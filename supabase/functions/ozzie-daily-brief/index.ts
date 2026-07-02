@@ -1,0 +1,259 @@
+// Ozzie Daily Brief — AI planning engine v1
+//
+// Gathers a user's recovery, load, today's planned session, and recent
+// training history, then asks GPT-4o-mini to write today's brief in
+// Ozzie's voice plus a one-line "why" behind today's recommendation.
+// Result is cached in ozzie_insights so repeat calls same day are free.
+
+import { createClient } from 'jsr:@supabase/supabase-js@2';
+
+const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
+
+const OZZIE_SYSTEM_PROMPT = `You are Ozzie, the AI coach inside the OSPREY fitness app. Your voice is modeled after the spirit of Kronk from The Emperor's New Groove: enthusiastic, warm, slightly goofy, genuinely kind, and unexpectedly wise. You celebrate hard things without being sycophantic. You deliver bad news without making someone feel bad. You explain every decision in plain language and never ask the user to take adjustments on faith.
+
+You are NOT a generic fitness app robot voice, overly formal, condescending, or exhaustingly hype ("LET'S GOOO!!" energy).
+
+Athlete context: The user is a hybrid athlete training in the spirit of Nick Bare and Kris Gethin — the goal is to look like a bodybuilder AND function like an endurance athlete. Their week typically combines strength sessions (upper push, upper pull, leg/hips/deadlift) with run workouts (intervals, threshold, long run) and endurance sessions (swim and bike). Active recovery sessions (cross training, easy bike/swim) are intentional parts of the program, not skipped days. When commenting on session variety, acknowledge that mixing modalities is the strategy, not a distraction. Nutrition is high-protein (~240g/day) and performance-focused — food is fuel, not reward.
+
+Rules:
+- Keep the daily brief to 2-3 sentences, spoken aloud to someone who may be half asleep.
+- Always ground claims in the actual data provided. If recovery/load data is missing, do not invent numbers — speak generally and warmly instead.
+- Always include a separate one-sentence "why" explaining the data behind today's recommendation, in plain English, suitable for a tappable "Why?" disclosure.
+- You will be given a "restRecommendation" of either "train", "easy", or "rest". Your insight_text and why_reasoning MUST agree with it — never contradict it. If it's "rest", explain rest as part of training, not a failure. If it's "easy", say so plainly without being alarming.
+- Never give medical advice or diagnose injury. Flag patterns and suggest consulting a professional if something seems concerning.
+- You will be given "workoutTimeConsistency" (the hour-of-day the user most often trains, and how many recent sessions fall there) and "foodLogCount14d". If workoutTimeConsistency shows 3+ sessions clustered in the same hour AND foodLogCount14d is under 3, include a "habit_tip": one short, concrete sentence suggesting the user stack food logging onto that already-consistent workout time (e.g. "You're consistently training around 7am — try logging breakfast right after, since you're already in the habit loop."). Otherwise set habit_tip to null. Never invent a time that isn't in the data.
+- Respond ONLY with valid JSON matching this shape: {"insight_text": string, "why_reasoning": string, "habit_tip": string | null}`;
+
+interface BriefContext {
+  displayName: string;
+  experienceTier: string;
+  recovery: { score: number; recommendation: string; hrvMs: number | null; sleepHours: number | null } | null;
+  load: { atl: number | null; ctl: number | null; tsb: number | null } | null;
+  todaySession: {
+    sessionType: string;
+    intensity: string;
+    plannedMinutes: number | null;
+    plannedDistanceKm: number | null;
+    description: string | null;
+  } | null;
+  recentWorkoutCount7d: number;
+  primaryGoal: string | null;
+  workoutTimeConsistency: { hour: number; count: number } | null;
+  foodLogCount14d: number;
+}
+
+type RestRecommendation = 'train' | 'easy' | 'rest';
+
+function deriveRestRecommendation(context: BriefContext): RestRecommendation {
+  if (context.recovery?.recommendation === 'easy' || context.recovery?.recommendation === 'rest') {
+    return context.recovery.recommendation;
+  }
+  if (context.recovery?.recommendation === 'train') return 'train';
+
+  // No recovery data yet — fall back to load-based heuristic if available.
+  if (context.load?.tsb != null && context.load.tsb < -25) return 'rest';
+  if (context.load?.tsb != null && context.load.tsb < -10) return 'easy';
+
+  return 'train';
+}
+
+function deriveWorkoutTimeConsistency(startedAts: string[]): { hour: number; count: number } | null {
+  if (startedAts.length < 3) return null;
+
+  const hourCounts = new Map<number, number>();
+  for (const iso of startedAts) {
+    const hour = new Date(iso).getUTCHours();
+    hourCounts.set(hour, (hourCounts.get(hour) ?? 0) + 1);
+  }
+
+  let bestHour = -1;
+  let bestCount = 0;
+  for (const [hour, count] of hourCounts) {
+    if (count > bestCount) {
+      bestHour = hour;
+      bestCount = count;
+    }
+  }
+
+  return bestCount >= 3 ? { hour: bestHour, count: bestCount } : null;
+}
+
+async function buildContext(supabase: ReturnType<typeof createClient>, userId: string): Promise<BriefContext> {
+  const today = new Date().toISOString().slice(0, 10);
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
+
+  const [userRes, recoveryRes, loadRes, sessionRes, workoutsRes, goalsRes, workoutTimesRes, foodLogRes] = await Promise.all([
+    supabase.from('users').select('display_name, experience_tier').eq('id', userId).single(),
+    supabase.from('recovery_scores').select('score, recommendation, hrv_ms, sleep_hours').eq('user_id', userId).eq('score_date', today).maybeSingle(),
+    supabase.from('load_scores').select('atl, ctl, tsb').eq('user_id', userId).eq('score_date', today).maybeSingle(),
+    supabase.from('training_sessions').select('session_type, intensity, planned_minutes, planned_distance_km, description').eq('user_id', userId).eq('session_date', today).maybeSingle(),
+    supabase.from('workout_logs').select('id').eq('user_id', userId).is('deleted_at', null).gte('started_at', sevenDaysAgo),
+    supabase.from('user_goals').select('primary_goal').eq('user_id', userId).maybeSingle(),
+    supabase.from('workout_logs').select('started_at').eq('user_id', userId).is('deleted_at', null).gte('started_at', fourteenDaysAgo),
+    supabase.from('food_log_entries').select('id').eq('user_id', userId).gte('logged_at', fourteenDaysAgo),
+  ]);
+
+  const user = userRes.data as { display_name: string; experience_tier: string } | null;
+
+  return {
+    displayName: user?.display_name ?? 'there',
+    experienceTier: user?.experience_tier ?? 'beginner',
+    recovery: recoveryRes.data
+      ? {
+          score: recoveryRes.data.score,
+          recommendation: recoveryRes.data.recommendation,
+          hrvMs: recoveryRes.data.hrv_ms,
+          sleepHours: recoveryRes.data.sleep_hours,
+        }
+      : null,
+    load: loadRes.data ? { atl: loadRes.data.atl, ctl: loadRes.data.ctl, tsb: loadRes.data.tsb } : null,
+    todaySession: sessionRes.data
+      ? {
+          sessionType: sessionRes.data.session_type,
+          intensity: sessionRes.data.intensity,
+          plannedMinutes: sessionRes.data.planned_minutes,
+          plannedDistanceKm: sessionRes.data.planned_distance_km,
+          description: sessionRes.data.description,
+        }
+      : null,
+    recentWorkoutCount7d: (workoutsRes.data ?? []).length,
+    primaryGoal: goalsRes.data?.primary_goal ?? null,
+    workoutTimeConsistency: deriveWorkoutTimeConsistency(
+      (workoutTimesRes.data ?? []).map((row) => row.started_at as string),
+    ),
+    foodLogCount14d: (foodLogRes.data ?? []).length,
+  };
+}
+
+async function callOpenAI(
+  context: BriefContext,
+  restRecommendation: RestRecommendation,
+): Promise<{ insight_text: string; why_reasoning: string; habit_tip: string | null }> {
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: OZZIE_SYSTEM_PROMPT },
+        {
+          role: 'user',
+          content: `Here is today's data for ${context.displayName} (${context.experienceTier} mode, goal: ${context.primaryGoal ?? 'general fitness'}):\n${JSON.stringify({ ...context, restRecommendation }, null, 2)}\n\nWrite today's brief.`,
+        },
+      ],
+      response_format: { type: 'json_object' },
+      temperature: 0.8,
+      max_tokens: 300,
+    }),
+  });
+
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`OpenAI error: ${response.status} ${errText}`);
+  }
+
+  const data = await response.json();
+  const content = data.choices?.[0]?.message?.content;
+  if (!content) throw new Error('OpenAI returned no content');
+
+  const parsed = JSON.parse(content);
+  return {
+    insight_text: parsed.insight_text ?? "Let's have a good one today.",
+    why_reasoning: parsed.why_reasoning ?? 'No specific data available yet — keep logging to unlock personalized insights.',
+    habit_tip: parsed.habit_tip ?? null,
+  };
+}
+
+Deno.serve(async (req: Request) => {
+  if (req.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
+  }
+
+  const authHeader = req.headers.get('Authorization');
+  if (!authHeader) {
+    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), { status: 401 });
+  }
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+  const token = authHeader.replace('Bearer ', '');
+  const { data: authData, error: authError } = await supabase.auth.getUser(token);
+
+  if (authError || !authData?.user) {
+    return new Response(JSON.stringify({ error: 'Invalid session' }), { status: 401 });
+  }
+
+  const userId = authData.user.id;
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+
+  try {
+    const { data: existing, error: existingError } = await supabase
+      .from('ozzie_insights')
+      .select('response_text, context_json')
+      .eq('user_id', userId)
+      .eq('insight_type', 'daily_brief')
+      .gte('created_at', todayStart.toISOString())
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (existingError) {
+      console.error('existing select error', existingError);
+    }
+
+    if (existing) {
+      const cachedContext = existing.context_json as {
+        why_reasoning?: string;
+        restRecommendation?: RestRecommendation;
+        habit_tip?: string | null;
+      } | null;
+      return new Response(
+        JSON.stringify({
+          insight_text: existing.response_text,
+          why_reasoning: cachedContext?.why_reasoning ?? null,
+          rest_recommendation: cachedContext?.restRecommendation ?? null,
+          habit_tip: cachedContext?.habit_tip ?? null,
+          cached: true,
+        }),
+        { headers: { 'Content-Type': 'application/json' } },
+      );
+    }
+
+    const context = await buildContext(supabase, userId);
+    const restRecommendation = deriveRestRecommendation(context);
+    const { insight_text, why_reasoning, habit_tip } = await callOpenAI(context, restRecommendation);
+
+    const { error: insertError } = await supabase.from('ozzie_insights').insert({
+      user_id: userId,
+      insight_type: 'daily_brief',
+      context_json: { ...context, why_reasoning, restRecommendation, habit_tip },
+      response_text: insight_text,
+    });
+
+    if (insertError) {
+      console.error('insert error', insertError);
+    }
+
+    return new Response(
+      JSON.stringify({
+        insight_text,
+        why_reasoning,
+        rest_recommendation: restRecommendation,
+        habit_tip,
+        cached: false,
+      }),
+      { headers: { 'Content-Type': 'application/json' } },
+    );
+  } catch (err) {
+    return new Response(JSON.stringify({ error: err instanceof Error ? err.message : 'Unknown error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+});

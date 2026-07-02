@@ -1,0 +1,31 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { fetchDailySummary } from '@/services/daily-summary';
+import { compressTodaySession, swapTodaySession, type SwappableSessionType } from '@/services/plan';
+import { withCache } from '@/services/offline-cache';
+import { useAuthStore } from '@/store/authStore';
+
+export function useDailySummary() {
+  const userId = useAuthStore((s) => s.user?.id);
+  const queryClient = useQueryClient();
+  const queryKey = ['daily-summary', userId];
+
+  const query = useQuery({
+    queryKey,
+    queryFn: () => withCache(queryKey, () => fetchDailySummary(userId!)),
+    enabled: Boolean(userId),
+  });
+
+  const swapSession = useMutation({
+    mutationFn: ({ sessionId, newType }: { sessionId: string; newType: SwappableSessionType }) =>
+      swapTodaySession(userId!, sessionId, newType),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
+  });
+
+  const compressSession = useMutation({
+    mutationFn: ({ sessionId, availableMinutes }: { sessionId: string; availableMinutes: number }) =>
+      compressTodaySession(userId!, sessionId, availableMinutes),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
+  });
+
+  return { ...query, swapSession, compressSession };
+}

@@ -1,0 +1,116 @@
+{
+  "expo": {
+    "name": "OSPREY",
+    "slug": "osprey",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "osprey",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#060912"
+    },
+    "ios": {
+      "bundleIdentifier": "com.SillyGoose.OSPREY",
+      "buildNumber": "1",
+      "supportsTablet": false,
+      "requireFullScreen": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "OSPREY uses your location to track GPS runs and log route maps.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "OSPREY uses background location to continue tracking your route if you lock your screen mid-run.",
+        "NSMotionUsageDescription": "OSPREY uses motion data to detect your activity type and count steps.",
+        "NSHealthShareUsageDescription": "OSPREY reads your workouts, heart rate, and activity data to personalize your coaching.",
+        "NSHealthUpdateUsageDescription": "OSPREY saves your workouts and body metrics to Apple Health.",
+        "NSMicrophoneUsageDescription": "OSPREY uses the microphone for voice workout logging — speak your sets and reps instead of typing.",
+        "NSCameraUsageDescription": "OSPREY uses the camera to scan food barcodes and photograph meals for quick logging.",
+        "NSPhotoLibraryUsageDescription": "OSPREY lets you pick a meal photo from your library to log food with Ozzie's help.",
+        "NSCalendarsUsageDescription": "OSPREY blocks time for your planned workouts on your calendar so they don't get double-booked.",
+        "UIBackgroundModes": [
+          "location",
+          "audio"
+        ],
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "associatedDomains": [
+        "applinks:osprey.app"
+      ],
+      "entitlements": {
+        "com.apple.developer.healthkit": true,
+        "com.apple.developer.healthkit.access": []
+      }
+    },
+    "android": {
+      "package": "com.sillygoose.osprey",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#060912"
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "OSPREY uses background location to track your route during workouts."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "OSPREY uses the camera to scan food barcodes."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "OSPREY lets you pick a meal photo from your library to log food with Ozzie's help."
+        }
+      ],
+      "expo-av",
+      "expo-sensors",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/icon.png"
+        }
+      ],
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "OSPREY blocks time for your planned workouts on your calendar so they don't get double-booked."
+        }
+      ],
+      "expo-sqlite",
+      ["@bacons/apple-targets"]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "efab587d-56da-4b0d-acec-e697c48b921a"
+      }
+    },
+    "owner": "thunderbob34"
+  }
+}

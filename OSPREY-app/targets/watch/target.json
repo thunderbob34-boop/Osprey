@@ -1,0 +1,6 @@
+{
+  "type": "watch",
+  "bundleIdentifier": "com.SillyGoose.OSPREY.watch",
+  "deploymentTarget": "9.0",
+  "name": "OSPREY Watch"
+}

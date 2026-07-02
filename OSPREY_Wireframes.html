@@ -1,0 +1,2284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSPREY Wireframes — Daily Summary & Onboarding</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #080b14;
+    color: #f0f0f0;
+    min-height: 100vh;
+  }
+
+  /* ── Page chrome ── */
+  .page-header {
+    background: rgba(8,11,20,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .page-header h1 { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 1px; }
+  .page-header span { font-size: 12px; color: rgba(255,255,255,0.35); }
+  .tab-bar {
+    display: flex;
+    gap: 8px;
+    padding: 20px 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .tab {
+    padding: 10px 24px;
+    border-radius: 8px 8px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-bottom: none;
+    background: rgba(255,255,255,0.03);
+    color: rgba(255,255,255,0.4);
+    transition: all 0.2s;
+  }
+  .tab.active { background: rgba(0,200,200,0.08); color: #00c8c8; border-color: rgba(0,200,200,0.4); }
+
+  /* ── Canvas ── */
+  .canvas {
+    padding: 40px 32px;
+    display: none;
+    background: radial-gradient(ellipse 600px 400px at 20% 10%, rgba(0,200,200,0.05) 0%, transparent 70%),
+                radial-gradient(ellipse 500px 500px at 80% 80%, rgba(27,58,92,0.15) 0%, transparent 70%);
+  }
+  .canvas.active { display: block; }
+
+  .canvas-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 32px;
+  }
+
+  /* ── Phone shell ── */
+  .phone-row {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .phone-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .phone-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #00c8c8;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .phone {
+    width: 320px;
+    background: #060912;
+    border-radius: 44px;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.8),
+      0 32px 80px rgba(0,0,0,0.8),
+      0 0 60px rgba(0,200,200,0.06);
+  }
+  .phone-notch {
+    width: 100%;
+    height: 44px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+  }
+  .notch-pill {
+    width: 80px;
+    height: 20px;
+    background: #000;
+    border-radius: 12px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 12px;
+  }
+  .phone-screen {
+    overflow-y: auto;
+    max-height: 620px;
+    background: #060912;
+    scrollbar-width: none;
+    position: relative;
+  }
+  /* Ambient light sources on each screen */
+  .phone-screen::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: -40px;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(ellipse, rgba(0,200,200,0.14) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .phone-screen::after {
+    content: '';
+    position: absolute;
+    bottom: 40px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(ellipse, rgba(27,58,92,0.5) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* All direct children of phone-screen need to sit above the glow layers */
+  .phone-screen > * { position: relative; z-index: 1; }
+  .phone-screen::-webkit-scrollbar { display: none; }
+  .phone-home {
+    height: 28px;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .home-indicator {
+    width: 100px;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+  }
+
+  /* ── Annotation panel ── */
+  .annotation-panel {
+    flex: 1;
+    min-width: 280px;
+    max-width: 420px;
+  }
+  .annotation-panel h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .annotation {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .ann-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #00c8c8;
+    color: #000;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .ann-text { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .ann-text strong { color: rgba(255,255,255,0.9); }
+
+  /* ── App UI components ── */
+  .app-header {
+    padding: 16px 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .app-header-left { display: flex; flex-direction: column; gap: 2px; }
+  .app-greeting { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.3px; }
+  .app-title { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: 1px; }
+  .osprey-logo {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ── Body Battery card ── */
+  .recovery-card {
+    margin: 10px 14px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 16px 18px 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .recovery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .recovery-label { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+  .recovery-date { font-size: 10px; color: rgba(255,255,255,0.25); }
+
+  /* Main layout: battery left, right-side breakdown */
+  .recovery-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  /* Battery tank */
+  .battery-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .battery-tank {
+    position: relative;
+    width: 44px;
+    height: 86px;
+  }
+  /* battery cap nub */
+  .battery-tank::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 7px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 3px 3px 0 0;
+  }
+  .battery-shell {
+    position: absolute;
+    inset: 0;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.3);
+  }
+  .battery-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 0 6px 6px;
+    transition: height 0.6s ease;
+  }
+  /* segment tick marks */
+  .battery-ticks {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    pointer-events: none;
+    padding: 0 0;
+  }
+  .battery-tick {
+    width: 100%;
+    height: 1px;
+    background: rgba(0,0,0,0.25);
+  }
+  .battery-score {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  .battery-num { font-size: 22px; font-weight: 900; line-height: 1; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+  .battery-denom { font-size: 9px; color: rgba(255,255,255,0.6); font-weight: 600; margin-top: 1px; }
+  .battery-label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Right side: status + metric pills */
+  .recovery-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 2px;
+  }
+  .battery-status {
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+  .battery-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .metric-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .metric-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 6px 10px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .metric-pill-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .metric-icon { font-size: 13px; line-height: 1; }
+  .metric-name { font-size: 10px; color: rgba(255,255,255,0.38); font-weight: 600; }
+  .metric-val { font-size: 12px; font-weight: 800; }
+  .metric-delta { font-size: 10px; font-weight: 700; margin-left: 4px; }
+
+  /* Today's session */
+  .section-header {
+    padding: 16px 20px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .section-title { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1.2px; }
+  .section-link { font-size: 11px; color: rgba(0,200,200,0.8); }
+
+  .session-card {
+    margin: 0 14px;
+    background: rgba(0,200,200,0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 18px 20px;
+    border: 1px solid rgba(0,200,200,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .session-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,200,200,0.15);
+    border: 1px solid rgba(0,200,200,0.3);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #00c8c8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .session-name { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 4px; letter-spacing: -0.3px; }
+  .session-meta { font-size: 11px; color: rgba(255,255,255,0.38); margin-bottom: 14px; }
+  .session-stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .session-stat { display: flex; flex-direction: column; gap: 2px; }
+  .session-stat-val { font-size: 15px; font-weight: 800; color: #fff; }
+  .session-stat-label { font-size: 10px; color: rgba(255,255,255,0.35); }
+  .start-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #00c8c8, #00a0a0);
+    color: #000;
+    border: none;
+    border-radius: 14px;
+    padding: 13px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(0,200,200,0.3);
+  }
+  .session-accent {
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    width: 130px;
+    height: 130px;
+    background: radial-gradient(ellipse, rgba(0,200,200,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  /* Nutrition strip */
+  .nutrition-card {
+    margin: 10px 14px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 14px 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .nutrition-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .nutrition-label { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; }
+  .nutrition-cals { font-size: 13px; font-weight: 700; color: #fff; }
+  .macro-bars { display: flex; gap: 8px; }
+  .macro-item { flex: 1; }
+  .macro-name { font-size: 9px; color: rgba(255,255,255,0.35); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .macro-bar-bg { width: 100%; height: 4px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
+  .macro-fill { height: 100%; border-radius: 3px; }
+  .macro-nums { display: flex; justify-content: space-between; margin-top: 3px; }
+  .macro-current { font-size: 10px; font-weight: 700; color: #fff; }
+  .macro-target { font-size: 10px; color: rgba(255,255,255,0.25); }
+
+  /* Ozzie card */
+  .ozzie-card {
+    margin: 10px 14px 8px;
+    background: rgba(200,154,0,0.07);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 16px 18px;
+    border: 1px solid rgba(200,154,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  .ozzie-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #c89a00, rgba(200,154,0,0.3));
+    border-radius: 3px 0 0 3px;
+  }
+  .ozzie-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .ozzie-avatar {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .ozzie-name { font-size: 11px; font-weight: 700; color: #c89a00; }
+  .ozzie-text { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .why-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+    background: rgba(200,154,0,0.1);
+    border: 1px solid rgba(200,154,0,0.35);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #c89a00;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    display: flex;
+    background: rgba(6,9,18,0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 10px 0 4px;
+  }
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 0;
+  }
+  .nav-icon { font-size: 18px; }
+  .nav-label { font-size: 9px; color: rgba(255,255,255,0.28); font-weight: 600; }
+  .nav-item.active .nav-label { color: #00c8c8; }
+  .nav-dot {
+    width: 4px;
+    height: 4px;
+    background: #00c8c8;
+    border-radius: 50%;
+  }
+
+  /* ── ONBOARDING SCREENS ── */
+  .onboard-screen { background: #060912; min-height: 620px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+  .onboard-screen::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(ellipse, rgba(0,200,200,0.12) 0%, transparent 65%);
+    pointer-events: none; z-index: 0;
+  }
+  .onboard-screen > * { position: relative; z-index: 1; }
+
+  .onboard-intro {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .ozzie-big {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .onboard-greeting { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 10px; line-height: 1.3; letter-spacing: -0.3px; }
+  .onboard-sub { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 32px; }
+  .onboard-speech {
+    background: rgba(200,154,0,0.07);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    border: 1px solid rgba(200,154,0,0.22);
+    border-left: 3px solid #c89a00;
+    padding: 14px 16px;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 28px;
+  }
+  .onboard-speech p { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.7; font-style: italic; }
+  .onboard-speech .speaker { font-size: 10px; font-weight: 700; color: #c89a00; margin-bottom: 6px; }
+
+  .primary-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #00c8c8, #00a0a0);
+    color: #000;
+    border: none;
+    border-radius: 14px;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 24px rgba(0,200,200,0.3);
+  }
+  .secondary-btn {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 13px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    backdrop-filter: blur(8px);
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    padding: 14px 20px 0;
+  }
+  .progress-track {
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill { height: 100%; background: linear-gradient(to right, #00c8c8, #4cde80); border-radius: 3px; transition: width 0.4s; }
+  .progress-label { font-size: 10px; color: rgba(255,255,255,0.25); margin-top: 6px; }
+
+  /* Form screen */
+  .form-screen { padding: 20px 20px; flex: 1; }
+  .form-q { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.4; letter-spacing: -0.2px; }
+  .form-hint { font-size: 12px; color: rgba(255,255,255,0.38); margin-bottom: 20px; }
+
+  .option-grid { display: flex; flex-direction: column; gap: 8px; }
+  .option-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .option-card.selected {
+    border-color: rgba(0,200,200,0.5);
+    background: rgba(0,200,200,0.08);
+  }
+  .option-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .option-text { display: flex; flex-direction: column; gap: 2px; }
+  .option-title { font-size: 13px; font-weight: 700; color: #fff; }
+  .option-desc { font-size: 11px; color: rgba(255,255,255,0.38); }
+  .option-check {
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+  .option-card.selected .option-check {
+    background: #00c8c8;
+    border-color: #00c8c8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #000;
+    font-weight: 900;
+  }
+
+  .continue-footer {
+    padding: 16px 20px 8px;
+    background: rgba(6,9,18,0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Plan reveal */
+  .plan-reveal {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .ozzie-reveal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .reveal-avatar {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .reveal-title { font-size: 17px; font-weight: 800; color: #fff; }
+  .reveal-sub { font-size: 12px; color: #888; }
+
+  .ozzie-reveal-speech {
+    background: rgba(200,154,0,0.07);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    border: 1px solid rgba(200,154,0,0.2);
+    border-left: 3px solid #c89a00;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+  .ozzie-reveal-speech p { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.7; font-style: italic; }
+
+  .plan-card {
+    background: rgba(0,200,200,0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0,200,200,0.15);
+    border-radius: 18px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .plan-card-label { font-size: 10px; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .plan-card-title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .plan-week-row {
+    display: flex;
+    gap: 6px;
+  }
+  .plan-day {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .plan-day-label { font-size: 9px; color: #888; }
+  .plan-day-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .day-run { background: rgba(0,200,200,0.2); color: #00c8c8; border: 1px solid rgba(0,200,200,0.4); }
+  .day-lift { background: rgba(200,154,0,0.2); color: #c89a00; border: 1px solid rgba(200,154,0,0.4); }
+  .day-rest { background: #1e1e32; color: #555; border: 1px solid #2a2a42; }
+  .day-race { background: rgba(173,20,87,0.2); color: #e91e8c; border: 1px solid rgba(173,20,87,0.4); }
+
+  /* Why modal overlay */
+  .why-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 200;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .why-overlay.open { display: flex; }
+  .why-sheet {
+    background: rgba(14,16,32,0.92);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border-radius: 24px 24px 0 0;
+    padding: 24px 24px 40px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-bottom: none;
+  }
+  .why-pill { width: 40px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 4px; margin: 0 auto 20px; }
+  .why-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 16px; }
+  .why-data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .why-data-label { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .why-data-val { font-size: 13px; font-weight: 700; }
+  .why-explanation { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-top: 16px; font-style: italic; }
+  .why-close {
+    width: 100%;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .divider { height: 1px; background: rgba(255,255,255,0.04); margin: 4px 16px; }
+
+  /* Screen switcher */
+  .screen-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .screen-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,0.4);
+    transition: all 0.2s;
+  }
+  .screen-btn.active { background: rgba(0,200,200,0.12); border-color: rgba(0,200,200,0.45); color: #00c8c8; }
+
+  .screen-frame { display: none; }
+  .screen-frame.active { display: block; }
+
+  .ozzie-pulse {
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(200,154,0,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(200,154,0,0); }
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .tag-good { background: rgba(76,222,128,0.15); color: #4cde80; }
+  .tag-warn { background: rgba(255,165,0,0.15); color: #ffa500; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🦅 OSPREY — Wireframes</h1>
+  <span>Interactive prototype · Daily Summary & Onboarding Flow</span>
+</div>
+
+<div class="tab-bar">
+  <div class="tab active" onclick="switchTab('daily')">Daily Summary Screen</div>
+  <div class="tab" onclick="switchTab('onboarding')">Onboarding Flow</div>
+  <div class="tab" onclick="switchTab('workout')">Active Workout</div>
+  <div class="tab" onclick="switchTab('recap')">Post-Workout Recap</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DAILY SUMMARY TAB
+════════════════════════════════════════════════════════════════════════════ -->
+<div class="canvas active" id="tab-daily">
+  <div class="canvas-title">Daily Summary Screen — States & Variants</div>
+
+  <div class="screen-nav">
+    <button class="screen-btn active" onclick="switchScreen('daily', 'morning')">Morning — Good Recovery</button>
+    <button class="screen-btn" onclick="switchScreen('daily', 'rest')">Rest Day Recommended</button>
+    <button class="screen-btn" onclick="switchScreen('daily', 'why')">Why? Sheet (open)</button>
+  </div>
+
+  <div class="phone-row">
+
+    <!-- Phone -->
+    <div class="phone-wrapper">
+      <div class="phone-label">iPhone 16 Pro · 393pt</div>
+      <div class="phone">
+        <div class="phone-notch">
+          <span>9:41</span>
+          <div class="notch-pill"></div>
+          <span>●●●</span>
+        </div>
+
+        <!-- SCREEN: Morning Good Recovery -->
+        <div class="phone-screen" id="screen-daily-morning">
+          <div class="app-header">
+            <div class="app-header-left">
+              <span class="app-greeting">Good morning, Gus</span>
+              <span class="app-title">OSPREY</span>
+            </div>
+            <div class="osprey-logo"><svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="9" fill="#1B3A5C"/><circle cx="18" cy="17" r="11" fill="#f5f0e8"/><path d="M7 13 Q18 5 29 13 Q26 19 18 20 Q10 19 7 13Z" fill="#1a2a3a"/><circle cx="13.5" cy="17.5" r="4" fill="#fff"/><circle cx="22.5" cy="17.5" r="4" fill="#fff"/><circle cx="13.5" cy="17.5" r="2.5" fill="#f5a623"/><circle cx="22.5" cy="17.5" r="2.5" fill="#f5a623"/><circle cx="13.5" cy="17.5" r="1.4" fill="#111"/><circle cx="22.5" cy="17.5" r="1.4" fill="#111"/><circle cx="14.2" cy="16.8" r="0.6" fill="#fff"/><circle cx="23.2" cy="16.8" r="0.6" fill="#fff"/><path d="M15.5 22 L18 26 L20.5 22 Q19 21 18 21 Q17 21 15.5 22Z" fill="#c89a00"/></svg></div>
+          </div>
+
+          <!-- Body Battery -->
+          <div class="recovery-card">
+            <div class="recovery-header">
+              <span class="recovery-label">Body Battery</span>
+              <span class="recovery-date">Sat, Jun 27</span>
+            </div>
+            <div class="recovery-main">
+              <div class="battery-wrap">
+                <div class="battery-tank">
+                  <div class="battery-shell">
+                    <div class="battery-fill" style="height:79%;background:linear-gradient(to top,#26a84d,#4cde80)"></div>
+                    <div class="battery-ticks">
+                      <div class="battery-tick"></div>
+                      <div class="battery-tick"></div>
+                      <div class="battery-tick"></div>
+                    </div>
+                    <div class="battery-score">
+                      <span class="battery-num">79</span>
+                      <span class="battery-denom">/100</span>
+                    </div>
+                  </div>
+                </div>
+                <span class="battery-label">Charged</span>
+              </div>
+              <div class="recovery-right">
+                <div class="battery-status" style="color:#4cde80">Ready to train</div>
+                <div class="battery-sub">Strong recovery overnight. HRV up — go get it.</div>
+                <div class="metric-pills">
+                  <div class="metric-pill">
+                    <div class="metric-pill-left">
+                      <span class="metric-icon">💓</span>
+                      <span class="metric-name">HRV</span>
+                    </div>
+                    <div>
+                      <span class="metric-val" style="color:#4cde80">68 ms</span>
+                      <span class="metric-delta" style="color:#4cde80">↑6</span>
+                    </div>
+                  </div>
+                  <div class="metric-pill">
+                    <div class="metric-pill-left">
+                      <span class="metric-icon">🌙</span>
+                      <span class="metric-name">Sleep</span>
+                    </div>
+                    <div>
+                      <span class="metric-val" style="color:#00c8c8">7h 22m</span>
+                    </div>
+                  </div>
+                  <div class="metric-pill">
+                    <div class="metric-pill-left">
+                      <span class="metric-icon">❤️</span>
+                      <span class="metric-name">Resting HR</span>
+                    </div>
+                    <div>
+                      <span class="metric-val" style="color:#aaa">52 bpm</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Today's Session -->
+          <div class="section-header">
+            <span class="section-title">Today's Session</span>
+            <span class="section-link">View week →</span>
+          </div>
+          <div class="session-card">
+            <div class="session-accent"></div>
+            <div class="session-type-badge">🏃 Tempo Run</div>
+            <div class="session-name">6-Mile Tempo</div>
+            <div class="session-meta">Target pace: 7:05 /mi · Moderate effort</div>
+            <div class="session-stats">
+              <div class="session-stat">
+                <span class="session-stat-val">6.0</span>
+                <span class="session-stat-label">Miles</span>
+              </div>
+              <div class="session-stat">
+                <span class="session-stat-val">~46</span>
+                <span class="session-stat-label">Minutes</span>
+              </div>
+              <div class="session-stat">
+                <span class="session-stat-val">580</span>
+                <span class="session-stat-label">Est. Cal</span>
+              </div>
+            </div>
+            <button class="start-btn">Start Session</button>
+          </div>
+
+          <!-- Nutrition -->
+          <div class="section-header">
+            <span class="section-title">Nutrition</span>
+            <span class="section-link">Log food →</span>
+          </div>
+          <div class="nutrition-card">
+            <div class="nutrition-row">
+              <span class="nutrition-label">Calories</span>
+              <span class="nutrition-cals">1,240 / 2,650</span>
+            </div>
+            <div class="macro-bars">
+              <div class="macro-item">
+                <div class="macro-name">Protein</div>
+                <div class="macro-bar-bg"><div class="macro-fill" style="width:55%;background:#4cde80"></div></div>
+                <div class="macro-nums"><span class="macro-current">98g</span><span class="macro-target">180g</span></div>
+              </div>
+              <div class="macro-item">
+                <div class="macro-name">Carbs</div>
+                <div class="macro-bar-bg"><div class="macro-fill" style="width:40%;background:#00c8c8"></div></div>
+                <div class="macro-nums"><span class="macro-current">140g</span><span class="macro-target">340g</span></div>
+              </div>
+              <div class="macro-item">
+                <div class="macro-name">Fat</div>
+                <div class="macro-bar-bg"><div class="macro-fill" style="width:60%;background:#5B5EA6"></div></div>
+                <div class="macro-nums"><span class="macro-current">44g</span><span class="macro-target">72g</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ozzie Card -->
+          <div class="section-header">
+            <span class="section-title">Ozzie</span>
+          </div>
+          <div class="ozzie-card">
+            <div class="ozzie-header">
+              <div class="ozzie-avatar ozzie-pulse"><svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#c89a00"/><circle cx="14" cy="13" r="9" fill="#fff"/><path d="M5 10 Q14 4 23 10 Q21 15 14 16 Q7 15 5 10Z" fill="#1a2a3a"/><circle cx="10.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="17.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="10.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="17.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="10.5" cy="13.5" r="1.1" fill="#111"/><circle cx="17.5" cy="13.5" r="1.1" fill="#111"/><circle cx="11.1" cy="12.9" r="0.5" fill="#fff"/><circle cx="18.1" cy="12.9" r="0.5" fill="#fff"/><path d="M12 18.5 L14 21.5 L16 18.5 Q15 18 14 18 Q13 18 12 18.5Z" fill="#c89a00"/></svg></div>
+              <span class="ozzie-name">Ozzie · Today's Insight</span>
+            </div>
+            <div class="ozzie-text">
+              HRV is up 6 points from yesterday and sleep was solid. Today's tempo is going to feel good — your aerobic base has been building for 3 weeks straight. Go out at 7:10 for the first mile, then settle into 7:05.
+            </div>
+            <div class="why-btn" onclick="openWhy()">Why this plan? ↗</div>
+          </div>
+
+          <div style="height: 16px;"></div>
+          <div class="bottom-nav">
+            <div class="nav-item active">
+              <div class="nav-icon">🏠</div>
+              <span class="nav-label">Home</span>
+              <div class="nav-dot"></div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">📅</div>
+              <span class="nav-label">Plan</span>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">🍎</div>
+              <span class="nav-label">Nutrition</span>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">👟</div>
+              <span class="nav-label">Activity</span>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">👤</div>
+              <span class="nav-label">Profile</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN: Rest Day -->
+        <div class="phone-screen" id="screen-daily-rest" style="display:none">
+          <div class="app-header">
+            <div class="app-header-left">
+              <span class="app-greeting">Good morning, Gus</span>
+              <span class="app-title">OSPREY</span>
+            </div>
+            <div class="osprey-logo"><svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="9" fill="#1B3A5C"/><circle cx="18" cy="17" r="11" fill="#f5f0e8"/><path d="M7 13 Q18 5 29 13 Q26 19 18 20 Q10 19 7 13Z" fill="#1a2a3a"/><circle cx="13.5" cy="17.5" r="4" fill="#fff"/><circle cx="22.5" cy="17.5" r="4" fill="#fff"/><circle cx="13.5" cy="17.5" r="2.5" fill="#f5a623"/><circle cx="22.5" cy="17.5" r="2.5" fill="#f5a623"/><circle cx="13.5" cy="17.5" r="1.4" fill="#111"/><circle cx="22.5" cy="17.5" r="1.4" fill="#111"/><circle cx="14.2" cy="16.8" r="0.6" fill="#fff"/><circle cx="23.2" cy="16.8" r="0.6" fill="#fff"/><path d="M15.5 22 L18 26 L20.5 22 Q19 21 18 21 Q17 21 15.5 22Z" fill="#c89a00"/></svg></div>
+          </div>
+
+          <div class="recovery-card">
+            <div class="recovery-header">
+              <span class="recovery-label">Body Battery</span>
+              <span class="recovery-date">Sun, Jun 28</span>
+            </div>
+            <div class="recovery-main">
+              <div class="battery-wrap">
+                <div class="battery-tank">
+                  <div class="battery-shell">
+                    <div class="battery-fill" style="height:41%;background:linear-gradient(to top,#b85a00,#ffa500)"></div>
+                    <div class="battery-ticks">
+                      <div class="battery-tick"></div>
+                      <div class="battery-tick"></div>
+                      <div class="battery-tick"></div>
+                    </div>
+                    <div class="battery-score">
+                      <span class="battery-num">41</span>
+                      <span class="battery-denom">/100</span>
+                    </div>
+                  </div>
+                </div>
+                <span class="battery-label">Low</span>
+              </div>
+              <div class="recovery-right">
+                <div class="battery-status" style="color:#ffa500">Rest today</div>
+                <div class="battery-sub">Battery is low. Your body needs to recharge before hard effort.</div>
+                <div class="metric-pills">
+                  <div class="metric-pill">
+                    <div class="metric-pill-left">
+                      <span class="metric-icon">💓</span>
+                      <span class="metric-name">HRV</span>
+                    </div>
+                    <div>
+                      <span class="metric-val" style="color:#ffa500">44 ms</span>
+                      <span class="metric-delta" style="color:#ffa500">↓18</span>
+                    </div>
+                  </div>
+                  <div class="metric-pill">
+                    <div class="metric-pill-left">
+                      <span class="metric-icon">🌙</span>
+                      <span class="metric-name">Sleep</span>
+                    </div>
+                    <div>
+                      <span class="metric-val" style="color:#ffa500">5h 50m</span>
+                    </div>
+                  </div>
+                  <div class="metric-pill">
+                    <div class="metric-pill-left">
+                      <span class="metric-icon">❤️</span>
+                      <span class="metric-name">Resting HR</span>
+                    </div>
+                    <div>
+                      <span class="metric-val" style="color:#ffa500">61 bpm</span>
+                      <span class="metric-delta" style="color:#ffa500">↑9</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <span class="section-title">Today's Session</span>
+          </div>
+          <div class="session-card" style="background: #1e1e32; border-color: #2a2a42;">
+            <div class="session-type-badge" style="color:#ffa500; background:rgba(255,165,0,0.1); border-color:rgba(255,165,0,0.3)">😴 Rest Day</div>
+            <div class="session-name">Full Recovery Day</div>
+            <div class="session-meta" style="margin-bottom:0">Originally: 8-Mile Long Run — rescheduled to Tuesday</div>
+            <div class="why-btn" style="margin-top:12px" onclick="openWhy()">Why was my run moved? ↗</div>
+          </div>
+
+          <div class="section-header">
+            <span class="section-title">Nutrition</span>
+            <span class="section-link">Log food →</span>
+          </div>
+          <div class="nutrition-card">
+            <div class="nutrition-row">
+              <span class="nutrition-label">Calories</span>
+              <span class="nutrition-cals">680 / 2,200 (rest day)</span>
+            </div>
+            <div class="macro-bars">
+              <div class="macro-item">
+                <div class="macro-name">Protein</div>
+                <div class="macro-bar-bg"><div class="macro-fill" style="width:30%;background:#4cde80"></div></div>
+                <div class="macro-nums"><span class="macro-current">54g</span><span class="macro-target">180g</span></div>
+              </div>
+              <div class="macro-item">
+                <div class="macro-name">Carbs</div>
+                <div class="macro-bar-bg"><div class="macro-fill" style="width:22%;background:#00c8c8"></div></div>
+                <div class="macro-nums"><span class="macro-current">74g</span><span class="macro-target">280g</span></div>
+              </div>
+              <div class="macro-item">
+                <div class="macro-name">Fat</div>
+                <div class="macro-bar-bg"><div class="macro-fill" style="width:35%;background:#5B5EA6"></div></div>
+                <div class="macro-nums"><span class="macro-current">26g</span><span class="macro-target">72g</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <span class="section-title">Ozzie</span>
+          </div>
+          <div class="ozzie-card">
+            <div class="ozzie-header">
+              <div class="ozzie-avatar ozzie-pulse"><svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#c89a00"/><circle cx="14" cy="13" r="9" fill="#fff"/><path d="M5 10 Q14 4 23 10 Q21 15 14 16 Q7 15 5 10Z" fill="#1a2a3a"/><circle cx="10.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="17.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="10.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="17.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="10.5" cy="13.5" r="1.1" fill="#111"/><circle cx="17.5" cy="13.5" r="1.1" fill="#111"/><circle cx="11.1" cy="12.9" r="0.5" fill="#fff"/><circle cx="18.1" cy="12.9" r="0.5" fill="#fff"/><path d="M12 18.5 L14 21.5 L16 18.5 Q15 18 14 18 Q13 18 12 18.5Z" fill="#c89a00"/></svg></div>
+              <span class="ozzie-name">Ozzie · Rest Day</span>
+            </div>
+            <div class="ozzie-text">
+              Your HRV dropped 18 points overnight and resting HR is up 9 bpm. Your body is working hard even though you don't feel tired. I moved the long run to Tuesday — this is the most productive thing you can do today.
+            </div>
+            <div class="why-btn" onclick="openWhy()">Show me the data ↗</div>
+          </div>
+          <div style="height:16px"></div>
+          <div class="bottom-nav">
+            <div class="nav-item active"><div class="nav-icon">🏠</div><span class="nav-label">Home</span><div class="nav-dot"></div></div>
+            <div class="nav-item"><div class="nav-icon">📅</div><span class="nav-label">Plan</span></div>
+            <div class="nav-item"><div class="nav-icon">🍎</div><span class="nav-label">Nutrition</span></div>
+            <div class="nav-item"><div class="nav-icon">👟</div><span class="nav-label">Activity</span></div>
+            <div class="nav-item"><div class="nav-icon">👤</div><span class="nav-label">Profile</span></div>
+          </div>
+        </div>
+
+        <!-- SCREEN: Why Sheet -->
+        <div class="phone-screen" id="screen-daily-why" style="display:none; position:relative; min-height:620px">
+          <!-- Background (blurred daily summary) -->
+          <div style="opacity:0.3; pointer-events:none">
+            <div class="app-header">
+              <div class="app-header-left">
+                <span class="app-greeting">Good morning, Gus</span>
+                <span class="app-title">OSPREY</span>
+              </div>
+              <div class="osprey-logo"><svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="9" fill="#1B3A5C"/><circle cx="18" cy="17" r="11" fill="#f5f0e8"/><path d="M7 13 Q18 5 29 13 Q26 19 18 20 Q10 19 7 13Z" fill="#1a2a3a"/><circle cx="13.5" cy="17.5" r="4" fill="#fff"/><circle cx="22.5" cy="17.5" r="4" fill="#fff"/><circle cx="13.5" cy="17.5" r="2.5" fill="#f5a623"/><circle cx="22.5" cy="17.5" r="2.5" fill="#f5a623"/><circle cx="13.5" cy="17.5" r="1.4" fill="#111"/><circle cx="22.5" cy="17.5" r="1.4" fill="#111"/><circle cx="14.2" cy="16.8" r="0.6" fill="#fff"/><circle cx="23.2" cy="16.8" r="0.6" fill="#fff"/><path d="M15.5 22 L18 26 L20.5 22 Q19 21 18 21 Q17 21 15.5 22Z" fill="#c89a00"/></svg></div>
+            </div>
+            <div class="recovery-card" style="opacity:0.5"></div>
+          </div>
+          <!-- Sheet -->
+          <div style="position:absolute; bottom:0; left:0; right:0; background:#1a1a2e; border-radius:24px 24px 0 0; padding:24px 20px 32px; border:1px solid #2a2a42;">
+            <div class="why-pill"></div>
+            <div class="why-title">Why was my run moved?</div>
+            <div class="why-data-row">
+              <span class="why-data-label">HRV last night</span>
+              <span class="why-data-val" style="color:#ffa500">44 ms (↓ 18 from avg)</span>
+            </div>
+            <div class="why-data-row">
+              <span class="why-data-label">Sleep</span>
+              <span class="why-data-val" style="color:#ffa500">5h 50m (↓ from 7.4h avg)</span>
+            </div>
+            <div class="why-data-row">
+              <span class="why-data-label">Resting HR</span>
+              <span class="why-data-val" style="color:#ffa500">61 bpm (↑ 9 from baseline)</span>
+            </div>
+            <div class="why-data-row">
+              <span class="why-data-label">7-day load</span>
+              <span class="why-data-val" style="color:#fff">+22% above 28-day avg</span>
+            </div>
+            <div class="why-explanation">
+              "Three of four recovery signals are in the red. Doing a hard long run on a day like this raises injury risk and produces worse training adaptation than resting. The long run is still happening — just Tuesday, when you'll actually benefit from it."
+            </div>
+            <button class="why-close" onclick="switchScreen('daily','rest')">Got it, thanks Ozzie</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="phone-home"><div class="home-indicator"></div></div>
+    </div>
+
+    <!-- Annotations -->
+    <div class="annotation-panel">
+      <h3>Screen annotations</h3>
+      <div class="annotation">
+        <div class="ann-num">1</div>
+        <div class="ann-text"><strong>Recovery Score (hero).</strong> Circular progress ring, 0–100. Green = good (70+), amber = caution (40–69), red = poor (&lt;40). Three sub-metrics below: HRV, sleep, resting HR with delta indicators.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">2</div>
+        <div class="ann-text"><strong>Today's Session card.</strong> Session type badge, name, target metrics, and a single Start Session CTA. If Ozzie rescheduled today, shows the new session with a Why? link. Never shows a guilt-inducing "missed" state.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">3</div>
+        <div class="ann-text"><strong>Nutrition strip.</strong> Calories consumed vs. target, plus three macro progress bars. Tapping anywhere opens the food log. On rest days, targets auto-adjust down — Ozzie explains why.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">4</div>
+        <div class="ann-text"><strong>Ozzie's insight card.</strong> Always at the bottom of the summary. One specific, data-backed insight in plain English. The "Why?" button opens a bottom sheet showing the exact data points behind any plan change — always stored at the time of the decision, never regenerated.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">5</div>
+        <div class="ann-text"><strong>Why? bottom sheet.</strong> Shows the 3–4 data points that drove the decision, with Ozzie's plain-language explanation. Dismissed with a single tap. This is the trust engine — users who understand Ozzie's decisions become long-term users.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ONBOARDING TAB
+════════════════════════════════════════════════════════════════════════════ -->
+<div class="canvas" id="tab-onboarding">
+  <div class="canvas-title">Onboarding Flow — 6 Screens</div>
+
+  <div class="screen-nav">
+    <button class="screen-btn active" onclick="switchScreen('onboard', '1')">1 — Ozzie Intro</button>
+    <button class="screen-btn" onclick="switchScreen('onboard', '2')">2 — Primary Goal</button>
+    <button class="screen-btn" onclick="switchScreen('onboard', '3')">3 — Mode Select</button>
+    <button class="screen-btn" onclick="switchScreen('onboard', '4')">4 — Target Event</button>
+    <button class="screen-btn" onclick="switchScreen('onboard', '5')">5 — Schedule</button>
+    <button class="screen-btn" onclick="switchScreen('onboard', '6')">6 — Plan Reveal</button>
+  </div>
+
+  <div class="phone-row">
+    <div class="phone-wrapper">
+      <div class="phone-label">Onboarding · 6-screen flow</div>
+      <div class="phone">
+        <div class="phone-notch">
+          <span>9:41</span>
+          <div class="notch-pill"></div>
+          <span>●●●</span>
+        </div>
+
+        <!-- Screen 1: Ozzie Intro -->
+        <div class="phone-screen" id="screen-onboard-1">
+          <div class="onboard-screen">
+            <div class="onboard-intro">
+              <div class="ozzie-big ozzie-pulse"><svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="36" fill="#c89a00"/><circle cx="36" cy="34" r="23" fill="#fff"/><path d="M13 26 Q36 11 59 26 Q54 38 36 40 Q18 38 13 26Z" fill="#1a2a3a"/><circle cx="26" cy="35" r="8.5" fill="#fff"/><circle cx="46" cy="35" r="8.5" fill="#fff"/><circle cx="26" cy="35" r="5.5" fill="#f5a623"/><circle cx="46" cy="35" r="5.5" fill="#f5a623"/><circle cx="26" cy="35" r="3.2" fill="#111"/><circle cx="46" cy="35" r="3.2" fill="#111"/><circle cx="27.8" cy="33" r="1.3" fill="#fff"/><circle cx="47.8" cy="33" r="1.3" fill="#fff"/><path d="M30 46 L36 55 L42 46 Q39.5 44 36 44 Q32.5 44 30 46Z" fill="#c89a00"/><path d="M17 50 Q22 42 28 45" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4"/><path d="M55 50 Q50 42 44 45" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4"/></svg></div>
+              <div class="onboard-greeting">Hey — I'm Ozzie.</div>
+              <div class="onboard-sub">Your OSPREY coach. I'm going to ask you a few quick questions so I can build your first plan — it takes about 90 seconds.</div>
+              <div class="onboard-speech">
+                <div class="speaker">Ozzie says:</div>
+                <p>"I'm not going to throw a complicated setup at you. Three questions, one plan, and we adjust as we go. Ready?"</p>
+              </div>
+              <button class="primary-btn" onclick="switchScreen('onboard','2')">Let's go →</button>
+              <button class="secondary-btn">I already have a plan</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 2: Primary Goal -->
+        <div class="phone-screen" id="screen-onboard-2" style="display:none">
+          <div class="onboard-screen">
+            <div class="progress-bar">
+              <div class="progress-track"><div class="progress-fill" style="width:20%"></div></div>
+              <div class="progress-label">Step 1 of 5</div>
+            </div>
+            <div class="form-screen">
+              <div class="ozzie-header" style="margin-bottom:14px">
+                <div class="ozzie-avatar" style="width:28px;height:28px"><svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#c89a00"/><circle cx="14" cy="13" r="9" fill="#fff"/><path d="M5 10 Q14 4 23 10 Q21 15 14 16 Q7 15 5 10Z" fill="#1a2a3a"/><circle cx="10.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="17.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="10.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="17.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="10.5" cy="13.5" r="1.1" fill="#111"/><circle cx="17.5" cy="13.5" r="1.1" fill="#111"/><circle cx="11.1" cy="12.9" r="0.5" fill="#fff"/><circle cx="18.1" cy="12.9" r="0.5" fill="#fff"/><path d="M12 18.5 L14 21.5 L16 18.5 Q15 18 14 18 Q13 18 12 18.5Z" fill="#c89a00"/></svg></div>
+                <span class="ozzie-name">Ozzie</span>
+              </div>
+              <div class="form-q">What's your main goal right now?</div>
+              <div class="form-hint">This shapes your entire plan. You can always change it later.</div>
+              <div class="option-grid">
+                <div class="option-card selected" onclick="selectOption(this)">
+                  <div class="option-icon" style="background:rgba(0,200,200,0.15)">🏃</div>
+                  <div class="option-text">
+                    <div class="option-title">Run better</div>
+                    <div class="option-desc">5K, 10K, half, full marathon</div>
+                  </div>
+                  <div class="option-check">✓</div>
+                </div>
+                <div class="option-card" onclick="selectOption(this)">
+                  <div class="option-icon" style="background:rgba(200,154,0,0.15)">🏋️</div>
+                  <div class="option-text">
+                    <div class="option-title">Get stronger</div>
+                    <div class="option-desc">Lift more, build muscle</div>
+                  </div>
+                  <div class="option-check"></div>
+                </div>
+                <div class="option-card" onclick="selectOption(this)">
+                  <div class="option-icon" style="background:rgba(91,94,166,0.15)">⚡</div>
+                  <div class="option-text">
+                    <div class="option-title">Hybrid athlete</div>
+                    <div class="option-desc">Run and lift — both matter</div>
+                  </div>
+                  <div class="option-check"></div>
+                </div>
+                <div class="option-card" onclick="selectOption(this)">
+                  <div class="option-icon" style="background:rgba(76,222,128,0.15)">⚖️</div>
+                  <div class="option-text">
+                    <div class="option-title">Lose weight</div>
+                    <div class="option-desc">Performance + body composition</div>
+                  </div>
+                  <div class="option-check"></div>
+                </div>
+              </div>
+            </div>
+            <div class="continue-footer">
+              <button class="primary-btn" onclick="switchScreen('onboard','3')">Continue →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 3: Mode Select (replaces Fitness Level) -->
+        <div class="phone-screen" id="screen-onboard-3" style="display:none">
+          <div class="onboard-screen">
+            <div class="progress-bar">
+              <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+              <div class="progress-label">Step 2 of 5</div>
+            </div>
+            <div class="form-screen">
+              <div class="ozzie-header" style="margin-bottom:14px">
+                <div class="ozzie-avatar" style="width:28px;height:28px"><svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#c89a00"/><circle cx="14" cy="13" r="9" fill="#fff"/><path d="M5 10 Q14 4 23 10 Q21 15 14 16 Q7 15 5 10Z" fill="#1a2a3a"/><circle cx="10.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="17.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="10.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="17.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="10.5" cy="13.5" r="1.1" fill="#111"/><circle cx="17.5" cy="13.5" r="1.1" fill="#111"/><circle cx="11.1" cy="12.9" r="0.5" fill="#fff"/><circle cx="18.1" cy="12.9" r="0.5" fill="#fff"/><path d="M12 18.5 L14 21.5 L16 18.5 Q15 18 14 18 Q13 18 12 18.5Z" fill="#c89a00"/></svg></div>
+                <span class="ozzie-name">Ozzie</span>
+              </div>
+              <div class="form-q">How would you describe yourself as a trainer right now?</div>
+              <div class="form-hint">This sets how I talk to you and what metrics I focus on. You can change it any time.</div>
+
+              <!-- Beginner card -->
+              <div class="option-card" onclick="selectOption(this)" style="margin-bottom:0;padding:16px;">
+                <div class="option-icon" style="background:rgba(0,200,200,0.15)">🌱</div>
+                <div class="option-text">
+                  <div class="option-title" style="color:#00c8c8;">Just getting started</div>
+                  <div class="option-desc">New to structured training, getting back into it, or keeping it casual. I'll keep it simple and encouraging — pace and effort, not TSS and CTL.</div>
+                </div>
+                <div class="option-check"></div>
+              </div>
+
+              <div style="height:10px;"></div>
+
+              <!-- Advanced card -->
+              <div class="option-card selected" onclick="selectOption(this)" style="padding:16px;border-color:rgba(173,20,87,0.5);background:rgba(173,20,87,0.07);">
+                <div class="option-icon" style="background:rgba(173,20,87,0.18)">🏆</div>
+                <div class="option-text">
+                  <div class="option-title" style="color:#e91e8c;">I have a training base</div>
+                  <div class="option-desc">You train regularly and have race goals or lifting PRs. I'll get into the data — TSS, load curve, periodization — and push you.</div>
+                </div>
+                <div class="option-check" style="color:#e91e8c;">✓</div>
+              </div>
+
+              <div style="margin-top:14px;font-size:11px;color:rgba(255,255,255,0.25);text-align:center;">You can switch modes any time in Settings</div>
+            </div>
+            <div class="continue-footer">
+              <button class="primary-btn" onclick="switchScreen('onboard','4')">Continue →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 4: Target Event -->
+        <div class="phone-screen" id="screen-onboard-4" style="display:none">
+          <div class="onboard-screen">
+            <div class="progress-bar">
+              <div class="progress-track"><div class="progress-fill" style="width:60%"></div></div>
+              <div class="progress-label">Step 3 of 5</div>
+            </div>
+            <div class="form-screen">
+              <div class="ozzie-header" style="margin-bottom:14px">
+                <div class="ozzie-avatar" style="width:28px;height:28px"><svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#c89a00"/><circle cx="14" cy="13" r="9" fill="#fff"/><path d="M5 10 Q14 4 23 10 Q21 15 14 16 Q7 15 5 10Z" fill="#1a2a3a"/><circle cx="10.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="17.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="10.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="17.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="10.5" cy="13.5" r="1.1" fill="#111"/><circle cx="17.5" cy="13.5" r="1.1" fill="#111"/><circle cx="11.1" cy="12.9" r="0.5" fill="#fff"/><circle cx="18.1" cy="12.9" r="0.5" fill="#fff"/><path d="M12 18.5 L14 21.5 L16 18.5 Q15 18 14 18 Q13 18 12 18.5Z" fill="#c89a00"/></svg></div>
+                <span class="ozzie-name">Ozzie</span>
+              </div>
+              <div class="form-q">Do you have a race or event coming up?</div>
+              <div class="form-hint">If yes, I'll anchor your plan to it. If not, no problem — we'll build toward general fitness.</div>
+              <div class="option-grid">
+                <div class="option-card selected" onclick="selectOption(this)">
+                  <div class="option-icon" style="background:rgba(173,20,87,0.15)">🎯</div>
+                  <div class="option-text">
+                    <div class="option-title">Yes — I have a race</div>
+                    <div class="option-desc">I'll enter the date and distance</div>
+                  </div>
+                  <div class="option-check">✓</div>
+                </div>
+                <div class="option-card" onclick="selectOption(this)">
+                  <div class="option-icon" style="background:rgba(0,200,200,0.15)">📈</div>
+                  <div class="option-text">
+                    <div class="option-title">No race — just improving</div>
+                    <div class="option-desc">Open-ended fitness plan</div>
+                  </div>
+                  <div class="option-check"></div>
+                </div>
+              </div>
+              <div style="margin-top:16px; background:#1e1e32; border-radius:14px; padding:14px 16px; border:1px solid #2a2a42;">
+                <div style="font-size:11px;color:#888;margin-bottom:8px;font-weight:700;">RACE DETAILS</div>
+                <div style="font-size:13px;color:#555;margin-bottom:10px;">Chicago Marathon · Oct 12, 2026</div>
+                <div style="font-size:11px;color:#888;margin-bottom:6px;">Goal time (optional)</div>
+                <div style="font-size:13px;color:#fff;background:#2a2a42;border-radius:8px;padding:10px 12px;">4:15:00</div>
+              </div>
+            </div>
+            <div class="continue-footer">
+              <button class="primary-btn" onclick="switchScreen('onboard','5')">Continue →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 5: Schedule -->
+        <div class="phone-screen" id="screen-onboard-5" style="display:none">
+          <div class="onboard-screen">
+            <div class="progress-bar">
+              <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
+              <div class="progress-label">Step 4 of 5</div>
+            </div>
+            <div class="form-screen">
+              <div class="ozzie-header" style="margin-bottom:14px">
+                <div class="ozzie-avatar" style="width:28px;height:28px"><svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#c89a00"/><circle cx="14" cy="13" r="9" fill="#fff"/><path d="M5 10 Q14 4 23 10 Q21 15 14 16 Q7 15 5 10Z" fill="#1a2a3a"/><circle cx="10.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="17.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="10.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="17.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="10.5" cy="13.5" r="1.1" fill="#111"/><circle cx="17.5" cy="13.5" r="1.1" fill="#111"/><circle cx="11.1" cy="12.9" r="0.5" fill="#fff"/><circle cx="18.1" cy="12.9" r="0.5" fill="#fff"/><path d="M12 18.5 L14 21.5 L16 18.5 Q15 18 14 18 Q13 18 12 18.5Z" fill="#c89a00"/></svg></div>
+                <span class="ozzie-name">Ozzie</span>
+              </div>
+              <div class="form-q">How many days per week can you train?</div>
+              <div class="form-hint">Be realistic. I'd rather have you nail 4 days than burn out on 6.</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+                <div style="text-align:center" onclick="selectDays(this, 3)">
+                  <div style="width:44px;height:44px;border-radius:12px;background:#1e1e32;border:1.5px solid #2a2a42;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#888;cursor:pointer">3</div>
+                  <div style="font-size:9px;color:#555;margin-top:4px">days</div>
+                </div>
+                <div style="text-align:center" onclick="selectDays(this, 4)">
+                  <div style="width:44px;height:44px;border-radius:12px;background:rgba(0,200,200,0.15);border:1.5px solid #00c8c8;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#00c8c8;cursor:pointer">4</div>
+                  <div style="font-size:9px;color:#00c8c8;margin-top:4px">selected</div>
+                </div>
+                <div style="text-align:center" onclick="selectDays(this, 5)">
+                  <div style="width:44px;height:44px;border-radius:12px;background:#1e1e32;border:1.5px solid #2a2a42;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#888;cursor:pointer">5</div>
+                  <div style="font-size:9px;color:#555;margin-top:4px">days</div>
+                </div>
+                <div style="text-align:center" onclick="selectDays(this, 6)">
+                  <div style="width:44px;height:44px;border-radius:12px;background:#1e1e32;border:1.5px solid #2a2a42;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#888;cursor:pointer">6</div>
+                  <div style="font-size:9px;color:#555;margin-top:4px">days</div>
+                </div>
+              </div>
+              <div class="form-q" style="font-size:14px;margin-top:4px">Which days work best?</div>
+              <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+                <div style="padding:8px 12px;border-radius:20px;border:1.5px solid #00c8c8;background:rgba(0,200,200,0.12);font-size:12px;font-weight:700;color:#00c8c8;cursor:pointer">Mon</div>
+                <div style="padding:8px 12px;border-radius:20px;border:1.5px solid #2a2a42;background:#1e1e32;font-size:12px;font-weight:700;color:#888;cursor:pointer">Tue</div>
+                <div style="padding:8px 12px;border-radius:20px;border:1.5px solid #00c8c8;background:rgba(0,200,200,0.12);font-size:12px;font-weight:700;color:#00c8c8;cursor:pointer">Wed</div>
+                <div style="padding:8px 12px;border-radius:20px;border:1.5px solid #2a2a42;background:#1e1e32;font-size:12px;font-weight:700;color:#888;cursor:pointer">Thu</div>
+                <div style="padding:8px 12px;border-radius:20px;border:1.5px solid #00c8c8;background:rgba(0,200,200,0.12);font-size:12px;font-weight:700;color:#00c8c8;cursor:pointer">Fri</div>
+                <div style="padding:8px 12px;border-radius:20px;border:1.5px solid #2a2a42;background:#1e1e32;font-size:12px;font-weight:700;color:#888;cursor:pointer">Sat</div>
+                <div style="padding:8px 12px;border-radius:20px;border:1.5px solid #00c8c8;background:rgba(0,200,200,0.12);font-size:12px;font-weight:700;color:#00c8c8;cursor:pointer">Sun</div>
+              </div>
+            </div>
+            <div class="continue-footer">
+              <button class="primary-btn" onclick="switchScreen('onboard','6')">Build my plan →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 6: Plan Reveal -->
+        <div class="phone-screen" id="screen-onboard-6" style="display:none">
+          <div class="onboard-screen">
+            <div class="progress-bar">
+              <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+              <div class="progress-label">Your plan is ready</div>
+            </div>
+            <div class="plan-reveal">
+              <div class="ozzie-reveal-header">
+                <div class="reveal-avatar ozzie-pulse"><svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="22" r="22" fill="#c89a00"/><circle cx="22" cy="21" r="14" fill="#fff"/><path d="M8 16 Q22 7 36 16 Q33 23 22 24 Q11 23 8 16Z" fill="#1a2a3a"/><circle cx="16" cy="21.5" r="5.2" fill="#fff"/><circle cx="28" cy="21.5" r="5.2" fill="#fff"/><circle cx="16" cy="21.5" r="3.3" fill="#f5a623"/><circle cx="28" cy="21.5" r="3.3" fill="#f5a623"/><circle cx="16" cy="21.5" r="1.9" fill="#111"/><circle cx="28" cy="21.5" r="1.9" fill="#111"/><circle cx="17.1" cy="20.2" r="0.8" fill="#fff"/><circle cx="29.1" cy="20.2" r="0.8" fill="#fff"/><path d="M18.5 28 L22 33 L25.5 28 Q24 27 22 27 Q20 27 18.5 28Z" fill="#c89a00"/></svg></div>
+                <div>
+                  <div class="reveal-title">Alright. Here we go.</div>
+                  <div class="reveal-sub">18-week Chicago Marathon build</div>
+                </div>
+              </div>
+              <div class="ozzie-reveal-speech">
+                <p>"Based on what you told me: 4 days a week, race on October 12th, goal of 4:15. I've got an 18-week plan ready. Week 1 is intentionally easy — I need to see how you respond before I push anything. Your first long run is Sunday."</p>
+              </div>
+              <div class="plan-card">
+                <div class="plan-card-label">Week 1 of 18 · Base building</div>
+                <div class="plan-card-title">Chicago Marathon Build</div>
+                <div class="plan-week-row">
+                  <div class="plan-day"><div class="plan-day-label">M</div><div class="plan-day-dot day-run">R</div></div>
+                  <div class="plan-day"><div class="plan-day-label">T</div><div class="plan-day-dot day-rest">—</div></div>
+                  <div class="plan-day"><div class="plan-day-label">W</div><div class="plan-day-dot day-lift">L</div></div>
+                  <div class="plan-day"><div class="plan-day-label">T</div><div class="plan-day-dot day-rest">—</div></div>
+                  <div class="plan-day"><div class="plan-day-label">F</div><div class="plan-day-dot day-run">R</div></div>
+                  <div class="plan-day"><div class="plan-day-label">S</div><div class="plan-day-dot day-rest">—</div></div>
+                  <div class="plan-day"><div class="plan-day-label">S</div><div class="plan-day-dot day-run">LR</div></div>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+                  <div style="font-size:10px;color:#888">🏃 <span style="color:#00c8c8;font-weight:700">Mon</span> Easy 4mi</div>
+                  <div style="font-size:10px;color:#888">🏋️ <span style="color:#c89a00;font-weight:700">Wed</span> Strength</div>
+                  <div style="font-size:10px;color:#888">🏃 <span style="color:#00c8c8;font-weight:700">Fri</span> Easy 5mi</div>
+                  <div style="font-size:10px;color:#888">🏃 <span style="color:#00c8c8;font-weight:700">Sun</span> Long 8mi</div>
+                </div>
+              </div>
+              <button class="primary-btn" style="margin-top:8px">Start training with Ozzie</button>
+              <button class="secondary-btn" style="margin-top:8px">Adjust the plan</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="phone-home"><div class="home-indicator"></div></div>
+    </div>
+
+    <!-- Annotations -->
+    <div class="annotation-panel">
+      <h3>Onboarding flow notes</h3>
+      <div class="annotation">
+        <div class="ann-num">1</div>
+        <div class="ann-text"><strong>Ozzie intro (screen 1).</strong> Ozzie leads with his name and personality, not a feature list. One speech bubble sets the tone for the whole relationship. "I'm not going to throw a complicated setup at you" is the first thing he says — trust starts here.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">2</div>
+        <div class="ann-text"><strong>5 form screens, max.</strong> Goal → Fitness level → Target event → Schedule → Plan reveal. No account setup friction here — email/password is handled before this flow. Progress bar visible throughout.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">3</div>
+        <div class="ann-text"><strong>Option cards, not dropdowns.</strong> Every question uses large tap targets with icons and one-line descriptions. No typing unless entering a race date or goal time. Fast, thumb-friendly, zero friction.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">4</div>
+        <div class="ann-text"><strong>Ozzie closes with the plan reveal.</strong> He references the user's specific answers ("4 days a week, race Oct 12th, goal 4:15") to prove he was actually listening. The weekly tile view makes the plan tangible immediately.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">5</div>
+        <div class="ann-text"><strong>"Adjust the plan" always visible.</strong> The plan is a starting point, not a verdict. Giving users control from the first screen builds trust and reduces churn from feeling locked in.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">6</div>
+        <div class="ann-text"><strong>Wearable connect deferred.</strong> Ozzie prompts wearable connection on day 2, not during onboarding. One action at a time. Users who haven't connected a wearable still get a useful plan — missing data is never a blocker.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Why overlay (global) -->
+<div class="why-overlay" id="why-overlay" onclick="closeWhy()">
+  <div class="why-sheet" onclick="event.stopPropagation()">
+    <div class="why-pill"></div>
+    <div class="why-title">Why was my run moved?</div>
+    <div class="why-data-row">
+      <span class="why-data-label">HRV last night</span>
+      <span class="why-data-val" style="color:#ffa500">44 ms (↓ 18 from avg)</span>
+    </div>
+    <div class="why-data-row">
+      <span class="why-data-label">Sleep duration</span>
+      <span class="why-data-val" style="color:#ffa500">5h 50m (↓ from 7.4h avg)</span>
+    </div>
+    <div class="why-data-row">
+      <span class="why-data-label">Resting HR</span>
+      <span class="why-data-val" style="color:#ffa500">61 bpm (↑ 9 from baseline)</span>
+    </div>
+    <div class="why-data-row">
+      <span class="why-data-label">7-day load vs 28-day</span>
+      <span class="why-data-val" style="color:#fff">+22% above average</span>
+    </div>
+    <div class="why-explanation">
+      "Three of four recovery signals are in the red. Doing a hard long run on a day like this raises injury risk and produces worse training adaptation than resting. The long run is still happening — just Tuesday, when you'll actually benefit from it."
+    </div>
+    <button class="why-close" onclick="closeWhy()">Got it, thanks Ozzie</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ACTIVE WORKOUT TAB
+════════════════════════════════════════════════════════════════════════════ -->
+<div class="canvas" id="tab-workout">
+  <div class="canvas-title">Active Workout — Running GPS Screen</div>
+
+  <div class="screen-nav">
+    <button class="screen-btn active" onclick="switchScreen('workout','running')">Mid-Run — On Pace</button>
+    <button class="screen-btn" onclick="switchScreen('workout','tooslow')">Mid-Run — Going Too Fast</button>
+    <button class="screen-btn" onclick="switchScreen('workout','paused')">Paused</button>
+  </div>
+
+  <div class="phone-row">
+    <div class="phone-wrapper">
+      <div class="phone-label">iPhone 16 Pro · Active Session</div>
+      <div class="phone">
+        <div class="phone-notch" style="background:rgba(0,0,0,0.8)">
+          <span>9:47</span>
+          <div class="notch-pill"></div>
+          <span style="color:#4cde80">● GPS</span>
+        </div>
+
+        <!-- SCREEN: Mid-Run On Pace -->
+        <div class="phone-screen" id="screen-workout-running" style="background:#060912; overflow:hidden; max-height:620px; position:relative;">
+
+          <!-- MAP AREA — SVG illustrated map -->
+          <div style="position:relative; height:310px; overflow:hidden; flex-shrink:0;">
+            <svg width="320" height="310" viewBox="0 0 320 310" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;">
+              <defs><linearGradient id="mf1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#060912" stop-opacity="0"/><stop offset="80%" stop-color="#060912" stop-opacity="0.9"/><stop offset="100%" stop-color="#060912" stop-opacity="1"/></linearGradient></defs>
+              <!-- base -->
+              <rect width="320" height="310" fill="#0d1421"/>
+              <!-- water -->
+              <path d="M0 262 Q28 252 54 266 Q78 279 90 272 Q100 265 92 310 L0 310Z" fill="#0a1828"/>
+              <path d="M0 262 Q28 252 54 266 Q78 279 90 272" fill="none" stroke="#162840" stroke-width="1.5"/>
+              <!-- parks -->
+              <rect x="128" y="88" width="66" height="50" rx="3" fill="#0e2016"/><rect x="128" y="88" width="66" height="50" rx="3" fill="none" stroke="#183020" stroke-width="1"/>
+              <circle cx="141" cy="102" r="4" fill="#163018" opacity="0.8"/><circle cx="154" cy="108" r="5" fill="#163018" opacity="0.7"/><circle cx="167" cy="100" r="4" fill="#163018" opacity="0.8"/><circle cx="177" cy="112" r="5" fill="#163018" opacity="0.6"/><circle cx="148" cy="118" r="4" fill="#163018" opacity="0.7"/><circle cx="162" cy="124" r="3" fill="#163018" opacity="0.8"/><circle cx="183" cy="122" r="4" fill="#163018" opacity="0.6"/>
+              <text x="161" y="132" text-anchor="middle" fill="#2a5040" font-size="7" font-family="-apple-system,sans-serif" font-weight="600">Riverside Park</text>
+              <rect x="248" y="42" width="42" height="33" rx="3" fill="#0e2016"/><circle cx="260" cy="54" r="3" fill="#163018" opacity="0.7"/><circle cx="272" cy="50" r="4" fill="#163018" opacity="0.6"/><circle cx="280" cy="60" r="3" fill="#163018" opacity="0.7"/>
+              <!-- city blocks -->
+              <rect x="18" y="42" width="50" height="38" rx="2" fill="#111926"/><rect x="18" y="90" width="50" height="44" rx="2" fill="#111926"/><rect x="18" y="144" width="50" height="46" rx="2" fill="#111926"/><rect x="18" y="202" width="50" height="48" rx="2" fill="#111926"/>
+              <rect x="78" y="42" width="44" height="38" rx="2" fill="#111926"/><rect x="78" y="90" width="44" height="44" rx="2" fill="#111926"/><rect x="78" y="144" width="44" height="46" rx="2" fill="#111926"/><rect x="78" y="202" width="44" height="48" rx="2" fill="#111926"/>
+              <rect x="204" y="90" width="38" height="44" rx="2" fill="#111926"/><rect x="204" y="144" width="38" height="46" rx="2" fill="#111926"/>
+              <rect x="248" y="86" width="42" height="50" rx="2" fill="#111926"/><rect x="248" y="148" width="42" height="48" rx="2" fill="#111926"/>
+              <rect x="128" y="148" width="66" height="46" rx="2" fill="#111926"/><rect x="128" y="206" width="66" height="46" rx="2" fill="#111926"/>
+              <rect x="204" y="202" width="86" height="50" rx="2" fill="#111926"/>
+              <!-- major roads -->
+              <path d="M0 160 L320 160" stroke="#243550" stroke-width="9"/><path d="M122 0 L122 310" stroke="#243550" stroke-width="9"/>
+              <!-- secondary roads -->
+              <path d="M0 82 L320 82" stroke="#182436" stroke-width="6"/><path d="M0 200 L320 200" stroke="#182436" stroke-width="6"/><path d="M0 256 L320 256" stroke="#182436" stroke-width="5"/>
+              <path d="M74 0 L74 310" stroke="#182436" stroke-width="6"/><path d="M200 0 L200 310" stroke="#182436" stroke-width="6"/><path d="M244 0 L244 310" stroke="#182436" stroke-width="5"/>
+              <!-- tertiary roads -->
+              <path d="M0 42 L320 42" stroke="#141e2e" stroke-width="4"/><path d="M0 144 L320 144" stroke="#141e2e" stroke-width="4"/>
+              <path d="M18 0 L18 310" stroke="#141e2e" stroke-width="4"/><path d="M290 0 L290 310" stroke="#141e2e" stroke-width="4"/><path d="M166 0 L166 82" stroke="#141e2e" stroke-width="3"/><path d="M166 148 L166 200" stroke="#141e2e" stroke-width="3"/><path d="M166 212 L166 310" stroke="#141e2e" stroke-width="3"/>
+              <!-- diagonal connector -->
+              <path d="M0 200 Q38 182 74 160" stroke="#182436" stroke-width="5" fill="none"/>
+              <path d="M200 82 Q220 62 244 42" stroke="#141e2e" stroke-width="4" fill="none"/>
+              <!-- centerline dashes -->
+              <path d="M0 160 L320 160" stroke="#1a2a40" stroke-width="1" stroke-dasharray="12 10"/>
+              <path d="M122 0 L122 310" stroke="#1a2a40" stroke-width="1" stroke-dasharray="12 10"/>
+              <!-- street labels -->
+              <text x="58" y="156" text-anchor="middle" fill="#2a4060" font-size="7" font-family="-apple-system,sans-serif" font-weight="600">LAKEFRONT AVE</text>
+              <text x="118" y="260" text-anchor="middle" fill="#2a4060" font-size="6.5" font-family="-apple-system,sans-serif" font-weight="600" transform="rotate(-90,118,260)">MICHIGAN BLVD</text>
+              <text x="37" y="78" text-anchor="middle" fill="#223040" font-size="6" font-family="-apple-system,sans-serif">ELM ST</text>
+              <text x="37" y="196" text-anchor="middle" fill="#223040" font-size="6" font-family="-apple-system,sans-serif">OAK AVE</text>
+              <text x="270" y="196" text-anchor="middle" fill="#223040" font-size="6" font-family="-apple-system,sans-serif">HARBOR DR</text>
+              <text x="220" y="78" text-anchor="middle" fill="#223040" font-size="6" font-family="-apple-system,sans-serif">CLARK ST</text>
+              <!-- planned route — full loop on roads (dashed) -->
+              <path d="M122 256 L122 200 L74 200 L74 160 L122 160 L122 82 L200 82 L200 42 L244 42 L244 200 L200 200 L200 256 L122 256Z" fill="none" stroke="rgba(0,200,200,0.2)" stroke-width="3.5" stroke-dasharray="7 5" stroke-linecap="square" stroke-linejoin="round"/>
+              <!-- completed route — 3.41 miles, road-snapped (teal) -->
+              <path d="M122 256 L122 200 L74 200 L74 160 L122 160 L122 82 L200 82 L200 42 L244 42 L244 144" fill="none" stroke="#00c8c8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 4px rgba(0,200,200,0.45))"/>
+              <!-- mile markers -->
+              <circle cx="74" cy="160" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="74" y="164" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">1</text>
+              <circle cx="200" cy="82" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="200" y="86" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">2</text>
+              <!-- current position — mile 3, heading south on State St (244), green glow -->
+              <circle cx="244" cy="144" r="16" fill="rgba(76,222,128,0.1)"/><circle cx="244" cy="144" r="10" fill="rgba(0,200,200,0.2)"/>
+              <circle cx="244" cy="144" r="5.5" fill="#00c8c8"/><circle cx="244" cy="144" r="2.5" fill="#fff"/>
+              <path d="M244 133 L240 142 L244 139 L248 142Z" fill="#fff" opacity="0.9"/>
+              <circle cx="258" cy="132" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="258" y="136" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">3</text>
+              <!-- fade -->
+              <rect x="0" y="236" width="320" height="74" fill="url(#mf1)"/>
+            </svg>
+
+            <!-- Floating top HUD over map -->
+            <div style="position:absolute;top:10px;left:12px;right:12px;display:flex;gap:8px;">
+              <!-- elapsed time -->
+              <div style="background:rgba(6,9,18,0.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px 12px;flex:1;text-align:center;">
+                <div style="font-size:9px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Time</div>
+                <div style="font-size:20px;font-weight:900;color:#fff;letter-spacing:1px;line-height:1;">24:08</div>
+              </div>
+              <!-- distance -->
+              <div style="background:rgba(6,9,18,0.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px 12px;flex:1;text-align:center;">
+                <div style="font-size:9px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Miles</div>
+                <div style="font-size:20px;font-weight:900;color:#fff;letter-spacing:1px;line-height:1;">3.41</div>
+              </div>
+              <!-- current pace -->
+              <div style="background:rgba(6,9,18,0.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(76,222,128,0.35);border-radius:14px;padding:8px 12px;flex:1;text-align:center;">
+                <div style="font-size:9px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Pace</div>
+                <div style="font-size:20px;font-weight:900;color:#4cde80;letter-spacing:1px;line-height:1;">7:04</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTTOM PANEL — scrollable controls -->
+          <div style="padding:0 14px 8px;position:relative;z-index:2;">
+
+            <!-- Pace zone bar -->
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:12px 14px;margin-bottom:10px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:1px;">Pace Zone</span>
+                <span style="font-size:11px;font-weight:800;color:#4cde80;">Zone 3 · Tempo</span>
+              </div>
+              <!-- zone bar -->
+              <div style="position:relative;height:8px;border-radius:4px;background:linear-gradient(to right,#4cde80 0%,#00c8c8 40%,#f5a623 70%,#ff4444 100%);overflow:hidden;">
+                <!-- zone boundaries -->
+                <div style="position:absolute;left:40%;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.3);"></div>
+                <div style="position:absolute;left:70%;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.3);"></div>
+              </div>
+              <!-- marker needle -->
+              <div style="position:relative;margin-top:-4px;margin-left:calc(56% - 6px);width:12px;height:12px;background:#fff;border-radius:50%;border:2px solid #4cde80;box-shadow:0 0 8px rgba(76,222,128,0.6);"></div>
+              <div style="display:flex;justify-content:space-between;margin-top:4px;">
+                <span style="font-size:8px;color:rgba(255,255,255,0.25);">Easy</span>
+                <span style="font-size:8px;color:rgba(255,255,255,0.25);">Tempo</span>
+                <span style="font-size:8px;color:rgba(255,255,255,0.25);">Threshold</span>
+                <span style="font-size:8px;color:rgba(255,255,255,0.25);">Max</span>
+              </div>
+            </div>
+
+            <!-- Ozzie live cue -->
+            <div style="background:rgba(200,154,0,0.07);border:1px solid rgba(200,154,0,0.25);border-left:3px solid #c89a00;border-radius:14px;padding:10px 12px;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:24px;height:24px;flex-shrink:0;margin-top:1px;">
+                <svg width="24" height="24" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#c89a00"/><circle cx="14" cy="13" r="9" fill="#fff"/><path d="M5 10 Q14 4 23 10 Q21 15 14 16 Q7 15 5 10Z" fill="#1a2a3a"/><circle cx="10.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="17.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="10.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="17.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="10.5" cy="13.5" r="1.1" fill="#111"/><circle cx="17.5" cy="13.5" r="1.1" fill="#111"/><circle cx="11.1" cy="12.9" r="0.5" fill="#fff"/><circle cx="18.1" cy="12.9" r="0.5" fill="#fff"/><path d="M12 18.5 L14 21.5 L16 18.5 Q15 18 14 18 Q13 18 12 18.5Z" fill="#c89a00"/></svg>
+              </div>
+              <div>
+                <div style="font-size:9px;font-weight:700;color:#c89a00;margin-bottom:3px;text-transform:uppercase;letter-spacing:1px;">Ozzie · Mile 3</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.75);line-height:1.6;">Perfect tempo pace. Mile 2 was 7:06 — you're splitting this evenly. Hold it through the hill at mile 4.</div>
+              </div>
+            </div>
+
+            <!-- Live stats row -->
+            <div style="display:flex;gap:8px;margin-bottom:12px;">
+              <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px 10px;text-align:center;">
+                <div style="font-size:8px;color:rgba(255,255,255,0.35);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.8px;">Heart Rate</div>
+                <div style="font-size:16px;font-weight:900;color:#f5a623;">158 <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.35);">bpm</span></div>
+              </div>
+              <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px 10px;text-align:center;">
+                <div style="font-size:8px;color:rgba(255,255,255,0.35);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.8px;">Cadence</div>
+                <div style="font-size:16px;font-weight:900;color:#fff;">178 <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.35);">spm</span></div>
+              </div>
+              <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:8px 10px;text-align:center;">
+                <div style="font-size:8px;color:rgba(255,255,255,0.35);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.8px;">Remaining</div>
+                <div style="font-size:16px;font-weight:900;color:#fff;">2.59 <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.35);">mi</span></div>
+              </div>
+            </div>
+
+            <!-- Controls -->
+            <div style="display:flex;gap:10px;align-items:center;">
+              <button onclick="switchScreen('workout','paused')" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px;font-size:13px;font-weight:800;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">⏸ Pause</button>
+              <button style="width:52px;height:52px;background:rgba(255,60,60,0.12);border:1.5px solid rgba(255,60,60,0.3);border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">⏹</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN: Going Too Fast -->
+        <div class="phone-screen" id="screen-workout-tooslow" style="display:none;background:#060912;overflow:hidden;max-height:620px;position:relative;">
+
+          <div style="position:relative;height:310px;overflow:hidden;flex-shrink:0;">
+            <svg width="320" height="310" viewBox="0 0 320 310" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;">
+              <defs><linearGradient id="mf2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#060912" stop-opacity="0"/><stop offset="80%" stop-color="#060912" stop-opacity="0.9"/><stop offset="100%" stop-color="#060912" stop-opacity="1"/></linearGradient></defs>
+              <rect width="320" height="310" fill="#0d1421"/>
+              <path d="M0 262 Q28 252 54 266 Q78 279 90 272 Q100 265 92 310 L0 310Z" fill="#0a1828"/>
+              <path d="M0 262 Q28 252 54 266 Q78 279 90 272" fill="none" stroke="#162840" stroke-width="1.5"/>
+              <rect x="128" y="88" width="66" height="50" rx="3" fill="#0e2016"/><rect x="128" y="88" width="66" height="50" rx="3" fill="none" stroke="#183020" stroke-width="1"/>
+              <circle cx="141" cy="102" r="4" fill="#163018" opacity="0.8"/><circle cx="154" cy="108" r="5" fill="#163018" opacity="0.7"/><circle cx="167" cy="100" r="4" fill="#163018" opacity="0.8"/><circle cx="177" cy="112" r="5" fill="#163018" opacity="0.6"/><circle cx="148" cy="118" r="4" fill="#163018" opacity="0.7"/><circle cx="162" cy="124" r="3" fill="#163018" opacity="0.8"/>
+              <text x="161" y="132" text-anchor="middle" fill="#2a5040" font-size="7" font-family="-apple-system,sans-serif" font-weight="600">Riverside Park</text>
+              <rect x="248" y="42" width="42" height="33" rx="3" fill="#0e2016"/><circle cx="260" cy="54" r="3" fill="#163018" opacity="0.7"/><circle cx="272" cy="50" r="4" fill="#163018" opacity="0.6"/>
+              <rect x="18" y="42" width="50" height="38" rx="2" fill="#111926"/><rect x="18" y="90" width="50" height="44" rx="2" fill="#111926"/><rect x="18" y="144" width="50" height="46" rx="2" fill="#111926"/><rect x="18" y="202" width="50" height="48" rx="2" fill="#111926"/>
+              <rect x="78" y="42" width="44" height="38" rx="2" fill="#111926"/><rect x="78" y="90" width="44" height="44" rx="2" fill="#111926"/><rect x="78" y="144" width="44" height="46" rx="2" fill="#111926"/><rect x="78" y="202" width="44" height="48" rx="2" fill="#111926"/>
+              <rect x="204" y="90" width="38" height="44" rx="2" fill="#111926"/><rect x="204" y="144" width="38" height="46" rx="2" fill="#111926"/>
+              <rect x="248" y="86" width="42" height="50" rx="2" fill="#111926"/><rect x="248" y="148" width="42" height="48" rx="2" fill="#111926"/>
+              <rect x="128" y="148" width="66" height="46" rx="2" fill="#111926"/><rect x="128" y="206" width="66" height="46" rx="2" fill="#111926"/>
+              <rect x="204" y="202" width="86" height="50" rx="2" fill="#111926"/>
+              <path d="M0 160 L320 160" stroke="#243550" stroke-width="9"/><path d="M122 0 L122 310" stroke="#243550" stroke-width="9"/>
+              <path d="M0 82 L320 82" stroke="#182436" stroke-width="6"/><path d="M0 200 L320 200" stroke="#182436" stroke-width="6"/><path d="M0 256 L320 256" stroke="#182436" stroke-width="5"/>
+              <path d="M74 0 L74 310" stroke="#182436" stroke-width="6"/><path d="M200 0 L200 310" stroke="#182436" stroke-width="6"/><path d="M244 0 L244 310" stroke="#182436" stroke-width="5"/>
+              <path d="M0 42 L320 42" stroke="#141e2e" stroke-width="4"/><path d="M0 144 L320 144" stroke="#141e2e" stroke-width="4"/>
+              <path d="M18 0 L18 310" stroke="#141e2e" stroke-width="4"/><path d="M290 0 L290 310" stroke="#141e2e" stroke-width="4"/>
+              <path d="M0 200 Q38 182 74 160" stroke="#182436" stroke-width="5" fill="none"/>
+              <path d="M0 160 L320 160" stroke="#1a2a40" stroke-width="1" stroke-dasharray="12 10"/>
+              <path d="M122 0 L122 310" stroke="#1a2a40" stroke-width="1" stroke-dasharray="12 10"/>
+              <text x="58" y="156" text-anchor="middle" fill="#2a4060" font-size="7" font-family="-apple-system,sans-serif" font-weight="600">LAKEFRONT AVE</text>
+              <text x="37" y="78" text-anchor="middle" fill="#223040" font-size="6" font-family="-apple-system,sans-serif">ELM ST</text>
+              <text x="270" y="196" text-anchor="middle" fill="#223040" font-size="6" font-family="-apple-system,sans-serif">HARBOR DR</text>
+              <!-- planned route — full loop on roads (dashed, amber tint) -->
+              <path d="M122 256 L122 200 L74 200 L74 160 L122 160 L122 82 L200 82 L200 42 L244 42 L244 200 L200 200 L200 256 L122 256Z" fill="none" stroke="rgba(255,165,0,0.15)" stroke-width="3.5" stroke-dasharray="7 5" stroke-linecap="square" stroke-linejoin="round"/>
+              <!-- completed route — 5.08 miles, road-snapped (amber) — nearly full loop -->
+              <path d="M122 256 L122 200 L74 200 L74 160 L122 160 L122 82 L200 82 L200 42 L244 42 L244 200 L200 200 L200 256" fill="none" stroke="#ffa500" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 4px rgba(255,165,0,0.4))"/>
+              <!-- mile markers -->
+              <circle cx="74" cy="160" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="74" y="164" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">1</text>
+              <circle cx="200" cy="82" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="200" y="86" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">2</text>
+              <circle cx="244" cy="160" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="244" y="164" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">3</text>
+              <circle cx="244" cy="200" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="244" y="204" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">4</text>
+              <!-- current position — mile 5, heading south on Michigan Blvd (x=200), amber glow -->
+              <circle cx="200" cy="240" r="16" fill="rgba(255,165,0,0.1)"/><circle cx="200" cy="240" r="10" fill="rgba(255,165,0,0.2)"/>
+              <circle cx="200" cy="240" r="5.5" fill="#ffa500"/><circle cx="200" cy="240" r="2.5" fill="#fff"/>
+              <path d="M200 229 L196 238 L200 235 L204 238Z" fill="#fff" opacity="0.9"/>
+              <circle cx="214" cy="228" r="9" fill="#0d1421" stroke="#ffa500" stroke-width="1.5"/><text x="214" y="232" text-anchor="middle" fill="#ffa500" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">5</text>
+              <rect x="0" y="236" width="320" height="74" fill="url(#mf2)"/>
+            </svg>
+
+            <div style="position:absolute;top:10px;left:12px;right:12px;display:flex;gap:8px;">
+              <div style="background:rgba(6,9,18,0.75);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px 12px;flex:1;text-align:center;">
+                <div style="font-size:9px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Time</div>
+                <div style="font-size:20px;font-weight:900;color:#fff;letter-spacing:1px;line-height:1;">38:44</div>
+              </div>
+              <div style="background:rgba(6,9,18,0.75);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:8px 12px;flex:1;text-align:center;">
+                <div style="font-size:9px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Miles</div>
+                <div style="font-size:20px;font-weight:900;color:#fff;letter-spacing:1px;line-height:1;">5.08</div>
+              </div>
+              <div style="background:rgba(6,9,18,0.75);backdrop-filter:blur(16px);border:1px solid rgba(255,165,0,0.4);border-radius:14px;padding:8px 12px;flex:1;text-align:center;">
+                <div style="font-size:9px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Pace</div>
+                <div style="font-size:20px;font-weight:900;color:#ffa500;letter-spacing:1px;line-height:1;">6:48</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:0 14px 8px;position:relative;z-index:2;">
+
+            <!-- Pace zone — in threshold/red -->
+            <div style="background:rgba(255,165,0,0.06);border:1px solid rgba(255,165,0,0.2);border-radius:16px;padding:12px 14px;margin-bottom:10px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:1px;">Pace Zone</span>
+                <span style="font-size:11px;font-weight:800;color:#ffa500;">Zone 4 · Threshold ⚠️</span>
+              </div>
+              <div style="position:relative;height:8px;border-radius:4px;background:linear-gradient(to right,#4cde80 0%,#00c8c8 40%,#f5a623 70%,#ff4444 100%);overflow:hidden;">
+                <div style="position:absolute;left:40%;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.3);"></div>
+                <div style="position:absolute;left:70%;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.3);"></div>
+              </div>
+              <div style="position:relative;margin-top:-4px;margin-left:calc(74% - 6px);width:12px;height:12px;background:#fff;border-radius:50%;border:2px solid #ffa500;box-shadow:0 0 8px rgba(255,165,0,0.7);"></div>
+              <div style="display:flex;justify-content:space-between;margin-top:4px;">
+                <span style="font-size:8px;color:rgba(255,255,255,0.25);">Easy</span>
+                <span style="font-size:8px;color:rgba(255,255,255,0.25);">Tempo</span>
+                <span style="font-size:8px;color:rgba(255,255,255,0.25);">Threshold</span>
+                <span style="font-size:8px;color:rgba(255,255,255,0.25);">Max</span>
+              </div>
+            </div>
+
+            <!-- Ozzie negative split warning -->
+            <div style="background:rgba(255,165,0,0.08);border:1px solid rgba(255,165,0,0.3);border-left:3px solid #ffa500;border-radius:14px;padding:10px 12px;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:24px;height:24px;flex-shrink:0;margin-top:1px;">
+                <svg width="24" height="24" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#c89a00"/><circle cx="14" cy="13" r="9" fill="#fff"/><path d="M5 10 Q14 4 23 10 Q21 15 14 16 Q7 15 5 10Z" fill="#1a2a3a"/><circle cx="10.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="17.5" cy="13.5" r="3.2" fill="#fff"/><circle cx="10.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="17.5" cy="13.5" r="2" fill="#f5a623"/><circle cx="10.5" cy="13.5" r="1.1" fill="#111"/><circle cx="17.5" cy="13.5" r="1.1" fill="#111"/><circle cx="11.1" cy="12.9" r="0.5" fill="#fff"/><circle cx="18.1" cy="12.9" r="0.5" fill="#fff"/><path d="M12 18.5 L14 21.5 L16 18.5 Q15 18 14 18 Q13 18 12 18.5Z" fill="#c89a00"/></svg>
+              </div>
+              <div>
+                <div style="font-size:9px;font-weight:700;color:#ffa500;margin-bottom:3px;text-transform:uppercase;letter-spacing:1px;">Ozzie · Negative Split Alert</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.75);line-height:1.6;">Whoa — 6:48 is 17 seconds faster than target. You've got 1 mile left. Ease back now or you'll blow up before the finish.</div>
+              </div>
+            </div>
+
+            <!-- Split comparison -->
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:10px 12px;margin-bottom:12px;">
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Mile Splits</div>
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:10px;color:rgba(255,255,255,0.5);">Mile 1</span>
+                  <span style="font-size:11px;font-weight:700;color:#4cde80;">7:08</span>
+                  <span style="font-size:9px;color:rgba(255,255,255,0.3);">target 7:05</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:10px;color:rgba(255,255,255,0.5);">Mile 2</span>
+                  <span style="font-size:11px;font-weight:700;color:#4cde80;">7:06</span>
+                  <span style="font-size:9px;color:rgba(255,255,255,0.3);">target 7:05</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:10px;color:rgba(255,255,255,0.5);">Mile 3</span>
+                  <span style="font-size:11px;font-weight:700;color:#4cde80;">7:02</span>
+                  <span style="font-size:9px;color:rgba(255,255,255,0.3);">target 7:05</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:10px;color:rgba(255,255,255,0.5);">Mile 4</span>
+                  <span style="font-size:11px;font-weight:700;color:#ffa500;">6:58</span>
+                  <span style="font-size:9px;color:rgba(255,255,255,0.3);">target 7:05</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06);padding-top:5px;">
+                  <span style="font-size:10px;color:rgba(255,255,255,0.5);">Mile 5 →</span>
+                  <span style="font-size:11px;font-weight:700;color:#ff5555;">6:48 ↑</span>
+                  <span style="font-size:9px;color:#ffa500;">too fast</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:center;">
+              <button onclick="switchScreen('workout','paused')" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px;font-size:13px;font-weight:800;color:#fff;cursor:pointer;">⏸ Pause</button>
+              <button style="width:52px;height:52px;background:rgba(255,60,60,0.12);border:1.5px solid rgba(255,60,60,0.3);border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">⏹</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN: Paused -->
+        <div class="phone-screen" id="screen-workout-paused" style="display:none;background:#060912;overflow:hidden;max-height:620px;position:relative;">
+
+          <div style="position:relative;height:220px;overflow:hidden;flex-shrink:0;">
+            <svg width="320" height="220" viewBox="0 0 320 310" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;top:-90px;">
+              <defs><linearGradient id="mf3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#060912" stop-opacity="0"/><stop offset="75%" stop-color="#060912" stop-opacity="0.95"/><stop offset="100%" stop-color="#060912" stop-opacity="1"/></linearGradient></defs>
+              <rect width="320" height="310" fill="#0d1421"/>
+              <path d="M0 262 Q28 252 54 266 Q78 279 90 272 Q100 265 92 310 L0 310Z" fill="#0a1828"/>
+              <rect x="128" y="88" width="66" height="50" rx="3" fill="#0e2016"/><circle cx="141" cy="102" r="4" fill="#163018" opacity="0.8"/><circle cx="154" cy="108" r="5" fill="#163018" opacity="0.7"/><circle cx="167" cy="100" r="4" fill="#163018" opacity="0.8"/><circle cx="177" cy="112" r="5" fill="#163018" opacity="0.6"/>
+              <text x="161" y="132" text-anchor="middle" fill="#2a5040" font-size="7" font-family="-apple-system,sans-serif" font-weight="600">Riverside Park</text>
+              <rect x="18" y="42" width="50" height="38" rx="2" fill="#111926"/><rect x="18" y="90" width="50" height="44" rx="2" fill="#111926"/><rect x="18" y="144" width="50" height="46" rx="2" fill="#111926"/><rect x="18" y="202" width="50" height="48" rx="2" fill="#111926"/>
+              <rect x="78" y="42" width="44" height="38" rx="2" fill="#111926"/><rect x="78" y="90" width="44" height="44" rx="2" fill="#111926"/><rect x="78" y="144" width="44" height="46" rx="2" fill="#111926"/><rect x="78" y="202" width="44" height="48" rx="2" fill="#111926"/>
+              <rect x="204" y="90" width="38" height="44" rx="2" fill="#111926"/><rect x="204" y="144" width="38" height="46" rx="2" fill="#111926"/>
+              <rect x="248" y="86" width="42" height="50" rx="2" fill="#111926"/><rect x="248" y="148" width="42" height="48" rx="2" fill="#111926"/>
+              <rect x="128" y="148" width="66" height="46" rx="2" fill="#111926"/><rect x="128" y="206" width="66" height="46" rx="2" fill="#111926"/>
+              <rect x="204" y="202" width="86" height="50" rx="2" fill="#111926"/>
+              <path d="M0 160 L320 160" stroke="#243550" stroke-width="9"/><path d="M122 0 L122 310" stroke="#243550" stroke-width="9"/>
+              <path d="M0 82 L320 82" stroke="#182436" stroke-width="6"/><path d="M0 200 L320 200" stroke="#182436" stroke-width="6"/>
+              <path d="M74 0 L74 310" stroke="#182436" stroke-width="6"/><path d="M200 0 L200 310" stroke="#182436" stroke-width="6"/><path d="M244 0 L244 310" stroke="#182436" stroke-width="5"/>
+              <path d="M0 42 L320 42" stroke="#141e2e" stroke-width="4"/><path d="M0 144 L320 144" stroke="#141e2e" stroke-width="4"/>
+              <path d="M18 0 L18 310" stroke="#141e2e" stroke-width="4"/><path d="M290 0 L290 310" stroke="#141e2e" stroke-width="4"/>
+              <path d="M0 200 Q38 182 74 160" stroke="#182436" stroke-width="5" fill="none"/>
+              <path d="M0 160 L320 160" stroke="#1a2a40" stroke-width="1" stroke-dasharray="12 10"/>
+              <path d="M122 0 L122 310" stroke="#1a2a40" stroke-width="1" stroke-dasharray="12 10"/>
+              <text x="58" y="156" text-anchor="middle" fill="#2a4060" font-size="7" font-family="-apple-system,sans-serif" font-weight="600">LAKEFRONT AVE</text>
+              <text x="37" y="78" text-anchor="middle" fill="#223040" font-size="6" font-family="-apple-system,sans-serif">ELM ST</text>
+              <!-- full road-snapped route (teal, completed) -->
+              <path d="M122 256 L122 200 L74 200 L74 160 L122 160 L122 82 L200 82 L200 42 L244 42 L244 82 L200 82" fill="none" stroke="rgba(0,200,200,0.15)" stroke-width="3.5" stroke-dasharray="7 5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M122 256 L122 200 L74 200 L74 160 L122 160 L122 82 L200 82 L200 42 L244 42 L244 160 L200 160 L200 200 L122 200" fill="none" stroke="#00c8c8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 3px rgba(0,200,200,0.5))"/>
+              <!-- mile markers -->
+              <circle cx="74" cy="160" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="74" y="164" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">1</text>
+              <circle cx="200" cy="82" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="200" y="86" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">2</text>
+              <circle cx="244" cy="160" r="9" fill="#0d1421" stroke="#00c8c8" stroke-width="1.5"/><text x="244" y="164" text-anchor="middle" fill="#00c8c8" font-size="8" font-weight="800" font-family="-apple-system,sans-serif">3</text>
+              <!-- position on Lakefront Ave heading back -->
+              <circle cx="200" cy="200" r="14" fill="rgba(255,255,255,0.08)"/><circle cx="200" cy="200" r="5" fill="rgba(255,255,255,0.6)"/><circle cx="200" cy="200" r="2.5" fill="#fff"/>
+              <!-- pause overlay -->
+              <rect width="320" height="310" fill="rgba(6,9,18,0.5)"/>
+              <rect x="100" y="138" width="120" height="34" rx="17" fill="rgba(6,9,18,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+              <text x="160" y="160" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="12" font-weight="700" font-family="-apple-system,sans-serif">⏸  PAUSED</text>
+              <rect x="0" y="210" width="320" height="100" fill="url(#mf3)"/>
+            </svg>
+          </div>
+
+          <div style="padding:0 14px 12px;position:relative;z-index:2;">
+            <!-- Summary stats -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+              <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:10px;text-align:center;">
+                <div style="font-size:8px;color:rgba(255,255,255,0.35);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.8px;">Time</div>
+                <div style="font-size:17px;font-weight:900;color:#fff;">38:44</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:10px;text-align:center;">
+                <div style="font-size:8px;color:rgba(255,255,255,0.35);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.8px;">Miles</div>
+                <div style="font-size:17px;font-weight:900;color:#fff;">5.08</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:10px;text-align:center;">
+                <div style="font-size:8px;color:rgba(255,255,255,0.35);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.8px;">Avg Pace</div>
+                <div style="font-size:17px;font-weight:900;color:#00c8c8;">7:04</div>
+              </div>
+            </div>
+
+            <!-- Ozzie pause message -->
+            <div style="background:rgba(200,154,0,0.07);border:1px solid rgba(200,154,0,0.22);border-left:3px solid #c89a00;border-radius:14px;padding:12px 14px;margin-bottom:14px;">
+              <div style="font-size:9px;font-weight:700;color:#c89a00;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Ozzie</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.7;">Taking a breather? You're 84% done. Average pace is 7:04 — right on target. One mile left. Let's close it out strong.</div>
+            </div>
+
+            <!-- Resume / End -->
+            <button onclick="switchScreen('workout','running')" style="width:100%;background:linear-gradient(135deg,#00c8c8,#00a0a0);color:#000;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:800;cursor:pointer;margin-bottom:10px;box-shadow:0 4px 20px rgba(0,200,200,0.3);">▶ Resume Run</button>
+            <button style="width:100%;background:rgba(255,60,60,0.08);border:1.5px solid rgba(255,60,60,0.25);border-radius:14px;padding:12px;font-size:13px;font-weight:700;color:rgba(255,100,100,0.8);cursor:pointer;">End & Save Workout</button>
+          </div>
+        </div>
+
+      </div><!-- phone -->
+    </div><!-- phone-wrapper -->
+
+    <!-- Annotations -->
+    <div class="annotation-panel">
+      <h3>Active Workout — Running GPS</h3>
+      <div class="annotation">
+        <div class="ann-num">1</div>
+        <div class="ann-text"><strong>Floating HUD tiles</strong> overlay the map — glass cards with time, distance, and current pace. Pace tile color-codes to zone: green = tempo, amber = threshold, red = too fast.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">2</div>
+        <div class="ann-text"><strong>Live map</strong> shows planned route (dashed) vs completed route (solid teal), current position dot with pace zone glow ring, and numbered mile markers.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">3</div>
+        <div class="ann-text"><strong>Pace Zone bar</strong> is a continuous gradient from Easy → Tempo → Threshold → Max with a needle showing real-time effort. Whole card turns amber when outside target zone.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">4</div>
+        <div class="ann-text"><strong>Ozzie live cue</strong> appears mid-run with mile-by-mile context. On the "Too Fast" screen, Ozzie fires a negative split warning before the effort becomes a problem.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">5</div>
+        <div class="ann-text"><strong>Split comparison table</strong> shows every completed mile vs target, going amber/red when drift exceeds ±10 seconds/mile — negative split intelligence in plain sight.</div>
+      </div>
+      <div class="annotation">
+        <div class="ann-num">6</div>
+        <div class="ann-text"><strong>Pause screen</strong> collapses the map, shows a summary stat row, and Ozzie gives a mid-workout status briefing. Resume or end from here.</div>
+      </div>
+    </div>
+
+  </div><!-- phone-row -->
+</div><!-- canvas workout -->
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     POST-WORKOUT RECAP TAB
+════════════════════════════════════════════════════════════════════════════ -->
+<div class="canvas" id="tab-recap">
+  <div class="canvas-title">Post-Workout Recap — 3 states</div>
+  <div class="screen-nav">
+    <button class="screen-btn active" onclick="switchScreen('recap','run')">After a Run</button>
+    <button class="screen-btn" onclick="switchScreen('recap','lift')">After a Lift</button>
+    <button class="screen-btn" onclick="switchScreen('recap','pr')">New PR Achieved</button>
+  </div>
+  <div class="phone-row">
+    <div class="phone-wrapper">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen" id="screen-recap-run" style="background:#060912; overflow-y:auto; padding:0;">
+
+          <!-- Header bar -->
+          <div style="background:rgba(0,200,200,0.08);border-bottom:1px solid rgba(0,200,200,0.15);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:11px;color:#00c8c8;font-weight:700;letter-spacing:1px;">WORKOUT COMPLETE</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);">Tue · Jun 28</div>
+          </div>
+
+          <!-- Activity type + title -->
+          <div style="padding:18px 16px 8px;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;margin-bottom:4px;">TEMPO RUN</div>
+            <div style="font-size:20px;font-weight:800;color:#fff;line-height:1.1;">Morning Threshold</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px;">6:41 AM · Grant Park Loop</div>
+          </div>
+
+          <!-- Big stat row -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);margin:10px 16px;border-radius:12px;overflow:hidden;">
+            <div style="background:#060912;padding:12px 8px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:#00c8c8;">5.3</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;letter-spacing:.5px;">MILES</div>
+            </div>
+            <div style="background:#060912;padding:12px 8px;text-align:center;border-left:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);">
+              <div style="font-size:22px;font-weight:900;color:#fff;">42:18</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;letter-spacing:.5px;">TIME</div>
+            </div>
+            <div style="background:#060912;padding:12px 8px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:#fff;">7:59</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;letter-spacing:.5px;">AVG PACE</div>
+            </div>
+          </div>
+
+          <!-- Secondary stats -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 16px;">
+            <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 8px;text-align:center;">
+              <div style="font-size:15px;font-weight:700;color:#fff;">154</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;">AVG HR</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 8px;text-align:center;">
+              <div style="font-size:15px;font-weight:700;color:#fff;">341</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;">CALORIES</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 8px;text-align:center;">
+              <div style="font-size:15px;font-weight:700;color:#c89a00;">68</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;">TSS</div>
+            </div>
+          </div>
+
+          <!-- Lap splits -->
+          <div style="margin:12px 16px 0;background:rgba(255,255,255,0.04);border-radius:10px;overflow:hidden;">
+            <div style="padding:8px 12px;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,0.05);">MILE SPLITS</div>
+            <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:6px 12px;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <div style="font-size:11px;color:rgba(255,255,255,0.45);width:36px;">Mi 1</div>
+              <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin:0 8px;position:relative;"><div style="position:absolute;left:0;top:0;height:4px;width:78%;background:#4cde80;border-radius:2px;"></div></div>
+              <div style="font-size:11px;font-weight:600;color:#4cde80;width:36px;text-align:right;">8:14</div>
+            </div>
+            <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:6px 12px;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <div style="font-size:11px;color:rgba(255,255,255,0.45);width:36px;">Mi 2</div>
+              <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin:0 8px;position:relative;"><div style="position:absolute;left:0;top:0;height:4px;width:85%;background:#00c8c8;border-radius:2px;"></div></div>
+              <div style="font-size:11px;font-weight:600;color:#00c8c8;width:36px;text-align:right;">7:51</div>
+            </div>
+            <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:6px 12px;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <div style="font-size:11px;color:rgba(255,255,255,0.45);width:36px;">Mi 3</div>
+              <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin:0 8px;position:relative;"><div style="position:absolute;left:0;top:0;height:4px;width:88%;background:#00c8c8;border-radius:2px;"></div></div>
+              <div style="font-size:11px;font-weight:600;color:#00c8c8;width:36px;text-align:right;">7:44</div>
+            </div>
+            <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:6px 12px;border-bottom:1px solid rgba(255,255,255,0.04);">
+              <div style="font-size:11px;color:rgba(255,255,255,0.45);width:36px;">Mi 4</div>
+              <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin:0 8px;position:relative;"><div style="position:absolute;left:0;top:0;height:4px;width:92%;background:#f5a623;border-radius:2px;"></div></div>
+              <div style="font-size:11px;font-weight:600;color:#f5a623;width:36px;text-align:right;">7:31</div>
+            </div>
+            <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:6px 12px;">
+              <div style="font-size:11px;color:rgba(255,255,255,0.45);width:36px;">Mi 5</div>
+              <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin:0 8px;position:relative;"><div style="position:absolute;left:0;top:0;height:4px;width:86%;background:#00c8c8;border-radius:2px;"></div></div>
+              <div style="font-size:11px;font-weight:600;color:#00c8c8;width:36px;text-align:right;">7:58</div>
+            </div>
+          </div>
+
+          <!-- Ozzie debrief -->
+          <div style="margin:12px 16px;background:rgba(200,154,0,0.07);border:1px solid rgba(200,154,0,0.2);border-radius:12px;padding:12px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <!-- Ozzie avatar small -->
+              <svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="14" fill="#1B3A5C"/><circle cx="14" cy="13" r="8" fill="#f5f0e8"/><path d="M6 10 Q14 4 22 10 Q20 15 14 16 Q8 15 6 10Z" fill="#1a2a3a"/><circle cx="11" cy="11" r="2" fill="#f0a500"/><circle cx="17" cy="11" r="2" fill="#f0a500"/><circle cx="11.5" cy="11" r="0.9" fill="#1a1a1a"/><circle cx="17.5" cy="11" r="0.9" fill="#1a1a1a"/><path d="M12 15 L14 18 L16 15 Q15 14.5 14 14.5 Q13 14.5 12 15Z" fill="#c89a00"/></svg>
+              <div style="font-size:11px;color:#c89a00;font-weight:700;">OZZIE'S TAKE</div>
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;">"That threshold run was solid. Mile 4 got a little hot — you crept into zone 4 — but you reeled it back in on 5. That's discipline. TSS of 68 is right on target for this week. Go eat something with protein in the next 45 minutes."</div>
+          </div>
+
+          <!-- Effort rating -->
+          <div style="margin:0 16px 12px;background:rgba(255,255,255,0.04);border-radius:10px;padding:12px;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;margin-bottom:10px;">HOW DID IT FEEL?</div>
+            <div style="display:flex;gap:6px;justify-content:space-between;">
+              <div style="flex:1;height:32px;border-radius:6px;background:rgba(76,222,128,0.15);border:1px solid rgba(76,222,128,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;color:#4cde80;">Easy</div>
+              <div style="flex:1;height:32px;border-radius:6px;background:rgba(0,200,200,0.15);border:1px solid rgba(0,200,200,0.5);display:flex;align-items:center;justify-content:center;font-size:10px;color:#00c8c8;font-weight:700;">Moderate ✓</div>
+              <div style="flex:1;height:32px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(255,255,255,0.35);">Hard</div>
+              <div style="flex:1;height:32px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(255,255,255,0.35);">Max</div>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div style="padding:0 16px 20px;display:flex;gap:8px;">
+            <div style="flex:1;height:38px;background:linear-gradient(135deg,#00c8c8,#00a0a0);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;">Save</div>
+            <div style="width:38px;height:38px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;">↑</div>
+            <div style="width:38px;height:38px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;">⋯</div>
+          </div>
+
+        </div>
+
+        <!-- LIFT RECAP -->
+        <div class="phone-screen" id="screen-recap-lift" style="display:none;background:#060912;overflow-y:auto;padding:0;">
+          <div style="background:rgba(200,154,0,0.08);border-bottom:1px solid rgba(200,154,0,0.15);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:11px;color:#c89a00;font-weight:700;letter-spacing:1px;">WORKOUT COMPLETE</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);">Tue · Jun 28</div>
+          </div>
+          <div style="padding:18px 16px 8px;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;margin-bottom:4px;">STRENGTH SESSION</div>
+            <div style="font-size:20px;font-weight:800;color:#fff;line-height:1.1;">Lower Body Power</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px;">7:15 AM · Home Gym · 54 min</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);margin:10px 16px;border-radius:12px;overflow:hidden;">
+            <div style="background:#060912;padding:12px 8px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:#c89a00;">9</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;letter-spacing:.5px;">SETS</div>
+            </div>
+            <div style="background:#060912;padding:12px 8px;text-align:center;border-left:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);">
+              <div style="font-size:22px;font-weight:900;color:#fff;">12,840</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;letter-spacing:.5px;">LBS MOVED</div>
+            </div>
+            <div style="background:#060912;padding:12px 8px;text-align:center;">
+              <div style="font-size:22px;font-weight:900;color:#fff;">421</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;letter-spacing:.5px;">CALORIES</div>
+            </div>
+          </div>
+          <!-- Exercise log -->
+          <div style="margin:0 16px;background:rgba(255,255,255,0.04);border-radius:10px;overflow:hidden;">
+            <div style="padding:8px 12px;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,0.05);">EXERCISES</div>
+            <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;">
+              <div><div style="font-size:12px;font-weight:600;color:#fff;">Back Squat</div><div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">3 × 5 @ 185 lb</div></div>
+              <div style="font-size:11px;color:#4cde80;">↑ +5 lb</div>
+            </div>
+            <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center;">
+              <div><div style="font-size:12px;font-weight:600;color:#fff;">Romanian Deadlift</div><div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">3 × 8 @ 135 lb</div></div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.35);">same</div>
+            </div>
+            <div style="padding:10px 12px;display:flex;justify-content:space-between;align-items:center;">
+              <div><div style="font-size:12px;font-weight:600;color:#fff;">Hip Thrust</div><div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">3 × 12 @ 115 lb</div></div>
+              <div style="font-size:11px;color:#4cde80;">↑ +10 lb</div>
+            </div>
+          </div>
+          <div style="margin:12px 16px;background:rgba(200,154,0,0.07);border:1px solid rgba(200,154,0,0.2);border-radius:12px;padding:12px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="14" fill="#1B3A5C"/><circle cx="14" cy="13" r="8" fill="#f5f0e8"/><path d="M6 10 Q14 4 22 10 Q20 15 14 16 Q8 15 6 10Z" fill="#1a2a3a"/><circle cx="11" cy="11" r="2" fill="#f0a500"/><circle cx="17" cy="11" r="2" fill="#f0a500"/><circle cx="11.5" cy="11" r="0.9" fill="#1a1a1a"/><circle cx="17.5" cy="11" r="0.9" fill="#1a1a1a"/><path d="M12 15 L14 18 L16 15 Q15 14.5 14 14.5 Q13 14.5 12 15Z" fill="#c89a00"/></svg>
+              <div style="font-size:11px;color:#c89a00;font-weight:700;">OZZIE'S TAKE</div>
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;">"Squat went up 5 pounds — that's 3 weeks in a row of progress. Your legs are responding. I'm keeping the load the same next session so you can lock in the pattern before we push again."</div>
+          </div>
+          <div style="padding:12px 16px 20px;display:flex;gap:8px;">
+            <div style="flex:1;height:38px;background:linear-gradient(135deg,#c89a00,#a07800);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;">Save</div>
+            <div style="width:38px;height:38px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;">↑</div>
+          </div>
+        </div>
+
+        <!-- PR RECAP -->
+        <div class="phone-screen" id="screen-recap-pr" style="display:none;background:#060912;overflow-y:auto;padding:0;">
+          <!-- Gold celebration header -->
+          <div style="background:linear-gradient(135deg,rgba(200,154,0,0.25),rgba(200,154,0,0.08));border-bottom:1px solid rgba(200,154,0,0.3);padding:16px;text-align:center;">
+            <div style="font-size:28px;margin-bottom:4px;">🏅</div>
+            <div style="font-size:13px;font-weight:800;color:#c89a00;letter-spacing:1px;">PERSONAL RECORD</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px;">5K — Fastest Ever</div>
+          </div>
+          <div style="padding:20px 16px;text-align:center;">
+            <div style="font-size:48px;font-weight:900;color:#c89a00;line-height:1;">22:41</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;">Previous best: 23:18 &nbsp;·&nbsp; <span style="color:#4cde80;">−37 sec</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);margin:0 16px;border-radius:12px;overflow:hidden;">
+            <div style="background:#060912;padding:12px 8px;text-align:center;">
+              <div style="font-size:18px;font-weight:900;color:#fff;">7:18</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;">AVG PACE</div>
+            </div>
+            <div style="background:#060912;padding:12px 8px;text-align:center;border-left:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);">
+              <div style="font-size:18px;font-weight:900;color:#fff;">168</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;">AVG HR</div>
+            </div>
+            <div style="background:#060912;padding:12px 8px;text-align:center;">
+              <div style="font-size:18px;font-weight:900;color:#fff;">247</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:2px;">CALORIES</div>
+            </div>
+          </div>
+          <div style="margin:14px 16px;background:rgba(200,154,0,0.1);border:1px solid rgba(200,154,0,0.35);border-radius:12px;padding:14px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="14" fill="#1B3A5C"/><circle cx="14" cy="13" r="8" fill="#f5f0e8"/><path d="M6 10 Q14 4 22 10 Q20 15 14 16 Q8 15 6 10Z" fill="#1a2a3a"/><circle cx="11" cy="11" r="2" fill="#f0a500"/><circle cx="17" cy="11" r="2" fill="#f0a500"/><circle cx="11.5" cy="11" r="0.9" fill="#1a1a1a"/><circle cx="17.5" cy="11" r="0.9" fill="#1a1a1a"/><path d="M12 15 L14 18 L16 15 Q15 14.5 14 14.5 Q13 14.5 12 15Z" fill="#c89a00"/></svg>
+              <div style="font-size:11px;color:#c89a00;font-weight:700;">OZZIE'S TAKE</div>
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.5;font-weight:500;">"That's a PR. 37 seconds faster than your best ever. I want you to sit with that for a second — you just ran the fastest 5K of your life. The aerobic base we've been building for 8 weeks just showed up. Really proud of this one."</div>
+          </div>
+          <div style="padding:0 16px 20px;display:flex;gap:8px;">
+            <div style="flex:1;height:40px;background:linear-gradient(135deg,#c89a00,#a07800);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;">Save & Share PR</div>
+            <div style="width:40px;height:40px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;">⋯</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="phone-label">Post-Workout Recap</div>
+  </div>
+</div>
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', ['daily','onboarding','workout','recap'][i] === tab);
+  });
+  document.querySelectorAll('.canvas').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+function switchScreen(group, id) {
+  const prefix = 'screen-' + group + '-';
+  document.querySelectorAll('[id^="' + prefix + '"]').forEach(s => s.style.display = 'none');
+  const el = document.getElementById(prefix + id);
+  if (el) el.style.display = 'block';
+
+  const tabId = group === 'daily' ? 'daily' : group === 'workout' ? 'workout' : group === 'recap' ? 'recap' : 'onboarding';
+  const nav = document.querySelectorAll('#tab-' + tabId + ' .screen-btn');
+  nav.forEach(btn => {
+    const t = btn.textContent.trim();
+    btn.classList.toggle('active', t.startsWith(id + ' —') || t.startsWith(id + ' ') || t.toLowerCase().startsWith(id.toLowerCase()));
+  });
+}
+
+function selectOption(card) {
+  const parent = card.closest('.option-grid');
+  parent.querySelectorAll('.option-card').forEach(c => {
+    c.classList.remove('selected');
+    const chk = c.querySelector('.option-check');
+    if (chk) chk.textContent = '';
+  });
+  card.classList.add('selected');
+  const chk = card.querySelector('.option-check');
+  if (chk) chk.textContent = '✓';
+}
+
+function selectTier(el) {
+  document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function openWhy() {
+  document.getElementById('why-overlay').classList.add('open');
+}
+function closeWhy() {
+  document.getElementById('why-overlay').classList.remove('open');
+}
+</script>
+</body>
+</html>

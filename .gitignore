@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Supabase local dev
+supabase/.temp/
+supabase/.branches/
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
