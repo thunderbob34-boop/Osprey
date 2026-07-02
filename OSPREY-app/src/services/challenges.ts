@@ -223,3 +223,32 @@ export async function deleteChallenge(challengeId: string): Promise<void> {
     .eq('id', challengeId);
   if (error) throw error;
 }
+
+export interface ChallengeRecap {
+  recapText: string;
+  generatedAt: string;
+}
+
+/** Most recent stored recap for a challenge, if one has ever been generated. */
+export async function fetchLatestChallengeRecap(challengeId: string): Promise<ChallengeRecap | null> {
+  const { data, error } = await supabase
+    .from('challenge_recaps')
+    .select('recap_text, generated_at')
+    .eq('challenge_id', challengeId)
+    .order('generated_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) return null;
+  return { recapText: data.recap_text, generatedAt: data.generated_at };
+}
+
+/** Generates a fresh Ozzie-narrated recap of the current standings. Costs one OpenAI call — on-demand, not automatic. */
+export async function generateChallengeRecap(challengeId: string): Promise<string> {
+  const { data, error } = await supabase.functions.invoke<{ recap: string }>('ozzie-challenge-recap', {
+    method: 'POST',
+    body: { challengeId },
+  });
+  if (error || !data) throw error ?? new Error('Failed to generate recap');
+  return data.recap;
+}

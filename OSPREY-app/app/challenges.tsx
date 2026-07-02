@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
 import { useSubscription } from '@/hooks/useSubscription';
@@ -24,7 +25,9 @@ import {
 import {
   CHALLENGE_TYPE_LABELS,
   currentMonthRange,
+  fetchLatestChallengeRecap,
   formatChallengeValue,
+  generateChallengeRecap,
   type ChallengeType,
 } from '@/services/challenges';
 
@@ -67,6 +70,25 @@ interface LeaderboardPanelProps {
 
 function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPanelProps) {
   const { data, isLoading, refetch, isFetching } = useChallengeLeaderboard(challenge.id);
+  const queryClient = useQueryClient();
+  const recapKey = ['challenge-recap', challenge.id];
+  const { data: recap, isLoading: recapLoading } = useQuery({
+    queryKey: recapKey,
+    queryFn: () => fetchLatestChallengeRecap(challenge.id),
+  });
+  const [generating, setGenerating] = useState(false);
+
+  async function handleGenerateRecap() {
+    setGenerating(true);
+    try {
+      await generateChallengeRecap(challenge.id);
+      queryClient.invalidateQueries({ queryKey: recapKey });
+    } catch (err) {
+      Alert.alert('Recap failed', err instanceof Error ? err.message : 'Try again.');
+    } finally {
+      setGenerating(false);
+    }
+  }
 
   return (
     <View style={styles.lbPanel}>
@@ -106,6 +128,24 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
           );
         })
       )}
+
+      <View style={styles.recapSection}>
+        <View style={styles.recapHeader}>
+          <Text style={styles.recapLabel}>🦅 WEEKLY RECAP</Text>
+          <TouchableOpacity onPress={handleGenerateRecap} disabled={generating}>
+            {generating ? (
+              <ActivityIndicator color={Colors.teal} size="small" />
+            ) : (
+              <Text style={styles.recapGenerate}>{recap ? 'Refresh' : 'Generate'}</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+        {recapLoading ? null : recap ? (
+          <Text style={styles.recapText}>{recap.recapText}</Text>
+        ) : (
+          <Text style={styles.recapEmpty}>No recap yet — tap Generate for Ozzie's read on the standings.</Text>
+        )}
+      </View>
     </View>
   );
 }
@@ -232,6 +272,10 @@ export default function ChallengesScreen() {
 
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
+
+          <TouchableOpacity style={styles.friendsLink} onPress={() => router.push('/friends')}>
+            <Text style={styles.friendsLinkText}>👥 Manage Friends</Text>
+          </TouchableOpacity>
 
           {/* ── Create form ── */}
           {showForm ? (
@@ -474,6 +518,17 @@ const styles = StyleSheet.create({
   close: { color: Colors.textMuted, fontSize: 18, fontWeight: '700' },
   add: { color: Colors.teal, fontSize: 24, fontWeight: '700' },
   title: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },
+  friendsLink: {
+    alignSelf: 'flex-start',
+    backgroundColor: Colors.surfaceTeal,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    marginBottom: 8,
+  },
+  friendsLinkText: { fontSize: 13, fontWeight: '700', color: Colors.teal },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
   empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 8 },
   errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
@@ -597,6 +652,17 @@ const styles = StyleSheet.create({
   refreshBtnText: { color: Colors.teal, fontSize: 16, fontWeight: '700' },
   lbClose: { color: Colors.textMuted, fontSize: 16, fontWeight: '700' },
   lbEmpty: { color: Colors.textMuted, fontSize: 13, fontStyle: 'italic', marginVertical: 6 },
+  recapSection: {
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: Colors.border,
+  },
+  recapHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
+  recapLabel: { fontSize: 10, fontWeight: '700', color: Colors.textMuted, letterSpacing: 1 },
+  recapGenerate: { fontSize: 12, fontWeight: '700', color: Colors.teal },
+  recapText: { fontSize: 13, color: Colors.textSecondary, lineHeight: 19, fontStyle: 'italic' },
+  recapEmpty: { fontSize: 12, color: Colors.textMuted, fontStyle: 'italic' },
   lbRow: {
     flexDirection: 'row',
     alignItems: 'center',

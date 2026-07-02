@@ -277,6 +277,17 @@ export default function SettingsTab() {
         </View>
 
         <View style={styles.card}>
+          <Text style={styles.cardLabel}>Friends & Crew</Text>
+          <Text style={styles.cardValue}>Add friends to share workouts and join challenges</Text>
+          <TouchableOpacity
+            style={styles.upgradeBtn}
+            onPress={() => router.push('/friends')}
+          >
+            <Text style={styles.upgradeText}>Manage friends</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.card}>
           <Text style={styles.cardLabel}>TRAINING PLAN</Text>
           <TouchableOpacity style={styles.planRow} onPress={() => router.push('/plan-preview')}>
             <View style={styles.planRowLeft}>

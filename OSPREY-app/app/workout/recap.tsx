@@ -16,7 +16,7 @@ import { useAuthStore } from '@/store/authStore';
 import { fetchWorkoutRecap } from '@/services/workouts';
 import { formatDuration } from '@/store/workoutStore';
 import { ozzieSpeak } from '@/services/ozzie-audio';
-import { shareWorkout } from '@/services/activity';
+import { shareWorkout, requestOzzieCommentary } from '@/services/activity';
 
 export default function WorkoutRecapScreen() {
   const router = useRouter();
@@ -34,8 +34,11 @@ export default function WorkoutRecapScreen() {
     if (!userId || !workoutId || shareState !== 'idle') return;
     setShareState('sharing');
     try {
-      await shareWorkout(userId, workoutId);
+      const shareId = await shareWorkout(userId, workoutId);
       setShareState('shared');
+      // Best-effort — the share is already posted either way, so don't
+      // block or fail the share flow if Ozzie's reaction doesn't generate.
+      requestOzzieCommentary(shareId).catch(() => undefined);
     } catch {
       setShareState('idle');
       Alert.alert('Could not share workout', 'Please try again.');

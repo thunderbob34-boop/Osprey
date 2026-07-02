@@ -121,6 +121,13 @@ export default function ActivityScreen() {
 
               {card.caption ? <Text style={styles.cardCaption}>"{card.caption}"</Text> : null}
 
+              {card.ozzieComment ? (
+                <View style={styles.ozzieCommentRow}>
+                  <Text style={styles.ozzieCommentAvatar}>🦅</Text>
+                  <Text style={styles.ozzieCommentText}>{card.ozzieComment}</Text>
+                </View>
+              ) : null}
+
               <View style={styles.cardFooter}>
                 <TouchableOpacity
                   style={[styles.kudoBtn, card.hasKudo && styles.kudoBtnActive]}
@@ -184,6 +191,17 @@ const styles = StyleSheet.create({
   cardStat: { color: Colors.textSecondary, fontSize: 13, fontWeight: '600' },
 
   cardCaption: { color: Colors.textSecondary, fontSize: 13, fontStyle: 'italic', lineHeight: 18 },
+  ozzieCommentRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 6,
+    backgroundColor: Colors.surfaceTeal,
+    borderRadius: 10,
+    padding: 8,
+    marginTop: 4,
+  },
+  ozzieCommentAvatar: { fontSize: 13 },
+  ozzieCommentText: { flex: 1, color: Colors.teal, fontSize: 12.5, lineHeight: 17, fontWeight: '600' },
 
   cardFooter: { flexDirection: 'row', gap: 8 },
   kudoBtn: {

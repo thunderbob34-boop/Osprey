@@ -6,6 +6,7 @@ export interface ActivityCard {
   userId: string;
   userName: string;
   caption: string | null;
+  ozzieComment: string | null;
   sessionType: string;
   durationMinutes: number | null;
   distanceKm: number | null;
@@ -20,6 +21,7 @@ interface ActivityCardRow {
   user_id: string;
   display_name: string;
   caption: string | null;
+  ozzie_comment: string | null;
   session_type: string;
   total_duration_s: number | null;
   total_distance_km: number | null;
@@ -35,6 +37,7 @@ function mapRow(row: ActivityCardRow): ActivityCard {
     userId: row.user_id,
     userName: row.display_name,
     caption: row.caption,
+    ozzieComment: row.ozzie_comment,
     sessionType: row.session_type,
     durationMinutes: row.total_duration_s ? Math.round(row.total_duration_s / 60) : null,
     distanceKm: row.total_distance_km,
@@ -69,6 +72,7 @@ async function fetchActivityFeedSimple(userId: string, limit: number): Promise<A
       workout_id,
       user_id,
       caption,
+      ozzie_comment,
       share_created_at:created_at,
       users!inner(display_name),
       workout_logs!inner(session_type, total_duration_s, total_distance_km)
@@ -103,6 +107,7 @@ async function fetchActivityFeedSimple(userId: string, limit: number): Promise<A
         userId: row.user_id,
         userName: row.users.display_name,
         caption: row.caption,
+        ozzieComment: row.ozzie_comment ?? null,
         sessionType: row.workout_logs.session_type,
         durationMinutes: row.workout_logs.total_duration_s ? Math.round(row.workout_logs.total_duration_s / 60) : null,
         distanceKm: row.workout_logs.total_distance_km,
@@ -127,6 +132,11 @@ export async function shareWorkout(
 
   if (error || !data) throw error ?? new Error('Failed to share workout');
   return data.id;
+}
+
+/** Best-effort: asks Ozzie to react to a share. Non-critical — the share already exists either way. */
+export async function requestOzzieCommentary(shareId: string): Promise<void> {
+  await supabase.functions.invoke('ozzie-activity-commentary', { method: 'POST', body: { shareId } });
 }
 
 /** Give or remove a kudo on a shared workout. Returns true if kudo was added, false if removed. */
