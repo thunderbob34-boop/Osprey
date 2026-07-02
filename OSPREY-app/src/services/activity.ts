@@ -14,17 +14,53 @@ export interface ActivityCard {
   hasKudo: boolean; // current user gave a kudo
 }
 
+interface ActivityFeedRpcRow {
+  share_id: string;
+  workout_id: string;
+  user_id: string;
+  display_name: string;
+  caption: string | null;
+  session_type: string;
+  total_duration_s: number | null;
+  total_distance_km: number | null;
+  share_created_at: string;
+  kudo_count: number;
+  user_gave_kudo: boolean;
+}
+
+function mapRpcRow(row: ActivityFeedRpcRow): ActivityCard {
+  return {
+    shareId: row.share_id,
+    workoutId: row.workout_id,
+    userId: row.user_id,
+    userName: row.display_name,
+    caption: row.caption,
+    sessionType: row.session_type,
+    durationMinutes: row.total_duration_s ? Math.round(row.total_duration_s / 60) : null,
+    distanceKm: row.total_distance_km,
+    postedAt: row.share_created_at,
+    kudoCount: Number(row.kudo_count),
+    hasKudo: row.user_gave_kudo,
+  };
+}
+
 /**
  * Fetch the recent activity feed: workouts shared by the user and their friends,
  * ordered newest first. Includes kudo counts and whether the current user gave a kudo.
+ *
+ * Uses the `get_activity_feed` RPC (016_fix_activity_sharing_rls.sql) — it's
+ * SECURITY DEFINER, which is required here: `users` and `workout_logs` are
+ * self-only under RLS, so a plain client-side query joining through them can
+ * never see a friend's row even once activity_shares/kudos allow friend
+ * reads. Falls back to a direct (self-posts-only) query if the RPC fails.
  */
 export async function fetchActivityFeed(userId: string, limit = 50): Promise<ActivityCard[]> {
-  // There is no `get_activity_feed` RPC in the schema — go straight to the
-  // direct query rather than paying for a guaranteed-to-fail round trip first.
+  const { data, error } = await supabase.rpc('get_activity_feed', { p_limit: limit });
+  if (!error) return (data ?? []).map(mapRpcRow);
   return fetchActivityFeedSimple(userId, limit);
 }
 
-/** Fetch recent shares + joins directly (no RPC). */
+/** Fallback: fetch the caller's own shares directly (no RPC, no friends' posts). */
 async function fetchActivityFeedSimple(userId: string, limit: number): Promise<ActivityCard[]> {
   const { data: shares, error } = await supabase
     .from('activity_shares')

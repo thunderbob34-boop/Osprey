@@ -8,9 +8,18 @@ import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 // Log tab showed real per-user targets from the same nutrition-coach data,
 // so the two screens visibly disagreed. Pull the real target here instead.
 export default function MacroTargetCard() {
-  const { data, isLoading } = useNutritionCoaching();
+  const { data, isLoading, isError } = useNutritionCoaching();
   const accentColor = Colors.teal;
   const borderColor = Colors.borderTeal;
+
+  if (isError) {
+    return (
+      <View style={[styles.card, { borderColor }]}>
+        <Text style={styles.cardLabel}>TODAY'S FUEL TARGETS</Text>
+        <Text style={styles.errorText}>Couldn&apos;t load your targets.</Text>
+      </View>
+    );
+  }
 
   if (isLoading || !data) {
     return (
@@ -115,5 +124,10 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.textMuted,
     marginTop: 2,
+  },
+  errorText: {
+    fontSize: 12,
+    color: Colors.textMuted,
+    marginTop: 4,
   },
 });

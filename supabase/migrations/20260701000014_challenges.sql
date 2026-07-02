@@ -119,6 +119,12 @@ CREATE POLICY challenge_members_delete ON challenge_members
 -- so one authenticated user cannot dump another user's friend list by passing
 -- a different id.
 
+-- CREATE OR REPLACE with a different parameter list creates a new overload
+-- rather than replacing the old one — on a database where this migration
+-- already ran with the old (p_user_id UUID) signature, that spoofable
+-- overload would otherwise keep existing and stay callable.
+DROP FUNCTION IF EXISTS get_my_friends(UUID);
+
 CREATE OR REPLACE FUNCTION get_my_friends()
 RETURNS TABLE(friend_user_id UUID, friend_display_name TEXT)
 SECURITY DEFINER

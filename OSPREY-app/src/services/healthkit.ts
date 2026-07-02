@@ -69,13 +69,16 @@ const SAMPLE_OPTIONS = { ascending: false } as const;
 // intervals are merged before summing.
 const ASLEEP_VALUES = new Set(['ASLEEP', 'CORE', 'DEEP', 'REM']);
 
-function sumMergedSleepHours(samples: HealthValue[]): number {
+function sumMergedSleepHours(samples: HealthValue[]): number | null {
   const intervals = samples
     .filter((s) => ASLEEP_VALUES.has(String((s as unknown as { value: string }).value)))
     .map((s) => [new Date(s.startDate).getTime(), new Date(s.endDate).getTime()] as [number, number])
     .sort((a, b) => a[0] - b[0]);
 
-  if (intervals.length === 0) return 0;
+  // No asleep-category samples (e.g. only INBED, no ASLEEP/CORE/DEEP/REM) —
+  // that's "unknown", not "zero hours of sleep"; the scoring below treats
+  // null as "skip this factor" vs. 0 which would apply the worst penalty.
+  if (intervals.length === 0) return null;
 
   let totalMs = 0;
   let [curStart, curEnd] = intervals[0];

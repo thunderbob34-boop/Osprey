@@ -180,7 +180,15 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   signOut: async () => {
     await supabase.auth.signOut();
     await clearOfflineCache();
-    await resetRevenueCatOnSignOut();
+    try {
+      // Purchases.logOut() can reject (e.g. already-anonymous user, SDK
+      // error) — must not skip the local state reset below on failure, or
+      // the device is left signed out of Supabase but still holding stale
+      // local auth/subscription/workout state.
+      await resetRevenueCatOnSignOut();
+    } catch (err) {
+      console.warn('[Auth] resetRevenueCatOnSignOut error:', err);
+    }
     resetSubscriptionCache();
     useWorkoutStore.getState().reset();
     useOnboardingStore.getState().reset();

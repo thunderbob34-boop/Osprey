@@ -44,6 +44,12 @@ CREATE POLICY race_partners_owner ON race_partners
 -- taken as a parameter — so one authenticated user cannot query another user's
 -- friend/race graph by passing a different id.
 
+-- CREATE OR REPLACE with a different parameter list creates a new overload
+-- rather than replacing the old one — on a database where this migration
+-- already ran with the old (p_user_id, p_event_date) signature, that
+-- spoofable overload would otherwise keep existing and stay callable.
+DROP FUNCTION IF EXISTS get_friends_at_race(UUID, DATE);
+
 CREATE OR REPLACE FUNCTION get_friends_at_race(
   p_event_date DATE
 )
