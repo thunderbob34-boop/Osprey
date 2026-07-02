@@ -37,7 +37,7 @@
 ## App Store Connect
 
 - [ ] Register app with bundle ID `com.SillyGoose.OSPREY`
-- [ ] Fill `ascAppId` in `eas.json` → `submit.production.ios.ascAppId` (currently `REPLACE_WITH_APP_STORE_CONNECT_APP_ID`)
+- [x] Fill `ascAppId` in `eas.json` → `submit.production.ios.ascAppId` — done, set to `6785572381`
 - [ ] Confirm `appleTeamId` in `eas.json` is correct (`8YVWCVPW8J`)
 - [ ] Enable HealthKit capability in App Store Connect → App → Capabilities
 - [ ] Upload screenshots — required sizes: 6.7" (iPhone 15 Pro Max), 6.5" (iPhone 14 Plus), 5.5" (iPhone 8 Plus)
@@ -96,14 +96,14 @@
 - [ ] Test HealthKit sync: workouts writing to Health app, reading heart rate
 - [ ] Test Calendar blocking: toggle on, confirm "OSPREY: ..." events appear on device calendar
 - [ ] Test offline behavior: load app, enable airplane mode, confirm Home/Stats/Log render from cache
-- [ ] Verify app icon and splash screen are not placeholder assets (check physical device)
+- [ ] Verify app icon and splash screen are not placeholder assets (check physical device) — **splash.png is confirmed a 1x1px placeholder as of 2026-07-02; this WILL ship a blank splash screen if not replaced.** App icon fixed this session (`app.json` now points at the real 1024x1024 `icon-1024.png` instead of a 192x192 file).
 
 ---
 
 ## Pre-Submission Sanity
 
 - [ ] `version` in `app.json` is `"1.0.0"` and `buildNumber` is `"1"` — confirmed
-- [ ] All `UIBackgroundModes` in `app.json` are correct (no duplicates — there are currently duplicates in `location` and `audio`; clean those up before production build)
-- [ ] `associatedDomains` in `app.json` has no duplicate entries (currently duplicated — clean up before production build)
+- [x] All `UIBackgroundModes` in `app.json` are correct — verified 2026-07-02, only `["location", "audio"]`, no duplicates
+- [x] `associatedDomains` in `app.json` has no duplicate entries — verified 2026-07-02, single entry (`applinks:osprey.app`)
 - [ ] Privacy policy URL is live and publicly accessible before submitting for review
 - [ ] App does not reference internal/dev tooling or placeholder copy visible to users

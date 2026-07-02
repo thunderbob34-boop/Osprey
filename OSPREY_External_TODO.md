@@ -1,7 +1,7 @@
 # OSPREY — External / Human To-Do List
 
 *Things Claude can't do from code — they need you, an account dashboard, a paid service, or a device.*
-*Last updated: 2026-06-29*
+*Last updated: 2026-07-02 (icon/ascAppId items verified and corrected by nightly audit)*
 
 Legend: 🔴 blocks the new features from working · 🟡 needed before TestFlight/launch · 🟢 nice-to-have / later
 
@@ -55,10 +55,10 @@ Code gates OSPREY+ behind the entitlement id **`osprey_plus`** and expects an an
 ## 6. App Store Connect / release prep 🟡
 
 - [ ] Register the app in App Store Connect (bundle id `com.SillyGoose.OSPREY`).
-- [ ] Fill in `eas.json` → `submit.production.ios.ascAppId` (currently `REPLACE_WITH_APP_STORE_CONNECT_APP_ID`).
+- [x] Fill in `eas.json` → `submit.production.ios.ascAppId` — done, set to `6785572381`.
 - [ ] Confirm Apple Developer capabilities: HealthKit (entitlement already in `app.json`), and that Calendar usage strings are present (they are, added this session).
 - [ ] Change the developer/owner name from "Augustas Johnson" to a company name before submission (per handoff).
-- [ ] Verify real app icon & splash — `assets/images/icon.png` is ~60 KB now (looks replaced), but double-check splash/adaptive-icon aren't still placeholders, at proper resolutions.
+- [ ] Verify real app icon & splash — **checked 2026-07-02: `icon.png` is actually 192x192/1.8KB (not ~60KB as previously noted here) and `splash.png` is a 1x1px placeholder.** `app.json`'s `icon` field was repointed to the existing 1024x1024 `icon-1024.png` this session (Apple/EAS requires a 1024x1024 source), but splash.png still needs real artwork before submission — it will currently ship a blank splash screen. `adaptive-icon.png` (Android) is a real 1024x1024 asset and looks fine.
 
 ---
 
