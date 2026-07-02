@@ -13,6 +13,13 @@ export function useDailySummary() {
     queryKey,
     queryFn: () => withCache(queryKey, () => fetchDailySummary(userId!)),
     enabled: Boolean(userId),
+    // Home tab query — was refetching on every mount/tab-focus with no
+    // staleTime (React Query default is 0), unlike its sibling hooks
+    // (useFuelStatus, useWeightLog, useActivity all use 60s). That meant a
+    // fresh Supabase round trip every time a user tapped back to the home
+    // tab, burning battery/data for data that rarely changes second to
+    // second. Mutations below still invalidate immediately on swap/compress.
+    staleTime: 60_000,
   });
 
   const swapSession = useMutation({
