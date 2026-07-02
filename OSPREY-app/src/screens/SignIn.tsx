@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -23,6 +23,7 @@ export default function SignInScreen() {
   const [error, setError] = useState('');
 
   const { signIn, signUp, loading } = useAuthStore();
+  const passwordRef = useRef<TextInput>(null);
 
   async function handleSubmit() {
     setError('');
@@ -77,14 +78,23 @@ export default function SignInScreen() {
             autoCapitalize="none"
             keyboardType="email-address"
             autoComplete="email"
+            textContentType="emailAddress"
+            returnKeyType="next"
+            blurOnSubmit={false}
+            onSubmitEditing={() => passwordRef.current?.focus()}
           />
           <TextInput
+            ref={passwordRef}
             style={styles.input}
             placeholder="Password"
             placeholderTextColor={Colors.textMuted}
             value={password}
             onChangeText={setPassword}
             secureTextEntry
+            autoComplete={mode === 'signup' ? 'new-password' : 'password'}
+            textContentType={mode === 'signup' ? 'newPassword' : 'password'}
+            returnKeyType="go"
+            onSubmitEditing={handleSubmit}
           />
 
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
