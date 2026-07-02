@@ -37,11 +37,13 @@ function isValidDate(s: string): boolean {
   return dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d;
 }
 
-function daysLeftLabel(daysLeft: number, status: Challenge['status']): string {
+function daysLeftLabel(challenge: Pick<Challenge, 'daysLeft' | 'daysUntilStart' | 'status'>): string {
+  const { daysLeft, daysUntilStart, status } = challenge;
   if (status === 'past')    return 'Ended';
   if (status === 'upcoming') {
-    if (-daysLeft === 1) return 'Starts tomorrow';
-    return `Starts in ${-daysLeft} days`;
+    if (daysUntilStart <= 0) return 'Starts today';
+    if (daysUntilStart === 1) return 'Starts tomorrow';
+    return `Starts in ${daysUntilStart} days`;
   }
   if (daysLeft === 0)  return 'Last day!';
   if (daysLeft === 1)  return '1 day left';
@@ -435,7 +437,7 @@ function ChallengeCard({ challenge: c, currentUserId, isLbOpen, onToggleLb, onLe
             {CHALLENGE_TYPE_LABELS[c.type]} · {c.startsOn} – {c.endsOn}
           </Text>
           <Text style={styles.challengeSubMeta}>
-            {c.memberCount} {c.memberCount === 1 ? 'member' : 'members'} · {daysLeftLabel(c.daysLeft, c.status)}
+            {c.memberCount} {c.memberCount === 1 ? 'member' : 'members'} · {daysLeftLabel(c)}
           </Text>
         </View>
         {c.status === 'active' ? (

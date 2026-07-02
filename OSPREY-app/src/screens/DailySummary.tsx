@@ -301,12 +301,21 @@ export default function DailySummaryScreen({
 
           <View style={styles.sessionActionsRow}>
             <TouchableOpacity
-              style={[styles.startBtn, session.sessionType === 'rest' && styles.startBtnDisabled]}
+              style={[
+                styles.startBtn,
+                (!session.sessionType || session.sessionType === 'rest') && styles.startBtnDisabled,
+              ]}
               onPress={() => onStartSession?.(session)}
-              disabled={session.sessionType === 'rest'}
+              disabled={!session.sessionType || session.sessionType === 'rest'}
+              accessibilityRole="button"
+              accessibilityState={{ disabled: !session.sessionType || session.sessionType === 'rest' }}
             >
               <Text style={styles.startBtnText}>
-                {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
+                {session.sessionType === 'rest'
+                  ? 'Rest Day'
+                  : !session.sessionType
+                    ? 'No Session Yet'
+                    : 'Start Session →'}
               </Text>
             </TouchableOpacity>
             {onSwapSession && session.sessionId && session.sessionType !== 'rest' ? (

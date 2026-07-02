@@ -11,6 +11,7 @@ export interface Challenge {
   endsOn: string;   // YYYY-MM-DD
   memberCount: number;
   daysLeft: number;  // negative = ended
+  daysUntilStart: number; // days from today until startsOn (only meaningful when status === 'upcoming')
   status: 'upcoming' | 'active' | 'past';
 }
 
@@ -130,6 +131,7 @@ export async function fetchMyChallenges(userId: string): Promise<Challenge[]> {
     endsOn: row.ends_on,
     memberCount: countMap[row.id] ?? 1,
     daysLeft: daysLeftUntil(row.ends_on),
+    daysUntilStart: daysLeftUntil(row.starts_on),
     status: challengeStatus(row.starts_on, row.ends_on),
   }));
 }
@@ -154,10 +156,8 @@ export async function fetchChallengeLeaderboard(
   }));
 }
 
-export async function fetchMyFriends(userId: string): Promise<FriendUser[]> {
-  const { data, error } = await supabase.rpc('get_my_friends', {
-    p_user_id: userId,
-  });
+export async function fetchMyFriends(): Promise<FriendUser[]> {
+  const { data, error } = await supabase.rpc('get_my_friends');
   if (error) throw error;
   return (data ?? []).map((row: { friend_user_id: string; friend_display_name: string }) => ({
     friendUserId: row.friend_user_id,

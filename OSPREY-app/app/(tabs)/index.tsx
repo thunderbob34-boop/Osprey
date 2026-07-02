@@ -18,8 +18,13 @@ export default function HomeTab() {
 
   function handleStartSession(session: SessionData) {
     const sessionId = session.sessionId ?? undefined;
-    if (session.sessionType === 'lift') {
+    const sessionType = session.sessionType;
+    if (sessionType === 'lift') {
       router.push({ pathname: '/workout/lift', params: { sessionId } });
+      return;
+    }
+    if (sessionType === 'swim' || sessionType === 'bike' || sessionType === 'cross') {
+      router.push({ pathname: '/workout/endurance', params: { sessionId, sessionType } });
       return;
     }
     router.push({ pathname: '/workout/run', params: { sessionId } });

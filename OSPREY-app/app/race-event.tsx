@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { format } from 'date-fns';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
@@ -106,7 +107,10 @@ export default function RaceEventScreen() {
     setGenerating(true);
     try {
       const parsedRaceDate = parseRaceDate(result!.date);
-      const isoRaceDate = parsedRaceDate ? parsedRaceDate.toISOString().slice(0, 10) : null;
+      // Local format, not toISOString() (UTC) — parseRaceDate returns a
+      // local-midnight Date, so for any UTC+ timezone the UTC conversion
+      // rolls it back to the previous day before it reaches the plan generator.
+      const isoRaceDate = parsedRaceDate ? format(parsedRaceDate, 'yyyy-MM-dd') : null;
 
       const { data, error } = await supabase.functions.invoke('ozzie-generate-plan', {
         body: {

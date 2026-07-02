@@ -147,7 +147,7 @@ export default function SettingsTab() {
       const success = await purchaseOspreyPlus();
       setPlusActive(success);
       if (!success) {
-        Alert.alert('OSPREY+', 'No packages available yet. Configure RevenueCat to enable purchases.');
+        Alert.alert('OSPREY+', 'No plans available right now. Please try again shortly.');
       }
     } catch (err) {
       Alert.alert('Purchase failed', err instanceof Error ? err.message : 'Try again later.');
@@ -162,6 +162,8 @@ export default function SettingsTab() {
       const restored = await restorePurchases();
       setPlusActive(restored);
       Alert.alert('Restore', restored ? 'Purchases restored.' : 'No active subscription found.');
+    } catch (err) {
+      Alert.alert('Restore failed', err instanceof Error ? err.message : 'Try again later.');
     } finally {
       setLoading(false);
     }

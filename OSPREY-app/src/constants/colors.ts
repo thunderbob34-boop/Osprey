@@ -28,7 +28,10 @@ export const Colors = {
   // Text
   textPrimary:   '#ffffff',
   textSecondary: 'rgba(255,255,255,0.55)',
-  textMuted:     'rgba(255,255,255,0.3)',
+  // 0.3 alpha over bg (~2.5:1) failed WCAG AA (4.5:1) for the body-level text
+  // this is used for app-wide (field labels, empty states, inactive tabs).
+  // 0.5 clears AA (~5.2:1) while staying visually distinct from textSecondary.
+  textMuted:     'rgba(255,255,255,0.5)',
 
   // Status
   green:   '#4cde80',

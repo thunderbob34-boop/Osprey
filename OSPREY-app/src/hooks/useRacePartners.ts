@@ -21,7 +21,7 @@ export function useRacePartners(race: RaceEvent) {
   const friendsAtRace = useQuery({
     queryKey: friendsKey,
     queryFn: () =>
-      withCache(friendsKey, () => fetchFriendsAtRace(userId!, race.eventDate)),
+      withCache(friendsKey, () => fetchFriendsAtRace(race.eventDate)),
     enabled: Boolean(userId),
   });
 

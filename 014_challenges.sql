@@ -26,14 +26,6 @@ ALTER TABLE challenges ENABLE ROW LEVEL SECURITY;
 GRANT SELECT, INSERT, UPDATE ON challenges TO authenticated;
 GRANT ALL ON challenges TO service_role;
 
--- Members (and creator) can read; only creator can write.
-CREATE POLICY challenges_read ON challenges
-  FOR SELECT TO authenticated
-  USING (
-    creator_user_id = auth.uid()
-    OR id IN (SELECT challenge_id FROM challenge_members WHERE user_id = auth.uid())
-  );
-
 CREATE POLICY challenges_insert ON challenges
   FOR INSERT TO authenticated
   WITH CHECK (creator_user_id = auth.uid());
@@ -42,6 +34,12 @@ CREATE POLICY challenges_update ON challenges
   FOR UPDATE TO authenticated
   USING (creator_user_id = auth.uid())
   WITH CHECK (creator_user_id = auth.uid());
+
+-- challenges_read (below challenge_members) references challenge_members, so
+-- it's created after that table exists — CREATE POLICY on a table that
+-- references a not-yet-created table fails with "relation does not exist",
+-- which is what happened here originally (challenges_read referenced
+-- challenge_members before challenge_members was defined further down).
 
 -- ── challenge_members ─────────────────────────────────────────────────────────
 
@@ -60,14 +58,38 @@ ALTER TABLE challenge_members ENABLE ROW LEVEL SECURITY;
 GRANT SELECT, INSERT, DELETE ON challenge_members TO authenticated;
 GRANT ALL ON challenge_members TO service_role;
 
+-- Membership check used by RLS policies below. Must be SECURITY DEFINER so it
+-- bypasses RLS internally — a policy on challenge_members that queries
+-- challenge_members directly (even via EXISTS/IN) triggers Postgres error
+-- 42P17 "infinite recursion detected in policy for relation challenge_members"
+-- because evaluating the policy re-triggers the policy on every row.
+CREATE OR REPLACE FUNCTION is_challenge_member(p_challenge_id UUID, p_user_id UUID)
+RETURNS BOOLEAN
+SECURITY DEFINER
+SET search_path = public
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM challenge_members
+    WHERE challenge_id = p_challenge_id AND user_id = p_user_id
+  );
+$$;
+
+-- Members (and creator) can read; only creator can write.
+CREATE POLICY challenges_read ON challenges
+  FOR SELECT TO authenticated
+  USING (
+    creator_user_id = auth.uid()
+    OR is_challenge_member(id, auth.uid())
+  );
+
 -- Members of a challenge can see all members of that same challenge.
 CREATE POLICY challenge_members_read ON challenge_members
   FOR SELECT TO authenticated
   USING (
     user_id = auth.uid()
-    OR challenge_id IN (
-      SELECT challenge_id FROM challenge_members WHERE user_id = auth.uid()
-    )
+    OR is_challenge_member(challenge_id, auth.uid())
   );
 
 -- Creator can add any member; anyone can add themselves.
@@ -93,8 +115,11 @@ CREATE POLICY challenge_members_delete ON challenge_members
 -- ── RPC: get_my_friends ───────────────────────────────────────────────────────
 -- Returns all accepted friends with display names.
 -- SECURITY DEFINER because users.display_name has a self-only RLS policy.
+-- The caller is always derived from auth.uid() — never taken as a parameter —
+-- so one authenticated user cannot dump another user's friend list by passing
+-- a different id.
 
-CREATE OR REPLACE FUNCTION get_my_friends(p_user_id UUID)
+CREATE OR REPLACE FUNCTION get_my_friends()
 RETURNS TABLE(friend_user_id UUID, friend_display_name TEXT)
 SECURITY DEFINER
 SET search_path = public
@@ -106,11 +131,11 @@ AS $$
     u.display_name    AS friend_display_name
   FROM friendships f
   JOIN users u ON u.id = CASE
-    WHEN f.requester_id = p_user_id THEN f.addressee_id
+    WHEN f.requester_id = auth.uid() THEN f.addressee_id
     ELSE f.requester_id
   END
   WHERE f.status = 'accepted'
-    AND (f.requester_id = p_user_id OR f.addressee_id = p_user_id)
+    AND (f.requester_id = auth.uid() OR f.addressee_id = auth.uid())
     AND u.deleted_at IS NULL
   ORDER BY u.display_name;
 $$;
@@ -149,10 +174,15 @@ AS $$
       )
   ),
   members AS (
+    -- Gated on challenge_info: if the caller isn't a member/creator (checked
+    -- above), challenge_info is empty and this CTE must return no rows too —
+    -- otherwise any authenticated user could pass an arbitrary challenge id
+    -- and read every member's user id and display name.
     SELECT cm.user_id, u.display_name
     FROM challenge_members cm
     JOIN users u ON u.id = cm.user_id
     WHERE cm.challenge_id = p_challenge_id
+      AND EXISTS (SELECT 1 FROM challenge_info)
   ),
   scores AS (
     SELECT

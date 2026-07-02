@@ -40,10 +40,11 @@ CREATE POLICY race_partners_owner ON race_partners
 -- ── RPC: get_friends_at_race ──────────────────────────────────────────────────
 -- Returns accepted friends who have at least one upcoming race on p_event_date.
 -- SECURITY DEFINER so it can join across users and race_events despite their
--- self-only RLS policies.
+-- self-only RLS policies. The caller is always derived from auth.uid() — never
+-- taken as a parameter — so one authenticated user cannot query another user's
+-- friend/race graph by passing a different id.
 
 CREATE OR REPLACE FUNCTION get_friends_at_race(
-  p_user_id    UUID,
   p_event_date DATE
 )
 RETURNS TABLE(
@@ -64,7 +65,7 @@ AS $$
     re.name           AS friend_race_name
   FROM friendships f
   JOIN users u ON u.id = CASE
-    WHEN f.requester_id = p_user_id THEN f.addressee_id
+    WHEN f.requester_id = auth.uid() THEN f.addressee_id
     ELSE f.requester_id
   END
   JOIN race_events re
@@ -72,7 +73,7 @@ AS $$
     AND re.event_date = p_event_date
     AND re.deleted_at IS NULL
   WHERE f.status = 'accepted'
-    AND (f.requester_id = p_user_id OR f.addressee_id = p_user_id)
+    AND (f.requester_id = auth.uid() OR f.addressee_id = auth.uid())
     AND u.deleted_at IS NULL
   ORDER BY u.display_name;
 $$;
@@ -81,7 +82,9 @@ GRANT EXECUTE ON FUNCTION get_friends_at_race TO authenticated;
 
 -- ── RPC: get_race_partners ────────────────────────────────────────────────────
 -- Returns the display names of all partners already added to a given race.
--- SECURITY DEFINER for the same cross-user read reason.
+-- SECURITY DEFINER for the same cross-user read reason. Restricted to the race
+-- owner (mirrors the race_partners_owner RLS policy) so a guessed/leaked race
+-- id doesn't expose partner names to non-owners.
 
 CREATE OR REPLACE FUNCTION get_race_partners(p_race_id UUID)
 RETURNS TABLE(
@@ -99,6 +102,10 @@ AS $$
   FROM race_partners rp
   JOIN users u ON u.id = rp.partner_user_id
   WHERE rp.race_id = p_race_id
+    AND EXISTS (
+      SELECT 1 FROM race_events re
+      WHERE re.id = p_race_id AND re.user_id = auth.uid() AND re.deleted_at IS NULL
+    )
   ORDER BY u.display_name;
 $$;
 

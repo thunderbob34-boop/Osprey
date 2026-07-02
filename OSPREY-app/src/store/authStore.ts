@@ -2,6 +2,10 @@ import { create } from 'zustand';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/services/supabase';
 import { clearOfflineCache } from '@/services/offline-cache';
+import { resetRevenueCatOnSignOut } from '@/services/subscriptions';
+import { resetSubscriptionCache } from '@/hooks/useSubscription';
+import { useWorkoutStore } from '@/store/workoutStore';
+import { useOnboardingStore } from '@/store/onboardingStore';
 
 export interface UserProfile {
   id: string;
@@ -113,8 +117,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
     if (error) {
       console.warn('[Auth] fetchProfile error:', error.message);
+      // Leave `profile` null (not a synthetic onboarding_complete:false profile) so
+      // app/index.tsx shows the "Could not load profile / Try Again" screen instead
+      // of routing an already-onboarded user back through onboarding on a transient
+      // network error, which would re-run onboarding and overwrite their real data.
       set({
-        profile: fallbackProfile(user),
+        profile: null,
         profileReady: true,
         profileError: error.message,
       });
@@ -172,6 +180,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   signOut: async () => {
     await supabase.auth.signOut();
     await clearOfflineCache();
+    await resetRevenueCatOnSignOut();
+    resetSubscriptionCache();
+    useWorkoutStore.getState().reset();
+    useOnboardingStore.getState().reset();
     set({
       session: null,
       user: null,

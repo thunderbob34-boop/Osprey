@@ -19,6 +19,26 @@ const OZZIE_VOICE_ID = process.env.EXPO_PUBLIC_OZZIE_VOICE_ID ?? 'REPLACE_AFTER_
 
 const CACHE_DIR = `${FileSystem.cacheDirectory}ozzie-audio/`;
 
+// `Buffer` is a Node global — it does not exist in React Native/Hermes and
+// there is no polyfill in this project, so `Buffer.from(...)` throws
+// ReferenceError at runtime. Encode base64 by hand instead.
+const BASE64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+function uint8ToBase64(bytes: Uint8Array): string {
+  let result = '';
+  for (let i = 0; i < bytes.length; i += 3) {
+    const b0 = bytes[i];
+    const b1 = i + 1 < bytes.length ? bytes[i + 1] : undefined;
+    const b2 = i + 2 < bytes.length ? bytes[i + 2] : undefined;
+
+    result += BASE64_CHARS[b0 >> 2];
+    result += BASE64_CHARS[((b0 & 0x03) << 4) | (b1 !== undefined ? b1 >> 4 : 0)];
+    result += b1 !== undefined ? BASE64_CHARS[((b1 & 0x0f) << 2) | (b2 !== undefined ? b2 >> 6 : 0)] : '=';
+    result += b2 !== undefined ? BASE64_CHARS[b2 & 0x3f] : '=';
+  }
+  return result;
+}
+
 type AudioProfile = 'workout' | 'ambient';
 
 const PROFILES: Record<AudioProfile, {
@@ -54,9 +74,14 @@ async function ensureCacheDir() {
 }
 
 function cacheKey(text: string, profile: AudioProfile): string {
-  // Simple hash: profile + first 60 chars of text, sanitized for filename
+  // profile + sanitized 60-char prefix + a cheap checksum of the full text,
+  // so two cues sharing a 60-char prefix don't collide on the same cache file.
   const sanitized = text.slice(0, 60).replace(/[^a-zA-Z0-9]/g, '_');
-  return `${CACHE_DIR}${profile}_${sanitized}.mp3`;
+  let checksum = 0;
+  for (let i = 0; i < text.length; i++) {
+    checksum = (checksum * 31 + text.charCodeAt(i)) >>> 0;
+  }
+  return `${CACHE_DIR}${profile}_${sanitized}_${checksum.toString(36)}.mp3`;
 }
 
 async function getCachedAudio(path: string): Promise<string | null> {
@@ -135,7 +160,7 @@ export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient'
       const audioData = await fetchTTS(text, profile);
       await FileSystem.writeAsStringAsync(
         cachePath,
-        Buffer.from(audioData).toString('base64'),
+        uint8ToBase64(audioData),
         { encoding: FileSystem.EncodingType.Base64 }
       );
       audioPath = cachePath;
@@ -198,7 +223,7 @@ export async function ozziePrewarm() {
         await ensureCacheDir();
         await FileSystem.writeAsStringAsync(
           path,
-          Buffer.from(audioData).toString('base64'),
+          uint8ToBase64(audioData),
           { encoding: FileSystem.EncodingType.Base64 }
         );
       } catch {

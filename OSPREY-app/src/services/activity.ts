@@ -14,62 +14,27 @@ export interface ActivityCard {
   hasKudo: boolean; // current user gave a kudo
 }
 
-interface ActivityCardRow {
-  share_id: string;
-  workout_id: string;
-  user_id: string;
-  display_name: string;
-  caption: string | null;
-  session_type: string;
-  total_duration_s: number | null;
-  total_distance_km: number | null;
-  share_created_at: string;
-  kudo_count: number;
-  user_gave_kudo: boolean;
-}
-
-function mapRow(row: ActivityCardRow): ActivityCard {
-  return {
-    shareId: row.share_id,
-    workoutId: row.workout_id,
-    userId: row.user_id,
-    userName: row.display_name,
-    caption: row.caption,
-    sessionType: row.session_type,
-    durationMinutes: row.total_duration_s ? Math.round(row.total_duration_s / 60) : null,
-    distanceKm: row.total_distance_km,
-    postedAt: row.share_created_at,
-    kudoCount: row.kudo_count,
-    hasKudo: row.user_gave_kudo,
-  };
-}
-
 /**
  * Fetch the recent activity feed: workouts shared by the user and their friends,
  * ordered newest first. Includes kudo counts and whether the current user gave a kudo.
  */
 export async function fetchActivityFeed(userId: string, limit = 50): Promise<ActivityCard[]> {
-  const { data, error } = await supabase.rpc('get_activity_feed', { p_user_id: userId, p_limit: limit });
-
-  if (error) {
-    // Fall back to a simple query if the RPC doesn't exist yet.
-    return fetchActivityFeedSimple(userId, limit);
-  }
-
-  return (data ?? []).map(mapRow);
+  // There is no `get_activity_feed` RPC in the schema — go straight to the
+  // direct query rather than paying for a guaranteed-to-fail round trip first.
+  return fetchActivityFeedSimple(userId, limit);
 }
 
-/** Fallback: fetch recent shares + joins without RPC. Slower but works. */
+/** Fetch recent shares + joins directly (no RPC). */
 async function fetchActivityFeedSimple(userId: string, limit: number): Promise<ActivityCard[]> {
   const { data: shares, error } = await supabase
     .from('activity_shares')
     .select(
       `
-      id as share_id,
+      share_id:id,
       workout_id,
       user_id,
       caption,
-      created_at as share_created_at,
+      share_created_at:created_at,
       users!inner(display_name),
       workout_logs!inner(session_type, total_duration_s, total_distance_km)
     `,
@@ -80,11 +45,11 @@ async function fetchActivityFeedSimple(userId: string, limit: number): Promise<A
 
   if (error) throw error;
 
-  // Fetch kudos for all shares.
+  // Fetch kudos for just these shares.
   const shareIds = (shares ?? []).map((s) => (s as any).share_id);
-  const { data: kudosData } = await supabase
-    .from('kudos')
-    .select('share_id, from_user');
+  const { data: kudosData } = shareIds.length
+    ? await supabase.from('kudos').select('share_id, from_user').in('share_id', shareIds)
+    : { data: [] as { share_id: string; from_user: string }[] };
 
   const kudosByShare = new Map<string, Set<string>>();
   for (const kudo of kudosData ?? []) {

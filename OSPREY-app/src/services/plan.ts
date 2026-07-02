@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { supabase } from '@/services/supabase';
 
 export type SwappableSessionType = 'run' | 'lift' | 'cross' | 'rest';
@@ -79,7 +80,10 @@ export async function fetchCurrentWeekSessions(userId: string): Promise<WeekSess
   const monday = new Date(now);
   monday.setHours(0, 0, 0, 0);
   monday.setDate(now.getDate() + diff);
-  const weekStartStr = monday.toISOString().slice(0, 10);
+  // Format in local time, not toISOString() (which converts to UTC) — for
+  // any UTC+ timezone that shifts the date to the previous day, so the query
+  // below matches no training_weeks row and "This Week" renders empty.
+  const weekStartStr = format(monday, 'yyyy-MM-dd');
 
   const { data: week, error: weekError } = await supabase
     .from('training_weeks')

@@ -13,13 +13,20 @@ export async function completeOnboarding(userId: string, draft: OnboardingDraft)
 
   if (userError) throw userError;
 
-  const { error: goalsError } = await supabase.from('user_goals').insert({
-    user_id: userId,
-    primary_goal: draft.primaryGoal,
-    weekly_run_days: draft.weeklyRunDays,
-    weekly_lift_days: draft.weeklyLiftDays,
-    fitness_level: draft.experienceTier,
-  });
+  // Upsert, not insert: user_goals has a UNIQUE(user_id) constraint
+  // (015_race_goal_tracking.sql), so a retry after a partial failure, or
+  // re-running onboarding, would otherwise fail with a duplicate-key error
+  // and leave onboarding permanently stuck.
+  const { error: goalsError } = await supabase.from('user_goals').upsert(
+    {
+      user_id: userId,
+      primary_goal: draft.primaryGoal,
+      weekly_run_days: draft.weeklyRunDays,
+      weekly_lift_days: draft.weeklyLiftDays,
+      fitness_level: draft.experienceTier,
+    },
+    { onConflict: 'user_id' },
+  );
 
   if (goalsError) throw goalsError;
 

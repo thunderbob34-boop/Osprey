@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { supabase } from '@/services/supabase';
 
 export interface CalendarDay {
@@ -14,8 +15,12 @@ export async function fetchCalendarMonth(
 ): Promise<CalendarDay[]> {
   const start = new Date(year, month, 1);
   const end = new Date(year, month + 1, 0);
-  const startStr = start.toISOString().slice(0, 10);
-  const endStr = end.toISOString().slice(0, 10);
+  // Local format, not toISOString() (UTC) — for UTC+ timezones the UTC
+  // conversion shifts these local calendar-month boundaries by a day, so the
+  // query below would drop the last day of the month / leak in the previous
+  // month's last day.
+  const startStr = format(start, 'yyyy-MM-dd');
+  const endStr = format(end, 'yyyy-MM-dd');
 
   const [sessionsRes, workoutsRes] = await Promise.all([
     supabase
@@ -45,7 +50,10 @@ export async function fetchCalendarMonth(
   }
 
   for (const row of workoutsRes.data ?? []) {
-    const date = (row.started_at as string).slice(0, 10);
+    // started_at is a UTC timestamptz — format in local time so an evening
+    // workout lands on the day the user actually did it, matching the
+    // planned session it completed (and startStr/endStr above).
+    const date = format(new Date(row.started_at as string), 'yyyy-MM-dd');
     const existing = byDate.get(date) ?? {
       date,
       plannedType: null,

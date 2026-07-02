@@ -58,6 +58,40 @@ function fetchSamples(
   });
 }
 
+// react-native-health's HealthKit queries default to `ascending: false`
+// (newest first), so the most recent sample is index 0, not the last one.
+const SAMPLE_OPTIONS = { ascending: false } as const;
+
+// Sleep categories that represent time actually asleep. HealthKit reports
+// overlapping INBED + ASLEEP (legacy) or INBED + CORE/DEEP/REM (iOS 16+)
+// samples for the same period, so summing every sample's duration roughly
+// doubles the true sleep time. INBED/AWAKE are excluded and the remaining
+// intervals are merged before summing.
+const ASLEEP_VALUES = new Set(['ASLEEP', 'CORE', 'DEEP', 'REM']);
+
+function sumMergedSleepHours(samples: HealthValue[]): number {
+  const intervals = samples
+    .filter((s) => ASLEEP_VALUES.has(String((s as unknown as { value: string }).value)))
+    .map((s) => [new Date(s.startDate).getTime(), new Date(s.endDate).getTime()] as [number, number])
+    .sort((a, b) => a[0] - b[0]);
+
+  if (intervals.length === 0) return 0;
+
+  let totalMs = 0;
+  let [curStart, curEnd] = intervals[0];
+  for (const [start, end] of intervals.slice(1)) {
+    if (start <= curEnd) {
+      curEnd = Math.max(curEnd, end);
+    } else {
+      totalMs += curEnd - curStart;
+      [curStart, curEnd] = [start, end];
+    }
+  }
+  totalMs += curEnd - curStart;
+
+  return totalMs / 3600000;
+}
+
 /**
  * Pulls last night's HRV, resting HR, and sleep duration from HealthKit and
  * writes a recovery_scores row for today using a simple v1 scoring formula.
@@ -73,8 +107,9 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
     fetchSamples(AppleHealthKit.getHeartRateVariabilitySamples, {
       startDate: since,
       unit: AppleHealthKit.Constants.Units.count,
+      ...SAMPLE_OPTIONS,
     }),
-    fetchSamples(AppleHealthKit.getRestingHeartRateSamples, { startDate: since }),
+    fetchSamples(AppleHealthKit.getRestingHeartRateSamples, { startDate: since, ...SAMPLE_OPTIONS }),
     fetchSamples(AppleHealthKit.getSleepSamples, { startDate: since }),
   ]);
 
@@ -82,17 +117,13 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
     return false; // nothing new to sync
   }
 
-  const hrvMs = hrvSamples.length > 0 ? hrvSamples[hrvSamples.length - 1].value : null;
-  const restingHr = restingHrSamples.length > 0 ? restingHrSamples[restingHrSamples.length - 1].value : null;
-
-  const sleepHours =
-    sleepSamples.length > 0
-      ? sleepSamples.reduce((sum, s) => {
-          const start = new Date(s.startDate).getTime();
-          const end = new Date(s.endDate).getTime();
-          return sum + (end - start) / 3600000;
-        }, 0)
-      : null;
+  // The native module ignores the `unit` option for HRV and always returns
+  // seconds — convert to ms (the unit `hrv_ms` and the scoring thresholds
+  // below expect), or every reading comes back as ~0.0x and gets scored as
+  // critically low HRV.
+  const hrvMs = hrvSamples.length > 0 ? hrvSamples[0].value * 1000 : null;
+  const restingHr = restingHrSamples.length > 0 ? restingHrSamples[0].value : null;
+  const sleepHours = sleepSamples.length > 0 ? sumMergedSleepHours(sleepSamples) : null;
 
   // v1 scoring: simple weighted heuristic, not a clinical algorithm.
   let score = 70;

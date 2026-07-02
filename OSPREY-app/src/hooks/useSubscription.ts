@@ -3,6 +3,11 @@ import { hasOspreyPlus } from '@/services/subscriptions';
 
 let moduleCache: boolean | null = null;
 
+/** Clear the cached entitlement so the next mount re-checks instead of showing the previous user's status. */
+export function resetSubscriptionCache() {
+  moduleCache = null;
+}
+
 export function useSubscription() {
   const [isPlus, setIsPlus] = useState<boolean>(moduleCache ?? false);
   const [isLoading, setIsLoading] = useState<boolean>(moduleCache === null);

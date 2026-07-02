@@ -1,4 +1,4 @@
-import { startOfMonth } from 'date-fns';
+import { format, startOfMonth } from 'date-fns';
 import { supabase } from '@/services/supabase';
 import { fetchWeekTargetKm } from '@/services/workouts';
 import type {
@@ -9,7 +9,10 @@ import type {
 } from '@/types/daily-summary';
 
 function todayDateString(): string {
-  return new Date().toISOString().slice(0, 10);
+  // Local date, not toISOString() (UTC) — training_sessions.session_date is a
+  // local plan date, so using UTC shows tomorrow's (or yesterday's) session
+  // for users outside UTC for part of the day.
+  return format(new Date(), 'yyyy-MM-dd');
 }
 
 function kmToMiles(km: number): number {

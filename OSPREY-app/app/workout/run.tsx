@@ -170,6 +170,16 @@ export default function RunWorkoutScreen() {
   if (warmingUp) {
     return (
       <SafeAreaView style={styles.container}>
+        <View style={styles.warmupHeader}>
+          <TouchableOpacity
+            onPress={() => router.back()}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel="Close and go back"
+          >
+            <Text style={styles.warmupClose}>✕</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.warmupWrap}>
           <Text style={styles.warmupTitle}>🔥 Warm Up First</Text>
           <Text style={styles.warmupSubtitle}>
@@ -334,6 +344,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   primaryBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
+  warmupHeader: { paddingHorizontal: 20, paddingTop: 16, alignItems: 'flex-end' },
+  warmupClose: { fontSize: 18, color: Colors.textMuted, fontWeight: '700' },
   warmupWrap: { flex: 1, padding: 24, gap: 14 },
   warmupTitle: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
   warmupSubtitle: { fontSize: 13, color: Colors.textMuted, lineHeight: 18, marginBottom: 6 },

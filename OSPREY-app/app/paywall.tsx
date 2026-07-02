@@ -24,7 +24,7 @@ const FEATURES = [
   { icon: '🏆', title: 'Group Challenges', desc: 'Create unlimited mileage, workout, and duration challenges with friends.' },
   { icon: '🔔', title: 'Live Run Coaching', desc: 'Automatic mile-split callouts, pace alerts, and HR zone cues mid-run.' },
   { icon: '📈', title: 'Performance Intelligence', desc: 'Fitness/fatigue/form trends (CTL/ATL/TSB), injury risk score, race time predictor.' },
-  { icon: '📆', title: 'AI Plan Generation', desc: 'Adaptive weekly training plans powered by GPT-4o-mini.' },
+  { icon: '📆', title: 'AI Plan Generation', desc: 'Adaptive weekly training plans, built and adjusted by Ozzie.' },
 ];
 
 export default function PaywallScreen() {
@@ -53,7 +53,10 @@ export default function PaywallScreen() {
         Alert.alert('Purchase failed', 'Your payment was not completed. Please try again.');
       }
     } catch (err: unknown) {
-      if (err && typeof err === 'object' && 'userCancelled' in err) return;
+      // RevenueCat's PurchasesError always carries a `userCancelled` property
+      // (true or false) — `in` matched on every error, silently swallowing
+      // real failures (network, declined payment, store errors) too.
+      if (err && typeof err === 'object' && (err as { userCancelled?: boolean }).userCancelled === true) return;
       Alert.alert('Purchase failed', err instanceof Error ? err.message : 'Try again.');
     } finally {
       setPurchasing(false);

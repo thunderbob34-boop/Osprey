@@ -1,30 +1,37 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { Colors } from '@/constants/colors';
+import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 
-const TRAINING = { protein: 240, carbs: 265, fat: 80, calories: 2740 };
-const LONG_DAY = { protein: 240, carbs: 340, fat: 80, calories: 3040 };
-
+// Previously showed hardcoded macros (240g protein / 2740 kcal, "carb reload"
+// on Sundays) for every user regardless of their actual profile — while the
+// Log tab showed real per-user targets from the same nutrition-coach data,
+// so the two screens visibly disagreed. Pull the real target here instead.
 export default function MacroTargetCard() {
-  const isSunday = new Date().getDay() === 0;
-  const targets = isSunday ? LONG_DAY : TRAINING;
-  const borderColor = isSunday ? Colors.borderGold : Colors.borderTeal;
-  const surface = isSunday ? Colors.surfaceGold : Colors.surfaceTeal;
-  const accentColor = isSunday ? Colors.gold : Colors.teal;
-  const badgeLabel = isSunday ? 'Long Day — Carb Reload' : 'Training Day';
+  const { data, isLoading } = useNutritionCoaching();
+  const accentColor = Colors.teal;
+  const borderColor = Colors.borderTeal;
+
+  if (isLoading || !data) {
+    return (
+      <View style={[styles.card, { borderColor }]}>
+        <Text style={styles.cardLabel}>TODAY'S FUEL TARGETS</Text>
+        <ActivityIndicator color={accentColor} style={{ marginTop: 10 }} />
+      </View>
+    );
+  }
+
+  const targets = data.target;
 
   return (
     <View style={[styles.card, { borderColor }]}>
       <View style={styles.headerRow}>
         <Text style={styles.cardLabel}>TODAY'S FUEL TARGETS</Text>
-        <View style={[styles.badge, { backgroundColor: surface }]}>
-          <Text style={[styles.badgeText, { color: accentColor }]}>{badgeLabel}</Text>
-        </View>
       </View>
       <View style={styles.macroGrid}>
-        <MacroBlock value={targets.protein} unit="g" label="Protein" accentColor={accentColor} />
-        <MacroBlock value={targets.carbs} unit="g" label="Carbs" accentColor={accentColor} />
-        <MacroBlock value={targets.fat} unit="g" label="Fat" accentColor={accentColor} />
+        <MacroBlock value={targets.proteinG} unit="g" label="Protein" accentColor={accentColor} />
+        <MacroBlock value={targets.carbsG} unit="g" label="Carbs" accentColor={accentColor} />
+        <MacroBlock value={targets.fatG} unit="g" label="Fat" accentColor={accentColor} />
         <MacroBlock value={targets.calories} unit="kcal" label="Calories" accentColor={accentColor} />
       </View>
     </View>

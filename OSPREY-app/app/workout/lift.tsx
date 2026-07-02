@@ -51,6 +51,7 @@ export default function LiftWorkoutScreen() {
   const [warmingUp, setWarmingUp] = useState(true);
   const [warmupDrills] = useState<WarmupDrill[]>(() => generateWarmup('lift'));
   const [checkedDrills, setCheckedDrills] = useState<Set<number>>(new Set());
+  const [loadError, setLoadError] = useState(false);
 
   function handleStartAfterWarmup() {
     setWarmingUp(false);
@@ -89,6 +90,7 @@ export default function LiftWorkoutScreen() {
         });
         setLiftExercises(initial);
       })
+      .catch(() => setLoadError(true))
       .finally(() => setLoading(false));
 
     return () => reset();
@@ -102,6 +104,23 @@ export default function LiftWorkoutScreen() {
     return () => clearInterval(timer);
   }, [startedAt, pausedAt, accumulatedPauseMs, status, tickRestTimer]);
 
+  function updateSetFields(
+    exerciseIndex: number,
+    setIndex: number,
+    fields: Partial<Record<'reps' | 'weightLbs', number>>,
+  ) {
+    const updated = liftExercises.map((exercise, ei) => {
+      if (ei !== exerciseIndex) return exercise;
+      return {
+        ...exercise,
+        sets: exercise.sets.map((set, si) =>
+          si === setIndex ? { ...set, ...fields } : set,
+        ),
+      };
+    });
+    setLiftExercises(updated);
+  }
+
   function updateSet(
     exerciseIndex: number,
     setIndex: number,
@@ -109,16 +128,7 @@ export default function LiftWorkoutScreen() {
     value: string,
   ) {
     const numeric = Number(value.replace(/[^0-9.]/g, '')) || 0;
-    const updated = liftExercises.map((exercise, ei) => {
-      if (ei !== exerciseIndex) return exercise;
-      return {
-        ...exercise,
-        sets: exercise.sets.map((set, si) =>
-          si === setIndex ? { ...set, [field]: numeric } : set,
-        ),
-      };
-    });
-    setLiftExercises(updated);
+    updateSetFields(exerciseIndex, setIndex, { [field]: numeric });
   }
 
   async function completeSet(exerciseIndex: number, setIndex: number) {
@@ -161,8 +171,13 @@ export default function LiftWorkoutScreen() {
       const exercise = liftExercises[exerciseIndex];
       const nextSetIndex = exercise.sets.findIndex((s) => !s.completed);
       const targetIndex = nextSetIndex === -1 ? exercise.sets.length - 1 : nextSetIndex;
-      if (weightLbs != null) updateSet(exerciseIndex, targetIndex, 'weightLbs', String(weightLbs));
-      if (reps != null) updateSet(exerciseIndex, targetIndex, 'reps', String(reps));
+      // Apply weight + reps in a single state update — two sequential
+      // updateSet() calls both close over the same pre-update `liftExercises`
+      // snapshot, so the second call silently overwrites the first.
+      const fields: Partial<Record<'reps' | 'weightLbs', number>> = {};
+      if (weightLbs != null) fields.weightLbs = weightLbs;
+      if (reps != null) fields.reps = reps;
+      updateSetFields(exerciseIndex, targetIndex, fields);
     } catch (err) {
       Alert.alert('Voice log failed', err instanceof Error ? err.message : 'Try again.');
     } finally {
@@ -173,6 +188,26 @@ export default function LiftWorkoutScreen() {
   function handleCancelVoiceLog() {
     cancelVoiceRecording();
     setRecordingExercise(null);
+  }
+
+  function handleDiscard() {
+    const hasProgress = liftExercises.some((e) => e.sets.some((s) => s.completed));
+    if (!hasProgress) {
+      reset();
+      router.back();
+      return;
+    }
+    Alert.alert('Discard workout?', 'The sets you logged will be lost.', [
+      { text: 'Keep Going', style: 'cancel' },
+      {
+        text: 'Discard',
+        style: 'destructive',
+        onPress: () => {
+          reset();
+          router.back();
+        },
+      },
+    ]);
   }
 
   async function handleFinish() {
@@ -202,9 +237,33 @@ export default function LiftWorkoutScreen() {
     );
   }
 
+  if (loadError) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.warmupWrap}>
+          <Text style={styles.warmupTitle}>Couldn&apos;t load exercises</Text>
+          <Text style={styles.warmupSubtitle}>Check your connection and try again.</Text>
+          <TouchableOpacity style={styles.warmupStartBtn} onPress={() => router.back()}>
+            <Text style={styles.finishBtnText}>Back</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   if (warmingUp) {
     return (
       <SafeAreaView style={styles.container}>
+        <View style={styles.warmupHeader}>
+          <TouchableOpacity
+            onPress={handleDiscard}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel="Close and go back"
+          >
+            <Text style={styles.headerClose}>✕</Text>
+          </TouchableOpacity>
+        </View>
         <ScrollView contentContainerStyle={styles.warmupWrap}>
           <Text style={styles.warmupTitle}>🔥 Warm Up First</Text>
           <Text style={styles.warmupSubtitle}>
@@ -239,6 +298,14 @@ export default function LiftWorkoutScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
+        <TouchableOpacity
+          onPress={handleDiscard}
+          hitSlop={12}
+          accessibilityRole="button"
+          accessibilityLabel="Discard workout and exit"
+        >
+          <Text style={styles.headerClose}>✕</Text>
+        </TouchableOpacity>
         <Text style={styles.headerLabel}>LIFT SESSION</Text>
         <Text style={styles.headerTime}>{formatDuration(elapsed)}</Text>
       </View>
@@ -335,6 +402,8 @@ const styles = StyleSheet.create({
   },
   headerLabel: { fontSize: 11, fontWeight: '700', color: Colors.gold, letterSpacing: 1 },
   headerTime: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary },
+  headerClose: { fontSize: 18, color: Colors.textMuted, fontWeight: '700' },
+  warmupHeader: { paddingHorizontal: 20, paddingTop: 16, alignItems: 'flex-end' },
   restBanner: {
     backgroundColor: Colors.surfaceTeal,
     paddingVertical: 10,

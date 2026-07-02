@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Alert,
   KeyboardAvoidingView,
+  Modal,
   Platform,
   SafeAreaView,
   ScrollView,
@@ -537,6 +538,8 @@ export default function RacesScreen() {
   const [logisticsRaceId, setLogisticsRaceId] = useState<string | null>(null);
   const [retroRaceId, setRetroRaceId] = useState<string | null>(null);
   const [partnersRaceId, setPartnersRaceId] = useState<string | null>(null);
+  const [resultPromptRace, setResultPromptRace] = useState<RaceEvent | null>(null);
+  const [resultTimeText, setResultTimeText] = useState('');
 
   function resetForm() {
     setName('');
@@ -592,22 +595,26 @@ export default function RacesScreen() {
   }
 
   function handleRecordResult(race: RaceEvent) {
-    Alert.prompt?.(
-      'Record result',
-      `Finish time for ${race.name} (h:mm:ss)`,
-      async (text?: string) => {
-        const seconds = text ? parseRaceTime(text) : null;
-        if (seconds == null) {
-          Alert.alert('Check the time', 'Use h:mm:ss or mm:ss.');
-          return;
-        }
-        try {
-          await recordResult.mutateAsync({ raceId: race.id, resultTimeS: seconds });
-        } catch (err) {
-          Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
-        }
-      },
-    );
+    // Alert.prompt is iOS-only — on Android it's undefined, so the optional
+    // call silently did nothing and this entire flow was dead on Android.
+    // Use an in-app modal instead so it works on both platforms.
+    setResultTimeText('');
+    setResultPromptRace(race);
+  }
+
+  async function submitResultPrompt() {
+    if (!resultPromptRace) return;
+    const seconds = parseRaceTime(resultTimeText);
+    if (seconds == null) {
+      Alert.alert('Check the time', 'Use h:mm:ss or mm:ss.');
+      return;
+    }
+    try {
+      await recordResult.mutateAsync({ raceId: resultPromptRace.id, resultTimeS: seconds });
+      setResultPromptRace(null);
+    } catch (err) {
+      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+    }
   }
 
   function handleDelete(race: RaceEvent) {
@@ -943,6 +950,51 @@ export default function RacesScreen() {
           )}
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <Modal
+        visible={resultPromptRace != null}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setResultPromptRace(null)}
+      >
+        <View style={styles.promptOverlay}>
+          <View style={styles.promptCard}>
+            <Text style={styles.promptTitle}>Record result</Text>
+            <Text style={styles.promptSubtitle}>
+              Finish time for {resultPromptRace?.name} (h:mm:ss)
+            </Text>
+            <TextInput
+              style={styles.promptInput}
+              value={resultTimeText}
+              onChangeText={setResultTimeText}
+              placeholder="1:45:30"
+              placeholderTextColor={Colors.textMuted}
+              keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'default'}
+              autoFocus
+              accessibilityLabel="Finish time"
+            />
+            <View style={styles.promptActions}>
+              <TouchableOpacity
+                style={styles.promptCancelBtn}
+                onPress={() => setResultPromptRace(null)}
+                accessibilityRole="button"
+                accessibilityLabel="Cancel"
+              >
+                <Text style={styles.promptCancelText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.promptSaveBtn}
+                onPress={submitResultPrompt}
+                disabled={recordResult.isPending}
+                accessibilityRole="button"
+                accessibilityLabel="Save finish time"
+              >
+                <Text style={styles.promptSaveText}>{recordResult.isPending ? 'Saving…' : 'Save'}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -1260,4 +1312,50 @@ const styles = StyleSheet.create({
   },
   linkBadgeText: { color: Colors.textMuted, fontSize: 11, fontWeight: '700' },
   linkBadgeTextActive: { color: Colors.teal },
+  promptOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 28,
+  },
+  promptCard: {
+    width: '100%',
+    backgroundColor: Colors.bgCard,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    padding: 20,
+  },
+  promptTitle: { fontSize: 17, fontWeight: '800', color: Colors.textPrimary, marginBottom: 4 },
+  promptSubtitle: { fontSize: 13, color: Colors.textMuted, marginBottom: 14 },
+  promptInput: {
+    backgroundColor: Colors.bg,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    color: Colors.textPrimary,
+    fontSize: 15,
+    marginBottom: 16,
+  },
+  promptActions: { flexDirection: 'row', gap: 10 },
+  promptCancelBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    alignItems: 'center',
+  },
+  promptCancelText: { color: Colors.textSecondary, fontWeight: '700', fontSize: 14 },
+  promptSaveBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 10,
+    backgroundColor: Colors.teal,
+    alignItems: 'center',
+  },
+  promptSaveText: { color: '#000', fontWeight: '800', fontSize: 14 },
 });

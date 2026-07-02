@@ -59,7 +59,10 @@ export default function EnduranceWorkoutScreen() {
   const [distance, setDistance] = useState('');
   const [distanceUnit, setDistanceUnit] = useState<'meters' | 'yards' | 'km' | 'miles'>('meters');
   const [syncing, setSyncing] = useState(false);
-  const lastAutoCueMs = useRef(0);
+  // Initialized to "now", not 0 — starting at 0 made `nowMs - lastAutoCueMs`
+  // already exceed the 10-minute interval on the very first tick, firing the
+  // first auto cue ~1 second after the screen mounts instead of after 10 min.
+  const lastAutoCueMs = useRef(Date.now());
   const speakingRef = useRef(false);
 
   useEffect(() => {

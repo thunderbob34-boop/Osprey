@@ -28,7 +28,7 @@ export function useChallenges() {
 
   const friends = useQuery({
     queryKey: friendsKey,
-    queryFn: () => withCache(friendsKey, () => fetchMyFriends(userId!)),
+    queryFn: () => withCache(friendsKey, () => fetchMyFriends()),
     enabled: Boolean(userId),
   });
 
