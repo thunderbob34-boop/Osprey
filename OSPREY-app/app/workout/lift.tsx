@@ -23,6 +23,7 @@ import { ozzieSpeak } from '@/services/ozzie-audio';
 import { startVoiceRecording, stopVoiceRecordingAndParse, cancelVoiceRecording } from '@/services/voice-log';
 import { generateWarmup, type WarmupDrill } from '@/services/warmup';
 import type { LiftExercise } from '@/types/workout';
+import AskOzzieButton from '@/components/AskOzzieButton';
 
 export default function LiftWorkoutScreen() {
   const router = useRouter();
@@ -371,6 +372,7 @@ export default function LiftWorkoutScreen() {
       </ScrollView>
 
       <View style={styles.footer}>
+        <AskOzzieButton getContext={() => ({ sessionType: 'lift', elapsedS: elapsed })} />
         <TouchableOpacity style={styles.finishBtn} onPress={handleFinish} disabled={saving}>
           {saving ? (
             <ActivityIndicator color="#000" />
@@ -462,7 +464,7 @@ const styles = StyleSheet.create({
   logBtnText: { fontSize: 12, fontWeight: '800', color: '#000' },
   addSetBtn: { marginTop: 4, alignSelf: 'flex-start' },
   addSetText: { fontSize: 12, color: Colors.teal, fontWeight: '700' },
-  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Colors.border },
+  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Colors.border, gap: 10 },
   finishBtn: {
     backgroundColor: Colors.teal,
     borderRadius: 14,

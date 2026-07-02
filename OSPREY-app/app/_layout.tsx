@@ -9,6 +9,7 @@ import { reconcileSupplementReminders } from '@/services/supplements';
 import { syncCalendarBlocks } from '@/services/calendar-blocking';
 import { fetchDefaultLiftExercises } from '@/services/workouts';
 import { ozziePrewarm } from '@/services/ozzie-audio';
+import { syncIfConnected } from '@/services/healthkit';
 import { Colors } from '@/constants/colors';
 import { AppLoadingScreen } from '@/components/AppLoadingScreen';
 
@@ -38,6 +39,7 @@ export default function RootLayout() {
       // Warm the offline cache for the exercise library so lift logging works
       // without a signal even if the user hasn't opened the workout screen yet.
       fetchDefaultLiftExercises().catch(() => undefined);
+      syncIfConnected(userId).catch(() => undefined);
     }
   }, [userId]);
 

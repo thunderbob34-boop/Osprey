@@ -25,6 +25,7 @@ export async function completeOnboarding(userId: string, draft: OnboardingDraft)
       user_id: userId,
       notification_enabled: true,
       audio_cues_enabled: true,
+      health_connected: draft.healthConnected,
     },
     { onConflict: 'user_id' },
   );

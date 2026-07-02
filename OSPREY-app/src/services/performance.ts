@@ -202,6 +202,32 @@ export async function fetchPerformanceData(
   return { dailyLoads, bestRunMiles, bestRunTimeS };
 }
 
+/**
+ * Persists today's ATL/CTL/TSB into `load_scores`. The Stats/Home screens
+ * already compute this client-side for charting (computeAtlCtlTsb) but
+ * nothing ever wrote it back — `load_scores` is read by the daily brief
+ * edge function and `v_daily_summary`'s "load" label, both of which show
+ * blank/null for every user until this runs at least once.
+ */
+export async function upsertTodayLoadScore(
+  userId: string,
+  latest: { atl: number; ctl: number; tsb: number },
+  weeklyTss: number,
+): Promise<void> {
+  const today = new Date().toISOString().slice(0, 10);
+  await supabase.from('load_scores').upsert(
+    {
+      user_id: userId,
+      score_date: today,
+      atl: latest.atl,
+      ctl: latest.ctl,
+      tsb: latest.tsb,
+      weekly_tss: Math.round(weeklyTss * 10) / 10,
+    },
+    { onConflict: 'user_id,score_date' },
+  );
+}
+
 // ── Training readiness label ──────────────────────────────────────────────────
 
 import { Colors } from '@/constants/colors';

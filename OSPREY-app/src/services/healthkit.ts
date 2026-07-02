@@ -27,6 +27,23 @@ export function isHealthKitSupported(): boolean {
   return Platform.OS === 'ios';
 }
 
+/** Reads the persisted "did this user connect Apple Health" flag. */
+export async function getHealthConnectedState(userId: string): Promise<boolean> {
+  const { data } = await supabase
+    .from('user_preferences')
+    .select('health_connected')
+    .eq('user_id', userId)
+    .maybeSingle();
+  return data?.health_connected ?? false;
+}
+
+/** Persists the "did this user connect Apple Health" flag so Settings doesn't forget it on relaunch. */
+export async function setHealthConnectedState(userId: string, connected: boolean): Promise<void> {
+  await supabase
+    .from('user_preferences')
+    .upsert({ user_id: userId, health_connected: connected }, { onConflict: 'user_id' });
+}
+
 export async function requestHealthKitAuthorization(): Promise<boolean> {
   if (!isHealthKitSupported()) return false;
 
@@ -116,6 +133,24 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
   );
 
   return !error;
+}
+
+/**
+ * Called once on app open. `initialized` is a module-level flag that resets
+ * every app launch (HealthKit has to be re-init'd each cold start even if
+ * the user authorized it in a previous session), so this re-requests
+ * authorization only for users who already opted in, then syncs today's
+ * recovery score — the daily source of the Life Load feature's recovery input.
+ */
+export async function syncIfConnected(userId: string): Promise<void> {
+  if (!isHealthKitSupported()) return;
+  const connected = await getHealthConnectedState(userId);
+  if (!connected) return;
+
+  const authorized = await requestHealthKitAuthorization();
+  if (!authorized) return;
+
+  await syncRecoveryFromHealthKit(userId);
 }
 
 const ACTIVITY_BY_SESSION_TYPE: Record<string, HealthActivity> = {

@@ -21,6 +21,8 @@ import {
   isHealthKitSupported,
   requestHealthKitAuthorization,
   syncRecoveryFromHealthKit,
+  getHealthConnectedState,
+  setHealthConnectedState,
 } from '@/services/healthkit';
 import {
   cancelDailyNudge,
@@ -66,6 +68,10 @@ export default function SettingsTab() {
 
   useEffect(() => {
     if (userId) isCalendarBlockingEnabled(userId).then(setCalBlockEnabled).catch(() => undefined);
+  }, [userId]);
+
+  useEffect(() => {
+    if (userId) getHealthConnectedState(userId).then(setHealthConnected).catch(() => undefined);
   }, [userId]);
 
   async function handleToggleCalendarBlocking() {
@@ -127,6 +133,7 @@ export default function SettingsTab() {
         return;
       }
       setHealthConnected(true);
+      await setHealthConnectedState(userId, true);
       const synced = await syncRecoveryFromHealthKit(userId);
       Alert.alert(
         'Apple Health',

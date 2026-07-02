@@ -15,6 +15,7 @@ import { Colors } from '@/constants/colors';
 import type { DailySummaryProps, TrainingReadiness } from '@/types/daily-summary';
 import MacroTargetCard from '@/components/MacroTargetCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
+import LifeLoadCard from '@/components/LifeLoadCard';
 
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
 
@@ -246,6 +247,9 @@ export default function DailySummaryScreen({
         {trainingReadiness ? (
           <ReadinessCard readiness={trainingReadiness} />
         ) : null}
+
+        {/* ── Life Load: recovery + training load + fueling, fused ── */}
+        <LifeLoadCard />
 
         {/* ── Nutrition Periodization ── */}
         <MacroTargetCard />

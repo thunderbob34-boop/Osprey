@@ -6,6 +6,7 @@ import {
   computeInjuryRisk,
   fetchPerformanceData,
   readinessFromTsb,
+  upsertTodayLoadScore,
   type PerformanceMetrics,
 } from '@/services/performance';
 import type { TrainingReadiness } from '@/types/daily-summary';
@@ -40,6 +41,11 @@ export function usePerformance() {
       const trainingReadiness = latest.ctl > 0
         ? readinessFromTsb(latest.tsb, latest.ctl)
         : null;
+
+      if (latest.ctl > 0 && userId) {
+        const weeklyTss = last7.reduce((s, d) => s + d.tss, 0);
+        upsertTodayLoadScore(userId, latest, weeklyTss).catch(() => undefined);
+      }
 
       return {
         atl: latest.atl,

@@ -14,6 +14,7 @@ import { useStats } from '@/hooks/useStats';
 import { usePerformance } from '@/hooks/usePerformance';
 import { useSubscription } from '@/hooks/useSubscription';
 import { formatRaceTimeSec } from '@/services/performance';
+import LifeLoadCard from '@/components/LifeLoadCard';
 
 const SESSION_ICON: Record<string, string> = {
   run:   '🏃',
@@ -174,6 +175,8 @@ export default function StatsTab() {
                       <Text style={styles.riskText}>{perf.injuryRisk.message}</Text>
                     </View>
                   ) : null}
+
+                  <LifeLoadCard />
 
                   <Text style={styles.sectionLabel}>FITNESS & FORM</Text>
                   <View style={styles.fitnessCard}>

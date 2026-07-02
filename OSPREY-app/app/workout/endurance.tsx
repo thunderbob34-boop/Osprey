@@ -17,6 +17,7 @@ import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
 import { formatDuration } from '@/store/workoutStore';
 import { useSubscription } from '@/hooks/useSubscription';
 import { isHealthKitSupported, requestHealthKitAuthorization } from '@/services/healthkit';
+import AskOzzieButton from '@/components/AskOzzieButton';
 
 const SESSION_META: Record<EnduranceType, { icon: string; label: string; color: string; borderColor: string }> = {
   swim: { icon: '🏊', label: 'SWIM',  color: Colors.teal,  borderColor: Colors.borderTeal },
@@ -170,9 +171,14 @@ export default function EnduranceWorkoutScreen() {
           <Text style={styles.timerSub}>elapsed</Text>
         </View>
 
-        <TouchableOpacity style={styles.ozzieBtn} onPress={handleManualCue}>
-          <Text style={styles.ozzieBtnText}>🦅 Ozzie Cue</Text>
-        </TouchableOpacity>
+        <View style={styles.ozzieRow}>
+          <TouchableOpacity style={[styles.ozzieBtn, { flex: 1 }]} onPress={handleManualCue}>
+            <Text style={styles.ozzieBtnText}>🦅 Ozzie Cue</Text>
+          </TouchableOpacity>
+          <View style={{ flex: 1 }}>
+            <AskOzzieButton getContext={() => ({ sessionType: type, elapsedS: elapsed })} />
+          </View>
+        </View>
 
         <View style={styles.distanceCard}>
           <Text style={styles.distanceLabel}>Distance</Text>
@@ -243,6 +249,7 @@ const styles = StyleSheet.create({
   timerBlock: { alignItems: 'center', gap: 6, marginVertical: 20 },
   timerValue: { fontSize: 72, fontWeight: '800', color: Colors.textPrimary, letterSpacing: -2 },
   timerSub: { fontSize: 12, color: Colors.textMuted, fontWeight: '600', letterSpacing: 0.5 },
+  ozzieRow: { flexDirection: 'row', gap: 10 },
   ozzieBtn: {
     backgroundColor: Colors.surfaceTeal,
     borderWidth: 1,

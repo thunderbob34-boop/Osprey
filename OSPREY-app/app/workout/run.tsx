@@ -29,6 +29,7 @@ import {
   type CoachingState,
 } from '@/services/coaching-engine';
 import { useSubscription } from '@/hooks/useSubscription';
+import AskOzzieButton from '@/components/AskOzzieButton';
 
 export default function RunWorkoutScreen() {
   const router = useRouter();
@@ -231,9 +232,22 @@ export default function RunWorkoutScreen() {
       ) : null}
 
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.ozzieBtn} onPress={handleOzzieCue}>
-          <Text style={styles.ozzieBtnText}>🦅 Ozzie Cue</Text>
-        </TouchableOpacity>
+        <View style={styles.ozzieRow}>
+          <TouchableOpacity style={[styles.ozzieBtn, { flex: 1 }]} onPress={handleOzzieCue}>
+            <Text style={styles.ozzieBtnText}>🦅 Ozzie Cue</Text>
+          </TouchableOpacity>
+          <View style={{ flex: 1 }}>
+            <AskOzzieButton
+              getContext={() => ({
+                sessionType: 'run',
+                elapsedS: elapsed,
+                distanceKm: distanceMeters / 1000,
+                paceMinPerMi: miles > 0 ? elapsed / 60 / miles : null,
+                avgHeartRate: heartRate,
+              })}
+            />
+          </View>
+        </View>
 
         <View style={styles.controlRow}>
           {status === 'paused' ? (
@@ -316,6 +330,7 @@ const styles = StyleSheet.create({
   },
   pausedText: { fontSize: 12, color: Colors.textSecondary, lineHeight: 18 },
   actions: { padding: 16, gap: 12 },
+  ozzieRow: { flexDirection: 'row', gap: 10 },
   ozzieBtn: {
     backgroundColor: Colors.surfaceTeal,
     borderWidth: 1,

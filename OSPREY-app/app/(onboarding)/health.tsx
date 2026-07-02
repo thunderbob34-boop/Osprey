@@ -46,8 +46,10 @@ export default function HealthScreen() {
 
   async function handleConnectHealth() {
     if (!isHealthKitSupported()) {
-      // Simulator or non-Apple device — mark intent, skip real auth
-      setHealthConnected(true);
+      // Simulator or non-Apple device — nothing to actually connect. Keep the
+      // flag honest (false) rather than claiming a connection that doesn't
+      // exist; "Skip for now" is the non-blocking path for this case.
+      Alert.alert('Apple Health', 'Not available on this device. You can connect later in Settings on a physical iPhone.');
       return;
     }
     try {
@@ -56,9 +58,9 @@ export default function HealthScreen() {
       if (!authorized) {
         Alert.alert('Apple Health', 'Permission not granted. You can connect later in Settings.');
       }
-    } catch {
-      // Entitlement missing in Expo Go — silently mark intent so setup can complete
-      setHealthConnected(true);
+    } catch (err) {
+      setHealthConnected(false);
+      Alert.alert('Apple Health', err instanceof Error ? err.message : 'Could not connect. You can try again later in Settings.');
     }
   }
 

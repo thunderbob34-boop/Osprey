@@ -21,7 +21,7 @@ export async function startVoiceRecording(): Promise<boolean> {
   return true;
 }
 
-export async function stopVoiceRecordingAndParse(): Promise<VoiceLogResult> {
+async function stopVoiceRecordingAndReadBase64(): Promise<string> {
   if (!recording) throw new Error('No active recording');
 
   await recording.stopAndUnloadAsync();
@@ -32,7 +32,11 @@ export async function stopVoiceRecordingAndParse(): Promise<VoiceLogResult> {
 
   if (!uri) throw new Error('Recording produced no file');
 
-  const audioBase64 = await FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 });
+  return FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 });
+}
+
+export async function stopVoiceRecordingAndParse(): Promise<VoiceLogResult> {
+  const audioBase64 = await stopVoiceRecordingAndReadBase64();
 
   const { data, error } = await supabase.functions.invoke<VoiceLogResult>('ozzie-voice-log', {
     method: 'POST',
@@ -40,6 +44,32 @@ export async function stopVoiceRecordingAndParse(): Promise<VoiceLogResult> {
   });
 
   if (error || !data) throw error ?? new Error('Failed to parse voice log');
+  return data;
+}
+
+export interface LiveCoachContext {
+  sessionType: string;
+  elapsedS: number;
+  distanceKm?: number | null;
+  paceMinPerMi?: number | null;
+  avgHeartRate?: number | null;
+}
+
+export interface LiveCoachResult {
+  transcript: string;
+  reply: string;
+}
+
+/** Records a spoken question mid-workout and gets back Ozzie's spoken answer, grounded in live session context. */
+export async function stopVoiceRecordingAndAsk(context: LiveCoachContext): Promise<LiveCoachResult> {
+  const audioBase64 = await stopVoiceRecordingAndReadBase64();
+
+  const { data, error } = await supabase.functions.invoke<LiveCoachResult>('ozzie-live-coach', {
+    method: 'POST',
+    body: { audioBase64, context },
+  });
+
+  if (error || !data) throw error ?? new Error('Failed to reach Ozzie');
   return data;
 }
 
