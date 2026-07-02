@@ -115,7 +115,8 @@ AS $$
   JOIN users u        ON u.id = s.user_id
   JOIN workout_logs wl ON wl.id = s.workout_id
   LEFT JOIN kudos k   ON k.share_id = s.id
-  WHERE s.user_id IN (SELECT id FROM visible_users)
+  WHERE p_user_id = auth.uid()
+    AND s.user_id IN (SELECT id FROM visible_users)
     AND s.deleted_at IS NULL
   GROUP BY s.id, s.workout_id, s.user_id, u.display_name, s.caption,
            wl.session_type, wl.total_duration_s, wl.total_distance_km, s.created_at

@@ -18,18 +18,23 @@ import { supabase } from '@/services/supabase';
 
 // Supabase's password-reset email links to redirectTo (osprey://reset-password)
 // with either `?code=...` (PKCE) or a `#access_token=...&refresh_token=...`
-// hash fragment (implicit flow), depending on project config. Expo Router's
+// hash fragment (implicit flow — the default when no flowType is configured,
+// which is the case here), depending on project config. Expo Router's
 // useLocalSearchParams only sees query params, not hash fragments, so this
 // screen parses the raw deep-link URL itself to catch either shape.
+// Must split on '#' BEFORE '?': a hash-only URL like
+// "osprey://reset-password#access_token=...&refresh_token=..." has no '?'
+// at all, so splitting on '?' first throws the token params away entirely.
 function parseAuthParams(url: string): { code?: string; accessToken?: string; refreshToken?: string } {
-  const [, rest = ''] = url.split('?');
-  const [queryPart, hashPart] = rest.split('#');
-  const params = new URLSearchParams(hashPart ?? queryPart ?? '');
-  // If there was no hash, queryPart already parsed above; if there WAS a
-  // hash, also merge query-string params that preceded it.
-  if (hashPart) {
-    new URLSearchParams(queryPart ?? '').forEach((v, k) => params.set(k, v));
-  }
+  const hashIndex = url.indexOf('#');
+  const hashPart = hashIndex >= 0 ? url.slice(hashIndex + 1) : '';
+  const beforeHash = hashIndex >= 0 ? url.slice(0, hashIndex) : url;
+  const queryIndex = beforeHash.indexOf('?');
+  const queryPart = queryIndex >= 0 ? beforeHash.slice(queryIndex + 1) : '';
+
+  const params = new URLSearchParams(queryPart);
+  new URLSearchParams(hashPart).forEach((v, k) => params.set(k, v));
+
   return {
     code: params.get('code') ?? undefined,
     accessToken: params.get('access_token') ?? undefined,
@@ -47,29 +52,39 @@ export default function ResetPasswordScreen() {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const url = await ExpoLinking.getInitialURL();
-      if (!url) {
-        setStatus('invalid');
-        return;
-      }
+    let handled = false;
+
+    async function handleUrl(url: string | null) {
+      if (!url || handled) return;
       const { code, accessToken, refreshToken } = parseAuthParams(url);
+      if (!code && !(accessToken && refreshToken)) return; // not a recovery link — keep waiting
+      handled = true;
       try {
         if (code) {
           const { error } = await supabase.auth.exchangeCodeForSession(code);
           if (error) throw error;
-        } else if (accessToken && refreshToken) {
-          const { error } = await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
-          if (error) throw error;
         } else {
-          setStatus('invalid');
-          return;
+          const { error } = await supabase.auth.setSession({ access_token: accessToken!, refresh_token: refreshToken! });
+          if (error) throw error;
         }
         setStatus('ready');
       } catch {
         setStatus('invalid');
       }
-    })();
+    }
+
+    // Cold start: the app was launched by tapping the reset link.
+    ExpoLinking.getInitialURL().then((url) => {
+      if (url) {
+        handleUrl(url);
+      } else if (!handled) {
+        setStatus('invalid');
+      }
+    });
+
+    // Warm start: the app was already running when the link was tapped.
+    const subscription = ExpoLinking.addEventListener('url', (event) => handleUrl(event.url));
+    return () => subscription.remove();
   }, []);
 
   async function handleSetPassword() {
