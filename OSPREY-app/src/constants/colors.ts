@@ -28,7 +28,10 @@ export const Colors = {
   // Text
   textPrimary:   '#ffffff',
   textSecondary: 'rgba(255,255,255,0.55)',
-  textMuted:     'rgba(255,255,255,0.3)',
+  // 0.3 alpha on #060912 is ~2.3:1 contrast, well under WCAG AA's 4.5:1 for
+  // body text; textMuted is used for field labels, hints, and placeholders
+  // throughout the app, not just decorative chrome. 0.48 lands at ~5:1.
+  textMuted:     'rgba(255,255,255,0.48)',
 
   // Status
   green:   '#4cde80',

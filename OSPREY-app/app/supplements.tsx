@@ -110,15 +110,24 @@ export default function SupplementsScreen() {
     }
   }
 
-  async function handleDelete(reminder: SupplementReminder) {
+  function handleDelete(reminder: SupplementReminder) {
     if (!userId) return;
-    try {
-      await deleteSupplementReminder(reminder.id);
-      setReminders((prev) => prev.filter((r) => r.id !== reminder.id));
-      await reconcileSupplementReminders(userId);
-    } catch (err) {
-      Alert.alert('Reminders', err instanceof Error ? err.message : 'Could not delete.');
-    }
+    Alert.alert('Remove reminder?', `Remove the reminder for ${reminder.name}?`, [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Remove',
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await deleteSupplementReminder(reminder.id);
+            setReminders((prev) => prev.filter((r) => r.id !== reminder.id));
+            await reconcileSupplementReminders(userId);
+          } catch (err) {
+            Alert.alert('Reminders', err instanceof Error ? err.message : 'Could not delete.');
+          }
+        },
+      },
+    ]);
   }
 
   return (

@@ -24,6 +24,8 @@ interface AuthState {
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
+  resetPasswordForEmail: (email: string) => Promise<{ error: string | null }>;
+  updatePassword: (newPassword: string) => Promise<{ error: string | null }>;
 }
 
 function fallbackProfile(user: User): UserProfile {
@@ -148,8 +150,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       if (!created) {
         set({ loading: false });
         return {
-          error:
-            'Account created but profile could not be saved. Run 002_fix_users_rls.sql in Supabase.',
+          error: 'Account created but your profile could not be saved. Please try signing in again.',
         };
       }
       set({ profile: created, profileReady: true, profileError: null });
@@ -179,5 +180,21 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       profileReady: true,
       profileError: null,
     });
+  },
+
+  resetPasswordForEmail: async (email) => {
+    set({ loading: true });
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: 'osprey://reset-password',
+    });
+    set({ loading: false });
+    return { error: error?.message ?? null };
+  },
+
+  updatePassword: async (newPassword) => {
+    set({ loading: true });
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    set({ loading: false });
+    return { error: error?.message ?? null };
   },
 }));

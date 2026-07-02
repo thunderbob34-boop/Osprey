@@ -13,7 +13,7 @@ import {
 import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
 
-type Mode = 'signin' | 'signup';
+type Mode = 'signin' | 'signup' | 'reset';
 
 export default function SignInScreen() {
   const [mode, setMode] = useState<Mode>('signin');
@@ -21,11 +21,24 @@ export default function SignInScreen() {
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
+  const [resetSent, setResetSent] = useState(false);
 
-  const { signIn, signUp, loading } = useAuthStore();
+  const { signIn, signUp, loading, resetPasswordForEmail } = useAuthStore();
 
   async function handleSubmit() {
     setError('');
+
+    if (mode === 'reset') {
+      if (!email) {
+        setError('Enter your email to reset your password.');
+        return;
+      }
+      const { error } = await resetPasswordForEmail(email);
+      if (error) setError(error);
+      else setResetSent(true);
+      return;
+    }
+
     if (!email || !password) {
       setError('Email and password are required.');
       return;
@@ -58,64 +71,100 @@ export default function SignInScreen() {
 
         {/* Form */}
         <View style={styles.form}>
-          {mode === 'signup' && (
-            <TextInput
-              style={styles.input}
-              placeholder="Your name"
-              placeholderTextColor={Colors.textMuted}
-              value={displayName}
-              onChangeText={setDisplayName}
-              autoCapitalize="words"
-            />
-          )}
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor={Colors.textMuted}
-            value={email}
-            onChangeText={setEmail}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            autoComplete="email"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor={Colors.textMuted}
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-          />
-
-          {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-          <TouchableOpacity
-            style={styles.submitBtn}
-            onPress={handleSubmit}
-            disabled={loading}
-          >
-            {loading ? (
-              <ActivityIndicator color="#000" />
-            ) : (
-              <Text style={styles.submitBtnText}>
-                {mode === 'signin' ? 'Sign In' : 'Create Account'}
+          {mode === 'reset' && resetSent ? (
+            <>
+              <Text style={styles.resetSentText}>
+                If an account exists for {email}, a password reset link is on its way. Check your inbox.
               </Text>
-            )}
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.switchMode}
+                onPress={() => {
+                  setMode('signin');
+                  setResetSent(false);
+                  setError('');
+                }}
+              >
+                <Text style={styles.switchModeText}>Back to sign in</Text>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <>
+              {mode === 'signup' && (
+                <TextInput
+                  style={styles.input}
+                  placeholder="Your name"
+                  placeholderTextColor={Colors.textMuted}
+                  value={displayName}
+                  onChangeText={setDisplayName}
+                  autoCapitalize="words"
+                />
+              )}
+              <TextInput
+                style={styles.input}
+                placeholder="Email"
+                placeholderTextColor={Colors.textMuted}
+                value={email}
+                onChangeText={setEmail}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                autoComplete="email"
+              />
+              {mode !== 'reset' && (
+                <TextInput
+                  style={styles.input}
+                  placeholder="Password"
+                  placeholderTextColor={Colors.textMuted}
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry
+                />
+              )}
 
-          <TouchableOpacity
-            style={styles.switchMode}
-            onPress={() => {
-              setMode(mode === 'signin' ? 'signup' : 'signin');
-              setError('');
-            }}
-          >
-            <Text style={styles.switchModeText}>
-              {mode === 'signin'
-                ? "Don't have an account? Sign up"
-                : 'Already have an account? Sign in'}
-            </Text>
-          </TouchableOpacity>
+              {mode === 'signin' && (
+                <TouchableOpacity
+                  onPress={() => {
+                    setMode('reset');
+                    setError('');
+                  }}
+                  style={styles.forgotPasswordLink}
+                >
+                  <Text style={styles.switchModeText}>Forgot password?</Text>
+                </TouchableOpacity>
+              )}
+
+              {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+              <TouchableOpacity
+                style={styles.submitBtn}
+                onPress={handleSubmit}
+                disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator color="#000" />
+                ) : (
+                  <Text style={styles.submitBtnText}>
+                    {mode === 'signin' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Send Reset Link'}
+                  </Text>
+                )}
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.switchMode}
+                onPress={() => {
+                  setMode(mode === 'signup' ? 'signin' : mode === 'reset' ? 'signin' : 'signup');
+                  setError('');
+                }}
+              >
+                <Text style={styles.switchModeText}>
+                  {mode === 'signup'
+                    ? 'Already have an account? Sign in'
+                    : mode === 'reset'
+                      ? 'Back to sign in'
+                      : "Don't have an account? Sign up"}
+                </Text>
+              </TouchableOpacity>
+            </>
+          )}
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -186,5 +235,16 @@ const styles = StyleSheet.create({
   switchModeText: {
     fontSize: 13,
     color: Colors.textMuted,
+  },
+  forgotPasswordLink: {
+    alignItems: 'flex-end',
+    paddingVertical: 2,
+  },
+  resetSentText: {
+    fontSize: 14,
+    color: Colors.textSecondary,
+    textAlign: 'center',
+    lineHeight: 20,
+    marginBottom: 8,
   },
 });

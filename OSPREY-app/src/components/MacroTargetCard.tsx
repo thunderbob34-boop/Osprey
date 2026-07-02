@@ -1,31 +1,44 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { Colors } from '@/constants/colors';
-
-const TRAINING = { protein: 240, carbs: 265, fat: 80, calories: 2740 };
-const LONG_DAY = { protein: 240, carbs: 340, fat: 80, calories: 3040 };
+import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 
 export default function MacroTargetCard() {
-  const isSunday = new Date().getDay() === 0;
-  const targets = isSunday ? LONG_DAY : TRAINING;
-  const borderColor = isSunday ? Colors.borderGold : Colors.borderTeal;
-  const surface = isSunday ? Colors.surfaceGold : Colors.surfaceTeal;
-  const accentColor = isSunday ? Colors.gold : Colors.teal;
-  const badgeLabel = isSunday ? 'Long Day — Carb Reload' : 'Training Day';
+  const { data, isLoading, error } = useNutritionCoaching();
+  const accentColor = Colors.teal;
+
+  if (isLoading) {
+    return (
+      <View style={[styles.card, { borderColor: Colors.borderTeal }]}>
+        <ActivityIndicator color={Colors.teal} />
+      </View>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <View style={[styles.card, { borderColor: Colors.border }]}>
+        <Text style={styles.cardLabel}>TODAY'S FUEL TARGETS</Text>
+        <Text style={styles.unavailable}>Couldn&apos;t load your targets. Pull to refresh.</Text>
+      </View>
+    );
+  }
+
+  const { target } = data;
 
   return (
-    <View style={[styles.card, { borderColor }]}>
+    <View style={[styles.card, { borderColor: Colors.borderTeal }]}>
       <View style={styles.headerRow}>
         <Text style={styles.cardLabel}>TODAY'S FUEL TARGETS</Text>
-        <View style={[styles.badge, { backgroundColor: surface }]}>
-          <Text style={[styles.badgeText, { color: accentColor }]}>{badgeLabel}</Text>
+        <View style={[styles.badge, { backgroundColor: Colors.surfaceTeal }]}>
+          <Text style={[styles.badgeText, { color: accentColor }]}>Personalized</Text>
         </View>
       </View>
       <View style={styles.macroGrid}>
-        <MacroBlock value={targets.protein} unit="g" label="Protein" accentColor={accentColor} />
-        <MacroBlock value={targets.carbs} unit="g" label="Carbs" accentColor={accentColor} />
-        <MacroBlock value={targets.fat} unit="g" label="Fat" accentColor={accentColor} />
-        <MacroBlock value={targets.calories} unit="kcal" label="Calories" accentColor={accentColor} />
+        <MacroBlock value={target.proteinG} unit="g" label="Protein" accentColor={accentColor} />
+        <MacroBlock value={target.carbsG} unit="g" label="Carbs" accentColor={accentColor} />
+        <MacroBlock value={target.fatG} unit="g" label="Fat" accentColor={accentColor} />
+        <MacroBlock value={target.calories} unit="kcal" label="Calories" accentColor={accentColor} />
       </View>
     </View>
   );
@@ -72,6 +85,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: Colors.textMuted,
     letterSpacing: 1,
+  },
+  unavailable: {
+    fontSize: 12,
+    color: Colors.textMuted,
+    marginTop: 8,
   },
   badge: {
     borderRadius: 6,

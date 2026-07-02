@@ -1,7 +1,10 @@
 /**
  * Ozzie Audio Service
  *
- * Handles all ElevenLabs TTS calls for Ozzie's voice.
+ * Handles all TTS calls for Ozzie's voice, via the `ozzie-tts` edge function
+ * (never calls ElevenLabs directly — EXPO_PUBLIC_* vars ship inside the JS
+ * bundle and are trivially extractable, so the ElevenLabs key must stay
+ * server-side).
  * Two profiles:
  *   - 'workout'  → Turbo v2.5, Speaker Boost ON  (mid-run cues over music)
  *   - 'ambient'  → Multilingual v2, Speaker Boost OFF (morning brief, debrief)
@@ -11,38 +14,13 @@
 
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import { supabase } from '@/services/supabase';
 
 // ─── Config ──────────────────────────────────────────────────────────────────
-
-const ELEVENLABS_API_KEY = process.env.EXPO_PUBLIC_ELEVENLABS_API_KEY ?? '';
-const OZZIE_VOICE_ID = process.env.EXPO_PUBLIC_OZZIE_VOICE_ID ?? 'REPLACE_AFTER_CASTING';
 
 const CACHE_DIR = `${FileSystem.cacheDirectory}ozzie-audio/`;
 
 type AudioProfile = 'workout' | 'ambient';
-
-const PROFILES: Record<AudioProfile, {
-  modelId: string;
-  stability: number;
-  similarityBoost: number;
-  style: number;
-  useSpeakerBoost: boolean;
-}> = {
-  workout: {
-    modelId: 'eleven_turbo_v2_5',
-    stability: 0.50,
-    similarityBoost: 0.80,
-    style: 0.25,
-    useSpeakerBoost: true,
-  },
-  ambient: {
-    modelId: 'eleven_multilingual_v2',
-    stability: 0.45,
-    similarityBoost: 0.80,
-    style: 0.30,
-    useSpeakerBoost: false,
-  },
-};
 
 // ─── Cache helpers ────────────────────────────────────────────────────────────
 
@@ -64,39 +42,19 @@ async function getCachedAudio(path: string): Promise<string | null> {
   return info.exists ? path : null;
 }
 
-// ─── ElevenLabs API call ──────────────────────────────────────────────────────
+// ─── TTS via edge function ────────────────────────────────────────────────────
+// Routed through `ozzie-tts` so the ElevenLabs key stays server-side.
 
-async function fetchTTS(text: string, profile: AudioProfile): Promise<Uint8Array> {
-  const config = PROFILES[profile];
+async function fetchTTS(text: string, profile: AudioProfile): Promise<string> {
+  const { data, error } = await supabase.functions.invoke<{ audioBase64: string }>('ozzie-tts', {
+    body: { text, profile },
+  });
 
-  const response = await fetch(
-    `https://api.elevenlabs.io/v1/text-to-speech/${OZZIE_VOICE_ID}`,
-    {
-      method: 'POST',
-      headers: {
-        'xi-api-key': ELEVENLABS_API_KEY,
-        'Content-Type': 'application/json',
-        'Accept': 'audio/mpeg',
-      },
-      body: JSON.stringify({
-        text,
-        model_id: config.modelId,
-        voice_settings: {
-          stability: config.stability,
-          similarity_boost: config.similarityBoost,
-          style: config.style,
-          use_speaker_boost: config.useSpeakerBoost,
-        },
-      }),
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(`ElevenLabs error: ${response.status} ${response.statusText}`);
+  if (error || !data?.audioBase64) {
+    throw error ?? new Error('ozzie-tts returned no audio');
   }
 
-  const buffer = await response.arrayBuffer();
-  return new Uint8Array(buffer);
+  return data.audioBase64;
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
@@ -111,11 +69,6 @@ let currentSound: Audio.Sound | null = null;
  * @param profile  'workout' (mid-run) or 'ambient' (daily brief, debrief)
  */
 export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient') {
-  if (!ELEVENLABS_API_KEY || !OZZIE_VOICE_ID || OZZIE_VOICE_ID === 'REPLACE_AFTER_CASTING') {
-    console.warn('[Ozzie] ElevenLabs not configured — skipping TTS');
-    return;
-  }
-
   try {
     await ensureCacheDir();
 
@@ -132,10 +85,10 @@ export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient'
 
     if (!audioPath) {
       // Fetch from ElevenLabs and cache
-      const audioData = await fetchTTS(text, profile);
+      const audioBase64 = await fetchTTS(text, profile);
       await FileSystem.writeAsStringAsync(
         cachePath,
-        Buffer.from(audioData).toString('base64'),
+        audioBase64,
         { encoding: FileSystem.EncodingType.Base64 }
       );
       audioPath = cachePath;
@@ -194,11 +147,11 @@ export async function ozziePrewarm() {
     const cached = await getCachedAudio(path);
     if (!cached) {
       try {
-        const audioData = await fetchTTS(cue.text, cue.profile);
+        const audioBase64 = await fetchTTS(cue.text, cue.profile);
         await ensureCacheDir();
         await FileSystem.writeAsStringAsync(
           path,
-          Buffer.from(audioData).toString('base64'),
+          audioBase64,
           { encoding: FileSystem.EncodingType.Base64 }
         );
       } catch {

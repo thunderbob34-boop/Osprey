@@ -22,28 +22,9 @@ CREATE TABLE challenges (
 
 CREATE INDEX idx_challenges_creator ON challenges(creator_user_id) WHERE deleted_at IS NULL;
 
-ALTER TABLE challenges ENABLE ROW LEVEL SECURITY;
-GRANT SELECT, INSERT, UPDATE ON challenges TO authenticated;
-GRANT ALL ON challenges TO service_role;
-
--- Members (and creator) can read; only creator can write.
-CREATE POLICY challenges_read ON challenges
-  FOR SELECT TO authenticated
-  USING (
-    creator_user_id = auth.uid()
-    OR id IN (SELECT challenge_id FROM challenge_members WHERE user_id = auth.uid())
-  );
-
-CREATE POLICY challenges_insert ON challenges
-  FOR INSERT TO authenticated
-  WITH CHECK (creator_user_id = auth.uid());
-
-CREATE POLICY challenges_update ON challenges
-  FOR UPDATE TO authenticated
-  USING (creator_user_id = auth.uid())
-  WITH CHECK (creator_user_id = auth.uid());
-
 -- ── challenge_members ─────────────────────────────────────────────────────────
+-- Declared before RLS policies below so is_challenge_member() and the
+-- challenges_read policy can reference it — table order matters here.
 
 CREATE TABLE challenge_members (
   id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -56,6 +37,49 @@ CREATE TABLE challenge_members (
 CREATE INDEX idx_challenge_members_challenge ON challenge_members(challenge_id);
 CREATE INDEX idx_challenge_members_user      ON challenge_members(user_id);
 
+-- ── RPC: is_challenge_member ──────────────────────────────────────────────────
+-- SECURITY DEFINER so it bypasses RLS on challenge_members when called from
+-- inside a challenge_members/challenges policy — a plain USING-clause subquery
+-- on challenge_members from within its own SELECT policy causes Postgres error
+-- 42P17 "infinite recursion detected in policy". Wrapping the membership check
+-- in a SECURITY DEFINER function breaks that recursion.
+
+CREATE OR REPLACE FUNCTION is_challenge_member(p_challenge_id UUID, p_user_id UUID)
+RETURNS BOOLEAN
+SECURITY DEFINER
+SET search_path = public
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM challenge_members
+    WHERE challenge_id = p_challenge_id AND user_id = p_user_id
+  );
+$$;
+
+GRANT EXECUTE ON FUNCTION is_challenge_member TO authenticated;
+
+ALTER TABLE challenges ENABLE ROW LEVEL SECURITY;
+GRANT SELECT, INSERT, UPDATE ON challenges TO authenticated;
+GRANT ALL ON challenges TO service_role;
+
+-- Members (and creator) can read; only creator can write.
+CREATE POLICY challenges_read ON challenges
+  FOR SELECT TO authenticated
+  USING (
+    creator_user_id = auth.uid()
+    OR is_challenge_member(id, auth.uid())
+  );
+
+CREATE POLICY challenges_insert ON challenges
+  FOR INSERT TO authenticated
+  WITH CHECK (creator_user_id = auth.uid());
+
+CREATE POLICY challenges_update ON challenges
+  FOR UPDATE TO authenticated
+  USING (creator_user_id = auth.uid())
+  WITH CHECK (creator_user_id = auth.uid());
+
 ALTER TABLE challenge_members ENABLE ROW LEVEL SECURITY;
 GRANT SELECT, INSERT, DELETE ON challenge_members TO authenticated;
 GRANT ALL ON challenge_members TO service_role;
@@ -65,9 +89,7 @@ CREATE POLICY challenge_members_read ON challenge_members
   FOR SELECT TO authenticated
   USING (
     user_id = auth.uid()
-    OR challenge_id IN (
-      SELECT challenge_id FROM challenge_members WHERE user_id = auth.uid()
-    )
+    OR is_challenge_member(challenge_id, auth.uid())
   );
 
 -- Creator can add any member; anyone can add themselves.

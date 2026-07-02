@@ -68,6 +68,7 @@ export default function RootLayout() {
         <Stack.Screen name="preferences" options={{ presentation: 'modal', headerShown: false }} />
         <Stack.Screen name="race-search" options={{ presentation: 'modal', headerShown: false }} />
         <Stack.Screen name="race-event" options={{ presentation: 'modal', headerShown: false }} />
+        <Stack.Screen name="reset-password" options={{ presentation: 'modal', headerShown: false }} />
       </Stack>
     </QueryClientProvider>
   );

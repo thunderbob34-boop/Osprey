@@ -292,7 +292,15 @@ export default function SettingsTab() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.signOutBtn} onPress={signOut}>
+        <TouchableOpacity
+          style={styles.signOutBtn}
+          onPress={() =>
+            Alert.alert('Sign out?', "You'll need to sign back in to see your data.", [
+              { text: 'Cancel', style: 'cancel' },
+              { text: 'Sign Out', style: 'destructive', onPress: signOut },
+            ])
+          }
+        >
           <Text style={styles.signOutText}>Sign Out</Text>
         </TouchableOpacity>
       </ScrollView>

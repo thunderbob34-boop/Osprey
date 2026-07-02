@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
@@ -15,17 +16,31 @@ import { useAuthStore } from '@/store/authStore';
 import { fetchWorkoutRecap } from '@/services/workouts';
 import { formatDuration } from '@/store/workoutStore';
 import { ozzieSpeak } from '@/services/ozzie-audio';
+import { shareWorkout } from '@/services/activity';
 
 export default function WorkoutRecapScreen() {
   const router = useRouter();
   const { workoutId } = useLocalSearchParams<{ workoutId: string }>();
   const userId = useAuthStore((s) => s.user?.id);
+  const [shareState, setShareState] = useState<'idle' | 'sharing' | 'shared'>('idle');
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['workout-recap', workoutId, userId],
     queryFn: () => fetchWorkoutRecap(userId!, workoutId!),
     enabled: Boolean(userId && workoutId),
   });
+
+  async function handleShare() {
+    if (!userId || !workoutId || shareState !== 'idle') return;
+    setShareState('sharing');
+    try {
+      await shareWorkout(userId, workoutId);
+      setShareState('shared');
+    } catch {
+      setShareState('idle');
+      Alert.alert('Could not share workout', 'Please try again.');
+    }
+  }
 
   useEffect(() => {
     if (data?.ozzieDebrief) {
@@ -138,7 +153,23 @@ export default function WorkoutRecapScreen() {
       </ScrollView>
 
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.homeBtn} onPress={() => router.replace('/(tabs)')}>
+        <TouchableOpacity
+          style={[styles.shareBtn, shareState === 'shared' && styles.shareBtnDone]}
+          onPress={handleShare}
+          disabled={shareState !== 'idle'}
+          accessibilityRole="button"
+          accessibilityLabel={shareState === 'shared' ? 'Shared with friends' : 'Share workout with friends'}
+        >
+          <Text style={styles.shareBtnText}>
+            {shareState === 'shared' ? '✓ Shared with friends' : shareState === 'sharing' ? 'Sharing…' : 'Share with friends'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.homeBtn}
+          onPress={() => router.replace('/(tabs)')}
+          accessibilityRole="button"
+          accessibilityLabel="Done, return to home"
+        >
           <Text style={styles.homeBtnText}>Done</Text>
         </TouchableOpacity>
       </View>
@@ -225,7 +256,18 @@ const styles = StyleSheet.create({
   },
   enduranceStatLabel: { fontSize: 14, color: Colors.textSecondary },
   enduranceStat: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Colors.border },
+  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Colors.border, gap: 10 },
+  shareBtn: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 14,
+    height: 52,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  shareBtnDone: { borderColor: Colors.teal },
+  shareBtnText: { fontSize: 15, fontWeight: '800', color: Colors.textPrimary },
   homeBtn: {
     backgroundColor: Colors.teal,
     borderRadius: 14,

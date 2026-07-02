@@ -65,11 +65,11 @@ async function fetchActivityFeedSimple(userId: string, limit: number): Promise<A
     .from('activity_shares')
     .select(
       `
-      id as share_id,
+      share_id:id,
       workout_id,
       user_id,
       caption,
-      created_at as share_created_at,
+      share_created_at:created_at,
       users!inner(display_name),
       workout_logs!inner(session_type, total_duration_s, total_distance_km)
     `,
@@ -80,11 +80,11 @@ async function fetchActivityFeedSimple(userId: string, limit: number): Promise<A
 
   if (error) throw error;
 
-  // Fetch kudos for all shares.
+  // Fetch kudos for the shares just fetched.
   const shareIds = (shares ?? []).map((s) => (s as any).share_id);
-  const { data: kudosData } = await supabase
-    .from('kudos')
-    .select('share_id, from_user');
+  const { data: kudosData } = shareIds.length
+    ? await supabase.from('kudos').select('share_id, from_user').in('share_id', shareIds)
+    : { data: [] };
 
   const kudosByShare = new Map<string, Set<string>>();
   for (const kudo of kudosData ?? []) {

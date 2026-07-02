@@ -59,7 +59,10 @@ export default function EnduranceWorkoutScreen() {
   const [distance, setDistance] = useState('');
   const [distanceUnit, setDistanceUnit] = useState<'meters' | 'yards' | 'km' | 'miles'>('meters');
   const [syncing, setSyncing] = useState(false);
-  const lastAutoCueMs = useRef(0);
+  // Seeded to the session start (not 0) so the first cue fires ~10 minutes
+  // in, not on the first tick — `Date.now() - 0` already exceeds the
+  // interval the instant `elapsed` ticks past zero.
+  const lastAutoCueMs = useRef(Date.now());
   const speakingRef = useRef(false);
 
   useEffect(() => {
@@ -100,9 +103,12 @@ export default function EnduranceWorkoutScreen() {
     try {
       const authorized = await requestHealthKitAuthorization();
       if (authorized) {
-        Alert.alert('Apple Health', 'Synced. Distance data from your HealthKit workout will be included.');
-        // In a full implementation, you'd fetch the distance from HealthKit here
-        // For now, just confirm the sync intent
+        // Reading a distance value back out of HealthKit isn't implemented yet —
+        // don't tell the user their data was synced when it wasn't.
+        Alert.alert(
+          'Apple Health',
+          'Health access granted. Automatic distance sync from HealthKit is coming soon — please enter your distance manually below for now.',
+        );
       } else {
         Alert.alert('Apple Health', 'Permission not granted. Enter distance manually.');
       }

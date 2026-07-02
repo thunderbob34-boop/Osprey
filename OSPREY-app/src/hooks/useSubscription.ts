@@ -13,6 +13,8 @@ export function useSubscription() {
       const result = await hasOspreyPlus();
       moduleCache = result;
       setIsPlus(result);
+    } catch (err) {
+      console.error('[useSubscription] check failed:', err);
     } finally {
       setIsLoading(false);
     }
@@ -26,7 +28,7 @@ export function useSubscription() {
 
   const refresh = useCallback(() => {
     moduleCache = null;
-    check();
+    check().catch(() => undefined);
   }, [check]);
 
   return { isPlus, isLoading, refresh };

@@ -63,10 +63,10 @@
 
 ## ElevenLabs
 
-- [ ] Listen to current Ozzie voice output (`EXPO_PUBLIC_OZZIE_VOICE_ID`) on a physical device
+- [ ] Listen to current Ozzie voice output (`OZZIE_VOICE_ID`) on a physical device
 - [ ] Confirm voice matches the casting brief (`Ozzie_ElevenLabs_Casting_Brief.md`) — warm, Kronk-spirited, not robotic
-- [ ] If voice needs adjustment: finish casting in ElevenLabs and update `EXPO_PUBLIC_OZZIE_VOICE_ID` in `.env.local`
-- [ ] Verify `ELEVENLABS_API_KEY` is set in Supabase edge function secrets (not just `.env.local`)
+- [ ] If voice needs adjustment: finish casting in ElevenLabs and update `OZZIE_VOICE_ID` via `supabase secrets set OZZIE_VOICE_ID=...`
+- [ ] Verify `ELEVENLABS_API_KEY` and `OZZIE_VOICE_ID` are set as Supabase edge function secrets (TTS is proxied through the `ozzie-tts` function — neither should ever be an `EXPO_PUBLIC_*` var, which would ship inside the client bundle)
 - [ ] Confirm ElevenLabs plan has sufficient monthly character quota for real-world usage
 - [ ] (Optional) Commission Ozzie custom voice clone for a fully original persona
 

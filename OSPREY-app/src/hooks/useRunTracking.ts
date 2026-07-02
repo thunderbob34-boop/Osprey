@@ -27,13 +27,20 @@ export function useRunTracking(enabled: boolean) {
   useEffect(() => {
     if (!enabled || status !== 'active') return;
 
+    // Each (re)start of tracking (e.g. resume after a pause) begins a fresh
+    // baseline — otherwise the first point after resume computes distance
+    // against wherever the user was when they paused, crediting any
+    // movement during the pause itself as run distance.
+    lastPointRef.current = null;
+
     let subscription: Location.LocationSubscription | null = null;
+    let cancelled = false;
 
     (async () => {
       const { status: permission } = await Location.requestForegroundPermissionsAsync();
-      if (permission !== 'granted') return;
+      if (permission !== 'granted' || cancelled) return;
 
-      subscription = await Location.watchPositionAsync(
+      const sub = await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.BestForNavigation,
           distanceInterval: 5,
@@ -64,9 +71,16 @@ export function useRunTracking(enabled: boolean) {
           addTrackPoint(point);
         },
       );
+
+      if (cancelled) {
+        sub.remove();
+        return;
+      }
+      subscription = sub;
     })();
 
     return () => {
+      cancelled = true;
       subscription?.remove();
     };
   }, [enabled, status, addDistance, addTrackPoint]);

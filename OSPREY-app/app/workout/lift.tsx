@@ -45,6 +45,7 @@ export default function LiftWorkoutScreen() {
 
   const [elapsed, setElapsed] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [saving, setSaving] = useState(false);
   const [recordingExercise, setRecordingExercise] = useState<number | null>(null);
   const [parsingVoice, setParsingVoice] = useState(false);
@@ -89,6 +90,7 @@ export default function LiftWorkoutScreen() {
         });
         setLiftExercises(initial);
       })
+      .catch(() => setLoadError(true))
       .finally(() => setLoading(false));
 
     return () => reset();
@@ -108,13 +110,20 @@ export default function LiftWorkoutScreen() {
     field: 'reps' | 'weightLbs',
     value: string,
   ) {
-    const numeric = Number(value.replace(/[^0-9.]/g, '')) || 0;
+    updateSetFields(exerciseIndex, setIndex, { [field]: Number(value.replace(/[^0-9.]/g, '')) || 0 });
+  }
+
+  function updateSetFields(
+    exerciseIndex: number,
+    setIndex: number,
+    fields: Partial<{ reps: number; weightLbs: number }>,
+  ) {
     const updated = liftExercises.map((exercise, ei) => {
       if (ei !== exerciseIndex) return exercise;
       return {
         ...exercise,
         sets: exercise.sets.map((set, si) =>
-          si === setIndex ? { ...set, [field]: numeric } : set,
+          si === setIndex ? { ...set, ...fields } : set,
         ),
       };
     });
@@ -161,8 +170,10 @@ export default function LiftWorkoutScreen() {
       const exercise = liftExercises[exerciseIndex];
       const nextSetIndex = exercise.sets.findIndex((s) => !s.completed);
       const targetIndex = nextSetIndex === -1 ? exercise.sets.length - 1 : nextSetIndex;
-      if (weightLbs != null) updateSet(exerciseIndex, targetIndex, 'weightLbs', String(weightLbs));
-      if (reps != null) updateSet(exerciseIndex, targetIndex, 'reps', String(reps));
+      const fields: Partial<{ reps: number; weightLbs: number }> = {};
+      if (weightLbs != null) fields.weightLbs = weightLbs;
+      if (reps != null) fields.reps = reps;
+      updateSetFields(exerciseIndex, targetIndex, fields);
     } catch (err) {
       Alert.alert('Voice log failed', err instanceof Error ? err.message : 'Try again.');
     } finally {
@@ -194,6 +205,24 @@ export default function LiftWorkoutScreen() {
     }
   }
 
+  function handleExit() {
+    if (status === 'idle') {
+      router.back();
+      return;
+    }
+    Alert.alert('Discard workout?', 'Your progress on this session will be lost.', [
+      { text: 'Keep Lifting', style: 'cancel' },
+      {
+        text: 'Discard',
+        style: 'destructive',
+        onPress: () => {
+          reset();
+          router.back();
+        },
+      },
+    ]);
+  }
+
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
@@ -202,9 +231,32 @@ export default function LiftWorkoutScreen() {
     );
   }
 
+  if (loadError) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.errorWrap}>
+          <Text style={styles.errorText}>Couldn&apos;t load your exercises. Check your connection and try again.</Text>
+          <TouchableOpacity style={styles.warmupStartBtn} onPress={() => router.back()}>
+            <Text style={styles.finishBtnText}>Back</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   if (warmingUp) {
     return (
       <SafeAreaView style={styles.container}>
+        <View style={styles.warmupCloseRow}>
+          <TouchableOpacity
+            onPress={handleExit}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            accessibilityRole="button"
+            accessibilityLabel="Close, exit without starting a workout"
+          >
+            <Text style={styles.closeBtnText}>✕</Text>
+          </TouchableOpacity>
+        </View>
         <ScrollView contentContainerStyle={styles.warmupWrap}>
           <Text style={styles.warmupTitle}>🔥 Warm Up First</Text>
           <Text style={styles.warmupSubtitle}>
@@ -239,6 +291,14 @@ export default function LiftWorkoutScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
+        <TouchableOpacity
+          onPress={handleExit}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          accessibilityRole="button"
+          accessibilityLabel="Discard workout and exit"
+        >
+          <Text style={styles.closeBtnText}>✕</Text>
+        </TouchableOpacity>
         <Text style={styles.headerLabel}>LIFT SESSION</Text>
         <Text style={styles.headerTime}>{formatDuration(elapsed)}</Text>
       </View>
@@ -335,6 +395,10 @@ const styles = StyleSheet.create({
   },
   headerLabel: { fontSize: 11, fontWeight: '700', color: Colors.gold, letterSpacing: 1 },
   headerTime: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary },
+  warmupCloseRow: { paddingHorizontal: 20, paddingTop: 12, alignItems: 'flex-end' },
+  closeBtnText: { fontSize: 20, color: Colors.textMuted, fontWeight: '700' },
+  errorWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24, gap: 16 },
+  errorText: { fontSize: 14, color: Colors.textSecondary, textAlign: 'center' },
   restBanner: {
     backgroundColor: Colors.surfaceTeal,
     paddingVertical: 10,

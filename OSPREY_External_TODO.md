@@ -38,10 +38,12 @@ Two **native modules** were added (`expo-calendar`, `expo-sqlite`) on top of the
 
 ## 4. Ozzie's voice (ElevenLabs) 🟡
 
-The audio service is fully built and the API key + voice ID are already set in `.env.local`. What remains is a human judgment call.
+TTS is proxied through the `ozzie-tts` edge function (as of the 2026-07-02 audit fix — it no longer calls ElevenLabs directly from the client, since `EXPO_PUBLIC_*` vars ship inside the JS bundle and are trivially extractable). Set the key and voice ID as edge function secrets, not client env vars:
+- `supabase secrets set ELEVENLABS_API_KEY=...`
+- `supabase secrets set OZZIE_VOICE_ID=...`
 
-- [ ] Listen to the current `EXPO_PUBLIC_OZZIE_VOICE_ID` output and confirm it matches the casting brief (`Ozzie_ElevenLabs_Casting_Brief.md`) — warm, Kronk-spirited, not robotic.
-- [ ] If not right, finish voice casting/tuning in ElevenLabs and update `EXPO_PUBLIC_OZZIE_VOICE_ID`.
+- [ ] Listen to the current `OZZIE_VOICE_ID` output and confirm it matches the casting brief (`Ozzie_ElevenLabs_Casting_Brief.md`) — warm, Kronk-spirited, not robotic.
+- [ ] If not right, finish voice casting/tuning in ElevenLabs and update the `OZZIE_VOICE_ID` secret.
 - [ ] Confirm the ElevenLabs plan has enough monthly character quota for real usage.
 
 ## 5. Monetization — RevenueCat 🟡

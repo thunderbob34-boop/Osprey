@@ -397,6 +397,60 @@ function RetroPanel({
   );
 }
 
+// ─── Result panel ─────────────────────────────────────────────────────────────
+// Alert.prompt is iOS-only and undefined on Android, so recording a finish
+// time used to silently no-op there. This is a cross-platform replacement.
+
+interface ResultPanelProps {
+  race: RaceEvent;
+  onClose: () => void;
+  onSave: (raceId: string, resultTimeS: number) => void;
+  isSaving: boolean;
+}
+
+function ResultPanel({ race, onClose, onSave, isSaving }: ResultPanelProps) {
+  const [text, setText] = useState('');
+  const [invalid, setInvalid] = useState(false);
+
+  function handleSave() {
+    const seconds = parseRaceTime(text);
+    if (seconds == null) {
+      setInvalid(true);
+      return;
+    }
+    setInvalid(false);
+    onSave(race.id, seconds);
+  }
+
+  return (
+    <View style={styles.retroPanel}>
+      <View style={styles.logisticsHeader}>
+        <Text style={styles.retroTitle}>Record Result</Text>
+        <TouchableOpacity onPress={onClose} hitSlop={10}>
+          <Text style={styles.logisticsClose}>✕</Text>
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.fieldLabel}>FINISH TIME FOR {race.name.toUpperCase()}</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="h:mm:ss or mm:ss"
+        placeholderTextColor={Colors.textMuted}
+        value={text}
+        onChangeText={(t) => {
+          setText(t);
+          setInvalid(false);
+        }}
+        keyboardType="numbers-and-punctuation"
+        autoFocus
+      />
+      {invalid ? <Text style={styles.errorText}>Use h:mm:ss or mm:ss, e.g. 1:45:00.</Text> : null}
+      <TouchableOpacity style={styles.saveBtn} onPress={handleSave} disabled={isSaving}>
+        {isSaving ? <ActivityIndicator color="#000" /> : <Text style={styles.saveBtnText}>Save Result</Text>}
+      </TouchableOpacity>
+    </View>
+  );
+}
+
 // ─── Partners panel ──────────────────────────────────────────────────────────
 // Self-contained: owns the useRacePartners query so it only runs when open.
 
@@ -537,6 +591,7 @@ export default function RacesScreen() {
   const [logisticsRaceId, setLogisticsRaceId] = useState<string | null>(null);
   const [retroRaceId, setRetroRaceId] = useState<string | null>(null);
   const [partnersRaceId, setPartnersRaceId] = useState<string | null>(null);
+  const [resultRaceId, setResultRaceId] = useState<string | null>(null);
 
   function resetForm() {
     setName('');
@@ -592,22 +647,16 @@ export default function RacesScreen() {
   }
 
   function handleRecordResult(race: RaceEvent) {
-    Alert.prompt?.(
-      'Record result',
-      `Finish time for ${race.name} (h:mm:ss)`,
-      async (text?: string) => {
-        const seconds = text ? parseRaceTime(text) : null;
-        if (seconds == null) {
-          Alert.alert('Check the time', 'Use h:mm:ss or mm:ss.');
-          return;
-        }
-        try {
-          await recordResult.mutateAsync({ raceId: race.id, resultTimeS: seconds });
-        } catch (err) {
-          Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
-        }
-      },
-    );
+    setResultRaceId((id) => (id === race.id ? null : race.id));
+  }
+
+  async function handleSaveResult(raceId: string, resultTimeS: number) {
+    try {
+      await recordResult.mutateAsync({ raceId, resultTimeS });
+      setResultRaceId(null);
+    } catch (err) {
+      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+    }
   }
 
   function handleDelete(race: RaceEvent) {
@@ -922,6 +971,15 @@ export default function RacesScreen() {
                           </View>
                         </View>
                       </View>
+
+                      {resultRaceId === race.id ? (
+                        <ResultPanel
+                          race={race}
+                          onClose={() => setResultRaceId(null)}
+                          onSave={handleSaveResult}
+                          isSaving={recordResult.isPending}
+                        />
+                      ) : null}
 
                       {retroRaceId === race.id ? (
                         <RetroPanel

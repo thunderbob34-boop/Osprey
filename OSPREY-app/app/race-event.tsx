@@ -16,6 +16,24 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
+import { createRaceEvent } from '@/services/races';
+import { useAuthStore } from '@/store/authStore';
+
+const KM_PER_MILE = 1.609344;
+
+// Best-effort parse of RunSignUp's free-text distance labels ("5K", "Half
+// Marathon", "13.1 Miles", …) into km, so "Add to My Races" can prefill a
+// useful distance instead of always leaving it blank.
+function parseDistanceLabelToKm(label: string): number | null {
+  const s = label.trim().toLowerCase();
+  if (/\bmarathon\b/.test(s) && !/\bhalf\b/.test(s)) return 42.195;
+  if (/\bhalf\b/.test(s)) return 21.0975;
+  const kmMatch = s.match(/([\d.]+)\s*k(m)?\b/);
+  if (kmMatch) return Number(kmMatch[1]);
+  const miMatch = s.match(/([\d.]+)\s*mi(les)?\b/);
+  if (miMatch) return Number(miMatch[1]) * KM_PER_MILE;
+  return null;
+}
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return '';
@@ -48,11 +66,14 @@ export default function RaceEventScreen() {
   const { raceId } = useLocalSearchParams<{ raceId: string }>();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const userId = useAuthStore((s) => s.user?.id);
   const cachedResult: RaceSearchResult | null = raceId ? getCachedRace(raceId) : null;
 
   const [generating, setGenerating] = useState(false);
   const [distances, setDistances] = useState<string[]>(cachedResult?.distances ?? []);
   const [loadingDistances, setLoadingDistances] = useState(true);
+  const [adding, setAdding] = useState(false);
+  const [added, setAdded] = useState(false);
 
   const result = cachedResult ? { ...cachedResult, distances } : null;
 
@@ -169,8 +190,31 @@ export default function RaceEventScreen() {
     }
   }
 
-  function handleAddToMyRaces() {
-    Alert.alert('Coming soon', 'Saving discovered races is coming in a future update.');
+  async function handleAddToMyRaces() {
+    if (!userId || !result || adding || added) return;
+    const parsedDate = parseRaceDate(result.date);
+    if (!parsedDate) {
+      Alert.alert('Missing date', "This race doesn't have a usable date and can't be added yet.");
+      return;
+    }
+    setAdding(true);
+    try {
+      await createRaceEvent(userId, {
+        name: result.name,
+        eventDate: parsedDate.toISOString().slice(0, 10),
+        distanceKm: result.distances.length > 0 ? parseDistanceLabelToKm(result.distances[0]) : null,
+        location: result.city || result.state ? [result.city, result.state].filter(Boolean).join(', ') : null,
+        raceUrl: result.url || null,
+      });
+      queryClient.invalidateQueries({
+        predicate: (query) => typeof query.queryKey[0] === 'string' && query.queryKey[0].startsWith('races-'),
+      });
+      setAdded(true);
+    } catch (err) {
+      Alert.alert('Could not add race', err instanceof Error ? err.message : 'Try again.');
+    } finally {
+      setAdding(false);
+    }
   }
 
   return (
@@ -240,9 +284,14 @@ export default function RaceEventScreen() {
           <TouchableOpacity
             style={styles.addBtn}
             onPress={handleAddToMyRaces}
+            disabled={adding || added}
             activeOpacity={0.8}
           >
-            <Text style={styles.addBtnText}>Add to My Races</Text>
+            {adding ? (
+              <ActivityIndicator color={Colors.teal} />
+            ) : (
+              <Text style={styles.addBtnText}>{added ? '✓ Added to My Races' : 'Add to My Races'}</Text>
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>

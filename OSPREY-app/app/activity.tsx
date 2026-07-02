@@ -92,7 +92,7 @@ export default function ActivityScreen() {
           <Text style={styles.errorText}>Couldn&apos;t load activity feed.</Text>
         ) : !feed || feed.length === 0 ? (
           <Text style={styles.empty}>
-            No activity yet. Complete a workout and tap the heart on Home to share it with friends.
+            No activity yet. Finish a workout and tap &ldquo;Share with friends&rdquo; on the recap screen to post it here.
           </Text>
         ) : (
           feed.map((card) => (
