@@ -1,6 +1,13 @@
 import { endOfWeek, format, startOfWeek } from 'date-fns';
 import { supabase } from '@/services/supabase';
-import type { LiftExercise, LiftPrescription, TrackPoint, WorkoutRecapData, WorkoutType } from '@/types/workout';
+import type {
+  IntervalPrescription,
+  LiftExercise,
+  LiftPrescription,
+  TrackPoint,
+  WorkoutRecapData,
+  WorkoutType,
+} from '@/types/workout';
 import { formatDuration, formatPace, metersToMiles } from '@/store/workoutStore';
 import { writeWorkoutToHealthKit } from '@/services/healthkit';
 import { withCache } from '@/services/offline-cache';
@@ -451,6 +458,20 @@ export async function fetchLiftPrescription(sessionId: string): Promise<LiftPres
   const prescription = data.lift_prescription as { exercises?: unknown };
   return Array.isArray(prescription.exercises) && prescription.exercises.length > 0
     ? (prescription as LiftPrescription)
+    : null;
+}
+
+export async function fetchIntervalPrescription(sessionId: string): Promise<IntervalPrescription | null> {
+  const { data, error } = await supabase
+    .from('training_sessions')
+    .select('interval_prescription')
+    .eq('id', sessionId)
+    .maybeSingle();
+
+  if (error || !data?.interval_prescription) return null;
+  const prescription = data.interval_prescription as { segments?: unknown };
+  return Array.isArray(prescription.segments) && prescription.segments.length > 0
+    ? (prescription as IntervalPrescription)
     : null;
 }
 

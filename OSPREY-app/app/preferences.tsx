@@ -17,6 +17,7 @@ import type {
   ExperienceLevel,
   TrainingDaysPerWeek,
   TrainingGoal,
+  TriathlonDistance,
 } from '@/types/preferences';
 
 interface GoalOption {
@@ -33,8 +34,16 @@ const GOAL_OPTIONS: GoalOption[] = [
   { value: 'hybrid', label: '🏋️ Hybrid Athlete' },
   { value: 'run_performance', label: '🏃 Run Performance' },
   { value: 'strength', label: '💪 Strength Focus' },
+  { value: 'triathlon', label: '🏊 Triathlon / Multisport' },
   { value: 'weight_loss', label: '🔥 Weight Loss' },
   { value: 'general', label: '⚡ General Fitness' },
+];
+
+const TRIATHLON_DISTANCE_OPTIONS: { value: TriathlonDistance; label: string }[] = [
+  { value: 'sprint', label: 'Sprint (750m/20k/5k)' },
+  { value: 'olympic', label: 'Olympic (1.5k/40k/10k)' },
+  { value: 'half', label: 'Half (70.3)' },
+  { value: 'full', label: 'Full (140.6)' },
 ];
 
 const LEVEL_OPTIONS: LevelOption[] = [
@@ -60,8 +69,11 @@ export default function PreferencesScreen() {
   const [longRunDay, setLongRunDay] = useState<'saturday' | 'sunday'>('saturday');
   const [includeSwim, setIncludeSwim] = useState(false);
   const [includeBike, setIncludeBike] = useState(false);
+  const [triathlonDistance, setTriathlonDistance] = useState<TriathlonDistance>('sprint');
   const [loading, setLoading] = useState(false);
   const [loadingPrefs, setLoadingPrefs] = useState(true);
+
+  const isTriathlon = primaryGoal === 'triathlon';
 
   useEffect(() => {
     async function loadSaved() {
@@ -75,6 +87,7 @@ export default function PreferencesScreen() {
           if (saved.longRunDay) setLongRunDay(saved.longRunDay);
           if (typeof saved.includeSwim === 'boolean') setIncludeSwim(saved.includeSwim);
           if (typeof saved.includeBike === 'boolean') setIncludeBike(saved.includeBike);
+          if (saved.triathlonDistance) setTriathlonDistance(saved.triathlonDistance);
         }
       } catch {
         // silently fall back to defaults
@@ -92,9 +105,10 @@ export default function PreferencesScreen() {
         primaryGoal,
         experienceLevel,
         daysPerWeek,
-        includeSwim,
-        includeBike,
+        includeSwim: isTriathlon ? true : includeSwim,
+        includeBike: isTriathlon ? true : includeBike,
         longRunDay,
+        ...(isTriathlon ? { triathlonDistance } : {}),
       };
 
       // Persist to Supabase Auth user_metadata (no schema change needed)
@@ -169,6 +183,30 @@ export default function PreferencesScreen() {
           ))}
         </View>
 
+        {isTriathlon ? (
+          <>
+            <Text style={styles.sectionLabel}>RACE DISTANCE</Text>
+            <View style={styles.chipRow}>
+              {TRIATHLON_DISTANCE_OPTIONS.map((opt) => (
+                <TouchableOpacity
+                  key={opt.value}
+                  style={[styles.chip, triathlonDistance === opt.value && styles.chipSelected]}
+                  onPress={() => setTriathlonDistance(opt.value)}
+                >
+                  <Text
+                    style={[
+                      styles.chipText,
+                      triathlonDistance === opt.value && styles.chipTextSelected,
+                    ]}
+                  >
+                    {opt.label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </>
+        ) : null}
+
         <Text style={styles.sectionLabel}>EXPERIENCE LEVEL</Text>
         <View style={styles.chipRow}>
           {LEVEL_OPTIONS.map((opt) => (
@@ -220,25 +258,33 @@ export default function PreferencesScreen() {
           ))}
         </View>
 
-        <Text style={styles.sectionLabel}>INCLUDE IN PLAN</Text>
-        <View style={styles.chipRow}>
-          <TouchableOpacity
-            style={[styles.chip, includeSwim && styles.chipSelected]}
-            onPress={() => setIncludeSwim((v) => !v)}
-          >
-            <Text style={[styles.chipText, includeSwim && styles.chipTextSelected]}>
-              🏊 Swim Sessions
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.chip, includeBike && styles.chipSelected]}
-            onPress={() => setIncludeBike((v) => !v)}
-          >
-            <Text style={[styles.chipText, includeBike && styles.chipTextSelected]}>
-              🚴 Bike Sessions
-            </Text>
-          </TouchableOpacity>
-        </View>
+        {isTriathlon ? (
+          <Text style={styles.helperText}>
+            Triathlon plans always include swim, bike, run, and strength days.
+          </Text>
+        ) : (
+          <>
+            <Text style={styles.sectionLabel}>INCLUDE IN PLAN</Text>
+            <View style={styles.chipRow}>
+              <TouchableOpacity
+                style={[styles.chip, includeSwim && styles.chipSelected]}
+                onPress={() => setIncludeSwim((v) => !v)}
+              >
+                <Text style={[styles.chipText, includeSwim && styles.chipTextSelected]}>
+                  🏊 Swim Sessions
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.chip, includeBike && styles.chipSelected]}
+                onPress={() => setIncludeBike((v) => !v)}
+              >
+                <Text style={[styles.chipText, includeBike && styles.chipTextSelected]}>
+                  🚴 Bike Sessions
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
 
         <TouchableOpacity
           style={[styles.generateBtn, loading && styles.generateBtnDisabled]}
@@ -287,6 +333,12 @@ const styles = StyleSheet.create({
     color: Colors.textMuted,
     letterSpacing: 1,
     marginBottom: 10,
+    marginTop: 20,
+  },
+  helperText: {
+    fontSize: 13,
+    color: Colors.textSecondary,
+    lineHeight: 19,
     marginTop: 20,
   },
   chipRow: {

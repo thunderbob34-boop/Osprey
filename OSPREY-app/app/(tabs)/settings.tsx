@@ -21,6 +21,7 @@ import {
   requestHealthKitAuthorization,
   syncRecoveryFromHealthKit,
 } from '@/services/healthkit';
+import { importHealthKitWorkouts } from '@/services/healthkit-import';
 import {
   cancelDailyNudge,
   fetchSmartNudgeHour,
@@ -136,13 +137,21 @@ export default function SettingsTab() {
       }
       setHealthConnected(true);
       await AsyncStorage.setItem(HEALTH_CONNECTED_KEY, '1').catch(() => undefined);
-      const synced = await syncRecoveryFromHealthKit(userId);
-      Alert.alert(
-        'Apple Health',
+      const [synced, imported] = await Promise.all([
+        syncRecoveryFromHealthKit(userId),
+        importHealthKitWorkouts(userId).catch(() => ({ imported: 0, skipped: 0 })),
+      ]);
+      const parts = [
         synced
-          ? "Connected — today's recovery score will reflect your HealthKit data."
-          : 'Connected. No new HRV, sleep, or heart rate data found yet.',
-      );
+          ? "Recovery score will reflect your HealthKit data."
+          : 'No new HRV, sleep, or heart rate data found yet.',
+      ];
+      if (imported.imported > 0) {
+        parts.push(
+          `Imported ${imported.imported} workout${imported.imported === 1 ? '' : 's'} from Apple Watch/other apps.`,
+        );
+      }
+      Alert.alert('Apple Health', `Connected — ${parts.join(' ')}`);
     } catch (err) {
       Alert.alert('Apple Health', err instanceof Error ? err.message : 'Something went wrong.');
     } finally {

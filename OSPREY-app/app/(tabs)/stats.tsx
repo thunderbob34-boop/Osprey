@@ -14,7 +14,9 @@ import { Colors } from '@/constants/colors';
 import { useStats } from '@/hooks/useStats';
 import { usePerformance } from '@/hooks/usePerformance';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useLiftAnalytics } from '@/hooks/useLiftAnalytics';
 import { formatRaceTimeSec } from '@/services/performance';
+import { kgToLb } from '@/services/body-metrics';
 
 const SESSION_ICON: Record<string, string> = {
   run:   '🏃',
@@ -80,6 +82,38 @@ function FitnessChart({ series }: { series: Array<{ date: string; atl: number; c
   );
 }
 
+// ── e1RM trend sparkline (single lift) ────────────────────────────────────────
+
+function E1rmChart({ points }: { points: number[] }) {
+  if (points.length < 2) return null;
+  const maxVal = Math.max(...points);
+  const minVal = Math.min(...points);
+  const range = Math.max(1, maxVal - minVal);
+  const innerW = CHART_W - CHART_PAD.l - CHART_PAD.r;
+  const innerH = CHART_H - CHART_PAD.t - CHART_PAD.b;
+
+  const coords = points
+    .map((v, i) => {
+      const x = CHART_PAD.l + (i / (points.length - 1)) * innerW;
+      const y = CHART_PAD.t + innerH - ((v - minVal) / range) * innerH;
+      return `${x},${y}`;
+    })
+    .join(' ');
+
+  return (
+    <Svg width={CHART_W} height={CHART_H} viewBox={`0 0 ${CHART_W} ${CHART_H}`}>
+      <Polyline
+        points={coords}
+        fill="none"
+        stroke={Colors.gold}
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+
 // ── Main screen ───────────────────────────────────────────────────────────────
 
 export default function StatsTab() {
@@ -87,6 +121,7 @@ export default function StatsTab() {
   const { data, isLoading, error } = useStats();
   const { isPlus } = useSubscription();
   const { data: perf, isLoading: perfLoading } = usePerformance();
+  const { data: liftStats } = useLiftAnalytics();
 
   const maxMiles = Math.max(1, ...(data?.weeklyMileage.map((w) => w.miles) ?? [1]));
 
@@ -254,6 +289,62 @@ export default function StatsTab() {
                 <Text style={styles.upsellArrow}>→</Text>
               </TouchableOpacity>
             )}
+
+            {liftStats && (liftStats.weekVolumeKg > 0 || liftStats.prs.length > 0) ? (
+              <>
+                <Text style={styles.sectionLabel}>LIFT VOLUME</Text>
+                <View style={styles.liftCard}>
+                  <View style={styles.liftVolumeRow}>
+                    <Text style={styles.liftVolumeValue}>
+                      {Math.round(kgToLb(liftStats.weekVolumeKg)).toLocaleString()} lbs
+                    </Text>
+                    <Text style={styles.liftVolumeSub}>moved this week</Text>
+                  </View>
+                  {liftStats.weekMuscleGroups.length > 0 ? (
+                    <View style={styles.muscleChipRow}>
+                      {liftStats.weekMuscleGroups.map((m) => (
+                        <View key={m.muscleGroup} style={styles.muscleChip}>
+                          <Text style={styles.muscleChipText}>{m.muscleGroup}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  ) : null}
+
+                  {liftStats.primaryLift && liftStats.primaryLift.trend.length >= 2 ? (
+                    <>
+                      <Text style={styles.liftTrendLabel}>
+                        {liftStats.primaryLift.exerciseName} · EST. 1RM TREND
+                      </Text>
+                      <View style={styles.svgWrap}>
+                        <E1rmChart
+                          points={liftStats.primaryLift.trend.map((p) => kgToLb(p.e1rmKg))}
+                        />
+                      </View>
+                    </>
+                  ) : null}
+                </View>
+
+                {liftStats.prs.length > 0 ? (
+                  <View style={styles.prList}>
+                    {liftStats.prs.map((pr, index) => (
+                      <View
+                        key={pr.exerciseName}
+                        style={[styles.prRow, index === liftStats.prs.length - 1 && styles.workoutRowLast]}
+                      >
+                        <Text style={styles.prMedal}>{index === 0 ? '🏆' : `#${index + 1}`}</Text>
+                        <View style={styles.workoutInfo}>
+                          <Text style={styles.workoutType}>{pr.exerciseName}</Text>
+                          <Text style={styles.workoutMeta}>
+                            Est. 1RM · {new Date(pr.achievedOn).toLocaleDateString([], { month: 'short', day: 'numeric' })}
+                          </Text>
+                        </View>
+                        <Text style={styles.prValue}>{Math.round(kgToLb(pr.bestE1rmKg))} lbs</Text>
+                      </View>
+                    ))}
+                  </View>
+                ) : null}
+              </>
+            ) : null}
 
             <Text style={styles.sectionLabel}>RECENT WORKOUTS</Text>
             {data && data.recentWorkouts.length > 0 ? (
@@ -473,6 +564,53 @@ const styles = StyleSheet.create({
   upsellTitle: { fontSize: 14, fontWeight: '700', color: Colors.teal, marginBottom: 3 },
   upsellDesc: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
   upsellArrow: { fontSize: 18, color: Colors.teal, fontWeight: '700' },
+
+  // ── Lift analytics ──
+  liftCard: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 14,
+    padding: 16,
+    marginBottom: 16,
+    gap: 10,
+  },
+  liftVolumeRow: { flexDirection: 'row', alignItems: 'baseline', gap: 8 },
+  liftVolumeValue: { fontSize: 22, fontWeight: '800', color: Colors.gold },
+  liftVolumeSub: { fontSize: 12, color: Colors.textMuted, fontWeight: '600' },
+  muscleChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
+  muscleChip: {
+    backgroundColor: 'rgba(200,154,0,0.12)',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  muscleChipText: { fontSize: 11, fontWeight: '700', color: Colors.gold },
+  liftTrendLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: Colors.textMuted,
+    letterSpacing: 0.8,
+    marginTop: 4,
+  },
+  prList: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 14,
+    overflow: 'hidden',
+    marginBottom: 24,
+  },
+  prRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    padding: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.border,
+  },
+  prMedal: { fontSize: 16, width: 28, textAlign: 'center' },
+  prValue: { fontSize: 14, fontWeight: '800', color: Colors.gold },
 
   // ── Recent workouts ──
   workoutList: {

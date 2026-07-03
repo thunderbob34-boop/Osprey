@@ -13,11 +13,13 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useAuthStore } from '@/store/authStore';
-import { saveEnduranceWorkout, type EnduranceType } from '@/services/workouts';
+import { fetchIntervalPrescription, saveEnduranceWorkout, type EnduranceType } from '@/services/workouts';
+import { expandIntervalSteps, ozzieCueForStep, totalIntervalDistanceM, type IntervalStep } from '@/services/intervals';
 import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
 import { formatDuration } from '@/store/workoutStore';
 import { useSubscription } from '@/hooks/useSubscription';
 import { isHealthKitSupported, requestHealthKitAuthorization } from '@/services/healthkit';
+import type { IntervalEffort, IntervalPrescription } from '@/types/workout';
 
 const SESSION_META: Record<EnduranceType, { icon: string; label: string; color: string; borderColor: string }> = {
   swim: { icon: '🏊', label: 'SWIM',  color: Colors.teal,  borderColor: Colors.borderTeal },
@@ -43,7 +45,22 @@ const ENCOURAGEMENTS: Record<EnduranceType, string[]> = {
   ],
 };
 
+const EFFORT_COLOR: Record<IntervalEffort | 'rest', string> = {
+  easy: Colors.teal,
+  moderate: Colors.teal,
+  threshold: Colors.amber,
+  hard: Colors.red,
+  max: Colors.red,
+  rest: Colors.textMuted,
+};
+
 const AUTO_CUE_INTERVAL_MS = 10 * 60 * 1000; // every 10 minutes
+
+function formatMMSS(totalSeconds: number): string {
+  const m = Math.floor(totalSeconds / 60);
+  const s = totalSeconds % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
 
 export default function EnduranceWorkoutScreen() {
   const router = useRouter();
@@ -63,19 +80,92 @@ export default function EnduranceWorkoutScreen() {
   const lastAutoCueMs = useRef(0);
   const speakingRef = useRef(false);
 
+  // ── Structured interval set (Ozzie's prescribed swim/bike workout) ──
+  const [intervalSteps, setIntervalSteps] = useState<IntervalStep[]>([]);
+  const [prescription, setPrescription] = useState<IntervalPrescription | null>(null);
+  const [stepIndex, setStepIndex] = useState(0);
+  const [stepRemainingS, setStepRemainingS] = useState<number | null>(null);
+  const [intervalsComplete, setIntervalsComplete] = useState(false);
+  const cuedStepRef = useRef(-1);
+  // Wall-clock deadline for the current countdown step — avoids decrementing
+  // state inside a setState updater (which would call advanceStep, itself
+  // multiple setStates, from within another setState's updater function).
+  const stepEndAtRef = useRef<number | null>(null);
+
+  const hasIntervals = intervalSteps.length > 0;
+  const currentStep = hasIntervals ? intervalSteps[stepIndex] : null;
+
+  useEffect(() => {
+    if (!sessionId || (type !== 'swim' && type !== 'bike')) return;
+    fetchIntervalPrescription(sessionId)
+      .then((p) => {
+        if (!p) return;
+        const steps = expandIntervalSteps(p);
+        if (steps.length === 0) return;
+        setPrescription(p);
+        setIntervalSteps(steps);
+      })
+      .catch(() => undefined);
+  }, [sessionId, type]);
+
+  // Speak Ozzie's cue once per step and (re)arm the countdown deadline.
+  useEffect(() => {
+    if (!currentStep || cuedStepRef.current === stepIndex) return;
+    cuedStepRef.current = stepIndex;
+    stepEndAtRef.current = currentStep.durationS != null ? Date.now() + currentStep.durationS * 1000 : null;
+    setStepRemainingS(currentStep.durationS);
+    ozzieSpeak(ozzieCueForStep(currentStep), 'workout').catch(() => undefined);
+  }, [currentStep, stepIndex]);
+
+  function advanceStep() {
+    setStepIndex((prevIndex) => {
+      const nextIndex = prevIndex + 1;
+      if (nextIndex >= intervalSteps.length) {
+        setIntervalsComplete(true);
+        setStepRemainingS(null);
+        stepEndAtRef.current = null;
+        ozzieSpeak("That's the full set — nice work. Wrap up and save when you're ready.", 'workout').catch(
+          () => undefined,
+        );
+        // Auto-fill total distance if every segment was distance-based.
+        if (prescription) {
+          const totalM = totalIntervalDistanceM(prescription);
+          if (totalM != null) {
+            setDistance(String(totalM));
+            setDistanceUnit('meters');
+          }
+        }
+        return prevIndex;
+      }
+      return nextIndex;
+    });
+  }
+
   useEffect(() => {
     const timer = setInterval(() => {
       setElapsed(Math.floor((Date.now() - startedAtRef.current) / 1000));
+
+      if (stepEndAtRef.current != null) {
+        const remaining = Math.ceil((stepEndAtRef.current - Date.now()) / 1000);
+        if (remaining <= 0) {
+          stepEndAtRef.current = null; // prevent double-advance before the next step re-arms it
+          advanceStep();
+        } else {
+          setStepRemainingS(remaining);
+        }
+      }
     }, 1000);
     return () => {
       clearInterval(timer);
       ozzieStop();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [intervalSteps]);
 
-  // Auto cues every 10 minutes (OSPREY+ only)
+  // Auto cues every 10 minutes (OSPREY+ only) — skip while running a structured set,
+  // Ozzie is already narrating each interval.
   useEffect(() => {
-    if (!isPlus || speakingRef.current) return;
+    if (!isPlus || speakingRef.current || hasIntervals) return;
     const nowMs = Date.now();
     if (elapsed > 0 && nowMs - lastAutoCueMs.current >= AUTO_CUE_INTERVAL_MS) {
       lastAutoCueMs.current = nowMs;
@@ -84,7 +174,7 @@ export default function EnduranceWorkoutScreen() {
       speakingRef.current = true;
       ozzieSpeak(cues[idx], 'workout').finally(() => { speakingRef.current = false; });
     }
-  }, [elapsed, isPlus, type]);
+  }, [elapsed, isPlus, type, hasIntervals]);
 
   async function handleManualCue() {
     const cues = ENCOURAGEMENTS[type];
@@ -157,13 +247,65 @@ export default function EnduranceWorkoutScreen() {
       <View style={styles.content}>
         <View style={[styles.sessionBadge, { borderColor: meta.borderColor }]}>
           <Text style={styles.sessionIcon}>{meta.icon}</Text>
-          <Text style={[styles.sessionLabel, { color: meta.color }]}>{meta.label} IN PROGRESS</Text>
+          <Text style={[styles.sessionLabel, { color: meta.color }]}>
+            {hasIntervals ? `${meta.label} · OZZIE'S SET` : `${meta.label} IN PROGRESS`}
+          </Text>
         </View>
 
         <View style={styles.timerBlock}>
           <Text style={styles.timerValue}>{timeStr}</Text>
           <Text style={styles.timerSub}>elapsed</Text>
         </View>
+
+        {hasIntervals ? (
+          <View
+            style={[
+              styles.intervalCard,
+              { borderColor: EFFORT_COLOR[currentStep?.effort ?? 'rest'] + '55' },
+            ]}
+          >
+            {intervalsComplete ? (
+              <>
+                <Text style={styles.intervalDoneIcon}>✓</Text>
+                <Text style={styles.intervalDoneText}>Set complete — nice work</Text>
+              </>
+            ) : currentStep ? (
+              <>
+                <View style={styles.intervalHeaderRow}>
+                  <Text style={styles.intervalProgress}>
+                    Step {stepIndex + 1} of {intervalSteps.length}
+                  </Text>
+                  <View
+                    style={[
+                      styles.effortPill,
+                      { backgroundColor: EFFORT_COLOR[currentStep.effort] + '22' },
+                    ]}
+                  >
+                    <Text style={[styles.effortPillText, { color: EFFORT_COLOR[currentStep.effort] }]}>
+                      {currentStep.effort.toUpperCase()}
+                    </Text>
+                  </View>
+                </View>
+                <Text style={styles.intervalLabel}>
+                  {currentStep.phase === 'rest' ? 'Rest' : currentStep.label}
+                </Text>
+                {currentStep.totalReps > 1 ? (
+                  <Text style={styles.intervalRep}>
+                    Rep {currentStep.repIndex} of {currentStep.totalReps}
+                  </Text>
+                ) : null}
+
+                {stepRemainingS != null ? (
+                  <Text style={styles.intervalCountdown}>{formatMMSS(stepRemainingS)}</Text>
+                ) : (
+                  <TouchableOpacity style={styles.intervalCompleteBtn} onPress={advanceStep}>
+                    <Text style={styles.intervalCompleteBtnText}>Mark Interval Complete</Text>
+                  </TouchableOpacity>
+                )}
+              </>
+            ) : null}
+          </View>
+        ) : null}
 
         <TouchableOpacity style={styles.ozzieBtn} onPress={handleManualCue}>
           <OzzieAvatar size={18} />
@@ -239,6 +381,48 @@ const styles = StyleSheet.create({
   timerBlock: { alignItems: 'center', gap: 6, marginVertical: 20 },
   timerValue: { fontSize: 72, fontWeight: '800', color: Colors.textPrimary, letterSpacing: -2 },
   timerSub: { fontSize: 12, color: Colors.textMuted, fontWeight: '600', letterSpacing: 0.5 },
+
+  // Interval runner
+  intervalCard: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1.5,
+    borderRadius: 16,
+    padding: 18,
+    alignItems: 'center',
+    gap: 6,
+  },
+  intervalHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 4,
+  },
+  intervalProgress: { fontSize: 11, fontWeight: '700', color: Colors.textMuted, letterSpacing: 0.5 },
+  effortPill: { borderRadius: 8, paddingHorizontal: 8, paddingVertical: 3 },
+  effortPillText: { fontSize: 10, fontWeight: '800', letterSpacing: 0.5 },
+  intervalLabel: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
+  intervalRep: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
+  intervalCountdown: {
+    fontSize: 40,
+    fontWeight: '900',
+    color: Colors.textPrimary,
+    marginTop: 6,
+    letterSpacing: -1,
+  },
+  intervalCompleteBtn: {
+    marginTop: 8,
+    backgroundColor: Colors.teal,
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    alignSelf: 'stretch',
+    alignItems: 'center',
+  },
+  intervalCompleteBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
+  intervalDoneIcon: { fontSize: 32, color: Colors.green, fontWeight: '900' },
+  intervalDoneText: { fontSize: 15, fontWeight: '700', color: Colors.textPrimary },
+
   ozzieBtn: {
     backgroundColor: Colors.surfaceTeal,
     borderWidth: 1,

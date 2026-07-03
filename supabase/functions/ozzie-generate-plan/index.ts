@@ -21,6 +21,8 @@ The user is a hybrid athlete whose philosophy is "look like a bodybuilder, funct
 
 Training load guidance: You will receive a 'trainingLoad' object with ATL (7-day fatigue), CTL (42-day fitness), and TSB (freshness = CTL - ATL). When TSB < -20, reduce next week's volume by 10-15% and flag at least one session as 'active_recovery'. When TSB > 15, the user is fresh — consider adding an intensity day. When CTL < 20, the user is early in training — keep volume moderate and don't add intervals.
 
+Triathlon / multisport guidance: When the goal is triathlon (or the user is training for a multisport event), balance all four disciplines across the week rather than defaulting to the hybrid run+lift split — use the given weekly swim/bike/run/lift day counts as hard targets, not suggestions. Include at least one "brick" session every 1-2 weeks: a bike session immediately followed by a short run in the same day's description (e.g. "Bike 45min + Run 10min Brick") — mark it session_type "bike" with the run noted in ozzie_notes since a session can only have one type. If a triathlonDistance is given ("sprint", "olympic", "half", "full"), scale session lengths accordingly: sprint = short/sharp (20-40min swims, 45-75min bikes, 20-40min runs), olympic = moderate (30-50min swims, 60-90min bikes, 30-50min runs), half = builds toward longer steady efforts (45-75min swims, 90-150min bikes, 45-75min runs), full = longest steady-state emphasis (60-90min swims, 2-4hr long bike, 60-100min long run) — never assign full-distance volume to a beginner in week one; ramp gradually. If the user has never done a triathlon before (fitnessLevel beginner + triathlonDistance sprint), treat this as "intro to multisport": keep every session approachable, favor completion over pace, and use ozzie_notes to explain WHY brick sessions and multisport pacing matter, not just what to do. For open-water-eligible swim sessions (outdoor season, not a pool-only context), mention sighting/drafting technique once in ozzie_notes.
+
 Rules:
 - Produce exactly 7 days, Monday through Sunday. Remaining days (beyond requested training days) are "rest".
 - session_type must be one of: run, lift, swim, bike, cross, rest, race.
@@ -31,12 +33,16 @@ Rules:
 - description: short, e.g. "Easy Run", "Upper Body — Push", "Active Recovery Bike", "Rest Day".
 - ozzie_notes: one plain-English sentence explaining why this session is placed here this week, in Ozzie's warm/direct voice.
 - lift_prescription: for lift days ONLY, write the actual strength workout like a real coach: {"exercises": [{"name": string, "sets": number (2-5), "reps": string (e.g. "5" or "8-12"), "note": string|null}]} with 4-6 exercises. Main compound movement first at lower reps, accessories after at higher reps. Choose names ONLY from this exact list, matched to the day's split: Upper Push day = Bench Press, Incline Dumbbell Press, Overhead Press, Lateral Raise, Tricep Pushdown, Chest Dip. Upper Pull day = Pull-Up, Barbell Row, Lat Pulldown, Seated Cable Row, Dumbbell Row, Barbell Curl, Face Pull. Lower/Hips day = Back Squat, Deadlift, Romanian Deadlift, Hip Thrust, Bulgarian Split Squat, Leg Press, Calf Raise. Full-body/core accessory (any split) = Plank, Box Jump, Hanging Leg Raise. Use "note" for form or effort cues ("2 reps in reserve", "pause at the bottom"). For every non-lift day, set lift_prescription to null.
-- Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string, "lift_prescription": {"exercises": [{"name": string, "sets": number, "reps": string, "note": string|null}]}|null}]} where dayOffset 0 = Monday.`;
+- interval_prescription: for swim and bike days with intensity "threshold" or "interval" ONLY, write real structured sets instead of a bare duration: {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}. Exactly one of distanceM/durationS per segment — swim segments use distanceM (e.g. 50/100/200), bike segments use durationS (e.g. 180-600 for 3-10min). effort must be one of: easy, moderate, threshold, hard, max. label is a short human string like "50m hard" or "5min @ threshold". Include a warm-up segment (effort "easy") first and a cool-down segment (effort "easy") last. 3-6 segments total. For easy/moderate swim or bike days and all other session types, set interval_prescription to null.
+- Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string, "lift_prescription": {"exercises": [{"name": string, "sets": number, "reps": string, "note": string|null}]}|null, "interval_prescription": {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}|null}]} where dayOffset 0 = Monday.`;
 
 interface GoalsContext {
   primaryGoal: string | null;
   weeklyRunDays: number;
   weeklyLiftDays: number;
+  weeklySwimDays?: number;
+  weeklyBikeDays?: number;
+  triathlonDistance?: string | null;
   fitnessLevel: string;
   targetRace: string | null;
 }
@@ -241,7 +247,7 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad)
         { role: 'system', content: PLAN_SYSTEM_PROMPT },
         {
           role: 'user',
-          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}. trainingLoad: ${JSON.stringify(trainingLoad)}.`,
+          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} trainingLoad: ${JSON.stringify(trainingLoad)}.`,
         },
       ],
       response_format: { type: 'json_object' },
@@ -270,6 +276,16 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad)
     ozzie_notes: string;
     lift_prescription: {
       exercises: Array<{ name: string; sets: number; reps: string; note: string | null }>;
+    } | null;
+    interval_prescription: {
+      segments: Array<{
+        reps: number;
+        distanceM: number | null;
+        durationS: number | null;
+        effort: string;
+        restS: number;
+        label: string;
+      }>;
     } | null;
   }>;
 }
@@ -343,13 +359,14 @@ Deno.serve(async (req: Request) => {
     }
 
     // Maps preferences.tsx's TrainingGoal values to the DB's primary_goal_enum
-    // ('run' | 'lift' | 'hybrid' | 'weight_loss' | 'general_fitness').
+    // ('run' | 'lift' | 'hybrid' | 'weight_loss' | 'general_fitness' | 'triathlon').
     const PRIMARY_GOAL_MAP: Record<string, string> = {
       hybrid: 'hybrid',
       run_performance: 'run',
       strength: 'lift',
       weight_loss: 'weight_loss',
       general: 'general_fitness',
+      triathlon: 'triathlon',
     };
 
     // Build goals context: explicit preferences/raceTarget from the request
@@ -361,10 +378,38 @@ Deno.serve(async (req: Request) => {
     if (body.preferences) {
       // Preferences from plan builder: map fields to goals context
       const prefs = body.preferences;
+      const mappedGoal = PRIMARY_GOAL_MAP[prefs.primaryGoal] ?? 'hybrid';
+      const isTriathlon = mappedGoal === 'triathlon';
+
+      let weeklyRunDays: number;
+      let weeklyLiftDays: number;
+      let weeklySwimDays: number;
+      let weeklyBikeDays: number;
+
+      if (isTriathlon) {
+        // Split days roughly evenly across all four disciplines, each
+        // guaranteed at least 1 day whenever the weekly total allows it.
+        const total = prefs.daysPerWeek;
+        weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
+        weeklySwimDays = Math.max(1, Math.round(total * 0.2));
+        weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
+        weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
+      } else {
+        weeklyRunDays = prefs.daysPerWeek >= 2 ? Math.ceil(prefs.daysPerWeek * 0.6) : 2;
+        weeklyLiftDays = prefs.daysPerWeek >= 2 ? Math.floor(prefs.daysPerWeek * 0.4) : 1;
+        // includeSwim/includeBike previously had no effect on the generated
+        // plan — surface them as one dedicated day each when checked.
+        weeklySwimDays = prefs.includeSwim ? 1 : 0;
+        weeklyBikeDays = prefs.includeBike ? 1 : 0;
+      }
+
       goals = {
-        primaryGoal: PRIMARY_GOAL_MAP[prefs.primaryGoal] ?? 'hybrid',
-        weeklyRunDays: prefs.daysPerWeek >= 2 ? Math.ceil(prefs.daysPerWeek * 0.6) : 2,
-        weeklyLiftDays: prefs.daysPerWeek >= 2 ? Math.floor(prefs.daysPerWeek * 0.4) : 1,
+        primaryGoal: mappedGoal,
+        weeklyRunDays,
+        weeklyLiftDays,
+        weeklySwimDays,
+        weeklyBikeDays,
+        triathlonDistance: isTriathlon ? prefs.triathlonDistance ?? 'sprint' : null,
         fitnessLevel: prefs.experienceLevel ?? 'beginner',
         targetRace: null,
       };
@@ -525,6 +570,10 @@ Deno.serve(async (req: Request) => {
         description: day.description,
         ozzie_notes: day.ozzie_notes,
         lift_prescription: day.session_type === 'lift' ? day.lift_prescription ?? null : null,
+        interval_prescription:
+          day.session_type === 'swim' || day.session_type === 'bike'
+            ? day.interval_prescription ?? null
+            : null,
       };
     });
 

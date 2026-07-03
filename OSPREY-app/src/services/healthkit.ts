@@ -5,6 +5,7 @@ import type {
   HealthInputOptions,
   HealthKitPermissions,
   HealthValue,
+  HKWorkoutQueriedSampleType,
 } from 'react-native-health';
 import { supabase } from '@/services/supabase';
 
@@ -16,6 +17,7 @@ const PERMISSIONS: HealthKitPermissions = {
       AppleHealthKit.Constants.Permissions.SleepAnalysis,
       AppleHealthKit.Constants.Permissions.StepCount,
       AppleHealthKit.Constants.Permissions.DistanceWalkingRunning,
+      AppleHealthKit.Constants.Permissions.Workout,
     ],
     write: [AppleHealthKit.Constants.Permissions.Workout],
   },
@@ -152,5 +154,50 @@ export async function writeWorkoutToHealthKit(params: {
       },
       (err) => resolve(!err),
     );
+  });
+}
+
+// Must match ios.bundleIdentifier in app.json — HealthKit stamps this as the
+// HKSource bundle id on anything OSPREY itself wrote via saveWorkout above,
+// so import can skip those and avoid re-importing our own workouts.
+const OWN_BUNDLE_ID = 'com.SillyGoose.OSPREY';
+
+export interface HealthKitWorkout {
+  externalId: string;
+  activityName: string;
+  startedAt: string;
+  endedAt: string;
+  durationS: number;
+  distanceMeters: number | null;
+  calories: number | null;
+}
+
+/**
+ * Reads workouts recorded by any source (Apple Watch, Garmin via its
+ * HealthKit bridge, etc.) in the given window, excluding ones OSPREY itself
+ * wrote — those are already in workout_logs from the in-app flow.
+ */
+export async function fetchHealthKitWorkouts(sinceISO: string): Promise<HealthKitWorkout[]> {
+  if (!isHealthKitSupported() || !initialized) return [];
+
+  return new Promise((resolve) => {
+    AppleHealthKit.getAnchoredWorkouts({ startDate: sinceISO }, (err, res) => {
+      if (err || !res?.data) {
+        resolve([]);
+        return;
+      }
+      const workouts = (res.data as HKWorkoutQueriedSampleType[])
+        .filter((w) => w.sourceId !== OWN_BUNDLE_ID)
+        .map((w) => ({
+          externalId: w.id,
+          activityName: w.activityName,
+          startedAt: w.start,
+          endedAt: w.end,
+          durationS: Math.round(w.duration),
+          distanceMeters: w.distance > 0 ? w.distance : null,
+          calories: w.calories > 0 ? Math.round(w.calories) : null,
+        }));
+      resolve(workouts);
+    });
   });
 }

@@ -1,32 +1,38 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { Colors } from '@/constants/colors';
+import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 
-const TRAINING = { protein: 240, carbs: 265, fat: 80, calories: 2740 };
-const LONG_DAY = { protein: 240, carbs: 340, fat: 80, calories: 3040 };
+// Shown only while the very first fetch is in flight or if it fails —
+// real targets always come from ozzie-nutrition-coach once loaded, which
+// adapts to the user's goal, today's session, and their weight trend.
+const FALLBACK = { protein: 200, carbs: 220, fat: 70, calories: 2400 };
 
 export default function MacroTargetCard() {
-  const isSunday = new Date().getDay() === 0;
-  const targets = isSunday ? LONG_DAY : TRAINING;
-  const borderColor = isSunday ? Colors.borderGold : Colors.borderTeal;
-  const surface = isSunday ? Colors.surfaceGold : Colors.surfaceTeal;
-  const accentColor = isSunday ? Colors.gold : Colors.teal;
-  const badgeLabel = isSunday ? 'Long Day — Carb Reload' : 'Training Day';
+  const { data, isLoading } = useNutritionCoaching();
+
+  const targets = data?.target
+    ? {
+        protein: data.target.proteinG,
+        carbs: data.target.carbsG,
+        fat: data.target.fatG,
+        calories: data.target.calories,
+      }
+    : FALLBACK;
 
   return (
-    <View style={[styles.card, { borderColor }]}>
+    <View style={[styles.card, { borderColor: Colors.borderTeal }]}>
       <View style={styles.headerRow}>
         <Text style={styles.cardLabel}>TODAY'S FUEL TARGETS</Text>
-        <View style={[styles.badge, { backgroundColor: surface }]}>
-          <Text style={[styles.badgeText, { color: accentColor }]}>{badgeLabel}</Text>
-        </View>
+        {isLoading ? <ActivityIndicator size="small" color={Colors.teal} /> : null}
       </View>
       <View style={styles.macroGrid}>
-        <MacroBlock value={targets.protein} unit="g" label="Protein" accentColor={accentColor} />
-        <MacroBlock value={targets.carbs} unit="g" label="Carbs" accentColor={accentColor} />
-        <MacroBlock value={targets.fat} unit="g" label="Fat" accentColor={accentColor} />
-        <MacroBlock value={targets.calories} unit="kcal" label="Calories" accentColor={accentColor} />
+        <MacroBlock value={targets.protein} unit="g" label="Protein" accentColor={Colors.teal} />
+        <MacroBlock value={targets.carbs} unit="g" label="Carbs" accentColor={Colors.teal} />
+        <MacroBlock value={targets.fat} unit="g" label="Fat" accentColor={Colors.teal} />
+        <MacroBlock value={targets.calories} unit="kcal" label="Calories" accentColor={Colors.teal} />
       </View>
+      {data?.tip ? <Text style={styles.tip}>{data.tip}</Text> : null}
     </View>
   );
 }
@@ -60,27 +66,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 16,
     marginBottom: 16,
+    gap: 10,
   },
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 14,
   },
   cardLabel: {
     fontSize: 10,
     fontWeight: '700',
     color: Colors.textMuted,
     letterSpacing: 1,
-  },
-  badge: {
-    borderRadius: 6,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-  },
-  badgeText: {
-    fontSize: 10,
-    fontWeight: '600',
   },
   macroGrid: {
     flexDirection: 'row',
@@ -108,5 +105,11 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.textMuted,
     marginTop: 2,
+  },
+  tip: {
+    fontSize: 12,
+    color: Colors.textSecondary,
+    lineHeight: 17,
+    fontStyle: 'italic',
   },
 });

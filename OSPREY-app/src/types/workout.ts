@@ -32,6 +32,22 @@ export interface LiftPrescription {
   }>;
 }
 
+export type IntervalEffort = 'easy' | 'moderate' | 'threshold' | 'hard' | 'max';
+
+export interface IntervalSegment {
+  reps: number;
+  distanceM: number | null;
+  durationS: number | null;
+  effort: IntervalEffort;
+  restS: number;
+  label: string;
+}
+
+/** Structured swim/bike set written by Ozzie on plan interval days. */
+export interface IntervalPrescription {
+  segments: IntervalSegment[];
+}
+
 export interface SavedWorkoutSummary {
   id: string;
   sessionType: WorkoutType;
