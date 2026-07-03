@@ -109,6 +109,12 @@ CREATE POLICY challenge_members_delete ON challenge_members
 -- Returns all accepted friends with display names.
 -- SECURITY DEFINER because users.display_name has a self-only RLS policy.
 
+-- Drop the old (p_user_id) signature in case this migration is re-run after
+-- an earlier deploy of the insecure version — CREATE OR REPLACE cannot
+-- change a function's argument list, so the vulnerable overload would
+-- otherwise remain callable.
+DROP FUNCTION IF EXISTS get_my_friends(UUID);
+
 CREATE OR REPLACE FUNCTION get_my_friends()
 RETURNS TABLE(friend_user_id UUID, friend_display_name TEXT)
 SECURITY DEFINER

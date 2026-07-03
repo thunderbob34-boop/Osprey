@@ -104,12 +104,14 @@ AS $$
     wl.total_distance_km,
     s.created_at            AS share_created_at,
     COUNT(k.id)              AS kudo_count,
-    BOOL_OR(k.from_user = auth.uid()) AS user_gave_kudo
+    COALESCE(BOOL_OR(k.from_user = auth.uid()), false) AS user_gave_kudo
   FROM activity_shares s
   JOIN users u ON u.id = s.user_id
   JOIN workout_logs wl ON wl.id = s.workout_id
   LEFT JOIN kudos k ON k.share_id = s.id
   WHERE s.deleted_at IS NULL
+    AND u.deleted_at IS NULL
+    AND wl.deleted_at IS NULL
     AND (
       s.user_id = auth.uid()
       OR EXISTS (

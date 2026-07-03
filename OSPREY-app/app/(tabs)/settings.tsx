@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,7 +9,7 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
 import {
@@ -55,9 +55,11 @@ export default function SettingsTab() {
   const [calBlockEnabled, setCalBlockEnabled] = useState(false);
   const [calBlockLoading, setCalBlockLoading] = useState(false);
 
-  useEffect(() => {
-    hasOspreyPlus().then(setPlusActive).catch(() => setPlusActive(false));
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      hasOspreyPlus().then(setPlusActive).catch(() => setPlusActive(false));
+    }, []),
+  );
 
   useEffect(() => {
     isDailyNudgeScheduled().then(setNudgeEnabled).catch(() => undefined);

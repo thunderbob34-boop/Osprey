@@ -42,6 +42,12 @@ CREATE POLICY race_partners_owner ON race_partners
 -- SECURITY DEFINER so it can join across users and race_events despite their
 -- self-only RLS policies.
 
+-- Drop the old (p_user_id, p_event_date) signature in case this migration is
+-- re-run after an earlier deploy of the insecure version — CREATE OR REPLACE
+-- cannot change a function's argument list, so the vulnerable overload would
+-- otherwise remain callable.
+DROP FUNCTION IF EXISTS get_friends_at_race(UUID, DATE);
+
 CREATE OR REPLACE FUNCTION get_friends_at_race(
   p_event_date DATE
 )
