@@ -2,7 +2,7 @@ import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import DailySummaryScreen from '@/screens/DailySummary';
 import BuildPlanBanner from '@/components/BuildPlanBanner';
-import OzzieCheckInCard from '@/components/OzzieCheckInCard';
+import OzzieAheadCard from '@/components/OzzieAheadCard';
 import { useDailySummary } from '@/hooks/useDailySummary';
 import { useFuelStatus } from '@/hooks/useFuelStatus';
 import { usePerformance } from '@/hooks/usePerformance';
@@ -85,7 +85,15 @@ export default function HomeTab() {
         !isLoading ? (
           <>
             {!hasPlan ? <BuildPlanBanner /> : null}
-            <OzzieCheckInCard />
+            <OzzieAheadCard
+              recovery={data?.recovery}
+              session={data?.session}
+              fuel={fuelStatus}
+              tsb={isPlus ? (perf?.trainingReadiness?.tsb ?? null) : null}
+              weekMiles={data?.weekMiles}
+              weekTarget={data?.weekTarget}
+              onStartSession={handleStartSession}
+            />
           </>
         ) : undefined
       }
