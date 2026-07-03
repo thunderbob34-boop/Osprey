@@ -16,6 +16,22 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
+import { createRaceEvent } from '@/services/races';
+import { useAuthStore } from '@/store/authStore';
+
+const KM_PER_MILE = 1.609344;
+
+/** Best-effort parse of a race-listing distance label ("5K", "Half Marathon", "10 Mile") into km. */
+function parseDistanceLabelToKm(label: string): number | null {
+  const lower = label.toLowerCase();
+  if (lower.includes('marathon') && !lower.includes('half')) return 42.195;
+  if (lower.includes('half')) return 21.0975;
+  const kMatch = lower.match(/([\d.]+)\s*k\b/);
+  if (kMatch) return Number(kMatch[1]);
+  const mileMatch = lower.match(/([\d.]+)\s*mile/);
+  if (mileMatch) return Number(mileMatch[1]) * KM_PER_MILE;
+  return null;
+}
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return '';
@@ -44,13 +60,42 @@ function pickDistanceAndroid(
   ]);
 }
 
+function pickDistance(distances: string[], onPick: (d: string) => void): void {
+  if (distances.length === 0) {
+    onPick('Running');
+    return;
+  }
+  if (distances.length === 1) {
+    onPick(distances[0]);
+    return;
+  }
+  if (Platform.OS === 'ios') {
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        title: 'Select Distance',
+        message: 'Which distance is this?',
+        options: [...distances, 'Cancel'],
+        cancelButtonIndex: distances.length,
+      },
+      (idx) => {
+        if (idx < distances.length) onPick(distances[idx]);
+      },
+    );
+  } else {
+    pickDistanceAndroid(distances, onPick);
+  }
+}
+
 export default function RaceEventScreen() {
   const { raceId } = useLocalSearchParams<{ raceId: string }>();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const userId = useAuthStore((s) => s.user?.id);
   const cachedResult: RaceSearchResult | null = raceId ? getCachedRace(raceId) : null;
 
   const [generating, setGenerating] = useState(false);
+  const [savingRace, setSavingRace] = useState(false);
+  const [savedRace, setSavedRace] = useState(false);
   const [distances, setDistances] = useState<string[]>(cachedResult?.distances ?? []);
   const [loadingDistances, setLoadingDistances] = useState(true);
 
@@ -141,36 +186,39 @@ export default function RaceEventScreen() {
   }
 
   function handleTrainPress() {
-    const distances = result!.distances;
-    if (distances.length === 0) {
-      startTrainFlow('Running');
+    pickDistance(result!.distances, startTrainFlow);
+  }
+
+  async function saveRace(selectedDistance: string) {
+    if (!userId) return;
+    const parsedDate = parseRaceDate(result!.date);
+    const isoDate = parsedDate ? parsedDate.toISOString().slice(0, 10) : null;
+    if (!isoDate) {
+      Alert.alert('Missing date', "Couldn't read this race's date.");
       return;
     }
-    if (distances.length === 1) {
-      startTrainFlow(distances[0]);
-      return;
-    }
-    if (Platform.OS === 'ios') {
-      ActionSheetIOS.showActionSheetWithOptions(
-        {
-          title: 'Select Distance',
-          message: 'Which distance are you training for?',
-          options: [...distances, 'Cancel'],
-          cancelButtonIndex: distances.length,
-        },
-        (idx) => {
-          if (idx < distances.length) {
-            startTrainFlow(distances[idx]);
-          }
-        },
-      );
-    } else {
-      pickDistanceAndroid(distances, (d) => startTrainFlow(d));
+    setSavingRace(true);
+    try {
+      await createRaceEvent(userId, {
+        name: result!.name,
+        distanceKm: parseDistanceLabelToKm(selectedDistance),
+        eventDate: isoDate,
+        location: [result!.city, result!.state].filter(Boolean).join(', ') || null,
+        raceUrl: result!.url || null,
+      });
+      queryClient.invalidateQueries({ queryKey: ['races-upcoming', userId] });
+      queryClient.invalidateQueries({ queryKey: ['races-past', userId] });
+      setSavedRace(true);
+      Alert.alert('Added to My Races', `${result!.name} is now on your Races tab.`);
+    } catch (err) {
+      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+    } finally {
+      setSavingRace(false);
     }
   }
 
   function handleAddToMyRaces() {
-    Alert.alert('Coming soon', 'Saving discovered races is coming in a future update.');
+    pickDistance(result!.distances, saveRace);
   }
 
   return (
@@ -241,8 +289,13 @@ export default function RaceEventScreen() {
             style={styles.addBtn}
             onPress={handleAddToMyRaces}
             activeOpacity={0.8}
+            disabled={savingRace || savedRace}
           >
-            <Text style={styles.addBtnText}>Add to My Races</Text>
+            {savingRace ? (
+              <ActivityIndicator color={Colors.teal} />
+            ) : (
+              <Text style={styles.addBtnText}>{savedRace ? 'Added ✓' : 'Add to My Races'}</Text>
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>

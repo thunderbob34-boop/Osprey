@@ -102,6 +102,23 @@ export default function LiftWorkoutScreen() {
     return () => clearInterval(timer);
   }, [startedAt, pausedAt, accumulatedPauseMs, status, tickRestTimer]);
 
+  function updateSetFields(
+    exerciseIndex: number,
+    setIndex: number,
+    fields: Partial<{ reps: number; weightLbs: number }>,
+  ) {
+    const updated = liftExercises.map((exercise, ei) => {
+      if (ei !== exerciseIndex) return exercise;
+      return {
+        ...exercise,
+        sets: exercise.sets.map((set, si) =>
+          si === setIndex ? { ...set, ...fields } : set,
+        ),
+      };
+    });
+    setLiftExercises(updated);
+  }
+
   function updateSet(
     exerciseIndex: number,
     setIndex: number,
@@ -109,16 +126,7 @@ export default function LiftWorkoutScreen() {
     value: string,
   ) {
     const numeric = Number(value.replace(/[^0-9.]/g, '')) || 0;
-    const updated = liftExercises.map((exercise, ei) => {
-      if (ei !== exerciseIndex) return exercise;
-      return {
-        ...exercise,
-        sets: exercise.sets.map((set, si) =>
-          si === setIndex ? { ...set, [field]: numeric } : set,
-        ),
-      };
-    });
-    setLiftExercises(updated);
+    updateSetFields(exerciseIndex, setIndex, { [field]: numeric });
   }
 
   async function completeSet(exerciseIndex: number, setIndex: number) {
@@ -161,8 +169,10 @@ export default function LiftWorkoutScreen() {
       const exercise = liftExercises[exerciseIndex];
       const nextSetIndex = exercise.sets.findIndex((s) => !s.completed);
       const targetIndex = nextSetIndex === -1 ? exercise.sets.length - 1 : nextSetIndex;
-      if (weightLbs != null) updateSet(exerciseIndex, targetIndex, 'weightLbs', String(weightLbs));
-      if (reps != null) updateSet(exerciseIndex, targetIndex, 'reps', String(reps));
+      const fields: Partial<{ reps: number; weightLbs: number }> = {};
+      if (weightLbs != null) fields.weightLbs = weightLbs;
+      if (reps != null) fields.reps = reps;
+      updateSetFields(exerciseIndex, targetIndex, fields);
     } catch (err) {
       Alert.alert('Voice log failed', err instanceof Error ? err.message : 'Try again.');
     } finally {

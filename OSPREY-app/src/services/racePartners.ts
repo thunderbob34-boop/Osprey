@@ -17,7 +17,6 @@ export async function fetchFriendsAtRace(
   eventDate: string,
 ): Promise<FriendAtRace[]> {
   const { data, error } = await supabase.rpc('get_friends_at_race', {
-    p_user_id: userId,
     p_event_date: eventDate,
   });
   if (error) throw error;

@@ -43,7 +43,6 @@ CREATE POLICY race_partners_owner ON race_partners
 -- self-only RLS policies.
 
 CREATE OR REPLACE FUNCTION get_friends_at_race(
-  p_user_id    UUID,
   p_event_date DATE
 )
 RETURNS TABLE(
@@ -64,7 +63,7 @@ AS $$
     re.name           AS friend_race_name
   FROM friendships f
   JOIN users u ON u.id = CASE
-    WHEN f.requester_id = p_user_id THEN f.addressee_id
+    WHEN f.requester_id = auth.uid() THEN f.addressee_id
     ELSE f.requester_id
   END
   JOIN race_events re
@@ -72,7 +71,7 @@ AS $$
     AND re.event_date = p_event_date
     AND re.deleted_at IS NULL
   WHERE f.status = 'accepted'
-    AND (f.requester_id = p_user_id OR f.addressee_id = p_user_id)
+    AND (f.requester_id = auth.uid() OR f.addressee_id = auth.uid())
     AND u.deleted_at IS NULL
   ORDER BY u.display_name;
 $$;
@@ -99,6 +98,11 @@ AS $$
   FROM race_partners rp
   JOIN users u ON u.id = rp.partner_user_id
   WHERE rp.race_id = p_race_id
+    -- Security: only the race owner or a flagged partner may see the partner list.
+    AND (
+      rp.race_id IN (SELECT id FROM race_events WHERE user_id = auth.uid() AND deleted_at IS NULL)
+      OR rp.partner_user_id = auth.uid()
+    )
   ORDER BY u.display_name;
 $$;
 

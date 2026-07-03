@@ -49,10 +49,10 @@ function mapRow(row: ActivityCardRow): ActivityCard {
  * ordered newest first. Includes kudo counts and whether the current user gave a kudo.
  */
 export async function fetchActivityFeed(userId: string, limit = 50): Promise<ActivityCard[]> {
-  const { data, error } = await supabase.rpc('get_activity_feed', { p_user_id: userId, p_limit: limit });
+  const { data, error } = await supabase.rpc('get_activity_feed', { p_limit: limit });
 
   if (error) {
-    // Fall back to a simple query if the RPC doesn't exist yet.
+    // Fall back to a simple query if the RPC isn't deployed yet.
     return fetchActivityFeedSimple(userId, limit);
   }
 
@@ -65,11 +65,11 @@ async function fetchActivityFeedSimple(userId: string, limit: number): Promise<A
     .from('activity_shares')
     .select(
       `
-      id as share_id,
+      share_id:id,
       workout_id,
       user_id,
       caption,
-      created_at as share_created_at,
+      share_created_at:created_at,
       users!inner(display_name),
       workout_logs!inner(session_type, total_duration_s, total_distance_km)
     `,

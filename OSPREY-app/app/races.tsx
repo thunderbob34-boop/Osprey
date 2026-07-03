@@ -214,6 +214,53 @@ function LogisticsPanel({
   );
 }
 
+// ─── Record result panel ─────────────────────────────────────────────────────
+// Alert.prompt is iOS-only and silently no-ops on Android, so this uses a
+// plain in-place TextInput instead (consistent with the Logistics/Retro panels).
+
+interface ResultPanelProps {
+  race: RaceEvent;
+  onClose: () => void;
+  onSave: (raceId: string, text: string) => Promise<void>;
+  isSaving: boolean;
+}
+
+function ResultPanel({ race, onClose, onSave, isSaving }: ResultPanelProps) {
+  const [text, setText] = useState('');
+
+  return (
+    <View style={styles.logisticsPanel}>
+      <View style={styles.logisticsHeader}>
+        <Text style={styles.logisticsTitle}>Record Result</Text>
+        <TouchableOpacity onPress={onClose} hitSlop={10}>
+          <Text style={styles.logisticsClose}>✕</Text>
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.fieldLabel}>FINISH TIME FOR {race.name.toUpperCase()}</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="h:mm:ss or mm:ss"
+        placeholderTextColor={Colors.textMuted}
+        value={text}
+        onChangeText={setText}
+        keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'default'}
+        autoFocus
+      />
+      <TouchableOpacity
+        style={styles.saveBtn}
+        onPress={() => onSave(race.id, text)}
+        disabled={isSaving}
+      >
+        {isSaving ? (
+          <ActivityIndicator color="#000" />
+        ) : (
+          <Text style={styles.saveBtnText}>Save Result</Text>
+        )}
+      </TouchableOpacity>
+    </View>
+  );
+}
+
 // ─── Retrospective panel ─────────────────────────────────────────────────────
 
 const FEEL_OPTIONS: { score: number; label: string }[] = [
@@ -537,6 +584,7 @@ export default function RacesScreen() {
   const [logisticsRaceId, setLogisticsRaceId] = useState<string | null>(null);
   const [retroRaceId, setRetroRaceId] = useState<string | null>(null);
   const [partnersRaceId, setPartnersRaceId] = useState<string | null>(null);
+  const [resultRaceId, setResultRaceId] = useState<string | null>(null);
 
   function resetForm() {
     setName('');
@@ -591,23 +639,18 @@ export default function RacesScreen() {
     }
   }
 
-  function handleRecordResult(race: RaceEvent) {
-    Alert.prompt?.(
-      'Record result',
-      `Finish time for ${race.name} (h:mm:ss)`,
-      async (text?: string) => {
-        const seconds = text ? parseRaceTime(text) : null;
-        if (seconds == null) {
-          Alert.alert('Check the time', 'Use h:mm:ss or mm:ss.');
-          return;
-        }
-        try {
-          await recordResult.mutateAsync({ raceId: race.id, resultTimeS: seconds });
-        } catch (err) {
-          Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
-        }
-      },
-    );
+  async function handleSaveResult(raceId: string, text: string) {
+    const seconds = text ? parseRaceTime(text) : null;
+    if (seconds == null) {
+      Alert.alert('Check the time', 'Use h:mm:ss or mm:ss.');
+      return;
+    }
+    try {
+      await recordResult.mutateAsync({ raceId, resultTimeS: seconds });
+      setResultRaceId(null);
+    } catch (err) {
+      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+    }
   }
 
   function handleDelete(race: RaceEvent) {
@@ -900,8 +943,19 @@ export default function RacesScreen() {
                           </Text>
                           <View style={styles.actionRow}>
                             {!race.resultTimeS ? (
-                              <TouchableOpacity onPress={() => handleRecordResult(race)}>
-                                <Text style={styles.actionLink}>Record result</Text>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  setResultRaceId((id) => (id === race.id ? null : race.id))
+                                }
+                              >
+                                <Text
+                                  style={[
+                                    styles.actionLink,
+                                    resultRaceId === race.id && styles.actionLinkActive,
+                                  ]}
+                                >
+                                  Record result
+                                </Text>
                               </TouchableOpacity>
                             ) : (
                               <TouchableOpacity
@@ -922,6 +976,15 @@ export default function RacesScreen() {
                           </View>
                         </View>
                       </View>
+
+                      {resultRaceId === race.id ? (
+                        <ResultPanel
+                          race={race}
+                          onClose={() => setResultRaceId(null)}
+                          onSave={handleSaveResult}
+                          isSaving={recordResult.isPending}
+                        />
+                      ) : null}
 
                       {retroRaceId === race.id ? (
                         <RetroPanel

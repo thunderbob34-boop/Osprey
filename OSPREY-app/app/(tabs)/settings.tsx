@@ -14,7 +14,6 @@ import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
 import {
   hasOspreyPlus,
-  purchaseOspreyPlus,
   restorePurchases,
 } from '@/services/subscriptions';
 import {
@@ -141,19 +140,8 @@ export default function SettingsTab() {
     }
   }
 
-  async function handleUpgrade() {
-    setLoading(true);
-    try {
-      const success = await purchaseOspreyPlus();
-      setPlusActive(success);
-      if (!success) {
-        Alert.alert('OSPREY+', 'No packages available yet. Configure RevenueCat to enable purchases.');
-      }
-    } catch (err) {
-      Alert.alert('Purchase failed', err instanceof Error ? err.message : 'Try again later.');
-    } finally {
-      setLoading(false);
-    }
+  function handleUpgrade() {
+    router.push('/paywall');
   }
 
   async function handleRestore() {

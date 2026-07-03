@@ -9,7 +9,7 @@ export default function WelcomeScreen() {
   return (
     <OnboardingShell
       step={0}
-      totalSteps={5}
+      totalSteps={4}
       title="Hey — I'm Ozzie."
       showOzzie={false}
       onContinue={() => router.push('/(onboarding)/name')}
@@ -26,7 +26,7 @@ export default function WelcomeScreen() {
         <View style={styles.speech}>
           <Text style={styles.speaker}>Ozzie says:</Text>
           <Text style={styles.quote}>
-            &ldquo;Three questions, one plan, and we adjust as we go. Ready?&rdquo;
+            &ldquo;Four quick questions, one plan, and we adjust as we go. Ready?&rdquo;
           </Text>
         </View>
       </View>

@@ -61,13 +61,28 @@ GRANT SELECT, INSERT, DELETE ON challenge_members TO authenticated;
 GRANT ALL ON challenge_members TO service_role;
 
 -- Members of a challenge can see all members of that same challenge.
+-- Uses a SECURITY DEFINER helper to avoid the policy querying its own table
+-- (a direct self-join here causes "infinite recursion detected in policy").
+CREATE OR REPLACE FUNCTION is_challenge_member(p_challenge_id UUID)
+RETURNS BOOLEAN
+SECURITY DEFINER
+SET search_path = public
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM challenge_members
+    WHERE challenge_id = p_challenge_id AND user_id = auth.uid()
+  );
+$$;
+
+GRANT EXECUTE ON FUNCTION is_challenge_member TO authenticated;
+
 CREATE POLICY challenge_members_read ON challenge_members
   FOR SELECT TO authenticated
   USING (
     user_id = auth.uid()
-    OR challenge_id IN (
-      SELECT challenge_id FROM challenge_members WHERE user_id = auth.uid()
-    )
+    OR is_challenge_member(challenge_id)
   );
 
 -- Creator can add any member; anyone can add themselves.
@@ -94,7 +109,7 @@ CREATE POLICY challenge_members_delete ON challenge_members
 -- Returns all accepted friends with display names.
 -- SECURITY DEFINER because users.display_name has a self-only RLS policy.
 
-CREATE OR REPLACE FUNCTION get_my_friends(p_user_id UUID)
+CREATE OR REPLACE FUNCTION get_my_friends()
 RETURNS TABLE(friend_user_id UUID, friend_display_name TEXT)
 SECURITY DEFINER
 SET search_path = public
@@ -106,11 +121,11 @@ AS $$
     u.display_name    AS friend_display_name
   FROM friendships f
   JOIN users u ON u.id = CASE
-    WHEN f.requester_id = p_user_id THEN f.addressee_id
+    WHEN f.requester_id = auth.uid() THEN f.addressee_id
     ELSE f.requester_id
   END
   WHERE f.status = 'accepted'
-    AND (f.requester_id = p_user_id OR f.addressee_id = p_user_id)
+    AND (f.requester_id = auth.uid() OR f.addressee_id = auth.uid())
     AND u.deleted_at IS NULL
   ORDER BY u.display_name;
 $$;
