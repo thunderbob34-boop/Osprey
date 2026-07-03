@@ -87,10 +87,17 @@ export default function EnduranceWorkoutScreen() {
   const [stepRemainingS, setStepRemainingS] = useState<number | null>(null);
   const [intervalsComplete, setIntervalsComplete] = useState(false);
   const cuedStepRef = useRef(-1);
-  // Wall-clock deadline for the current countdown step — avoids decrementing
-  // state inside a setState updater (which would call advanceStep, itself
-  // multiple setStates, from within another setState's updater function).
+  // Wall-clock deadline for the current countdown step — the 1s timer compares
+  // against this instead of decrementing state, so a slow JS frame can't drift
+  // the countdown.
   const stepEndAtRef = useRef<number | null>(null);
+  // Refs mirror state the timer callback needs, since its closure only
+  // refreshes when intervalSteps changes — reading refs avoids stale values
+  // and keeps advanceStep free of setState-updater side effects.
+  const stepIndexRef = useRef(0);
+  const intervalStepsRef = useRef<IntervalStep[]>([]);
+  const prescriptionRef = useRef<IntervalPrescription | null>(null);
+  const completedRef = useRef(false);
 
   const hasIntervals = intervalSteps.length > 0;
   const currentStep = hasIntervals ? intervalSteps[stepIndex] : null;
@@ -102,6 +109,8 @@ export default function EnduranceWorkoutScreen() {
         if (!p) return;
         const steps = expandIntervalSteps(p);
         if (steps.length === 0) return;
+        prescriptionRef.current = p;
+        intervalStepsRef.current = steps;
         setPrescription(p);
         setIntervalSteps(steps);
       })
@@ -118,27 +127,31 @@ export default function EnduranceWorkoutScreen() {
   }, [currentStep, stepIndex]);
 
   function advanceStep() {
-    setStepIndex((prevIndex) => {
-      const nextIndex = prevIndex + 1;
-      if (nextIndex >= intervalSteps.length) {
-        setIntervalsComplete(true);
-        setStepRemainingS(null);
-        stepEndAtRef.current = null;
-        ozzieSpeak("That's the full set — nice work. Wrap up and save when you're ready.", 'workout').catch(
-          () => undefined,
-        );
-        // Auto-fill total distance if every segment was distance-based.
-        if (prescription) {
-          const totalM = totalIntervalDistanceM(prescription);
-          if (totalM != null) {
-            setDistance(String(totalM));
-            setDistanceUnit('meters');
-          }
+    if (completedRef.current) return;
+    const nextIndex = stepIndexRef.current + 1;
+
+    if (nextIndex >= intervalStepsRef.current.length) {
+      completedRef.current = true;
+      stepEndAtRef.current = null;
+      setIntervalsComplete(true);
+      setStepRemainingS(null);
+      ozzieSpeak("That's the full set — nice work. Wrap up and save when you're ready.", 'workout').catch(
+        () => undefined,
+      );
+      // Auto-fill total distance if every segment was distance-based.
+      const p = prescriptionRef.current;
+      if (p) {
+        const totalM = totalIntervalDistanceM(p);
+        if (totalM != null) {
+          setDistance(String(totalM));
+          setDistanceUnit('meters');
         }
-        return prevIndex;
       }
-      return nextIndex;
-    });
+      return;
+    }
+
+    stepIndexRef.current = nextIndex;
+    setStepIndex(nextIndex);
   }
 
   useEffect(() => {

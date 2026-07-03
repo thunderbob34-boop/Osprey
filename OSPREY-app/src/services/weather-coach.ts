@@ -120,6 +120,14 @@ export function deriveWeatherCoach(
     const day = dayName(hotDay.date, todayIso);
     headline = `${hotDay.tempMaxF}° ${day} — start hydrating now`;
     detail = `Heat performance is won 48 hours early: add ~20 oz of fluids and a pinch of salt to today and tomorrow. Plan ${day}'s session early morning, shaded, or indoors.`;
+  } else if (warmDay && warmDay.date === todayIso) {
+    // Warm (85-92°) today — not alert-tier, but worth timing and fluids.
+    severity = 'caution';
+    suggestIndoor = false;
+    headline = `Warm one today — high of ${today.tempMaxF}°`;
+    detail = window
+      ? `Beat the heat: train ${formatWindow(window)} (~${window.tempF}°), favor shade, and bring fluids.`
+      : 'Favor shade, ease the pace in the heat, and bring fluids.';
   } else if (today.precipProbabilityMax >= RAIN_PROB && outdoorSession) {
     severity = 'caution';
     headline = `${today.precipProbabilityMax}% chance of rain today`;

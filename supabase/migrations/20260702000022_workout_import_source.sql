@@ -8,6 +8,10 @@ ALTER TABLE workout_logs
   ADD COLUMN IF NOT EXISTS source TEXT NOT NULL DEFAULT 'manual',
   ADD COLUMN IF NOT EXISTS external_id TEXT;
 
+-- NOT a partial index: PostgREST's on_conflict emits a bare
+-- ON CONFLICT (user_id, external_id) with no WHERE predicate, which
+-- Postgres refuses to match against a partial unique index. A full unique
+-- index is safe because NULLs are distinct — manual workouts (external_id
+-- NULL) never collide with each other.
 CREATE UNIQUE INDEX IF NOT EXISTS idx_workout_logs_user_external
-  ON workout_logs(user_id, external_id)
-  WHERE external_id IS NOT NULL;
+  ON workout_logs(user_id, external_id);
