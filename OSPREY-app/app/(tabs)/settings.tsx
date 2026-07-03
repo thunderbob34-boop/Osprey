@@ -272,6 +272,17 @@ export default function SettingsTab() {
         </View>
 
         <View style={styles.card}>
+          <Text style={styles.cardLabel}>Fuel Plan</Text>
+          <Text style={styles.cardValue}>Meals, budget & grocery list</Text>
+          <TouchableOpacity
+            style={styles.upgradeBtn}
+            onPress={() => router.push('/meal-prep')}
+          >
+            <Text style={styles.upgradeText}>Open fuel plan</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.card}>
           <Text style={styles.cardLabel}>TRAINING PLAN</Text>
           <TouchableOpacity style={styles.planRow} onPress={() => router.push('/plan-preview')}>
             <View style={styles.planRowLeft}>

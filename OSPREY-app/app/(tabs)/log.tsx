@@ -333,6 +333,14 @@ export default function LogTab() {
                 </Text>
               </View>
               {nutrition.tip ? <Text style={styles.tipText}>{nutrition.tip}</Text> : null}
+              <TouchableOpacity
+                style={styles.mealPrepBtn}
+                onPress={() => router.push('/meal-prep')}
+                accessibilityRole="button"
+                accessibilityLabel="Open fuel plan: meals and grocery list"
+              >
+                <Text style={styles.mealPrepBtnText}>🍳 Fuel Plan — meals &amp; grocery list →</Text>
+              </TouchableOpacity>
             </View>
           ) : null}
 
@@ -697,6 +705,16 @@ const styles = StyleSheet.create({
   macroChipRow: { flexDirection: 'row', gap: 12 },
   macroChip: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
   tipText: { fontSize: 13, color: Colors.textSecondary, lineHeight: 18, marginTop: 4 },
+  mealPrepBtn: {
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    backgroundColor: Colors.surfaceTeal,
+    borderRadius: 10,
+    paddingVertical: 11,
+    alignItems: 'center',
+  },
+  mealPrepBtnText: { fontSize: 13.5, fontWeight: '700', color: Colors.teal },
   todayCard: {
     backgroundColor: Colors.bgCard,
     borderWidth: 1,
