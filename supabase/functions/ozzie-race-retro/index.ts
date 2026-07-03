@@ -34,6 +34,7 @@ interface RetroRequest {
   retroPacingNotes: string | null;
   retroNutritionNotes: string | null;
   retroLessons: string | null;
+  partners?: Array<{ name: string; resultTimeS: number | null; goalTimeS: number | null }>;
 }
 
 const KM_PER_MILE = 1.609344;
@@ -84,6 +85,20 @@ function buildUserMessage(req: RetroRequest): string {
   if (req.retroPacingNotes) lines.push(`Pacing reflection: ${req.retroPacingNotes}`);
   if (req.retroNutritionNotes) lines.push(`Nutrition reflection: ${req.retroNutritionNotes}`);
   if (req.retroLessons) lines.push(`Key lessons they noted: ${req.retroLessons}`);
+
+  const finishedPartners = (req.partners ?? []).filter((p) => p.resultTimeS != null);
+  if (finishedPartners.length > 0) {
+    const partnerLines = finishedPartners
+      .map((p) => {
+        const goal = p.goalTimeS ? ` (goal ${formatTime(p.goalTimeS)})` : '';
+        return `${p.name}: ${formatTime(p.resultTimeS as number)}${goal}`;
+      })
+      .join('; ');
+    lines.push(`Training partners who raced the same event: ${partnerLines}`);
+    lines.push(
+      'If it fits naturally, acknowledge how the squad did together in one line — celebrate shared wins, but keep the focus on THIS athlete.',
+    );
+  }
 
   return lines.join('\n');
 }

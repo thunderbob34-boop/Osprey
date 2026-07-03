@@ -808,6 +808,21 @@ export default function RacesScreen() {
                       <Text style={styles.nextMeta}>Target {formatRaceTime(nextRace.goalTimeS)}</Text>
                     ) : null}
                   </View>
+                  {nextRace.daysUntil === 0 ? (
+                    <TouchableOpacity
+                      style={styles.watchCrewBtn}
+                      onPress={() =>
+                        router.push({
+                          pathname: '/live-race',
+                          params: { raceId: nextRace.id, raceName: nextRace.name },
+                        })
+                      }
+                      accessibilityRole="button"
+                      accessibilityLabel="Watch your crew live"
+                    >
+                      <Text style={styles.watchCrewText}>📡 Watch your crew live →</Text>
+                    </TouchableOpacity>
+                  ) : null}
                 </View>
               ) : null}
 
@@ -1047,6 +1062,16 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   nextLabel: { color: Colors.teal, fontSize: 10, fontWeight: '800', letterSpacing: 1 },
+  watchCrewBtn: {
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    backgroundColor: Colors.surfaceTeal,
+    borderRadius: 10,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  watchCrewText: { fontSize: 13, fontWeight: '700', color: Colors.teal },
   nextName: { color: Colors.textPrimary, fontSize: 20, fontWeight: '900', marginTop: 4 },
   nextCountdown: { color: Colors.gold, fontSize: 15, fontWeight: '700', marginTop: 2 },
   nextMetaRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 14, marginTop: 8 },

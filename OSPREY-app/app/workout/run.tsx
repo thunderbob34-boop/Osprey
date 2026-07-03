@@ -22,6 +22,13 @@ import {
 import { useAuthStore } from '@/store/authStore';
 import { saveRunWorkout } from '@/services/workouts';
 import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
+import {
+  fetchTodaysRace,
+  publishLivePosition,
+  startLiveBroadcast,
+  stopLiveBroadcast,
+} from '@/services/liveRace';
+import { useQuery } from '@tanstack/react-query';
 import { generateWarmup, type WarmupDrill } from '@/services/warmup';
 import {
   checkCues,
@@ -34,6 +41,7 @@ export default function RunWorkoutScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{ sessionId?: string }>();
   const userId = useAuthStore((s) => s.user?.id);
+  const displayName = useAuthStore((s) => s.profile?.display_name ?? 'Athlete');
 
   const status = useWorkoutStore((s) => s.status);
   const startedAt = useWorkoutStore((s) => s.startedAt);
@@ -55,14 +63,64 @@ export default function RunWorkoutScreen() {
   const coachingStateRef = useRef<CoachingState>(makeCoachingState());
   const speakingRef = useRef(false);
   const { isPlus } = useSubscription();
+  const [isLive, setIsLive] = useState(false);
+  const [goingLive, setGoingLive] = useState(false);
+
+  // Only offer "go live for my crew" when the athlete actually has a race
+  // logged for today — this is a race-day feature, not an every-run one.
+  const todaysRace = useQuery({
+    queryKey: ['todays-race', userId],
+    queryFn: () => fetchTodaysRace(userId!),
+    enabled: Boolean(userId),
+    staleTime: 30 * 60 * 1000,
+  });
 
   useRunTracking(status === 'active');
 
   useEffect(() => {
     return () => {
       ozzieStop();
+      // Always tear the broadcast channel down when leaving the run screen.
+      stopLiveBroadcast();
     };
   }, []);
+
+  async function handleToggleLive() {
+    const race = todaysRace.data;
+    if (!race) return;
+    if (isLive) {
+      await stopLiveBroadcast();
+      setIsLive(false);
+      return;
+    }
+    setGoingLive(true);
+    try {
+      await startLiveBroadcast(race.raceId);
+      setIsLive(true);
+    } catch (err) {
+      Alert.alert('Could not go live', err instanceof Error ? err.message : 'Try again.');
+    } finally {
+      setGoingLive(false);
+    }
+  }
+
+  // Push position to the crew's channel while live. Throttled inside the
+  // service, so calling it every tick is fine.
+  useEffect(() => {
+    if (!isLive || status !== 'active' || !userId) return;
+    const currentMiles = metersToMiles(distanceMeters);
+    const last = trackPoints[trackPoints.length - 1];
+    publishLivePosition({
+      userId,
+      displayName,
+      distanceMiles: currentMiles,
+      elapsedS: elapsed,
+      paceLabel: currentMiles > 0 ? `${formatPace(elapsed / currentMiles)}/mi` : '--:--',
+      lat: last?.lat ?? null,
+      lon: last?.lon ?? null,
+      sentAt: new Date().toISOString(),
+    });
+  }, [isLive, status, userId, displayName, distanceMeters, elapsed, trackPoints]);
 
   function handleStartAfterWarmup() {
     setWarmingUp(false);
@@ -141,6 +199,8 @@ export default function RunWorkoutScreen() {
     if (!userId || !startedAt) return;
 
     setSaving(true);
+    await stopLiveBroadcast();
+    setIsLive(false);
     try {
       const workoutId = await saveRunWorkout({
         userId,
@@ -223,8 +283,26 @@ export default function RunWorkoutScreen() {
           ) : null}
         </MapView>
         <View style={styles.mapOverlay}>
-          <Text style={styles.sessionLabel}>RUN IN PROGRESS</Text>
+          <Text style={styles.sessionLabel}>{isLive ? '🔴 LIVE FOR YOUR CREW' : 'RUN IN PROGRESS'}</Text>
         </View>
+        {todaysRace.data ? (
+          <TouchableOpacity
+            style={[styles.liveBtn, isLive && styles.liveBtnOn]}
+            onPress={handleToggleLive}
+            disabled={goingLive}
+            accessibilityRole="button"
+            accessibilityState={{ selected: isLive }}
+            accessibilityLabel={isLive ? 'Stop sharing live position' : 'Share live position with your race crew'}
+          >
+            {goingLive ? (
+              <ActivityIndicator size="small" color={isLive ? '#000' : Colors.teal} />
+            ) : (
+              <Text style={[styles.liveBtnText, isLive && styles.liveBtnTextOn]}>
+                {isLive ? '⏹ Stop live' : '📡 Go live'}
+              </Text>
+            )}
+          </TouchableOpacity>
+        ) : null}
       </View>
 
       <View style={styles.statsRow}>
@@ -306,6 +384,22 @@ const styles = StyleSheet.create({
     color: Colors.teal,
     letterSpacing: 1.2,
   },
+  liveBtn: {
+    position: 'absolute',
+    top: 10,
+    right: 12,
+    backgroundColor: 'rgba(6,9,18,0.8)',
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderRadius: 18,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    minWidth: 84,
+    alignItems: 'center',
+  },
+  liveBtnOn: { backgroundColor: Colors.teal, borderColor: Colors.teal },
+  liveBtnText: { fontSize: 12, fontWeight: '800', color: Colors.teal },
+  liveBtnTextOn: { color: '#000' },
   statsRow: {
     flexDirection: 'row',
     padding: 16,

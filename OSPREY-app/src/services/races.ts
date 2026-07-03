@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { fetchPartnerRaceResults } from '@/services/liveRace';
 
 export interface ChecklistItem {
   id: string;
@@ -274,6 +275,19 @@ export async function updateRaceRetro(raceId: string, update: RaceRetroUpdate): 
 }
 
 export async function generateOzzieRetro(race: RaceEvent, retroFeelScore: number | null): Promise<string> {
+  // Pull partner finishes for the same race so Ozzie's debrief can reference
+  // how the squad did ("you and Sam both PR'd") instead of a purely solo take.
+  // Best-effort — a failure here must not block the retrospective.
+  let partners: Array<{ name: string; resultTimeS: number | null; goalTimeS: number | null }> = [];
+  try {
+    const rows = await fetchPartnerRaceResults(race.id);
+    partners = rows
+      .filter((p) => p.resultTimeS != null)
+      .map((p) => ({ name: p.partnerDisplayName, resultTimeS: p.resultTimeS, goalTimeS: p.goalTimeS }));
+  } catch {
+    partners = [];
+  }
+
   const { data, error } = await supabase.functions.invoke('ozzie-race-retro', {
     body: {
       raceName: race.name,
@@ -285,6 +299,7 @@ export async function generateOzzieRetro(race: RaceEvent, retroFeelScore: number
       retroPacingNotes: race.retroPacingNotes,
       retroNutritionNotes: race.retroNutritionNotes,
       retroLessons: race.retroLessons,
+      partners,
     },
   });
   if (error) throw error;

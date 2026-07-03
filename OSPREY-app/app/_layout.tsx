@@ -63,6 +63,7 @@ export default function RootLayout() {
         <Stack.Screen name="supplements" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="meal-prep" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="races" options={{ presentation: 'fullScreenModal' }} />
+        <Stack.Screen name="live-race" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="activity" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="challenges" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="paywall" options={{ presentation: 'modal' }} />
