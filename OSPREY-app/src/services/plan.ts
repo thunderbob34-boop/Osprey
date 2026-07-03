@@ -106,6 +106,39 @@ export async function fetchCurrentWeekSessions(userId: string): Promise<WeekSess
   return (sessions ?? []) as WeekSession[];
 }
 
+// ── Mid-week recalibration ────────────────────────────────────────────────────
+
+export interface RecalibrateChange {
+  date: string;
+  before: { description: string | null; intensity: string; planned_minutes: number | null };
+  after: { description: string; intensity: string; planned_minutes: number | null };
+  changed: boolean;
+}
+
+export interface RecalibrateResult {
+  recalibrated: boolean;
+  reason?: 'no_active_plan' | 'week_complete';
+  summary?: string;
+  tsb?: number;
+  changes?: RecalibrateChange[];
+  changedCount?: number;
+}
+
+/**
+ * Asks Ozzie to rebuild only the remaining (not yet completed) days of the
+ * current week around the athlete's live recovery/load picture. Completed
+ * and past days are never touched.
+ */
+export async function recalibrateWeek(): Promise<RecalibrateResult> {
+  const { data, error } = await supabase.functions.invoke<RecalibrateResult & { error?: string }>(
+    'ozzie-generate-plan',
+    { method: 'POST', body: { recalibrate: true } },
+  );
+  if (error || !data) throw error ?? new Error('Recalibration failed');
+  if ((data as { error?: string }).error) throw new Error((data as { error?: string }).error);
+  return data;
+}
+
 const SWAP_DESCRIPTIONS: Record<SwappableSessionType, string> = {
   run: 'Easy Run',
   lift: 'Strength Session',

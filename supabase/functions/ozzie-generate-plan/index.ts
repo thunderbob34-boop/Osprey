@@ -227,6 +227,232 @@ async function generateRescheduleReason(swaps: RescheduleSwap[]): Promise<string
   return data.choices?.[0]?.message?.content?.trim() ?? "Looks like a session got missed — I've moved it to an open day this week.";
 }
 
+// ── Recalibrate: rebuild only the REMAINING days of the current week ─────────
+// Triggered by the plan-adaptation banner's "Recalibrate" button. Unlike a
+// force rebuild this never touches completed/past days and never deletes
+// session rows — remaining sessions are updated in place (same ids), so
+// nothing referencing them needs detaching and history stays intact.
+
+const RECALIBRATE_SYSTEM_PROMPT = `You are Ozzie, the AI coach inside the OSPREY fitness app — warm, direct, Kronk-spirited. The athlete's recovery/fatigue picture changed mid-week and they asked you to recalibrate the REST of this week's training.
+
+You are given: the remaining (not yet done) days of the current week with their currently planned sessions, what's already been completed or missed this week, the athlete's training load (ATL = 7-day fatigue, CTL = 42-day fitness, TSB = freshness = CTL - ATL), and their latest recovery score if one exists.
+
+How to adjust:
+- TSB < -20 or recovery recommendation "rest": cut remaining volume hard — convert the hardest remaining session to easy or rest, shorten the others 20-30%. Protect one quality session only if TSB is trending better later in the week.
+- TSB -10 to -20 or recommendation "easy": soften intensity (threshold/interval → easy/moderate), trim 10-15% of minutes.
+- TSB > 15 and recovery is good: the athlete is fresh — you may upgrade ONE easy day to a quality session, never more.
+- Never schedule two hard days back-to-back. Never change a day into "race".
+- Keep the overall shape sensible: if a long run remains, it stays the longest session.
+- A day may also stay exactly as it is — only change what the data justifies.
+
+Output rules:
+- Return EXACTLY the same dates you were given — no more, no fewer.
+- session_type: run, lift, swim, bike, cross, rest, race. intensity: easy, moderate, threshold, interval, race, rest.
+- planned_minutes / planned_distance_km: numbers or null (null for rest; distance null for lift/cross/rest).
+- ozzie_notes: one sentence per day, in Ozzie's voice, saying why this day is now what it is.
+- summary: 1-2 sentences to show the athlete what you changed overall and why, grounded in the numbers.
+- Respond ONLY with valid JSON: {"days": [{"date": "YYYY-MM-DD", "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string}], "summary": string}`;
+
+interface RemainingSession {
+  id: string;
+  session_date: string;
+  session_type: string;
+  intensity: string;
+  planned_minutes: number | null;
+  planned_distance_km: number | null;
+  description: string | null;
+  ozzie_notes: string | null;
+}
+
+interface RecalibratedDay {
+  date: string;
+  session_type: string;
+  intensity: string;
+  planned_minutes: number | null;
+  planned_distance_km: number | null;
+  description: string;
+  ozzie_notes: string;
+}
+
+const SESSION_TYPES = new Set(['run', 'lift', 'swim', 'bike', 'cross', 'rest', 'race']);
+const INTENSITIES = new Set(['easy', 'moderate', 'threshold', 'interval', 'race', 'rest']);
+
+async function recalibrateRemainingWeek(
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+): Promise<Record<string, unknown>> {
+  const weekStartStr = toDateString(mondayOfThisWeek());
+  const todayStr = toDateString(new Date());
+
+  const { data: week } = await supabase
+    .from('training_weeks')
+    .select('id, plan_id, training_plans!inner(user_id, status)')
+    .eq('start_date', weekStartStr)
+    .eq('training_plans.user_id', userId)
+    .eq('training_plans.status', 'active')
+    .maybeSingle();
+
+  if (!week) return { recalibrated: false, reason: 'no_active_plan' };
+
+  const { data: sessions } = await supabase
+    .from('training_sessions')
+    .select('id, session_date, session_type, intensity, planned_minutes, planned_distance_km, description, ozzie_notes')
+    .eq('week_id', week.id)
+    .order('session_date', { ascending: true });
+
+  const all = (sessions ?? []) as RemainingSession[];
+  if (all.length === 0) return { recalibrated: false, reason: 'no_active_plan' };
+
+  const { data: linked } = await supabase
+    .from('workout_logs')
+    .select('session_id')
+    .in('session_id', all.map((s) => s.id));
+  const completedIds = new Set((linked ?? []).map((w) => w.session_id));
+
+  const remaining = all.filter((s) => s.session_date >= todayStr && !completedIds.has(s.id));
+  if (remaining.length === 0) return { recalibrated: false, reason: 'week_complete' };
+
+  const completed = all.filter((s) => completedIds.has(s.id));
+  const missed = all.filter(
+    (s) => s.session_date < todayStr && s.session_type !== 'rest' && !completedIds.has(s.id),
+  );
+
+  const [trainingLoad, recoveryRes] = await Promise.all([
+    computeTrainingLoad(supabase, userId),
+    supabase
+      .from('recovery_scores')
+      .select('score, recommendation, hrv_ms, sleep_hours, score_date')
+      .eq('user_id', userId)
+      .order('score_date', { ascending: false })
+      .limit(1)
+      .maybeSingle(),
+  ]);
+
+  const userMessage = JSON.stringify(
+    {
+      remainingDays: remaining.map((s) => ({
+        date: s.session_date,
+        session_type: s.session_type,
+        intensity: s.intensity,
+        planned_minutes: s.planned_minutes,
+        planned_distance_km: s.planned_distance_km,
+        description: s.description,
+      })),
+      completedThisWeek: completed.map((s) => ({ date: s.session_date, description: s.description })),
+      missedThisWeek: missed.map((s) => ({ date: s.session_date, description: s.description })),
+      trainingLoad,
+      recovery: recoveryRes.data ?? null,
+    },
+    null,
+    2,
+  );
+
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: RECALIBRATE_SYSTEM_PROMPT },
+        { role: 'user', content: `Recalibrate the rest of this week:\n${userMessage}` },
+      ],
+      response_format: { type: 'json_object' },
+      temperature: 0.6,
+      max_tokens: 900,
+    }),
+  });
+
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`OpenAI error: ${response.status} ${errText}`);
+  }
+  const data = await response.json();
+  const content = data.choices?.[0]?.message?.content;
+  if (!content) throw new Error('OpenAI returned no content');
+  const parsed = JSON.parse(content) as { days?: RecalibratedDay[]; summary?: string };
+
+  if (!Array.isArray(parsed.days) || parsed.days.length === 0) {
+    throw new Error('Recalibration returned no days');
+  }
+
+  // Apply only to dates we actually offered, updating rows IN PLACE by id.
+  const byDate = new Map(remaining.map((s) => [s.session_date, s]));
+  const changes: Array<{
+    date: string;
+    before: { description: string | null; intensity: string; planned_minutes: number | null };
+    after: { description: string; intensity: string; planned_minutes: number | null };
+    changed: boolean;
+  }> = [];
+
+  for (const day of parsed.days) {
+    const target = byDate.get(day.date);
+    if (!target) continue; // model invented a date — ignore it
+    if (!SESSION_TYPES.has(day.session_type) || !INTENSITIES.has(day.intensity)) continue;
+
+    const changed =
+      day.session_type !== target.session_type ||
+      day.intensity !== target.intensity ||
+      (day.planned_minutes ?? null) !== (target.planned_minutes ?? null) ||
+      (day.planned_distance_km ?? null) !== (target.planned_distance_km ?? null);
+
+    changes.push({
+      date: day.date,
+      before: {
+        description: target.description,
+        intensity: target.intensity,
+        planned_minutes: target.planned_minutes,
+      },
+      after: {
+        description: day.description,
+        intensity: day.intensity,
+        planned_minutes: day.planned_minutes,
+      },
+      changed,
+    });
+
+    if (changed || day.ozzie_notes) {
+      const { error: updateError } = await supabase
+        .from('training_sessions')
+        .update({
+          session_type: day.session_type,
+          intensity: day.intensity,
+          planned_minutes: day.planned_minutes,
+          planned_distance_km: day.planned_distance_km,
+          description: day.description,
+          ozzie_notes: day.ozzie_notes,
+        })
+        .eq('id', target.id);
+      if (updateError) throw updateError;
+    }
+  }
+
+  const summary =
+    typeof parsed.summary === 'string' && parsed.summary.trim()
+      ? parsed.summary.trim()
+      : 'I retuned the rest of your week around how recovered you are right now.';
+
+  await supabase.from('plan_adjustments').insert({
+    user_id: userId,
+    plan_id: week.plan_id,
+    session_id: null,
+    triggered_by: 'user_request',
+    original_json: { remaining: remaining.map(({ id: _id, ...rest }) => rest), trainingLoad, recovery: recoveryRes.data ?? null },
+    adjusted_json: { days: parsed.days, changes },
+    ozzie_reason: summary,
+  });
+
+  return {
+    recalibrated: true,
+    summary,
+    tsb: trainingLoad.tsb,
+    changes,
+    changedCount: changes.filter((c) => c.changed).length,
+  };
+}
+
 async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad) {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -298,6 +524,16 @@ Deno.serve(async (req: Request) => {
     // silent background call fired every time the home screen loads.
     const rawBody = await req.text();
     const body = rawBody ? JSON.parse(rawBody) : {};
+
+    // Mid-week recalibration is its own path: it adjusts only the remaining
+    // days of the existing week in place and never creates/deletes anything.
+    if (body.recalibrate === true) {
+      const result = await recalibrateRemainingWeek(supabase, userId);
+      return new Response(JSON.stringify(result), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     const forceRebuild = body.force === true && (Boolean(body.preferences) || Boolean(body.raceTarget));
 
     // Idempotency: does an active plan already have a week starting this Monday?

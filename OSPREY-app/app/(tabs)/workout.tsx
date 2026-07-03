@@ -1,8 +1,20 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, SafeAreaView, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  View,
+} from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
 import { usePlanAdaptation } from '@/hooks/usePlanAdaptation';
+import { recalibrateWeek, type RecalibrateResult } from '@/services/plan';
+import { ozzieSpeak } from '@/services/ozzie-audio';
 
 type Card = {
   emoji: string;
@@ -63,7 +75,33 @@ const CARDS: Card[] = [
 export default function WorkoutTab() {
   const router = useRouter();
   const alert = usePlanAdaptation();
+  const queryClient = useQueryClient();
   const [dismissed, setDismissed] = useState(false);
+  const [result, setResult] = useState<RecalibrateResult | null>(null);
+
+  const recalibrate = useMutation({
+    mutationFn: recalibrateWeek,
+    onSuccess: (res) => {
+      if (!res.recalibrated) {
+        Alert.alert(
+          'Nothing to recalibrate',
+          res.reason === 'week_complete'
+            ? "This week's remaining sessions are already done — next week's plan will pick up the new load picture."
+            : 'No active plan for this week yet — build one from the Home tab first.',
+        );
+        return;
+      }
+      setResult(res);
+      setDismissed(true);
+      if (res.summary) ozzieSpeak(res.summary, 'ambient');
+      // Every surface that shows planned sessions needs the fresh week.
+      queryClient.invalidateQueries({ queryKey: ['daily-summary'] });
+      queryClient.invalidateQueries({ queryKey: ['calendar-month'] });
+    },
+    onError: (err) => {
+      Alert.alert('Recalibration failed', err instanceof Error ? err.message : 'Try again.');
+    },
+  });
 
   const bannerBg =
     alert?.severity === 'warning'
@@ -89,15 +127,70 @@ export default function WorkoutTab() {
           <View style={[styles.banner, { backgroundColor: bannerBg, borderColor: bannerBorder }]}>
             <Text style={styles.bannerMessage}>{alert.message}</Text>
             <View style={styles.bannerActions}>
-              <TouchableOpacity onPress={() => router.push('/(tabs)/' as any)} style={styles.bannerButton}>
-                <Text style={[styles.bannerButtonText, { color: Colors.teal }]}>Recalibrate →</Text>
+              <TouchableOpacity
+                onPress={() => recalibrate.mutate()}
+                style={styles.bannerButton}
+                disabled={recalibrate.isPending}
+                accessibilityRole="button"
+                accessibilityLabel="Recalibrate the rest of this week's plan"
+              >
+                {recalibrate.isPending ? (
+                  <View style={styles.bannerLoadingRow}>
+                    <ActivityIndicator size="small" color={Colors.teal} />
+                    <Text style={[styles.bannerButtonText, { color: Colors.teal }]}>Recalibrating…</Text>
+                  </View>
+                ) : (
+                  <Text style={[styles.bannerButtonText, { color: Colors.teal }]}>Recalibrate →</Text>
+                )}
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setDismissed(true)} style={styles.bannerDismiss}>
+              <TouchableOpacity
+                onPress={() => setDismissed(true)}
+                style={styles.bannerDismiss}
+                hitSlop={10}
+                accessibilityRole="button"
+                accessibilityLabel="Dismiss"
+              >
                 <Text style={styles.bannerDismissText}>✕</Text>
               </TouchableOpacity>
             </View>
           </View>
         )}
+
+        {result?.recalibrated ? (
+          <View style={styles.resultCard}>
+            <View style={styles.resultHeader}>
+              <Text style={styles.resultLabel}>WEEK RECALIBRATED</Text>
+              <TouchableOpacity
+                onPress={() => setResult(null)}
+                hitSlop={10}
+                accessibilityRole="button"
+                accessibilityLabel="Dismiss recalibration summary"
+              >
+                <Text style={styles.bannerDismissText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+            {result.summary ? <Text style={styles.resultSummary}>&ldquo;{result.summary}&rdquo;</Text> : null}
+            {(result.changes ?? [])
+              .filter((c) => c.changed)
+              .map((c) => (
+                <View key={c.date} style={styles.diffRow}>
+                  <Text style={styles.diffDate}>{c.date.slice(5)}</Text>
+                  <Text style={styles.diffBefore} numberOfLines={1}>
+                    {c.before.description ?? c.before.intensity}
+                  </Text>
+                  <Text style={styles.diffArrow}>→</Text>
+                  <Text style={styles.diffAfter} numberOfLines={1}>
+                    {c.after.description}
+                  </Text>
+                </View>
+              ))}
+            {result.changedCount === 0 ? (
+              <Text style={styles.resultSummary}>
+                Ozzie looked at the numbers and kept the week as planned.
+              </Text>
+            ) : null}
+          </View>
+        ) : null}
 
         {CARDS.map((card) => (
           <TouchableOpacity
@@ -148,7 +241,24 @@ const styles = StyleSheet.create({
   bannerMessage: { fontSize: 13, color: Colors.textPrimary, lineHeight: 19, marginBottom: 10 },
   bannerActions: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   bannerButton: {},
+  bannerLoadingRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   bannerButtonText: { fontSize: 13, fontWeight: '700' },
   bannerDismiss: { padding: 4 },
   bannerDismissText: { fontSize: 13, color: Colors.textMuted },
+  resultCard: {
+    backgroundColor: Colors.surfaceTeal,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderRadius: 14,
+    padding: 14,
+    marginBottom: 16,
+  },
+  resultHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
+  resultLabel: { fontSize: 10, fontWeight: '700', color: Colors.teal, letterSpacing: 1 },
+  resultSummary: { fontSize: 13, color: Colors.textSecondary, fontStyle: 'italic', lineHeight: 19, marginBottom: 8 },
+  diffRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 5 },
+  diffDate: { fontSize: 11.5, fontWeight: '700', color: Colors.textMuted, width: 42 },
+  diffBefore: { flex: 1, fontSize: 12.5, color: Colors.textMuted, textDecorationLine: 'line-through' },
+  diffArrow: { fontSize: 12, color: Colors.teal, fontWeight: '700' },
+  diffAfter: { flex: 1, fontSize: 12.5, fontWeight: '700', color: Colors.textPrimary },
 });
