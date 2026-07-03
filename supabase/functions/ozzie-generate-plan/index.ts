@@ -30,7 +30,8 @@ Rules:
 - planned_distance_km: for run, race, swim, and bike sessions — a reasonable distance for the session's duration, intensity, and the athlete's level (e.g. an easy run duration implies roughly a 9-11 min/mile pace, swims are much shorter than runs for the same duration). null for lift, cross, and rest days.
 - description: short, e.g. "Easy Run", "Upper Body — Push", "Active Recovery Bike", "Rest Day".
 - ozzie_notes: one plain-English sentence explaining why this session is placed here this week, in Ozzie's warm/direct voice.
-- Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string}]} where dayOffset 0 = Monday.`;
+- lift_prescription: for lift days ONLY, write the actual strength workout like a real coach: {"exercises": [{"name": string, "sets": number (2-5), "reps": string (e.g. "5" or "8-12"), "note": string|null}]} with 4-6 exercises. Main compound movement first at lower reps, accessories after at higher reps. Choose names ONLY from this exact list: Back Squat, Deadlift, Bench Press, Pull-Up, Romanian Deadlift, Hip Thrust, Calf Raise, Plank, Box Jump. Match the split in the description (e.g. "Lower Body" day = squat/RDL/hip thrust/calf work). Use "note" for form or effort cues ("2 reps in reserve", "pause at the bottom"). For every non-lift day, set lift_prescription to null.
+- Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string, "lift_prescription": {"exercises": [{"name": string, "sets": number, "reps": string, "note": string|null}]}|null}]} where dayOffset 0 = Monday.`;
 
 interface GoalsContext {
   primaryGoal: string | null;
@@ -267,6 +268,9 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad)
     planned_distance_km: number | null;
     description: string;
     ozzie_notes: string;
+    lift_prescription: {
+      exercises: Array<{ name: string; sets: number; reps: string; note: string | null }>;
+    } | null;
   }>;
 }
 
@@ -520,6 +524,7 @@ Deno.serve(async (req: Request) => {
         planned_distance_km: day.planned_distance_km,
         description: day.description,
         ozzie_notes: day.ozzie_notes,
+        lift_prescription: day.session_type === 'lift' ? day.lift_prescription ?? null : null,
       };
     });
 

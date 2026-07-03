@@ -22,6 +22,16 @@ export interface LiftExercise {
   sets: LiftSet[];
 }
 
+/** Structured strength workout written by Ozzie on plan lift days. */
+export interface LiftPrescription {
+  exercises: Array<{
+    name: string;
+    sets: number;
+    reps: string;
+    note: string | null;
+  }>;
+}
+
 export interface SavedWorkoutSummary {
   id: string;
   sessionType: WorkoutType;

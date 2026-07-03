@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import OzzieMascot from '@/components/OzzieMascot';
 import {
   getOfferings,
   purchaseOspreyPlus,
@@ -90,7 +91,7 @@ export default function PaywallScreen() {
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.logoWrap}>
-          <Text style={styles.logoIcon}>🦅</Text>
+          <OzzieMascot size={72} />
           <Text style={styles.logoTitle}>OSPREY+</Text>
           <Text style={styles.logoTagline}>Your AI coach, fully unleashed.</Text>
         </View>

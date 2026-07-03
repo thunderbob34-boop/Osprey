@@ -17,6 +17,7 @@
       "buildNumber": "1",
       "supportsTablet": false,
       "requireFullScreen": true,
+      "usesAppleSignIn": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "OSPREY uses your location to track GPS runs and log route maps.",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "OSPREY uses background location to continue tracking your route if you lock your screen mid-run.",
@@ -98,7 +99,11 @@
         }
       ],
       "expo-sqlite",
-      ["@bacons/apple-targets"]
+      "expo-apple-authentication",
+      [
+        "@bacons/apple-targets"
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true

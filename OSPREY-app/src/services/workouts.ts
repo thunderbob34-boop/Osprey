@@ -1,6 +1,6 @@
 import { endOfWeek, format, startOfWeek } from 'date-fns';
 import { supabase } from '@/services/supabase';
-import type { LiftExercise, TrackPoint, WorkoutRecapData, WorkoutType } from '@/types/workout';
+import type { LiftExercise, LiftPrescription, TrackPoint, WorkoutRecapData, WorkoutType } from '@/types/workout';
 import { formatDuration, formatPace, metersToMiles } from '@/store/workoutStore';
 import { writeWorkoutToHealthKit } from '@/services/healthkit';
 import { withCache } from '@/services/offline-cache';
@@ -426,10 +426,51 @@ export async function fetchDefaultLiftExercises(): Promise<Array<{ id: string; n
       .select('id, name')
       .neq('muscle_group', 'Cardio')
       .neq('muscle_group', 'Recovery')
+      .order('name')
       .limit(6);
 
     if (error) throw error;
     return data ?? [];
+  });
+}
+
+export interface LibraryExercise {
+  id: string;
+  name: string;
+  muscleGroup: string;
+}
+
+export async function fetchLiftPrescription(sessionId: string): Promise<LiftPrescription | null> {
+  const { data, error } = await supabase
+    .from('training_sessions')
+    .select('lift_prescription')
+    .eq('id', sessionId)
+    .maybeSingle();
+
+  if (error || !data?.lift_prescription) return null;
+  const prescription = data.lift_prescription as { exercises?: unknown };
+  return Array.isArray(prescription.exercises) && prescription.exercises.length > 0
+    ? (prescription as LiftPrescription)
+    : null;
+}
+
+export async function fetchExerciseLibrary(): Promise<LibraryExercise[]> {
+  // Full library for the in-session exercise picker, grouped by muscle.
+  return withCache(['exercise-library', 'full'], async () => {
+    const { data, error } = await supabase
+      .from('exercises')
+      .select('id, name, muscle_group')
+      .neq('muscle_group', 'Cardio')
+      .neq('muscle_group', 'Recovery')
+      .order('muscle_group')
+      .order('name');
+
+    if (error) throw error;
+    return (data ?? []).map((row) => ({
+      id: row.id as string,
+      name: row.name as string,
+      muscleGroup: (row.muscle_group as string) ?? 'Other',
+    }));
   });
 }
 

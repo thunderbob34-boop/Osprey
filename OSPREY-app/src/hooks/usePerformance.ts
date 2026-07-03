@@ -6,12 +6,14 @@ import {
   computeInjuryRisk,
   fetchPerformanceData,
   readinessFromTsb,
+  type DailyLoad,
   type PerformanceMetrics,
 } from '@/services/performance';
 import type { TrainingReadiness } from '@/types/daily-summary';
 
 export interface PerformanceResult extends PerformanceMetrics {
   trainingReadiness: TrainingReadiness | null;
+  dailyLoads: DailyLoad[];
 }
 
 export function usePerformance() {
@@ -50,6 +52,7 @@ export function usePerformance() {
         series: chartSeries,
         racePredictor,
         trainingReadiness,
+        dailyLoads,
       };
     },
     enabled: Boolean(userId),

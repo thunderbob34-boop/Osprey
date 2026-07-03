@@ -12,11 +12,14 @@ export default function NameScreen() {
   const displayName = useOnboardingStore((s) => s.displayName);
   const setDisplayName = useOnboardingStore((s) => s.setDisplayName);
 
+  // Seed from the profile once on mount only — re-seeding on every change
+  // would refill the field the moment the user clears it to type a new name.
   useEffect(() => {
-    if (!displayName && profile?.display_name) {
+    if (!useOnboardingStore.getState().displayName && profile?.display_name) {
       setDisplayName(profile.display_name);
     }
-  }, [displayName, profile?.display_name, setDisplayName]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <OnboardingShell

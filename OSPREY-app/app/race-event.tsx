@@ -14,8 +14,24 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
+import ScreenHeader from '@/components/ScreenHeader';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
+import { createRaceEvent } from '@/services/races';
+import { useAuthStore } from '@/store/authStore';
+
+/** Best-effort conversion of a race distance label ("5K", "Half Marathon") to km. */
+function distanceLabelToKm(label: string): number | null {
+  const lower = label.toLowerCase();
+  if (lower.includes('half') && lower.includes('marathon')) return 21.1;
+  if (lower.includes('marathon')) return 42.2;
+  const kMatch = lower.match(/(\d+(?:\.\d+)?)\s*k/);
+  if (kMatch) return Number(kMatch[1]);
+  const mileMatch = lower.match(/(\d+(?:\.\d+)?)\s*mile/);
+  if (mileMatch) return Number(mileMatch[1]) * 1.609;
+  if (lower.includes('mile')) return 1.6;
+  return null;
+}
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return '';
@@ -48,9 +64,11 @@ export default function RaceEventScreen() {
   const { raceId } = useLocalSearchParams<{ raceId: string }>();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const userId = useAuthStore((s) => s.user?.id);
   const cachedResult: RaceSearchResult | null = raceId ? getCachedRace(raceId) : null;
 
   const [generating, setGenerating] = useState(false);
+  const [savingRace, setSavingRace] = useState(false);
   const [distances, setDistances] = useState<string[]>(cachedResult?.distances ?? []);
   const [loadingDistances, setLoadingDistances] = useState(true);
 
@@ -140,14 +158,14 @@ export default function RaceEventScreen() {
     }
   }
 
-  function handleTrainPress() {
-    const distances = result!.distances;
-    if (distances.length === 0) {
-      startTrainFlow('Running');
+  function pickDistance(onPick: (distance: string) => void, fallback = 'Running') {
+    const available = result!.distances;
+    if (available.length === 0) {
+      onPick(fallback);
       return;
     }
-    if (distances.length === 1) {
-      startTrainFlow(distances[0]);
+    if (available.length === 1) {
+      onPick(available[0]);
       return;
     }
     if (Platform.OS === 'ios') {
@@ -155,33 +173,70 @@ export default function RaceEventScreen() {
         {
           title: 'Select Distance',
           message: 'Which distance are you training for?',
-          options: [...distances, 'Cancel'],
-          cancelButtonIndex: distances.length,
+          options: [...available, 'Cancel'],
+          cancelButtonIndex: available.length,
         },
         (idx) => {
-          if (idx < distances.length) {
-            startTrainFlow(distances[idx]);
+          if (idx < available.length) {
+            onPick(available[idx]);
           }
         },
       );
     } else {
-      pickDistanceAndroid(distances, (d) => startTrainFlow(d));
+      pickDistanceAndroid(available, onPick);
     }
   }
 
+  function handleTrainPress() {
+    pickDistance(startTrainFlow);
+  }
+
   function handleAddToMyRaces() {
-    Alert.alert('Coming soon', 'Saving discovered races is coming in a future update.');
+    if (!userId) {
+      Alert.alert('Sign in required', 'Sign in to save races to your race hub.');
+      return;
+    }
+    const parsedDate = parseRaceDate(result!.date);
+    if (!parsedDate) {
+      Alert.alert('Missing date', "This event doesn't have a confirmed date yet, so it can't be saved.");
+      return;
+    }
+    pickDistance((selectedDistance) => void saveRace(selectedDistance, parsedDate));
+  }
+
+  async function saveRace(selectedDistance: string, parsedDate: Date) {
+    setSavingRace(true);
+    try {
+      await createRaceEvent(userId!, {
+        name: result!.name,
+        eventDate: parsedDate.toISOString().slice(0, 10),
+        distanceKm: distanceLabelToKm(selectedDistance),
+        location: result!.city ? `${result!.city}, ${result!.state}` : result!.state || null,
+        raceUrl: result!.url || null,
+        notes: null,
+      });
+      queryClient.invalidateQueries({ queryKey: ['races-upcoming'] });
+      queryClient.invalidateQueries({ queryKey: ['races-past'] });
+      Alert.alert('Race saved 🎉', `${result!.name} is in your race hub.`, [
+        { text: 'Stay here', style: 'cancel' },
+        {
+          text: 'View My Races',
+          onPress: () => {
+            router.dismissAll();
+            router.replace('/races');
+          },
+        },
+      ]);
+    } catch (err) {
+      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+    } finally {
+      setSavingRace(false);
+    }
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} hitSlop={12}>
-          <Text style={styles.backText}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Race Details</Text>
-        <View style={{ width: 36 }} />
-      </View>
+      <ScreenHeader title="Race Details" />
 
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.heroSection}>
@@ -240,9 +295,14 @@ export default function RaceEventScreen() {
           <TouchableOpacity
             style={styles.addBtn}
             onPress={handleAddToMyRaces}
+            disabled={savingRace}
             activeOpacity={0.8}
           >
-            <Text style={styles.addBtnText}>Add to My Races</Text>
+            {savingRace ? (
+              <ActivityIndicator color={Colors.teal} />
+            ) : (
+              <Text style={styles.addBtnText}>Add to My Races</Text>
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>

@@ -14,6 +14,9 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import DateField from '@/components/DateField';
+import FieldError from '@/components/FieldError';
+import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
 import { useSubscription } from '@/hooks/useSubscription';
 import {
@@ -126,6 +129,7 @@ export default function ChallengesScreen() {
   const [formStart, setFormStart] = useState(defaultDates.start);
   const [formEnd, setFormEnd] = useState(defaultDates.end);
   const [invitedIds, setInvitedIds] = useState<Set<string>>(new Set());
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   // ── expanded leaderboard ──
   const [lbChallengeId, setLbChallengeId] = useState<string | null>(null);
@@ -153,16 +157,15 @@ export default function ChallengesScreen() {
       router.push('/paywall');
       return;
     }
-    if (!formName.trim()) {
-      Alert.alert('Name the challenge', 'What are you competing for?');
-      return;
+    const errors: Record<string, string> = {};
+    if (!formName.trim()) errors.name = 'What are you competing for?';
+    if (!isValidDate(formStart)) errors.start = 'Pick a start date.';
+    if (!isValidDate(formEnd)) errors.end = 'Pick an end date.';
+    if (!errors.start && !errors.end && formEnd < formStart) {
+      errors.end = 'End date must be on or after start date.';
     }
-    if (!isValidDate(formStart) || !isValidDate(formEnd)) {
-      Alert.alert('Check the dates', 'Use YYYY-MM-DD for both start and end.');
-      return;
-    }
-    if (formEnd < formStart) {
-      Alert.alert('Check the dates', 'End date must be on or after start date.');
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
       return;
     }
     try {
@@ -220,15 +223,14 @@ export default function ChallengesScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} hitSlop={12}>
-          <Text style={styles.close}>✕</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Challenges</Text>
-        <TouchableOpacity onPress={() => setShowForm((v) => !v)} hitSlop={12}>
-          <Text style={styles.add}>{showForm ? '−' : '+'}</Text>
-        </TouchableOpacity>
-      </View>
+      <ScreenHeader
+        title="Challenges"
+        right={
+          <TouchableOpacity onPress={() => setShowForm((v) => !v)} hitSlop={12}>
+            <Text style={styles.add}>{showForm ? '−' : '+'}</Text>
+          </TouchableOpacity>
+        }
+      />
 
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
@@ -239,12 +241,16 @@ export default function ChallengesScreen() {
               <Text style={styles.formTitle}>New challenge</Text>
 
               <TextInput
-                style={styles.input}
+                style={[styles.input, fieldErrors.name ? styles.inputError : null]}
                 placeholder="Challenge name (e.g. July Mileage Madness)"
                 placeholderTextColor={Colors.textMuted}
                 value={formName}
-                onChangeText={setFormName}
+                onChangeText={(v) => {
+                  setFormName(v);
+                  setFieldErrors((prev) => ({ ...prev, name: '' }));
+                }}
               />
+              <FieldError message={fieldErrors.name} />
 
               <Text style={styles.fieldLabel}>TYPE</Text>
               <View style={styles.chipRow}>
@@ -262,24 +268,26 @@ export default function ChallengesScreen() {
               </View>
 
               <Text style={styles.fieldLabel}>START DATE</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="YYYY-MM-DD"
-                placeholderTextColor={Colors.textMuted}
+              <DateField
                 value={formStart}
-                onChangeText={setFormStart}
-                autoCapitalize="none"
+                onChange={(d) => {
+                  setFormStart(d);
+                  setFieldErrors((prev) => ({ ...prev, start: '' }));
+                }}
+                placeholder="First day"
               />
+              <FieldError message={fieldErrors.start} />
 
               <Text style={styles.fieldLabel}>END DATE</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="YYYY-MM-DD"
-                placeholderTextColor={Colors.textMuted}
+              <DateField
                 value={formEnd}
-                onChangeText={setFormEnd}
-                autoCapitalize="none"
+                onChange={(d) => {
+                  setFormEnd(d);
+                  setFieldErrors((prev) => ({ ...prev, end: '' }));
+                }}
+                placeholder="Last day"
               />
+              <FieldError message={fieldErrors.end} />
 
               {friends && friends.length > 0 ? (
                 <>
@@ -503,6 +511,9 @@ const styles = StyleSheet.create({
     color: Colors.textMuted,
     letterSpacing: 0.8,
     marginTop: 6,
+  },
+  inputError: {
+    borderColor: Colors.red,
   },
   input: {
     backgroundColor: Colors.bg,

@@ -1,6 +1,7 @@
 import { startOfMonth } from 'date-fns';
 import { supabase } from '@/services/supabase';
 import { fetchWeekTargetKm } from '@/services/workouts';
+import { getCachedWeatherBriefSummary } from '@/services/weather-context';
 import type {
   DailySummaryData,
   DailySummaryViewRow,
@@ -133,12 +134,16 @@ async function fetchDailyBrief(userId: string): Promise<DailyBrief> {
     };
   }
 
+  const weatherSummary = await getCachedWeatherBriefSummary();
   const { data: generated, error: fnError } = await supabase.functions.invoke<{
     insight_text: string;
     why_reasoning: string;
     rest_recommendation: RecoveryRecommendation | null;
     habit_tip: string | null;
-  }>('ozzie-daily-brief', { method: 'POST' });
+  }>('ozzie-daily-brief', {
+    method: 'POST',
+    body: weatherSummary ? { weather: weatherSummary } : {},
+  });
 
   if (fnError || !generated) {
     return { text: null, whyReasoning: null, restRecommendation: null, habitTip: null };

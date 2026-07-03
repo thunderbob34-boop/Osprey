@@ -22,6 +22,21 @@ CREATE TABLE challenges (
 
 CREATE INDEX idx_challenges_creator ON challenges(creator_user_id) WHERE deleted_at IS NULL;
 
+-- ── challenge_members ─────────────────────────────────────────────────────────
+
+CREATE TABLE challenge_members (
+  id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  challenge_id UUID NOT NULL REFERENCES challenges(id) ON DELETE CASCADE,
+  user_id      UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  joined_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE(challenge_id, user_id)
+);
+
+CREATE INDEX idx_challenge_members_challenge ON challenge_members(challenge_id);
+CREATE INDEX idx_challenge_members_user      ON challenge_members(user_id);
+
+-- ── RLS & Policies ────────────────────────────────────────────────────────────
+
 ALTER TABLE challenges ENABLE ROW LEVEL SECURITY;
 GRANT SELECT, INSERT, UPDATE ON challenges TO authenticated;
 GRANT ALL ON challenges TO service_role;
@@ -42,19 +57,6 @@ CREATE POLICY challenges_update ON challenges
   FOR UPDATE TO authenticated
   USING (creator_user_id = auth.uid())
   WITH CHECK (creator_user_id = auth.uid());
-
--- ── challenge_members ─────────────────────────────────────────────────────────
-
-CREATE TABLE challenge_members (
-  id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  challenge_id UUID NOT NULL REFERENCES challenges(id) ON DELETE CASCADE,
-  user_id      UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  joined_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  UNIQUE(challenge_id, user_id)
-);
-
-CREATE INDEX idx_challenge_members_challenge ON challenge_members(challenge_id);
-CREATE INDEX idx_challenge_members_user      ON challenge_members(user_id);
 
 ALTER TABLE challenge_members ENABLE ROW LEVEL SECURITY;
 GRANT SELECT, INSERT, DELETE ON challenge_members TO authenticated;

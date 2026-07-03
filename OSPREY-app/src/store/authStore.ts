@@ -1,5 +1,8 @@
 import { create } from 'zustand';
 import { Session, User } from '@supabase/supabase-js';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import * as WebBrowser from 'expo-web-browser';
+import { makeRedirectUri } from 'expo-auth-session';
 import { supabase } from '@/services/supabase';
 import { clearOfflineCache } from '@/services/offline-cache';
 
@@ -23,7 +26,10 @@ interface AuthState {
   fetchProfile: () => Promise<void>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
+  signInWithApple: () => Promise<{ error: string | null }>;
+  signInWithGoogle: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
+  deleteAccount: () => Promise<{ error: string | null }>;
 }
 
 function fallbackProfile(user: User): UserProfile {
@@ -169,6 +175,85 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     return { error: error?.message ?? null };
   },
 
+  signInWithApple: async () => {
+    set({ loading: true });
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+      if (!credential.identityToken) {
+        return { error: 'Apple sign-in returned no identity token.' };
+      }
+      const { data, error } = await supabase.auth.signInWithIdToken({
+        provider: 'apple',
+        token: credential.identityToken,
+      });
+      if (error) return { error: error.message };
+
+      // Apple only shares the name on the FIRST authorization — persist it now.
+      const fullName = [credential.fullName?.givenName, credential.fullName?.familyName]
+        .filter(Boolean)
+        .join(' ');
+      if (data.user && fullName) {
+        await ensureUserRow(data.user, fullName);
+      }
+      await get().fetchProfile();
+      return { error: null };
+    } catch (err) {
+      if ((err as { code?: string })?.code === 'ERR_REQUEST_CANCELED') {
+        return { error: null };
+      }
+      return { error: err instanceof Error ? err.message : 'Apple sign-in failed.' };
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  signInWithGoogle: async () => {
+    set({ loading: true });
+    try {
+      const redirectTo = makeRedirectUri({ scheme: 'osprey', path: 'auth-callback' });
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo, skipBrowserRedirect: true },
+      });
+      if (error || !data?.url) {
+        return { error: error?.message ?? 'Could not start Google sign-in.' };
+      }
+
+      const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo);
+      if (result.type !== 'success') return { error: null }; // user canceled
+
+      const url = new URL(result.url);
+      const code = url.searchParams.get('code');
+      if (code) {
+        const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+        if (exchangeError) return { error: exchangeError.message };
+      } else {
+        const fragment = new URLSearchParams(url.hash.replace(/^#/, ''));
+        const accessToken = fragment.get('access_token');
+        const refreshToken = fragment.get('refresh_token');
+        if (!accessToken || !refreshToken) {
+          return { error: 'Google sign-in did not return a session.' };
+        }
+        const { error: setError } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        });
+        if (setError) return { error: setError.message };
+      }
+      await get().fetchProfile();
+      return { error: null };
+    } catch (err) {
+      return { error: err instanceof Error ? err.message : 'Google sign-in failed.' };
+    } finally {
+      set({ loading: false });
+    }
+  },
+
   signOut: async () => {
     await supabase.auth.signOut();
     await clearOfflineCache();
@@ -179,5 +264,29 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       profileReady: true,
       profileError: null,
     });
+  },
+
+  deleteAccount: async () => {
+    set({ loading: true });
+    try {
+      const { error } = await supabase.rpc('delete_my_account');
+      if (error) return { error: error.message };
+
+      // The auth user no longer exists, so signOut may 4xx — clean up locally.
+      await supabase.auth.signOut().catch(() => undefined);
+      await clearOfflineCache();
+      set({
+        session: null,
+        user: null,
+        profile: null,
+        profileReady: true,
+        profileError: null,
+      });
+      return { error: null };
+    } catch (err) {
+      return { error: err instanceof Error ? err.message : 'Could not delete account.' };
+    } finally {
+      set({ loading: false });
+    }
   },
 }));

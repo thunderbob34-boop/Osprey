@@ -24,6 +24,7 @@ Rules:
 - You will be given a "restRecommendation" of either "train", "easy", or "rest". Your insight_text and why_reasoning MUST agree with it — never contradict it. If it's "rest", explain rest as part of training, not a failure. If it's "easy", say so plainly without being alarming.
 - Never give medical advice or diagnose injury. Flag patterns and suggest consulting a professional if something seems concerning.
 - You will be given "workoutTimeConsistency" (the hour-of-day the user most often trains, and how many recent sessions fall there) and "foodLogCount14d". If workoutTimeConsistency shows 3+ sessions clustered in the same hour AND foodLogCount14d is under 3, include a "habit_tip": one short, concrete sentence suggesting the user stack food logging onto that already-consistent workout time (e.g. "You're consistently training around 7am — try logging breakfast right after, since you're already in the habit loop."). Otherwise set habit_tip to null. Never invent a time that isn't in the data.
+- You may be given a "weather" string with the local forecast, today's best outdoor window, and any upcoming heat spike. When present, weave it into the brief like a coach who checked the sky before you woke up: if a heat spike is 1-2 days out, tell them to start hydrating NOW (extra fluids + electrolytes today, not on the hot day); if today is hot, recommend the best time window, shade, or moving the session indoors; if rain is likely, suggest the driest window or an indoor swap. Never invent weather that isn't in the data, and skip weather talk entirely when it's unremarkable.
 - Respond ONLY with valid JSON matching this shape: {"insight_text": string, "why_reasoning": string, "habit_tip": string | null}`;
 
 interface BriefContext {
@@ -131,6 +132,7 @@ async function buildContext(supabase: ReturnType<typeof createClient>, userId: s
 async function callOpenAI(
   context: BriefContext,
   restRecommendation: RestRecommendation,
+  weather: string | null,
 ): Promise<{ insight_text: string; why_reasoning: string; habit_tip: string | null }> {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -144,7 +146,7 @@ async function callOpenAI(
         { role: 'system', content: OZZIE_SYSTEM_PROMPT },
         {
           role: 'user',
-          content: `Here is today's data for ${context.displayName} (${context.experienceTier} mode, goal: ${context.primaryGoal ?? 'general fitness'}):\n${JSON.stringify({ ...context, restRecommendation }, null, 2)}\n\nWrite today's brief.`,
+          content: `Here is today's data for ${context.displayName} (${context.experienceTier} mode, goal: ${context.primaryGoal ?? 'general fitness'}):\n${JSON.stringify({ ...context, restRecommendation, weather }, null, 2)}\n\nWrite today's brief.`,
         },
       ],
       response_format: { type: 'json_object' },
@@ -225,9 +227,19 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    let weather: string | null = null;
+    try {
+      const body = await req.json();
+      if (typeof body?.weather === 'string' && body.weather.length < 600) {
+        weather = body.weather;
+      }
+    } catch {
+      // No/invalid body — weather stays null.
+    }
+
     const context = await buildContext(supabase, userId);
     const restRecommendation = deriveRestRecommendation(context);
-    const { insight_text, why_reasoning, habit_tip } = await callOpenAI(context, restRecommendation);
+    const { insight_text, why_reasoning, habit_tip } = await callOpenAI(context, restRecommendation, weather);
 
     const { error: insertError } = await supabase.from('ozzie_insights').insert({
       user_id: userId,

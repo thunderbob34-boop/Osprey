@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  Switch,
   Text,
   TouchableOpacity,
   View,
@@ -10,13 +11,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from 'expo-constants';
 import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
-import {
-  hasOspreyPlus,
-  purchaseOspreyPlus,
-  restorePurchases,
-} from '@/services/subscriptions';
+import { hasOspreyPlus, restorePurchases } from '@/services/subscriptions';
 import {
   isHealthKitSupported,
   requestHealthKitAuthorization,
@@ -35,6 +34,8 @@ import {
   isCalendarBlockingEnabled,
 } from '@/services/calendar-blocking';
 
+const HEALTH_CONNECTED_KEY = 'osprey:health-connected';
+
 function formatHour(hour: number): string {
   const period = hour >= 12 ? 'PM' : 'AM';
   const displayHour = hour % 12 === 0 ? 12 : hour % 12;
@@ -44,6 +45,7 @@ function formatHour(hour: number): string {
 export default function SettingsTab() {
   const router = useRouter();
   const signOut = useAuthStore((s) => s.signOut);
+  const deleteAccount = useAuthStore((s) => s.deleteAccount);
   const profile = useAuthStore((s) => s.profile);
   const userId = useAuthStore((s) => s.user?.id);
   const [plusActive, setPlusActive] = useState<boolean | null>(null);
@@ -55,6 +57,7 @@ export default function SettingsTab() {
   const [nudgeLoading, setNudgeLoading] = useState(false);
   const [calBlockEnabled, setCalBlockEnabled] = useState(false);
   const [calBlockLoading, setCalBlockLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     hasOspreyPlus().then(setPlusActive).catch(() => setPlusActive(false));
@@ -65,11 +68,17 @@ export default function SettingsTab() {
   }, []);
 
   useEffect(() => {
+    AsyncStorage.getItem(HEALTH_CONNECTED_KEY)
+      .then((v) => setHealthConnected(v === '1'))
+      .catch(() => undefined);
+  }, []);
+
+  useEffect(() => {
     if (userId) isCalendarBlockingEnabled(userId).then(setCalBlockEnabled).catch(() => undefined);
   }, [userId]);
 
   async function handleToggleCalendarBlocking() {
-    if (!userId) return;
+    if (!userId || calBlockLoading) return;
     setCalBlockLoading(true);
     try {
       if (calBlockEnabled) {
@@ -83,7 +92,6 @@ export default function SettingsTab() {
         return;
       }
       setCalBlockEnabled(true);
-      Alert.alert('Calendar', "Done — this week's planned workouts are now blocked on your calendar.");
     } catch (err) {
       Alert.alert('Calendar', err instanceof Error ? err.message : 'Something went wrong.');
     } finally {
@@ -92,7 +100,7 @@ export default function SettingsTab() {
   }
 
   async function handleToggleNudge() {
-    if (!userId) return;
+    if (!userId || nudgeLoading) return;
     setNudgeLoading(true);
     try {
       if (nudgeEnabled) {
@@ -127,6 +135,7 @@ export default function SettingsTab() {
         return;
       }
       setHealthConnected(true);
+      await AsyncStorage.setItem(HEALTH_CONNECTED_KEY, '1').catch(() => undefined);
       const synced = await syncRecoveryFromHealthKit(userId);
       Alert.alert(
         'Apple Health',
@@ -141,21 +150,6 @@ export default function SettingsTab() {
     }
   }
 
-  async function handleUpgrade() {
-    setLoading(true);
-    try {
-      const success = await purchaseOspreyPlus();
-      setPlusActive(success);
-      if (!success) {
-        Alert.alert('OSPREY+', 'No packages available yet. Configure RevenueCat to enable purchases.');
-      }
-    } catch (err) {
-      Alert.alert('Purchase failed', err instanceof Error ? err.message : 'Try again later.');
-    } finally {
-      setLoading(false);
-    }
-  }
-
   async function handleRestore() {
     setLoading(true);
     try {
@@ -166,6 +160,48 @@ export default function SettingsTab() {
       setLoading(false);
     }
   }
+
+  function handleSignOut() {
+    Alert.alert('Sign out?', 'You can sign back in any time.', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Sign Out', style: 'destructive', onPress: () => void signOut() },
+    ]);
+  }
+
+  function handleDeleteAccount() {
+    Alert.alert(
+      'Delete your account?',
+      'This permanently erases your account, workouts, plans, races, and nutrition history. This cannot be undone.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete Forever',
+          style: 'destructive',
+          onPress: () => {
+            // Second confirmation — this is irreversible.
+            Alert.alert('Are you sure?', 'All of your OSPREY data will be gone for good.', [
+              { text: 'Keep my account', style: 'cancel' },
+              {
+                text: 'Yes, delete everything',
+                style: 'destructive',
+                onPress: async () => {
+                  setDeleting(true);
+                  const { error } = await deleteAccount();
+                  setDeleting(false);
+                  if (error) {
+                    Alert.alert('Delete failed', error);
+                  }
+                  // On success the cleared session redirects to sign-in automatically.
+                },
+              },
+            ]);
+          },
+        },
+      ],
+    );
+  }
+
+  const appVersion = Constants.expoConfig?.version ?? '1.0.0';
 
   return (
     <SafeAreaView style={styles.container}>
@@ -185,8 +221,8 @@ export default function SettingsTab() {
             </Text>
           )}
           {!plusActive ? (
-            <TouchableOpacity style={styles.upgradeBtn} onPress={handleUpgrade} disabled={loading}>
-              <Text style={styles.upgradeText}>Upgrade to OSPREY+</Text>
+            <TouchableOpacity style={styles.primaryBtn} onPress={() => router.push('/paywall')}>
+              <Text style={styles.primaryBtnText}>Upgrade to OSPREY+</Text>
             </TouchableOpacity>
           ) : null}
           <TouchableOpacity style={styles.linkBtn} onPress={handleRestore} disabled={loading}>
@@ -201,14 +237,14 @@ export default function SettingsTab() {
               {healthConnected ? 'Connected' : 'Not connected'}
             </Text>
             <TouchableOpacity
-              style={styles.upgradeBtn}
+              style={styles.primaryBtn}
               onPress={handleConnectHealth}
               disabled={healthSyncing}
             >
               {healthSyncing ? (
                 <ActivityIndicator color="#000" />
               ) : (
-                <Text style={styles.upgradeText}>
+                <Text style={styles.primaryBtnText}>
                   {healthConnected ? 'Sync Now' : 'Connect Apple Health'}
                 </Text>
               )}
@@ -217,60 +253,64 @@ export default function SettingsTab() {
         ) : null}
 
         <View style={styles.card}>
-          <Text style={styles.cardLabel}>Ozzie's Daily Nudge</Text>
-          <Text style={styles.cardValue}>
-            {nudgeEnabled
-              ? nudgeHour != null
-                ? `On · ${formatHour(nudgeHour)}`
-                : 'On'
-              : 'Off'}
-          </Text>
-          <TouchableOpacity
-            style={styles.upgradeBtn}
-            onPress={handleToggleNudge}
-            disabled={nudgeLoading}
-          >
-            {nudgeLoading ? (
-              <ActivityIndicator color="#000" />
-            ) : (
-              <Text style={styles.upgradeText}>
-                {nudgeEnabled ? 'Turn Off' : 'Turn On'}
+          <View style={styles.switchRow}>
+            <View style={styles.switchRowLeft}>
+              <Text style={styles.cardLabel}>Ozzie's Daily Nudge</Text>
+              <Text style={styles.switchRowSub}>
+                {nudgeEnabled
+                  ? nudgeHour != null
+                    ? `A daily check-in around ${formatHour(nudgeHour)}`
+                    : 'A daily check-in at your usual training time'
+                  : 'One notification a day, timed to your training'}
               </Text>
-            )}
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.card}>
-          <Text style={styles.cardLabel}>Calendar Blocking</Text>
-          <Text style={styles.cardValue}>
-            {calBlockEnabled ? 'On · workouts blocked on your calendar' : 'Off'}
-          </Text>
-          <TouchableOpacity
-            style={styles.upgradeBtn}
-            onPress={handleToggleCalendarBlocking}
-            disabled={calBlockLoading}
-          >
-            {calBlockLoading ? (
-              <ActivityIndicator color="#000" />
+            </View>
+            {nudgeLoading ? (
+              <ActivityIndicator color={Colors.teal} />
             ) : (
-              <Text style={styles.upgradeText}>{calBlockEnabled ? 'Turn Off' : 'Turn On'}</Text>
+              <Switch
+                value={nudgeEnabled}
+                onValueChange={handleToggleNudge}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
+                thumbColor={nudgeEnabled ? Colors.teal : '#f4f3f4'}
+              />
             )}
-          </TouchableOpacity>
+          </View>
+          <View style={styles.rowDivider} />
+          <View style={styles.switchRow}>
+            <View style={styles.switchRowLeft}>
+              <Text style={styles.cardLabel}>Calendar Blocking</Text>
+              <Text style={styles.switchRowSub}>
+                {calBlockEnabled
+                  ? 'Planned workouts are blocked on your calendar'
+                  : 'Reserve time for planned workouts'}
+              </Text>
+            </View>
+            {calBlockLoading ? (
+              <ActivityIndicator color={Colors.teal} />
+            ) : (
+              <Switch
+                value={calBlockEnabled}
+                onValueChange={handleToggleCalendarBlocking}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
+                thumbColor={calBlockEnabled ? Colors.teal : '#f4f3f4'}
+              />
+            )}
+          </View>
         </View>
 
         <View style={styles.card}>
           <Text style={styles.cardLabel}>Supplements & Meds</Text>
-          <Text style={styles.cardValue}>Timed reminders</Text>
-          <TouchableOpacity
-            style={styles.upgradeBtn}
-            onPress={() => router.push('/supplements')}
-          >
-            <Text style={styles.upgradeText}>Manage reminders</Text>
+          <TouchableOpacity style={styles.planRow} onPress={() => router.push('/supplements')}>
+            <View style={styles.planRowLeft}>
+              <Text style={styles.cardValue}>Reminders</Text>
+              <Text style={styles.planRowSub}>Timed supplement & medication nudges</Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.card}>
-          <Text style={styles.cardLabel}>TRAINING PLAN</Text>
+          <Text style={styles.cardLabel}>Training Plan</Text>
           <TouchableOpacity style={styles.planRow} onPress={() => router.push('/plan-preview')}>
             <View style={styles.planRowLeft}>
               <Text style={styles.cardValue}>This Week's Plan</Text>
@@ -278,7 +318,7 @@ export default function SettingsTab() {
             </View>
             <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>
-          <View style={styles.planRowDivider} />
+          <View style={styles.rowDivider} />
           <TouchableOpacity style={styles.planRow} onPress={() => router.push('/preferences')}>
             <View style={styles.planRowLeft}>
               <Text style={styles.cardValue}>Training Preferences</Text>
@@ -292,9 +332,30 @@ export default function SettingsTab() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.signOutBtn} onPress={signOut}>
+        <TouchableOpacity style={styles.signOutBtn} onPress={handleSignOut}>
           <Text style={styles.signOutText}>Sign Out</Text>
         </TouchableOpacity>
+
+        {/* ── Danger zone ── */}
+        <View style={styles.dangerCard}>
+          <Text style={styles.dangerLabel}>Danger Zone</Text>
+          <Text style={styles.dangerSub}>
+            Permanently delete your account and all training data.
+          </Text>
+          <TouchableOpacity
+            style={styles.dangerBtn}
+            onPress={handleDeleteAccount}
+            disabled={deleting}
+          >
+            {deleting ? (
+              <ActivityIndicator color={Colors.red} />
+            ) : (
+              <Text style={styles.dangerBtnText}>Delete Account</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.versionText}>OSPREY v{appVersion}</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -320,18 +381,37 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: Colors.textMuted,
     letterSpacing: 1,
+    textTransform: 'uppercase',
   },
   cardValue: { fontSize: 15, fontWeight: '700', color: Colors.textPrimary },
-  upgradeBtn: {
+  primaryBtn: {
     marginTop: 4,
     backgroundColor: Colors.teal,
     borderRadius: 10,
     paddingVertical: 12,
     alignItems: 'center',
   },
-  upgradeText: { fontSize: 14, fontWeight: '800', color: '#000' },
+  primaryBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
   linkBtn: { alignItems: 'center', paddingVertical: 6 },
   linkText: { fontSize: 13, color: Colors.textMuted, fontWeight: '600' },
+  switchRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+  switchRowLeft: { flex: 1, gap: 4 },
+  switchRowSub: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
+  rowDivider: { height: 1, backgroundColor: Colors.border, marginVertical: 10 },
+  planRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 4,
+  },
+  planRowLeft: { flex: 1 },
+  planRowSub: { fontSize: 12, color: Colors.textSecondary, marginTop: 2 },
+  chevron: { fontSize: 22, color: Colors.textMuted, marginLeft: 8 },
   signOutBtn: {
     alignSelf: 'flex-start',
     marginTop: 12,
@@ -342,15 +422,37 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  signOutText: { color: Colors.red, fontSize: 14, fontWeight: '600' },
-  planRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 4,
+  signOutText: { color: Colors.textPrimary, fontSize: 14, fontWeight: '600' },
+  dangerCard: {
+    marginTop: 24,
+    backgroundColor: 'rgba(255,68,68,0.05)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,68,68,0.25)',
+    borderRadius: 14,
+    padding: 16,
+    gap: 8,
   },
-  planRowLeft: { flex: 1 },
-  planRowSub: { fontSize: 12, color: Colors.textMuted, marginTop: 2 },
-  planRowDivider: { height: 1, backgroundColor: Colors.border, marginVertical: 8 },
-  chevron: { fontSize: 22, color: Colors.textMuted, marginLeft: 8 },
+  dangerLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: Colors.red,
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+  },
+  dangerSub: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
+  dangerBtn: {
+    marginTop: 4,
+    borderWidth: 1,
+    borderColor: 'rgba(255,68,68,0.45)',
+    borderRadius: 10,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  dangerBtnText: { fontSize: 14, fontWeight: '800', color: Colors.red },
+  versionText: {
+    marginTop: 20,
+    textAlign: 'center',
+    fontSize: 12,
+    color: Colors.textMuted,
+  },
 });

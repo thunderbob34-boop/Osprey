@@ -15,6 +15,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
+import FieldError from '@/components/FieldError';
 import { useTodayLog } from '@/hooks/useTodayLog';
 import type { MealType, QuickWorkoutType } from '@/types/log';
 import { searchFoodByName, type FoodItemResult } from '@/services/food-lookup';
@@ -66,6 +67,7 @@ export default function LogTab() {
     scannedProtein?: string;
     scannedCarbs?: string;
     scannedFat?: string;
+    openFood?: string;
   }>();
 
   const [workoutType, setWorkoutType] = useState<QuickWorkoutType>('run');
@@ -89,6 +91,25 @@ export default function LogTab() {
 
   const [weightInput, setWeightInput] = useState('');
   const [weightUnit, setWeightUnit] = useState<'lb' | 'kg'>('lb');
+
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  function clearFieldError(key: string) {
+    setFieldErrors((prev) => {
+      if (!prev[key]) return prev;
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
+  }
+
+  // "Log manually" fallback from the barcode scanner — just open the food form.
+  useEffect(() => {
+    if (params.openFood !== '1') return;
+    setOpenSection('food');
+    router.setParams({ openFood: undefined });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.openFood]);
 
   useEffect(() => {
     if (!params.scannedFoodId) return;
@@ -226,7 +247,7 @@ export default function LogTab() {
   async function handleSaveWorkout() {
     const mins = Number(minutes);
     if (!mins || mins <= 0) {
-      Alert.alert('Add a duration', 'How many minutes was this workout?');
+      setFieldErrors({ minutes: 'How many minutes was this workout?' });
       return;
     }
     try {
@@ -245,12 +266,11 @@ export default function LogTab() {
 
   async function handleSaveFood() {
     const cals = Number(calories);
-    if (!foodName.trim()) {
-      Alert.alert('Add a name', 'What did you eat?');
-      return;
-    }
-    if (!cals || cals <= 0) {
-      Alert.alert('Add calories', 'Roughly how many calories?');
+    const errors: Record<string, string> = {};
+    if (!foodName.trim()) errors.foodName = 'What did you eat?';
+    if (!cals || cals <= 0) errors.calories = 'Roughly how many calories?';
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
       return;
     }
     try {
@@ -274,7 +294,7 @@ export default function LogTab() {
   async function handleSaveWeight() {
     const value = Number(weightInput);
     if (!value || value <= 0) {
-      Alert.alert('Add your weight', 'Enter a number to log today\'s weigh-in.');
+      setFieldErrors({ weight: "Enter a number to log today's weigh-in." });
       return;
     }
     const weightKg = weightUnit === 'lb' ? lbToKg(value) : value;
@@ -403,13 +423,17 @@ export default function LogTab() {
                 <View style={styles.field}>
                   <Text style={styles.fieldLabel}>MINUTES</Text>
                   <TextInput
-                    style={styles.input}
+                    style={[styles.input, fieldErrors.minutes ? styles.inputError : null]}
                     keyboardType="number-pad"
                     placeholder="30"
                     placeholderTextColor={Colors.textMuted}
                     value={minutes}
-                    onChangeText={setMinutes}
+                    onChangeText={(v) => {
+                      setMinutes(v);
+                      clearFieldError('minutes');
+                    }}
                   />
+                  <FieldError message={fieldErrors.minutes} />
                 </View>
                 <View style={styles.field}>
                   <Text style={styles.fieldLabel}>DISTANCE (MI)</Text>
@@ -478,12 +502,16 @@ export default function LogTab() {
                 </View>
               </View>
               <TextInput
-                style={styles.input}
+                style={[styles.input, fieldErrors.foodName ? styles.inputError : null]}
                 placeholder="Grilled chicken bowl"
                 placeholderTextColor={Colors.textMuted}
                 value={foodName}
-                onChangeText={handleFoodNameChange}
+                onChangeText={(v) => {
+                  handleFoodNameChange(v);
+                  clearFieldError('foodName');
+                }}
               />
+              <FieldError message={fieldErrors.foodName} />
 
               {analyzingPhoto ? (
                 <View style={styles.analyzingRow}>
@@ -546,13 +574,17 @@ export default function LogTab() {
 
               <Text style={styles.fieldLabel}>CALORIES</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.input, fieldErrors.calories ? styles.inputError : null]}
                 keyboardType="number-pad"
                 placeholder="450"
                 placeholderTextColor={Colors.textMuted}
                 value={calories}
-                onChangeText={setCalories}
+                onChangeText={(v) => {
+                  setCalories(v);
+                  clearFieldError('calories');
+                }}
               />
+              <FieldError message={fieldErrors.calories} />
 
               <View style={styles.fieldRow}>
                 <View style={styles.field}>
@@ -642,13 +674,17 @@ export default function LogTab() {
 
               <Text style={styles.fieldLabel}>TODAY&apos;S WEIGHT ({weightUnit})</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.input, fieldErrors.weight ? styles.inputError : null]}
                 keyboardType="decimal-pad"
                 placeholder={weightUnit === 'lb' ? 'e.g. 168.4' : 'e.g. 76.4'}
                 placeholderTextColor={Colors.textMuted}
                 value={weightInput}
-                onChangeText={setWeightInput}
+                onChangeText={(v) => {
+                  setWeightInput(v);
+                  clearFieldError('weight');
+                }}
               />
+              <FieldError message={fieldErrors.weight} />
 
               <TouchableOpacity
                 style={styles.saveBtn}
@@ -767,6 +803,9 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     lineHeight: 18,
     marginBottom: 4,
+  },
+  inputError: {
+    borderColor: Colors.red,
   },
   input: {
     backgroundColor: 'rgba(255,255,255,0.04)',

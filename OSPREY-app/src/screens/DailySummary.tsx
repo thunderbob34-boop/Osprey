@@ -11,6 +11,7 @@ import {
   RefreshControl,
   Alert,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import type { DailySummaryProps, TrainingReadiness } from '@/types/daily-summary';
 import MacroTargetCard from '@/components/MacroTargetCard';
@@ -72,7 +73,6 @@ export default function DailySummaryScreen({
     monthMiles: '—',
     load: '—',
   },
-  showBottomNav = true,
   isLoading = false,
   error = null,
   onRetry,
@@ -86,6 +86,7 @@ export default function DailySummaryScreen({
   onActivityPress,
   onViewWeekPress,
   headerBanner,
+  weatherCard,
 }: DailySummaryProps) {
   const weekProgress = weekTarget ? Math.min(1, weekMiles / weekTarget) : 0;
   const greeting = getGreeting();
@@ -108,6 +109,19 @@ export default function DailySummaryScreen({
       { text: 'Cancel', style: 'cancel' },
     ]);
   }
+
+  // Single entry point for session tweaks — keeps the card down to two buttons.
+  function handleAdjustPress() {
+    const options = [];
+    if (onSwapSession) {
+      options.push({ text: 'Swap workout type', onPress: handleSwapPress });
+    }
+    if (onCompressSession) {
+      options.push({ text: 'Short on time?', onPress: handleCompressPress });
+    }
+    options.push({ text: 'Cancel', style: 'cancel' as const });
+    Alert.alert('Adjust today\'s session', undefined, options);
+  }
   const [whyExpanded, setWhyExpanded] = useState(false);
 
   function formatFuelTime(minutes: number): string {
@@ -121,25 +135,25 @@ export default function DailySummaryScreen({
     if (!fuelStatus) return null;
     if (fuelStatus.lastLoggedMinutesAgo == null) {
       return {
-        title: '🍽 Fuel up before training',
+        title: 'Fuel up before training',
         body: "No meals logged yet today. Eat a carb-rich snack 60-90 min before your session for best performance.",
       };
     }
     const timeAgo = formatFuelTime(fuelStatus.lastLoggedMinutesAgo);
     if (fuelStatus.recommendation === 'recently_fueled') {
       return {
-        title: '🍽 Recently fueled',
+        title: 'Recently fueled',
         body: `Last meal logged ${timeAgo} ago. Give it a little time to digest before going hard.`,
       };
     }
     if (fuelStatus.recommendation === 'good_timing') {
       return {
-        title: '🍽 Good timing',
+        title: 'Good timing',
         body: `Last meal logged ${timeAgo} ago — that's a solid fueling window for today's session.`,
       };
     }
     return {
-      title: '🍽 Fuel up before training',
+      title: 'Fuel up before training',
       body: `It's been ${timeAgo} since your last logged meal. Grab a carb-rich snack 60-90 min before training.`,
     };
   }
@@ -201,7 +215,7 @@ export default function DailySummaryScreen({
           <View style={styles.headerRight}>
             {onActivityPress ? (
               <TouchableOpacity style={styles.activityBtn} onPress={onActivityPress}>
-                <Text style={styles.activityBtnText}>👥</Text>
+                <Ionicons name="people-outline" size={20} color={Colors.teal} />
               </TouchableOpacity>
             ) : null}
             <TouchableOpacity style={styles.avatarBtn} onPress={onActivityPress}>
@@ -256,46 +270,52 @@ export default function DailySummaryScreen({
         <View style={styles.sessionCard}>
           <View style={styles.sessionHeader}>
             <Text style={styles.sessionLabel}>TODAY&apos;S SESSION</Text>
-            <View style={styles.sessionHeaderRight}>
-              {session.zone ? (
-                <View style={styles.sessionBadge}>
-                  <Text style={styles.sessionBadgeText}>{session.zone}</Text>
-                </View>
-              ) : null}
-              {onViewWeekPress ? (
-                <TouchableOpacity onPress={onViewWeekPress} hitSlop={8}>
-                  <Text style={styles.viewWeekLink}>Full week ›</Text>
-                </TouchableOpacity>
+            {onViewWeekPress ? (
+              <TouchableOpacity onPress={onViewWeekPress} hitSlop={8}>
+                <Text style={styles.viewWeekLink}>Full week ›</Text>
+              </TouchableOpacity>
+            ) : null}
+          </View>
+
+          <Text style={styles.sessionType}>{session.type}</Text>
+
+          <View style={styles.sessionChips}>
+            <View style={styles.sessionChip}>
+              <Text style={styles.sessionChipText}>{session.duration}</Text>
+            </View>
+            {session.distance ? (
+              <View style={styles.sessionChip}>
+                <Text style={styles.sessionChipText}>{session.distance}</Text>
+              </View>
+            ) : null}
+            {session.zone ? (
+              <View style={[styles.sessionChip, styles.sessionChipAccent]}>
+                <Text style={[styles.sessionChipText, styles.sessionChipAccentText]}>
+                  {session.zone}
+                </Text>
+              </View>
+            ) : null}
+          </View>
+
+          {/* Ozzie note — tap to see the reasoning */}
+          <TouchableOpacity
+            style={styles.ozzieNote}
+            activeOpacity={session.whyReasoning ? 0.7 : 1}
+            onPress={() => session.whyReasoning && setWhyExpanded((v) => !v)}
+          >
+            <OzzieAvatar size={24} />
+            <View style={styles.ozzieNoteBody}>
+              <Text style={styles.ozzieNoteText}>{session.ozzieNote}</Text>
+              {session.whyReasoning ? (
+                <Text style={styles.whyToggleText}>
+                  {whyExpanded ? 'Hide reasoning ▴' : 'Why this session? ▾'}
+                </Text>
               ) : null}
             </View>
-          </View>
-          <Text style={styles.sessionType}>{session.type}</Text>
-          <Text style={styles.sessionMeta}>
-            {session.duration}
-            {session.distance ? `  ·  ${session.distance}` : ''}
-          </Text>
-
-          {/* Ozzie note */}
-          <View style={styles.ozzieNote}>
-            <OzzieAvatar size={24} />
-            <Text style={styles.ozzieNoteText}>"{session.ozzieNote}"</Text>
-          </View>
-
-          {session.whyReasoning ? (
-            <View>
-              <TouchableOpacity
-                style={styles.whyToggle}
-                onPress={() => setWhyExpanded((v) => !v)}
-              >
-                <Text style={styles.whyToggleText}>
-                  {whyExpanded ? '▾ Why?' : '▸ Why?'}
-                </Text>
-              </TouchableOpacity>
-              {whyExpanded ? (
-                <View style={styles.whyPanel}>
-                  <Text style={styles.whyPanelText}>{session.whyReasoning}</Text>
-                </View>
-              ) : null}
+          </TouchableOpacity>
+          {whyExpanded && session.whyReasoning ? (
+            <View style={styles.whyPanel}>
+              <Text style={styles.whyPanelText}>{session.whyReasoning}</Text>
             </View>
           ) : null}
 
@@ -309,22 +329,24 @@ export default function DailySummaryScreen({
                 {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
               </Text>
             </TouchableOpacity>
-            {onSwapSession && session.sessionId && session.sessionType !== 'rest' ? (
-              <TouchableOpacity style={styles.swapBtn} onPress={handleSwapPress}>
-                <Text style={styles.swapBtnText}>Swap</Text>
+            {(onSwapSession || onCompressSession) &&
+            session.sessionId &&
+            session.sessionType !== 'rest' ? (
+              <TouchableOpacity style={styles.adjustBtn} onPress={handleAdjustPress}>
+                <Text style={styles.adjustBtnText}>Adjust</Text>
               </TouchableOpacity>
             ) : null}
           </View>
-          {onCompressSession && session.sessionId && session.sessionType !== 'rest' ? (
-            <TouchableOpacity style={styles.compressLink} onPress={handleCompressPress}>
-              <Text style={styles.compressLinkText}>⏱ Short on time?</Text>
-            </TouchableOpacity>
-          ) : null}
         </View>
+
+        {weatherCard ?? null}
 
         {fuelCard && session.sessionType !== 'rest' ? (
           <View style={styles.fuelCard}>
-            <Text style={styles.fuelCardTitle}>{fuelCard.title}</Text>
+            <View style={styles.fuelCardTitleRow}>
+              <Ionicons name="restaurant-outline" size={15} color={Colors.gold} />
+              <Text style={styles.fuelCardTitle}>{fuelCard.title}</Text>
+            </View>
             <Text style={styles.fuelCardBody}>{fuelCard.body}</Text>
           </View>
         ) : null}
@@ -365,15 +387,6 @@ export default function DailySummaryScreen({
 
       </ScrollView>
 
-      {showBottomNav ? (
-        <View style={styles.bottomNav}>
-          <NavItem icon="🏠" label="Today" active />
-          <NavItem icon="📅" label="Plan" />
-          <NavItem icon="▶️" label="Workout" />
-          <NavItem icon="📊" label="Stats" />
-          <NavItem icon="⚙️" label="Settings" />
-        </View>
-      ) : null}
     </SafeAreaView>
   );
 }
@@ -413,27 +426,6 @@ function StatChip({
       <Text style={[styles.statValue, { color }]}>{value}</Text>
       <Text style={styles.statLabel}>{label}</Text>
     </View>
-  );
-}
-
-function NavItem({
-  icon,
-  label,
-  active = false,
-  onPress,
-}: {
-  icon: string;
-  label: string;
-  active?: boolean;
-  onPress?: () => void;
-}) {
-  return (
-    <TouchableOpacity style={styles.navItem} onPress={onPress}>
-      <Text style={styles.navIcon}>{icon}</Text>
-      <Text style={[styles.navLabel, active && { color: Colors.teal }]}>
-        {label}
-      </Text>
-    </TouchableOpacity>
   );
 }
 
@@ -514,7 +506,8 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 13,
-    color: Colors.textMuted,
+    fontWeight: '600',
+    color: Colors.teal,
     marginTop: 2,
   },
   headerRight: {
@@ -644,10 +637,10 @@ const styles = StyleSheet.create({
 
   // Session card
   sessionCard: {
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 16,
+    backgroundColor: 'rgba(0,200,200,0.10)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(0,200,200,0.35)',
+    borderRadius: 18,
     padding: 18,
     marginBottom: 14,
   },
@@ -655,7 +648,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 8,
+    marginBottom: 10,
   },
   sessionLabel: {
     fontSize: 10,
@@ -663,57 +656,57 @@ const styles = StyleSheet.create({
     color: Colors.teal,
     letterSpacing: 1.5,
   },
-  sessionHeaderRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
   viewWeekLink: {
     fontSize: 12,
     fontWeight: '700',
     color: Colors.textSecondary,
   },
-  sessionBadge: {
-    backgroundColor: 'rgba(0,200,200,0.15)',
-    borderRadius: 6,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-  },
-  sessionBadgeText: {
-    fontSize: 10,
-    color: Colors.teal,
-    fontWeight: '600',
-  },
   sessionType: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: '800',
     color: Colors.textPrimary,
-    marginBottom: 4,
+    letterSpacing: -0.4,
+    marginBottom: 10,
   },
-  sessionMeta: {
-    fontSize: 13,
-    color: Colors.textSecondary,
+  sessionChips: {
+    flexDirection: 'row',
+    gap: 8,
     marginBottom: 14,
+  },
+  sessionChip: {
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  sessionChipText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: Colors.textPrimary,
+  },
+  sessionChipAccent: {
+    backgroundColor: 'rgba(0,200,200,0.18)',
+  },
+  sessionChipAccentText: {
+    color: Colors.teal,
   },
   ozzieNote: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 10,
-    backgroundColor: Colors.surfaceGold,
-    borderRadius: 10,
-    padding: 10,
+    backgroundColor: 'rgba(6,9,18,0.45)',
+    borderRadius: 12,
+    padding: 12,
     marginBottom: 14,
   },
-  ozzieNoteText: {
+  ozzieNoteBody: {
     flex: 1,
-    fontSize: 12,
-    color: Colors.textSecondary,
-    lineHeight: 18,
-    fontStyle: 'italic',
+    gap: 6,
   },
-  whyToggle: {
-    alignSelf: 'flex-start',
-    marginBottom: 10,
+  ozzieNoteText: {
+    fontSize: 13,
+    color: Colors.textSecondary,
+    lineHeight: 19,
   },
   whyToggleText: {
     fontSize: 11,
@@ -754,28 +747,19 @@ const styles = StyleSheet.create({
   startBtnDisabled: {
     opacity: 0.45,
   },
-  swapBtn: {
-    paddingHorizontal: 16,
+  adjustBtn: {
+    paddingHorizontal: 18,
     height: 44,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: 'rgba(255,255,255,0.18)',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  swapBtnText: {
+  adjustBtnText: {
     fontSize: 13,
     fontWeight: '700',
-    color: Colors.textSecondary,
-  },
-  compressLink: {
-    marginTop: 10,
-    alignSelf: 'center',
-  },
-  compressLinkText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: Colors.teal,
+    color: Colors.textPrimary,
   },
   fuelCard: {
     backgroundColor: Colors.bgCard,
@@ -786,6 +770,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     gap: 4,
   },
+  fuelCardTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   fuelCardTitle: { fontSize: 13, fontWeight: '800', color: Colors.textPrimary },
   fuelCardBody: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
 
@@ -875,29 +860,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: Colors.textMuted,
     letterSpacing: 0.5,
-  },
-
-  // Bottom nav
-  bottomNav: {
-    flexDirection: 'row',
-    backgroundColor: 'rgba(6,9,18,0.92)',
-    borderTopWidth: 1,
-    borderTopColor: Colors.border,
-    paddingBottom: 20,
-    paddingTop: 10,
-  },
-  navItem: {
-    flex: 1,
-    alignItems: 'center',
-    gap: 3,
-  },
-  navIcon: {
-    fontSize: 20,
-  },
-  navLabel: {
-    fontSize: 10,
-    color: Colors.textMuted,
-    fontWeight: '500',
   },
 
 });

@@ -93,6 +93,60 @@ export function computeInjuryRisk(dailyLoads: DailyLoad[]): InjuryRisk {
   return { level: 'low', acwr, message: 'Load in the optimal zone. Keep it up.' };
 }
 
+// ── ACWR trend (proactive de-load detection) ─────────────────────────────────
+
+export interface AcwrTrend {
+  direction: 'climbing' | 'stable' | 'falling';
+  daysToHighRisk: number | null; // linear projection, null if not climbing
+}
+
+const TREND_WINDOW_DAYS = 4;
+const MODERATE_ACWR_THRESHOLD = 1.3;
+const TREND_SLOPE_EPSILON = 0.02; // per-day ACWR change below this counts as "stable"
+
+/**
+ * Looks at the ACWR trajectory over the last few days (not just today's single
+ * value) so a de-load can be proposed before tsb tips negative.
+ */
+export function computeAcwrTrend(dailyLoads: DailyLoad[]): AcwrTrend {
+  if (dailyLoads.length < TREND_WINDOW_DAYS) {
+    return { direction: 'stable', daysToHighRisk: null };
+  }
+
+  const acwrSeries: number[] = [];
+  for (let i = TREND_WINDOW_DAYS - 1; i >= 0; i--) {
+    const trimmed = dailyLoads.slice(0, dailyLoads.length - i);
+    const risk = computeInjuryRisk(trimmed);
+    if (risk.level === 'undertrained' && risk.acwr === 0) {
+      // Not enough training history yet — mirror computeInjuryRisk's own guard.
+      return { direction: 'stable', daysToHighRisk: null };
+    }
+    acwrSeries.push(risk.acwr);
+  }
+
+  const n = acwrSeries.length;
+  const xMean = (n - 1) / 2;
+  const yMean = acwrSeries.reduce((s, v) => s + v, 0) / n;
+  let num = 0;
+  let den = 0;
+  for (let i = 0; i < n; i++) {
+    num += (i - xMean) * (acwrSeries[i] - yMean);
+    den += (i - xMean) ** 2;
+  }
+  const slope = den === 0 ? 0 : num / den;
+  const latest = acwrSeries[n - 1];
+
+  if (slope > TREND_SLOPE_EPSILON) {
+    const daysToHighRisk =
+      latest >= MODERATE_ACWR_THRESHOLD ? 0 : Math.ceil((MODERATE_ACWR_THRESHOLD - latest) / slope);
+    return { direction: 'climbing', daysToHighRisk };
+  }
+  if (slope < -TREND_SLOPE_EPSILON) {
+    return { direction: 'falling', daysToHighRisk: null };
+  }
+  return { direction: 'stable', daysToHighRisk: null };
+}
+
 // ── Riegel race time predictor ────────────────────────────────────────────────
 
 const RIEGEL_EXPONENT = 1.06;

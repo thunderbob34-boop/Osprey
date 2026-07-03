@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import OzzieAvatar from '@/components/OzzieAvatar';
 import { useAuthStore } from '@/store/authStore';
 import { saveEnduranceWorkout, type EnduranceType } from '@/services/workouts';
 import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
@@ -165,7 +166,8 @@ export default function EnduranceWorkoutScreen() {
         </View>
 
         <TouchableOpacity style={styles.ozzieBtn} onPress={handleManualCue}>
-          <Text style={styles.ozzieBtnText}>🦅 Ozzie Cue</Text>
+          <OzzieAvatar size={18} />
+          <Text style={styles.ozzieBtnText}>Ozzie Cue</Text>
         </TouchableOpacity>
 
         <View style={styles.distanceCard}>
@@ -244,6 +246,9 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     paddingVertical: 16,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
   },
   ozzieBtnText: { fontSize: 15, fontWeight: '700', color: Colors.teal },
   distanceCard: {

@@ -63,6 +63,7 @@ export function computeRacePhase(goal: RaceGoal): RacePhaseInfo | null {
 }
 
 export interface WeekSession {
+  id: string;
   session_date: string;
   session_type: string;
   intensity: string;
@@ -71,15 +72,20 @@ export interface WeekSession {
   description: string;
 }
 
-/** The active plan's current week (Monday-start), sessions in date order. */
-export async function fetchCurrentWeekSessions(userId: string): Promise<WeekSession[]> {
+/** Monday-start date (YYYY-MM-DD) of the current calendar week. */
+export function currentWeekStartDate(): string {
   const now = new Date();
   const day = now.getDay();
   const diff = day === 0 ? -6 : 1 - day;
   const monday = new Date(now);
   monday.setHours(0, 0, 0, 0);
   monday.setDate(now.getDate() + diff);
-  const weekStartStr = monday.toISOString().slice(0, 10);
+  return monday.toISOString().slice(0, 10);
+}
+
+/** The active plan's current week (Monday-start), sessions in date order. */
+export async function fetchCurrentWeekSessions(userId: string): Promise<WeekSession[]> {
+  const weekStartStr = currentWeekStartDate();
 
   const { data: week, error: weekError } = await supabase
     .from('training_weeks')
@@ -94,7 +100,7 @@ export async function fetchCurrentWeekSessions(userId: string): Promise<WeekSess
 
   const { data: sessions, error: sessionsError } = await supabase
     .from('training_sessions')
-    .select('session_date, session_type, intensity, planned_minutes, planned_distance_km, description')
+    .select('id, session_date, session_type, intensity, planned_minutes, planned_distance_km, description')
     .eq('week_id', week.id)
     .order('session_date', { ascending: true });
 
@@ -120,6 +126,7 @@ export async function swapTodaySession(
   userId: string,
   sessionId: string,
   newType: SwappableSessionType,
+  triggeredBy: string = 'user_request',
 ): Promise<void> {
   const { data: original, error: fetchError } = await supabase
     .from('training_sessions')
@@ -130,6 +137,11 @@ export async function swapTodaySession(
 
   if (fetchError || !original) throw fetchError ?? new Error('Session not found');
 
+  const ozzieNotes =
+    triggeredBy === 'trend_deload'
+      ? 'De-loaded ahead of a projected load spike — same training effect, lower risk this week.'
+      : 'Swapped to fit today better — same training effect, different shape.';
+
   const { error: updateError } = await supabase
     .from('training_sessions')
     .update({
@@ -138,20 +150,25 @@ export async function swapTodaySession(
       description: SWAP_DESCRIPTIONS[newType],
       planned_distance_km: newType === 'run' ? original.planned_distance_km : null,
       planned_minutes: newType === 'rest' ? null : original.planned_minutes ?? 30,
-      ozzie_notes: "Swapped to fit today better — same training effect, different shape.",
+      ozzie_notes: ozzieNotes,
     })
     .eq('id', sessionId)
     .eq('user_id', userId);
 
   if (updateError) throw updateError;
 
+  const ozzieReason =
+    triggeredBy === 'trend_deload'
+      ? `Ozzie de-loaded this session from ${original.session_type} to ${newType} — training load was climbing toward the danger zone.`
+      : `You swapped today's session from ${original.session_type} to ${newType}.`;
+
   await supabase.from('plan_adjustments').insert({
     user_id: userId,
     session_id: sessionId,
-    triggered_by: 'user_request',
+    triggered_by: triggeredBy,
     original_json: { session_type: original.session_type, description: original.description },
     adjusted_json: { session_type: newType, description: SWAP_DESCRIPTIONS[newType] },
-    ozzie_reason: `You swapped today's session from ${original.session_type} to ${newType}.`,
+    ozzie_reason: ozzieReason,
   });
 }
 

@@ -25,10 +25,10 @@ export const Colors = {
   borderTeal: 'rgba(0,200,200,0.2)',
   borderGold: 'rgba(200,154,0,0.25)',
 
-  // Text
+  // Text — muted stays readable on the near-black bg (WCAG-friendly)
   textPrimary:   '#ffffff',
-  textSecondary: 'rgba(255,255,255,0.55)',
-  textMuted:     'rgba(255,255,255,0.3)',
+  textSecondary: 'rgba(255,255,255,0.65)',
+  textMuted:     'rgba(255,255,255,0.45)',
 
   // Status
   green:   '#4cde80',

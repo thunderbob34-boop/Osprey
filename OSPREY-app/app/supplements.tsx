@@ -15,6 +15,8 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import FieldError from '@/components/FieldError';
+import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
 import {
   createSupplementReminder,
@@ -44,6 +46,7 @@ export default function SupplementsScreen() {
   const [saving, setSaving] = useState(false);
 
   const [name, setName] = useState('');
+  const [nameError, setNameError] = useState('');
   const [dosage, setDosage] = useState('');
   const [hour, setHour] = useState(8);
   const [minute, setMinute] = useState(0);
@@ -68,7 +71,7 @@ export default function SupplementsScreen() {
   async function handleAdd() {
     if (!userId) return;
     if (!name.trim()) {
-      Alert.alert('Reminders', 'Give the supplement a name first.');
+      setNameError('Give the supplement a name first.');
       return;
     }
     setSaving(true);
@@ -123,13 +126,7 @@ export default function SupplementsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} hitSlop={12}>
-          <Text style={styles.close}>✕</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Supplement Reminders</Text>
-        <View style={{ width: 20 }} />
-      </View>
+      <ScreenHeader title="Supplement Reminders" />
 
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -174,12 +171,16 @@ export default function SupplementsScreen() {
               <View style={styles.addCard}>
                 <Text style={styles.addTitle}>Add a reminder</Text>
                 <TextInput
-                  style={styles.input}
+                  style={[styles.input, nameError ? styles.inputError : null]}
                   placeholder="Name (e.g. Creatine)"
                   placeholderTextColor={Colors.textMuted}
                   value={name}
-                  onChangeText={setName}
+                  onChangeText={(v) => {
+                    setName(v);
+                    setNameError('');
+                  }}
                 />
+                <FieldError message={nameError} />
                 <TextInput
                   style={styles.input}
                   placeholder="Dosage (optional, e.g. 5g)"
@@ -285,6 +286,9 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   addTitle: { color: Colors.textPrimary, fontSize: 15, fontWeight: '800' },
+  inputError: {
+    borderColor: Colors.red,
+  },
   input: {
     backgroundColor: Colors.bg,
     borderWidth: 1,

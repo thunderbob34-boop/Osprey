@@ -30,7 +30,6 @@ export default function ModeScreen() {
         description="Training regularly for 1–2 years. I'm ready for structure and want to see the metrics."
         selected={experienceTier === 'intermediate'}
         onPress={() => setExperienceTier('intermediate')}
-        accent={Colors.teal}
       />
       <OptionCard
         icon="🏆"
@@ -38,7 +37,6 @@ export default function ModeScreen() {
         description="You train regularly with race goals or lifting PRs. I'll get into the data and push you."
         selected={experienceTier === 'advanced'}
         onPress={() => setExperienceTier('advanced')}
-        accent={Colors.pink}
       />
       <Text style={styles.note}>You can switch modes any time in Settings</Text>
     </OnboardingShell>

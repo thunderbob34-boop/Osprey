@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
-  Alert,
+  Modal,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import ScreenHeader from '@/components/ScreenHeader';
 import { useCalendarMonth } from '@/hooks/useCalendarMonth';
 import type { CalendarDay } from '@/services/calendar';
 
@@ -71,31 +72,28 @@ export default function CalendarScreen() {
     }
   }
 
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const selectedDay = selectedDate ? dayMap.get(selectedDate) : undefined;
+
   function handleDayPress(dateStr: string) {
     const day = dayMap.get(dateStr);
     if (!day) return;
+    if (!day.plannedType && day.completedTypes.length === 0) return;
+    setSelectedDate(dateStr);
+  }
 
-    const lines: string[] = [];
-    if (day.plannedType) {
-      lines.push(`Planned: ${formatSessionType(day.plannedType)}${day.plannedDescription ? ` — ${day.plannedDescription}` : ''}`);
-    }
-    if (day.completedTypes.length > 0) {
-      lines.push(`Completed: ${day.completedTypes.map(formatSessionType).join(', ')}`);
-    }
-    if (lines.length === 0) return;
-
-    Alert.alert(dateStr, lines.join('\n'));
+  function formatSheetDate(dateStr: string): string {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+    });
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Text style={styles.backBtn}>← Back</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Calendar</Text>
-        <View style={{ width: 50 }} />
-      </View>
+      <ScreenHeader title="Calendar" />
 
       <View style={styles.monthNav}>
         <TouchableOpacity onPress={goToPrevMonth} style={styles.navBtn}>
@@ -148,6 +146,59 @@ export default function CalendarScreen() {
         <Text style={styles.legendText}>🏃 Run  🏋️ Lift  🔁 Cross  🏁 Race</Text>
         <Text style={styles.legendText}>Faded = planned · Solid = completed</Text>
       </View>
+
+      {/* ── Day detail sheet ── */}
+      <Modal
+        visible={selectedDate != null}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setSelectedDate(null)}
+      >
+        <TouchableOpacity
+          style={styles.sheetBackdrop}
+          activeOpacity={1}
+          onPress={() => setSelectedDate(null)}
+        />
+        <View style={styles.sheet}>
+          <View style={styles.sheetHandle} />
+          <Text style={styles.sheetTitle}>
+            {selectedDate ? formatSheetDate(selectedDate) : ''}
+          </Text>
+
+          {selectedDay?.plannedType ? (
+            <View style={styles.sheetCard}>
+              <Text style={styles.sheetCardIcon}>
+                {SESSION_ICON[selectedDay.plannedType] ?? '•'}
+              </Text>
+              <View style={styles.sheetCardBody}>
+                <Text style={styles.sheetCardLabel}>PLANNED</Text>
+                <Text style={styles.sheetCardTitle}>
+                  {formatSessionType(selectedDay.plannedType)}
+                </Text>
+                {selectedDay.plannedDescription ? (
+                  <Text style={styles.sheetCardDesc}>{selectedDay.plannedDescription}</Text>
+                ) : null}
+              </View>
+            </View>
+          ) : null}
+
+          {selectedDay && selectedDay.completedTypes.length > 0 ? (
+            <View style={[styles.sheetCard, styles.sheetCardDone]}>
+              <Text style={styles.sheetCardIcon}>✅</Text>
+              <View style={styles.sheetCardBody}>
+                <Text style={[styles.sheetCardLabel, { color: Colors.green }]}>COMPLETED</Text>
+                <Text style={styles.sheetCardTitle}>
+                  {selectedDay.completedTypes.map(formatSessionType).join(', ')}
+                </Text>
+              </View>
+            </View>
+          ) : null}
+
+          <TouchableOpacity style={styles.sheetCloseBtn} onPress={() => setSelectedDate(null)}>
+            <Text style={styles.sheetCloseBtnText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -200,4 +251,53 @@ const styles = StyleSheet.create({
   cellIconDone: { opacity: 1 },
   legend: { padding: 20, gap: 4, marginTop: 'auto' },
   legendText: { fontSize: 11, color: Colors.textMuted, textAlign: 'center' },
+
+  // Day detail sheet
+  sheetBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' },
+  sheet: {
+    backgroundColor: '#0D1424',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 20,
+    paddingBottom: 40,
+    gap: 12,
+  },
+  sheetHandle: {
+    alignSelf: 'center',
+    width: 36,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    marginBottom: 4,
+  },
+  sheetTitle: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary },
+  sheetCard: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 12,
+    backgroundColor: Colors.surfaceTeal,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderRadius: 14,
+    padding: 14,
+  },
+  sheetCardDone: {
+    backgroundColor: Colors.surfaceGreen,
+    borderColor: Colors.borderGreen,
+  },
+  sheetCardIcon: { fontSize: 24 },
+  sheetCardBody: { flex: 1, gap: 2 },
+  sheetCardLabel: { fontSize: 10, fontWeight: '700', color: Colors.teal, letterSpacing: 1 },
+  sheetCardTitle: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary },
+  sheetCardDesc: { fontSize: 13, color: Colors.textSecondary, lineHeight: 18, marginTop: 2 },
+  sheetCloseBtn: {
+    marginTop: 4,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 12,
+    height: 46,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sheetCloseBtnText: { fontSize: 14, fontWeight: '700', color: Colors.textSecondary },
 });

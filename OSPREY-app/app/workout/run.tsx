@@ -11,6 +11,7 @@ import {
 import MapView, { Polyline } from 'react-native-maps';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import OzzieAvatar from '@/components/OzzieAvatar';
 import { useRunTracking } from '@/hooks/useRunTracking';
 import {
   useWorkoutStore,
@@ -232,7 +233,8 @@ export default function RunWorkoutScreen() {
 
       <View style={styles.actions}>
         <TouchableOpacity style={styles.ozzieBtn} onPress={handleOzzieCue}>
-          <Text style={styles.ozzieBtnText}>🦅 Ozzie Cue</Text>
+          <OzzieAvatar size={18} />
+          <Text style={styles.ozzieBtnText}>Ozzie Cue</Text>
         </TouchableOpacity>
 
         <View style={styles.controlRow}>
@@ -323,6 +325,9 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
   },
   ozzieBtnText: { fontSize: 14, fontWeight: '700', color: Colors.teal },
   controlRow: { flexDirection: 'row', gap: 10 },

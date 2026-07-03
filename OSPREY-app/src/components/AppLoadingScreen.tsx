@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, Animated, Easing, StyleSheet } from 'react-native';
 import { Colors } from '@/constants/colors';
+import OzzieMascot from '@/components/OzzieMascot';
 
 function LoadingDot({ delay }: { delay: number }) {
   const anim = useRef(new Animated.Value(0)).current;
@@ -109,7 +110,7 @@ export function AppLoadingScreen() {
       >
         <View style={styles.outerRing}>
           <View style={styles.innerCircle}>
-            <Text style={styles.eagle}>🦅</Text>
+            <OzzieMascot size={56} />
           </View>
         </View>
       </Animated.View>

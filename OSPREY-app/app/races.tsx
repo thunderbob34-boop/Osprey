@@ -14,6 +14,10 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import DateField from '@/components/DateField';
+import FieldError from '@/components/FieldError';
+import InputModal from '@/components/InputModal';
+import ScreenHeader from '@/components/ScreenHeader';
 import { useRacePartners } from '@/hooks/useRacePartners';
 import { useRaces } from '@/hooks/useRaces';
 import { useSubscription } from '@/hooks/useSubscription';
@@ -537,6 +541,8 @@ export default function RacesScreen() {
   const [logisticsRaceId, setLogisticsRaceId] = useState<string | null>(null);
   const [retroRaceId, setRetroRaceId] = useState<string | null>(null);
   const [partnersRaceId, setPartnersRaceId] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [resultRace, setResultRace] = useState<RaceEvent | null>(null);
 
   function resetForm() {
     setName('');
@@ -549,18 +555,16 @@ export default function RacesScreen() {
   }
 
   async function handleCreate() {
-    if (!name.trim()) {
-      Alert.alert('Name your race', 'What event is this?');
-      return;
-    }
-    if (!isValidDate(eventDate)) {
-      Alert.alert('Check the date', 'Use YYYY-MM-DD, e.g. 2026-10-11.');
-      return;
-    }
+    const errors: Record<string, string> = {};
+    if (!name.trim()) errors.name = 'What event is this?';
+    if (!isValidDate(eventDate)) errors.date = 'When is race day?';
     const km = distanceKm ?? (customMiles ? Number(customMiles) * KM_PER_MILE : null);
     const goalTimeS = goalTime ? parseRaceTime(goalTime) : null;
     if (goalTime && goalTimeS == null) {
-      Alert.alert('Check the goal time', 'Use h:mm:ss or mm:ss, e.g. 1:45:00.');
+      errors.goalTime = 'Use h:mm:ss or mm:ss, e.g. 1:45:00.';
+    }
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
       return;
     }
     try {
@@ -592,22 +596,20 @@ export default function RacesScreen() {
   }
 
   function handleRecordResult(race: RaceEvent) {
-    Alert.prompt?.(
-      'Record result',
-      `Finish time for ${race.name} (h:mm:ss)`,
-      async (text?: string) => {
-        const seconds = text ? parseRaceTime(text) : null;
-        if (seconds == null) {
-          Alert.alert('Check the time', 'Use h:mm:ss or mm:ss.');
-          return;
-        }
-        try {
-          await recordResult.mutateAsync({ raceId: race.id, resultTimeS: seconds });
-        } catch (err) {
-          Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
-        }
-      },
-    );
+    setResultRace(race);
+  }
+
+  async function handleSubmitResult(text: string) {
+    const race = resultRace;
+    setResultRace(null);
+    if (!race) return;
+    const seconds = parseRaceTime(text);
+    if (seconds == null) return;
+    try {
+      await recordResult.mutateAsync({ raceId: race.id, resultTimeS: seconds });
+    } catch (err) {
+      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+    }
   }
 
   function handleDelete(race: RaceEvent) {
@@ -671,15 +673,14 @@ export default function RacesScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} hitSlop={12}>
-          <Text style={styles.close}>✕</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Races</Text>
-        <TouchableOpacity onPress={() => setShowForm((v) => !v)} hitSlop={12}>
-          <Text style={styles.add}>{showForm ? '−' : '+'}</Text>
-        </TouchableOpacity>
-      </View>
+      <ScreenHeader
+        title="Races"
+        right={
+          <TouchableOpacity onPress={() => setShowForm((v) => !v)} hitSlop={12}>
+            <Text style={styles.add}>{showForm ? '−' : '+'}</Text>
+          </TouchableOpacity>
+        }
+      />
 
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
@@ -687,12 +688,16 @@ export default function RacesScreen() {
             <View style={styles.formCard}>
               <Text style={styles.formTitle}>Add a race</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.input, fieldErrors.name ? styles.inputError : null]}
                 placeholder="Race name (e.g. Chicago Marathon)"
                 placeholderTextColor={Colors.textMuted}
                 value={name}
-                onChangeText={setName}
+                onChangeText={(v) => {
+                  setName(v);
+                  setFieldErrors((prev) => ({ ...prev, name: '' }));
+                }}
               />
+              <FieldError message={fieldErrors.name} />
 
               <Text style={styles.fieldLabel}>DISTANCE</Text>
               <View style={styles.chipRow}>
@@ -724,24 +729,30 @@ export default function RacesScreen() {
               </View>
 
               <Text style={styles.fieldLabel}>DATE</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="YYYY-MM-DD"
-                placeholderTextColor={Colors.textMuted}
+              <DateField
                 value={eventDate}
-                onChangeText={setEventDate}
-                autoCapitalize="none"
+                onChange={(d) => {
+                  setEventDate(d);
+                  setFieldErrors((prev) => ({ ...prev, date: '' }));
+                }}
+                placeholder="Race day"
+                minimumDate={new Date()}
               />
+              <FieldError message={fieldErrors.date} />
 
               <Text style={styles.fieldLabel}>GOAL TIME (optional)</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.input, fieldErrors.goalTime ? styles.inputError : null]}
                 placeholder="h:mm:ss (e.g. 1:45:00)"
                 placeholderTextColor={Colors.textMuted}
                 value={goalTime}
-                onChangeText={setGoalTime}
+                onChangeText={(v) => {
+                  setGoalTime(v);
+                  setFieldErrors((prev) => ({ ...prev, goalTime: '' }));
+                }}
                 autoCapitalize="none"
               />
+              <FieldError message={fieldErrors.goalTime} />
 
               <Text style={styles.fieldLabel}>LOCATION (optional)</Text>
               <TextInput
@@ -943,6 +954,17 @@ export default function RacesScreen() {
           )}
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <InputModal
+        visible={resultRace != null}
+        title="Record result"
+        message={resultRace ? `Finish time for ${resultRace.name}` : undefined}
+        placeholder="h:mm:ss (e.g. 1:45:00)"
+        keyboardType="numbers-and-punctuation"
+        validate={(text) => (parseRaceTime(text) == null ? 'Use h:mm:ss or mm:ss.' : null)}
+        onSubmit={handleSubmitResult}
+        onCancel={() => setResultRace(null)}
+      />
     </SafeAreaView>
   );
 }
@@ -1110,6 +1132,9 @@ const styles = StyleSheet.create({
     color: Colors.textMuted,
     letterSpacing: 0.8,
     marginTop: 6,
+  },
+  inputError: {
+    borderColor: Colors.red,
   },
   input: {
     backgroundColor: Colors.bg,

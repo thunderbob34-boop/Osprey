@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import ScreenHeader from '@/components/ScreenHeader';
 import { useActivity } from '@/hooks/useActivity';
 import { useAuthStore } from '@/store/authStore';
 
@@ -77,13 +78,7 @@ export default function ActivityScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} hitSlop={12}>
-          <Text style={styles.close}>✕</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Activity</Text>
-        <View style={{ width: 20 }} />
-      </View>
+      <ScreenHeader title="Activity" />
 
       <ScrollView contentContainerStyle={styles.scroll}>
         {isLoading ? (

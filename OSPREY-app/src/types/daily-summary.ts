@@ -73,7 +73,6 @@ export interface TrainingReadiness {
 }
 
 export interface DailySummaryProps extends Partial<DailySummaryData> {
-  showBottomNav?: boolean;
   isLoading?: boolean;
   error?: string | null;
   onRetry?: () => void;
@@ -87,4 +86,5 @@ export interface DailySummaryProps extends Partial<DailySummaryData> {
   onActivityPress?: () => void;
   onViewWeekPress?: () => void;
   headerBanner?: React.ReactNode;
+  weatherCard?: React.ReactNode;
 }

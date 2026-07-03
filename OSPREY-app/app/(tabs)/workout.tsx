@@ -1,11 +1,14 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, SafeAreaView, View } from 'react-native';
+import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { usePlanAdaptation } from '@/hooks/usePlanAdaptation';
 
 type Card = {
-  emoji: string;
+  icon: ComponentProps<typeof MaterialCommunityIcons>['name'];
+  iconColor: string;
   title: string;
   desc: string;
   route: string;
@@ -16,7 +19,8 @@ type Card = {
 
 const CARDS: Card[] = [
   {
-    emoji: '🏃',
+    icon: 'run',
+    iconColor: Colors.teal,
     title: 'Run',
     desc: 'GPS map, live pace, Ozzie mid-run cues',
     route: '/workout/run',
@@ -24,7 +28,8 @@ const CARDS: Card[] = [
     border: Colors.borderTeal,
   },
   {
-    emoji: '🏋️',
+    icon: 'dumbbell',
+    iconColor: Colors.gold,
     title: 'Lift',
     desc: 'Log sets, rest timer, Ozzie encouragement',
     route: '/workout/lift',
@@ -32,7 +37,8 @@ const CARDS: Card[] = [
     border: Colors.borderGold,
   },
   {
-    emoji: '🏊',
+    icon: 'swim',
+    iconColor: '#4A90D9',
     title: 'Swim',
     desc: 'Timer-based session with Ozzie pool cues',
     route: '/workout/endurance',
@@ -41,7 +47,8 @@ const CARDS: Card[] = [
     border: Colors.borderBlue,
   },
   {
-    emoji: '🚴',
+    icon: 'bike',
+    iconColor: Colors.green,
     title: 'Bike',
     desc: 'Track your ride duration, Ozzie keeps cadence',
     route: '/workout/endurance',
@@ -50,7 +57,8 @@ const CARDS: Card[] = [
     border: Colors.borderGreen,
   },
   {
-    emoji: '🔁',
+    icon: 'yoga',
+    iconColor: Colors.textSecondary,
     title: 'Cross Training',
     desc: 'Yoga, rowing, or any active recovery session',
     route: '/workout/endurance',
@@ -107,7 +115,7 @@ export default function WorkoutTab() {
               router.push(card.params ? { pathname: card.route as any, params: card.params } : card.route as any)
             }
           >
-            <Text style={styles.cardEmoji}>{card.emoji}</Text>
+            <MaterialCommunityIcons name={card.icon} size={28} color={card.iconColor} />
             <View style={styles.cardText}>
               <Text style={styles.cardTitle}>{card.title}</Text>
               <Text style={styles.cardDesc}>{card.desc}</Text>
@@ -134,7 +142,6 @@ const styles = StyleSheet.create({
     padding: 18,
     marginBottom: 12,
   },
-  cardEmoji: { fontSize: 28 },
   cardText: { flex: 1 },
   cardTitle: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary, marginBottom: 4 },
   cardDesc: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },

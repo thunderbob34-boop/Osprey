@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Colors } from '@/constants/colors';
+import OzzieAvatar from '@/components/OzzieAvatar';
 
 interface OnboardingShellProps {
   step: number;
@@ -58,9 +59,7 @@ export default function OnboardingShell({
       >
         {showOzzie && step > 0 ? (
           <View style={styles.ozzieHeader}>
-            <View style={styles.ozzieAvatar}>
-              <Text style={styles.ozzieEmoji}>🦅</Text>
-            </View>
+            <OzzieAvatar size={28} />
             <Text style={styles.ozzieName}>Ozzie</Text>
           </View>
         ) : null}
@@ -167,17 +166,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
     marginBottom: 14,
-  },
-  ozzieAvatar: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    backgroundColor: Colors.gold,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  ozzieEmoji: {
-    fontSize: 14,
   },
   ozzieName: {
     fontSize: 13,

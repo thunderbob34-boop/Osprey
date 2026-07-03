@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -10,8 +10,12 @@ import {
   Platform,
   ActivityIndicator,
 } from 'react-native';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import * as WebBrowser from 'expo-web-browser';
 import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
+
+WebBrowser.maybeCompleteAuthSession();
 
 type Mode = 'signin' | 'signup';
 
@@ -21,8 +25,27 @@ export default function SignInScreen() {
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
+  const [appleAvailable, setAppleAvailable] = useState(false);
 
-  const { signIn, signUp, loading } = useAuthStore();
+  const { signIn, signUp, signInWithApple, signInWithGoogle, loading } = useAuthStore();
+
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      AppleAuthentication.isAvailableAsync().then(setAppleAvailable).catch(() => {});
+    }
+  }, []);
+
+  async function handleApple() {
+    setError('');
+    const { error } = await signInWithApple();
+    if (error) setError(error);
+  }
+
+  async function handleGoogle() {
+    setError('');
+    const { error } = await signInWithGoogle();
+    if (error) setError(error);
+  }
 
   async function handleSubmit() {
     setError('');
@@ -116,6 +139,28 @@ export default function SignInScreen() {
                 : 'Already have an account? Sign in'}
             </Text>
           </TouchableOpacity>
+
+          {/* ── Social sign-in ── */}
+          <View style={styles.dividerRow}>
+            <View style={styles.dividerLine} />
+            <Text style={styles.dividerText}>or</Text>
+            <View style={styles.dividerLine} />
+          </View>
+
+          {appleAvailable ? (
+            <AppleAuthentication.AppleAuthenticationButton
+              buttonType={AppleAuthentication.AppleAuthenticationButtonType.CONTINUE}
+              buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+              cornerRadius={12}
+              style={styles.appleBtn}
+              onPress={handleApple}
+            />
+          ) : null}
+
+          <TouchableOpacity style={styles.googleBtn} onPress={handleGoogle} disabled={loading}>
+            <Text style={styles.googleBtnG}>G</Text>
+            <Text style={styles.googleBtnText}>Continue with Google</Text>
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -186,5 +231,44 @@ const styles = StyleSheet.create({
   switchModeText: {
     fontSize: 13,
     color: Colors.textMuted,
+  },
+  dividerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    marginVertical: 4,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: Colors.border,
+  },
+  dividerText: {
+    fontSize: 12,
+    color: Colors.textMuted,
+    fontWeight: '600',
+  },
+  appleBtn: {
+    height: 50,
+    width: '100%',
+  },
+  googleBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    height: 50,
+  },
+  googleBtnG: {
+    fontSize: 18,
+    fontWeight: '900',
+    color: '#4285F4',
+  },
+  googleBtnText: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#1a1a1a',
   },
 });

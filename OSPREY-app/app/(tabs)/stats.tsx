@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Svg, { Line, Path, Polyline, Rect } from 'react-native-svg';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { useStats } from '@/hooks/useStats';
 import { usePerformance } from '@/hooks/usePerformance';
@@ -92,22 +93,22 @@ export default function StatsTab() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.titleRow}>
-          <View>
-            <Text style={styles.title}>Stats</Text>
-            <Text style={styles.subtitle}>Training trends and progress at a glance.</Text>
-          </View>
-          <View style={styles.headerBtns}>
-            <TouchableOpacity style={styles.calendarBtn} onPress={() => router.push('/races')}>
-              <Text style={styles.calendarBtnText}>🏁 Races</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.calendarBtn} onPress={() => router.push('/challenges')}>
-              <Text style={styles.calendarBtnText}>🏆 Challenges</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.calendarBtn} onPress={() => router.push('/calendar')}>
-              <Text style={styles.calendarBtnText}>📅 Calendar</Text>
-            </TouchableOpacity>
-          </View>
+        <Text style={styles.title}>Stats</Text>
+        <Text style={styles.subtitle}>Training trends and progress at a glance.</Text>
+
+        <View style={styles.navChipRow}>
+          <TouchableOpacity style={styles.navChip} onPress={() => router.push('/races')}>
+            <Ionicons name="flag-outline" size={14} color={Colors.teal} />
+            <Text style={styles.navChipText}>Races</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navChip} onPress={() => router.push('/challenges')}>
+            <Ionicons name="trophy-outline" size={14} color={Colors.teal} />
+            <Text style={styles.navChipText}>Challenges</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navChip} onPress={() => router.push('/calendar')}>
+            <Ionicons name="calendar-outline" size={14} color={Colors.teal} />
+            <Text style={styles.navChipText}>Calendar</Text>
+          </TouchableOpacity>
         </View>
 
         {isLoading ? (
@@ -126,8 +127,8 @@ export default function StatsTab() {
               />
             </View>
 
-            <Text style={styles.sectionLabel}>WEEKLY MILEAGE</Text>
             <View style={styles.chartCard}>
+              <Text style={styles.heroLabel}>WEEKLY MILEAGE</Text>
               <View style={styles.chartBars}>
                 {data?.weeklyMileage.map((week) => (
                   <View key={week.weekStartIso} style={styles.barColumn}>
@@ -315,24 +316,21 @@ function FitnessMetric({
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
   scrollContent: { padding: 28, paddingBottom: 48 },
-  titleRow: {
+  title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 4 },
+  subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, marginBottom: 16 },
+  navChipRow: { flexDirection: 'row', gap: 8, marginBottom: 20 },
+  navChip: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  title: { fontSize: 24, fontWeight: '800', color: Colors.textPrimary, marginBottom: 4 },
-  subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, maxWidth: 200 },
-  headerBtns: { gap: 8, alignItems: 'flex-end' },
-  calendarBtn: {
+    alignItems: 'center',
+    gap: 6,
     backgroundColor: Colors.surfaceTeal,
     borderWidth: 1,
     borderColor: Colors.borderTeal,
     borderRadius: 20,
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
     paddingVertical: 8,
   },
-  calendarBtnText: { fontSize: 12, fontWeight: '700', color: Colors.teal },
+  navChipText: { fontSize: 12, fontWeight: '700', color: Colors.teal },
   errorText: { fontSize: 13, color: Colors.red },
   statsRow: { flexDirection: 'row', gap: 10, marginBottom: 24 },
   statBlock: {
@@ -357,12 +355,19 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   chartCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: 'rgba(0,200,200,0.10)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(0,200,200,0.35)',
+    borderRadius: 18,
     padding: 16,
     marginBottom: 24,
+  },
+  heroLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: Colors.teal,
+    letterSpacing: 1.5,
+    marginBottom: 12,
   },
   chartBars: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', height: 140 },
   barColumn: { flex: 1, alignItems: 'center', height: '100%', justifyContent: 'flex-end' },
