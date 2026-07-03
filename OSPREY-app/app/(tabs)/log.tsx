@@ -16,10 +16,12 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
 import FieldError from '@/components/FieldError';
+import HydrationCard from '@/components/HydrationCard';
 import { useTodayLog } from '@/hooks/useTodayLog';
 import type { MealType, QuickWorkoutType } from '@/types/log';
 import { searchFoodByName, type FoodItemResult } from '@/services/food-lookup';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
+import { useHydration } from '@/hooks/useHydration';
 import { useWeightLog } from '@/hooks/useWeightLog';
 import { kgToLb, lbToKg } from '@/services/body-metrics';
 import { estimateMealFromPhoto } from '@/services/meal-photo';
@@ -57,6 +59,7 @@ function getErrorMessage(err: unknown): string {
 export default function LogTab() {
   const { data, isLoading, error, logWorkout, logFood } = useTodayLog();
   const { data: nutrition } = useNutritionCoaching();
+  const { data: hydration, add: addHydration } = useHydration();
   const { data: weightSummary, log: logWeightMutation } = useWeightLog();
   const [openSection, setOpenSection] = useState<'workout' | 'food' | 'weight' | null>(null);
   const router = useRouter();
@@ -354,6 +357,14 @@ export default function LogTab() {
               </View>
               {nutrition.tip ? <Text style={styles.tipText}>{nutrition.tip}</Text> : null}
             </View>
+          ) : null}
+
+          {hydration ? (
+            <HydrationCard
+              ounces={hydration.ounces}
+              targetOz={hydration.targetOz}
+              onAdd={(oz) => addHydration.mutate(oz)}
+            />
           ) : null}
 
           {isLoading ? (

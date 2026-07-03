@@ -1,10 +1,14 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import type { WeatherCoachResult } from '@/services/weather-coach';
 
 interface WeatherCoachCardProps {
   weather: WeatherCoachResult;
+  /** Shown when the forecast recommends moving today's outdoor session inside. */
+  onMoveIndoors?: () => void;
+  movingIndoors?: boolean;
+  alreadyIndoors?: boolean;
 }
 
 const SEVERITY_STYLE = {
@@ -28,8 +32,14 @@ const SEVERITY_STYLE = {
   },
 };
 
-export default function WeatherCoachCard({ weather }: WeatherCoachCardProps) {
+export default function WeatherCoachCard({
+  weather,
+  onMoveIndoors,
+  movingIndoors,
+  alreadyIndoors,
+}: WeatherCoachCardProps) {
   const s = SEVERITY_STYLE[weather.severity];
+  const showAction = weather.suggestIndoor && onMoveIndoors && !alreadyIndoors;
 
   return (
     <View style={[styles.card, { backgroundColor: s.bg, borderColor: s.border }]}>
@@ -39,6 +49,25 @@ export default function WeatherCoachCard({ weather }: WeatherCoachCardProps) {
       </View>
       <Text style={styles.headline}>{weather.headline}</Text>
       <Text style={styles.detail}>{weather.detail}</Text>
+
+      {showAction ? (
+        <TouchableOpacity
+          style={[styles.actionBtn, { borderColor: s.accent }]}
+          onPress={onMoveIndoors}
+          disabled={movingIndoors}
+        >
+          {movingIndoors ? (
+            <ActivityIndicator color={s.accent} size="small" />
+          ) : (
+            <Text style={[styles.actionText, { color: s.accent }]}>Move today's session indoors</Text>
+          )}
+        </TouchableOpacity>
+      ) : alreadyIndoors ? (
+        <View style={styles.movedRow}>
+          <Ionicons name="checkmark-circle" size={14} color={Colors.green} />
+          <Text style={styles.movedText}>Moved indoors</Text>
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -70,5 +99,27 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: Colors.textSecondary,
     lineHeight: 18,
+  },
+  actionBtn: {
+    marginTop: 4,
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  actionText: {
+    fontSize: 13,
+    fontWeight: '800',
+  },
+  movedRow: {
+    marginTop: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  movedText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: Colors.green,
   },
 });

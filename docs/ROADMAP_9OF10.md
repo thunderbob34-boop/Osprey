@@ -9,15 +9,15 @@ Work each numbered list top-down. Items marked ✅ shipped on Jul 2, 2026.
 ## 🏠 Home (Today) — 7/10 → 9/10
 
 1. ✅ **Weather Coach engine** — Open-Meteo forecast + heat lead-up hydration alerts (48h early), best outdoor window today, indoor/shade swap advice, rain/cold guidance. Card on Home; forecast summary feeds the Ozzie daily brief prompt.
-2. **Heat-aware plan actions** — when WeatherCoach says `suggestIndoor`, offer a one-tap "Move indoors" that swaps run→treadmill note / bike→trainer on today's session (reuse the existing swap mutation).
-3. **Hydration tracker** — dead-simple water/electrolyte log (taps, not forms) so heat-week advice has a measurable target; show a small ring on the fuel card during heat alerts.
+2. ✅ **Heat-aware plan actions** — WeatherCoachCard shows "Move today's session indoors" whenever `suggestIndoor` is true; marks the session description (Treadmill/Trainer/Indoor) without changing the training stimulus, and the card shows a "Moved indoors ✓" state once done.
+3. ✅ **Hydration tracker** — `hydration_log` table + `log_hydration()` RPC (atomic increment, no read-then-write race), quick-add chips (+8/+16/+24 oz) on Home (emphasized during heat alerts) and in Log.
 4. **Schedule assistant v2** — read tomorrow's calendar events (permission already granted for blocking); if the usual training window collides with a meeting, Ozzie suggests a new window in the evening brief.
 5. **Streak/consistency reframing** — Ozzie comments on week-over-week consistency in the brief (data already in quickStats).
 
 ## 🏋️ Workout — 5/10 → 9/10
 
 1. ✅ **Ozzie writes the lifts** — plan generator now emits structured `lift_prescription` (exercise/sets/reps/coach cues, constrained to the exercise library); lift screen preloads the prescribed workout with "OZZIE'S PLAN" header and per-exercise cues.
-2. **Expand the exercise library seed** — 12 exercises is too thin for a Hevy replacement. Seed ~80–120 movements across muscle groups (barbell/dumbbell/machine/bodyweight variants) in a new migration; update the plan-generator allow-list to the compound staples.
+2. ✅ **Expand the exercise library seed** — grew from 12 to ~100 movements across every muscle group and equipment type (barbell/dumbbell/machine/cable/bodyweight/kettlebell). Plan-generator allow-list expanded to explicit Push/Pull/Lower splits (7 exercises each) instead of 9 generic names.
 3. **Structured swim/bike sessions** — plan generator emits `interval_prescription` for swim/bike days ("8×50m hard / 20s rest", "4×5min @ threshold"); endurance screen renders the interval ladder with per-interval countdown and Ozzie audio cues (audio pipeline already exists).
 4. **Triathlon & multisport plans** — plan-generator prompt already schedules run/lift/swim/bike in one week; add goal options "Sprint Tri / Olympic Tri / First Multisport" in preferences + race-target flow, brick-session support (bike→run same session), and open-water swim notes.
 5. **In-run structured guidance** — surface today's interval targets during GPS runs (current pace vs. target band), with Ozzie cueing splits.
@@ -27,7 +27,7 @@ Work each numbered list top-down. Items marked ✅ shipped on Jul 2, 2026.
 
 1. **Adaptive nutrition loop (the MacroFactor killer)** — weekly job: compare 14-day weight trend + logged intake vs. goal, adjust calorie/macro targets, and have Ozzie *announce* the change in plain English ("You're down 1.4 lb this week — faster than we planned. Adding 120 cal to rest days."). New edge function + `nutrition_target_adjustments` table.
 2. ✅ *(prereq shipped earlier)* Inline validation, barcode scanner with manual fallback/torch/haptics.
-3. **Hydration logging** (shared with Home #3).
+3. ✅ **Hydration logging** — shared HydrationCard shown at the top of Log, same table/RPC as Home.
 4. **Meal templates & recents** — one-tap re-log of frequent meals; "copy yesterday."
 5. **Training-day macro periodization surfaced in Log** — show today's target type (training vs. rest day) at the top of the food section, not just on Home.
 
@@ -59,7 +59,7 @@ Work each numbered list top-down. Items marked ✅ shipped on Jul 2, 2026.
 
 ## Ops checklist (do these for today's features to go live)
 
-1. `supabase db push --linked` → applies migrations **016** (delete account) and **017** (lift prescriptions).
+1. `supabase db push --linked` → applies migrations **016** (delete account), **017** (lift prescriptions), **018** (hydration log), **019** (expanded exercise library).
 2. `supabase functions deploy ozzie-daily-brief` → weather-aware briefs.
 3. `supabase functions deploy ozzie-generate-plan` → lift prescriptions in new plans (existing plans keep working; prescriptions appear on next plan generation).
 4. Supabase dashboard → Auth → enable Apple + Google providers; add `osprey://auth-callback` redirect.

@@ -4,8 +4,10 @@ import DailySummaryScreen from '@/screens/DailySummary';
 import BuildPlanBanner from '@/components/BuildPlanBanner';
 import DeloadSuggestionCard from '@/components/DeloadSuggestionCard';
 import WeatherCoachCard from '@/components/WeatherCoachCard';
+import HydrationCard from '@/components/HydrationCard';
 import { useDailySummary } from '@/hooks/useDailySummary';
 import { useWeatherCoach } from '@/hooks/useWeatherCoach';
+import { useHydration } from '@/hooks/useHydration';
 import { useFuelStatus } from '@/hooks/useFuelStatus';
 import { usePerformance } from '@/hooks/usePerformance';
 import { usePlanDeload } from '@/hooks/usePlanDeload';
@@ -15,12 +17,13 @@ import type { SwappableSessionType } from '@/services/plan';
 
 export default function HomeTab() {
   const router = useRouter();
-  const { data, isLoading, isRefetching, error, refetch, swapSession, compressSession } = useDailySummary();
+  const { data, isLoading, isRefetching, error, refetch, swapSession, compressSession, moveIndoors } = useDailySummary();
   const { data: fuelStatus } = useFuelStatus();
   const { isPlus } = useSubscription();
   const { data: perf } = usePerformance();
   const { suggestion: deloadSuggestion, isAccepting: isDeloadAccepting, accept: acceptDeload, dismiss: dismissDeload } = usePlanDeload();
   const { data: weatherCoach } = useWeatherCoach(data?.session?.sessionType ?? null);
+  const { data: hydration, add: addHydration } = useHydration();
 
   function handleStartSession(session: SessionData) {
     const sessionId = session.sessionId ?? undefined;
@@ -63,7 +66,18 @@ export default function HomeTab() {
     });
   }
 
+  function handleMoveIndoors() {
+    const sessionId = data?.session?.sessionId;
+    if (!sessionId) return;
+    moveIndoors.mutate(sessionId, {
+      onError: (err) => {
+        Alert.alert('Could not move session', err instanceof Error ? err.message : 'Try again.');
+      },
+    });
+  }
+
   const hasPlan = Boolean(data?.session?.sessionId);
+  const alreadyIndoors = /\((Treadmill|Trainer|Indoor)\)/i.test(data?.session?.type ?? '');
 
   return (
     <DailySummaryScreen
@@ -86,7 +100,28 @@ export default function HomeTab() {
       trainingReadiness={isPlus ? (perf?.trainingReadiness ?? null) : null}
       onActivityPress={() => router.push('/activity')}
       onViewWeekPress={() => router.push('/plan-preview')}
-      weatherCard={weatherCoach ? <WeatherCoachCard weather={weatherCoach} /> : undefined}
+      weatherCard={
+        weatherCoach || hydration ? (
+          <>
+            {weatherCoach ? (
+              <WeatherCoachCard
+                weather={weatherCoach}
+                onMoveIndoors={hasPlan ? handleMoveIndoors : undefined}
+                movingIndoors={moveIndoors.isPending}
+                alreadyIndoors={alreadyIndoors}
+              />
+            ) : null}
+            {hydration ? (
+              <HydrationCard
+                ounces={hydration.ounces}
+                targetOz={hydration.targetOz}
+                onAdd={(oz) => addHydration.mutate(oz)}
+                emphasized={weatherCoach?.severity === 'alert'}
+              />
+            ) : null}
+          </>
+        ) : undefined
+      }
       headerBanner={
         !isLoading && !hasPlan ? (
           <BuildPlanBanner />

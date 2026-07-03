@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchDailySummary } from '@/services/daily-summary';
-import { compressTodaySession, swapTodaySession, type SwappableSessionType } from '@/services/plan';
+import { compressTodaySession, moveSessionIndoors, swapTodaySession, type SwappableSessionType } from '@/services/plan';
 import { withCache } from '@/services/offline-cache';
 import { useAuthStore } from '@/store/authStore';
 
@@ -27,5 +27,10 @@ export function useDailySummary() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey }),
   });
 
-  return { ...query, swapSession, compressSession };
+  const moveIndoors = useMutation({
+    mutationFn: (sessionId: string) => moveSessionIndoors(userId!, sessionId),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
+  });
+
+  return { ...query, swapSession, compressSession, moveIndoors };
 }

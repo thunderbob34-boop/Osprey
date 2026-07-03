@@ -172,6 +172,42 @@ export async function swapTodaySession(
   });
 }
 
+const INDOOR_SUFFIX: Record<string, string> = {
+  run: 'Treadmill',
+  bike: 'Trainer',
+  cross: 'Indoor',
+};
+
+/**
+ * Weather-triggered swap: keeps the session type and volume intact but
+ * marks it as an indoor equivalent (treadmill run, trainer ride, etc.)
+ * instead of changing the training stimulus like swapTodaySession does.
+ */
+export async function moveSessionIndoors(userId: string, sessionId: string): Promise<void> {
+  const { data: original, error: fetchError } = await supabase
+    .from('training_sessions')
+    .select('session_type, description')
+    .eq('id', sessionId)
+    .eq('user_id', userId)
+    .single();
+
+  if (fetchError || !original) throw fetchError ?? new Error('Session not found');
+
+  const suffix = INDOOR_SUFFIX[original.session_type] ?? 'Indoor';
+  const baseDescription = (original.description ?? '').replace(/\s*\(Indoor.*\)$/i, '');
+
+  const { error: updateError } = await supabase
+    .from('training_sessions')
+    .update({
+      description: `${baseDescription} (${suffix})`,
+      ozzie_notes: 'Moved indoors ahead of tough weather — same session, safer conditions.',
+    })
+    .eq('id', sessionId)
+    .eq('user_id', userId);
+
+  if (updateError) throw updateError;
+}
+
 /**
  * Shrinks today's session to fit the minutes the user actually has,
  * preserving the training stimulus at a lower volume rather than
