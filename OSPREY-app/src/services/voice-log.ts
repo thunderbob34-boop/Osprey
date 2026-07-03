@@ -21,7 +21,9 @@ export async function startVoiceRecording(): Promise<boolean> {
   return true;
 }
 
-export async function stopVoiceRecordingAndParse(): Promise<VoiceLogResult> {
+/** Stop the active recording and return the clip as base64 — shared by the
+ * set-parsing voice log and the morning check-in. */
+export async function stopVoiceRecordingBase64(): Promise<string> {
   if (!recording) throw new Error('No active recording');
 
   await recording.stopAndUnloadAsync();
@@ -32,7 +34,11 @@ export async function stopVoiceRecordingAndParse(): Promise<VoiceLogResult> {
 
   if (!uri) throw new Error('Recording produced no file');
 
-  const audioBase64 = await FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 });
+  return FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 });
+}
+
+export async function stopVoiceRecordingAndParse(): Promise<VoiceLogResult> {
+  const audioBase64 = await stopVoiceRecordingBase64();
 
   const { data, error } = await supabase.functions.invoke<VoiceLogResult>('ozzie-voice-log', {
     method: 'POST',
