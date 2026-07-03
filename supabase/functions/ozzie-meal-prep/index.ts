@@ -289,28 +289,41 @@ Deno.serve(async (req: Request) => {
     );
 
     // Merge groceries into the week's list WITHOUT clobbering `checked` on
-    // items the user already has: update quantity/cost only for existing
-    // names, insert the new ones unchecked.
+    // items the user already has: skip names already on the list, insert only
+    // the genuinely new ones unchecked. Existing rows are left untouched so an
+    // in-store check survives a mid-week regenerate.
     const week = weekOf(planDate);
     const { data: existingItems } = await supabase
       .from('grocery_items')
       .select('name')
       .eq('user_id', userId)
       .eq('week_of', week);
-    const existingNames = new Set((existingItems ?? []).map((r) => String(r.name).toLowerCase()));
+    const seenNames = new Set((existingItems ?? []).map((r) => String(r.name).toLowerCase()));
 
-    const toInsert = plan.groceries.filter((g) => !existingNames.has(g.name.toLowerCase()));
+    // Dedupe within this response too: the UNIQUE(user_id, week_of, name)
+    // constraint means two groceries with the same name in one batch would
+    // otherwise fail the whole insert and silently drop every new item.
+    const toInsert: Array<Record<string, unknown>> = [];
+    for (const g of plan.groceries) {
+      const key = g.name.toLowerCase();
+      if (seenNames.has(key)) continue;
+      seenNames.add(key);
+      toInsert.push({
+        user_id: userId,
+        week_of: week,
+        name: g.name,
+        quantity: g.quantity,
+        category: g.category,
+        est_cost: g.estCost,
+      });
+    }
     if (toInsert.length > 0) {
-      await supabase.from('grocery_items').insert(
-        toInsert.map((g) => ({
-          user_id: userId,
-          week_of: week,
-          name: g.name,
-          quantity: g.quantity,
-          category: g.category,
-          est_cost: g.estCost,
-        })),
-      );
+      const { error: groceryInsertError } = await supabase.from('grocery_items').insert(toInsert);
+      if (groceryInsertError) {
+        // Non-fatal — the meal plan itself is already saved and returned; the
+        // grocery list just won't have this run's items. Log for visibility.
+        console.error('grocery insert error:', groceryInsertError);
+      }
     }
 
     return new Response(

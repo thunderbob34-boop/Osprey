@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import { format } from 'date-fns';
 import AppleHealthKit from 'react-native-health';
 import type {
   HealthActivity,
@@ -7,6 +8,17 @@ import type {
   HealthValue,
 } from 'react-native-health';
 import { supabase } from '@/services/supabase';
+
+// Same bounded subjective modifier the ozzie-checkin edge function applies
+// (energy ±8, soreness up to -10, clamped [-12, +8]). Recomputed here so a
+// HealthKit sync that lands after a spoken check-in preserves the subjective
+// signal instead of overwriting the score from objective data alone.
+function subjectiveModifier(energyLevel: number | null, sorenessAreas: string[] | null): number {
+  if (energyLevel == null) return 0;
+  const energyPart = (energyLevel - 3) * 4;
+  const sorenessPart = -Math.min(10, (sorenessAreas?.length ?? 0) * 5);
+  return Math.max(-12, Math.min(8, energyPart + sorenessPart));
+}
 
 const PERMISSIONS: HealthKitPermissions = {
   permissions: {
@@ -104,7 +116,9 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
   if (!isHealthKitSupported() || !initialized) return false;
 
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-  const today = new Date().toISOString().slice(0, 10);
+  // Local date, matching the spoken check-in's key — a UTC date would land on
+  // a different recovery_scores row near midnight and split the two signals.
+  const today = format(new Date(), 'yyyy-MM-dd');
 
   const [hrvSamples, restingHrSamples, sleepSamples] = await Promise.all([
     fetchSamples(AppleHealthKit.getHeartRateVariabilitySamples, {
@@ -132,6 +146,19 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
   let score = 70;
   if (hrvMs != null) score += hrvMs > 60 ? 10 : hrvMs < 30 ? -15 : 0;
   if (sleepHours != null) score += sleepHours >= 7 ? 10 : sleepHours < 5 ? -20 : -5;
+
+  // Fold in today's spoken check-in if one exists, so an objective sync doesn't
+  // wipe the subjective signal (and so order of operations doesn't matter).
+  const { data: checkin } = await supabase
+    .from('subjective_checkins')
+    .select('energy_level, soreness_areas')
+    .eq('user_id', userId)
+    .eq('checkin_date', today)
+    .maybeSingle();
+  if (checkin) {
+    score += subjectiveModifier(checkin.energy_level, checkin.soreness_areas);
+  }
+
   score = Math.max(0, Math.min(100, Math.round(score)));
 
   const recommendation = score >= 65 ? 'train' : score >= 40 ? 'easy' : 'rest';

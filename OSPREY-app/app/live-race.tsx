@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
-import { subscribeToLiveRace, type LivePositionPayload } from '@/services/liveRace';
+import { watchCrew, type LivePositionPayload } from '@/services/liveRace';
 
 const STALE_MS = 45_000; // no ping in 45s → grey the racer out
 
@@ -22,10 +22,16 @@ export default function LiveRaceScreen() {
 
   useEffect(() => {
     if (!raceId) return;
-    unsubRef.current = subscribeToLiveRace(raceId, (payload) => {
+    let cancelled = false;
+    watchCrew(raceId, (payload) => {
       setPositions((prev) => ({ ...prev, [payload.userId]: payload }));
+    }).then((unsub) => {
+      // If the screen already unmounted before the crew resolved, tear down now.
+      if (cancelled) unsub();
+      else unsubRef.current = unsub;
     });
     return () => {
+      cancelled = true;
       unsubRef.current?.();
       unsubRef.current = null;
     };

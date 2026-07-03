@@ -132,7 +132,9 @@ export interface RecalibrateResult {
 export async function recalibrateWeek(): Promise<RecalibrateResult> {
   const { data, error } = await supabase.functions.invoke<RecalibrateResult & { error?: string }>(
     'ozzie-generate-plan',
-    { method: 'POST', body: { recalibrate: true } },
+    // Send the client's LOCAL date so "this week" / "today" match what the
+    // user sees, not the server's UTC day.
+    { method: 'POST', body: { recalibrate: true, today: format(new Date(), 'yyyy-MM-dd') } },
   );
   if (error || !data) throw error ?? new Error('Recalibration failed');
   if ((data as { error?: string }).error) throw new Error((data as { error?: string }).error);

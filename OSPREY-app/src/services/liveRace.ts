@@ -56,15 +56,23 @@ export async function startLiveBroadcast(raceId: string): Promise<void> {
   const channel = supabase.channel(channelName(raceId), {
     config: { broadcast: { self: false } },
   });
-  broadcastChannel = channel;
-  await new Promise<void>((resolve, reject) => {
-    channel.subscribe((status) => {
-      if (status === 'SUBSCRIBED') resolve();
-      if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
-        reject(new Error('Could not go live — check your connection.'));
-      }
+  try {
+    await new Promise<void>((resolve, reject) => {
+      channel.subscribe((status) => {
+        if (status === 'SUBSCRIBED') resolve();
+        if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+          reject(new Error('Could not go live — check your connection.'));
+        }
+      });
     });
-  });
+    // Only mark it active once the subscribe actually succeeded — otherwise a
+    // failed attempt would leave a wedged non-null channel that the guard above
+    // treats as "already live", so retrying does nothing while the UI says LIVE.
+    broadcastChannel = channel;
+  } catch (err) {
+    await supabase.removeChannel(channel).catch(() => undefined);
+    throw err;
+  }
 }
 
 /** Throttled — safe to call from every GPS tick. */
@@ -88,21 +96,45 @@ export async function stopLiveBroadcast(): Promise<void> {
 
 // ── Watching (the crew) ───────────────────────────────────────────────────────
 
-export function subscribeToLiveRace(
-  raceId: string,
+/**
+ * Watch the whole crew at an event. Because each partner broadcasts on their
+ * OWN race-id channel (rows are per-user), the watcher resolves its partners'
+ * race ids via get_crew_race_ids and subscribes to every one of them plus its
+ * own — otherwise a watcher keyed on its own race id would never receive a
+ * partner's broadcasts. Returns a Promise of an unsubscribe fn that tears down
+ * every channel it opened.
+ */
+export async function watchCrew(
+  ownRaceId: string,
   onPosition: (payload: LivePositionPayload) => void,
-): () => void {
-  const channel = supabase.channel(channelName(raceId), {
-    config: { broadcast: { self: false } },
-  });
-  channel.on('broadcast', { event: 'position' }, ({ payload }) => {
-    if (payload && typeof payload.userId === 'string') {
-      onPosition(payload as LivePositionPayload);
+): Promise<() => void> {
+  const raceIds = new Set<string>([ownRaceId]);
+  try {
+    const { data } = await supabase.rpc('get_crew_race_ids', { p_race_id: ownRaceId });
+    for (const row of (data ?? []) as { partner_race_id: string }[]) {
+      if (row.partner_race_id) raceIds.add(row.partner_race_id);
     }
+  } catch {
+    // Fall back to own channel only — better a partial view than none.
+  }
+
+  const channels = [...raceIds].map((raceId) => {
+    const channel = supabase.channel(channelName(raceId), {
+      config: { broadcast: { self: false } },
+    });
+    channel.on('broadcast', { event: 'position' }, ({ payload }) => {
+      if (payload && typeof payload.userId === 'string') {
+        onPosition(payload as LivePositionPayload);
+      }
+    });
+    channel.subscribe();
+    return channel;
   });
-  channel.subscribe();
+
   return () => {
-    supabase.removeChannel(channel).catch(() => undefined);
+    for (const channel of channels) {
+      supabase.removeChannel(channel).catch(() => undefined);
+    }
   };
 }
 

@@ -277,12 +277,25 @@ interface RecalibratedDay {
 const SESSION_TYPES = new Set(['run', 'lift', 'swim', 'bike', 'cross', 'rest', 'race']);
 const INTENSITIES = new Set(['easy', 'moderate', 'threshold', 'interval', 'race', 'rest']);
 
+function mondayOf(dateStr: string): string {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(Date.UTC(y, m - 1, d));
+  const day = date.getUTCDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  date.setUTCDate(date.getUTCDate() + diff);
+  return date.toISOString().slice(0, 10);
+}
+
 async function recalibrateRemainingWeek(
   supabase: ReturnType<typeof createClient>,
   userId: string,
+  clientToday: string | null,
 ): Promise<Record<string, unknown>> {
-  const weekStartStr = toDateString(mondayOfThisWeek());
-  const todayStr = toDateString(new Date());
+  // Prefer the client's LOCAL date so "today" and the current week match what
+  // the user sees, rather than the server's UTC day (which rolls over
+  // mid-evening in the Americas). Falls back to server UTC if absent.
+  const todayStr = clientToday ?? toDateString(new Date());
+  const weekStartStr = mondayOf(todayStr);
 
   const { data: week } = await supabase
     .from('training_weeks')
@@ -528,7 +541,9 @@ Deno.serve(async (req: Request) => {
     // Mid-week recalibration is its own path: it adjusts only the remaining
     // days of the existing week in place and never creates/deletes anything.
     if (body.recalibrate === true) {
-      const result = await recalibrateRemainingWeek(supabase, userId);
+      const clientToday =
+        typeof body.today === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(body.today) ? body.today : null;
+      const result = await recalibrateRemainingWeek(supabase, userId, clientToday);
       return new Response(JSON.stringify(result), {
         headers: { 'Content-Type': 'application/json' },
       });

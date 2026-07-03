@@ -45,3 +45,34 @@ AS $$
 $$;
 
 GRANT EXECUTE ON FUNCTION get_partner_race_results TO authenticated;
+
+-- ── RPC: get_crew_race_ids ────────────────────────────────────────────────────
+-- Live positions broadcast on a channel keyed by the RACER'S OWN race_events.id.
+-- But partners at the same event each have their OWN race row (RLS self-only),
+-- so a watcher can't guess a partner's race id — and therefore can't subscribe
+-- to the partner's live channel — without this lookup. For a race the caller
+-- owns, returns each linked partner's race_events.id for the same event date.
+-- The watcher subscribes to its own channel plus each of these. SECURITY
+-- DEFINER + owner gate, mirroring get_partner_race_results.
+
+CREATE OR REPLACE FUNCTION get_crew_race_ids(p_race_id UUID)
+RETURNS TABLE(partner_race_id UUID)
+SECURITY DEFINER
+SET search_path = public
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT pre.id AS partner_race_id
+  FROM race_partners rp
+  JOIN race_events mine
+    ON  mine.id = rp.race_id
+    AND mine.user_id = auth.uid()
+    AND mine.deleted_at IS NULL
+  JOIN race_events pre
+    ON  pre.user_id = rp.partner_user_id
+    AND pre.event_date = mine.event_date
+    AND pre.deleted_at IS NULL
+  WHERE rp.race_id = p_race_id;
+$$;
+
+GRANT EXECUTE ON FUNCTION get_crew_race_ids TO authenticated;

@@ -153,6 +153,22 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    // Read any PRIOR check-in for today BEFORE overwriting it, so a re-check-in
+    // doesn't compound: we back its old modifier out of the current score to
+    // recover the objective base, then apply the new one.
+    const { data: priorCheckin } = await supabase
+      .from('subjective_checkins')
+      .select('energy_level, soreness_areas')
+      .eq('user_id', userId)
+      .eq('checkin_date', checkinDate)
+      .maybeSingle();
+    const priorModifier = priorCheckin
+      ? subjectiveModifier({
+          energyLevel: priorCheckin.energy_level ?? 3,
+          sorenessAreas: priorCheckin.soreness_areas ?? [],
+        } as CheckinExtraction)
+      : 0;
+
     const extraction = await extractCheckin(transcript);
 
     await supabase.from('subjective_checkins').upsert(
@@ -180,7 +196,9 @@ Deno.serve(async (req: Request) => {
       .eq('score_date', checkinDate)
       .maybeSingle();
 
-    const baseScore = existing ? Number(existing.score) : 70;
+    // Subtract the prior check-in's modifier to get the objective base, then
+    // add the new one — so checking in twice replaces rather than stacks.
+    const baseScore = (existing ? Number(existing.score) : 70) - priorModifier;
     const blended = Math.max(0, Math.min(100, Math.round(baseScore + modifier)));
     const recommendation = blended >= 65 ? 'train' : blended >= 40 ? 'easy' : 'rest';
 
