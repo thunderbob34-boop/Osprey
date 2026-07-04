@@ -16,8 +16,9 @@ export async function fetchFriendsAtRace(
   userId: string,
   eventDate: string,
 ): Promise<FriendAtRace[]> {
+  // userId is unused server-side — get_friends_at_race scopes to auth.uid()
+  // internally so a caller can't pass someone else's id and read their races.
   const { data, error } = await supabase.rpc('get_friends_at_race', {
-    p_user_id: userId,
     p_event_date: eventDate,
   });
   if (error) throw error;

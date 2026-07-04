@@ -243,8 +243,9 @@ function initRetro(race: RaceEvent): RetroState {
 function pacingDeltaLabel(goalTimeS: number, resultTimeS: number): string {
   const deltaS = resultTimeS - goalTimeS;
   const sign = deltaS > 0 ? '+' : '';
-  const absM = Math.floor(Math.abs(deltaS) / 60);
-  const absS = Math.round(Math.abs(deltaS) % 60);
+  const absTotal = Math.round(Math.abs(deltaS));
+  const absM = Math.floor(absTotal / 60);
+  const absS = absTotal % 60;
   const pct = ((deltaS / goalTimeS) * 100).toFixed(1);
   return `${sign}${absM}:${String(absS).padStart(2, '0')} (${sign}${pct}%)`;
 }
@@ -536,6 +537,8 @@ export default function RacesScreen() {
 
   const [logisticsRaceId, setLogisticsRaceId] = useState<string | null>(null);
   const [retroRaceId, setRetroRaceId] = useState<string | null>(null);
+  const [resultRaceId, setResultRaceId] = useState<string | null>(null);
+  const [resultTimeText, setResultTimeText] = useState('');
   const [partnersRaceId, setPartnersRaceId] = useState<string | null>(null);
 
   function resetForm() {
@@ -592,22 +595,25 @@ export default function RacesScreen() {
   }
 
   function handleRecordResult(race: RaceEvent) {
-    Alert.prompt?.(
-      'Record result',
-      `Finish time for ${race.name} (h:mm:ss)`,
-      async (text?: string) => {
-        const seconds = text ? parseRaceTime(text) : null;
-        if (seconds == null) {
-          Alert.alert('Check the time', 'Use h:mm:ss or mm:ss.');
-          return;
-        }
-        try {
-          await recordResult.mutateAsync({ raceId: race.id, resultTimeS: seconds });
-        } catch (err) {
-          Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
-        }
-      },
-    );
+    // Alert.prompt is iOS-only — it silently no-ops on Android. Toggle an
+    // inline text field instead, matching the logistics/retro panel pattern
+    // below, so recording a result works on both platforms.
+    setResultTimeText('');
+    setResultRaceId((id) => (id === race.id ? null : race.id));
+  }
+
+  async function handleSaveResult(race: RaceEvent) {
+    const seconds = parseRaceTime(resultTimeText);
+    if (seconds == null) {
+      Alert.alert('Check the time', 'Use h:mm:ss or mm:ss.');
+      return;
+    }
+    try {
+      await recordResult.mutateAsync({ raceId: race.id, resultTimeS: seconds });
+      setResultRaceId(null);
+    } catch (err) {
+      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+    }
   }
 
   function handleDelete(race: RaceEvent) {
@@ -923,6 +929,33 @@ export default function RacesScreen() {
                         </View>
                       </View>
 
+                      {resultRaceId === race.id ? (
+                        <View style={styles.resultPanel}>
+                          <Text style={styles.resultPanelLabel}>
+                            Finish time for {race.name} (h:mm:ss)
+                          </Text>
+                          <View style={styles.resultPanelRow}>
+                            <TextInput
+                              style={styles.resultPanelInput}
+                              placeholder="e.g. 1:45:30"
+                              placeholderTextColor={Colors.textMuted}
+                              value={resultTimeText}
+                              onChangeText={setResultTimeText}
+                              autoFocus
+                            />
+                            <TouchableOpacity
+                              style={styles.resultPanelSaveBtn}
+                              onPress={() => handleSaveResult(race)}
+                              disabled={recordResult.isPending}
+                            >
+                              <Text style={styles.resultPanelSaveText}>
+                                {recordResult.isPending ? 'Saving…' : 'Save'}
+                              </Text>
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+                      ) : null}
+
                       {retroRaceId === race.id ? (
                         <RetroPanel
                           race={race}
@@ -1022,6 +1055,37 @@ const styles = StyleSheet.create({
   actionLink: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
   actionLinkActive: { color: Colors.gold },
   actionDelete: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
+
+  // ── Record result panel ──
+  resultPanel: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderTopWidth: 0,
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
+    padding: 14,
+  },
+  resultPanelLabel: { color: Colors.textMuted, fontSize: 12, marginBottom: 8 },
+  resultPanelRow: { flexDirection: 'row', gap: 10, alignItems: 'center' },
+  resultPanelInput: {
+    flex: 1,
+    backgroundColor: Colors.bg,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    color: Colors.textPrimary,
+    fontSize: 14,
+  },
+  resultPanelSaveBtn: {
+    backgroundColor: Colors.teal,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  resultPanelSaveText: { color: '#000', fontSize: 13, fontWeight: '700' },
 
   // ── Logistics panel ──
   logisticsPanel: {

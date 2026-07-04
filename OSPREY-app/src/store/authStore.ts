@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/services/supabase';
 import { clearOfflineCache } from '@/services/offline-cache';
+import { clearSubscriptionCache } from '@/hooks/useSubscription';
 
 export interface UserProfile {
   id: string;
@@ -25,6 +26,11 @@ interface AuthState {
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
 }
+
+// initialize() can run more than once (e.g. re-mount during fast refresh);
+// guard so onAuthStateChange doesn't stack duplicate listeners that each
+// re-fetch the profile and set state on every auth event.
+let authListenerRegistered = false;
 
 function fallbackProfile(user: User): UserProfile {
   return {
@@ -88,14 +94,19 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       await get().fetchProfile();
     }
 
-    supabase.auth.onAuthStateChange(async (_event, session) => {
-      set({ session, user: session?.user ?? null, profileReady: false });
-      if (session?.user) {
-        await get().fetchProfile();
-      } else {
-        set({ profile: null, profileReady: true, profileError: null });
-      }
-    });
+    if (!authListenerRegistered) {
+      authListenerRegistered = true;
+      supabase.auth.onAuthStateChange(async (_event, session) => {
+        set({ session, user: session?.user ?? null, profileReady: false });
+        if (session?.user) {
+          await get().fetchProfile();
+        } else {
+          clearSubscriptionCache();
+          await clearOfflineCache();
+          set({ profile: null, profileReady: true, profileError: null });
+        }
+      });
+    }
   },
 
   fetchProfile: async () => {
@@ -172,6 +183,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   signOut: async () => {
     await supabase.auth.signOut();
     await clearOfflineCache();
+    clearSubscriptionCache();
     set({
       session: null,
       user: null,

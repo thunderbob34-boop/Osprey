@@ -3,8 +3,11 @@
 // a personalized coaching debrief: what worked, what to work on next cycle.
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { createClient } from 'jsr:@supabase/supabase-js@2';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
 const SYSTEM_PROMPT = `You are Ozzie, the AI coach inside the OSPREY fitness app. Your voice is warm, enthusiastic, and unexpectedly wise — think Kronk from The Emperor's New Groove, but with a running coach's brain.
 
@@ -36,9 +39,10 @@ interface RetroRequest {
 const KM_PER_MILE = 1.609344;
 
 function formatTime(totalSeconds: number): string {
-  const h = Math.floor(totalSeconds / 3600);
-  const m = Math.floor((totalSeconds % 3600) / 60);
-  const s = Math.round(totalSeconds % 60);
+  const total = Math.round(totalSeconds);
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
   if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   return `${m}:${String(s).padStart(2, '0')}`;
 }
@@ -46,8 +50,9 @@ function formatTime(totalSeconds: number): string {
 function pacingDelta(goalTimeS: number, resultTimeS: number): string {
   const deltaS = resultTimeS - goalTimeS;
   const sign = deltaS > 0 ? '+' : '';
-  const absM = Math.floor(Math.abs(deltaS) / 60);
-  const absS = Math.round(Math.abs(deltaS) % 60);
+  const absTotal = Math.round(Math.abs(deltaS));
+  const absM = Math.floor(absTotal / 60);
+  const absS = absTotal % 60;
   const pct = ((deltaS / goalTimeS) * 100).toFixed(1);
   return `${sign}${absM}:${String(absS).padStart(2, '0')} (${sign}${pct}%)`;
 }
@@ -92,6 +97,25 @@ serve(async (req) => {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
       },
+    });
+  }
+
+  const authHeader = req.headers.get('Authorization');
+  if (!authHeader) {
+    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+    });
+  }
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+  const token = authHeader.replace('Bearer ', '');
+  const { data: authData, error: authError } = await supabase.auth.getUser(token);
+
+  if (authError || !authData?.user) {
+    return new Response(JSON.stringify({ error: 'Invalid session' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
     });
   }
 

@@ -59,7 +59,7 @@ export default function EnduranceWorkoutScreen() {
   const [distance, setDistance] = useState('');
   const [distanceUnit, setDistanceUnit] = useState<'meters' | 'yards' | 'km' | 'miles'>('meters');
   const [syncing, setSyncing] = useState(false);
-  const lastAutoCueMs = useRef(0);
+  const lastAutoCueMs = useRef(Date.now());
   const speakingRef = useRef(false);
 
   useEffect(() => {

@@ -109,7 +109,12 @@ export default function LiftWorkoutScreen() {
     value: string,
   ) {
     const numeric = Number(value.replace(/[^0-9.]/g, '')) || 0;
-    const updated = liftExercises.map((exercise, ei) => {
+    // Read the freshest state from the store rather than the closed-over
+    // `liftExercises` prop — two updateSet calls back-to-back in the same
+    // tick (e.g. voice log setting weight then reps) would otherwise both
+    // build off the same stale array and the second call would clobber
+    // the first's change.
+    const updated = useWorkoutStore.getState().liftExercises.map((exercise, ei) => {
       if (ei !== exerciseIndex) return exercise;
       return {
         ...exercise,

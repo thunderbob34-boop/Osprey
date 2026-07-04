@@ -22,6 +22,17 @@ export default function HomeTab() {
       router.push({ pathname: '/workout/lift', params: { sessionId } });
       return;
     }
+    if (
+      session.sessionType === 'swim' ||
+      session.sessionType === 'bike' ||
+      session.sessionType === 'cross'
+    ) {
+      router.push({
+        pathname: '/workout/endurance',
+        params: { sessionId, sessionType: session.sessionType },
+      });
+      return;
+    }
     router.push({ pathname: '/workout/run', params: { sessionId } });
   }
 

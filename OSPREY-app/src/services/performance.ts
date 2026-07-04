@@ -137,12 +137,12 @@ export function buildRacePredictor(
 interface WorkoutRow {
   started_at: string;
   total_duration_s: number;
-  distance_meters: number | null;
+  total_distance_km: number | null;
   session_type: string;
   tss: number | null;
 }
 
-function estimateTss(durationS: number, distanceMeters: number | null): number {
+function estimateTss(durationS: number, distanceKm: number | null): number {
   // Simple estimate when TSS not stored: (hours * 50) for moderate effort runs
   return (durationS / 3600) * 50;
 }
@@ -160,8 +160,9 @@ export async function fetchPerformanceData(
 
   const { data, error } = await supabase
     .from('workout_logs')
-    .select('started_at, total_duration_s, distance_meters, session_type, tss')
+    .select('started_at, total_duration_s, total_distance_km, session_type, tss')
     .eq('user_id', userId)
+    .is('deleted_at', null)
     .gte('started_at', since.toISOString())
     .order('started_at', { ascending: true });
 
@@ -173,15 +174,15 @@ export async function fetchPerformanceData(
   const tssMap: Record<string, number> = {};
   let bestRunMiles = 0;
   let bestRunTimeS = 0;
-  const metersPerMile = 1609.344;
+  const kmPerMile = 1.609344;
 
   for (const row of rows) {
     const date = row.started_at.slice(0, 10);
-    const tss = row.tss != null ? Number(row.tss) : estimateTss(row.total_duration_s, row.distance_meters);
+    const tss = row.tss != null ? Number(row.tss) : estimateTss(row.total_duration_s, row.total_distance_km);
     tssMap[date] = (tssMap[date] ?? 0) + tss;
 
-    if (row.session_type === 'run' && row.distance_meters && row.total_duration_s > 0) {
-      const miles = row.distance_meters / metersPerMile;
+    if (row.session_type === 'run' && row.total_distance_km && row.total_duration_s > 0) {
+      const miles = row.total_distance_km / kmPerMile;
       if (miles > bestRunMiles) {
         bestRunMiles = miles;
         bestRunTimeS = row.total_duration_s;
@@ -234,9 +235,10 @@ export function readinessFromTsb(tsb: number, ctl: number): TrainingReadiness {
 // ── Format helpers ────────────────────────────────────────────────────────────
 
 export function formatRaceTimeSec(totalS: number): string {
-  const h = Math.floor(totalS / 3600);
-  const m = Math.floor((totalS % 3600) / 60);
-  const s = Math.round(totalS % 60);
+  const total = Math.round(totalS);
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
   if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   return `${m}:${String(s).padStart(2, '0')}`;
 }

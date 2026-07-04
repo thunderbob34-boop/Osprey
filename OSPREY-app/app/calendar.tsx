@@ -120,7 +120,9 @@ export default function CalendarScreen() {
           {cells.map((cell, i) => {
             if (!cell) return <View key={i} style={styles.cell} />;
             const day = dayMap.get(cell.dateStr);
-            const isToday = cell.dateStr === today.toISOString().slice(0, 10);
+            const isToday =
+              cell.dateStr ===
+              `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
             const hasCompleted = (day?.completedTypes.length ?? 0) > 0;
             const icon = hasCompleted
               ? SESSION_ICON[day!.completedTypes[0]] ?? '✓'

@@ -53,7 +53,10 @@ export default function PaywallScreen() {
         Alert.alert('Purchase failed', 'Your payment was not completed. Please try again.');
       }
     } catch (err: unknown) {
-      if (err && typeof err === 'object' && 'userCancelled' in err) return;
+      const cancelled = Boolean(
+        err && typeof err === 'object' && (err as { userCancelled?: unknown }).userCancelled === true,
+      );
+      if (cancelled) return;
       Alert.alert('Purchase failed', err instanceof Error ? err.message : 'Try again.');
     } finally {
       setPurchasing(false);

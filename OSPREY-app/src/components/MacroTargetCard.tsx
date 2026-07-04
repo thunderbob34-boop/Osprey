@@ -1,17 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { ActivityIndicator, View, Text, StyleSheet } from 'react-native';
 import { Colors } from '@/constants/colors';
-
-const TRAINING = { protein: 240, carbs: 265, fat: 80, calories: 2740 };
-const LONG_DAY = { protein: 240, carbs: 340, fat: 80, calories: 3040 };
+import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 
 export default function MacroTargetCard() {
+  const { data, isLoading, error } = useNutritionCoaching();
   const isSunday = new Date().getDay() === 0;
-  const targets = isSunday ? LONG_DAY : TRAINING;
   const borderColor = isSunday ? Colors.borderGold : Colors.borderTeal;
   const surface = isSunday ? Colors.surfaceGold : Colors.surfaceTeal;
   const accentColor = isSunday ? Colors.gold : Colors.teal;
   const badgeLabel = isSunday ? 'Long Day — Carb Reload' : 'Training Day';
+
+  if (isLoading) {
+    return (
+      <View style={[styles.card, styles.centered, { borderColor }]}>
+        <ActivityIndicator color={accentColor} />
+      </View>
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <View style={[styles.card, styles.centered, { borderColor }]}>
+        <Text style={styles.errorText}>Couldn't load today's fuel targets.</Text>
+      </View>
+    );
+  }
+
+  const targets = data.target;
 
   return (
     <View style={[styles.card, { borderColor }]}>
@@ -22,9 +38,9 @@ export default function MacroTargetCard() {
         </View>
       </View>
       <View style={styles.macroGrid}>
-        <MacroBlock value={targets.protein} unit="g" label="Protein" accentColor={accentColor} />
-        <MacroBlock value={targets.carbs} unit="g" label="Carbs" accentColor={accentColor} />
-        <MacroBlock value={targets.fat} unit="g" label="Fat" accentColor={accentColor} />
+        <MacroBlock value={targets.proteinG} unit="g" label="Protein" accentColor={accentColor} />
+        <MacroBlock value={targets.carbsG} unit="g" label="Carbs" accentColor={accentColor} />
+        <MacroBlock value={targets.fatG} unit="g" label="Fat" accentColor={accentColor} />
         <MacroBlock value={targets.calories} unit="kcal" label="Calories" accentColor={accentColor} />
       </View>
     </View>
@@ -60,6 +76,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 16,
     marginBottom: 16,
+  },
+  centered: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 72,
+  },
+  errorText: {
+    fontSize: 12,
+    color: Colors.textMuted,
   },
   headerRow: {
     flexDirection: 'row',

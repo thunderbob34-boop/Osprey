@@ -14,7 +14,6 @@ import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
 import {
   hasOspreyPlus,
-  purchaseOspreyPlus,
   restorePurchases,
 } from '@/services/subscriptions';
 import {
@@ -141,19 +140,11 @@ export default function SettingsTab() {
     }
   }
 
-  async function handleUpgrade() {
-    setLoading(true);
-    try {
-      const success = await purchaseOspreyPlus();
-      setPlusActive(success);
-      if (!success) {
-        Alert.alert('OSPREY+', 'No packages available yet. Configure RevenueCat to enable purchases.');
-      }
-    } catch (err) {
-      Alert.alert('Purchase failed', err instanceof Error ? err.message : 'Try again later.');
-    } finally {
-      setLoading(false);
-    }
+  function handleUpgrade() {
+    // Route through the paywall screen rather than purchasing directly —
+    // the OS payment sheet alone never shows the user the feature list,
+    // price framing, or subscription terms (also an App Store review risk).
+    router.push('/paywall');
   }
 
   async function handleRestore() {
@@ -162,6 +153,8 @@ export default function SettingsTab() {
       const restored = await restorePurchases();
       setPlusActive(restored);
       Alert.alert('Restore', restored ? 'Purchases restored.' : 'No active subscription found.');
+    } catch (err) {
+      Alert.alert('Restore failed', err instanceof Error ? err.message : 'Please try again.');
     } finally {
       setLoading(false);
     }

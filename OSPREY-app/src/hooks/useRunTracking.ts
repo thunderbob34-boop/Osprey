@@ -28,12 +28,13 @@ export function useRunTracking(enabled: boolean) {
     if (!enabled || status !== 'active') return;
 
     let subscription: Location.LocationSubscription | null = null;
+    let cancelled = false;
 
     (async () => {
       const { status: permission } = await Location.requestForegroundPermissionsAsync();
-      if (permission !== 'granted') return;
+      if (permission !== 'granted' || cancelled) return;
 
-      subscription = await Location.watchPositionAsync(
+      const sub = await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.BestForNavigation,
           distanceInterval: 5,
@@ -64,10 +65,23 @@ export function useRunTracking(enabled: boolean) {
           addTrackPoint(point);
         },
       );
+
+      if (cancelled) {
+        // Effect was cleaned up (pause/unmount) while watchPositionAsync was
+        // still resolving — the subscription is created after cleanup already
+        // ran, so remove it immediately instead of leaking a live GPS watch.
+        sub.remove();
+        return;
+      }
+      subscription = sub;
     })();
 
     return () => {
+      cancelled = true;
       subscription?.remove();
+      // Reset so a resumed/new run doesn't compute its first distance delta
+      // against a coordinate from before the pause (or a previous workout).
+      lastPointRef.current = null;
     };
   }, [enabled, status, addDistance, addTrackPoint]);
 }
