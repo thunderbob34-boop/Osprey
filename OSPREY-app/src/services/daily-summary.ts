@@ -188,7 +188,10 @@ async function fetchHabitStreak(userId: string): Promise<number> {
   const forgivenessDays = prefsRes.data?.streak_forgiveness_days ?? 1;
 
   const activeDates = new Set(
-    (workoutsRes.data ?? []).map((row) => new Date(row.started_at).toISOString().slice(0, 10)),
+    // Local calendar date, not UTC — otherwise an evening workout can land
+    // on the wrong day relative to the local "today" this streak is
+    // compared against below, silently breaking or extending the streak.
+    (workoutsRes.data ?? []).map((row) => format(new Date(row.started_at), 'yyyy-MM-dd')),
   );
 
   if (activeDates.size === 0) return 0;

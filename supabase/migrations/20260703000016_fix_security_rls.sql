@@ -31,7 +31,15 @@ CREATE POLICY friendships_insert ON friendships
 -- update (RLS policies can't compare NEW to OLD directly, so this needs a
 -- trigger). Without this, an addressee could keep addressee_id = self and
 -- silently swap requester_id to any other user's UUID.
-CREATE OR REPLACE FUNCTION prevent_friendship_identity_change()
+--
+-- Also enforce who can drive a status transition: friendships_update's
+-- USING/WITH CHECK (requester_id = auth.uid() OR addressee_id = auth.uid())
+-- lets EITHER party set ANY status, which on its own still allows a
+-- requester to self-accept their own pending request — insert a pending
+-- row against a victim, then immediately UPDATE it to 'accepted' without
+-- the victim ever consenting. Only the addressee may accept; nobody may
+-- revert an accepted friendship back to pending.
+CREATE OR REPLACE FUNCTION enforce_friendship_update_rules()
 RETURNS TRIGGER
 LANGUAGE plpgsql
 AS $$
@@ -39,15 +47,27 @@ BEGIN
   IF NEW.requester_id <> OLD.requester_id OR NEW.addressee_id <> OLD.addressee_id THEN
     RAISE EXCEPTION 'Cannot change the parties of an existing friendship row';
   END IF;
+
+  IF NEW.status <> OLD.status THEN
+    IF OLD.status = 'pending' AND NEW.status = 'accepted' AND auth.uid() <> OLD.addressee_id THEN
+      RAISE EXCEPTION 'Only the addressee can accept a friend request';
+    END IF;
+    IF OLD.status = 'accepted' AND NEW.status = 'pending' THEN
+      RAISE EXCEPTION 'Cannot revert an accepted friendship back to pending';
+    END IF;
+  END IF;
+
   RETURN NEW;
 END;
 $$;
 
 DROP TRIGGER IF EXISTS trg_prevent_friendship_identity_change ON friendships;
-CREATE TRIGGER trg_prevent_friendship_identity_change
+DROP FUNCTION IF EXISTS prevent_friendship_identity_change();
+DROP TRIGGER IF EXISTS trg_enforce_friendship_update_rules ON friendships;
+CREATE TRIGGER trg_enforce_friendship_update_rules
   BEFORE UPDATE ON friendships
   FOR EACH ROW
-  EXECUTE FUNCTION prevent_friendship_identity_change();
+  EXECUTE FUNCTION enforce_friendship_update_rules();
 
 -- ── 2. SECURITY DEFINER RPCs trusting a caller-supplied user id ────────────
 
@@ -157,6 +177,8 @@ AS $$
     WHERE challenge_id = p_challenge_id AND user_id = p_user_id
   );
 $$;
+
+GRANT EXECUTE ON FUNCTION is_challenge_member(UUID, UUID) TO authenticated;
 
 DROP POLICY IF EXISTS challenge_members_read ON challenge_members;
 CREATE POLICY challenge_members_read ON challenge_members
