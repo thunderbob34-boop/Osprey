@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { localDateString } from '@/utils/date';
 
 export type SwappableSessionType = 'run' | 'lift' | 'cross' | 'rest';
 
@@ -79,7 +80,7 @@ export async function fetchCurrentWeekSessions(userId: string): Promise<WeekSess
   const monday = new Date(now);
   monday.setHours(0, 0, 0, 0);
   monday.setDate(now.getDate() + diff);
-  const weekStartStr = monday.toISOString().slice(0, 10);
+  const weekStartStr = localDateString(monday);
 
   const { data: week, error: weekError } = await supabase
     .from('training_weeks')

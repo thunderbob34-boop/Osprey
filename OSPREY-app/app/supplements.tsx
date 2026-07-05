@@ -110,7 +110,14 @@ export default function SupplementsScreen() {
     }
   }
 
-  async function handleDelete(reminder: SupplementReminder) {
+  function handleDelete(reminder: SupplementReminder) {
+    Alert.alert('Delete reminder?', `Remove "${reminder.name}" from your reminders.`, [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Delete', style: 'destructive', onPress: () => confirmDelete(reminder) },
+    ]);
+  }
+
+  async function confirmDelete(reminder: SupplementReminder) {
     if (!userId) return;
     try {
       await deleteSupplementReminder(reminder.id);

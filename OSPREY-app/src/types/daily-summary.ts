@@ -87,4 +87,6 @@ export interface DailySummaryProps extends Partial<DailySummaryData> {
   onActivityPress?: () => void;
   onViewWeekPress?: () => void;
   headerBanner?: React.ReactNode;
+  macroTargets?: { protein: number; carbs: number; fat: number; calories: number } | null;
+  macroTargetsLoading?: boolean;
 }

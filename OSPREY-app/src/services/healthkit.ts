@@ -43,6 +43,35 @@ export async function requestHealthKitAuthorization(): Promise<boolean> {
   });
 }
 
+/**
+ * HealthKit sleep samples overlap by design (an INBED range spans the ASLEEP
+ * ranges within it, and stage-based sources can overlap each other too).
+ * Summing durations naively roughly doubles the reported total, so we drop
+ * INBED entries and merge overlapping ASLEEP intervals before summing.
+ */
+function computeSleepHours(samples: HealthValue[]): number {
+  const intervals = samples
+    .filter((s) => (s as unknown as { value?: string }).value !== 'INBED')
+    .map((s) => [new Date(s.startDate).getTime(), new Date(s.endDate).getTime()] as [number, number])
+    .sort((a, b) => a[0] - b[0]);
+
+  let totalMs = 0;
+  let curStart: number | null = null;
+  let curEnd: number | null = null;
+  for (const [start, end] of intervals) {
+    if (curEnd == null || start > curEnd) {
+      if (curStart != null && curEnd != null) totalMs += curEnd - curStart;
+      curStart = start;
+      curEnd = end;
+    } else if (end > curEnd) {
+      curEnd = end;
+    }
+  }
+  if (curStart != null && curEnd != null) totalMs += curEnd - curStart;
+
+  return totalMs / 3600000;
+}
+
 function fetchSamples(
   fn: (options: HealthInputOptions, cb: (err: string, results: HealthValue[]) => void) => void,
   options: HealthInputOptions,
@@ -70,9 +99,11 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
   const today = new Date().toISOString().slice(0, 10);
 
   const [hrvSamples, restingHrSamples, sleepSamples] = await Promise.all([
+    // HRV SDNN samples are always returned in milliseconds — no unit param needed,
+    // and `Units.count` was the wrong unit for a time quantity (either rejected by
+    // the native call or silently mis-scaling every value).
     fetchSamples(AppleHealthKit.getHeartRateVariabilitySamples, {
       startDate: since,
-      unit: AppleHealthKit.Constants.Units.count,
     }),
     fetchSamples(AppleHealthKit.getRestingHeartRateSamples, { startDate: since }),
     fetchSamples(AppleHealthKit.getSleepSamples, { startDate: since }),
@@ -85,14 +116,7 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
   const hrvMs = hrvSamples.length > 0 ? hrvSamples[hrvSamples.length - 1].value : null;
   const restingHr = restingHrSamples.length > 0 ? restingHrSamples[restingHrSamples.length - 1].value : null;
 
-  const sleepHours =
-    sleepSamples.length > 0
-      ? sleepSamples.reduce((sum, s) => {
-          const start = new Date(s.startDate).getTime();
-          const end = new Date(s.endDate).getTime();
-          return sum + (end - start) / 3600000;
-        }, 0)
-      : null;
+  const sleepHours = sleepSamples.length > 0 ? computeSleepHours(sleepSamples) : null;
 
   // v1 scoring: simple weighted heuristic, not a clinical algorithm.
   let score = 70;

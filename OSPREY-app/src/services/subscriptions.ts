@@ -44,3 +44,19 @@ export async function restorePurchases(): Promise<boolean> {
   const info = await Purchases.restorePurchases();
   return Boolean(info.entitlements.active[ENTITLEMENT_ID]);
 }
+
+/**
+ * Call on sign-out. Without this, `configured` stays true and the next
+ * `initRevenueCat(userId)` for a different account no-ops — the new user
+ * silently inherits the previous account's RevenueCat identity/entitlements.
+ */
+export async function resetRevenueCat(): Promise<void> {
+  if (configured) {
+    try {
+      await Purchases.logOut();
+    } catch {
+      // best-effort — still reset local state so the next sign-in reconfigures
+    }
+  }
+  configured = false;
+}

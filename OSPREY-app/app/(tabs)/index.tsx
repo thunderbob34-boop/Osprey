@@ -6,6 +6,7 @@ import { useDailySummary } from '@/hooks/useDailySummary';
 import { useFuelStatus } from '@/hooks/useFuelStatus';
 import { usePerformance } from '@/hooks/usePerformance';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import type { SessionData } from '@/types/daily-summary';
 import type { SwappableSessionType } from '@/services/plan';
 
@@ -15,11 +16,16 @@ export default function HomeTab() {
   const { data: fuelStatus } = useFuelStatus();
   const { isPlus } = useSubscription();
   const { data: perf } = usePerformance();
+  const { data: nutritionCoaching, isLoading: nutritionLoading } = useNutritionCoaching();
 
   function handleStartSession(session: SessionData) {
     const sessionId = session.sessionId ?? undefined;
     if (session.sessionType === 'lift') {
       router.push({ pathname: '/workout/lift', params: { sessionId } });
+      return;
+    }
+    if (session.sessionType === 'swim' || session.sessionType === 'bike' || session.sessionType === 'cross') {
+      router.push({ pathname: '/workout/endurance', params: { sessionId, sessionType: session.sessionType } });
       return;
     }
     router.push({ pathname: '/workout/run', params: { sessionId } });
@@ -73,6 +79,17 @@ export default function HomeTab() {
       habitTip={data?.habitTip}
       quickStats={data?.quickStats}
       trainingReadiness={isPlus ? (perf?.trainingReadiness ?? null) : null}
+      macroTargets={
+        nutritionCoaching
+          ? {
+              protein: nutritionCoaching.target.proteinG,
+              carbs: nutritionCoaching.target.carbsG,
+              fat: nutritionCoaching.target.fatG,
+              calories: nutritionCoaching.target.calories,
+            }
+          : null
+      }
+      macroTargetsLoading={nutritionLoading}
       onActivityPress={() => router.push('/activity')}
       onViewWeekPress={() => router.push('/plan-preview')}
       headerBanner={!isLoading && !hasPlan ? <BuildPlanBanner /> : undefined}

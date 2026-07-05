@@ -1,7 +1,7 @@
 import { endOfWeek, format, startOfWeek } from 'date-fns';
 import { supabase } from '@/services/supabase';
 import type { LiftExercise, TrackPoint, WorkoutRecapData, WorkoutType } from '@/types/workout';
-import { formatDuration, formatPace, metersToMiles } from '@/store/workoutStore';
+import { formatDuration, formatPace } from '@/store/workoutStore';
 import { writeWorkoutToHealthKit } from '@/services/healthkit';
 import { withCache } from '@/services/offline-cache';
 
@@ -61,7 +61,9 @@ function buildRunSplits(trackPoints: TrackPoint[], totalDurationS: number) {
       });
       mile += 1;
       mileStartIndex = i;
-      mileDistance = 0;
+      // Carry the overshoot past the mile boundary forward instead of
+      // discarding it, so it doesn't get silently dropped from the next split.
+      mileDistance = mileDistance >= mileMeters ? mileDistance - mileMeters : 0;
     }
   }
 
@@ -98,7 +100,10 @@ async function detectSetPr(
     .map((row) => row.id as string)
     .filter((id) => id !== excludeWorkoutId);
 
-  if (workoutIds.length === 0) return true;
+  // No training history for this exercise yet — nothing to compare against,
+  // so this can't be confirmed as a PR (was previously announcing every
+  // first-ever exercise as a "New PR!").
+  if (workoutIds.length === 0) return false;
 
   const { data } = await supabase
     .from('exercise_sets')
@@ -106,7 +111,7 @@ async function detectSetPr(
     .eq('exercise_id', exerciseId)
     .in('workout_id', workoutIds);
 
-  if (!data || data.length === 0) return true;
+  if (!data || data.length === 0) return false;
 
   const best = data.reduce((max, row) => {
     const score = (row.weight_kg ?? 0) * (row.reps ?? 0);

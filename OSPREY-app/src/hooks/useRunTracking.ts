@@ -40,7 +40,7 @@ export function useRunTracking(enabled: boolean) {
           timeInterval: 2000,
         },
         (location) => {
-          const { latitude, longitude, speed } = location.coords;
+          const { latitude, longitude, speed, accuracy } = location.coords;
           const point = {
             lat: latitude,
             lon: longitude,
@@ -48,7 +48,11 @@ export function useRunTracking(enabled: boolean) {
             speedMs: speed ?? undefined,
           };
 
-          if (lastPointRef.current) {
+          // Drop fixes with poor accuracy — GPS jitter while standing still
+          // otherwise accumulates as distance.
+          const isUsableFix = accuracy == null || accuracy <= 25;
+
+          if (isUsableFix && lastPointRef.current) {
             const delta = haversineMeters(
               lastPointRef.current.lat,
               lastPointRef.current.lon,
@@ -60,7 +64,9 @@ export function useRunTracking(enabled: boolean) {
             }
           }
 
-          lastPointRef.current = { lat: latitude, lon: longitude };
+          if (isUsableFix) {
+            lastPointRef.current = { lat: latitude, lon: longitude };
+          }
           addTrackPoint(point);
         },
       );
@@ -68,6 +74,9 @@ export function useRunTracking(enabled: boolean) {
 
     return () => {
       subscription?.remove();
+      // Reset so resuming after a pause doesn't credit the entire distance
+      // moved while paused to the first post-resume GPS fix.
+      lastPointRef.current = null;
     };
   }, [enabled, status, addDistance, addTrackPoint]);
 }

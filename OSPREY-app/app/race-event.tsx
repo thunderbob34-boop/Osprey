@@ -16,6 +16,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
+import { useRaces } from '@/hooks/useRaces';
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return '';
@@ -50,7 +51,9 @@ export default function RaceEventScreen() {
   const queryClient = useQueryClient();
   const cachedResult: RaceSearchResult | null = raceId ? getCachedRace(raceId) : null;
 
+  const { create: createRace } = useRaces();
   const [generating, setGenerating] = useState(false);
+  const [savingRace, setSavingRace] = useState(false);
   const [distances, setDistances] = useState<string[]>(cachedResult?.distances ?? []);
   const [loadingDistances, setLoadingDistances] = useState(true);
 
@@ -60,10 +63,14 @@ export default function RaceEventScreen() {
     if (!raceId) return;
     let cancelled = false;
     setLoadingDistances(true);
-    fetchRaceDistances(raceId).then((fetched) => {
-      if (!cancelled && fetched.length > 0) setDistances(fetched);
-      if (!cancelled) setLoadingDistances(false);
-    });
+    fetchRaceDistances(raceId)
+      .then((fetched) => {
+        if (!cancelled && fetched.length > 0) setDistances(fetched);
+      })
+      .catch(() => undefined)
+      .finally(() => {
+        if (!cancelled) setLoadingDistances(false);
+      });
     return () => {
       cancelled = true;
     };
@@ -169,8 +176,29 @@ export default function RaceEventScreen() {
     }
   }
 
-  function handleAddToMyRaces() {
-    Alert.alert('Coming soon', 'Saving discovered races is coming in a future update.');
+  async function handleAddToMyRaces() {
+    const parsedDate = parseRaceDate(result!.date);
+    if (!parsedDate) {
+      Alert.alert('Missing date', "This race doesn't have a valid date to save.");
+      return;
+    }
+    const location = [result!.city, result!.state].filter(Boolean).join(', ') || null;
+    setSavingRace(true);
+    try {
+      await createRace.mutateAsync({
+        name: result!.name,
+        eventDate: parsedDate.toISOString().slice(0, 10),
+        location,
+        raceUrl: result!.url || null,
+      });
+      Alert.alert('Saved', `${result!.name} was added to My Races.`, [
+        { text: 'OK', onPress: () => router.back() },
+      ]);
+    } catch (err) {
+      Alert.alert('Error', err instanceof Error ? err.message : 'Could not save this race.');
+    } finally {
+      setSavingRace(false);
+    }
   }
 
   return (
@@ -240,9 +268,14 @@ export default function RaceEventScreen() {
           <TouchableOpacity
             style={styles.addBtn}
             onPress={handleAddToMyRaces}
+            disabled={savingRace}
             activeOpacity={0.8}
           >
-            <Text style={styles.addBtnText}>Add to My Races</Text>
+            {savingRace ? (
+              <ActivityIndicator color={Colors.teal} />
+            ) : (
+              <Text style={styles.addBtnText}>Add to My Races</Text>
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>

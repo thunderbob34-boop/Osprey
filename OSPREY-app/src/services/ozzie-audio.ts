@@ -53,10 +53,37 @@ async function ensureCacheDir() {
   }
 }
 
+function hashText(text: string): string {
+  let hash = 0;
+  for (let i = 0; i < text.length; i++) {
+    hash = (Math.imul(31, hash) + text.charCodeAt(i)) | 0;
+  }
+  return (hash >>> 0).toString(36);
+}
+
 function cacheKey(text: string, profile: AudioProfile): string {
-  // Simple hash: profile + first 60 chars of text, sanitized for filename
-  const sanitized = text.slice(0, 60).replace(/[^a-zA-Z0-9]/g, '_');
-  return `${CACHE_DIR}${profile}_${sanitized}.mp3`;
+  // Truncated text for a readable filename + a full-text hash so two cues
+  // that only differ after char 60 don't collide on the same cache file.
+  const sanitized = text.slice(0, 40).replace(/[^a-zA-Z0-9]/g, '_');
+  return `${CACHE_DIR}${profile}_${sanitized}_${hashText(text)}.mp3`;
+}
+
+const BASE64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+/** Hermes has no global `Buffer` — encode raw bytes to base64 by hand. */
+function bytesToBase64(bytes: Uint8Array): string {
+  let result = '';
+  const len = bytes.length;
+  for (let i = 0; i < len; i += 3) {
+    const b1 = bytes[i];
+    const b2 = i + 1 < len ? bytes[i + 1] : 0;
+    const b3 = i + 2 < len ? bytes[i + 2] : 0;
+    result += BASE64_CHARS[b1 >> 2];
+    result += BASE64_CHARS[((b1 & 3) << 4) | (b2 >> 4)];
+    result += i + 1 < len ? BASE64_CHARS[((b2 & 15) << 2) | (b3 >> 6)] : '=';
+    result += i + 2 < len ? BASE64_CHARS[b3 & 63] : '=';
+  }
+  return result;
 }
 
 async function getCachedAudio(path: string): Promise<string | null> {
@@ -135,7 +162,7 @@ export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient'
       const audioData = await fetchTTS(text, profile);
       await FileSystem.writeAsStringAsync(
         cachePath,
-        Buffer.from(audioData).toString('base64'),
+        bytesToBase64(audioData),
         { encoding: FileSystem.EncodingType.Base64 }
       );
       audioPath = cachePath;
@@ -170,9 +197,14 @@ export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient'
  */
 export async function ozzieStop() {
   if (currentSound) {
-    await currentSound.stopAsync();
-    await currentSound.unloadAsync();
+    const sound = currentSound;
     currentSound = null;
+    try {
+      await sound.stopAsync();
+      await sound.unloadAsync();
+    } catch {
+      // Already unloaded (e.g. playback finished right as stop was requested) — fine.
+    }
   }
 }
 
@@ -198,7 +230,7 @@ export async function ozziePrewarm() {
         await ensureCacheDir();
         await FileSystem.writeAsStringAsync(
           path,
-          Buffer.from(audioData).toString('base64'),
+          bytesToBase64(audioData),
           { encoding: FileSystem.EncodingType.Base64 }
         );
       } catch {

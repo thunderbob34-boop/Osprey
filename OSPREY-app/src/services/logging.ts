@@ -88,14 +88,19 @@ export async function saveQuickFood(userId: string, input: QuickFoodInput): Prom
   let foodItemId = input.foodItemId;
 
   if (!foodItemId) {
+    // food_items stores macros per 100g, but a quick-logged entry's macros
+    // are for the entry's actual quantity — scale before saving, or every
+    // later lookup of this item by weight gets wrong macros.
+    const quantityG = input.quantityG ?? 100;
+    const per100gScale = 100 / quantityG;
     const { data: foodItem, error: foodItemError } = await supabase
       .from('food_items')
       .insert({
         name: input.name,
-        calories_per_100g: input.calories,
-        protein_g: input.proteinG ?? null,
-        carbs_g: input.carbsG ?? null,
-        fat_g: input.fatG ?? null,
+        calories_per_100g: Math.round(input.calories * per100gScale),
+        protein_g: input.proteinG != null ? Math.round(input.proteinG * per100gScale * 10) / 10 : null,
+        carbs_g: input.carbsG != null ? Math.round(input.carbsG * per100gScale * 10) / 10 : null,
+        fat_g: input.fatG != null ? Math.round(input.fatG * per100gScale * 10) / 10 : null,
         source: 'manual',
       })
       .select('id')

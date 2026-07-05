@@ -86,6 +86,8 @@ export default function DailySummaryScreen({
   onActivityPress,
   onViewWeekPress,
   headerBanner,
+  macroTargets,
+  macroTargetsLoading,
 }: DailySummaryProps) {
   const weekProgress = weekTarget ? Math.min(1, weekMiles / weekTarget) : 0;
   const greeting = getGreeting();
@@ -248,7 +250,7 @@ export default function DailySummaryScreen({
         ) : null}
 
         {/* ── Nutrition Periodization ── */}
-        <MacroTargetCard />
+        <MacroTargetCard targets={macroTargets} isLoading={macroTargetsLoading} />
 
         {headerBanner ?? null}
 

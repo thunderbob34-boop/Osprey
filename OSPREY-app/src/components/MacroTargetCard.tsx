@@ -2,16 +2,35 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors } from '@/constants/colors';
 
-const TRAINING = { protein: 240, carbs: 265, fat: 80, calories: 2740 };
-const LONG_DAY = { protein: 240, carbs: 340, fat: 80, calories: 3040 };
+export interface MacroTargets {
+  protein: number;
+  carbs: number;
+  fat: number;
+  calories: number;
+}
 
-export default function MacroTargetCard() {
+interface MacroTargetCardProps {
+  targets: MacroTargets | null | undefined;
+  isLoading?: boolean;
+}
+
+export default function MacroTargetCard({ targets, isLoading }: MacroTargetCardProps) {
   const isSunday = new Date().getDay() === 0;
-  const targets = isSunday ? LONG_DAY : TRAINING;
   const borderColor = isSunday ? Colors.borderGold : Colors.borderTeal;
   const surface = isSunday ? Colors.surfaceGold : Colors.surfaceTeal;
   const accentColor = isSunday ? Colors.gold : Colors.teal;
   const badgeLabel = isSunday ? 'Long Day — Carb Reload' : 'Training Day';
+
+  if (!targets) {
+    return (
+      <View style={[styles.card, { borderColor }]}>
+        <Text style={styles.cardLabel}>TODAY'S FUEL TARGETS</Text>
+        <Text style={styles.emptyText}>
+          {isLoading ? 'Loading your targets…' : 'Log a few meals to unlock personalized targets.'}
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <View style={[styles.card, { borderColor }]}>
@@ -22,10 +41,10 @@ export default function MacroTargetCard() {
         </View>
       </View>
       <View style={styles.macroGrid}>
-        <MacroBlock value={targets.protein} unit="g" label="Protein" accentColor={accentColor} />
-        <MacroBlock value={targets.carbs} unit="g" label="Carbs" accentColor={accentColor} />
-        <MacroBlock value={targets.fat} unit="g" label="Fat" accentColor={accentColor} />
-        <MacroBlock value={targets.calories} unit="kcal" label="Calories" accentColor={accentColor} />
+        <MacroBlock value={Math.round(targets.protein)} unit="g" label="Protein" accentColor={accentColor} />
+        <MacroBlock value={Math.round(targets.carbs)} unit="g" label="Carbs" accentColor={accentColor} />
+        <MacroBlock value={Math.round(targets.fat)} unit="g" label="Fat" accentColor={accentColor} />
+        <MacroBlock value={Math.round(targets.calories)} unit="kcal" label="Calories" accentColor={accentColor} />
       </View>
     </View>
   );
@@ -108,5 +127,10 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.textMuted,
     marginTop: 2,
+  },
+  emptyText: {
+    fontSize: 12,
+    color: Colors.textMuted,
+    marginTop: 6,
   },
 });

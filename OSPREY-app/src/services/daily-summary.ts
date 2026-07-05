@@ -1,6 +1,7 @@
 import { startOfMonth } from 'date-fns';
 import { supabase } from '@/services/supabase';
 import { fetchWeekTargetKm } from '@/services/workouts';
+import { localDateString } from '@/utils/date';
 import type {
   DailySummaryData,
   DailySummaryViewRow,
@@ -9,7 +10,7 @@ import type {
 } from '@/types/daily-summary';
 
 function todayDateString(): string {
-  return new Date().toISOString().slice(0, 10);
+  return localDateString();
 }
 
 function kmToMiles(km: number): number {
@@ -185,7 +186,7 @@ async function fetchHabitStreak(userId: string): Promise<number> {
   const forgivenessDays = prefsRes.data?.streak_forgiveness_days ?? 1;
 
   const activeDates = new Set(
-    (workoutsRes.data ?? []).map((row) => new Date(row.started_at).toISOString().slice(0, 10)),
+    (workoutsRes.data ?? []).map((row) => localDateString(new Date(row.started_at))),
   );
 
   if (activeDates.size === 0) return 0;

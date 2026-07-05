@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/services/supabase';
 import { clearOfflineCache } from '@/services/offline-cache';
+import { resetRevenueCat } from '@/services/subscriptions';
+import { resetSubscriptionCache } from '@/hooks/useSubscription';
 
 export interface UserProfile {
   id: string;
@@ -79,6 +81,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   initialized: false,
 
   initialize: async () => {
+    // Guard against double registration of the auth-state listener if
+    // initialize() is ever invoked more than once (e.g. Fast Refresh).
+    if (get().initialized) return;
+
     const {
       data: { session },
     } = await supabase.auth.getSession();
@@ -161,8 +167,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   signIn: async (email, password) => {
     set({ loading: true });
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (!error) {
+      // Set session/user directly from the response instead of relying on
+      // onAuthStateChange having already fired — that listener runs
+      // asynchronously and racing it here could read a stale/null `user`
+      // and momentarily route a signed-in user as logged-out.
+      set({ session: data.session, user: data.user });
       await get().fetchProfile();
     }
     set({ loading: false });
@@ -172,6 +183,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   signOut: async () => {
     await supabase.auth.signOut();
     await clearOfflineCache();
+    resetSubscriptionCache();
+    await resetRevenueCat();
     set({
       session: null,
       user: null,

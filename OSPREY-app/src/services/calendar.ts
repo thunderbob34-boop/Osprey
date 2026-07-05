@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { localDateString } from '@/utils/date';
 
 export interface CalendarDay {
   date: string; // YYYY-MM-DD
@@ -14,8 +15,10 @@ export async function fetchCalendarMonth(
 ): Promise<CalendarDay[]> {
   const start = new Date(year, month, 1);
   const end = new Date(year, month + 1, 0);
-  const startStr = start.toISOString().slice(0, 10);
-  const endStr = end.toISOString().slice(0, 10);
+  // Local calendar dates, not UTC — otherwise the month's start/end (and every
+  // completed workout binned below) shifts a day for any UTC+ timezone.
+  const startStr = localDateString(start);
+  const endStr = localDateString(end);
 
   const [sessionsRes, workoutsRes] = await Promise.all([
     supabase
@@ -33,6 +36,9 @@ export async function fetchCalendarMonth(
       .lte('started_at', new Date(end.getTime() + 24 * 60 * 60 * 1000).toISOString()),
   ]);
 
+  if (sessionsRes.error) throw sessionsRes.error;
+  if (workoutsRes.error) throw workoutsRes.error;
+
   const byDate = new Map<string, CalendarDay>();
 
   for (const row of sessionsRes.data ?? []) {
@@ -45,7 +51,7 @@ export async function fetchCalendarMonth(
   }
 
   for (const row of workoutsRes.data ?? []) {
-    const date = (row.started_at as string).slice(0, 10);
+    const date = localDateString(new Date(row.started_at as string));
     const existing = byDate.get(date) ?? {
       date,
       plannedType: null,

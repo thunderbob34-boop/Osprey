@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { localDateString } from '@/utils/date';
 
 export interface ChecklistItem {
   id: string;
@@ -78,17 +79,18 @@ function daysUntil(dateStr: string): number {
 export function goalPacePerMile(goalTimeS: number | null, distanceKm: number | null): string | null {
   if (!goalTimeS || !distanceKm || distanceKm <= 0) return null;
   const miles = distanceKm / KM_PER_MILE;
-  const secPerMile = goalTimeS / miles;
+  const secPerMile = Math.round(goalTimeS / miles);
   const min = Math.floor(secPerMile / 60);
-  const sec = Math.round(secPerMile % 60);
+  const sec = secPerMile % 60;
   return `${min}:${String(sec).padStart(2, '0')}`;
 }
 
 export function formatRaceTime(totalSeconds: number | null): string | null {
   if (totalSeconds == null) return null;
-  const h = Math.floor(totalSeconds / 3600);
-  const m = Math.floor((totalSeconds % 3600) / 60);
-  const s = Math.round(totalSeconds % 60);
+  const total = Math.round(totalSeconds);
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
   if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   return `${m}:${String(s).padStart(2, '0')}`;
 }
@@ -98,7 +100,7 @@ export function parseRaceTime(text: string): number | null {
   const trimmed = text.trim();
   if (!trimmed) return null;
   const parts = trimmed.split(':').map((p) => Number(p));
-  if (parts.some((n) => Number.isNaN(n))) return null;
+  if (parts.some((n) => Number.isNaN(n) || n < 0)) return null;
   if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
   if (parts.length === 2) return parts[0] * 60 + parts[1];
   if (parts.length === 1) return parts[0] * 60; // bare number = minutes
@@ -136,7 +138,7 @@ const SELECT_COLS =
 
 /** Upcoming + today's races, soonest first. */
 export async function fetchUpcomingRaces(userId: string): Promise<RaceEvent[]> {
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateString();
   const { data, error } = await supabase
     .from('race_events')
     .select(SELECT_COLS)
@@ -151,7 +153,7 @@ export async function fetchUpcomingRaces(userId: string): Promise<RaceEvent[]> {
 
 /** Past races (results), most recent first. */
 export async function fetchPastRaces(userId: string): Promise<RaceEvent[]> {
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateString();
   const { data, error } = await supabase
     .from('race_events')
     .select(SELECT_COLS)

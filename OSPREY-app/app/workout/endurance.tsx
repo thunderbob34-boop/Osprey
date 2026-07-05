@@ -100,9 +100,9 @@ export default function EnduranceWorkoutScreen() {
     try {
       const authorized = await requestHealthKitAuthorization();
       if (authorized) {
-        Alert.alert('Apple Health', 'Synced. Distance data from your HealthKit workout will be included.');
-        // In a full implementation, you'd fetch the distance from HealthKit here
-        // For now, just confirm the sync intent
+        // Reading a workout's distance back from HealthKit isn't wired up yet —
+        // say so rather than imply distance was imported when it wasn't.
+        Alert.alert('Apple Health', 'Connected. Auto-importing distance from HealthKit isn’t available yet — enter it manually below.');
       } else {
         Alert.alert('Apple Health', 'Permission not granted. Enter distance manually.');
       }
