@@ -16,7 +16,7 @@ export default function HomeTab() {
   const { data: fuelStatus } = useFuelStatus();
   const { isPlus } = useSubscription();
   const { data: perf } = usePerformance();
-  const { data: nutritionCoaching, isLoading: nutritionLoading } = useNutritionCoaching();
+  const { data: nutritionCoaching, isLoading: nutritionLoading, isError: nutritionError } = useNutritionCoaching();
 
   function handleStartSession(session: SessionData) {
     const sessionId = session.sessionId ?? undefined;
@@ -90,6 +90,7 @@ export default function HomeTab() {
           : null
       }
       macroTargetsLoading={nutritionLoading}
+      macroTargetsError={nutritionError}
       onActivityPress={() => router.push('/activity')}
       onViewWeekPress={() => router.push('/plan-preview')}
       headerBanner={!isLoading && !hasPlan ? <BuildPlanBanner /> : undefined}

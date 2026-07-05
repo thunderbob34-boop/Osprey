@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
 import { useCalendarMonth } from '@/hooks/useCalendarMonth';
 import type { CalendarDay } from '@/services/calendar';
+import { localDateString } from '@/utils/date';
 
 const SESSION_ICON: Record<string, string> = {
   run: '🏃',
@@ -120,7 +121,7 @@ export default function CalendarScreen() {
           {cells.map((cell, i) => {
             if (!cell) return <View key={i} style={styles.cell} />;
             const day = dayMap.get(cell.dateStr);
-            const isToday = cell.dateStr === today.toISOString().slice(0, 10);
+            const isToday = cell.dateStr === localDateString(today);
             const hasCompleted = (day?.completedTypes.length ?? 0) > 0;
             const icon = hasCompleted
               ? SESSION_ICON[day!.completedTypes[0]] ?? '✓'

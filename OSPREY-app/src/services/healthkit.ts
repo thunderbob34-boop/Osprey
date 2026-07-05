@@ -47,11 +47,14 @@ export async function requestHealthKitAuthorization(): Promise<boolean> {
  * HealthKit sleep samples overlap by design (an INBED range spans the ASLEEP
  * ranges within it, and stage-based sources can overlap each other too).
  * Summing durations naively roughly doubles the reported total, so we drop
- * INBED entries and merge overlapping ASLEEP intervals before summing.
+ * non-asleep categories (in bed but awake, or unknown) and merge overlapping
+ * asleep intervals before summing.
  */
+const NON_SLEEP_CATEGORIES = new Set(['INBED', 'AWAKE', 'UNKNOWN']);
+
 function computeSleepHours(samples: HealthValue[]): number {
   const intervals = samples
-    .filter((s) => (s as unknown as { value?: string }).value !== 'INBED')
+    .filter((s) => !NON_SLEEP_CATEGORIES.has(String((s as unknown as { value?: string }).value)))
     .map((s) => [new Date(s.startDate).getTime(), new Date(s.endDate).getTime()] as [number, number])
     .sort((a, b) => a[0] - b[0]);
 
@@ -99,9 +102,10 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
   const today = new Date().toISOString().slice(0, 10);
 
   const [hrvSamples, restingHrSamples, sleepSamples] = await Promise.all([
-    // HRV SDNN samples are always returned in milliseconds — no unit param needed,
-    // and `Units.count` was the wrong unit for a time quantity (either rejected by
-    // the native call or silently mis-scaling every value).
+    // react-native-health's native HRV query hardcodes HKUnit secondUnit — values
+    // come back in seconds (e.g. 0.02–0.15), not milliseconds. `unit` isn't read
+    // by the native call at all, so passing one (the old `Units.count`) did nothing;
+    // the actual fix is converting to ms below.
     fetchSamples(AppleHealthKit.getHeartRateVariabilitySamples, {
       startDate: since,
     }),
@@ -113,7 +117,7 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
     return false; // nothing new to sync
   }
 
-  const hrvMs = hrvSamples.length > 0 ? hrvSamples[hrvSamples.length - 1].value : null;
+  const hrvMs = hrvSamples.length > 0 ? hrvSamples[hrvSamples.length - 1].value * 1000 : null;
   const restingHr = restingHrSamples.length > 0 ? restingHrSamples[restingHrSamples.length - 1].value : null;
 
   const sleepHours = sleepSamples.length > 0 ? computeSleepHours(sleepSamples) : null;

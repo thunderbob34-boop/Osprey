@@ -17,6 +17,7 @@ import { Colors } from '@/constants/colors';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
 import { useRaces } from '@/hooks/useRaces';
+import { localDateString } from '@/utils/date';
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return '';
@@ -113,7 +114,9 @@ export default function RaceEventScreen() {
     setGenerating(true);
     try {
       const parsedRaceDate = parseRaceDate(result!.date);
-      const isoRaceDate = parsedRaceDate ? parsedRaceDate.toISOString().slice(0, 10) : null;
+      // parseRaceDate returns a local-midnight Date — toISOString() would shift
+      // it back a day for anyone east of UTC.
+      const isoRaceDate = parsedRaceDate ? localDateString(parsedRaceDate) : null;
 
       const { data, error } = await supabase.functions.invoke('ozzie-generate-plan', {
         body: {
@@ -187,7 +190,7 @@ export default function RaceEventScreen() {
     try {
       await createRace.mutateAsync({
         name: result!.name,
-        eventDate: parsedDate.toISOString().slice(0, 10),
+        eventDate: localDateString(parsedDate),
         location,
         raceUrl: result!.url || null,
       });

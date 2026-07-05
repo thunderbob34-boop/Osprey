@@ -12,9 +12,10 @@ export interface MacroTargets {
 interface MacroTargetCardProps {
   targets: MacroTargets | null | undefined;
   isLoading?: boolean;
+  isError?: boolean;
 }
 
-export default function MacroTargetCard({ targets, isLoading }: MacroTargetCardProps) {
+export default function MacroTargetCard({ targets, isLoading, isError }: MacroTargetCardProps) {
   const isSunday = new Date().getDay() === 0;
   const borderColor = isSunday ? Colors.borderGold : Colors.borderTeal;
   const surface = isSunday ? Colors.surfaceGold : Colors.surfaceTeal;
@@ -26,7 +27,11 @@ export default function MacroTargetCard({ targets, isLoading }: MacroTargetCardP
       <View style={[styles.card, { borderColor }]}>
         <Text style={styles.cardLabel}>TODAY'S FUEL TARGETS</Text>
         <Text style={styles.emptyText}>
-          {isLoading ? 'Loading your targets…' : 'Log a few meals to unlock personalized targets.'}
+          {isLoading
+            ? 'Loading your targets…'
+            : isError
+              ? "Couldn't load your targets right now. Pull to refresh."
+              : 'Log a few meals to unlock personalized targets.'}
         </Text>
       </View>
     );
