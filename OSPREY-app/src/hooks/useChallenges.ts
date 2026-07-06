@@ -62,11 +62,11 @@ export function useChallenges() {
   };
 }
 
-export function useChallengeLeaderboard(challengeId: string | null) {
-  const key = ['challenge-leaderboard', challengeId];
+export function useChallengeLeaderboard(challengeId: string | null, verifiedOnly = false) {
+  const key = ['challenge-leaderboard', challengeId, verifiedOnly];
   return useQuery({
     queryKey: key,
-    queryFn: () => fetchChallengeLeaderboard(challengeId!),
+    queryFn: () => fetchChallengeLeaderboard(challengeId!, verifiedOnly),
     enabled: Boolean(challengeId),
     staleTime: 60_000, // refresh at most once per minute
   });

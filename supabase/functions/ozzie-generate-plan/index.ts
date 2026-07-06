@@ -38,6 +38,32 @@ interface GoalsContext {
   weeklyLiftDays: number;
   fitnessLevel: string;
   targetRace: string | null;
+  physiqueGoal: string | null;
+}
+
+// Return-to-training ramp: how gently to restart after a training gap.
+// Longer gaps (and any lingering pain) start lower; floor at 40%.
+interface RampRequest {
+  gapDays: number;
+  reason: string;
+  painFlag: boolean;
+}
+
+function computeRamp(ramp: RampRequest): { startPercent: number; rampWeeks: number } {
+  let startPercent: number;
+  let rampWeeks: number;
+  if (ramp.gapDays <= 21) {
+    startPercent = 70;
+    rampWeeks = 2;
+  } else if (ramp.gapDays <= 42) {
+    startPercent = 60;
+    rampWeeks = 3;
+  } else {
+    startPercent = 50;
+    rampWeeks = 4;
+  }
+  if (ramp.painFlag) startPercent = Math.max(40, startPercent - 10);
+  return { startPercent, rampWeeks };
 }
 
 interface TrainingLoad {
@@ -227,7 +253,23 @@ async function generateRescheduleReason(swaps: RescheduleSwap[]): Promise<string
   return data.choices?.[0]?.message?.content?.trim() ?? "Looks like a session got missed — I've moved it to an open day this week.";
 }
 
-async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad) {
+async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad, ramp: RampRequest | null) {
+  let userMessage = `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}. trainingLoad: ${JSON.stringify(trainingLoad)}.`;
+
+  if (goals.physiqueGoal) {
+    const PHYSIQUE_NOTES: Record<string, string> = {
+      cut: 'Physique goal: cutting. Keep lift volume high to preserve muscle while in a calorie deficit — do not slash strength work to add cardio.',
+      maintain: 'Physique goal: maintain. Balance strength and endurance evenly.',
+      lean_bulk: 'Physique goal: lean bulk. Prioritize progressive-overload strength sessions; keep endurance sessions easy so they support rather than blunt muscle gain.',
+    };
+    userMessage += ` ${PHYSIQUE_NOTES[goals.physiqueGoal] ?? ''}`;
+  }
+
+  if (ramp) {
+    const { startPercent, rampWeeks } = computeRamp(ramp);
+    userMessage += ` IMPORTANT — RETURN-TO-TRAINING RAMP: this athlete is returning after ${ramp.gapDays} days completely off training (reason: ${ramp.reason}${ramp.painFlag ? ', with lingering pain/soreness' : ''}). This is week 1 of a ${rampWeeks}-week ramp back to full volume. Prescribe roughly ${startPercent}% of the normal weekly volume for this goal and level, every session at "easy" intensity (NO threshold, interval, or race intensity anywhere this week${ramp.painFlag ? ', and no heavy compound lifting — bodyweight/light accessory work only' : ''}), with at least ${ramp.painFlag ? 3 : 2} rest days. In ozzie_notes, acknowledge the comeback warmly — returning is the win, the fitness follows.`;
+  }
+
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -238,10 +280,7 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad)
       model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: PLAN_SYSTEM_PROMPT },
-        {
-          role: 'user',
-          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}. trainingLoad: ${JSON.stringify(trainingLoad)}.`,
-        },
+        { role: 'user', content: userMessage },
       ],
       response_format: { type: 'json_object' },
       temperature: 0.7,
@@ -298,7 +337,18 @@ Deno.serve(async (req: Request) => {
     // silent background call fired every time the home screen loads.
     const rawBody = await req.text();
     const body = rawBody ? JSON.parse(rawBody) : {};
-    const forceRebuild = body.force === true && (Boolean(body.preferences) || Boolean(body.raceTarget));
+    const ramp: RampRequest | null =
+      body.ramp && typeof body.ramp.gapDays === 'number'
+        ? {
+            gapDays: Math.max(0, Math.min(365, body.ramp.gapDays)),
+            reason: ['illness', 'injury', 'travel', 'life'].includes(body.ramp.reason)
+              ? body.ramp.reason
+              : 'life',
+            painFlag: body.ramp.painFlag === true,
+          }
+        : null;
+    const forceRebuild =
+      body.force === true && (Boolean(body.preferences) || Boolean(body.raceTarget) || ramp != null);
 
     // Idempotency: does an active plan already have a week starting this Monday?
     const { data: existingWeek } = await supabase
@@ -363,6 +413,7 @@ Deno.serve(async (req: Request) => {
         weeklyLiftDays: prefs.daysPerWeek >= 2 ? Math.floor(prefs.daysPerWeek * 0.4) : 1,
         fitnessLevel: prefs.experienceLevel ?? 'beginner',
         targetRace: null,
+        physiqueGoal: null,
       };
 
       const { error: goalsUpsertError } = await supabase.from('user_goals').upsert(
@@ -388,6 +439,7 @@ Deno.serve(async (req: Request) => {
         weeklyLiftDays: 1,
         fitnessLevel: 'intermediate',
         targetRace: `${race.raceName} (${race.distance})`,
+        physiqueGoal: null,
       };
 
       const { error: goalsUpsertError } = await supabase.from('user_goals').upsert(
@@ -408,7 +460,7 @@ Deno.serve(async (req: Request) => {
       // Fallback: try to fetch from user_goals table
       const { data: goalsRow } = await supabase
         .from('user_goals')
-        .select('primary_goal, weekly_run_days, weekly_lift_days, fitness_level, target_race')
+        .select('primary_goal, weekly_run_days, weekly_lift_days, fitness_level, target_race, physique_goal')
         .eq('user_id', userId)
         .maybeSingle();
 
@@ -418,7 +470,19 @@ Deno.serve(async (req: Request) => {
         weeklyLiftDays: goalsRow?.weekly_lift_days ?? 2,
         fitnessLevel: goalsRow?.fitness_level ?? 'beginner',
         targetRace: goalsRow?.target_race ?? null,
+        physiqueGoal: goalsRow?.physique_goal ?? null,
       };
+    }
+
+    // Physique goal lives only on user_goals — the preferences/raceTarget
+    // branches build their context from the request body, so backfill it.
+    if (goals.physiqueGoal == null && (body.preferences || body.raceTarget)) {
+      const { data: physiqueRow } = await supabase
+        .from('user_goals')
+        .select('physique_goal')
+        .eq('user_id', userId)
+        .maybeSingle();
+      goals.physiqueGoal = physiqueRow?.physique_goal ?? null;
     }
 
     const planType = goals.weeklyLiftDays > 0 && goals.weeklyRunDays > 0 ? 'hybrid' : goals.weeklyLiftDays > 0 ? 'lift' : 'run';
@@ -505,7 +569,7 @@ Deno.serve(async (req: Request) => {
       weekId = week.id as string;
     }
 
-    const days = await generateWeekDays(goals, trainingLoad);
+    const days = await generateWeekDays(goals, trainingLoad, ramp);
 
     const sessionRows = days.map((day) => {
       const sessionDate = new Date(weekStart);
@@ -525,6 +589,21 @@ Deno.serve(async (req: Request) => {
 
     const { error: sessionsError } = await supabase.from('training_sessions').insert(sessionRows);
     if (sessionsError) throw sessionsError;
+
+    // Audit trail for ramp rebuilds so "why is my week so light?" is answerable.
+    if (ramp) {
+      const { startPercent, rampWeeks } = computeRamp(ramp);
+      const { error: adjustmentError } = await supabase.from('plan_adjustments').insert({
+        user_id: userId,
+        plan_id: planId,
+        session_id: null,
+        triggered_by: 'return_to_training',
+        original_json: { gapDays: ramp.gapDays, reason: ramp.reason, painFlag: ramp.painFlag },
+        adjusted_json: { startPercent, rampWeeks },
+        ozzie_reason: `Rebuilt this week as week 1 of a ${rampWeeks}-week return-to-training ramp (~${startPercent}% volume) after ${ramp.gapDays} days off.`,
+      });
+      if (adjustmentError) console.error('ramp adjustment insert error', adjustmentError);
+    }
 
     return new Response(JSON.stringify({
       created: true,

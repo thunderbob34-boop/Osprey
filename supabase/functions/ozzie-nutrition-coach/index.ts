@@ -21,6 +21,8 @@ Rules:
 - Ground every claim in the actual data given (target calories/macros, training session today, and what's logged so far). Never invent numbers.
 - If the weightTrend has a non-null direction AND its calorieAdjustment is non-zero, the targets were just adjusted because of the scale. Mention this in plain language using weightTrend.note as your guide, so the user understands WHY their numbers changed today. If calorieAdjustment is 0, do not harp on weight.
 - If little or nothing has been logged today, gently nudge toward logging rather than guessing how they're doing.
+- You may be given a "physiqueGoal" ('cut', 'maintain', or 'lean_bulk') — the "look" half of look-like-a-bodybuilder/function-like-an-athlete. Frame the targets through it when present (e.g. on a cut: protein protects muscle; on a lean bulk: the surplus is fuel for growth).
+- If "raceConflict" is non-null, the athlete is cutting AND racing within 10 days — the deficit has been paused and calories held at maintenance. If it's worth mentioning today, explain it in plain language using raceConflict.note as your guide: race performance wins this week, the cut resumes after.
 - Never give medical advice, never suggest extreme restriction or disordered eating patterns. This is a fitness app, not a diet app — frame food as fuel for training.
 - Respond ONLY with valid JSON matching this shape: {"tip": string}`;
 
@@ -37,9 +39,22 @@ interface WeightTrend {
   note: string;
 }
 
+type PhysiqueGoal = 'cut' | 'maintain' | 'lean_bulk';
+
+// "Look + Function": when a physique goal and an imminent race collide
+// (cutting during race week), the deficit is suspended and this note tells
+// GPT to explain why the numbers moved.
+interface RaceConflict {
+  raceName: string | null;
+  daysUntilRace: number;
+  note: string;
+}
+
 interface NutritionContext {
   displayName: string;
   primaryGoal: PrimaryGoal | null;
+  physiqueGoal: PhysiqueGoal | null;
+  raceConflict: RaceConflict | null;
   todaySession: { sessionType: string; plannedMinutes: number | null } | null;
   loggedToday: { calories: number; proteinG: number; carbsG: number; fatG: number };
   weightTrend: WeightTrend;
@@ -150,8 +165,25 @@ const SESSION_CAL_PER_MIN: Record<string, number> = {
   rest:  0,
 };
 
+// Physique-goal calorie offsets, layered on top of the performance baseline.
+// A cut deficit is deliberately modest (-300) — this is a training app, and
+// protein rises on a cut to protect muscle.
+const PHYSIQUE_CAL_OFFSET: Record<PhysiqueGoal, number> = {
+  cut: -300,
+  maintain: 0,
+  lean_bulk: 200,
+};
+
+const PHYSIQUE_PROTEIN_BONUS: Record<PhysiqueGoal, number> = {
+  cut: 20,
+  maintain: 0,
+  lean_bulk: 10,
+};
+
 function computeTarget(
   primaryGoal: PrimaryGoal | null,
+  physiqueGoal: PhysiqueGoal | null,
+  raceConflict: RaceConflict | null,
   todaySession: { sessionType: string; plannedMinutes: number | null } | null,
   weightTrend: WeightTrend,
 ): { calories: number; proteinG: number; carbsG: number; fatG: number } {
@@ -182,6 +214,17 @@ function computeTarget(
     calories += Math.round(minutes * ratePerMin);
   }
 
+  // Physique layer. During a race-proximity conflict, the cut deficit is
+  // suspended (calories held at maintenance) — underfueling race week costs
+  // more than a week of paused cutting. Protein bonus stays either way.
+  if (physiqueGoal) {
+    proteinG += PHYSIQUE_PROTEIN_BONUS[physiqueGoal];
+    const deficitSuspended = raceConflict != null && physiqueGoal === 'cut';
+    if (!deficitSuspended) {
+      calories += PHYSIQUE_CAL_OFFSET[physiqueGoal];
+    }
+  }
+
   // Weight-trend correction — self-corrects when the scale doesn't match the goal.
   // Floor protects against unsafe lowballing if multiple negatives stack.
   calories = Math.max(1600, calories + weightTrend.calorieAdjustment);
@@ -205,9 +248,13 @@ async function buildContext(
 
   const twentyEightDaysAgo = new Date(Date.now() - 28 * 86400000).toISOString().slice(0, 10);
 
-  const [userRes, goalsRes, sessionRes, foodRes, weightRes] = await Promise.all([
+  const [userRes, goalsRes, sessionRes, foodRes, weightRes, raceRes] = await Promise.all([
     supabase.from('users').select('display_name').eq('id', userId).single(),
-    supabase.from('user_goals').select('primary_goal').eq('user_id', userId).maybeSingle(),
+    supabase
+      .from('user_goals')
+      .select('primary_goal, physique_goal')
+      .eq('user_id', userId)
+      .maybeSingle(),
     supabase
       .from('training_sessions')
       .select('session_type, planned_minutes')
@@ -225,14 +272,40 @@ async function buildContext(
       .eq('user_id', userId)
       .gte('recorded_on', twentyEightDaysAgo)
       .order('recorded_on', { ascending: true }),
+    supabase
+      .from('race_events')
+      .select('name, event_date')
+      .eq('user_id', userId)
+      .is('deleted_at', null)
+      .gte('event_date', today)
+      .order('event_date', { ascending: true })
+      .limit(1)
+      .maybeSingle(),
   ]);
 
   const user = userRes.data as { display_name: string } | null;
   const primaryGoal = (goalsRes.data?.primary_goal ?? null) as PrimaryGoal | null;
+  const physiqueGoal = (goalsRes.data?.physique_goal ?? null) as PhysiqueGoal | null;
   const todaySession = sessionRes.data
     ? { sessionType: sessionRes.data.session_type, plannedMinutes: sessionRes.data.planned_minutes }
     : null;
   const weightTrend = computeWeightTrend((weightRes.data ?? []) as BodyMetricRow[], primaryGoal);
+
+  // Race-proximity conflict: a cut deficit inside the 10 days before a race
+  // is exactly the tension "Look + Function" coaching exists to resolve.
+  let raceConflict: RaceConflict | null = null;
+  if (physiqueGoal === 'cut' && raceRes.data?.event_date) {
+    const daysUntilRace = Math.round(
+      (new Date(raceRes.data.event_date as string).getTime() - new Date(today).getTime()) / 86400000,
+    );
+    if (daysUntilRace >= 0 && daysUntilRace <= 10) {
+      raceConflict = {
+        raceName: (raceRes.data.name as string) ?? null,
+        daysUntilRace,
+        note: `Race in ${daysUntilRace} day(s) — the cut deficit is paused and calories are held at maintenance until after the race, so training and race day are fully fueled.`,
+      };
+    }
+  }
 
   const loggedToday = (foodRes.data ?? []).reduce(
     (acc, row) => ({
@@ -247,10 +320,12 @@ async function buildContext(
   return {
     displayName: user?.display_name ?? 'there',
     primaryGoal,
+    physiqueGoal,
+    raceConflict,
     todaySession,
     loggedToday,
     weightTrend,
-    target: computeTarget(primaryGoal, todaySession, weightTrend),
+    target: computeTarget(primaryGoal, physiqueGoal, raceConflict, todaySession, weightTrend),
   };
 }
 

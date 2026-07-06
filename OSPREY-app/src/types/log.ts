@@ -27,6 +27,9 @@ export interface LoggedWorkoutRow {
   durationMinutes: number;
   distanceMiles: number | null;
   notes: string | null;
+  // Passed the server-side GPS plausibility check (verify_workout_effort) —
+  // eligible for verified-only challenge leaderboards.
+  verified: boolean;
 }
 
 export interface LoggedFoodRow {

@@ -66,13 +66,25 @@ interface LeaderboardPanelProps {
 }
 
 function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPanelProps) {
-  const { data, isLoading, refetch, isFetching } = useChallengeLeaderboard(challenge.id);
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+  const { data, isLoading, refetch, isFetching } = useChallengeLeaderboard(challenge.id, verifiedOnly);
 
   return (
     <View style={styles.lbPanel}>
       <View style={styles.lbHeader}>
         <Text style={styles.lbTitle}>Leaderboard</Text>
         <View style={styles.lbHeaderRight}>
+          <TouchableOpacity
+            onPress={() => setVerifiedOnly((v) => !v)}
+            style={[styles.verifiedToggle, verifiedOnly && styles.verifiedToggleOn]}
+            accessibilityRole="button"
+            accessibilityState={{ selected: verifiedOnly }}
+            accessibilityLabel="Count only GPS-verified workouts"
+          >
+            <Text style={[styles.verifiedToggleText, verifiedOnly && styles.verifiedToggleTextOn]}>
+              ✓ Verified only
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => refetch()} disabled={isFetching} style={styles.refreshBtn}>
             {isFetching ? (
               <ActivityIndicator color={Colors.teal} size="small" />
@@ -594,6 +606,19 @@ const styles = StyleSheet.create({
   lbTitle: { color: Colors.teal, fontSize: 12, fontWeight: '800', letterSpacing: 0.5 },
   lbHeaderRight: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   refreshBtn: { padding: 4 },
+  verifiedToggle: {
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  verifiedToggleOn: {
+    borderColor: Colors.teal,
+    backgroundColor: Colors.surfaceTeal,
+  },
+  verifiedToggleText: { fontSize: 11, fontWeight: '700', color: Colors.textMuted },
+  verifiedToggleTextOn: { color: Colors.teal },
   refreshBtnText: { color: Colors.teal, fontSize: 16, fontWeight: '700' },
   lbClose: { color: Colors.textMuted, fontSize: 16, fontWeight: '700' },
   lbEmpty: { color: Colors.textMuted, fontSize: 13, fontStyle: 'italic', marginVertical: 6 },

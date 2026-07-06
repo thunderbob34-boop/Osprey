@@ -21,7 +21,7 @@ export async function fetchTodayLog(userId: string): Promise<TodayLogData> {
   const [workoutsRes, foodRes] = await Promise.all([
     supabase
       .from('workout_logs')
-      .select('id, session_type, started_at, total_duration_s, total_distance_km, notes')
+      .select('id, session_type, started_at, total_duration_s, total_distance_km, notes, verified')
       .eq('user_id', userId)
       .is('deleted_at', null)
       .gte('started_at', since)
@@ -47,6 +47,7 @@ export async function fetchTodayLog(userId: string): Promise<TodayLogData> {
         ? Math.round((row.total_distance_km / MILES_TO_KM) * 10) / 10
         : null,
     notes: row.notes,
+    verified: row.verified === true,
   }));
 
   const food: LoggedFoodRow[] = (foodRes.data ?? []).map((row) => ({

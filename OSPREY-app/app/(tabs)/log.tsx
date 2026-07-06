@@ -349,7 +349,10 @@ export default function LogTab() {
                 <>
                   {data?.workouts.map((w) => (
                     <View key={w.id} style={styles.entryRow}>
-                      <Text style={styles.entryPrimary}>{formatSessionType(w.sessionType)}</Text>
+                      <Text style={styles.entryPrimary}>
+                        {formatSessionType(w.sessionType)}
+                        {w.verified ? <Text style={styles.verifiedBadge}>  ✓ Verified</Text> : null}
+                      </Text>
                       <Text style={styles.entrySecondary}>
                         {w.durationMinutes} min
                         {w.distanceMiles ? ` · ${w.distanceMiles} mi` : ''} · {formatTime(w.startedAt)}
@@ -710,6 +713,7 @@ const styles = StyleSheet.create({
   emptyText: { fontSize: 13, color: Colors.textMuted },
   entryRow: { gap: 2 },
   entryPrimary: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
+  verifiedBadge: { fontSize: 11, fontWeight: '700', color: Colors.teal },
   entrySecondary: { fontSize: 12, color: Colors.textSecondary },
   totalText: {
     fontSize: 12,

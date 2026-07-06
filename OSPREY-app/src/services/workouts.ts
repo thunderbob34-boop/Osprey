@@ -157,6 +157,13 @@ export async function saveRunWorkout(params: {
       })),
     );
     if (trackError) throw trackError;
+
+    // Server-side plausibility check awards the "verified" badge that
+    // challenge leaderboards can filter on. Best-effort — a failure here
+    // just leaves the workout unverified, never blocks the save.
+    await supabase
+      .rpc('verify_workout_effort', { p_workout_id: workout.id })
+      .then(() => undefined, () => undefined);
   }
 
   writeWorkoutToHealthKit({

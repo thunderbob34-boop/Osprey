@@ -136,9 +136,11 @@ export async function fetchMyChallenges(userId: string): Promise<Challenge[]> {
 
 export async function fetchChallengeLeaderboard(
   challengeId: string,
+  verifiedOnly = false,
 ): Promise<LeaderboardEntry[]> {
   const { data, error } = await supabase.rpc('get_challenge_leaderboard', {
     p_challenge_id: challengeId,
+    p_verified_only: verifiedOnly,
   });
   if (error) throw error;
   return (data ?? []).map((row: {

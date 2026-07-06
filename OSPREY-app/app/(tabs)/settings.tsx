@@ -263,6 +263,19 @@ export default function SettingsTab() {
         </View>
 
         <View style={styles.card}>
+          <Text style={styles.cardLabel}>Physique</Text>
+          <Text style={styles.cardValue}>Progress photos & physique goal</Text>
+          <TouchableOpacity
+            style={styles.upgradeBtn}
+            onPress={() => router.push('/physique')}
+            accessibilityRole="button"
+            accessibilityLabel="Open physique goal and progress photos"
+          >
+            <Text style={styles.upgradeText}>Set goal & photos</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.card}>
           <Text style={styles.cardLabel}>TRAINING PLAN</Text>
           <TouchableOpacity style={styles.planRow} onPress={() => router.push('/plan-preview')}>
             <View style={styles.planRowLeft}>
