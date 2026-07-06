@@ -17,8 +17,9 @@ import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
 import FieldError from '@/components/FieldError';
 import HydrationCard from '@/components/HydrationCard';
-import { useTodayLog } from '@/hooks/useTodayLog';
-import type { MealType, QuickWorkoutType } from '@/types/log';
+import { useRecentMeals, useTodayLog } from '@/hooks/useTodayLog';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import type { MealType, QuickWorkoutType, RecentMeal } from '@/types/log';
 import { searchFoodByName, type FoodItemResult } from '@/services/food-lookup';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import { useHydration } from '@/hooks/useHydration';
@@ -57,11 +58,25 @@ function getErrorMessage(err: unknown): string {
 }
 
 export default function LogTab() {
-  const { data, isLoading, error, logWorkout, logFood } = useTodayLog();
+  const {
+    data,
+    isLoading,
+    error,
+    logWorkout,
+    updateWorkout,
+    deleteWorkout,
+    logFood,
+    updateFood,
+    deleteFood,
+    copyYesterday,
+  } = useTodayLog();
+  const { data: recentMeals } = useRecentMeals();
   const { data: nutrition } = useNutritionCoaching();
   const { data: hydration, add: addHydration } = useHydration();
   const { data: weightSummary, log: logWeightMutation } = useWeightLog();
   const [openSection, setOpenSection] = useState<'workout' | 'food' | 'weight' | null>(null);
+  const [editingWorkoutId, setEditingWorkoutId] = useState<string | null>(null);
+  const [editingFoodId, setEditingFoodId] = useState<string | null>(null);
   const router = useRouter();
   const params = useLocalSearchParams<{
     scannedFoodId?: string;
@@ -92,8 +107,18 @@ export default function LogTab() {
   const [analyzingPhoto, setAnalyzingPhoto] = useState(false);
   const [photoConfidenceNote, setPhotoConfidenceNote] = useState<string | null>(null);
 
+  const { units: unitPreference } = useUnitPreference();
   const [weightInput, setWeightInput] = useState('');
   const [weightUnit, setWeightUnit] = useState<'lb' | 'kg'>('lb');
+  const weightUnitTouched = useRef(false);
+
+  // Default the weight-logging unit to the account-wide preference (Settings
+  // → Units) until the user manually flips the chip in this session.
+  useEffect(() => {
+    if (!weightUnitTouched.current) {
+      setWeightUnit(unitPreference === 'metric' ? 'kg' : 'lb');
+    }
+  }, [unitPreference]);
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
@@ -253,17 +278,80 @@ export default function LogTab() {
       setFieldErrors({ minutes: 'How many minutes was this workout?' });
       return;
     }
+    const input = {
+      sessionType: workoutType,
+      minutes: mins,
+      distanceMiles: distance ? Number(distance) : undefined,
+      notes: workoutNotes,
+    };
     try {
-      await logWorkout.mutateAsync({
-        sessionType: workoutType,
-        minutes: mins,
-        distanceMiles: distance ? Number(distance) : undefined,
-        notes: workoutNotes,
-      });
+      if (editingWorkoutId) {
+        await updateWorkout.mutateAsync({ id: editingWorkoutId, input });
+      } else {
+        await logWorkout.mutateAsync(input);
+      }
       resetWorkoutForm();
+      setEditingWorkoutId(null);
       setOpenSection(null);
     } catch (err) {
       Alert.alert('Save failed', getErrorMessage(err));
+    }
+  }
+
+  function handleEditWorkout(w: NonNullable<typeof data>['workouts'][number]) {
+    setEditingWorkoutId(w.id);
+    setWorkoutType((w.sessionType as QuickWorkoutType) ?? 'run');
+    setMinutes(String(w.durationMinutes));
+    setDistance(w.distanceMiles != null ? String(w.distanceMiles) : '');
+    setWorkoutNotes(w.notes ?? '');
+    setOpenSection('workout');
+  }
+
+  function handleDeleteWorkout(id: string) {
+    Alert.alert('Delete workout?', 'This will remove it from your log.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: () => {
+          deleteWorkout.mutate(id, {
+            onError: (err) => Alert.alert('Delete failed', getErrorMessage(err)),
+          });
+          if (editingWorkoutId === id) {
+            resetWorkoutForm();
+            setEditingWorkoutId(null);
+            setOpenSection(null);
+          }
+        },
+      },
+    ]);
+  }
+
+  async function handleRelogMeal(meal: RecentMeal) {
+    try {
+      await logFood.mutateAsync({
+        name: meal.name,
+        mealType: (meal.mealType ?? 'snack') as MealType,
+        calories: meal.calories ?? 0,
+        proteinG: meal.proteinG ?? undefined,
+        carbsG: meal.carbsG ?? undefined,
+        fatG: meal.fatG ?? undefined,
+        foodItemId: meal.foodItemId,
+        quantityG: meal.quantityG ?? undefined,
+      });
+    } catch (err) {
+      Alert.alert('Save failed', getErrorMessage(err));
+    }
+  }
+
+  async function handleCopyYesterday() {
+    try {
+      const copied = await copyYesterday.mutateAsync();
+      if (copied === 0) {
+        Alert.alert('Nothing to copy', "Yesterday's food log is empty.");
+      }
+    } catch (err) {
+      Alert.alert('Copy failed', getErrorMessage(err));
     }
   }
 
@@ -276,22 +364,62 @@ export default function LogTab() {
       setFieldErrors(errors);
       return;
     }
+    const input = {
+      name: foodName.trim(),
+      mealType,
+      calories: cals,
+      proteinG: protein ? Number(protein) : undefined,
+      carbsG: carbs ? Number(carbs) : undefined,
+      fatG: fat ? Number(fat) : undefined,
+      foodItemId: selectedFoodItem?.id || undefined,
+      quantityG: selectedFoodItem ? Number(quantityG) || 100 : undefined,
+    };
     try {
-      await logFood.mutateAsync({
-        name: foodName.trim(),
-        mealType,
-        calories: cals,
-        proteinG: protein ? Number(protein) : undefined,
-        carbsG: carbs ? Number(carbs) : undefined,
-        fatG: fat ? Number(fat) : undefined,
-        foodItemId: selectedFoodItem?.id || undefined,
-        quantityG: selectedFoodItem ? Number(quantityG) || 100 : undefined,
-      });
+      if (editingFoodId) {
+        await updateFood.mutateAsync({ id: editingFoodId, input });
+      } else {
+        await logFood.mutateAsync(input);
+      }
       resetFoodForm();
+      setEditingFoodId(null);
       setOpenSection(null);
     } catch (err) {
       Alert.alert('Save failed', getErrorMessage(err));
     }
+  }
+
+  function handleEditFood(f: NonNullable<typeof data>['food'][number]) {
+    setEditingFoodId(f.id);
+    setFoodName(f.name);
+    setMealType((f.mealType as MealType) ?? 'snack');
+    setCalories(f.calories != null ? String(f.calories) : '');
+    setProtein(f.proteinG != null ? String(f.proteinG) : '');
+    setCarbs(f.carbsG != null ? String(f.carbsG) : '');
+    setFat(f.fatG != null ? String(f.fatG) : '');
+    setQuantityG(f.quantityG != null ? String(f.quantityG) : '100');
+    setSelectedFoodItem(null);
+    setFoodResults([]);
+    setOpenSection('food');
+  }
+
+  function handleDeleteFood(id: string) {
+    Alert.alert('Delete food entry?', 'This will remove it from your log.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: () => {
+          deleteFood.mutate(id, {
+            onError: (err) => Alert.alert('Delete failed', getErrorMessage(err)),
+          });
+          if (editingFoodId === id) {
+            resetFoodForm();
+            setEditingFoodId(null);
+            setOpenSection(null);
+          }
+        },
+      },
+    ]);
   }
 
   async function handleSaveWeight() {
@@ -324,7 +452,28 @@ export default function LogTab() {
 
           {nutrition ? (
             <View style={styles.nutritionCard}>
-              <Text style={styles.cardLabel}>NUTRITION TODAY</Text>
+              <View style={styles.nutritionHeaderRow}>
+                <Text style={styles.cardLabel}>NUTRITION TODAY</Text>
+                {nutrition.dayType ? (
+                  <View
+                    style={[
+                      styles.dayTypeChip,
+                      nutrition.dayType === 'rest' && styles.dayTypeChipRest,
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.dayTypeChipText,
+                        nutrition.dayType === 'rest' && styles.dayTypeChipTextRest,
+                      ]}
+                    >
+                      {nutrition.dayType === 'training'
+                        ? `🏋️ Training day${nutrition.todaySessionType ? ` · ${formatSessionType(nutrition.todaySessionType)}` : ''}`
+                        : '😴 Rest day target'}
+                    </Text>
+                  </View>
+                ) : null}
+              </View>
               <View style={styles.macroRow}>
                 <Text style={styles.macroValue}>
                   {nutrition.loggedToday.calories} / {nutrition.target.calories}
@@ -379,21 +528,55 @@ export default function LogTab() {
               ) : (
                 <>
                   {data?.workouts.map((w) => (
-                    <View key={w.id} style={styles.entryRow}>
-                      <Text style={styles.entryPrimary}>{formatSessionType(w.sessionType)}</Text>
-                      <Text style={styles.entrySecondary}>
-                        {w.durationMinutes} min
-                        {w.distanceMiles ? ` · ${w.distanceMiles} mi` : ''} · {formatTime(w.startedAt)}
-                      </Text>
-                    </View>
+                    <TouchableOpacity
+                      key={w.id}
+                      style={styles.entryRow}
+                      onPress={() => handleEditWorkout(w)}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Edit ${formatSessionType(w.sessionType)} workout`}
+                    >
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.entryPrimary}>{formatSessionType(w.sessionType)}</Text>
+                        <Text style={styles.entrySecondary}>
+                          {w.durationMinutes} min
+                          {w.distanceMiles ? ` · ${w.distanceMiles} mi` : ''} · {formatTime(w.startedAt)}
+                        </Text>
+                      </View>
+                      <TouchableOpacity
+                        onPress={() => handleDeleteWorkout(w.id)}
+                        hitSlop={8}
+                        style={styles.entryDeleteBtn}
+                        accessibilityRole="button"
+                        accessibilityLabel={`Delete ${formatSessionType(w.sessionType)} workout`}
+                      >
+                        <Text style={styles.entryDeleteText}>✕</Text>
+                      </TouchableOpacity>
+                    </TouchableOpacity>
                   ))}
                   {data?.food.map((f) => (
-                    <View key={f.id} style={styles.entryRow}>
-                      <Text style={styles.entryPrimary}>{f.name}</Text>
-                      <Text style={styles.entrySecondary}>
-                        {f.calories ?? 0} cal · {f.mealType ?? 'meal'} · {formatTime(f.loggedAt)}
-                      </Text>
-                    </View>
+                    <TouchableOpacity
+                      key={f.id}
+                      style={styles.entryRow}
+                      onPress={() => handleEditFood(f)}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Edit ${f.name}`}
+                    >
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.entryPrimary}>{f.name}</Text>
+                        <Text style={styles.entrySecondary}>
+                          {f.calories ?? 0} cal · {f.mealType ?? 'meal'} · {formatTime(f.loggedAt)}
+                        </Text>
+                      </View>
+                      <TouchableOpacity
+                        onPress={() => handleDeleteFood(f.id)}
+                        hitSlop={8}
+                        style={styles.entryDeleteBtn}
+                        accessibilityRole="button"
+                        accessibilityLabel={`Delete ${f.name}`}
+                      >
+                        <Text style={styles.entryDeleteText}>✕</Text>
+                      </TouchableOpacity>
+                    </TouchableOpacity>
                   ))}
                   {data && data.totalCalories > 0 ? (
                     <Text style={styles.totalText}>{data.totalCalories} cal logged today</Text>
@@ -406,7 +589,18 @@ export default function LogTab() {
           {/* Log a Workout */}
           <TouchableOpacity
             style={styles.actionCard}
-            onPress={() => setOpenSection(openSection === 'workout' ? null : 'workout')}
+            onPress={() => {
+              if (openSection === 'workout') {
+                setOpenSection(null);
+              } else {
+                resetWorkoutForm();
+                setEditingWorkoutId(null);
+                setOpenSection('workout');
+              }
+            }}
+            accessibilityRole="button"
+            accessibilityLabel="Log a workout"
+            accessibilityState={{ expanded: openSection === 'workout' }}
           >
             <Text style={styles.actionTitle}>🏃 Log a Workout</Text>
             <Text style={styles.actionChevron}>{openSection === 'workout' ? '−' : '+'}</Text>
@@ -420,6 +614,9 @@ export default function LogTab() {
                     key={t.value}
                     style={[styles.chip, workoutType === t.value && styles.chipActive]}
                     onPress={() => setWorkoutType(t.value)}
+                    accessibilityRole="button"
+                    accessibilityLabel={t.label}
+                    accessibilityState={{ selected: workoutType === t.value }}
                   >
                     <Text
                       style={[styles.chipText, workoutType === t.value && styles.chipTextActive]}
@@ -443,6 +640,7 @@ export default function LogTab() {
                       setMinutes(v);
                       clearFieldError('minutes');
                     }}
+                    accessibilityLabel="Workout duration in minutes"
                   />
                   <FieldError message={fieldErrors.minutes} />
                 </View>
@@ -455,6 +653,7 @@ export default function LogTab() {
                     placeholderTextColor={Colors.textMuted}
                     value={distance}
                     onChangeText={setDistance}
+                    accessibilityLabel="Distance in miles, optional"
                   />
                 </View>
               </View>
@@ -467,17 +666,26 @@ export default function LogTab() {
                 value={workoutNotes}
                 onChangeText={setWorkoutNotes}
                 multiline
+                accessibilityLabel="Workout notes"
               />
 
               <TouchableOpacity
                 style={styles.saveBtn}
                 onPress={handleSaveWorkout}
-                disabled={logWorkout.isPending}
+                disabled={logWorkout.isPending || updateWorkout.isPending}
+                accessibilityRole="button"
+                accessibilityLabel={editingWorkoutId ? 'Update workout' : 'Save workout'}
+                accessibilityState={{
+                  disabled: logWorkout.isPending || updateWorkout.isPending,
+                  busy: logWorkout.isPending || updateWorkout.isPending,
+                }}
               >
-                {logWorkout.isPending ? (
+                {logWorkout.isPending || updateWorkout.isPending ? (
                   <ActivityIndicator color="#000" />
                 ) : (
-                  <Text style={styles.saveBtnText}>Save Workout</Text>
+                  <Text style={styles.saveBtnText}>
+                    {editingWorkoutId ? 'Update Workout' : 'Save Workout'}
+                  </Text>
                 )}
               </TouchableOpacity>
             </View>
@@ -486,7 +694,18 @@ export default function LogTab() {
           {/* Log Food */}
           <TouchableOpacity
             style={styles.actionCard}
-            onPress={() => setOpenSection(openSection === 'food' ? null : 'food')}
+            onPress={() => {
+              if (openSection === 'food') {
+                setOpenSection(null);
+              } else {
+                resetFoodForm();
+                setEditingFoodId(null);
+                setOpenSection('food');
+              }
+            }}
+            accessibilityRole="button"
+            accessibilityLabel="Log food"
+            accessibilityState={{ expanded: openSection === 'food' }}
           >
             <Text style={styles.actionTitle}>🍽 Log Food</Text>
             <Text style={styles.actionChevron}>{openSection === 'food' ? '−' : '+'}</Text>
@@ -494,6 +713,47 @@ export default function LogTab() {
 
           {openSection === 'food' ? (
             <View style={styles.form}>
+              <>
+                  <Text style={styles.fieldLabel}>QUICK ADD</Text>
+                  <View style={styles.chipRow}>
+                    {(recentMeals ?? []).map((meal) => (
+                      <TouchableOpacity
+                        key={meal.foodItemId}
+                        style={styles.recentChip}
+                        onPress={() => handleRelogMeal(meal)}
+                        disabled={logFood.isPending}
+                        accessibilityRole="button"
+                        accessibilityLabel={`Log ${meal.name} again, ${meal.calories ?? 0} calories`}
+                        accessibilityState={{ disabled: logFood.isPending }}
+                      >
+                        <Text style={styles.recentChipName} numberOfLines={1}>
+                          {meal.name}
+                        </Text>
+                        <Text style={styles.recentChipMeta}>{meal.calories ?? 0} cal</Text>
+                      </TouchableOpacity>
+                    ))}
+                    <TouchableOpacity
+                      style={[styles.recentChip, styles.copyYesterdayChip]}
+                      onPress={handleCopyYesterday}
+                      disabled={copyYesterday.isPending}
+                      accessibilityRole="button"
+                      accessibilityLabel="Copy all meals from yesterday"
+                      accessibilityState={{ disabled: copyYesterday.isPending, busy: copyYesterday.isPending }}
+                    >
+                      {copyYesterday.isPending ? (
+                        <ActivityIndicator color={Colors.gold} size="small" />
+                      ) : (
+                        <>
+                          <Text style={[styles.recentChipName, { color: Colors.gold }]}>
+                            ⧉ Copy yesterday
+                          </Text>
+                          <Text style={styles.recentChipMeta}>all meals</Text>
+                        </>
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                </>
+
               <View style={styles.foodNameHeader}>
                 <Text style={styles.fieldLabel}>WHAT DID YOU EAT?</Text>
                 <View style={styles.scanBtnRow}>
@@ -501,12 +761,17 @@ export default function LogTab() {
                     style={styles.scanBtn}
                     onPress={handleTakeMealPhoto}
                     disabled={analyzingPhoto}
+                    accessibilityRole="button"
+                    accessibilityLabel="Photograph meal to estimate macros"
+                    accessibilityState={{ disabled: analyzingPhoto, busy: analyzingPhoto }}
                   >
                     <Text style={styles.scanBtnText}>📸 Photo</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={styles.scanBtn}
                     onPress={() => router.push('/food-scanner')}
+                    accessibilityRole="button"
+                    accessibilityLabel="Scan food barcode"
                   >
                     <Text style={styles.scanBtnText}>📷 Scan</Text>
                   </TouchableOpacity>
@@ -521,6 +786,7 @@ export default function LogTab() {
                   handleFoodNameChange(v);
                   clearFieldError('foodName');
                 }}
+                accessibilityLabel="Food name"
               />
               <FieldError message={fieldErrors.foodName} />
 
@@ -546,6 +812,8 @@ export default function LogTab() {
                       key={item.id}
                       style={styles.resultRow}
                       onPress={() => handlePickFoodResult(item)}
+                      accessibilityRole="button"
+                      accessibilityLabel={`${item.name}${item.brand ? `, ${item.brand}` : ''}, ${item.caloriesPer100g} calories per 100 grams`}
                     >
                       <Text style={styles.resultName}>
                         {item.name}
@@ -565,6 +833,7 @@ export default function LogTab() {
                     keyboardType="number-pad"
                     value={quantityG}
                     onChangeText={handleQuantityChange}
+                    accessibilityLabel="Quantity in grams"
                   />
                 </>
               ) : null}
@@ -575,6 +844,9 @@ export default function LogTab() {
                     key={m.value}
                     style={[styles.chip, mealType === m.value && styles.chipActive]}
                     onPress={() => setMealType(m.value)}
+                    accessibilityRole="button"
+                    accessibilityLabel={m.label}
+                    accessibilityState={{ selected: mealType === m.value }}
                   >
                     <Text style={[styles.chipText, mealType === m.value && styles.chipTextActive]}>
                       {m.label}
@@ -594,6 +866,7 @@ export default function LogTab() {
                   setCalories(v);
                   clearFieldError('calories');
                 }}
+                accessibilityLabel="Calories"
               />
               <FieldError message={fieldErrors.calories} />
 
@@ -607,6 +880,7 @@ export default function LogTab() {
                     placeholderTextColor={Colors.textMuted}
                     value={protein}
                     onChangeText={setProtein}
+                    accessibilityLabel="Protein in grams, optional"
                   />
                 </View>
                 <View style={styles.field}>
@@ -618,6 +892,7 @@ export default function LogTab() {
                     placeholderTextColor={Colors.textMuted}
                     value={carbs}
                     onChangeText={setCarbs}
+                    accessibilityLabel="Carbs in grams, optional"
                   />
                 </View>
                 <View style={styles.field}>
@@ -629,6 +904,7 @@ export default function LogTab() {
                     placeholderTextColor={Colors.textMuted}
                     value={fat}
                     onChangeText={setFat}
+                    accessibilityLabel="Fat in grams, optional"
                   />
                 </View>
               </View>
@@ -636,12 +912,18 @@ export default function LogTab() {
               <TouchableOpacity
                 style={styles.saveBtn}
                 onPress={handleSaveFood}
-                disabled={logFood.isPending}
+                disabled={logFood.isPending || updateFood.isPending}
+                accessibilityRole="button"
+                accessibilityLabel={editingFoodId ? 'Update food' : 'Save food'}
+                accessibilityState={{
+                  disabled: logFood.isPending || updateFood.isPending,
+                  busy: logFood.isPending || updateFood.isPending,
+                }}
               >
-                {logFood.isPending ? (
+                {logFood.isPending || updateFood.isPending ? (
                   <ActivityIndicator color="#000" />
                 ) : (
-                  <Text style={styles.saveBtnText}>Save Food</Text>
+                  <Text style={styles.saveBtnText}>{editingFoodId ? 'Update Food' : 'Save Food'}</Text>
                 )}
               </TouchableOpacity>
             </View>
@@ -651,6 +933,9 @@ export default function LogTab() {
           <TouchableOpacity
             style={styles.actionCard}
             onPress={() => setOpenSection(openSection === 'weight' ? null : 'weight')}
+            accessibilityRole="button"
+            accessibilityLabel="Log weight"
+            accessibilityState={{ expanded: openSection === 'weight' }}
           >
             <Text style={styles.actionTitle}>⚖️ Log Weight</Text>
             <Text style={styles.actionChevron}>{openSection === 'weight' ? '−' : '+'}</Text>
@@ -676,7 +961,13 @@ export default function LogTab() {
                   <TouchableOpacity
                     key={u}
                     style={[styles.chip, weightUnit === u && styles.chipActive]}
-                    onPress={() => setWeightUnit(u)}
+                    onPress={() => {
+                      weightUnitTouched.current = true;
+                      setWeightUnit(u);
+                    }}
+                    accessibilityRole="button"
+                    accessibilityLabel={u}
+                    accessibilityState={{ selected: weightUnit === u }}
                   >
                     <Text style={[styles.chipText, weightUnit === u && styles.chipTextActive]}>{u}</Text>
                   </TouchableOpacity>
@@ -694,6 +985,7 @@ export default function LogTab() {
                   setWeightInput(v);
                   clearFieldError('weight');
                 }}
+                accessibilityLabel={`Today's weight in ${weightUnit}`}
               />
               <FieldError message={fieldErrors.weight} />
 
@@ -701,6 +993,9 @@ export default function LogTab() {
                 style={styles.saveBtn}
                 onPress={handleSaveWeight}
                 disabled={logWeightMutation.isPending}
+                accessibilityRole="button"
+                accessibilityLabel="Save weight"
+                accessibilityState={{ disabled: logWeightMutation.isPending, busy: logWeightMutation.isPending }}
               >
                 {logWeightMutation.isPending ? (
                   <ActivityIndicator color="#000" />
@@ -731,6 +1026,23 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     gap: 8,
   },
+  nutritionHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 8,
+  },
+  dayTypeChip: {
+    backgroundColor: Colors.surfaceTeal,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  dayTypeChipRest: { backgroundColor: Colors.goldDim, borderColor: 'rgba(200,154,0,0.3)' },
+  dayTypeChipText: { fontSize: 10, fontWeight: '700', color: Colors.teal },
+  dayTypeChipTextRest: { color: Colors.gold },
   macroRow: { flexDirection: 'row', alignItems: 'baseline', gap: 6 },
   macroValue: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
   macroUnit: { fontSize: 13, color: Colors.textMuted, fontWeight: '600' },
@@ -755,9 +1067,11 @@ const styles = StyleSheet.create({
   },
   cardLabel: { fontSize: 10, fontWeight: '700', color: Colors.textMuted, letterSpacing: 1 },
   emptyText: { fontSize: 13, color: Colors.textMuted },
-  entryRow: { gap: 2 },
+  entryRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   entryPrimary: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
   entrySecondary: { fontSize: 12, color: Colors.textSecondary },
+  entryDeleteBtn: { padding: 4 },
+  entryDeleteText: { fontSize: 13, color: Colors.textMuted, fontWeight: '700' },
   totalText: {
     fontSize: 12,
     fontWeight: '700',
@@ -797,6 +1111,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.03)',
   },
   chipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+  recentChip: {
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    backgroundColor: Colors.surfaceTeal,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    maxWidth: 160,
+    gap: 1,
+  },
+  recentChipName: { fontSize: 12, fontWeight: '700', color: Colors.teal },
+  recentChipMeta: { fontSize: 10, color: Colors.textMuted, fontWeight: '600' },
+  copyYesterdayChip: {
+    borderColor: 'rgba(200,154,0,0.3)',
+    backgroundColor: Colors.goldDim,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   chipText: { fontSize: 13, fontWeight: '600', color: Colors.textSecondary },
   chipTextActive: { color: Colors.teal },
   fieldRow: { flexDirection: 'row', gap: 10 },

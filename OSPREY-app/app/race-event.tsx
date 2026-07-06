@@ -91,7 +91,12 @@ export default function RaceEventScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} hitSlop={12}>
+          <TouchableOpacity
+            onPress={() => router.back()}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
+          >
             <Text style={styles.backText}>←</Text>
           </TouchableOpacity>
           <Text style={styles.title}>Race Details</Text>
@@ -284,6 +289,9 @@ export default function RaceEventScreen() {
             onPress={handleTrainPress}
             disabled={generating}
             activeOpacity={0.8}
+            accessibilityRole="button"
+            accessibilityLabel="Train for this event"
+            accessibilityState={{ disabled: generating, busy: generating }}
           >
             {generating ? (
               <ActivityIndicator color="#000" />
@@ -297,6 +305,9 @@ export default function RaceEventScreen() {
             onPress={handleAddToMyRaces}
             disabled={savingRace}
             activeOpacity={0.8}
+            accessibilityRole="button"
+            accessibilityLabel="Add to my races"
+            accessibilityState={{ disabled: savingRace, busy: savingRace }}
           >
             {savingRace ? (
               <ActivityIndicator color={Colors.teal} />

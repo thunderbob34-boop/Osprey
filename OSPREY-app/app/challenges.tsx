@@ -58,7 +58,7 @@ function medalFor(rank: number): string {
   return `#${rank}`;
 }
 
-const CHALLENGE_TYPES: ChallengeType[] = ['mileage', 'workouts', 'duration'];
+const CHALLENGE_TYPES: ChallengeType[] = ['mileage', 'workouts', 'duration', 'lift_volume', 'streak'];
 
 // ── Leaderboard panel ─────────────────────────────────────────────────────────
 
@@ -76,14 +76,21 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
       <View style={styles.lbHeader}>
         <Text style={styles.lbTitle}>Leaderboard</Text>
         <View style={styles.lbHeaderRight}>
-          <TouchableOpacity onPress={() => refetch()} disabled={isFetching} style={styles.refreshBtn}>
+          <TouchableOpacity
+            onPress={() => refetch()}
+            disabled={isFetching}
+            style={styles.refreshBtn}
+            accessibilityRole="button"
+            accessibilityLabel="Refresh leaderboard"
+            accessibilityState={{ disabled: isFetching, busy: isFetching }}
+          >
             {isFetching ? (
               <ActivityIndicator color={Colors.teal} size="small" />
             ) : (
               <Text style={styles.refreshBtnText}>↺</Text>
             )}
           </TouchableOpacity>
-          <TouchableOpacity onPress={onClose} hitSlop={10}>
+          <TouchableOpacity onPress={onClose} hitSlop={10} accessibilityRole="button" accessibilityLabel="Close leaderboard">
             <Text style={styles.lbClose}>✕</Text>
           </TouchableOpacity>
         </View>
@@ -226,7 +233,12 @@ export default function ChallengesScreen() {
       <ScreenHeader
         title="Challenges"
         right={
-          <TouchableOpacity onPress={() => setShowForm((v) => !v)} hitSlop={12}>
+          <TouchableOpacity
+            onPress={() => setShowForm((v) => !v)}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel={showForm ? 'Close new challenge form' : 'New challenge'}
+          >
             <Text style={styles.add}>{showForm ? '−' : '+'}</Text>
           </TouchableOpacity>
         }
@@ -249,6 +261,7 @@ export default function ChallengesScreen() {
                   setFormName(v);
                   setFieldErrors((prev) => ({ ...prev, name: '' }));
                 }}
+                accessibilityLabel="Challenge name"
               />
               <FieldError message={fieldErrors.name} />
 
@@ -259,6 +272,9 @@ export default function ChallengesScreen() {
                     key={t}
                     style={[styles.chip, formType === t && styles.chipActive]}
                     onPress={() => setFormType(t)}
+                    accessibilityRole="button"
+                    accessibilityLabel={CHALLENGE_TYPE_LABELS[t]}
+                    accessibilityState={{ selected: formType === t }}
                   >
                     <Text style={[styles.chipText, formType === t && styles.chipTextActive]}>
                       {CHALLENGE_TYPE_LABELS[t]}
@@ -300,6 +316,9 @@ export default function ChallengesScreen() {
                           key={f.friendUserId}
                           style={[styles.inviteChip, invited && styles.inviteChipActive]}
                           onPress={() => toggleInvite(f.friendUserId)}
+                          accessibilityRole="checkbox"
+                          accessibilityLabel={`Invite ${f.friendDisplayName}`}
+                          accessibilityState={{ checked: invited }}
                         >
                           <Text style={[styles.inviteChipText, invited && styles.inviteChipTextActive]}>
                             {invited ? '✓ ' : ''}{f.friendDisplayName}
@@ -315,6 +334,9 @@ export default function ChallengesScreen() {
                 style={styles.saveBtn}
                 onPress={handleCreate}
                 disabled={create.isPending}
+                accessibilityRole="button"
+                accessibilityLabel="Create challenge"
+                accessibilityState={{ disabled: create.isPending, busy: create.isPending }}
               >
                 {create.isPending ? (
                   <ActivityIndicator color="#000" />
@@ -451,12 +473,21 @@ function ChallengeCard({ challenge: c, currentUserId, isLbOpen, onToggleLb, onLe
         ) : null}
       </View>
       <View style={styles.actionRow}>
-        <TouchableOpacity onPress={onToggleLb}>
+        <TouchableOpacity
+          onPress={onToggleLb}
+          accessibilityRole="button"
+          accessibilityLabel={`${isLbOpen ? 'Hide' : 'Show'} leaderboard for ${c.name}`}
+          accessibilityState={{ expanded: isLbOpen }}
+        >
           <Text style={[styles.actionLink, isLbOpen && styles.actionLinkActive]}>
             Leaderboard
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onLeave}>
+        <TouchableOpacity
+          onPress={onLeave}
+          accessibilityRole="button"
+          accessibilityLabel={`${isCreator ? 'Delete' : 'Leave'} ${c.name}`}
+        >
           <Text style={styles.actionDelete}>
             {isCreator ? 'Delete' : 'Leave'}
           </Text>

@@ -21,9 +21,24 @@ import {
   metersToMiles,
 } from '@/store/workoutStore';
 import { useAuthStore } from '@/store/authStore';
-import { saveRunWorkout } from '@/services/workouts';
+import { fetchIntervalPrescription, saveRunWorkout } from '@/services/workouts';
+import { expandIntervalSteps, type IntervalStep } from '@/services/intervals';
+import {
+  computeStepProgress,
+  fetchPaceBands,
+  formatPaceBand,
+  formatPaceSecPerMile,
+  paceStatusForBand,
+  runCueForStep,
+  type PaceBands,
+} from '@/services/run-guidance';
 import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
 import { generateWarmup, type WarmupDrill } from '@/services/warmup';
+import {
+  fetchLatestHeartRateBpm,
+  isHealthKitSupported,
+  requestHealthKitAuthorization,
+} from '@/services/healthkit';
 import {
   checkCues,
   makeCoachingState,
@@ -43,6 +58,7 @@ export default function RunWorkoutScreen() {
   const distanceMeters = useWorkoutStore((s) => s.distanceMeters);
   const trackPoints = useWorkoutStore((s) => s.trackPoints);
   const heartRate = useWorkoutStore((s) => s.heartRate);
+  const setHeartRate = useWorkoutStore((s) => s.setHeartRate);
   const startWorkout = useWorkoutStore((s) => s.startWorkout);
   const pauseWorkout = useWorkoutStore((s) => s.pauseWorkout);
   const resumeWorkout = useWorkoutStore((s) => s.resumeWorkout);
@@ -57,7 +73,54 @@ export default function RunWorkoutScreen() {
   const speakingRef = useRef(false);
   const { isPlus } = useSubscription();
 
+  // Structured in-run guidance (Ozzie-prescribed intervals for today's session)
+  const [intervalSteps, setIntervalSteps] = useState<IntervalStep[] | null>(null);
+  const [paceBands, setPaceBands] = useState<PaceBands | null>(null);
+  const [stepIndex, setStepIndex] = useState(0);
+  const [intervalsDone, setIntervalsDone] = useState(false);
+  const stepStartRef = useRef({ elapsedS: 0, distanceM: 0 });
+
   useRunTracking(status === 'active');
+
+  useEffect(() => {
+    if (!params.sessionId) return;
+    fetchIntervalPrescription(params.sessionId)
+      .then((prescription) => {
+        if (prescription) setIntervalSteps(expandIntervalSteps(prescription));
+      })
+      .catch(() => undefined);
+    if (userId) {
+      fetchPaceBands(userId).then(setPaceBands).catch(() => undefined);
+    }
+  }, [params.sessionId, userId]);
+
+  // Auto-advance interval steps on time/distance and cue every transition.
+  useEffect(() => {
+    if (!intervalSteps || intervalsDone || status !== 'active') return;
+    const step = intervalSteps[stepIndex];
+    if (!step) return;
+
+    const progress = computeStepProgress(
+      step,
+      stepStartRef.current.elapsedS,
+      stepStartRef.current.distanceM,
+      elapsed,
+      distanceMeters,
+    );
+    if (!progress.done) return;
+
+    stepStartRef.current = { elapsedS: elapsed, distanceM: distanceMeters };
+    const next = intervalSteps[stepIndex + 1];
+    if (next) {
+      setStepIndex(stepIndex + 1);
+      ozzieSpeak(runCueForStep(next, paceBands), 'workout').catch(() => undefined);
+    } else {
+      setIntervalsDone(true);
+      ozzieSpeak('Intervals complete. Great work — cruise it home easy.', 'workout').catch(
+        () => undefined,
+      );
+    }
+  }, [elapsed, distanceMeters, intervalSteps, stepIndex, intervalsDone, status, paceBands]);
 
   useEffect(() => {
     return () => {
@@ -65,9 +128,40 @@ export default function RunWorkoutScreen() {
     };
   }, []);
 
+  // Pull the latest Apple Watch heart-rate sample from HealthKit while running.
+  // Requires the user to be recording on a paired Watch (or another HealthKit
+  // source) in parallel — OSPREY has no direct Watch connection of its own.
+  useEffect(() => {
+    if (status !== 'active' || !isHealthKitSupported()) return;
+    let cancelled = false;
+    let interval: ReturnType<typeof setInterval> | null = null;
+
+    requestHealthKitAuthorization().then((authorized) => {
+      if (!authorized || cancelled) return;
+      const poll = () => {
+        fetchLatestHeartRateBpm()
+          .then((bpm) => {
+            if (!cancelled && bpm != null) setHeartRate(bpm);
+          })
+          .catch(() => undefined);
+      };
+      poll();
+      interval = setInterval(poll, 15000);
+    });
+
+    return () => {
+      cancelled = true;
+      if (interval) clearInterval(interval);
+    };
+  }, [status, setHeartRate]);
+
   function handleStartAfterWarmup() {
     setWarmingUp(false);
     startWorkout('run', params.sessionId ?? null);
+    if (intervalSteps?.[0]) {
+      stepStartRef.current = { elapsedS: 0, distanceM: 0 };
+      ozzieSpeak(runCueForStep(intervalSteps[0], paceBands), 'workout').catch(() => undefined);
+    }
   }
 
   function toggleDrill(index: number) {
@@ -181,6 +275,9 @@ export default function RunWorkoutScreen() {
               key={drill.name}
               style={styles.warmupRow}
               onPress={() => toggleDrill(i)}
+              accessibilityRole="checkbox"
+              accessibilityLabel={`${drill.name}, ${drill.durationLabel}`}
+              accessibilityState={{ checked: checkedDrills.has(i) }}
             >
               <View style={[styles.checkbox, checkedDrills.has(i) && styles.checkboxChecked]}>
                 {checkedDrills.has(i) ? <Text style={styles.checkboxMark}>✓</Text> : null}
@@ -194,10 +291,16 @@ export default function RunWorkoutScreen() {
           <TouchableOpacity
             style={[styles.primaryBtn, { flex: undefined, marginTop: 8 }]}
             onPress={handleStartAfterWarmup}
+            accessibilityRole="button"
+            accessibilityLabel="Start run"
           >
             <Text style={styles.primaryBtnText}>Start Run →</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleStartAfterWarmup}>
+          <TouchableOpacity
+            onPress={handleStartAfterWarmup}
+            accessibilityRole="button"
+            accessibilityLabel="Skip warm-up"
+          >
             <Text style={styles.skipWarmupText}>Skip warm-up</Text>
           </TouchableOpacity>
         </View>
@@ -225,6 +328,18 @@ export default function RunWorkoutScreen() {
         <StatBlock label="HR" value={heartRate ? `${heartRate}` : '--'} />
       </View>
 
+      {intervalSteps ? (
+        <IntervalGuidanceCard
+          steps={intervalSteps}
+          stepIndex={stepIndex}
+          done={intervalsDone}
+          bands={paceBands}
+          elapsed={elapsed}
+          distanceMeters={distanceMeters}
+          stepStart={stepStartRef.current}
+        />
+      ) : null}
+
       {status === 'paused' ? (
         <View style={styles.pausedBanner}>
           <Text style={styles.pausedText}>Paused — Ozzie says take a breath, then resume when ready.</Text>
@@ -232,22 +347,44 @@ export default function RunWorkoutScreen() {
       ) : null}
 
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.ozzieBtn} onPress={handleOzzieCue}>
+        <TouchableOpacity
+          style={styles.ozzieBtn}
+          onPress={handleOzzieCue}
+          accessibilityRole="button"
+          accessibilityLabel="Get an Ozzie cue"
+        >
           <OzzieAvatar size={18} />
           <Text style={styles.ozzieBtnText}>Ozzie Cue</Text>
         </TouchableOpacity>
 
         <View style={styles.controlRow}>
           {status === 'paused' ? (
-            <TouchableOpacity style={styles.primaryBtn} onPress={resumeWorkout}>
+            <TouchableOpacity
+              style={styles.primaryBtn}
+              onPress={resumeWorkout}
+              accessibilityRole="button"
+              accessibilityLabel="Resume run"
+            >
               <Text style={styles.primaryBtnText}>▶ Resume</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity style={styles.secondaryBtn} onPress={pauseWorkout}>
+            <TouchableOpacity
+              style={styles.secondaryBtn}
+              onPress={pauseWorkout}
+              accessibilityRole="button"
+              accessibilityLabel="Pause run"
+            >
               <Text style={styles.secondaryBtnText}>⏸ Pause</Text>
             </TouchableOpacity>
           )}
-          <TouchableOpacity style={styles.endBtn} onPress={confirmEnd} disabled={saving}>
+          <TouchableOpacity
+            style={styles.endBtn}
+            onPress={confirmEnd}
+            disabled={saving}
+            accessibilityRole="button"
+            accessibilityLabel="End and save run"
+            accessibilityState={{ disabled: saving, busy: saving }}
+          >
             {saving ? (
               <ActivityIndicator color={Colors.red} />
             ) : (
@@ -257,6 +394,93 @@ export default function RunWorkoutScreen() {
         </View>
       </View>
     </SafeAreaView>
+  );
+}
+
+function IntervalGuidanceCard({
+  steps,
+  stepIndex,
+  done,
+  bands,
+  elapsed,
+  distanceMeters,
+  stepStart,
+}: {
+  steps: IntervalStep[];
+  stepIndex: number;
+  done: boolean;
+  bands: PaceBands | null;
+  elapsed: number;
+  distanceMeters: number;
+  stepStart: { elapsedS: number; distanceM: number };
+}) {
+  if (done) {
+    return (
+      <View style={styles.intervalCard}>
+        <Text style={styles.intervalHeader}>OZZIE'S INTERVALS</Text>
+        <Text style={styles.intervalLabel}>Intervals complete ✓ — cruise it home easy.</Text>
+      </View>
+    );
+  }
+
+  const step = steps[stepIndex];
+  const progress = computeStepProgress(
+    step,
+    stepStart.elapsedS,
+    stepStart.distanceM,
+    elapsed,
+    distanceMeters,
+  );
+
+  const remaining =
+    progress.remainingS != null
+      ? formatDuration(Math.ceil(progress.remainingS))
+      : progress.remainingM != null
+        ? `${Math.ceil(progress.remainingM)}m to go`
+        : '';
+
+  const band = step.phase === 'work' && bands ? bands[step.effort as keyof PaceBands] : null;
+  const paceStatus =
+    band && progress.stepPaceSecPerMile != null
+      ? paceStatusForBand(progress.stepPaceSecPerMile, band)
+      : null;
+  const statusColor =
+    paceStatus === 'in_band' ? Colors.green : paceStatus == null ? Colors.textMuted : Colors.amber;
+  const statusText =
+    paceStatus === 'in_band'
+      ? 'On target'
+      : paceStatus === 'too_fast'
+        ? 'Ease up'
+        : paceStatus === 'too_slow'
+          ? 'Pick it up'
+          : null;
+
+  return (
+    <View style={styles.intervalCard}>
+      <Text style={styles.intervalHeader}>
+        OZZIE'S INTERVALS · STEP {stepIndex + 1}/{steps.length}
+      </Text>
+      <View style={styles.intervalRow}>
+        <Text style={[styles.intervalLabel, step.phase === 'rest' && { color: Colors.gold }]}>
+          {step.phase === 'rest'
+            ? 'Rest'
+            : step.totalReps > 1
+              ? `${step.label} · rep ${step.repIndex}/${step.totalReps}`
+              : step.label}
+        </Text>
+        <Text style={styles.intervalRemaining}>{remaining}</Text>
+      </View>
+      {band ? (
+        <View style={styles.intervalRow}>
+          <Text style={styles.intervalTarget}>Target {formatPaceBand(band)}</Text>
+          {progress.stepPaceSecPerMile != null ? (
+            <Text style={[styles.intervalStatus, { color: statusColor }]}>
+              {formatPaceSecPerMile(progress.stepPaceSecPerMile)} /mi{statusText ? ` · ${statusText}` : ''}
+            </Text>
+          ) : null}
+        </View>
+      ) : null}
+    </View>
   );
 }
 
@@ -317,6 +541,31 @@ const styles = StyleSheet.create({
     borderColor: Colors.borderGold,
   },
   pausedText: { fontSize: 12, color: Colors.textSecondary, lineHeight: 18 },
+  intervalCard: {
+    marginHorizontal: 16,
+    marginBottom: 4,
+    backgroundColor: Colors.surfaceTeal,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderRadius: 12,
+    padding: 12,
+    gap: 6,
+  },
+  intervalHeader: {
+    fontSize: 9,
+    fontWeight: '700',
+    color: Colors.teal,
+    letterSpacing: 1,
+  },
+  intervalRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  intervalLabel: { fontSize: 15, fontWeight: '800', color: Colors.textPrimary, flexShrink: 1 },
+  intervalRemaining: { fontSize: 15, fontWeight: '800', color: Colors.teal },
+  intervalTarget: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
+  intervalStatus: { fontSize: 12, fontWeight: '700' },
   actions: { padding: 16, gap: 12 },
   ozzieBtn: {
     backgroundColor: Colors.surfaceTeal,

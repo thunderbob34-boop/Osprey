@@ -160,8 +160,15 @@ export default function SupplementsScreen() {
                       onValueChange={() => handleToggle(reminder)}
                       trackColor={{ true: Colors.teal, false: Colors.border }}
                       thumbColor="#fff"
+                      accessibilityRole="switch"
+                      accessibilityLabel={`${reminder.name} reminder`}
                     />
-                    <TouchableOpacity onPress={() => handleDelete(reminder)} hitSlop={10}>
+                    <TouchableOpacity
+                      onPress={() => handleDelete(reminder)}
+                      hitSlop={10}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Delete ${reminder.name} reminder`}
+                    >
                       <Text style={styles.delete}>🗑</Text>
                     </TouchableOpacity>
                   </View>
@@ -179,6 +186,7 @@ export default function SupplementsScreen() {
                     setName(v);
                     setNameError('');
                   }}
+                  accessibilityLabel="Supplement name"
                 />
                 <FieldError message={nameError} />
                 <TextInput
@@ -187,6 +195,7 @@ export default function SupplementsScreen() {
                   placeholderTextColor={Colors.textMuted}
                   value={dosage}
                   onChangeText={setDosage}
+                  accessibilityLabel="Dosage, optional"
                 />
 
                 <Text style={styles.fieldLabel}>TIME</Text>
@@ -196,6 +205,9 @@ export default function SupplementsScreen() {
                       key={h}
                       style={[styles.chip, hour === h && styles.chipActive]}
                       onPress={() => setHour(h)}
+                      accessibilityRole="button"
+                      accessibilityLabel={`${h % 12 === 0 ? 12 : h % 12} ${h >= 12 ? 'PM' : 'AM'}`}
+                      accessibilityState={{ selected: hour === h }}
                     >
                       <Text style={[styles.chipText, hour === h && styles.chipTextActive]}>
                         {h % 12 === 0 ? 12 : h % 12}
@@ -210,6 +222,9 @@ export default function SupplementsScreen() {
                       key={m}
                       style={[styles.chip, minute === m && styles.chipActive]}
                       onPress={() => setMinute(m)}
+                      accessibilityRole="button"
+                      accessibilityLabel={`${String(m).padStart(2, '0')} minutes`}
+                      accessibilityState={{ selected: minute === m }}
                     >
                       <Text style={[styles.chipText, minute === m && styles.chipTextActive]}>
                         :{String(m).padStart(2, '0')}
@@ -228,10 +243,19 @@ export default function SupplementsScreen() {
                     onValueChange={setTrainingDaysOnly}
                     trackColor={{ true: Colors.teal, false: Colors.border }}
                     thumbColor="#fff"
+                    accessibilityRole="switch"
+                    accessibilityLabel="Training days only"
                   />
                 </View>
 
-                <TouchableOpacity style={styles.addBtn} onPress={handleAdd} disabled={saving}>
+                <TouchableOpacity
+                  style={styles.addBtn}
+                  onPress={handleAdd}
+                  disabled={saving}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Add reminder, ${formatTime(hour, minute)}`}
+                  accessibilityState={{ disabled: saving, busy: saving }}
+                >
                   {saving ? (
                     <ActivityIndicator color="#000" />
                   ) : (

@@ -1,12 +1,22 @@
 import { format, startOfWeek, subWeeks } from 'date-fns';
 import { supabase } from '@/services/supabase';
-import type { RecentWorkoutRow, StatsData, WeeklyMileagePoint } from '@/types/stats';
+import type {
+  RecentWorkoutRow,
+  SportPeriodTotal,
+  SportType,
+  StatsData,
+  WeeklySportPoint,
+} from '@/types/stats';
 
 const MILES_PER_KM = 0.621371;
 const WEEKS_BACK = 6;
 
 function kmToMiles(km: number): number {
   return Math.round(km * MILES_PER_KM * 10) / 10;
+}
+
+function round1(n: number): number {
+  return Math.round(n * 10) / 10;
 }
 
 export async function fetchStats(userId: string): Promise<StatsData> {
@@ -36,27 +46,60 @@ export async function fetchStats(userId: string): Promise<StatsData> {
     last30d.reduce((sum, row) => sum + (row.total_duration_s ?? 0), 0) / 60,
   );
 
-  const weeklyBuckets = new Map<string, number>();
+  // ── Per-sport weekly volume (stacked hours by run/bike/swim/lift/cross/race) ──
+  const weeklySportBuckets = new Map<string, Partial<Record<SportType, { hours: number; km: number }>>>();
   for (let i = 0; i < WEEKS_BACK; i += 1) {
     const weekStart = startOfWeek(subWeeks(now, WEEKS_BACK - 1 - i), { weekStartsOn: 1 });
-    weeklyBuckets.set(weekStart.toISOString().slice(0, 10), 0);
+    weeklySportBuckets.set(weekStart.toISOString().slice(0, 10), {});
   }
 
   for (const row of rows) {
     const weekStart = startOfWeek(new Date(row.started_at), { weekStartsOn: 1 });
     const key = weekStart.toISOString().slice(0, 10);
-    if (weeklyBuckets.has(key)) {
-      weeklyBuckets.set(key, (weeklyBuckets.get(key) ?? 0) + (row.total_distance_km ?? 0));
-    }
+    const bucket = weeklySportBuckets.get(key);
+    if (!bucket) continue;
+
+    const sport = row.session_type as SportType;
+    const entry = bucket[sport] ?? { hours: 0, km: 0 };
+    entry.hours += (row.total_duration_s ?? 0) / 3600;
+    entry.km += row.total_distance_km ?? 0;
+    bucket[sport] = entry;
   }
 
-  const weeklyMileage: WeeklyMileagePoint[] = Array.from(weeklyBuckets.entries()).map(
-    ([weekStartIso, km]) => ({
-      weekStartIso,
-      label: format(new Date(weekStartIso), 'MMM d'),
-      miles: kmToMiles(km),
-    }),
+  const weeklySportVolume: WeeklySportPoint[] = Array.from(weeklySportBuckets.entries()).map(
+    ([weekStartIso, bucket]) => {
+      const hoursBySport: Partial<Record<SportType, number>> = {};
+      let totalHours = 0;
+      for (const [sport, v] of Object.entries(bucket) as Array<[SportType, { hours: number; km: number }]>) {
+        hoursBySport[sport] = round1(v.hours);
+        totalHours += v.hours;
+      }
+      return {
+        weekStartIso,
+        label: format(new Date(weekStartIso), 'MMM d'),
+        hoursBySport,
+        totalHours: round1(totalHours),
+      };
+    },
   );
+
+  // ── Per-sport totals across the same window, for the legend under the chart ──
+  const sportTotalsMap = new Map<SportType, { hours: number; km: number }>();
+  for (const row of rows) {
+    const sport = row.session_type as SportType;
+    const entry = sportTotalsMap.get(sport) ?? { hours: 0, km: 0 };
+    entry.hours += (row.total_duration_s ?? 0) / 3600;
+    entry.km += row.total_distance_km ?? 0;
+    sportTotalsMap.set(sport, entry);
+  }
+
+  const sportTotalsPeriod: SportPeriodTotal[] = Array.from(sportTotalsMap.entries())
+    .map(([sessionType, v]) => ({
+      sessionType,
+      hours: round1(v.hours),
+      miles: v.km > 0 ? kmToMiles(v.km) : null,
+    }))
+    .sort((a, b) => b.hours - a.hours);
 
   const recentWorkouts: RecentWorkoutRow[] = rows.slice(0, 10).map((row) => ({
     id: row.id,
@@ -70,7 +113,8 @@ export async function fetchStats(userId: string): Promise<StatsData> {
     totalWorkouts30d,
     totalMiles30d,
     totalMinutes30d,
-    weeklyMileage,
+    weeklySportVolume,
+    sportTotalsPeriod,
     recentWorkouts,
   };
 }

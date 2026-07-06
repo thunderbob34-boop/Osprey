@@ -83,15 +83,27 @@ export default function FoodScannerScreen() {
           <TouchableOpacity
             style={styles.primaryBtn}
             onPress={mustOpenSettings ? () => Linking.openSettings() : requestPermission}
+            accessibilityRole="button"
+            accessibilityLabel={mustOpenSettings ? 'Open Settings' : 'Allow camera access'}
           >
             <Text style={styles.primaryBtnText}>
               {mustOpenSettings ? 'Open Settings' : 'Allow Camera'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.linkBtn} onPress={goToManualLog}>
+          <TouchableOpacity
+            style={styles.linkBtn}
+            onPress={goToManualLog}
+            accessibilityRole="button"
+            accessibilityLabel="Log food manually instead"
+          >
             <Text style={styles.linkText}>Log food manually instead</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.linkBtn} onPress={() => router.back()}>
+          <TouchableOpacity
+            style={styles.linkBtn}
+            onPress={() => router.back()}
+            accessibilityRole="button"
+            accessibilityLabel="Cancel"
+          >
             <Text style={styles.linkText}>Cancel</Text>
           </TouchableOpacity>
         </View>
@@ -111,12 +123,20 @@ export default function FoodScannerScreen() {
         onBarcodeScanned={scanning ? (result) => handleScan(result.data) : undefined}
       />
       <View style={styles.overlay}>
-        <TouchableOpacity style={styles.closeBtn} onPress={() => router.back()}>
+        <TouchableOpacity
+          style={styles.closeBtn}
+          onPress={() => router.back()}
+          accessibilityRole="button"
+          accessibilityLabel="Cancel"
+        >
           <Text style={styles.closeBtnText}>Cancel</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.torchBtn, torchOn && styles.torchBtnOn]}
           onPress={() => setTorchOn((v) => !v)}
+          accessibilityRole="button"
+          accessibilityLabel={torchOn ? 'Turn off flashlight' : 'Turn on flashlight'}
+          accessibilityState={{ selected: torchOn }}
         >
           <Ionicons
             name={torchOn ? 'flashlight' : 'flashlight-outline'}
@@ -133,7 +153,12 @@ export default function FoodScannerScreen() {
         ) : error ? (
           <View style={styles.statusBox}>
             <Text style={styles.errorText}>{error}</Text>
-            <TouchableOpacity style={styles.manualBtn} onPress={goToManualLog}>
+            <TouchableOpacity
+              style={styles.manualBtn}
+              onPress={goToManualLog}
+              accessibilityRole="button"
+              accessibilityLabel="Log manually"
+            >
               <Text style={styles.manualBtnText}>Log manually</Text>
             </TouchableOpacity>
             <Text style={styles.hintSmall}>…or point the camera at another barcode</Text>

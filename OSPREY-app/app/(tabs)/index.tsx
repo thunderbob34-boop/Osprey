@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import DailySummaryScreen from '@/screens/DailySummary';
@@ -7,23 +8,44 @@ import WeatherCoachCard from '@/components/WeatherCoachCard';
 import HydrationCard from '@/components/HydrationCard';
 import { useDailySummary } from '@/hooks/useDailySummary';
 import { useWeatherCoach } from '@/hooks/useWeatherCoach';
+import { useSavedRoutes } from '@/hooks/useSavedRoutes';
 import { useHydration } from '@/hooks/useHydration';
 import { useFuelStatus } from '@/hooks/useFuelStatus';
 import { usePerformance } from '@/hooks/usePerformance';
 import { usePlanDeload } from '@/hooks/usePlanDeload';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useAuthStore } from '@/store/authStore';
+import { reconcileEveningBrief } from '@/services/evening-brief';
 import type { SessionData } from '@/types/daily-summary';
 import type { SwappableSessionType } from '@/services/plan';
 
 export default function HomeTab() {
   const router = useRouter();
+  const userId = useAuthStore((s) => s.user?.id);
   const { data, isLoading, isRefetching, error, refetch, swapSession, compressSession, moveIndoors } = useDailySummary();
   const { data: fuelStatus } = useFuelStatus();
   const { isPlus } = useSubscription();
   const { data: perf } = usePerformance();
   const { suggestion: deloadSuggestion, isAccepting: isDeloadAccepting, accept: acceptDeload, dismiss: dismissDeload } = usePlanDeload();
-  const { data: weatherCoach } = useWeatherCoach(data?.session?.sessionType ?? null);
+  const { data: savedRoutes } = useSavedRoutes();
+  const { data: weatherCoach } = useWeatherCoach(data?.session?.sessionType ?? null, savedRoutes);
   const { data: hydration, add: addHydration } = useHydration();
+
+  // Reconcile tonight's evening look-ahead notification whenever tomorrow's
+  // forecast actually changes — no-ops instantly if the user hasn't opted
+  // in. Depends on the primitive values (not the `weatherCoach` object,
+  // which react-query gives a new identity on every refetch) so this
+  // doesn't re-run and re-schedule on every window-focus refetch.
+  const tomorrowMaxF = weatherCoach?.tomorrow?.maxF;
+  const tomorrowPrecip = weatherCoach?.tomorrow?.precipProbabilityMax;
+  useEffect(() => {
+    if (!userId) return;
+    const tomorrowWeather =
+      tomorrowMaxF != null && tomorrowPrecip != null
+        ? { maxF: tomorrowMaxF, precipProbabilityMax: tomorrowPrecip }
+        : null;
+    reconcileEveningBrief(userId, tomorrowWeather).catch(() => undefined);
+  }, [userId, tomorrowMaxF, tomorrowPrecip]);
 
   function handleStartSession(session: SessionData) {
     const sessionId = session.sessionId ?? undefined;

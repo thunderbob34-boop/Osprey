@@ -123,6 +123,38 @@ async function detectSetPr(
   return weightKg * reps > best;
 }
 
+/**
+ * Records a PR into coach_memory so the daily brief can reference it weeks
+ * later. Deduped per (workout, exercise) at the DB level, so re-viewing the
+ * recap never creates a duplicate or overwrites the original occurred_on
+ * date. Best-effort — a failure here should never break the recap.
+ */
+async function recordPrMemory(
+  userId: string,
+  workoutId: string,
+  exerciseId: string,
+  exerciseName: string,
+  weightLbs: number,
+  reps: number,
+): Promise<void> {
+  try {
+    const { error } = await supabase.from('coach_memory').upsert(
+      {
+        user_id: userId,
+        event_type: 'pr',
+        workout_id: workoutId,
+        exercise_id: exerciseId,
+        summary: `New PR on ${exerciseName} — ${weightLbs} lbs × ${reps} reps.`,
+        metadata: { exerciseName, weightLbs, reps },
+      },
+      { onConflict: 'user_id,event_type,workout_id,exercise_id', ignoreDuplicates: true },
+    );
+    if (error) console.error('[coach-memory] PR record failed', error);
+  } catch {
+    // Best-effort — never let a memory-write failure surface to the user.
+  }
+}
+
 export async function saveRunWorkout(params: {
   userId: string;
   sessionId?: string | null;
@@ -292,12 +324,21 @@ export async function fetchWorkoutRecap(
 ): Promise<WorkoutRecapData> {
   const { data: workout, error } = await supabase
     .from('workout_logs')
-    .select('id, session_type, total_distance_km, total_duration_s, started_at, notes')
+    .select('id, session_type, total_distance_km, total_duration_s, started_at, notes, training_sessions(description, ozzie_notes)')
     .eq('id', workoutId)
     .eq('user_id', userId)
     .single();
 
   if (error || !workout) throw error ?? new Error('Workout not found');
+
+  // PostgREST's embed shape for a to-one FK isn't always inferred as a plain
+  // object by supabase-js's types — defend against either shape (same
+  // pattern used in fetchLastSetsForExercises for workout_logs embeds).
+  const rawPlannedSession = workout.training_sessions as unknown as
+    | { description: string | null; ozzie_notes: string | null }
+    | { description: string | null; ozzie_notes: string | null }[]
+    | null;
+  const plannedSession = Array.isArray(rawPlannedSession) ? rawPlannedSession[0] ?? null : rawPlannedSession;
 
   const { data: trackPoints } = await supabase
     .from('activity_logs')
@@ -372,6 +413,9 @@ export async function fetchWorkoutRecap(
           )
         : false;
       if (isPr) hasPr = true;
+      if (isPr && topSet) {
+        recordPrMemory(userId, workoutId, exerciseId, value.name, topSet.weightLbs, topSet.reps);
+      }
       return { name: value.name, sets: value.sets, volumeLbs, isPr };
     }),
   );
@@ -381,6 +425,13 @@ export async function fetchWorkoutRecap(
     ozzieDebrief = hasPr
       ? `Huge session — ${totalVolume.toLocaleString()} lbs of volume and a new PR. That's the work.`
       : `Strong lift — ${totalVolume.toLocaleString()} lbs total volume. Consistency builds champions.`;
+  }
+
+  // Reference the plan's own stated intent for this session ("why this is in
+  // the plan," written when the week was generated) so the debrief ties the
+  // just-finished effort back to the bigger picture, not just today's stats.
+  if (plannedSession?.ozzie_notes) {
+    ozzieDebrief = `${ozzieDebrief} ${plannedSession.ozzie_notes}`;
   }
 
   return {
@@ -529,4 +580,34 @@ export async function fetchLastSetsForExercises(
     };
   }
   return lastByExercise;
+}
+
+/**
+ * Historical best single-set volume score (weightLbs × reps) per exercise,
+ * used for live PR detection mid-session. Same scoring as detectSetPr, so a
+ * mid-session celebration always matches the recap's PR flag. Exercises with
+ * no history are absent from the result.
+ */
+export async function fetchBestSetScores(
+  userId: string,
+  exerciseIds: string[],
+): Promise<Record<string, number>> {
+  if (exerciseIds.length === 0) return {};
+
+  const { data, error } = await supabase
+    .from('exercise_sets')
+    .select('exercise_id, reps, weight_kg, workout_logs!inner(user_id, deleted_at)')
+    .in('exercise_id', exerciseIds)
+    .eq('workout_logs.user_id', userId)
+    .is('workout_logs.deleted_at', null);
+
+  if (error) throw error;
+
+  const best: Record<string, number> = {};
+  for (const row of data ?? []) {
+    const exerciseId = row.exercise_id as string;
+    const scoreLbs = ((row.weight_kg as number | null) ?? 0) / LBS_TO_KG * ((row.reps as number | null) ?? 0);
+    if (scoreLbs > (best[exerciseId] ?? 0)) best[exerciseId] = scoreLbs;
+  }
+  return best;
 }

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSPREY — Onboarding Flow Preview</title>
+<style>
+  :root {
+    --teal: #00c8c8;
+    --teal-dim: rgba(0,200,200,0.12);
+    --gold: #c89a00;
+    --bg: #060912;
+    --bg-card: rgba(255,255,255,0.04);
+    --bg-card-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --border-teal: rgba(0,200,200,0.2);
+    --text: #ffffff;
+    --text-2: rgba(255,255,255,0.65);
+    --text-3: rgba(255,255,255,0.45);
+    --green: #4cde80;
+    --amber: #f5a623;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #02040a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 12px 48px;
+    min-height: 100vh;
+  }
+  h1.pagehead { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  p.pagesub { font-size: 12px; color: var(--text-3); margin-bottom: 20px; text-align: center; max-width: 420px; }
+
+  .phone {
+    width: 390px;
+    max-width: 100%;
+    height: 780px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 36px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    position: relative;
+  }
+
+  .progress-wrap { padding: 22px 20px 0; }
+  .progress-track { height: 4px; background: var(--bg-card); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--teal); border-radius: 2px; transition: width .35s ease; }
+  .progress-label { font-size: 10px; color: var(--text-3); margin-top: 6px; letter-spacing: .5px; }
+
+  .screen { flex: 1; overflow-y: auto; padding: 16px 20px 110px; }
+  .ozzie-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .ozzie-dot {
+    width: 28px; height: 28px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--teal), #1B3A5C);
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+  }
+  .ozzie-name { font-size: 12px; font-weight: 700; color: var(--teal); }
+
+  .title { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 6px; }
+  .hint { font-size: 13px; color: var(--text-2); line-height: 1.45; margin-bottom: 18px; }
+
+  .sport-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sport-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all .15s ease;
+  }
+  .sport-card:hover { background: var(--bg-card-hover); }
+  .sport-card.sel { background: var(--teal-dim); border-color: var(--border-teal); }
+  .sport-card .ic { font-size: 26px; display: block; margin-bottom: 6px; }
+  .sport-card .nm { font-size: 13px; font-weight: 700; }
+  .sport-card.sel .nm { color: var(--teal); }
+
+  .opt-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all .15s ease;
+  }
+  .opt-card:hover { background: var(--bg-card-hover); }
+  .opt-card.sel { background: var(--teal-dim); border-color: var(--border-teal); }
+  .opt-card .ic { font-size: 22px; }
+  .opt-card .tt { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+  .opt-card.sel .tt { color: var(--teal); }
+  .opt-card .dd { font-size: 12px; color: var(--text-2); line-height: 1.4; }
+  .opt-card .skipnote { display:inline-block; margin-top:6px; font-size:10px; color: var(--gold); background: rgba(200,154,0,0.12); border-radius: 6px; padding: 2px 8px; font-weight: 700; letter-spacing: .4px; }
+
+  .seg {
+    display: flex; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; margin-bottom: 16px;
+  }
+  .seg button {
+    flex: 1; padding: 10px; background: none; border: none; color: var(--text-3);
+    font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit;
+  }
+  .seg button.on { background: var(--teal-dim); color: var(--teal); }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .8px; color: var(--text-3); margin-bottom: 6px; text-transform: uppercase; }
+  .field input {
+    width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 13px 14px; color: var(--text); font-size: 15px; font-family: inherit;
+  }
+  .field input:focus { outline: none; border-color: var(--border-teal); }
+  .field input::placeholder { color: var(--text-3); }
+  .lookup-btn {
+    width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 13px 14px; color: var(--text-3); font-size: 15px;
+    text-align: left; cursor: pointer; font-family: inherit;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .lookup-btn.has-value { color: var(--text); border-color: var(--border-teal); }
+  .lookup-btn .chev { color: var(--text-3); font-size: 12px; }
+
+  .note-card {
+    background: rgba(0,200,200,0.06); border: 1px solid var(--border-teal);
+    border-radius: 14px; padding: 16px; font-size: 13px; color: var(--text-2); line-height: 1.5;
+  }
+  .note-card b { color: var(--teal); }
+
+  .ultra-box {
+    margin-top: 18px; border-top: 1px dashed var(--border); padding-top: 16px;
+  }
+  .ultra-box .ub-head { font-size: 11px; font-weight: 800; letter-spacing: 1px; color: var(--amber); margin-bottom: 12px; }
+
+  .footer {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 14px 20px 26px;
+    background: linear-gradient(transparent, var(--bg) 35%);
+    display: flex; gap: 10px;
+  }
+  .btn-back {
+    background: var(--bg-card); border: 1px solid var(--border); color: var(--text-2);
+    border-radius: 14px; padding: 15px 18px; font-size: 15px; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+  }
+  .btn-primary {
+    flex: 1; background: var(--teal); border: none; color: #04252a;
+    border-radius: 14px; padding: 15px; font-size: 15px; font-weight: 800;
+    cursor: pointer; font-family: inherit; transition: opacity .15s;
+  }
+  .btn-primary:disabled { opacity: .35; cursor: not-allowed; }
+
+  /* Event lookup modal */
+  .modal-veil {
+    position: absolute; inset: 0; background: rgba(2,4,10,0.75);
+    display: none; align-items: flex-end; z-index: 20; backdrop-filter: blur(2px);
+  }
+  .modal-veil.open { display: flex; }
+  .modal {
+    width: 100%; max-height: 78%; background: #0a0f1c;
+    border: 1px solid var(--border); border-bottom: none;
+    border-radius: 24px 24px 0 0; padding: 18px 20px 26px;
+    display: flex; flex-direction: column;
+  }
+  .modal .m-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; }
+  .modal input.search {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 14px; color: var(--text); font-size: 14px; font-family: inherit; margin-bottom: 12px;
+  }
+  .modal input.search:focus { outline: none; border-color: var(--border-teal); }
+  .m-list { overflow-y: auto; flex: 1; }
+  .m-item {
+    padding: 13px 10px; border-bottom: 1px solid var(--border); cursor: pointer;
+    font-size: 14px; display: flex; justify-content: space-between; align-items: center;
+    border-radius: 8px;
+  }
+  .m-item:hover { background: var(--bg-card-hover); }
+  .m-item .cat { font-size: 10px; color: var(--text-3); letter-spacing: .5px; text-transform: uppercase; }
+
+  /* End screen */
+  .end-icon { font-size: 44px; text-align: center; margin: 40px 0 14px; }
+  .dev-panel {
+    margin-top: 22px; background: rgba(200,154,0,0.07); border: 1px solid rgba(200,154,0,0.25);
+    border-radius: 14px; padding: 14px;
+  }
+  .dev-panel .dp-head { font-size: 10px; font-weight: 800; letter-spacing: 1px; color: var(--gold); margin-bottom: 8px; }
+  .dev-panel pre { font-size: 11px; color: var(--text-2); white-space: pre-wrap; word-break: break-all; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; line-height: 1.55; }
+  .dev-panel .dp-note { font-size: 10px; color: var(--text-3); margin-top: 8px; font-style: italic; }
+
+  .flow-legend { margin-top: 22px; max-width: 390px; width: 100%; }
+  .flow-legend h3 { font-size: 12px; letter-spacing: 1px; color: var(--text-3); text-transform: uppercase; margin-bottom: 10px; }
+  .flow-legend pre { font-size: 11px; color: var(--text-2); background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; line-height: 1.7; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+</style>
+</head>
+<body>
+
+<h1 class="pagehead">OSPREY — New Onboarding Flow (Spec Preview)</h1>
+<p class="pagesub">Interactive prototype of OSPREY_onboarding_spec.md. Click through it like the real app. The gold panel at the end shows the internal payload — including the silently computed tier that is never shown to the user.</p>
+
+<div class="phone">
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="prog" style="width:33%"></div></div>
+    <div class="progress-label" id="progLabel">Step 1 of 3</div>
+  </div>
+  <div class="screen" id="screen"></div>
+  <div class="footer">
+    <button class="btn-back" id="backBtn" onclick="goBack()" style="display:none">←</button>
+    <button class="btn-primary" id="nextBtn" onclick="goNext()" disabled>Continue →</button>
+  </div>
+
+  <div class="modal-veil" id="veil" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="m-title">Find your event</div>
+      <input class="search" id="mSearch" placeholder="Search races, distances, lifts…" oninput="renderLookup()">
+      <div class="m-list" id="mList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="flow-legend">
+  <h3>Flow logic under test</h3>
+  <pre>Page 1 (Sport Focus — 10 sports)
+   ↓
+Page 2 (Training Focus)
+   ├─ PR for an event ────→ Page 3 (Event = searchable lookup)
+   ├─ Improve performance → Page 3 (Event = free text)
+   ├─ Fat loss ───────────→ skip Page 3
+   └─ Learn the basics ───→ skip Page 3
+   ↓
+(existing steps: HealthKit → done)</pre>
+</div>
+
+<script>
+const SPORTS = [
+  { id: 'running',      ic: '🏃', nm: 'Running' },
+  { id: 'cycling',      ic: '🚴', nm: 'Cycling' },
+  { id: 'swimming',     ic: '🏊', nm: 'Swimming' },
+  { id: 'triathlon',    ic: '🏅', nm: 'Triathlon' },
+  { id: 'hybrid',       ic: '⚡', nm: 'Hybrid' },
+  { id: 'crossfit',     ic: '🤸', nm: 'CrossFit' },
+  { id: 'hyrox',        ic: '🛷', nm: 'Hyrox' },
+  { id: 'rowing',       ic: '🚣', nm: 'Rowing' },
+  { id: 'powerlifting', ic: '🏋️', nm: 'Powerlifting' },
+  { id: 'ultra',        ic: '⛰️', nm: 'Ultra-Distance' },
+];
+
+const FOCUSES = [
+  { id: 'pr_event',    ic: '🎯', tt: 'PR for an event',     dd: 'You have a specific race or lift on the calendar and a number to beat.', page3: true },
+  { id: 'performance', ic: '📈', tt: 'Improve performance', dd: 'Get faster, stronger, fitter — no specific event locked in yet.', page3: true },
+  { id: 'fat_loss',    ic: '⚖️', tt: 'Fat loss',            dd: 'Train with purpose while dropping body fat.', page3: false },
+  { id: 'basics',      ic: '🌱', tt: 'Learn the basics',    dd: 'New to this sport — build technique and consistency first.', page3: false },
+];
+
+const EVENT_CATALOG = {
+  running:      [['5K','Road'],['10K','Road'],['Half Marathon','Road'],['Marathon','Road'],['1 Mile','Track']],
+  cycling:      [['Criterium','Race'],['40k Time Trial','Race'],['Gran Fondo','Endurance'],['Century (100mi)','Endurance']],
+  swimming:     [['50 Free','Pool'],['100 Free','Pool'],['200 Free','Pool'],['500 Free','Pool'],['1650 Free','Pool'],['200 IM','Pool'],['400 IM','Pool']],
+  triathlon:    [['Sprint Tri','Multi'],['Olympic Tri','Multi'],['70.3','Multi'],['Ironman','Multi']],
+  hybrid:       [['5K','Run'],['Half Marathon','Run'],['Back Squat 1RM','Lift'],['Deadlift 1RM','Lift'],['Hyrox Open','Race']],
+  crossfit:     [['CrossFit Open','Season'],['Fran','Benchmark'],['Murph','Benchmark'],['Grace','Benchmark'],['Total (S/P/D)','Lift']],
+  hyrox:        [['Hyrox Open','Race'],['Hyrox Pro','Race'],['Hyrox Doubles','Race'],['Hyrox Relay','Race']],
+  rowing:       [['2k Erg','Erg'],['5k Erg','Erg'],['6k Erg','Erg'],['Head Race (4–6k)','Water'],['1k Masters Sprint','Water']],
+  powerlifting: [['Back Squat 1RM','Lift'],['Bench Press 1RM','Lift'],['Deadlift 1RM','Lift'],['3-Lift Total','Meet'],['First Meet','Meet']],
+  ultra:        [['50k','Trail'],['50 Mile','Trail'],['100k','Trail'],['100 Mile','Trail'],['Backyard Ultra','Last-one-standing']],
+};
+
+const LIFT_EVENTS = new Set(['Back Squat 1RM','Bench Press 1RM','Deadlift 1RM','3-Lift Total','Total (S/P/D)']);
+
+const state = {
+  page: 1,
+  sport: null,
+  focus: null,
+  hasPR: true,
+  event: '',
+  pr: '',
+  goal: '',
+  ultraLongest: '',
+  ultraHardDays: '',
+};
+const history = [];
+
+function needsPage3() {
+  const f = FOCUSES.find(x => x.id === state.focus);
+  return !!(f && f.page3);
+}
+
+function setNext(enabled, label) {
+  const b = document.getElementById('nextBtn');
+  b.disabled = !enabled;
+  b.textContent = label || 'Continue →';
+}
+
+function render() {
+  const s = document.getElementById('screen');
+  const totalSteps = needsPage3() || state.page <= 2 ? 3 : 2;
+  const shownStep = Math.min(state.page, 3);
+  document.getElementById('prog').style.width = (state.page >= 4 ? 100 : (shownStep / 3) * 100) + '%';
+  document.getElementById('progLabel').textContent = state.page >= 4 ? 'Onboarding complete' : `Step ${shownStep} of 3`;
+  document.getElementById('backBtn').style.display = history.length ? 'block' : 'none';
+
+  if (state.page === 1) {
+    s.innerHTML = ozzie() + `
+      <div class="title">What are you training for?</div>
+      <div class="hint">Pick your sport. Everything downstream — plan, zones, fueling — is built for it specifically.</div>
+      <div class="sport-grid">` +
+      SPORTS.map(sp => `
+        <div class="sport-card ${state.sport===sp.id?'sel':''}" onclick="pick('sport','${sp.id}')">
+          <span class="ic">${sp.ic}</span><span class="nm">${sp.nm}</span>
+        </div>`).join('') + `</div>`;
+    setNext(!!state.sport);
+  }
+
+  if (state.page === 2) {
+    s.innerHTML = ozzie() + `
+      <div class="title">What's the mission?</div>
+      <div class="hint">This decides what I ask you next.</div>` +
+      FOCUSES.map(f => `
+        <div class="opt-card ${state.focus===f.id?'sel':''}" onclick="pick('focus','${f.id}')">
+          <span class="ic">${f.ic}</span>
+          <div>
+            <div class="tt">${f.tt}</div>
+            <div class="dd">${f.dd}</div>
+            ${!f.page3 ? '<span class="skipnote">SKIPS LEVEL PAGE</span>' : ''}
+          </div>
+        </div>`).join('');
+    setNext(!!state.focus);
+  }
+
+  if (state.page === 3) {
+    const isPR = state.focus === 'pr_event';
+    const isLift = LIFT_EVENTS.has(state.event);
+    const prPlaceholder = isLift ? 'e.g. 405 lb / 184 kg' : 'e.g. 3:28:15';
+    let inner = `
+      <div class="seg">
+        <button class="${state.hasPR?'on':''}" onclick="setHasPR(true)">I have a recent result</button>
+        <button class="${!state.hasPR?'on':''}" onclick="setHasPR(false)">No current data</button>
+      </div>`;
+
+    if (!state.hasPR) {
+      inner += `
+        <div class="note-card">
+          <b>No numbers? No problem.</b><br>
+          I'll build your baseline from your first two weeks of training — every session teaches me your real level. No labels, no tests, just data.
+        </div>`;
+    } else {
+      inner += `
+        <div class="field">
+          <label>Event</label>
+          ${isPR
+            ? `<button class="lookup-btn ${state.event?'has-value':''}" onclick="openModal()">
+                 <span>${state.event || 'Search races, distances, lifts…'}</span><span class="chev">▼</span>
+               </button>`
+            : `<input placeholder="e.g. local 10k, spring crit…" value="${esc(state.event)}" oninput="typeVal('event', this.value)">`}
+        </div>
+        <div class="field">
+          <label>Current PR / time</label>
+          <input placeholder="${prPlaceholder}" value="${esc(state.pr)}" oninput="typeVal('pr', this.value)">
+        </div>
+        <div class="field">
+          <label>Goal to beat</label>
+          <input placeholder="${isLift ? 'e.g. 425 lb / 193 kg' : 'e.g. 3:19:59'}" value="${esc(state.goal)}" oninput="typeVal('goal', this.value)">
+        </div>`;
+    }
+
+    if (state.sport === 'ultra') {
+      inner += `
+        <div class="ultra-box">
+          <div class="ub-head">ULTRA-DISTANCE SPECIFICS</div>
+          <div class="field">
+            <label>Longest recent race — distance + time</label>
+            <input placeholder="e.g. 50k in 6:45" value="${esc(state.ultraLongest)}" oninput="typeVal('ultraLongest', this.value)">
+          </div>
+          <div class="field">
+            <label>Consecutive hard days you can tolerate</label>
+            <input type="number" min="1" max="7" placeholder="e.g. 2" value="${esc(state.ultraHardDays)}" oninput="typeVal('ultraHardDays', this.value)">
+          </div>
+          <div class="note-card" style="font-size:12px">
+            Long-run progression will start at <b>10 mi</b> and peak at <b>20 mi+</b>, scaled to your race.
+          </div>
+        </div>`;
+    }
+
+    s.innerHTML = ozzie() + `
+      <div class="title">Where are you now?</div>
+      <div class="hint">${isPR ? 'Pick your event and tell me the number to beat.' : 'Tell me what you are working with — rough numbers are fine.'}</div>` + inner;
+
+    const ready = !state.hasPR || (state.event && state.pr);
+    setNext(!!ready);
+  }
+
+  if (state.page === 4) {
+    const skipped = !needsPage3();
+    s.innerHTML = `
+      <div class="end-icon">🦅</div>
+      <div class="title" style="text-align:center">Locked in.</div>
+      <div class="hint" style="text-align:center">
+        ${skipped
+          ? 'Level page skipped — straight through, no dead space. Next: HealthKit connect (existing step).'
+          : 'Next: HealthKit connect (existing step), then Ozzie builds your plan.'}
+      </div>
+      <div class="dev-panel">
+        <div class="dp-head">DEV ONLY — PAYLOAD SENT TO PLAN ENGINE</div>
+        <pre>${esc(JSON.stringify(buildPayload(), null, 2))}</pre>
+        <div class="dp-note">internal_tier is computed silently and never rendered anywhere in the UI — per spec.</div>
+      </div>`;
+    setNext(true, 'Restart prototype ↺');
+  }
+}
+
+function buildPayload() {
+  return {
+    sport: state.sport,
+    training_focus: state.focus,
+    event: needsPage3() && state.hasPR ? state.event || null : null,
+    current_pr: needsPage3() && state.hasPR ? state.pr || null : null,
+    goal: needsPage3() && state.hasPR ? state.goal || null : null,
+    ultra: state.sport === 'ultra' ? {
+      longest_recent: state.ultraLongest || null,
+      hard_days_tolerance: state.ultraHardDays ? Number(state.ultraHardDays) : null,
+      long_run_start_mi: 10, long_run_peak_mi: 20,
+    } : undefined,
+    internal_tier: computeTier(),
+  };
+}
+
+// Naive illustration of the silent tier calc — the real one lives server/plan-side.
+function computeTier() {
+  if (!needsPage3() || !state.hasPR || !state.pr) return 'baseline_from_first_2_weeks';
+  return 'computed_from_pr (hidden from user)';
+}
+
+function ozzie() {
+  return `<div class="ozzie-row"><div class="ozzie-dot">🦅</div><span class="ozzie-name">Ozzie</span></div>`;
+}
+
+function esc(x) {
+  return String(x ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function pick(key, val) {
+  state[key] = val;
+  if (key === 'sport') { state.event = ''; state.pr = ''; state.goal = ''; }
+  render();
+}
+function typeVal(key, val) {
+  state[key] = val;
+  // avoid full re-render on each keystroke (keeps input focus); just refresh button state
+  const ready = !state.hasPR || (state.event && state.pr);
+  if (state.page === 3) document.getElementById('nextBtn').disabled = !ready;
+}
+function setHasPR(v) { state.hasPR = v; render(); }
+
+function goNext() {
+  if (state.page === 4) {
+    history.length = 0;
+    Object.assign(state, { page: 1, sport: null, focus: null, hasPR: true, event: '', pr: '', goal: '', ultraLongest: '', ultraHardDays: '' });
+    render();
+    return;
+  }
+  history.push(state.page);
+  if (state.page === 1) state.page = 2;
+  else if (state.page === 2) state.page = needsPage3() ? 3 : 4;
+  else if (state.page === 3) state.page = 4;
+  render();
+}
+function goBack() {
+  if (!history.length) return;
+  state.page = history.pop();
+  render();
+}
+
+function openModal() {
+  document.getElementById('veil').classList.add('open');
+  document.getElementById('mSearch').value = '';
+  renderLookup();
+  document.getElementById('mSearch').focus();
+}
+function closeModal() { document.getElementById('veil').classList.remove('open'); }
+function renderLookup() {
+  const q = document.getElementById('mSearch').value.toLowerCase();
+  const items = (EVENT_CATALOG[state.sport] || []).filter(([nm]) => nm.toLowerCase().includes(q));
+  document.getElementById('mList').innerHTML = items.length
+    ? items.map(([nm, cat]) =>
+        `<div class="m-item" onclick="chooseEvent('${esc(nm).replace(/'/g,"\\'")}')"><span>${esc(nm)}</span><span class="cat">${esc(cat)}</span></div>`).join('')
+    : `<div style="padding:20px;text-align:center;color:var(--text-3);font-size:13px">No matches</div>`;
+}
+function chooseEvent(nm) {
+  state.event = nm;
+  closeModal();
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

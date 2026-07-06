@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Alert,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -12,11 +13,13 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { useStats } from '@/hooks/useStats';
+import { useDeleteWorkoutLog } from '@/hooks/useTodayLog';
 import { usePerformance } from '@/hooks/usePerformance';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useLiftAnalytics } from '@/hooks/useLiftAnalytics';
 import { formatRaceTimeSec } from '@/services/performance';
 import { kgToLb } from '@/services/body-metrics';
+import type { SportType } from '@/types/stats';
 
 const SESSION_ICON: Record<string, string> = {
   run:   '🏃',
@@ -25,6 +28,27 @@ const SESSION_ICON: Record<string, string> = {
   bike:  '🚴',
   cross: '🔁',
   race:  '🏁',
+};
+
+// Fixed stacking order (bottom to top) + color per sport for the per-sport
+// volume chart. Bike blue is derived from the existing borderBlue/surfaceBlue
+// hue since the design system doesn't have a standalone solid blue token.
+const SPORT_ORDER: SportType[] = ['run', 'bike', 'swim', 'lift', 'cross', 'race'];
+const SPORT_COLOR: Record<SportType, string> = {
+  run: Colors.teal,
+  bike: '#3388dd',
+  swim: Colors.green,
+  lift: Colors.gold,
+  cross: Colors.pink,
+  race: Colors.amber,
+};
+const SPORT_LABEL: Record<SportType, string> = {
+  run: 'Run',
+  bike: 'Bike',
+  swim: 'Swim',
+  lift: 'Lift',
+  cross: 'Cross',
+  race: 'Race',
 };
 
 function formatSessionType(type: string): string {
@@ -114,6 +138,38 @@ function E1rmChart({ points }: { points: number[] }) {
   );
 }
 
+// ── Per-sport weekly volume (stacked bars) ────────────────────────────────────
+
+function SportVolumeChart({
+  weeks,
+}: {
+  weeks: Array<{ weekStartIso: string; label: string; totalHours: number; hoursBySport: Partial<Record<SportType, number>> }>;
+}) {
+  const maxHours = Math.max(1, ...weeks.map((w) => w.totalHours));
+
+  return (
+    <View style={styles.chartBars}>
+      {weeks.map((week) => (
+        <View key={week.weekStartIso} style={styles.barColumn}>
+          <Text style={styles.barValue}>{week.totalHours > 0 ? `${week.totalHours}h` : ''}</Text>
+          <View style={[styles.barTrack, styles.stackedBarTrack]}>
+            {SPORT_ORDER.filter((sport) => (week.hoursBySport[sport] ?? 0) > 0).map((sport) => (
+              <View
+                key={sport}
+                style={{ flex: week.hoursBySport[sport] ?? 0, backgroundColor: SPORT_COLOR[sport] }}
+              />
+            ))}
+            {/* Spacer last so, in a column-reverse track, it lands at the top —
+                representing headroom up to the tallest week in the window. */}
+            <View style={{ flex: Math.max(0, maxHours - week.totalHours) }} />
+          </View>
+          <Text style={styles.barLabel}>{week.label}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
 // ── Main screen ───────────────────────────────────────────────────────────────
 
 export default function StatsTab() {
@@ -122,8 +178,22 @@ export default function StatsTab() {
   const { isPlus } = useSubscription();
   const { data: perf, isLoading: perfLoading } = usePerformance();
   const { data: liftStats } = useLiftAnalytics();
+  const deleteWorkoutLog = useDeleteWorkoutLog();
 
-  const maxMiles = Math.max(1, ...(data?.weeklyMileage.map((w) => w.miles) ?? [1]));
+  function handleDeleteWorkout(id: string, label: string) {
+    Alert.alert(`Delete ${label}?`, 'This will remove it from your history.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: () =>
+          deleteWorkoutLog.mutate(id, {
+            onError: (err) =>
+              Alert.alert('Delete failed', err instanceof Error ? err.message : 'Try again.'),
+          }),
+      },
+    ]);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -132,17 +202,41 @@ export default function StatsTab() {
         <Text style={styles.subtitle}>Training trends and progress at a glance.</Text>
 
         <View style={styles.navChipRow}>
-          <TouchableOpacity style={styles.navChip} onPress={() => router.push('/races')}>
+          <TouchableOpacity
+            style={styles.navChip}
+            onPress={() => router.push('/races')}
+            accessibilityRole="button"
+            accessibilityLabel="Races"
+          >
             <Ionicons name="flag-outline" size={14} color={Colors.teal} />
             <Text style={styles.navChipText}>Races</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navChip} onPress={() => router.push('/challenges')}>
+          <TouchableOpacity
+            style={styles.navChip}
+            onPress={() => router.push('/challenges')}
+            accessibilityRole="button"
+            accessibilityLabel="Challenges"
+          >
             <Ionicons name="trophy-outline" size={14} color={Colors.teal} />
             <Text style={styles.navChipText}>Challenges</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navChip} onPress={() => router.push('/calendar')}>
+          <TouchableOpacity
+            style={styles.navChip}
+            onPress={() => router.push('/calendar')}
+            accessibilityRole="button"
+            accessibilityLabel="Calendar"
+          >
             <Ionicons name="calendar-outline" size={14} color={Colors.teal} />
             <Text style={styles.navChipText}>Calendar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.navChip}
+            onPress={() => router.push('/routes')}
+            accessibilityRole="button"
+            accessibilityLabel="Routes"
+          >
+            <Ionicons name="map-outline" size={14} color={Colors.teal} />
+            <Text style={styles.navChipText}>Routes</Text>
           </TouchableOpacity>
         </View>
 
@@ -163,23 +257,23 @@ export default function StatsTab() {
             </View>
 
             <View style={styles.chartCard}>
-              <Text style={styles.heroLabel}>WEEKLY MILEAGE</Text>
-              <View style={styles.chartBars}>
-                {data?.weeklyMileage.map((week) => (
-                  <View key={week.weekStartIso} style={styles.barColumn}>
-                    <Text style={styles.barValue}>{week.miles > 0 ? week.miles : ''}</Text>
-                    <View style={styles.barTrack}>
+              <Text style={styles.heroLabel}>WEEKLY TRAINING VOLUME</Text>
+              {data ? <SportVolumeChart weeks={data.weeklySportVolume} /> : null}
+              {data && data.sportTotalsPeriod.length > 0 ? (
+                <View style={styles.sportLegend}>
+                  {data.sportTotalsPeriod.map((total) => (
+                    <View key={total.sessionType} style={styles.sportLegendItem}>
                       <View
-                        style={[
-                          styles.barFill,
-                          { height: `${Math.max(4, (week.miles / maxMiles) * 100)}%` },
-                        ]}
+                        style={[styles.legendDot, { backgroundColor: SPORT_COLOR[total.sessionType] }]}
                       />
+                      <Text style={styles.sportLegendText}>
+                        {SPORT_LABEL[total.sessionType]} · {total.hours}h
+                        {total.miles != null ? ` · ${total.miles} mi` : ''}
+                      </Text>
                     </View>
-                    <Text style={styles.barLabel}>{week.label}</Text>
-                  </View>
-                ))}
-              </View>
+                  ))}
+                </View>
+              ) : null}
             </View>
 
             {/* ── Performance Intelligence (OSPREY+) ── */}
@@ -256,7 +350,44 @@ export default function StatsTab() {
                     ) : null}
                   </View>
 
-                  {perf.racePredictor && perf.racePredictor.predictions.length > 0 ? (
+                  {perf.triathlonPredictor ? (
+                    <>
+                      <Text style={styles.sectionLabel}>
+                        {perf.triathlonPredictor.raceLabel.toUpperCase()} PREDICTOR
+                      </Text>
+                      <View style={styles.predictorCard}>
+                        {perf.triathlonPredictor.splits.map((split) => (
+                          <View key={split.leg} style={styles.predictorRow}>
+                            <Text style={styles.predictorDist}>
+                              {SESSION_ICON[split.leg]} {split.label}
+                            </Text>
+                            {split.predictedTimeS != null ? (
+                              <Text style={styles.predictorTime}>
+                                {formatRaceTimeSec(split.predictedTimeS)}
+                              </Text>
+                            ) : (
+                              <Text style={styles.predictorPlaceholder}>Log a {split.leg} to unlock</Text>
+                            )}
+                          </View>
+                        ))}
+                        <View style={[styles.predictorRow, styles.predictorTotalRow]}>
+                          <Text style={styles.predictorTotalLabel}>
+                            Est. finish (+{Math.round(perf.triathlonPredictor.transitionEstimateS / 60)}
+                            min transitions)
+                          </Text>
+                          {perf.triathlonPredictor.totalTimeS != null ? (
+                            <Text style={styles.predictorTotalValue}>
+                              {formatRaceTimeSec(perf.triathlonPredictor.totalTimeS)}
+                            </Text>
+                          ) : (
+                            <Text style={styles.predictorPlaceholder}>
+                              Log all 3 disciplines to unlock
+                            </Text>
+                          )}
+                        </View>
+                      </View>
+                    </>
+                  ) : perf.racePredictor && perf.racePredictor.predictions.length > 0 ? (
                     <>
                       <Text style={styles.sectionLabel}>RACE PREDICTOR</Text>
                       <View style={styles.predictorCard}>
@@ -278,7 +409,12 @@ export default function StatsTab() {
               ) : null
             ) : (
               /* Gate upsell for non-plus users */
-              <TouchableOpacity style={styles.upsellCard} onPress={() => router.push('/paywall')}>
+              <TouchableOpacity
+                style={styles.upsellCard}
+                onPress={() => router.push('/paywall')}
+                accessibilityRole="button"
+                accessibilityLabel="Unlock Performance Intelligence"
+              >
                 <Text style={styles.upsellIcon}>📈</Text>
                 <View style={{ flex: 1 }}>
                   <Text style={styles.upsellTitle}>Performance Intelligence</Text>
@@ -365,6 +501,15 @@ export default function StatsTab() {
                         {w.distanceMiles ? ` · ${w.distanceMiles} mi` : ''}
                       </Text>
                     </View>
+                    <TouchableOpacity
+                      onPress={() => handleDeleteWorkout(w.id, formatSessionType(w.sessionType))}
+                      hitSlop={8}
+                      style={styles.workoutDeleteBtn}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Delete ${formatSessionType(w.sessionType)} workout`}
+                    >
+                      <Ionicons name="trash-outline" size={16} color={Colors.textMuted} />
+                    </TouchableOpacity>
                   </View>
                 ))}
               </View>
@@ -473,6 +618,18 @@ const styles = StyleSheet.create({
   },
   barFill: { width: '100%', backgroundColor: Colors.teal, borderRadius: 6 },
   barLabel: { fontSize: 9, color: Colors.textMuted, marginTop: 6 },
+  stackedBarTrack: { flexDirection: 'column-reverse' },
+  sportLegend: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginTop: 14,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(255,255,255,0.08)',
+  },
+  sportLegendItem: { flexDirection: 'row', alignItems: 'center', gap: 5 },
+  sportLegendText: { fontSize: 10, color: Colors.textSecondary, fontWeight: '600' },
 
   // ── Risk banner ──
   riskBanner: {
@@ -547,6 +704,10 @@ const styles = StyleSheet.create({
   },
   predictorDist: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
   predictorTime: { fontSize: 14, fontWeight: '800', color: Colors.teal },
+  predictorPlaceholder: { fontSize: 11, color: Colors.textMuted, fontStyle: 'italic' },
+  predictorTotalRow: { borderBottomWidth: 0, paddingTop: 12, marginTop: 2 },
+  predictorTotalLabel: { fontSize: 12, fontWeight: '700', color: Colors.textSecondary, flexShrink: 1 },
+  predictorTotalValue: { fontSize: 16, fontWeight: '800', color: Colors.gold },
 
   // ── Upsell card ──
   upsellCard: {
@@ -633,6 +794,7 @@ const styles = StyleSheet.create({
   workoutInfo: { flex: 1 },
   workoutType: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
   workoutMeta: { fontSize: 12, color: Colors.textSecondary, marginTop: 2 },
+  workoutDeleteBtn: { padding: 4 },
   emptyCard: {
     backgroundColor: Colors.bgCard,
     borderWidth: 1,

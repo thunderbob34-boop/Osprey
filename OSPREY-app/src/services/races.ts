@@ -195,11 +195,33 @@ export async function createRaceEvent(userId: string, input: RaceEventInput): Pr
 }
 
 export async function recordRaceResult(raceId: string, resultTimeS: number): Promise<void> {
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from('race_events')
     .update({ result_time_s: resultTimeS })
-    .eq('id', raceId);
+    .eq('id', raceId)
+    .select('user_id, name')
+    .single();
   if (error) throw error;
+
+  // Best-effort — coach memory is a nice-to-have, never block on it.
+  const row = data as { user_id: string; name: string } | null;
+  if (row) {
+    try {
+      const { error: memErr } = await supabase.from('coach_memory').upsert(
+        {
+          user_id: row.user_id,
+          event_type: 'race_result',
+          race_id: raceId,
+          summary: `Finished ${row.name} in ${formatRaceTime(resultTimeS)}.`,
+          metadata: { raceName: row.name, resultTimeS },
+        },
+        { onConflict: 'user_id,event_type,race_id' },
+      );
+      if (memErr) console.error('[coach-memory] race result record failed', memErr);
+    } catch {
+      // Best-effort — never let a memory-write failure block recording the result.
+    }
+  }
 }
 
 export async function deleteRaceEvent(raceId: string): Promise<void> {

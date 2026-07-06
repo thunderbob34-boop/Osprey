@@ -1,6 +1,6 @@
 import { supabase } from '@/services/supabase';
 
-export type ChallengeType = 'mileage' | 'workouts' | 'duration';
+export type ChallengeType = 'mileage' | 'workouts' | 'duration' | 'lift_volume' | 'streak';
 
 export interface Challenge {
   id: string;
@@ -29,15 +29,20 @@ export interface FriendUser {
 // ── Label helpers ─────────────────────────────────────────────────────────────
 
 export const CHALLENGE_TYPE_LABELS: Record<ChallengeType, string> = {
-  mileage:  '🏃 Miles',
-  workouts: '💪 Workouts',
-  duration: '⏱️ Minutes',
+  mileage:     '🏃 Miles',
+  workouts:    '💪 Workouts',
+  duration:    '⏱️ Minutes',
+  lift_volume: '🏋️ Lift Volume',
+  streak:      '🔥 Streak',
 };
 
 export function formatChallengeValue(value: number, type: ChallengeType): string {
-  if (type === 'mileage')  return `${value.toFixed(1)} mi`;
-  if (type === 'workouts') return `${Math.round(value)} workouts`;
-  return `${Math.round(value)} min`;
+  if (type === 'mileage')     return `${value.toFixed(1)} mi`;
+  if (type === 'workouts')    return `${Math.round(value)} workouts`;
+  if (type === 'duration')    return `${Math.round(value)} min`;
+  if (type === 'lift_volume') return `${Math.round(value).toLocaleString()} lbs`;
+  if (type === 'streak')      return `${Math.round(value)} day${Math.round(value) === 1 ? '' : 's'}`;
+  return `${Math.round(value)}`;
 }
 
 // ── Date helpers ──────────────────────────────────────────────────────────────

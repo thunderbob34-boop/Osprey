@@ -10,7 +10,12 @@ export default function BuildPlanBanner() {
       <Text style={styles.subtitle}>
         Ozzie can build a personalized schedule based on your goals.
       </Text>
-      <TouchableOpacity style={styles.btn} onPress={() => router.push('/preferences')}>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => router.push('/preferences')}
+        accessibilityRole="button"
+        accessibilityLabel="Build my plan"
+      >
         <Text style={styles.btnText}>Build My Plan →</Text>
       </TouchableOpacity>
     </View>

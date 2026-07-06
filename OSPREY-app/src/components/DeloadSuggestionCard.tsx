@@ -39,10 +39,24 @@ export default function DeloadSuggestionCard({ session, daysToHighRisk, isAccept
         Projected to hit the danger zone {urgency}. Consider de-loading {dayLabel} {session.description || session.session_type}.
       </Text>
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.dismissBtn} onPress={onDismiss} disabled={isAccepting}>
+        <TouchableOpacity
+          style={styles.dismissBtn}
+          onPress={onDismiss}
+          disabled={isAccepting}
+          accessibilityRole="button"
+          accessibilityLabel="Not now"
+          accessibilityState={{ disabled: isAccepting }}
+        >
           <Text style={styles.dismissText}>Not now</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.acceptBtn} onPress={handleAccept} disabled={isAccepting}>
+        <TouchableOpacity
+          style={styles.acceptBtn}
+          onPress={handleAccept}
+          disabled={isAccepting}
+          accessibilityRole="button"
+          accessibilityLabel="De-load it"
+          accessibilityState={{ disabled: isAccepting, busy: isAccepting }}
+        >
           {isAccepting ? (
             <ActivityIndicator color="#000" size="small" />
           ) : (

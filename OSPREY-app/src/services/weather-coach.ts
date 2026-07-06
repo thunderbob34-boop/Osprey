@@ -25,6 +25,28 @@ export interface WeatherCoachResult {
   /** Compact plain-text summary fed to the Ozzie daily-brief prompt. */
   briefSummary: string;
   todayMaxF: number;
+  /** One of the user's own saved routes, surfaced when its tags fit today's conditions. */
+  recommendedRoute: { name: string; tags: string[] } | null;
+  /** Tomorrow's forecast, for the evening look-ahead notification — null if the forecast doesn't reach that far. */
+  tomorrow: { maxF: number; precipProbabilityMax: number } | null;
+}
+
+export interface WeatherRouteRef {
+  name: string;
+  tags: string[];
+}
+
+const HEAT_FRIENDLY_TAGS = ['shaded', 'shade', 'indoor', 'trail'];
+const RAIN_FRIENDLY_TAGS = ['indoor', 'covered'];
+
+function findMatchingRoute(
+  routes: WeatherRouteRef[] | undefined,
+  wantedTags: string[],
+): { name: string; tags: string[] } | null {
+  if (!routes || routes.length === 0) return null;
+  const wanted = new Set(wantedTags);
+  const match = routes.find((r) => r.tags.some((t) => wanted.has(t.toLowerCase())));
+  return match ? { name: match.name, tags: match.tags } : null;
 }
 
 const HEAT_CAUTION_F = 85;
@@ -90,6 +112,7 @@ function bestWindowToday(forecast: Forecast, todayIso: string): WeatherWindow | 
 export function deriveWeatherCoach(
   forecast: Forecast,
   todaySessionType: string | null,
+  savedRoutes?: WeatherRouteRef[],
 ): WeatherCoachResult | null {
   if (forecast.daily.length === 0) return null;
 
@@ -106,10 +129,12 @@ export function deriveWeatherCoach(
   let detail: string;
   let severity: WeatherSeverity = 'info';
   let suggestIndoor = false;
+  let recommendedRoute: { name: string; tags: string[] } | null = null;
 
   if (hotDay && hotDay.date === todayIso) {
     severity = 'alert';
     suggestIndoor = outdoorSession;
+    recommendedRoute = findMatchingRoute(savedRoutes, HEAT_FRIENDLY_TAGS);
     headline = `${hotDay.tempMaxF}° today — treat heat like altitude`;
     detail = window
       ? `Get outside ${formatWindow(window)} (~${window.tempF}°), pick shade, and carry fluids — or take today's session indoors. Electrolytes with every bottle.`
@@ -124,12 +149,14 @@ export function deriveWeatherCoach(
     // Warm (85-92°) today — not alert-tier, but worth timing and fluids.
     severity = 'caution';
     suggestIndoor = false;
+    recommendedRoute = findMatchingRoute(savedRoutes, HEAT_FRIENDLY_TAGS);
     headline = `Warm one today — high of ${today.tempMaxF}°`;
     detail = window
       ? `Beat the heat: train ${formatWindow(window)} (~${window.tempF}°), favor shade, and bring fluids.`
       : 'Favor shade, ease the pace in the heat, and bring fluids.';
   } else if (today.precipProbabilityMax >= RAIN_PROB && outdoorSession) {
     severity = 'caution';
+    recommendedRoute = findMatchingRoute(savedRoutes, RAIN_FRIENDLY_TAGS);
     headline = `${today.precipProbabilityMax}% chance of rain today`;
     detail = window
       ? `Driest, most comfortable stretch looks like ${formatWindow(window)}. Wet kit beats a missed session — or swap to an indoor option.`
@@ -163,7 +190,10 @@ export function deriveWeatherCoach(
     (window ? ` Best outdoor window today ${formatWindow(window)} (~${window.tempF}°F).` : '') +
     (hotDay && hotDay.date !== todayIso
       ? ` Heat spike ${dayName(hotDay.date, todayIso)} (${hotDay.tempMaxF}°F): recommend hydration lead-up starting today.`
-      : '');
+      : '') +
+    (recommendedRoute ? ` User's saved route "${recommendedRoute.name}" fits today's conditions.` : '');
+
+  const tomorrowDay = forecast.daily[1];
 
   return {
     headline,
@@ -173,5 +203,9 @@ export function deriveWeatherCoach(
     suggestIndoor,
     briefSummary,
     todayMaxF: today.tempMaxF,
+    recommendedRoute,
+    tomorrow: tomorrowDay
+      ? { maxF: tomorrowDay.tempMaxF, precipProbabilityMax: tomorrowDay.precipProbabilityMax }
+      : null,
   };
 }

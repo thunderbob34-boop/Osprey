@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSPREY — Onboarding As I Imagined It (Docs-Derived)</title>
+<style>
+  :root {
+    --teal: #00c8c8;
+    --teal-dim: rgba(0,200,200,0.12);
+    --gold: #c89a00;
+    --bg: #060912;
+    --bg-card: rgba(255,255,255,0.04);
+    --bg-card-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --border-teal: rgba(0,200,200,0.2);
+    --text: #ffffff;
+    --text-2: rgba(255,255,255,0.65);
+    --text-3: rgba(255,255,255,0.45);
+    --green: #4cde80;
+    --amber: #f5a623;
+    --pink: #e91e8c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #02040a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 24px 12px 48px; min-height: 100vh;
+  }
+  h1.pagehead { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  p.pagesub { font-size: 12px; color: var(--text-3); margin-bottom: 20px; text-align: center; max-width: 460px; line-height: 1.5; }
+
+  .phone {
+    width: 390px; max-width: 100%; height: 800px;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 36px;
+    overflow: hidden; display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6); position: relative;
+  }
+  .progress-wrap { padding: 22px 20px 0; }
+  .progress-track { height: 4px; background: var(--bg-card); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--teal); border-radius: 2px; transition: width .35s ease; }
+  .progress-label { font-size: 10px; color: var(--text-3); margin-top: 6px; letter-spacing: .5px; }
+
+  .screen { flex: 1; overflow-y: auto; padding: 16px 20px 110px; }
+  .ozzie-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .ozzie-dot { width: 28px; height: 28px; border-radius: 14px; background: linear-gradient(135deg, var(--teal), #1B3A5C); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .ozzie-name { font-size: 12px; font-weight: 700; color: var(--teal); }
+  .input-tag { display:inline-block; font-size: 9px; font-weight: 800; letter-spacing: 1px; color: var(--gold); background: rgba(200,154,0,0.12); border-radius: 6px; padding: 3px 8px; margin-bottom: 10px; }
+
+  .title { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 6px; }
+  .hint { font-size: 13px; color: var(--text-2); line-height: 1.45; margin-bottom: 18px; }
+
+  .sport-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .sport-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 13px 8px; cursor: pointer; text-align: center; transition: all .15s ease;
+  }
+  .sport-card:hover { background: var(--bg-card-hover); }
+  .sport-card.sel { background: var(--teal-dim); border-color: var(--border-teal); }
+  .sport-card .ic { font-size: 24px; display: block; margin-bottom: 5px; }
+  .sport-card .nm { font-size: 11px; font-weight: 700; }
+  .sport-card.sel .nm { color: var(--teal); }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .8px; color: var(--text-3); margin-bottom: 6px; text-transform: uppercase; }
+  .field input, .field select {
+    width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 13px 14px; color: var(--text); font-size: 15px; font-family: inherit;
+    appearance: none;
+  }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--border-teal); }
+  .field input::placeholder { color: var(--text-3); }
+  .field select option { background: #0a0f1c; }
+
+  .live-calc {
+    background: rgba(0,200,200,0.06); border: 1px solid var(--border-teal);
+    border-radius: 12px; padding: 12px 14px; font-size: 13px; color: var(--text-2);
+    margin-bottom: 14px; line-height: 1.5;
+  }
+  .live-calc b { color: var(--teal); font-variant-numeric: tabular-nums; }
+  .live-calc .lc-head { font-size: 9px; font-weight: 800; letter-spacing: 1px; color: var(--teal); display: block; margin-bottom: 4px; }
+
+  .phase-bar { display: flex; gap: 5px; margin: 8px 0 8px; }
+  .phase-seg {
+    flex: 1; height: 52px; border-radius: 10px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    color: #04252a;
+  }
+  .phase-seg .pn { font-size: 9px; font-weight: 800; letter-spacing: 1px; opacity: .8; }
+  .phase-seg .pw { font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .phase-base  { background: #2b8a8a; color: #ddffff; }
+  .phase-build { background: var(--teal); }
+  .phase-peak  { background: var(--amber); }
+  .phase-taper { background: var(--green); }
+  .phase-note { font-size: 11px; color: var(--text-3); line-height: 1.5; }
+
+  .seg {
+    display: flex; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; margin-bottom: 16px;
+  }
+  .seg button {
+    flex: 1; padding: 11px; background: none; border: none; color: var(--text-3);
+    font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit;
+  }
+  .seg button.on { background: var(--teal-dim); color: var(--teal); }
+  .field input[type="date"] { color-scheme: dark; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+  .chip {
+    border: 1px solid var(--border); background: var(--bg-card); color: var(--text-2);
+    border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 700; cursor: pointer;
+  }
+  .chip.on { background: rgba(233,30,140,0.12); border-color: rgba(233,30,140,0.4); color: var(--pink); }
+  .chip-note { font-size: 11px; color: var(--text-3); margin-bottom: 14px; }
+
+  .day-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
+  .day-btn {
+    width: 38px; height: 38px; border-radius: 8px; background: var(--bg-card);
+    border: 1px solid var(--border); color: var(--text-3); font-size: 14px; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+  }
+  .day-btn.on { background: var(--teal-dim); border-color: var(--border-teal); color: var(--teal); }
+
+  .zones-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .zones-table td { padding: 8px 6px; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .zones-table td:first-child { color: var(--text-2); font-weight: 700; }
+  .zones-table td:last-child { text-align: right; color: var(--teal); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  .footer {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 20px 26px;
+    background: linear-gradient(transparent, var(--bg) 35%); display: flex; gap: 10px;
+  }
+  .btn-back { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-2); border-radius: 14px; padding: 15px 18px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .btn-primary { flex: 1; background: var(--teal); border: none; color: #04252a; border-radius: 14px; padding: 15px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+  .btn-primary:disabled { opacity: .35; cursor: not-allowed; }
+
+  .end-icon { font-size: 44px; text-align: center; margin: 26px 0 12px; }
+
+  .diff-legend { margin-top: 22px; max-width: 460px; width: 100%; }
+  .diff-legend h3 { font-size: 12px; letter-spacing: 1px; color: var(--text-3); text-transform: uppercase; margin-bottom: 10px; }
+  .diff-legend ul { list-style: none; }
+  .diff-legend li { font-size: 12px; color: var(--text-2); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; line-height: 1.5; }
+  .diff-legend li b { color: var(--text); }
+  .diff-legend .mine { color: var(--teal); font-weight: 800; }
+  .diff-legend .yours { color: var(--gold); font-weight: 800; }
+</style>
+</head>
+<body>
+
+<h1 class="pagehead">OSPREY Onboarding — What I Imagined (Before Your Spec)</h1>
+<p class="pagesub">Reconstructed honestly from the only sources I had: the 9 coaching blueprints. Each screen is one of the docs&rsquo; four canonical onboarding inputs, wired straight into the sport calculators — numbers in, zones out. The gold tag on each screen names the blueprint input it maps to.</p>
+
+<div class="phone">
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="prog" style="width:20%"></div></div>
+    <div class="progress-label" id="progLabel">Step 1 of 5</div>
+  </div>
+  <div class="screen" id="screen"></div>
+  <div class="footer">
+    <button class="btn-back" id="backBtn" style="display:none">←</button>
+    <button class="btn-primary" id="nextBtn" disabled>Continue →</button>
+  </div>
+</div>
+
+<div class="diff-legend">
+  <h3>Where my imagined flow differs from your spec</h3>
+  <ul>
+    <li><b>Five pages, no skips.</b> <span class="mine">Mine</span> marches through all four blueprint inputs for everyone. <span class="yours">Yours</span> is leaner — 2&ndash;3 pages with the conditional Level skip. Yours respects drop-off risk more.</li>
+    <li><b>Numbers up front.</b> <span class="mine">Mine</span> asks for current load + threshold anchor (FTP, CSS, T-pace, 2k split, 1RMs) on day one so zones exist immediately. <span class="yours">Yours</span> defers to a PR or a 2-week observed baseline — friendlier to new users.</li>
+    <li><b>Timeline and injuries.</b> <span class="mine">Mine</span> collects weeks-to-race and injury flags (blueprint inputs 3 and 4). <span class="yours">Yours</span> leaves them out of pages 1&ndash;3 — they would need a home later in the flow.</li>
+    <li><b>No training-focus fork.</b> <span class="mine">Mine</span> assumes everyone is event-driven, as the docs do. <span class="yours">Yours</span> adds Fat loss and Learn-the-basics paths the blueprints never mention — a real product insight the docs miss.</li>
+    <li><b>Tier handling agrees.</b> Neither shows a beginner/intermediate/advanced label. The docs derive level from load numbers; your spec derives it from PRs. Both kill the current self-labeled mode screen.</li>
+  </ul>
+</div>
+
+<script>
+const SPORTS = {
+  running:      { ic: '🏃', nm: 'Running',      vol: ['Miles per week', 'e.g. 30'],   anchorKind: 'pace',  anchor: ['Threshold pace (min/mi)', 'e.g. 7:10'],  events: ['5K','10K','Half Marathon','Marathon'], inj: ['Achilles / calf','Knee','Shin / bone stress','IT band'] },
+  ultra:        { ic: '⛰️', nm: 'Ultra',         vol: ['Miles per week', 'e.g. 45'],   anchorKind: 'hr',    anchor: ['Max heart rate (bpm)', 'e.g. 185'],      events: ['50k','50 Mile','100k','100 Mile'], inj: ['Achilles / calf','Knee','Bone stress','Quad tendon'] },
+  cycling:      { ic: '🚴', nm: 'Cycling',       vol: ['Hours per week', 'e.g. 8'],    anchorKind: 'watts', anchor: ['FTP (watts)', 'e.g. 250'],               events: ['Criterium','Road Race','40k TT','Gran Fondo'], inj: ['Knee','Low back','Neck'] },
+  swimming:     { ic: '🏊', nm: 'Swimming',      vol: ['Yards per week', 'e.g. 12000'],anchorKind: 'css',   anchor: null,                                       events: ['50 Free','100 Free','200 Free','500 Free','1650 Free','200 IM','400 IM'], inj: ['Shoulder','Low back','Breaststroke knee'] },
+  rowing:       { ic: '🚣', nm: 'Rowing',        vol: ['Meters per week', 'e.g. 40000'],anchorKind: 'split',anchor: ['2k split (per 500m)', 'e.g. 1:50'],      events: ['2k Single','2k Crew','Head Race','1k Masters'], inj: ['Ribs','Low back'] },
+  triathlon:    { ic: '🏅', nm: 'Triathlon',     vol: ['Hours per week', 'e.g. 10'],   anchorKind: 'tri',   anchor: null,                                       events: ['Sprint','Olympic','70.3','Ironman'], inj: ['Knee / Achilles','Shoulder','IT band / hip'] },
+  powerlifting: { ic: '🏋️', nm: 'Powerlifting',  vol: ['Sessions per week', 'e.g. 4'], anchorKind: 'lifts', anchor: null,                                       events: ['First Meet','Weight-class Total','Peak Strength'], inj: ['Low back','Shoulder','Knee / hip'] },
+  hyrox:        { ic: '🛷', nm: 'Hyrox',         vol: ['Sessions per week', 'e.g. 5'], anchorKind: 'pacemi',anchor: ['Threshold pace (min/mi)', 'e.g. 6:50'],  events: ['Hyrox Open','Hyrox Pro','Hyrox Doubles'], inj: ['Shin / Achilles','Low back','Shoulder','Grip / forearm'] },
+  crossfit:     { ic: '🤸', nm: 'CrossFit',      vol: ['Sessions per week', 'e.g. 5'], anchorKind: 'bench', anchor: ['Fran time (mm:ss)', 'e.g. 4:30'],        events: ['The Open','Quarterfinals','General fitness season'], inj: ['Shoulder','Low back','Knee'] },
+};
+
+const state = {
+  page: 1, sport: null,
+  vol: '', anchor: '', tt400: '', tt200: '',
+  squat: '', bench: '', dead: '',
+  css: '', ftp: '', runT: '',
+  event: '', weeks: 16,
+  dateMode: true, raceDate: isoPlusWeeks(16),
+  days: 4, injuries: new Set(),
+};
+const history = [];
+const $ = (id) => document.getElementById(id);
+
+function mmssToSec(v) {
+  const m = String(v).trim().match(/^(\d+):(\d{1,2})$/);
+  if (!m) return null;
+  return Number(m[1]) * 60 + Number(m[2]);
+}
+function secToMMSS(s) {
+  const m = Math.floor(s / 60), r = Math.round(s % 60);
+  return m + ':' + String(r).padStart(2, '0');
+}
+function localISO(d) {
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function todayISO() {
+  return localISO(new Date());
+}
+function isoPlusWeeks(w) {
+  const d = new Date();
+  d.setDate(d.getDate() + w * 7);
+  return localISO(d);
+}
+function weeksFromDate(iso) {
+  if (!iso) return 0;
+  const t = new Date(); t.setHours(0, 0, 0, 0);
+  const r = new Date(iso + 'T00:00:00');
+  if (isNaN(r.getTime())) return 0;
+  return Math.max(0, Math.ceil((r.getTime() - t.getTime()) / (7 * 24 * 60 * 60 * 1000)));
+}
+function esc(x) {
+  return String(x ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function ozzie(tag) {
+  return `<div class="ozzie-row"><div class="ozzie-dot">🦅</div><span class="ozzie-name">Ozzie</span></div>
+          <span class="input-tag">BLUEPRINT INPUT ${tag}</span>`;
+}
+
+function anchorReady() {
+  const sp = SPORTS[state.sport];
+  if (!sp) return false;
+  switch (sp.anchorKind) {
+    case 'css':   return mmssToSec(state.tt400) != null && mmssToSec(state.tt200) != null;
+    case 'lifts': return state.squat !== '' || state.bench !== '' || state.dead !== '';
+    case 'tri':   return state.ftp !== '' || state.runT !== '' || (mmssToSec(state.tt400) != null && mmssToSec(state.tt200) != null);
+    default:      return state.anchor !== '';
+  }
+}
+
+function render() {
+  const s = $('screen');
+  $('prog').style.width = (state.page >= 6 ? 100 : (state.page / 5) * 100) + '%';
+  $('progLabel').textContent = state.page >= 6 ? 'Plan ready' : 'Step ' + state.page + ' of 5';
+  $('backBtn').style.display = history.length ? 'block' : 'none';
+
+  if (state.page === 1) {
+    s.innerHTML = ozzie('0 — SPORT') + `
+      <div class="title">Which blueprint are we opening?</div>
+      <div class="hint">One card per coaching doc — 9 sports, 9 blueprints, one engine.</div>
+      <div class="sport-grid">` +
+      Object.entries(SPORTS).map(([id, sp]) => `
+        <div class="sport-card ${state.sport===id?'sel':''}" data-sport="${id}">
+          <span class="ic">${sp.ic}</span><span class="nm">${sp.nm}</span>
+        </div>`).join('') + `</div>`;
+    setNext(!!state.sport);
+  }
+
+  if (state.page === 2) {
+    const sp = SPORTS[state.sport];
+    let fields = `
+      <div class="field"><label>${sp.vol[0]}</label>
+        <input id="f_vol" inputmode="decimal" placeholder="${sp.vol[1]}" value="${esc(state.vol)}"></div>`;
+
+    if (sp.anchorKind === 'css') {
+      fields += `
+        <div class="field"><label>400 time trial (mm:ss)</label>
+          <input id="f_tt400" placeholder="e.g. 6:00" value="${esc(state.tt400)}"></div>
+        <div class="field"><label>200 time trial (mm:ss)</label>
+          <input id="f_tt200" placeholder="e.g. 2:52" value="${esc(state.tt200)}"></div>
+        <div class="live-calc" id="cssOut">${cssLine()}</div>`;
+    } else if (sp.anchorKind === 'lifts') {
+      fields += `
+        <div class="field"><label>Squat 1RM (lb)</label><input id="f_squat" inputmode="decimal" placeholder="e.g. 405" value="${esc(state.squat)}"></div>
+        <div class="field"><label>Bench 1RM (lb)</label><input id="f_bench" inputmode="decimal" placeholder="e.g. 275" value="${esc(state.bench)}"></div>
+        <div class="field"><label>Deadlift 1RM (lb)</label><input id="f_dead" inputmode="decimal" placeholder="e.g. 495" value="${esc(state.dead)}"></div>`;
+    } else if (sp.anchorKind === 'tri') {
+      fields += `
+        <div class="field"><label>Bike FTP (watts)</label><input id="f_ftp" inputmode="decimal" placeholder="e.g. 240" value="${esc(state.ftp)}"></div>
+        <div class="field"><label>Run threshold (min/mi)</label><input id="f_runT" placeholder="e.g. 7:20" value="${esc(state.runT)}"></div>
+        <div class="field"><label>Swim 400 / 200 TT (mm:ss)</label>
+          <div style="display:flex;gap:8px">
+            <input id="f_tt400" placeholder="400 — 6:00" value="${esc(state.tt400)}" style="flex:1">
+            <input id="f_tt200" placeholder="200 — 2:52" value="${esc(state.tt200)}" style="flex:1">
+          </div></div>
+        <div class="live-calc" id="cssOut">${cssLine()}</div>`;
+    } else {
+      fields += `
+        <div class="field"><label>${sp.anchor[0]}</label>
+          <input id="f_anchor" placeholder="${sp.anchor[1]}" value="${esc(state.anchor)}"></div>`;
+    }
+
+    s.innerHTML = ozzie('1 — EXPERIENCE &amp; CURRENT LOAD') + `
+      <div class="title">Where is your engine today?</div>
+      <div class="hint">Real numbers beat labels. Your threshold anchor sets every training zone from day one — re-tested every 4&ndash;8 weeks.</div>` + fields;
+    setNext(state.vol !== '' && anchorReady());
+  }
+
+  if (state.page === 3) {
+    const sp = SPORTS[state.sport];
+    s.innerHTML = ozzie('2 — GOAL EVENT &amp; DEMANDS') + `
+      <div class="title">What is the target?</div>
+      <div class="hint">The event sets the energy-system mix, the key sessions, and how long the taper runs.</div>
+      <div class="field"><label>Goal event</label>
+        <select id="f_event">
+          <option value="">Choose…</option>
+          ${sp.events.map(e => `<option ${state.event===e?'selected':''}>${e}</option>`).join('')}
+        </select></div>`;
+    setNext(!!state.event);
+  }
+
+  if (state.page === 4) {
+    const evName = state.event || 'your event';
+    s.innerHTML = ozzie('3 — TIMELINE TO PEAK') + `
+      <div class="title">When is race day?</div>
+      <div class="hint">Give me the date of ${esc(evName)} and I will count the weeks — or flip over and set the weeks yourself.</div>
+      <div class="seg">
+        <button class="${state.dateMode?'on':''}" id="segDate">📅 Event date</button>
+        <button class="${!state.dateMode?'on':''}" id="segWeeks">✏️ Weeks manually</button>
+      </div>
+      ${state.dateMode
+        ? `<div class="field"><label>${esc(evName)} — date</label>
+             <input id="f_date" type="date" value="${state.raceDate}" min="${todayISO()}"></div>`
+        : `<div class="field"><label>Weeks to event</label>
+             <input id="f_weeks" type="number" min="4" max="52" value="${state.weeks}"></div>`}
+      <div class="live-calc">
+        <span class="lc-head">MACROCYCLE — <span id="wkCount">${state.weeks}</span> WEEKS OUT</span>
+        <div id="phaseOut">${phaseBar()}</div>
+      </div>`;
+    setNext(state.weeks >= 4);
+  }
+
+  if (state.page === 5) {
+    const sp = SPORTS[state.sport];
+    s.innerHTML = ozzie('4 — CONSTRAINTS &amp; INJURY HISTORY') + `
+      <div class="title">What do we need to work around?</div>
+      <div class="hint">Sessions per week caps the plan shape. Injury flags set load caps and the red-flag watchlist.</div>
+      <div class="field"><label>Days you can train per week</label>
+        <div class="day-row">
+          ${[2,3,4,5,6,7].map(d => `<button class="day-btn ${state.days===d?'on':''}" data-day="${d}">${d}</button>`).join('')}
+        </div></div>
+      <div class="field"><label>Any history here? (tap all that apply)</label>
+        <div class="chips">
+          ${sp.inj.map(i => `<span class="chip ${state.injuries.has(i)?'on':''}" data-inj="${esc(i)}">${esc(i)}</span>`).join('')}
+        </div>
+        <div class="chip-note">Flagged areas get prehab work and conservative load ramps — progress capped at ~10%/week regardless.</div>
+      </div>`;
+    setNext(true);
+  }
+
+  if (state.page === 6) {
+    s.innerHTML = `
+      <div class="end-icon">🦅</div>
+      <div class="title" style="text-align:center">Your zones are live.</div>
+      <div class="hint" style="text-align:center">Straight from your anchor — the same math the plan engine uses.</div>
+      <div class="live-calc">
+        <span class="lc-head">MACROCYCLE — ${state.weeks} WEEKS TO ${esc(state.event).toUpperCase()}</span>
+        ${phaseBar()}
+      </div>
+      <div class="live-calc">
+        <span class="lc-head">TRAINING ZONES FROM YOUR ANCHOR</span>
+        ${zonesPreview()}
+      </div>`;
+    setNext(true, 'Restart prototype ↺');
+  }
+
+  bindEvents();
+}
+
+function cssLine() {
+  const t4 = mmssToSec(state.tt400), t2 = mmssToSec(state.tt200);
+  if (t4 == null || t2 == null) return '<span class="lc-head">CSS — LIVE</span>Enter both time trials and I will compute your Critical Swim Speed on the spot.';
+  const css = (t4 - t2) / 2;
+  if (css <= 0) return '<span class="lc-head">CSS — LIVE</span>That 200 is faster than half the 400 — double-check the times.';
+  return `<span class="lc-head">CSS — LIVE</span>CSS = (${t4}s − ${t2}s) ÷ 2 = <b>${secToMMSS(css)} / 100</b>. Threshold zone: <b>${secToMMSS(css-2)}–${secToMMSS(css+2)}</b>.`;
+}
+
+function phaseBar() {
+  const w = Math.max(4, Number(state.weeks) || 16);
+  const base = Math.round(w * 0.4), build = Math.round(w * 0.35), peak = Math.round(w * 0.15);
+  const taper = Math.max(1, w - base - build - peak);
+  const seg = (cls, nm, n) =>
+    `<div class="phase-seg phase-${cls}"><span class="pn">${nm}</span><span class="pw">${n} wk</span></div>`;
+  return `
+    <div class="phase-bar">${seg('base','BASE',base)}${seg('build','BUILD',build)}${seg('peak','PEAK',peak)}${seg('taper','TAPER',taper)}</div>
+    <div class="phase-note">3:1 loading inside each block — three build weeks, one recovery week. Taper keeps intensity, cuts volume.</div>`;
+}
+
+function zonesPreview() {
+  const sp = SPORTS[state.sport];
+  const row = (a, b) => `<tr><td>${a}</td><td>${b}</td></tr>`;
+  let rows = '';
+
+  if (sp.anchorKind === 'pace') {
+    const t = mmssToSec(state.anchor);
+    if (t != null) rows =
+      row('Easy (E)', secToMMSS(t+60) + '–' + secToMMSS(t+120) + ' /mi') +
+      row('Marathon (M)', secToMMSS(t+15) + '–' + secToMMSS(t+30) + ' /mi') +
+      row('Threshold (T)', secToMMSS(t) + ' /mi') +
+      row('Interval (I)', secToMMSS(t-20) + '–' + secToMMSS(t-10) + ' /mi');
+  } else if (sp.anchorKind === 'pacemi') {
+    const t = mmssToSec(state.anchor);
+    if (t != null) rows =
+      row('Z2 Aerobic', secToMMSS(t+40) + '–' + secToMMSS(t+72) + ' /mi') +
+      row('Z3 Threshold / race', secToMMSS(t-16) + '–' + secToMMSS(t+16) + ' /mi') +
+      row('Compromised-run split', secToMMSS(t+24) + '–' + secToMMSS(t+48) + ' /mi');
+  } else if (sp.anchorKind === 'watts') {
+    const ftp = Number(state.anchor);
+    if (ftp > 0) rows =
+      row('Z2 Endurance', Math.round(ftp*0.56) + '–' + Math.round(ftp*0.75) + ' W') +
+      row('Sweet spot', Math.round(ftp*0.88) + '–' + Math.round(ftp*0.94) + ' W') +
+      row('Z4 Threshold', Math.round(ftp*0.91) + '–' + Math.round(ftp*1.05) + ' W') +
+      row('Z5 VO2max', Math.round(ftp*1.06) + '–' + Math.round(ftp*1.20) + ' W');
+  } else if (sp.anchorKind === 'split') {
+    const t = mmssToSec(state.anchor);
+    if (t != null) rows =
+      row('UT2 Base', secToMMSS(t+12) + '–' + secToMMSS(t+16) + ' /500m @ 18–20spm') +
+      row('AT Threshold', secToMMSS(t+3) + '–' + secToMMSS(t+5) + ' /500m @ 26–28spm') +
+      row('AN Race pace', secToMMSS(t) + ' and faster @ 34–40spm');
+  } else if (sp.anchorKind === 'hr') {
+    const hr = Number(state.anchor);
+    if (hr > 0) rows =
+      row('Z2 Endurance', Math.round(hr*0.70) + '–' + Math.round(hr*0.80) + ' bpm') +
+      row('Z4 Threshold', Math.round(hr*0.87) + '–' + Math.round(hr*0.92) + ' bpm') +
+      row('Z5 VO2 / hills', Math.round(hr*0.92) + '+ bpm');
+  } else if (sp.anchorKind === 'css') {
+    const t4 = mmssToSec(state.tt400), t2 = mmssToSec(state.tt200);
+    if (t4 != null && t2 != null && t4 > t2) {
+      const css = (t4 - t2) / 2;
+      rows =
+        row('CSS', secToMMSS(css) + ' / 100') +
+        row('Z2 Aerobic', secToMMSS(css+3) + '–' + secToMMSS(css+6) + ' / 100') +
+        row('Z3 Threshold', secToMMSS(css-2) + '–' + secToMMSS(css+2) + ' / 100') +
+        row('Z4 VO2max', secToMMSS(css-5) + '–' + secToMMSS(css-2) + ' / 100');
+    }
+  } else if (sp.anchorKind === 'lifts') {
+    const sq = Number(state.squat);
+    if (sq > 0) rows =
+      row('Hypertrophy 65–75%', Math.round(sq*0.65) + '–' + Math.round(sq*0.75) + ' lb (squat)') +
+      row('Strength 75–85%', Math.round(sq*0.75) + '–' + Math.round(sq*0.85) + ' lb') +
+      row('Max 85–92%', Math.round(sq*0.85) + '–' + Math.round(sq*0.92) + ' lb') +
+      row('Meet opener ~89–91%', Math.round(sq*0.89) + '–' + Math.round(sq*0.91) + ' lb');
+  } else if (sp.anchorKind === 'tri') {
+    const ftp = Number(state.ftp);
+    const t4 = mmssToSec(state.tt400), t2 = mmssToSec(state.tt200);
+    if (ftp > 0) rows += row('Bike sweet spot', Math.round(ftp*0.88) + '–' + Math.round(ftp*0.94) + ' W');
+    const rt = mmssToSec(state.runT);
+    if (rt != null) rows += row('Run threshold', secToMMSS(rt) + ' /mi');
+    if (t4 != null && t2 != null && t4 > t2) rows += row('Swim CSS', secToMMSS((t4-t2)/2) + ' / 100');
+  }
+
+  if (!rows) rows = row('Zones', 'anchor pending — set after baseline block');
+  if (state.injuries.size) {
+    rows += row('Watchlist', [...state.injuries].join(', '));
+  }
+  return '<table class="zones-table">' + rows + '</table>';
+}
+
+function setNext(enabled, label) {
+  const b = $('nextBtn');
+  b.disabled = !enabled;
+  b.textContent = label || 'Continue →';
+}
+
+function bindEvents() {
+  document.querySelectorAll('[data-sport]').forEach(el => el.onclick = () => {
+    state.sport = el.dataset.sport;
+    state.anchor = ''; state.vol = ''; state.event = '';
+    state.injuries = new Set();
+    render();
+  });
+  document.querySelectorAll('[data-day]').forEach(el => el.onclick = () => {
+    state.days = Number(el.dataset.day);
+    render();
+  });
+  document.querySelectorAll('[data-inj]').forEach(el => el.onclick = () => {
+    const k = el.dataset.inj;
+    state.injuries.has(k) ? state.injuries.delete(k) : state.injuries.add(k);
+    render();
+  });
+
+  const wire = (id, key, after) => {
+    const el = $(id);
+    if (el) el.oninput = () => {
+      state[key] = el.value;
+      if (after) after();
+      refreshNextOnly();
+    };
+  };
+  wire('f_vol', 'vol');
+  wire('f_anchor', 'anchor');
+  wire('f_tt400', 'tt400', updateCss);
+  wire('f_tt200', 'tt200', updateCss);
+  wire('f_squat', 'squat');
+  wire('f_bench', 'bench');
+  wire('f_dead', 'dead');
+  wire('f_ftp', 'ftp');
+  wire('f_runT', 'runT');
+
+  const ev = $('f_event');
+  if (ev) ev.onchange = () => { state.event = ev.value; refreshNextOnly(); };
+
+  const wk = $('f_weeks');
+  if (wk) wk.oninput = () => {
+    state.weeks = Number(wk.value) || 0;
+    syncTimelineUI();
+  };
+  const dt = $('f_date');
+  if (dt) dt.oninput = () => {
+    state.raceDate = dt.value;
+    state.weeks = weeksFromDate(dt.value);
+    syncTimelineUI();
+  };
+  const sd = $('segDate'), sw = $('segWeeks');
+  if (sd) sd.onclick = () => {
+    if (!state.dateMode) {
+      state.dateMode = true;
+      state.raceDate = isoPlusWeeks(state.weeks || 16);
+      render();
+    }
+  };
+  if (sw) sw.onclick = () => {
+    if (state.dateMode) { state.dateMode = false; render(); }
+  };
+
+  $('backBtn').onclick = () => {
+    if (!history.length) return;
+    state.page = history.pop();
+    render();
+  };
+  $('nextBtn').onclick = () => {
+    if (state.page === 6) {
+      history.length = 0;
+      Object.assign(state, { page: 1, sport: null, vol: '', anchor: '', tt400: '', tt200: '', squat: '', bench: '', dead: '', css: '', ftp: '', runT: '', event: '', weeks: 16, dateMode: true, raceDate: isoPlusWeeks(16), days: 4, injuries: new Set() });
+      render();
+      return;
+    }
+    history.push(state.page);
+    state.page += 1;
+    render();
+  };
+}
+
+function updateCss() {
+  const out = $('cssOut');
+  if (out) out.innerHTML = cssLine();
+}
+
+function syncTimelineUI() {
+  const out = $('phaseOut');
+  if (out) out.innerHTML = phaseBar();
+  const wc = $('wkCount');
+  if (wc) wc.textContent = state.weeks;
+  refreshNextOnly();
+}
+
+function refreshNextOnly() {
+  if (state.page === 2) setNext(state.vol !== '' && anchorReady());
+  else if (state.page === 3) setNext(!!state.event);
+  else if (state.page === 4) setNext(state.weeks >= 4);
+}
+
+render();
+</script>
+</body>
+</html>

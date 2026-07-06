@@ -38,6 +38,7 @@ export default function NameScreen() {
         onChangeText={setDisplayName}
         autoCapitalize="words"
         autoFocus
+        accessibilityLabel="Your name"
       />
     </OnboardingShell>
   );

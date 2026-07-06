@@ -97,10 +97,20 @@ export default function WorkoutTab() {
           <View style={[styles.banner, { backgroundColor: bannerBg, borderColor: bannerBorder }]}>
             <Text style={styles.bannerMessage}>{alert.message}</Text>
             <View style={styles.bannerActions}>
-              <TouchableOpacity onPress={() => router.push('/(tabs)/' as any)} style={styles.bannerButton}>
+              <TouchableOpacity
+                onPress={() => router.push('/(tabs)/' as any)}
+                style={styles.bannerButton}
+                accessibilityRole="button"
+                accessibilityLabel="Recalibrate plan"
+              >
                 <Text style={[styles.bannerButtonText, { color: Colors.teal }]}>Recalibrate →</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setDismissed(true)} style={styles.bannerDismiss}>
+              <TouchableOpacity
+                onPress={() => setDismissed(true)}
+                style={styles.bannerDismiss}
+                accessibilityRole="button"
+                accessibilityLabel="Dismiss"
+              >
                 <Text style={styles.bannerDismissText}>✕</Text>
               </TouchableOpacity>
             </View>
@@ -114,6 +124,8 @@ export default function WorkoutTab() {
             onPress={() =>
               router.push(card.params ? { pathname: card.route as any, params: card.params } : card.route as any)
             }
+            accessibilityRole="button"
+            accessibilityLabel={`${card.title}, ${card.desc}`}
           >
             <MaterialCommunityIcons name={card.icon} size={28} color={card.iconColor} />
             <View style={styles.cardText}>

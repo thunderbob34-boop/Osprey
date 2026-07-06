@@ -21,6 +21,8 @@ export default function ScreenHeader({ title, right, onBack }: ScreenHeaderProps
         onPress={onBack ?? (() => router.back())}
         hitSlop={12}
         style={styles.backBtn}
+        accessibilityRole="button"
+        accessibilityLabel="Go back"
       >
         <Ionicons name="chevron-back" size={24} color={Colors.teal} />
       </TouchableOpacity>

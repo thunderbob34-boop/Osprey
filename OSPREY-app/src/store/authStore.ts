@@ -30,6 +30,8 @@ interface AuthState {
   signInWithGoogle: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
   deleteAccount: () => Promise<{ error: string | null }>;
+  sendPasswordReset: (email: string) => Promise<{ error: string | null }>;
+  updatePassword: (newPassword: string) => Promise<{ error: string | null }>;
 }
 
 function fallbackProfile(user: User): UserProfile {
@@ -264,6 +266,17 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       profileReady: true,
       profileError: null,
     });
+  },
+
+  sendPasswordReset: async (email) => {
+    const redirectTo = makeRedirectUri({ scheme: 'osprey', path: 'reset-password' });
+    const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo });
+    return { error: error?.message ?? null };
+  },
+
+  updatePassword: async (newPassword) => {
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    return { error: error?.message ?? null };
   },
 
   deleteAccount: async () => {

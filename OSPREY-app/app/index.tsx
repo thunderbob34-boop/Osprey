@@ -28,7 +28,12 @@ export default function Index() {
       <View style={styles.center}>
         <Text style={styles.errorTitle}>Could not load profile</Text>
         {profileError ? <Text style={styles.errorText}>{profileError}</Text> : null}
-        <TouchableOpacity style={styles.retryBtn} onPress={() => fetchProfile()}>
+        <TouchableOpacity
+          style={styles.retryBtn}
+          onPress={() => fetchProfile()}
+          accessibilityRole="button"
+          accessibilityLabel="Try again"
+        >
           <Text style={styles.retryText}>Try Again</Text>
         </TouchableOpacity>
       </View>

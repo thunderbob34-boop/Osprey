@@ -12,6 +12,7 @@ import { supabase } from '@/services/supabase';
 const PERMISSIONS: HealthKitPermissions = {
   permissions: {
     read: [
+      AppleHealthKit.Constants.Permissions.HeartRate,
       AppleHealthKit.Constants.Permissions.HeartRateVariability,
       AppleHealthKit.Constants.Permissions.RestingHeartRate,
       AppleHealthKit.Constants.Permissions.SleepAnalysis,
@@ -118,6 +119,23 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
   );
 
   return !error;
+}
+
+/**
+ * Most recent heart-rate sample (bpm) recorded by any HealthKit source —
+ * typically an Apple Watch — in the last few minutes. Used to show live-ish
+ * heart rate during an in-app workout without a direct Watch connection.
+ */
+export async function fetchLatestHeartRateBpm(sinceMs = 5 * 60 * 1000): Promise<number | null> {
+  if (!isHealthKitSupported() || !initialized) return null;
+
+  const since = new Date(Date.now() - sinceMs).toISOString();
+  const samples = await fetchSamples(AppleHealthKit.getHeartRateSamples, {
+    startDate: since,
+    unit: AppleHealthKit.Constants.Units.bpm,
+  });
+  if (samples.length === 0) return null;
+  return Math.round(samples[samples.length - 1].value);
 }
 
 const ACTIVITY_BY_SESSION_TYPE: Record<string, HealthActivity> = {

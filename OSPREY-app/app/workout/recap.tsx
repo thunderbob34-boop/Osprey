@@ -46,7 +46,12 @@ export default function WorkoutRecapScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.center}>
           <Text style={styles.errorText}>Could not load workout recap.</Text>
-          <TouchableOpacity style={styles.homeBtn} onPress={() => router.replace('/(tabs)')}>
+          <TouchableOpacity
+            style={styles.homeBtn}
+            onPress={() => router.replace('/(tabs)')}
+            accessibilityRole="button"
+            accessibilityLabel="Back to home"
+          >
             <Text style={styles.homeBtnText}>Back to Home</Text>
           </TouchableOpacity>
         </View>
@@ -138,7 +143,12 @@ export default function WorkoutRecapScreen() {
       </ScrollView>
 
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.homeBtn} onPress={() => router.replace('/(tabs)')}>
+        <TouchableOpacity
+          style={styles.homeBtn}
+          onPress={() => router.replace('/(tabs)')}
+          accessibilityRole="button"
+          accessibilityLabel="Done"
+        >
           <Text style={styles.homeBtnText}>Done</Text>
         </TouchableOpacity>
       </View>

@@ -74,6 +74,9 @@ export default function OnboardingShell({
           style={[styles.primaryBtn, continueDisabled && styles.primaryBtnDisabled]}
           onPress={onContinue}
           disabled={continueDisabled || loading}
+          accessibilityRole="button"
+          accessibilityLabel={continueLabel}
+          accessibilityState={{ disabled: continueDisabled || loading, busy: loading }}
         >
           {loading ? (
             <ActivityIndicator color="#000" />
@@ -111,6 +114,9 @@ export function OptionCard({
       ]}
       onPress={onPress}
       activeOpacity={0.8}
+      accessibilityRole="button"
+      accessibilityLabel={`${optionTitle}, ${description}`}
+      accessibilityState={{ selected }}
     >
       <View style={[styles.optionIcon, { backgroundColor: `${accentColor}26` }]}>
         <Text style={styles.optionIconText}>{icon}</Text>

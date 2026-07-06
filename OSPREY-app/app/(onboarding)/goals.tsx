@@ -30,6 +30,9 @@ function DayPicker({
             key={day}
             style={[styles.dayBtn, value === day && styles.dayBtnActive]}
             onPress={() => onChange(day)}
+            accessibilityRole="button"
+            accessibilityLabel={`${day} ${label}`}
+            accessibilityState={{ selected: value === day }}
           >
             <Text style={[styles.dayBtnText, value === day && styles.dayBtnTextActive]}>
               {day}

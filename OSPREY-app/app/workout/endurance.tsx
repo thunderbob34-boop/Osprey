@@ -18,7 +18,11 @@ import { expandIntervalSteps, ozzieCueForStep, totalIntervalDistanceM, type Inte
 import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
 import { formatDuration } from '@/store/workoutStore';
 import { useSubscription } from '@/hooks/useSubscription';
-import { isHealthKitSupported, requestHealthKitAuthorization } from '@/services/healthkit';
+import {
+  fetchHealthKitWorkouts,
+  isHealthKitSupported,
+  requestHealthKitAuthorization,
+} from '@/services/healthkit';
 import type { IntervalEffort, IntervalPrescription } from '@/types/workout';
 
 const SESSION_META: Record<EnduranceType, { icon: string; label: string; color: string; borderColor: string }> = {
@@ -203,12 +207,27 @@ export default function EnduranceWorkoutScreen() {
     setSyncing(true);
     try {
       const authorized = await requestHealthKitAuthorization();
-      if (authorized) {
-        Alert.alert('Apple Health', 'Synced. Distance data from your HealthKit workout will be included.');
-        // In a full implementation, you'd fetch the distance from HealthKit here
-        // For now, just confirm the sync intent
-      } else {
+      if (!authorized) {
         Alert.alert('Apple Health', 'Permission not granted. Enter distance manually.');
+        return;
+      }
+      // Look for a workout an Apple Watch (or other HealthKit source) recorded
+      // since this session started — e.g. the user also hit "start" on the
+      // Watch's own Workout app in parallel with OSPREY.
+      const workouts = await fetchHealthKitWorkouts(new Date(startedAtRef.current).toISOString());
+      const match = workouts.find((w) => w.distanceMeters != null && w.distanceMeters > 0);
+      if (match?.distanceMeters != null) {
+        setDistance(String(Math.round((match.distanceMeters / 1000) * 100) / 100));
+        setDistanceUnit('km');
+        Alert.alert(
+          'Apple Health',
+          `Pulled ${(match.distanceMeters / 1000).toFixed(2)} km from your ${match.activityName} workout.`,
+        );
+      } else {
+        Alert.alert(
+          'Apple Health',
+          "No matching workout with distance found yet. If you're recording on Apple Watch, end that workout first, then sync again — or enter distance manually.",
+        );
       }
     } catch {
       Alert.alert('Apple Health', 'Could not sync. Enter distance manually.');
@@ -311,7 +330,12 @@ export default function EnduranceWorkoutScreen() {
                 {stepRemainingS != null ? (
                   <Text style={styles.intervalCountdown}>{formatMMSS(stepRemainingS)}</Text>
                 ) : (
-                  <TouchableOpacity style={styles.intervalCompleteBtn} onPress={advanceStep}>
+                  <TouchableOpacity
+                    style={styles.intervalCompleteBtn}
+                    onPress={advanceStep}
+                    accessibilityRole="button"
+                    accessibilityLabel="Mark interval complete"
+                  >
                     <Text style={styles.intervalCompleteBtnText}>Mark Interval Complete</Text>
                   </TouchableOpacity>
                 )}
@@ -320,7 +344,12 @@ export default function EnduranceWorkoutScreen() {
           </View>
         ) : null}
 
-        <TouchableOpacity style={styles.ozzieBtn} onPress={handleManualCue}>
+        <TouchableOpacity
+          style={styles.ozzieBtn}
+          onPress={handleManualCue}
+          accessibilityRole="button"
+          accessibilityLabel="Get an Ozzie cue"
+        >
           <OzzieAvatar size={18} />
           <Text style={styles.ozzieBtnText}>Ozzie Cue</Text>
         </TouchableOpacity>
@@ -335,6 +364,7 @@ export default function EnduranceWorkoutScreen() {
               value={distance}
               onChangeText={setDistance}
               keyboardType="decimal-pad"
+              accessibilityLabel="Distance"
             />
           </View>
           <View style={styles.unitRow}>
@@ -343,6 +373,9 @@ export default function EnduranceWorkoutScreen() {
                 key={unit}
                 style={[styles.unitBtn, distanceUnit === unit && styles.unitBtnActive]}
                 onPress={() => setDistanceUnit(unit)}
+                accessibilityRole="button"
+                accessibilityLabel={unit}
+                accessibilityState={{ selected: distanceUnit === unit }}
               >
                 <Text style={[styles.unitBtnText, distanceUnit === unit && styles.unitBtnTextActive]}>
                   {unit}
@@ -354,6 +387,9 @@ export default function EnduranceWorkoutScreen() {
             style={[styles.syncBtn, syncing && { opacity: 0.6 }]}
             onPress={handleSyncHealthKit}
             disabled={syncing}
+            accessibilityRole="button"
+            accessibilityLabel="Sync distance from Apple Health"
+            accessibilityState={{ disabled: syncing, busy: syncing }}
           >
             {syncing ? (
               <ActivityIndicator color={Colors.teal} size="small" />
@@ -363,7 +399,14 @@ export default function EnduranceWorkoutScreen() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.endBtn} onPress={confirmEnd} disabled={saving}>
+        <TouchableOpacity
+          style={styles.endBtn}
+          onPress={confirmEnd}
+          disabled={saving}
+          accessibilityRole="button"
+          accessibilityLabel="End and save session"
+          accessibilityState={{ disabled: saving, busy: saving }}
+        >
           {saving ? (
             <ActivityIndicator color={Colors.red} />
           ) : (

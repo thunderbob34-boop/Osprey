@@ -98,7 +98,11 @@ export default function ActivityScreen() {
                   <Text style={styles.cardTime}>{timeAgo(card.postedAt)}</Text>
                 </View>
                 {card.userId === currentUserId ? (
-                  <TouchableOpacity onPress={() => handleDelete(card)}>
+                  <TouchableOpacity
+                    onPress={() => handleDelete(card)}
+                    accessibilityRole="button"
+                    accessibilityLabel="Remove this post"
+                  >
                     <Text style={styles.delete}>✕</Text>
                   </TouchableOpacity>
                 ) : null}
@@ -121,6 +125,9 @@ export default function ActivityScreen() {
                   style={[styles.kudoBtn, card.hasKudo && styles.kudoBtnActive]}
                   onPress={() => handleKudo(card)}
                   disabled={kudoingId === card.shareId}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${card.hasKudo ? 'Remove kudo' : 'Give kudo'}${card.kudoCount > 0 ? `, ${card.kudoCount}` : ''}`}
+                  accessibilityState={{ selected: card.hasKudo, disabled: kudoingId === card.shareId }}
                 >
                   {kudoingId === card.shareId ? (
                     <ActivityIndicator size="small" color={Colors.teal} />

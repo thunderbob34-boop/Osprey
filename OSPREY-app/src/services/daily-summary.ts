@@ -2,6 +2,7 @@ import { startOfMonth } from 'date-fns';
 import { supabase } from '@/services/supabase';
 import { fetchWeekTargetKm } from '@/services/workouts';
 import { getCachedWeatherBriefSummary } from '@/services/weather-context';
+import { getScheduleBriefSummary } from '@/services/schedule-context';
 import type {
   DailySummaryData,
   DailySummaryViewRow,
@@ -134,7 +135,10 @@ async function fetchDailyBrief(userId: string): Promise<DailyBrief> {
     };
   }
 
-  const weatherSummary = await getCachedWeatherBriefSummary();
+  const [weatherSummary, scheduleSummary] = await Promise.all([
+    getCachedWeatherBriefSummary(),
+    getScheduleBriefSummary(userId),
+  ]);
   const { data: generated, error: fnError } = await supabase.functions.invoke<{
     insight_text: string;
     why_reasoning: string;
@@ -142,7 +146,10 @@ async function fetchDailyBrief(userId: string): Promise<DailyBrief> {
     habit_tip: string | null;
   }>('ozzie-daily-brief', {
     method: 'POST',
-    body: weatherSummary ? { weather: weatherSummary } : {},
+    body: {
+      ...(weatherSummary ? { weather: weatherSummary } : {}),
+      ...(scheduleSummary ? { schedule: scheduleSummary } : {}),
+    },
   });
 
   if (fnError || !generated) {

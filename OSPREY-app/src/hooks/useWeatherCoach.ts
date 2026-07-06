@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import * as Location from 'expo-location';
 import { fetchForecast } from '@/services/weather';
-import { deriveWeatherCoach, type WeatherCoachResult } from '@/services/weather-coach';
+import { deriveWeatherCoach, type WeatherCoachResult, type WeatherRouteRef } from '@/services/weather-coach';
 import { setCachedWeatherBriefSummary } from '@/services/weather-context';
 
 async function getCoords(): Promise<{ latitude: number; longitude: number } | null> {
@@ -19,9 +19,12 @@ async function getCoords(): Promise<{ latitude: number; longitude: number } | nu
   return current?.coords ?? null;
 }
 
-export function useWeatherCoach(todaySessionType: string | null | undefined) {
+export function useWeatherCoach(
+  todaySessionType: string | null | undefined,
+  savedRoutes?: WeatherRouteRef[],
+) {
   return useQuery<WeatherCoachResult | null>({
-    queryKey: ['weather-coach', todaySessionType ?? 'unknown'],
+    queryKey: ['weather-coach', todaySessionType ?? 'unknown', savedRoutes?.length ?? 0],
     staleTime: 30 * 60 * 1000,
     retry: 1,
     queryFn: async () => {
@@ -29,7 +32,7 @@ export function useWeatherCoach(todaySessionType: string | null | undefined) {
       if (!coords) return null;
 
       const forecast = await fetchForecast(coords.latitude, coords.longitude);
-      const result = deriveWeatherCoach(forecast, todaySessionType ?? null);
+      const result = deriveWeatherCoach(forecast, todaySessionType ?? null, savedRoutes);
 
       // Stash a compact summary so the Ozzie daily brief can reference the
       // forecast without the server needing location or a weather key.

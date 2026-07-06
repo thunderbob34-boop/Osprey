@@ -2,9 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuthStore } from '@/store/authStore';
 import {
   buildRacePredictor,
+  buildTriathlonPredictor,
   computeAtlCtlTsb,
   computeInjuryRisk,
   fetchPerformanceData,
+  fetchTriathlonPreference,
   readinessFromTsb,
   type DailyLoad,
   type PerformanceMetrics,
@@ -23,11 +25,22 @@ export function usePerformance() {
   return useQuery<PerformanceResult>({
     queryKey: key,
     queryFn: async () => {
-      const { dailyLoads, bestRunMiles, bestRunTimeS } = await fetchPerformanceData(userId!);
+      const [
+        { dailyLoads, bestRunMiles, bestRunTimeS, bestSwimMiles, bestSwimTimeS, bestBikeMiles, bestBikeTimeS },
+        triathlonDistance,
+      ] = await Promise.all([fetchPerformanceData(userId!), fetchTriathlonPreference(userId!)]);
       const series = computeAtlCtlTsb(dailyLoads);
       const latest = series[series.length - 1] ?? { atl: 0, ctl: 0, tsb: 0 };
       const injuryRisk = computeInjuryRisk(dailyLoads);
       const racePredictor = buildRacePredictor(dailyLoads, bestRunMiles, bestRunTimeS);
+      const triathlonPredictor = triathlonDistance
+        ? buildTriathlonPredictor(
+            triathlonDistance,
+            bestSwimMiles > 0 ? { miles: bestSwimMiles, timeS: bestSwimTimeS } : null,
+            bestBikeMiles > 0 ? { miles: bestBikeMiles, timeS: bestBikeTimeS } : null,
+            bestRunMiles > 0 ? { miles: bestRunMiles, timeS: bestRunTimeS } : null,
+          )
+        : null;
 
       // ACWR: acute (7-day avg) / chronic (28-day avg)
       const last28 = dailyLoads.slice(-28);
@@ -51,6 +64,7 @@ export function usePerformance() {
         injuryRisk,
         series: chartSeries,
         racePredictor,
+        triathlonPredictor,
         trainingReadiness,
         dailyLoads,
       };

@@ -79,13 +79,24 @@ export default function InputModal({
             keyboardType={keyboardType}
             autoFocus
             autoCapitalize="none"
+            accessibilityLabel={placeholder ?? title}
           />
           <FieldError message={error} />
           <View style={styles.actions}>
-            <TouchableOpacity style={styles.cancelBtn} onPress={onCancel}>
+            <TouchableOpacity
+              style={styles.cancelBtn}
+              onPress={onCancel}
+              accessibilityRole="button"
+              accessibilityLabel="Cancel"
+            >
               <Text style={styles.cancelText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit}>
+            <TouchableOpacity
+              style={styles.submitBtn}
+              onPress={handleSubmit}
+              accessibilityRole="button"
+              accessibilityLabel={submitLabel}
+            >
               <Text style={styles.submitText}>{submitLabel}</Text>
             </TouchableOpacity>
           </View>

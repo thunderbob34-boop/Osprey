@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "OSPREY-app (Expo)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "OSPREY-app", "run", "start"],
+      "port": 8081
+    }
+  ]
+}

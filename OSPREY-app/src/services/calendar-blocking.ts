@@ -69,8 +69,13 @@ async function getOrCreateOspreyCalendar(userId: string): Promise<string> {
   return newCalendarId;
 }
 
+/** The OSPREY calendar id from a prior sync, or null if never created. */
+export async function getOspreyCalendarId(userId: string): Promise<string | null> {
+  return AsyncStorage.getItem(calIdKey(userId));
+}
+
 /** Most common workout start hour over the last 30 days, default 6pm. */
-async function fetchUsualWorkoutHour(userId: string): Promise<number> {
+export async function fetchUsualWorkoutHour(userId: string): Promise<number> {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 86400000).toISOString();
   const { data } = await supabase
     .from('workout_logs')

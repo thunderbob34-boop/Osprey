@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
@@ -27,7 +28,9 @@ export default function SignInScreen() {
   const [error, setError] = useState('');
   const [appleAvailable, setAppleAvailable] = useState(false);
 
-  const { signIn, signUp, signInWithApple, signInWithGoogle, loading } = useAuthStore();
+  const [resetSending, setResetSending] = useState(false);
+  const { signIn, signUp, signInWithApple, signInWithGoogle, sendPasswordReset, loading } =
+    useAuthStore();
 
   useEffect(() => {
     if (Platform.OS === 'ios') {
@@ -45,6 +48,25 @@ export default function SignInScreen() {
     setError('');
     const { error } = await signInWithGoogle();
     if (error) setError(error);
+  }
+
+  async function handleForgotPassword() {
+    setError('');
+    if (!email) {
+      setError('Enter your email above, then tap "Forgot password?" again.');
+      return;
+    }
+    setResetSending(true);
+    const { error } = await sendPasswordReset(email);
+    setResetSending(false);
+    if (error) {
+      setError(error);
+      return;
+    }
+    Alert.alert(
+      'Check your email',
+      `We sent a password reset link to ${email}. Follow it to set a new password.`,
+    );
   }
 
   async function handleSubmit() {
@@ -89,6 +111,7 @@ export default function SignInScreen() {
               value={displayName}
               onChangeText={setDisplayName}
               autoCapitalize="words"
+              accessibilityLabel="Your name"
             />
           )}
           <TextInput
@@ -100,6 +123,7 @@ export default function SignInScreen() {
             autoCapitalize="none"
             keyboardType="email-address"
             autoComplete="email"
+            accessibilityLabel="Email"
           />
           <TextInput
             style={styles.input}
@@ -108,7 +132,23 @@ export default function SignInScreen() {
             value={password}
             onChangeText={setPassword}
             secureTextEntry
+            accessibilityLabel="Password"
           />
+
+          {mode === 'signin' ? (
+            <TouchableOpacity
+              style={styles.forgotPassword}
+              onPress={handleForgotPassword}
+              disabled={resetSending}
+              accessibilityRole="button"
+              accessibilityLabel="Forgot password?"
+              accessibilityState={{ disabled: resetSending, busy: resetSending }}
+            >
+              <Text style={styles.forgotPasswordText}>
+                {resetSending ? 'Sending...' : 'Forgot password?'}
+              </Text>
+            </TouchableOpacity>
+          ) : null}
 
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
@@ -116,6 +156,9 @@ export default function SignInScreen() {
             style={styles.submitBtn}
             onPress={handleSubmit}
             disabled={loading}
+            accessibilityRole="button"
+            accessibilityLabel={mode === 'signin' ? 'Sign in' : 'Create account'}
+            accessibilityState={{ disabled: loading, busy: loading }}
           >
             {loading ? (
               <ActivityIndicator color="#000" />
@@ -132,6 +175,8 @@ export default function SignInScreen() {
               setMode(mode === 'signin' ? 'signup' : 'signin');
               setError('');
             }}
+            accessibilityRole="button"
+            accessibilityLabel={mode === 'signin' ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
           >
             <Text style={styles.switchModeText}>
               {mode === 'signin'
@@ -157,7 +202,14 @@ export default function SignInScreen() {
             />
           ) : null}
 
-          <TouchableOpacity style={styles.googleBtn} onPress={handleGoogle} disabled={loading}>
+          <TouchableOpacity
+            style={styles.googleBtn}
+            onPress={handleGoogle}
+            disabled={loading}
+            accessibilityRole="button"
+            accessibilityLabel="Continue with Google"
+            accessibilityState={{ disabled: loading, busy: loading }}
+          >
             <Text style={styles.googleBtnG}>G</Text>
             <Text style={styles.googleBtnText}>Continue with Google</Text>
           </TouchableOpacity>
@@ -210,6 +262,15 @@ const styles = StyleSheet.create({
     color: Colors.red,
     fontSize: 13,
     textAlign: 'center',
+  },
+  forgotPassword: {
+    alignItems: 'flex-end',
+    paddingVertical: 2,
+  },
+  forgotPasswordText: {
+    fontSize: 13,
+    color: Colors.teal,
+    fontWeight: '600',
   },
   submitBtn: {
     backgroundColor: Colors.teal,

@@ -16,6 +16,7 @@ import {
   type RaceRetroUpdate,
 } from '@/services/races';
 import { withCache } from '@/services/offline-cache';
+import { reconcileRaceWeekReminders } from '@/services/notifications';
 import { useAuthStore } from '@/store/authStore';
 
 export function useRaces() {
@@ -43,7 +44,10 @@ export function useRaces() {
 
   const create = useMutation({
     mutationFn: (input: RaceEventInput) => createRaceEvent(userId!, input),
-    onSuccess: invalidate,
+    onSuccess: () => {
+      invalidate();
+      if (userId) reconcileRaceWeekReminders(userId).catch(() => undefined);
+    },
   });
 
   const recordResult = useMutation({
@@ -54,7 +58,10 @@ export function useRaces() {
 
   const remove = useMutation({
     mutationFn: (raceId: string) => deleteRaceEvent(raceId),
-    onSuccess: invalidate,
+    onSuccess: () => {
+      invalidate();
+      if (userId) reconcileRaceWeekReminders(userId).catch(() => undefined);
+    },
   });
 
   const linkToPlan = useMutation({

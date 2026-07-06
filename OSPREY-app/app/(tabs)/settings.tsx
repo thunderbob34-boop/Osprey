@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  Linking,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -14,6 +15,9 @@ import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 import { Colors } from '@/constants/colors';
+import { PRIVACY_POLICY_URL, SUPPORT_EMAIL } from '@/constants/links';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import type { UnitSystem } from '@/services/units';
 import { useAuthStore } from '@/store/authStore';
 import { hasOspreyPlus, restorePurchases } from '@/services/subscriptions';
 import {
@@ -26,9 +30,14 @@ import {
   cancelDailyNudge,
   fetchSmartNudgeHour,
   isDailyNudgeScheduled,
+  isRaceWeekRemindersEnabled,
   requestNotificationPermission,
   scheduleDailyNudge,
+  setRaceWeekRemindersEnabled,
 } from '@/services/notifications';
+import { isSupplementRemindersEnabled, setSupplementRemindersEnabled } from '@/services/supplements';
+import { isEveningBriefEnabled, setEveningBriefEnabled } from '@/services/evening-brief';
+import { requestDataExport } from '@/services/data-export';
 import {
   disableCalendarBlocking,
   enableCalendarBlocking,
@@ -49,6 +58,7 @@ export default function SettingsTab() {
   const deleteAccount = useAuthStore((s) => s.deleteAccount);
   const profile = useAuthStore((s) => s.profile);
   const userId = useAuthStore((s) => s.user?.id);
+  const { units, setUnits } = useUnitPreference();
   const [plusActive, setPlusActive] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const [healthConnected, setHealthConnected] = useState(false);
@@ -58,7 +68,14 @@ export default function SettingsTab() {
   const [nudgeLoading, setNudgeLoading] = useState(false);
   const [calBlockEnabled, setCalBlockEnabled] = useState(false);
   const [calBlockLoading, setCalBlockLoading] = useState(false);
+  const [suppRemindersEnabled, setSuppRemindersEnabled] = useState(true);
+  const [suppRemindersLoading, setSuppRemindersLoading] = useState(false);
+  const [raceWeekEnabled, setRaceWeekEnabled] = useState(true);
+  const [raceWeekLoading, setRaceWeekLoading] = useState(false);
+  const [eveningBriefEnabled, setEveningBriefEnabledState] = useState(false);
+  const [eveningBriefLoading, setEveningBriefLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
     hasOspreyPlus().then(setPlusActive).catch(() => setPlusActive(false));
@@ -76,6 +93,18 @@ export default function SettingsTab() {
 
   useEffect(() => {
     if (userId) isCalendarBlockingEnabled(userId).then(setCalBlockEnabled).catch(() => undefined);
+  }, [userId]);
+
+  useEffect(() => {
+    if (userId) isSupplementRemindersEnabled(userId).then(setSuppRemindersEnabled).catch(() => undefined);
+  }, [userId]);
+
+  useEffect(() => {
+    if (userId) isRaceWeekRemindersEnabled(userId).then(setRaceWeekEnabled).catch(() => undefined);
+  }, [userId]);
+
+  useEffect(() => {
+    if (userId) isEveningBriefEnabled(userId).then(setEveningBriefEnabledState).catch(() => undefined);
   }, [userId]);
 
   async function handleToggleCalendarBlocking() {
@@ -97,6 +126,60 @@ export default function SettingsTab() {
       Alert.alert('Calendar', err instanceof Error ? err.message : 'Something went wrong.');
     } finally {
       setCalBlockLoading(false);
+    }
+  }
+
+  async function handleToggleSupplementReminders() {
+    if (!userId || suppRemindersLoading) return;
+    setSuppRemindersLoading(true);
+    try {
+      const next = !suppRemindersEnabled;
+      const ok = await setSupplementRemindersEnabled(userId, next);
+      if (!ok) {
+        Alert.alert('Notifications', 'Enable notifications in Settings to get supplement reminders.');
+        return;
+      }
+      setSuppRemindersEnabled(next);
+    } catch (err) {
+      Alert.alert('Notifications', err instanceof Error ? err.message : 'Something went wrong.');
+    } finally {
+      setSuppRemindersLoading(false);
+    }
+  }
+
+  async function handleToggleRaceWeek() {
+    if (!userId || raceWeekLoading) return;
+    setRaceWeekLoading(true);
+    try {
+      const next = !raceWeekEnabled;
+      const ok = await setRaceWeekRemindersEnabled(userId, next);
+      if (!ok) {
+        Alert.alert('Notifications', 'Enable notifications in Settings to get race-week reminders.');
+        return;
+      }
+      setRaceWeekEnabled(next);
+    } catch (err) {
+      Alert.alert('Notifications', err instanceof Error ? err.message : 'Something went wrong.');
+    } finally {
+      setRaceWeekLoading(false);
+    }
+  }
+
+  async function handleToggleEveningBrief() {
+    if (!userId || eveningBriefLoading) return;
+    setEveningBriefLoading(true);
+    try {
+      const next = !eveningBriefEnabled;
+      const ok = await setEveningBriefEnabled(userId, next);
+      if (!ok) {
+        Alert.alert('Notifications', 'Enable notifications in Settings to get the evening look-ahead.');
+        return;
+      }
+      setEveningBriefEnabledState(next);
+    } catch (err) {
+      Alert.alert('Notifications', err instanceof Error ? err.message : 'Something went wrong.');
+    } finally {
+      setEveningBriefLoading(false);
     }
   }
 
@@ -177,6 +260,19 @@ export default function SettingsTab() {
     ]);
   }
 
+  async function handleExportData() {
+    if (exporting) return;
+    setExporting(true);
+    try {
+      const { email } = await requestDataExport();
+      Alert.alert('Export sent', `Check ${email} in a few minutes for your data.`);
+    } catch (err) {
+      Alert.alert('Export failed', err instanceof Error ? err.message : 'Try again.');
+    } finally {
+      setExporting(false);
+    }
+  }
+
   function handleDeleteAccount() {
     Alert.alert(
       'Delete your account?',
@@ -230,11 +326,23 @@ export default function SettingsTab() {
             </Text>
           )}
           {!plusActive ? (
-            <TouchableOpacity style={styles.primaryBtn} onPress={() => router.push('/paywall')}>
+            <TouchableOpacity
+              style={styles.primaryBtn}
+              onPress={() => router.push('/paywall')}
+              accessibilityRole="button"
+              accessibilityLabel="Upgrade to OSPREY+"
+            >
               <Text style={styles.primaryBtnText}>Upgrade to OSPREY+</Text>
             </TouchableOpacity>
           ) : null}
-          <TouchableOpacity style={styles.linkBtn} onPress={handleRestore} disabled={loading}>
+          <TouchableOpacity
+            style={styles.linkBtn}
+            onPress={handleRestore}
+            disabled={loading}
+            accessibilityRole="button"
+            accessibilityLabel="Restore purchases"
+            accessibilityState={{ disabled: loading, busy: loading }}
+          >
             <Text style={styles.linkText}>Restore purchases</Text>
           </TouchableOpacity>
         </View>
@@ -249,6 +357,9 @@ export default function SettingsTab() {
               style={styles.primaryBtn}
               onPress={handleConnectHealth}
               disabled={healthSyncing}
+              accessibilityRole="button"
+              accessibilityLabel={healthConnected ? 'Sync Apple Health now' : 'Connect Apple Health'}
+              accessibilityState={{ disabled: healthSyncing, busy: healthSyncing }}
             >
               {healthSyncing ? (
                 <ActivityIndicator color="#000" />
@@ -281,10 +392,73 @@ export default function SettingsTab() {
                 onValueChange={handleToggleNudge}
                 trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
                 thumbColor={nudgeEnabled ? Colors.teal : '#f4f3f4'}
+                accessibilityRole="switch"
+                accessibilityLabel="Ozzie's daily nudge"
               />
             )}
           </View>
           <View style={styles.rowDivider} />
+          <View style={styles.switchRow}>
+            <View style={styles.switchRowLeft}>
+              <Text style={styles.cardLabel}>Supplement Reminders</Text>
+              <Text style={styles.switchRowSub}>Timed nudges for each reminder you've set up</Text>
+            </View>
+            {suppRemindersLoading ? (
+              <ActivityIndicator color={Colors.teal} />
+            ) : (
+              <Switch
+                value={suppRemindersEnabled}
+                onValueChange={handleToggleSupplementReminders}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
+                thumbColor={suppRemindersEnabled ? Colors.teal : '#f4f3f4'}
+                accessibilityRole="switch"
+                accessibilityLabel="Supplement reminders"
+              />
+            )}
+          </View>
+          <View style={styles.rowDivider} />
+          <View style={styles.switchRow}>
+            <View style={styles.switchRowLeft}>
+              <Text style={styles.cardLabel}>Race-Week Reminders</Text>
+              <Text style={styles.switchRowSub}>A heads-up 7 days before each upcoming race</Text>
+            </View>
+            {raceWeekLoading ? (
+              <ActivityIndicator color={Colors.teal} />
+            ) : (
+              <Switch
+                value={raceWeekEnabled}
+                onValueChange={handleToggleRaceWeek}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
+                thumbColor={raceWeekEnabled ? Colors.teal : '#f4f3f4'}
+                accessibilityRole="switch"
+                accessibilityLabel="Race-week reminders"
+              />
+            )}
+          </View>
+          <View style={styles.rowDivider} />
+          <View style={styles.switchRow}>
+            <View style={styles.switchRowLeft}>
+              <Text style={styles.cardLabel}>Evening Look-Ahead</Text>
+              <Text style={styles.switchRowSub}>
+                An 8pm heads-up on tomorrow's session, weather, and fueling
+              </Text>
+            </View>
+            {eveningBriefLoading ? (
+              <ActivityIndicator color={Colors.teal} />
+            ) : (
+              <Switch
+                value={eveningBriefEnabled}
+                onValueChange={handleToggleEveningBrief}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
+                thumbColor={eveningBriefEnabled ? Colors.teal : '#f4f3f4'}
+                accessibilityRole="switch"
+                accessibilityLabel="Evening look-ahead"
+              />
+            )}
+          </View>
+        </View>
+
+        <View style={styles.card}>
           <View style={styles.switchRow}>
             <View style={styles.switchRowLeft}>
               <Text style={styles.cardLabel}>Calendar Blocking</Text>
@@ -302,6 +476,8 @@ export default function SettingsTab() {
                 onValueChange={handleToggleCalendarBlocking}
                 trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
                 thumbColor={calBlockEnabled ? Colors.teal : '#f4f3f4'}
+                accessibilityRole="switch"
+                accessibilityLabel="Calendar blocking"
               />
             )}
           </View>
@@ -309,7 +485,12 @@ export default function SettingsTab() {
 
         <View style={styles.card}>
           <Text style={styles.cardLabel}>Supplements & Meds</Text>
-          <TouchableOpacity style={styles.planRow} onPress={() => router.push('/supplements')}>
+          <TouchableOpacity
+            style={styles.planRow}
+            onPress={() => router.push('/supplements')}
+            accessibilityRole="button"
+            accessibilityLabel="Supplement and medication reminders"
+          >
             <View style={styles.planRowLeft}>
               <Text style={styles.cardValue}>Reminders</Text>
               <Text style={styles.planRowSub}>Timed supplement & medication nudges</Text>
@@ -320,7 +501,12 @@ export default function SettingsTab() {
 
         <View style={styles.card}>
           <Text style={styles.cardLabel}>Training Plan</Text>
-          <TouchableOpacity style={styles.planRow} onPress={() => router.push('/plan-preview')}>
+          <TouchableOpacity
+            style={styles.planRow}
+            onPress={() => router.push('/plan-preview')}
+            accessibilityRole="button"
+            accessibilityLabel="This week's plan"
+          >
             <View style={styles.planRowLeft}>
               <Text style={styles.cardValue}>This Week's Plan</Text>
               <Text style={styles.planRowSub}>See your full weekly schedule</Text>
@@ -328,7 +514,12 @@ export default function SettingsTab() {
             <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>
           <View style={styles.rowDivider} />
-          <TouchableOpacity style={styles.planRow} onPress={() => router.push('/preferences')}>
+          <TouchableOpacity
+            style={styles.planRow}
+            onPress={() => router.push('/preferences')}
+            accessibilityRole="button"
+            accessibilityLabel="Training preferences"
+          >
             <View style={styles.planRowLeft}>
               <Text style={styles.cardValue}>Training Preferences</Text>
               <Text style={styles.planRowSub}>
@@ -341,7 +532,88 @@ export default function SettingsTab() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.signOutBtn} onPress={handleSignOut}>
+        <View style={styles.card}>
+          <Text style={styles.cardLabel}>Units</Text>
+          <View style={styles.unitToggleRow}>
+            {(['imperial', 'metric'] as UnitSystem[]).map((option) => (
+              <TouchableOpacity
+                key={option}
+                style={[styles.unitOption, units === option && styles.unitOptionActive]}
+                onPress={() => setUnits.mutate(option)}
+                disabled={setUnits.isPending}
+                accessibilityRole="button"
+                accessibilityLabel={option === 'imperial' ? 'Imperial, miles and pounds' : 'Metric, kilometers and kilograms'}
+                accessibilityState={{ selected: units === option, disabled: setUnits.isPending }}
+              >
+                <Text style={[styles.unitOptionText, units === option && styles.unitOptionTextActive]}>
+                  {option === 'imperial' ? 'Imperial (mi, lbs)' : 'Metric (km, kg)'}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardLabel}>About & Support</Text>
+          <TouchableOpacity
+            style={styles.planRow}
+            onPress={() => Linking.openURL(PRIVACY_POLICY_URL).catch(() => undefined)}
+            accessibilityRole="button"
+            accessibilityLabel="Privacy policy"
+          >
+            <View style={styles.planRowLeft}>
+              <Text style={styles.cardValue}>Privacy Policy</Text>
+              <Text style={styles.planRowSub}>How your training data is handled</Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
+          </TouchableOpacity>
+          <View style={styles.rowDivider} />
+          <TouchableOpacity
+            style={styles.planRow}
+            onPress={() =>
+              Linking.openURL(`mailto:${SUPPORT_EMAIL}?subject=OSPREY%20Support`).catch(() =>
+                Alert.alert('Contact Support', `Email us at ${SUPPORT_EMAIL}`),
+              )
+            }
+            accessibilityRole="button"
+            accessibilityLabel="Contact support"
+          >
+            <View style={styles.planRowLeft}>
+              <Text style={styles.cardValue}>Contact Support</Text>
+              <Text style={styles.planRowSub}>{SUPPORT_EMAIL}</Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardLabel}>Your Data</Text>
+          <Text style={styles.planRowSub}>
+            Export everything you've logged — workouts, lift sets, nutrition, bodyweight, and races —
+            as CSV files emailed to your account address.
+          </Text>
+          <TouchableOpacity
+            style={styles.exportBtn}
+            onPress={handleExportData}
+            disabled={exporting}
+            accessibilityRole="button"
+            accessibilityLabel="Export my data"
+            accessibilityState={{ disabled: exporting, busy: exporting }}
+          >
+            {exporting ? (
+              <ActivityIndicator color={Colors.teal} />
+            ) : (
+              <Text style={styles.exportBtnText}>Export My Data</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity
+          style={styles.signOutBtn}
+          onPress={handleSignOut}
+          accessibilityRole="button"
+          accessibilityLabel="Sign out"
+        >
           <Text style={styles.signOutText}>Sign Out</Text>
         </TouchableOpacity>
 
@@ -355,6 +627,9 @@ export default function SettingsTab() {
             style={styles.dangerBtn}
             onPress={handleDeleteAccount}
             disabled={deleting}
+            accessibilityRole="button"
+            accessibilityLabel="Delete account"
+            accessibilityState={{ disabled: deleting, busy: deleting }}
           >
             {deleting ? (
               <ActivityIndicator color={Colors.red} />
@@ -393,6 +668,19 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   cardValue: { fontSize: 15, fontWeight: '700', color: Colors.textPrimary },
+  unitToggleRow: { flexDirection: 'row', gap: 8, marginTop: 4 },
+  unitOption: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    backgroundColor: 'rgba(255,255,255,0.03)',
+    borderRadius: 10,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  unitOptionActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+  unitOptionText: { fontSize: 13, fontWeight: '600', color: Colors.textSecondary },
+  unitOptionTextActive: { color: Colors.teal, fontWeight: '700' },
   primaryBtn: {
     marginTop: 4,
     backgroundColor: Colors.teal,
@@ -432,6 +720,17 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   signOutText: { color: Colors.textPrimary, fontSize: 14, fontWeight: '600' },
+  exportBtn: {
+    marginTop: 10,
+    alignSelf: 'flex-start',
+    backgroundColor: Colors.surfaceTeal,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  exportBtnText: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
   dangerCard: {
     marginTop: 24,
     backgroundColor: 'rgba(255,68,68,0.05)',

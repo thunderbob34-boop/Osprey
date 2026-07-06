@@ -158,7 +158,12 @@ export default function PreferencesScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.closeBtn}>
+        <TouchableOpacity
+          onPress={() => router.back()}
+          style={styles.closeBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Close"
+        >
           <Text style={styles.closeText}>✕</Text>
         </TouchableOpacity>
         <Text style={styles.title}>Build Your Plan</Text>
@@ -173,6 +178,9 @@ export default function PreferencesScreen() {
               key={opt.value}
               style={[styles.chip, primaryGoal === opt.value && styles.chipSelected]}
               onPress={() => setPrimaryGoal(opt.value)}
+              accessibilityRole="button"
+              accessibilityLabel={opt.label}
+              accessibilityState={{ selected: primaryGoal === opt.value }}
             >
               <Text
                 style={[styles.chipText, primaryGoal === opt.value && styles.chipTextSelected]}
@@ -192,6 +200,9 @@ export default function PreferencesScreen() {
                   key={opt.value}
                   style={[styles.chip, triathlonDistance === opt.value && styles.chipSelected]}
                   onPress={() => setTriathlonDistance(opt.value)}
+                  accessibilityRole="button"
+                  accessibilityLabel={opt.label}
+                  accessibilityState={{ selected: triathlonDistance === opt.value }}
                 >
                   <Text
                     style={[
@@ -214,6 +225,9 @@ export default function PreferencesScreen() {
               key={opt.value}
               style={[styles.chip, experienceLevel === opt.value && styles.chipSelected]}
               onPress={() => setExperienceLevel(opt.value)}
+              accessibilityRole="button"
+              accessibilityLabel={opt.label}
+              accessibilityState={{ selected: experienceLevel === opt.value }}
             >
               <Text
                 style={[styles.chipText, experienceLevel === opt.value && styles.chipTextSelected]}
@@ -231,6 +245,9 @@ export default function PreferencesScreen() {
               key={day}
               style={[styles.chipLarge, daysPerWeek === day && styles.chipSelected]}
               onPress={() => setDaysPerWeek(day)}
+              accessibilityRole="button"
+              accessibilityLabel={`${day} days per week`}
+              accessibilityState={{ selected: daysPerWeek === day }}
             >
               <Text
                 style={[styles.chipTextLarge, daysPerWeek === day && styles.chipTextSelected]}
@@ -248,6 +265,9 @@ export default function PreferencesScreen() {
               key={day}
               style={[styles.chip, longRunDay === day && styles.chipSelected]}
               onPress={() => setLongRunDay(day)}
+              accessibilityRole="button"
+              accessibilityLabel={day.charAt(0).toUpperCase() + day.slice(1)}
+              accessibilityState={{ selected: longRunDay === day }}
             >
               <Text
                 style={[styles.chipText, longRunDay === day && styles.chipTextSelected]}
@@ -269,6 +289,9 @@ export default function PreferencesScreen() {
               <TouchableOpacity
                 style={[styles.chip, includeSwim && styles.chipSelected]}
                 onPress={() => setIncludeSwim((v) => !v)}
+                accessibilityRole="checkbox"
+                accessibilityLabel="Swim sessions"
+                accessibilityState={{ checked: includeSwim }}
               >
                 <Text style={[styles.chipText, includeSwim && styles.chipTextSelected]}>
                   🏊 Swim Sessions
@@ -277,6 +300,9 @@ export default function PreferencesScreen() {
               <TouchableOpacity
                 style={[styles.chip, includeBike && styles.chipSelected]}
                 onPress={() => setIncludeBike((v) => !v)}
+                accessibilityRole="checkbox"
+                accessibilityLabel="Bike sessions"
+                accessibilityState={{ checked: includeBike }}
               >
                 <Text style={[styles.chipText, includeBike && styles.chipTextSelected]}>
                   🚴 Bike Sessions
@@ -290,6 +316,9 @@ export default function PreferencesScreen() {
           style={[styles.generateBtn, loading && styles.generateBtnDisabled]}
           onPress={handleGenerate}
           disabled={loading}
+          accessibilityRole="button"
+          accessibilityLabel="Generate my plan"
+          accessibilityState={{ disabled: loading, busy: loading }}
         >
           {loading ? (
             <>
@@ -301,7 +330,12 @@ export default function PreferencesScreen() {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.skipBtn} onPress={() => router.back()}>
+        <TouchableOpacity
+          style={styles.skipBtn}
+          onPress={() => router.back()}
+          accessibilityRole="button"
+          accessibilityLabel="Skip for now"
+        >
           <Text style={styles.skipText}>Skip for now</Text>
         </TouchableOpacity>
       </ScrollView>

@@ -39,7 +39,13 @@ interface RaceCardProps {
 
 function RaceCard({ item, onPress }: RaceCardProps) {
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.75}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={onPress}
+      activeOpacity={0.75}
+      accessibilityRole="button"
+      accessibilityLabel={`${item.name}, ${item.city ? `${item.city}, ${item.state}` : item.state || 'Location TBD'}, ${formatDate(item.date)}`}
+    >
       <View style={styles.cardMain}>
         <Text style={styles.cardName} numberOfLines={2}>
           {item.name}
@@ -117,7 +123,13 @@ export default function RaceSearchScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} hitSlop={12} style={styles.backBtn}>
+        <TouchableOpacity
+          onPress={() => router.back()}
+          hitSlop={12}
+          style={styles.backBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Go back"
+        >
           <Text style={styles.backText}>←</Text>
         </TouchableOpacity>
         <Text style={styles.title}>Find a Race</Text>
@@ -135,6 +147,7 @@ export default function RaceSearchScreen() {
           returnKeyType="search"
           autoCapitalize="none"
           autoCorrect={false}
+          accessibilityLabel="Search races by name or city"
         />
       </View>
 
@@ -149,6 +162,9 @@ export default function RaceSearchScreen() {
             key={f}
             style={[styles.filterChip, activeFilter === f && styles.filterChipActive]}
             onPress={() => setActiveFilter(f)}
+            accessibilityRole="button"
+            accessibilityLabel={f}
+            accessibilityState={{ selected: activeFilter === f }}
           >
             <Text style={[styles.filterChipText, activeFilter === f && styles.filterChipTextActive]}>
               {f}
@@ -164,7 +180,12 @@ export default function RaceSearchScreen() {
       ) : error ? (
         <View style={styles.center}>
           <Text style={styles.errorText}>{error}</Text>
-          <TouchableOpacity style={styles.retryBtn} onPress={handleRetry}>
+          <TouchableOpacity
+            style={styles.retryBtn}
+            onPress={handleRetry}
+            accessibilityRole="button"
+            accessibilityLabel="Retry"
+          >
             <Text style={styles.retryBtnText}>Retry</Text>
           </TouchableOpacity>
         </View>

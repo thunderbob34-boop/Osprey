@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useAuthStore } from '@/store/authStore';
 import { initRevenueCat } from '@/services/subscriptions';
 import { reconcileSupplementReminders } from '@/services/supplements';
+import { reconcileRaceWeekReminders } from '@/services/notifications';
 import { syncCalendarBlocks } from '@/services/calendar-blocking';
 import { fetchDefaultLiftExercises } from '@/services/workouts';
 import { ozziePrewarm } from '@/services/ozzie-audio';
@@ -34,6 +35,7 @@ export default function RootLayout() {
     if (userId) {
       initRevenueCat(userId).catch(() => undefined);
       reconcileSupplementReminders(userId).catch(() => undefined);
+      reconcileRaceWeekReminders(userId).catch(() => undefined);
       syncCalendarBlocks(userId).catch(() => undefined);
       // Warm the offline cache for the exercise library so lift logging works
       // without a signal even if the user hasn't opened the workout screen yet.
@@ -68,6 +70,7 @@ export default function RootLayout() {
         <Stack.Screen name="preferences" options={{ presentation: 'modal', headerShown: false }} />
         <Stack.Screen name="race-search" options={{ presentation: 'modal', headerShown: false }} />
         <Stack.Screen name="race-event" options={{ presentation: 'modal', headerShown: false }} />
+        <Stack.Screen name="reset-password" options={{ presentation: 'modal', headerShown: false }} />
       </Stack>
     </QueryClientProvider>
   );

@@ -2,8 +2,10 @@ import { supabase } from '@/services/supabase';
 import type {
   LoggedFoodRow,
   LoggedWorkoutRow,
+  MealType,
   QuickFoodInput,
   QuickWorkoutInput,
+  RecentMeal,
   TodayLogData,
 } from '@/types/log';
 
@@ -28,7 +30,7 @@ export async function fetchTodayLog(userId: string): Promise<TodayLogData> {
       .order('started_at', { ascending: false }),
     supabase
       .from('food_log_entries')
-      .select('id, meal_type, logged_at, calories, food_items(name)')
+      .select('id, meal_type, logged_at, calories, protein_g, carbs_g, fat_g, quantity_g, food_item_id, food_items(name)')
       .eq('user_id', userId)
       .gte('logged_at', since)
       .order('logged_at', { ascending: false }),
@@ -55,11 +57,102 @@ export async function fetchTodayLog(userId: string): Promise<TodayLogData> {
     mealType: row.meal_type,
     loggedAt: row.logged_at,
     calories: row.calories,
+    proteinG: row.protein_g,
+    carbsG: row.carbs_g,
+    fatG: row.fat_g,
+    quantityG: row.quantity_g,
+    foodItemId: row.food_item_id,
   }));
 
   const totalCalories = food.reduce((sum, row) => sum + (row.calories ?? 0), 0);
 
   return { workouts, food, totalCalories };
+}
+
+/**
+ * The user's most-logged meals over the last 3 weeks, most frequent first.
+ * Each carries the macros from its most recent logging so a re-log matches
+ * what they actually ate last time.
+ */
+export async function fetchRecentMeals(userId: string, limit = 6): Promise<RecentMeal[]> {
+  const since = new Date(Date.now() - 21 * 86400000).toISOString();
+
+  const { data, error } = await supabase
+    .from('food_log_entries')
+    .select('food_item_id, meal_type, quantity_g, calories, protein_g, carbs_g, fat_g, food_items(name)')
+    .eq('user_id', userId)
+    .gte('logged_at', since)
+    .order('logged_at', { ascending: false });
+
+  if (error) throw error;
+
+  const byItem = new Map<string, RecentMeal>();
+  for (const row of data ?? []) {
+    const foodItemId = row.food_item_id as string | null;
+    if (!foodItemId) continue;
+    const existing = byItem.get(foodItemId);
+    if (existing) {
+      existing.timesLogged += 1; // rows are newest-first, so macros stay from the latest log
+      continue;
+    }
+    byItem.set(foodItemId, {
+      foodItemId,
+      name: (row.food_items as { name?: string } | null)?.name ?? 'Meal',
+      mealType: (row.meal_type as MealType | null) ?? null,
+      quantityG: row.quantity_g,
+      calories: row.calories,
+      proteinG: row.protein_g,
+      carbsG: row.carbs_g,
+      fatG: row.fat_g,
+      timesLogged: 1,
+    });
+  }
+
+  return Array.from(byItem.values())
+    .sort((a, b) => b.timesLogged - a.timesLogged)
+    .slice(0, limit);
+}
+
+/**
+ * Re-logs every food entry from yesterday onto today, preserving each entry's
+ * time of day and meal type. Returns how many entries were copied (0 when
+ * yesterday was unlogged).
+ */
+export async function copyYesterdayFood(userId: string): Promise<number> {
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const yesterdayStart = new Date(todayStart.getTime() - 86400000);
+
+  const { data, error } = await supabase
+    .from('food_log_entries')
+    .select('food_item_id, meal_type, quantity_g, calories, protein_g, carbs_g, fat_g, logged_at')
+    .eq('user_id', userId)
+    .gte('logged_at', yesterdayStart.toISOString())
+    .lt('logged_at', todayStart.toISOString());
+
+  if (error) throw error;
+  if (!data || data.length === 0) return 0;
+
+  const rows = data.map((row) => {
+    const original = new Date(row.logged_at);
+    const loggedAt = new Date(todayStart);
+    loggedAt.setHours(original.getHours(), original.getMinutes(), 0, 0);
+    return {
+      user_id: userId,
+      food_item_id: row.food_item_id,
+      meal_type: row.meal_type,
+      quantity_g: row.quantity_g,
+      calories: row.calories,
+      protein_g: row.protein_g,
+      carbs_g: row.carbs_g,
+      fat_g: row.fat_g,
+      logged_at: loggedAt.toISOString(),
+    };
+  });
+
+  const { error: insertError } = await supabase.from('food_log_entries').insert(rows);
+  if (insertError) throw insertError;
+  return rows.length;
 }
 
 export async function saveQuickWorkout(
@@ -81,6 +174,52 @@ export async function saveQuickWorkout(
     notes: input.notes || null,
   });
 
+  if (error) throw error;
+}
+
+export async function deleteLoggedWorkout(id: string): Promise<void> {
+  const { error } = await supabase
+    .from('workout_logs')
+    .update({ deleted_at: new Date().toISOString() })
+    .eq('id', id);
+  if (error) throw error;
+}
+
+export async function updateLoggedWorkout(
+  id: string,
+  input: QuickWorkoutInput,
+): Promise<void> {
+  const durationS = Math.max(1, Math.round(input.minutes * 60));
+  const { error } = await supabase
+    .from('workout_logs')
+    .update({
+      session_type: input.sessionType,
+      total_duration_s: durationS,
+      total_distance_km:
+        input.distanceMiles != null ? Math.round(input.distanceMiles * MILES_TO_KM * 1000) / 1000 : null,
+      notes: input.notes || null,
+    })
+    .eq('id', id);
+  if (error) throw error;
+}
+
+export async function deleteLoggedFood(id: string): Promise<void> {
+  const { error } = await supabase.from('food_log_entries').delete().eq('id', id);
+  if (error) throw error;
+}
+
+export async function updateLoggedFood(id: string, input: QuickFoodInput): Promise<void> {
+  const { error } = await supabase
+    .from('food_log_entries')
+    .update({
+      meal_type: input.mealType,
+      quantity_g: input.quantityG ?? 100,
+      calories: input.calories,
+      protein_g: input.proteinG ?? null,
+      carbs_g: input.carbsG ?? null,
+      fat_g: input.fatG ?? null,
+    })
+    .eq('id', id);
   if (error) throw error;
 }
 

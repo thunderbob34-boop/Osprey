@@ -1,8 +1,31 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from '@/services/supabase';
 
 const SUPP_PREFIX = 'osprey-supp-';
+const masterEnabledKey = (userId: string) => `osprey-suppmaster-enabled-${userId}`;
+
+/**
+ * Category-level switch shown in Settings. Defaults ON (opt-out) since
+ * per-reminder scheduling already existed before this toggle — flipping the
+ * default to off would silently break notifications for every existing user
+ * with reminders already set up.
+ */
+export async function isSupplementRemindersEnabled(userId: string): Promise<boolean> {
+  return (await AsyncStorage.getItem(masterEnabledKey(userId))) !== 'false';
+}
+
+/** Toggles the master switch and re-derives scheduled notifications immediately. */
+export async function setSupplementRemindersEnabled(userId: string, enabled: boolean): Promise<boolean> {
+  if (enabled) {
+    const { status } = await Notifications.requestPermissionsAsync();
+    if (status !== 'granted') return false;
+  }
+  await AsyncStorage.setItem(masterEnabledKey(userId), enabled ? 'true' : 'false');
+  await reconcileSupplementReminders(userId);
+  return true;
+}
 
 export interface SupplementReminder {
   id: string;
@@ -127,6 +150,7 @@ async function cancelAllSupplementNotifications(): Promise<void> {
  */
 export async function reconcileSupplementReminders(userId: string): Promise<void> {
   await cancelAllSupplementNotifications();
+  if (!(await isSupplementRemindersEnabled(userId))) return;
 
   const reminders = (await fetchSupplementReminders(userId)).filter((r) => r.enabled);
   if (reminders.length === 0) return;

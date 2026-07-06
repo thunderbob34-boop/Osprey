@@ -49,7 +49,13 @@ export default function DateField({
   if (Platform.OS === 'android') {
     return (
       <>
-        <TouchableOpacity style={styles.field} onPress={() => setOpen(true)} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.field}
+          onPress={() => setOpen(true)}
+          activeOpacity={0.7}
+          accessibilityRole="button"
+          accessibilityLabel={value ? formatDisplay(value) : placeholder}
+        >
           <Text style={value ? styles.fieldText : styles.fieldPlaceholder}>
             {value ? formatDisplay(value) : placeholder}
           </Text>
@@ -74,17 +80,34 @@ export default function DateField({
   // iOS — inline spinner in a bottom sheet with a Done button.
   return (
     <>
-      <TouchableOpacity style={styles.field} onPress={() => setOpen(true)} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.field}
+        onPress={() => setOpen(true)}
+        activeOpacity={0.7}
+        accessibilityRole="button"
+        accessibilityLabel={value ? formatDisplay(value) : placeholder}
+      >
         <Text style={value ? styles.fieldText : styles.fieldPlaceholder}>
           {value ? formatDisplay(value) : placeholder}
         </Text>
       </TouchableOpacity>
 
       <Modal visible={open} transparent animationType="slide" onRequestClose={() => setOpen(false)}>
-        <TouchableOpacity style={styles.backdrop} activeOpacity={1} onPress={() => setOpen(false)} />
+        <TouchableOpacity
+          style={styles.backdrop}
+          activeOpacity={1}
+          onPress={() => setOpen(false)}
+          accessibilityRole="button"
+          accessibilityLabel="Close date picker"
+        />
         <View style={styles.sheet}>
           <View style={styles.sheetHeader}>
-            <TouchableOpacity onPress={() => setOpen(false)} hitSlop={12}>
+            <TouchableOpacity
+              onPress={() => setOpen(false)}
+              hitSlop={12}
+              accessibilityRole="button"
+              accessibilityLabel="Cancel"
+            >
               <Text style={styles.sheetCancel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -93,6 +116,8 @@ export default function DateField({
                 setOpen(false);
               }}
               hitSlop={12}
+              accessibilityRole="button"
+              accessibilityLabel="Done"
             >
               <Text style={styles.sheetDone}>Done</Text>
             </TouchableOpacity>

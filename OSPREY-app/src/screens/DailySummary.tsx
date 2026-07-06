@@ -179,7 +179,12 @@ export default function DailySummaryScreen({
           <Text style={styles.errorTitle}>Couldn&apos;t load summary</Text>
           <Text style={styles.stateText}>{error}</Text>
           {onRetry ? (
-            <TouchableOpacity style={styles.retryBtn} onPress={onRetry}>
+            <TouchableOpacity
+              style={styles.retryBtn}
+              onPress={onRetry}
+              accessibilityRole="button"
+              accessibilityLabel="Try again"
+            >
               <Text style={styles.retryBtnText}>Try Again</Text>
             </TouchableOpacity>
           ) : null}
@@ -214,11 +219,21 @@ export default function DailySummaryScreen({
           </View>
           <View style={styles.headerRight}>
             {onActivityPress ? (
-              <TouchableOpacity style={styles.activityBtn} onPress={onActivityPress}>
+              <TouchableOpacity
+                style={styles.activityBtn}
+                onPress={onActivityPress}
+                accessibilityRole="button"
+                accessibilityLabel="View activity"
+              >
                 <Ionicons name="people-outline" size={20} color={Colors.teal} />
               </TouchableOpacity>
             ) : null}
-            <TouchableOpacity style={styles.avatarBtn} onPress={onActivityPress}>
+            <TouchableOpacity
+              style={styles.avatarBtn}
+              onPress={onActivityPress}
+              accessibilityRole="button"
+              accessibilityLabel="View activity"
+            >
               <OzzieAvatar size={36} />
             </TouchableOpacity>
           </View>
@@ -271,7 +286,12 @@ export default function DailySummaryScreen({
           <View style={styles.sessionHeader}>
             <Text style={styles.sessionLabel}>TODAY&apos;S SESSION</Text>
             {onViewWeekPress ? (
-              <TouchableOpacity onPress={onViewWeekPress} hitSlop={8}>
+              <TouchableOpacity
+                onPress={onViewWeekPress}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel="View full week"
+              >
                 <Text style={styles.viewWeekLink}>Full week ›</Text>
               </TouchableOpacity>
             ) : null}
@@ -302,6 +322,8 @@ export default function DailySummaryScreen({
             style={styles.ozzieNote}
             activeOpacity={session.whyReasoning ? 0.7 : 1}
             onPress={() => session.whyReasoning && setWhyExpanded((v) => !v)}
+            accessibilityRole={session.whyReasoning ? 'button' : undefined}
+            accessibilityLabel={session.whyReasoning ? (whyExpanded ? 'Hide reasoning' : 'Why this session') : undefined}
           >
             <OzzieAvatar size={24} />
             <View style={styles.ozzieNoteBody}>
@@ -324,6 +346,9 @@ export default function DailySummaryScreen({
               style={[styles.startBtn, session.sessionType === 'rest' && styles.startBtnDisabled]}
               onPress={() => onStartSession?.(session)}
               disabled={session.sessionType === 'rest'}
+              accessibilityRole="button"
+              accessibilityLabel={session.sessionType === 'rest' ? 'Rest day' : 'Start session'}
+              accessibilityState={{ disabled: session.sessionType === 'rest' }}
             >
               <Text style={styles.startBtnText}>
                 {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
@@ -332,7 +357,12 @@ export default function DailySummaryScreen({
             {(onSwapSession || onCompressSession) &&
             session.sessionId &&
             session.sessionType !== 'rest' ? (
-              <TouchableOpacity style={styles.adjustBtn} onPress={handleAdjustPress}>
+              <TouchableOpacity
+                style={styles.adjustBtn}
+                onPress={handleAdjustPress}
+                accessibilityRole="button"
+                accessibilityLabel="Adjust today's session"
+              >
                 <Text style={styles.adjustBtnText}>Adjust</Text>
               </TouchableOpacity>
             ) : null}

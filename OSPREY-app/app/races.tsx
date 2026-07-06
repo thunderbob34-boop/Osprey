@@ -113,7 +113,7 @@ function LogisticsPanel({
     <View style={styles.logisticsPanel}>
       <View style={styles.logisticsHeader}>
         <Text style={styles.logisticsTitle}>Race Logistics</Text>
-        <TouchableOpacity onPress={onClose} hitSlop={10}>
+        <TouchableOpacity onPress={onClose} hitSlop={10} accessibilityRole="button" accessibilityLabel="Close race logistics">
           <Text style={styles.logisticsClose}>✕</Text>
         </TouchableOpacity>
       </View>
@@ -126,6 +126,7 @@ function LogisticsPanel({
         placeholderTextColor={Colors.textMuted}
         value={form.packetPickupTime}
         onChangeText={(t) => setForm((p) => ({ ...p, packetPickupTime: t }))}
+        accessibilityLabel="Packet pickup time and location"
       />
 
       {/* Parking */}
@@ -138,6 +139,7 @@ function LogisticsPanel({
         onChangeText={(t) => setForm((p) => ({ ...p, parkingNotes: t }))}
         multiline
         numberOfLines={3}
+        accessibilityLabel="Parking and transit notes"
       />
 
       {/* Gear */}
@@ -150,6 +152,7 @@ function LogisticsPanel({
         onChangeText={(t) => setForm((p) => ({ ...p, gearNotes: t }))}
         multiline
         numberOfLines={3}
+        accessibilityLabel="Gear notes"
       />
 
       {/* Morning checklist */}
@@ -165,6 +168,9 @@ function LogisticsPanel({
           style={styles.checkRow}
           onPress={() => toggleCheckItem(item.id)}
           activeOpacity={0.7}
+          accessibilityRole="checkbox"
+          accessibilityLabel={item.label}
+          accessibilityState={{ checked: item.done }}
         >
           <View style={[styles.checkbox, item.done && styles.checkboxDone]}>
             {item.done ? <Text style={styles.checkmark}>✓</Text> : null}
@@ -183,6 +189,9 @@ function LogisticsPanel({
             onPress={() => (isPlus ? onGenerateBriefing(race) : onPaywall())}
             disabled={isGenerating}
             style={styles.generateBtn}
+            accessibilityRole="button"
+            accessibilityLabel={!isPlus ? 'Unlock OSPREY+ to generate race briefing' : race.ozzieBriefingText ? 'Refresh race briefing' : 'Generate race briefing'}
+            accessibilityState={{ disabled: isGenerating, busy: isGenerating }}
           >
             {isGenerating ? (
               <ActivityIndicator color={Colors.teal} size="small" />
@@ -207,6 +216,9 @@ function LogisticsPanel({
         style={styles.saveBtn}
         onPress={() => onSave(race.id, form)}
         disabled={isSaving}
+        accessibilityRole="button"
+        accessibilityLabel="Save logistics"
+        accessibilityState={{ disabled: isSaving, busy: isSaving }}
       >
         {isSaving ? (
           <ActivityIndicator color="#000" />
@@ -286,7 +298,7 @@ function RetroPanel({
     <View style={styles.retroPanel}>
       <View style={styles.logisticsHeader}>
         <Text style={styles.retroTitle}>Race Retrospective</Text>
-        <TouchableOpacity onPress={onClose} hitSlop={10}>
+        <TouchableOpacity onPress={onClose} hitSlop={10} accessibilityRole="button" accessibilityLabel="Close race retrospective">
           <Text style={styles.logisticsClose}>✕</Text>
         </TouchableOpacity>
       </View>
@@ -312,6 +324,9 @@ function RetroPanel({
             key={opt.score}
             style={[styles.feelChip, form.feelScore === opt.score && styles.feelChipActive]}
             onPress={() => setForm((p) => ({ ...p, feelScore: opt.score }))}
+            accessibilityRole="button"
+            accessibilityLabel={opt.label}
+            accessibilityState={{ selected: form.feelScore === opt.score }}
           >
             <Text style={[styles.feelScore, form.feelScore === opt.score && styles.feelScoreActive]}>
               {opt.score}
@@ -333,6 +348,7 @@ function RetroPanel({
         onChangeText={(t) => setForm((p) => ({ ...p, pacingNotes: t }))}
         multiline
         numberOfLines={3}
+        accessibilityLabel="Pacing reflection notes"
       />
 
       {/* Nutrition notes */}
@@ -345,6 +361,7 @@ function RetroPanel({
         onChangeText={(t) => setForm((p) => ({ ...p, nutritionNotes: t }))}
         multiline
         numberOfLines={3}
+        accessibilityLabel="Nutrition adherence notes"
       />
 
       {/* Key lessons */}
@@ -357,6 +374,7 @@ function RetroPanel({
         onChangeText={(t) => setForm((p) => ({ ...p, lessons: t }))}
         multiline
         numberOfLines={3}
+        accessibilityLabel="Key lessons"
       />
 
       {/* Ozzie's take */}
@@ -367,6 +385,9 @@ function RetroPanel({
             onPress={() => (isPlus ? onGenerateRetro(race, form.feelScore) : onPaywall())}
             disabled={isGenerating}
             style={styles.generateBtn}
+            accessibilityRole="button"
+            accessibilityLabel={!isPlus ? 'Unlock OSPREY+ to generate race retrospective' : race.ozzieRetroText ? "Refresh Ozzie's take" : "Generate Ozzie's take"}
+            accessibilityState={{ disabled: isGenerating, busy: isGenerating }}
           >
             {isGenerating ? (
               <ActivityIndicator color={Colors.teal} size="small" />
@@ -390,6 +411,9 @@ function RetroPanel({
         style={styles.saveBtn}
         onPress={() => onSave(race.id, form)}
         disabled={isSaving}
+        accessibilityRole="button"
+        accessibilityLabel="Save retrospective"
+        accessibilityState={{ disabled: isSaving, busy: isSaving }}
       >
         {isSaving ? (
           <ActivityIndicator color="#000" />
@@ -439,7 +463,7 @@ function PartnersPanel({ race, onClose }: PartnersPanelProps) {
           <Text style={styles.partnersTitle}>Training Partners</Text>
           <Text style={styles.partnersSubtitle}>{race.eventDate}</Text>
         </View>
-        <TouchableOpacity onPress={onClose} hitSlop={10}>
+        <TouchableOpacity onPress={onClose} hitSlop={10} accessibilityRole="button" accessibilityLabel="Close training partners">
           <Text style={styles.logisticsClose}>✕</Text>
         </TouchableOpacity>
       </View>
@@ -460,6 +484,9 @@ function PartnersPanel({ race, onClose }: PartnersPanelProps) {
                 onPress={() => togglePartner(friend.friendUserId)}
                 activeOpacity={0.75}
                 disabled={isWorking}
+                accessibilityRole="button"
+                accessibilityLabel={`${friend.friendDisplayName}, ${friend.friendRaceName}`}
+                accessibilityState={{ selected: linked, disabled: isWorking }}
               >
                 <View style={styles.friendAvatar}>
                   <Text style={styles.friendInitial}>
@@ -499,6 +526,9 @@ function PartnersPanel({ race, onClose }: PartnersPanelProps) {
               <TouchableOpacity
                 onPress={() => removePartner.mutate(p.partnerUserId)}
                 disabled={isWorking}
+                accessibilityRole="button"
+                accessibilityLabel={`Remove ${p.partnerDisplayName} as training partner`}
+                accessibilityState={{ disabled: isWorking }}
               >
                 <Text style={styles.actionDelete}>Remove</Text>
               </TouchableOpacity>
@@ -676,7 +706,12 @@ export default function RacesScreen() {
       <ScreenHeader
         title="Races"
         right={
-          <TouchableOpacity onPress={() => setShowForm((v) => !v)} hitSlop={12}>
+          <TouchableOpacity
+            onPress={() => setShowForm((v) => !v)}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel={showForm ? 'Close add race form' : 'Add a race'}
+          >
             <Text style={styles.add}>{showForm ? '−' : '+'}</Text>
           </TouchableOpacity>
         }
@@ -696,6 +731,7 @@ export default function RacesScreen() {
                   setName(v);
                   setFieldErrors((prev) => ({ ...prev, name: '' }));
                 }}
+                accessibilityLabel="Race name"
               />
               <FieldError message={fieldErrors.name} />
 
@@ -709,6 +745,9 @@ export default function RacesScreen() {
                       setDistanceKm(p.km);
                       setCustomMiles('');
                     }}
+                    accessibilityRole="button"
+                    accessibilityLabel={p.label}
+                    accessibilityState={{ selected: distanceKm === p.km }}
                   >
                     <Text style={[styles.chipText, distanceKm === p.km && styles.chipTextActive]}>
                       {p.label}
@@ -725,6 +764,7 @@ export default function RacesScreen() {
                     setCustomMiles(t);
                     setDistanceKm(null);
                   }}
+                  accessibilityLabel="Custom distance in miles"
                 />
               </View>
 
@@ -751,6 +791,7 @@ export default function RacesScreen() {
                   setFieldErrors((prev) => ({ ...prev, goalTime: '' }));
                 }}
                 autoCapitalize="none"
+                accessibilityLabel="Goal time"
               />
               <FieldError message={fieldErrors.goalTime} />
 
@@ -761,9 +802,17 @@ export default function RacesScreen() {
                 placeholderTextColor={Colors.textMuted}
                 value={location}
                 onChangeText={setLocation}
+                accessibilityLabel="Location"
               />
 
-              <TouchableOpacity style={styles.saveBtn} onPress={handleCreate} disabled={create.isPending}>
+              <TouchableOpacity
+                style={styles.saveBtn}
+                onPress={handleCreate}
+                disabled={create.isPending}
+                accessibilityRole="button"
+                accessibilityLabel="Save race"
+                accessibilityState={{ disabled: create.isPending, busy: create.isPending }}
+              >
                 {create.isPending ? (
                   <ActivityIndicator color="#000" />
                 ) : (
@@ -785,6 +834,8 @@ export default function RacesScreen() {
               style={styles.discoverBtn}
               onPress={() => router.push('/race-search')}
               activeOpacity={0.8}
+              accessibilityRole="button"
+              accessibilityLabel="Discover events, search races"
             >
               <Text style={styles.discoverBtnText}>Discover Events →</Text>
             </TouchableOpacity>
@@ -829,13 +880,20 @@ export default function RacesScreen() {
                             {race.location ? ` · ${race.location}` : ''}
                           </Text>
                           <View style={styles.actionRow}>
-                            <TouchableOpacity onPress={() => handleLinkToPlan(race)}>
+                            <TouchableOpacity
+                              onPress={() => handleLinkToPlan(race)}
+                              accessibilityRole="button"
+                              accessibilityLabel={`Link ${race.name} to training plan`}
+                            >
                               <Text style={styles.actionLink}>Link to plan</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                               onPress={() =>
                                 setLogisticsRaceId((id) => (id === race.id ? null : race.id))
                               }
+                              accessibilityRole="button"
+                              accessibilityLabel={`${logisticsRaceId === race.id ? 'Hide' : 'Show'} logistics for ${race.name}`}
+                              accessibilityState={{ expanded: logisticsRaceId === race.id }}
                             >
                               <Text
                                 style={[
@@ -850,6 +908,9 @@ export default function RacesScreen() {
                               onPress={() =>
                                 setPartnersRaceId((id) => (id === race.id ? null : race.id))
                               }
+                              accessibilityRole="button"
+                              accessibilityLabel={`${partnersRaceId === race.id ? 'Hide' : 'Show'} training partners for ${race.name}`}
+                              accessibilityState={{ expanded: partnersRaceId === race.id }}
                             >
                               <Text
                                 style={[
@@ -860,7 +921,11 @@ export default function RacesScreen() {
                                 Partners
                               </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => handleDelete(race)}>
+                            <TouchableOpacity
+                              onPress={() => handleDelete(race)}
+                              accessibilityRole="button"
+                              accessibilityLabel={`Remove ${race.name}`}
+                            >
                               <Text style={styles.actionDelete}>Remove</Text>
                             </TouchableOpacity>
                           </View>
@@ -911,7 +976,11 @@ export default function RacesScreen() {
                           </Text>
                           <View style={styles.actionRow}>
                             {!race.resultTimeS ? (
-                              <TouchableOpacity onPress={() => handleRecordResult(race)}>
+                              <TouchableOpacity
+                                onPress={() => handleRecordResult(race)}
+                                accessibilityRole="button"
+                                accessibilityLabel={`Record result for ${race.name}`}
+                              >
                                 <Text style={styles.actionLink}>Record result</Text>
                               </TouchableOpacity>
                             ) : (
@@ -919,6 +988,9 @@ export default function RacesScreen() {
                                 onPress={() =>
                                   setRetroRaceId((id) => (id === race.id ? null : race.id))
                                 }
+                                accessibilityRole="button"
+                                accessibilityLabel={`${retroRaceId === race.id ? 'Hide' : 'Show'} retrospective for ${race.name}`}
+                                accessibilityState={{ expanded: retroRaceId === race.id }}
                               >
                                 <Text
                                   style={[

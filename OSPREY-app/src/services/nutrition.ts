@@ -11,6 +11,9 @@ export interface NutritionCoaching {
   target: NutritionMacros;
   loggedToday: NutritionMacros;
   tip: string | null;
+  /** Which periodized target applies today; null until the function redeploys. */
+  dayType: 'training' | 'rest' | null;
+  todaySessionType: string | null;
 }
 
 export interface FuelStatus {
@@ -50,6 +53,8 @@ export async function fetchNutritionCoaching(userId: string): Promise<NutritionC
     target: NutritionMacros;
     loggedToday: NutritionMacros;
     tip: string;
+    dayType?: 'training' | 'rest';
+    todaySessionType?: string | null;
   }>('ozzie-nutrition-coach', { method: 'POST' });
 
   if (error || !data) {
@@ -60,5 +65,7 @@ export async function fetchNutritionCoaching(userId: string): Promise<NutritionC
     target: data.target,
     loggedToday: data.loggedToday,
     tip: data.tip,
+    dayType: data.dayType ?? null,
+    todaySessionType: data.todaySessionType ?? null,
   };
 }

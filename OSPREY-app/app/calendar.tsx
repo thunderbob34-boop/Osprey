@@ -96,11 +96,21 @@ export default function CalendarScreen() {
       <ScreenHeader title="Calendar" />
 
       <View style={styles.monthNav}>
-        <TouchableOpacity onPress={goToPrevMonth} style={styles.navBtn}>
+        <TouchableOpacity
+          onPress={goToPrevMonth}
+          style={styles.navBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Previous month"
+        >
           <Text style={styles.navBtnText}>‹</Text>
         </TouchableOpacity>
         <Text style={styles.monthLabel}>{monthLabel}</Text>
-        <TouchableOpacity onPress={goToNextMonth} style={styles.navBtn}>
+        <TouchableOpacity
+          onPress={goToNextMonth}
+          style={styles.navBtn}
+          accessibilityRole="button"
+          accessibilityLabel="Next month"
+        >
           <Text style={styles.navBtnText}>›</Text>
         </TouchableOpacity>
       </View>
@@ -126,11 +136,18 @@ export default function CalendarScreen() {
                 ? SESSION_ICON[day.plannedType] ?? '•'
                 : null;
 
+            const dayLabelParts = [`${monthLabel.split(' ')[0]} ${cell.day}`];
+            if (isToday) dayLabelParts.push('today');
+            if (hasCompleted) dayLabelParts.push(`completed ${day!.completedTypes.map(formatSessionType).join(', ')}`);
+            else if (day?.plannedType) dayLabelParts.push(`planned ${formatSessionType(day.plannedType)}`);
+
             return (
               <TouchableOpacity
                 key={i}
                 style={[styles.cell, isToday && styles.cellToday]}
                 onPress={() => handleDayPress(cell.dateStr)}
+                accessibilityRole="button"
+                accessibilityLabel={dayLabelParts.join(', ')}
               >
                 <Text style={[styles.cellDay, isToday && styles.cellDayToday]}>{cell.day}</Text>
                 {icon ? (
@@ -158,6 +175,8 @@ export default function CalendarScreen() {
           style={styles.sheetBackdrop}
           activeOpacity={1}
           onPress={() => setSelectedDate(null)}
+          accessibilityRole="button"
+          accessibilityLabel="Close day details"
         />
         <View style={styles.sheet}>
           <View style={styles.sheetHandle} />
@@ -194,7 +213,12 @@ export default function CalendarScreen() {
             </View>
           ) : null}
 
-          <TouchableOpacity style={styles.sheetCloseBtn} onPress={() => setSelectedDate(null)}>
+          <TouchableOpacity
+            style={styles.sheetCloseBtn}
+            onPress={() => setSelectedDate(null)}
+            accessibilityRole="button"
+            accessibilityLabel="Close"
+          >
             <Text style={styles.sheetCloseBtnText}>Close</Text>
           </TouchableOpacity>
         </View>

@@ -162,7 +162,12 @@ export default function PlanPreviewScreen() {
     <SafeAreaView style={styles.container}>
       {isViewOnly ? (
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} hitSlop={12}>
+          <TouchableOpacity
+            onPress={() => router.back()}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
+          >
             <Text style={styles.backText}>←</Text>
           </TouchableOpacity>
           <Text style={styles.headerTitle}>This Week's Plan</Text>
@@ -181,7 +186,12 @@ export default function PlanPreviewScreen() {
       ) : isViewOnly && sessions.length === 0 ? (
         <View style={styles.center}>
           <Text style={styles.errorText}>No active plan yet.</Text>
-          <TouchableOpacity style={styles.buildBtn} onPress={() => router.replace('/preferences')}>
+          <TouchableOpacity
+            style={styles.buildBtn}
+            onPress={() => router.replace('/preferences')}
+            accessibilityRole="button"
+            accessibilityLabel="Build my plan"
+          >
             <Text style={styles.buildBtnText}>Build My Plan →</Text>
           </TouchableOpacity>
         </View>
@@ -310,11 +320,21 @@ export default function PlanPreviewScreen() {
 
           <View style={styles.footer}>
             {isViewOnly ? (
-              <TouchableOpacity style={styles.homeBtn} onPress={() => router.back()}>
+              <TouchableOpacity
+                style={styles.homeBtn}
+                onPress={() => router.back()}
+                accessibilityRole="button"
+                accessibilityLabel="Done"
+              >
                 <Text style={styles.homeBtnText}>Done</Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.homeBtn} onPress={goHome}>
+              <TouchableOpacity
+                style={styles.homeBtn}
+                onPress={goHome}
+                accessibilityRole="button"
+                accessibilityLabel="Let's go"
+              >
                 <Text style={styles.homeBtnText}>Let's Go →</Text>
               </TouchableOpacity>
             )}

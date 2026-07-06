@@ -1,8 +1,13 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from '@/services/supabase';
+import { fetchUpcomingRaces } from '@/services/races';
 
 const DAILY_NUDGE_ID = 'osprey-daily-nudge';
+const RACE_WEEK_PREFIX = 'osprey-raceweek-';
+const DAYS_BEFORE_RACE = 7;
+const raceWeekEnabledKey = (userId: string) => `osprey-raceweek-enabled-${userId}`;
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -88,4 +93,61 @@ export async function cancelDailyNudge(): Promise<void> {
 export async function isDailyNudgeScheduled(): Promise<boolean> {
   const scheduled = await Notifications.getAllScheduledNotificationsAsync();
   return scheduled.some((n) => n.identifier === DAILY_NUDGE_ID);
+}
+
+// ── Race-week reminders ────────────────────────────────────────────────────
+
+/** Defaults ON — this is a new feature with no prior behavior to preserve. */
+export async function isRaceWeekRemindersEnabled(userId: string): Promise<boolean> {
+  return (await AsyncStorage.getItem(raceWeekEnabledKey(userId))) !== 'false';
+}
+
+async function cancelAllRaceWeekNotifications(): Promise<void> {
+  const scheduled = await Notifications.getAllScheduledNotificationsAsync();
+  await Promise.all(
+    scheduled
+      .filter((n) => n.identifier.startsWith(RACE_WEEK_PREFIX))
+      .map((n) => Notifications.cancelScheduledNotificationAsync(n.identifier).catch(() => undefined)),
+  );
+}
+
+/**
+ * Re-derives race-week local notifications from the user's upcoming races —
+ * one per race, firing 7 days before the event at 8am local time. Reconcile
+ * style (clear + recreate), safe to call on app open and whenever races
+ * change. No-op (after clearing) when the master toggle is off.
+ */
+export async function reconcileRaceWeekReminders(userId: string): Promise<void> {
+  await cancelAllRaceWeekNotifications();
+  if (!(await isRaceWeekRemindersEnabled(userId))) return;
+
+  const races = await fetchUpcomingRaces(userId);
+  const sound = Platform.OS === 'ios' ? 'default' : undefined;
+
+  for (const race of races) {
+    const [y, m, d] = race.eventDate.split('-').map(Number);
+    const fireAt = new Date(y, m - 1, d - DAYS_BEFORE_RACE, 8, 0, 0, 0);
+    if (fireAt.getTime() <= Date.now()) continue; // 7-day mark already passed
+
+    await Notifications.scheduleNotificationAsync({
+      identifier: `${RACE_WEEK_PREFIX}${race.id}`,
+      content: {
+        title: '🏁 Race week!',
+        body: `${race.name} is one week out — time to taper, dial in fueling, and trust the training.`,
+        sound,
+      },
+      trigger: { type: Notifications.SchedulableTriggerInputTypes.DATE, date: fireAt },
+    });
+  }
+}
+
+/** Toggles the master switch and re-derives scheduled notifications immediately. */
+export async function setRaceWeekRemindersEnabled(userId: string, enabled: boolean): Promise<boolean> {
+  if (enabled) {
+    const granted = await requestNotificationPermission();
+    if (!granted) return false;
+  }
+  await AsyncStorage.setItem(raceWeekEnabledKey(userId), enabled ? 'true' : 'false');
+  await reconcileRaceWeekReminders(userId);
+  return true;
 }

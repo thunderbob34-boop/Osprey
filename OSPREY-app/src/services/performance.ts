@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import type { TriathlonDistance } from '@/types/preferences';
 
 export interface DailyLoad {
   date: string; // YYYY-MM-DD
@@ -20,6 +21,7 @@ export interface PerformanceMetrics {
   injuryRisk: InjuryRisk;
   series: PerformanceSeries[];
   racePredictor: RacePredictor | null;
+  triathlonPredictor: TriathlonPredictor | null;
 }
 
 export interface InjuryRisk {
@@ -191,14 +193,19 @@ export function buildRacePredictor(
 interface WorkoutRow {
   started_at: string;
   total_duration_s: number;
-  distance_meters: number | null;
+  total_distance_km: number | null;
   session_type: string;
   tss: number | null;
 }
 
-function estimateTss(durationS: number, distanceMeters: number | null): number {
+function estimateTss(durationS: number): number {
   // Simple estimate when TSS not stored: (hours * 50) for moderate effort runs
   return (durationS / 3600) * 50;
+}
+
+export interface BestEffort {
+  miles: number;
+  timeS: number;
 }
 
 export async function fetchPerformanceData(
@@ -208,13 +215,21 @@ export async function fetchPerformanceData(
   dailyLoads: DailyLoad[];
   bestRunMiles: number;
   bestRunTimeS: number;
+  bestSwimMiles: number;
+  bestSwimTimeS: number;
+  bestBikeMiles: number;
+  bestBikeTimeS: number;
 }> {
   const since = new Date();
   since.setDate(since.getDate() - days);
 
   const { data, error } = await supabase
     .from('workout_logs')
-    .select('started_at, total_duration_s, distance_meters, session_type, tss')
+    // NB: the column is `total_distance_km` — a prior version of this query
+    // selected a nonexistent `distance_meters` column, which made Postgrest
+    // error on every call and silently broke fitness/fatigue, injury risk,
+    // and the race predictor for every OSPREY+ user.
+    .select('started_at, total_duration_s, total_distance_km, session_type, tss')
     .eq('user_id', userId)
     .gte('started_at', since.toISOString())
     .order('started_at', { ascending: true });
@@ -225,20 +240,31 @@ export async function fetchPerformanceData(
 
   // Build a map from date → total TSS
   const tssMap: Record<string, number> = {};
+  const KM_TO_MILES = 0.621371;
+
   let bestRunMiles = 0;
   let bestRunTimeS = 0;
-  const metersPerMile = 1609.344;
+  let bestSwimMiles = 0;
+  let bestSwimTimeS = 0;
+  let bestBikeMiles = 0;
+  let bestBikeTimeS = 0;
 
   for (const row of rows) {
     const date = row.started_at.slice(0, 10);
-    const tss = row.tss != null ? Number(row.tss) : estimateTss(row.total_duration_s, row.distance_meters);
+    const tss = row.tss != null ? Number(row.tss) : estimateTss(row.total_duration_s);
     tssMap[date] = (tssMap[date] ?? 0) + tss;
 
-    if (row.session_type === 'run' && row.distance_meters && row.total_duration_s > 0) {
-      const miles = row.distance_meters / metersPerMile;
-      if (miles > bestRunMiles) {
+    if (row.total_distance_km && row.total_duration_s > 0) {
+      const miles = row.total_distance_km * KM_TO_MILES;
+      if (row.session_type === 'run' && miles > bestRunMiles) {
         bestRunMiles = miles;
         bestRunTimeS = row.total_duration_s;
+      } else if (row.session_type === 'swim' && miles > bestSwimMiles) {
+        bestSwimMiles = miles;
+        bestSwimTimeS = row.total_duration_s;
+      } else if (row.session_type === 'bike' && miles > bestBikeMiles) {
+        bestBikeMiles = miles;
+        bestBikeTimeS = row.total_duration_s;
       }
     }
   }
@@ -252,7 +278,136 @@ export async function fetchPerformanceData(
     dailyLoads.push({ date: dateStr, tss: tssMap[dateStr] ?? 0 });
   }
 
-  return { dailyLoads, bestRunMiles, bestRunTimeS };
+  return {
+    dailyLoads,
+    bestRunMiles,
+    bestRunTimeS,
+    bestSwimMiles,
+    bestSwimTimeS,
+    bestBikeMiles,
+    bestBikeTimeS,
+  };
+}
+
+/** Triathlon goal + target race distance, or null if the user isn't training for one. */
+export async function fetchTriathlonPreference(userId: string): Promise<TriathlonDistance | null> {
+  const { data: goalRow } = await supabase
+    .from('user_goals')
+    .select('primary_goal')
+    .eq('user_id', userId)
+    .maybeSingle();
+
+  if (goalRow?.primary_goal !== 'triathlon') return null;
+
+  // triathlonDistance isn't persisted to user_goals — it lives in the auth
+  // user_metadata blob preferences.tsx writes to (no schema change needed).
+  const { data: authData } = await supabase.auth.getUser();
+  const saved = authData.user?.user_metadata?.osprey_preferences as
+    | { triathlonDistance?: TriathlonDistance }
+    | undefined;
+  return saved?.triathlonDistance ?? 'sprint';
+}
+
+// ── Triathlon split predictor (swim/bike/run + transitions) ──────────────────
+
+const TRI_LEGS: Record<
+  TriathlonDistance,
+  { raceLabel: string; swim: { miles: number; label: string }; bike: { miles: number; label: string }; run: { miles: number; label: string } }
+> = {
+  sprint: {
+    raceLabel: 'Sprint Triathlon',
+    swim: { miles: 0.466, label: '750m Swim' },
+    bike: { miles: 12.4, label: '20K Bike' },
+    run: { miles: 3.107, label: '5K Run' },
+  },
+  olympic: {
+    raceLabel: 'Olympic Triathlon',
+    swim: { miles: 0.932, label: '1.5K Swim' },
+    bike: { miles: 24.9, label: '40K Bike' },
+    run: { miles: 6.214, label: '10K Run' },
+  },
+  half: {
+    raceLabel: 'Half Ironman (70.3)',
+    swim: { miles: 1.2, label: '1.2mi Swim' },
+    bike: { miles: 56, label: '56mi Bike' },
+    run: { miles: 13.109, label: '13.1mi Run' },
+  },
+  full: {
+    raceLabel: 'Ironman (140.6)',
+    swim: { miles: 2.4, label: '2.4mi Swim' },
+    bike: { miles: 112, label: '112mi Bike' },
+    run: { miles: 26.219, label: '26.2mi Run' },
+  },
+};
+
+const TRANSITION_ESTIMATE_S: Record<TriathlonDistance, number> = {
+  sprint: 3 * 60,
+  olympic: 4 * 60,
+  half: 6 * 60,
+  full: 9 * 60,
+};
+
+export interface TriSplitPrediction {
+  leg: 'swim' | 'bike' | 'run';
+  label: string;
+  distanceMiles: number;
+  /** null when there's no recorded effort yet for this leg — never invented. */
+  predictedTimeS: number | null;
+}
+
+export interface TriathlonPredictor {
+  raceLabel: string;
+  splits: TriSplitPrediction[];
+  transitionEstimateS: number;
+  /** null until every leg has at least one recorded effort to extrapolate from. */
+  totalTimeS: number | null;
+}
+
+function predictLeg(
+  leg: 'swim' | 'bike' | 'run',
+  label: string,
+  targetMiles: number,
+  best: BestEffort | null,
+): TriSplitPrediction {
+  if (!best || best.miles <= 0 || best.timeS <= 0) {
+    return { leg, label, distanceMiles: targetMiles, predictedTimeS: null };
+  }
+  return {
+    leg,
+    label,
+    distanceMiles: targetMiles,
+    predictedTimeS: Math.round(riegelPredict(best.miles, best.timeS, targetMiles)),
+  };
+}
+
+/**
+ * Predicts swim/bike/run splits and a total finish time for the athlete's
+ * target triathlon distance, extrapolating from their own best recorded
+ * effort in each discipline (Riegel scaling, same as the run-only predictor).
+ * A leg with no logged history yet returns `predictedTimeS: null` rather than
+ * a guessed number — consistent with how Ozzie never invents data elsewhere.
+ */
+export function buildTriathlonPredictor(
+  distance: TriathlonDistance,
+  swimBest: BestEffort | null,
+  bikeBest: BestEffort | null,
+  runBest: BestEffort | null,
+): TriathlonPredictor {
+  const config = TRI_LEGS[distance];
+
+  const splits: TriSplitPrediction[] = [
+    predictLeg('swim', config.swim.label, config.swim.miles, swimBest),
+    predictLeg('bike', config.bike.label, config.bike.miles, bikeBest),
+    predictLeg('run', config.run.label, config.run.miles, runBest),
+  ];
+
+  const transitionEstimateS = TRANSITION_ESTIMATE_S[distance];
+  const allHaveData = splits.every((s) => s.predictedTimeS != null);
+  const totalTimeS = allHaveData
+    ? splits.reduce((sum, s) => sum + (s.predictedTimeS ?? 0), 0) + transitionEstimateS
+    : null;
+
+  return { raceLabel: config.raceLabel, splits, transitionEstimateS, totalTimeS };
 }
 
 // ── Training readiness label ──────────────────────────────────────────────────

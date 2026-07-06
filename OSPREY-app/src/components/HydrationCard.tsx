@@ -39,7 +39,13 @@ export default function HydrationCard({ ounces, targetOz, onAdd, emphasized }: H
 
       <View style={styles.quickAddRow}>
         {QUICK_ADDS.map((oz) => (
-          <TouchableOpacity key={oz} style={styles.quickAddBtn} onPress={() => onAdd(oz)}>
+          <TouchableOpacity
+            key={oz}
+            style={styles.quickAddBtn}
+            onPress={() => onAdd(oz)}
+            accessibilityRole="button"
+            accessibilityLabel={`Add ${oz} ounces of water`}
+          >
             <Text style={styles.quickAddText}>+{oz} oz</Text>
           </TouchableOpacity>
         ))}

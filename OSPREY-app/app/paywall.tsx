@@ -83,7 +83,12 @@ export default function PaywallScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} hitSlop={12}>
+        <TouchableOpacity
+          onPress={() => router.back()}
+          hitSlop={12}
+          accessibilityRole="button"
+          accessibilityLabel="Close"
+        >
           <Text style={styles.close}>✕</Text>
         </TouchableOpacity>
         <View />
@@ -116,6 +121,9 @@ export default function PaywallScreen() {
           style={[styles.subscribeBtn, purchasing && styles.subscribeBtnLoading]}
           onPress={handleSubscribe}
           disabled={purchasing || restoring}
+          accessibilityRole="button"
+          accessibilityLabel={priceString ? `Start for ${priceString} per month` : 'Subscribe to OSPREY+'}
+          accessibilityState={{ disabled: purchasing || restoring, busy: purchasing }}
         >
           {purchasing ? (
             <ActivityIndicator color="#000" />
@@ -133,6 +141,9 @@ export default function PaywallScreen() {
           style={styles.restoreBtn}
           onPress={handleRestore}
           disabled={purchasing || restoring}
+          accessibilityRole="button"
+          accessibilityLabel="Restore purchase"
+          accessibilityState={{ disabled: purchasing || restoring, busy: restoring }}
         >
           {restoring ? (
             <ActivityIndicator color={Colors.textMuted} size="small" />

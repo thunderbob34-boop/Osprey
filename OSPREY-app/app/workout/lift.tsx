@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -21,6 +21,7 @@ import {
 } from '@/store/workoutStore';
 import { useAuthStore } from '@/store/authStore';
 import {
+  fetchBestSetScores,
   fetchDefaultLiftExercises,
   fetchExerciseLibrary,
   fetchLastSetsForExercises,
@@ -28,6 +29,7 @@ import {
   saveLiftWorkout,
   type LibraryExercise,
 } from '@/services/workouts';
+import { computePlates, formatPlateBreakdown } from '@/services/plate-math';
 import { ozzieSpeak } from '@/services/ozzie-audio';
 import { startVoiceRecording, stopVoiceRecordingAndParse, cancelVoiceRecording } from '@/services/voice-log';
 import { generateWarmup, type WarmupDrill } from '@/services/warmup';
@@ -67,10 +69,29 @@ export default function LiftWorkoutScreen() {
   // Ozzie's prescribed workout for this plan session (exerciseId → coach cue).
   const [isPrescribed, setIsPrescribed] = useState(false);
   const [prescriptionCues, setPrescriptionCues] = useState<Record<string, string>>({});
+  // Plate calculator (tap a set number) + live PR detection.
+  const [plateModal, setPlateModal] = useState<{ exerciseName: string; weightLbs: number } | null>(null);
+  const [prExercises, setPrExercises] = useState<Set<string>>(new Set());
+  // Historical best set score (weightLbs × reps) per exercise — mutated as new
+  // PRs land this session so only a *bigger* set re-triggers.
+  const bestScoresRef = useRef<Record<string, number>>({});
 
   function handleStartAfterWarmup() {
     setWarmingUp(false);
     startWorkout('lift', params.sessionId ?? null);
+  }
+
+  function handleExitWarmup() {
+    reset();
+    router.back();
+  }
+
+  function confirmExit() {
+    Alert.alert('End workout?', 'Save your logged sets and see your recap, or discard this session.', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Discard & Exit', style: 'destructive', onPress: () => { reset(); router.back(); } },
+      { text: 'Finish & Save', onPress: handleFinish },
+    ]);
   }
 
   function toggleDrill(index: number) {
@@ -111,6 +132,12 @@ export default function LiftWorkoutScreen() {
           ? await fetchLastSetsForExercises(userId, baseExercises.map((e) => e.id)).catch(() => ({}))
           : {};
         setLastSets(last);
+        if (userId) {
+          bestScoresRef.current = await fetchBestSetScores(
+            userId,
+            baseExercises.map((e) => e.id),
+          ).catch(() => ({}));
+        }
 
         if (usePrescription) {
           setPrescriptionCues(
@@ -189,6 +216,11 @@ export default function LiftWorkoutScreen() {
   }, [library, liftExercises, search]);
 
   function handleAddExercise(exercise: LibraryExercise) {
+    if (userId && bestScoresRef.current[exercise.id] == null) {
+      fetchBestSetScores(userId, [exercise.id])
+        .then((scores) => Object.assign(bestScoresRef.current, scores))
+        .catch(() => undefined);
+    }
     const prev = lastSets[exercise.id];
     const reps = prev?.reps ?? 8;
     const weightLbs = prev?.weightLbs ?? 45;
@@ -244,12 +276,27 @@ export default function LiftWorkoutScreen() {
     startRestTimer(90);
     const exercise = liftExercises[exerciseIndex];
     const set = exercise?.sets[setIndex];
-    if (set) {
+    if (!set) return;
+
+    // Live PR check — same weight×reps score the recap uses, so this
+    // celebration always survives to the Finish screen. Only fires when
+    // there's real history to beat.
+    const score = set.weightLbs * set.reps;
+    const previousBest = bestScoresRef.current[exercise.exerciseId];
+    if (previousBest != null && previousBest > 0 && score > previousBest) {
+      bestScoresRef.current[exercise.exerciseId] = score;
+      setPrExercises((prev) => new Set(prev).add(exercise.exerciseId));
       await ozzieSpeak(
-        `${exercise.name}, set ${set.setNumber}. ${set.reps} at ${set.weightLbs}. Let's go.`,
+        `New PR on ${exercise.name} — ${set.weightLbs} for ${set.reps}! Best set you've ever logged. That's the work.`,
         'workout',
       );
+      return;
     }
+
+    await ozzieSpeak(
+      `${exercise.name}, set ${set.setNumber}. ${set.reps} at ${set.weightLbs}. Let's go.`,
+      'workout',
+    );
   }
 
   async function handleStartVoiceLog(exerciseIndex: number) {
@@ -324,9 +371,19 @@ export default function LiftWorkoutScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.warmupWrap}>
-          <View style={styles.warmupTitleRow}>
-            <Ionicons name="flame" size={22} color={Colors.amber} />
-            <Text style={styles.warmupTitle}>Warm Up First</Text>
+          <View style={styles.warmupHeaderRow}>
+            <View style={styles.warmupTitleRow}>
+              <Ionicons name="flame" size={22} color={Colors.amber} />
+              <Text style={styles.warmupTitle}>Warm Up First</Text>
+            </View>
+            <TouchableOpacity
+              onPress={handleExitWarmup}
+              hitSlop={12}
+              accessibilityRole="button"
+              accessibilityLabel="Exit workout"
+            >
+              <Ionicons name="close" size={24} color={Colors.textMuted} />
+            </TouchableOpacity>
           </View>
           <Text style={styles.warmupSubtitle}>
             Prime the muscles you're about to load before jumping into working sets.
@@ -336,6 +393,9 @@ export default function LiftWorkoutScreen() {
               key={drill.name}
               style={styles.warmupRow}
               onPress={() => toggleDrill(i)}
+              accessibilityRole="checkbox"
+              accessibilityLabel={`${drill.name}, ${drill.durationLabel}`}
+              accessibilityState={{ checked: checkedDrills.has(i) }}
             >
               <View style={[styles.checkbox, checkedDrills.has(i) && styles.checkboxChecked]}>
                 {checkedDrills.has(i) ? <Text style={styles.checkboxMark}>✓</Text> : null}
@@ -346,10 +406,19 @@ export default function LiftWorkoutScreen() {
               </View>
             </TouchableOpacity>
           ))}
-          <TouchableOpacity style={styles.warmupStartBtn} onPress={handleStartAfterWarmup}>
+          <TouchableOpacity
+            style={styles.warmupStartBtn}
+            onPress={handleStartAfterWarmup}
+            accessibilityRole="button"
+            accessibilityLabel="Start lifting"
+          >
             <Text style={styles.finishBtnText}>Start Lifting →</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleStartAfterWarmup}>
+          <TouchableOpacity
+            onPress={handleStartAfterWarmup}
+            accessibilityRole="button"
+            accessibilityLabel="Skip warm-up"
+          >
             <Text style={styles.skipWarmupText}>Skip warm-up</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -360,11 +429,22 @@ export default function LiftWorkoutScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View>
-          <Text style={styles.headerLabel}>
-            {isPrescribed ? "OZZIE'S PLAN · LIFT SESSION" : 'LIFT SESSION'}
-          </Text>
-          <Text style={styles.headerTime}>{formatDuration(elapsed)}</Text>
+        <View style={styles.headerLeft}>
+          <TouchableOpacity
+            onPress={confirmExit}
+            hitSlop={12}
+            style={styles.closeBtn}
+            accessibilityRole="button"
+            accessibilityLabel="End workout"
+          >
+            <Ionicons name="close" size={22} color={Colors.textMuted} />
+          </TouchableOpacity>
+          <View>
+            <Text style={styles.headerLabel}>
+              {isPrescribed ? "OZZIE'S PLAN · LIFT SESSION" : 'LIFT SESSION'}
+            </Text>
+            <Text style={styles.headerTime}>{formatDuration(elapsed)}</Text>
+          </View>
         </View>
         <View style={styles.headerStats}>
           <View style={styles.headerStat}>
@@ -394,7 +474,14 @@ export default function LiftWorkoutScreen() {
             <View key={exercise.exerciseId} style={styles.exerciseCard}>
               <View style={styles.exerciseHeader}>
                 <View style={styles.exerciseTitleBlock}>
-                  <Text style={styles.exerciseName}>{exercise.name}</Text>
+                  <View style={styles.exerciseNameRow}>
+                    <Text style={styles.exerciseName}>{exercise.name}</Text>
+                    {prExercises.has(exercise.exerciseId) ? (
+                      <View style={styles.prBadge}>
+                        <Text style={styles.prBadgeText}>PR!</Text>
+                      </View>
+                    ) : null}
+                  </View>
                   {cue ? <Text style={styles.exerciseCue}>{cue}</Text> : null}
                 </View>
                 <View style={styles.exerciseActions}>
@@ -406,6 +493,12 @@ export default function LiftWorkoutScreen() {
                         : handleStartVoiceLog(exerciseIndex)
                     }
                     disabled={parsingVoice || (recordingExercise != null && recordingExercise !== exerciseIndex)}
+                    accessibilityRole="button"
+                    accessibilityLabel={recordingExercise === exerciseIndex ? 'Stop voice logging' : `Log ${exercise.name} set by voice`}
+                    accessibilityState={{
+                      disabled: parsingVoice || (recordingExercise != null && recordingExercise !== exerciseIndex),
+                      busy: parsingVoice && recordingExercise == null,
+                    }}
                   >
                     {parsingVoice && recordingExercise == null ? (
                       <ActivityIndicator color={Colors.teal} size="small" />
@@ -419,13 +512,19 @@ export default function LiftWorkoutScreen() {
                     onPress={() => handleRemoveExercise(exerciseIndex)}
                     hitSlop={8}
                     style={styles.removeBtn}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Remove ${exercise.name}`}
                   >
                     <Text style={styles.removeBtnText}>✕</Text>
                   </TouchableOpacity>
                 </View>
               </View>
               {recordingExercise === exerciseIndex ? (
-                <TouchableOpacity onPress={handleCancelVoiceLog}>
+                <TouchableOpacity
+                  onPress={handleCancelVoiceLog}
+                  accessibilityRole="button"
+                  accessibilityLabel="Cancel voice recording"
+                >
                   <Text style={styles.recordingHint}>Listening... say "weight for reps" — tap Stop when done</Text>
                 </TouchableOpacity>
               ) : null}
@@ -444,7 +543,17 @@ export default function LiftWorkoutScreen() {
                   key={set.setNumber}
                   style={[styles.setRow, set.completed && styles.setRowDone]}
                 >
-                  <Text style={[styles.setNumber, styles.colSet]}>{set.setNumber}</Text>
+                  <TouchableOpacity
+                    style={[styles.setNumberBtn, styles.colSet]}
+                    onPress={() =>
+                      setPlateModal({ exerciseName: exercise.name, weightLbs: set.weightLbs })
+                    }
+                    hitSlop={6}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Show plate breakdown for set ${set.setNumber}, ${set.weightLbs} pounds`}
+                  >
+                    <Text style={styles.setNumber}>{set.setNumber}</Text>
+                  </TouchableOpacity>
                   <Text style={[styles.setPrevious, styles.colPrev]}>
                     {previous ? `${previous.weightLbs} × ${previous.reps}` : '—'}
                   </Text>
@@ -454,6 +563,7 @@ export default function LiftWorkoutScreen() {
                     value={String(set.weightLbs)}
                     onChangeText={(v) => updateSet(exerciseIndex, setIndex, 'weightLbs', v)}
                     editable={!set.completed}
+                    accessibilityLabel={`Set ${set.setNumber} weight in pounds`}
                   />
                   <TextInput
                     style={[styles.setInput, styles.colInput, set.completed && styles.setInputDone]}
@@ -461,30 +571,51 @@ export default function LiftWorkoutScreen() {
                     value={String(set.reps)}
                     onChangeText={(v) => updateSet(exerciseIndex, setIndex, 'reps', v)}
                     editable={!set.completed}
+                    accessibilityLabel={`Set ${set.setNumber} reps`}
                   />
                   <TouchableOpacity
                     style={[styles.logBtn, styles.colCheck, set.completed && styles.logBtnDone]}
                     onPress={() => completeSet(exerciseIndex, setIndex)}
                     disabled={set.completed}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Complete set ${set.setNumber}`}
+                    accessibilityState={{ disabled: set.completed, checked: set.completed }}
                   >
                     <Text style={styles.logBtnText}>✓</Text>
                   </TouchableOpacity>
                 </View>
               ))}
-              <TouchableOpacity style={styles.addSetBtn} onPress={() => addLiftSet(exerciseIndex)}>
+              <TouchableOpacity
+                style={styles.addSetBtn}
+                onPress={() => addLiftSet(exerciseIndex)}
+                accessibilityRole="button"
+                accessibilityLabel={`Add set to ${exercise.name}`}
+              >
                 <Text style={styles.addSetText}>+ Add Set</Text>
               </TouchableOpacity>
             </View>
           );
         })}
 
-        <TouchableOpacity style={styles.addExerciseBtn} onPress={() => setPickerVisible(true)}>
+        <TouchableOpacity
+          style={styles.addExerciseBtn}
+          onPress={() => setPickerVisible(true)}
+          accessibilityRole="button"
+          accessibilityLabel="Add exercise"
+        >
           <Text style={styles.addExerciseText}>+ Add Exercise</Text>
         </TouchableOpacity>
       </ScrollView>
 
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.finishBtn} onPress={handleFinish} disabled={saving}>
+        <TouchableOpacity
+          style={styles.finishBtn}
+          onPress={handleFinish}
+          disabled={saving}
+          accessibilityRole="button"
+          accessibilityLabel="Finish workout"
+          accessibilityState={{ disabled: saving, busy: saving }}
+        >
           {saving ? (
             <ActivityIndicator color="#000" />
           ) : (
@@ -492,6 +623,47 @@ export default function LiftWorkoutScreen() {
           )}
         </TouchableOpacity>
       </View>
+
+      {/* ── Plate calculator ── */}
+      <Modal
+        visible={plateModal != null}
+        animationType="fade"
+        transparent
+        onRequestClose={() => setPlateModal(null)}
+      >
+        <TouchableOpacity
+          style={styles.plateBackdrop}
+          activeOpacity={1}
+          onPress={() => setPlateModal(null)}
+          accessibilityRole="button"
+          accessibilityLabel="Close plate calculator"
+        >
+          {plateModal ? (
+            <View style={styles.plateCard}>
+              <Text style={styles.plateTitle}>
+                {plateModal.exerciseName} · {plateModal.weightLbs} lbs
+              </Text>
+              <View style={styles.plateRow}>
+                {computePlates(plateModal.weightLbs).perSide.map((plate, i) => (
+                  <View
+                    key={`${plate}-${i}`}
+                    style={[
+                      styles.plateChip,
+                      plate >= 45 && { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+                    ]}
+                  >
+                    <Text style={styles.plateChipText}>{plate}</Text>
+                  </View>
+                ))}
+              </View>
+              <Text style={styles.plateBreakdown}>
+                {formatPlateBreakdown(computePlates(plateModal.weightLbs))}
+              </Text>
+              <Text style={styles.plateHint}>Tap anywhere to close</Text>
+            </View>
+          ) : null}
+        </TouchableOpacity>
+      </Modal>
 
       {/* ── Exercise picker ── */}
       <Modal
@@ -503,7 +675,12 @@ export default function LiftWorkoutScreen() {
         <SafeAreaView style={styles.pickerContainer}>
           <View style={styles.pickerHeader}>
             <Text style={styles.pickerTitle}>Add Exercise</Text>
-            <TouchableOpacity onPress={() => setPickerVisible(false)} hitSlop={12}>
+            <TouchableOpacity
+              onPress={() => setPickerVisible(false)}
+              hitSlop={12}
+              accessibilityRole="button"
+              accessibilityLabel="Close exercise picker"
+            >
               <Text style={styles.pickerClose}>✕</Text>
             </TouchableOpacity>
           </View>
@@ -514,6 +691,7 @@ export default function LiftWorkoutScreen() {
             value={search}
             onChangeText={setSearch}
             autoCorrect={false}
+            accessibilityLabel="Search exercises"
           />
           <ScrollView contentContainerStyle={styles.pickerList}>
             {groupedLibrary.length === 0 ? (
@@ -531,6 +709,8 @@ export default function LiftWorkoutScreen() {
                       key={exercise.id}
                       style={styles.pickerRow}
                       onPress={() => handleAddExercise(exercise)}
+                      accessibilityRole="button"
+                      accessibilityLabel={`Add ${exercise.name}`}
                     >
                       <Text style={styles.pickerRowText}>{exercise.name}</Text>
                       <Text style={styles.pickerRowAdd}>+</Text>
@@ -556,6 +736,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Colors.border,
   },
+  headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  closeBtn: {},
   headerLabel: { fontSize: 11, fontWeight: '700', color: Colors.gold, letterSpacing: 1 },
   headerTime: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary, marginTop: 2 },
   headerStats: { flexDirection: 'row', gap: 16 },
@@ -580,7 +762,15 @@ const styles = StyleSheet.create({
     padding: 14,
   },
   exerciseTitleBlock: { flex: 1, gap: 2 },
-  exerciseName: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary },
+  exerciseNameRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  exerciseName: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary, flexShrink: 1 },
+  prBadge: {
+    backgroundColor: Colors.gold,
+    borderRadius: 6,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  prBadgeText: { fontSize: 10, fontWeight: '800', color: '#000', letterSpacing: 0.5 },
   exerciseCue: { fontSize: 12, fontWeight: '600', color: Colors.gold },
   exerciseHeader: {
     flexDirection: 'row',
@@ -634,7 +824,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   setRowDone: { opacity: 0.6 },
-  setNumber: { fontSize: 13, color: Colors.textSecondary, fontWeight: '800', textAlign: 'center' },
+  setNumber: { fontSize: 13, color: Colors.teal, fontWeight: '800', textAlign: 'center' },
+  setNumberBtn: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 6,
+    borderRadius: 6,
+    backgroundColor: 'rgba(0,200,200,0.08)',
+  },
   setPrevious: { fontSize: 12, color: Colors.textMuted, textAlign: 'center', fontWeight: '600' },
   setInput: {
     backgroundColor: 'rgba(255,255,255,0.04)',
@@ -677,6 +874,41 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   finishBtnText: { fontSize: 15, fontWeight: '800', color: '#000' },
+
+  // Plate calculator modal
+  plateBackdrop: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 32,
+  },
+  plateCard: {
+    width: '100%',
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderRadius: 16,
+    padding: 20,
+    alignItems: 'center',
+    gap: 12,
+  },
+  plateTitle: { fontSize: 15, fontWeight: '800', color: Colors.textPrimary, textAlign: 'center' },
+  plateRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'center' },
+  plateChip: {
+    minWidth: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: Colors.border,
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 6,
+  },
+  plateChipText: { fontSize: 13, fontWeight: '800', color: Colors.textPrimary },
+  plateBreakdown: { fontSize: 13, color: Colors.textSecondary, textAlign: 'center', lineHeight: 19 },
+  plateHint: { fontSize: 11, color: Colors.textMuted },
 
   // Picker modal
   pickerContainer: { flex: 1, backgroundColor: Colors.bg },
@@ -734,6 +966,7 @@ const styles = StyleSheet.create({
 
   // Warmup
   warmupWrap: { padding: 24, gap: 14, paddingBottom: 48 },
+  warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   warmupTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   warmupTitle: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
   warmupSubtitle: { fontSize: 13, color: Colors.textMuted, lineHeight: 18, marginBottom: 6 },

@@ -25,6 +25,9 @@ Rules:
 - Never give medical advice or diagnose injury. Flag patterns and suggest consulting a professional if something seems concerning.
 - You will be given "workoutTimeConsistency" (the hour-of-day the user most often trains, and how many recent sessions fall there) and "foodLogCount14d". If workoutTimeConsistency shows 3+ sessions clustered in the same hour AND foodLogCount14d is under 3, include a "habit_tip": one short, concrete sentence suggesting the user stack food logging onto that already-consistent workout time (e.g. "You're consistently training around 7am — try logging breakfast right after, since you're already in the habit loop."). Otherwise set habit_tip to null. Never invent a time that isn't in the data.
 - You may be given a "weather" string with the local forecast, today's best outdoor window, and any upcoming heat spike. When present, weave it into the brief like a coach who checked the sky before you woke up: if a heat spike is 1-2 days out, tell them to start hydrating NOW (extra fluids + electrolytes today, not on the hot day); if today is hot, recommend the best time window, shade, or moving the session indoors; if rain is likely, suggest the driest window or an indoor swap. Never invent weather that isn't in the data, and skip weather talk entirely when it's unremarkable.
+- You may be given a "schedule" string describing a calendar conflict with the user's usual training window, plus the free windows we computed from their calendar. When present, mention it like a coach who checked their calendar: name the conflict briefly and recommend ONE specific free window from the data for today's session. Only ever suggest times that appear in the schedule string — never invent a window. If it says no open window remains, suggest a shortened version of today's session rather than skipping.
+- You are given "recentWorkoutCount7d" (sessions in the last 7 days) and "workoutCountPrior7d" (the 7 days before that). Frame consistency as a week-over-week trend, never as a streak to protect: if this week is up or steady, give it one specific, non-sycophantic nod; if this week is down, treat today as a clean reset with zero guilt — no "getting back on track" or "don't break the chain" language. Skip the comparison entirely when both weeks are 0.
+- You may be given "recentMemories" — a short list of notable things that happened recently or in past weeks/months (PRs, race results), each with a one-line summary and the date it happened. This is your long-term memory as a coach. If one is genuinely relevant to today (e.g. today's session targets the same lift that was PR'd, or a race just happened and today is the first session back), reference it specifically and naturally, the way a coach who remembers your history would ("Last month you PR'd Bench Press — let's see where it is today"). Never force a reference when nothing is relevant — skip it silently rather than shoehorning an unrelated memory in. Never invent a memory that isn't in the list.
 - Respond ONLY with valid JSON matching this shape: {"insight_text": string, "why_reasoning": string, "habit_tip": string | null}`;
 
 interface BriefContext {
@@ -40,9 +43,11 @@ interface BriefContext {
     description: string | null;
   } | null;
   recentWorkoutCount7d: number;
+  workoutCountPrior7d: number;
   primaryGoal: string | null;
   workoutTimeConsistency: { hour: number; count: number } | null;
   foodLogCount14d: number;
+  recentMemories: Array<{ summary: string; occurredOn: string }>;
 }
 
 type RestRecommendation = 'train' | 'easy' | 'rest';
@@ -85,8 +90,9 @@ async function buildContext(supabase: ReturnType<typeof createClient>, userId: s
   const today = new Date().toISOString().slice(0, 10);
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
   const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
+  const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
-  const [userRes, recoveryRes, loadRes, sessionRes, workoutsRes, goalsRes, workoutTimesRes, foodLogRes] = await Promise.all([
+  const [userRes, recoveryRes, loadRes, sessionRes, workoutsRes, goalsRes, workoutTimesRes, foodLogRes, memoriesRes] = await Promise.all([
     supabase.from('users').select('display_name, experience_tier').eq('id', userId).single(),
     supabase.from('recovery_scores').select('score, recommendation, hrv_ms, sleep_hours').eq('user_id', userId).eq('score_date', today).maybeSingle(),
     supabase.from('load_scores').select('atl, ctl, tsb').eq('user_id', userId).eq('score_date', today).maybeSingle(),
@@ -95,6 +101,7 @@ async function buildContext(supabase: ReturnType<typeof createClient>, userId: s
     supabase.from('user_goals').select('primary_goal').eq('user_id', userId).maybeSingle(),
     supabase.from('workout_logs').select('started_at').eq('user_id', userId).is('deleted_at', null).gte('started_at', fourteenDaysAgo),
     supabase.from('food_log_entries').select('id').eq('user_id', userId).gte('logged_at', fourteenDaysAgo),
+    supabase.from('coach_memory').select('summary, occurred_on').eq('user_id', userId).gte('occurred_on', ninetyDaysAgo).order('occurred_on', { ascending: false }).limit(5),
   ]);
 
   const user = userRes.data as { display_name: string; experience_tier: string } | null;
@@ -121,11 +128,18 @@ async function buildContext(supabase: ReturnType<typeof createClient>, userId: s
         }
       : null,
     recentWorkoutCount7d: (workoutsRes.data ?? []).length,
+    workoutCountPrior7d: (workoutTimesRes.data ?? []).filter(
+      (row) => (row.started_at as string) < sevenDaysAgo,
+    ).length,
     primaryGoal: goalsRes.data?.primary_goal ?? null,
     workoutTimeConsistency: deriveWorkoutTimeConsistency(
       (workoutTimesRes.data ?? []).map((row) => row.started_at as string),
     ),
     foodLogCount14d: (foodLogRes.data ?? []).length,
+    recentMemories: (memoriesRes.data ?? []).map((row) => ({
+      summary: row.summary as string,
+      occurredOn: row.occurred_on as string,
+    })),
   };
 }
 
@@ -133,6 +147,7 @@ async function callOpenAI(
   context: BriefContext,
   restRecommendation: RestRecommendation,
   weather: string | null,
+  schedule: string | null,
 ): Promise<{ insight_text: string; why_reasoning: string; habit_tip: string | null }> {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -146,7 +161,7 @@ async function callOpenAI(
         { role: 'system', content: OZZIE_SYSTEM_PROMPT },
         {
           role: 'user',
-          content: `Here is today's data for ${context.displayName} (${context.experienceTier} mode, goal: ${context.primaryGoal ?? 'general fitness'}):\n${JSON.stringify({ ...context, restRecommendation, weather }, null, 2)}\n\nWrite today's brief.`,
+          content: `Here is today's data for ${context.displayName} (${context.experienceTier} mode, goal: ${context.primaryGoal ?? 'general fitness'}):\n${JSON.stringify({ ...context, restRecommendation, weather, schedule }, null, 2)}\n\nWrite today's brief.`,
         },
       ],
       response_format: { type: 'json_object' },
@@ -228,18 +243,22 @@ Deno.serve(async (req: Request) => {
     }
 
     let weather: string | null = null;
+    let schedule: string | null = null;
     try {
       const body = await req.json();
       if (typeof body?.weather === 'string' && body.weather.length < 600) {
         weather = body.weather;
       }
+      if (typeof body?.schedule === 'string' && body.schedule.length < 600) {
+        schedule = body.schedule;
+      }
     } catch {
-      // No/invalid body — weather stays null.
+      // No/invalid body — weather and schedule stay null.
     }
 
     const context = await buildContext(supabase, userId);
     const restRecommendation = deriveRestRecommendation(context);
-    const { insight_text, why_reasoning, habit_tip } = await callOpenAI(context, restRecommendation, weather);
+    const { insight_text, why_reasoning, habit_tip } = await callOpenAI(context, restRecommendation, weather, schedule);
 
     const { error: insertError } = await supabase.from('ozzie_insights').insert({
       user_id: userId,

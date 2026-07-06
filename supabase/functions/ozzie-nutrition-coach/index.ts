@@ -369,6 +369,13 @@ Deno.serve(async (req: Request) => {
         target,
         loggedToday: context.loggedToday,
         tip,
+        // Today's periodization: the target above already includes the
+        // training-day activity bump; this tells the UI which day it is.
+        dayType:
+          context.todaySession && context.todaySession.sessionType !== 'rest'
+            ? 'training'
+            : 'rest',
+        todaySessionType: context.todaySession?.sessionType ?? null,
       }),
       { headers: { 'Content-Type': 'application/json' } },
     );

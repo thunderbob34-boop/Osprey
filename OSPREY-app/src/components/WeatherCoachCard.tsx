@@ -50,11 +50,24 @@ export default function WeatherCoachCard({
       <Text style={styles.headline}>{weather.headline}</Text>
       <Text style={styles.detail}>{weather.detail}</Text>
 
+      {weather.recommendedRoute ? (
+        <View style={[styles.routeChip, { borderColor: s.border }]}>
+          <Ionicons name="map-outline" size={13} color={s.accent} />
+          <Text style={styles.routeChipText}>
+            Try <Text style={styles.routeChipName}>{weather.recommendedRoute.name}</Text>
+            {weather.recommendedRoute.tags.length > 0 ? ` (${weather.recommendedRoute.tags.join(', ')})` : ''}
+          </Text>
+        </View>
+      ) : null}
+
       {showAction ? (
         <TouchableOpacity
           style={[styles.actionBtn, { borderColor: s.accent }]}
           onPress={onMoveIndoors}
           disabled={movingIndoors}
+          accessibilityRole="button"
+          accessibilityLabel="Move today's session indoors"
+          accessibilityState={{ disabled: movingIndoors, busy: movingIndoors }}
         >
           {movingIndoors ? (
             <ActivityIndicator color={s.accent} size="small" />
@@ -100,6 +113,19 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     lineHeight: 18,
   },
+  routeChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 2,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    alignSelf: 'flex-start',
+  },
+  routeChipText: { fontSize: 12, color: Colors.textSecondary },
+  routeChipName: { fontWeight: '700', color: Colors.textPrimary },
   actionBtn: {
     marginTop: 4,
     borderWidth: 1,

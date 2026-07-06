@@ -35,10 +35,28 @@ export interface LoggedFoodRow {
   mealType: string | null;
   loggedAt: string;
   calories: number | null;
+  proteinG: number | null;
+  carbsG: number | null;
+  fatG: number | null;
+  quantityG: number | null;
+  foodItemId: string | null;
 }
 
 export interface TodayLogData {
   workouts: LoggedWorkoutRow[];
   food: LoggedFoodRow[];
   totalCalories: number;
+}
+
+/** A frequently-logged meal, ready for one-tap re-logging. */
+export interface RecentMeal {
+  foodItemId: string;
+  name: string;
+  mealType: MealType | null;
+  quantityG: number | null;
+  calories: number | null;
+  proteinG: number | null;
+  carbsG: number | null;
+  fatG: number | null;
+  timesLogged: number;
 }
