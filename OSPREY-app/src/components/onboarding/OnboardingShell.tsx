@@ -114,9 +114,9 @@ export function OptionCard({
       ]}
       onPress={onPress}
       activeOpacity={0.8}
-      accessibilityRole="button"
-      accessibilityLabel={`${optionTitle}, ${description}`}
+      accessibilityRole="radio"
       accessibilityState={{ selected }}
+      accessibilityLabel={`${optionTitle}. ${description}`}
     >
       <View style={[styles.optionIcon, { backgroundColor: `${accentColor}26` }]}>
         <Text style={styles.optionIconText}>{icon}</Text>

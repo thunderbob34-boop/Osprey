@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -31,6 +31,7 @@ export default function SignInScreen() {
   const [resetSending, setResetSending] = useState(false);
   const { signIn, signUp, signInWithApple, signInWithGoogle, sendPasswordReset, loading } =
     useAuthStore();
+  const passwordRef = useRef<TextInput>(null);
 
   useEffect(() => {
     if (Platform.OS === 'ios') {
@@ -124,8 +125,13 @@ export default function SignInScreen() {
             keyboardType="email-address"
             autoComplete="email"
             accessibilityLabel="Email"
+            textContentType="emailAddress"
+            returnKeyType="next"
+            blurOnSubmit={false}
+            onSubmitEditing={() => passwordRef.current?.focus()}
           />
           <TextInput
+            ref={passwordRef}
             style={styles.input}
             placeholder="Password"
             placeholderTextColor={Colors.textMuted}
@@ -133,6 +139,10 @@ export default function SignInScreen() {
             onChangeText={setPassword}
             secureTextEntry
             accessibilityLabel="Password"
+            autoComplete={mode === 'signup' ? 'new-password' : 'password'}
+            textContentType={mode === 'signup' ? 'newPassword' : 'password'}
+            returnKeyType="go"
+            onSubmitEditing={handleSubmit}
           />
 
           {mode === 'signin' ? (

@@ -39,8 +39,16 @@ export async function searchFoodByName(query: string): Promise<FoodItemResult[]>
 }
 
 async function fetchFromOpenFoodFacts(barcode: string): Promise<FoodItemResult | null> {
+  // Matches the AbortController + timeout pattern used for the other
+  // third-party fetch calls in race-search.ts. Without it, a slow/unresponsive
+  // Open Food Facts response left the barcode scanner's loading state spinning
+  // indefinitely with no way for the user to recover short of force-quitting.
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
   try {
-    const res = await fetch(`https://world.openfoodfacts.org/api/v2/product/${barcode}.json`);
+    const res = await fetch(`https://world.openfoodfacts.org/api/v2/product/${barcode}.json`, {
+      signal: controller.signal,
+    });
     if (!res.ok) return null;
     const json = await res.json();
     if (json.status !== 1 || !json.product) return null;
@@ -63,6 +71,8 @@ async function fetchFromOpenFoodFacts(barcode: string): Promise<FoodItemResult |
     };
   } catch {
     return null;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 

@@ -55,12 +55,19 @@ export function useRunTracking(enabled: boolean) {
               latitude,
               longitude,
             );
+            // Only move the anchor once a fix clears the noise threshold. Previously
+            // the anchor was replaced on every fix regardless of distance, so a run
+            // of sub-meter GPS jitter would reset the reference point each time and
+            // silently drop genuine slow/steady movement that never individually
+            // crossed 1m between two consecutive (but noisy) fixes.
             if (delta >= 1) {
               addDistance(delta);
+              lastPointRef.current = { lat: latitude, lon: longitude };
             }
+          } else {
+            lastPointRef.current = { lat: latitude, lon: longitude };
           }
 
-          lastPointRef.current = { lat: latitude, lon: longitude };
           addTrackPoint(point);
         },
       );
