@@ -125,8 +125,13 @@ export default function RunWorkoutScreen() {
   useEffect(() => {
     return () => {
       ozzieStop();
+      // Leaving the screen any way other than the explicit End/Discard buttons
+      // (Android back, swipe, etc.) left the store at status: 'active' with
+      // stale trackPoints — re-entering Run then accrued GPS distance on top
+      // of the abandoned session during the next warm-up. Mirrors lift.tsx.
+      reset();
     };
-  }, []);
+  }, [reset]);
 
   // Pull the latest Apple Watch heart-rate sample from HealthKit while running.
   // Requires the user to be recording on a paired Watch (or another HealthKit
@@ -162,6 +167,11 @@ export default function RunWorkoutScreen() {
       stepStartRef.current = { elapsedS: 0, distanceM: 0 };
       ozzieSpeak(runCueForStep(intervalSteps[0], paceBands), 'workout').catch(() => undefined);
     }
+  }
+
+  function handleExitWarmup() {
+    reset();
+    router.back();
   }
 
   function toggleDrill(index: number) {
@@ -266,7 +276,17 @@ export default function RunWorkoutScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.warmupWrap}>
-          <Text style={styles.warmupTitle}>🔥 Warm Up First</Text>
+          <View style={styles.warmupHeaderRow}>
+            <Text style={styles.warmupTitle}>🔥 Warm Up First</Text>
+            <TouchableOpacity
+              onPress={handleExitWarmup}
+              hitSlop={12}
+              accessibilityRole="button"
+              accessibilityLabel="Exit workout"
+            >
+              <Text style={styles.warmupExitText}>✕</Text>
+            </TouchableOpacity>
+          </View>
           <Text style={styles.warmupSubtitle}>
             A few minutes here cuts injury risk and makes the first mile feel better.
           </Text>
@@ -589,7 +609,9 @@ const styles = StyleSheet.create({
   },
   primaryBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
   warmupWrap: { flex: 1, padding: 24, gap: 14 },
+  warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   warmupTitle: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
+  warmupExitText: { fontSize: 22, fontWeight: '600', color: Colors.textMuted },
   warmupSubtitle: { fontSize: 13, color: Colors.textMuted, lineHeight: 18, marginBottom: 6 },
   warmupRow: {
     flexDirection: 'row',

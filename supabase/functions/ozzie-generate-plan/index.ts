@@ -17,7 +17,7 @@ The user is a hybrid athlete whose philosophy is "look like a bodybuilder, funct
 - Alternate upper/lower strength splits so no muscle group is hit two days in a row.
 - Pair run/bike/swim on the same day as strength when the user has more lift days than available days, or place them as standalone active-recovery sessions.
 - Include at least one threshold or interval run per week (not two hard days back-to-back).
-- Long run goes on Sunday; active recovery (bike or swim, 30-60 min easy) goes on a mid-week day.
+- Long run goes on the day given in the user message as "Long run day" (default Sunday if none is given); active recovery (bike or swim, 30-60 min easy) goes on a mid-week day.
 
 Training load guidance: You will receive a 'trainingLoad' object with ATL (7-day fatigue), CTL (42-day fitness), and TSB (freshness = CTL - ATL). When TSB < -20, reduce next week's volume by 10-15% and flag at least one session as 'active_recovery'. When TSB > 15, the user is fresh — consider adding an intensity day. When CTL < 20, the user is early in training — keep volume moderate and don't add intervals.
 
@@ -45,6 +45,7 @@ interface GoalsContext {
   triathlonDistance?: string | null;
   fitnessLevel: string;
   targetRace: string | null;
+  longRunDay?: string | null;
 }
 
 interface TrainingLoad {
@@ -247,7 +248,7 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad)
         { role: 'system', content: PLAN_SYSTEM_PROMPT },
         {
           role: 'user',
-          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} trainingLoad: ${JSON.stringify(trainingLoad)}.`,
+          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} Long run day: ${goals.longRunDay ?? 'sunday'}. trainingLoad: ${JSON.stringify(trainingLoad)}.`,
         },
       ],
       response_format: { type: 'json_object' },
@@ -412,6 +413,7 @@ Deno.serve(async (req: Request) => {
         triathlonDistance: isTriathlon ? prefs.triathlonDistance ?? 'sprint' : null,
         fitnessLevel: prefs.experienceLevel ?? 'beginner',
         targetRace: null,
+        longRunDay: prefs.longRunDay ?? null,
       };
 
       const { error: goalsUpsertError } = await supabase.from('user_goals').upsert(
@@ -429,13 +431,23 @@ Deno.serve(async (req: Request) => {
       );
       if (goalsUpsertError) throw goalsUpsertError;
     } else if (body.raceTarget) {
-      // Race plan: map race details to goals context
+      // Race plan: map race details to goals context. Seed run/lift days and
+      // fitness level from the athlete's real onboarding profile when one
+      // exists, instead of always assuming a 4-run/1-lift intermediate —
+      // that discarded a beginner's actual experience tier on every
+      // race-target plan.
       const race = body.raceTarget;
+      const { data: existingGoals } = await supabase
+        .from('user_goals')
+        .select('weekly_run_days, weekly_lift_days, fitness_level')
+        .eq('user_id', userId)
+        .maybeSingle();
+
       goals = {
         primaryGoal: 'run',
-        weeklyRunDays: 4,
-        weeklyLiftDays: 1,
-        fitnessLevel: 'intermediate',
+        weeklyRunDays: existingGoals?.weekly_run_days ?? 4,
+        weeklyLiftDays: existingGoals?.weekly_lift_days ?? 1,
+        fitnessLevel: existingGoals?.fitness_level ?? 'intermediate',
         targetRace: `${race.raceName} (${race.distance})`,
       };
 

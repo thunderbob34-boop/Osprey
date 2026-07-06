@@ -121,11 +121,15 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
     if (error) {
       console.warn('[Auth] fetchProfile error:', error.message);
-      set({
-        profile: fallbackProfile(user),
+      // Keep whatever profile we already had (e.g. from a prior successful
+      // fetch) instead of replacing it with a synthetic onboarding_complete:
+      // false profile — that fabrication was bouncing already-onboarded users
+      // back into onboarding on any transient/offline fetch failure.
+      set((state) => ({
+        profile: state.profile,
         profileReady: true,
         profileError: error.message,
-      });
+      }));
       return;
     }
 

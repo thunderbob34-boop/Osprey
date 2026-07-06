@@ -72,14 +72,20 @@ export interface WeekSession {
   description: string;
 }
 
-/** Monday-start date (YYYY-MM-DD) of the current calendar week. */
+/**
+ * Monday-start date (YYYY-MM-DD) of the current calendar week, computed in UTC
+ * to match `ozzie-generate-plan`'s `mondayOfThisWeek()`/`toDateString()`, which
+ * run on the Edge Function's UTC clock. Computing this from the device's local
+ * calendar day (as before) and then converting to UTC shifted the date back a
+ * day for every UTC+ timezone, so `fetchCurrentWeekSessions` could never find
+ * the week the server had actually stored — the plan existed but never showed.
+ */
 export function currentWeekStartDate(): string {
   const now = new Date();
-  const day = now.getDay();
+  const day = now.getUTCDay();
   const diff = day === 0 ? -6 : 1 - day;
-  const monday = new Date(now);
-  monday.setHours(0, 0, 0, 0);
-  monday.setDate(now.getDate() + diff);
+  const monday = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  monday.setUTCDate(monday.getUTCDate() + diff);
   return monday.toISOString().slice(0, 10);
 }
 

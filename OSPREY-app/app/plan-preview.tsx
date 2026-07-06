@@ -274,9 +274,12 @@ export default function PlanPreviewScreen() {
             <Text style={styles.scheduleLabel}>SCHEDULE</Text>
             <View style={styles.scheduleCard}>
               {sessions.map((session, idx) => {
-                const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                const dayOfWeek = idx; // sessions are in order Mon-Sun
-                const dayName = dayNames[dayOfWeek] ?? `Day ${dayOfWeek}`;
+                const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                // Label from the session's actual date rather than assuming the
+                // array is a gapless Mon-Sun sequence — a misordered or short
+                // response from the generator used to mislabel every session.
+                const [y, m, d] = session.session_date.split('-').map(Number);
+                const dayName = dayNames[new Date(y, m - 1, d).getDay()] ?? session.session_date;
                 const distance = formatDistance(session);
                 const pace = formatPace(session);
 

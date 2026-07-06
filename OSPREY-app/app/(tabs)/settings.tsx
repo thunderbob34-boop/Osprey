@@ -248,6 +248,8 @@ export default function SettingsTab() {
       const restored = await restorePurchases();
       setPlusActive(restored);
       Alert.alert('Restore', restored ? 'Purchases restored.' : 'No active subscription found.');
+    } catch (err) {
+      Alert.alert('Restore failed', err instanceof Error ? err.message : 'Something went wrong. Try again.');
     } finally {
       setLoading(false);
     }

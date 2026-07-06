@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
-import { parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
+import { fetchRaceDistances, parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
 
 const DISTANCE_FILTERS = ['All', '5K', '10K', 'Half', 'Full'] as const;
 type DistanceFilter = (typeof DISTANCE_FILTERS)[number];
@@ -81,6 +81,31 @@ export default function RaceSearchScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // The RunSignUp list endpoint never returns event/distance data (searchRaces'
+  // `distances` is always []), so any non-"All" chip matched nothing. Distances
+  // are only fetched lazily, per race, once a specific distance is selected —
+  // not on every search — to avoid firing 20 extra requests per keystroke.
+  const [distanceCache, setDistanceCache] = useState<Record<string, string[]>>({});
+
+  useEffect(() => {
+    if (activeFilter === 'All' || results.length === 0) return;
+    const missing = results.filter((r) => !(r.raceId in distanceCache));
+    if (missing.length === 0) return;
+    let cancelled = false;
+    Promise.all(missing.map(async (r) => [r.raceId, await fetchRaceDistances(r.raceId)] as const)).then(
+      (pairs) => {
+        if (cancelled) return;
+        setDistanceCache((prev) => {
+          const next = { ...prev };
+          for (const [id, distances] of pairs) next[id] = distances;
+          return next;
+        });
+      },
+    );
+    return () => {
+      cancelled = true;
+    };
+  }, [activeFilter, results, distanceCache]);
 
   const runSearch = useCallback(async (q: string) => {
     setLoading(true);
@@ -118,7 +143,11 @@ export default function RaceSearchScreen() {
     runSearch(query);
   }
 
-  const filtered = results.filter((r) => matchesFilter(r, activeFilter));
+  const enrichedResults = results.map((r) => ({
+    ...r,
+    distances: distanceCache[r.raceId] ?? r.distances,
+  }));
+  const filtered = enrichedResults.filter((r) => matchesFilter(r, activeFilter));
 
   return (
     <SafeAreaView style={styles.container}>

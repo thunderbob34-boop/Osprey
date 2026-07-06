@@ -4,6 +4,13 @@
 -- weather coach can recommend from real, known-good options on hot/rainy
 -- days instead of generic "find some shade" advice.
 
+-- 001_initial_schema.sql already created a saved_routes table with a different,
+-- unused shape (surface/gpx_url/lat/lon instead of tags/notes below) — that CREATE
+-- TABLE collided with this one on any fresh migration run. Nothing depends on the
+-- 001 shape (src/services/routes.ts only ever queries the tags/notes shape), so
+-- drop it here rather than leaving the migration chain unable to apply from zero.
+DROP TABLE IF EXISTS saved_routes CASCADE;
+
 CREATE TABLE saved_routes (
   id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id      UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,

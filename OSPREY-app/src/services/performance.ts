@@ -231,6 +231,7 @@ export async function fetchPerformanceData(
     // and the race predictor for every OSPREY+ user.
     .select('started_at, total_duration_s, total_distance_km, session_type, tss')
     .eq('user_id', userId)
+    .is('deleted_at', null)
     .gte('started_at', since.toISOString())
     .order('started_at', { ascending: true });
 

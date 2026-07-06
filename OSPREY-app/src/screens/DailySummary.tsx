@@ -16,6 +16,7 @@ import { Colors } from '@/constants/colors';
 import type { DailySummaryProps, TrainingReadiness } from '@/types/daily-summary';
 import MacroTargetCard from '@/components/MacroTargetCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
+import ActionSheetModal, { type ActionSheetOption } from '@/components/ActionSheetModal';
 
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
 
@@ -91,24 +92,31 @@ export default function DailySummaryScreen({
   const weekProgress = weekTarget ? Math.min(1, weekMiles / weekTarget) : 0;
   const greeting = getGreeting();
 
+  // Android's native Alert renders at most 3 buttons and silently drops the
+  // rest, so these two (5 and 4 options respectively) render via a custom
+  // ActionSheetModal instead of Alert.alert — see `sheet` state below.
+  const [sheet, setSheet] = useState<'swap' | 'compress' | null>(null);
+
   function handleSwapPress() {
-    Alert.alert('Swap today\'s session', 'Same training effect, different shape.', [
-      { text: 'Run', onPress: () => onSwapSession?.('run') },
-      { text: 'Lift', onPress: () => onSwapSession?.('lift') },
-      { text: 'Cross Training', onPress: () => onSwapSession?.('cross') },
-      { text: 'Make it Rest', onPress: () => onSwapSession?.('rest'), style: 'destructive' },
-      { text: 'Cancel', style: 'cancel' },
-    ]);
+    setSheet('swap');
   }
 
   function handleCompressPress() {
-    Alert.alert('Short on time?', "I'll shrink today's session to fit — same effort, less volume.", [
-      { text: '15 min', onPress: () => onCompressSession?.(15) },
-      { text: '20 min', onPress: () => onCompressSession?.(20) },
-      { text: '30 min', onPress: () => onCompressSession?.(30) },
-      { text: 'Cancel', style: 'cancel' },
-    ]);
+    setSheet('compress');
   }
+
+  const swapOptions: ActionSheetOption[] = [
+    { label: 'Run', onPress: () => { setSheet(null); onSwapSession?.('run'); } },
+    { label: 'Lift', onPress: () => { setSheet(null); onSwapSession?.('lift'); } },
+    { label: 'Cross Training', onPress: () => { setSheet(null); onSwapSession?.('cross'); } },
+    { label: 'Make it Rest', onPress: () => { setSheet(null); onSwapSession?.('rest'); }, destructive: true },
+  ];
+
+  const compressOptions: ActionSheetOption[] = [
+    { label: '15 min', onPress: () => { setSheet(null); onCompressSession?.(15); } },
+    { label: '20 min', onPress: () => { setSheet(null); onCompressSession?.(20); } },
+    { label: '30 min', onPress: () => { setSheet(null); onCompressSession?.(30); } },
+  ];
 
   // Single entry point for session tweaks — keeps the card down to two buttons.
   function handleAdjustPress() {
@@ -417,6 +425,20 @@ export default function DailySummaryScreen({
 
       </ScrollView>
 
+      <ActionSheetModal
+        visible={sheet === 'swap'}
+        title="Swap today's session"
+        message="Same training effect, different shape."
+        options={swapOptions}
+        onCancel={() => setSheet(null)}
+      />
+      <ActionSheetModal
+        visible={sheet === 'compress'}
+        title="Short on time?"
+        message="I'll shrink today's session to fit — same effort, less volume."
+        options={compressOptions}
+        onCancel={() => setSheet(null)}
+      />
     </SafeAreaView>
   );
 }
