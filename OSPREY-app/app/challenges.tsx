@@ -305,30 +305,39 @@ export default function ChallengesScreen() {
               />
               <FieldError message={fieldErrors.end} />
 
+              <Text style={styles.fieldLabel}>INVITE FRIENDS</Text>
               {friends && friends.length > 0 ? (
-                <>
-                  <Text style={styles.fieldLabel}>INVITE FRIENDS</Text>
-                  <View style={styles.friendInviteRow}>
-                    {friends.map((f) => {
-                      const invited = invitedIds.has(f.friendUserId);
-                      return (
-                        <TouchableOpacity
-                          key={f.friendUserId}
-                          style={[styles.inviteChip, invited && styles.inviteChipActive]}
-                          onPress={() => toggleInvite(f.friendUserId)}
-                          accessibilityRole="checkbox"
-                          accessibilityLabel={`Invite ${f.friendDisplayName}`}
-                          accessibilityState={{ checked: invited }}
-                        >
-                          <Text style={[styles.inviteChipText, invited && styles.inviteChipTextActive]}>
-                            {invited ? '✓ ' : ''}{f.friendDisplayName}
-                          </Text>
-                        </TouchableOpacity>
-                      );
-                    })}
-                  </View>
-                </>
-              ) : null}
+                <View style={styles.friendInviteRow}>
+                  {friends.map((f) => {
+                    const invited = invitedIds.has(f.friendUserId);
+                    return (
+                      <TouchableOpacity
+                        key={f.friendUserId}
+                        style={[styles.inviteChip, invited && styles.inviteChipActive]}
+                        onPress={() => toggleInvite(f.friendUserId)}
+                        accessibilityRole="checkbox"
+                        accessibilityLabel={`Invite ${f.friendDisplayName}`}
+                        accessibilityState={{ checked: invited }}
+                      >
+                        <Text style={[styles.inviteChipText, invited && styles.inviteChipTextActive]}>
+                          {invited ? '✓ ' : ''}{f.friendDisplayName}
+                        </Text>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              ) : (
+                <View style={styles.noFriendsRow}>
+                  <Text style={styles.noFriendsText}>Add friends to invite them.</Text>
+                  <TouchableOpacity
+                    onPress={() => router.push('/friends')}
+                    accessibilityRole="button"
+                    accessibilityLabel="Add friends"
+                  >
+                    <Text style={styles.noFriendsLink}>Add Friends</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
 
               <TouchableOpacity
                 style={styles.saveBtn}
@@ -580,6 +589,9 @@ const styles = StyleSheet.create({
   inviteChipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
   inviteChipText: { color: Colors.textMuted, fontSize: 13, fontWeight: '600' },
   inviteChipTextActive: { color: Colors.teal },
+  noFriendsRow: { flexDirection: 'row', alignItems: 'center', gap: 10, flexWrap: 'wrap' },
+  noFriendsText: { color: Colors.textMuted, fontSize: 13 },
+  noFriendsLink: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
   saveBtn: {
     marginTop: 10,
     backgroundColor: Colors.teal,

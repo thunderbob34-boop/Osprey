@@ -486,6 +486,22 @@ export default function SettingsTab() {
         </View>
 
         <View style={styles.card}>
+          <Text style={styles.cardLabel}>Social</Text>
+          <TouchableOpacity
+            style={styles.planRow}
+            onPress={() => router.push('/friends')}
+            accessibilityRole="button"
+            accessibilityLabel="Friends"
+          >
+            <View style={styles.planRowLeft}>
+              <Text style={styles.cardValue}>Friends</Text>
+              <Text style={styles.planRowSub}>Add friends, manage requests, and see who you train with</Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.card}>
           <Text style={styles.cardLabel}>Supplements & Meds</Text>
           <TouchableOpacity
             style={styles.planRow}

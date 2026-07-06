@@ -3,8 +3,10 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as SplashScreen from 'expo-splash-screen';
+import * as Sentry from '@sentry/react-native';
 import { useAuthStore } from '@/store/authStore';
 import { initRevenueCat } from '@/services/subscriptions';
+import { initCrashReporting } from '@/services/crash-reporting';
 import { reconcileSupplementReminders } from '@/services/supplements';
 import { reconcileRaceWeekReminders } from '@/services/notifications';
 import { syncCalendarBlocks } from '@/services/calendar-blocking';
@@ -15,9 +17,13 @@ import { AppLoadingScreen } from '@/components/AppLoadingScreen';
 
 SplashScreen.preventAutoHideAsync();
 
+// Initialize crash reporting as early as possible so startup errors are
+// captured too. No-ops if EXPO_PUBLIC_SENTRY_DSN isn't configured.
+initCrashReporting();
+
 const queryClient = new QueryClient();
 
-export default function RootLayout() {
+function RootLayout() {
   const initialize = useAuthStore((s) => s.initialize);
   const initialized = useAuthStore((s) => s.initialized);
   const userId = useAuthStore((s) => s.user?.id);
@@ -66,6 +72,7 @@ export default function RootLayout() {
         <Stack.Screen name="races" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="activity" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="challenges" options={{ presentation: 'fullScreenModal' }} />
+        <Stack.Screen name="friends" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="paywall" options={{ presentation: 'modal' }} />
         <Stack.Screen name="preferences" options={{ presentation: 'modal', headerShown: false }} />
         <Stack.Screen name="race-search" options={{ presentation: 'modal', headerShown: false }} />
@@ -75,3 +82,8 @@ export default function RootLayout() {
     </QueryClientProvider>
   );
 }
+
+// Sentry.wrap adds a top-level error boundary around the root layout so
+// unhandled render errors are captured too, not just JS exceptions. No-ops
+// safely when Sentry was never initialized (no DSN configured).
+export default Sentry.wrap(RootLayout);

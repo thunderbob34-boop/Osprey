@@ -86,9 +86,18 @@ export default function ActivityScreen() {
         ) : error ? (
           <Text style={styles.errorText}>Couldn&apos;t load activity feed.</Text>
         ) : !feed || feed.length === 0 ? (
-          <Text style={styles.empty}>
-            No activity yet. Complete a workout and tap the heart on Home to share it with friends.
-          </Text>
+          <View style={styles.emptyBlock}>
+            <Text style={styles.empty}>
+              No activity yet. Complete a workout and tap the heart on Home to share it with friends.
+            </Text>
+            <TouchableOpacity
+              onPress={() => router.push('/friends')}
+              accessibilityRole="button"
+              accessibilityLabel="Add friends"
+            >
+              <Text style={styles.emptyLink}>Add Friends</Text>
+            </TouchableOpacity>
+          </View>
         ) : (
           feed.map((card) => (
             <View key={card.shareId} style={styles.card}>
@@ -165,7 +174,9 @@ const styles = StyleSheet.create({
   close: { color: Colors.textMuted, fontSize: 18, fontWeight: '700' },
   title: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },
   scroll: { padding: 16, paddingBottom: 32, gap: 12 },
-  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 24 },
+  emptyBlock: { marginTop: 24, gap: 8 },
+  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20 },
+  emptyLink: { color: Colors.teal, fontSize: 14, fontWeight: '700' },
   errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
 
   card: {

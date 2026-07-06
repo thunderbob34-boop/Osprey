@@ -434,6 +434,7 @@ interface PartnersPanelProps {
 }
 
 function PartnersPanel({ race, onClose }: PartnersPanelProps) {
+  const router = useRouter();
   const { friendsAtRace, partners, partnerIds, isLoading, addPartner, removePartner } =
     useRacePartners(race);
 
@@ -507,9 +508,18 @@ function PartnersPanel({ race, onClose }: PartnersPanelProps) {
           })}
         </>
       ) : (
-        <Text style={styles.partnersEmpty}>
-          None of your accepted friends have a race on this date yet.
-        </Text>
+        <View style={styles.partnersEmptyBlock}>
+          <Text style={styles.partnersEmpty}>
+            None of your accepted friends have a race on this date yet.
+          </Text>
+          <TouchableOpacity
+            onPress={() => router.push('/friends')}
+            accessibilityRole="button"
+            accessibilityLabel="Add friends"
+          >
+            <Text style={styles.partnersEmptyLink}>Add Friends</Text>
+          </TouchableOpacity>
+        </View>
       )}
 
       {orphanedPartners.length > 0 ? (
@@ -1310,13 +1320,14 @@ const styles = StyleSheet.create({
     lineHeight: 17,
     marginBottom: 4,
   },
+  partnersEmptyBlock: { gap: 6, marginVertical: 8 },
   partnersEmpty: {
     color: Colors.textMuted,
     fontSize: 13,
     lineHeight: 18,
     fontStyle: 'italic',
-    marginVertical: 8,
   },
+  partnersEmptyLink: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
   friendRow: {
     flexDirection: 'row',
     alignItems: 'center',

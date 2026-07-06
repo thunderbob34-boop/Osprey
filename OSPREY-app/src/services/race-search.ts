@@ -1,3 +1,5 @@
+import { reportError } from '@/services/crash-reporting';
+
 export interface RaceSearchResult {
   raceId: string;
   name: string;
@@ -196,6 +198,7 @@ export async function searchRaces(params: {
     } else {
       console.error('[race-search] Fetch error:', err);
     }
+    reportError(err);
     return [];
   } finally {
     clearTimeout(timeoutId);

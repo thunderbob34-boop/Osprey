@@ -11,6 +11,7 @@
 
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import { reportError } from '@/services/crash-reporting';
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
@@ -23,7 +24,7 @@ const CACHE_DIR = `${FileSystem.cacheDirectory}ozzie-audio/`;
 // encode the raw MP3 bytes to base64 by hand instead of `Buffer.from(...).toString('base64')`.
 const BASE64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
-function bytesToBase64(bytes: Uint8Array): string {
+export function bytesToBase64(bytes: Uint8Array): string {
   let result = '';
   for (let i = 0; i < bytes.length; i += 3) {
     const b0 = bytes[i];
@@ -181,6 +182,7 @@ export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient'
 
   } catch (err) {
     console.error('[Ozzie] TTS error:', err);
+    reportError(err);
   }
 }
 
