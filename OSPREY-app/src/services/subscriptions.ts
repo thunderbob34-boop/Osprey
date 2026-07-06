@@ -14,9 +14,16 @@ export async function initRevenueCat(userId: string): Promise<void> {
   configured = true;
 }
 
+// An unconfigured store (no RevenueCat key, or Android — never wired up) used
+// to fail OPEN (`return true`) unconditionally, which meant a real build
+// shipped with no key silently gave every user OSPREY+ for free. Fail closed
+// in any real build; keep failing open only in __DEV__ so local development
+// doesn't require a RevenueCat sandbox account to exercise Plus-gated UI.
+const UNCONFIGURED_ENTITLEMENT = typeof __DEV__ !== 'undefined' && __DEV__;
+
 export async function hasOspreyPlus(): Promise<boolean> {
   if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) {
-    return true;
+    return UNCONFIGURED_ENTITLEMENT;
   }
 
   const info = await Purchases.getCustomerInfo();
@@ -29,7 +36,7 @@ export async function getOfferings() {
 }
 
 export async function purchaseOspreyPlus(): Promise<boolean> {
-  if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) return true;
+  if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) return UNCONFIGURED_ENTITLEMENT;
 
   const offerings = await getOfferings();
   const packageToBuy = offerings?.current?.availablePackages[0];
@@ -40,7 +47,7 @@ export async function purchaseOspreyPlus(): Promise<boolean> {
 }
 
 export async function restorePurchases(): Promise<boolean> {
-  if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) return true;
+  if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) return UNCONFIGURED_ENTITLEMENT;
   const info = await Purchases.restorePurchases();
   return Boolean(info.entitlements.active[ENTITLEMENT_ID]);
 }
