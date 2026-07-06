@@ -14,6 +14,7 @@ import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
 import {
   computeRacePhase,
+  currentWeekStartDate,
   fetchCurrentWeekSessions,
   fetchPlanWeeks,
   fetchRaceGoal,
@@ -274,7 +275,12 @@ export default function PlanPreviewScreen() {
                   contentContainerStyle={styles.blockScroll}
                 >
                   {planWeeks.map((week) => {
-                    const isCurrent = week.weekNumber === racePhase?.currentWeekNumber;
+                    // Compare against the same UTC Monday string the server
+                    // used to store this week, not racePhase.currentWeekNumber
+                    // — that's computed independently client-side from the
+                    // race date and can disagree with the server's own
+                    // plan-creation-anchored week numbering by a week.
+                    const isCurrent = week.startDate === currentWeekStartDate();
                     return (
                       <View
                         key={week.weekNumber}

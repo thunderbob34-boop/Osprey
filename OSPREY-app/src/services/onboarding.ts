@@ -34,18 +34,25 @@ export async function completeOnboarding(userId: string, draft: OnboardingDraft)
 
   if (userError) throw userError;
 
-  const { error: goalsError } = await supabase.from('user_goals').insert({
-    user_id: userId,
-    primary_goal: draft.primaryGoal,
-    weekly_run_days: draft.weeklyRunDays,
-    weekly_lift_days: draft.weeklyLiftDays,
-    fitness_level: draft.experienceTier,
-    target_race: draft.targetRaceName,
-    target_date: draft.targetDate,
-    injury_notes: draft.injuryNotes,
-    constraint_tags: draft.constraintTags,
-    total_weeks_planned: computeTotalWeeksPlanned(draft.targetDate),
-  });
+  // Upsert, not insert: user_goals.user_id is UNIQUE, and a plain insert means
+  // retrying "Finish Setup" after any later step in this function throws
+  // (e.g. the user_preferences upsert below) hits a unique violation on the
+  // second attempt and leaves the user stuck unable to complete onboarding.
+  const { error: goalsError } = await supabase.from('user_goals').upsert(
+    {
+      user_id: userId,
+      primary_goal: draft.primaryGoal,
+      weekly_run_days: draft.weeklyRunDays,
+      weekly_lift_days: draft.weeklyLiftDays,
+      fitness_level: draft.experienceTier,
+      target_race: draft.targetRaceName,
+      target_date: draft.targetDate,
+      injury_notes: draft.injuryNotes,
+      constraint_tags: draft.constraintTags,
+      total_weeks_planned: computeTotalWeeksPlanned(draft.targetDate),
+    },
+    { onConflict: 'user_id' },
+  );
 
   if (goalsError) throw goalsError;
 

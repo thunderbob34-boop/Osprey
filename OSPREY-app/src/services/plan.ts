@@ -121,13 +121,31 @@ export interface PlanWeekSummary {
   volumeMultiplier: number | null;
 }
 
-/** Every week of the active plan's block (Base/Build/Peak/Taper), in order — only meaningful once a real multi-week block exists. */
+/**
+ * Every week of the CURRENT plan's block (Base/Build/Peak/Taper), in order —
+ * only meaningful once a real multi-week block exists. Each plan regeneration
+ * inserts its own `training_plans` row rather than updating one in place, so
+ * a user can have more than one `status: 'active'` plan; scope to the plan
+ * whose week actually covers the current calendar week, not every active
+ * plan's weeks combined — otherwise old plans' leftover "week 1" rows show up
+ * as duplicate chips alongside the real block.
+ */
 export async function fetchPlanWeeks(userId: string): Promise<PlanWeekSummary[]> {
-  const { data, error } = await supabase
+  const { data: currentWeek, error: currentWeekError } = await supabase
     .from('training_weeks')
-    .select('week_number, start_date, focus, volume_multiplier, training_plans!inner(user_id, status)')
+    .select('plan_id, training_plans!inner(user_id, status)')
+    .eq('start_date', currentWeekStartDate())
     .eq('training_plans.user_id', userId)
     .eq('training_plans.status', 'active')
+    .maybeSingle();
+
+  if (currentWeekError) throw currentWeekError;
+  if (!currentWeek) return [];
+
+  const { data, error } = await supabase
+    .from('training_weeks')
+    .select('week_number, start_date, focus, volume_multiplier')
+    .eq('plan_id', currentWeek.plan_id)
     .order('week_number', { ascending: true });
 
   if (error) throw error;

@@ -338,6 +338,7 @@ async function fetchLatestBodyWeightKg(
     .from('body_metrics')
     .select('weight_kg')
     .eq('user_id', userId)
+    .not('weight_kg', 'is', null)
     .order('recorded_on', { ascending: false })
     .limit(1)
     .maybeSingle();
@@ -370,56 +371,82 @@ interface DayAllocation {
   weeklyCrossDays: number;
 }
 
+const ZERO_ALLOCATION: DayAllocation = {
+  weeklyRunDays: 0,
+  weeklyLiftDays: 0,
+  weeklySwimDays: 0,
+  weeklyBikeDays: 0,
+  weeklyCrossDays: 0,
+};
+
+/**
+ * Splits `total` whole days across categories by relative weight using the
+ * largest-remainder method, so the result always sums to EXACTLY `total` —
+ * never over or under. An earlier version used independent `Math.max(1, ...)`
+ * floors per category, which could sum to more than the athlete's actual
+ * available days (e.g. hyrox at 4 days/week producing 5 scheduled days).
+ */
+function distributeDaysByWeight(total: number, weights: Partial<Record<keyof DayAllocation, number>>): DayAllocation {
+  const entries = Object.entries(weights) as Array<[keyof DayAllocation, number]>;
+  const totalWeight = entries.reduce((sum, [, w]) => sum + w, 0);
+  if (total <= 0 || totalWeight <= 0) return { ...ZERO_ALLOCATION };
+
+  const shares = entries.map(([key, w]) => {
+    const exact = (w / totalWeight) * total;
+    return { key, floor: Math.floor(exact), remainder: exact - Math.floor(exact) };
+  });
+
+  const result: DayAllocation = { ...ZERO_ALLOCATION };
+  for (const s of shares) result[s.key] = s.floor;
+
+  let leftover = total - shares.reduce((sum, s) => sum + s.floor, 0);
+  const byRemainderDesc = [...shares].sort((a, b) => b.remainder - a.remainder);
+  for (let i = 0; leftover > 0 && byRemainderDesc.length > 0; i++, leftover--) {
+    result[byRemainderDesc[i % byRemainderDesc.length].key] += 1;
+  }
+  return result;
+}
+
 function computeSportDayAllocation(
   mappedGoal: string,
   totalDaysPerWeek: number,
   triathlonDistance?: string | null,
 ): DayAllocation {
   const total = Math.max(1, totalDaysPerWeek);
-  const zero: DayAllocation = { weeklyRunDays: 0, weeklyLiftDays: 0, weeklySwimDays: 0, weeklyBikeDays: 0, weeklyCrossDays: 0 };
+  void triathlonDistance;
 
   switch (mappedGoal) {
-    case 'triathlon': {
-      const weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
-      const weeklySwimDays = Math.max(1, Math.round(total * 0.2));
-      const weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
-      const weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
-      return { ...zero, weeklyRunDays, weeklyLiftDays, weeklySwimDays, weeklyBikeDays };
-    }
+    case 'triathlon':
+      return distributeDaysByWeight(total, { weeklyBikeDays: 3, weeklySwimDays: 2, weeklyLiftDays: 2, weeklyRunDays: 3 });
     case 'cycling':
-      return { ...zero, weeklyBikeDays: Math.max(2, total - (total >= 3 ? 1 : 0)), weeklyLiftDays: total >= 3 ? 1 : 0 };
+      return distributeDaysByWeight(total, { weeklyBikeDays: 4, weeklyLiftDays: 1 });
     case 'swimming':
-      return { ...zero, weeklySwimDays: Math.max(2, total - (total >= 3 ? 1 : 0)), weeklyLiftDays: total >= 3 ? 1 : 0 };
+      return distributeDaysByWeight(total, { weeklySwimDays: 4, weeklyLiftDays: 1 });
     case 'rowing':
-      return { ...zero, weeklyCrossDays: Math.max(2, total - (total >= 3 ? 1 : 0)), weeklyLiftDays: total >= 3 ? 1 : 0 };
+      return distributeDaysByWeight(total, { weeklyCrossDays: 4, weeklyLiftDays: 1 });
     case 'powerlifting':
-      return { ...zero, weeklyLiftDays: total };
-    case 'hyrox': {
-      const weeklyRunDays = Math.max(1, Math.ceil(total * 0.4));
-      const weeklyCrossDays = Math.max(1, Math.ceil(total * 0.4));
-      const weeklyLiftDays = Math.max(1, total - weeklyRunDays - weeklyCrossDays);
-      return { ...zero, weeklyRunDays, weeklyCrossDays, weeklyLiftDays };
-    }
-    case 'crossfit': {
-      const weeklyCrossDays = Math.max(2, total - Math.max(1, Math.floor(total * 0.3)));
-      const weeklyLiftDays = Math.max(1, total - weeklyCrossDays);
-      return { ...zero, weeklyCrossDays, weeklyLiftDays };
-    }
+      return { ...ZERO_ALLOCATION, weeklyLiftDays: total };
+    case 'hyrox':
+      return distributeDaysByWeight(total, { weeklyRunDays: 4, weeklyCrossDays: 4, weeklyLiftDays: 2 });
+    case 'crossfit':
+      return distributeDaysByWeight(total, { weeklyCrossDays: 7, weeklyLiftDays: 3 });
     case 'ultra':
-      return { ...zero, weeklyRunDays: Math.max(2, total - (total >= 3 ? 1 : 0)), weeklyLiftDays: total >= 3 ? 1 : 0 };
+      return distributeDaysByWeight(total, { weeklyRunDays: 4, weeklyLiftDays: 1 });
     case 'run':
-      return { ...zero, weeklyRunDays: total >= 2 ? Math.ceil(total * 0.6) : 2, weeklyLiftDays: total >= 2 ? Math.floor(total * 0.4) : 1 };
-    case 'lift':
-      return { ...zero, weeklyLiftDays: total };
-    default: {
-      // hybrid / weight_loss / general_fitness — the original generic split.
-      void triathlonDistance;
       return {
-        ...zero,
+        ...ZERO_ALLOCATION,
         weeklyRunDays: total >= 2 ? Math.ceil(total * 0.6) : 2,
         weeklyLiftDays: total >= 2 ? Math.floor(total * 0.4) : 1,
       };
-    }
+    case 'lift':
+      return { ...ZERO_ALLOCATION, weeklyLiftDays: total };
+    default:
+      // hybrid / weight_loss / general_fitness — the original generic split.
+      return {
+        ...ZERO_ALLOCATION,
+        weeklyRunDays: total >= 2 ? Math.ceil(total * 0.6) : 2,
+        weeklyLiftDays: total >= 2 ? Math.floor(total * 0.4) : 1,
+      };
   }
 }
 
@@ -599,7 +626,10 @@ async function generateWeekDays(
       ],
       response_format: { type: 'json_object' },
       temperature: 0.7,
-      max_tokens: 1000,
+      // Powerlifting/crossfit/hyrox weeks can have a real lift_prescription
+      // (4-6 exercises) on most or all 7 days — bumped from 900/1000 to give
+      // those all-lift-heavy sports enough room without truncating mid-JSON.
+      max_tokens: 1400,
     }),
   });
 
