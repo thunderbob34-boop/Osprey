@@ -340,3 +340,130 @@ for pending requests, and wiring the existing `useChallenges`/
 `useRacePartners`/`useActivity` hooks' empty-state copy to point at it
 ("Add friends to see their activity here") instead of the current
 unexplained-empty-forever state.
+
+---
+
+## Addendum — full implementation session (same day, same branch)
+
+Following this report, every item under "Categories skipped" and all three
+feature proposals above were implemented in full (except the Expo SDK
+upgrade — see below), in 8 sequential phases, each independently committed,
+typechecked/linted/tested, and pushed. Total: 12 commits, ~6,000 lines added
+across 60+ files.
+
+### What was built
+
+1. **Paywall fail-safe default.** `hasOspreyPlus`/`purchaseOspreyPlus`/
+   `restorePurchases` no longer fail open unconditionally when RevenueCat is
+   unconfigured — only in `__DEV__` now, so a real build without a key ships
+   with the paywall actually enforced instead of silently granting everyone
+   OSPREY+.
+2. **Test suite.** Jest (`jest-expo` preset) plus a first batch of real unit
+   tests for the pure functions most worth covering: TSB/CTL/ATL and ACWR
+   math, the Riegel predictor, the hand-written base64 encoder that replaced
+   `Buffer.from`, `currentWeekStartDate`'s UTC alignment, and
+   `computeRacePhase`'s phase boundaries. 37 tests, all passing.
+3. **Crash reporting.** `@sentry/react-native` wired behind an
+   `EXPO_PUBLIC_SENTRY_DSN` env var (no-ops until configured, matching the
+   existing ElevenLabs/RevenueCat optional-key pattern), a root render-error
+   boundary, and `reportError()` calls added to two previously-silent catch
+   blocks.
+4. **Real friend system.** The `friendships`/`race_partners`/challenge-invite/
+   activity-feed plumbing was already fully correct (confirmed in the
+   original audit above) but nothing ever created a `friendships` row — no
+   add-friend UI existed anywhere. Added exact-match search-by-email,
+   send/accept/decline via a new `/friends` screen, and pointed the three
+   previously-dead empty states (challenges invites, race partners, activity
+   feed) at it.
+5. **Closed-loop coach memory.** Ozzie now references the athlete's 5 most
+   recent `coach_memory` events (PRs, race results, injury flags) in the
+   plan-generation prompt, favors lower-impact sessions when a recent injury
+   flag exists, and a new read-only Coach's Log screen shows the full
+   history. Wired up the `injury_flag` event type, which previously had zero
+   writers anywhere in the app.
+6. **Full periodized multi-week plan generation.** `ozzie-generate-plan` no
+   longer generates one identical "week 1, Base building" forever — when the
+   block length is known (a dated race target, or the onboarding-collected
+   timeline), the entire `training_weeks` skeleton is created up front with a
+   deterministic Base/Build/Peak/Taper phase and volume multiplier per week;
+   only the current week's sessions populate immediately, and future weeks
+   fill in via the existing idempotent regeneration path using their
+   already-decided phase — so a Taper week finally generates less volume
+   than a Base week. `plan-preview.tsx` shows the whole block as a strip of
+   real per-week phase chips.
+7. **Coaching-engine fidelity.** Real threshold-anchored running pace zones
+   (Riegel-derived from the athlete's own best logged effort, not a generic
+   guess) and body-weight-based daily carb targets are computed server-side
+   and injected into the prompt. Onboarding expanded from 2 of the 4
+   documented coaching inputs to all 4: a full 9-sport + hybrid grid (adding
+   cycling, swimming, rowing, powerlifting, hyrox, crossfit, ultra to
+   `primary_goal_enum`), a target-event/timeline screen, and an
+   injury/constraints screen — all persisted and threaded into the
+   generator, which now gives each of the 7 new sports its own prompt
+   guidance and sport-appropriate weekly day split.
+8. **Apple Watch phone-side bridge — best effort, unverified.** The Watch
+   app (`targets/watch/`) has always had real, working `WCSession` receiver
+   code; the phone side was a stub deleted entirely the day before the
+   original audit. Built a local Expo Module (`modules/watch-connectivity/`)
+   implementing the phone-side `WCSession` delegate (a small `NSObject`
+   proxy, since Expo's `Module` base class isn't itself an `NSObject` and
+   can't conform to `WCSessionDelegate` directly — mirrors the same pattern
+   `expo-location` uses for `CLLocationManagerDelegate`), wired into the
+   three active-workout screens via a new `useWatchSync` hook. **This cannot
+   be verified in this environment** — no Xcode, CocoaPods, iOS simulator, or
+   physical Watch is available here. TypeScript compiles and passes lint;
+   actual Swift compilation, CocoaPods/autolinking integration, and
+   `WCSession` activating on a real device are all unconfirmed pending a
+   real device build.
+
+### Deliberately not attempted
+
+**The Expo SDK upgrade** (still ~4 majors behind, flagged in the original
+audit above) was explicitly skipped this session. Unlike everything else in
+this list, it's a native-project-touching change with real whole-app-breakage
+risk and no way to regression-test it here (no device/simulator, no way to
+run `expo prebuild` and rebuild). Recommend doing this as a dedicated,
+reviewed, incrementally-tested change rather than an unattended one.
+
+### Verification
+
+Two more FABLE verification passes ran across this entire diff (in addition
+to typecheck/lint/test gates after every commit). Of ~19 distinct
+areas/claims checked, one was **BROKEN** and fixed immediately:
+
+- `recordInjuryFlagMemory`'s dedup index was accidentally made partial
+  (`WHERE event_type = 'injury_flag'`) — the *exact* PostgREST-can't-target-a-
+  partial-index mistake (42P10) the original audit's own fix (item 4 in the
+  Fixes list above) had just corrected for a different table. Every
+  injury-flag write was silently failing. Caught by the verification pass,
+  fixed in the same session by making the index non-partial.
+
+Four more issues were caught and fixed before they shipped:
+- The new plan-preview block strip pulled weeks from *every* active plan a
+  user had (each regeneration creates a new plan row rather than archiving
+  the last one), showing duplicate "week 1" chips for any returning user —
+  scoped to the current plan only.
+- Its "current week" highlight compared two independently-computed week
+  numbers (server plan-creation-anchored vs. client race-date-anchored) that
+  could disagree by a week — now compares the same date string both sides
+  already use to look up "this week".
+- `computeSportDayAllocation` could sum to more days than the athlete
+  actually has available (hyrox at 4 days/week scheduled 5 sessions, zero
+  rest) — replaced with a weighted distributor that always sums to exactly
+  the requested total.
+- `completeOnboarding` did a plain `insert` where the table has a unique
+  constraint, so retrying "Finish Setup" after a transient failure would
+  strand the user — changed to `upsert`.
+
+Everything else — the friend system's RLS/RPC correctness, the Sentry
+no-op-when-unconfigured behavior, the Watch bridge's JS-side graceful
+degradation, the multi-week block math (hand-verified against several
+concrete week counts), the Riegel threshold-pace math, and the three
+original request-body flows (preferences/raceTarget/background fallback)
+for regressions — came back verified. Two lower-severity items were logged
+as known limitations rather than fixed under time pressure: changing a race
+target or preferences mid-block doesn't yet regenerate the whole block's
+remaining weeks (only the current week), and background plan regeneration
+for a multi-discipline athlete (e.g. a 6-day-a-week triathlete) can't fully
+reconstruct swim/bike/cross day counts from `user_goals`' generic run/lift
+columns alone.
