@@ -16,7 +16,7 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 - [ ] `supabase db push --linked` — applies migrations 016–026 (delete account, lift prescriptions, hydration, expanded exercise library, interval prescriptions, triathlon goal, workout-import source, saved routes, challenge types, leaderboard v2, coach memory).
 - [ ] Deploy all edge functions: `ozzie-daily-brief`, `ozzie-generate-plan`, `ozzie-nutrition-coach`, `ozzie-meal-photo`, `ozzie-voice-log`, `ozzie-race-briefing`, `ozzie-race-retro`, `ozzie-data-export`.
 - [ ] Set secrets (Supabase → Edge Functions → Secrets):
-  - [ ] `OPENAI_API_KEY` — **currently empty; every Ozzie AI feature is dead without it.** Confirm OpenAI billing/credits are enabled.
+  - [x] `OPENAI_API_KEY` — set 2026-07-05. Verify billing/credits are enabled on the OpenAI account (a key without billing 429s on every call).
   - [ ] `ELEVENLABS_API_KEY` (must be set server-side, not just `.env.local`)
   - [ ] `RESEND_API_KEY` + verified sending domain in Resend (data export emails); optionally `EXPORT_FROM_EMAIL`
 - [ ] Supabase → Auth: enable Apple + Google providers; add `osprey://auth-callback` redirect.
