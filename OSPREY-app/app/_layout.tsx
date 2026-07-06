@@ -73,6 +73,7 @@ function RootLayout() {
         <Stack.Screen name="activity" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="challenges" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="friends" options={{ presentation: 'fullScreenModal' }} />
+        <Stack.Screen name="coach-log" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="paywall" options={{ presentation: 'modal' }} />
         <Stack.Screen name="preferences" options={{ presentation: 'modal', headerShown: false }} />
         <Stack.Screen name="race-search" options={{ presentation: 'modal', headerShown: false }} />

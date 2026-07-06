@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuthStore } from '@/store/authStore';
 import {
@@ -8,10 +9,12 @@ import {
   fetchPerformanceData,
   fetchTriathlonPreference,
   readinessFromTsb,
+  recordInjuryFlagMemory,
   type DailyLoad,
   type PerformanceMetrics,
 } from '@/services/performance';
 import type { TrainingReadiness } from '@/types/daily-summary';
+import { localDateString } from '@/utils/date';
 
 export interface PerformanceResult extends PerformanceMetrics {
   trainingReadiness: TrainingReadiness | null;
@@ -22,7 +25,7 @@ export function usePerformance() {
   const userId = useAuthStore((s) => s.user?.id);
   const key = ['performance', userId];
 
-  return useQuery<PerformanceResult>({
+  const query = useQuery<PerformanceResult>({
     queryKey: key,
     queryFn: async () => {
       const [
@@ -72,4 +75,24 @@ export function usePerformance() {
     enabled: Boolean(userId),
     staleTime: 300_000, // 5 minutes
   });
+
+  // Persist a coach_memory note whenever injury risk reads "high" so the plan
+  // generator and daily brief can factor it in later. lastWrittenRef dedupes
+  // on (day, level) so repeat renders/refetches with an unchanged "high"
+  // reading don't fire redundant network calls — the DB's dedup index would
+  // make repeats harmless anyway, but there's no reason to make the call.
+  const level = query.data?.injuryRisk.level;
+  const message = query.data?.injuryRisk.message;
+  const lastWrittenRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!userId || level !== 'high' || !message) return;
+    const today = localDateString();
+    const dedupeKey = `${today}:${level}`;
+    if (lastWrittenRef.current === dedupeKey) return;
+    lastWrittenRef.current = dedupeKey;
+    recordInjuryFlagMemory(userId, today, message).catch(() => undefined);
+  }, [userId, level, message]);
+
+  return query;
 }

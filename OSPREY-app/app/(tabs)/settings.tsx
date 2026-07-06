@@ -502,6 +502,22 @@ export default function SettingsTab() {
         </View>
 
         <View style={styles.card}>
+          <Text style={styles.cardLabel}>Coaching</Text>
+          <TouchableOpacity
+            style={styles.planRow}
+            onPress={() => router.push('/coach-log')}
+            accessibilityRole="button"
+            accessibilityLabel="Coach's Log"
+          >
+            <View style={styles.planRowLeft}>
+              <Text style={styles.cardValue}>Coach&apos;s Log</Text>
+              <Text style={styles.planRowSub}>PRs, race results, and injury notes Ozzie remembers</Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.card}>
           <Text style={styles.cardLabel}>Supplements & Meds</Text>
           <TouchableOpacity
             style={styles.planRow}

@@ -441,6 +441,61 @@ export function readinessFromTsb(tsb: number, ctl: number): TrainingReadiness {
   return { tsb: Math.round(tsb * 10) / 10, ctl: Math.round(ctl * 10) / 10, label, color };
 }
 
+// ── Coach memory ──────────────────────────────────────────────────────────────
+
+export interface CoachMemoryEntry {
+  id: string;
+  eventType: 'pr' | 'race_result' | 'injury_flag';
+  occurredOn: string;
+  summary: string;
+}
+
+/**
+ * Records an elevated-injury-risk flag into coach_memory so future plan
+ * generation and the daily brief can see it. Deduped per (user, day) at the
+ * DB level (idx_coach_memory_injury_flag_dedup), so re-computing injury risk
+ * on every Home-tab refetch never creates more than one row per local day.
+ * Best-effort — a failure here should never surface to the user.
+ */
+export async function recordInjuryFlagMemory(
+  userId: string,
+  occurredOn: string,
+  message: string,
+): Promise<void> {
+  try {
+    const { error } = await supabase.from('coach_memory').upsert(
+      {
+        user_id: userId,
+        event_type: 'injury_flag',
+        occurred_on: occurredOn,
+        summary: message,
+      },
+      { onConflict: 'user_id,event_type,occurred_on', ignoreDuplicates: true },
+    );
+    if (error) console.error('[coach-memory] injury flag record failed', error);
+  } catch {
+    // Best-effort — never let a memory-write failure surface to the user.
+  }
+}
+
+/** Full chronological (newest-first) coach_memory history for the "Coach's Log" screen. */
+export async function fetchCoachMemory(userId: string): Promise<CoachMemoryEntry[]> {
+  const { data, error } = await supabase
+    .from('coach_memory')
+    .select('id, event_type, occurred_on, summary')
+    .eq('user_id', userId)
+    .order('occurred_on', { ascending: false });
+
+  if (error) throw error;
+
+  return (data ?? []).map((row) => ({
+    id: row.id as string,
+    eventType: row.event_type as CoachMemoryEntry['eventType'],
+    occurredOn: row.occurred_on as string,
+    summary: row.summary as string,
+  }));
+}
+
 // ── Format helpers ────────────────────────────────────────────────────────────
 
 export function formatRaceTimeSec(totalS: number): string {

@@ -54,6 +54,35 @@ interface TrainingLoad {
   tsb: number;
 }
 
+interface CoachMemoryRow {
+  event_type: string;
+  summary: string;
+  occurred_on: string;
+}
+
+/** Most recent coach_memory rows (PRs, race results, injury flags) — additive context for the prompt. */
+async function fetchRecentCoachMemory(
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+): Promise<CoachMemoryRow[]> {
+  const { data } = await supabase
+    .from('coach_memory')
+    .select('event_type, summary, occurred_on')
+    .eq('user_id', userId)
+    .order('occurred_on', { ascending: false })
+    .limit(5);
+
+  return (data ?? []) as CoachMemoryRow[];
+}
+
+/** True if any fetched coach_memory row is an injury flag from roughly the last two weeks. */
+function hasRecentInjuryFlag(rows: CoachMemoryRow[]): boolean {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 14);
+  const cutoffStr = toDateString(cutoff);
+  return rows.some((row) => row.event_type === 'injury_flag' && row.occurred_on >= cutoffStr);
+}
+
 async function computeTrainingLoad(supabase: ReturnType<typeof createClient>, userId: string): Promise<TrainingLoad> {
   const since = new Date();
   since.setDate(since.getDate() - 84);
@@ -235,7 +264,21 @@ async function generateRescheduleReason(swaps: RescheduleSwap[]): Promise<string
   return data.choices?.[0]?.message?.content?.trim() ?? "Looks like a session got missed — I've moved it to an open day this week.";
 }
 
-async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad) {
+async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad, recentMemories: CoachMemoryRow[]) {
+  // Purely additive context: a short plain-text recap of recent coach_memory
+  // events (PRs, race results, injury flags) folded into the user prompt, and
+  // — when a recent injury flag is present — one extra instruction on the
+  // system prompt nudging the model toward lower-impact/easier sessions this
+  // week. Neither changes the JSON response schema or the days-per-week loop.
+  const memorySentence =
+    recentMemories.length > 0
+      ? ` Recent coaching notes: ${recentMemories.map((m) => m.summary).join('; ')}.`
+      : '';
+
+  const systemContent = hasRecentInjuryFlag(recentMemories)
+    ? `${PLAN_SYSTEM_PROMPT}\n\nThis athlete logged an elevated injury-risk flag within the last two weeks. Favor lower-impact, easier sessions for this athlete this week and avoid adding intensity work.`
+    : PLAN_SYSTEM_PROMPT;
+
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -245,10 +288,10 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad)
     body: JSON.stringify({
       model: 'gpt-4o-mini',
       messages: [
-        { role: 'system', content: PLAN_SYSTEM_PROMPT },
+        { role: 'system', content: systemContent },
         {
           role: 'user',
-          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} Long run day: ${goals.longRunDay ?? 'sunday'}. trainingLoad: ${JSON.stringify(trainingLoad)}.`,
+          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} Long run day: ${goals.longRunDay ?? 'sunday'}. trainingLoad: ${JSON.stringify(trainingLoad)}.${memorySentence}`,
         },
       ],
       response_format: { type: 'json_object' },
@@ -485,6 +528,7 @@ Deno.serve(async (req: Request) => {
     const planType = goals.weeklyLiftDays > 0 && goals.weeklyRunDays > 0 ? 'hybrid' : goals.weeklyLiftDays > 0 ? 'lift' : 'run';
 
     const trainingLoad = await computeTrainingLoad(supabase, userId);
+    const recentMemories = await fetchRecentCoachMemory(supabase, userId);
 
     // Reuse the existing plan/week row when rebuilding (broken week or an
     // explicit force rebuild) instead of creating a duplicate; otherwise
@@ -566,7 +610,7 @@ Deno.serve(async (req: Request) => {
       weekId = week.id as string;
     }
 
-    const days = await generateWeekDays(goals, trainingLoad);
+    const days = await generateWeekDays(goals, trainingLoad, recentMemories);
 
     const sessionRows = days.map((day) => {
       const sessionDate = new Date(weekStart);
