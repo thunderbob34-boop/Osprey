@@ -28,7 +28,8 @@ function formatDate(dateStr: string): string {
 function matchesFilter(result: RaceSearchResult, filter: DistanceFilter): boolean {
   if (filter === 'All') return true;
   if (filter === 'Full') return result.distances.some((d) => d === 'Marathon');
-  if (filter === 'Half') return result.distances.some((d) => d === 'Half');
+  // fetchRaceDistances returns the canonical label 'Half Marathon', not 'Half'.
+  if (filter === 'Half') return result.distances.some((d) => d === 'Half Marathon');
   return result.distances.includes(filter);
 }
 
