@@ -33,6 +33,7 @@ import { computePlates, formatPlateBreakdown } from '@/services/plate-math';
 import { ozzieSpeak } from '@/services/ozzie-audio';
 import { startVoiceRecording, stopVoiceRecordingAndParse, cancelVoiceRecording } from '@/services/voice-log';
 import { generateWarmup, type WarmupDrill } from '@/services/warmup';
+import { useWatchSync } from '@/hooks/useWatchSync';
 import type { LiftExercise } from '@/types/workout';
 
 export default function LiftWorkoutScreen() {
@@ -93,6 +94,13 @@ export default function LiftWorkoutScreen() {
       { text: 'Finish & Save', onPress: handleFinish },
     ]);
   }
+
+  // Keep a paired Apple Watch's on-wrist view in sync with this lift session,
+  // and let "End Workout" on the wrist trigger the same confirm-and-save flow
+  // as the in-app button. No heart rate / distance tracked for lifts.
+  // Requires a native Watch bridge build + a paired Watch — see
+  // src/services/watch-connectivity.ts (no-ops safely otherwise).
+  useWatchSync(status === 'saving' ? 'active' : status, elapsed, null, null, confirmExit);
 
   function toggleDrill(index: number) {
     setCheckedDrills((prev) => {

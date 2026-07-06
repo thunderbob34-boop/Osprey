@@ -1,0 +1,14 @@
+{
+  "name": "watch-connectivity",
+  "version": "1.0.0",
+  "description": "Local Expo Module bridging WCSession (Apple Watch <-> iPhone) to JS for the OSPREY workout screens.",
+  "main": "index.ts",
+  "types": "index.ts",
+  "license": "UNLICENSED",
+  "private": true,
+  "author": "OSPREY",
+  "homepage": "https://osprey.app",
+  "peerDependencies": {
+    "expo": "*"
+  }
+}

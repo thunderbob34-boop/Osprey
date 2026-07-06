@@ -45,6 +45,7 @@ import {
   type CoachingState,
 } from '@/services/coaching-engine';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useWatchSync } from '@/hooks/useWatchSync';
 
 export default function RunWorkoutScreen() {
   const router = useRouter();
@@ -133,9 +134,9 @@ export default function RunWorkoutScreen() {
     };
   }, [reset]);
 
-  // Pull the latest Apple Watch heart-rate sample from HealthKit while running.
-  // Requires the user to be recording on a paired Watch (or another HealthKit
-  // source) in parallel — OSPREY has no direct Watch connection of its own.
+  // Pull the latest Apple Watch heart-rate sample from HealthKit while running
+  // (a separate, HealthKit-based channel — works even without our own Watch
+  // bridge, e.g. via a Garmin-to-HealthKit pipeline).
   useEffect(() => {
     if (status !== 'active' || !isHealthKitSupported()) return;
     let cancelled = false;
@@ -271,6 +272,18 @@ export default function RunWorkoutScreen() {
       { text: 'End & Save', onPress: handleEndWorkout },
     ]);
   }
+
+  // Keep a paired Apple Watch's on-wrist view in sync with this run, and let
+  // "End Workout" on the wrist trigger the same confirm-and-save flow as the
+  // in-app button. Requires a native Watch bridge build + a paired Watch —
+  // see src/services/watch-connectivity.ts (no-ops safely otherwise).
+  useWatchSync(
+    status === 'saving' ? 'active' : status,
+    elapsed,
+    heartRate,
+    distanceMeters > 0 ? metersToMiles(distanceMeters) : null,
+    confirmEnd,
+  );
 
   if (warmingUp) {
     return (

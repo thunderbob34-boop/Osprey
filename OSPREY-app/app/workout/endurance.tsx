@@ -18,6 +18,7 @@ import { expandIntervalSteps, ozzieCueForStep, totalIntervalDistanceM, type Inte
 import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
 import { formatDuration } from '@/store/workoutStore';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useWatchSync } from '@/hooks/useWatchSync';
 import {
   fetchHealthKitWorkouts,
   isHealthKitSupported,
@@ -59,6 +60,15 @@ const EFFORT_COLOR: Record<IntervalEffort | 'rest', string> = {
 };
 
 const AUTO_CUE_INTERVAL_MS = 10 * 60 * 1000; // every 10 minutes
+
+// Mirrors the unit-conversion table in saveEnduranceWorkout (src/services/workouts.ts),
+// just targeting miles (for the Watch) instead of km (for storage).
+const DISTANCE_UNIT_TO_MILES: Record<'meters' | 'yards' | 'km' | 'miles', number> = {
+  meters: 1 / 1609.344,
+  yards: 1 / 1760,
+  km: 0.621371,
+  miles: 1,
+};
 
 function formatMMSS(totalSeconds: number): string {
   const m = Math.floor(totalSeconds / 60);
@@ -266,6 +276,21 @@ export default function EnduranceWorkoutScreen() {
       { text: 'End & Save', onPress: handleEnd },
     ]);
   }
+
+  // Endurance sessions have no pause state — they're "active" for the whole
+  // time this screen is mounted. Convert whatever unit the athlete is
+  // entering/synced distance in to miles for the Watch's display.
+  const enteredDistanceMiles =
+    distance && parseFloat(distance) > 0
+      ? parseFloat(distance) * DISTANCE_UNIT_TO_MILES[distanceUnit]
+      : null;
+
+  // Keep a paired Apple Watch's on-wrist view in sync with this session, and
+  // let "End Workout" on the wrist trigger the same confirm-and-save flow as
+  // the in-app button. No heart rate tracked for endurance sessions. Requires
+  // a native Watch bridge build + a paired Watch — see
+  // src/services/watch-connectivity.ts (no-ops safely otherwise).
+  useWatchSync('active', elapsed, null, enteredDistanceMiles, confirmEnd);
 
   const hours = Math.floor(elapsed / 3600);
   const mins  = Math.floor((elapsed % 3600) / 60);
