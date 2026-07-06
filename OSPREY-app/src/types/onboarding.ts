@@ -1,4 +1,17 @@
-export type PrimaryGoal = 'run' | 'lift' | 'hybrid' | 'weight_loss' | 'general_fitness';
+export type PrimaryGoal =
+  | 'run'
+  | 'lift'
+  | 'hybrid'
+  | 'weight_loss'
+  | 'general_fitness'
+  | 'cycling'
+  | 'swimming'
+  | 'rowing'
+  | 'triathlon'
+  | 'powerlifting'
+  | 'hyrox'
+  | 'crossfit'
+  | 'ultra';
 export type ExperienceTier = 'beginner' | 'intermediate' | 'advanced';
 
 export interface OnboardingDraft {
@@ -8,6 +21,10 @@ export interface OnboardingDraft {
   weeklyRunDays: number;
   weeklyLiftDays: number;
   healthConnected: boolean;
+  targetRaceName: string | null;
+  targetDate: string | null;
+  injuryNotes: string;
+  constraintTags: string[];
 }
 
 export const DEFAULT_ONBOARDING_DRAFT: OnboardingDraft = {
@@ -17,4 +34,8 @@ export const DEFAULT_ONBOARDING_DRAFT: OnboardingDraft = {
   weeklyRunDays: 3,
   weeklyLiftDays: 2,
   healthConnected: false,
+  targetRaceName: null,
+  targetDate: null,
+  injuryNotes: '',
+  constraintTags: [],
 };

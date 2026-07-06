@@ -13,6 +13,10 @@ interface OnboardingState extends OnboardingDraft {
   setWeeklyRunDays: (days: number) => void;
   setWeeklyLiftDays: (days: number) => void;
   setHealthConnected: (connected: boolean) => void;
+  setTargetRaceName: (name: string | null) => void;
+  setTargetDate: (date: string | null) => void;
+  setInjuryNotes: (notes: string) => void;
+  setConstraintTags: (tags: string[]) => void;
   reset: () => void;
 }
 
@@ -25,5 +29,9 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
   setWeeklyRunDays: (weeklyRunDays) => set({ weeklyRunDays }),
   setWeeklyLiftDays: (weeklyLiftDays) => set({ weeklyLiftDays }),
   setHealthConnected: (healthConnected) => set({ healthConnected }),
+  setTargetRaceName: (targetRaceName) => set({ targetRaceName }),
+  setTargetDate: (targetDate) => set({ targetDate }),
+  setInjuryNotes: (injuryNotes) => set({ injuryNotes }),
+  setConstraintTags: (constraintTags) => set({ constraintTags }),
   reset: () => set({ ...DEFAULT_ONBOARDING_DRAFT }),
 }));

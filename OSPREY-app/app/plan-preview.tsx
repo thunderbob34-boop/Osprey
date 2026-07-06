@@ -15,7 +15,9 @@ import { useAuthStore } from '@/store/authStore';
 import {
   computeRacePhase,
   fetchCurrentWeekSessions,
+  fetchPlanWeeks,
   fetchRaceGoal,
+  type PlanWeekSummary,
   type RaceGoal,
   type RacePhaseInfo,
   type WeekSession,
@@ -73,6 +75,7 @@ export default function PlanPreviewScreen() {
   const [loading, setLoading] = useState(isViewOnly);
   const [loadError, setLoadError] = useState(false);
   const [raceGoal, setRaceGoal] = useState<RaceGoal | null>(null);
+  const [planWeeks, setPlanWeeks] = useState<PlanWeekSummary[]>([]);
 
   useEffect(() => {
     if (!isViewOnly || !userId) return;
@@ -113,6 +116,23 @@ export default function PlanPreviewScreen() {
     if (!raceGoal) return null;
     return computeRacePhase(raceGoal);
   }, [raceGoal]);
+
+  // The full periodized block (one real week per row, phase already decided
+  // at plan-creation time) — only populated once ozzie-generate-plan has
+  // created a multi-week block (a known total_weeks_planned), not for a
+  // rolling single-week plan.
+  useEffect(() => {
+    if (!userId) return;
+    let cancelled = false;
+    fetchPlanWeeks(userId)
+      .then((weeks) => {
+        if (!cancelled) setPlanWeeks(weeks);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
 
   function goHome() {
     queryClient.invalidateQueries({ queryKey: ['daily-summary'] });
@@ -242,6 +262,35 @@ export default function PlanPreviewScreen() {
                     </Text>
                   ))}
                 </View>
+              </View>
+            ) : null}
+
+            {planWeeks.length > 1 ? (
+              <View style={styles.blockCard}>
+                <Text style={styles.summaryLabel}>YOUR FULL BLOCK</Text>
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={styles.blockScroll}
+                >
+                  {planWeeks.map((week) => {
+                    const isCurrent = week.weekNumber === racePhase?.currentWeekNumber;
+                    return (
+                      <View
+                        key={week.weekNumber}
+                        style={[styles.blockWeekChip, isCurrent && styles.blockWeekChipActive]}
+                        accessibilityLabel={`Week ${week.weekNumber}, ${week.focus ?? 'unlabeled'} phase${isCurrent ? ', current week' : ''}`}
+                      >
+                        <Text style={[styles.blockWeekNum, isCurrent && styles.blockWeekNumActive]}>
+                          {week.weekNumber}
+                        </Text>
+                        <Text style={[styles.blockWeekPhase, isCurrent && styles.blockWeekPhaseActive]}>
+                          {week.focus ?? '—'}
+                        </Text>
+                      </View>
+                    );
+                  })}
+                </ScrollView>
               </View>
             ) : null}
 
@@ -410,6 +459,31 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   phaseLabelActive: { color: Colors.gold },
+  blockCard: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 14,
+    padding: 16,
+    marginBottom: 16,
+    gap: 10,
+  },
+  blockScroll: { gap: 8, paddingRight: 4 },
+  blockWeekChip: {
+    width: 56,
+    paddingVertical: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    backgroundColor: Colors.bg,
+    alignItems: 'center',
+    gap: 2,
+  },
+  blockWeekChipActive: { borderColor: Colors.borderTeal, backgroundColor: Colors.surfaceTeal },
+  blockWeekNum: { fontSize: 15, fontWeight: '800', color: Colors.textPrimary },
+  blockWeekNumActive: { color: Colors.teal },
+  blockWeekPhase: { fontSize: 9, fontWeight: '700', color: Colors.textMuted, textTransform: 'uppercase' },
+  blockWeekPhaseActive: { color: Colors.teal },
   summaryCard: {
     backgroundColor: Colors.surfaceTeal,
     borderWidth: 1,

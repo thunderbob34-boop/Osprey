@@ -30,6 +30,10 @@ export default function HealthScreen() {
         weeklyRunDays: draft.weeklyRunDays,
         weeklyLiftDays: draft.weeklyLiftDays,
         healthConnected: draft.healthConnected,
+        targetRaceName: draft.targetRaceName,
+        targetDate: draft.targetDate,
+        injuryNotes: draft.injuryNotes,
+        constraintTags: draft.constraintTags,
       });
       await fetchProfile();
       reset();
@@ -64,8 +68,8 @@ export default function HealthScreen() {
 
   return (
     <OnboardingShell
-      step={4}
-      totalSteps={5}
+      step={6}
+      totalSteps={7}
       title="Connect Apple Health"
       hint="Ozzie uses HRV, sleep, and heart rate to score recovery and tune your plan."
       onContinue={handleFinish}

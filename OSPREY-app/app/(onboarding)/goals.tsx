@@ -6,10 +6,16 @@ import type { PrimaryGoal } from '@/types/onboarding';
 import { Colors } from '@/constants/colors';
 
 const GOALS: Array<{ id: PrimaryGoal; icon: string; title: string; desc: string }> = [
-  { id: 'run', icon: '🏃', title: 'Run better', desc: '5K, 10K, half, full marathon' },
-  { id: 'lift', icon: '🏋️', title: 'Get stronger', desc: 'Lift more, build muscle' },
+  { id: 'run', icon: '🏃', title: 'Running', desc: '5K, 10K, half, full marathon' },
+  { id: 'cycling', icon: '🚴', title: 'Cycling', desc: 'Road, criterium, gran fondo' },
+  { id: 'swimming', icon: '🏊', title: 'Swimming', desc: 'Pool racing, 50 to 1650' },
+  { id: 'triathlon', icon: '🏅', title: 'Triathlon', desc: 'Sprint through Ironman' },
   { id: 'hybrid', icon: '⚡', title: 'Hybrid athlete', desc: 'Run and lift — both matter' },
-  { id: 'weight_loss', icon: '⚖️', title: 'Lose weight', desc: 'Performance + body composition' },
+  { id: 'crossfit', icon: '🤸', title: 'CrossFit', desc: 'Constantly varied, benchmark WODs' },
+  { id: 'hyrox', icon: '🛷', title: 'Hyrox', desc: '8 runs + 8 stations' },
+  { id: 'rowing', icon: '🚣', title: 'Rowing', desc: '2K on the erg or water' },
+  { id: 'powerlifting', icon: '🏋️', title: 'Powerlifting', desc: 'Squat, bench, deadlift PRs' },
+  { id: 'ultra', icon: '⛰️', title: 'Ultra-distance', desc: '50K to 100 miles and beyond' },
 ];
 
 function DayPicker({
@@ -56,10 +62,10 @@ export default function GoalsScreen() {
   return (
     <OnboardingShell
       step={3}
-      totalSteps={5}
+      totalSteps={7}
       title="What's your main goal right now?"
       hint="This shapes your entire plan. You can always change it later."
-      onContinue={() => router.push('/(onboarding)/health')}
+      onContinue={() => router.push('/(onboarding)/event')}
     >
       {GOALS.map((goal) => (
         <OptionCard

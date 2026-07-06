@@ -114,6 +114,31 @@ export async function fetchCurrentWeekSessions(userId: string): Promise<WeekSess
   return (sessions ?? []) as WeekSession[];
 }
 
+export interface PlanWeekSummary {
+  weekNumber: number;
+  startDate: string;
+  focus: string | null;
+  volumeMultiplier: number | null;
+}
+
+/** Every week of the active plan's block (Base/Build/Peak/Taper), in order — only meaningful once a real multi-week block exists. */
+export async function fetchPlanWeeks(userId: string): Promise<PlanWeekSummary[]> {
+  const { data, error } = await supabase
+    .from('training_weeks')
+    .select('week_number, start_date, focus, volume_multiplier, training_plans!inner(user_id, status)')
+    .eq('training_plans.user_id', userId)
+    .eq('training_plans.status', 'active')
+    .order('week_number', { ascending: true });
+
+  if (error) throw error;
+  return (data ?? []).map((row) => ({
+    weekNumber: row.week_number as number,
+    startDate: row.start_date as string,
+    focus: (row.focus as string) ?? null,
+    volumeMultiplier: row.volume_multiplier != null ? Number(row.volume_multiplier) : null,
+  }));
+}
+
 const SWAP_DESCRIPTIONS: Record<SwappableSessionType, string> = {
   run: 'Easy Run',
   lift: 'Strength Session',

@@ -1,9 +1,19 @@
-// Ozzie Weekly Plan Generator — AI planning engine v1
+// Ozzie Weekly Plan Generator — AI planning engine v2
 //
 // Creates a training_plan + training_week + 7 days of training_sessions
 // for the current week, based on the user's goals. Idempotent: if an
 // active plan with a week covering today already exists, returns it
 // instead of creating a duplicate.
+//
+// v2 adds real multi-week periodization: when the athlete's total block
+// length is known (a race target with a date, or an onboarding-collected
+// timeline), the FULL block of training_weeks rows is created up front —
+// each with a deterministic phase (Base/Build/Peak/Taper) and a volume
+// target — instead of every week being hardcoded "week 1, Base building"
+// forever. Only the current week's training_sessions are populated via the
+// LLM immediately; future weeks stay as empty ("broken") week rows and are
+// naturally filled in by the existing idempotent regeneration path when
+// they become the current week, using their already-known phase.
 
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 
@@ -11,7 +21,22 @@ const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
-const PLAN_SYSTEM_PROMPT = `You are Ozzie, the AI coach inside the OSPREY fitness app. You design a single week of training based on a user's goals and experience level.
+// ── Per-sport prompt guidance (docs/coaching/*.md philosophy, condensed) ──────
+// Sessions for these sports map onto the existing session_type_enum (run,
+// lift, cross, swim, bike, rest, race — there's no dedicated "row"/"metcon"
+// type), described explicitly in the `description` field so the mapping
+// doesn't lose sport identity.
+const SPORT_PROMPT_SNIPPETS: Record<string, string> = {
+  cycling: `Cycling guidance: philosophy is "build a deep aerobic base, raise FTP with threshold and sweet-spot work, add race-winning power on top, and arrive fresh." Polarized 80/20 (~80% Zone 2 easy endurance, ~20% genuinely hard, minimal junk tempo). Map cycling sessions to session_type "bike".`,
+  swimming: `Swimming guidance: philosophy is "build a big aerobic engine, sharpen it with race-specific speed, protect the shoulders, and arrive rested." Pyramidal base (lots of easy aerobic, a threshold block, a little speed) that polarizes as the target meet nears. Map swim sessions to session_type "swim".`,
+  rowing: `Rowing guidance: philosophy is "build a big aerobic engine, sharpen it with race-specific power, protect the ribs and low back, and arrive rested." Aerobic-dominant power-endurance (~75-80% aerobic, ~20% top-end that wins races) — pyramidal early, polarizing hard in the final ~6 weeks of a block. Map rowing sessions to session_type "cross" and name them explicitly in description (e.g. "Steady-State Row 40min", "2k Test Row").`,
+  powerlifting: `Powerlifting guidance: philosophy is "build strength on a base of quality volume, express it with heavy specific practice, peak fatigue-free, and lift a big total without breaking." All training sessions are session_type "lift" with a real lift_prescription — write %1RM-at-RPE style prescriptions using the "note" field for the RPE/RIR target (e.g. "Top set @ RPE 8, 2 RIR"). Center Squat, Bench Press, and Deadlift as the primary movements across the week's lift days.`,
+  hyrox: `Hyrox guidance: philosophy is "build an aerobic engine that holds pace under load, get strong enough the stations don't spike your heart rate, rehearse running on tired legs, and pace it like a race." Polarized: mostly easy/aerobic running to build the engine, sharp threshold/race-pace work, layered with strength-endurance work. Map dedicated runs to session_type "run" and station-simulation/compromised-running sessions to session_type "cross" (name the stations explicitly in description, e.g. "Sled Push + Run Brick", "Wall Balls + Lunges Circuit").`,
+  crossfit: `CrossFit guidance: philosophy is "build strength, a big aerobic/anaerobic engine, and gymnastics skill concurrently, periodizing emphasis so the athlete peaks without being fried — mechanics, then consistency, then intensity." Map metcon/conditioning sessions to session_type "cross" (name the workout style in description, e.g. "AMRAP Metcon", "Gymnastics Skill + EMOM") and dedicated strength days to session_type "lift" with a real lift_prescription.`,
+  ultra: `Ultra guidance: philosophy is "build a huge aerobic base, teach the body to burn fuel and eat descents, train the gut and the mind, and arrive durable and rested." Aerobic-dominant durability — polarized 80/20 with very little in the mushy middle; time-on-feet matters more than raw pace. The long run (and eventually a back-to-back long weekend) is the engine — don't be shy about long_run planned_minutes exceeding 3 hours as the block progresses toward Peak. Map sessions to session_type "run".`,
+};
+
+const PLAN_SYSTEM_PROMPT_BASE = `You are Ozzie, the AI coach inside the OSPREY fitness app. You design a single week of training based on a user's goals, experience level, and current training phase.
 
 The user is a hybrid athlete whose philosophy is "look like a bodybuilder, function like an athlete." When goal is hybrid:
 - Alternate upper/lower strength splits so no muscle group is hit two days in a row.
@@ -21,6 +46,16 @@ The user is a hybrid athlete whose philosophy is "look like a bodybuilder, funct
 
 Training load guidance: You will receive a 'trainingLoad' object with ATL (7-day fatigue), CTL (42-day fitness), and TSB (freshness = CTL - ATL). When TSB < -20, reduce next week's volume by 10-15% and flag at least one session as 'active_recovery'. When TSB > 15, the user is fresh — consider adding an intensity day. When CTL < 20, the user is early in training — keep volume moderate and don't add intervals.
 
+Periodization phase guidance: You will receive a 'phase' (Base, Build, Peak, or Taper) and a 'volumeMultiplier' (relative to the athlete's normal full-volume week). Base = highest volume but the easiest intensity distribution — build the aerobic engine. Build = volume rising toward its peak, more quality/threshold work mixed in. Peak = volume holds near its highest but every session is sharp and race-specific. Taper = volume multiplier is well below 1.0 by design — CUT total minutes/distance accordingly (this is not optional), keep 1-2 short race-pace "tune-up" touches so the athlete stays sharp, and drop everything else to easy. Never generate a Taper week with the same volume as a Base week.
+
+80/20 rule: across every week, no more than roughly 20% of total weekly training minutes should be at threshold/interval/hard intensity — the rest stays easy/moderate. This applies even in Build/Peak phases; more quality means smarter placement, not abandoning the ratio.
+
+Fueling: when a 'fueling' object is given (daily carb gram range for easy/moderate/high days, computed from the athlete's own body weight), reference the applicable range in ozzie_notes for at least the week's highest-volume day (e.g. "Aim for ~420-520g of carbs today to fuel this one."). Don't repeat it on rest days.
+
+Zones: when a 'runningZones' object is given (real E/M/T/I/R pace ranges in min:sec/mile, derived from the athlete's own recent best effort — not a generic guess), use those exact ranges for planned_distance_km reasoning on run days and for interval_prescription segment labels, instead of inventing a pace.
+
+Constraints: when 'constraints' (injury/limitation tags and/or a free-text note) are given, actively avoid or modify sessions that would aggravate them — e.g. a "knee" constraint means favor lower-impact cross-training over high-mileage running, or reduce running volume and substitute bike/swim; mention the accommodation briefly in ozzie_notes on the affected day so the athlete knows it was deliberate, not an oversight.
+
 Triathlon / multisport guidance: When the goal is triathlon (or the user is training for a multisport event), balance all four disciplines across the week rather than defaulting to the hybrid run+lift split — use the given weekly swim/bike/run/lift day counts as hard targets, not suggestions. Include at least one "brick" session every 1-2 weeks: a bike session immediately followed by a short run in the same day's description (e.g. "Bike 45min + Run 10min Brick") — mark it session_type "bike" with the run noted in ozzie_notes since a session can only have one type. If a triathlonDistance is given ("sprint", "olympic", "half", "full"), scale session lengths accordingly: sprint = short/sharp (20-40min swims, 45-75min bikes, 20-40min runs), olympic = moderate (30-50min swims, 60-90min bikes, 30-50min runs), half = builds toward longer steady efforts (45-75min swims, 90-150min bikes, 45-75min runs), full = longest steady-state emphasis (60-90min swims, 2-4hr long bike, 60-100min long run) — never assign full-distance volume to a beginner in week one; ramp gradually. If the user has never done a triathlon before (fitnessLevel beginner + triathlonDistance sprint), treat this as "intro to multisport": keep every session approachable, favor completion over pace, and use ozzie_notes to explain WHY brick sessions and multisport pacing matter, not just what to do. For open-water-eligible swim sessions (outdoor season, not a pool-only context), mention sighting/drafting technique once in ozzie_notes.
 
 Rules:
@@ -28,10 +63,10 @@ Rules:
 - session_type must be one of: run, lift, swim, bike, cross, rest, race.
 - intensity must be one of: easy, moderate, threshold, interval, race, rest. Rest days use "rest".
 - For beginners, favor "easy" intensity and avoid back-to-back hard days.
-- planned_minutes: a reasonable duration for the session type and level. null for rest days.
-- planned_distance_km: for run, race, swim, and bike sessions — a reasonable distance for the session's duration, intensity, and the athlete's level (e.g. an easy run duration implies roughly a 9-11 min/mile pace, swims are much shorter than runs for the same duration). null for lift, cross, and rest days.
+- planned_minutes: a reasonable duration for the session type, level, and current phase/volumeMultiplier. null for rest days.
+- planned_distance_km: for run, race, swim, and bike sessions — a reasonable distance for the session's duration, intensity, and the athlete's level (use runningZones when given; otherwise an easy run implies roughly a 9-11 min/mile pace, swims are much shorter than runs for the same duration). null for lift, cross, and rest days.
 - description: short, e.g. "Easy Run", "Upper Body — Push", "Active Recovery Bike", "Rest Day".
-- ozzie_notes: one plain-English sentence explaining why this session is placed here this week, in Ozzie's warm/direct voice.
+- ozzie_notes: one to two plain-English sentences explaining why this session is placed here this week (referencing phase/fueling/constraints when relevant), in Ozzie's warm/direct voice.
 - lift_prescription: for lift days ONLY, write the actual strength workout like a real coach: {"exercises": [{"name": string, "sets": number (2-5), "reps": string (e.g. "5" or "8-12"), "note": string|null}]} with 4-6 exercises. Main compound movement first at lower reps, accessories after at higher reps. Choose names ONLY from this exact list, matched to the day's split: Upper Push day = Bench Press, Incline Dumbbell Press, Overhead Press, Lateral Raise, Tricep Pushdown, Chest Dip. Upper Pull day = Pull-Up, Barbell Row, Lat Pulldown, Seated Cable Row, Dumbbell Row, Barbell Curl, Face Pull. Lower/Hips day = Back Squat, Deadlift, Romanian Deadlift, Hip Thrust, Bulgarian Split Squat, Leg Press, Calf Raise. Full-body/core accessory (any split) = Plank, Box Jump, Hanging Leg Raise. Use "note" for form or effort cues ("2 reps in reserve", "pause at the bottom"). For every non-lift day, set lift_prescription to null.
 - interval_prescription: for swim, bike, and run days with intensity "threshold" or "interval" ONLY, write real structured sets instead of a bare duration: {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}. Exactly one of distanceM/durationS per segment — swim segments use distanceM (e.g. 50/100/200), bike segments use durationS (e.g. 180-600 for 3-10min), run segments use distanceM for track-style reps (200-1600) or durationS for tempo blocks. effort must be one of: easy, moderate, threshold, hard, max. label is a short human string like "50m hard", "800m @ threshold", or "5min @ threshold". Include a warm-up segment (effort "easy") first and a cool-down segment (effort "easy") last. 3-6 segments total. For easy/moderate days and all other session types, set interval_prescription to null.
 - Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string, "lift_prescription": {"exercises": [{"name": string, "sets": number, "reps": string, "note": string|null}]}|null, "interval_prescription": {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}|null}]} where dayOffset 0 = Monday.`;
@@ -42,10 +77,15 @@ interface GoalsContext {
   weeklyLiftDays: number;
   weeklySwimDays?: number;
   weeklyBikeDays?: number;
+  weeklyCrossDays?: number;
   triathlonDistance?: string | null;
   fitnessLevel: string;
   targetRace: string | null;
+  targetDate?: string | null;
+  totalWeeksPlanned?: number | null;
   longRunDay?: string | null;
+  injuryNotes?: string | null;
+  constraintTags?: string[];
 }
 
 interface TrainingLoad {
@@ -135,6 +175,252 @@ function mondayOfThisWeek(): Date {
 
 function toDateString(d: Date): string {
   return d.toISOString().slice(0, 10);
+}
+
+function addDays(d: Date, days: number): Date {
+  const next = new Date(d);
+  next.setDate(next.getDate() + days);
+  return next;
+}
+
+// ── Multi-week block periodization ────────────────────────────────────────────
+// Base 0-40% / Build 40-75% / Peak 75-90% / Taper 90-100% of the block, matching
+// docs/coaching/_index.md and src/services/plan.ts's computeRacePhase on the
+// client. volumeMultiplier scales a baseline weekly TSS target; every 4th
+// Base/Build week is a lighter recovery week (the "3:1 loading" principle
+// several sport blueprints call for).
+type BlockPhase = 'Base' | 'Build' | 'Peak' | 'Taper';
+
+interface WeekPlan {
+  weekNumber: number;
+  phase: BlockPhase;
+  volumeMultiplier: number;
+}
+
+function computeBlockPhases(totalWeeks: number): WeekPlan[] {
+  const weeks: WeekPlan[] = [];
+  for (let w = 1; w <= totalWeeks; w++) {
+    const progress = w / totalWeeks;
+    let phase: BlockPhase;
+    let volumeMultiplier: number;
+
+    if (progress <= 0.4) {
+      phase = 'Base';
+      volumeMultiplier = 0.75 + 0.15 * (progress / 0.4);
+    } else if (progress <= 0.75) {
+      phase = 'Build';
+      volumeMultiplier = 0.9 + 0.1 * ((progress - 0.4) / 0.35);
+    } else if (progress <= 0.9) {
+      phase = 'Peak';
+      volumeMultiplier = 1.0;
+    } else {
+      phase = 'Taper';
+      const taperProgress = (progress - 0.9) / 0.1;
+      volumeMultiplier = 0.75 - 0.35 * taperProgress;
+    }
+
+    if ((phase === 'Base' || phase === 'Build') && w % 4 === 0) {
+      volumeMultiplier *= 0.7;
+    }
+
+    weeks.push({ weekNumber: w, phase, volumeMultiplier: Math.round(volumeMultiplier * 100) / 100 });
+  }
+  return weeks;
+}
+
+/** Fallback for a plan with no known total length: honest single-week Base treatment (today's pre-v2 behavior). */
+function singleUnknownLengthWeek(): WeekPlan {
+  return { weekNumber: 1, phase: 'Base', volumeMultiplier: 1.0 };
+}
+
+// ── Running pace zones (threshold-anchored, docs/coaching/running.md) ────────
+// Deno edge functions can't import from OSPREY-app/src (separate deploy
+// target/module resolution) — these are small, deliberately duplicated from
+// src/services/calculators/running.ts so both stay easy to keep in sync.
+interface Range {
+  min: number;
+  max: number;
+}
+
+interface BestRunEffort {
+  miles: number;
+  timeS: number;
+}
+
+const RIEGEL_EXPONENT = 1.06;
+
+async function fetchBestRunEffort(
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+): Promise<BestRunEffort | null> {
+  const since = new Date();
+  since.setDate(since.getDate() - 84);
+
+  const { data } = await supabase
+    .from('workout_logs')
+    .select('total_distance_km, total_duration_s')
+    .eq('user_id', userId)
+    .eq('session_type', 'run')
+    .is('deleted_at', null)
+    .gte('started_at', since.toISOString())
+    .not('total_distance_km', 'is', null)
+    .not('total_duration_s', 'is', null);
+
+  const rows = (data ?? []) as Array<{ total_distance_km: number; total_duration_s: number }>;
+  const KM_TO_MILES = 0.621371;
+
+  let best: BestRunEffort | null = null;
+  let bestPaceSecPerMile = Infinity;
+  for (const row of rows) {
+    const miles = row.total_distance_km * KM_TO_MILES;
+    if (miles < 2 || row.total_duration_s <= 0) continue; // too short for a meaningful threshold signal
+    const paceSecPerMile = row.total_duration_s / miles;
+    if (paceSecPerMile < bestPaceSecPerMile) {
+      bestPaceSecPerMile = paceSecPerMile;
+      best = { miles, timeS: row.total_duration_s };
+    }
+  }
+  return best;
+}
+
+/** Threshold ≈ the pace sustainable for a 60-minute effort (Daniels-style), via Riegel from any known best effort. */
+function estimateThresholdPaceSecPerMile(effort: BestRunEffort | null, fitnessLevel: string): number {
+  if (effort) {
+    const predictedMilesIn60Min = effort.miles * Math.pow(3600 / effort.timeS, 1 / RIEGEL_EXPONENT);
+    return 3600 / predictedMilesIn60Min;
+  }
+  switch (fitnessLevel) {
+    case 'advanced':
+      return 6 * 60 + 30;
+    case 'intermediate':
+      return 8 * 60 + 30;
+    default:
+      return 10 * 60 + 30;
+  }
+}
+
+function runningPaceZonesLocal(thresholdSecPerMile: number) {
+  const t = thresholdSecPerMile;
+  return {
+    easy: { min: t + 60, max: t + 120 },
+    marathonPace: { min: t + 15, max: t + 30 },
+    halfMarathonPace: { min: t + 5, max: t + 15 },
+    tenKPace: { min: t - 15, max: t - 5 },
+    fiveKPace: { min: t - 30, max: t - 20 },
+    intervalPace: { min: t - 20, max: t - 10 },
+  };
+}
+
+function formatPace(secPerMile: number): string {
+  const m = Math.floor(secPerMile / 60);
+  const s = Math.round(secPerMile % 60);
+  return `${m}:${String(s).padStart(2, '0')}/mi`;
+}
+
+function formatZonesForPrompt(zones: ReturnType<typeof runningPaceZonesLocal>): Record<string, string> {
+  const fmt = (r: Range) => `${formatPace(r.min)}-${formatPace(r.max)}`;
+  return {
+    easy: fmt(zones.easy),
+    marathonPace: fmt(zones.marathonPace),
+    halfMarathonPace: fmt(zones.halfMarathonPace),
+    tenKPace: fmt(zones.tenKPace),
+    fiveKPace: fmt(zones.fiveKPace),
+    intervalPace: fmt(zones.intervalPace),
+  };
+}
+
+// ── Fueling (docs/coaching/_index.md / running.md carb-per-kg guidance) ──────
+async function fetchLatestBodyWeightKg(
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+): Promise<number | null> {
+  const { data } = await supabase
+    .from('body_metrics')
+    .select('weight_kg')
+    .eq('user_id', userId)
+    .order('recorded_on', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  return (data as { weight_kg: number } | null)?.weight_kg ?? null;
+}
+
+const CARB_G_PER_KG: Record<'easy' | 'moderate' | 'high', Range> = {
+  easy: { min: 3, max: 5 },
+  moderate: { min: 5, max: 7 },
+  high: { min: 8, max: 10 },
+};
+
+function dailyCarbGramsLocal(dayType: 'easy' | 'moderate' | 'high', bodyWeightKg: number): Range {
+  const perKg = CARB_G_PER_KG[dayType];
+  return { min: Math.round(perKg.min * bodyWeightKg), max: Math.round(perKg.max * bodyWeightKg) };
+}
+
+// ── Sport → weekly day allocation ─────────────────────────────────────────────
+// Centralizes the "how many days of what" split so both the explicit
+// preferences flow and the background/regeneration fallback can produce a
+// sport-appropriate split from just (sport, totalDaysPerWeek) — rather than
+// nonsensically applying a generic run/lift slider split to, say, a
+// powerlifter or swimmer.
+interface DayAllocation {
+  weeklyRunDays: number;
+  weeklyLiftDays: number;
+  weeklySwimDays: number;
+  weeklyBikeDays: number;
+  weeklyCrossDays: number;
+}
+
+function computeSportDayAllocation(
+  mappedGoal: string,
+  totalDaysPerWeek: number,
+  triathlonDistance?: string | null,
+): DayAllocation {
+  const total = Math.max(1, totalDaysPerWeek);
+  const zero: DayAllocation = { weeklyRunDays: 0, weeklyLiftDays: 0, weeklySwimDays: 0, weeklyBikeDays: 0, weeklyCrossDays: 0 };
+
+  switch (mappedGoal) {
+    case 'triathlon': {
+      const weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
+      const weeklySwimDays = Math.max(1, Math.round(total * 0.2));
+      const weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
+      const weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
+      return { ...zero, weeklyRunDays, weeklyLiftDays, weeklySwimDays, weeklyBikeDays };
+    }
+    case 'cycling':
+      return { ...zero, weeklyBikeDays: Math.max(2, total - (total >= 3 ? 1 : 0)), weeklyLiftDays: total >= 3 ? 1 : 0 };
+    case 'swimming':
+      return { ...zero, weeklySwimDays: Math.max(2, total - (total >= 3 ? 1 : 0)), weeklyLiftDays: total >= 3 ? 1 : 0 };
+    case 'rowing':
+      return { ...zero, weeklyCrossDays: Math.max(2, total - (total >= 3 ? 1 : 0)), weeklyLiftDays: total >= 3 ? 1 : 0 };
+    case 'powerlifting':
+      return { ...zero, weeklyLiftDays: total };
+    case 'hyrox': {
+      const weeklyRunDays = Math.max(1, Math.ceil(total * 0.4));
+      const weeklyCrossDays = Math.max(1, Math.ceil(total * 0.4));
+      const weeklyLiftDays = Math.max(1, total - weeklyRunDays - weeklyCrossDays);
+      return { ...zero, weeklyRunDays, weeklyCrossDays, weeklyLiftDays };
+    }
+    case 'crossfit': {
+      const weeklyCrossDays = Math.max(2, total - Math.max(1, Math.floor(total * 0.3)));
+      const weeklyLiftDays = Math.max(1, total - weeklyCrossDays);
+      return { ...zero, weeklyCrossDays, weeklyLiftDays };
+    }
+    case 'ultra':
+      return { ...zero, weeklyRunDays: Math.max(2, total - (total >= 3 ? 1 : 0)), weeklyLiftDays: total >= 3 ? 1 : 0 };
+    case 'run':
+      return { ...zero, weeklyRunDays: total >= 2 ? Math.ceil(total * 0.6) : 2, weeklyLiftDays: total >= 2 ? Math.floor(total * 0.4) : 1 };
+    case 'lift':
+      return { ...zero, weeklyLiftDays: total };
+    default: {
+      // hybrid / weight_loss / general_fitness — the original generic split.
+      void triathlonDistance;
+      return {
+        ...zero,
+        weeklyRunDays: total >= 2 ? Math.ceil(total * 0.6) : 2,
+        weeklyLiftDays: total >= 2 ? Math.floor(total * 0.4) : 1,
+      };
+    }
+  }
 }
 
 interface RescheduleSwap {
@@ -264,20 +550,40 @@ async function generateRescheduleReason(swaps: RescheduleSwap[]): Promise<string
   return data.choices?.[0]?.message?.content?.trim() ?? "Looks like a session got missed — I've moved it to an open day this week.";
 }
 
-async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad, recentMemories: CoachMemoryRow[]) {
-  // Purely additive context: a short plain-text recap of recent coach_memory
-  // events (PRs, race results, injury flags) folded into the user prompt, and
-  // — when a recent injury flag is present — one extra instruction on the
-  // system prompt nudging the model toward lower-impact/easier sessions this
-  // week. Neither changes the JSON response schema or the days-per-week loop.
+async function generateWeekDays(
+  goals: GoalsContext,
+  trainingLoad: TrainingLoad,
+  recentMemories: CoachMemoryRow[],
+  weekPlan: WeekPlan,
+  runningZones: ReturnType<typeof formatZonesForPrompt> | null,
+  fueling: { easy: Range; moderate: Range; high: Range } | null,
+) {
   const memorySentence =
     recentMemories.length > 0
       ? ` Recent coaching notes: ${recentMemories.map((m) => m.summary).join('; ')}.`
       : '';
 
-  const systemContent = hasRecentInjuryFlag(recentMemories)
-    ? `${PLAN_SYSTEM_PROMPT}\n\nThis athlete logged an elevated injury-risk flag within the last two weeks. Favor lower-impact, easier sessions for this athlete this week and avoid adding intensity work.`
-    : PLAN_SYSTEM_PROMPT;
+  const sportSnippet = goals.primaryGoal ? SPORT_PROMPT_SNIPPETS[goals.primaryGoal] : undefined;
+
+  let systemContent = sportSnippet ? `${PLAN_SYSTEM_PROMPT_BASE}\n\n${sportSnippet}` : PLAN_SYSTEM_PROMPT_BASE;
+  if (hasRecentInjuryFlag(recentMemories)) {
+    systemContent += `\n\nThis athlete logged an elevated injury-risk flag within the last two weeks. Favor lower-impact, easier sessions for this athlete this week and avoid adding intensity work.`;
+  }
+
+  const constraintsSentence =
+    goals.constraintTags && goals.constraintTags.length > 0
+      ? ` constraints: {tags: ${JSON.stringify(goals.constraintTags)}${goals.injuryNotes ? `, note: ${JSON.stringify(goals.injuryNotes)}` : ''}}.`
+      : goals.injuryNotes
+        ? ` constraints: {note: ${JSON.stringify(goals.injuryNotes)}}.`
+        : '';
+
+  const fuelingSentence = fueling
+    ? ` fueling (carbs g/day): {easy: "${fueling.easy.min}-${fueling.easy.max}", moderate: "${fueling.moderate.min}-${fueling.moderate.max}", high: "${fueling.high.min}-${fueling.high.max}"}.`
+    : '';
+
+  const zonesSentence = runningZones ? ` runningZones: ${JSON.stringify(runningZones)}.` : '';
+
+  const userContent = `Build week ${weekPlan.weekNumber}${goals.totalWeeksPlanned ? ` of ${goals.totalWeeksPlanned}` : ''} for a ${goals.fitnessLevel} athlete. phase: ${weekPlan.phase}. volumeMultiplier: ${weekPlan.volumeMultiplier}. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.weeklyCrossDays ? ` Weekly cross-training days: ${goals.weeklyCrossDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} Long run day: ${goals.longRunDay ?? 'sunday'}. trainingLoad: ${JSON.stringify(trainingLoad)}.${zonesSentence}${fuelingSentence}${constraintsSentence}${memorySentence}`;
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -289,14 +595,11 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad,
       model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: systemContent },
-        {
-          role: 'user',
-          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} Long run day: ${goals.longRunDay ?? 'sunday'}. trainingLoad: ${JSON.stringify(trainingLoad)}.${memorySentence}`,
-        },
+        { role: 'user', content: userContent },
       ],
       response_format: { type: 'json_object' },
       temperature: 0.7,
-      max_tokens: 900,
+      max_tokens: 1000,
     }),
   });
 
@@ -367,7 +670,7 @@ Deno.serve(async (req: Request) => {
     // Idempotency: does an active plan already have a week starting this Monday?
     const { data: existingWeek } = await supabase
       .from('training_weeks')
-      .select('id, plan_id, training_plans!inner(user_id, status)')
+      .select('id, plan_id, week_number, focus, volume_multiplier, training_plans!inner(user_id, status)')
       .eq('start_date', weekStartStr)
       .eq('training_plans.user_id', userId)
       .eq('training_plans.status', 'active')
@@ -382,9 +685,11 @@ Deno.serve(async (req: Request) => {
       sessionCountForWeek = count ?? 0;
     }
 
-    // A week row with zero sessions is an orphaned/partial-failure artifact
-    // (e.g. GPT call failed after the plan/week rows were already inserted).
-    // Treat it the same as "no plan" instead of blocking regeneration forever.
+    // A week row with zero sessions is either an orphaned/partial-failure
+    // artifact (e.g. GPT call failed after the plan/week rows were already
+    // inserted), OR — new in v2 — a future week of a pre-created block whose
+    // turn has now come. Either way, populate it now instead of blocking
+    // regeneration forever.
     const existingWeekIsBroken = existingWeek != null && sessionCountForWeek === 0;
 
     if (existingWeek && !existingWeekIsBroken && !forceRebuild) {
@@ -402,8 +707,8 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    // Maps preferences.tsx's TrainingGoal values to the DB's primary_goal_enum
-    // ('run' | 'lift' | 'hybrid' | 'weight_loss' | 'general_fitness' | 'triathlon').
+    // Maps preferences.tsx's TrainingGoal values, and the onboarding sport
+    // grid, to the DB's primary_goal_enum.
     const PRIMARY_GOAL_MAP: Record<string, string> = {
       hybrid: 'hybrid',
       run_performance: 'run',
@@ -411,6 +716,13 @@ Deno.serve(async (req: Request) => {
       weight_loss: 'weight_loss',
       general: 'general_fitness',
       triathlon: 'triathlon',
+      cycling: 'cycling',
+      swimming: 'swimming',
+      rowing: 'rowing',
+      powerlifting: 'powerlifting',
+      hyrox: 'hyrox',
+      crossfit: 'crossfit',
+      ultra: 'ultra',
     };
 
     // Build goals context: explicit preferences/raceTarget from the request
@@ -420,52 +732,52 @@ Deno.serve(async (req: Request) => {
     // (each week's training_plans row is otherwise ephemeral).
     let goals: GoalsContext;
     if (body.preferences) {
-      // Preferences from plan builder: map fields to goals context
+      // Preferences from plan builder: map fields to goals context. Fetch
+      // whatever's already stored first so tweaking run/lift days here
+      // doesn't silently wipe a race target or injury notes set elsewhere
+      // (onboarding, race-event's "Train for This Event").
       const prefs = body.preferences;
       const mappedGoal = PRIMARY_GOAL_MAP[prefs.primaryGoal] ?? 'hybrid';
       const isTriathlon = mappedGoal === 'triathlon';
 
-      let weeklyRunDays: number;
-      let weeklyLiftDays: number;
-      let weeklySwimDays: number;
-      let weeklyBikeDays: number;
+      const { data: existingGoals } = await supabase
+        .from('user_goals')
+        .select('target_race, target_date, total_weeks_planned, injury_notes, constraint_tags')
+        .eq('user_id', userId)
+        .maybeSingle();
 
-      if (isTriathlon) {
-        // Split days roughly evenly across all four disciplines, each
-        // guaranteed at least 1 day whenever the weekly total allows it.
-        const total = prefs.daysPerWeek;
-        weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
-        weeklySwimDays = Math.max(1, Math.round(total * 0.2));
-        weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
-        weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
-      } else {
-        weeklyRunDays = prefs.daysPerWeek >= 2 ? Math.ceil(prefs.daysPerWeek * 0.6) : 2;
-        weeklyLiftDays = prefs.daysPerWeek >= 2 ? Math.floor(prefs.daysPerWeek * 0.4) : 1;
-        // includeSwim/includeBike previously had no effect on the generated
-        // plan — surface them as one dedicated day each when checked.
-        weeklySwimDays = prefs.includeSwim ? 1 : 0;
-        weeklyBikeDays = prefs.includeBike ? 1 : 0;
+      const allocation = computeSportDayAllocation(mappedGoal, prefs.daysPerWeek, prefs.triathlonDistance);
+      // includeSwim/includeBike (hybrid-only checkboxes) still layer one
+      // dedicated day on top of the sport's own allocation when checked.
+      if (!isTriathlon) {
+        if (prefs.includeSwim) allocation.weeklySwimDays = Math.max(allocation.weeklySwimDays, 1);
+        if (prefs.includeBike) allocation.weeklyBikeDays = Math.max(allocation.weeklyBikeDays, 1);
       }
 
       goals = {
         primaryGoal: mappedGoal,
-        weeklyRunDays,
-        weeklyLiftDays,
-        weeklySwimDays,
-        weeklyBikeDays,
+        weeklyRunDays: allocation.weeklyRunDays,
+        weeklyLiftDays: allocation.weeklyLiftDays,
+        weeklySwimDays: allocation.weeklySwimDays,
+        weeklyBikeDays: allocation.weeklyBikeDays,
+        weeklyCrossDays: allocation.weeklyCrossDays,
         triathlonDistance: isTriathlon ? prefs.triathlonDistance ?? 'sprint' : null,
         fitnessLevel: prefs.experienceLevel ?? 'beginner',
-        targetRace: null,
+        targetRace: existingGoals?.target_race ?? null,
+        targetDate: existingGoals?.target_date ?? null,
+        totalWeeksPlanned: existingGoals?.total_weeks_planned ?? null,
         longRunDay: prefs.longRunDay ?? null,
+        injuryNotes: existingGoals?.injury_notes ?? null,
+        constraintTags: existingGoals?.constraint_tags ?? [],
       };
 
       const { error: goalsUpsertError } = await supabase.from('user_goals').upsert(
         {
           user_id: userId,
           primary_goal: goals.primaryGoal,
-          target_race: null,
-          target_date: null,
-          total_weeks_planned: null,
+          target_race: goals.targetRace,
+          target_date: goals.targetDate,
+          total_weeks_planned: goals.totalWeeksPlanned,
           weekly_run_days: goals.weeklyRunDays,
           weekly_lift_days: goals.weeklyLiftDays,
           fitness_level: goals.fitnessLevel,
@@ -474,15 +786,14 @@ Deno.serve(async (req: Request) => {
       );
       if (goalsUpsertError) throw goalsUpsertError;
     } else if (body.raceTarget) {
-      // Race plan: map race details to goals context. Seed run/lift days and
-      // fitness level from the athlete's real onboarding profile when one
-      // exists, instead of always assuming a 4-run/1-lift intermediate —
-      // that discarded a beginner's actual experience tier on every
-      // race-target plan.
+      // Race plan: map race details to goals context. Seed run/lift days,
+      // fitness level, injury notes, and constraints from the athlete's real
+      // onboarding profile when one exists, instead of always assuming a
+      // 4-run/1-lift intermediate.
       const race = body.raceTarget;
       const { data: existingGoals } = await supabase
         .from('user_goals')
-        .select('weekly_run_days, weekly_lift_days, fitness_level')
+        .select('weekly_run_days, weekly_lift_days, fitness_level, injury_notes, constraint_tags')
         .eq('user_id', userId)
         .maybeSingle();
 
@@ -492,6 +803,10 @@ Deno.serve(async (req: Request) => {
         weeklyLiftDays: existingGoals?.weekly_lift_days ?? 1,
         fitnessLevel: existingGoals?.fitness_level ?? 'intermediate',
         targetRace: `${race.raceName} (${race.distance})`,
+        targetDate: race.raceDate ?? null,
+        totalWeeksPlanned: race.weeksOut ?? null,
+        injuryNotes: existingGoals?.injury_notes ?? null,
+        constraintTags: existingGoals?.constraint_tags ?? [],
       };
 
       const { error: goalsUpsertError } = await supabase.from('user_goals').upsert(
@@ -499,8 +814,8 @@ Deno.serve(async (req: Request) => {
           user_id: userId,
           primary_goal: 'run',
           target_race: goals.targetRace,
-          target_date: race.raceDate ?? null,
-          total_weeks_planned: race.weeksOut ?? null,
+          target_date: goals.targetDate,
+          total_weeks_planned: goals.totalWeeksPlanned,
           weekly_run_days: goals.weeklyRunDays,
           weekly_lift_days: goals.weeklyLiftDays,
           fitness_level: goals.fitnessLevel,
@@ -509,36 +824,70 @@ Deno.serve(async (req: Request) => {
       );
       if (goalsUpsertError) throw goalsUpsertError;
     } else {
-      // Fallback: try to fetch from user_goals table
+      // Fallback: try to fetch from user_goals table (background silent call).
       const { data: goalsRow } = await supabase
         .from('user_goals')
-        .select('primary_goal, weekly_run_days, weekly_lift_days, fitness_level, target_race')
+        .select(
+          'primary_goal, weekly_run_days, weekly_lift_days, fitness_level, target_race, target_date, total_weeks_planned, injury_notes, constraint_tags',
+        )
         .eq('user_id', userId)
         .maybeSingle();
 
+      const mappedGoal = goalsRow?.primary_goal ?? 'hybrid';
+      // For sports whose weekly split can't come from a generic run/lift
+      // slider (a swimmer, powerlifter, a triathlete needing swim/bike days
+      // too, etc.), recompute a sport-appropriate allocation from the stored
+      // total day count rather than trusting whatever a generic run/lift
+      // slider happened to store — user_goals has no weekly_swim_days/
+      // weekly_bike_days columns, so those would otherwise silently vanish
+      // every time a triathlete's plan regenerates in the background.
+      const needsSportAllocation = mappedGoal in SPORT_PROMPT_SNIPPETS || mappedGoal === 'triathlon';
+      const storedTotalDays = (goalsRow?.weekly_run_days ?? 0) + (goalsRow?.weekly_lift_days ?? 0);
+      const allocation = needsSportAllocation
+        ? computeSportDayAllocation(mappedGoal, storedTotalDays > 0 ? storedTotalDays : 4)
+        : null;
+
       goals = {
-        primaryGoal: goalsRow?.primary_goal ?? 'hybrid',
-        weeklyRunDays: goalsRow?.weekly_run_days ?? 3,
-        weeklyLiftDays: goalsRow?.weekly_lift_days ?? 2,
+        primaryGoal: mappedGoal,
+        weeklyRunDays: allocation ? allocation.weeklyRunDays : goalsRow?.weekly_run_days ?? 3,
+        weeklyLiftDays: allocation ? allocation.weeklyLiftDays : goalsRow?.weekly_lift_days ?? 2,
+        weeklySwimDays: allocation?.weeklySwimDays,
+        weeklyBikeDays: allocation?.weeklyBikeDays,
+        weeklyCrossDays: allocation?.weeklyCrossDays,
         fitnessLevel: goalsRow?.fitness_level ?? 'beginner',
         targetRace: goalsRow?.target_race ?? null,
+        targetDate: goalsRow?.target_date ?? null,
+        totalWeeksPlanned: goalsRow?.total_weeks_planned ?? null,
+        injuryNotes: goalsRow?.injury_notes ?? null,
+        constraintTags: goalsRow?.constraint_tags ?? [],
       };
     }
 
-    const planType = goals.weeklyLiftDays > 0 && goals.weeklyRunDays > 0 ? 'hybrid' : goals.weeklyLiftDays > 0 ? 'lift' : 'run';
+    const planType = goals.primaryGoal === 'run' || goals.primaryGoal === 'lift' || goals.primaryGoal === 'hybrid'
+      ? (goals.primaryGoal as 'run' | 'lift' | 'hybrid')
+      : 'custom';
 
     const trainingLoad = await computeTrainingLoad(supabase, userId);
     const recentMemories = await fetchRecentCoachMemory(supabase, userId);
 
     // Reuse the existing plan/week row when rebuilding (broken week or an
     // explicit force rebuild) instead of creating a duplicate; otherwise
-    // create fresh plan + week rows for a brand new week.
+    // create fresh plan + week row(s) for a brand new plan.
     let planId: string;
     let weekId: string;
+    let weekPlan: WeekPlan;
 
     if (existingWeek) {
       planId = existingWeek.plan_id as string;
       weekId = existingWeek.id as string;
+      // This week's phase/volume were already decided when the block (or this
+      // single week) was first created — read them back rather than
+      // recomputing, so a Taper week regenerated mid-week stays a Taper week.
+      weekPlan = {
+        weekNumber: (existingWeek.week_number as number) ?? 1,
+        phase: ((existingWeek.focus as string) as BlockPhase) ?? 'Base',
+        volumeMultiplier: existingWeek.volume_multiplier ? Number(existingWeek.volume_multiplier) : 1.0,
+      };
 
       const { error: planUpdateError } = await supabase
         .from('training_plans')
@@ -595,22 +944,64 @@ Deno.serve(async (req: Request) => {
       if (planError || !plan) throw planError ?? new Error('Failed to create plan');
       planId = plan.id as string;
 
-      const { data: week, error: weekError } = await supabase
-        .from('training_weeks')
-        .insert({
-          plan_id: planId,
-          week_number: 1,
-          start_date: weekStartStr,
-          focus: 'Base building',
-        })
-        .select('id')
-        .single();
+      // Known block length (a dated race target, or an onboarding-collected
+      // timeline) → create the WHOLE block of training_weeks rows now, each
+      // with its real phase/volume already decided. Only this week's row
+      // gets sessions populated below; future weeks stay as empty "broken"
+      // rows the existing idempotency check above will naturally fill in
+      // (with their own already-correct phase) once they become current.
+      const totalWeeks = goals.totalWeeksPlanned && goals.totalWeeksPlanned > 1 ? goals.totalWeeksPlanned : null;
+      const blockWeeks = totalWeeks ? computeBlockPhases(totalWeeks) : [singleUnknownLengthWeek()];
 
-      if (weekError || !week) throw weekError ?? new Error('Failed to create week');
-      weekId = week.id as string;
+      const weekRows = blockWeeks.map((wp) => ({
+        plan_id: planId,
+        week_number: wp.weekNumber,
+        start_date: toDateString(addDays(weekStart, (wp.weekNumber - 1) * 7)),
+        focus: wp.phase,
+        volume_multiplier: wp.volumeMultiplier,
+      }));
+
+      const { data: insertedWeeks, error: weeksError } = await supabase
+        .from('training_weeks')
+        .insert(weekRows)
+        .select('id, week_number, focus, volume_multiplier');
+      if (weeksError || !insertedWeeks || insertedWeeks.length === 0) {
+        throw weeksError ?? new Error('Failed to create training weeks');
+      }
+
+      const thisWeekRow = insertedWeeks.find((w) => w.week_number === 1) ?? insertedWeeks[0];
+      weekId = thisWeekRow.id as string;
+      weekPlan = {
+        weekNumber: thisWeekRow.week_number as number,
+        phase: thisWeekRow.focus as BlockPhase,
+        volumeMultiplier: Number(thisWeekRow.volume_multiplier),
+      };
     }
 
-    const days = await generateWeekDays(goals, trainingLoad, recentMemories);
+    // Running-specific zones/fueling: only meaningful for sports where the
+    // athlete is actually running under their own aerobic pacing (run,
+    // hybrid, ultra, hyrox's run days, triathlon's run leg) — skip for
+    // lift-only/rowing/swim/bike-only goals where a running pace is noise.
+    const usesRunningPace = ['run', 'hybrid', 'ultra', 'hyrox', 'triathlon', 'weight_loss', 'general_fitness'].includes(
+      goals.primaryGoal ?? '',
+    );
+    let runningZones: ReturnType<typeof formatZonesForPrompt> | null = null;
+    if (usesRunningPace) {
+      const bestEffort = await fetchBestRunEffort(supabase, userId);
+      const thresholdPace = estimateThresholdPaceSecPerMile(bestEffort, goals.fitnessLevel);
+      runningZones = formatZonesForPrompt(runningPaceZonesLocal(thresholdPace));
+    }
+
+    const bodyWeightKg = await fetchLatestBodyWeightKg(supabase, userId);
+    const fueling = bodyWeightKg
+      ? {
+          easy: dailyCarbGramsLocal('easy', bodyWeightKg),
+          moderate: dailyCarbGramsLocal('moderate', bodyWeightKg),
+          high: dailyCarbGramsLocal('high', bodyWeightKg),
+        }
+      : null;
+
+    const days = await generateWeekDays(goals, trainingLoad, recentMemories, weekPlan, runningZones, fueling);
 
     const sessionRows = days.map((day) => {
       const sessionDate = new Date(weekStart);
@@ -640,6 +1031,9 @@ Deno.serve(async (req: Request) => {
       created: true,
       weekId,
       planId,
+      weekNumber: weekPlan.weekNumber,
+      phase: weekPlan.phase,
+      totalWeeksPlanned: goals.totalWeeksPlanned ?? null,
       sessionCount: sessionRows.length,
       sessions: sessionRows,
     }), {
