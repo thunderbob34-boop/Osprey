@@ -75,6 +75,17 @@ export default function RaceEventScreen() {
 
   const result = cachedResult ? { ...cachedResult, distances } : null;
 
+  // A stale/direct deep link to a raceId no longer in the in-memory search
+  // cache can land here with no back-stack (e.g. after an app restart) —
+  // guard the same way ScreenHeader's default handler does.
+  function goBack() {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/races');
+    }
+  }
+
   useEffect(() => {
     if (!raceId) return;
     let cancelled = false;
@@ -93,7 +104,7 @@ export default function RaceEventScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => router.back()}
+            onPress={goBack}
             hitSlop={12}
             accessibilityRole="button"
             accessibilityLabel="Go back"

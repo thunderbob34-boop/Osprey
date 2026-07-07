@@ -15,10 +15,22 @@ interface ScreenHeaderProps {
 export default function ScreenHeader({ title, right, onBack }: ScreenHeaderProps) {
   const router = useRouter();
 
+  // Screens can be landed on with an empty history (e.g. after a
+  // dismissAll()+replace() flow like "Add to My Races" → Races), in which
+  // case router.back() has nothing to do and logs a GO_BACK warning. Fall
+  // back to the home tab rather than leaving the chevron dead.
+  function defaultBack() {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/(tabs)');
+    }
+  }
+
   return (
     <View style={styles.header}>
       <TouchableOpacity
-        onPress={onBack ?? (() => router.back())}
+        onPress={onBack ?? defaultBack}
         hitSlop={12}
         style={styles.backBtn}
         accessibilityRole="button"
