@@ -61,15 +61,18 @@ export async function fetchActivityFeed(userId: string, limit = 50): Promise<Act
 
 /** Fallback: fetch recent shares + joins without RPC. Slower but works. */
 async function fetchActivityFeedSimple(userId: string, limit: number): Promise<ActivityCard[]> {
+  // PostgREST aliasing is `alias:column`, not SQL's `column as alias` — the
+  // latter silently becomes a request for a column literally named
+  // "idasshare_id" (whitespace stripped) and 400s on every call.
   const { data: shares, error } = await supabase
     .from('activity_shares')
     .select(
       `
-      id as share_id,
+      share_id:id,
       workout_id,
       user_id,
       caption,
-      created_at as share_created_at,
+      share_created_at:created_at,
       users!inner(display_name),
       workout_logs!inner(session_type, total_duration_s, total_distance_km)
     `,
@@ -80,11 +83,12 @@ async function fetchActivityFeedSimple(userId: string, limit: number): Promise<A
 
   if (error) throw error;
 
-  // Fetch kudos for all shares.
+  // Fetch kudos for these shares only — an unfiltered `select` here would
+  // silently truncate at PostgREST's row cap once the table grows.
   const shareIds = (shares ?? []).map((s) => (s as any).share_id);
-  const { data: kudosData } = await supabase
-    .from('kudos')
-    .select('share_id, from_user');
+  const { data: kudosData } = shareIds.length
+    ? await supabase.from('kudos').select('share_id, from_user').in('share_id', shareIds)
+    : { data: [] as { share_id: string; from_user: string }[] };
 
   const kudosByShare = new Map<string, Set<string>>();
   for (const kudo of kudosData ?? []) {

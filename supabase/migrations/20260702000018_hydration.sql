@@ -30,7 +30,17 @@ CREATE POLICY hydration_log_self ON hydration_log
 
 -- Adds a fixed amount to today's row, creating it with the user's target if
 -- it doesn't exist yet. Avoids a read-then-write race across quick taps.
-CREATE OR REPLACE FUNCTION log_hydration(p_ounces NUMERIC, p_target_oz NUMERIC DEFAULT 80)
+--
+-- p_logged_on defaults to CURRENT_DATE (Postgres server/UTC date) but the
+-- client always passes its own local date explicitly — without that, a
+-- user west of UTC would have their hydration ring reset at UTC midnight
+-- (mid-evening local time) instead of their own midnight, since the
+-- client-side "today" and this default would otherwise disagree.
+CREATE OR REPLACE FUNCTION log_hydration(
+  p_ounces NUMERIC,
+  p_target_oz NUMERIC DEFAULT 80,
+  p_logged_on DATE DEFAULT CURRENT_DATE
+)
 RETURNS hydration_log
 SECURITY DEFINER
 SET search_path = public
@@ -44,7 +54,7 @@ BEGIN
   END IF;
 
   INSERT INTO hydration_log (user_id, logged_on, ounces, target_oz)
-  VALUES (auth.uid(), CURRENT_DATE, GREATEST(0, p_ounces), p_target_oz)
+  VALUES (auth.uid(), p_logged_on, GREATEST(0, p_ounces), p_target_oz)
   ON CONFLICT (user_id, logged_on)
   DO UPDATE SET ounces = GREATEST(0, hydration_log.ounces + p_ounces)
   RETURNING * INTO result;
@@ -53,5 +63,5 @@ BEGIN
 END;
 $$;
 
-REVOKE EXECUTE ON FUNCTION log_hydration(NUMERIC, NUMERIC) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION log_hydration(NUMERIC, NUMERIC) TO authenticated;
+REVOKE EXECUTE ON FUNCTION log_hydration(NUMERIC, NUMERIC, DATE) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION log_hydration(NUMERIC, NUMERIC, DATE) TO authenticated;
