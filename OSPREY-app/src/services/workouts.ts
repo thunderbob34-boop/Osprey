@@ -95,11 +95,19 @@ async function detectSetPr(
   reps: number,
   excludeWorkoutId?: string,
 ): Promise<boolean> {
-  const { data: workouts } = await supabase
+  const { data: workouts, error: workoutsError } = await supabase
     .from('workout_logs')
     .select('id')
     .eq('user_id', userId)
     .is('deleted_at', null);
+
+  if (workoutsError) {
+    // A failed lookup must not be treated as "no history" — that silently
+    // mislabeled every failed query as a PR below, celebrating a false PR
+    // and permanently writing a bogus record into coach_memory.
+    console.error('[pr-detect] workout lookup failed', workoutsError);
+    return false;
+  }
 
   const workoutIds = (workouts ?? [])
     .map((row) => row.id as string)
@@ -107,11 +115,16 @@ async function detectSetPr(
 
   if (workoutIds.length === 0) return true;
 
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('exercise_sets')
     .select('weight_kg, reps')
     .eq('exercise_id', exerciseId)
     .in('workout_id', workoutIds);
+
+  if (error) {
+    console.error('[pr-detect] set history lookup failed', error);
+    return false;
+  }
 
   if (!data || data.length === 0) return true;
 

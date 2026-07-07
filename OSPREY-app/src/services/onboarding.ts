@@ -13,13 +13,22 @@ export async function completeOnboarding(userId: string, draft: OnboardingDraft)
 
   if (userError) throw userError;
 
-  const { error: goalsError } = await supabase.from('user_goals').insert({
-    user_id: userId,
-    primary_goal: draft.primaryGoal,
-    weekly_run_days: draft.weeklyRunDays,
-    weekly_lift_days: draft.weeklyLiftDays,
-    fitness_level: draft.experienceTier,
-  });
+  // user_goals has a UNIQUE(user_id) constraint. A plain insert wedges
+  // onboarding permanently for anyone who retries after a partial failure
+  // (e.g. this step succeeds, the prefs upsert below fails on flaky
+  // network) — every subsequent attempt hits a 23505 duplicate-key error
+  // with no way to finish. Upsert, matching the pattern already used below
+  // and in ozzie-generate-plan.
+  const { error: goalsError } = await supabase.from('user_goals').upsert(
+    {
+      user_id: userId,
+      primary_goal: draft.primaryGoal,
+      weekly_run_days: draft.weeklyRunDays,
+      weekly_lift_days: draft.weeklyLiftDays,
+      fitness_level: draft.experienceTier,
+    },
+    { onConflict: 'user_id' },
+  );
 
   if (goalsError) throw goalsError;
 
