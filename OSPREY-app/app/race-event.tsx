@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
+import { format } from 'date-fns';
 import { Colors } from '@/constants/colors';
 import ScreenHeader from '@/components/ScreenHeader';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
@@ -129,7 +130,9 @@ export default function RaceEventScreen() {
     setGenerating(true);
     try {
       const parsedRaceDate = parseRaceDate(result!.date);
-      const isoRaceDate = parsedRaceDate ? parsedRaceDate.toISOString().slice(0, 10) : null;
+      // parseRaceDate returns local midnight — format locally, since
+      // toISOString() would shift the date a day for UTC+ timezones.
+      const isoRaceDate = parsedRaceDate ? format(parsedRaceDate, 'yyyy-MM-dd') : null;
 
       const { data, error } = await supabase.functions.invoke('ozzie-generate-plan', {
         body: {
@@ -214,7 +217,7 @@ export default function RaceEventScreen() {
     try {
       await createRaceEvent(userId!, {
         name: result!.name,
-        eventDate: parsedDate.toISOString().slice(0, 10),
+        eventDate: format(parsedDate, 'yyyy-MM-dd'),
         distanceKm: distanceLabelToKm(selectedDistance),
         location: result!.city ? `${result!.city}, ${result!.state}` : result!.state || null,
         raceUrl: result!.url || null,

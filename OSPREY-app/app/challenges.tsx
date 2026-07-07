@@ -19,6 +19,7 @@ import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
 import {
   useChallengeLeaderboard,
   useChallenges,
@@ -70,6 +71,7 @@ interface LeaderboardPanelProps {
 
 function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPanelProps) {
   const { data, isLoading, refetch, isFetching } = useChallengeLeaderboard(challenge.id);
+  const { units } = useUnitPreference();
 
   return (
     <View style={styles.lbPanel}>
@@ -110,7 +112,7 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
                 {isMe ? 'You' : entry.displayName}
               </Text>
               <Text style={[styles.lbValue, isMe && styles.lbValueMe]}>
-                {formatChallengeValue(entry.value, challenge.type)}
+                {formatChallengeValue(entry.value, challenge.type, units)}
               </Text>
             </View>
           );
@@ -355,7 +357,7 @@ export default function ChallengesScreen() {
           ) : challenges?.length === 0 && !showForm ? (
             <Text style={styles.empty}>
               No challenges yet. Tap + to create one and compete with friends on mileage,
-              workout count, or total minutes.
+              workout count, minutes, lift volume, or streaks.
             </Text>
           ) : (
             <>

@@ -27,6 +27,7 @@ export default function RoutesScreen() {
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
   const [distanceMiles, setDistanceMiles] = useState('');
+  const [notes, setNotes] = useState('');
   const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set());
   const [customTag, setCustomTag] = useState('');
   const [nameError, setNameError] = useState<string | undefined>();
@@ -34,6 +35,7 @@ export default function RoutesScreen() {
   function resetForm() {
     setName('');
     setDistanceMiles('');
+    setNotes('');
     setSelectedTags(new Set());
     setCustomTag('');
     setNameError(undefined);
@@ -61,7 +63,7 @@ export default function RoutesScreen() {
       return;
     }
     const parsedDistance = distanceMiles ? Number(distanceMiles) : undefined;
-    if (parsedDistance != null && !Number.isFinite(parsedDistance)) {
+    if (parsedDistance != null && (!Number.isFinite(parsedDistance) || parsedDistance <= 0)) {
       Alert.alert('Invalid distance', 'Enter a number like 3.1, or leave it blank.');
       return;
     }
@@ -70,6 +72,7 @@ export default function RoutesScreen() {
         name: name.trim(),
         tags: [...selectedTags],
         distanceMiles: parsedDistance != null ? (units === 'metric' ? kmToMiles(parsedDistance) : parsedDistance) : undefined,
+        notes: notes.trim() || undefined,
       });
       resetForm();
     } catch (err) {
@@ -135,6 +138,18 @@ export default function RoutesScreen() {
                 value={distanceMiles}
                 onChangeText={setDistanceMiles}
                 accessibilityLabel={`Distance in ${units === 'metric' ? 'kilometers' : 'miles'}, optional`}
+              />
+
+              <Text style={styles.fieldLabel}>NOTES (OPTIONAL)</Text>
+              <TextInput
+                style={[styles.input, styles.multiline]}
+                placeholder="Water fountain at mile 2, sketchy after dark…"
+                placeholderTextColor={Colors.textMuted}
+                value={notes}
+                onChangeText={setNotes}
+                multiline
+                numberOfLines={2}
+                accessibilityLabel="Route notes, optional"
               />
 
               <Text style={styles.fieldLabel}>TAGS</Text>
@@ -227,6 +242,9 @@ export default function RoutesScreen() {
                       ? formatDistanceKm(milesToKm(route.distanceMiles), units)
                       : 'Distance not set'}
                   </Text>
+                  {route.notes ? (
+                    <Text style={styles.routeNotes}>{route.notes}</Text>
+                  ) : null}
                   {route.tags.length > 0 ? (
                     <View style={styles.routeTagRow}>
                       {route.tags.map((tag) => (
@@ -334,6 +352,8 @@ const styles = StyleSheet.create({
   },
   routeName: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },
   routeMeta: { color: Colors.textMuted, fontSize: 12, marginTop: 2 },
+  routeNotes: { color: Colors.textSecondary, fontSize: 13, lineHeight: 18, marginTop: 6 },
+  multiline: { minHeight: 60, textAlignVertical: 'top' },
   routeTagRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
   routeTagChip: {
     backgroundColor: Colors.surfaceTeal,

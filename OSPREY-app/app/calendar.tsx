@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { format } from 'date-fns';
 import { Colors } from '@/constants/colors';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useCalendarMonth } from '@/hooks/useCalendarMonth';
@@ -17,6 +18,8 @@ import type { CalendarDay } from '@/services/calendar';
 const SESSION_ICON: Record<string, string> = {
   run: '🏃',
   lift: '🏋️',
+  swim: '🏊',
+  bike: '🚴',
   cross: '🔁',
   race: '🏁',
   rest: '😴',
@@ -31,6 +34,8 @@ function formatSessionType(type: string): string {
 export default function CalendarScreen() {
   const router = useRouter();
   const today = useMemo(() => new Date(), []);
+  // Local date — toISOString() flips to tomorrow at 5pm Pacific.
+  const todayStr = useMemo(() => format(today, 'yyyy-MM-dd'), [today]);
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth());
 
@@ -78,7 +83,7 @@ export default function CalendarScreen() {
   function handleDayPress(dateStr: string) {
     const day = dayMap.get(dateStr);
     if (!day) return;
-    if (!day.plannedType && day.completedTypes.length === 0) return;
+    if (!day.plannedType && day.completedTypes.length === 0 && !day.raceName) return;
     setSelectedDate(dateStr);
   }
 
@@ -128,16 +133,20 @@ export default function CalendarScreen() {
           {cells.map((cell, i) => {
             if (!cell) return <View key={i} style={styles.cell} />;
             const day = dayMap.get(cell.dateStr);
-            const isToday = cell.dateStr === today.toISOString().slice(0, 10);
+            const isToday = cell.dateStr === todayStr;
             const hasCompleted = (day?.completedTypes.length ?? 0) > 0;
-            const icon = hasCompleted
-              ? SESSION_ICON[day!.completedTypes[0]] ?? '✓'
-              : day?.plannedType
-                ? SESSION_ICON[day.plannedType] ?? '•'
-                : null;
+            // Race day trumps everything — it's the day you circled.
+            const icon = day?.raceName
+              ? '🏁'
+              : hasCompleted
+                ? SESSION_ICON[day!.completedTypes[0]] ?? '✓'
+                : day?.plannedType
+                  ? SESSION_ICON[day.plannedType] ?? '•'
+                  : null;
 
             const dayLabelParts = [`${monthLabel.split(' ')[0]} ${cell.day}`];
             if (isToday) dayLabelParts.push('today');
+            if (day?.raceName) dayLabelParts.push(`race day, ${day.raceName}`);
             if (hasCompleted) dayLabelParts.push(`completed ${day!.completedTypes.map(formatSessionType).join(', ')}`);
             else if (day?.plannedType) dayLabelParts.push(`planned ${formatSessionType(day.plannedType)}`);
 
@@ -151,7 +160,9 @@ export default function CalendarScreen() {
               >
                 <Text style={[styles.cellDay, isToday && styles.cellDayToday]}>{cell.day}</Text>
                 {icon ? (
-                  <Text style={[styles.cellIcon, hasCompleted && styles.cellIconDone]}>{icon}</Text>
+                  <Text style={[styles.cellIcon, (hasCompleted || day?.raceName) && styles.cellIconDone]}>
+                    {icon}
+                  </Text>
                 ) : null}
               </TouchableOpacity>
             );
@@ -160,7 +171,7 @@ export default function CalendarScreen() {
       )}
 
       <View style={styles.legend}>
-        <Text style={styles.legendText}>🏃 Run  🏋️ Lift  🔁 Cross  🏁 Race</Text>
+        <Text style={styles.legendText}>🏃 Run  🏋️ Lift  🏊 Swim  🚴 Bike  🔁 Cross  🏁 Race</Text>
         <Text style={styles.legendText}>Faded = planned · Solid = completed</Text>
       </View>
 
@@ -183,6 +194,26 @@ export default function CalendarScreen() {
           <Text style={styles.sheetTitle}>
             {selectedDate ? formatSheetDate(selectedDate) : ''}
           </Text>
+
+          {selectedDay?.raceName ? (
+            <TouchableOpacity
+              style={[styles.sheetCard, styles.sheetCardRace]}
+              onPress={() => {
+                setSelectedDate(null);
+                router.push('/races');
+              }}
+              activeOpacity={0.8}
+              accessibilityRole="button"
+              accessibilityLabel={`Race day: ${selectedDay.raceName}. View in race hub`}
+            >
+              <Text style={styles.sheetCardIcon}>🏁</Text>
+              <View style={styles.sheetCardBody}>
+                <Text style={[styles.sheetCardLabel, { color: Colors.gold }]}>RACE DAY</Text>
+                <Text style={styles.sheetCardTitle}>{selectedDay.raceName}</Text>
+                <Text style={styles.sheetCardDesc}>View in Race Hub →</Text>
+              </View>
+            </TouchableOpacity>
+          ) : null}
 
           {selectedDay?.plannedType ? (
             <View style={styles.sheetCard}>
@@ -308,6 +339,10 @@ const styles = StyleSheet.create({
   sheetCardDone: {
     backgroundColor: Colors.surfaceGreen,
     borderColor: Colors.borderGreen,
+  },
+  sheetCardRace: {
+    backgroundColor: Colors.surfaceGold,
+    borderColor: Colors.borderGold,
   },
   sheetCardIcon: { fontSize: 24 },
   sheetCardBody: { flex: 1, gap: 2 },

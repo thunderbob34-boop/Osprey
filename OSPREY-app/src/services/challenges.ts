@@ -1,4 +1,6 @@
+import { format } from 'date-fns';
 import { supabase } from '@/services/supabase';
+import type { UnitSystem } from '@/services/units';
 
 export type ChallengeType = 'mileage' | 'workouts' | 'duration' | 'lift_volume' | 'streak';
 
@@ -36,11 +38,28 @@ export const CHALLENGE_TYPE_LABELS: Record<ChallengeType, string> = {
   streak:      '🔥 Streak',
 };
 
-export function formatChallengeValue(value: number, type: ChallengeType): string {
-  if (type === 'mileage')     return `${value.toFixed(1)} mi`;
+const MILES_TO_KM = 1.609344;
+const LB_TO_KG = 0.453592;
+
+/**
+ * Leaderboard values are stored in imperial (miles / lbs) for every member;
+ * only the display converts, so all members still rank on the same numbers.
+ */
+export function formatChallengeValue(
+  value: number,
+  type: ChallengeType,
+  units: UnitSystem = 'imperial',
+): string {
+  if (type === 'mileage') {
+    return units === 'metric' ? `${(value * MILES_TO_KM).toFixed(1)} km` : `${value.toFixed(1)} mi`;
+  }
   if (type === 'workouts')    return `${Math.round(value)} workouts`;
   if (type === 'duration')    return `${Math.round(value)} min`;
-  if (type === 'lift_volume') return `${Math.round(value).toLocaleString()} lbs`;
+  if (type === 'lift_volume') {
+    return units === 'metric'
+      ? `${Math.round(value * LB_TO_KG).toLocaleString()} kg`
+      : `${Math.round(value).toLocaleString()} lbs`;
+  }
   if (type === 'streak')      return `${Math.round(value)} day${Math.round(value) === 1 ? '' : 's'}`;
   return `${Math.round(value)}`;
 }
@@ -48,7 +67,9 @@ export function formatChallengeValue(value: number, type: ChallengeType): string
 // ── Date helpers ──────────────────────────────────────────────────────────────
 
 function todayStr(): string {
-  return new Date().toISOString().slice(0, 10);
+  // Local date, not toISOString() — the UTC date flips at 5pm Pacific, which
+  // would mark a challenge "past" while its last day is still in progress.
+  return format(new Date(), 'yyyy-MM-dd');
 }
 
 function daysLeftUntil(endsOn: string): number {

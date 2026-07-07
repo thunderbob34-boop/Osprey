@@ -583,9 +583,17 @@ export default function RacesScreen() {
     const errors: Record<string, string> = {};
     if (!name.trim()) errors.name = 'What event is this?';
     if (!isValidDate(eventDate)) errors.date = 'When is race day?';
+    const customValue = customMiles ? Number(customMiles) : null;
+    if (customValue != null && (!Number.isFinite(customValue) || customValue <= 0)) {
+      errors.distance = 'Enter a number like 3.1.';
+    }
     const km =
       distanceKm ??
-      (customMiles ? (units === 'metric' ? Number(customMiles) : milesToKm(Number(customMiles))) : null);
+      (customValue != null && Number.isFinite(customValue) && customValue > 0
+        ? units === 'metric'
+          ? customValue
+          : milesToKm(customValue)
+        : null);
     const goalTimeS = goalTime ? parseRaceTime(goalTime) : null;
     if (goalTime && goalTimeS == null) {
       errors.goalTime = 'Use h:mm:ss or mm:ss, e.g. 1:45:00.';
@@ -631,7 +639,10 @@ export default function RacesScreen() {
     setResultRace(null);
     if (!race) return;
     const seconds = parseRaceTime(text);
-    if (seconds == null) return;
+    if (seconds == null) {
+      Alert.alert('Invalid time', 'Use h:mm:ss or mm:ss, e.g. 1:45:00.');
+      return;
+    }
     try {
       await recordResult.mutateAsync({ raceId: race.id, resultTimeS: seconds });
     } catch (err) {
@@ -760,10 +771,12 @@ export default function RacesScreen() {
                   onChangeText={(t) => {
                     setCustomMiles(t);
                     setDistanceKm(null);
+                    setFieldErrors((prev) => ({ ...prev, distance: '' }));
                   }}
                   accessibilityLabel={`Custom distance in ${units === 'metric' ? 'kilometers' : 'miles'}`}
                 />
               </View>
+              <FieldError message={fieldErrors.distance} />
 
               <Text style={styles.fieldLabel}>DATE</Text>
               <DateField
