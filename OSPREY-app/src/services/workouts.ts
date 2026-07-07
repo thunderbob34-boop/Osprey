@@ -275,6 +275,8 @@ export async function saveEnduranceWorkout(params: {
   durationS: number;
   distance?: { value: number; unit: 'meters' | 'yards' | 'km' | 'miles' } | null;
   heartRate?: number | null;
+  /** Specific activity for a 'cross' session (e.g. "Yoga", "Rowing") — stored in workout_logs.notes. */
+  notes?: string | null;
 }): Promise<string> {
   const tss = Math.round((params.durationS / 3600) * ENDURANCE_TSS_PER_HOUR[params.sessionType] * 10) / 10;
 
@@ -303,6 +305,7 @@ export async function saveEnduranceWorkout(params: {
       total_distance_km: distanceKm,
       total_duration_s: params.durationS,
       avg_heart_rate: params.heartRate ?? null,
+      notes: params.notes ?? null,
       tss,
     })
     .select('id')
@@ -375,7 +378,8 @@ export async function fetchWorkoutRecap(
   } else if (sessionType === 'bike') {
     ozzieDebrief = `Good ride — ${formatDuration(durationS)} on the bike. Steady aerobic base work like this pays dividends on race day.`;
   } else if (sessionType === 'cross') {
-    ozzieDebrief = `Smart active recovery session — ${formatDuration(durationS)}. This is what the pros do on their easy days. Your body's rebuilding right now.`;
+    const activityLabel = workout.notes ? workout.notes.toLowerCase() : 'active recovery';
+    ozzieDebrief = `Smart ${activityLabel} session — ${formatDuration(durationS)}. This is what the pros do on their easy days. Your body's rebuilding right now.`;
   }
 
   const exerciseMap = new Map<

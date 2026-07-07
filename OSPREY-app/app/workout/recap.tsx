@@ -125,7 +125,9 @@ export default function WorkoutRecapScreen() {
             </View>
             <View style={styles.enduranceRow}>
               <Text style={styles.enduranceStatLabel}>Session Type</Text>
-              <Text style={styles.enduranceStat}>{sessionType.charAt(0).toUpperCase() + sessionType.slice(1)}</Text>
+              <Text style={styles.enduranceStat}>
+                {data.workout.notes || sessionType.charAt(0).toUpperCase() + sessionType.slice(1)}
+              </Text>
             </View>
           </View>
         ) : (

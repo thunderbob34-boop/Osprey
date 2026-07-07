@@ -60,7 +60,7 @@ const CARDS: Card[] = [
     icon: 'yoga',
     iconColor: Colors.textSecondary,
     title: 'Cross Training',
-    desc: 'Yoga, rowing, or any active recovery session',
+    desc: 'Pick CrossFit, yoga, rowing, hiking, and more',
     route: '/workout/endurance',
     params: { sessionType: 'cross' },
     surface: Colors.bgCard,

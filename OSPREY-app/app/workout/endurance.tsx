@@ -45,6 +45,24 @@ const SESSION_META: Record<EnduranceType, { icon: string; label: string; color: 
   cross:{ icon: '🔁', label: 'CROSS', color: Colors.amber, borderColor: Colors.borderGold },
 };
 
+interface CrossActivity {
+  id: string;
+  label: string;
+  icon: string;
+}
+
+const CROSS_ACTIVITIES: CrossActivity[] = [
+  { id: 'crossfit',   label: 'CrossFit',           icon: '🏋️' },
+  { id: 'yoga',       label: 'Yoga',                icon: '🧘' },
+  { id: 'hiit',       label: 'HIIT',                icon: '🔥' },
+  { id: 'mobility',   label: 'Mobility / Stretch',  icon: '🤸' },
+  { id: 'rowing',     label: 'Rowing',              icon: '🚣' },
+  { id: 'elliptical', label: 'Elliptical',          icon: '🌀' },
+  { id: 'stairs',     label: 'Stair Climber',       icon: '🪜' },
+  { id: 'hiking',     label: 'Hiking',              icon: '🥾' },
+  { id: 'other',      label: 'Other',               icon: '🔁' },
+];
+
 const ENCOURAGEMENTS: Record<EnduranceType, string[]> = {
   swim: [
     'Smooth strokes. Stay long in the water.',
@@ -98,13 +116,31 @@ export default function EnduranceWorkoutScreen() {
       ? unitPreference === 'metric' ? 'meters' : 'yards'
       : unitPreference === 'metric' ? 'km' : 'miles';
 
+  // startedAtRef is set at mount for swim/bike (timer starts immediately, as
+  // always) but reset the moment a cross-training activity is picked — time
+  // spent choosing shouldn't count toward "elapsed."
   const startedAtRef = useRef<number>(Date.now());
   const [elapsed, setElapsed] = useState(0);
   const [saving, setSaving] = useState(false);
   const [distance, setDistance] = useState('');
   const [syncing, setSyncing] = useState(false);
+  const [crossActivity, setCrossActivity] = useState<CrossActivity | null>(null);
+  const [sessionStarted, setSessionStarted] = useState(type !== 'cross');
   const lastAutoCueMs = useRef(0);
   const speakingRef = useRef(false);
+
+  // Cross-training has no distance measurement — CrossFit/yoga/rowing/etc.
+  // are all tracked purely by time.
+  const showDistance = type !== 'cross';
+  const badgeMeta = type === 'cross' && crossActivity
+    ? { icon: crossActivity.icon, label: crossActivity.label.toUpperCase(), color: meta.color, borderColor: meta.borderColor }
+    : meta;
+
+  function startCrossActivity(activity: CrossActivity) {
+    setCrossActivity(activity);
+    startedAtRef.current = Date.now();
+    setSessionStarted(true);
+  }
 
   // ── Structured interval set (Ozzie's prescribed swim/bike workout) ──
   const [intervalSteps, setIntervalSteps] = useState<IntervalStep[]>([]);
@@ -180,6 +216,9 @@ export default function EnduranceWorkoutScreen() {
   }
 
   useEffect(() => {
+    // Cross-training hasn't picked an activity yet — don't tick until it has.
+    if (!sessionStarted) return;
+
     const timer = setInterval(() => {
       setElapsed(Math.floor((Date.now() - startedAtRef.current) / 1000));
 
@@ -198,7 +237,7 @@ export default function EnduranceWorkoutScreen() {
       ozzieStop();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [intervalSteps]);
+  }, [intervalSteps, sessionStarted]);
 
   // Auto cues every 10 minutes (OSPREY+ only) — skip while running a structured set,
   // Ozzie is already narrating each interval.
@@ -262,7 +301,7 @@ export default function EnduranceWorkoutScreen() {
     setSaving(true);
     try {
       const durationS = Math.floor((Date.now() - startedAtRef.current) / 1000);
-      const distanceParam = distance && parseFloat(distance) > 0
+      const distanceParam = showDistance && distance && parseFloat(distance) > 0
         ? { value: parseFloat(distance), unit: distanceUnit }
         : null;
       const workoutId = await saveEnduranceWorkout({
@@ -272,6 +311,7 @@ export default function EnduranceWorkoutScreen() {
         startedAt: startedAtRef.current,
         durationS,
         distance: distanceParam,
+        notes: type === 'cross' && crossActivity && crossActivity.id !== 'other' ? crossActivity.label : null,
       });
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {
@@ -288,6 +328,40 @@ export default function EnduranceWorkoutScreen() {
     ]);
   }
 
+  if (type === 'cross' && !sessionStarted) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <TouchableOpacity
+          style={styles.pickerCloseBtn}
+          onPress={() => (router.canGoBack() ? router.back() : router.replace('/(tabs)'))}
+          hitSlop={12}
+          accessibilityRole="button"
+          accessibilityLabel="Cancel"
+        >
+          <Text style={styles.pickerCloseText}>✕</Text>
+        </TouchableOpacity>
+        <View style={styles.pickerContent}>
+          <Text style={styles.pickerTitle}>What are you doing?</Text>
+          <Text style={styles.pickerSubtitle}>Pick an activity and Ozzie starts the clock.</Text>
+          <View style={styles.activityGrid}>
+            {CROSS_ACTIVITIES.map((activity) => (
+              <TouchableOpacity
+                key={activity.id}
+                style={styles.activityTile}
+                onPress={() => startCrossActivity(activity)}
+                accessibilityRole="button"
+                accessibilityLabel={`Start ${activity.label}`}
+              >
+                <Text style={styles.activityTileIcon}>{activity.icon}</Text>
+                <Text style={styles.activityTileLabel}>{activity.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   const hours = Math.floor(elapsed / 3600);
   const mins  = Math.floor((elapsed % 3600) / 60);
   const secs  = elapsed % 60;
@@ -298,10 +372,10 @@ export default function EnduranceWorkoutScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <View style={[styles.sessionBadge, { borderColor: meta.borderColor }]}>
-          <Text style={styles.sessionIcon}>{meta.icon}</Text>
-          <Text style={[styles.sessionLabel, { color: meta.color }]}>
-            {hasIntervals ? `${meta.label} · OZZIE'S SET` : `${meta.label} IN PROGRESS`}
+        <View style={[styles.sessionBadge, { borderColor: badgeMeta.borderColor }]}>
+          <Text style={styles.sessionIcon}>{badgeMeta.icon}</Text>
+          <Text style={[styles.sessionLabel, { color: badgeMeta.color }]}>
+            {hasIntervals ? `${badgeMeta.label} · OZZIE'S SET` : `${badgeMeta.label} IN PROGRESS`}
           </Text>
         </View>
 
@@ -375,34 +449,36 @@ export default function EnduranceWorkoutScreen() {
           <Text style={styles.ozzieBtnText}>Ozzie Cue</Text>
         </TouchableOpacity>
 
-        <View style={styles.distanceCard}>
-          <Text style={styles.distanceLabel}>Distance ({distanceUnit})</Text>
-          <View style={styles.distanceInputRow}>
-            <TextInput
-              style={styles.distanceInput}
-              placeholder="0"
-              placeholderTextColor={Colors.textMuted}
-              value={distance}
-              onChangeText={setDistance}
-              keyboardType="decimal-pad"
-              accessibilityLabel={`Distance in ${distanceUnit}`}
-            />
+        {showDistance ? (
+          <View style={styles.distanceCard}>
+            <Text style={styles.distanceLabel}>Distance ({distanceUnit})</Text>
+            <View style={styles.distanceInputRow}>
+              <TextInput
+                style={styles.distanceInput}
+                placeholder="0"
+                placeholderTextColor={Colors.textMuted}
+                value={distance}
+                onChangeText={setDistance}
+                keyboardType="decimal-pad"
+                accessibilityLabel={`Distance in ${distanceUnit}`}
+              />
+            </View>
+            <TouchableOpacity
+              style={[styles.syncBtn, syncing && { opacity: 0.6 }]}
+              onPress={handleSyncHealthKit}
+              disabled={syncing}
+              accessibilityRole="button"
+              accessibilityLabel="Sync distance from Apple Health"
+              accessibilityState={{ disabled: syncing, busy: syncing }}
+            >
+              {syncing ? (
+                <ActivityIndicator color={Colors.teal} size="small" />
+              ) : (
+                <Text style={styles.syncBtnText}>Sync from Apple Health</Text>
+              )}
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={[styles.syncBtn, syncing && { opacity: 0.6 }]}
-            onPress={handleSyncHealthKit}
-            disabled={syncing}
-            accessibilityRole="button"
-            accessibilityLabel="Sync distance from Apple Health"
-            accessibilityState={{ disabled: syncing, busy: syncing }}
-          >
-            {syncing ? (
-              <ActivityIndicator color={Colors.teal} size="small" />
-            ) : (
-              <Text style={styles.syncBtnText}>Sync from Apple Health</Text>
-            )}
-          </TouchableOpacity>
-        </View>
+        ) : null}
 
         <TouchableOpacity
           style={styles.endBtn}
@@ -426,6 +502,34 @@ export default function EnduranceWorkoutScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
   content: { flex: 1, padding: 28, justifyContent: 'center', gap: 20 },
+
+  // Pre-start activity picker (cross-training only)
+  pickerCloseBtn: { alignSelf: 'flex-end', padding: 16 },
+  pickerCloseText: { fontSize: 18, fontWeight: '700', color: Colors.textMuted },
+  pickerContent: { flex: 1, padding: 28, paddingTop: 0, justifyContent: 'center', gap: 24 },
+  pickerTitle: { fontSize: 26, fontWeight: '900', color: Colors.textPrimary, textAlign: 'center' },
+  pickerSubtitle: { fontSize: 14, color: Colors.textMuted, textAlign: 'center', marginTop: -12 },
+  activityGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, justifyContent: 'center' },
+  activityTile: {
+    width: '46%',
+    aspectRatio: 1.3,
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+  },
+  activityTileIcon: { fontSize: 30 },
+  activityTileLabel: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: Colors.textSecondary,
+    textAlign: 'center',
+    paddingHorizontal: 8,
+  },
+
   sessionBadge: {
     alignSelf: 'center',
     flexDirection: 'row',
