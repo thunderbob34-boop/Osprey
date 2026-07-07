@@ -53,6 +53,14 @@ export default function HomeTab() {
       router.push({ pathname: '/workout/lift', params: { sessionId } });
       return;
     }
+    // Only 'run' belongs on the GPS run screen — swim/bike/cross sessions
+    // were previously sent there too, showing a run map and mile-pace UI
+    // for a swim day and logging it as a run instead of the swim/bike
+    // interval prescription Ozzie actually built.
+    if (session.sessionType === 'swim' || session.sessionType === 'bike' || session.sessionType === 'cross') {
+      router.push({ pathname: '/workout/endurance', params: { sessionId, sessionType: session.sessionType } });
+      return;
+    }
     router.push({ pathname: '/workout/run', params: { sessionId } });
   }
 
