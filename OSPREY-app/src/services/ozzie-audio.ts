@@ -54,14 +54,47 @@ async function ensureCacheDir() {
 }
 
 function cacheKey(text: string, profile: AudioProfile): string {
-  // Simple hash: profile + first 60 chars of text, sanitized for filename
-  const sanitized = text.slice(0, 60).replace(/[^a-zA-Z0-9]/g, '_');
-  return `${CACHE_DIR}${profile}_${sanitized}.mp3`;
+  // Hash the full text (not just a prefix) so two cues that only differ
+  // after the first 60 characters don't collide on the same cache file.
+  const hash = hashString(text);
+  return `${CACHE_DIR}${profile}_${hash}.mp3`;
+}
+
+function hashString(text: string): string {
+  let hash = 0;
+  for (let i = 0; i < text.length; i++) {
+    hash = (Math.imul(31, hash) + text.charCodeAt(i)) | 0;
+  }
+  return (hash >>> 0).toString(36);
 }
 
 async function getCachedAudio(path: string): Promise<string | null> {
   const info = await FileSystem.getInfoAsync(path);
   return info.exists ? path : null;
+}
+
+const BASE64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+/**
+ * Hermes has no global `Buffer` (Node's Buffer isn't polyfilled in this
+ * app), so `Buffer.from(...).toString('base64')` throws a ReferenceError on
+ * every call — this encodes the same bytes with no external dependency.
+ */
+function uint8ArrayToBase64(bytes: Uint8Array): string {
+  let result = '';
+  const len = bytes.length;
+  for (let i = 0; i < len; i += 3) {
+    const b1 = bytes[i];
+    const b2 = i + 1 < len ? bytes[i + 1] : 0;
+    const b3 = i + 2 < len ? bytes[i + 2] : 0;
+    const triplet = (b1 << 16) | (b2 << 8) | b3;
+
+    result += BASE64_CHARS[(triplet >> 18) & 0x3f];
+    result += BASE64_CHARS[(triplet >> 12) & 0x3f];
+    result += i + 1 < len ? BASE64_CHARS[(triplet >> 6) & 0x3f] : '=';
+    result += i + 2 < len ? BASE64_CHARS[triplet & 0x3f] : '=';
+  }
+  return result;
 }
 
 // ─── ElevenLabs API call ──────────────────────────────────────────────────────
@@ -135,7 +168,7 @@ export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient'
       const audioData = await fetchTTS(text, profile);
       await FileSystem.writeAsStringAsync(
         cachePath,
-        Buffer.from(audioData).toString('base64'),
+        uint8ArrayToBase64(audioData),
         { encoding: FileSystem.EncodingType.Base64 }
       );
       audioPath = cachePath;
@@ -198,7 +231,7 @@ export async function ozziePrewarm() {
         await ensureCacheDir();
         await FileSystem.writeAsStringAsync(
           path,
-          Buffer.from(audioData).toString('base64'),
+          uint8ArrayToBase64(audioData),
           { encoding: FileSystem.EncodingType.Base64 }
         );
       } catch {
