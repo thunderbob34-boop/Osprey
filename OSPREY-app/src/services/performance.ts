@@ -1,6 +1,11 @@
 import { supabase } from '@/services/supabase';
 import type { TriathlonDistance } from '@/types/preferences';
 
+// ── Training readiness label ──────────────────────────────────────────────────
+
+import { Colors } from '@/constants/colors';
+import type { TrainingReadiness } from '@/types/daily-summary';
+
 export interface DailyLoad {
   date: string; // YYYY-MM-DD
   tss: number;
@@ -33,7 +38,7 @@ export interface InjuryRisk {
 export interface RacePredictor {
   baseMiles: number;
   basePaceSecPerMile: number;
-  predictions: Array<{ label: string; distanceMiles: number; predictedTimeS: number }>;
+  predictions: { label: string; distanceMiles: number; predictedTimeS: number }[];
 }
 
 // ── ATL / CTL / TSB computation ───────────────────────────────────────────────
@@ -161,7 +166,7 @@ export function riegelPredict(
   return sourceTimeS * Math.pow(targetDistanceMiles / sourceDistanceMiles, RIEGEL_EXPONENT);
 }
 
-const RACE_DISTANCES: Array<{ label: string; miles: number }> = [
+const RACE_DISTANCES: { label: string; miles: number }[] = [
   { label: '5K', miles: 3.107 },
   { label: '10K', miles: 6.214 },
   { label: 'Half', miles: 13.109 },
@@ -409,11 +414,6 @@ export function buildTriathlonPredictor(
 
   return { raceLabel: config.raceLabel, splits, transitionEstimateS, totalTimeS };
 }
-
-// ── Training readiness label ──────────────────────────────────────────────────
-
-import { Colors } from '@/constants/colors';
-import type { TrainingReadiness } from '@/types/daily-summary';
 
 export function readinessFromTsb(tsb: number, ctl: number): TrainingReadiness {
   let label: string;

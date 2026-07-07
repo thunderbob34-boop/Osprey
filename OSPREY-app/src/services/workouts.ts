@@ -8,9 +8,10 @@ import type {
   WorkoutRecapData,
   WorkoutType,
 } from '@/types/workout';
-import { formatDuration, formatPace, metersToMiles } from '@/store/workoutStore';
+import { formatDuration, formatPace } from '@/store/workoutStore';
 import { writeWorkoutToHealthKit } from '@/services/healthkit';
 import { withCache } from '@/services/offline-cache';
+import { formatWeightKg, type UnitSystem } from '@/services/units';
 
 const LBS_TO_KG = 0.453592;
 
@@ -321,6 +322,7 @@ export async function saveEnduranceWorkout(params: {
 export async function fetchWorkoutRecap(
   userId: string,
   workoutId: string,
+  units: UnitSystem = 'imperial',
 ): Promise<WorkoutRecapData> {
   const { data: workout, error } = await supabase
     .from('workout_logs')
@@ -378,7 +380,7 @@ export async function fetchWorkoutRecap(
 
   const exerciseMap = new Map<
     string,
-    { name: string; sets: Array<{ setNumber: number; reps: number; weightLbs: number; completed: boolean }> }
+    { name: string; sets: { setNumber: number; reps: number; weightLbs: number; completed: boolean }[] }
   >();
 
   if (setRows) {
@@ -422,9 +424,10 @@ export async function fetchWorkoutRecap(
 
   if (sessionType === 'lift' && exercises.length > 0) {
     const totalVolume = exercises.reduce((sum, ex) => sum + ex.volumeLbs, 0);
+    const volumeText = formatWeightKg(totalVolume * LBS_TO_KG, units);
     ozzieDebrief = hasPr
-      ? `Huge session — ${totalVolume.toLocaleString()} lbs of volume and a new PR. That's the work.`
-      : `Strong lift — ${totalVolume.toLocaleString()} lbs total volume. Consistency builds champions.`;
+      ? `Huge session — ${volumeText} of volume and a new PR. That's the work.`
+      : `Strong lift — ${volumeText} total volume. Consistency builds champions.`;
   }
 
   // Reference the plan's own stated intent for this session ("why this is in
@@ -476,7 +479,7 @@ export async function fetchWeekTargetKm(userId: string): Promise<number | undefi
   return total > 0 ? total : undefined;
 }
 
-export async function fetchDefaultLiftExercises(): Promise<Array<{ id: string; name: string }>> {
+export async function fetchDefaultLiftExercises(): Promise<{ id: string; name: string }[]> {
   // Cached so the exercise library is available for offline lift logging.
   return withCache(['exercise-library', 'default-lift'], async () => {
     const { data, error } = await supabase

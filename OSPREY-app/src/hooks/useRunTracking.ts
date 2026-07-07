@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as Location from 'expo-location';
 import { useWorkoutStore } from '@/store/workoutStore';
 
-function haversineMeters(
+export function haversineMeters(
   lat1: number,
   lon1: number,
   lat2: number,
@@ -18,11 +18,40 @@ function haversineMeters(
   return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+export const GPS_NOISE_THRESHOLD_M = 1;
+
+export interface GpsAnchor {
+  lat: number;
+  lon: number;
+}
+
+/**
+ * Distance noise filter for incoming GPS fixes. Only moves the anchor once a
+ * fix clears the noise threshold. Previously the anchor was replaced on every
+ * fix regardless of distance, so a run of sub-meter GPS jitter would reset the
+ * reference point each time and silently drop genuine slow/steady movement
+ * that never individually crossed 1m between two consecutive (but noisy) fixes.
+ */
+export function processLocationFix(
+  anchor: GpsAnchor | null,
+  lat: number,
+  lon: number,
+): { acceptedDelta: number; anchor: GpsAnchor } {
+  if (!anchor) {
+    return { acceptedDelta: 0, anchor: { lat, lon } };
+  }
+  const delta = haversineMeters(anchor.lat, anchor.lon, lat, lon);
+  if (delta >= GPS_NOISE_THRESHOLD_M) {
+    return { acceptedDelta: delta, anchor: { lat, lon } };
+  }
+  return { acceptedDelta: 0, anchor };
+}
+
 export function useRunTracking(enabled: boolean) {
   const status = useWorkoutStore((s) => s.status);
   const addDistance = useWorkoutStore((s) => s.addDistance);
   const addTrackPoint = useWorkoutStore((s) => s.addTrackPoint);
-  const lastPointRef = useRef<{ lat: number; lon: number } | null>(null);
+  const lastPointRef = useRef<GpsAnchor | null>(null);
 
   useEffect(() => {
     if (!enabled || status !== 'active') return;
@@ -48,25 +77,13 @@ export function useRunTracking(enabled: boolean) {
             speedMs: speed ?? undefined,
           };
 
-          if (lastPointRef.current) {
-            const delta = haversineMeters(
-              lastPointRef.current.lat,
-              lastPointRef.current.lon,
-              latitude,
-              longitude,
-            );
-            // Only move the anchor once a fix clears the noise threshold. Previously
-            // the anchor was replaced on every fix regardless of distance, so a run
-            // of sub-meter GPS jitter would reset the reference point each time and
-            // silently drop genuine slow/steady movement that never individually
-            // crossed 1m between two consecutive (but noisy) fixes.
-            if (delta >= 1) {
-              addDistance(delta);
-              lastPointRef.current = { lat: latitude, lon: longitude };
-            }
-          } else {
-            lastPointRef.current = { lat: latitude, lon: longitude };
-          }
+          const { acceptedDelta, anchor } = processLocationFix(
+            lastPointRef.current,
+            latitude,
+            longitude,
+          );
+          if (acceptedDelta > 0) addDistance(acceptedDelta);
+          lastPointRef.current = anchor;
 
           addTrackPoint(point);
         },

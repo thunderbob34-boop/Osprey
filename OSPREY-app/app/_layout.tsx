@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import * as Sentry from '@sentry/react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useAuthStore } from '@/store/authStore';
 import { initRevenueCat } from '@/services/subscriptions';
@@ -15,9 +16,17 @@ import { AppLoadingScreen } from '@/components/AppLoadingScreen';
 
 SplashScreen.preventAutoHideAsync();
 
+// No-ops until EXPO_PUBLIC_SENTRY_DSN is set (in .env.local locally, and as an
+// EAS environment variable for builds) — see docs/TODO.md.
+const sentryDsn = process.env.EXPO_PUBLIC_SENTRY_DSN;
+Sentry.init({
+  dsn: sentryDsn,
+  enabled: Boolean(sentryDsn) && !__DEV__,
+});
+
 const queryClient = new QueryClient();
 
-export default function RootLayout() {
+function RootLayout() {
   const initialize = useAuthStore((s) => s.initialize);
   const initialized = useAuthStore((s) => s.initialized);
   const userId = useAuthStore((s) => s.user?.id);
@@ -75,3 +84,5 @@ export default function RootLayout() {
     </QueryClientProvider>
   );
 }
+
+export default Sentry.wrap(RootLayout);

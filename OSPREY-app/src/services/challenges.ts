@@ -86,11 +86,6 @@ interface ChallengeRow {
   ends_on: string;
 }
 
-interface MemberCountRow {
-  challenge_id: string;
-  count: number;
-}
-
 export async function fetchMyChallenges(userId: string): Promise<Challenge[]> {
   // Fetch challenges the user is a member of.
   const { data: memberRows, error: memberError } = await supabase

@@ -22,12 +22,16 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 - [ ] Supabase → Auth: enable Apple + Google providers; add `osprey://auth-callback` redirect.
 - [ ] Verify RLS is enabled on all tables (Dashboard → Table Editor).
 - [ ] **Fresh native build** — native modules (`expo-calendar`, `expo-sqlite`, `react-native-health`, `react-native-maps`, `react-native-purchases`) don't work in Expo Go or old dev clients: `npx expo prebuild --clean` then EAS dev-client build. Use Node 20 (Node 22+ breaks Expo SDK 52).
+- [ ] **Verify SecureStore session migration on device** — 2026-07-06: Supabase auth session moved from plain AsyncStorage to encrypted storage (`src/services/secure-session-storage.ts`, AES key in Keychain/Keystore). On a device with an existing login, update the app and confirm you stay signed in across an app relaunch; also confirm fresh sign-in persists across relaunch.
 
 ## 2. Before TestFlight / launch 🟡
 
 ### Assets
-- [ ] **Replace `splash.png` — it is a 1×1px placeholder and will ship a blank splash screen.**
+- [x] `splash.png` — replaced 2026-07-06 with a real 1284×2778 splash (Ozzie mark centered on `#060912`, generated from `icon-1024.png`).
 - [x] App icon — fixed 2026-07-02 (audit branch, merged 2026-07-05): `app.json` points at the 1024×1024 `icon-1024.png`.
+
+### Crash reporting
+- [ ] **Activate Sentry** — the SDK is fully wired as of 2026-07-07 (`@sentry/react-native` + Expo plugin + metro config + init in `app/_layout.tsx`) but no-ops until a DSN exists. Create a free Sentry project (React Native platform), then set `EXPO_PUBLIC_SENTRY_DSN` in `.env.local` and as an EAS environment variable for production builds. Optional but recommended before launch: add `organization`/`project` + `SENTRY_AUTH_TOKEN` to the plugin config so release builds upload source maps for readable stack traces.
 
 ### RevenueCat / monetization
 - [ ] App Store Connect: create subscription group + two products — $9.99/mo and $89.99/yr.

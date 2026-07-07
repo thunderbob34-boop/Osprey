@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, Animated, Easing, StyleSheet } from 'react-native';
+import { View, Animated, Easing, StyleSheet } from 'react-native';
 import { Colors } from '@/constants/colors';
 import OzzieMascot from '@/components/OzzieMascot';
 
