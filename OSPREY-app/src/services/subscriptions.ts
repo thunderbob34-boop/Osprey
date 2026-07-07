@@ -15,8 +15,13 @@ export async function initRevenueCat(userId: string): Promise<void> {
 }
 
 export async function hasOspreyPlus(): Promise<boolean> {
+  // Fail CLOSED: if RevenueCat isn't configured yet (missing key, non-iOS
+  // build, or a call that races initRevenueCat() at launch), treat the user
+  // as not entitled rather than granting Plus for free. Failing open here
+  // previously meant any misconfigured or pre-init build unlocked every
+  // paid feature.
   if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) {
-    return true;
+    return false;
   }
 
   const info = await Purchases.getCustomerInfo();
@@ -29,7 +34,7 @@ export async function getOfferings() {
 }
 
 export async function purchaseOspreyPlus(): Promise<boolean> {
-  if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) return true;
+  if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) return false;
 
   const offerings = await getOfferings();
   const packageToBuy = offerings?.current?.availablePackages[0];
@@ -40,7 +45,7 @@ export async function purchaseOspreyPlus(): Promise<boolean> {
 }
 
 export async function restorePurchases(): Promise<boolean> {
-  if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) return true;
+  if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) return false;
   const info = await Purchases.restorePurchases();
   return Boolean(info.entitlements.active[ENTITLEMENT_ID]);
 }
