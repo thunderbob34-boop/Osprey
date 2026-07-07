@@ -80,7 +80,14 @@ export function currentWeekStartDate(): string {
   const monday = new Date(now);
   monday.setHours(0, 0, 0, 0);
   monday.setDate(now.getDate() + diff);
-  return monday.toISOString().slice(0, 10);
+  // Format from local date parts, not toISOString() — that converts to UTC
+  // first, which rolls Monday 00:00 local back to Sunday for any user east
+  // of UTC, so the query below matches no training_weeks row and the
+  // user's entire current week silently disappears.
+  const y = monday.getFullYear();
+  const m = String(monday.getMonth() + 1).padStart(2, '0');
+  const d = String(monday.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
 }
 
 /** The active plan's current week (Monday-start), sessions in date order. */

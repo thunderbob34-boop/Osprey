@@ -221,7 +221,11 @@ export async function fetchPerformanceData(
   bestBikeTimeS: number;
 }> {
   const since = new Date();
-  since.setDate(since.getDate() - days);
+  // days - 1, not days: the fill loop below writes `days` entries starting
+  // at `since`, so anchoring on `days` back left "today" one day past the
+  // window and it was never read out of tssMap — a session logged today
+  // never entered ATL/CTL/TSB or ACWR until the next day's calculation.
+  since.setDate(since.getDate() - (days - 1));
 
   const { data, error } = await supabase
     .from('workout_logs')
@@ -244,10 +248,13 @@ export async function fetchPerformanceData(
 
   let bestRunMiles = 0;
   let bestRunTimeS = 0;
+  let bestRunPaceSPerMi = Infinity;
   let bestSwimMiles = 0;
   let bestSwimTimeS = 0;
+  let bestSwimPaceSPerMi = Infinity;
   let bestBikeMiles = 0;
   let bestBikeTimeS = 0;
+  let bestBikePaceSPerMi = Infinity;
 
   for (const row of rows) {
     const date = row.started_at.slice(0, 10);
@@ -256,13 +263,26 @@ export async function fetchPerformanceData(
 
     if (row.total_distance_km && row.total_duration_s > 0) {
       const miles = row.total_distance_km * KM_TO_MILES;
-      if (row.session_type === 'run' && miles > bestRunMiles) {
+
+      // "Best effort" anchors the Riegel race predictor and run-guidance's
+      // pace bands — it needs to be the athlete's FASTEST pace, not their
+      // longest run. Picking by distance alone previously anchored every
+      // prediction to easy long-run pace, since long runs are rarely the
+      // fastest ones. The minimum-distance floor is per-sport: a 1500m
+      // (~0.93mi) pool swim is a completely normal "best effort" and a
+      // blanket 1-mile floor was nulling out swim/triathlon predictions
+      // for anyone whose swims are all pool-length.
+      const paceSPerMi = row.total_duration_s / miles;
+      if (row.session_type === 'run' && miles >= 1 && paceSPerMi < bestRunPaceSPerMi) {
+        bestRunPaceSPerMi = paceSPerMi;
         bestRunMiles = miles;
         bestRunTimeS = row.total_duration_s;
-      } else if (row.session_type === 'swim' && miles > bestSwimMiles) {
+      } else if (row.session_type === 'swim' && miles >= 0.25 && paceSPerMi < bestSwimPaceSPerMi) {
+        bestSwimPaceSPerMi = paceSPerMi;
         bestSwimMiles = miles;
         bestSwimTimeS = row.total_duration_s;
-      } else if (row.session_type === 'bike' && miles > bestBikeMiles) {
+      } else if (row.session_type === 'bike' && miles >= 1 && paceSPerMi < bestBikePaceSPerMi) {
+        bestBikePaceSPerMi = paceSPerMi;
         bestBikeMiles = miles;
         bestBikeTimeS = row.total_duration_s;
       }
