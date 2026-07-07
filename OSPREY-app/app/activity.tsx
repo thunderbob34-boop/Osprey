@@ -14,8 +14,8 @@ import { Colors } from '@/constants/colors';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useActivity } from '@/hooks/useActivity';
 import { useAuthStore } from '@/store/authStore';
-
-const KM_PER_MILE = 1.609344;
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { formatDistanceKm } from '@/services/units';
 
 function formatWorkoutType(type: string): string {
   switch (type) {
@@ -30,12 +30,6 @@ function formatWorkoutType(type: string): string {
     default:
       return type;
   }
-}
-
-function formatDistance(km: number | null): string {
-  if (km == null) return '';
-  const miles = km / KM_PER_MILE;
-  return `${Math.round(miles * 10) / 10} mi`;
 }
 
 function timeAgo(isoStr: string): string {
@@ -56,6 +50,7 @@ export default function ActivityScreen() {
   const router = useRouter();
   const { feed, isLoading, error, share, kudo, remove } = useActivity();
   const currentUserId = useAuthStore((s) => s.user?.id);
+  const { units } = useUnitPreference();
   const [kudoingId, setKudoingId] = useState<string | null>(null);
 
   async function handleKudo(card: any) {
@@ -114,7 +109,7 @@ export default function ActivityScreen() {
                   <Text style={styles.cardStat}>{card.durationMinutes} min</Text>
                 ) : null}
                 {card.distanceKm ? (
-                  <Text style={styles.cardStat}>{formatDistance(card.distanceKm)}</Text>
+                  <Text style={styles.cardStat}>{formatDistanceKm(card.distanceKm, units)}</Text>
                 ) : null}
               </View>
 

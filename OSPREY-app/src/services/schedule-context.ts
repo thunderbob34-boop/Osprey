@@ -58,9 +58,9 @@ async function fetchBusyBlocks(
 }
 
 /** Gaps between busy blocks within waking hours, ≥45 min, not already past. */
-function findFreeWindows(busy: BusyBlock[], dayStart: Date, dayEnd: Date): Array<{ start: Date; end: Date }> {
+function findFreeWindows(busy: BusyBlock[], dayStart: Date, dayEnd: Date): { start: Date; end: Date }[] {
   const now = new Date();
-  const windows: Array<{ start: Date; end: Date }> = [];
+  const windows: { start: Date; end: Date }[] = [];
   let cursor = dayStart;
 
   for (const block of busy) {

@@ -18,12 +18,26 @@ import { expandIntervalSteps, ozzieCueForStep, totalIntervalDistanceM, type Inte
 import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
 import { formatDuration } from '@/store/workoutStore';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
 import {
   fetchHealthKitWorkouts,
   isHealthKitSupported,
   requestHealthKitAuthorization,
 } from '@/services/healthkit';
 import type { IntervalEffort, IntervalPrescription } from '@/types/workout';
+
+type DistanceUnit = 'meters' | 'yards' | 'km' | 'miles';
+
+const METERS_PER_UNIT: Record<DistanceUnit, number> = {
+  meters: 1,
+  yards: 0.9144,
+  km: 1000,
+  miles: 1609.34,
+};
+
+function metersToUnit(meters: number, unit: DistanceUnit): number {
+  return meters / METERS_PER_UNIT[unit];
+}
 
 const SESSION_META: Record<EnduranceType, { icon: string; label: string; color: string; borderColor: string }> = {
   swim: { icon: '🏊', label: 'SWIM',  color: Colors.teal,  borderColor: Colors.borderTeal },
@@ -71,15 +85,23 @@ export default function EnduranceWorkoutScreen() {
   const { sessionType, sessionId } = useLocalSearchParams<{ sessionType: EnduranceType; sessionId?: string }>();
   const userId = useAuthStore((s) => s.user?.id);
   const { isPlus } = useSubscription();
+  const { units: unitPreference } = useUnitPreference();
 
   const type: EnduranceType = (sessionType ?? 'cross') as EnduranceType;
   const meta = SESSION_META[type] ?? SESSION_META.cross;
+
+  // Swims are conventionally tracked in meters/yards (pool lengths); other
+  // endurance sessions use km/miles — both follow the account-wide unit
+  // preference (Settings → Units), no per-session picker.
+  const distanceUnit: DistanceUnit =
+    type === 'swim'
+      ? unitPreference === 'metric' ? 'meters' : 'yards'
+      : unitPreference === 'metric' ? 'km' : 'miles';
 
   const startedAtRef = useRef<number>(Date.now());
   const [elapsed, setElapsed] = useState(0);
   const [saving, setSaving] = useState(false);
   const [distance, setDistance] = useState('');
-  const [distanceUnit, setDistanceUnit] = useState<'meters' | 'yards' | 'km' | 'miles'>('meters');
   const [syncing, setSyncing] = useState(false);
   const lastAutoCueMs = useRef(0);
   const speakingRef = useRef(false);
@@ -147,8 +169,7 @@ export default function EnduranceWorkoutScreen() {
       if (p) {
         const totalM = totalIntervalDistanceM(p);
         if (totalM != null) {
-          setDistance(String(totalM));
-          setDistanceUnit('meters');
+          setDistance(String(Math.round(metersToUnit(totalM, distanceUnit) * 100) / 100));
         }
       }
       return;
@@ -217,11 +238,11 @@ export default function EnduranceWorkoutScreen() {
       const workouts = await fetchHealthKitWorkouts(new Date(startedAtRef.current).toISOString());
       const match = workouts.find((w) => w.distanceMeters != null && w.distanceMeters > 0);
       if (match?.distanceMeters != null) {
-        setDistance(String(Math.round((match.distanceMeters / 1000) * 100) / 100));
-        setDistanceUnit('km');
+        const converted = metersToUnit(match.distanceMeters, distanceUnit);
+        setDistance(String(Math.round(converted * 100) / 100));
         Alert.alert(
           'Apple Health',
-          `Pulled ${(match.distanceMeters / 1000).toFixed(2)} km from your ${match.activityName} workout.`,
+          `Pulled ${converted.toFixed(2)} ${distanceUnit} from your ${match.activityName} workout.`,
         );
       } else {
         Alert.alert(
@@ -355,7 +376,7 @@ export default function EnduranceWorkoutScreen() {
         </TouchableOpacity>
 
         <View style={styles.distanceCard}>
-          <Text style={styles.distanceLabel}>Distance</Text>
+          <Text style={styles.distanceLabel}>Distance ({distanceUnit})</Text>
           <View style={styles.distanceInputRow}>
             <TextInput
               style={styles.distanceInput}
@@ -364,24 +385,8 @@ export default function EnduranceWorkoutScreen() {
               value={distance}
               onChangeText={setDistance}
               keyboardType="decimal-pad"
-              accessibilityLabel="Distance"
+              accessibilityLabel={`Distance in ${distanceUnit}`}
             />
-          </View>
-          <View style={styles.unitRow}>
-            {(['meters', 'yards', 'km', 'miles'] as const).map((unit) => (
-              <TouchableOpacity
-                key={unit}
-                style={[styles.unitBtn, distanceUnit === unit && styles.unitBtnActive]}
-                onPress={() => setDistanceUnit(unit)}
-                accessibilityRole="button"
-                accessibilityLabel={unit}
-                accessibilityState={{ selected: distanceUnit === unit }}
-              >
-                <Text style={[styles.unitBtnText, distanceUnit === unit && styles.unitBtnTextActive]}>
-                  {unit}
-                </Text>
-              </TouchableOpacity>
-            ))}
           </View>
           <TouchableOpacity
             style={[styles.syncBtn, syncing && { opacity: 0.6 }]}
@@ -521,31 +526,6 @@ const styles = StyleSheet.create({
     color: Colors.textPrimary,
     fontSize: 16,
     fontWeight: '600',
-  },
-  unitRow: {
-    flexDirection: 'row',
-    gap: 6,
-  },
-  unitBtn: {
-    flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 8,
-    paddingVertical: 8,
-    alignItems: 'center',
-  },
-  unitBtnActive: {
-    backgroundColor: Colors.surfaceTeal,
-    borderColor: Colors.borderTeal,
-  },
-  unitBtnText: {
-    fontSize: 11,
-    fontWeight: '600',
-    color: Colors.textMuted,
-  },
-  unitBtnTextActive: {
-    color: Colors.teal,
   },
   syncBtn: {
     backgroundColor: Colors.surfaceTeal,

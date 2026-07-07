@@ -11,7 +11,7 @@ export interface RecoveryData {
 export interface SessionData {
   type: string;
   duration: string;
-  distance?: string;
+  distanceKm?: number | null;
   zone?: string;
   ozzieNote: string;
   whyReasoning?: string | null;
@@ -26,7 +26,7 @@ export interface FuelStatusData {
 
 export interface QuickStats {
   streak: string;
-  monthMiles: string;
+  monthDistanceKm: number;
   load: string;
 }
 
@@ -59,8 +59,8 @@ export interface DailySummaryData {
   userName: string;
   recovery?: RecoveryData;
   session: SessionData;
-  weekMiles: number;
-  weekTarget?: number;
+  weekDistanceKm: number;
+  weekTargetKm?: number;
   quickStats: QuickStats;
   habitTip?: string | null;
 }
@@ -84,7 +84,11 @@ export interface DailySummaryProps extends Partial<DailySummaryData> {
   fuelStatus?: FuelStatusData;
   trainingReadiness?: TrainingReadiness | null;
   onActivityPress?: () => void;
+  onOzziePress?: () => void;
   onViewWeekPress?: () => void;
   headerBanner?: React.ReactNode;
   weatherCard?: React.ReactNode;
+  hydration?: { ounces: number; targetOz: number };
+  onAddHydration?: (ounces: number) => void;
+  hydrationEmphasized?: boolean;
 }

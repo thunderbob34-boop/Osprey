@@ -14,10 +14,6 @@ function todayDateString(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
-function kmToMiles(km: number): number {
-  return Math.round(km * 0.621371 * 10) / 10;
-}
-
 function normalizeRecommendation(value: string | null): RecoveryRecommendation {
   if (value === 'easy' || value === 'rest') return value;
   return 'train';
@@ -283,10 +279,7 @@ function mapSession(
   return {
     type: session.description ?? formatSessionType(session.session_type),
     duration: session.planned_minutes ? `${session.planned_minutes} min` : '—',
-    distance:
-      session.planned_distance_km != null
-        ? `${kmToMiles(session.planned_distance_km)} mi`
-        : undefined,
+    distanceKm: session.planned_distance_km,
     zone: intensityToZone(session.intensity),
     ozzieNote: dailyBrief.text ?? session.ozzie_notes ?? fallbackNote,
     whyReasoning: dailyBrief.whyReasoning,
@@ -304,8 +297,6 @@ function mapDailySummary(
   weekTargetKm?: number,
 ): DailySummaryData {
   const recommendation = normalizeRecommendation(row.recovery_recommendation);
-  const weekMiles =
-    row.week_distance_km != null ? kmToMiles(row.week_distance_km) : 0;
 
   return {
     userName: row.display_name,
@@ -318,12 +309,12 @@ function mapDailySummary(
           }
         : undefined,
     session: mapSession(session, dailyBrief),
-    weekMiles,
-    weekTarget: weekTargetKm != null ? kmToMiles(weekTargetKm) : undefined,
+    weekDistanceKm: row.week_distance_km ?? 0,
+    weekTargetKm,
     habitTip: dailyBrief.habitTip,
     quickStats: {
       streak: streakDays > 0 ? `${streakDays} day streak` : '—',
-      monthMiles: `${kmToMiles(monthDistanceKm)} mi`,
+      monthDistanceKm: monthDistanceKm,
       load: loadLabelFromTsb(row.tsb),
     },
   };

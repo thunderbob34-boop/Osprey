@@ -40,7 +40,7 @@ function setCachedRace(result: RaceSearchResult): void {
 
 const DISTANCE_KEYWORDS = ['Marathon', 'Half', '15K', '10K', '5K'];
 
-function parseDistances(events: Array<{ name?: string }>): string[] {
+function parseDistances(events: { name?: string }[]): string[] {
   const found: string[] = [];
   for (const kw of DISTANCE_KEYWORDS) {
     if (events.some((e) => typeof e.name === 'string' && e.name.includes(kw))) {
@@ -61,7 +61,7 @@ interface RunSignUpRace {
   description?: string | null;
   url?: string;
   logo_url?: string | null;
-  events?: Array<{ name?: string }>;
+  events?: { name?: string }[];
 }
 
 interface RunSignUpResponseItem {

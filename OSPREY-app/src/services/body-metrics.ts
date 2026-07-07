@@ -23,6 +23,11 @@ export interface WeightSummary {
   entryCount: number;
 }
 
+export interface WeightHistoryPoint {
+  recordedOn: string;
+  kg: number;
+}
+
 function todayDateString(): string {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -101,4 +106,24 @@ export async function fetchWeightSummary(userId: string): Promise<WeightSummary>
     rounded > 0.1 ? 'gaining' : rounded < -0.1 ? 'losing' : 'holding';
 
   return { latestKg, kgPerWeek: rounded, direction, entryCount: readings.length };
+}
+
+/** Raw weigh-ins (oldest → newest) over the last `days`, for charting progress. */
+export async function fetchWeightHistory(userId: string, days = 90): Promise<WeightHistoryPoint[]> {
+  const since = new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
+
+  const { data, error } = await supabase
+    .from('body_metrics')
+    .select('recorded_on, weight_kg')
+    .eq('user_id', userId)
+    .gte('recorded_on', since)
+    .not('weight_kg', 'is', null)
+    .order('recorded_on', { ascending: true });
+
+  if (error) throw error;
+
+  return (data ?? []).map((r) => ({
+    recordedOn: r.recorded_on as string,
+    kg: Number(r.weight_kg),
+  }));
 }

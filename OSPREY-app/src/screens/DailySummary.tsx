@@ -14,8 +14,10 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import type { DailySummaryProps, TrainingReadiness } from '@/types/daily-summary';
-import MacroTargetCard from '@/components/MacroTargetCard';
+import NutritionCard from '@/components/NutritionCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { formatDistanceKm, kmToMiles } from '@/services/units';
 
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
 
@@ -65,12 +67,12 @@ export default function DailySummaryScreen({
     duration: 'Free day',
     ozzieNote: "Ozzie is still crunching today's read.",
   },
-  weekMiles = 0,
-  weekTarget,
+  weekDistanceKm = 0,
+  weekTargetKm,
   habitTip,
   quickStats = {
     streak: '—',
-    monthMiles: '—',
+    monthDistanceKm: 0,
     load: '—',
   },
   isLoading = false,
@@ -84,12 +86,17 @@ export default function DailySummaryScreen({
   fuelStatus,
   trainingReadiness,
   onActivityPress,
+  onOzziePress,
   onViewWeekPress,
   headerBanner,
   weatherCard,
+  hydration,
+  onAddHydration,
+  hydrationEmphasized,
 }: DailySummaryProps) {
-  const weekProgress = weekTarget ? Math.min(1, weekMiles / weekTarget) : 0;
+  const weekProgress = weekTargetKm ? Math.min(1, weekDistanceKm / weekTargetKm) : 0;
   const greeting = getGreeting();
+  const { units } = useUnitPreference();
 
   function handleSwapPress() {
     Alert.alert('Swap today\'s session', 'Same training effect, different shape.', [
@@ -123,41 +130,6 @@ export default function DailySummaryScreen({
     Alert.alert('Adjust today\'s session', undefined, options);
   }
   const [whyExpanded, setWhyExpanded] = useState(false);
-
-  function formatFuelTime(minutes: number): string {
-    if (minutes < 60) return `${minutes} min`;
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return mins > 0 ? `${hours}h ${mins}m` : `${hours}h`;
-  }
-
-  function fuelCardCopy(): { title: string; body: string } | null {
-    if (!fuelStatus) return null;
-    if (fuelStatus.lastLoggedMinutesAgo == null) {
-      return {
-        title: 'Fuel up before training',
-        body: "No meals logged yet today. Eat a carb-rich snack 60-90 min before your session for best performance.",
-      };
-    }
-    const timeAgo = formatFuelTime(fuelStatus.lastLoggedMinutesAgo);
-    if (fuelStatus.recommendation === 'recently_fueled') {
-      return {
-        title: 'Recently fueled',
-        body: `Last meal logged ${timeAgo} ago. Give it a little time to digest before going hard.`,
-      };
-    }
-    if (fuelStatus.recommendation === 'good_timing') {
-      return {
-        title: 'Good timing',
-        body: `Last meal logged ${timeAgo} ago — that's a solid fueling window for today's session.`,
-      };
-    }
-    return {
-      title: 'Fuel up before training',
-      body: `It's been ${timeAgo} since your last logged meal. Grab a carb-rich snack 60-90 min before training.`,
-    };
-  }
-  const fuelCard = fuelCardCopy();
 
   if (isLoading) {
     return (
@@ -230,9 +202,9 @@ export default function DailySummaryScreen({
             ) : null}
             <TouchableOpacity
               style={styles.avatarBtn}
-              onPress={onActivityPress}
+              onPress={onOzziePress}
               accessibilityRole="button"
-              accessibilityLabel="View activity"
+              accessibilityLabel="Ask Ozzie"
             >
               <OzzieAvatar size={36} />
             </TouchableOpacity>
@@ -276,8 +248,14 @@ export default function DailySummaryScreen({
           <ReadinessCard readiness={trainingReadiness} />
         ) : null}
 
-        {/* ── Nutrition Periodization ── */}
-        <MacroTargetCard />
+        {/* ── Nutrition (fuel targets + hydration + meal timing) ── */}
+        <NutritionCard
+          hydration={hydration}
+          onAddHydration={onAddHydration}
+          hydrationEmphasized={hydrationEmphasized}
+          fuelStatus={fuelStatus}
+          showFuelTip={session.sessionType !== 'rest'}
+        />
 
         {headerBanner ?? null}
 
@@ -303,9 +281,9 @@ export default function DailySummaryScreen({
             <View style={styles.sessionChip}>
               <Text style={styles.sessionChipText}>{session.duration}</Text>
             </View>
-            {session.distance ? (
+            {session.distanceKm != null ? (
               <View style={styles.sessionChip}>
-                <Text style={styles.sessionChipText}>{session.distance}</Text>
+                <Text style={styles.sessionChipText}>{formatDistanceKm(session.distanceKm, units)}</Text>
               </View>
             ) : null}
             {session.zone ? (
@@ -371,30 +349,26 @@ export default function DailySummaryScreen({
 
         {weatherCard ?? null}
 
-        {fuelCard && session.sessionType !== 'rest' ? (
-          <View style={styles.fuelCard}>
-            <View style={styles.fuelCardTitleRow}>
-              <Ionicons name="restaurant-outline" size={15} color={Colors.gold} />
-              <Text style={styles.fuelCardTitle}>{fuelCard.title}</Text>
-            </View>
-            <Text style={styles.fuelCardBody}>{fuelCard.body}</Text>
-          </View>
-        ) : null}
-
         {/* ── Weekly Progress ── */}
         <View style={styles.weekCard}>
           <View style={styles.weekRow}>
-            <Text style={styles.weekLabel}>WEEK MILEAGE</Text>
+            <Text style={styles.weekLabel}>{units === 'metric' ? 'WEEK DISTANCE' : 'WEEK MILEAGE'}</Text>
             <Text style={styles.weekNumbers}>
-              <Text style={styles.weekMiles}>{weekMiles}</Text>
-              {weekTarget != null ? (
-                <Text style={styles.weekTarget}> / {weekTarget} mi</Text>
+              <Text style={styles.weekMiles}>
+                {units === 'metric' ? Math.round(weekDistanceKm * 10) / 10 : Math.round(kmToMiles(weekDistanceKm) * 10) / 10}
+              </Text>
+              {weekTargetKm != null ? (
+                <Text style={styles.weekTarget}>
+                  {' '}
+                  / {units === 'metric' ? Math.round(weekTargetKm * 10) / 10 : Math.round(kmToMiles(weekTargetKm) * 10) / 10}{' '}
+                  {units === 'metric' ? 'km' : 'mi'}
+                </Text>
               ) : (
-                <Text style={styles.weekTarget}> mi this week</Text>
+                <Text style={styles.weekTarget}> {units === 'metric' ? 'km' : 'mi'} this week</Text>
               )}
             </Text>
           </View>
-          {weekTarget != null ? (
+          {weekTargetKm != null ? (
             <View style={styles.weekTrack}>
               <View style={[styles.weekFill, { width: `${weekProgress * 100}%` }]} />
             </View>
@@ -404,7 +378,11 @@ export default function DailySummaryScreen({
         {/* ── Quick Stats Row ── */}
         <View style={styles.statsRow}>
           <StatChip label="Consistency" value={quickStats.streak} color={Colors.gold} />
-          <StatChip label="This Month" value={quickStats.monthMiles} color={Colors.teal} />
+          <StatChip
+            label="This Month"
+            value={formatDistanceKm(quickStats.monthDistanceKm, units)}
+            color={Colors.teal}
+          />
           <StatChip label="Load" value={quickStats.load} color={Colors.amber} />
         </View>
 
@@ -652,7 +630,10 @@ const styles = StyleSheet.create({
   },
   batteryScoreOverlay: {
     position: 'absolute',
-    inset: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -791,19 +772,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: Colors.textPrimary,
   },
-  fuelCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 14,
-    marginBottom: 16,
-    gap: 4,
-  },
-  fuelCardTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  fuelCardTitle: { fontSize: 13, fontWeight: '800', color: Colors.textPrimary },
-  fuelCardBody: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
-
   // Week progress
   weekCard: {
     backgroundColor: Colors.bgCard,

@@ -16,10 +16,13 @@ import { Colors } from '@/constants/colors';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useSavedRoutes } from '@/hooks/useSavedRoutes';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { formatDistanceKm, kmToMiles, milesToKm } from '@/services/units';
 import { SUGGESTED_ROUTE_TAGS, type SavedRoute } from '@/types/routes';
 
 export default function RoutesScreen() {
   const { data: routes, isLoading, error, addRoute, removeRoute } = useSavedRoutes();
+  const { units } = useUnitPreference();
 
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
@@ -66,7 +69,7 @@ export default function RoutesScreen() {
       await addRoute.mutateAsync({
         name: name.trim(),
         tags: [...selectedTags],
-        distanceMiles: parsedDistance,
+        distanceMiles: parsedDistance != null ? (units === 'metric' ? kmToMiles(parsedDistance) : parsedDistance) : undefined,
       });
       resetForm();
     } catch (err) {
@@ -121,7 +124,9 @@ export default function RoutesScreen() {
               />
               <FieldError message={nameError} />
 
-              <Text style={styles.fieldLabel}>DISTANCE (MI, OPTIONAL)</Text>
+              <Text style={styles.fieldLabel}>
+                DISTANCE ({units === 'metric' ? 'KM' : 'MI'}, OPTIONAL)
+              </Text>
               <TextInput
                 style={styles.input}
                 keyboardType="decimal-pad"
@@ -129,7 +134,7 @@ export default function RoutesScreen() {
                 placeholderTextColor={Colors.textMuted}
                 value={distanceMiles}
                 onChangeText={setDistanceMiles}
-                accessibilityLabel="Distance in miles, optional"
+                accessibilityLabel={`Distance in ${units === 'metric' ? 'kilometers' : 'miles'}, optional`}
               />
 
               <Text style={styles.fieldLabel}>TAGS</Text>
@@ -218,7 +223,9 @@ export default function RoutesScreen() {
                 <View style={{ flex: 1 }}>
                   <Text style={styles.routeName}>{route.name}</Text>
                   <Text style={styles.routeMeta}>
-                    {route.distanceMiles != null ? `${route.distanceMiles} mi` : 'Distance not set'}
+                    {route.distanceMiles != null
+                      ? formatDistanceKm(milesToKm(route.distanceMiles), units)
+                      : 'Distance not set'}
                   </Text>
                   {route.tags.length > 0 ? (
                     <View style={styles.routeTagRow}>

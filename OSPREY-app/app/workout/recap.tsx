@@ -15,15 +15,19 @@ import { useAuthStore } from '@/store/authStore';
 import { fetchWorkoutRecap } from '@/services/workouts';
 import { formatDuration } from '@/store/workoutStore';
 import { ozzieSpeak } from '@/services/ozzie-audio';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { formatWeightKg } from '@/services/units';
+import { lbToKg } from '@/services/body-metrics';
 
 export default function WorkoutRecapScreen() {
   const router = useRouter();
   const { workoutId } = useLocalSearchParams<{ workoutId: string }>();
   const userId = useAuthStore((s) => s.user?.id);
+  const { units } = useUnitPreference();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['workout-recap', workoutId, userId],
-    queryFn: () => fetchWorkoutRecap(userId!, workoutId!),
+    queryKey: ['workout-recap', workoutId, userId, units],
+    queryFn: () => fetchWorkoutRecap(userId!, workoutId!, units),
     enabled: Boolean(userId && workoutId),
   });
 
@@ -134,7 +138,7 @@ export default function WorkoutRecapScreen() {
                   {exercise.isPr ? <Text style={styles.prTag}>PR</Text> : null}
                 </View>
                 <Text style={styles.exerciseMeta}>
-                  {exercise.sets.length} sets · {exercise.volumeLbs.toLocaleString()} lbs volume
+                  {exercise.sets.length} sets · {formatWeightKg(lbToKg(exercise.volumeLbs), units)} volume
                 </Text>
               </View>
             ))}

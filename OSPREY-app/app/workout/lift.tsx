@@ -33,6 +33,8 @@ import { computePlates, formatPlateBreakdown } from '@/services/plate-math';
 import { ozzieSpeak } from '@/services/ozzie-audio';
 import { startVoiceRecording, stopVoiceRecordingAndParse, cancelVoiceRecording } from '@/services/voice-log';
 import { generateWarmup, type WarmupDrill } from '@/services/warmup';
+import { LIFT_TEMPLATES, getWorkedMuscleGroups, type LiftTemplate } from '@/services/lift-templates';
+import MuscleDiagram from '@/components/MuscleDiagram';
 import type { LiftExercise } from '@/types/workout';
 
 export default function LiftWorkoutScreen() {
@@ -59,9 +61,13 @@ export default function LiftWorkoutScreen() {
   const [saving, setSaving] = useState(false);
   const [recordingExercise, setRecordingExercise] = useState<number | null>(null);
   const [parsingVoice, setParsingVoice] = useState(false);
+  const [previewing, setPreviewing] = useState(true);
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
+  const originalPrescriptionRef = useRef<LiftExercise[] | null>(null);
   const [warmingUp, setWarmingUp] = useState(true);
   const [warmupDrills] = useState<WarmupDrill[]>(() => generateWarmup('lift'));
   const [checkedDrills, setCheckedDrills] = useState<Set<number>>(new Set());
+  const allDrillsChecked = warmupDrills.length > 0 && checkedDrills.size === warmupDrills.length;
   const [lastSets, setLastSets] = useState<Record<string, { reps: number; weightLbs: number }>>({});
   const [library, setLibrary] = useState<LibraryExercise[]>([]);
   const [pickerVisible, setPickerVisible] = useState(false);
@@ -81,9 +87,37 @@ export default function LiftWorkoutScreen() {
     startWorkout('lift', params.sessionId ?? null);
   }
 
-  function handleExitWarmup() {
+  function handleExit() {
     reset();
     router.back();
+  }
+
+  function handleSelectTemplate(template: LiftTemplate) {
+    const matched = template.exerciseNames.flatMap((name) => {
+      const match = library.find((e) => e.name.toLowerCase() === name.toLowerCase());
+      return match ? [match] : [];
+    });
+    const next: LiftExercise[] = matched.map((exercise) => {
+      const prev = lastSets[exercise.id];
+      const reps = prev?.reps ?? 8;
+      const weightLbs = prev?.weightLbs ?? 45;
+      return {
+        exerciseId: exercise.id,
+        name: exercise.name,
+        sets: [
+          { setNumber: 1, reps, weightLbs, completed: false },
+          { setNumber: 2, reps, weightLbs, completed: false },
+          { setNumber: 3, reps, weightLbs, completed: false },
+        ],
+      };
+    });
+    setLiftExercises(next);
+    setSelectedTemplateId(template.id);
+  }
+
+  function handleSelectOzziePlan() {
+    setLiftExercises(originalPrescriptionRef.current ?? []);
+    setSelectedTemplateId(null);
   }
 
   function confirmExit() {
@@ -143,22 +177,22 @@ export default function LiftWorkoutScreen() {
           setPrescriptionCues(
             Object.fromEntries(plan.map((p) => [p.exercise.id, p.cue])),
           );
-          setLiftExercises(
-            plan.map((p) => {
-              const prev = last[p.exercise.id];
-              const weightLbs = prev?.weightLbs ?? 45;
-              return {
-                exerciseId: p.exercise.id,
-                name: p.exercise.name,
-                sets: Array.from({ length: p.sets }, (_, i) => ({
-                  setNumber: i + 1,
-                  reps: p.reps,
-                  weightLbs,
-                  completed: false,
-                })),
-              };
-            }),
-          );
+          const prescribedExercises: LiftExercise[] = plan.map((p) => {
+            const prev = last[p.exercise.id];
+            const weightLbs = prev?.weightLbs ?? 45;
+            return {
+              exerciseId: p.exercise.id,
+              name: p.exercise.name,
+              sets: Array.from({ length: p.sets }, (_, i) => ({
+                setNumber: i + 1,
+                reps: p.reps,
+                weightLbs,
+                completed: false,
+              })),
+            };
+          });
+          originalPrescriptionRef.current = prescribedExercises;
+          setLiftExercises(prescribedExercises);
           return;
         }
 
@@ -242,14 +276,19 @@ export default function LiftWorkoutScreen() {
 
   function handleRemoveExercise(exerciseIndex: number) {
     const exercise = liftExercises[exerciseIndex];
-    Alert.alert(`Remove ${exercise.name}?`, 'Logged sets for this exercise will be discarded.', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Remove',
-        style: 'destructive',
-        onPress: () => setLiftExercises(liftExercises.filter((_, i) => i !== exerciseIndex)),
-      },
-    ]);
+    const hasLoggedSets = exercise.sets.some((s) => s.completed);
+    Alert.alert(
+      `Remove ${exercise.name}?`,
+      hasLoggedSets ? 'Logged sets for this exercise will be discarded.' : "This will remove it from today's plan.",
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Remove',
+          style: 'destructive',
+          onPress: () => setLiftExercises(liftExercises.filter((_, i) => i !== exerciseIndex)),
+        },
+      ],
+    );
   }
 
   function updateSet(
@@ -359,10 +398,197 @@ export default function LiftWorkoutScreen() {
     }
   }
 
+  // Shared between the preview screen and the active workout screen — both
+  // let the user add exercises from the full library via the same modal.
+  const exercisePickerModal = (
+    <Modal
+      visible={pickerVisible}
+      animationType="slide"
+      presentationStyle="pageSheet"
+      onRequestClose={() => setPickerVisible(false)}
+    >
+      <SafeAreaView style={styles.pickerContainer}>
+        <View style={styles.pickerHeader}>
+          <Text style={styles.pickerTitle}>Add Exercise</Text>
+          <TouchableOpacity
+            onPress={() => setPickerVisible(false)}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel="Close exercise picker"
+          >
+            <Text style={styles.pickerClose}>✕</Text>
+          </TouchableOpacity>
+        </View>
+        <TextInput
+          style={styles.pickerSearch}
+          placeholder="Search exercises…"
+          placeholderTextColor={Colors.textMuted}
+          value={search}
+          onChangeText={setSearch}
+          autoCorrect={false}
+          accessibilityLabel="Search exercises"
+        />
+        <ScrollView contentContainerStyle={styles.pickerList}>
+          {groupedLibrary.length === 0 ? (
+            <Text style={styles.pickerEmpty}>
+              {library.length === 0
+                ? 'Exercise library unavailable — check your connection.'
+                : 'No exercises match your search.'}
+            </Text>
+          ) : (
+            groupedLibrary.map((group) => (
+              <View key={group.muscleGroup}>
+                <Text style={styles.pickerGroupLabel}>{group.muscleGroup.toUpperCase()}</Text>
+                {group.exercises.map((exercise) => (
+                  <TouchableOpacity
+                    key={exercise.id}
+                    style={styles.pickerRow}
+                    onPress={() => handleAddExercise(exercise)}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Add ${exercise.name}`}
+                  >
+                    <Text style={styles.pickerRowText}>{exercise.name}</Text>
+                    <Text style={styles.pickerRowAdd}>+</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            ))
+          )}
+        </ScrollView>
+      </SafeAreaView>
+    </Modal>
+  );
+
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
         <ActivityIndicator color={Colors.teal} style={{ marginTop: 80 }} />
+      </SafeAreaView>
+    );
+  }
+
+  if (previewing) {
+    const workedGroups = getWorkedMuscleGroups(liftExercises.map((e) => e.exerciseId), library);
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.previewHeaderRow}>
+          <View style={styles.previewTitleBlock}>
+            <Text style={styles.previewEyebrow}>
+              {isPrescribed && !selectedTemplateId ? "OZZIE'S PLAN" : 'PLAN YOUR LIFT'}
+            </Text>
+            <Text style={styles.previewTitle}>
+              {isPrescribed && !selectedTemplateId ? "Today's Recommended Lift" : 'Choose a Focus'}
+            </Text>
+          </View>
+          <TouchableOpacity
+            onPress={handleExit}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel="Exit workout"
+          >
+            <Ionicons name="close" size={24} color={Colors.textMuted} />
+          </TouchableOpacity>
+        </View>
+
+        <ScrollView contentContainerStyle={styles.previewScroll}>
+          <View style={styles.templateChipRow}>
+            {isPrescribed ? (
+              <TouchableOpacity
+                style={[styles.templateChip, !selectedTemplateId && styles.templateChipActive]}
+                onPress={handleSelectOzziePlan}
+                accessibilityRole="button"
+                accessibilityLabel="Use Ozzie's plan"
+              >
+                <Text style={[styles.templateChipText, !selectedTemplateId && styles.templateChipTextActive]}>
+                  Ozzie&apos;s Plan
+                </Text>
+              </TouchableOpacity>
+            ) : null}
+            {LIFT_TEMPLATES.map((template) => (
+              <TouchableOpacity
+                key={template.id}
+                style={[styles.templateChip, selectedTemplateId === template.id && styles.templateChipActive]}
+                onPress={() => handleSelectTemplate(template)}
+                accessibilityRole="button"
+                accessibilityLabel={`Use ${template.label} template`}
+              >
+                <Text
+                  style={[
+                    styles.templateChipText,
+                    selectedTemplateId === template.id && styles.templateChipTextActive,
+                  ]}
+                >
+                  {template.label}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <MuscleDiagram workedGroups={workedGroups} />
+
+          <Text style={styles.previewSectionLabel}>EXERCISES</Text>
+          {liftExercises.length === 0 ? (
+            <View style={styles.previewEmptyCard}>
+              <Text style={styles.previewEmptyText}>
+                No exercises yet — pick a template above or add your own below.
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.previewExerciseList}>
+              {liftExercises.map((exercise, index) => (
+                <View
+                  key={exercise.exerciseId}
+                  style={[
+                    styles.previewExerciseRow,
+                    index === liftExercises.length - 1 && styles.previewExerciseRowLast,
+                  ]}
+                >
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.previewExerciseName}>{exercise.name}</Text>
+                    <Text style={styles.previewExerciseMeta}>
+                      {exercise.sets.length} × {exercise.sets[0]?.reps ?? 8}
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => handleRemoveExercise(index)}
+                    hitSlop={8}
+                    accessibilityRole="button"
+                    accessibilityLabel={`Remove ${exercise.name}`}
+                  >
+                    <Text style={styles.removeBtnText}>✕</Text>
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </View>
+          )}
+
+          <TouchableOpacity
+            style={styles.addExerciseBtn}
+            onPress={() => setPickerVisible(true)}
+            accessibilityRole="button"
+            accessibilityLabel="Add exercise"
+          >
+            <Text style={styles.addExerciseText}>+ Add Exercise</Text>
+          </TouchableOpacity>
+        </ScrollView>
+
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={[styles.finishBtn, liftExercises.length === 0 && styles.warmupStartBtnDisabled]}
+            onPress={() => setPreviewing(false)}
+            disabled={liftExercises.length === 0}
+            accessibilityRole="button"
+            accessibilityLabel="Continue to warm-up"
+            accessibilityState={{ disabled: liftExercises.length === 0 }}
+          >
+            <Text style={styles.finishBtnText}>Continue to Warm-Up →</Text>
+          </TouchableOpacity>
+          {liftExercises.length === 0 ? (
+            <Text style={styles.warmupHint}>Add at least one exercise to continue.</Text>
+          ) : null}
+        </View>
+
+        {exercisePickerModal}
       </SafeAreaView>
     );
   }
@@ -377,7 +603,7 @@ export default function LiftWorkoutScreen() {
               <Text style={styles.warmupTitle}>Warm Up First</Text>
             </View>
             <TouchableOpacity
-              onPress={handleExitWarmup}
+              onPress={handleExit}
               hitSlop={12}
               accessibilityRole="button"
               accessibilityLabel="Exit workout"
@@ -407,13 +633,18 @@ export default function LiftWorkoutScreen() {
             </TouchableOpacity>
           ))}
           <TouchableOpacity
-            style={styles.warmupStartBtn}
+            style={[styles.warmupStartBtn, !allDrillsChecked && styles.warmupStartBtnDisabled]}
             onPress={handleStartAfterWarmup}
+            disabled={!allDrillsChecked}
             accessibilityRole="button"
             accessibilityLabel="Start lifting"
+            accessibilityState={{ disabled: !allDrillsChecked }}
           >
             <Text style={styles.finishBtnText}>Start Lifting →</Text>
           </TouchableOpacity>
+          {!allDrillsChecked ? (
+            <Text style={styles.warmupHint}>Check off each drill to start lifting.</Text>
+          ) : null}
           <TouchableOpacity
             onPress={handleStartAfterWarmup}
             accessibilityRole="button"
@@ -665,63 +896,7 @@ export default function LiftWorkoutScreen() {
         </TouchableOpacity>
       </Modal>
 
-      {/* ── Exercise picker ── */}
-      <Modal
-        visible={pickerVisible}
-        animationType="slide"
-        presentationStyle="pageSheet"
-        onRequestClose={() => setPickerVisible(false)}
-      >
-        <SafeAreaView style={styles.pickerContainer}>
-          <View style={styles.pickerHeader}>
-            <Text style={styles.pickerTitle}>Add Exercise</Text>
-            <TouchableOpacity
-              onPress={() => setPickerVisible(false)}
-              hitSlop={12}
-              accessibilityRole="button"
-              accessibilityLabel="Close exercise picker"
-            >
-              <Text style={styles.pickerClose}>✕</Text>
-            </TouchableOpacity>
-          </View>
-          <TextInput
-            style={styles.pickerSearch}
-            placeholder="Search exercises…"
-            placeholderTextColor={Colors.textMuted}
-            value={search}
-            onChangeText={setSearch}
-            autoCorrect={false}
-            accessibilityLabel="Search exercises"
-          />
-          <ScrollView contentContainerStyle={styles.pickerList}>
-            {groupedLibrary.length === 0 ? (
-              <Text style={styles.pickerEmpty}>
-                {library.length === 0
-                  ? 'Exercise library unavailable — check your connection.'
-                  : 'No exercises match your search.'}
-              </Text>
-            ) : (
-              groupedLibrary.map((group) => (
-                <View key={group.muscleGroup}>
-                  <Text style={styles.pickerGroupLabel}>{group.muscleGroup.toUpperCase()}</Text>
-                  {group.exercises.map((exercise) => (
-                    <TouchableOpacity
-                      key={exercise.id}
-                      style={styles.pickerRow}
-                      onPress={() => handleAddExercise(exercise)}
-                      accessibilityRole="button"
-                      accessibilityLabel={`Add ${exercise.name}`}
-                    >
-                      <Text style={styles.pickerRowText}>{exercise.name}</Text>
-                      <Text style={styles.pickerRowAdd}>+</Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              ))
-            )}
-          </ScrollView>
-        </SafeAreaView>
-      </Modal>
+      {exercisePickerModal}
     </SafeAreaView>
   );
 }
@@ -964,6 +1139,65 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
 
+  // Preview (template picker + muscle diagram, before warm-up)
+  previewHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.border,
+  },
+  previewTitleBlock: { gap: 2 },
+  previewEyebrow: { fontSize: 10, fontWeight: '700', color: Colors.teal, letterSpacing: 1 },
+  previewTitle: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
+  previewScroll: { padding: 20, gap: 14, paddingBottom: 24 },
+  templateChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  templateChip: {
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 18,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    backgroundColor: Colors.bgCard,
+  },
+  templateChipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+  templateChipText: { fontSize: 13, fontWeight: '700', color: Colors.textSecondary },
+  templateChipTextActive: { color: Colors.teal },
+  previewSectionLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: Colors.textMuted,
+    letterSpacing: 1,
+    marginTop: 4,
+  },
+  previewEmptyCard: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 14,
+    padding: 16,
+  },
+  previewEmptyText: { fontSize: 13, color: Colors.textMuted, lineHeight: 19 },
+  previewExerciseList: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 14,
+    overflow: 'hidden',
+  },
+  previewExerciseRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    padding: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.border,
+  },
+  previewExerciseRowLast: { borderBottomWidth: 0 },
+  previewExerciseName: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
+  previewExerciseMeta: { fontSize: 12, color: Colors.textMuted, marginTop: 2 },
+
   // Warmup
   warmupWrap: { padding: 24, gap: 14, paddingBottom: 48 },
   warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
@@ -1001,6 +1235,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  warmupStartBtnDisabled: { opacity: 0.45 },
+  warmupHint: { fontSize: 12, color: Colors.textMuted, textAlign: 'center', marginTop: -4 },
   skipWarmupText: {
     fontSize: 13,
     color: Colors.textMuted,

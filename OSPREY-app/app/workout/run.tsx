@@ -69,6 +69,7 @@ export default function RunWorkoutScreen() {
   const [warmingUp, setWarmingUp] = useState(true);
   const [warmupDrills] = useState<WarmupDrill[]>(() => generateWarmup('run'));
   const [checkedDrills, setCheckedDrills] = useState<Set<number>>(new Set());
+  const allDrillsChecked = warmupDrills.length > 0 && checkedDrills.size === warmupDrills.length;
   const coachingStateRef = useRef<CoachingState>(makeCoachingState());
   const speakingRef = useRef(false);
   const { isPlus } = useSubscription();
@@ -289,13 +290,18 @@ export default function RunWorkoutScreen() {
             </TouchableOpacity>
           ))}
           <TouchableOpacity
-            style={[styles.primaryBtn, { flex: undefined, marginTop: 8 }]}
+            style={[styles.primaryBtn, { flex: undefined, marginTop: 8 }, !allDrillsChecked && styles.primaryBtnDisabled]}
             onPress={handleStartAfterWarmup}
+            disabled={!allDrillsChecked}
             accessibilityRole="button"
             accessibilityLabel="Start run"
+            accessibilityState={{ disabled: !allDrillsChecked }}
           >
             <Text style={styles.primaryBtnText}>Start Run →</Text>
           </TouchableOpacity>
+          {!allDrillsChecked ? (
+            <Text style={styles.warmupHint}>Check off each drill to start the run.</Text>
+          ) : null}
           <TouchableOpacity
             onPress={handleStartAfterWarmup}
             accessibilityRole="button"
@@ -588,6 +594,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   primaryBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
+  primaryBtnDisabled: { opacity: 0.45 },
+  warmupHint: { fontSize: 12, color: Colors.textMuted, textAlign: 'center', marginTop: -4 },
   warmupWrap: { flex: 1, padding: 24, gap: 14 },
   warmupTitle: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
   warmupSubtitle: { fontSize: 13, color: Colors.textMuted, lineHeight: 18, marginBottom: 6 },

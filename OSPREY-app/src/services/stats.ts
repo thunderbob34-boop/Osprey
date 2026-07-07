@@ -70,7 +70,7 @@ export async function fetchStats(userId: string): Promise<StatsData> {
     ([weekStartIso, bucket]) => {
       const hoursBySport: Partial<Record<SportType, number>> = {};
       let totalHours = 0;
-      for (const [sport, v] of Object.entries(bucket) as Array<[SportType, { hours: number; km: number }]>) {
+      for (const [sport, v] of Object.entries(bucket) as [SportType, { hours: number; km: number }][]) {
         hoursBySport[sport] = round1(v.hours);
         totalHours += v.hours;
       }

@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import type { IntervalPrescription, LiftPrescription } from '@/types/workout';
 
 export type SwappableSessionType = 'run' | 'lift' | 'cross' | 'rest';
 
@@ -70,6 +71,19 @@ export interface WeekSession {
   planned_minutes: number | null;
   planned_distance_km: number | null;
   description: string;
+  ozzie_notes: string | null;
+  lift_prescription: LiftPrescription | null;
+  interval_prescription: IntervalPrescription | null;
+}
+
+function isValidLiftPrescription(value: unknown): value is LiftPrescription {
+  const exercises = (value as { exercises?: unknown } | null)?.exercises;
+  return Array.isArray(exercises) && exercises.length > 0;
+}
+
+function isValidIntervalPrescription(value: unknown): value is IntervalPrescription {
+  const segments = (value as { segments?: unknown } | null)?.segments;
+  return Array.isArray(segments) && segments.length > 0;
 }
 
 /** Monday-start date (YYYY-MM-DD) of the current calendar week. */
@@ -100,12 +114,20 @@ export async function fetchCurrentWeekSessions(userId: string): Promise<WeekSess
 
   const { data: sessions, error: sessionsError } = await supabase
     .from('training_sessions')
-    .select('id, session_date, session_type, intensity, planned_minutes, planned_distance_km, description')
+    .select(
+      'id, session_date, session_type, intensity, planned_minutes, planned_distance_km, description, ozzie_notes, lift_prescription, interval_prescription',
+    )
     .eq('week_id', week.id)
     .order('session_date', { ascending: true });
 
   if (sessionsError) throw sessionsError;
-  return (sessions ?? []) as WeekSession[];
+  return (sessions ?? []).map((row) => ({
+    ...row,
+    lift_prescription: isValidLiftPrescription(row.lift_prescription) ? row.lift_prescription : null,
+    interval_prescription: isValidIntervalPrescription(row.interval_prescription)
+      ? row.interval_prescription
+      : null,
+  })) as WeekSession[];
 }
 
 const SWAP_DESCRIPTIONS: Record<SwappableSessionType, string> = {

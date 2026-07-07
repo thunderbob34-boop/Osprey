@@ -144,7 +144,7 @@ export function deriveWeatherCoach(
     severity = 'caution';
     const day = dayName(hotDay.date, todayIso);
     headline = `${hotDay.tempMaxF}° ${day} — start hydrating now`;
-    detail = `Heat performance is won 48 hours early: add ~20 oz of fluids and a pinch of salt to today and tomorrow. Plan ${day}'s session early morning, shaded, or indoors.`;
+    detail = `Heat performance is won 48 hours early: add ~20 oz of fluids with electrolytes (sports drink, electrolyte mix, or a salt tablet) to today and tomorrow. Plan ${day}'s session early morning, shaded, or indoors.`;
   } else if (warmDay && warmDay.date === todayIso) {
     // Warm (85-92°) today — not alert-tier, but worth timing and fluids.
     severity = 'caution';

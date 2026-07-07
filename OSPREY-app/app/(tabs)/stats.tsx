@@ -19,6 +19,8 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { useLiftAnalytics } from '@/hooks/useLiftAnalytics';
 import { formatRaceTimeSec } from '@/services/performance';
 import { kgToLb } from '@/services/body-metrics';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { formatDistanceKm, milesToKm, type UnitSystem } from '@/services/units';
 import type { SportType } from '@/types/stats';
 
 const SESSION_ICON: Record<string, string> = {
@@ -57,6 +59,11 @@ function formatSessionType(type: string): string {
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString([], { month: 'short', day: 'numeric' });
+}
+
+/** Raw numeric weight in the display unit — for chart plotting, not text. */
+function toDisplayWeight(kg: number, units: UnitSystem): number {
+  return units === 'metric' ? kg : kgToLb(kg);
 }
 
 // ── Fitness chart (CTL/ATL line chart) ───────────────────────────────────────
@@ -178,6 +185,7 @@ export default function StatsTab() {
   const { isPlus } = useSubscription();
   const { data: perf, isLoading: perfLoading } = usePerformance();
   const { data: liftStats } = useLiftAnalytics();
+  const { units } = useUnitPreference();
   const deleteWorkoutLog = useDeleteWorkoutLog();
 
   function handleDeleteWorkout(id: string, label: string) {
@@ -248,7 +256,11 @@ export default function StatsTab() {
           <>
             <View style={styles.statsRow}>
               <StatBlock label="WORKOUTS" value={`${data?.totalWorkouts30d ?? 0}`} sub="Last 30 days" />
-              <StatBlock label="DISTANCE" value={`${data?.totalMiles30d ?? 0} mi`} sub="Last 30 days" />
+              <StatBlock
+                label="DISTANCE"
+                value={formatDistanceKm(milesToKm(data?.totalMiles30d ?? 0), units)}
+                sub="Last 30 days"
+              />
               <StatBlock
                 label="TIME"
                 value={`${Math.round((data?.totalMinutes30d ?? 0) / 60)} hr`}
@@ -268,7 +280,7 @@ export default function StatsTab() {
                       />
                       <Text style={styles.sportLegendText}>
                         {SPORT_LABEL[total.sessionType]} · {total.hours}h
-                        {total.miles != null ? ` · ${total.miles} mi` : ''}
+                        {total.miles != null ? ` · ${formatDistanceKm(milesToKm(total.miles), units)}` : ''}
                       </Text>
                     </View>
                   ))}
@@ -432,7 +444,8 @@ export default function StatsTab() {
                 <View style={styles.liftCard}>
                   <View style={styles.liftVolumeRow}>
                     <Text style={styles.liftVolumeValue}>
-                      {Math.round(kgToLb(liftStats.weekVolumeKg)).toLocaleString()} lbs
+                      {Math.round(toDisplayWeight(liftStats.weekVolumeKg, units)).toLocaleString()}{' '}
+                      {units === 'metric' ? 'kg' : 'lbs'}
                     </Text>
                     <Text style={styles.liftVolumeSub}>moved this week</Text>
                   </View>
@@ -453,7 +466,7 @@ export default function StatsTab() {
                       </Text>
                       <View style={styles.svgWrap}>
                         <E1rmChart
-                          points={liftStats.primaryLift.trend.map((p) => kgToLb(p.e1rmKg))}
+                          points={liftStats.primaryLift.trend.map((p) => toDisplayWeight(p.e1rmKg, units))}
                         />
                       </View>
                     </>
@@ -474,7 +487,9 @@ export default function StatsTab() {
                             Est. 1RM · {new Date(pr.achievedOn).toLocaleDateString([], { month: 'short', day: 'numeric' })}
                           </Text>
                         </View>
-                        <Text style={styles.prValue}>{Math.round(kgToLb(pr.bestE1rmKg))} lbs</Text>
+                        <Text style={styles.prValue}>
+                          {Math.round(toDisplayWeight(pr.bestE1rmKg, units))} {units === 'metric' ? 'kg' : 'lbs'}
+                        </Text>
                       </View>
                     ))}
                   </View>
@@ -498,7 +513,7 @@ export default function StatsTab() {
                       <Text style={styles.workoutType}>{formatSessionType(w.sessionType)}</Text>
                       <Text style={styles.workoutMeta}>
                         {formatDate(w.startedAt)} · {w.durationMinutes} min
-                        {w.distanceMiles ? ` · ${w.distanceMiles} mi` : ''}
+                        {w.distanceMiles ? ` · ${formatDistanceKm(milesToKm(w.distanceMiles), units)}` : ''}
                       </Text>
                     </View>
                     <TouchableOpacity
@@ -554,7 +569,7 @@ const styles = StyleSheet.create({
   scrollContent: { padding: 28, paddingBottom: 48 },
   title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 4 },
   subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, marginBottom: 16 },
-  navChipRow: { flexDirection: 'row', gap: 8, marginBottom: 20 },
+  navChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 20 },
   navChip: {
     flexDirection: 'row',
     alignItems: 'center',

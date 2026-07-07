@@ -12,11 +12,18 @@ import {
   Alert,
 } from 'react-native';
 import * as AppleAuthentication from 'expo-apple-authentication';
-import * as WebBrowser from 'expo-web-browser';
 import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
 
-WebBrowser.maybeCompleteAuthSession();
+// Initialize WebBrowser only if available (not in dev builds without native modules)
+try {
+  const WebBrowser = require('expo-web-browser');
+  if (WebBrowser?.maybeCompleteAuthSession) {
+    WebBrowser.maybeCompleteAuthSession();
+  }
+} catch {
+  // Module not available — continue without it
+}
 
 type Mode = 'signin' | 'signup';
 

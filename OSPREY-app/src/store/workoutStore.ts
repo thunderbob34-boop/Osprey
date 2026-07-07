@@ -46,13 +46,16 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
   ...INITIAL_STATE,
 
   startWorkout: (type, sessionId = null) =>
-    set({
+    set((state) => ({
       ...INITIAL_STATE,
       workoutType: type,
       status: 'active',
       startedAt: Date.now(),
       sessionId,
-    }),
+      // lift.tsx populates liftExercises (prescribed or default) while the
+      // warm-up screen is showing, before this fires — don't clobber it.
+      liftExercises: state.liftExercises,
+    })),
 
   pauseWorkout: () => {
     const { status, pausedAt } = get();

@@ -5,7 +5,6 @@ import DailySummaryScreen from '@/screens/DailySummary';
 import BuildPlanBanner from '@/components/BuildPlanBanner';
 import DeloadSuggestionCard from '@/components/DeloadSuggestionCard';
 import WeatherCoachCard from '@/components/WeatherCoachCard';
-import HydrationCard from '@/components/HydrationCard';
 import { useDailySummary } from '@/hooks/useDailySummary';
 import { useWeatherCoach } from '@/hooks/useWeatherCoach';
 import { useSavedRoutes } from '@/hooks/useSavedRoutes';
@@ -115,33 +114,25 @@ export default function HomeTab() {
       userName={data?.userName}
       recovery={data?.recovery}
       session={data?.session}
-      weekMiles={data?.weekMiles}
-      weekTarget={data?.weekTarget}
+      weekDistanceKm={data?.weekDistanceKm}
+      weekTargetKm={data?.weekTargetKm}
       habitTip={data?.habitTip}
       quickStats={data?.quickStats}
       trainingReadiness={isPlus ? (perf?.trainingReadiness ?? null) : null}
       onActivityPress={() => router.push('/activity')}
+      onOzziePress={() => router.push('/ask-ozzie')}
       onViewWeekPress={() => router.push('/plan-preview')}
+      hydration={hydration}
+      onAddHydration={(oz) => addHydration.mutate(oz)}
+      hydrationEmphasized={weatherCoach?.severity === 'alert'}
       weatherCard={
-        weatherCoach || hydration ? (
-          <>
-            {weatherCoach ? (
-              <WeatherCoachCard
-                weather={weatherCoach}
-                onMoveIndoors={hasPlan ? handleMoveIndoors : undefined}
-                movingIndoors={moveIndoors.isPending}
-                alreadyIndoors={alreadyIndoors}
-              />
-            ) : null}
-            {hydration ? (
-              <HydrationCard
-                ounces={hydration.ounces}
-                targetOz={hydration.targetOz}
-                onAdd={(oz) => addHydration.mutate(oz)}
-                emphasized={weatherCoach?.severity === 'alert'}
-              />
-            ) : null}
-          </>
+        weatherCoach ? (
+          <WeatherCoachCard
+            weather={weatherCoach}
+            onMoveIndoors={hasPlan ? handleMoveIndoors : undefined}
+            movingIndoors={moveIndoors.isPending}
+            alreadyIndoors={alreadyIndoors}
+          />
         ) : undefined
       }
       headerBanner={

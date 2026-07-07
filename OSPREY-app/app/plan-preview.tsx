@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   SafeAreaView,
@@ -12,6 +12,15 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
+import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
+import { useHydration } from '@/hooks/useHydration';
+import { useWeatherCoach } from '@/hooks/useWeatherCoach';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { formatDistanceKm, formatPacePerUnit, kmToMiles, type UnitSystem } from '@/services/units';
+import { estimateDayMacros, type DayMacroEstimate } from '@/services/nutrition-estimate';
+import { totalIntervalDistanceM } from '@/services/intervals';
+import type { WeatherSeverity } from '@/services/weather-coach';
+import type { IntervalPrescription, LiftPrescription } from '@/types/workout';
 import {
   computeRacePhase,
   fetchCurrentWeekSessions,
@@ -28,36 +37,174 @@ interface SessionPreview {
   planned_minutes: number | null;
   planned_distance_km: number | null;
   description: string;
+  ozzie_notes?: string | null;
+  lift_prescription?: LiftPrescription | null;
+  interval_prescription?: IntervalPrescription | null;
 }
 
-function kmToMiles(km: number): number {
-  return km * 0.621371;
+// Keep in sync with HEAT_CAUTION_F in services/weather-coach.ts.
+const HEAT_CAUTION_F = 85;
+
+const INTENSITY_COLORS: Record<string, { bg: string; fg: string }> = {
+  easy: { bg: 'rgba(76,222,128,0.15)', fg: Colors.green },
+  moderate: { bg: 'rgba(245,166,35,0.15)', fg: Colors.amber },
+  threshold: { bg: 'rgba(245,166,35,0.15)', fg: Colors.amber },
+  interval: { bg: 'rgba(255,68,68,0.15)', fg: Colors.red },
+  race: { bg: 'rgba(255,68,68,0.15)', fg: Colors.red },
+  rest: { bg: 'rgba(255,255,255,0.08)', fg: Colors.textMuted },
+};
+
+const EFFORT_COLORS: Record<string, string> = {
+  easy: Colors.green,
+  moderate: Colors.teal,
+  threshold: Colors.amber,
+  hard: Colors.red,
+  max: Colors.red,
+};
+
+interface WeatherNote {
+  text: string;
+  severity: WeatherSeverity;
 }
 
-/** Distance line under the session description — miles for run/bike, yards for swim. */
-function formatDistance(session: SessionPreview): string | null {
+/** Distance line under the session description — respects the global unit; yards/meters for swim. */
+function formatDistance(session: SessionPreview, units: UnitSystem): string | null {
   if (session.planned_distance_km == null) return null;
   if (session.session_type === 'swim') {
-    const yards = Math.round(session.planned_distance_km * 1093.61);
-    return `${yards} yd`;
+    return units === 'metric'
+      ? `${Math.round(session.planned_distance_km * 1000)} m`
+      : `${Math.round(session.planned_distance_km * 1093.61)} yd`;
   }
   if (session.session_type === 'run' || session.session_type === 'race' || session.session_type === 'bike') {
-    const mi = kmToMiles(session.planned_distance_km);
-    return `${mi < 10 ? mi.toFixed(1) : Math.round(mi)} mi`;
+    return formatDistanceKm(session.planned_distance_km, units);
   }
   return null;
 }
 
-/** Target pace (min:sec / mi) — run sessions only, derived from distance + duration. */
-function formatPace(session: SessionPreview): string | null {
+/** Target pace — run sessions only, derived from distance + duration. */
+function formatPace(session: SessionPreview, units: UnitSystem): string | null {
   if (session.session_type !== 'run' && session.session_type !== 'race') return null;
   if (!session.planned_distance_km || !session.planned_minutes) return null;
-  const miles = kmToMiles(session.planned_distance_km);
-  if (miles <= 0) return null;
-  const paceMinutes = session.planned_minutes / miles;
-  const min = Math.floor(paceMinutes);
-  const sec = Math.round((paceMinutes - min) * 60);
-  return `${min}:${String(sec).padStart(2, '0')}/mi`;
+  return formatPacePerUnit(session.planned_minutes * 60, session.planned_distance_km, units);
+}
+
+interface SessionDetailPanelProps {
+  session: SessionPreview;
+  isViewOnly: boolean;
+  macros: DayMacroEstimate | null;
+  hydrationTargetOz: number | null;
+  weatherNote: WeatherNote | null;
+  isLast: boolean;
+}
+
+function SessionDetailPanel({
+  session,
+  isViewOnly,
+  macros,
+  hydrationTargetOz,
+  weatherNote,
+  isLast,
+}: SessionDetailPanelProps) {
+  const intensityColor = INTENSITY_COLORS[session.intensity];
+  const totalDistanceM = session.interval_prescription
+    ? totalIntervalDistanceM(session.interval_prescription)
+    : null;
+
+  return (
+    <View style={[styles.detailPanel, !isLast && styles.detailPanelDivider]}>
+      {/* ── Workout ── */}
+      <View style={styles.detailSection}>
+        <Text style={styles.detailSectionLabel}>WORKOUT</Text>
+        <View style={styles.detailMetaRow}>
+          <View style={[styles.intensityChip, intensityColor && { backgroundColor: intensityColor.bg }]}>
+            <Text style={[styles.intensityChipText, intensityColor && { color: intensityColor.fg }]}>
+              {session.intensity}
+            </Text>
+          </View>
+          {session.planned_minutes ? (
+            <Text style={styles.detailMetaText}>{session.planned_minutes} min</Text>
+          ) : null}
+          {totalDistanceM ? (
+            <Text style={styles.detailMetaText}>{Math.round(totalDistanceM)} m total</Text>
+          ) : null}
+        </View>
+
+        {session.lift_prescription ? (
+          <View style={styles.exerciseList}>
+            {session.lift_prescription.exercises.map((exercise, i) => (
+              <View key={`${exercise.name}-${i}`} style={styles.exerciseRow}>
+                <View style={styles.exerciseNameRow}>
+                  <Text style={styles.exerciseName}>{exercise.name}</Text>
+                  <Text style={styles.exerciseMeta}>
+                    {exercise.sets}×{exercise.reps}
+                  </Text>
+                </View>
+                {exercise.note ? <Text style={styles.exerciseNote}>{exercise.note}</Text> : null}
+              </View>
+            ))}
+          </View>
+        ) : null}
+
+        {session.interval_prescription ? (
+          <View style={styles.segmentList}>
+            {session.interval_prescription.segments.map((segment, i) => (
+              <View key={`${segment.label}-${i}`} style={styles.segmentRow}>
+                <Text style={styles.segmentReps}>{segment.reps}×</Text>
+                <Text style={styles.segmentLabel}>{segment.label}</Text>
+                <Text style={[styles.segmentEffort, { color: EFFORT_COLORS[segment.effort] ?? Colors.textMuted }]}>
+                  {segment.effort}
+                </Text>
+                {segment.restS > 0 ? <Text style={styles.segmentRest}>{segment.restS}s rest</Text> : null}
+              </View>
+            ))}
+          </View>
+        ) : null}
+      </View>
+
+      {/* ── Why ── */}
+      {session.ozzie_notes ? (
+        <View style={styles.detailSection}>
+          <Text style={styles.detailSectionLabel}>WHY THIS SESSION</Text>
+          <Text style={styles.detailBodyText}>{session.ozzie_notes}</Text>
+        </View>
+      ) : null}
+
+      {/* ── Fuel & Hydration ── */}
+      {isViewOnly && macros ? (
+        <View style={styles.detailSection}>
+          <Text style={styles.detailSectionLabel}>FUEL &amp; HYDRATION</Text>
+          <View style={styles.macroGrid}>
+            <View style={styles.macroItem}>
+              <Text style={styles.macroValue}>{macros.proteinG}g</Text>
+              <Text style={styles.macroLabel}>Protein</Text>
+            </View>
+            <View style={styles.macroItem}>
+              <Text style={styles.macroValue}>{macros.carbsG}g</Text>
+              <Text style={styles.macroLabel}>Carbs</Text>
+            </View>
+            <View style={styles.macroItem}>
+              <Text style={styles.macroValue}>{macros.fatG}g</Text>
+              <Text style={styles.macroLabel}>Fat</Text>
+            </View>
+            <View style={styles.macroItem}>
+              <Text style={styles.macroValue}>{macros.calories.toLocaleString()}</Text>
+              <Text style={styles.macroLabel}>{macros.isExact ? 'Calories' : 'Calories (est.)'}</Text>
+            </View>
+          </View>
+          {hydrationTargetOz != null ? (
+            <Text style={styles.hydrationLine}>💧 {hydrationTargetOz} oz water target</Text>
+          ) : null}
+        </View>
+      ) : null}
+
+      {/* ── Anything else ── */}
+      {weatherNote ? (
+        <Text style={[styles.heatNote, weatherNote.severity === 'alert' && styles.heatNoteAlert]}>
+          {weatherNote.severity === 'alert' ? '🔴' : '⚠️'} {weatherNote.text}
+        </Text>
+      ) : null}
+    </View>
+  );
 }
 
 export default function PlanPreviewScreen() {
@@ -73,6 +220,12 @@ export default function PlanPreviewScreen() {
   const [loading, setLoading] = useState(isViewOnly);
   const [loadError, setLoadError] = useState(false);
   const [raceGoal, setRaceGoal] = useState<RaceGoal | null>(null);
+  const [expandedDate, setExpandedDate] = useState<string | null>(null);
+
+  const { data: nutritionCoaching } = useNutritionCoaching();
+  const { data: hydration } = useHydration();
+  const { data: weatherCoach } = useWeatherCoach(nutritionCoaching?.todaySessionType ?? null);
+  const { units } = useUnitPreference();
 
   useEffect(() => {
     if (!isViewOnly || !userId) return;
@@ -143,10 +296,10 @@ export default function PlanPreviewScreen() {
 
   const totalSessions = sessions.filter((s) => s.session_type !== 'rest').length;
   const totalMinutes = sessions.reduce((sum, s) => sum + (s.planned_minutes ?? 0), 0);
-  const totalMiles = sessions.reduce((sum, s) => {
+  const totalDistanceKm = sessions.reduce((sum, s) => {
     if (!s.planned_distance_km) return sum;
     if (s.session_type !== 'run' && s.session_type !== 'race' && s.session_type !== 'bike') return sum;
-    return sum + kmToMiles(s.planned_distance_km);
+    return sum + s.planned_distance_km;
   }, 0);
 
   const SESSION_ICONS: Record<string, string> = {
@@ -157,6 +310,46 @@ export default function PlanPreviewScreen() {
     cross: '🔁',
     rest: '😴',
   };
+
+  const todayIso = useMemo(() => new Date().toISOString().slice(0, 10), []);
+  const tomorrowIso = useMemo(() => {
+    const d = new Date(`${todayIso}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() + 1);
+    return d.toISOString().slice(0, 10);
+  }, [todayIso]);
+  const todaySession = useMemo(
+    () => sessions.find((s) => s.session_date === todayIso) ?? null,
+    [sessions, todayIso],
+  );
+
+  function macrosForSession(session: SessionPreview): DayMacroEstimate | null {
+    if (!nutritionCoaching?.target) return null;
+    if (session.session_date === todayIso) {
+      return { ...nutritionCoaching.target, isExact: true };
+    }
+    return estimateDayMacros(
+      nutritionCoaching.target,
+      todaySession?.session_type ?? null,
+      todaySession?.planned_minutes ?? null,
+      session.session_type,
+      session.planned_minutes,
+    );
+  }
+
+  function weatherNoteForDate(dateIso: string): WeatherNote | null {
+    if (!weatherCoach) return null;
+    if (dateIso === todayIso) {
+      if (weatherCoach.severity === 'info') return null;
+      return { text: weatherCoach.headline, severity: weatherCoach.severity };
+    }
+    if (dateIso === tomorrowIso && weatherCoach.tomorrow && weatherCoach.tomorrow.maxF >= HEAT_CAUTION_F) {
+      return {
+        text: `${Math.round(weatherCoach.tomorrow.maxF)}° tomorrow — start hydrating early.`,
+        severity: 'caution',
+      };
+    }
+    return null;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -253,8 +446,12 @@ export default function PlanPreviewScreen() {
                   <Text style={styles.summaryName}>Sessions</Text>
                 </View>
                 <View style={styles.summaryItem}>
-                  <Text style={styles.summaryValue}>{totalMiles > 0 ? totalMiles.toFixed(1) : '0'}</Text>
-                  <Text style={styles.summaryName}>Miles</Text>
+                  <Text style={styles.summaryValue}>
+                    {totalDistanceKm > 0
+                      ? (units === 'metric' ? totalDistanceKm : kmToMiles(totalDistanceKm)).toFixed(1)
+                      : '0'}
+                  </Text>
+                  <Text style={styles.summaryName}>{units === 'metric' ? 'Km' : 'Miles'}</Text>
                 </View>
                 <View style={styles.summaryItem}>
                   <Text style={styles.summaryValue}>{Math.round(totalMinutes / 60)}</Text>
@@ -277,34 +474,54 @@ export default function PlanPreviewScreen() {
                 const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
                 const dayOfWeek = idx; // sessions are in order Mon-Sun
                 const dayName = dayNames[dayOfWeek] ?? `Day ${dayOfWeek}`;
-                const distance = formatDistance(session);
-                const pace = formatPace(session);
+                const distance = formatDistance(session, units);
+                const pace = formatPace(session, units);
+                const isExpanded = expandedDate === session.session_date;
+                const isLast = idx === sessions.length - 1;
 
                 return (
-                  <View
-                    key={`${session.session_date}-${idx}`}
-                    style={[
-                      styles.sessionRow,
-                      idx < sessions.length - 1 && { borderBottomWidth: 1, borderBottomColor: Colors.border },
-                    ]}
-                  >
-                    <View style={styles.sessionLeft}>
-                      <Text style={styles.dayName}>{dayName}</Text>
-                      <Text style={styles.sessionDesc}>{session.description}</Text>
-                      {distance ? (
-                        <Text style={styles.sessionDistance}>
-                          {distance}
-                          {pace ? ` · ${pace}` : ''}
-                        </Text>
-                      ) : null}
-                    </View>
-                    <View style={styles.sessionRight}>
-                      <Text style={styles.sessionIcon}>{SESSION_ICONS[session.session_type] ?? '○'}</Text>
-                      {session.planned_minutes ? (
-                        <Text style={styles.sessionTime}>{session.planned_minutes}m</Text>
-                      ) : null}
-                    </View>
-                  </View>
+                  <Fragment key={`${session.session_date}-${idx}`}>
+                    <TouchableOpacity
+                      style={[
+                        styles.sessionRow,
+                        !isLast && !isExpanded && { borderBottomWidth: 1, borderBottomColor: Colors.border },
+                      ]}
+                      onPress={() =>
+                        setExpandedDate((d) => (d === session.session_date ? null : session.session_date))
+                      }
+                      accessibilityRole="button"
+                      accessibilityLabel={`${isExpanded ? 'Hide' : 'Show'} details for ${dayName}`}
+                      accessibilityState={{ expanded: isExpanded }}
+                    >
+                      <View style={styles.sessionLeft}>
+                        <Text style={styles.dayName}>{dayName}</Text>
+                        <Text style={styles.sessionDesc}>{session.description}</Text>
+                        {distance ? (
+                          <Text style={styles.sessionDistance}>
+                            {distance}
+                            {pace ? ` · ${pace}` : ''}
+                          </Text>
+                        ) : null}
+                      </View>
+                      <View style={styles.sessionRight}>
+                        <Text style={styles.sessionIcon}>{SESSION_ICONS[session.session_type] ?? '○'}</Text>
+                        {session.planned_minutes ? (
+                          <Text style={styles.sessionTime}>{session.planned_minutes}m</Text>
+                        ) : null}
+                        <Text style={styles.chevron}>{isExpanded ? '▾' : '▸'}</Text>
+                      </View>
+                    </TouchableOpacity>
+                    {isExpanded ? (
+                      <SessionDetailPanel
+                        session={session}
+                        isViewOnly={isViewOnly}
+                        macros={macrosForSession(session)}
+                        hydrationTargetOz={isViewOnly ? hydration?.targetOz ?? null : null}
+                        weatherNote={weatherNoteForDate(session.session_date)}
+                        isLast={isLast}
+                      />
+                    ) : null}
+                  </Fragment>
                 );
               })}
             </View>
@@ -486,4 +703,56 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   homeBtnText: { fontSize: 16, fontWeight: '800', color: '#000' },
+
+  // ── Expandable day panel ──
+  chevron: { fontSize: 12, color: Colors.textMuted, marginTop: 2 },
+  detailPanel: {
+    backgroundColor: Colors.bgCard,
+    borderTopWidth: 1,
+    borderTopColor: Colors.borderTeal,
+    padding: 16,
+    gap: 14,
+  },
+  detailPanelDivider: { borderBottomWidth: 1, borderBottomColor: Colors.border },
+  detailSection: { gap: 8 },
+  detailSectionLabel: { color: Colors.teal, fontSize: 10, fontWeight: '800', letterSpacing: 1 },
+  detailBodyText: { color: Colors.textPrimary, fontSize: 14, lineHeight: 21 },
+  detailMetaRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  detailMetaText: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
+  intensityChip: {
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  intensityChipText: { fontSize: 11, fontWeight: '700', color: Colors.textPrimary, textTransform: 'capitalize' },
+
+  exerciseList: { gap: 10, marginTop: 4 },
+  exerciseRow: { gap: 2 },
+  exerciseNameRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  exerciseName: { fontSize: 13, fontWeight: '700', color: Colors.textPrimary, flexShrink: 1 },
+  exerciseMeta: { fontSize: 12, fontWeight: '700', color: Colors.teal },
+  exerciseNote: { fontSize: 11, color: Colors.textMuted, fontStyle: 'italic' },
+
+  segmentList: { gap: 8, marginTop: 4 },
+  segmentRow: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
+  segmentReps: { fontSize: 12, fontWeight: '800', color: Colors.textPrimary },
+  segmentLabel: { fontSize: 12, color: Colors.textPrimary, flexShrink: 1 },
+  segmentEffort: { fontSize: 11, fontWeight: '700', textTransform: 'uppercase' },
+  segmentRest: { fontSize: 11, color: Colors.textMuted },
+
+  macroGrid: { flexDirection: 'row', gap: 8 },
+  macroItem: {
+    flex: 1,
+    backgroundColor: 'rgba(0,200,200,0.1)',
+    borderRadius: 10,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  macroValue: { fontSize: 16, fontWeight: '900', color: Colors.teal },
+  macroLabel: { fontSize: 10, color: Colors.textMuted, marginTop: 2, textAlign: 'center' },
+  hydrationLine: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
+
+  heatNote: { fontSize: 12, color: Colors.amber, fontWeight: '600', lineHeight: 17 },
+  heatNoteAlert: { color: Colors.red },
 });

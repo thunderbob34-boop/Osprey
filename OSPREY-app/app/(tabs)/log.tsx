@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import Svg, { Polyline } from 'react-native-svg';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
@@ -25,6 +26,7 @@ import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import { useHydration } from '@/hooks/useHydration';
 import { useWeightLog } from '@/hooks/useWeightLog';
 import { kgToLb, lbToKg } from '@/services/body-metrics';
+import { formatWeightKg, kmToMiles, milesToKm } from '@/services/units';
 import { estimateMealFromPhoto } from '@/services/meal-photo';
 
 const WORKOUT_TYPES: { value: QuickWorkoutType; label: string }[] = [
@@ -47,6 +49,46 @@ function formatSessionType(type: string): string {
 
 function formatTime(iso: string): string {
   return new Date(iso).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+}
+
+function formatShortDate(dateString: string): string {
+  return new Date(dateString).toLocaleDateString([], { month: 'short', day: 'numeric' });
+}
+
+// ── Weight trend sparkline ────────────────────────────────────────────────
+const WEIGHT_CHART_W = 320;
+const WEIGHT_CHART_H = 90;
+const WEIGHT_CHART_PAD = { t: 8, b: 8, l: 4, r: 4 };
+
+function WeightChart({ points }: { points: number[] }) {
+  if (points.length < 2) return null;
+
+  const maxVal = Math.max(...points);
+  const minVal = Math.min(...points);
+  const range = Math.max(0.1, maxVal - minVal);
+  const innerW = WEIGHT_CHART_W - WEIGHT_CHART_PAD.l - WEIGHT_CHART_PAD.r;
+  const innerH = WEIGHT_CHART_H - WEIGHT_CHART_PAD.t - WEIGHT_CHART_PAD.b;
+
+  const coords = points
+    .map((v, i) => {
+      const x = WEIGHT_CHART_PAD.l + (i / (points.length - 1)) * innerW;
+      const y = WEIGHT_CHART_PAD.t + innerH - ((v - minVal) / range) * innerH;
+      return `${x},${y}`;
+    })
+    .join(' ');
+
+  return (
+    <Svg width={WEIGHT_CHART_W} height={WEIGHT_CHART_H} viewBox={`0 0 ${WEIGHT_CHART_W} ${WEIGHT_CHART_H}`}>
+      <Polyline
+        points={coords}
+        fill="none"
+        stroke={Colors.teal}
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
 }
 
 function getErrorMessage(err: unknown): string {
@@ -73,7 +115,7 @@ export default function LogTab() {
   const { data: recentMeals } = useRecentMeals();
   const { data: nutrition } = useNutritionCoaching();
   const { data: hydration, add: addHydration } = useHydration();
-  const { data: weightSummary, log: logWeightMutation } = useWeightLog();
+  const { data: weightSummary, log: logWeightMutation, history: weightHistory } = useWeightLog();
   const [openSection, setOpenSection] = useState<'workout' | 'food' | 'weight' | null>(null);
   const [editingWorkoutId, setEditingWorkoutId] = useState<string | null>(null);
   const [editingFoodId, setEditingFoodId] = useState<string | null>(null);
@@ -109,16 +151,9 @@ export default function LogTab() {
 
   const { units: unitPreference } = useUnitPreference();
   const [weightInput, setWeightInput] = useState('');
-  const [weightUnit, setWeightUnit] = useState<'lb' | 'kg'>('lb');
-  const weightUnitTouched = useRef(false);
-
-  // Default the weight-logging unit to the account-wide preference (Settings
-  // → Units) until the user manually flips the chip in this session.
-  useEffect(() => {
-    if (!weightUnitTouched.current) {
-      setWeightUnit(unitPreference === 'metric' ? 'kg' : 'lb');
-    }
-  }, [unitPreference]);
+  // Weight/distance units always follow the account-wide preference (Settings
+  // → Units) — no per-screen override.
+  const weightUnit: 'lb' | 'kg' = unitPreference === 'metric' ? 'kg' : 'lb';
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
@@ -278,10 +313,16 @@ export default function LogTab() {
       setFieldErrors({ minutes: 'How many minutes was this workout?' });
       return;
     }
+    const enteredDistance = distance ? Number(distance) : undefined;
     const input = {
       sessionType: workoutType,
       minutes: mins,
-      distanceMiles: distance ? Number(distance) : undefined,
+      distanceMiles:
+        enteredDistance != null
+          ? unitPreference === 'metric'
+            ? kmToMiles(enteredDistance)
+            : enteredDistance
+          : undefined,
       notes: workoutNotes,
     };
     try {
@@ -302,7 +343,11 @@ export default function LogTab() {
     setEditingWorkoutId(w.id);
     setWorkoutType((w.sessionType as QuickWorkoutType) ?? 'run');
     setMinutes(String(w.durationMinutes));
-    setDistance(w.distanceMiles != null ? String(w.distanceMiles) : '');
+    setDistance(
+      w.distanceMiles != null
+        ? String(unitPreference === 'metric' ? Math.round(milesToKm(w.distanceMiles) * 100) / 100 : w.distanceMiles)
+        : '',
+    );
     setWorkoutNotes(w.notes ?? '');
     setOpenSection('workout');
   }
@@ -539,7 +584,13 @@ export default function LogTab() {
                         <Text style={styles.entryPrimary}>{formatSessionType(w.sessionType)}</Text>
                         <Text style={styles.entrySecondary}>
                           {w.durationMinutes} min
-                          {w.distanceMiles ? ` · ${w.distanceMiles} mi` : ''} · {formatTime(w.startedAt)}
+                          {w.distanceMiles
+                            ? ` · ${
+                                unitPreference === 'metric'
+                                  ? `${Math.round(milesToKm(w.distanceMiles) * 10) / 10} km`
+                                  : `${w.distanceMiles} mi`
+                              }`
+                            : ''} · {formatTime(w.startedAt)}
                         </Text>
                       </View>
                       <TouchableOpacity
@@ -645,7 +696,9 @@ export default function LogTab() {
                   <FieldError message={fieldErrors.minutes} />
                 </View>
                 <View style={styles.field}>
-                  <Text style={styles.fieldLabel}>DISTANCE (MI)</Text>
+                  <Text style={styles.fieldLabel}>
+                    DISTANCE ({unitPreference === 'metric' ? 'KM' : 'MI'})
+                  </Text>
                   <TextInput
                     style={styles.input}
                     keyboardType="decimal-pad"
@@ -653,7 +706,7 @@ export default function LogTab() {
                     placeholderTextColor={Colors.textMuted}
                     value={distance}
                     onChangeText={setDistance}
-                    accessibilityLabel="Distance in miles, optional"
+                    accessibilityLabel={`Distance in ${unitPreference === 'metric' ? 'kilometers' : 'miles'}, optional`}
                   />
                 </View>
               </View>
@@ -945,9 +998,9 @@ export default function LogTab() {
             <View style={styles.form}>
               {weightSummary?.latestKg != null ? (
                 <Text style={styles.weightSummaryText}>
-                  Last logged: {kgToLb(weightSummary.latestKg)} lb
+                  Last logged: {formatWeightKg(weightSummary.latestKg, unitPreference)}
                   {weightSummary.kgPerWeek != null && weightSummary.direction
-                    ? ` · ${weightSummary.direction} ${Math.abs(kgToLb(weightSummary.kgPerWeek))} lb/wk`
+                    ? ` · ${weightSummary.direction} ${formatWeightKg(Math.abs(weightSummary.kgPerWeek), unitPreference)}/wk`
                     : ''}
                 </Text>
               ) : (
@@ -956,23 +1009,20 @@ export default function LogTab() {
                 </Text>
               )}
 
-              <View style={styles.chipRow}>
-                {(['lb', 'kg'] as const).map((u) => (
-                  <TouchableOpacity
-                    key={u}
-                    style={[styles.chip, weightUnit === u && styles.chipActive]}
-                    onPress={() => {
-                      weightUnitTouched.current = true;
-                      setWeightUnit(u);
-                    }}
-                    accessibilityRole="button"
-                    accessibilityLabel={u}
-                    accessibilityState={{ selected: weightUnit === u }}
-                  >
-                    <Text style={[styles.chipText, weightUnit === u && styles.chipTextActive]}>{u}</Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
+              {weightHistory && weightHistory.length >= 2 ? (
+                <>
+                  <Text style={styles.fieldLabel}>WEIGHT TREND</Text>
+                  <View style={styles.svgWrap}>
+                    <WeightChart
+                      points={weightHistory.map((p) => (weightUnit === 'lb' ? kgToLb(p.kg) : p.kg))}
+                    />
+                  </View>
+                  <Text style={styles.chartDateRange}>
+                    {formatShortDate(weightHistory[0].recordedOn)} —{' '}
+                    {formatShortDate(weightHistory[weightHistory.length - 1].recordedOn)}
+                  </Text>
+                </>
+              ) : null}
 
               <Text style={styles.fieldLabel}>TODAY&apos;S WEIGHT ({weightUnit})</Text>
               <TextInput
@@ -1147,6 +1197,8 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     marginBottom: 4,
   },
+  svgWrap: { alignItems: 'center' },
+  chartDateRange: { fontSize: 9, color: Colors.textMuted, textAlign: 'right', marginTop: -4, marginBottom: 4 },
   inputError: {
     borderColor: Colors.red,
   },

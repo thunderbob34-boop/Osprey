@@ -1,10 +1,17 @@
 import { create } from 'zustand';
 import { Session, User } from '@supabase/supabase-js';
 import * as AppleAuthentication from 'expo-apple-authentication';
-import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri } from 'expo-auth-session';
 import { supabase } from '@/services/supabase';
 import { clearOfflineCache } from '@/services/offline-cache';
+
+// WebBrowser is optional — only available in native builds
+let WebBrowser: any = null;
+try {
+  WebBrowser = require('expo-web-browser');
+} catch {
+  // Module not available in development build; Google sign-in will be disabled
+}
 
 export interface UserProfile {
   id: string;
@@ -224,6 +231,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       });
       if (error || !data?.url) {
         return { error: error?.message ?? 'Could not start Google sign-in.' };
+      }
+
+      if (!WebBrowser?.openAuthSessionAsync) {
+        return { error: 'Google sign-in is not available in this build.' };
       }
 
       const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo);

@@ -25,3 +25,22 @@ export function formatDistanceKm(km: number, units: UnitSystem): string {
 export function formatWeightKg(kg: number, units: UnitSystem): string {
   return units === 'metric' ? `${Math.round(kg * 10) / 10} kg` : `${kgToLb(kg)} lbs`;
 }
+
+/** Canonical km↔mile converters — use these instead of a local constant/helper. */
+export function kmToMiles(km: number): number {
+  return km * KM_TO_MILES;
+}
+
+export function milesToKm(miles: number): number {
+  return miles / KM_TO_MILES;
+}
+
+/** "M:SS /mi" or "M:SS /km" from a total time + distance, honoring the global unit. */
+export function formatPacePerUnit(totalSeconds: number | null, km: number | null, units: UnitSystem): string | null {
+  if (!totalSeconds || !km || km <= 0) return null;
+  const distance = units === 'metric' ? km : kmToMiles(km);
+  const secPerUnit = totalSeconds / distance;
+  const min = Math.floor(secPerUnit / 60);
+  const sec = Math.round(secPerUnit % 60);
+  return `${min}:${String(sec).padStart(2, '0')} /${units === 'metric' ? 'km' : 'mi'}`;
+}

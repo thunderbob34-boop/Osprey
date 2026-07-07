@@ -24,12 +24,12 @@ export interface LiftExercise {
 
 /** Structured strength workout written by Ozzie on plan lift days. */
 export interface LiftPrescription {
-  exercises: Array<{
+  exercises: {
     name: string;
     sets: number;
     reps: string;
     note: string | null;
-  }>;
+  }[];
 }
 
 export type IntervalEffort = 'easy' | 'moderate' | 'threshold' | 'hard' | 'max';
@@ -59,8 +59,8 @@ export interface SavedWorkoutSummary {
 
 export interface WorkoutRecapData {
   workout: SavedWorkoutSummary;
-  splits: Array<{ mile: number; pace: string; durationS: number }>;
-  exercises: Array<{ name: string; sets: LiftSet[]; volumeLbs: number; isPr: boolean }>;
+  splits: { mile: number; pace: string; durationS: number }[];
+  exercises: { name: string; sets: LiftSet[]; volumeLbs: number; isPr: boolean }[];
   ozzieDebrief: string;
   hasPr: boolean;
 }
