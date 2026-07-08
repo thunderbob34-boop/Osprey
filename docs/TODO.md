@@ -10,6 +10,17 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 
 ---
 
+## 0. `osprey.app` is not an owned domain 🔴
+
+**Found 2026-07-10:** `osprey.app`'s nameservers are `dan.com` (a GoDaddy-owned domain marketplace/parking service) and the site redirects to `/lander` — a for-sale/parking page. **This domain has not been purchased.** It's referenced throughout the codebase and today's config as if it were live:
+- `src/constants/links.ts` — `PRIVACY_POLICY_URL`, `TERMS_OF_USE_URL`, `SUPPORT_EMAIL`
+- Supabase Auth Site URL (set to `https://osprey.app` 2026-07-10 — needs updating once a real domain exists)
+- Apple Sign In Services ID domain + return URL config (set 2026-07-10 — needs updating too)
+- Resend sending domain (`exports@osprey.app` default in `ozzie-data-export`) — see below
+- App Store Connect privacy policy URL (§2)
+
+**Action needed:** buy a domain (osprey.app or otherwise), then revisit every item above.
+
 ## 1. Backend go-live 🔴
 
 - [x] **Sync migration history first.** Verified 2026-07-10 via `supabase migration list` — local and remote are in lockstep for every migration `20260628000001` through `20260709000031` (and `...032` after it was applied). No repair needed.
@@ -18,11 +29,12 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 - [ ] Set secrets (Supabase → Edge Functions → Secrets):
   - [x] `OPENAI_API_KEY` — set 2026-07-05. Verify billing/credits are enabled on the OpenAI account (a key without billing 429s on every call).
   - [x] `ELEVENLABS_API_KEY` — confirmed set 2026-07-06 (verified via `supabase secrets list` 2026-07-10).
-  - [ ] `RESEND_API_KEY` + verified sending domain in Resend (data export emails); optionally `EXPORT_FROM_EMAIL` — **still not set**, confirmed missing 2026-07-10.
+  - [x] `RESEND_API_KEY` — set 2026-07-08. Created a Resend account + a "Sending access"-only key (not Full access — least privilege, since the edge function only calls `POST /emails`).
+    - [ ] **Not functional for real users yet** — no domain verified in Resend (see §0). Resend's fallback test sender (`onboarding@resend.dev`) can only email the account owner, not arbitrary app users, so data export emails won't actually reach anyone until a real domain is bought and verified. Once it is: add + verify it in Resend, and update `EXPORT_FROM_EMAIL` if the domain isn't `osprey.app`.
 - [ ] Supabase → Auth: enable Apple + Google providers.
   - [x] Add `osprey://auth-callback` redirect — added 2026-07-10 (Redirect URLs allow-list was empty before this).
-  - [x] Site URL — updated 2026-07-10 from the `http://localhost:3000` dev default to `https://osprey.app`.
-  - [x] Apple provider — **Enabled** 2026-07-10. Created Services ID `com.SillyGoose.OSPREY.signin` (domain `osprey.app`, return URL `https://jslbutpmgoushkzcghtg.supabase.co/auth/v1/callback`) and a Sign In with Apple key (Key ID `P54N2RM8UV`) in Apple Developer; Client IDs + generated ES256 client-secret JWT set in Supabase. **JWT expires 2027-01-07 — must regenerate before then** (Apple caps these at 6 months; Supabase's own banner warns web sign-in breaks otherwise).
+  - [x] Site URL — updated 2026-07-10 from the `http://localhost:3000` dev default to `https://osprey.app`. **⚠️ `osprey.app` isn't actually owned yet (see §0) — update this once a real domain exists.**
+  - [x] Apple provider — **Enabled** 2026-07-10. Created Services ID `com.SillyGoose.OSPREY.signin` (domain `osprey.app`, return URL `https://jslbutpmgoushkzcghtg.supabase.co/auth/v1/callback`) and a Sign In with Apple key (Key ID `P54N2RM8UV`) in Apple Developer; Client IDs + generated ES256 client-secret JWT set in Supabase. **JWT expires 2027-01-07 — must regenerate before then** (Apple caps these at 6 months; Supabase's own banner warns web sign-in breaks otherwise). **⚠️ Domain `osprey.app` isn't owned yet (see §0) — the Services ID's registered domain will need updating once a real domain exists.**
   - [ ] Google provider — confirmed **Disabled** in dashboard 2026-07-10. Needs a Google Cloud OAuth client ID/secret before it can be turned on. **Deferred** — user doesn't want to enable billing on a Google Cloud project yet.
 - [x] Verify RLS is enabled on all tables — checked 2026-07-10: 31/33 public tables have RLS on. The 2 without (`exercises`, `food_items`) are pure shared reference data with no `user_id` column, so that's correct as-is, not a gap.
   - [x] **Found + fixed in the same pass:** every public table granted `TRUNCATE` to `anon`/`authenticated` (RLS doesn't govern TRUNCATE at all, so this was the one thing those policies could never stop). Not reachable through the app's normal PostgREST path, but closed as defense-in-depth via migration `032_revoke_truncate_grants.sql`. Confirmed 0 tables left with the grant afterward.
@@ -53,7 +65,7 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 - [ ] Enable HealthKit capability.
 - [ ] Screenshots: 6.7", 6.5", 5.5".
 - [ ] Fill metadata from `metadata/` (name, subtitle, description, keywords, promo text, release notes). Age rating 4+.
-- [ ] Privacy policy URL live before review — `metadata/privacy-url.txt` is a placeholder; confirm `https://osprey.app/privacy` actually hosts `docs/privacy.html` and update `src/constants/links.ts` if not. Real support URL too.
+- [ ] Privacy policy URL live before review — **confirmed 2026-07-10 this is currently broken, see §0: `osprey.app` isn't owned.** `metadata/privacy-url.txt` is a placeholder; once a real domain exists, host `docs/privacy.html` there and update `src/constants/links.ts`. Real support URL too.
 - [ ] App Privacy declaration: Health & Fitness, Location, User Content, Identifiers; processors Supabase / OpenAI / ElevenLabs / RevenueCat.
 - [ ] Change owner display name from "Augustas Johnson" to company name before submission.
 - [ ] Add subscription metadata (blocks production review).
@@ -84,7 +96,7 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 - [ ] HealthKit: workouts write to Health; Apple Watch/Garmin import (existing users re-prompted for the new Workout read scope); no duplicates on re-sync.
 - [ ] Calendar blocking: "OSPREY: …" events appear; schedule-conflict note in brief.
 - [ ] Offline: airplane mode after one load → Home/Stats/Log render from cache.
-- [ ] Data export: button emails 5 CSVs (needs `RESEND_API_KEY`).
+- [ ] Data export: button emails 5 CSVs — `RESEND_API_KEY` is set, but blocked on a verified sending domain (see §0).
 - [ ] Units toggle: Log weight chip follows preference.
 - [ ] **Regression:** Performance Intelligence card (fitness/fatigue chart, injury risk, race predictor) renders for an OSPREY+ account — was silently broken by the `distance_meters` column bug, fixed Jul 3.
 
