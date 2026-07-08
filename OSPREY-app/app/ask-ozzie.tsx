@@ -1,17 +1,10 @@
-import { useState } from 'react';
 import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import ScreenHeader from '@/components/ScreenHeader';
 import OzzieMascot from '@/components/OzzieMascot';
@@ -19,63 +12,31 @@ import { useDailySummary } from '@/hooks/useDailySummary';
 
 export default function AskOzzieScreen() {
   const { data } = useDailySummary();
-  const [question, setQuestion] = useState('');
-
-  function handleSend() {
-    if (!question.trim()) return;
-    Alert.alert(
-      "Ozzie's still learning to chat",
-      "Two-way conversations with Ozzie are on the way. For now, check today's read below, or use “Why this session?” on the Home tab.",
-    );
-    setQuestion('');
-  }
 
   return (
     <SafeAreaView style={styles.container}>
       <ScreenHeader title="Ask Ozzie" />
 
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <ScrollView contentContainerStyle={styles.scroll}>
-          <View style={styles.mascotWrap}>
-            <OzzieMascot size={96} animated />
-          </View>
-
-          <Text style={styles.heading}>Today's read</Text>
-          <View style={styles.noteCard}>
-            <Text style={styles.noteText}>
-              {data?.session?.ozzieNote ?? "Ozzie is still crunching today's read."}
-            </Text>
-            {data?.session?.whyReasoning ? (
-              <Text style={styles.reasoningText}>{data.session.whyReasoning}</Text>
-            ) : null}
-          </View>
-
-          <Text style={styles.comingSoon}>
-            Full two-way chat with Ozzie is coming soon. In the meantime, drop a question below and
-            we'll let you know when it's live.
-          </Text>
-        </ScrollView>
-
-        <View style={styles.composeRow}>
-          <TextInput
-            style={styles.input}
-            value={question}
-            onChangeText={setQuestion}
-            placeholder="Ask Ozzie something..."
-            placeholderTextColor={Colors.textMuted}
-            returnKeyType="send"
-            onSubmitEditing={handleSend}
-          />
-          <TouchableOpacity
-            style={styles.sendBtn}
-            onPress={handleSend}
-            accessibilityRole="button"
-            accessibilityLabel="Send"
-          >
-            <Ionicons name="arrow-up" size={18} color="#000" />
-          </TouchableOpacity>
+      <ScrollView contentContainerStyle={styles.scroll}>
+        <View style={styles.mascotWrap}>
+          <OzzieMascot size={96} animated />
         </View>
-      </KeyboardAvoidingView>
+
+        <Text style={styles.heading}>Today's read</Text>
+        <View style={styles.noteCard}>
+          <Text style={styles.noteText}>
+            {data?.session?.ozzieNote ?? "Ozzie is still crunching today's read."}
+          </Text>
+          {data?.session?.whyReasoning ? (
+            <Text style={styles.reasoningText}>{data.session.whyReasoning}</Text>
+          ) : null}
+        </View>
+
+        <Text style={styles.comingSoon}>
+          Two-way conversations with Ozzie aren't live yet. In the meantime, tap "Why this
+          session?" on the Home tab for reasoning behind any specific workout.
+        </Text>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -113,32 +74,5 @@ const styles = StyleSheet.create({
     color: Colors.textMuted,
     lineHeight: 18,
     textAlign: 'center',
-  },
-  composeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: Colors.border,
-  },
-  input: {
-    flex: 1,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 22,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    color: Colors.textPrimary,
-    fontSize: 14,
-  },
-  sendBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: Colors.teal,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
