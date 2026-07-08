@@ -160,6 +160,34 @@ async function fetchDailyBrief(userId: string): Promise<DailyBrief> {
   };
 }
 
+/**
+ * Clears the cached daily brief so the next fetchDailyBrief() call
+ * regenerates fresh text instead of showing stale content. Needed whenever a
+ * session is adjusted (swap/compress/move-indoors) — those already write a
+ * fresh training_sessions.ozzie_notes, but mapSession() prefers the daily
+ * brief's text when one exists.
+ *
+ * Deliberately NOT date-filtered: the ozzie-daily-brief edge function decides
+ * whether a brief already "exists for today" using the *server's* midnight
+ * (Deno edge runtime, UTC), while fetchDailyBrief's read here uses the
+ * *device's* local midnight. For any user behind UTC, there's a multi-hour
+ * evening window where a brief generated in local-today already reads as
+ * "yesterday" to the server — the edge function then keeps re-serving it
+ * indefinitely since, by its own UTC-day check, one already exists. Since
+ * only the single most recent row is ever read (fetchDailyBrief orders by
+ * created_at desc, limit 1), deleting every row for this user unconditionally
+ * has no downside and sidesteps the timezone mismatch entirely.
+ */
+export async function invalidateTodayDailyBrief(userId: string): Promise<void> {
+  const { error } = await supabase
+    .from('ozzie_insights')
+    .delete()
+    .eq('user_id', userId)
+    .eq('insight_type', 'daily_brief');
+
+  if (error) throw error;
+}
+
 async function fetchMonthDistanceKm(userId: string): Promise<number> {
   const { data, error } = await supabase
     .from('workout_logs')

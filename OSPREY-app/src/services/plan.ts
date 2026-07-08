@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { invalidateTodayDailyBrief } from '@/services/daily-summary';
 import type { IntervalPrescription, LiftPrescription } from '@/types/workout';
 
 export type SwappableSessionType = 'run' | 'lift' | 'cross' | 'rest';
@@ -192,6 +193,10 @@ export async function swapTodaySession(
     adjusted_json: { session_type: newType, description: SWAP_DESCRIPTIONS[newType] },
     ozzie_reason: ozzieReason,
   });
+
+  // Otherwise today's cached daily brief (which describes the pre-swap
+  // session) keeps outranking the ozzie_notes we just set above.
+  await invalidateTodayDailyBrief(userId).catch(() => undefined);
 }
 
 const INDOOR_SUFFIX: Record<string, string> = {
@@ -228,6 +233,8 @@ export async function moveSessionIndoors(userId: string, sessionId: string): Pro
     .eq('user_id', userId);
 
   if (updateError) throw updateError;
+
+  await invalidateTodayDailyBrief(userId).catch(() => undefined);
 }
 
 /**
@@ -276,4 +283,6 @@ export async function compressTodaySession(
     adjusted_json: { planned_minutes: availableMinutes, planned_distance_km: newDistanceKm },
     ozzie_reason: `You compressed today's ${original.session_type} from ${originalMinutes} to ${availableMinutes} minutes.`,
   });
+
+  await invalidateTodayDailyBrief(userId).catch(() => undefined);
 }

@@ -22,21 +22,37 @@ export function useDailySummary() {
     staleTime: 60_000,
   });
 
+  // Swapping/compressing/moving today's session changes its type, duration,
+  // and intensity — all of which ozzie-nutrition-coach tailors its macro
+  // targets and copy to. Without this, NutritionCard keeps showing targets
+  // for the pre-adjustment session for up to its 5min staleTime (or longer
+  // offline, since withCache serves the last-good value on fetch failure).
+  const nutritionKey = ['nutrition-coaching', userId];
+
   const swapSession = useMutation({
     mutationFn: ({ sessionId, newType }: { sessionId: string; newType: SwappableSessionType }) =>
       swapTodaySession(userId!, sessionId, newType),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey: nutritionKey });
+    },
   });
 
   const compressSession = useMutation({
     mutationFn: ({ sessionId, availableMinutes }: { sessionId: string; availableMinutes: number }) =>
       compressTodaySession(userId!, sessionId, availableMinutes),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey: nutritionKey });
+    },
   });
 
   const moveIndoors = useMutation({
     mutationFn: (sessionId: string) => moveSessionIndoors(userId!, sessionId),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey: nutritionKey });
+    },
   });
 
   return { ...query, swapSession, compressSession, moveIndoors };

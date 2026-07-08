@@ -52,6 +52,75 @@ interface BriefContext {
 
 type RestRecommendation = 'train' | 'easy' | 'rest';
 
+// ── Timezone helpers ──────────────────────────────────────────────────────
+// This function runs on Deno's edge runtime, which reports its own clock in
+// UTC — but "today," "midnight," and "what hour do they usually train" all
+// need to mean the *user's* local day, not the server's. Using plain
+// new Date()/getUTCHours() here caused a real bug: for any user behind UTC,
+// there's a multi-hour evening window where the server's UTC day has already
+// rolled over while the user's local day hasn't, so the "already generated
+// a brief today?" check (keyed off UTC midnight) kept matching a brief from
+// the user's *previous* local evening and never regenerated it. These use
+// Intl (built into Deno, no extra dependency) to do the date math in the
+// user's actual IANA timezone (users.timezone, e.g. "America/Chicago").
+
+/** "YYYY-MM-DD" for the given instant, as a calendar date in timeZone. */
+function zonedDateString(timeZone: string, date: Date = new Date()): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(date);
+}
+
+/** Local wall-clock hour (0-23) for the given instant, as seen in timeZone. */
+function zonedHour(timeZone: string, date: Date): number {
+  const hourStr = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    hour: '2-digit',
+    hour12: false,
+  }).format(date);
+  // hour12:false can render midnight as "24" in some ICU builds — normalize.
+  return Number(hourStr) % 24;
+}
+
+/** The UTC instant corresponding to local midnight of "today" in timeZone. */
+function zonedMidnightUTC(timeZone: string, referenceDate: Date = new Date()): Date {
+  const dateStr = zonedDateString(timeZone, referenceDate);
+  const naiveUTC = new Date(`${dateStr}T00:00:00Z`);
+
+  // Find timeZone's UTC offset at ~this instant by reading naiveUTC's wall
+  // clock back through the same timezone, then reinterpreting those
+  // components as if they were UTC — the delta is the offset.
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    hour12: false,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  })
+    .formatToParts(naiveUTC)
+    .reduce((acc, p) => {
+      acc[p.type] = p.value;
+      return acc;
+    }, {} as Record<string, string>);
+
+  const asIfUTC = Date.UTC(
+    Number(parts.year),
+    Number(parts.month) - 1,
+    Number(parts.day),
+    Number(parts.hour) % 24,
+    Number(parts.minute),
+    Number(parts.second),
+  );
+  const offsetMs = asIfUTC - naiveUTC.getTime();
+  return new Date(naiveUTC.getTime() - offsetMs);
+}
+
 function deriveRestRecommendation(context: BriefContext): RestRecommendation {
   if (context.recovery?.recommendation === 'easy' || context.recovery?.recommendation === 'rest') {
     return context.recovery.recommendation;
@@ -65,12 +134,18 @@ function deriveRestRecommendation(context: BriefContext): RestRecommendation {
   return 'train';
 }
 
-function deriveWorkoutTimeConsistency(startedAts: string[]): { hour: number; count: number } | null {
+function deriveWorkoutTimeConsistency(
+  startedAts: string[],
+  timeZone: string,
+): { hour: number; count: number } | null {
   if (startedAts.length < 3) return null;
 
   const hourCounts = new Map<number, number>();
   for (const iso of startedAts) {
-    const hour = new Date(iso).getUTCHours();
+    // Local hour, not UTC — getUTCHours() reported the wrong "usual training
+    // hour" for anyone outside UTC (e.g. a 7am local session showed as 11am
+    // for a UTC-4 user), which fed directly into the habit-tip copy.
+    const hour = zonedHour(timeZone, new Date(iso));
     hourCounts.set(hour, (hourCounts.get(hour) ?? 0) + 1);
   }
 
@@ -86,8 +161,12 @@ function deriveWorkoutTimeConsistency(startedAts: string[]): { hour: number; cou
   return bestCount >= 3 ? { hour: bestHour, count: bestCount } : null;
 }
 
-async function buildContext(supabase: ReturnType<typeof createClient>, userId: string): Promise<BriefContext> {
-  const today = new Date().toISOString().slice(0, 10);
+async function buildContext(
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+  timeZone: string,
+): Promise<BriefContext> {
+  const today = zonedDateString(timeZone);
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
   const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
   const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
@@ -134,6 +213,7 @@ async function buildContext(supabase: ReturnType<typeof createClient>, userId: s
     primaryGoal: goalsRes.data?.primary_goal ?? null,
     workoutTimeConsistency: deriveWorkoutTimeConsistency(
       (workoutTimesRes.data ?? []).map((row) => row.started_at as string),
+      timeZone,
     ),
     foodLogCount14d: (foodLogRes.data ?? []).length,
     recentMemories: (memoriesRes.data ?? []).map((row) => ({
@@ -206,10 +286,19 @@ Deno.serve(async (req: Request) => {
   }
 
   const userId = authData.user.id;
-  const todayStart = new Date();
-  todayStart.setHours(0, 0, 0, 0);
 
   try {
+    // Read before the cache check below: "today" has to mean the user's
+    // local day, not the edge runtime's UTC clock (see the timezone helpers
+    // above for why getting this wrong lets a stale brief re-serve forever).
+    const { data: userRow } = await supabase
+      .from('users')
+      .select('timezone')
+      .eq('id', userId)
+      .maybeSingle();
+    const timeZone = userRow?.timezone ?? 'America/Chicago';
+    const todayStart = zonedMidnightUTC(timeZone);
+
     const { data: existing, error: existingError } = await supabase
       .from('ozzie_insights')
       .select('response_text, context_json')
@@ -256,7 +345,7 @@ Deno.serve(async (req: Request) => {
       // No/invalid body — weather and schedule stay null.
     }
 
-    const context = await buildContext(supabase, userId);
+    const context = await buildContext(supabase, userId, timeZone);
     const restRecommendation = deriveRestRecommendation(context);
     const { insight_text, why_reasoning, habit_tip } = await callOpenAI(context, restRecommendation, weather, schedule);
 
