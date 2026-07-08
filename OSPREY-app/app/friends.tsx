@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -16,7 +16,7 @@ import { Colors } from '@/constants/colors';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
 import { useFriends } from '@/hooks/useFriends';
-import { searchUserByEmail, type FriendSearchResult } from '@/services/friends';
+import { normalizePhoneNumber, searchUserByEmailOrPhone, type FriendSearchResult } from '@/services/friends';
 
 function timeAgo(isoStr: string): string {
   const posted = new Date(isoStr);
@@ -28,24 +28,34 @@ function timeAgo(isoStr: string): string {
 
 export default function FriendsScreen() {
   const userId = useAuthStore((s) => s.user?.id);
-  const { friends, pending, isLoading, sendRequest, acceptRequest, removeFriendship, removeFriend } =
+  const { friends, pending, myPhone, isLoading, sendRequest, acceptRequest, removeFriendship, removeFriend, updatePhone } =
     useFriends(userId);
 
-  const [email, setEmail] = useState('');
+  const [query, setQuery] = useState('');
   const [searching, setSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [result, setResult] = useState<FriendSearchResult | null>(null);
 
+  const [phoneInput, setPhoneInput] = useState('');
+  const [phoneEditing, setPhoneEditing] = useState(false);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
+
+  // Only sync from the server value while the user isn't actively editing —
+  // otherwise a background refetch would clobber an in-progress edit.
+  useEffect(() => {
+    if (!phoneEditing) setPhoneInput(myPhone ?? '');
+  }, [myPhone, phoneEditing]);
+
   async function handleSearch() {
-    const trimmed = email.trim();
+    const trimmed = query.trim();
     if (!trimmed) return;
     setSearching(true);
     setSearchError(null);
     setResult(null);
     try {
-      const found = await searchUserByEmail(trimmed);
+      const found = await searchUserByEmailOrPhone(trimmed);
       if (!found) {
-        setSearchError("No OSPREY user found with that email.");
+        setSearchError('No OSPREY user found with that email or phone number.');
       } else {
         setResult(found);
       }
@@ -54,6 +64,29 @@ export default function FriendsScreen() {
     } finally {
       setSearching(false);
     }
+  }
+
+  function handleSavePhone() {
+    setPhoneError(null);
+    const trimmed = phoneInput.trim();
+    if (!trimmed) {
+      updatePhone.mutate(null, { onSuccess: () => setPhoneEditing(false) });
+      return;
+    }
+    const normalized = normalizePhoneNumber(trimmed);
+    if (!normalized) {
+      setPhoneError('Enter a valid phone number, e.g. (555) 123-4567.');
+      return;
+    }
+    updatePhone.mutate(normalized, {
+      onSuccess: () => setPhoneEditing(false),
+      onError: (err) =>
+        setPhoneError(
+          err instanceof Error && err.message.toLowerCase().includes('duplicate')
+            ? 'Another account already uses that number.'
+            : 'Could not save. Try again.',
+        ),
+    });
   }
 
   function handleSendRequest() {
@@ -98,35 +131,74 @@ export default function FriendsScreen() {
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
           <Text style={styles.subtitle}>
-            Add friends by email to share workouts, compete in challenges, and sync race days.
+            Add friends by email or phone number to share workouts, compete in challenges, and
+            sync race days.
           </Text>
+
+          <View style={styles.searchCard}>
+            <Text style={styles.fieldLabel}>YOUR PHONE NUMBER</Text>
+            <Text style={styles.phoneHint}>So friends can find you by number instead of email.</Text>
+            <View style={styles.searchRow}>
+              <TextInput
+                style={styles.input}
+                placeholder="Add your phone number"
+                placeholderTextColor={Colors.textMuted}
+                value={phoneInput}
+                onChangeText={(v) => {
+                  setPhoneInput(v);
+                  setPhoneEditing(true);
+                  setPhoneError(null);
+                }}
+                keyboardType="phone-pad"
+                onSubmitEditing={handleSavePhone}
+                returnKeyType="done"
+                accessibilityLabel="Your phone number"
+              />
+              {phoneEditing && phoneInput.trim() !== (myPhone ?? '') ? (
+                <TouchableOpacity
+                  style={styles.searchBtn}
+                  onPress={handleSavePhone}
+                  disabled={updatePhone.isPending}
+                  accessibilityRole="button"
+                  accessibilityLabel="Save phone number"
+                  accessibilityState={{ disabled: updatePhone.isPending, busy: updatePhone.isPending }}
+                >
+                  {updatePhone.isPending ? (
+                    <ActivityIndicator color="#000" size="small" />
+                  ) : (
+                    <Text style={styles.searchBtnText}>Save</Text>
+                  )}
+                </TouchableOpacity>
+              ) : null}
+            </View>
+            {phoneError ? <Text style={styles.searchError}>{phoneError}</Text> : null}
+          </View>
 
           <View style={styles.searchCard}>
             <Text style={styles.fieldLabel}>ADD A FRIEND</Text>
             <View style={styles.searchRow}>
               <TextInput
                 style={styles.input}
-                placeholder="Their email address"
+                placeholder="Their email or phone number"
                 placeholderTextColor={Colors.textMuted}
-                value={email}
+                value={query}
                 onChangeText={(v) => {
-                  setEmail(v);
+                  setQuery(v);
                   setResult(null);
                   setSearchError(null);
                 }}
                 autoCapitalize="none"
-                keyboardType="email-address"
                 onSubmitEditing={handleSearch}
                 returnKeyType="search"
-                accessibilityLabel="Friend's email address"
+                accessibilityLabel="Friend's email or phone number"
               />
               <TouchableOpacity
                 style={styles.searchBtn}
                 onPress={handleSearch}
-                disabled={searching || !email.trim()}
+                disabled={searching || !query.trim()}
                 accessibilityRole="button"
                 accessibilityLabel="Search"
-                accessibilityState={{ disabled: searching || !email.trim(), busy: searching }}
+                accessibilityState={{ disabled: searching || !query.trim(), busy: searching }}
               >
                 {searching ? (
                   <ActivityIndicator color="#000" size="small" />
@@ -205,7 +277,7 @@ export default function FriendsScreen() {
               <Text style={styles.sectionLabel}>YOUR FRIENDS</Text>
               {!friends || friends.length === 0 ? (
                 <Text style={styles.empty}>
-                  No friends yet. Search their email above to send a request.
+                  No friends yet. Search their email or phone number above to send a request.
                 </Text>
               ) : (
                 friends.map((f) => (
@@ -254,6 +326,7 @@ const styles = StyleSheet.create({
     color: Colors.textMuted,
     letterSpacing: 0.8,
   },
+  phoneHint: { fontSize: 12, color: Colors.textMuted, marginTop: -6 },
   searchRow: { flexDirection: 'row', gap: 8 },
   input: {
     flex: 1,
