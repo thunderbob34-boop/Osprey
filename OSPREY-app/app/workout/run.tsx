@@ -34,7 +34,8 @@ import {
   runCueForStep,
   type PaceBands,
 } from '@/services/run-guidance';
-import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
+import { OZZIE_VOICE_ENABLED, ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
+import { useCueBanner } from '@/hooks/useCueBanner';
 import { generateWarmup, type WarmupDrill } from '@/services/warmup';
 import { OUTSIDE_RUN_CUES } from '@/services/ozzie-cues';
 import {
@@ -76,6 +77,7 @@ export default function RunWorkoutScreen() {
   const coachingStateRef = useRef<CoachingState>(makeCoachingState());
   const speakingRef = useRef(false);
   const { isPlus } = useSubscription();
+  const { cueBannerText, showCueBanner } = useCueBanner();
 
   // Structured in-run guidance (Ozzie-prescribed intervals for today's session)
   const [intervalSteps, setIntervalSteps] = useState<IntervalStep[] | null>(null);
@@ -201,10 +203,14 @@ export default function RunWorkoutScreen() {
 
     if (cue) {
       coachingStateRef.current = cue.nextState;
-      speakingRef.current = true;
-      ozzieSpeak(cue.text, 'workout').finally(() => {
-        speakingRef.current = false;
-      });
+      if (OZZIE_VOICE_ENABLED) {
+        speakingRef.current = true;
+        ozzieSpeak(cue.text, 'workout').finally(() => {
+          speakingRef.current = false;
+        });
+      } else {
+        showCueBanner(cue.text);
+      }
     }
   }, [elapsed, isPlus, status, distanceMeters, heartRate, startedAt, pausedAt, accumulatedPauseMs]);
 
@@ -385,16 +391,25 @@ export default function RunWorkoutScreen() {
         </View>
       ) : null}
 
-      <View style={styles.actions}>
-        <TouchableOpacity
-          style={styles.ozzieBtn}
-          onPress={handleOzzieCue}
-          accessibilityRole="button"
-          accessibilityLabel="Get an Ozzie cue"
-        >
+      {!OZZIE_VOICE_ENABLED && cueBannerText ? (
+        <View style={styles.cueBanner}>
           <OzzieAvatar size={18} />
-          <Text style={styles.ozzieBtnText}>Ozzie Cue</Text>
-        </TouchableOpacity>
+          <Text style={styles.cueBannerText}>{cueBannerText}</Text>
+        </View>
+      ) : null}
+
+      <View style={styles.actions}>
+        {OZZIE_VOICE_ENABLED ? (
+          <TouchableOpacity
+            style={styles.ozzieBtn}
+            onPress={handleOzzieCue}
+            accessibilityRole="button"
+            accessibilityLabel="Get an Ozzie cue"
+          >
+            <OzzieAvatar size={18} />
+            <Text style={styles.ozzieBtnText}>Ozzie Cue</Text>
+          </TouchableOpacity>
+        ) : null}
 
         <View style={styles.controlRow}>
           {status === 'paused' ? (
@@ -579,6 +594,18 @@ const styles = StyleSheet.create({
     borderColor: Colors.borderGold,
   },
   pausedText: { fontSize: 12, color: Colors.textSecondary, lineHeight: 18 },
+  cueBanner: {
+    marginHorizontal: 16,
+    backgroundColor: Colors.surfaceTeal,
+    borderRadius: 12,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  cueBannerText: { flex: 1, fontSize: 13, fontWeight: '600', color: Colors.textPrimary, lineHeight: 18 },
   intervalCard: {
     marginHorizontal: 16,
     marginBottom: 4,

@@ -14,6 +14,11 @@ import * as FileSystem from 'expo-file-system';
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
+// Voice is a post-launch feature — the ElevenLabs account is still on the
+// Free plan, which has no commercial license for Speech/Music. Flip this
+// back on once a paid ElevenLabs plan is active.
+export const OZZIE_VOICE_ENABLED = false;
+
 const ELEVENLABS_API_KEY = process.env.EXPO_PUBLIC_ELEVENLABS_API_KEY ?? '';
 const OZZIE_VOICE_ID = process.env.EXPO_PUBLIC_OZZIE_VOICE_ID ?? 'REPLACE_AFTER_CASTING';
 
@@ -111,6 +116,8 @@ let currentSound: Audio.Sound | null = null;
  * @param profile  'workout' (mid-run) or 'ambient' (daily brief, debrief)
  */
 export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient') {
+  if (!OZZIE_VOICE_ENABLED) return;
+
   if (!ELEVENLABS_API_KEY || !OZZIE_VOICE_ID || OZZIE_VOICE_ID === 'REPLACE_AFTER_CASTING') {
     console.warn('[Ozzie] ElevenLabs not configured — skipping TTS');
     return;
@@ -181,6 +188,8 @@ export async function ozzieStop() {
  * so the first mid-run cue is instant.
  */
 export async function ozziePrewarm() {
+  if (!OZZIE_VOICE_ENABLED) return;
+
   const commonCues = [
     { text: "Let's get after it.", profile: 'workout' as AudioProfile },
     { text: "Nice work. Keep that pace.", profile: 'workout' as AudioProfile },

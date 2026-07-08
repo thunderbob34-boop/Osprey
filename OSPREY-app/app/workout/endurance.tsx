@@ -22,7 +22,8 @@ import {
   type EnduranceType,
 } from '@/services/workouts';
 import { expandIntervalSteps, ozzieCueForStep, totalIntervalDistanceM, type IntervalStep } from '@/services/intervals';
-import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
+import { OZZIE_VOICE_ENABLED, ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
+import { useCueBanner } from '@/hooks/useCueBanner';
 import { ENCOURAGEMENTS } from '@/services/ozzie-cues';
 import { formatDuration, useWorkoutStore } from '@/store/workoutStore';
 import { useRunTracking } from '@/hooks/useRunTracking';
@@ -107,6 +108,7 @@ export default function EnduranceWorkoutScreen() {
   const userId = useAuthStore((s) => s.user?.id);
   const { isPlus } = useSubscription();
   const { units: unitPreference } = useUnitPreference();
+  const { cueBannerText, showCueBanner } = useCueBanner();
 
   const type: EnduranceType = (sessionType ?? 'cross') as EnduranceType;
   const meta = SESSION_META[type] ?? SESSION_META.cross;
@@ -296,8 +298,12 @@ export default function EnduranceWorkoutScreen() {
       lastAutoCueMs.current = nowMs;
       const cues = ENCOURAGEMENTS[type];
       const idx = Math.floor(elapsed / 600) % cues.length;
-      speakingRef.current = true;
-      ozzieSpeak(cues[idx], 'workout').finally(() => { speakingRef.current = false; });
+      if (OZZIE_VOICE_ENABLED) {
+        speakingRef.current = true;
+        ozzieSpeak(cues[idx], 'workout').finally(() => { speakingRef.current = false; });
+      } else {
+        showCueBanner(cues[idx]);
+      }
     }
   }, [elapsed, isPlus, type, hasIntervals]);
 
@@ -514,15 +520,24 @@ export default function EnduranceWorkoutScreen() {
           </View>
         ) : null}
 
-        <TouchableOpacity
-          style={styles.ozzieBtn}
-          onPress={handleManualCue}
-          accessibilityRole="button"
-          accessibilityLabel="Get an Ozzie cue"
-        >
-          <OzzieAvatar size={18} />
-          <Text style={styles.ozzieBtnText}>Ozzie Cue</Text>
-        </TouchableOpacity>
+        {!OZZIE_VOICE_ENABLED && cueBannerText ? (
+          <View style={styles.cueBanner}>
+            <OzzieAvatar size={18} />
+            <Text style={styles.cueBannerText}>{cueBannerText}</Text>
+          </View>
+        ) : null}
+
+        {OZZIE_VOICE_ENABLED ? (
+          <TouchableOpacity
+            style={styles.ozzieBtn}
+            onPress={handleManualCue}
+            accessibilityRole="button"
+            accessibilityLabel="Get an Ozzie cue"
+          >
+            <OzzieAvatar size={18} />
+            <Text style={styles.ozzieBtnText}>Ozzie Cue</Text>
+          </TouchableOpacity>
+        ) : null}
 
         {showDistance ? (
           <View style={styles.distanceCard}>
@@ -713,6 +728,17 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   ozzieBtnText: { fontSize: 15, fontWeight: '700', color: Colors.teal },
+  cueBanner: {
+    backgroundColor: Colors.surfaceTeal,
+    borderRadius: 12,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  cueBannerText: { flex: 1, fontSize: 13, fontWeight: '600', color: Colors.textPrimary, lineHeight: 18 },
   distanceCard: {
     backgroundColor: Colors.bgCard,
     borderWidth: 1,
