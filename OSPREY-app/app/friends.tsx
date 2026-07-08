@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
@@ -141,7 +142,7 @@ export default function FriendsScreen() {
             <View style={styles.searchRow}>
               <TextInput
                 style={styles.input}
-                placeholder="Add your phone number"
+                placeholder="(555) 123-4567"
                 placeholderTextColor={Colors.textMuted}
                 value={phoneInput}
                 onChangeText={(v) => {
@@ -156,7 +157,7 @@ export default function FriendsScreen() {
               />
               {phoneEditing && phoneInput.trim() !== (myPhone ?? '') ? (
                 <TouchableOpacity
-                  style={styles.searchBtn}
+                  style={[styles.searchBtn, updatePhone.isPending && styles.searchBtnDisabled]}
                   onPress={handleSavePhone}
                   disabled={updatePhone.isPending}
                   accessibilityRole="button"
@@ -172,9 +173,9 @@ export default function FriendsScreen() {
               ) : null}
             </View>
             {phoneError ? <Text style={styles.searchError}>{phoneError}</Text> : null}
-          </View>
 
-          <View style={styles.searchCard}>
+            <View style={styles.rowDivider} />
+
             <Text style={styles.fieldLabel}>ADD A FRIEND</Text>
             <View style={styles.searchRow}>
               <TextInput
@@ -193,7 +194,7 @@ export default function FriendsScreen() {
                 accessibilityLabel="Friend's email or phone number"
               />
               <TouchableOpacity
-                style={styles.searchBtn}
+                style={[styles.searchBtn, (searching || !query.trim()) && styles.searchBtnDisabled]}
                 onPress={handleSearch}
                 disabled={searching || !query.trim()}
                 accessibilityRole="button"
@@ -263,22 +264,27 @@ export default function FriendsScreen() {
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={() => handleDecline(req.friendshipId)}
-                        hitSlop={8}
+                        hitSlop={12}
+                        style={styles.declineBtn}
                         accessibilityRole="button"
                         accessibilityLabel={`Decline ${req.requesterDisplayName}`}
                       >
-                        <Text style={styles.declineText}>✕</Text>
+                        <Ionicons name="close" size={18} color={Colors.textMuted} />
                       </TouchableOpacity>
                     </View>
                   ))}
                 </>
               ) : null}
 
-              <Text style={styles.sectionLabel}>YOUR FRIENDS</Text>
+              <Text style={styles.sectionLabel}>
+                YOUR FRIENDS{friends && friends.length > 0 ? ` · ${friends.length}` : ''}
+              </Text>
               {!friends || friends.length === 0 ? (
-                <Text style={styles.empty}>
-                  No friends yet. Search their email or phone number above to send a request.
-                </Text>
+                <View style={styles.emptyCard}>
+                  <Text style={styles.empty}>
+                    No friends yet. Search their email or phone number above to send a request.
+                  </Text>
+                </View>
               ) : (
                 friends.map((f) => (
                   <View key={f.friendUserId} style={styles.friendRow}>
@@ -288,7 +294,7 @@ export default function FriendsScreen() {
                     <Text style={[styles.friendName, { flex: 1 }]}>{f.friendDisplayName}</Text>
                     <TouchableOpacity
                       onPress={() => handleRemoveFriend(f.friendUserId, f.friendDisplayName)}
-                      hitSlop={8}
+                      hitSlop={12}
                       accessibilityRole="button"
                       accessibilityLabel={`Remove ${f.friendDisplayName}`}
                     >
@@ -309,7 +315,14 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
   subtitle: { color: Colors.textMuted, fontSize: 13, lineHeight: 19, marginBottom: 4 },
-  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 4 },
+  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20 },
+  emptyCard: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 14,
+    padding: 16,
+  },
 
   searchCard: {
     backgroundColor: Colors.bgCard,
@@ -320,6 +333,7 @@ const styles = StyleSheet.create({
     gap: 10,
     marginBottom: 6,
   },
+  rowDivider: { height: 1, backgroundColor: Colors.border, marginVertical: 2 },
   fieldLabel: {
     fontSize: 10,
     fontWeight: '700',
@@ -346,6 +360,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  searchBtnDisabled: { opacity: 0.5 },
   searchBtnText: { color: '#000', fontSize: 14, fontWeight: '800' },
   searchError: { color: Colors.red, fontSize: 13 },
 
@@ -409,6 +424,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   acceptBtnText: { color: '#000', fontSize: 13, fontWeight: '800' },
-  declineText: { color: Colors.textMuted, fontSize: 15, fontWeight: '700' },
+  declineBtn: { padding: 2 },
   removeText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
 });
