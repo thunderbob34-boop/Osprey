@@ -45,11 +45,23 @@ import {
 } from '@/services/calendar-blocking';
 
 const HEALTH_CONNECTED_KEY = 'osprey:health-connected';
+const HEALTH_LAST_SYNCED_KEY = 'osprey:health-last-synced';
 
 function formatHour(hour: number): string {
   const period = hour >= 12 ? 'PM' : 'AM';
   const displayHour = hour % 12 === 0 ? 12 : hour % 12;
   return `${displayHour}:00 ${period}`;
+}
+
+function formatLastSynced(isoStr: string): string {
+  const synced = new Date(isoStr);
+  const minutes = Math.floor((Date.now() - synced.getTime()) / 60000);
+  if (minutes < 1) return 'just now';
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
 }
 
 export default function SettingsTab() {
@@ -62,6 +74,7 @@ export default function SettingsTab() {
   const [plusActive, setPlusActive] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const [healthConnected, setHealthConnected] = useState(false);
+  const [healthLastSynced, setHealthLastSynced] = useState<string | null>(null);
   const [healthSyncing, setHealthSyncing] = useState(false);
   const [nudgeEnabled, setNudgeEnabled] = useState(false);
   const [nudgeHour, setNudgeHour] = useState<number | null>(null);
@@ -88,6 +101,9 @@ export default function SettingsTab() {
   useEffect(() => {
     AsyncStorage.getItem(HEALTH_CONNECTED_KEY)
       .then((v) => setHealthConnected(v === '1'))
+      .catch(() => undefined);
+    AsyncStorage.getItem(HEALTH_LAST_SYNCED_KEY)
+      .then(setHealthLastSynced)
       .catch(() => undefined);
   }, []);
 
@@ -234,6 +250,9 @@ export default function SettingsTab() {
           `Imported ${imported.imported} workout${imported.imported === 1 ? '' : 's'} from Apple Watch/other apps.`,
         );
       }
+      const now = new Date().toISOString();
+      await AsyncStorage.setItem(HEALTH_LAST_SYNCED_KEY, now).catch(() => undefined);
+      setHealthLastSynced(now);
       Alert.alert('Apple Health', `Connected — ${parts.join(' ')}`);
     } catch (err) {
       Alert.alert('Apple Health', err instanceof Error ? err.message : 'Something went wrong.');
@@ -248,6 +267,8 @@ export default function SettingsTab() {
       const restored = await restorePurchases();
       setPlusActive(restored);
       Alert.alert('Restore', restored ? 'Purchases restored.' : 'No active subscription found.');
+    } catch (err) {
+      Alert.alert('Restore failed', err instanceof Error ? err.message : 'Try again.');
     } finally {
       setLoading(false);
     }
@@ -353,6 +374,9 @@ export default function SettingsTab() {
             <Text style={styles.cardValue}>
               {healthConnected ? 'Connected' : 'Not connected'}
             </Text>
+            {healthConnected && healthLastSynced ? (
+              <Text style={styles.switchRowSub}>Last synced {formatLastSynced(healthLastSynced)}</Text>
+            ) : null}
             <TouchableOpacity
               style={styles.primaryBtn}
               onPress={handleConnectHealth}
@@ -373,9 +397,10 @@ export default function SettingsTab() {
         ) : null}
 
         <View style={styles.card}>
+          <Text style={styles.cardLabel}>NOTIFICATIONS</Text>
           <View style={styles.switchRow}>
             <View style={styles.switchRowLeft}>
-              <Text style={styles.cardLabel}>Ozzie's Daily Nudge</Text>
+              <Text style={styles.cardValue}>Ozzie's Daily Nudge</Text>
               <Text style={styles.switchRowSub}>
                 {nudgeEnabled
                   ? nudgeHour != null
@@ -400,7 +425,7 @@ export default function SettingsTab() {
           <View style={styles.rowDivider} />
           <View style={styles.switchRow}>
             <View style={styles.switchRowLeft}>
-              <Text style={styles.cardLabel}>Supplement Reminders</Text>
+              <Text style={styles.cardValue}>Supplement Reminders</Text>
               <Text style={styles.switchRowSub}>Timed nudges for each reminder you've set up</Text>
             </View>
             {suppRemindersLoading ? (
@@ -416,10 +441,19 @@ export default function SettingsTab() {
               />
             )}
           </View>
+          <TouchableOpacity
+            style={styles.subLinkRow}
+            onPress={() => router.push('/supplements')}
+            accessibilityRole="button"
+            accessibilityLabel="Manage individual supplement and medication reminders"
+          >
+            <Text style={styles.subLinkText}>Manage individual reminders</Text>
+            <Text style={styles.chevron}>›</Text>
+          </TouchableOpacity>
           <View style={styles.rowDivider} />
           <View style={styles.switchRow}>
             <View style={styles.switchRowLeft}>
-              <Text style={styles.cardLabel}>Race-Week Reminders</Text>
+              <Text style={styles.cardValue}>Race-Week Reminders</Text>
               <Text style={styles.switchRowSub}>A heads-up 7 days before each upcoming race</Text>
             </View>
             {raceWeekLoading ? (
@@ -438,7 +472,7 @@ export default function SettingsTab() {
           <View style={styles.rowDivider} />
           <View style={styles.switchRow}>
             <View style={styles.switchRowLeft}>
-              <Text style={styles.cardLabel}>Evening Look-Ahead</Text>
+              <Text style={styles.cardValue}>Evening Look-Ahead</Text>
               <Text style={styles.switchRowSub}>
                 An 8pm heads-up on tomorrow's session, weather, and fueling
               </Text>
@@ -481,22 +515,6 @@ export default function SettingsTab() {
               />
             )}
           </View>
-        </View>
-
-        <View style={styles.card}>
-          <Text style={styles.cardLabel}>Supplements & Meds</Text>
-          <TouchableOpacity
-            style={styles.planRow}
-            onPress={() => router.push('/supplements')}
-            accessibilityRole="button"
-            accessibilityLabel="Supplement and medication reminders"
-          >
-            <View style={styles.planRowLeft}>
-              <Text style={styles.cardValue}>Reminders</Text>
-              <Text style={styles.planRowSub}>Timed supplement & medication nudges</Text>
-            </View>
-            <Text style={styles.chevron}>›</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.card}>
@@ -648,8 +666,8 @@ export default function SettingsTab() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
   scroll: { flex: 1 },
-  content: { padding: 28, paddingBottom: 48 },
-  title: { fontSize: 24, fontWeight: '800', color: Colors.textPrimary, marginBottom: 8 },
+  content: { padding: 24, paddingBottom: 48 },
+  title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 8 },
   subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, marginBottom: 24 },
   card: {
     backgroundColor: Colors.bgCard,
@@ -700,6 +718,14 @@ const styles = StyleSheet.create({
   switchRowLeft: { flex: 1, gap: 4 },
   switchRowSub: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
   rowDivider: { height: 1, backgroundColor: Colors.border, marginVertical: 10 },
+  subLinkRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 8,
+    paddingLeft: 4,
+  },
+  subLinkText: { fontSize: 12, fontWeight: '600', color: Colors.teal },
   planRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -710,16 +736,15 @@ const styles = StyleSheet.create({
   planRowSub: { fontSize: 12, color: Colors.textSecondary, marginTop: 2 },
   chevron: { fontSize: 22, color: Colors.textMuted, marginLeft: 8 },
   signOutBtn: {
-    alignSelf: 'flex-start',
     marginTop: 12,
     backgroundColor: Colors.bgCard,
     borderWidth: 1,
     borderColor: Colors.border,
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    borderRadius: 14,
+    paddingVertical: 14,
+    alignItems: 'center',
   },
-  signOutText: { color: Colors.textPrimary, fontSize: 14, fontWeight: '600' },
+  signOutText: { color: Colors.textPrimary, fontSize: 14, fontWeight: '700' },
   exportBtn: {
     marginTop: 10,
     alignSelf: 'flex-start',

@@ -47,6 +47,13 @@ function formatSessionType(type: string): string {
   return type.charAt(0).toUpperCase() + type.slice(1);
 }
 
+const WORKOUT_ENTRY_ICON: Record<string, string> = {
+  run: '🏃',
+  lift: '🏋️',
+  cross: '🔁',
+  race: '🏁',
+};
+
 function formatTime(iso: string): string {
   return new Date(iso).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
 }
@@ -56,17 +63,16 @@ function formatShortDate(dateString: string): string {
 }
 
 // ── Weight trend sparkline ────────────────────────────────────────────────
-const WEIGHT_CHART_W = 320;
 const WEIGHT_CHART_H = 90;
 const WEIGHT_CHART_PAD = { t: 8, b: 8, l: 4, r: 4 };
 
-function WeightChart({ points }: { points: number[] }) {
-  if (points.length < 2) return null;
+function WeightChart({ points, width }: { points: number[]; width: number }) {
+  if (points.length < 2 || width <= 0) return null;
 
   const maxVal = Math.max(...points);
   const minVal = Math.min(...points);
   const range = Math.max(0.1, maxVal - minVal);
-  const innerW = WEIGHT_CHART_W - WEIGHT_CHART_PAD.l - WEIGHT_CHART_PAD.r;
+  const innerW = width - WEIGHT_CHART_PAD.l - WEIGHT_CHART_PAD.r;
   const innerH = WEIGHT_CHART_H - WEIGHT_CHART_PAD.t - WEIGHT_CHART_PAD.b;
 
   const coords = points
@@ -78,7 +84,7 @@ function WeightChart({ points }: { points: number[] }) {
     .join(' ');
 
   return (
-    <Svg width={WEIGHT_CHART_W} height={WEIGHT_CHART_H} viewBox={`0 0 ${WEIGHT_CHART_W} ${WEIGHT_CHART_H}`}>
+    <Svg width={width} height={WEIGHT_CHART_H} viewBox={`0 0 ${width} ${WEIGHT_CHART_H}`}>
       <Polyline
         points={coords}
         fill="none"
@@ -151,6 +157,7 @@ export default function LogTab() {
 
   const { units: unitPreference } = useUnitPreference();
   const [weightInput, setWeightInput] = useState('');
+  const [chartWidth, setChartWidth] = useState(0);
   // Weight/distance units always follow the account-wide preference (Settings
   // → Units) — no per-screen override.
   const weightUnit: 'lb' | 'kg' = unitPreference === 'metric' ? 'kg' : 'lb';
@@ -352,8 +359,8 @@ export default function LogTab() {
     setOpenSection('workout');
   }
 
-  function handleDeleteWorkout(id: string) {
-    Alert.alert('Delete workout?', 'This will remove it from your log.', [
+  function handleDeleteWorkout(id: string, label: string) {
+    Alert.alert(`Delete ${label} workout?`, 'This will remove it from your log.', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Delete',
@@ -447,8 +454,8 @@ export default function LogTab() {
     setOpenSection('food');
   }
 
-  function handleDeleteFood(id: string) {
-    Alert.alert('Delete food entry?', 'This will remove it from your log.', [
+  function handleDeleteFood(id: string, name: string) {
+    Alert.alert(`Delete ${name}?`, 'This will remove it from your log.', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Delete',
@@ -493,7 +500,7 @@ export default function LogTab() {
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <Text style={styles.title}>Log</Text>
-          <Text style={styles.subtitle}>Quick workout and nutrition logging.</Text>
+          <Text style={styles.subtitle}>Log a workout, a meal, or today's weigh-in.</Text>
 
           {nutrition ? (
             <View style={styles.nutritionCard}>
@@ -580,6 +587,7 @@ export default function LogTab() {
                       accessibilityRole="button"
                       accessibilityLabel={`Edit ${formatSessionType(w.sessionType)} workout`}
                     >
+                      <Text style={styles.entryIcon}>{WORKOUT_ENTRY_ICON[w.sessionType] ?? '🏃'}</Text>
                       <View style={{ flex: 1 }}>
                         <Text style={styles.entryPrimary}>{formatSessionType(w.sessionType)}</Text>
                         <Text style={styles.entrySecondary}>
@@ -594,8 +602,8 @@ export default function LogTab() {
                         </Text>
                       </View>
                       <TouchableOpacity
-                        onPress={() => handleDeleteWorkout(w.id)}
-                        hitSlop={8}
+                        onPress={() => handleDeleteWorkout(w.id, formatSessionType(w.sessionType))}
+                        hitSlop={12}
                         style={styles.entryDeleteBtn}
                         accessibilityRole="button"
                         accessibilityLabel={`Delete ${formatSessionType(w.sessionType)} workout`}
@@ -612,6 +620,7 @@ export default function LogTab() {
                       accessibilityRole="button"
                       accessibilityLabel={`Edit ${f.name}`}
                     >
+                      <Text style={styles.entryIcon}>🍽</Text>
                       <View style={{ flex: 1 }}>
                         <Text style={styles.entryPrimary}>{f.name}</Text>
                         <Text style={styles.entrySecondary}>
@@ -619,8 +628,8 @@ export default function LogTab() {
                         </Text>
                       </View>
                       <TouchableOpacity
-                        onPress={() => handleDeleteFood(f.id)}
-                        hitSlop={8}
+                        onPress={() => handleDeleteFood(f.id, f.name)}
+                        hitSlop={12}
                         style={styles.entryDeleteBtn}
                         accessibilityRole="button"
                         accessibilityLabel={`Delete ${f.name}`}
@@ -1012,9 +1021,13 @@ export default function LogTab() {
               {weightHistory && weightHistory.length >= 2 ? (
                 <>
                   <Text style={styles.fieldLabel}>WEIGHT TREND</Text>
-                  <View style={styles.svgWrap}>
+                  <View
+                    style={styles.svgWrap}
+                    onLayout={(e) => setChartWidth(e.nativeEvent.layout.width)}
+                  >
                     <WeightChart
                       points={weightHistory.map((p) => (weightUnit === 'lb' ? kgToLb(p.kg) : p.kg))}
+                      width={chartWidth}
                     />
                   </View>
                   <Text style={styles.chartDateRange}>
@@ -1063,8 +1076,8 @@ export default function LogTab() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
-  scrollContent: { padding: 28, paddingBottom: 48 },
-  title: { fontSize: 24, fontWeight: '800', color: Colors.textPrimary, marginBottom: 4 },
+  scrollContent: { padding: 24, paddingBottom: 48 },
+  title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 4 },
   subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, marginBottom: 20 },
   errorText: { fontSize: 13, color: Colors.red, marginBottom: 16 },
   nutritionCard: {
@@ -1117,10 +1130,11 @@ const styles = StyleSheet.create({
   },
   cardLabel: { fontSize: 10, fontWeight: '700', color: Colors.textMuted, letterSpacing: 1 },
   emptyText: { fontSize: 13, color: Colors.textMuted },
-  entryRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  entryRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 4 },
+  entryIcon: { fontSize: 18, width: 22, textAlign: 'center' },
   entryPrimary: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
   entrySecondary: { fontSize: 12, color: Colors.textSecondary },
-  entryDeleteBtn: { padding: 4 },
+  entryDeleteBtn: { padding: 10, marginLeft: 2 },
   entryDeleteText: { fontSize: 13, color: Colors.textMuted, fontWeight: '700' },
   totalText: {
     fontSize: 12,
@@ -1197,7 +1211,7 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     marginBottom: 4,
   },
-  svgWrap: { alignItems: 'center' },
+  svgWrap: { width: '100%', alignItems: 'center' },
   chartDateRange: { fontSize: 9, color: Colors.textMuted, textAlign: 'right', marginTop: -4, marginBottom: 4 },
   inputError: {
     borderColor: Colors.red,
