@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
+  Linking,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -10,6 +11,8 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import type { PurchasesPackage } from 'react-native-purchases';
 import { Colors } from '@/constants/colors';
 import OzzieMascot from '@/components/OzzieMascot';
 import {
@@ -18,6 +21,28 @@ import {
   restorePurchases,
 } from '@/services/subscriptions';
 import { useSubscription } from '@/hooks/useSubscription';
+import { PRIVACY_POLICY_URL, TERMS_OF_USE_URL } from '@/constants/links';
+
+function packageLabel(pkg: PurchasesPackage): string {
+  switch (pkg.packageType) {
+    case 'ANNUAL':
+      return 'Annual';
+    case 'MONTHLY':
+      return 'Monthly';
+    case 'WEEKLY':
+      return 'Weekly';
+    case 'SIX_MONTH':
+      return '6 Months';
+    case 'THREE_MONTH':
+      return '3 Months';
+    case 'TWO_MONTH':
+      return '2 Months';
+    case 'LIFETIME':
+      return 'Lifetime';
+    default:
+      return pkg.identifier;
+  }
+}
 
 const FEATURES = [
   { icon: '🤖', title: 'AI Race Briefings', desc: 'Ozzie preps you the morning of every race with personalized strategy.' },
@@ -32,21 +57,26 @@ export default function PaywallScreen() {
   const router = useRouter();
   const { refresh } = useSubscription();
 
-  const [priceString, setPriceString] = useState<string | null>(null);
+  const [packages, setPackages] = useState<PurchasesPackage[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [purchasing, setPurchasing] = useState(false);
   const [restoring, setRestoring] = useState(false);
 
   useEffect(() => {
     getOfferings().then((o) => {
-      const pkg = o?.current?.availablePackages[0];
-      if (pkg) setPriceString(pkg.product.priceString);
+      const pkgs = o?.current?.availablePackages ?? [];
+      setPackages(pkgs);
+      setSelectedId(pkgs[0]?.identifier ?? null);
     }).catch(() => undefined);
   }, []);
+
+  const selectedPackage = packages.find((p) => p.identifier === selectedId) ?? packages[0];
+  const priceString = selectedPackage?.product.priceString ?? null;
 
   async function handleSubscribe() {
     setPurchasing(true);
     try {
-      const success = await purchaseOspreyPlus();
+      const success = await purchaseOspreyPlus(selectedId ?? undefined);
       if (success) {
         refresh();
         router.back();
@@ -89,7 +119,7 @@ export default function PaywallScreen() {
           accessibilityRole="button"
           accessibilityLabel="Close"
         >
-          <Text style={styles.close}>✕</Text>
+          <Ionicons name="close" size={22} color={Colors.textMuted} />
         </TouchableOpacity>
         <View />
       </View>
@@ -116,6 +146,38 @@ export default function PaywallScreen() {
             </View>
           ))}
         </View>
+
+        {packages.length > 1 ? (
+          <View style={styles.packageRow}>
+            {packages.map((pkg) => (
+              <TouchableOpacity
+                key={pkg.identifier}
+                style={[styles.packageChip, pkg.identifier === selectedId && styles.packageChipActive]}
+                onPress={() => setSelectedId(pkg.identifier)}
+                accessibilityRole="button"
+                accessibilityLabel={`${packageLabel(pkg)}, ${pkg.product.priceString}`}
+                accessibilityState={{ selected: pkg.identifier === selectedId }}
+              >
+                <Text
+                  style={[
+                    styles.packageChipLabel,
+                    pkg.identifier === selectedId && styles.packageChipLabelActive,
+                  ]}
+                >
+                  {packageLabel(pkg)}
+                </Text>
+                <Text
+                  style={[
+                    styles.packageChipPrice,
+                    pkg.identifier === selectedId && styles.packageChipPriceActive,
+                  ]}
+                >
+                  {pkg.product.priceString}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ) : null}
 
         <TouchableOpacity
           style={[styles.subscribeBtn, purchasing && styles.subscribeBtnLoading]}
@@ -156,6 +218,15 @@ export default function PaywallScreen() {
           Subscription renews automatically. Cancel in App Store settings at any time.
           Price may vary by region.
         </Text>
+        <View style={styles.legalLinksRow}>
+          <TouchableOpacity onPress={() => Linking.openURL(TERMS_OF_USE_URL).catch(() => undefined)}>
+            <Text style={styles.legalLink}>Terms of Use</Text>
+          </TouchableOpacity>
+          <Text style={styles.legalLinkDivider}>·</Text>
+          <TouchableOpacity onPress={() => Linking.openURL(PRIVACY_POLICY_URL).catch(() => undefined)}>
+            <Text style={styles.legalLink}>Privacy Policy</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -170,7 +241,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 14,
   },
-  close: { color: Colors.textMuted, fontSize: 18, fontWeight: '700' },
   scroll: { padding: 24, paddingBottom: 56, gap: 20 },
   logoWrap: { alignItems: 'center', gap: 6, marginBottom: 8 },
   logoIcon: { fontSize: 52 },
@@ -208,6 +278,22 @@ const styles = StyleSheet.create({
   featureTitle: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
   featureDesc: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17, marginTop: 2 },
   featureCheck: { color: Colors.teal, fontSize: 15, fontWeight: '800', marginTop: 2 },
+  packageRow: { flexDirection: 'row', gap: 10 },
+  packageChip: {
+    flex: 1,
+    borderWidth: 1.5,
+    borderColor: Colors.border,
+    backgroundColor: Colors.bgCard,
+    borderRadius: 12,
+    paddingVertical: 12,
+    alignItems: 'center',
+    gap: 2,
+  },
+  packageChipActive: { borderColor: Colors.teal, backgroundColor: Colors.surfaceTeal },
+  packageChipLabel: { fontSize: 13, fontWeight: '700', color: Colors.textSecondary },
+  packageChipLabelActive: { color: Colors.teal },
+  packageChipPrice: { fontSize: 12, color: Colors.textMuted, fontWeight: '600' },
+  packageChipPriceActive: { color: Colors.teal },
   subscribeBtn: {
     backgroundColor: Colors.teal,
     borderRadius: 14,
@@ -230,4 +316,13 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     marginTop: -4,
   },
+  legalLinksRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: -8,
+  },
+  legalLink: { color: Colors.textMuted, fontSize: 11, fontWeight: '600', textDecorationLine: 'underline' },
+  legalLinkDivider: { color: Colors.textMuted, fontSize: 11 },
 });

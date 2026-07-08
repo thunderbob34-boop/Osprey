@@ -113,7 +113,18 @@ export default function SupplementsScreen() {
     }
   }
 
-  async function handleDelete(reminder: SupplementReminder) {
+  function handleDelete(reminder: SupplementReminder) {
+    Alert.alert(`Delete ${reminder.name}?`, 'This reminder will stop notifying you.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: () => confirmDelete(reminder),
+      },
+    ]);
+  }
+
+  async function confirmDelete(reminder: SupplementReminder) {
     if (!userId) return;
     try {
       await deleteSupplementReminder(reminder.id);
@@ -273,17 +284,6 @@ export default function SupplementsScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
-  },
-  close: { color: Colors.textMuted, fontSize: 18, fontWeight: '700' },
-  title: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
   empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginBottom: 8 },
   reminderRow: {

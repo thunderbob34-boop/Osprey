@@ -28,11 +28,18 @@ export async function getOfferings() {
   return Purchases.getOfferings();
 }
 
-export async function purchaseOspreyPlus(): Promise<boolean> {
+/**
+ * Buys the given package identifier, or the offering's first package if
+ * none is specified (e.g. only one product is configured in RevenueCat).
+ */
+export async function purchaseOspreyPlus(packageIdentifier?: string): Promise<boolean> {
   if (Platform.OS !== 'ios' || !REVENUECAT_IOS_KEY || !configured) return true;
 
   const offerings = await getOfferings();
-  const packageToBuy = offerings?.current?.availablePackages[0];
+  const packages = offerings?.current?.availablePackages ?? [];
+  const packageToBuy = packageIdentifier
+    ? packages.find((p) => p.identifier === packageIdentifier) ?? packages[0]
+    : packages[0];
   if (!packageToBuy) return false;
 
   const { customerInfo } = await Purchases.purchasePackage(packageToBuy);

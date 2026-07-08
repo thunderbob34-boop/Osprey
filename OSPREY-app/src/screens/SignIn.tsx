@@ -10,10 +10,13 @@ import {
   Platform,
   ActivityIndicator,
   Alert,
+  Linking,
 } from 'react-native';
 import * as AppleAuthentication from 'expo-apple-authentication';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
+import { PRIVACY_POLICY_URL, TERMS_OF_USE_URL } from '@/constants/links';
 
 // Initialize WebBrowser only if available (not in dev builds without native modules)
 try {
@@ -34,6 +37,7 @@ export default function SignInScreen() {
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
   const [appleAvailable, setAppleAvailable] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [resetSending, setResetSending] = useState(false);
   const { signIn, signUp, signInWithApple, signInWithGoogle, sendPasswordReset, loading } =
@@ -137,20 +141,31 @@ export default function SignInScreen() {
             blurOnSubmit={false}
             onSubmitEditing={() => passwordRef.current?.focus()}
           />
-          <TextInput
-            ref={passwordRef}
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor={Colors.textMuted}
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            accessibilityLabel="Password"
-            autoComplete={mode === 'signup' ? 'new-password' : 'password'}
-            textContentType={mode === 'signup' ? 'newPassword' : 'password'}
-            returnKeyType="go"
-            onSubmitEditing={handleSubmit}
-          />
+          <View style={styles.passwordRow}>
+            <TextInput
+              ref={passwordRef}
+              style={[styles.input, styles.passwordInput]}
+              placeholder="Password"
+              placeholderTextColor={Colors.textMuted}
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!showPassword}
+              accessibilityLabel="Password"
+              autoComplete={mode === 'signup' ? 'new-password' : 'password'}
+              textContentType={mode === 'signup' ? 'newPassword' : 'password'}
+              returnKeyType="go"
+              onSubmitEditing={handleSubmit}
+            />
+            <TouchableOpacity
+              style={styles.showPasswordBtn}
+              onPress={() => setShowPassword((v) => !v)}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel={showPassword ? 'Hide password' : 'Show password'}
+            >
+              <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={20} color={Colors.textMuted} />
+            </TouchableOpacity>
+          </View>
 
           {mode === 'signin' ? (
             <TouchableOpacity
@@ -227,9 +242,23 @@ export default function SignInScreen() {
             accessibilityLabel="Continue with Google"
             accessibilityState={{ disabled: loading, busy: loading }}
           >
-            <Text style={styles.googleBtnG}>G</Text>
+            <Ionicons name="logo-google" size={18} color="#4285F4" />
             <Text style={styles.googleBtnText}>Continue with Google</Text>
           </TouchableOpacity>
+
+          {mode === 'signup' ? (
+            <Text style={styles.legalText}>
+              By creating an account, you agree to our{' '}
+              <Text style={styles.legalLink} onPress={() => Linking.openURL(TERMS_OF_USE_URL).catch(() => undefined)}>
+                Terms of Use
+              </Text>{' '}
+              and{' '}
+              <Text style={styles.legalLink} onPress={() => Linking.openURL(PRIVACY_POLICY_URL).catch(() => undefined)}>
+                Privacy Policy
+              </Text>
+              .
+            </Text>
+          ) : null}
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -279,6 +308,15 @@ const styles = StyleSheet.create({
     color: Colors.red,
     fontSize: 13,
     textAlign: 'center',
+  },
+  passwordRow: { justifyContent: 'center' },
+  passwordInput: { paddingRight: 44 },
+  showPasswordBtn: {
+    position: 'absolute',
+    right: 12,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   forgotPassword: {
     alignItems: 'flex-end',
@@ -339,14 +377,20 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     height: 50,
   },
-  googleBtnG: {
-    fontSize: 18,
-    fontWeight: '900',
-    color: '#4285F4',
-  },
   googleBtnText: {
     fontSize: 15,
     fontWeight: '700',
     color: '#1a1a1a',
+  },
+  legalText: {
+    fontSize: 11,
+    color: Colors.textMuted,
+    textAlign: 'center',
+    lineHeight: 16,
+    marginTop: 4,
+  },
+  legalLink: {
+    color: Colors.teal,
+    fontWeight: '600',
   },
 });
