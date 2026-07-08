@@ -4,7 +4,7 @@
 
 *Bundle ID: `com.SillyGoose.OSPREY` · EAS Project: `efab587d-56da-4b0d-acec-e697c48b921a` · Supabase project: `jslbutpmgoushkzcghtg`*
 
-*Last updated: 2026-07-05*
+*Last updated: 2026-07-10*
 
 Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launch · 🟢 later
 
@@ -12,15 +12,20 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 
 ## 1. Backend go-live 🔴
 
-- [ ] **Sync migration history first.** All SQL now lives in `supabase/migrations/` (001–010 were moved from the repo root on 2026-07-05 and renamed to `20260628000001`–`...010`). Since 001–015 were originally applied by hand, run `supabase migration list` and mark any already-applied ones with `supabase migration repair --status applied <version>` **before** pushing.
-- [ ] `supabase db push --linked` — applies migrations 016–026 (delete account, lift prescriptions, hydration, expanded exercise library, interval prescriptions, triathlon goal, workout-import source, saved routes, challenge types, leaderboard v2, coach memory).
-- [ ] Deploy all edge functions: `ozzie-daily-brief`, `ozzie-generate-plan`, `ozzie-nutrition-coach`, `ozzie-meal-photo`, `ozzie-voice-log`, `ozzie-race-briefing`, `ozzie-race-retro`, `ozzie-data-export`.
+- [x] **Sync migration history first.** Verified 2026-07-10 via `supabase migration list` — local and remote are in lockstep for every migration `20260628000001` through `20260709000031` (and `...032` after it was applied). No repair needed.
+- [x] `supabase db push --linked` — all migrations through `032` applied (delete account, lift prescriptions, hydration, expanded exercise library, interval prescriptions, triathlon goal, workout-import source, saved routes, challenge types, leaderboard v2, coach memory, friend requests, friend search by phone, anon SELECT grants, TRUNCATE-grant revoke — see below).
+- [x] Deploy all edge functions — confirmed 2026-07-10 via `supabase functions list`: `ozzie-daily-brief`, `ozzie-generate-plan`, `ozzie-nutrition-coach`, `ozzie-meal-photo`, `ozzie-voice-log`, `ozzie-race-briefing`, `ozzie-race-retro`, `ozzie-data-export` are all `ACTIVE`.
 - [ ] Set secrets (Supabase → Edge Functions → Secrets):
   - [x] `OPENAI_API_KEY` — set 2026-07-05. Verify billing/credits are enabled on the OpenAI account (a key without billing 429s on every call).
-  - [ ] `ELEVENLABS_API_KEY` (must be set server-side, not just `.env.local`)
-  - [ ] `RESEND_API_KEY` + verified sending domain in Resend (data export emails); optionally `EXPORT_FROM_EMAIL`
-- [ ] Supabase → Auth: enable Apple + Google providers; add `osprey://auth-callback` redirect.
-- [ ] Verify RLS is enabled on all tables (Dashboard → Table Editor).
+  - [x] `ELEVENLABS_API_KEY` — confirmed set 2026-07-06 (verified via `supabase secrets list` 2026-07-10).
+  - [ ] `RESEND_API_KEY` + verified sending domain in Resend (data export emails); optionally `EXPORT_FROM_EMAIL` — **still not set**, confirmed missing 2026-07-10.
+- [ ] Supabase → Auth: enable Apple + Google providers.
+  - [x] Add `osprey://auth-callback` redirect — added 2026-07-10 (Redirect URLs allow-list was empty before this).
+  - [x] Site URL — updated 2026-07-10 from the `http://localhost:3000` dev default to `https://osprey.app`.
+  - [ ] Apple provider — confirmed **Disabled** in dashboard 2026-07-10. Needs an Apple Services ID + key from Apple Developer before it can be turned on.
+  - [ ] Google provider — confirmed **Disabled** in dashboard 2026-07-10. Needs a Google Cloud OAuth client ID/secret before it can be turned on.
+- [x] Verify RLS is enabled on all tables — checked 2026-07-10: 31/33 public tables have RLS on. The 2 without (`exercises`, `food_items`) are pure shared reference data with no `user_id` column, so that's correct as-is, not a gap.
+  - [x] **Found + fixed in the same pass:** every public table granted `TRUNCATE` to `anon`/`authenticated` (RLS doesn't govern TRUNCATE at all, so this was the one thing those policies could never stop). Not reachable through the app's normal PostgREST path, but closed as defense-in-depth via migration `032_revoke_truncate_grants.sql`. Confirmed 0 tables left with the grant afterward.
 - [ ] **Fresh native build** — native modules (`expo-calendar`, `expo-sqlite`, `react-native-health`, `react-native-maps`, `react-native-purchases`) don't work in Expo Go or old dev clients: `npx expo prebuild --clean` then EAS dev-client build. Use Node 20 (Node 22+ breaks Expo SDK 52).
 - [ ] **Verify SecureStore session migration on device** — 2026-07-06: Supabase auth session moved from plain AsyncStorage to encrypted storage (`src/services/secure-session-storage.ts`, AES key in Keychain/Keystore). On a device with an existing login, update the app and confirm you stay signed in across an app relaunch; also confirm fresh sign-in persists across relaunch.
 
