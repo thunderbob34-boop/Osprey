@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
+import { format } from 'date-fns';
 import {
   ActivityIndicator,
   SafeAreaView,
@@ -16,7 +17,7 @@ import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import { useHydration } from '@/hooks/useHydration';
 import { useWeatherCoach } from '@/hooks/useWeatherCoach';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
-import { formatDistanceKm, formatPacePerUnit, kmToMiles, type UnitSystem } from '@/services/units';
+import { formatDistanceKm, formatFluidOz, formatPacePerUnit, kmToMiles, type UnitSystem } from '@/services/units';
 import { estimateDayMacros, type DayMacroEstimate } from '@/services/nutrition-estimate';
 import { totalIntervalDistanceM } from '@/services/intervals';
 import type { WeatherSeverity } from '@/services/weather-coach';
@@ -88,6 +89,14 @@ function formatPace(session: SessionPreview, units: UnitSystem): string | null {
   return formatPacePerUnit(session.planned_minutes * 60, session.planned_distance_km, units);
 }
 
+/** Weekday name from the session's own date — not row order, which breaks for
+ * any short/reordered week (a race-week taper, a skipped day, etc). Parsed as
+ * a local date, same as calendar.tsx's day-sheet formatter. */
+function dayNameForDate(dateIso: string): string {
+  const [y, m, d] = dateIso.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('en-US', { weekday: 'long' });
+}
+
 interface SessionDetailPanelProps {
   session: SessionPreview;
   isViewOnly: boolean;
@@ -95,6 +104,7 @@ interface SessionDetailPanelProps {
   hydrationTargetOz: number | null;
   weatherNote: WeatherNote | null;
   isLast: boolean;
+  units: UnitSystem;
 }
 
 function SessionDetailPanel({
@@ -103,6 +113,7 @@ function SessionDetailPanel({
   macros,
   hydrationTargetOz,
   weatherNote,
+  units,
   isLast,
 }: SessionDetailPanelProps) {
   const intensityColor = INTENSITY_COLORS[session.intensity];
@@ -192,7 +203,9 @@ function SessionDetailPanel({
             </View>
           </View>
           {hydrationTargetOz != null ? (
-            <Text style={styles.hydrationLine}>💧 {hydrationTargetOz} oz water target</Text>
+            <Text style={styles.hydrationLine}>
+              💧 {formatFluidOz(hydrationTargetOz, units)} {units === 'metric' ? 'ml' : 'oz'} water target
+            </Text>
           ) : null}
         </View>
       ) : null}
@@ -311,11 +324,14 @@ export default function PlanPreviewScreen() {
     rest: '😴',
   };
 
-  const todayIso = useMemo(() => new Date().toISOString().slice(0, 10), []);
+  // Local date, not toISOString() — that flips to tomorrow before local
+  // midnight for anyone west of UTC (e.g. ~5pm Pacific), misattributing
+  // today's macro/weather annotations to the wrong day.
+  const todayIso = useMemo(() => format(new Date(), 'yyyy-MM-dd'), []);
   const tomorrowIso = useMemo(() => {
-    const d = new Date(`${todayIso}T00:00:00Z`);
-    d.setUTCDate(d.getUTCDate() + 1);
-    return d.toISOString().slice(0, 10);
+    const d = new Date(`${todayIso}T00:00:00`);
+    d.setDate(d.getDate() + 1);
+    return format(d, 'yyyy-MM-dd');
   }, [todayIso]);
   const todaySession = useMemo(
     () => sessions.find((s) => s.session_date === todayIso) ?? null,
@@ -471,9 +487,7 @@ export default function PlanPreviewScreen() {
             <Text style={styles.scheduleLabel}>SCHEDULE</Text>
             <View style={styles.scheduleCard}>
               {sessions.map((session, idx) => {
-                const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                const dayOfWeek = idx; // sessions are in order Mon-Sun
-                const dayName = dayNames[dayOfWeek] ?? `Day ${dayOfWeek}`;
+                const dayName = dayNameForDate(session.session_date);
                 const distance = formatDistance(session, units);
                 const pace = formatPace(session, units);
                 const isExpanded = expandedDate === session.session_date;
@@ -519,6 +533,7 @@ export default function PlanPreviewScreen() {
                         hydrationTargetOz={isViewOnly ? hydration?.targetOz ?? null : null}
                         weatherNote={weatherNoteForDate(session.session_date)}
                         isLast={isLast}
+                        units={units}
                       />
                     ) : null}
                   </Fragment>

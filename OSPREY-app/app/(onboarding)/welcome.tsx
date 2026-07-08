@@ -19,7 +19,7 @@ export default function WelcomeScreen() {
       <View style={styles.hero}>
         <OzzieMascot size={160} animated />
         <Text style={styles.subtitle}>
-          Your OSPREY coach. Three quick questions and I&apos;ll build your first plan —
+          Your OSPREY coach. A few quick questions and I&apos;ll build your first plan —
           about 90 seconds. <Text style={styles.subtitleAccent}>Ready?</Text>
         </Text>
       </View>

@@ -51,6 +51,16 @@ function countdownLabel(daysUntil: number): string {
   return `${daysUntil} days out`;
 }
 
+/** "Sep 12, 2026" from a yyyy-mm-dd string, parsed as a local date. */
+function formatEventDate(dateStr: string): string {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+
 // ─── Logistics panel ─────────────────────────────────────────────────────────
 
 interface LogisticsState {
@@ -455,7 +465,7 @@ function PartnersPanel({ race, onClose }: PartnersPanelProps) {
       <View style={styles.logisticsHeader}>
         <View>
           <Text style={styles.partnersTitle}>Training Partners</Text>
-          <Text style={styles.partnersSubtitle}>{race.eventDate}</Text>
+          <Text style={styles.partnersSubtitle}>{formatEventDate(race.eventDate)}</Text>
         </View>
         <TouchableOpacity onPress={onClose} hitSlop={10} accessibilityRole="button" accessibilityLabel="Close training partners">
           <Text style={styles.logisticsClose}>✕</Text>
@@ -887,54 +897,57 @@ export default function RacesScreen() {
                         <View style={{ flex: 1 }}>
                           <Text style={styles.raceName}>{race.name}</Text>
                           <Text style={styles.raceMeta}>
-                            {race.eventDate} · {countdownLabel(race.daysUntil)}
+                            {formatEventDate(race.eventDate)} · {countdownLabel(race.daysUntil)}
                             {race.distanceKm ? ` · ${formatDistanceKm(race.distanceKm, units)}` : ''}
                             {race.location ? ` · ${race.location}` : ''}
                           </Text>
                           <View style={styles.actionRow}>
-                            <TouchableOpacity
-                              onPress={() => handleLinkToPlan(race)}
-                              accessibilityRole="button"
-                              accessibilityLabel={`Link ${race.name} to training plan`}
-                            >
-                              <Text style={styles.actionLink}>Link to plan</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                              onPress={() =>
-                                setLogisticsRaceId((id) => (id === race.id ? null : race.id))
-                              }
-                              accessibilityRole="button"
-                              accessibilityLabel={`${logisticsRaceId === race.id ? 'Hide' : 'Show'} logistics for ${race.name}`}
-                              accessibilityState={{ expanded: logisticsRaceId === race.id }}
-                            >
-                              <Text
-                                style={[
-                                  styles.actionLink,
-                                  logisticsRaceId === race.id && styles.actionLinkActive,
-                                ]}
+                            <View style={styles.actionGroup}>
+                              <TouchableOpacity
+                                onPress={() => handleLinkToPlan(race)}
+                                accessibilityRole="button"
+                                accessibilityLabel={`Link ${race.name} to training plan`}
                               >
-                                Logistics
-                              </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                              onPress={() =>
-                                setPartnersRaceId((id) => (id === race.id ? null : race.id))
-                              }
-                              accessibilityRole="button"
-                              accessibilityLabel={`${partnersRaceId === race.id ? 'Hide' : 'Show'} training partners for ${race.name}`}
-                              accessibilityState={{ expanded: partnersRaceId === race.id }}
-                            >
-                              <Text
-                                style={[
-                                  styles.actionLink,
-                                  partnersRaceId === race.id && styles.actionLinkActive,
-                                ]}
+                                <Text style={styles.actionLink}>Link to plan</Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  setLogisticsRaceId((id) => (id === race.id ? null : race.id))
+                                }
+                                accessibilityRole="button"
+                                accessibilityLabel={`${logisticsRaceId === race.id ? 'Hide' : 'Show'} logistics for ${race.name}`}
+                                accessibilityState={{ expanded: logisticsRaceId === race.id }}
                               >
-                                Partners
-                              </Text>
-                            </TouchableOpacity>
+                                <Text
+                                  style={[
+                                    styles.actionLink,
+                                    logisticsRaceId === race.id && styles.actionLinkActive,
+                                  ]}
+                                >
+                                  Logistics
+                                </Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  setPartnersRaceId((id) => (id === race.id ? null : race.id))
+                                }
+                                accessibilityRole="button"
+                                accessibilityLabel={`${partnersRaceId === race.id ? 'Hide' : 'Show'} training partners for ${race.name}`}
+                                accessibilityState={{ expanded: partnersRaceId === race.id }}
+                              >
+                                <Text
+                                  style={[
+                                    styles.actionLink,
+                                    partnersRaceId === race.id && styles.actionLinkActive,
+                                  ]}
+                                >
+                                  Partners
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
                             <TouchableOpacity
                               onPress={() => handleDelete(race)}
+                              hitSlop={8}
                               accessibilityRole="button"
                               accessibilityLabel={`Remove ${race.name}`}
                             >
@@ -982,7 +995,7 @@ export default function RacesScreen() {
                         <View style={{ flex: 1 }}>
                           <Text style={styles.raceName}>{race.name}</Text>
                           <Text style={styles.raceMeta}>
-                            {race.eventDate}
+                            {formatEventDate(race.eventDate)}
                             {race.distanceKm ? ` · ${formatDistanceKm(race.distanceKm, units)}` : ''}
                             {race.resultTimeS ? ` · Finished ${formatRaceTime(race.resultTimeS)}` : ''}
                           </Text>
@@ -1076,18 +1089,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   discoverBtnText: { color: '#000', fontSize: 13, fontWeight: '800' },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
-  },
-  close: { color: Colors.textMuted, fontSize: 18, fontWeight: '700' },
   add: { color: Colors.teal, fontSize: 24, fontWeight: '700' },
-  title: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
   empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 8 },
   errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
@@ -1124,7 +1126,8 @@ const styles = StyleSheet.create({
   },
   raceName: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },
   raceMeta: { color: Colors.textMuted, fontSize: 12, marginTop: 3, lineHeight: 17 },
-  actionRow: { flexDirection: 'row', gap: 18, marginTop: 8 },
+  actionRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 },
+  actionGroup: { flexDirection: 'row', gap: 18, flexWrap: 'wrap', flexShrink: 1 },
   actionLink: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
   actionLinkActive: { color: Colors.gold },
   actionDelete: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },

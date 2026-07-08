@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { format } from 'date-fns';
 import { Colors } from '@/constants/colors';
 import { parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
 
@@ -86,7 +87,9 @@ export default function RaceSearchScreen() {
     setLoading(true);
     setError(null);
     try {
-      const todayStr = new Date().toISOString().slice(0, 10);
+      // Local date, not toISOString() — avoids excluding today's own races
+      // for anyone west of UTC in the evening.
+      const todayStr = format(new Date(), 'yyyy-MM-dd');
       const data = await searchRaces({
         query: q || undefined,
         startDateMin: todayStr,

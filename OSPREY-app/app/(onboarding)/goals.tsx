@@ -59,6 +59,7 @@ export default function GoalsScreen() {
       totalSteps={5}
       title="What's your main goal right now?"
       hint="This shapes your entire plan. You can always change it later."
+      continueDisabled={weeklyRunDays + weeklyLiftDays === 0}
       onContinue={() => router.push('/(onboarding)/health')}
     >
       {GOALS.map((goal) => (
@@ -77,11 +78,20 @@ export default function GoalsScreen() {
         <DayPicker label="Run days per week" value={weeklyRunDays} onChange={setWeeklyRunDays} />
         <DayPicker label="Lift days per week" value={weeklyLiftDays} onChange={setWeeklyLiftDays} />
       </View>
+      {weeklyRunDays + weeklyLiftDays === 0 ? (
+        <Text style={styles.zeroDaysHint}>Pick at least one training day to continue.</Text>
+      ) : null}
     </OnboardingShell>
   );
 }
 
 const styles = StyleSheet.create({
+  zeroDaysHint: {
+    fontSize: 12,
+    color: Colors.textMuted,
+    textAlign: 'center',
+    marginTop: 8,
+  },
   scheduleCard: {
     marginTop: 8,
     backgroundColor: Colors.bgCard,

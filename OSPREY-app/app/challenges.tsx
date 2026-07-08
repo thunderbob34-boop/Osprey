@@ -503,18 +503,7 @@ function ChallengeCard({ challenge: c, currentUserId, isLbOpen, onToggleLb, onLe
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
-  },
-  close: { color: Colors.textMuted, fontSize: 18, fontWeight: '700' },
   add: { color: Colors.teal, fontSize: 24, fontWeight: '700' },
-  title: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
   empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 8 },
   errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },

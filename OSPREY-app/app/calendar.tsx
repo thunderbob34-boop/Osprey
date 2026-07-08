@@ -104,6 +104,7 @@ export default function CalendarScreen() {
         <TouchableOpacity
           onPress={goToPrevMonth}
           style={styles.navBtn}
+          hitSlop={12}
           accessibilityRole="button"
           accessibilityLabel="Previous month"
         >
@@ -113,6 +114,7 @@ export default function CalendarScreen() {
         <TouchableOpacity
           onPress={goToNextMonth}
           style={styles.navBtn}
+          hitSlop={12}
           accessibilityRole="button"
           accessibilityLabel="Next month"
         >
@@ -260,16 +262,6 @@ export default function CalendarScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingTop: 12,
-    paddingBottom: 8,
-  },
-  backBtn: { fontSize: 14, color: Colors.teal, fontWeight: '700', width: 50 },
-  title: { fontSize: 17, fontWeight: '800', color: Colors.textPrimary },
   monthNav: {
     flexDirection: 'row',
     alignItems: 'center',

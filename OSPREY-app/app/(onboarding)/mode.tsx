@@ -38,7 +38,7 @@ export default function ModeScreen() {
         selected={experienceTier === 'advanced'}
         onPress={() => setExperienceTier('advanced')}
       />
-      <Text style={styles.note}>You can switch modes any time in Settings</Text>
+      <Text style={styles.note}>You can change this any time in Settings → Training Preferences</Text>
     </OnboardingShell>
   );
 }
