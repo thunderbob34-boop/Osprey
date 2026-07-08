@@ -1,10 +1,15 @@
-import * as SQLite from 'expo-sqlite';
+import type * as SQLite from 'expo-sqlite';
 
 // Local read-through cache backed by SQLite. Every wrapped read-query writes
 // its successful result here; when the network call later fails (offline), the
 // same key serves the last-known-good value so the app stays usable without a
 // signal. Phase 1 scope: plan/session data, daily summary, stats, calendar,
 // today's log, nutrition, and the exercise library.
+//
+// expo-sqlite has no web implementation and throws at import time on web, so
+// the module is required lazily (inside the try/catch call sites below)
+// rather than imported at the top — native behavior is unchanged, and web
+// callers just get a cache-miss no-op.
 
 const DB_NAME = 'osprey-offline.db';
 const TTL_MS = 7 * 24 * 60 * 60 * 1000; // keep up to 7 days of cached reads
@@ -13,7 +18,8 @@ let dbPromise: Promise<SQLite.SQLiteDatabase> | null = null;
 
 async function getDb(): Promise<SQLite.SQLiteDatabase> {
   if (!dbPromise) {
-    dbPromise = SQLite.openDatabaseAsync(DB_NAME).then(async (db) => {
+    const SQLiteModule = require('expo-sqlite') as typeof SQLite;
+    dbPromise = SQLiteModule.openDatabaseAsync(DB_NAME).then(async (db) => {
       await db.execAsync(
         `CREATE TABLE IF NOT EXISTS cache_kv (
            key TEXT PRIMARY KEY NOT NULL,
