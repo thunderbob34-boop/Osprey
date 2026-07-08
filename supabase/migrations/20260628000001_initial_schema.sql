@@ -241,23 +241,13 @@ CREATE TABLE activity_logs (
 CREATE INDEX idx_activity_logs_workout ON activity_logs(workout_id, recorded_at);
 
 
-CREATE TABLE saved_routes (
-  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id       UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  name          TEXT NOT NULL,
-  distance_km   NUMERIC(7,3),
-  surface       run_surface_enum,
-  gpx_url       TEXT,   -- Supabase Storage URL for GPX file
-  start_lat     NUMERIC(10,7),
-  start_lon     NUMERIC(10,7),
-  is_public     BOOLEAN NOT NULL DEFAULT FALSE,
-  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  deleted_at    TIMESTAMPTZ
-);
-
-CREATE TRIGGER saved_routes_updated_at BEFORE UPDATE ON saved_routes
-  FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+-- Note: saved_routes is intentionally NOT defined here. It's created by
+-- migration 023_saved_routes.sql, which the app's src/services/routes.ts
+-- actually queries (tags/distance_km/notes columns). An earlier, unused
+-- draft schema (surface/gpx_url/start_lat/start_lon/is_public) briefly
+-- lived in this file and its matching RLS block in 004_fix_remaining_rls.sql
+-- — both removed (2026-07-08 audit) since replaying migrations against a
+-- fresh database hit "relation saved_routes already exists" at 023.
 
 
 -- ============================================================

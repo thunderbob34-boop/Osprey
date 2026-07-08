@@ -3,7 +3,7 @@
 -- 001 enabled RLS + wrote policies for these tables, but never
 -- granted table privileges to `authenticated` (Postgres denies by
 -- default regardless of RLS policies until GRANT is issued).
--- Also fixes two tables 001 missed entirely: friendships, saved_routes.
+-- Also fixes a table 001 missed entirely: friendships.
 -- ============================================================
 
 -- ── Tables with existing 001 policies that just need grants ──
@@ -44,23 +44,6 @@ CREATE POLICY friendships_delete ON friendships
   FOR DELETE TO authenticated
   USING (requester_id = auth.uid() OR addressee_id = auth.uid());
 
--- ── saved_routes: 001 never enabled RLS for this user-owned table ──
-ALTER TABLE saved_routes ENABLE ROW LEVEL SECURITY;
-GRANT SELECT, INSERT, UPDATE, DELETE ON saved_routes TO authenticated;
-
-CREATE POLICY saved_routes_select ON saved_routes
-  FOR SELECT TO authenticated
-  USING (user_id = auth.uid() OR is_public = true);
-
-CREATE POLICY saved_routes_insert ON saved_routes
-  FOR INSERT TO authenticated
-  WITH CHECK (user_id = auth.uid());
-
-CREATE POLICY saved_routes_update ON saved_routes
-  FOR UPDATE TO authenticated
-  USING (user_id = auth.uid())
-  WITH CHECK (user_id = auth.uid());
-
-CREATE POLICY saved_routes_delete ON saved_routes
-  FOR DELETE TO authenticated
-  USING (user_id = auth.uid());
+-- Note: saved_routes RLS/grants are NOT set up here — see the removal note
+-- in 001_initial_schema.sql. migration 023_saved_routes.sql sets up RLS for
+-- the table it actually creates.

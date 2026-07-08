@@ -14,7 +14,7 @@ import {
 import { useRouter } from 'expo-router';
 import { format } from 'date-fns';
 import { Colors } from '@/constants/colors';
-import { parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
+import { fetchRaceDistances, parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
 
 const DISTANCE_FILTERS = ['All', '5K', '10K', 'Half', 'Full'] as const;
 type DistanceFilter = (typeof DISTANCE_FILTERS)[number];
@@ -82,8 +82,10 @@ export default function RaceSearchScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const requestIdRef = useRef(0);
 
   const runSearch = useCallback(async (q: string) => {
+    const requestId = ++requestIdRef.current;
     setLoading(true);
     setError(null);
     try {
@@ -94,13 +96,27 @@ export default function RaceSearchScreen() {
         query: q || undefined,
         startDateMin: todayStr,
       });
+      if (requestId !== requestIdRef.current) return;
       if (data.length === 0 && !q) {
         setError(null);
       }
       setResults(data);
+      setLoading(false);
+
+      // RunSignUp's race-list endpoint never includes each race's events, so
+      // `distances` comes back empty here — the 5K/10K/Half/Full filter
+      // chips (and the badges on each card) would otherwise always be
+      // empty/non-matching. Fetch each race's real distances from its detail
+      // endpoint and merge them in once they resolve, without blocking the
+      // initial render.
+      const enriched = await Promise.all(
+        data.map(async (r) => ({ ...r, distances: await fetchRaceDistances(r.raceId) })),
+      );
+      if (requestId !== requestIdRef.current) return;
+      setResults(enriched);
     } catch {
+      if (requestId !== requestIdRef.current) return;
       setError("Couldn't load races. Check your connection.");
-    } finally {
       setLoading(false);
     }
   }, []);

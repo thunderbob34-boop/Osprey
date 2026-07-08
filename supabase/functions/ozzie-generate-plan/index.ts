@@ -290,6 +290,40 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad)
   }>;
 }
 
+// session_type/intensity are DB enum columns — an unrecognized value from
+// the model throws a Postgres enum error and 500s the whole request (the
+// user's only plan). Whitelist against the actual enum values and drop
+// anything malformed instead of trusting the model's output verbatim; a
+// week left with fewer than 7 sessions self-heals on the next call via the
+// existingWeekIsBroken check above.
+const VALID_SESSION_TYPES = new Set([
+  'run', 'lift', 'cross', 'rest', 'race', 'rowing', 'hyrox', 'swim', 'bike',
+]);
+const VALID_INTENSITIES = new Set(['easy', 'moderate', 'threshold', 'interval', 'race', 'rest']);
+
+function sanitizeDays<T extends { dayOffset: number; session_type: string; intensity: string }>(
+  days: T[],
+): T[] {
+  const seenOffsets = new Set<number>();
+  const valid: T[] = [];
+  for (const day of days) {
+    if (
+      !Number.isInteger(day.dayOffset) ||
+      day.dayOffset < 0 ||
+      day.dayOffset > 6 ||
+      seenOffsets.has(day.dayOffset) ||
+      !VALID_SESSION_TYPES.has(day.session_type) ||
+      !VALID_INTENSITIES.has(day.intensity)
+    ) {
+      console.error('[ozzie-generate-plan] dropping malformed plan day from model output', day);
+      continue;
+    }
+    seenOffsets.add(day.dayOffset);
+    valid.push(day);
+  }
+  return valid;
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
@@ -321,13 +355,18 @@ Deno.serve(async (req: Request) => {
     const forceRebuild = body.force === true && (Boolean(body.preferences) || Boolean(body.raceTarget));
 
     // Idempotency: does an active plan already have a week starting this Monday?
-    const { data: existingWeek } = await supabase
+    // .limit(1) instead of .maybeSingle() — if a user ever ends up with more
+    // than one active plan sharing this Monday's start_date, maybeSingle()
+    // throws PGRST116 and 500s every silent home-screen load; take the first
+    // match instead of hard-failing on a data state this endpoint doesn't own.
+    const { data: existingWeeks } = await supabase
       .from('training_weeks')
       .select('id, plan_id, training_plans!inner(user_id, status)')
       .eq('start_date', weekStartStr)
       .eq('training_plans.user_id', userId)
       .eq('training_plans.status', 'active')
-      .maybeSingle();
+      .limit(1);
+    const existingWeek = existingWeeks?.[0] ?? null;
 
     let sessionCountForWeek = 0;
     if (existingWeek) {
@@ -390,10 +429,21 @@ Deno.serve(async (req: Request) => {
         // Split days roughly evenly across all four disciplines, each
         // guaranteed at least 1 day whenever the weekly total allows it.
         const total = prefs.daysPerWeek;
-        weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
-        weeklySwimDays = Math.max(1, Math.round(total * 0.2));
-        weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
-        weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
+        if (total <= 3) {
+          // Not enough days for all 4 disciplines to get their own day and
+          // still sum to `total` — drop the dedicated lift day (still
+          // covered by brick-session strength cues) and split the rest
+          // across the three actual triathlon disciplines.
+          weeklyLiftDays = 0;
+          weeklyBikeDays = Math.max(1, Math.round(total * 0.4));
+          weeklySwimDays = Math.max(1, Math.round(total * 0.3));
+          weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays);
+        } else {
+          weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
+          weeklySwimDays = Math.max(1, Math.round(total * 0.2));
+          weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
+          weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
+        }
       } else {
         weeklyRunDays = prefs.daysPerWeek >= 2 ? Math.ceil(prefs.daysPerWeek * 0.6) : 2;
         weeklyLiftDays = prefs.daysPerWeek >= 2 ? Math.floor(prefs.daysPerWeek * 0.4) : 1;
@@ -554,7 +604,7 @@ Deno.serve(async (req: Request) => {
       weekId = week.id as string;
     }
 
-    const days = await generateWeekDays(goals, trainingLoad);
+    const days = sanitizeDays(await generateWeekDays(goals, trainingLoad));
 
     const sessionRows = days.map((day) => {
       const sessionDate = new Date(weekStart);

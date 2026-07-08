@@ -12,7 +12,7 @@ export default function ModeScreen() {
   return (
     <OnboardingShell
       step={2}
-      totalSteps={5}
+      totalSteps={4}
       title="How would you describe yourself as a trainer right now?"
       hint="This sets how I talk to you and what metrics I focus on. You can change it any time."
       onContinue={() => router.push('/(onboarding)/goals')}

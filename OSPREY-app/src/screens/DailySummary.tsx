@@ -185,7 +185,7 @@ export default function DailySummaryScreen({
               style={styles.avatarBtn}
               onPress={onOzziePress}
               accessibilityRole="button"
-              accessibilityLabel="Ask Ozzie"
+              accessibilityLabel="Today's read from Ozzie"
             >
               <OzzieAvatar size={36} />
             </TouchableOpacity>

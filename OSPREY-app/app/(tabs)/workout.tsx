@@ -144,9 +144,9 @@ export default function WorkoutTab() {
                 onPress={() => router.push('/preferences')}
                 style={styles.bannerButton}
                 accessibilityRole="button"
-                accessibilityLabel="Recalibrate plan"
+                accessibilityLabel="Rebuild training plan"
               >
-                <Text style={[styles.bannerButtonText, { color: Colors.teal }]}>Recalibrate →</Text>
+                <Text style={[styles.bannerButtonText, { color: Colors.teal }]}>Rebuild plan →</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={dismissAlert}

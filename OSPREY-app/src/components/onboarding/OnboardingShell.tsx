@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import OzzieAvatar from '@/components/OzzieAvatar';
 
@@ -36,14 +38,26 @@ export default function OnboardingShell({
   loading = false,
   showOzzie = true,
 }: OnboardingShellProps) {
+  const router = useRouter();
   const progress = totalSteps > 0 ? (step / totalSteps) * 100 : 0;
 
   return (
     <SafeAreaView style={styles.container}>
       {step > 0 ? (
         <View style={styles.progressWrap}>
-          <View style={styles.progressTrack}>
-            <View style={[styles.progressFill, { width: `${progress}%` }]} />
+          <View style={styles.progressRow}>
+            <TouchableOpacity
+              onPress={() => router.back()}
+              hitSlop={12}
+              style={styles.backBtn}
+              accessibilityRole="button"
+              accessibilityLabel="Go back"
+            >
+              <Ionicons name="chevron-back" size={22} color={Colors.textMuted} />
+            </TouchableOpacity>
+            <View style={styles.progressTrack}>
+              <View style={[styles.progressFill, { width: `${progress}%` }]} />
+            </View>
           </View>
           <Text style={styles.progressLabel}>
             Step {step} of {totalSteps}
@@ -144,7 +158,16 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     gap: 6,
   },
+  progressRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  backBtn: {
+    marginLeft: -8,
+  },
   progressTrack: {
+    flex: 1,
     height: 4,
     backgroundColor: 'rgba(255,255,255,0.08)',
     borderRadius: 2,
