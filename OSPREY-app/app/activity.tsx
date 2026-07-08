@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useActivity } from '@/hooks/useActivity';
@@ -25,6 +26,8 @@ function formatWorkoutType(type: string): string {
       return '🏋️ Lift';
     case 'cross':
       return '🔁 Cross';
+    case 'rowing':
+      return '🚣 Rowing';
     case 'race':
       return '🏁 Race';
     default:
@@ -73,7 +76,19 @@ export default function ActivityScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScreenHeader title="Activity" />
+      <ScreenHeader
+        title="Activity"
+        right={
+          <TouchableOpacity
+            onPress={() => router.push('/friends')}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel="Friends"
+          >
+            <Ionicons name="person-add-outline" size={22} color={Colors.teal} />
+          </TouchableOpacity>
+        }
+      />
 
       <ScrollView contentContainerStyle={styles.scroll}>
         {isLoading ? (
@@ -82,7 +97,8 @@ export default function ActivityScreen() {
           <Text style={styles.errorText}>Couldn&apos;t load activity feed.</Text>
         ) : !feed || feed.length === 0 ? (
           <Text style={styles.empty}>
-            No activity yet. Complete a workout and tap the heart on Home to share it with friends.
+            No activity yet. Share a completed workout from its recap screen to post it here for
+            your friends.
           </Text>
         ) : (
           feed.map((card) => (
@@ -148,17 +164,6 @@ export default function ActivityScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
-  },
-  close: { color: Colors.textMuted, fontSize: 18, fontWeight: '700' },
-  title: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },
   scroll: { padding: 16, paddingBottom: 32, gap: 12 },
   empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 24 },
   errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
