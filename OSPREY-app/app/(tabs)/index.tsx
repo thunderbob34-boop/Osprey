@@ -122,6 +122,7 @@ export default function HomeTab() {
       onActivityPress={() => router.push('/activity')}
       onOzziePress={() => router.push('/ask-ozzie')}
       onViewWeekPress={() => router.push('/plan-preview')}
+      onConnectHealthPress={() => router.push('/(tabs)/settings')}
       hydration={hydration}
       onAddHydration={(oz) => addHydration.mutate(oz)}
       hydrationEmphasized={weatherCoach?.severity === 'alert'}

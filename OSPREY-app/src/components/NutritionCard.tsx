@@ -2,13 +2,18 @@ import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { formatFluidOz, mlToOz } from '@/services/units';
 import type { FuelStatusData } from '@/types/daily-summary';
 
 // Shown only while the very first fetch is in flight or if it fails —
 // real targets always come from ozzie-nutrition-coach once loaded, which
 // adapts to the user's goal, today's session, and their weight trend.
 const FALLBACK = { protein: 200, carbs: 220, fat: 70, calories: 2400 };
-const QUICK_ADDS = [8, 16, 24];
+// Metric quick-adds are round ml amounts, not conversions of the imperial
+// ones — matches how a metric user would actually think about a glass/bottle.
+const QUICK_ADDS_OZ = [8, 16, 24];
+const QUICK_ADDS_ML = [250, 500, 750];
 
 interface NutritionCardProps {
   hydration?: { ounces: number; targetOz: number };
@@ -28,6 +33,8 @@ export default function NutritionCard({
   showFuelTip = true,
 }: NutritionCardProps) {
   const { data, isLoading } = useNutritionCoaching();
+  const { units } = useUnitPreference();
+  const unitLabel = units === 'metric' ? 'ml' : 'oz';
 
   const targets = data?.target
     ? {
@@ -68,8 +75,8 @@ export default function NutritionCard({
                 <Text style={styles.sectionLabel}>HYDRATION</Text>
               </View>
               <Text style={styles.amount}>
-                {Math.round(hydration.ounces)}{' '}
-                <Text style={styles.amountTarget}>/ {Math.round(hydration.targetOz)} oz</Text>
+                {formatFluidOz(hydration.ounces, units)}{' '}
+                <Text style={styles.amountTarget}>/ {formatFluidOz(hydration.targetOz, units)} {unitLabel}</Text>
               </Text>
             </View>
             <View style={styles.track}>
@@ -81,15 +88,15 @@ export default function NutritionCard({
               />
             </View>
             <View style={styles.quickAddRow}>
-              {QUICK_ADDS.map((oz) => (
+              {(units === 'metric' ? QUICK_ADDS_ML : QUICK_ADDS_OZ).map((amount) => (
                 <TouchableOpacity
-                  key={oz}
+                  key={amount}
                   style={styles.quickAddBtn}
-                  onPress={() => onAddHydration?.(oz)}
+                  onPress={() => onAddHydration?.(units === 'metric' ? mlToOz(amount) : amount)}
                   accessibilityRole="button"
-                  accessibilityLabel={`Add ${oz} ounces of water`}
+                  accessibilityLabel={`Add ${amount} ${unitLabel} of water`}
                 >
-                  <Text style={styles.quickAddText}>+{oz} oz</Text>
+                  <Text style={styles.quickAddText}>+{amount} {unitLabel}</Text>
                 </TouchableOpacity>
               ))}
             </View>

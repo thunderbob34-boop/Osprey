@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { formatFluidOz, mlToOz } from '@/services/units';
 
 interface HydrationCardProps {
   ounces: number;
@@ -10,11 +12,16 @@ interface HydrationCardProps {
   emphasized?: boolean;
 }
 
-const QUICK_ADDS = [8, 16, 24];
+// Metric quick-adds are round ml amounts, not conversions of the imperial
+// ones — matches how a metric user would actually think about a glass/bottle.
+const QUICK_ADDS_OZ = [8, 16, 24];
+const QUICK_ADDS_ML = [250, 500, 750];
 
 export default function HydrationCard({ ounces, targetOz, onAdd, emphasized }: HydrationCardProps) {
+  const { units } = useUnitPreference();
   const progress = targetOz > 0 ? Math.min(1, ounces / targetOz) : 0;
   const met = progress >= 1;
+  const unitLabel = units === 'metric' ? 'ml' : 'oz';
 
   return (
     <View style={[styles.card, emphasized && styles.cardEmphasized]}>
@@ -24,7 +31,8 @@ export default function HydrationCard({ ounces, targetOz, onAdd, emphasized }: H
           <Text style={styles.label}>HYDRATION</Text>
         </View>
         <Text style={styles.amount}>
-          {Math.round(ounces)} <Text style={styles.amountTarget}>/ {Math.round(targetOz)} oz</Text>
+          {formatFluidOz(ounces, units)}{' '}
+          <Text style={styles.amountTarget}>/ {formatFluidOz(targetOz, units)} {unitLabel}</Text>
         </Text>
       </View>
 
@@ -38,15 +46,15 @@ export default function HydrationCard({ ounces, targetOz, onAdd, emphasized }: H
       </View>
 
       <View style={styles.quickAddRow}>
-        {QUICK_ADDS.map((oz) => (
+        {(units === 'metric' ? QUICK_ADDS_ML : QUICK_ADDS_OZ).map((amount) => (
           <TouchableOpacity
-            key={oz}
+            key={amount}
             style={styles.quickAddBtn}
-            onPress={() => onAdd(oz)}
+            onPress={() => onAdd(units === 'metric' ? mlToOz(amount) : amount)}
             accessibilityRole="button"
-            accessibilityLabel={`Add ${oz} ounces of water`}
+            accessibilityLabel={`Add ${amount} ${unitLabel} of water`}
           >
-            <Text style={styles.quickAddText}>+{oz} oz</Text>
+            <Text style={styles.quickAddText}>+{amount} {unitLabel}</Text>
           </TouchableOpacity>
         ))}
       </View>

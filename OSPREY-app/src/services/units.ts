@@ -4,6 +4,7 @@ import { kgToLb } from '@/services/body-metrics';
 export type UnitSystem = 'imperial' | 'metric';
 
 const KM_TO_MILES = 0.621371;
+const OZ_TO_ML = 29.5735;
 
 export async function fetchUnitPreference(userId: string): Promise<UnitSystem> {
   const { data, error } = await supabase.from('users').select('units').eq('id', userId).maybeSingle();
@@ -33,6 +34,23 @@ export function kmToMiles(km: number): number {
 
 export function milesToKm(miles: number): number {
   return miles / KM_TO_MILES;
+}
+
+/**
+ * Hydration is stored purely in ounces in the DB (log_hydration RPC takes
+ * p_ounces) regardless of unit preference — these only convert at the
+ * display layer, same pattern as kmToMiles/milesToKm above.
+ */
+export function ozToMl(oz: number): number {
+  return oz * OZ_TO_ML;
+}
+
+export function mlToOz(ml: number): number {
+  return ml / OZ_TO_ML;
+}
+
+export function formatFluidOz(oz: number, units: UnitSystem): string {
+  return units === 'metric' ? `${Math.round(ozToMl(oz))}` : `${Math.round(oz)}`;
 }
 
 /** "M:SS /mi" or "M:SS /km" from a total time + distance, honoring the global unit. */

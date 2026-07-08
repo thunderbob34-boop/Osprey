@@ -86,6 +86,8 @@ export interface DailySummaryProps extends Partial<DailySummaryData> {
   onActivityPress?: () => void;
   onOzziePress?: () => void;
   onViewWeekPress?: () => void;
+  /** Shown as a tap target on the Body Battery empty state ("no score yet"). */
+  onConnectHealthPress?: () => void;
   headerBanner?: React.ReactNode;
   weatherCard?: React.ReactNode;
   hydration?: { ounces: number; targetOz: number };

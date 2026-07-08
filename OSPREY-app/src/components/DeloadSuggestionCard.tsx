@@ -1,4 +1,5 @@
 import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { format } from 'date-fns';
 import { Colors } from '@/constants/colors';
 import type { WeekSession } from '@/services/plan';
 
@@ -11,7 +12,9 @@ interface Props {
 }
 
 function formatSessionDay(dateStr: string): string {
-  const todayStr = new Date().toISOString().slice(0, 10);
+  // Local date, not toISOString() — that flips to tomorrow before local
+  // midnight for anyone west of UTC (e.g. ~5pm Pacific).
+  const todayStr = format(new Date(), 'yyyy-MM-dd');
   if (dateStr === todayStr) return "Today's";
   const date = new Date(`${dateStr}T00:00:00`);
   return `${date.toLocaleDateString('en-US', { weekday: 'long' })}'s`;
@@ -75,7 +78,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.amber,
     borderRadius: 14,
     padding: 16,
-    marginHorizontal: 16,
     marginBottom: 12,
     gap: 8,
   },

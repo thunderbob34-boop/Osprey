@@ -9,7 +9,7 @@ import {
   StatusBar,
   ActivityIndicator,
   RefreshControl,
-  Alert,
+  Modal,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
@@ -88,6 +88,7 @@ export default function DailySummaryScreen({
   onActivityPress,
   onOzziePress,
   onViewWeekPress,
+  onConnectHealthPress,
   headerBanner,
   weatherCard,
   hydration,
@@ -98,38 +99,18 @@ export default function DailySummaryScreen({
   const greeting = getGreeting();
   const { units } = useUnitPreference();
 
-  function handleSwapPress() {
-    Alert.alert('Swap today\'s session', 'Same training effect, different shape.', [
-      { text: 'Run', onPress: () => onSwapSession?.('run') },
-      { text: 'Lift', onPress: () => onSwapSession?.('lift') },
-      { text: 'Cross Training', onPress: () => onSwapSession?.('cross') },
-      { text: 'Make it Rest', onPress: () => onSwapSession?.('rest'), style: 'destructive' },
-      { text: 'Cancel', style: 'cancel' },
-    ]);
-  }
-
-  function handleCompressPress() {
-    Alert.alert('Short on time?', "I'll shrink today's session to fit — same effort, less volume.", [
-      { text: '15 min', onPress: () => onCompressSession?.(15) },
-      { text: '20 min', onPress: () => onCompressSession?.(20) },
-      { text: '30 min', onPress: () => onCompressSession?.(30) },
-      { text: 'Cancel', style: 'cancel' },
-    ]);
-  }
-
-  // Single entry point for session tweaks — keeps the card down to two buttons.
-  function handleAdjustPress() {
-    const options = [];
-    if (onSwapSession) {
-      options.push({ text: 'Swap workout type', onPress: handleSwapPress });
-    }
-    if (onCompressSession) {
-      options.push({ text: 'Short on time?', onPress: handleCompressPress });
-    }
-    options.push({ text: 'Cancel', style: 'cancel' as const });
-    Alert.alert('Adjust today\'s session', undefined, options);
-  }
   const [whyExpanded, setWhyExpanded] = useState(false);
+  const [adjustSheetOpen, setAdjustSheetOpen] = useState(false);
+
+  function handleSwap(newType: 'run' | 'lift' | 'cross' | 'rest') {
+    setAdjustSheetOpen(false);
+    onSwapSession?.(newType);
+  }
+
+  function handleCompress(minutes: number) {
+    setAdjustSheetOpen(false);
+    onCompressSession?.(minutes);
+  }
 
   if (isLoading) {
     return (
@@ -219,7 +200,14 @@ export default function DailySummaryScreen({
               <Text
                 style={[
                   styles.recoveryLabel,
-                  { color: recovery.recommendation === 'train' ? Colors.green : Colors.amber },
+                  {
+                    color:
+                      recovery.recommendation === 'train'
+                        ? Colors.green
+                        : recovery.recommendation === 'easy'
+                          ? Colors.amber
+                          : Colors.recoveryRed,
+                  },
                 ]}
               >
                 {recovery.label}
@@ -232,15 +220,24 @@ export default function DailySummaryScreen({
             />
           </View>
         ) : (
-          <View style={styles.recoveryCard}>
+          <TouchableOpacity
+            style={styles.recoveryCard}
+            activeOpacity={onConnectHealthPress ? 0.7 : 1}
+            onPress={onConnectHealthPress}
+            disabled={!onConnectHealthPress}
+            accessibilityRole={onConnectHealthPress ? 'button' : undefined}
+            accessibilityLabel={onConnectHealthPress ? 'Connect Apple Health in Settings' : undefined}
+          >
             <View style={styles.recoveryLeft}>
               <Text style={styles.recoveryTitle}>Body Battery</Text>
               <Text style={styles.recoveryLabel}>No score yet</Text>
               <Text style={styles.recoverySubtext}>
-                Connect Apple Health or log a workout to unlock recovery scoring.
+                {onConnectHealthPress
+                  ? 'Tap to connect Apple Health, or log a workout to unlock recovery scoring.'
+                  : 'Connect Apple Health or log a workout to unlock recovery scoring.'}
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
 
         {/* ── Training Readiness (OSPREY+) ── */}
@@ -248,18 +245,10 @@ export default function DailySummaryScreen({
           <ReadinessCard readiness={trainingReadiness} />
         ) : null}
 
-        {/* ── Nutrition (fuel targets + hydration + meal timing) ── */}
-        <NutritionCard
-          hydration={hydration}
-          onAddHydration={onAddHydration}
-          hydrationEmphasized={hydrationEmphasized}
-          fuelStatus={fuelStatus}
-          showFuelTip={session.sessionType !== 'rest'}
-        />
-
         {headerBanner ?? null}
 
-        {/* ── Today's Session Card ── */}
+        {/* ── Today's Session Card — the day's #1 question, so it sits right
+             under Battery/Readiness rather than below the Nutrition card. ── */}
         <View style={styles.sessionCard}>
           <View style={styles.sessionHeader}>
             <Text style={styles.sessionLabel}>TODAY&apos;S SESSION</Text>
@@ -337,7 +326,7 @@ export default function DailySummaryScreen({
             session.sessionType !== 'rest' ? (
               <TouchableOpacity
                 style={styles.adjustBtn}
-                onPress={handleAdjustPress}
+                onPress={() => setAdjustSheetOpen(true)}
                 accessibilityRole="button"
                 accessibilityLabel="Adjust today's session"
               >
@@ -348,6 +337,15 @@ export default function DailySummaryScreen({
         </View>
 
         {weatherCard ?? null}
+
+        {/* ── Nutrition (fuel targets + hydration + meal timing) ── */}
+        <NutritionCard
+          hydration={hydration}
+          onAddHydration={onAddHydration}
+          hydrationEmphasized={hydrationEmphasized}
+          fuelStatus={fuelStatus}
+          showFuelTip={session.sessionType !== 'rest'}
+        />
 
         {/* ── Weekly Progress ── */}
         <View style={styles.weekCard}>
@@ -394,6 +392,111 @@ export default function DailySummaryScreen({
         ) : null}
 
       </ScrollView>
+
+      {/* ── Adjust session bottom sheet — replaces the old chained Alert.alert
+           menus (Adjust → Swap/Compress → specific choice) with every option
+           visible at once. ── */}
+      <Modal
+        visible={adjustSheetOpen}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setAdjustSheetOpen(false)}
+      >
+        <TouchableOpacity
+          style={styles.sheetBackdrop}
+          activeOpacity={1}
+          onPress={() => setAdjustSheetOpen(false)}
+          accessibilityRole="button"
+          accessibilityLabel="Close"
+        />
+        <View style={styles.sheet}>
+          <View style={styles.sheetHandle} />
+          <Text style={styles.sheetTitle}>Adjust Today&apos;s Session</Text>
+
+          {onSwapSession ? (
+            <>
+              <Text style={styles.sheetSectionLabel}>SWAP TO</Text>
+              <View style={styles.sheetRowGroup}>
+                <TouchableOpacity
+                  style={styles.sheetRow}
+                  onPress={() => handleSwap('run')}
+                  accessibilityRole="button"
+                  accessibilityLabel="Swap to Run"
+                >
+                  <Text style={styles.sheetRowText}>🏃 Run</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.sheetRow}
+                  onPress={() => handleSwap('lift')}
+                  accessibilityRole="button"
+                  accessibilityLabel="Swap to Lift"
+                >
+                  <Text style={styles.sheetRowText}>🏋️ Lift</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.sheetRow}
+                  onPress={() => handleSwap('cross')}
+                  accessibilityRole="button"
+                  accessibilityLabel="Swap to Cross Training"
+                >
+                  <Text style={styles.sheetRowText}>🔁 Cross Training</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.sheetRow, styles.sheetRowLast]}
+                  onPress={() => handleSwap('rest')}
+                  accessibilityRole="button"
+                  accessibilityLabel="Make it a rest day"
+                >
+                  <Text style={[styles.sheetRowText, styles.sheetRowTextDestructive]}>
+                    😴 Make it a Rest Day
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          ) : null}
+
+          {onCompressSession ? (
+            <>
+              <Text style={styles.sheetSectionLabel}>SHORT ON TIME?</Text>
+              <View style={styles.sheetRowGroup}>
+                <TouchableOpacity
+                  style={styles.sheetRow}
+                  onPress={() => handleCompress(15)}
+                  accessibilityRole="button"
+                  accessibilityLabel="Shrink to 15 minutes"
+                >
+                  <Text style={styles.sheetRowText}>15 min</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.sheetRow}
+                  onPress={() => handleCompress(20)}
+                  accessibilityRole="button"
+                  accessibilityLabel="Shrink to 20 minutes"
+                >
+                  <Text style={styles.sheetRowText}>20 min</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.sheetRow, styles.sheetRowLast]}
+                  onPress={() => handleCompress(30)}
+                  accessibilityRole="button"
+                  accessibilityLabel="Shrink to 30 minutes"
+                >
+                  <Text style={styles.sheetRowText}>30 min</Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          ) : null}
+
+          <TouchableOpacity
+            style={styles.sheetCloseBtn}
+            onPress={() => setAdjustSheetOpen(false)}
+            accessibilityRole="button"
+            accessibilityLabel="Cancel"
+          >
+            <Text style={styles.sheetCloseBtnText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
 
     </SafeAreaView>
   );
@@ -495,7 +598,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    padding: 20,
+    padding: 24,
     paddingBottom: 32,
   },
 
@@ -507,8 +610,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   greeting: {
-    fontSize: 24,
-    fontWeight: '800',
+    fontSize: 28,
+    fontWeight: '900',
     color: Colors.textPrimary,
     letterSpacing: -0.5,
   },
@@ -860,4 +963,57 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
 
+  // ── Adjust session bottom sheet ──
+  sheetBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' },
+  sheet: {
+    backgroundColor: '#0D1424',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 20,
+    paddingBottom: 40,
+    gap: 4,
+  },
+  sheetHandle: {
+    alignSelf: 'center',
+    width: 36,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    marginBottom: 4,
+  },
+  sheetTitle: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary, marginBottom: 8 },
+  sheetSectionLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: Colors.textMuted,
+    letterSpacing: 1,
+    marginTop: 12,
+    marginBottom: 6,
+  },
+  sheetRowGroup: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 14,
+    overflow: 'hidden',
+  },
+  sheetRow: {
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.border,
+  },
+  sheetRowLast: { borderBottomWidth: 0 },
+  sheetRowText: { fontSize: 15, fontWeight: '600', color: Colors.textPrimary },
+  sheetRowTextDestructive: { color: Colors.red },
+  sheetCloseBtn: {
+    marginTop: 16,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 12,
+    height: 46,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sheetCloseBtnText: { fontSize: 14, fontWeight: '700', color: Colors.textSecondary },
 });
