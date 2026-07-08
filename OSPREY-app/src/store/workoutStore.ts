@@ -25,6 +25,8 @@ interface WorkoutState {
   addLiftSet: (exerciseIndex: number) => void;
   startRestTimer: (seconds: number) => void;
   tickRestTimer: () => void;
+  skipRestTimer: () => void;
+  addRestSeconds: (seconds: number) => void;
   reset: () => void;
 }
 
@@ -127,6 +129,13 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
       if (state.restSecondsLeft <= 1) return { restSecondsLeft: null };
       return { restSecondsLeft: state.restSecondsLeft - 1 };
     }),
+
+  skipRestTimer: () => set({ restSecondsLeft: null }),
+
+  addRestSeconds: (seconds) =>
+    set((state) => ({
+      restSecondsLeft: state.restSecondsLeft == null ? null : state.restSecondsLeft + seconds,
+    })),
 
   reset: () => set({ ...INITIAL_STATE }),
 }));

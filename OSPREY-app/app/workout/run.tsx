@@ -8,10 +8,12 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
-import MapView, { Polyline } from 'react-native-maps';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
 import OzzieAvatar from '@/components/OzzieAvatar';
+import RunMap from '@/components/RunMap';
 import { useRunTracking } from '@/hooks/useRunTracking';
 import {
   useWorkoutStore,
@@ -34,6 +36,7 @@ import {
 } from '@/services/run-guidance';
 import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
 import { generateWarmup, type WarmupDrill } from '@/services/warmup';
+import { OUTSIDE_RUN_CUES } from '@/services/ozzie-cues';
 import {
   fetchLatestHeartRateBpm,
   isHealthKitSupported,
@@ -224,13 +227,26 @@ export default function RunWorkoutScreen() {
         };
 
   async function handleOzzieCue() {
-    const cues = [
-      'Nice work. Hold that pace.',
-      'Looking strong. Stay relaxed through the shoulders.',
-      'One mile at a time — you’ve got this.',
-    ];
-    const cue = cues[Math.floor(Math.random() * cues.length)];
+    const cue = OUTSIDE_RUN_CUES[Math.floor(Math.random() * OUTSIDE_RUN_CUES.length)];
     await ozzieSpeak(cue, 'workout');
+  }
+
+  function handleExit() {
+    reset();
+    // dismissTo dismisses (correct "closing" animation) while walking the
+    // stack until it finds this exact route, rather than a bare back(),
+    // which has no fallback and proved unreliable elsewhere in this flow.
+    router.dismissTo('/(tabs)/workout');
+  }
+
+  function handlePause() {
+    Haptics.selectionAsync().catch(() => undefined);
+    pauseWorkout();
+  }
+
+  function handleResume() {
+    Haptics.selectionAsync().catch(() => undefined);
+    resumeWorkout();
   }
 
   async function handleEndWorkout() {
@@ -247,6 +263,7 @@ export default function RunWorkoutScreen() {
         trackPoints,
         heartRate,
       });
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       reset();
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {
@@ -258,7 +275,17 @@ export default function RunWorkoutScreen() {
   function confirmEnd() {
     Alert.alert('End workout?', 'Save this run and see your recap.', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Discard & Exit', style: 'destructive', onPress: () => { reset(); router.replace('/(tabs)'); } },
+      {
+        text: 'Discard & Exit',
+        style: 'destructive',
+        onPress: () => {
+          reset();
+          // dismissTo dismisses (correct "closing" animation) while walking
+          // the stack until it finds this exact route, rather than back()'s
+          // one-step pop, which can resolve unpredictably.
+          router.dismissTo('/(tabs)/workout');
+        },
+      },
       { text: 'End & Save', onPress: handleEndWorkout },
     ]);
   }
@@ -267,7 +294,17 @@ export default function RunWorkoutScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.warmupWrap}>
-          <Text style={styles.warmupTitle}>🔥 Warm Up First</Text>
+          <View style={styles.warmupHeaderRow}>
+            <Text style={styles.warmupTitle}>🔥 Warm Up First</Text>
+            <TouchableOpacity
+              onPress={handleExit}
+              hitSlop={12}
+              accessibilityRole="button"
+              accessibilityLabel="Exit workout"
+            >
+              <Ionicons name="close" size={24} color={Colors.textMuted} />
+            </TouchableOpacity>
+          </View>
           <Text style={styles.warmupSubtitle}>
             A few minutes here cuts injury risk and makes the first mile feel better.
           </Text>
@@ -317,11 +354,7 @@ export default function RunWorkoutScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.mapWrap}>
-        <MapView style={styles.map} region={region} showsUserLocation>
-          {coordinates.length > 1 ? (
-            <Polyline coordinates={coordinates} strokeColor={Colors.teal} strokeWidth={4} />
-          ) : null}
-        </MapView>
+        <RunMap region={region} coordinates={coordinates} />
         <View style={styles.mapOverlay}>
           <Text style={styles.sessionLabel}>RUN IN PROGRESS</Text>
         </View>
@@ -367,7 +400,7 @@ export default function RunWorkoutScreen() {
           {status === 'paused' ? (
             <TouchableOpacity
               style={styles.primaryBtn}
-              onPress={resumeWorkout}
+              onPress={handleResume}
               accessibilityRole="button"
               accessibilityLabel="Resume run"
             >
@@ -376,7 +409,7 @@ export default function RunWorkoutScreen() {
           ) : (
             <TouchableOpacity
               style={styles.secondaryBtn}
-              onPress={pauseWorkout}
+              onPress={handlePause}
               accessibilityRole="button"
               accessibilityLabel="Pause run"
             >
@@ -392,7 +425,7 @@ export default function RunWorkoutScreen() {
             accessibilityState={{ disabled: saving, busy: saving }}
           >
             {saving ? (
-              <ActivityIndicator color={Colors.red} />
+              <ActivityIndicator color="#000" />
             ) : (
               <Text style={styles.endBtnText}>End & Save</Text>
             )}
@@ -510,7 +543,6 @@ function StatBlock({
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
   mapWrap: { flex: 1, minHeight: 280 },
-  map: { flex: 1 },
   mapOverlay: {
     position: 'absolute',
     top: 12,
@@ -597,6 +629,7 @@ const styles = StyleSheet.create({
   primaryBtnDisabled: { opacity: 0.45 },
   warmupHint: { fontSize: 12, color: Colors.textMuted, textAlign: 'center', marginTop: -4 },
   warmupWrap: { flex: 1, padding: 24, gap: 14 },
+  warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   warmupTitle: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
   warmupSubtitle: { fontSize: 13, color: Colors.textMuted, lineHeight: 18, marginBottom: 6 },
   warmupRow: {
@@ -640,12 +673,10 @@ const styles = StyleSheet.create({
   secondaryBtnText: { fontSize: 14, fontWeight: '800', color: Colors.textPrimary },
   endBtn: {
     flex: 1,
-    backgroundColor: 'rgba(255,68,68,0.08)',
-    borderWidth: 1.5,
-    borderColor: 'rgba(255,68,68,0.25)',
+    backgroundColor: Colors.teal,
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',
   },
-  endBtnText: { fontSize: 14, fontWeight: '700', color: Colors.red },
+  endBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
 });

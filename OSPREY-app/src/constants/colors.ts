@@ -42,8 +42,16 @@ export const Colors = {
   recoveryRed:   '#cc2222',
 
   // Sport surfaces (Swim, Bike cards)
+  blue:         '#3388dd',
   surfaceBlue:  'rgba(0,100,200,0.07)',
   surfaceGreen: 'rgba(76,222,128,0.06)',
   borderBlue:   'rgba(0,100,200,0.2)',
   borderGreen:  'rgba(76,222,128,0.2)',
+
+  // Sport surfaces (Hyrox, Rowing cards)
+  indigo:       '#5b6ee8',
+  surfaceRed:   'rgba(255,68,68,0.06)',
+  borderRed:    'rgba(255,68,68,0.2)',
+  surfaceIndigo:'rgba(91,110,232,0.06)',
+  borderIndigo: 'rgba(91,110,232,0.2)',
 } as const;

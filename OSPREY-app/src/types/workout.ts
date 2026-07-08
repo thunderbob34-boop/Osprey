@@ -1,4 +1,6 @@
-export type WorkoutType = 'run' | 'lift' | 'swim' | 'bike' | 'cross';
+import type { HyroxSplits } from './hyrox';
+
+export type WorkoutType = 'run' | 'lift' | 'swim' | 'bike' | 'cross' | 'rowing' | 'hyrox';
 export type WorkoutStatus = 'idle' | 'active' | 'paused' | 'saving';
 
 export interface TrackPoint {
@@ -7,6 +9,7 @@ export interface TrackPoint {
   recordedAt: string;
   speedMs?: number;
   heartRate?: number;
+  altitudeM?: number;
 }
 
 export interface LiftSet {
@@ -55,6 +58,7 @@ export interface SavedWorkoutSummary {
   totalDurationS: number;
   startedAt: string;
   notes: string | null;
+  hyroxSplits?: HyroxSplits | null;
 }
 
 export interface WorkoutRecapData {

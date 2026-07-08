@@ -1,10 +1,18 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, SafeAreaView, View } from 'react-native';
 import type { ComponentProps } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colors } from '@/constants/colors';
 import { usePlanAdaptation } from '@/hooks/usePlanAdaptation';
+import { pickTrackingMode } from '@/utils/trackingModePicker';
+
+// Keyed by the alert's own message text — once the underlying training-load
+// condition changes enough to produce different copy, the new message is
+// unrelated to whatever was dismissed and reappears automatically.
+const DISMISSED_ALERT_KEY = 'osprey.workout.dismissedPlanAlert';
 
 type Card = {
   icon: ComponentProps<typeof MaterialCommunityIcons>['name'];
@@ -13,6 +21,8 @@ type Card = {
   desc: string;
   route: string;
   params?: Record<string, string>;
+  /** Run and Bike offer an Outside (GPS) vs Stationary (no GPS) choice before starting. */
+  needsModePicker?: boolean;
   surface: string;
   border: string;
 };
@@ -22,8 +32,9 @@ const CARDS: Card[] = [
     icon: 'run',
     iconColor: Colors.teal,
     title: 'Run',
-    desc: 'GPS map, live pace, Ozzie mid-run cues',
+    desc: 'Outside with GPS, or stationary on a treadmill',
     route: '/workout/run',
+    needsModePicker: true,
     surface: Colors.surfaceTeal,
     border: Colors.borderTeal,
   },
@@ -50,17 +61,37 @@ const CARDS: Card[] = [
     icon: 'bike',
     iconColor: Colors.green,
     title: 'Bike',
-    desc: 'Track your ride duration, Ozzie keeps cadence',
+    desc: 'Outside with GPS, or stationary on a trainer',
     route: '/workout/endurance',
     params: { sessionType: 'bike' },
+    needsModePicker: true,
     surface: Colors.surfaceGreen,
     border: Colors.borderGreen,
+  },
+  {
+    icon: 'rowing',
+    iconColor: Colors.indigo,
+    title: 'Rowing',
+    desc: 'Timer-based session with a live /500m split',
+    route: '/workout/endurance',
+    params: { sessionType: 'rowing' },
+    surface: Colors.surfaceIndigo,
+    border: Colors.borderIndigo,
+  },
+  {
+    icon: 'weight-lifter',
+    iconColor: Colors.red,
+    title: 'Hyrox',
+    desc: '8 runs, 8 stations, race-order logging',
+    route: '/workout/hyrox',
+    surface: Colors.surfaceRed,
+    border: Colors.borderRed,
   },
   {
     icon: 'yoga',
     iconColor: Colors.textSecondary,
     title: 'Cross Training',
-    desc: 'Pick CrossFit, yoga, rowing, hiking, and more',
+    desc: 'Pick CrossFit, yoga, hiking, and more',
     route: '/workout/endurance',
     params: { sessionType: 'cross' },
     surface: Colors.bgCard,
@@ -71,7 +102,19 @@ const CARDS: Card[] = [
 export default function WorkoutTab() {
   const router = useRouter();
   const alert = usePlanAdaptation();
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissedMessage, setDismissedMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    AsyncStorage.getItem(DISMISSED_ALERT_KEY).then(setDismissedMessage).catch(() => undefined);
+  }, []);
+
+  function dismissAlert() {
+    if (!alert) return;
+    setDismissedMessage(alert.message);
+    AsyncStorage.setItem(DISMISSED_ALERT_KEY, alert.message).catch(() => undefined);
+  }
+
+  const showAlert = alert != null && alert.message !== dismissedMessage;
 
   const bannerBg =
     alert?.severity === 'warning'
@@ -93,12 +136,12 @@ export default function WorkoutTab() {
           GPS run, set-by-set lift, or timer-based endurance — everything saves to your training load.
         </Text>
 
-        {alert && !dismissed && (
+        {showAlert && (
           <View style={[styles.banner, { backgroundColor: bannerBg, borderColor: bannerBorder }]}>
             <Text style={styles.bannerMessage}>{alert.message}</Text>
             <View style={styles.bannerActions}>
               <TouchableOpacity
-                onPress={() => router.push('/(tabs)/' as any)}
+                onPress={() => router.push('/preferences')}
                 style={styles.bannerButton}
                 accessibilityRole="button"
                 accessibilityLabel="Recalibrate plan"
@@ -106,7 +149,7 @@ export default function WorkoutTab() {
                 <Text style={[styles.bannerButtonText, { color: Colors.teal }]}>Recalibrate →</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => setDismissed(true)}
+                onPress={dismissAlert}
                 style={styles.bannerDismiss}
                 accessibilityRole="button"
                 accessibilityLabel="Dismiss"
@@ -121,9 +164,32 @@ export default function WorkoutTab() {
           <TouchableOpacity
             key={card.title}
             style={[styles.card, { backgroundColor: card.surface, borderColor: card.border }]}
-            onPress={() =>
-              router.push(card.params ? { pathname: card.route as any, params: card.params } : card.route as any)
-            }
+            onPress={() => {
+              Haptics.selectionAsync().catch(() => undefined);
+              if (!card.needsModePicker) {
+                router.push(card.params ? { pathname: card.route as any, params: card.params } : card.route as any);
+                return;
+              }
+              pickTrackingMode((mode) => {
+                if (mode === 'outside') {
+                  // Outside Run keeps its dedicated GPS screen; outside Bike
+                  // gets GPS tracking bolted onto the endurance screen it
+                  // already uses (no live map, just an accurate live distance).
+                  if (card.title === 'Run') {
+                    router.push('/workout/run');
+                  } else {
+                    router.push({ pathname: '/workout/endurance', params: { ...card.params, mode: 'outside' } });
+                  }
+                } else {
+                  // Stationary Run reuses the endurance screen's plain
+                  // timer + manual/HealthKit distance entry (sessionType=run).
+                  router.push({
+                    pathname: '/workout/endurance',
+                    params: card.title === 'Run' ? { sessionType: 'run' } : (card.params ?? {}),
+                  });
+                }
+              });
+            }}
             accessibilityRole="button"
             accessibilityLabel={`${card.title}, ${card.desc}`}
           >

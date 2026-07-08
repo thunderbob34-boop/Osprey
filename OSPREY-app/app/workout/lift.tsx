@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
 import {
   useWorkoutStore,
@@ -54,6 +55,8 @@ export default function LiftWorkoutScreen() {
   const addLiftSet = useWorkoutStore((s) => s.addLiftSet);
   const startRestTimer = useWorkoutStore((s) => s.startRestTimer);
   const tickRestTimer = useWorkoutStore((s) => s.tickRestTimer);
+  const skipRestTimer = useWorkoutStore((s) => s.skipRestTimer);
+  const addRestSeconds = useWorkoutStore((s) => s.addRestSeconds);
   const reset = useWorkoutStore((s) => s.reset);
 
   const [elapsed, setElapsed] = useState(0);
@@ -89,7 +92,10 @@ export default function LiftWorkoutScreen() {
 
   function handleExit() {
     reset();
-    router.back();
+    // dismissTo dismisses (correct "closing" animation) while walking the
+    // stack until it finds this exact route, rather than a bare back(),
+    // which has no fallback and proved unreliable elsewhere in this flow.
+    router.dismissTo('/(tabs)/workout');
   }
 
   function handleSelectTemplate(template: LiftTemplate) {
@@ -123,7 +129,7 @@ export default function LiftWorkoutScreen() {
   function confirmExit() {
     Alert.alert('End workout?', 'Save your logged sets and see your recap, or discard this session.', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Discard & Exit', style: 'destructive', onPress: () => { reset(); router.back(); } },
+      { text: 'Discard & Exit', style: 'destructive', onPress: () => { reset(); router.dismissTo('/(tabs)/workout'); } },
       { text: 'Finish & Save', onPress: handleFinish },
     ]);
   }
@@ -325,6 +331,7 @@ export default function LiftWorkoutScreen() {
     if (previousBest != null && previousBest > 0 && score > previousBest) {
       bestScoresRef.current[exercise.exerciseId] = score;
       setPrExercises((prev) => new Set(prev).add(exercise.exerciseId));
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       await ozzieSpeak(
         `New PR on ${exercise.name} — ${set.weightLbs} for ${set.reps}! Best set you've ever logged. That's the work.`,
         'workout',
@@ -332,6 +339,7 @@ export default function LiftWorkoutScreen() {
       return;
     }
 
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => undefined);
     await ozzieSpeak(
       `${exercise.name}, set ${set.setNumber}. ${set.reps} at ${set.weightLbs}. Let's go.`,
       'workout',
@@ -390,6 +398,7 @@ export default function LiftWorkoutScreen() {
         durationS: elapsed,
         exercises: liftExercises,
       });
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       reset();
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {
@@ -416,7 +425,7 @@ export default function LiftWorkoutScreen() {
             accessibilityRole="button"
             accessibilityLabel="Close exercise picker"
           >
-            <Text style={styles.pickerClose}>✕</Text>
+            <Ionicons name="close" size={20} color={Colors.textMuted} />
           </TouchableOpacity>
         </View>
         <TextInput
@@ -693,7 +702,28 @@ export default function LiftWorkoutScreen() {
 
       {restSecondsLeft != null ? (
         <View style={styles.restBanner}>
-          <Text style={styles.restText}>Rest · {restSecondsLeft}s</Text>
+          <View style={styles.restRow}>
+            <Text style={styles.restText}>Rest · {restSecondsLeft}s</Text>
+            <View style={styles.restActions}>
+              <TouchableOpacity
+                onPress={() => addRestSeconds(15)}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel="Add 15 seconds to rest"
+              >
+                <Text style={styles.restActionText}>+15s</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={skipRestTimer}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel="Skip rest"
+              >
+                <Text style={styles.restActionText}>Skip</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <Text style={styles.restCaption}>Shake it out, stay loose — back at it soon.</Text>
         </View>
       ) : null}
 
@@ -922,11 +952,15 @@ const styles = StyleSheet.create({
   restBanner: {
     backgroundColor: Colors.surfaceTeal,
     paddingVertical: 10,
-    alignItems: 'center',
+    paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: Colors.borderTeal,
   },
+  restRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   restText: { fontSize: 14, fontWeight: '700', color: Colors.teal },
+  restActions: { flexDirection: 'row', gap: 16 },
+  restActionText: { fontSize: 13, fontWeight: '700', color: Colors.teal },
+  restCaption: { fontSize: 11, color: Colors.textMuted, marginTop: 4, textAlign: 'center' },
   scroll: { flex: 1 },
   scrollContent: { padding: 16, gap: 12, paddingBottom: 24 },
   exerciseCard: {
@@ -1095,7 +1129,6 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   pickerTitle: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
-  pickerClose: { fontSize: 18, color: Colors.textMuted, fontWeight: '700' },
   pickerSearch: {
     marginHorizontal: 20,
     marginBottom: 8,

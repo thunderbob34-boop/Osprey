@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -24,25 +25,28 @@ import { formatDistanceKm, milesToKm, type UnitSystem } from '@/services/units';
 import type { SportType } from '@/types/stats';
 
 const SESSION_ICON: Record<string, string> = {
-  run:   '🏃',
-  lift:  '🏋️',
-  swim:  '🏊',
-  bike:  '🚴',
-  cross: '🔁',
-  race:  '🏁',
+  run:    '🏃',
+  lift:   '🏋️',
+  swim:   '🏊',
+  bike:   '🚴',
+  cross:  '🔁',
+  race:   '🏁',
+  rowing: '🚣',
+  hyrox:  '💪',
 };
 
 // Fixed stacking order (bottom to top) + color per sport for the per-sport
-// volume chart. Bike blue is derived from the existing borderBlue/surfaceBlue
-// hue since the design system doesn't have a standalone solid blue token.
-const SPORT_ORDER: SportType[] = ['run', 'bike', 'swim', 'lift', 'cross', 'race'];
+// volume chart.
+const SPORT_ORDER: SportType[] = ['run', 'bike', 'swim', 'rowing', 'lift', 'hyrox', 'cross', 'race'];
 const SPORT_COLOR: Record<SportType, string> = {
   run: Colors.teal,
-  bike: '#3388dd',
+  bike: Colors.blue,
   swim: Colors.green,
   lift: Colors.gold,
   cross: Colors.pink,
   race: Colors.amber,
+  rowing: Colors.indigo,
+  hyrox: Colors.red,
 };
 const SPORT_LABEL: Record<SportType, string> = {
   run: 'Run',
@@ -51,6 +55,8 @@ const SPORT_LABEL: Record<SportType, string> = {
   lift: 'Lift',
   cross: 'Cross',
   race: 'Race',
+  rowing: 'Rowing',
+  hyrox: 'Hyrox',
 };
 
 function formatSessionType(type: string): string {
@@ -68,15 +74,20 @@ function toDisplayWeight(kg: number, units: UnitSystem): number {
 
 // ── Fitness chart (CTL/ATL line chart) ───────────────────────────────────────
 
-const CHART_W = 320;
 const CHART_H = 90;
 const CHART_PAD = { t: 8, b: 8, l: 4, r: 4 };
 
-function FitnessChart({ series }: { series: Array<{ date: string; atl: number; ctl: number }> }) {
-  if (series.length < 2) return null;
+function FitnessChart({
+  series,
+  width,
+}: {
+  series: Array<{ date: string; atl: number; ctl: number }>;
+  width: number;
+}) {
+  if (series.length < 2 || width <= 0) return null;
 
   const maxVal = Math.max(1, ...series.map((s) => Math.max(s.atl, s.ctl)));
-  const innerW = CHART_W - CHART_PAD.l - CHART_PAD.r;
+  const innerW = width - CHART_PAD.l - CHART_PAD.r;
   const innerH = CHART_H - CHART_PAD.t - CHART_PAD.b;
 
   function xOf(i: number) {
@@ -90,7 +101,7 @@ function FitnessChart({ series }: { series: Array<{ date: string; atl: number; c
   const atlPoints = series.map((s, i) => `${xOf(i)},${yOf(s.atl)}`).join(' ');
 
   return (
-    <Svg width={CHART_W} height={CHART_H} viewBox={`0 0 ${CHART_W} ${CHART_H}`}>
+    <Svg width={width} height={CHART_H} viewBox={`0 0 ${width} ${CHART_H}`}>
       <Polyline
         points={ctlPoints}
         fill="none"
@@ -115,12 +126,12 @@ function FitnessChart({ series }: { series: Array<{ date: string; atl: number; c
 
 // ── e1RM trend sparkline (single lift) ────────────────────────────────────────
 
-function E1rmChart({ points }: { points: number[] }) {
-  if (points.length < 2) return null;
+function E1rmChart({ points, width }: { points: number[]; width: number }) {
+  if (points.length < 2 || width <= 0) return null;
   const maxVal = Math.max(...points);
   const minVal = Math.min(...points);
   const range = Math.max(1, maxVal - minVal);
-  const innerW = CHART_W - CHART_PAD.l - CHART_PAD.r;
+  const innerW = width - CHART_PAD.l - CHART_PAD.r;
   const innerH = CHART_H - CHART_PAD.t - CHART_PAD.b;
 
   const coords = points
@@ -132,7 +143,7 @@ function E1rmChart({ points }: { points: number[] }) {
     .join(' ');
 
   return (
-    <Svg width={CHART_W} height={CHART_H} viewBox={`0 0 ${CHART_W} ${CHART_H}`}>
+    <Svg width={width} height={CHART_H} viewBox={`0 0 ${width} ${CHART_H}`}>
       <Polyline
         points={coords}
         fill="none"
@@ -187,6 +198,7 @@ export default function StatsTab() {
   const { data: liftStats } = useLiftAnalytics();
   const { units } = useUnitPreference();
   const deleteWorkoutLog = useDeleteWorkoutLog();
+  const [chartWidth, setChartWidth] = useState(0);
 
   function handleDeleteWorkout(id: string, label: string) {
     Alert.alert(`Delete ${label}?`, 'This will remove it from your history.', [
@@ -352,8 +364,8 @@ export default function StatsTab() {
                             <Text style={styles.legendText}>Fatigue (ATL)</Text>
                           </View>
                         </View>
-                        <View style={styles.svgWrap}>
-                          <FitnessChart series={perf.series} />
+                        <View style={styles.svgWrap} onLayout={(e) => setChartWidth(e.nativeEvent.layout.width)}>
+                          <FitnessChart series={perf.series} width={chartWidth} />
                         </View>
                         <Text style={styles.chartDateRange}>
                           {perf.series[0]?.date} — {perf.series[perf.series.length - 1]?.date}
@@ -464,9 +476,10 @@ export default function StatsTab() {
                       <Text style={styles.liftTrendLabel}>
                         {liftStats.primaryLift.exerciseName} · EST. 1RM TREND
                       </Text>
-                      <View style={styles.svgWrap}>
+                      <View style={styles.svgWrap} onLayout={(e) => setChartWidth(e.nativeEvent.layout.width)}>
                         <E1rmChart
                           points={liftStats.primaryLift.trend.map((p) => toDisplayWeight(p.e1rmKg, units))}
+                          width={chartWidth}
                         />
                       </View>
                     </>
@@ -497,7 +510,17 @@ export default function StatsTab() {
               </>
             ) : null}
 
-            <Text style={styles.sectionLabel}>RECENT WORKOUTS</Text>
+            <View style={styles.sectionHeaderRow}>
+              <Text style={[styles.sectionLabel, { marginBottom: 0 }]}>RECENT WORKOUTS</Text>
+              <TouchableOpacity
+                onPress={() => router.push('/calendar')}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel="View all workouts in Calendar"
+              >
+                <Text style={styles.viewAllLink}>View all ›</Text>
+              </TouchableOpacity>
+            </View>
             {data && data.recentWorkouts.length > 0 ? (
               <View style={styles.workoutList}>
                 {data.recentWorkouts.map((w, index) => (
@@ -566,7 +589,7 @@ function FitnessMetric({
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.bg },
-  scrollContent: { padding: 28, paddingBottom: 48 },
+  scrollContent: { padding: 24, paddingBottom: 48 },
   title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 4 },
   subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, marginBottom: 16 },
   navChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 20 },
@@ -597,6 +620,13 @@ const styles = StyleSheet.create({
   statLabel: { fontSize: 9, fontWeight: '700', color: Colors.textMuted, letterSpacing: 0.8 },
   statValue: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary, marginTop: 2 },
   statSub: { fontSize: 10, color: Colors.textMuted },
+  sectionHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  viewAllLink: { fontSize: 12, fontWeight: '700', color: Colors.teal },
   sectionLabel: {
     fontSize: 10,
     fontWeight: '700',
@@ -690,7 +720,7 @@ const styles = StyleSheet.create({
   legendItem: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   legendDot: { width: 8, height: 8, borderRadius: 4 },
   legendText: { fontSize: 10, color: Colors.textMuted, fontWeight: '600' },
-  svgWrap: { alignItems: 'center' },
+  svgWrap: { width: '100%', alignItems: 'center' },
   chartDateRange: { fontSize: 9, color: Colors.textMuted, textAlign: 'right', marginTop: -4 },
 
   // ── Race predictor ──

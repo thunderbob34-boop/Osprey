@@ -10,15 +10,25 @@ import {
   View,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useAuthStore } from '@/store/authStore';
-import { fetchIntervalPrescription, saveEnduranceWorkout, type EnduranceType } from '@/services/workouts';
+import {
+  computeElevationGainM,
+  fetchIntervalPrescription,
+  saveEnduranceWorkout,
+  type EnduranceType,
+} from '@/services/workouts';
 import { expandIntervalSteps, ozzieCueForStep, totalIntervalDistanceM, type IntervalStep } from '@/services/intervals';
 import { ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
-import { formatDuration } from '@/store/workoutStore';
+import { ENCOURAGEMENTS } from '@/services/ozzie-cues';
+import { formatDuration, useWorkoutStore } from '@/store/workoutStore';
+import { useRunTracking } from '@/hooks/useRunTracking';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { pickTrackingMode } from '@/utils/trackingModePicker';
 import {
   fetchHealthKitWorkouts,
   isHealthKitSupported,
@@ -40,9 +50,11 @@ function metersToUnit(meters: number, unit: DistanceUnit): number {
 }
 
 const SESSION_META: Record<EnduranceType, { icon: string; label: string; color: string; borderColor: string }> = {
-  swim: { icon: '🏊', label: 'SWIM',  color: Colors.teal,  borderColor: Colors.borderTeal },
-  bike: { icon: '🚴', label: 'BIKE',  color: Colors.teal,  borderColor: Colors.borderTeal },
-  cross:{ icon: '🔁', label: 'CROSS', color: Colors.amber, borderColor: Colors.borderGold },
+  swim:   { icon: '🏊', label: 'SWIM',   color: Colors.teal,  borderColor: Colors.borderTeal },
+  bike:   { icon: '🚴', label: 'BIKE',   color: Colors.teal,  borderColor: Colors.borderTeal },
+  run:    { icon: '🏃', label: 'RUN',    color: Colors.teal,  borderColor: Colors.borderTeal },
+  rowing: { icon: '🚣', label: 'ROW',    color: Colors.teal,  borderColor: Colors.borderTeal },
+  cross:  { icon: '🔁', label: 'CROSS',  color: Colors.amber, borderColor: Colors.borderGold },
 };
 
 interface CrossActivity {
@@ -51,35 +63,22 @@ interface CrossActivity {
   icon: string;
 }
 
+// Rowing moved out to its own EnduranceType/Workout-tab card — it has a
+// full coaching blueprint + training-zone calculator, same tier as Swim/Bike.
 const CROSS_ACTIVITIES: CrossActivity[] = [
   { id: 'crossfit',   label: 'CrossFit',           icon: '🏋️' },
   { id: 'yoga',       label: 'Yoga',                icon: '🧘' },
   { id: 'hiit',       label: 'HIIT',                icon: '🔥' },
   { id: 'mobility',   label: 'Mobility / Stretch',  icon: '🤸' },
-  { id: 'rowing',     label: 'Rowing',              icon: '🚣' },
   { id: 'elliptical', label: 'Elliptical',          icon: '🌀' },
   { id: 'stairs',     label: 'Stair Climber',       icon: '🪜' },
   { id: 'hiking',     label: 'Hiking',              icon: '🥾' },
   { id: 'other',      label: 'Other',               icon: '🔁' },
 ];
 
-const ENCOURAGEMENTS: Record<EnduranceType, string[]> = {
-  swim: [
-    'Smooth strokes. Stay long in the water.',
-    "Every length counts. Keep your technique tight.",
-    'Focus on hip rotation — power comes from the core, not the arms.',
-  ],
-  bike: [
-    'Steady cadence. Let the gears do the work.',
-    "Keep your upper body relaxed — only your legs should burn.",
-    'Mid-ride check: stay hydrated, keep the power consistent.',
-  ],
-  cross: [
-    'Active recovery is still training. This is how champions stay fresh.',
-    "Your body's rebuilding right now. Stay with it.",
-    'Consistent effort. Every session moves the needle.',
-  ],
-};
+// The handful of Cross Training activities where distance is a real metric
+// (most — CrossFit, yoga, HIIT, mobility — are tracked purely by time).
+const DISTANCE_ACTIVITIES = new Set(['elliptical', 'hiking']);
 
 const EFFORT_COLOR: Record<IntervalEffort | 'rest', string> = {
   easy: Colors.teal,
@@ -100,13 +99,38 @@ function formatMMSS(totalSeconds: number): string {
 
 export default function EnduranceWorkoutScreen() {
   const router = useRouter();
-  const { sessionType, sessionId } = useLocalSearchParams<{ sessionType: EnduranceType; sessionId?: string }>();
+  const { sessionType, sessionId, mode } = useLocalSearchParams<{
+    sessionType: EnduranceType;
+    sessionId?: string;
+    mode?: string;
+  }>();
   const userId = useAuthStore((s) => s.user?.id);
   const { isPlus } = useSubscription();
   const { units: unitPreference } = useUnitPreference();
 
   const type: EnduranceType = (sessionType ?? 'cross') as EnduranceType;
   const meta = SESSION_META[type] ?? SESSION_META.cross;
+  // The only combinations that swap manual/synced distance for live GPS.
+  const isOutsideBike = type === 'bike' && mode === 'outside';
+  const [hikeMode, setHikeMode] = useState<'outside' | 'stationary' | null>(null);
+  const isOutsideHike = type === 'cross' && hikeMode === 'outside';
+  const isGpsTracking = isOutsideBike || isOutsideHike;
+
+  const gpsDistanceMeters = useWorkoutStore((s) => s.distanceMeters);
+  const gpsTrackPoints = useWorkoutStore((s) => s.trackPoints);
+  const startGpsWorkout = useWorkoutStore((s) => s.startWorkout);
+  const resetGpsWorkout = useWorkoutStore((s) => s.reset);
+  useRunTracking(isGpsTracking);
+
+  useEffect(() => {
+    if (isOutsideBike) startGpsWorkout('bike', sessionId ?? null);
+    // Runs once on mount for an outside-bike session — startWorkout resets
+    // the shared store, so re-running it on every render would wipe GPS
+    // progress already collected. Outside Hike starts its own GPS tracking
+    // from startCrossActivity() instead, once the mode picker resolves —
+    // there's no activity picked yet at mount time to know it's a hike.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Swims are conventionally tracked in meters/yards (pool lengths); other
   // endurance sessions use km/miles — both follow the account-wide unit
@@ -126,17 +150,39 @@ export default function EnduranceWorkoutScreen() {
   const [syncing, setSyncing] = useState(false);
   const [crossActivity, setCrossActivity] = useState<CrossActivity | null>(null);
   const [sessionStarted, setSessionStarted] = useState(type !== 'cross');
+  const [wodScore, setWodScore] = useState('');
+  const [floorsClimbed, setFloorsClimbed] = useState('');
   const lastAutoCueMs = useRef(0);
   const speakingRef = useRef(false);
 
-  // Cross-training has no distance measurement — CrossFit/yoga/rowing/etc.
-  // are all tracked purely by time.
-  const showDistance = type !== 'cross';
+  // Most Cross Training activities (CrossFit, yoga, HIIT, mobility) are
+  // tracked purely by time — distance only applies to a handful where it's
+  // a real metric.
+  const showDistance =
+    type !== 'cross' || (crossActivity != null && DISTANCE_ACTIVITIES.has(crossActivity.id));
   const badgeMeta = type === 'cross' && crossActivity
     ? { icon: crossActivity.icon, label: crossActivity.label.toUpperCase(), color: meta.color, borderColor: meta.borderColor }
     : meta;
 
+  // Split per 500m is the metric rowers actually pace against — recomputed
+  // from whatever distance is entered so far, not a true continuous live
+  // feed (no erg/PM5 hardware integration), hence the on-screen caption.
+  const rowingDistanceM =
+    type === 'rowing' && distance ? parseFloat(distance) * METERS_PER_UNIT[distanceUnit] : 0;
+  const splitPer500 =
+    type === 'rowing' && rowingDistanceM > 0 && elapsed > 0 ? (elapsed / rowingDistanceM) * 500 : null;
+
   function startCrossActivity(activity: CrossActivity) {
+    if (activity.id === 'hiking') {
+      pickTrackingMode((selectedMode) => {
+        setHikeMode(selectedMode);
+        if (selectedMode === 'outside') startGpsWorkout('cross', sessionId ?? null);
+        setCrossActivity(activity);
+        startedAtRef.current = Date.now();
+        setSessionStarted(true);
+      });
+      return;
+    }
     setCrossActivity(activity);
     startedAtRef.current = Date.now();
     setSessionStarted(true);
@@ -165,7 +211,7 @@ export default function EnduranceWorkoutScreen() {
   const currentStep = hasIntervals ? intervalSteps[stepIndex] : null;
 
   useEffect(() => {
-    if (!sessionId || (type !== 'swim' && type !== 'bike')) return;
+    if (!sessionId || (type !== 'swim' && type !== 'bike' && type !== 'run')) return;
     fetchIntervalPrescription(sessionId)
       .then((p) => {
         if (!p) return;
@@ -197,6 +243,7 @@ export default function EnduranceWorkoutScreen() {
       stepEndAtRef.current = null;
       setIntervalsComplete(true);
       setStepRemainingS(null);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       ozzieSpeak("That's the full set — nice work. Wrap up and save when you're ready.", 'workout').catch(
         () => undefined,
       );
@@ -211,6 +258,7 @@ export default function EnduranceWorkoutScreen() {
       return;
     }
 
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => undefined);
     stepIndexRef.current = nextIndex;
     setStepIndex(nextIndex);
   }
@@ -301,9 +349,13 @@ export default function EnduranceWorkoutScreen() {
     setSaving(true);
     try {
       const durationS = Math.floor((Date.now() - startedAtRef.current) / 1000);
-      const distanceParam = showDistance && distance && parseFloat(distance) > 0
-        ? { value: parseFloat(distance), unit: distanceUnit }
-        : null;
+      const distanceParam = isGpsTracking
+        ? gpsDistanceMeters > 0
+          ? { value: metersToUnit(gpsDistanceMeters, distanceUnit), unit: distanceUnit }
+          : null
+        : showDistance && distance && parseFloat(distance) > 0
+          ? { value: parseFloat(distance), unit: distanceUnit }
+          : null;
       const workoutId = await saveEnduranceWorkout({
         userId,
         sessionId: sessionId ?? null,
@@ -312,7 +364,12 @@ export default function EnduranceWorkoutScreen() {
         durationS,
         distance: distanceParam,
         notes: type === 'cross' && crossActivity && crossActivity.id !== 'other' ? crossActivity.label : null,
+        wodScore: crossActivity?.id === 'crossfit' && wodScore.trim() ? wodScore.trim() : null,
+        floorsClimbed: crossActivity?.id === 'stairs' && floorsClimbed ? parseInt(floorsClimbed, 10) : null,
+        elevationGainM: isOutsideHike ? computeElevationGainM(gpsTrackPoints) : null,
       });
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+      if (isGpsTracking) resetGpsWorkout();
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {
       Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
@@ -323,7 +380,17 @@ export default function EnduranceWorkoutScreen() {
   function confirmEnd() {
     Alert.alert('End session?', 'Save this workout and see your recap.', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Discard & Exit', style: 'destructive', onPress: () => router.replace('/(tabs)') },
+      {
+        text: 'Discard & Exit',
+        style: 'destructive',
+        onPress: () => {
+          if (isGpsTracking) resetGpsWorkout();
+          // dismissTo dismisses (correct "closing" animation) while walking
+          // the stack until it finds this exact route, rather than back()'s
+          // one-step pop, which can resolve unpredictably.
+          router.dismissTo('/(tabs)/workout');
+        },
+      },
       { text: 'End & Save', onPress: handleEnd },
     ]);
   }
@@ -333,12 +400,12 @@ export default function EnduranceWorkoutScreen() {
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
           style={styles.pickerCloseBtn}
-          onPress={() => (router.canGoBack() ? router.back() : router.replace('/(tabs)'))}
+          onPress={() => router.dismissTo('/(tabs)/workout')}
           hitSlop={12}
           accessibilityRole="button"
           accessibilityLabel="Cancel"
         >
-          <Text style={styles.pickerCloseText}>✕</Text>
+          <Ionicons name="close" size={22} color={Colors.textMuted} />
         </TouchableOpacity>
         <View style={styles.pickerContent}>
           <Text style={styles.pickerTitle}>What are you doing?</Text>
@@ -375,13 +442,21 @@ export default function EnduranceWorkoutScreen() {
         <View style={[styles.sessionBadge, { borderColor: badgeMeta.borderColor }]}>
           <Text style={styles.sessionIcon}>{badgeMeta.icon}</Text>
           <Text style={[styles.sessionLabel, { color: badgeMeta.color }]}>
-            {hasIntervals ? `${badgeMeta.label} · OZZIE'S SET` : `${badgeMeta.label} IN PROGRESS`}
+            {hasIntervals
+              ? `${badgeMeta.label} · OZZIE'S SET`
+              : `${badgeMeta.label}${isGpsTracking ? ' · GPS' : ''} IN PROGRESS`}
           </Text>
         </View>
 
         <View style={styles.timerBlock}>
           <Text style={styles.timerValue}>{timeStr}</Text>
           <Text style={styles.timerSub}>elapsed</Text>
+          {splitPer500 != null ? (
+            <>
+              <Text style={styles.splitValue}>{formatMMSS(Math.round(splitPer500))} /500m</Text>
+              <Text style={styles.splitCaption}>split updates as you enter distance</Text>
+            </>
+          ) : null}
         </View>
 
         {hasIntervals ? (
@@ -452,31 +527,68 @@ export default function EnduranceWorkoutScreen() {
         {showDistance ? (
           <View style={styles.distanceCard}>
             <Text style={styles.distanceLabel}>Distance ({distanceUnit})</Text>
-            <View style={styles.distanceInputRow}>
-              <TextInput
-                style={styles.distanceInput}
-                placeholder="0"
-                placeholderTextColor={Colors.textMuted}
-                value={distance}
-                onChangeText={setDistance}
-                keyboardType="decimal-pad"
-                accessibilityLabel={`Distance in ${distanceUnit}`}
-              />
-            </View>
-            <TouchableOpacity
-              style={[styles.syncBtn, syncing && { opacity: 0.6 }]}
-              onPress={handleSyncHealthKit}
-              disabled={syncing}
-              accessibilityRole="button"
-              accessibilityLabel="Sync distance from Apple Health"
-              accessibilityState={{ disabled: syncing, busy: syncing }}
-            >
-              {syncing ? (
-                <ActivityIndicator color={Colors.teal} size="small" />
-              ) : (
-                <Text style={styles.syncBtnText}>Sync from Apple Health</Text>
-              )}
-            </TouchableOpacity>
+            {isGpsTracking ? (
+              <Text style={styles.distanceLiveValue}>
+                {metersToUnit(gpsDistanceMeters, distanceUnit).toFixed(2)}
+              </Text>
+            ) : (
+              <>
+                <View style={styles.distanceInputRow}>
+                  <TextInput
+                    style={styles.distanceInput}
+                    placeholder="0"
+                    placeholderTextColor={Colors.textMuted}
+                    value={distance}
+                    onChangeText={setDistance}
+                    keyboardType="decimal-pad"
+                    accessibilityLabel={`Distance in ${distanceUnit}`}
+                  />
+                </View>
+                <TouchableOpacity
+                  style={[styles.syncBtn, syncing && { opacity: 0.6 }]}
+                  onPress={handleSyncHealthKit}
+                  disabled={syncing}
+                  accessibilityRole="button"
+                  accessibilityLabel="Sync distance from Apple Health"
+                  accessibilityState={{ disabled: syncing, busy: syncing }}
+                >
+                  {syncing ? (
+                    <ActivityIndicator color={Colors.teal} size="small" />
+                  ) : (
+                    <Text style={styles.syncBtnText}>Sync from Apple Health</Text>
+                  )}
+                </TouchableOpacity>
+              </>
+            )}
+          </View>
+        ) : null}
+
+        {crossActivity?.id === 'crossfit' ? (
+          <View style={styles.distanceCard}>
+            <Text style={styles.distanceLabel}>WOD Score</Text>
+            <TextInput
+              style={styles.distanceInput}
+              placeholder="18:32 or 5 rounds + 12 reps"
+              placeholderTextColor={Colors.textMuted}
+              value={wodScore}
+              onChangeText={setWodScore}
+              accessibilityLabel="WOD score"
+            />
+          </View>
+        ) : null}
+
+        {crossActivity?.id === 'stairs' ? (
+          <View style={styles.distanceCard}>
+            <Text style={styles.distanceLabel}>Floors Climbed</Text>
+            <TextInput
+              style={styles.distanceInput}
+              placeholder="0"
+              placeholderTextColor={Colors.textMuted}
+              value={floorsClimbed}
+              onChangeText={setFloorsClimbed}
+              keyboardType="number-pad"
+              accessibilityLabel="Floors climbed"
+            />
           </View>
         ) : null}
 
@@ -489,7 +601,7 @@ export default function EnduranceWorkoutScreen() {
           accessibilityState={{ disabled: saving, busy: saving }}
         >
           {saving ? (
-            <ActivityIndicator color={Colors.red} />
+            <ActivityIndicator color="#000" />
           ) : (
             <Text style={styles.endBtnText}>End & Save</Text>
           )}
@@ -505,7 +617,6 @@ const styles = StyleSheet.create({
 
   // Pre-start activity picker (cross-training only)
   pickerCloseBtn: { alignSelf: 'flex-end', padding: 16 },
-  pickerCloseText: { fontSize: 18, fontWeight: '700', color: Colors.textMuted },
   pickerContent: { flex: 1, padding: 28, paddingTop: 0, justifyContent: 'center', gap: 24 },
   pickerTitle: { fontSize: 26, fontWeight: '900', color: Colors.textPrimary, textAlign: 'center' },
   pickerSubtitle: { fontSize: 14, color: Colors.textMuted, textAlign: 'center', marginTop: -12 },
@@ -546,6 +657,8 @@ const styles = StyleSheet.create({
   timerBlock: { alignItems: 'center', gap: 6, marginVertical: 20 },
   timerValue: { fontSize: 72, fontWeight: '800', color: Colors.textPrimary, letterSpacing: -2 },
   timerSub: { fontSize: 12, color: Colors.textMuted, fontWeight: '600', letterSpacing: 0.5 },
+  splitValue: { fontSize: 20, fontWeight: '800', color: Colors.teal, marginTop: 8 },
+  splitCaption: { fontSize: 10, color: Colors.textMuted, fontStyle: 'italic' },
 
   // Interval runner
   intervalCard: {
@@ -631,6 +744,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  distanceLiveValue: {
+    color: Colors.teal,
+    fontSize: 28,
+    fontWeight: '800',
+  },
   syncBtn: {
     backgroundColor: Colors.surfaceTeal,
     borderWidth: 1,
@@ -645,12 +763,10 @@ const styles = StyleSheet.create({
     color: Colors.teal,
   },
   endBtn: {
-    backgroundColor: 'rgba(255,68,68,0.08)',
-    borderWidth: 1.5,
-    borderColor: 'rgba(255,68,68,0.25)',
+    backgroundColor: Colors.teal,
     borderRadius: 14,
     paddingVertical: 16,
     alignItems: 'center',
   },
-  endBtnText: { fontSize: 15, fontWeight: '700', color: Colors.red },
+  endBtnText: { fontSize: 15, fontWeight: '800', color: '#000' },
 });

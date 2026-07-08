@@ -12,6 +12,8 @@ import { formatDuration, formatPace } from '@/store/workoutStore';
 import { writeWorkoutToHealthKit } from '@/services/healthkit';
 import { withCache } from '@/services/offline-cache';
 import { formatWeightKg, type UnitSystem } from '@/services/units';
+import type { HyroxDivision } from '@/services/calculators/hyrox';
+import type { HyroxSplits } from '@/types/hyrox';
 
 const LBS_TO_KG = 0.453592;
 
@@ -192,6 +194,7 @@ export async function saveRunWorkout(params: {
         recorded_at: point.recordedAt,
         lat: point.lat,
         lon: point.lon,
+        altitude_m: point.altitudeM ?? null,
         speed_ms: point.speedMs ?? null,
         heart_rate: point.heartRate ?? params.heartRate ?? null,
       })),
@@ -259,13 +262,31 @@ export async function saveLiftWorkout(params: {
   return workout.id;
 }
 
-export type EnduranceType = 'swim' | 'bike' | 'cross';
+export type EnduranceType = 'swim' | 'bike' | 'run' | 'rowing' | 'cross';
 
 const ENDURANCE_TSS_PER_HOUR: Record<EnduranceType, number> = {
   swim: 65,
   bike: 45,
+  // Matches the moderate-effort flat rate estimateTss() already uses
+  // elsewhere for runs with no GPS pace data to work from.
+  run: 50,
+  // Full-body, ~75-80% aerobic per docs/coaching/rowing.md §2 — between
+  // swim's upper-body-heavy 65 and bike's lower 45.
+  rowing: 60,
   cross: 50,
 };
+
+/** Sums positive altitude deltas between consecutive GPS fixes — the only elevation-aware track (Hiking). */
+export function computeElevationGainM(trackPoints: TrackPoint[]): number | null {
+  const withAltitude = trackPoints.filter((p) => p.altitudeM != null);
+  if (withAltitude.length < 2) return null;
+  let gain = 0;
+  for (let i = 1; i < withAltitude.length; i++) {
+    const delta = withAltitude[i].altitudeM! - withAltitude[i - 1].altitudeM!;
+    if (delta > 0) gain += delta;
+  }
+  return Math.round(gain);
+}
 
 export async function saveEnduranceWorkout(params: {
   userId: string;
@@ -277,6 +298,12 @@ export async function saveEnduranceWorkout(params: {
   heartRate?: number | null;
   /** Specific activity for a 'cross' session (e.g. "Yoga", "Rowing") — stored in workout_logs.notes. */
   notes?: string | null;
+  /** CrossFit WOD score, free text — "18:32" or "5 rounds + 12 reps". */
+  wodScore?: string | null;
+  /** Stair Climber floor count. */
+  floorsClimbed?: number | null;
+  /** Hiking elevation gain — see computeElevationGainM. */
+  elevationGainM?: number | null;
 }): Promise<string> {
   const tss = Math.round((params.durationS / 3600) * ENDURANCE_TSS_PER_HOUR[params.sessionType] * 10) / 10;
 
@@ -306,6 +333,9 @@ export async function saveEnduranceWorkout(params: {
       total_duration_s: params.durationS,
       avg_heart_rate: params.heartRate ?? null,
       notes: params.notes ?? null,
+      wod_score: params.wodScore ?? null,
+      floors_climbed: params.floorsClimbed ?? null,
+      elevation_gain_m: params.elevationGainM ?? null,
       tss,
     })
     .select('id')
@@ -322,6 +352,51 @@ export async function saveEnduranceWorkout(params: {
   return workout.id;
 }
 
+// Full-body, race-intensity effort across running + strength + carries —
+// no pace/HR data to derive a more precise number from, unlike GPS runs.
+function estimateHyroxTss(durationS: number): number {
+  return Math.round((durationS / 3600) * 70 * 10) / 10;
+}
+
+export async function saveHyroxWorkout(params: {
+  userId: string;
+  sessionId?: string | null;
+  division: HyroxDivision;
+  startedAt: number;
+  durationS: number;
+  splits: HyroxSplits;
+}): Promise<string> {
+  const { data: workout, error } = await supabase
+    .from('workout_logs')
+    .insert({
+      user_id: params.userId,
+      session_id: params.sessionId ?? null,
+      started_at: new Date(params.startedAt).toISOString(),
+      ended_at: new Date(params.startedAt + params.durationS * 1000).toISOString(),
+      session_type: 'hyrox',
+      status: 'completed',
+      // Each run segment is a fixed 1km — a customized/practice session can
+      // skip some runs, so this isn't always the full race's 8km.
+      total_distance_km: params.splits.runs.length,
+      total_duration_s: params.durationS,
+      hyrox_division: params.division,
+      hyrox_splits: params.splits,
+      tss: estimateHyroxTss(params.durationS),
+    })
+    .select('id')
+    .single();
+
+  if (error || !workout) throw error ?? new Error('Failed to save Hyrox session');
+
+  writeWorkoutToHealthKit({
+    sessionType: 'hyrox',
+    startedAt: new Date(params.startedAt).toISOString(),
+    endedAt: new Date(params.startedAt + params.durationS * 1000).toISOString(),
+  }).catch(() => undefined);
+
+  return workout.id;
+}
+
 export async function fetchWorkoutRecap(
   userId: string,
   workoutId: string,
@@ -329,7 +404,7 @@ export async function fetchWorkoutRecap(
 ): Promise<WorkoutRecapData> {
   const { data: workout, error } = await supabase
     .from('workout_logs')
-    .select('id, session_type, total_distance_km, total_duration_s, started_at, notes, training_sessions(description, ozzie_notes)')
+    .select('id, session_type, total_distance_km, total_duration_s, started_at, notes, hyrox_splits, training_sessions(description, ozzie_notes)')
     .eq('id', workoutId)
     .eq('user_id', userId)
     .single();
@@ -449,6 +524,7 @@ export async function fetchWorkoutRecap(
       totalDurationS: durationS,
       startedAt: workout.started_at,
       notes: workout.notes,
+      hyroxSplits: (workout.hyrox_splits as HyroxSplits | null) ?? null,
     },
     splits: buildRunSplits(
       (trackPoints ?? []).map((p) => ({

@@ -69,12 +69,13 @@ export function useRunTracking(enabled: boolean) {
           timeInterval: 2000,
         },
         (location) => {
-          const { latitude, longitude, speed } = location.coords;
+          const { latitude, longitude, speed, altitude } = location.coords;
           const point = {
             lat: latitude,
             lon: longitude,
             recordedAt: new Date().toISOString(),
             speedMs: speed ?? undefined,
+            altitudeM: altitude ?? undefined,
           };
 
           const { acceptedDelta, anchor } = processLocationFix(

@@ -1,4 +1,4 @@
-export type SportType = 'run' | 'lift' | 'swim' | 'bike' | 'cross' | 'race';
+export type SportType = 'run' | 'lift' | 'swim' | 'bike' | 'cross' | 'race' | 'rowing' | 'hyrox';
 
 export interface RecentWorkoutRow {
   id: string;

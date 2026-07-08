@@ -1,15 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   SafeAreaView,
   ScrollView,
+  TextInput,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
+import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
 import { useAuthStore } from '@/store/authStore';
 import { fetchWorkoutRecap } from '@/services/workouts';
@@ -18,6 +20,8 @@ import { ozzieSpeak } from '@/services/ozzie-audio';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatWeightKg } from '@/services/units';
 import { lbToKg } from '@/services/body-metrics';
+import { HYROX_STATIONS } from '@/types/hyrox';
+import { shareWorkout } from '@/services/activity';
 
 export default function WorkoutRecapScreen() {
   const router = useRouter();
@@ -31,11 +35,38 @@ export default function WorkoutRecapScreen() {
     enabled: Boolean(userId && workoutId),
   });
 
+  const [caption, setCaption] = useState('');
+  const [sharing, setSharing] = useState(false);
+  const [shared, setShared] = useState(false);
+  const [shareError, setShareError] = useState<string | null>(null);
+
+  async function handleShare() {
+    if (!userId || !workoutId) return;
+    setSharing(true);
+    setShareError(null);
+    try {
+      await shareWorkout(userId, workoutId, caption.trim() || null);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+      setShared(true);
+    } catch (err) {
+      setShareError(err instanceof Error ? err.message : 'Could not share. Try again.');
+    } finally {
+      setSharing(false);
+    }
+  }
+
   useEffect(() => {
     if (data?.ozzieDebrief) {
       ozzieSpeak(data.ozzieDebrief, 'ambient');
     }
   }, [data?.ozzieDebrief]);
+
+  // dismissTo dismisses (the correct "closing" animation, not a forward
+  // transition) while walking the stack until it finds this exact route —
+  // more reliable than back(), which just pops one step.
+  function exitToWorkoutTab() {
+    router.dismissTo('/(tabs)/workout');
+  }
 
   if (isLoading) {
     return (
@@ -52,11 +83,11 @@ export default function WorkoutRecapScreen() {
           <Text style={styles.errorText}>Could not load workout recap.</Text>
           <TouchableOpacity
             style={styles.homeBtn}
-            onPress={() => router.replace('/(tabs)')}
+            onPress={exitToWorkoutTab}
             accessibilityRole="button"
-            accessibilityLabel="Back to home"
+            accessibilityLabel="Back to workout"
           >
-            <Text style={styles.homeBtnText}>Back to Home</Text>
+            <Text style={styles.homeBtnText}>Back to Workout</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -65,18 +96,28 @@ export default function WorkoutRecapScreen() {
 
   const sessionType = data.workout.sessionType;
   const isRun = sessionType === 'run';
-  const isEndurance = sessionType === 'swim' || sessionType === 'bike' || sessionType === 'cross';
+  const isHyrox = sessionType === 'hyrox' && data.workout.hyroxSplits != null;
+  const isEndurance =
+    sessionType === 'swim' || sessionType === 'bike' || sessionType === 'cross' || sessionType === 'rowing';
+  // A stationary (treadmill) run is sessionType 'run' but has no GPS track
+  // points, so there's nothing to build mile splits from — show the same
+  // duration/type summary card the other non-GPS session types get instead
+  // of an empty "MILE SPLITS" list.
+  const showSplits = isRun && data.splits.length > 0;
+  const showSessionSummary = isEndurance || (isRun && !showSplits);
   const distanceMiles =
     data.workout.totalDistanceKm != null
       ? Math.round(data.workout.totalDistanceKm * 0.621371 * 10) / 10
       : null;
 
   const SESSION_LABELS: Record<string, { title: string; badgeStyle: object; stat: string }> = {
-    run:   { title: 'Run Recap',  badgeStyle: styles.badgeRun,  stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
-    lift:  { title: 'Lift Recap', badgeStyle: styles.badgeLift, stat: '' },
-    swim:  { title: 'Swim Recap', badgeStyle: styles.badgeBlue, stat: '' },
-    bike:  { title: 'Bike Recap', badgeStyle: styles.badgeGreen, stat: '' },
-    cross: { title: 'Cross Training Recap', badgeStyle: styles.badgeLift, stat: '' },
+    run:    { title: 'Run Recap',    badgeStyle: styles.badgeRun,   stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
+    lift:   { title: 'Lift Recap',   badgeStyle: styles.badgeLift,  stat: '' },
+    swim:   { title: 'Swim Recap',   badgeStyle: styles.badgeBlue,  stat: '' },
+    bike:   { title: 'Bike Recap',   badgeStyle: styles.badgeGreen, stat: '' },
+    rowing: { title: 'Rowing Recap', badgeStyle: styles.badgeBlue,  stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
+    hyrox:  { title: 'Hyrox Recap',  badgeStyle: styles.badgeHyrox, stat: '' },
+    cross:  { title: 'Cross Training Recap', badgeStyle: styles.badgeLift, stat: '' },
   };
   const label = SESSION_LABELS[sessionType] ?? SESSION_LABELS.lift;
 
@@ -105,7 +146,33 @@ export default function WorkoutRecapScreen() {
           <Text style={styles.ozzieText}>&ldquo;{data.ozzieDebrief}&rdquo;</Text>
         </View>
 
-        {isRun ? (
+        {isHyrox ? (
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>STATION SPLITS</Text>
+            {HYROX_STATIONS.map((station, i) => {
+              const run = data.workout.hyroxSplits!.runs.find((r) => r.index === i + 1);
+              const stationSplit = data.workout.hyroxSplits!.stations.find((s) => s.index === i + 1);
+              return (
+                <View key={station.id}>
+                  <View style={styles.splitRow}>
+                    <Text style={styles.splitMile}>Run {i + 1}</Text>
+                    <Text style={styles.splitTime}>{run ? formatDuration(run.durationS) : '--'}</Text>
+                  </View>
+                  <View style={styles.splitRow}>
+                    <Text style={styles.splitMile}>{station.label}</Text>
+                    <Text style={styles.splitTime}>{stationSplit ? formatDuration(stationSplit.durationS) : '--'}</Text>
+                  </View>
+                </View>
+              );
+            })}
+            <View style={[styles.enduranceRow, { borderBottomWidth: 0 }]}>
+              <Text style={styles.enduranceStatLabel}>Total roxzone (transitions)</Text>
+              <Text style={styles.enduranceStat}>
+                {formatDuration(data.workout.hyroxSplits!.roxzoneS.reduce((sum, r) => sum + r.durationS, 0))}
+              </Text>
+            </View>
+          </View>
+        ) : showSplits ? (
           <View style={styles.card}>
             <Text style={styles.cardTitle}>MILE SPLITS</Text>
             {data.splits.map((split) => (
@@ -116,7 +183,7 @@ export default function WorkoutRecapScreen() {
               </View>
             ))}
           </View>
-        ) : isEndurance ? (
+        ) : showSessionSummary ? (
           <View style={styles.card}>
             <Text style={styles.cardTitle}>SESSION SUMMARY</Text>
             <View style={styles.enduranceRow}>
@@ -146,12 +213,47 @@ export default function WorkoutRecapScreen() {
             ))}
           </View>
         )}
+
+        <View style={styles.shareCard}>
+          {shared ? (
+            <View style={styles.sharedRow}>
+              <Text style={styles.sharedText}>✓ Shared to your activity feed</Text>
+            </View>
+          ) : (
+            <>
+              <Text style={styles.cardTitle}>SHARE THIS WORKOUT</Text>
+              <TextInput
+                style={styles.captionInput}
+                placeholder="Add a caption (optional)"
+                placeholderTextColor={Colors.textMuted}
+                value={caption}
+                onChangeText={setCaption}
+                accessibilityLabel="Share caption, optional"
+              />
+              {shareError ? <Text style={styles.shareErrorText}>{shareError}</Text> : null}
+              <TouchableOpacity
+                style={styles.shareBtn}
+                onPress={handleShare}
+                disabled={sharing}
+                accessibilityRole="button"
+                accessibilityLabel="Share to activity feed"
+                accessibilityState={{ disabled: sharing, busy: sharing }}
+              >
+                {sharing ? (
+                  <ActivityIndicator color={Colors.teal} size="small" />
+                ) : (
+                  <Text style={styles.shareBtnText}>Share to Activity Feed</Text>
+                )}
+              </TouchableOpacity>
+            </>
+          )}
+        </View>
       </ScrollView>
 
       <View style={styles.footer}>
         <TouchableOpacity
           style={styles.homeBtn}
-          onPress={() => router.replace('/(tabs)')}
+          onPress={exitToWorkoutTab}
           accessibilityRole="button"
           accessibilityLabel="Done"
         >
@@ -188,6 +290,7 @@ const styles = StyleSheet.create({
   badgeLift: { color: Colors.gold },
   badgeBlue: { color: '#3B82F6' },
   badgeGreen: { color: '#4ADE80' },
+  badgeHyrox: { color: Colors.red },
   title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 4 },
   meta: { fontSize: 14, color: Colors.textMuted, marginBottom: 20 },
   ozzieCard: {
@@ -241,6 +344,37 @@ const styles = StyleSheet.create({
   },
   enduranceStatLabel: { fontSize: 14, color: Colors.textSecondary },
   enduranceStat: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
+  shareCard: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 14,
+    padding: 16,
+    marginTop: 16,
+    gap: 10,
+  },
+  captionInput: {
+    backgroundColor: 'rgba(255,255,255,0.04)',
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    color: Colors.textPrimary,
+    fontSize: 14,
+  },
+  shareErrorText: { fontSize: 12, color: Colors.red },
+  shareBtn: {
+    backgroundColor: Colors.surfaceTeal,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+    borderRadius: 10,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  shareBtnText: { fontSize: 14, fontWeight: '700', color: Colors.teal },
+  sharedRow: { alignItems: 'center', paddingVertical: 4 },
+  sharedText: { fontSize: 13, fontWeight: '700', color: Colors.green },
   footer: { padding: 16, borderTopWidth: 1, borderTopColor: Colors.border },
   homeBtn: {
     backgroundColor: Colors.teal,
