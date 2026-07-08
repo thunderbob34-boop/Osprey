@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import OnboardingShell, { OptionCard } from '@/components/onboarding/OnboardingShell';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import { useAuthStore } from '@/store/authStore';
-import { completeOnboarding } from '@/services/onboarding';
+import { completeOnboarding, generateInitialPlan } from '@/services/onboarding';
 import { isHealthKitSupported, requestHealthKitAuthorization } from '@/services/healthkit';
 import { Colors } from '@/constants/colors';
 
@@ -23,14 +23,20 @@ export default function HealthScreen() {
 
     setLoading(true);
     try {
-      await completeOnboarding(userId, {
+      const onboardingDraft = {
         displayName: draft.displayName,
         primaryGoal: draft.primaryGoal,
         experienceTier: draft.experienceTier,
         weeklyRunDays: draft.weeklyRunDays,
         weeklyLiftDays: draft.weeklyLiftDays,
         healthConnected: draft.healthConnected,
-      });
+      };
+      await completeOnboarding(userId, onboardingDraft);
+      // Best-effort — land on Home with a real plan already generated
+      // instead of the "no plan yet" banner. A failure here (slow model
+      // response, transient error) shouldn't block finishing onboarding;
+      // the banner is a perfectly fine fallback.
+      await generateInitialPlan(onboardingDraft).catch(() => undefined);
       await fetchProfile();
       reset();
       router.replace('/(tabs)');

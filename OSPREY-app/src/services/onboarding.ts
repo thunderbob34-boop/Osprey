@@ -1,5 +1,42 @@
 import { supabase } from '@/services/supabase';
-import type { OnboardingDraft } from '@/types/onboarding';
+import type { OnboardingDraft, PrimaryGoal } from '@/types/onboarding';
+import type { TrainingDaysPerWeek, TrainingGoal, UserPreferences } from '@/types/preferences';
+
+// Onboarding's 5-value goal vocab -> the plan-builder's 6-value one — shared
+// with app/preferences.tsx so a Preferences visit right after onboarding
+// seeds from the same mapping instead of drifting apart.
+export const ONBOARDING_GOAL_TO_PREFERENCES: Record<PrimaryGoal, TrainingGoal> = {
+  run: 'run_performance',
+  lift: 'strength',
+  hybrid: 'hybrid',
+  weight_loss: 'weight_loss',
+  general_fitness: 'general',
+};
+
+function buildPlanPreferences(draft: OnboardingDraft): UserPreferences {
+  const totalDays = draft.weeklyRunDays + draft.weeklyLiftDays;
+  return {
+    primaryGoal: ONBOARDING_GOAL_TO_PREFERENCES[draft.primaryGoal],
+    experienceLevel: draft.experienceTier,
+    daysPerWeek: Math.min(6, Math.max(3, totalDays)) as TrainingDaysPerWeek,
+    longRunDay: 'saturday',
+    includeSwim: false,
+    includeBike: false,
+  };
+}
+
+/**
+ * Generates the user's first training plan straight from onboarding answers,
+ * so they land on Home with a real plan instead of the "no plan yet" banner.
+ * Best-effort: a failure here shouldn't block onboarding completion — the
+ * banner is a perfectly fine fallback if this doesn't come back in time.
+ */
+export async function generateInitialPlan(draft: OnboardingDraft): Promise<void> {
+  const { error } = await supabase.functions.invoke('ozzie-generate-plan', {
+    body: { preferences: buildPlanPreferences(draft), force: true },
+  });
+  if (error) throw error;
+}
 
 export async function completeOnboarding(userId: string, draft: OnboardingDraft): Promise<void> {
   const { error: userError } = await supabase

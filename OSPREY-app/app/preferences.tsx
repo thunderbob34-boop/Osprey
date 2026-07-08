@@ -10,15 +10,18 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
 import { useAuthStore } from '@/store/authStore';
+import { ONBOARDING_GOAL_TO_PREFERENCES } from '@/services/onboarding';
 import type {
   ExperienceLevel,
   TrainingDaysPerWeek,
   TrainingGoal,
   TriathlonDistance,
 } from '@/types/preferences';
+import type { PrimaryGoal } from '@/types/onboarding';
 
 interface GoalOption {
   value: TrainingGoal;
@@ -63,6 +66,7 @@ const EXPERIENCE_TIER_MAP: Record<ExperienceLevel, string> = {
 export default function PreferencesScreen() {
   const router = useRouter();
   const userId = useAuthStore((s) => s.user?.id);
+  const profile = useAuthStore((s) => s.profile);
   const [primaryGoal, setPrimaryGoal] = useState<TrainingGoal>('hybrid');
   const [experienceLevel, setExperienceLevel] = useState<ExperienceLevel>('intermediate');
   const [daysPerWeek, setDaysPerWeek] = useState<TrainingDaysPerWeek>(5);
@@ -72,6 +76,10 @@ export default function PreferencesScreen() {
   const [triathlonDistance, setTriathlonDistance] = useState<TriathlonDistance>('sprint');
   const [loading, setLoading] = useState(false);
   const [loadingPrefs, setLoadingPrefs] = useState(true);
+  // Whether a plan-builder session has run before via this screen — a good
+  // proxy for "you already have an active plan," since onboarding itself
+  // never writes to osprey_preferences (it goes straight to user_goals).
+  const [hasGeneratedBefore, setHasGeneratedBefore] = useState(false);
 
   const isTriathlon = primaryGoal === 'triathlon';
 
@@ -81,6 +89,7 @@ export default function PreferencesScreen() {
         const { data } = await supabase.auth.getUser();
         const saved = data.user?.user_metadata?.osprey_preferences;
         if (saved) {
+          setHasGeneratedBefore(true);
           if (saved.primaryGoal) setPrimaryGoal(saved.primaryGoal);
           if (saved.experienceLevel) setExperienceLevel(saved.experienceLevel);
           if (saved.daysPerWeek) setDaysPerWeek(saved.daysPerWeek);
@@ -88,6 +97,27 @@ export default function PreferencesScreen() {
           if (typeof saved.includeSwim === 'boolean') setIncludeSwim(saved.includeSwim);
           if (typeof saved.includeBike === 'boolean') setIncludeBike(saved.includeBike);
           if (saved.triathlonDistance) setTriathlonDistance(saved.triathlonDistance);
+        } else if (userId) {
+          // First visit — no prior plan-builder session. Seed from the
+          // answers already given during onboarding instead of asking the
+          // same goal/experience/days questions cold a second time.
+          if (profile?.experience_tier) {
+            setExperienceLevel(profile.experience_tier as ExperienceLevel);
+          }
+          const { data: goalsRow } = await supabase
+            .from('user_goals')
+            .select('primary_goal, weekly_run_days, weekly_lift_days')
+            .eq('user_id', userId)
+            .maybeSingle();
+          if (goalsRow?.primary_goal) {
+            const mapped = ONBOARDING_GOAL_TO_PREFERENCES[goalsRow.primary_goal as PrimaryGoal];
+            if (mapped) setPrimaryGoal(mapped);
+          }
+          if (goalsRow?.weekly_run_days != null || goalsRow?.weekly_lift_days != null) {
+            const totalDays = (goalsRow.weekly_run_days ?? 0) + (goalsRow.weekly_lift_days ?? 0);
+            const clamped = Math.min(6, Math.max(3, totalDays)) as TrainingDaysPerWeek;
+            setDaysPerWeek(clamped);
+          }
         }
       } catch {
         // silently fall back to defaults
@@ -96,7 +126,7 @@ export default function PreferencesScreen() {
       }
     }
     loadSaved();
-  }, []);
+  }, [userId]);
 
   async function handleGenerate() {
     setLoading(true);
@@ -164,7 +194,7 @@ export default function PreferencesScreen() {
           accessibilityRole="button"
           accessibilityLabel="Close"
         >
-          <Text style={styles.closeText}>✕</Text>
+          <Ionicons name="close" size={20} color={Colors.textMuted} />
         </TouchableOpacity>
         <Text style={styles.title}>Build Your Plan</Text>
         <Text style={styles.subtitle}>
@@ -312,6 +342,12 @@ export default function PreferencesScreen() {
           </>
         )}
 
+        {hasGeneratedBefore ? (
+          <Text style={styles.replaceWarning}>
+            This replaces your current plan going forward — past sessions already logged are untouched.
+          </Text>
+        ) : null}
+
         <TouchableOpacity
           style={[styles.generateBtn, loading && styles.generateBtnDisabled]}
           onPress={handleGenerate}
@@ -326,7 +362,9 @@ export default function PreferencesScreen() {
               <Text style={styles.generateBtnText}>Ozzie is building your schedule...</Text>
             </>
           ) : (
-            <Text style={styles.generateBtnText}>Generate My Plan →</Text>
+            <Text style={styles.generateBtnText}>
+              {hasGeneratedBefore ? 'Regenerate My Plan →' : 'Generate My Plan →'}
+            </Text>
           )}
         </TouchableOpacity>
 
@@ -334,9 +372,9 @@ export default function PreferencesScreen() {
           style={styles.skipBtn}
           onPress={() => router.back()}
           accessibilityRole="button"
-          accessibilityLabel="Skip for now"
+          accessibilityLabel={hasGeneratedBefore ? 'Cancel' : 'Skip for now'}
         >
-          <Text style={styles.skipText}>Skip for now</Text>
+          <Text style={styles.skipText}>{hasGeneratedBefore ? 'Cancel' : 'Skip for now'}</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -348,7 +386,6 @@ const styles = StyleSheet.create({
   loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   scroll: { padding: 24, paddingBottom: 48 },
   closeBtn: { alignSelf: 'flex-start', padding: 8, marginBottom: 4 },
-  closeText: { fontSize: 18, color: Colors.textMuted },
   title: {
     fontSize: 28,
     fontWeight: '800',
@@ -414,6 +451,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     color: Colors.textSecondary,
+  },
+  replaceWarning: {
+    fontSize: 12,
+    color: Colors.amber,
+    textAlign: 'center',
+    lineHeight: 17,
+    marginTop: 20,
   },
   generateBtn: {
     marginTop: 32,
