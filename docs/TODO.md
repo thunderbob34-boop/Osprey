@@ -39,10 +39,13 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 - [ ] **Activate Sentry** — the SDK is fully wired as of 2026-07-07 (`@sentry/react-native` + Expo plugin + metro config + init in `app/_layout.tsx`) but no-ops until a DSN exists. Create a free Sentry project (React Native platform), then set `EXPO_PUBLIC_SENTRY_DSN` in `.env.local` and as an EAS environment variable for production builds. Optional but recommended before launch: add `organization`/`project` + `SENTRY_AUTH_TOKEN` to the plugin config so release builds upload source maps for readable stack traces.
 
 ### RevenueCat / monetization
-- [ ] App Store Connect: create subscription group + two products — $9.99/mo and $89.99/yr.
-- [ ] RevenueCat: entitlement `osprey_plus`, attach both products, default Offering = annual.
-- [ ] Add App Store Connect API key to RevenueCat.
-- [ ] Test purchase + Restore Purchases on TestFlight with a sandbox account (restore on a second device too).
+- [x] App Store Connect: subscription group + two products — confirmed 2026-07-10, already existed as `osprey_plus_month` ($5.99/mo) and `osprey_plus_annual` ($59.99/yr), not the $9.99/$89.99 originally planned. Kept the existing prices (user decision, 2026-07-10) rather than changing them — treat $5.99/$59.99 as the real pricing going forward.
+- [x] RevenueCat: entitlement `osprey_plus` — confirmed 2026-07-10, both products already attached.
+- [x] RevenueCat: default Offering = annual — confirmed 2026-07-10. `osprey_plus_offering` is the active default offering with both packages; Annual is listed first, and `app/paywall.tsx` selects `packages[0]` by default, so annual is already the pre-selected plan with no code change needed.
+- [x] Add App Store Connect API key to RevenueCat — confirmed 2026-07-10, already uploaded (Key ID `FFM67VT688`) and showing "Valid credentials".
+- [x] App's `EXPO_PUBLIC_REVENUECAT_IOS_KEY` verified 2026-07-10 to exactly match this RevenueCat project's Public API Key — confirmed wired to the right project.
+- [ ] Test purchase + Restore Purchases on TestFlight with a sandbox account (restore on a second device too) — **still needs a real TestFlight build**, blocked on the Fresh Native Build + App Store Connect items in §1/§2.
+- [ ] **Optional cleanup:** two unused legacy leftovers in RevenueCat from an earlier setup pass — entitlement "OSPREY Premium" (1 product) and offering "default" (1 package). Neither is referenced by app code; safe to delete whenever, not blocking.
 
 ### App Store Connect
 - [ ] Register app (bundle `com.SillyGoose.OSPREY`).
@@ -56,9 +59,13 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 - [ ] Add subscription metadata (blocks production review).
 - [ ] `version` `1.0.0` / `buildNumber` `1` confirmed; no dev/placeholder copy visible to users.
 
-### Ozzie voice
-- [ ] Listen to `EXPO_PUBLIC_OZZIE_VOICE_ID` on a physical device; confirm it matches the casting brief (warm, Kronk-spirited). Re-cast + update `.env.local` if not.
-- [ ] Confirm ElevenLabs quota covers real usage. (🟢 later: commission custom voice clone.)
+### Ozzie voice — deferred post-launch, disabled for now
+- [x] Voice checked 2026-07-10: `EXPO_PUBLIC_OZZIE_VOICE_ID` is "Smart Kronk" in ElevenLabs, described as "similar to Patrick Warburton's iconic delivery" — matches the casting brief. No re-cast needed.
+- [x] **ElevenLabs quota checked 2026-07-10 — account is on the Free plan** (350/10,000 credits used), which has **no commercial license for Speech/Music**. Shipping voice in a paid app right now would violate ElevenLabs' terms.
+- [x] **Decision (2026-07-10): voice is now a post-launch feature, fully disabled.** `OZZIE_VOICE_ENABLED = false` in `src/services/ozzie-audio.ts` — `ozzieSpeak()`/`ozziePrewarm()` no-op, zero ElevenLabs calls anywhere (daily debrief, PR celebration, mid-run/interval cues, launch pre-warm). "Ozzie Cue" manual buttons hidden in `run.tsx`/`endurance.tsx` while disabled.
+  - [x] Paid-feature-parity fix: the OSPREY+ paywall bullet "Live Run Coaching" (mile-split/pace/HR-zone cues) was 100% audio-only with no visual fallback — paying subscribers were getting nothing. Added `useCueBanner` (new hook, `src/hooks/useCueBanner.ts`) — shows the cue text as an on-screen banner instead, wired into both `run.tsx`'s OSPREY+ live-coaching cues and `endurance.tsx`'s OSPREY+ 10-minute encouragement cues. Endurance's per-interval-step narration was left alone (already fully redundant with the visible "Step X of Y" UI).
+  - [x] Fixed App Store Connect subscription descriptions that promised "voice coaching"/"voice feedback" (both products) — updated to "live coaching" language matching what's actually live.
+- [ ] **To re-enable later:** upgrade ElevenLabs off the Free plan (Starter $6/mo/30k credits or Creator, for commercial license), flip `OZZIE_VOICE_ENABLED` back to `true`, re-test on a physical device.
 
 ### Build & submit
 - [ ] `eas build --platform ios --profile production` → `eas submit --platform ios` → TestFlight internal testers first.
@@ -66,8 +73,8 @@ Legend: 🔴 blocks features from working · 🟡 needed before TestFlight/launc
 ## 3. QA pass (after §1 is done)
 
 - [ ] Clean-account onboarding: sign up → profile → plan generates (check lift + interval prescriptions and, for a triathlon goal, balanced swim/bike/run/lift days).
-- [ ] GPS run: start, in-run guidance card + Ozzie cues, stop, route map. Verify slow steady walking accrues distance (GPS anchor fix, 2026-07-05).
-- [ ] Lift log: prescribed workout preloads, plate math on set tap, PR detection + voice celebration, rest timer, recap ties back to plan intent.
+- [ ] GPS run: start, in-run guidance card, stop, route map. Verify slow steady walking accrues distance (GPS anchor fix, 2026-07-05). Voice cues are disabled for now (see Ozzie voice section) — confirm the on-screen cue banner shows instead for OSPREY+ accounts.
+- [ ] Lift log: prescribed workout preloads, plate math on set tap, PR detection (haptic — voice celebration disabled for now), rest timer, recap ties back to plan intent.
 - [ ] Food log: barcode (incl. timeout fallback), photo, manual, Quick Add recents, Copy yesterday. Macro card on Home matches Log.
 - [ ] Weight trend: log weight across days → nutrition tip mentions trend, targets shift, training/rest-day chip shows.
 - [ ] Hydration quick-add on Home and Log.
