@@ -42,7 +42,7 @@ const CARDS: Card[] = [
     icon: 'dumbbell',
     iconColor: Colors.gold,
     title: 'Lift',
-    desc: 'Log sets, rest timer, Ozzie encouragement',
+    desc: 'Log sets, rest timer, PR tracking',
     route: '/workout/lift',
     surface: Colors.surfaceGold,
     border: Colors.borderGold,
@@ -151,6 +151,7 @@ export default function WorkoutTab() {
               <TouchableOpacity
                 onPress={dismissAlert}
                 style={styles.bannerDismiss}
+                hitSlop={12}
                 accessibilityRole="button"
                 accessibilityLabel="Dismiss"
               >
