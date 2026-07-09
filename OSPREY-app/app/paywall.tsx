@@ -44,11 +44,33 @@ function packageLabel(pkg: PurchasesPackage): string {
   }
 }
 
+/** Billing-period suffix for the subscribe button, matched to the selected package — not hardcoded to monthly. */
+function packagePeriodSuffix(pkg: PurchasesPackage): string {
+  switch (pkg.packageType) {
+    case 'ANNUAL':
+      return '/yr';
+    case 'MONTHLY':
+      return '/mo';
+    case 'WEEKLY':
+      return '/wk';
+    case 'SIX_MONTH':
+      return '/6mo';
+    case 'THREE_MONTH':
+      return '/3mo';
+    case 'TWO_MONTH':
+      return '/2mo';
+    case 'LIFETIME':
+      return '';
+    default:
+      return '';
+  }
+}
+
 const FEATURES = [
   { icon: '🤖', title: 'AI Race Briefings', desc: 'Ozzie preps you the morning of every race with personalized strategy.' },
   { icon: '📋', title: 'Race Retrospectives', desc: 'Post-race coaching debrief from Ozzie — what worked, what to fix.' },
   { icon: '🏆', title: 'Group Challenges', desc: 'Create unlimited mileage, workout, and duration challenges with friends.' },
-  { icon: '🔔', title: 'Live Run Coaching', desc: 'Automatic mile-split callouts, pace alerts, and HR zone cues mid-run.' },
+  { icon: '🔔', title: 'Live Run Coaching', desc: 'Automatic mile-split callouts and HR zone cues mid-run.' },
   { icon: '📈', title: 'Performance Intelligence', desc: 'Fitness/fatigue/form trends (CTL/ATL/TSB), injury risk score, race time predictor.' },
   { icon: '📆', title: 'AI Plan Generation', desc: 'Adaptive weekly training plans powered by GPT-4o-mini.' },
 ];
@@ -72,6 +94,7 @@ export default function PaywallScreen() {
 
   const selectedPackage = packages.find((p) => p.identifier === selectedId) ?? packages[0];
   const priceString = selectedPackage?.product.priceString ?? null;
+  const periodSuffix = selectedPackage ? packagePeriodSuffix(selectedPackage) : '';
 
   async function handleSubscribe() {
     setPurchasing(true);
@@ -184,7 +207,7 @@ export default function PaywallScreen() {
           onPress={handleSubscribe}
           disabled={purchasing || restoring}
           accessibilityRole="button"
-          accessibilityLabel={priceString ? `Start for ${priceString} per month` : 'Subscribe to OSPREY+'}
+          accessibilityLabel={priceString ? `Start for ${priceString}${periodSuffix}` : 'Subscribe to OSPREY+'}
           accessibilityState={{ disabled: purchasing || restoring, busy: purchasing }}
         >
           {purchasing ? (
@@ -192,7 +215,7 @@ export default function PaywallScreen() {
           ) : (
             <>
               <Text style={styles.subscribeBtnText}>
-                {priceString ? `Start for ${priceString}/mo` : 'Subscribe to OSPREY+'}
+                {priceString ? `Start for ${priceString}${periodSuffix}` : 'Subscribe to OSPREY+'}
               </Text>
               <Text style={styles.subscribeBtnSub}>Cancel anytime</Text>
             </>
