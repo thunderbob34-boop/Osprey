@@ -233,7 +233,12 @@ export default function EnduranceWorkoutScreen() {
     cuedStepRef.current = stepIndex;
     stepEndAtRef.current = currentStep.durationS != null ? Date.now() + currentStep.durationS * 1000 : null;
     setStepRemainingS(currentStep.durationS);
-    ozzieSpeak(ozzieCueForStep(currentStep), 'workout').catch(() => undefined);
+    const stepCue = ozzieCueForStep(currentStep);
+    if (OZZIE_VOICE_ENABLED) {
+      ozzieSpeak(stepCue, 'workout').catch(() => undefined);
+    } else {
+      showCueBanner(stepCue);
+    }
   }, [currentStep, stepIndex]);
 
   function advanceStep() {
@@ -294,7 +299,7 @@ export default function EnduranceWorkoutScreen() {
   useEffect(() => {
     if (!isPlus || speakingRef.current || hasIntervals) return;
     const nowMs = Date.now();
-    if (elapsed > 0 && nowMs - lastAutoCueMs.current >= AUTO_CUE_INTERVAL_MS) {
+    if (elapsed >= AUTO_CUE_INTERVAL_MS / 1000 && nowMs - lastAutoCueMs.current >= AUTO_CUE_INTERVAL_MS) {
       lastAutoCueMs.current = nowMs;
       const cues = ENCOURAGEMENTS[type];
       const idx = Math.floor(elapsed / 600) % cues.length;
@@ -384,7 +389,7 @@ export default function EnduranceWorkoutScreen() {
   }
 
   function confirmEnd() {
-    Alert.alert('End session?', 'Save this workout and see your recap.', [
+    Alert.alert('End session?', 'Save this workout and see your recap, or discard this session.', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Discard & Exit',
@@ -521,7 +526,7 @@ export default function EnduranceWorkoutScreen() {
         ) : null}
 
         {!OZZIE_VOICE_ENABLED && cueBannerText ? (
-          <View style={styles.cueBanner}>
+          <View style={styles.cueBanner} accessibilityLiveRegion="polite" accessibilityRole="alert">
             <OzzieAvatar size={18} />
             <Text style={styles.cueBannerText}>{cueBannerText}</Text>
           </View>

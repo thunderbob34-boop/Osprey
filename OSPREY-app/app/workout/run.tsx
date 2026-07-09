@@ -119,12 +119,20 @@ export default function RunWorkoutScreen() {
     const next = intervalSteps[stepIndex + 1];
     if (next) {
       setStepIndex(stepIndex + 1);
-      ozzieSpeak(runCueForStep(next, paceBands), 'workout').catch(() => undefined);
+      const nextCue = runCueForStep(next, paceBands);
+      if (OZZIE_VOICE_ENABLED) {
+        ozzieSpeak(nextCue, 'workout').catch(() => undefined);
+      } else {
+        showCueBanner(nextCue);
+      }
     } else {
       setIntervalsDone(true);
-      ozzieSpeak('Intervals complete. Great work — cruise it home easy.', 'workout').catch(
-        () => undefined,
-      );
+      const doneCue = 'Intervals complete. Great work — cruise it home easy.';
+      if (OZZIE_VOICE_ENABLED) {
+        ozzieSpeak(doneCue, 'workout').catch(() => undefined);
+      } else {
+        showCueBanner(doneCue);
+      }
     }
   }, [elapsed, distanceMeters, intervalSteps, stepIndex, intervalsDone, status, paceBands]);
 
@@ -166,7 +174,12 @@ export default function RunWorkoutScreen() {
     startWorkout('run', params.sessionId ?? null);
     if (intervalSteps?.[0]) {
       stepStartRef.current = { elapsedS: 0, distanceM: 0 };
-      ozzieSpeak(runCueForStep(intervalSteps[0], paceBands), 'workout').catch(() => undefined);
+      const firstCue = runCueForStep(intervalSteps[0], paceBands);
+      if (OZZIE_VOICE_ENABLED) {
+        ozzieSpeak(firstCue, 'workout').catch(() => undefined);
+      } else {
+        showCueBanner(firstCue);
+      }
     }
   }
 
@@ -279,7 +292,7 @@ export default function RunWorkoutScreen() {
   }
 
   function confirmEnd() {
-    Alert.alert('End workout?', 'Save this run and see your recap.', [
+    Alert.alert('End workout?', 'Save this run and see your recap, or discard this session.', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Discard & Exit',
@@ -386,13 +399,13 @@ export default function RunWorkoutScreen() {
       ) : null}
 
       {status === 'paused' ? (
-        <View style={styles.pausedBanner}>
+        <View style={styles.pausedBanner} accessibilityLiveRegion="polite" accessibilityRole="alert">
           <Text style={styles.pausedText}>Paused — Ozzie says take a breath, then resume when ready.</Text>
         </View>
       ) : null}
 
       {!OZZIE_VOICE_ENABLED && cueBannerText ? (
-        <View style={styles.cueBanner}>
+        <View style={styles.cueBanner} accessibilityLiveRegion="polite" accessibilityRole="alert">
           <OzzieAvatar size={18} />
           <Text style={styles.cueBannerText}>{cueBannerText}</Text>
         </View>
