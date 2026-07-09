@@ -28,6 +28,12 @@ try {
   // Module not available — continue without it
 }
 
+// Google OAuth is deliberately deferred — the provider is confirmed Disabled
+// in Supabase (needs a Google Cloud OAuth client, and billing isn't enabled
+// on that project yet; see docs/TODO.md). Keep the button hidden rather than
+// live and guaranteed to fail until it's actually enabled server-side.
+const GOOGLE_SIGNIN_ENABLED = false;
+
 type Mode = 'signin' | 'signup';
 
 export default function SignInScreen() {
@@ -218,33 +224,39 @@ export default function SignInScreen() {
           </TouchableOpacity>
 
           {/* ── Social sign-in ── */}
-          <View style={styles.dividerRow}>
-            <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>or</Text>
-            <View style={styles.dividerLine} />
-          </View>
+          {appleAvailable || GOOGLE_SIGNIN_ENABLED ? (
+            <>
+              <View style={styles.dividerRow}>
+                <View style={styles.dividerLine} />
+                <Text style={styles.dividerText}>or</Text>
+                <View style={styles.dividerLine} />
+              </View>
 
-          {appleAvailable ? (
-            <AppleAuthentication.AppleAuthenticationButton
-              buttonType={AppleAuthentication.AppleAuthenticationButtonType.CONTINUE}
-              buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
-              cornerRadius={12}
-              style={styles.appleBtn}
-              onPress={handleApple}
-            />
+              {appleAvailable ? (
+                <AppleAuthentication.AppleAuthenticationButton
+                  buttonType={AppleAuthentication.AppleAuthenticationButtonType.CONTINUE}
+                  buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+                  cornerRadius={12}
+                  style={styles.appleBtn}
+                  onPress={handleApple}
+                />
+              ) : null}
+
+              {GOOGLE_SIGNIN_ENABLED ? (
+                <TouchableOpacity
+                  style={styles.googleBtn}
+                  onPress={handleGoogle}
+                  disabled={loading}
+                  accessibilityRole="button"
+                  accessibilityLabel="Continue with Google"
+                  accessibilityState={{ disabled: loading, busy: loading }}
+                >
+                  <Ionicons name="logo-google" size={18} color="#4285F4" />
+                  <Text style={styles.googleBtnText}>Continue with Google</Text>
+                </TouchableOpacity>
+              ) : null}
+            </>
           ) : null}
-
-          <TouchableOpacity
-            style={styles.googleBtn}
-            onPress={handleGoogle}
-            disabled={loading}
-            accessibilityRole="button"
-            accessibilityLabel="Continue with Google"
-            accessibilityState={{ disabled: loading, busy: loading }}
-          >
-            <Ionicons name="logo-google" size={18} color="#4285F4" />
-            <Text style={styles.googleBtnText}>Continue with Google</Text>
-          </TouchableOpacity>
 
           {mode === 'signup' ? (
             <Text style={styles.legalText}>
