@@ -44,6 +44,46 @@ function packageLabel(pkg: PurchasesPackage): string {
   }
 }
 
+function periodSuffix(pkg: PurchasesPackage): string {
+  switch (pkg.packageType) {
+    case 'ANNUAL':
+      return '/yr';
+    case 'MONTHLY':
+      return '/mo';
+    case 'WEEKLY':
+      return '/wk';
+    case 'SIX_MONTH':
+      return '/6mo';
+    case 'THREE_MONTH':
+      return '/3mo';
+    case 'TWO_MONTH':
+      return '/2mo';
+    case 'LIFETIME':
+      return '';
+    default:
+      return '';
+  }
+}
+
+function periodSpokenSuffix(pkg: PurchasesPackage): string {
+  switch (pkg.packageType) {
+    case 'ANNUAL':
+      return ' per year';
+    case 'MONTHLY':
+      return ' per month';
+    case 'WEEKLY':
+      return ' per week';
+    case 'SIX_MONTH':
+      return ' per 6 months';
+    case 'THREE_MONTH':
+      return ' per 3 months';
+    case 'TWO_MONTH':
+      return ' per 2 months';
+    default:
+      return '';
+  }
+}
+
 const FEATURES = [
   { icon: '🤖', title: 'AI Race Briefings', desc: 'Ozzie preps you the morning of every race with personalized strategy.' },
   { icon: '📋', title: 'Race Retrospectives', desc: 'Post-race coaching debrief from Ozzie — what worked, what to fix.' },
@@ -72,6 +112,7 @@ export default function PaywallScreen() {
 
   const selectedPackage = packages.find((p) => p.identifier === selectedId) ?? packages[0];
   const priceString = selectedPackage?.product.priceString ?? null;
+  const priceSuffix = selectedPackage ? periodSuffix(selectedPackage) : '';
 
   async function handleSubscribe() {
     setPurchasing(true);
@@ -184,7 +225,11 @@ export default function PaywallScreen() {
           onPress={handleSubscribe}
           disabled={purchasing || restoring}
           accessibilityRole="button"
-          accessibilityLabel={priceString ? `Start for ${priceString} per month` : 'Subscribe to OSPREY+'}
+          accessibilityLabel={
+            priceString && selectedPackage
+              ? `Start for ${priceString}${periodSpokenSuffix(selectedPackage)}`
+              : 'Subscribe to OSPREY+'
+          }
           accessibilityState={{ disabled: purchasing || restoring, busy: purchasing }}
         >
           {purchasing ? (
@@ -192,7 +237,7 @@ export default function PaywallScreen() {
           ) : (
             <>
               <Text style={styles.subscribeBtnText}>
-                {priceString ? `Start for ${priceString}/mo` : 'Subscribe to OSPREY+'}
+                {priceString ? `Start for ${priceString}${priceSuffix}` : 'Subscribe to OSPREY+'}
               </Text>
               <Text style={styles.subscribeBtnSub}>Cancel anytime</Text>
             </>

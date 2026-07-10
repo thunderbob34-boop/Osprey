@@ -44,23 +44,7 @@ CREATE POLICY friendships_delete ON friendships
   FOR DELETE TO authenticated
   USING (requester_id = auth.uid() OR addressee_id = auth.uid());
 
--- ── saved_routes: 001 never enabled RLS for this user-owned table ──
-ALTER TABLE saved_routes ENABLE ROW LEVEL SECURITY;
-GRANT SELECT, INSERT, UPDATE, DELETE ON saved_routes TO authenticated;
-
-CREATE POLICY saved_routes_select ON saved_routes
-  FOR SELECT TO authenticated
-  USING (user_id = auth.uid() OR is_public = true);
-
-CREATE POLICY saved_routes_insert ON saved_routes
-  FOR INSERT TO authenticated
-  WITH CHECK (user_id = auth.uid());
-
-CREATE POLICY saved_routes_update ON saved_routes
-  FOR UPDATE TO authenticated
-  USING (user_id = auth.uid())
-  WITH CHECK (user_id = auth.uid());
-
-CREATE POLICY saved_routes_delete ON saved_routes
-  FOR DELETE TO authenticated
-  USING (user_id = auth.uid());
+-- saved_routes RLS: moved to 023_saved_routes.sql (2026-07-10 audit) — this
+-- file's policies referenced is_public, a column that belonged to 001's
+-- dead/unused saved_routes definition, since removed. 023 sets up RLS for
+-- the schema the app actually uses.

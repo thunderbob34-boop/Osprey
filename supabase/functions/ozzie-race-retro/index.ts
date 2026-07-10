@@ -3,8 +3,11 @@
 // a personalized coaching debrief: what worked, what to work on next cycle.
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { createClient } from 'jsr:@supabase/supabase-js@2';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
 const SYSTEM_PROMPT = `You are Ozzie, the AI coach inside the OSPREY fitness app. Your voice is warm, enthusiastic, and unexpectedly wise — think Kronk from The Emperor's New Groove, but with a running coach's brain.
 
@@ -95,6 +98,19 @@ serve(async (req) => {
     });
   }
 
+  const authHeader = req.headers.get('Authorization');
+  if (!authHeader) {
+    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), { status: 401 });
+  }
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+  const token = authHeader.replace('Bearer ', '');
+  const { data: authData, error: authError } = await supabase.auth.getUser(token);
+
+  if (authError || !authData?.user) {
+    return new Response(JSON.stringify({ error: 'Invalid session' }), { status: 401 });
+  }
+
   try {
     const body: RetroRequest = await req.json();
 
@@ -113,6 +129,7 @@ serve(async (req) => {
         max_tokens: 300,
         temperature: 0.7,
       }),
+      signal: AbortSignal.timeout(15000),
     });
 
     if (!response.ok) {

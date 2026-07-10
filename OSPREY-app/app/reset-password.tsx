@@ -43,33 +43,52 @@ export default function ResetPasswordScreen() {
 
   useEffect(() => {
     let cancelled = false;
+    let resolved = false;
 
-    async function establishRecoverySession() {
-      const url = await Linking.getInitialURL();
+    async function tryUrl(url: string | null): Promise<boolean> {
       const tokens = url ? parseRecoveryTokens(url) : null;
-      if (!tokens) {
-        if (!cancelled) {
-          setError('This reset link is invalid or has expired. Request a new one from the sign-in screen.');
-          setVerifying(false);
-        }
-        return;
-      }
+      if (!tokens || cancelled || resolved) return false;
+      resolved = true;
       const { error: setSessionError } = await supabase.auth.setSession({
         access_token: tokens.accessToken,
         refresh_token: tokens.refreshToken,
       });
-      if (cancelled) return;
+      if (cancelled) return true;
       if (setSessionError) {
         setError('This reset link is invalid or has expired. Request a new one from the sign-in screen.');
       } else {
         setSessionReady(true);
       }
       setVerifying(false);
+      return true;
     }
 
-    establishRecoverySession();
+    // Linking.getInitialURL() only returns the URL that cold-launched the
+    // app. If OSPREY was already running/backgrounded when the reset link
+    // was tapped (the app resumes rather than cold-launching), the tokens
+    // arrive via the 'url' event instead — subscribe to both so a warm
+    // start doesn't strand the user on "invalid or expired link".
+    const subscription = Linking.addEventListener('url', ({ url }) => {
+      tryUrl(url);
+    });
+
+    Linking.getInitialURL().then(async (url) => {
+      const handled = await tryUrl(url);
+      if (!handled && !cancelled && !resolved) {
+        // Give the 'url' event a brief window in case it fires just after
+        // mount (warm start) before giving up.
+        setTimeout(() => {
+          if (!cancelled && !resolved) {
+            setError('This reset link is invalid or has expired. Request a new one from the sign-in screen.');
+            setVerifying(false);
+          }
+        }, 1500);
+      }
+    });
+
     return () => {
       cancelled = true;
+      subscription.remove();
     };
   }, []);
 

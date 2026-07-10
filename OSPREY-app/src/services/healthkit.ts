@@ -2,12 +2,24 @@ import { Platform } from 'react-native';
 import AppleHealthKit from 'react-native-health';
 import type {
   HealthActivity,
+  HealthActivityOptions,
   HealthInputOptions,
   HealthKitPermissions,
   HealthValue,
   HKWorkoutQueriedSampleType,
 } from 'react-native-health';
 import { supabase } from '@/services/supabase';
+
+// react-native-health's HealthActivityOptions type omits `distance`/
+// `distanceUnit`/`energyBurned`/`energyBurnedUnit`, but the native
+// saveWorkout implementation reads exactly those top-level fields (and
+// ignores `metadata` entirely) — see RCTAppleHealthKit+Methods_Workout.m.
+type SaveWorkoutOptions = HealthActivityOptions & {
+  distance?: number;
+  distanceUnit?: string;
+  energyBurned?: number;
+  energyBurnedUnit?: string;
+};
 
 const PERMISSIONS: HealthKitPermissions = {
   permissions: {
@@ -142,6 +154,10 @@ const ACTIVITY_BY_SESSION_TYPE: Record<string, HealthActivity> = {
   run: AppleHealthKit.Constants.Activities.Running,
   lift: AppleHealthKit.Constants.Activities.TraditionalStrengthTraining,
   cross: AppleHealthKit.Constants.Activities.FunctionalStrengthTraining,
+  swim: AppleHealthKit.Constants.Activities.Swimming,
+  bike: AppleHealthKit.Constants.Activities.Cycling,
+  rowing: AppleHealthKit.Constants.Activities.Rowing,
+  hyrox: AppleHealthKit.Constants.Activities.HighIntensityIntervalTraining,
 };
 
 /**
@@ -159,19 +175,18 @@ export async function writeWorkoutToHealthKit(params: {
   const activityType = ACTIVITY_BY_SESSION_TYPE[params.sessionType];
   if (!activityType) return false;
 
+  const options: SaveWorkoutOptions = {
+    type: activityType,
+    startDate: params.startedAt,
+    endDate: params.endedAt,
+    distance: params.distanceMeters ?? undefined,
+    distanceUnit: 'meter',
+    energyBurned: params.calories ?? undefined,
+    energyBurnedUnit: 'calorie',
+  };
+
   return new Promise((resolve) => {
-    AppleHealthKit.saveWorkout(
-      {
-        type: activityType,
-        startDate: params.startedAt,
-        endDate: params.endedAt,
-        metadata: {
-          distanceMeters: params.distanceMeters ?? undefined,
-          calories: params.calories ?? undefined,
-        },
-      },
-      (err) => resolve(!err),
-    );
+    AppleHealthKit.saveWorkout(options, (err) => resolve(!err));
   });
 }
 

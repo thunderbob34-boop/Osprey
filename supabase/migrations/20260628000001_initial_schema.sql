@@ -240,25 +240,14 @@ CREATE TABLE activity_logs (
 
 CREATE INDEX idx_activity_logs_workout ON activity_logs(workout_id, recorded_at);
 
-
-CREATE TABLE saved_routes (
-  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id       UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  name          TEXT NOT NULL,
-  distance_km   NUMERIC(7,3),
-  surface       run_surface_enum,
-  gpx_url       TEXT,   -- Supabase Storage URL for GPX file
-  start_lat     NUMERIC(10,7),
-  start_lon     NUMERIC(10,7),
-  is_public     BOOLEAN NOT NULL DEFAULT FALSE,
-  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  deleted_at    TIMESTAMPTZ
-);
-
-CREATE TRIGGER saved_routes_updated_at BEFORE UPDATE ON saved_routes
-  FOR EACH ROW EXECUTE FUNCTION set_updated_at();
-
+-- saved_routes intentionally NOT created here — see 023_saved_routes.sql,
+-- which is the schema src/services/routes.ts actually reads/writes
+-- (tags/distance_km/notes). This file originally also created a
+-- differently-shaped, entirely-unused saved_routes table (surface/gpx_url/
+-- start_lat/start_lon/is_public/deleted_at, none of which the app ever
+-- touches), which made 023's CREATE TABLE fail outright on any fresh
+-- migration replay ("relation already exists"). Removed 2026-07-10 audit —
+-- see that table's real definition in 023 instead.
 
 -- ============================================================
 -- DOMAIN 5 — NUTRITION

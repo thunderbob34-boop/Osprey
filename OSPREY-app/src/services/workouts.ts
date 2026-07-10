@@ -108,7 +108,12 @@ async function detectSetPr(
     .map((row) => row.id as string)
     .filter((id) => id !== excludeWorkoutId);
 
-  if (workoutIds.length === 0) return true;
+  // No prior history for this exercise — matches the live mid-set PR check
+  // in lift.tsx (`previousBest > 0 && score > previousBest`), which never
+  // celebrates a first-ever log as a PR. Without this, a brand-new
+  // exercise's first set always got flagged "New PR!" on the recap even
+  // though the same session showed no PR haptic/toast mid-workout.
+  if (workoutIds.length === 0) return false;
 
   const { data } = await supabase
     .from('exercise_sets')
@@ -116,7 +121,7 @@ async function detectSetPr(
     .eq('exercise_id', exerciseId)
     .in('workout_id', workoutIds);
 
-  if (!data || data.length === 0) return true;
+  if (!data || data.length === 0) return false;
 
   const best = data.reduce((max, row) => {
     const score = (row.weight_kg ?? 0) * (row.reps ?? 0);

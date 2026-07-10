@@ -175,10 +175,8 @@ export async function fetchChallengeLeaderboard(
   }));
 }
 
-export async function fetchMyFriends(userId: string): Promise<FriendUser[]> {
-  const { data, error } = await supabase.rpc('get_my_friends', {
-    p_user_id: userId,
-  });
+export async function fetchMyFriends(_userId: string): Promise<FriendUser[]> {
+  const { data, error } = await supabase.rpc('get_my_friends');
   if (error) throw error;
   return (data ?? []).map((row: { friend_user_id: string; friend_display_name: string }) => ({
     friendUserId: row.friend_user_id,

@@ -29,7 +29,7 @@ function timeAgo(isoStr: string): string {
 
 export default function FriendsScreen() {
   const userId = useAuthStore((s) => s.user?.id);
-  const { friends, pending, myPhone, isLoading, sendRequest, acceptRequest, removeFriendship, removeFriend, updatePhone } =
+  const { friends, pending, myPhone, isLoading, error, sendRequest, acceptRequest, removeFriendship, removeFriend, updatePhone } =
     useFriends(userId);
 
   const [query, setQuery] = useState('');
@@ -238,6 +238,10 @@ export default function FriendsScreen() {
 
           {isLoading ? (
             <ActivityIndicator color={Colors.teal} style={{ marginTop: 24 }} />
+          ) : error ? (
+            <View style={styles.emptyCard}>
+              <Text style={styles.empty}>Couldn't load your friends. Pull to refresh or try again shortly.</Text>
+            </View>
           ) : (
             <>
               {pending && pending.length > 0 ? (

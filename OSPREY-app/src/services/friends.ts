@@ -92,8 +92,8 @@ export async function sendFriendRequest(requesterId: string, addresseeId: string
   if (error) throw error;
 }
 
-export async function fetchPendingRequests(userId: string): Promise<PendingFriendRequest[]> {
-  const { data, error } = await supabase.rpc('get_pending_friend_requests', { p_user_id: userId });
+export async function fetchPendingRequests(_userId: string): Promise<PendingFriendRequest[]> {
+  const { data, error } = await supabase.rpc('get_pending_friend_requests');
   if (error) throw error;
   return (data ?? []).map((row: {
     friendship_id: string;
