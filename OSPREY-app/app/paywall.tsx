@@ -44,6 +44,48 @@ function packageLabel(pkg: PurchasesPackage): string {
   }
 }
 
+// Billing period suffix/spoken form for the *selected* package — the
+// subscribe button used to hardcode "/mo" regardless of which package was
+// selected, so picking the (default-selected) annual plan showed its yearly
+// price mislabeled as a monthly one (e.g. "$59.99/mo" for a $59.99/yr plan).
+function packagePeriodSuffix(pkg: PurchasesPackage): string {
+  switch (pkg.packageType) {
+    case 'ANNUAL':
+      return '/yr';
+    case 'MONTHLY':
+      return '/mo';
+    case 'WEEKLY':
+      return '/wk';
+    case 'SIX_MONTH':
+      return '/6mo';
+    case 'THREE_MONTH':
+      return '/3mo';
+    case 'TWO_MONTH':
+      return '/2mo';
+    default:
+      return '';
+  }
+}
+
+function packagePeriodWords(pkg: PurchasesPackage): string {
+  switch (pkg.packageType) {
+    case 'ANNUAL':
+      return 'per year';
+    case 'MONTHLY':
+      return 'per month';
+    case 'WEEKLY':
+      return 'per week';
+    case 'SIX_MONTH':
+      return 'every 6 months';
+    case 'THREE_MONTH':
+      return 'every 3 months';
+    case 'TWO_MONTH':
+      return 'every 2 months';
+    default:
+      return '';
+  }
+}
+
 const FEATURES = [
   { icon: '🤖', title: 'AI Race Briefings', desc: 'Ozzie preps you the morning of every race with personalized strategy.' },
   { icon: '📋', title: 'Race Retrospectives', desc: 'Post-race coaching debrief from Ozzie — what worked, what to fix.' },
@@ -184,7 +226,11 @@ export default function PaywallScreen() {
           onPress={handleSubscribe}
           disabled={purchasing || restoring}
           accessibilityRole="button"
-          accessibilityLabel={priceString ? `Start for ${priceString} per month` : 'Subscribe to OSPREY+'}
+          accessibilityLabel={
+            priceString && selectedPackage
+              ? `Start for ${priceString} ${packagePeriodWords(selectedPackage)}`
+              : 'Subscribe to OSPREY+'
+          }
           accessibilityState={{ disabled: purchasing || restoring, busy: purchasing }}
         >
           {purchasing ? (
@@ -192,7 +238,9 @@ export default function PaywallScreen() {
           ) : (
             <>
               <Text style={styles.subscribeBtnText}>
-                {priceString ? `Start for ${priceString}/mo` : 'Subscribe to OSPREY+'}
+                {priceString && selectedPackage
+                  ? `Start for ${priceString}${packagePeriodSuffix(selectedPackage)}`
+                  : 'Subscribe to OSPREY+'}
               </Text>
               <Text style={styles.subscribeBtnSub}>Cancel anytime</Text>
             </>

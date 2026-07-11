@@ -72,8 +72,13 @@ async function computeTrainingLoad(supabase: ReturnType<typeof createClient>, us
     tssMap[date] = (tssMap[date] ?? 0) + (row.tss ?? 0);
   }
 
-  const alphaAtl = 1 - Math.exp(-1 / 7);
-  const alphaCtl = 1 - Math.exp(-1 / 42);
+  // Matches the simple EWA in src/services/performance.ts (the formula
+  // backing the user-facing Performance card) rather than the impulse-response
+  // form (1 - exp(-1/tau)) previously used here — the two diverge by ~7% on
+  // the same inputs, which could put the plan engine's TSB-threshold
+  // decisions on the opposite side of a boundary from what the user sees.
+  const TAU_ATL = 7;
+  const TAU_CTL = 42;
   let atl = 0;
   let ctl = 0;
 
@@ -82,8 +87,8 @@ async function computeTrainingLoad(supabase: ReturnType<typeof createClient>, us
     d.setDate(d.getDate() + i);
     const dateStr = d.toISOString().slice(0, 10);
     const tss = tssMap[dateStr] ?? 0;
-    atl = atl + alphaAtl * (tss - atl);
-    ctl = ctl + alphaCtl * (tss - ctl);
+    atl = atl + (tss - atl) / TAU_ATL;
+    ctl = ctl + (tss - ctl) / TAU_CTL;
   }
 
   return {

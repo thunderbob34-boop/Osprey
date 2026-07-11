@@ -185,7 +185,7 @@ export default function DailySummaryScreen({
               style={styles.avatarBtn}
               onPress={onOzziePress}
               accessibilityRole="button"
-              accessibilityLabel="Ask Ozzie"
+              accessibilityLabel="Ozzie's take"
             >
               <OzzieAvatar size={36} />
             </TouchableOpacity>
@@ -413,47 +413,38 @@ export default function DailySummaryScreen({
           <View style={styles.sheetHandle} />
           <Text style={styles.sheetTitle}>Adjust Today&apos;s Session</Text>
 
-          {onSwapSession ? (
-            <>
-              <Text style={styles.sheetSectionLabel}>SWAP TO</Text>
-              <View style={styles.sheetRowGroup}>
-                <TouchableOpacity
-                  style={styles.sheetRow}
-                  onPress={() => handleSwap('run')}
-                  accessibilityRole="button"
-                  accessibilityLabel="Swap to Run"
-                >
-                  <Text style={styles.sheetRowText}>🏃 Run</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.sheetRow}
-                  onPress={() => handleSwap('lift')}
-                  accessibilityRole="button"
-                  accessibilityLabel="Swap to Lift"
-                >
-                  <Text style={styles.sheetRowText}>🏋️ Lift</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.sheetRow}
-                  onPress={() => handleSwap('cross')}
-                  accessibilityRole="button"
-                  accessibilityLabel="Swap to Cross Training"
-                >
-                  <Text style={styles.sheetRowText}>🔁 Cross Training</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[styles.sheetRow, styles.sheetRowLast]}
-                  onPress={() => handleSwap('rest')}
-                  accessibilityRole="button"
-                  accessibilityLabel="Make it a rest day"
-                >
-                  <Text style={[styles.sheetRowText, styles.sheetRowTextDestructive]}>
-                    😴 Make it a Rest Day
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </>
-          ) : null}
+          {onSwapSession ? (() => {
+            const swapOptions = [
+              { type: 'run' as const, icon: '🏃', label: 'Run' },
+              { type: 'lift' as const, icon: '🏋️', label: 'Lift' },
+              { type: 'cross' as const, icon: '🔁', label: 'Cross Training' },
+              { type: 'rest' as const, icon: '😴', label: 'Make it a Rest Day', destructive: true },
+              // Today's own session type is excluded — swapping to it would be a no-op.
+            ].filter((opt) => opt.type !== session.sessionType);
+
+            return (
+              <>
+                <Text style={styles.sheetSectionLabel}>SWAP TO</Text>
+                <View style={styles.sheetRowGroup}>
+                  {swapOptions.map((opt, i) => (
+                    <TouchableOpacity
+                      key={opt.type}
+                      style={[styles.sheetRow, i === swapOptions.length - 1 && styles.sheetRowLast]}
+                      onPress={() => handleSwap(opt.type)}
+                      accessibilityRole="button"
+                      accessibilityLabel={opt.type === 'rest' ? 'Make it a rest day' : `Swap to ${opt.label}`}
+                    >
+                      <Text
+                        style={[styles.sheetRowText, opt.destructive && styles.sheetRowTextDestructive]}
+                      >
+                        {opt.icon} {opt.label}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </>
+            );
+          })() : null}
 
           {onCompressSession ? (
             <>

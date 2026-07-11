@@ -58,6 +58,14 @@ export function useRunTracking(enabled: boolean) {
 
     let subscription: Location.LocationSubscription | null = null;
 
+    // Reset the anchor whenever tracking (re)starts — e.g. resuming after a
+    // pause, where the runner may have moved between the pause and resume.
+    // Without this, the first fix after resuming diffs against a stale
+    // pre-pause anchor and can inject a spurious distance jump. The first
+    // fix after a reset always has a zero delta (see processLocationFix),
+    // so this only ever drops distance, never fabricates it.
+    lastPointRef.current = null;
+
     (async () => {
       const { status: permission } = await Location.requestForegroundPermissionsAsync();
       if (permission !== 'granted') return;

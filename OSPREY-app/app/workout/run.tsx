@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
@@ -52,6 +53,7 @@ import { useSubscription } from '@/hooks/useSubscription';
 
 export default function RunWorkoutScreen() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const params = useLocalSearchParams<{ sessionId?: string }>();
   const userId = useAuthStore((s) => s.user?.id);
 
@@ -270,6 +272,9 @@ export default function RunWorkoutScreen() {
         heartRate,
       });
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+      queryClient.invalidateQueries({ queryKey: ['daily-summary'] });
+      queryClient.invalidateQueries({ queryKey: ['stats'] });
+      queryClient.invalidateQueries({ queryKey: ['calendar-month'] });
       reset();
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {

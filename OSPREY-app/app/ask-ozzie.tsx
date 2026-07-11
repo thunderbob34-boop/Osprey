@@ -15,7 +15,7 @@ export default function AskOzzieScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScreenHeader title="Ask Ozzie" />
+      <ScreenHeader title="Ozzie's Take" />
 
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.mascotWrap}>

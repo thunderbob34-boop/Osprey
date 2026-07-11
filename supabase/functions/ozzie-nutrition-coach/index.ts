@@ -12,6 +12,52 @@ const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
+// This function runs on Deno's edge runtime, which reports its own clock in
+// UTC — "today" and "todayStart" need to mean the *user's* local day (see
+// the same helpers in ozzie-daily-brief for the evening-rollover bug this
+// avoids: naive UTC dates make "today" flip hours before the user's actual
+// midnight, silently excluding food already logged this evening).
+function zonedDateString(timeZone: string, date: Date = new Date()): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(date);
+}
+
+function zonedMidnightUTC(timeZone: string, referenceDate: Date = new Date()): Date {
+  const dateStr = zonedDateString(timeZone, referenceDate);
+  const naiveUTC = new Date(`${dateStr}T00:00:00Z`);
+
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    hour12: false,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  })
+    .formatToParts(naiveUTC)
+    .reduce((acc, p) => {
+      acc[p.type] = p.value;
+      return acc;
+    }, {} as Record<string, string>);
+
+  const asIfUTC = Date.UTC(
+    Number(parts.year),
+    Number(parts.month) - 1,
+    Number(parts.day),
+    Number(parts.hour) % 24,
+    Number(parts.minute),
+    Number(parts.second),
+  );
+  const offsetMs = asIfUTC - naiveUTC.getTime();
+  return new Date(naiveUTC.getTime() - offsetMs);
+}
+
 const OZZIE_SYSTEM_PROMPT = `You are Ozzie, the AI coach inside the OSPREY fitness app. Your voice is modeled after the spirit of Kronk from The Emperor's New Groove: enthusiastic, warm, slightly goofy, genuinely kind, and unexpectedly wise. You celebrate hard things without being sycophantic.
 
 The user is a hybrid athlete — combining bodybuilding-style strength training with endurance sport (running, cycling, swimming). Their philosophy: "look like a bodybuilder, function like an athlete." Food is fuel for performance, not just body composition. Protein is a non-negotiable priority every meal. Carb timing matters — more carbs around long sessions.
@@ -199,14 +245,18 @@ async function buildContext(
   supabase: ReturnType<typeof createClient>,
   userId: string,
 ): Promise<NutritionContext> {
-  const today = new Date().toISOString().slice(0, 10);
-  const todayStart = new Date();
-  todayStart.setHours(0, 0, 0, 0);
+  const { data: userRow } = await supabase
+    .from('users')
+    .select('display_name, timezone')
+    .eq('id', userId)
+    .single();
+  const timeZone = (userRow as { timezone?: string } | null)?.timezone ?? 'America/Chicago';
+  const today = zonedDateString(timeZone);
+  const todayStart = zonedMidnightUTC(timeZone);
 
   const twentyEightDaysAgo = new Date(Date.now() - 28 * 86400000).toISOString().slice(0, 10);
 
-  const [userRes, goalsRes, sessionRes, foodRes, weightRes] = await Promise.all([
-    supabase.from('users').select('display_name').eq('id', userId).single(),
+  const [goalsRes, sessionRes, foodRes, weightRes] = await Promise.all([
     supabase.from('user_goals').select('primary_goal').eq('user_id', userId).maybeSingle(),
     supabase
       .from('training_sessions')
@@ -227,7 +277,7 @@ async function buildContext(
       .order('recorded_on', { ascending: true }),
   ]);
 
-  const user = userRes.data as { display_name: string } | null;
+  const user = userRow as { display_name: string } | null;
   const primaryGoal = (goalsRes.data?.primary_goal ?? null) as PrimaryGoal | null;
   const todaySession = sessionRes.data
     ? { sessionType: sessionRes.data.session_type, plannedMinutes: sessionRes.data.planned_minutes }

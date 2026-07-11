@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
@@ -59,6 +60,7 @@ const ALL_SEGMENT_KEYS = buildHyroxSegments().map(segmentKey);
 
 export default function HyroxWorkoutScreen() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const userId = useAuthStore((s) => s.user?.id);
 
   const [phase, setPhase] = useState<Phase>('division');
@@ -154,6 +156,9 @@ export default function HyroxWorkoutScreen() {
         durationS,
         splits,
       });
+      queryClient.invalidateQueries({ queryKey: ['daily-summary'] });
+      queryClient.invalidateQueries({ queryKey: ['stats'] });
+      queryClient.invalidateQueries({ queryKey: ['calendar-month'] });
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {
       Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');

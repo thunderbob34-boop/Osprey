@@ -161,6 +161,66 @@ function deriveWorkoutTimeConsistency(
   return bestCount >= 3 ? { hour: bestHour, count: bestCount } : null;
 }
 
+// Nothing ever wrote to load_scores, so the SELECT below always returned
+// null and the TSB-based rest-recommendation fallback in
+// deriveRestRecommendation() never fired for anyone without HealthKit
+// recovery data. Compute it here (same simple EWA as
+// src/services/performance.ts / ozzie-generate-plan) and persist it so the
+// fallback has real numbers and future reads of load_scores aren't dead.
+async function computeAndStoreTrainingLoad(
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+  today: string,
+): Promise<{ atl: number; ctl: number; tsb: number } | null> {
+  const since = new Date(Date.now() - 84 * 86400000);
+  const { data } = await supabase
+    .from('workout_logs')
+    .select('started_at, tss')
+    .eq('user_id', userId)
+    .is('deleted_at', null)
+    .gte('started_at', since.toISOString())
+    .order('started_at', { ascending: true });
+
+  const rows = (data ?? []) as Array<{ started_at: string; tss: number | null }>;
+  if (rows.length === 0) return null;
+
+  const tssMap: Record<string, number> = {};
+  for (const row of rows) {
+    const date = row.started_at.slice(0, 10);
+    tssMap[date] = (tssMap[date] ?? 0) + (row.tss ?? 0);
+  }
+
+  const TAU_ATL = 7;
+  const TAU_CTL = 42;
+  let atl = 0;
+  let ctl = 0;
+  let weeklyTss = 0;
+
+  for (let i = 0; i < 84; i++) {
+    const d = new Date(since);
+    d.setDate(d.getDate() + i);
+    const dateStr = d.toISOString().slice(0, 10);
+    const tss = tssMap[dateStr] ?? 0;
+    atl = atl + (tss - atl) / TAU_ATL;
+    ctl = ctl + (tss - ctl) / TAU_CTL;
+    if (i >= 77) weeklyTss += tss;
+  }
+
+  const result = {
+    atl: Math.round(atl * 10) / 10,
+    ctl: Math.round(ctl * 10) / 10,
+    tsb: Math.round((ctl - atl) * 10) / 10,
+  };
+
+  const { error } = await supabase.from('load_scores').upsert(
+    { user_id: userId, score_date: today, atl: result.atl, ctl: result.ctl, tsb: result.tsb, weekly_tss: Math.round(weeklyTss * 10) / 10 },
+    { onConflict: 'user_id,score_date' },
+  );
+  if (error) console.error('load_scores upsert error', error);
+
+  return result;
+}
+
 async function buildContext(
   supabase: ReturnType<typeof createClient>,
   userId: string,
@@ -185,6 +245,10 @@ async function buildContext(
 
   const user = userRes.data as { display_name: string; experience_tier: string } | null;
 
+  const load = loadRes.data
+    ? { atl: loadRes.data.atl, ctl: loadRes.data.ctl, tsb: loadRes.data.tsb }
+    : await computeAndStoreTrainingLoad(supabase, userId, today);
+
   return {
     displayName: user?.display_name ?? 'there',
     experienceTier: user?.experience_tier ?? 'beginner',
@@ -196,7 +260,7 @@ async function buildContext(
           sleepHours: recoveryRes.data.sleep_hours,
         }
       : null,
-    load: loadRes.data ? { atl: loadRes.data.atl, ctl: loadRes.data.ctl, tsb: loadRes.data.tsb } : null,
+    load,
     todaySession: sessionRes.data
       ? {
           sessionType: sessionRes.data.session_type,

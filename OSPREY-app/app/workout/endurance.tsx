@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
@@ -100,6 +101,7 @@ function formatMMSS(totalSeconds: number): string {
 
 export default function EnduranceWorkoutScreen() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { sessionType, sessionId, mode } = useLocalSearchParams<{
     sessionType: EnduranceType;
     sessionId?: string;
@@ -375,6 +377,9 @@ export default function EnduranceWorkoutScreen() {
         elevationGainM: isOutsideHike ? computeElevationGainM(gpsTrackPoints) : null,
       });
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+      queryClient.invalidateQueries({ queryKey: ['daily-summary'] });
+      queryClient.invalidateQueries({ queryKey: ['stats'] });
+      queryClient.invalidateQueries({ queryKey: ['calendar-month'] });
       if (isGpsTracking) resetGpsWorkout();
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {

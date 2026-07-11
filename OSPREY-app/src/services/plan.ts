@@ -46,7 +46,12 @@ export function computeRacePhase(goal: RaceGoal): RacePhaseInfo | null {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const raceDate = new Date(goal.targetDate);
+  // Parse as local-midnight components, not `new Date('YYYY-MM-DD')` — that
+  // form is spec'd to parse as UTC midnight, which for any timezone behind
+  // UTC sits a few hours *before* the same calendar day's local midnight
+  // above, silently inflating weeksRemaining near a week/phase boundary.
+  const [raceYear, raceMonth, raceDay] = goal.targetDate.split('-').map(Number);
+  const raceDate = new Date(raceYear, raceMonth - 1, raceDay);
   if (isNaN(raceDate.getTime())) return null;
 
   const msPerWeek = 7 * 24 * 60 * 60 * 1000;
