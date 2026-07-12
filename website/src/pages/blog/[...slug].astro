@@ -1,0 +1,23 @@
+---
+import Page from '../../layouts/Page.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+type Props = { post: CollectionEntry<'blog'> };
+const { post } = Astro.props;
+const { Content } = await post.render();
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+<Page title={`${post.data.title} — Osprey`} description={post.data.description}>
+  <div class="meta">{fmt(post.data.date)} · {post.data.category}</div>
+  <h1>{post.data.title}</h1>
+  <Content />
+</Page>
+
+<style>
+  .meta { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--mut); margin-bottom: 16px; }
+</style>

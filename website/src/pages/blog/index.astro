@@ -1,0 +1,30 @@
+---
+import Page from '../../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+<Page title="Blog — Osprey" description="Product news and training thinking from Osprey.">
+  <h1>Blog</h1>
+  <ul class="posts">
+    {posts.map((p) => (
+      <li>
+        <a href={`/blog/${p.slug}`}>
+          <div class="meta">{fmt(p.data.date)} · {p.data.category}</div>
+          <div class="title">{p.data.title}</div>
+          <p class="desc">{p.data.description}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Page>
+
+<style>
+  .posts { list-style: none; margin: 24px 0 0; padding: 0; border-top: var(--border-w) solid var(--line); }
+  .posts li { border-bottom: var(--border-w) solid var(--line); }
+  .posts a { display: block; padding: 24px 0; }
+  .meta { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--mut); margin-bottom: 8px; }
+  .title { font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; }
+  .title:hover { color: var(--amber); }
+  .desc { font-size: 14px; color: var(--mut); margin-top: 8px; }
+</style>

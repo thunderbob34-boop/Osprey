@@ -1,0 +1,42 @@
+---
+import Page from '../layouts/Page.astro';
+import Button from '../components/Button.astro';
+const tiers = [
+  { eyebrow: 'Free', name: 'Athletes', price: '$0', line: 'Everything an individual needs.',
+    features: ['GPS run tracking + route maps', 'Strength logging with progression', 'Nutrition & macro tracking', 'Ozzie AI coaching'], cta: 'Download', href: '/#download', variant: 'primary' as const },
+  { eyebrow: 'Team plan', name: 'Coaches & clubs', price: "Let's talk", line: 'Manage every athlete from one view.',
+    features: ['Everything in Free, per athlete', 'Roster & training dashboard', 'Assign plans and races', 'Team challenges & reporting'], cta: 'Talk to us', href: 'mailto:hello@osprey.app', variant: 'ghost' as const },
+];
+---
+<Page title="Pricing — Osprey" description="Free for athletes. A team plan for coaches and clubs.">
+  <h1>Pricing</h1>
+  <div class="tiers">
+    {tiers.map((t) => (
+      <div class="tier">
+        <div class="eyebrow">{t.eyebrow}</div>
+        <div class="name">{t.name}</div>
+        <div class="price">{t.price}</div>
+        <p class="line">{t.line}</p>
+        <ul>{t.features.map((f) => <li>{f}</li>)}</ul>
+        <Button href={t.href} variant={t.variant}>{t.cta}</Button>
+      </div>
+    ))}
+  </div>
+</Page>
+
+<style>
+  .tiers { display: flex; border: var(--border-w) solid var(--line); margin-top: 24px; }
+  .tier { flex: 1; padding: 32px 28px; border-right: var(--border-w) solid var(--line); }
+  .tier:last-child { border-right: none; }
+  .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--amber); font-weight: 700; margin-bottom: 12px; }
+  .name { font-size: 22px; font-weight: 700; text-transform: uppercase; }
+  .price { font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--amber); letter-spacing: -0.02em; margin: 8px 0 12px; }
+  .line { color: var(--mut); font-size: 14px; margin-bottom: 20px; }
+  ul { list-style: none; margin: 0 0 28px; padding: 0; }
+  li { font-size: 14px; color: var(--text-soft); padding: 8px 0; border-top: var(--border-w) solid var(--line); }
+  @media (max-width: 760px) {
+    .tiers { flex-direction: column; }
+    .tier { border-right: none; border-bottom: var(--border-w) solid var(--line); }
+    .tier:last-child { border-bottom: none; }
+  }
+</style>
