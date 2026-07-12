@@ -16,6 +16,6 @@ const { title, description } = Astro.props;
   .prose :global(h1) { font-weight: 700; font-size: clamp(36px, 6vw, 64px); text-transform: uppercase; letter-spacing: -0.015em; line-height: 0.95; margin-bottom: 32px; }
   .prose :global(h2) { font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: 0.02em; margin: 40px 0 12px; }
   .prose :global(p) { font-size: 16px; line-height: 1.6; color: var(--text-soft); margin-bottom: 16px; }
-  .prose :global(a) { color: var(--amber); text-decoration: underline; }
+  .prose :global(a:not(.btn):not(.post-link)) { color: var(--amber); text-decoration: underline; }
   .prose :global(ul) { margin: 0 0 16px 20px; color: var(--text-soft); line-height: 1.6; }
 </style>

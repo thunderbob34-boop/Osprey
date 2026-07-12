@@ -2,14 +2,14 @@
 import Page from '../../layouts/Page.astro';
 import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 ---
 <Page title="Blog — Osprey" description="Product news and training thinking from Osprey.">
   <h1>Blog</h1>
   <ul class="posts">
     {posts.map((p) => (
       <li>
-        <a href={`/blog/${p.slug}`}>
+        <a class="post-link" href={`/blog/${p.slug}`}>
           <div class="meta">{fmt(p.data.date)} · {p.data.category}</div>
           <div class="title">{p.data.title}</div>
           <p class="desc">{p.data.description}</p>
