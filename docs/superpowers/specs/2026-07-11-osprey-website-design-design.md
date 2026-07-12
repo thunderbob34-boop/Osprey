@@ -105,11 +105,11 @@ Same tokens and components, no new language:
 - **Blog:** hard-bordered card grid; post pages are narrow-measure body text (65–75ch) on `--ink`.
 - **Legal:** plain narrow-measure text pages.
 
-## 10. Implementation Notes (for the plan, not decided here)
+## 10. Implementation Notes
 
-- The approved mockup is plain HTML/CSS/vanilla JS and the site is fundamentally static; the implementation plan should weigh plain static files vs. Astro (component reuse across sub-pages, blog collections) — no heavier framework is justified.
+- **Stack: Astro** (decided). Component reuse of nav/footer/buttons/device-frame across homepage + Pricing/Blog/Legal, a content-collection blog, near-zero shipped JS (the tab switcher is the only interactive island). The approved mockup's HTML/CSS/JS ports directly into Astro components.
 - Hosting/domain (osprey.app is already in the app's associated domains) and analytics are external-TODO items, not design decisions.
-- The `docs/` folder currently serves GitHub Pages content (`.nojekyll`, `privacy.html`) — the plan must decide where the site lives relative to that.
+- The `docs/` folder currently serves GitHub Pages content (`.nojekyll`, `privacy.html`) — the plan must decide where the built site lives relative to that (e.g. Astro `outDir` → `docs/`, or a move to a dedicated deploy).
 
 ## 11. Rejected Alternatives (documented so they aren't re-proposed)
 
