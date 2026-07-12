@@ -31,13 +31,14 @@ New pure function, `webapp/src/lib/tuneups.ts`, same shape as `predictions.ts`:
 
 ## 4. Discovery: search-assist deep link
 
-- Target site: **RunSignup** (`runsignup.com/Races`), which supports a URL-based search (location + date range + distance). Single provider for v1 — no account/API key required for a plain search link.
-- URL is built from: the user's saved `users.location_text`, the ladder distance, and a date window centered on that week's long-run `session_date` (the surrounding Sat–Sun, ±1 day buffer for date math safety).
+- Target site: **RunSignup** (`runsignup.com/Races`), which supports a URL-based search — **verified live during planning** (not assumed): the site's own JSON API requires an API key, but the public "Find a Race" page's Filters panel writes its selections to the URL and a cold navigation to that URL alone reproduces the filtered results, confirmed against real Charlotte, NC race data. No account/API key needed.
+- Confirmed query params: `zipcodeRadius` (US zip), `radius` (search radius in miles from that zip), `eventType=running_race` (excludes virtual/nonprofit/other event types), `distance`/`max_distance` (race distance band) + `units` (`K`/`M`/`Y`/`m`), `start_date`/`end_date` (`YYYY-MM-DD`).
+- URL is built from: the user's saved `users.location_zip`, a fixed default radius (proposing 25 miles — tunable), the ladder distance expressed as a `distance`/`max_distance` km band around it (e.g. 5K → `distance=4&max_distance=6`), `units=K`, and a date window centered on that week's long-run `session_date` (the surrounding Sat–Sun, ±1 day buffer for date math safety).
 - Opens in a new tab. Osprey does not parse or import results — the user finds a race there and returns to Osprey to add it themselves.
 
 ## 5. Data model changes
 
-- **`users.location_text text null`** — free-text location ("Denver, CO"), no geocoding. Set once in `/settings`, reused for every tune-up search. Migration follows the existing numbered convention (`supabase/migrations/`).
+- **`users.location_zip text null`** — a US zip code, not free-text city/state. Refined during planning: RunSignup's search (verified live, see §4) filters via a `zipcodeRadius` query param that specifically wants a zip, not a city name — still "no geocoding" as originally intended, just the exact simple format the target site needs. Set once in `/settings`, reused for every tune-up search. Migration follows the existing numbered convention (`supabase/migrations/`).
 - **No changes to `race_events` schema** — all needed columns (`name`, `distance_km`, `event_date`, `goal_time_s`, `result_time_s`, `notes`) already exist.
 - **New gap identified during design:** the webapp currently only *reads* `race_events` (Calendar pins/countdown from the Phase 1 build) — there's no create form. This feature needs one: a minimal add-race form (name, date, distance, optional URL/notes) writing to `race_events`. Scoped as part of this feature, not a separate one, since the tune-up flow has nowhere to land without it.
 
@@ -46,13 +47,13 @@ New pure function, `webapp/src/lib/tuneups.ts`, same shape as `predictions.ts`:
 Both live on `/calendar`, where race data already surfaces (Phase 1 built the month grid, race pins, and side pane):
 
 - **Month grid:** a tune-up-eligible week's long-run chip gets a small distinct marker (visually related to but different from the existing race-pin ★, so a *real* race and a *tune-up opportunity* read as different things at a glance).
-- **Side pane:** selecting a tune-up-eligible session shows the existing session detail plus a new card — ladder distance, one line of context ("This week's long run (≈11km) is close to a 10K"), and a "Find a race near you" button that opens the RunSignup deep link. If `users.location_text` is unset, the button instead prompts to set it in Settings first.
+- **Side pane:** selecting a tune-up-eligible session shows the existing session detail plus a new card — ladder distance, one line of context ("This week's long run (≈11km) is close to a 10K"), and a "Find a race near you" button that opens the RunSignup deep link. If `users.location_zip` is unset, the button instead prompts to set it in Settings first.
 - **Add-race form:** reachable from the side pane (e.g., "Add the race you found" under the tune-up card) and generally from wherever race events are managed — exact entry point is an implementation detail, not a design fork.
 
 ## 7. Data layer
 
 - `features/calendar/queries.ts` gains a `useGoalDistanceKm(planId)` (implements the two-source lookup from §3: `target_event_id → race_events.distance_km` first, `user_goals.target_race` keyword-parse second) and a `useTuneUpWeeks(sessions, goalDistanceKm)` — the latter a pure computation over already-fetched `training_sessions`, not a new network call.
-- `features/settings/queries.ts` gains `location_text` to the existing units read/write pattern (same shape as the units toggle already shipped).
+- `features/settings/queries.ts` gains `location_zip` to the existing units read/write pattern (same shape as the units toggle already shipped).
 - New `features/races/queries.ts` (or folded into `features/calendar/`) for the add-race mutation.
 
 ## 8. Testing
@@ -68,7 +69,7 @@ Both live on `/calendar`, where race data already surfaces (Phase 1 built the mo
 - Structured race-database API integration (RunSignup API or otherwise) — deep link only.
 - Automatic parsing/import of the race the user picks — manual entry via the new add-race form.
 - Mobile app (`OSPREY-app/`) — webapp only.
-- Geocoding, radius math, or map display — `location_text` is passed straight through to the external site's own search.
+- Geocoding, radius math, or map display — `location_zip` is passed straight through to the external site's own search.
 - A second race-finder site or fallback — single provider (RunSignup) for v1.
 
 ## 10. Risks & mitigations
