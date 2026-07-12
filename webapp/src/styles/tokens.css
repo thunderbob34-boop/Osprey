@@ -1,0 +1,6 @@
+:root {
+  --ink: #09090B; --panel: #101014; --line: #3F3F46;
+  --amber: #c8793a; --amber-bright: #d98b4a;
+  --text: #FAFAFA; --text-soft: #c9cbd1; --mut: #A1A1AA;
+  --border-w: 2px; --tap: 44px;
+}

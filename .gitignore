@@ -17,3 +17,8 @@ supabase/.branches/
 website/dist/
 website/node_modules/
 website/.astro/
+
+# Webapp build artifacts
+webapp/node_modules/
+webapp/dist/
+webapp/.env.local
