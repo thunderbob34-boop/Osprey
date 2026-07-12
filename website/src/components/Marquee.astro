@@ -1,0 +1,18 @@
+---
+const phrase = 'Run harder · Lift heavier · Fuel smarter · ';
+const repeated = phrase.repeat(4);
+---
+<div class="marquee" aria-hidden="true">
+  <span class="marquee-inner">{repeated}</span>
+</div>
+
+<style>
+  .marquee { overflow: hidden; white-space: nowrap; border-bottom: var(--border-w) solid var(--line); padding: 12px 0; }
+  .marquee-inner {
+    display: inline-block; animation: slide 18s linear infinite;
+    font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 3px;
+    color: var(--amber);
+  }
+  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee-inner { animation: none; } }
+</style>

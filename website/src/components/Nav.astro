@@ -1,0 +1,27 @@
+---
+import Button from './Button.astro';
+---
+<nav class="nav">
+  <a class="logo" href="/">Osprey</a>
+  <div class="navlinks">
+    <a href="/#coaching">Coaching</a>
+    <a href="/#coaches">For Coaches</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/blog">Blog</a>
+  </div>
+  <Button href="/#download" size="small">Download</Button>
+</nav>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 28px; background: var(--ink);
+    border-bottom: var(--border-w) solid var(--line);
+  }
+  .logo { font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.02em; }
+  .navlinks { display: flex; gap: 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mut); font-weight: 700; }
+  .navlinks a { padding: 8px 4px; transition: color 150ms ease; }
+  .navlinks a:hover { color: var(--text); }
+  @media (max-width: 760px) { .navlinks { display: none; } }
+</style>
