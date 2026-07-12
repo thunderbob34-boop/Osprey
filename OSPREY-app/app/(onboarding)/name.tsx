@@ -24,7 +24,7 @@ export default function NameScreen() {
   return (
     <OnboardingShell
       step={1}
-      totalSteps={5}
+      totalSteps={4}
       title="What should Ozzie call you?"
       hint="This is how I'll greet you every morning."
       continueDisabled={!displayName.trim()}

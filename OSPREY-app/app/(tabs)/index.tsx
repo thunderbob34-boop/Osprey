@@ -48,11 +48,25 @@ export default function HomeTab() {
 
   function handleStartSession(session: SessionData) {
     const sessionId = session.sessionId ?? undefined;
-    if (session.sessionType === 'lift') {
-      router.push({ pathname: '/workout/lift', params: { sessionId } });
-      return;
+    // Mirrors the route mapping in the Workout tab (app/(tabs)/workout.tsx)
+    // so that starting today's session from Home lands on the same
+    // per-sport screen as picking it manually from Workout.
+    switch (session.sessionType) {
+      case 'lift':
+        router.push({ pathname: '/workout/lift', params: { sessionId } });
+        return;
+      case 'hyrox':
+        router.push('/workout/hyrox');
+        return;
+      case 'swim':
+      case 'bike':
+      case 'rowing':
+      case 'cross':
+        router.push({ pathname: '/workout/endurance', params: { sessionType: session.sessionType, sessionId } });
+        return;
+      default:
+        router.push({ pathname: '/workout/run', params: { sessionId } });
     }
-    router.push({ pathname: '/workout/run', params: { sessionId } });
   }
 
   function handleSwapSession(newType: SwappableSessionType) {

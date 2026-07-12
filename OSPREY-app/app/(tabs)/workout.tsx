@@ -151,6 +151,7 @@ export default function WorkoutTab() {
               <TouchableOpacity
                 onPress={dismissAlert}
                 style={styles.bannerDismiss}
+                hitSlop={12}
                 accessibilityRole="button"
                 accessibilityLabel="Dismiss"
               >

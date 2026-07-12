@@ -152,6 +152,7 @@ export default function LogTab() {
   const [foodResults, setFoodResults] = useState<FoodItemResult[]>([]);
   const [searching, setSearching] = useState(false);
   const searchDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchRequestId = useRef(0);
   const [analyzingPhoto, setAnalyzingPhoto] = useState(false);
   const [photoConfidenceNote, setPhotoConfidenceNote] = useState<string | null>(null);
 
@@ -221,14 +222,17 @@ export default function LogTab() {
     }
 
     searchDebounce.current = setTimeout(async () => {
+      const requestId = ++searchRequestId.current;
       setSearching(true);
       try {
         const results = await searchFoodByName(text);
+        if (requestId !== searchRequestId.current) return;
         setFoodResults(results);
       } catch {
+        if (requestId !== searchRequestId.current) return;
         setFoodResults([]);
       } finally {
-        setSearching(false);
+        if (requestId === searchRequestId.current) setSearching(false);
       }
     }, 300);
   }

@@ -82,8 +82,10 @@ export default function RaceSearchScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const requestIdRef = useRef(0);
 
   const runSearch = useCallback(async (q: string) => {
+    const requestId = ++requestIdRef.current;
     setLoading(true);
     setError(null);
     try {
@@ -94,14 +96,16 @@ export default function RaceSearchScreen() {
         query: q || undefined,
         startDateMin: todayStr,
       });
+      if (requestId !== requestIdRef.current) return;
       if (data.length === 0 && !q) {
         setError(null);
       }
       setResults(data);
     } catch {
+      if (requestId !== requestIdRef.current) return;
       setError("Couldn't load races. Check your connection.");
     } finally {
-      setLoading(false);
+      if (requestId === requestIdRef.current) setLoading(false);
     }
   }, []);
 

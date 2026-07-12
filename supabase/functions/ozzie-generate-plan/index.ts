@@ -429,13 +429,22 @@ Deno.serve(async (req: Request) => {
       );
       if (goalsUpsertError) throw goalsUpsertError;
     } else if (body.raceTarget) {
-      // Race plan: map race details to goals context
+      // Race plan: map race details to goals context. The request body only
+      // carries race logistics (name/date/distance/weeksOut), not the
+      // athlete's training preferences, so pull those from the same
+      // user_goals row the no-body fallback branch below reads from.
       const race = body.raceTarget;
+      const { data: raceGoalsRow } = await supabase
+        .from('user_goals')
+        .select('weekly_run_days, weekly_lift_days, fitness_level')
+        .eq('user_id', userId)
+        .maybeSingle();
+
       goals = {
         primaryGoal: 'run',
-        weeklyRunDays: 4,
-        weeklyLiftDays: 1,
-        fitnessLevel: 'intermediate',
+        weeklyRunDays: raceGoalsRow?.weekly_run_days ?? 3,
+        weeklyLiftDays: raceGoalsRow?.weekly_lift_days ?? 2,
+        fitnessLevel: raceGoalsRow?.fitness_level ?? 'beginner',
         targetRace: `${race.raceName} (${race.distance})`,
       };
 
@@ -607,7 +616,7 @@ Deno.serve(async (req: Request) => {
       }
     }
     console.error('Plan generation error:', message);
-    return new Response(JSON.stringify({ error: message }), {
+    return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

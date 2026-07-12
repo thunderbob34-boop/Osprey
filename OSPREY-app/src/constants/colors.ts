@@ -28,7 +28,7 @@ export const Colors = {
   // Text — muted stays readable on the near-black bg (WCAG-friendly)
   textPrimary:   '#ffffff',
   textSecondary: 'rgba(255,255,255,0.65)',
-  textMuted:     'rgba(255,255,255,0.45)',
+  textMuted:     'rgba(255,255,255,0.6)',
 
   // Status
   green:   '#4cde80',

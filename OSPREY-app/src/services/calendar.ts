@@ -84,5 +84,8 @@ export async function fetchCalendarMonth(
     getDay(row.event_date as string).raceName = row.name as string;
   }
 
-  return Array.from(byDate.values());
+  // The workouts query window is extended by +24h to catch late-night
+  // UTC-shifted workouts, which can bucket a workout onto a local day just
+  // outside the requested month — filter those stray days back out.
+  return Array.from(byDate.values()).filter((day) => day.date >= startStr && day.date <= endStr);
 }

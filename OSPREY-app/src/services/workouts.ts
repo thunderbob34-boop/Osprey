@@ -304,6 +304,8 @@ export async function saveEnduranceWorkout(params: {
   floorsClimbed?: number | null;
   /** Hiking elevation gain — see computeElevationGainM. */
   elevationGainM?: number | null;
+  /** GPS track for outdoor endurance sessions (e.g. outdoor bike) — populates the recap map/splits like saveRunWorkout. */
+  trackPoints?: TrackPoint[];
 }): Promise<string> {
   const tss = Math.round((params.durationS / 3600) * ENDURANCE_TSS_PER_HOUR[params.sessionType] * 10) / 10;
 
@@ -342,6 +344,22 @@ export async function saveEnduranceWorkout(params: {
     .single();
 
   if (error || !workout) throw error ?? new Error('Failed to save workout');
+
+  if (params.trackPoints && params.trackPoints.length > 0) {
+    const { error: trackError } = await supabase.from('activity_logs').insert(
+      params.trackPoints.map((point) => ({
+        workout_id: workout.id,
+        user_id: params.userId,
+        recorded_at: point.recordedAt,
+        lat: point.lat,
+        lon: point.lon,
+        altitude_m: point.altitudeM ?? null,
+        speed_ms: point.speedMs ?? null,
+        heart_rate: point.heartRate ?? params.heartRate ?? null,
+      })),
+    );
+    if (trackError) throw trackError;
+  }
 
   writeWorkoutToHealthKit({
     sessionType: params.sessionType,

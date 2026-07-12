@@ -111,6 +111,7 @@ export default function ActivityScreen() {
                 {card.userId === currentUserId ? (
                   <TouchableOpacity
                     onPress={() => handleDelete(card)}
+                    hitSlop={12}
                     accessibilityRole="button"
                     accessibilityLabel="Remove this post"
                   >

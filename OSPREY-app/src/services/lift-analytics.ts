@@ -113,7 +113,7 @@ export async function fetchLiftAnalytics(userId: string, weeksBack = 8): Promise
       let bestE1rmKg = 0;
       let achievedOn = '';
       for (const [date, e1rm] of byDate) {
-        if (e1rm >= bestE1rmKg) {
+        if (e1rm > bestE1rmKg || (e1rm === bestE1rmKg && date > achievedOn)) {
           bestE1rmKg = e1rm;
           achievedOn = date;
         }

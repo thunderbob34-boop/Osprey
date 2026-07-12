@@ -310,15 +310,28 @@ export default function DailySummaryScreen({
 
           <View style={styles.sessionActionsRow}>
             <TouchableOpacity
-              style={[styles.startBtn, session.sessionType === 'rest' && styles.startBtnDisabled]}
+              style={[
+                styles.startBtn,
+                (session.sessionType === 'rest' || !session.sessionId) && styles.startBtnDisabled,
+              ]}
               onPress={() => onStartSession?.(session)}
-              disabled={session.sessionType === 'rest'}
+              disabled={session.sessionType === 'rest' || !session.sessionId}
               accessibilityRole="button"
-              accessibilityLabel={session.sessionType === 'rest' ? 'Rest day' : 'Start session'}
-              accessibilityState={{ disabled: session.sessionType === 'rest' }}
+              accessibilityLabel={
+                session.sessionType === 'rest'
+                  ? 'Rest day'
+                  : !session.sessionId
+                    ? 'No session planned'
+                    : 'Start session'
+              }
+              accessibilityState={{ disabled: session.sessionType === 'rest' || !session.sessionId }}
             >
               <Text style={styles.startBtnText}>
-                {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
+                {session.sessionType === 'rest'
+                  ? 'Rest Day'
+                  : !session.sessionId
+                    ? 'No Plan Yet'
+                    : 'Start Session →'}
               </Text>
             </TouchableOpacity>
             {(onSwapSession || onCompressSession) &&

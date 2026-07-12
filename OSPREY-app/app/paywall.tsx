@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -44,6 +44,48 @@ function packageLabel(pkg: PurchasesPackage): string {
   }
 }
 
+/** Short price suffix (e.g. "/mo") derived from the package's actual billing period. */
+function periodSuffix(pkg: PurchasesPackage): string {
+  switch (pkg.packageType) {
+    case 'ANNUAL':
+      return '/yr';
+    case 'MONTHLY':
+      return '/mo';
+    case 'WEEKLY':
+      return '/wk';
+    case 'SIX_MONTH':
+      return '/6mo';
+    case 'THREE_MONTH':
+      return '/3mo';
+    case 'TWO_MONTH':
+      return '/2mo';
+    case 'LIFETIME':
+    default:
+      return '';
+  }
+}
+
+/** Long-form price period (e.g. "per month") derived from the package's actual billing period. */
+function periodLabel(pkg: PurchasesPackage): string {
+  switch (pkg.packageType) {
+    case 'ANNUAL':
+      return 'per year';
+    case 'MONTHLY':
+      return 'per month';
+    case 'WEEKLY':
+      return 'per week';
+    case 'SIX_MONTH':
+      return 'every 6 months';
+    case 'THREE_MONTH':
+      return 'every 3 months';
+    case 'TWO_MONTH':
+      return 'every 2 months';
+    case 'LIFETIME':
+    default:
+      return '';
+  }
+}
+
 const FEATURES = [
   { icon: '🤖', title: 'AI Race Briefings', desc: 'Ozzie preps you the morning of every race with personalized strategy.' },
   { icon: '📋', title: 'Race Retrospectives', desc: 'Post-race coaching debrief from Ozzie — what worked, what to fix.' },
@@ -61,17 +103,31 @@ export default function PaywallScreen() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [purchasing, setPurchasing] = useState(false);
   const [restoring, setRestoring] = useState(false);
+  const [loadingOfferings, setLoadingOfferings] = useState(true);
+  const [offeringsError, setOfferingsError] = useState(false);
 
-  useEffect(() => {
+  const loadOfferings = useCallback(() => {
+    setLoadingOfferings(true);
+    setOfferingsError(false);
     getOfferings().then((o) => {
       const pkgs = o?.current?.availablePackages ?? [];
       setPackages(pkgs);
       setSelectedId(pkgs[0]?.identifier ?? null);
-    }).catch(() => undefined);
+    }).catch(() => {
+      setOfferingsError(true);
+    }).finally(() => {
+      setLoadingOfferings(false);
+    });
   }, []);
+
+  useEffect(() => {
+    loadOfferings();
+  }, [loadOfferings]);
 
   const selectedPackage = packages.find((p) => p.identifier === selectedId) ?? packages[0];
   const priceString = selectedPackage?.product.priceString ?? null;
+  const priceSuffix = selectedPackage ? periodSuffix(selectedPackage) : '';
+  const pricePeriodLabel = selectedPackage ? periodLabel(selectedPackage) : '';
 
   async function handleSubscribe() {
     setPurchasing(true);
@@ -147,7 +203,23 @@ export default function PaywallScreen() {
           ))}
         </View>
 
-        {packages.length > 1 ? (
+        {loadingOfferings ? (
+          <View style={styles.offeringsCenter}>
+            <ActivityIndicator color={Colors.teal} />
+          </View>
+        ) : offeringsError ? (
+          <View style={styles.offeringsCenter}>
+            <Text style={styles.errorText}>Couldn&apos;t load plans.</Text>
+            <TouchableOpacity
+              style={styles.retryBtn}
+              onPress={loadOfferings}
+              accessibilityRole="button"
+              accessibilityLabel="Retry"
+            >
+              <Text style={styles.retryBtnText}>Retry</Text>
+            </TouchableOpacity>
+          </View>
+        ) : packages.length > 1 ? (
           <View style={styles.packageRow}>
             {packages.map((pkg) => (
               <TouchableOpacity
@@ -155,7 +227,7 @@ export default function PaywallScreen() {
                 style={[styles.packageChip, pkg.identifier === selectedId && styles.packageChipActive]}
                 onPress={() => setSelectedId(pkg.identifier)}
                 accessibilityRole="button"
-                accessibilityLabel={`${packageLabel(pkg)}, ${pkg.product.priceString}`}
+                accessibilityLabel={`${packageLabel(pkg)}, ${pkg.product.priceString}${periodLabel(pkg) ? ` ${periodLabel(pkg)}` : ''}`}
                 accessibilityState={{ selected: pkg.identifier === selectedId }}
               >
                 <Text
@@ -172,7 +244,7 @@ export default function PaywallScreen() {
                     pkg.identifier === selectedId && styles.packageChipPriceActive,
                   ]}
                 >
-                  {pkg.product.priceString}
+                  {pkg.product.priceString}{periodSuffix(pkg)}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -184,7 +256,11 @@ export default function PaywallScreen() {
           onPress={handleSubscribe}
           disabled={purchasing || restoring}
           accessibilityRole="button"
-          accessibilityLabel={priceString ? `Start for ${priceString} per month` : 'Subscribe to OSPREY+'}
+          accessibilityLabel={
+            priceString
+              ? `Start for ${priceString}${pricePeriodLabel ? ` ${pricePeriodLabel}` : ''}`
+              : 'Subscribe to OSPREY+'
+          }
           accessibilityState={{ disabled: purchasing || restoring, busy: purchasing }}
         >
           {purchasing ? (
@@ -192,7 +268,7 @@ export default function PaywallScreen() {
           ) : (
             <>
               <Text style={styles.subscribeBtnText}>
-                {priceString ? `Start for ${priceString}/mo` : 'Subscribe to OSPREY+'}
+                {priceString ? `Start for ${priceString}${priceSuffix}` : 'Subscribe to OSPREY+'}
               </Text>
               <Text style={styles.subscribeBtnSub}>Cancel anytime</Text>
             </>
@@ -278,6 +354,17 @@ const styles = StyleSheet.create({
   featureTitle: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
   featureDesc: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17, marginTop: 2 },
   featureCheck: { color: Colors.teal, fontSize: 15, fontWeight: '800', marginTop: 2 },
+  offeringsCenter: { alignItems: 'center', justifyContent: 'center', paddingVertical: 20, gap: 12 },
+  errorText: { color: Colors.textSecondary, fontSize: 14, textAlign: 'center' },
+  retryBtn: {
+    paddingHorizontal: 20,
+    paddingVertical: 9,
+    borderRadius: 10,
+    backgroundColor: Colors.surfaceTeal,
+    borderWidth: 1,
+    borderColor: Colors.borderTeal,
+  },
+  retryBtnText: { color: Colors.teal, fontSize: 14, fontWeight: '700' },
   packageRow: { flexDirection: 'row', gap: 10 },
   packageChip: {
     flex: 1,

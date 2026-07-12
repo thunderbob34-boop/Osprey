@@ -19,7 +19,6 @@ import {
   useWorkoutStore,
   getElapsedSeconds,
   formatDuration,
-  formatPace,
   metersToMiles,
 } from '@/store/workoutStore';
 import { useAuthStore } from '@/store/authStore';
@@ -49,6 +48,8 @@ import {
   type CoachingState,
 } from '@/services/coaching-engine';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { formatDistanceKm, formatPacePerUnit } from '@/services/units';
 
 export default function RunWorkoutScreen() {
   const router = useRouter();
@@ -77,6 +78,7 @@ export default function RunWorkoutScreen() {
   const coachingStateRef = useRef<CoachingState>(makeCoachingState());
   const speakingRef = useRef(false);
   const { isPlus } = useSubscription();
+  const { units } = useUnitPreference();
   const { cueBannerText, showCueBanner } = useCueBanner();
 
   // Structured in-run guidance (Ozzie-prescribed intervals for today's session)
@@ -214,8 +216,9 @@ export default function RunWorkoutScreen() {
     }
   }, [elapsed, isPlus, status, distanceMeters, heartRate, startedAt, pausedAt, accumulatedPauseMs]);
 
-  const miles = metersToMiles(distanceMeters);
-  const pace = miles > 0 ? formatPace(elapsed / miles) : '--:--';
+  const distanceKm = distanceMeters / 1000;
+  const distanceLabel = formatDistanceKm(distanceKm, units);
+  const pace = formatPacePerUnit(elapsed, distanceKm, units) ?? '--:--';
   const coordinates = trackPoints.map((p) => ({ latitude: p.lat, longitude: p.lon }));
   const region =
     coordinates.length > 0
@@ -367,7 +370,7 @@ export default function RunWorkoutScreen() {
       </View>
 
       <View style={styles.statsRow}>
-        <StatBlock label="DISTANCE" value={`${miles.toFixed(2)} mi`} />
+        <StatBlock label="DISTANCE" value={distanceLabel} />
         <StatBlock label="PACE" value={pace} accent />
         <StatBlock label="TIME" value={formatDuration(elapsed)} />
         <StatBlock label="HR" value={heartRate ? `${heartRate}` : '--'} />

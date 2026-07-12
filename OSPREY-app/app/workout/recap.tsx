@@ -18,7 +18,7 @@ import { fetchWorkoutRecap } from '@/services/workouts';
 import { formatDuration } from '@/store/workoutStore';
 import { ozzieSpeak } from '@/services/ozzie-audio';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
-import { formatWeightKg } from '@/services/units';
+import { formatDistanceKm, formatWeightKg } from '@/services/units';
 import { lbToKg } from '@/services/body-metrics';
 import { HYROX_STATIONS } from '@/types/hyrox';
 import { shareWorkout } from '@/services/activity';
@@ -105,17 +105,17 @@ export default function WorkoutRecapScreen() {
   // of an empty "MILE SPLITS" list.
   const showSplits = isRun && data.splits.length > 0;
   const showSessionSummary = isEndurance || (isRun && !showSplits);
-  const distanceMiles =
+  const distanceLabel =
     data.workout.totalDistanceKm != null
-      ? Math.round(data.workout.totalDistanceKm * 0.621371 * 10) / 10
+      ? formatDistanceKm(data.workout.totalDistanceKm, units)
       : null;
 
   const SESSION_LABELS: Record<string, { title: string; badgeStyle: object; stat: string }> = {
-    run:    { title: 'Run Recap',    badgeStyle: styles.badgeRun,   stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
+    run:    { title: 'Run Recap',    badgeStyle: styles.badgeRun,   stat: distanceLabel ?? '' },
     lift:   { title: 'Lift Recap',   badgeStyle: styles.badgeLift,  stat: '' },
     swim:   { title: 'Swim Recap',   badgeStyle: styles.badgeBlue,  stat: '' },
     bike:   { title: 'Bike Recap',   badgeStyle: styles.badgeGreen, stat: '' },
-    rowing: { title: 'Rowing Recap', badgeStyle: styles.badgeBlue,  stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
+    rowing: { title: 'Rowing Recap', badgeStyle: styles.badgeBlue,  stat: distanceLabel ?? '' },
     hyrox:  { title: 'Hyrox Recap',  badgeStyle: styles.badgeHyrox, stat: '' },
     cross:  { title: 'Cross Training Recap', badgeStyle: styles.badgeLift, stat: '' },
   };
