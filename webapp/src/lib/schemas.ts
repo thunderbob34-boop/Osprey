@@ -1,0 +1,41 @@
+import { z } from 'zod';
+
+export const SessionTypeEnum = z.enum(['run', 'lift', 'cross', 'rest', 'race', 'swim', 'bike', 'rowing', 'hyrox']);
+export const WorkoutStatusEnum = z.enum(['planned', 'completed', 'skipped', 'partial']);
+export const IntensityEnum = z.enum(['easy', 'moderate', 'threshold', 'interval', 'race', 'rest']);
+
+export const WorkoutLogSchema = z.object({
+  id: z.string().uuid(), user_id: z.string().uuid(), session_id: z.string().uuid().nullable(),
+  started_at: z.string(), ended_at: z.string().nullable(),
+  session_type: SessionTypeEnum, status: WorkoutStatusEnum,
+  perceived_effort: z.number().int().min(1).max(10).nullable(),
+  total_distance_km: z.coerce.number().nullable(), total_duration_s: z.number().int().nullable(),
+  avg_heart_rate: z.number().int().nullable(), max_heart_rate: z.number().int().nullable(),
+  calories_burned: z.number().int().nullable(), tss: z.coerce.number().nullable(),
+  notes: z.string().nullable(), created_at: z.string(), updated_at: z.string(),
+  deleted_at: z.string().nullable(),
+});
+export type WorkoutLog = z.infer<typeof WorkoutLogSchema>;
+
+export const ExerciseSetSchema = z.object({
+  id: z.string().uuid(), workout_id: z.string().uuid(), exercise_id: z.string().uuid(),
+  set_number: z.number().int(), reps: z.number().int().nullable(),
+  weight_kg: z.coerce.number().nullable(), duration_s: z.number().int().nullable(),
+  rpe: z.number().int().min(1).max(10).nullable(), created_at: z.string(),
+});
+export type ExerciseSet = z.infer<typeof ExerciseSetSchema>;
+
+export const TrainingSessionSchema = z.object({
+  id: z.string().uuid(), week_id: z.string().uuid(), user_id: z.string().uuid(),
+  session_date: z.string(), session_type: SessionTypeEnum, intensity: IntensityEnum,
+  planned_minutes: z.number().int().nullable(), planned_distance_km: z.coerce.number().nullable(),
+  description: z.string().nullable(), ozzie_notes: z.string().nullable(),
+  created_at: z.string(), updated_at: z.string(),
+});
+export type TrainingSession = z.infer<typeof TrainingSessionSchema>;
+
+export const ExerciseSchema = z.object({
+  id: z.string().uuid(), name: z.string(), muscle_group: z.string().nullable(),
+  equipment: z.string().nullable(), created_at: z.string(),
+});
+export type Exercise = z.infer<typeof ExerciseSchema>;
