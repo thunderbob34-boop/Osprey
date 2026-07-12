@@ -5,7 +5,7 @@ const { tag, name, blurb } = Astro.props;
 <div class="ath">
   <div class="ath-img">
     <span>{tag}</span>
-    <span class="play" role="button" tabindex="0" aria-label={`Play ${name}'s story`}>▶</span>
+    <span class="play" aria-hidden="true">▶</span>
   </div>
   <div class="ath-body"><b>{name}</b><p>{blurb}</p></div>
 </div>
@@ -14,7 +14,7 @@ const { tag, name, blurb } = Astro.props;
   .ath { flex: 1; border-right: var(--border-w) solid var(--line); }
   .ath:last-child { border-right: none; }
   .ath-img {
-    aspect-ratio: 16 / 11; background: linear-gradient(150deg, #2c2f36, #101014);
+    aspect-ratio: 16 / 11; background: linear-gradient(150deg, #2c2f36, var(--panel));
     display: flex; align-items: flex-end; justify-content: space-between; padding: 18px;
     font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
   }
