@@ -30,4 +30,10 @@ describe('showcase screens', () => {
       expect(el.querySelector('.coach')).not.toBeNull();
     });
   });
+
+  it('renderScreen embeds the mode label as a data attribute', () => {
+    const el = document.createElement('div');
+    el.innerHTML = renderScreen('coach');
+    expect(el.querySelector('[data-mode]')?.getAttribute('data-mode')).toBe('Daily brief');
+  });
 });

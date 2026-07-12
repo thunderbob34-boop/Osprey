@@ -74,6 +74,7 @@ export const SCREENS: Record<ScreenKey, Screen> = {
 export function renderScreen(key: ScreenKey): string {
   const s = SCREENS[key];
   return (
+    `<span data-mode="${s.mode}" hidden></span>` +
     `<div class="dev-label">${s.label}</div>` +
     `<div class="dev-metric">${s.metric}</div>` +
     s.viz +
