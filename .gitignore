@@ -12,3 +12,8 @@ supabase/.branches/
 # Logs
 *.log
 .superpowers/
+
+# Website build artifacts
+website/dist/
+website/node_modules/
+website/.astro/
