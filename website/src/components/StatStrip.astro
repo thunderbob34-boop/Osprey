@@ -1,0 +1,25 @@
+---
+const stats = [
+  { num: '26.2', lab: 'Miles tracked' },
+  { num: '315', lab: 'LB PR logged' },
+  { num: '94%', lab: 'Plan adherence' },
+];
+---
+<section class="stats" aria-label="Osprey by the numbers">
+  {stats.map((s) => (
+    <div class="stat"><div class="num">{s.num}</div><div class="lab">{s.lab}</div></div>
+  ))}
+</section>
+
+<style>
+  .stats { display: flex; border-bottom: var(--border-w) solid var(--line); font-variant-numeric: tabular-nums; }
+  .stat { flex: 1; padding: clamp(28px, 4vw, 52px) 28px; border-right: var(--border-w) solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .num { font-weight: 700; font-size: clamp(40px, 6vw, 72px); color: var(--amber); letter-spacing: -0.03em; line-height: 1; }
+  .lab { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--mut); margin-top: 12px; }
+  @media (max-width: 760px) {
+    .stats { flex-direction: column; }
+    .stat { border-right: none; border-bottom: var(--border-w) solid var(--line); }
+    .stat:last-child { border-bottom: none; }
+  }
+</style>

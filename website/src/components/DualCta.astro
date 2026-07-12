@@ -1,0 +1,31 @@
+---
+import Button from './Button.astro';
+---
+<section class="split" id="coaches">
+  <div class="splitcard">
+    <div class="eyebrow">Free</div>
+    <h3>For athletes</h3>
+    <p>Full coaching, running, strength &amp; nutrition tracking. No paywall on effort.</p>
+    <Button href="/#download">Download</Button>
+  </div>
+  <div class="splitcard">
+    <div class="eyebrow">Team plan</div>
+    <h3>For coaches &amp; clubs</h3>
+    <p>Every athlete's training, one command view.</p>
+    <Button href="/pricing" variant="ghost">Talk to us</Button>
+  </div>
+</section>
+
+<style>
+  .split { display: flex; border-bottom: var(--border-w) solid var(--line); }
+  .splitcard { flex: 1; padding: clamp(40px, 6vw, 64px) 32px; border-right: var(--border-w) solid var(--line); }
+  .splitcard:last-child { border-right: none; }
+  .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--amber); font-weight: 700; margin-bottom: 14px; }
+  h3 { font-size: clamp(24px, 3vw, 34px); text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 12px; }
+  p { font-size: 14px; color: var(--mut); margin-bottom: 28px; line-height: 1.55; max-width: 320px; }
+  @media (max-width: 760px) {
+    .split { flex-direction: column; }
+    .splitcard { border-right: none; border-bottom: var(--border-w) solid var(--line); }
+    .splitcard:last-child { border-bottom: none; }
+  }
+</style>

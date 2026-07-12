@@ -1,0 +1,34 @@
+---
+interface Props { tag: string; name: string; blurb: string; }
+const { tag, name, blurb } = Astro.props;
+---
+<div class="ath">
+  <div class="ath-img">
+    <span>{tag}</span>
+    <span class="play" role="button" tabindex="0" aria-label={`Play ${name}'s story`}>▶</span>
+  </div>
+  <div class="ath-body"><b>{name}</b><p>{blurb}</p></div>
+</div>
+
+<style>
+  .ath { flex: 1; border-right: var(--border-w) solid var(--line); }
+  .ath:last-child { border-right: none; }
+  .ath-img {
+    aspect-ratio: 16 / 11; background: linear-gradient(150deg, #2c2f36, #101014);
+    display: flex; align-items: flex-end; justify-content: space-between; padding: 18px;
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .ath-img .play {
+    border: var(--border-w) solid var(--text); width: var(--tap); height: var(--tap);
+    display: flex; align-items: center; justify-content: center; font-size: 13px; cursor: pointer;
+    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .ath-img .play:hover { background: var(--amber); border-color: var(--amber); color: #000; }
+  .ath-body { padding: 20px 18px; border-top: var(--border-w) solid var(--line); }
+  .ath-body b { display: block; font-size: 15px; text-transform: uppercase; margin-bottom: 6px; }
+  .ath-body p { font-size: 13px; color: var(--mut); line-height: 1.5; }
+  @media (max-width: 760px) {
+    .ath { border-right: none; border-bottom: var(--border-w) solid var(--line); }
+    .ath:last-child { border-bottom: none; }
+  }
+</style>
