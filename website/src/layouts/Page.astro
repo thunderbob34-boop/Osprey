@@ -15,7 +15,7 @@ const { title, description } = Astro.props;
   .prose { max-width: 68ch; margin: 0 auto; padding: clamp(48px, 8vw, 96px) 28px; }
   .prose :global(:where(h1)) { font-weight: 700; font-size: clamp(36px, 6vw, 64px); text-transform: uppercase; letter-spacing: -0.015em; line-height: 0.95; margin-bottom: 32px; }
   .prose :global(:where(h2)) { font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: 0.02em; margin: 40px 0 12px; }
-  .prose :global(:where(p)) { font-size: 16px; line-height: 1.6; color: var(--text-soft); margin-bottom: 16px; }
+  .prose :global(p:not([class])) { font-size: 16px; line-height: 1.6; color: var(--text-soft); margin-bottom: 16px; }
   .prose :global(:where(a:not(.btn):not(.post-link))) { color: var(--amber); text-decoration: underline; }
-  .prose :global(:where(ul)) { margin: 0 0 16px 20px; color: var(--text-soft); line-height: 1.6; }
+  .prose :global(ul:not([class])) { margin: 0 0 16px 20px; color: var(--text-soft); line-height: 1.6; }
 </style>

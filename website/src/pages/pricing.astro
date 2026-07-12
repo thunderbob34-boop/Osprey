@@ -17,7 +17,7 @@ const tiers = [
         <div class="name">{t.name}</div>
         <div class="price">{t.price}</div>
         <p class="line">{t.line}</p>
-        <ul>{t.features.map((f) => <li>{f}</li>)}</ul>
+        <ul class="features">{t.features.map((f) => <li>{f}</li>)}</ul>
         <Button href={t.href} variant={t.variant}>{t.cta}</Button>
       </div>
     ))}
