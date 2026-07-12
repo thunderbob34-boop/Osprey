@@ -1,6 +1,55 @@
 ---
 import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Marquee from '../components/Marquee.astro';
+import Showcase from '../components/Showcase.astro';
+import StatStrip from '../components/StatStrip.astro';
+import AthleteCard from '../components/AthleteCard.astro';
+import DualCta from '../components/DualCta.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+
+const athletes = [
+  { tag: 'First marathon', name: 'Dana R.', blurb: 'Training for her first marathon, 14 weeks out.' },
+  { tag: 'Comeback season', name: 'Marcus T.', blurb: 'Rebuilding strength after an injury layoff.' },
+  { tag: 'Trail season', name: 'Priya K.', blurb: '50K trail race, altitude and nutrition dialed in.' },
+];
 ---
-<Base title="Osprey — Hunt Your Limits" description="One coach across every run, every lift, every meal.">
-  <main style="padding:64px 28px"><h1 style="text-transform:uppercase">Osprey</h1></main>
+<Base title="Osprey — Hunt Your Limits" description="One coach across every run, every lift, every meal — an eye that never drifts.">
+  <Nav />
+  <Marquee />
+
+  <header class="hero">
+    <h1>Hunt<br />your<br /><span class="amber">Limits</span></h1>
+    <p>GPS runs. Heavy lifts. Macros logged. One coach across all of it — an eye that never drifts.</p>
+    <div class="btnrow">
+      <Button href="/#download">Get the app</Button>
+      <Button href="/#coaching" variant="ghost">Watch the film</Button>
+    </div>
+  </header>
+
+  <StatStrip />
+  <Showcase />
+
+  <section>
+    <div class="secthead"><h2>Mid-<span class="amber">pursuit</span></h2></div>
+    <div class="athletes">
+      {athletes.map((a) => <AthleteCard tag={a.tag} name={a.name} blurb={a.blurb} />)}
+    </div>
+  </section>
+
+  <DualCta />
+  <Footer />
 </Base>
+
+<style>
+  .hero { padding: clamp(64px, 10vw, 128px) 28px clamp(48px, 7vw, 96px); border-bottom: var(--border-w) solid var(--line); }
+  h1 { font-weight: 700; font-size: clamp(64px, 13vw, 160px); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 32px; }
+  .amber { color: var(--amber); }
+  .hero p { font-size: clamp(15px, 1.6vw, 19px); color: var(--mut); max-width: 460px; margin-bottom: 40px; line-height: 1.55; }
+  .btnrow { display: flex; gap: 12px; flex-wrap: wrap; }
+  .secthead { padding: clamp(48px, 7vw, 96px) 28px 0; }
+  .secthead h2 { font-weight: 700; font-size: clamp(40px, 7vw, 88px); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.015em; }
+  .athletes { display: flex; border-bottom: var(--border-w) solid var(--line); margin-top: clamp(28px, 4vw, 48px); }
+  @media (max-width: 760px) { .athletes { flex-direction: column; } }
+</style>
