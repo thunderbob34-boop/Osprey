@@ -1,0 +1,37 @@
+---
+import Button from './Button.astro';
+---
+<footer class="footer" id="download">
+  <div class="btnrow">
+    <Button href="/#download">Download for iOS</Button>
+    <Button href="/#download" variant="ghost">Download for Android</Button>
+  </div>
+  <div class="foot-word">Osprey</div>
+  <div class="footlinks">
+    <div>
+      <a href="/#coaching">Coaching</a>
+      <a href="/#coaches">For Coaches</a>
+      <a href="/pricing">Pricing</a>
+    </div>
+    <div>
+      <a href="/blog">Blog</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
+  <div class="legal">© 2026 Osprey</div>
+</footer>
+
+<style>
+  .footer { padding: clamp(48px, 7vw, 88px) 28px 40px; }
+  .foot-word {
+    font-weight: 700; font-size: clamp(72px, 18vw, 240px); line-height: 0.85;
+    text-transform: uppercase; letter-spacing: -0.04em; color: var(--amber);
+    margin: 48px 0 56px;
+  }
+  .footlinks { display: flex; gap: 64px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mut); }
+  .footlinks a { display: block; margin-bottom: 12px; transition: color 150ms ease; }
+  .footlinks a:hover { color: var(--text); }
+  .legal { margin-top: 48px; font-size: 11px; color: #7d8088; letter-spacing: 0.06em; text-transform: uppercase; }
+  @media (max-width: 760px) { .footlinks { gap: 40px; } }
+</style>
