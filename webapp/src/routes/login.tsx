@@ -1,8 +1,14 @@
 import { useState } from 'react';
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { signInWithPassword, signInWithApple } from '../lib/auth';
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { signInWithPassword, signInWithApple, getSession } from '../lib/auth';
 
-export const Route = createFileRoute('/login')({ component: LoginPage });
+export const Route = createFileRoute('/login')({
+  beforeLoad: async () => {
+    const session = await getSession();
+    if (session) throw redirect({ to: '/calendar' });
+  },
+  component: LoginPage,
+});
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -32,7 +38,7 @@ function LoginPage() {
         <button type="submit" disabled={busy} style={{ width: '100%', background: 'var(--amber)', color: '#000', fontWeight: 700, textTransform: 'uppercase', padding: '12px 0', border: 'var(--border-w) solid var(--amber)', cursor: 'pointer' }}>
           {busy ? 'Signing in…' : 'Sign in'}
         </button>
-        <button type="button" onClick={() => void signInWithApple()} style={{ width: '100%', marginTop: 10, background: 'transparent', color: 'var(--text)', fontWeight: 700, textTransform: 'uppercase', padding: '12px 0', border: 'var(--border-w) solid var(--line)', cursor: 'pointer' }}>
+        <button type="button" onClick={() => { void signInWithApple().then((err) => { if (err) setError(err); }); }} style={{ width: '100%', marginTop: 10, background: 'transparent', color: 'var(--text)', fontWeight: 700, textTransform: 'uppercase', padding: '12px 0', border: 'var(--border-w) solid var(--line)', cursor: 'pointer' }}>
           Sign in with Apple
         </button>
       </form>

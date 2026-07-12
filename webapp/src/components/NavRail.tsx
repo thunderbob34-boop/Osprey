@@ -1,4 +1,5 @@
 import { Link, useNavigate } from '@tanstack/react-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { signOut } from '../lib/auth';
 
 const links = [
@@ -10,6 +11,7 @@ const links = [
 
 export function NavRail() {
   const navigate = useNavigate();
+  const qc = useQueryClient();
   return (
     <nav style={{ width: 200, borderRight: 'var(--border-w) solid var(--line)', padding: '24px 0', display: 'flex', flexDirection: 'column' }}>
       <div style={{ fontWeight: 700, fontSize: 18, textTransform: 'uppercase', padding: '0 20px 24px' }}>Osprey</div>
@@ -19,7 +21,7 @@ export function NavRail() {
           {l.label}
         </Link>
       ))}
-      <button onClick={() => { void signOut().then(() => navigate({ to: '/login' })); }}
+      <button onClick={() => { void signOut().then(() => { qc.clear(); navigate({ to: '/login' }); }); }}
         style={{ margin: 'auto 20px 0', background: 'transparent', border: 'var(--border-w) solid var(--line)', padding: '10px 0', textTransform: 'uppercase', fontSize: 12, cursor: 'pointer' }}>
         Sign out
       </button>
