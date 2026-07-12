@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osprey — Hunt Your Limits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #09090B;
+    --panel: #101014;
+    --line: #3F3F46;
+    --amber: #c8793a;
+    --amber-bright: #d98b4a;
+    --text: #FAFAFA;
+    --mut: #A1A1AA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 28px;
+    background: var(--ink);
+    border-bottom: 2px solid var(--line);
+  }
+  .logo { font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: 0.02em; }
+  .navlinks { display: flex; gap: 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mut); font-weight: 500; }
+  .navlinks a { padding: 8px 4px; transition: color 150ms ease; cursor: pointer; }
+  .navlinks a:hover { color: var(--text); }
+  .btn {
+    display: inline-block; cursor: pointer;
+    background: var(--amber); color: #000;
+    font-family: inherit; font-weight: 700; font-size: 14px;
+    padding: 14px 28px; border: 2px solid var(--amber);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    transition: background 150ms ease, border-color 150ms ease, transform 100ms ease;
+  }
+  .btn:hover { background: var(--amber-bright); border-color: var(--amber-bright); }
+  .btn:active { transform: translate(2px, 2px); }
+  .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+  .btn.ghost:hover { background: rgba(255,255,255,0.06); border-color: var(--mut); }
+  .btn.small { font-size: 12px; padding: 10px 18px; }
+
+  /* ---------- Marquee ---------- */
+  .marquee { overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--line); padding: 12px 0; }
+  .marquee-inner {
+    display: inline-block;
+    animation: slide 18s linear infinite;
+    font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 3px;
+    color: var(--amber);
+  }
+  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-inner { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: clamp(64px, 10vw, 128px) 28px clamp(48px, 7vw, 96px); border-bottom: 2px solid var(--line); }
+  .hero h1 {
+    font-weight: 700;
+    font-size: clamp(64px, 13vw, 160px);
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+  .hero h1 .amber { color: var(--amber); }
+  .hero p { font-size: clamp(15px, 1.6vw, 19px); color: var(--mut); max-width: 460px; margin-bottom: 40px; line-height: 1.55; }
+  .btnrow { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ---------- Stats ---------- */
+  .stats { display: flex; border-bottom: 2px solid var(--line); }
+  .stat { flex: 1; padding: clamp(28px, 4vw, 52px) 28px; border-right: 2px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat .num { font-weight: 700; font-size: clamp(40px, 6vw, 72px); color: var(--amber); letter-spacing: -0.03em; line-height: 1; }
+  .stat .lab { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--mut); margin-top: 12px; }
+
+  /* ---------- Section headings ---------- */
+  .secthead { padding: clamp(48px, 7vw, 96px) 28px 0; }
+  .secthead h2 {
+    font-weight: 700;
+    font-size: clamp(40px, 7vw, 88px);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+  }
+  .secthead h2 .amber { color: var(--amber); }
+
+  /* ---------- Showcase tabs + device ---------- */
+  .tabs { display: flex; border-top: 2px solid var(--line); border-bottom: 2px solid var(--line); margin-top: clamp(28px, 4vw, 48px); }
+  .tab {
+    flex: 1; text-align: center; cursor: pointer;
+    padding: 18px 8px;
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--mut); background: transparent;
+    border: none; border-right: 2px solid var(--line);
+    transition: color 150ms ease, background 150ms ease;
+  }
+  .tab:last-child { border-right: none; }
+  .tab:hover { color: var(--text); }
+  .tab[aria-selected="true"] { background: var(--amber); color: #000; }
+  .device-zone { padding: clamp(40px, 6vw, 72px) 28px; border-bottom: 2px solid var(--line); display: flex; justify-content: center; }
+  .device { width: 100%; max-width: 480px; border: 2px solid var(--line); background: var(--panel); }
+  .device-bar {
+    display: flex; justify-content: space-between;
+    padding: 12px 16px; border-bottom: 2px solid var(--line);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--mut);
+  }
+  .device-body { padding: 32px 24px; min-height: 220px; }
+  .dev-label { font-size: 12px; color: var(--mut); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+  .dev-metric { font-size: clamp(40px, 6vw, 56px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .coach { border-top: 2px solid var(--line); padding-top: 20px; font-size: 14.5px; color: #c9cbd1; line-height: 1.55; }
+  .coach b { color: var(--amber); text-transform: uppercase; }
+
+  /* ---------- Athletes ---------- */
+  .athletes { display: flex; border-bottom: 2px solid var(--line); }
+  .ath { flex: 1; border-right: 2px solid var(--line); }
+  .ath:last-child { border-right: none; }
+  .ath-img {
+    aspect-ratio: 16 / 11;
+    background: linear-gradient(150deg, #2c2f36, #101014);
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 18px;
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .ath-img .play {
+    border: 2px solid var(--text); width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; cursor: pointer; transition: background 150ms ease, color 150ms ease;
+  }
+  .ath-img .play:hover { background: var(--amber); border-color: var(--amber); color: #000; }
+  .ath-body { padding: 20px 18px; border-top: 2px solid var(--line); }
+  .ath-body b { display: block; font-size: 15px; text-transform: uppercase; margin-bottom: 6px; }
+  .ath-body p { font-size: 13px; color: var(--mut); line-height: 1.5; }
+
+  /* ---------- Dual CTA ---------- */
+  .split { display: flex; border-bottom: 2px solid var(--line); }
+  .splitcard { flex: 1; padding: clamp(40px, 6vw, 64px) 32px; border-right: 2px solid var(--line); }
+  .splitcard:last-child { border-right: none; }
+  .splitcard .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--amber); font-weight: 700; margin-bottom: 14px; }
+  .splitcard h3 { font-size: clamp(24px, 3vw, 34px); text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .splitcard p { font-size: 14px; color: var(--mut); margin-bottom: 28px; line-height: 1.55; max-width: 320px; }
+
+  /* ---------- Footer ---------- */
+  .footer { padding: clamp(48px, 7vw, 88px) 28px 40px; }
+  .foot-word {
+    font-weight: 700;
+    font-size: clamp(72px, 18vw, 240px);
+    line-height: 0.85;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    color: var(--amber);
+    margin: 48px 0 56px;
+  }
+  .footlinks { display: flex; gap: 64px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mut); }
+  .footlinks a { display: block; margin-bottom: 12px; transition: color 150ms ease; }
+  .footlinks a:hover { color: var(--text); }
+  .legal { margin-top: 48px; font-size: 11px; color: #55575e; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 760px) {
+    .navlinks { display: none; }
+    .stats { flex-direction: column; }
+    .stat { border-right: none; border-bottom: 2px solid var(--line); }
+    .stat:last-child { border-bottom: none; }
+    .athletes { flex-direction: column; }
+    .ath { border-right: none; border-bottom: 2px solid var(--line); }
+    .ath:last-child { border-bottom: none; }
+    .split { flex-direction: column; }
+    .splitcard { border-right: none; border-bottom: 2px solid var(--line); }
+    .splitcard:last-child { border-bottom: none; }
+    .tab { font-size: 11px; letter-spacing: 0.06em; padding: 14px 4px; }
+    .footlinks { gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo">Osprey</div>
+  <div class="navlinks">
+    <a href="#coaching">Coaching</a>
+    <a href="#coaches">For Coaches</a>
+    <a href="#">Pricing</a>
+    <a href="#">Blog</a>
+  </div>
+  <a class="btn small" href="#download">Download</a>
+</nav>
+
+<div class="marquee" aria-hidden="true">
+  <span class="marquee-inner">Run harder · Lift heavier · Fuel smarter · Run harder · Lift heavier · Fuel smarter · Run harder · Lift heavier · Fuel smarter · Run harder · Lift heavier · Fuel smarter ·&nbsp;</span>
+</div>
+
+<header class="hero">
+  <h1>Hunt<br>your<br><span class="amber">Limits</span></h1>
+  <p>GPS runs. Heavy lifts. Macros logged. One coach across all of it — an eye that never drifts.</p>
+  <div class="btnrow">
+    <a class="btn" href="#download">Get the app</a>
+    <a class="btn ghost" href="#coaching">Watch the film</a>
+  </div>
+</header>
+
+<section class="stats" aria-label="Osprey by the numbers">
+  <div class="stat"><div class="num">26.2</div><div class="lab">Miles tracked</div></div>
+  <div class="stat"><div class="num">315</div><div class="lab">LB PR logged</div></div>
+  <div class="stat"><div class="num">94%</div><div class="lab">Plan adherence</div></div>
+</section>
+
+<section id="coaching">
+  <div class="secthead">
+    <h2>One coach.<br><span class="amber">Every session.</span></h2>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Coaching surfaces">
+    <button class="tab" role="tab" aria-selected="false" data-tab="run">Run</button>
+    <button class="tab" role="tab" aria-selected="true" data-tab="strength">Strength</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="nutrition">Nutrition</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="coach">Coach</button>
+  </div>
+
+  <div class="device-zone">
+    <div class="device">
+      <div class="device-bar"><span>Osprey</span><span id="device-mode">Live session</span></div>
+      <div class="device-body" id="device-body">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="secthead" style="padding-bottom: clamp(28px, 4vw, 48px);">
+    <h2>Mid-<span class="amber">pursuit</span></h2>
+  </div>
+  <div class="athletes">
+    <div class="ath">
+      <div class="ath-img"><span>First marathon</span><span class="play" role="button" tabindex="0" aria-label="Play Dana's story">▶</span></div>
+      <div class="ath-body"><b>Dana R.</b><p>Training for her first marathon, 14 weeks out.</p></div>
+    </div>
+    <div class="ath">
+      <div class="ath-img"><span>Comeback season</span><span class="play" role="button" tabindex="0" aria-label="Play Marcus's story">▶</span></div>
+      <div class="ath-body"><b>Marcus T.</b><p>Rebuilding strength after an injury layoff.</p></div>
+    </div>
+    <div class="ath">
+      <div class="ath-img"><span>Trail season</span><span class="play" role="button" tabindex="0" aria-label="Play Priya's story">▶</span></div>
+      <div class="ath-body"><b>Priya K.</b><p>50K trail race, altitude and nutrition dialed in.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="split" id="coaches">
+  <div class="splitcard">
+    <div class="eyebrow">Free</div>
+    <h3>For athletes</h3>
+    <p>Full coaching, running, strength &amp; nutrition tracking. No paywall on effort.</p>
+    <a class="btn" href="#download">Download</a>
+  </div>
+  <div class="splitcard">
+    <div class="eyebrow">Team plan</div>
+    <h3>For coaches &amp; clubs</h3>
+    <p>Every athlete's training, one command view.</p>
+    <a class="btn ghost" href="#">Talk to us</a>
+  </div>
+</section>
+
+<footer class="footer" id="download">
+  <div class="btnrow">
+    <a class="btn" href="#">Download for iOS</a>
+    <a class="btn ghost" href="#">Download for Android</a>
+  </div>
+  <div class="foot-word">Osprey</div>
+  <div class="footlinks">
+    <div>
+      <a href="#coaching">Coaching</a>
+      <a href="#coaches">For Coaches</a>
+      <a href="#">Pricing</a>
+    </div>
+    <div>
+      <a href="#">Blog</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+  <div class="legal">© 2026 Osprey · Layout test — not production</div>
+</footer>
+
+<script>
+  const SCREENS = {
+    run: {
+      mode: 'Live run',
+      label: 'Tempo run · Mile 4 of 6',
+      metric: '7:42 /MI',
+      coach: '<b>Ozzie —</b> Pace is drifting 6s hot on this hill. Ease off, hold effort steady.'
+    },
+    strength: {
+      mode: 'Live session',
+      label: 'Upper body · Set 3 of 4',
+      metric: '185 LB × 8',
+      coach: '<b>Ozzie —</b> Last week you hit 6 at this weight. Good progression, rest 90s.'
+    },
+    nutrition: {
+      mode: 'Fuel log',
+      label: 'Today · Post-workout',
+      metric: '142G PROTEIN',
+      coach: '<b>Ozzie —</b> 38g to target. A recovery shake now beats chasing it at dinner.'
+    },
+    coach: {
+      mode: 'Daily brief',
+      label: 'Thursday · Race week -10',
+      metric: 'DELOAD DAY',
+      coach: '<b>Ozzie —</b> Legs logged 31 miles this week. Today we bank recovery — trust the plan.'
+    }
+  };
+
+  const body = document.getElementById('device-body');
+  const mode = document.getElementById('device-mode');
+  const tabs = document.querySelectorAll('.tab');
+
+  function render(key) {
+    const s = SCREENS[key];
+    mode.textContent = s.mode;
+    body.innerHTML =
+      '<div class="dev-label">' + s.label + '</div>' +
+      '<div class="dev-metric">' + s.metric + '</div>' +
+      '<div class="coach">' + s.coach + '</div>';
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      tab.setAttribute('aria-selected', 'true');
+      render(tab.dataset.tab);
+    });
+  });
+
+  render('strength');
+</script>
+
+</body>
+</html>
