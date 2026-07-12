@@ -7,16 +7,16 @@ const initialMode = SCREENS.strength.mode;
   <div class="secthead"><h2>One coach.<br /><span class="amber">Every session.</span></h2></div>
 
   <div class="tabs" role="tablist" aria-label="Coaching surfaces">
-    <button class="tab" role="tab" aria-selected="false" data-tab="run">Run</button>
-    <button class="tab" role="tab" aria-selected="true" data-tab="strength">Strength</button>
-    <button class="tab" role="tab" aria-selected="false" data-tab="nutrition">Nutrition</button>
-    <button class="tab" role="tab" aria-selected="false" data-tab="coach">Coach</button>
+    <button class="tab" role="tab" id="tab-run" aria-controls="device-body" aria-selected="false" tabindex="-1" data-tab="run">Run</button>
+    <button class="tab" role="tab" id="tab-strength" aria-controls="device-body" aria-selected="true" tabindex="0" data-tab="strength">Strength</button>
+    <button class="tab" role="tab" id="tab-nutrition" aria-controls="device-body" aria-selected="false" tabindex="-1" data-tab="nutrition">Nutrition</button>
+    <button class="tab" role="tab" id="tab-coach" aria-controls="device-body" aria-selected="false" tabindex="-1" data-tab="coach">Coach</button>
   </div>
 
   <div class="device-zone">
     <div class="device">
       <div class="device-bar"><span>Osprey</span><span id="device-mode">{initialMode}</span></div>
-      <div class="device-body" id="device-body" set:html={initial}></div>
+      <div class="device-body" id="device-body" role="tabpanel" aria-labelledby="tab-strength" tabindex="0" set:html={initial}></div>
     </div>
   </div>
 </section>
@@ -26,10 +26,6 @@ const initialMode = SCREENS.strength.mode;
 </script>
 
 <style>
-  .secthead { padding: clamp(48px, 7vw, 96px) 28px 0; }
-  h2 { font-weight: 700; font-size: clamp(40px, 7vw, 88px); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.015em; }
-  .amber { color: var(--amber); }
-
   .tabs { display: flex; border-top: var(--border-w) solid var(--line); border-bottom: var(--border-w) solid var(--line); margin-top: clamp(28px, 4vw, 48px); }
   .tab {
     flex: 1; text-align: center; cursor: pointer; padding: 18px 8px;

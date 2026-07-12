@@ -11,7 +11,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', day: 'nu
       <li>
         <a class="post-link" href={`/blog/${p.slug}`}>
           <div class="meta">{fmt(p.data.date)} · {p.data.category}</div>
-          <div class="title">{p.data.title}</div>
+          <h2 class="title">{p.data.title}</h2>
           <p class="desc">{p.data.description}</p>
         </a>
       </li>
