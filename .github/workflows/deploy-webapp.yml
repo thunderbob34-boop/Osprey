@@ -40,3 +40,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: webapp
           command: deploy
+          wranglerVersion: '4'
