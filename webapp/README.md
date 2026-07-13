@@ -14,6 +14,7 @@ Requires `.env.local` with `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` for 
 ## Routes
 
 - `/calendar` — season view: month grid of planned sessions (intensity-colored, ✓ when a linked workout is logged as completed), upcoming race countdown, a Riegel-formula race-time predictor from your best recent run, and a side pane with session/race detail including Ozzie's coaching notes.
+  - Tune-up-eligible weeks (5K/10K/Half, shorter than the plan's goal distance, matched by planned long-run distance ±20%) show a dashed marker and a side-pane card with a verified RunSignup search deep link, plus a form to log the race you pick.
 - `/log` → `/log/:workoutId` — start a lift workout (optionally linked to a plan session), then log sets in a keyboard-first grid: type-ahead exercise search, tab/blur-to-save, Enter duplicates the last set.
 - `/history` → `/history/:workoutId` — filterable, paginated table of everything logged, with a stat band (sessions, distance, avg effort) and a per-workout detail view (full sets for lifts).
 - `/settings` — account info and an imperial/metric toggle.
