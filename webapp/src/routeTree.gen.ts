@@ -13,9 +13,11 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as AuthedIndexRouteImport } from './routes/_authed/index'
 import { Route as AuthedSettingsRouteImport } from './routes/_authed/settings'
+import { Route as AuthedNutritionRouteImport } from './routes/_authed/nutrition'
 import { Route as AuthedLogRouteImport } from './routes/_authed/log'
 import { Route as AuthedHistoryRouteImport } from './routes/_authed/history'
 import { Route as AuthedCalendarRouteImport } from './routes/_authed/calendar'
+import { Route as AuthedNutritionIndexRouteImport } from './routes/_authed/nutrition.index'
 import { Route as AuthedLogIndexRouteImport } from './routes/_authed/log.index'
 import { Route as AuthedHistoryIndexRouteImport } from './routes/_authed/history.index'
 import { Route as AuthedLogWorkoutIdRouteImport } from './routes/_authed/log.$workoutId'
@@ -40,6 +42,11 @@ const AuthedSettingsRoute = AuthedSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AuthedRoute,
 } as any)
+const AuthedNutritionRoute = AuthedNutritionRouteImport.update({
+  id: '/nutrition',
+  path: '/nutrition',
+  getParentRoute: () => AuthedRoute,
+} as any)
 const AuthedLogRoute = AuthedLogRouteImport.update({
   id: '/log',
   path: '/log',
@@ -54,6 +61,11 @@ const AuthedCalendarRoute = AuthedCalendarRouteImport.update({
   id: '/calendar',
   path: '/calendar',
   getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedNutritionIndexRoute = AuthedNutritionIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthedNutritionRoute,
 } as any)
 const AuthedLogIndexRoute = AuthedLogIndexRouteImport.update({
   id: '/',
@@ -82,11 +94,13 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof AuthedCalendarRoute
   '/history': typeof AuthedHistoryRouteWithChildren
   '/log': typeof AuthedLogRouteWithChildren
+  '/nutrition': typeof AuthedNutritionRouteWithChildren
   '/settings': typeof AuthedSettingsRoute
   '/history/$workoutId': typeof AuthedHistoryWorkoutIdRoute
   '/log/$workoutId': typeof AuthedLogWorkoutIdRoute
   '/history/': typeof AuthedHistoryIndexRoute
   '/log/': typeof AuthedLogIndexRoute
+  '/nutrition/': typeof AuthedNutritionIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -97,6 +111,7 @@ export interface FileRoutesByTo {
   '/log/$workoutId': typeof AuthedLogWorkoutIdRoute
   '/history': typeof AuthedHistoryIndexRoute
   '/log': typeof AuthedLogIndexRoute
+  '/nutrition': typeof AuthedNutritionIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -105,12 +120,14 @@ export interface FileRoutesById {
   '/_authed/calendar': typeof AuthedCalendarRoute
   '/_authed/history': typeof AuthedHistoryRouteWithChildren
   '/_authed/log': typeof AuthedLogRouteWithChildren
+  '/_authed/nutrition': typeof AuthedNutritionRouteWithChildren
   '/_authed/settings': typeof AuthedSettingsRoute
   '/_authed/': typeof AuthedIndexRoute
   '/_authed/history/$workoutId': typeof AuthedHistoryWorkoutIdRoute
   '/_authed/log/$workoutId': typeof AuthedLogWorkoutIdRoute
   '/_authed/history/': typeof AuthedHistoryIndexRoute
   '/_authed/log/': typeof AuthedLogIndexRoute
+  '/_authed/nutrition/': typeof AuthedNutritionIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -120,11 +137,13 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/history'
     | '/log'
+    | '/nutrition'
     | '/settings'
     | '/history/$workoutId'
     | '/log/$workoutId'
     | '/history/'
     | '/log/'
+    | '/nutrition/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -135,6 +154,7 @@ export interface FileRouteTypes {
     | '/log/$workoutId'
     | '/history'
     | '/log'
+    | '/nutrition'
   id:
     | '__root__'
     | '/_authed'
@@ -142,12 +162,14 @@ export interface FileRouteTypes {
     | '/_authed/calendar'
     | '/_authed/history'
     | '/_authed/log'
+    | '/_authed/nutrition'
     | '/_authed/settings'
     | '/_authed/'
     | '/_authed/history/$workoutId'
     | '/_authed/log/$workoutId'
     | '/_authed/history/'
     | '/_authed/log/'
+    | '/_authed/nutrition/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -185,6 +207,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedSettingsRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/nutrition': {
+      id: '/_authed/nutrition'
+      path: '/nutrition'
+      fullPath: '/nutrition'
+      preLoaderRoute: typeof AuthedNutritionRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/log': {
       id: '/_authed/log'
       path: '/log'
@@ -205,6 +234,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/calendar'
       preLoaderRoute: typeof AuthedCalendarRouteImport
       parentRoute: typeof AuthedRoute
+    }
+    '/_authed/nutrition/': {
+      id: '/_authed/nutrition/'
+      path: '/'
+      fullPath: '/nutrition/'
+      preLoaderRoute: typeof AuthedNutritionIndexRouteImport
+      parentRoute: typeof AuthedNutritionRoute
     }
     '/_authed/log/': {
       id: '/_authed/log/'
@@ -265,10 +301,23 @@ const AuthedLogRouteWithChildren = AuthedLogRoute._addFileChildren(
   AuthedLogRouteChildren,
 )
 
+interface AuthedNutritionRouteChildren {
+  AuthedNutritionIndexRoute: typeof AuthedNutritionIndexRoute
+}
+
+const AuthedNutritionRouteChildren: AuthedNutritionRouteChildren = {
+  AuthedNutritionIndexRoute: AuthedNutritionIndexRoute,
+}
+
+const AuthedNutritionRouteWithChildren = AuthedNutritionRoute._addFileChildren(
+  AuthedNutritionRouteChildren,
+)
+
 interface AuthedRouteChildren {
   AuthedCalendarRoute: typeof AuthedCalendarRoute
   AuthedHistoryRoute: typeof AuthedHistoryRouteWithChildren
   AuthedLogRoute: typeof AuthedLogRouteWithChildren
+  AuthedNutritionRoute: typeof AuthedNutritionRouteWithChildren
   AuthedSettingsRoute: typeof AuthedSettingsRoute
   AuthedIndexRoute: typeof AuthedIndexRoute
 }
@@ -277,6 +326,7 @@ const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedCalendarRoute: AuthedCalendarRoute,
   AuthedHistoryRoute: AuthedHistoryRouteWithChildren,
   AuthedLogRoute: AuthedLogRouteWithChildren,
+  AuthedNutritionRoute: AuthedNutritionRouteWithChildren,
   AuthedSettingsRoute: AuthedSettingsRoute,
   AuthedIndexRoute: AuthedIndexRoute,
 }
