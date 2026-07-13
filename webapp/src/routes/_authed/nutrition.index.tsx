@@ -69,6 +69,7 @@ function QuickAdd({ userId, dateStr }: { userId: string; dateStr: string }) {
     };
     const food = await addManual.mutateAsync({ name: manual.name.trim(), per100g });
     setSelected(food); setTerm(food.name); setManualOpen(false);
+    setManual({ name: '', calories: '', protein: '', carbs: '', fat: '' });
   }
 
   return (
@@ -235,12 +236,11 @@ function FuelDesk() {
         title={<>Fuel <span className="amber">Desk</span></>}
         actions={
           <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any -- /nutrition/recipes route lands in Task 8; cast avoids a typed-router error until then */}
-            <Link to={'/nutrition/recipes' as any} className="btn ghost small">Recipes</Link>
+            <Link to="/nutrition/recipes" className="btn ghost small">Recipes</Link>
             <div className="toggle-group">
-              <button type="button" onClick={() => setDateStr(addDays(dateStr, -1))}>‹</button>
+              <button type="button" aria-label="Previous day" onClick={() => setDateStr(addDays(dateStr, -1))}>‹</button>
               <button type="button" className={isToday ? 'active' : ''} onClick={() => setDateStr(today)}>Today</button>
-              <button type="button" disabled={isToday} onClick={() => setDateStr(addDays(dateStr, 1))}>›</button>
+              <button type="button" aria-label="Next day" disabled={isToday} onClick={() => setDateStr(addDays(dateStr, 1))}>›</button>
             </div>
           </div>
         }

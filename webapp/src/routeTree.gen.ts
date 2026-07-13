@@ -22,6 +22,8 @@ import { Route as AuthedLogIndexRouteImport } from './routes/_authed/log.index'
 import { Route as AuthedHistoryIndexRouteImport } from './routes/_authed/history.index'
 import { Route as AuthedLogWorkoutIdRouteImport } from './routes/_authed/log.$workoutId'
 import { Route as AuthedHistoryWorkoutIdRouteImport } from './routes/_authed/history.$workoutId'
+import { Route as AuthedNutritionRecipesIndexRouteImport } from './routes/_authed/nutrition.recipes.index'
+import { Route as AuthedNutritionRecipesRecipeIdRouteImport } from './routes/_authed/nutrition.recipes.$recipeId'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -87,6 +89,18 @@ const AuthedHistoryWorkoutIdRoute = AuthedHistoryWorkoutIdRouteImport.update({
   path: '/$workoutId',
   getParentRoute: () => AuthedHistoryRoute,
 } as any)
+const AuthedNutritionRecipesIndexRoute =
+  AuthedNutritionRecipesIndexRouteImport.update({
+    id: '/recipes/',
+    path: '/recipes/',
+    getParentRoute: () => AuthedNutritionRoute,
+  } as any)
+const AuthedNutritionRecipesRecipeIdRoute =
+  AuthedNutritionRecipesRecipeIdRouteImport.update({
+    id: '/recipes/$recipeId',
+    path: '/recipes/$recipeId',
+    getParentRoute: () => AuthedNutritionRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthedIndexRoute
@@ -101,6 +115,8 @@ export interface FileRoutesByFullPath {
   '/history/': typeof AuthedHistoryIndexRoute
   '/log/': typeof AuthedLogIndexRoute
   '/nutrition/': typeof AuthedNutritionIndexRoute
+  '/nutrition/recipes/$recipeId': typeof AuthedNutritionRecipesRecipeIdRoute
+  '/nutrition/recipes/': typeof AuthedNutritionRecipesIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -112,6 +128,8 @@ export interface FileRoutesByTo {
   '/history': typeof AuthedHistoryIndexRoute
   '/log': typeof AuthedLogIndexRoute
   '/nutrition': typeof AuthedNutritionIndexRoute
+  '/nutrition/recipes/$recipeId': typeof AuthedNutritionRecipesRecipeIdRoute
+  '/nutrition/recipes': typeof AuthedNutritionRecipesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -128,6 +146,8 @@ export interface FileRoutesById {
   '/_authed/history/': typeof AuthedHistoryIndexRoute
   '/_authed/log/': typeof AuthedLogIndexRoute
   '/_authed/nutrition/': typeof AuthedNutritionIndexRoute
+  '/_authed/nutrition/recipes/$recipeId': typeof AuthedNutritionRecipesRecipeIdRoute
+  '/_authed/nutrition/recipes/': typeof AuthedNutritionRecipesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -144,6 +164,8 @@ export interface FileRouteTypes {
     | '/history/'
     | '/log/'
     | '/nutrition/'
+    | '/nutrition/recipes/$recipeId'
+    | '/nutrition/recipes/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -155,6 +177,8 @@ export interface FileRouteTypes {
     | '/history'
     | '/log'
     | '/nutrition'
+    | '/nutrition/recipes/$recipeId'
+    | '/nutrition/recipes'
   id:
     | '__root__'
     | '/_authed'
@@ -170,6 +194,8 @@ export interface FileRouteTypes {
     | '/_authed/history/'
     | '/_authed/log/'
     | '/_authed/nutrition/'
+    | '/_authed/nutrition/recipes/$recipeId'
+    | '/_authed/nutrition/recipes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -270,6 +296,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedHistoryWorkoutIdRouteImport
       parentRoute: typeof AuthedHistoryRoute
     }
+    '/_authed/nutrition/recipes/': {
+      id: '/_authed/nutrition/recipes/'
+      path: '/recipes'
+      fullPath: '/nutrition/recipes/'
+      preLoaderRoute: typeof AuthedNutritionRecipesIndexRouteImport
+      parentRoute: typeof AuthedNutritionRoute
+    }
+    '/_authed/nutrition/recipes/$recipeId': {
+      id: '/_authed/nutrition/recipes/$recipeId'
+      path: '/recipes/$recipeId'
+      fullPath: '/nutrition/recipes/$recipeId'
+      preLoaderRoute: typeof AuthedNutritionRecipesRecipeIdRouteImport
+      parentRoute: typeof AuthedNutritionRoute
+    }
   }
 }
 
@@ -303,10 +343,14 @@ const AuthedLogRouteWithChildren = AuthedLogRoute._addFileChildren(
 
 interface AuthedNutritionRouteChildren {
   AuthedNutritionIndexRoute: typeof AuthedNutritionIndexRoute
+  AuthedNutritionRecipesRecipeIdRoute: typeof AuthedNutritionRecipesRecipeIdRoute
+  AuthedNutritionRecipesIndexRoute: typeof AuthedNutritionRecipesIndexRoute
 }
 
 const AuthedNutritionRouteChildren: AuthedNutritionRouteChildren = {
   AuthedNutritionIndexRoute: AuthedNutritionIndexRoute,
+  AuthedNutritionRecipesRecipeIdRoute: AuthedNutritionRecipesRecipeIdRoute,
+  AuthedNutritionRecipesIndexRoute: AuthedNutritionRecipesIndexRoute,
 }
 
 const AuthedNutritionRouteWithChildren = AuthedNutritionRoute._addFileChildren(
