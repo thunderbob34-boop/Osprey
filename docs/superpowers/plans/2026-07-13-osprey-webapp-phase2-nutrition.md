@@ -18,6 +18,7 @@
 - Design system: existing tokens/classes from `webapp/src/styles/tokens.css` + `app.css` only. No new colors, no new fonts, 2px hard borders, `tabular-nums` for all numbers.
 - Day boundaries are **local-day** — never `toISOString().slice(0,10)` for grouping/filtering by day (mobile shipped UTC bugs; see audit 2026-07-12).
 - Zod enums must match DB values exactly: `meal_type ∈ {'breakfast','lunch','dinner','snack'}`.
+- **Physical table names are `user_recipes` and `user_recipe_ingredients`** — production already has an unrelated dormant `recipes` table (a preset-meal library, no `user_id`), so the new user-owned tables are namespaced. Every SQL statement, every supabase `.from('…')`, every PostgREST embed, and every embedded-array row accessor uses these names. Embedding ingredients is `.select('*, user_recipe_ingredients(*, food_items(*))')` and the returned key is `user_recipe_ingredients`. Keep TypeScript type names (`Recipe`, `RecipeIngredient`, `RecipeWithIngredients`), hook names (`useRecipes`, …), React Query cache keys (`['recipes', …]`, `['recipe', …]`), route paths (`/nutrition/recipes`), file names (`recipes.ts`, `nutrition.recipes.*.tsx`), and UI copy ("Recipes") unchanged — only the database identifiers change.
 - Do NOT modify `supabase/functions/ozzie-nutrition-coach` (shared with mobile).
 - Quick-add food search must exclude shadow rows: filter `source != 'recipe'` (keep rows with NULL source).
 - Macro math exists ONLY in `src/lib/macros.ts` — never reimplement inline in components/hooks.
@@ -54,7 +55,7 @@ webapp/tests/schemas.test.ts      (modify — add nutrition schema cases)
 - Create: `supabase/migrations/20260713000002_recipes_and_web_nutrition_grants.sql`
 
 **Interfaces:**
-- Produces: tables `recipes(id, user_id, name, servings, shadow_food_item_id, created_at, updated_at)` and `recipe_ingredients(id, recipe_id, food_item_id, quantity_g)`, RLS-scoped to the owning user, with full CRUD grants for `authenticated`; `DELETE` grant on `food_log_entries`.
+- Produces: tables `user_recipes(id, user_id, name, servings, shadow_food_item_id, created_at, updated_at)` and `user_recipe_ingredients(id, recipe_id, food_item_id, quantity_g)`, RLS-scoped to the owning user, with full CRUD grants for `authenticated`; `DELETE` grant on `food_log_entries`. (`GRANT DELETE ON food_log_entries` may already exist in prod — GRANT is idempotent, so re-granting is a harmless no-op.)
 
 - [ ] **Step 1: Write the migration file**
 
@@ -68,7 +69,7 @@ webapp/tests/schemas.test.ts      (modify — add nutrition schema cases)
 -- UPDATE grant is needed on the shared food_items table and old log entries keep
 -- the values they were logged with.
 
-CREATE TABLE recipes (
+CREATE TABLE user_recipes (
   id                    UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id               UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   name                  TEXT NOT NULL,
@@ -77,30 +78,30 @@ CREATE TABLE recipes (
   created_at            TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at            TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
-CREATE INDEX idx_recipes_user ON recipes(user_id);
+CREATE INDEX idx_user_recipes_user ON user_recipes(user_id);
 
-CREATE TABLE recipe_ingredients (
+CREATE TABLE user_recipe_ingredients (
   id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  recipe_id     UUID NOT NULL REFERENCES recipes(id) ON DELETE CASCADE,
+  recipe_id     UUID NOT NULL REFERENCES user_recipes(id) ON DELETE CASCADE,
   food_item_id  UUID NOT NULL REFERENCES food_items(id),
   quantity_g    NUMERIC(6,1) NOT NULL CHECK (quantity_g > 0)
 );
-CREATE INDEX idx_recipe_ingredients_recipe ON recipe_ingredients(recipe_id);
+CREATE INDEX idx_user_recipe_ingredients_recipe ON user_recipe_ingredients(recipe_id);
 
-ALTER TABLE recipes ENABLE ROW LEVEL SECURITY;
-ALTER TABLE recipe_ingredients ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_recipes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_recipe_ingredients ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY recipes_self ON recipes
+CREATE POLICY user_recipes_self ON user_recipes
   USING (user_id = auth.uid());
 
-CREATE POLICY recipe_ingredients_via_recipe ON recipe_ingredients
-  USING (recipe_id IN (SELECT id FROM recipes WHERE user_id = auth.uid()));
+CREATE POLICY user_recipe_ingredients_via_recipe ON user_recipe_ingredients
+  USING (recipe_id IN (SELECT id FROM user_recipes WHERE user_id = auth.uid()));
 
 -- RLS restricts rows; it does not substitute for base grants (see
 -- 20260712000033_exercise_sets_write_grants.sql for the precedent).
-GRANT SELECT, INSERT, UPDATE, DELETE ON recipes TO authenticated;
-GRANT SELECT, INSERT, DELETE ON recipe_ingredients TO authenticated;
-GRANT UPDATE (quantity_g) ON recipe_ingredients TO authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON user_recipes TO authenticated;
+GRANT SELECT, INSERT, DELETE ON user_recipe_ingredients TO authenticated;
+GRANT UPDATE (quantity_g) ON user_recipe_ingredients TO authenticated;
 
 -- The web day-log has a per-entry delete control; nothing granted DELETE on
 -- food_log_entries before now (mobile only inserts). RLS policy food_log_self
@@ -117,13 +118,13 @@ Use the Supabase MCP tool `apply_migration` with `name: "recipes_and_web_nutriti
 Via MCP `execute_sql`:
 
 ```sql
-SELECT tablename, policyname FROM pg_policies WHERE tablename IN ('recipes','recipe_ingredients');
+SELECT tablename, policyname FROM pg_policies WHERE tablename IN ('user_recipes','user_recipe_ingredients');
 SELECT table_name, privilege_type FROM information_schema.role_table_grants
-WHERE grantee = 'authenticated' AND table_name IN ('recipes','recipe_ingredients','food_log_entries')
+WHERE grantee = 'authenticated' AND table_name IN ('user_recipes','user_recipe_ingredients','food_log_entries')
 ORDER BY table_name, privilege_type;
 ```
 
-Expected: `recipes_self`, `recipe_ingredients_via_recipe` policies; recipes → DELETE/INSERT/SELECT/UPDATE; recipe_ingredients → DELETE/INSERT/SELECT/UPDATE; food_log_entries includes DELETE.
+Expected: `user_recipes_self`, `user_recipe_ingredients_via_recipe` policies; user_recipes → DELETE/INSERT/SELECT/UPDATE; user_recipe_ingredients → DELETE/INSERT/SELECT/UPDATE; food_log_entries includes DELETE.
 
 - [ ] **Step 4: RLS behavioral smoke test (server-side, before any UI exists)**
 
@@ -133,12 +134,12 @@ Get the real account's id: `SELECT id FROM users WHERE email = 'thunderbob34@gma
 BEGIN;
 SELECT set_config('role', 'authenticated', true),
        set_config('request.jwt.claims', '{"sub":"<uid>","role":"authenticated"}', true);
-INSERT INTO recipes (user_id, name, servings) VALUES ('<uid>', 'rls-smoke', 2) RETURNING id;      -- expect 1 row
-UPDATE recipes SET name = 'rls-smoke-2', updated_at = NOW() WHERE name = 'rls-smoke' RETURNING id; -- expect 1 row
-INSERT INTO recipe_ingredients (recipe_id, food_item_id, quantity_g)
-  SELECT r.id, f.id, 100 FROM recipes r, (SELECT id FROM food_items LIMIT 1) f
+INSERT INTO user_recipes (user_id, name, servings) VALUES ('<uid>', 'rls-smoke', 2) RETURNING id;      -- expect 1 row
+UPDATE user_recipes SET name = 'rls-smoke-2', updated_at = NOW() WHERE name = 'rls-smoke' RETURNING id; -- expect 1 row
+INSERT INTO user_recipe_ingredients (recipe_id, food_item_id, quantity_g)
+  SELECT r.id, f.id, 100 FROM user_recipes r, (SELECT id FROM food_items LIMIT 1) f
   WHERE r.name = 'rls-smoke-2' RETURNING id;                                                       -- expect 1 row
-DELETE FROM recipes WHERE name = 'rls-smoke-2' RETURNING id;                                       -- expect 1 row (cascade)
+DELETE FROM user_recipes WHERE name = 'rls-smoke-2' RETURNING id;                                  -- expect 1 row (cascade)
 ROLLBACK;
 ```
 
@@ -146,10 +147,10 @@ Then the negative case — a *different* sub must see nothing:
 
 ```sql
 BEGIN;
-INSERT INTO recipes (user_id, name, servings) VALUES ('<uid>', 'rls-negative', 1);
+INSERT INTO user_recipes (user_id, name, servings) VALUES ('<uid>', 'rls-negative', 1);
 SELECT set_config('role', 'authenticated', true),
        set_config('request.jwt.claims', '{"sub":"00000000-0000-0000-0000-000000000001","role":"authenticated"}', true);
-SELECT count(*) FROM recipes WHERE name = 'rls-negative';  -- expect 0
+SELECT count(*) FROM user_recipes WHERE name = 'rls-negative';  -- expect 0
 ROLLBACK;
 ```
 
@@ -778,15 +779,15 @@ import { perServing, scale, sumIngredientMacros, type Macros } from '../../lib/m
 import { loggedAtFor } from '../../lib/day';
 
 const RecipeWithIngredientsSchema = RecipeSchema.extend({
-  recipe_ingredients: z.array(RecipeIngredientSchema.extend({ food_items: FoodItemSchema })),
+  user_recipe_ingredients: z.array(RecipeIngredientSchema.extend({ food_items: FoodItemSchema })),
 });
 export type RecipeWithIngredients = z.infer<typeof RecipeWithIngredientsSchema>;
 
-const RECIPE_SELECT = '*, recipe_ingredients(*, food_items(*))';
+const RECIPE_SELECT = '*, user_recipe_ingredients(*, food_items(*))';
 
 export function recipeTotals(r: RecipeWithIngredients): Macros {
   return sumIngredientMacros(
-    r.recipe_ingredients.map((i) => ({
+    r.user_recipe_ingredients.map((i) => ({
       quantityG: i.quantity_g,
       per100g: {
         calories: i.food_items.calories_per_100g, proteinG: i.food_items.protein_g,
@@ -804,7 +805,7 @@ export function useRecipes(userId: string) {
   return useQuery({
     queryKey: ['recipes', userId],
     queryFn: async (): Promise<RecipeWithIngredients[]> => {
-      const { data, error } = await supabase.from('recipes').select(RECIPE_SELECT).eq('user_id', userId).order('name');
+      const { data, error } = await supabase.from('user_recipes').select(RECIPE_SELECT).eq('user_id', userId).order('name');
       if (error) throw error;
       return z.array(RecipeWithIngredientsSchema).parse(data);
     },
@@ -815,7 +816,7 @@ export function useRecipe(recipeId: string) {
   return useQuery({
     queryKey: ['recipe', recipeId],
     queryFn: async (): Promise<RecipeWithIngredients> => {
-      const { data, error } = await supabase.from('recipes').select(RECIPE_SELECT).eq('id', recipeId).single();
+      const { data, error } = await supabase.from('user_recipes').select(RECIPE_SELECT).eq('id', recipeId).single();
       if (error) throw error;
       return RecipeWithIngredientsSchema.parse(data);
     },
@@ -832,7 +833,7 @@ export function useCreateRecipe(userId: string) {
   return useMutation({
     mutationFn: async (input: { name: string; servings: number }): Promise<Recipe> => {
       const { data, error } = await supabase
-        .from('recipes')
+        .from('user_recipes')
         .insert({ user_id: userId, name: input.name, servings: input.servings })
         .select('*')
         .single();
@@ -848,7 +849,7 @@ export function useUpdateRecipe(recipeId: string) {
   return useMutation({
     mutationFn: async (input: { name?: string; servings?: number }) => {
       const { error } = await supabase
-        .from('recipes')
+        .from('user_recipes')
         .update({ ...input, updated_at: new Date().toISOString() })
         .eq('id', recipeId);
       if (error) throw error;
@@ -863,7 +864,7 @@ export function useDeleteRecipe(userId: string) {
     mutationFn: async (recipeId: string) => {
       // recipe_ingredients cascade; the shadow food_items row (if any) stays —
       // old log entries reference it and it's excluded from search by source.
-      const { error } = await supabase.from('recipes').delete().eq('id', recipeId);
+      const { error } = await supabase.from('user_recipes').delete().eq('id', recipeId);
       if (error) throw error;
     },
     onSuccess: () => void qc.invalidateQueries({ queryKey: ['recipes', userId] }),
@@ -875,7 +876,7 @@ export function useAddIngredient(recipeId: string) {
   return useMutation({
     mutationFn: async (input: { foodItemId: string; quantityG: number }) => {
       const { error } = await supabase
-        .from('recipe_ingredients')
+        .from('user_recipe_ingredients')
         .insert({ recipe_id: recipeId, food_item_id: input.foodItemId, quantity_g: input.quantityG });
       if (error) throw error;
     },
@@ -888,7 +889,7 @@ export function useUpdateIngredient(recipeId: string) {
   return useMutation({
     mutationFn: async (input: { ingredientId: string; quantityG: number }) => {
       const { error } = await supabase
-        .from('recipe_ingredients')
+        .from('user_recipe_ingredients')
         .update({ quantity_g: input.quantityG })
         .eq('id', input.ingredientId);
       if (error) throw error;
@@ -901,7 +902,7 @@ export function useRemoveIngredient(recipeId: string) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (ingredientId: string) => {
-      const { error } = await supabase.from('recipe_ingredients').delete().eq('id', ingredientId);
+      const { error } = await supabase.from('user_recipe_ingredients').delete().eq('id', ingredientId);
       if (error) throw error;
     },
     onSuccess: () => invalidateRecipe(qc, recipeId),
@@ -940,7 +941,7 @@ async function ensureShadowItem(recipe: RecipeWithIngredients, per: Macros): Pro
     .single();
   if (insErr) throw insErr;
   const { error: updErr } = await supabase
-    .from('recipes')
+    .from('user_recipes')
     .update({ shadow_food_item_id: created.id, updated_at: new Date().toISOString() })
     .eq('id', recipe.id);
   if (updErr) throw updErr;
@@ -951,7 +952,7 @@ export function useLogRecipeServing(userId: string) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (input: { recipe: RecipeWithIngredients; servings: number; mealType: MealType; dateStr: string }) => {
-      if (input.recipe.recipe_ingredients.length === 0) throw new Error('Add ingredients before logging');
+      if (input.recipe.user_recipe_ingredients.length === 0) throw new Error('Add ingredients before logging');
       const per = recipePerServing(input.recipe);
       const shadowId = await ensureShadowItem(input.recipe, per);
       const total = scale(per, input.servings);
@@ -1405,7 +1406,7 @@ function RecipeList() {
             </thead>
             <tbody>
               {(recipes.data ?? []).map((r) => {
-                const per = r.recipe_ingredients.length > 0 ? recipePerServing(r) : null;
+                const per = r.user_recipe_ingredients.length > 0 ? recipePerServing(r) : null;
                 return (
                   <tr key={r.id}>
                     <td><Link className="link-amber" to="/nutrition/recipes/$recipeId" params={{ recipeId: r.id }}>{r.name}</Link></td>
@@ -1440,6 +1441,7 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { PageHeader } from '../../components/PageHeader';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { toDateInputValue } from '../../lib/day';
+import { macrosFor } from '../../lib/macros';
 import type { FoodItem, MealType } from '../../lib/schemas';
 import { useFoodSearch } from '../../features/nutrition/queries';
 import {
@@ -1485,7 +1487,7 @@ function Builder() {
   if (recipe.isError) return <ErrorPanel error={recipe.error as Error} onRetry={() => void recipe.refetch()} />;
   if (!recipe.data) return <p className="loading-line">Loading…</p>;
   const r = recipe.data;
-  const hasIngredients = r.recipe_ingredients.length > 0;
+  const hasIngredients = r.user_recipe_ingredients.length > 0;
   const per = hasIngredients ? recipePerServing(r) : null;
   const totals = hasIngredients ? recipeTotals(r) : null;
   const servingsToLog = Number(logServings);
@@ -1519,22 +1521,25 @@ function Builder() {
                 <tr><th>Ingredient</th><th className="num">Qty (g)</th><th className="num">Kcal</th><th className="num">P</th><th className="num">C</th><th className="num">F</th><th aria-label="actions" /></tr>
               </thead>
               <tbody>
-                {r.recipe_ingredients.map((i) => (
+                {r.user_recipe_ingredients.map((i) => {
+                  const im = macrosFor({ quantityG: i.quantity_g, per100g: { calories: i.food_items.calories_per_100g, proteinG: i.food_items.protein_g, carbsG: i.food_items.carbs_g, fatG: i.food_items.fat_g } });
+                  return (
                   <tr key={i.id}>
                     <td>{i.food_items.name}</td>
                     <td className="num">
                       <input style={{ width: 80, textAlign: 'right' }} inputMode="decimal" defaultValue={String(i.quantity_g)}
                         onBlur={(e) => { const n = Number(e.target.value); if (Number.isFinite(n) && n > 0 && n !== i.quantity_g) void updIng.mutateAsync({ ingredientId: i.id, quantityG: n }); }} />
                     </td>
-                    <td className="num">{Math.round(((i.food_items.calories_per_100g ?? 0) * i.quantity_g) / 100)}</td>
-                    <td className="num">{Math.round(((i.food_items.protein_g ?? 0) * i.quantity_g) / 100)}g</td>
-                    <td className="num">{Math.round(((i.food_items.carbs_g ?? 0) * i.quantity_g) / 100)}g</td>
-                    <td className="num">{Math.round(((i.food_items.fat_g ?? 0) * i.quantity_g) / 100)}g</td>
+                    <td className="num">{im.calories}</td>
+                    <td className="num">{im.proteinG}g</td>
+                    <td className="num">{im.carbsG}g</td>
+                    <td className="num">{im.fatG}g</td>
                     <td className="num">
                       <button className="icon-btn" type="button" aria-label={`Remove ${i.food_items.name}`} onClick={() => void rmIng.mutateAsync(i.id)}>✕</button>
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
                 <tr>
                   <td colSpan={7} style={{ padding: '12px 16px' }}>
                     <IngredientSearch onPick={(f) => void addIng.mutateAsync({ foodItemId: f.id, quantityG: 100 })} />
