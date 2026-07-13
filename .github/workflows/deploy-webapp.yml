@@ -1,0 +1,42 @@
+name: Deploy webapp
+
+on:
+  push:
+    branches: [main]
+    paths: ['webapp/**', '.github/workflows/deploy-webapp.yml']
+  workflow_dispatch:
+
+concurrency:
+  group: webapp-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: cloudflare-workers
+      url: https://app.osprey.app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: webapp/package-lock.json
+      - run: npm ci
+        working-directory: webapp
+      - run: npm run typecheck
+        working-directory: webapp
+      - run: npm test
+        working-directory: webapp
+      - run: npm run build
+        working-directory: webapp
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: webapp
+          command: deploy
