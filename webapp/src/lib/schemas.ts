@@ -34,6 +34,14 @@ export const TrainingSessionSchema = z.object({
 });
 export type TrainingSession = z.infer<typeof TrainingSessionSchema>;
 
+export const RaceEventSchema = z.object({
+  id: z.string().uuid(), user_id: z.string().uuid(), name: z.string(),
+  distance_km: z.coerce.number().nullable(), event_date: z.string(),
+  goal_time_s: z.number().int().nullable(), result_time_s: z.number().int().nullable(),
+  notes: z.string().nullable(),
+});
+export type RaceEvent = z.infer<typeof RaceEventSchema>;
+
 export const ExerciseSchema = z.object({
   id: z.string().uuid(), name: z.string(), muscle_group: z.string().nullable(),
   equipment: z.string().nullable(), created_at: z.string(),

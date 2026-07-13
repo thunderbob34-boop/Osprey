@@ -14,6 +14,8 @@ Every sport blueprint follows the same 10-section structure (onboarding → phil
 ## Repo layout
 
 - `OSPREY-app/` — the application code (React Native / Expo).
+- `webapp/` — authenticated web companion app (Vite/React, see `webapp/README.md` and `docs/superpowers/specs/2026-07-12-osprey-webapp-phase1-design.md`).
+- `website/` — the Astro marketing site.
 - `docs/` — project docs, including `docs/coaching/` (this coaching content).
 
 ## Key conventions

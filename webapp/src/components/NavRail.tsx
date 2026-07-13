@@ -1,6 +1,7 @@
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { signOut } from '../lib/auth';
+import { useUserProfile } from '../lib/useAuthUser';
 
 const links = [
   { to: '/calendar', label: 'Calendar' },
@@ -12,19 +13,34 @@ const links = [
 export function NavRail() {
   const navigate = useNavigate();
   const qc = useQueryClient();
+  const { data: profile } = useUserProfile();
+
   return (
-    <nav style={{ width: 200, borderRight: 'var(--border-w) solid var(--line)', padding: '24px 0', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ fontWeight: 700, fontSize: 18, textTransform: 'uppercase', padding: '0 20px 24px' }}>Osprey</div>
-      {links.map((l) => (
-        <Link key={l.to} to={l.to} style={{ padding: '12px 20px', fontSize: 13, textTransform: 'uppercase', letterSpacing: 1.5, color: 'var(--mut)' }}
-          activeProps={{ style: { color: '#000', background: 'var(--amber)', fontWeight: 700 } }}>
-          {l.label}
-        </Link>
-      ))}
-      <button onClick={() => { void signOut().then(() => { qc.clear(); navigate({ to: '/login' }); }); }}
-        style={{ margin: 'auto 20px 0', background: 'transparent', border: 'var(--border-w) solid var(--line)', padding: '10px 0', textTransform: 'uppercase', fontSize: 12, cursor: 'pointer' }}>
-        Sign out
-      </button>
+    <nav className="rail">
+      <div className="rail-brand">
+        <span className="rail-logo">Osprey</span>
+      </div>
+      <div className="rail-links">
+        {links.map((l) => (
+          <Link key={l.to} to={l.to} className="rail-link" activeProps={{ className: 'rail-link active' }}>
+            {l.label}
+          </Link>
+        ))}
+      </div>
+      <div className="rail-foot">
+        {profile && (
+          <div className="rail-user">
+            <b>{profile.display_name}</b>
+            {profile.email}
+          </div>
+        )}
+        <button
+          className="rail-signout"
+          onClick={() => { void signOut().then(() => { qc.clear(); navigate({ to: '/login' }); }); }}
+        >
+          Sign out
+        </button>
+      </div>
     </nav>
   );
 }

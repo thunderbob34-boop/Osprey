@@ -9,9 +9,9 @@ export const Route = createFileRoute('/_authed')({
     return { userId: session.user.id };
   },
   component: () => (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
+    <div className="app-shell">
       <NavRail />
-      <main style={{ flex: 1, padding: 28, minWidth: 0 }}>
+      <main className="page">
         <Outlet />
       </main>
     </div>

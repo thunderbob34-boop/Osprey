@@ -16,6 +16,10 @@ import { Route as AuthedSettingsRouteImport } from './routes/_authed/settings'
 import { Route as AuthedLogRouteImport } from './routes/_authed/log'
 import { Route as AuthedHistoryRouteImport } from './routes/_authed/history'
 import { Route as AuthedCalendarRouteImport } from './routes/_authed/calendar'
+import { Route as AuthedLogIndexRouteImport } from './routes/_authed/log.index'
+import { Route as AuthedHistoryIndexRouteImport } from './routes/_authed/history.index'
+import { Route as AuthedLogWorkoutIdRouteImport } from './routes/_authed/log.$workoutId'
+import { Route as AuthedHistoryWorkoutIdRouteImport } from './routes/_authed/history.$workoutId'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -51,38 +55,86 @@ const AuthedCalendarRoute = AuthedCalendarRouteImport.update({
   path: '/calendar',
   getParentRoute: () => AuthedRoute,
 } as any)
+const AuthedLogIndexRoute = AuthedLogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthedLogRoute,
+} as any)
+const AuthedHistoryIndexRoute = AuthedHistoryIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthedHistoryRoute,
+} as any)
+const AuthedLogWorkoutIdRoute = AuthedLogWorkoutIdRouteImport.update({
+  id: '/$workoutId',
+  path: '/$workoutId',
+  getParentRoute: () => AuthedLogRoute,
+} as any)
+const AuthedHistoryWorkoutIdRoute = AuthedHistoryWorkoutIdRouteImport.update({
+  id: '/$workoutId',
+  path: '/$workoutId',
+  getParentRoute: () => AuthedHistoryRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthedIndexRoute
   '/login': typeof LoginRoute
   '/calendar': typeof AuthedCalendarRoute
-  '/history': typeof AuthedHistoryRoute
-  '/log': typeof AuthedLogRoute
+  '/history': typeof AuthedHistoryRouteWithChildren
+  '/log': typeof AuthedLogRouteWithChildren
   '/settings': typeof AuthedSettingsRoute
+  '/history/$workoutId': typeof AuthedHistoryWorkoutIdRoute
+  '/log/$workoutId': typeof AuthedLogWorkoutIdRoute
+  '/history/': typeof AuthedHistoryIndexRoute
+  '/log/': typeof AuthedLogIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/calendar': typeof AuthedCalendarRoute
-  '/history': typeof AuthedHistoryRoute
-  '/log': typeof AuthedLogRoute
   '/settings': typeof AuthedSettingsRoute
   '/': typeof AuthedIndexRoute
+  '/history/$workoutId': typeof AuthedHistoryWorkoutIdRoute
+  '/log/$workoutId': typeof AuthedLogWorkoutIdRoute
+  '/history': typeof AuthedHistoryIndexRoute
+  '/log': typeof AuthedLogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authed': typeof AuthedRouteWithChildren
   '/login': typeof LoginRoute
   '/_authed/calendar': typeof AuthedCalendarRoute
-  '/_authed/history': typeof AuthedHistoryRoute
-  '/_authed/log': typeof AuthedLogRoute
+  '/_authed/history': typeof AuthedHistoryRouteWithChildren
+  '/_authed/log': typeof AuthedLogRouteWithChildren
   '/_authed/settings': typeof AuthedSettingsRoute
   '/_authed/': typeof AuthedIndexRoute
+  '/_authed/history/$workoutId': typeof AuthedHistoryWorkoutIdRoute
+  '/_authed/log/$workoutId': typeof AuthedLogWorkoutIdRoute
+  '/_authed/history/': typeof AuthedHistoryIndexRoute
+  '/_authed/log/': typeof AuthedLogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/calendar' | '/history' | '/log' | '/settings'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/calendar'
+    | '/history'
+    | '/log'
+    | '/settings'
+    | '/history/$workoutId'
+    | '/log/$workoutId'
+    | '/history/'
+    | '/log/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/calendar' | '/history' | '/log' | '/settings' | '/'
+  to:
+    | '/login'
+    | '/calendar'
+    | '/settings'
+    | '/'
+    | '/history/$workoutId'
+    | '/log/$workoutId'
+    | '/history'
+    | '/log'
   id:
     | '__root__'
     | '/_authed'
@@ -92,6 +144,10 @@ export interface FileRouteTypes {
     | '/_authed/log'
     | '/_authed/settings'
     | '/_authed/'
+    | '/_authed/history/$workoutId'
+    | '/_authed/log/$workoutId'
+    | '/_authed/history/'
+    | '/_authed/log/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -150,21 +206,77 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedCalendarRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/log/': {
+      id: '/_authed/log/'
+      path: '/'
+      fullPath: '/log/'
+      preLoaderRoute: typeof AuthedLogIndexRouteImport
+      parentRoute: typeof AuthedLogRoute
+    }
+    '/_authed/history/': {
+      id: '/_authed/history/'
+      path: '/'
+      fullPath: '/history/'
+      preLoaderRoute: typeof AuthedHistoryIndexRouteImport
+      parentRoute: typeof AuthedHistoryRoute
+    }
+    '/_authed/log/$workoutId': {
+      id: '/_authed/log/$workoutId'
+      path: '/$workoutId'
+      fullPath: '/log/$workoutId'
+      preLoaderRoute: typeof AuthedLogWorkoutIdRouteImport
+      parentRoute: typeof AuthedLogRoute
+    }
+    '/_authed/history/$workoutId': {
+      id: '/_authed/history/$workoutId'
+      path: '/$workoutId'
+      fullPath: '/history/$workoutId'
+      preLoaderRoute: typeof AuthedHistoryWorkoutIdRouteImport
+      parentRoute: typeof AuthedHistoryRoute
+    }
   }
 }
 
+interface AuthedHistoryRouteChildren {
+  AuthedHistoryWorkoutIdRoute: typeof AuthedHistoryWorkoutIdRoute
+  AuthedHistoryIndexRoute: typeof AuthedHistoryIndexRoute
+}
+
+const AuthedHistoryRouteChildren: AuthedHistoryRouteChildren = {
+  AuthedHistoryWorkoutIdRoute: AuthedHistoryWorkoutIdRoute,
+  AuthedHistoryIndexRoute: AuthedHistoryIndexRoute,
+}
+
+const AuthedHistoryRouteWithChildren = AuthedHistoryRoute._addFileChildren(
+  AuthedHistoryRouteChildren,
+)
+
+interface AuthedLogRouteChildren {
+  AuthedLogWorkoutIdRoute: typeof AuthedLogWorkoutIdRoute
+  AuthedLogIndexRoute: typeof AuthedLogIndexRoute
+}
+
+const AuthedLogRouteChildren: AuthedLogRouteChildren = {
+  AuthedLogWorkoutIdRoute: AuthedLogWorkoutIdRoute,
+  AuthedLogIndexRoute: AuthedLogIndexRoute,
+}
+
+const AuthedLogRouteWithChildren = AuthedLogRoute._addFileChildren(
+  AuthedLogRouteChildren,
+)
+
 interface AuthedRouteChildren {
   AuthedCalendarRoute: typeof AuthedCalendarRoute
-  AuthedHistoryRoute: typeof AuthedHistoryRoute
-  AuthedLogRoute: typeof AuthedLogRoute
+  AuthedHistoryRoute: typeof AuthedHistoryRouteWithChildren
+  AuthedLogRoute: typeof AuthedLogRouteWithChildren
   AuthedSettingsRoute: typeof AuthedSettingsRoute
   AuthedIndexRoute: typeof AuthedIndexRoute
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedCalendarRoute: AuthedCalendarRoute,
-  AuthedHistoryRoute: AuthedHistoryRoute,
-  AuthedLogRoute: AuthedLogRoute,
+  AuthedHistoryRoute: AuthedHistoryRouteWithChildren,
+  AuthedLogRoute: AuthedLogRouteWithChildren,
   AuthedSettingsRoute: AuthedSettingsRoute,
   AuthedIndexRoute: AuthedIndexRoute,
 }
