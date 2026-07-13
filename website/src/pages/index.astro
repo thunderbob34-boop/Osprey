@@ -8,11 +8,12 @@ import AthleteCard from '../components/AthleteCard.astro';
 import DualCta from '../components/DualCta.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
+import VideoModal from '../components/VideoModal.astro';
 
 const athletes = [
-  { tag: 'First marathon', name: 'Dana R.', blurb: 'Training for her first marathon, 14 weeks out.' },
-  { tag: 'Comeback season', name: 'Marcus T.', blurb: 'Rebuilding strength after an injury layoff.' },
-  { tag: 'Trail season', name: 'Priya K.', blurb: '50K trail race, altitude and nutrition dialed in.' },
+  { tag: 'First marathon', name: 'Dana R.', blurb: 'Marathon training, 14 weeks out — mornings on the bridge loop.', videoSrc: '/videos/athlete-marathon.mp4' },
+  { tag: 'Comeback season', name: 'Marcus T.', blurb: 'Back on the machines after a layoff, rebuilding strength one set at a time.', videoSrc: '/videos/athlete-strength.mp4' },
+  { tag: 'Trail season', name: 'Priya K.', blurb: 'Logging trail miles through the forest ahead of her 50K.', videoSrc: '/videos/athlete-trail.mp4' },
 ];
 ---
 <Base title="Osprey — Hunt Your Limits" description="One coach across every run, every lift, every meal — an eye that never drifts.">
@@ -24,7 +25,7 @@ const athletes = [
     <p>GPS runs. Heavy lifts. Macros logged. One coach across all of it — an eye that never drifts.</p>
     <div class="btnrow">
       <Button href="/#download">Get the app</Button>
-      <Button href="/#coaching" variant="ghost">Watch the film</Button>
+      <Button href="/videos/hero-runner.mp4" variant="ghost" videoSrc="/videos/hero-runner.mp4">Watch the film</Button>
     </div>
   </header>
 
@@ -34,12 +35,13 @@ const athletes = [
   <section>
     <div class="secthead"><h2>Mid-<span class="amber">pursuit</span></h2></div>
     <div class="athletes">
-      {athletes.map((a) => <AthleteCard tag={a.tag} name={a.name} blurb={a.blurb} />)}
+      {athletes.map((a) => <AthleteCard tag={a.tag} name={a.name} blurb={a.blurb} videoSrc={a.videoSrc} />)}
     </div>
   </section>
 
   <DualCta />
   <Footer />
+  <VideoModal />
 </Base>
 
 <style>

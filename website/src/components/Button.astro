@@ -1,8 +1,8 @@
 ---
-interface Props { href: string; variant?: 'primary' | 'ghost'; size?: 'default' | 'small'; }
-const { href, variant = 'primary', size = 'default' } = Astro.props;
+interface Props { href: string; variant?: 'primary' | 'ghost'; size?: 'default' | 'small'; videoSrc?: string; }
+const { href, variant = 'primary', size = 'default', videoSrc } = Astro.props;
 ---
-<a class:list={['btn', variant, size === 'small' && 'small']} href={href}><slot /></a>
+<a class:list={['btn', variant, size === 'small' && 'small']} href={href} data-video-src={videoSrc}><slot /></a>
 
 <style>
   .btn {

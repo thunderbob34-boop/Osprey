@@ -1,11 +1,11 @@
 ---
-interface Props { tag: string; name: string; blurb: string; }
-const { tag, name, blurb } = Astro.props;
+interface Props { tag: string; name: string; blurb: string; videoSrc: string; }
+const { tag, name, blurb, videoSrc } = Astro.props;
 ---
 <div class="ath">
   <div class="ath-img">
+    <video class="ath-video" src={videoSrc} autoplay muted loop playsinline preload="metadata"></video>
     <span>{tag}</span>
-    <span class="play" aria-hidden="true">▶</span>
   </div>
   <div class="ath-body"><b>{name}</b><p>{blurb}</p></div>
 </div>
@@ -14,16 +14,13 @@ const { tag, name, blurb } = Astro.props;
   .ath { flex: 1; border-right: var(--border-w) solid var(--line); }
   .ath:last-child { border-right: none; }
   .ath-img {
+    position: relative; overflow: hidden;
     aspect-ratio: 16 / 11; background: linear-gradient(150deg, #2c2f36, var(--panel));
-    display: flex; align-items: flex-end; justify-content: space-between; padding: 18px;
+    display: flex; align-items: flex-end; padding: 18px;
     font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
   }
-  .ath-img .play {
-    border: var(--border-w) solid var(--text); width: var(--tap); height: var(--tap);
-    display: flex; align-items: center; justify-content: center; font-size: 13px; cursor: pointer;
-    transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
-  }
-  .ath-img .play:hover { background: var(--amber); border-color: var(--amber); color: #000; }
+  .ath-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .ath-img span { position: relative; z-index: 1; text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
   .ath-body { padding: 20px 18px; border-top: var(--border-w) solid var(--line); }
   .ath-body b { display: block; font-size: 15px; text-transform: uppercase; margin-bottom: 6px; }
   .ath-body p { font-size: 13px; color: var(--mut); line-height: 1.5; }
