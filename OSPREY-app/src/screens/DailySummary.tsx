@@ -11,8 +11,11 @@ import {
   RefreshControl,
   Modal,
 } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { cardEntering } from '@/constants/motion';
+import PressableScale from '@/components/PressableScale';
 import type { DailySummaryProps, TrainingReadiness } from '@/types/daily-summary';
 import NutritionCard from '@/components/NutritionCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
@@ -165,7 +168,7 @@ export default function DailySummaryScreen({
         }
       >
         {/* ── Header ── */}
-        <View style={styles.header}>
+        <Animated.View entering={cardEntering(0)} style={styles.header}>
           <View>
             <Text style={styles.greeting}>{greeting}, {userName}.</Text>
             <Text style={styles.date}>{formatDate()}</Text>
@@ -190,11 +193,11 @@ export default function DailySummaryScreen({
               <OzzieAvatar size={36} />
             </TouchableOpacity>
           </View>
-        </View>
+        </Animated.View>
 
         {/* ── Recovery Card ── */}
         {recovery ? (
-          <View style={styles.recoveryCard}>
+          <Animated.View entering={cardEntering(1)} style={styles.recoveryCard}>
             <View style={styles.recoveryLeft}>
               <Text style={styles.recoveryTitle}>Body Battery</Text>
               <Text
@@ -218,38 +221,43 @@ export default function DailySummaryScreen({
               score={recovery.score}
               recommendation={recovery.recommendation}
             />
-          </View>
+          </Animated.View>
         ) : (
-          <TouchableOpacity
-            style={styles.recoveryCard}
-            activeOpacity={onConnectHealthPress ? 0.7 : 1}
-            onPress={onConnectHealthPress}
-            disabled={!onConnectHealthPress}
-            accessibilityRole={onConnectHealthPress ? 'button' : undefined}
-            accessibilityLabel={onConnectHealthPress ? 'Connect Apple Health in Settings' : undefined}
-          >
-            <View style={styles.recoveryLeft}>
-              <Text style={styles.recoveryTitle}>Body Battery</Text>
-              <Text style={styles.recoveryLabel}>No score yet</Text>
-              <Text style={styles.recoverySubtext}>
-                {onConnectHealthPress
-                  ? 'Tap to connect Apple Health, or log a workout to unlock recovery scoring.'
-                  : 'Connect Apple Health or log a workout to unlock recovery scoring.'}
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <Animated.View entering={cardEntering(1)}>
+            <PressableScale
+              style={styles.recoveryCard}
+              onPress={onConnectHealthPress}
+              disabled={!onConnectHealthPress}
+              accessibilityRole={onConnectHealthPress ? 'button' : undefined}
+              accessibilityLabel={onConnectHealthPress ? 'Connect Apple Health in Settings' : undefined}
+            >
+              <View style={styles.recoveryLeft}>
+                <Text style={styles.recoveryTitle}>Body Battery</Text>
+                <Text style={styles.recoveryLabel}>No score yet</Text>
+                <Text style={styles.recoverySubtext}>
+                  {onConnectHealthPress
+                    ? 'Tap to connect Apple Health, or log a workout to unlock recovery scoring.'
+                    : 'Connect Apple Health or log a workout to unlock recovery scoring.'}
+                </Text>
+              </View>
+            </PressableScale>
+          </Animated.View>
         )}
 
         {/* ── Training Readiness (OSPREY+) ── */}
         {trainingReadiness ? (
-          <ReadinessCard readiness={trainingReadiness} />
+          <Animated.View entering={cardEntering(2)}>
+            <ReadinessCard readiness={trainingReadiness} />
+          </Animated.View>
         ) : null}
 
-        {headerBanner ?? null}
+        {headerBanner ? (
+          <Animated.View entering={cardEntering(3)}>{headerBanner}</Animated.View>
+        ) : null}
 
         {/* ── Today's Session Card — the day's #1 question, so it sits right
              under Battery/Readiness rather than below the Nutrition card. ── */}
-        <View style={styles.sessionCard}>
+        <Animated.View entering={cardEntering(4)} style={styles.sessionCard}>
           <View style={styles.sessionHeader}>
             <Text style={styles.sessionLabel}>TODAY&apos;S SESSION</Text>
             {onViewWeekPress ? (
@@ -309,7 +317,7 @@ export default function DailySummaryScreen({
           ) : null}
 
           <View style={styles.sessionActionsRow}>
-            <TouchableOpacity
+            <PressableScale
               style={[styles.startBtn, session.sessionType === 'rest' && styles.startBtnDisabled]}
               onPress={() => onStartSession?.(session)}
               disabled={session.sessionType === 'rest'}
@@ -320,35 +328,39 @@ export default function DailySummaryScreen({
               <Text style={styles.startBtnText}>
                 {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
               </Text>
-            </TouchableOpacity>
+            </PressableScale>
             {(onSwapSession || onCompressSession) &&
             session.sessionId &&
             session.sessionType !== 'rest' ? (
-              <TouchableOpacity
+              <PressableScale
                 style={styles.adjustBtn}
                 onPress={() => setAdjustSheetOpen(true)}
                 accessibilityRole="button"
                 accessibilityLabel="Adjust today's session"
               >
                 <Text style={styles.adjustBtnText}>Adjust</Text>
-              </TouchableOpacity>
+              </PressableScale>
             ) : null}
           </View>
-        </View>
+        </Animated.View>
 
-        {weatherCard ?? null}
+        {weatherCard ? (
+          <Animated.View entering={cardEntering(5)}>{weatherCard}</Animated.View>
+        ) : null}
 
         {/* ── Nutrition (fuel targets + hydration + meal timing) ── */}
-        <NutritionCard
-          hydration={hydration}
-          onAddHydration={onAddHydration}
-          hydrationEmphasized={hydrationEmphasized}
-          fuelStatus={fuelStatus}
-          showFuelTip={session.sessionType !== 'rest'}
-        />
+        <Animated.View entering={cardEntering(6)}>
+          <NutritionCard
+            hydration={hydration}
+            onAddHydration={onAddHydration}
+            hydrationEmphasized={hydrationEmphasized}
+            fuelStatus={fuelStatus}
+            showFuelTip={session.sessionType !== 'rest'}
+          />
+        </Animated.View>
 
         {/* ── Weekly Progress ── */}
-        <View style={styles.weekCard}>
+        <Animated.View entering={cardEntering(7)} style={styles.weekCard}>
           <View style={styles.weekRow}>
             <Text style={styles.weekLabel}>{units === 'metric' ? 'WEEK DISTANCE' : 'WEEK MILEAGE'}</Text>
             <Text style={styles.weekNumbers}>
@@ -371,10 +383,10 @@ export default function DailySummaryScreen({
               <View style={[styles.weekFill, { width: `${weekProgress * 100}%` }]} />
             </View>
           ) : null}
-        </View>
+        </Animated.View>
 
         {/* ── Quick Stats Row ── */}
-        <View style={styles.statsRow}>
+        <Animated.View entering={cardEntering(8)} style={styles.statsRow}>
           <StatChip label="Consistency" value={quickStats.streak} color={Colors.gold} />
           <StatChip
             label="This Month"
@@ -382,13 +394,13 @@ export default function DailySummaryScreen({
             color={Colors.teal}
           />
           <StatChip label="Load" value={quickStats.load} color={Colors.amber} />
-        </View>
+        </Animated.View>
 
         {habitTip ? (
-          <View style={styles.habitTipCard}>
+          <Animated.View entering={cardEntering(9)} style={styles.habitTipCard}>
             <Text style={styles.habitTipLabel}>HABIT TIP</Text>
             <Text style={styles.habitTipText}>{habitTip}</Text>
-          </View>
+          </Animated.View>
         ) : null}
 
       </ScrollView>

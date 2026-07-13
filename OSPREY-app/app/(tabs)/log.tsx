@@ -12,10 +12,13 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import Animated from 'react-native-reanimated';
 import Svg, { Polyline } from 'react-native-svg';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
+import { cardEntering, sectionEntering, sectionExiting } from '@/constants/motion';
+import PressableScale from '@/components/PressableScale';
 import FieldError from '@/components/FieldError';
 import HydrationCard from '@/components/HydrationCard';
 import { useRecentMeals, useTodayLog } from '@/hooks/useTodayLog';
@@ -499,11 +502,11 @@ export default function LogTab() {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
-          <Text style={styles.title}>Log</Text>
-          <Text style={styles.subtitle}>Log a workout, a meal, or today's weigh-in.</Text>
+          <Animated.Text entering={cardEntering(0)} style={styles.title}>Log</Animated.Text>
+          <Animated.Text entering={cardEntering(1)} style={styles.subtitle}>Log a workout, a meal, or today's weigh-in.</Animated.Text>
 
           {nutrition ? (
-            <View style={styles.nutritionCard}>
+            <Animated.View entering={cardEntering(2)} style={styles.nutritionCard}>
               <View style={styles.nutritionHeaderRow}>
                 <Text style={styles.cardLabel}>NUTRITION TODAY</Text>
                 {nutrition.dayType ? (
@@ -557,15 +560,17 @@ export default function LogTab() {
                 </Text>
               </View>
               {nutrition.tip ? <Text style={styles.tipText}>{nutrition.tip}</Text> : null}
-            </View>
+            </Animated.View>
           ) : null}
 
           {hydration ? (
-            <HydrationCard
-              ounces={hydration.ounces}
-              targetOz={hydration.targetOz}
-              onAdd={(oz) => addHydration.mutate(oz)}
-            />
+            <Animated.View entering={cardEntering(3)}>
+              <HydrationCard
+                ounces={hydration.ounces}
+                targetOz={hydration.targetOz}
+                onAdd={(oz) => addHydration.mutate(oz)}
+              />
+            </Animated.View>
           ) : null}
 
           {isLoading ? (
@@ -573,7 +578,7 @@ export default function LogTab() {
           ) : error ? (
             <Text style={styles.errorText}>Couldn&apos;t load today&apos;s log.</Text>
           ) : (
-            <View style={styles.todayCard}>
+            <Animated.View entering={cardEntering(4)} style={styles.todayCard}>
               <Text style={styles.cardLabel}>TODAY</Text>
               {!hasEntries ? (
                 <Text style={styles.emptyText}>Nothing logged yet today.</Text>
@@ -643,11 +648,12 @@ export default function LogTab() {
                   ) : null}
                 </>
               )}
-            </View>
+            </Animated.View>
           )}
 
           {/* Log a Workout */}
-          <TouchableOpacity
+          <Animated.View entering={cardEntering(5)}>
+          <PressableScale
             style={styles.actionCard}
             onPress={() => {
               if (openSection === 'workout') {
@@ -664,10 +670,11 @@ export default function LogTab() {
           >
             <Text style={styles.actionTitle}>🏃 Log a Workout</Text>
             <Text style={styles.actionChevron}>{openSection === 'workout' ? '−' : '+'}</Text>
-          </TouchableOpacity>
+          </PressableScale>
+          </Animated.View>
 
           {openSection === 'workout' ? (
-            <View style={styles.form}>
+            <Animated.View entering={sectionEntering} exiting={sectionExiting} style={styles.form}>
               <View style={styles.chipRow}>
                 {WORKOUT_TYPES.map((t) => (
                   <TouchableOpacity
@@ -750,11 +757,12 @@ export default function LogTab() {
                   </Text>
                 )}
               </TouchableOpacity>
-            </View>
+            </Animated.View>
           ) : null}
 
           {/* Log Food */}
-          <TouchableOpacity
+          <Animated.View entering={cardEntering(6)}>
+          <PressableScale
             style={styles.actionCard}
             onPress={() => {
               if (openSection === 'food') {
@@ -771,10 +779,11 @@ export default function LogTab() {
           >
             <Text style={styles.actionTitle}>🍽 Log Food</Text>
             <Text style={styles.actionChevron}>{openSection === 'food' ? '−' : '+'}</Text>
-          </TouchableOpacity>
+          </PressableScale>
+          </Animated.View>
 
           {openSection === 'food' ? (
-            <View style={styles.form}>
+            <Animated.View entering={sectionEntering} exiting={sectionExiting} style={styles.form}>
               <>
                   <Text style={styles.fieldLabel}>QUICK ADD</Text>
                   <View style={styles.chipRow}>
@@ -988,11 +997,12 @@ export default function LogTab() {
                   <Text style={styles.saveBtnText}>{editingFoodId ? 'Update Food' : 'Save Food'}</Text>
                 )}
               </TouchableOpacity>
-            </View>
+            </Animated.View>
           ) : null}
 
           {/* Log Weight */}
-          <TouchableOpacity
+          <Animated.View entering={cardEntering(7)}>
+          <PressableScale
             style={styles.actionCard}
             onPress={() => setOpenSection(openSection === 'weight' ? null : 'weight')}
             accessibilityRole="button"
@@ -1001,10 +1011,11 @@ export default function LogTab() {
           >
             <Text style={styles.actionTitle}>⚖️ Log Weight</Text>
             <Text style={styles.actionChevron}>{openSection === 'weight' ? '−' : '+'}</Text>
-          </TouchableOpacity>
+          </PressableScale>
+          </Animated.View>
 
           {openSection === 'weight' ? (
-            <View style={styles.form}>
+            <Animated.View entering={sectionEntering} exiting={sectionExiting} style={styles.form}>
               {weightSummary?.latestKg != null ? (
                 <Text style={styles.weightSummaryText}>
                   Last logged: {formatWeightKg(weightSummary.latestKg, unitPreference)}
@@ -1066,7 +1077,7 @@ export default function LogTab() {
                   <Text style={styles.saveBtnText}>Save Weight</Text>
                 )}
               </TouchableOpacity>
-            </View>
+            </Animated.View>
           ) : null}
         </ScrollView>
       </KeyboardAvoidingView>
