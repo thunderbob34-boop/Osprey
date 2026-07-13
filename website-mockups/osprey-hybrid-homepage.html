@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osprey — Train Hard. Deload Smarter.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #09090B;
+    --panel: #101014;
+    --deep: #050506;      /* premium act: darker than ink */
+    --line: #3F3F46;
+    --amber: #c8793a;
+    --amber-bright: #d98b4a;
+    --text: #FAFAFA;
+    --text-soft: #c9cbd1;
+    --mut: #A1A1AA;
+    --border-w: 2px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--ink); }
+  body {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 500; color: var(--text); background: var(--ink);
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  .amber { color: var(--amber); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding-left: 28px; padding-right: 28px; }
+  section, header.hero { border-bottom: var(--border-w) solid var(--line); }
+
+  .btn {
+    display: inline-block; cursor: pointer; font-weight: 700; font-size: 14px;
+    padding: 14px 28px; border: var(--border-w) solid var(--amber);
+    background: var(--amber); color: #000;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    transition: background 150ms ease, border-color 150ms ease, transform 100ms ease;
+  }
+  .btn:hover { background: var(--amber-bright); border-color: var(--amber-bright); }
+  .btn:active { transform: translate(2px, 2px); }
+  .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+  .btn.ghost:hover { background: rgba(255,255,255,0.06); border-color: var(--mut); }
+  .btn.small { font-size: 12px; padding: 10px 18px; }
+  .btn:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--amber-bright); outline-offset: 3px; }
+
+  .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--mut); font-weight: 700; }
+
+  /* ============ NAV (fixed — Runna: a CTA is always on screen) ============ */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 28px; background: var(--ink);
+    border-bottom: var(--border-w) solid var(--line);
+  }
+  .logo { font-weight: 700; font-size: 20px; text-transform: uppercase; }
+  .navlinks { display: flex; gap: 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mut); font-weight: 700; }
+  .navlinks a { padding: 8px 4px; transition: color 150ms ease; }
+  .navlinks a:hover { color: var(--text); }
+
+  .marquee { overflow: hidden; white-space: nowrap; border-bottom: var(--border-w) solid var(--line); padding: 12px 0; }
+  .marquee-inner {
+    display: inline-block; animation: slide 18s linear infinite;
+    font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 3px; color: var(--amber);
+  }
+  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ============ 1 · HERO — photography-led (Strava move, chosen over product-led) ============ */
+  h1 { font-weight: 700; font-size: clamp(52px, 8.5vw, 118px); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 30px; text-wrap: balance; }
+  .btnrow { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero {
+    position: relative; min-height: clamp(520px, 88vh, 860px);
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden;
+  }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero .veil {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(9,9,11,0.72) 0%, rgba(9,9,11,0.28) 45%, rgba(9,9,11,0.15) 100%),
+      linear-gradient(to top, rgba(9,9,11,0.65) 0%, rgba(9,9,11,0) 35%);
+  }
+  .hero .content { position: relative; z-index: 2; width: 100%; }
+  .hero h1 { margin-bottom: clamp(28px, 4vw, 44px); max-width: 10ch; }
+  .cta-block {
+    display: inline-flex; align-items: center; gap: 18px;
+    background: var(--amber); color: #000;
+    font-weight: 700; font-size: clamp(16px, 1.8vw, 21px); text-transform: uppercase; letter-spacing: 0.04em;
+    padding: clamp(20px, 2.6vw, 30px) clamp(28px, 3.6vw, 46px);
+    transition: background 150ms ease, transform 100ms ease;
+  }
+  .cta-block:hover { background: var(--amber-bright); }
+  .cta-block:active { transform: translate(2px, 2px); }
+  .cta-block .ch { font-size: 1.35em; line-height: 0.8; }
+  .cue {
+    position: absolute; z-index: 2; left: 0; right: 0; bottom: 22px;
+    display: block; text-align: center; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text);
+  }
+  .cue span { display: block; color: var(--amber-bright); font-size: 18px; line-height: 0.9; margin-top: 2px; }
+  .photo-note {
+    position: absolute; z-index: 2; right: 16px; top: 16px;
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+    color: rgba(250,250,250,0.55); border: 1px solid rgba(250,250,250,0.25); padding: 6px 10px;
+  }
+
+
+  /* ============ 2 · MANIFESTO (Strava: text only) ============ */
+  .manifesto .wrap { padding-top: clamp(72px, 10vw, 140px); padding-bottom: clamp(72px, 10vw, 140px); max-width: 1000px; }
+  .manifesto h2 { font-weight: 700; font-size: clamp(30px, 4.6vw, 58px); line-height: 1.08; letter-spacing: -0.015em; text-wrap: balance; margin: 18px 0 28px; }
+  .manifesto p { font-size: clamp(16px, 1.7vw, 20px); color: var(--mut); max-width: 62ch; line-height: 1.6; }
+
+  /* ============ 3 · HOW IT WORKS (3 declaratives, real sequence) ============ */
+  .steps .head { padding: clamp(40px, 6vw, 72px) 28px 0; }
+  .cells { display: grid; grid-template-columns: repeat(3, 1fr); border-top: var(--border-w) solid var(--line); margin-top: clamp(32px, 5vw, 56px); }
+  .cell { padding: clamp(28px, 4vw, 52px) 28px clamp(32px, 5vw, 60px); border-right: var(--border-w) solid var(--line); }
+  .cell:last-child { border-right: 0; }
+  .cell .n { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--amber); margin-bottom: 18px; }
+  .cell h3 { font-size: clamp(22px, 2.3vw, 30px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.05; margin-bottom: 14px; }
+  .cell p { font-size: 15px; color: var(--mut); max-width: 34ch; }
+
+  /* ============ 4 · DELOAD STORY (the disproportionate section) ============ */
+  .deload { background: var(--panel); }
+  .deload .top { padding: clamp(64px, 9vw, 120px) 28px clamp(40px, 6vw, 72px); max-width: 1000px; margin: 0 auto; }
+  .deload h2 { font-weight: 700; font-size: clamp(34px, 5.6vw, 72px); line-height: 0.98; text-transform: uppercase; letter-spacing: -0.015em; margin: 18px 0 24px; text-wrap: balance; }
+  .deload .top p { font-size: clamp(16px, 1.7vw, 19px); color: var(--mut); max-width: 58ch; }
+
+  .season { border-top: var(--border-w) solid var(--line); border-bottom: var(--border-w) solid var(--line); }
+  .season .wrap { padding-top: clamp(36px, 5vw, 60px); padding-bottom: clamp(36px, 5vw, 60px); }
+  .chart { display: flex; align-items: flex-end; gap: clamp(4px, 0.7vw, 10px); height: clamp(140px, 22vw, 240px); border-bottom: var(--border-w) solid var(--line); }
+  .chart i { flex: 1; background: #26262c; display: block; position: relative; }
+  .chart i.d { background: var(--amber); }
+  .chart-x { display: flex; gap: clamp(4px, 0.7vw, 10px); margin-top: 10px; }
+  .chart-x s { flex: 1; text-decoration: none; font-size: 9px; text-align: center; color: var(--mut); letter-spacing: 1px; }
+  .chart-x s.d { color: var(--amber); font-weight: 700; }
+  .legend { display: flex; gap: 26px; margin-top: 22px; font-size: 12px; color: var(--mut); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; }
+  .legend i { display: inline-block; width: 12px; height: 12px; margin-right: 8px; vertical-align: -1px; }
+  .legend .load i { background: #26262c; border: 1px solid var(--line); }
+  .legend .dl i { background: var(--amber); }
+
+  .signals { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: var(--border-w) solid var(--line); }
+  .signal { padding: clamp(24px, 3.5vw, 44px) 28px; border-right: var(--border-w) solid var(--line); }
+  .signal:last-child { border-right: 0; }
+  .signal .v { font-size: clamp(26px, 3.2vw, 42px); font-weight: 700; color: var(--amber); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1; }
+  .signal .k { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-soft); font-weight: 700; margin: 12px 0 8px; }
+  .signal p { font-size: 13px; color: var(--mut); }
+
+  .bend { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+  .bend .txt { padding: clamp(48px, 7vw, 96px) 28px; }
+  .bend h3 { font-weight: 700; font-size: clamp(26px, 3.4vw, 44px); line-height: 1.02; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 18px; text-wrap: balance; }
+  .bend p { color: var(--mut); font-size: 16px; max-width: 46ch; margin-bottom: 14px; }
+  .bend .swap { border-left: var(--border-w) solid var(--line); align-self: stretch; display: flex; flex-direction: column; justify-content: center; padding: clamp(36px, 5vw, 64px) clamp(28px, 4vw, 56px); background: var(--ink); }
+  .swap-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid #232329; font-size: 13.5px; }
+  .swap-row:last-child { border-bottom: 0; }
+  .was { color: var(--mut); text-decoration: line-through; text-decoration-color: #55555e; }
+  .arrow { color: var(--amber); font-weight: 700; }
+  .now { color: var(--text); font-weight: 700; }
+
+  /* ============ 5 · STAT BAND ============ */
+  .stats { display: flex; font-variant-numeric: tabular-nums; }
+  .stat { flex: 1; padding: clamp(28px, 4vw, 52px) 28px; border-right: var(--border-w) solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .num { font-weight: 700; font-size: clamp(40px, 6vw, 72px); color: var(--amber); letter-spacing: -0.03em; line-height: 1; }
+  .lab { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--mut); margin-top: 12px; font-weight: 700; }
+
+  /* ============ 6 · PREMIUM ACT (dark-on-darker, the one upsell) ============ */
+  .pro { background: var(--deep); }
+  .pro .wrap { padding-top: clamp(64px, 9vw, 120px); padding-bottom: clamp(64px, 9vw, 120px); display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: clamp(36px, 5vw, 80px); align-items: center; }
+  .pro h2 { font-weight: 700; font-size: clamp(34px, 5vw, 64px); line-height: 0.98; text-transform: uppercase; letter-spacing: -0.015em; margin: 18px 0 22px; }
+  .pro .lead { color: var(--mut); font-size: 17px; max-width: 52ch; margin-bottom: 32px; }
+  .pro-list { border: var(--border-w) solid var(--amber); background: var(--ink); box-shadow: 10px 10px 0 0 #000; }
+  .pro-item { padding: 20px 24px; border-bottom: var(--border-w) solid #2a2a30; display: flex; gap: 16px; align-items: baseline; }
+  .pro-item:last-child { border-bottom: 0; }
+  .pro-item .tick { color: var(--amber); font-weight: 700; }
+  .pro-item div b { display: block; font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 0.04em; }
+  .pro-item div s { text-decoration: none; font-size: 13px; color: var(--mut); }
+
+  /* ============ 7 · FAQ ============ */
+  .faq .wrap { padding-top: clamp(56px, 8vw, 100px); padding-bottom: clamp(56px, 8vw, 100px); max-width: 940px; }
+  .faq h2 { font-weight: 700; font-size: clamp(30px, 4.2vw, 54px); text-transform: uppercase; letter-spacing: -0.015em; margin: 16px 0 36px; }
+  details { border-top: var(--border-w) solid var(--line); }
+  details:last-of-type { border-bottom: var(--border-w) solid var(--line); }
+  summary {
+    cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 4px; font-weight: 700; font-size: clamp(16px, 1.8vw, 20px);
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--amber); font-size: 24px; font-weight: 700; margin-left: 20px; }
+  details[open] summary::after { content: "–"; }
+  details p { padding: 0 4px 24px; color: var(--mut); max-width: 68ch; font-size: 15px; }
+
+  /* ============ 8 · CLOSING CTA (hero reprised) ============ */
+  .closer .wrap { padding-top: clamp(72px, 11vw, 150px); padding-bottom: clamp(72px, 11vw, 150px); text-align: left; }
+  .closer h2 { font-weight: 700; font-size: clamp(48px, 8vw, 112px); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 34px; text-wrap: balance; }
+  .closer p { color: var(--mut); margin-bottom: 36px; max-width: 44ch; }
+
+  footer { padding: 28px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; color: var(--mut); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; }
+  footer a:hover { color: var(--text); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-inner { animation: none; }
+    .btn { transition: none; }
+  }
+  @media (max-width: 900px) {
+    .cells { grid-template-columns: 1fr; }
+    .cell { border-right: 0; border-bottom: var(--border-w) solid var(--line); }
+    .cell:last-child { border-bottom: 0; }
+    .signals { grid-template-columns: 1fr 1fr; }
+    .signal:nth-child(2n) { border-right: 0; }
+    .signal:nth-child(-n+2) { border-bottom: var(--border-w) solid var(--line); }
+    .bend { grid-template-columns: 1fr; }
+    .bend .swap { border-left: 0; border-top: var(--border-w) solid var(--line); }
+    .pro .wrap { grid-template-columns: 1fr; }
+    .stats { flex-direction: column; }
+    .stat { border-right: none; border-bottom: var(--border-w) solid var(--line); }
+    .stat:last-child { border-bottom: none; }
+    .navlinks { display: none; }
+    .chart-x s:nth-child(odd) { visibility: hidden; }
+  }
+</style>
+</head>
+<body>
+
+<!-- FIXED NAV — Runna: a CTA is always on screen -->
+<nav class="nav">
+  <a class="logo" href="#">Osprey</a>
+  <div class="navlinks">
+    <a href="#deload">Deload Watch</a>
+    <a href="#pro">Pro</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a class="btn small" href="#download">Get the app</a>
+</nav>
+
+<div class="marquee" aria-hidden="true">
+  <span class="marquee-inner">Run harder · Lift heavier · Fuel smarter · Run harder · Lift heavier · Fuel smarter · Run harder · Lift heavier · Fuel smarter · Run harder · Lift heavier · Fuel smarter · </span>
+</div>
+
+<!-- 1 · HERO — photography-led (Strava's formula): image → headline → one CTA block → scroll cue -->
+<header class="hero">
+  <canvas id="motion" aria-hidden="true"></canvas>
+  <div class="veil" aria-hidden="true"></div>
+  <span class="photo-note">Placeholder — swap for athlete photography</span>
+  <div class="content">
+    <div class="wrap">
+      <h1>Train hard.<br><span class="amber">Deload smarter.</span></h1>
+      <a class="cta-block" href="#download"><span class="ch">›</span> Get the app.</a>
+    </div>
+  </div>
+  <a class="cue" href="#why">Explore Osprey<span>⌄</span></a>
+</header>
+
+<!-- 2 · MANIFESTO — Strava move: the argument, text only -->
+<section class="manifesto" id="why">
+  <div class="wrap">
+    <span class="eyebrow">Why Osprey</span>
+    <h2>Most apps count what you did. Osprey watches what you're <span class="amber">ready for.</span></h2>
+    <p>Mileage totals and PR confetti tell you where you've been. They say nothing about tomorrow. Osprey is one coach across your running, lifting, and fueling — an eye that never drifts — and its job is the call every self-coached athlete gets wrong: when to push, and when to back off.</p>
+  </div>
+</section>
+
+<!-- 3 · HOW IT WORKS — three declaratives; a real sequence, so numbers are earned -->
+<section class="steps">
+  <div class="head wrap">
+    <span class="eyebrow">How it works</span>
+  </div>
+  <div class="cells">
+    <div class="cell">
+      <div class="n">01</div>
+      <h3>Train hard.</h3>
+      <p>Log runs, lifts, and meals in one place. Your plan already knows what today asks of you.</p>
+    </div>
+    <div class="cell">
+      <div class="n">02</div>
+      <h3>Watch the signals.</h3>
+      <p>HRV, sleep, tonnage, pace drift — Osprey reads them every morning so you don't have to.</p>
+    </div>
+    <div class="cell">
+      <div class="n">03</div>
+      <h3>Deload smarter.</h3>
+      <p>When the signals stack up, the week reshapes itself. Recovery gets programmed, not improvised.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · THE DELOAD STORY — Strava's trick: the thesis gets the square footage -->
+<section class="deload" id="deload">
+  <div class="top">
+    <span class="eyebrow">Deload Watch</span>
+    <h2>The hardest week of training is the <span class="amber">easy one.</span></h2>
+    <p>Every good season breathes — three weeks of load, one week of letting it land. Skip that week and the fitness never consolidates. Most athletes skip it, because no app made them feel good about backing off. Osprey makes the easy week a feature, not a failure.</p>
+  </div>
+
+  <div class="season">
+    <div class="wrap">
+      <div class="chart" aria-label="16-week season load chart: load builds for three weeks, then an amber deload week, repeating">
+        <i style="height:42%"></i><i style="height:54%"></i><i style="height:66%"></i><i class="d" style="height:34%"></i>
+        <i style="height:52%"></i><i style="height:64%"></i><i style="height:78%"></i><i class="d" style="height:40%"></i>
+        <i style="height:62%"></i><i style="height:76%"></i><i style="height:90%"></i><i class="d" style="height:44%"></i>
+        <i style="height:72%"></i><i style="height:86%"></i><i style="height:100%"></i><i class="d" style="height:30%"></i>
+      </div>
+      <div class="chart-x" aria-hidden="true">
+        <s>W1</s><s>W2</s><s>W3</s><s class="d">W4</s><s>W5</s><s>W6</s><s>W7</s><s class="d">W8</s>
+        <s>W9</s><s>W10</s><s>W11</s><s class="d">W12</s><s>W13</s><s>W14</s><s>W15</s><s class="d">W16</s>
+      </div>
+      <div class="legend">
+        <span class="load"><i></i>Training load</span>
+        <span class="dl"><i></i>Deload week</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="signals">
+    <div class="signal">
+      <div class="v">−12%</div>
+      <div class="k">HRV trend</div>
+      <p>Seven mornings below your baseline is a pattern, not a blip.</p>
+    </div>
+    <div class="signal">
+      <div class="v">+3.1h</div>
+      <div class="k">Sleep debt</div>
+      <p>Counted against your own norm, not a generic eight hours.</p>
+    </div>
+    <div class="signal">
+      <div class="v">−8%</div>
+      <div class="k">Bar speed</div>
+      <p>Same weight, slower bar. The nervous system votes first.</p>
+    </div>
+    <div class="signal">
+      <div class="v">+14%</div>
+      <div class="k">Pace drift</div>
+      <p>Easy runs creeping out of zone while effort feels the same.</p>
+    </div>
+  </div>
+
+  <div class="bend">
+    <div class="txt">
+      <h3>Your plan bends before you <span class="amber">break.</span></h3>
+      <p>When enough signals stack up, Osprey doesn't send a wellness tip. It rewrites the week: volume drops, intensity holds, fueling shifts to match.</p>
+      <p>You see exactly what changed and why — and the season plan absorbs it, so one honest easy week never snowballs into a lost month.</p>
+    </div>
+    <div class="swap" aria-label="Example of a rewritten deload week">
+      <div class="swap-row"><span class="was">Thu · Intervals 6×800m</span><span class="arrow">→</span><span class="now">Easy 40 min, Z2 cap</span></div>
+      <div class="swap-row"><span class="was">Fri · Squat 5×5 @ 80%</span><span class="arrow">→</span><span class="now">3×3 @ 70%, bar speed</span></div>
+      <div class="swap-row"><span class="was">Sat · Long run 2:30</span><span class="arrow">→</span><span class="now">Cut to 1:30, flat</span></div>
+      <div class="swap-row"><span class="was">Carbs · race-load 8g/kg</span><span class="arrow">→</span><span class="now">Maintenance 5g/kg</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · STAT BAND -->
+<section class="stats" aria-label="Osprey by the numbers">
+  <div class="stat"><div class="num">26.2</div><div class="lab">Miles tracked</div></div>
+  <div class="stat"><div class="num">315</div><div class="lab">LB PR logged</div></div>
+  <div class="stat"><div class="num">94%</div><div class="lab">Plan adherence</div></div>
+</section>
+
+<!-- 6 · PREMIUM ACT — the one upsell moment, darker than the page -->
+<section class="pro" id="pro">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Osprey Pro</span>
+      <h2>Race day is a <span class="amber">feature.</span></h2>
+      <p class="lead">The free coach runs your season. Pro runs the day that season points at — taper, fueling, pacing, and a human in your corner.</p>
+      <a class="btn" href="#download">Go Pro</a>
+    </div>
+    <div class="pro-list">
+      <div class="pro-item"><span class="tick">→</span><div><b>Race-week engine</b><s>Taper volume, carb-load timing, and a morning-of checklist.</s></div></div>
+      <div class="pro-item"><span class="tick">→</span><div><b>Pacing plans</b><s>Split-by-split targets built from your training, not a calculator.</s></div></div>
+      <div class="pro-item"><span class="tick">→</span><div><b>Coach chat</b><s>A certified coach reviews your season and answers within a day.</s></div></div>
+      <div class="pro-item"><span class="tick">→</span><div><b>Unlimited seasons</b><s>Stack goals across all nine sports without resetting history.</s></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <span class="eyebrow">Questions</span>
+    <h2>Before you ask</h2>
+    <details>
+      <summary>Which sports does Osprey coach?</summary>
+      <p>Nine, each on its own blueprint: running, ultra, cycling, swimming, rowing, triathlon, powerlifting, HYROX, and CrossFit. One engine drives them all, so your lifting and your endurance work never contradict each other.</p>
+    </details>
+    <details>
+      <summary>Do I need a wearable?</summary>
+      <p>No. Osprey reads HRV and sleep from a watch or ring if you have one, but bar speed, pace drift, and your own session notes carry the signal on their own.</p>
+    </details>
+    <details>
+      <summary>How does Osprey decide when I deload?</summary>
+      <p>Deloads are planned into your season from day one — roughly every fourth week. The signals move one forward or soften a week early when your body disagrees with the calendar. You always see which signals triggered the change.</p>
+    </details>
+    <details>
+      <summary>Can I use it alongside a human coach?</summary>
+      <p>Yes. Export any week, share your season view, or let your coach adjust sessions directly — Osprey keeps the signal-watching either way.</p>
+    </details>
+  </div>
+</section>
+
+<!-- 8 · CLOSING CTA — hero reprised (Runna's bookend) -->
+<section class="closer" id="download">
+  <div class="wrap">
+    <span class="eyebrow">Get Osprey</span>
+    <h2>Train hard.<br><span class="amber">Deload smarter.</span></h2>
+    <p>Four questions to answer, one season to build. Your first plan is free.</p>
+    <div class="btnrow">
+      <a class="btn" href="#">Get the app</a>
+      <a class="btn ghost" href="#deload">See Deload Watch</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Osprey</span>
+  <span><a href="#">Privacy</a> · <a href="#">Terms</a></span>
+</footer>
+
+<script>
+  (function () {
+    const canvas = document.getElementById('motion');
+    const ctx = canvas.getContext('2d');
+    function draw() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // ground: warm charcoal field
+      const base = ctx.createLinearGradient(0, 0, w, h);
+      base.addColorStop(0, '#14100c');
+      base.addColorStop(0.5, '#1d1610');
+      base.addColorStop(1, '#0c0a08');
+      ctx.fillStyle = base;
+      ctx.fillRect(0, 0, w, h);
+
+      // motion streaks: long horizontal smears in earth tones, copper highlights rare
+      const colors = [
+        [58, 46, 36], [90, 68, 50], [42, 34, 26], [120, 92, 66],
+        [30, 24, 18], [138, 106, 77], [200, 121, 58] // last = copper, rare
+      ];
+      let seed = 7;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+      for (let i = 0; i < 340; i++) {
+        const ci = rnd() < 0.06 ? 6 : Math.floor(rnd() * 6);
+        const [r, g, b] = colors[ci];
+        const y = rnd() * h;
+        const len = w * (0.25 + rnd() * 0.9);
+        const x = -w * 0.2 + rnd() * w;
+        const thick = 1 + rnd() * (ci === 6 ? 3 : 26);
+        const alpha = 0.03 + rnd() * (ci === 6 ? 0.22 : 0.10);
+        const tilt = (rnd() - 0.5) * h * 0.06;
+        const grad = ctx.createLinearGradient(x, y, x + len, y + tilt);
+        grad.addColorStop(0, `rgba(${r},${g},${b},0)`);
+        grad.addColorStop(0.5, `rgba(${r},${g},${b},${alpha})`);
+        grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = thick;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.quadraticCurveTo(x + len * 0.5, y + tilt * 0.5, x + len, y + tilt);
+        ctx.stroke();
+      }
+
+      // a hint of a figure: dense dark mass right-of-center with copper edge
+      const fx = w * 0.62, fy = h * 0.52;
+      const body = ctx.createRadialGradient(fx, fy, 10, fx, fy, h * 0.42);
+      body.addColorStop(0, 'rgba(8,6,5,0.85)');
+      body.addColorStop(0.55, 'rgba(12,9,7,0.45)');
+      body.addColorStop(1, 'rgba(12,9,7,0)');
+      ctx.fillStyle = body;
+      ctx.save();
+      ctx.translate(fx, fy);
+      ctx.scale(0.62, 1);
+      ctx.translate(-fx, -fy);
+      ctx.beginPath();
+      ctx.arc(fx, fy, h * 0.42, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      for (let i = 0; i < 26; i++) {
+        const y2 = fy - h * 0.3 + rnd() * h * 0.6;
+        const len2 = w * (0.06 + rnd() * 0.22);
+        const a2 = 0.05 + rnd() * 0.16;
+        const g2 = ctx.createLinearGradient(fx - len2, y2, fx + len2 * 0.4, y2);
+        g2.addColorStop(0, 'rgba(200,121,58,0)');
+        g2.addColorStop(0.8, `rgba(217,139,74,${a2})`);
+        g2.addColorStop(1, 'rgba(200,121,58,0)');
+        ctx.strokeStyle = g2;
+        ctx.lineWidth = 1 + rnd() * 5;
+        ctx.beginPath();
+        ctx.moveTo(fx - len2, y2);
+        ctx.lineTo(fx + len2 * 0.4, y2);
+        ctx.stroke();
+      }
+
+      // grain
+      ctx.globalAlpha = 0.05;
+      for (let i = 0; i < 1400; i++) {
+        ctx.fillStyle = rnd() > 0.5 ? '#000' : '#fff';
+        ctx.fillRect(rnd() * w, rnd() * h, 1, 1);
+      }
+      ctx.globalAlpha = 1;
+    }
+    draw();
+    let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(draw, 150); });
+  })();
+</script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 **Date:** 2026-07-11
 **Status:** Approved direction, pending user review of this document
 **Reference implementation:** `website-mockups/osprey-brutalist-amber.html` (interactive layout test, approved by user)
-**Research artifact:** `docs/ANTIGRAVITY_DESIGN.md` (Antigravity extraction that seeded the project)
+**Research artifact:** `docs/design-references/DESIGN-antigravity.md` (Antigravity extraction that seeded the project)
 
 ## 1. Purpose & Scope
 

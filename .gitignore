@@ -22,3 +22,5 @@ website/.astro/
 webapp/node_modules/
 webapp/dist/
 webapp/.env.local
+webapp/.vite/
+webapp/*.tsbuildinfo

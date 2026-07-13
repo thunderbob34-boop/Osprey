@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osprey Hero — A/B: Product-led vs Photography-led</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #09090B;
+    --panel: #101014;
+    --line: #3F3F46;
+    --amber: #c8793a;
+    --amber-bright: #d98b4a;
+    --text: #FAFAFA;
+    --text-soft: #c9cbd1;
+    --mut: #A1A1AA;
+    --border-w: 2px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--ink); }
+  body {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 500; color: var(--text); background: var(--ink);
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  .amber { color: var(--amber); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding-left: 28px; padding-right: 28px; }
+
+  .btn {
+    display: inline-block; cursor: pointer; font-weight: 700; font-size: 14px;
+    padding: 14px 28px; border: var(--border-w) solid var(--amber);
+    background: var(--amber); color: #000;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    transition: background 150ms ease, border-color 150ms ease, transform 100ms ease;
+  }
+  .btn:hover { background: var(--amber-bright); border-color: var(--amber-bright); }
+  .btn:active { transform: translate(2px, 2px); }
+  .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+  .btn.ghost:hover { background: rgba(255,255,255,0.06); border-color: var(--mut); }
+  .btn:focus-visible, a:focus-visible { outline: 2px solid var(--amber-bright); outline-offset: 3px; }
+
+  /* variant labels */
+  .tag {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--amber); color: #000; padding: 10px 28px;
+    font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 2px;
+  }
+  .tag.b { background: var(--text); }
+  .tag s { text-decoration: none; opacity: 0.75; font-size: 11px; letter-spacing: 1px; }
+
+  /* ============ HERO A — product-led (current) ============ */
+  .hero-a { border-bottom: var(--border-w) solid var(--line); background: var(--ink); }
+  .hero-a .wrap {
+    display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(32px, 5vw, 72px); align-items: center;
+    padding-top: clamp(56px, 8vw, 110px); padding-bottom: clamp(56px, 8vw, 110px);
+  }
+  .chip {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--text-soft); border: var(--border-w) solid var(--line); background: var(--panel);
+    padding: 9px 16px; margin-bottom: 28px;
+  }
+  .chip b { color: var(--amber); font-weight: 700; }
+  h1 { font-weight: 700; font-size: clamp(52px, 8.5vw, 118px); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 30px; text-wrap: balance; }
+  .hero-a p.sub { font-size: clamp(16px, 1.6vw, 19px); color: var(--mut); max-width: 480px; margin-bottom: 40px; line-height: 1.55; }
+  .btnrow { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .device-zone { position: relative; justify-self: center; padding: 34px 10px; }
+  .phone {
+    width: min(280px, 70vw); border: var(--border-w) solid var(--line); background: var(--panel);
+    padding: 14px; box-shadow: 12px 12px 0 0 #000;
+  }
+  .screen { border: var(--border-w) solid var(--line); background: var(--ink); padding: 16px 14px; }
+  .scr-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--mut); font-weight: 700; }
+  .scr-week { font-size: 22px; font-weight: 700; text-transform: uppercase; line-height: 1.1; margin: 6px 0 2px; }
+  .scr-week span { color: var(--amber); }
+  .scr-sub { font-size: 10.5px; color: var(--mut); margin-bottom: 14px; }
+  .scr-bars { display: flex; align-items: flex-end; gap: 5px; height: 74px; border-bottom: var(--border-w) solid var(--line); margin-bottom: 12px; }
+  .scr-bars i { flex: 1; background: #303038; display: block; }
+  .scr-bars i.d { background: var(--amber); }
+  .scr-row { display: flex; justify-content: space-between; font-size: 10.5px; padding: 7px 0; border-bottom: 1px solid #232329; color: var(--text-soft); }
+  .scr-row:last-child { border-bottom: 0; }
+  .scr-row b { color: var(--text); font-weight: 700; }
+  .plate {
+    position: absolute; background: var(--ink); border: var(--border-w) solid var(--amber);
+    padding: 10px 14px; box-shadow: 8px 8px 0 0 #000;
+  }
+  .plate .k { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--mut); font-weight: 700; }
+  .plate .v { font-size: 20px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+  .plate .v span { color: var(--amber); }
+  .plate.p1 { top: 0; right: -8px; }
+  .plate.p2 { bottom: 44px; left: -26px; border-color: var(--line); }
+
+  /* ============ HERO B — photography-led (Strava move) ============ */
+  .hero-b {
+    position: relative; min-height: clamp(520px, 88vh, 860px);
+    border-bottom: var(--border-w) solid var(--line);
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-b canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero-b .veil {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(9,9,11,0.72) 0%, rgba(9,9,11,0.28) 45%, rgba(9,9,11,0.15) 100%),
+      linear-gradient(to top, rgba(9,9,11,0.65) 0%, rgba(9,9,11,0) 35%);
+  }
+  .hero-b .content { position: relative; z-index: 2; width: 100%; }
+  .hero-b h1 { margin-bottom: clamp(28px, 4vw, 44px); max-width: 10ch; }
+  .cta-block {
+    display: inline-flex; align-items: center; gap: 18px;
+    background: var(--amber); color: #000;
+    font-weight: 700; font-size: clamp(16px, 1.8vw, 21px); text-transform: uppercase; letter-spacing: 0.04em;
+    padding: clamp(20px, 2.6vw, 30px) clamp(28px, 3.6vw, 46px);
+    transition: background 150ms ease, transform 100ms ease;
+  }
+  .cta-block:hover { background: var(--amber-bright); }
+  .cta-block:active { transform: translate(2px, 2px); }
+  .cta-block .ch { font-size: 1.35em; line-height: 0.8; }
+  .cue {
+    position: absolute; z-index: 2; left: 0; right: 0; bottom: 22px;
+    text-align: center; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; color: var(--text);
+  }
+  .cue span { display: block; color: var(--amber-bright); font-size: 18px; line-height: 0.9; margin-top: 2px; }
+  .photo-note {
+    position: absolute; z-index: 2; right: 16px; top: 16px;
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+    color: rgba(250,250,250,0.55); border: 1px solid rgba(250,250,250,0.25); padding: 6px 10px;
+  }
+
+  /* ============ verdict strip ============ */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; }
+  .compare > div { padding: clamp(32px, 5vw, 56px) 28px; }
+  .compare > div:first-child { border-right: var(--border-w) solid var(--line); }
+  .compare h2 { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+  .compare h2 i { font-style: normal; color: var(--amber); }
+  .compare ul { list-style: none; }
+  .compare li { font-size: 14px; color: var(--mut); padding: 8px 0 8px 22px; position: relative; }
+  .compare li::before { content: "→"; position: absolute; left: 0; color: var(--amber); font-weight: 700; }
+  .compare li b { color: var(--text); font-weight: 700; }
+
+  footer { padding: 22px 28px; color: var(--mut); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; border-top: var(--border-w) solid var(--line); }
+
+  @media (prefers-reduced-motion: reduce) { .btn, .cta-block { transition: none; } }
+  @media (max-width: 900px) {
+    .hero-a .wrap { grid-template-columns: 1fr; }
+    .device-zone { justify-self: start; }
+    .compare { grid-template-columns: 1fr; }
+    .compare > div:first-child { border-right: 0; border-bottom: var(--border-w) solid var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= A ================= -->
+<div class="tag">
+  <span>Hero A — Product-led (current mockup)</span>
+  <s>Runna's formula: proof → headline → CTA → app render</s>
+</div>
+
+<header class="hero-a">
+  <div class="wrap">
+    <div>
+      <span class="chip">One coach · <b>Nine sports</b> · Zero drift</span>
+      <h1>Train hard.<br><span class="amber">Deload smarter.</span></h1>
+      <p class="sub">Osprey plans your whole season — every run, every lift, every meal — and watches the signals that say when to push and when to back off.</p>
+      <div class="btnrow">
+        <a class="btn" href="#">Get the app</a>
+        <a class="btn ghost" href="#">See how it works</a>
+      </div>
+    </div>
+    <div class="device-zone">
+      <div class="phone">
+        <div class="screen">
+          <div class="scr-label">This week</div>
+          <div class="scr-week">Week 8 <span>· Deload</span></div>
+          <div class="scr-sub">Volume −40% · Intensity held</div>
+          <div class="scr-bars" aria-hidden="true">
+            <i style="height:46%"></i><i style="height:60%"></i><i style="height:72%"></i><i class="d" style="height:38%"></i>
+            <i style="height:58%"></i><i style="height:70%"></i><i style="height:84%"></i><i class="d" style="height:42%"></i>
+          </div>
+          <div class="scr-row"><span>Tue · Easy run</span><b>40 min</b></div>
+          <div class="scr-row"><span>Thu · Squat</span><b>3×3 @ 70%</b></div>
+          <div class="scr-row"><span>Sat · Long run</span><b>Cut to 90 min</b></div>
+        </div>
+      </div>
+      <div class="plate p1">
+        <div class="k">HRV · 7-day</div>
+        <div class="v"><span>−12%</span></div>
+      </div>
+      <div class="plate p2">
+        <div class="k">Season</div>
+        <div class="v">Wk 8/16</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= B ================= -->
+<div class="tag b">
+  <span>Hero B — Photography-led (Strava move)</span>
+  <s>Strava's formula: image → headline → one CTA block → scroll cue</s>
+</div>
+
+<header class="hero-b">
+  <canvas id="motion" aria-hidden="true"></canvas>
+  <div class="veil" aria-hidden="true"></div>
+  <span class="photo-note">Placeholder — swap for athlete photography</span>
+  <div class="content">
+    <div class="wrap">
+      <h1>Train hard.<br><span class="amber">Deload smarter.</span></h1>
+      <a class="cta-block" href="#"><span class="ch">›</span> Get the app.</a>
+    </div>
+  </div>
+  <p class="cue">Explore Osprey<span>⌄</span></p>
+</header>
+
+<!-- ================= verdict ================= -->
+<section class="compare">
+  <div>
+    <h2><i>A</i> — Product-led</h2>
+    <ul>
+      <li><b>Shows the actual product</b> making its hardest call — the deload week is on screen before a word is read.</li>
+      <li>Proof chip + stat plates give the data-first crowd something to trust immediately.</li>
+      <li>Denser: two CTAs, subcopy, chip. More to scan before the ask.</li>
+      <li>No photography budget needed; ships day one and always matches the real UI.</li>
+    </ul>
+  </div>
+  <div>
+    <h2><i>B</i> — Photography-led</h2>
+    <ul>
+      <li><b>Leads with feeling</b> — effort and motion first, product later. Bigger emotional range.</li>
+      <li>One oversized copper block is a harder, more brutalist ask than a button row.</li>
+      <li>Sparse: headline + one CTA. Nothing competes with the image.</li>
+      <li>Lives or dies on the photo — needs real, art-directed athlete shots (the canvas here is a stand-in).</li>
+    </ul>
+  </div>
+</section>
+
+<footer>Osprey hero comparison · both variants use identical copy so the treatment is the only variable</footer>
+
+<script>
+  (function () {
+    const canvas = document.getElementById('motion');
+    const ctx = canvas.getContext('2d');
+    function draw() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // ground: warm charcoal field
+      const base = ctx.createLinearGradient(0, 0, w, h);
+      base.addColorStop(0, '#14100c');
+      base.addColorStop(0.5, '#1d1610');
+      base.addColorStop(1, '#0c0a08');
+      ctx.fillStyle = base;
+      ctx.fillRect(0, 0, w, h);
+
+      // motion streaks: long horizontal smears in earth tones, copper highlights rare
+      const colors = [
+        [58, 46, 36], [90, 68, 50], [42, 34, 26], [120, 92, 66],
+        [30, 24, 18], [138, 106, 77], [200, 121, 58] // last = copper, rare
+      ];
+      let seed = 7;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+      for (let i = 0; i < 340; i++) {
+        const ci = rnd() < 0.06 ? 6 : Math.floor(rnd() * 6);
+        const [r, g, b] = colors[ci];
+        const y = rnd() * h;
+        const len = w * (0.25 + rnd() * 0.9);
+        const x = -w * 0.2 + rnd() * w;
+        const thick = 1 + rnd() * (ci === 6 ? 3 : 26);
+        const alpha = 0.03 + rnd() * (ci === 6 ? 0.22 : 0.10);
+        const tilt = (rnd() - 0.5) * h * 0.06;
+        const grad = ctx.createLinearGradient(x, y, x + len, y + tilt);
+        grad.addColorStop(0, `rgba(${r},${g},${b},0)`);
+        grad.addColorStop(0.5, `rgba(${r},${g},${b},${alpha})`);
+        grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = thick;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.quadraticCurveTo(x + len * 0.5, y + tilt * 0.5, x + len, y + tilt);
+        ctx.stroke();
+      }
+
+      // a hint of a figure: dense dark mass right-of-center with copper edge
+      const fx = w * 0.62, fy = h * 0.52;
+      const body = ctx.createRadialGradient(fx, fy, 10, fx, fy, h * 0.42);
+      body.addColorStop(0, 'rgba(8,6,5,0.85)');
+      body.addColorStop(0.55, 'rgba(12,9,7,0.45)');
+      body.addColorStop(1, 'rgba(12,9,7,0)');
+      ctx.fillStyle = body;
+      ctx.save();
+      ctx.translate(fx, fy);
+      ctx.scale(0.62, 1);
+      ctx.translate(-fx, -fy);
+      ctx.beginPath();
+      ctx.arc(fx, fy, h * 0.42, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      for (let i = 0; i < 26; i++) {
+        const y2 = fy - h * 0.3 + rnd() * h * 0.6;
+        const len2 = w * (0.06 + rnd() * 0.22);
+        const a2 = 0.05 + rnd() * 0.16;
+        const g2 = ctx.createLinearGradient(fx - len2, y2, fx + len2 * 0.4, y2);
+        g2.addColorStop(0, 'rgba(200,121,58,0)');
+        g2.addColorStop(0.8, `rgba(217,139,74,${a2})`);
+        g2.addColorStop(1, 'rgba(200,121,58,0)');
+        ctx.strokeStyle = g2;
+        ctx.lineWidth = 1 + rnd() * 5;
+        ctx.beginPath();
+        ctx.moveTo(fx - len2, y2);
+        ctx.lineTo(fx + len2 * 0.4, y2);
+        ctx.stroke();
+      }
+
+      // grain
+      ctx.globalAlpha = 0.05;
+      for (let i = 0; i < 1400; i++) {
+        ctx.fillStyle = rnd() > 0.5 ? '#000' : '#fff';
+        ctx.fillRect(rnd() * w, rnd() * h, 1, 1);
+      }
+      ctx.globalAlpha = 1;
+    }
+    draw();
+    let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(draw, 150); });
+  })();
+</script>
+
+</body>
+</html>

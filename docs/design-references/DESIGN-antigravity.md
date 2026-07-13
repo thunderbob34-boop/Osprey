@@ -89,4 +89,4 @@ To build Osprey's marketing site *in this language but leveled up* for a running
 workflow: firecrawl-website-design-clone (executed via live browser inspection due to Firecrawl auth failure)
 source_url: https://antigravity.google
 target_stack: unspecified (Osprey marketing site — not yet started; app itself is Expo/React Native per `OSPREY-app/`)
-output: docs/ANTIGRAVITY_DESIGN.md
+output: docs/design-references/DESIGN-antigravity.md
