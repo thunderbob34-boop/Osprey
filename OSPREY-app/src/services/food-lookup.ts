@@ -32,6 +32,9 @@ export async function searchFoodByName(query: string): Promise<FoodItemResult[]>
     .from('food_items')
     .select('id, name, brand, calories_per_100g, protein_g, carbs_g, fat_g, barcode')
     .ilike('name', `%${trimmed}%`)
+    // shadow recipe rows from the web nutrition feature (source='recipe', per-serving
+    // macros stashed in the per-100g columns) must never surface in food search
+    .or('source.is.null,source.neq.recipe')
     .limit(15);
 
   if (error) throw error;

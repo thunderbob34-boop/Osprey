@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Osprey — Nutrition Desk mockup (Phase 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== tokens.css (verbatim) ===== */
+  :root {
+    --ink: #09090B; --panel: #101014; --line: #3F3F46;
+    --amber: #c8793a; --amber-bright: #d98b4a;
+    --text: #FAFAFA; --text-soft: #c9cbd1; --mut: #A1A1AA;
+    --border-w: 2px; --tap: 44px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--ink); color: var(--text);
+    font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  input, select {
+    background: var(--ink); border: var(--border-w) solid var(--line); color: var(--text);
+    font-family: inherit; font-size: 13.5px; padding: 10px 12px;
+  }
+  input::placeholder { color: var(--mut); }
+
+  /* ===== app.css (relevant subset, verbatim classes) ===== */
+  .app-shell { display: flex; min-height: 100vh; }
+  .btn {
+    display: inline-block; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 14px;
+    padding: 12px 26px; border: var(--border-w) solid var(--amber);
+    background: var(--amber); color: #000;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+  .btn.small { font-size: 12px; padding: 8px 16px; }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .rail {
+    width: 220px; flex: none; border-right: var(--border-w) solid var(--line);
+    display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh;
+  }
+  .rail-brand { padding: 24px 20px 20px; border-bottom: var(--border-w) solid var(--line); }
+  .rail-logo { font-weight: 700; font-size: 18px; text-transform: uppercase; letter-spacing: 0.02em; }
+  .rail-links { flex: 1; padding: 14px 0; display: flex; flex-direction: column; }
+  .rail-link {
+    padding: 13px 20px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--mut); font-weight: 700; border-left: 3px solid transparent;
+  }
+  .rail-link.active { color: #000; background: var(--amber); border-left-color: var(--amber-bright); }
+  .rail-foot { border-top: var(--border-w) solid var(--line); padding: 16px 20px 20px; }
+  .rail-user { font-size: 12px; color: var(--text-soft); margin-bottom: 12px; }
+  .rail-user b { display: block; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; font-size: 13px; margin-bottom: 2px; }
+  .rail-signout {
+    width: 100%; background: transparent; color: var(--mut); border: var(--border-w) solid var(--line);
+    padding: 10px 0; text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; font-weight: 700; cursor: pointer;
+  }
+
+  .page { flex: 1; min-width: 0; padding: 40px 44px 80px; }
+  .page-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--mut); font-weight: 700; margin-bottom: 10px; }
+  .page-title { font-weight: 700; font-size: clamp(30px, 3.4vw, 46px); text-transform: uppercase; letter-spacing: -0.015em; line-height: 1.02; }
+  .page-title .amber { color: var(--amber); }
+  .page-head { margin-bottom: 36px; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+
+  .badge {
+    display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.2px; padding: 4px 9px;
+    border: 1px solid var(--line); color: var(--text-soft); white-space: nowrap;
+  }
+  .badge.amber { border-color: var(--amber); color: var(--amber); }
+
+  .card { border: var(--border-w) solid var(--line); background: var(--panel); padding: 22px 24px; }
+
+  .ozzie-note {
+    border: var(--border-w) solid var(--amber); background: var(--ink);
+    padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start;
+    box-shadow: 6px 6px 0 0 #000; margin-top: 24px;
+  }
+  .ozzie-note .tag { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--amber); flex: none; padding-top: 2px; }
+  .ozzie-note p { font-size: 14px; color: var(--text-soft); line-height: 1.5; }
+
+  .toggle-group { display: inline-flex; border: var(--border-w) solid var(--line); }
+  .toggle-group button {
+    background: transparent; color: var(--mut); border: none; cursor: pointer;
+    padding: 10px 20px; font-weight: 700; font-size: 12.5px; text-transform: uppercase; letter-spacing: 1.5px; font-family: inherit;
+  }
+  .toggle-group button + button { border-left: var(--border-w) solid var(--line); }
+  .toggle-group button.active { background: var(--amber); color: #000; }
+
+  .activity-table { width: 100%; border-collapse: collapse; }
+  .activity-table th {
+    text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut);
+    font-weight: 700; padding: 0 16px 12px; border-bottom: var(--border-w) solid var(--line);
+  }
+  .activity-table td { padding: 14px 16px; border-bottom: 1px solid #232329; font-size: 13.5px; }
+  .activity-table tr:last-child td { border-bottom: none; }
+  .activity-table td.num { font-variant-numeric: tabular-nums; text-align: right; }
+  .activity-table th.num { text-align: right; }
+  .icon-btn { background: transparent; border: none; color: var(--mut); cursor: pointer; padding: 6px; font-size: 13px; }
+
+  .field label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); font-weight: 700; margin-bottom: 7px; }
+
+  /* ===== NEW for Phase 2 — targets band (adapted from marketing showcase 'nutrition' screen) ===== */
+  .fuel-band { display: flex; border: var(--border-w) solid var(--line); background: var(--panel); margin-bottom: 24px; }
+  .fuel-cal { flex: none; width: 260px; padding: 26px 28px; border-right: var(--border-w) solid var(--line); }
+  .fuel-cal .num { font-weight: 700; font-size: 46px; color: var(--amber); letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .fuel-cal .of { font-size: 15px; color: var(--mut); font-variant-numeric: tabular-nums; margin-top: 6px; }
+  .fuel-cal .lab { font-size: 10.5px; text-transform: uppercase; letter-spacing: 2px; color: var(--mut); margin-top: 10px; font-weight: 700; }
+  .fuel-macros { flex: 1; padding: 24px 28px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+  .macro .m-head { display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+  .macro .m-head b { color: var(--text); }
+  .macro .track { height: 14px; background: #2c2f36; position: relative; }
+  .macro .fill { height: 100%; background: var(--amber); }
+  .macro .target { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--text); }
+
+  .quick-add { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 28px; }
+  .quick-add .grow { flex: 1; min-width: 260px; position: relative; }
+  .quick-add input, .quick-add select { width: 100%; }
+  .qty-field { width: 110px; }
+  .meal-field { width: 150px; }
+
+  .exercise-dropdown {
+    position: absolute; z-index: 10; list-style: none; top: 100%; left: 0; right: 0;
+    background: var(--panel); border: var(--border-w) solid var(--line);
+  }
+  .exercise-dropdown li + li { border-top: 1px solid #232329; }
+  .exercise-dropdown .row { display: flex; justify-content: space-between; padding: 9px 12px; font-size: 13.5px; }
+  .exercise-dropdown .muted { color: var(--mut); }
+  .exercise-dropdown .row.hover { background: rgba(200,121,58,0.1); }
+
+  .meal-head td {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 2px; color: var(--amber);
+    font-weight: 700; padding: 18px 16px 8px; border-bottom: 1px solid #232329;
+  }
+
+  .grid-hint { color: var(--mut); font-size: 11px; margin-top: 10px; }
+
+  /* recipe builder */
+  .builder-layout { display: flex; gap: 28px; align-items: flex-start; }
+  .builder-main { flex: 1; min-width: 0; }
+  .builder-aside { width: 320px; flex: none; }
+  .per-serving { border: var(--border-w) solid var(--amber); background: var(--ink); padding: 18px 20px; box-shadow: 6px 6px 0 0 #000; }
+  .per-serving .days { font-size: 34px; font-weight: 700; color: var(--amber); line-height: 1; font-variant-numeric: tabular-nums; }
+  .per-serving .lab { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin-top: 4px; }
+  .per-serving .rows { margin-top: 14px; border-top: 1px solid #232329; }
+  .per-serving .r { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #232329; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .per-serving .r span:first-child { color: var(--mut); text-transform: uppercase; font-size: 10.5px; letter-spacing: 1.5px; font-weight: 700; padding-top: 2px; }
+
+  /* mockup chrome */
+  .mock-divider {
+    max-width: 1280px; margin: 60px auto 0; padding: 14px 24px;
+    border: var(--border-w) dashed var(--line); color: var(--mut);
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
+  }
+  .screen { border-bottom: var(--border-w) solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="mock-divider" style="margin-top:24px">Mockup · Screen 1 — /nutrition (Fuel Desk)</div>
+
+<div class="app-shell screen">
+  <nav class="rail">
+    <div class="rail-brand"><span class="rail-logo">Osprey</span></div>
+    <div class="rail-links">
+      <a class="rail-link" href="#">Calendar</a>
+      <a class="rail-link" href="#">Log</a>
+      <a class="rail-link" href="#">History</a>
+      <a class="rail-link active" href="#">Nutrition</a>
+      <a class="rail-link" href="#">Settings</a>
+    </div>
+    <div class="rail-foot">
+      <div class="rail-user"><b>Gus J.</b>thunderbob34@gmail.com</div>
+      <button class="rail-signout">Sign out</button>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="page-head">
+      <div>
+        <div class="page-eyebrow">Nutrition · Sunday, July 13</div>
+        <h1 class="page-title">Fuel <span class="amber">Desk</span></h1>
+      </div>
+      <div class="toggle-group">
+        <button>‹</button>
+        <button class="active">Today</button>
+        <button>›</button>
+      </div>
+    </div>
+
+    <!-- targets band -->
+    <div class="fuel-band">
+      <div class="fuel-cal">
+        <div class="num">2,183</div>
+        <div class="of">/ 2,600 kcal</div>
+        <div class="lab">Calories · Training day</div>
+      </div>
+      <div class="fuel-macros">
+        <div class="macro">
+          <div class="m-head"><span>Protein</span><span><b>142</b> / 180g</span></div>
+          <div class="track"><div class="fill" style="width:79%"></div><div class="target" style="left:100%"></div></div>
+        </div>
+        <div class="macro">
+          <div class="m-head"><span>Carbs</span><span><b>226</b> / 310g</span></div>
+          <div class="track"><div class="fill" style="width:73%"></div><div class="target" style="left:100%"></div></div>
+        </div>
+        <div class="macro">
+          <div class="m-head"><span>Fat</span><span><b>58</b> / 75g</span></div>
+          <div class="track"><div class="fill" style="width:77%"></div><div class="target" style="left:100%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- quick add -->
+    <div class="quick-add">
+      <div class="field grow">
+        <label>Add food</label>
+        <input value="greek yog" />
+        <ul class="exercise-dropdown">
+          <li><div class="row hover"><span>Greek Yogurt, plain 2%</span><span class="muted">73 kcal / 100g</span></div></li>
+          <li><div class="row"><span>Greek Yogurt, nonfat (Fage)</span><span class="muted">59 kcal / 100g</span></div></li>
+          <li><div class="row"><span class="muted">Can't find it? Add manually →</span></div></li>
+        </ul>
+      </div>
+      <div class="field qty-field">
+        <label>Qty (g)</label>
+        <input value="170" />
+      </div>
+      <div class="field meal-field">
+        <label>Meal</label>
+        <select><option>Breakfast</option></select>
+      </div>
+      <button class="btn">Log it</button>
+    </div>
+
+    <!-- day log -->
+    <div class="card" style="padding: 6px 0 14px;">
+      <table class="activity-table">
+        <thead>
+          <tr><th>Food</th><th class="num">Qty</th><th class="num">Kcal</th><th class="num">P</th><th class="num">C</th><th class="num">F</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr class="meal-head"><td colspan="7">Breakfast</td></tr>
+          <tr>
+            <td>Overnight Oats <span class="badge amber" style="margin-left:8px">Recipe × 2</span></td>
+            <td class="num">2 srv</td><td class="num">684</td><td class="num">28g</td><td class="num">96g</td><td class="num">22g</td>
+            <td class="num"><button class="icon-btn">✕</button></td>
+          </tr>
+          <tr>
+            <td>Coffee, black</td>
+            <td class="num">240g</td><td class="num">2</td><td class="num">0g</td><td class="num">0g</td><td class="num">0g</td>
+            <td class="num"><button class="icon-btn">✕</button></td>
+          </tr>
+          <tr class="meal-head"><td colspan="7">Lunch</td></tr>
+          <tr>
+            <td>Chicken breast, grilled</td>
+            <td class="num">220g</td><td class="num">363</td><td class="num">68g</td><td class="num">0g</td><td class="num">8g</td>
+            <td class="num"><button class="icon-btn">✕</button></td>
+          </tr>
+          <tr>
+            <td>White rice, cooked</td>
+            <td class="num">250g</td><td class="num">325</td><td class="num">7g</td><td class="num">71g</td><td class="num">1g</td>
+            <td class="num"><button class="icon-btn">✕</button></td>
+          </tr>
+          <tr class="meal-head"><td colspan="7">Snack</td></tr>
+          <tr>
+            <td>Whey protein shake</td>
+            <td class="num">32g</td><td class="num">120</td><td class="num">24g</td><td class="num">3g</td><td class="num">2g</td>
+            <td class="num"><button class="icon-btn">✕</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="grid-hint" style="padding: 0 16px;">Dinner not logged yet.</div>
+    </div>
+
+    <div class="ozzie-note">
+      <span class="tag">Ozzie —</span>
+      <p>38g of protein to target. A recovery shake now beats chasing it at dinner — you lift in 3 hours.</p>
+    </div>
+  </main>
+</div>
+
+<div class="mock-divider">Mockup · Screen 2 — /nutrition/recipes/overnight-oats (Recipe builder)</div>
+
+<div class="app-shell">
+  <nav class="rail">
+    <div class="rail-brand"><span class="rail-logo">Osprey</span></div>
+    <div class="rail-links">
+      <a class="rail-link" href="#">Calendar</a>
+      <a class="rail-link" href="#">Log</a>
+      <a class="rail-link" href="#">History</a>
+      <a class="rail-link active" href="#">Nutrition</a>
+      <a class="rail-link" href="#">Settings</a>
+    </div>
+    <div class="rail-foot">
+      <div class="rail-user"><b>Gus J.</b>thunderbob34@gmail.com</div>
+      <button class="rail-signout">Sign out</button>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="page-head">
+      <div>
+        <div class="page-eyebrow">Nutrition · Recipes</div>
+        <h1 class="page-title">Overnight <span class="amber">Oats</span></h1>
+      </div>
+      <button class="btn ghost small">← All recipes</button>
+    </div>
+
+    <div class="builder-layout">
+      <div class="builder-main">
+        <div class="quick-add" style="margin-bottom:20px">
+          <div class="field grow">
+            <label>Recipe name</label>
+            <input value="Overnight Oats" />
+          </div>
+          <div class="field qty-field">
+            <label>Servings</label>
+            <input value="4" />
+          </div>
+        </div>
+
+        <div class="card" style="padding: 6px 0 14px;">
+          <table class="activity-table">
+            <thead>
+              <tr><th>Ingredient</th><th class="num">Qty (g)</th><th class="num">Kcal</th><th class="num">P</th><th class="num">C</th><th class="num">F</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rolled oats</td>
+                <td class="num">320</td><td class="num">1,216</td><td class="num">42g</td><td class="num">211g</td><td class="num">22g</td>
+                <td class="num"><button class="icon-btn">✕</button></td>
+              </tr>
+              <tr>
+                <td>Whole milk</td>
+                <td class="num">480</td><td class="num">293</td><td class="num">15g</td><td class="num">23g</td><td class="num">16g</td>
+                <td class="num"><button class="icon-btn">✕</button></td>
+              </tr>
+              <tr>
+                <td>Blueberries</td>
+                <td class="num">200</td><td class="num">114</td><td class="num">1g</td><td class="num">29g</td><td class="num">1g</td>
+                <td class="num"><button class="icon-btn">✕</button></td>
+              </tr>
+              <tr>
+                <td>Honey</td>
+                <td class="num">40</td><td class="num">122</td><td class="num">0g</td><td class="num">33g</td><td class="num">0g</td>
+                <td class="num"><button class="icon-btn">✕</button></td>
+              </tr>
+              <tr>
+                <td colspan="7" style="padding: 12px 16px;">
+                  <input placeholder="Search foods to add an ingredient…" style="width: 320px;" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <aside class="builder-aside">
+        <div class="per-serving">
+          <div class="days">436</div>
+          <div class="lab">kcal per serving · makes 4</div>
+          <div class="rows">
+            <div class="r"><span>Protein</span><span>14.5g</span></div>
+            <div class="r"><span>Carbs</span><span>74.0g</span></div>
+            <div class="r"><span>Fat</span><span>9.8g</span></div>
+          </div>
+          <div style="margin-top:16px; display:flex; gap:10px;">
+            <button class="btn small" style="flex:1">Log a serving</button>
+            <button class="btn ghost small">Save</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
