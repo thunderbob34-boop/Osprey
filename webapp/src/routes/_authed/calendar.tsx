@@ -20,13 +20,12 @@ const INTENSITY_COLOR: Record<string, string> = {
 
 function monthRange(anchor: Date): { fromISO: string; toISO: string; cells: Date[] } {
   const first = new Date(anchor.getFullYear(), anchor.getMonth(), 1);
-  const last = new Date(anchor.getFullYear(), anchor.getMonth() + 1, 0);
   const lead = (first.getDay() + 6) % 7; // Monday-first grid
   const start = new Date(first); start.setDate(first.getDate() - lead);
   const cells: Date[] = [];
   for (let i = 0; i < 42; i++) { const d = new Date(start); d.setDate(start.getDate() + i); cells.push(d); }
   const iso = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-  return { fromISO: iso(first), toISO: iso(last), cells };
+  return { fromISO: iso(cells[0]), toISO: iso(cells[41]), cells };
 }
 
 function daysUntil(dateISO: string): number {
@@ -187,6 +186,8 @@ function CalendarPage() {
                     >
                       Find a race near you
                     </a>
+                  ) : locationZip.isError ? (
+                    <p className="err-line">Couldn't check your saved zip code. Try reloading.</p>
                   ) : (
                     <p className="err-line">Set a zip code in Settings to search for races near you.</p>
                   )}

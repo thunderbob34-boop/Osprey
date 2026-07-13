@@ -14,6 +14,8 @@ function LocationCard({ userId }: { userId: string }) {
 
   useEffect(() => { if (zip.data) setDraft(zip.data); }, [zip.data]);
 
+  const isValidZip = /^\d{5}$/.test(draft.trim());
+
   return (
     <div className="card">
       <div className="settings-row">
@@ -29,7 +31,7 @@ function LocationCard({ userId }: { userId: string }) {
           <button
             className="btn"
             type="button"
-            disabled={update.isPending || draft.trim() === '' || draft === (zip.data ?? '')}
+            disabled={update.isPending || !isValidZip || draft === (zip.data ?? '')}
             onClick={() => update.mutate(draft.trim())}
           >
             {update.isPending ? 'Saving…' : 'Save'}

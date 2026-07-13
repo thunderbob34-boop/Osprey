@@ -16,14 +16,18 @@ export function AddRaceForm({ userId, defaultDate, onDone }: Props) {
 
   async function submit(e: FormEvent) {
     e.preventDefault();
-    await create.mutateAsync({
-      name,
-      eventDate,
-      distanceKm: distanceKm.trim() ? Number(distanceKm) : null,
-      raceUrl: raceUrl.trim() || null,
-      notes: null,
-    });
-    onDone();
+    try {
+      await create.mutateAsync({
+        name,
+        eventDate,
+        distanceKm: distanceKm.trim() ? Number(distanceKm) : null,
+        raceUrl: raceUrl.trim() || null,
+        notes: null,
+      });
+      onDone();
+    } catch {
+      // error state is already surfaced via create.isError below; nothing further to do
+    }
   }
 
   return (
