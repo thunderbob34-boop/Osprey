@@ -47,3 +47,44 @@ export const ExerciseSchema = z.object({
   equipment: z.string().nullable(), created_at: z.string(),
 });
 export type Exercise = z.infer<typeof ExerciseSchema>;
+
+export const MealTypeEnum = z.enum(['breakfast', 'lunch', 'dinner', 'snack']);
+export type MealType = z.infer<typeof MealTypeEnum>;
+
+export const FoodItemSchema = z.object({
+  id: z.string().uuid(), name: z.string(), brand: z.string().nullable(),
+  calories_per_100g: z.coerce.number().nullable(), protein_g: z.coerce.number().nullable(),
+  carbs_g: z.coerce.number().nullable(), fat_g: z.coerce.number().nullable(),
+  barcode: z.string().nullable(), source: z.string().nullable(), created_at: z.string(),
+});
+export type FoodItem = z.infer<typeof FoodItemSchema>;
+
+export const FoodLogEntrySchema = z.object({
+  id: z.string().uuid(), user_id: z.string().uuid(), food_item_id: z.string().uuid(),
+  logged_at: z.string(), meal_type: MealTypeEnum.nullable(),
+  quantity_g: z.coerce.number(), calories: z.coerce.number().nullable(),
+  protein_g: z.coerce.number().nullable(), carbs_g: z.coerce.number().nullable(),
+  fat_g: z.coerce.number().nullable(), created_at: z.string(),
+});
+export type FoodLogEntry = z.infer<typeof FoodLogEntrySchema>;
+
+export const NutritionTargetsSchema = z.object({
+  id: z.string().uuid(), user_id: z.string().uuid(),
+  calories: z.number().int().nullable(), protein_g: z.number().int().nullable(),
+  carbs_g: z.number().int().nullable(), fat_g: z.number().int().nullable(),
+  created_at: z.string(), updated_at: z.string(),
+});
+export type NutritionTargets = z.infer<typeof NutritionTargetsSchema>;
+
+export const RecipeSchema = z.object({
+  id: z.string().uuid(), user_id: z.string().uuid(), name: z.string(),
+  servings: z.number().int().positive(), shadow_food_item_id: z.string().uuid().nullable(),
+  created_at: z.string(), updated_at: z.string(),
+});
+export type Recipe = z.infer<typeof RecipeSchema>;
+
+export const RecipeIngredientSchema = z.object({
+  id: z.string().uuid(), recipe_id: z.string().uuid(), food_item_id: z.string().uuid(),
+  quantity_g: z.coerce.number(),
+});
+export type RecipeIngredient = z.infer<typeof RecipeIngredientSchema>;
