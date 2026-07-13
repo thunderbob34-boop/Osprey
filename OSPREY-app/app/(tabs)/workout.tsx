@@ -1,4 +1,5 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, SafeAreaView, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 import type { ComponentProps } from 'react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
@@ -6,6 +7,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colors } from '@/constants/colors';
+import { cardEntering } from '@/constants/motion';
+import PressableScale from '@/components/PressableScale';
 import { usePlanAdaptation } from '@/hooks/usePlanAdaptation';
 import { pickTrackingMode } from '@/utils/trackingModePicker';
 
@@ -131,13 +134,13 @@ export default function WorkoutTab() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.title}>Start a Workout</Text>
-        <Text style={styles.subtitle}>
+        <Animated.Text entering={cardEntering(0)} style={styles.title}>Start a Workout</Animated.Text>
+        <Animated.Text entering={cardEntering(1)} style={styles.subtitle}>
           GPS run, set-by-set lift, or timer-based endurance — everything saves to your training load.
-        </Text>
+        </Animated.Text>
 
         {showAlert && (
-          <View style={[styles.banner, { backgroundColor: bannerBg, borderColor: bannerBorder }]}>
+          <Animated.View entering={cardEntering(2)} style={[styles.banner, { backgroundColor: bannerBg, borderColor: bannerBorder }]}>
             <Text style={styles.bannerMessage}>{alert.message}</Text>
             <View style={styles.bannerActions}>
               <TouchableOpacity
@@ -157,12 +160,12 @@ export default function WorkoutTab() {
                 <Text style={styles.bannerDismissText}>✕</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </Animated.View>
         )}
 
-        {CARDS.map((card) => (
-          <TouchableOpacity
-            key={card.title}
+        {CARDS.map((card, index) => (
+          <Animated.View key={card.title} entering={cardEntering(2 + index)}>
+          <PressableScale
             style={[styles.card, { backgroundColor: card.surface, borderColor: card.border }]}
             onPress={() => {
               Haptics.selectionAsync().catch(() => undefined);
@@ -199,7 +202,8 @@ export default function WorkoutTab() {
               <Text style={styles.cardDesc}>{card.desc}</Text>
             </View>
             <Text style={styles.cardArrow}>→</Text>
-          </TouchableOpacity>
+          </PressableScale>
+          </Animated.View>
         ))}
       </ScrollView>
     </SafeAreaView>
