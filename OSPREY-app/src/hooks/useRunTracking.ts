@@ -57,12 +57,17 @@ export function useRunTracking(enabled: boolean) {
     if (!enabled || status !== 'active') return;
 
     let subscription: Location.LocationSubscription | null = null;
+    // watchPositionAsync is async; if this effect is torn down (fast unmount or
+    // status change) before it resolves, `subscription` is still null when the
+    // cleanup runs — leaving an orphaned watcher. Track cancellation and remove
+    // the watcher the moment it resolves if we're already gone.
+    let cancelled = false;
 
     (async () => {
       const { status: permission } = await Location.requestForegroundPermissionsAsync();
-      if (permission !== 'granted') return;
+      if (permission !== 'granted' || cancelled) return;
 
-      subscription = await Location.watchPositionAsync(
+      const sub = await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.BestForNavigation,
           distanceInterval: 5,
@@ -89,9 +94,15 @@ export function useRunTracking(enabled: boolean) {
           addTrackPoint(point);
         },
       );
+      if (cancelled) {
+        sub.remove();
+        return;
+      }
+      subscription = sub;
     })();
 
     return () => {
+      cancelled = true;
       subscription?.remove();
     };
   }, [enabled, status, addDistance, addTrackPoint]);

@@ -303,13 +303,30 @@ export default function LiftWorkoutScreen() {
     field: 'reps' | 'weightLbs',
     value: string,
   ) {
-    const numeric = Number(value.replace(/[^0-9.]/g, '')) || 0;
+    updateSetFields(exerciseIndex, setIndex, { [field]: value });
+  }
+
+  // Applies one or more field updates to a single set in a single pass. A voice
+  // log sets both weight and reps; chaining two updateSet() calls would each
+  // rebuild from the same render-scoped `liftExercises` snapshot, so the second
+  // clobbered the first (the weight update was silently lost).
+  function updateSetFields(
+    exerciseIndex: number,
+    setIndex: number,
+    fields: Partial<Record<'reps' | 'weightLbs', string>>,
+  ) {
+    const numericFields = Object.fromEntries(
+      Object.entries(fields).map(([field, value]) => [
+        field,
+        Number((value ?? '').replace(/[^0-9.]/g, '')) || 0,
+      ]),
+    );
     const updated = liftExercises.map((exercise, ei) => {
       if (ei !== exerciseIndex) return exercise;
       return {
         ...exercise,
         sets: exercise.sets.map((set, si) =>
-          si === setIndex ? { ...set, [field]: numeric } : set,
+          si === setIndex ? { ...set, ...numericFields } : set,
         ),
       };
     });
@@ -373,8 +390,10 @@ export default function LiftWorkoutScreen() {
       const exercise = liftExercises[exerciseIndex];
       const nextSetIndex = exercise.sets.findIndex((s) => !s.completed);
       const targetIndex = nextSetIndex === -1 ? exercise.sets.length - 1 : nextSetIndex;
-      if (weightLbs != null) updateSet(exerciseIndex, targetIndex, 'weightLbs', String(weightLbs));
-      if (reps != null) updateSet(exerciseIndex, targetIndex, 'reps', String(reps));
+      const fields: Partial<Record<'reps' | 'weightLbs', string>> = {};
+      if (weightLbs != null) fields.weightLbs = String(weightLbs);
+      if (reps != null) fields.reps = String(reps);
+      updateSetFields(exerciseIndex, targetIndex, fields);
     } catch (err) {
       Alert.alert('Voice log failed', err instanceof Error ? err.message : 'Try again.');
     } finally {

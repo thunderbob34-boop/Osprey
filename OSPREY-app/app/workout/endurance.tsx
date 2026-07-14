@@ -373,6 +373,7 @@ export default function EnduranceWorkoutScreen() {
         wodScore: crossActivity?.id === 'crossfit' && wodScore.trim() ? wodScore.trim() : null,
         floorsClimbed: crossActivity?.id === 'stairs' && floorsClimbed ? parseInt(floorsClimbed, 10) : null,
         elevationGainM: isOutsideHike ? computeElevationGainM(gpsTrackPoints) : null,
+        trackPoints: isGpsTracking ? gpsTrackPoints : [],
       });
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       if (isGpsTracking) resetGpsWorkout();
