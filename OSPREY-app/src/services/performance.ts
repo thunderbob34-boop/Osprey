@@ -279,6 +279,10 @@ export async function fetchPerformanceData(
   for (let i = 0; i < days; i++) {
     const d = new Date(since);
     d.setDate(d.getDate() + i);
+    // Intentionally UTC: tssMap is keyed off `row.started_at.slice(0,10)` (also
+    // UTC), so both sides of this join must use the same basis. Localizing only
+    // this line would zero out every day. Keep them symmetric.
+    // eslint-disable-next-line no-restricted-syntax
     const dateStr = d.toISOString().slice(0, 10);
     dailyLoads.push({ date: dateStr, tss: tssMap[dateStr] ?? 0 });
   }

@@ -19,6 +19,7 @@ function days(tssValues: number[]): DailyLoad[] {
   return tssValues.map((tss, i) => {
     const d = new Date(start);
     d.setUTCDate(d.getUTCDate() + i);
+    // eslint-disable-next-line no-restricted-syntax -- mirrors performance.ts's intentional UTC day keying
     return { date: d.toISOString().slice(0, 10), tss };
   });
 }

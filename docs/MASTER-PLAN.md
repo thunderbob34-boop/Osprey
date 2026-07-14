@@ -193,21 +193,21 @@ The full branch-by-branch table, verification status, and harvest list live in [
 - [ ] Friend-request consent bypass (requester can self-accept).
 - [ ] `get_challenge_leaderboard` leaks member roster to non-members.
 - [ ] Subscription **fails open** (grants free Plus) off-iOS — needs product decision.
-- [ ] 8 edge functions leak raw `err.message` / Postgres internals in 500s.
+- [x] 8 edge functions leak raw `err.message` / Postgres internals in 500s. **Fixed** `7acdca2` (6 fns → generic message + server log). *Needs `supabase functions deploy`.*
 
 **Correctness / crash:**
 - [x] Home crash on multi-session days — `.maybeSingle()` on 2+ rows (`daily-summary.ts`). **Fixed** `fb80acb` (order + limit 1).
-- [ ] Voice-logging drops set weight → corrupts PR history (`lift.tsx`).
-- [ ] Endurance GPS tracks never persisted (`saveEnduranceWorkout`).
+- [x] Voice-logging drops set weight → corrupts PR history (`lift.tsx`). **Fixed** `caf6b3c` (`updateSetFields` single-pass).
+- [x] Endurance GPS tracks never persisted (`saveEnduranceWorkout`). **Fixed** `caf6b3c` (trackPoints param + `activity_logs` insert).
 - [x] "Start Session" mis-routes swim/bike/rowing/cross/hyrox to the GPS run screen (`app/(tabs)/index.tsx`). **Fixed** `fb80acb` (per-sport switch mirroring Workout tab).
-- [ ] GPS watcher leak on fast unmount.
+- [x] GPS watcher leak on fast unmount. **Fixed** `caf6b3c` (cancellation flag in `useRunTracking`).
 - [x] UTC-vs-local "today" — **Fixed** `fb80acb`: added tested `src/utils/date.ts` `localDateString()`, applied in `daily-summary.ts`. `calendar.ts` stray-day leak **Fixed** in follow-up (tested `clampDaysToMonth`).
-- [ ] `ozzie-generate-plan` idempotency race (no unique constraint on one-active-plan-per-week).
+- [~] `ozzie-generate-plan` idempotency race. **Partially fixed** `79e676f`: the `.maybeSingle()` crash on duplicate weeks is resolved (order+limit). **Open decision:** the TOCTOU race still needs a DB unique constraint + violation recovery — is the invariant *one active plan per user*, or can a user train for two races at once? Decide before adding the constraint.
 - [ ] Race-plan branch hardcodes `intermediate`/4-run/1-lift, ignores athlete profile.
 - [ ] `toggleKudo` non-atomic race; activity-feed fallback query unscoped; `useSubscription` doesn't propagate refresh.
 
 **UX:**
-- [ ] Onboarding progress bar never reaches 100% (`totalSteps` 5 vs 4 real steps) — *re-found despite 2 prior "fixes."*
+- [x] Onboarding progress bar never reaches 100% — **Fixed** `caf6b3c` (`totalSteps` 5→4 across the 5 screens).
 - [x] Paywall shows annual price as "/mo" — **App Store risk.** **Fixed** `fb80acb`: suffix/label now derived from the package's real billing period. *(Follow-up available: paywall loading/error state.)*
 - [ ] Day-picker touch targets <44px; broader units-display sweep (~14 files still hardcode miles/lbs).
 
@@ -240,7 +240,7 @@ are symmetric — needs a coordinated change + test update) and `body-metrics.ts
 deploy ozzie-nutrition-coach` — both must ship together with the app build (the client now passes params the
 old DB/function don't expect; the edge fn is back-compat, the RPC is not until the migration applies).
 
-**Still worth doing:** a lint rule banning `new Date().toISOString().slice(0,10)` to prevent regressions.
+**Lint rule added** (`no-restricted-syntax` in `.eslintrc.js`, commit in this batch): bans `x.toISOString().slice()` for calendar days → points to `localDateString()`/`parseLocalDate()`. `performance.ts` keeps an intentional UTC-symmetric keying via a justified `eslint-disable`.
 
 ### 3E. 🟢 Later / deferred (post-launch)
 

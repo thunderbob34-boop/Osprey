@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { localDateString } from '@/utils/date';
 
 const LB_PER_KG = 2.2046226218;
 
@@ -56,7 +57,7 @@ export async function logWeight(
  * ~7-day average vs. the prior window, expressed as kg/week.
  */
 export async function fetchWeightSummary(userId: string): Promise<WeightSummary> {
-  const twentyEightDaysAgo = new Date(Date.now() - 28 * 86400000).toISOString().slice(0, 10);
+  const twentyEightDaysAgo = localDateString(new Date(Date.now() - 28 * 86400000));
 
   const { data, error } = await supabase
     .from('body_metrics')
@@ -110,7 +111,7 @@ export async function fetchWeightSummary(userId: string): Promise<WeightSummary>
 
 /** Raw weigh-ins (oldest → newest) over the last `days`, for charting progress. */
 export async function fetchWeightHistory(userId: string, days = 90): Promise<WeightHistoryPoint[]> {
-  const since = new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
+  const since = localDateString(new Date(Date.now() - days * 86400000));
 
   const { data, error } = await supabase
     .from('body_metrics')
