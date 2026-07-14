@@ -8,7 +8,7 @@ describe('envelopeFromInputs', () => {
     const env = envelopeFromInputs({
       sport: 'run', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
       baselineLoad: 0, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
-      rowingSplitSecPer500: null,
+      rowingSplitSecPer500: null, selfReportAnchor: null,
     });
     expect(env.phase).toBe('Base');
     expect(env.zones).not.toBeNull(); // estimate anchor still yields zones
@@ -28,6 +28,7 @@ describe('envelopeFromInputs', () => {
       bestRunMiles: null,
       bestRunTimeS: null,
       rowingSplitSecPer500: null,
+      selfReportAnchor: null,
     }, now);
 
     expect(env.phase).toBe('Taper');
@@ -40,7 +41,7 @@ describe('envelopeFromInputs', () => {
     const env = envelopeFromInputs({
       sport: 'rowing', race: null, fitnessLevel: 'intermediate', bodyWeightKg: 80,
       baselineLoad: 200, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
-      rowingSplitSecPer500: 118,
+      rowingSplitSecPer500: 118, selfReportAnchor: null,
     });
     expect(env.zones?.kind).toBe('rowing');
     // Pin the actual value, not just the zone kind: the 'intermediate' tier fallback is
@@ -49,5 +50,15 @@ describe('envelopeFromInputs', () => {
     if (env.zones?.kind === 'rowing') {
       expect(env.zones.splitSecPer500).toBe(118);
     }
+  });
+
+  it('threads a self-reported swim CSS into the envelope', () => {
+    const env = envelopeFromInputs({
+      sport: 'swim', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
+      baselineLoad: 200, prevWeekLoad: null,
+      bestRunMiles: null, bestRunTimeS: null, rowingSplitSecPer500: null,
+      selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 90, splitSecPer500: null },
+    });
+    expect(env.zones).toMatchObject({ kind: 'swim', cssSecPer100: 90 });
   });
 });

@@ -2,6 +2,7 @@ import { supabase } from '@/services/supabase';
 import { computeRacePhase, RaceGoal } from '@/services/plan';
 import { computeEnvelope, CoachingEnvelope } from './envelope';
 import { selectBestRunEffort, selectBestRowingSplit } from './anchor';
+import { toSelfReportAnchor, type SelfReportAnchor, type ThresholdAnchorMap } from './baseline';
 
 const MILES_PER_KM = 0.621371;
 const RECENT_WINDOW_MS = 56 * 24 * 60 * 60 * 1000; // 8 weeks
@@ -16,6 +17,7 @@ interface EnvelopeInputs {
   bestRunMiles: number | null;
   bestRunTimeS: number | null;
   rowingSplitSecPer500: number | null;
+  selfReportAnchor: SelfReportAnchor | null;
 }
 
 // Pure: inputs → envelope. No-race plans run a Base maintenance macrocycle.
@@ -38,6 +40,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     fitnessLevel: i.fitnessLevel,
     bodyWeightKg: i.bodyWeightKg,
     rowingSplitSecPer500: i.rowingSplitSecPer500,
+    selfReportAnchor: i.selfReportAnchor,
   });
 }
 
@@ -49,12 +52,12 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
   let inputs: EnvelopeInputs = {
     sport: 'run', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
     baselineLoad: 200, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
-    rowingSplitSecPer500: null,
+    rowingSplitSecPer500: null, selfReportAnchor: null,
   };
 
   if (userId) {
     const [goalsRes, weightRes, runsRes, rowsRes] = await Promise.all([
-      supabase.from('user_goals').select('primary_goal, fitness_level, target_date, total_weeks_planned').eq('user_id', userId).maybeSingle(),
+      supabase.from('user_goals').select('primary_goal, fitness_level, target_date, total_weeks_planned, threshold_anchor').eq('user_id', userId).maybeSingle(),
       supabase.from('body_metrics').select('weight_kg').eq('user_id', userId).order('recorded_on', { ascending: false }).limit(1).maybeSingle(),
       // Recent runs (not the single longest all-time), so the anchor can pick the
       // best-QUALITY effort rather than the slowest long run — see selectBestRunEffort.
@@ -90,6 +93,7 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       bestRunMiles: bestEffort?.distanceMiles ?? null,
       bestRunTimeS: bestEffort?.timeS ?? null,
       rowingSplitSecPer500: rowingSplit,
+      selfReportAnchor: toSelfReportAnchor(g?.threshold_anchor as ThresholdAnchorMap | null),
     };
   }
 
