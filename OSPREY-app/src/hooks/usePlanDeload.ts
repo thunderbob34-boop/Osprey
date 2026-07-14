@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuthStore } from '@/store/authStore';
+import { localDateString } from '@/utils/date';
 import { usePerformance } from '@/hooks/usePerformance';
 import { computeAcwrTrend } from '@/services/performance';
 import {
@@ -72,7 +73,7 @@ export function usePlanDeload() {
     // A planned taper/peak already is a de-load — don't stack another one on top.
     if (phase?.phase === 'Taper' || phase?.phase === 'Peak') return null;
 
-    const today = new Date().toISOString().slice(0, 10);
+    const today = localDateString();
     const upcoming = sessions.filter((s) => s.session_date >= today && s.session_type !== 'rest');
     const candidate = upcoming.find((s) => HARD_INTENSITIES.has(s.intensity)) ?? upcoming[0];
     if (!candidate) return null;

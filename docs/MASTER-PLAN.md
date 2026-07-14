@@ -225,10 +225,22 @@ New UTC-vs-local "today" bugs keep appearing in different files (`currentWeekSta
 `ozzie-nutrition-coach`, `daily-summary`, `calendar`, `computeRacePhase`). **The real fix is a repo-wide
 date-handling convention + lint rule**, not another one-off patch.
 
-**Convention now established:** `src/utils/date.ts` `localDateString()` is the local-day helper — `daily-summary`
-and `calendar` are converted. Remaining offenders to migrate: `currentWeekStartDate`, `log_hydration`,
-`ozzie-nutrition-coach`, `computeRacePhase`. A lint rule banning `new Date().toISOString().slice(0,10)` would
-prevent regressions.
+**Convention established + offenders migrated (2026-07-13).** `src/utils/date.ts` provides `localDateString()`
+(local day) and `parseLocalDate()` (local-midnight parse of `YYYY-MM-DD`). Jest is pinned to `TZ=Asia/Kolkata`
+(positive offset) so local-day regressions actually fail. Migrated: `plan.ts` (`currentWeekStartDate`,
+`computeRacePhase` — TDD), `daily-summary`, `calendar`, `hydration` (read), `races`, `usePlanDeload`,
+`weather-context`, `healthkit`, `stats`, and — server-side — `log_hydration` (new migration
+`20260713000003`, client now passes its local day) and `ozzie-nutrition-coach` (client passes `clientDate` +
+`dayStartUtc`; edge fn falls back to UTC if absent).
+
+**Deliberately left** (internally-consistent, risk > reward): `performance.ts` daily-load series (keys + fill
+are symmetric — needs a coordinated change + test update) and `body-metrics.ts` rolling N-day cutoffs (benign).
+
+**⚠️ Deploy steps** (go-live): `supabase db push` the new `log_hydration` migration, and `supabase functions
+deploy ozzie-nutrition-coach` — both must ship together with the app build (the client now passes params the
+old DB/function don't expect; the edge fn is back-compat, the RPC is not until the migration applies).
+
+**Still worth doing:** a lint rule banning `new Date().toISOString().slice(0,10)` to prevent regressions.
 
 ### 3E. 🟢 Later / deferred (post-launch)
 

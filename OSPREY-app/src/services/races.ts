@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { localDateString } from '@/utils/date';
 
 export interface ChecklistItem {
   id: string;
@@ -136,7 +137,7 @@ const SELECT_COLS =
 
 /** Upcoming + today's races, soonest first. */
 export async function fetchUpcomingRaces(userId: string): Promise<RaceEvent[]> {
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateString();
   const { data, error } = await supabase
     .from('race_events')
     .select(SELECT_COLS)
@@ -151,7 +152,7 @@ export async function fetchUpcomingRaces(userId: string): Promise<RaceEvent[]> {
 
 /** Past races (results), most recent first. */
 export async function fetchPastRaces(userId: string): Promise<RaceEvent[]> {
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = localDateString();
   const { data, error } = await supabase
     .from('race_events')
     .select(SELECT_COLS)

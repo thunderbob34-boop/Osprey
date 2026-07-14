@@ -8,6 +8,7 @@ import type {
   HKWorkoutQueriedSampleType,
 } from 'react-native-health';
 import { supabase } from '@/services/supabase';
+import { localDateString } from '@/utils/date';
 
 const PERMISSIONS: HealthKitPermissions = {
   permissions: {
@@ -70,7 +71,7 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
   if (!isHealthKitSupported() || !initialized) return false;
 
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateString();
 
   const [hrvSamples, restingHrSamples, sleepSamples] = await Promise.all([
     fetchSamples(AppleHealthKit.getHeartRateVariabilitySamples, {

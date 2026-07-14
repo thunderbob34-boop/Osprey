@@ -1,5 +1,6 @@
 import { supabase } from '@/services/supabase';
 import { invalidateTodayDailyBrief } from '@/services/daily-summary';
+import { localDateString, parseLocalDate } from '@/utils/date';
 import type { IntervalPrescription, LiftPrescription } from '@/types/workout';
 
 export type SwappableSessionType = 'run' | 'lift' | 'cross' | 'rest';
@@ -41,12 +42,14 @@ export interface RacePhaseInfo {
  * Standard endurance periodization split by percentage of the full plan:
  * Base 0-40%, Build 40-75%, Peak 75-90%, Taper 90-100%.
  */
-export function computeRacePhase(goal: RaceGoal): RacePhaseInfo | null {
+export function computeRacePhase(goal: RaceGoal, now: Date = new Date()): RacePhaseInfo | null {
   if (!goal.targetDate || !goal.totalWeeksPlanned) return null;
 
-  const today = new Date();
+  const today = new Date(now);
   today.setHours(0, 0, 0, 0);
-  const raceDate = new Date(goal.targetDate);
+  // Parse the target date at LOCAL midnight so it matches `today` — `new Date(str)`
+  // would parse YYYY-MM-DD as UTC and flip phase boundaries in offset zones.
+  const raceDate = parseLocalDate(goal.targetDate);
   if (isNaN(raceDate.getTime())) return null;
 
   const msPerWeek = 7 * 24 * 60 * 60 * 1000;
@@ -88,14 +91,13 @@ function isValidIntervalPrescription(value: unknown): value is IntervalPrescript
 }
 
 /** Monday-start date (YYYY-MM-DD) of the current calendar week. */
-export function currentWeekStartDate(): string {
-  const now = new Date();
+export function currentWeekStartDate(now: Date = new Date()): string {
   const day = now.getDay();
   const diff = day === 0 ? -6 : 1 - day;
   const monday = new Date(now);
   monday.setHours(0, 0, 0, 0);
   monday.setDate(now.getDate() + diff);
-  return monday.toISOString().slice(0, 10);
+  return localDateString(monday);
 }
 
 /** The active plan's current week (Monday-start), sessions in date order. */

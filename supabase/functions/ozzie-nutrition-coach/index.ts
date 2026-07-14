@@ -198,11 +198,9 @@ function computeTarget(
 async function buildContext(
   supabase: ReturnType<typeof createClient>,
   userId: string,
+  today: string,
+  todayStart: Date,
 ): Promise<NutritionContext> {
-  const today = new Date().toISOString().slice(0, 10);
-  const todayStart = new Date();
-  todayStart.setHours(0, 0, 0, 0);
-
   const twentyEightDaysAgo = new Date(Date.now() - 28 * 86400000).toISOString().slice(0, 10);
 
   const [userRes, goalsRes, sessionRes, foodRes, weightRes] = await Promise.all([
@@ -308,11 +306,32 @@ Deno.serve(async (req: Request) => {
   }
 
   const userId = authData.user.id;
-  const todayStart = new Date();
+
+  // "Today" must mean the USER's local day, not the edge runtime's UTC day, or
+  // targets/tips/session lookups flip hours before the user's actual midnight.
+  // The client passes its local day; fall back to UTC if the body is absent.
+  let clientToday: string | undefined;
+  let clientDayStartUtc: string | undefined;
+  try {
+    const body = await req.json();
+    if (body && typeof body === 'object') {
+      if (typeof body.clientDate === 'string') clientToday = body.clientDate;
+      if (typeof body.dayStartUtc === 'string') clientDayStartUtc = body.dayStartUtc;
+    }
+  } catch {
+    // No/invalid JSON body — fall back to UTC below.
+  }
+
+  const today = clientToday ?? new Date().toISOString().slice(0, 10);
+  let todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
+  if (clientDayStartUtc) {
+    const parsed = new Date(clientDayStartUtc);
+    if (!isNaN(parsed.getTime())) todayStart = parsed;
+  }
 
   try {
-    const context = await buildContext(supabase, userId);
+    const context = await buildContext(supabase, userId, today, todayStart);
 
     const { data: existingTarget } = await supabase
       .from('nutrition_targets')

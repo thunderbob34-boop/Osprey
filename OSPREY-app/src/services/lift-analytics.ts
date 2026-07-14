@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { localDateString } from '@/utils/date';
 
 interface RawSetRow {
   reps: number | null;
@@ -46,7 +47,7 @@ function mondayStart(d: Date): string {
   const diff = day === 0 ? -6 : 1 - day;
   date.setDate(date.getDate() + diff);
   date.setHours(0, 0, 0, 0);
-  return date.toISOString().slice(0, 10);
+  return localDateString(date);
 }
 
 export async function fetchLiftAnalytics(userId: string, weeksBack = 8): Promise<LiftAnalytics> {

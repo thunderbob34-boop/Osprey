@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { localDateString } from '@/utils/date';
 
 export interface NutritionMacros {
   calories: number;
@@ -49,13 +50,21 @@ export async function fetchFuelStatus(userId: string): Promise<FuelStatus> {
 }
 
 export async function fetchNutritionCoaching(userId: string): Promise<NutritionCoaching> {
+  // Tell the edge function the user's local day + local-midnight instant so
+  // "today" means the athlete's calendar day, not the runtime's UTC day.
+  const dayStart = new Date();
+  dayStart.setHours(0, 0, 0, 0);
+
   const { data, error } = await supabase.functions.invoke<{
     target: NutritionMacros;
     loggedToday: NutritionMacros;
     tip: string;
     dayType?: 'training' | 'rest';
     todaySessionType?: string | null;
-  }>('ozzie-nutrition-coach', { method: 'POST' });
+  }>('ozzie-nutrition-coach', {
+    method: 'POST',
+    body: { clientDate: localDateString(), dayStartUtc: dayStart.toISOString() },
+  });
 
   if (error || !data) {
     throw error ?? new Error('Failed to load nutrition coaching');

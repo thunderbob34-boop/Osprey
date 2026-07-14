@@ -4,11 +4,12 @@
 // never needs the user's location or a weather API key.
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { localDateString } from '@/utils/date';
 
 const WEATHER_CONTEXT_KEY = 'osprey:weather-context';
 
 export async function setCachedWeatherBriefSummary(summary: string): Promise<void> {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateString();
   await AsyncStorage.setItem(
     WEATHER_CONTEXT_KEY,
     JSON.stringify({ date: today, summary }),
@@ -21,7 +22,7 @@ export async function getCachedWeatherBriefSummary(): Promise<string | null> {
     const raw = await AsyncStorage.getItem(WEATHER_CONTEXT_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as { date?: string; summary?: string };
-    const today = new Date().toISOString().slice(0, 10);
+    const today = localDateString();
     return parsed.date === today && parsed.summary ? parsed.summary : null;
   } catch {
     return null;

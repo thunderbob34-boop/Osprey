@@ -1,5 +1,6 @@
 import { format, startOfWeek, subWeeks } from 'date-fns';
 import { supabase } from '@/services/supabase';
+import { localDateString } from '@/utils/date';
 import type {
   RecentWorkoutRow,
   SportPeriodTotal,
@@ -50,12 +51,12 @@ export async function fetchStats(userId: string): Promise<StatsData> {
   const weeklySportBuckets = new Map<string, Partial<Record<SportType, { hours: number; km: number }>>>();
   for (let i = 0; i < WEEKS_BACK; i += 1) {
     const weekStart = startOfWeek(subWeeks(now, WEEKS_BACK - 1 - i), { weekStartsOn: 1 });
-    weeklySportBuckets.set(weekStart.toISOString().slice(0, 10), {});
+    weeklySportBuckets.set(localDateString(weekStart), {});
   }
 
   for (const row of rows) {
     const weekStart = startOfWeek(new Date(row.started_at), { weekStartsOn: 1 });
-    const key = weekStart.toISOString().slice(0, 10);
+    const key = localDateString(weekStart);
     const bucket = weeklySportBuckets.get(key);
     if (!bucket) continue;
 

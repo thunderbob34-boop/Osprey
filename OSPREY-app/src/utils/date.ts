@@ -15,3 +15,15 @@ export function localDateString(date: Date = new Date()): string {
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
+
+/**
+ * Parse a `YYYY-MM-DD` string to LOCAL midnight of that calendar day.
+ *
+ * `new Date('2026-07-13')` parses as UTC midnight, which becomes the previous
+ * evening in positive-offset zones — mixing it with a local "today" flips
+ * day/phase boundaries. This builds the date from local components instead.
+ */
+export function parseLocalDate(dateStr: string): Date {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
