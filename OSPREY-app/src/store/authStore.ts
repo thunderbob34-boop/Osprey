@@ -4,6 +4,7 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import { makeRedirectUri } from 'expo-auth-session';
 import { supabase } from '@/services/supabase';
 import { clearOfflineCache } from '@/services/offline-cache';
+import { resetRevenueCat } from '@/services/subscriptions';
 
 // WebBrowser is optional — only available in native builds
 let WebBrowser: any = null;
@@ -269,6 +270,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   signOut: async () => {
     await supabase.auth.signOut();
+    await resetRevenueCat();
     await clearOfflineCache();
     set({
       session: null,
@@ -298,6 +300,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
       // The auth user no longer exists, so signOut may 4xx — clean up locally.
       await supabase.auth.signOut().catch(() => undefined);
+      await resetRevenueCat();
       await clearOfflineCache();
       set({
         session: null,

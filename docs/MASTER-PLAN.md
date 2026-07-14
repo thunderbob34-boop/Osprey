@@ -192,7 +192,7 @@ The full branch-by-branch table, verification status, and harvest list live in [
 - [ ] IDOR in 4 social `SECURITY DEFINER` RPCs (trusts client `p_user_id`). *The perennial finding.*
 - [ ] Friend-request consent bypass (requester can self-accept).
 - [ ] `get_challenge_leaderboard` leaks member roster to non-members.
-- [ ] Subscription **fails open** (grants free Plus) off-iOS — needs product decision.
+- [x] Subscription **fails open** (grants free Plus) off-iOS. **Fixed** in `subscriptions.ts`: fail closed in real builds, open only in `__DEV__`. Same change also fixes an init race (checks now `waitForInit()` before reading `configured`) and the RevenueCat identity leaking across account switches (`resetRevenueCat()` wired into sign-out + delete-account).
 - [x] 8 edge functions leak raw `err.message` / Postgres internals in 500s. **Fixed** `7acdca2` (6 fns → generic message + server log). *Needs `supabase functions deploy`.*
 
 **Correctness / crash:**
