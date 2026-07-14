@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
 import { ExerciseSchema, ExerciseSetSchema, TrainingSessionSchema, WorkoutLogSchema, type WorkoutLog } from '../../lib/schemas';
+import { toDateInputValue } from '../../lib/day';
 
 export function useCreateWorkout(userId: string) {
   return useMutation({
@@ -101,7 +102,7 @@ export function useWeekSessions(userId: string) {
   const day = (now.getDay() + 6) % 7; // Monday=0
   const monday = new Date(now); monday.setDate(now.getDate() - day);
   const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
-  const iso = (d: Date) => d.toISOString().slice(0, 10);
+  const iso = toDateInputValue;
   return useQuery({
     queryKey: ['weekSessions', userId, iso(monday)],
     queryFn: async () => {

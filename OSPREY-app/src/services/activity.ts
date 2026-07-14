@@ -61,6 +61,21 @@ export async function fetchActivityFeed(userId: string, limit = 50): Promise<Act
 
 /** Fallback: fetch recent shares + joins without RPC. Slower but works. */
 async function fetchActivityFeedSimple(userId: string, limit: number): Promise<ActivityCard[]> {
+  // Relying on RLS alone here previously meant a permissive `activity_shares`
+  // policy would leak every user's shares through this fallback path — scope
+  // explicitly to the caller + their accepted friends, matching what
+  // get_activity_feed does server-side.
+  const { data: friendRows } = await supabase
+    .from('friendships')
+    .select('requester_id, addressee_id')
+    .eq('status', 'accepted')
+    .or(`requester_id.eq.${userId},addressee_id.eq.${userId}`);
+
+  const friendIds = new Set<string>([userId]);
+  for (const row of friendRows ?? []) {
+    friendIds.add(row.requester_id === userId ? row.addressee_id : row.requester_id);
+  }
+
   const { data: shares, error } = await supabase
     .from('activity_shares')
     .select(
@@ -75,6 +90,7 @@ async function fetchActivityFeedSimple(userId: string, limit: number): Promise<A
     `,
     )
     .is('deleted_at', null)
+    .in('user_id', Array.from(friendIds))
     .order('created_at', { ascending: false })
     .limit(limit);
 
@@ -130,9 +146,17 @@ export async function shareWorkout(
   return data.id;
 }
 
-/** Give or remove a kudo on a shared workout. Returns true if kudo was added, false if removed. */
+const POSTGRES_UNIQUE_VIOLATION = '23505';
+
+/** Give or remove a kudo on a shared workout. Returns true if kudo was added, false if removed.
+ *
+ * The read-then-write below is inherently racy under a rapid double-tap (both
+ * reads can see "no kudo yet"), so both branches tolerate the DB's UNIQUE
+ * (share_id, from_user) constraint firing instead of surfacing it as an error:
+ * a losing INSERT is treated as "kudo already given" (true), and a losing
+ * DELETE (0 rows affected) is simply a no-op.
+ */
 export async function toggleKudo(shareId: string, userId: string): Promise<boolean> {
-  // Check if already has kudo.
   const { data: existing } = await supabase
     .from('kudos')
     .select('id')
@@ -141,7 +165,6 @@ export async function toggleKudo(shareId: string, userId: string): Promise<boole
     .maybeSingle();
 
   if (existing) {
-    // Remove kudo.
     const { error } = await supabase
       .from('kudos')
       .delete()
@@ -151,11 +174,13 @@ export async function toggleKudo(shareId: string, userId: string): Promise<boole
     return false;
   }
 
-  // Add kudo.
   const { error } = await supabase
     .from('kudos')
     .insert({ share_id: shareId, from_user: userId });
-  if (error) throw error;
+  if (error) {
+    if (error.code === POSTGRES_UNIQUE_VIOLATION) return true;
+    throw error;
+  }
   return true;
 }
 

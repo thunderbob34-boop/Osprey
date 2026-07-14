@@ -1,6 +1,7 @@
 @import './tokens.css';
 @import './app.css';
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap');
+@import '@fontsource/space-grotesk/500.css';
+@import '@fontsource/space-grotesk/700.css';
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {

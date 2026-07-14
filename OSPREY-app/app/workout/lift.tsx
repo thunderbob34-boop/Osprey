@@ -51,6 +51,7 @@ export default function LiftWorkoutScreen() {
   const restSecondsLeft = useWorkoutStore((s) => s.restSecondsLeft);
   const startWorkout = useWorkoutStore((s) => s.startWorkout);
   const setLiftExercises = useWorkoutStore((s) => s.setLiftExercises);
+  const updateLiftSet = useWorkoutStore((s) => s.updateLiftSet);
   const logLiftSet = useWorkoutStore((s) => s.logLiftSet);
   const addLiftSet = useWorkoutStore((s) => s.addLiftSet);
   const startRestTimer = useWorkoutStore((s) => s.startRestTimer);
@@ -304,16 +305,7 @@ export default function LiftWorkoutScreen() {
     value: string,
   ) {
     const numeric = Number(value.replace(/[^0-9.]/g, '')) || 0;
-    const updated = liftExercises.map((exercise, ei) => {
-      if (ei !== exerciseIndex) return exercise;
-      return {
-        ...exercise,
-        sets: exercise.sets.map((set, si) =>
-          si === setIndex ? { ...set, [field]: numeric } : set,
-        ),
-      };
-    });
-    setLiftExercises(updated);
+    updateLiftSet(exerciseIndex, setIndex, field, numeric);
   }
 
   async function completeSet(exerciseIndex: number, setIndex: number) {

@@ -149,7 +149,8 @@ serve(async (req) => {
       },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: String(err) }), {
+    console.error('ozzie-race-retro error:', err);
+    return new Response(JSON.stringify({ error: 'Failed to generate race retro. Please try again.' }), {
       status: 500,
       headers: {
         'Content-Type': 'application/json',

@@ -103,14 +103,27 @@ export default function PaywallScreen() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [purchasing, setPurchasing] = useState(false);
   const [restoring, setRestoring] = useState(false);
+  const [offeringsStatus, setOfferingsStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
+  const [loadAttempt, setLoadAttempt] = useState(0);
 
   useEffect(() => {
-    getOfferings().then((o) => {
-      const pkgs = o?.current?.availablePackages ?? [];
-      setPackages(pkgs);
-      setSelectedId(pkgs[0]?.identifier ?? null);
-    }).catch(() => undefined);
-  }, []);
+    let cancelled = false;
+    setOfferingsStatus('loading');
+    getOfferings()
+      .then((o) => {
+        if (cancelled) return;
+        const pkgs = o?.current?.availablePackages ?? [];
+        setPackages(pkgs);
+        setSelectedId(pkgs[0]?.identifier ?? null);
+        setOfferingsStatus(pkgs.length > 0 ? 'loaded' : 'error');
+      })
+      .catch(() => {
+        if (!cancelled) setOfferingsStatus('error');
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [loadAttempt]);
 
   const selectedPackage = packages.find((p) => p.identifier === selectedId) ?? packages[0];
   const priceString = selectedPackage?.product.priceString ?? null;
@@ -223,13 +236,36 @@ export default function PaywallScreen() {
           </View>
         ) : null}
 
+        {offeringsStatus === 'loading' ? (
+          <View style={styles.offeringsStatusRow} accessibilityLabel="Loading pricing" accessibilityRole="progressbar">
+            <ActivityIndicator color={Colors.teal} />
+            <Text style={styles.offeringsStatusText}>Loading pricing…</Text>
+          </View>
+        ) : offeringsStatus === 'error' ? (
+          <View style={styles.offeringsStatusRow}>
+            <Text style={styles.offeringsErrorText}>
+              Couldn't load pricing. Check your connection and try again.
+            </Text>
+            <TouchableOpacity
+              onPress={() => setLoadAttempt((n) => n + 1)}
+              accessibilityRole="button"
+              accessibilityLabel="Retry loading pricing"
+            >
+              <Text style={styles.offeringsRetryText}>Retry</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+
         <TouchableOpacity
-          style={[styles.subscribeBtn, purchasing && styles.subscribeBtnLoading]}
+          style={[
+            styles.subscribeBtn,
+            (purchasing || offeringsStatus !== 'loaded') && styles.subscribeBtnLoading,
+          ]}
           onPress={handleSubscribe}
-          disabled={purchasing || restoring}
+          disabled={purchasing || restoring || offeringsStatus !== 'loaded'}
           accessibilityRole="button"
           accessibilityLabel={priceString ? `Start for ${priceString} ${pricePeriodLabel}`.trim() : 'Subscribe to OSPREY+'}
-          accessibilityState={{ disabled: purchasing || restoring, busy: purchasing }}
+          accessibilityState={{ disabled: purchasing || restoring || offeringsStatus !== 'loaded', busy: purchasing }}
         >
           {purchasing ? (
             <ActivityIndicator color="#000" />
@@ -338,6 +374,16 @@ const styles = StyleSheet.create({
   packageChipLabelActive: { color: Colors.teal },
   packageChipPrice: { fontSize: 12, color: Colors.textMuted, fontWeight: '600' },
   packageChipPriceActive: { color: Colors.teal },
+  offeringsStatusRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    marginBottom: 14,
+  },
+  offeringsStatusText: { color: Colors.textMuted, fontSize: 13, fontWeight: '600' },
+  offeringsErrorText: { color: Colors.textSecondary, fontSize: 13, fontWeight: '600', flexShrink: 1 },
+  offeringsRetryText: { color: Colors.teal, fontSize: 13, fontWeight: '800' },
   subscribeBtn: {
     backgroundColor: Colors.teal,
     borderRadius: 14,

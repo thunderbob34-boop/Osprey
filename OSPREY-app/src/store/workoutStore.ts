@@ -21,6 +21,7 @@ interface WorkoutState {
   addTrackPoint: (point: TrackPoint) => void;
   setHeartRate: (hr: number | null) => void;
   setLiftExercises: (exercises: LiftExercise[]) => void;
+  updateLiftSet: (exerciseIndex: number, setIndex: number, field: 'reps' | 'weightLbs', value: number) => void;
   logLiftSet: (exerciseIndex: number, setIndex: number) => void;
   addLiftSet: (exerciseIndex: number) => void;
   startRestTimer: (seconds: number) => void;
@@ -84,6 +85,23 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
   setHeartRate: (heartRate) => set({ heartRate }),
 
   setLiftExercises: (liftExercises) => set({ liftExercises }),
+
+  // Reads from the store's current state, not a React render-time closure, so two
+  // synchronous calls (e.g. voice-log setting weight then reps) each see the other's
+  // update instead of one clobbering the other.
+  updateLiftSet: (exerciseIndex, setIndex, field, value) =>
+    set((state) => {
+      const liftExercises = state.liftExercises.map((exercise, ei) => {
+        if (ei !== exerciseIndex) return exercise;
+        return {
+          ...exercise,
+          sets: exercise.sets.map((set, si) =>
+            si === setIndex ? { ...set, [field]: value } : set,
+          ),
+        };
+      });
+      return { liftExercises };
+    }),
 
   logLiftSet: (exerciseIndex, setIndex) =>
     set((state) => {
@@ -158,8 +176,11 @@ export function formatDuration(totalSeconds: number): string {
 
 export function formatPace(secondsPerMile: number): string {
   if (!Number.isFinite(secondsPerMile) || secondsPerMile <= 0) return '--:--';
-  const minutes = Math.floor(secondsPerMile / 60);
-  const seconds = Math.round(secondsPerMile % 60);
+  // Round the total first, then split — rounding minutes/seconds independently
+  // can produce an invalid "M:60" when the seconds remainder rounds up to 60.
+  const total = Math.round(secondsPerMile);
+  const minutes = Math.floor(total / 60);
+  const seconds = total % 60;
   return `${minutes}:${String(seconds).padStart(2, '0')}`;
 }
 

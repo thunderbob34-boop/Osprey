@@ -3,13 +3,14 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useCreateWorkout, useWeekSessions } from '../../features/log/queries';
 import { PageHeader } from '../../components/PageHeader';
 import { SESSION_TYPE_LABEL } from '../../lib/format';
+import { toDateTimeInputValue } from '../../lib/day';
 
 function LogLauncher() {
   const { userId } = Route.useRouteContext();
   const navigate = useNavigate();
   const create = useCreateWorkout(userId);
   const sessions = useWeekSessions(userId);
-  const [startedAt, setStartedAt] = useState(() => new Date().toISOString().slice(0, 16));
+  const [startedAt, setStartedAt] = useState(() => toDateTimeInputValue(new Date()));
   const [sessionId, setSessionId] = useState<string>('');
 
   async function start() {

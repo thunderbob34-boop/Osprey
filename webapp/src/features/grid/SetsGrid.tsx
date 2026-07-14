@@ -22,14 +22,38 @@ export function SetsGrid({ units, initialRows, onCommitRow, onDeleteRow }: Props
   const stateRef = useRef(state);
   stateRef.current = state;
 
+  // A not-yet-saved row has dbId=null until its INSERT round-trips; a second
+  // edit (e.g. select exercise, then immediately edit weight and blur) could
+  // fire before that resolves and both would see dbId=null, INSERTing twice.
+  // Serialize commits per row: a commit that arrives while one is already in
+  // flight waits for it, then re-reads the row (now carrying the real dbId)
+  // and retries as an UPDATE instead of racing a second INSERT.
+  const pendingRef = useRef<Map<string, Promise<void>>>(new Map());
+
   async function commit(row: SetRow) {
     if (!row.dirty || !row.exerciseId || (row.reps === null && row.weightKg === null)) return;
+    const { localId } = row;
+    const existing = pendingRef.current.get(localId);
+    if (existing) {
+      await existing;
+      const latest = stateRef.current.rows.find((r) => r.localId === localId);
+      if (latest) await commit(latest);
+      return;
+    }
+    const task = (async () => {
+      try {
+        const dbId = await onCommitRow(row, nums.get(localId) ?? 1);
+        dispatch({ type: 'markSaved', localId, dbId });
+        setErrors((e) => ({ ...e, [localId]: '' }));
+      } catch (err) {
+        setErrors((e) => ({ ...e, [localId]: (err as Error).message }));
+      }
+    })();
+    pendingRef.current.set(localId, task);
     try {
-      const dbId = await onCommitRow(row, nums.get(row.localId) ?? 1);
-      dispatch({ type: 'markSaved', localId: row.localId, dbId });
-      setErrors((e) => ({ ...e, [row.localId]: '' }));
-    } catch (err) {
-      setErrors((e) => ({ ...e, [row.localId]: (err as Error).message }));
+      await task;
+    } finally {
+      pendingRef.current.delete(localId);
     }
   }
 

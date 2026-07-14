@@ -71,7 +71,7 @@ export default function HealthScreen() {
   return (
     <OnboardingShell
       step={4}
-      totalSteps={5}
+      totalSteps={4}
       title="Connect Apple Health"
       hint="Ozzie uses HRV, sleep, and heart rate to score recovery and tune your plan."
       onContinue={handleFinish}

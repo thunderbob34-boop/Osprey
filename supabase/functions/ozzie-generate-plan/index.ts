@@ -429,13 +429,23 @@ Deno.serve(async (req: Request) => {
       );
       if (goalsUpsertError) throw goalsUpsertError;
     } else if (body.raceTarget) {
-      // Race plan: map race details to goals context
+      // Race plan: map race details to goals context. Previously hardcoded
+      // weeklyRunDays/weeklyLiftDays/fitnessLevel to a fixed intermediate
+      // 4-run/1-lift week regardless of the athlete — fall back to their own
+      // onboarding profile (same source the no-target branch below uses)
+      // before defaulting, so a beginner or 6-day athlete isn't handed
+      // someone else's week.
       const race = body.raceTarget;
+      const { data: athleteGoalsRow } = await supabase
+        .from('user_goals')
+        .select('weekly_run_days, weekly_lift_days, fitness_level')
+        .eq('user_id', userId)
+        .maybeSingle();
       goals = {
         primaryGoal: 'run',
-        weeklyRunDays: 4,
-        weeklyLiftDays: 1,
-        fitnessLevel: 'intermediate',
+        weeklyRunDays: athleteGoalsRow?.weekly_run_days ?? 4,
+        weeklyLiftDays: athleteGoalsRow?.weekly_lift_days ?? 1,
+        fitnessLevel: athleteGoalsRow?.fitness_level ?? 'intermediate',
         targetRace: `${race.raceName} (${race.distance})`,
       };
 
@@ -607,7 +617,7 @@ Deno.serve(async (req: Request) => {
       }
     }
     console.error('Plan generation error:', message);
-    return new Response(JSON.stringify({ error: message }), {
+    return new Response(JSON.stringify({ error: 'Failed to generate plan. Please try again.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

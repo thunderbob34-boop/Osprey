@@ -192,12 +192,17 @@ export default function RunWorkoutScreen() {
 
     const miles = metersToMiles(distanceMeters);
     const currentElapsed = getElapsedSeconds({ startedAt, pausedAt, accumulatedPauseMs, status });
+    // Structured interval steps already cue their own per-step pace target
+    // (runCueForStep) — only apply the general drift warning on a steady run,
+    // using the athlete's own "easy" ceiling as the goal.
+    const goalPaceSecPerMile =
+      !intervalSteps?.length && paceBands ? paceBands.easy.maxSecPerMile : null;
     const cue = checkCues(
       coachingStateRef.current,
       miles,
       currentElapsed,
       heartRate,
-      null,
+      goalPaceSecPerMile,
       Date.now(),
     );
 
@@ -212,7 +217,7 @@ export default function RunWorkoutScreen() {
         showCueBanner(cue.text);
       }
     }
-  }, [elapsed, isPlus, status, distanceMeters, heartRate, startedAt, pausedAt, accumulatedPauseMs]);
+  }, [elapsed, isPlus, status, distanceMeters, heartRate, startedAt, pausedAt, accumulatedPauseMs, intervalSteps, paceBands]);
 
   const miles = metersToMiles(distanceMeters);
   const pace = miles > 0 ? formatPace(elapsed / miles) : '--:--';

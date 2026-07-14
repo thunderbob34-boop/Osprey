@@ -57,12 +57,13 @@ export function useRunTracking(enabled: boolean) {
     if (!enabled || status !== 'active') return;
 
     let subscription: Location.LocationSubscription | null = null;
+    let cancelled = false;
 
     (async () => {
       const { status: permission } = await Location.requestForegroundPermissionsAsync();
-      if (permission !== 'granted') return;
+      if (permission !== 'granted' || cancelled) return;
 
-      subscription = await Location.watchPositionAsync(
+      const sub = await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.BestForNavigation,
           distanceInterval: 5,
@@ -89,9 +90,19 @@ export function useRunTracking(enabled: boolean) {
           addTrackPoint(point);
         },
       );
+
+      // The component may have unmounted while watchPositionAsync was
+      // resolving — cleanup already ran and found `subscription` null, so
+      // remove this now-orphaned watcher immediately instead of leaking it.
+      if (cancelled) {
+        sub.remove();
+        return;
+      }
+      subscription = sub;
     })();
 
     return () => {
+      cancelled = true;
       subscription?.remove();
     };
   }, [enabled, status, addDistance, addTrackPoint]);

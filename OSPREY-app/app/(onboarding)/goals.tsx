@@ -33,6 +33,7 @@ function DayPicker({
             accessibilityRole="button"
             accessibilityLabel={`${day} ${label}`}
             accessibilityState={{ selected: value === day }}
+            hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}
           >
             <Text style={[styles.dayBtnText, value === day && styles.dayBtnTextActive]}>
               {day}
@@ -56,7 +57,7 @@ export default function GoalsScreen() {
   return (
     <OnboardingShell
       step={3}
-      totalSteps={5}
+      totalSteps={4}
       title="What's your main goal right now?"
       hint="This shapes your entire plan. You can always change it later."
       continueDisabled={weeklyRunDays + weeklyLiftDays === 0}

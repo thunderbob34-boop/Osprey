@@ -92,7 +92,8 @@ Deno.serve(async (req: Request) => {
       { headers: { 'Content-Type': 'application/json' } },
     );
   } catch (err) {
-    return new Response(JSON.stringify({ error: err instanceof Error ? err.message : 'Unknown error' }), {
+    console.error('ozzie-meal-photo error:', err);
+    return new Response(JSON.stringify({ error: 'Failed to analyze meal photo. Please try again.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

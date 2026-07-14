@@ -399,7 +399,8 @@ Deno.serve(async (req: Request) => {
       { headers: { 'Content-Type': 'application/json' } },
     );
   } catch (err) {
-    return new Response(JSON.stringify({ error: err instanceof Error ? err.message : 'Unknown error' }), {
+    console.error('ozzie-nutrition-coach error:', err);
+    return new Response(JSON.stringify({ error: 'Failed to get nutrition coaching. Please try again.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
