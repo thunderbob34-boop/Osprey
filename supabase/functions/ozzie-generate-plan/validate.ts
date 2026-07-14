@@ -35,14 +35,26 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
   // intensity (and therefore its target band), so clamping has to see the
   // final intensity — otherwise a demoted `easy` session would keep the
   // distance clamped to fit its old, faster `interval`/`threshold` band.
-  const maxHard = Math.ceil(days.length * envelope.hardSessionShareMax);
+  // Cap hard sessions at the polarization share of TRAINING days — rest days are
+  // not sessions and must not loosen the cap (else a 5-run week with 2 rest days
+  // would allow ceil(7*0.2)=2 hard = 40% of real sessions instead of ~20%).
+  const trainingCount = days.filter((d) => d.session_type !== 'rest').length;
+  const maxHard = Math.max(1, Math.round(trainingCount * envelope.hardSessionShareMax));
   let seen = 0;
   let out = days.map((d) => {
     if (HARD.has(d.intensity)) {
       seen += 1;
       if (seen > maxHard) {
         changed.push(`day${d.dayOffset}: ${d.intensity}→easy (polarization)`);
-        return { ...d, intensity: 'easy', interval_prescription: null };
+        // Reconcile the prose too — the LLM's "6×800m" description/notes and
+        // interval prescription no longer describe this now-easy session.
+        return {
+          ...d,
+          intensity: 'easy',
+          interval_prescription: null,
+          description: 'Easy Run',
+          ozzie_notes: 'Eased off to keep the week polarized (~80% easy).',
+        };
       }
     }
     return d;

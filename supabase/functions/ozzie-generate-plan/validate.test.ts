@@ -58,3 +58,27 @@ Deno.test('reorders polarization before pace-clamp so a demoted session lands in
   assert(implied >= easy.min && implied <= easy.max, `demoted session implied pace ${implied} s/mi not in easy band [${easy.min}, ${easy.max}]`);
   assert(!(implied >= fiveK.min && implied <= fiveK.max), `demoted session implied pace ${implied} s/mi is still inside the old fiveK band — polarization did not run before pace-clamp`);
 });
+
+Deno.test('polarization cap counts training days only, not rest days', () => {
+  // 5 hard interval days + 2 rest = 7. The cap must be ~20% of the 5 TRAINING days
+  // (→ 1 hard), not 20% of all 7 (→ 2). Rest days must not loosen the cap.
+  const hard = (o: number) => ({ dayOffset: o, session_type: 'run', intensity: 'interval', planned_minutes: 40, planned_distance_km: 8 });
+  const rest = (o: number) => ({ dayOffset: o, session_type: 'rest', intensity: 'rest', planned_minutes: null, planned_distance_km: null });
+  const { days } = validateAndClamp([hard(0), hard(1), hard(2), hard(3), hard(4), rest(5), rest(6)], envelope as never);
+  const hardCount = days.filter((d) => d.intensity === 'interval' || d.intensity === 'threshold').length;
+  assertEquals(hardCount, 1);
+});
+
+Deno.test('a demoted session gets easy-run prose, not the stale hard description/prescription', () => {
+  const hard = (o: number) => ({
+    dayOffset: o, session_type: 'run', intensity: 'interval', planned_minutes: 40, planned_distance_km: 8,
+    description: '6x800m intervals', ozzie_notes: 'Hit these hard.', interval_prescription: { segments: [] },
+  });
+  const { days } = validateAndClamp([hard(0), hard(1), hard(2), hard(3), hard(4)], envelope as never);
+  const demoted = days.filter((d) => d.intensity === 'easy');
+  assert(demoted.length > 0);
+  for (const d of demoted) {
+    assert(d.description !== '6x800m intervals', 'demoted session kept its stale hard description');
+    assertEquals((d as Record<string, unknown>).interval_prescription, null);
+  }
+});
