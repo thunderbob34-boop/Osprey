@@ -201,7 +201,7 @@ The full branch-by-branch table, verification status, and harvest list live in [
 - [ ] Endurance GPS tracks never persisted (`saveEnduranceWorkout`).
 - [x] "Start Session" mis-routes swim/bike/rowing/cross/hyrox to the GPS run screen (`app/(tabs)/index.tsx`). **Fixed** `fb80acb` (per-sport switch mirroring Workout tab).
 - [ ] GPS watcher leak on fast unmount.
-- [x] UTC-vs-local "today" — **Fixed** `fb80acb`: added tested `src/utils/date.ts` `localDateString()`, applied in `daily-summary.ts`. *Remaining in this class: `calendar.ts` UTC window (§3D) — now a quick swap to the new helper.*
+- [x] UTC-vs-local "today" — **Fixed** `fb80acb`: added tested `src/utils/date.ts` `localDateString()`, applied in `daily-summary.ts`. `calendar.ts` stray-day leak **Fixed** in follow-up (tested `clampDaysToMonth`).
 - [ ] `ozzie-generate-plan` idempotency race (no unique constraint on one-active-plan-per-week).
 - [ ] Race-plan branch hardcodes `intermediate`/4-run/1-lift, ignores athlete profile.
 - [ ] `toggleKudo` non-atomic race; activity-feed fallback query unscoped; `useSubscription` doesn't propagate refresh.
@@ -224,6 +224,11 @@ The full branch-by-branch table, verification status, and harvest list live in [
 New UTC-vs-local "today" bugs keep appearing in different files (`currentWeekStartDate`, `log_hydration`,
 `ozzie-nutrition-coach`, `daily-summary`, `calendar`, `computeRacePhase`). **The real fix is a repo-wide
 date-handling convention + lint rule**, not another one-off patch.
+
+**Convention now established:** `src/utils/date.ts` `localDateString()` is the local-day helper — `daily-summary`
+and `calendar` are converted. Remaining offenders to migrate: `currentWeekStartDate`, `log_hydration`,
+`ozzie-nutrition-coach`, `computeRacePhase`. A lint rule banning `new Date().toISOString().slice(0,10)` would
+prevent regressions.
 
 ### 3E. 🟢 Later / deferred (post-launch)
 

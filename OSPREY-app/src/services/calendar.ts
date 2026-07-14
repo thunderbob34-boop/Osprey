@@ -14,6 +14,21 @@ function emptyDay(date: string): CalendarDay {
   return { date, plannedType: null, plannedDescription: null, completedTypes: [], raceName: null };
 }
 
+/**
+ * Drop calendar days whose local date falls outside `[startStr, endStr]`.
+ * The workouts query window is padded +24h to catch UTC-shifted late-night logs,
+ * which can bucket a workout onto a local day just outside the requested month —
+ * this filters those stray days back out. Both bounds are inclusive `YYYY-MM-DD`,
+ * so lexical string comparison is date-correct.
+ */
+export function clampDaysToMonth(
+  days: CalendarDay[],
+  startStr: string,
+  endStr: string,
+): CalendarDay[] {
+  return days.filter((day) => day.date >= startStr && day.date <= endStr);
+}
+
 export async function fetchCalendarMonth(
   userId: string,
   year: number,
@@ -84,5 +99,5 @@ export async function fetchCalendarMonth(
     getDay(row.event_date as string).raceName = row.name as string;
   }
 
-  return Array.from(byDate.values());
+  return clampDaysToMonth(Array.from(byDate.values()), startStr, endStr);
 }
