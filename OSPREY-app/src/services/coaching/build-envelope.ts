@@ -1,7 +1,7 @@
 import { supabase } from '@/services/supabase';
 import { computeRacePhase, RaceGoal } from '@/services/plan';
 import { computeEnvelope, CoachingEnvelope } from './envelope';
-import { selectBestRunEffort } from './anchor';
+import { selectBestRunEffort, selectBestRowingSplit } from './anchor';
 
 const MILES_PER_KM = 0.621371;
 const RECENT_WINDOW_MS = 56 * 24 * 60 * 60 * 1000; // 8 weeks
@@ -15,6 +15,7 @@ interface EnvelopeInputs {
   prevWeekLoad: number | null;
   bestRunMiles: number | null;
   bestRunTimeS: number | null;
+  rowingSplitSecPer500: number | null;
 }
 
 // Pure: inputs → envelope. No-race plans run a Base maintenance macrocycle.
@@ -36,7 +37,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     bestRunTimeS: i.bestRunTimeS,
     fitnessLevel: i.fitnessLevel,
     bodyWeightKg: i.bodyWeightKg,
-    rowingSplitSecPer500: null,
+    rowingSplitSecPer500: i.rowingSplitSecPer500,
   });
 }
 
@@ -48,26 +49,36 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
   let inputs: EnvelopeInputs = {
     sport: 'run', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
     baselineLoad: 200, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
+    rowingSplitSecPer500: null,
   };
 
   if (userId) {
-    const [goalsRes, weightRes, runsRes] = await Promise.all([
+    const [goalsRes, weightRes, runsRes, rowsRes] = await Promise.all([
       supabase.from('user_goals').select('primary_goal, fitness_level, target_date, total_weeks_planned').eq('user_id', userId).maybeSingle(),
       supabase.from('body_metrics').select('weight_kg').eq('user_id', userId).order('recorded_on', { ascending: false }).limit(1).maybeSingle(),
       // Recent runs (not the single longest all-time), so the anchor can pick the
       // best-QUALITY effort rather than the slowest long run — see selectBestRunEffort.
       supabase.from('workout_logs').select('total_distance_km, total_duration_s').eq('user_id', userId).eq('session_type', 'run').is('deleted_at', null).gte('started_at', new Date(Date.now() - RECENT_WINDOW_MS).toISOString()).order('started_at', { ascending: false }).limit(30),
+      // Recent rowing logs, mirrored from the runs query above — selectBestRowingSplit
+      // picks the fastest 500m split rather than the longest/slowest piece.
+      supabase.from('workout_logs').select('total_distance_km, total_duration_s').eq('user_id', userId).eq('session_type', 'rowing').is('deleted_at', null).gte('started_at', new Date(Date.now() - RECENT_WINDOW_MS).toISOString()).order('started_at', { ascending: false }).limit(30),
     ]);
     // A failed query silently degrades to generic defaults — surface it so it's diagnosable.
     if (goalsRes.error) console.warn('[build-envelope] user_goals query failed:', goalsRes.error.message);
     if (weightRes.error) console.warn('[build-envelope] body_metrics query failed:', weightRes.error.message);
     if (runsRes.error) console.warn('[build-envelope] workout_logs query failed:', runsRes.error.message);
+    if (rowsRes.error) console.warn('[build-envelope] workout_logs (rowing) query failed:', rowsRes.error.message);
 
     const g = goalsRes.data;
     const recentRuns = (runsRes.data ?? [])
       .filter((r) => r.total_distance_km && r.total_duration_s)
       .map((r) => ({ distanceMiles: (r.total_distance_km as number) * MILES_PER_KM, timeS: r.total_duration_s as number }));
     const bestEffort = selectBestRunEffort(recentRuns);
+
+    const recentRows = (rowsRes.data ?? [])
+      .filter((r) => r.total_distance_km && r.total_duration_s)
+      .map((r) => ({ distanceKm: r.total_distance_km as number, timeS: r.total_duration_s as number }));
+    const rowingSplit = selectBestRowingSplit(recentRows);
 
     inputs = {
       sport: g?.primary_goal ?? 'run',
@@ -78,6 +89,7 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       prevWeekLoad: null,
       bestRunMiles: bestEffort?.distanceMiles ?? null,
       bestRunTimeS: bestEffort?.timeS ?? null,
+      rowingSplitSecPer500: rowingSplit,
     };
   }
 
