@@ -3,6 +3,7 @@ import { supabase } from '@/services/supabase';
 import { fetchWeekTargetKm } from '@/services/workouts';
 import { getCachedWeatherBriefSummary } from '@/services/weather-context';
 import { getScheduleBriefSummary } from '@/services/schedule-context';
+import { localDateString } from '@/utils/date';
 import type {
   DailySummaryData,
   DailySummaryViewRow,
@@ -11,7 +12,7 @@ import type {
 } from '@/types/daily-summary';
 
 function todayDateString(): string {
-  return new Date().toISOString().slice(0, 10);
+  return localDateString();
 }
 
 function normalizeRecommendation(value: string | null): RecoveryRecommendation {
@@ -89,6 +90,10 @@ async function fetchTodaySession(userId: string): Promise<TodaySessionRow | null
     )
     .eq('user_id', userId)
     .eq('session_date', todayDateString())
+    // A day can hold more than one session; `.maybeSingle()` throws on 2+ rows,
+    // crashing Home. Deterministically take the earliest-created one.
+    .order('created_at', { ascending: true })
+    .limit(1)
     .maybeSingle();
 
   if (error) throw error;
@@ -221,7 +226,7 @@ async function fetchHabitStreak(userId: string): Promise<number> {
   const forgivenessDays = prefsRes.data?.streak_forgiveness_days ?? 1;
 
   const activeDates = new Set(
-    (workoutsRes.data ?? []).map((row) => new Date(row.started_at).toISOString().slice(0, 10)),
+    (workoutsRes.data ?? []).map((row) => localDateString(new Date(row.started_at))),
   );
 
   if (activeDates.size === 0) return 0;
