@@ -53,6 +53,17 @@ interface TrainingLoad {
   tsb: number;
 }
 
+interface Envelope {
+  sport: string;
+  phase: string;
+  weekNumber: number;
+  totalWeeks: number;
+  targetWeeklyLoad: number;
+  hardSessionShareMax: number;
+  runZones: { thresholdSecPerMile: number; easy: { min: number; max: number }; marathonPace: { min: number; max: number }; tenKPace: { min: number; max: number }; fiveKPace: { min: number; max: number }; intervalPace: { min: number; max: number } } | null;
+  fuel: { dailyCarbG: { min: number | null; max: number | null }; proteinG: { min: number; max: number }; longSessionCarbGPerHour: number };
+}
+
 async function computeTrainingLoad(supabase: ReturnType<typeof createClient>, userId: string): Promise<TrainingLoad> {
   const since = new Date();
   since.setDate(since.getDate() - 84);
@@ -234,7 +245,15 @@ async function generateRescheduleReason(swaps: RescheduleSwap[]): Promise<string
   return data.choices?.[0]?.message?.content?.trim() ?? "Looks like a session got missed — I've moved it to an open day this week.";
 }
 
-async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad) {
+async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad, envelope?: Envelope) {
+  const envelopeGuidance = envelope
+    ? ` COACHING ENVELOPE (hard constraints — stay inside these): phase=${envelope.phase}, week ${envelope.weekNumber}/${envelope.totalWeeks}, target weekly load ≈ ${envelope.targetWeeklyLoad} TSS, at most ${Math.round(envelope.hardSessionShareMax * 100)}% of sessions hard.` +
+      (envelope.runZones
+        ? ` Run pace bands (sec/mile): easy ${envelope.runZones.easy.min}-${envelope.runZones.easy.max}, threshold ~${envelope.runZones.thresholdSecPerMile}, 10K ${envelope.runZones.tenKPace.min}-${envelope.runZones.tenKPace.max}, 5K/interval ${envelope.runZones.fiveKPace.min}-${envelope.runZones.fiveKPace.max}. Choose distances/durations so implied pace matches the band for each session's intensity.`
+        : '') +
+      ` Daily carbs ${envelope.fuel.dailyCarbG.min}-${envelope.fuel.dailyCarbG.max} g; long-session fuel ~${envelope.fuel.longSessionCarbGPerHour} g/hr.`
+    : '';
+
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -247,7 +266,7 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad)
         { role: 'system', content: PLAN_SYSTEM_PROMPT },
         {
           role: 'user',
-          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} trainingLoad: ${JSON.stringify(trainingLoad)}.`,
+          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} trainingLoad: ${JSON.stringify(trainingLoad)}.${envelopeGuidance}`,
         },
       ],
       response_format: { type: 'json_object' },
@@ -582,7 +601,7 @@ Deno.serve(async (req: Request) => {
       weekId = week.id as string;
     }
 
-    const days = await generateWeekDays(goals, trainingLoad);
+    const days = await generateWeekDays(goals, trainingLoad, (body.envelope as Envelope | undefined));
 
     const sessionRows = days.map((day) => {
       const sessionDate = new Date(weekStart);
