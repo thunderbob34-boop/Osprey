@@ -39,6 +39,9 @@ const GOAL_OPTIONS: GoalOption[] = [
   { value: 'run_performance', label: '🏃 Run Performance' },
   { value: 'strength', label: '💪 Strength Focus' },
   { value: 'triathlon', label: '🏊 Triathlon / Multisport' },
+  { value: 'swim', label: '🏊 Swimming' },
+  { value: 'rowing', label: '🚣 Rowing' },
+  { value: 'hyrox', label: '🏋️‍♂️ Hyrox' },
   { value: 'weight_loss', label: '🔥 Weight Loss' },
   { value: 'general', label: '⚡ General Fitness' },
 ];

@@ -4,11 +4,15 @@ import OnboardingShell, { OptionCard } from '@/components/onboarding/OnboardingS
 import { useOnboardingStore } from '@/store/onboardingStore';
 import type { PrimaryGoal } from '@/types/onboarding';
 import { Colors } from '@/constants/colors';
+import { primaryDayLabel } from '@/constants/sports';
 
 const GOALS: Array<{ id: PrimaryGoal; icon: string; title: string; desc: string }> = [
   { id: 'run', icon: '🏃', title: 'Run better', desc: '5K, 10K, half, full marathon' },
   { id: 'lift', icon: '🏋️', title: 'Get stronger', desc: 'Lift more, build muscle' },
   { id: 'hybrid', icon: '⚡', title: 'Hybrid athlete', desc: 'Run and lift — both matter' },
+  { id: 'swim', icon: '🏊', title: 'Swim faster', desc: 'Pool or open water — CSS-paced zones' },
+  { id: 'rowing', icon: '🚣', title: 'Row stronger', desc: 'Erg or water — 2k-split zones' },
+  { id: 'hyrox', icon: '🏋️‍♂️', title: 'Hyrox', desc: 'Run + functional strength stations' },
   { id: 'weight_loss', icon: '⚖️', title: 'Lose weight', desc: 'Performance + body composition' },
 ];
 
@@ -75,7 +79,7 @@ export default function GoalsScreen() {
 
       <View style={styles.scheduleCard}>
         <Text style={styles.scheduleTitle}>WEEKLY SCHEDULE</Text>
-        <DayPicker label="Run days per week" value={weeklyRunDays} onChange={setWeeklyRunDays} />
+        <DayPicker label={primaryDayLabel(primaryGoal)} value={weeklyRunDays} onChange={setWeeklyRunDays} />
         <DayPicker label="Lift days per week" value={weeklyLiftDays} onChange={setWeeklyLiftDays} />
       </View>
       {weeklyRunDays + weeklyLiftDays === 0 ? (
