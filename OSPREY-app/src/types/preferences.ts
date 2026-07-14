@@ -4,7 +4,10 @@ export type TrainingGoal =
   | 'strength'
   | 'weight_loss'
   | 'general'
-  | 'triathlon';
+  | 'triathlon'
+  | 'swim'
+  | 'rowing'
+  | 'hyrox';
 export type ExperienceLevel = 'beginner' | 'intermediate' | 'advanced';
 export type TrainingDaysPerWeek = 3 | 4 | 5 | 6;
 export type TriathlonDistance = 'sprint' | 'olympic' | 'half' | 'full';

@@ -1,4 +1,12 @@
-export type PrimaryGoal = 'run' | 'lift' | 'hybrid' | 'weight_loss' | 'general_fitness';
+export type PrimaryGoal =
+  | 'run'
+  | 'lift'
+  | 'hybrid'
+  | 'weight_loss'
+  | 'general_fitness'
+  | 'swim'
+  | 'rowing'
+  | 'hyrox';
 export type ExperienceTier = 'beginner' | 'intermediate' | 'advanced';
 
 export interface OnboardingDraft {

@@ -12,6 +12,9 @@ export const ONBOARDING_GOAL_TO_PREFERENCES: Record<PrimaryGoal, TrainingGoal> =
   hybrid: 'hybrid',
   weight_loss: 'weight_loss',
   general_fitness: 'general',
+  swim: 'swim',
+  rowing: 'rowing',
+  hyrox: 'hyrox',
 };
 
 function buildPlanPreferences(draft: OnboardingDraft): UserPreferences {
