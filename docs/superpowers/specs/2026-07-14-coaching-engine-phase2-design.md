@@ -136,9 +136,16 @@ progress bar (kept consistent with the Phase-1 `totalSteps` fix).
 
 - **2a — ZoneSet generalization + swim & rowing (pace-based).** Refactor `runZones`→`zones`/`ZoneSet`, extend
   `computeEnvelope` + the pace-clamp to swim (CSS) and rowing (split), add rowing data-derivation + the sport-key
-  map (incl. hyrox). Reuses the whole Phase 1 architecture. Highest value, lowest risk.
-- **2b — Anchor acquisition: onboarding Baseline step + HR-fallback zones.** The `user_goals.threshold_anchor`
-  read/write, the Baseline screen, and the HR-zone path (universal fallback). Unblocks cycling + swim precision.
+  map (incl. hyrox). Reuses the whole Phase 1 architecture. **DONE 2026-07-14** (Tasks 1-6). ⚠️ **Known
+  limitation, activated in 2b:** the app is goal-centric — `primary_goal` never carries `'swim'`/`'rowing'`
+  (onboarding `goals.tsx` + `preferences.tsx` offer Hybrid/Run/Strength/Triathlon only), so `blueprintSport`
+  never resolves to swim/rowing and these zones are built + tested but **dormant** until 2b adds sport selection.
+- **2b — Sport selection + anchor acquisition.** The user-facing SPORT picker in onboarding + the plan-builder
+  (so a user can *be* a swimmer/rower/hyrox athlete → `primary_goal`), the edge-fn wiring that pairs with it
+  (`PRIMARY_GOAL_MAP` swim/rowing entries, `GoalsContext.weeklyRowDays`, the `session_type` enum + prompt rules
+  incl. rowing) — this **activates 2a's dormant zones**. Plus the anchor-acquisition layer: the optional Baseline
+  input screen (FTP / 400+200 swim / 2k row), the `user_goals.threshold_anchor` read/write, and the HR-zone
+  universal fallback. (Bundles the deferred "Task 8" wiring from the 2a execution.)
 - **2c — Cycling (power, prompt-guided) + triathlon (composite) + fuel-per-day-type.** The zone-type divergence
   and the 3-anchor composite, on a proven foundation.
 
