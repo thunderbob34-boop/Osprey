@@ -432,7 +432,7 @@ Deno.serve(async (req: Request) => {
       // Race plan: map race details to goals context. Previously hardcoded
       // weeklyRunDays/weeklyLiftDays/fitnessLevel to a fixed intermediate
       // 4-run/1-lift week regardless of the athlete — fall back to their own
-      // onboarding profile (same source the no-target branch below uses)
+      // onboarding profile (same user_goals source the no-explicit-input fallback below uses)
       // before defaulting, so a beginner or 6-day athlete isn't handed
       // someone else's week.
       const race = body.raceTarget;
