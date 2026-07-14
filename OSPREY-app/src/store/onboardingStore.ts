@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import type { ThresholdAnchorMap } from '@/services/coaching/baseline';
 import {
   DEFAULT_ONBOARDING_DRAFT,
   OnboardingDraft,
@@ -13,6 +14,7 @@ interface OnboardingState extends OnboardingDraft {
   setWeeklyRunDays: (days: number) => void;
   setWeeklyLiftDays: (days: number) => void;
   setHealthConnected: (connected: boolean) => void;
+  setThresholdAnchor: (anchor: OnboardingDraft['thresholdAnchor']) => void;
   reset: () => void;
 }
 
@@ -25,5 +27,6 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
   setWeeklyRunDays: (weeklyRunDays) => set({ weeklyRunDays }),
   setWeeklyLiftDays: (weeklyLiftDays) => set({ weeklyLiftDays }),
   setHealthConnected: (healthConnected) => set({ healthConnected }),
+  setThresholdAnchor: (thresholdAnchor) => set({ thresholdAnchor }),
   reset: () => set({ ...DEFAULT_ONBOARDING_DRAFT }),
 }));

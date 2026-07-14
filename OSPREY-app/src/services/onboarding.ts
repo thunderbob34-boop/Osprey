@@ -58,6 +58,7 @@ export async function completeOnboarding(userId: string, draft: OnboardingDraft)
     weekly_run_days: draft.weeklyRunDays,
     weekly_lift_days: draft.weeklyLiftDays,
     fitness_level: draft.experienceTier,
+    threshold_anchor: draft.thresholdAnchor,
   });
 
   if (goalsError) throw goalsError;
