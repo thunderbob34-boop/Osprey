@@ -541,7 +541,30 @@ Deno.serve(async (req: Request) => {
         .select('id')
         .single();
 
-      if (planError || !plan) throw planError ?? new Error('Failed to create plan');
+      if (planError) {
+        // 23505 = the one-active-plan-per-user unique index: a concurrent
+        // generation already created the active plan. Reuse the week it made
+        // for this Monday instead of creating a duplicate.
+        if ((planError as { code?: string }).code === '23505') {
+          const { data: racedWeek } = await supabase
+            .from('training_weeks')
+            .select('id, training_plans!inner(user_id, status)')
+            .eq('start_date', weekStartStr)
+            .eq('training_plans.user_id', userId)
+            .eq('training_plans.status', 'active')
+            .order('created_at', { ascending: true })
+            .limit(1)
+            .maybeSingle();
+          if (racedWeek) {
+            return new Response(
+              JSON.stringify({ created: false, weekId: racedWeek.id, rescheduled: [] }),
+              { headers: { 'Content-Type': 'application/json' } },
+            );
+          }
+        }
+        throw planError;
+      }
+      if (!plan) throw new Error('Failed to create plan');
       planId = plan.id as string;
 
       const { data: week, error: weekError } = await supabase

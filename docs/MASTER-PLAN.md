@@ -202,7 +202,7 @@ The full branch-by-branch table, verification status, and harvest list live in [
 - [x] "Start Session" mis-routes swim/bike/rowing/cross/hyrox to the GPS run screen (`app/(tabs)/index.tsx`). **Fixed** `fb80acb` (per-sport switch mirroring Workout tab).
 - [x] GPS watcher leak on fast unmount. **Fixed** `caf6b3c` (cancellation flag in `useRunTracking`).
 - [x] UTC-vs-local "today" — **Fixed** `fb80acb`: added tested `src/utils/date.ts` `localDateString()`, applied in `daily-summary.ts`. `calendar.ts` stray-day leak **Fixed** in follow-up (tested `clampDaysToMonth`).
-- [~] `ozzie-generate-plan` idempotency race. **Partially fixed** `79e676f`: the `.maybeSingle()` crash on duplicate weeks is resolved (order+limit). **Open decision:** the TOCTOU race still needs a DB unique constraint + violation recovery — is the invariant *one active plan per user*, or can a user train for two races at once? Decide before adding the constraint.
+- [x] `ozzie-generate-plan` idempotency race. **Fixed.** Crash on duplicate weeks resolved (`79e676f`); the TOCTOU race is now closed by the decided invariant — **one active plan per user**: migration `20260714000001` (partial unique index on `training_plans(user_id) WHERE status='active'`, with a dedup step so it applies cleanly on live data) + the edge fn catches the `23505` and reuses the concurrently-created plan. *Needs `supabase db push` + `functions deploy ozzie-generate-plan`.*
 - [ ] Race-plan branch hardcodes `intermediate`/4-run/1-lift, ignores athlete profile.
 - [ ] `toggleKudo` non-atomic race; activity-feed fallback query unscoped; `useSubscription` doesn't propagate refresh.
 
