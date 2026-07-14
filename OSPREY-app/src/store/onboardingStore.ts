@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import type { ThresholdAnchorMap } from '@/services/coaching/baseline';
 import {
   DEFAULT_ONBOARDING_DRAFT,
   OnboardingDraft,
