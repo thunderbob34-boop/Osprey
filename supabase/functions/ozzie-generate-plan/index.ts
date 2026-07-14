@@ -327,6 +327,11 @@ Deno.serve(async (req: Request) => {
       .eq('start_date', weekStartStr)
       .eq('training_plans.user_id', userId)
       .eq('training_plans.status', 'active')
+      // A prior concurrent generation could have created more than one week for
+      // this Monday; `.maybeSingle()` throws on 2+ rows and would block plan-gen
+      // forever. Deterministically take the earliest instead of crashing.
+      .order('created_at', { ascending: true })
+      .limit(1)
       .maybeSingle();
 
     let sessionCountForWeek = 0;
