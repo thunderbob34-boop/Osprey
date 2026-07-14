@@ -607,7 +607,7 @@ Deno.serve(async (req: Request) => {
       }
     }
     console.error('Plan generation error:', message);
-    return new Response(JSON.stringify({ error: message }), {
+    return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
