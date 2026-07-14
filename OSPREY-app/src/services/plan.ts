@@ -58,11 +58,17 @@ export function computeRacePhase(goal: RaceGoal, now: Date = new Date()): RacePh
   const currentWeekNumber = Math.min(totalWeeks, Math.max(1, totalWeeks - weeksRemaining + 1));
   const progress = currentWeekNumber / totalWeeks;
 
+  // Taper is the blueprint's final block (docs/coaching/_index.md:19), scaled to
+  // plan length: ~3 weeks for a full build, fewer for short plans. Drive it by
+  // weeksRemaining so it's always the true final N weeks, not a fixed % that
+  // under-tapers long plans (audit-reports/2026-07-10-audit.md:44).
+  const taperWeeks = totalWeeks <= 6 ? 1 : totalWeeks <= 10 ? 2 : 3;
+
   let phase: RacePhaseName;
-  if (progress <= 0.4) phase = 'Base';
+  if (weeksRemaining <= taperWeeks) phase = 'Taper';
+  else if (progress <= 0.4) phase = 'Base';
   else if (progress <= 0.75) phase = 'Build';
-  else if (progress <= 0.9) phase = 'Peak';
-  else phase = 'Taper';
+  else phase = 'Peak';
 
   return { weeksRemaining, currentWeekNumber, totalWeeks, phase };
 }
