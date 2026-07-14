@@ -518,6 +518,26 @@ Deno.serve(async (req: Request) => {
         .eq('id', planId);
       if (planUpdateError) throw planUpdateError;
 
+      // Force-rebuild reuses this week row instead of inserting a new one, so
+      // the regenerated sessions can reflect a changed envelope (e.g. race
+      // target updated mid-plan) while the week header silently goes stale.
+      // Refresh it the same way the insert branch below seeds a new week — but
+      // only when an envelope was actually supplied; otherwise leave the reused
+      // week's existing values untouched (unchanged, backward-compatible
+      // behavior for background/no-envelope regenerations).
+      const envelopeForWeek = body.envelope as Envelope | undefined;
+      if (envelopeForWeek) {
+        const { error: weekUpdateError } = await supabase
+          .from('training_weeks')
+          .update({
+            week_number: envelopeForWeek.weekNumber,
+            focus: envelopeForWeek.phase,
+            tss_target: envelopeForWeek.targetWeeklyLoad,
+          })
+          .eq('id', weekId);
+        if (weekUpdateError) throw weekUpdateError;
+      }
+
       // workout_logs.session_id and plan_adjustments.session_id both reference
       // training_sessions(id) with no ON DELETE CASCADE. Any row pointing at a
       // session in this week must be detached (nulled out, not deleted) before
