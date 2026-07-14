@@ -7,6 +7,7 @@
 
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 import { validateAndClamp } from './validate.ts';
+import { routeDisciplineDays, type DisciplineDays } from './goals.ts';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
@@ -26,15 +27,15 @@ Triathlon / multisport guidance: When the goal is triathlon (or the user is trai
 
 Rules:
 - Produce exactly 7 days, Monday through Sunday. Remaining days (beyond requested training days) are "rest".
-- session_type must be one of: run, lift, swim, bike, cross, rest, race.
+- session_type must be one of: run, lift, swim, bike, rowing, cross, rest, race.
 - intensity must be one of: easy, moderate, threshold, interval, race, rest. Rest days use "rest".
 - For beginners, favor "easy" intensity and avoid back-to-back hard days.
 - planned_minutes: a reasonable duration for the session type and level. null for rest days.
-- planned_distance_km: for run, race, swim, and bike sessions — a reasonable distance for the session's duration, intensity, and the athlete's level (e.g. an easy run duration implies roughly a 9-11 min/mile pace, swims are much shorter than runs for the same duration). null for lift, cross, and rest days.
+- planned_distance_km: for run, race, swim, bike, and rowing sessions — a reasonable distance for the session's duration, intensity, and the athlete's level (e.g. an easy run duration implies roughly a 9-11 min/mile pace, swims are much shorter than runs for the same duration). null for lift, cross, and rest days.
 - description: short, e.g. "Easy Run", "Upper Body — Push", "Active Recovery Bike", "Rest Day".
 - ozzie_notes: one plain-English sentence explaining why this session is placed here this week, in Ozzie's warm/direct voice.
 - lift_prescription: for lift days ONLY, write the actual strength workout like a real coach: {"exercises": [{"name": string, "sets": number (2-5), "reps": string (e.g. "5" or "8-12"), "note": string|null}]} with 4-6 exercises. Main compound movement first at lower reps, accessories after at higher reps. Choose names ONLY from this exact list, matched to the day's split: Upper Push day = Bench Press, Incline Dumbbell Press, Overhead Press, Lateral Raise, Tricep Pushdown, Chest Dip. Upper Pull day = Pull-Up, Barbell Row, Lat Pulldown, Seated Cable Row, Dumbbell Row, Barbell Curl, Face Pull. Lower/Hips day = Back Squat, Deadlift, Romanian Deadlift, Hip Thrust, Bulgarian Split Squat, Leg Press, Calf Raise. Full-body/core accessory (any split) = Plank, Box Jump, Hanging Leg Raise. Use "note" for form or effort cues ("2 reps in reserve", "pause at the bottom"). For every non-lift day, set lift_prescription to null.
-- interval_prescription: for swim, bike, and run days with intensity "threshold" or "interval" ONLY, write real structured sets instead of a bare duration: {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}. Exactly one of distanceM/durationS per segment — swim segments use distanceM (e.g. 50/100/200), bike segments use durationS (e.g. 180-600 for 3-10min), run segments use distanceM for track-style reps (200-1600) or durationS for tempo blocks. effort must be one of: easy, moderate, threshold, hard, max. label is a short human string like "50m hard", "800m @ threshold", or "5min @ threshold". Include a warm-up segment (effort "easy") first and a cool-down segment (effort "easy") last. 3-6 segments total. For easy/moderate days and all other session types, set interval_prescription to null.
+- interval_prescription: for swim, bike, run, and rowing days with intensity "threshold" or "interval" ONLY, write real structured sets instead of a bare duration: {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}. Exactly one of distanceM/durationS per segment — swim segments use distanceM (e.g. 50/100/200), bike segments use durationS (e.g. 180-600 for 3-10min), run segments use distanceM for track-style reps (200-1600) or durationS for tempo blocks. rowing segments use distanceM (e.g. 250/500/1000) for interval pieces or durationS for steady blocks. effort must be one of: easy, moderate, threshold, hard, max. label is a short human string like "50m hard", "800m @ threshold", or "5min @ threshold". Include a warm-up segment (effort "easy") first and a cool-down segment (effort "easy") last. 3-6 segments total. For easy/moderate days and all other session types, set interval_prescription to null.
 - Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string, "lift_prescription": {"exercises": [{"name": string, "sets": number, "reps": string, "note": string|null}]}|null, "interval_prescription": {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}|null}]} where dayOffset 0 = Monday.`;
 
 interface GoalsContext {
@@ -43,6 +44,7 @@ interface GoalsContext {
   weeklyLiftDays: number;
   weeklySwimDays?: number;
   weeklyBikeDays?: number;
+  weeklyRowDays?: number;
   triathlonDistance?: string | null;
   fitnessLevel: string;
   targetRace: string | null;
@@ -326,7 +328,7 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad,
         { role: 'system', content: PLAN_SYSTEM_PROMPT },
         {
           role: 'user',
-          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} trainingLoad: ${JSON.stringify(trainingLoad)}.${envelopeGuidance}`,
+          content: `Build this week's plan for a ${goals.fitnessLevel} athlete. Goal: ${goals.primaryGoal ?? 'general fitness'}${goals.targetRace ? `, target race: ${goals.targetRace}` : ''}. Weekly run days: ${goals.weeklyRunDays}. Weekly lift days: ${goals.weeklyLiftDays}.${goals.weeklySwimDays ? ` Weekly swim days: ${goals.weeklySwimDays}.` : ''}${goals.weeklyBikeDays ? ` Weekly bike days: ${goals.weeklyBikeDays}.` : ''}${goals.weeklyRowDays ? ` Weekly row days: ${goals.weeklyRowDays}.` : ''}${goals.triathlonDistance ? ` triathlonDistance: ${goals.triathlonDistance}.` : ''} trainingLoad: ${JSON.stringify(trainingLoad)}.${envelopeGuidance}`,
         },
       ],
       response_format: { type: 'json_object' },
@@ -443,7 +445,8 @@ Deno.serve(async (req: Request) => {
     }
 
     // Maps preferences.tsx's TrainingGoal values to the DB's primary_goal_enum
-    // ('run' | 'lift' | 'hybrid' | 'weight_loss' | 'general_fitness' | 'triathlon').
+    // ('run' | 'lift' | 'hybrid' | 'weight_loss' | 'general_fitness' | 'triathlon'
+    //  | 'swim' | 'rowing' | 'hyrox' — the last three added in 20260714000003).
     const PRIMARY_GOAL_MAP: Record<string, string> = {
       hybrid: 'hybrid',
       run_performance: 'run',
@@ -451,6 +454,9 @@ Deno.serve(async (req: Request) => {
       weight_loss: 'weight_loss',
       general: 'general_fitness',
       triathlon: 'triathlon',
+      swim: 'swim',
+      rowing: 'rowing',
+      hyrox: 'hyrox',
     };
 
     // Build goals context: explicit preferences/raceTarget from the request
@@ -465,34 +471,36 @@ Deno.serve(async (req: Request) => {
       const mappedGoal = PRIMARY_GOAL_MAP[prefs.primaryGoal] ?? 'hybrid';
       const isTriathlon = mappedGoal === 'triathlon';
 
-      let weeklyRunDays: number;
-      let weeklyLiftDays: number;
-      let weeklySwimDays: number;
-      let weeklyBikeDays: number;
+      let routed: DisciplineDays;
+      // Persisted to user_goals.weekly_run_days as "primary endurance days";
+      // the background-regen path re-routes it by primary_goal (Step 8).
+      let primaryDaysForStorage: number;
 
       if (isTriathlon) {
         // Split days roughly evenly across all four disciplines, each
         // guaranteed at least 1 day whenever the weekly total allows it.
         const total = prefs.daysPerWeek;
-        weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
-        weeklySwimDays = Math.max(1, Math.round(total * 0.2));
-        weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
-        weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
+        const weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
+        const weeklySwimDays = Math.max(1, Math.round(total * 0.2));
+        const weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
+        const weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
+        routed = { weeklyRunDays, weeklyLiftDays, weeklySwimDays, weeklyBikeDays, weeklyRowDays: 0 };
+        primaryDaysForStorage = weeklyRunDays;
       } else {
-        weeklyRunDays = prefs.daysPerWeek >= 2 ? Math.ceil(prefs.daysPerWeek * 0.6) : 2;
-        weeklyLiftDays = prefs.daysPerWeek >= 2 ? Math.floor(prefs.daysPerWeek * 0.4) : 1;
-        // includeSwim/includeBike previously had no effect on the generated
-        // plan — surface them as one dedicated day each when checked.
-        weeklySwimDays = prefs.includeSwim ? 1 : 0;
-        weeklyBikeDays = prefs.includeBike ? 1 : 0;
+        const primaryDays = prefs.daysPerWeek >= 2 ? Math.ceil(prefs.daysPerWeek * 0.6) : 2;
+        const liftDays = prefs.daysPerWeek >= 2 ? Math.floor(prefs.daysPerWeek * 0.4) : 1;
+        // includeSwim/includeBike surface as one dedicated secondary day each.
+        routed = routeDisciplineDays(mappedGoal, primaryDays, liftDays, !!prefs.includeSwim, !!prefs.includeBike);
+        primaryDaysForStorage = primaryDays;
       }
 
       goals = {
         primaryGoal: mappedGoal,
-        weeklyRunDays,
-        weeklyLiftDays,
-        weeklySwimDays,
-        weeklyBikeDays,
+        weeklyRunDays: routed.weeklyRunDays,
+        weeklyLiftDays: routed.weeklyLiftDays,
+        weeklySwimDays: routed.weeklySwimDays,
+        weeklyBikeDays: routed.weeklyBikeDays,
+        weeklyRowDays: routed.weeklyRowDays,
         triathlonDistance: isTriathlon ? prefs.triathlonDistance ?? 'sprint' : null,
         fitnessLevel: prefs.experienceLevel ?? 'beginner',
         targetRace: null,
@@ -505,7 +513,7 @@ Deno.serve(async (req: Request) => {
           target_race: null,
           target_date: null,
           total_weeks_planned: null,
-          weekly_run_days: goals.weeklyRunDays,
+          weekly_run_days: primaryDaysForStorage,
           weekly_lift_days: goals.weeklyLiftDays,
           fitness_level: goals.fitnessLevel,
         },
@@ -545,10 +553,18 @@ Deno.serve(async (req: Request) => {
         .eq('user_id', userId)
         .maybeSingle();
 
+      const bgGoal = goalsRow?.primary_goal ?? 'hybrid';
+      const bgPrimaryDays = goalsRow?.weekly_run_days ?? 3;
+      const bgLiftDays = goalsRow?.weekly_lift_days ?? 2;
+      const bgRouted = routeDisciplineDays(bgGoal, bgPrimaryDays, bgLiftDays, false, false);
+
       goals = {
-        primaryGoal: goalsRow?.primary_goal ?? 'hybrid',
-        weeklyRunDays: goalsRow?.weekly_run_days ?? 3,
-        weeklyLiftDays: goalsRow?.weekly_lift_days ?? 2,
+        primaryGoal: bgGoal,
+        weeklyRunDays: bgRouted.weeklyRunDays,
+        weeklyLiftDays: bgRouted.weeklyLiftDays,
+        weeklySwimDays: bgRouted.weeklySwimDays,
+        weeklyBikeDays: bgRouted.weeklyBikeDays,
+        weeklyRowDays: bgRouted.weeklyRowDays,
         fitnessLevel: goalsRow?.fitness_level ?? 'beginner',
         targetRace: goalsRow?.target_race ?? null,
       };
@@ -707,7 +723,10 @@ Deno.serve(async (req: Request) => {
         fuel: (day as { fuel?: unknown }).fuel ?? null,
         lift_prescription: day.session_type === 'lift' ? day.lift_prescription ?? null : null,
         interval_prescription:
-          day.session_type === 'swim' || day.session_type === 'bike' || day.session_type === 'run'
+          day.session_type === 'swim' ||
+          day.session_type === 'bike' ||
+          day.session_type === 'run' ||
+          day.session_type === 'rowing'
             ? day.interval_prescription ?? null
             : null,
       };
