@@ -54,6 +54,55 @@ interface TrainingLoad {
   tsb: number;
 }
 
+// Hand-narrowed copy of the app's ZoneSet — Deno edge functions can't import
+// '@/...', so these mirror OSPREY-app/src/services/coaching/zones.ts and the
+// calculators it wraps (calculators/running.ts, swimming.ts, rowing.ts) field
+// for field, including the `.bands` nesting. Keep in sync if those change.
+// `Range` allows both bounds to be null because some bands are open-ended
+// (e.g. swim z1EasyRecovery.max, rowing an.min).
+interface Range {
+  min: number | null;
+  max: number | null;
+}
+
+interface RunningPaceZones {
+  thresholdSecPerMile: number;
+  easy: Range;
+  marathonPace: Range;
+  halfMarathonPace: Range;
+  tenKPace: Range;
+  fiveKPace: Range;
+  intervalPace: Range;
+}
+
+interface SwimPaceZones {
+  cssSecPer100: number;
+  z1EasyRecovery: Range;
+  z2Aerobic: Range;
+  z3Threshold: Range;
+  z4Vo2Max: Range;
+}
+
+interface RowingZone {
+  splitSecPer500: Range;
+  strokeRateSpm: Range;
+  percentOf2kPower: Range;
+}
+
+interface RowingTrainingZones {
+  current2kSplitSecPer500: number;
+  ut2: RowingZone;
+  ut1: RowingZone;
+  at: RowingZone;
+  tr: RowingZone;
+  an: RowingZone;
+}
+
+type ZoneSet =
+  | { kind: 'run'; thresholdSecPerMile: number; bands: RunningPaceZones }
+  | { kind: 'swim'; cssSecPer100: number; bands: SwimPaceZones }
+  | { kind: 'rowing'; splitSecPer500: number; bands: RowingTrainingZones };
+
 interface Envelope {
   sport: string;
   phase: string;
@@ -61,7 +110,7 @@ interface Envelope {
   totalWeeks: number;
   targetWeeklyLoad: number;
   hardSessionShareMax: number;
-  runZones: { thresholdSecPerMile: number; easy: { min: number; max: number }; marathonPace: { min: number; max: number }; tenKPace: { min: number; max: number }; fiveKPace: { min: number; max: number }; intervalPace: { min: number; max: number } } | null;
+  zones: ZoneSet | null;
   fuel: { dailyCarbG: { min: number | null; max: number | null }; proteinG: { min: number; max: number }; longSessionCarbGPerHour: number };
 }
 
@@ -247,11 +296,21 @@ async function generateRescheduleReason(swaps: RescheduleSwap[]): Promise<string
 }
 
 async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad, envelope?: Envelope) {
+  // Per-kind pace-band guidance, switched on zones.kind. Field paths route
+  // through `.bands` to match the app's ZoneSet shape (see the Envelope/zones
+  // type above) — kept in sync, this reads exactly what build-envelope.ts sends.
+  const z = envelope?.zones;
+  const zoneGuidance = !z
+    ? ''
+    : z.kind === 'run'
+      ? ` Run pace bands (sec/mile): easy ${z.bands.easy.min}-${z.bands.easy.max}, threshold ~${z.thresholdSecPerMile}, 10K ${z.bands.tenKPace.min}-${z.bands.tenKPace.max}, 5K/interval ${z.bands.fiveKPace.min}-${z.bands.fiveKPace.max}. Choose distances/durations so implied pace matches the band for each session's intensity.`
+      : z.kind === 'swim'
+        ? ` Swim CSS ~${z.cssSecPer100} s/100m; easy ${z.bands.z2Aerobic.min}-${z.bands.z2Aerobic.max}, threshold ${z.bands.z3Threshold.min}-${z.bands.z3Threshold.max} s/100m. Choose distances/durations so implied pace matches the band for each session's intensity.`
+        : ` Rowing 2k split ~${z.splitSecPer500} s/500m; easy (UT2) ${z.bands.ut2.splitSecPer500.min}-${z.bands.ut2.splitSecPer500.max}, threshold (AT) ${z.bands.at.splitSecPer500.min}-${z.bands.at.splitSecPer500.max} s/500m. Choose piece lengths/rest so implied split matches the band for each session's intensity.`;
+
   const envelopeGuidance = envelope
     ? ` COACHING ENVELOPE (hard constraints — stay inside these): phase=${envelope.phase}, week ${envelope.weekNumber}/${envelope.totalWeeks}, target weekly load ≈ ${envelope.targetWeeklyLoad} TSS, at most ${Math.round(envelope.hardSessionShareMax * 100)}% of sessions hard.` +
-      (envelope.runZones
-        ? ` Run pace bands (sec/mile): easy ${envelope.runZones.easy.min}-${envelope.runZones.easy.max}, threshold ~${envelope.runZones.thresholdSecPerMile}, 10K ${envelope.runZones.tenKPace.min}-${envelope.runZones.tenKPace.max}, 5K/interval ${envelope.runZones.fiveKPace.min}-${envelope.runZones.fiveKPace.max}. Choose distances/durations so implied pace matches the band for each session's intensity.`
-        : '') +
+      zoneGuidance +
       ` Daily carbs ${envelope.fuel.dailyCarbG.min}-${envelope.fuel.dailyCarbG.max} g; long-session fuel ~${envelope.fuel.longSessionCarbGPerHour} g/hr.`
     : '';
 
