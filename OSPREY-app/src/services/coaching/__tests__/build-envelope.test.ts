@@ -10,7 +10,7 @@ describe('envelopeFromInputs', () => {
       baselineLoad: 0, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
     });
     expect(env.phase).toBe('Base');
-    expect(env.runZones).not.toBeNull(); // estimate anchor still yields zones
+    expect(env.zones).not.toBeNull(); // estimate anchor still yields zones
   });
 
   it('derives a Taper envelope from a race 1 week out in an 8-week plan, via an injected now', () => {
@@ -31,6 +31,6 @@ describe('envelopeFromInputs', () => {
     expect(env.phase).toBe('Taper');
     expect(env.weekNumber).toBe(8);
     expect(env.totalWeeks).toBe(8);
-    expect(env.runZones).not.toBeNull();
+    expect(env.zones).not.toBeNull();
   });
 });

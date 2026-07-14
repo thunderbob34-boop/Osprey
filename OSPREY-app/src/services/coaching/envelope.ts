@@ -1,7 +1,8 @@
-import { runningPaceZones, RunningPaceZones } from '@/services/calculators/running';
+import { runningPaceZones } from '@/services/calculators/running';
 import { Phase, loadingWeek, targetWeeklyLoad } from './periodization';
 import { resolveRunningAnchor } from './anchor';
 import { computeRunningFuel, FuelTargets } from './fuel';
+import { ZoneSet, blueprintSport } from './zones';
 
 export interface CoachingEnvelope {
   sport: string;
@@ -10,7 +11,7 @@ export interface CoachingEnvelope {
   totalWeeks: number;
   targetWeeklyLoad: number;
   hardSessionShareMax: number; // polarization cap (docs/coaching/_index.md:16)
-  runZones: RunningPaceZones | null;
+  zones: ZoneSet | null;
   fuel: FuelTargets;
 }
 
@@ -35,16 +36,17 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     prevWeekLoad: input.prevWeekLoad,
   });
 
-  const isRun = input.sport === 'run' || input.sport === 'hybrid';
-  const runZones = isRun
-    ? runningPaceZones(
-        resolveRunningAnchor({
-          bestRunMiles: input.bestRunMiles,
-          bestRunTimeS: input.bestRunTimeS,
-          fitnessLevel: input.fitnessLevel,
-        }).thresholdSecPerMile,
-      )
-    : null;
+  let zones: ZoneSet | null = null;
+  const bp = blueprintSport(input.sport);
+  if (bp === 'run') {
+    const t = resolveRunningAnchor({
+      bestRunMiles: input.bestRunMiles,
+      bestRunTimeS: input.bestRunTimeS,
+      fitnessLevel: input.fitnessLevel,
+    }).thresholdSecPerMile;
+    zones = { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) };
+  }
+  // swim / rowing added in Tasks 2 & 3.
 
   const hardWeek = loadingWeek(input.weekNumber) !== 4 && input.phase !== 'Taper';
 
@@ -55,7 +57,7 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     totalWeeks: input.totalWeeks,
     targetWeeklyLoad: load,
     hardSessionShareMax: 0.2,
-    runZones,
+    zones,
     fuel: computeRunningFuel({ bodyWeightKg: input.bodyWeightKg, hardWeek }),
   };
 }

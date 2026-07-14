@@ -9,8 +9,11 @@ const baseInput = {
 describe('computeEnvelope', () => {
   it('produces run zones from the derived anchor for a running plan', () => {
     const env = computeEnvelope(baseInput);
-    expect(env.runZones).not.toBeNull();
-    expect(env.runZones!.easy.min).toBeGreaterThan(env.runZones!.thresholdSecPerMile); // easy is slower
+    expect(env.zones).not.toBeNull();
+    expect(env.zones?.kind).toBe('run');
+    if (env.zones && env.zones.kind === 'run') {
+      expect(env.zones.bands.easy.min).toBeGreaterThan(env.zones.thresholdSecPerMile); // easy is slower
+    }
   });
 
   it('carries a phase-appropriate target load and fuel', () => {
@@ -21,6 +24,6 @@ describe('computeEnvelope', () => {
   });
 
   it('omits run zones for a non-running sport', () => {
-    expect(computeEnvelope({ ...baseInput, sport: 'cycling' }).runZones).toBeNull();
+    expect(computeEnvelope({ ...baseInput, sport: 'cycling' }).zones).toBeNull();
   });
 });
