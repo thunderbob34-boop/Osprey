@@ -1,4 +1,4 @@
-import { computeEnvelope } from '@/services/coaching/envelope';
+import { computeEnvelope, EnvelopeInput } from '@/services/coaching/envelope';
 
 const baseInput = {
   sport: 'run', phase: 'Build' as const, weekNumber: 5, totalWeeks: 16,
@@ -42,5 +42,32 @@ describe('computeEnvelope', () => {
       expect(env.zones.splitSecPer500).toBe(120);
       expect(env.zones.bands.tr.splitSecPer500.min).toBe(120); // TR band starts at the 2k split
     }
+  });
+});
+
+const base: EnvelopeInput = {
+  sport: 'swim', phase: 'Base' as const, weekNumber: 1, totalWeeks: 8,
+  baselineLoad: 200, prevWeekLoad: null,
+  bestRunMiles: null, bestRunTimeS: null, rowingSplitSecPer500: null,
+  fitnessLevel: 'beginner', bodyWeightKg: 70,
+};
+
+describe('computeEnvelope self-report priority', () => {
+  it('prefers a self-reported swim CSS over the tier estimate', () => {
+    const env = computeEnvelope({ ...base, sport: 'swim', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 88, splitSecPer500: null } });
+    expect(env.zones).toMatchObject({ kind: 'swim', cssSecPer100: 88 });
+  });
+  it('prefers a self-reported run threshold over data/tier', () => {
+    const env = computeEnvelope({ ...base, sport: 'run', selfReportAnchor: { thresholdSecPerMile: 400, cssSecPer100: null, splitSecPer500: null } });
+    expect(env.zones).toMatchObject({ kind: 'run', thresholdSecPerMile: 400 });
+  });
+  it('prefers a self-reported rowing split over data/tier', () => {
+    const env = computeEnvelope({ ...base, sport: 'rowing', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: 108 } });
+    expect(env.zones).toMatchObject({ kind: 'rowing', splitSecPer500: 108 });
+  });
+  it('is unchanged when selfReportAnchor is absent (regression guard)', () => {
+    const withField = computeEnvelope({ ...base, sport: 'swim', selfReportAnchor: null });
+    const withoutField = computeEnvelope({ ...base, sport: 'swim' });
+    expect(withField).toEqual(withoutField);
   });
 });
