@@ -6,6 +6,7 @@
 // instead of creating a duplicate.
 
 import { createClient } from 'jsr:@supabase/supabase-js@2';
+import { validateAndClamp } from './validate.ts';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
@@ -590,9 +591,10 @@ Deno.serve(async (req: Request) => {
         .from('training_weeks')
         .insert({
           plan_id: planId,
-          week_number: 1,
+          week_number: (body.envelope as Envelope | undefined)?.weekNumber ?? 1,
           start_date: weekStartStr,
-          focus: 'Base building',
+          focus: (body.envelope as Envelope | undefined)?.phase ?? 'Base building',
+          tss_target: (body.envelope as Envelope | undefined)?.targetWeeklyLoad ?? null,
         })
         .select('id')
         .single();
@@ -603,7 +605,14 @@ Deno.serve(async (req: Request) => {
 
     const days = await generateWeekDays(goals, trainingLoad, (body.envelope as Envelope | undefined));
 
-    const sessionRows = days.map((day) => {
+    const envelope = body.envelope as Envelope | undefined;
+    const clamped = envelope
+      ? validateAndClamp(days as never, envelope as never)
+      : { days, changed: [] as string[] };
+    if (clamped.changed.length) console.log('envelope clamp', clamped.changed);
+    const finalDays = clamped.days;
+
+    const sessionRows = finalDays.map((day) => {
       const sessionDate = new Date(weekStart);
       sessionDate.setDate(weekStart.getDate() + day.dayOffset);
       return {
@@ -616,6 +625,7 @@ Deno.serve(async (req: Request) => {
         planned_distance_km: day.planned_distance_km,
         description: day.description,
         ozzie_notes: day.ozzie_notes,
+        fuel: (day as { fuel?: unknown }).fuel ?? null,
         lift_prescription: day.session_type === 'lift' ? day.lift_prescription ?? null : null,
         interval_prescription:
           day.session_type === 'swim' || day.session_type === 'bike' || day.session_type === 'run'
