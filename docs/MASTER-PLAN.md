@@ -196,19 +196,19 @@ The full branch-by-branch table, verification status, and harvest list live in [
 - [ ] 8 edge functions leak raw `err.message` / Postgres internals in 500s.
 
 **Correctness / crash:**
-- [ ] Home crash on multi-session days — `.maybeSingle()` on 2+ rows (`daily-summary.ts`).
+- [x] Home crash on multi-session days — `.maybeSingle()` on 2+ rows (`daily-summary.ts`). **Fixed** `fb80acb` (order + limit 1).
 - [ ] Voice-logging drops set weight → corrupts PR history (`lift.tsx`).
 - [ ] Endurance GPS tracks never persisted (`saveEnduranceWorkout`).
-- [ ] "Start Session" mis-routes swim/bike/rowing/cross/hyrox to the GPS run screen (`app/(tabs)/index.tsx`).
+- [x] "Start Session" mis-routes swim/bike/rowing/cross/hyrox to the GPS run screen (`app/(tabs)/index.tsx`). **Fixed** `fb80acb` (per-sport switch mirroring Workout tab).
 - [ ] GPS watcher leak on fast unmount.
-- [ ] UTC-vs-local "today" — `daily-summary.ts` + `calendar.ts` show tomorrow's session after ~5pm. *(newest of a recurring class — see 3D)*
+- [x] UTC-vs-local "today" — **Fixed** `fb80acb`: added tested `src/utils/date.ts` `localDateString()`, applied in `daily-summary.ts`. *Remaining in this class: `calendar.ts` UTC window (§3D) — now a quick swap to the new helper.*
 - [ ] `ozzie-generate-plan` idempotency race (no unique constraint on one-active-plan-per-week).
 - [ ] Race-plan branch hardcodes `intermediate`/4-run/1-lift, ignores athlete profile.
 - [ ] `toggleKudo` non-atomic race; activity-feed fallback query unscoped; `useSubscription` doesn't propagate refresh.
 
 **UX:**
 - [ ] Onboarding progress bar never reaches 100% (`totalSteps` 5 vs 4 real steps) — *re-found despite 2 prior "fixes."*
-- [ ] Paywall shows annual price as "/mo" — **App Store risk.** *(fixed on 5 branches, still live)*
+- [x] Paywall shows annual price as "/mo" — **App Store risk.** **Fixed** `fb80acb`: suffix/label now derived from the package's real billing period. *(Follow-up available: paywall loading/error state.)*
 - [ ] Day-picker touch targets <44px; broader units-display sweep (~14 files still hardcode miles/lbs).
 
 ### 3C. 🔵 The coaching-engine fidelity gap (biggest architectural item — flagged in 5 audits)
