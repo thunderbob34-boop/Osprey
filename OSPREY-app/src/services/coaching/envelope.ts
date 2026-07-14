@@ -1,6 +1,7 @@
 import { runningPaceZones } from '@/services/calculators/running';
+import { swimPaceZones } from '@/services/calculators/swimming';
 import { Phase, loadingWeek, targetWeeklyLoad } from './periodization';
-import { resolveRunningAnchor } from './anchor';
+import { estimateSwimCssByTier, resolveRunningAnchor } from './anchor';
 import { computeRunningFuel, FuelTargets } from './fuel';
 import { ZoneSet, blueprintSport } from './zones';
 
@@ -45,8 +46,11 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
       fitnessLevel: input.fitnessLevel,
     }).thresholdSecPerMile;
     zones = { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) };
+  } else if (bp === 'swim') {
+    const css = estimateSwimCssByTier(input.fitnessLevel);
+    zones = { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) };
   }
-  // swim / rowing added in Tasks 2 & 3.
+  // rowing added in Task 3.
 
   const hardWeek = loadingWeek(input.weekNumber) !== 4 && input.phase !== 'Taper';
 

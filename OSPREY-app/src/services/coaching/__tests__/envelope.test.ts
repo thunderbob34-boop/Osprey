@@ -26,4 +26,12 @@ describe('computeEnvelope', () => {
   it('omits run zones for a non-running sport', () => {
     expect(computeEnvelope({ ...baseInput, sport: 'cycling' }).zones).toBeNull();
   });
+
+  it('produces swim zones for a swimming plan', () => {
+    const env = computeEnvelope({ ...baseInput, sport: 'swim' });
+    expect(env.zones?.kind).toBe('swim');
+    if (env.zones?.kind === 'swim') {
+      expect(env.zones.bands.z3Threshold.min).toBeLessThan(env.zones.cssSecPer100); // threshold is faster than CSS
+    }
+  });
 });

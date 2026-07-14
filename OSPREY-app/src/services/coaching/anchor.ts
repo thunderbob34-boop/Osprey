@@ -64,3 +64,14 @@ export function resolveRunningAnchor(input: {
   const estimate = TIER_ESTIMATE_SEC_PER_MILE[fitnessLevel] ?? TIER_ESTIMATE_SEC_PER_MILE.beginner;
   return { thresholdSecPerMile: estimate, source: 'estimate' };
 }
+
+// Coarse cold-start CSS (sec/100m) by tier — until 2b adds the 400+200 TT input / HR zones.
+const TIER_SWIM_CSS_SEC_PER_100: Record<string, number> = {
+  advanced: 80,     // 1:20/100m
+  intermediate: 100, // 1:40/100m
+  beginner: 130,     // 2:10/100m
+};
+
+export function estimateSwimCssByTier(fitnessLevel: string): number {
+  return TIER_SWIM_CSS_SEC_PER_100[fitnessLevel] ?? TIER_SWIM_CSS_SEC_PER_100.beginner;
+}

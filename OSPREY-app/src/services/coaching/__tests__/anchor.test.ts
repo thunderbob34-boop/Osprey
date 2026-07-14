@@ -1,4 +1,14 @@
-import { resolveRunningAnchor, selectBestRunEffort } from '@/services/coaching/anchor';
+import { estimateSwimCssByTier, resolveRunningAnchor, selectBestRunEffort } from '@/services/coaching/anchor';
+
+describe('estimateSwimCssByTier', () => {
+  it('gives a realistic CSS per 100m and ranks advanced faster than beginner', () => {
+    const adv = estimateSwimCssByTier('advanced');
+    const beg = estimateSwimCssByTier('beginner');
+    expect(adv).toBeGreaterThan(60);   // faster than 1:00/100m is implausible for these tiers
+    expect(beg).toBeLessThan(180);
+    expect(adv).toBeLessThan(beg);
+  });
+});
 
 describe('resolveRunningAnchor', () => {
   it('derives threshold pace from a logged effort (a 20:00 5K → sane T pace)', () => {
