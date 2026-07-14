@@ -14,12 +14,6 @@
     "typecheck": "tsc --noEmit",
     "test": "TZ=Asia/Kolkata jest"
   },
-  "jest": {
-    "preset": "jest-expo",
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
-    }
-  },
   "dependencies": {
     "@expo/metro-runtime": "~4.0.0",
     "@opentelemetry/api": "^1.9.1",
