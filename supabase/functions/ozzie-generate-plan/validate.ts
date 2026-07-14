@@ -30,8 +30,28 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
   const changed: string[] = [];
   const z = envelope.runZones;
 
-  // (a) clamp run pace into the band by scaling distance for the fixed duration.
+  // (a) polarization: demote excess hard sessions (keep the earliest ones).
+  // This MUST run before pace-clamp: a session demoted here changes its
+  // intensity (and therefore its target band), so clamping has to see the
+  // final intensity — otherwise a demoted `easy` session would keep the
+  // distance clamped to fit its old, faster `interval`/`threshold` band.
+  const maxHard = Math.ceil(days.length * envelope.hardSessionShareMax);
+  let seen = 0;
   let out = days.map((d) => {
+    if (HARD.has(d.intensity)) {
+      seen += 1;
+      if (seen > maxHard) {
+        changed.push(`day${d.dayOffset}: ${d.intensity}→easy (polarization)`);
+        return { ...d, intensity: 'easy', interval_prescription: null };
+      }
+    }
+    return d;
+  });
+
+  // (b) clamp run pace into the band by scaling distance for the fixed duration.
+  // Runs after polarization so a demoted session is clamped into the band
+  // matching its FINAL (post-demotion) intensity.
+  out = out.map((d) => {
     if (z && d.session_type === 'run' && d.planned_minutes && d.planned_distance_km) {
       const band = bandFor(d.intensity, z);
       if (band) {
@@ -52,20 +72,6 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
           changed.push(`day${d.dayOffset}: pace ${Math.round(impliedSecPerMi)}→${Math.round(target)} s/mi`);
           return { ...d, planned_distance_km: roundedKm };
         }
-      }
-    }
-    return d;
-  });
-
-  // (b) polarization: demote excess hard sessions (keep the earliest ones).
-  const maxHard = Math.ceil(out.length * envelope.hardSessionShareMax);
-  let seen = 0;
-  out = out.map((d) => {
-    if (HARD.has(d.intensity)) {
-      seen += 1;
-      if (seen > maxHard) {
-        changed.push(`day${d.dayOffset}: ${d.intensity}→easy (polarization)`);
-        return { ...d, intensity: 'easy', interval_prescription: null };
       }
     }
     return d;
