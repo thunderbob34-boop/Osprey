@@ -20,14 +20,25 @@ estimates for every sport. 2b-ii lets an athlete state a real baseline and makes
   athlete has no logs to derive from.
 - **HR-fallback zones are 2b-iii; cycling FTP is 2c.** 2b-ii's ladder is `self_report > data-derive > tier`.
 
-## 2. This slice is app-only — no migration, no edge-fn change
+## 2. Scope: the OSPREY mobile app only — no migration, no edge-fn, no webapp change (this slice)
 
-The key architectural fact that scopes 2b-ii tightly:
+Two senses of "scope," both landing on mobile-only for 2b-ii:
+
+**Deploy scope — no backend change:**
 - **No migration.** `user_goals.threshold_anchor JSONB` already exists (Phase 1, migration `20260714000002`) and
   is currently unused. 2b-ii is its first reader/writer.
 - **No edge-fn change, no redeploy.** `computeEnvelope` + `build-envelope` run **in the app** (`OSPREY-app/src/services/coaching/`); the app resolves the `CoachingEnvelope` and hands `envelope.zones` to `ozzie-generate-plan`, which since 2a/2b-i already accepts any `ZoneSet`. A more-accurate anchor only changes the *numbers* inside `zones` — the contract is unchanged.
 
 So 2b-ii ships entirely with the app build and adds **nothing** to the 2b-i go-live deploy coupling. Low-risk.
+
+**Surface scope — why not the webapp/website (yet):** the **website** is Astro marketing (no auth, no onboarding, no
+user data) — never in scope. The **webapp** analyst surface (`webapp/`) does **not** generate plans — it has no
+`computeEnvelope`/envelope code (plan generation is mobile + edge-fn only), so §3's self-report priority has no
+webapp counterpart to update, and onboarding doesn't happen there. The webapp's *natural* role here is a **Training
+Zones view + editor** on its `settings` route (read/write the same `threshold_anchor`) — which is exactly the edit
+path deferred in §10, and is the **dedicated next slice (2b-ii-web)**, kept separate so each plan/review cycle owns
+one codebase. Phone = quick optional capture; webapp = the real view + edit (matches CLAUDE.md: *the webapp
+complements the phone, never mirrors it*).
 
 ## 3. Anchor priority in `computeEnvelope` (the pure core)
 
@@ -124,14 +135,17 @@ runbook beyond what 2b-i already records.
   with gentle copy and a prominent Skip; the tier estimate is a fine fallback.
 - **Run baseline sparsity** — many new runners have no recent *timed* run; skippable, and data-derivation takes
   over once they log.
-- **No edit path yet** — 2b-ii captures the anchor only at onboarding. Changing it later (a settings "your zones"
-  editor, or a post-onboarding "sharpen" prompt) is out of scope; re-deriving from logs still improves non-self-report
-  anchors over time. **Open:** is onboarding-only acceptable for now, or is a minimal edit entry needed this slice?
-  Lean: onboarding-only.
+- **No edit path on mobile — by design.** 2b-ii captures the anchor only at onboarding. Editing/re-entering it is
+  the **webapp Training Zones editor's** job (the dedicated next slice, §2), which is the better home for precise
+  entry; re-deriving from logs also keeps non-self-report anchors improving over time. So mobile onboarding-only is
+  deliberate, not a gap. (Resolved in brainstorming: webapp editor is a separate slice, not folded into 2b-ii.)
 - **Plan-builder path** — a user selecting a sport in `preferences.tsx` (not onboarding) gets no Baseline prompt in
   2b-ii; they resolve via data/tier, and `computeEnvelope` still honors any `threshold_anchor` already stored.
 - **`source` stored but unused** — persisted for a later confidence UI; harmless now.
 
-## 11. Out of scope
-Cycling FTP input + power zones (2c); HR-fallback zones (2b-iii); a post-onboarding "sharpen your zones" prompt or
-settings zone-editor; surfacing measured-vs-estimated confidence; a plan-builder Baseline entry; changing the LLM.
+## 11. Out of scope (and where it goes)
+- **Webapp Training Zones view + editor** (read/write `threshold_anchor` on the `settings` route) → the dedicated
+  **next slice, 2b-ii-web**; owns the anchor edit path (§2, §10).
+- HR-fallback zones → **2b-iii**. Cycling FTP input + power zones → **2c**.
+- Surfacing measured-vs-estimated confidence (the stored `source`); a mobile post-onboarding "sharpen" prompt; a
+  plan-builder Baseline entry; changing the LLM → later / unscheduled.
