@@ -167,6 +167,9 @@ The full branch-by-branch table, verification status, and harvest list live in [
 
 ### 3A. 🔴 Launch blockers (mobile app → TestFlight)
 
+> **The concrete backend deploy steps (migrations + edge functions, with ordering/coupling) and this
+> launch sequence as an actionable runbook live in [DEPLOY-CHECKLIST.md](DEPLOY-CHECKLIST.md).**
+
 - [ ] **Buy a real domain.** `osprey.app` is NOT owned (nameservers = `dan.com` parking). Root blocker — cascades to:
   Supabase Auth Site URL, Apple Sign In Services ID + return URL, Resend sending domain, privacy/support URLs,
   and `src/constants/links.ts`. **Do this first.**
