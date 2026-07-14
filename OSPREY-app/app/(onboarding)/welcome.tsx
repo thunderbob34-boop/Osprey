@@ -10,7 +10,7 @@ export default function WelcomeScreen() {
   return (
     <OnboardingShell
       step={0}
-      totalSteps={4}
+      totalSteps={5}
       title="Hey — I'm Ozzie."
       showOzzie={false}
       onContinue={() => router.push('/(onboarding)/name')}
