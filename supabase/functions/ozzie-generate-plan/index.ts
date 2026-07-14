@@ -723,7 +723,10 @@ Deno.serve(async (req: Request) => {
         fuel: (day as { fuel?: unknown }).fuel ?? null,
         lift_prescription: day.session_type === 'lift' ? day.lift_prescription ?? null : null,
         interval_prescription:
-          day.session_type === 'swim' || day.session_type === 'bike' || day.session_type === 'run'
+          day.session_type === 'swim' ||
+          day.session_type === 'bike' ||
+          day.session_type === 'run' ||
+          day.session_type === 'rowing'
             ? day.interval_prescription ?? null
             : null,
       };
