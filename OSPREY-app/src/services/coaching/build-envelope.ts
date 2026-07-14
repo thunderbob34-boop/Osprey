@@ -1,6 +1,10 @@
 import { supabase } from '@/services/supabase';
 import { computeRacePhase, RaceGoal } from '@/services/plan';
 import { computeEnvelope, CoachingEnvelope } from './envelope';
+import { selectBestRunEffort } from './anchor';
+
+const MILES_PER_KM = 0.621371;
+const RECENT_WINDOW_MS = 56 * 24 * 60 * 60 * 1000; // 8 weeks
 
 interface EnvelopeInputs {
   sport: string;
@@ -46,12 +50,24 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
   };
 
   if (userId) {
-    const [goalsRes, weightRes, bestRes] = await Promise.all([
+    const [goalsRes, weightRes, runsRes] = await Promise.all([
       supabase.from('user_goals').select('primary_goal, fitness_level, target_date, total_weeks_planned').eq('user_id', userId).maybeSingle(),
       supabase.from('body_metrics').select('weight_kg').eq('user_id', userId).order('recorded_on', { ascending: false }).limit(1).maybeSingle(),
-      supabase.from('workout_logs').select('total_distance_km, total_duration_s').eq('user_id', userId).eq('session_type', 'run').is('deleted_at', null).order('total_distance_km', { ascending: false }).limit(1).maybeSingle(),
+      // Recent runs (not the single longest all-time), so the anchor can pick the
+      // best-QUALITY effort rather than the slowest long run — see selectBestRunEffort.
+      supabase.from('workout_logs').select('total_distance_km, total_duration_s').eq('user_id', userId).eq('session_type', 'run').is('deleted_at', null).gte('started_at', new Date(Date.now() - RECENT_WINDOW_MS).toISOString()).order('started_at', { ascending: false }).limit(30),
     ]);
+    // A failed query silently degrades to generic defaults — surface it so it's diagnosable.
+    if (goalsRes.error) console.warn('[build-envelope] user_goals query failed:', goalsRes.error.message);
+    if (weightRes.error) console.warn('[build-envelope] body_metrics query failed:', weightRes.error.message);
+    if (runsRes.error) console.warn('[build-envelope] workout_logs query failed:', runsRes.error.message);
+
     const g = goalsRes.data;
+    const recentRuns = (runsRes.data ?? [])
+      .filter((r) => r.total_distance_km && r.total_duration_s)
+      .map((r) => ({ distanceMiles: (r.total_distance_km as number) * MILES_PER_KM, timeS: r.total_duration_s as number }));
+    const bestEffort = selectBestRunEffort(recentRuns);
+
     inputs = {
       sport: g?.primary_goal ?? 'run',
       race: g?.target_date && g?.total_weeks_planned ? { targetDate: g.target_date, totalWeeksPlanned: g.total_weeks_planned } : null,
@@ -59,8 +75,8 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       bodyWeightKg: weightRes.data?.weight_kg ?? 70,
       baselineLoad: 200,          // Phase 2 will thread real CTL; Base default for now
       prevWeekLoad: null,
-      bestRunMiles: bestRes.data?.total_distance_km ? bestRes.data.total_distance_km * 0.621371 : null,
-      bestRunTimeS: bestRes.data?.total_duration_s ?? null,
+      bestRunMiles: bestEffort?.distanceMiles ?? null,
+      bestRunTimeS: bestEffort?.timeS ?? null,
     };
   }
 

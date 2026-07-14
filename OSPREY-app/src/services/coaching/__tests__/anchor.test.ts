@@ -1,4 +1,4 @@
-import { resolveRunningAnchor } from '@/services/coaching/anchor';
+import { resolveRunningAnchor, selectBestRunEffort } from '@/services/coaching/anchor';
 
 describe('resolveRunningAnchor', () => {
   it('derives threshold pace from a logged effort (a 20:00 5K → sane T pace)', () => {
@@ -20,5 +20,32 @@ describe('resolveRunningAnchor', () => {
     const adv = resolveRunningAnchor({ bestRunMiles: null, bestRunTimeS: null, fitnessLevel: 'advanced' });
     const beg = resolveRunningAnchor({ bestRunMiles: null, bestRunTimeS: null, fitnessLevel: 'beginner' });
     expect(adv.thresholdSecPerMile).toBeLessThan(beg.thresholdSecPerMile);
+  });
+});
+
+describe('selectBestRunEffort', () => {
+  it('picks the best-QUALITY effort, not the longest run', () => {
+    const runs = [
+      { distanceMiles: 13, timeS: 6300 }, // 13 mi @ ~8:04/mi — longest, but a slow long run
+      { distanceMiles: 3.107, timeS: 1200 }, // 5K @ ~6:26/mi — the real fitness signal
+      { distanceMiles: 5, timeS: 2400 }, // 5 mi @ 8:00/mi — easy
+    ];
+    // The longest-run heuristic would return the 13-miler and derive a slow threshold;
+    // best-effort must return the fast 5K.
+    expect(selectBestRunEffort(runs)).toEqual({ distanceMiles: 3.107, timeS: 1200 });
+  });
+
+  it('ignores too-short or invalid efforts', () => {
+    const runs = [
+      { distanceMiles: 0.5, timeS: 120 }, // < 1 mi — noise
+      { distanceMiles: 4, timeS: 0 }, // no time
+      { distanceMiles: 6.2, timeS: 2700 }, // 10K @ ~7:15/mi — valid
+    ];
+    expect(selectBestRunEffort(runs)).toEqual({ distanceMiles: 6.2, timeS: 2700 });
+  });
+
+  it('returns null when there is no valid effort', () => {
+    expect(selectBestRunEffort([])).toBeNull();
+    expect(selectBestRunEffort([{ distanceMiles: 0.3, timeS: 90 }])).toBeNull();
   });
 });
