@@ -1,21 +1,29 @@
 # OSPREY — Go-Live Deploy Checklist
 
 > Backend deploy runbook (migrations + edge functions) plus the ordered path to the App Store.
-> The backend steps below are precise and current as of 2026-07-14. For the detailed app-store
-> launch-blocker sub-items, this doc points to [MASTER-PLAN.md](MASTER-PLAN.md) §3A (single source of truth).
+> For the detailed app-store launch-blocker sub-items, this doc points to [MASTER-PLAN.md](MASTER-PLAN.md) §3A.
+
+## Status
+
+- ✅ **Backend deployed 2026-07-14** to project `jslbutpmgoushkzcghtg` (OSPREY):
+  - 6 edge functions deployed (`ozzie-generate-plan` first, then nutrition-coach, data-export, daily-brief, meal-photo, voice-log) — `verify_jwt=true` preserved.
+  - `log_hydration_client_date` + `one_active_plan_per_user` applied and verified (index exists; 0 users with >1 active plan; 1 duplicate archived).
+- ⚠️ **`supabase db push` is NOT usable** on this project — the repo's `supabase/migrations/` has **diverged** from the live `schema_migrations` history (many live migrations were applied via dashboard/MCP and never committed; some repo files are live under different version numbers). Migrations were therefore applied with **MCP `apply_migration`**, not `db push`. **`db pull` cannot auto-reconcile it** (it errors and suggests reverting real migrations — do not run that). Reconciliation is a **pending, separate task** (see below).
 
 **Prerequisites:** Supabase CLI installed and the project linked (`supabase link`), edge-function secrets
 already set (OpenAI, ElevenLabs, Resend — per MASTER-PLAN §3A), and **Node 20** for the app build.
 
 ---
 
-## 1. Database migrations — `supabase db push`
+## 1. Database migrations — ✅ done (via MCP, not `db push`)
 
-First see what's actually pending against the live project, then apply:
+> **Do NOT use `supabase db push` here until the migration-history drift is reconciled** (see the
+> reconciliation appendix). Both pending migrations were applied 2026-07-14 via MCP `apply_migration`.
+> The commands below are the *intended* workflow once the drift is fixed.
 
 ```bash
 supabase migration list      # compare local vs remote; confirm what's unapplied
-supabase db push             # applies all pending migrations in order
+supabase db push             # applies all pending migrations in order — BLOCKED by drift for now
 ```
 
 Migrations present locally after the last known-applied (`…032`). Confirm which are already on the
@@ -39,9 +47,9 @@ WHERE status='active' AND deleted_at IS NULL GROUP BY user_id HAVING count(*) > 
 
 ---
 
-## 2. Edge functions — `supabase functions deploy`
+## 2. Edge functions — ✅ done (`supabase functions deploy`)
 
-Six functions changed this session. Deploy each:
+All six deployed 2026-07-14 (`verify_jwt=true` preserved). Commands, for reference / redeploy:
 
 ```bash
 supabase functions deploy ozzie-nutrition-coach   # timezone: uses client-passed local day (UTC fallback)
@@ -109,3 +117,28 @@ These were verified by typecheck/tests but not exercised at runtime here — con
 
 ## Time-bomb
 - [ ] **Apple Sign-In client-secret JWT expires 2027-01-07** — regenerate before then (Apple caps at 6 months).
+
+---
+
+## Appendix — migration-history drift (pending reconciliation)
+
+**Symptom:** `supabase/migrations/` (repo) and `supabase_migrations.schema_migrations` (live DB) have diverged.
+The live DB has ~22 migrations not in the repo (applied via dashboard/MCP — e.g. `create_waitlist_table`,
+`harden_security_definer_functions`, `move_pg_trgm_out_of_public`, `add_activity_feed_rpc`,
+`add_accept_friend_request_rpc`, `nutrition_targets_manual_override`, `create_recipes_and_meal_plans`), and
+6 repo files are live under different version numbers (e.g. repo `20260713000001_fix_social_rpc_idor_and_consent`
+= live `20260713123556`). `db pull` cannot merge this; its auto-suggested `migration repair --status reverted …`
+would mark **real, applied** migrations as reverted — **do not run it.**
+
+**The live DB is the source of truth** (`schema_migrations` stores each migration's SQL in its `statements`
+column, so the repo can be rebuilt from it). Reconciliation options, to be chosen deliberately:
+
+- **A — Rebuild repo from remote (surgical):** add the ~22 remote-only migrations (reconstructed from
+  `statements`) as repo files, remove the 6 divergent repo files → repo file set == remote version set →
+  `db push` becomes a no-op. Local-only, git-reversible. Loses the hand-written comments on rebuilt files.
+- **B — Accept remote as truth, keep applying via MCP/dashboard:** document that `db push` is not used here;
+  keep applying migrations with MCP `apply_migration`. Lowest effort; repo migrations stay partially historical.
+- **C — Full squash/baseline reset:** collapse to a single baseline from the current remote schema. Cleanest
+  long-term but the biggest change; best done deliberately pre-launch.
+
+Until reconciled: **apply new migrations via MCP `apply_migration`, not `db push`.**

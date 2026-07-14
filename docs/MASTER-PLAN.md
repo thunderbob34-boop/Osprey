@@ -196,7 +196,7 @@ The full branch-by-branch table, verification status, and harvest list live in [
 - [ ] Friend-request consent bypass (requester can self-accept).
 - [ ] `get_challenge_leaderboard` leaks member roster to non-members.
 - [x] Subscription **fails open** (grants free Plus) off-iOS. **Fixed** in `subscriptions.ts`: fail closed in real builds, open only in `__DEV__`. Same change also fixes an init race (checks now `waitForInit()` before reading `configured`) and the RevenueCat identity leaking across account switches (`resetRevenueCat()` wired into sign-out + delete-account).
-- [x] 8 edge functions leak raw `err.message` / Postgres internals in 500s. **Fixed** `7acdca2` (6 fns → generic message + server log). *Needs `supabase functions deploy`.*
+- [x] 8 edge functions leak raw `err.message` / Postgres internals in 500s. **Fixed** `7acdca2` (6 fns → generic message + server log). *Deployed 2026-07-14.*
 
 **Correctness / crash:**
 - [x] Home crash on multi-session days — `.maybeSingle()` on 2+ rows (`daily-summary.ts`). **Fixed** `fb80acb` (order + limit 1).
@@ -205,7 +205,7 @@ The full branch-by-branch table, verification status, and harvest list live in [
 - [x] "Start Session" mis-routes swim/bike/rowing/cross/hyrox to the GPS run screen (`app/(tabs)/index.tsx`). **Fixed** `fb80acb` (per-sport switch mirroring Workout tab).
 - [x] GPS watcher leak on fast unmount. **Fixed** `caf6b3c` (cancellation flag in `useRunTracking`).
 - [x] UTC-vs-local "today" — **Fixed** `fb80acb`: added tested `src/utils/date.ts` `localDateString()`, applied in `daily-summary.ts`. `calendar.ts` stray-day leak **Fixed** in follow-up (tested `clampDaysToMonth`).
-- [x] `ozzie-generate-plan` idempotency race. **Fixed.** Crash on duplicate weeks resolved (`79e676f`); the TOCTOU race is now closed by the decided invariant — **one active plan per user**: migration `20260714000001` (partial unique index on `training_plans(user_id) WHERE status='active'`, with a dedup step so it applies cleanly on live data) + the edge fn catches the `23505` and reuses the concurrently-created plan. *Needs `supabase db push` + `functions deploy ozzie-generate-plan`.*
+- [x] `ozzie-generate-plan` idempotency race. **Fixed.** Crash on duplicate weeks resolved (`79e676f`); the TOCTOU race is now closed by the decided invariant — **one active plan per user**: migration `20260714000001` (partial unique index on `training_plans(user_id) WHERE status='active'`, with a dedup step so it applies cleanly on live data) + the edge fn catches the `23505` and reuses the concurrently-created plan. *Deployed 2026-07-14 (index verified live; 1 duplicate plan archived).*
 - [ ] Race-plan branch hardcodes `intermediate`/4-run/1-lift, ignores athlete profile.
 - [x] `toggleKudo` non-atomic race; activity-feed fallback scoping; `useSubscription` refresh propagation. **Fixed:** kudo insert now treats the `23505` conflict as "present" (kudos already has `UNIQUE(share_id, from_user)`); `useSubscription` rewritten on a shared `useSyncExternalStore` so a paywall refresh propagates to every mounted screen; activity-feed fallback made explicitly own-scoped (it was already RLS-bounded to `user_id = auth.uid()`, never a leak — the `get_activity_feed` RPC is the real path and exists on main).
 
@@ -239,9 +239,10 @@ date-handling convention + lint rule**, not another one-off patch.
 **Deliberately left** (internally-consistent, risk > reward): `performance.ts` daily-load series (keys + fill
 are symmetric — needs a coordinated change + test update) and `body-metrics.ts` rolling N-day cutoffs (benign).
 
-**⚠️ Deploy steps** (go-live): `supabase db push` the new `log_hydration` migration, and `supabase functions
-deploy ozzie-nutrition-coach` — both must ship together with the app build (the client now passes params the
-old DB/function don't expect; the edge fn is back-compat, the RPC is not until the migration applies).
+**✅ Backend deployed 2026-07-14** — `log_hydration` + `one_active_plan_per_user` migrations applied (via MCP
+`apply_migration`, not `db push`) and all 6 changed edge functions deployed. The client build that passes the
+new params must still ship as the go-live app build. **Open follow-up:** the repo↔live migration-history drift
+that blocks `db push` — reconciliation options in [DEPLOY-CHECKLIST.md](DEPLOY-CHECKLIST.md) appendix.
 
 **Lint rule added** (`no-restricted-syntax` in `.eslintrc.js`, commit in this batch): bans `x.toISOString().slice()` for calendar days → points to `localDateString()`/`parseLocalDate()`. `performance.ts` keeps an intentional UTC-symmetric keying via a justified `eslint-disable`.
 
