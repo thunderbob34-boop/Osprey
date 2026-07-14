@@ -1,5 +1,5 @@
 import { supabase } from '@/services/supabase';
-import { computeRacePhase } from '@/services/plan';
+import { computeRacePhase, RaceGoal } from '@/services/plan';
 import { computeEnvelope, CoachingEnvelope } from './envelope';
 
 interface EnvelopeInputs {
@@ -14,10 +14,13 @@ interface EnvelopeInputs {
 }
 
 // Pure: inputs → envelope. No-race plans run a Base maintenance macrocycle.
-export function envelopeFromInputs(i: EnvelopeInputs): CoachingEnvelope {
-  const phaseInfo = i.race
-    ? computeRacePhase({ targetDate: i.race.targetDate, totalWeeksPlanned: i.race.totalWeeksPlanned } as never)
+// `now` is injectable so the race→phase branch is deterministic under test;
+// real callers rely on the default (current time).
+export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): CoachingEnvelope {
+  const raceGoal: RaceGoal | null = i.race
+    ? { targetRace: null, targetDate: i.race.targetDate, totalWeeksPlanned: i.race.totalWeeksPlanned }
     : null;
+  const phaseInfo = raceGoal ? computeRacePhase(raceGoal, now) : null;
   return computeEnvelope({
     sport: i.sport,
     phase: phaseInfo?.phase ?? 'Base',
