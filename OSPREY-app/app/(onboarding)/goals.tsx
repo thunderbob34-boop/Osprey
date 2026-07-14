@@ -5,6 +5,7 @@ import { useOnboardingStore } from '@/store/onboardingStore';
 import type { PrimaryGoal } from '@/types/onboarding';
 import { Colors } from '@/constants/colors';
 import { primaryDayLabel } from '@/constants/sports';
+import { anchorKeyForGoal } from '@/services/coaching/baseline';
 
 const GOALS: Array<{ id: PrimaryGoal; icon: string; title: string; desc: string }> = [
   { id: 'run', icon: '🏃', title: 'Run better', desc: '5K, 10K, half, full marathon' },
@@ -60,11 +61,13 @@ export default function GoalsScreen() {
   return (
     <OnboardingShell
       step={3}
-      totalSteps={4}
+      totalSteps={5}
       title="What's your main goal right now?"
       hint="This shapes your entire plan. You can always change it later."
       continueDisabled={weeklyRunDays + weeklyLiftDays === 0}
-      onContinue={() => router.push('/(onboarding)/health')}
+      onContinue={() =>
+        router.push(anchorKeyForGoal(primaryGoal) ? '/(onboarding)/baseline' : '/(onboarding)/health')
+      }
     >
       {GOALS.map((goal) => (
         <OptionCard

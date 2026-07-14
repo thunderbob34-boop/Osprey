@@ -1,3 +1,4 @@
+import type { SelfReportAnchor } from './baseline';
 import { runningPaceZones } from '@/services/calculators/running';
 import { swimPaceZones } from '@/services/calculators/swimming';
 import { rowingTrainingZones } from '@/services/calculators/rowing';
@@ -29,6 +30,7 @@ export interface EnvelopeInput {
   fitnessLevel: string;
   bodyWeightKg: number;
   rowingSplitSecPer500: number | null;
+  selfReportAnchor?: SelfReportAnchor | null;
 }
 
 export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
@@ -42,17 +44,22 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
   let zones: ZoneSet | null = null;
   const bp = blueprintSport(input.sport);
   if (bp === 'run') {
-    const t = resolveRunningAnchor({
-      bestRunMiles: input.bestRunMiles,
-      bestRunTimeS: input.bestRunTimeS,
-      fitnessLevel: input.fitnessLevel,
-    }).thresholdSecPerMile;
+    const t =
+      input.selfReportAnchor?.thresholdSecPerMile ??
+      resolveRunningAnchor({
+        bestRunMiles: input.bestRunMiles,
+        bestRunTimeS: input.bestRunTimeS,
+        fitnessLevel: input.fitnessLevel,
+      }).thresholdSecPerMile;
     zones = { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) };
   } else if (bp === 'swim') {
-    const css = estimateSwimCssByTier(input.fitnessLevel);
+    const css = input.selfReportAnchor?.cssSecPer100 ?? estimateSwimCssByTier(input.fitnessLevel);
     zones = { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) };
   } else if (bp === 'rowing') {
-    const split = input.rowingSplitSecPer500 ?? estimateRowingSplitByTier(input.fitnessLevel);
+    const split =
+      input.selfReportAnchor?.splitSecPer500 ??
+      input.rowingSplitSecPer500 ??
+      estimateRowingSplitByTier(input.fitnessLevel);
     zones = { kind: 'rowing', splitSecPer500: split, bands: rowingTrainingZones(split) };
   }
 

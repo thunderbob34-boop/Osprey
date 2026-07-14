@@ -1,3 +1,5 @@
+import type { ThresholdAnchorMap } from '@/services/coaching/baseline';
+
 export type PrimaryGoal =
   | 'run'
   | 'lift'
@@ -16,6 +18,7 @@ export interface OnboardingDraft {
   weeklyRunDays: number;
   weeklyLiftDays: number;
   healthConnected: boolean;
+  thresholdAnchor: ThresholdAnchorMap | null;
 }
 
 export const DEFAULT_ONBOARDING_DRAFT: OnboardingDraft = {
@@ -25,4 +28,5 @@ export const DEFAULT_ONBOARDING_DRAFT: OnboardingDraft = {
   weeklyRunDays: 3,
   weeklyLiftDays: 2,
   healthConnected: false,
+  thresholdAnchor: null,
 };
