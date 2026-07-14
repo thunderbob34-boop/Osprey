@@ -26,9 +26,7 @@ describe('currentWeekStartDate', () => {
 });
 
 describe('computeRacePhase', () => {
-  const goal = { targetDate: '2026-08-10', totalWeeksPlanned: 12 } as Parameters<
-    typeof computeRacePhase
-  >[0];
+  const goal = { targetRace: null, targetDate: '2026-08-10', totalWeeksPlanned: 12 };
 
   it('computes weeks remaining from LOCAL midnight on both sides', () => {
     // now = 2026-07-13 local; race 2026-08-10 → exactly 4 weeks out.
@@ -39,7 +37,7 @@ describe('computeRacePhase', () => {
   });
 
   it('returns null without a target date', () => {
-    expect(computeRacePhase({ targetDate: null, totalWeeksPlanned: 12 } as typeof goal)).toBeNull();
+    expect(computeRacePhase({ targetRace: null, targetDate: null, totalWeeksPlanned: 12 })).toBeNull();
   });
 });
 
@@ -48,19 +46,19 @@ describe('computeRacePhase taper window', () => {
 
   it('gives a 16-week plan 3 taper weeks (final 3), not ~1.6', () => {
     // race 3 weeks out in a 16-week plan → Taper
-    const goal = { targetDate: '2026-01-26', totalWeeksPlanned: 16 } as Parameters<typeof computeRacePhase>[0];
+    const goal = { targetRace: null, targetDate: '2026-01-26', totalWeeksPlanned: 16 };
     expect(computeRacePhase(goal, now)?.phase).toBe('Taper');
   });
 
   it('keeps week 4-of-16-out in Peak/Build, not Taper', () => {
-    const goal = { targetDate: '2026-02-02', totalWeeksPlanned: 16 } as Parameters<typeof computeRacePhase>[0];
+    const goal = { targetRace: null, targetDate: '2026-02-02', totalWeeksPlanned: 16 };
     expect(computeRacePhase(goal, now)?.phase).not.toBe('Taper');
   });
 
   it('scales taper to 1 week for a short 5-week plan', () => {
-    const goal2wk = { targetDate: '2026-01-19', totalWeeksPlanned: 5 } as Parameters<typeof computeRacePhase>[0];
+    const goal2wk = { targetRace: null, targetDate: '2026-01-19', totalWeeksPlanned: 5 };
     expect(computeRacePhase(goal2wk, now)?.phase).not.toBe('Taper'); // 2 weeks out, taper=1 → still Build/Peak
-    const goal1wk = { targetDate: '2026-01-12', totalWeeksPlanned: 5 } as Parameters<typeof computeRacePhase>[0];
+    const goal1wk = { targetRace: null, targetDate: '2026-01-12', totalWeeksPlanned: 5 };
     expect(computeRacePhase(goal1wk, now)?.phase).toBe('Taper'); // 1 week out → Taper
   });
 });
