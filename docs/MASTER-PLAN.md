@@ -204,7 +204,7 @@ The full branch-by-branch table, verification status, and harvest list live in [
 - [x] UTC-vs-local "today" — **Fixed** `fb80acb`: added tested `src/utils/date.ts` `localDateString()`, applied in `daily-summary.ts`. `calendar.ts` stray-day leak **Fixed** in follow-up (tested `clampDaysToMonth`).
 - [x] `ozzie-generate-plan` idempotency race. **Fixed.** Crash on duplicate weeks resolved (`79e676f`); the TOCTOU race is now closed by the decided invariant — **one active plan per user**: migration `20260714000001` (partial unique index on `training_plans(user_id) WHERE status='active'`, with a dedup step so it applies cleanly on live data) + the edge fn catches the `23505` and reuses the concurrently-created plan. *Needs `supabase db push` + `functions deploy ozzie-generate-plan`.*
 - [ ] Race-plan branch hardcodes `intermediate`/4-run/1-lift, ignores athlete profile.
-- [ ] `toggleKudo` non-atomic race; activity-feed fallback query unscoped; `useSubscription` doesn't propagate refresh.
+- [x] `toggleKudo` non-atomic race; activity-feed fallback scoping; `useSubscription` refresh propagation. **Fixed:** kudo insert now treats the `23505` conflict as "present" (kudos already has `UNIQUE(share_id, from_user)`); `useSubscription` rewritten on a shared `useSyncExternalStore` so a paywall refresh propagates to every mounted screen; activity-feed fallback made explicitly own-scoped (it was already RLS-bounded to `user_id = auth.uid()`, never a leak — the `get_activity_feed` RPC is the real path and exists on main).
 
 **UX:**
 - [x] Onboarding progress bar never reaches 100% — **Fixed** `caf6b3c` (`totalSteps` 5→4 across the 5 screens).

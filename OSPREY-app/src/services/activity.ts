@@ -74,6 +74,11 @@ async function fetchActivityFeedSimple(userId: string, limit: number): Promise<A
       workout_logs!inner(session_type, total_duration_s, total_distance_km)
     `,
     )
+    // Degraded fallback for when the get_activity_feed RPC is unavailable.
+    // activity_shares RLS only exposes the caller's own rows (user_id =
+    // auth.uid()), so friends' activity can't appear here — scope explicitly to
+    // make that intent clear and defend in depth. The RPC is the real feed path.
+    .eq('user_id', userId)
     .is('deleted_at', null)
     .order('created_at', { ascending: false })
     .limit(limit);
@@ -155,7 +160,14 @@ export async function toggleKudo(shareId: string, userId: string): Promise<boole
   const { error } = await supabase
     .from('kudos')
     .insert({ share_id: shareId, from_user: userId });
-  if (error) throw error;
+  if (error) {
+    // 23505 = a concurrent tap already inserted this kudo (kudos has a
+    // UNIQUE(share_id, from_user) constraint). The check-then-insert above is
+    // not atomic, so treat the conflict as "kudo present" instead of surfacing
+    // a race error to the user.
+    if ((error as { code?: string }).code === '23505') return true;
+    throw error;
+  }
   return true;
 }
 
