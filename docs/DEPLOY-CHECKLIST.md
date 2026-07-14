@@ -47,7 +47,7 @@ WHERE status='active' AND deleted_at IS NULL GROUP BY user_id HAVING count(*) > 
 
 ---
 
-## 2. Edge functions — ✅ done (`supabase functions deploy`)
+## 2. Edge functions — ✅ deployed 2026-07-14 · ⚠️ `ozzie-generate-plan` has PENDING changes (redeploy at go-live)
 
 All six deployed 2026-07-14 (`verify_jwt=true` preserved). Commands, for reference / redeploy:
 
@@ -63,6 +63,27 @@ supabase functions deploy ozzie-voice-log         # generic error text
 All six are **backward-compatible** with the current app build on their own (the error-text change is internal;
 `ozzie-nutrition-coach` falls back to UTC if the app doesn't send `clientDate`). The one true coupling is the
 `log_hydration` RPC — see §3.
+
+### ⚠️ Pending since the 2026-07-14 deploy — `ozzie-generate-plan` must be REDEPLOYED at go-live
+
+The coaching-engine work landed on `main` after that deploy, so the **live** `ozzie-generate-plan` is now stale.
+Redeploy it (`supabase functions deploy ozzie-generate-plan`) as part of the app go-live, and apply the one new
+migration. What changed and why the app + edge fn must ship together (atomic):
+
+- **Phase 2a** — `computeEnvelope` now sends `envelope.zones` (a `ZoneSet` discriminated union) instead of
+  `runZones`, and `validate.ts` clamps per-kind. **Coupling:** the app build sends `zones`; the *deployed* fn
+  still reads `runZones`, so until redeployed, run pace guidance + the pace-clamp silently no-op (soft
+  degradation — no error, just weaker plans).
+- **Phase 2b-i** — sport routing: `PRIMARY_GOAL_MAP` gains swim/rowing/hyrox, a new pure `goals.ts`
+  (`routeDisciplineDays`), `GoalsContext.weeklyRowDays`, and rowing prompt rules. Until redeployed, a user who
+  selects Swimming/Rowing/Hyrox falls through `?? 'hybrid'` and their zones never fire.
+- **Migration `20260714000003_sport_primary_goals.sql`** — adds swim/rowing/hyrox to `primary_goal_enum`.
+  **Committed but NOT applied.** Apply via MCP `apply_migration` (idempotent `ADD VALUE IF NOT EXISTS`,
+  backward-compatible). Must be applied **before/with** the 2b-i redeploy — the fn upserts those enum values, and
+  storing one before the enum has it would 500 the request.
+
+Each piece is backward-compatible on its own, but the app build that exposes sport selection needs **both** the
+migration applied **and** the fn redeployed, or a selected sport fails to persist / no-ops.
 
 ---
 
