@@ -17,7 +17,8 @@ import { format } from 'date-fns';
 import { Colors } from '@/constants/colors';
 import ScreenHeader from '@/components/ScreenHeader';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
-import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
+import { extractFunctionErrorMessage } from '@/services/supabase';
+import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { createRaceEvent } from '@/services/races';
 import { useAuthStore } from '@/store/authStore';
 
@@ -145,16 +146,14 @@ export default function RaceEventScreen() {
       // toISOString() would shift the date a day for UTC+ timezones.
       const isoRaceDate = parsedRaceDate ? format(parsedRaceDate, 'yyyy-MM-dd') : null;
 
-      const { data, error } = await supabase.functions.invoke('ozzie-generate-plan', {
-        body: {
-          raceTarget: {
-            raceName: result!.name,
-            raceDate: isoRaceDate,
-            distance: selectedDistance,
-            weeksOut: weeks,
-          },
-          force: true,
+      const { data, error } = await invokeGeneratePlan({
+        raceTarget: {
+          raceName: result!.name,
+          raceDate: isoRaceDate,
+          distance: selectedDistance,
+          weeksOut: weeks,
         },
+        force: true,
       });
       if (error) {
         const message = await extractFunctionErrorMessage(error);

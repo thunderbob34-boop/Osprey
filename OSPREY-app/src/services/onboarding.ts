@@ -1,4 +1,5 @@
 import { supabase } from '@/services/supabase';
+import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import type { OnboardingDraft, PrimaryGoal } from '@/types/onboarding';
 import type { TrainingDaysPerWeek, TrainingGoal, UserPreferences } from '@/types/preferences';
 
@@ -32,9 +33,7 @@ function buildPlanPreferences(draft: OnboardingDraft): UserPreferences {
  * banner is a perfectly fine fallback if this doesn't come back in time.
  */
 export async function generateInitialPlan(draft: OnboardingDraft): Promise<void> {
-  const { error } = await supabase.functions.invoke('ozzie-generate-plan', {
-    body: { preferences: buildPlanPreferences(draft), force: true },
-  });
+  const { error } = await invokeGeneratePlan({ preferences: buildPlanPreferences(draft), force: true });
   if (error) throw error;
 }
 

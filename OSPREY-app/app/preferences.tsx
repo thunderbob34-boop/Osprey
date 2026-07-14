@@ -13,6 +13,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
+import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { useAuthStore } from '@/store/authStore';
 import { ONBOARDING_GOAL_TO_PREFERENCES } from '@/services/onboarding';
 import type {
@@ -154,9 +155,7 @@ export default function PreferencesScreen() {
           .eq('id', userId);
       }
 
-      const { data, error } = await supabase.functions.invoke('ozzie-generate-plan', {
-        body: { preferences, force: true },
-      });
+      const { data, error } = await invokeGeneratePlan({ preferences, force: true });
       if (error) {
         const message = await extractFunctionErrorMessage(error);
         Alert.alert('Plan generation failed', message);

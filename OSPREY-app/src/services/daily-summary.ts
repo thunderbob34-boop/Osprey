@@ -1,5 +1,6 @@
 import { startOfMonth } from 'date-fns';
 import { supabase } from '@/services/supabase';
+import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { fetchWeekTargetKm } from '@/services/workouts';
 import { getCachedWeatherBriefSummary } from '@/services/weather-context';
 import { getScheduleBriefSummary } from '@/services/schedule-context';
@@ -368,7 +369,7 @@ export async function fetchDailySummary(userId: string): Promise<DailySummaryDat
   // Always run — idempotent. Generates the week's plan if missing, and
   // detects/reschedules any missed sessions earlier in the current week
   // regardless of whether today already has a session planned.
-  await supabase.functions.invoke('ozzie-generate-plan', { method: 'POST' });
+  await invokeGeneratePlan();
   const session = await fetchTodaySession(userId);
 
   // Fetched after session resolution so the brief's own context query sees
