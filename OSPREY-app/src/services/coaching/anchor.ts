@@ -75,3 +75,24 @@ const TIER_SWIM_CSS_SEC_PER_100: Record<string, number> = {
 export function estimateSwimCssByTier(fitnessLevel: string): number {
   return TIER_SWIM_CSS_SEC_PER_100[fitnessLevel] ?? TIER_SWIM_CSS_SEC_PER_100.beginner;
 }
+
+// Coarse cold-start rowing splits (sec/500m) by tier — until a real 2k test is added.
+const TIER_ROWING_SPLIT_SEC_PER_500: Record<string, number> = {
+  advanced: 105,     // 1:45/500m
+  intermediate: 120, // 2:00/500m
+  beginner: 140,     // 2:20/500m
+};
+
+export function estimateRowingSplitByTier(fitnessLevel: string): number {
+  return TIER_ROWING_SPLIT_SEC_PER_500[fitnessLevel] ?? TIER_ROWING_SPLIT_SEC_PER_500.beginner;
+}
+
+/** Best (fastest) 500m split from logged rowing efforts >= 1000m. Approximates the
+ *  2k-split anchor; refine with a real 2k test in a later phase. */
+export function selectBestRowingSplit(efforts: { distanceKm: number; timeS: number }[]): number | null {
+  const splits = efforts
+    .filter((e) => e.distanceKm >= 1 && e.timeS > 0)
+    .map((e) => e.timeS / (e.distanceKm * 2)); // sec per 500m
+  if (splits.length === 0) return null;
+  return Math.round(Math.min(...splits));
+}

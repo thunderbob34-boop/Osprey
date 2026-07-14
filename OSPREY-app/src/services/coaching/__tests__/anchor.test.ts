@@ -1,4 +1,25 @@
-import { estimateSwimCssByTier, resolveRunningAnchor, selectBestRunEffort } from '@/services/coaching/anchor';
+import { estimateSwimCssByTier, resolveRunningAnchor, selectBestRunEffort, selectBestRowingSplit, estimateRowingSplitByTier } from '@/services/coaching/anchor';
+
+describe('selectBestRowingSplit', () => {
+  it('returns the fastest split (sec/500m) among efforts >= 1000m', () => {
+    const efforts = [
+      { distanceKm: 2, timeS: 480 },  // 2000m in 8:00 => 120 s/500m
+      { distanceKm: 5, timeS: 1350 }, // 5000m in 22:30 => 135 s/500m
+      { distanceKm: 0.5, timeS: 90 }, // 500m sprint — excluded (< 1000m)
+    ];
+    expect(selectBestRowingSplit(efforts)).toBe(120);
+  });
+  it('returns null when there is no qualifying effort', () => {
+    expect(selectBestRowingSplit([{ distanceKm: 0.4, timeS: 80 }])).toBeNull();
+    expect(selectBestRowingSplit([])).toBeNull();
+  });
+});
+
+describe('estimateRowingSplitByTier', () => {
+  it('ranks advanced faster than beginner', () => {
+    expect(estimateRowingSplitByTier('advanced')).toBeLessThan(estimateRowingSplitByTier('beginner'));
+  });
+});
 
 describe('estimateSwimCssByTier', () => {
   it('gives a realistic CSS per 100m and ranks advanced faster than beginner', () => {

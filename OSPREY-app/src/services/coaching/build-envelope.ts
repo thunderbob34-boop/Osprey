@@ -36,6 +36,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     bestRunTimeS: i.bestRunTimeS,
     fitnessLevel: i.fitnessLevel,
     bodyWeightKg: i.bodyWeightKg,
+    rowingSplitSecPer500: null,
   });
 }
 
