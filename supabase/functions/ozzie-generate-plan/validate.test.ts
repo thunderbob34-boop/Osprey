@@ -5,7 +5,8 @@ import { validateAndClamp } from './validate.ts';
 const envelope = {
   sport: 'run', phase: 'Build', weekNumber: 5, totalWeeks: 16,
   targetWeeklyLoad: 300, hardSessionShareMax: 0.2,
-  runZones: { thresholdSecPerMile: 450, easy: { min: 510, max: 570 }, marathonPace: { min: 465, max: 480 }, tenKPace: { min: 435, max: 445 }, fiveKPace: { min: 420, max: 430 }, intervalPace: { min: 430, max: 440 } },
+  zones: { kind: 'run', thresholdSecPerMile: 450,
+    bands: { easy: { min: 510, max: 570 }, marathonPace: { min: 465, max: 480 }, tenKPace: { min: 435, max: 445 }, fiveKPace: { min: 420, max: 430 } } },
   fuel: { dailyCarbG: { min: 350, max: 490 }, proteinG: { min: 112, max: 154 }, longSessionCarbGPerHour: 75 },
 };
 
@@ -37,7 +38,7 @@ Deno.test('clamps an interval run that is implied too slow into the fiveK band (
   // image of the too-fast/floor branch the first test covers).
   const day = { dayOffset: 0, session_type: 'run', intensity: 'interval', planned_minutes: 30, planned_distance_km: 3 };
   const { days, changed } = validateAndClamp([day], envelope as never);
-  const band = envelope.runZones.fiveKPace;
+  const band = envelope.zones.bands.fiveKPace;
   const implied = (days[0].planned_minutes! * 60) / (days[0].planned_distance_km! * 0.621371); // s/mi
   assert(implied >= band.min && implied <= band.max, `implied ${implied} not in interval band [${band.min}, ${band.max}]`);
   assert(changed.length > 0);
@@ -52,8 +53,8 @@ Deno.test('reorders polarization before pace-clamp so a demoted session lands in
   const { days } = validateAndClamp([hard(0), hard(1), hard(2), hard(3), hard(4)], envelope as never);
   const demoted = days.find((d) => d.intensity === 'easy');
   assert(demoted !== undefined, 'expected at least one session to be demoted to easy');
-  const easy = envelope.runZones.easy;
-  const fiveK = envelope.runZones.fiveKPace;
+  const easy = envelope.zones.bands.easy;
+  const fiveK = envelope.zones.bands.fiveKPace;
   const implied = (demoted!.planned_minutes! * 60) / (demoted!.planned_distance_km! * 0.621371); // s/mi
   assert(implied >= easy.min && implied <= easy.max, `demoted session implied pace ${implied} s/mi not in easy band [${easy.min}, ${easy.max}]`);
   assert(!(implied >= fiveK.min && implied <= fiveK.max), `demoted session implied pace ${implied} s/mi is still inside the old fiveK band — polarization did not run before pace-clamp`);
@@ -81,4 +82,36 @@ Deno.test('a demoted session gets easy-run prose, not the stale hard description
     assert(d.description !== '6x800m intervals', 'demoted session kept its stale hard description');
     assertEquals((d as Record<string, unknown>).interval_prescription, null);
   }
+});
+
+const swimEnvelope = {
+  hardSessionShareMax: 0.2,
+  zones: { kind: 'swim', cssSecPer100: 100,
+    bands: { z1EasyRecovery: { min: 108, max: null }, z2Aerobic: { min: 103, max: 106 },
+      z3Threshold: { min: 98, max: 102 }, z4Vo2Max: { min: 95, max: 98 } } },
+  fuel: { dailyCarbG: { min: 350, max: 490 }, proteinG: { min: 112, max: 154 }, longSessionCarbGPerHour: 60 },
+};
+
+Deno.test('clamps a swim easy session implied too fast into the z2 band (sec/100m)', () => {
+  // 2 km in 30 min => 900 s / 20 hundred-m => 45 s/100m, way faster than easy z2 (103-106).
+  const day = { dayOffset: 0, session_type: 'swim', intensity: 'moderate', planned_minutes: 30, planned_distance_km: 2 };
+  const { days } = validateAndClamp([day], swimEnvelope as never);
+  const implied = (days[0].planned_minutes! * 60) / (days[0].planned_distance_km! * 10); // s/100m
+  assert(implied >= 103 && implied <= 106, `implied ${implied} not in z2 band`);
+});
+
+const rowEnvelope = {
+  hardSessionShareMax: 0.2,
+  zones: { kind: 'rowing', splitSecPer500: 120,
+    bands: { ut2: { splitSecPer500: { min: 132, max: 136 } }, ut1: { splitSecPer500: { min: 126, max: 130 } },
+      at: { splitSecPer500: { min: 123, max: 125 } }, tr: { splitSecPer500: { min: 120, max: 122 } } } },
+  fuel: { dailyCarbG: { min: 350, max: 490 }, proteinG: { min: 112, max: 154 }, longSessionCarbGPerHour: 60 },
+};
+
+Deno.test('clamps a rowing easy session into the UT2 split band (sec/500m)', () => {
+  // 8 km in 30 min => 1800 s / 16 five-hundred-m => 112.5 s/500m, faster than UT2 (132-136).
+  const day = { dayOffset: 0, session_type: 'rowing', intensity: 'easy', planned_minutes: 30, planned_distance_km: 8 };
+  const { days } = validateAndClamp([day], rowEnvelope as never);
+  const implied = (days[0].planned_minutes! * 60) / (days[0].planned_distance_km! * 2); // s/500m
+  assert(implied >= 132 && implied <= 137, `implied ${implied} not in UT2 band`);
 });

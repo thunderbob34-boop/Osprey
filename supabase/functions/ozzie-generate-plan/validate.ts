@@ -9,26 +9,41 @@ export type PlanDay = {
 };
 
 type Band = { min: number; max: number };
-interface EnvelopeLike {
-  hardSessionShareMax: number;
-  runZones: { easy: Band; tenKPace: Band; fiveKPace: Band; intervalPace: Band; marathonPace: Band } | null;
-  fuel: unknown;
-}
+type Zones =
+  | { kind: 'run'; thresholdSecPerMile: number; bands: { easy: Band; marathonPace: Band; tenKPace: Band; fiveKPace: Band } }
+  | { kind: 'swim'; cssSecPer100: number; bands: { z1EasyRecovery: Band; z2Aerobic: Band; z3Threshold: Band; z4Vo2Max: Band } }
+  | { kind: 'rowing'; splitSecPer500: number; bands: { ut2: { splitSecPer500: Band }; ut1: { splitSecPer500: Band }; at: { splitSecPer500: Band }; tr: { splitSecPer500: Band } } };
+interface EnvelopeLike { hardSessionShareMax: number; zones: Zones | null; fuel: unknown; }
 
 const KM_TO_MI = 0.621371;
 const HARD = new Set(['interval', 'threshold']);
 
-function bandFor(intensity: string, z: NonNullable<EnvelopeLike['runZones']>): Band | null {
-  if (intensity === 'easy') return z.easy;
-  if (intensity === 'moderate') return z.marathonPace;
-  if (intensity === 'threshold') return z.tenKPace;
-  if (intensity === 'interval') return z.fiveKPace;
+// Session type each zone kind clamps, and the pace unit divisor from km.
+const KIND_TYPE = { run: 'run', swim: 'swim', rowing: 'rowing' } as const;
+const KIND_UNIT_PER_KM = { run: KM_TO_MI, swim: 10, rowing: 2 } as const; // sec/mi, sec/100m, sec/500m
+
+function bandFor(intensity: string, z: Zones): Band | null {
+  if (z.kind === 'run') {
+    if (intensity === 'easy') return z.bands.easy;
+    if (intensity === 'moderate') return z.bands.marathonPace;
+    if (intensity === 'threshold') return z.bands.tenKPace;
+    if (intensity === 'interval') return z.bands.fiveKPace;
+  } else if (z.kind === 'swim') {
+    if (intensity === 'easy') return z.bands.z2Aerobic;   // easy swims sit in aerobic
+    if (intensity === 'moderate') return z.bands.z2Aerobic;
+    if (intensity === 'threshold') return z.bands.z3Threshold;
+    if (intensity === 'interval') return z.bands.z4Vo2Max;
+  } else {
+    if (intensity === 'easy') return z.bands.ut2.splitSecPer500;
+    if (intensity === 'moderate') return z.bands.ut1.splitSecPer500;
+    if (intensity === 'threshold') return z.bands.at.splitSecPer500;
+    if (intensity === 'interval') return z.bands.tr.splitSecPer500;
+  }
   return null;
 }
 
 export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { days: PlanDay[]; changed: string[] } {
   const changed: string[] = [];
-  const z = envelope.runZones;
 
   // (a) polarization: demote excess hard sessions (keep the earliest ones).
   // This MUST run before pace-clamp: a session demoted here changes its
@@ -60,34 +75,40 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
     return d;
   });
 
-  // (b) clamp run pace into the band by scaling distance for the fixed duration.
-  // Runs after polarization so a demoted session is clamped into the band
-  // matching its FINAL (post-demotion) intensity.
-  out = out.map((d) => {
-    if (z && d.session_type === 'run' && d.planned_minutes && d.planned_distance_km) {
-      const band = bandFor(d.intensity, z);
-      if (band) {
-        const impliedSecPerMi = (d.planned_minutes * 60) / (d.planned_distance_km * KM_TO_MI);
-        const target = Math.min(band.max, Math.max(band.min, impliedSecPerMi));
-        if (target !== impliedSecPerMi) {
-          const newKm = (d.planned_minutes * 60) / (target * KM_TO_MI);
-          // Round toward the safe side of whichever edge we clamped to.
-          // Plain round-to-nearest can overshoot back across the edge (e.g.
-          // rounding distance up also speeds up the recomputed pace, which
-          // can undershoot a band.min floor by a couple of seconds/mile) —
-          // floor when we clamped up to band.min (less distance -> slower,
-          // stays >= min), ceil when we clamped down to band.max (more
-          // distance -> faster, stays <= max).
-          const roundedKm = target === band.min
-            ? Math.floor(newKm * 10) / 10
-            : Math.ceil(newKm * 10) / 10;
-          changed.push(`day${d.dayOffset}: pace ${Math.round(impliedSecPerMi)}→${Math.round(target)} s/mi`);
-          return { ...d, planned_distance_km: roundedKm };
+  // (b) clamp pace into the band by scaling distance for the fixed duration,
+  // keyed off the envelope's zone kind (run/swim/rowing). Runs after
+  // polarization so a demoted session is clamped into the band matching its
+  // FINAL (post-demotion) intensity.
+  const z = envelope.zones;
+  if (z) {
+    const clampType = KIND_TYPE[z.kind];
+    const perKm = KIND_UNIT_PER_KM[z.kind];
+    out = out.map((d) => {
+      if (d.session_type === clampType && d.planned_minutes && d.planned_distance_km) {
+        const band = bandFor(d.intensity, z);
+        if (band) {
+          const implied = (d.planned_minutes * 60) / (d.planned_distance_km * perKm);
+          const target = Math.min(band.max, Math.max(band.min, implied));
+          if (target !== implied) {
+            const newKm = (d.planned_minutes * 60) / (target * perKm);
+            // Round toward the safe side of whichever edge we clamped to.
+            // Plain round-to-nearest can overshoot back across the edge (e.g.
+            // rounding distance up also speeds up the recomputed pace, which
+            // can undershoot a band.min floor by a couple of seconds/mile) —
+            // floor when we clamped up to band.min (less distance -> slower,
+            // stays >= min), ceil when we clamped down to band.max (more
+            // distance -> faster, stays <= max).
+            const roundedKm = target === band.min
+              ? Math.floor(newKm * 10) / 10
+              : Math.ceil(newKm * 10) / 10;
+            changed.push(`day${d.dayOffset}: pace ${Math.round(implied)}→${Math.round(target)} (${z.kind})`);
+            return { ...d, planned_distance_km: roundedKm };
+          }
         }
       }
-    }
-    return d;
-  });
+      return d;
+    });
+  }
 
   // (c) attach envelope fuel to every non-rest session.
   out = out.map((d) => (d.session_type === 'rest' ? d : { ...d, fuel: envelope.fuel }));
