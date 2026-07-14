@@ -8,9 +8,10 @@ describe('envelopeFromInputs', () => {
     const env = envelopeFromInputs({
       sport: 'run', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
       baselineLoad: 0, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
+      rowingSplitSecPer500: null,
     });
     expect(env.phase).toBe('Base');
-    expect(env.runZones).not.toBeNull(); // estimate anchor still yields zones
+    expect(env.zones).not.toBeNull(); // estimate anchor still yields zones
   });
 
   it('derives a Taper envelope from a race 1 week out in an 8-week plan, via an injected now', () => {
@@ -26,11 +27,27 @@ describe('envelopeFromInputs', () => {
       prevWeekLoad: null,
       bestRunMiles: null,
       bestRunTimeS: null,
+      rowingSplitSecPer500: null,
     }, now);
 
     expect(env.phase).toBe('Taper');
     expect(env.weekNumber).toBe(8);
     expect(env.totalWeeks).toBe(8);
-    expect(env.runZones).not.toBeNull();
+    expect(env.zones).not.toBeNull();
+  });
+
+  it('passes a rowing split through to a rowing envelope', () => {
+    const env = envelopeFromInputs({
+      sport: 'rowing', race: null, fitnessLevel: 'intermediate', bodyWeightKg: 80,
+      baselineLoad: 200, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
+      rowingSplitSecPer500: 118,
+    });
+    expect(env.zones?.kind).toBe('rowing');
+    // Pin the actual value, not just the zone kind: the 'intermediate' tier fallback is
+    // 120 (see estimateRowingSplitByTier), so 118 only appears if the split was threaded
+    // through rather than silently dropped in favor of the fallback.
+    if (env.zones?.kind === 'rowing') {
+      expect(env.zones.splitSecPer500).toBe(118);
+    }
   });
 });

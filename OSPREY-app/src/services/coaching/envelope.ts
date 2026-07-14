@@ -1,7 +1,10 @@
-import { runningPaceZones, RunningPaceZones } from '@/services/calculators/running';
+import { runningPaceZones } from '@/services/calculators/running';
+import { swimPaceZones } from '@/services/calculators/swimming';
+import { rowingTrainingZones } from '@/services/calculators/rowing';
 import { Phase, loadingWeek, targetWeeklyLoad } from './periodization';
-import { resolveRunningAnchor } from './anchor';
+import { estimateSwimCssByTier, resolveRunningAnchor, estimateRowingSplitByTier } from './anchor';
 import { computeRunningFuel, FuelTargets } from './fuel';
+import { ZoneSet, blueprintSport } from './zones';
 
 export interface CoachingEnvelope {
   sport: string;
@@ -10,7 +13,7 @@ export interface CoachingEnvelope {
   totalWeeks: number;
   targetWeeklyLoad: number;
   hardSessionShareMax: number; // polarization cap (docs/coaching/_index.md:16)
-  runZones: RunningPaceZones | null;
+  zones: ZoneSet | null;
   fuel: FuelTargets;
 }
 
@@ -25,6 +28,7 @@ export interface EnvelopeInput {
   bestRunTimeS: number | null;
   fitnessLevel: string;
   bodyWeightKg: number;
+  rowingSplitSecPer500: number | null;
 }
 
 export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
@@ -35,16 +39,22 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     prevWeekLoad: input.prevWeekLoad,
   });
 
-  const isRun = input.sport === 'run' || input.sport === 'hybrid';
-  const runZones = isRun
-    ? runningPaceZones(
-        resolveRunningAnchor({
-          bestRunMiles: input.bestRunMiles,
-          bestRunTimeS: input.bestRunTimeS,
-          fitnessLevel: input.fitnessLevel,
-        }).thresholdSecPerMile,
-      )
-    : null;
+  let zones: ZoneSet | null = null;
+  const bp = blueprintSport(input.sport);
+  if (bp === 'run') {
+    const t = resolveRunningAnchor({
+      bestRunMiles: input.bestRunMiles,
+      bestRunTimeS: input.bestRunTimeS,
+      fitnessLevel: input.fitnessLevel,
+    }).thresholdSecPerMile;
+    zones = { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) };
+  } else if (bp === 'swim') {
+    const css = estimateSwimCssByTier(input.fitnessLevel);
+    zones = { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) };
+  } else if (bp === 'rowing') {
+    const split = input.rowingSplitSecPer500 ?? estimateRowingSplitByTier(input.fitnessLevel);
+    zones = { kind: 'rowing', splitSecPer500: split, bands: rowingTrainingZones(split) };
+  }
 
   const hardWeek = loadingWeek(input.weekNumber) !== 4 && input.phase !== 'Taper';
 
@@ -55,7 +65,7 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     totalWeeks: input.totalWeeks,
     targetWeeklyLoad: load,
     hardSessionShareMax: 0.2,
-    runZones,
+    zones,
     fuel: computeRunningFuel({ bodyWeightKg: input.bodyWeightKg, hardWeek }),
   };
 }
