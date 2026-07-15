@@ -15,6 +15,7 @@ export const ONBOARDING_GOAL_TO_PREFERENCES: Record<PrimaryGoal, TrainingGoal> =
   swim: 'swim',
   rowing: 'rowing',
   hyrox: 'hyrox',
+  cycling: 'cycling',
 };
 
 function buildPlanPreferences(draft: OnboardingDraft): UserPreferences {

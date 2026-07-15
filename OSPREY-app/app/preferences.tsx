@@ -42,6 +42,7 @@ const GOAL_OPTIONS: GoalOption[] = [
   { value: 'swim', label: '🏊 Swimming' },
   { value: 'rowing', label: '🚣 Rowing' },
   { value: 'hyrox', label: '🏋️‍♂️ Hyrox' },
+  { value: 'cycling', label: '🚴 Cycling' },
   { value: 'weight_loss', label: '🔥 Weight Loss' },
   { value: 'general', label: '⚡ General Fitness' },
 ];

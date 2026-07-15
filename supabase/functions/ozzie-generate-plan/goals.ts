@@ -10,7 +10,7 @@
 // pre-2b logic (run gets the primary days; swim/bike come only from the
 // toggles; row is 0). Do not regress this.
 
-export type EnduranceDiscipline = 'run' | 'swim' | 'rowing';
+export type EnduranceDiscipline = 'run' | 'swim' | 'rowing' | 'cycling';
 
 // Goals whose *primary* training discipline is an endurance sport. Anything not
 // listed (lift, weight_loss, general_fitness, triathlon, unknown) falls back to
@@ -21,6 +21,7 @@ export const ENDURANCE_PRIMARY: Record<string, EnduranceDiscipline> = {
   hyrox: 'run',
   swim: 'swim',
   rowing: 'rowing',
+  cycling: 'cycling',
 };
 
 export interface DisciplineDays {
@@ -43,7 +44,7 @@ export function routeDisciplineDays(
     weeklyRunDays: discipline === 'run' ? primaryDays : 0,
     weeklyLiftDays: liftDays,
     weeklySwimDays: discipline === 'swim' ? primaryDays : includeSwim ? 1 : 0,
-    weeklyBikeDays: includeBike ? 1 : 0,
+    weeklyBikeDays: discipline === 'cycling' ? primaryDays : includeBike ? 1 : 0,
     weeklyRowDays: discipline === 'rowing' ? primaryDays : 0,
   };
 }
