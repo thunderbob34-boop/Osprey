@@ -29,4 +29,14 @@ describe('computeFuel', () => {
   it('ignores gutTrained for non-ultra sports (regression)', () => {
     expect(computeFuel('run', 70, true).longSessionCarbGPerHour).toBe(computeFuel('run', 70).longSessionCarbGPerHour);
   });
+  it('gives a lifter powerlifting carbs (4-7 g/kg) + no in-session rate', () => {
+    const f = computeFuel('lift', 90);
+    expect(f.longSessionCarbGPerHour).toBe(0);
+    expect(f.dailyCarbGByDayType.easy.min).toBe(Math.round(4 * 90)); // low end of 4-7 g/kg
+    expect(f.dailyCarbGByDayType.peak.max).toBe(Math.round(7 * 90)); // high end
+    expect(f.proteinG.min).toBe(Math.round(90 * 1.6));
+  });
+  it('leaves non-lift fuel unchanged (regression)', () => {
+    expect(computeFuel('run', 70).longSessionCarbGPerHour).toBe(75); // marathon default
+  });
 });

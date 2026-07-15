@@ -335,7 +335,7 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad,
     ? ` COACHING ENVELOPE (hard constraints — stay inside these): phase=${envelope.phase}, week ${envelope.weekNumber}/${envelope.totalWeeks}, target weekly load ≈ ${envelope.targetWeeklyLoad} TSS, at most ${Math.round(envelope.hardSessionShareMax * 100)}% of sessions hard.` +
       zoneGuidance +
       hrGuidance(envelope.hrZones) +
-      ` Daily carbs by day: easy ${envelope.fuel.dailyCarbGByDayType.easy.min}-${envelope.fuel.dailyCarbGByDayType.easy.max} g, hard ${envelope.fuel.dailyCarbGByDayType.high.min}-${envelope.fuel.dailyCarbGByDayType.high.max} g, race ${envelope.fuel.dailyCarbGByDayType.peak.min}-${envelope.fuel.dailyCarbGByDayType.peak.max} g; in-session ~${envelope.fuel.longSessionCarbGPerHour} g/hr.`
+      ` Daily carbs by day: easy ${envelope.fuel.dailyCarbGByDayType.easy.min}-${envelope.fuel.dailyCarbGByDayType.easy.max} g, hard ${envelope.fuel.dailyCarbGByDayType.high.min}-${envelope.fuel.dailyCarbGByDayType.high.max} g, race ${envelope.fuel.dailyCarbGByDayType.peak.min}-${envelope.fuel.dailyCarbGByDayType.peak.max} g; protein ${envelope.fuel.proteinG.min}-${envelope.fuel.proteinG.max} g/day; in-session ~${envelope.fuel.longSessionCarbGPerHour} g/hr.`
     : '';
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
