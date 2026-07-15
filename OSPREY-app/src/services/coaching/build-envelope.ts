@@ -46,6 +46,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     selfReportAnchor: i.selfReportAnchor,
     maxHR: i.maxHR,
     ultraParams: i.ultraParams,
+    weeksRemaining: phaseInfo?.weeksRemaining ?? null,
   });
 }
 

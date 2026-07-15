@@ -3,11 +3,13 @@ import { runningPaceZones } from '@/services/calculators/running';
 import { swimPaceZones } from '@/services/calculators/swimming';
 import { rowingTrainingZones } from '@/services/calculators/rowing';
 import { cyclingPowerZones } from '@/services/calculators/cycling';
+import { ultraTaperWeeklyVolumes } from '@/services/calculators/ultra';
 import { Phase, targetWeeklyLoad } from './periodization';
 import { estimateSwimCssByTier, resolveRunningAnchor, estimateRowingSplitByTier } from './anchor';
 import { computeFuel, FuelPlan } from './fuel';
 import { ZoneSet, blueprintSport } from './zones';
 import { resolveMaxHR, ultraHRZones, HRZones } from './hr';
+import { ULTRA_DISTANCE_FACTOR } from './ultra-params';
 
 export interface HrZoneInfo {
   maxHR: number;
@@ -42,15 +44,32 @@ export interface EnvelopeInput {
   selfReportAnchor?: SelfReportAnchor | null;
   maxHR?: number | null;
   ultraParams?: import('./ultra-params').UltraGoalParams | null;
+  weeksRemaining?: number | null;
 }
 
 export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
-  const load = targetWeeklyLoad({
-    baselineLoad: input.baselineLoad,
-    phase: input.phase,
-    weekNumber: input.weekNumber,
-    prevWeekLoad: input.prevWeekLoad,
-  });
+  const isUltra = input.sport === 'ultra';
+  const distanceFactor = isUltra ? (ULTRA_DISTANCE_FACTOR[input.ultraParams?.raceDistance ?? '50k'] ?? 1) : 1;
+  const scaledBaseline = Math.round(input.baselineLoad * distanceFactor);
+
+  let load: number;
+  if (isUltra && input.phase === 'Taper') {
+    // Progressive 25/25/30 taper (docs/coaching/ultra.md §8): 3-out ×0.75, 2-out ×0.75, race week ×0.70.
+    const taperIdx = Math.min(2, Math.max(0, 3 - (input.weeksRemaining ?? 3)));
+    load = Math.round(ultraTaperWeeklyVolumes(scaledBaseline)[taperIdx]);
+  } else {
+    // Math.round wraps this call (the brief's else-branch was unrounded): targetWeeklyLoad's
+    // Taper branch returns a raw applyVolumeCut() float (periodization.ts is unchanged, so
+    // that's still un-rounded there); every other phase already returns Math.round(target),
+    // so this is a no-op for Base/Build/Peak and only cleans up Taper float dust (e.g.
+    // 400*(1-0.45) = 220.00000000000003) for non-ultra plans too.
+    load = Math.round(targetWeeklyLoad({
+      baselineLoad: scaledBaseline,
+      phase: input.phase,
+      weekNumber: input.weekNumber,
+      prevWeekLoad: input.prevWeekLoad,
+    }));
+  }
 
   let zones: ZoneSet | null = null;
   if (input.sport === 'triathlon') {
