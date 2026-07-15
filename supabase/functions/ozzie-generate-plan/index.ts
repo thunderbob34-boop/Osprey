@@ -38,10 +38,10 @@ Rules:
 - planned_distance_km: for run, race, swim, bike, and rowing sessions — a reasonable distance for the session's duration, intensity, and the athlete's level (e.g. an easy run duration implies roughly a 9-11 min/mile pace, swims are much shorter than runs for the same duration). null for lift, cross, and rest days.
 - description: short, e.g. "Easy Run", "Upper Body — Push", "Active Recovery Bike", "Rest Day".
 - ozzie_notes: one plain-English sentence explaining why this session is placed here this week, in Ozzie's warm/direct voice.
-- lift_prescription: for lift days ONLY, write the actual strength workout like a real coach: {"exercises": [{"name": string, "sets": number (2-5), "reps": string (e.g. "5" or "8-12"), "note": string|null}]} with 4-6 exercises. Main compound movement first at lower reps, accessories after at higher reps. Choose names ONLY from this exact list, matched to the day's split: Upper Push day = Bench Press, Incline Dumbbell Press, Overhead Press, Lateral Raise, Tricep Pushdown, Chest Dip. Upper Pull day = Pull-Up, Barbell Row, Lat Pulldown, Seated Cable Row, Dumbbell Row, Barbell Curl, Face Pull. Lower/Hips day = Back Squat, Deadlift, Romanian Deadlift, Hip Thrust, Bulgarian Split Squat, Leg Press, Calf Raise. Full-body/core accessory (any split) = Plank, Box Jump, Hanging Leg Raise. Use "note" for form or effort cues ("2 reps in reserve", "pause at the bottom"). For every non-lift day, set lift_prescription to null.
+- lift_prescription: for lift days ONLY. When a STRENGTH block is given (powerlifting), program a competition lift first — name EXACTLY "Back Squat", "Bench Press", or "Deadlift" — as the top working set at the prescribed %1RM load (set "loadKg" to the kg from the STRENGTH block for that lift), sets/reps within the Prilepin caps, then back-off sets, one variation (e.g. "Pause Squat", "Spoto Press", "Deficit Deadlift"), and 2-3 accessories (rows, pull-ups, RDLs, triceps, upper back, abs). Shape: {"exercises": [{"name": string, "sets": number, "reps": string, "loadKg": number|null, "note": string|null}]}, 4-6 exercises, the comp lift first with its loadKg set. When NO strength block is given, fall back to a general strength session (no loadKg needed). For every non-lift day, set lift_prescription to null.
 - interval_prescription: for swim, bike, run, and rowing days with intensity "threshold" or "interval" ONLY, write real structured sets instead of a bare duration: {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}. Exactly one of distanceM/durationS per segment — swim segments use distanceM (e.g. 50/100/200), bike segments use durationS (e.g. 180-600 for 3-10min), run segments use distanceM for track-style reps (200-1600) or durationS for tempo blocks. rowing segments use distanceM (e.g. 250/500/1000) for interval pieces or durationS for steady blocks. effort must be one of: easy, moderate, threshold, hard, max. label is a short human string like "50m hard", "800m @ threshold", or "5min @ threshold". Include a warm-up segment (effort "easy") first and a cool-down segment (effort "easy") last. 3-6 segments total. For easy/moderate days and all other session types, set interval_prescription to null.
 - Zone guidance: apply the pace bands (if given) ONLY to the athlete's primary-sport sessions (run/swim/rowing). For bike, cross, and easy-cardio / cross-training sessions — and for ALL cardio when no pace bands are given (e.g. weight-loss or general-fitness plans) — target the HR zones instead. Never pace-clamp a cross-training session.
-- Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string, "lift_prescription": {"exercises": [{"name": string, "sets": number, "reps": string, "note": string|null}]}|null, "interval_prescription": {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}|null}]} where dayOffset 0 = Monday.`;
+- Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string, "lift_prescription": {"exercises": [{"name": string, "sets": number, "reps": string, "loadKg": number|null, "note": string|null}]}|null, "interval_prescription": {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}|null}]} where dayOffset 0 = Monday.`;
 
 interface GoalsContext {
   primaryGoal: string | null;
@@ -128,6 +128,20 @@ interface Envelope {
   zones: ZoneSet | null;
   hrZones?: HrZoneInfo | null;
   fuel: { dailyCarbGByDayType: { easy: { min: number; max: number }; moderate: { min: number; max: number }; high: { min: number; max: number }; peak: { min: number; max: number } }; proteinG: { min: number; max: number }; longSessionCarbGPerHour: number };
+  // Hand-narrowed mirror of StrengthPrescription (OSPREY-app/src/services/coaching/strength.ts).
+  // Present only when sport === 'lift' (powerlifting); attempts is non-null only in Peak/Taper.
+  strength?: {
+    oneRepMaxKg: { squat: number; bench: number; deadlift: number };
+    workingPercent1RM: number;
+    zone: { name: string; percent1RM: [number, number]; reps: [number, number]; rpe: [number, number]; rir: [number, number] };
+    prilepin: { repsPerSet: [number, number]; totalReps: [number, number] };
+    fatG: { min: number; max: number };
+    attempts: {
+      squat: { opener: { min: number; max: number }; second: { min: number; max: number }; third: { min: number; max: number } };
+      bench: { opener: { min: number; max: number }; second: { min: number; max: number }; third: { min: number; max: number } };
+      deadlift: { opener: { min: number; max: number }; second: { min: number; max: number }; third: { min: number; max: number } };
+    } | null;
+  } | null;
 }
 
 async function computeTrainingLoad(supabase: ReturnType<typeof createClient>, userId: string): Promise<TrainingLoad> {
@@ -331,11 +345,20 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad,
               (z.bike ? ` Bike power endurance Z2 ${z.bike.bands.z2Endurance.min}-${z.bike.bands.z2Endurance.max}w, threshold Z4 ${z.bike.bands.z4Threshold.min}-${z.bike.bands.z4Threshold.max}w (advice only — do NOT pace-clamp bike).` : ' Bike: no FTP — use the HR zones for rides.')
             : ` Bike power zones (from FTP ~${z.ftpWatts}w): endurance Z2 ${z.bands.z2Endurance.min}-${z.bands.z2Endurance.max}w, threshold Z4 ${z.bands.z4Threshold.min}-${z.bands.z4Threshold.max}w. Advice only — target these watts for rides; do NOT distance/pace-clamp bike sessions.`;
 
+  // Powerlifting %1RM/Prilepin guidance, present only when the envelope carries
+  // a strength block (sport === 'lift'). Mirrors StrengthPrescription's numbers
+  // into prose the lift_prescription rule below acts on (loadKg per lift).
+  const s = envelope?.strength;
+  const strengthGuidance = !s ? '' :
+    ` STRENGTH (powerlifting): work the comp lifts at ~${s.workingPercent1RM}% 1RM — squat ${Math.round(s.oneRepMaxKg.squat * s.workingPercent1RM / 100)}kg, bench ${Math.round(s.oneRepMaxKg.bench * s.workingPercent1RM / 100)}kg, deadlift ${Math.round(s.oneRepMaxKg.deadlift * s.workingPercent1RM / 100)}kg (zone "${s.zone.name}", RPE ${s.zone.rpe[0]}-${s.zone.rpe[1]}, RIR ${s.zone.rir[0]}-${s.zone.rir[1]}). Keep top-set volume within Prilepin: ${s.prilepin.repsPerSet[0]}-${s.prilepin.repsPerSet[1]} reps/set, ${s.prilepin.totalReps[0]}-${s.prilepin.totalReps[1]} total reps at this intensity; then back-off volume + a variation + 2-3 accessories. Daily fat ${s.fatG.min}-${s.fatG.max} g; creatine 3-5 g/day.` +
+    (s.attempts ? ` MEET WEEK — plan openers (~90% of goal): squat ${Math.round(s.attempts.squat.opener.min)}-${Math.round(s.attempts.squat.opener.max)}kg, bench ${Math.round(s.attempts.bench.opener.min)}-${Math.round(s.attempts.bench.opener.max)}kg, deadlift ${Math.round(s.attempts.deadlift.opener.min)}-${Math.round(s.attempts.deadlift.opener.max)}kg; each lift's 2nd/3rd build to the goal third.` : '');
+
   const envelopeGuidance = envelope
     ? ` COACHING ENVELOPE (hard constraints — stay inside these): phase=${envelope.phase}, week ${envelope.weekNumber}/${envelope.totalWeeks}, target weekly load ≈ ${envelope.targetWeeklyLoad} TSS, at most ${Math.round(envelope.hardSessionShareMax * 100)}% of sessions hard.` +
       zoneGuidance +
       hrGuidance(envelope.hrZones) +
-      ` Daily carbs by day: easy ${envelope.fuel.dailyCarbGByDayType.easy.min}-${envelope.fuel.dailyCarbGByDayType.easy.max} g, hard ${envelope.fuel.dailyCarbGByDayType.high.min}-${envelope.fuel.dailyCarbGByDayType.high.max} g, race ${envelope.fuel.dailyCarbGByDayType.peak.min}-${envelope.fuel.dailyCarbGByDayType.peak.max} g; protein ${envelope.fuel.proteinG.min}-${envelope.fuel.proteinG.max} g/day; in-session ~${envelope.fuel.longSessionCarbGPerHour} g/hr.`
+      ` Daily carbs by day: easy ${envelope.fuel.dailyCarbGByDayType.easy.min}-${envelope.fuel.dailyCarbGByDayType.easy.max} g, hard ${envelope.fuel.dailyCarbGByDayType.high.min}-${envelope.fuel.dailyCarbGByDayType.high.max} g, race ${envelope.fuel.dailyCarbGByDayType.peak.min}-${envelope.fuel.dailyCarbGByDayType.peak.max} g; protein ${envelope.fuel.proteinG.min}-${envelope.fuel.proteinG.max} g/day; in-session ~${envelope.fuel.longSessionCarbGPerHour} g/hr.` +
+      strengthGuidance
     : '';
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
