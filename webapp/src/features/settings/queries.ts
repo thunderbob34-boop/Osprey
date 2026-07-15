@@ -72,6 +72,9 @@ export function useUpdateThresholdAnchor(userId: string) {
       if (error) throw error;
       if (!data || data.length === 0) throw new Error('Could not save — no goals record found for your account.');
     },
-    onSuccess: () => void qc.invalidateQueries({ queryKey: ['threshold-anchor', userId] }),
+    // Return (don't `void`) the invalidation so the mutation stays pending until the
+    // refetch settles — otherwise buttons re-enable while the cached map is stale, and
+    // a fast second-sport save would build off the old map and drop the just-saved one.
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['threshold-anchor', userId] }),
   });
 }

@@ -69,7 +69,7 @@ function SportZone({ row, map, onSave, saving }: { row: Row; map: ThresholdAncho
       {row.key === 'row' && <TimeInput label="2k" m={a} s={b} setM={setA} setS={setB} />}
       {row.key === 'run' && <><input placeholder="distance (mi)" value={a} onChange={(e) => setA(e.target.value)} inputMode="decimal" /><TimeInput label="time" m={c} s={d} setM={setC} setS={setD} /></>}
 
-      {shown != null && <ZonePreview sportKey={row.key} value={shown} estimated={preview == null && stored == null} />}
+      {shown != null && <ZonePreview sportKey={row.key} value={shown} />}
       {stored == null && preview == null && <p style={{ color: 'var(--mut)' }}>Not set — Ozzie estimates these from your training. Enter your numbers to set them precisely.</p>}
 
       {error ? <span className="err-line">{error}</span> : null}
@@ -81,8 +81,8 @@ function SportZone({ row, map, onSave, saving }: { row: Row; map: ThresholdAncho
   );
 }
 
-function ZonePreview({ sportKey, value }: { sportKey: AnchorKey; value: number; estimated: boolean }) {
-  if (sportKey === 'swim') { const z = swimPaceZones(value); return <div style={{ color: 'var(--mut)' }}>CSS {value}s/100m · easy {band(z.z2Aerobic, 's/100m')} · threshold {band(z.z3Threshold, 's/100m')}</div>; }
+function ZonePreview({ sportKey, value }: { sportKey: AnchorKey; value: number }) {
+  if (sportKey === 'swim') { const z = swimPaceZones(value); return <div style={{ color: 'var(--mut)' }}>CSS {value}s/100m · aerobic {band(z.z2Aerobic, 's/100m')} · threshold {band(z.z3Threshold, 's/100m')}</div>; }
   if (sportKey === 'row') { const z = rowingTrainingZones(value); return <div style={{ color: 'var(--mut)' }}>2k split {value}s/500m · UT2 {band(z.ut2.splitSecPer500, 's/500m')} · AT {band(z.at.splitSecPer500, 's/500m')}</div>; }
   const z = runningPaceZones(value); return <div style={{ color: 'var(--mut)' }}>Threshold {formatMinSec(value)}/mi · easy {band(z.easy, '/mi')} · 5K {band(z.fiveKPace, '/mi')}</div>;
 }
