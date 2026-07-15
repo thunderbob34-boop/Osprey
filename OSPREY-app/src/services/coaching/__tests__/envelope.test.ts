@@ -55,15 +55,15 @@ const base: EnvelopeInput = {
 
 describe('computeEnvelope self-report priority', () => {
   it('prefers a self-reported swim CSS over the tier estimate', () => {
-    const env = computeEnvelope({ ...base, sport: 'swim', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 88, splitSecPer500: null } });
+    const env = computeEnvelope({ ...base, sport: 'swim', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 88, splitSecPer500: null, ftpWatts: null } });
     expect(env.zones).toMatchObject({ kind: 'swim', cssSecPer100: 88 });
   });
   it('prefers a self-reported run threshold over data/tier', () => {
-    const env = computeEnvelope({ ...base, sport: 'run', selfReportAnchor: { thresholdSecPerMile: 400, cssSecPer100: null, splitSecPer500: null } });
+    const env = computeEnvelope({ ...base, sport: 'run', selfReportAnchor: { thresholdSecPerMile: 400, cssSecPer100: null, splitSecPer500: null, ftpWatts: null } });
     expect(env.zones).toMatchObject({ kind: 'run', thresholdSecPerMile: 400 });
   });
   it('prefers a self-reported rowing split over data/tier', () => {
-    const env = computeEnvelope({ ...base, sport: 'rowing', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: 108 } });
+    const env = computeEnvelope({ ...base, sport: 'rowing', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: 108, ftpWatts: null } });
     expect(env.zones).toMatchObject({ kind: 'rowing', splitSecPer500: 108 });
   });
   it('is unchanged when selfReportAnchor is absent (regression guard)', () => {

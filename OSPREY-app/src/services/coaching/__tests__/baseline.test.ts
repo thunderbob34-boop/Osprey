@@ -2,6 +2,7 @@ import {
   parseSwimBaseline,
   parseRowingBaseline,
   parseRunBaseline,
+  parseFTPBaseline,
   anchorKeyForGoal,
   toSelfReportAnchor,
 } from '@/services/coaching/baseline';
@@ -47,6 +48,17 @@ describe('parseRunBaseline', () => {
   });
 });
 
+describe('parseFTPBaseline', () => {
+  it('accepts a plausible FTP', () => {
+    expect(parseFTPBaseline(240)).toEqual({ ok: true, value: 240 });
+  });
+  it('rejects non-positive / implausible watts', () => {
+    expect(parseFTPBaseline(0).ok).toBe(false);
+    expect(parseFTPBaseline(49).ok).toBe(false);
+    expect(parseFTPBaseline(601).ok).toBe(false);
+  });
+});
+
 describe('anchorKeyForGoal', () => {
   it('maps sports to their stored anchor key', () => {
     expect(anchorKeyForGoal('swim')).toBe('swim');
@@ -62,12 +74,19 @@ describe('anchorKeyForGoal', () => {
   });
 });
 
+describe('anchorKeyForGoal cycling', () => {
+  it('maps cycling to the bike anchor key', () => {
+    expect(anchorKeyForGoal('cycling')).toBe('bike');
+  });
+});
+
 describe('toSelfReportAnchor', () => {
   it('flattens the stored per-sport map to the flat envelope input', () => {
     expect(toSelfReportAnchor({ swim: { cssSecPer100: 95, source: 'self_report' } })).toEqual({
       thresholdSecPerMile: null,
       cssSecPer100: 95,
       splitSecPer500: null,
+      ftpWatts: null,
     });
   });
   it('returns all-null for null/undefined', () => {
@@ -75,6 +94,15 @@ describe('toSelfReportAnchor', () => {
       thresholdSecPerMile: null,
       cssSecPer100: null,
       splitSecPer500: null,
+      ftpWatts: null,
+    });
+  });
+});
+
+describe('toSelfReportAnchor bike', () => {
+  it('reads bike.ftpWatts into the flat anchor', () => {
+    expect(toSelfReportAnchor({ bike: { ftpWatts: 240, source: 'self_report' } })).toEqual({
+      thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: null, ftpWatts: 240,
     });
   });
 });
