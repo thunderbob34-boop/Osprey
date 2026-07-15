@@ -52,8 +52,7 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
   });
 
   let zones: ZoneSet | null = null;
-  const bp = blueprintSport(input.sport);
-  if (bp === 'run') {
+  if (input.sport === 'triathlon') {
     const t =
       input.selfReportAnchor?.thresholdSecPerMile ??
       resolveRunningAnchor({
@@ -61,22 +60,41 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
         bestRunTimeS: input.bestRunTimeS,
         fitnessLevel: input.fitnessLevel,
       }).thresholdSecPerMile;
-    zones = { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) };
-  } else if (bp === 'swim') {
     const css = input.selfReportAnchor?.cssSecPer100 ?? estimateSwimCssByTier(input.fitnessLevel);
-    zones = { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) };
-  } else if (bp === 'rowing') {
-    const split =
-      input.selfReportAnchor?.splitSecPer500 ??
-      input.rowingSplitSecPer500 ??
-      estimateRowingSplitByTier(input.fitnessLevel);
-    zones = { kind: 'rowing', splitSecPer500: split, bands: rowingTrainingZones(split) };
-  } else if (bp === 'cycling') {
     const ftp = input.selfReportAnchor?.ftpWatts;
-    if (ftp != null) {
-      zones = { kind: 'cycling', ftpWatts: ftp, bands: cyclingPowerZones(ftp) };
+    zones = {
+      kind: 'triathlon',
+      swim: { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) },
+      run: { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) },
+      bike: ftp != null ? { kind: 'cycling', ftpWatts: ftp, bands: cyclingPowerZones(ftp) } : null,
+    };
+  } else {
+    const bp = blueprintSport(input.sport);
+    if (bp === 'run') {
+      const t =
+        input.selfReportAnchor?.thresholdSecPerMile ??
+        resolveRunningAnchor({
+          bestRunMiles: input.bestRunMiles,
+          bestRunTimeS: input.bestRunTimeS,
+          fitnessLevel: input.fitnessLevel,
+        }).thresholdSecPerMile;
+      zones = { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) };
+    } else if (bp === 'swim') {
+      const css = input.selfReportAnchor?.cssSecPer100 ?? estimateSwimCssByTier(input.fitnessLevel);
+      zones = { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) };
+    } else if (bp === 'rowing') {
+      const split =
+        input.selfReportAnchor?.splitSecPer500 ??
+        input.rowingSplitSecPer500 ??
+        estimateRowingSplitByTier(input.fitnessLevel);
+      zones = { kind: 'rowing', splitSecPer500: split, bands: rowingTrainingZones(split) };
+    } else if (bp === 'cycling') {
+      const ftp = input.selfReportAnchor?.ftpWatts;
+      if (ftp != null) {
+        zones = { kind: 'cycling', ftpWatts: ftp, bands: cyclingPowerZones(ftp) };
+      }
+      // else zones stays null → the universal hrZones (2b-iii) carries the cyclist's guidance
     }
-    // else zones stays null → the universal hrZones (2b-iii) carries the cyclist's guidance
   }
 
   const hardWeek = loadingWeek(input.weekNumber) !== 4 && input.phase !== 'Taper';

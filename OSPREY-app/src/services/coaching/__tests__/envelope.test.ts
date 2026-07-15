@@ -1,6 +1,9 @@
 import { computeEnvelope, EnvelopeInput } from '@/services/coaching/envelope';
 import { ultraHRZones } from '@/services/coaching/hr';
 import { cyclingPowerZones } from '@/services/calculators/cycling';
+import { swimPaceZones } from '@/services/calculators/swimming';
+import { runningPaceZones } from '@/services/calculators/running';
+import { estimateSwimCssByTier } from '@/services/coaching/anchor';
 
 const baseInput = {
   sport: 'run', phase: 'Build' as const, weekNumber: 5, totalWeeks: 16,
@@ -113,5 +116,26 @@ describe('computeEnvelope cycling', () => {
     const env = computeEnvelope({ ...hrBase, sport: 'cycling', maxHR: 180, selfReportAnchor: null });
     expect(env.zones).toBeNull();
     expect(env.hrZones.maxHR).toBe(180);
+  });
+});
+
+describe('computeEnvelope triathlon composite', () => {
+  it('resolves swim + run + bike from self-report anchors', () => {
+    const env = computeEnvelope({ ...hrBase, sport: 'triathlon', maxHR: 180,
+      selfReportAnchor: { thresholdSecPerMile: 440, cssSecPer100: 95, splitSecPer500: null, ftpWatts: 240 } });
+    expect(env.zones).toEqual({
+      kind: 'triathlon',
+      swim: { kind: 'swim', cssSecPer100: 95, bands: swimPaceZones(95) },
+      run: { kind: 'run', thresholdSecPerMile: 440, bands: runningPaceZones(440) },
+      bike: { kind: 'cycling', ftpWatts: 240, bands: cyclingPowerZones(240) },
+    });
+  });
+  it('leaves bike null when the triathlete has no FTP (→ HR for bikes); swim falls to tier', () => {
+    const env = computeEnvelope({ ...hrBase, sport: 'triathlon', fitnessLevel: 'beginner', maxHR: 180,
+      selfReportAnchor: { thresholdSecPerMile: 440, cssSecPer100: null, splitSecPer500: null, ftpWatts: null } });
+    const z = env.zones as Extract<typeof env.zones, { kind: 'triathlon' }>;
+    expect(z.bike).toBeNull();
+    expect(z.swim).toEqual({ kind: 'swim', cssSecPer100: estimateSwimCssByTier('beginner'), bands: swimPaceZones(estimateSwimCssByTier('beginner')) });
+    expect(env.hrZones.maxHR).toBe(180); // HR still there for the bike sessions
   });
 });
