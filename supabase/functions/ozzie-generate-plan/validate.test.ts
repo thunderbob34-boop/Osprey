@@ -130,3 +130,29 @@ Deno.test('cycling envelope does not pace-clamp bike sessions (prompt-only)', ()
   assertEquals(changed.length, 0);
   assert((days[0] as Record<string, unknown>).fuel !== undefined, 'fuel not attached'); // fuel still attached
 });
+
+Deno.test('triathlon clamps swim + run by their sub-zones, leaves bike unclamped', () => {
+  const envelope = {
+    hardSessionShareMax: 0.5,
+    zones: {
+      kind: 'triathlon',
+      swim: { kind: 'swim', cssSecPer100: 95, bands: { z1EasyRecovery: { min: 103, max: 999 }, z2Aerobic: { min: 98, max: 101 }, z3Threshold: { min: 93, max: 97 }, z4Vo2Max: { min: 90, max: 93 } } },
+      run:  { kind: 'run',  thresholdSecPerMile: 440, bands: { easy: { min: 500, max: 560 }, marathonPace: { min: 455, max: 470 }, tenKPace: { min: 425, max: 435 }, fiveKPace: { min: 410, max: 420 } } },
+      bike: { kind: 'cycling', ftpWatts: 240, bands: { z2Endurance: { min: 134, max: 180 }, z4Threshold: { min: 218, max: 252 } } },
+    },
+    fuel: { dailyCarbG: { min: 1, max: 2 }, proteinG: { min: 1, max: 2 }, longSessionCarbGPerHour: 60 },
+  };
+  const days = [
+    // easy swim implied WAY too fast (short distance / long time) → clamped into z2Aerobic
+    { dayOffset: 0, session_type: 'swim', intensity: 'easy', planned_minutes: 30, planned_distance_km: 2 },
+    // easy run implied too fast → clamped into the easy band
+    { dayOffset: 1, session_type: 'run', intensity: 'easy', planned_minutes: 30, planned_distance_km: 8 },
+    // bike → never clamped (advice-only), distance untouched
+    { dayOffset: 2, session_type: 'bike', intensity: 'threshold', planned_minutes: 60, planned_distance_km: 30 },
+  ];
+  const { days: out, changed } = validateAndClamp(days as any, envelope as any);
+  assertEquals(out[2].planned_distance_km, 30);          // bike untouched
+  assert(changed.some((c) => c.includes('swim')));        // swim clamped
+  assert(changed.some((c) => c.includes('run')));         // run clamped
+  assert(!changed.some((c) => c.includes('day2')));       // bike not in the change log
+});
