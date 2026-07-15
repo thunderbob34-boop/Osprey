@@ -10,8 +10,11 @@ describe('primaryDayLabel', () => {
     expect(primaryDayLabel('run')).toBe('Run days per week');
     expect(primaryDayLabel('hybrid')).toBe('Run days per week');
     expect(primaryDayLabel('hyrox')).toBe('Run days per week');
-    expect(primaryDayLabel('lift')).toBe('Run days per week');
     expect(primaryDayLabel(null)).toBe('Run days per week');
+  });
+
+  it('labels lift as lift days per week', () => {
+    expect(primaryDayLabel('lift')).toBe('Lift days per week');
   });
 
   it('labels cycling as ride days', () => {
