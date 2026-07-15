@@ -20,4 +20,13 @@ describe('computeFuel', () => {
     expect(swim).toBeGreaterThan(0);
     expect(swim).not.toBe(run); // swim dispatch is distinct; a dropped branch would collapse it to the run default
   });
+  it('gives ultra its own in-session carb rate, higher when gut-trained', () => {
+    const untrained = computeFuel('ultra', 70, false).longSessionCarbGPerHour;
+    const trained = computeFuel('ultra', 70, true).longSessionCarbGPerHour;
+    expect(untrained).toBe(75);  // midpoint {60,90}
+    expect(trained).toBe(90);    // midpoint {60,120}
+  });
+  it('ignores gutTrained for non-ultra sports (regression)', () => {
+    expect(computeFuel('run', 70, true).longSessionCarbGPerHour).toBe(computeFuel('run', 70).longSessionCarbGPerHour);
+  });
 });

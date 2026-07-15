@@ -129,6 +129,6 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     hardSessionShareMax: 0.2,
     zones,
     hrZones,
-    fuel: computeFuel(input.sport, input.bodyWeightKg),
+    fuel: computeFuel(input.sport, input.bodyWeightKg, input.ultraParams?.gutTrained ?? false),
   };
 }
