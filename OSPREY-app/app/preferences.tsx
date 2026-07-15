@@ -111,10 +111,10 @@ export default function PreferencesScreen() {
           if (typeof saved.includeSwim === 'boolean') setIncludeSwim(saved.includeSwim);
           if (typeof saved.includeBike === 'boolean') setIncludeBike(saved.includeBike);
           if (saved.triathlonDistance) setTriathlonDistance(saved.triathlonDistance);
-          if (saved.ultraParams) {
-            if (saved.ultraParams.raceDistance) setUltraDistance(saved.ultraParams.raceDistance);
-            setUltraVert(saved.ultraParams.vertGainM != null ? String(saved.ultraParams.vertGainM) : '');
-            setGutTrained(!!saved.ultraParams.gutTrained);
+          if (saved.goalParams) {
+            if (saved.goalParams.raceDistance) setUltraDistance(saved.goalParams.raceDistance);
+            setUltraVert(saved.goalParams.vertGainM != null ? String(saved.goalParams.vertGainM) : '');
+            setGutTrained(!!saved.goalParams.gutTrained);
           }
         } else if (userId) {
           // First visit — no prior plan-builder session. Seed from the
