@@ -45,3 +45,20 @@ Deno.test('cross-training toggles add one day each without stealing primary swim
 Deno.test('unknown / non-endurance goal falls back to run primary', () => {
   assertEquals(routeDisciplineDays('weight_loss', 3, 2, false, false).weeklyRunDays, 3);
 });
+
+Deno.test('cycling primary routes the primary days to bike, zero run', () => {
+  const r = routeDisciplineDays('cycling', 5, 2, false, false);
+  assertEquals(r.weeklyBikeDays, 5);
+  assertEquals(r.weeklyRunDays, 0);
+  assertEquals(r.weeklySwimDays, 0);
+  assertEquals(r.weeklyRowDays, 0);
+  assertEquals(r.weeklyLiftDays, 2);
+});
+
+Deno.test('run/hybrid bike days unchanged by the cycling case (regression)', () => {
+  // run primary, no includeBike → bike days still 0
+  assertEquals(routeDisciplineDays('run', 3, 2, false, false).weeklyBikeDays, 0);
+  // run primary WITH includeBike → still exactly 1 cross-training bike day
+  assertEquals(routeDisciplineDays('run', 3, 2, false, true).weeklyBikeDays, 1);
+  assertEquals(routeDisciplineDays('run', 3, 2, false, true).weeklyRunDays, 3);
+});
