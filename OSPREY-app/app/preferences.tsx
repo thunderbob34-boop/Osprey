@@ -18,6 +18,7 @@ import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { useAuthStore } from '@/store/authStore';
 import { ONBOARDING_GOAL_TO_PREFERENCES } from '@/services/onboarding';
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
+import { parseStrengthParams } from '@/services/coaching/strength-params';
 import type {
   ExperienceLevel,
   TrainingDaysPerWeek,
@@ -87,6 +88,12 @@ export default function PreferencesScreen() {
   const [ultraDistance, setUltraDistance] = useState<UltraRaceDistance>('50k');
   const [ultraVert, setUltraVert] = useState('');
   const [gutTrained, setGutTrained] = useState(false);
+  const [squat, setSquat] = useState('');
+  const [bench, setBench] = useState('');
+  const [deadlift, setDeadlift] = useState('');
+  const [goalSquat, setGoalSquat] = useState('');
+  const [goalBench, setGoalBench] = useState('');
+  const [goalDeadlift, setGoalDeadlift] = useState('');
   const [loading, setLoading] = useState(false);
   const [loadingPrefs, setLoadingPrefs] = useState(true);
   // Whether a plan-builder session has run before via this screen — a good
@@ -96,6 +103,7 @@ export default function PreferencesScreen() {
 
   const isTriathlon = primaryGoal === 'triathlon';
   const isUltra = primaryGoal === 'ultra';
+  const isLift = primaryGoal === 'strength';
 
   useEffect(() => {
     async function loadSaved() {
@@ -115,6 +123,18 @@ export default function PreferencesScreen() {
             if (saved.goalParams.raceDistance) setUltraDistance(saved.goalParams.raceDistance);
             setUltraVert(saved.goalParams.vertGainM != null ? String(saved.goalParams.vertGainM) : '');
             setGutTrained(!!saved.goalParams.gutTrained);
+            if (saved.goalParams.oneRepMaxKg) {
+              const maxes = saved.goalParams.oneRepMaxKg;
+              setSquat(maxes.squat != null ? String(maxes.squat) : '');
+              setBench(maxes.bench != null ? String(maxes.bench) : '');
+              setDeadlift(maxes.deadlift != null ? String(maxes.deadlift) : '');
+            }
+            if (saved.goalParams.goalThirdKg) {
+              const goalThirds = saved.goalParams.goalThirdKg;
+              setGoalSquat(goalThirds.squat != null ? String(goalThirds.squat) : '');
+              setGoalBench(goalThirds.bench != null ? String(goalThirds.bench) : '');
+              setGoalDeadlift(goalThirds.deadlift != null ? String(goalThirds.deadlift) : '');
+            }
           }
         } else if (userId) {
           // First visit — no prior plan-builder session. Seed from the
@@ -159,6 +179,15 @@ export default function PreferencesScreen() {
       }
       const ultraParamsValue = ultraParams && ultraParams.ok ? ultraParams.value : null;
 
+      const strengthParams = isLift
+        ? parseStrengthParams({ squat, bench, deadlift, goalSquat, goalBench, goalDeadlift })
+        : null;
+      if (strengthParams && !strengthParams.ok) {
+        Alert.alert('Check your lift numbers', strengthParams.error);
+        return;
+      }
+      const strengthParamsValue = strengthParams && strengthParams.ok ? strengthParams.value : null;
+
       const preferences = {
         primaryGoal,
         experienceLevel,
@@ -168,6 +197,7 @@ export default function PreferencesScreen() {
         longRunDay,
         ...(isTriathlon ? { triathlonDistance } : {}),
         ...(ultraParamsValue ? { goalParams: ultraParamsValue } : {}),
+        ...(strengthParamsValue ? { goalParams: strengthParamsValue } : {}),
       };
 
       // Persist to Supabase Auth user_metadata (no schema change needed)
@@ -194,6 +224,18 @@ export default function PreferencesScreen() {
           .eq('user_id', userId);
         if (goalParamsError) {
           Alert.alert('Could not save your ultra details', goalParamsError.message);
+          return;
+        }
+      }
+      // Same ordering requirement for a lift athlete's 1RMs — the build-envelope
+      // reads goal_params from the DB, not from this in-memory preferences object.
+      if (strengthParamsValue && userId) {
+        const { error: goalParamsError } = await supabase
+          .from('user_goals')
+          .update({ goal_params: strengthParamsValue })
+          .eq('user_id', userId);
+        if (goalParamsError) {
+          Alert.alert('Could not save your lift numbers', goalParamsError.message);
           return;
         }
       }
@@ -337,6 +379,32 @@ export default function PreferencesScreen() {
           </>
         ) : null}
 
+        {isLift ? (
+          <>
+            <LiftField label="SQUAT — 1RM (KG)" value={squat} onChangeText={setSquat} placeholder="140" />
+            <LiftField label="BENCH — 1RM (KG)" value={bench} onChangeText={setBench} placeholder="100" />
+            <LiftField label="DEADLIFT — 1RM (KG)" value={deadlift} onChangeText={setDeadlift} placeholder="180" />
+            <LiftField
+              label="GOAL SQUAT — 3RD ATTEMPT (KG, OPTIONAL)"
+              value={goalSquat}
+              onChangeText={setGoalSquat}
+              placeholder="150"
+            />
+            <LiftField
+              label="GOAL BENCH — 3RD ATTEMPT (KG, OPTIONAL)"
+              value={goalBench}
+              onChangeText={setGoalBench}
+              placeholder="105"
+            />
+            <LiftField
+              label="GOAL DEADLIFT — 3RD ATTEMPT (KG, OPTIONAL)"
+              value={goalDeadlift}
+              onChangeText={setGoalDeadlift}
+              placeholder="190"
+            />
+          </>
+        ) : null}
+
         <Text style={styles.sectionLabel}>EXPERIENCE LEVEL</Text>
         <View style={styles.chipRow}>
           {LEVEL_OPTIONS.map((opt) => (
@@ -467,6 +535,32 @@ export default function PreferencesScreen() {
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+function LiftField({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+}: {
+  label: string;
+  value: string;
+  onChangeText: (v: string) => void;
+  placeholder?: string;
+}) {
+  return (
+    <>
+      <Text style={styles.sectionLabel}>{label}</Text>
+      <TextInput
+        style={styles.input}
+        value={value}
+        onChangeText={onChangeText}
+        keyboardType="decimal-pad"
+        placeholder={placeholder}
+        placeholderTextColor={Colors.textMuted}
+      />
+    </>
   );
 }
 

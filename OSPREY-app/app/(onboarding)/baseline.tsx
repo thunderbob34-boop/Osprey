@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import OnboardingShell from '@/components/onboarding/OnboardingShell';
 import { useOnboardingStore } from '@/store/onboardingStore';
+import { useAuthStore } from '@/store/authStore';
 import {
   parseSwimBaseline,
   parseRowingBaseline,
@@ -13,6 +14,8 @@ import {
 } from '@/services/coaching/baseline';
 import { estimateFTPFromTwentyMinPower } from '@/services/calculators/triathlon';
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
+import { parseStrengthParams } from '@/services/coaching/strength-params';
+import { bestE1rmForLift, fetchLiftAnalytics } from '@/services/lift-analytics';
 import { Colors } from '@/constants/colors';
 
 const HEALTH = '/(onboarding)/health';
@@ -22,6 +25,7 @@ const ULTRA_DISTANCES: UltraRaceDistance[] = ['50k', '50mi', '100k', '100mi'];
 
 export default function BaselineScreen() {
   const router = useRouter();
+  const userId = useAuthStore((s) => s.user?.id);
   const primaryGoal = useOnboardingStore((s) => s.primaryGoal);
   const setThresholdAnchor = useOnboardingStore((s) => s.setThresholdAnchor);
   const setGoalParams = useOnboardingStore((s) => s.setGoalParams);
@@ -36,7 +40,33 @@ export default function BaselineScreen() {
   const [ultraDistance, setUltraDistance] = useState<UltraRaceDistance>('50k');
   const [ultraVert, setUltraVert] = useState('');
   const [gutTrained, setGutTrained] = useState(false);
+  const [squat, setSquat] = useState(''); const [bench, setBench] = useState(''); const [deadlift, setDeadlift] = useState('');
+  const [goalSquat, setGoalSquat] = useState(''); const [goalBench, setGoalBench] = useState(''); const [goalDeadlift, setGoalDeadlift] = useState('');
   const [error, setError] = useState<string | null>(null);
+
+  // Hybrid pre-fill: seed each 1RM from the athlete's logged sets (best e1RM
+  // per lift) when a value exists. They can still edit before continuing.
+  useEffect(() => {
+    if (primaryGoal !== 'lift' || !userId) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const analytics = await fetchLiftAnalytics(userId);
+        if (cancelled) return;
+        const sq = bestE1rmForLift(analytics, 'squat');
+        const be = bestE1rmForLift(analytics, 'bench');
+        const dl = bestE1rmForLift(analytics, 'deadlift');
+        if (sq != null) setSquat((v) => (v === '' ? String(sq) : v));
+        if (be != null) setBench((v) => (v === '' ? String(be) : v));
+        if (dl != null) setDeadlift((v) => (v === '' ? String(dl) : v));
+      } catch {
+        // Best-effort pre-fill — the athlete can still enter values manually.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [primaryGoal, userId]);
 
   function onContinue() {
     setError(null);
@@ -44,6 +74,13 @@ export default function BaselineScreen() {
       const u = parseUltraParams({ raceDistance: ultraDistance, vertGainM: ultraVert, gutTrained });
       if (!u.ok) return setError(u.error);
       setGoalParams(u.value);
+    }
+    if (primaryGoal === 'lift') {
+      const s = parseStrengthParams({ squat, bench, deadlift, goalSquat, goalBench, goalDeadlift });
+      if (!s.ok) return setError(s.error);
+      setGoalParams(s.value);
+      router.push(HEALTH);
+      return;
     }
     let value: number;
     let anchor: ThresholdAnchorMap;
@@ -71,7 +108,7 @@ export default function BaselineScreen() {
   }
 
   const title =
-    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : 'A recent hard run?';
+    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : primaryGoal === 'lift' ? 'Know your current maxes?' : 'A recent hard run?';
 
   return (
     <OnboardingShell
@@ -151,6 +188,15 @@ export default function BaselineScreen() {
             <TextInput style={styles.input} value={twentyMin} onChangeText={setTwentyMin} keyboardType="number-pad" placeholder="253" placeholderTextColor={Colors.textMuted} />
           </View>
         </>
+      ) : primaryGoal === 'lift' ? (
+        <>
+          <NumberField label="Squat — 1RM (kg)" value={squat} onChangeText={setSquat} placeholder="140" />
+          <NumberField label="Bench — 1RM (kg)" value={bench} onChangeText={setBench} placeholder="100" />
+          <NumberField label="Deadlift — 1RM (kg)" value={deadlift} onChangeText={setDeadlift} placeholder="180" />
+          <NumberField label="Goal squat — 3rd attempt (kg, optional)" value={goalSquat} onChangeText={setGoalSquat} placeholder="150" />
+          <NumberField label="Goal bench — 3rd attempt (kg, optional)" value={goalBench} onChangeText={setGoalBench} placeholder="105" />
+          <NumberField label="Goal deadlift — 3rd attempt (kg, optional)" value={goalDeadlift} onChangeText={setGoalDeadlift} placeholder="190" />
+        </>
       ) : (
         <>
           <View style={styles.field}>
@@ -179,6 +225,22 @@ function TimeRow({ label, m, s, setM, setS }: { label: string; m: string; s: str
         <Text style={styles.colon}>:</Text>
         <TextInput style={[styles.input, styles.timeInput]} value={s} onChangeText={setS} keyboardType="number-pad" placeholder="sec" placeholderTextColor={Colors.textMuted} />
       </View>
+    </View>
+  );
+}
+
+function NumberField({ label, value, onChangeText, placeholder }: { label: string; value: string; onChangeText: (v: string) => void; placeholder?: string }) {
+  return (
+    <View style={styles.field}>
+      <Text style={styles.label}>{label}</Text>
+      <TextInput
+        style={styles.input}
+        value={value}
+        onChangeText={onChangeText}
+        keyboardType="decimal-pad"
+        placeholder={placeholder}
+        placeholderTextColor={Colors.textMuted}
+      />
     </View>
   );
 }
