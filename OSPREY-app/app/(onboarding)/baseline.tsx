@@ -11,6 +11,7 @@ import {
   anchorKeyForGoal,
   type ThresholdAnchorMap,
 } from '@/services/coaching/baseline';
+import { estimateFTPFromTwentyMinPower } from '@/services/calculators/triathlon';
 import { Colors } from '@/constants/colors';
 
 const HEALTH = '/(onboarding)/health';
@@ -45,7 +46,7 @@ export default function BaselineScreen() {
       value = r.value; anchor = { row: { splitSecPer500: value, source: 'self_report' } };
     } else if (key === 'bike') {
       // FTP entered directly, or derived from 20-min power (0.95×) when FTP is blank.
-      const ftpW = num(ftp) || (num(twentyMin) ? Math.round(num(twentyMin) * 0.95) : NaN);
+      const ftpW = num(ftp) || (num(twentyMin) ? estimateFTPFromTwentyMinPower(num(twentyMin)) : NaN);
       const r = parseFTPBaseline(ftpW);
       if (!r.ok) return setError(r.error);
       value = r.value; anchor = { bike: { ftpWatts: value, source: 'self_report' } };

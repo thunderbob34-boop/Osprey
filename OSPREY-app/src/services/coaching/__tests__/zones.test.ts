@@ -8,12 +8,12 @@ describe('blueprintSport', () => {
   it('maps hyrox to run (its anchor is compromised run pace)', () => {
     expect(blueprintSport('hyrox')).toBe('run');
   });
-  it('maps swim and rowing to themselves', () => {
+  it('maps swim, rowing, and cycling to themselves', () => {
     expect(blueprintSport('swim')).toBe('swim');
     expect(blueprintSport('rowing')).toBe('rowing');
+    expect(blueprintSport('cycling')).toBe('cycling');
   });
   it('returns null for sports without endurance zones this phase', () => {
-    expect(blueprintSport('cycling')).toBeNull();
     expect(blueprintSport('lift')).toBeNull();
     expect(blueprintSport('triathlon')).toBeNull();
   });
