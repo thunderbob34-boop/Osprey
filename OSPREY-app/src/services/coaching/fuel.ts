@@ -2,6 +2,7 @@ import { runningRaceFuelGPerHour } from '@/services/calculators/running';
 import { cyclingInRideCarbGPerHour } from '@/services/calculators/cycling';
 import { swimMeetDayCarbGPerHour } from '@/services/calculators/swimming';
 import { ultraRaceCarbGPerHour } from '@/services/calculators/ultra';
+import { powerliftingDailyNutrition } from '@/services/calculators/powerlifting';
 import { dailyCarbGrams, EnduranceDayType } from '@/services/calculators/shared';
 import { midpoint, Range } from '@/services/calculators/types';
 
@@ -20,6 +21,17 @@ function inSessionCarbGPerHour(sport: string, gutTrained: boolean): number {
 }
 
 export function computeFuel(sport: string, bodyWeightKg: number, gutTrained = false): FuelPlan {
+  if (sport === 'lift') {
+    const n = powerliftingDailyNutrition(bodyWeightKg);      // carbG 4-7 g/kg, proteinG 1.6-2.2
+    const mid = Math.round((n.carbG.min + n.carbG.max) / 2);
+    const low: Range = { min: Math.round(n.carbG.min), max: mid };      // rest/easy days
+    const high: Range = { min: mid, max: Math.round(n.carbG.max) };     // high-volume days
+    return {
+      dailyCarbGByDayType: { easy: low, moderate: low, high, peak: high },
+      proteinG: { min: Math.round(n.proteinG.min), max: Math.round(n.proteinG.max) },
+      longSessionCarbGPerHour: 0,                            // no endurance in-session fueling
+    };
+  }
   const carb = (dt: EnduranceDayType) => dailyCarbGrams(dt, bodyWeightKg);
   return {
     dailyCarbGByDayType: { easy: carb('easy'), moderate: carb('moderate'), high: carb('high'), peak: carb('peak') },

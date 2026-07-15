@@ -31,7 +31,7 @@ export function buildPlanPreferences(draft: OnboardingDraft): UserPreferences {
     // Mirrors app/preferences.tsx's handleGenerate: without this, the edge function's
     // plan-builder-branch `user_goals` upsert writes `goal_params: null`, clobbering the
     // real value completeOnboarding just inserted (see onboarding.test.ts for the pin).
-    ultraParams: draft.goalParams ?? null,
+    goalParams: draft.goalParams ?? null,
   };
 }
 

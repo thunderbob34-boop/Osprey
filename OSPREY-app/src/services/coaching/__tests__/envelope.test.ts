@@ -4,6 +4,7 @@ import { cyclingPowerZones } from '@/services/calculators/cycling';
 import { swimPaceZones } from '@/services/calculators/swimming';
 import { runningPaceZones } from '@/services/calculators/running';
 import { estimateSwimCssByTier } from '@/services/coaching/anchor';
+import { buildStrengthPrescription } from '@/services/coaching/strength';
 
 const baseInput = {
   sport: 'run', phase: 'Build' as const, weekNumber: 5, totalWeeks: 16,
@@ -163,5 +164,46 @@ describe('computeEnvelope ultra taper + distance-scaled volume', () => {
   it('leaves a non-ultra taper on the flat cut (regression)', () => {
     const run = computeEnvelope({ ...ultraInput(), sport: 'run', phase: 'Taper', weeksRemaining: 1, prevWeekLoad: 400 });
     expect(run.targetWeeklyLoad).toBe(Math.round(400 * 0.55)); // applyVolumeCut(prev, 0.45)
+  });
+});
+
+function liftInput(overrides: Partial<EnvelopeInput> = {}): EnvelopeInput {
+  return {
+    sport: 'lift', phase: 'Base', weekNumber: 1, totalWeeks: 8,
+    baselineLoad: 200, prevWeekLoad: null,
+    bestRunMiles: null, bestRunTimeS: null, rowingSplitSecPer500: null,
+    fitnessLevel: 'intermediate', bodyWeightKg: 90,
+    strengthParams: {
+      oneRepMaxKg: { squat: 200, bench: 140, deadlift: 240 },
+      goalThirdKg: { squat: 210, bench: 145, deadlift: 250 },
+    },
+    ...overrides,
+  };
+}
+
+describe('computeEnvelope strength prescription (PL T2)', () => {
+  it('populates a non-null strength prescription for a lift sport, wired straight from buildStrengthPrescription', () => {
+    const input = liftInput();
+    const env = computeEnvelope(input);
+    expect(env.strength).not.toBeNull();
+    expect(env.strength?.zone.name).toBe('Strength-Volume'); // Base phase → 80% → Strength-Volume
+    expect(env.strength).toEqual(buildStrengthPrescription(input));
+  });
+
+  it('is null for a non-lift sport and leaves every other envelope field byte-identical (regression)', () => {
+    const withStrengthParams = computeEnvelope({
+      ...baseInput,
+      strengthParams: {
+        oneRepMaxKg: { squat: 200, bench: 140, deadlift: 240 },
+        goalThirdKg: { squat: 210, bench: 145, deadlift: 250 },
+      },
+    });
+    const withoutStrengthParams = computeEnvelope({ ...baseInput });
+
+    expect(withStrengthParams.strength).toBeNull();
+    expect(withoutStrengthParams.strength).toBeNull();
+    // strengthParams is fully inert for sport: 'run' — zones/hrZones/fuel/targetWeeklyLoad
+    // (and every other field) stay byte-identical whether or not strengthParams is present.
+    expect(withStrengthParams).toEqual(withoutStrengthParams);
   });
 });

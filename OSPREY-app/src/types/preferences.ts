@@ -1,4 +1,4 @@
-import type { UltraGoalParams } from '@/services/coaching/ultra-params';
+import type { GoalParams } from '@/services/coaching/strength-params';
 
 export type TrainingGoal =
   | 'hybrid'
@@ -26,10 +26,11 @@ export interface UserPreferences {
   /** Only meaningful when primaryGoal is 'triathlon'. */
   triathlonDistance?: TriathlonDistance;
   /**
-   * Only meaningful when primaryGoal is 'ultra'. Round-trips through
+   * Sport-specific goal params (ultra race distance/vert/gut-trained; lift 1RMs; …) —
+   * a generic goal_params carrier keyed off primaryGoal. Round-trips through
    * invokeGeneratePlan({ preferences }) -> the edge function's plan-builder-branch
-   * `user_goals` upsert, which writes `goal_params: (prefs.ultraParams as unknown) ?? null`.
-   * Omitting this silently nulls out a real ultra athlete's race params on that upsert.
+   * `user_goals` upsert, which writes `goal_params: (prefs.goalParams as unknown) ?? null`.
+   * Omitting this silently nulls out a real athlete's goal params on that upsert.
    */
-  ultraParams?: UltraGoalParams | null;
+  goalParams?: GoalParams | null;
 }

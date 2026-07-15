@@ -1,5 +1,6 @@
 import { supabase } from '@/services/supabase';
 import { localDateString } from '@/utils/date';
+import type { PowerliftingLift } from '@/services/calculators/powerlifting';
 
 interface RawSetRow {
   reps: number | null;
@@ -138,4 +139,12 @@ export async function fetchLiftAnalytics(userId: string, weeksBack = 8): Promise
   }
 
   return { weekVolumeKg: Math.round(weekVolumeKg), weekMuscleGroups, primaryLift, prs };
+}
+
+const LIFT_EXERCISE_NAME: Record<PowerliftingLift, string> = { squat: 'Back Squat', bench: 'Bench Press', deadlift: 'Deadlift' };
+
+/** Best estimated 1RM (kg) for a comp lift from analytics.prs, or null if it isn't in the athlete's top lifts. */
+export function bestE1rmForLift(analytics: LiftAnalytics, lift: PowerliftingLift): number | null {
+  const pr = analytics.prs.find((p) => p.exerciseName === LIFT_EXERCISE_NAME[lift]);
+  return pr ? Math.round(pr.bestE1rmKg) : null;
 }

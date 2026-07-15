@@ -223,3 +223,48 @@ Deno.test('triathlon clamps swim + run by their sub-zones, leaves bike unclamped
   assert(changed.some((c) => c.includes('run')));         // run clamped
   assert(!changed.some((c) => c.includes('day2')));       // bike not in the change log
 });
+
+Deno.test('clamps an out-of-band comp-lift load into the %1RM band, leaves a valid load', () => {
+  const envelope = {
+    hardSessionShareMax: 1, zones: null,
+    fuel: { dailyCarbGByDayType: { easy: {min:1,max:2}, moderate:{min:1,max:2}, high:{min:1,max:2}, peak:{min:1,max:2} }, proteinG:{min:1,max:2}, longSessionCarbGPerHour:0 },
+    strength: { oneRepMaxKg: { squat: 200, bench: 140, deadlift: 240 }, workingPercent1RM: 80, zone: { name:'Strength-Volume', percent1RM:[75,85], reps:[3,6], rpe:[7,8], rir:[2,3] }, prilepin: { repsPerSet:[2,4], totalReps:[10,20] }, fatG:{min:1,max:2}, attempts: null },
+  };
+  const days = [
+    { dayOffset: 0, session_type: 'lift', intensity: 'moderate', planned_minutes: 60, planned_distance_km: null,
+      lift_prescription: { exercises: [ { name: 'Back Squat', sets: 4, reps: '4', loadKg: 400, note: null }, { name: 'Barbell Row', sets: 3, reps: '8', loadKg: null, note: null } ] } },
+    { dayOffset: 1, session_type: 'lift', intensity: 'moderate', planned_minutes: 60, planned_distance_km: null,
+      lift_prescription: { exercises: [ { name: 'Bench Press', sets: 4, reps: '4', loadKg: 112, note: null } ] } }, // 80% of 140 = 112, in band
+  ];
+  const { days: out, changed } = validateAndClamp(days as any, envelope as any);
+  const squat = (out[0] as any).lift_prescription.exercises[0].loadKg;
+  assertEquals(squat >= 200*0.75 && squat <= 200*0.85, true); // clamped into [150,170]
+  assertEquals((out[1] as any).lift_prescription.exercises[0].loadKg, 112); // valid → untouched
+  assertEquals((out[0] as any).lift_prescription.exercises[1].loadKg, null); // accessory untouched
+  assertEquals(changed.some((c) => c.includes('squat')), true);
+});
+
+Deno.test('non-lift plan + load-free lift day pass through the guardrail untouched', () => {
+  // an envelope with no strength, or a lift day with no loadKg, is unchanged
+  const baseEnvelope = {
+    hardSessionShareMax: 1, zones: null,
+    fuel: { dailyCarbGByDayType: { easy: {min:1,max:2}, moderate:{min:1,max:2}, high:{min:1,max:2}, peak:{min:1,max:2} }, proteinG:{min:1,max:2}, longSessionCarbGPerHour:0 },
+  };
+  const strength = { oneRepMaxKg: { squat: 200, bench: 140, deadlift: 240 }, workingPercent1RM: 80, zone: { name:'Strength-Volume', percent1RM:[75,85], reps:[3,6], rpe:[7,8], rir:[2,3] }, prilepin: { repsPerSet:[2,4], totalReps:[10,20] }, fatG:{min:1,max:2}, attempts: null };
+
+  // (1) no `strength` on the envelope at all → even an out-of-band comp-lift load is left
+  // alone (there's no 1RM to clamp against, so the guardrail no-ops entirely).
+  const outOfBandDay = { dayOffset: 0, session_type: 'lift', intensity: 'moderate', planned_minutes: 60, planned_distance_km: null,
+    lift_prescription: { exercises: [ { name: 'Back Squat', sets: 4, reps: '4', loadKg: 999, note: null } ] } };
+  const { days: out1, changed: changed1 } = validateAndClamp([outOfBandDay] as any, baseEnvelope as any);
+  assertEquals((out1[0] as any).lift_prescription.exercises[0].loadKg, 999); // no strength envelope → untouched
+  assertEquals(changed1.length, 0);
+
+  // (2) strength IS present, but this comp lift's loadKg is null (left for prompt-driven
+  // prescription) → the guardrail must not synthesize a load from nothing.
+  const nullLoadDay = { dayOffset: 0, session_type: 'lift', intensity: 'moderate', planned_minutes: 60, planned_distance_km: null,
+    lift_prescription: { exercises: [ { name: 'Back Squat', sets: 4, reps: '4', loadKg: null, note: null } ] } };
+  const { days: out2, changed: changed2 } = validateAndClamp([nullLoadDay] as any, { ...baseEnvelope, strength } as any);
+  assertEquals((out2[0] as any).lift_prescription.exercises[0].loadKg, null); // loadKg: null → pass through
+  assertEquals(changed2.length, 0);
+});

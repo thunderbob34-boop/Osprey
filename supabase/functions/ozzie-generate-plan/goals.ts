@@ -40,6 +40,17 @@ export function routeDisciplineDays(
   includeSwim: boolean,
   includeBike: boolean,
 ): DisciplineDays {
+  if (primaryGoal === 'lift') {
+    // Strength-primary: the bulk of days are lifting; keep 1-2 easy-cardio days for
+    // recovery (docs/coaching/powerlifting.md §5). primaryDays is the bigger share.
+    return {
+      weeklyRunDays: Math.min(2, liftDays),
+      weeklyLiftDays: primaryDays,
+      weeklySwimDays: includeSwim ? 1 : 0,
+      weeklyBikeDays: includeBike ? 1 : 0,
+      weeklyRowDays: 0,
+    };
+  }
   const discipline = ENDURANCE_PRIMARY[primaryGoal] ?? 'run';
   return {
     weeklyRunDays: discipline === 'run' ? primaryDays : 0,

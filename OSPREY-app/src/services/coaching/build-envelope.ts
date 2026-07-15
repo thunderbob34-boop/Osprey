@@ -4,6 +4,7 @@ import { computeEnvelope, CoachingEnvelope } from './envelope';
 import { selectBestRunEffort, selectBestRowingSplit } from './anchor';
 import { toSelfReportAnchor, type SelfReportAnchor, type ThresholdAnchorMap } from './baseline';
 import { toUltraParams, type UltraGoalParams } from './ultra-params';
+import { toStrengthParams, type StrengthGoalParams } from './strength-params';
 
 const MILES_PER_KM = 0.621371;
 const RECENT_WINDOW_MS = 56 * 24 * 60 * 60 * 1000; // 8 weeks
@@ -21,6 +22,11 @@ interface EnvelopeInputs {
   selfReportAnchor: SelfReportAnchor | null;
   maxHR: number | null;
   ultraParams: UltraGoalParams | null;
+  // Optional (unlike ultraParams above): only 'lift' plans populate it (Step 4), and
+  // keeping it optional here avoids forcing every EnvelopeInputs literal (incl. existing
+  // envelopeFromInputs tests) to name a field computeEnvelope doesn't consume yet — Task 2
+  // wires actual usage into computeEnvelope.
+  strengthParams?: StrengthGoalParams | null;
 }
 
 // Pure: inputs → envelope. No-race plans run a Base maintenance macrocycle.
@@ -46,6 +52,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     selfReportAnchor: i.selfReportAnchor,
     maxHR: i.maxHR,
     ultraParams: i.ultraParams,
+    strengthParams: i.strengthParams,
     weeksRemaining: phaseInfo?.weeksRemaining ?? null,
   });
 }
@@ -60,6 +67,7 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
     baselineLoad: 200, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
     rowingSplitSecPer500: null, selfReportAnchor: null, maxHR: null,
     ultraParams: null,
+    strengthParams: null,
   };
 
   if (userId) {
@@ -105,6 +113,7 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       selfReportAnchor: toSelfReportAnchor(g?.threshold_anchor as ThresholdAnchorMap | null),
       maxHR: (maxHrRes.data?.max_heart_rate as number | null) ?? null,
       ultraParams: g?.primary_goal === 'ultra' ? toUltraParams(g?.goal_params) : null,
+      strengthParams: g?.primary_goal === 'lift' ? toStrengthParams(g?.goal_params) : null,
     };
   }
 

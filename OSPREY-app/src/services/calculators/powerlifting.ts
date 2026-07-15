@@ -5,7 +5,7 @@ export interface PrilepinRange {
   totalReps: [number, number];
 }
 
-const PRILEPIN_TABLE: { percent1RM: number; range: PrilepinRange }[] = [
+export const PRILEPIN_TABLE: { percent1RM: number; range: PrilepinRange }[] = [
   { percent1RM: 70, range: { repsPerSet: [3, 6], totalReps: [12, 24] } },
   { percent1RM: 80, range: { repsPerSet: [2, 4], totalReps: [10, 20] } },
   { percent1RM: 90, range: { repsPerSet: [1, 2], totalReps: [4, 10] } },
@@ -27,7 +27,7 @@ export interface IntensityZone {
   rirRange: [number, number];
 }
 
-const INTENSITY_ZONES: IntensityZone[] = [
+export const INTENSITY_ZONES: IntensityZone[] = [
   { name: 'Speed / Dynamic', percent1RMRange: [40, 60], repRange: [1, 3], rpeRange: [0, 0], rirRange: [0, 0] },
   { name: 'Hypertrophy', percent1RMRange: [65, 75], repRange: [6, 12], rpeRange: [6, 8], rirRange: [2, 4] },
   { name: 'Strength-Volume', percent1RMRange: [75, 85], repRange: [3, 6], rpeRange: [7, 8], rirRange: [2, 3] },

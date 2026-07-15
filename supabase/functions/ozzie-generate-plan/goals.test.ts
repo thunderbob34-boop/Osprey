@@ -69,3 +69,15 @@ Deno.test('ultra routes its primary days to run days', () => {
   assertEquals(d.weeklySwimDays, 0);
   assertEquals(d.weeklyBikeDays, 0);
 });
+
+Deno.test('lift routes the bulk of days to lifting (not running)', () => {
+  const d = routeDisciplineDays('lift', 3, 2, false, false); // 5-day builder → primaryDays 3, liftDays 2
+  assertEquals(d.weeklyLiftDays, 3);          // the bulk is lifting
+  assertEquals(d.weeklyRunDays, 2);           // min(2, liftDays) easy-cardio conditioning
+  assertEquals(d.weeklySwimDays, 0);
+});
+
+Deno.test('non-lift routing is unchanged (regression)', () => {
+  assertEquals(routeDisciplineDays('run', 3, 2, false, false).weeklyRunDays, 3);
+  assertEquals(routeDisciplineDays('cycling', 4, 1, false, false).weeklyBikeDays, 4);
+});
