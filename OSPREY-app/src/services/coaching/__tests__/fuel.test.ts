@@ -14,4 +14,10 @@ describe('computeFuel', () => {
     expect(f.proteinG.min).toBe(Math.round(70 * 1.6));
     expect(f.proteinG.max).toBe(Math.round(70 * 2.2));
   });
+  it('routes each sport to its own in-session carb rate (swim differs from the running default)', () => {
+    const swim = computeFuel('swim', 70).longSessionCarbGPerHour;
+    const run = computeFuel('run', 70).longSessionCarbGPerHour;
+    expect(swim).toBeGreaterThan(0);
+    expect(swim).not.toBe(run); // swim dispatch is distinct; a dropped branch would collapse it to the run default
+  });
 });

@@ -51,6 +51,31 @@ Deno.test('attaches day-type carbs per session by (post-polarization) intensity'
   assertEquals((out[2] as any).fuel, undefined);                          // rest → no fuel
 });
 
+Deno.test('a session demoted by polarization gets easy-day carbs, not its original hard-day carbs', () => {
+  // 5 interval days, cap 0.2 → only 1 stays hard, 4 demote to 'easy'. Fuel-attach (step c)
+  // runs AFTER polarization (step a), so a demoted day must carry easy-day carbs (210-350),
+  // NOT the high-day carbs (560-700) its original 'interval' intensity would have earned.
+  const env = {
+    hardSessionShareMax: 0.2,
+    zones: null,
+    fuel: {
+      dailyCarbGByDayType: { easy: { min: 210, max: 350 }, moderate: { min: 350, max: 490 }, high: { min: 560, max: 700 }, peak: { min: 700, max: 840 } },
+      proteinG: { min: 112, max: 154 },
+      longSessionCarbGPerHour: 75,
+    },
+  };
+  const hard = (o: number) => ({ dayOffset: o, session_type: 'run', intensity: 'interval', planned_minutes: 40, planned_distance_km: 8 });
+  const { days: out } = validateAndClamp([hard(0), hard(1), hard(2), hard(3), hard(4)] as any, env as any);
+  const demoted = out.filter((d) => d.intensity === 'easy');
+  assert(demoted.length > 0, 'expected polarization to demote at least one session to easy');
+  for (const d of demoted) {
+    assertEquals((d as any).fuel.dailyCarbG, { min: 210, max: 350 }); // demoted → easy-day carbs
+  }
+  const survivingHard = out.filter((d) => d.intensity === 'interval');
+  assertEquals(survivingHard.length, 1);
+  assertEquals((survivingHard[0] as any).fuel.dailyCarbG, { min: 560, max: 700 }); // still-hard → high-day carbs
+});
+
 Deno.test('demotes excess hard sessions to easy', () => {
   const hard = (o: number) => ({ dayOffset: o, session_type: 'run', intensity: 'interval', planned_minutes: 40, planned_distance_km: 8 });
   const { days } = validateAndClamp([hard(0), hard(1), hard(2), hard(3), hard(4)], envelope as never);
