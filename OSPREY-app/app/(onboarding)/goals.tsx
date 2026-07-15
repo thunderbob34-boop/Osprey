@@ -14,6 +14,7 @@ const GOALS: Array<{ id: PrimaryGoal; icon: string; title: string; desc: string 
   { id: 'swim', icon: '🏊', title: 'Swim faster', desc: 'Pool or open water — CSS-paced zones' },
   { id: 'rowing', icon: '🚣', title: 'Row stronger', desc: 'Erg or water — 2k-split zones' },
   { id: 'hyrox', icon: '🏋️‍♂️', title: 'Hyrox', desc: 'Run + functional strength stations' },
+  { id: 'cycling', icon: '🚴', title: 'Ride faster', desc: 'Road or indoor — power & HR zones' },
   { id: 'weight_loss', icon: '⚖️', title: 'Lose weight', desc: 'Performance + body composition' },
 ];
 

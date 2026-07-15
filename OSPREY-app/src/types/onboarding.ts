@@ -8,7 +8,8 @@ export type PrimaryGoal =
   | 'general_fitness'
   | 'swim'
   | 'rowing'
-  | 'hyrox';
+  | 'hyrox'
+  | 'cycling';
 export type ExperienceTier = 'beginner' | 'intermediate' | 'advanced';
 
 export interface OnboardingDraft {

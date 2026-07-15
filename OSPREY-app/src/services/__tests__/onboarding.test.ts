@@ -7,6 +7,10 @@ describe('ONBOARDING_GOAL_TO_PREFERENCES', () => {
     expect(ONBOARDING_GOAL_TO_PREFERENCES.hyrox).toBe('hyrox');
   });
 
+  it('maps cycling to the cycling plan-builder goal', () => {
+    expect(ONBOARDING_GOAL_TO_PREFERENCES.cycling).toBe('cycling');
+  });
+
   it('leaves the existing goal mappings unchanged', () => {
     expect(ONBOARDING_GOAL_TO_PREFERENCES.run).toBe('run_performance');
     expect(ONBOARDING_GOAL_TO_PREFERENCES.lift).toBe('strength');
