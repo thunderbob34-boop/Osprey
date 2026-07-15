@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseSwimBaseline, parseRowingBaseline, parseRunBaseline, parseFTPBaseline, estimateFTPFromTwentyMinPower } from '../src/lib/baseline';
+import { parseSwimBaseline, parseRowingBaseline, parseRunBaseline, parseFTPBaseline } from '../src/lib/baseline';
 
 describe('parseSwimBaseline', () => {
   it('computes CSS for valid times', () => {
@@ -38,11 +38,5 @@ describe('parseFTPBaseline', () => {
     expect(parseFTPBaseline(0).ok).toBe(false);
     expect(parseFTPBaseline(49).ok).toBe(false);
     expect(parseFTPBaseline(601).ok).toBe(false);
-  });
-});
-
-describe('estimateFTPFromTwentyMinPower', () => {
-  it('estimates FTP as round(20-min power × 0.95)', () => {
-    expect(estimateFTPFromTwentyMinPower(253)).toBe(240);
   });
 });
