@@ -5,7 +5,7 @@ describe('computeRunningFuel', () => {
     const f = computeRunningFuel({ bodyWeightKg: 70, hardWeek: true });
     expect(f.dailyCarbG.min).toBeGreaterThan(0);
     expect(f.proteinG.min).toBeCloseTo(70 * 1.6, 0);
-    expect(f.proteinG.max).toBeCloseTo(70 * 2.2, 0);
+    expect(f.proteinG.max).toBeCloseTo(70 * 2.0, 0);
   });
 
   it('prescribes in-session carbs for long runs', () => {

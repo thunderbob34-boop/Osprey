@@ -25,4 +25,11 @@ describe('targetWeeklyLoad', () => {
     const taper = targetWeeklyLoad({ baselineLoad: base, phase: 'Taper', weekNumber: 11, prevWeekLoad: peak });
     expect(taper).toBeLessThan(peak * 0.8);
   });
+
+  it('eases volume in Peak below Build, per the "volume easing" blueprints (never the macrocycle high)', () => {
+    // loadingWeek 1 for both, uncapped by prevWeekLoad, so this isolates the phase factor.
+    const build = targetWeeklyLoad({ baselineLoad: base, phase: 'Build', weekNumber: 1, prevWeekLoad: null });
+    const peak = targetWeeklyLoad({ baselineLoad: base, phase: 'Peak', weekNumber: 1, prevWeekLoad: null });
+    expect(peak).toBeLessThan(build);
+  });
 });

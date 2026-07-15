@@ -5,7 +5,7 @@ import { useOnboardingStore } from '@/store/onboardingStore';
 import type { PrimaryGoal } from '@/types/onboarding';
 import { Colors } from '@/constants/colors';
 import { primaryDayLabel } from '@/constants/sports';
-import { anchorKeyForGoal } from '@/services/coaching/baseline';
+import { anchorKeyForGoal, onboardingTotalSteps } from '@/services/coaching/baseline';
 
 const GOALS: Array<{ id: PrimaryGoal; icon: string; title: string; desc: string }> = [
   { id: 'run', icon: '🏃', title: 'Run better', desc: '5K, 10K, half, full marathon' },
@@ -38,6 +38,7 @@ function DayPicker({
             accessibilityRole="button"
             accessibilityLabel={`${day} ${label}`}
             accessibilityState={{ selected: value === day }}
+            hitSlop={{ top: 6, bottom: 6, left: 4, right: 4 }}
           >
             <Text style={[styles.dayBtnText, value === day && styles.dayBtnTextActive]}>
               {day}
@@ -61,7 +62,7 @@ export default function GoalsScreen() {
   return (
     <OnboardingShell
       step={3}
-      totalSteps={5}
+      totalSteps={onboardingTotalSteps(primaryGoal)}
       title="What's your main goal right now?"
       hint="This shapes your entire plan. You can always change it later."
       continueDisabled={weeklyRunDays + weeklyLiftDays === 0}

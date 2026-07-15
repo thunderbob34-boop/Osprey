@@ -7,6 +7,8 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { Colors } from '@/constants/colors';
 import OzzieAvatar from '@/components/OzzieAvatar';
@@ -51,40 +53,46 @@ export default function OnboardingShell({
         </View>
       ) : null}
 
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoider}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 24}
       >
-        {showOzzie && step > 0 ? (
-          <View style={styles.ozzieHeader}>
-            <OzzieAvatar size={28} />
-            <Text style={styles.ozzieName}>Ozzie</Text>
-          </View>
-        ) : null}
-
-        <Text style={[styles.title, step === 0 && styles.titleLarge]}>{title}</Text>
-        {hint ? <Text style={styles.hint}>{hint}</Text> : null}
-        {children}
-      </ScrollView>
-
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={[styles.primaryBtn, continueDisabled && styles.primaryBtnDisabled]}
-          onPress={onContinue}
-          disabled={continueDisabled || loading}
-          accessibilityRole="button"
-          accessibilityLabel={continueLabel}
-          accessibilityState={{ disabled: continueDisabled || loading, busy: loading }}
+        <ScrollView
+          style={styles.scroll}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
-          {loading ? (
-            <ActivityIndicator color="#000" />
-          ) : (
-            <Text style={styles.primaryBtnText}>{continueLabel}</Text>
-          )}
-        </TouchableOpacity>
-      </View>
+          {showOzzie && step > 0 ? (
+            <View style={styles.ozzieHeader}>
+              <OzzieAvatar size={28} />
+              <Text style={styles.ozzieName}>Ozzie</Text>
+            </View>
+          ) : null}
+
+          <Text style={[styles.title, step === 0 && styles.titleLarge]}>{title}</Text>
+          {hint ? <Text style={styles.hint}>{hint}</Text> : null}
+          {children}
+        </ScrollView>
+
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={[styles.primaryBtn, continueDisabled && styles.primaryBtnDisabled]}
+            onPress={onContinue}
+            disabled={continueDisabled || loading}
+            accessibilityRole="button"
+            accessibilityLabel={continueLabel}
+            accessibilityState={{ disabled: continueDisabled || loading, busy: loading }}
+          >
+            {loading ? (
+              <ActivityIndicator color="#000" />
+            ) : (
+              <Text style={styles.primaryBtnText}>{continueLabel}</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -159,6 +167,9 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.textMuted,
     fontWeight: '600',
+  },
+  keyboardAvoider: {
+    flex: 1,
   },
   scroll: {
     flex: 1,

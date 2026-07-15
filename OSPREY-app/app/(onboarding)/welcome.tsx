@@ -8,6 +8,9 @@ export default function WelcomeScreen() {
   const router = useRouter();
 
   return (
+    // step=0 is the welcome screen; the shell hides the progress bar entirely
+    // for it, so totalSteps here is inert (see onboardingTotalSteps for the
+    // real per-goal step count used on every other onboarding screen).
     <OnboardingShell
       step={0}
       totalSteps={5}

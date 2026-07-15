@@ -61,7 +61,7 @@ export function computeRacePhase(goal: RaceGoal, now: Date = new Date()): RacePh
   // Taper is the blueprint's final block (docs/coaching/_index.md:19), scaled to
   // plan length: ~3 weeks for a full build, fewer for short plans. Drive it by
   // weeksRemaining so it's always the true final N weeks, not a fixed % that
-  // under-tapers long plans (audit-reports/2026-07-10-audit.md:44).
+  // under-tapers long plans.
   const taperWeeks = totalWeeks <= 6 ? 1 : totalWeeks <= 10 ? 2 : 3;
 
   let phase: RacePhaseName;

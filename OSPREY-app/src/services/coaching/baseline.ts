@@ -64,6 +64,16 @@ export function anchorKeyForGoal(goal: string): 'run' | 'swim' | 'row' | null {
   return bp === 'rowing' ? 'row' : bp; // 'run' | 'swim' | null pass through
 }
 
+/**
+ * Total onboarding steps for the shell's progress bar. The baseline screen
+ * only shows for goals with an anchor (anchorKeyForGoal), so the step count
+ * itself depends on the chosen goal — otherwise the bar jumps/mislabels on
+ * the (more common) paths that skip it, e.g. the default 'hybrid' goal.
+ */
+export function onboardingTotalSteps(goal: string): 4 | 5 {
+  return anchorKeyForGoal(goal) ? 5 : 4;
+}
+
 export function toSelfReportAnchor(map: ThresholdAnchorMap | null | undefined): SelfReportAnchor {
   return {
     thresholdSecPerMile: map?.run?.thresholdSecPerMile ?? null,

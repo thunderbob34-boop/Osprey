@@ -2,17 +2,19 @@ import { Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import OnboardingShell, { OptionCard } from '@/components/onboarding/OnboardingShell';
 import { useOnboardingStore } from '@/store/onboardingStore';
+import { onboardingTotalSteps } from '@/services/coaching/baseline';
 import { Colors } from '@/constants/colors';
 
 export default function ModeScreen() {
   const router = useRouter();
   const experienceTier = useOnboardingStore((s) => s.experienceTier);
   const setExperienceTier = useOnboardingStore((s) => s.setExperienceTier);
+  const primaryGoal = useOnboardingStore((s) => s.primaryGoal);
 
   return (
     <OnboardingShell
       step={2}
-      totalSteps={5}
+      totalSteps={onboardingTotalSteps(primaryGoal)}
       title="How would you describe yourself as a trainer right now?"
       hint="This sets how I talk to you and what metrics I focus on. You can change it any time."
       onContinue={() => router.push('/(onboarding)/goals')}
