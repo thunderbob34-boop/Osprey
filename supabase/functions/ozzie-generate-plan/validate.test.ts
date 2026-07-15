@@ -7,7 +7,11 @@ const envelope = {
   targetWeeklyLoad: 300, hardSessionShareMax: 0.2,
   zones: { kind: 'run', thresholdSecPerMile: 450,
     bands: { easy: { min: 510, max: 570 }, marathonPace: { min: 465, max: 480 }, tenKPace: { min: 435, max: 445 }, fiveKPace: { min: 420, max: 430 } } },
-  fuel: { dailyCarbG: { min: 350, max: 490 }, proteinG: { min: 112, max: 154 }, longSessionCarbGPerHour: 75 },
+  fuel: {
+    dailyCarbGByDayType: { easy: { min: 210, max: 350 }, moderate: { min: 350, max: 490 }, high: { min: 560, max: 700 }, peak: { min: 700, max: 840 } },
+    proteinG: { min: 112, max: 154 },
+    longSessionCarbGPerHour: 75,
+  },
 };
 
 Deno.test('clamps an easy run that is implied too fast into the easy band', () => {
@@ -22,7 +26,29 @@ Deno.test('clamps an easy run that is implied too fast into the easy band', () =
 Deno.test('attaches fuel to non-rest sessions', () => {
   const day = { dayOffset: 0, session_type: 'run', intensity: 'easy', planned_minutes: 40, planned_distance_km: 6 };
   const { days } = validateAndClamp([day], envelope as never);
-  assertEquals((days[0] as Record<string, unknown>).fuel !== undefined, true);
+  assertEquals((days[0] as any).fuel.dailyCarbG, envelope.fuel.dailyCarbGByDayType.easy);
+});
+
+Deno.test('attaches day-type carbs per session by (post-polarization) intensity', () => {
+  const envelope = {
+    hardSessionShareMax: 1,  // don't demote — we want to observe both intensities
+    zones: null,
+    fuel: {
+      dailyCarbGByDayType: { easy: { min: 210, max: 350 }, moderate: { min: 350, max: 490 }, high: { min: 560, max: 700 }, peak: { min: 700, max: 840 } },
+      proteinG: { min: 112, max: 154 },
+      longSessionCarbGPerHour: 75,
+    },
+  };
+  const days = [
+    { dayOffset: 0, session_type: 'run', intensity: 'easy', planned_minutes: 40, planned_distance_km: 8 },
+    { dayOffset: 1, session_type: 'run', intensity: 'interval', planned_minutes: 40, planned_distance_km: 10 },
+    { dayOffset: 2, session_type: 'rest', intensity: 'rest', planned_minutes: null, planned_distance_km: null },
+  ];
+  const { days: out } = validateAndClamp(days as any, envelope as any);
+  assertEquals((out[0] as any).fuel.dailyCarbG, { min: 210, max: 350 }); // easy → easy carbs
+  assertEquals((out[1] as any).fuel.dailyCarbG, { min: 560, max: 700 }); // interval → high carbs
+  assertEquals((out[0] as any).fuel.longSessionCarbGPerHour, 75);
+  assertEquals((out[2] as any).fuel, undefined);                          // rest → no fuel
 });
 
 Deno.test('demotes excess hard sessions to easy', () => {
@@ -89,7 +115,11 @@ const swimEnvelope = {
   zones: { kind: 'swim', cssSecPer100: 100,
     bands: { z1EasyRecovery: { min: 108, max: null }, z2Aerobic: { min: 103, max: 106 },
       z3Threshold: { min: 98, max: 102 }, z4Vo2Max: { min: 95, max: 98 } } },
-  fuel: { dailyCarbG: { min: 350, max: 490 }, proteinG: { min: 112, max: 154 }, longSessionCarbGPerHour: 60 },
+  fuel: {
+    dailyCarbGByDayType: { easy: { min: 210, max: 350 }, moderate: { min: 350, max: 490 }, high: { min: 560, max: 700 }, peak: { min: 700, max: 840 } },
+    proteinG: { min: 112, max: 154 },
+    longSessionCarbGPerHour: 60,
+  },
 };
 
 Deno.test('clamps a swim easy session implied too fast into the z2 band (sec/100m)', () => {
@@ -105,7 +135,11 @@ const rowEnvelope = {
   zones: { kind: 'rowing', splitSecPer500: 120,
     bands: { ut2: { splitSecPer500: { min: 132, max: 136 } }, ut1: { splitSecPer500: { min: 126, max: 130 } },
       at: { splitSecPer500: { min: 123, max: 125 } }, tr: { splitSecPer500: { min: 120, max: 122 } } } },
-  fuel: { dailyCarbG: { min: 350, max: 490 }, proteinG: { min: 112, max: 154 }, longSessionCarbGPerHour: 60 },
+  fuel: {
+    dailyCarbGByDayType: { easy: { min: 210, max: 350 }, moderate: { min: 350, max: 490 }, high: { min: 560, max: 700 }, peak: { min: 700, max: 840 } },
+    proteinG: { min: 112, max: 154 },
+    longSessionCarbGPerHour: 60,
+  },
 };
 
 Deno.test('clamps a rowing easy session into the UT2 split band (sec/500m)', () => {
@@ -120,7 +154,11 @@ const cyclingEnvelope = {
   hardSessionShareMax: 0.2,
   zones: { kind: 'cycling', ftpWatts: 240,
     bands: { z2Endurance: { min: 134, max: 180 }, z4Threshold: { min: 218, max: 252 } } },
-  fuel: { dailyCarbG: { min: 1, max: 2 }, proteinG: { min: 1, max: 2 }, longSessionCarbGPerHour: 60 },
+  fuel: {
+    dailyCarbGByDayType: { easy: { min: 1, max: 2 }, moderate: { min: 1, max: 2 }, high: { min: 1, max: 2 }, peak: { min: 1, max: 2 } },
+    proteinG: { min: 1, max: 2 },
+    longSessionCarbGPerHour: 60,
+  },
 };
 
 Deno.test('cycling envelope does not pace-clamp bike sessions (prompt-only)', () => {
@@ -140,7 +178,11 @@ Deno.test('triathlon clamps swim + run by their sub-zones, leaves bike unclamped
       run:  { kind: 'run',  thresholdSecPerMile: 440, bands: { easy: { min: 500, max: 560 }, marathonPace: { min: 455, max: 470 }, tenKPace: { min: 425, max: 435 }, fiveKPace: { min: 410, max: 420 } } },
       bike: { kind: 'cycling', ftpWatts: 240, bands: { z2Endurance: { min: 134, max: 180 }, z4Threshold: { min: 218, max: 252 } } },
     },
-    fuel: { dailyCarbG: { min: 1, max: 2 }, proteinG: { min: 1, max: 2 }, longSessionCarbGPerHour: 60 },
+    fuel: {
+      dailyCarbGByDayType: { easy: { min: 1, max: 2 }, moderate: { min: 1, max: 2 }, high: { min: 1, max: 2 }, peak: { min: 1, max: 2 } },
+      proteinG: { min: 1, max: 2 },
+      longSessionCarbGPerHour: 60,
+    },
   };
   const days = [
     // easy swim implied WAY too fast (short distance / long time) → clamped into z2Aerobic
