@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -16,6 +17,7 @@ import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
 import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { useAuthStore } from '@/store/authStore';
 import { ONBOARDING_GOAL_TO_PREFERENCES } from '@/services/onboarding';
+import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
 import type {
   ExperienceLevel,
   TrainingDaysPerWeek,
@@ -55,6 +57,8 @@ const TRIATHLON_DISTANCE_OPTIONS: { value: TriathlonDistance; label: string }[] 
   { value: 'full', label: 'Full (140.6)' },
 ];
 
+const ULTRA_DISTANCES: UltraRaceDistance[] = ['50k', '50mi', '100k', '100mi'];
+
 const LEVEL_OPTIONS: LevelOption[] = [
   { value: 'beginner', label: 'Beginner' },
   { value: 'intermediate', label: 'Intermediate' },
@@ -80,6 +84,9 @@ export default function PreferencesScreen() {
   const [includeSwim, setIncludeSwim] = useState(false);
   const [includeBike, setIncludeBike] = useState(false);
   const [triathlonDistance, setTriathlonDistance] = useState<TriathlonDistance>('sprint');
+  const [ultraDistance, setUltraDistance] = useState<UltraRaceDistance>('50k');
+  const [ultraVert, setUltraVert] = useState('');
+  const [gutTrained, setGutTrained] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingPrefs, setLoadingPrefs] = useState(true);
   // Whether a plan-builder session has run before via this screen — a good
@@ -88,6 +95,7 @@ export default function PreferencesScreen() {
   const [hasGeneratedBefore, setHasGeneratedBefore] = useState(false);
 
   const isTriathlon = primaryGoal === 'triathlon';
+  const isUltra = primaryGoal === 'ultra';
 
   useEffect(() => {
     async function loadSaved() {
@@ -103,6 +111,11 @@ export default function PreferencesScreen() {
           if (typeof saved.includeSwim === 'boolean') setIncludeSwim(saved.includeSwim);
           if (typeof saved.includeBike === 'boolean') setIncludeBike(saved.includeBike);
           if (saved.triathlonDistance) setTriathlonDistance(saved.triathlonDistance);
+          if (saved.ultraParams) {
+            if (saved.ultraParams.raceDistance) setUltraDistance(saved.ultraParams.raceDistance);
+            setUltraVert(saved.ultraParams.vertGainM != null ? String(saved.ultraParams.vertGainM) : '');
+            setGutTrained(!!saved.ultraParams.gutTrained);
+          }
         } else if (userId) {
           // First visit — no prior plan-builder session. Seed from the
           // answers already given during onboarding instead of asking the
@@ -137,6 +150,15 @@ export default function PreferencesScreen() {
   async function handleGenerate() {
     setLoading(true);
     try {
+      const ultraParams = isUltra
+        ? parseUltraParams({ raceDistance: ultraDistance, vertGainM: ultraVert, gutTrained })
+        : null;
+      if (ultraParams && !ultraParams.ok) {
+        Alert.alert('Check your ultra details', ultraParams.error);
+        return;
+      }
+      const ultraParamsValue = ultraParams && ultraParams.ok ? ultraParams.value : null;
+
       const preferences = {
         primaryGoal,
         experienceLevel,
@@ -145,6 +167,7 @@ export default function PreferencesScreen() {
         includeBike: isTriathlon ? true : includeBike,
         longRunDay,
         ...(isTriathlon ? { triathlonDistance } : {}),
+        ...(ultraParamsValue ? { ultraParams: ultraParamsValue } : {}),
       };
 
       // Persist to Supabase Auth user_metadata (no schema change needed)
@@ -158,6 +181,21 @@ export default function PreferencesScreen() {
           .from('users')
           .update({ experience_tier: EXPERIENCE_TIER_MAP[experienceLevel] })
           .eq('id', userId);
+      }
+
+      // Persist goal_params BEFORE generating: invokeGeneratePlan builds the
+      // envelope by reading user_goals.goal_params straight from the DB, so
+      // this has to land first or the plan we're about to generate won't see
+      // today's ultra inputs.
+      if (ultraParamsValue && userId) {
+        const { error: goalParamsError } = await supabase
+          .from('user_goals')
+          .update({ goal_params: ultraParamsValue })
+          .eq('user_id', userId);
+        if (goalParamsError) {
+          Alert.alert('Could not save your ultra details', goalParamsError.message);
+          return;
+        }
       }
 
       const { data, error } = await invokeGeneratePlan({ preferences, force: true });
@@ -248,6 +286,53 @@ export default function PreferencesScreen() {
                   </Text>
                 </TouchableOpacity>
               ))}
+            </View>
+          </>
+        ) : null}
+
+        {isUltra ? (
+          <>
+            <Text style={styles.sectionLabel}>RACE DISTANCE</Text>
+            <View style={styles.chipRow}>
+              {ULTRA_DISTANCES.map((d) => (
+                <TouchableOpacity
+                  key={d}
+                  style={[styles.chip, ultraDistance === d && styles.chipSelected]}
+                  onPress={() => setUltraDistance(d)}
+                  accessibilityRole="button"
+                  accessibilityLabel={d}
+                  accessibilityState={{ selected: ultraDistance === d }}
+                >
+                  <Text style={[styles.chipText, ultraDistance === d && styles.chipTextSelected]}>
+                    {d}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            <Text style={styles.sectionLabel}>RACE VERT (METRES, OPTIONAL)</Text>
+            <TextInput
+              style={styles.input}
+              value={ultraVert}
+              onChangeText={setUltraVert}
+              keyboardType="number-pad"
+              placeholder="e.g. 2000"
+              placeholderTextColor={Colors.textMuted}
+            />
+
+            <Text style={styles.sectionLabel}>GUT-TRAINED</Text>
+            <View style={styles.chipRow}>
+              <TouchableOpacity
+                style={[styles.chip, gutTrained && styles.chipSelected]}
+                onPress={() => setGutTrained((v) => !v)}
+                accessibilityRole="checkbox"
+                accessibilityLabel="Gut-trained for race-day fueling"
+                accessibilityState={{ checked: gutTrained }}
+              >
+                <Text style={[styles.chipText, gutTrained && styles.chipTextSelected]}>
+                  🥤 Practiced high-carb race fueling
+                </Text>
+              </TouchableOpacity>
             </View>
           </>
         ) : null}
@@ -415,6 +500,16 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     lineHeight: 19,
     marginTop: 20,
+  },
+  input: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    color: Colors.textPrimary,
+    fontSize: 16,
   },
   chipRow: {
     flexDirection: 'row',

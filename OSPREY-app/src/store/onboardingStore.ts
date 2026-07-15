@@ -5,8 +5,10 @@ import {
   PrimaryGoal,
   ExperienceTier,
 } from '@/types/onboarding';
+import type { UltraGoalParams } from '@/services/coaching/ultra-params';
 
 interface OnboardingState extends OnboardingDraft {
+  goalParams: UltraGoalParams | null;
   setDisplayName: (name: string) => void;
   setPrimaryGoal: (goal: PrimaryGoal) => void;
   setExperienceTier: (tier: ExperienceTier) => void;
@@ -14,11 +16,13 @@ interface OnboardingState extends OnboardingDraft {
   setWeeklyLiftDays: (days: number) => void;
   setHealthConnected: (connected: boolean) => void;
   setThresholdAnchor: (anchor: OnboardingDraft['thresholdAnchor']) => void;
+  setGoalParams: (params: UltraGoalParams) => void;
   reset: () => void;
 }
 
 export const useOnboardingStore = create<OnboardingState>((set) => ({
   ...DEFAULT_ONBOARDING_DRAFT,
+  goalParams: null,
 
   setDisplayName: (displayName) => set({ displayName }),
   setPrimaryGoal: (primaryGoal) => set({ primaryGoal }),
@@ -27,5 +31,6 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
   setWeeklyLiftDays: (weeklyLiftDays) => set({ weeklyLiftDays }),
   setHealthConnected: (healthConnected) => set({ healthConnected }),
   setThresholdAnchor: (thresholdAnchor) => set({ thresholdAnchor }),
-  reset: () => set({ ...DEFAULT_ONBOARDING_DRAFT }),
+  setGoalParams: (goalParams) => set({ goalParams }),
+  reset: () => set({ ...DEFAULT_ONBOARDING_DRAFT, goalParams: null }),
 }));

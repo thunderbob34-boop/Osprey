@@ -31,6 +31,7 @@ export default function HealthScreen() {
         weeklyLiftDays: draft.weeklyLiftDays,
         healthConnected: draft.healthConnected,
         thresholdAnchor: draft.thresholdAnchor,
+        goalParams: draft.goalParams,
       };
       await completeOnboarding(userId, onboardingDraft);
       // Best-effort — land on Home with a real plan already generated
