@@ -1,5 +1,6 @@
 // Baseline anchor parse/validate — ported from OSPREY-app/src/services/coaching/
-// baseline.ts (parse fns) + anchor.ts (deriveThresholdSecPerMile). Uses the webapp's
+// baseline.ts (parse fns) + anchor.ts (deriveThresholdSecPerMile), plus
+// calculators/triathlon.ts (estimateFTPFromTwentyMinPower). Uses the webapp's
 // existing riegelPredict port. Keep the validation bounds in sync with the mobile file.
 import { computeCSSPer100 } from './training-zones';
 import { riegelPredict } from './predictions';
@@ -44,4 +45,19 @@ export function parseRunBaseline(distanceMiles: number, timeS: number): ParseRes
   const threshold = deriveThresholdSecPerMile(distanceMiles, timeS);
   if (threshold < 240 || threshold > 900) return { ok: false, error: "That doesn't look right — check the distance and time." };
   return { ok: true, value: threshold };
+}
+
+export function parseFTPBaseline(ftpWatts: number): ParseResult {
+  if (!Number.isFinite(ftpWatts) || ftpWatts <= 0) {
+    return { ok: false, error: 'Enter your FTP in watts.' };
+  }
+  if (ftpWatts < 50 || ftpWatts > 600) {
+    return { ok: false, error: "That doesn't look like a valid FTP — check your watts." };
+  }
+  return { ok: true, value: Math.round(ftpWatts) };
+}
+
+/** FTP ≈ 95% of 20-minute max power (docs/coaching/triathlon.md §2). */
+export function estimateFTPFromTwentyMinPower(twentyMinMaxPowerWatts: number): number {
+  return Math.round(twentyMinMaxPowerWatts * 0.95);
 }

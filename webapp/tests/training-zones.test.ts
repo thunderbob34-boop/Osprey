@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { swimPaceZones, runningPaceZones, rowingTrainingZones, computeCSSPer100 } from '../src/lib/training-zones';
+import { swimPaceZones, runningPaceZones, rowingTrainingZones, computeCSSPer100, cyclingPowerZones } from '../src/lib/training-zones';
 
 describe('swimPaceZones', () => {
   it('offsets bands from CSS', () => {
@@ -28,5 +28,13 @@ describe('rowingTrainingZones', () => {
     expect(z.ut2.splitSecPer500).toEqual({ min: 120, max: 124 });
     expect(z.at.splitSecPer500).toEqual({ min: 111, max: 113 });
     expect(z.an.splitSecPer500).toEqual({ min: null, max: 108 });
+  });
+});
+
+describe('cyclingPowerZones', () => {
+  it('derives power bands from FTP (pct(56)=134, pct(75)=180, pct(91)=218, pct(105)=252)', () => {
+    const z = cyclingPowerZones(240);
+    expect(z.z2Endurance).toEqual({ min: 134, max: 180 });
+    expect(z.z4Threshold).toEqual({ min: 218, max: 252 });
   });
 });

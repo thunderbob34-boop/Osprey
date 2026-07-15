@@ -4,6 +4,7 @@ import * as web from '../src/lib/training-zones';
 import { swimPaceZones as mSwim } from '../../OSPREY-app/src/services/calculators/swimming';
 import { runningPaceZones as mRun } from '../../OSPREY-app/src/services/calculators/running';
 import { rowingTrainingZones as mRow } from '../../OSPREY-app/src/services/calculators/rowing';
+import { cyclingPowerZones as mCyc } from '../../OSPREY-app/src/services/calculators/cycling';
 
 // If this test ever fails, the webapp port has DRIFTED from the mobile source of
 // truth. Re-sync webapp/src/lib/training-zones.ts to the OSPREY-app original.
@@ -16,5 +17,8 @@ describe('zone calculator parity (webapp port === OSPREY-app original)', () => {
   });
   it('rowingTrainingZones matches across splits', () => {
     for (const s of [95, 108, 120, 150]) expect(web.rowingTrainingZones(s)).toEqual(mRow(s));
+  });
+  it('cyclingPowerZones matches across FTP values', () => {
+    for (const ftp of [180, 240, 300, 400]) expect(web.cyclingPowerZones(ftp)).toEqual(mCyc(ftp));
   });
 });

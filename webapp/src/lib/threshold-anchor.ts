@@ -7,11 +7,12 @@ export const ThresholdAnchorSchema = z
     run: z.object({ thresholdSecPerMile: z.number(), source: SourceEnum }),
     swim: z.object({ cssSecPer100: z.number(), source: SourceEnum }),
     row: z.object({ splitSecPer500: z.number(), source: SourceEnum }),
+    bike: z.object({ ftpWatts: z.number(), source: SourceEnum }),
   })
   .partial();
 
 export type ThresholdAnchorMap = z.infer<typeof ThresholdAnchorSchema>;
-export type AnchorKey = 'run' | 'swim' | 'row';
+export type AnchorKey = 'run' | 'swim' | 'row' | 'bike';
 
 // Robust read: a malformed/partial JSONB column becomes {} rather than throwing
 // or passing a bad number downstream. Hardens the read the mobile app does with
