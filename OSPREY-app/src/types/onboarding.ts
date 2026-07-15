@@ -1,5 +1,5 @@
 import type { ThresholdAnchorMap } from '@/services/coaching/baseline';
-import type { UltraGoalParams } from '@/services/coaching/ultra-params';
+import type { GoalParams } from '@/services/coaching/strength-params';
 
 export type PrimaryGoal =
   | 'run'
@@ -22,7 +22,7 @@ export interface OnboardingDraft {
   weeklyLiftDays: number;
   healthConnected: boolean;
   thresholdAnchor: ThresholdAnchorMap | null;
-  goalParams?: UltraGoalParams | null;
+  goalParams?: GoalParams | null;
 }
 
 export const DEFAULT_ONBOARDING_DRAFT: OnboardingDraft = {

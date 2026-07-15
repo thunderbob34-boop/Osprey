@@ -5,10 +5,10 @@ import {
   PrimaryGoal,
   ExperienceTier,
 } from '@/types/onboarding';
-import type { UltraGoalParams } from '@/services/coaching/ultra-params';
+import type { GoalParams } from '@/services/coaching/strength-params';
 
 interface OnboardingState extends OnboardingDraft {
-  goalParams: UltraGoalParams | null;
+  goalParams: GoalParams | null;
   setDisplayName: (name: string) => void;
   setPrimaryGoal: (goal: PrimaryGoal) => void;
   setExperienceTier: (tier: ExperienceTier) => void;
@@ -16,7 +16,7 @@ interface OnboardingState extends OnboardingDraft {
   setWeeklyLiftDays: (days: number) => void;
   setHealthConnected: (connected: boolean) => void;
   setThresholdAnchor: (anchor: OnboardingDraft['thresholdAnchor']) => void;
-  setGoalParams: (params: UltraGoalParams) => void;
+  setGoalParams: (params: GoalParams) => void;
   reset: () => void;
 }
 

@@ -44,6 +44,7 @@ export interface EnvelopeInput {
   selfReportAnchor?: SelfReportAnchor | null;
   maxHR?: number | null;
   ultraParams?: import('./ultra-params').UltraGoalParams | null;
+  strengthParams?: import('./strength-params').StrengthGoalParams | null;
   weeksRemaining?: number | null;
 }
 

@@ -540,7 +540,7 @@ Deno.serve(async (req: Request) => {
           weekly_run_days: primaryDaysForStorage,
           weekly_lift_days: goals.weeklyLiftDays,
           fitness_level: goals.fitnessLevel,
-          goal_params: (prefs.ultraParams as unknown) ?? null,
+          goal_params: (prefs.goalParams as unknown) ?? null,
         },
         { onConflict: 'user_id' },
       );

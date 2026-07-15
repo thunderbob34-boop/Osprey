@@ -167,7 +167,7 @@ export default function PreferencesScreen() {
         includeBike: isTriathlon ? true : includeBike,
         longRunDay,
         ...(isTriathlon ? { triathlonDistance } : {}),
-        ...(ultraParamsValue ? { ultraParams: ultraParamsValue } : {}),
+        ...(ultraParamsValue ? { goalParams: ultraParamsValue } : {}),
       };
 
       // Persist to Supabase Auth user_metadata (no schema change needed)
