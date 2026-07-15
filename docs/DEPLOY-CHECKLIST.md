@@ -118,6 +118,17 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   the enum/`goal_params` need the migrations. **Non-ultra plans byte-identical** (all ultra logic sport-gated);
   `validate.ts` untouched. **⚠️ PRE-SHIP:** the ultra collection UI (React Native screens) needs a device/simulator
   smoke test — it could not be visually rendered in CI (pre-existing Expo Router static-SSR block).
+- **Phase 3-ii (powerlifting)** — `lift` becomes a real powerlifting engine: the app sends a new `envelope.strength`
+  field (phase→%1RM zone + Prilepin caps + kg loads + meet attempts, from the athlete's 1RMs stored in `goal_params`);
+  the edge fn reworks the `lift_prescription` prompt to emit structured `loadKg`, adds a `strengthGuidance` block, and
+  adds a `lift`-gated **load guardrail** in `validate.ts` (clamps a comp lift's `loadKg` into the %1RM band). Lift now
+  routes lift-primary, and the shared prompt fuel line gains a protein target for ALL sports (additive). **NO
+  migration** (the `lift` enum, `goal_params`, and `target_date` all already exist). **App + edge MUST deploy
+  together:** a new-app lift plan hitting the *old* fn gets the generic bodybuilder prompt (soft degrade). **Non-lift
+  plans byte-identical** (all strength logic `lift`-gated; `validate.ts` steps a/b/c untouched — the guardrail is a
+  pure append). **⚠️ PRE-SHIP:** device smoke test the 2 lift collection screens (same Expo SSR headless-render
+  caveat as ultra). **Follow-ups (non-blocking, filed):** (1) a plan-builder goal-*switcher*'s first generation reads
+  a stale `primary_goal` (pre-existing, affects ultra too); (2) a lifter who *skips* the 1RM form gets 0 kg comp lifts.
 - **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
   (cycling) + `20260715000002_ultra_primary_goal.sql` (ultra) + `20260715000003_goal_params.sql` (adds
   `user_goals.goal_params` JSONB)** — the first three add values to `primary_goal_enum`; `goal_params` is an additive
