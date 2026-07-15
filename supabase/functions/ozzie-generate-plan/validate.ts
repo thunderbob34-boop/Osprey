@@ -12,7 +12,8 @@ type Band = { min: number; max: number };
 type Zones =
   | { kind: 'run'; thresholdSecPerMile: number; bands: { easy: Band; marathonPace: Band; tenKPace: Band; fiveKPace: Band } }
   | { kind: 'swim'; cssSecPer100: number; bands: { z1EasyRecovery: Band; z2Aerobic: Band; z3Threshold: Band; z4Vo2Max: Band } }
-  | { kind: 'rowing'; splitSecPer500: number; bands: { ut2: { splitSecPer500: Band }; ut1: { splitSecPer500: Band }; at: { splitSecPer500: Band }; tr: { splitSecPer500: Band } } };
+  | { kind: 'rowing'; splitSecPer500: number; bands: { ut2: { splitSecPer500: Band }; ut1: { splitSecPer500: Band }; at: { splitSecPer500: Band }; tr: { splitSecPer500: Band } } }
+  | { kind: 'cycling'; ftpWatts: number; bands: { z2Endurance: Band; z4Threshold: Band } };
 interface EnvelopeLike { hardSessionShareMax: number; zones: Zones | null; fuel: unknown; }
 
 const KM_TO_MI = 0.621371;
@@ -33,7 +34,7 @@ function bandFor(intensity: string, z: Zones): Band | null {
     if (intensity === 'moderate') return z.bands.z2Aerobic;
     if (intensity === 'threshold') return z.bands.z3Threshold;
     if (intensity === 'interval') return z.bands.z4Vo2Max;
-  } else {
+  } else if (z.kind === 'rowing') {
     if (intensity === 'easy') return z.bands.ut2.splitSecPer500;
     if (intensity === 'moderate') return z.bands.ut1.splitSecPer500;
     if (intensity === 'threshold') return z.bands.at.splitSecPer500;
@@ -80,7 +81,7 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
   // polarization so a demoted session is clamped into the band matching its
   // FINAL (post-demotion) intensity.
   const z = envelope.zones;
-  if (z) {
+  if (z && (z.kind === 'run' || z.kind === 'swim' || z.kind === 'rowing')) {
     const clampType = KIND_TYPE[z.kind];
     const perKm = KIND_UNIT_PER_KM[z.kind];
     out = out.map((d) => {
