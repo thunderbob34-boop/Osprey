@@ -53,7 +53,8 @@ they're saving before they save it.
 
 ## 4. Ported pure logic (`webapp/src/lib/`)
 
-Mirror verbatim from OSPREY-app, each with a `// ported from …` header (keep in sync; §9 risk):
+Mirror verbatim from OSPREY-app, each with a `// ported from …` header. Drift from the mobile originals is caught
+**mechanically** by a parity test (§7), not merely by the comment:
 - **`webapp/src/lib/baseline.ts`** — `parseSwimBaseline`, `parseRowingBaseline`, `parseRunBaseline` (mirror
   `OSPREY-app/src/services/coaching/baseline.ts`) + `deriveThresholdSecPerMile` (mirror
   `OSPREY-app/src/services/coaching/anchor.ts`). Omit the mobile-onboarding-only `anchorKeyForGoal` /
@@ -73,10 +74,12 @@ Mirror the existing `useUnits` / `useUpdateUnits` shape (TanStack Query):
   schema convention). A malformed/partial column parses to the valid subset (or `{}`) rather than throwing — this
   also hardens the read that mobile does with an unchecked cast (a gap the 2b-ii review flagged).
 - **`useUpdateThresholdAnchor(userId)`** — `mutationFn(nextMap: ThresholdAnchorMap)` →
-  `supabase.from('user_goals').update({ threshold_anchor: nextMap }).eq('user_id', userId)`, invalidating the
-  query on success. **Merge happens in the component** (it holds the current map from `useThresholdAnchor`):
-  Save computes `{ ...current, [key]: { …, source: 'self_report' } }`; Clear computes `{ ...current }` minus the
-  key. Writing the whole column is last-write-wins (acceptable for a single user; §9).
+  `supabase.from('user_goals').update({ threshold_anchor: nextMap }).eq('user_id', userId).select('user_id')`.
+  **Guard the no-row case:** `.select()` returns the rows the UPDATE matched, so `data.length === 0` means no
+  `user_goals` row existed — throw so the mutation's error state shows "Couldn't save" instead of a silent
+  success. Invalidate the query on success. **Merge happens in the component** (it holds the current map from
+  `useThresholdAnchor`): Save computes `{ ...current, [key]: { …, source: 'self_report' } }`; Clear computes
+  `{ ...current }` minus the key. Writing the whole column is last-write-wins (acceptable for a single user; §9).
 
 RLS already permits this: `GRANT … UPDATE ON user_goals TO authenticated` + policy `user_goals_update USING
 (user_id = auth.uid())` (`20260628000002`). Every onboarded user has a `user_goals` row (`completeOnboarding`
@@ -89,10 +92,17 @@ inserts it), so `update … eq(user_id)` always targets an existing row.
   generated plan with no other change — the two surfaces meet at the column.
 
 ## 7. Testing (TDD)
-- Webapp tests (its `tests/` setup; `TZ=America/New_York` precedent): the ported `baseline` parse/validate (incl.
-  400 > 200 and plausibility), the three band calculators (a value or two each, matching the OSPREY-app suite so
-  drift is caught), the `ThresholdAnchorMap` zod schema (valid / partial / malformed → safe), and the component's
-  merge/clear helper (preserves other sports' entries).
+- Webapp tests (its `tests/` setup, `vitest`, `TZ=America/New_York` precedent): the ported `baseline`
+  parse/validate (incl. 400 > 200 and plausibility), the three band calculators, the `ThresholdAnchorMap` zod
+  schema (valid / partial / malformed → safe subset), and the component's merge/clear helper (preserves other
+  sports' entries).
+- **Parity test (`webapp/tests/zone-parity.test.ts`) — the drift fix.** It imports BOTH the webapp ports and the
+  OSPREY-app originals (`../../OSPREY-app/src/services/calculators/{swimming,running,rowing}` and
+  `.../coaching/{baseline,anchor}` — the calculators are pure, importing only a `Range` type, so they load
+  standalone under vitest) and asserts identical output across representative inputs per function. Any future change
+  to the mobile formula that isn't mirrored fails this test — a mechanical guarantee the comment-only precedent
+  lacks. (Plan note: verify the webapp `tsc` accepts following the out-of-`include` import; the files are pure +
+  strict-clean, so it should. If it balks, scope the parity check to a runtime-only test.)
 - The card UI is React — verified by the webapp's typecheck + in the browser preview; the pure logic is the TDD core.
 - The webapp's existing suite stays green.
 
@@ -101,19 +111,20 @@ Webapp-only. No migration, no edge-fn. Ships with the webapp's own deploy (`weba
 `wrangler.toml`) — independent of the mobile app + edge-fn go-live coupling. The column and RLS are already live.
 
 ## 9. Risks & open questions
-- **Ported zone math can drift from mobile's.** Two copies of `swimPaceZones` etc. The mitigation is the webapp's
-  standing convention: the `// ported from …` comment + **shared test values** (§7 pins the same numbers the
-  OSPREY-app suite pins), so a drift fails a test. A future consolidation into a shared package is possible but out
-  of scope (matches how `predictions.ts` is handled today).
+- **Ported zone math can drift from mobile's** — *addressed.* Two copies of `swimPaceZones` etc. exist (the
+  webapp's deliberate isolation convention), but the §7 **parity test** imports both and asserts equality, so any
+  unmirrored change to the mobile formula fails CI. This is a real mechanical guard, not the comment-only status quo
+  (`predictions.ts`). A shared workspace package would eliminate the duplication entirely but is out of scope: with
+  no root workspace today it means a monorepo migration touching the shipped mobile app's Metro build — grossly
+  disproportionate to a display-consistency risk. Revisit if a third surface needs the same math.
 - **Last-write-wins on the whole column.** Two browser tabs editing different sports at once could clobber; single
   user, negligible. A `jsonb ||` merge would need an RPC (migration/edge-fn) — deliberately avoided.
 - **`source` is always `self_report` here** (a webapp entry is a self-report). No confidence/measured-vs-estimated
   surfacing yet.
-- **A no-row UPDATE silently no-ops.** `update … eq(user_id)` on an account with no `user_goals` row affects 0 rows
-  without erroring — the save would appear to succeed but persist nothing. Every onboarded user has a row, but the
-  plan must guard: request the affected count (or a follow-up read) and surface "couldn't save" if nothing changed,
-  rather than assuming success. (Upsert is unsuitable — `user_goals.primary_goal` is `NOT NULL` and a zones edit
-  has no goal to supply.)
+- **A no-row UPDATE silently no-ops** — *addressed* (§5): the mutation appends `.select('user_id')` and throws when
+  the returned array is empty, so an account with no `user_goals` row surfaces "Couldn't save" instead of a false
+  success. Every onboarded user has a row, so this only fires in a genuinely broken state. (Upsert is unsuitable —
+  `user_goals.primary_goal` is `NOT NULL` and a zones edit has no goal to supply.)
 - **Open:** should Clearing a sport delete just that key or the whole column when it's the last entry? Lean: delete
   the key, write the remaining map (or `null` when empty). Plan detail.
 
