@@ -82,13 +82,17 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   no `hrZones` → `hrGuidance` returns `''`), so this one degrades softly if the fn lags the app — but redeploy so
   weight_loss/general_fitness + cross-training cardio actually get HR guidance. `validate.ts` is unchanged.
   (2b-ii / 2b-ii-web added NO edge-fn changes — app-only and webapp-only respectively.)
-- **Migration `20260714000003_sport_primary_goals.sql`** — adds swim/rowing/hyrox to `primary_goal_enum`.
-  **Committed but NOT applied.** Apply via MCP `apply_migration` (idempotent `ADD VALUE IF NOT EXISTS`,
-  backward-compatible). Must be applied **before/with** the 2b-i redeploy — the fn upserts those enum values, and
-  storing one before the enum has it would 500 the request.
+- **Phase 2c-i-a** — cycling as a selectable sport: `PRIMARY_GOAL_MAP` gains `cycling`, and `routeDisciplineDays`
+  (`goals.ts`) routes a cycling athlete's days to `weeklyBikeDays`. Until redeployed, a Cycling selection falls
+  through `?? 'hybrid'` and gets a hybrid (run+lift) plan instead of a bike-focused one. `validate.ts` unchanged
+  (cycling has no pace clamp; power/FTP zones are the deferred 2c-i-b).
+- **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
+  (cycling)** — add those values to `primary_goal_enum`. **Committed but NOT applied.** Apply BOTH via MCP
+  `apply_migration` (idempotent `ADD VALUE IF NOT EXISTS`, backward-compatible). Each must be applied **before/with**
+  its redeploy — the fn upserts those enum values, and storing one before the enum has it would 500 the request.
 
 Each piece is backward-compatible on its own, but the app build that exposes sport selection needs **both** the
-migration applied **and** the fn redeployed, or a selected sport fails to persist / no-ops.
+migrations applied **and** the fn redeployed, or a selected sport fails to persist / no-ops.
 
 ---
 
