@@ -93,6 +93,12 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   would fall through the `zoneGuidance` chain and be mis-described as rowing. No migration (the cycling enum is
   2c-i-a; FTP rides the existing `threshold_anchor` JSONB via a new `bike` key). Webapp Training Zones cycling
   section ships with the webapp's own deploy.
+- **Phase 2c-ii** — triathlon composite: the app sends a `{ kind: 'triathlon', swim, bike, run }` envelope zone, and
+  **`validate.ts` is refactored** so the pace-clamp dispatches per session type (`paceZoneForSession`) — single-sport
+  clamping is byte-identical (verified), and a triathlon plan clamps swim/run by their sub-zones while bike stays
+  advice-only. `index.ts` mirrors the composite + emits three-discipline guidance. **App + edge MUST deploy
+  together:** a triathlon composite zone hitting the *old* fn would fall through `zoneGuidance` and be mis-read as
+  cycling. No migration; no webapp change (triathletes set the 3 anchors on the 2c-i-b card).
 - **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
   (cycling)** — add those values to `primary_goal_enum`. **Committed but NOT applied.** Apply BOTH via MCP
   `apply_migration` (idempotent `ADD VALUE IF NOT EXISTS`, backward-compatible). Each must be applied **before/with**
