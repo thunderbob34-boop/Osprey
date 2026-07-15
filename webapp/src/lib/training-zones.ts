@@ -1,6 +1,6 @@
 // Training-zone math — ported verbatim from OSPREY-app/src/services/calculators/
-// {types,swimming,running,rowing}.ts, the tested, shipped formulas the mobile app
-// uses. Keep in sync with those; do not fork the math (parity test: tests/zone-parity.test.ts).
+// {types,swimming,running,rowing,cycling}.ts, the tested, shipped formulas the mobile
+// app uses. Keep in sync with those; do not fork the math (parity test: tests/zone-parity.test.ts).
 
 /** A numeric band; either bound is null when the zone is open-ended. */
 export interface Range {
@@ -95,5 +95,32 @@ export function rowingTrainingZones(current2kSplitSecPer500: number): RowingTrai
     at: { splitSecPer500: { min: split + 3, max: split + 5 }, strokeRateSpm: { min: 26, max: 28 }, percentOf2kPower: { min: 75, max: 85 } },
     tr: { splitSecPer500: { min: split, max: split + 2 }, strokeRateSpm: { min: 28, max: 32 }, percentOf2kPower: { min: 85, max: 95 } },
     an: { splitSecPer500: { min: null, max: split }, strokeRateSpm: { min: 34, max: 40 }, percentOf2kPower: { min: 95, max: 110 } },
+  };
+}
+
+export interface CyclingPowerZones {
+  ftpWatts: number;
+  z1ActiveRecovery: Range;
+  z2Endurance: Range;
+  z3Tempo: Range;
+  z4Threshold: Range;
+  z5Vo2Max: Range;
+  z6Anaerobic: Range;
+  z7Neuromuscular: Range;
+  sweetSpot: Range;
+}
+
+export function cyclingPowerZones(ftpWatts: number): CyclingPowerZones {
+  const pct = (p: number) => Math.round(ftpWatts * (p / 100));
+  return {
+    ftpWatts,
+    z1ActiveRecovery: { min: null, max: pct(55) },
+    z2Endurance: { min: pct(56), max: pct(75) },
+    z3Tempo: { min: pct(76), max: pct(90) },
+    z4Threshold: { min: pct(91), max: pct(105) },
+    z5Vo2Max: { min: pct(106), max: pct(120) },
+    z6Anaerobic: { min: pct(121), max: pct(150) },
+    z7Neuromuscular: { min: pct(151), max: null },
+    sweetSpot: { min: pct(88), max: pct(94) },
   };
 }

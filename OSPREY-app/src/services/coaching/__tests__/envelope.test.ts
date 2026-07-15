@@ -1,5 +1,6 @@
 import { computeEnvelope, EnvelopeInput } from '@/services/coaching/envelope';
 import { ultraHRZones } from '@/services/coaching/hr';
+import { cyclingPowerZones } from '@/services/calculators/cycling';
 
 const baseInput = {
   sport: 'run', phase: 'Build' as const, weekNumber: 5, totalWeeks: 16,
@@ -55,15 +56,15 @@ const base: EnvelopeInput = {
 
 describe('computeEnvelope self-report priority', () => {
   it('prefers a self-reported swim CSS over the tier estimate', () => {
-    const env = computeEnvelope({ ...base, sport: 'swim', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 88, splitSecPer500: null } });
+    const env = computeEnvelope({ ...base, sport: 'swim', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 88, splitSecPer500: null, ftpWatts: null } });
     expect(env.zones).toMatchObject({ kind: 'swim', cssSecPer100: 88 });
   });
   it('prefers a self-reported run threshold over data/tier', () => {
-    const env = computeEnvelope({ ...base, sport: 'run', selfReportAnchor: { thresholdSecPerMile: 400, cssSecPer100: null, splitSecPer500: null } });
+    const env = computeEnvelope({ ...base, sport: 'run', selfReportAnchor: { thresholdSecPerMile: 400, cssSecPer100: null, splitSecPer500: null, ftpWatts: null } });
     expect(env.zones).toMatchObject({ kind: 'run', thresholdSecPerMile: 400 });
   });
   it('prefers a self-reported rowing split over data/tier', () => {
-    const env = computeEnvelope({ ...base, sport: 'rowing', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: 108 } });
+    const env = computeEnvelope({ ...base, sport: 'rowing', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: 108, ftpWatts: null } });
     expect(env.zones).toMatchObject({ kind: 'rowing', splitSecPer500: 108 });
   });
   it('is unchanged when selfReportAnchor is absent (regression guard)', () => {
@@ -99,5 +100,18 @@ describe('computeEnvelope hrZones (universal HR fallback)', () => {
     const withHr = computeEnvelope({ ...hrBase, sport: 'run', bestRunMiles: 6.2, bestRunTimeS: 3000, maxHR: 180 });
     const noHr = computeEnvelope({ ...hrBase, sport: 'run', bestRunMiles: 6.2, bestRunTimeS: 3000 });
     expect(withHr.zones).toEqual(noHr.zones);
+  });
+});
+
+describe('computeEnvelope cycling', () => {
+  it('builds cycling power zones from a self-reported FTP', () => {
+    const env = computeEnvelope({ ...hrBase, sport: 'cycling', maxHR: 180,
+      selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: null, ftpWatts: 240 } });
+    expect(env.zones).toEqual({ kind: 'cycling', ftpWatts: 240, bands: cyclingPowerZones(240) });
+  });
+  it('falls to zones:null + HR when a cyclist has no FTP', () => {
+    const env = computeEnvelope({ ...hrBase, sport: 'cycling', maxHR: 180, selfReportAnchor: null });
+    expect(env.zones).toBeNull();
+    expect(env.hrZones.maxHR).toBe(180);
   });
 });

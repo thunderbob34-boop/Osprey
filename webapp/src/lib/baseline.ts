@@ -45,3 +45,13 @@ export function parseRunBaseline(distanceMiles: number, timeS: number): ParseRes
   if (threshold < 240 || threshold > 900) return { ok: false, error: "That doesn't look right — check the distance and time." };
   return { ok: true, value: threshold };
 }
+
+export function parseFTPBaseline(ftpWatts: number): ParseResult {
+  if (!Number.isFinite(ftpWatts) || ftpWatts <= 0) {
+    return { ok: false, error: 'Enter your FTP in watts.' };
+  }
+  if (ftpWatts < 50 || ftpWatts > 600) {
+    return { ok: false, error: "That doesn't look like a valid FTP — check your watts." };
+  }
+  return { ok: true, value: Math.round(ftpWatts) };
+}

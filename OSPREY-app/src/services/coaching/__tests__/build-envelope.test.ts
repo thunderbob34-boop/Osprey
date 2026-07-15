@@ -58,7 +58,7 @@ describe('envelopeFromInputs', () => {
       sport: 'swim', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
       baselineLoad: 200, prevWeekLoad: null,
       bestRunMiles: null, bestRunTimeS: null, rowingSplitSecPer500: null,
-      selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 90, splitSecPer500: null }, maxHR: null,
+      selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 90, splitSecPer500: null, ftpWatts: null }, maxHR: null,
     });
     expect(env.zones).toMatchObject({ kind: 'swim', cssSecPer100: 90 });
   });

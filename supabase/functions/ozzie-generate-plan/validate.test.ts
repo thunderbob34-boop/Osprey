@@ -115,3 +115,18 @@ Deno.test('clamps a rowing easy session into the UT2 split band (sec/500m)', () 
   const implied = (days[0].planned_minutes! * 60) / (days[0].planned_distance_km! * 2); // s/500m
   assert(implied >= 132 && implied <= 137, `implied ${implied} not in UT2 band`);
 });
+
+const cyclingEnvelope = {
+  hardSessionShareMax: 0.2,
+  zones: { kind: 'cycling', ftpWatts: 240,
+    bands: { z2Endurance: { min: 134, max: 180 }, z4Threshold: { min: 218, max: 252 } } },
+  fuel: { dailyCarbG: { min: 1, max: 2 }, proteinG: { min: 1, max: 2 }, longSessionCarbGPerHour: 60 },
+};
+
+Deno.test('cycling envelope does not pace-clamp bike sessions (prompt-only)', () => {
+  const day = { dayOffset: 0, session_type: 'bike', intensity: 'threshold', planned_minutes: 60, planned_distance_km: 30 };
+  const { days, changed } = validateAndClamp([day], cyclingEnvelope as never);
+  assertEquals(days[0].planned_distance_km, 30); // untouched — no pace clamp
+  assertEquals(changed.length, 0);
+  assert((days[0] as Record<string, unknown>).fuel !== undefined, 'fuel not attached'); // fuel still attached
+});

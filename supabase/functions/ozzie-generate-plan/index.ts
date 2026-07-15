@@ -102,10 +102,17 @@ interface RowingTrainingZones {
   an: RowingZone;
 }
 
+interface CyclingPowerZones {
+  ftpWatts: number;
+  z1ActiveRecovery: Range; z2Endurance: Range; z3Tempo: Range; z4Threshold: Range;
+  z5Vo2Max: Range; z6Anaerobic: Range; z7Neuromuscular: Range; sweetSpot: Range;
+}
+
 type ZoneSet =
   | { kind: 'run'; thresholdSecPerMile: number; bands: RunningPaceZones }
   | { kind: 'swim'; cssSecPer100: number; bands: SwimPaceZones }
-  | { kind: 'rowing'; splitSecPer500: number; bands: RowingTrainingZones };
+  | { kind: 'rowing'; splitSecPer500: number; bands: RowingTrainingZones }
+  | { kind: 'cycling'; ftpWatts: number; bands: CyclingPowerZones };
 
 interface Envelope {
   sport: string;
@@ -311,7 +318,9 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad,
       ? ` Run pace bands (sec/mile): easy ${z.bands.easy.min}-${z.bands.easy.max}, threshold ~${z.thresholdSecPerMile}, 10K ${z.bands.tenKPace.min}-${z.bands.tenKPace.max}, 5K/interval ${z.bands.fiveKPace.min}-${z.bands.fiveKPace.max}. Choose distances/durations so implied pace matches the band for each session's intensity.`
       : z.kind === 'swim'
         ? ` Swim CSS ~${z.cssSecPer100} s/100m; easy ${z.bands.z2Aerobic.min}-${z.bands.z2Aerobic.max}, threshold ${z.bands.z3Threshold.min}-${z.bands.z3Threshold.max} s/100m. Choose distances/durations so implied pace matches the band for each session's intensity.`
-        : ` Rowing 2k split ~${z.splitSecPer500} s/500m; easy (UT2) ${z.bands.ut2.splitSecPer500.min}-${z.bands.ut2.splitSecPer500.max}, threshold (AT) ${z.bands.at.splitSecPer500.min}-${z.bands.at.splitSecPer500.max} s/500m. Choose piece lengths/rest so implied split matches the band for each session's intensity.`;
+        : z.kind === 'rowing'
+          ? ` Rowing 2k split ~${z.splitSecPer500} s/500m; easy (UT2) ${z.bands.ut2.splitSecPer500.min}-${z.bands.ut2.splitSecPer500.max}, threshold (AT) ${z.bands.at.splitSecPer500.min}-${z.bands.at.splitSecPer500.max} s/500m. Choose piece lengths/rest so implied split matches the band for each session's intensity.`
+          : ` Bike power zones (from FTP ~${z.ftpWatts}w): endurance Z2 ${z.bands.z2Endurance.min}-${z.bands.z2Endurance.max}w, threshold Z4 ${z.bands.z4Threshold.min}-${z.bands.z4Threshold.max}w. Advice only — target these watts for rides; do NOT distance/pace-clamp bike sessions.`;
 
   const envelopeGuidance = envelope
     ? ` COACHING ENVELOPE (hard constraints — stay inside these): phase=${envelope.phase}, week ${envelope.weekNumber}/${envelope.totalWeeks}, target weekly load ≈ ${envelope.targetWeeklyLoad} TSS, at most ${Math.round(envelope.hardSessionShareMax * 100)}% of sessions hard.` +

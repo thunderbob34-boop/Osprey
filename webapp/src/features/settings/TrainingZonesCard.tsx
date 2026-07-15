@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useThresholdAnchor, useUpdateThresholdAnchor } from './queries';
 import { setAnchorEntry, clearAnchorEntry, type AnchorKey, type ThresholdAnchorMap } from '../../lib/threshold-anchor';
-import { parseSwimBaseline, parseRowingBaseline, parseRunBaseline } from '../../lib/baseline';
-import { swimPaceZones, runningPaceZones, rowingTrainingZones, formatMinSec, type Range } from '../../lib/training-zones';
+import { parseSwimBaseline, parseRowingBaseline, parseRunBaseline, parseFTPBaseline } from '../../lib/baseline';
+import { swimPaceZones, runningPaceZones, rowingTrainingZones, cyclingPowerZones, formatMinSec, type Range } from '../../lib/training-zones';
 import { ErrorPanel } from '../../components/ErrorPanel';
 
 const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
@@ -15,6 +15,7 @@ const ROWS: Row[] = [
   { key: 'run', title: 'Run' },
   { key: 'swim', title: 'Swim' },
   { key: 'row', title: 'Rowing' },
+  { key: 'bike', title: 'Cycling' },
 ];
 
 export function TrainingZonesCard({ userId }: { userId: string }) {
@@ -46,10 +47,12 @@ function SportZone({ row, map, onSave, saving }: { row: Row; map: ThresholdAncho
   let preview: number | null = null;
   if (row.key === 'swim') { const r = parseSwimBaseline(mmss(a, b), mmss(c, d)); if (r.ok) preview = r.value; }
   else if (row.key === 'row') { const r = parseRowingBaseline(mmss(a, b)); if (r.ok) preview = r.value; }
+  else if (row.key === 'bike') { const r = parseFTPBaseline(num(a)); if (r.ok) preview = r.value; }
   else { const r = parseRunBaseline(num(a), mmss(c, d)); if (r.ok) preview = r.value; }
 
   const stored = row.key === 'swim' ? entry && 'cssSecPer100' in entry ? entry.cssSecPer100 : null
     : row.key === 'row' ? entry && 'splitSecPer500' in entry ? entry.splitSecPer500 : null
+    : row.key === 'bike' ? (entry && 'ftpWatts' in entry ? entry.ftpWatts : null)
     : entry && 'thresholdSecPerMile' in entry ? entry.thresholdSecPerMile : null;
   const shown = preview ?? stored;
 
@@ -58,6 +61,7 @@ function SportZone({ row, map, onSave, saving }: { row: Row; map: ThresholdAncho
     let value: number; let payload: NonNullable<ThresholdAnchorMap[AnchorKey]>;
     if (row.key === 'swim') { const r = parseSwimBaseline(mmss(a, b), mmss(c, d)); if (!r.ok) return setError(r.error); value = r.value; payload = { cssSecPer100: value, source: 'self_report' }; }
     else if (row.key === 'row') { const r = parseRowingBaseline(mmss(a, b)); if (!r.ok) return setError(r.error); value = r.value; payload = { splitSecPer500: value, source: 'self_report' }; }
+    else if (row.key === 'bike') { const r = parseFTPBaseline(num(a)); if (!r.ok) return setError(r.error); value = r.value; payload = { ftpWatts: value, source: 'self_report' }; }
     else { const r = parseRunBaseline(num(a), mmss(c, d)); if (!r.ok) return setError(r.error); value = r.value; payload = { thresholdSecPerMile: value, source: 'self_report' }; }
     onSave(setAnchorEntry(map, row.key, payload));
   }
@@ -67,6 +71,7 @@ function SportZone({ row, map, onSave, saving }: { row: Row; map: ThresholdAncho
       <strong>{row.title}</strong>
       {row.key === 'swim' && <><TimeInput label="400m" m={a} s={b} setM={setA} setS={setB} /><TimeInput label="200m" m={c} s={d} setM={setC} setS={setD} /></>}
       {row.key === 'row' && <TimeInput label="2k" m={a} s={b} setM={setA} setS={setB} />}
+      {row.key === 'bike' && <input placeholder="FTP (watts)" value={a} onChange={(e) => setA(e.target.value)} inputMode="numeric" />}
       {row.key === 'run' && <><input placeholder="distance (mi)" value={a} onChange={(e) => setA(e.target.value)} inputMode="decimal" /><TimeInput label="time" m={c} s={d} setM={setC} setS={setD} /></>}
 
       {shown != null && <ZonePreview sportKey={row.key} value={shown} />}
@@ -84,6 +89,7 @@ function SportZone({ row, map, onSave, saving }: { row: Row; map: ThresholdAncho
 function ZonePreview({ sportKey, value }: { sportKey: AnchorKey; value: number }) {
   if (sportKey === 'swim') { const z = swimPaceZones(value); return <div style={{ color: 'var(--mut)' }}>CSS {value}s/100m · aerobic {band(z.z2Aerobic, 's/100m')} · threshold {band(z.z3Threshold, 's/100m')}</div>; }
   if (sportKey === 'row') { const z = rowingTrainingZones(value); return <div style={{ color: 'var(--mut)' }}>2k split {value}s/500m · UT2 {band(z.ut2.splitSecPer500, 's/500m')} · AT {band(z.at.splitSecPer500, 's/500m')}</div>; }
+  if (sportKey === 'bike') { const z = cyclingPowerZones(value); return <div style={{ color: 'var(--mut)' }}>FTP {value}w · endurance {z.z2Endurance.min}-{z.z2Endurance.max}w · threshold {z.z4Threshold.min}-{z.z4Threshold.max}w</div>; }
   const z = runningPaceZones(value); return <div style={{ color: 'var(--mut)' }}>Threshold {formatMinSec(value)}/mi · easy {band(z.easy, '/mi')} · 5K {band(z.fiveKPace, '/mi')}</div>;
 }
 

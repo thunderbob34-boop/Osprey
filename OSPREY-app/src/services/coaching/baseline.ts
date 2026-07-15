@@ -9,6 +9,7 @@ export interface ThresholdAnchorMap {
   run?: { thresholdSecPerMile: number; source: AnchorSource };
   swim?: { cssSecPer100: number; source: AnchorSource };
   row?: { splitSecPer500: number; source: AnchorSource };
+  bike?: { ftpWatts: number; source: AnchorSource };
 }
 
 // Flat shape consumed by computeEnvelope (see envelope.ts EnvelopeInput).
@@ -16,6 +17,7 @@ export interface SelfReportAnchor {
   thresholdSecPerMile: number | null;
   cssSecPer100: number | null;
   splitSecPer500: number | null;
+  ftpWatts: number | null;
 }
 
 export type ParseResult = { ok: true; value: number } | { ok: false; error: string };
@@ -57,11 +59,24 @@ export function parseRunBaseline(distanceMiles: number, timeS: number): ParseRes
   return { ok: true, value: threshold };
 }
 
+export function parseFTPBaseline(ftpWatts: number): ParseResult {
+  if (!Number.isFinite(ftpWatts) || ftpWatts <= 0) {
+    return { ok: false, error: 'Enter your FTP in watts.' };
+  }
+  if (ftpWatts < 50 || ftpWatts > 600) {
+    return { ok: false, error: "That doesn't look like a valid FTP — check your watts." };
+  }
+  return { ok: true, value: Math.round(ftpWatts) };
+}
+
 // The stored anchor key for a primary goal, or null if the goal has no endurance
-// anchor to collect. Reuses blueprintSport (run/hybrid/hyrox→run, swim, rowing).
-export function anchorKeyForGoal(goal: string): 'run' | 'swim' | 'row' | null {
+// anchor to collect. Reuses blueprintSport (run/hybrid/hyrox→run, swim, rowing, cycling).
+export function anchorKeyForGoal(goal: string): 'run' | 'swim' | 'row' | 'bike' | null {
+  if (goal === 'cycling') return 'bike';
   const bp = blueprintSport(goal);
-  return bp === 'rowing' ? 'row' : bp; // 'run' | 'swim' | null pass through
+  if (bp === 'rowing') return 'row';
+  if (bp === 'cycling') return 'bike';
+  return bp; // 'run' | 'swim' | null pass through
 }
 
 export function toSelfReportAnchor(map: ThresholdAnchorMap | null | undefined): SelfReportAnchor {
@@ -69,5 +84,6 @@ export function toSelfReportAnchor(map: ThresholdAnchorMap | null | undefined): 
     thresholdSecPerMile: map?.run?.thresholdSecPerMile ?? null,
     cssSecPer100: map?.swim?.cssSecPer100 ?? null,
     splitSecPer500: map?.row?.splitSecPer500 ?? null,
+    ftpWatts: map?.bike?.ftpWatts ?? null,
   };
 }

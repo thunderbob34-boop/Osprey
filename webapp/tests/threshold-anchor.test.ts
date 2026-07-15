@@ -11,6 +11,10 @@ describe('parseThresholdAnchor', () => {
     expect(parseThresholdAnchor(null)).toEqual({});
     expect(parseThresholdAnchor('garbage')).toEqual({});
   });
+  it('accepts a bike entry and round-trips it', () => {
+    const m = { bike: { ftpWatts: 240, source: 'self_report' } };
+    expect(parseThresholdAnchor(m)).toEqual(m);
+  });
 });
 
 describe('setAnchorEntry / clearAnchorEntry preserve other sports', () => {
@@ -28,5 +32,13 @@ describe('setAnchorEntry / clearAnchorEntry preserve other sports', () => {
       swim: { cssSecPer100: 95, source: 'self_report' as const },
     };
     expect(clearAnchorEntry(cur, 'swim')).toEqual({ run: { thresholdSecPerMile: 443, source: 'self_report' } });
+  });
+  it('sets bike without touching other sports', () => {
+    const cur = { run: { thresholdSecPerMile: 443, source: 'self_report' as const } };
+    const next = setAnchorEntry(cur, 'bike', { ftpWatts: 240, source: 'self_report' });
+    expect(next).toEqual({
+      run: { thresholdSecPerMile: 443, source: 'self_report' },
+      bike: { ftpWatts: 240, source: 'self_report' },
+    });
   });
 });

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseSwimBaseline, parseRowingBaseline, parseRunBaseline } from '../src/lib/baseline';
+import { parseSwimBaseline, parseRowingBaseline, parseRunBaseline, parseFTPBaseline } from '../src/lib/baseline';
 
 describe('parseSwimBaseline', () => {
   it('computes CSS for valid times', () => {
@@ -27,5 +27,16 @@ describe('parseRunBaseline', () => {
   });
   it('rejects non-positive', () => {
     expect(parseRunBaseline(0, 3000).ok).toBe(false);
+  });
+});
+
+describe('parseFTPBaseline', () => {
+  it('accepts a valid FTP', () => {
+    expect(parseFTPBaseline(240)).toEqual({ ok: true, value: 240 });
+  });
+  it('rejects implausible values', () => {
+    expect(parseFTPBaseline(0).ok).toBe(false);
+    expect(parseFTPBaseline(49).ok).toBe(false);
+    expect(parseFTPBaseline(601).ok).toBe(false);
   });
 });

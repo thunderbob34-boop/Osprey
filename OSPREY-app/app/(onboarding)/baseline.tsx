@@ -7,9 +7,11 @@ import {
   parseSwimBaseline,
   parseRowingBaseline,
   parseRunBaseline,
+  parseFTPBaseline,
   anchorKeyForGoal,
   type ThresholdAnchorMap,
 } from '@/services/coaching/baseline';
+import { estimateFTPFromTwentyMinPower } from '@/services/calculators/triathlon';
 import { Colors } from '@/constants/colors';
 
 const HEALTH = '/(onboarding)/health';
@@ -27,6 +29,7 @@ export default function BaselineScreen() {
   const [swim200m, setSwim200m] = useState(''); const [swim200s, setSwim200s] = useState('');
   const [row2kM, setRow2kM] = useState(''); const [row2kS, setRow2kS] = useState('');
   const [runMiles, setRunMiles] = useState(''); const [runMin, setRunMin] = useState(''); const [runSec, setRunSec] = useState('');
+  const [ftp, setFtp] = useState(''); const [twentyMin, setTwentyMin] = useState('');
   const [error, setError] = useState<string | null>(null);
 
   function onContinue() {
@@ -41,6 +44,12 @@ export default function BaselineScreen() {
       const r = parseRowingBaseline(mmss(row2kM, row2kS));
       if (!r.ok) return setError(r.error);
       value = r.value; anchor = { row: { splitSecPer500: value, source: 'self_report' } };
+    } else if (key === 'bike') {
+      // FTP entered directly, or derived from 20-min power (0.95×) when FTP is blank.
+      const ftpW = num(ftp) || (num(twentyMin) ? estimateFTPFromTwentyMinPower(num(twentyMin)) : NaN);
+      const r = parseFTPBaseline(ftpW);
+      if (!r.ok) return setError(r.error);
+      value = r.value; anchor = { bike: { ftpWatts: value, source: 'self_report' } };
     } else {
       const r = parseRunBaseline(num(runMiles), mmss(runMin, runSec));
       if (!r.ok) return setError(r.error);
@@ -51,7 +60,7 @@ export default function BaselineScreen() {
   }
 
   const title =
-    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : 'A recent hard run?';
+    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : 'A recent hard run?';
 
   return (
     <OnboardingShell
@@ -69,6 +78,17 @@ export default function BaselineScreen() {
         </>
       ) : key === 'row' ? (
         <TimeRow label="2k time" m={row2kM} s={row2kS} setM={setRow2kM} setS={setRow2kS} />
+      ) : key === 'bike' ? (
+        <>
+          <View style={styles.field}>
+            <Text style={styles.label}>FTP (watts)</Text>
+            <TextInput style={styles.input} value={ftp} onChangeText={setFtp} keyboardType="number-pad" placeholder="240" placeholderTextColor={Colors.textMuted} />
+          </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>…or your best 20-min power (watts)</Text>
+            <TextInput style={styles.input} value={twentyMin} onChangeText={setTwentyMin} keyboardType="number-pad" placeholder="253" placeholderTextColor={Colors.textMuted} />
+          </View>
+        </>
       ) : (
         <>
           <View style={styles.field}>
