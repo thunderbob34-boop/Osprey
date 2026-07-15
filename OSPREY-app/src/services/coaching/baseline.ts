@@ -70,11 +70,13 @@ export function parseFTPBaseline(ftpWatts: number): ParseResult {
 }
 
 // The stored anchor key for a primary goal, or null if the goal has no endurance
-// anchor to collect. Reuses blueprintSport (run/hybrid/hyrox→run, swim, rowing).
+// anchor to collect. Reuses blueprintSport (run/hybrid/hyrox→run, swim, rowing, cycling).
 export function anchorKeyForGoal(goal: string): 'run' | 'swim' | 'row' | 'bike' | null {
   if (goal === 'cycling') return 'bike';
   const bp = blueprintSport(goal);
-  return bp === 'rowing' ? 'row' : bp; // 'run' | 'swim' | null pass through
+  if (bp === 'rowing') return 'row';
+  if (bp === 'cycling') return 'bike';
+  return bp; // 'run' | 'swim' | null pass through
 }
 
 export function toSelfReportAnchor(map: ThresholdAnchorMap | null | undefined): SelfReportAnchor {

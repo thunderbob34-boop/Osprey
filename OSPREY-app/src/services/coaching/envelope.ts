@@ -2,6 +2,7 @@ import type { SelfReportAnchor } from './baseline';
 import { runningPaceZones } from '@/services/calculators/running';
 import { swimPaceZones } from '@/services/calculators/swimming';
 import { rowingTrainingZones } from '@/services/calculators/rowing';
+import { cyclingPowerZones } from '@/services/calculators/cycling';
 import { Phase, loadingWeek, targetWeeklyLoad } from './periodization';
 import { estimateSwimCssByTier, resolveRunningAnchor, estimateRowingSplitByTier } from './anchor';
 import { computeRunningFuel, FuelTargets } from './fuel';
@@ -70,6 +71,12 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
       input.rowingSplitSecPer500 ??
       estimateRowingSplitByTier(input.fitnessLevel);
     zones = { kind: 'rowing', splitSecPer500: split, bands: rowingTrainingZones(split) };
+  } else if (bp === 'cycling') {
+    const ftp = input.selfReportAnchor?.ftpWatts;
+    if (ftp != null) {
+      zones = { kind: 'cycling', ftpWatts: ftp, bands: cyclingPowerZones(ftp) };
+    }
+    // else zones stays null → the universal hrZones (2b-iii) carries the cyclist's guidance
   }
 
   const hardWeek = loadingWeek(input.weekNumber) !== 4 && input.phase !== 'Taper';

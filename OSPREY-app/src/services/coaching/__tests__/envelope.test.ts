@@ -1,5 +1,6 @@
 import { computeEnvelope, EnvelopeInput } from '@/services/coaching/envelope';
 import { ultraHRZones } from '@/services/coaching/hr';
+import { cyclingPowerZones } from '@/services/calculators/cycling';
 
 const baseInput = {
   sport: 'run', phase: 'Build' as const, weekNumber: 5, totalWeeks: 16,
@@ -99,5 +100,18 @@ describe('computeEnvelope hrZones (universal HR fallback)', () => {
     const withHr = computeEnvelope({ ...hrBase, sport: 'run', bestRunMiles: 6.2, bestRunTimeS: 3000, maxHR: 180 });
     const noHr = computeEnvelope({ ...hrBase, sport: 'run', bestRunMiles: 6.2, bestRunTimeS: 3000 });
     expect(withHr.zones).toEqual(noHr.zones);
+  });
+});
+
+describe('computeEnvelope cycling', () => {
+  it('builds cycling power zones from a self-reported FTP', () => {
+    const env = computeEnvelope({ ...hrBase, sport: 'cycling', maxHR: 180,
+      selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: null, ftpWatts: 240 } });
+    expect(env.zones).toEqual({ kind: 'cycling', ftpWatts: 240, bands: cyclingPowerZones(240) });
+  });
+  it('falls to zones:null + HR when a cyclist has no FTP', () => {
+    const env = computeEnvelope({ ...hrBase, sport: 'cycling', maxHR: 180, selfReportAnchor: null });
+    expect(env.zones).toBeNull();
+    expect(env.hrZones.maxHR).toBe(180);
   });
 });
