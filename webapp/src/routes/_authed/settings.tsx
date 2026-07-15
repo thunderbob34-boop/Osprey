@@ -4,6 +4,7 @@ import { useUnits, useUpdateUnits, useLocationZip, useUpdateLocationZip } from '
 import { useUserProfile } from '../../lib/useAuthUser';
 import { PageHeader } from '../../components/PageHeader';
 import { ErrorPanel } from '../../components/ErrorPanel';
+import { TrainingZonesCard } from '../../features/settings/TrainingZonesCard';
 
 const TIER_LABEL: Record<string, string> = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' };
 
@@ -96,6 +97,10 @@ function SettingsPage() {
       )}
 
       <LocationCard userId={userId} />
+
+      <div style={{ marginTop: 24 }}>
+        <TrainingZonesCard userId={userId} />
+      </div>
     </>
   );
 }
