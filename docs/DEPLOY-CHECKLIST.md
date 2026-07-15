@@ -109,10 +109,22 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   webapp/mobile.** The stored `training_sessions.fuel` shape is unchanged (`{ dailyCarbG, proteinG,
   longSessionCarbGPerHour }`) — only the `dailyCarbG` value now varies by the day's intensity, so no renderer or
   migration impact.
+- **Phase 3-i (ultra)** — ultra becomes a selectable goal reusing run + HR zones: the app sends `envelope.sport='ultra'`
+  (routed to run zones via `blueprintSport('ultra')='run'`) plus a new `envelope.ultraParams`-driven progressive
+  25/25/30 taper, distance-scaled volume, and heavier fuel; the edge fn gains `enforceBackToBackLongRuns` (a
+  deterministic post-`validateAndClamp` step that puts the two longest runs on consecutive days for ultra) + an ultra
+  prompt block. A new `user_goals.goal_params` JSONB carries race-distance/vert/gut-trained. **App + edge MUST deploy
+  together:** a new-app ultra plan hitting the *old* fn gets no back-to-backs + no ultra prompt (soft degrade), and
+  the enum/`goal_params` need the migrations. **Non-ultra plans byte-identical** (all ultra logic sport-gated);
+  `validate.ts` untouched. **⚠️ PRE-SHIP:** the ultra collection UI (React Native screens) needs a device/simulator
+  smoke test — it could not be visually rendered in CI (pre-existing Expo Router static-SSR block).
 - **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
-  (cycling)** — add those values to `primary_goal_enum`. **Committed but NOT applied.** Apply BOTH via MCP
-  `apply_migration` (idempotent `ADD VALUE IF NOT EXISTS`, backward-compatible). Each must be applied **before/with**
-  its redeploy — the fn upserts those enum values, and storing one before the enum has it would 500 the request.
+  (cycling) + `20260715000002_ultra_primary_goal.sql` (ultra) + `20260715000003_goal_params.sql` (adds
+  `user_goals.goal_params` JSONB)** — the first three add values to `primary_goal_enum`; `goal_params` is an additive
+  nullable column. **All FOUR committed but NOT applied.** Apply via MCP `apply_migration` (idempotent
+  `ADD VALUE IF NOT EXISTS` / `ADD COLUMN IF NOT EXISTS`, backward-compatible). Each enum value must be applied
+  **before/with** its redeploy — the fn upserts those enum values, and storing one before the enum has it would 500
+  the request.
 
 Each piece is backward-compatible on its own, but the app build that exposes sport selection needs **both** the
 migrations applied **and** the fn redeployed, or a selected sport fails to persist / no-ops.
