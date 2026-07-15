@@ -12,16 +12,19 @@ import {
   type ThresholdAnchorMap,
 } from '@/services/coaching/baseline';
 import { estimateFTPFromTwentyMinPower } from '@/services/calculators/triathlon';
+import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
 import { Colors } from '@/constants/colors';
 
 const HEALTH = '/(onboarding)/health';
 const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
 const mmss = (m: string, s: string) => num(m) * 60 + num(s);
+const ULTRA_DISTANCES: UltraRaceDistance[] = ['50k', '50mi', '100k', '100mi'];
 
 export default function BaselineScreen() {
   const router = useRouter();
   const primaryGoal = useOnboardingStore((s) => s.primaryGoal);
   const setThresholdAnchor = useOnboardingStore((s) => s.setThresholdAnchor);
+  const setGoalParams = useOnboardingStore((s) => s.setGoalParams);
   const key = anchorKeyForGoal(primaryGoal);
 
   // Fields (times as minutes + seconds; run distance in miles).
@@ -30,10 +33,18 @@ export default function BaselineScreen() {
   const [row2kM, setRow2kM] = useState(''); const [row2kS, setRow2kS] = useState('');
   const [runMiles, setRunMiles] = useState(''); const [runMin, setRunMin] = useState(''); const [runSec, setRunSec] = useState('');
   const [ftp, setFtp] = useState(''); const [twentyMin, setTwentyMin] = useState('');
+  const [ultraDistance, setUltraDistance] = useState<UltraRaceDistance>('50k');
+  const [ultraVert, setUltraVert] = useState('');
+  const [gutTrained, setGutTrained] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   function onContinue() {
     setError(null);
+    if (primaryGoal === 'ultra') {
+      const u = parseUltraParams({ raceDistance: ultraDistance, vertGainM: ultraVert, gutTrained });
+      if (!u.ok) return setError(u.error);
+      setGoalParams(u.value);
+    }
     let value: number;
     let anchor: ThresholdAnchorMap;
     if (key === 'swim') {
@@ -60,7 +71,7 @@ export default function BaselineScreen() {
   }
 
   const title =
-    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : 'A recent hard run?';
+    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : 'A recent hard run?';
 
   return (
     <OnboardingShell
@@ -71,6 +82,57 @@ export default function BaselineScreen() {
       onContinue={onContinue}
       continueLabel="Use these numbers →"
     >
+      {primaryGoal === 'ultra' ? (
+        <>
+          <View style={styles.field}>
+            <Text style={styles.label}>Race distance</Text>
+            <View style={styles.chipRow}>
+              {ULTRA_DISTANCES.map((d) => (
+                <Pressable
+                  key={d}
+                  style={[styles.chip, ultraDistance === d && styles.chipSelected]}
+                  onPress={() => setUltraDistance(d)}
+                  accessibilityRole="button"
+                  accessibilityLabel={d}
+                  accessibilityState={{ selected: ultraDistance === d }}
+                >
+                  <Text style={[styles.chipText, ultraDistance === d && styles.chipTextSelected]}>
+                    {d}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>Total race vert, metres (optional)</Text>
+            <TextInput
+              style={styles.input}
+              value={ultraVert}
+              onChangeText={setUltraVert}
+              keyboardType="number-pad"
+              placeholder="e.g. 2000"
+              placeholderTextColor={Colors.textMuted}
+            />
+          </View>
+          <View style={styles.field}>
+            <Text style={styles.label}>Fueling</Text>
+            <View style={styles.chipRow}>
+              <Pressable
+                style={[styles.chip, gutTrained && styles.chipSelected]}
+                onPress={() => setGutTrained((v) => !v)}
+                accessibilityRole="checkbox"
+                accessibilityLabel="Gut-trained for race-day fueling"
+                accessibilityState={{ checked: gutTrained }}
+              >
+                <Text style={[styles.chipText, gutTrained && styles.chipTextSelected]}>
+                  🥤 Gut-trained (practiced high-carb fueling)
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+        </>
+      ) : null}
+
       {key === 'swim' ? (
         <>
           <TimeRow label="400m time" m={swim400m} s={swim400s} setM={setSwim400m} setS={setSwim400s} />
@@ -130,4 +192,16 @@ const styles = StyleSheet.create({
   colon: { color: Colors.textMuted, fontSize: 18, fontWeight: '700' },
   error: { fontSize: 12, color: Colors.red, marginTop: 4 },
   skip: { fontSize: 13, color: Colors.textMuted, textAlign: 'center', marginTop: 16, textDecorationLine: 'underline' },
+  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  chip: {
+    backgroundColor: Colors.bgCard,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  chipSelected: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+  chipText: { fontSize: 14, fontWeight: '600', color: Colors.textSecondary },
+  chipTextSelected: { color: Colors.teal },
 });

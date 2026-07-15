@@ -16,9 +16,10 @@ export const ONBOARDING_GOAL_TO_PREFERENCES: Record<PrimaryGoal, TrainingGoal> =
   rowing: 'rowing',
   hyrox: 'hyrox',
   cycling: 'cycling',
+  ultra: 'ultra',
 };
 
-function buildPlanPreferences(draft: OnboardingDraft): UserPreferences {
+export function buildPlanPreferences(draft: OnboardingDraft): UserPreferences {
   const totalDays = draft.weeklyRunDays + draft.weeklyLiftDays;
   return {
     primaryGoal: ONBOARDING_GOAL_TO_PREFERENCES[draft.primaryGoal],
@@ -27,6 +28,10 @@ function buildPlanPreferences(draft: OnboardingDraft): UserPreferences {
     longRunDay: 'saturday',
     includeSwim: false,
     includeBike: false,
+    // Mirrors app/preferences.tsx's handleGenerate: without this, the edge function's
+    // plan-builder-branch `user_goals` upsert writes `goal_params: null`, clobbering the
+    // real value completeOnboarding just inserted (see onboarding.test.ts for the pin).
+    ultraParams: draft.goalParams ?? null,
   };
 }
 
@@ -60,6 +65,7 @@ export async function completeOnboarding(userId: string, draft: OnboardingDraft)
     weekly_lift_days: draft.weeklyLiftDays,
     fitness_level: draft.experienceTier,
     threshold_anchor: draft.thresholdAnchor,
+    goal_params: draft.goalParams ?? null,
   });
 
   if (goalsError) throw goalsError;

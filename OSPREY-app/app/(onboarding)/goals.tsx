@@ -9,6 +9,7 @@ import { anchorKeyForGoal } from '@/services/coaching/baseline';
 
 const GOALS: Array<{ id: PrimaryGoal; icon: string; title: string; desc: string }> = [
   { id: 'run', icon: '🏃', title: 'Run better', desc: '5K, 10K, half, full marathon' },
+  { id: 'ultra', icon: '⛰️', title: 'Go ultra', desc: '50k to 100 miles — trail & mountain' },
   { id: 'lift', icon: '🏋️', title: 'Get stronger', desc: 'Lift more, build muscle' },
   { id: 'hybrid', icon: '⚡', title: 'Hybrid athlete', desc: 'Run and lift — both matter' },
   { id: 'swim', icon: '🏊', title: 'Swim faster', desc: 'Pool or open water — CSS-paced zones' },

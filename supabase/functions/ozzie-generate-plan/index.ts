@@ -9,6 +9,7 @@ import { createClient } from 'jsr:@supabase/supabase-js@2';
 import { validateAndClamp } from './validate.ts';
 import { routeDisciplineDays, type DisciplineDays } from './goals.ts';
 import { hrGuidance, type HrZoneInfo } from './guidance.ts';
+import { enforceBackToBackLongRuns } from './backtoback.ts';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
@@ -25,6 +26,8 @@ The user is a hybrid athlete whose philosophy is "look like a bodybuilder, funct
 Training load guidance: You will receive a 'trainingLoad' object with ATL (7-day fatigue), CTL (42-day fitness), and TSB (freshness = CTL - ATL). When TSB < -20, reduce next week's volume by 10-15% and flag at least one session as 'active_recovery'. When TSB > 15, the user is fresh — consider adding an intensity day. When CTL < 20, the user is early in training — keep volume moderate and don't add intervals.
 
 Triathlon / multisport guidance: When the goal is triathlon (or the user is training for a multisport event), balance all four disciplines across the week rather than defaulting to the hybrid run+lift split — use the given weekly swim/bike/run/lift day counts as hard targets, not suggestions. Include at least one "brick" session every 1-2 weeks: a bike session immediately followed by a short run in the same day's description (e.g. "Bike 45min + Run 10min Brick") — mark it session_type "bike" with the run noted in ozzie_notes since a session can only have one type. If a triathlonDistance is given ("sprint", "olympic", "half", "full"), scale session lengths accordingly: sprint = short/sharp (20-40min swims, 45-75min bikes, 20-40min runs), olympic = moderate (30-50min swims, 60-90min bikes, 30-50min runs), half = builds toward longer steady efforts (45-75min swims, 90-150min bikes, 45-75min runs), full = longest steady-state emphasis (60-90min swims, 2-4hr long bike, 60-100min long run) — never assign full-distance volume to a beginner in week one; ramp gradually. If the user has never done a triathlon before (fitnessLevel beginner + triathlonDistance sprint), treat this as "intro to multisport": keep every session approachable, favor completion over pace, and use ozzie_notes to explain WHY brick sessions and multisport pacing matter, not just what to do. For open-water-eligible swim sessions (outdoor season, not a pool-only context), mention sighting/drafting technique once in ozzie_notes.
+
+Ultra / ultramarathon guidance: When the goal is ultra, coach for the mountains and long hours, not road-marathon pace. Run by EFFORT and heart rate, not pace — terrain scrambles pace; keep ~80% of running easy (Zone 1-2, conversational). The engine is the long run and the BACK-TO-BACK: place the two longest runs on consecutive days (a big Saturday + big Sunday) to train tired legs — progress time-on-feet, not pace. Program power-hiking on steep climbs and deliberate downhill/descent work (eccentric quad conditioning). Fuel heavily: 60-120 g/hr of carbs on long efforts and drink to thirst (do NOT overdrink). Include eccentric/downhill strength twice a week. Build volume ≤10%/week with a recovery week every 3-4 weeks. If no target race date is set, the plan runs a general base build — encourage the athlete in ozzie_notes to set a race date so the taper can be scheduled.
 
 Rules:
 - Produce exactly 7 days, Monday through Sunday. Remaining days (beyond requested training days) are "rest".
@@ -477,6 +480,7 @@ Deno.serve(async (req: Request) => {
       rowing: 'rowing',
       hyrox: 'hyrox',
       cycling: 'cycling',
+      ultra: 'ultra',
     };
 
     // Build goals context: explicit preferences/raceTarget from the request
@@ -536,6 +540,7 @@ Deno.serve(async (req: Request) => {
           weekly_run_days: primaryDaysForStorage,
           weekly_lift_days: goals.weeklyLiftDays,
           fitness_level: goals.fitnessLevel,
+          goal_params: (prefs.ultraParams as unknown) ?? null,
         },
         { onConflict: 'user_id' },
       );
@@ -725,7 +730,7 @@ Deno.serve(async (req: Request) => {
       ? validateAndClamp(days as never, envelope as never)
       : { days, changed: [] as string[] };
     if (clamped.changed.length) console.log('envelope clamp', clamped.changed);
-    const finalDays = clamped.days;
+    const finalDays = enforceBackToBackLongRuns(clamped.days as never, goals.primaryGoal ?? '') as typeof clamped.days;
 
     const sessionRows = finalDays.map((day) => {
       const sessionDate = new Date(weekStart);

@@ -20,7 +20,7 @@ export type BlueprintSport = 'run' | 'swim' | 'rowing' | 'cycling';
 /** Canonical primaryGoal → the blueprint whose zones drive the plan. Triathlon is a
  *  COMPOSITE handled directly in computeEnvelope, not a single blueprint sport. */
 export function blueprintSport(primaryGoal: string): BlueprintSport | null {
-  if (primaryGoal === 'run' || primaryGoal === 'hybrid' || primaryGoal === 'hyrox') return 'run';
+  if (primaryGoal === 'run' || primaryGoal === 'hybrid' || primaryGoal === 'hyrox' || primaryGoal === 'ultra') return 'run';
   if (primaryGoal === 'swim') return 'swim';
   if (primaryGoal === 'rowing') return 'rowing';
   if (primaryGoal === 'cycling') return 'cycling';

@@ -22,6 +22,7 @@ export const ENDURANCE_PRIMARY: Record<string, EnduranceDiscipline> = {
   swim: 'swim',
   rowing: 'rowing',
   cycling: 'cycling',
+  ultra: 'run',
 };
 
 export interface DisciplineDays {

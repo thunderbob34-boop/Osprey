@@ -8,7 +8,7 @@ describe('envelopeFromInputs', () => {
     const env = envelopeFromInputs({
       sport: 'run', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
       baselineLoad: 0, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
-      rowingSplitSecPer500: null, selfReportAnchor: null, maxHR: null,
+      rowingSplitSecPer500: null, selfReportAnchor: null, maxHR: null, ultraParams: null,
     });
     expect(env.phase).toBe('Base');
     expect(env.zones).not.toBeNull(); // estimate anchor still yields zones
@@ -30,6 +30,7 @@ describe('envelopeFromInputs', () => {
       rowingSplitSecPer500: null,
       selfReportAnchor: null,
       maxHR: null,
+      ultraParams: null,
     }, now);
 
     expect(env.phase).toBe('Taper');
@@ -42,7 +43,7 @@ describe('envelopeFromInputs', () => {
     const env = envelopeFromInputs({
       sport: 'rowing', race: null, fitnessLevel: 'intermediate', bodyWeightKg: 80,
       baselineLoad: 200, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
-      rowingSplitSecPer500: 118, selfReportAnchor: null, maxHR: null,
+      rowingSplitSecPer500: 118, selfReportAnchor: null, maxHR: null, ultraParams: null,
     });
     expect(env.zones?.kind).toBe('rowing');
     // Pin the actual value, not just the zone kind: the 'intermediate' tier fallback is
@@ -59,6 +60,7 @@ describe('envelopeFromInputs', () => {
       baselineLoad: 200, prevWeekLoad: null,
       bestRunMiles: null, bestRunTimeS: null, rowingSplitSecPer500: null,
       selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 90, splitSecPer500: null, ftpWatts: null }, maxHR: null,
+      ultraParams: null,
     });
     expect(env.zones).toMatchObject({ kind: 'swim', cssSecPer100: 90 });
   });
@@ -69,6 +71,7 @@ describe('envelopeFromInputs', () => {
       baselineLoad: 200, prevWeekLoad: null,
       bestRunMiles: null, bestRunTimeS: null, rowingSplitSecPer500: null,
       selfReportAnchor: null, maxHR: 185,
+      ultraParams: null,
     });
     expect(env.hrZones).toMatchObject({ maxHR: 185, source: 'observed' });
   });

@@ -139,3 +139,29 @@ describe('computeEnvelope triathlon composite', () => {
     expect(env.hrZones.maxHR).toBe(180); // HR still there for the bike sessions
   });
 });
+
+function ultraInput(): EnvelopeInput {
+  return {
+    sport: 'ultra', phase: 'Build', weekNumber: 5, totalWeeks: 16,
+    baselineLoad: 400, prevWeekLoad: 400, bestRunMiles: 3.107, bestRunTimeS: 1200,
+    fitnessLevel: 'intermediate', bodyWeightKg: 70, rowingSplitSecPer500: null,
+    ultraParams: { raceDistance: '50k', vertGainM: null, gutTrained: false },
+  };
+}
+
+describe('computeEnvelope ultra taper + distance-scaled volume', () => {
+  it('scales ultra baseline volume up with race distance', () => {
+    const base = computeEnvelope({ ...ultraInput(), phase: 'Build', ultraParams: { raceDistance: '50k', vertGainM: null, gutTrained: false } });
+    const long = computeEnvelope({ ...ultraInput(), phase: 'Build', ultraParams: { raceDistance: '100mi', vertGainM: null, gutTrained: false } });
+    expect(long.targetWeeklyLoad).toBeGreaterThan(base.targetWeeklyLoad);
+  });
+  it('applies the progressive ultra taper (race week is the deepest cut)', () => {
+    const threeOut = computeEnvelope({ ...ultraInput(), phase: 'Taper', weeksRemaining: 3, prevWeekLoad: 400 });
+    const raceWeek = computeEnvelope({ ...ultraInput(), phase: 'Taper', weeksRemaining: 1, prevWeekLoad: 400 });
+    expect(raceWeek.targetWeeklyLoad).toBeLessThan(threeOut.targetWeeklyLoad); // 0.70 < 0.75 of baseline
+  });
+  it('leaves a non-ultra taper on the flat cut (regression)', () => {
+    const run = computeEnvelope({ ...ultraInput(), sport: 'run', phase: 'Taper', weeksRemaining: 1, prevWeekLoad: 400 });
+    expect(run.targetWeeklyLoad).toBe(Math.round(400 * 0.55)); // applyVolumeCut(prev, 0.45)
+  });
+});
