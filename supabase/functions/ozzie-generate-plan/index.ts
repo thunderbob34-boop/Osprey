@@ -9,6 +9,7 @@ import { createClient } from 'jsr:@supabase/supabase-js@2';
 import { validateAndClamp } from './validate.ts';
 import { routeDisciplineDays, type DisciplineDays } from './goals.ts';
 import { hrGuidance, type HrZoneInfo } from './guidance.ts';
+import { enforceBackToBackLongRuns } from './backtoback.ts';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
@@ -727,7 +728,7 @@ Deno.serve(async (req: Request) => {
       ? validateAndClamp(days as never, envelope as never)
       : { days, changed: [] as string[] };
     if (clamped.changed.length) console.log('envelope clamp', clamped.changed);
-    const finalDays = clamped.days;
+    const finalDays = enforceBackToBackLongRuns(clamped.days as never, goals.primaryGoal ?? '') as typeof clamped.days;
 
     const sessionRows = finalDays.map((day) => {
       const sessionDate = new Date(weekStart);
