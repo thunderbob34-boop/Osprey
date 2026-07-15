@@ -86,6 +86,13 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   (`goals.ts`) routes a cycling athlete's days to `weeklyBikeDays`. Until redeployed, a Cycling selection falls
   through `?? 'hybrid'` and gets a hybrid (run+lift) plan instead of a bike-focused one. `validate.ts` unchanged
   (cycling has no pace clamp; power/FTP zones are the deferred 2c-i-b).
+- **Phase 2c-i-b** — cycling POWER zones: the app now sends a `{ kind: 'cycling', ftpWatts, bands }` envelope zone
+  when a cyclist has an FTP, and **`validate.ts` gains the `cycling` kind + narrows the pace-clamp to
+  run/swim/rowing** (first `validate.ts` change since 2a — cycling is prompt-only). `index.ts` mirrors the cycling
+  ZoneSet + emits watt guidance. **App + edge MUST deploy together:** a new-app cycling zone hitting the *old* fn
+  would fall through the `zoneGuidance` chain and be mis-described as rowing. No migration (the cycling enum is
+  2c-i-a; FTP rides the existing `threshold_anchor` JSONB via a new `bike` key). Webapp Training Zones cycling
+  section ships with the webapp's own deploy.
 - **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
   (cycling)** — add those values to `primary_goal_enum`. **Committed but NOT applied.** Apply BOTH via MCP
   `apply_migration` (idempotent `ADD VALUE IF NOT EXISTS`, backward-compatible). Each must be applied **before/with**
