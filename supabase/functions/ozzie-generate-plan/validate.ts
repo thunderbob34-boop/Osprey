@@ -9,21 +9,22 @@ export type PlanDay = {
 };
 
 type Band = { min: number; max: number };
-type Zones =
-  | { kind: 'run'; thresholdSecPerMile: number; bands: { easy: Band; marathonPace: Band; tenKPace: Band; fiveKPace: Band } }
-  | { kind: 'swim'; cssSecPer100: number; bands: { z1EasyRecovery: Band; z2Aerobic: Band; z3Threshold: Band; z4Vo2Max: Band } }
-  | { kind: 'rowing'; splitSecPer500: number; bands: { ut2: { splitSecPer500: Band }; ut1: { splitSecPer500: Band }; at: { splitSecPer500: Band }; tr: { splitSecPer500: Band } } }
-  | { kind: 'cycling'; ftpWatts: number; bands: { z2Endurance: Band; z4Threshold: Band } };
+type RunZone = { kind: 'run'; thresholdSecPerMile: number; bands: { easy: Band; marathonPace: Band; tenKPace: Band; fiveKPace: Band } };
+type SwimZone = { kind: 'swim'; cssSecPer100: number; bands: { z1EasyRecovery: Band; z2Aerobic: Band; z3Threshold: Band; z4Vo2Max: Band } };
+type RowingZone = { kind: 'rowing'; splitSecPer500: number; bands: { ut2: { splitSecPer500: Band }; ut1: { splitSecPer500: Band }; at: { splitSecPer500: Band }; tr: { splitSecPer500: Band } } };
+type CyclingZone = { kind: 'cycling'; ftpWatts: number; bands: { z2Endurance: Band; z4Threshold: Band } };
+type TriZone = { kind: 'triathlon'; swim: SwimZone | null; bike: CyclingZone | null; run: RunZone | null };
+type PaceZone = RunZone | SwimZone | RowingZone; // clampable (implied pace/split); cycling/tri are not directly clampable
+type Zones = RunZone | SwimZone | RowingZone | CyclingZone | TriZone;
 interface EnvelopeLike { hardSessionShareMax: number; zones: Zones | null; fuel: unknown; }
 
 const KM_TO_MI = 0.621371;
 const HARD = new Set(['interval', 'threshold']);
 
-// Session type each zone kind clamps, and the pace unit divisor from km.
-const KIND_TYPE = { run: 'run', swim: 'swim', rowing: 'rowing' } as const;
+// Pace unit divisor from km, by pace-zone kind.
 const KIND_UNIT_PER_KM = { run: KM_TO_MI, swim: 10, rowing: 2 } as const; // sec/mi, sec/100m, sec/500m
 
-function bandFor(intensity: string, z: Zones): Band | null {
+function bandFor(intensity: string, z: PaceZone): Band | null {
   if (z.kind === 'run') {
     if (intensity === 'easy') return z.bands.easy;
     if (intensity === 'moderate') return z.bands.marathonPace;
@@ -34,13 +35,29 @@ function bandFor(intensity: string, z: Zones): Band | null {
     if (intensity === 'moderate') return z.bands.z2Aerobic;
     if (intensity === 'threshold') return z.bands.z3Threshold;
     if (intensity === 'interval') return z.bands.z4Vo2Max;
-  } else if (z.kind === 'rowing') {
+  } else {
     if (intensity === 'easy') return z.bands.ut2.splitSecPer500;
     if (intensity === 'moderate') return z.bands.ut1.splitSecPer500;
     if (intensity === 'threshold') return z.bands.at.splitSecPer500;
     if (intensity === 'interval') return z.bands.tr.splitSecPer500;
   }
   return null;
+}
+
+// The pace zone (if any) that applies to a given session type. Single-sport zones
+// apply only to their own session type; a triathlon composite routes swim→swim,
+// run→run; bike (and lift/cross) have no pace clamp.
+function paceZoneForSession(z: Zones | null, sessionType: string): PaceZone | null {
+  if (!z) return null;
+  if (z.kind === 'run') return sessionType === 'run' ? z : null;
+  if (z.kind === 'swim') return sessionType === 'swim' ? z : null;
+  if (z.kind === 'rowing') return sessionType === 'rowing' ? z : null;
+  if (z.kind === 'triathlon') {
+    if (sessionType === 'swim') return z.swim;
+    if (sessionType === 'run') return z.run;
+    return null; // bike / lift / cross → no pace clamp
+  }
+  return null; // cycling → prompt-only
 }
 
 export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { days: PlanDay[]; changed: string[] } {
@@ -76,40 +93,40 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
     return d;
   });
 
-  // (b) clamp pace into the band by scaling distance for the fixed duration,
-  // keyed off the envelope's zone kind (run/swim/rowing). Runs after
+  // (b) clamp pace into the band by scaling distance for the fixed duration.
+  // paceZoneForSession picks the applicable pace zone per day's session_type
+  // (single-sport zones clamp only their own type; a triathlon composite routes
+  // swim/run to their sub-zone and leaves bike/lift/cross unclamped). Runs after
   // polarization so a demoted session is clamped into the band matching its
   // FINAL (post-demotion) intensity.
   const z = envelope.zones;
-  if (z && (z.kind === 'run' || z.kind === 'swim' || z.kind === 'rowing')) {
-    const clampType = KIND_TYPE[z.kind];
-    const perKm = KIND_UNIT_PER_KM[z.kind];
-    out = out.map((d) => {
-      if (d.session_type === clampType && d.planned_minutes && d.planned_distance_km) {
-        const band = bandFor(d.intensity, z);
-        if (band) {
-          const implied = (d.planned_minutes * 60) / (d.planned_distance_km * perKm);
-          const target = Math.min(band.max, Math.max(band.min, implied));
-          if (target !== implied) {
-            const newKm = (d.planned_minutes * 60) / (target * perKm);
-            // Round toward the safe side of whichever edge we clamped to.
-            // Plain round-to-nearest can overshoot back across the edge (e.g.
-            // rounding distance up also speeds up the recomputed pace, which
-            // can undershoot a band.min floor by a couple of seconds/mile) —
-            // floor when we clamped up to band.min (less distance -> slower,
-            // stays >= min), ceil when we clamped down to band.max (more
-            // distance -> faster, stays <= max).
-            const roundedKm = target === band.min
-              ? Math.floor(newKm * 10) / 10
-              : Math.ceil(newKm * 10) / 10;
-            changed.push(`day${d.dayOffset}: pace ${Math.round(implied)}→${Math.round(target)} (${z.kind})`);
-            return { ...d, planned_distance_km: roundedKm };
-          }
+  out = out.map((d) => {
+    const pz = paceZoneForSession(z, d.session_type);
+    if (pz && d.planned_minutes && d.planned_distance_km) {
+      const perKm = KIND_UNIT_PER_KM[pz.kind];
+      const band = bandFor(d.intensity, pz);
+      if (band) {
+        const implied = (d.planned_minutes * 60) / (d.planned_distance_km * perKm);
+        const target = Math.min(band.max, Math.max(band.min, implied));
+        if (target !== implied) {
+          const newKm = (d.planned_minutes * 60) / (target * perKm);
+          // Round toward the safe side of whichever edge we clamped to.
+          // Plain round-to-nearest can overshoot back across the edge (e.g.
+          // rounding distance up also speeds up the recomputed pace, which
+          // can undershoot a band.min floor by a couple of seconds/mile) —
+          // floor when we clamped up to band.min (less distance -> slower,
+          // stays >= min), ceil when we clamped down to band.max (more
+          // distance -> faster, stays <= max).
+          const roundedKm = target === band.min
+            ? Math.floor(newKm * 10) / 10
+            : Math.ceil(newKm * 10) / 10;
+          changed.push(`day${d.dayOffset}: pace ${Math.round(implied)}→${Math.round(target)} (${pz.kind})`);
+          return { ...d, planned_distance_km: roundedKm };
         }
       }
-      return d;
-    });
-  }
+    }
+    return d;
+  });
 
   // (c) attach envelope fuel to every non-rest session.
   out = out.map((d) => (d.session_type === 'rest' ? d : { ...d, fuel: envelope.fuel }));
