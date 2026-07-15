@@ -62,3 +62,10 @@ Deno.test('run/hybrid bike days unchanged by the cycling case (regression)', () 
   assertEquals(routeDisciplineDays('run', 3, 2, false, true).weeklyBikeDays, 1);
   assertEquals(routeDisciplineDays('run', 3, 2, false, true).weeklyRunDays, 3);
 });
+
+Deno.test('ultra routes its primary days to run days', () => {
+  const d = routeDisciplineDays('ultra', 4, 1, false, false);
+  assertEquals(d.weeklyRunDays, 4);
+  assertEquals(d.weeklySwimDays, 0);
+  assertEquals(d.weeklyBikeDays, 0);
+});

@@ -37,6 +37,7 @@ interface LevelOption {
 const GOAL_OPTIONS: GoalOption[] = [
   { value: 'hybrid', label: '🏋️ Hybrid Athlete' },
   { value: 'run_performance', label: '🏃 Run Performance' },
+  { value: 'ultra', label: '⛰️ Ultra' },
   { value: 'strength', label: '💪 Strength Focus' },
   { value: 'triathlon', label: '🏊 Triathlon / Multisport' },
   { value: 'swim', label: '🏊 Swimming' },

@@ -9,7 +9,8 @@ export type PrimaryGoal =
   | 'swim'
   | 'rowing'
   | 'hyrox'
-  | 'cycling';
+  | 'cycling'
+  | 'ultra';
 export type ExperienceTier = 'beginner' | 'intermediate' | 'advanced';
 
 export interface OnboardingDraft {

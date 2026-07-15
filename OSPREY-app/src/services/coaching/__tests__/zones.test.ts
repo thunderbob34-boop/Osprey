@@ -8,6 +8,9 @@ describe('blueprintSport', () => {
   it('maps hyrox to run (its anchor is compromised run pace)', () => {
     expect(blueprintSport('hyrox')).toBe('run');
   });
+  it('routes ultra to the run blueprint (reuses run pace zones)', () => {
+    expect(blueprintSport('ultra')).toBe('run');
+  });
   it('maps swim, rowing, and cycling to themselves', () => {
     expect(blueprintSport('swim')).toBe('swim');
     expect(blueprintSport('rowing')).toBe('rowing');
