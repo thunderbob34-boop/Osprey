@@ -10,6 +10,7 @@ import { computeFuel, FuelPlan } from './fuel';
 import { ZoneSet, blueprintSport } from './zones';
 import { resolveMaxHR, ultraHRZones, HRZones } from './hr';
 import { ULTRA_DISTANCE_FACTOR } from './ultra-params';
+import { buildStrengthPrescription, StrengthPrescription } from './strength';
 
 export interface HrZoneInfo {
   maxHR: number;
@@ -27,6 +28,7 @@ export interface CoachingEnvelope {
   zones: ZoneSet | null;
   hrZones: HrZoneInfo; // universal HR fallback (prompt-only); always populated
   fuel: FuelPlan;
+  strength: StrengthPrescription | null;
 }
 
 export interface EnvelopeInput {
@@ -121,6 +123,8 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
   const hr = resolveMaxHR(input.maxHR ?? null);
   const hrZones: HrZoneInfo = { maxHR: hr.maxHR, source: hr.source, bands: ultraHRZones(hr.maxHR) };
 
+  const strength = buildStrengthPrescription(input);
+
   return {
     sport: input.sport,
     phase: input.phase,
@@ -131,5 +135,6 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     zones,
     hrZones,
     fuel: computeFuel(input.sport, input.bodyWeightKg, input.ultraParams?.gutTrained ?? false),
+    strength,
   };
 }
