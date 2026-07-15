@@ -16,7 +16,12 @@ type CyclingZone = { kind: 'cycling'; ftpWatts: number; bands: { z2Endurance: Ba
 type TriZone = { kind: 'triathlon'; swim: SwimZone | null; bike: CyclingZone | null; run: RunZone | null };
 type PaceZone = RunZone | SwimZone | RowingZone; // clampable (implied pace/split); cycling/tri are not directly clampable
 type Zones = RunZone | SwimZone | RowingZone | CyclingZone | TriZone;
-interface EnvelopeLike { hardSessionShareMax: number; zones: Zones | null; fuel: unknown; }
+type FuelPlan = {
+  dailyCarbGByDayType: { easy: Band; moderate: Band; high: Band; peak: Band };
+  proteinG: Band;
+  longSessionCarbGPerHour: number;
+};
+interface EnvelopeLike { hardSessionShareMax: number; zones: Zones | null; fuel: FuelPlan; }
 
 const KM_TO_MI = 0.621371;
 const HARD = new Set(['interval', 'threshold']);
@@ -58,6 +63,13 @@ function paceZoneForSession(z: Zones | null, sessionType: string): PaceZone | nu
     return null; // bike / lift / cross → no pace clamp
   }
   return null; // cycling → prompt-only
+}
+
+function carbDayType(intensity: string): 'easy' | 'moderate' | 'high' | 'peak' {
+  if (intensity === 'moderate') return 'moderate';
+  if (intensity === 'threshold' || intensity === 'interval') return 'high';
+  if (intensity === 'race') return 'peak';
+  return 'easy'; // easy / rest / anything else
 }
 
 export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { days: PlanDay[]; changed: string[] } {
@@ -128,8 +140,20 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
     return d;
   });
 
-  // (c) attach envelope fuel to every non-rest session.
-  out = out.map((d) => (d.session_type === 'rest' ? d : { ...d, fuel: envelope.fuel }));
+  // (c) attach the day-type carb range to every non-rest session, keyed off its
+  // FINAL (post-polarization) intensity — hard days get high carbs, easy days fewer.
+  out = out.map((d) =>
+    d.session_type === 'rest'
+      ? d
+      : {
+          ...d,
+          fuel: {
+            dailyCarbG: envelope.fuel.dailyCarbGByDayType[carbDayType(d.intensity)],
+            proteinG: envelope.fuel.proteinG,
+            longSessionCarbGPerHour: envelope.fuel.longSessionCarbGPerHour,
+          },
+        },
+  );
 
   return { days: out, changed };
 }

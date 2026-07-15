@@ -1,15 +1,23 @@
-import { computeRunningFuel } from '@/services/coaching/fuel';
+import { computeFuel } from '@/services/coaching/fuel';
+import { dailyCarbGrams } from '@/services/calculators/shared';
 
-describe('computeRunningFuel', () => {
-  it('scales daily carbs and protein with bodyweight', () => {
-    const f = computeRunningFuel({ bodyWeightKg: 70, hardWeek: true });
-    expect(f.dailyCarbG.min).toBeGreaterThan(0);
-    expect(f.proteinG.min).toBeCloseTo(70 * 1.6, 0);
-    expect(f.proteinG.max).toBeCloseTo(70 * 2.2, 0);
+describe('computeFuel', () => {
+  it('returns the carb ladder by day-type for the given body weight', () => {
+    const f = computeFuel('run', 70);
+    expect(f.dailyCarbGByDayType.easy).toEqual(dailyCarbGrams('easy', 70));
+    expect(f.dailyCarbGByDayType.high).toEqual(dailyCarbGrams('high', 70));
+    expect(f.dailyCarbGByDayType.peak).toEqual(dailyCarbGrams('peak', 70));
   });
-
-  it('prescribes in-session carbs for long runs', () => {
-    const f = computeRunningFuel({ bodyWeightKg: 70, hardWeek: true });
+  it('sets a positive per-sport in-session carb rate + a sane protein range', () => {
+    const f = computeFuel('cycling', 70);
     expect(f.longSessionCarbGPerHour).toBeGreaterThan(0);
+    expect(f.proteinG.min).toBe(Math.round(70 * 1.6));
+    expect(f.proteinG.max).toBe(Math.round(70 * 2.2));
+  });
+  it('routes each sport to its own in-session carb rate (swim differs from the running default)', () => {
+    const swim = computeFuel('swim', 70).longSessionCarbGPerHour;
+    const run = computeFuel('run', 70).longSessionCarbGPerHour;
+    expect(swim).toBeGreaterThan(0);
+    expect(swim).not.toBe(run); // swim dispatch is distinct; a dropped branch would collapse it to the run default
   });
 });

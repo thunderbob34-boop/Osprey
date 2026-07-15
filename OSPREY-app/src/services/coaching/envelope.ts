@@ -3,9 +3,9 @@ import { runningPaceZones } from '@/services/calculators/running';
 import { swimPaceZones } from '@/services/calculators/swimming';
 import { rowingTrainingZones } from '@/services/calculators/rowing';
 import { cyclingPowerZones } from '@/services/calculators/cycling';
-import { Phase, loadingWeek, targetWeeklyLoad } from './periodization';
+import { Phase, targetWeeklyLoad } from './periodization';
 import { estimateSwimCssByTier, resolveRunningAnchor, estimateRowingSplitByTier } from './anchor';
-import { computeRunningFuel, FuelTargets } from './fuel';
+import { computeFuel, FuelPlan } from './fuel';
 import { ZoneSet, blueprintSport } from './zones';
 import { resolveMaxHR, ultraHRZones, HRZones } from './hr';
 
@@ -24,7 +24,7 @@ export interface CoachingEnvelope {
   hardSessionShareMax: number; // polarization cap (docs/coaching/_index.md:16)
   zones: ZoneSet | null;
   hrZones: HrZoneInfo; // universal HR fallback (prompt-only); always populated
-  fuel: FuelTargets;
+  fuel: FuelPlan;
 }
 
 export interface EnvelopeInput {
@@ -97,8 +97,6 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     }
   }
 
-  const hardWeek = loadingWeek(input.weekNumber) !== 4 && input.phase !== 'Taper';
-
   const hr = resolveMaxHR(input.maxHR ?? null);
   const hrZones: HrZoneInfo = { maxHR: hr.maxHR, source: hr.source, bands: ultraHRZones(hr.maxHR) };
 
@@ -111,6 +109,6 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     hardSessionShareMax: 0.2,
     zones,
     hrZones,
-    fuel: computeRunningFuel({ bodyWeightKg: input.bodyWeightKg, hardWeek }),
+    fuel: computeFuel(input.sport, input.bodyWeightKg),
   };
 }

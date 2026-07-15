@@ -99,6 +99,16 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   advice-only. `index.ts` mirrors the composite + emits three-discipline guidance. **App + edge MUST deploy
   together:** a triathlon composite zone hitting the *old* fn would fall through `zoneGuidance` and be mis-read as
   cycling. No migration; no webapp change (triathletes set the 3 anchors on the 2c-i-b card).
+- **Phase 2c-iii** — fuel per day-type: the app's `envelope.fuel` changes from a single `FuelTargets` range to a
+  `FuelPlan` (a carb ladder keyed by day-type — easy/moderate/high/peak — plus a per-sport in-session rate), and
+  **`validate.ts` step (c) now attaches each session its own carb range by post-polarization intensity** (a hard day
+  gets high-day carbs, an easy or demoted day fewer). `index.ts` mirrors `FuelPlan` + the prompt states the by-day
+  ranges. **App + edge MUST deploy together:** the envelope wire-shape changed (`FuelTargets`→`FuelPlan`), so a new
+  edge fn (`validate.ts` reads `fuel.dailyCarbGByDayType`) hitting an *old* app's single-range `fuel` would throw,
+  and an old fn reading a new `FuelPlan` for `.dailyCarbG` would emit a broken carb string. **No migration; no
+  webapp/mobile.** The stored `training_sessions.fuel` shape is unchanged (`{ dailyCarbG, proteinG,
+  longSessionCarbGPerHour }`) — only the `dailyCarbG` value now varies by the day's intensity, so no renderer or
+  migration impact.
 - **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
   (cycling)** — add those values to `primary_goal_enum`. **Committed but NOT applied.** Apply BOTH via MCP
   `apply_migration` (idempotent `ADD VALUE IF NOT EXISTS`, backward-compatible). Each must be applied **before/with**
