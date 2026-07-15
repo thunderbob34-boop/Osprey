@@ -21,7 +21,8 @@ type FuelPlan = {
   proteinG: Band;
   longSessionCarbGPerHour: number;
 };
-interface EnvelopeLike { hardSessionShareMax: number; zones: Zones | null; fuel: FuelPlan; }
+type StrengthLike = { oneRepMaxKg: { squat: number; bench: number; deadlift: number }; workingPercent1RM: number; zone: { percent1RM: [number, number] }; prilepin: { repsPerSet: [number, number] } };
+interface EnvelopeLike { hardSessionShareMax: number; zones: Zones | null; fuel: FuelPlan; strength?: StrengthLike | null; }
 
 const KM_TO_MI = 0.621371;
 const HARD = new Set(['interval', 'threshold']);
@@ -154,6 +155,30 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
           },
         },
   );
+
+  const LIFT_OF: Record<string, 'squat' | 'bench' | 'deadlift'> = { 'Back Squat': 'squat', 'Bench Press': 'bench', 'Deadlift': 'deadlift' };
+
+  // (d) lift load guardrail: clamp a comp lift's loadKg into the zone's %1RM band.
+  const st = envelope.strength;
+  if (st) {
+    out = out.map((d) => {
+      if (d.session_type !== 'lift') return d;
+      const lp = d.lift_prescription as { exercises?: { name: string; loadKg: number | null }[] } | undefined;
+      if (!lp?.exercises) return d;
+      let touched = false;
+      const exercises = lp.exercises.map((ex) => {
+        const lift = LIFT_OF[ex.name];
+        if (!lift || ex.loadKg == null) return ex;
+        const orm = st.oneRepMaxKg[lift];
+        const lo = orm * st.zone.percent1RM[0] / 100;
+        const hi = orm * st.zone.percent1RM[1] / 100;
+        const clamped = Math.round(Math.min(hi, Math.max(lo, ex.loadKg)));
+        if (clamped !== ex.loadKg) { touched = true; changed.push(`day${d.dayOffset}: ${lift} ${ex.loadKg}→${clamped}kg (%1RM guardrail)`); }
+        return { ...ex, loadKg: clamped };
+      });
+      return touched ? { ...d, lift_prescription: { ...lp, exercises } } : d;
+    });
+  }
 
   return { days: out, changed };
 }
