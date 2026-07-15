@@ -77,6 +77,11 @@ migration. What changed and why the app + edge fn must ship together (atomic):
 - **Phase 2b-i** — sport routing: `PRIMARY_GOAL_MAP` gains swim/rowing/hyrox, a new pure `goals.ts`
   (`routeDisciplineDays`), `GoalsContext.weeklyRowDays`, and rowing prompt rules. Until redeployed, a user who
   selects Swimming/Rowing/Hyrox falls through `?? 'hybrid'` and their zones never fire.
+- **Phase 2b-iii** — HR-fallback zones: the app sends a new `envelope.hrZones` field; the fn mirrors it (`Envelope`
+  interface) and appends HR-zone guidance to the prompt via a new pure `guidance.ts`. Backward-compatible (old app →
+  no `hrZones` → `hrGuidance` returns `''`), so this one degrades softly if the fn lags the app — but redeploy so
+  weight_loss/general_fitness + cross-training cardio actually get HR guidance. `validate.ts` is unchanged.
+  (2b-ii / 2b-ii-web added NO edge-fn changes — app-only and webapp-only respectively.)
 - **Migration `20260714000003_sport_primary_goals.sql`** — adds swim/rowing/hyrox to `primary_goal_enum`.
   **Committed but NOT applied.** Apply via MCP `apply_migration` (idempotent `ADD VALUE IF NOT EXISTS`,
   backward-compatible). Must be applied **before/with** the 2b-i redeploy — the fn upserts those enum values, and
