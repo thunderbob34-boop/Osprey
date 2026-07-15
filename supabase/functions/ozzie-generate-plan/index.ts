@@ -8,6 +8,7 @@
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 import { validateAndClamp } from './validate.ts';
 import { routeDisciplineDays, type DisciplineDays } from './goals.ts';
+import { hrGuidance, type HrZoneInfo } from './guidance.ts';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
@@ -36,6 +37,7 @@ Rules:
 - ozzie_notes: one plain-English sentence explaining why this session is placed here this week, in Ozzie's warm/direct voice.
 - lift_prescription: for lift days ONLY, write the actual strength workout like a real coach: {"exercises": [{"name": string, "sets": number (2-5), "reps": string (e.g. "5" or "8-12"), "note": string|null}]} with 4-6 exercises. Main compound movement first at lower reps, accessories after at higher reps. Choose names ONLY from this exact list, matched to the day's split: Upper Push day = Bench Press, Incline Dumbbell Press, Overhead Press, Lateral Raise, Tricep Pushdown, Chest Dip. Upper Pull day = Pull-Up, Barbell Row, Lat Pulldown, Seated Cable Row, Dumbbell Row, Barbell Curl, Face Pull. Lower/Hips day = Back Squat, Deadlift, Romanian Deadlift, Hip Thrust, Bulgarian Split Squat, Leg Press, Calf Raise. Full-body/core accessory (any split) = Plank, Box Jump, Hanging Leg Raise. Use "note" for form or effort cues ("2 reps in reserve", "pause at the bottom"). For every non-lift day, set lift_prescription to null.
 - interval_prescription: for swim, bike, run, and rowing days with intensity "threshold" or "interval" ONLY, write real structured sets instead of a bare duration: {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}. Exactly one of distanceM/durationS per segment — swim segments use distanceM (e.g. 50/100/200), bike segments use durationS (e.g. 180-600 for 3-10min), run segments use distanceM for track-style reps (200-1600) or durationS for tempo blocks. rowing segments use distanceM (e.g. 250/500/1000) for interval pieces or durationS for steady blocks. effort must be one of: easy, moderate, threshold, hard, max. label is a short human string like "50m hard", "800m @ threshold", or "5min @ threshold". Include a warm-up segment (effort "easy") first and a cool-down segment (effort "easy") last. 3-6 segments total. For easy/moderate days and all other session types, set interval_prescription to null.
+- Zone guidance: apply the pace bands (if given) ONLY to the athlete's primary-sport sessions (run/swim/rowing). For bike, cross, and easy-cardio / cross-training sessions — and for ALL cardio when no pace bands are given (e.g. weight-loss or general-fitness plans) — target the HR zones instead. Never pace-clamp a cross-training session.
 - Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string, "lift_prescription": {"exercises": [{"name": string, "sets": number, "reps": string, "note": string|null}]}|null, "interval_prescription": {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}|null}]} where dayOffset 0 = Monday.`;
 
 interface GoalsContext {
@@ -113,6 +115,7 @@ interface Envelope {
   targetWeeklyLoad: number;
   hardSessionShareMax: number;
   zones: ZoneSet | null;
+  hrZones?: HrZoneInfo | null;
   fuel: { dailyCarbG: { min: number | null; max: number | null }; proteinG: { min: number; max: number }; longSessionCarbGPerHour: number };
 }
 
@@ -313,6 +316,7 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad,
   const envelopeGuidance = envelope
     ? ` COACHING ENVELOPE (hard constraints — stay inside these): phase=${envelope.phase}, week ${envelope.weekNumber}/${envelope.totalWeeks}, target weekly load ≈ ${envelope.targetWeeklyLoad} TSS, at most ${Math.round(envelope.hardSessionShareMax * 100)}% of sessions hard.` +
       zoneGuidance +
+      hrGuidance(envelope.hrZones) +
       ` Daily carbs ${envelope.fuel.dailyCarbG.min}-${envelope.fuel.dailyCarbG.max} g; long-session fuel ~${envelope.fuel.longSessionCarbGPerHour} g/hr.`
     : '';
 

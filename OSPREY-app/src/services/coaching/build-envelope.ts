@@ -18,6 +18,7 @@ interface EnvelopeInputs {
   bestRunTimeS: number | null;
   rowingSplitSecPer500: number | null;
   selfReportAnchor: SelfReportAnchor | null;
+  maxHR: number | null;
 }
 
 // Pure: inputs → envelope. No-race plans run a Base maintenance macrocycle.
@@ -41,6 +42,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     bodyWeightKg: i.bodyWeightKg,
     rowingSplitSecPer500: i.rowingSplitSecPer500,
     selfReportAnchor: i.selfReportAnchor,
+    maxHR: i.maxHR,
   });
 }
 
@@ -52,11 +54,11 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
   let inputs: EnvelopeInputs = {
     sport: 'run', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
     baselineLoad: 200, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
-    rowingSplitSecPer500: null, selfReportAnchor: null,
+    rowingSplitSecPer500: null, selfReportAnchor: null, maxHR: null,
   };
 
   if (userId) {
-    const [goalsRes, weightRes, runsRes, rowsRes] = await Promise.all([
+    const [goalsRes, weightRes, runsRes, rowsRes, maxHrRes] = await Promise.all([
       supabase.from('user_goals').select('primary_goal, fitness_level, target_date, total_weeks_planned, threshold_anchor').eq('user_id', userId).maybeSingle(),
       supabase.from('body_metrics').select('weight_kg').eq('user_id', userId).order('recorded_on', { ascending: false }).limit(1).maybeSingle(),
       // Recent runs (not the single longest all-time), so the anchor can pick the
@@ -65,12 +67,14 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       // Recent rowing logs, mirrored from the runs query above — selectBestRowingSplit
       // picks the fastest 500m split rather than the longest/slowest piece.
       supabase.from('workout_logs').select('total_distance_km, total_duration_s').eq('user_id', userId).eq('session_type', 'rowing').is('deleted_at', null).gte('started_at', new Date(Date.now() - RECENT_WINDOW_MS).toISOString()).order('started_at', { ascending: false }).limit(30),
+      supabase.from('workout_logs').select('max_heart_rate').eq('user_id', userId).is('deleted_at', null).gte('started_at', new Date(Date.now() - RECENT_WINDOW_MS).toISOString()).not('max_heart_rate', 'is', null).order('max_heart_rate', { ascending: false }).limit(1).maybeSingle(),
     ]);
     // A failed query silently degrades to generic defaults — surface it so it's diagnosable.
     if (goalsRes.error) console.warn('[build-envelope] user_goals query failed:', goalsRes.error.message);
     if (weightRes.error) console.warn('[build-envelope] body_metrics query failed:', weightRes.error.message);
     if (runsRes.error) console.warn('[build-envelope] workout_logs query failed:', runsRes.error.message);
     if (rowsRes.error) console.warn('[build-envelope] workout_logs (rowing) query failed:', rowsRes.error.message);
+    if (maxHrRes.error) console.warn('[build-envelope] workout_logs (maxHR) query failed:', maxHrRes.error.message);
 
     const g = goalsRes.data;
     const recentRuns = (runsRes.data ?? [])
@@ -94,6 +98,7 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       bestRunTimeS: bestEffort?.timeS ?? null,
       rowingSplitSecPer500: rowingSplit,
       selfReportAnchor: toSelfReportAnchor(g?.threshold_anchor as ThresholdAnchorMap | null),
+      maxHR: (maxHrRes.data?.max_heart_rate as number | null) ?? null,
     };
   }
 

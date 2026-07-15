@@ -1,4 +1,5 @@
 import { computeEnvelope, EnvelopeInput } from '@/services/coaching/envelope';
+import { ultraHRZones } from '@/services/coaching/hr';
 
 const baseInput = {
   sport: 'run', phase: 'Build' as const, weekNumber: 5, totalWeeks: 16,
@@ -69,5 +70,34 @@ describe('computeEnvelope self-report priority', () => {
     const withField = computeEnvelope({ ...base, sport: 'swim', selfReportAnchor: null });
     const withoutField = computeEnvelope({ ...base, sport: 'swim' });
     expect(withField).toEqual(withoutField);
+  });
+});
+
+const hrBase: EnvelopeInput = {
+  sport: 'run', phase: 'Base', weekNumber: 1, totalWeeks: 8,
+  baselineLoad: 200, prevWeekLoad: null,
+  bestRunMiles: null, bestRunTimeS: null, rowingSplitSecPer500: null,
+  fitnessLevel: 'beginner', bodyWeightKg: 70,
+};
+
+describe('computeEnvelope hrZones (universal HR fallback)', () => {
+  it('populates hrZones from a plausible observed max', () => {
+    const env = computeEnvelope({ ...hrBase, maxHR: 180 });
+    expect(env.hrZones).toEqual({ maxHR: 180, source: 'observed', bands: ultraHRZones(180) });
+  });
+  it('uses the conservative default when maxHR is null', () => {
+    const env = computeEnvelope({ ...hrBase, maxHR: null });
+    expect(env.hrZones.maxHR).toBe(190);
+    expect(env.hrZones.source).toBe('estimated');
+  });
+  it('populates hrZones even for a non-pace goal (weight_loss: zones null, hrZones set)', () => {
+    const env = computeEnvelope({ ...hrBase, sport: 'weight_loss', maxHR: 175 });
+    expect(env.zones).toBeNull();
+    expect(env.hrZones.maxHR).toBe(175);
+  });
+  it('leaves pace zones byte-identical (hrZones is additive)', () => {
+    const withHr = computeEnvelope({ ...hrBase, sport: 'run', bestRunMiles: 6.2, bestRunTimeS: 3000, maxHR: 180 });
+    const noHr = computeEnvelope({ ...hrBase, sport: 'run', bestRunMiles: 6.2, bestRunTimeS: 3000 });
+    expect(withHr.zones).toEqual(noHr.zones);
   });
 });
