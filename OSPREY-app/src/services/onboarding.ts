@@ -61,6 +61,7 @@ export async function completeOnboarding(userId: string, draft: OnboardingDraft)
     weekly_lift_days: draft.weeklyLiftDays,
     fitness_level: draft.experienceTier,
     threshold_anchor: draft.thresholdAnchor,
+    goal_params: draft.goalParams ?? null,
   });
 
   if (goalsError) throw goalsError;

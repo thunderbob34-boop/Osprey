@@ -41,6 +41,7 @@ export interface EnvelopeInput {
   rowingSplitSecPer500: number | null;
   selfReportAnchor?: SelfReportAnchor | null;
   maxHR?: number | null;
+  ultraParams?: import('./ultra-params').UltraGoalParams | null;
 }
 
 export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {

@@ -20,7 +20,7 @@ export interface SelfReportAnchor {
   ftpWatts: number | null;
 }
 
-export type ParseResult = { ok: true; value: number } | { ok: false; error: string };
+export type ParseResult<T = number> = { ok: true; value: T } | { ok: false; error: string };
 
 // Plausibility guards keep a typo from poisoning the athlete's zones for weeks.
 export function parseSwimBaseline(time400Sec: number, time200Sec: number): ParseResult {

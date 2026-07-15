@@ -3,6 +3,7 @@ import { computeRacePhase, RaceGoal } from '@/services/plan';
 import { computeEnvelope, CoachingEnvelope } from './envelope';
 import { selectBestRunEffort, selectBestRowingSplit } from './anchor';
 import { toSelfReportAnchor, type SelfReportAnchor, type ThresholdAnchorMap } from './baseline';
+import { toUltraParams, type UltraGoalParams } from './ultra-params';
 
 const MILES_PER_KM = 0.621371;
 const RECENT_WINDOW_MS = 56 * 24 * 60 * 60 * 1000; // 8 weeks
@@ -19,6 +20,7 @@ interface EnvelopeInputs {
   rowingSplitSecPer500: number | null;
   selfReportAnchor: SelfReportAnchor | null;
   maxHR: number | null;
+  ultraParams: UltraGoalParams | null;
 }
 
 // Pure: inputs → envelope. No-race plans run a Base maintenance macrocycle.
@@ -43,6 +45,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     rowingSplitSecPer500: i.rowingSplitSecPer500,
     selfReportAnchor: i.selfReportAnchor,
     maxHR: i.maxHR,
+    ultraParams: i.ultraParams,
   });
 }
 
@@ -55,11 +58,12 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
     sport: 'run', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
     baselineLoad: 200, prevWeekLoad: null, bestRunMiles: null, bestRunTimeS: null,
     rowingSplitSecPer500: null, selfReportAnchor: null, maxHR: null,
+    ultraParams: null,
   };
 
   if (userId) {
     const [goalsRes, weightRes, runsRes, rowsRes, maxHrRes] = await Promise.all([
-      supabase.from('user_goals').select('primary_goal, fitness_level, target_date, total_weeks_planned, threshold_anchor').eq('user_id', userId).maybeSingle(),
+      supabase.from('user_goals').select('primary_goal, fitness_level, target_date, total_weeks_planned, threshold_anchor, goal_params').eq('user_id', userId).maybeSingle(),
       supabase.from('body_metrics').select('weight_kg').eq('user_id', userId).order('recorded_on', { ascending: false }).limit(1).maybeSingle(),
       // Recent runs (not the single longest all-time), so the anchor can pick the
       // best-QUALITY effort rather than the slowest long run — see selectBestRunEffort.
@@ -99,6 +103,7 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       rowingSplitSecPer500: rowingSplit,
       selfReportAnchor: toSelfReportAnchor(g?.threshold_anchor as ThresholdAnchorMap | null),
       maxHR: (maxHrRes.data?.max_heart_rate as number | null) ?? null,
+      ultraParams: g?.primary_goal === 'ultra' ? toUltraParams(g?.goal_params) : null,
     };
   }
 
