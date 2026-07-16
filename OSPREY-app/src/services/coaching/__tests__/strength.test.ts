@@ -28,8 +28,15 @@ describe('buildStrengthPrescription', () => {
   it('is null for a non-lift sport', () => {
     expect(buildStrengthPrescription({ ...base(), sport: 'run' })).toBeNull();
   });
-  it('defaults maxes to 0 when strengthParams is absent (no crash)', () => {
-    expect(buildStrengthPrescription({ ...base(), strengthParams: undefined })!.oneRepMaxKg).toEqual({ squat: 0, bench: 0, deadlift: 0 });
+  it('returns null when strengthParams is absent (paramless lifter → general strength plan)', () => {
+    expect(buildStrengthPrescription({ ...base(), strengthParams: undefined })).toBeNull();
+  });
+  it('returns null when all three maxes are null (onboarding "Skip — estimate for me")', () => {
+    expect(buildStrengthPrescription({ ...base(), strengthParams: { oneRepMaxKg: { squat: null, bench: null, deadlift: null } } })).toBeNull();
+  });
+  it('still builds when at least one max is present (partial provide → per-lift 0 handled downstream)', () => {
+    const s = buildStrengthPrescription({ ...base(), strengthParams: { oneRepMaxKg: { squat: 200, bench: null, deadlift: null } } })!;
+    expect(s.oneRepMaxKg).toEqual({ squat: 200, bench: 0, deadlift: 0 });
   });
   it('Taper → Max Strength zone (90%) with an attempt card', () => {
     const taper = buildStrengthPrescription({ ...base(), phase: 'Taper' })!;
