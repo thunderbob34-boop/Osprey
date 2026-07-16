@@ -81,3 +81,10 @@ Deno.test('non-lift routing is unchanged (regression)', () => {
   assertEquals(routeDisciplineDays('run', 3, 2, false, false).weeklyRunDays, 3);
   assertEquals(routeDisciplineDays('cycling', 4, 1, false, false).weeklyBikeDays, 4);
 });
+
+Deno.test('crossfit routes strength-anchored with engine days', () => {
+  const d = routeDisciplineDays('crossfit', 5, 2, false, false);
+  assertEquals(d.weeklyLiftDays, 5);            // strength/metcon in most sessions
+  assertEquals(d.weeklyRunDays, 2);             // dedicated engine (min(2, liftDays))
+  assertEquals(d.weeklyRowDays, 0);
+});
