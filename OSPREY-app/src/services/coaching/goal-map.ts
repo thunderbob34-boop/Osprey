@@ -13,7 +13,8 @@ export type PrimaryGoalEnum =
   | 'rowing'
   | 'hyrox'
   | 'cycling'
-  | 'ultra';
+  | 'ultra'
+  | 'crossfit';
 
 // Client mirror of ozzie-generate-plan/index.ts PRIMARY_GOAL_MAP. Translates a plan-builder
 // TrainingGoal to the DB primary_goal_enum that the envelope build gates on. Keep in sync
@@ -30,6 +31,7 @@ export const TRAINING_GOAL_TO_PRIMARY_GOAL: Record<TrainingGoal, PrimaryGoalEnum
   hyrox: 'hyrox',
   cycling: 'cycling',
   ultra: 'ultra',
+  crossfit: 'crossfit',
 };
 
 export function primaryGoalFromTrainingGoal(g: TrainingGoal): PrimaryGoalEnum {

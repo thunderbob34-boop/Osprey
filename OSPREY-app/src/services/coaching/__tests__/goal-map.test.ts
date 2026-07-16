@@ -20,6 +20,7 @@ describe('goal-map', () => {
     expect(TRAINING_GOAL_TO_PRIMARY_GOAL.run_performance).toBe('run');
     expect(TRAINING_GOAL_TO_PRIMARY_GOAL.general).toBe('general_fitness');
     expect(TRAINING_GOAL_TO_PRIMARY_GOAL.triathlon).toBe('triathlon'); // plan-builder only — no onboarding inverse
-    expect(Object.keys(TRAINING_GOAL_TO_PRIMARY_GOAL)).toHaveLength(11);
+    expect(TRAINING_GOAL_TO_PRIMARY_GOAL.crossfit).toBe('crossfit');
+    expect(Object.keys(TRAINING_GOAL_TO_PRIMARY_GOAL)).toHaveLength(12);
   });
 });

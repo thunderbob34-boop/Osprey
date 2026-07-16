@@ -495,6 +495,7 @@ Deno.serve(async (req: Request) => {
       hyrox: 'hyrox',
       cycling: 'cycling',
       ultra: 'ultra',
+      crossfit: 'crossfit',
     };
 
     // Build goals context: explicit preferences/raceTarget from the request
