@@ -1,7 +1,7 @@
 jest.mock('@/services/supabase', () => ({ supabase: {} }));
 jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'));
-import { envelopeFromInputs } from '@/services/coaching/build-envelope';
+import { envelopeFromInputs, resolveGoalInputs } from '@/services/coaching/build-envelope';
 
 describe('envelopeFromInputs', () => {
   it('defaults a no-history athlete to a Base maintenance envelope', () => {
@@ -74,5 +74,32 @@ describe('envelopeFromInputs', () => {
       ultraParams: null,
     });
     expect(env.hrZones).toMatchObject({ maxHR: 185, source: 'observed' });
+  });
+});
+
+describe('resolveGoalInputs (goal switch: the posted goal wins over the stale DB read)', () => {
+  it('switches hybrid → lift and populates strengthParams from goal_params', () => {
+    const r = resolveGoalInputs('strength', 'hybrid', { oneRepMaxKg: { squat: 200, bench: 140, deadlift: 240 } });
+    expect(r.sport).toBe('lift');
+    expect(r.strengthParams?.oneRepMaxKg).toEqual({ squat: 200, bench: 140, deadlift: 240 });
+    expect(r.ultraParams).toBeNull();
+  });
+
+  it('switches run → ultra and populates ultraParams from goal_params', () => {
+    const r = resolveGoalInputs('ultra', 'run', { raceDistance: '100k', vertGainM: 3000, gutTrained: true });
+    expect(r.sport).toBe('ultra');
+    expect(r.ultraParams).not.toBeNull();
+    expect(r.strengthParams).toBeNull();
+  });
+
+  it.each(['triathlon', 'swim', 'rowing'] as const)('switches an endurance goal to %s', (goal) => {
+    expect(resolveGoalInputs(goal, 'hybrid', null).sport).toBe(goal);
+  });
+
+  it('falls back to the DB goal when no preferences are posted (background regen / race-event)', () => {
+    expect(resolveGoalInputs(undefined, 'rowing', null).sport).toBe('rowing');
+    expect(resolveGoalInputs(undefined, null, null).sport).toBe('run'); // ultimate default
+    // A lift envelope is NOT built off a stale-but-irrelevant DB read when nothing switched:
+    expect(resolveGoalInputs(undefined, 'lift', { oneRepMaxKg: { squat: 200, bench: 140, deadlift: 240 } }).strengthParams).not.toBeNull();
   });
 });
