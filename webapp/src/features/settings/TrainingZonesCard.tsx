@@ -4,6 +4,7 @@ import { setAnchorEntry, clearAnchorEntry, type AnchorKey, type ThresholdAnchorM
 import { parseSwimBaseline, parseRowingBaseline, parseRunBaseline, parseFTPBaseline } from '../../lib/baseline';
 import { swimPaceZones, runningPaceZones, rowingTrainingZones, cyclingPowerZones, formatMinSec, type Range } from '../../lib/training-zones';
 import { ErrorPanel } from '../../components/ErrorPanel';
+import { StrengthZones } from './StrengthZones';
 
 const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
 const mmss = (m: string, s: string) => num(m) * 60 + num(s);
@@ -32,6 +33,7 @@ export function TrainingZonesCard({ userId }: { userId: string }) {
       {ROWS.map((row) => (
         <SportZone key={row.key} row={row} map={map} onSave={(next) => update.mutate(next)} saving={update.isPending} />
       ))}
+      <StrengthZones userId={userId} />
       {update.error ? <ErrorPanel error={update.error} /> : null}
     </div>
   );
