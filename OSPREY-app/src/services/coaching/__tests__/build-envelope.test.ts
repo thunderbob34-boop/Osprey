@@ -102,4 +102,16 @@ describe('resolveGoalInputs (goal switch: the posted goal wins over the stale DB
     // A lift envelope is NOT built off a stale-but-irrelevant DB read when nothing switched:
     expect(resolveGoalInputs(undefined, 'lift', { oneRepMaxKg: { squat: 200, bench: 140, deadlift: 240 } }).strengthParams).not.toBeNull();
   });
+
+  it('switches to hyrox and populates hyroxParams from goal_params', () => {
+    const r = resolveGoalInputs('hyrox', 'run', { division: 'open_men', targetTimeMinutes: 85 });
+    expect(r.sport).toBe('hyrox');
+    expect(r.hyroxParams).toEqual({ division: 'open_men', targetTimeMinutes: 85 });
+    expect(r.ultraParams).toBeNull();
+    expect(r.strengthParams).toBeNull();
+  });
+  it('leaves hyroxParams null for a non-hyrox goal', () => {
+    expect(resolveGoalInputs('run_performance', 'run', null).hyroxParams).toBeNull();
+    expect(resolveGoalInputs(undefined, 'lift', { division: 'open_men' }).hyroxParams).toBeNull();
+  });
 });
