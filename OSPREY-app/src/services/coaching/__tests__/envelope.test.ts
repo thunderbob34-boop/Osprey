@@ -207,3 +207,26 @@ describe('computeEnvelope strength prescription (PL T2)', () => {
     expect(withStrengthParams).toEqual(withoutStrengthParams);
   });
 });
+
+describe('computeEnvelope hyrox prescription', () => {
+  const hyroxInput = () => ({
+    ...baseInput, sport: 'hyrox',
+    selfReportAnchor: { thresholdSecPerMile: 483, cssSecPer100: null, splitSecPer500: null, ftpWatts: null },
+    hyroxParams: { division: 'open_men', targetTimeMinutes: null },
+  }) as any;
+
+  it('populates a non-null hyrox prescription for a hyrox sport, wired from buildHyroxPrescription', () => {
+    const env = computeEnvelope(hyroxInput());
+    expect(env.hyrox).not.toBeNull();
+    expect(env.hyrox?.division).toBe('open_men');
+    expect(env.zones?.kind).toBe('run'); // hyrox reuses run zones
+  });
+
+  it('is null for a non-hyrox sport and leaves every other envelope field byte-identical (regression)', () => {
+    const withHyrox = computeEnvelope({ ...baseInput, hyroxParams: { division: 'open_men', targetTimeMinutes: null } } as any);
+    const withoutHyrox = computeEnvelope({ ...baseInput });
+    expect(withHyrox.hyrox).toBeNull();
+    expect(withoutHyrox.hyrox).toBeNull();
+    expect(withHyrox).toEqual(withoutHyrox); // hyroxParams fully inert for sport: 'run'
+  });
+});
