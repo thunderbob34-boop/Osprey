@@ -18,6 +18,7 @@ import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { useAuthStore } from '@/store/authStore';
 import { ONBOARDING_GOAL_TO_PREFERENCES } from '@/services/onboarding';
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
+import { parseHyroxParams, type HyroxDivision } from '@/services/coaching/hyrox-params';
 import { parseStrengthParams } from '@/services/coaching/strength-params';
 import type {
   ExperienceLevel,
@@ -60,6 +61,13 @@ const TRIATHLON_DISTANCE_OPTIONS: { value: TriathlonDistance; label: string }[] 
 
 const ULTRA_DISTANCES: UltraRaceDistance[] = ['50k', '50mi', '100k', '100mi'];
 
+const HYROX_DIVISIONS: { value: HyroxDivision; label: string }[] = [
+  { value: 'open_men', label: 'Open M' },
+  { value: 'open_women', label: 'Open W' },
+  { value: 'pro_men', label: 'Pro M' },
+  { value: 'pro_women', label: 'Pro W' },
+];
+
 const LEVEL_OPTIONS: LevelOption[] = [
   { value: 'beginner', label: 'Beginner' },
   { value: 'intermediate', label: 'Intermediate' },
@@ -88,6 +96,7 @@ export default function PreferencesScreen() {
   const [ultraDistance, setUltraDistance] = useState<UltraRaceDistance>('50k');
   const [ultraVert, setUltraVert] = useState('');
   const [gutTrained, setGutTrained] = useState(false);
+  const [division, setDivision] = useState<HyroxDivision>('open_men');
   const [squat, setSquat] = useState('');
   const [bench, setBench] = useState('');
   const [deadlift, setDeadlift] = useState('');
@@ -104,6 +113,7 @@ export default function PreferencesScreen() {
   const isTriathlon = primaryGoal === 'triathlon';
   const isUltra = primaryGoal === 'ultra';
   const isLift = primaryGoal === 'strength';
+  const isHyrox = primaryGoal === 'hyrox';
 
   useEffect(() => {
     async function loadSaved() {
@@ -123,6 +133,7 @@ export default function PreferencesScreen() {
             if (saved.goalParams.raceDistance) setUltraDistance(saved.goalParams.raceDistance);
             setUltraVert(saved.goalParams.vertGainM != null ? String(saved.goalParams.vertGainM) : '');
             setGutTrained(!!saved.goalParams.gutTrained);
+            if (saved.goalParams.division) setDivision(saved.goalParams.division);
             if (saved.goalParams.oneRepMaxKg) {
               const maxes = saved.goalParams.oneRepMaxKg;
               setSquat(maxes.squat != null ? String(maxes.squat) : '');
@@ -188,6 +199,13 @@ export default function PreferencesScreen() {
       }
       const strengthParamsValue = strengthParams && strengthParams.ok ? strengthParams.value : null;
 
+      const hyroxParams = isHyrox ? parseHyroxParams({ division, targetTimeMinutes: '' }) : null;
+      if (hyroxParams && !hyroxParams.ok) {
+        Alert.alert('Check your hyrox details', hyroxParams.error);
+        return;
+      }
+      const hyroxParamsValue = hyroxParams && hyroxParams.ok ? hyroxParams.value : null;
+
       const preferences = {
         primaryGoal,
         experienceLevel,
@@ -198,6 +216,7 @@ export default function PreferencesScreen() {
         ...(isTriathlon ? { triathlonDistance } : {}),
         ...(ultraParamsValue ? { goalParams: ultraParamsValue } : {}),
         ...(strengthParamsValue ? { goalParams: strengthParamsValue } : {}),
+        ...(hyroxParamsValue ? { goalParams: hyroxParamsValue } : {}),
       };
 
       // Persist to Supabase Auth user_metadata (no schema change needed)
@@ -236,6 +255,18 @@ export default function PreferencesScreen() {
           .eq('user_id', userId);
         if (goalParamsError) {
           Alert.alert('Could not save your lift numbers', goalParamsError.message);
+          return;
+        }
+      }
+      // Same ordering requirement for a hyrox athlete's division — the build-envelope
+      // reads goal_params from the DB, not from this in-memory preferences object.
+      if (hyroxParamsValue && userId) {
+        const { error: goalParamsError } = await supabase
+          .from('user_goals')
+          .update({ goal_params: hyroxParamsValue })
+          .eq('user_id', userId);
+        if (goalParamsError) {
+          Alert.alert('Could not save your hyrox details', goalParamsError.message);
           return;
         }
       }
@@ -402,6 +433,28 @@ export default function PreferencesScreen() {
               onChangeText={setGoalDeadlift}
               placeholder="190"
             />
+          </>
+        ) : null}
+
+        {isHyrox ? (
+          <>
+            <Text style={styles.sectionLabel}>DIVISION</Text>
+            <View style={styles.chipRow}>
+              {HYROX_DIVISIONS.map((d) => (
+                <TouchableOpacity
+                  key={d.value}
+                  style={[styles.chip, division === d.value && styles.chipSelected]}
+                  onPress={() => setDivision(d.value)}
+                  accessibilityRole="button"
+                  accessibilityLabel={d.label}
+                  accessibilityState={{ selected: division === d.value }}
+                >
+                  <Text style={[styles.chipText, division === d.value && styles.chipTextSelected]}>
+                    {d.label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
           </>
         ) : null}
 

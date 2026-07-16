@@ -14,6 +14,7 @@ import {
 } from '@/services/coaching/baseline';
 import { estimateFTPFromTwentyMinPower } from '@/services/calculators/triathlon';
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
+import { parseHyroxParams, type HyroxDivision } from '@/services/coaching/hyrox-params';
 import { parseStrengthParams } from '@/services/coaching/strength-params';
 import { bestE1rmForLift, fetchLiftAnalytics } from '@/services/lift-analytics';
 import { Colors } from '@/constants/colors';
@@ -22,6 +23,12 @@ const HEALTH = '/(onboarding)/health';
 const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
 const mmss = (m: string, s: string) => num(m) * 60 + num(s);
 const ULTRA_DISTANCES: UltraRaceDistance[] = ['50k', '50mi', '100k', '100mi'];
+const HYROX_DIVISIONS: { value: HyroxDivision; label: string }[] = [
+  { value: 'open_men', label: 'Open M' },
+  { value: 'open_women', label: 'Open W' },
+  { value: 'pro_men', label: 'Pro M' },
+  { value: 'pro_women', label: 'Pro W' },
+];
 
 export default function BaselineScreen() {
   const router = useRouter();
@@ -40,6 +47,7 @@ export default function BaselineScreen() {
   const [ultraDistance, setUltraDistance] = useState<UltraRaceDistance>('50k');
   const [ultraVert, setUltraVert] = useState('');
   const [gutTrained, setGutTrained] = useState(false);
+  const [division, setDivision] = useState<HyroxDivision>('open_men');
   const [squat, setSquat] = useState(''); const [bench, setBench] = useState(''); const [deadlift, setDeadlift] = useState('');
   const [goalSquat, setGoalSquat] = useState(''); const [goalBench, setGoalBench] = useState(''); const [goalDeadlift, setGoalDeadlift] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -82,6 +90,11 @@ export default function BaselineScreen() {
       router.push(HEALTH);
       return;
     }
+    if (primaryGoal === 'hyrox') {
+      const h = parseHyroxParams({ division, targetTimeMinutes: '' });
+      if (!h.ok) return setError(h.error);
+      setGoalParams(h.value);
+    }
     let value: number;
     let anchor: ThresholdAnchorMap;
     if (key === 'swim') {
@@ -108,7 +121,7 @@ export default function BaselineScreen() {
   }
 
   const title =
-    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : primaryGoal === 'lift' ? 'Know your current maxes?' : 'A recent hard run?';
+    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : primaryGoal === 'hyrox' ? 'Your division, and a recent hard run' : primaryGoal === 'lift' ? 'Know your current maxes?' : 'A recent hard run?';
 
   return (
     <OnboardingShell
@@ -199,6 +212,27 @@ export default function BaselineScreen() {
         </>
       ) : (
         <>
+          {primaryGoal === 'hyrox' ? (
+            <View style={styles.field}>
+              <Text style={styles.label}>Division</Text>
+              <View style={styles.chipRow}>
+                {HYROX_DIVISIONS.map((d) => (
+                  <Pressable
+                    key={d.value}
+                    style={[styles.chip, division === d.value && styles.chipSelected]}
+                    onPress={() => setDivision(d.value)}
+                    accessibilityRole="button"
+                    accessibilityLabel={d.label}
+                    accessibilityState={{ selected: division === d.value }}
+                  >
+                    <Text style={[styles.chipText, division === d.value && styles.chipTextSelected]}>
+                      {d.label}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+            </View>
+          ) : null}
           <View style={styles.field}>
             <Text style={styles.label}>Distance (miles)</Text>
             <TextInput style={styles.input} value={runMiles} onChangeText={setRunMiles} keyboardType="decimal-pad" placeholder="6.2" placeholderTextColor={Colors.textMuted} />
