@@ -60,9 +60,9 @@ export interface CoachingResponse {
 
 // Contract mirrors OSPREY-app/src/services/nutrition.ts::fetchNutritionCoaching.
 // Only meaningful for "today", so callers pass enabled=false for past dates.
-export function useNutritionCoaching(enabled: boolean) {
+export function useNutritionCoaching(userId: string, enabled: boolean) {
   return useQuery({
-    queryKey: ['nutrition-coaching'],
+    queryKey: ['nutrition-coaching', userId],
     enabled,
     retry: 1,
     staleTime: 5 * 60_000,

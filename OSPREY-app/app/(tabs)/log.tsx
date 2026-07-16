@@ -210,6 +210,12 @@ export default function LogTab() {
     });
   }, [params.scannedFoodId]);
 
+  useEffect(() => {
+    return () => {
+      if (searchDebounce.current) clearTimeout(searchDebounce.current);
+    };
+  }, []);
+
   function handleFoodNameChange(text: string) {
     setFoodName(text);
     setSelectedFoodItem(null);

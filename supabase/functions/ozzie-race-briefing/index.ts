@@ -132,7 +132,8 @@ serve(async (req) => {
       },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: String(err) }), {
+    console.error('ozzie-race-briefing error', err);
+    return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
       status: 500,
       headers: {
         'Content-Type': 'application/json',
