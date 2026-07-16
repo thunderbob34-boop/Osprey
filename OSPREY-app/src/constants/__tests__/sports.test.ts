@@ -20,4 +20,8 @@ describe('primaryDayLabel', () => {
   it('labels cycling as ride days', () => {
     expect(primaryDayLabel('cycling')).toBe('Ride days per week');
   });
+
+  it('labels crossfit as training days per week (WOD-based, no running)', () => {
+    expect(primaryDayLabel('crossfit')).toBe('Training days per week');
+  });
 });
