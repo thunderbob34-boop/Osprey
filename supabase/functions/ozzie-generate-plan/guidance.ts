@@ -101,3 +101,48 @@ export function hyroxGuidance(h: HyroxInfo | null | undefined): string {
     ` (familiar dose). Program station work in the session descriptions/ozzie_notes (not lift_prescription).`
   );
 }
+
+// Hand-narrowed mirror of CrossfitPrescription (OSPREY-app/src/services/coaching/crossfit.ts),
+// matching index.ts's Envelope.crossfit. Keep in sync if that shape changes.
+export interface CrossfitInfo {
+  strengthLoadsKg: { backSquat: number; deadlift: number; press: number }; // 0 = no 1RM → RPE
+  workingPercent1RM: number;
+  zoneName: string;
+  energySystems: { system: string; minDurationSec: number; maxDurationSec: number | null; workToRest: string; purpose: string }[];
+  benchmark: { name: string; timeDomain: string; athleteFranSec: number | null; franTier: string | null };
+}
+
+const CROSSFIT_LIFTS = [
+  { key: 'backSquat', label: 'back squat' },
+  { key: 'deadlift', label: 'deadlift' },
+  { key: 'press', label: 'press' },
+] as const;
+
+// Crossfit coaching, present only when the envelope carries a crossfit block (sport === 'crossfit').
+// A lift with no 1RM (strengthLoadsKg[lift] === 0 — a partial-provide athlete left it blank) is
+// omitted from the load line, same as strengthGuidance's comp-lift omission, and called out to be
+// programmed by RPE instead so the LLM is never told to load a 0kg working set.
+export function crossfitGuidance(c: CrossfitInfo | null | undefined): string {
+  if (!c) return '';
+  const present = CROSSFIT_LIFTS.filter((l) => c.strengthLoadsKg[l.key] > 0);
+  const missing = CROSSFIT_LIFTS.filter((l) => c.strengthLoadsKg[l.key] <= 0);
+  const loads = present.map((l) => `${l.label} ${c.strengthLoadsKg[l.key]}kg`).join(', ');
+  const loadsPart = loads ? ` — ${loads}` : '';
+  const rpeNote = missing.length
+    ? ` (no 1RM for ${missing.map((l) => l.label).join(', ')} — program by RPE instead)`
+    : '';
+  const energy = c.energySystems
+    .map((e) => `${e.system} ${e.minDurationSec}-${e.maxDurationSec ?? '∞'}s @ ${e.workToRest} (${e.purpose})`)
+    .join('; ');
+  const franRead = c.benchmark.franTier
+    ? ` Athlete's Fran tier (engine-fitness signal): ${c.benchmark.franTier}${c.benchmark.athleteFranSec != null ? ` (${c.benchmark.athleteFranSec}s)` : ''}.`
+    : ` No Fran time on file yet — a Fran test establishes this athlete's engine-fitness baseline.`;
+  return (
+    ` CROSSFIT: train strength + engine + gymnastics CONCURRENTLY, periodizing the emphasis to the phase above` +
+    ` (Base = strength + aerobic base + skill acquisition, Build = strength-endurance + threshold + gymnastics volume,` +
+    ` Peak/Competition = mixed-modal peaking, Taper/Deload = freshness). Strength at ~${c.workingPercent1RM}% 1RM` +
+    ` (zone "${c.zoneName}")${loadsPart}${rpeNote}. Metcon energy systems (work:rest by time domain): ${energy}.` +
+    ` Benchmark to test this block: ${c.benchmark.name} (${c.benchmark.timeDomain}).${franRead}` +
+    ` Program gymnastics + metcon work in the session descriptions/ozzie_notes (not lift_prescription).`
+  );
+}
