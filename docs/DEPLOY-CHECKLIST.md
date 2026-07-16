@@ -153,10 +153,19 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   test the 2 hyrox collection screens (division picker; same Expo SSR headless-render caveat as ultra/powerlifting).
   **Follow-up (non-blocking, filed):** `goal_params.targetTimeMinutes` is plumbed but not yet collected/consumed (both
   UIs hardcode `''`) — wire it to prompt pacing + `hyroxInRaceCarbGPerHour(targetTime)` in a later slice.
+- **Phase 3 (crossfit) — the Phase 3 finale + the only sport needing a NEW migration.** `crossfit` becomes a real
+  periodized 3-modality goal: full plumbing + a **new migration** (`20260716000001`, below), a composing
+  `envelope.crossfit` field (strength %1RM reusing `intensityZoneForPercent1RM` + the wired energy-system zones +
+  benchmark testing), and an edge `crossfitGuidance` block. Engine reuses `hrZones` (`blueprintSport('crossfit')=null`
+  → NO ZoneSet change). **App + edge MUST deploy together:** a new-app crossfit plan hitting the *old* fn gets a
+  generic plan (soft degrade). **Non-crossfit plans byte-identical.** **⚠️ PRE-SHIP:** device smoke test the crossfit
+  collection screens (3 1RMs + compete toggle + Fran). **Follow-ups (filed):** (1) the `competing` toggle is collected
+  but inert in the plan — a competing athlete is still periodized via a set `target_date`; wire its intensity-bias when
+  the Open-week competition-peaking slice lands; (2) `primaryDayLabel('crossfit')` shows "Run days" (small label fix).
 - **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
-  (cycling) + `20260715000002_ultra_primary_goal.sql` (ultra) + `20260715000003_goal_params.sql` (adds
-  `user_goals.goal_params` JSONB)** — the first three add values to `primary_goal_enum`; `goal_params` is an additive
-  nullable column. **All FOUR committed but NOT applied.** Apply via MCP `apply_migration` (idempotent
+  (cycling) + `20260715000002_ultra_primary_goal.sql` (ultra) + `20260716000001_crossfit_primary_goal.sql` (crossfit)
+  + `20260715000003_goal_params.sql` (adds `user_goals.goal_params` JSONB)** — the four `*_primary_goal`/`sport_primary_goals`
+  migrations add values to `primary_goal_enum`; `goal_params` is an additive nullable column. **All FIVE committed but NOT applied.** Apply via MCP `apply_migration` (idempotent
   `ADD VALUE IF NOT EXISTS` / `ADD COLUMN IF NOT EXISTS`, backward-compatible). Each enum value must be applied
   **before/with** its redeploy — the fn upserts those enum values, and storing one before the enum has it would 500
   the request.
