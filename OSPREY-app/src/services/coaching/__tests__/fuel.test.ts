@@ -39,4 +39,11 @@ describe('computeFuel', () => {
   it('leaves non-lift fuel unchanged (regression)', () => {
     expect(computeFuel('run', 70).longSessionCarbGPerHour).toBe(75); // marathon default
   });
+  it('gives hyrox its nutrition (5-8 g/kg carbs) + a race in-session rate', () => {
+    const f = computeFuel('hyrox', 70);
+    expect(f.dailyCarbGByDayType.easy.min).toBe(Math.round(5 * 70)); // low end of 5-8 g/kg
+    expect(f.dailyCarbGByDayType.peak.max).toBe(Math.round(8 * 70)); // high end
+    expect(f.proteinG.min).toBe(Math.round(70 * 1.6));
+    expect(f.longSessionCarbGPerHour).toBe(45); // midpoint hyroxInRaceCarbGPerHour(90) = {30,60}
+  });
 });

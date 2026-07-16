@@ -3,6 +3,7 @@ import { cyclingInRideCarbGPerHour } from '@/services/calculators/cycling';
 import { swimMeetDayCarbGPerHour } from '@/services/calculators/swimming';
 import { ultraRaceCarbGPerHour } from '@/services/calculators/ultra';
 import { powerliftingDailyNutrition } from '@/services/calculators/powerlifting';
+import { hyroxDailyNutrition, hyroxInRaceCarbGPerHour } from '@/services/calculators/hyrox';
 import { dailyCarbGrams, EnduranceDayType } from '@/services/calculators/shared';
 import { midpoint, Range } from '@/services/calculators/types';
 
@@ -30,6 +31,17 @@ export function computeFuel(sport: string, bodyWeightKg: number, gutTrained = fa
       dailyCarbGByDayType: { easy: low, moderate: low, high, peak: high },
       proteinG: { min: Math.round(n.proteinG.min), max: Math.round(n.proteinG.max) },
       longSessionCarbGPerHour: 0,                            // no endurance in-session fueling
+    };
+  }
+  if (sport === 'hyrox') {
+    const n = hyroxDailyNutrition(bodyWeightKg);              // carbG 5-8 g/kg, proteinG 1.6-2.2
+    const mid = Math.round((n.carbG.min + n.carbG.max) / 2);
+    const low: Range = { min: Math.round(n.carbG.min), max: mid };
+    const high: Range = { min: mid, max: Math.round(n.carbG.max) };
+    return {
+      dailyCarbGByDayType: { easy: low, moderate: low, high, peak: high },
+      proteinG: { min: Math.round(n.proteinG.min), max: Math.round(n.proteinG.max) },
+      longSessionCarbGPerHour: Math.round(midpoint(hyroxInRaceCarbGPerHour(90)) ?? 45), // race >75 min → 30-60 g/hr
     };
   }
   const carb = (dt: EnduranceDayType) => dailyCarbGrams(dt, bodyWeightKg);
