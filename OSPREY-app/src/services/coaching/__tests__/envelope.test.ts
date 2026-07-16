@@ -231,6 +231,33 @@ describe('computeEnvelope hyrox prescription', () => {
   });
 });
 
+describe('computeEnvelope crossfit prescription', () => {
+  const crossfitInput = () => ({
+    ...baseInput, sport: 'crossfit',
+    crossfitParams: { oneRepMaxKg: { backSquat: 140, deadlift: 180, press: 60 }, competing: true, franSec: 200 },
+  }) as any;
+
+  it('populates a non-null crossfit prescription for a crossfit sport, wired from buildCrossfitPrescription', () => {
+    const env = computeEnvelope(crossfitInput());
+    expect(env.crossfit).not.toBeNull();
+    expect(env.crossfit?.workingPercent1RM).toBe(84); // baseInput.phase is 'Build' → 84%
+    expect(env.crossfit?.strengthLoadsKg.backSquat).toBe(Math.round(140 * 84 / 100)); // 118
+    expect(env.crossfit?.benchmark.franTier).toBe('intermediate');
+    expect(env.crossfit?.energySystems.length).toBe(4);
+  });
+
+  it('is null for a non-crossfit sport and leaves every other envelope field byte-identical (regression)', () => {
+    const withCrossfit = computeEnvelope({
+      ...baseInput,
+      crossfitParams: { oneRepMaxKg: { backSquat: 140, deadlift: 180, press: 60 }, competing: true, franSec: 200 },
+    } as any);
+    const withoutCrossfit = computeEnvelope({ ...baseInput });
+    expect(withCrossfit.crossfit).toBeNull();
+    expect(withoutCrossfit.crossfit).toBeNull();
+    expect(withCrossfit).toEqual(withoutCrossfit); // crossfitParams fully inert for sport: 'run'
+  });
+});
+
 describe('resolveZones confidence', () => {
   const base = {
     sport: 'run', phase: 'Base' as const, weekNumber: 1, totalWeeks: 8, baselineLoad: 200, prevWeekLoad: null,
