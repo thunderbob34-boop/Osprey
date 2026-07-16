@@ -20,6 +20,7 @@ import { ONBOARDING_GOAL_TO_PREFERENCES } from '@/services/onboarding';
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
 import { parseHyroxParams, type HyroxDivision } from '@/services/coaching/hyrox-params';
 import { parseStrengthParams } from '@/services/coaching/strength-params';
+import { parseCrossfitParams } from '@/services/coaching/crossfit-params';
 import type {
   ExperienceLevel,
   TrainingDaysPerWeek,
@@ -47,6 +48,7 @@ const GOAL_OPTIONS: GoalOption[] = [
   { value: 'swim', label: '🏊 Swimming' },
   { value: 'rowing', label: '🚣 Rowing' },
   { value: 'hyrox', label: '🏋️‍♂️ Hyrox' },
+  { value: 'crossfit', label: '🤸 CrossFit' },
   { value: 'cycling', label: '🚴 Cycling' },
   { value: 'weight_loss', label: '🔥 Weight Loss' },
   { value: 'general', label: '⚡ General Fitness' },
@@ -103,6 +105,13 @@ export default function PreferencesScreen() {
   const [goalSquat, setGoalSquat] = useState('');
   const [goalBench, setGoalBench] = useState('');
   const [goalDeadlift, setGoalDeadlift] = useState('');
+  // CrossFit's deadlift is a separate field from lift's (different GoalParams shape) —
+  // named distinctly to avoid colliding with the `deadlift` state above.
+  const [backSquat, setBackSquat] = useState('');
+  const [crossfitDeadlift, setCrossfitDeadlift] = useState('');
+  const [press, setPress] = useState('');
+  const [competing, setCompeting] = useState(false);
+  const [fran, setFran] = useState('');
   const [loading, setLoading] = useState(false);
   const [loadingPrefs, setLoadingPrefs] = useState(true);
   // Whether a plan-builder session has run before via this screen — a good
@@ -114,6 +123,7 @@ export default function PreferencesScreen() {
   const isUltra = primaryGoal === 'ultra';
   const isLift = primaryGoal === 'strength';
   const isHyrox = primaryGoal === 'hyrox';
+  const isCrossfit = primaryGoal === 'crossfit';
 
   useEffect(() => {
     async function loadSaved() {
@@ -134,7 +144,10 @@ export default function PreferencesScreen() {
             setUltraVert(saved.goalParams.vertGainM != null ? String(saved.goalParams.vertGainM) : '');
             setGutTrained(!!saved.goalParams.gutTrained);
             if (saved.goalParams.division) setDivision(saved.goalParams.division);
-            if (saved.goalParams.oneRepMaxKg) {
+            // strength's oneRepMaxKg is { squat, bench, deadlift }; crossfit's is a
+            // differently-shaped { backSquat, deadlift, press } under the same key —
+            // gate each read by which goal was actually saved so they don't cross-pollute.
+            if (saved.primaryGoal !== 'crossfit' && saved.goalParams.oneRepMaxKg) {
               const maxes = saved.goalParams.oneRepMaxKg;
               setSquat(maxes.squat != null ? String(maxes.squat) : '');
               setBench(maxes.bench != null ? String(maxes.bench) : '');
@@ -146,6 +159,14 @@ export default function PreferencesScreen() {
               setGoalBench(goalThirds.bench != null ? String(goalThirds.bench) : '');
               setGoalDeadlift(goalThirds.deadlift != null ? String(goalThirds.deadlift) : '');
             }
+            if (saved.primaryGoal === 'crossfit' && saved.goalParams.oneRepMaxKg) {
+              const cfMaxes = saved.goalParams.oneRepMaxKg;
+              setBackSquat(cfMaxes.backSquat != null ? String(cfMaxes.backSquat) : '');
+              setCrossfitDeadlift(cfMaxes.deadlift != null ? String(cfMaxes.deadlift) : '');
+              setPress(cfMaxes.press != null ? String(cfMaxes.press) : '');
+            }
+            setCompeting(!!saved.goalParams.competing);
+            setFran(saved.goalParams.franSec != null ? String(saved.goalParams.franSec) : '');
           }
         } else if (userId) {
           // First visit — no prior plan-builder session. Seed from the
@@ -206,6 +227,15 @@ export default function PreferencesScreen() {
       }
       const hyroxParamsValue = hyroxParams && hyroxParams.ok ? hyroxParams.value : null;
 
+      const crossfitParams = isCrossfit
+        ? parseCrossfitParams({ backSquat, deadlift: crossfitDeadlift, press, competing, fran })
+        : null;
+      if (crossfitParams && !crossfitParams.ok) {
+        Alert.alert('Check your crossfit numbers', crossfitParams.error);
+        return;
+      }
+      const crossfitParamsValue = crossfitParams && crossfitParams.ok ? crossfitParams.value : null;
+
       const preferences = {
         primaryGoal,
         experienceLevel,
@@ -217,6 +247,7 @@ export default function PreferencesScreen() {
         ...(ultraParamsValue ? { goalParams: ultraParamsValue } : {}),
         ...(strengthParamsValue ? { goalParams: strengthParamsValue } : {}),
         ...(hyroxParamsValue ? { goalParams: hyroxParamsValue } : {}),
+        ...(crossfitParamsValue ? { goalParams: crossfitParamsValue } : {}),
       };
 
       // Persist to Supabase Auth user_metadata (no schema change needed)
@@ -267,6 +298,18 @@ export default function PreferencesScreen() {
           .eq('user_id', userId);
         if (goalParamsError) {
           Alert.alert('Could not save your hyrox details', goalParamsError.message);
+          return;
+        }
+      }
+      // Same ordering requirement for a crossfit athlete's maxes/Fran — the build-envelope
+      // reads goal_params from the DB, not from this in-memory preferences object.
+      if (crossfitParamsValue && userId) {
+        const { error: goalParamsError } = await supabase
+          .from('user_goals')
+          .update({ goal_params: crossfitParamsValue })
+          .eq('user_id', userId);
+        if (goalParamsError) {
+          Alert.alert('Could not save your crossfit numbers', goalParamsError.message);
           return;
         }
       }
@@ -455,6 +498,44 @@ export default function PreferencesScreen() {
                 </TouchableOpacity>
               ))}
             </View>
+          </>
+        ) : null}
+
+        {isCrossfit ? (
+          <>
+            <LiftField
+              label="BACK SQUAT — 1RM (KG, OPTIONAL)"
+              value={backSquat}
+              onChangeText={setBackSquat}
+              placeholder="120"
+            />
+            <LiftField
+              label="DEADLIFT — 1RM (KG, OPTIONAL)"
+              value={crossfitDeadlift}
+              onChangeText={setCrossfitDeadlift}
+              placeholder="160"
+            />
+            <LiftField label="PRESS — 1RM (KG, OPTIONAL)" value={press} onChangeText={setPress} placeholder="60" />
+            <Text style={styles.sectionLabel}>COMPETING?</Text>
+            <View style={styles.chipRow}>
+              <TouchableOpacity
+                style={[styles.chip, competing && styles.chipSelected]}
+                onPress={() => setCompeting((v) => !v)}
+                accessibilityRole="checkbox"
+                accessibilityLabel="Training to compete (Open, etc.)"
+                accessibilityState={{ checked: competing }}
+              >
+                <Text style={[styles.chipText, competing && styles.chipTextSelected]}>
+                  🏆 Training to compete (Open, regionals, etc.)
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <LiftField
+              label="FRAN TIME — SECONDS (OPTIONAL)"
+              value={fran}
+              onChangeText={setFran}
+              placeholder="240"
+            />
           </>
         ) : null}
 
