@@ -75,3 +75,29 @@ export function strengthGuidance(s: StrengthInfo | null | undefined): string {
     meet
   );
 }
+
+// Hand-narrowed mirror of HyroxPrescription (OSPREY-app/src/services/coaching/hyrox.ts),
+// matching index.ts's Envelope.hyrox. Keep in sync if that shape changes.
+export interface HyroxInfo {
+  division: string;
+  compromisedRunSplitSecPerKm: { min: number; max: number };
+  stationWeights: { sledPushKg: number; sledPullKg: number; farmersCarryPerHandKg: number; sandbagLungesKg: number; wallBallKg: number };
+  sodiumMgPerHour: { min: number; max: number };
+  caffeineMg: { min: number; max: number };
+}
+
+// Hyrox coaching, present only when the envelope carries a hyrox block (sport === 'hyrox').
+export function hyroxGuidance(h: HyroxInfo | null | undefined): string {
+  if (!h) return '';
+  const w = h.stationWeights;
+  return (
+    ` HYROX (${h.division.replace('_', ' ')}): race 8×1km runs + 8 stations as ONE effort — control the opening` +
+    ` SkiErg→Sled block. Target compromised run splits ${h.compromisedRunSplitSecPerKm.min}-${h.compromisedRunSplitSecPerKm.max} s/km` +
+    ` (stations pre-fatigue you — do NOT run fresh-5k pace). Signature session: compromised-running intervals` +
+    ` (1km race-pace → a station → 1km race-pace). Station strength-endurance at race weights — sled push ${w.sledPushKg}kg,` +
+    ` sled pull ${w.sledPullKg}kg, farmers ${w.farmersCarryPerHandKg}kg/hand, sandbag lunge ${w.sandbagLungesKg}kg,` +
+    ` wall ball ${w.wallBallKg}kg (100 reps, pre-plan the break); ski/row 1000m at target split. Race day:` +
+    ` ${h.sodiumMgPerHour.min}-${h.sodiumMgPerHour.max} mg/hr sodium, caffeine ${h.caffeineMg.min}-${h.caffeineMg.max} mg pre-race` +
+    ` (familiar dose). Program station work in the session descriptions/ozzie_notes (not lift_prescription).`
+  );
+}

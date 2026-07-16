@@ -11,6 +11,7 @@ import { ZoneSet, blueprintSport } from './zones';
 import { resolveMaxHR, ultraHRZones, HRZones } from './hr';
 import { ULTRA_DISTANCE_FACTOR } from './ultra-params';
 import { buildStrengthPrescription, StrengthPrescription } from './strength';
+import { buildHyroxPrescription, HyroxPrescription } from './hyrox';
 
 export interface HrZoneInfo {
   maxHR: number;
@@ -29,6 +30,7 @@ export interface CoachingEnvelope {
   hrZones: HrZoneInfo; // universal HR fallback (prompt-only); always populated
   fuel: FuelPlan;
   strength: StrengthPrescription | null;
+  hyrox: HyroxPrescription | null;
 }
 
 export interface EnvelopeInput {
@@ -47,6 +49,7 @@ export interface EnvelopeInput {
   maxHR?: number | null;
   ultraParams?: import('./ultra-params').UltraGoalParams | null;
   strengthParams?: import('./strength-params').StrengthGoalParams | null;
+  hyroxParams?: import('./hyrox-params').HyroxGoalParams | null;
   weeksRemaining?: number | null;
 }
 
@@ -124,6 +127,7 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
   const hrZones: HrZoneInfo = { maxHR: hr.maxHR, source: hr.source, bands: ultraHRZones(hr.maxHR) };
 
   const strength = buildStrengthPrescription(input);
+  const hyrox = buildHyroxPrescription(input);
 
   return {
     sport: input.sport,
@@ -136,5 +140,6 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     hrZones,
     fuel: computeFuel(input.sport, input.bodyWeightKg, input.ultraParams?.gutTrained ?? false),
     strength,
+    hyrox,
   };
 }

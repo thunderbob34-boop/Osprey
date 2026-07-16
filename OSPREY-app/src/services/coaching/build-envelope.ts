@@ -5,6 +5,7 @@ import { selectBestRunEffort, selectBestRowingSplit } from './anchor';
 import { toSelfReportAnchor, type SelfReportAnchor, type ThresholdAnchorMap } from './baseline';
 import { toUltraParams, type UltraGoalParams } from './ultra-params';
 import { toStrengthParams, type StrengthGoalParams } from './strength-params';
+import { toHyroxParams, type HyroxGoalParams } from './hyrox-params';
 import { primaryGoalFromTrainingGoal } from './goal-map';
 import type { TrainingGoal, UserPreferences } from '@/types/preferences';
 
@@ -29,6 +30,7 @@ interface EnvelopeInputs {
   // envelopeFromInputs tests) to name a field computeEnvelope doesn't consume yet — Task 2
   // wires actual usage into computeEnvelope.
   strengthParams?: StrengthGoalParams | null;
+  hyroxParams?: HyroxGoalParams | null;
 }
 
 // Pure: inputs → envelope. No-race plans run a Base maintenance macrocycle.
@@ -55,6 +57,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     maxHR: i.maxHR,
     ultraParams: i.ultraParams,
     strengthParams: i.strengthParams,
+    hyroxParams: i.hyroxParams,
     weeksRemaining: phaseInfo?.weeksRemaining ?? null,
   });
 }
@@ -68,12 +71,13 @@ export function resolveGoalInputs(
   postedGoal: TrainingGoal | undefined,
   dbGoal: string | null | undefined,
   goalParams: unknown,
-): { sport: string; ultraParams: UltraGoalParams | null; strengthParams: StrengthGoalParams | null } {
+): { sport: string; ultraParams: UltraGoalParams | null; strengthParams: StrengthGoalParams | null; hyroxParams: HyroxGoalParams | null } {
   const effectiveGoal = postedGoal ? primaryGoalFromTrainingGoal(postedGoal) : (dbGoal ?? 'run');
   return {
     sport: effectiveGoal,
     ultraParams: effectiveGoal === 'ultra' ? toUltraParams(goalParams) : null,
     strengthParams: effectiveGoal === 'lift' ? toStrengthParams(goalParams) : null,
+    hyroxParams: effectiveGoal === 'hyrox' ? toHyroxParams(goalParams) : null,
   };
 }
 
