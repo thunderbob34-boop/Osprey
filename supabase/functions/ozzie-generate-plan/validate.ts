@@ -168,7 +168,9 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
       let touched = false;
       const exercises = lp.exercises.map((ex) => {
         const lift = LIFT_OF[ex.name];
-        if (!lift || ex.loadKg == null) return ex;
+        // Skip a comp lift with no 1RM (orm ≤ 0): a partial-provide lifter left this lift
+        // blank, so there's no %1RM band to clamp against — don't clamp a real day into [0,0].
+        if (!lift || ex.loadKg == null || st.oneRepMaxKg[lift] <= 0) return ex;
         const orm = st.oneRepMaxKg[lift];
         const lo = orm * st.zone.percent1RM[0] / 100;
         const hi = orm * st.zone.percent1RM[1] / 100;
