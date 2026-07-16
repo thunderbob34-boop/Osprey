@@ -20,6 +20,12 @@ export function buildStrengthPrescription(input: EnvelopeInput): StrengthPrescri
   if (input.sport !== 'lift') return null;
   const p = input.strengthParams;
   const orm = { squat: p?.oneRepMaxKg.squat ?? 0, bench: p?.oneRepMaxKg.bench ?? 0, deadlift: p?.oneRepMaxKg.deadlift ?? 0 };
+  // A paramless lifter (onboarding "Skip — estimate for me": goal_params null → all-null
+  // maxes) has no 1RM to anchor %1RM loads. Return null so the envelope carries no strength
+  // block and the plan falls back to the general/whitelist strength prompt, instead of
+  // prescribing 0 kg comp lifts. A PARTIAL provide (≥1 max) still builds; its blank lifts
+  // are handled by the edge guardrail + prompt (Fix #2 Part B).
+  if (orm.squat === 0 && orm.bench === 0 && orm.deadlift === 0) return null;
   const pct = STRENGTH_PHASE_PERCENT[input.phase];
   const z = intensityZoneForPercent1RM(pct)!;
   const pr = prilepinRange(pct);

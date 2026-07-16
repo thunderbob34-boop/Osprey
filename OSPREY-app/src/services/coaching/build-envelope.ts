@@ -5,6 +5,8 @@ import { selectBestRunEffort, selectBestRowingSplit } from './anchor';
 import { toSelfReportAnchor, type SelfReportAnchor, type ThresholdAnchorMap } from './baseline';
 import { toUltraParams, type UltraGoalParams } from './ultra-params';
 import { toStrengthParams, type StrengthGoalParams } from './strength-params';
+import { primaryGoalFromTrainingGoal } from './goal-map';
+import type { TrainingGoal, UserPreferences } from '@/types/preferences';
 
 const MILES_PER_KM = 0.621371;
 const RECENT_WINDOW_MS = 56 * 24 * 60 * 60 * 1000; // 8 weeks
@@ -57,10 +59,29 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
   });
 }
 
+// Resolve the effective goal for the envelope build. A plan-builder goal SWITCHER posts
+// their just-picked goal in preferences.primaryGoal, but user_goals.primary_goal in the DB
+// still holds the OLD goal until the edge fn's upsert — which runs AFTER this build. Prefer
+// the posted goal so the first generation is built for the new sport; fall back to the DB
+// value for background/regen and race-event calls that post no preferences.
+export function resolveGoalInputs(
+  postedGoal: TrainingGoal | undefined,
+  dbGoal: string | null | undefined,
+  goalParams: unknown,
+): { sport: string; ultraParams: UltraGoalParams | null; strengthParams: StrengthGoalParams | null } {
+  const effectiveGoal = postedGoal ? primaryGoalFromTrainingGoal(postedGoal) : (dbGoal ?? 'run');
+  return {
+    sport: effectiveGoal,
+    ultraParams: effectiveGoal === 'ultra' ? toUltraParams(goalParams) : null,
+    strengthParams: effectiveGoal === 'lift' ? toStrengthParams(goalParams) : null,
+  };
+}
+
 // Async: gather the athlete's inputs, then invoke generation with the envelope.
 export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}) {
   const { data: auth } = await supabase.auth.getUser();
   const userId = auth?.user?.id;
+  const postedGoal = (extraBody.preferences as UserPreferences | undefined)?.primaryGoal;
 
   let inputs: EnvelopeInputs = {
     sport: 'run', race: null, fitnessLevel: 'beginner', bodyWeightKg: 70,
@@ -101,7 +122,7 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
     const rowingSplit = selectBestRowingSplit(recentRows);
 
     inputs = {
-      sport: g?.primary_goal ?? 'run',
+      ...resolveGoalInputs(postedGoal, g?.primary_goal, g?.goal_params),
       race: g?.target_date && g?.total_weeks_planned ? { targetDate: g.target_date, totalWeeksPlanned: g.total_weeks_planned } : null,
       fitnessLevel: g?.fitness_level ?? 'beginner',
       bodyWeightKg: weightRes.data?.weight_kg ?? 70,
@@ -112,8 +133,6 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       rowingSplitSecPer500: rowingSplit,
       selfReportAnchor: toSelfReportAnchor(g?.threshold_anchor as ThresholdAnchorMap | null),
       maxHR: (maxHrRes.data?.max_heart_rate as number | null) ?? null,
-      ultraParams: g?.primary_goal === 'ultra' ? toUltraParams(g?.goal_params) : null,
-      strengthParams: g?.primary_goal === 'lift' ? toStrengthParams(g?.goal_params) : null,
     };
   }
 

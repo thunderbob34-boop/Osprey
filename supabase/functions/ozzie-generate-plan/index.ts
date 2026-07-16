@@ -8,7 +8,7 @@
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 import { validateAndClamp } from './validate.ts';
 import { routeDisciplineDays, type DisciplineDays } from './goals.ts';
-import { hrGuidance, type HrZoneInfo } from './guidance.ts';
+import { hrGuidance, type HrZoneInfo, strengthGuidance } from './guidance.ts';
 import { enforceBackToBackLongRuns } from './backtoback.ts';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
@@ -345,20 +345,12 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad,
               (z.bike ? ` Bike power endurance Z2 ${z.bike.bands.z2Endurance.min}-${z.bike.bands.z2Endurance.max}w, threshold Z4 ${z.bike.bands.z4Threshold.min}-${z.bike.bands.z4Threshold.max}w (advice only — do NOT pace-clamp bike).` : ' Bike: no FTP — use the HR zones for rides.')
             : ` Bike power zones (from FTP ~${z.ftpWatts}w): endurance Z2 ${z.bands.z2Endurance.min}-${z.bands.z2Endurance.max}w, threshold Z4 ${z.bands.z4Threshold.min}-${z.bands.z4Threshold.max}w. Advice only — target these watts for rides; do NOT distance/pace-clamp bike sessions.`;
 
-  // Powerlifting %1RM/Prilepin guidance, present only when the envelope carries
-  // a strength block (sport === 'lift'). Mirrors StrengthPrescription's numbers
-  // into prose the lift_prescription rule below acts on (loadKg per lift).
-  const s = envelope?.strength;
-  const strengthGuidance = !s ? '' :
-    ` STRENGTH (powerlifting): work the comp lifts at ~${s.workingPercent1RM}% 1RM — squat ${Math.round(s.oneRepMaxKg.squat * s.workingPercent1RM / 100)}kg, bench ${Math.round(s.oneRepMaxKg.bench * s.workingPercent1RM / 100)}kg, deadlift ${Math.round(s.oneRepMaxKg.deadlift * s.workingPercent1RM / 100)}kg (zone "${s.zone.name}", RPE ${s.zone.rpe[0]}-${s.zone.rpe[1]}, RIR ${s.zone.rir[0]}-${s.zone.rir[1]}). Keep top-set volume within Prilepin: ${s.prilepin.repsPerSet[0]}-${s.prilepin.repsPerSet[1]} reps/set, ${s.prilepin.totalReps[0]}-${s.prilepin.totalReps[1]} total reps at this intensity; then back-off volume + a variation + 2-3 accessories. Daily fat ${s.fatG.min}-${s.fatG.max} g; creatine 3-5 g/day.` +
-    (s.attempts ? ` MEET WEEK — plan openers (~90% of goal): squat ${Math.round(s.attempts.squat.opener.min)}-${Math.round(s.attempts.squat.opener.max)}kg, bench ${Math.round(s.attempts.bench.opener.min)}-${Math.round(s.attempts.bench.opener.max)}kg, deadlift ${Math.round(s.attempts.deadlift.opener.min)}-${Math.round(s.attempts.deadlift.opener.max)}kg; each lift's 2nd/3rd build to the goal third.` : '');
-
   const envelopeGuidance = envelope
     ? ` COACHING ENVELOPE (hard constraints — stay inside these): phase=${envelope.phase}, week ${envelope.weekNumber}/${envelope.totalWeeks}, target weekly load ≈ ${envelope.targetWeeklyLoad} TSS, at most ${Math.round(envelope.hardSessionShareMax * 100)}% of sessions hard.` +
       zoneGuidance +
       hrGuidance(envelope.hrZones) +
       ` Daily carbs by day: easy ${envelope.fuel.dailyCarbGByDayType.easy.min}-${envelope.fuel.dailyCarbGByDayType.easy.max} g, hard ${envelope.fuel.dailyCarbGByDayType.high.min}-${envelope.fuel.dailyCarbGByDayType.high.max} g, race ${envelope.fuel.dailyCarbGByDayType.peak.min}-${envelope.fuel.dailyCarbGByDayType.peak.max} g; protein ${envelope.fuel.proteinG.min}-${envelope.fuel.proteinG.max} g/day; in-session ~${envelope.fuel.longSessionCarbGPerHour} g/hr.` +
-      strengthGuidance
+      strengthGuidance(envelope.strength)
     : '';
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {

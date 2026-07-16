@@ -268,3 +268,16 @@ Deno.test('non-lift plan + load-free lift day pass through the guardrail untouch
   assertEquals((out2[0] as any).lift_prescription.exercises[0].loadKg, null); // loadKg: null → pass through
   assertEquals(changed2.length, 0);
 });
+
+Deno.test('guardrail leaves a comp lift with orm=0 untouched (partial-provide lifter)', () => {
+  const strength = { oneRepMaxKg: { squat: 200, bench: 0, deadlift: 240 }, workingPercent1RM: 80, zone: { name: 'Strength-Volume', percent1RM: [75, 85], reps: [3, 6], rpe: [7, 8], rir: [2, 3] }, prilepin: { repsPerSet: [2, 4], totalReps: [10, 20] }, fatG: { min: 1, max: 2 }, attempts: null };
+  const baseEnvelope = {
+    hardSessionShareMax: 1, zones: null,
+    fuel: { dailyCarbGByDayType: { easy: {min:1,max:2}, moderate:{min:1,max:2}, high:{min:1,max:2}, peak:{min:1,max:2} }, proteinG:{min:1,max:2}, longSessionCarbGPerHour:0 },
+  };
+  const benchDay = { dayOffset: 0, session_type: 'lift',
+    lift_prescription: { exercises: [ { name: 'Bench Press', sets: 4, reps: '4', loadKg: 60, note: null } ] } };
+  const { days: out, changed } = validateAndClamp([benchDay] as any, { ...baseEnvelope, strength } as any);
+  assertEquals((out[0] as any).lift_prescription.exercises[0].loadKg, 60); // bench orm=0 → not clamped into [0,0]
+  assertEquals(changed.length, 0);
+});
