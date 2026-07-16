@@ -129,6 +129,18 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   pure append). **⚠️ PRE-SHIP:** device smoke test the 2 lift collection screens (same Expo SSR headless-render
   caveat as ultra). **Follow-ups (non-blocking, filed):** (1) a plan-builder goal-*switcher*'s first generation reads
   a stale `primary_goal` (pre-existing, affects ultra too); (2) a lifter who *skips* the 1RM form gets 0 kg comp lifts.
+  **→ Both RESOLVED in Phase 3 follow-ups (merged `9765833`), below.**
+- **Phase 3 follow-ups** (fixes the two above). **Fix #1 (goal-switch stale envelope) — APP-ONLY:** `invokeGeneratePlan`
+  now prefers the just-picked goal (POSTed `preferences.primaryGoal`, mapped via a new client `goal-map.ts` mirror of the
+  fn's `PRIMARY_GOAL_MAP`) over the stale `user_goals.primary_goal` DB read, so a goal switch builds the right sport's
+  envelope on the FIRST generation; **no edge change.** **Fix #2 (paramless-lift 0 kg):** Part A is APP-ONLY
+  (`buildStrengthPrescription` returns null when a lifter has no 1RMs → falls back to the general strength prompt, which
+  the *current* live fn already handles); **Part B is EDGE and rides THIS redeploy** — `validate.ts` step (d) skips
+  clamping a comp lift with `orm ≤ 0`, and `strengthGuidance` (extracted from `index.ts` into `guidance.ts`) omits 0-orm
+  lifts, so a *partial*-provide lifter is never told or clamped to 0 kg. **NO migration. Non-lift/single-sport
+  byte-identical** (Fix #1 fallback is behavior-preserving; Fix #2 strength logic is `lift`-gated; `validate.ts` a/b/c
+  untouched). Without the redeploy, the partial-provide half of Fix #2 stays broken (stale fn still says "bench 0kg" +
+  clamps to [0,0]); the skip-the-form half (Part A) is correct regardless.
 - **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
   (cycling) + `20260715000002_ultra_primary_goal.sql` (ultra) + `20260715000003_goal_params.sql` (adds
   `user_goals.goal_params` JSONB)** — the first three add values to `primary_goal_enum`; `goal_params` is an additive
