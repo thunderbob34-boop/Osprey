@@ -312,7 +312,7 @@ git commit -m "feat(app): useDisplayZones hook (resolve zones + confidence from 
 - [ ] **Step 1: Build `ZonesCard`**
 
 Create `OSPREY-app/src/components/ZonesCard.tsx`. It calls `useDisplayZones()`; returns `null` if that's `null`. Otherwise it renders a card matching the plan-preview's `summaryCard`/`raceCard` visual language (`Colors.surfaceTeal` bg, `Colors.borderTeal`, a teal `YOUR ZONES` micro-label with `letterSpacing: 1`), containing two rows — an aerobic/easy row (green dot) and a threshold row (amber dot) — each `label` left, `value` right. Build the two `{ label, value }` rows by switching on `zones?.kind` (or HR fallback) per the Band access table above. Format:
-  - pace (sec/mi): a helper `paceMi(sec, units)` → `M:SS/mi`, or convert to `/km` when `units === 'metric'` (`sec / 0.621371` then format). A `Range` renders as `min–max`; the run threshold scalar renders as a single `~M:SS`.
+  - pace (sec/mi): a helper `paceMi(sec, units)` → `M:SS/mi`, or convert to `/km` when `units === 'metric'` (**`sec × 0.621371`** then format — 0.621371 = mi per km; a km is shorter than a mile so it takes fewer sec/km. Dividing is wrong, ~2.6× off). A `Range` renders as `min–max`; the run threshold scalar renders as a single `~M:SS`.
   - swim (sec/100m): `M:SS/100m` (or `/100yd` imperial).
   - rowing (sec/500m): `M:SS/500m`.
   - cycling (watts) / HR (bpm): integer ranges — `min–max w` / `min–max bpm`.
