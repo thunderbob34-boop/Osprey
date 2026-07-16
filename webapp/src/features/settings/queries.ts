@@ -3,6 +3,7 @@ import { supabase } from '../../lib/supabase';
 import type { UnitSystem } from '../../lib/units';
 import { parseThresholdAnchor, type ThresholdAnchorMap } from '../../lib/threshold-anchor';
 import { PrimaryGoalSchema, type PrimaryGoal } from '../../lib/goals';
+import { mergeGoalParams } from '../../lib/goal-params';
 
 export function useUnits(userId: string) {
   return useQuery({
@@ -109,5 +110,22 @@ export function useUserGoal(userId: string) {
         thresholdAnchor: parseThresholdAnchor(data?.threshold_anchor),
       };
     },
+  });
+}
+
+export function useUpdateGoalParams(userId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (patch: Record<string, unknown>) => {
+      const { data: cur, error: readErr } = await supabase
+        .from('user_goals').select('goal_params').eq('user_id', userId).maybeSingle();
+      if (readErr) throw readErr;
+      const next = mergeGoalParams(cur?.goal_params, patch);
+      const { data, error } = await supabase
+        .from('user_goals').update({ goal_params: next }).eq('user_id', userId).select('user_id');
+      if (error) throw error;
+      if (!data || data.length === 0) throw new Error('Could not save — no goals record found for your account.');
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['user-goal', userId] }),
   });
 }
