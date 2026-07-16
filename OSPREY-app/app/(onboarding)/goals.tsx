@@ -68,7 +68,11 @@ export default function GoalsScreen() {
       hint="This shapes your entire plan. You can always change it later."
       continueDisabled={weeklyRunDays + weeklyLiftDays === 0}
       onContinue={() =>
-        router.push(anchorKeyForGoal(primaryGoal) ? '/(onboarding)/baseline' : '/(onboarding)/health')
+        router.push(
+          anchorKeyForGoal(primaryGoal) || primaryGoal === 'lift'
+            ? '/(onboarding)/baseline'
+            : '/(onboarding)/health'
+        )
       }
     >
       {GOALS.map((goal) => (

@@ -143,6 +143,7 @@ export default function WorkoutTab() {
               <TouchableOpacity
                 onPress={() => router.push('/preferences')}
                 style={styles.bannerButton}
+                hitSlop={8}
                 accessibilityRole="button"
                 accessibilityLabel="Recalibrate plan"
               >
@@ -151,6 +152,7 @@ export default function WorkoutTab() {
               <TouchableOpacity
                 onPress={dismissAlert}
                 style={styles.bannerDismiss}
+                hitSlop={12}
                 accessibilityRole="button"
                 accessibilityLabel="Dismiss"
               >
@@ -232,8 +234,8 @@ const styles = StyleSheet.create({
   },
   bannerMessage: { fontSize: 13, color: Colors.textPrimary, lineHeight: 19, marginBottom: 10 },
   bannerActions: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  bannerButton: {},
+  bannerButton: { minHeight: 44, justifyContent: 'center', paddingVertical: 10 },
   bannerButtonText: { fontSize: 13, fontWeight: '700' },
-  bannerDismiss: { padding: 4 },
+  bannerDismiss: { minHeight: 44, minWidth: 44, alignItems: 'center', justifyContent: 'center' },
   bannerDismissText: { fontSize: 13, color: Colors.textMuted },
 });

@@ -76,12 +76,29 @@ export default function BaselineScreen() {
     };
   }, [primaryGoal, userId]);
 
+  function onSkip() {
+    // Preserve any ultra race params (distance/vert/fueling) the athlete already
+    // entered on this screen even when skipping the optional recent-effort anchor.
+    if (primaryGoal === 'ultra') {
+      const u = parseUltraParams({ raceDistance: ultraDistance, vertGainM: ultraVert, gutTrained });
+      if (u.ok) setGoalParams(u.value);
+    }
+    router.push(HEALTH);
+  }
+
   function onContinue() {
     setError(null);
     if (primaryGoal === 'ultra') {
       const u = parseUltraParams({ raceDistance: ultraDistance, vertGainM: ultraVert, gutTrained });
       if (!u.ok) return setError(u.error);
       setGoalParams(u.value);
+      // The recent hard-effort anchor is optional for ultra — only require it
+      // (and only error on it) if the athlete actually started filling it in.
+      const hasRunInput = runMiles.trim() !== '' || runMin.trim() !== '' || runSec.trim() !== '';
+      if (!hasRunInput) {
+        router.push(HEALTH);
+        return;
+      }
     }
     if (primaryGoal === 'lift') {
       const s = parseStrengthParams({ squat, bench, deadlift, goalSquat, goalBench, goalDeadlift });
@@ -243,7 +260,7 @@ export default function BaselineScreen() {
 
       {error ? <Text style={styles.error}>{error}</Text> : null}
 
-      <Pressable onPress={() => router.push(HEALTH)} accessibilityRole="button">
+      <Pressable onPress={onSkip} accessibilityRole="button">
         <Text style={styles.skip}>Skip — estimate for me</Text>
       </Pressable>
     </OnboardingShell>

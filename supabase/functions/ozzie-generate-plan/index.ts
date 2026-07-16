@@ -10,6 +10,7 @@ import { validateAndClamp } from './validate.ts';
 import { routeDisciplineDays, type DisciplineDays } from './goals.ts';
 import { hrGuidance, type HrZoneInfo, strengthGuidance, hyroxGuidance } from './guidance.ts';
 import { enforceBackToBackLongRuns } from './backtoback.ts';
+import { zonedDateString, mondayOfWeek, toDateString } from './date.ts';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
@@ -191,20 +192,6 @@ async function computeTrainingLoad(supabase: ReturnType<typeof createClient>, us
     ctl: Math.round(ctl * 10) / 10,
     tsb: Math.round((ctl - atl) * 10) / 10,
   };
-}
-
-function mondayOfThisWeek(): Date {
-  const now = new Date();
-  const day = now.getDay(); // 0 = Sunday
-  const diff = day === 0 ? -6 : 1 - day;
-  const monday = new Date(now);
-  monday.setHours(0, 0, 0, 0);
-  monday.setDate(now.getDate() + diff);
-  return monday;
-}
-
-function toDateString(d: Date): string {
-  return d.toISOString().slice(0, 10);
 }
 
 interface RescheduleSwap {
@@ -437,7 +424,10 @@ Deno.serve(async (req: Request) => {
   }
 
   const userId = authData.user.id;
-  const weekStart = mondayOfThisWeek();
+  const { data: tzRow } = await supabase.from('users').select('timezone').eq('id', userId).maybeSingle();
+  const timeZone = tzRow?.timezone ?? 'America/Chicago';
+  const todayStr = zonedDateString(timeZone);
+  const weekStart = mondayOfWeek(todayStr);
   const weekStartStr = toDateString(weekStart);
 
   try {
@@ -477,7 +467,6 @@ Deno.serve(async (req: Request) => {
     const existingWeekIsBroken = existingWeek != null && sessionCountForWeek === 0;
 
     if (existingWeek && !existingWeekIsBroken && !forceRebuild) {
-      const todayStr = toDateString(new Date());
       const swaps = await rescheduleMissedSessions(
         supabase,
         userId,
@@ -571,24 +560,40 @@ Deno.serve(async (req: Request) => {
       );
       if (goalsUpsertError) throw goalsUpsertError;
     } else if (body.raceTarget) {
-      // Race plan: map race details to goals context
+      // Race plan: attach race metadata to the athlete's existing goal context
+      // instead of overwriting it — a race target shouldn't reset a non-runner's
+      // sport, lift days, or fitness level to running defaults.
       const race = body.raceTarget;
+      const { data: raceGoalsRow } = await supabase
+        .from('user_goals')
+        .select('primary_goal, weekly_run_days, weekly_lift_days, fitness_level')
+        .eq('user_id', userId)
+        .maybeSingle();
+
+      const rgGoal = raceGoalsRow?.primary_goal ?? 'run';
+      const rgPrimaryDays = raceGoalsRow?.weekly_run_days ?? 4;
+      const rgLiftDays = raceGoalsRow?.weekly_lift_days ?? 1;
+      const rgRouted = routeDisciplineDays(rgGoal, rgPrimaryDays, rgLiftDays, false, false);
+
       goals = {
-        primaryGoal: 'run',
-        weeklyRunDays: 4,
-        weeklyLiftDays: 1,
-        fitnessLevel: 'intermediate',
+        primaryGoal: rgGoal,
+        weeklyRunDays: rgRouted.weeklyRunDays,
+        weeklyLiftDays: rgRouted.weeklyLiftDays,
+        weeklySwimDays: rgRouted.weeklySwimDays,
+        weeklyBikeDays: rgRouted.weeklyBikeDays,
+        weeklyRowDays: rgRouted.weeklyRowDays,
+        fitnessLevel: raceGoalsRow?.fitness_level ?? 'intermediate',
         targetRace: `${race.raceName} (${race.distance})`,
       };
 
       const { error: goalsUpsertError } = await supabase.from('user_goals').upsert(
         {
           user_id: userId,
-          primary_goal: 'run',
+          primary_goal: goals.primaryGoal,
           target_race: goals.targetRace,
           target_date: race.raceDate ?? null,
           total_weeks_planned: race.weeksOut ?? null,
-          weekly_run_days: goals.weeklyRunDays,
+          weekly_run_days: rgPrimaryDays,
           weekly_lift_days: goals.weeklyLiftDays,
           fitness_level: goals.fitnessLevel,
         },
@@ -620,7 +625,17 @@ Deno.serve(async (req: Request) => {
       };
     }
 
-    const planType = goals.weeklyLiftDays > 0 && goals.weeklyRunDays > 0 ? 'hybrid' : goals.weeklyLiftDays > 0 ? 'lift' : 'run';
+    // plan_type_enum only has 'run' | 'lift' | 'hybrid' | 'custom' — a swim/bike/row-only
+    // plan has no dedicated value, so it must fall to 'custom' rather than mislabeling as 'run'.
+    const hasOtherEndurance =
+      (goals.weeklySwimDays ?? 0) > 0 || (goals.weeklyBikeDays ?? 0) > 0 || (goals.weeklyRowDays ?? 0) > 0;
+    const planType = hasOtherEndurance
+      ? 'custom'
+      : goals.weeklyLiftDays > 0 && goals.weeklyRunDays > 0
+        ? 'hybrid'
+        : goals.weeklyLiftDays > 0
+          ? 'lift'
+          : 'run';
 
     const trainingLoad = await computeTrainingLoad(supabase, userId);
 
@@ -759,7 +774,7 @@ Deno.serve(async (req: Request) => {
 
     const sessionRows = finalDays.map((day) => {
       const sessionDate = new Date(weekStart);
-      sessionDate.setDate(weekStart.getDate() + day.dayOffset);
+      sessionDate.setUTCDate(weekStart.getUTCDate() + day.dayOffset);
       return {
         week_id: weekId,
         user_id: userId,
