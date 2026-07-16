@@ -104,6 +104,9 @@ export function useRunTracking(enabled: boolean) {
     return () => {
       cancelled = true;
       subscription?.remove();
+      // Drop the anchor on pause/stop so resuming doesn't compute a delta
+      // against the pre-pause position and lump in distance covered while paused.
+      lastPointRef.current = null;
     };
   }, [enabled, status, addDistance, addTrackPoint]);
 }

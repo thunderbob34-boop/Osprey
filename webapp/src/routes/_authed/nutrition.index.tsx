@@ -209,7 +209,7 @@ function FuelDesk() {
 
   const dayLog = useDayLog(userId, dateStr);
   const targetsRow = useNutritionTargets(userId);
-  const coaching = useNutritionCoaching(isToday);
+  const coaching = useNutritionCoaching(userId, isToday);
   const del = useDeleteLogEntry(userId);
 
   const logged = sumDay(dayLog.data ?? []);

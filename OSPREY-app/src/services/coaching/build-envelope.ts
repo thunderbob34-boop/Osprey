@@ -136,6 +136,18 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
     };
   }
 
+  // A brand-new race target hasn't been persisted to user_goals yet — this very
+  // request is what writes target_date/total_weeks_planned (see the raceTarget
+  // branch in ozzie-generate-plan) — so prefer the freshly-posted race over the
+  // stale (still-null) DB read above. Mirrors the goal-override precedent in
+  // resolveGoalInputs for the same class of "read-before-write" staleness.
+  const postedRaceTarget = extraBody.raceTarget as
+    | { raceDate?: string | null; weeksOut?: number }
+    | undefined;
+  if (postedRaceTarget?.raceDate && postedRaceTarget?.weeksOut) {
+    inputs.race = { targetDate: postedRaceTarget.raceDate, totalWeeksPlanned: postedRaceTarget.weeksOut };
+  }
+
   const envelope = envelopeFromInputs(inputs);
   return supabase.functions.invoke('ozzie-generate-plan', {
     method: 'POST',
