@@ -12,6 +12,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
+import { ZonesCard } from '@/components/ZonesCard';
 import { useAuthStore } from '@/store/authStore';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import { useHydration } from '@/hooks/useHydration';
@@ -483,6 +484,8 @@ export default function PlanPreviewScreen() {
                 ))}
               </View>
             </View>
+
+            <ZonesCard />
 
             <Text style={styles.scheduleLabel}>SCHEDULE</Text>
             <View style={styles.scheduleCard}>
