@@ -12,6 +12,7 @@ import { resolveMaxHR, ultraHRZones, HRZones } from './hr';
 import { ULTRA_DISTANCE_FACTOR } from './ultra-params';
 import { buildStrengthPrescription, StrengthPrescription } from './strength';
 import { buildHyroxPrescription, HyroxPrescription } from './hyrox';
+import { buildCrossfitPrescription, CrossfitPrescription } from './crossfit';
 
 export interface HrZoneInfo {
   maxHR: number;
@@ -31,6 +32,7 @@ export interface CoachingEnvelope {
   fuel: FuelPlan;
   strength: StrengthPrescription | null;
   hyrox: HyroxPrescription | null;
+  crossfit: CrossfitPrescription | null;
 }
 
 export interface EnvelopeInput {
@@ -50,6 +52,7 @@ export interface EnvelopeInput {
   ultraParams?: import('./ultra-params').UltraGoalParams | null;
   strengthParams?: import('./strength-params').StrengthGoalParams | null;
   hyroxParams?: import('./hyrox-params').HyroxGoalParams | null;
+  crossfitParams?: import('./crossfit-params').CrossfitGoalParams | null;
   weeksRemaining?: number | null;
 }
 
@@ -144,6 +147,7 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
 
   const strength = buildStrengthPrescription(input);
   const hyrox = buildHyroxPrescription(input);
+  const crossfit = buildCrossfitPrescription(input);
 
   return {
     sport: input.sport,
@@ -157,5 +161,6 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     fuel: computeFuel(input.sport, input.bodyWeightKg, input.ultraParams?.gutTrained ?? false),
     strength,
     hyrox,
+    crossfit,
   };
 }

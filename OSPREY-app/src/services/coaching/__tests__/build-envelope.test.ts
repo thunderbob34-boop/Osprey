@@ -114,4 +114,14 @@ describe('resolveGoalInputs (goal switch: the posted goal wins over the stale DB
     expect(resolveGoalInputs('run_performance', 'run', null).hyroxParams).toBeNull();
     expect(resolveGoalInputs(undefined, 'lift', { division: 'open_men' }).hyroxParams).toBeNull();
   });
+
+  it('switches to crossfit and populates crossfitParams', () => {
+    const r = resolveGoalInputs('crossfit', 'run', { competing: true, oneRepMaxKg: { backSquat: 140, deadlift: 180, press: 60 } });
+    expect(r.sport).toBe('crossfit');
+    expect(r.crossfitParams).toEqual({ oneRepMaxKg: { backSquat: 140, deadlift: 180, press: 60 }, competing: true, franSec: null });
+    expect(r.strengthParams).toBeNull();
+  });
+  it('leaves crossfitParams null for a non-crossfit goal', () => {
+    expect(resolveGoalInputs('run_performance', 'run', null).crossfitParams).toBeNull();
+  });
 });

@@ -11,7 +11,8 @@ export type PrimaryGoal =
   | 'rowing'
   | 'hyrox'
   | 'cycling'
-  | 'ultra';
+  | 'ultra'
+  | 'crossfit';
 export type ExperienceTier = 'beginner' | 'intermediate' | 'advanced';
 
 export interface OnboardingDraft {

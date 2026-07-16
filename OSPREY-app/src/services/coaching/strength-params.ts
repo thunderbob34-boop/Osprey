@@ -1,6 +1,7 @@
 import { ParseResult } from './baseline';
 import type { UltraGoalParams } from './ultra-params';
 import type { HyroxGoalParams } from './hyrox-params';
+import type { CrossfitGoalParams } from './crossfit-params';
 
 export type PowerliftingLift = 'squat' | 'bench' | 'deadlift';
 type LiftMaxes = { squat: number | null; bench: number | null; deadlift: number | null };
@@ -12,7 +13,7 @@ export interface StrengthGoalParams {
 
 // A sport-specific goal_params blob is one of these. `goal_params` is a generic JSONB
 // column (ultra added it); its shape depends on the athlete's primary_goal.
-export type GoalParams = UltraGoalParams | StrengthGoalParams | HyroxGoalParams;
+export type GoalParams = UltraGoalParams | StrengthGoalParams | HyroxGoalParams | CrossfitGoalParams;
 
 const posKg = (v: unknown): number | null => (typeof v === 'number' && v > 0 && v <= 600 ? Math.round(v) : null);
 const maxes = (o: unknown): LiftMaxes => {

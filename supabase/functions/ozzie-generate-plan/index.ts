@@ -8,7 +8,7 @@
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 import { validateAndClamp } from './validate.ts';
 import { routeDisciplineDays, type DisciplineDays } from './goals.ts';
-import { hrGuidance, type HrZoneInfo, strengthGuidance, hyroxGuidance } from './guidance.ts';
+import { hrGuidance, type HrZoneInfo, strengthGuidance, hyroxGuidance, crossfitGuidance } from './guidance.ts';
 import { enforceBackToBackLongRuns } from './backtoback.ts';
 import { zonedDateString, mondayOfWeek, toDateString } from './date.ts';
 
@@ -151,6 +151,15 @@ interface Envelope {
     stationWeights: { sledPushKg: number; sledPullKg: number; farmersCarryPerHandKg: number; sandbagLungesKg: number; wallBallKg: number };
     sodiumMgPerHour: { min: number; max: number };
     caffeineMg: { min: number; max: number };
+  } | null;
+  // Hand-narrowed mirror of CrossfitPrescription (OSPREY-app/src/services/coaching/crossfit.ts).
+  // Present only when sport === 'crossfit'.
+  crossfit?: {
+    strengthLoadsKg: { backSquat: number; deadlift: number; press: number };
+    workingPercent1RM: number;
+    zoneName: string;
+    energySystems: { system: string; minDurationSec: number; maxDurationSec: number | null; workToRest: string; purpose: string }[];
+    benchmark: { name: string; timeDomain: string; athleteFranSec: number | null; franTier: string | null };
   } | null;
 }
 
@@ -347,7 +356,8 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad,
       hrGuidance(envelope.hrZones) +
       ` Daily carbs by day: easy ${envelope.fuel.dailyCarbGByDayType.easy.min}-${envelope.fuel.dailyCarbGByDayType.easy.max} g, hard ${envelope.fuel.dailyCarbGByDayType.high.min}-${envelope.fuel.dailyCarbGByDayType.high.max} g, race ${envelope.fuel.dailyCarbGByDayType.peak.min}-${envelope.fuel.dailyCarbGByDayType.peak.max} g; protein ${envelope.fuel.proteinG.min}-${envelope.fuel.proteinG.max} g/day; in-session ~${envelope.fuel.longSessionCarbGPerHour} g/hr.` +
       strengthGuidance(envelope.strength) +
-      hyroxGuidance(envelope.hyrox)
+      hyroxGuidance(envelope.hyrox) +
+      crossfitGuidance(envelope.crossfit)
     : '';
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -495,6 +505,7 @@ Deno.serve(async (req: Request) => {
       hyrox: 'hyrox',
       cycling: 'cycling',
       ultra: 'ultra',
+      crossfit: 'crossfit',
     };
 
     // Build goals context: explicit preferences/raceTarget from the request

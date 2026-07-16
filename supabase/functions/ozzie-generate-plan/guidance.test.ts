@@ -1,5 +1,5 @@
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
-import { hrGuidance, type HrZoneInfo, strengthGuidance, type StrengthInfo, hyroxGuidance, type HyroxInfo } from './guidance.ts';
+import { hrGuidance, type HrZoneInfo, strengthGuidance, type StrengthInfo, hyroxGuidance, type HyroxInfo, crossfitGuidance, type CrossfitInfo } from './guidance.ts';
 
 const hr180: HrZoneInfo = {
   maxHR: 180,
@@ -93,4 +93,50 @@ Deno.test('hyroxGuidance states the compromised split, station weights, and race
   assertEquals(g.includes('wall ball 6kg'), true);
   assertEquals(g.includes('500-1000 mg/hr'), true);
   assertEquals(g.includes('descriptions'), true); // station work goes in session notes, not the whitelist
+});
+
+const fullCrossfit: CrossfitInfo = {
+  strengthLoadsKg: { backSquat: 109, deadlift: 140, press: 47 },
+  workingPercent1RM: 78,
+  zoneName: 'Strength-Volume',
+  energySystems: [
+    { system: 'Phosphagen / alactic', minDurationSec: 0, maxDurationSec: 15, workToRest: '1:5-1:10', purpose: 'Power, speed' },
+    { system: 'Glycolytic / anaerobic', minDurationSec: 15, maxDurationSec: 120, workToRest: '1:1-1:3', purpose: 'Lactate tolerance' },
+    { system: 'Aerobic threshold', minDurationSec: 120, maxDurationSec: 600, workToRest: 'Short rest', purpose: 'Sustainable power' },
+    { system: 'Aerobic base (Z2)', minDurationSec: 600, maxDurationSec: null, workToRest: 'Continuous', purpose: 'Engine & recovery' },
+  ],
+  benchmark: { name: 'Fran', timeDomain: 'short', athleteFranSec: 200, franTier: 'intermediate' },
+};
+
+Deno.test('crossfitGuidance returns empty for null/undefined', () => {
+  assertEquals(crossfitGuidance(null), '');
+  assertEquals(crossfitGuidance(undefined), '');
+});
+
+Deno.test('crossfitGuidance states the concurrent modality emphasis, strength loads, energy systems, and benchmark', () => {
+  const g = crossfitGuidance(fullCrossfit);
+  assertEquals(g.includes('back squat 109kg'), true);
+  assertEquals(g.includes('deadlift 140kg'), true);
+  assertEquals(g.includes('press 47kg'), true);
+  assertEquals(g.includes('~78% 1RM'), true); // the phase %
+  assertEquals(g.includes('Fran'), true); // benchmark to test
+  assertEquals(g.includes('intermediate'), true); // athlete's Fran tier read
+  assertEquals(g.includes('1:5-1:10'), true); // energy-system work:rest framework
+  assertEquals(g.includes('descriptions'), true);
+  assertEquals(g.includes('ozzie_notes'), true); // gymnastics/metcon steered to notes, not the whitelist
+  assertEquals(g.includes('lift_prescription'), true);
+});
+
+Deno.test('crossfitGuidance omits a lift with no 1RM (load=0) from the load line and cues RPE', () => {
+  const g = crossfitGuidance({ ...fullCrossfit, strengthLoadsKg: { backSquat: 109, deadlift: 140, press: 0 } });
+  assertEquals(g.includes('back squat 109kg'), true);
+  assertEquals(g.includes('deadlift 140kg'), true);
+  assertEquals(/press \d/.test(g), false); // no "press 0kg" or any press load shown
+  assertEquals(g.includes('RPE'), true);
+});
+
+Deno.test('crossfitGuidance does not claim a Fran tier when none is on file', () => {
+  const g = crossfitGuidance({ ...fullCrossfit, benchmark: { ...fullCrossfit.benchmark, athleteFranSec: null, franTier: null } });
+  assertEquals(g.includes('Fran'), true); // still names the benchmark to test
+  assertEquals(g.includes('intermediate'), false);
 });

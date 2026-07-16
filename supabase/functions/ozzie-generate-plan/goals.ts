@@ -51,6 +51,17 @@ export function routeDisciplineDays(
       weeklyRowDays: 0,
     };
   }
+  if (primaryGoal === 'crossfit') {
+    // Mixed-modal, strength-anchored: most sessions carry a barbell + a metcon; keep a
+    // couple of dedicated engine days (docs/coaching/crossfit.md §3).
+    return {
+      weeklyRunDays: Math.min(2, liftDays),
+      weeklyLiftDays: primaryDays,
+      weeklySwimDays: includeSwim ? 1 : 0,
+      weeklyBikeDays: includeBike ? 1 : 0,
+      weeklyRowDays: 0,
+    };
+  }
   const discipline = ENDURANCE_PRIMARY[primaryGoal] ?? 'run';
   return {
     weeklyRunDays: discipline === 'run' ? primaryDays : 0,

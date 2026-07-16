@@ -15,6 +15,7 @@ const GOALS: Array<{ id: PrimaryGoal; icon: string; title: string; desc: string 
   { id: 'swim', icon: '🏊', title: 'Swim faster', desc: 'Pool or open water — CSS-paced zones' },
   { id: 'rowing', icon: '🚣', title: 'Row stronger', desc: 'Erg or water — 2k-split zones' },
   { id: 'hyrox', icon: '🏋️‍♂️', title: 'Hyrox', desc: 'Run + functional strength stations' },
+  { id: 'crossfit', icon: '🤸', title: 'CrossFit', desc: 'Squat, deadlift, press — plus benchmark WODs' },
   { id: 'cycling', icon: '🚴', title: 'Ride faster', desc: 'Road or indoor — power & HR zones' },
   { id: 'weight_loss', icon: '⚖️', title: 'Lose weight', desc: 'Performance + body composition' },
 ];
@@ -69,7 +70,7 @@ export default function GoalsScreen() {
       continueDisabled={weeklyRunDays + weeklyLiftDays === 0}
       onContinue={() =>
         router.push(
-          anchorKeyForGoal(primaryGoal) || primaryGoal === 'lift'
+          anchorKeyForGoal(primaryGoal) || primaryGoal === 'lift' || primaryGoal === 'crossfit'
             ? '/(onboarding)/baseline'
             : '/(onboarding)/health'
         )

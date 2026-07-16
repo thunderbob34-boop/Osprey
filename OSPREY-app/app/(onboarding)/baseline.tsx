@@ -16,6 +16,7 @@ import { estimateFTPFromTwentyMinPower } from '@/services/calculators/triathlon'
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
 import { parseHyroxParams, type HyroxDivision } from '@/services/coaching/hyrox-params';
 import { parseStrengthParams } from '@/services/coaching/strength-params';
+import { parseCrossfitParams } from '@/services/coaching/crossfit-params';
 import { bestE1rmForLift, fetchLiftAnalytics } from '@/services/lift-analytics';
 import { Colors } from '@/constants/colors';
 
@@ -50,6 +51,10 @@ export default function BaselineScreen() {
   const [division, setDivision] = useState<HyroxDivision>('open_men');
   const [squat, setSquat] = useState(''); const [bench, setBench] = useState(''); const [deadlift, setDeadlift] = useState('');
   const [goalSquat, setGoalSquat] = useState(''); const [goalBench, setGoalBench] = useState(''); const [goalDeadlift, setGoalDeadlift] = useState('');
+  // CrossFit's deadlift is a separate field from lift's (different GoalParams shape) —
+  // named distinctly to avoid colliding with the `deadlift` state above.
+  const [backSquat, setBackSquat] = useState(''); const [crossfitDeadlift, setCrossfitDeadlift] = useState(''); const [press, setPress] = useState('');
+  const [competing, setCompeting] = useState(false); const [fran, setFran] = useState('');
   const [error, setError] = useState<string | null>(null);
 
   // Hybrid pre-fill: seed each 1RM from the athlete's logged sets (best e1RM
@@ -107,6 +112,15 @@ export default function BaselineScreen() {
       router.push(HEALTH);
       return;
     }
+    if (primaryGoal === 'crossfit') {
+      // No run anchor for crossfit — mirrors the lift branch above (early-return),
+      // not the ultra/hyrox fall-through into run-anchor collection.
+      const c = parseCrossfitParams({ backSquat, deadlift: crossfitDeadlift, press, competing, fran });
+      if (!c.ok) return setError(c.error);
+      setGoalParams(c.value);
+      router.push(HEALTH);
+      return;
+    }
     if (primaryGoal === 'hyrox') {
       const h = parseHyroxParams({ division, targetTimeMinutes: '' });
       if (!h.ok) return setError(h.error);
@@ -138,7 +152,7 @@ export default function BaselineScreen() {
   }
 
   const title =
-    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : primaryGoal === 'hyrox' ? 'Your division, and a recent hard run' : primaryGoal === 'lift' ? 'Know your current maxes?' : 'A recent hard run?';
+    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : primaryGoal === 'hyrox' ? 'Your division, and a recent hard run' : primaryGoal === 'lift' ? 'Know your current maxes?' : primaryGoal === 'crossfit' ? 'Know your crossfit numbers?' : 'A recent hard run?';
 
   return (
     <OnboardingShell
@@ -226,6 +240,29 @@ export default function BaselineScreen() {
           <NumberField label="Goal squat — 3rd attempt (kg, optional)" value={goalSquat} onChangeText={setGoalSquat} placeholder="150" />
           <NumberField label="Goal bench — 3rd attempt (kg, optional)" value={goalBench} onChangeText={setGoalBench} placeholder="105" />
           <NumberField label="Goal deadlift — 3rd attempt (kg, optional)" value={goalDeadlift} onChangeText={setGoalDeadlift} placeholder="190" />
+        </>
+      ) : primaryGoal === 'crossfit' ? (
+        <>
+          <NumberField label="Back squat — 1RM (kg, optional)" value={backSquat} onChangeText={setBackSquat} placeholder="120" />
+          <NumberField label="Deadlift — 1RM (kg, optional)" value={crossfitDeadlift} onChangeText={setCrossfitDeadlift} placeholder="160" />
+          <NumberField label="Press — 1RM (kg, optional)" value={press} onChangeText={setPress} placeholder="60" />
+          <View style={styles.field}>
+            <Text style={styles.label}>Competing?</Text>
+            <View style={styles.chipRow}>
+              <Pressable
+                style={[styles.chip, competing && styles.chipSelected]}
+                onPress={() => setCompeting((v) => !v)}
+                accessibilityRole="checkbox"
+                accessibilityLabel="Training to compete (Open, etc.)"
+                accessibilityState={{ checked: competing }}
+              >
+                <Text style={[styles.chipText, competing && styles.chipTextSelected]}>
+                  🏆 Training to compete (Open, regionals, etc.)
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+          <NumberField label="Fran time — seconds (optional)" value={fran} onChangeText={setFran} placeholder="240" />
         </>
       ) : (
         <>

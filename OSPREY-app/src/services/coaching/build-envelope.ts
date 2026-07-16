@@ -6,6 +6,7 @@ import { toSelfReportAnchor, type SelfReportAnchor, type ThresholdAnchorMap } fr
 import { toUltraParams, type UltraGoalParams } from './ultra-params';
 import { toStrengthParams, type StrengthGoalParams } from './strength-params';
 import { toHyroxParams, type HyroxGoalParams } from './hyrox-params';
+import { toCrossfitParams, type CrossfitGoalParams } from './crossfit-params';
 import { primaryGoalFromTrainingGoal } from './goal-map';
 import type { TrainingGoal, UserPreferences } from '@/types/preferences';
 
@@ -31,6 +32,7 @@ interface EnvelopeInputs {
   // wires actual usage into computeEnvelope.
   strengthParams?: StrengthGoalParams | null;
   hyroxParams?: HyroxGoalParams | null;
+  crossfitParams?: CrossfitGoalParams | null;
 }
 
 // Pure: inputs → envelope. No-race plans run a Base maintenance macrocycle.
@@ -58,6 +60,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     ultraParams: i.ultraParams,
     strengthParams: i.strengthParams,
     hyroxParams: i.hyroxParams,
+    crossfitParams: i.crossfitParams,
     weeksRemaining: phaseInfo?.weeksRemaining ?? null,
   });
 }
@@ -71,13 +74,14 @@ export function resolveGoalInputs(
   postedGoal: TrainingGoal | undefined,
   dbGoal: string | null | undefined,
   goalParams: unknown,
-): { sport: string; ultraParams: UltraGoalParams | null; strengthParams: StrengthGoalParams | null; hyroxParams: HyroxGoalParams | null } {
+): { sport: string; ultraParams: UltraGoalParams | null; strengthParams: StrengthGoalParams | null; hyroxParams: HyroxGoalParams | null; crossfitParams: CrossfitGoalParams | null } {
   const effectiveGoal = postedGoal ? primaryGoalFromTrainingGoal(postedGoal) : (dbGoal ?? 'run');
   return {
     sport: effectiveGoal,
     ultraParams: effectiveGoal === 'ultra' ? toUltraParams(goalParams) : null,
     strengthParams: effectiveGoal === 'lift' ? toStrengthParams(goalParams) : null,
     hyroxParams: effectiveGoal === 'hyrox' ? toHyroxParams(goalParams) : null,
+    crossfitParams: effectiveGoal === 'crossfit' ? toCrossfitParams(goalParams) : null,
   };
 }
 
