@@ -141,6 +141,18 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   byte-identical** (Fix #1 fallback is behavior-preserving; Fix #2 strength logic is `lift`-gated; `validate.ts` a/b/c
   untouched). Without the redeploy, the partial-provide half of Fix #2 stays broken (stale fn still says "bench 0kg" +
   clamps to [0,0]); the skip-the-form half (Part A) is correct regardless.
+- **Phase 3 (hyrox)** — `hyrox` becomes a real hybrid engine by wiring the already-built (orphaned) hyrox calculators
+  into the coaching engine: the app sends a new `envelope.hyrox` field (compromised run-pace split + division-fixed
+  station weights + race electrolytes, from the athlete's division in `goal_params`); the edge fn gains a `hyroxGuidance`
+  prompt block (compromised-running intervals + station strength-endurance + roxzone) and an `Envelope.hyrox` mirror.
+  Hyrox **reuses run zones** (`blueprintSport('hyrox')='run'`) — **no ZoneSet variant, `validate.ts` untouched**. Station
+  work is steered into session descriptions/ozzie_notes (NOT the `lift_prescription` whitelist). **NO migration** (the
+  `hyrox` enum is already in `20260714000003` below; `goal_params` exists). **App + edge MUST deploy together:** a new-app
+  hyrox plan hitting the *old* fn gets a generic run plan (soft degrade — no compromised-split/station guidance).
+  **Non-hyrox plans byte-identical** (all hyrox logic sport-gated; `validate.ts` unchanged). **⚠️ PRE-SHIP:** device smoke
+  test the 2 hyrox collection screens (division picker; same Expo SSR headless-render caveat as ultra/powerlifting).
+  **Follow-up (non-blocking, filed):** `goal_params.targetTimeMinutes` is plumbed but not yet collected/consumed (both
+  UIs hardcode `''`) — wire it to prompt pacing + `hyroxInRaceCarbGPerHour(targetTime)` in a later slice.
 - **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
   (cycling) + `20260715000002_ultra_primary_goal.sql` (ultra) + `20260715000003_goal_params.sql` (adds
   `user_goals.goal_params` JSONB)** — the first three add values to `primary_goal_enum`; `goal_params` is an additive
