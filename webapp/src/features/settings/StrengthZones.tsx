@@ -53,7 +53,7 @@ export function StrengthZones({ userId }: { userId: string }) {
   const update = useUpdateGoalParams(userId);
   const units = useUnits(userId);
 
-  if (!goal.data || !['lift', 'crossfit', 'hyrox'].includes(goal.data.primaryGoal ?? '')) return null;
+  if (!goal.data || !units.data || !['lift', 'crossfit', 'hyrox'].includes(goal.data.primaryGoal ?? '')) return null;
 
   const unitSystem: UnitSystem = units.data ?? 'imperial';
   const phase = phaseOrBase({
