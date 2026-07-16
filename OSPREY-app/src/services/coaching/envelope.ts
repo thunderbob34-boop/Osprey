@@ -53,6 +53,66 @@ export interface EnvelopeInput {
   weeksRemaining?: number | null;
 }
 
+export type ZonesConfidence = 'measured' | 'estimated';
+
+// Zone dispatch + a client-only confidence signal. `estimated` = the sport's pace/power
+// anchor is a pure tier fallback (no self-report AND no logged data); `measured` otherwise.
+// computeEnvelope consumes only `.zones` (byte-identical); the display path uses both.
+export function resolveZones(input: EnvelopeInput): { zones: ZoneSet | null; zonesConfidence: ZonesConfidence } {
+  const runConfidence = (): ZonesConfidence =>
+    input.selfReportAnchor?.thresholdSecPerMile != null
+      ? 'measured'
+      : resolveRunningAnchor({ bestRunMiles: input.bestRunMiles, bestRunTimeS: input.bestRunTimeS, fitnessLevel: input.fitnessLevel }).source === 'derived'
+        ? 'measured'
+        : 'estimated';
+
+  let zones: ZoneSet | null = null;
+  let zonesConfidence: ZonesConfidence = 'estimated';
+
+  if (input.sport === 'triathlon') {
+    const t =
+      input.selfReportAnchor?.thresholdSecPerMile ??
+      resolveRunningAnchor({ bestRunMiles: input.bestRunMiles, bestRunTimeS: input.bestRunTimeS, fitnessLevel: input.fitnessLevel }).thresholdSecPerMile;
+    const css = input.selfReportAnchor?.cssSecPer100 ?? estimateSwimCssByTier(input.fitnessLevel);
+    const ftp = input.selfReportAnchor?.ftpWatts;
+    zones = {
+      kind: 'triathlon',
+      swim: { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) },
+      run: { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) },
+      bike: ftp != null ? { kind: 'cycling', ftpWatts: ftp, bands: cyclingPowerZones(ftp) } : null,
+    };
+    const swimConf: ZonesConfidence = input.selfReportAnchor?.cssSecPer100 != null ? 'measured' : 'estimated';
+    zonesConfidence = runConfidence() === 'estimated' || swimConf === 'estimated' ? 'estimated' : 'measured';
+  } else {
+    const bp = blueprintSport(input.sport);
+    if (bp === 'run') {
+      const t =
+        input.selfReportAnchor?.thresholdSecPerMile ??
+        resolveRunningAnchor({ bestRunMiles: input.bestRunMiles, bestRunTimeS: input.bestRunTimeS, fitnessLevel: input.fitnessLevel }).thresholdSecPerMile;
+      zones = { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) };
+      zonesConfidence = runConfidence();
+    } else if (bp === 'swim') {
+      const css = input.selfReportAnchor?.cssSecPer100 ?? estimateSwimCssByTier(input.fitnessLevel);
+      zones = { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) };
+      zonesConfidence = input.selfReportAnchor?.cssSecPer100 != null ? 'measured' : 'estimated';
+    } else if (bp === 'rowing') {
+      const hasSplit = input.selfReportAnchor?.splitSecPer500 != null || input.rowingSplitSecPer500 != null;
+      const split =
+        input.selfReportAnchor?.splitSecPer500 ?? input.rowingSplitSecPer500 ?? estimateRowingSplitByTier(input.fitnessLevel);
+      zones = { kind: 'rowing', splitSecPer500: split, bands: rowingTrainingZones(split) };
+      zonesConfidence = hasSplit ? 'measured' : 'estimated';
+    } else if (bp === 'cycling') {
+      const ftp = input.selfReportAnchor?.ftpWatts;
+      if (ftp != null) {
+        zones = { kind: 'cycling', ftpWatts: ftp, bands: cyclingPowerZones(ftp) };
+        zonesConfidence = 'measured';
+      }
+      // else zones stays null → the display falls back to hrZones (confidence from hrZones.source)
+    }
+  }
+  return { zones, zonesConfidence };
+}
+
 export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
   const isUltra = input.sport === 'ultra';
   const distanceFactor = isUltra ? (ULTRA_DISTANCE_FACTOR[input.ultraParams?.raceDistance ?? '50k'] ?? 1) : 1;
@@ -77,51 +137,7 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     }));
   }
 
-  let zones: ZoneSet | null = null;
-  if (input.sport === 'triathlon') {
-    const t =
-      input.selfReportAnchor?.thresholdSecPerMile ??
-      resolveRunningAnchor({
-        bestRunMiles: input.bestRunMiles,
-        bestRunTimeS: input.bestRunTimeS,
-        fitnessLevel: input.fitnessLevel,
-      }).thresholdSecPerMile;
-    const css = input.selfReportAnchor?.cssSecPer100 ?? estimateSwimCssByTier(input.fitnessLevel);
-    const ftp = input.selfReportAnchor?.ftpWatts;
-    zones = {
-      kind: 'triathlon',
-      swim: { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) },
-      run: { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) },
-      bike: ftp != null ? { kind: 'cycling', ftpWatts: ftp, bands: cyclingPowerZones(ftp) } : null,
-    };
-  } else {
-    const bp = blueprintSport(input.sport);
-    if (bp === 'run') {
-      const t =
-        input.selfReportAnchor?.thresholdSecPerMile ??
-        resolveRunningAnchor({
-          bestRunMiles: input.bestRunMiles,
-          bestRunTimeS: input.bestRunTimeS,
-          fitnessLevel: input.fitnessLevel,
-        }).thresholdSecPerMile;
-      zones = { kind: 'run', thresholdSecPerMile: t, bands: runningPaceZones(t) };
-    } else if (bp === 'swim') {
-      const css = input.selfReportAnchor?.cssSecPer100 ?? estimateSwimCssByTier(input.fitnessLevel);
-      zones = { kind: 'swim', cssSecPer100: css, bands: swimPaceZones(css) };
-    } else if (bp === 'rowing') {
-      const split =
-        input.selfReportAnchor?.splitSecPer500 ??
-        input.rowingSplitSecPer500 ??
-        estimateRowingSplitByTier(input.fitnessLevel);
-      zones = { kind: 'rowing', splitSecPer500: split, bands: rowingTrainingZones(split) };
-    } else if (bp === 'cycling') {
-      const ftp = input.selfReportAnchor?.ftpWatts;
-      if (ftp != null) {
-        zones = { kind: 'cycling', ftpWatts: ftp, bands: cyclingPowerZones(ftp) };
-      }
-      // else zones stays null → the universal hrZones (2b-iii) carries the cyclist's guidance
-    }
-  }
+  const { zones } = resolveZones(input);
 
   const hr = resolveMaxHR(input.maxHR ?? null);
   const hrZones: HrZoneInfo = { maxHR: hr.maxHR, source: hr.source, bands: ultraHRZones(hr.maxHR) };

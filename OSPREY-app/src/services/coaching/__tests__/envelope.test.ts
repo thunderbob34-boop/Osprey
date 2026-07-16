@@ -1,4 +1,4 @@
-import { computeEnvelope, EnvelopeInput } from '@/services/coaching/envelope';
+import { computeEnvelope, resolveZones, EnvelopeInput } from '@/services/coaching/envelope';
 import { ultraHRZones } from '@/services/coaching/hr';
 import { cyclingPowerZones } from '@/services/calculators/cycling';
 import { swimPaceZones } from '@/services/calculators/swimming';
@@ -228,5 +228,42 @@ describe('computeEnvelope hyrox prescription', () => {
     expect(withHyrox.hyrox).toBeNull();
     expect(withoutHyrox.hyrox).toBeNull();
     expect(withHyrox).toEqual(withoutHyrox); // hyroxParams fully inert for sport: 'run'
+  });
+});
+
+describe('resolveZones confidence', () => {
+  const base = {
+    sport: 'run', phase: 'Base' as const, weekNumber: 1, totalWeeks: 8, baselineLoad: 200, prevWeekLoad: null,
+    bestRunMiles: null, bestRunTimeS: null, fitnessLevel: 'intermediate', bodyWeightKg: 70, rowingSplitSecPer500: null,
+  } as const;
+
+  it('run: estimated with no anchor + no data, measured when data-derived, measured when self-reported', () => {
+    expect(resolveZones({ ...base }).zonesConfidence).toBe('estimated');                          // tier fallback
+    expect(resolveZones({ ...base, bestRunMiles: 3.1, bestRunTimeS: 1200 }).zonesConfidence).toBe('measured'); // derived
+    expect(resolveZones({ ...base, selfReportAnchor: { thresholdSecPerMile: 440, cssSecPer100: null, splitSecPer500: null, ftpWatts: null } }).zonesConfidence).toBe('measured');
+  });
+  it('swim: measured only with a self-reported CSS', () => {
+    expect(resolveZones({ ...base, sport: 'swim' }).zonesConfidence).toBe('estimated');
+    expect(resolveZones({ ...base, sport: 'swim', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: 90, splitSecPer500: null, ftpWatts: null } }).zonesConfidence).toBe('measured');
+  });
+  it('rowing: measured with logged split data, estimated on the tier fallback', () => {
+    expect(resolveZones({ ...base, sport: 'rowing' }).zonesConfidence).toBe('estimated');
+    expect(resolveZones({ ...base, sport: 'rowing', rowingSplitSecPer500: 118 }).zonesConfidence).toBe('measured');
+  });
+  it('cycling: measured with FTP (power zones), null zones without FTP', () => {
+    const withFtp = resolveZones({ ...base, sport: 'cycling', selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: null, ftpWatts: 240 } });
+    expect(withFtp.zones?.kind).toBe('cycling');
+    expect(withFtp.zonesConfidence).toBe('measured');
+    expect(resolveZones({ ...base, sport: 'cycling' }).zones).toBeNull(); // → display falls back to HR
+  });
+  it('triathlon: estimated if any shown discipline is estimated', () => {
+    const allSelf = resolveZones({ ...base, sport: 'triathlon', selfReportAnchor: { thresholdSecPerMile: 440, cssSecPer100: 90, splitSecPer500: null, ftpWatts: 240 } });
+    expect(allSelf.zonesConfidence).toBe('measured');
+    const noSwim = resolveZones({ ...base, sport: 'triathlon', selfReportAnchor: { thresholdSecPerMile: 440, cssSecPer100: null, splitSecPer500: null, ftpWatts: 240 } });
+    expect(noSwim.zonesConfidence).toBe('estimated'); // swim fell to tier
+  });
+  it('computeEnvelope zones equal resolveZones zones (extraction is faithful)', () => {
+    const input: EnvelopeInput = { ...base, sport: 'rowing', rowingSplitSecPer500: 118 };
+    expect(computeEnvelope(input).zones).toEqual(resolveZones(input).zones);
   });
 });
