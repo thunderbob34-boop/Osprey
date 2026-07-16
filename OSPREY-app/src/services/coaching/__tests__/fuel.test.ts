@@ -46,4 +46,11 @@ describe('computeFuel', () => {
     expect(f.proteinG.min).toBe(Math.round(70 * 1.6));
     expect(f.longSessionCarbGPerHour).toBe(45); // midpoint hyroxInRaceCarbGPerHour(90) = {30,60}
   });
+  it('gives crossfit its nutrition (4-8 g/kg carbs) + a race in-session rate', () => {
+    const f = computeFuel('crossfit', 80);
+    expect(f.dailyCarbGByDayType.easy.min).toBe(Math.round(4 * 80)); // 320
+    expect(f.dailyCarbGByDayType.peak.max).toBe(Math.round(8 * 80)); // 640
+    expect(f.proteinG.min).toBe(Math.round(80 * 1.6));
+    expect(f.longSessionCarbGPerHour).toBeGreaterThan(0);            // doubles/long metcons
+  });
 });
