@@ -1,5 +1,5 @@
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
-import { hrGuidance, type HrZoneInfo, strengthGuidance, type StrengthInfo } from './guidance.ts';
+import { hrGuidance, type HrZoneInfo, strengthGuidance, type StrengthInfo, hyroxGuidance, type HyroxInfo } from './guidance.ts';
 
 const hr180: HrZoneInfo = {
   maxHR: 180,
@@ -71,4 +71,26 @@ Deno.test('strengthGuidance omits a 0-orm lift from the meet-week openers too', 
   assertEquals(g.includes('squat 180-184kg'), true);
   assertEquals(g.includes('deadlift 214-218kg'), true);
   assertEquals(/bench \d/.test(g), false); // no bench opener line
+});
+
+const fullHyrox: HyroxInfo = {
+  division: 'open_men',
+  compromisedRunSplitSecPerKm: { min: 315, max: 330 },
+  stationWeights: { sledPushKg: 152, sledPullKg: 103, farmersCarryPerHandKg: 24, sandbagLungesKg: 20, wallBallKg: 6 },
+  sodiumMgPerHour: { min: 500, max: 1000 },
+  caffeineMg: { min: 210, max: 420 },
+};
+
+Deno.test('hyroxGuidance returns empty for null/undefined', () => {
+  assertEquals(hyroxGuidance(null), '');
+  assertEquals(hyroxGuidance(undefined), '');
+});
+
+Deno.test('hyroxGuidance states the compromised split, station weights, and race electrolytes', () => {
+  const g = hyroxGuidance(fullHyrox);
+  assertEquals(g.includes('315-330 s/km'), true);
+  assertEquals(g.includes('sled push 152kg'), true);
+  assertEquals(g.includes('wall ball 6kg'), true);
+  assertEquals(g.includes('500-1000 mg/hr'), true);
+  assertEquals(g.includes('descriptions'), true); // station work goes in session notes, not the whitelist
 });
