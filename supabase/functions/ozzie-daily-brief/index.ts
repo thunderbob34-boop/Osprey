@@ -1,8 +1,9 @@
-// Ozzie Daily Brief — AI planning engine v1
+// Ozzie Daily Brief
 //
-// Gathers a user's recovery, load, today's planned session, and recent
-// training history, then asks GPT-4o-mini to write today's brief in
-// Ozzie's voice plus a one-line "why" behind today's recommendation.
+// Gathers a user's recovery, load, today's planned session, and recent training
+// history, then writes today's brief in Ozzie's voice plus a one-line "why".
+// DEFAULTS to a deterministic, $0 template (template.ts) — no OpenAI call; set
+// OZZIE_LLM_PROVIDER=openai|cloudflare to generate it with an LLM instead.
 // Result is cached in ozzie_insights so repeat calls same day are free.
 
 import { createClient } from 'jsr:@supabase/supabase-js@2';
@@ -320,11 +321,13 @@ Deno.serve(async (req: Request) => {
 
     const context = await buildContext(supabase, userId, timeZone);
     const restRecommendation = deriveRestRecommendation(context);
-    // OZZIE_LLM_PROVIDER = 'template' skips the LLM entirely (deterministic,
-    // $0, fully private); 'openai'/'cloudflare' generate via generateBrief.
-    const brief = activeProvider() === 'template'
-      ? templateBrief(context, restRecommendation, weather, schedule)
-      : await generateBrief(context, restRecommendation, weather, schedule);
+    // The daily brief DEFAULTS to the deterministic, $0 template. Only an
+    // explicit OZZIE_LLM_PROVIDER=openai (or =cloudflare) generates it with an
+    // LLM; anything else (incl. unset or a typo) falls back to the free path.
+    const provider = activeProvider('template');
+    const brief = provider === 'openai' || provider === 'cloudflare'
+      ? await generateBrief(context, restRecommendation, weather, schedule)
+      : templateBrief(context, restRecommendation, weather, schedule);
     const { insight_text, why_reasoning, habit_tip } = brief;
 
     const { error: insertError } = await supabase.from('ozzie_insights').insert({

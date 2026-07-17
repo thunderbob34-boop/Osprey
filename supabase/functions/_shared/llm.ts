@@ -36,13 +36,18 @@ export interface ChatOptions {
 // Read the provider lazily (inside the call), NOT at module load — so importing
 // this file for its pure helpers (parseJsonLoose in tests) needs no env access,
 // and there are no import-time side effects.
-function providerName(): string {
-  return (Deno.env.get('OZZIE_LLM_PROVIDER') ?? 'openai').toLowerCase();
+function providerName(fallback = 'openai'): string {
+  return (Deno.env.get('OZZIE_LLM_PROVIDER') ?? fallback).toLowerCase();
 }
 
-/** Which backend chatComplete() will use — handy for logging an A/B run. */
-export function activeProvider(): string {
-  return providerName();
+/**
+ * Which backend a caller should use. `fallback` is the default when
+ * OZZIE_LLM_PROVIDER is unset, so a function can pick its own default — the
+ * daily brief passes 'template' to run free by default — while chatComplete's
+ * own LLM dispatch still falls back to openai.
+ */
+export function activeProvider(fallback = 'openai'): string {
+  return providerName(fallback);
 }
 
 export async function chatComplete(messages: ChatMessage[], opts: ChatOptions = {}): Promise<string> {
