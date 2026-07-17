@@ -181,8 +181,16 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   collection screens (3 1RMs + compete toggle + Fran). **Follow-ups (filed):** (1) the `competing` toggle is collected
   but inert in the plan — a competing athlete is still periodized via a set `target_date`; wire its intensity-bias when
   the Open-week competition-peaking slice lands; (2) `primaryDayLabel('crossfit')` shows "Run days" (small label fix).
-- **Webapp Ozzie chat (NEW edge fn `ozzie-chat` + NEW migration `20260717000001`) — INDEPENDENT of everything above.** A grounded, streaming
-  coaching chat at the webapp's `/chat`. Adds the **ninth** edge function, `ozzie-chat` (the FIRST that streams SSE rather than
+- **Webapp Ozzie chat (NEW edge fn `ozzie-chat` + NEW migration `20260717000001`) — ✅ DEPLOYED 2026-07-17 (independent of everything above).**
+  Migration applied via MCP `apply_migration` (live version differs from the repo filename — the documented drift; tables + RLS +
+  narrow grants verified: `ozzie_conversations` SELECT+INSERT, `ozzie_messages` SELECT-only, both RLS-enabled with `*_self`
+  policies). Function deployed via MCP `deploy_edge_function` (**`verify_jwt: true`** — matches all 10 other fns incl. the
+  browser-facing `ozzie-race-briefing`; the platform exempts the OPTIONS preflight from JWT and adds CORS to its own 401s, and the
+  fn does its own `getUser` auth). VERIFIED LIVE: OPTIONS preflight → `200` + ACAO + the 4 Allow-Headers from the fn's CORS (so the
+  module booted — `./context.ts`/`./stream.ts` imports resolved); a bogus-JWT POST → `401` + ACAO (auth gate active). **⚠️ STILL
+  PENDING: the authenticated happy path** (a real send → streamed reply → both turns persisted) — needs a logged-in session, so
+  run the ~2-min `/chat` click-through (now doable via `npm run dev` + login, since the backend is live). A grounded, streaming
+  coaching chat at the webapp's `/chat`. Was the **ninth** edge function, `ozzie-chat` (the FIRST that streams SSE rather than
   returning JSON), and one migration creating `ozzie_conversations` + `ozzie_messages`. **This bundle touches no existing table,
   enum, view, or function**, so — unlike every coaching-engine item above — it can deploy **standalone without redeploying
   `ozzie-generate-plan` or applying the coaching migrations.** Deploy = `supabase functions deploy ozzie-chat` (it needs
@@ -225,10 +233,10 @@ The safe sequence, because the app build and backend must agree:
    hidden, no strength card; endurance rows unaffected via the separate `threshold_anchor` read) — no crash, but the
    feature stays dark until the columns land. **Webapp-only: no new migration, no edge change.** The strength math is a
    parity-tested copy of the mobile calculators (`webapp/src/lib/{race-phase,strength-loads,crossfit-zones,hyrox-loads}.ts`).
-5. **Webapp Ozzie chat (branch `spec/webapp-ozzie-chat`)** — deploy `ozzie-chat` + apply `20260717000001` (see §2). Order
-   between the two doesn't matter (the function 404s a thread-read against a missing table, the table is inert without the
-   function), but **both must precede the webapp build that ships `/chat`**, or a send fails at the network. **This bundle is
-   independent of the coaching bundle** (items 1–4) — it can go before, after, or without them; it shares only the already-set
+5. **Webapp Ozzie chat — ✅ DONE 2026-07-17.** Migration `20260717000001` applied + `ozzie-chat` deployed (`verify_jwt: true`),
+   both verified live (see §2). The chat backend is now live; a `/chat` send works for any authenticated client (incl. `npm run dev`
+   + login) — only the public webapp build (§4, Cloudflare) is still pending for end users. **This bundle was
+   independent of the coaching bundle** (items 1–4) — it went without them; it shares only the already-set
    `OPENAI_API_KEY`. Nothing about it forces the held coaching go-live.
 
 **Rule of thumb:** push migrations + deploy functions **before** promoting the app build that depends on them.
