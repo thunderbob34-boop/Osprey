@@ -78,6 +78,16 @@ async function buildContext(
     supabase.from('v_daily_summary').select('recovery_score, tsb').eq('user_id', userId).maybeSingle(),
   ]);
 
+  // Observability only — keep the null/empty fallbacks below exactly as they
+  // are (a brand-new athlete with no goals or sessions is a legitimate,
+  // expected shape). Without this, a query failure is indistinguishable from
+  // "this athlete has no data" and Ozzie confidently coaches from nothing.
+  if (userRes.error) console.error('ozzie-chat context error (users)', userRes.error);
+  if (goalsRes.error) console.error('ozzie-chat context error (user_goals)', goalsRes.error);
+  if (weekRes.error) console.error('ozzie-chat context error (training_sessions)', weekRes.error);
+  if (logsRes.error) console.error('ozzie-chat context error (workout_logs)', logsRes.error);
+  if (summaryRes.error) console.error('ozzie-chat context error (v_daily_summary)', summaryRes.error);
+
   const targetDate = (goalsRes.data?.target_date as string | undefined) ?? null;
   const totalWeeksPlanned = (goalsRes.data?.total_weeks_planned as number | undefined) ?? null;
 
@@ -130,7 +140,13 @@ Deno.serve(async (req: Request) => {
     conversationId = String(body.conversationId ?? '');
     message = String(body.message ?? '').slice(0, 2000);
     clientDate = String(body.clientDate ?? '').slice(0, 10);
-    if (!conversationId || !message.trim() || !/^\d{4}-\d{2}-\d{2}$/.test(clientDate)) {
+    // The regex is a shape check, not a validity check — "2026-02-30" passes it
+    // but new Date(...) below turns it into an Invalid Date, whose
+    // .toISOString() throws inside weekBounds. Mirrors computeRacePhase's own
+    // isNaN(getTime()) guard in context.ts.
+    const clientDateValid =
+      /^\d{4}-\d{2}-\d{2}$/.test(clientDate) && !isNaN(new Date(`${clientDate}T00:00:00Z`).getTime());
+    if (!conversationId || !message.trim() || !clientDateValid) {
       return json({ error: 'conversationId, message and clientDate are required' }, 400);
     }
   } catch {
@@ -199,59 +215,88 @@ Deno.serve(async (req: Request) => {
     const encoder = new TextEncoder();
     let buffer = '';
     let assembled = '';
-    let persisted = false;
+    let persistPromise: Promise<void> | null = null;
 
-    // The server owns the record: this runs on normal completion AND when the
-    // browser walks away mid-reply (stream cancel), so a thread is never left
-    // with a dangling question.
-    async function persistReply(): Promise<void> {
-      if (persisted) return;
-      persisted = true;
+    async function doPersistReply(): Promise<void> {
       if (!assembled.trim()) return;
-      await supabase.from('ozzie_messages').insert({
-        conversation_id: conversationId,
-        user_id: userId,
-        role: 'assistant',
-        content: assembled,
-      });
-      await supabase
-        .from('ozzie_conversations')
-        .update({ updated_at: new Date().toISOString() })
-        .eq('id', conversationId)
-        .eq('user_id', userId);
+      try {
+        const { error: assistantError } = await supabase.from('ozzie_messages').insert({
+          conversation_id: conversationId,
+          user_id: userId,
+          role: 'assistant',
+          content: assembled,
+        });
+        if (assistantError) console.error('ozzie-chat persist error', assistantError);
+
+        const { error: updateError } = await supabase
+          .from('ozzie_conversations')
+          .update({ updated_at: new Date().toISOString() })
+          .eq('id', conversationId)
+          .eq('user_id', userId);
+        if (updateError) console.error('ozzie-chat persist error', updateError);
+      } catch (err) {
+        // A failed write must not corrupt the response the user is already
+        // reading — log and move on rather than throw.
+        console.error('ozzie-chat persist error', err);
+      }
+    }
+
+    // The reply is persisted on both the normal-completion path and the
+    // client-disconnect (stream cancel) path, so a dropped connection can't
+    // lose what Ozzie already said. Memoized so every caller — pull's done
+    // branch, pull's error branch, and cancel — joins the SAME write instead
+    // of racing it or (worse) treating a flipped boolean as if the write had
+    // already landed.
+    function persistReply(): Promise<void> {
+      return (persistPromise ??= doPersistReply());
     }
 
     const stream = new ReadableStream({
       async pull(controller) {
-        const { done, value } = await reader.read();
+        try {
+          const { done, value } = await reader.read();
 
-        if (done) {
+          if (done) {
+            await persistReply();
+            controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+            controller.close();
+            return;
+          }
+
+          buffer += decoder.decode(value, { stream: true });
+          const parsed = parseSSEChunk(buffer);
+          buffer = parsed.rest;
+
+          for (const token of parsed.tokens) {
+            assembled += token;
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ token })}\n\n`));
+          }
+
+          if (parsed.done) {
+            await reader.cancel();
+            await persistReply();
+            controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+            controller.close();
+          }
+        } catch (err) {
+          // A mid-stream upstream failure (e.g. an OpenAI TCP reset) lands
+          // here. Per the Streams spec `cancel` is NOT invoked for this case —
+          // only consumer-initiated cancellation runs it — so this is the
+          // only path left that can still persist whatever Ozzie had already
+          // said, and the only path that releases the upstream reader.
+          console.error('ozzie-chat stream error', err);
           await persistReply();
-          controller.enqueue(encoder.encode('data: [DONE]\n\n'));
-          controller.close();
-          return;
-        }
-
-        buffer += decoder.decode(value, { stream: true });
-        const parsed = parseSSEChunk(buffer);
-        buffer = parsed.rest;
-
-        for (const token of parsed.tokens) {
-          assembled += token;
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ token })}\n\n`));
-        }
-
-        if (parsed.done) {
-          await reader.cancel();
-          await persistReply();
-          controller.enqueue(encoder.encode('data: [DONE]\n\n'));
-          controller.close();
+          reader.releaseLock();
+          controller.error(err);
         }
       },
-      cancel() {
+      async cancel() {
         // Browser went away mid-reply — keep whatever Ozzie already said.
-        void reader.cancel();
-        void persistReply();
+        // Awaited so the request doesn't finish until the write actually
+        // lands; persistReply is memoized, so this joins the same write
+        // `pull`'s done-branch may already have started rather than racing it.
+        await reader.cancel();
+        await persistReply();
       },
     });
 
