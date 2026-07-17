@@ -59,13 +59,16 @@ function ChatPage() {
     } catch (err) {
       setSendError(err instanceof Error ? err : new Error('Something went wrong.'));
     } finally {
-      setStreaming(null);
-      setPending(null);
       // The function owns the record, so refetch whatever happened — on a failed
-      // answer the question is already saved and reappears from the server
-      // rather than vanishing.
+      // answer the question is already saved and reappears from the server. Await
+      // the refetch BEFORE clearing the optimistic bubbles so the real messages
+      // are already in `messages.data` when `pending`/`streaming` disappear —
+      // otherwise there's a gap (a few hundred ms) where neither the optimistic
+      // nor the server copy is on screen and the just-sent turn appears to vanish.
       if (conversationId) await qc.invalidateQueries({ queryKey: ['messages', conversationId] });
       await qc.invalidateQueries({ queryKey: ['conversations', userId] });
+      setStreaming(null);
+      setPending(null);
     }
   }
 
@@ -79,6 +82,10 @@ function ChatPage() {
             className="btn"
             type="button"
             style={{ width: '100%' }}
+            // Disabled mid-send: a send in flight owns the page's streaming state,
+            // and switching threads while it's in flight would strand its "Sending…"
+            // status on the newly-active thread and leak its bubble into this view.
+            disabled={busy}
             onClick={() => { setActiveId(null); setStreaming(null); setSendError(null); }}
           >
             + New chat
@@ -91,6 +98,7 @@ function ChatPage() {
             <button
               key={c.id}
               type="button"
+              disabled={busy}
               onClick={() => { setActiveId(c.id); setSendError(null); }}
               style={{
                 display: 'block', width: '100%', textAlign: 'left', cursor: 'pointer',
