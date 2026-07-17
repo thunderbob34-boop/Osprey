@@ -85,13 +85,14 @@ function TodayHero({ userId, weekSessions, todayISO, isPending, isError, error, 
 
 function StatBand({ userId }: { userId: string }) {
   const ds = useDailySummary(userId);
+  const units = useUnits(userId);
   const s = ds.data;
   if (!s) return null; // covers "no row yet", still loading, and query error alike — nothing to show
 
   const tiles: { num: string; lab: string; sub?: string | null }[] = [];
   if (s.recoveryScore != null) tiles.push({ num: String(s.recoveryScore), lab: 'Recovery', sub: s.recoveryRecommendation });
   if (s.tsb != null) tiles.push({ num: (s.tsb > 0 ? '+' : '') + s.tsb, lab: 'Form (TSB)' });
-  if (s.weekDistanceKm != null) tiles.push({ num: `${Math.round(s.weekDistanceKm)} km`, lab: 'This week' });
+  if (s.weekDistanceKm != null) tiles.push({ num: formatDistanceKm(s.weekDistanceKm, units.data ?? 'imperial') ?? '', lab: 'This week' });
   if (s.workoutsLast30d != null) tiles.push({ num: String(s.workoutsLast30d), lab: 'Last 30 days' });
   if (tiles.length === 0) return null;
 
@@ -152,7 +153,7 @@ function NextRaceCard({ userId }: { userId: string }) {
   const bestRun = useBestRun(userId);
   const goal = useUserGoal(userId);
 
-  if (nextRace.isError || goal.isError) {
+  if (nextRace.isError) {
     return (
       <ErrorPanel
         error={nextRace.error ?? goal.error ?? new Error('Could not load your next race.')}
@@ -169,9 +170,10 @@ function NextRaceCard({ userId }: { userId: string }) {
   if (!nextRace.data && !phase) return null; // no upcoming race and no active plan phase — nothing to show
 
   // bestRun/predictor are best-effort: a failed or empty fetch just means no predictor line, never an error state.
+  const isRunGoal = ['run', 'ultra', 'triathlon'].includes(goal.data?.primaryGoal ?? '');
   const predictor = bestRun.data ? buildRacePredictor(bestRun.data.miles, bestRun.data.timeS) : null;
-  const compactPrediction = predictor
-    ? predictor.predictions.find((p) => p.label === 'Marathon') ?? predictor.predictions[predictor.predictions.length - 1] ?? null
+  const compactPrediction = isRunGoal && predictor
+    ? predictor.predictions.find((p) => p.label === 'Marathon') ?? null
     : null;
 
   return (
