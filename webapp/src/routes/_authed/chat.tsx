@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { useConversations, useMessages, useCreateConversation } from '../../features/chat/queries';
-import { sendChatMessage } from '../../features/chat/send';
+import { sendChatMessage, ChatSendError } from '../../features/chat/send';
 import { PageHeader } from '../../components/PageHeader';
 import { ErrorPanel } from '../../components/ErrorPanel';
 
@@ -57,6 +57,13 @@ function ChatPage() {
         onToken: (token) => setStreaming((prev) => (prev ?? '') + token),
       });
     } catch (err) {
+      // Give the athlete their text back only when the question wasn't saved.
+      // A ChatSendError with persisted=true (a 502, or the connection dropping
+      // mid-reply) means the turn is already in the thread and the refetch below
+      // will show it — restoring the composer there would invite a duplicate
+      // re-send. Everything else (createConversation failed, offline, 401/400/404)
+      // never saved the turn, so returning the draft is safe and kind.
+      if (!(err instanceof ChatSendError && err.persisted)) setDraft(text);
       setSendError(err instanceof Error ? err : new Error('Something went wrong.'));
     } finally {
       // The function owns the record, so refetch whatever happened — on a failed
