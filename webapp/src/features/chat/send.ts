@@ -98,66 +98,105 @@ export async function sendChatMessage({
   // No request left the browser → nothing was saved.
   if (!token) throw new ChatSendError('Your session expired — sign in again.', false);
 
-  let res: Response;
+  // Abort the request if it goes IDLE_TIMEOUT_MS without progress. Neither the
+  // edge function nor fetch times a request out on its own, so a stalled
+  // connection or a hung / rate-limited model call would otherwise strand the UI
+  // on "Ozzie is thinking…" forever. The timer resets on every chunk, so a
+  // legitimately long reply that keeps streaming is never cut off — only a
+  // genuine stall trips it.
+  const IDLE_TIMEOUT_MS = 30_000;
+  const ctrl = new AbortController();
+  let idleTimer: ReturnType<typeof setTimeout> | undefined;
+  const bumpIdle = () => {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => ctrl.abort(), IDLE_TIMEOUT_MS);
+  };
+  const isAbort = (e: unknown) => e != null && (e as { name?: string }).name === 'AbortError';
+
   try {
-    res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ozzie-chat`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        conversationId,
-        message,
-        // The function has no idea what day it is where the athlete lives.
-        clientDate: toDateInputValue(new Date()),
-      }),
-    });
-  } catch {
-    // The request never reached the function (offline, DNS, function down), so
-    // the user turn was never inserted — the caller should restore the composer.
-    throw new ChatSendError('Could not reach Ozzie. Check your connection and try again.', false);
-  }
-
-  if (!res.ok || !res.body) {
-    const body = (await res.json().catch(() => null)) as { error?: string } | null;
-    // A 2xx means the server reached the streaming stage, which is after the
-    // user-turn insert — so an ok-but-bodyless response counts as persisted.
-    const persisted = res.ok || httpFailureWasPersisted(res.status);
-    throw new ChatSendError(body?.error ?? 'Ozzie could not answer right now. Please try again.', persisted);
-  }
-
-  const reader = res.body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
-  let completed = false;
-
-  for (;;) {
-    const { done, value } = await reader.read();
-    if (done) {
-      // The transport ended without us ever seeing the [DONE] sentinel —
-      // a dropped connection or a crash mid-generation, not a finished
-      // reply. Resolving normally here would let the caller mistake a
-      // truncated reply for a complete one, so surface it instead.
-      if (!completed) {
-        // A 200 got us here, so the server already inserted the user turn before
-        // streaming — it's saved (and the refetch will show it). Don't restore.
-        throw new ChatSendError(
-          'The connection to Ozzie dropped before the reply finished. Please try again.',
-          true,
-        );
+    let res: Response;
+    try {
+      bumpIdle();
+      res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ozzie-chat`, {
+        method: 'POST',
+        signal: ctrl.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          conversationId,
+          message,
+          // The function has no idea what day it is where the athlete lives.
+          clientDate: toDateInputValue(new Date()),
+        }),
+      });
+    } catch (err) {
+      // Idle timeout before the response arrived: the request reached the
+      // function and was processing, so the user turn was likely already
+      // inserted → persisted. Any other error means it never landed → not.
+      if (isAbort(err)) {
+        throw new ChatSendError('Ozzie took too long to respond. Please try again.', true);
       }
-      break;
+      // The request never reached the function (offline, DNS, function down), so
+      // the user turn was never inserted — the caller should restore the composer.
+      throw new ChatSendError('Could not reach Ozzie. Check your connection and try again.', false);
     }
 
-    buffer += decoder.decode(value, { stream: true });
-    const parsed = parseTokenStream(buffer);
-    buffer = parsed.rest;
-    parsed.tokens.forEach(onToken);
-    if (parsed.done) {
-      completed = true;
-      break;
+    if (!res.ok || !res.body) {
+      const body = (await res.json().catch(() => null)) as { error?: string } | null;
+      // A 2xx means the server reached the streaming stage, which is after the
+      // user-turn insert — so an ok-but-bodyless response counts as persisted.
+      const persisted = res.ok || httpFailureWasPersisted(res.status);
+      throw new ChatSendError(body?.error ?? 'Ozzie could not answer right now. Please try again.', persisted);
     }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let completed = false;
+
+    try {
+      for (;;) {
+        bumpIdle(); // each read gets a fresh window to produce a chunk
+        const { done, value } = await reader.read();
+        if (done) {
+          // The transport ended without us ever seeing the [DONE] sentinel —
+          // a dropped connection or a crash mid-generation, not a finished
+          // reply. Resolving normally here would let the caller mistake a
+          // truncated reply for a complete one, so surface it instead.
+          if (!completed) {
+            // A 200 got us here, so the server already inserted the user turn
+            // before streaming — it's saved (the refetch shows it). Don't restore.
+            throw new ChatSendError(
+              'The connection to Ozzie dropped before the reply finished. Please try again.',
+              true,
+            );
+          }
+          break;
+        }
+
+        buffer += decoder.decode(value, { stream: true });
+        const parsed = parseTokenStream(buffer);
+        buffer = parsed.rest;
+        parsed.tokens.forEach(onToken);
+        if (parsed.done) {
+          completed = true;
+          break;
+        }
+      }
+    } catch (err) {
+      // Our own ChatSendError (e.g. the dropped-connection one above) passes
+      // through unchanged. An idle timeout mid-stream aborts reader.read(): a
+      // 200 already arrived, so the turn is saved → persisted.
+      if (err instanceof ChatSendError) throw err;
+      if (isAbort(err)) {
+        throw new ChatSendError('Ozzie stopped responding mid-reply. Please try again.', true);
+      }
+      throw err;
+    }
+  } finally {
+    clearTimeout(idleTimer);
   }
 }
