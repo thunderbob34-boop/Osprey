@@ -64,6 +64,25 @@ All six are **backward-compatible** with the current app build on their own (the
 `ozzie-nutrition-coach` falls back to UTC if the app doesn't send `clientDate`). The one true coupling is the
 `log_hydration` RPC — see §3.
 
+### ⚠️ Pending — `ozzie-nutrition-coach` must be REDEPLOYED for the webapp (CORS fix)
+
+The **deployed** `ozzie-nutrition-coach` has **no CORS handling**, but the webapp calls it from the **browser**
+(`webapp/src/features/nutrition/queries.ts` → `supabase.functions.invoke`). `functions.invoke` sends
+`Authorization` + `x-client-info` (non-safelisted) headers, so the browser issues a CORS **preflight** — and the
+deployed function `405`s the `OPTIONS` with **no `Access-Control-Allow-Origin`**, so the browser blocks the POST.
+**The webapp's nutrition coaching tip does not work in a browser today.** Confirmed empirically 2026-07-17 with a
+real `OPTIONS` preflight to the live endpoint (`405`, no ACAO); the control (`ozzie-race-briefing`, which has CORS)
+returns `200` + ACAO on the same request. This went unnoticed because launch is held (no logged-in web click-through)
+and React Native doesn't enforce CORS, so the 6 phone-only functions are unaffected.
+
+**Fix (committed, NOT deployed):** `ozzie-nutrition-coach/index.ts` now answers `OPTIONS` and sets
+`Access-Control-Allow-Origin: *` on every response, mirroring `ozzie-race-briefing:75-82`. **Redeploy
+`supabase functions deploy ozzie-nutrition-coach` before/with the webapp go-live.** **Backward-compatible and
+INDEPENDENT** of the coaching atomic bundle below — adding CORS headers is invisible to the mobile app, so this can
+redeploy anytime (it needs no migration and no app-build coupling). Only browser-reachable function in the repo that
+lacked CORS: the webapp calls exactly one edge fn today (`ozzie-nutrition-coach`); the new `ozzie-chat` (its own
+branch) already ships with CORS.
+
 ### ⚠️ Pending since the 2026-07-14 deploy — `ozzie-generate-plan` must be REDEPLOYED at go-live
 
 The coaching-engine work landed on `main` after that deploy, so the **live** `ozzie-generate-plan` is now stale.

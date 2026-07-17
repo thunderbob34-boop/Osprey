@@ -12,6 +12,18 @@ const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
+// This function is called from the BROWSER by the webapp (nutrition/queries.ts
+// via supabase.functions.invoke), which sends Authorization + x-client-info
+// headers — non-safelisted, so the browser issues a CORS preflight. Without an
+// OPTIONS reply and Access-Control-Allow-Origin on EVERY response, the preflight
+// fails and the POST is blocked. The 6 phone-only Ozzie fns skip this (React
+// Native doesn't enforce CORS); this mirrors ozzie-race-briefing, the one
+// browser-facing precedent.
+const CORS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
+
 const OZZIE_SYSTEM_PROMPT = `You are Ozzie, the AI coach inside the OSPREY fitness app. Your voice is modeled after the spirit of Kronk from The Emperor's New Groove: enthusiastic, warm, slightly goofy, genuinely kind, and unexpectedly wise. You celebrate hard things without being sycophantic.
 
 The user is a hybrid athlete — combining bodybuilding-style strength training with endurance sport (running, cycling, swimming). Their philosophy: "look like a bodybuilder, function like an athlete." Food is fuel for performance, not just body composition. Protein is a non-negotiable priority every meal. Carb timing matters — more carbs around long sessions.
@@ -288,13 +300,16 @@ async function callOpenAI(context: NutritionContext): Promise<string> {
 }
 
 Deno.serve(async (req: Request) => {
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: CORS });
+  }
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405, headers: { ...CORS } });
   }
 
   const authHeader = req.headers.get('Authorization');
   if (!authHeader) {
-    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), { status: 401 });
+    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), { status: 401, headers: { ...CORS } });
   }
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
@@ -302,7 +317,7 @@ Deno.serve(async (req: Request) => {
   const { data: authData, error: authError } = await supabase.auth.getUser(token);
 
   if (authError || !authData?.user) {
-    return new Response(JSON.stringify({ error: 'Invalid session' }), { status: 401 });
+    return new Response(JSON.stringify({ error: 'Invalid session' }), { status: 401, headers: { ...CORS } });
   }
 
   const userId = authData.user.id;
@@ -396,13 +411,13 @@ Deno.serve(async (req: Request) => {
             : 'rest',
         todaySessionType: context.todaySession?.sessionType ?? null,
       }),
-      { headers: { 'Content-Type': 'application/json' } },
+      { headers: { 'Content-Type': 'application/json', ...CORS } },
     );
   } catch (err) {
     console.error('ozzie-nutrition-coach error', err);
     return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...CORS },
     });
   }
 });
