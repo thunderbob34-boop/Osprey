@@ -20,7 +20,7 @@ export function NavRail() {
   return (
     <nav className="rail">
       <div className="rail-brand">
-        <span className="rail-logo">Osprey</span>
+        <Link to="/" className="rail-logo">Osprey</Link>
       </div>
       <div className="rail-links">
         {links.map((l) => (
