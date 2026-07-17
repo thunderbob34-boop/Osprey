@@ -1,13 +1,19 @@
-// Ozzie Daily Brief — AI planning engine v1
+// Ozzie Daily Brief
 //
-// Gathers a user's recovery, load, today's planned session, and recent
-// training history, then asks GPT-4o-mini to write today's brief in
-// Ozzie's voice plus a one-line "why" behind today's recommendation.
+// Gathers a user's recovery, load, today's planned session, and recent training
+// history, then writes today's brief in Ozzie's voice plus a one-line "why".
+// DEFAULTS to a deterministic, $0 template (template.ts) — no OpenAI call; set
+// OZZIE_LLM_PROVIDER=openai|cloudflare to generate it with an LLM instead.
 // Result is cached in ozzie_insights so repeat calls same day are free.
 
 import { createClient } from 'jsr:@supabase/supabase-js@2';
+// SPIKE: route the LLM call through the shared provider-agnostic helper so the
+// backend (OpenAI vs Cloudflare Workers AI) can be swapped with one env var.
+// The OpenAI key now lives inside _shared/llm.ts, not here.
+import { activeProvider, chatComplete, parseJsonLoose } from '../_shared/llm.ts';
+import { templateBrief } from './template.ts';
+import type { BriefContext, RestRecommendation } from './types.ts';
 
-const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
@@ -30,27 +36,8 @@ Rules:
 - You may be given "recentMemories" — a short list of notable things that happened recently or in past weeks/months (PRs, race results), each with a one-line summary and the date it happened. This is your long-term memory as a coach. If one is genuinely relevant to today (e.g. today's session targets the same lift that was PR'd, or a race just happened and today is the first session back), reference it specifically and naturally, the way a coach who remembers your history would ("Last month you PR'd Bench Press — let's see where it is today"). Never force a reference when nothing is relevant — skip it silently rather than shoehorning an unrelated memory in. Never invent a memory that isn't in the list.
 - Respond ONLY with valid JSON matching this shape: {"insight_text": string, "why_reasoning": string, "habit_tip": string | null}`;
 
-interface BriefContext {
-  displayName: string;
-  experienceTier: string;
-  recovery: { score: number; recommendation: string; hrvMs: number | null; sleepHours: number | null } | null;
-  load: { atl: number | null; ctl: number | null; tsb: number | null } | null;
-  todaySession: {
-    sessionType: string;
-    intensity: string;
-    plannedMinutes: number | null;
-    plannedDistanceKm: number | null;
-    description: string | null;
-  } | null;
-  recentWorkoutCount7d: number;
-  workoutCountPrior7d: number;
-  primaryGoal: string | null;
-  workoutTimeConsistency: { hour: number; count: number } | null;
-  foodLogCount14d: number;
-  recentMemories: Array<{ summary: string; occurredOn: string }>;
-}
-
-type RestRecommendation = 'train' | 'easy' | 'rest';
+// BriefContext + RestRecommendation now live in ./types.ts (shared with the
+// template path so it stays dependency-free and testable).
 
 // ── Timezone helpers ──────────────────────────────────────────────────────
 // This function runs on Deno's edge runtime, which reports its own clock in
@@ -223,47 +210,34 @@ async function buildContext(
   };
 }
 
-async function callOpenAI(
+async function generateBrief(
   context: BriefContext,
   restRecommendation: RestRecommendation,
   weather: string | null,
   schedule: string | null,
 ): Promise<{ insight_text: string; why_reasoning: string; habit_tip: string | null }> {
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: OZZIE_SYSTEM_PROMPT },
-        {
-          role: 'user',
-          content: `Here is today's data for ${context.displayName} (${context.experienceTier} mode, goal: ${context.primaryGoal ?? 'general fitness'}):\n${JSON.stringify({ ...context, restRecommendation, weather, schedule }, null, 2)}\n\nWrite today's brief.`,
-        },
-      ],
-      response_format: { type: 'json_object' },
-      temperature: 0.8,
-      max_tokens: 300,
-    }),
-  });
+  // Same prompt + messages as before — only the transport changed. chatComplete
+  // dispatches to OpenAI (default) or Cloudflare Workers AI per OZZIE_LLM_PROVIDER.
+  const content = await chatComplete(
+    [
+      { role: 'system', content: OZZIE_SYSTEM_PROMPT },
+      {
+        role: 'user',
+        content: `Here is today's data for ${context.displayName} (${context.experienceTier} mode, goal: ${context.primaryGoal ?? 'general fitness'}):\n${JSON.stringify({ ...context, restRecommendation, weather, schedule }, null, 2)}\n\nWrite today's brief.`,
+      },
+    ],
+    { json: true, temperature: 0.8, maxTokens: 300 },
+  );
 
-  if (!response.ok) {
-    const errText = await response.text();
-    throw new Error(`OpenAI error: ${response.status} ${errText}`);
-  }
-
-  const data = await response.json();
-  const content = data.choices?.[0]?.message?.content;
-  if (!content) throw new Error('OpenAI returned no content');
-
-  const parsed = JSON.parse(content);
+  // parseJsonLoose (not JSON.parse) so an open model that wraps the object in
+  // prose still works; OpenAI's response_format keeps its output clean either way.
+  const parsed = parseJsonLoose(content);
   return {
-    insight_text: parsed.insight_text ?? "Let's have a good one today.",
-    why_reasoning: parsed.why_reasoning ?? 'No specific data available yet — keep logging to unlock personalized insights.',
-    habit_tip: parsed.habit_tip ?? null,
+    insight_text: (parsed.insight_text as string) ?? "Let's have a good one today.",
+    why_reasoning:
+      (parsed.why_reasoning as string) ??
+      'No specific data available yet — keep logging to unlock personalized insights.',
+    habit_tip: (parsed.habit_tip as string | null) ?? null,
   };
 }
 
@@ -347,7 +321,14 @@ Deno.serve(async (req: Request) => {
 
     const context = await buildContext(supabase, userId, timeZone);
     const restRecommendation = deriveRestRecommendation(context);
-    const { insight_text, why_reasoning, habit_tip } = await callOpenAI(context, restRecommendation, weather, schedule);
+    // The daily brief DEFAULTS to the deterministic, $0 template. Only an
+    // explicit OZZIE_LLM_PROVIDER=openai (or =cloudflare) generates it with an
+    // LLM; anything else (incl. unset or a typo) falls back to the free path.
+    const provider = activeProvider('template');
+    const brief = provider === 'openai' || provider === 'cloudflare'
+      ? await generateBrief(context, restRecommendation, weather, schedule)
+      : templateBrief(context, restRecommendation, weather, schedule);
+    const { insight_text, why_reasoning, habit_tip } = brief;
 
     const { error: insertError } = await supabase.from('ozzie_insights').insert({
       user_id: userId,
