@@ -162,6 +162,18 @@ migration. What changed and why the app + edge fn must ship together (atomic):
   collection screens (3 1RMs + compete toggle + Fran). **Follow-ups (filed):** (1) the `competing` toggle is collected
   but inert in the plan — a competing athlete is still periodized via a set `target_date`; wire its intensity-bias when
   the Open-week competition-peaking slice lands; (2) `primaryDayLabel('crossfit')` shows "Run days" (small label fix).
+- **Webapp Ozzie chat (NEW edge fn `ozzie-chat` + NEW migration `20260717000001`) — INDEPENDENT of everything above.** A grounded, streaming
+  coaching chat at the webapp's `/chat`. Adds the **ninth** edge function, `ozzie-chat` (the FIRST that streams SSE rather than
+  returning JSON), and one migration creating `ozzie_conversations` + `ozzie_messages`. **This bundle touches no existing table,
+  enum, view, or function**, so — unlike every coaching-engine item above — it can deploy **standalone without redeploying
+  `ozzie-generate-plan` or applying the coaching migrations.** Deploy = `supabase functions deploy ozzie-chat` (it needs
+  `verify_jwt` handling like the others AND, being browser-called, it sets its own CORS — the six phone-only fns don't) + apply
+  `20260717000001` via MCP. **Chat is dark until BOTH land** (the webapp `/chat` renders + lists threads but a send fails at the
+  network). The function reads only already-deployed columns — it deliberately does **NOT** select `user_goals.goal_params`
+  (verified absent in prod 2026-07-17; it selects `primary_goal/target_race/target_date/total_weeks_planned/threshold_anchor`,
+  all live), so it has **no dependency on the pending coaching bundle**. `OPENAI_API_KEY` is already set (same secret the other
+  Ozzie fns use). **Webapp-only client** (no mobile change; the phone's Ask-Ozzie stays a stub). **⚠️ PRE-SHIP:** a ~2-min
+  logged-in click-through of `/chat` once deployed — agents hit the login wall, so the streaming round-trip is unexercised.
 - **Migrations `20260714000003_sport_primary_goals.sql` (swim/rowing/hyrox) + `20260715000001_cycling_primary_goal.sql`
   (cycling) + `20260715000002_ultra_primary_goal.sql` (ultra) + `20260716000001_crossfit_primary_goal.sql` (crossfit)
   + `20260715000003_goal_params.sql` (adds `user_goals.goal_params` JSONB)** — the four `*_primary_goal`/`sport_primary_goals`
@@ -194,6 +206,11 @@ The safe sequence, because the app build and backend must agree:
    hidden, no strength card; endurance rows unaffected via the separate `threshold_anchor` read) — no crash, but the
    feature stays dark until the columns land. **Webapp-only: no new migration, no edge change.** The strength math is a
    parity-tested copy of the mobile calculators (`webapp/src/lib/{race-phase,strength-loads,crossfit-zones,hyrox-loads}.ts`).
+5. **Webapp Ozzie chat (branch `spec/webapp-ozzie-chat`)** — deploy `ozzie-chat` + apply `20260717000001` (see §2). Order
+   between the two doesn't matter (the function 404s a thread-read against a missing table, the table is inert without the
+   function), but **both must precede the webapp build that ships `/chat`**, or a send fails at the network. **This bundle is
+   independent of the coaching bundle** (items 1–4) — it can go before, after, or without them; it shares only the already-set
+   `OPENAI_API_KEY`. Nothing about it forces the held coaching go-live.
 
 **Rule of thumb:** push migrations + deploy functions **before** promoting the app build that depends on them.
 

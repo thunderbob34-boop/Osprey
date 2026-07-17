@@ -16,6 +16,7 @@ import { Route as AuthedSettingsRouteImport } from './routes/_authed/settings'
 import { Route as AuthedNutritionRouteImport } from './routes/_authed/nutrition'
 import { Route as AuthedLogRouteImport } from './routes/_authed/log'
 import { Route as AuthedHistoryRouteImport } from './routes/_authed/history'
+import { Route as AuthedChatRouteImport } from './routes/_authed/chat'
 import { Route as AuthedCalendarRouteImport } from './routes/_authed/calendar'
 import { Route as AuthedNutritionIndexRouteImport } from './routes/_authed/nutrition.index'
 import { Route as AuthedLogIndexRouteImport } from './routes/_authed/log.index'
@@ -57,6 +58,11 @@ const AuthedLogRoute = AuthedLogRouteImport.update({
 const AuthedHistoryRoute = AuthedHistoryRouteImport.update({
   id: '/history',
   path: '/history',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedChatRoute = AuthedChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
   getParentRoute: () => AuthedRoute,
 } as any)
 const AuthedCalendarRoute = AuthedCalendarRouteImport.update({
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/': typeof AuthedIndexRoute
   '/login': typeof LoginRoute
   '/calendar': typeof AuthedCalendarRoute
+  '/chat': typeof AuthedChatRoute
   '/history': typeof AuthedHistoryRouteWithChildren
   '/log': typeof AuthedLogRouteWithChildren
   '/nutrition': typeof AuthedNutritionRouteWithChildren
@@ -121,6 +128,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/calendar': typeof AuthedCalendarRoute
+  '/chat': typeof AuthedChatRoute
   '/settings': typeof AuthedSettingsRoute
   '/': typeof AuthedIndexRoute
   '/history/$workoutId': typeof AuthedHistoryWorkoutIdRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/_authed': typeof AuthedRouteWithChildren
   '/login': typeof LoginRoute
   '/_authed/calendar': typeof AuthedCalendarRoute
+  '/_authed/chat': typeof AuthedChatRoute
   '/_authed/history': typeof AuthedHistoryRouteWithChildren
   '/_authed/log': typeof AuthedLogRouteWithChildren
   '/_authed/nutrition': typeof AuthedNutritionRouteWithChildren
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/calendar'
+    | '/chat'
     | '/history'
     | '/log'
     | '/nutrition'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
   to:
     | '/login'
     | '/calendar'
+    | '/chat'
     | '/settings'
     | '/'
     | '/history/$workoutId'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/_authed'
     | '/login'
     | '/_authed/calendar'
+    | '/_authed/chat'
     | '/_authed/history'
     | '/_authed/log'
     | '/_authed/nutrition'
@@ -252,6 +264,13 @@ declare module '@tanstack/react-router' {
       path: '/history'
       fullPath: '/history'
       preLoaderRoute: typeof AuthedHistoryRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/chat': {
+      id: '/_authed/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof AuthedChatRouteImport
       parentRoute: typeof AuthedRoute
     }
     '/_authed/calendar': {
@@ -359,6 +378,7 @@ const AuthedNutritionRouteWithChildren = AuthedNutritionRoute._addFileChildren(
 
 interface AuthedRouteChildren {
   AuthedCalendarRoute: typeof AuthedCalendarRoute
+  AuthedChatRoute: typeof AuthedChatRoute
   AuthedHistoryRoute: typeof AuthedHistoryRouteWithChildren
   AuthedLogRoute: typeof AuthedLogRouteWithChildren
   AuthedNutritionRoute: typeof AuthedNutritionRouteWithChildren
@@ -368,6 +388,7 @@ interface AuthedRouteChildren {
 
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedCalendarRoute: AuthedCalendarRoute,
+  AuthedChatRoute: AuthedChatRoute,
   AuthedHistoryRoute: AuthedHistoryRouteWithChildren,
   AuthedLogRoute: AuthedLogRouteWithChildren,
   AuthedNutritionRoute: AuthedNutritionRouteWithChildren,
