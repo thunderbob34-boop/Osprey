@@ -64,9 +64,14 @@ All six are **backward-compatible** with the current app build on their own (the
 `ozzie-nutrition-coach` falls back to UTC if the app doesn't send `clientDate`). The one true coupling is the
 `log_hydration` RPC — see §3.
 
-### ⚠️ Pending — `ozzie-nutrition-coach` must be REDEPLOYED for the webapp (CORS fix)
+### ✅ DONE 2026-07-17 — `ozzie-nutrition-coach` REDEPLOYED with CORS (was broken in the browser)
 
-The **deployed** `ozzie-nutrition-coach` has **no CORS handling**, but the webapp calls it from the **browser**
+**Redeployed 2026-07-17** via `supabase functions deploy ozzie-nutrition-coach --use-api` (from disk, `verify_jwt: true`
+preserved — no config.toml override). VERIFIED LIVE: OPTIONS preflight → `200` + ACAO + the 4 Allow-Headers (was `405`
+with no ACAO before); bogus-JWT POST → `401` + ACAO (auth gate intact). The browser nutrition tip now works. History
+below for context:
+
+The **previously deployed** `ozzie-nutrition-coach` had **no CORS handling**, but the webapp calls it from the **browser**
 (`webapp/src/features/nutrition/queries.ts` → `supabase.functions.invoke`). `functions.invoke` sends
 `Authorization` + `x-client-info` (non-safelisted) headers, so the browser issues a CORS **preflight** — and the
 deployed function `405`s the `OPTIONS` with **no `Access-Control-Allow-Origin`**, so the browser blocks the POST.
