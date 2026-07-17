@@ -96,6 +96,10 @@ export default function BaselineScreen() {
       const c = parseCrossfitParams({ backSquat, deadlift: crossfitDeadlift, press, competing, fran });
       if (c.ok) setGoalParams(c.value);
     }
+    if (primaryGoal === 'lift') {
+      const s = parseStrengthParams({ squat, bench, deadlift, goalSquat, goalBench, goalDeadlift });
+      if (s.ok) setGoalParams(s.value);
+    }
     router.push(HEALTH);
   }
 

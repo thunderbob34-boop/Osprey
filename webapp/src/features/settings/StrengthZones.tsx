@@ -19,10 +19,11 @@ function parseValidWeightKg(text: string, units: UnitSystem): number | null {
   return kg != null && validKg(kg) ? kg : null;
 }
 
-// A weight-input string seeded from the stored kg value, re-seeded whenever the
-// user's unit system changes (not on every stored-value change, so an in-progress
-// edit survives a background refetch) — otherwise a value typed in one unit system
-// is silently reinterpreted in another after a units toggle.
+// A weight-input string seeded from the stored kg value, re-seeded (after the
+// initial mount) whenever the unit system or the stored kg value itself changes —
+// otherwise a value typed in one unit system is silently reinterpreted in another
+// after a units toggle. A same-value refetch is a no-op (React skips the effect),
+// so an in-progress edit in an unrelated sibling field is untouched.
 function useWeightInputState(storedKg: number | null, unitSystem: UnitSystem): [string, (v: string) => void] {
   const [value, setValue] = useState(() => (storedKg != null ? bareWeight(storedKg, unitSystem) : ''));
   const mounted = useRef(false);
