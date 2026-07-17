@@ -9,7 +9,7 @@ import { sessionUpdatePayload, type SessionEdits } from '../../lib/session-edit'
 
 export function useMonthSessions(userId: string, fromISO: string, toISO: string) {
   return useQuery({
-    queryKey: ['sessions', userId, fromISO],
+    queryKey: ['sessions', userId, fromISO, toISO],
     queryFn: async () => {
       const { data, error } = await supabase.from('training_sessions').select('*')
         .eq('user_id', userId).gte('session_date', fromISO).lte('session_date', toISO).order('session_date');
@@ -21,7 +21,7 @@ export function useMonthSessions(userId: string, fromISO: string, toISO: string)
 
 export function useCompletions(userId: string, fromISO: string, toISO: string) {
   return useQuery({
-    queryKey: ['completions', userId, fromISO],
+    queryKey: ['completions', userId, fromISO, toISO],
     queryFn: async (): Promise<Set<string>> => {
       const { data, error } = await supabase.from('workout_logs').select('session_id')
         .eq('user_id', userId).eq('status', 'completed').is('deleted_at', null)
@@ -36,7 +36,7 @@ export function useCompletions(userId: string, fromISO: string, toISO: string) {
 /** Race events (goal race + any tune-up races) falling in the visible month. */
 export function useMonthRaceEvents(userId: string, fromISO: string, toISO: string) {
   return useQuery({
-    queryKey: ['race-events', userId, fromISO],
+    queryKey: ['race-events', userId, fromISO, toISO],
     queryFn: async () => {
       const { data, error } = await supabase.from('race_events')
         .select('id, user_id, name, distance_km, event_date, goal_time_s, result_time_s, notes')
