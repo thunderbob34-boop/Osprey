@@ -85,15 +85,28 @@ export async function sendChatMessage({
   const reader = res.body.getReader();
   const decoder = new TextDecoder();
   let buffer = '';
+  let completed = false;
 
   for (;;) {
     const { done, value } = await reader.read();
-    if (done) break;
+    if (done) {
+      // The transport ended without us ever seeing the [DONE] sentinel —
+      // a dropped connection or a crash mid-generation, not a finished
+      // reply. Resolving normally here would let the caller mistake a
+      // truncated reply for a complete one, so surface it instead.
+      if (!completed) {
+        throw new Error('The connection to Ozzie dropped before the reply finished. Please try again.');
+      }
+      break;
+    }
 
     buffer += decoder.decode(value, { stream: true });
     const parsed = parseTokenStream(buffer);
     buffer = parsed.rest;
     parsed.tokens.forEach(onToken);
-    if (parsed.done) break;
+    if (parsed.done) {
+      completed = true;
+      break;
+    }
   }
 }
