@@ -9,7 +9,9 @@ import { createClient } from 'jsr:@supabase/supabase-js@2';
 // SPIKE: route the LLM call through the shared provider-agnostic helper so the
 // backend (OpenAI vs Cloudflare Workers AI) can be swapped with one env var.
 // The OpenAI key now lives inside _shared/llm.ts, not here.
-import { chatComplete, parseJsonLoose } from '../_shared/llm.ts';
+import { activeProvider, chatComplete, parseJsonLoose } from '../_shared/llm.ts';
+import { templateBrief } from './template.ts';
+import type { BriefContext, RestRecommendation } from './types.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
@@ -33,27 +35,8 @@ Rules:
 - You may be given "recentMemories" — a short list of notable things that happened recently or in past weeks/months (PRs, race results), each with a one-line summary and the date it happened. This is your long-term memory as a coach. If one is genuinely relevant to today (e.g. today's session targets the same lift that was PR'd, or a race just happened and today is the first session back), reference it specifically and naturally, the way a coach who remembers your history would ("Last month you PR'd Bench Press — let's see where it is today"). Never force a reference when nothing is relevant — skip it silently rather than shoehorning an unrelated memory in. Never invent a memory that isn't in the list.
 - Respond ONLY with valid JSON matching this shape: {"insight_text": string, "why_reasoning": string, "habit_tip": string | null}`;
 
-interface BriefContext {
-  displayName: string;
-  experienceTier: string;
-  recovery: { score: number; recommendation: string; hrvMs: number | null; sleepHours: number | null } | null;
-  load: { atl: number | null; ctl: number | null; tsb: number | null } | null;
-  todaySession: {
-    sessionType: string;
-    intensity: string;
-    plannedMinutes: number | null;
-    plannedDistanceKm: number | null;
-    description: string | null;
-  } | null;
-  recentWorkoutCount7d: number;
-  workoutCountPrior7d: number;
-  primaryGoal: string | null;
-  workoutTimeConsistency: { hour: number; count: number } | null;
-  foodLogCount14d: number;
-  recentMemories: Array<{ summary: string; occurredOn: string }>;
-}
-
-type RestRecommendation = 'train' | 'easy' | 'rest';
+// BriefContext + RestRecommendation now live in ./types.ts (shared with the
+// template path so it stays dependency-free and testable).
 
 // ── Timezone helpers ──────────────────────────────────────────────────────
 // This function runs on Deno's edge runtime, which reports its own clock in
@@ -337,7 +320,12 @@ Deno.serve(async (req: Request) => {
 
     const context = await buildContext(supabase, userId, timeZone);
     const restRecommendation = deriveRestRecommendation(context);
-    const { insight_text, why_reasoning, habit_tip } = await generateBrief(context, restRecommendation, weather, schedule);
+    // OZZIE_LLM_PROVIDER = 'template' skips the LLM entirely (deterministic,
+    // $0, fully private); 'openai'/'cloudflare' generate via generateBrief.
+    const brief = activeProvider() === 'template'
+      ? templateBrief(context, restRecommendation, weather, schedule)
+      : await generateBrief(context, restRecommendation, weather, schedule);
+    const { insight_text, why_reasoning, habit_tip } = brief;
 
     const { error: insertError } = await supabase.from('ozzie_insights').insert({
       user_id: userId,
