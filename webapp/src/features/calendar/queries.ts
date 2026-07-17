@@ -1,10 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
 import { TrainingSessionSchema, RaceEventSchema } from '../../lib/schemas';
 import { matchTuneUpWeeks, parseGoalDistanceFromText, type TuneUpWeek } from '../../lib/tuneups';
 import type { TrainingSession } from '../../lib/schemas';
+import { sessionUpdatePayload, type SessionEdits } from '../../lib/session-edit';
 
 export function useMonthSessions(userId: string, fromISO: string, toISO: string) {
   return useQuery({
@@ -134,4 +135,67 @@ export function useTuneUpWeeks(sessions: TrainingSession[] | undefined, goalDist
       goalDistanceKm,
     );
   }, [sessions, goalDistanceKm]);
+}
+
+function invalidateCalendar(qc: ReturnType<typeof useQueryClient>, userId: string) {
+  return Promise.all([
+    qc.invalidateQueries({ queryKey: ['sessions', userId] }),
+    qc.invalidateQueries({ queryKey: ['completions', userId] }),
+  ]);
+}
+
+export function useUpdateSession(userId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, current, edits }: { id: string; current: TrainingSession; edits: SessionEdits }) => {
+      const { data, error } = await supabase
+        .from('training_sessions').update(sessionUpdatePayload(current, edits)).eq('id', id).select('id');
+      if (error) throw error;
+      if (!data || data.length === 0) throw new Error('Could not save — that session no longer exists.');
+    },
+    onSuccess: () => invalidateCalendar(qc, userId),
+  });
+}
+
+export function useDeleteSession(userId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      // Detach the two nullable FK refs first (no ON DELETE CASCADE) or the delete 400s.
+      const { error: e1 } = await supabase.from('workout_logs').update({ session_id: null }).eq('session_id', id);
+      if (e1) throw e1;
+      const { error: e2 } = await supabase.from('plan_adjustments').update({ session_id: null }).eq('session_id', id);
+      if (e2) throw e2;
+      const { data, error: e3 } = await supabase.from('training_sessions').delete().eq('id', id).select('id');
+      if (e3) throw e3;
+      if (!data || data.length === 0) throw new Error('Could not delete — that session no longer exists.');
+    },
+    onSuccess: () => invalidateCalendar(qc, userId),
+  });
+}
+
+export interface NewSession {
+  weekId: string;
+  session_date: string;
+  session_type: string;
+  intensity: string;
+  planned_minutes: number | null;
+  planned_distance_km: number | null;
+  description: string | null;
+}
+
+export function useCreateSession(userId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (s: NewSession) => {
+      const { data, error } = await supabase.from('training_sessions').insert({
+        week_id: s.weekId, user_id: userId, session_date: s.session_date,
+        session_type: s.session_type, intensity: s.intensity,
+        planned_minutes: s.planned_minutes, planned_distance_km: s.planned_distance_km, description: s.description,
+      }).select('id');
+      if (error) throw error;
+      if (!data || data.length === 0) throw new Error('Could not add the session.');
+    },
+    onSuccess: () => invalidateCalendar(qc, userId),
+  });
 }

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import {
   useMonthSessions, useCompletions, useMonthRaceEvents, useNextRaceEvent, useBestRun,
@@ -12,6 +12,7 @@ import { computeRacePhase } from '../../lib/race-phase';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { PageHeader } from '../../components/PageHeader';
 import { AddRaceForm } from '../../components/AddRaceForm';
+import { SessionEditor } from '../../features/calendar/SessionEditor';
 import { SESSION_TYPE_LABEL, INTENSITY_LABEL } from '../../lib/format';
 
 const INTENSITY_COLOR: Record<string, string> = {
@@ -42,6 +43,19 @@ function CalendarPage() {
   const [anchor, setAnchor] = useState(() => new Date());
   const [selected, setSelected] = useState<Selection>(null);
   const [addingRace, setAddingRace] = useState<string | null>(null); // holds a default date, or null when closed
+  const [editing, setEditing] = useState(false); // true = SessionEditor open for `selected`
+  const [addDate, setAddDate] = useState<string | null>(null); // set = SessionEditor open in add mode for this date
+
+  // Editing and an in-progress "add" form both key off the current selection: picking a
+  // different session/race always exits edit mode, and — since the add affordance clears
+  // `selected` when it opens — a real selection change also means the add form should close.
+  // (Only clearing addDate when `selected` becomes truthy avoids fighting the add affordance's
+  // own setAddDate(dISO) + setSelected(null) pair, which lands in the same batched render.)
+  useEffect(() => {
+    setEditing(false);
+    if (selected) setAddDate(null);
+  }, [selected]);
+
   const { fromISO, toISO, cells } = useMemo(() => monthRange(anchor), [anchor]);
 
   const sessions = useMonthSessions(userId, fromISO, toISO);
@@ -131,6 +145,16 @@ function CalendarPage() {
                       </button>
                     );
                   })}
+                  {inMonth && daySessions.length === 0 && (
+                    <button
+                      className="btn ghost"
+                      type="button"
+                      style={{ display: 'block', width: '100%', textAlign: 'left', padding: '3px 6px', fontSize: 10.5 }}
+                      onClick={() => { setAddDate(dISO); setSelected(null); }}
+                    >
+                      + Add
+                    </button>
+                  )}
                 </div>
               );
             })}
@@ -180,42 +204,57 @@ function CalendarPage() {
           ))}
 
           {selected?.kind === 'session' && (
-            <div className="detail-card">
-              <div className="tag">{selected.data.session_date} · {INTENSITY_LABEL[selected.data.intensity]}</div>
-              <h3>{SESSION_TYPE_LABEL[selected.data.session_type]}{completions.data?.has(selected.data.id) ? ' · Done ✓' : ''}</h3>
-              {selected.data.description && <p>{selected.data.description}</p>}
-              {selected.data.ozzie_notes && (
-                <div className="note-block">
-                  <div className="tag">Ozzie</div>
-                  <p>{selected.data.ozzie_notes}</p>
-                </div>
-              )}
-
-              {selectedTuneUp && (
-                <div className="note-block tuneup-block">
-                  <div className="tag">Tune-up opportunity</div>
-                  <p>This week's long run (≈{selectedTuneUp.plannedDistanceKm.toFixed(1)}km) is close to a {selectedTuneUp.label}.</p>
-                  {locationZip.data ? (
-                    <a
-                      className="btn small"
-                      href={buildRunSignupSearchUrl({ zip: locationZip.data, ladderKm: selectedTuneUp.ladderKm, centerDateISO: selectedTuneUp.sessionDate })}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Find a race near you
-                    </a>
-                  ) : locationZip.isError ? (
-                    <p className="err-line">Couldn't check your saved zip code. Try reloading.</p>
-                  ) : (
-                    <p className="err-line">Set a zip code in Settings to search for races near you.</p>
+            <>
+              {editing ? (
+                <SessionEditor
+                  key={selected.data.id}
+                  userId={userId}
+                  session={selected.data}
+                  monthSessions={sessions.data ?? []}
+                  onDone={() => { setEditing(false); setSelected(null); }}
+                />
+              ) : (
+                <div className="detail-card">
+                  <div className="tag">{selected.data.session_date} · {INTENSITY_LABEL[selected.data.intensity]}</div>
+                  <h3>{SESSION_TYPE_LABEL[selected.data.session_type]}{completions.data?.has(selected.data.id) ? ' · Done ✓' : ''}</h3>
+                  {selected.data.description && <p>{selected.data.description}</p>}
+                  {selected.data.ozzie_notes && (
+                    <div className="note-block">
+                      <div className="tag">Ozzie</div>
+                      <p>{selected.data.ozzie_notes}</p>
+                    </div>
                   )}
-                  {' '}
-                  <button className="btn ghost small" type="button" onClick={() => setAddingRace(selectedTuneUp.sessionDate)}>
-                    Add the race you found
-                  </button>
+
+                  {selectedTuneUp && (
+                    <div className="note-block tuneup-block">
+                      <div className="tag">Tune-up opportunity</div>
+                      <p>This week's long run (≈{selectedTuneUp.plannedDistanceKm.toFixed(1)}km) is close to a {selectedTuneUp.label}.</p>
+                      {locationZip.data ? (
+                        <a
+                          className="btn small"
+                          href={buildRunSignupSearchUrl({ zip: locationZip.data, ladderKm: selectedTuneUp.ladderKm, centerDateISO: selectedTuneUp.sessionDate })}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Find a race near you
+                        </a>
+                      ) : locationZip.isError ? (
+                        <p className="err-line">Couldn't check your saved zip code. Try reloading.</p>
+                      ) : (
+                        <p className="err-line">Set a zip code in Settings to search for races near you.</p>
+                      )}
+                      {' '}
+                      <button className="btn ghost small" type="button" onClick={() => setAddingRace(selectedTuneUp.sessionDate)}>
+                        Add the race you found
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
-            </div>
+              <button className="btn ghost small" type="button" onClick={() => setEditing((e) => !e)}>
+                {editing ? 'Cancel' : 'Edit'}
+              </button>
+            </>
           )}
 
           {selected?.kind === 'race' && (
@@ -231,7 +270,17 @@ function CalendarPage() {
             </div>
           )}
 
-          {!selected && (
+          {addDate !== null && (
+            <SessionEditor
+              key={addDate}
+              userId={userId}
+              addDate={addDate}
+              monthSessions={sessions.data ?? []}
+              onDone={() => setAddDate(null)}
+            />
+          )}
+
+          {!selected && !addDate && (
             <p style={{ color: 'var(--mut)', fontSize: 13.5 }}>Select a session or race on the calendar to see details.</p>
           )}
 
