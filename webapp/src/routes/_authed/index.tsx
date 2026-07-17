@@ -1,15 +1,28 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { useMonthSessions, useCompletions } from '../../features/calendar/queries';
+import { useMonthSessions, useCompletions, useNextRaceEvent, useBestRun } from '../../features/calendar/queries';
 import { useDailySummary, useTodayBrief } from '../../features/home/queries';
-import { useUnits } from '../../features/settings/queries';
+import { useUnits, useUserGoal } from '../../features/settings/queries';
+import { useDayLog, sumDay, useNutritionTargets } from '../../features/nutrition/queries';
 import { pickTodaySession, buildWeekStrip } from '../../features/home/model';
 import { sameWeekDates } from '../../lib/session-edit';
 import { toDateInputValue } from '../../lib/day';
+import { buildRacePredictor, formatRaceTimeSec } from '../../lib/predictions';
+import { computeRacePhase } from '../../lib/race-phase';
 import type { TrainingSession } from '../../lib/schemas';
 import { PageHeader } from '../../components/PageHeader';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { Badge } from '../../components/Badge';
 import { SESSION_TYPE_LABEL, INTENSITY_LABEL, formatMinutes, formatDistanceKm } from '../../lib/format';
+
+function daysUntil(dateISO: string): number {
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const target = new Date(`${dateISO}T00:00:00`);
+  return Math.round((target.getTime() - today.getTime()) / 86_400_000);
+}
+
+function pct(eaten: number, target: number | null): number {
+  return target != null && target > 0 ? Math.min(100, Math.round((eaten / target) * 100)) : 0;
+}
 
 // Shared week-query state, threaded into both TodayHero and WeekStrip so the
 // month/completions fetch in DashboardPage happens exactly once.
@@ -134,6 +147,110 @@ function WeekStrip({ weekSessions, completedIds, todayISO, isPending, isError, e
   );
 }
 
+function NextRaceCard({ userId }: { userId: string }) {
+  const nextRace = useNextRaceEvent(userId);
+  const bestRun = useBestRun(userId);
+  const goal = useUserGoal(userId);
+
+  if (nextRace.isError || goal.isError) {
+    return (
+      <ErrorPanel
+        error={nextRace.error ?? goal.error ?? new Error('Could not load your next race.')}
+        onRetry={() => { void nextRace.refetch(); void goal.refetch(); }}
+      />
+    );
+  }
+  if (nextRace.isPending || goal.isPending) return <p className="loading-line">Loading…</p>;
+
+  const phase = goal.data
+    ? computeRacePhase({ targetRace: goal.data.targetRace, targetDate: goal.data.targetDate, totalWeeksPlanned: goal.data.totalWeeksPlanned })
+    : null;
+
+  if (!nextRace.data && !phase) return null; // no upcoming race and no active plan phase — nothing to show
+
+  // bestRun/predictor are best-effort: a failed or empty fetch just means no predictor line, never an error state.
+  const predictor = bestRun.data ? buildRacePredictor(bestRun.data.miles, bestRun.data.timeS) : null;
+  const compactPrediction = predictor
+    ? predictor.predictions.find((p) => p.label === 'Marathon') ?? predictor.predictions[predictor.predictions.length - 1] ?? null
+    : null;
+
+  return (
+    <>
+      {nextRace.data && (
+        <div className="race-countdown">
+          <div className="days">T–{Math.max(0, daysUntil(nextRace.data.event_date))}</div>
+          <div className="lab">Days to race</div>
+          <div className="name">{nextRace.data.name}</div>
+          <div className="meta">
+            {new Date(`${nextRace.data.event_date}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            {nextRace.data.distance_km ? ` · ${nextRace.data.distance_km}km` : ''}
+            {nextRace.data.goal_time_s ? ` · Goal ${formatRaceTimeSec(nextRace.data.goal_time_s)}` : ''}
+          </div>
+        </div>
+      )}
+
+      {phase && (
+        <div className="detail-card">
+          <div className="tag">Training phase</div>
+          <h3>{phase.phase}</h3>
+          <p>Week {phase.currentWeekNumber} of {phase.totalWeeks} · {phase.weeksRemaining} to go</p>
+        </div>
+      )}
+
+      {compactPrediction && (
+        <div className="detail-card">
+          <div className="tag">Race predictor</div>
+          <p>Predicted {compactPrediction.label.toLowerCase()}: <b>{formatRaceTimeSec(compactPrediction.predictedTimeS)}</b></p>
+        </div>
+      )}
+    </>
+  );
+}
+
+function MacroBar({ label, eaten, target }: { label: string; eaten: number; target: number | null }) {
+  return (
+    <div className="macro">
+      <div className="m-head">
+        <span>{label}</span>
+        <span><b>{eaten}</b>{target != null ? ` / ${target}g` : 'g'}</span>
+      </div>
+      <div className="track">
+        <div className="fill" style={{ width: `${pct(eaten, target)}%` }} />
+        {target != null && <div className="target" />}
+      </div>
+    </div>
+  );
+}
+
+function FuelCard({ userId, todayISO }: { userId: string; todayISO: string }) {
+  const day = useDayLog(userId, todayISO);
+  const targets = useNutritionTargets(userId);
+  const eaten = sumDay(day.data ?? []);
+
+  if (targets.isError) return <ErrorPanel error={targets.error ?? new Error('Could not load your nutrition targets.')} onRetry={() => void targets.refetch()} />;
+  if (targets.isPending) return <p className="loading-line">Loading…</p>;
+  if (!targets.data) return null; // no targets set yet — nothing to show
+
+  const t = targets.data;
+
+  return (
+    <div className="fuel-band" style={{ marginBottom: 0 }}>
+      <div className="fuel-cal">
+        <div className="num">{eaten.calories.toLocaleString()}</div>
+        <div className="of">{t.calories != null ? `/ ${t.calories.toLocaleString()} kcal` : 'kcal'}</div>
+        <div className="lab">Today's fuel</div>
+      </div>
+      <div className="fuel-macros">
+        {day.isError && <p className="err-line" role="alert">Couldn't load today's food log.</p>}
+        <MacroBar label="Protein" eaten={eaten.proteinG} target={t.protein_g} />
+        <MacroBar label="Carbs" eaten={eaten.carbsG} target={t.carbs_g} />
+        <MacroBar label="Fat" eaten={eaten.fatG} target={t.fat_g} />
+        <Link className="link-amber" to="/nutrition">Open Fuel Desk ›</Link>
+      </div>
+    </div>
+  );
+}
+
 function DashboardPage() {
   const { userId } = Route.useRouteContext();
   const todayISO = toDateInputValue(new Date());
@@ -180,6 +297,10 @@ function DashboardPage() {
           error={weekError}
           onRetry={retryWeek}
         />
+
+        <NextRaceCard userId={userId} />
+
+        <FuelCard userId={userId} todayISO={todayISO} />
       </div>
     </>
   );
