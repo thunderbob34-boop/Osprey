@@ -43,6 +43,7 @@ export function sessionUpdatePayload(current: TrainingSession, edits: SessionEdi
   if (edits.session_date !== undefined) payload.session_date = edits.session_date; // a move
   if (edits.session_type !== current.session_type) {
     payload.ozzie_notes = null;
+    payload.fuel = null;
     if (edits.session_type !== 'lift') payload.lift_prescription = null;
     if (!INTERVAL_TYPES.has(edits.session_type)) payload.interval_prescription = null;
   }

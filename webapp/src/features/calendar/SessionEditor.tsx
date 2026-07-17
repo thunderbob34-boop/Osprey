@@ -42,7 +42,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
   const fields = (): Omit<SessionEdits, 'session_date'> => ({
     session_type: sessionType,
     intensity,
-    planned_minutes: toNumOrNull(minutes),
+    planned_minutes: minutes.trim() === '' ? null : Math.round(Number(minutes)),
     planned_distance_km: toNumOrNull(distanceKm),
     description,
   });
@@ -99,7 +99,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
 
       <div className="settings-row">
         <span className="k">Minutes</span>
-        <input type="number" min="0" style={{ width: 90 }} value={minutes} onChange={(e) => setMinutes(e.target.value)} />
+        <input type="number" min="0" step="1" style={{ width: 90 }} value={minutes} onChange={(e) => setMinutes(e.target.value)} />
       </div>
 
       <div className="settings-row">

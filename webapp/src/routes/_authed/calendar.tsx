@@ -211,7 +211,7 @@ function CalendarPage() {
                   userId={userId}
                   session={selected.data}
                   monthSessions={sessions.data ?? []}
-                  onDone={() => setEditing(false)}
+                  onDone={() => { setEditing(false); setSelected(null); }}
                 />
               ) : (
                 <div className="detail-card">

@@ -35,16 +35,19 @@ describe('sessionUpdatePayload', () => {
   it('a non-type edit clears no coach fields', () => {
     const p = sessionUpdatePayload(S({ session_type: 'run' }), { session_type: 'run', ...base });
     expect(p).toEqual({ session_type: 'run', intensity: 'easy', planned_minutes: 30, planned_distance_km: 5, description: 'd' });
+    expect('fuel' in p).toBe(false);
   });
   it('run→lift clears ozzie_notes + interval_prescription, not lift_prescription', () => {
     const p = sessionUpdatePayload(S({ session_type: 'run' }), { session_type: 'lift', ...base });
     expect(p.ozzie_notes).toBeNull();
+    expect(p.fuel).toBeNull();
     expect(p.interval_prescription).toBeNull();
     expect('lift_prescription' in p).toBe(false);
   });
   it('lift→run clears ozzie_notes + lift_prescription, not interval_prescription', () => {
     const p = sessionUpdatePayload(S({ session_type: 'lift' }), { session_type: 'run', ...base });
     expect(p.ozzie_notes).toBeNull();
+    expect(p.fuel).toBeNull();
     expect(p.lift_prescription).toBeNull();
     expect('interval_prescription' in p).toBe(false);
   });
