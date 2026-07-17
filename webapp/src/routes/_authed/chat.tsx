@@ -70,7 +70,7 @@ function ChatPage() {
   }
 
   return (
-    <div className="page">
+    <>
       <PageHeader eyebrow="Coach" title="Ask Ozzie" sub="Grounded in your plan, zones and recent training." />
 
       <div style={{ display: 'flex', gap: 16, alignItems: 'stretch', flexWrap: 'wrap' }}>
@@ -151,7 +151,7 @@ function ChatPage() {
           </div>
         </section>
       </div>
-    </div>
+    </>
   );
 }
 
