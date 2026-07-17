@@ -145,7 +145,7 @@ function CalendarPage() {
                       </button>
                     );
                   })}
-                  {inMonth && (
+                  {inMonth && daySessions.length === 0 && (
                     <button
                       className="btn ghost"
                       type="button"
