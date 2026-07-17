@@ -186,6 +186,14 @@ The safe sequence, because the app build and backend must agree:
    passes `p_log_date` to the RPC; the *old* 2-arg RPC would reject that call. The new 3-arg RPC is fine for
    an old app too (param defaults to `CURRENT_DATE`), so migration-first is always safe; **app-build-first is not.**
 3. Everything else (security migration, the 5 error-text functions, nutrition-coach) can go in any order.
+4. **Webapp all-sports coverage (merged 2026-07-16, `ea34af8`)** — the webapp's `useUserGoal` reads
+   `user_goals.{primary_goal, goal_params, target_date, total_weeks_planned}` to drive the sport-aware calendar
+   (run predictor gated to run/ultra/triathlon + a training-phase chip) and the editable strength/hybrid zones card.
+   `goal_params` is in the pending migration bundle above, so **apply those migrations before/with the webapp's
+   Cloudflare deploy.** Against the *current* deployed schema the `select` 400s and degrades gracefully (predictor
+   hidden, no strength card; endurance rows unaffected via the separate `threshold_anchor` read) — no crash, but the
+   feature stays dark until the columns land. **Webapp-only: no new migration, no edge change.** The strength math is a
+   parity-tested copy of the mobile calculators (`webapp/src/lib/{race-phase,strength-loads,crossfit-zones,hyrox-loads}.ts`).
 
 **Rule of thumb:** push migrations + deploy functions **before** promoting the app build that depends on them.
 
