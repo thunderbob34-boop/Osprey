@@ -2,6 +2,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../../lib/supabase';
 import type { UnitSystem } from '../../lib/units';
 import { parseThresholdAnchor, type ThresholdAnchorMap } from '../../lib/threshold-anchor';
+import { PrimaryGoalSchema, type PrimaryGoal } from '../../lib/goals';
+import { mergeGoalParams } from '../../lib/goal-params';
 
 export function useUnits(userId: string) {
   return useQuery({
@@ -76,5 +78,54 @@ export function useUpdateThresholdAnchor(userId: string) {
     // refetch settles — otherwise buttons re-enable while the cached map is stale, and
     // a fast second-sport save would build off the old map and drop the just-saved one.
     onSuccess: () => qc.invalidateQueries({ queryKey: ['threshold-anchor', userId] }),
+  });
+}
+
+export interface UserGoal {
+  primaryGoal: PrimaryGoal | null;
+  goalParams: unknown;
+  targetRace: string | null;
+  targetDate: string | null;
+  totalWeeksPlanned: number | null;
+  thresholdAnchor: ThresholdAnchorMap;
+}
+
+export function useUserGoal(userId: string) {
+  return useQuery({
+    queryKey: ['user-goal', userId],
+    queryFn: async (): Promise<UserGoal> => {
+      const { data, error } = await supabase
+        .from('user_goals')
+        .select('primary_goal, goal_params, target_race, target_date, total_weeks_planned, threshold_anchor')
+        .eq('user_id', userId)
+        .maybeSingle();
+      if (error) throw error;
+      const primary = PrimaryGoalSchema.safeParse(data?.primary_goal);
+      return {
+        primaryGoal: primary.success ? primary.data : null,
+        goalParams: data?.goal_params ?? null,
+        targetRace: data?.target_race ?? null,
+        targetDate: data?.target_date ?? null,
+        totalWeeksPlanned: data?.total_weeks_planned ?? null,
+        thresholdAnchor: parseThresholdAnchor(data?.threshold_anchor),
+      };
+    },
+  });
+}
+
+export function useUpdateGoalParams(userId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (patch: Record<string, unknown>) => {
+      const { data: cur, error: readErr } = await supabase
+        .from('user_goals').select('goal_params').eq('user_id', userId).maybeSingle();
+      if (readErr) throw readErr;
+      const next = mergeGoalParams(cur?.goal_params, patch);
+      const { data, error } = await supabase
+        .from('user_goals').update({ goal_params: next }).eq('user_id', userId).select('user_id');
+      if (error) throw error;
+      if (!data || data.length === 0) throw new Error('Could not save — no goals record found for your account.');
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['user-goal', userId] }),
   });
 }

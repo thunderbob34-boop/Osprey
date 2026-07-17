@@ -4,10 +4,11 @@ import {
   useMonthSessions, useCompletions, useMonthRaceEvents, useNextRaceEvent, useBestRun,
   useGoalDistanceKm, useTuneUpWeeks,
 } from '../../features/calendar/queries';
-import { useLocationZip } from '../../features/settings/queries';
+import { useLocationZip, useUserGoal } from '../../features/settings/queries';
 import type { TrainingSession, RaceEvent } from '../../lib/schemas';
 import { buildRacePredictor, formatRaceTimeSec } from '../../lib/predictions';
 import { buildRunSignupSearchUrl } from '../../lib/racesearch';
+import { computeRacePhase } from '../../lib/race-phase';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { PageHeader } from '../../components/PageHeader';
 import { AddRaceForm } from '../../components/AddRaceForm';
@@ -51,6 +52,7 @@ function CalendarPage() {
   const goalDistanceKm = useGoalDistanceKm(userId);
   const tuneUpWeeks = useTuneUpWeeks(sessions.data, goalDistanceKm.data);
   const locationZip = useLocationZip(userId);
+  const userGoal = useUserGoal(userId);
 
   const iso = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   const sessionsByDate = useMemo(() => {
@@ -67,6 +69,14 @@ function CalendarPage() {
 
   const predictor = bestRun.data ? buildRacePredictor(bestRun.data.miles, bestRun.data.timeS) : null;
   const selectedTuneUp = selected?.kind === 'session' ? tuneUpBySessionId.get(selected.data.id) : undefined;
+  const isRunGoal = ['run', 'ultra', 'triathlon'].includes(userGoal.data?.primaryGoal ?? '');
+  const phaseInfo = userGoal.data
+    ? computeRacePhase({
+        targetRace: userGoal.data.targetRace,
+        targetDate: userGoal.data.targetDate,
+        totalWeeksPlanned: userGoal.data.totalWeeksPlanned,
+      })
+    : null;
 
   if (sessions.isError) return <ErrorPanel error={sessions.error as Error} onRetry={() => void sessions.refetch()} />;
 
@@ -141,7 +151,15 @@ function CalendarPage() {
             </div>
           )}
 
-          {predictor ? (
+          {phaseInfo && (
+            <div className="detail-card">
+              <div className="tag">Training phase</div>
+              <h3>{phaseInfo.phase}</h3>
+              <p>Week {phaseInfo.currentWeekNumber} of {phaseInfo.totalWeeks} · {phaseInfo.weeksRemaining} to go</p>
+            </div>
+          )}
+
+          {isRunGoal && (predictor ? (
             <div className="detail-card">
               <div className="tag">Race predictor</div>
               <p>From your best run in the last 12 weeks ({predictor.baseMiles.toFixed(1)} mi at {formatRaceTimeSec(predictor.basePaceSecPerMile)}/mi pace).</p>
@@ -159,7 +177,7 @@ function CalendarPage() {
               <div className="tag">Race predictor</div>
               <p>Log a completed run with distance and time — including a tune-up race — and your predicted times for every distance show up here.</p>
             </div>
-          )}
+          ))}
 
           {selected?.kind === 'session' && (
             <div className="detail-card">
