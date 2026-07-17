@@ -191,6 +191,12 @@ Deno.serve(async (req: Request) => {
 
     const upstream = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
+      // Hard ceiling on the whole model call so a hung/stalled OpenAI stream
+      // can't pin the function open indefinitely. Aborting mid-stream rejects
+      // the reader in pull()'s catch, which persists the partial reply and
+      // errors the client stream — the same path a real upstream reset takes.
+      // The webapp also idle-times-out at 30s, so this is the server-side floor.
+      signal: AbortSignal.timeout(90_000),
       headers: {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
         'Content-Type': 'application/json',
