@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { useConversations, useMessages, useCreateConversation } from '../../features/chat/queries';
 import { sendChatMessage, ChatSendError } from '../../features/chat/send';
@@ -170,4 +170,13 @@ function ChatPage() {
   );
 }
 
-export const Route = createFileRoute('/_authed/chat')({ component: ChatPage });
+export const Route = createFileRoute('/_authed/chat')({
+  // Chat is hidden until OpenAI billing is turned on: the nav link is removed
+  // (NavRail.tsx) and any direct hit on /chat bounces to the dashboard, so it
+  // can't be reached or run up OpenAI usage. Re-enable: delete this beforeLoad
+  // and restore the nav link. ChatPage below is left fully intact.
+  beforeLoad: () => {
+    throw redirect({ to: '/' });
+  },
+  component: ChatPage,
+});

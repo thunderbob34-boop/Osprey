@@ -181,14 +181,16 @@ export default function DailySummaryScreen({
                 <Ionicons name="people-outline" size={20} color={Colors.teal} />
               </TouchableOpacity>
             ) : null}
-            <TouchableOpacity
-              style={styles.avatarBtn}
-              onPress={onOzziePress}
-              accessibilityRole="button"
-              accessibilityLabel="Ask Ozzie"
-            >
-              <OzzieAvatar size={36} />
-            </TouchableOpacity>
+            {onOzziePress ? (
+              <TouchableOpacity
+                style={styles.avatarBtn}
+                onPress={onOzziePress}
+                accessibilityRole="button"
+                accessibilityLabel="Ask Ozzie"
+              >
+                <OzzieAvatar size={36} />
+              </TouchableOpacity>
+            ) : null}
           </View>
         </View>
 
