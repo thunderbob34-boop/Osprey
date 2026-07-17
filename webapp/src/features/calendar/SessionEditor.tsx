@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useCreateSession, useDeleteSession, useUpdateSession } from './queries';
 import { sameWeekDates, weekIdForDate, type SessionEdits } from '../../lib/session-edit';
 import { SESSION_TYPE_LABEL, INTENSITY_LABEL, formatDateShort } from '../../lib/format';
@@ -7,16 +7,20 @@ import type { TrainingSession } from '../../lib/schemas';
 interface Props {
   userId: string;
   monthSessions: TrainingSession[];
-  onDone: () => void;
+  onDone: (action: 'saved' | 'deleted' | 'added') => void;
+  onCancel?: () => void;
   session?: TrainingSession; // edit mode
   addDate?: string; // add mode — exactly one of session/addDate is set
 }
 
+// Clamps to a non-negative value; blank or unparseable input becomes null.
 function toNumOrNull(raw: string): number | null {
-  return raw.trim() === '' ? null : Number(raw);
+  if (raw.trim() === '') return null;
+  const n = Number(raw);
+  return Number.isFinite(n) ? Math.max(0, n) : null;
 }
 
-export function SessionEditor({ userId, monthSessions, onDone, session, addDate }: Props) {
+export function SessionEditor({ userId, monthSessions, onDone, onCancel, session, addDate }: Props) {
   const [sessionType, setSessionType] = useState<TrainingSession['session_type']>(session?.session_type ?? 'run');
   const [intensity, setIntensity] = useState<TrainingSession['intensity']>(session?.intensity ?? 'easy');
   const [minutes, setMinutes] = useState(session?.planned_minutes != null ? String(session.planned_minutes) : '');
@@ -28,6 +32,16 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
   const del = useDeleteSession(userId);
   const create = useCreateSession(userId);
 
+  // Move keyboard/screen-reader focus into the form as soon as it opens — otherwise
+  // it stays on the triggering "Edit"/"+ Add" button, off-screen from the fields.
+  // (Two refs: the dead-end "no training week" card has no Type select to focus.)
+  const typeSelectRef = useRef<HTMLSelectElement>(null);
+  const deadEndCancelRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    typeSelectRef.current?.focus();
+    deadEndCancelRef.current?.focus();
+  }, []);
+
   // Add mode only — the week this new session would join, if the plan covers this date.
   const weekId = !session && addDate ? weekIdForDate(addDate, monthSessions) : null;
 
@@ -35,6 +49,11 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
     return (
       <div className="detail-card">
         <p className="err-line">No training week here yet — add sessions to a week your plan covers.</p>
+        {onCancel && (
+          <div className="log-form-actions" style={{ marginTop: 12 }}>
+            <button ref={deadEndCancelRef} className="btn ghost" type="button" onClick={onCancel}>Cancel</button>
+          </div>
+        )}
       </div>
     );
   }
@@ -42,16 +61,23 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
   const fields = (): Omit<SessionEdits, 'session_date'> => ({
     session_type: sessionType,
     intensity,
-    planned_minutes: minutes.trim() === '' ? null : Math.round(Number(minutes)),
+    planned_minutes: minutes.trim() === '' ? null : Math.max(0, Math.round(Number(minutes)) || 0),
     planned_distance_km: toNumOrNull(distanceKm),
     description,
   });
 
   async function handleSave() {
     if (!session) return;
+    // A type change wipes any Ozzie-generated coaching content for the old type
+    // (notes, fuel, and prescriptions) — confirm before discarding it. ozzie_notes is
+    // the only one of those fields the webapp reads, but it's a reliable proxy: Ozzie
+    // writes a note alongside any prescription/fuel it generates for a session.
+    if (sessionType !== session.session_type && session.ozzie_notes) {
+      if (!window.confirm("Changing the session type clears Ozzie's coaching notes for this session. Continue?")) return;
+    }
     try {
       await update.mutateAsync({ id: session.id, current: session, edits: { ...fields(), session_date: moveTo } });
-      onDone();
+      onDone('saved');
     } catch {
       // surfaced via update.error below
     }
@@ -62,7 +88,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
     if (!window.confirm('Delete this session?')) return;
     try {
       await del.mutateAsync(session.id);
-      onDone();
+      onDone('deleted');
     } catch {
       // surfaced via del.error below
     }
@@ -72,7 +98,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
     if (weekId === null || !addDate) return;
     try {
       await create.mutateAsync({ weekId, session_date: addDate, ...fields() });
-      onDone();
+      onDone('added');
     } catch {
       // surfaced via create.error below
     }
@@ -84,27 +110,27 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
   return (
     <div className="detail-card">
       <div className="settings-row">
-        <span className="k">Type</span>
-        <select value={sessionType} onChange={(e) => setSessionType(e.target.value as TrainingSession['session_type'])}>
+        <label className="k" htmlFor="se-type">Type</label>
+        <select ref={typeSelectRef} id="se-type" value={sessionType} onChange={(e) => setSessionType(e.target.value as TrainingSession['session_type'])}>
           {Object.keys(SESSION_TYPE_LABEL).map((k) => <option key={k} value={k}>{SESSION_TYPE_LABEL[k]}</option>)}
         </select>
       </div>
 
       <div className="settings-row">
-        <span className="k">Intensity</span>
-        <select value={intensity} onChange={(e) => setIntensity(e.target.value as TrainingSession['intensity'])}>
+        <label className="k" htmlFor="se-intensity">Intensity</label>
+        <select id="se-intensity" value={intensity} onChange={(e) => setIntensity(e.target.value as TrainingSession['intensity'])}>
           {Object.keys(INTENSITY_LABEL).map((k) => <option key={k} value={k}>{INTENSITY_LABEL[k]}</option>)}
         </select>
       </div>
 
       <div className="settings-row">
-        <span className="k">Minutes</span>
-        <input type="number" min="0" step="1" style={{ width: 90 }} value={minutes} onChange={(e) => setMinutes(e.target.value)} />
+        <label className="k" htmlFor="se-minutes">Minutes</label>
+        <input id="se-minutes" type="number" min="0" step="1" style={{ width: 90 }} value={minutes} onChange={(e) => setMinutes(e.target.value)} />
       </div>
 
       <div className="settings-row">
-        <span className="k">Distance (km)</span>
-        <input type="number" min="0" step="0.1" style={{ width: 90 }} value={distanceKm} onChange={(e) => setDistanceKm(e.target.value)} />
+        <label className="k" htmlFor="se-distance">Distance (km)</label>
+        <input id="se-distance" type="number" min="0" step="0.1" style={{ width: 90 }} value={distanceKm} onChange={(e) => setDistanceKm(e.target.value)} />
       </div>
 
       <div className="field" style={{ marginTop: 14 }}>
@@ -114,8 +140,8 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
 
       {session && (
         <div className="settings-row">
-          <span className="k">Move to</span>
-          <select value={moveTo} onChange={(e) => setMoveTo(e.target.value)}>
+          <label className="k" htmlFor="se-move-to">Move to</label>
+          <select id="se-move-to" value={moveTo} onChange={(e) => setMoveTo(e.target.value)}>
             {sameWeekDates(session.session_date).map((d) => (
               // Append a local-midnight time so formatDateShort's `new Date(str)` parses in local
               // time, not UTC — a bare "YYYY-MM-DD" would roll back a day for negative-offset zones
@@ -137,6 +163,9 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
         <button className="btn" type="button" onClick={() => void (session ? handleSave() : handleAdd())} disabled={pending}>
           {session ? (update.isPending ? 'Saving…' : 'Save') : (create.isPending ? 'Adding…' : 'Add session')}
         </button>
+        {!session && onCancel && (
+          <button className="btn ghost" type="button" onClick={onCancel} disabled={pending}>Cancel</button>
+        )}
       </div>
     </div>
   );

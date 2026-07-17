@@ -27,8 +27,6 @@ export interface SessionEdits {
   session_date?: string; // set to the Move-to day for a move; omit for a pure field edit
 }
 
-const INTERVAL_TYPES = new Set(['run', 'swim', 'bike', 'rowing']);
-
 // The UPDATE body for an edit. A TYPE change also clears the now-mismatched
 // coach-generated fields (ozzie_notes + the wrong prescription) so nothing stale
 // renders; a non-type edit touches none of them.
@@ -45,7 +43,9 @@ export function sessionUpdatePayload(current: TrainingSession, edits: SessionEdi
     payload.ozzie_notes = null;
     payload.fuel = null;
     if (edits.session_type !== 'lift') payload.lift_prescription = null;
-    if (!INTERVAL_TYPES.has(edits.session_type)) payload.interval_prescription = null;
+    // Always clear on a type change, even between two interval sports (run->swim etc.) —
+    // the prescription's pace/split units are sport-specific and don't carry over.
+    payload.interval_prescription = null;
   }
   return payload;
 }

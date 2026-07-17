@@ -229,6 +229,7 @@ async function rescheduleMissedSessions(
   const { data: linkedWorkouts } = await supabase
     .from('workout_logs')
     .select('session_id')
+    .is('deleted_at', null)
     .in(
       'session_id',
       sessions.map((s) => s.id),

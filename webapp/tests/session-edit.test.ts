@@ -44,12 +44,16 @@ describe('sessionUpdatePayload', () => {
     expect(p.interval_prescription).toBeNull();
     expect('lift_prescription' in p).toBe(false);
   });
-  it('lift→run clears ozzie_notes + lift_prescription, not interval_prescription', () => {
+  it('lift→run clears ozzie_notes + lift_prescription + interval_prescription', () => {
     const p = sessionUpdatePayload(S({ session_type: 'lift' }), { session_type: 'run', ...base });
     expect(p.ozzie_notes).toBeNull();
     expect(p.fuel).toBeNull();
     expect(p.lift_prescription).toBeNull();
-    expect('interval_prescription' in p).toBe(false);
+    expect(p.interval_prescription).toBeNull();
+  });
+  it('run→swim clears interval_prescription even though both are interval types (stale run paces don\'t apply to swim)', () => {
+    const p = sessionUpdatePayload(S({ session_type: 'run' }), { session_type: 'swim', ...base });
+    expect(p.interval_prescription).toBeNull();
   });
   it('includes session_date only when provided (a move)', () => {
     const noMove = sessionUpdatePayload(S({ session_type: 'run' }), { session_type: 'run', ...base });

@@ -82,11 +82,19 @@ export default function BaselineScreen() {
   }, [primaryGoal, userId]);
 
   function onSkip() {
-    // Preserve any ultra race params (distance/vert/fueling) the athlete already
-    // entered on this screen even when skipping the optional recent-effort anchor.
+    // Preserve any race/sport params the athlete already entered on this screen
+    // even when skipping the optional recent-effort anchor.
     if (primaryGoal === 'ultra') {
       const u = parseUltraParams({ raceDistance: ultraDistance, vertGainM: ultraVert, gutTrained });
       if (u.ok) setGoalParams(u.value);
+    }
+    if (primaryGoal === 'hyrox') {
+      const h = parseHyroxParams({ division, targetTimeMinutes: '' });
+      if (h.ok) setGoalParams(h.value);
+    }
+    if (primaryGoal === 'crossfit') {
+      const c = parseCrossfitParams({ backSquat, deadlift: crossfitDeadlift, press, competing, fran });
+      if (c.ok) setGoalParams(c.value);
     }
     router.push(HEALTH);
   }
@@ -125,6 +133,13 @@ export default function BaselineScreen() {
       const h = parseHyroxParams({ division, targetTimeMinutes: '' });
       if (!h.ok) return setError(h.error);
       setGoalParams(h.value);
+      // The recent hard-run anchor is optional for hyrox too — only require it
+      // (and only error on it) if the athlete actually started filling it in.
+      const hasRunInput = runMiles.trim() !== '' || runMin.trim() !== '' || runSec.trim() !== '';
+      if (!hasRunInput) {
+        router.push(HEALTH);
+        return;
+      }
     }
     let value: number;
     let anchor: ThresholdAnchorMap;
