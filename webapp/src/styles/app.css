@@ -26,7 +26,8 @@
   position: sticky; top: 0; height: 100vh;
 }
 .rail-brand { padding: 24px 20px 20px; border-bottom: var(--border-w) solid var(--line); }
-.rail-logo { font-weight: 700; font-size: 18px; text-transform: uppercase; letter-spacing: 0.02em; }
+.rail-logo { font-weight: 700; font-size: 18px; text-transform: uppercase; letter-spacing: 0.02em; transition: color 120ms ease; }
+.rail-logo:hover { color: var(--amber); }
 .rail-links { flex: 1; padding: 14px 0; display: flex; flex-direction: column; }
 .rail-link {
   padding: 13px 20px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px;
