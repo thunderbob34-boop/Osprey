@@ -8,7 +8,10 @@ const links = [
   { to: '/log', label: 'Log' },
   { to: '/history', label: 'History' },
   { to: '/nutrition', label: 'Nutrition' },
-  { to: '/chat', label: 'Ask Ozzie' },
+  // Ask Ozzie (chat) hidden until OpenAI billing is turned on — the /chat route
+  // also redirects to '/' (see chat.tsx). Re-enable: restore this link + drop
+  // the beforeLoad redirect. The page, data layer, and edge fn are all intact.
+  // { to: '/chat', label: 'Ask Ozzie' },
   { to: '/settings', label: 'Settings' },
 ] as const;
 

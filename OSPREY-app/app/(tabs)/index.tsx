@@ -138,7 +138,10 @@ export default function HomeTab() {
       quickStats={data?.quickStats}
       trainingReadiness={isPlus ? (perf?.trainingReadiness ?? null) : null}
       onActivityPress={() => router.push('/activity')}
-      onOzziePress={() => router.push('/ask-ozzie')}
+      // Ask Ozzie hidden until OpenAI billing is on — omitting this prop hides
+      // the header avatar button (DailySummary gates it on onOzziePress). The
+      // ask-ozzie screen stays; re-enable by restoring this line.
+      // onOzziePress={() => router.push('/ask-ozzie')}
       onViewWeekPress={() => router.push('/plan-preview')}
       onConnectHealthPress={() => router.push('/(tabs)/settings')}
       hydration={hydration}
