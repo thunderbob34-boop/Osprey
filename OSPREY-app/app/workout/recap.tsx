@@ -138,7 +138,7 @@ export default function WorkoutRecapScreen() {
           {label.stat ? ` · ${label.stat}` : ''}
         </Text>
 
-        <Card style={styles.ozzieCard}>
+        <Card emphasis style={styles.ozzieCard}>
           <Text style={styles.ozzieLabel}>Ozzie&apos;s debrief</Text>
           <Text style={styles.ozzieText}>&ldquo;{data.ozzieDebrief}&rdquo;</Text>
         </Card>
