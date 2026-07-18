@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import OnboardingShell from '@/components/onboarding/OnboardingShell';
 import OzzieMascot from '@/components/OzzieMascot';
-import { Colors } from '@/constants/colors';
+import { Theme } from '@/constants/theme';
 
 export default function WelcomeScreen() {
   const router = useRouter();
@@ -36,13 +36,13 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: Colors.textPrimary,
+    color: Theme.text,
     textAlign: 'center',
     lineHeight: 27,
     paddingHorizontal: 8,
   },
   subtitleAccent: {
-    color: Colors.teal,
+    color: Theme.accent,
     fontWeight: '800',
   },
 });

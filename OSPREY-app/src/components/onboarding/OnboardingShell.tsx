@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import OzzieAvatar from '@/components/OzzieAvatar';
 
 interface OnboardingShellProps {
@@ -79,7 +79,7 @@ export default function OnboardingShell({
           accessibilityState={{ disabled: continueDisabled || loading, busy: loading }}
         >
           {loading ? (
-            <ActivityIndicator color="#000" />
+            <ActivityIndicator color={Theme.ink} />
           ) : (
             <Text style={styles.primaryBtnText}>{continueLabel}</Text>
           )}
@@ -104,13 +104,17 @@ export function OptionCard({
   onPress: () => void;
   accent?: string;
 }) {
-  const accentColor = accent ?? Colors.teal;
+  const accentColor = accent ?? Theme.accent;
 
   return (
     <TouchableOpacity
       style={[
         styles.optionCard,
-        selected && { borderColor: accentColor, backgroundColor: `${accentColor}14` },
+        // Border-only. This card already carries THREE selection cues — accent
+        // border, accent title, and the ✓ below — so a fill is redundant, and
+        // goals.tsx renders these directly above border-only day buttons where
+        // the mismatch would read as a seam. Convention: races.tsx:1267.
+        selected && { borderColor: accentColor },
       ]}
       onPress={onPress}
       activeOpacity={0.8}
@@ -137,7 +141,7 @@ export function OptionCard({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
   },
   progressWrap: {
     paddingHorizontal: 24,
@@ -146,18 +150,20 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     height: 4,
-    backgroundColor: 'rgba(255,255,255,0.08)',
+    // The unfilled track behind the accent progress fill. Same rgba value that
+    // stats.tsx's sportLegend border took to Theme.line in an earlier slice.
+    backgroundColor: Theme.line,
     borderRadius: 2,
     overflow: 'hidden',
   },
   progressFill: {
     height: 4,
-    backgroundColor: Colors.teal,
+    backgroundColor: Theme.accent,
     borderRadius: 2,
   },
   progressLabel: {
     fontSize: 11,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     fontWeight: '600',
   },
   scroll: {
@@ -176,12 +182,13 @@ const styles = StyleSheet.create({
   ozzieName: {
     fontSize: 13,
     fontWeight: '700',
-    color: Colors.gold,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
   },
   title: {
     fontSize: 22,
     fontWeight: '800',
-    color: Colors.textPrimary,
+    color: Theme.text,
     marginBottom: 8,
     letterSpacing: -0.3,
   },
@@ -192,7 +199,7 @@ const styles = StyleSheet.create({
   },
   hint: {
     fontSize: 14,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     lineHeight: 20,
     marginBottom: 20,
   },
@@ -200,38 +207,40 @@ const styles = StyleSheet.create({
     padding: 24,
     paddingTop: 8,
     borderTopWidth: 1,
-    borderTopColor: Colors.border,
+    borderTopColor: Theme.line,
   },
   primaryBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     height: 52,
     alignItems: 'center',
     justifyContent: 'center',
   },
   primaryBtnDisabled: {
-    opacity: 0.45,
+    opacity: 0.5,
   },
   primaryBtnText: {
     fontSize: 15,
     fontWeight: '800',
-    color: '#000',
+    color: Theme.ink,
   },
   optionCard: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 14,
     marginBottom: 10,
   },
   optionIcon: {
     width: 40,
     height: 40,
-    borderRadius: 10,
+    borderRadius: Radius.card,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -244,12 +253,12 @@ const styles = StyleSheet.create({
   optionTitle: {
     fontSize: 15,
     fontWeight: '700',
-    color: Colors.textPrimary,
+    color: Theme.text,
     marginBottom: 3,
   },
   optionDesc: {
     fontSize: 12,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     lineHeight: 17,
   },
   optionCheck: {

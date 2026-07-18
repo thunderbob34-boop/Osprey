@@ -12,7 +12,7 @@ import { reconcileRaceWeekReminders } from '@/services/notifications';
 import { syncCalendarBlocks } from '@/services/calendar-blocking';
 import { fetchDefaultLiftExercises } from '@/services/workouts';
 import { ozziePrewarm } from '@/services/ozzie-audio';
-import { Colors } from '@/constants/colors';
+import { Theme } from '@/constants/theme';
 import { AppLoadingScreen } from '@/components/AppLoadingScreen';
 
 SplashScreen.preventAutoHideAsync();
@@ -64,8 +64,8 @@ function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <StatusBar style="light" backgroundColor={Colors.bg} />
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: Colors.bg } }}>
+      <StatusBar style="light" backgroundColor={Theme.ink} />
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: Theme.ink } }}>
         <Stack.Screen name="index" />
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(onboarding)" />

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Animated, Easing, StyleSheet } from 'react-native';
-import { Colors } from '@/constants/colors';
+import { Theme } from '@/constants/theme';
 import OzzieMascot from '@/components/OzzieMascot';
 
 function LoadingDot({ delay }: { delay: number }) {
@@ -145,7 +145,7 @@ export function AppLoadingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     height: 116,
     borderRadius: 58,
     borderWidth: 1,
-    borderColor: 'rgba(0, 200, 200, 0.1)',
+    borderColor: 'rgba(200, 121, 58, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -162,9 +162,9 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: 'rgba(0, 200, 200, 0.08)',
+    backgroundColor: 'rgba(200, 121, 58, 0.08)',
     borderWidth: 1.5,
-    borderColor: 'rgba(0, 200, 200, 0.3)',
+    borderColor: 'rgba(200, 121, 58, 0.3)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -177,16 +177,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 42,
     fontWeight: '900',
-    color: '#FFFFFF',
+    color: Theme.text,
     letterSpacing: 4,
-    textShadowColor: Colors.teal,
+    textShadowColor: Theme.accent,
     textShadowRadius: 8,
     textShadowOffset: { width: 0, height: 0 },
   },
   tagline: {
     fontSize: 14,
     letterSpacing: 2,
-    color: Colors.teal,
+    color: Theme.accent,
     marginTop: 6,
   },
   dotsGap: {
@@ -201,6 +201,6 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: Colors.teal,
+    backgroundColor: Theme.accent,
   },
 });

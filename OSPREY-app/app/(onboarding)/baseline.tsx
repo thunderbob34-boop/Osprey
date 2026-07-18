@@ -19,6 +19,7 @@ import { parseStrengthParams } from '@/services/coaching/strength-params';
 import { parseCrossfitParams } from '@/services/coaching/crossfit-params';
 import { bestE1rmForLift, fetchLiftAnalytics } from '@/services/lift-analytics';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
 
 const HEALTH = '/(onboarding)/health';
 const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
@@ -192,7 +193,7 @@ export default function BaselineScreen() {
               onChangeText={setUltraVert}
               keyboardType="number-pad"
               placeholder="e.g. 2000"
-              placeholderTextColor={Colors.textMuted}
+              placeholderTextColor={Theme.textMut}
             />
           </View>
           <View style={styles.field}>
@@ -225,11 +226,11 @@ export default function BaselineScreen() {
         <>
           <View style={styles.field}>
             <Text style={styles.label}>FTP (watts)</Text>
-            <TextInput style={styles.input} value={ftp} onChangeText={setFtp} keyboardType="number-pad" placeholder="240" placeholderTextColor={Colors.textMuted} />
+            <TextInput style={styles.input} value={ftp} onChangeText={setFtp} keyboardType="number-pad" placeholder="240" placeholderTextColor={Theme.textMut} />
           </View>
           <View style={styles.field}>
             <Text style={styles.label}>…or your best 20-min power (watts)</Text>
-            <TextInput style={styles.input} value={twentyMin} onChangeText={setTwentyMin} keyboardType="number-pad" placeholder="253" placeholderTextColor={Colors.textMuted} />
+            <TextInput style={styles.input} value={twentyMin} onChangeText={setTwentyMin} keyboardType="number-pad" placeholder="253" placeholderTextColor={Theme.textMut} />
           </View>
         </>
       ) : primaryGoal === 'lift' ? (
@@ -289,7 +290,7 @@ export default function BaselineScreen() {
           ) : null}
           <View style={styles.field}>
             <Text style={styles.label}>Distance (miles)</Text>
-            <TextInput style={styles.input} value={runMiles} onChangeText={setRunMiles} keyboardType="decimal-pad" placeholder="6.2" placeholderTextColor={Colors.textMuted} />
+            <TextInput style={styles.input} value={runMiles} onChangeText={setRunMiles} keyboardType="decimal-pad" placeholder="6.2" placeholderTextColor={Theme.textMut} />
           </View>
           <TimeRow label="Time" m={runMin} s={runSec} setM={setRunMin} setS={setRunSec} />
         </>
@@ -309,9 +310,9 @@ function TimeRow({ label, m, s, setM, setS }: { label: string; m: string; s: str
     <View style={styles.field}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.timeRow}>
-        <TextInput style={[styles.input, styles.timeInput]} value={m} onChangeText={setM} keyboardType="number-pad" placeholder="min" placeholderTextColor={Colors.textMuted} />
+        <TextInput style={[styles.input, styles.timeInput]} value={m} onChangeText={setM} keyboardType="number-pad" placeholder="min" placeholderTextColor={Theme.textMut} />
         <Text style={styles.colon}>:</Text>
-        <TextInput style={[styles.input, styles.timeInput]} value={s} onChangeText={setS} keyboardType="number-pad" placeholder="sec" placeholderTextColor={Colors.textMuted} />
+        <TextInput style={[styles.input, styles.timeInput]} value={s} onChangeText={setS} keyboardType="number-pad" placeholder="sec" placeholderTextColor={Theme.textMut} />
       </View>
     </View>
   );
@@ -327,7 +328,7 @@ function NumberField({ label, value, onChangeText, placeholder }: { label: strin
         onChangeText={onChangeText}
         keyboardType="decimal-pad"
         placeholder={placeholder}
-        placeholderTextColor={Colors.textMuted}
+        placeholderTextColor={Theme.textMut}
       />
     </View>
   );
@@ -335,23 +336,23 @@ function NumberField({ label, value, onChangeText, placeholder }: { label: strin
 
 const styles = StyleSheet.create({
   field: { gap: 6, marginBottom: 12 },
-  label: { fontSize: 13, color: Colors.textSecondary, fontWeight: '600' },
+  label: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
   timeRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  input: { backgroundColor: Colors.bgCard, borderWidth: 1, borderColor: Colors.border, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 12, color: Colors.textPrimary, fontSize: 16 },
+  input: { backgroundColor: Theme.ink, borderWidth: 1, borderColor: Theme.line, borderRadius: Radius.card, paddingHorizontal: 14, paddingVertical: 12, color: Theme.text, fontSize: 16 },
   timeInput: { flex: 1, textAlign: 'center' },
-  colon: { color: Colors.textMuted, fontSize: 18, fontWeight: '700' },
+  colon: { color: Theme.textMut, fontSize: 18, fontWeight: '700' },
   error: { fontSize: 12, color: Colors.red, marginTop: 4 },
-  skip: { fontSize: 13, color: Colors.textMuted, textAlign: 'center', marginTop: 16, textDecorationLine: 'underline' },
+  skip: { fontSize: 13, color: Theme.textMut, textAlign: 'center', marginTop: 16, textDecorationLine: 'underline' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     borderRadius: 24,
     paddingHorizontal: 16,
     paddingVertical: 10,
   },
-  chipSelected: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
-  chipText: { fontSize: 14, fontWeight: '600', color: Colors.textSecondary },
-  chipTextSelected: { color: Colors.teal },
+  chipSelected: { borderColor: Theme.accent },
+  chipText: { fontSize: 14, fontWeight: '600', color: Theme.textMut },
+  chipTextSelected: { color: Theme.accent },
 });

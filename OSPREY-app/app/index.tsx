@@ -1,7 +1,7 @@
 import { Redirect } from 'expo-router';
 import { ActivityIndicator, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useAuthStore } from '@/store/authStore';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 
 export default function Index() {
   const session = useAuthStore((s) => s.session);
@@ -14,7 +14,7 @@ export default function Index() {
   if (!initialized || (session && !profileReady)) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator color={Colors.teal} />
+        <ActivityIndicator color={Theme.accent} />
       </View>
     );
   }
@@ -52,31 +52,33 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
     padding: 28,
     gap: 12,
   },
   errorTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   errorText: {
     fontSize: 13,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
     lineHeight: 18,
   },
   retryBtn: {
     marginTop: 8,
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingHorizontal: 20,
     paddingVertical: 12,
   },
   retryText: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#000',
+    color: Theme.ink,
   },
 });

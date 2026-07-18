@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import OnboardingShell, { OptionCard } from '@/components/onboarding/OnboardingShell';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import type { PrimaryGoal } from '@/types/onboarding';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { primaryDayLabel } from '@/constants/sports';
 import { anchorKeyForGoal } from '@/services/coaching/baseline';
 
@@ -102,23 +102,24 @@ export default function GoalsScreen() {
 const styles = StyleSheet.create({
   zeroDaysHint: {
     fontSize: 12,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
     marginTop: 8,
   },
   scheduleCard: {
     marginTop: 8,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     gap: 16,
   },
   scheduleTitle: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
   },
   dayPicker: {
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
   },
   dayLabel: {
     fontSize: 13,
-    color: Colors.textSecondary,
+    color: Theme.textMut,
     fontWeight: '600',
   },
   dayRow: {
@@ -137,23 +138,22 @@ const styles = StyleSheet.create({
   dayBtn: {
     width: 34,
     height: 34,
-    borderRadius: 8,
+    borderRadius: Radius.card,
     backgroundColor: 'rgba(255,255,255,0.04)',
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
   dayBtnActive: {
-    backgroundColor: Colors.tealDim,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.accent,
   },
   dayBtnText: {
     fontSize: 13,
     fontWeight: '700',
-    color: Colors.textMuted,
+    color: Theme.textMut,
   },
   dayBtnTextActive: {
-    color: Colors.teal,
+    color: Theme.accent,
   },
 });
