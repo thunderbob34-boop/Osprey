@@ -2,7 +2,7 @@ import { Text, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import OnboardingShell, { OptionCard } from '@/components/onboarding/OnboardingShell';
 import { useOnboardingStore } from '@/store/onboardingStore';
-import { Colors } from '@/constants/colors';
+import { Theme } from '@/constants/theme';
 
 export default function ModeScreen() {
   const router = useRouter();
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   note: {
     marginTop: 4,
     fontSize: 11,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
   },
 });

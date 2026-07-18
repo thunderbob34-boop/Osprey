@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import OnboardingShell from '@/components/onboarding/OnboardingShell';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import { useAuthStore } from '@/store/authStore';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
 
 export default function NameScreen() {
   const router = useRouter();
@@ -33,7 +33,7 @@ export default function NameScreen() {
       <TextInput
         style={styles.input}
         placeholder="Your name"
-        placeholderTextColor={Colors.textMuted}
+        placeholderTextColor={Theme.textMut}
         value={displayName}
         onChangeText={setDisplayName}
         autoCapitalize="words"
@@ -46,13 +46,13 @@ export default function NameScreen() {
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     height: 52,
     paddingHorizontal: 16,
     fontSize: 16,
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
 });
