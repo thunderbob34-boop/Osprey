@@ -1,7 +1,7 @@
 // OSPREY-app/src/components/ui/Badge.tsx
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Theme } from '@/constants/theme';
+import { Theme, Radius } from '@/constants/theme';
 
 type BadgeProps = {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ export function Badge({ children, tone = 'neutral' }: BadgeProps) {
         alignSelf: 'flex-start',
         borderWidth: 1,
         borderColor: color,
-        borderRadius: 3,
+        borderRadius: Radius.card,
         paddingVertical: 3,
         paddingHorizontal: 8,
       }}
