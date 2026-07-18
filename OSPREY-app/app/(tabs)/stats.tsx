@@ -13,6 +13,7 @@ import Svg, { Line, Path, Polyline, Rect } from 'react-native-svg';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { Theme, ChartPalette, Radius, BorderWidth } from '@/constants/theme';
 import { useStats } from '@/hooks/useStats';
 import { useDeleteWorkoutLog } from '@/hooks/useTodayLog';
 import { usePerformance } from '@/hooks/usePerformance';
@@ -39,14 +40,14 @@ const SESSION_ICON: Record<string, string> = {
 // volume chart.
 const SPORT_ORDER: SportType[] = ['run', 'bike', 'swim', 'rowing', 'lift', 'hyrox', 'cross', 'race'];
 const SPORT_COLOR: Record<SportType, string> = {
-  run: Colors.teal,
-  bike: Colors.blue,
-  swim: Colors.green,
-  lift: Colors.gold,
-  cross: Colors.pink,
-  race: Colors.amber,
-  rowing: Colors.indigo,
-  hyrox: Colors.red,
+  run: ChartPalette.run,
+  bike: ChartPalette.bike,
+  swim: ChartPalette.swim,
+  lift: ChartPalette.lift,
+  cross: ChartPalette.cross,
+  race: ChartPalette.race,
+  rowing: ChartPalette.rowing,
+  hyrox: ChartPalette.hyrox,
 };
 const SPORT_LABEL: Record<SportType, string> = {
   run: 'Run',
@@ -105,7 +106,7 @@ function FitnessChart({
       <Polyline
         points={ctlPoints}
         fill="none"
-        stroke={Colors.teal}
+        stroke={ChartPalette.run}
         strokeWidth={1.8}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -114,7 +115,7 @@ function FitnessChart({
       <Polyline
         points={atlPoints}
         fill="none"
-        stroke={Colors.amber}
+        stroke={ChartPalette.neutral}
         strokeWidth={1.4}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -147,7 +148,7 @@ function E1rmChart({ points, width }: { points: number[]; width: number }) {
       <Polyline
         points={coords}
         fill="none"
-        stroke={Colors.gold}
+        stroke={ChartPalette.lift}
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -228,7 +229,7 @@ export default function StatsTab() {
             accessibilityRole="button"
             accessibilityLabel="Races"
           >
-            <Ionicons name="flag-outline" size={14} color={Colors.teal} />
+            <Ionicons name="flag-outline" size={14} color={Theme.accent} />
             <Text style={styles.navChipText}>Races</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -237,7 +238,7 @@ export default function StatsTab() {
             accessibilityRole="button"
             accessibilityLabel="Challenges"
           >
-            <Ionicons name="trophy-outline" size={14} color={Colors.teal} />
+            <Ionicons name="trophy-outline" size={14} color={Theme.accent} />
             <Text style={styles.navChipText}>Challenges</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -246,7 +247,7 @@ export default function StatsTab() {
             accessibilityRole="button"
             accessibilityLabel="Calendar"
           >
-            <Ionicons name="calendar-outline" size={14} color={Colors.teal} />
+            <Ionicons name="calendar-outline" size={14} color={Theme.accent} />
             <Text style={styles.navChipText}>Calendar</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -255,13 +256,13 @@ export default function StatsTab() {
             accessibilityRole="button"
             accessibilityLabel="Routes"
           >
-            <Ionicons name="map-outline" size={14} color={Colors.teal} />
+            <Ionicons name="map-outline" size={14} color={Theme.accent} />
             <Text style={styles.navChipText}>Routes</Text>
           </TouchableOpacity>
         </View>
 
         {isLoading ? (
-          <ActivityIndicator color={Colors.teal} style={{ marginTop: 24 }} />
+          <ActivityIndicator color={Theme.accent} style={{ marginTop: 24 }} />
         ) : error ? (
           <Text style={styles.errorText}>Couldn&apos;t load stats.</Text>
         ) : (
@@ -303,7 +304,7 @@ export default function StatsTab() {
             {/* ── Performance Intelligence (OSPREY+) ── */}
             {isPlus ? (
               perfLoading ? (
-                <ActivityIndicator color={Colors.teal} style={{ marginTop: 8 }} />
+                <ActivityIndicator color={Theme.accent} style={{ marginTop: 8 }} />
               ) : perf ? (
                 <>
                   {/* Injury risk banner — only shown when not in the safe zone */}
@@ -336,13 +337,13 @@ export default function StatsTab() {
                         label="FITNESS"
                         sublabel="CTL"
                         value={perf.ctl.toFixed(1)}
-                        color={Colors.teal}
+                        color={ChartPalette.run}
                       />
                       <FitnessMetric
                         label="FATIGUE"
                         sublabel="ATL"
                         value={perf.atl.toFixed(1)}
-                        color={Colors.amber}
+                        color={ChartPalette.neutral}
                       />
                       <FitnessMetric
                         label="FORM"
@@ -356,11 +357,11 @@ export default function StatsTab() {
                       <>
                         <View style={styles.chartLegend}>
                           <View style={styles.legendItem}>
-                            <View style={[styles.legendDot, { backgroundColor: Colors.teal }]} />
+                            <View style={[styles.legendDot, { backgroundColor: ChartPalette.run }]} />
                             <Text style={styles.legendText}>Fitness (CTL)</Text>
                           </View>
                           <View style={styles.legendItem}>
-                            <View style={[styles.legendDot, { backgroundColor: Colors.amber }]} />
+                            <View style={[styles.legendDot, { backgroundColor: ChartPalette.neutral }]} />
                             <Text style={styles.legendText}>Fatigue (ATL)</Text>
                           </View>
                         </View>
@@ -546,7 +547,7 @@ export default function StatsTab() {
                       accessibilityRole="button"
                       accessibilityLabel={`Delete ${formatSessionType(w.sessionType)} workout`}
                     >
-                      <Ionicons name="trash-outline" size={16} color={Colors.textMuted} />
+                      <Ionicons name="trash-outline" size={16} color={Theme.textMut} />
                     </TouchableOpacity>
                   </View>
                 ))}
@@ -588,71 +589,79 @@ function FitnessMetric({
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   scrollContent: { padding: 24, paddingBottom: 48 },
-  title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 4 },
-  subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, marginBottom: 16 },
+  title: { fontSize: 28, fontWeight: '900', color: Theme.text, marginBottom: 4 },
+  subtitle: { fontSize: 14, color: Theme.textMut, lineHeight: 20, marginBottom: 16 },
   navChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 20 },
   navChip: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.accent,
     borderRadius: 20,
     paddingHorizontal: 14,
     paddingVertical: 8,
   },
-  navChipText: { fontSize: 12, fontWeight: '700', color: Colors.teal },
+  navChipText: { fontSize: 12, fontWeight: '700', color: Theme.accent },
   errorText: { fontSize: 13, color: Colors.red },
   statsRow: { flexDirection: 'row', gap: 10, marginBottom: 24 },
   statBlock: {
     flex: 1,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 12,
     alignItems: 'center',
     gap: 2,
   },
-  statLabel: { fontSize: 9, fontWeight: '700', color: Colors.textMuted, letterSpacing: 0.8 },
-  statValue: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary, marginTop: 2 },
-  statSub: { fontSize: 10, color: Colors.textMuted },
+  statLabel: {
+    fontSize: 9,
+    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
+    letterSpacing: 0.8,
+  },
+  statValue: { fontSize: 18, fontWeight: '800', color: Theme.text, marginTop: 2 },
+  statSub: { fontSize: 10, color: Theme.textMut },
   sectionHeaderRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
   },
-  viewAllLink: { fontSize: 12, fontWeight: '700', color: Colors.teal },
+  viewAllLink: { fontSize: 12, fontWeight: '700', color: Theme.accent },
   sectionLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
     marginBottom: 10,
     marginTop: 4,
   },
   chartCard: {
-    backgroundColor: 'rgba(0,200,200,0.10)',
-    borderWidth: 1.5,
-    borderColor: 'rgba(0,200,200,0.35)',
-    borderRadius: 18,
+    backgroundColor: Theme.accent + '1A',
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent + '59',
+    borderRadius: Radius.card,
     padding: 16,
     marginBottom: 24,
   },
   heroLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.teal,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1.5,
     marginBottom: 12,
   },
   chartBars: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', height: 140 },
   barColumn: { flex: 1, alignItems: 'center', height: '100%', justifyContent: 'flex-end' },
-  barValue: { fontSize: 10, fontWeight: '700', color: Colors.teal, marginBottom: 4 },
+  barValue: { fontSize: 10, fontWeight: '700', color: Theme.accent, marginBottom: 4 },
   barTrack: {
     width: 18,
     flex: 1,
@@ -661,8 +670,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     overflow: 'hidden',
   },
-  barFill: { width: '100%', backgroundColor: Colors.teal, borderRadius: 6 },
-  barLabel: { fontSize: 9, color: Colors.textMuted, marginTop: 6 },
+  barFill: { width: '100%', backgroundColor: Theme.accent, borderRadius: 6 },
+  barLabel: { fontSize: 9, color: Theme.textMut, marginTop: 6 },
   stackedBarTrack: { flexDirection: 'column-reverse' },
   sportLegend: {
     flexDirection: 'row',
@@ -671,71 +680,78 @@ const styles = StyleSheet.create({
     marginTop: 14,
     paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(255,255,255,0.08)',
+    borderTopColor: Theme.line,
   },
   sportLegendItem: { flexDirection: 'row', alignItems: 'center', gap: 5 },
-  sportLegendText: { fontSize: 10, color: Colors.textSecondary, fontWeight: '600' },
+  sportLegendText: { fontSize: 10, color: Theme.textSoft, fontWeight: '600' },
 
   // ── Risk banner ──
   riskBanner: {
     flexDirection: 'row',
     gap: 10,
-    borderRadius: 12,
+    borderRadius: Radius.card,
     padding: 12,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     marginBottom: 16,
     alignItems: 'flex-start',
   },
+  // FUNCTIONAL — severity tier, not a surface
   riskBannerHigh: {
     backgroundColor: 'rgba(255,68,68,0.07)',
     borderColor: 'rgba(255,68,68,0.25)',
   },
   riskBannerMod: {
-    backgroundColor: Colors.surfaceGold,
-    borderColor: Colors.borderGold,
+    backgroundColor: Theme.accent + '12',
+    borderColor: Theme.accent + '40',
   },
   riskBannerInfo: {
-    backgroundColor: Colors.surfaceTeal,
-    borderColor: Colors.borderTeal,
+    backgroundColor: Theme.panel,
+    borderColor: Theme.line,
   },
   riskIcon: { fontSize: 16 },
-  riskText: { flex: 1, fontSize: 13, color: Colors.textSecondary, lineHeight: 18 },
+  riskText: { flex: 1, fontSize: 13, color: Theme.textSoft, lineHeight: 18 },
 
   // ── Fitness card ──
   fitnessCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     marginBottom: 24,
     gap: 12,
   },
   fitnessMetrics: { flexDirection: 'row', justifyContent: 'space-around' },
   fitnessMetric: { alignItems: 'center', gap: 2 },
-  fmLabel: { fontSize: 9, fontWeight: '700', color: Colors.textMuted, letterSpacing: 0.8 },
+  fmLabel: {
+    fontSize: 9,
+    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
+    letterSpacing: 0.8,
+  },
   fmValue: { fontSize: 22, fontWeight: '800' },
-  fmSub: { fontSize: 9, color: Colors.textMuted },
+  fmSub: { fontSize: 9, color: Theme.textMut },
   chartLegend: { flexDirection: 'row', gap: 16, marginBottom: -4 },
   legendItem: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   legendDot: { width: 8, height: 8, borderRadius: 4 },
-  legendText: { fontSize: 10, color: Colors.textMuted, fontWeight: '600' },
+  legendText: { fontSize: 10, color: Theme.textMut, fontWeight: '600' },
   svgWrap: { width: '100%', alignItems: 'center' },
-  chartDateRange: { fontSize: 9, color: Colors.textMuted, textAlign: 'right', marginTop: -4 },
+  chartDateRange: { fontSize: 9, color: Theme.textMut, textAlign: 'right', marginTop: -4 },
 
   // ── Race predictor ──
   predictorCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     marginBottom: 24,
     gap: 0,
   },
   predictorBase: {
     fontSize: 11,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     marginBottom: 10,
     fontStyle: 'italic',
   },
@@ -745,65 +761,71 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 9,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
-  predictorDist: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  predictorTime: { fontSize: 14, fontWeight: '800', color: Colors.teal },
-  predictorPlaceholder: { fontSize: 11, color: Colors.textMuted, fontStyle: 'italic' },
+  predictorDist: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  predictorTime: { fontSize: 14, fontWeight: '800', color: Theme.accent },
+  predictorPlaceholder: { fontSize: 11, color: Theme.textMut, fontStyle: 'italic' },
   predictorTotalRow: { borderBottomWidth: 0, paddingTop: 12, marginTop: 2 },
-  predictorTotalLabel: { fontSize: 12, fontWeight: '700', color: Colors.textSecondary, flexShrink: 1 },
-  predictorTotalValue: { fontSize: 16, fontWeight: '800', color: Colors.gold },
+  predictorTotalLabel: { fontSize: 12, fontWeight: '700', color: Theme.textSoft, flexShrink: 1 },
+  predictorTotalValue: { fontSize: 16, fontWeight: '800', color: Theme.accent },
 
   // ── Upsell card ──
   upsellCard: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     padding: 16,
     marginBottom: 24,
   },
   upsellIcon: { fontSize: 28 },
-  upsellTitle: { fontSize: 14, fontWeight: '700', color: Colors.teal, marginBottom: 3 },
-  upsellDesc: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
-  upsellArrow: { fontSize: 18, color: Colors.teal, fontWeight: '700' },
+  upsellTitle: { fontSize: 14, fontWeight: '700', color: Theme.accent, marginBottom: 3 },
+  upsellDesc: { fontSize: 12, color: Theme.textSoft, lineHeight: 17 },
+  upsellArrow: { fontSize: 18, color: Theme.accent, fontWeight: '700' },
 
   // ── Lift analytics ──
   liftCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     marginBottom: 16,
     gap: 10,
   },
   liftVolumeRow: { flexDirection: 'row', alignItems: 'baseline', gap: 8 },
-  liftVolumeValue: { fontSize: 22, fontWeight: '800', color: Colors.gold },
-  liftVolumeSub: { fontSize: 12, color: Colors.textMuted, fontWeight: '600' },
+  liftVolumeValue: { fontSize: 22, fontWeight: '800', color: Theme.accent },
+  liftVolumeSub: { fontSize: 12, color: Theme.textMut, fontWeight: '600' },
   muscleChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   muscleChip: {
-    backgroundColor: 'rgba(200,154,0,0.12)',
-    borderRadius: 8,
+    // Nested inside liftCard (Theme.panel) — a solid Theme.panel fill here
+    // would match its parent and read as flat, so this recedes to Theme.ink.
+    // Matches routes.tsx's routeTagChip (ink fill + accent text), which is the
+    // same thing: a passive tag inside a card. The accent-tint treatment is
+    // reserved for ACTIVE/selected chips (routes.tsx chipActive), not labels.
+    backgroundColor: Theme.ink,
+    borderRadius: Radius.card,
     paddingHorizontal: 10,
     paddingVertical: 4,
   },
-  muscleChipText: { fontSize: 11, fontWeight: '700', color: Colors.gold },
+  muscleChipText: { fontSize: 11, fontWeight: '700', color: Theme.accent },
   liftTrendLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 0.8,
     marginTop: 4,
   },
   prList: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     overflow: 'hidden',
     marginBottom: 24,
   },
@@ -813,17 +835,17 @@ const styles = StyleSheet.create({
     gap: 12,
     padding: 14,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   prMedal: { fontSize: 16, width: 28, textAlign: 'center' },
-  prValue: { fontSize: 14, fontWeight: '800', color: Colors.gold },
+  prValue: { fontSize: 14, fontWeight: '800', color: Theme.accent },
 
   // ── Recent workouts ──
   workoutList: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     overflow: 'hidden',
   },
   workoutRow: {
@@ -832,20 +854,20 @@ const styles = StyleSheet.create({
     gap: 12,
     padding: 14,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   workoutRowLast: { borderBottomWidth: 0 },
   workoutIcon: { fontSize: 20 },
   workoutInfo: { flex: 1 },
-  workoutType: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  workoutMeta: { fontSize: 12, color: Colors.textSecondary, marginTop: 2 },
+  workoutType: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  workoutMeta: { fontSize: 12, color: Theme.textSoft, marginTop: 2 },
   workoutDeleteBtn: { padding: 4 },
   emptyCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
   },
-  emptyText: { fontSize: 13, color: Colors.textMuted },
+  emptyText: { fontSize: 13, color: Theme.textMut },
 });

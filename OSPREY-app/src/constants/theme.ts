@@ -35,3 +35,27 @@ export const Shadow = {
     elevation: 3,
   },
 } as const;
+
+// Chart series colours. A stacked-bar segment has room for neither an icon nor
+// a label, so colour is its ONLY encoding — which is why the Workout tab's
+// "scheme B" (drop hues, identify by icon + label) deliberately does not apply
+// here. Decided from rendered mockups, 2026-07-18.
+//
+// Run leads with the brand accent; the other seven are desaturated and tuned to
+// sit on Theme.ink without competing with it. Hues are spread so that sports
+// ADJACENT in SPORT_ORDER (stats.tsx) don't collide — notably bike and swim,
+// which stack next to each other, sit on opposite sides of the blue/green line.
+//
+// `neutral` is the second series on the fitness/fatigue chart (ATL against
+// accent's CTL); it is not a sport.
+export const ChartPalette = {
+  run: Theme.accent,
+  bike: '#5b7fa6',
+  swim: '#5aa06d',
+  rowing: '#6b6fa8',
+  lift: '#a8935c',
+  hyrox: '#b05f4f',
+  cross: '#9c6b8a',
+  race: '#d4c44a',
+  neutral: '#7d8aa5',
+} as const;

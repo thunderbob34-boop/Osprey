@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform, Modal } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
 
 interface DateFieldProps {
   /** ISO date string 'YYYY-MM-DD', or '' when unset. */
@@ -142,29 +142,33 @@ export default function DateField({
 
 const styles = StyleSheet.create({
   field: {
-    backgroundColor: Colors.bgCard,
+    // Matches the sibling TextInputs it sits beside in challenges.tsx and
+    // races.tsx forms (ink fill, 1px line): Theme.panel here would both seam
+    // against them and sit flush on the Theme.panel card behind it.
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     height: 48,
     paddingHorizontal: 14,
     justifyContent: 'center',
   },
   fieldText: {
     fontSize: 15,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontWeight: '600',
   },
   fieldPlaceholder: {
     fontSize: 15,
-    color: Colors.textMuted,
+    color: Theme.textMut,
   },
   backdrop: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    // Scrim, not a surface — re-derived from Theme.ink at the original alpha.
+    backgroundColor: 'rgba(9,9,11,0.5)',
   },
   sheet: {
-    backgroundColor: '#0D1424',
+    backgroundColor: Theme.panel,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingBottom: 34,
@@ -175,9 +179,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
-  sheetCancel: { fontSize: 15, color: Colors.textMuted, fontWeight: '600' },
-  sheetDone: { fontSize: 15, color: Colors.teal, fontWeight: '800' },
+  sheetCancel: { fontSize: 15, color: Theme.textMut, fontWeight: '600' },
+  sheetDone: { fontSize: 15, color: Theme.accent, fontWeight: '800' },
   picker: { alignSelf: 'center' },
 });

@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useSavedRoutes } from '@/hooks/useSavedRoutes';
@@ -117,7 +118,7 @@ export default function RoutesScreen() {
               <TextInput
                 style={[styles.input, nameError ? styles.inputError : null]}
                 placeholder="Route name (e.g. Riverside Loop)"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={name}
                 onChangeText={(v) => {
                   setName(v);
@@ -134,7 +135,7 @@ export default function RoutesScreen() {
                 style={styles.input}
                 keyboardType="decimal-pad"
                 placeholder="e.g. 3.1"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={distanceMiles}
                 onChangeText={setDistanceMiles}
                 accessibilityLabel={`Distance in ${units === 'metric' ? 'kilometers' : 'miles'}, optional`}
@@ -144,7 +145,7 @@ export default function RoutesScreen() {
               <TextInput
                 style={[styles.input, styles.multiline]}
                 placeholder="Water fountain at mile 2, sketchy after dark…"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={notes}
                 onChangeText={setNotes}
                 multiline
@@ -187,7 +188,7 @@ export default function RoutesScreen() {
                 <TextInput
                   style={[styles.input, { flex: 1 }]}
                   placeholder="Custom tag…"
-                  placeholderTextColor={Colors.textMuted}
+                  placeholderTextColor={Theme.textMut}
                   value={customTag}
                   onChangeText={setCustomTag}
                   onSubmitEditing={addCustomTag}
@@ -205,7 +206,7 @@ export default function RoutesScreen() {
               </View>
 
               <TouchableOpacity
-                style={styles.saveBtn}
+                style={[styles.saveBtn, addRoute.isPending && styles.saveBtnDisabled]}
                 onPress={handleSave}
                 disabled={addRoute.isPending}
                 accessibilityRole="button"
@@ -213,7 +214,7 @@ export default function RoutesScreen() {
                 accessibilityState={{ disabled: addRoute.isPending, busy: addRoute.isPending }}
               >
                 {addRoute.isPending ? (
-                  <ActivityIndicator color="#000" />
+                  <ActivityIndicator color={Theme.ink} />
                 ) : (
                   <Text style={styles.saveBtnText}>Save Route</Text>
                 )}
@@ -222,7 +223,7 @@ export default function RoutesScreen() {
           ) : null}
 
           {isLoading ? (
-            <ActivityIndicator color={Colors.teal} style={{ marginTop: 32 }} />
+            <ActivityIndicator color={Theme.accent} style={{ marginTop: 32 }} />
           ) : error ? (
             <Text style={styles.errorText}>Couldn&apos;t load your routes.</Text>
           ) : !routes || routes.length === 0 ? (
@@ -273,94 +274,102 @@ export default function RoutesScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
-  add: { color: Colors.teal, fontSize: 24, fontWeight: '700' },
+  container: { flex: 1, backgroundColor: Theme.ink },
+  add: { color: Theme.accent, fontSize: 24, fontWeight: '700' },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
-  subtitle: { color: Colors.textMuted, fontSize: 13, lineHeight: 19, marginBottom: 4 },
-  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 8 },
+  subtitle: { color: Theme.textMut, fontSize: 13, lineHeight: 19, marginBottom: 4 },
+  empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginTop: 8 },
   errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
 
   formCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     gap: 8,
     marginBottom: 6,
   },
-  formTitle: { color: Colors.textPrimary, fontSize: 15, fontWeight: '800', marginBottom: 2 },
+  formTitle: { color: Theme.text, fontSize: 15, fontWeight: '800', marginBottom: 2 },
   fieldLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 0.8,
     marginTop: 6,
   },
   inputError: { borderColor: Colors.red },
   input: {
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 15,
   },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {
     paddingHorizontal: 14,
     paddingVertical: 9,
-    borderRadius: 9,
+    borderRadius: Radius.card,
     borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bg,
+    borderColor: Theme.line,
+    backgroundColor: Theme.ink,
   },
-  chipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
-  chipText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
-  chipTextActive: { color: Colors.teal },
+  // Border-only, matching challenges.tsx. A Theme.panel fill here would make
+  // the ACTIVE chip blend into the Theme.panel formCard behind it while the
+  // inactive (ink) chips stand off it — inverting the emphasis.
+  chipActive: { borderColor: Theme.accent },
+  chipText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
+  chipTextActive: { color: Theme.accent },
   customTagRow: { flexDirection: 'row', gap: 8, marginTop: 4, alignItems: 'center' },
   customTagAddBtn: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 10,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  customTagAddText: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
+  customTagAddText: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
   saveBtn: {
     marginTop: 10,
-    backgroundColor: Colors.teal,
-    borderRadius: 10,
-    paddingVertical: 13,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
+    paddingVertical: 14,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  saveBtnText: { color: '#000', fontSize: 14, fontWeight: '800' },
+  saveBtnDisabled: { opacity: 0.5 },
+  saveBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
 
   routeCard: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 14,
     gap: 10,
   },
-  routeName: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },
-  routeMeta: { color: Colors.textMuted, fontSize: 12, marginTop: 2 },
-  routeNotes: { color: Colors.textSecondary, fontSize: 13, lineHeight: 18, marginTop: 6 },
+  routeName: { color: Theme.text, fontSize: 15, fontWeight: '700' },
+  routeMeta: { color: Theme.textMut, fontSize: 12, marginTop: 2 },
+  routeNotes: { color: Theme.textSoft, fontSize: 13, lineHeight: 18, marginTop: 6 },
   multiline: { minHeight: 60, textAlignVertical: 'top' },
   routeTagRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 8 },
   routeTagChip: {
-    backgroundColor: Colors.surfaceTeal,
-    borderRadius: 8,
+    backgroundColor: Theme.ink,
+    borderRadius: Radius.card,
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
-  routeTagText: { fontSize: 11, fontWeight: '700', color: Colors.teal },
-  deleteText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
+  routeTagText: { fontSize: 11, fontWeight: '700', color: Theme.accent },
+  deleteText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
 });
