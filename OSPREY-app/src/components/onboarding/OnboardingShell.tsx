@@ -146,7 +146,9 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     height: 4,
-    backgroundColor: 'rgba(255,255,255,0.08)',
+    // The unfilled track behind the accent progress fill. Same rgba value that
+    // stats.tsx's sportLegend border took to Theme.line in an earlier slice.
+    backgroundColor: Theme.line,
     borderRadius: 2,
     overflow: 'hidden',
   },
