@@ -272,8 +272,10 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.ink,
   },
   // Active/selected chip treatment — accent tint reserved for this state.
+  // Border-only, matching races.tsx chipActive and every merged chipActive in
+  // the app. This chip pairs with filterChipTextActive (accent text), so border
+  // + text are already two cues and a tint would be redundant.
   filterChipActive: {
-    backgroundColor: Theme.accent + '1F',
     borderColor: Theme.accent,
   },
   filterChipText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
@@ -298,11 +300,19 @@ const styles = StyleSheet.create({
   badge: {
     paddingHorizontal: 8,
     paddingVertical: 3,
-    borderRadius: 6,
+    // Radius.card, matching race-event's badge — it's the same distance list
+    // one tap later in the same flow.
+    borderRadius: Radius.card,
     backgroundColor: Theme.ink,
     borderWidth: 1,
     borderColor: Theme.line,
   },
+  // textSoft, not accent: cardName above is already Theme.accent, and a badge
+  // does not take accent inside a card whose title already has it — the two
+  // would sit at equal weight on one row, and the badges matter least there.
+  // (Contrast stats.tsx muscleChipText, which IS accent because nothing beside
+  // it competes for amber.) race-event's badgeText must match this — same
+  // distance list, one tap later.
   badgeText: { color: Theme.textSoft, fontSize: 11, fontWeight: '700' },
   chevron: { color: Theme.textMut, fontSize: 22, fontWeight: '300' },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32, gap: 16 },

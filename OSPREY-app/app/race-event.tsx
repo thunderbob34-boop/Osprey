@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
@@ -107,13 +108,14 @@ export default function RaceEventScreen() {
           <TouchableOpacity
             onPress={goBack}
             hitSlop={12}
+            style={styles.backBtn}
             accessibilityRole="button"
             accessibilityLabel="Go back"
           >
-            <Text style={styles.backText}>←</Text>
+            <Ionicons name="chevron-back" size={24} color={Theme.accent} />
           </TouchableOpacity>
-          <Text style={styles.title}>Race Details</Text>
-          <View style={{ width: 36 }} />
+          <Text style={styles.title} numberOfLines={1}>Race Details</Text>
+          <View style={styles.headerRight} />
         </View>
         <View style={styles.center}>
           <Text style={styles.errorText}>Race not found. Go back and try again.</Text>
@@ -345,17 +347,23 @@ export default function RaceEventScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Theme.ink },
+  // Error-state header only (the success path uses ScreenHeader). Aligned to
+  // ScreenHeader's real values — 16/12 padding, BorderWidth.card, 44px side
+  // controls, centred title — so the "race not found" path doesn't render a
+  // visibly different header from the one on the success path of this same
+  // screen. Same alignment race-search.tsx got.
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: BorderWidth.card,
     borderBottomColor: Theme.line,
   },
-  backText: { color: Theme.accent, fontSize: 22, fontWeight: '700' },
-  title: { color: Theme.text, fontSize: 16, fontWeight: '800' },
+  backBtn: { width: 44 },
+  headerRight: { width: 44 },
+  title: { flex: 1, textAlign: 'center', color: Theme.text, fontSize: 16, fontWeight: '800' },
   scroll: { padding: 20, paddingBottom: 48, gap: 24 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32 },
   errorText: { color: Theme.textMut, fontSize: 15, textAlign: 'center' },

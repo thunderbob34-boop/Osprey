@@ -218,7 +218,7 @@ function LogisticsPanel({
 
       {/* Save button */}
       <TouchableOpacity
-        style={styles.saveBtn}
+        style={[styles.saveBtn, isSaving && styles.saveBtnDisabled]}
         onPress={() => onSave(race.id, form)}
         disabled={isSaving}
         accessibilityRole="button"
@@ -413,7 +413,7 @@ function RetroPanel({
       </View>
 
       <TouchableOpacity
-        style={styles.saveBtn}
+        style={[styles.saveBtn, isSaving && styles.saveBtnDisabled]}
         onPress={() => onSave(race.id, form)}
         disabled={isSaving}
         accessibilityRole="button"
@@ -827,7 +827,7 @@ export default function RacesScreen() {
               />
 
               <TouchableOpacity
-                style={styles.saveBtn}
+                style={[styles.saveBtn, create.isPending && styles.saveBtnDisabled]}
                 onPress={handleCreate}
                 disabled={create.isPending}
                 accessibilityRole="button"
@@ -1281,6 +1281,9 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
     alignItems: 'center',
   },
+  // Mirrors race-event's ctaBtnDisabled — the hand-rolled recipe specifies a
+  // 0.5 disabled opacity, and saveBtn renders with `disabled` at three sites.
+  saveBtnDisabled: { opacity: 0.5 },
   saveBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
 
   // ── Retro panel ──
@@ -1319,7 +1322,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(245,166,35,0.07)',
     borderColor: 'rgba(245,166,35,0.25)',
   },
-  deltaLabel: { color: Theme.textMut, fontSize: 9, fontWeight: '800', letterSpacing: 1 },
+  deltaLabel: {
+    color: Theme.textMut,
+    fontSize: 9,
+    fontWeight: '800',
+    letterSpacing: 1,
+    fontFamily: 'SpaceGrotesk_700Bold',
+  },
   deltaValue: { fontSize: 18, fontWeight: '800', marginTop: 2 },
   deltaValueGood: { color: Colors.green },
   deltaValueMiss: { color: Colors.amber },
