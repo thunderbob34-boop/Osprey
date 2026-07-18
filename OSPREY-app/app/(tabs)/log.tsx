@@ -16,6 +16,8 @@ import Svg, { Polyline } from 'react-native-svg';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Card } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import HydrationCard from '@/components/HydrationCard';
 import { useRecentMeals, useTodayLog } from '@/hooks/useTodayLog';
@@ -88,7 +90,7 @@ function WeightChart({ points, width }: { points: number[]; width: number }) {
       <Polyline
         points={coords}
         fill="none"
-        stroke={Colors.teal}
+        stroke={Theme.accent}
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -509,7 +511,7 @@ export default function LogTab() {
           <Text style={styles.subtitle}>Log a workout, a meal, or today's weigh-in.</Text>
 
           {nutrition ? (
-            <View style={styles.nutritionCard}>
+            <Card style={styles.nutritionCard}>
               <View style={styles.nutritionHeaderRow}>
                 <Text style={styles.cardLabel}>NUTRITION TODAY</Text>
                 {nutrition.dayType ? (
@@ -563,7 +565,7 @@ export default function LogTab() {
                 </Text>
               </View>
               {nutrition.tip ? <Text style={styles.tipText}>{nutrition.tip}</Text> : null}
-            </View>
+            </Card>
           ) : null}
 
           {hydration ? (
@@ -575,11 +577,11 @@ export default function LogTab() {
           ) : null}
 
           {isLoading ? (
-            <ActivityIndicator color={Colors.teal} style={{ marginTop: 24 }} />
+            <ActivityIndicator color={Theme.accent} style={{ marginTop: 24 }} />
           ) : error ? (
             <Text style={styles.errorText}>Couldn&apos;t load today&apos;s log.</Text>
           ) : (
-            <View style={styles.todayCard}>
+            <Card style={styles.todayCard}>
               <Text style={styles.cardLabel}>TODAY</Text>
               {!hasEntries ? (
                 <Text style={styles.emptyText}>Nothing logged yet today.</Text>
@@ -649,31 +651,33 @@ export default function LogTab() {
                   ) : null}
                 </>
               )}
-            </View>
+            </Card>
           )}
 
           {/* Log a Workout */}
-          <TouchableOpacity
-            style={styles.actionCard}
-            onPress={() => {
-              if (openSection === 'workout') {
-                setOpenSection(null);
-              } else {
-                resetWorkoutForm();
-                setEditingWorkoutId(null);
-                setOpenSection('workout');
-              }
-            }}
-            accessibilityRole="button"
-            accessibilityLabel="Log a workout"
-            accessibilityState={{ expanded: openSection === 'workout' }}
-          >
-            <Text style={styles.actionTitle}>🏃 Log a Workout</Text>
-            <Text style={styles.actionChevron}>{openSection === 'workout' ? '−' : '+'}</Text>
-          </TouchableOpacity>
+          <Card style={styles.actionCardWrap}>
+            <TouchableOpacity
+              style={styles.actionCard}
+              onPress={() => {
+                if (openSection === 'workout') {
+                  setOpenSection(null);
+                } else {
+                  resetWorkoutForm();
+                  setEditingWorkoutId(null);
+                  setOpenSection('workout');
+                }
+              }}
+              accessibilityRole="button"
+              accessibilityLabel="Log a workout"
+              accessibilityState={{ expanded: openSection === 'workout' }}
+            >
+              <Text style={styles.actionTitle}>🏃 Log a Workout</Text>
+              <Text style={styles.actionChevron}>{openSection === 'workout' ? '−' : '+'}</Text>
+            </TouchableOpacity>
+          </Card>
 
           {openSection === 'workout' ? (
-            <View style={styles.form}>
+            <Card style={styles.form}>
               <View style={styles.chipRow}>
                 {WORKOUT_TYPES.map((t) => (
                   <TouchableOpacity
@@ -700,7 +704,7 @@ export default function LogTab() {
                     style={[styles.input, fieldErrors.minutes ? styles.inputError : null]}
                     keyboardType="number-pad"
                     placeholder="30"
-                    placeholderTextColor={Colors.textMuted}
+                    placeholderTextColor={Theme.textMut}
                     value={minutes}
                     onChangeText={(v) => {
                       setMinutes(v);
@@ -718,7 +722,7 @@ export default function LogTab() {
                     style={styles.input}
                     keyboardType="decimal-pad"
                     placeholder="optional"
-                    placeholderTextColor={Colors.textMuted}
+                    placeholderTextColor={Theme.textMut}
                     value={distance}
                     onChangeText={setDistance}
                     accessibilityLabel={`Distance in ${unitPreference === 'metric' ? 'kilometers' : 'miles'}, optional`}
@@ -730,7 +734,7 @@ export default function LogTab() {
               <TextInput
                 style={[styles.input, styles.notesInput]}
                 placeholder="How did it feel?"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={workoutNotes}
                 onChangeText={setWorkoutNotes}
                 multiline
@@ -738,7 +742,10 @@ export default function LogTab() {
               />
 
               <TouchableOpacity
-                style={styles.saveBtn}
+                style={[
+                  styles.saveBtn,
+                  (logWorkout.isPending || updateWorkout.isPending) && styles.saveBtnDisabled,
+                ]}
                 onPress={handleSaveWorkout}
                 disabled={logWorkout.isPending || updateWorkout.isPending}
                 accessibilityRole="button"
@@ -749,38 +756,40 @@ export default function LogTab() {
                 }}
               >
                 {logWorkout.isPending || updateWorkout.isPending ? (
-                  <ActivityIndicator color="#000" />
+                  <ActivityIndicator color={Theme.ink} />
                 ) : (
                   <Text style={styles.saveBtnText}>
                     {editingWorkoutId ? 'Update Workout' : 'Save Workout'}
                   </Text>
                 )}
               </TouchableOpacity>
-            </View>
+            </Card>
           ) : null}
 
           {/* Log Food */}
-          <TouchableOpacity
-            style={styles.actionCard}
-            onPress={() => {
-              if (openSection === 'food') {
-                setOpenSection(null);
-              } else {
-                resetFoodForm();
-                setEditingFoodId(null);
-                setOpenSection('food');
-              }
-            }}
-            accessibilityRole="button"
-            accessibilityLabel="Log food"
-            accessibilityState={{ expanded: openSection === 'food' }}
-          >
-            <Text style={styles.actionTitle}>🍽 Log Food</Text>
-            <Text style={styles.actionChevron}>{openSection === 'food' ? '−' : '+'}</Text>
-          </TouchableOpacity>
+          <Card style={styles.actionCardWrap}>
+            <TouchableOpacity
+              style={styles.actionCard}
+              onPress={() => {
+                if (openSection === 'food') {
+                  setOpenSection(null);
+                } else {
+                  resetFoodForm();
+                  setEditingFoodId(null);
+                  setOpenSection('food');
+                }
+              }}
+              accessibilityRole="button"
+              accessibilityLabel="Log food"
+              accessibilityState={{ expanded: openSection === 'food' }}
+            >
+              <Text style={styles.actionTitle}>🍽 Log Food</Text>
+              <Text style={styles.actionChevron}>{openSection === 'food' ? '−' : '+'}</Text>
+            </TouchableOpacity>
+          </Card>
 
           {openSection === 'food' ? (
-            <View style={styles.form}>
+            <Card style={styles.form}>
               <>
                   <Text style={styles.fieldLabel}>QUICK ADD</Text>
                   <View style={styles.chipRow}>
@@ -848,7 +857,7 @@ export default function LogTab() {
               <TextInput
                 style={[styles.input, fieldErrors.foodName ? styles.inputError : null]}
                 placeholder="Grilled chicken bowl"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={foodName}
                 onChangeText={(v) => {
                   handleFoodNameChange(v);
@@ -860,7 +869,7 @@ export default function LogTab() {
 
               {analyzingPhoto ? (
                 <View style={styles.analyzingRow}>
-                  <ActivityIndicator color={Colors.teal} />
+                  <ActivityIndicator color={Theme.accent} />
                   <Text style={styles.analyzingText}>Ozzie's looking at your photo...</Text>
                 </View>
               ) : null}
@@ -870,7 +879,7 @@ export default function LogTab() {
               ) : null}
 
               {searching ? (
-                <ActivityIndicator color={Colors.teal} style={{ alignSelf: 'flex-start' }} />
+                <ActivityIndicator color={Theme.accent} style={{ alignSelf: 'flex-start' }} />
               ) : null}
 
               {foodResults.length > 0 ? (
@@ -928,7 +937,7 @@ export default function LogTab() {
                 style={[styles.input, fieldErrors.calories ? styles.inputError : null]}
                 keyboardType="number-pad"
                 placeholder="450"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={calories}
                 onChangeText={(v) => {
                   setCalories(v);
@@ -945,7 +954,7 @@ export default function LogTab() {
                     style={styles.input}
                     keyboardType="number-pad"
                     placeholder="optional"
-                    placeholderTextColor={Colors.textMuted}
+                    placeholderTextColor={Theme.textMut}
                     value={protein}
                     onChangeText={setProtein}
                     accessibilityLabel="Protein in grams, optional"
@@ -957,7 +966,7 @@ export default function LogTab() {
                     style={styles.input}
                     keyboardType="number-pad"
                     placeholder="optional"
-                    placeholderTextColor={Colors.textMuted}
+                    placeholderTextColor={Theme.textMut}
                     value={carbs}
                     onChangeText={setCarbs}
                     accessibilityLabel="Carbs in grams, optional"
@@ -969,7 +978,7 @@ export default function LogTab() {
                     style={styles.input}
                     keyboardType="number-pad"
                     placeholder="optional"
-                    placeholderTextColor={Colors.textMuted}
+                    placeholderTextColor={Theme.textMut}
                     value={fat}
                     onChangeText={setFat}
                     accessibilityLabel="Fat in grams, optional"
@@ -978,7 +987,10 @@ export default function LogTab() {
               </View>
 
               <TouchableOpacity
-                style={styles.saveBtn}
+                style={[
+                  styles.saveBtn,
+                  (logFood.isPending || updateFood.isPending) && styles.saveBtnDisabled,
+                ]}
                 onPress={handleSaveFood}
                 disabled={logFood.isPending || updateFood.isPending}
                 accessibilityRole="button"
@@ -989,28 +1001,30 @@ export default function LogTab() {
                 }}
               >
                 {logFood.isPending || updateFood.isPending ? (
-                  <ActivityIndicator color="#000" />
+                  <ActivityIndicator color={Theme.ink} />
                 ) : (
                   <Text style={styles.saveBtnText}>{editingFoodId ? 'Update Food' : 'Save Food'}</Text>
                 )}
               </TouchableOpacity>
-            </View>
+            </Card>
           ) : null}
 
           {/* Log Weight */}
-          <TouchableOpacity
-            style={styles.actionCard}
-            onPress={() => setOpenSection(openSection === 'weight' ? null : 'weight')}
-            accessibilityRole="button"
-            accessibilityLabel="Log weight"
-            accessibilityState={{ expanded: openSection === 'weight' }}
-          >
-            <Text style={styles.actionTitle}>⚖️ Log Weight</Text>
-            <Text style={styles.actionChevron}>{openSection === 'weight' ? '−' : '+'}</Text>
-          </TouchableOpacity>
+          <Card style={styles.actionCardWrap}>
+            <TouchableOpacity
+              style={styles.actionCard}
+              onPress={() => setOpenSection(openSection === 'weight' ? null : 'weight')}
+              accessibilityRole="button"
+              accessibilityLabel="Log weight"
+              accessibilityState={{ expanded: openSection === 'weight' }}
+            >
+              <Text style={styles.actionTitle}>⚖️ Log Weight</Text>
+              <Text style={styles.actionChevron}>{openSection === 'weight' ? '−' : '+'}</Text>
+            </TouchableOpacity>
+          </Card>
 
           {openSection === 'weight' ? (
-            <View style={styles.form}>
+            <Card style={styles.form}>
               {weightSummary?.latestKg != null ? (
                 <Text style={styles.weightSummaryText}>
                   Last logged: {formatWeightKg(weightSummary.latestKg, unitPreference)}
@@ -1048,7 +1062,7 @@ export default function LogTab() {
                 style={[styles.input, fieldErrors.weight ? styles.inputError : null]}
                 keyboardType="decimal-pad"
                 placeholder={weightUnit === 'lb' ? 'e.g. 168.4' : 'e.g. 76.4'}
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={weightInput}
                 onChangeText={(v) => {
                   setWeightInput(v);
@@ -1059,7 +1073,7 @@ export default function LogTab() {
               <FieldError message={fieldErrors.weight} />
 
               <TouchableOpacity
-                style={styles.saveBtn}
+                style={[styles.saveBtn, logWeightMutation.isPending && styles.saveBtnDisabled]}
                 onPress={handleSaveWeight}
                 disabled={logWeightMutation.isPending}
                 accessibilityRole="button"
@@ -1067,12 +1081,12 @@ export default function LogTab() {
                 accessibilityState={{ disabled: logWeightMutation.isPending, busy: logWeightMutation.isPending }}
               >
                 {logWeightMutation.isPending ? (
-                  <ActivityIndicator color="#000" />
+                  <ActivityIndicator color={Theme.ink} />
                 ) : (
                   <Text style={styles.saveBtnText}>Save Weight</Text>
                 )}
               </TouchableOpacity>
-            </View>
+            </Card>
           ) : null}
         </ScrollView>
       </KeyboardAvoidingView>
@@ -1081,17 +1095,12 @@ export default function LogTab() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   scrollContent: { padding: 24, paddingBottom: 48 },
-  title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 4 },
-  subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, marginBottom: 20 },
+  title: { fontSize: 28, fontWeight: '900', color: Theme.text, marginBottom: 4 },
+  subtitle: { fontSize: 14, color: Theme.textMut, lineHeight: 20, marginBottom: 20 },
   errorText: { fontSize: 13, color: Colors.red, marginBottom: 16 },
   nutritionCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 16,
     marginBottom: 16,
     gap: 8,
   },
@@ -1102,71 +1111,60 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   dayTypeChip: {
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
   dayTypeChipRest: { backgroundColor: Colors.goldDim, borderColor: 'rgba(200,154,0,0.3)' },
-  dayTypeChipText: { fontSize: 10, fontWeight: '700', color: Colors.teal },
+  dayTypeChipText: { fontSize: 10, fontWeight: '700', color: Theme.accent, fontFamily: 'SpaceGrotesk_700Bold' },
   dayTypeChipTextRest: { color: Colors.gold },
   macroRow: { flexDirection: 'row', alignItems: 'baseline', gap: 6 },
-  macroValue: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
-  macroUnit: { fontSize: 13, color: Colors.textMuted, fontWeight: '600' },
+  macroValue: { fontSize: 20, fontWeight: '800', color: Theme.text },
+  macroUnit: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
   progressTrack: {
     height: 6,
     borderRadius: 3,
-    backgroundColor: 'rgba(255,255,255,0.08)',
+    backgroundColor: Theme.line,
     overflow: 'hidden',
   },
-  progressFill: { height: '100%', backgroundColor: Colors.teal, borderRadius: 3 },
+  progressFill: { height: '100%', backgroundColor: Theme.accent, borderRadius: 3 },
   macroChipRow: { flexDirection: 'row', gap: 12 },
-  macroChip: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
-  tipText: { fontSize: 13, color: Colors.textSecondary, lineHeight: 18, marginTop: 4 },
+  macroChip: { fontSize: 12, color: Theme.textSoft, fontWeight: '600' },
+  tipText: { fontSize: 13, color: Theme.textSoft, lineHeight: 18, marginTop: 4 },
   todayCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 16,
     marginBottom: 20,
     gap: 10,
   },
-  cardLabel: { fontSize: 10, fontWeight: '700', color: Colors.textMuted, letterSpacing: 1 },
-  emptyText: { fontSize: 13, color: Colors.textMuted },
+  cardLabel: { fontSize: 10, fontWeight: '700', color: Theme.textMut, letterSpacing: 1, fontFamily: 'SpaceGrotesk_700Bold' },
+  emptyText: { fontSize: 13, color: Theme.textMut },
   entryRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 4 },
   entryIcon: { fontSize: 18, width: 22, textAlign: 'center' },
-  entryPrimary: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  entrySecondary: { fontSize: 12, color: Colors.textSecondary },
+  entryPrimary: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  entrySecondary: { fontSize: 12, color: Theme.textSoft },
   entryDeleteBtn: { padding: 10, marginLeft: 2 },
-  entryDeleteText: { fontSize: 13, color: Colors.textMuted, fontWeight: '700' },
+  entryDeleteText: { fontSize: 13, color: Theme.textMut, fontWeight: '700' },
   totalText: {
     fontSize: 12,
     fontWeight: '700',
-    color: Colors.teal,
+    color: Theme.accent,
     marginTop: 4,
+  },
+  actionCardWrap: {
+    padding: 0,
+    marginBottom: 12,
   },
   actionCard: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
     padding: 16,
-    marginBottom: 12,
   },
-  actionTitle: { fontSize: 15, fontWeight: '700', color: Colors.textPrimary },
-  actionChevron: { fontSize: 18, fontWeight: '800', color: Colors.teal },
+  actionTitle: { fontSize: 15, fontWeight: '700', color: Theme.text },
+  actionChevron: { fontSize: 18, fontWeight: '800', color: Theme.accent },
   form: {
-    backgroundColor: 'rgba(255,255,255,0.02)',
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 16,
     marginTop: -4,
     marginBottom: 16,
     gap: 10,
@@ -1176,60 +1174,61 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: 'rgba(255,255,255,0.03)',
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    backgroundColor: Theme.panel,
   },
-  chipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+  chipActive: { backgroundColor: Theme.panel, borderColor: Theme.accent },
   recentChip: {
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    backgroundColor: Colors.surfaceTeal,
-    borderRadius: 12,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     paddingHorizontal: 12,
     paddingVertical: 8,
     maxWidth: 160,
     gap: 1,
   },
-  recentChipName: { fontSize: 12, fontWeight: '700', color: Colors.teal },
-  recentChipMeta: { fontSize: 10, color: Colors.textMuted, fontWeight: '600' },
+  recentChipName: { fontSize: 12, fontWeight: '700', color: Theme.accent },
+  recentChipMeta: { fontSize: 10, color: Theme.textMut, fontWeight: '600' },
   copyYesterdayChip: {
     borderColor: 'rgba(200,154,0,0.3)',
     backgroundColor: Colors.goldDim,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  chipText: { fontSize: 13, fontWeight: '600', color: Colors.textSecondary },
-  chipTextActive: { color: Colors.teal },
+  chipText: { fontSize: 13, fontWeight: '600', color: Theme.textSoft },
+  chipTextActive: { color: Theme.accent },
   fieldRow: { flexDirection: 'row', gap: 10 },
   field: { flex: 1 },
   fieldLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    color: Theme.textMut,
     letterSpacing: 0.8,
     marginTop: 4,
     marginBottom: 6,
+    fontFamily: 'SpaceGrotesk_700Bold',
   },
   weightSummaryText: {
     fontSize: 13,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 18,
     marginBottom: 4,
   },
   svgWrap: { width: '100%', alignItems: 'center' },
-  chartDateRange: { fontSize: 9, color: Colors.textMuted, textAlign: 'right', marginTop: -4, marginBottom: 4 },
+  chartDateRange: { fontSize: 9, color: Theme.textMut, textAlign: 'right', marginTop: -4, marginBottom: 4 },
   inputError: {
     borderColor: Colors.red,
   },
   input: {
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 14,
   },
   notesInput: { minHeight: 60, textAlignVertical: 'top' },
@@ -1241,37 +1240,40 @@ const styles = StyleSheet.create({
   },
   scanBtnRow: { flexDirection: 'row', gap: 8 },
   scanBtn: {
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
     borderRadius: 20,
     paddingHorizontal: 12,
     paddingVertical: 6,
   },
-  scanBtnText: { fontSize: 12, fontWeight: '700', color: Colors.teal },
+  scanBtnText: { fontSize: 12, fontWeight: '700', color: Theme.accent },
   analyzingRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  analyzingText: { fontSize: 12, color: Colors.textMuted, fontWeight: '600' },
+  analyzingText: { fontSize: 12, color: Theme.textMut, fontWeight: '600' },
   resultsBox: {
-    backgroundColor: 'rgba(255,255,255,0.03)',
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     overflow: 'hidden',
   },
   resultRow: {
     paddingHorizontal: 12,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
-  resultName: { fontSize: 13, fontWeight: '700', color: Colors.textPrimary },
-  resultMeta: { fontSize: 11, color: Colors.textMuted, marginTop: 2 },
+  resultName: { fontSize: 13, fontWeight: '700', color: Theme.text },
+  resultMeta: { fontSize: 11, color: Theme.textMut, marginTop: 2 },
   saveBtn: {
     marginTop: 6,
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 13,
     alignItems: 'center',
   },
-  saveBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
+  saveBtnDisabled: { opacity: 0.5 },
+  saveBtnText: { fontSize: 14, fontWeight: '800', color: Theme.ink },
 });

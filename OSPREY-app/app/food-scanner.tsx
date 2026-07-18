@@ -13,6 +13,8 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import { lookupBarcode } from '@/services/food-lookup';
 
 export default function FoodScannerScreen() {
@@ -63,7 +65,7 @@ export default function FoodScannerScreen() {
   if (!permission) {
     return (
       <SafeAreaView style={styles.container}>
-        <ActivityIndicator color={Colors.teal} />
+        <ActivityIndicator color={Theme.accent} />
       </SafeAreaView>
     );
   }
@@ -80,24 +82,22 @@ export default function FoodScannerScreen() {
               ? 'Camera access is turned off for OSPREY. Enable it in Settings to scan barcodes.'
               : 'OSPREY uses your camera to scan food barcodes for quick logging.'}
           </Text>
-          <TouchableOpacity
+          <Button
+            variant="primary"
             style={styles.primaryBtn}
             onPress={mustOpenSettings ? () => Linking.openSettings() : requestPermission}
-            accessibilityRole="button"
             accessibilityLabel={mustOpenSettings ? 'Open Settings' : 'Allow camera access'}
           >
-            <Text style={styles.primaryBtnText}>
-              {mustOpenSettings ? 'Open Settings' : 'Allow Camera'}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            {mustOpenSettings ? 'Open Settings' : 'Allow Camera'}
+          </Button>
+          <Button
+            variant="secondary"
             style={styles.linkBtn}
             onPress={goToManualLog}
-            accessibilityRole="button"
             accessibilityLabel="Log food manually instead"
           >
-            <Text style={styles.linkText}>Log food manually instead</Text>
-          </TouchableOpacity>
+            Log food manually instead
+          </Button>
           <TouchableOpacity
             style={styles.linkBtn}
             onPress={() => router.back()}
@@ -141,26 +141,26 @@ export default function FoodScannerScreen() {
           <Ionicons
             name={torchOn ? 'flashlight' : 'flashlight-outline'}
             size={20}
-            color={torchOn ? '#000' : Colors.textPrimary}
+            color={torchOn ? Theme.ink : Theme.text}
           />
         </TouchableOpacity>
         <View style={styles.frame} />
         {!scanning ? (
           <View style={styles.statusBox}>
-            <ActivityIndicator color={Colors.teal} />
+            <ActivityIndicator color={Theme.accent} />
             <Text style={styles.statusText}>Looking up product...</Text>
           </View>
         ) : error ? (
           <View style={styles.statusBox}>
             <Text style={styles.errorText}>{error}</Text>
-            <TouchableOpacity
+            <Button
+              variant="primary"
               style={styles.manualBtn}
               onPress={goToManualLog}
-              accessibilityRole="button"
               accessibilityLabel="Log manually"
             >
-              <Text style={styles.manualBtnText}>Log manually</Text>
-            </TouchableOpacity>
+              Log manually
+            </Button>
             <Text style={styles.hintSmall}>…or point the camera at another barcode</Text>
           </View>
         ) : (
@@ -172,7 +172,7 @@ export default function FoodScannerScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   camera: { flex: 1 },
   overlay: {
     position: 'absolute',
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
-  closeBtnText: { color: Colors.textPrimary, fontSize: 14, fontWeight: '700' },
+  closeBtnText: { color: Theme.text, fontSize: 14, fontWeight: '700' },
   torchBtn: {
     position: 'absolute',
     top: 60,
@@ -205,18 +205,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  torchBtnOn: { backgroundColor: Colors.teal },
+  torchBtnOn: { backgroundColor: Theme.accent },
   frame: {
     width: 260,
     height: 160,
     borderWidth: 2,
-    borderColor: Colors.teal,
-    borderRadius: 16,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
   },
-  hint: { color: Colors.textPrimary, fontSize: 14, marginTop: 20, fontWeight: '600' },
-  hintSmall: { color: Colors.textSecondary, fontSize: 12, fontWeight: '600' },
+  hint: { color: Theme.text, fontSize: 14, marginTop: 20, fontWeight: '600' },
+  hintSmall: { color: Theme.textSoft, fontSize: 12, fontWeight: '600' },
   statusBox: { marginTop: 20, alignItems: 'center', gap: 10 },
-  statusText: { color: Colors.textPrimary, fontSize: 14, fontWeight: '600' },
+  statusText: { color: Theme.text, fontSize: 14, fontWeight: '600' },
   errorText: {
     color: Colors.red,
     fontSize: 14,
@@ -225,23 +225,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   manualBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 10,
+    // borderRadius comes from the Button primitive; only sizing is overridden here.
     paddingVertical: 10,
     paddingHorizontal: 22,
   },
-  manualBtnText: { fontSize: 13, fontWeight: '800', color: '#000' },
   permissionBox: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 28, gap: 12 },
-  title: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
-  subtitle: { fontSize: 14, color: Colors.textMuted, textAlign: 'center', lineHeight: 20 },
+  title: { fontSize: 20, fontWeight: '800', color: Theme.text },
+  subtitle: { fontSize: 14, color: Theme.textMut, textAlign: 'center', lineHeight: 20 },
   primaryBtn: {
     marginTop: 12,
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
+    // borderRadius comes from the Button primitive; only sizing is overridden here.
     paddingVertical: 13,
     paddingHorizontal: 28,
   },
-  primaryBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
   linkBtn: { paddingVertical: 10 },
-  linkText: { fontSize: 13, color: Colors.textMuted, fontWeight: '600' },
+  linkText: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
 });

@@ -1,6 +1,8 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Card } from '@/components/ui';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatFluidOz, mlToOz } from '@/services/units';
 
@@ -24,10 +26,10 @@ export default function HydrationCard({ ounces, targetOz, onAdd, emphasized }: H
   const unitLabel = units === 'metric' ? 'ml' : 'oz';
 
   return (
-    <View style={[styles.card, emphasized && styles.cardEmphasized]}>
+    <Card emphasis={emphasized} style={styles.card}>
       <View style={styles.headerRow}>
         <View style={styles.titleRow}>
-          <Ionicons name="water" size={15} color={met ? Colors.green : Colors.teal} />
+          <Ionicons name="water" size={15} color={met ? Colors.green : Theme.accent} />
           <Text style={styles.label}>HYDRATION</Text>
         </View>
         <Text style={styles.amount}>
@@ -40,7 +42,7 @@ export default function HydrationCard({ ounces, targetOz, onAdd, emphasized }: H
         <View
           style={[
             styles.fill,
-            { width: `${progress * 100}%`, backgroundColor: met ? Colors.green : Colors.teal },
+            { width: `${progress * 100}%`, backgroundColor: met ? Colors.green : Theme.accent },
           ]}
         />
       </View>
@@ -58,36 +60,27 @@ export default function HydrationCard({ ounces, targetOz, onAdd, emphasized }: H
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </Card>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 14,
     marginBottom: 14,
     gap: 10,
-  },
-  cardEmphasized: {
-    backgroundColor: 'rgba(0,200,200,0.08)',
-    borderColor: Colors.borderTeal,
-  },
+  } as ViewStyle,
   headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  label: { fontSize: 10, fontWeight: '700', color: Colors.teal, letterSpacing: 1.2 },
-  amount: { fontSize: 14, fontWeight: '800', color: Colors.textPrimary },
-  amountTarget: { fontSize: 12, fontWeight: '600', color: Colors.textMuted },
+  label: { fontSize: 10, fontWeight: '700', color: Theme.accent, letterSpacing: 1.2, fontFamily: 'SpaceGrotesk_700Bold' },
+  amount: { fontSize: 14, fontWeight: '800', color: Theme.text },
+  amountTarget: { fontSize: 12, fontWeight: '600', color: Theme.textMut },
   track: {
     height: 6,
-    backgroundColor: 'rgba(255,255,255,0.07)',
+    backgroundColor: Theme.line,
     borderRadius: 3,
     overflow: 'hidden',
   },
@@ -95,10 +88,12 @@ const styles = StyleSheet.create({
   quickAddRow: { flexDirection: 'row', gap: 8 },
   quickAddBtn: {
     flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    borderRadius: 10,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingVertical: 8,
     alignItems: 'center',
   },
-  quickAddText: { fontSize: 12, fontWeight: '700', color: Colors.textPrimary },
+  quickAddText: { fontSize: 12, fontWeight: '700', color: Theme.text },
 });
