@@ -309,7 +309,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: Radius.card,
     backgroundColor: Theme.accent + '1F',
-    borderWidth: 1,
+    // 2px matches race-event's addBtn and the Button primitive, which uses
+    // BorderWidth.card for both its primary and secondary variants. These two
+    // screens sit in one flow, so a 1px accent outline here would seam.
+    borderWidth: BorderWidth.card,
     borderColor: Theme.accent,
   },
   retryBtnText: { color: Theme.accent, fontSize: 14, fontWeight: '700' },
