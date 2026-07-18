@@ -13,6 +13,7 @@ import Svg, { Line, Path, Polyline, Rect } from 'react-native-svg';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { Theme, ChartPalette } from '@/constants/theme';
 import { useStats } from '@/hooks/useStats';
 import { useDeleteWorkoutLog } from '@/hooks/useTodayLog';
 import { usePerformance } from '@/hooks/usePerformance';
@@ -39,14 +40,14 @@ const SESSION_ICON: Record<string, string> = {
 // volume chart.
 const SPORT_ORDER: SportType[] = ['run', 'bike', 'swim', 'rowing', 'lift', 'hyrox', 'cross', 'race'];
 const SPORT_COLOR: Record<SportType, string> = {
-  run: Colors.teal,
-  bike: Colors.blue,
-  swim: Colors.green,
-  lift: Colors.gold,
-  cross: Colors.pink,
-  race: Colors.amber,
-  rowing: Colors.indigo,
-  hyrox: Colors.red,
+  run: ChartPalette.run,
+  bike: ChartPalette.bike,
+  swim: ChartPalette.swim,
+  lift: ChartPalette.lift,
+  cross: ChartPalette.cross,
+  race: ChartPalette.race,
+  rowing: ChartPalette.rowing,
+  hyrox: ChartPalette.hyrox,
 };
 const SPORT_LABEL: Record<SportType, string> = {
   run: 'Run',
@@ -105,7 +106,7 @@ function FitnessChart({
       <Polyline
         points={ctlPoints}
         fill="none"
-        stroke={Colors.teal}
+        stroke={ChartPalette.run}
         strokeWidth={1.8}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -114,7 +115,7 @@ function FitnessChart({
       <Polyline
         points={atlPoints}
         fill="none"
-        stroke={Colors.amber}
+        stroke={ChartPalette.neutral}
         strokeWidth={1.4}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -147,7 +148,7 @@ function E1rmChart({ points, width }: { points: number[]; width: number }) {
       <Polyline
         points={coords}
         fill="none"
-        stroke={Colors.gold}
+        stroke={ChartPalette.lift}
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -336,13 +337,13 @@ export default function StatsTab() {
                         label="FITNESS"
                         sublabel="CTL"
                         value={perf.ctl.toFixed(1)}
-                        color={Colors.teal}
+                        color={ChartPalette.run}
                       />
                       <FitnessMetric
                         label="FATIGUE"
                         sublabel="ATL"
                         value={perf.atl.toFixed(1)}
-                        color={Colors.amber}
+                        color={ChartPalette.neutral}
                       />
                       <FitnessMetric
                         label="FORM"
@@ -686,17 +687,18 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     alignItems: 'flex-start',
   },
+  // FUNCTIONAL — severity tier, not a surface
   riskBannerHigh: {
     backgroundColor: 'rgba(255,68,68,0.07)',
     borderColor: 'rgba(255,68,68,0.25)',
   },
   riskBannerMod: {
-    backgroundColor: Colors.surfaceGold,
-    borderColor: Colors.borderGold,
+    backgroundColor: Theme.accent + '12',
+    borderColor: Theme.accent + '40',
   },
   riskBannerInfo: {
-    backgroundColor: Colors.surfaceTeal,
-    borderColor: Colors.borderTeal,
+    backgroundColor: Theme.panel,
+    borderColor: Theme.line,
   },
   riskIcon: { fontSize: 16 },
   riskText: { flex: 1, fontSize: 13, color: Colors.textSecondary, lineHeight: 18 },
