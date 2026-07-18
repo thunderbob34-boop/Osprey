@@ -12,6 +12,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useActivity } from '@/hooks/useActivity';
 import { useAuthStore } from '@/store/authStore';
@@ -85,14 +86,14 @@ export default function ActivityScreen() {
             accessibilityRole="button"
             accessibilityLabel="Friends"
           >
-            <Ionicons name="person-add-outline" size={22} color={Colors.teal} />
+            <Ionicons name="person-add-outline" size={22} color={Theme.accent} />
           </TouchableOpacity>
         }
       />
 
       <ScrollView contentContainerStyle={styles.scroll}>
         {isLoading ? (
-          <ActivityIndicator color={Colors.teal} style={{ marginTop: 32 }} />
+          <ActivityIndicator color={Theme.accent} style={{ marginTop: 32 }} />
         ) : error ? (
           <Text style={styles.errorText}>Couldn&apos;t load activity feed.</Text>
         ) : !feed || feed.length === 0 ? (
@@ -141,7 +142,7 @@ export default function ActivityScreen() {
                   accessibilityState={{ selected: card.hasKudo, disabled: kudoingId === card.shareId }}
                 >
                   {kudoingId === card.shareId ? (
-                    <ActivityIndicator size="small" color={Colors.teal} />
+                    <ActivityIndicator size="small" color={Theme.accent} />
                   ) : (
                     <>
                       <Text style={[styles.kudoEmoji, card.hasKudo && styles.kudoEmojiActive]}>
@@ -163,29 +164,29 @@ export default function ActivityScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   scroll: { padding: 16, paddingBottom: 32, gap: 12 },
-  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 24 },
+  empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginTop: 24 },
   errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
 
   card: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 14,
     gap: 10,
   },
   cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
-  cardName: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },
-  cardTime: { color: Colors.textMuted, fontSize: 12, marginTop: 2 },
-  delete: { color: Colors.textMuted, fontSize: 16, fontWeight: '700' },
+  cardName: { color: Theme.text, fontSize: 15, fontWeight: '700' },
+  cardTime: { color: Theme.textMut, fontSize: 12, marginTop: 2 },
+  delete: { color: Theme.textMut, fontSize: 16, fontWeight: '700' },
 
   cardBody: { flexDirection: 'row', gap: 12, alignItems: 'center' },
-  cardWorkout: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },
-  cardStat: { color: Colors.textSecondary, fontSize: 13, fontWeight: '600' },
+  cardWorkout: { color: Theme.text, fontSize: 15, fontWeight: '700' },
+  cardStat: { color: Theme.textSoft, fontSize: 13, fontWeight: '600' },
 
-  cardCaption: { color: Colors.textSecondary, fontSize: 13, fontStyle: 'italic', lineHeight: 18 },
+  cardCaption: { color: Theme.textSoft, fontSize: 13, fontStyle: 'italic', lineHeight: 18 },
 
   cardFooter: { flexDirection: 'row', gap: 8 },
   kudoBtn: {
@@ -194,14 +195,16 @@ const styles = StyleSheet.create({
     gap: 6,
     paddingHorizontal: 10,
     paddingVertical: 7,
-    borderRadius: 8,
-    backgroundColor: Colors.bg,
+    borderRadius: Radius.card,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
   },
-  kudoBtnActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+  // Selected state has a second cue (kudoTextActive turns accent + bold),
+  // so the container itself is border-only — no tint fill.
+  kudoBtnActive: { borderColor: Theme.accent },
   kudoEmoji: { fontSize: 14 },
   kudoEmojiActive: { fontSize: 15 },
-  kudoText: { color: Colors.textMuted, fontSize: 12, fontWeight: '600' },
-  kudoTextActive: { color: Colors.teal, fontWeight: '700' },
+  kudoText: { color: Theme.textMut, fontSize: 12, fontWeight: '600' },
+  kudoTextActive: { color: Theme.accent, fontWeight: '700' },
 });

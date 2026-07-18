@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
 import { useFriends } from '@/hooks/useFriends';
@@ -143,7 +144,7 @@ export default function FriendsScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="(555) 123-4567"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={phoneInput}
                 onChangeText={(v) => {
                   setPhoneInput(v);
@@ -165,7 +166,7 @@ export default function FriendsScreen() {
                   accessibilityState={{ disabled: updatePhone.isPending, busy: updatePhone.isPending }}
                 >
                   {updatePhone.isPending ? (
-                    <ActivityIndicator color="#000" size="small" />
+                    <ActivityIndicator color={Theme.ink} size="small" />
                   ) : (
                     <Text style={styles.searchBtnText}>Save</Text>
                   )}
@@ -181,7 +182,7 @@ export default function FriendsScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="Their email or phone number"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={query}
                 onChangeText={(v) => {
                   setQuery(v);
@@ -202,7 +203,7 @@ export default function FriendsScreen() {
                 accessibilityState={{ disabled: searching || !query.trim(), busy: searching }}
               >
                 {searching ? (
-                  <ActivityIndicator color="#000" size="small" />
+                  <ActivityIndicator color={Theme.ink} size="small" />
                 ) : (
                   <Text style={styles.searchBtnText}>Search</Text>
                 )}
@@ -237,7 +238,7 @@ export default function FriendsScreen() {
           </View>
 
           {isLoading ? (
-            <ActivityIndicator color={Colors.teal} style={{ marginTop: 24 }} />
+            <ActivityIndicator color={Theme.accent} style={{ marginTop: 24 }} />
           ) : (
             <>
               {pending && pending.length > 0 ? (
@@ -269,7 +270,7 @@ export default function FriendsScreen() {
                         accessibilityRole="button"
                         accessibilityLabel={`Decline ${req.requesterDisplayName}`}
                       >
-                        <Ionicons name="close" size={18} color={Colors.textMuted} />
+                        <Ionicons name="close" size={18} color={Theme.textMut} />
                       </TouchableOpacity>
                     </View>
                   ))}
@@ -312,118 +313,134 @@ export default function FriendsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
-  subtitle: { color: Colors.textMuted, fontSize: 13, lineHeight: 19, marginBottom: 4 },
-  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20 },
+  subtitle: { color: Theme.textMut, fontSize: 13, lineHeight: 19, marginBottom: 4 },
+  empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20 },
   emptyCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
   },
 
   searchCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     gap: 10,
     marginBottom: 6,
   },
-  rowDivider: { height: 1, backgroundColor: Colors.border, marginVertical: 2 },
+  rowDivider: { height: 1, backgroundColor: Theme.line, marginVertical: 2 },
+  // Inline field label (heads a single input inside the card) — textMut,
+  // matching log.tsx's fieldLabel convention.
   fieldLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    color: Theme.textMut,
     letterSpacing: 0.8,
+    fontFamily: 'SpaceGrotesk_700Bold',
   },
-  phoneHint: { fontSize: 12, color: Colors.textMuted, marginTop: -6 },
+  phoneHint: { fontSize: 12, color: Theme.textMut, marginTop: -6 },
   searchRow: { flexDirection: 'row', gap: 8 },
   input: {
     flex: 1,
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 15,
   },
   searchBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 10,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingHorizontal: 18,
     alignItems: 'center',
     justifyContent: 'center',
   },
   searchBtnDisabled: { opacity: 0.5 },
-  searchBtnText: { color: '#000', fontSize: 14, fontWeight: '800' },
+  searchBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
   searchError: { color: Colors.red, fontSize: 13 },
 
+  // Nested inside searchCard (now Theme.panel) — recedes to ink so it
+  // doesn't read as another panel stacked on top of the card.
   resultRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 12,
   },
-  resultName: { flex: 1, color: Colors.textPrimary, fontSize: 14, fontWeight: '700' },
-  resultStatus: { color: Colors.textMuted, fontSize: 12, fontWeight: '600' },
+  resultName: { flex: 1, color: Theme.text, fontSize: 14, fontWeight: '700' },
+  resultStatus: { color: Theme.textMut, fontSize: 12, fontWeight: '600' },
+  // Secondary CTA (mirrors Button's `secondary` variant: outline, no fill) —
+  // subordinate to the filled Search/Save actions above it.
   addFriendBtn: {
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 10,
+    backgroundColor: 'transparent',
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 8,
   },
-  addFriendBtnText: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
+  addFriendBtnText: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
 
+  // Screen-level section header (heads a whole list, not a single card) —
+  // accent, matching stats.tsx's sectionLabel convention.
   sectionLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    color: Theme.accent,
     letterSpacing: 1,
     marginTop: 12,
     marginBottom: 2,
+    fontFamily: 'SpaceGrotesk_700Bold',
   },
   friendRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 12,
   },
+  // Nested inside friendRow/resultRow — recedes to ink. borderRadius stays a
+  // literal half-of-width circle (structural, not a decorative radius).
   friendAvatar: {
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  friendInitial: { color: Colors.teal, fontSize: 15, fontWeight: '800' },
-  friendName: { color: Colors.textPrimary, fontSize: 14, fontWeight: '700' },
-  friendMeta: { color: Colors.textMuted, fontSize: 11, marginTop: 1 },
+  friendInitial: { color: Theme.text, fontSize: 15, fontWeight: '800' },
+  friendName: { color: Theme.text, fontSize: 14, fontWeight: '700' },
+  friendMeta: { color: Theme.textMut, fontSize: 11, marginTop: 1 },
   acceptBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 10,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 8,
   },
-  acceptBtnText: { color: '#000', fontSize: 13, fontWeight: '800' },
+  acceptBtnText: { color: Theme.ink, fontSize: 13, fontWeight: '800' },
   declineBtn: { padding: 2 },
-  removeText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
+  removeText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
 });
