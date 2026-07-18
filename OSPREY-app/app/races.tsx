@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import DateField from '@/components/DateField';
 import FieldError from '@/components/FieldError';
 import InputModal from '@/components/InputModal';
@@ -127,7 +128,7 @@ function LogisticsPanel({
       <TextInput
         style={styles.input}
         placeholder="Time + location (e.g. Sat 10am, Expo Hall B)"
-        placeholderTextColor={Colors.textMuted}
+        placeholderTextColor={Theme.textMut}
         value={form.packetPickupTime}
         onChangeText={(t) => setForm((p) => ({ ...p, packetPickupTime: t }))}
         accessibilityLabel="Packet pickup time and location"
@@ -138,7 +139,7 @@ function LogisticsPanel({
       <TextInput
         style={[styles.input, styles.multiline]}
         placeholder="Parking lot, garage, transit stop…"
-        placeholderTextColor={Colors.textMuted}
+        placeholderTextColor={Theme.textMut}
         value={form.parkingNotes}
         onChangeText={(t) => setForm((p) => ({ ...p, parkingNotes: t }))}
         multiline
@@ -151,7 +152,7 @@ function LogisticsPanel({
       <TextInput
         style={[styles.input, styles.multiline]}
         placeholder="Shoes, kit, drop bag contents…"
-        placeholderTextColor={Colors.textMuted}
+        placeholderTextColor={Theme.textMut}
         value={form.gearNotes}
         onChangeText={(t) => setForm((p) => ({ ...p, gearNotes: t }))}
         multiline
@@ -198,7 +199,7 @@ function LogisticsPanel({
             accessibilityState={{ disabled: isGenerating, busy: isGenerating }}
           >
             {isGenerating ? (
-              <ActivityIndicator color={Colors.teal} size="small" />
+              <ActivityIndicator color={Theme.accent} size="small" />
             ) : (
               <Text style={styles.generateBtnText}>
                 {!isPlus ? '🔒 OSPREY+' : race.ozzieBriefingText ? '↺ Refresh' : 'Generate'}
@@ -225,7 +226,7 @@ function LogisticsPanel({
         accessibilityState={{ disabled: isSaving, busy: isSaving }}
       >
         {isSaving ? (
-          <ActivityIndicator color="#000" />
+          <ActivityIndicator color={Theme.ink} />
         ) : (
           <Text style={styles.saveBtnText}>Save Logistics</Text>
         )}
@@ -347,7 +348,7 @@ function RetroPanel({
       <TextInput
         style={[styles.input, styles.multiline]}
         placeholder="How did the pacing feel? Went out too hard? Negative split?"
-        placeholderTextColor={Colors.textMuted}
+        placeholderTextColor={Theme.textMut}
         value={form.pacingNotes}
         onChangeText={(t) => setForm((p) => ({ ...p, pacingNotes: t }))}
         multiline
@@ -360,7 +361,7 @@ function RetroPanel({
       <TextInput
         style={[styles.input, styles.multiline]}
         placeholder="Did the fueling plan hold up? Bonk? GI issues?"
-        placeholderTextColor={Colors.textMuted}
+        placeholderTextColor={Theme.textMut}
         value={form.nutritionNotes}
         onChangeText={(t) => setForm((p) => ({ ...p, nutritionNotes: t }))}
         multiline
@@ -373,7 +374,7 @@ function RetroPanel({
       <TextInput
         style={[styles.input, styles.multiline]}
         placeholder="What would you do differently next time?"
-        placeholderTextColor={Colors.textMuted}
+        placeholderTextColor={Theme.textMut}
         value={form.lessons}
         onChangeText={(t) => setForm((p) => ({ ...p, lessons: t }))}
         multiline
@@ -394,7 +395,7 @@ function RetroPanel({
             accessibilityState={{ disabled: isGenerating, busy: isGenerating }}
           >
             {isGenerating ? (
-              <ActivityIndicator color={Colors.teal} size="small" />
+              <ActivityIndicator color={Theme.accent} size="small" />
             ) : (
               <Text style={styles.generateBtnText}>
                 {!isPlus ? '🔒 OSPREY+' : race.ozzieRetroText ? '↺ Refresh' : 'Generate'}
@@ -420,7 +421,7 @@ function RetroPanel({
         accessibilityState={{ disabled: isSaving, busy: isSaving }}
       >
         {isSaving ? (
-          <ActivityIndicator color="#000" />
+          <ActivityIndicator color={Theme.ink} />
         ) : (
           <Text style={styles.saveBtnText}>Save Retrospective</Text>
         )}
@@ -473,7 +474,7 @@ function PartnersPanel({ race, onClose }: PartnersPanelProps) {
       </View>
 
       {isLoading ? (
-        <ActivityIndicator color={Colors.teal} style={{ marginVertical: 12 }} />
+        <ActivityIndicator color={Theme.accent} style={{ marginVertical: 12 }} />
       ) : friendsAtRace && friendsAtRace.length > 0 ? (
         <>
           <Text style={styles.partnersHint}>
@@ -1134,12 +1135,12 @@ const styles = StyleSheet.create({
 
   // ── Logistics panel ──
   logisticsPanel: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
     borderTopWidth: 0,
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: Radius.card,
+    borderBottomRightRadius: Radius.card,
     padding: 16,
     gap: 8,
     marginTop: -2,
@@ -1150,8 +1151,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 4,
   },
-  logisticsTitle: { color: Colors.teal, fontSize: 13, fontWeight: '800', letterSpacing: 0.5 },
-  logisticsClose: { color: Colors.textMuted, fontSize: 16, fontWeight: '700' },
+  // Panel identity collapsed to a single accent (user decision) — Logistics
+  // and Retrospective no longer carry distinct teal/gold cues.
+  logisticsTitle: {
+    color: Theme.accent,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    fontSize: 13,
+    fontWeight: '800',
+    letterSpacing: 0.5,
+  },
+  logisticsClose: { color: Theme.textMut, fontSize: 16, fontWeight: '700' },
 
   checklistHeader: {
     flexDirection: 'row',
@@ -1159,34 +1168,36 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 6,
   },
-  checklistProgress: { color: Colors.teal, fontSize: 11, fontWeight: '700' },
+  checklistProgress: { color: Theme.accent, fontSize: 11, fontWeight: '700' },
   checkRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
     paddingVertical: 7,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   checkbox: {
     width: 22,
     height: 22,
     borderRadius: 6,
     borderWidth: 1.5,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  checkboxDone: { backgroundColor: Colors.teal, borderColor: Colors.teal },
-  checkmark: { color: '#000', fontSize: 13, fontWeight: '900' },
-  checkLabel: { color: Colors.textSecondary, fontSize: 14 },
-  checkLabelDone: { color: Colors.textMuted, textDecorationLine: 'line-through' },
+  checkboxDone: { backgroundColor: Theme.accent, borderColor: Theme.accent },
+  checkmark: { color: Theme.ink, fontSize: 13, fontWeight: '900' },
+  checkLabel: { color: Theme.textSoft, fontSize: 14 },
+  checkLabelDone: { color: Theme.textMut, textDecorationLine: 'line-through' },
 
+  // Nested surface inside logisticsPanel/retroPanel (Theme.panel) — recedes
+  // to Theme.ink so it doesn't read flat against its parent.
   briefingSection: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 10,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 14,
     marginTop: 8,
     gap: 8,
@@ -1196,11 +1207,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  briefingLabel: { color: Colors.teal, fontSize: 10, fontWeight: '800', letterSpacing: 1 },
+  briefingLabel: { color: Theme.accent, fontFamily: 'SpaceGrotesk_700Bold', fontSize: 10, fontWeight: '800', letterSpacing: 1 },
   generateBtn: { paddingHorizontal: 10, paddingVertical: 4 },
-  generateBtnText: { color: Colors.teal, fontSize: 12, fontWeight: '700' },
-  briefingText: { color: Colors.textPrimary, fontSize: 14, lineHeight: 21 },
-  briefingPlaceholder: { color: Colors.textMuted, fontSize: 13, fontStyle: 'italic' },
+  generateBtnText: { color: Theme.accent, fontSize: 12, fontWeight: '700' },
+  briefingText: { color: Theme.text, fontSize: 14, lineHeight: 21 },
+  briefingPlaceholder: { color: Theme.textMut, fontSize: 13, fontStyle: 'italic' },
 
   // ── Add-race form ──
   formCard: {
@@ -1258,23 +1269,32 @@ const styles = StyleSheet.create({
 
   // ── Retro panel ──
   retroPanel: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.borderGold,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
     borderTopWidth: 0,
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: Radius.card,
+    borderBottomRightRadius: Radius.card,
     padding: 16,
     gap: 8,
     marginTop: -2,
   },
-  retroTitle: { color: Colors.gold, fontSize: 13, fontWeight: '800', letterSpacing: 0.5 },
+  // Panel identity collapsed to a single accent (user decision) — Logistics
+  // and Retrospective no longer carry distinct teal/gold cues.
+  retroTitle: {
+    color: Theme.accent,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    fontSize: 13,
+    fontWeight: '800',
+    letterSpacing: 0.5,
+  },
   deltaBadge: {
-    borderRadius: 10,
+    borderRadius: Radius.card,
     padding: 12,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     marginBottom: 4,
   },
+  // FUNCTIONAL — pass/fail against goal time, not brand
   deltaBadgeGood: {
     backgroundColor: 'rgba(76,222,128,0.07)',
     borderColor: 'rgba(76,222,128,0.25)',
@@ -1283,50 +1303,60 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(245,166,35,0.07)',
     borderColor: 'rgba(245,166,35,0.25)',
   },
-  deltaLabel: { color: Colors.textMuted, fontSize: 9, fontWeight: '800', letterSpacing: 1 },
+  deltaLabel: { color: Theme.textMut, fontSize: 9, fontWeight: '800', letterSpacing: 1 },
   deltaValue: { fontSize: 18, fontWeight: '800', marginTop: 2 },
   deltaValueGood: { color: Colors.green },
   deltaValueMiss: { color: Colors.amber },
-  deltaSubtext: { color: Colors.textMuted, fontSize: 12, marginTop: 2 },
+  deltaSubtext: { color: Theme.textMut, fontSize: 12, marginTop: 2 },
   feelRow: { flexDirection: 'row', gap: 6, flexWrap: 'wrap' },
   feelChip: {
     flex: 1,
     minWidth: 56,
     alignItems: 'center',
     paddingVertical: 8,
-    borderRadius: 9,
+    borderRadius: Radius.card,
     borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bg,
+    borderColor: Theme.line,
+    backgroundColor: Theme.ink,
   },
-  feelChipActive: { backgroundColor: Colors.surfaceGold, borderColor: Colors.borderGold },
-  feelScore: { color: Colors.textMuted, fontSize: 15, fontWeight: '800' },
-  feelScoreActive: { color: Colors.gold },
-  feelLabel: { color: Colors.textMuted, fontSize: 9, fontWeight: '700', marginTop: 2, textAlign: 'center' },
-  feelLabelActive: { color: Colors.gold },
+  // Generic selected-chip state (1-5 "how did it feel" selector), not a
+  // semantic scale — the accent tint is correct here.
+  feelChipActive: { backgroundColor: Theme.accent + '1F', borderColor: Theme.accent },
+  feelScore: { color: Theme.textMut, fontSize: 15, fontWeight: '800' },
+  feelScoreActive: { color: Theme.accent },
+  feelLabel: { color: Theme.textMut, fontSize: 9, fontWeight: '700', marginTop: 2, textAlign: 'center' },
+  feelLabelActive: { color: Theme.accent },
 
   // ── Partners panel ──
   partnersPanel: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
     borderTopWidth: 0,
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: Radius.card,
+    borderBottomRightRadius: Radius.card,
     padding: 16,
     gap: 8,
     marginTop: -2,
   },
-  partnersTitle: { color: Colors.teal, fontSize: 13, fontWeight: '800', letterSpacing: 0.5 },
-  partnersSubtitle: { color: Colors.textMuted, fontSize: 11, marginTop: 1 },
+  // Same panel-heading role as logisticsTitle/retroTitle — collapsed to the
+  // single accent identity.
+  partnersTitle: {
+    color: Theme.accent,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    fontSize: 13,
+    fontWeight: '800',
+    letterSpacing: 0.5,
+  },
+  partnersSubtitle: { color: Theme.textMut, fontSize: 11, marginTop: 1 },
   partnersHint: {
-    color: Colors.textMuted,
+    color: Theme.textMut,
     fontSize: 12,
     lineHeight: 17,
     marginBottom: 4,
   },
   partnersEmpty: {
-    color: Colors.textMuted,
+    color: Theme.textMut,
     fontSize: 13,
     lineHeight: 18,
     fontStyle: 'italic',
@@ -1338,38 +1368,40 @@ const styles = StyleSheet.create({
     gap: 12,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    borderRadius: 10,
+    borderRadius: Radius.card,
     borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bg,
+    borderColor: Theme.line,
+    backgroundColor: Theme.ink,
   },
+  // Active/linked state — accent tint is correct here (same treatment as
+  // feelChipActive).
   friendRowLinked: {
-    borderColor: Colors.borderTeal,
-    backgroundColor: Colors.surfaceTeal,
+    borderColor: Theme.accent,
+    backgroundColor: Theme.accent + '1F',
   },
   friendAvatar: {
     width: 34,
     height: 34,
     borderRadius: 17,
-    backgroundColor: Colors.tealDim,
+    backgroundColor: Theme.accent + '1F',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  friendInitial: { color: Colors.teal, fontSize: 15, fontWeight: '800' },
-  friendName: { color: Colors.textPrimary, fontSize: 14, fontWeight: '700' },
-  friendRaceName: { color: Colors.textMuted, fontSize: 11, marginTop: 1 },
+  friendInitial: { color: Theme.accent, fontSize: 15, fontWeight: '800' },
+  friendName: { color: Theme.text, fontSize: 14, fontWeight: '700' },
+  friendRaceName: { color: Theme.textMut, fontSize: 11, marginTop: 1 },
   linkBadge: {
     paddingHorizontal: 10,
     paddingVertical: 5,
-    borderRadius: 8,
+    borderRadius: Radius.card,
     borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bg,
+    borderColor: Theme.line,
+    backgroundColor: Theme.ink,
   },
   linkBadgeActive: {
-    borderColor: Colors.borderTeal,
-    backgroundColor: Colors.surfaceTeal,
+    borderColor: Theme.accent,
+    backgroundColor: Theme.accent + '1F',
   },
-  linkBadgeText: { color: Colors.textMuted, fontSize: 11, fontWeight: '700' },
-  linkBadgeTextActive: { color: Colors.teal },
+  linkBadgeText: { color: Theme.textMut, fontSize: 11, fontWeight: '700' },
+  linkBadgeTextActive: { color: Theme.accent },
 });
