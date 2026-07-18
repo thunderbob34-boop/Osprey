@@ -11,6 +11,7 @@ import {
 import { useRouter } from 'expo-router';
 import { format } from 'date-fns';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useCalendarMonth } from '@/hooks/useCalendarMonth';
 import type { CalendarDay } from '@/services/calendar';
@@ -129,7 +130,7 @@ export default function CalendarScreen() {
       </View>
 
       {isLoading ? (
-        <ActivityIndicator color={Colors.teal} style={{ marginTop: 24 }} />
+        <ActivityIndicator color={Theme.accent} style={{ marginTop: 24 }} />
       ) : (
         <View style={styles.grid}>
           {cells.map((cell, i) => {
@@ -261,7 +262,7 @@ export default function CalendarScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   monthNav: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -270,14 +271,14 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   navBtn: { padding: 8 },
-  navBtnText: { fontSize: 22, color: Colors.teal, fontWeight: '700' },
-  monthLabel: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary },
+  navBtnText: { fontSize: 22, color: Theme.accent, fontWeight: '700' },
+  monthLabel: { fontSize: 16, fontWeight: '800', color: Theme.text },
   weekdayRow: { flexDirection: 'row', paddingHorizontal: 16, marginTop: 8 },
   weekdayLabel: {
     flex: 1,
     textAlign: 'center',
     fontSize: 11,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     fontWeight: '700',
   },
   grid: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 12, marginTop: 4 },
@@ -289,22 +290,22 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   cellToday: {
-    backgroundColor: Colors.surfaceTeal,
-    borderRadius: 10,
+    backgroundColor: Theme.accent + '1A',
+    borderRadius: Radius.card,
   },
-  cellDay: { fontSize: 13, color: Colors.textSecondary, fontWeight: '600' },
-  cellDayToday: { color: Colors.teal, fontWeight: '800' },
+  cellDay: { fontSize: 13, color: Theme.textSoft, fontWeight: '600' },
+  cellDayToday: { color: Theme.accent, fontWeight: '800' },
   cellIcon: { fontSize: 14, opacity: 0.45 },
   cellIconDone: { opacity: 1 },
   legend: { padding: 20, gap: 4, marginTop: 'auto' },
-  legendText: { fontSize: 11, color: Colors.textMuted, textAlign: 'center' },
+  legendText: { fontSize: 11, color: Theme.textMut, textAlign: 'center' },
 
   // Day detail sheet
   sheetBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' },
   sheet: {
-    backgroundColor: '#0D1424',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    backgroundColor: Theme.panel,
+    borderTopLeftRadius: Radius.card,
+    borderTopRightRadius: Radius.card,
     padding: 20,
     paddingBottom: 40,
     gap: 12,
@@ -317,15 +318,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.2)',
     marginBottom: 4,
   },
-  sheetTitle: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary },
+  sheetTitle: { fontSize: 18, fontWeight: '800', color: Theme.text },
   sheetCard: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 12,
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.accent + '0F',
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 14,
+    borderColor: Theme.accent + '33',
+    borderRadius: Radius.card,
     padding: 14,
   },
   sheetCardDone: {
@@ -338,17 +339,23 @@ const styles = StyleSheet.create({
   },
   sheetCardIcon: { fontSize: 24 },
   sheetCardBody: { flex: 1, gap: 2 },
-  sheetCardLabel: { fontSize: 10, fontWeight: '700', color: Colors.teal, letterSpacing: 1 },
-  sheetCardTitle: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary },
-  sheetCardDesc: { fontSize: 13, color: Colors.textSecondary, lineHeight: 18, marginTop: 2 },
+  sheetCardLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: Theme.accent,
+    letterSpacing: 1,
+    fontFamily: 'SpaceGrotesk_700Bold',
+  },
+  sheetCardTitle: { fontSize: 16, fontWeight: '800', color: Theme.text },
+  sheetCardDesc: { fontSize: 13, color: Theme.textSoft, lineHeight: 18, marginTop: 2 },
   sheetCloseBtn: {
     marginTop: 4,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     height: 46,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  sheetCloseBtnText: { fontSize: 14, fontWeight: '700', color: Colors.textSecondary },
+  sheetCloseBtnText: { fontSize: 14, fontWeight: '700', color: Theme.textSoft },
 });
