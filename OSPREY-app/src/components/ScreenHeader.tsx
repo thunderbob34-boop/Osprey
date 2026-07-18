@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
+import { Theme, BorderWidth } from '@/constants/theme';
 
 interface ScreenHeaderProps {
   title: string;
@@ -36,7 +36,7 @@ export default function ScreenHeader({ title, right, onBack }: ScreenHeaderProps
         accessibilityRole="button"
         accessibilityLabel="Go back"
       >
-        <Ionicons name="chevron-back" size={24} color={Colors.teal} />
+        <Ionicons name="chevron-back" size={24} color={Theme.accent} />
       </TouchableOpacity>
       <Text style={styles.title} numberOfLines={1}>
         {title}
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomWidth: BorderWidth.card,
+    borderBottomColor: Theme.line,
   },
   backBtn: {
     width: 44,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: '800',
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   right: {
     width: 44,

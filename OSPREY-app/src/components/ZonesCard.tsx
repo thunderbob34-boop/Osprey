@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
 import { useDisplayZones } from '@/hooks/useDisplayZones';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import type { HrZoneInfo } from '@/services/coaching/envelope';
@@ -166,28 +167,34 @@ export function ZonesCard(): JSX.Element | null {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 14,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     marginBottom: 24,
     gap: 12,
   },
   headerRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  label: { fontSize: 11, fontWeight: '700', color: Colors.teal, letterSpacing: 1 },
+  label: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: Theme.accent,
+    letterSpacing: 1,
+    fontFamily: 'SpaceGrotesk_700Bold',
+  },
   tag: {
-    backgroundColor: Colors.goldDim,
-    borderRadius: 6,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     paddingHorizontal: 6,
     paddingVertical: 2,
   },
-  tagText: { fontSize: 11, fontWeight: '700', color: Colors.gold },
+  tagText: { fontSize: 11, fontWeight: '700', color: Theme.accent },
   rows: { gap: 10 },
   row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   rowLeft: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   dot: { width: 8, height: 8, borderRadius: 4 },
-  rowLabel: { fontSize: 13, fontWeight: '600', color: Colors.textSecondary },
-  rowValue: { fontSize: 14, fontWeight: '800', color: Colors.textPrimary },
-  nudge: { fontSize: 11, color: Colors.textMuted, lineHeight: 16 },
+  rowLabel: { fontSize: 13, fontWeight: '600', color: Theme.textSoft },
+  rowValue: { fontSize: 14, fontWeight: '800', color: Theme.text },
+  nudge: { fontSize: 11, color: Theme.textMut, lineHeight: 16 },
 });
