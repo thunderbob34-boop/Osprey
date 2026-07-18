@@ -48,6 +48,26 @@ export const Shadow = {
 //
 // `neutral` is the second series on the fitness/fatigue chart (ATL against
 // accent's CTL); it is not a sport.
+// Effort ramp — athletic convention, low to high. Decided from rendered
+// options, 2026-07-18, and SHARED so it can't drift.
+//
+// It lived as local constants in endurance.tsx and immediately did drift:
+// plan-preview.tsx kept its own map with `moderate` teal and `hard`/`max` BOTH
+// red — the exact collapse this ramp was approved to fix (six levels rendered
+// in four colours). Both files now consume this one source.
+//
+// `rest` and `threshold` reference live Theme tokens rather than copies.
+export const EffortPalette = {
+  rest: Theme.textMut,
+  easy: '#4cde80',
+  moderate: '#d4c44a',
+  threshold: Theme.accent,
+  hard: '#e85d32',
+  max: '#ff4444',
+} as const;
+
+export type EffortLevel = keyof typeof EffortPalette;
+
 // Training-readiness scale, keyed by the tone `readinessFromTsb()` returns.
 // Decided from rendered options, 2026-07-18.
 //

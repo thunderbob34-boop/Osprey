@@ -13,7 +13,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, EffortPalette } from '@/constants/theme';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useAuthStore } from '@/store/authStore';
 import {
@@ -85,25 +85,11 @@ const CROSS_ACTIVITIES: CrossActivity[] = [
 // (most — CrossFit, yoga, HIIT, mobility — are tracked purely by time).
 const DISTANCE_ACTIVITIES = new Set(['elliptical', 'hiking']);
 
-// Athletic-convention RPE/intensity ramp (approved design change): gray →
-// green → yellow → accent → orange → red. Deliberately gives `moderate` and
-// `hard` values distinct from their neighbors — previously `moderate`
-// collapsed onto `easy` (both teal) and `hard` collapsed onto `max` (both red).
-const EFFORT_REST = Theme.textMut;
-const EFFORT_EASY = '#4cde80';
-const EFFORT_MODERATE = '#d4c44a';
-const EFFORT_THRESHOLD = Theme.accent;
-const EFFORT_HARD = '#e85d32';
-const EFFORT_MAX = '#ff4444';
-
-const EFFORT_COLOR: Record<IntervalEffort | 'rest', string> = {
-  easy: EFFORT_EASY,
-  moderate: EFFORT_MODERATE,
-  threshold: EFFORT_THRESHOLD,
-  hard: EFFORT_HARD,
-  max: EFFORT_MAX,
-  rest: EFFORT_REST,
-};
+// The athletic-convention ramp now lives in constants/theme.ts as
+// EffortPalette, shared with plan-preview.tsx. It started here as local
+// constants and drifted — plan-preview grew its own copy with `moderate` teal
+// and `hard`/`max` both red. One source now.
+const EFFORT_COLOR: Record<IntervalEffort | 'rest', string> = EffortPalette;
 
 const AUTO_CUE_INTERVAL_MS = 10 * 60 * 1000; // every 10 minutes
 

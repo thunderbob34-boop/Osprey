@@ -1,4 +1,4 @@
-import { Theme, Radius, BorderWidth, Spacing, Shadow, ChartPalette, ReadinessPalette } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, Spacing, Shadow, ChartPalette, ReadinessPalette, EffortPalette } from '@/constants/theme';
 
 describe('Theme tokens — pinned to the design spec (2026-07-17)', () => {
   it('matches the color values in design.md §1', () => {
@@ -31,6 +31,32 @@ describe('Theme tokens — pinned to the design spec (2026-07-17)', () => {
       shadowRadius: 0,
       elevation: 3,
     });
+  });
+});
+
+describe('EffortPalette — pinned effort ramp (2026-07-18)', () => {
+  it('matches the design spec', () => {
+    expect(EffortPalette).toEqual({
+      rest: '#A1A1AA',
+      easy: '#4cde80',
+      moderate: '#d4c44a',
+      threshold: '#c8793a',
+      hard: '#e85d32',
+      max: '#ff4444',
+    });
+  });
+
+  it('gives all six levels a distinct colour', () => {
+    // The whole point of this ramp. Before it, endurance had easy+moderate both
+    // teal and hard+max both red, and plan-preview had hard+max both red — six
+    // levels rendered in four colours.
+    const values = Object.values(EffortPalette);
+    expect(new Set(values).size).toBe(values.length);
+  });
+
+  it('uses the live Theme tokens for rest and threshold, not copies that can drift', () => {
+    expect(EffortPalette.rest).toBe(Theme.textMut);
+    expect(EffortPalette.threshold).toBe(Theme.accent);
   });
 });
 

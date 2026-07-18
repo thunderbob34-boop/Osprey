@@ -12,7 +12,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, EffortPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { ZonesCard } from '@/components/ZonesCard';
 import { useAuthStore } from '@/store/authStore';
@@ -58,13 +58,11 @@ const INTENSITY_COLORS: Record<string, { bg: string; fg: string }> = {
   rest: { bg: 'rgba(255,255,255,0.08)', fg: Colors.textMuted },
 };
 
-const EFFORT_COLORS: Record<string, string> = {
-  easy: Colors.green,
-  moderate: Colors.teal,
-  threshold: Colors.amber,
-  hard: Colors.red,
-  max: Colors.red,
-};
+// Was a local copy that drifted from the approved ramp: `moderate` was teal,
+// and `hard`/`max` were BOTH red — the exact collapse the six-step ramp exists
+// to fix. Now shares constants/theme.ts's EffortPalette with endurance.tsx, so
+// the same effort reads the same colour on both screens.
+const EFFORT_COLORS: Record<string, string> = EffortPalette;
 
 interface WeatherNote {
   text: string;
