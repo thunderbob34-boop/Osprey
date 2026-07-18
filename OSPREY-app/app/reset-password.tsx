@@ -14,6 +14,7 @@ import {
 import { useRouter } from 'expo-router';
 import * as Linking from 'expo-linking';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { supabase } from '@/services/supabase';
 import { useAuthStore } from '@/store/authStore';
 
@@ -105,14 +106,14 @@ export default function ResetPasswordScreen() {
         <Text style={styles.title}>Reset Password</Text>
 
         {verifying ? (
-          <ActivityIndicator color={Colors.teal} style={{ marginTop: 24 }} />
+          <ActivityIndicator color={Theme.accent} style={{ marginTop: 24 }} />
         ) : sessionReady ? (
           <View style={styles.form}>
             <Text style={styles.subtitle}>Choose a new password for your account.</Text>
             <TextInput
               style={styles.input}
               placeholder="New password"
-              placeholderTextColor={Colors.textMuted}
+              placeholderTextColor={Theme.textMut}
               value={password}
               onChangeText={setPassword}
               secureTextEntry
@@ -121,7 +122,7 @@ export default function ResetPasswordScreen() {
             <TextInput
               style={styles.input}
               placeholder="Confirm new password"
-              placeholderTextColor={Colors.textMuted}
+              placeholderTextColor={Theme.textMut}
               value={confirmPassword}
               onChangeText={setConfirmPassword}
               secureTextEntry
@@ -129,7 +130,7 @@ export default function ResetPasswordScreen() {
             />
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <TouchableOpacity
-              style={styles.submitBtn}
+              style={[styles.submitBtn, saving && styles.submitBtnDisabled]}
               onPress={handleSave}
               disabled={saving}
               accessibilityRole="button"
@@ -137,7 +138,7 @@ export default function ResetPasswordScreen() {
               accessibilityState={{ disabled: saving, busy: saving }}
             >
               {saving ? (
-                <ActivityIndicator color="#000" />
+                <ActivityIndicator color={Theme.ink} />
               ) : (
                 <Text style={styles.submitBtnText}>Save Password</Text>
               )}
@@ -162,35 +163,40 @@ export default function ResetPasswordScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   inner: { flex: 1, justifyContent: 'center', padding: 28 },
   title: {
     fontSize: 24,
     fontWeight: '800',
-    color: Colors.textPrimary,
+    color: Theme.text,
     textAlign: 'center',
     marginBottom: 24,
   },
-  subtitle: { fontSize: 13, color: Colors.textMuted, marginBottom: 8, textAlign: 'center' },
+  subtitle: { fontSize: 13, color: Theme.textMut, marginBottom: 8, textAlign: 'center' },
   form: { gap: 12 },
   input: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     height: 50,
     paddingHorizontal: 16,
     fontSize: 15,
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   errorText: { color: Colors.red, fontSize: 13, textAlign: 'center' },
   submitBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 4,
   },
-  submitBtnText: { fontSize: 15, fontWeight: '700', color: '#000' },
+  submitBtnDisabled: {
+    opacity: 0.5,
+  },
+  submitBtnText: { fontSize: 15, fontWeight: '700', color: Theme.ink },
 });
