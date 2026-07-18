@@ -6,7 +6,7 @@ import { useOnboardingStore } from '@/store/onboardingStore';
 import { useAuthStore } from '@/store/authStore';
 import { completeOnboarding, generateInitialPlan } from '@/services/onboarding';
 import { isHealthKitSupported, requestHealthKitAuthorization } from '@/services/healthkit';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 
 export default function HealthScreen() {
   const router = useRouter();
@@ -108,15 +108,15 @@ export default function HealthScreen() {
 const styles = StyleSheet.create({
   noteCard: {
     marginTop: 8,
-    backgroundColor: Colors.surfaceTeal,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     padding: 14,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
   },
   noteText: {
     fontSize: 12,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 18,
   },
 });
