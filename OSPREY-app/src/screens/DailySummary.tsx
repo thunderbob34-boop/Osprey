@@ -18,8 +18,8 @@ import NutritionCard from '@/components/NutritionCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, kmToMiles } from '@/services/units';
-import { Card, Badge } from '@/components/ui';
-import { Theme } from '@/constants/theme';
+import { Card, Badge, Button } from '@/components/ui';
+import { Theme, Radius } from '@/constants/theme';
 
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
 
@@ -117,9 +117,9 @@ export default function DailySummaryScreen({
   if (isLoading) {
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor={Colors.bg} />
+        <StatusBar barStyle="light-content" backgroundColor={Theme.ink} />
         <View style={styles.centeredState}>
-          <ActivityIndicator color={Colors.teal} size="large" />
+          <ActivityIndicator color={Theme.accent} size="large" />
           <Text style={styles.stateText}>Loading your daily summary…</Text>
         </View>
       </SafeAreaView>
@@ -129,7 +129,7 @@ export default function DailySummaryScreen({
   if (error) {
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor={Colors.bg} />
+        <StatusBar barStyle="light-content" backgroundColor={Theme.ink} />
         <View style={styles.centeredState}>
           <Text style={styles.errorTitle}>Couldn&apos;t load summary</Text>
           <Text style={styles.stateText}>{error}</Text>
@@ -150,7 +150,7 @@ export default function DailySummaryScreen({
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={Colors.bg} />
+      <StatusBar barStyle="light-content" backgroundColor={Theme.ink} />
 
       <ScrollView
         style={styles.scroll}
@@ -161,7 +161,7 @@ export default function DailySummaryScreen({
             <RefreshControl
               refreshing={isRefreshing}
               onRefresh={onRefresh}
-              tintColor={Colors.teal}
+              tintColor={Theme.accent}
             />
           ) : undefined
         }
@@ -180,7 +180,7 @@ export default function DailySummaryScreen({
                 accessibilityRole="button"
                 accessibilityLabel="View activity"
               >
-                <Ionicons name="people-outline" size={20} color={Colors.teal} />
+                <Ionicons name="people-outline" size={20} color={Theme.accent} />
               </TouchableOpacity>
             ) : null}
             {onOzziePress ? (
@@ -257,7 +257,7 @@ export default function DailySummaryScreen({
 
         {/* ── Today's Session Card — the day's #1 question, so it sits right
              under Battery/Readiness rather than below the Nutrition card. ── */}
-        <View style={styles.sessionCard}>
+        <Card style={{ marginBottom: 14 }}>
           <View style={styles.sessionHeader}>
             <Text style={styles.sessionLabel}>TODAY&apos;S SESSION</Text>
             {onViewWeekPress ? (
@@ -319,32 +319,24 @@ export default function DailySummaryScreen({
           </Card>
 
           <View style={styles.sessionActionsRow}>
-            <TouchableOpacity
-              style={[styles.startBtn, session.sessionType === 'rest' && styles.startBtnDisabled]}
+            <Button
+              variant="primary"
               onPress={() => onStartSession?.(session)}
               disabled={session.sessionType === 'rest'}
-              accessibilityRole="button"
               accessibilityLabel={session.sessionType === 'rest' ? 'Rest day' : 'Start session'}
-              accessibilityState={{ disabled: session.sessionType === 'rest' }}
+              style={{ flex: 1 }}
             >
-              <Text style={styles.startBtnText}>
-                {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
-              </Text>
-            </TouchableOpacity>
+              {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
+            </Button>
             {(onSwapSession || onCompressSession) &&
             session.sessionId &&
             session.sessionType !== 'rest' ? (
-              <TouchableOpacity
-                style={styles.adjustBtn}
-                onPress={() => setAdjustSheetOpen(true)}
-                accessibilityRole="button"
-                accessibilityLabel="Adjust today's session"
-              >
-                <Text style={styles.adjustBtnText}>Adjust</Text>
-              </TouchableOpacity>
+              <Button variant="secondary" onPress={() => setAdjustSheetOpen(true)}>
+                Adjust
+              </Button>
             ) : null}
           </View>
-        </View>
+        </Card>
 
         {weatherCard ?? null}
 
@@ -358,7 +350,7 @@ export default function DailySummaryScreen({
         />
 
         {/* ── Weekly Progress ── */}
-        <View style={styles.weekCard}>
+        <Card style={styles.weekCard}>
           <View style={styles.weekRow}>
             <Text style={styles.weekLabel}>{units === 'metric' ? 'WEEK DISTANCE' : 'WEEK MILEAGE'}</Text>
             <Text style={styles.weekNumbers}>
@@ -381,7 +373,7 @@ export default function DailySummaryScreen({
               <View style={[styles.weekFill, { width: `${weekProgress * 100}%` }]} />
             </View>
           ) : null}
-        </View>
+        </Card>
 
         {/* ── Quick Stats Row ── */}
         <View style={styles.statsRow}>
@@ -512,7 +504,7 @@ export default function DailySummaryScreen({
 
 function ReadinessCard({ readiness }: { readiness: TrainingReadiness }) {
   return (
-    <View style={[styles.readinessCard, { borderColor: readiness.color + '33' }]}>
+    <Card style={{ ...styles.readinessCard, borderColor: readiness.color + '33' }}>
       <View style={styles.readinessLeft}>
         <Text style={styles.readinessTitle}>Training Readiness</Text>
         <Text style={[styles.readinessLabel, { color: readiness.color }]}>
@@ -522,10 +514,10 @@ function ReadinessCard({ readiness }: { readiness: TrainingReadiness }) {
       </View>
       <View style={styles.readinessRight}>
         <Text style={styles.readinessCtlLabel}>FITNESS</Text>
-        <Text style={[styles.readinessCtlValue, { color: Colors.teal }]}>{readiness.ctl.toFixed(0)}</Text>
+        <Text style={[styles.readinessCtlValue, { color: Theme.accent }]}>{readiness.ctl.toFixed(0)}</Text>
         <Text style={styles.readinessCtlSub}>CTL</Text>
       </View>
-    </View>
+    </Card>
   );
 }
 
@@ -560,7 +552,7 @@ function formatDate(): string {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
   },
   centeredState: {
     flex: 1,
@@ -571,26 +563,26 @@ const styles = StyleSheet.create({
   },
   stateText: {
     fontSize: 14,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
     lineHeight: 20,
   },
   errorTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   retryBtn: {
     marginTop: 8,
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
+    backgroundColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingHorizontal: 20,
     paddingVertical: 12,
   },
   retryBtnText: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#000',
+    color: Theme.ink,
   },
   scroll: {
     flex: 1,
@@ -610,13 +602,14 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 28,
     fontWeight: '900',
-    color: Colors.textPrimary,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.text,
     letterSpacing: -0.5,
   },
   date: {
     fontSize: 13,
     fontWeight: '600',
-    color: Colors.teal,
+    color: Theme.accent,
     marginTop: 2,
   },
   headerRight: {
@@ -627,10 +620,10 @@ const styles = StyleSheet.create({
   activityBtn: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: Colors.surfaceTeal,
+    borderRadius: Radius.card,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -638,10 +631,10 @@ const styles = StyleSheet.create({
   avatarBtn: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: Colors.bgCard,
+    borderRadius: Radius.card,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -651,20 +644,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderRadius: 14,
-    padding: 14,
     marginBottom: 12,
   },
   readinessLeft: { gap: 2 },
-  readinessTitle: { fontSize: 9, fontWeight: '700', color: Colors.textMuted, letterSpacing: 0.8 },
+  readinessTitle: { fontSize: 9, fontWeight: '700', color: Theme.textMut, letterSpacing: 0.8 },
   readinessLabel: { fontSize: 18, fontWeight: '800' },
-  readinessSub: { fontSize: 11, color: Colors.textMuted, marginTop: 1 },
+  readinessSub: { fontSize: 11, color: Theme.textMut, marginTop: 1 },
   readinessRight: { alignItems: 'center', gap: 1 },
-  readinessCtlLabel: { fontSize: 9, fontWeight: '700', color: Colors.textMuted, letterSpacing: 0.8 },
+  readinessCtlLabel: { fontSize: 9, fontWeight: '700', color: Theme.textMut, letterSpacing: 0.8 },
   readinessCtlValue: { fontSize: 22, fontWeight: '800' },
-  readinessCtlSub: { fontSize: 9, color: Colors.textMuted },
+  readinessCtlSub: { fontSize: 9, color: Theme.textMut },
 
   // Recovery card
   recoveryRow: {
@@ -702,17 +691,17 @@ const styles = StyleSheet.create({
   batteryNub: {
     width: 18,
     height: 7,
-    backgroundColor: 'rgba(255,255,255,0.35)',
+    backgroundColor: Theme.line,
     borderRadius: 3,
     marginBottom: -1,
   },
   batteryShell: {
     width: 44,
     height: 86,
-    borderRadius: 8,
+    borderRadius: Radius.card,
     borderWidth: 1.5,
-    borderColor: 'rgba(255,255,255,0.35)',
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    borderColor: Theme.line,
+    backgroundColor: Theme.panel,
     overflow: 'hidden',
     justifyContent: 'flex-end',
   },
@@ -742,14 +731,6 @@ const styles = StyleSheet.create({
   },
 
   // Session card
-  sessionCard: {
-    backgroundColor: 'rgba(0,200,200,0.10)',
-    borderWidth: 1.5,
-    borderColor: 'rgba(0,200,200,0.35)',
-    borderRadius: 18,
-    padding: 18,
-    marginBottom: 14,
-  },
   sessionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -759,18 +740,19 @@ const styles = StyleSheet.create({
   sessionLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.teal,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1.5,
   },
   viewWeekLink: {
     fontSize: 12,
     fontWeight: '700',
-    color: Colors.textSecondary,
+    color: Theme.accent,
   },
   sessionType: {
     fontSize: 26,
     fontWeight: '800',
-    color: Colors.textPrimary,
+    color: Theme.text,
     letterSpacing: -0.4,
     marginBottom: 10,
   },
@@ -780,21 +762,24 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
   sessionChip: {
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    borderRadius: 8,
+    backgroundColor: Theme.panel,
+    borderWidth: 1,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 10,
     paddingVertical: 5,
   },
   sessionChipText: {
     fontSize: 12,
     fontWeight: '700',
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   sessionChipAccent: {
-    backgroundColor: 'rgba(0,200,200,0.18)',
+    borderColor: Theme.accent,
+    backgroundColor: Theme.accent + '22',
   },
   sessionChipAccentText: {
-    color: Colors.teal,
+    color: Theme.accent,
   },
   ozzieNote: {
     flexDirection: 'row',
@@ -831,42 +816,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
   },
-  startBtn: {
-    flex: 1,
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  startBtnText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#000',
-  },
-  startBtnDisabled: {
-    opacity: 0.45,
-  },
-  adjustBtn: {
-    paddingHorizontal: 18,
-    height: 44,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.18)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  adjustBtnText: {
-    fontSize: 13,
-    fontWeight: '700',
-    color: Colors.textPrimary,
-  },
   // Week progress
   weekCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
     padding: 16,
     marginBottom: 14,
   },
@@ -879,28 +830,28 @@ const styles = StyleSheet.create({
   weekLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    color: Theme.textMut,
     letterSpacing: 1,
   },
   weekNumbers: {
     fontSize: 13,
   },
   weekMiles: {
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontWeight: '700',
   },
   weekTarget: {
-    color: Colors.textMuted,
+    color: Theme.textMut,
   },
   weekTrack: {
     height: 5,
-    backgroundColor: 'rgba(255,255,255,0.07)',
+    backgroundColor: Theme.line,
     borderRadius: 3,
     overflow: 'hidden',
   },
   weekFill: {
     height: 5,
-    backgroundColor: Colors.teal,
+    backgroundColor: Theme.accent,
     borderRadius: 3,
   },
 
@@ -931,8 +882,10 @@ const styles = StyleSheet.create({
 
   // ── Adjust session bottom sheet ──
   sheetBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' },
+  // NOTE: sheet keeps a 20px rounded top (not Radius.card) — a bottom sheet
+  // is a distinct surface type (slide-up affordance), not a Card.
   sheet: {
-    backgroundColor: '#0D1424',
+    backgroundColor: Theme.panel,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
@@ -944,42 +897,43 @@ const styles = StyleSheet.create({
     width: 36,
     height: 4,
     borderRadius: 2,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: Theme.line,
     marginBottom: 4,
   },
-  sheetTitle: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary, marginBottom: 8 },
+  sheetTitle: { fontSize: 18, fontWeight: '800', color: Theme.text, marginBottom: 8 },
   sheetSectionLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 1,
     marginTop: 12,
     marginBottom: 6,
   },
   sheetRowGroup: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     overflow: 'hidden',
   },
   sheetRow: {
     paddingHorizontal: 16,
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   sheetRowLast: { borderBottomWidth: 0 },
-  sheetRowText: { fontSize: 15, fontWeight: '600', color: Colors.textPrimary },
+  sheetRowText: { fontSize: 15, fontWeight: '600', color: Theme.text },
   sheetRowTextDestructive: { color: Colors.red },
   sheetCloseBtn: {
     marginTop: 16,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     height: 46,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  sheetCloseBtnText: { fontSize: 14, fontWeight: '700', color: Colors.textSecondary },
+  sheetCloseBtnText: { fontSize: 14, fontWeight: '700', color: Theme.textSoft },
 });

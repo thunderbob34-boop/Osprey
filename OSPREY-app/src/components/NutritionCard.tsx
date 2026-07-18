@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { Card } from '@/components/ui';
+import { Theme, Radius } from '@/constants/theme';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatFluidOz, mlToOz } from '@/services/units';
@@ -51,10 +53,10 @@ export default function NutritionCard({
   const hydrationMet = hydrationProgress >= 1;
 
   return (
-    <View style={styles.card}>
+    <Card style={styles.card}>
       <View style={styles.headerRow}>
         <Text style={styles.cardLabel}>NUTRITION</Text>
-        {isLoading ? <ActivityIndicator size="small" color={Colors.teal} /> : null}
+        {isLoading ? <ActivityIndicator size="small" color={Theme.accent} /> : null}
       </View>
 
       <View style={styles.macroGrid}>
@@ -71,7 +73,7 @@ export default function NutritionCard({
           <View style={[styles.hydrationSection, hydrationEmphasized && styles.hydrationSectionEmphasized]}>
             <View style={styles.hydrationHeaderRow}>
               <View style={styles.titleRow}>
-                <Ionicons name="water" size={14} color={hydrationMet ? Colors.green : Colors.teal} />
+                <Ionicons name="water" size={14} color={hydrationMet ? Colors.green : Theme.accent} />
                 <Text style={styles.sectionLabel}>HYDRATION</Text>
               </View>
               <Text style={styles.amount}>
@@ -83,7 +85,7 @@ export default function NutritionCard({
               <View
                 style={[
                   styles.fill,
-                  { width: `${hydrationProgress * 100}%`, backgroundColor: hydrationMet ? Colors.green : Colors.teal },
+                  { width: `${hydrationProgress * 100}%`, backgroundColor: hydrationMet ? Colors.green : Theme.accent },
                 ]}
               />
             </View>
@@ -108,13 +110,13 @@ export default function NutritionCard({
         <>
           <View style={styles.divider} />
           <View style={styles.fuelTipTitleRow}>
-            <Ionicons name="restaurant-outline" size={14} color={Colors.gold} />
+            <Ionicons name="restaurant-outline" size={14} color={Theme.accent} />
             <Text style={styles.fuelTipTitle}>{fuelTip.title}</Text>
           </View>
           <Text style={styles.fuelTipBody}>{fuelTip.body}</Text>
         </>
       ) : null}
-    </View>
+    </Card>
   );
 }
 
@@ -166,11 +168,6 @@ function MacroBlock({ value, unit, label }: { value: number; unit: string; label
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.bgCard,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    padding: 16,
     marginBottom: 16,
     gap: 12,
   },
@@ -182,7 +179,8 @@ const styles = StyleSheet.create({
   cardLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
   },
   macroGrid: {
@@ -202,33 +200,33 @@ const styles = StyleSheet.create({
   macroNumber: {
     fontSize: 22,
     fontWeight: '800',
-    color: Colors.teal,
+    color: Theme.accent,
   },
   macroUnit: {
     fontSize: 11,
-    color: Colors.textMuted,
+    color: Theme.textMut,
   },
   macroLabel: {
     fontSize: 11,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     marginTop: 2,
   },
   tip: {
     fontSize: 12,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 17,
     fontStyle: 'italic',
   },
   divider: {
     height: 1,
-    backgroundColor: Colors.border,
+    backgroundColor: Theme.line,
   },
   hydrationSection: { gap: 10 },
   hydrationSectionEmphasized: {
-    backgroundColor: 'rgba(0,200,200,0.08)',
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 10,
     margin: -10,
   },
@@ -238,12 +236,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  sectionLabel: { fontSize: 10, fontWeight: '700', color: Colors.teal, letterSpacing: 1.2 },
-  amount: { fontSize: 14, fontWeight: '800', color: Colors.textPrimary },
-  amountTarget: { fontSize: 12, fontWeight: '600', color: Colors.textMuted },
+  sectionLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
+    letterSpacing: 1.2,
+  },
+  amount: { fontSize: 14, fontWeight: '800', color: Theme.text },
+  amountTarget: { fontSize: 12, fontWeight: '600', color: Theme.textMut },
   track: {
     height: 6,
-    backgroundColor: 'rgba(255,255,255,0.07)',
+    backgroundColor: Theme.line,
     borderRadius: 3,
     overflow: 'hidden',
   },
@@ -251,13 +255,15 @@ const styles = StyleSheet.create({
   quickAddRow: { flexDirection: 'row', gap: 8 },
   quickAddBtn: {
     flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    borderRadius: 10,
+    backgroundColor: Theme.panel,
+    borderWidth: 1,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingVertical: 8,
     alignItems: 'center',
   },
-  quickAddText: { fontSize: 12, fontWeight: '700', color: Colors.textPrimary },
+  quickAddText: { fontSize: 12, fontWeight: '700', color: Theme.text },
   fuelTipTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  fuelTipTitle: { fontSize: 13, fontWeight: '800', color: Colors.textPrimary },
-  fuelTipBody: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
+  fuelTipTitle: { fontSize: 13, fontWeight: '800', color: Theme.text },
+  fuelTipBody: { fontSize: 12, color: Theme.textSoft, lineHeight: 17 },
 });
