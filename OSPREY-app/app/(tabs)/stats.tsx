@@ -689,9 +689,9 @@ const styles = StyleSheet.create({
   riskBanner: {
     flexDirection: 'row',
     gap: 10,
-    borderRadius: 12,
+    borderRadius: Radius.card,
     padding: 12,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     marginBottom: 16,
     alignItems: 'flex-start',
   },

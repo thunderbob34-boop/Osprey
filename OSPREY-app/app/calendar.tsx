@@ -11,7 +11,7 @@ import {
 import { useRouter } from 'expo-router';
 import { format } from 'date-fns';
 import { Colors } from '@/constants/colors';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useCalendarMonth } from '@/hooks/useCalendarMonth';
 import type { CalendarDay } from '@/services/calendar';
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     gap: 12,
     backgroundColor: Theme.accent + '0F',
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     borderColor: Theme.accent + '33',
     borderRadius: Radius.card,
     padding: 14,
@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
   sheetCardDesc: { fontSize: 13, color: Theme.textSoft, lineHeight: 18, marginTop: 2 },
   sheetCloseBtn: {
     marginTop: 4,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
     borderRadius: Radius.card,
     height: 46,
