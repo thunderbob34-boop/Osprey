@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
@@ -133,7 +134,10 @@ export default function RaceSearchScreen() {
           accessibilityRole="button"
           accessibilityLabel="Go back"
         >
-          <Text style={styles.backText}>←</Text>
+          {/* Same glyph as ScreenHeader (src/components/ScreenHeader.tsx:39) —
+              this screen keeps its own header, but a text arrow read as a
+              different app next to the chevron on /races in the same flow. */}
+          <Ionicons name="chevron-back" size={24} color={Theme.accent} />
         </TouchableOpacity>
         <Text style={styles.title} numberOfLines={1}>Find a Race</Text>
         <View style={styles.headerRight} />
@@ -233,7 +237,6 @@ const styles = StyleSheet.create({
     borderBottomColor: Theme.line,
   },
   backBtn: { width: 44, alignItems: 'flex-start' },
-  backText: { color: Theme.accent, fontSize: 24, fontWeight: '700' },
   title: { flex: 1, textAlign: 'center', color: Theme.text, fontSize: 16, fontWeight: '800' },
   headerRight: { width: 44, alignItems: 'flex-end' },
   // Text input container: Theme.ink + 1px + Theme.line (not panel/2px —
