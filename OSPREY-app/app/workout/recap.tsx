@@ -13,6 +13,8 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Card, Button } from '@/components/ui';
 import { useAuthStore } from '@/store/authStore';
 import { fetchWorkoutRecap } from '@/services/workouts';
 import { formatDuration } from '@/store/workoutStore';
@@ -71,7 +73,7 @@ export default function WorkoutRecapScreen() {
   if (isLoading) {
     return (
       <SafeAreaView style={styles.container}>
-        <ActivityIndicator color={Colors.teal} style={{ marginTop: 80 }} />
+        <ActivityIndicator color={Theme.accent} style={{ marginTop: 80 }} />
       </SafeAreaView>
     );
   }
@@ -81,14 +83,9 @@ export default function WorkoutRecapScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.center}>
           <Text style={styles.errorText}>Could not load workout recap.</Text>
-          <TouchableOpacity
-            style={styles.homeBtn}
-            onPress={exitToWorkoutTab}
-            accessibilityRole="button"
-            accessibilityLabel="Back to workout"
-          >
-            <Text style={styles.homeBtnText}>Back to Workout</Text>
-          </TouchableOpacity>
+          <Button variant="primary" onPress={exitToWorkoutTab} accessibilityLabel="Back to workout">
+            Back to Workout
+          </Button>
         </View>
       </SafeAreaView>
     );
@@ -110,14 +107,14 @@ export default function WorkoutRecapScreen() {
       ? Math.round(data.workout.totalDistanceKm * 0.621371 * 10) / 10
       : null;
 
-  const SESSION_LABELS: Record<string, { title: string; badgeStyle: object; stat: string }> = {
-    run:    { title: 'Run Recap',    badgeStyle: styles.badgeRun,   stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
-    lift:   { title: 'Lift Recap',   badgeStyle: styles.badgeLift,  stat: '' },
-    swim:   { title: 'Swim Recap',   badgeStyle: styles.badgeBlue,  stat: '' },
-    bike:   { title: 'Bike Recap',   badgeStyle: styles.badgeGreen, stat: '' },
-    rowing: { title: 'Rowing Recap', badgeStyle: styles.badgeBlue,  stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
-    hyrox:  { title: 'Hyrox Recap',  badgeStyle: styles.badgeHyrox, stat: '' },
-    cross:  { title: 'Cross Training Recap', badgeStyle: styles.badgeLift, stat: '' },
+  const SESSION_LABELS: Record<string, { title: string; stat: string }> = {
+    run:    { title: 'Run Recap',    stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
+    lift:   { title: 'Lift Recap',   stat: '' },
+    swim:   { title: 'Swim Recap',   stat: '' },
+    bike:   { title: 'Bike Recap',   stat: '' },
+    rowing: { title: 'Rowing Recap', stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
+    hyrox:  { title: 'Hyrox Recap',  stat: '' },
+    cross:  { title: 'Cross Training Recap', stat: '' },
   };
   const label = SESSION_LABELS[sessionType] ?? SESSION_LABELS.lift;
 
@@ -125,14 +122,14 @@ export default function WorkoutRecapScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         {data.hasPr ? (
-          <View style={styles.prBanner}>
+          <Card emphasis style={styles.prBanner}>
             <Text style={styles.prEmoji}>🏆</Text>
             <Text style={styles.prTitle}>New PR!</Text>
             <Text style={styles.prSub}>Ozzie flagged a personal record in this session.</Text>
-          </View>
+          </Card>
         ) : null}
 
-        <Text style={[styles.badge, label.badgeStyle]}>
+        <Text style={styles.badge}>
           WORKOUT COMPLETE
         </Text>
         <Text style={styles.title}>{label.title}</Text>
@@ -141,13 +138,13 @@ export default function WorkoutRecapScreen() {
           {label.stat ? ` · ${label.stat}` : ''}
         </Text>
 
-        <View style={styles.ozzieCard}>
+        <Card style={styles.ozzieCard}>
           <Text style={styles.ozzieLabel}>Ozzie&apos;s debrief</Text>
           <Text style={styles.ozzieText}>&ldquo;{data.ozzieDebrief}&rdquo;</Text>
-        </View>
+        </Card>
 
         {isHyrox ? (
-          <View style={styles.card}>
+          <Card style={styles.card}>
             <Text style={styles.cardTitle}>STATION SPLITS</Text>
             {HYROX_STATIONS.map((station, i) => {
               const run = data.workout.hyroxSplits!.runs.find((r) => r.index === i + 1);
@@ -171,9 +168,9 @@ export default function WorkoutRecapScreen() {
                 {formatDuration(data.workout.hyroxSplits!.roxzoneS.reduce((sum, r) => sum + r.durationS, 0))}
               </Text>
             </View>
-          </View>
+          </Card>
         ) : showSplits ? (
-          <View style={styles.card}>
+          <Card style={styles.card}>
             <Text style={styles.cardTitle}>MILE SPLITS</Text>
             {data.splits.map((split) => (
               <View key={split.mile} style={styles.splitRow}>
@@ -182,9 +179,9 @@ export default function WorkoutRecapScreen() {
                 <Text style={styles.splitTime}>{formatDuration(split.durationS)}</Text>
               </View>
             ))}
-          </View>
+          </Card>
         ) : showSessionSummary ? (
-          <View style={styles.card}>
+          <Card style={styles.card}>
             <Text style={styles.cardTitle}>SESSION SUMMARY</Text>
             <View style={styles.enduranceRow}>
               <Text style={styles.enduranceStatLabel}>Duration</Text>
@@ -196,9 +193,9 @@ export default function WorkoutRecapScreen() {
                 {data.workout.notes || sessionType.charAt(0).toUpperCase() + sessionType.slice(1)}
               </Text>
             </View>
-          </View>
+          </Card>
         ) : (
-          <View style={styles.card}>
+          <Card style={styles.card}>
             <Text style={styles.cardTitle}>EXERCISES</Text>
             {data.exercises.map((exercise) => (
               <View key={exercise.name} style={styles.exerciseBlock}>
@@ -211,10 +208,10 @@ export default function WorkoutRecapScreen() {
                 </Text>
               </View>
             ))}
-          </View>
+          </Card>
         )}
 
-        <View style={styles.shareCard}>
+        <Card style={styles.shareCard}>
           {shared ? (
             <View style={styles.sharedRow}>
               <Text style={styles.sharedText}>✓ Shared to your activity feed</Text>
@@ -225,14 +222,14 @@ export default function WorkoutRecapScreen() {
               <TextInput
                 style={styles.captionInput}
                 placeholder="Add a caption (optional)"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={caption}
                 onChangeText={setCaption}
                 accessibilityLabel="Share caption, optional"
               />
               {shareError ? <Text style={styles.shareErrorText}>{shareError}</Text> : null}
               <TouchableOpacity
-                style={styles.shareBtn}
+                style={[styles.shareBtn, sharing && styles.shareBtnDisabled]}
                 onPress={handleShare}
                 disabled={sharing}
                 accessibilityRole="button"
@@ -240,149 +237,120 @@ export default function WorkoutRecapScreen() {
                 accessibilityState={{ disabled: sharing, busy: sharing }}
               >
                 {sharing ? (
-                  <ActivityIndicator color={Colors.teal} size="small" />
+                  <ActivityIndicator color={Theme.ink} size="small" />
                 ) : (
                   <Text style={styles.shareBtnText}>Share to Activity Feed</Text>
                 )}
               </TouchableOpacity>
             </>
           )}
-        </View>
+        </Card>
       </ScrollView>
 
       <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.homeBtn}
-          onPress={exitToWorkoutTab}
-          accessibilityRole="button"
-          accessibilityLabel="Done"
-        >
-          <Text style={styles.homeBtnText}>Done</Text>
-        </TouchableOpacity>
+        <Button variant="primary" onPress={exitToWorkoutTab} accessibilityLabel="Done">
+          Done
+        </Button>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24 },
   content: { padding: 20, paddingBottom: 32 },
   prBanner: {
-    backgroundColor: Colors.surfaceGold,
-    borderRadius: 16,
     padding: 20,
     alignItems: 'center',
     marginBottom: 16,
-    borderWidth: 1,
-    borderColor: Colors.borderGold,
   },
   prEmoji: { fontSize: 36, marginBottom: 6 },
-  prTitle: { fontSize: 24, fontWeight: '900', color: Colors.gold },
-  prSub: { fontSize: 13, color: Colors.textSecondary, textAlign: 'center', marginTop: 4 },
+  prTitle: { fontSize: 24, fontWeight: '900', color: Theme.accent },
+  prSub: { fontSize: 13, color: Theme.textSoft, textAlign: 'center', marginTop: 4 },
   badge: {
     fontSize: 11,
     fontWeight: '700',
     letterSpacing: 1,
     marginBottom: 8,
+    color: Theme.accent,
+    fontFamily: 'SpaceGrotesk_700Bold',
   },
-  badgeRun: { color: Colors.teal },
-  badgeLift: { color: Colors.gold },
-  badgeBlue: { color: '#3B82F6' },
-  badgeGreen: { color: '#4ADE80' },
-  badgeHyrox: { color: Colors.red },
-  title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 4 },
-  meta: { fontSize: 14, color: Colors.textMuted, marginBottom: 20 },
+  title: { fontSize: 28, fontWeight: '900', color: Theme.text, marginBottom: 4 },
+  meta: { fontSize: 14, color: Theme.textMut, marginBottom: 20 },
   ozzieCard: {
-    backgroundColor: Colors.surfaceGold,
-    borderRadius: 14,
     padding: 16,
     marginBottom: 16,
-    borderWidth: 1,
-    borderColor: Colors.borderGold,
   },
-  ozzieLabel: { fontSize: 11, fontWeight: '700', color: Colors.gold, marginBottom: 6 },
-  ozzieText: { fontSize: 14, color: Colors.textSecondary, lineHeight: 21, fontStyle: 'italic' },
+  ozzieLabel: { fontSize: 11, fontWeight: '700', color: Theme.accent, marginBottom: 6, fontFamily: 'SpaceGrotesk_700Bold' },
+  ozzieText: { fontSize: 14, color: Theme.textSoft, lineHeight: 21, fontStyle: 'italic' },
   card: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
     padding: 16,
   },
-  cardTitle: { fontSize: 10, fontWeight: '700', color: Colors.textMuted, letterSpacing: 1, marginBottom: 12 },
+  cardTitle: { fontSize: 10, fontWeight: '700', color: Theme.textMut, letterSpacing: 1, marginBottom: 12, fontFamily: 'SpaceGrotesk_700Bold' },
   splitRow: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
-  splitMile: { flex: 1, fontSize: 14, color: Colors.textPrimary, fontWeight: '600' },
-  splitPace: { width: 60, fontSize: 14, color: Colors.teal, fontWeight: '800', textAlign: 'center' },
-  splitTime: { width: 60, fontSize: 13, color: Colors.textMuted, textAlign: 'right' },
-  exerciseBlock: { paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: Colors.border },
+  splitMile: { flex: 1, fontSize: 14, color: Theme.text, fontWeight: '600' },
+  splitPace: { width: 60, fontSize: 14, color: Theme.accent, fontWeight: '800', textAlign: 'center' },
+  splitTime: { width: 60, fontSize: 13, color: Theme.textMut, textAlign: 'right' },
+  exerciseBlock: { paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: Theme.line },
   exerciseHeader: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  exerciseName: { fontSize: 15, fontWeight: '700', color: Colors.textPrimary },
+  exerciseName: { fontSize: 15, fontWeight: '700', color: Theme.text },
   prTag: {
     fontSize: 10,
     fontWeight: '800',
-    color: Colors.gold,
-    backgroundColor: Colors.goldDim,
+    color: Theme.accent,
+    backgroundColor: Theme.panel,
+    borderWidth: 1,
+    borderColor: Theme.accent,
     paddingHorizontal: 6,
     paddingVertical: 2,
-    borderRadius: 4,
+    borderRadius: Radius.card,
   },
-  exerciseMeta: { fontSize: 12, color: Colors.textMuted, marginTop: 4 },
+  exerciseMeta: { fontSize: 12, color: Theme.textMut, marginTop: 4 },
   enduranceRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
-  enduranceStatLabel: { fontSize: 14, color: Colors.textSecondary },
-  enduranceStat: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
+  enduranceStatLabel: { fontSize: 14, color: Theme.textSoft },
+  enduranceStat: { fontSize: 14, fontWeight: '700', color: Theme.text },
   shareCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
     padding: 16,
     marginTop: 16,
     gap: 10,
   },
   captionInput: {
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     borderRadius: 10,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 14,
   },
   shareErrorText: { fontSize: 12, color: Colors.red },
   shareBtn: {
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 10,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 12,
     alignItems: 'center',
   },
-  shareBtnText: { fontSize: 14, fontWeight: '700', color: Colors.teal },
+  shareBtnDisabled: { opacity: 0.5 },
+  shareBtnText: { fontSize: 14, fontWeight: '700', color: Theme.ink },
   sharedRow: { alignItems: 'center', paddingVertical: 4 },
   sharedText: { fontSize: 13, fontWeight: '700', color: Colors.green },
-  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Colors.border },
-  homeBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
-    height: 52,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  homeBtnText: { fontSize: 15, fontWeight: '800', color: '#000' },
-  errorText: { color: Colors.textMuted, marginBottom: 16 },
+  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Theme.line },
+  errorText: { color: Theme.textMut, marginBottom: 16 },
 });
