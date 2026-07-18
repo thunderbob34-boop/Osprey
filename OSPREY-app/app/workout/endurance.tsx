@@ -13,6 +13,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useAuthStore } from '@/store/authStore';
 import {
@@ -50,12 +51,15 @@ function metersToUnit(meters: number, unit: DistanceUnit): number {
   return meters / METERS_PER_UNIT[unit];
 }
 
-const SESSION_META: Record<EnduranceType, { icon: string; label: string; color: string; borderColor: string }> = {
-  swim:   { icon: '🏊', label: 'SWIM',   color: Colors.teal,  borderColor: Colors.borderTeal },
-  bike:   { icon: '🚴', label: 'BIKE',   color: Colors.teal,  borderColor: Colors.borderTeal },
-  run:    { icon: '🏃', label: 'RUN',    color: Colors.teal,  borderColor: Colors.borderTeal },
-  rowing: { icon: '🚣', label: 'ROW',    color: Colors.teal,  borderColor: Colors.borderTeal },
-  cross:  { icon: '🔁', label: 'CROSS',  color: Colors.amber, borderColor: Colors.borderGold },
+// Scheme B (approved design change): sessions are de-colored — every type
+// reads as neutral panel/line chrome, differentiated by label + icon only.
+// Cross-training's old gold accent is intentionally gone.
+const SESSION_META: Record<EnduranceType, { icon: string; label: string }> = {
+  swim:   { icon: '🏊', label: 'SWIM' },
+  bike:   { icon: '🚴', label: 'BIKE' },
+  run:    { icon: '🏃', label: 'RUN' },
+  rowing: { icon: '🚣', label: 'ROW' },
+  cross:  { icon: '🔁', label: 'CROSS' },
 };
 
 interface CrossActivity {
@@ -81,13 +85,24 @@ const CROSS_ACTIVITIES: CrossActivity[] = [
 // (most — CrossFit, yoga, HIIT, mobility — are tracked purely by time).
 const DISTANCE_ACTIVITIES = new Set(['elliptical', 'hiking']);
 
+// Athletic-convention RPE/intensity ramp (approved design change): gray →
+// green → yellow → accent → orange → red. Deliberately gives `moderate` and
+// `hard` values distinct from their neighbors — previously `moderate`
+// collapsed onto `easy` (both teal) and `hard` collapsed onto `max` (both red).
+const EFFORT_REST = Theme.textMut;
+const EFFORT_EASY = '#4cde80';
+const EFFORT_MODERATE = '#d4c44a';
+const EFFORT_THRESHOLD = Theme.accent;
+const EFFORT_HARD = '#e85d32';
+const EFFORT_MAX = '#ff4444';
+
 const EFFORT_COLOR: Record<IntervalEffort | 'rest', string> = {
-  easy: Colors.teal,
-  moderate: Colors.teal,
-  threshold: Colors.amber,
-  hard: Colors.red,
-  max: Colors.red,
-  rest: Colors.textMuted,
+  easy: EFFORT_EASY,
+  moderate: EFFORT_MODERATE,
+  threshold: EFFORT_THRESHOLD,
+  hard: EFFORT_HARD,
+  max: EFFORT_MAX,
+  rest: EFFORT_REST,
 };
 
 const AUTO_CUE_INTERVAL_MS = 10 * 60 * 1000; // every 10 minutes
@@ -163,7 +178,7 @@ export default function EnduranceWorkoutScreen() {
   const showDistance =
     type !== 'cross' || (crossActivity != null && DISTANCE_ACTIVITIES.has(crossActivity.id));
   const badgeMeta = type === 'cross' && crossActivity
-    ? { icon: crossActivity.icon, label: crossActivity.label.toUpperCase(), color: meta.color, borderColor: meta.borderColor }
+    ? { icon: crossActivity.icon, label: crossActivity.label.toUpperCase() }
     : meta;
 
   // Split per 500m is the metric rowers actually pace against — recomputed
@@ -412,7 +427,7 @@ export default function EnduranceWorkoutScreen() {
           accessibilityRole="button"
           accessibilityLabel="Cancel"
         >
-          <Ionicons name="close" size={22} color={Colors.textMuted} />
+          <Ionicons name="close" size={22} color={Theme.textMut} />
         </TouchableOpacity>
         <View style={styles.pickerContent}>
           <Text style={styles.pickerTitle}>What are you doing?</Text>
@@ -446,9 +461,9 @@ export default function EnduranceWorkoutScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <View style={[styles.sessionBadge, { borderColor: badgeMeta.borderColor }]}>
+        <View style={[styles.sessionBadge, { borderColor: Theme.line }]}>
           <Text style={styles.sessionIcon}>{badgeMeta.icon}</Text>
-          <Text style={[styles.sessionLabel, { color: badgeMeta.color }]}>
+          <Text style={[styles.sessionLabel, { color: Theme.accent }]}>
             {hasIntervals
               ? `${badgeMeta.label} · OZZIE'S SET`
               : `${badgeMeta.label}${isGpsTracking ? ' · GPS' : ''} IN PROGRESS`}
@@ -553,7 +568,7 @@ export default function EnduranceWorkoutScreen() {
                   <TextInput
                     style={styles.distanceInput}
                     placeholder="0"
-                    placeholderTextColor={Colors.textMuted}
+                    placeholderTextColor={Theme.textMut}
                     value={distance}
                     onChangeText={setDistance}
                     keyboardType="decimal-pad"
@@ -569,7 +584,7 @@ export default function EnduranceWorkoutScreen() {
                   accessibilityState={{ disabled: syncing, busy: syncing }}
                 >
                   {syncing ? (
-                    <ActivityIndicator color={Colors.teal} size="small" />
+                    <ActivityIndicator color={Theme.accent} size="small" />
                   ) : (
                     <Text style={styles.syncBtnText}>Sync from Apple Health</Text>
                   )}
@@ -634,16 +649,16 @@ const styles = StyleSheet.create({
   // Pre-start activity picker (cross-training only)
   pickerCloseBtn: { alignSelf: 'flex-end', padding: 16 },
   pickerContent: { flex: 1, padding: 28, paddingTop: 0, justifyContent: 'center', gap: 24 },
-  pickerTitle: { fontSize: 26, fontWeight: '900', color: Colors.textPrimary, textAlign: 'center' },
-  pickerSubtitle: { fontSize: 14, color: Colors.textMuted, textAlign: 'center', marginTop: -12 },
+  pickerTitle: { fontSize: 26, fontWeight: '900', color: Theme.text, textAlign: 'center' },
+  pickerSubtitle: { fontSize: 14, color: Theme.textMut, textAlign: 'center', marginTop: -12 },
   activityGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, justifyContent: 'center' },
   activityTile: {
     width: '46%',
     aspectRatio: 1.3,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 16,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
@@ -652,7 +667,7 @@ const styles = StyleSheet.create({
   activityTileLabel: {
     fontSize: 13,
     fontWeight: '700',
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     textAlign: 'center',
     paddingHorizontal: 8,
   },
@@ -741,17 +756,18 @@ const styles = StyleSheet.create({
   },
   cueBannerText: { flex: 1, fontSize: 13, fontWeight: '600', color: Colors.textPrimary, lineHeight: 18 },
   distanceCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     gap: 12,
   },
   distanceLabel: {
     fontSize: 11,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 1,
   },
   distanceInputRow: {
@@ -761,33 +777,33 @@ const styles = StyleSheet.create({
   },
   distanceInput: {
     flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 16,
     fontWeight: '600',
   },
   distanceLiveValue: {
-    color: Colors.teal,
+    color: Theme.accent,
     fontSize: 28,
     fontWeight: '800',
   },
   syncBtn: {
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 10,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingVertical: 10,
     alignItems: 'center',
   },
   syncBtnText: {
     fontSize: 13,
     fontWeight: '600',
-    color: Colors.teal,
+    color: Theme.accent,
   },
   endBtn: {
     backgroundColor: Colors.teal,
