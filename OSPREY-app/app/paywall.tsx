@@ -13,8 +13,9 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { PurchasesPackage } from 'react-native-purchases';
-import { Colors } from '@/constants/colors';
 import OzzieMascot from '@/components/OzzieMascot';
+import { Card } from '@/components/ui';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import {
   getOfferings,
   purchaseOspreyPlus,
@@ -163,7 +164,7 @@ export default function PaywallScreen() {
           accessibilityRole="button"
           accessibilityLabel="Close"
         >
-          <Ionicons name="close" size={22} color={Colors.textMuted} />
+          <Ionicons name="close" size={22} color={Theme.textMut} />
         </TouchableOpacity>
         <View />
       </View>
@@ -175,7 +176,7 @@ export default function PaywallScreen() {
           <Text style={styles.logoTagline}>Your AI coach, fully unleashed.</Text>
         </View>
 
-        <View style={styles.featuresCard}>
+        <Card style={styles.featuresCard}>
           {FEATURES.map((f, i) => (
             <View
               key={f.title}
@@ -189,7 +190,7 @@ export default function PaywallScreen() {
               <Text style={styles.featureCheck}>✓</Text>
             </View>
           ))}
-        </View>
+        </Card>
 
         {packages.length > 1 ? (
           <View style={styles.packageRow}>
@@ -232,7 +233,7 @@ export default function PaywallScreen() {
           accessibilityState={{ disabled: purchasing || restoring, busy: purchasing }}
         >
           {purchasing ? (
-            <ActivityIndicator color="#000" />
+            <ActivityIndicator color={Theme.ink} />
           ) : (
             <>
               <Text style={styles.subscribeBtnText}>
@@ -252,7 +253,7 @@ export default function PaywallScreen() {
           accessibilityState={{ disabled: purchasing || restoring, busy: restoring }}
         >
           {restoring ? (
-            <ActivityIndicator color={Colors.textMuted} size="small" />
+            <ActivityIndicator color={Theme.textMut} size="small" />
           ) : (
             <Text style={styles.restoreBtnText}>Restore purchase</Text>
           )}
@@ -277,7 +278,7 @@ export default function PaywallScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -291,20 +292,19 @@ const styles = StyleSheet.create({
   logoTitle: {
     fontSize: 32,
     fontWeight: '900',
-    color: Colors.teal,
+    color: Theme.accent,
     letterSpacing: 2,
   },
   logoTagline: {
     fontSize: 16,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     fontWeight: '600',
     textAlign: 'center',
   },
   featuresCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 16,
+    // Override Card's default padding so feature-row dividers run edge-to-edge
+    // (each featureRow carries its own padding:16).
+    padding: 0,
     overflow: 'hidden',
   },
   featureRow: {
@@ -315,46 +315,48 @@ const styles = StyleSheet.create({
   },
   featureRowBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   featureIcon: { fontSize: 22, width: 28, textAlign: 'center' },
   featureText: { flex: 1 },
-  featureTitle: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  featureDesc: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17, marginTop: 2 },
-  featureCheck: { color: Colors.teal, fontSize: 15, fontWeight: '800', marginTop: 2 },
+  featureTitle: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  featureDesc: { fontSize: 12, color: Theme.textSoft, lineHeight: 17, marginTop: 2 },
+  featureCheck: { color: Theme.accent, fontSize: 15, fontWeight: '800', marginTop: 2 },
   packageRow: { flexDirection: 'row', gap: 10 },
   packageChip: {
     flex: 1,
-    borderWidth: 1.5,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bgCard,
-    borderRadius: 12,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     paddingVertical: 12,
     alignItems: 'center',
     gap: 2,
   },
-  packageChipActive: { borderColor: Colors.teal, backgroundColor: Colors.surfaceTeal },
-  packageChipLabel: { fontSize: 13, fontWeight: '700', color: Colors.textSecondary },
-  packageChipLabelActive: { color: Colors.teal },
-  packageChipPrice: { fontSize: 12, color: Colors.textMuted, fontWeight: '600' },
-  packageChipPriceActive: { color: Colors.teal },
+  packageChipActive: { borderColor: Theme.accent, backgroundColor: Theme.panel },
+  packageChipLabel: { fontSize: 13, fontWeight: '700', color: Theme.textSoft },
+  packageChipLabelActive: { color: Theme.accent },
+  packageChipPrice: { fontSize: 12, color: Theme.textMut, fontWeight: '600' },
+  packageChipPriceActive: { color: Theme.accent },
   subscribeBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 17,
     alignItems: 'center',
     gap: 3,
   },
   subscribeBtnLoading: { opacity: 0.7 },
-  subscribeBtnText: { color: '#000', fontSize: 17, fontWeight: '800' },
+  subscribeBtnText: { color: Theme.ink, fontSize: 17, fontWeight: '800' },
   subscribeBtnSub: { color: 'rgba(0,0,0,0.5)', fontSize: 12, fontWeight: '600' },
   restoreBtn: {
     alignItems: 'center',
     paddingVertical: 12,
   },
-  restoreBtnText: { color: Colors.textMuted, fontSize: 14, fontWeight: '600' },
+  restoreBtnText: { color: Theme.textMut, fontSize: 14, fontWeight: '600' },
   legal: {
-    color: Colors.textMuted,
+    color: Theme.textMut,
     fontSize: 11,
     textAlign: 'center',
     lineHeight: 16,
@@ -367,6 +369,6 @@ const styles = StyleSheet.create({
     gap: 8,
     marginTop: -8,
   },
-  legalLink: { color: Colors.textMuted, fontSize: 11, fontWeight: '600', textDecorationLine: 'underline' },
-  legalLinkDivider: { color: Colors.textMuted, fontSize: 11 },
+  legalLink: { color: Theme.textMut, fontSize: 11, fontWeight: '600', textDecorationLine: 'underline' },
+  legalLinkDivider: { color: Theme.textMut, fontSize: 11 },
 });
