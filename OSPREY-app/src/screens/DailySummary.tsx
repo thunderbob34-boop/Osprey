@@ -350,7 +350,7 @@ export default function DailySummaryScreen({
         />
 
         {/* ── Weekly Progress ── */}
-        <View style={styles.weekCard}>
+        <Card style={styles.weekCard}>
           <View style={styles.weekRow}>
             <Text style={styles.weekLabel}>{units === 'metric' ? 'WEEK DISTANCE' : 'WEEK MILEAGE'}</Text>
             <Text style={styles.weekNumbers}>
@@ -373,7 +373,7 @@ export default function DailySummaryScreen({
               <View style={[styles.weekFill, { width: `${weekProgress * 100}%` }]} />
             </View>
           ) : null}
-        </View>
+        </Card>
 
         {/* ── Quick Stats Row ── */}
         <View style={styles.statsRow}>
@@ -504,7 +504,7 @@ export default function DailySummaryScreen({
 
 function ReadinessCard({ readiness }: { readiness: TrainingReadiness }) {
   return (
-    <View style={[styles.readinessCard, { borderColor: readiness.color + '33' }]}>
+    <Card style={{ ...styles.readinessCard, borderColor: readiness.color + '33' }}>
       <View style={styles.readinessLeft}>
         <Text style={styles.readinessTitle}>Training Readiness</Text>
         <Text style={[styles.readinessLabel, { color: readiness.color }]}>
@@ -514,10 +514,10 @@ function ReadinessCard({ readiness }: { readiness: TrainingReadiness }) {
       </View>
       <View style={styles.readinessRight}>
         <Text style={styles.readinessCtlLabel}>FITNESS</Text>
-        <Text style={[styles.readinessCtlValue, { color: Colors.teal }]}>{readiness.ctl.toFixed(0)}</Text>
+        <Text style={[styles.readinessCtlValue, { color: Theme.accent }]}>{readiness.ctl.toFixed(0)}</Text>
         <Text style={styles.readinessCtlSub}>CTL</Text>
       </View>
-    </View>
+    </Card>
   );
 }
 
@@ -644,20 +644,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderRadius: 14,
-    padding: 14,
     marginBottom: 12,
   },
   readinessLeft: { gap: 2 },
-  readinessTitle: { fontSize: 9, fontWeight: '700', color: Colors.textMuted, letterSpacing: 0.8 },
+  readinessTitle: { fontSize: 9, fontWeight: '700', color: Theme.textMut, letterSpacing: 0.8 },
   readinessLabel: { fontSize: 18, fontWeight: '800' },
-  readinessSub: { fontSize: 11, color: Colors.textMuted, marginTop: 1 },
+  readinessSub: { fontSize: 11, color: Theme.textMut, marginTop: 1 },
   readinessRight: { alignItems: 'center', gap: 1 },
-  readinessCtlLabel: { fontSize: 9, fontWeight: '700', color: Colors.textMuted, letterSpacing: 0.8 },
+  readinessCtlLabel: { fontSize: 9, fontWeight: '700', color: Theme.textMut, letterSpacing: 0.8 },
   readinessCtlValue: { fontSize: 22, fontWeight: '800' },
-  readinessCtlSub: { fontSize: 9, color: Colors.textMuted },
+  readinessCtlSub: { fontSize: 9, color: Theme.textMut },
 
   // Recovery card
   recoveryRow: {
@@ -695,17 +691,17 @@ const styles = StyleSheet.create({
   batteryNub: {
     width: 18,
     height: 7,
-    backgroundColor: 'rgba(255,255,255,0.35)',
+    backgroundColor: Theme.line,
     borderRadius: 3,
     marginBottom: -1,
   },
   batteryShell: {
     width: 44,
     height: 86,
-    borderRadius: 8,
+    borderRadius: Radius.card,
     borderWidth: 1.5,
-    borderColor: 'rgba(255,255,255,0.35)',
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    borderColor: Theme.line,
+    backgroundColor: Theme.panel,
     overflow: 'hidden',
     justifyContent: 'flex-end',
   },
@@ -822,10 +818,6 @@ const styles = StyleSheet.create({
   },
   // Week progress
   weekCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
     padding: 16,
     marginBottom: 14,
   },
@@ -838,28 +830,28 @@ const styles = StyleSheet.create({
   weekLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    color: Theme.textMut,
     letterSpacing: 1,
   },
   weekNumbers: {
     fontSize: 13,
   },
   weekMiles: {
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontWeight: '700',
   },
   weekTarget: {
-    color: Colors.textMuted,
+    color: Theme.textMut,
   },
   weekTrack: {
     height: 5,
-    backgroundColor: 'rgba(255,255,255,0.07)',
+    backgroundColor: Theme.line,
     borderRadius: 3,
     overflow: 'hidden',
   },
   weekFill: {
     height: 5,
-    backgroundColor: Colors.teal,
+    backgroundColor: Theme.accent,
     borderRadius: 3,
   },
 
@@ -890,8 +882,10 @@ const styles = StyleSheet.create({
 
   // ── Adjust session bottom sheet ──
   sheetBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' },
+  // NOTE: sheet keeps a 20px rounded top (not Radius.card) — a bottom sheet
+  // is a distinct surface type (slide-up affordance), not a Card.
   sheet: {
-    backgroundColor: '#0D1424',
+    backgroundColor: Theme.panel,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
@@ -903,42 +897,43 @@ const styles = StyleSheet.create({
     width: 36,
     height: 4,
     borderRadius: 2,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: Theme.line,
     marginBottom: 4,
   },
-  sheetTitle: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary, marginBottom: 8 },
+  sheetTitle: { fontSize: 18, fontWeight: '800', color: Theme.text, marginBottom: 8 },
   sheetSectionLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 1,
     marginTop: 12,
     marginBottom: 6,
   },
   sheetRowGroup: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     overflow: 'hidden',
   },
   sheetRow: {
     paddingHorizontal: 16,
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   sheetRowLast: { borderBottomWidth: 0 },
-  sheetRowText: { fontSize: 15, fontWeight: '600', color: Colors.textPrimary },
+  sheetRowText: { fontSize: 15, fontWeight: '600', color: Theme.text },
   sheetRowTextDestructive: { color: Colors.red },
   sheetCloseBtn: {
     marginTop: 16,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     height: 46,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  sheetCloseBtnText: { fontSize: 14, fontWeight: '700', color: Colors.textSecondary },
+  sheetCloseBtnText: { fontSize: 14, fontWeight: '700', color: Theme.textSoft },
 });
