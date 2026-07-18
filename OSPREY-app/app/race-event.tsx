@@ -12,9 +12,10 @@ import {
   View,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import ScreenHeader from '@/components/ScreenHeader';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
 import { extractFunctionErrorMessage } from '@/services/supabase';
@@ -107,13 +108,14 @@ export default function RaceEventScreen() {
           <TouchableOpacity
             onPress={goBack}
             hitSlop={12}
+            style={styles.backBtn}
             accessibilityRole="button"
             accessibilityLabel="Go back"
           >
-            <Text style={styles.backText}>←</Text>
+            <Ionicons name="chevron-back" size={24} color={Theme.accent} />
           </TouchableOpacity>
-          <Text style={styles.title}>Race Details</Text>
-          <View style={{ width: 36 }} />
+          <Text style={styles.title} numberOfLines={1}>Race Details</Text>
+          <View style={styles.headerRight} />
         </View>
         <View style={styles.center}>
           <Text style={styles.errorText}>Race not found. Go back and try again.</Text>
@@ -285,7 +287,7 @@ export default function RaceEventScreen() {
         ) : loadingDistances ? (
           <View style={styles.section}>
             <Text style={styles.sectionLabel}>DISTANCES</Text>
-            <ActivityIndicator color={Colors.teal} style={{ alignSelf: 'flex-start' }} />
+            <ActivityIndicator color={Theme.accent} style={{ alignSelf: 'flex-start' }} />
           </View>
         ) : null}
 
@@ -298,7 +300,7 @@ export default function RaceEventScreen() {
 
         <View style={styles.ctaSection}>
           <TouchableOpacity
-            style={styles.trainBtn}
+            style={[styles.trainBtn, generating && styles.ctaBtnDisabled]}
             onPress={handleTrainPress}
             disabled={generating}
             activeOpacity={0.8}
@@ -307,14 +309,14 @@ export default function RaceEventScreen() {
             accessibilityState={{ disabled: generating, busy: generating }}
           >
             {generating ? (
-              <ActivityIndicator color="#000" />
+              <ActivityIndicator color={Theme.ink} />
             ) : (
               <Text style={styles.trainBtnText}>Train for This Event →</Text>
             )}
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.addBtn}
+            style={[styles.addBtn, savingRace && styles.ctaBtnDisabled]}
             onPress={handleAddToMyRaces}
             disabled={savingRace}
             activeOpacity={0.8}
@@ -323,7 +325,7 @@ export default function RaceEventScreen() {
             accessibilityState={{ disabled: savingRace, busy: savingRace }}
           >
             {savingRace ? (
-              <ActivityIndicator color={Colors.teal} />
+              <ActivityIndicator color={Theme.accent} />
             ) : (
               <Text style={styles.addBtnText}>Add to My Races</Text>
             )}
@@ -334,7 +336,7 @@ export default function RaceEventScreen() {
       {generating ? (
         <View style={styles.loadingOverlay}>
           <View style={styles.loadingCard}>
-            <ActivityIndicator color={Colors.teal} size="large" />
+            <ActivityIndicator color={Theme.accent} size="large" />
             <Text style={styles.loadingText}>Building your {result.name} training plan...</Text>
           </View>
         </View>
@@ -344,109 +346,128 @@ export default function RaceEventScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
+  // Error-state header only (the success path uses ScreenHeader). Aligned to
+  // ScreenHeader's real values — 16/12 padding, BorderWidth.card, 44px side
+  // controls, centred title — so the "race not found" path doesn't render a
+  // visibly different header from the one on the success path of this same
+  // screen. Same alignment race-search.tsx got.
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: BorderWidth.card,
+    borderBottomColor: Theme.line,
   },
-  backText: { color: Colors.teal, fontSize: 22, fontWeight: '700' },
-  title: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },
+  backBtn: { width: 44 },
+  headerRight: { width: 44 },
+  title: { flex: 1, textAlign: 'center', color: Theme.text, fontSize: 16, fontWeight: '800' },
   scroll: { padding: 20, paddingBottom: 48, gap: 24 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32 },
-  errorText: { color: Colors.textMuted, fontSize: 15, textAlign: 'center' },
+  errorText: { color: Theme.textMut, fontSize: 15, textAlign: 'center' },
 
   heroSection: { gap: 8 },
   heroName: {
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 26,
     fontWeight: '900',
     lineHeight: 32,
   },
   heroLocation: {
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     fontSize: 15,
     lineHeight: 20,
   },
+  // Pill radius (20) is a shape KEEP, not card chrome.
   datePill: {
     alignSelf: 'flex-start',
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
     borderRadius: 20,
     paddingHorizontal: 14,
     paddingVertical: 6,
     marginTop: 4,
   },
-  datePillText: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
+  datePillText: { color: Theme.textSoft, fontSize: 13, fontWeight: '700' },
 
   section: { gap: 8 },
+  // Uppercase section label heading this card's content — accent, per the
+  // eyebrow-label rule.
   sectionLabel: {
-    color: Colors.textMuted,
+    color: Theme.accent,
     fontSize: 10,
     fontWeight: '800',
+    fontFamily: 'SpaceGrotesk_700Bold',
     letterSpacing: 1,
   },
   badgeRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   badge: {
     paddingHorizontal: 12,
     paddingVertical: 6,
-    borderRadius: 8,
-    backgroundColor: Colors.surfaceTeal,
+    borderRadius: Radius.card,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
   },
-  badgeText: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
+  badgeText: { color: Theme.textSoft, fontSize: 13, fontWeight: '700' },
   descriptionText: {
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     fontSize: 14,
     lineHeight: 22,
   },
 
   ctaSection: { gap: 12, marginTop: 8 },
+  // Hand-rolled (hosts an ActivityIndicator; Button.children is typed
+  // `string`). Primary CTA — mirrors Button's primary recipe.
   trainBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 16,
     alignItems: 'center',
   },
-  trainBtnText: { color: '#000', fontSize: 16, fontWeight: '900' },
+  trainBtnText: { color: Theme.ink, fontSize: 16, fontWeight: '900' },
+  // Hand-rolled (hosts an ActivityIndicator). Secondary CTA — mirrors
+  // Button's secondary recipe (transparent fill, accent border/text).
   addBtn: {
-    borderRadius: 14,
+    backgroundColor: 'transparent',
+    borderRadius: Radius.card,
     paddingVertical: 14,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    backgroundColor: Colors.surfaceTeal,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
   },
-  addBtnText: { color: Colors.teal, fontSize: 15, fontWeight: '700' },
+  addBtnText: { color: Theme.accent, fontSize: 15, fontWeight: '700' },
+  ctaBtnDisabled: { opacity: 0.5 },
 
+  // Full-screen scrim — re-derived from Theme.ink at the original alpha,
+  // not flattened to a surface.
   loadingOverlay: {
     position: 'absolute',
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
-    backgroundColor: 'rgba(6,9,18,0.85)',
+    backgroundColor: 'rgba(9,9,11,0.85)',
     alignItems: 'center',
     justifyContent: 'center',
   },
   loadingCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 16,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 28,
     alignItems: 'center',
     gap: 16,
     maxWidth: 280,
   },
   loadingText: {
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 15,
     fontWeight: '700',
     textAlign: 'center',

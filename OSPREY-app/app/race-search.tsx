@@ -12,8 +12,9 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { format } from 'date-fns';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
 
 const DISTANCE_FILTERS = ['All', '5K', '10K', 'Half', 'Full'] as const;
@@ -133,10 +134,13 @@ export default function RaceSearchScreen() {
           accessibilityRole="button"
           accessibilityLabel="Go back"
         >
-          <Text style={styles.backText}>←</Text>
+          {/* Same glyph as ScreenHeader (src/components/ScreenHeader.tsx:39) —
+              this screen keeps its own header, but a text arrow read as a
+              different app next to the chevron on /races in the same flow. */}
+          <Ionicons name="chevron-back" size={24} color={Theme.accent} />
         </TouchableOpacity>
-        <Text style={styles.title}>Find a Race</Text>
-        <View style={{ width: 36 }} />
+        <Text style={styles.title} numberOfLines={1}>Find a Race</Text>
+        <View style={styles.headerRight} />
       </View>
 
       <View style={styles.searchRow}>
@@ -144,7 +148,7 @@ export default function RaceSearchScreen() {
         <TextInput
           style={styles.searchInput}
           placeholder="Search races by name or city"
-          placeholderTextColor={Colors.textMuted}
+          placeholderTextColor={Theme.textMut}
           value={query}
           onChangeText={handleQueryChange}
           returnKeyType="search"
@@ -178,7 +182,7 @@ export default function RaceSearchScreen() {
 
       {loading ? (
         <View style={styles.center}>
-          <ActivityIndicator color={Colors.teal} size="large" />
+          <ActivityIndicator color={Theme.accent} size="large" />
         </View>
       ) : error ? (
         <View style={styles.center}>
@@ -219,34 +223,39 @@ export default function RaceSearchScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
+  // Bespoke header (kept per controller decision), styled to match
+  // src/components/ScreenHeader.tsx's ink ground / accent chevron / text
+  // title / line border look without swapping in that component.
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: BorderWidth.card,
+    borderBottomColor: Theme.line,
   },
-  backBtn: { width: 36, alignItems: 'flex-start' },
-  backText: { color: Colors.teal, fontSize: 22, fontWeight: '700' },
-  title: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },
+  backBtn: { width: 44, alignItems: 'flex-start' },
+  title: { flex: 1, textAlign: 'center', color: Theme.text, fontSize: 16, fontWeight: '800' },
+  headerRight: { width: 44, alignItems: 'flex-end' },
+  // Text input container: Theme.ink + 1px + Theme.line (not panel/2px —
+  // that treatment is reserved for card surfaces).
   searchRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 16,
     marginVertical: 12,
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: Platform.OS === 'ios' ? 12 : 8,
     gap: 10,
   },
   searchIcon: { fontSize: 16 },
-  searchInput: { flex: 1, color: Colors.textPrimary, fontSize: 15 },
+  searchInput: { flex: 1, color: Theme.text, fontSize: 15 },
   filterBar: { flexShrink: 0, maxHeight: 48 },
   filterScroll: {
     paddingHorizontal: 16,
@@ -259,51 +268,66 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bg,
+    borderColor: Theme.line,
+    backgroundColor: Theme.ink,
   },
+  // Active/selected chip treatment — accent tint reserved for this state.
+  // Border-only, matching races.tsx chipActive and every merged chipActive in
+  // the app. This chip pairs with filterChipTextActive (accent text), so border
+  // + text are already two cues and a tint would be redundant.
   filterChipActive: {
-    backgroundColor: Colors.surfaceTeal,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.accent,
   },
-  filterChipText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
-  filterChipTextActive: { color: Colors.teal },
+  filterChipText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
+  filterChipTextActive: { color: Theme.accent },
   list: { padding: 16, gap: 10, paddingBottom: 48 },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     gap: 12,
   },
   cardMain: { flex: 1, gap: 4 },
-  cardName: { color: Colors.teal, fontSize: 15, fontWeight: '800', lineHeight: 20 },
-  cardMeta: { color: Colors.textSecondary, fontSize: 13, lineHeight: 18 },
+  cardName: { color: Theme.accent, fontSize: 15, fontWeight: '800', lineHeight: 20 },
+  cardMeta: { color: Theme.textSoft, fontSize: 13, lineHeight: 18 },
   metaIcon: { fontSize: 12 },
   badgeRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 4 },
+  // Nested inside a Theme.panel card — recedes to ink, not another panel fill.
   badge: {
     paddingHorizontal: 8,
     paddingVertical: 3,
-    borderRadius: 6,
-    backgroundColor: Colors.surfaceTeal,
+    // Radius.card, matching race-event's badge — it's the same distance list
+    // one tap later in the same flow.
+    borderRadius: Radius.card,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
   },
-  badgeText: { color: Colors.teal, fontSize: 11, fontWeight: '700' },
-  chevron: { color: Colors.textMuted, fontSize: 22, fontWeight: '300' },
+  // textSoft, not accent: cardName above is already Theme.accent, and a badge
+  // does not take accent inside a card whose title already has it — the two
+  // would sit at equal weight on one row, and the badges matter least there.
+  // (Contrast stats.tsx muscleChipText, which IS accent because nothing beside
+  // it competes for amber.) race-event's badgeText must match this — same
+  // distance list, one tap later.
+  badgeText: { color: Theme.textSoft, fontSize: 11, fontWeight: '700' },
+  chevron: { color: Theme.textMut, fontSize: 22, fontWeight: '300' },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32, gap: 16 },
-  errorText: { color: Colors.textSecondary, fontSize: 15, textAlign: 'center', lineHeight: 22 },
+  errorText: { color: Theme.textSoft, fontSize: 15, textAlign: 'center', lineHeight: 22 },
   retryBtn: {
     paddingHorizontal: 24,
     paddingVertical: 10,
-    borderRadius: 10,
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderRadius: Radius.card,
+    backgroundColor: Theme.accent + '1F',
+    // 2px matches race-event's addBtn and the Button primitive, which uses
+    // BorderWidth.card for both its primary and secondary variants. These two
+    // screens sit in one flow, so a 1px accent outline here would seam.
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
   },
-  retryBtnText: { color: Colors.teal, fontSize: 14, fontWeight: '700' },
-  emptyText: { color: Colors.textMuted, fontSize: 15, textAlign: 'center', lineHeight: 22 },
+  retryBtnText: { color: Theme.accent, fontSize: 14, fontWeight: '700' },
+  emptyText: { color: Theme.textMut, fontSize: 15, textAlign: 'center', lineHeight: 22 },
 });
