@@ -12,6 +12,8 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import RunMap from '@/components/RunMap';
 import { useRunTracking } from '@/hooks/useRunTracking';
@@ -308,7 +310,7 @@ export default function RunWorkoutScreen() {
               accessibilityRole="button"
               accessibilityLabel="Exit workout"
             >
-              <Ionicons name="close" size={24} color={Colors.textMuted} />
+              <Ionicons name="close" size={24} color={Theme.textMut} />
             </TouchableOpacity>
           </View>
           <Text style={styles.warmupSubtitle}>
@@ -332,16 +334,14 @@ export default function RunWorkoutScreen() {
               </View>
             </TouchableOpacity>
           ))}
-          <TouchableOpacity
-            style={[styles.primaryBtn, { flex: undefined, marginTop: 8 }, !allDrillsChecked && styles.primaryBtnDisabled]}
+          <Button
             onPress={handleStartAfterWarmup}
             disabled={!allDrillsChecked}
-            accessibilityRole="button"
             accessibilityLabel="Start run"
-            accessibilityState={{ disabled: !allDrillsChecked }}
+            style={{ marginTop: 8 }}
           >
-            <Text style={styles.primaryBtnText}>Start Run →</Text>
-          </TouchableOpacity>
+            Start Run →
+          </Button>
           {!allDrillsChecked ? (
             <Text style={styles.warmupHint}>Check off each drill to start the run.</Text>
           ) : null}
@@ -387,7 +387,9 @@ export default function RunWorkoutScreen() {
 
       {status === 'paused' ? (
         <View style={styles.pausedBanner}>
-          <Text style={styles.pausedText}>Paused — Ozzie says take a breath, then resume when ready.</Text>
+          <Text style={styles.pausedText}>
+            Paused — Ozzie says take a breath, then resume when ready.
+          </Text>
         </View>
       ) : null}
 
@@ -413,26 +415,21 @@ export default function RunWorkoutScreen() {
 
         <View style={styles.controlRow}>
           {status === 'paused' ? (
-            <TouchableOpacity
-              style={styles.primaryBtn}
-              onPress={handleResume}
-              accessibilityRole="button"
-              accessibilityLabel="Resume run"
-            >
-              <Text style={styles.primaryBtnText}>▶ Resume</Text>
-            </TouchableOpacity>
+            <Button onPress={handleResume} accessibilityLabel="Resume run" style={styles.controlBtn}>
+              ▶ Resume
+            </Button>
           ) : (
-            <TouchableOpacity
-              style={styles.secondaryBtn}
+            <Button
+              variant="secondary"
               onPress={handlePause}
-              accessibilityRole="button"
               accessibilityLabel="Pause run"
+              style={styles.controlBtn}
             >
-              <Text style={styles.secondaryBtnText}>⏸ Pause</Text>
-            </TouchableOpacity>
+              ⏸ Pause
+            </Button>
           )}
           <TouchableOpacity
-            style={styles.endBtn}
+            style={[styles.endBtn, saving && styles.endBtnDisabled]}
             onPress={confirmEnd}
             disabled={saving}
             accessibilityRole="button"
@@ -440,7 +437,7 @@ export default function RunWorkoutScreen() {
             accessibilityState={{ disabled: saving, busy: saving }}
           >
             {saving ? (
-              <ActivityIndicator color="#000" />
+              <ActivityIndicator color={Theme.ink} />
             ) : (
               <Text style={styles.endBtnText}>End & Save</Text>
             )}
@@ -515,7 +512,7 @@ function IntervalGuidanceCard({
         OZZIE'S INTERVALS · STEP {stepIndex + 1}/{steps.length}
       </Text>
       <View style={styles.intervalRow}>
-        <Text style={[styles.intervalLabel, step.phase === 'rest' && { color: Colors.gold }]}>
+        <Text style={[styles.intervalLabel, step.phase === 'rest' && { color: Theme.accent }]}>
           {step.phase === 'rest'
             ? 'Rest'
             : step.totalReps > 1
@@ -550,29 +547,32 @@ function StatBlock({
   return (
     <View style={styles.statBlock}>
       <Text style={styles.statLabel}>{label}</Text>
-      <Text style={[styles.statValue, accent && { color: Colors.teal }]}>{value}</Text>
+      <Text style={[styles.statValue, accent && { color: Theme.accent }]}>{value}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   mapWrap: { flex: 1, minHeight: 280 },
   mapOverlay: {
     position: 'absolute',
     top: 12,
     alignSelf: 'center',
-    backgroundColor: 'rgba(6,9,18,0.75)',
+    // Re-derived scrim: Theme.ink (#09090B) at 0.75 alpha, for legibility
+    // over a live map — NOT Theme.panel, which is a surface, not a scrim.
+    backgroundColor: 'rgba(9,9,11,0.75)',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
   },
   sessionLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.teal,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1.2,
   },
   statsRow: {
@@ -580,46 +580,53 @@ const styles = StyleSheet.create({
     padding: 16,
     gap: 8,
     borderTopWidth: 1,
-    borderTopColor: Colors.border,
+    borderTopColor: Theme.line,
   },
   statBlock: { flex: 1, alignItems: 'center' },
-  statLabel: { fontSize: 9, color: Colors.textMuted, fontWeight: '700', letterSpacing: 0.8 },
-  statValue: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary, marginTop: 4 },
+  statLabel: {
+    fontSize: 9,
+    color: Theme.textMut,
+    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    letterSpacing: 0.8,
+  },
+  statValue: { fontSize: 18, fontWeight: '800', color: Theme.text, marginTop: 4 },
   pausedBanner: {
     marginHorizontal: 16,
-    backgroundColor: Colors.surfaceGold,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     padding: 12,
     borderWidth: 1,
-    borderColor: Colors.borderGold,
+    borderColor: Theme.line,
   },
-  pausedText: { fontSize: 12, color: Colors.textSecondary, lineHeight: 18 },
+  pausedText: { fontSize: 12, color: Theme.textSoft, lineHeight: 18 },
   cueBanner: {
     marginHorizontal: 16,
-    backgroundColor: Colors.surfaceTeal,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     padding: 12,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
   },
-  cueBannerText: { flex: 1, fontSize: 13, fontWeight: '600', color: Colors.textPrimary, lineHeight: 18 },
+  cueBannerText: { flex: 1, fontSize: 13, fontWeight: '600', color: Theme.text, lineHeight: 18 },
   intervalCard: {
     marginHorizontal: 16,
     marginBottom: 4,
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 12,
     gap: 6,
   },
   intervalHeader: {
     fontSize: 9,
     fontWeight: '700',
-    color: Colors.teal,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
   },
   intervalRow: {
@@ -627,46 +634,38 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  intervalLabel: { fontSize: 15, fontWeight: '800', color: Colors.textPrimary, flexShrink: 1 },
-  intervalRemaining: { fontSize: 15, fontWeight: '800', color: Colors.teal },
-  intervalTarget: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
+  intervalLabel: { fontSize: 15, fontWeight: '800', color: Theme.text, flexShrink: 1 },
+  intervalRemaining: { fontSize: 15, fontWeight: '800', color: Theme.accent },
+  intervalTarget: { fontSize: 12, color: Theme.textSoft, fontWeight: '600' },
   intervalStatus: { fontSize: 12, fontWeight: '700' },
   actions: { padding: 16, gap: 12 },
   ozzieBtn: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 14,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingVertical: 14,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 8,
   },
-  ozzieBtnText: { fontSize: 14, fontWeight: '700', color: Colors.teal },
+  ozzieBtnText: { fontSize: 14, fontWeight: '700', color: Theme.accent },
   controlRow: { flexDirection: 'row', gap: 10 },
-  primaryBtn: {
-    flex: 1,
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
-    paddingVertical: 14,
-    alignItems: 'center',
-  },
-  primaryBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
-  primaryBtnDisabled: { opacity: 0.45 },
-  warmupHint: { fontSize: 12, color: Colors.textMuted, textAlign: 'center', marginTop: -4 },
+  controlBtn: { flex: 1 },
+  warmupHint: { fontSize: 12, color: Theme.textMut, textAlign: 'center', marginTop: -4 },
   warmupWrap: { flex: 1, padding: 24, gap: 14 },
   warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  warmupTitle: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
-  warmupSubtitle: { fontSize: 13, color: Colors.textMuted, lineHeight: 18, marginBottom: 6 },
+  warmupTitle: { fontSize: 22, fontWeight: '800', color: Theme.text },
+  warmupSubtitle: { fontSize: 13, color: Theme.textMut, lineHeight: 18, marginBottom: 6 },
   warmupRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 12,
   },
   checkbox: {
@@ -674,36 +673,30 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 7,
     borderWidth: 2,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  checkboxChecked: { backgroundColor: Colors.teal, borderColor: Colors.teal },
-  checkboxMark: { color: '#000', fontSize: 14, fontWeight: '800' },
-  warmupDrillName: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  warmupDrillDuration: { fontSize: 12, color: Colors.textMuted, marginTop: 2 },
+  checkboxChecked: { backgroundColor: Theme.accent, borderColor: Theme.accent },
+  checkboxMark: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
+  warmupDrillName: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  warmupDrillDuration: { fontSize: 12, color: Theme.textMut, marginTop: 2 },
   skipWarmupText: {
     fontSize: 13,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
     fontWeight: '600',
   },
-  secondaryBtn: {
-    flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    paddingVertical: 14,
-    alignItems: 'center',
-  },
-  secondaryBtnText: { fontSize: 14, fontWeight: '800', color: Colors.textPrimary },
   endBtn: {
     flex: 1,
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 14,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  endBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
+  endBtnDisabled: { opacity: 0.5 },
+  endBtnText: { fontSize: 14, fontWeight: '800', color: Theme.ink },
 });
