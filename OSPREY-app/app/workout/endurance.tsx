@@ -720,7 +720,12 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   effortPill: { borderRadius: Radius.card, paddingHorizontal: 8, paddingVertical: 3 },
-  effortPillText: { fontSize: 10, fontWeight: '800', letterSpacing: 0.5 },
+  effortPillText: {
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 0.5,
+    fontFamily: 'SpaceGrotesk_700Bold',
+  },
   intervalLabel: { fontSize: 22, fontWeight: '800', color: Theme.text },
   intervalRep: { fontSize: 12, color: Theme.textSoft, fontWeight: '600' },
   intervalCountdown: {

@@ -414,19 +414,32 @@ export default function RunWorkoutScreen() {
         ) : null}
 
         <View style={styles.controlRow}>
+          {/*
+            Hand-rolled rather than <Button>: Button applies its `style` prop to the
+            inner Pressable, but the flex child of this row is Button's Animated.View
+            wrapper (which carries only the press transform). A `flex: 1` passed to
+            <Button> therefore never reaches the node being flexed, and this control
+            collapses to text width beside the flex:1 End & Save. Revisit if the
+            primitive gains a wrapperStyle / flex-capable API.
+          */}
           {status === 'paused' ? (
-            <Button onPress={handleResume} accessibilityLabel="Resume run" style={styles.controlBtn}>
-              ▶ Resume
-            </Button>
-          ) : (
-            <Button
-              variant="secondary"
-              onPress={handlePause}
-              accessibilityLabel="Pause run"
-              style={styles.controlBtn}
+            <TouchableOpacity
+              style={[styles.controlBtn, styles.controlBtnPrimary]}
+              onPress={handleResume}
+              accessibilityRole="button"
+              accessibilityLabel="Resume run"
             >
-              ⏸ Pause
-            </Button>
+              <Text style={styles.controlBtnPrimaryText}>▶ Resume</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={[styles.controlBtn, styles.controlBtnSecondary]}
+              onPress={handlePause}
+              accessibilityRole="button"
+              accessibilityLabel="Pause run"
+            >
+              <Text style={styles.controlBtnSecondaryText}>⏸ Pause</Text>
+            </TouchableOpacity>
           )}
           <TouchableOpacity
             style={[styles.endBtn, saving && styles.endBtnDisabled]}
@@ -596,7 +609,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.panel,
     borderRadius: Radius.card,
     padding: 12,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
   },
   pausedText: { fontSize: 12, color: Theme.textSoft, lineHeight: 18 },
@@ -605,7 +618,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.panel,
     borderRadius: Radius.card,
     padding: 12,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
     flexDirection: 'row',
     alignItems: 'center',
@@ -616,7 +629,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 4,
     backgroundColor: Theme.panel,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
     borderRadius: Radius.card,
     padding: 12,
@@ -641,7 +654,7 @@ const styles = StyleSheet.create({
   actions: { padding: 16, gap: 12 },
   ozzieBtn: {
     backgroundColor: Theme.panel,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
     borderRadius: Radius.card,
     paddingVertical: 14,
@@ -652,7 +665,21 @@ const styles = StyleSheet.create({
   },
   ozzieBtnText: { fontSize: 14, fontWeight: '700', color: Theme.accent },
   controlRow: { flexDirection: 'row', gap: 10 },
-  controlBtn: { flex: 1 },
+  // paddingVertical matches endBtn (14) so the two buttons in controlRow are the
+  // same height; the Button primitive's 12 would leave them ~4px mismatched.
+  controlBtn: {
+    flex: 1,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
+    paddingVertical: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  controlBtnPrimary: { backgroundColor: Theme.accent },
+  controlBtnPrimaryText: { color: Theme.ink, fontWeight: '800', fontSize: 14 },
+  controlBtnSecondary: { backgroundColor: 'transparent' },
+  controlBtnSecondaryText: { color: Theme.accent, fontWeight: '800', fontSize: 14 },
   warmupHint: { fontSize: 12, color: Theme.textMut, textAlign: 'center', marginTop: -4 },
   warmupWrap: { flex: 1, padding: 24, gap: 14 },
   warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
@@ -663,7 +690,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 12,
     backgroundColor: Theme.panel,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
     borderRadius: Radius.card,
     padding: 12,
