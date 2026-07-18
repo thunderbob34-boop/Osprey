@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { Colors } from '@/constants/colors';
+import { Theme } from '@/constants/theme';
 
 interface PlaceholderScreenProps {
   title: string;
@@ -20,7 +20,7 @@ export default function PlaceholderScreen({ title, subtitle }: PlaceholderScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
   },
   content: {
     flex: 1,
@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '800',
-    color: Colors.textPrimary,
+    color: Theme.text,
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 14,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
     lineHeight: 20,
   },

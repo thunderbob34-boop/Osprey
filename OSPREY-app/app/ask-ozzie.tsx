@@ -5,7 +5,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import ScreenHeader from '@/components/ScreenHeader';
 import OzzieMascot from '@/components/OzzieMascot';
 import { useDailySummary } from '@/hooks/useDailySummary';
@@ -42,36 +42,37 @@ export default function AskOzzieScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   scroll: { padding: 20, paddingBottom: 32, gap: 16 },
   mascotWrap: { alignItems: 'center', marginBottom: 4 },
   heading: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
   },
   noteCard: {
-    backgroundColor: 'rgba(0,200,200,0.10)',
-    borderWidth: 1.5,
-    borderColor: 'rgba(0,200,200,0.35)',
-    borderRadius: 18,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     gap: 10,
   },
   noteText: {
     fontSize: 14,
-    color: Colors.textPrimary,
+    color: Theme.text,
     lineHeight: 20,
   },
   reasoningText: {
     fontSize: 13,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 19,
   },
   comingSoon: {
     fontSize: 12,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     lineHeight: 18,
     textAlign: 'center',
   },
