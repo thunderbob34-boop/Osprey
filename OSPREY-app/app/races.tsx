@@ -744,7 +744,7 @@ export default function RacesScreen() {
               <TextInput
                 style={[styles.input, fieldErrors.name ? styles.inputError : null]}
                 placeholder="Race name (e.g. Chicago Marathon)"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={name}
                 onChangeText={(v) => {
                   setName(v);
@@ -776,7 +776,7 @@ export default function RacesScreen() {
                 <TextInput
                   style={[styles.input, styles.customMiles, distanceKm == null && customMiles ? styles.chipActive : null]}
                   placeholder={units === 'metric' ? 'km' : 'mi'}
-                  placeholderTextColor={Colors.textMuted}
+                  placeholderTextColor={Theme.textMut}
                   keyboardType="decimal-pad"
                   value={customMiles}
                   onChangeText={(t) => {
@@ -805,7 +805,7 @@ export default function RacesScreen() {
               <TextInput
                 style={[styles.input, fieldErrors.goalTime ? styles.inputError : null]}
                 placeholder="h:mm:ss (e.g. 1:45:00)"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={goalTime}
                 onChangeText={(v) => {
                   setGoalTime(v);
@@ -820,7 +820,7 @@ export default function RacesScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="City, venue…"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={location}
                 onChangeText={setLocation}
                 accessibilityLabel="Location"
@@ -835,7 +835,7 @@ export default function RacesScreen() {
                 accessibilityState={{ disabled: create.isPending, busy: create.isPending }}
               >
                 {create.isPending ? (
-                  <ActivityIndicator color="#000" />
+                  <ActivityIndicator color={Theme.ink} />
                 ) : (
                   <Text style={styles.saveBtnText}>Save Race</Text>
                 )}
@@ -863,7 +863,7 @@ export default function RacesScreen() {
           </View>
 
           {isLoading ? (
-            <ActivityIndicator color={Colors.teal} style={{ marginTop: 32 }} />
+            <ActivityIndicator color={Theme.accent} style={{ marginTop: 32 }} />
           ) : error ? (
             <Text style={styles.errorText}>Couldn&apos;t load races.</Text>
           ) : (
@@ -1068,49 +1068,58 @@ export default function RacesScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   discoverCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     gap: 10,
     marginBottom: 4,
   },
   discoverEmoji: { fontSize: 22 },
   discoverBody: { gap: 2 },
-  discoverTitle: { color: Colors.textPrimary, fontSize: 15, fontWeight: '800' },
-  discoverSub: { color: Colors.textMuted, fontSize: 12, lineHeight: 17 },
+  discoverTitle: { color: Theme.text, fontSize: 15, fontWeight: '800' },
+  discoverSub: { color: Theme.textMut, fontSize: 12, lineHeight: 17 },
   discoverBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 10,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 10,
     alignItems: 'center',
     marginTop: 4,
   },
-  discoverBtnText: { color: '#000', fontSize: 13, fontWeight: '800' },
-  add: { color: Colors.teal, fontSize: 24, fontWeight: '700' },
+  discoverBtnText: { color: Theme.ink, fontSize: 13, fontWeight: '800' },
+  add: { color: Theme.accent, fontSize: 24, fontWeight: '700' },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
-  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 8 },
+  empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginTop: 8 },
   errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
 
   nextCard: {
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 16,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 18,
     marginBottom: 6,
   },
-  nextLabel: { color: Colors.teal, fontSize: 10, fontWeight: '800', letterSpacing: 1 },
-  nextName: { color: Colors.textPrimary, fontSize: 20, fontWeight: '900', marginTop: 4 },
-  nextCountdown: { color: Colors.gold, fontSize: 15, fontWeight: '700', marginTop: 2 },
+  nextLabel: {
+    color: Theme.accent,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 1,
+  },
+  nextName: { color: Theme.text, fontSize: 20, fontWeight: '900', marginTop: 4 },
+  nextCountdown: { color: Theme.accentBright, fontSize: 15, fontWeight: '700', marginTop: 2 },
   nextMetaRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 14, marginTop: 8 },
-  nextMeta: { color: Colors.textSecondary, fontSize: 13, fontWeight: '600' },
+  nextMeta: { color: Theme.textSoft, fontSize: 13, fontWeight: '600' },
 
   sectionLabel: {
-    color: Colors.textMuted,
+    color: Theme.accent,
+    fontFamily: 'SpaceGrotesk_700Bold',
     fontSize: 10,
     fontWeight: '800',
     letterSpacing: 1,
@@ -1119,19 +1128,19 @@ const styles = StyleSheet.create({
   },
   raceRow: {
     flexDirection: 'row',
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 14,
   },
-  raceName: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },
-  raceMeta: { color: Colors.textMuted, fontSize: 12, marginTop: 3, lineHeight: 17 },
+  raceName: { color: Theme.text, fontSize: 15, fontWeight: '700' },
+  raceMeta: { color: Theme.textMut, fontSize: 12, marginTop: 3, lineHeight: 17 },
   actionRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 },
   actionGroup: { flexDirection: 'row', gap: 18, flexWrap: 'wrap', flexShrink: 1 },
-  actionLink: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
-  actionLinkActive: { color: Colors.gold },
-  actionDelete: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
+  actionLink: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
+  actionLinkActive: { color: Theme.accentBright },
+  actionDelete: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
 
   // ── Logistics panel ──
   logisticsPanel: {
@@ -1215,19 +1224,20 @@ const styles = StyleSheet.create({
 
   // ── Add-race form ──
   formCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     gap: 8,
     marginBottom: 6,
   },
-  formTitle: { color: Colors.textPrimary, fontSize: 15, fontWeight: '800', marginBottom: 2 },
+  formTitle: { color: Theme.text, fontSize: 15, fontWeight: '800', marginBottom: 2 },
   fieldLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 0.8,
     marginTop: 6,
   },
@@ -1235,13 +1245,13 @@ const styles = StyleSheet.create({
     borderColor: Colors.red,
   },
   input: {
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 15,
   },
   multiline: { minHeight: 72, textAlignVertical: 'top', paddingTop: 12 },
@@ -1249,23 +1259,27 @@ const styles = StyleSheet.create({
   chip: {
     paddingHorizontal: 14,
     paddingVertical: 9,
-    borderRadius: 9,
+    borderRadius: Radius.card,
     borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bg,
+    borderColor: Theme.line,
+    backgroundColor: Theme.ink,
   },
-  chipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
-  chipText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
-  chipTextActive: { color: Colors.teal },
+  // Active/selected distance-preset chip — accent tint is correct here (same
+  // treatment as feelChipActive in the Retro panel).
+  chipActive: { backgroundColor: Theme.accent + '1F', borderColor: Theme.accent },
+  chipText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
+  chipTextActive: { color: Theme.accent },
   customMiles: { width: 70, paddingVertical: 9 },
   saveBtn: {
     marginTop: 10,
-    backgroundColor: Colors.teal,
-    borderRadius: 10,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 13,
     alignItems: 'center',
   },
-  saveBtnText: { color: '#000', fontSize: 14, fontWeight: '800' },
+  saveBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
 
   // ── Retro panel ──
   retroPanel: {
