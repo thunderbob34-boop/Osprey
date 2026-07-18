@@ -1264,9 +1264,11 @@ const styles = StyleSheet.create({
     borderColor: Theme.line,
     backgroundColor: Theme.ink,
   },
-  // Active/selected distance-preset chip — accent tint is correct here (same
-  // treatment as feelChipActive in the Retro panel).
-  chipActive: { backgroundColor: Theme.accent + '1F', borderColor: Theme.accent },
+  // Border-only, matching challenges.tsx and routes.tsx. This chip pairs with
+  // chipTextActive (accent text), so the border + text are already two cues and
+  // a tint would be redundant. Contrast feelChipActive in the Retro panel, which
+  // has NO text-active variant and therefore does need its fill.
+  chipActive: { borderColor: Theme.accent },
   chipText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
   chipTextActive: { color: Theme.accent },
   customMiles: { width: 70, paddingVertical: 9 },
@@ -1333,8 +1335,9 @@ const styles = StyleSheet.create({
     borderColor: Theme.line,
     backgroundColor: Theme.ink,
   },
-  // Generic selected-chip state (1-5 "how did it feel" selector), not a
-  // semantic scale — the accent tint is correct here.
+  // Keeps its accent tint, unlike chipActive above: this 1-5 selector has NO
+  // text-active variant, so the fill + border are its only selection cues.
+  // (chipActive pairs with chipTextActive, so a border alone already reads.)
   feelChipActive: { backgroundColor: Theme.accent + '1F', borderColor: Theme.accent },
   feelScore: { color: Theme.textMut, fontSize: 15, fontWeight: '800' },
   feelScoreActive: { color: Theme.accent },
