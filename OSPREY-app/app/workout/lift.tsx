@@ -1056,8 +1056,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 6,
     borderRadius: 6,
-    // Current-set cue: an accent-tinted chip so the set-number badge stays
-    // visibly distinct from Theme.panel rows around it (was rgba(0,200,200,0.08)).
+    // NB: this is the plate-calculator button, applied to EVERY set row — not a
+    // "current set" marker (the only per-row state cue is setRowDone's opacity).
+    // The accent tint just keeps the chip distinct from the Theme.panel row
+    // around it, exactly as the old rgba(0,200,200,0.08) teal did.
     backgroundColor: 'rgba(200,121,58,0.10)',
   },
   setPrevious: { fontSize: 12, color: Theme.textMut, textAlign: 'center', fontWeight: '600' },
@@ -1075,7 +1077,12 @@ const styles = StyleSheet.create({
   },
   setInputDone: { borderColor: 'transparent', color: Theme.textMut },
   logBtn: {
+    // Needs a visible body: the parent is a <Card> (also Theme.panel), so a bare
+    // panel fill would leave the row's primary action as a floating ✓ glyph with
+    // no tap affordance until it's completed (logBtnDone paints it green).
     backgroundColor: Theme.panel,
+    borderWidth: 1,
+    borderColor: Theme.line,
     borderRadius: Radius.card,
     paddingVertical: 8,
     alignItems: 'center',

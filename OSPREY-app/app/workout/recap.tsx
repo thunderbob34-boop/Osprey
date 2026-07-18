@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.panel,
     borderWidth: 1,
     borderColor: Theme.line,
-    borderRadius: 10,
+    borderRadius: Radius.card,
     paddingHorizontal: 12,
     paddingVertical: 10,
     color: Theme.text,
