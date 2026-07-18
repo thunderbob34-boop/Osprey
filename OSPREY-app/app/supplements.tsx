@@ -15,6 +15,8 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Card } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
@@ -145,7 +147,7 @@ export default function SupplementsScreen() {
       >
         <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
           {loading ? (
-            <ActivityIndicator color={Colors.teal} style={{ marginTop: 32 }} />
+            <ActivityIndicator color={Theme.accent} style={{ marginTop: 32 }} />
           ) : (
             <>
               {reminders.length === 0 ? (
@@ -155,7 +157,7 @@ export default function SupplementsScreen() {
                 </Text>
               ) : (
                 reminders.map((reminder) => (
-                  <View key={reminder.id} style={styles.reminderRow}>
+                  <Card key={reminder.id} style={styles.reminderRow}>
                     <View style={{ flex: 1 }}>
                       <Text style={styles.reminderName}>
                         {reminder.name}
@@ -169,7 +171,7 @@ export default function SupplementsScreen() {
                     <Switch
                       value={reminder.enabled}
                       onValueChange={() => handleToggle(reminder)}
-                      trackColor={{ true: Colors.teal, false: Colors.border }}
+                      trackColor={{ true: Theme.accent, false: Theme.line }}
                       thumbColor="#fff"
                       accessibilityRole="switch"
                       accessibilityLabel={`${reminder.name} reminder`}
@@ -182,16 +184,16 @@ export default function SupplementsScreen() {
                     >
                       <Text style={styles.delete}>🗑</Text>
                     </TouchableOpacity>
-                  </View>
+                  </Card>
                 ))
               )}
 
-              <View style={styles.addCard}>
+              <Card style={styles.addCard}>
                 <Text style={styles.addTitle}>Add a reminder</Text>
                 <TextInput
                   style={[styles.input, nameError ? styles.inputError : null]}
                   placeholder="Name (e.g. Creatine)"
-                  placeholderTextColor={Colors.textMuted}
+                  placeholderTextColor={Theme.textMut}
                   value={name}
                   onChangeText={(v) => {
                     setName(v);
@@ -203,7 +205,7 @@ export default function SupplementsScreen() {
                 <TextInput
                   style={styles.input}
                   placeholder="Dosage (optional, e.g. 5g)"
-                  placeholderTextColor={Colors.textMuted}
+                  placeholderTextColor={Theme.textMut}
                   value={dosage}
                   onChangeText={setDosage}
                   accessibilityLabel="Dosage, optional"
@@ -252,7 +254,7 @@ export default function SupplementsScreen() {
                   <Switch
                     value={trainingDaysOnly}
                     onValueChange={setTrainingDaysOnly}
-                    trackColor={{ true: Colors.teal, false: Colors.border }}
+                    trackColor={{ true: Theme.accent, false: Theme.line }}
                     thumbColor="#fff"
                     accessibilityRole="switch"
                     accessibilityLabel="Training days only"
@@ -260,7 +262,7 @@ export default function SupplementsScreen() {
                 </View>
 
                 <TouchableOpacity
-                  style={styles.addBtn}
+                  style={[styles.addBtn, saving && styles.addBtnDisabled]}
                   onPress={handleAdd}
                   disabled={saving}
                   accessibilityRole="button"
@@ -268,12 +270,12 @@ export default function SupplementsScreen() {
                   accessibilityState={{ disabled: saving, busy: saving }}
                 >
                   {saving ? (
-                    <ActivityIndicator color="#000" />
+                    <ActivityIndicator color={Theme.ink} />
                   ) : (
                     <Text style={styles.addBtnText}>Add reminder · {formatTime(hour, minute)}</Text>
                   )}
                 </TouchableOpacity>
-              </View>
+              </Card>
             </>
           )}
         </ScrollView>
@@ -283,50 +285,41 @@ export default function SupplementsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
-  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginBottom: 8 },
+  empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginBottom: 8 },
   reminderRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
-    padding: 14,
   },
-  reminderName: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },
-  reminderDose: { color: Colors.textMuted, fontSize: 13, fontWeight: '500' },
-  reminderMeta: { color: Colors.textMuted, fontSize: 12, marginTop: 2 },
+  reminderName: { color: Theme.text, fontSize: 15, fontWeight: '700' },
+  reminderDose: { color: Theme.textMut, fontSize: 13, fontWeight: '500' },
+  reminderMeta: { color: Theme.textMut, fontSize: 12, marginTop: 2 },
   delete: { fontSize: 16 },
   addCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 16,
     marginTop: 8,
     gap: 10,
   },
-  addTitle: { color: Colors.textPrimary, fontSize: 15, fontWeight: '800' },
+  addTitle: { color: Theme.text, fontSize: 15, fontWeight: '800' },
   inputError: {
     borderColor: Colors.red,
   },
   input: {
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 15,
   },
   fieldLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 1,
     marginTop: 4,
   },
@@ -335,24 +328,27 @@ const styles = StyleSheet.create({
   chip: {
     paddingHorizontal: 12,
     paddingVertical: 8,
-    borderRadius: 9,
+    borderRadius: Radius.card,
     borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bg,
+    borderColor: Theme.line,
+    backgroundColor: Theme.ink,
     marginRight: 8,
   },
-  chipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
-  chipText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
-  chipTextActive: { color: Colors.teal },
+  chipActive: { backgroundColor: Theme.panel, borderColor: Theme.accent },
+  chipText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
+  chipTextActive: { color: Theme.accent },
   switchRow: { flexDirection: 'row', alignItems: 'center', marginTop: 4 },
-  switchLabel: { color: Colors.textPrimary, fontSize: 14, fontWeight: '700' },
-  switchHint: { color: Colors.textMuted, fontSize: 12, marginTop: 2 },
+  switchLabel: { color: Theme.text, fontSize: 14, fontWeight: '700' },
+  switchHint: { color: Theme.textMut, fontSize: 12, marginTop: 2 },
   addBtn: {
     marginTop: 6,
-    backgroundColor: Colors.teal,
-    borderRadius: 10,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 13,
     alignItems: 'center',
   },
-  addBtnText: { color: '#000', fontSize: 14, fontWeight: '800' },
+  addBtnDisabled: { opacity: 0.5 },
+  addBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
 });
