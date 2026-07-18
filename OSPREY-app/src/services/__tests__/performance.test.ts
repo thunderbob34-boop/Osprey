@@ -208,6 +208,31 @@ describe('readinessFromTsb', () => {
   ])('labels tsb %d as %s', (tsb, label) => {
     expect(readinessFromTsb(tsb, 50).label).toBe(label);
   });
+
+  it.each([
+    [20, 'detrained'],
+    [10, 'fresh'],
+    [0, 'ready'],
+    [-10, 'carrying'],
+    [-20, 'fatigued'],
+    [-30, 'overreached'],
+  ])('gives tsb %d the %s tone', (tsb, tone) => {
+    expect(readinessFromTsb(tsb, 50).tone).toBe(tone);
+  });
+
+  it('returns a presentation-free tone, never a colour string', () => {
+    // The service must not decide presentation. It returned raw Colors values
+    // for years, which is how old-system teal survived the whole design
+    // migration and kept rendering on the already-migrated home screen.
+    const r = readinessFromTsb(0, 50) as unknown as Record<string, unknown>;
+    expect(r.color).toBeUndefined();
+    expect(String(r.tone)).not.toMatch(/^#|^rgb/);
+  });
+
+  it('gives every state a distinct tone', () => {
+    const tones = [20, 10, 0, -10, -20, -30].map((t) => readinessFromTsb(t, 50).tone);
+    expect(new Set(tones).size).toBe(tones.length);
+  });
 });
 
 describe('formatRaceTimeSec', () => {

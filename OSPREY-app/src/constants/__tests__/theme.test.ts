@@ -1,4 +1,4 @@
-import { Theme, Radius, BorderWidth, Spacing, Shadow, ChartPalette } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, Spacing, Shadow, ChartPalette, ReadinessPalette } from '@/constants/theme';
 
 describe('Theme tokens — pinned to the design spec (2026-07-17)', () => {
   it('matches the color values in design.md §1', () => {
@@ -31,6 +31,34 @@ describe('Theme tokens — pinned to the design spec (2026-07-17)', () => {
       shadowRadius: 0,
       elevation: 3,
     });
+  });
+});
+
+describe('ReadinessPalette — pinned readiness scale (2026-07-18)', () => {
+  it('marks Ready with the brand accent, since Ready is the target state', () => {
+    expect(ReadinessPalette.ready).toBe(Theme.accent);
+  });
+
+  it('recedes the detrained end to neutral rather than colouring it as a win', () => {
+    // TSB above +15 usually means fitness has been rested off — a signal, not
+    // an achievement. It must NOT read as the top of a good-to-bad ramp.
+    expect(ReadinessPalette.detrained).toBe('#7d8aa5');
+  });
+
+  it('matches the design spec', () => {
+    expect(ReadinessPalette).toEqual({
+      detrained: '#7d8aa5',
+      fresh: '#4cde80',
+      ready: '#c8793a',
+      carrying: '#d4c44a',
+      fatigued: '#e85d32',
+      overreached: '#ff4444',
+    });
+  });
+
+  it('gives every state a distinct colour', () => {
+    const values = Object.values(ReadinessPalette);
+    expect(new Set(values).size).toBe(values.length);
   });
 });
 

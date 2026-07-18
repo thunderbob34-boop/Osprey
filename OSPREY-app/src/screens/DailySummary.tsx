@@ -19,7 +19,7 @@ import OzzieAvatar from '@/components/OzzieAvatar';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, kmToMiles } from '@/services/units';
 import { Card, Badge, Button } from '@/components/ui';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, ReadinessPalette } from '@/constants/theme';
 
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
 
@@ -503,11 +503,13 @@ export default function DailySummaryScreen({
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function ReadinessCard({ readiness }: { readiness: TrainingReadiness }) {
+  // The service returns a tone; presentation is decided here and only here.
+  const toneColor = ReadinessPalette[readiness.tone];
   return (
-    <Card style={{ ...styles.readinessCard, borderColor: readiness.color + '33' }}>
+    <Card style={{ ...styles.readinessCard, borderColor: toneColor + '33' }}>
       <View style={styles.readinessLeft}>
         <Text style={styles.readinessTitle}>Training Readiness</Text>
-        <Text style={[styles.readinessLabel, { color: readiness.color }]}>
+        <Text style={[styles.readinessLabel, { color: toneColor }]}>
           {readiness.label}
         </Text>
         <Text style={styles.readinessSub}>TSB {readiness.tsb > 0 ? '+' : ''}{readiness.tsb.toFixed(1)}</Text>

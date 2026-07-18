@@ -48,6 +48,30 @@ export const Shadow = {
 //
 // `neutral` is the second series on the fitness/fatigue chart (ATL against
 // accent's CTL); it is not a sport.
+// Training-readiness scale, keyed by the tone `readinessFromTsb()` returns.
+// Decided from rendered options, 2026-07-18.
+//
+// This is NOT a good-to-bad ramp, and that is the point. `ready` (TSB near 0)
+// takes the brand accent because it is the state you want to TRAIN in, per
+// docs/coaching/. `detrained` (TSB > +15) recedes to neutral rather than
+// reading as the top of the scale — a very high TSB usually means fitness has
+// been rested off, so it is a signal, not an achievement. Fatigue accumulates
+// downward from `ready` through yellow/orange/red.
+//
+// The service deliberately returns a TONE, not a colour: it previously handed
+// back raw `Colors` values, which is how old-system teal kept rendering on the
+// already-migrated home screen through eight slices of this migration.
+export const ReadinessPalette = {
+  detrained: '#7d8aa5',
+  fresh: '#4cde80',
+  ready: Theme.accent,
+  carrying: '#d4c44a',
+  fatigued: '#e85d32',
+  overreached: '#ff4444',
+} as const;
+
+export type ReadinessTone = keyof typeof ReadinessPalette;
+
 export const ChartPalette = {
   run: Theme.accent,
   bike: '#5b7fa6',

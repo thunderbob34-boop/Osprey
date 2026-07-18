@@ -1,4 +1,5 @@
 import type React from 'react';
+import type { ReadinessTone } from '@/constants/theme';
 
 export type RecoveryRecommendation = 'train' | 'easy' | 'rest';
 
@@ -69,7 +70,13 @@ export interface TrainingReadiness {
   tsb: number;
   ctl: number;
   label: string;
-  color: string;
+  /**
+   * Semantic state, NOT a colour. The UI maps this through `ReadinessPalette`
+   * (src/constants/theme.ts). This used to be a raw colour string produced by
+   * the service, which is how old-system teal survived the design migration
+   * and kept rendering on the already-migrated home screen.
+   */
+  tone: ReadinessTone;
 }
 
 export interface DailySummaryProps extends Partial<DailySummaryData> {

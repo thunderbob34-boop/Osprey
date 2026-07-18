@@ -3,7 +3,7 @@ import type { TriathlonDistance } from '@/types/preferences';
 
 // ── Training readiness label ──────────────────────────────────────────────────
 
-import { Colors } from '@/constants/colors';
+import type { ReadinessTone } from '@/constants/theme';
 import type { TrainingReadiness } from '@/types/daily-summary';
 
 export interface DailyLoad {
@@ -419,29 +419,37 @@ export function buildTriathlonPredictor(
   return { raceLabel: config.raceLabel, splits, transitionEstimateS, totalTimeS };
 }
 
+// Returns a semantic TONE, never a colour — the UI maps it through
+// ReadinessPalette. A service that hands back colour strings decides
+// presentation, which is exactly how this function kept rendering old-system
+// teal on the migrated home screen long after the rest of the app moved on.
+//
+// Note `detrained` and `ready` were BOTH teal before, with green between them:
+// six states, four colours, and a non-contiguous one. Each state now has its
+// own tone.
 export function readinessFromTsb(tsb: number, ctl: number): TrainingReadiness {
   let label: string;
-  let color: string;
+  let tone: ReadinessTone;
   if (tsb > 15) {
     label = 'Peak Fresh';
-    color = Colors.teal;
+    tone = 'detrained';
   } else if (tsb > 5) {
     label = 'Fresh';
-    color = Colors.green;
+    tone = 'fresh';
   } else if (tsb >= -5) {
     label = 'Ready';
-    color = Colors.teal;
+    tone = 'ready';
   } else if (tsb >= -15) {
     label = 'Carrying Load';
-    color = Colors.amber;
+    tone = 'carrying';
   } else if (tsb >= -25) {
     label = 'Fatigued';
-    color = Colors.amber;
+    tone = 'fatigued';
   } else {
     label = 'Overreached';
-    color = Colors.red;
+    tone = 'overreached';
   }
-  return { tsb: Math.round(tsb * 10) / 10, ctl: Math.round(ctl * 10) / 10, label, color };
+  return { tsb: Math.round(tsb * 10) / 10, ctl: Math.round(ctl * 10) / 10, label, tone };
 }
 
 // ── Format helpers ────────────────────────────────────────────────────────────
