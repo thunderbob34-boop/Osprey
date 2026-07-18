@@ -1,14 +1,28 @@
 // OSPREY-app/src/components/ui/Button.tsx
 import React, { useRef } from 'react';
-import { Animated, Pressable, Text, ViewStyle } from 'react-native';
+import { Animated, Pressable, StyleProp, Text, ViewStyle } from 'react-native';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 
 type ButtonProps = {
   variant?: 'primary' | 'secondary';
   onPress: () => void;
-  children: string;
+  /**
+   * A string is wrapped in the themed `<Text>` below. Anything else renders
+   * as-is, so a button can host an `<ActivityIndicator>` or an icon without
+   * being hand-rolled — pass `Theme.ink` (primary) or `Theme.accent`
+   * (secondary) as the spinner colour to match the label it replaces.
+   */
+  children: React.ReactNode;
   disabled?: boolean;
-  style?: ViewStyle;
+  /** Applied to the inner Pressable — padding, colours, borders. */
+  style?: StyleProp<ViewStyle>;
+  /**
+   * Applied to the OUTER wrapper, which is the flex child when this button sits
+   * in a row. `style={{ flex: 1 }}` silently does nothing: it lands on the
+   * Pressable inside a wrapper that has no flex of its own, so the button
+   * collapses to text width. Use `wrapperStyle={{ flex: 1 }}` instead.
+   */
+  wrapperStyle?: StyleProp<ViewStyle>;
   accessibilityLabel?: string;
 };
 
@@ -18,6 +32,7 @@ export function Button({
   children,
   disabled,
   style,
+  wrapperStyle,
   accessibilityLabel,
 }: ButtonProps) {
   // Mirrors the webapp's .btn translate(2px,2px) press effect
@@ -34,7 +49,12 @@ export function Button({
   const isPrimary = variant === 'primary';
 
   return (
-    <Animated.View style={{ transform: [{ translateX: translate }, { translateY: translate }] }}>
+    <Animated.View
+      style={[
+        { transform: [{ translateX: translate }, { translateY: translate }] },
+        wrapperStyle,
+      ]}
+    >
       <Pressable
         onPress={onPress}
         onPressIn={pressIn}
@@ -57,9 +77,13 @@ export function Button({
           style,
         ]}
       >
-        <Text style={{ color: isPrimary ? Theme.ink : Theme.accent, fontWeight: '800', fontSize: 14 }}>
-          {children}
-        </Text>
+        {typeof children === 'string' ? (
+          <Text style={{ color: isPrimary ? Theme.ink : Theme.accent, fontWeight: '800', fontSize: 14 }}>
+            {children}
+          </Text>
+        ) : (
+          children
+        )}
       </Pressable>
     </Animated.View>
   );
