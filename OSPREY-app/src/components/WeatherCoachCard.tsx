@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 10,
-    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
     letterSpacing: 1.2,
   },
   headline: {
