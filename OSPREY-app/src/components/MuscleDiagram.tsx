@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Svg, { Line, Path } from 'react-native-svg';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
 
 interface MuscleDiagramProps {
   workedGroups: Set<string>;
@@ -14,9 +14,9 @@ interface MuscleDiagramProps {
 const BODY_FILL = 'rgba(255,255,255,0.07)';
 const BODY_STROKE = 'rgba(255,255,255,0.14)';
 const MUSCLE_FILL = 'rgba(255,255,255,0.13)';
-const MUSCLE_SEAM = 'rgba(6,9,18,0.7)';
-const HIGHLIGHT_FILL = Colors.teal;
-const HIGHLIGHT_GLOW = 'rgba(0,200,200,0.30)';
+const MUSCLE_SEAM = 'rgba(9,9,11,0.7)';
+const HIGHLIGHT_FILL = Theme.accent;
+const HIGHLIGHT_GLOW = 'rgba(200,121,58,0.30)';
 
 // Every group either view can highlight — used to expand 'Full Body' into
 // "highlight everything" rather than tracking it as its own drawn region.
@@ -260,17 +260,17 @@ export default function MuscleDiagram({ workedGroups }: MuscleDiagramProps) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     alignItems: 'center',
     gap: 10,
   },
   toggleRow: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: Theme.panel,
     borderRadius: 20,
     padding: 3,
     gap: 3,
@@ -283,15 +283,15 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
   },
   toggleBtnActive: {
-    backgroundColor: Colors.surfaceTeal,
-    borderColor: Colors.borderTeal,
+    backgroundColor: Theme.panel,
+    borderColor: Theme.accent,
   },
-  toggleText: { fontSize: 12, fontWeight: '700', color: Colors.textMuted },
-  toggleTextActive: { color: Colors.teal },
+  toggleText: { fontSize: 12, fontWeight: '700', color: Theme.textMut },
+  toggleTextActive: { color: Theme.accent },
   bodyWrap: { paddingVertical: 4 },
   legend: {
     fontSize: 12,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     textAlign: 'center',
     lineHeight: 17,
   },

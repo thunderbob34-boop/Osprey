@@ -15,6 +15,8 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button, Card } from '@/components/ui';
 import {
   useWorkoutStore,
   getElapsedSeconds,
@@ -444,13 +446,13 @@ export default function LiftWorkoutScreen() {
             accessibilityRole="button"
             accessibilityLabel="Close exercise picker"
           >
-            <Ionicons name="close" size={20} color={Colors.textMuted} />
+            <Ionicons name="close" size={20} color={Theme.textMut} />
           </TouchableOpacity>
         </View>
         <TextInput
           style={styles.pickerSearch}
           placeholder="Search exercises…"
-          placeholderTextColor={Colors.textMuted}
+          placeholderTextColor={Theme.textMut}
           value={search}
           onChangeText={setSearch}
           autoCorrect={false}
@@ -490,7 +492,7 @@ export default function LiftWorkoutScreen() {
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
-        <ActivityIndicator color={Colors.teal} style={{ marginTop: 80 }} />
+        <ActivityIndicator color={Theme.accent} style={{ marginTop: 80 }} />
       </SafeAreaView>
     );
   }
@@ -514,7 +516,7 @@ export default function LiftWorkoutScreen() {
             accessibilityRole="button"
             accessibilityLabel="Exit workout"
           >
-            <Ionicons name="close" size={24} color={Colors.textMuted} />
+            <Ionicons name="close" size={24} color={Theme.textMut} />
           </TouchableOpacity>
         </View>
 
@@ -601,16 +603,13 @@ export default function LiftWorkoutScreen() {
         </ScrollView>
 
         <View style={styles.footer}>
-          <TouchableOpacity
-            style={[styles.finishBtn, liftExercises.length === 0 && styles.warmupStartBtnDisabled]}
+          <Button
             onPress={() => setPreviewing(false)}
             disabled={liftExercises.length === 0}
-            accessibilityRole="button"
             accessibilityLabel="Continue to warm-up"
-            accessibilityState={{ disabled: liftExercises.length === 0 }}
           >
-            <Text style={styles.finishBtnText}>Continue to Warm-Up →</Text>
-          </TouchableOpacity>
+            Continue to Warm-Up →
+          </Button>
           {liftExercises.length === 0 ? (
             <Text style={styles.warmupHint}>Add at least one exercise to continue.</Text>
           ) : null}
@@ -636,7 +635,7 @@ export default function LiftWorkoutScreen() {
               accessibilityRole="button"
               accessibilityLabel="Exit workout"
             >
-              <Ionicons name="close" size={24} color={Colors.textMuted} />
+              <Ionicons name="close" size={24} color={Theme.textMut} />
             </TouchableOpacity>
           </View>
           <Text style={styles.warmupSubtitle}>
@@ -660,16 +659,14 @@ export default function LiftWorkoutScreen() {
               </View>
             </TouchableOpacity>
           ))}
-          <TouchableOpacity
-            style={[styles.warmupStartBtn, !allDrillsChecked && styles.warmupStartBtnDisabled]}
+          <Button
             onPress={handleStartAfterWarmup}
             disabled={!allDrillsChecked}
-            accessibilityRole="button"
             accessibilityLabel="Start lifting"
-            accessibilityState={{ disabled: !allDrillsChecked }}
+            style={{ marginTop: 8 }}
           >
-            <Text style={styles.finishBtnText}>Start Lifting →</Text>
-          </TouchableOpacity>
+            Start Lifting →
+          </Button>
           {!allDrillsChecked ? (
             <Text style={styles.warmupHint}>Check off each drill to start lifting.</Text>
           ) : null}
@@ -696,7 +693,7 @@ export default function LiftWorkoutScreen() {
             accessibilityRole="button"
             accessibilityLabel="End workout"
           >
-            <Ionicons name="close" size={22} color={Colors.textMuted} />
+            <Ionicons name="close" size={22} color={Theme.textMut} />
           </TouchableOpacity>
           <View>
             <Text style={styles.headerLabel}>
@@ -751,7 +748,7 @@ export default function LiftWorkoutScreen() {
           const previous = lastSets[exercise.exerciseId];
           const cue = prescriptionCues[exercise.exerciseId];
           return (
-            <View key={exercise.exerciseId} style={styles.exerciseCard}>
+            <Card key={exercise.exerciseId} style={styles.exerciseCard}>
               <View style={styles.exerciseHeader}>
                 <View style={styles.exerciseTitleBlock}>
                   <View style={styles.exerciseNameRow}>
@@ -781,11 +778,11 @@ export default function LiftWorkoutScreen() {
                     }}
                   >
                     {parsingVoice && recordingExercise == null ? (
-                      <ActivityIndicator color={Colors.teal} size="small" />
+                      <ActivityIndicator color={Theme.accent} size="small" />
                     ) : recordingExercise === exerciseIndex ? (
                       <Text style={styles.micBtnTextActive}>Stop</Text>
                     ) : (
-                      <Ionicons name="mic-outline" size={16} color={Colors.teal} />
+                      <Ionicons name="mic-outline" size={16} color={Theme.accent} />
                     )}
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -873,7 +870,7 @@ export default function LiftWorkoutScreen() {
               >
                 <Text style={styles.addSetText}>+ Add Set</Text>
               </TouchableOpacity>
-            </View>
+            </Card>
           );
         })}
 
@@ -889,7 +886,7 @@ export default function LiftWorkoutScreen() {
 
       <View style={styles.footer}>
         <TouchableOpacity
-          style={styles.finishBtn}
+          style={[styles.finishBtn, saving && styles.finishBtnDisabled]}
           onPress={handleFinish}
           disabled={saving}
           accessibilityRole="button"
@@ -897,7 +894,7 @@ export default function LiftWorkoutScreen() {
           accessibilityState={{ disabled: saving, busy: saving }}
         >
           {saving ? (
-            <ActivityIndicator color="#000" />
+            <ActivityIndicator color={Theme.ink} />
           ) : (
             <Text style={styles.finishBtnText}>Finish Workout →</Text>
           )}
@@ -929,7 +926,7 @@ export default function LiftWorkoutScreen() {
                     key={`${plate}-${i}`}
                     style={[
                       styles.plateChip,
-                      plate >= 45 && { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+                      plate >= 45 && styles.plateChipHighlight,
                     ]}
                   >
                     <Text style={styles.plateChipText}>{plate}</Text>
@@ -951,55 +948,55 @@ export default function LiftWorkoutScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   header: {
     padding: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   closeBtn: {},
-  headerLabel: { fontSize: 11, fontWeight: '700', color: Colors.gold, letterSpacing: 1 },
-  headerTime: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary, marginTop: 2 },
+  headerLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
+    letterSpacing: 1,
+  },
+  headerTime: { fontSize: 20, fontWeight: '800', color: Theme.text, marginTop: 2 },
   headerStats: { flexDirection: 'row', gap: 16 },
   headerStat: { alignItems: 'center' },
-  headerStatValue: { fontSize: 16, fontWeight: '800', color: Colors.teal },
-  headerStatLabel: { fontSize: 10, color: Colors.textMuted, marginTop: 1 },
+  headerStatValue: { fontSize: 16, fontWeight: '800', color: Theme.accent },
+  headerStatLabel: { fontSize: 10, color: Theme.textMut, marginTop: 1 },
   restBanner: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.borderTeal,
+    borderBottomColor: Theme.line,
   },
   restRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  restText: { fontSize: 14, fontWeight: '700', color: Colors.teal },
+  restText: { fontSize: 14, fontWeight: '700', color: Theme.accent },
   restActions: { flexDirection: 'row', gap: 16 },
-  restActionText: { fontSize: 13, fontWeight: '700', color: Colors.teal },
-  restCaption: { fontSize: 11, color: Colors.textMuted, marginTop: 4, textAlign: 'center' },
+  restActionText: { fontSize: 13, fontWeight: '700', color: Theme.accent },
+  restCaption: { fontSize: 11, color: Theme.textMut, marginTop: 4, textAlign: 'center' },
   scroll: { flex: 1 },
   scrollContent: { padding: 16, gap: 12, paddingBottom: 24 },
-  exerciseCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 14,
-  },
+  exerciseCard: {},
   exerciseTitleBlock: { flex: 1, gap: 2 },
   exerciseNameRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  exerciseName: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary, flexShrink: 1 },
+  exerciseName: { fontSize: 16, fontWeight: '800', color: Theme.text, flexShrink: 1 },
   prBadge: {
-    backgroundColor: Colors.gold,
+    backgroundColor: Theme.accent,
     borderRadius: 6,
     paddingHorizontal: 6,
     paddingVertical: 2,
   },
-  prBadgeText: { fontSize: 10, fontWeight: '800', color: '#000', letterSpacing: 0.5 },
-  exerciseCue: { fontSize: 12, fontWeight: '600', color: Colors.gold },
+  prBadgeText: { fontSize: 10, fontWeight: '800', color: Theme.ink, letterSpacing: 0.5 },
+  exerciseCue: { fontSize: 12, fontWeight: '600', color: Theme.accent },
   exerciseHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -1009,9 +1006,9 @@ const styles = StyleSheet.create({
   },
   exerciseActions: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   micBtn: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
     borderRadius: 16,
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -1019,11 +1016,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   micBtnActive: { backgroundColor: Colors.red, borderColor: Colors.red },
-  micBtnText: { fontSize: 13, fontWeight: '700', color: Colors.teal },
+  micBtnText: { fontSize: 13, fontWeight: '700', color: Theme.accent },
   micBtnTextActive: { fontSize: 13, fontWeight: '700', color: '#fff' },
   removeBtn: { padding: 4 },
-  removeBtnText: { fontSize: 14, color: Colors.textMuted, fontWeight: '700' },
-  recordingHint: { fontSize: 11, color: Colors.textMuted, marginBottom: 8, fontStyle: 'italic' },
+  removeBtnText: { fontSize: 14, color: Theme.textMut, fontWeight: '700' },
+  recordingHint: { fontSize: 11, color: Theme.textMut, marginBottom: 8, fontStyle: 'italic' },
 
   // Set table
   setTableHeader: {
@@ -1036,7 +1033,8 @@ const styles = StyleSheet.create({
   setColLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 0.5,
     textAlign: 'center',
   },
@@ -1052,56 +1050,68 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   setRowDone: { opacity: 0.6 },
-  setNumber: { fontSize: 13, color: Colors.teal, fontWeight: '800', textAlign: 'center' },
+  setNumber: { fontSize: 13, color: Theme.accent, fontWeight: '800', textAlign: 'center' },
   setNumberBtn: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 6,
     borderRadius: 6,
-    backgroundColor: 'rgba(0,200,200,0.08)',
+    // NB: this is the plate-calculator button, applied to EVERY set row — not a
+    // "current set" marker (the only per-row state cue is setRowDone's opacity).
+    // The accent tint just keeps the chip distinct from the Theme.panel row
+    // around it, exactly as the old rgba(0,200,200,0.08) teal did.
+    backgroundColor: 'rgba(200,121,58,0.10)',
   },
-  setPrevious: { fontSize: 12, color: Colors.textMuted, textAlign: 'center', fontWeight: '600' },
+  setPrevious: { fontSize: 12, color: Theme.textMut, textAlign: 'center', fontWeight: '600' },
   setInput: {
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 8,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 8,
     paddingVertical: 8,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 14,
     fontWeight: '700',
     textAlign: 'center',
   },
-  setInputDone: { borderColor: 'transparent', color: Colors.textMuted },
+  setInputDone: { borderColor: 'transparent', color: Theme.textMut },
   logBtn: {
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    borderRadius: 8,
+    // Needs a visible body: the parent is a <Card> (also Theme.panel), so a bare
+    // panel fill would leave the row's primary action as a floating ✓ glyph with
+    // no tap affordance until it's completed (logBtnDone paints it green).
+    backgroundColor: Theme.panel,
+    borderWidth: 1,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingVertical: 8,
     alignItems: 'center',
   },
   logBtnDone: { backgroundColor: Colors.green },
-  logBtnText: { fontSize: 13, fontWeight: '800', color: '#fff' },
+  logBtnText: { fontSize: 13, fontWeight: '800', color: Theme.text },
   addSetBtn: { marginTop: 4, alignSelf: 'flex-start' },
-  addSetText: { fontSize: 12, color: Colors.teal, fontWeight: '700' },
+  addSetText: { fontSize: 12, color: Theme.accent, fontWeight: '700' },
   addExerciseBtn: {
     borderWidth: 1.5,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.accent,
     borderStyle: 'dashed',
-    borderRadius: 14,
+    borderRadius: Radius.card,
     paddingVertical: 14,
     alignItems: 'center',
   },
-  addExerciseText: { fontSize: 14, fontWeight: '800', color: Colors.teal },
-  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Colors.border },
+  addExerciseText: { fontSize: 14, fontWeight: '800', color: Theme.accent },
+  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Theme.line },
   finishBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     height: 52,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  finishBtnText: { fontSize: 15, fontWeight: '800', color: '#000' },
+  finishBtnDisabled: { opacity: 0.5 },
+  finishBtnText: { fontSize: 15, fontWeight: '800', color: Theme.ink },
 
   // Plate calculator modal
   plateBackdrop: {
@@ -1113,33 +1123,36 @@ const styles = StyleSheet.create({
   },
   plateCard: {
     width: '100%',
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 16,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 20,
     alignItems: 'center',
     gap: 12,
   },
-  plateTitle: { fontSize: 15, fontWeight: '800', color: Colors.textPrimary, textAlign: 'center' },
+  plateTitle: { fontSize: 15, fontWeight: '800', color: Theme.text, textAlign: 'center' },
   plateRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'center' },
   plateChip: {
     minWidth: 40,
     height: 40,
     borderRadius: 20,
     borderWidth: 2,
-    borderColor: Colors.border,
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    borderColor: Theme.line,
+    backgroundColor: Theme.panel,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 6,
   },
-  plateChipText: { fontSize: 13, fontWeight: '800', color: Colors.textPrimary },
-  plateBreakdown: { fontSize: 13, color: Colors.textSecondary, textAlign: 'center', lineHeight: 19 },
-  plateHint: { fontSize: 11, color: Colors.textMuted },
+  // Highlights 45+ plates distinctly from the base chip — an accent tint
+  // rather than Theme.panel, so the highlight isn't erased by the migration.
+  plateChipHighlight: { backgroundColor: 'rgba(200,121,58,0.15)', borderColor: Theme.accent },
+  plateChipText: { fontSize: 13, fontWeight: '800', color: Theme.text },
+  plateBreakdown: { fontSize: 13, color: Theme.textSoft, textAlign: 'center', lineHeight: 19 },
+  plateHint: { fontSize: 11, color: Theme.textMut },
 
   // Picker modal
-  pickerContainer: { flex: 1, backgroundColor: Colors.bg },
+  pickerContainer: { flex: 1, backgroundColor: Theme.ink },
   pickerHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -1147,24 +1160,25 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 12,
   },
-  pickerTitle: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
+  pickerTitle: { fontSize: 20, fontWeight: '800', color: Theme.text },
   pickerSearch: {
     marginHorizontal: 20,
     marginBottom: 8,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     height: 44,
     paddingHorizontal: 14,
     fontSize: 15,
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   pickerList: { paddingHorizontal: 20, paddingBottom: 40 },
   pickerGroupLabel: {
     fontSize: 11,
     fontWeight: '700',
-    color: Colors.teal,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
     marginTop: 16,
     marginBottom: 6,
@@ -1173,21 +1187,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 12,
     marginBottom: 8,
   },
-  pickerRowText: { fontSize: 14, fontWeight: '600', color: Colors.textPrimary },
-  pickerRowAdd: { fontSize: 18, fontWeight: '800', color: Colors.teal },
+  pickerRowText: { fontSize: 14, fontWeight: '600', color: Theme.text },
+  pickerRowAdd: { fontSize: 18, fontWeight: '800', color: Theme.accent },
   pickerEmpty: {
     marginTop: 32,
     textAlign: 'center',
     fontSize: 13,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     lineHeight: 19,
   },
 
@@ -1198,44 +1212,51 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   previewTitleBlock: { gap: 2 },
-  previewEyebrow: { fontSize: 10, fontWeight: '700', color: Colors.teal, letterSpacing: 1 },
-  previewTitle: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
+  previewEyebrow: {
+    fontSize: 10,
+    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
+    letterSpacing: 1,
+  },
+  previewTitle: { fontSize: 20, fontWeight: '800', color: Theme.text },
   previewScroll: { padding: 20, gap: 14, paddingBottom: 24 },
   templateChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   templateChip: {
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     borderRadius: 18,
     paddingHorizontal: 14,
     paddingVertical: 8,
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
   },
-  templateChipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
-  templateChipText: { fontSize: 13, fontWeight: '700', color: Colors.textSecondary },
-  templateChipTextActive: { color: Colors.teal },
+  templateChipActive: { backgroundColor: Theme.panel, borderColor: Theme.accent },
+  templateChipText: { fontSize: 13, fontWeight: '700', color: Theme.textSoft },
+  templateChipTextActive: { color: Theme.accent },
   previewSectionLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
     marginTop: 4,
   },
   previewEmptyCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
   },
-  previewEmptyText: { fontSize: 13, color: Colors.textMuted, lineHeight: 19 },
+  previewEmptyText: { fontSize: 13, color: Theme.textMut, lineHeight: 19 },
   previewExerciseList: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     overflow: 'hidden',
   },
   previewExerciseRow: {
@@ -1244,26 +1265,26 @@ const styles = StyleSheet.create({
     gap: 12,
     padding: 14,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   previewExerciseRowLast: { borderBottomWidth: 0 },
-  previewExerciseName: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  previewExerciseMeta: { fontSize: 12, color: Colors.textMuted, marginTop: 2 },
+  previewExerciseName: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  previewExerciseMeta: { fontSize: 12, color: Theme.textMut, marginTop: 2 },
 
   // Warmup
   warmupWrap: { padding: 24, gap: 14, paddingBottom: 48 },
   warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   warmupTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  warmupTitle: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
-  warmupSubtitle: { fontSize: 13, color: Colors.textMuted, lineHeight: 18, marginBottom: 6 },
+  warmupTitle: { fontSize: 22, fontWeight: '800', color: Theme.text },
+  warmupSubtitle: { fontSize: 13, color: Theme.textMut, lineHeight: 18, marginBottom: 6 },
   warmupRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 12,
   },
   checkbox: {
@@ -1271,27 +1292,18 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 7,
     borderWidth: 2,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  checkboxChecked: { backgroundColor: Colors.teal, borderColor: Colors.teal },
-  checkboxMark: { color: '#000', fontSize: 14, fontWeight: '800' },
-  warmupDrillName: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  warmupDrillDuration: { fontSize: 12, color: Colors.textMuted, marginTop: 2 },
-  warmupStartBtn: {
-    marginTop: 8,
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
-    height: 52,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  warmupStartBtnDisabled: { opacity: 0.45 },
-  warmupHint: { fontSize: 12, color: Colors.textMuted, textAlign: 'center', marginTop: -4 },
+  checkboxChecked: { backgroundColor: Theme.accent, borderColor: Theme.accent },
+  checkboxMark: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
+  warmupDrillName: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  warmupDrillDuration: { fontSize: 12, color: Theme.textMut, marginTop: 2 },
+  warmupHint: { fontSize: 12, color: Theme.textMut, textAlign: 'center', marginTop: -4 },
   skipWarmupText: {
     fontSize: 13,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
     fontWeight: '600',
   },
