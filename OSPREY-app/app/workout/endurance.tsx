@@ -600,7 +600,7 @@ export default function EnduranceWorkoutScreen() {
             <TextInput
               style={styles.distanceInput}
               placeholder="18:32 or 5 rounds + 12 reps"
-              placeholderTextColor={Colors.textMuted}
+              placeholderTextColor={Theme.textMut}
               value={wodScore}
               onChangeText={setWodScore}
               accessibilityLabel="WOD score"
@@ -614,7 +614,7 @@ export default function EnduranceWorkoutScreen() {
             <TextInput
               style={styles.distanceInput}
               placeholder="0"
-              placeholderTextColor={Colors.textMuted}
+              placeholderTextColor={Theme.textMut}
               value={floorsClimbed}
               onChangeText={setFloorsClimbed}
               keyboardType="number-pad"
@@ -624,7 +624,7 @@ export default function EnduranceWorkoutScreen() {
         ) : null}
 
         <TouchableOpacity
-          style={styles.endBtn}
+          style={[styles.endBtn, saving && styles.endBtnDisabled]}
           onPress={confirmEnd}
           disabled={saving}
           accessibilityRole="button"
@@ -632,7 +632,7 @@ export default function EnduranceWorkoutScreen() {
           accessibilityState={{ disabled: saving, busy: saving }}
         >
           {saving ? (
-            <ActivityIndicator color="#000" />
+            <ActivityIndicator color={Theme.ink} />
           ) : (
             <Text style={styles.endBtnText}>End & Save</Text>
           )}
@@ -643,7 +643,7 @@ export default function EnduranceWorkoutScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   content: { flex: 1, padding: 28, justifyContent: 'center', gap: 20 },
 
   // Pre-start activity picker (cross-training only)
@@ -677,25 +677,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: Theme.panel,
     borderWidth: 1,
     borderRadius: 24,
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
   sessionIcon: { fontSize: 20 },
-  sessionLabel: { fontSize: 11, fontWeight: '800', letterSpacing: 1.2 },
+  sessionLabel: {
+    fontSize: 11,
+    fontWeight: '800',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    letterSpacing: 1.2,
+  },
   timerBlock: { alignItems: 'center', gap: 6, marginVertical: 20 },
-  timerValue: { fontSize: 72, fontWeight: '800', color: Colors.textPrimary, letterSpacing: -2 },
-  timerSub: { fontSize: 12, color: Colors.textMuted, fontWeight: '600', letterSpacing: 0.5 },
-  splitValue: { fontSize: 20, fontWeight: '800', color: Colors.teal, marginTop: 8 },
-  splitCaption: { fontSize: 10, color: Colors.textMuted, fontStyle: 'italic' },
+  timerValue: { fontSize: 72, fontWeight: '800', color: Theme.text, letterSpacing: -2 },
+  timerSub: { fontSize: 12, color: Theme.textMut, fontWeight: '600', letterSpacing: 0.5 },
+  splitValue: { fontSize: 20, fontWeight: '800', color: Theme.accent, marginTop: 8 },
+  splitCaption: { fontSize: 10, color: Theme.textMut, fontStyle: 'italic' },
 
   // Interval runner
   intervalCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1.5,
-    borderRadius: 16,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderRadius: Radius.card,
     padding: 18,
     alignItems: 'center',
     gap: 6,
@@ -707,54 +712,64 @@ const styles = StyleSheet.create({
     width: '100%',
     marginBottom: 4,
   },
-  intervalProgress: { fontSize: 11, fontWeight: '700', color: Colors.textMuted, letterSpacing: 0.5 },
-  effortPill: { borderRadius: 8, paddingHorizontal: 8, paddingVertical: 3 },
+  intervalProgress: {
+    fontSize: 11,
+    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
+    letterSpacing: 0.5,
+  },
+  effortPill: { borderRadius: Radius.card, paddingHorizontal: 8, paddingVertical: 3 },
   effortPillText: { fontSize: 10, fontWeight: '800', letterSpacing: 0.5 },
-  intervalLabel: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
-  intervalRep: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
+  intervalLabel: { fontSize: 22, fontWeight: '800', color: Theme.text },
+  intervalRep: { fontSize: 12, color: Theme.textSoft, fontWeight: '600' },
   intervalCountdown: {
     fontSize: 40,
     fontWeight: '900',
-    color: Colors.textPrimary,
+    color: Theme.text,
     marginTop: 6,
     letterSpacing: -1,
   },
   intervalCompleteBtn: {
     marginTop: 8,
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 12,
     paddingHorizontal: 20,
     alignSelf: 'stretch',
     alignItems: 'center',
   },
-  intervalCompleteBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
+  intervalCompleteBtnText: { fontSize: 14, fontWeight: '800', color: Theme.ink },
+  // FUNCTIONAL: green = interval completed (HR-zone "easy" convention doing
+  // double duty per the plan's Design Decisions — intentional, not a bug).
   intervalDoneIcon: { fontSize: 32, color: Colors.green, fontWeight: '900' },
-  intervalDoneText: { fontSize: 15, fontWeight: '700', color: Colors.textPrimary },
+  intervalDoneText: { fontSize: 15, fontWeight: '700', color: Theme.text },
 
   ozzieBtn: {
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingVertical: 16,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 8,
   },
-  ozzieBtnText: { fontSize: 15, fontWeight: '700', color: Colors.teal },
+  ozzieBtnText: { fontSize: 15, fontWeight: '700', color: Theme.accent },
   cueBanner: {
-    backgroundColor: Colors.surfaceTeal,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     padding: 12,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
   },
-  cueBannerText: { flex: 1, fontSize: 13, fontWeight: '600', color: Colors.textPrimary, lineHeight: 18 },
+  cueBannerText: { flex: 1, fontSize: 13, fontWeight: '600', color: Theme.text, lineHeight: 18 },
   distanceCard: {
     backgroundColor: Theme.panel,
     borderWidth: BorderWidth.card,
@@ -806,10 +821,13 @@ const styles = StyleSheet.create({
     color: Theme.accent,
   },
   endBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 16,
     alignItems: 'center',
   },
-  endBtnText: { fontSize: 15, fontWeight: '800', color: '#000' },
+  endBtnDisabled: { opacity: 0.5 },
+  endBtnText: { fontSize: 15, fontWeight: '800', color: Theme.ink },
 });
