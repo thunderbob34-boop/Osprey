@@ -15,6 +15,8 @@ import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Card, Button } from '@/components/ui';
 import { PRIVACY_POLICY_URL, SUPPORT_EMAIL } from '@/constants/links';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import type { UnitSystem } from '@/services/units';
@@ -337,24 +339,24 @@ export default function SettingsTab() {
           {profile?.display_name ? `Signed in as ${profile.display_name}` : 'Account settings'}
         </Text>
 
-        <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.cardLabel}>OSPREY+</Text>
           {plusActive == null ? (
-            <ActivityIndicator color={Colors.teal} />
+            <ActivityIndicator color={Theme.accent} />
           ) : (
             <Text style={styles.cardValue}>
               {plusActive ? 'Active — all features unlocked' : 'Free tier'}
             </Text>
           )}
           {!plusActive ? (
-            <TouchableOpacity
-              style={styles.primaryBtn}
+            <Button
+              variant="primary"
               onPress={() => router.push('/paywall')}
-              accessibilityRole="button"
               accessibilityLabel="Upgrade to OSPREY+"
+              style={styles.btnSpacing}
             >
-              <Text style={styles.primaryBtnText}>Upgrade to OSPREY+</Text>
-            </TouchableOpacity>
+              Upgrade to OSPREY+
+            </Button>
           ) : null}
           <TouchableOpacity
             style={styles.linkBtn}
@@ -366,10 +368,10 @@ export default function SettingsTab() {
           >
             <Text style={styles.linkText}>Restore purchases</Text>
           </TouchableOpacity>
-        </View>
+        </Card>
 
         {isHealthKitSupported() ? (
-          <View style={styles.card}>
+          <Card style={styles.card}>
             <Text style={styles.cardLabel}>Apple Health</Text>
             <Text style={styles.cardValue}>
               {healthConnected ? 'Connected' : 'Not connected'}
@@ -378,7 +380,7 @@ export default function SettingsTab() {
               <Text style={styles.switchRowSub}>Last synced {formatLastSynced(healthLastSynced)}</Text>
             ) : null}
             <TouchableOpacity
-              style={styles.primaryBtn}
+              style={[styles.primaryBtn, healthSyncing && styles.primaryBtnDisabled]}
               onPress={handleConnectHealth}
               disabled={healthSyncing}
               accessibilityRole="button"
@@ -386,17 +388,17 @@ export default function SettingsTab() {
               accessibilityState={{ disabled: healthSyncing, busy: healthSyncing }}
             >
               {healthSyncing ? (
-                <ActivityIndicator color="#000" />
+                <ActivityIndicator color={Theme.ink} />
               ) : (
                 <Text style={styles.primaryBtnText}>
                   {healthConnected ? 'Sync Now' : 'Connect Apple Health'}
                 </Text>
               )}
             </TouchableOpacity>
-          </View>
+          </Card>
         ) : null}
 
-        <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.cardLabel}>NOTIFICATIONS</Text>
           <View style={styles.switchRow}>
             <View style={styles.switchRowLeft}>
@@ -410,13 +412,13 @@ export default function SettingsTab() {
               </Text>
             </View>
             {nudgeLoading ? (
-              <ActivityIndicator color={Colors.teal} />
+              <ActivityIndicator color={Theme.accent} />
             ) : (
               <Switch
                 value={nudgeEnabled}
                 onValueChange={handleToggleNudge}
-                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
-                thumbColor={nudgeEnabled ? Colors.teal : '#f4f3f4'}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Theme.accent }}
+                thumbColor={nudgeEnabled ? Theme.accent : '#f4f3f4'}
                 accessibilityRole="switch"
                 accessibilityLabel="Ozzie's daily nudge"
               />
@@ -429,13 +431,13 @@ export default function SettingsTab() {
               <Text style={styles.switchRowSub}>Timed nudges for each reminder you've set up</Text>
             </View>
             {suppRemindersLoading ? (
-              <ActivityIndicator color={Colors.teal} />
+              <ActivityIndicator color={Theme.accent} />
             ) : (
               <Switch
                 value={suppRemindersEnabled}
                 onValueChange={handleToggleSupplementReminders}
-                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
-                thumbColor={suppRemindersEnabled ? Colors.teal : '#f4f3f4'}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Theme.accent }}
+                thumbColor={suppRemindersEnabled ? Theme.accent : '#f4f3f4'}
                 accessibilityRole="switch"
                 accessibilityLabel="Supplement reminders"
               />
@@ -457,13 +459,13 @@ export default function SettingsTab() {
               <Text style={styles.switchRowSub}>A heads-up 7 days before each upcoming race</Text>
             </View>
             {raceWeekLoading ? (
-              <ActivityIndicator color={Colors.teal} />
+              <ActivityIndicator color={Theme.accent} />
             ) : (
               <Switch
                 value={raceWeekEnabled}
                 onValueChange={handleToggleRaceWeek}
-                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
-                thumbColor={raceWeekEnabled ? Colors.teal : '#f4f3f4'}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Theme.accent }}
+                thumbColor={raceWeekEnabled ? Theme.accent : '#f4f3f4'}
                 accessibilityRole="switch"
                 accessibilityLabel="Race-week reminders"
               />
@@ -478,21 +480,21 @@ export default function SettingsTab() {
               </Text>
             </View>
             {eveningBriefLoading ? (
-              <ActivityIndicator color={Colors.teal} />
+              <ActivityIndicator color={Theme.accent} />
             ) : (
               <Switch
                 value={eveningBriefEnabled}
                 onValueChange={handleToggleEveningBrief}
-                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
-                thumbColor={eveningBriefEnabled ? Colors.teal : '#f4f3f4'}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Theme.accent }}
+                thumbColor={eveningBriefEnabled ? Theme.accent : '#f4f3f4'}
                 accessibilityRole="switch"
                 accessibilityLabel="Evening look-ahead"
               />
             )}
           </View>
-        </View>
+        </Card>
 
-        <View style={styles.card}>
+        <Card style={styles.card}>
           <View style={styles.switchRow}>
             <View style={styles.switchRowLeft}>
               <Text style={styles.cardLabel}>Calendar Blocking</Text>
@@ -503,21 +505,21 @@ export default function SettingsTab() {
               </Text>
             </View>
             {calBlockLoading ? (
-              <ActivityIndicator color={Colors.teal} />
+              <ActivityIndicator color={Theme.accent} />
             ) : (
               <Switch
                 value={calBlockEnabled}
                 onValueChange={handleToggleCalendarBlocking}
-                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Colors.tealDark }}
-                thumbColor={calBlockEnabled ? Colors.teal : '#f4f3f4'}
+                trackColor={{ false: 'rgba(255,255,255,0.12)', true: Theme.accent }}
+                thumbColor={calBlockEnabled ? Theme.accent : '#f4f3f4'}
                 accessibilityRole="switch"
                 accessibilityLabel="Calendar blocking"
               />
             )}
           </View>
-        </View>
+        </Card>
 
-        <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.cardLabel}>Training Plan</Text>
           <TouchableOpacity
             style={styles.planRow}
@@ -548,9 +550,9 @@ export default function SettingsTab() {
             </View>
             <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>
-        </View>
+        </Card>
 
-        <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.cardLabel}>Units</Text>
           <View style={styles.unitToggleRow}>
             {(['imperial', 'metric'] as UnitSystem[]).map((option) => (
@@ -569,9 +571,9 @@ export default function SettingsTab() {
               </TouchableOpacity>
             ))}
           </View>
-        </View>
+        </Card>
 
-        <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.cardLabel}>About & Support</Text>
           <TouchableOpacity
             style={styles.planRow}
@@ -602,16 +604,16 @@ export default function SettingsTab() {
             </View>
             <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>
-        </View>
+        </Card>
 
-        <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.cardLabel}>Your Data</Text>
           <Text style={styles.planRowSub}>
             Export everything you've logged — workouts, lift sets, nutrition, bodyweight, and races —
             as CSV files emailed to your account address.
           </Text>
           <TouchableOpacity
-            style={styles.exportBtn}
+            style={[styles.exportBtn, exporting && styles.exportBtnDisabled]}
             onPress={handleExportData}
             disabled={exporting}
             accessibilityRole="button"
@@ -619,21 +621,21 @@ export default function SettingsTab() {
             accessibilityState={{ disabled: exporting, busy: exporting }}
           >
             {exporting ? (
-              <ActivityIndicator color={Colors.teal} />
+              <ActivityIndicator color={Theme.accent} />
             ) : (
               <Text style={styles.exportBtnText}>Export My Data</Text>
             )}
           </TouchableOpacity>
-        </View>
+        </Card>
 
-        <TouchableOpacity
-          style={styles.signOutBtn}
+        <Button
+          variant="secondary"
           onPress={handleSignOut}
-          accessibilityRole="button"
           accessibilityLabel="Sign out"
+          style={styles.signOutBtn}
         >
-          <Text style={styles.signOutText}>Sign Out</Text>
-        </TouchableOpacity>
+          Sign Out
+        </Button>
 
         {/* ── Danger zone ── */}
         <View style={styles.dangerCard}>
@@ -642,7 +644,7 @@ export default function SettingsTab() {
             Permanently delete your account and all training data.
           </Text>
           <TouchableOpacity
-            style={styles.dangerBtn}
+            style={[styles.dangerBtn, deleting && styles.dangerBtnDisabled]}
             onPress={handleDeleteAccount}
             disabled={deleting}
             accessibilityRole="button"
@@ -664,16 +666,12 @@ export default function SettingsTab() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   scroll: { flex: 1 },
   content: { padding: 24, paddingBottom: 48 },
-  title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 8 },
-  subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, marginBottom: 24 },
+  title: { fontSize: 28, fontWeight: '900', color: Theme.text, marginBottom: 8 },
+  subtitle: { fontSize: 14, color: Theme.textMut, lineHeight: 20, marginBottom: 24 },
   card: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
     padding: 16,
     marginBottom: 12,
     gap: 8,
@@ -681,34 +679,39 @@ const styles = StyleSheet.create({
   cardLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    color: Theme.textMut,
     letterSpacing: 1,
     textTransform: 'uppercase',
+    fontFamily: 'SpaceGrotesk_700Bold',
   },
-  cardValue: { fontSize: 15, fontWeight: '700', color: Colors.textPrimary },
+  cardValue: { fontSize: 15, fontWeight: '700', color: Theme.text },
   unitToggleRow: { flexDirection: 'row', gap: 8, marginTop: 4 },
   unitOption: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: 'rgba(255,255,255,0.03)',
-    borderRadius: 10,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    backgroundColor: 'transparent',
+    borderRadius: Radius.card,
     paddingVertical: 12,
     alignItems: 'center',
   },
-  unitOptionActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
-  unitOptionText: { fontSize: 13, fontWeight: '600', color: Colors.textSecondary },
-  unitOptionTextActive: { color: Colors.teal, fontWeight: '700' },
+  unitOptionActive: { backgroundColor: Theme.panel, borderColor: Theme.accent },
+  unitOptionText: { fontSize: 13, fontWeight: '600', color: Theme.textSoft },
+  unitOptionTextActive: { color: Theme.accent, fontWeight: '700' },
   primaryBtn: {
     marginTop: 4,
-    backgroundColor: Colors.teal,
-    borderRadius: 10,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 12,
     alignItems: 'center',
   },
-  primaryBtnText: { fontSize: 14, fontWeight: '800', color: '#000' },
+  primaryBtnDisabled: { opacity: 0.5 },
+  primaryBtnText: { fontSize: 14, fontWeight: '800', color: Theme.ink },
+  btnSpacing: { marginTop: 4 },
   linkBtn: { alignItems: 'center', paddingVertical: 6 },
-  linkText: { fontSize: 13, color: Colors.textMuted, fontWeight: '600' },
+  linkText: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
   switchRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -716,8 +719,8 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   switchRowLeft: { flex: 1, gap: 4 },
-  switchRowSub: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
-  rowDivider: { height: 1, backgroundColor: Colors.border, marginVertical: 10 },
+  switchRowSub: { fontSize: 12, color: Theme.textSoft, lineHeight: 17 },
+  rowDivider: { height: 1, backgroundColor: Theme.line, marginVertical: 10 },
   subLinkRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -725,7 +728,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingLeft: 4,
   },
-  subLinkText: { fontSize: 12, fontWeight: '600', color: Colors.teal },
+  subLinkText: { fontSize: 12, fontWeight: '600', color: Theme.accent },
   planRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -733,29 +736,23 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   planRowLeft: { flex: 1 },
-  planRowSub: { fontSize: 12, color: Colors.textSecondary, marginTop: 2 },
-  chevron: { fontSize: 22, color: Colors.textMuted, marginLeft: 8 },
+  planRowSub: { fontSize: 12, color: Theme.textSoft, marginTop: 2 },
+  chevron: { fontSize: 22, color: Theme.textMut, marginLeft: 8 },
   signOutBtn: {
     marginTop: 12,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    paddingVertical: 14,
-    alignItems: 'center',
   },
-  signOutText: { color: Colors.textPrimary, fontSize: 14, fontWeight: '700' },
   exportBtn: {
     marginTop: 10,
     alignSelf: 'flex-start',
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 16,
     paddingVertical: 10,
   },
-  exportBtnText: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
+  exportBtnDisabled: { opacity: 0.5 },
+  exportBtnText: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
   dangerCard: {
     marginTop: 24,
     backgroundColor: 'rgba(255,68,68,0.05)',
@@ -771,8 +768,9 @@ const styles = StyleSheet.create({
     color: Colors.red,
     letterSpacing: 1,
     textTransform: 'uppercase',
+    fontFamily: 'SpaceGrotesk_700Bold',
   },
-  dangerSub: { fontSize: 12, color: Colors.textSecondary, lineHeight: 17 },
+  dangerSub: { fontSize: 12, color: Theme.textSoft, lineHeight: 17 },
   dangerBtn: {
     marginTop: 4,
     borderWidth: 1,
@@ -781,11 +779,12 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     alignItems: 'center',
   },
+  dangerBtnDisabled: { opacity: 0.5 },
   dangerBtnText: { fontSize: 14, fontWeight: '800', color: Colors.red },
   versionText: {
     marginTop: 20,
     textAlign: 'center',
     fontSize: 12,
-    color: Colors.textMuted,
+    color: Theme.textMut,
   },
 });
