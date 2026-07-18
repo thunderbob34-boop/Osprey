@@ -302,6 +302,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   featuresCard: {
+    // Override Card's default padding so feature-row dividers run edge-to-edge
+    // (each featureRow carries its own padding:16).
+    padding: 0,
     overflow: 'hidden',
   },
   featureRow: {
