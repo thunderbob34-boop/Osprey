@@ -16,7 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
-import { Button } from '@/components/ui';
+import { Button, Card } from '@/components/ui';
 import {
   useWorkoutStore,
   getElapsedSeconds,
@@ -693,7 +693,7 @@ export default function LiftWorkoutScreen() {
             accessibilityRole="button"
             accessibilityLabel="End workout"
           >
-            <Ionicons name="close" size={22} color={Colors.textMuted} />
+            <Ionicons name="close" size={22} color={Theme.textMut} />
           </TouchableOpacity>
           <View>
             <Text style={styles.headerLabel}>
@@ -748,7 +748,7 @@ export default function LiftWorkoutScreen() {
           const previous = lastSets[exercise.exerciseId];
           const cue = prescriptionCues[exercise.exerciseId];
           return (
-            <View key={exercise.exerciseId} style={styles.exerciseCard}>
+            <Card key={exercise.exerciseId} style={styles.exerciseCard}>
               <View style={styles.exerciseHeader}>
                 <View style={styles.exerciseTitleBlock}>
                   <View style={styles.exerciseNameRow}>
@@ -778,11 +778,11 @@ export default function LiftWorkoutScreen() {
                     }}
                   >
                     {parsingVoice && recordingExercise == null ? (
-                      <ActivityIndicator color={Colors.teal} size="small" />
+                      <ActivityIndicator color={Theme.accent} size="small" />
                     ) : recordingExercise === exerciseIndex ? (
                       <Text style={styles.micBtnTextActive}>Stop</Text>
                     ) : (
-                      <Ionicons name="mic-outline" size={16} color={Colors.teal} />
+                      <Ionicons name="mic-outline" size={16} color={Theme.accent} />
                     )}
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -870,7 +870,7 @@ export default function LiftWorkoutScreen() {
               >
                 <Text style={styles.addSetText}>+ Add Set</Text>
               </TouchableOpacity>
-            </View>
+            </Card>
           );
         })}
 
@@ -886,7 +886,7 @@ export default function LiftWorkoutScreen() {
 
       <View style={styles.footer}>
         <TouchableOpacity
-          style={styles.finishBtn}
+          style={[styles.finishBtn, saving && styles.finishBtnDisabled]}
           onPress={handleFinish}
           disabled={saving}
           accessibilityRole="button"
@@ -894,7 +894,7 @@ export default function LiftWorkoutScreen() {
           accessibilityState={{ disabled: saving, busy: saving }}
         >
           {saving ? (
-            <ActivityIndicator color="#000" />
+            <ActivityIndicator color={Theme.ink} />
           ) : (
             <Text style={styles.finishBtnText}>Finish Workout →</Text>
           )}
@@ -926,7 +926,7 @@ export default function LiftWorkoutScreen() {
                     key={`${plate}-${i}`}
                     style={[
                       styles.plateChip,
-                      plate >= 45 && { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+                      plate >= 45 && styles.plateChipHighlight,
                     ]}
                   >
                     <Text style={styles.plateChipText}>{plate}</Text>
@@ -955,48 +955,48 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   closeBtn: {},
-  headerLabel: { fontSize: 11, fontWeight: '700', color: Colors.gold, letterSpacing: 1 },
-  headerTime: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary, marginTop: 2 },
+  headerLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
+    letterSpacing: 1,
+  },
+  headerTime: { fontSize: 20, fontWeight: '800', color: Theme.text, marginTop: 2 },
   headerStats: { flexDirection: 'row', gap: 16 },
   headerStat: { alignItems: 'center' },
-  headerStatValue: { fontSize: 16, fontWeight: '800', color: Colors.teal },
-  headerStatLabel: { fontSize: 10, color: Colors.textMuted, marginTop: 1 },
+  headerStatValue: { fontSize: 16, fontWeight: '800', color: Theme.accent },
+  headerStatLabel: { fontSize: 10, color: Theme.textMut, marginTop: 1 },
   restBanner: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.borderTeal,
+    borderBottomColor: Theme.line,
   },
   restRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  restText: { fontSize: 14, fontWeight: '700', color: Colors.teal },
+  restText: { fontSize: 14, fontWeight: '700', color: Theme.accent },
   restActions: { flexDirection: 'row', gap: 16 },
-  restActionText: { fontSize: 13, fontWeight: '700', color: Colors.teal },
-  restCaption: { fontSize: 11, color: Colors.textMuted, marginTop: 4, textAlign: 'center' },
+  restActionText: { fontSize: 13, fontWeight: '700', color: Theme.accent },
+  restCaption: { fontSize: 11, color: Theme.textMut, marginTop: 4, textAlign: 'center' },
   scroll: { flex: 1 },
   scrollContent: { padding: 16, gap: 12, paddingBottom: 24 },
-  exerciseCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 14,
-  },
+  exerciseCard: {},
   exerciseTitleBlock: { flex: 1, gap: 2 },
   exerciseNameRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  exerciseName: { fontSize: 16, fontWeight: '800', color: Colors.textPrimary, flexShrink: 1 },
+  exerciseName: { fontSize: 16, fontWeight: '800', color: Theme.text, flexShrink: 1 },
   prBadge: {
-    backgroundColor: Colors.gold,
+    backgroundColor: Theme.accent,
     borderRadius: 6,
     paddingHorizontal: 6,
     paddingVertical: 2,
   },
-  prBadgeText: { fontSize: 10, fontWeight: '800', color: '#000', letterSpacing: 0.5 },
-  exerciseCue: { fontSize: 12, fontWeight: '600', color: Colors.gold },
+  prBadgeText: { fontSize: 10, fontWeight: '800', color: Theme.ink, letterSpacing: 0.5 },
+  exerciseCue: { fontSize: 12, fontWeight: '600', color: Theme.accent },
   exerciseHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -1006,9 +1006,9 @@ const styles = StyleSheet.create({
   },
   exerciseActions: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   micBtn: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
     borderRadius: 16,
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -1016,11 +1016,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   micBtnActive: { backgroundColor: Colors.red, borderColor: Colors.red },
-  micBtnText: { fontSize: 13, fontWeight: '700', color: Colors.teal },
+  micBtnText: { fontSize: 13, fontWeight: '700', color: Theme.accent },
   micBtnTextActive: { fontSize: 13, fontWeight: '700', color: '#fff' },
   removeBtn: { padding: 4 },
   removeBtnText: { fontSize: 14, color: Theme.textMut, fontWeight: '700' },
-  recordingHint: { fontSize: 11, color: Colors.textMuted, marginBottom: 8, fontStyle: 'italic' },
+  recordingHint: { fontSize: 11, color: Theme.textMut, marginBottom: 8, fontStyle: 'italic' },
 
   // Set table
   setTableHeader: {
@@ -1033,7 +1033,8 @@ const styles = StyleSheet.create({
   setColLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 0.5,
     textAlign: 'center',
   },
@@ -1049,38 +1050,40 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   setRowDone: { opacity: 0.6 },
-  setNumber: { fontSize: 13, color: Colors.teal, fontWeight: '800', textAlign: 'center' },
+  setNumber: { fontSize: 13, color: Theme.accent, fontWeight: '800', textAlign: 'center' },
   setNumberBtn: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 6,
     borderRadius: 6,
-    backgroundColor: 'rgba(0,200,200,0.08)',
+    // Current-set cue: an accent-tinted chip so the set-number badge stays
+    // visibly distinct from Theme.panel rows around it (was rgba(0,200,200,0.08)).
+    backgroundColor: 'rgba(200,121,58,0.10)',
   },
-  setPrevious: { fontSize: 12, color: Colors.textMuted, textAlign: 'center', fontWeight: '600' },
+  setPrevious: { fontSize: 12, color: Theme.textMut, textAlign: 'center', fontWeight: '600' },
   setInput: {
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 8,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 8,
     paddingVertical: 8,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 14,
     fontWeight: '700',
     textAlign: 'center',
   },
-  setInputDone: { borderColor: 'transparent', color: Colors.textMuted },
+  setInputDone: { borderColor: 'transparent', color: Theme.textMut },
   logBtn: {
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    borderRadius: 8,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     paddingVertical: 8,
     alignItems: 'center',
   },
   logBtnDone: { backgroundColor: Colors.green },
-  logBtnText: { fontSize: 13, fontWeight: '800', color: '#fff' },
+  logBtnText: { fontSize: 13, fontWeight: '800', color: Theme.text },
   addSetBtn: { marginTop: 4, alignSelf: 'flex-start' },
-  addSetText: { fontSize: 12, color: Colors.teal, fontWeight: '700' },
+  addSetText: { fontSize: 12, color: Theme.accent, fontWeight: '700' },
   addExerciseBtn: {
     borderWidth: 1.5,
     borderColor: Theme.accent,
@@ -1092,13 +1095,16 @@ const styles = StyleSheet.create({
   addExerciseText: { fontSize: 14, fontWeight: '800', color: Theme.accent },
   footer: { padding: 16, borderTopWidth: 1, borderTopColor: Theme.line },
   finishBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     height: 52,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  finishBtnText: { fontSize: 15, fontWeight: '800', color: '#000' },
+  finishBtnDisabled: { opacity: 0.5 },
+  finishBtnText: { fontSize: 15, fontWeight: '800', color: Theme.ink },
 
   // Plate calculator modal
   plateBackdrop: {
@@ -1110,30 +1116,33 @@ const styles = StyleSheet.create({
   },
   plateCard: {
     width: '100%',
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 16,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 20,
     alignItems: 'center',
     gap: 12,
   },
-  plateTitle: { fontSize: 15, fontWeight: '800', color: Colors.textPrimary, textAlign: 'center' },
+  plateTitle: { fontSize: 15, fontWeight: '800', color: Theme.text, textAlign: 'center' },
   plateRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'center' },
   plateChip: {
     minWidth: 40,
     height: 40,
     borderRadius: 20,
     borderWidth: 2,
-    borderColor: Colors.border,
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    borderColor: Theme.line,
+    backgroundColor: Theme.panel,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 6,
   },
-  plateChipText: { fontSize: 13, fontWeight: '800', color: Colors.textPrimary },
-  plateBreakdown: { fontSize: 13, color: Colors.textSecondary, textAlign: 'center', lineHeight: 19 },
-  plateHint: { fontSize: 11, color: Colors.textMuted },
+  // Highlights 45+ plates distinctly from the base chip — an accent tint
+  // rather than Theme.panel, so the highlight isn't erased by the migration.
+  plateChipHighlight: { backgroundColor: 'rgba(200,121,58,0.15)', borderColor: Theme.accent },
+  plateChipText: { fontSize: 13, fontWeight: '800', color: Theme.text },
+  plateBreakdown: { fontSize: 13, color: Theme.textSoft, textAlign: 'center', lineHeight: 19 },
+  plateHint: { fontSize: 11, color: Theme.textMut },
 
   // Picker modal
   pickerContainer: { flex: 1, backgroundColor: Theme.ink },
