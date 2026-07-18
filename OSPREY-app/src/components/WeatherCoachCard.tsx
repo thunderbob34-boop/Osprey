@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
 import type { WeatherCoachResult } from '@/services/weather-coach';
 
 interface WeatherCoachCardProps {
@@ -25,9 +26,9 @@ const SEVERITY_STYLE = {
     icon: 'water' as const,
   },
   info: {
-    bg: Colors.surfaceTeal,
-    border: Colors.borderTeal,
-    accent: Colors.teal,
+    bg: Theme.panel,
+    border: Theme.line,
+    accent: Theme.accent,
     icon: 'partly-sunny-outline' as const,
   },
 };
@@ -88,7 +89,7 @@ export default function WeatherCoachCard({
 const styles = StyleSheet.create({
   card: {
     borderWidth: 1,
-    borderRadius: 14,
+    borderRadius: Radius.card,
     padding: 14,
     marginBottom: 14,
     gap: 6,
@@ -106,11 +107,11 @@ const styles = StyleSheet.create({
   headline: {
     fontSize: 15,
     fontWeight: '800',
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   detail: {
     fontSize: 12,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 18,
   },
   routeChip: {
@@ -119,17 +120,17 @@ const styles = StyleSheet.create({
     gap: 6,
     marginTop: 2,
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: Radius.card,
     paddingHorizontal: 10,
     paddingVertical: 6,
     alignSelf: 'flex-start',
   },
-  routeChipText: { fontSize: 12, color: Colors.textSecondary },
-  routeChipName: { fontWeight: '700', color: Colors.textPrimary },
+  routeChipText: { fontSize: 12, color: Theme.textSoft },
+  routeChipName: { fontWeight: '700', color: Theme.text },
   actionBtn: {
     marginTop: 4,
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: Radius.card,
     paddingVertical: 10,
     alignItems: 'center',
   },

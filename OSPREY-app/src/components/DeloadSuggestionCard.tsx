@@ -1,6 +1,7 @@
-import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { format } from 'date-fns';
-import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Card, Button } from '@/components/ui';
 import type { WeekSession } from '@/services/plan';
 
 interface Props {
@@ -36,59 +37,58 @@ export default function DeloadSuggestionCard({ session, daysToHighRisk, isAccept
   }
 
   return (
-    <View style={styles.card}>
+    <Card emphasis style={styles.card}>
       <Text style={styles.title}>⚠️ Ozzie noticed your load climbing</Text>
       <Text style={styles.subtitle}>
         Projected to hit the danger zone {urgency}. Consider de-loading {dayLabel} {session.description || session.session_type}.
       </Text>
       <View style={styles.actions}>
-        <TouchableOpacity
-          style={styles.dismissBtn}
+        <Button
+          variant="secondary"
           onPress={onDismiss}
           disabled={isAccepting}
-          accessibilityRole="button"
           accessibilityLabel="Not now"
-          accessibilityState={{ disabled: isAccepting }}
+          style={styles.flexBtn}
         >
-          <Text style={styles.dismissText}>Not now</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.acceptBtn}
-          onPress={handleAccept}
-          disabled={isAccepting}
-          accessibilityRole="button"
-          accessibilityLabel="De-load it"
-          accessibilityState={{ disabled: isAccepting, busy: isAccepting }}
-        >
-          {isAccepting ? (
+          Not now
+        </Button>
+        {isAccepting ? (
+          <View
+            style={styles.acceptBtnLoading}
+            accessibilityRole="button"
+            accessibilityLabel="De-load it"
+            accessibilityState={{ disabled: true, busy: true }}
+          >
             <ActivityIndicator color="#000" size="small" />
-          ) : (
-            <Text style={styles.acceptText}>De-load it →</Text>
-          )}
-        </TouchableOpacity>
+          </View>
+        ) : (
+          <Button
+            variant="primary"
+            onPress={handleAccept}
+            accessibilityLabel="De-load it"
+            style={styles.flexBtn}
+          >
+            De-load it →
+          </Button>
+        )}
       </View>
-    </View>
+    </Card>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.amber,
-    borderRadius: 14,
-    padding: 16,
     marginBottom: 12,
     gap: 8,
-  },
+  } as ViewStyle,
   title: {
     fontSize: 15,
     fontWeight: '700',
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   subtitle: {
     fontSize: 13,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 18,
   },
   actions: {
@@ -96,29 +96,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
   },
-  dismissBtn: {
+  flexBtn: {
     flex: 1,
-    borderRadius: 10,
+  } as ViewStyle,
+  // Mirrors <Button variant="primary"> styling — used only while isAccepting,
+  // since Button's children type is `string` and can't host an ActivityIndicator.
+  acceptBtnLoading: {
+    flex: 1,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 12,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: Colors.border,
-  },
-  dismissText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: Colors.textSecondary,
-  },
-  acceptBtn: {
-    flex: 1,
-    backgroundColor: Colors.amber,
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  acceptText: {
-    fontSize: 14,
-    fontWeight: '800',
-    color: '#000',
+    opacity: 0.5,
   },
 });
