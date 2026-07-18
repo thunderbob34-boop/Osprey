@@ -304,8 +304,12 @@ const styles = StyleSheet.create({
   sheetBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' },
   sheet: {
     backgroundColor: Theme.panel,
-    borderTopLeftRadius: Radius.card,
-    borderTopRightRadius: Radius.card,
+    // Sheet corners stay at 20 — a bottom sheet's large top radius is a sheet
+    // affordance, not card chrome. Matches the already-migrated Home adjust
+    // sheet (src/screens/DailySummary.tsx:889), which kept 20 through its own
+    // migration.
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     padding: 20,
     paddingBottom: 40,
     gap: 12,
