@@ -460,7 +460,7 @@ const styles = StyleSheet.create({
   },
   // "Run" tint — the accent-recoloured counterpart of overviewRowStation
   // below (Task 5's run-vs-station resolution: run legs -> accent).
-  overviewRowRun: { backgroundColor: 'rgba(200,121,58,0.06)', borderColor: 'rgba(200,121,58,0.2)' },
+  overviewRowRun: { backgroundColor: Theme.accent + '0F', borderColor: Theme.accent + '33' },
   // FUNCTIONAL — station-leg marker, not a frosted-brand surface. Do not
   // flatten to Theme.panel; it carries the run/station alternating rhythm.
   overviewRowStation: { backgroundColor: 'rgba(255,68,68,0.06)', borderColor: 'rgba(255,68,68,0.2)' },
@@ -537,14 +537,15 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
   },
-  // Fill is the dynamic accentColor (accent / Colors.red / Colors.green) —
-  // white reads acceptably against all three, so this mark is left as-is
-  // rather than forced to Theme.ink (that mapping targets fixed accent fills).
+  // Fill is the dynamic accentColor, but this button only renders in the
+  // !sessionComplete branch, so the fill is only ever Theme.accent or
+  // Colors.red (green is unreachable here) — same dual-fill situation as
+  // overviewCheckMark above, resolved the same way: Theme.ink.
   completeBtnText: {
     fontSize: 15,
     lineHeight: 20,
     fontWeight: '800',
-    color: '#fff',
+    color: Theme.ink,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
