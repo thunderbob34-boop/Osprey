@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform, Modal } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius } from '@/constants/theme';
 
 interface DateFieldProps {
   /** ISO date string 'YYYY-MM-DD', or '' when unset. */
@@ -142,8 +142,11 @@ export default function DateField({
 
 const styles = StyleSheet.create({
   field: {
-    backgroundColor: Theme.panel,
-    borderWidth: BorderWidth.card,
+    // Matches the sibling TextInputs it sits beside in challenges.tsx and
+    // races.tsx forms (ink fill, 1px line): Theme.panel here would both seam
+    // against them and sit flush on the Theme.panel card behind it.
+    backgroundColor: Theme.ink,
+    borderWidth: 1,
     borderColor: Theme.line,
     borderRadius: Radius.card,
     height: 48,
@@ -161,7 +164,8 @@ const styles = StyleSheet.create({
   },
   backdrop: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    // Scrim, not a surface — re-derived from Theme.ink at the original alpha.
+    backgroundColor: 'rgba(9,9,11,0.5)',
   },
   sheet: {
     backgroundColor: Theme.panel,

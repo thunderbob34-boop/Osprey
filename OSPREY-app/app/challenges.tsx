@@ -82,7 +82,7 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
           <TouchableOpacity
             onPress={() => refetch()}
             disabled={isFetching}
-            style={[styles.refreshBtn, isFetching && styles.refreshBtnDisabled]}
+            style={styles.refreshBtn}
             accessibilityRole="button"
             accessibilityLabel="Refresh leaderboard"
             accessibilityState={{ disabled: isFetching, busy: isFetching }}
@@ -648,7 +648,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  refreshBtnDisabled: { opacity: 0.5 },
   refreshBtnText: { color: Theme.accent, fontSize: 16, fontWeight: '700' },
   lbClose: { color: Theme.textMut, fontSize: 16, fontWeight: '700' },
   lbEmpty: { color: Theme.textMut, fontSize: 13, fontStyle: 'italic', marginVertical: 6 },

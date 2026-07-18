@@ -301,7 +301,9 @@ const styles = StyleSheet.create({
   legendText: { fontSize: 11, color: Theme.textMut, textAlign: 'center' },
 
   // Day detail sheet
-  sheetBackdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' },
+  // Scrim, not a surface — re-derived from Theme.ink at the original alpha
+  // rather than mapped to a surface token. Matches InputModal.tsx.
+  sheetBackdrop: { flex: 1, backgroundColor: 'rgba(9,9,11,0.5)' },
   sheet: {
     backgroundColor: Theme.panel,
     // Sheet corners stay at 20 — a bottom sheet's large top radius is a sheet

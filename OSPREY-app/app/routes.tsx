@@ -319,7 +319,10 @@ const styles = StyleSheet.create({
     borderColor: Theme.line,
     backgroundColor: Theme.ink,
   },
-  chipActive: { backgroundColor: Theme.panel, borderColor: Theme.accent },
+  // Border-only, matching challenges.tsx. A Theme.panel fill here would make
+  // the ACTIVE chip blend into the Theme.panel formCard behind it while the
+  // inactive (ink) chips stand off it — inverting the emphasis.
+  chipActive: { borderColor: Theme.accent },
   chipText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
   chipTextActive: { color: Theme.accent },
   customTagRow: { flexDirection: 'row', gap: 8, marginTop: 4, alignItems: 'center' },
