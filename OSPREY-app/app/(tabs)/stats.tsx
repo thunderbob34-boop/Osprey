@@ -803,9 +803,11 @@ const styles = StyleSheet.create({
   muscleChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   muscleChip: {
     // Nested inside liftCard (Theme.panel) — a solid Theme.panel fill here
-    // would match its parent and read as flat, so this stays a translucent
-    // accent tint instead (same treatment as routes.tsx's chipActive fix).
-    backgroundColor: Theme.accent + '1F',
+    // would match its parent and read as flat, so this recedes to Theme.ink.
+    // Matches routes.tsx's routeTagChip (ink fill + accent text), which is the
+    // same thing: a passive tag inside a card. The accent-tint treatment is
+    // reserved for ACTIVE/selected chips (routes.tsx chipActive), not labels.
+    backgroundColor: Theme.ink,
     borderRadius: Radius.card,
     paddingHorizontal: 10,
     paddingVertical: 4,

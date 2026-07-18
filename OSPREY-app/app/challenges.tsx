@@ -88,7 +88,7 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
             accessibilityState={{ disabled: isFetching, busy: isFetching }}
           >
             {isFetching ? (
-              <ActivityIndicator color={Theme.ink} size="small" />
+              <ActivityIndicator color={Theme.accent} size="small" />
             ) : (
               <Text style={styles.refreshBtnText}>↺</Text>
             )}
@@ -639,18 +639,17 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   lbHeaderRight: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  // Deliberately NOT the filled-accent CTA recipe: this is a subordinate icon
+  // glyph sitting beside the close control in a header row, not a primary
+  // action. A filled accent square here would outweigh the panel it sits in.
   refreshBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
     paddingHorizontal: 8,
     paddingVertical: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
   refreshBtnDisabled: { opacity: 0.5 },
-  refreshBtnText: { color: Theme.ink, fontSize: 16, fontWeight: '700' },
+  refreshBtnText: { color: Theme.accent, fontSize: 16, fontWeight: '700' },
   lbClose: { color: Theme.textMut, fontSize: 16, fontWeight: '700' },
   lbEmpty: { color: Theme.textMut, fontSize: 13, fontStyle: 'italic', marginVertical: 6 },
   lbRow: {
