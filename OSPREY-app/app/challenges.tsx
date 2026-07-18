@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import DateField from '@/components/DateField';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
@@ -81,13 +82,13 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
           <TouchableOpacity
             onPress={() => refetch()}
             disabled={isFetching}
-            style={styles.refreshBtn}
+            style={[styles.refreshBtn, isFetching && styles.refreshBtnDisabled]}
             accessibilityRole="button"
             accessibilityLabel="Refresh leaderboard"
             accessibilityState={{ disabled: isFetching, busy: isFetching }}
           >
             {isFetching ? (
-              <ActivityIndicator color={Colors.teal} size="small" />
+              <ActivityIndicator color={Theme.ink} size="small" />
             ) : (
               <Text style={styles.refreshBtnText}>↺</Text>
             )}
@@ -99,7 +100,7 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
       </View>
 
       {isLoading ? (
-        <ActivityIndicator color={Colors.teal} style={{ marginVertical: 12 }} />
+        <ActivityIndicator color={Theme.accent} style={{ marginVertical: 12 }} />
       ) : !data || data.length === 0 ? (
         <Text style={styles.lbEmpty}>No workouts logged yet. Go get it!</Text>
       ) : (
@@ -257,7 +258,7 @@ export default function ChallengesScreen() {
               <TextInput
                 style={[styles.input, fieldErrors.name ? styles.inputError : null]}
                 placeholder="Challenge name (e.g. July Mileage Madness)"
-                placeholderTextColor={Colors.textMuted}
+                placeholderTextColor={Theme.textMut}
                 value={formName}
                 onChangeText={(v) => {
                   setFormName(v);
@@ -333,7 +334,7 @@ export default function ChallengesScreen() {
               ) : null}
 
               <TouchableOpacity
-                style={styles.saveBtn}
+                style={[styles.saveBtn, create.isPending && styles.saveBtnDisabled]}
                 onPress={handleCreate}
                 disabled={create.isPending}
                 accessibilityRole="button"
@@ -341,7 +342,7 @@ export default function ChallengesScreen() {
                 accessibilityState={{ disabled: create.isPending, busy: create.isPending }}
               >
                 {create.isPending ? (
-                  <ActivityIndicator color="#000" />
+                  <ActivityIndicator color={Theme.ink} />
                 ) : (
                   <Text style={styles.saveBtnText}>Create Challenge</Text>
                 )}
@@ -351,7 +352,7 @@ export default function ChallengesScreen() {
 
           {/* ── Challenge lists ── */}
           {isLoading ? (
-            <ActivityIndicator color={Colors.teal} style={{ marginTop: 32 }} />
+            <ActivityIndicator color={Theme.accent} style={{ marginTop: 32 }} />
           ) : error ? (
             <Text style={styles.errorText}>Couldn&apos;t load challenges.</Text>
           ) : challenges?.length === 0 && !showForm ? (
@@ -502,15 +503,16 @@ function ChallengeCard({ challenge: c, currentUserId, isLbOpen, onToggleLb, onLe
 // ── Styles ────────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
-  add: { color: Colors.teal, fontSize: 24, fontWeight: '700' },
+  container: { flex: 1, backgroundColor: Theme.ink },
+  add: { color: Theme.accent, fontSize: 24, fontWeight: '700' },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
-  empty: { color: Colors.textMuted, fontSize: 14, lineHeight: 20, marginTop: 8 },
+  empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginTop: 8 },
   errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
   sectionLabel: {
-    color: Colors.textMuted,
+    color: Theme.accent,
     fontSize: 10,
     fontWeight: '800',
+    fontFamily: 'SpaceGrotesk_700Bold',
     letterSpacing: 1,
     marginTop: 14,
     marginBottom: 2,
@@ -518,19 +520,20 @@ const styles = StyleSheet.create({
 
   // ── Form ──
   formCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
     gap: 8,
     marginBottom: 6,
   },
-  formTitle: { color: Colors.textPrimary, fontSize: 15, fontWeight: '800', marginBottom: 2 },
+  formTitle: { color: Theme.text, fontSize: 15, fontWeight: '800', marginBottom: 2 },
   fieldLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 0.8,
     marginTop: 6,
   },
@@ -538,61 +541,65 @@ const styles = StyleSheet.create({
     borderColor: Colors.red,
   },
   input: {
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 15,
   },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {
     paddingHorizontal: 14,
     paddingVertical: 9,
-    borderRadius: 9,
+    borderRadius: Radius.card,
     borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bg,
+    borderColor: Theme.line,
+    backgroundColor: Theme.ink,
   },
-  chipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
-  chipText: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
-  chipTextActive: { color: Colors.teal },
+  chipActive: { borderColor: Theme.accent },
+  chipText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
+  chipTextActive: { color: Theme.accent },
   friendInviteRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   inviteChip: {
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.bg,
+    borderColor: Theme.line,
+    backgroundColor: Theme.ink,
   },
-  inviteChipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
-  inviteChipText: { color: Colors.textMuted, fontSize: 13, fontWeight: '600' },
-  inviteChipTextActive: { color: Colors.teal },
+  inviteChipActive: { borderColor: Theme.accent },
+  inviteChipText: { color: Theme.textMut, fontSize: 13, fontWeight: '600' },
+  inviteChipTextActive: { color: Theme.accent },
   saveBtn: {
     marginTop: 10,
-    backgroundColor: Colors.teal,
-    borderRadius: 10,
-    paddingVertical: 13,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
+    paddingVertical: 14,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  saveBtnText: { color: '#000', fontSize: 14, fontWeight: '800' },
+  saveBtnDisabled: { opacity: 0.5 },
+  saveBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
 
   // ── Challenge card ──
   challengeCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 14,
     gap: 8,
   },
   challengeCardTop: { flexDirection: 'row', alignItems: 'flex-start' },
-  challengeName: { color: Colors.textPrimary, fontSize: 15, fontWeight: '700' },
-  challengeMeta: { color: Colors.textMuted, fontSize: 12, marginTop: 3, lineHeight: 17 },
-  challengeSubMeta: { color: Colors.textMuted, fontSize: 11, marginTop: 2 },
+  challengeName: { color: Theme.text, fontSize: 15, fontWeight: '700' },
+  challengeMeta: { color: Theme.textMut, fontSize: 12, marginTop: 3, lineHeight: 17 },
+  challengeSubMeta: { color: Theme.textMut, fontSize: 11, marginTop: 2 },
   activePip: {
     width: 8,
     height: 8,
@@ -602,18 +609,18 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   actionRow: { flexDirection: 'row', gap: 18 },
-  actionLink: { color: Colors.teal, fontSize: 13, fontWeight: '700' },
-  actionLinkActive: { color: Colors.gold },
-  actionDelete: { color: Colors.textMuted, fontSize: 13, fontWeight: '700' },
+  actionLink: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
+  actionLinkActive: { color: Theme.accentBright },
+  actionDelete: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
 
   // ── Leaderboard panel ──
   lbPanel: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
     borderTopWidth: 0,
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
+    borderBottomLeftRadius: Radius.card,
+    borderBottomRightRadius: Radius.card,
     padding: 14,
     gap: 6,
     marginTop: -2,
@@ -624,28 +631,44 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 6,
   },
-  lbTitle: { color: Colors.teal, fontSize: 12, fontWeight: '800', letterSpacing: 0.5 },
+  lbTitle: {
+    color: Theme.accent,
+    fontSize: 12,
+    fontWeight: '800',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    letterSpacing: 0.5,
+  },
   lbHeaderRight: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  refreshBtn: { padding: 4 },
-  refreshBtnText: { color: Colors.teal, fontSize: 16, fontWeight: '700' },
-  lbClose: { color: Colors.textMuted, fontSize: 16, fontWeight: '700' },
-  lbEmpty: { color: Colors.textMuted, fontSize: 13, fontStyle: 'italic', marginVertical: 6 },
+  refreshBtn: {
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  refreshBtnDisabled: { opacity: 0.5 },
+  refreshBtnText: { color: Theme.ink, fontSize: 16, fontWeight: '700' },
+  lbClose: { color: Theme.textMut, fontSize: 16, fontWeight: '700' },
+  lbEmpty: { color: Theme.textMut, fontSize: 13, fontStyle: 'italic', marginVertical: 6 },
   lbRow: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 8,
     paddingHorizontal: 10,
-    borderRadius: 8,
+    borderRadius: Radius.card,
     gap: 10,
   },
   lbRowMe: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.accent,
   },
   lbMedal: { fontSize: 16, width: 30, textAlign: 'center' },
-  lbName: { flex: 1, color: Colors.textSecondary, fontSize: 14, fontWeight: '600' },
-  lbNameMe: { color: Colors.textPrimary, fontWeight: '800' },
-  lbValue: { color: Colors.textMuted, fontSize: 14, fontWeight: '700' },
-  lbValueMe: { color: Colors.teal },
+  lbName: { flex: 1, color: Theme.textSoft, fontSize: 14, fontWeight: '600' },
+  lbNameMe: { color: Theme.text, fontWeight: '800' },
+  lbValue: { color: Theme.textMut, fontSize: 14, fontWeight: '700' },
+  lbValueMe: { color: Theme.accent },
 });
