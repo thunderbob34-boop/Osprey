@@ -18,6 +18,8 @@ import NutritionCard from '@/components/NutritionCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, kmToMiles } from '@/services/units';
+import { Card, Badge } from '@/components/ui';
+import { Theme } from '@/constants/theme';
 
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
 
@@ -196,50 +198,54 @@ export default function DailySummaryScreen({
 
         {/* ── Recovery Card ── */}
         {recovery ? (
-          <View style={styles.recoveryCard}>
-            <View style={styles.recoveryLeft}>
-              <Text style={styles.recoveryTitle}>Body Battery</Text>
-              <Text
-                style={[
-                  styles.recoveryLabel,
-                  {
-                    color:
-                      recovery.recommendation === 'train'
-                        ? Colors.green
-                        : recovery.recommendation === 'easy'
-                          ? Colors.amber
-                          : Colors.recoveryRed,
-                  },
-                ]}
-              >
-                {recovery.label}
-              </Text>
-              <Text style={styles.recoverySubtext}>HRV · Sleep · Load</Text>
+          <Card style={{ marginBottom: 14 }}>
+            <View style={styles.recoveryRow}>
+              <View style={styles.recoveryLeft}>
+                <Text style={styles.recoveryTitle}>Body Battery</Text>
+                <Text
+                  style={[
+                    styles.recoveryLabel,
+                    {
+                      color:
+                        recovery.recommendation === 'train'
+                          ? Colors.green
+                          : recovery.recommendation === 'easy'
+                            ? Colors.amber
+                            : Colors.recoveryRed,
+                    },
+                  ]}
+                >
+                  {recovery.label}
+                </Text>
+                <Text style={styles.recoverySubtext}>HRV · Sleep · Load</Text>
+              </View>
+              <BodyBatteryTank
+                score={recovery.score}
+                recommendation={recovery.recommendation}
+              />
             </View>
-            <BodyBatteryTank
-              score={recovery.score}
-              recommendation={recovery.recommendation}
-            />
-          </View>
+          </Card>
         ) : (
-          <TouchableOpacity
-            style={styles.recoveryCard}
-            activeOpacity={onConnectHealthPress ? 0.7 : 1}
-            onPress={onConnectHealthPress}
-            disabled={!onConnectHealthPress}
-            accessibilityRole={onConnectHealthPress ? 'button' : undefined}
-            accessibilityLabel={onConnectHealthPress ? 'Connect Apple Health in Settings' : undefined}
-          >
-            <View style={styles.recoveryLeft}>
-              <Text style={styles.recoveryTitle}>Body Battery</Text>
-              <Text style={styles.recoveryLabel}>No score yet</Text>
-              <Text style={styles.recoverySubtext}>
-                {onConnectHealthPress
-                  ? 'Tap to connect Apple Health, or log a workout to unlock recovery scoring.'
-                  : 'Connect Apple Health or log a workout to unlock recovery scoring.'}
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <Card style={{ marginBottom: 14 }}>
+            <TouchableOpacity
+              style={styles.recoveryRow}
+              activeOpacity={onConnectHealthPress ? 0.7 : 1}
+              onPress={onConnectHealthPress}
+              disabled={!onConnectHealthPress}
+              accessibilityRole={onConnectHealthPress ? 'button' : undefined}
+              accessibilityLabel={onConnectHealthPress ? 'Connect Apple Health in Settings' : undefined}
+            >
+              <View style={styles.recoveryLeft}>
+                <Text style={styles.recoveryTitle}>Body Battery</Text>
+                <Text style={styles.recoveryLabel}>No score yet</Text>
+                <Text style={styles.recoverySubtext}>
+                  {onConnectHealthPress
+                    ? 'Tap to connect Apple Health, or log a workout to unlock recovery scoring.'
+                    : 'Connect Apple Health or log a workout to unlock recovery scoring.'}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </Card>
         )}
 
         {/* ── Training Readiness (OSPREY+) ── */}
@@ -287,28 +293,30 @@ export default function DailySummaryScreen({
           </View>
 
           {/* Ozzie note — tap to see the reasoning */}
-          <TouchableOpacity
-            style={styles.ozzieNote}
-            activeOpacity={session.whyReasoning ? 0.7 : 1}
-            onPress={() => session.whyReasoning && setWhyExpanded((v) => !v)}
-            accessibilityRole={session.whyReasoning ? 'button' : undefined}
-            accessibilityLabel={session.whyReasoning ? (whyExpanded ? 'Hide reasoning' : 'Why this session') : undefined}
-          >
-            <OzzieAvatar size={24} />
-            <View style={styles.ozzieNoteBody}>
-              <Text style={styles.ozzieNoteText}>{session.ozzieNote}</Text>
-              {session.whyReasoning ? (
-                <Text style={styles.whyToggleText}>
-                  {whyExpanded ? 'Hide reasoning ▴' : 'Why this session? ▾'}
-                </Text>
-              ) : null}
-            </View>
-          </TouchableOpacity>
-          {whyExpanded && session.whyReasoning ? (
-            <View style={styles.whyPanel}>
-              <Text style={styles.whyPanelText}>{session.whyReasoning}</Text>
-            </View>
-          ) : null}
+          <Card emphasis style={{ marginBottom: 14 }}>
+            <TouchableOpacity
+              style={styles.ozzieNote}
+              activeOpacity={session.whyReasoning ? 0.7 : 1}
+              onPress={() => session.whyReasoning && setWhyExpanded((v) => !v)}
+              accessibilityRole={session.whyReasoning ? 'button' : undefined}
+              accessibilityLabel={session.whyReasoning ? (whyExpanded ? 'Hide reasoning' : 'Why this session') : undefined}
+            >
+              <OzzieAvatar size={24} />
+              <View style={styles.ozzieNoteBody}>
+                <Text style={styles.ozzieNoteText}>{session.ozzieNote}</Text>
+                {session.whyReasoning ? (
+                  <Text style={styles.whyToggleText}>
+                    {whyExpanded ? 'Hide reasoning ▴' : 'Why this session? ▾'}
+                  </Text>
+                ) : null}
+              </View>
+            </TouchableOpacity>
+            {whyExpanded && session.whyReasoning ? (
+              <View style={styles.whyPanel}>
+                <Text style={styles.whyPanelText}>{session.whyReasoning}</Text>
+              </View>
+            ) : null}
+          </Card>
 
           <View style={styles.sessionActionsRow}>
             <TouchableOpacity
@@ -377,20 +385,16 @@ export default function DailySummaryScreen({
 
         {/* ── Quick Stats Row ── */}
         <View style={styles.statsRow}>
-          <StatChip label="Consistency" value={quickStats.streak} color={Colors.gold} />
-          <StatChip
-            label="This Month"
-            value={formatDistanceKm(quickStats.monthDistanceKm, units)}
-            color={Colors.teal}
-          />
-          <StatChip label="Load" value={quickStats.load} color={Colors.amber} />
+          <StatChip label="Consistency" value={quickStats.streak} tone="accent" />
+          <StatChip label="This Month" value={formatDistanceKm(quickStats.monthDistanceKm, units)} />
+          <StatChip label="Load" value={quickStats.load} />
         </View>
 
         {habitTip ? (
-          <View style={styles.habitTipCard}>
-            <Text style={styles.habitTipLabel}>HABIT TIP</Text>
-            <Text style={styles.habitTipText}>{habitTip}</Text>
-          </View>
+          <Card style={{ marginTop: 16 }}>
+            <Badge tone="accent">Habit Tip</Badge>
+            <Text style={[styles.habitTipText, { marginTop: 6 }]}>{habitTip}</Text>
+          </Card>
         ) : null}
 
       </ScrollView>
@@ -525,20 +529,12 @@ function ReadinessCard({ readiness }: { readiness: TrainingReadiness }) {
   );
 }
 
-function StatChip({
-  label,
-  value,
-  color,
-}: {
-  label: string;
-  value: string;
-  color: string;
-}) {
+function StatChip({ label, value, tone }: { label: string; value: string; tone?: 'accent' | 'neutral' }) {
   return (
-    <View style={styles.statChip}>
-      <Text style={[styles.statValue, { color }]}>{value}</Text>
+    <Card style={styles.statChip}>
+      <Text style={[styles.statValue, { color: tone === 'accent' ? Theme.accent : Theme.text }]}>{value}</Text>
       <Text style={styles.statLabel}>{label}</Text>
-    </View>
+    </Card>
   );
 }
 
@@ -671,24 +667,18 @@ const styles = StyleSheet.create({
   readinessCtlSub: { fontSize: 9, color: Colors.textMuted },
 
   // Recovery card
-  recoveryCard: {
-    backgroundColor: 'rgba(255,255,255,0.07)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.14)',
-    borderRadius: 16,
-    padding: 18,
+  recoveryRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 14,
   },
   recoveryLeft: {
     flex: 1,
   },
   recoveryTitle: {
     fontSize: 11,
-    fontWeight: '700',
-    color: Colors.teal,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
     textTransform: 'uppercase',
     marginBottom: 6,
@@ -696,12 +686,12 @@ const styles = StyleSheet.create({
   recoveryLabel: {
     fontSize: 20,
     fontWeight: '800',
-    color: Colors.textPrimary,
+    color: Theme.text,
     marginBottom: 4,
   },
   recoverySubtext: {
     fontSize: 11,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
   },
 
   // Body Battery tank
@@ -810,10 +800,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 10,
-    backgroundColor: 'rgba(6,9,18,0.45)',
-    borderRadius: 12,
-    padding: 12,
-    marginBottom: 14,
   },
   ozzieNoteBody: {
     flex: 1,
@@ -821,26 +807,24 @@ const styles = StyleSheet.create({
   },
   ozzieNoteText: {
     fontSize: 13,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 19,
   },
   whyToggleText: {
     fontSize: 11,
     fontWeight: '700',
-    color: Colors.teal,
+    color: Theme.accent,
     letterSpacing: 0.3,
   },
   whyPanel: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
-    padding: 10,
-    marginBottom: 10,
+    marginTop: 10,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: Theme.line,
   },
   whyPanelText: {
     fontSize: 12,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     lineHeight: 18,
   },
   sessionActionsRow: {
@@ -925,33 +909,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
   },
-  habitTipCard: {
-    marginTop: 16,
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 14,
-    padding: 14,
-  },
-  habitTipLabel: {
-    fontSize: 10,
-    fontWeight: '700',
-    color: Colors.teal,
-    letterSpacing: 1,
-    marginBottom: 6,
-  },
   habitTipText: {
     fontSize: 13,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 19,
   },
   statChip: {
     flex: 1,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
-    padding: 12,
     alignItems: 'center',
   },
   statValue: {
@@ -961,7 +925,7 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 10,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     letterSpacing: 0.5,
   },
 
