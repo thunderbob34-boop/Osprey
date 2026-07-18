@@ -15,6 +15,8 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import {
   useWorkoutStore,
   getElapsedSeconds,
@@ -444,13 +446,13 @@ export default function LiftWorkoutScreen() {
             accessibilityRole="button"
             accessibilityLabel="Close exercise picker"
           >
-            <Ionicons name="close" size={20} color={Colors.textMuted} />
+            <Ionicons name="close" size={20} color={Theme.textMut} />
           </TouchableOpacity>
         </View>
         <TextInput
           style={styles.pickerSearch}
           placeholder="Search exercises…"
-          placeholderTextColor={Colors.textMuted}
+          placeholderTextColor={Theme.textMut}
           value={search}
           onChangeText={setSearch}
           autoCorrect={false}
@@ -490,7 +492,7 @@ export default function LiftWorkoutScreen() {
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
-        <ActivityIndicator color={Colors.teal} style={{ marginTop: 80 }} />
+        <ActivityIndicator color={Theme.accent} style={{ marginTop: 80 }} />
       </SafeAreaView>
     );
   }
@@ -514,7 +516,7 @@ export default function LiftWorkoutScreen() {
             accessibilityRole="button"
             accessibilityLabel="Exit workout"
           >
-            <Ionicons name="close" size={24} color={Colors.textMuted} />
+            <Ionicons name="close" size={24} color={Theme.textMut} />
           </TouchableOpacity>
         </View>
 
@@ -601,16 +603,13 @@ export default function LiftWorkoutScreen() {
         </ScrollView>
 
         <View style={styles.footer}>
-          <TouchableOpacity
-            style={[styles.finishBtn, liftExercises.length === 0 && styles.warmupStartBtnDisabled]}
+          <Button
             onPress={() => setPreviewing(false)}
             disabled={liftExercises.length === 0}
-            accessibilityRole="button"
             accessibilityLabel="Continue to warm-up"
-            accessibilityState={{ disabled: liftExercises.length === 0 }}
           >
-            <Text style={styles.finishBtnText}>Continue to Warm-Up →</Text>
-          </TouchableOpacity>
+            Continue to Warm-Up →
+          </Button>
           {liftExercises.length === 0 ? (
             <Text style={styles.warmupHint}>Add at least one exercise to continue.</Text>
           ) : null}
@@ -636,7 +635,7 @@ export default function LiftWorkoutScreen() {
               accessibilityRole="button"
               accessibilityLabel="Exit workout"
             >
-              <Ionicons name="close" size={24} color={Colors.textMuted} />
+              <Ionicons name="close" size={24} color={Theme.textMut} />
             </TouchableOpacity>
           </View>
           <Text style={styles.warmupSubtitle}>
@@ -660,16 +659,14 @@ export default function LiftWorkoutScreen() {
               </View>
             </TouchableOpacity>
           ))}
-          <TouchableOpacity
-            style={[styles.warmupStartBtn, !allDrillsChecked && styles.warmupStartBtnDisabled]}
+          <Button
             onPress={handleStartAfterWarmup}
             disabled={!allDrillsChecked}
-            accessibilityRole="button"
             accessibilityLabel="Start lifting"
-            accessibilityState={{ disabled: !allDrillsChecked }}
+            style={{ marginTop: 8 }}
           >
-            <Text style={styles.finishBtnText}>Start Lifting →</Text>
-          </TouchableOpacity>
+            Start Lifting →
+          </Button>
           {!allDrillsChecked ? (
             <Text style={styles.warmupHint}>Check off each drill to start lifting.</Text>
           ) : null}
@@ -951,7 +948,7 @@ export default function LiftWorkoutScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   header: {
     padding: 20,
     flexDirection: 'row',
@@ -1022,7 +1019,7 @@ const styles = StyleSheet.create({
   micBtnText: { fontSize: 13, fontWeight: '700', color: Colors.teal },
   micBtnTextActive: { fontSize: 13, fontWeight: '700', color: '#fff' },
   removeBtn: { padding: 4 },
-  removeBtnText: { fontSize: 14, color: Colors.textMuted, fontWeight: '700' },
+  removeBtnText: { fontSize: 14, color: Theme.textMut, fontWeight: '700' },
   recordingHint: { fontSize: 11, color: Colors.textMuted, marginBottom: 8, fontStyle: 'italic' },
 
   // Set table
@@ -1086,14 +1083,14 @@ const styles = StyleSheet.create({
   addSetText: { fontSize: 12, color: Colors.teal, fontWeight: '700' },
   addExerciseBtn: {
     borderWidth: 1.5,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.accent,
     borderStyle: 'dashed',
-    borderRadius: 14,
+    borderRadius: Radius.card,
     paddingVertical: 14,
     alignItems: 'center',
   },
-  addExerciseText: { fontSize: 14, fontWeight: '800', color: Colors.teal },
-  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Colors.border },
+  addExerciseText: { fontSize: 14, fontWeight: '800', color: Theme.accent },
+  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Theme.line },
   finishBtn: {
     backgroundColor: Colors.teal,
     borderRadius: 14,
@@ -1139,7 +1136,7 @@ const styles = StyleSheet.create({
   plateHint: { fontSize: 11, color: Colors.textMuted },
 
   // Picker modal
-  pickerContainer: { flex: 1, backgroundColor: Colors.bg },
+  pickerContainer: { flex: 1, backgroundColor: Theme.ink },
   pickerHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -1147,24 +1144,25 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 12,
   },
-  pickerTitle: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
+  pickerTitle: { fontSize: 20, fontWeight: '800', color: Theme.text },
   pickerSearch: {
     marginHorizontal: 20,
     marginBottom: 8,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     height: 44,
     paddingHorizontal: 14,
     fontSize: 15,
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   pickerList: { paddingHorizontal: 20, paddingBottom: 40 },
   pickerGroupLabel: {
     fontSize: 11,
     fontWeight: '700',
-    color: Colors.teal,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
     marginTop: 16,
     marginBottom: 6,
@@ -1173,21 +1171,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 12,
     marginBottom: 8,
   },
-  pickerRowText: { fontSize: 14, fontWeight: '600', color: Colors.textPrimary },
-  pickerRowAdd: { fontSize: 18, fontWeight: '800', color: Colors.teal },
+  pickerRowText: { fontSize: 14, fontWeight: '600', color: Theme.text },
+  pickerRowAdd: { fontSize: 18, fontWeight: '800', color: Theme.accent },
   pickerEmpty: {
     marginTop: 32,
     textAlign: 'center',
     fontSize: 13,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     lineHeight: 19,
   },
 
@@ -1198,44 +1196,51 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   previewTitleBlock: { gap: 2 },
-  previewEyebrow: { fontSize: 10, fontWeight: '700', color: Colors.teal, letterSpacing: 1 },
-  previewTitle: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
+  previewEyebrow: {
+    fontSize: 10,
+    fontWeight: '700',
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
+    letterSpacing: 1,
+  },
+  previewTitle: { fontSize: 20, fontWeight: '800', color: Theme.text },
   previewScroll: { padding: 20, gap: 14, paddingBottom: 24 },
   templateChipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   templateChip: {
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     borderRadius: 18,
     paddingHorizontal: 14,
     paddingVertical: 8,
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
   },
-  templateChipActive: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
-  templateChipText: { fontSize: 13, fontWeight: '700', color: Colors.textSecondary },
-  templateChipTextActive: { color: Colors.teal },
+  templateChipActive: { backgroundColor: Theme.panel, borderColor: Theme.accent },
+  templateChipText: { fontSize: 13, fontWeight: '700', color: Theme.textSoft },
+  templateChipTextActive: { color: Theme.accent },
   previewSectionLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1,
     marginTop: 4,
   },
   previewEmptyCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 16,
   },
-  previewEmptyText: { fontSize: 13, color: Colors.textMuted, lineHeight: 19 },
+  previewEmptyText: { fontSize: 13, color: Theme.textMut, lineHeight: 19 },
   previewExerciseList: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     overflow: 'hidden',
   },
   previewExerciseRow: {
@@ -1244,26 +1249,26 @@ const styles = StyleSheet.create({
     gap: 12,
     padding: 14,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
   previewExerciseRowLast: { borderBottomWidth: 0 },
-  previewExerciseName: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  previewExerciseMeta: { fontSize: 12, color: Colors.textMuted, marginTop: 2 },
+  previewExerciseName: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  previewExerciseMeta: { fontSize: 12, color: Theme.textMut, marginTop: 2 },
 
   // Warmup
   warmupWrap: { padding: 24, gap: 14, paddingBottom: 48 },
   warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   warmupTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  warmupTitle: { fontSize: 22, fontWeight: '800', color: Colors.textPrimary },
-  warmupSubtitle: { fontSize: 13, color: Colors.textMuted, lineHeight: 18, marginBottom: 6 },
+  warmupTitle: { fontSize: 22, fontWeight: '800', color: Theme.text },
+  warmupSubtitle: { fontSize: 13, color: Theme.textMut, lineHeight: 18, marginBottom: 6 },
   warmupRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     padding: 12,
   },
   checkbox: {
@@ -1271,27 +1276,18 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 7,
     borderWidth: 2,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  checkboxChecked: { backgroundColor: Colors.teal, borderColor: Colors.teal },
-  checkboxMark: { color: '#000', fontSize: 14, fontWeight: '800' },
-  warmupDrillName: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  warmupDrillDuration: { fontSize: 12, color: Colors.textMuted, marginTop: 2 },
-  warmupStartBtn: {
-    marginTop: 8,
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
-    height: 52,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  warmupStartBtnDisabled: { opacity: 0.45 },
-  warmupHint: { fontSize: 12, color: Colors.textMuted, textAlign: 'center', marginTop: -4 },
+  checkboxChecked: { backgroundColor: Theme.accent, borderColor: Theme.accent },
+  checkboxMark: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
+  warmupDrillName: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  warmupDrillDuration: { fontSize: 12, color: Theme.textMut, marginTop: 2 },
+  warmupHint: { fontSize: 12, color: Theme.textMut, textAlign: 'center', marginTop: -4 },
   skipWarmupText: {
     fontSize: 13,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
     fontWeight: '600',
   },
