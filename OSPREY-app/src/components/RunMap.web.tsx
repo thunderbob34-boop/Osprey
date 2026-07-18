@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { Colors } from '@/constants/colors';
+import { Theme } from '@/constants/theme';
 
 type Region = {
   latitude: number;
@@ -19,6 +19,6 @@ export default function RunMap({ region: _region, coordinates: _coordinates }: {
 }
 
 const styles = StyleSheet.create({
-  map: { flex: 1, backgroundColor: Colors.bgCard, alignItems: 'center', justifyContent: 'center' },
-  placeholder: { color: Colors.textMuted, fontSize: 13 },
+  map: { flex: 1, backgroundColor: Theme.panel, alignItems: 'center', justifyContent: 'center' },
+  placeholder: { color: Theme.textMut, fontSize: 13 },
 });

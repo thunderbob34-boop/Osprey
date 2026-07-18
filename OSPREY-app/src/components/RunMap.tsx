@@ -1,6 +1,6 @@
 import MapView, { Polyline } from 'react-native-maps';
 import { StyleSheet } from 'react-native';
-import { Colors } from '@/constants/colors';
+import { Theme } from '@/constants/theme';
 
 type Region = {
   latitude: number;
@@ -15,7 +15,7 @@ export default function RunMap({ region, coordinates }: { region: Region; coordi
   return (
     <MapView style={styles.map} region={region} showsUserLocation>
       {coordinates.length > 1 ? (
-        <Polyline coordinates={coordinates} strokeColor={Colors.teal} strokeWidth={4} />
+        <Polyline coordinates={coordinates} strokeColor={Theme.accent} strokeWidth={4} />
       ) : null}
     </MapView>
   );
