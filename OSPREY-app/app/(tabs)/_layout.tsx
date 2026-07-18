@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 import { Redirect, Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors } from '@/constants/colors';
+import { Theme } from '@/constants/theme';
 import { useAuthStore } from '@/store/authStore';
 
 type TabIconBaseName = 'home' | 'fitness' | 'create' | 'bar-chart' | 'settings';
@@ -35,8 +35,8 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: 'rgba(6,9,18,0.92)',
-          borderTopColor: Colors.border,
+          backgroundColor: Theme.ink,
+          borderTopColor: Theme.line,
           borderTopWidth: 1,
           paddingTop: 8,
           // Scales to the device's actual home-indicator inset (0 on an SE,
@@ -45,8 +45,8 @@ export default function TabLayout() {
           paddingBottom: insets.bottom > 0 ? insets.bottom : 12,
           height: 56 + insets.bottom,
         },
-        tabBarActiveTintColor: Colors.teal,
-        tabBarInactiveTintColor: Colors.textMuted,
+        tabBarActiveTintColor: Theme.accent,
+        tabBarInactiveTintColor: Theme.textMut,
         tabBarLabelStyle: {
           fontSize: 10,
           fontWeight: '500',
