@@ -19,7 +19,7 @@ import OzzieAvatar from '@/components/OzzieAvatar';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, kmToMiles } from '@/services/units';
 import { Card, Badge } from '@/components/ui';
-import { Theme } from '@/constants/theme';
+import { Theme, Radius } from '@/constants/theme';
 
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
 
@@ -117,9 +117,9 @@ export default function DailySummaryScreen({
   if (isLoading) {
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor={Colors.bg} />
+        <StatusBar barStyle="light-content" backgroundColor={Theme.ink} />
         <View style={styles.centeredState}>
-          <ActivityIndicator color={Colors.teal} size="large" />
+          <ActivityIndicator color={Theme.accent} size="large" />
           <Text style={styles.stateText}>Loading your daily summary…</Text>
         </View>
       </SafeAreaView>
@@ -129,7 +129,7 @@ export default function DailySummaryScreen({
   if (error) {
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor={Colors.bg} />
+        <StatusBar barStyle="light-content" backgroundColor={Theme.ink} />
         <View style={styles.centeredState}>
           <Text style={styles.errorTitle}>Couldn&apos;t load summary</Text>
           <Text style={styles.stateText}>{error}</Text>
@@ -150,7 +150,7 @@ export default function DailySummaryScreen({
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={Colors.bg} />
+      <StatusBar barStyle="light-content" backgroundColor={Theme.ink} />
 
       <ScrollView
         style={styles.scroll}
@@ -161,7 +161,7 @@ export default function DailySummaryScreen({
             <RefreshControl
               refreshing={isRefreshing}
               onRefresh={onRefresh}
-              tintColor={Colors.teal}
+              tintColor={Theme.accent}
             />
           ) : undefined
         }
@@ -180,7 +180,7 @@ export default function DailySummaryScreen({
                 accessibilityRole="button"
                 accessibilityLabel="View activity"
               >
-                <Ionicons name="people-outline" size={20} color={Colors.teal} />
+                <Ionicons name="people-outline" size={20} color={Theme.accent} />
               </TouchableOpacity>
             ) : null}
             {onOzziePress ? (
@@ -560,7 +560,7 @@ function formatDate(): string {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
   },
   centeredState: {
     flex: 1,
@@ -571,26 +571,26 @@ const styles = StyleSheet.create({
   },
   stateText: {
     fontSize: 14,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
     lineHeight: 20,
   },
   errorTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   retryBtn: {
     marginTop: 8,
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
+    backgroundColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingHorizontal: 20,
     paddingVertical: 12,
   },
   retryBtnText: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#000',
+    color: Theme.ink,
   },
   scroll: {
     flex: 1,
@@ -610,13 +610,14 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 28,
     fontWeight: '900',
+    fontFamily: 'SpaceGrotesk_700Bold',
     color: Colors.textPrimary,
     letterSpacing: -0.5,
   },
   date: {
     fontSize: 13,
     fontWeight: '600',
-    color: Colors.teal,
+    color: Theme.accent,
     marginTop: 2,
   },
   headerRight: {
@@ -627,10 +628,10 @@ const styles = StyleSheet.create({
   activityBtn: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: Colors.surfaceTeal,
+    borderRadius: Radius.card,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -638,10 +639,10 @@ const styles = StyleSheet.create({
   avatarBtn: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: Colors.bgCard,
+    borderRadius: Radius.card,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
