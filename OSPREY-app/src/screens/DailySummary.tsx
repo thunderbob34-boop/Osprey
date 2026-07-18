@@ -603,7 +603,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '900',
     fontFamily: 'SpaceGrotesk_700Bold',
-    color: Colors.textPrimary,
+    color: Theme.text,
     letterSpacing: -0.5,
   },
   date: {
