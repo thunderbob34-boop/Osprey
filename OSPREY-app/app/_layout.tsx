@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as Sentry from '@sentry/react-native';
 import * as SplashScreen from 'expo-splash-screen';
+import { useFonts, SpaceGrotesk_500Medium, SpaceGrotesk_700Bold } from '@expo-google-fonts/space-grotesk';
 import { useAuthStore } from '@/store/authStore';
 import { initRevenueCat } from '@/services/subscriptions';
 import { reconcileSupplementReminders } from '@/services/supplements';
@@ -30,6 +31,7 @@ function RootLayout() {
   const initialize = useAuthStore((s) => s.initialize);
   const initialized = useAuthStore((s) => s.initialized);
   const userId = useAuthStore((s) => s.user?.id);
+  const [fontsLoaded] = useFonts({ SpaceGrotesk_500Medium, SpaceGrotesk_700Bold });
 
   // Hide the native splash immediately — AppLoadingScreen handles the branded wait
   useEffect(() => {
@@ -56,7 +58,7 @@ function RootLayout() {
     ozziePrewarm().catch(() => undefined);
   }, []);
 
-  if (!initialized) {
+  if (!initialized || !fontsLoaded) {
     return <AppLoadingScreen />;
   }
 
