@@ -15,6 +15,7 @@ import {
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { useAuthStore } from '@/store/authStore';
 import { PRIVACY_POLICY_URL, TERMS_OF_USE_URL } from '@/constants/links';
 
@@ -119,7 +120,7 @@ export default function SignInScreen() {
             <TextInput
               style={styles.input}
               placeholder="Your name"
-              placeholderTextColor={Colors.textMuted}
+              placeholderTextColor={Theme.textMut}
               value={displayName}
               onChangeText={setDisplayName}
               autoCapitalize="words"
@@ -129,7 +130,7 @@ export default function SignInScreen() {
           <TextInput
             style={styles.input}
             placeholder="Email"
-            placeholderTextColor={Colors.textMuted}
+            placeholderTextColor={Theme.textMut}
             value={email}
             onChangeText={setEmail}
             autoCapitalize="none"
@@ -146,7 +147,7 @@ export default function SignInScreen() {
               ref={passwordRef}
               style={[styles.input, styles.passwordInput]}
               placeholder="Password"
-              placeholderTextColor={Colors.textMuted}
+              placeholderTextColor={Theme.textMut}
               value={password}
               onChangeText={setPassword}
               secureTextEntry={!showPassword}
@@ -163,7 +164,7 @@ export default function SignInScreen() {
               accessibilityRole="button"
               accessibilityLabel={showPassword ? 'Hide password' : 'Show password'}
             >
-              <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={20} color={Colors.textMuted} />
+              <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={20} color={Theme.textMut} />
             </TouchableOpacity>
           </View>
 
@@ -185,7 +186,7 @@ export default function SignInScreen() {
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
           <TouchableOpacity
-            style={styles.submitBtn}
+            style={[styles.submitBtn, loading && styles.submitBtnDisabled]}
             onPress={handleSubmit}
             disabled={loading}
             accessibilityRole="button"
@@ -193,7 +194,7 @@ export default function SignInScreen() {
             accessibilityState={{ disabled: loading, busy: loading }}
           >
             {loading ? (
-              <ActivityIndicator color="#000" />
+              <ActivityIndicator color={Theme.ink} />
             ) : (
               <Text style={styles.submitBtnText}>
                 {mode === 'signin' ? 'Sign In' : 'Create Account'}
@@ -268,7 +269,7 @@ export default function SignInScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.bg,
+    backgroundColor: Theme.ink,
   },
   inner: {
     flex: 1,
@@ -282,12 +283,12 @@ const styles = StyleSheet.create({
   osprey: {
     fontSize: 40,
     fontWeight: '900',
-    color: Colors.teal,
+    color: Theme.accent,
     letterSpacing: 4,
   },
   tagline: {
     fontSize: 13,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     marginTop: 6,
     fontStyle: 'italic',
   },
@@ -295,14 +296,14 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   input: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.ink,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 12,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     height: 50,
     paddingHorizontal: 16,
     fontSize: 15,
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   errorText: {
     color: Colors.red,
@@ -324,21 +325,26 @@ const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     fontSize: 13,
-    color: Colors.teal,
+    color: Theme.accent,
     fontWeight: '600',
   },
   submitBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 4,
   },
+  submitBtnDisabled: {
+    opacity: 0.5,
+  },
   submitBtnText: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#000',
+    color: Theme.ink,
   },
   switchMode: {
     alignItems: 'center',
@@ -346,7 +352,7 @@ const styles = StyleSheet.create({
   },
   switchModeText: {
     fontSize: 13,
-    color: Colors.textMuted,
+    color: Theme.textMut,
   },
   dividerRow: {
     flexDirection: 'row',
@@ -357,11 +363,11 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: Colors.border,
+    backgroundColor: Theme.line,
   },
   dividerText: {
     fontSize: 12,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     fontWeight: '600',
   },
   appleBtn: {
@@ -384,13 +390,13 @@ const styles = StyleSheet.create({
   },
   legalText: {
     fontSize: 11,
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
     lineHeight: 16,
     marginTop: 4,
   },
   legalLink: {
-    color: Colors.teal,
+    color: Theme.accent,
     fontWeight: '600',
   },
 });
