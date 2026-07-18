@@ -13,6 +13,8 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button, Card } from '@/components/ui';
 import { useAuthStore } from '@/store/authStore';
 import { hyroxStationWeights, type HyroxDivision } from '@/services/calculators/hyrox';
 import { saveHyroxWorkout } from '@/services/workouts';
@@ -179,7 +181,7 @@ export default function HyroxWorkoutScreen() {
           accessibilityRole="button"
           accessibilityLabel="Cancel"
         >
-          <Ionicons name="close" size={20} color={Colors.textMuted} />
+          <Ionicons name="close" size={20} color={Theme.textMut} />
         </TouchableOpacity>
         <View style={styles.pickerContent}>
           <Text style={styles.pickerTitle}>Which division?</Text>
@@ -225,7 +227,7 @@ export default function HyroxWorkoutScreen() {
             accessibilityRole="button"
             accessibilityLabel="Cancel"
           >
-            <Ionicons name="close" size={20} color={Colors.textMuted} />
+            <Ionicons name="close" size={20} color={Theme.textMut} />
           </TouchableOpacity>
         </View>
 
@@ -268,7 +270,15 @@ export default function HyroxWorkoutScreen() {
                 accessibilityLabel={segmentLabel(segment)}
                 accessibilityState={{ checked: selected }}
               >
-                <View style={[styles.overviewCheck, selected && { backgroundColor: isRun ? Colors.teal : Colors.red, borderColor: isRun ? Colors.teal : Colors.red }]}>
+                <View
+                  style={[
+                    styles.overviewCheck,
+                    selected && {
+                      backgroundColor: isRun ? Theme.accent : Colors.red,
+                      borderColor: isRun ? Theme.accent : Colors.red,
+                    },
+                  ]}
+                >
                   {selected ? <Text style={styles.overviewCheckMark}>✓</Text> : null}
                 </View>
                 <Text style={styles.overviewIndex}>{i + 1}</Text>
@@ -286,16 +296,14 @@ export default function HyroxWorkoutScreen() {
           })}
         </ScrollView>
 
-        <TouchableOpacity
-          style={[styles.startBtn, selectedKeys.size === 0 && styles.startBtnDisabled]}
+        <Button
           onPress={startRace}
           disabled={selectedKeys.size === 0}
-          accessibilityRole="button"
           accessibilityLabel={isFullRace ? 'Start race' : 'Start workout'}
-          accessibilityState={{ disabled: selectedKeys.size === 0 }}
+          style={styles.startBtn}
         >
-          <Text style={styles.startBtnText}>{isFullRace ? 'Start Race →' : 'Start Workout →'}</Text>
-        </TouchableOpacity>
+          {isFullRace ? 'Start Race →' : 'Start Workout →'}
+        </Button>
         {selectedKeys.size === 0 ? (
           <Text style={styles.startHint}>Select at least one segment to start.</Text>
         ) : null}
@@ -305,7 +313,7 @@ export default function HyroxWorkoutScreen() {
 
   // ── Running ───────────────────────────────────────────────────────────────
   const currentIsRun = currentSegment?.type === 'run';
-  const accentColor = sessionComplete ? Colors.green : currentIsRun ? Colors.teal : Colors.red;
+  const accentColor = sessionComplete ? Colors.green : currentIsRun ? Theme.accent : Colors.red;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -319,7 +327,7 @@ export default function HyroxWorkoutScreen() {
           {segments.map((seg, i) => {
             const done = seg.completedAtMs != null;
             const isCurrent = i === segmentIndex && !sessionComplete;
-            const tint = seg.type === 'run' ? Colors.teal : Colors.red;
+            const tint = seg.type === 'run' ? Theme.accent : Colors.red;
             return (
               <View
                 key={`${seg.type}-${seg.index}`}
@@ -340,14 +348,14 @@ export default function HyroxWorkoutScreen() {
         </View>
 
         {sessionComplete ? (
-          <View style={[styles.segmentCard, { borderColor: Colors.borderGreen }]}>
+          <Card style={{ ...styles.segmentCard, borderColor: Colors.borderGreen }}>
             <Text style={styles.segmentDoneIcon}>✓</Text>
             <Text style={styles.segmentDoneText}>
               {isFullRace ? 'Full race complete' : 'Workout complete'} — nice work
             </Text>
-          </View>
+          </Card>
         ) : (
-          <View style={[styles.segmentCard, { borderColor: accentColor + '66' }]}>
+          <Card style={{ ...styles.segmentCard, borderColor: accentColor + '66' }}>
             <Text style={[styles.segmentProgress, { color: accentColor }]}>
               {currentIsRun ? 'RUN' : 'STATION'} · SEGMENT {segmentIndex + 1} OF {segments.length}
             </Text>
@@ -364,12 +372,12 @@ export default function HyroxWorkoutScreen() {
             >
               <Text style={styles.completeBtnText}>Mark Complete</Text>
             </TouchableOpacity>
-          </View>
+          </Card>
         )}
 
         {sessionComplete ? (
           <TouchableOpacity
-            style={styles.endBtn}
+            style={[styles.endBtn, saving && styles.endBtnDisabled]}
             onPress={handleSave}
             disabled={saving}
             accessibilityRole="button"
@@ -377,7 +385,7 @@ export default function HyroxWorkoutScreen() {
             accessibilityState={{ disabled: saving, busy: saving }}
           >
             {saving ? (
-              <ActivityIndicator color="#000" />
+              <ActivityIndicator color={Theme.ink} />
             ) : (
               <Text style={styles.endBtnText}>End & Save</Text>
             )}
@@ -398,21 +406,21 @@ export default function HyroxWorkoutScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   content: { flex: 1, padding: 28, justifyContent: 'center', gap: 16 },
 
   closeBtn: { alignSelf: 'flex-end', padding: 16 },
   pickerContent: { flex: 1, padding: 28, paddingTop: 0, justifyContent: 'center', gap: 24 },
-  pickerTitle: { fontSize: 26, fontWeight: '900', color: Colors.textPrimary, textAlign: 'center' },
-  pickerSubtitle: { fontSize: 14, color: Colors.textMuted, textAlign: 'center', marginTop: -12 },
+  pickerTitle: { fontSize: 26, fontWeight: '900', color: Theme.text, textAlign: 'center' },
+  pickerSubtitle: { fontSize: 14, color: Theme.textMut, textAlign: 'center', marginTop: -12 },
   divisionGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, justifyContent: 'center' },
   divisionTile: {
     width: '46%',
     aspectRatio: 1.6,
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 16,
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -420,7 +428,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     fontWeight: '700',
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
@@ -433,60 +441,49 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 8,
   },
-  overviewBack: { fontSize: 15, fontWeight: '700', color: Colors.teal },
-  overviewTitle: { fontSize: 26, fontWeight: '900', color: Colors.textPrimary, paddingHorizontal: 20, marginTop: 8 },
-  overviewSubtitle: { fontSize: 13, color: Colors.textMuted, paddingHorizontal: 20, marginTop: 4, marginBottom: 12 },
+  overviewBack: { fontSize: 15, fontWeight: '700', color: Theme.accent },
+  overviewTitle: { fontSize: 26, fontWeight: '900', color: Theme.text, paddingHorizontal: 20, marginTop: 8 },
+  overviewSubtitle: { fontSize: 13, color: Theme.textMut, paddingHorizontal: 20, marginTop: 4, marginBottom: 12 },
   overviewToolbar: { paddingHorizontal: 20, marginBottom: 12, gap: 8 },
-  overviewHint: { fontSize: 12, color: Colors.textMuted, lineHeight: 17 },
+  overviewHint: { fontSize: 12, color: Theme.textMut, lineHeight: 17 },
   overviewQuickActions: { flexDirection: 'row', gap: 16 },
-  overviewQuickAction: { fontSize: 13, fontWeight: '700', color: Colors.teal },
+  overviewQuickAction: { fontSize: 13, fontWeight: '700', color: Theme.accent },
   overviewList: { flex: 1, paddingHorizontal: 20 },
   overviewRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    borderRadius: 12,
-    borderWidth: 1,
+    borderRadius: Radius.card,
+    borderWidth: BorderWidth.card,
     padding: 12,
     marginBottom: 8,
   },
-  overviewRowRun: { backgroundColor: Colors.surfaceTeal, borderColor: Colors.borderTeal },
+  // "Run" tint — the accent-recoloured counterpart of overviewRowStation
+  // below (Task 5's run-vs-station resolution: run legs -> accent).
+  overviewRowRun: { backgroundColor: 'rgba(200,121,58,0.06)', borderColor: 'rgba(200,121,58,0.2)' },
+  // FUNCTIONAL — station-leg marker, not a frosted-brand surface. Do not
+  // flatten to Theme.panel; it carries the run/station alternating rhythm.
   overviewRowStation: { backgroundColor: 'rgba(255,68,68,0.06)', borderColor: 'rgba(255,68,68,0.2)' },
-  overviewRowSkipped: { backgroundColor: Colors.bgCard, borderColor: Colors.border },
+  overviewRowSkipped: { backgroundColor: Theme.panel, borderColor: Theme.line },
   overviewCheck: {
     width: 20,
     height: 20,
     borderRadius: 6,
     borderWidth: 1.5,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  overviewCheckMark: { fontSize: 12, fontWeight: '900', color: '#fff' },
-  overviewIndex: { width: 18, fontSize: 12, fontWeight: '800', color: Colors.textMuted, textAlign: 'center' },
+  overviewCheckMark: { fontSize: 12, fontWeight: '900', color: Theme.ink },
+  overviewIndex: { width: 18, fontSize: 12, fontWeight: '800', color: Theme.textMut, textAlign: 'center' },
   overviewIcon: { fontSize: 22 },
-  overviewLabel: { fontSize: 15, fontWeight: '800', color: Colors.textPrimary },
-  overviewLabelRun: { color: Colors.teal },
-  overviewTarget: { fontSize: 12, color: Colors.textMuted, marginTop: 1 },
+  overviewLabel: { fontSize: 15, fontWeight: '800', color: Theme.text },
+  overviewLabelRun: { color: Theme.accent },
+  overviewTarget: { fontSize: 12, color: Theme.textMut, marginTop: 1 },
   dimmed: { opacity: 0.35 },
-  startBtn: {
-    marginHorizontal: 20,
-    marginTop: 12,
-    backgroundColor: Colors.red,
-    borderRadius: 14,
-    paddingVertical: 16,
-    alignItems: 'center',
-  },
-  startBtnText: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: '800',
-    color: '#fff',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-  },
-  startBtnDisabled: { opacity: 0.4 },
-  startHint: { textAlign: 'center', fontSize: 12, color: Colors.textMuted, marginTop: 8 },
+  // Layout only — color/border/radius now come from the Button primitive.
+  startBtn: { marginHorizontal: 20, marginTop: 12 },
+  startHint: { textAlign: 'center', fontSize: 12, color: Theme.textMut, marginTop: 8 },
 
   // Progress strip
   progressStrip: { flexDirection: 'row', flexWrap: 'wrap', gap: 4, justifyContent: 'center' },
@@ -509,40 +506,40 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: Theme.panel,
     borderWidth: 1,
     borderRadius: 24,
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
   sessionIcon: { fontSize: 20 },
-  sessionLabel: { fontSize: 11, fontWeight: '800', letterSpacing: 1.2 },
+  sessionLabel: { fontSize: 11, fontWeight: '800', fontFamily: 'SpaceGrotesk_700Bold', letterSpacing: 1.2 },
   timerBlock: { alignItems: 'center', gap: 6 },
-  timerValue: { fontSize: 60, fontWeight: '800', color: Colors.textPrimary, letterSpacing: -2 },
-  timerSub: { fontSize: 12, color: Colors.textMuted, fontWeight: '600', letterSpacing: 0.5 },
+  timerValue: { fontSize: 60, fontWeight: '800', color: Theme.text, letterSpacing: -2 },
+  timerSub: { fontSize: 12, color: Theme.textMut, fontWeight: '600', letterSpacing: 0.5 },
 
   segmentCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1.5,
-    borderRadius: 16,
-    padding: 22,
     alignItems: 'center',
     gap: 6,
+    padding: 22,
   },
-  segmentProgress: { fontSize: 11, fontWeight: '800', letterSpacing: 0.8 },
+  segmentProgress: { fontSize: 11, fontWeight: '800', fontFamily: 'SpaceGrotesk_700Bold', letterSpacing: 0.8 },
   segmentIcon: { fontSize: 40, marginTop: 4 },
-  segmentLabel: { fontSize: 26, fontWeight: '900', color: Colors.textPrimary, textAlign: 'center' },
-  segmentTarget: { fontSize: 15, fontWeight: '700', color: Colors.textSecondary },
+  segmentLabel: { fontSize: 26, fontWeight: '900', color: Theme.text, textAlign: 'center' },
+  segmentTarget: { fontSize: 15, fontWeight: '700', color: Theme.textSoft },
   segmentDoneIcon: { fontSize: 32, color: Colors.green, fontWeight: '900' },
-  segmentDoneText: { fontSize: 15, fontWeight: '700', color: Colors.textPrimary, textAlign: 'center' },
+  segmentDoneText: { fontSize: 15, fontWeight: '700', color: Theme.text, textAlign: 'center' },
   completeBtn: {
     marginTop: 10,
-    borderRadius: 12,
+    borderRadius: Radius.card,
     paddingVertical: 14,
     paddingHorizontal: 24,
     alignSelf: 'stretch',
     alignItems: 'center',
   },
+  // Fill is the dynamic accentColor (accent / Colors.red / Colors.green) —
+  // white reads acceptably against all three, so this mark is left as-is
+  // rather than forced to Theme.ink (that mapping targets fixed accent fills).
   completeBtnText: {
     fontSize: 15,
     lineHeight: 20,
@@ -553,24 +550,28 @@ const styles = StyleSheet.create({
   },
 
   endBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 16,
     alignItems: 'center',
   },
+  endBtnDisabled: { opacity: 0.5 },
   endBtnText: {
     fontSize: 15,
     lineHeight: 20,
     fontWeight: '800',
-    color: '#000',
+    color: Theme.ink,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
+  // FUNCTIONAL — destructive "discard" chrome, kept red.
   discardBtn: {
     backgroundColor: 'rgba(255,68,68,0.08)',
     borderWidth: 1.5,
     borderColor: 'rgba(255,68,68,0.25)',
-    borderRadius: 14,
+    borderRadius: Radius.card,
     paddingVertical: 14,
     alignItems: 'center',
   },
