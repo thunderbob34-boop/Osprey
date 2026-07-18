@@ -68,6 +68,30 @@ export const EffortPalette = {
 
 export type EffortLevel = keyof typeof EffortPalette;
 
+// Session intensity — the same ordered ladder as EffortPalette, one level up.
+// `rest`/`easy`/`moderate`/`threshold` are shared keys and MUST resolve
+// identically: an "easy" session and an "easy" interval are the same idea.
+// The two session-only intensities map onto the ramp's top end — an interval
+// session is a hard day, a race is maximal.
+//
+// DERIVED, not copied. plan-preview.tsx previously hand-picked these and drifted
+// into moderate+threshold both amber and interval+race both red — six
+// intensities in four colours, the same collapse EffortPalette exists to fix.
+// Each chip's background is its own foreground at ~15% (0x26/255), so a fg and
+// its bg cannot drift apart either.
+const intensityChip = (fg: string) => ({ bg: `${fg}26`, fg }) as const;
+
+export const IntensityPalette = {
+  rest: intensityChip(EffortPalette.rest),
+  easy: intensityChip(EffortPalette.easy),
+  moderate: intensityChip(EffortPalette.moderate),
+  threshold: intensityChip(EffortPalette.threshold),
+  interval: intensityChip(EffortPalette.hard),
+  race: intensityChip(EffortPalette.max),
+} as const;
+
+export type SessionIntensity = keyof typeof IntensityPalette;
+
 // Training-readiness scale, keyed by the tone `readinessFromTsb()` returns.
 // Decided from rendered options, 2026-07-18.
 //

@@ -12,7 +12,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
-import { Theme, Radius, EffortPalette } from '@/constants/theme';
+import { Theme, Radius, EffortPalette, IntensityPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { ZonesCard } from '@/components/ZonesCard';
 import { useAuthStore } from '@/store/authStore';
@@ -49,14 +49,10 @@ interface SessionPreview {
 // Keep in sync with HEAT_CAUTION_F in services/weather-coach.ts.
 const HEAT_CAUTION_F = 85;
 
-const INTENSITY_COLORS: Record<string, { bg: string; fg: string }> = {
-  easy: { bg: 'rgba(76,222,128,0.15)', fg: Colors.green },
-  moderate: { bg: 'rgba(245,166,35,0.15)', fg: Colors.amber },
-  threshold: { bg: 'rgba(245,166,35,0.15)', fg: Colors.amber },
-  interval: { bg: 'rgba(255,68,68,0.15)', fg: Colors.red },
-  race: { bg: 'rgba(255,68,68,0.15)', fg: Colors.red },
-  rest: { bg: 'rgba(255,255,255,0.08)', fg: Colors.textMuted },
-};
+// Shares constants/theme.ts's IntensityPalette, itself derived from the effort
+// ramp. Was hand-picked here with moderate+threshold both amber and
+// interval+race both red — six intensities in four colours.
+const INTENSITY_COLORS: Record<string, { bg: string; fg: string }> = IntensityPalette;
 
 // Was a local copy that drifted from the approved ramp: `moderate` was teal,
 // and `hard`/`max` were BOTH red — the exact collapse the six-step ramp exists
@@ -163,7 +159,7 @@ function SessionDetailPanel({
               <View key={`${segment.label}-${i}`} style={styles.segmentRow}>
                 <Text style={styles.segmentReps}>{segment.reps}×</Text>
                 <Text style={styles.segmentLabel}>{segment.label}</Text>
-                <Text style={[styles.segmentEffort, { color: EFFORT_COLORS[segment.effort] ?? Colors.textMuted }]}>
+                <Text style={[styles.segmentEffort, { color: EFFORT_COLORS[segment.effort] ?? EffortPalette.rest }]}>
                   {segment.effort}
                 </Text>
                 {segment.restS > 0 ? <Text style={styles.segmentRest}>{segment.restS}s rest</Text> : null}

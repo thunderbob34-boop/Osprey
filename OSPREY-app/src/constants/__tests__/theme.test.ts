@@ -1,4 +1,4 @@
-import { Theme, Radius, BorderWidth, Spacing, Shadow, ChartPalette, ReadinessPalette, EffortPalette } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, Spacing, Shadow, ChartPalette, ReadinessPalette, EffortPalette, IntensityPalette } from '@/constants/theme';
 
 describe('Theme tokens — pinned to the design spec (2026-07-17)', () => {
   it('matches the color values in design.md §1', () => {
@@ -57,6 +57,38 @@ describe('EffortPalette — pinned effort ramp (2026-07-18)', () => {
   it('uses the live Theme tokens for rest and threshold, not copies that can drift', () => {
     expect(EffortPalette.rest).toBe(Theme.textMut);
     expect(EffortPalette.threshold).toBe(Theme.accent);
+  });
+});
+
+describe('IntensityPalette — session intensity, derived from the effort ramp', () => {
+  it('gives all six intensities a distinct foreground', () => {
+    // Was moderate+threshold both amber and interval+race both red — six
+    // intensities in four colours, the same collapse EffortPalette fixed.
+    const fgs = Object.values(IntensityPalette).map((v) => v.fg);
+    expect(new Set(fgs).size).toBe(fgs.length);
+  });
+
+  it('shares the effort ramp rather than copying it', () => {
+    // The four keys the two scales have in common must resolve identically —
+    // an "easy" session and an "easy" interval are the same idea.
+    expect(IntensityPalette.rest.fg).toBe(EffortPalette.rest);
+    expect(IntensityPalette.easy.fg).toBe(EffortPalette.easy);
+    expect(IntensityPalette.moderate.fg).toBe(EffortPalette.moderate);
+    expect(IntensityPalette.threshold.fg).toBe(EffortPalette.threshold);
+  });
+
+  it('maps the two session-only intensities onto the ramp top end', () => {
+    // interval ≈ a hard day, race ≈ maximal. Keeps one ordered ladder.
+    expect(IntensityPalette.interval.fg).toBe(EffortPalette.hard);
+    expect(IntensityPalette.race.fg).toBe(EffortPalette.max);
+  });
+
+  it('derives every chip background from its own foreground', () => {
+    // Not hand-picked rgba literals — that is how the fg and bg of a chip
+    // drift apart.
+    for (const v of Object.values(IntensityPalette)) {
+      expect(v.bg).toBe(`${v.fg}26`);
+    }
   });
 });
 
