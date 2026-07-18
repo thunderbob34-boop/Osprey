@@ -9,9 +9,17 @@ type ButtonProps = {
   children: string;
   disabled?: boolean;
   style?: ViewStyle;
+  accessibilityLabel?: string;
 };
 
-export function Button({ variant = 'primary', onPress, children, disabled, style }: ButtonProps) {
+export function Button({
+  variant = 'primary',
+  onPress,
+  children,
+  disabled,
+  style,
+  accessibilityLabel,
+}: ButtonProps) {
   // Mirrors the webapp's .btn translate(2px,2px) press effect
   // (webapp/src/styles/app.css:8-17) via a native Animated translation.
   const translate = useRef(new Animated.Value(0)).current;
@@ -32,6 +40,8 @@ export function Button({ variant = 'primary', onPress, children, disabled, style
         onPressIn={pressIn}
         onPressOut={pressOut}
         disabled={disabled}
+        accessibilityLabel={accessibilityLabel}
+        accessibilityState={{ disabled: !!disabled }}
         style={[
           {
             backgroundColor: isPrimary ? Theme.accent : 'transparent',

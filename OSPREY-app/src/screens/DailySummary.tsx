@@ -18,7 +18,7 @@ import NutritionCard from '@/components/NutritionCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, kmToMiles } from '@/services/units';
-import { Card, Badge } from '@/components/ui';
+import { Card, Badge, Button } from '@/components/ui';
 import { Theme, Radius } from '@/constants/theme';
 
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
@@ -257,7 +257,7 @@ export default function DailySummaryScreen({
 
         {/* ── Today's Session Card — the day's #1 question, so it sits right
              under Battery/Readiness rather than below the Nutrition card. ── */}
-        <View style={styles.sessionCard}>
+        <Card style={{ marginBottom: 14 }}>
           <View style={styles.sessionHeader}>
             <Text style={styles.sessionLabel}>TODAY&apos;S SESSION</Text>
             {onViewWeekPress ? (
@@ -319,32 +319,24 @@ export default function DailySummaryScreen({
           </Card>
 
           <View style={styles.sessionActionsRow}>
-            <TouchableOpacity
-              style={[styles.startBtn, session.sessionType === 'rest' && styles.startBtnDisabled]}
+            <Button
+              variant="primary"
               onPress={() => onStartSession?.(session)}
               disabled={session.sessionType === 'rest'}
-              accessibilityRole="button"
               accessibilityLabel={session.sessionType === 'rest' ? 'Rest day' : 'Start session'}
-              accessibilityState={{ disabled: session.sessionType === 'rest' }}
+              style={{ flex: 1 }}
             >
-              <Text style={styles.startBtnText}>
-                {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
-              </Text>
-            </TouchableOpacity>
+              {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
+            </Button>
             {(onSwapSession || onCompressSession) &&
             session.sessionId &&
             session.sessionType !== 'rest' ? (
-              <TouchableOpacity
-                style={styles.adjustBtn}
-                onPress={() => setAdjustSheetOpen(true)}
-                accessibilityRole="button"
-                accessibilityLabel="Adjust today's session"
-              >
-                <Text style={styles.adjustBtnText}>Adjust</Text>
-              </TouchableOpacity>
+              <Button variant="secondary" onPress={() => setAdjustSheetOpen(true)}>
+                Adjust
+              </Button>
             ) : null}
           </View>
-        </View>
+        </Card>
 
         {weatherCard ?? null}
 
@@ -743,14 +735,6 @@ const styles = StyleSheet.create({
   },
 
   // Session card
-  sessionCard: {
-    backgroundColor: 'rgba(0,200,200,0.10)',
-    borderWidth: 1.5,
-    borderColor: 'rgba(0,200,200,0.35)',
-    borderRadius: 18,
-    padding: 18,
-    marginBottom: 14,
-  },
   sessionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -760,18 +744,19 @@ const styles = StyleSheet.create({
   sessionLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.teal,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.accent,
     letterSpacing: 1.5,
   },
   viewWeekLink: {
     fontSize: 12,
     fontWeight: '700',
-    color: Colors.textSecondary,
+    color: Theme.accent,
   },
   sessionType: {
     fontSize: 26,
     fontWeight: '800',
-    color: Colors.textPrimary,
+    color: Theme.text,
     letterSpacing: -0.4,
     marginBottom: 10,
   },
@@ -781,21 +766,24 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
   sessionChip: {
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    borderRadius: 8,
+    backgroundColor: Theme.panel,
+    borderWidth: 1,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 10,
     paddingVertical: 5,
   },
   sessionChipText: {
     fontSize: 12,
     fontWeight: '700',
-    color: Colors.textPrimary,
+    color: Theme.text,
   },
   sessionChipAccent: {
-    backgroundColor: 'rgba(0,200,200,0.18)',
+    borderColor: Theme.accent,
+    backgroundColor: Theme.accent + '22',
   },
   sessionChipAccentText: {
-    color: Colors.teal,
+    color: Theme.accent,
   },
   ozzieNote: {
     flexDirection: 'row',
@@ -831,36 +819,6 @@ const styles = StyleSheet.create({
   sessionActionsRow: {
     flexDirection: 'row',
     gap: 10,
-  },
-  startBtn: {
-    flex: 1,
-    backgroundColor: Colors.teal,
-    borderRadius: 12,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  startBtnText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#000',
-  },
-  startBtnDisabled: {
-    opacity: 0.45,
-  },
-  adjustBtn: {
-    paddingHorizontal: 18,
-    height: 44,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.18)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  adjustBtnText: {
-    fontSize: 13,
-    fontWeight: '700',
-    color: Colors.textPrimary,
   },
   // Week progress
   weekCard: {
