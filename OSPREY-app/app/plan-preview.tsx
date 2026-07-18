@@ -12,6 +12,8 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
+import { Card, Button } from '@/components/ui';
 import { ZonesCard } from '@/components/ZonesCard';
 import { useAuthStore } from '@/store/authStore';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
@@ -387,7 +389,7 @@ export default function PlanPreviewScreen() {
 
       {loading ? (
         <View style={styles.center}>
-          <ActivityIndicator color={Colors.teal} size="large" />
+          <ActivityIndicator color={Theme.accent} size="large" />
         </View>
       ) : loadError ? (
         <View style={styles.center}>
@@ -396,14 +398,13 @@ export default function PlanPreviewScreen() {
       ) : isViewOnly && sessions.length === 0 ? (
         <View style={styles.center}>
           <Text style={styles.errorText}>No active plan yet.</Text>
-          <TouchableOpacity
-            style={styles.buildBtn}
+          <Button
+            variant="primary"
             onPress={() => router.replace('/preferences')}
-            accessibilityRole="button"
             accessibilityLabel="Build my plan"
           >
-            <Text style={styles.buildBtnText}>Build My Plan →</Text>
-          </TouchableOpacity>
+            Build My Plan →
+          </Button>
         </View>
       ) : (
         <>
@@ -416,7 +417,7 @@ export default function PlanPreviewScreen() {
             ) : null}
 
             {raceGoal && racePhase ? (
-              <View style={styles.raceCard}>
+              <Card style={styles.raceCard}>
                 <Text style={styles.raceCardLabel}>TRAINING FOR</Text>
                 <Text style={styles.raceCardName}>{raceGoal.targetRace}</Text>
                 <Text style={styles.raceCardMeta}>
@@ -452,10 +453,10 @@ export default function PlanPreviewScreen() {
                     </Text>
                   ))}
                 </View>
-              </View>
+              </Card>
             ) : null}
 
-            <View style={styles.summaryCard}>
+            <Card style={styles.summaryCard}>
               <Text style={styles.summaryLabel}>THIS WEEK</Text>
               <View style={styles.summaryGrid}>
                 <View style={styles.summaryItem}>
@@ -483,12 +484,12 @@ export default function PlanPreviewScreen() {
                   </View>
                 ))}
               </View>
-            </View>
+            </Card>
 
             <ZonesCard />
 
             <Text style={styles.scheduleLabel}>SCHEDULE</Text>
-            <View style={styles.scheduleCard}>
+            <Card style={styles.scheduleCard}>
               {sessions.map((session, idx) => {
                 const dayName = dayNameForDate(session.session_date);
                 const distance = formatDistance(session, units);
@@ -501,7 +502,7 @@ export default function PlanPreviewScreen() {
                     <TouchableOpacity
                       style={[
                         styles.sessionRow,
-                        !isLast && !isExpanded && { borderBottomWidth: 1, borderBottomColor: Colors.border },
+                        !isLast && !isExpanded && { borderBottomWidth: 1, borderBottomColor: Theme.line },
                       ]}
                       onPress={() =>
                         setExpandedDate((d) => (d === session.session_date ? null : session.session_date))
@@ -542,36 +543,26 @@ export default function PlanPreviewScreen() {
                   </Fragment>
                 );
               })}
-            </View>
+            </Card>
 
             {!isViewOnly ? (
-              <View style={styles.noteCard}>
+              <Card style={styles.noteCard}>
                 <Text style={styles.noteText}>
                   ✓ Your plan is saved. You can view it anytime from Settings.
                 </Text>
-              </View>
+              </Card>
             ) : null}
           </ScrollView>
 
           <View style={styles.footer}>
             {isViewOnly ? (
-              <TouchableOpacity
-                style={styles.homeBtn}
-                onPress={() => router.back()}
-                accessibilityRole="button"
-                accessibilityLabel="Done"
-              >
-                <Text style={styles.homeBtnText}>Done</Text>
-              </TouchableOpacity>
+              <Button variant="primary" onPress={() => router.back()} accessibilityLabel="Done">
+                Done
+              </Button>
             ) : (
-              <TouchableOpacity
-                style={styles.homeBtn}
-                onPress={goHome}
-                accessibilityRole="button"
-                accessibilityLabel="Let's go"
-              >
-                <Text style={styles.homeBtnText}>Let's Go →</Text>
-              </TouchableOpacity>
+              <Button variant="primary" onPress={goHome} accessibilityLabel="Let's go">
+                Let's Go →
+              </Button>
             )}
           </View>
         </>
@@ -581,16 +572,9 @@ export default function PlanPreviewScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32, gap: 16 },
-  errorText: { color: Colors.textMuted, fontSize: 15, textAlign: 'center' },
-  buildBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-  },
-  buildBtnText: { fontSize: 15, fontWeight: '800', color: '#000' },
+  errorText: { color: Theme.textMut, fontSize: 15, textAlign: 'center' },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -598,18 +582,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.border,
+    borderBottomColor: Theme.line,
   },
-  backText: { color: Colors.teal, fontSize: 22, fontWeight: '700' },
-  headerTitle: { color: Colors.textPrimary, fontSize: 16, fontWeight: '800' },
+  backText: { color: Theme.accent, fontSize: 22, fontWeight: '700' },
+  headerTitle: { color: Theme.text, fontSize: 16, fontWeight: '800' },
   scroll: { padding: 20, paddingBottom: 32 },
-  title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 6 },
-  subtitle: { fontSize: 14, color: Colors.textMuted, marginBottom: 20 },
+  title: { fontSize: 28, fontWeight: '900', color: Theme.text, marginBottom: 6 },
+  subtitle: { fontSize: 14, color: Theme.textMut, marginBottom: 20 },
   raceCard: {
-    backgroundColor: Colors.surfaceGold,
-    borderWidth: 1,
-    borderColor: Colors.borderGold,
-    borderRadius: 14,
     padding: 16,
     marginBottom: 16,
     gap: 4,
@@ -617,19 +597,20 @@ const styles = StyleSheet.create({
   raceCardLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.gold,
+    color: Theme.accent,
     letterSpacing: 1,
+    fontFamily: 'SpaceGrotesk_700Bold',
   },
-  raceCardName: { fontSize: 18, fontWeight: '900', color: Colors.textPrimary, marginTop: 2 },
-  raceCardMeta: { fontSize: 12, color: Colors.textSecondary, marginBottom: 12 },
+  raceCardName: { fontSize: 18, fontWeight: '900', color: Theme.text, marginTop: 2 },
+  raceCardMeta: { fontSize: 12, color: Theme.textSoft, marginBottom: 12 },
   phaseTrack: {
     flexDirection: 'row',
     gap: 4,
     height: 8,
   },
-  phaseSegment: { flex: 1, borderRadius: 4 },
-  phaseSegmentActive: { backgroundColor: Colors.gold },
-  phaseSegmentInactive: { backgroundColor: 'rgba(255,255,255,0.1)' },
+  phaseSegment: { flex: 1, borderRadius: Radius.card },
+  phaseSegmentActive: { backgroundColor: Theme.accent },
+  phaseSegmentInactive: { backgroundColor: Theme.line },
   phaseLabelsRow: {
     flexDirection: 'row',
     marginTop: 6,
@@ -638,15 +619,11 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    color: Theme.textMut,
     textAlign: 'center',
   },
-  phaseLabelActive: { color: Colors.gold },
+  phaseLabelActive: { color: Theme.accent },
   summaryCard: {
-    backgroundColor: Colors.surfaceTeal,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
-    borderRadius: 14,
     padding: 16,
     marginBottom: 24,
     gap: 12,
@@ -654,8 +631,9 @@ const styles = StyleSheet.create({
   summaryLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.teal,
+    color: Theme.accent,
     letterSpacing: 1,
+    fontFamily: 'SpaceGrotesk_700Bold',
   },
   summaryGrid: {
     flexDirection: 'row',
@@ -663,29 +641,26 @@ const styles = StyleSheet.create({
   },
   summaryItem: {
     flex: 1,
-    backgroundColor: 'rgba(0,200,200,0.1)',
-    borderRadius: 10,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     padding: 12,
     alignItems: 'center',
   },
-  summaryValue: { fontSize: 24, fontWeight: '900', color: Colors.teal },
-  summaryName: { fontSize: 11, color: Colors.textMuted, marginTop: 4 },
+  summaryValue: { fontSize: 24, fontWeight: '900', color: Theme.accent },
+  summaryName: { fontSize: 11, color: Theme.textMut, marginTop: 4 },
   typesRow: { flexDirection: 'row', gap: 8, justifyContent: 'center' },
   typeChip: { alignItems: 'center', gap: 4 },
   typeIcon: { fontSize: 20 },
-  typeCount: { fontSize: 12, fontWeight: '700', color: Colors.teal },
+  typeCount: { fontSize: 12, fontWeight: '700', color: Theme.accent },
   scheduleLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.textMuted,
+    color: Theme.textMut,
     letterSpacing: 1,
     marginBottom: 8,
+    fontFamily: 'SpaceGrotesk_700Bold',
   },
   scheduleCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
     padding: 0,
     marginBottom: 16,
     overflow: 'hidden',
@@ -698,79 +673,74 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   sessionLeft: { flex: 1 },
-  dayName: { fontSize: 13, fontWeight: '700', color: Colors.textPrimary, marginBottom: 2 },
-  sessionDesc: { fontSize: 12, color: Colors.textSecondary },
-  sessionDistance: { fontSize: 11, color: Colors.teal, fontWeight: '600', marginTop: 2 },
+  dayName: { fontSize: 13, fontWeight: '700', color: Theme.text, marginBottom: 2 },
+  sessionDesc: { fontSize: 12, color: Theme.textSoft },
+  sessionDistance: { fontSize: 11, color: Theme.accent, fontWeight: '600', marginTop: 2 },
   sessionRight: { alignItems: 'flex-end', gap: 4 },
   sessionIcon: { fontSize: 18 },
-  sessionTime: { fontSize: 11, color: Colors.textMuted, fontWeight: '600' },
+  sessionTime: { fontSize: 11, color: Theme.textMut, fontWeight: '600' },
   noteCard: {
-    backgroundColor: Colors.surfaceTeal,
-    borderRadius: 10,
     padding: 12,
-    borderWidth: 1,
-    borderColor: Colors.borderTeal,
   },
-  noteText: { fontSize: 12, color: Colors.teal, fontWeight: '500', lineHeight: 18 },
-  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Colors.border },
-  homeBtn: {
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
-    height: 52,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  homeBtnText: { fontSize: 16, fontWeight: '800', color: '#000' },
+  noteText: { fontSize: 12, color: Theme.accent, fontWeight: '500', lineHeight: 18 },
+  footer: { padding: 16, borderTopWidth: 1, borderTopColor: Theme.line },
 
   // ── Expandable day panel ──
-  chevron: { fontSize: 12, color: Colors.textMuted, marginTop: 2 },
+  chevron: { fontSize: 12, color: Theme.textMut, marginTop: 2 },
   detailPanel: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderTopWidth: 1,
-    borderTopColor: Colors.borderTeal,
+    borderTopColor: Theme.line,
     padding: 16,
     gap: 14,
   },
-  detailPanelDivider: { borderBottomWidth: 1, borderBottomColor: Colors.border },
+  detailPanelDivider: { borderBottomWidth: 1, borderBottomColor: Theme.line },
   detailSection: { gap: 8 },
-  detailSectionLabel: { color: Colors.teal, fontSize: 10, fontWeight: '800', letterSpacing: 1 },
-  detailBodyText: { color: Colors.textPrimary, fontSize: 14, lineHeight: 21 },
+  detailSectionLabel: {
+    color: Theme.accent,
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 1,
+    fontFamily: 'SpaceGrotesk_700Bold',
+  },
+  detailBodyText: { color: Theme.text, fontSize: 14, lineHeight: 21 },
   detailMetaRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  detailMetaText: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
+  detailMetaText: { fontSize: 12, color: Theme.textSoft, fontWeight: '600' },
   intensityChip: {
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    borderRadius: 8,
+    backgroundColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 10,
     paddingVertical: 4,
   },
-  intensityChipText: { fontSize: 11, fontWeight: '700', color: Colors.textPrimary, textTransform: 'capitalize' },
+  intensityChipText: { fontSize: 11, fontWeight: '700', color: Theme.text, textTransform: 'capitalize' },
 
   exerciseList: { gap: 10, marginTop: 4 },
   exerciseRow: { gap: 2 },
   exerciseNameRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  exerciseName: { fontSize: 13, fontWeight: '700', color: Colors.textPrimary, flexShrink: 1 },
-  exerciseMeta: { fontSize: 12, fontWeight: '700', color: Colors.teal },
-  exerciseNote: { fontSize: 11, color: Colors.textMuted, fontStyle: 'italic' },
+  exerciseName: { fontSize: 13, fontWeight: '700', color: Theme.text, flexShrink: 1 },
+  exerciseMeta: { fontSize: 12, fontWeight: '700', color: Theme.accent },
+  exerciseNote: { fontSize: 11, color: Theme.textMut, fontStyle: 'italic' },
 
   segmentList: { gap: 8, marginTop: 4 },
   segmentRow: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
-  segmentReps: { fontSize: 12, fontWeight: '800', color: Colors.textPrimary },
-  segmentLabel: { fontSize: 12, color: Colors.textPrimary, flexShrink: 1 },
+  segmentReps: { fontSize: 12, fontWeight: '800', color: Theme.text },
+  segmentLabel: { fontSize: 12, color: Theme.text, flexShrink: 1 },
   segmentEffort: { fontSize: 11, fontWeight: '700', textTransform: 'uppercase' },
-  segmentRest: { fontSize: 11, color: Colors.textMuted },
+  segmentRest: { fontSize: 11, color: Theme.textMut },
 
   macroGrid: { flexDirection: 'row', gap: 8 },
   macroItem: {
     flex: 1,
-    backgroundColor: 'rgba(0,200,200,0.1)',
-    borderRadius: 10,
+    backgroundColor: Theme.panel,
+    borderRadius: Radius.card,
     paddingVertical: 10,
     alignItems: 'center',
   },
-  macroValue: { fontSize: 16, fontWeight: '900', color: Colors.teal },
-  macroLabel: { fontSize: 10, color: Colors.textMuted, marginTop: 2, textAlign: 'center' },
-  hydrationLine: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
+  macroValue: { fontSize: 16, fontWeight: '900', color: Theme.accent },
+  macroLabel: { fontSize: 10, color: Theme.textMut, marginTop: 2, textAlign: 'center' },
+  hydrationLine: { fontSize: 12, color: Theme.textSoft, fontWeight: '600' },
 
+  // ── FUNCTIONAL — weather-severity legend, not brand. Leave untouched. ──
   heatNote: { fontSize: 12, color: Colors.amber, fontWeight: '600', lineHeight: 17 },
   heatNoteAlert: { color: Colors.red },
 });
