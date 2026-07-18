@@ -13,6 +13,8 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
 import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { useAuthStore } from '@/store/authStore';
@@ -337,7 +339,7 @@ export default function PreferencesScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.loadingContainer}>
-          <ActivityIndicator color={Colors.teal} size="large" />
+          <ActivityIndicator color={Theme.accent} size="large" />
         </View>
       </SafeAreaView>
     );
@@ -352,7 +354,7 @@ export default function PreferencesScreen() {
           accessibilityRole="button"
           accessibilityLabel="Close"
         >
-          <Ionicons name="close" size={20} color={Colors.textMuted} />
+          <Ionicons name="close" size={20} color={Theme.textMut} />
         </TouchableOpacity>
         <Text style={styles.title}>Build Your Plan</Text>
         <Text style={styles.subtitle}>
@@ -433,7 +435,7 @@ export default function PreferencesScreen() {
               onChangeText={setUltraVert}
               keyboardType="number-pad"
               placeholder="e.g. 2000"
-              placeholderTextColor={Colors.textMuted}
+              placeholderTextColor={Theme.textMut}
             />
 
             <Text style={styles.sectionLabel}>GUT-TRAINED</Text>
@@ -649,7 +651,7 @@ export default function PreferencesScreen() {
         >
           {loading ? (
             <>
-              <ActivityIndicator color="#000" style={{ marginRight: 8 }} />
+              <ActivityIndicator color={Theme.ink} style={{ marginRight: 8 }} />
               <Text style={styles.generateBtnText}>Ozzie is building your schedule...</Text>
             </>
           ) : (
@@ -659,14 +661,14 @@ export default function PreferencesScreen() {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.skipBtn}
+        <Button
+          variant="secondary"
           onPress={() => router.back()}
-          accessibilityRole="button"
           accessibilityLabel={hasGeneratedBefore ? 'Cancel' : 'Skip for now'}
+          style={styles.skipBtn}
         >
-          <Text style={styles.skipText}>{hasGeneratedBefore ? 'Cancel' : 'Skip for now'}</Text>
-        </TouchableOpacity>
+          {hasGeneratedBefore ? 'Cancel' : 'Skip for now'}
+        </Button>
       </ScrollView>
     </SafeAreaView>
   );
@@ -692,51 +694,52 @@ function LiftField({
         onChangeText={onChangeText}
         keyboardType="decimal-pad"
         placeholder={placeholder}
-        placeholderTextColor={Colors.textMuted}
+        placeholderTextColor={Theme.textMut}
       />
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   scroll: { padding: 24, paddingBottom: 48 },
   closeBtn: { alignSelf: 'flex-start', padding: 8, marginBottom: 4 },
   title: {
     fontSize: 28,
     fontWeight: '800',
-    color: Colors.textPrimary,
+    color: Theme.text,
     marginBottom: 10,
   },
   subtitle: {
     fontSize: 15,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 22,
     marginBottom: 8,
   },
   sectionLabel: {
     fontSize: 12,
     fontWeight: '700',
-    color: Colors.textMuted,
+    fontFamily: 'SpaceGrotesk_700Bold',
+    color: Theme.textMut,
     letterSpacing: 1,
     marginBottom: 10,
     marginTop: 20,
   },
   helperText: {
     fontSize: 13,
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
     lineHeight: 19,
     marginTop: 20,
   },
   input: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 10,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    color: Colors.textPrimary,
+    color: Theme.text,
     fontSize: 16,
   },
   chipRow: {
@@ -745,29 +748,29 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   chip: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     borderRadius: 24,
     paddingHorizontal: 16,
     paddingVertical: 10,
   },
   chipSelected: {
-    backgroundColor: Colors.surfaceTeal,
-    borderColor: Colors.borderTeal,
+    backgroundColor: Theme.panel,
+    borderColor: Theme.accent,
   },
   chipText: {
     fontSize: 14,
     fontWeight: '600',
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
   },
   chipTextSelected: {
-    color: Colors.teal,
+    color: Theme.accent,
   },
   chipLarge: {
-    backgroundColor: Colors.bgCard,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Theme.line,
     borderRadius: 24,
     paddingHorizontal: 24,
     paddingVertical: 14,
@@ -777,7 +780,7 @@ const styles = StyleSheet.create({
   chipTextLarge: {
     fontSize: 18,
     fontWeight: '700',
-    color: Colors.textSecondary,
+    color: Theme.textSoft,
   },
   replaceWarning: {
     fontSize: 12,
@@ -788,29 +791,24 @@ const styles = StyleSheet.create({
   },
   generateBtn: {
     marginTop: 32,
-    backgroundColor: Colors.teal,
-    borderRadius: 14,
+    backgroundColor: Theme.accent,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
     paddingVertical: 16,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
   },
   generateBtnDisabled: {
-    opacity: 0.7,
+    opacity: 0.5,
   },
   generateBtnText: {
     fontSize: 16,
     fontWeight: '800',
-    color: '#000',
+    color: Theme.ink,
   },
   skipBtn: {
     marginTop: 16,
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  skipText: {
-    fontSize: 14,
-    color: Colors.textMuted,
-    fontWeight: '600',
   },
 });
