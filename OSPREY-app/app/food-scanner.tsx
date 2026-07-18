@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   manualBtn: {
-    borderRadius: Radius.card,
+    // borderRadius comes from the Button primitive; only sizing is overridden here.
     paddingVertical: 10,
     paddingHorizontal: 22,
   },
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   subtitle: { fontSize: 14, color: Theme.textMut, textAlign: 'center', lineHeight: 20 },
   primaryBtn: {
     marginTop: 12,
-    borderRadius: Radius.card,
+    // borderRadius comes from the Button primitive; only sizing is overridden here.
     paddingVertical: 13,
     paddingHorizontal: 28,
   },

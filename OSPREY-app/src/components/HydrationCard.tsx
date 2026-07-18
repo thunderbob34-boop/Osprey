@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Card } from '@/components/ui';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatFluidOz, mlToOz } from '@/services/units';
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   quickAddBtn: {
     flex: 1,
     backgroundColor: Theme.panel,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
     borderRadius: Radius.card,
     paddingVertical: 8,

@@ -1112,9 +1112,9 @@ const styles = StyleSheet.create({
   },
   dayTypeChip: {
     backgroundColor: Theme.panel,
-    borderWidth: 1,
+    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
-    borderRadius: 12,
+    borderRadius: Radius.card,
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
@@ -1274,6 +1274,6 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
     alignItems: 'center',
   },
-  saveBtnDisabled: { opacity: 0.6 },
+  saveBtnDisabled: { opacity: 0.5 },
   saveBtnText: { fontSize: 14, fontWeight: '800', color: Theme.ink },
 });
