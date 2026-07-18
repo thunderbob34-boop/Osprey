@@ -16,6 +16,8 @@ import Svg, { Polyline } from 'react-native-svg';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
+import { Theme, Radius } from '@/constants/theme';
+import { Card } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import HydrationCard from '@/components/HydrationCard';
 import { useRecentMeals, useTodayLog } from '@/hooks/useTodayLog';
@@ -509,7 +511,7 @@ export default function LogTab() {
           <Text style={styles.subtitle}>Log a workout, a meal, or today's weigh-in.</Text>
 
           {nutrition ? (
-            <View style={styles.nutritionCard}>
+            <Card style={styles.nutritionCard}>
               <View style={styles.nutritionHeaderRow}>
                 <Text style={styles.cardLabel}>NUTRITION TODAY</Text>
                 {nutrition.dayType ? (
@@ -563,7 +565,7 @@ export default function LogTab() {
                 </Text>
               </View>
               {nutrition.tip ? <Text style={styles.tipText}>{nutrition.tip}</Text> : null}
-            </View>
+            </Card>
           ) : null}
 
           {hydration ? (
@@ -575,11 +577,11 @@ export default function LogTab() {
           ) : null}
 
           {isLoading ? (
-            <ActivityIndicator color={Colors.teal} style={{ marginTop: 24 }} />
+            <ActivityIndicator color={Theme.accent} style={{ marginTop: 24 }} />
           ) : error ? (
             <Text style={styles.errorText}>Couldn&apos;t load today&apos;s log.</Text>
           ) : (
-            <View style={styles.todayCard}>
+            <Card style={styles.todayCard}>
               <Text style={styles.cardLabel}>TODAY</Text>
               {!hasEntries ? (
                 <Text style={styles.emptyText}>Nothing logged yet today.</Text>
@@ -649,7 +651,7 @@ export default function LogTab() {
                   ) : null}
                 </>
               )}
-            </View>
+            </Card>
           )}
 
           {/* Log a Workout */}
@@ -1081,17 +1083,12 @@ export default function LogTab() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.bg },
+  container: { flex: 1, backgroundColor: Theme.ink },
   scrollContent: { padding: 24, paddingBottom: 48 },
-  title: { fontSize: 28, fontWeight: '900', color: Colors.textPrimary, marginBottom: 4 },
-  subtitle: { fontSize: 14, color: Colors.textMuted, lineHeight: 20, marginBottom: 20 },
+  title: { fontSize: 28, fontWeight: '900', color: Theme.text, marginBottom: 4 },
+  subtitle: { fontSize: 14, color: Theme.textMut, lineHeight: 20, marginBottom: 20 },
   errorText: { fontSize: 13, color: Colors.red, marginBottom: 16 },
   nutritionCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 16,
     marginBottom: 16,
     gap: 8,
   },
@@ -1102,50 +1099,45 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   dayTypeChip: {
-    backgroundColor: Colors.surfaceTeal,
+    backgroundColor: Theme.panel,
     borderWidth: 1,
-    borderColor: Colors.borderTeal,
+    borderColor: Theme.line,
     borderRadius: 12,
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
   dayTypeChipRest: { backgroundColor: Colors.goldDim, borderColor: 'rgba(200,154,0,0.3)' },
-  dayTypeChipText: { fontSize: 10, fontWeight: '700', color: Colors.teal },
+  dayTypeChipText: { fontSize: 10, fontWeight: '700', color: Theme.accent, fontFamily: 'SpaceGrotesk_700Bold' },
   dayTypeChipTextRest: { color: Colors.gold },
   macroRow: { flexDirection: 'row', alignItems: 'baseline', gap: 6 },
-  macroValue: { fontSize: 20, fontWeight: '800', color: Colors.textPrimary },
-  macroUnit: { fontSize: 13, color: Colors.textMuted, fontWeight: '600' },
+  macroValue: { fontSize: 20, fontWeight: '800', color: Theme.text },
+  macroUnit: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
   progressTrack: {
     height: 6,
     borderRadius: 3,
-    backgroundColor: 'rgba(255,255,255,0.08)',
+    backgroundColor: Theme.line,
     overflow: 'hidden',
   },
-  progressFill: { height: '100%', backgroundColor: Colors.teal, borderRadius: 3 },
+  progressFill: { height: '100%', backgroundColor: Theme.accent, borderRadius: 3 },
   macroChipRow: { flexDirection: 'row', gap: 12 },
-  macroChip: { fontSize: 12, color: Colors.textSecondary, fontWeight: '600' },
-  tipText: { fontSize: 13, color: Colors.textSecondary, lineHeight: 18, marginTop: 4 },
+  macroChip: { fontSize: 12, color: Theme.textSoft, fontWeight: '600' },
+  tipText: { fontSize: 13, color: Theme.textSoft, lineHeight: 18, marginTop: 4 },
   todayCard: {
-    backgroundColor: Colors.bgCard,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 14,
-    padding: 16,
     marginBottom: 20,
     gap: 10,
   },
-  cardLabel: { fontSize: 10, fontWeight: '700', color: Colors.textMuted, letterSpacing: 1 },
-  emptyText: { fontSize: 13, color: Colors.textMuted },
+  cardLabel: { fontSize: 10, fontWeight: '700', color: Theme.textMut, letterSpacing: 1, fontFamily: 'SpaceGrotesk_700Bold' },
+  emptyText: { fontSize: 13, color: Theme.textMut },
   entryRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 4 },
   entryIcon: { fontSize: 18, width: 22, textAlign: 'center' },
-  entryPrimary: { fontSize: 14, fontWeight: '700', color: Colors.textPrimary },
-  entrySecondary: { fontSize: 12, color: Colors.textSecondary },
+  entryPrimary: { fontSize: 14, fontWeight: '700', color: Theme.text },
+  entrySecondary: { fontSize: 12, color: Theme.textSoft },
   entryDeleteBtn: { padding: 10, marginLeft: 2 },
-  entryDeleteText: { fontSize: 13, color: Colors.textMuted, fontWeight: '700' },
+  entryDeleteText: { fontSize: 13, color: Theme.textMut, fontWeight: '700' },
   totalText: {
     fontSize: 12,
     fontWeight: '700',
-    color: Colors.teal,
+    color: Theme.accent,
     marginTop: 4,
   },
   actionCard: {
