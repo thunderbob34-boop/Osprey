@@ -110,7 +110,11 @@ export function OptionCard({
     <TouchableOpacity
       style={[
         styles.optionCard,
-        selected && { borderColor: accentColor, backgroundColor: `${accentColor}14` },
+        // Border-only. This card already carries THREE selection cues — accent
+        // border, accent title, and the ✓ below — so a fill is redundant, and
+        // goals.tsx renders these directly above border-only day buttons where
+        // the mismatch would read as a seam. Convention: races.tsx:1267.
+        selected && { borderColor: accentColor },
       ]}
       onPress={onPress}
       activeOpacity={0.8}

@@ -6,7 +6,7 @@ import { useOnboardingStore } from '@/store/onboardingStore';
 import { useAuthStore } from '@/store/authStore';
 import { completeOnboarding, generateInitialPlan } from '@/services/onboarding';
 import { isHealthKitSupported, requestHealthKitAuthorization } from '@/services/healthkit';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius } from '@/constants/theme';
 
 export default function HealthScreen() {
   const router = useRouter();
@@ -106,12 +106,16 @@ export default function HealthScreen() {
 }
 
 const styles = StyleSheet.create({
+  // Passive callout, NOT a selectable option — it sits directly below tappable
+  // OptionCards, and at BorderWidth.card it read as a third, unselected one.
+  // Differentiated by emphasis (1px) rather than a second hue, so it recedes
+  // instead of advertising itself as tappable.
   noteCard: {
     marginTop: 8,
     backgroundColor: Theme.panel,
     borderRadius: Radius.card,
     padding: 14,
-    borderWidth: BorderWidth.card,
+    borderWidth: 1,
     borderColor: Theme.line,
   },
   noteText: {
