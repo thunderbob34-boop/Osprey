@@ -61,3 +61,50 @@ jest.mock('react-native-purchases', () => ({
   },
   LOG_LEVEL: { VERBOSE: 'VERBOSE', DEBUG: 'DEBUG', INFO: 'INFO', WARN: 'WARN', ERROR: 'ERROR' },
 }));
+
+// Mock react-native-svg. Its native font loading throws under jest-expo
+// ("loadedNativeFonts.forEach is not a function").
+//
+// The mock renders each SVG element as a host view of the same name and
+// PRESERVES ALL PROPS — that matters: chart tests assert on `stroke` and
+// `fill`, so a mock that dropped props would let those assertions pass against
+// an empty tree, which is worse than no test at all.
+jest.mock('react-native-svg', () => {
+  const React = require('react');
+  const makeMock = (name) => {
+    const Component = ({ children, ...props }) =>
+      React.createElement(name, props, children);
+    Component.displayName = name;
+    return Component;
+  };
+  const Svg = makeMock('Svg');
+  return {
+    __esModule: true,
+    default: Svg,
+    Svg,
+    Circle: makeMock('Circle'),
+    Ellipse: makeMock('Ellipse'),
+    G: makeMock('G'),
+    Line: makeMock('Line'),
+    Path: makeMock('Path'),
+    Polygon: makeMock('Polygon'),
+    Polyline: makeMock('Polyline'),
+    Rect: makeMock('Rect'),
+    Text: makeMock('SvgText'),
+    Defs: makeMock('Defs'),
+    LinearGradient: makeMock('LinearGradient'),
+    Stop: makeMock('Stop'),
+  };
+});
+
+// Mock expo-font. Its native-font registry ("loadedNativeFonts.forEach is not
+// a function") throws under jest-expo when a screen renders icon fonts.
+jest.mock('expo-font', () => ({
+  __esModule: true,
+  useFonts: () => [true, null],
+  loadAsync: jest.fn(() => Promise.resolve()),
+  isLoaded: jest.fn(() => true),
+  isLoading: jest.fn(() => false),
+  unloadAsync: jest.fn(() => Promise.resolve()),
+  loadedNativeFonts: [],
+}));

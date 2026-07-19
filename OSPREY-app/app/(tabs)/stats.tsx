@@ -665,7 +665,10 @@ const styles = StyleSheet.create({
   barTrack: {
     width: 18,
     flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    // The unfilled track behind the stacked bars. Was a raw rgba byte-identical
+    // to the OLD Colors.bgCard — a leftover the migration missed, caught by the
+    // no-old-colours screen test. Same call as OnboardingShell's progressTrack.
+    backgroundColor: Theme.line,
     borderRadius: 6,
     justifyContent: 'flex-end',
     overflow: 'hidden',
