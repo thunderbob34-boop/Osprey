@@ -99,6 +99,25 @@ describe('Button — accessibility and disabled state', () => {
     expect(flatten(pressable.props.style).opacity).toBe(0.5);
   });
 
+  it('announces busy to assistive tech while an action is in flight', () => {
+    // Every hand-rolled spinner button set accessibilityState.busy. Without
+    // this prop, converting them to <Button> would have silently dropped the
+    // "loading" announcement app-wide — an a11y regression, not a visual one.
+    render(
+      <Button onPress={() => {}} disabled busy accessibilityLabel="Saving">
+        <ActivityIndicator />
+      </Button>,
+    );
+    const state = screen.getByLabelText('Saving').props.accessibilityState;
+    expect(state.busy).toBe(true);
+    expect(state.disabled).toBe(true);
+  });
+
+  it('reports busy false by default, not undefined', () => {
+    render(<Button onPress={() => {}} accessibilityLabel="Idle">Idle</Button>);
+    expect(screen.getByLabelText('Idle').props.accessibilityState.busy).toBe(false);
+  });
+
   it('does not fire onPress while disabled', () => {
     const onPress = jest.fn();
     render(<Button onPress={onPress} disabled accessibilityLabel="Saving">Saving</Button>);

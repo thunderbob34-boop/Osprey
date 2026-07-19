@@ -14,6 +14,13 @@ type ButtonProps = {
    */
   children: React.ReactNode;
   disabled?: boolean;
+  /**
+   * Surfaces `accessibilityState.busy` — announces "loading" to assistive tech
+   * while an action is in flight. Every hand-rolled spinner button in this app
+   * set it, so a conversion that omits it is an accessibility regression, not
+   * just a visual one. Pass it alongside a spinner child.
+   */
+  busy?: boolean;
   /** Applied to the inner Pressable — padding, colours, borders. */
   style?: StyleProp<ViewStyle>;
   /**
@@ -31,6 +38,7 @@ export function Button({
   onPress,
   children,
   disabled,
+  busy,
   style,
   wrapperStyle,
   accessibilityLabel,
@@ -62,7 +70,7 @@ export function Button({
         disabled={disabled}
         accessibilityRole="button"
         accessibilityLabel={accessibilityLabel}
-        accessibilityState={{ disabled: !!disabled }}
+        accessibilityState={{ disabled: !!disabled, busy: !!busy }}
         style={[
           {
             backgroundColor: isPrimary ? Theme.accent : 'transparent',

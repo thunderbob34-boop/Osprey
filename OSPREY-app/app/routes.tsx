@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useSavedRoutes } from '@/hooks/useSavedRoutes';
@@ -205,20 +206,15 @@ export default function RoutesScreen() {
                 </TouchableOpacity>
               </View>
 
-              <TouchableOpacity
-                style={[styles.saveBtn, addRoute.isPending && styles.saveBtnDisabled]}
+              <Button
                 onPress={handleSave}
                 disabled={addRoute.isPending}
-                accessibilityRole="button"
+                busy={addRoute.isPending}
                 accessibilityLabel="Save route"
-                accessibilityState={{ disabled: addRoute.isPending, busy: addRoute.isPending }}
+                style={styles.saveBtn}
               >
-                {addRoute.isPending ? (
-                  <ActivityIndicator color={Theme.ink} />
-                ) : (
-                  <Text style={styles.saveBtnText}>Save Route</Text>
-                )}
-              </TouchableOpacity>
+                {addRoute.isPending ? <ActivityIndicator color={Theme.ink} /> : 'Save Route'}
+              </Button>
             </View>
           ) : null}
 
@@ -335,18 +331,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   customTagAddText: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
-  saveBtn: {
-    marginTop: 10,
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  saveBtnDisabled: { opacity: 0.5 },
-  saveBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
+  // Only what <Button> does not already provide. Its fill, border, radius,
+  // ink label and 0.5-disabled all come from the primitive now; paddingVertical
+  // is kept at 14 because the primitive defaults to 12 and that would shrink
+  // this button by 4px against the form around it.
+  saveBtn: { marginTop: 10, paddingVertical: 14 },
 
   routeCard: {
     flexDirection: 'row',
