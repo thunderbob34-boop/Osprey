@@ -114,7 +114,7 @@ const colorOf = (el: { props: { style?: unknown } }) =>
 function renderWithCharts() {
   const utils = render(<StatsScreen />);
   const svgWraps = screen.UNSAFE_root.findAll(
-    (n) => typeof n.props?.onLayout === 'function',
+    (n: { props?: Record<string, unknown> }) => typeof n.props?.onLayout === 'function',
   );
   for (const w of svgWraps) {
     fireEvent(w, 'layout', { nativeEvent: { layout: { width: 320, height: 120 } } });
