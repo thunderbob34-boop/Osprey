@@ -6,14 +6,13 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
-  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { useAuthStore } from '@/store/authStore';
 import { fetchWorkoutRecap } from '@/services/workouts';
@@ -228,20 +227,18 @@ export default function WorkoutRecapScreen() {
                 accessibilityLabel="Share caption, optional"
               />
               {shareError ? <Text style={styles.shareErrorText}>{shareError}</Text> : null}
-              <TouchableOpacity
-                style={[styles.shareBtn, sharing && styles.shareBtnDisabled]}
+              <Button
                 onPress={handleShare}
                 disabled={sharing}
-                accessibilityRole="button"
+                busy={sharing}
                 accessibilityLabel="Share to activity feed"
-                accessibilityState={{ disabled: sharing, busy: sharing }}
               >
                 {sharing ? (
                   <ActivityIndicator color={Theme.ink} size="small" />
                 ) : (
                   <Text style={styles.shareBtnText}>Share to Activity Feed</Text>
                 )}
-              </TouchableOpacity>
+              </Button>
             </>
           )}
         </Card>
@@ -339,15 +336,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   shareErrorText: { fontSize: 12, color: Colors.red },
-  shareBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  shareBtnDisabled: { opacity: 0.5 },
   shareBtnText: { fontSize: 14, fontWeight: '700', color: Theme.ink },
   sharedRow: { alignItems: 'center', paddingVertical: 4 },
   sharedText: { fontSize: 13, fontWeight: '700', color: Colors.green },

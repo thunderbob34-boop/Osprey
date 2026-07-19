@@ -415,46 +415,44 @@ export default function RunWorkoutScreen() {
 
         <View style={styles.controlRow}>
           {/*
-            Hand-rolled rather than <Button>: Button applies its `style` prop to the
-            inner Pressable, but the flex child of this row is Button's Animated.View
-            wrapper (which carries only the press transform). A `flex: 1` passed to
-            <Button> therefore never reaches the node being flexed, and this control
-            collapses to text width beside the flex:1 End & Save. Revisit if the
-            primitive gains a wrapperStyle / flex-capable API.
+            Both buttons use wrapperStyle={{ flex: 1 }} for the 50/50 split — Button
+            applies `style` to the inner Pressable, but the flex child of this row is
+            Button's Animated.View wrapper (which carries only the press transform),
+            so a bare `style={{ flex: 1 }}` would never reach the flexed node. The
+            primitive gained `wrapperStyle` for exactly this case (see
+            components/ui/Button.tsx). paddingVertical: 14 is passed on both so they
+            match End & Save's height (the primitive defaults to 12).
           */}
           {status === 'paused' ? (
-            <TouchableOpacity
-              style={[styles.controlBtn, styles.controlBtnPrimary]}
+            <Button
               onPress={handleResume}
-              accessibilityRole="button"
               accessibilityLabel="Resume run"
+              wrapperStyle={{ flex: 1 }}
+              style={{ paddingVertical: 14 }}
             >
-              <Text style={styles.controlBtnPrimaryText}>▶ Resume</Text>
-            </TouchableOpacity>
+              ▶ Resume
+            </Button>
           ) : (
-            <TouchableOpacity
-              style={[styles.controlBtn, styles.controlBtnSecondary]}
+            <Button
+              variant="secondary"
               onPress={handlePause}
-              accessibilityRole="button"
               accessibilityLabel="Pause run"
+              wrapperStyle={{ flex: 1 }}
+              style={{ paddingVertical: 14 }}
             >
-              <Text style={styles.controlBtnSecondaryText}>⏸ Pause</Text>
-            </TouchableOpacity>
+              ⏸ Pause
+            </Button>
           )}
-          <TouchableOpacity
-            style={[styles.endBtn, saving && styles.endBtnDisabled]}
+          <Button
             onPress={confirmEnd}
             disabled={saving}
-            accessibilityRole="button"
+            busy={saving}
             accessibilityLabel="End and save run"
-            accessibilityState={{ disabled: saving, busy: saving }}
+            wrapperStyle={{ flex: 1 }}
+            style={{ paddingVertical: 14 }}
           >
-            {saving ? (
-              <ActivityIndicator color={Theme.ink} />
-            ) : (
-              <Text style={styles.endBtnText}>End & Save</Text>
-            )}
-          </TouchableOpacity>
+            {saving ? <ActivityIndicator color={Theme.ink} /> : 'End & Save'}
+          </Button>
         </View>
       </View>
     </SafeAreaView>
@@ -665,21 +663,6 @@ const styles = StyleSheet.create({
   },
   ozzieBtnText: { fontSize: 14, fontWeight: '700', color: Theme.accent },
   controlRow: { flexDirection: 'row', gap: 10 },
-  // paddingVertical matches endBtn (14) so the two buttons in controlRow are the
-  // same height; the Button primitive's 12 would leave them ~4px mismatched.
-  controlBtn: {
-    flex: 1,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  controlBtnPrimary: { backgroundColor: Theme.accent },
-  controlBtnPrimaryText: { color: Theme.ink, fontWeight: '800', fontSize: 14 },
-  controlBtnSecondary: { backgroundColor: 'transparent' },
-  controlBtnSecondaryText: { color: Theme.accent, fontWeight: '800', fontSize: 14 },
   warmupHint: { fontSize: 12, color: Theme.textMut, textAlign: 'center', marginTop: -4 },
   warmupWrap: { flex: 1, padding: 24, gap: 14 },
   warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
@@ -714,16 +697,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
   },
-  endBtn: {
-    flex: 1,
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  endBtnDisabled: { opacity: 0.5 },
-  endBtnText: { fontSize: 14, fontWeight: '800', color: Theme.ink },
 });

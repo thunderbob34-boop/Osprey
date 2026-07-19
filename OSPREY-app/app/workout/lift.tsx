@@ -762,6 +762,13 @@ export default function LiftWorkoutScreen() {
                   {cue ? <Text style={styles.exerciseCue}>{cue}</Text> : null}
                 </View>
                 <View style={styles.exerciseActions}>
+                  {/*
+                    SKIP: not converted to <Button> — this is an icon+text+spinner
+                    button with a bespoke pill layout (minWidth 36, 16px radius) and
+                    a non-accent active fill (Colors.red when recording), none of
+                    which the primitive's style prop can express without fighting
+                    its own defaults.
+                  */}
                   <TouchableOpacity
                     style={[styles.micBtn, recordingExercise === exerciseIndex && styles.micBtnActive]}
                     onPress={() =>
@@ -885,20 +892,19 @@ export default function LiftWorkoutScreen() {
       </ScrollView>
 
       <View style={styles.footer}>
-        <TouchableOpacity
-          style={[styles.finishBtn, saving && styles.finishBtnDisabled]}
+        <Button
           onPress={handleFinish}
           disabled={saving}
-          accessibilityRole="button"
+          busy={saving}
           accessibilityLabel="Finish workout"
-          accessibilityState={{ disabled: saving, busy: saving }}
+          style={{ height: 52, justifyContent: 'center' }}
         >
           {saving ? (
             <ActivityIndicator color={Theme.ink} />
           ) : (
             <Text style={styles.finishBtnText}>Finish Workout →</Text>
           )}
-        </TouchableOpacity>
+        </Button>
       </View>
 
       {/* ── Plate calculator ── */}
@@ -1101,16 +1107,6 @@ const styles = StyleSheet.create({
   },
   addExerciseText: { fontSize: 14, fontWeight: '800', color: Theme.accent },
   footer: { padding: 16, borderTopWidth: 1, borderTopColor: Theme.line },
-  finishBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    height: 52,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  finishBtnDisabled: { opacity: 0.5 },
   finishBtnText: { fontSize: 15, fontWeight: '800', color: Theme.ink },
 
   // Plate calculator modal

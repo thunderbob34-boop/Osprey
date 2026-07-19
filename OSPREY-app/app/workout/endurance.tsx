@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth, EffortPalette } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useAuthStore } from '@/store/authStore';
 import {
@@ -561,20 +562,20 @@ export default function EnduranceWorkoutScreen() {
                     accessibilityLabel={`Distance in ${distanceUnit}`}
                   />
                 </View>
-                <TouchableOpacity
-                  style={[styles.syncBtn, syncing && { opacity: 0.6 }]}
+                <Button
+                  variant="secondary"
                   onPress={handleSyncHealthKit}
                   disabled={syncing}
-                  accessibilityRole="button"
+                  busy={syncing}
                   accessibilityLabel="Sync distance from Apple Health"
-                  accessibilityState={{ disabled: syncing, busy: syncing }}
+                  style={[styles.syncBtn, syncing && { opacity: 0.6 }]}
                 >
                   {syncing ? (
                     <ActivityIndicator color={Theme.accent} size="small" />
                   ) : (
                     <Text style={styles.syncBtnText}>Sync from Apple Health</Text>
                   )}
-                </TouchableOpacity>
+                </Button>
               </>
             )}
           </View>
@@ -609,20 +610,19 @@ export default function EnduranceWorkoutScreen() {
           </View>
         ) : null}
 
-        <TouchableOpacity
-          style={[styles.endBtn, saving && styles.endBtnDisabled]}
+        <Button
           onPress={confirmEnd}
           disabled={saving}
-          accessibilityRole="button"
+          busy={saving}
           accessibilityLabel="End and save session"
-          accessibilityState={{ disabled: saving, busy: saving }}
+          style={{ paddingVertical: 16 }}
         >
           {saving ? (
             <ActivityIndicator color={Theme.ink} />
           ) : (
             <Text style={styles.endBtnText}>End & Save</Text>
           )}
-        </TouchableOpacity>
+        </Button>
       </View>
     </SafeAreaView>
   );
@@ -798,27 +798,18 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '800',
   },
+  // Only what <Button variant="secondary"> doesn't already provide — its
+  // default is a transparent fill with an accent border; this button keeps
+  // its pre-existing panel fill / line border and 10px vertical padding.
   syncBtn: {
     backgroundColor: Theme.panel,
-    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
-    borderRadius: Radius.card,
     paddingVertical: 10,
-    alignItems: 'center',
   },
   syncBtnText: {
     fontSize: 13,
     fontWeight: '600',
     color: Theme.accent,
   },
-  endBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 16,
-    alignItems: 'center',
-  },
-  endBtnDisabled: { opacity: 0.5 },
   endBtnText: { fontSize: 15, fontWeight: '800', color: Theme.ink },
 });

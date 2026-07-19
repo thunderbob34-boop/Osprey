@@ -376,20 +376,19 @@ export default function HyroxWorkoutScreen() {
         )}
 
         {sessionComplete ? (
-          <TouchableOpacity
-            style={[styles.endBtn, saving && styles.endBtnDisabled]}
+          <Button
             onPress={handleSave}
             disabled={saving}
-            accessibilityRole="button"
+            busy={saving}
             accessibilityLabel="End and save session"
-            accessibilityState={{ disabled: saving, busy: saving }}
+            style={{ paddingVertical: 16 }}
           >
             {saving ? (
               <ActivityIndicator color={Theme.ink} />
             ) : (
               <Text style={styles.endBtnText}>End & Save</Text>
             )}
-          </TouchableOpacity>
+          </Button>
         ) : (
           <TouchableOpacity
             style={styles.discardBtn}
@@ -550,15 +549,6 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
 
-  endBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 16,
-    alignItems: 'center',
-  },
-  endBtnDisabled: { opacity: 0.5 },
   endBtnText: {
     fontSize: 15,
     lineHeight: 20,
