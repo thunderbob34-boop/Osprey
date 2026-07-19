@@ -1,2 +1,4 @@
-https://github.com/anthropics/claude-code/issues
-# PLACEHOLDER — replace with a real support URL before submission (e.g. a dedicated support page, email form, or Notion help center)
+mailto:support@osprey.app
+# Matches SUPPORT_EMAIL in OSPREY-app/src/constants/links.ts — functional today if that mailbox exists.
+# Apple accepts a mailto: URL, but a real support page reads more trustworthy to reviewers and users.
+# Before ASC submission: confirm support@osprey.app is monitored, or replace with a live support page/form URL.

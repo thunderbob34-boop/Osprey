@@ -1,4 +1,6 @@
-https://PLACEHOLDER.example.com/privacy
-# PLACEHOLDER — replace with a real, publicly accessible privacy policy URL before submission.
-# The privacy policy must cover: health & fitness data (HealthKit), GPS/location data, account data, and any third-party processors (Supabase, OpenAI, ElevenLabs, RevenueCat).
+https://osprey.app/privacy
+# This is the correct final URL — it matches PRIVACY_POLICY_URL in OSPREY-app/src/constants/links.ts
+# and the live page already exists at website/src/pages/privacy.astro.
+# NOT YET LIVE: osprey.app is unregistered and the website's GitHub Pages deploy is held (see docs/MASTER-PLAN.md §3A).
+# Before ASC submission: buy the domain, un-hold the Pages deploy, then confirm this URL 200s.
 # App Store Connect will reject the app without a live, accessible privacy policy URL.
