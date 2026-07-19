@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -104,14 +104,26 @@ export default function PaywallScreen() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [purchasing, setPurchasing] = useState(false);
   const [restoring, setRestoring] = useState(false);
+  // Previously unset on failure/empty response, so the screen silently
+  // rendered a priceless "Subscribe to OSPREY+" button that, when tapped,
+  // alerted "Purchase failed" for a purchase that was never attempted.
+  const [offeringsState, setOfferingsState] = useState<'loading' | 'loaded' | 'error'>('loading');
+
+  const loadOfferings = useCallback(() => {
+    setOfferingsState('loading');
+    getOfferings()
+      .then((o) => {
+        const pkgs = o?.current?.availablePackages ?? [];
+        setPackages(pkgs);
+        setSelectedId(pkgs[0]?.identifier ?? null);
+        setOfferingsState(pkgs.length > 0 ? 'loaded' : 'error');
+      })
+      .catch(() => setOfferingsState('error'));
+  }, []);
 
   useEffect(() => {
-    getOfferings().then((o) => {
-      const pkgs = o?.current?.availablePackages ?? [];
-      setPackages(pkgs);
-      setSelectedId(pkgs[0]?.identifier ?? null);
-    }).catch(() => undefined);
-  }, []);
+    loadOfferings();
+  }, [loadOfferings]);
 
   const selectedPackage = packages.find((p) => p.identifier === selectedId) ?? packages[0];
   const priceString = selectedPackage?.product.priceString ?? null;
@@ -119,6 +131,7 @@ export default function PaywallScreen() {
   const pricePeriodLabel = selectedPackage ? periodLabel(selectedPackage) : '';
 
   async function handleSubscribe() {
+    if (!selectedId) return;
     setPurchasing(true);
     try {
       const success = await purchaseOspreyPlus(selectedId ?? undefined);
@@ -192,57 +205,80 @@ export default function PaywallScreen() {
           ))}
         </Card>
 
-        {packages.length > 1 ? (
-          <View style={styles.packageRow}>
-            {packages.map((pkg) => (
-              <TouchableOpacity
-                key={pkg.identifier}
-                style={[styles.packageChip, pkg.identifier === selectedId && styles.packageChipActive]}
-                onPress={() => setSelectedId(pkg.identifier)}
-                accessibilityRole="button"
-                accessibilityLabel={`${packageLabel(pkg)}, ${pkg.product.priceString}`}
-                accessibilityState={{ selected: pkg.identifier === selectedId }}
-              >
-                <Text
-                  style={[
-                    styles.packageChipLabel,
-                    pkg.identifier === selectedId && styles.packageChipLabelActive,
-                  ]}
-                >
-                  {packageLabel(pkg)}
-                </Text>
-                <Text
-                  style={[
-                    styles.packageChipPrice,
-                    pkg.identifier === selectedId && styles.packageChipPriceActive,
-                  ]}
-                >
-                  {pkg.product.priceString}
-                </Text>
-              </TouchableOpacity>
-            ))}
+        {offeringsState === 'loading' ? (
+          <View style={styles.offeringsLoading}>
+            <ActivityIndicator color={Theme.accent} />
+            <Text style={styles.offeringsLoadingText}>Loading plans…</Text>
           </View>
-        ) : null}
+        ) : offeringsState === 'error' ? (
+          <View style={styles.offeringsError}>
+            <Text style={styles.offeringsErrorText}>
+              Plans couldn&apos;t load. Check your connection and try again.
+            </Text>
+            <TouchableOpacity
+              style={styles.retryBtn}
+              onPress={loadOfferings}
+              accessibilityRole="button"
+              accessibilityLabel="Retry loading plans"
+            >
+              <Text style={styles.retryBtnText}>Retry</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <>
+            {packages.length > 1 ? (
+              <View style={styles.packageRow}>
+                {packages.map((pkg) => (
+                  <TouchableOpacity
+                    key={pkg.identifier}
+                    style={[styles.packageChip, pkg.identifier === selectedId && styles.packageChipActive]}
+                    onPress={() => setSelectedId(pkg.identifier)}
+                    accessibilityRole="button"
+                    accessibilityLabel={`${packageLabel(pkg)}, ${pkg.product.priceString}`}
+                    accessibilityState={{ selected: pkg.identifier === selectedId }}
+                  >
+                    <Text
+                      style={[
+                        styles.packageChipLabel,
+                        pkg.identifier === selectedId && styles.packageChipLabelActive,
+                      ]}
+                    >
+                      {packageLabel(pkg)}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.packageChipPrice,
+                        pkg.identifier === selectedId && styles.packageChipPriceActive,
+                      ]}
+                    >
+                      {pkg.product.priceString}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            ) : null}
 
-        <TouchableOpacity
-          style={[styles.subscribeBtn, purchasing && styles.subscribeBtnLoading]}
-          onPress={handleSubscribe}
-          disabled={purchasing || restoring}
-          accessibilityRole="button"
-          accessibilityLabel={priceString ? `Start for ${priceString} ${pricePeriodLabel}`.trim() : 'Subscribe to OSPREY+'}
-          accessibilityState={{ disabled: purchasing || restoring, busy: purchasing }}
-        >
-          {purchasing ? (
-            <ActivityIndicator color={Theme.ink} />
-          ) : (
-            <>
-              <Text style={styles.subscribeBtnText}>
-                {priceString ? `Start for ${priceString}${priceSuffix}` : 'Subscribe to OSPREY+'}
-              </Text>
-              <Text style={styles.subscribeBtnSub}>Cancel anytime</Text>
-            </>
-          )}
-        </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.subscribeBtn, purchasing && styles.subscribeBtnLoading]}
+              onPress={handleSubscribe}
+              disabled={purchasing || restoring || !selectedId}
+              accessibilityRole="button"
+              accessibilityLabel={priceString ? `Start for ${priceString} ${pricePeriodLabel}`.trim() : 'Subscribe to OSPREY+'}
+              accessibilityState={{ disabled: purchasing || restoring || !selectedId, busy: purchasing }}
+            >
+              {purchasing ? (
+                <ActivityIndicator color={Theme.ink} />
+              ) : (
+                <>
+                  <Text style={styles.subscribeBtnText}>
+                    {priceString ? `Start for ${priceString}${priceSuffix}` : 'Subscribe to OSPREY+'}
+                  </Text>
+                  <Text style={styles.subscribeBtnSub}>Cancel anytime</Text>
+                </>
+              )}
+            </TouchableOpacity>
+          </>
+        )}
 
         <TouchableOpacity
           style={styles.restoreBtn}
@@ -322,6 +358,27 @@ const styles = StyleSheet.create({
   featureTitle: { fontSize: 14, fontWeight: '700', color: Theme.text },
   featureDesc: { fontSize: 12, color: Theme.textSoft, lineHeight: 17, marginTop: 2 },
   featureCheck: { color: Theme.accent, fontSize: 15, fontWeight: '800', marginTop: 2 },
+  offeringsLoading: { alignItems: 'center', paddingVertical: 20, gap: 10 },
+  offeringsLoadingText: { color: Theme.textMut, fontSize: 13, fontWeight: '600' },
+  offeringsError: {
+    alignItems: 'center',
+    paddingVertical: 16,
+    gap: 12,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
+    backgroundColor: Theme.panel,
+    paddingHorizontal: 20,
+  },
+  offeringsErrorText: { color: Theme.textSoft, fontSize: 13, textAlign: 'center', lineHeight: 18 },
+  retryBtn: {
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  retryBtnText: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
   packageRow: { flexDirection: 'row', gap: 10 },
   packageChip: {
     flex: 1,
