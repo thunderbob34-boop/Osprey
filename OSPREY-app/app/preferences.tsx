@@ -13,7 +13,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
 import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
@@ -641,13 +641,12 @@ export default function PreferencesScreen() {
           </Text>
         ) : null}
 
-        <TouchableOpacity
-          style={[styles.generateBtn, loading && styles.generateBtnDisabled]}
+        <Button
           onPress={handleGenerate}
           disabled={loading}
-          accessibilityRole="button"
+          busy={loading}
           accessibilityLabel="Generate my plan"
-          accessibilityState={{ disabled: loading, busy: loading }}
+          style={styles.generateBtn}
         >
           {loading ? (
             <>
@@ -659,7 +658,7 @@ export default function PreferencesScreen() {
               {hasGeneratedBefore ? 'Regenerate My Plan →' : 'Generate My Plan →'}
             </Text>
           )}
-        </TouchableOpacity>
+        </Button>
 
         <Button
           variant="secondary"
@@ -789,19 +788,15 @@ const styles = StyleSheet.create({
     lineHeight: 17,
     marginTop: 20,
   },
+  // Only what <Button> does not already provide; paddingVertical is kept at 16
+  // (the primitive defaults to 12), and flexDirection/justifyContent lay out
+  // the loading state's spinner + text side by side instead of the default
+  // single centered child.
   generateBtn: {
     marginTop: 32,
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
     paddingVertical: 16,
-    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-  generateBtnDisabled: {
-    opacity: 0.5,
   },
   generateBtnText: {
     fontSize: 16,

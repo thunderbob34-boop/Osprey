@@ -133,6 +133,14 @@ export default function ActivityScreen() {
               {card.caption ? <Text style={styles.cardCaption}>"{card.caption}"</Text> : null}
 
               <View style={styles.cardFooter}>
+                {/* NOT converted to <Button>: neither variant fits. Its resting
+                    fill is Theme.ink (not transparent) with a neutral line
+                    border, and the "active" cue is border-color-only, not a
+                    fill/outline swap — a structurally different recipe from
+                    primary/secondary. It also swaps an icon+count pair (not
+                    plain text) for the spinner, which the primitive's single
+                    ReactNode child handles but its color/shape defaults don't
+                    match. Left hand-rolled. */}
                 <TouchableOpacity
                   style={[styles.kudoBtn, card.hasKudo && styles.kudoBtnActive]}
                   onPress={() => handleKudo(card)}

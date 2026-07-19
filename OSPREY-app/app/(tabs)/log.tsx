@@ -17,7 +17,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
-import { Card } from '@/components/ui';
+import { Card, Button } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import HydrationCard from '@/components/HydrationCard';
 import { useRecentMeals, useTodayLog } from '@/hooks/useTodayLog';
@@ -741,28 +741,21 @@ export default function LogTab() {
                 accessibilityLabel="Workout notes"
               />
 
-              <TouchableOpacity
-                style={[
-                  styles.saveBtn,
-                  (logWorkout.isPending || updateWorkout.isPending) && styles.saveBtnDisabled,
-                ]}
+              <Button
                 onPress={handleSaveWorkout}
                 disabled={logWorkout.isPending || updateWorkout.isPending}
-                accessibilityRole="button"
+                busy={logWorkout.isPending || updateWorkout.isPending}
                 accessibilityLabel={editingWorkoutId ? 'Update workout' : 'Save workout'}
-                accessibilityState={{
-                  disabled: logWorkout.isPending || updateWorkout.isPending,
-                  busy: logWorkout.isPending || updateWorkout.isPending,
-                }}
+                style={styles.saveBtn}
               >
                 {logWorkout.isPending || updateWorkout.isPending ? (
                   <ActivityIndicator color={Theme.ink} />
+                ) : editingWorkoutId ? (
+                  'Update Workout'
                 ) : (
-                  <Text style={styles.saveBtnText}>
-                    {editingWorkoutId ? 'Update Workout' : 'Save Workout'}
-                  </Text>
+                  'Save Workout'
                 )}
-              </TouchableOpacity>
+              </Button>
             </Card>
           ) : null}
 
@@ -809,6 +802,12 @@ export default function LogTab() {
                         <Text style={styles.recentChipMeta}>{meal.calories ?? 0} cal</Text>
                       </TouchableOpacity>
                     ))}
+                    {/* NOT converted to <Button>: gold here is functional (distinguishes
+                        this action from the accent-colored recent-meal chips beside it),
+                        and the primitive only offers ink/accent spinner+text colors — a
+                        gold treatment isn't expressible without overriding both the fill
+                        and the label, at which point it's not really using the primitive.
+                        Left hand-rolled to preserve the gold semantics. */}
                     <TouchableOpacity
                       style={[styles.recentChip, styles.copyYesterdayChip]}
                       onPress={handleCopyYesterday}
@@ -986,26 +985,21 @@ export default function LogTab() {
                 </View>
               </View>
 
-              <TouchableOpacity
-                style={[
-                  styles.saveBtn,
-                  (logFood.isPending || updateFood.isPending) && styles.saveBtnDisabled,
-                ]}
+              <Button
                 onPress={handleSaveFood}
                 disabled={logFood.isPending || updateFood.isPending}
-                accessibilityRole="button"
+                busy={logFood.isPending || updateFood.isPending}
                 accessibilityLabel={editingFoodId ? 'Update food' : 'Save food'}
-                accessibilityState={{
-                  disabled: logFood.isPending || updateFood.isPending,
-                  busy: logFood.isPending || updateFood.isPending,
-                }}
+                style={styles.saveBtn}
               >
                 {logFood.isPending || updateFood.isPending ? (
                   <ActivityIndicator color={Theme.ink} />
+                ) : editingFoodId ? (
+                  'Update Food'
                 ) : (
-                  <Text style={styles.saveBtnText}>{editingFoodId ? 'Update Food' : 'Save Food'}</Text>
+                  'Save Food'
                 )}
-              </TouchableOpacity>
+              </Button>
             </Card>
           ) : null}
 
@@ -1072,20 +1066,15 @@ export default function LogTab() {
               />
               <FieldError message={fieldErrors.weight} />
 
-              <TouchableOpacity
-                style={[styles.saveBtn, logWeightMutation.isPending && styles.saveBtnDisabled]}
+              <Button
                 onPress={handleSaveWeight}
                 disabled={logWeightMutation.isPending}
-                accessibilityRole="button"
+                busy={logWeightMutation.isPending}
                 accessibilityLabel="Save weight"
-                accessibilityState={{ disabled: logWeightMutation.isPending, busy: logWeightMutation.isPending }}
+                style={styles.saveBtn}
               >
-                {logWeightMutation.isPending ? (
-                  <ActivityIndicator color={Theme.ink} />
-                ) : (
-                  <Text style={styles.saveBtnText}>Save Weight</Text>
-                )}
-              </TouchableOpacity>
+                {logWeightMutation.isPending ? <ActivityIndicator color={Theme.ink} /> : 'Save Weight'}
+              </Button>
             </Card>
           ) : null}
         </ScrollView>
@@ -1265,15 +1254,7 @@ const styles = StyleSheet.create({
   },
   resultName: { fontSize: 13, fontWeight: '700', color: Theme.text },
   resultMeta: { fontSize: 11, color: Theme.textMut, marginTop: 2 },
-  saveBtn: {
-    marginTop: 6,
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 13,
-    alignItems: 'center',
-  },
-  saveBtnDisabled: { opacity: 0.5 },
-  saveBtnText: { fontSize: 14, fontWeight: '800', color: Theme.ink },
+  // Only what <Button> does not already provide: paddingVertical is kept at 13
+  // (the primitive defaults to 12) to match this form's existing button height.
+  saveBtn: { marginTop: 6, paddingVertical: 13 },
 });

@@ -379,22 +379,21 @@ export default function SettingsTab() {
             {healthConnected && healthLastSynced ? (
               <Text style={styles.switchRowSub}>Last synced {formatLastSynced(healthLastSynced)}</Text>
             ) : null}
-            <TouchableOpacity
-              style={[styles.primaryBtn, healthSyncing && styles.primaryBtnDisabled]}
+            <Button
               onPress={handleConnectHealth}
               disabled={healthSyncing}
-              accessibilityRole="button"
+              busy={healthSyncing}
               accessibilityLabel={healthConnected ? 'Sync Apple Health now' : 'Connect Apple Health'}
-              accessibilityState={{ disabled: healthSyncing, busy: healthSyncing }}
+              style={styles.primaryBtn}
             >
               {healthSyncing ? (
                 <ActivityIndicator color={Theme.ink} />
+              ) : healthConnected ? (
+                'Sync Now'
               ) : (
-                <Text style={styles.primaryBtnText}>
-                  {healthConnected ? 'Sync Now' : 'Connect Apple Health'}
-                </Text>
+                'Connect Apple Health'
               )}
-            </TouchableOpacity>
+            </Button>
           </Card>
         ) : null}
 
@@ -612,20 +611,16 @@ export default function SettingsTab() {
             Export everything you've logged — workouts, lift sets, nutrition, bodyweight, and races —
             as CSV files emailed to your account address.
           </Text>
-          <TouchableOpacity
-            style={[styles.exportBtn, exporting && styles.exportBtnDisabled]}
+          <Button
+            variant="secondary"
             onPress={handleExportData}
             disabled={exporting}
-            accessibilityRole="button"
+            busy={exporting}
             accessibilityLabel="Export my data"
-            accessibilityState={{ disabled: exporting, busy: exporting }}
+            style={styles.exportBtn}
           >
-            {exporting ? (
-              <ActivityIndicator color={Theme.accent} />
-            ) : (
-              <Text style={styles.exportBtnText}>Export My Data</Text>
-            )}
-          </TouchableOpacity>
+            {exporting ? <ActivityIndicator color={Theme.accent} /> : 'Export My Data'}
+          </Button>
         </Card>
 
         <Button
@@ -643,6 +638,10 @@ export default function SettingsTab() {
           <Text style={styles.dangerSub}>
             Permanently delete your account and all training data.
           </Text>
+          {/* NOT converted to <Button>: this is the destructive delete-account
+              action, deliberately styled red through the whole design migration.
+              The primitive is accent-only (primary/secondary), so converting it
+              would erase the danger signal. Left hand-rolled on purpose. */}
           <TouchableOpacity
             style={[styles.dangerBtn, deleting && styles.dangerBtnDisabled]}
             onPress={handleDeleteAccount}
@@ -698,17 +697,9 @@ const styles = StyleSheet.create({
   unitOptionActive: { backgroundColor: Theme.panel, borderColor: Theme.accent },
   unitOptionText: { fontSize: 13, fontWeight: '600', color: Theme.textSoft },
   unitOptionTextActive: { color: Theme.accent, fontWeight: '700' },
-  primaryBtn: {
-    marginTop: 4,
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  primaryBtnDisabled: { opacity: 0.5 },
-  primaryBtnText: { fontSize: 14, fontWeight: '800', color: Theme.ink },
+  // Only what <Button> does not already provide (fill, border, radius,
+  // paddingVertical: 12, and ink label all come from the primary variant now).
+  primaryBtn: { marginTop: 4 },
   btnSpacing: { marginTop: 4 },
   linkBtn: { alignItems: 'center', paddingVertical: 6 },
   linkText: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
@@ -741,18 +732,19 @@ const styles = StyleSheet.create({
   signOutBtn: {
     marginTop: 12,
   },
+  // variant="secondary" gives the accent label/spinner and BorderWidth.card/
+  // Radius.card border for free; this button additionally overrides the
+  // secondary variant's transparent fill + accent border with a panel fill
+  // + line border (its own third look, documented as fair game via `style`
+  // in the primitive's own prop docs), plus its own padding/alignment.
   exportBtn: {
     marginTop: 10,
     alignSelf: 'flex-start',
     backgroundColor: Theme.panel,
-    borderWidth: BorderWidth.card,
     borderColor: Theme.line,
-    borderRadius: Radius.card,
     paddingHorizontal: 16,
     paddingVertical: 10,
   },
-  exportBtnDisabled: { opacity: 0.5 },
-  exportBtnText: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
   dangerCard: {
     marginTop: 24,
     backgroundColor: 'rgba(255,68,68,0.05)',

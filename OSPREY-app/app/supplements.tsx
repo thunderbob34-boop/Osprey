@@ -16,7 +16,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
-import { Card } from '@/components/ui';
+import { Card, Button } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
@@ -261,20 +261,15 @@ export default function SupplementsScreen() {
                   />
                 </View>
 
-                <TouchableOpacity
-                  style={[styles.addBtn, saving && styles.addBtnDisabled]}
+                <Button
                   onPress={handleAdd}
                   disabled={saving}
-                  accessibilityRole="button"
+                  busy={saving}
                   accessibilityLabel={`Add reminder, ${formatTime(hour, minute)}`}
-                  accessibilityState={{ disabled: saving, busy: saving }}
+                  style={styles.addBtn}
                 >
-                  {saving ? (
-                    <ActivityIndicator color={Theme.ink} />
-                  ) : (
-                    <Text style={styles.addBtnText}>Add reminder · {formatTime(hour, minute)}</Text>
-                  )}
-                </TouchableOpacity>
+                  {saving ? <ActivityIndicator color={Theme.ink} /> : `Add reminder · ${formatTime(hour, minute)}`}
+                </Button>
               </Card>
             </>
           )}
@@ -340,15 +335,7 @@ const styles = StyleSheet.create({
   switchRow: { flexDirection: 'row', alignItems: 'center', marginTop: 4 },
   switchLabel: { color: Theme.text, fontSize: 14, fontWeight: '700' },
   switchHint: { color: Theme.textMut, fontSize: 12, marginTop: 2 },
-  addBtn: {
-    marginTop: 6,
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 13,
-    alignItems: 'center',
-  },
-  addBtnDisabled: { opacity: 0.5 },
-  addBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
+  // Only what <Button> does not already provide; paddingVertical is kept at 13
+  // (the primitive defaults to 12).
+  addBtn: { marginTop: 6, paddingVertical: 13 },
 });

@@ -15,6 +15,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import DateField from '@/components/DateField';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
@@ -79,6 +80,10 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
       <View style={styles.lbHeader}>
         <Text style={styles.lbTitle}>Leaderboard</Text>
         <View style={styles.lbHeaderRight}>
+          {/* NOT converted to <Button>: this is a bare accent glyph beside the
+              close control (see refreshBtn's own comment below) — a subordinate
+              icon, not a primary/secondary CTA. The primitive's filled/outlined
+              recipes would outweigh the panel it sits in, so it stays hand-rolled. */}
           <TouchableOpacity
             onPress={() => refetch()}
             disabled={isFetching}
@@ -333,20 +338,15 @@ export default function ChallengesScreen() {
                 </>
               ) : null}
 
-              <TouchableOpacity
-                style={[styles.saveBtn, create.isPending && styles.saveBtnDisabled]}
+              <Button
                 onPress={handleCreate}
                 disabled={create.isPending}
-                accessibilityRole="button"
+                busy={create.isPending}
                 accessibilityLabel="Create challenge"
-                accessibilityState={{ disabled: create.isPending, busy: create.isPending }}
+                style={styles.saveBtn}
               >
-                {create.isPending ? (
-                  <ActivityIndicator color={Theme.ink} />
-                ) : (
-                  <Text style={styles.saveBtnText}>Create Challenge</Text>
-                )}
-              </TouchableOpacity>
+                {create.isPending ? <ActivityIndicator color={Theme.ink} /> : 'Create Challenge'}
+              </Button>
             </View>
           ) : null}
 
@@ -574,18 +574,10 @@ const styles = StyleSheet.create({
   inviteChipActive: { borderColor: Theme.accent },
   inviteChipText: { color: Theme.textMut, fontSize: 13, fontWeight: '600' },
   inviteChipTextActive: { color: Theme.accent },
-  saveBtn: {
-    marginTop: 10,
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  saveBtnDisabled: { opacity: 0.5 },
-  saveBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
+  // Only what <Button> does not already provide; paddingVertical is kept at 14
+  // because the primitive defaults to 12, which would shrink this button
+  // against the form around it.
+  saveBtn: { marginTop: 10, paddingVertical: 14, justifyContent: 'center' },
 
   // ── Challenge card ──
   challengeCard: {

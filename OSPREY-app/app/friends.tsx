@@ -15,6 +15,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
 import { useFriends } from '@/hooks/useFriends';
@@ -157,20 +158,14 @@ export default function FriendsScreen() {
                 accessibilityLabel="Your phone number"
               />
               {phoneEditing && phoneInput.trim() !== (myPhone ?? '') ? (
-                <TouchableOpacity
-                  style={[styles.searchBtn, updatePhone.isPending && styles.searchBtnDisabled]}
+                <Button
                   onPress={handleSavePhone}
                   disabled={updatePhone.isPending}
-                  accessibilityRole="button"
+                  busy={updatePhone.isPending}
                   accessibilityLabel="Save phone number"
-                  accessibilityState={{ disabled: updatePhone.isPending, busy: updatePhone.isPending }}
                 >
-                  {updatePhone.isPending ? (
-                    <ActivityIndicator color={Theme.ink} size="small" />
-                  ) : (
-                    <Text style={styles.searchBtnText}>Save</Text>
-                  )}
-                </TouchableOpacity>
+                  {updatePhone.isPending ? <ActivityIndicator color={Theme.ink} size="small" /> : 'Save'}
+                </Button>
               ) : null}
             </View>
             {phoneError ? <Text style={styles.searchError}>{phoneError}</Text> : null}
@@ -194,20 +189,14 @@ export default function FriendsScreen() {
                 returnKeyType="search"
                 accessibilityLabel="Friend's email or phone number"
               />
-              <TouchableOpacity
-                style={[styles.searchBtn, (searching || !query.trim()) && styles.searchBtnDisabled]}
+              <Button
                 onPress={handleSearch}
                 disabled={searching || !query.trim()}
-                accessibilityRole="button"
+                busy={searching}
                 accessibilityLabel="Search"
-                accessibilityState={{ disabled: searching || !query.trim(), busy: searching }}
               >
-                {searching ? (
-                  <ActivityIndicator color={Theme.ink} size="small" />
-                ) : (
-                  <Text style={styles.searchBtnText}>Search</Text>
-                )}
-              </TouchableOpacity>
+                {searching ? <ActivityIndicator color={Theme.ink} size="small" /> : 'Search'}
+              </Button>
             </View>
 
             {searchError ? <Text style={styles.searchError}>{searchError}</Text> : null}
@@ -357,17 +346,6 @@ const styles = StyleSheet.create({
     color: Theme.text,
     fontSize: 15,
   },
-  searchBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingHorizontal: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  searchBtnDisabled: { opacity: 0.5 },
-  searchBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
   searchError: { color: Colors.red, fontSize: 13 },
 
   // Nested inside searchCard (now Theme.panel) — recedes to ink so it
