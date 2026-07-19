@@ -16,6 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import ScreenHeader from '@/components/ScreenHeader';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
 import { extractFunctionErrorMessage } from '@/services/supabase';
@@ -299,37 +300,28 @@ export default function RaceEventScreen() {
         ) : null}
 
         <View style={styles.ctaSection}>
-          <TouchableOpacity
-            style={[styles.trainBtn, generating && styles.ctaBtnDisabled]}
+          <Button
             onPress={handleTrainPress}
             disabled={generating}
-            activeOpacity={0.8}
-            accessibilityRole="button"
+            busy={generating}
             accessibilityLabel="Train for this event"
-            accessibilityState={{ disabled: generating, busy: generating }}
+            style={styles.trainBtn}
           >
-            {generating ? (
-              <ActivityIndicator color={Theme.ink} />
-            ) : (
-              <Text style={styles.trainBtnText}>Train for This Event →</Text>
-            )}
-          </TouchableOpacity>
+            {generating ? <ActivityIndicator color={Theme.ink} /> : 'Train for This Event →'}
+          </Button>
 
-          <TouchableOpacity
-            style={[styles.addBtn, savingRace && styles.ctaBtnDisabled]}
+          {/* Deliberately secondary/outline against the filled Train CTA above —
+              preserve that hierarchy, do not promote to primary. */}
+          <Button
+            variant="secondary"
             onPress={handleAddToMyRaces}
             disabled={savingRace}
-            activeOpacity={0.8}
-            accessibilityRole="button"
+            busy={savingRace}
             accessibilityLabel="Add to my races"
-            accessibilityState={{ disabled: savingRace, busy: savingRace }}
+            style={styles.addBtn}
           >
-            {savingRace ? (
-              <ActivityIndicator color={Theme.accent} />
-            ) : (
-              <Text style={styles.addBtnText}>Add to My Races</Text>
-            )}
-          </TouchableOpacity>
+            {savingRace ? <ActivityIndicator color={Theme.accent} /> : 'Add to My Races'}
+          </Button>
         </View>
       </ScrollView>
 
@@ -420,29 +412,12 @@ const styles = StyleSheet.create({
   },
 
   ctaSection: { gap: 12, marginTop: 8 },
-  // Hand-rolled (hosts an ActivityIndicator; Button.children is typed
-  // `string`). Primary CTA — mirrors Button's primary recipe.
-  trainBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 16,
-    alignItems: 'center',
-  },
-  trainBtnText: { color: Theme.ink, fontSize: 16, fontWeight: '900' },
-  // Hand-rolled (hosts an ActivityIndicator). Secondary CTA — mirrors
-  // Button's secondary recipe (transparent fill, accent border/text).
-  addBtn: {
-    backgroundColor: 'transparent',
-    borderRadius: Radius.card,
-    paddingVertical: 14,
-    alignItems: 'center',
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-  },
-  addBtnText: { color: Theme.accent, fontSize: 15, fontWeight: '700' },
-  ctaBtnDisabled: { opacity: 0.5 },
+  // Only what <Button> does not already provide. Fill/border/radius/label
+  // colour/0.5-disabled all come from the primitive now; paddingVertical is
+  // kept at its previous value (primitive defaults to 12) so each CTA's
+  // height doesn't shift against the other.
+  trainBtn: { paddingVertical: 16 },
+  addBtn: { paddingVertical: 14 },
 
   // Full-screen scrim — re-derived from Theme.ink at the original alpha,
   // not flattened to a surface.

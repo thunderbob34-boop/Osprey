@@ -15,6 +15,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import DateField from '@/components/DateField';
 import FieldError from '@/components/FieldError';
 import InputModal from '@/components/InputModal';
@@ -190,6 +191,10 @@ function LogisticsPanel({
       <View style={styles.briefingSection}>
         <View style={styles.briefingHeaderRow}>
           <Text style={styles.briefingLabel}>OZZIE RACE BRIEFING</Text>
+          {/* Hand-rolled, not <Button>: generateBtn is border/fill-less (just
+              padding) — a bare accent-text tap target, not the primitive's
+              bordered-pill recipe. Converting would add a visible border box
+              that isn't there today. */}
           <TouchableOpacity
             onPress={() => (isPlus ? onGenerateBriefing(race) : onPaywall())}
             disabled={isGenerating}
@@ -217,20 +222,15 @@ function LogisticsPanel({
       </View>
 
       {/* Save button */}
-      <TouchableOpacity
-        style={[styles.saveBtn, isSaving && styles.saveBtnDisabled]}
+      <Button
         onPress={() => onSave(race.id, form)}
         disabled={isSaving}
-        accessibilityRole="button"
+        busy={isSaving}
         accessibilityLabel="Save logistics"
-        accessibilityState={{ disabled: isSaving, busy: isSaving }}
+        style={styles.saveBtn}
       >
-        {isSaving ? (
-          <ActivityIndicator color={Theme.ink} />
-        ) : (
-          <Text style={styles.saveBtnText}>Save Logistics</Text>
-        )}
-      </TouchableOpacity>
+        {isSaving ? <ActivityIndicator color={Theme.ink} /> : 'Save Logistics'}
+      </Button>
     </View>
   );
 }
@@ -386,6 +386,8 @@ function RetroPanel({
       <View style={styles.briefingSection}>
         <View style={styles.briefingHeaderRow}>
           <Text style={styles.briefingLabel}>OZZIE'S TAKE</Text>
+          {/* Hand-rolled, not <Button>: same reasoning as the Logistics panel's
+              generate button — generateBtn has no border/fill of its own. */}
           <TouchableOpacity
             onPress={() => (isPlus ? onGenerateRetro(race, form.feelScore) : onPaywall())}
             disabled={isGenerating}
@@ -412,20 +414,15 @@ function RetroPanel({
         )}
       </View>
 
-      <TouchableOpacity
-        style={[styles.saveBtn, isSaving && styles.saveBtnDisabled]}
+      <Button
         onPress={() => onSave(race.id, form)}
         disabled={isSaving}
-        accessibilityRole="button"
+        busy={isSaving}
         accessibilityLabel="Save retrospective"
-        accessibilityState={{ disabled: isSaving, busy: isSaving }}
+        style={styles.saveBtn}
       >
-        {isSaving ? (
-          <ActivityIndicator color={Theme.ink} />
-        ) : (
-          <Text style={styles.saveBtnText}>Save Retrospective</Text>
-        )}
-      </TouchableOpacity>
+        {isSaving ? <ActivityIndicator color={Theme.ink} /> : 'Save Retrospective'}
+      </Button>
     </View>
   );
 }
@@ -826,20 +823,15 @@ export default function RacesScreen() {
                 accessibilityLabel="Location"
               />
 
-              <TouchableOpacity
-                style={[styles.saveBtn, create.isPending && styles.saveBtnDisabled]}
+              <Button
                 onPress={handleCreate}
                 disabled={create.isPending}
-                accessibilityRole="button"
+                busy={create.isPending}
                 accessibilityLabel="Save race"
-                accessibilityState={{ disabled: create.isPending, busy: create.isPending }}
+                style={styles.saveBtn}
               >
-                {create.isPending ? (
-                  <ActivityIndicator color={Theme.ink} />
-                ) : (
-                  <Text style={styles.saveBtnText}>Save Race</Text>
-                )}
-              </TouchableOpacity>
+                {create.isPending ? <ActivityIndicator color={Theme.ink} /> : 'Save Race'}
+              </Button>
             </View>
           ) : null}
 
@@ -1272,19 +1264,11 @@ const styles = StyleSheet.create({
   chipText: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
   chipTextActive: { color: Theme.accent },
   customMiles: { width: 70, paddingVertical: 9 },
-  saveBtn: {
-    marginTop: 10,
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 13,
-    alignItems: 'center',
-  },
-  // Mirrors race-event's ctaBtnDisabled — the hand-rolled recipe specifies a
-  // 0.5 disabled opacity, and saveBtn renders with `disabled` at three sites.
-  saveBtnDisabled: { opacity: 0.5 },
-  saveBtnText: { color: Theme.ink, fontSize: 14, fontWeight: '800' },
+  // Only what <Button> does not already provide. Its fill, border, radius,
+  // ink label and 0.5-disabled all come from the primitive now; paddingVertical
+  // is kept at 13 (the primitive defaults to 12) to match the previous height
+  // across all three Save buttons that share this style.
+  saveBtn: { marginTop: 10, paddingVertical: 13 },
 
   // ── Retro panel ──
   retroPanel: {
