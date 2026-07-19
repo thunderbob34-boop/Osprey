@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Theme } from '@/constants/theme';
 import { useAuthStore } from '@/store/authStore';
+import { useResumeWorkoutPrompt } from '@/hooks/useResumeWorkoutPrompt';
 
 type TabIconBaseName = 'home' | 'fitness' | 'create' | 'bar-chart' | 'settings';
 
@@ -17,6 +18,7 @@ export default function TabLayout() {
   const profile = useAuthStore((s) => s.profile);
   const profileReady = useAuthStore((s) => s.profileReady);
   const insets = useSafeAreaInsets();
+  useResumeWorkoutPrompt();
 
   if (!session) {
     return <Redirect href="/(auth)/sign-in" />;

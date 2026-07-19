@@ -21,6 +21,7 @@ import {
   useWorkoutStore,
   getElapsedSeconds,
   formatDuration,
+  isResumableWorkout,
 } from '@/store/workoutStore';
 import { useAuthStore } from '@/store/authStore';
 import {
@@ -66,10 +67,19 @@ export default function LiftWorkoutScreen() {
   const [saving, setSaving] = useState(false);
   const [recordingExercise, setRecordingExercise] = useState<number | null>(null);
   const [parsingVoice, setParsingVoice] = useState(false);
-  const [previewing, setPreviewing] = useState(true);
+  // A lift session already active/paused in the store means this is a
+  // resume after an app kill — skip the template preview and warm-up
+  // screens straight to the live lift screen, and skip re-fetching a fresh
+  // prescription below, so the resumed sets/completions aren't clobbered.
+  // Captured once at mount (a ref, not a live value) — recomputing this from
+  // the store on every render and feeding it into the fetch effect's deps
+  // would re-fire that effect (and its `reset()` cleanup) the moment
+  // startWorkout() flips status to 'active', wiping the workout mid-start.
+  const resumingLiftRef = useRef(isResumableWorkout('lift'));
+  const [previewing, setPreviewing] = useState(!resumingLiftRef.current);
   const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
   const originalPrescriptionRef = useRef<LiftExercise[] | null>(null);
-  const [warmingUp, setWarmingUp] = useState(true);
+  const [warmingUp, setWarmingUp] = useState(!resumingLiftRef.current);
   const [warmupDrills] = useState<WarmupDrill[]>(() => generateWarmup('lift'));
   const [checkedDrills, setCheckedDrills] = useState<Set<number>>(new Set());
   const allDrillsChecked = warmupDrills.length > 0 && checkedDrills.size === warmupDrills.length;
@@ -200,7 +210,7 @@ export default function LiftWorkoutScreen() {
             };
           });
           originalPrescriptionRef.current = prescribedExercises;
-          setLiftExercises(prescribedExercises);
+          if (!resumingLiftRef.current) setLiftExercises(prescribedExercises);
           return;
         }
 
@@ -218,7 +228,7 @@ export default function LiftWorkoutScreen() {
             ],
           };
         });
-        setLiftExercises(initial);
+        if (!resumingLiftRef.current) setLiftExercises(initial);
       })
       .finally(() => setLoading(false));
 

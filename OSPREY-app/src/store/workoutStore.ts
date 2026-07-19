@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { LiftExercise, TrackPoint, WorkoutStatus, WorkoutType } from '@/types/workout';
 
 interface WorkoutState {
@@ -44,101 +46,138 @@ const INITIAL_STATE = {
   sessionId: null as string | null,
 };
 
-export const useWorkoutStore = create<WorkoutState>((set, get) => ({
-  ...INITIAL_STATE,
-
-  startWorkout: (type, sessionId = null) =>
-    set((state) => ({
+export const useWorkoutStore = create<WorkoutState>()(
+  persist(
+    (set, get) => ({
       ...INITIAL_STATE,
-      workoutType: type,
-      status: 'active',
-      startedAt: Date.now(),
-      sessionId,
-      // lift.tsx populates liftExercises (prescribed or default) while the
-      // warm-up screen is showing, before this fires — don't clobber it.
-      liftExercises: state.liftExercises,
-    })),
 
-  pauseWorkout: () => {
-    const { status, pausedAt } = get();
-    if (status !== 'active' || pausedAt) return;
-    set({ status: 'paused', pausedAt: Date.now() });
-  },
+      startWorkout: (type, sessionId = null) =>
+        set((state) => ({
+          ...INITIAL_STATE,
+          workoutType: type,
+          status: 'active',
+          startedAt: Date.now(),
+          sessionId,
+          // lift.tsx populates liftExercises (prescribed or default) while the
+          // warm-up screen is showing, before this fires — don't clobber it.
+          liftExercises: state.liftExercises,
+        })),
 
-  resumeWorkout: () => {
-    const { pausedAt, accumulatedPauseMs } = get();
-    if (!pausedAt) return;
-    set({
-      status: 'active',
-      pausedAt: null,
-      accumulatedPauseMs: accumulatedPauseMs + (Date.now() - pausedAt),
-    });
-  },
+      pauseWorkout: () => {
+        const { status, pausedAt } = get();
+        if (status !== 'active' || pausedAt) return;
+        set({ status: 'paused', pausedAt: Date.now() });
+      },
 
-  addDistance: (meters) =>
-    set((state) => ({ distanceMeters: state.distanceMeters + meters })),
+      resumeWorkout: () => {
+        const { pausedAt, accumulatedPauseMs } = get();
+        if (!pausedAt) return;
+        set({
+          status: 'active',
+          pausedAt: null,
+          accumulatedPauseMs: accumulatedPauseMs + (Date.now() - pausedAt),
+        });
+      },
 
-  addTrackPoint: (point) =>
-    set((state) => ({ trackPoints: [...state.trackPoints, point] })),
+      addDistance: (meters) =>
+        set((state) => ({ distanceMeters: state.distanceMeters + meters })),
 
-  setHeartRate: (heartRate) => set({ heartRate }),
+      addTrackPoint: (point) =>
+        set((state) => ({ trackPoints: [...state.trackPoints, point] })),
 
-  setLiftExercises: (liftExercises) => set({ liftExercises }),
+      setHeartRate: (heartRate) => set({ heartRate }),
 
-  logLiftSet: (exerciseIndex, setIndex) =>
-    set((state) => {
-      const liftExercises = state.liftExercises.map((exercise, ei) => {
-        if (ei !== exerciseIndex) return exercise;
-        return {
-          ...exercise,
-          sets: exercise.sets.map((set, si) =>
-            si === setIndex ? { ...set, completed: true } : set,
-          ),
-        };
-      });
-      return { liftExercises };
+      setLiftExercises: (liftExercises) => set({ liftExercises }),
+
+      logLiftSet: (exerciseIndex, setIndex) =>
+        set((state) => {
+          const liftExercises = state.liftExercises.map((exercise, ei) => {
+            if (ei !== exerciseIndex) return exercise;
+            return {
+              ...exercise,
+              sets: exercise.sets.map((set, si) =>
+                si === setIndex ? { ...set, completed: true } : set,
+              ),
+            };
+          });
+          return { liftExercises };
+        }),
+
+      addLiftSet: (exerciseIndex) =>
+        set((state) => {
+          const liftExercises = state.liftExercises.map((exercise, ei) => {
+            if (ei !== exerciseIndex) return exercise;
+            const nextSetNumber = exercise.sets.length + 1;
+            const last = exercise.sets[exercise.sets.length - 1];
+            return {
+              ...exercise,
+              sets: [
+                ...exercise.sets,
+                {
+                  setNumber: nextSetNumber,
+                  reps: last?.reps ?? 8,
+                  weightLbs: last?.weightLbs ?? 135,
+                  completed: false,
+                },
+              ],
+            };
+          });
+          return { liftExercises };
+        }),
+
+      startRestTimer: (seconds) => set({ restSecondsLeft: seconds }),
+
+      tickRestTimer: () =>
+        set((state) => {
+          if (state.restSecondsLeft == null) return state;
+          if (state.restSecondsLeft <= 1) return { restSecondsLeft: null };
+          return { restSecondsLeft: state.restSecondsLeft - 1 };
+        }),
+
+      skipRestTimer: () => set({ restSecondsLeft: null }),
+
+      addRestSeconds: (seconds) =>
+        set((state) => ({
+          restSecondsLeft: state.restSecondsLeft == null ? null : state.restSecondsLeft + seconds,
+        })),
+
+      reset: () => set({ ...INITIAL_STATE }),
     }),
-
-  addLiftSet: (exerciseIndex) =>
-    set((state) => {
-      const liftExercises = state.liftExercises.map((exercise, ei) => {
-        if (ei !== exerciseIndex) return exercise;
-        const nextSetNumber = exercise.sets.length + 1;
-        const last = exercise.sets[exercise.sets.length - 1];
-        return {
-          ...exercise,
-          sets: [
-            ...exercise.sets,
-            {
-              setNumber: nextSetNumber,
-              reps: last?.reps ?? 8,
-              weightLbs: last?.weightLbs ?? 135,
-              completed: false,
-            },
-          ],
-        };
-      });
-      return { liftExercises };
-    }),
-
-  startRestTimer: (seconds) => set({ restSecondsLeft: seconds }),
-
-  tickRestTimer: () =>
-    set((state) => {
-      if (state.restSecondsLeft == null) return state;
-      if (state.restSecondsLeft <= 1) return { restSecondsLeft: null };
-      return { restSecondsLeft: state.restSecondsLeft - 1 };
-    }),
-
-  skipRestTimer: () => set({ restSecondsLeft: null }),
-
-  addRestSeconds: (seconds) =>
-    set((state) => ({
-      restSecondsLeft: state.restSecondsLeft == null ? null : state.restSecondsLeft + seconds,
-    })),
-
-  reset: () => set({ ...INITIAL_STATE }),
-}));
+    {
+      // Survives an app kill mid-workout (crash, OS force-quit, swipe-away)
+      // so the athlete can resume instead of losing a run/lift session with
+      // no trace — see useResumeWorkoutPrompt, which reads this on launch.
+      name: 'osprey:workout-in-progress',
+      storage: createJSONStorage(() => AsyncStorage),
+      // restSecondsLeft is a live countdown with no meaning after a restart;
+      // everything else (actions included) is either derivable or safe to
+      // re-run, so only the fields needed to resume/recap are persisted.
+      partialize: (state) => ({
+        workoutType: state.workoutType,
+        status: state.status,
+        startedAt: state.startedAt,
+        pausedAt: state.pausedAt,
+        accumulatedPauseMs: state.accumulatedPauseMs,
+        distanceMeters: state.distanceMeters,
+        trackPoints: state.trackPoints,
+        heartRate: state.heartRate,
+        liftExercises: state.liftExercises,
+        sessionId: state.sessionId,
+      }),
+      // A workout that was 'active' (or mid-save) when the app died wasn't
+      // actually paused — but treating the entire app-dead gap as elapsed
+      // time would badly inflate duration/pace on resume. Land it in
+      // 'paused' with pausedAt = now, matching getElapsedSeconds's existing
+      // pause math, and let the athlete explicitly choose to resume.
+      onRehydrateStorage: () => (state) => {
+        if (state && state.status !== 'idle' && state.status !== 'paused') {
+          state.status = 'paused';
+          state.pausedAt = Date.now();
+        }
+      },
+    },
+  ),
+);
 
 export function getElapsedSeconds(state: Pick<WorkoutState, 'startedAt' | 'pausedAt' | 'accumulatedPauseMs' | 'status'>): number {
   if (!state.startedAt) return 0;
@@ -165,4 +204,19 @@ export function formatPace(secondsPerMile: number): string {
 
 export function metersToMiles(meters: number): number {
   return meters / 1609.344;
+}
+
+/**
+ * True when the store already holds a live (active/paused) workout of this
+ * exact type — i.e. the athlete is resuming after a kill, not starting
+ * fresh. Screens use this to skip their warm-up gate and its `startWorkout`
+ * call, which would otherwise reset the very progress being resumed.
+ */
+export function isResumableWorkout(type: WorkoutType): boolean {
+  const state = useWorkoutStore.getState();
+  return (
+    state.workoutType === type &&
+    state.status !== 'idle' &&
+    state.startedAt != null
+  );
 }
