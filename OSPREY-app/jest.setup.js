@@ -39,3 +39,25 @@ jest.mock('@/services/supabase', () => ({
   },
   extractFunctionErrorMessage: jest.fn(),
 }));
+
+// Mock react-native-purchases (RevenueCat) for Jest tests.
+// It ships untranspiled ESM that Jest cannot parse, and it is reached
+// transitively from any screen touching useSubscription — which is most of
+// them. Without this, screen tests fail on an import chain rather than on
+// anything they are actually asserting.
+jest.mock('react-native-purchases', () => ({
+  __esModule: true,
+  default: {
+    configure: jest.fn(),
+    setLogLevel: jest.fn(),
+    getCustomerInfo: jest.fn(() => Promise.resolve({ entitlements: { active: {} } })),
+    getOfferings: jest.fn(() => Promise.resolve({ current: null })),
+    purchasePackage: jest.fn(() => Promise.resolve({ customerInfo: { entitlements: { active: {} } } })),
+    restorePurchases: jest.fn(() => Promise.resolve({ entitlements: { active: {} } })),
+    logIn: jest.fn(() => Promise.resolve({ customerInfo: { entitlements: { active: {} } } })),
+    logOut: jest.fn(() => Promise.resolve()),
+    addCustomerInfoUpdateListener: jest.fn(),
+    removeCustomerInfoUpdateListener: jest.fn(),
+  },
+  LOG_LEVEL: { VERBOSE: 'VERBOSE', DEBUG: 'DEBUG', INFO: 'INFO', WARN: 'WARN', ERROR: 'ERROR' },
+}));
