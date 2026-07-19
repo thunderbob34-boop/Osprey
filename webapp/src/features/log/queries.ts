@@ -6,8 +6,12 @@ import { ExerciseSchema, ExerciseSetSchema, TrainingSessionSchema, WorkoutLogSch
 export function useCreateWorkout(userId: string) {
   return useMutation({
     mutationFn: async (input: { startedAt: string; sessionId: string | null }): Promise<WorkoutLog> => {
+      // Was 'completed' at creation — the calendar, history, and stats all
+      // counted the launch itself as a finished workout, before a single set
+      // existed. Starts 'planned'; useCommitSet flips it to 'completed' the
+      // moment a set is actually logged.
       const { data, error } = await supabase.from('workout_logs')
-        .insert({ user_id: userId, session_type: 'lift', status: 'completed', started_at: input.startedAt, session_id: input.sessionId })
+        .insert({ user_id: userId, session_type: 'lift', status: 'planned', started_at: input.startedAt, session_id: input.sessionId })
         .select().single();
       if (error) throw error;
       return WorkoutLogSchema.parse(data);
@@ -56,9 +60,18 @@ export function useCommitSet(workoutId: string) {
         .insert({ workout_id: workoutId, exercise_id: input.exerciseId, set_number: input.setNumber, reps: input.reps, weight_kg: input.weightKg, rpe: input.rpe })
         .select('id').single();
       if (error) throw error;
+      // First real set logged — the workout was created 'planned' (see
+      // useCreateWorkout); this is the moment it actually becomes completed.
+      // Safe to call on every new set: matches only the 'planned' row, so
+      // it's a no-op once the workout is already completed.
+      await supabase.from('workout_logs').update({ status: 'completed' })
+        .eq('id', workoutId).eq('status', 'planned');
       return { dbId: (data as { id: string }).id };
     },
-    onSettled: () => void qc.invalidateQueries({ queryKey: ['sets', workoutId] }),
+    onSettled: () => {
+      void qc.invalidateQueries({ queryKey: ['sets', workoutId] });
+      void qc.invalidateQueries({ queryKey: ['workout', workoutId] });
+    },
   });
 }
 
