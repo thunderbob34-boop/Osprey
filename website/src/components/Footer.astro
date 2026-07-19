@@ -3,9 +3,9 @@ import Button from './Button.astro';
 ---
 <footer class="footer" id="download">
   <div class="btnrow">
-    <Button href="/#download">Download for iOS</Button>
-    <Button href="/#download" variant="ghost">Download for Android</Button>
+    <Button href="mailto:hello@osprey.app?subject=Notify%20me%20when%20Osprey%20launches">Get notified at launch</Button>
   </div>
+  <p class="download-note">OSPREY is in testing now — iOS first. Drop your email and we'll ping you the day it's live.</p>
   <div class="foot-word">Osprey</div>
   <div class="footlinks">
     <div>
@@ -24,6 +24,7 @@ import Button from './Button.astro';
 
 <style>
   .footer { padding: clamp(48px, 7vw, 88px) 28px 40px; }
+  .download-note { margin-top: 16px; font-size: 13px; color: var(--mut); max-width: 380px; }
   .foot-word {
     font-weight: 700; font-size: clamp(72px, 18vw, 240px); line-height: 0.85;
     text-transform: uppercase; letter-spacing: -0.04em; color: var(--amber);

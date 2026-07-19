@@ -2,20 +2,22 @@
 import Page from '../layouts/Page.astro';
 import Button from '../components/Button.astro';
 const tiers = [
-  { eyebrow: 'Free', name: 'Athletes', price: '$0', line: 'Everything an individual needs.',
-    features: ['GPS run tracking + route maps', 'Strength logging with progression', 'Nutrition & macro tracking', 'Ozzie AI coaching'], cta: 'Download', href: '/#download', variant: 'primary' as const },
+  { eyebrow: 'Free', name: 'Athletes', price: '$0', line: 'Track everything yourself, no card required.',
+    features: ['GPS run tracking + route maps', 'Strength logging with progression', 'Nutrition & macro tracking', 'Manual training log'], cta: 'Download', href: '/#download', variant: 'ghost' as const },
+  { eyebrow: 'Most popular', name: 'OSPREY+', price: '$5.99', priceSuffix: '/mo', line: 'Ozzie builds and adapts the plan for you. $59.99/yr if you pay annually.',
+    features: ['AI-generated, adaptive weekly plans', 'Live run coaching — pace & HR cues', 'Fitness/fatigue trends + race predictor', 'Race briefings & retrospectives', 'Unlimited group challenges'], cta: 'Download', href: '/#download', variant: 'primary' as const },
   { eyebrow: 'Team plan', name: 'Coaches & clubs', price: "Let's talk", line: 'Manage every athlete from one view.',
-    features: ['Everything in Free, per athlete', 'Roster & training dashboard', 'Assign plans and races', 'Team challenges & reporting'], cta: 'Talk to us', href: 'mailto:hello@osprey.app', variant: 'ghost' as const },
+    features: ['Everything in OSPREY+, per athlete', 'Roster & training dashboard', 'Assign plans and races', 'Team challenges & reporting'], cta: 'Talk to us', href: 'mailto:hello@osprey.app', variant: 'ghost' as const },
 ];
 ---
-<Page title="Pricing — Osprey" description="Free for athletes. A team plan for coaches and clubs.">
+<Page title="Pricing — Osprey" description="Free to track everything yourself. OSPREY+ unlocks Ozzie's AI coaching for $5.99/mo.">
   <h1>Pricing</h1>
   <div class="tiers">
     {tiers.map((t) => (
       <div class="tier">
         <div class="eyebrow">{t.eyebrow}</div>
         <h2 class="name">{t.name}</h2>
-        <div class="price">{t.price}</div>
+        <div class="price">{t.price}{t.priceSuffix && <span class="suffix">{t.priceSuffix}</span>}</div>
         <p class="line">{t.line}</p>
         <ul class="features">{t.features.map((f) => <li>{f}</li>)}</ul>
         <Button href={t.href} variant={t.variant}>{t.cta}</Button>
@@ -31,6 +33,7 @@ const tiers = [
   .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--amber); font-weight: 700; margin-bottom: 12px; }
   .name { font-size: 22px; font-weight: 700; text-transform: uppercase; }
   .price { font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--amber); letter-spacing: -0.02em; margin: 8px 0 12px; }
+  .suffix { font-size: 15px; font-weight: 700; color: var(--mut); letter-spacing: 0; margin-left: 2px; }
   .line { color: var(--mut); font-size: 14px; margin-bottom: 20px; }
   ul { list-style: none; margin: 0 0 28px; padding: 0; }
   li { font-size: 14px; color: var(--text-soft); padding: 8px 0; border-top: var(--border-w) solid var(--line); }
