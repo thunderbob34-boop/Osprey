@@ -1,6 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as Location from 'expo-location';
 import { useWorkoutStore } from '@/store/workoutStore';
+
+/**
+ * 'unknown' before the permission prompt resolves (or while tracking is
+ * disabled), 'granted'/'denied' after. Callers use this to tell the athlete
+ * why distance/pace never move instead of leaving them looking at 0.00 with
+ * no explanation.
+ */
+export type GpsPermissionStatus = 'unknown' | 'granted' | 'denied';
 
 export function haversineMeters(
   lat1: number,
@@ -52,6 +60,7 @@ export function useRunTracking(enabled: boolean) {
   const addDistance = useWorkoutStore((s) => s.addDistance);
   const addTrackPoint = useWorkoutStore((s) => s.addTrackPoint);
   const lastPointRef = useRef<GpsAnchor | null>(null);
+  const [permissionStatus, setPermissionStatus] = useState<GpsPermissionStatus>('unknown');
 
   useEffect(() => {
     if (!enabled || status !== 'active') return;
@@ -65,7 +74,12 @@ export function useRunTracking(enabled: boolean) {
 
     (async () => {
       const { status: permission } = await Location.requestForegroundPermissionsAsync();
-      if (permission !== 'granted' || cancelled) return;
+      if (cancelled) return;
+      if (permission !== 'granted') {
+        setPermissionStatus('denied');
+        return;
+      }
+      setPermissionStatus('granted');
 
       const sub = await Location.watchPositionAsync(
         {
@@ -109,4 +123,6 @@ export function useRunTracking(enabled: boolean) {
       lastPointRef.current = null;
     };
   }, [enabled, status, addDistance, addTrackPoint]);
+
+  return { permissionStatus };
 }

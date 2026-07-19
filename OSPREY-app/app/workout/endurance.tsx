@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
+  Linking,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -27,7 +28,7 @@ import { expandIntervalSteps, ozzieCueForStep, totalIntervalDistanceM, type Inte
 import { OZZIE_VOICE_ENABLED, ozzieSpeak, ozzieStop } from '@/services/ozzie-audio';
 import { useCueBanner } from '@/hooks/useCueBanner';
 import { ENCOURAGEMENTS } from '@/services/ozzie-cues';
-import { formatDuration, useWorkoutStore } from '@/store/workoutStore';
+import { formatDuration, isResumableWorkout, useWorkoutStore } from '@/store/workoutStore';
 import { useRunTracking } from '@/hooks/useRunTracking';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
@@ -124,10 +125,15 @@ export default function EnduranceWorkoutScreen() {
   const gpsTrackPoints = useWorkoutStore((s) => s.trackPoints);
   const startGpsWorkout = useWorkoutStore((s) => s.startWorkout);
   const resetGpsWorkout = useWorkoutStore((s) => s.reset);
-  useRunTracking(isGpsTracking);
+  const { permissionStatus: gpsPermission } = useRunTracking(isGpsTracking);
 
   useEffect(() => {
-    if (isOutsideBike) startGpsWorkout('bike', sessionId ?? null);
+    // A bike workout already active/paused in the store means this is a
+    // resume after an app kill, not a fresh start — calling startWorkout
+    // again would reset the very distance/track points being resumed.
+    if (isOutsideBike && !isResumableWorkout('bike')) {
+      startGpsWorkout('bike', sessionId ?? null);
+    }
     // Runs once on mount for an outside-bike session — startWorkout resets
     // the shared store, so re-running it on every render would wipe GPS
     // progress already collected. Outside Hike starts its own GPS tracking
@@ -386,20 +392,36 @@ export default function EnduranceWorkoutScreen() {
     }
   }
 
+  function handleDiscard() {
+    if (isGpsTracking) resetGpsWorkout();
+    // dismissTo dismisses (correct "closing" animation) while walking
+    // the stack until it finds this exact route, rather than back()'s
+    // one-step pop, which can resolve unpredictably.
+    router.dismissTo('/(tabs)/workout');
+  }
+
   function confirmEnd() {
+    // A near-zero GPS distance almost always means location never tracked
+    // (denied permission, no fix yet) — surface that instead of silently
+    // saving a 0.00 workout the athlete has no way to explain later.
+    if (isGpsTracking && gpsDistanceMeters < 10) {
+      Alert.alert(
+        'No distance recorded',
+        gpsPermission === 'denied'
+          ? "Location was off during this session, so distance wasn't tracked. Save it anyway, or discard it?"
+          : 'This session has almost no distance recorded. Save it anyway, or discard it?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Discard & Exit', style: 'destructive', onPress: handleDiscard },
+          { text: 'Save Anyway', onPress: handleEnd },
+        ],
+      );
+      return;
+    }
+
     Alert.alert('End session?', 'Save this workout and see your recap.', [
       { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Discard & Exit',
-        style: 'destructive',
-        onPress: () => {
-          if (isGpsTracking) resetGpsWorkout();
-          // dismissTo dismisses (correct "closing" animation) while walking
-          // the stack until it finds this exact route, rather than back()'s
-          // one-step pop, which can resolve unpredictably.
-          router.dismissTo('/(tabs)/workout');
-        },
-      },
+      { text: 'Discard & Exit', style: 'destructive', onPress: handleDiscard },
       { text: 'End & Save', onPress: handleEnd },
     ]);
   }
@@ -456,6 +478,20 @@ export default function EnduranceWorkoutScreen() {
               : `${badgeMeta.label}${isGpsTracking ? ' · GPS' : ''} IN PROGRESS`}
           </Text>
         </View>
+
+        {isGpsTracking && gpsPermission === 'denied' ? (
+          <TouchableOpacity
+            style={styles.gpsDeniedBanner}
+            onPress={() => Linking.openSettings()}
+            accessibilityRole="button"
+            accessibilityLabel="Location is off. Open Settings to enable it."
+          >
+            <Ionicons name="location-outline" size={16} color={Theme.text} />
+            <Text style={styles.gpsDeniedText}>
+              Location is off — OSPREY can&apos;t track distance. Tap to open Settings.
+            </Text>
+          </TouchableOpacity>
+        ) : null}
 
         <View style={styles.timerBlock}>
           <Text style={styles.timerValue}>{timeStr}</Text>
@@ -761,6 +797,17 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   cueBannerText: { flex: 1, fontSize: 13, fontWeight: '600', color: Theme.text, lineHeight: 18 },
+  gpsDeniedBanner: {
+    backgroundColor: 'rgba(255,68,68,0.08)',
+    borderRadius: Radius.card,
+    padding: 12,
+    borderWidth: BorderWidth.card,
+    borderColor: 'rgba(255,68,68,0.3)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  gpsDeniedText: { flex: 1, fontSize: 12, fontWeight: '600', color: Theme.text, lineHeight: 17 },
   distanceCard: {
     backgroundColor: Theme.panel,
     borderWidth: BorderWidth.card,

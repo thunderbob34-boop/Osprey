@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
   Alert,
+  Linking,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,6 +24,7 @@ import {
   formatDuration,
   formatPace,
   metersToMiles,
+  isResumableWorkout,
 } from '@/store/workoutStore';
 import { useAuthStore } from '@/store/authStore';
 import { fetchIntervalPrescription, saveRunWorkout } from '@/services/workouts';
@@ -72,7 +74,11 @@ export default function RunWorkoutScreen() {
 
   const [elapsed, setElapsed] = useState(0);
   const [saving, setSaving] = useState(false);
-  const [warmingUp, setWarmingUp] = useState(true);
+  // A run already active/paused in the store means this is a resume after
+  // an app kill, not a fresh start — skip warm-up straight to the live
+  // screen so handleStartAfterWarmup's startWorkout() never fires and wipes
+  // the distance/track points being resumed.
+  const [warmingUp, setWarmingUp] = useState(() => !isResumableWorkout('run'));
   const [warmupDrills] = useState<WarmupDrill[]>(() => generateWarmup('run'));
   const [checkedDrills, setCheckedDrills] = useState<Set<number>>(new Set());
   const allDrillsChecked = warmupDrills.length > 0 && checkedDrills.size === warmupDrills.length;
@@ -88,7 +94,7 @@ export default function RunWorkoutScreen() {
   const [intervalsDone, setIntervalsDone] = useState(false);
   const stepStartRef = useRef({ elapsedS: 0, distanceM: 0 });
 
-  useRunTracking(status === 'active');
+  const { permissionStatus: gpsPermission } = useRunTracking(status === 'active');
 
   useEffect(() => {
     if (!params.sessionId) return;
@@ -280,20 +286,36 @@ export default function RunWorkoutScreen() {
     }
   }
 
+  function handleDiscard() {
+    reset();
+    // dismissTo dismisses (correct "closing" animation) while walking
+    // the stack until it finds this exact route, rather than back()'s
+    // one-step pop, which can resolve unpredictably.
+    router.dismissTo('/(tabs)/workout');
+  }
+
   function confirmEnd() {
+    // A near-zero distance almost always means GPS never tracked (denied
+    // permission, no fix yet) — surface that instead of silently saving a
+    // 0.00 mi run the athlete has no way to explain later.
+    if (distanceMeters < 10) {
+      Alert.alert(
+        'No distance recorded',
+        gpsPermission === 'denied'
+          ? "Location was off during this run, so distance wasn't tracked. Save it anyway, or discard it?"
+          : 'This run has almost no distance recorded. Save it anyway, or discard it?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Discard & Exit', style: 'destructive', onPress: handleDiscard },
+          { text: 'Save Anyway', onPress: handleEndWorkout },
+        ],
+      );
+      return;
+    }
+
     Alert.alert('End workout?', 'Save this run and see your recap.', [
       { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Discard & Exit',
-        style: 'destructive',
-        onPress: () => {
-          reset();
-          // dismissTo dismisses (correct "closing" animation) while walking
-          // the stack until it finds this exact route, rather than back()'s
-          // one-step pop, which can resolve unpredictably.
-          router.dismissTo('/(tabs)/workout');
-        },
-      },
+      { text: 'Discard & Exit', style: 'destructive', onPress: handleDiscard },
       { text: 'End & Save', onPress: handleEndWorkout },
     ]);
   }
@@ -372,6 +394,20 @@ export default function RunWorkoutScreen() {
         <StatBlock label="TIME" value={formatDuration(elapsed)} />
         <StatBlock label="HR" value={heartRate ? `${heartRate}` : '--'} />
       </View>
+
+      {gpsPermission === 'denied' ? (
+        <TouchableOpacity
+          style={styles.gpsDeniedBanner}
+          onPress={() => Linking.openSettings()}
+          accessibilityRole="button"
+          accessibilityLabel="Location is off. Open Settings to enable it."
+        >
+          <Ionicons name="location-outline" size={16} color={Theme.text} />
+          <Text style={styles.gpsDeniedText}>
+            Location is off — OSPREY can&apos;t track distance or pace. Tap to open Settings.
+          </Text>
+        </TouchableOpacity>
+      ) : null}
 
       {intervalSteps ? (
         <IntervalGuidanceCard
@@ -611,6 +647,18 @@ const styles = StyleSheet.create({
     borderColor: Theme.line,
   },
   pausedText: { fontSize: 12, color: Theme.textSoft, lineHeight: 18 },
+  gpsDeniedBanner: {
+    marginHorizontal: 16,
+    backgroundColor: 'rgba(255,68,68,0.08)',
+    borderRadius: Radius.card,
+    padding: 12,
+    borderWidth: BorderWidth.card,
+    borderColor: 'rgba(255,68,68,0.3)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  gpsDeniedText: { flex: 1, fontSize: 12, fontWeight: '600', color: Theme.text, lineHeight: 17 },
   cueBanner: {
     marginHorizontal: 16,
     backgroundColor: Theme.panel,
