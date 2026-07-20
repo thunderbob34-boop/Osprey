@@ -16,6 +16,23 @@ const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
+// This function was written for mobile only (supabase.functions.invoke over React
+// Native's fetch, which doesn't enforce CORS) and had never been called from a
+// browser until the webapp's usePlanSync started calling it — see
+// benchmark/osprey-webapp-ux-pass.md F1 in the hyrox-trainer-experience skill.
+// A browser POST through supabase-js sends Authorization + x-client-info headers
+// (non-safelisted), so it preflights with OPTIONS first; without an OPTIONS
+// reply and Access-Control-Allow-Origin on EVERY response, the preflight itself
+// 405s and the real POST never leaves the browser. Confirmed live in this
+// project's edge-function logs before this fix: repeated
+// "OPTIONS | 405 | .../ozzie-generate-plan" with zero corresponding POSTs.
+// Mirrors ozzie-nutrition-coach and ozzie-race-briefing, the two functions
+// that already learned this the same way.
+const CORS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
+
 const PLAN_SYSTEM_PROMPT = `You are Ozzie, the AI coach inside the OSPREY fitness app. You design a single week of training based on a user's goals and experience level.
 
 The user is a hybrid athlete whose philosophy is "look like a bodybuilder, function like an athlete." When goal is hybrid:
@@ -416,13 +433,16 @@ async function generateWeekDays(goals: GoalsContext, trainingLoad: TrainingLoad,
 }
 
 Deno.serve(async (req: Request) => {
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: CORS });
+  }
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405, headers: CORS });
   }
 
   const authHeader = req.headers.get('Authorization');
   if (!authHeader) {
-    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), { status: 401 });
+    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), { status: 401, headers: CORS });
   }
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
@@ -430,7 +450,7 @@ Deno.serve(async (req: Request) => {
   const { data: authData, error: authError } = await supabase.auth.getUser(token);
 
   if (authError || !authData?.user) {
-    return new Response(JSON.stringify({ error: 'Invalid session' }), { status: 401 });
+    return new Response(JSON.stringify({ error: 'Invalid session' }), { status: 401, headers: CORS });
   }
 
   const userId = authData.user.id;
@@ -486,7 +506,7 @@ Deno.serve(async (req: Request) => {
         todayStr,
       );
       return new Response(JSON.stringify({ created: false, weekId: existingWeek.id, rescheduled: swaps }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...CORS, 'Content-Type': 'application/json' },
       });
     }
 
@@ -656,6 +676,29 @@ Deno.serve(async (req: Request) => {
     let planId: string;
     let weekId: string;
 
+    // A user can have an active plan whose most recent week isn't this
+    // Monday — the plan went stale (this function went uncalled for a
+    // while) rather than never having existed. Looked up here rather than
+    // folded into the existingWeek query above, which requires
+    // start_date = weekStartStr and so can never see it. Reused below
+    // instead of falling into the plan INSERT further down, which the
+    // one-active-plan-per-user unique index (uniq_one_active_plan_per_user)
+    // rejects — the 23505 recovery a few lines down only matches a genuine
+    // concurrent race (another request creating THIS SAME week), not a
+    // plan that's simply behind. Confirmed live: this silently 500'd
+    // (swallowed by both mobile and webapp callers, neither of which
+    // surfaces invoke() errors to the athlete) for an account whose plan
+    // hadn't regenerated in 3 weeks.
+    const { data: staleActivePlan } = existingWeek
+      ? { data: null }
+      : await supabase
+          .from('training_plans')
+          .select('id')
+          .eq('user_id', userId)
+          .eq('status', 'active')
+          .is('deleted_at', null)
+          .maybeSingle();
+
     if (existingWeek) {
       planId = existingWeek.plan_id as string;
       weekId = existingWeek.id as string;
@@ -718,6 +761,35 @@ Deno.serve(async (req: Request) => {
         .delete()
         .eq('week_id', weekId);
       if (deleteSessionsError) throw deleteSessionsError;
+    } else if (staleActivePlan) {
+      // Same plan, just no week for this Monday yet — update it in place
+      // and create the missing week. No old sessions to detach/delete:
+      // there is no current week yet, so nothing points at one.
+      planId = staleActivePlan.id as string;
+
+      const { error: planUpdateError } = await supabase
+        .from('training_plans')
+        .update({
+          name: `${goals.primaryGoal ? goals.primaryGoal.replace(/_/g, ' ') : 'General fitness'} plan`,
+          plan_type: planType,
+        })
+        .eq('id', planId);
+      if (planUpdateError) throw planUpdateError;
+
+      const { data: week, error: weekError } = await supabase
+        .from('training_weeks')
+        .insert({
+          plan_id: planId,
+          week_number: (body.envelope as Envelope | undefined)?.weekNumber ?? 1,
+          start_date: weekStartStr,
+          focus: (body.envelope as Envelope | undefined)?.phase ?? 'Base building',
+          tss_target: (body.envelope as Envelope | undefined)?.targetWeeklyLoad ?? null,
+        })
+        .select('id')
+        .single();
+
+      if (weekError || !week) throw weekError ?? new Error('Failed to create week');
+      weekId = week.id as string;
     } else {
       const { data: plan, error: planError } = await supabase
         .from('training_plans')
@@ -749,7 +821,7 @@ Deno.serve(async (req: Request) => {
           if (racedWeek) {
             return new Response(
               JSON.stringify({ created: false, weekId: racedWeek.id, rescheduled: [] }),
-              { headers: { 'Content-Type': 'application/json' } },
+              { headers: { ...CORS, 'Content-Type': 'application/json' } },
             );
           }
         }
@@ -818,7 +890,7 @@ Deno.serve(async (req: Request) => {
       sessionCount: sessionRows.length,
       sessions: sessionRows,
     }), {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...CORS, 'Content-Type': 'application/json' },
     });
   } catch (err) {
     // Duck-type instead of `instanceof Error` — PostgrestError and other
@@ -840,7 +912,7 @@ Deno.serve(async (req: Request) => {
     console.error('Plan generation error:', message);
     return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...CORS, 'Content-Type': 'application/json' },
     });
   }
 });

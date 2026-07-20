@@ -83,18 +83,32 @@ function TodayHero({ userId, weekSessions, todayISO, isPending, isError, error, 
   );
 }
 
+// Both early-outs below used to render nothing (a query error, "no row yet",
+// and "row exists but every field is still null" all looked identical to a
+// user: silence). Replaced with the same .empty-state block the Fuel Desk
+// already uses, so the dashboard explains itself instead of going quiet —
+// see benchmark/osprey-webapp-ux-pass.md F2.
+function StatBandEmpty() {
+  return (
+    <div className="empty-state">
+      <h3>No training stats yet</h3>
+      <p>Recovery, form, and weekly mileage show up here once you've logged a few sessions.</p>
+    </div>
+  );
+}
+
 function StatBand({ userId }: { userId: string }) {
   const ds = useDailySummary(userId);
   const units = useUnits(userId);
   const s = ds.data;
-  if (!s) return null; // covers "no row yet", still loading, and query error alike — nothing to show
+  if (!s) return <StatBandEmpty />;
 
   const tiles: { num: string; lab: string; sub?: string | null }[] = [];
   if (s.recoveryScore != null) tiles.push({ num: String(s.recoveryScore), lab: 'Recovery', sub: s.recoveryRecommendation });
   if (s.tsb != null) tiles.push({ num: (s.tsb > 0 ? '+' : '') + s.tsb, lab: 'Form (TSB)' });
   if (s.weekDistanceKm != null) tiles.push({ num: formatDistanceKm(s.weekDistanceKm, units.data ?? 'imperial') ?? '', lab: 'This week' });
   if (s.workoutsLast30d != null) tiles.push({ num: String(s.workoutsLast30d), lab: 'Last 30 days' });
-  if (tiles.length === 0) return null;
+  if (tiles.length === 0) return <StatBandEmpty />;
 
   return (
     <div className="stat-band" style={{ marginBottom: 0 }}>
@@ -167,7 +181,19 @@ function NextRaceCard({ userId }: { userId: string }) {
     ? computeRacePhase({ targetRace: goal.data.targetRace, targetDate: goal.data.targetDate, totalWeeksPlanned: goal.data.totalWeeksPlanned })
     : null;
 
-  if (!nextRace.data && !phase) return null; // no upcoming race and no active plan phase — nothing to show
+  // A genuinely empty account (no race tracked, no active plan phase) — the
+  // one case with nothing race-related to say anything about yet. Previously
+  // rendered nothing at all; now points at the one action that unblocks it.
+  if (!nextRace.data && !phase) {
+    return (
+      <div className="empty-state">
+        <h3>No race on your calendar</h3>
+        <p>
+          Add an upcoming race to see your countdown and training phase here — <Link className="link-amber" to="/calendar">open the calendar</Link>.
+        </p>
+      </div>
+    );
+  }
 
   // bestRun/predictor are best-effort: a failed or empty fetch just means no predictor line, never an error state.
   const isRunGoal = ['run', 'ultra', 'triathlon'].includes(goal.data?.primaryGoal ?? '');
@@ -191,20 +217,38 @@ function NextRaceCard({ userId }: { userId: string }) {
         </div>
       )}
 
-      {phase && (
+      {phase ? (
         <div className="detail-card">
           <div className="tag">Training phase</div>
           <h3>{phase.phase}</h3>
           <p>Week {phase.currentWeekNumber} of {phase.totalWeeks} · {phase.weeksRemaining} to go</p>
         </div>
-      )}
+      ) : nextRace.data ? (
+        // A race is tracked, but user_goals.target_date/total_weeks_planned — the
+        // fields that drive a training phase — aren't set. Those are set during
+        // mobile onboarding/preferences, not editable from this surface (verified:
+        // useUserGoal only reads them; no webapp mutation writes them), so the
+        // copy points at the surface that can actually fix it rather than a
+        // webapp control that doesn't exist.
+        <div className="empty-state">
+          <h3>No active training block</h3>
+          <p>This race isn't linked to a training plan yet — set your race goal in the OSPREY mobile app to see your phase here.</p>
+        </div>
+      ) : null}
 
-      {compactPrediction && (
+      {compactPrediction ? (
         <div className="detail-card">
           <div className="tag">Race predictor</div>
           <p>Predicted {compactPrediction.label.toLowerCase()}: <b>{formatRaceTimeSec(compactPrediction.predictedTimeS)}</b></p>
         </div>
-      )}
+      ) : isRunGoal ? (
+        <div className="empty-state">
+          <h3>No predicted time yet</h3>
+          <p>
+            Log a hard running effort to see your predicted race times — <Link className="link-amber" to="/log">open the log</Link>.
+          </p>
+        </div>
+      ) : null}
     </>
   );
 }
