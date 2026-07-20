@@ -25,7 +25,7 @@ import { useRaces } from '@/hooks/useRaces';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, formatPacePerUnit, milesToKm } from '@/services/units';
-import { formatRaceDistance, RACE_DISTANCE_LADDER } from '@/services/race-display';
+import { formatRaceDistance, RACE_DISTANCE_LADDER, raceRunwayLabel } from '@/services/race-display';
 import {
   DEFAULT_CHECKLIST,
   formatRaceTime,
@@ -872,6 +872,7 @@ export default function RacesScreen() {
                       <Text style={styles.nextMeta}>Target {formatRaceTime(nextRace.goalTimeS)}</Text>
                     ) : null}
                   </View>
+                  <Text style={styles.nextRunway}>{raceRunwayLabel(Math.round(nextRace.daysUntil / 7))}</Text>
                 </View>
               ) : null}
 
@@ -1102,6 +1103,7 @@ const styles = StyleSheet.create({
   nextCountdown: { color: Theme.accentBright, fontSize: 15, fontWeight: '700', marginTop: 2 },
   nextMetaRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 14, marginTop: 8 },
   nextMeta: { color: Theme.textSoft, fontSize: 13, fontWeight: '600' },
+  nextRunway: { color: Theme.textSoft, fontSize: 13, marginTop: 10, lineHeight: 18 },
 
   sectionLabel: {
     color: Theme.accent,

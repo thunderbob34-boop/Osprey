@@ -27,3 +27,19 @@ export function formatRaceDistance(km: number, units: UnitSystem): string {
   const match = RACE_DISTANCE_LADDER.find((rung) => Math.abs(rung.km - km) < DISTANCE_MATCH_TOLERANCE_KM);
   return match ? RACE_DISTANCE_DISPLAY_LABEL[match.label] : formatDistanceKm(km, units);
 }
+
+/**
+ * A plain-language read of how much time is left before a race. Mirrors
+ * the wording OSPREY's webapp (webapp/src/lib/race-runway.ts) shows for
+ * the identical concept, so the coaching voice reads the same on both
+ * surfaces — not a formal port, since it's presentational copy rather
+ * than domain logic, but keep the wording matched if either surface's
+ * copy changes.
+ */
+export function raceRunwayLabel(weeksOut: number): string {
+  if (weeksOut <= 1) return "Race week — trust the work you've put in.";
+  if (weeksOut <= 4) return 'Peak block window — sharpen up with race-specific work.';
+  if (weeksOut <= 11) return 'Time for a focused build — base phase should be behind you.';
+  if (weeksOut <= 20) return 'Full build fits, with room for a base block first.';
+  return 'Plenty of runway — no need to rush into hard training yet.';
+}
