@@ -94,7 +94,9 @@ export function hyroxGuidance(h: HyroxInfo | null | undefined): string {
     ` HYROX (${h.division.replace('_', ' ')}): race 8×1km runs + 8 stations as ONE effort — control the opening` +
     ` SkiErg→Sled block. Target compromised run splits ${h.compromisedRunSplitSecPerKm.min}-${h.compromisedRunSplitSecPerKm.max} s/km` +
     ` (stations pre-fatigue you — do NOT run fresh-5k pace). Signature session: compromised-running intervals` +
-    ` (1km race-pace → a station → 1km race-pace). Station strength-endurance at race weights — sled push ${w.sledPushKg}kg,` +
+    ` (1km race-pace → a station → 1km race-pace) — give this session_type "hyrox" (not "run" or "cross"),` +
+    ` set planned_distance_km to the rep count × 1km (e.g. 6km for 6 reps), and program it 1-2x/week, escalating` +
+    ` the rep count across the block (e.g. ×6 early, building to ×8 near race week). Station strength-endurance at race weights — sled push ${w.sledPushKg}kg,` +
     ` sled pull ${w.sledPullKg}kg, farmers ${w.farmersCarryPerHandKg}kg/hand, sandbag lunge ${w.sandbagLungesKg}kg,` +
     ` wall ball ${w.wallBallKg}kg (100 reps, pre-plan the break); ski/row 1000m at target split. Race day:` +
     ` ${h.sodiumMgPerHour.min}-${h.sodiumMgPerHour.max} mg/hr sodium, caffeine ${h.caffeineMg.min}-${h.caffeineMg.max} mg pre-race` +

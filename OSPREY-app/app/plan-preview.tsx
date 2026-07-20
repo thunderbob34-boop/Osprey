@@ -308,7 +308,10 @@ export default function PlanPreviewScreen() {
   const totalMinutes = sessions.reduce((sum, s) => sum + (s.planned_minutes ?? 0), 0);
   const totalDistanceKm = sessions.reduce((sum, s) => {
     if (!s.planned_distance_km) return sum;
-    if (s.session_type !== 'run' && s.session_type !== 'race' && s.session_type !== 'bike') return sum;
+    // Hyrox's planned_distance_km is real running distance (rep count × 1km,
+    // per hyroxGuidance) — same character as run/race/bike, unlike swim/rowing
+    // (pool/erg distance, not comparable to road mileage).
+    if (s.session_type !== 'run' && s.session_type !== 'race' && s.session_type !== 'bike' && s.session_type !== 'hyrox') return sum;
     return sum + s.planned_distance_km;
   }, 0);
 
@@ -317,6 +320,8 @@ export default function PlanPreviewScreen() {
     lift: '🏋️',
     swim: '🏊',
     bike: '🚴',
+    rowing: '🚣',
+    hyrox: '🏋️‍♂️',
     cross: '🔁',
     rest: '😴',
   };

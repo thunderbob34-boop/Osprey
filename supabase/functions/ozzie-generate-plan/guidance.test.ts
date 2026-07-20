@@ -95,6 +95,13 @@ Deno.test('hyroxGuidance states the compromised split, station weights, and race
   assertEquals(g.includes('descriptions'), true); // station work goes in session notes, not the whitelist
 });
 
+Deno.test('hyroxGuidance tells the model to type the signature session "hyrox" and how to size it', () => {
+  const g = hyroxGuidance(fullHyrox);
+  assertEquals(g.includes('session_type "hyrox"'), true);
+  assertEquals(g.includes('rep count × 1km'), true);
+  assertEquals(g.includes('1-2x/week'), true);
+});
+
 const fullCrossfit: CrossfitInfo = {
   strengthLoadsKg: { backSquat: 109, deadlift: 140, press: 47 },
   workingPercent1RM: 78,

@@ -3,6 +3,7 @@ import { renderWithProviders as render, screen, fireEvent } from '@/test-utils/r
 import PlanPreview from '@/../app/plan-preview';
 import { EffortPalette, IntensityPalette, Theme } from '@/constants/theme';
 import { Colors } from '@/constants/colors';
+import { kmToMiles } from '@/services/units';
 
 /**
  * plan-preview renders BOTH colour scales this project reworked:
@@ -50,7 +51,27 @@ const mockSessions = [
     planned_distance_km: null,
     description: 'Rest day',
   },
+  {
+    session_date: '2026-07-23',
+    session_type: 'hyrox',
+    intensity: 'threshold',
+    planned_minutes: 40,
+    planned_distance_km: 6,
+    description: 'Compromised-Running Intervals',
+  },
+  {
+    session_date: '2026-07-24',
+    session_type: 'rowing',
+    intensity: 'moderate',
+    planned_minutes: 30,
+    planned_distance_km: 6,
+    description: 'Steady Row',
+  },
 ];
+
+// 8 (interval run) + 12 (threshold run) + 6 (hyrox) = 26km of "real mileage".
+// Rowing's 6km is erg distance, not comparable to road mileage, and stays excluded.
+const EXPECTED_TOTAL_DISTANCE_KM = 26;
 
 jest.mock('expo-router', () => ({
   useLocalSearchParams: () => ({ sessions: JSON.stringify(mockSessions) }),
@@ -171,6 +192,29 @@ describe('plan-preview — IntensityPalette reaches session chips', () => {
     const colors = new Set(easies.map(colorOf));
     expect(colors.size).toBe(1);
     expect([...colors][0]).toBe(EffortPalette.easy);
+  });
+});
+
+describe('plan-preview — session-type icons and mileage rollup', () => {
+  // SESSION_ICONS was missing both 'rowing' and 'hyrox' (added to the DB enum
+  // and the AI plan-generator's own type list in the same pass) — it silently
+  // fell back to a bare circle for both instead of crashing, which is exactly
+  // the kind of gap that's easy to miss without a direct assertion.
+  it('renders a real icon for a hyrox session, not the "unknown type" fallback', () => {
+    render(<PlanPreview />);
+    // Appears twice: the session row and the "THIS WEEK" summary type chip.
+    expect(screen.getAllByText('🏋️‍♂️').length).toBeGreaterThan(0);
+  });
+
+  it('renders a real icon for a rowing session, not the "unknown type" fallback', () => {
+    render(<PlanPreview />);
+    expect(screen.getAllByText('🚣').length).toBeGreaterThan(0);
+  });
+
+  it('counts a hyrox session\'s planned_distance_km toward the week\'s mileage total (real running distance), but not rowing\'s (erg distance)', () => {
+    render(<PlanPreview />);
+    const expectedMiles = kmToMiles(EXPECTED_TOTAL_DISTANCE_KM).toFixed(1);
+    expect(screen.getByText(expectedMiles)).toBeTruthy();
   });
 });
 
