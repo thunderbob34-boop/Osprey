@@ -25,6 +25,7 @@ import { useRaces } from '@/hooks/useRaces';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, formatPacePerUnit, milesToKm } from '@/services/units';
+import { formatRaceDistance, RACE_DISTANCE_LADDER } from '@/services/race-display';
 import {
   DEFAULT_CHECKLIST,
   formatRaceTime,
@@ -32,13 +33,6 @@ import {
   type ChecklistItem,
   type RaceEvent,
 } from '@/services/races';
-
-const DISTANCE_PRESETS: { label: string; km: number }[] = [
-  { label: '5K', km: 5 },
-  { label: '10K', km: 10 },
-  { label: 'Half', km: 21.0975 },
-  { label: 'Full', km: 42.195 },
-];
 
 function isValidDate(s: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
@@ -753,7 +747,7 @@ export default function RacesScreen() {
 
               <Text style={styles.fieldLabel}>DISTANCE</Text>
               <View style={styles.chipRow}>
-                {DISTANCE_PRESETS.map((p) => (
+                {RACE_DISTANCE_LADDER.map((p) => (
                   <TouchableOpacity
                     key={p.label}
                     style={[styles.chip, distanceKm === p.km && styles.chipActive]}
@@ -867,7 +861,7 @@ export default function RacesScreen() {
                   <Text style={styles.nextCountdown}>{countdownLabel(nextRace.daysUntil)}</Text>
                   <View style={styles.nextMetaRow}>
                     {nextRace.distanceKm ? (
-                      <Text style={styles.nextMeta}>{formatDistanceKm(nextRace.distanceKm, units)}</Text>
+                      <Text style={styles.nextMeta}>{formatRaceDistance(nextRace.distanceKm, units)}</Text>
                     ) : null}
                     {formatPacePerUnit(nextRace.goalTimeS, nextRace.distanceKm, units) ? (
                       <Text style={styles.nextMeta}>
@@ -891,7 +885,7 @@ export default function RacesScreen() {
                           <Text style={styles.raceName}>{race.name}</Text>
                           <Text style={styles.raceMeta}>
                             {formatEventDate(race.eventDate)} · {countdownLabel(race.daysUntil)}
-                            {race.distanceKm ? ` · ${formatDistanceKm(race.distanceKm, units)}` : ''}
+                            {race.distanceKm ? ` · ${formatRaceDistance(race.distanceKm, units)}` : ''}
                             {race.location ? ` · ${race.location}` : ''}
                           </Text>
                           <View style={styles.actionRow}>
@@ -989,7 +983,7 @@ export default function RacesScreen() {
                           <Text style={styles.raceName}>{race.name}</Text>
                           <Text style={styles.raceMeta}>
                             {formatEventDate(race.eventDate)}
-                            {race.distanceKm ? ` · ${formatDistanceKm(race.distanceKm, units)}` : ''}
+                            {race.distanceKm ? ` · ${formatRaceDistance(race.distanceKm, units)}` : ''}
                             {race.resultTimeS ? ` · Finished ${formatRaceTime(race.resultTimeS)}` : ''}
                           </Text>
                           <View style={styles.actionRow}>
