@@ -154,7 +154,7 @@
   display: block; width: 100%; text-align: left; padding: 9px 12px; background: transparent; border: none;
   color: var(--text); font-family: inherit; font-size: 13.5px; cursor: pointer;
 }
-.exercise-dropdown button:hover { background: var(--amber-veil-strong); }
+.exercise-dropdown button:hover, .exercise-dropdown button.active { background: var(--amber-veil-strong); }
 .exercise-dropdown .muted { color: var(--mut); }
 .icon-btn { background: transparent; border: none; color: var(--mut); cursor: pointer; padding: 6px; font-size: 13px; line-height: 1; }
 .icon-btn:hover { color: var(--text); }

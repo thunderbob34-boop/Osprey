@@ -8,6 +8,7 @@ import { addDays, toDateInputValue } from '../../lib/day';
 import type { FoodItem, MealType } from '../../lib/schemas';
 import { MEAL_LABEL } from '../../lib/format';
 import { MacroBar } from '../../components/MacroBar';
+import { Combobox } from '../../components/Combobox';
 import {
   MEAL_ORDER, sumDay, useAddManualFood, useDayLog, useDeleteLogEntry,
   useFoodSearch, useLogFood, useNutritionCoaching, useNutritionTargets, type DayLogEntry,
@@ -34,6 +35,7 @@ function FuelBand({ logged, target, dayTypeLabel }: { logged: Macros; target: Pa
 function QuickAdd({ userId, dateStr }: { userId: string; dateStr: string }) {
   const [term, setTerm] = useState('');
   const [selected, setSelected] = useState<FoodItem | null>(null);
+  const [open, setOpen] = useState(false);
   const [qty, setQty] = useState('100');
   const [meal, setMeal] = useState<MealType>('breakfast');
   const [manualOpen, setManualOpen] = useState(false);
@@ -57,32 +59,29 @@ function QuickAdd({ userId, dateStr }: { userId: string; dateStr: string }) {
     setManual({ name: '', calories: '', protein: '', carbs: '', fat: '' });
   }
 
+  function selectFood(f: FoodItem) {
+    setSelected(f);
+    setTerm(f.name);
+  }
+
   return (
     <>
       <div className="quick-add">
         <div className="field grow">
           <label htmlFor="food-search">Add food</label>
-          <input
-            id="food-search" autoComplete="off" placeholder="Search foods…" value={term}
-            onChange={(e) => { setTerm(e.target.value); setSelected(null); setManualOpen(false); }}
+          <Combobox
+            id="food-search"
+            value={term}
+            onChange={(v) => { setTerm(v); setSelected(null); setManualOpen(false); }}
+            placeholder="Search foods…"
+            open={open && !selected && term.trim().length >= 2}
+            onOpenChange={setOpen}
+            items={search.data ?? []}
+            getKey={(f) => f.id}
+            renderItem={(f) => <>{f.name}{f.brand ? ` (${f.brand})` : ''}<span className="muted"> · {f.calories_per_100g ?? '—'} kcal/100g</span></>}
+            onSelect={selectFood}
+            footer={{ label: "Can't find it? Add manually →", onSelect: () => setManualOpen(true) }}
           />
-          {!selected && term.trim().length >= 2 && (
-            <ul className="exercise-dropdown">
-              {(search.data ?? []).map((f) => (
-                <li key={f.id}>
-                  <button type="button" onClick={() => { setSelected(f); setTerm(f.name); }}>
-                    {f.name}{f.brand ? ` (${f.brand})` : ''}
-                    <span className="muted"> · {f.calories_per_100g ?? '—'} kcal/100g</span>
-                  </button>
-                </li>
-              ))}
-              <li>
-                <button type="button" className="muted" onClick={() => setManualOpen(true)}>
-                  Can't find it? Add manually →
-                </button>
-              </li>
-            </ul>
-          )}
         </div>
         <div className="field qty-field">
           <label htmlFor="food-qty">Qty (g)</label>

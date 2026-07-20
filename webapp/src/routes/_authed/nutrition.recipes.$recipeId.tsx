@@ -7,6 +7,7 @@ import { macrosFor } from '../../lib/macros';
 import type { FoodItem, MealType } from '../../lib/schemas';
 import { MEAL_LABEL } from '../../lib/format';
 import { useFoodSearch } from '../../features/nutrition/queries';
+import { Combobox } from '../../components/Combobox';
 import {
   recipePerServing, recipeTotals, useAddIngredient, useLogRecipeServing,
   useRecipe, useRemoveIngredient, useUpdateIngredient, useUpdateRecipe,
@@ -14,21 +15,21 @@ import {
 
 function IngredientSearch({ onPick }: { onPick: (f: FoodItem) => void }) {
   const [term, setTerm] = useState('');
+  const [open, setOpen] = useState(false);
   const search = useFoodSearch(term);
   return (
     <div className="field" style={{ position: 'relative', maxWidth: 360 }}>
-      <input placeholder="Search foods to add an ingredient…" value={term} onChange={(e) => setTerm(e.target.value)} />
-      {term.trim().length >= 2 && (
-        <ul className="exercise-dropdown">
-          {(search.data ?? []).map((f) => (
-            <li key={f.id}>
-              <button type="button" onClick={() => { onPick(f); setTerm(''); }}>
-                {f.name}<span className="muted"> · {f.calories_per_100g ?? '—'} kcal/100g</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <Combobox
+        value={term}
+        onChange={setTerm}
+        placeholder="Search foods to add an ingredient…"
+        open={open && term.trim().length >= 2}
+        onOpenChange={setOpen}
+        items={search.data ?? []}
+        getKey={(f) => f.id}
+        renderItem={(f) => <>{f.name}<span className="muted"> · {f.calories_per_100g ?? '—'} kcal/100g</span></>}
+        onSelect={(f) => { onPick(f); setTerm(''); }}
+      />
     </div>
   );
 }

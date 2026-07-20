@@ -1,7 +1,9 @@
 import { useReducer, useEffect, useRef, useState } from 'react';
 import { gridReducer, emptyGrid, setNumbers, type SetRow } from './reducer';
 import { formatWeightKg, parseWeightInput, kgToLb, type UnitSystem } from '../../lib/units';
+import type { Exercise } from '../../lib/schemas';
 import { useExerciseSearch } from '../log/queries';
+import { Combobox } from '../../components/Combobox';
 
 interface Props {
   units: UnitSystem;
@@ -120,33 +122,26 @@ function ExerciseCell({ row, dispatch, onSelect }: { row: SetRow; dispatch: Reac
   const [term, setTerm] = useState(row.exerciseName);
   const [open, setOpen] = useState(false);
   const search = useExerciseSearch(open ? term : '');
+
+  function selectExercise(ex: Exercise) {
+    setTerm(ex.name);
+    dispatch({ type: 'editCell', localId: row.localId, field: 'exercise', value: { exerciseId: ex.id, exerciseName: ex.name } });
+    onSelect(ex.id, ex.name);
+  }
+
   return (
     <div>
-      <input
+      <Combobox
         value={term}
+        onChange={setTerm}
         placeholder="Search exercise…"
-        onChange={(e) => { setTerm(e.target.value); setOpen(true); }}
-        onFocus={() => setOpen(true)}
-        onBlur={() => setTimeout(() => setOpen(false), 150)}
+        open={open}
+        onOpenChange={setOpen}
+        items={search.data ?? []}
+        getKey={(ex) => ex.id}
+        renderItem={(ex) => <>{ex.name}{ex.muscle_group ? <span className="muted"> · {ex.muscle_group}</span> : null}</>}
+        onSelect={selectExercise}
       />
-      {open && (search.data?.length ?? 0) > 0 && (
-        <ul className="exercise-dropdown">
-          {search.data!.map((ex) => (
-            <li key={ex.id}>
-              <button
-                type="button"
-                onMouseDown={() => {
-                  setTerm(ex.name); setOpen(false);
-                  dispatch({ type: 'editCell', localId: row.localId, field: 'exercise', value: { exerciseId: ex.id, exerciseName: ex.name } });
-                  onSelect(ex.id, ex.name);
-                }}
-              >
-                {ex.name}{ex.muscle_group ? <span className="muted"> · {ex.muscle_group}</span> : null}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }
