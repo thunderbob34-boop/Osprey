@@ -8,8 +8,23 @@ export interface HyroxGoalParams {
   targetTimeMinutes: number | null; // optional race-time goal; null = unset
 }
 
-const DIVISIONS: HyroxDivision[] = ['open_men', 'open_women', 'pro_men', 'pro_women'];
-const isDivision = (v: unknown): v is HyroxDivision => DIVISIONS.includes(v as HyroxDivision);
+// Must stay in step with the HyroxDivision union in services/calculators/hyrox.ts —
+// the Record<HyroxDivision, …> weights table there is compiler-checked, but this
+// runtime guard is not, so a new division added there silently fails validation here.
+// Exported as the single source of truth for every division picker in the app —
+// app/preferences.tsx and app/(onboarding)/baseline.tsx previously each kept their
+// own hardcoded 4-division copy of this list, which is exactly how both of them
+// silently fell out of sync when doubles_men/women/mixed were added here.
+export const HYROX_DIVISIONS: HyroxDivision[] = [
+  'open_men',
+  'open_women',
+  'pro_men',
+  'pro_women',
+  'doubles_men',
+  'doubles_women',
+  'doubles_mixed',
+];
+const isDivision = (v: unknown): v is HyroxDivision => HYROX_DIVISIONS.includes(v as HyroxDivision);
 const posMin = (v: unknown): number | null => (typeof v === 'number' && v > 0 && v <= 300 ? Math.round(v) : null);
 
 // Stored JSONB (or null) → safe params, or null when no valid division (a paramless hyrox

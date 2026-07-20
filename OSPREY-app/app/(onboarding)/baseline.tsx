@@ -14,7 +14,7 @@ import {
 } from '@/services/coaching/baseline';
 import { estimateFTPFromTwentyMinPower } from '@/services/calculators/triathlon';
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
-import { parseHyroxParams, type HyroxDivision } from '@/services/coaching/hyrox-params';
+import { parseHyroxParams, HYROX_DIVISIONS, type HyroxDivision } from '@/services/coaching/hyrox-params';
 import { parseStrengthParams } from '@/services/coaching/strength-params';
 import { parseCrossfitParams } from '@/services/coaching/crossfit-params';
 import { bestE1rmForLift, fetchLiftAnalytics } from '@/services/lift-analytics';
@@ -25,12 +25,19 @@ const HEALTH = '/(onboarding)/health';
 const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
 const mmss = (m: string, s: string) => num(m) * 60 + num(s);
 const ULTRA_DISTANCES: UltraRaceDistance[] = ['50k', '50mi', '100k', '100mi'];
-const HYROX_DIVISIONS: { value: HyroxDivision; label: string }[] = [
-  { value: 'open_men', label: 'Open M' },
-  { value: 'open_women', label: 'Open W' },
-  { value: 'pro_men', label: 'Pro M' },
-  { value: 'pro_women', label: 'Pro W' },
-];
+const HYROX_DIVISION_LABEL: Record<HyroxDivision, string> = {
+  open_men: 'Open M',
+  open_women: 'Open W',
+  pro_men: 'Pro M',
+  pro_women: 'Pro W',
+  doubles_men: 'Dbl M',
+  doubles_women: 'Dbl W',
+  doubles_mixed: 'Dbl Mix',
+};
+const HYROX_DIVISION_OPTIONS: { value: HyroxDivision; label: string }[] = HYROX_DIVISIONS.map((value) => ({
+  value,
+  label: HYROX_DIVISION_LABEL[value],
+}));
 
 export default function BaselineScreen() {
   const router = useRouter();
@@ -271,7 +278,7 @@ export default function BaselineScreen() {
             <View style={styles.field}>
               <Text style={styles.label}>Division</Text>
               <View style={styles.chipRow}>
-                {HYROX_DIVISIONS.map((d) => (
+                {HYROX_DIVISION_OPTIONS.map((d) => (
                   <Pressable
                     key={d.value}
                     style={[styles.chip, division === d.value && styles.chipSelected]}
