@@ -30,7 +30,7 @@ function WorkoutDetail() {
 
       {w.session_type === 'lift' && (
         <>
-          <div style={{ overflowX: 'auto', marginBottom: 20 }}>
+          <div className="table-scroll" style={{ marginBottom: 20 }}>
             <table className="activity-table">
               <thead>
                 <tr>

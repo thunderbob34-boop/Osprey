@@ -54,7 +54,7 @@ function HistoryPage() {
             <EmptyState title="No workouts match" body="Try clearing the filters, or log your first session." />
           ) : (
             <>
-              <div style={{ overflowX: 'auto' }}>
+              <div className="table-scroll">
                 <table className="activity-table">
                   <thead>
                     <tr>

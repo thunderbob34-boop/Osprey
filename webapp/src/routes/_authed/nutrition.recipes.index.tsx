@@ -38,6 +38,7 @@ function RecipeList() {
           action={<button className="btn" type="button" style={{ marginTop: 16 }} onClick={() => void createNew()}>Create your first recipe</button>} />
       ) : (
         <div className="card" style={{ padding: '6px 0 6px' }}>
+          <div className="table-scroll">
           <table className="activity-table">
             <thead>
               <tr><th>Recipe</th><th className="num">Servings</th><th className="num">Kcal/srv</th><th className="num">P</th><th className="num">C</th><th className="num">F</th><th aria-label="actions" /></tr>
@@ -61,6 +62,7 @@ function RecipeList() {
               })}
             </tbody>
           </table>
+          </div>
         </div>
       )}
     </>

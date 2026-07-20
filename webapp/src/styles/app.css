@@ -108,7 +108,10 @@
 .link-amber:hover { color: var(--amber-bright); }
 
 /* ---------- activity table (History) ---------- */
-.activity-table { width: 100%; border-collapse: collapse; }
+/* Wraps every .activity-table/.grid-table instance — narrow viewports scroll
+   the table horizontally instead of squeezing columns or overflowing the page. */
+.table-scroll { overflow-x: auto; }
+.activity-table { width: 100%; min-width: 480px; border-collapse: collapse; }
 .activity-table th {
   text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut);
   font-weight: 700; padding: 0 16px 12px; border-bottom: var(--border-w) solid var(--line);
@@ -133,7 +136,7 @@
 .settings-row .v { font-size: 15px; font-weight: 700; }
 
 /* ---------- sets grid (strength logging) ---------- */
-.grid-table { width: 100%; border-collapse: collapse; }
+.grid-table { width: 100%; min-width: 560px; border-collapse: collapse; }
 .grid-table th {
   text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut);
   font-weight: 700; padding: 0 10px 10px; border-bottom: var(--border-w) solid var(--line);
@@ -164,8 +167,8 @@
 .grid-hint { color: var(--mut); font-size: 11px; margin-top: 10px; }
 
 /* ---------- calendar (month grid + side pane) ---------- */
-.cal-layout { display: flex; gap: 28px; align-items: flex-start; }
-.cal-main { flex: 1; min-width: 0; }
+.cal-layout { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
+.cal-main { flex: 1; min-width: 320px; }
 .cal-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
 .cal-nav .month-title { flex: 1; font-weight: 700; font-size: 26px; text-transform: uppercase; letter-spacing: -0.01em; }
 .cal-nav button { padding: 8px 16px; }
@@ -183,6 +186,7 @@
 .cal-chip.race.selected { background: var(--amber); color: var(--on-amber); }
 
 .cal-aside { width: 320px; flex: none; display: flex; flex-direction: column; gap: 20px; }
+@media (max-width: 1100px) { .cal-aside { width: 100%; } }
 .race-countdown { border: var(--border-w) solid var(--amber); background: var(--ink); padding: 18px 20px; box-shadow: 6px 6px 0 0 var(--shadow-color); }
 .race-countdown .days { font-size: 34px; font-weight: 700; color: var(--amber); line-height: 1; font-variant-numeric: tabular-nums; }
 .race-countdown .lab { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin-top: 4px; }
@@ -250,7 +254,11 @@
   .rail-links { flex-direction: row; padding: 0; overflow-x: auto; }
   .rail-link { border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
   .rail-link.active { border-left-color: transparent; border-bottom-color: var(--amber-bright); }
-  .rail-foot { display: none; }
+  /* Was `display: none` — sign-out had no way to be reached below 860px. Keep
+     it, just compact: drop the name/email block, border-left instead of -top. */
+  .rail-foot { flex: none; border-top: none; border-left: var(--border-w) solid var(--line); padding: 10px 16px; }
+  .rail-user { display: none; }
+  .rail-signout { width: auto; white-space: nowrap; padding: 8px 14px; }
   .page { padding: 28px 20px 60px; }
   .week-row { grid-template-columns: 64px 1fr; }
   .week-stat { grid-column: 2 / 3; text-align: left; }

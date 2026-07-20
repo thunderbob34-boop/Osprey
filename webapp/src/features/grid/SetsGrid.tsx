@@ -57,6 +57,7 @@ export function SetsGrid({ units, initialRows, onCommitRow, onDeleteRow }: Props
 
   return (
     <div>
+      <div className="table-scroll">
       <table className="grid-table">
         <thead>
           <tr>
@@ -110,6 +111,7 @@ export function SetsGrid({ units, initialRows, onCommitRow, onDeleteRow }: Props
           )}
         </tbody>
       </table>
+      </div>
       <div className="grid-actions">
         <button className="btn ghost" type="button" onClick={() => dispatch({ type: 'addRow' })}>+ Set</button>
         <button className="btn" type="button" onClick={() => dispatch({ type: 'duplicateLast' })}>Duplicate last (⏎)</button>

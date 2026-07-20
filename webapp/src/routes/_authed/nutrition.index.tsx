@@ -146,6 +146,7 @@ function DayLogTable({ entries, onDelete }: { entries: DayLogEntry[]; onDelete: 
 
   return (
     <div className="card" style={{ padding: '6px 0 14px' }}>
+      <div className="table-scroll">
       <table className="activity-table">
         <thead>
           <tr><th>Food</th><th className="num">Qty</th><th className="num">Kcal</th><th className="num">P</th><th className="num">C</th><th className="num">F</th><th aria-label="actions" /></tr>
@@ -156,6 +157,7 @@ function DayLogTable({ entries, onDelete }: { entries: DayLogEntry[]; onDelete: 
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }
