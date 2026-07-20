@@ -1,11 +1,11 @@
 OSPREY is the training companion built for hybrid athletes — people who run miles, pull heavy, and refuse to choose a lane. Whether you're logging a long run at sunrise, grinding through a strength session at lunch, or piecing together a race-week taper, OSPREY tracks everything and adapts around you.
 
-At the center of it all is Ozzie, your AI coach. Ozzie isn't a chatbot with a clipboard. He shows up in your earpiece mid-run with live pacing cues, checks in on your recovery, adjusts your nutrition targets when your weight trend shifts, and gives you a daily brief each morning so you know exactly what you're walking into. He's warm, direct, occasionally goofy, and always in your corner.
+At the center of it all is Ozzie, your AI coach. Ozzie isn't a chatbot with a clipboard. He shows up mid-run with on-screen pacing cues, checks in on your recovery, adjusts your nutrition targets when your weight trend shifts, and gives you a daily brief each morning so you know exactly what you're walking into. He's warm, direct, occasionally goofy, and always in your corner.
 
 WHAT OSPREY DOES
 
-GPS Run Tracking with Live Coaching
-Track every run with full GPS routing, real-time pace, heart rate zones, and elevation. Ozzie reads your splits as they happen and adjusts coaching cues on the fly — not after the fact.
+GPS Run Tracking with On-Screen Coaching
+Track every run with full GPS routing, real-time pace, heart rate zones, and elevation. Ozzie reads your splits as they happen and surfaces coaching cues right on screen — not after the fact.
 
 Strength Logging
 Log every lift with set-by-set tracking, rest timers, and volume history. OSPREY tracks progressive overload across training blocks so Ozzie can actually see whether you're improving.
@@ -26,12 +26,12 @@ Performance Analytics
 OSPREY calculates ATL, CTL, and TSB (form, fitness, and fatigue) the way endurance coaches have done it for decades. Watch your fitness build across a training block and know when you're primed to race.
 
 Race Hub
-Add races to your calendar and OSPREY builds a race file: goal pace, logistics notes, packing list, and post-race retrospective. After the race, log how it went and Ozzie uses it to inform the next training block.
+Add races to your calendar and OSPREY builds a race file: goal pace, logistics notes, and post-race retrospective. After the race, log how it went and Ozzie uses it to inform the next training block.
 
 Group Challenges
 Compete with friends on weekly mileage, lifting volume, or consistency streaks. Challenges sync automatically — no manual reporting, no honor system.
 
 OSPREY+ PREMIUM
-Unlock the full coaching experience with an OSPREY+ subscription. Premium includes Ozzie's live run coaching, AI plan generation, advanced analytics, race hub, and unlimited food logging with photo analysis. Try it free, then decide.
+Unlock the full coaching experience with an OSPREY+ subscription. Premium includes Ozzie's in-run coaching cues, AI plan generation, advanced analytics, race hub, and unlimited food logging with photo analysis. Try it free, then decide.
 
 You trained hard to get here. Now train smart.

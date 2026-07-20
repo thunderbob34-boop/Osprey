@@ -2,12 +2,12 @@ Welcome to OSPREY.
 
 This is the first release — everything is new. Here's what you're getting:
 
-Ozzie, your AI coach, is live. He'll talk to you mid-run, give you a daily brief each morning, and keep your training plan honest when your schedule gets messy.
+Ozzie, your AI coach, is live. He'll coach you mid-run with on-screen cues, give you a daily brief each morning, and keep your training plan honest when your schedule gets messy.
 
-GPS run tracking with live coaching cues, lift logging with full set tracking, and support for swim, bike, and cross training are all in. Food logging works with barcodes, photos, and text. Performance analytics (ATL/CTL/TSB) track your fitness and fatigue across training blocks.
+GPS run tracking with on-screen coaching cues, lift logging with full set tracking, and support for swim, bike, and cross training are all in. Food logging works with barcodes, photos, and text. Performance analytics (ATL/CTL/TSB) track your fitness and fatigue across training blocks.
 
 Race Hub lets you prep for events with goal pacing, logistics notes, and post-race retrospectives. Group Challenges sync automatically with friends.
 
-OSPREY+ unlocks the full coaching experience — live run coaching, AI plan generation, advanced analytics, and unlimited food logging.
+OSPREY+ unlocks the full coaching experience — in-run coaching cues, AI plan generation, advanced analytics, and unlimited food logging.
 
 Thanks for being here from the start.
