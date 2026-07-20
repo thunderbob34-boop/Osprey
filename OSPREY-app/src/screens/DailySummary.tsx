@@ -137,14 +137,9 @@ export default function DailySummaryScreen({
           <Text style={styles.errorTitle}>Couldn&apos;t load summary</Text>
           <Text style={styles.stateText}>{error}</Text>
           {onRetry ? (
-            <TouchableOpacity
-              style={styles.retryBtn}
-              onPress={onRetry}
-              accessibilityRole="button"
-              accessibilityLabel="Try again"
-            >
-              <Text style={styles.retryBtnText}>Try Again</Text>
-            </TouchableOpacity>
+            <Button style={styles.retryBtn} onPress={onRetry} accessibilityLabel="Try again">
+              Try Again
+            </Button>
           ) : null}
         </View>
       </SafeAreaView>
@@ -577,18 +572,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: Theme.text,
   },
-  retryBtn: {
-    marginTop: 8,
-    backgroundColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-  },
-  retryBtnText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: Theme.ink,
-  },
+  retryBtn: { marginTop: 8 },
   scroll: {
     flex: 1,
   },

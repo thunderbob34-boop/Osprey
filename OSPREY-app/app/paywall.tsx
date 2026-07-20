@@ -14,7 +14,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { PurchasesPackage } from 'react-native-purchases';
 import OzzieMascot from '@/components/OzzieMascot';
-import { Card } from '@/components/ui';
+import { Card, Button } from '@/components/ui';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import {
   getOfferings,
@@ -215,14 +215,9 @@ export default function PaywallScreen() {
             <Text style={styles.offeringsErrorText}>
               Plans couldn&apos;t load. Check your connection and try again.
             </Text>
-            <TouchableOpacity
-              style={styles.retryBtn}
-              onPress={loadOfferings}
-              accessibilityRole="button"
-              accessibilityLabel="Retry loading plans"
-            >
-              <Text style={styles.retryBtnText}>Retry</Text>
-            </TouchableOpacity>
+            <Button variant="secondary" style={styles.retryBtn} onPress={loadOfferings} accessibilityLabel="Retry loading plans">
+              Retry
+            </Button>
           </View>
         ) : (
           <>
@@ -258,13 +253,12 @@ export default function PaywallScreen() {
               </View>
             ) : null}
 
-            <TouchableOpacity
-              style={[styles.subscribeBtn, purchasing && styles.subscribeBtnLoading]}
+            <Button
+              style={styles.subscribeBtn}
               onPress={handleSubscribe}
               disabled={purchasing || restoring || !selectedId}
-              accessibilityRole="button"
+              busy={purchasing}
               accessibilityLabel={priceString ? `Start for ${priceString} ${pricePeriodLabel}`.trim() : 'Subscribe to OSPREY+'}
-              accessibilityState={{ disabled: purchasing || restoring || !selectedId, busy: purchasing }}
             >
               {purchasing ? (
                 <ActivityIndicator color={Theme.ink} />
@@ -276,7 +270,7 @@ export default function PaywallScreen() {
                   <Text style={styles.subscribeBtnSub}>Cancel anytime</Text>
                 </>
               )}
-            </TouchableOpacity>
+            </Button>
           </>
         )}
 
@@ -371,14 +365,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   offeringsErrorText: { color: Theme.textSoft, fontSize: 13, textAlign: 'center', lineHeight: 18 },
-  retryBtn: {
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-  retryBtnText: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
+  retryBtn: { paddingHorizontal: 20, paddingVertical: 10 },
   packageRow: { flexDirection: 'row', gap: 10 },
   packageChip: {
     flex: 1,
@@ -395,18 +382,12 @@ const styles = StyleSheet.create({
   packageChipLabelActive: { color: Theme.accent },
   packageChipPrice: { fontSize: 12, color: Theme.textMut, fontWeight: '600' },
   packageChipPriceActive: { color: Theme.accent },
-  subscribeBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 17,
-    alignItems: 'center',
-    gap: 3,
-  },
-  subscribeBtnLoading: { opacity: 0.7 },
+  subscribeBtn: { paddingVertical: 17, gap: 3 },
   subscribeBtnText: { color: Theme.ink, fontSize: 17, fontWeight: '800' },
-  subscribeBtnSub: { color: 'rgba(0,0,0,0.5)', fontSize: 12, fontWeight: '600' },
+  // Ink-derived rather than a flat rgba(0,0,0,0.5) — that blended toward the
+  // accent background at ~2.4:1 contrast; this reads clearly while staying
+  // visually secondary to the price label above it.
+  subscribeBtnSub: { color: 'rgba(9,9,11,0.65)', fontSize: 12, fontWeight: '600' },
   restoreBtn: {
     alignItems: 'center',
     paddingVertical: 12,

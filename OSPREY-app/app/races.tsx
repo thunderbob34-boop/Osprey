@@ -842,15 +842,13 @@ export default function RacesScreen() {
                 Search 50,000+ running events — 5K to marathon.
               </Text>
             </View>
-            <TouchableOpacity
+            <Button
               style={styles.discoverBtn}
               onPress={() => router.push('/race-search')}
-              activeOpacity={0.8}
-              accessibilityRole="button"
-              accessibilityLabel="Discover events, search races"
+              accessibilityLabel="Discover races"
             >
-              <Text style={styles.discoverBtnText}>Discover Events →</Text>
-            </TouchableOpacity>
+              Discover Races →
+            </Button>
           </View>
 
           {isLoading ? (
@@ -1073,16 +1071,7 @@ const styles = StyleSheet.create({
   discoverBody: { gap: 2 },
   discoverTitle: { color: Theme.text, fontSize: 15, fontWeight: '800' },
   discoverSub: { color: Theme.textMut, fontSize: 12, lineHeight: 17 },
-  discoverBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    paddingVertical: 10,
-    alignItems: 'center',
-    marginTop: 4,
-  },
-  discoverBtnText: { color: Theme.ink, fontSize: 13, fontWeight: '800' },
+  discoverBtn: { marginTop: 4 },
   add: { color: Theme.accent, fontSize: 24, fontWeight: '700' },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
   empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginTop: 8 },

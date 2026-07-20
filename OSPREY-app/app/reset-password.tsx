@@ -8,12 +8,12 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import * as Linking from 'expo-linking';
-import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
+import { Theme, Radius, StatusPalette } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import { supabase } from '@/services/supabase';
 import { useAuthStore } from '@/store/authStore';
 
@@ -128,32 +128,26 @@ export default function ResetPasswordScreen() {
               accessibilityLabel="Confirm new password"
             />
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
-            <TouchableOpacity
-              style={[styles.submitBtn, saving && styles.submitBtnDisabled]}
+            <Button
+              style={styles.submitBtn}
               onPress={handleSave}
               disabled={saving}
-              accessibilityRole="button"
+              busy={saving}
               accessibilityLabel="Save password"
-              accessibilityState={{ disabled: saving, busy: saving }}
             >
-              {saving ? (
-                <ActivityIndicator color={Theme.ink} />
-              ) : (
-                <Text style={styles.submitBtnText}>Save Password</Text>
-              )}
-            </TouchableOpacity>
+              {saving ? <ActivityIndicator color={Theme.ink} /> : 'Save Password'}
+            </Button>
           </View>
         ) : (
           <View style={styles.form}>
             <Text style={styles.errorText}>{error}</Text>
-            <TouchableOpacity
+            <Button
               style={styles.submitBtn}
               onPress={() => router.replace('/(auth)/sign-in')}
-              accessibilityRole="button"
               accessibilityLabel="Back to sign in"
             >
-              <Text style={styles.submitBtnText}>Back to Sign In</Text>
-            </TouchableOpacity>
+              Back to Sign In
+            </Button>
           </View>
         )}
       </KeyboardAvoidingView>
@@ -184,18 +178,5 @@ const styles = StyleSheet.create({
     color: Theme.text,
   },
   errorText: { color: StatusPalette.danger, fontSize: 13, textAlign: 'center' },
-  submitBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 4,
-  },
-  submitBtnDisabled: {
-    opacity: 0.5,
-  },
-  submitBtnText: { fontSize: 15, fontWeight: '700', color: Theme.ink },
+  submitBtn: { marginTop: 4, paddingVertical: 16 },
 });

@@ -637,24 +637,16 @@ export default function SettingsTab() {
           <Text style={styles.dangerSub}>
             Permanently delete your account and all training data.
           </Text>
-          {/* NOT converted to <Button>: this is the destructive delete-account
-              action, deliberately styled red through the whole design migration.
-              The primitive is accent-only (primary/secondary), so converting it
-              would erase the danger signal. Left hand-rolled on purpose. */}
-          <TouchableOpacity
-            style={[styles.dangerBtn, deleting && styles.dangerBtnDisabled]}
+          <Button
+            variant="danger"
+            style={styles.dangerBtn}
             onPress={handleDeleteAccount}
             disabled={deleting}
-            accessibilityRole="button"
+            busy={deleting}
             accessibilityLabel="Delete account"
-            accessibilityState={{ disabled: deleting, busy: deleting }}
           >
-            {deleting ? (
-              <ActivityIndicator color={StatusPalette.danger} />
-            ) : (
-              <Text style={styles.dangerBtnText}>Delete Account</Text>
-            )}
-          </TouchableOpacity>
+            {deleting ? <ActivityIndicator color={StatusPalette.danger} /> : 'Delete Account'}
+          </Button>
         </View>
 
         <Text style={styles.versionText}>OSPREY v{appVersion}</Text>
@@ -762,16 +754,7 @@ const styles = StyleSheet.create({
     fontFamily: 'SpaceGrotesk_700Bold',
   },
   dangerSub: { fontSize: 12, color: Theme.textSoft, lineHeight: 17 },
-  dangerBtn: {
-    marginTop: 4,
-    borderWidth: 1,
-    borderColor: 'rgba(255,68,68,0.45)',
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  dangerBtnDisabled: { opacity: 0.5 },
-  dangerBtnText: { fontSize: 14, fontWeight: '800', color: StatusPalette.danger },
+  dangerBtn: { marginTop: 4 },
   versionText: {
     marginTop: 20,
     textAlign: 'center',

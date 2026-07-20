@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import OzzieAvatar from '@/components/OzzieAvatar';
+import { Button } from '@/components/ui';
 
 interface OnboardingShellProps {
   step: number;
@@ -70,20 +71,15 @@ export default function OnboardingShell({
       </ScrollView>
 
       <View style={styles.footer}>
-        <TouchableOpacity
-          style={[styles.primaryBtn, continueDisabled && styles.primaryBtnDisabled]}
+        <Button
+          style={styles.primaryBtn}
           onPress={onContinue}
           disabled={continueDisabled || loading}
-          accessibilityRole="button"
+          busy={loading}
           accessibilityLabel={continueLabel}
-          accessibilityState={{ disabled: continueDisabled || loading, busy: loading }}
         >
-          {loading ? (
-            <ActivityIndicator color={Theme.ink} />
-          ) : (
-            <Text style={styles.primaryBtnText}>{continueLabel}</Text>
-          )}
-        </TouchableOpacity>
+          {loading ? <ActivityIndicator color={Theme.ink} /> : continueLabel}
+        </Button>
       </View>
     </SafeAreaView>
   );
@@ -209,23 +205,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: Theme.line,
   },
-  primaryBtn: {
-    backgroundColor: Theme.accent,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    height: 52,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  primaryBtnDisabled: {
-    opacity: 0.5,
-  },
-  primaryBtnText: {
-    fontSize: 15,
-    fontWeight: '800',
-    color: Theme.ink,
-  },
+  primaryBtn: { paddingVertical: 17 },
   optionCard: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -15,6 +15,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Button } from '@/components/ui';
 import { parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
 
 const DISTANCE_FILTERS = ['All', '5K', '10K', 'Half', 'Full'] as const;
@@ -187,14 +188,9 @@ export default function RaceSearchScreen() {
       ) : error ? (
         <View style={styles.center}>
           <Text style={styles.errorText}>{error}</Text>
-          <TouchableOpacity
-            style={styles.retryBtn}
-            onPress={handleRetry}
-            accessibilityRole="button"
-            accessibilityLabel="Retry"
-          >
-            <Text style={styles.retryBtnText}>Retry</Text>
-          </TouchableOpacity>
+          <Button variant="secondary" onPress={handleRetry} accessibilityLabel="Retry">
+            Retry
+          </Button>
         </View>
       ) : filtered.length === 0 ? (
         <View style={styles.center}>
@@ -317,17 +313,5 @@ const styles = StyleSheet.create({
   chevron: { color: Theme.textMut, fontSize: 22, fontWeight: '300' },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32, gap: 16 },
   errorText: { color: Theme.textSoft, fontSize: 15, textAlign: 'center', lineHeight: 22 },
-  retryBtn: {
-    paddingHorizontal: 24,
-    paddingVertical: 10,
-    borderRadius: Radius.card,
-    backgroundColor: Theme.accent + '1F',
-    // 2px matches race-event's addBtn and the Button primitive, which uses
-    // BorderWidth.card for both its primary and secondary variants. These two
-    // screens sit in one flow, so a 1px accent outline here would seam.
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-  },
-  retryBtnText: { color: Theme.accent, fontSize: 14, fontWeight: '700' },
   emptyText: { color: Theme.textMut, fontSize: 15, textAlign: 'center', lineHeight: 22 },
 });
