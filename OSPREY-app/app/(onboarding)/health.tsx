@@ -7,6 +7,7 @@ import { useOnboardingStore } from '@/store/onboardingStore';
 import { useAuthStore } from '@/store/authStore';
 import { completeOnboarding, generateInitialPlan } from '@/services/onboarding';
 import { isHealthKitSupported, requestHealthKitAuthorization } from '@/services/healthkit';
+import { hasBaselineStep, onboardingTotalSteps } from '@/services/coaching/baseline';
 import { Theme, Radius } from '@/constants/theme';
 import { friendlyError } from '@/utils/errorMessage';
 
@@ -24,6 +25,8 @@ export default function HealthScreen() {
   const draft = useOnboardingStore();
   const reset = useOnboardingStore((s) => s.reset);
   const [loading, setLoading] = useState(false);
+  const totalSteps = onboardingTotalSteps(draft.primaryGoal);
+  const step = hasBaselineStep(draft.primaryGoal) ? 5 : 4;
 
   async function handleFinish() {
     if (!userId) return;
@@ -83,8 +86,8 @@ export default function HealthScreen() {
 
   return (
     <OnboardingShell
-      step={5}
-      totalSteps={5}
+      step={step}
+      totalSteps={totalSteps}
       title="Connect Apple Health"
       hint="Ozzie uses HRV, sleep, and heart rate to score recovery and tune your plan."
       onContinue={handleFinish}

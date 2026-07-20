@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import OnboardingShell from '@/components/onboarding/OnboardingShell';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import { useAuthStore } from '@/store/authStore';
+import { onboardingTotalSteps } from '@/services/coaching/baseline';
 import { Theme, Radius } from '@/constants/theme';
 
 export default function NameScreen() {
@@ -11,6 +12,7 @@ export default function NameScreen() {
   const profile = useAuthStore((s) => s.profile);
   const displayName = useOnboardingStore((s) => s.displayName);
   const setDisplayName = useOnboardingStore((s) => s.setDisplayName);
+  const primaryGoal = useOnboardingStore((s) => s.primaryGoal);
 
   // Seed from the profile once on mount only — re-seeding on every change
   // would refill the field the moment the user clears it to type a new name.
@@ -24,7 +26,7 @@ export default function NameScreen() {
   return (
     <OnboardingShell
       step={1}
-      totalSteps={5}
+      totalSteps={onboardingTotalSteps(primaryGoal)}
       title="What should Ozzie call you?"
       hint="This is how I'll greet you every morning."
       continueDisabled={!displayName.trim()}
@@ -39,6 +41,10 @@ export default function NameScreen() {
         autoCapitalize="words"
         autoFocus
         accessibilityLabel="Your name"
+        returnKeyType="done"
+        onSubmitEditing={() => {
+          if (displayName.trim()) router.push('/(onboarding)/mode');
+        }}
       />
     </OnboardingShell>
   );

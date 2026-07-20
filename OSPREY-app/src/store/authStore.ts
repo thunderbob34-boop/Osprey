@@ -5,6 +5,7 @@ import { makeRedirectUri } from 'expo-auth-session';
 import { supabase } from '@/services/supabase';
 import { clearOfflineCache } from '@/services/offline-cache';
 import { resetRevenueCat } from '@/services/subscriptions';
+import { refreshSubscription } from '@/hooks/useSubscription';
 import { friendlyError } from '@/utils/errorMessage';
 
 // WebBrowser is optional — only available in native builds
@@ -106,7 +107,20 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
 
     supabase.auth.onAuthStateChange(async (_event, session) => {
+      const prevUserId = get().user?.id ?? null;
+      const nextUserId = session?.user?.id ?? null;
+
+      if (nextUserId === prevUserId) {
+        // TOKEN_REFRESHED / USER_UPDATED for the same signed-in user (fires
+        // roughly hourly and on app foreground) — swap the session/user
+        // without blanking profileReady, which would unmount the whole tab
+        // navigator for the length of a profile round-trip.
+        set({ session, user: session?.user ?? null });
+        return;
+      }
+
       set({ session, user: session?.user ?? null, profileReady: false });
+      refreshSubscription(); // don't let entitlement leak across an account switch
       if (session?.user) {
         await get().fetchProfile();
       } else {

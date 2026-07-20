@@ -79,6 +79,24 @@ export function anchorKeyForGoal(goal: string): 'run' | 'swim' | 'row' | 'bike' 
   return bp; // 'run' | 'swim' | null pass through
 }
 
+// True for every goal that routes through the baseline screen — either to collect
+// a threshold anchor (anchorKeyForGoal) or, for lift/crossfit, 1RM/benchmark inputs
+// instead. Single source of truth for goals.tsx's routing AND onboardingTotalSteps
+// below, so the two can't drift out of sync the way a duplicated condition would.
+export function hasBaselineStep(goal: string): boolean {
+  return anchorKeyForGoal(goal) != null || goal === 'lift' || goal === 'crossfit';
+}
+
+/**
+ * Total onboarding steps for the shell's progress bar. The baseline screen
+ * only shows for goals with hasBaselineStep, so the step count itself depends
+ * on the chosen goal — otherwise the bar jumps/mislabels on the (more common)
+ * paths that skip it, e.g. the default 'hybrid' goal.
+ */
+export function onboardingTotalSteps(goal: string): 4 | 5 {
+  return hasBaselineStep(goal) ? 5 : 4;
+}
+
 export function toSelfReportAnchor(map: ThresholdAnchorMap | null | undefined): SelfReportAnchor {
   return {
     thresholdSecPerMile: map?.run?.thresholdSecPerMile ?? null,
