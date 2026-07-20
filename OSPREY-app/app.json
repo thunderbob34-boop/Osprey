@@ -21,7 +21,6 @@
       "usesAppleSignIn": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "OSPREY uses your location to track GPS runs and log route maps.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "OSPREY uses background location to continue tracking your route if you lock your screen mid-run.",
         "NSMotionUsageDescription": "OSPREY uses motion data to detect your activity type and count steps.",
         "NSHealthShareUsageDescription": "OSPREY reads your workouts, heart rate, and activity data to personalize your coaching.",
         "NSHealthUpdateUsageDescription": "OSPREY saves your workouts and body metrics to Apple Health.",
@@ -30,7 +29,6 @@
         "NSPhotoLibraryUsageDescription": "OSPREY lets you pick a meal photo from your library to log food with Ozzie's help.",
         "NSCalendarsUsageDescription": "OSPREY blocks time for your planned workouts on your calendar so they don't get double-booked.",
         "UIBackgroundModes": [
-          "location",
           "audio"
         ],
         "ITSAppUsesNonExemptEncryption": false
@@ -70,7 +68,7 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "OSPREY uses background location to track your route during workouts."
+          "locationWhenInUsePermission": "OSPREY uses your location to track GPS runs and log route maps."
         }
       ],
       [

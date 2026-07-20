@@ -185,7 +185,7 @@ export default function BaselineScreen() {
             </View>
           </View>
           <View style={styles.field}>
-            <Text style={styles.label}>Total race vert, metres (optional)</Text>
+            <Text style={styles.label}>Total race vert, meters (optional)</Text>
             <TextInput
               style={styles.input}
               value={ultraVert}

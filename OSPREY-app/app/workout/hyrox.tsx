@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
@@ -61,6 +61,7 @@ const ALL_SEGMENT_KEYS = buildHyroxSegments().map(segmentKey);
 
 export default function HyroxWorkoutScreen() {
   const router = useRouter();
+  const params = useLocalSearchParams<{ origin?: string }>();
   const userId = useAuthStore((s) => s.user?.id);
 
   const [phase, setPhase] = useState<Phase>('division');
@@ -156,7 +157,7 @@ export default function HyroxWorkoutScreen() {
         durationS,
         splits,
       });
-      router.replace({ pathname: '/workout/recap', params: { workoutId } });
+      router.replace({ pathname: '/workout/recap', params: { workoutId, origin: params.origin } });
     } catch (err) {
       Alert.alert('Save failed', friendlyError(err, 'Try again.'));
       setSaving(false);

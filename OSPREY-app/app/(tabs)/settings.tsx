@@ -16,7 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
-import { PRIVACY_POLICY_URL, SUPPORT_EMAIL } from '@/constants/links';
+import { PRIVACY_POLICY_URL, SUPPORT_EMAIL, TERMS_OF_USE_URL } from '@/constants/links';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import type { UnitSystem } from '@/services/units';
 import { useAuthStore } from '@/store/authStore';
@@ -583,6 +583,18 @@ export default function SettingsTab() {
             <View style={styles.planRowLeft}>
               <Text style={styles.cardValue}>Privacy Policy</Text>
               <Text style={styles.planRowSub}>How your training data is handled</Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
+          </TouchableOpacity>
+          <View style={styles.rowDivider} />
+          <TouchableOpacity
+            style={styles.planRow}
+            onPress={() => Linking.openURL(TERMS_OF_USE_URL).catch(() => undefined)}
+            accessibilityRole="button"
+            accessibilityLabel="Terms of use"
+          >
+            <View style={styles.planRowLeft}>
+              <Text style={styles.cardValue}>Terms of Use</Text>
             </View>
             <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>

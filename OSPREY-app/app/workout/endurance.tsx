@@ -103,10 +103,11 @@ function formatMMSS(totalSeconds: number): string {
 
 export default function EnduranceWorkoutScreen() {
   const router = useRouter();
-  const { sessionType, sessionId, mode } = useLocalSearchParams<{
+  const { sessionType, sessionId, mode, origin } = useLocalSearchParams<{
     sessionType: EnduranceType;
     sessionId?: string;
     mode?: string;
+    origin?: string;
   }>();
   const userId = useAuthStore((s) => s.user?.id);
   const { isPlus } = useSubscription();
@@ -385,7 +386,7 @@ export default function EnduranceWorkoutScreen() {
       });
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       if (isGpsTracking) resetGpsWorkout();
-      router.replace({ pathname: '/workout/recap', params: { workoutId } });
+      router.replace({ pathname: '/workout/recap', params: { workoutId, origin } });
     } catch (err) {
       Alert.alert('Save failed', friendlyError(err, 'Try again.'));
       setSaving(false);

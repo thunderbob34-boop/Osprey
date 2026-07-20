@@ -317,14 +317,31 @@ export default function DailySummaryScreen({
           </Card>
 
           <View style={styles.sessionActionsRow}>
+            {/* No sessionId means there's no real plan session to start — a
+                rest day, or a free/no-plan day. Previously only 'rest'
+                disabled this, so a no-plan day showed an enabled
+                "Start Session →" that dropped the athlete straight into a GPS
+                run warm-up with nothing to attach it to. onStartSession now
+                routes a no-sessionId tap to the Workout tab picker instead, so
+                this stays a useful (not disabled) action, just relabeled. */}
             <Button
               variant="primary"
               onPress={() => onStartSession?.(session)}
               disabled={session.sessionType === 'rest'}
-              accessibilityLabel={session.sessionType === 'rest' ? 'Rest day' : 'Start session'}
+              accessibilityLabel={
+                session.sessionType === 'rest'
+                  ? 'Rest day'
+                  : !session.sessionId
+                    ? 'Start a workout'
+                    : 'Start session'
+              }
               style={{ flex: 1 }}
             >
-              {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
+              {session.sessionType === 'rest'
+                ? 'Rest Day'
+                : !session.sessionId
+                  ? 'Start a Workout →'
+                  : 'Start Session →'}
             </Button>
             {(onSwapSession || onCompressSession) &&
             session.sessionId &&

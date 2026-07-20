@@ -26,7 +26,7 @@ import { friendlyError } from '@/utils/errorMessage';
 
 export default function WorkoutRecapScreen() {
   const router = useRouter();
-  const { workoutId } = useLocalSearchParams<{ workoutId: string }>();
+  const { workoutId, origin } = useLocalSearchParams<{ workoutId: string; origin?: string }>();
   const userId = useAuthStore((s) => s.user?.id);
   const { units } = useUnitPreference();
 
@@ -64,9 +64,11 @@ export default function WorkoutRecapScreen() {
 
   // dismissTo dismisses (the correct "closing" animation, not a forward
   // transition) while walking the stack until it finds this exact route —
-  // more reliable than back(), which just pops one step.
+  // more reliable than back(), which just pops one step. Sessions started
+  // from Home dismiss back to Home instead of the Workout tab, so the
+  // athlete lands where they were, not on a "start another workout" picker.
   function exitToWorkoutTab() {
-    router.dismissTo('/(tabs)/workout');
+    router.dismissTo(origin === 'home' ? '/(tabs)' : '/(tabs)/workout');
   }
 
   if (isLoading) {

@@ -242,12 +242,20 @@ export default function ChallengesScreen() {
         title="Challenges"
         right={
           <TouchableOpacity
-            onPress={() => setShowForm((v) => !v)}
+            onPress={() => {
+              if (!isPlus && !showForm) {
+                router.push('/paywall');
+                return;
+              }
+              setShowForm((v) => !v);
+            }}
             hitSlop={12}
             accessibilityRole="button"
-            accessibilityLabel={showForm ? 'Close new challenge form' : 'New challenge'}
+            accessibilityLabel={
+              showForm ? 'Close new challenge form' : isPlus ? 'New challenge' : 'New challenge, requires OSPREY+'
+            }
           >
-            <Text style={styles.add}>{showForm ? '−' : '+'}</Text>
+            <Text style={styles.add}>{showForm ? '−' : isPlus ? '+' : '🔒'}</Text>
           </TouchableOpacity>
         }
       />

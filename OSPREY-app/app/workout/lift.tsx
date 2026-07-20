@@ -43,7 +43,7 @@ import { friendlyError } from '@/utils/errorMessage';
 
 export default function LiftWorkoutScreen() {
   const router = useRouter();
-  const params = useLocalSearchParams<{ sessionId?: string }>();
+  const params = useLocalSearchParams<{ sessionId?: string; origin?: string }>();
   const userId = useAuthStore((s) => s.user?.id);
 
   const status = useWorkoutStore((s) => s.status);
@@ -431,7 +431,7 @@ export default function LiftWorkoutScreen() {
       });
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       reset();
-      router.replace({ pathname: '/workout/recap', params: { workoutId } });
+      router.replace({ pathname: '/workout/recap', params: { workoutId, origin: params.origin } });
     } catch (err) {
       Alert.alert('Save failed', friendlyError(err, 'Try again.'));
       setSaving(false);

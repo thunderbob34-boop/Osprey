@@ -18,6 +18,7 @@ import { reconcileEveningBrief } from '@/services/evening-brief';
 import type { SessionData } from '@/types/daily-summary';
 import type { SwappableSessionType } from '@/services/plan';
 import { friendlyError } from '@/utils/errorMessage';
+import { pickTrackingMode } from '@/utils/trackingModePicker';
 
 export default function HomeTab() {
   const router = useRouter();
@@ -48,29 +49,64 @@ export default function HomeTab() {
   }, [userId, tomorrowMaxF, tomorrowPrecip]);
 
   function handleStartSession(session: SessionData) {
+    // No real session to start (no plan yet, or a free day) — go to the
+    // Workout tab's picker instead of falling through to the GPS run screen
+    // with nothing to attach the workout to.
+    if (!session.sessionId) {
+      router.push('/(tabs)/workout');
+      return;
+    }
     const sessionId = session.sessionId ?? undefined;
     // Mirror the per-sport routing in the Workout tab (app/(tabs)/workout.tsx)
     // so starting today's session from Home lands on the same screen as picking
     // it manually — previously everything non-lift fell through to the GPS run
     // screen, mis-routing swim/bike/rowing/cross/hyrox sessions.
+    // origin: 'home' is threaded through to the recap screen so it dismisses
+    // back to Home instead of the Workout tab when that's where the session
+    // was actually started from.
     switch (session.sessionType) {
       case 'lift':
-        router.push({ pathname: '/workout/lift', params: { sessionId } });
+        router.push({ pathname: '/workout/lift', params: { sessionId, origin: 'home' } });
         return;
       case 'hyrox':
-        router.push('/workout/hyrox');
+        router.push({ pathname: '/workout/hyrox', params: { origin: 'home' } });
         return;
       case 'swim':
-      case 'bike':
       case 'rowing':
       case 'cross':
         router.push({
           pathname: '/workout/endurance',
-          params: { sessionType: session.sessionType, sessionId },
+          params: { sessionType: session.sessionType, sessionId, origin: 'home' },
+        });
+        return;
+      case 'bike':
+        // Bike can be tracked outside (GPS) or stationary — the Workout tab
+        // always asks; Home used to assume outside and route here with no
+        // mode param, so a planned outdoor ride silently got no GPS.
+        pickTrackingMode((mode) => {
+          router.push({
+            pathname: '/workout/endurance',
+            params:
+              mode === 'outside'
+                ? { sessionType: 'bike', sessionId, mode: 'outside', origin: 'home' }
+                : { sessionType: 'bike', sessionId, origin: 'home' },
+          });
         });
         return;
       default:
-        router.push({ pathname: '/workout/run', params: { sessionId } });
+        // Run can also be tracked outside (GPS) or stationary — same gap as
+        // bike above: Home always launched the GPS screen, so a treadmill
+        // run couldn't be started correctly from here.
+        pickTrackingMode((mode) => {
+          if (mode === 'outside') {
+            router.push({ pathname: '/workout/run', params: { sessionId, origin: 'home' } });
+          } else {
+            router.push({
+              pathname: '/workout/endurance',
+              params: { sessionType: 'run', sessionId, origin: 'home' },
+            });
+          }
+        });
     }
   }
 

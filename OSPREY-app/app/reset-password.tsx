@@ -43,17 +43,19 @@ export default function ResetPasswordScreen() {
 
   useEffect(() => {
     let cancelled = false;
+    let handled = false;
 
-    async function establishRecoverySession() {
-      const url = await Linking.getInitialURL();
+    // getInitialURL() only covers a cold start — tapping the reset-password
+    // email link while the app is already warm/backgrounded routes here via
+    // the 'url' event instead, and the recovery tokens in the hash were
+    // never read in that case, so a perfectly valid link showed "invalid or
+    // expired." Listening for both and using whichever resolves first with
+    // real tokens covers both launch paths.
+    async function tryEstablish(url: string | null) {
+      if (cancelled || handled) return;
       const tokens = url ? parseRecoveryTokens(url) : null;
-      if (!tokens) {
-        if (!cancelled) {
-          setError('This reset link is invalid or has expired. Request a new one from the sign-in screen.');
-          setVerifying(false);
-        }
-        return;
-      }
+      if (!tokens) return;
+      handled = true;
       const { error: setSessionError } = await supabase.auth.setSession({
         access_token: tokens.accessToken,
         refresh_token: tokens.refreshToken,
@@ -67,9 +69,29 @@ export default function ResetPasswordScreen() {
       setVerifying(false);
     }
 
-    establishRecoverySession();
+    const subscription = Linking.addEventListener('url', ({ url }) => {
+      tryEstablish(url);
+    });
+
+    Linking.getInitialURL().then((url) => {
+      if (cancelled || handled) return;
+      if (url) {
+        tryEstablish(url);
+        return;
+      }
+      // No cold-start URL — give a concurrent 'url' event (the warm-app
+      // path) a brief window to arrive before giving up.
+      setTimeout(() => {
+        if (!cancelled && !handled) {
+          setError('This reset link is invalid or has expired. Request a new one from the sign-in screen.');
+          setVerifying(false);
+        }
+      }, 500);
+    });
+
     return () => {
       cancelled = true;
+      subscription.remove();
     };
   }, []);
 

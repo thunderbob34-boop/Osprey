@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import OnboardingShell, { OptionCard } from '@/components/onboarding/OnboardingShell';
 import { useOnboardingStore } from '@/store/onboardingStore';
@@ -8,6 +9,11 @@ import { completeOnboarding, generateInitialPlan } from '@/services/onboarding';
 import { isHealthKitSupported, requestHealthKitAuthorization } from '@/services/healthkit';
 import { Theme, Radius } from '@/constants/theme';
 import { friendlyError } from '@/utils/errorMessage';
+
+// Must match app/(tabs)/settings.tsx's HEALTH_CONNECTED_KEY — Settings reads
+// this same key, and previously only its own connect button ever wrote it,
+// so connecting here left Settings permanently showing "Not connected."
+const HEALTH_CONNECTED_KEY = 'osprey:health-connected';
 
 export default function HealthScreen() {
   const router = useRouter();
@@ -57,17 +63,21 @@ export default function HealthScreen() {
     if (!isHealthKitSupported()) {
       // Simulator or non-Apple device — mark intent, skip real auth
       setHealthConnected(true);
+      AsyncStorage.setItem(HEALTH_CONNECTED_KEY, '1').catch(() => undefined);
       return;
     }
     try {
       const authorized = await requestHealthKitAuthorization();
       setHealthConnected(authorized);
-      if (!authorized) {
+      if (authorized) {
+        AsyncStorage.setItem(HEALTH_CONNECTED_KEY, '1').catch(() => undefined);
+      } else {
         Alert.alert('Apple Health', 'Permission not granted. You can connect later in Settings.');
       }
     } catch {
       // Entitlement missing in Expo Go — silently mark intent so setup can complete
       setHealthConnected(true);
+      AsyncStorage.setItem(HEALTH_CONNECTED_KEY, '1').catch(() => undefined);
     }
   }
 

@@ -19,6 +19,13 @@ import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { useAuthStore } from '@/store/authStore';
 import { ONBOARDING_GOAL_TO_PREFERENCES } from '@/services/onboarding';
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
+import {
+  parseSwimBaseline,
+  parseRowingBaseline,
+  parseRunBaseline,
+  parseFTPBaseline,
+  type ThresholdAnchorMap,
+} from '@/services/coaching/baseline';
 import { parseHyroxParams, type HyroxDivision } from '@/services/coaching/hyrox-params';
 import { parseStrengthParams } from '@/services/coaching/strength-params';
 import { parseCrossfitParams } from '@/services/coaching/crossfit-params';
@@ -30,6 +37,9 @@ import type {
 } from '@/types/preferences';
 import type { PrimaryGoal } from '@/types/onboarding';
 import { friendlyError } from '@/utils/errorMessage';
+
+const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
+const mmss = (m: string, s: string) => num(m) * 60 + num(s);
 
 interface GoalOption {
   value: TrainingGoal;
@@ -64,6 +74,25 @@ const TRIATHLON_DISTANCE_OPTIONS: { value: TriathlonDistance; label: string }[] 
 ];
 
 const ULTRA_DISTANCES: UltraRaceDistance[] = ['50k', '50mi', '100k', '100mi'];
+
+// Which threshold anchor (if any) a goal is scored against — mirrors
+// services/coaching/baseline.ts's anchorKeyForGoal, but keyed by this screen's
+// own TrainingGoal strings ('run_performance', not onboarding's 'run') since
+// the two enums don't line up 1:1.
+const ANCHOR_KEY_FOR_GOAL: Record<TrainingGoal, 'run' | 'swim' | 'row' | 'bike' | null> = {
+  run_performance: 'run',
+  hybrid: 'run',
+  ultra: 'run',
+  hyrox: 'run',
+  triathlon: null,
+  swim: 'swim',
+  rowing: 'row',
+  cycling: 'bike',
+  strength: null,
+  crossfit: null,
+  weight_loss: null,
+  general: null,
+};
 
 const HYROX_DIVISIONS: { value: HyroxDivision; label: string }[] = [
   { value: 'open_men', label: 'Open M' },
@@ -121,11 +150,24 @@ export default function PreferencesScreen() {
   // never writes to osprey_preferences (it goes straight to user_goals).
   const [hasGeneratedBefore, setHasGeneratedBefore] = useState(false);
 
+  // Threshold anchor (FTP/CSS/2k/run threshold) — set once at onboarding,
+  // previously with no way to correct it afterward as the athlete's fitness
+  // actually changes. Fields mirror app/(onboarding)/baseline.tsx's.
+  const [anchorMap, setAnchorMap] = useState<ThresholdAnchorMap | null>(null);
+  const [loadingAnchor, setLoadingAnchor] = useState(true);
+  const [savingAnchor, setSavingAnchor] = useState(false);
+  const [swim400m, setSwim400m] = useState(''); const [swim400s, setSwim400s] = useState('');
+  const [swim200m, setSwim200m] = useState(''); const [swim200s, setSwim200s] = useState('');
+  const [row2kM, setRow2kM] = useState(''); const [row2kS, setRow2kS] = useState('');
+  const [runMiles, setRunMiles] = useState(''); const [runMin, setRunMin] = useState(''); const [runSec, setRunSec] = useState('');
+  const [ftpWatts, setFtpWatts] = useState('');
+
   const isTriathlon = primaryGoal === 'triathlon';
   const isUltra = primaryGoal === 'ultra';
   const isLift = primaryGoal === 'strength';
   const isHyrox = primaryGoal === 'hyrox';
   const isCrossfit = primaryGoal === 'crossfit';
+  const anchorKey = ANCHOR_KEY_FOR_GOAL[primaryGoal];
 
   useEffect(() => {
     async function loadSaved() {
@@ -200,6 +242,83 @@ export default function PreferencesScreen() {
     }
     loadSaved();
   }, [userId]);
+
+  useEffect(() => {
+    if (!userId) return;
+    let cancelled = false;
+    async function loadAnchor() {
+      try {
+        const { data } = await supabase
+          .from('user_goals')
+          .select('threshold_anchor')
+          .eq('user_id', userId)
+          .maybeSingle();
+        if (cancelled) return;
+        const map = (data?.threshold_anchor as ThresholdAnchorMap | null) ?? null;
+        setAnchorMap(map);
+        if (map?.swim) {
+          // Only cssSecPer100 is stored — the two split times that produced it
+          // aren't, so there's nothing to pre-fill for a re-derivation; the
+          // athlete re-enters both times to update it.
+        }
+        if (map?.row) {
+          const totalS = map.row.splitSecPer500 * 4;
+          setRow2kM(String(Math.floor(totalS / 60)));
+          setRow2kS(String(Math.round(totalS % 60)));
+        }
+        if (map?.bike) {
+          setFtpWatts(String(map.bike.ftpWatts));
+        }
+        // run's stored value is a derived pace (sec/mile), not the raw
+        // distance+time the athlete entered — same re-entry situation as swim.
+      } catch {
+        // silently fall back to empty fields
+      } finally {
+        if (!cancelled) setLoadingAnchor(false);
+      }
+    }
+    loadAnchor();
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  async function handleSaveAnchor() {
+    if (!userId || !anchorKey) return;
+    let result: { ok: true; value: number } | { ok: false; error: string };
+    if (anchorKey === 'swim') {
+      result = parseSwimBaseline(num(swim400m) * 60 + num(swim400s), num(swim200m) * 60 + num(swim200s));
+    } else if (anchorKey === 'row') {
+      result = parseRowingBaseline(mmss(row2kM, row2kS));
+    } else if (anchorKey === 'run') {
+      result = parseRunBaseline(num(runMiles), mmss(runMin, runSec));
+    } else {
+      result = parseFTPBaseline(num(ftpWatts));
+    }
+    if (!result.ok) {
+      Alert.alert('Check your numbers', result.error);
+      return;
+    }
+    setSavingAnchor(true);
+    try {
+      const next: ThresholdAnchorMap = { ...anchorMap };
+      if (anchorKey === 'swim') next.swim = { cssSecPer100: result.value, source: 'self_report' };
+      else if (anchorKey === 'row') next.row = { splitSecPer500: result.value, source: 'self_report' };
+      else if (anchorKey === 'run') next.run = { thresholdSecPerMile: result.value, source: 'self_report' };
+      else next.bike = { ftpWatts: result.value, source: 'self_report' };
+      const { error } = await supabase
+        .from('user_goals')
+        .update({ threshold_anchor: next })
+        .eq('user_id', userId);
+      if (error) throw error;
+      setAnchorMap(next);
+      Alert.alert('Saved', "Your training zones will use this the next time Ozzie builds your plan.");
+    } catch (err) {
+      Alert.alert('Could not save', friendlyError(err));
+    } finally {
+      setSavingAnchor(false);
+    }
+  }
 
   async function handleGenerate() {
     setLoading(true);
@@ -381,6 +500,63 @@ export default function PreferencesScreen() {
           ))}
         </View>
 
+        {anchorKey && !loadingAnchor ? (
+          <View style={styles.anchorCard}>
+            <Text style={styles.sectionLabel}>
+              {anchorKey === 'swim' ? 'SWIM THRESHOLD (CSS)' : anchorKey === 'row' ? 'ROWING 2K TIME' : anchorKey === 'bike' ? 'CYCLING FTP' : 'RUN THRESHOLD PACE'}
+            </Text>
+            <Text style={styles.anchorHint}>
+              {anchorMap?.[anchorKey]
+                ? "Sets your training zones. Update it as your fitness changes — it doesn't happen automatically."
+                : 'Not set yet — sets your training zones once entered.'}
+            </Text>
+            {anchorKey === 'swim' ? (
+              <>
+                <Text style={styles.anchorFieldLabel}>400m time (min : sec)</Text>
+                <View style={styles.mmssRow}>
+                  <TextInput style={[styles.input, styles.mmssInput]} value={swim400m} onChangeText={setSwim400m} keyboardType="number-pad" placeholder="7" placeholderTextColor={Theme.textMut} />
+                  <TextInput style={[styles.input, styles.mmssInput]} value={swim400s} onChangeText={setSwim400s} keyboardType="number-pad" placeholder="30" placeholderTextColor={Theme.textMut} />
+                </View>
+                <Text style={styles.anchorFieldLabel}>200m time (min : sec)</Text>
+                <View style={styles.mmssRow}>
+                  <TextInput style={[styles.input, styles.mmssInput]} value={swim200m} onChangeText={setSwim200m} keyboardType="number-pad" placeholder="3" placeholderTextColor={Theme.textMut} />
+                  <TextInput style={[styles.input, styles.mmssInput]} value={swim200s} onChangeText={setSwim200s} keyboardType="number-pad" placeholder="20" placeholderTextColor={Theme.textMut} />
+                </View>
+              </>
+            ) : anchorKey === 'row' ? (
+              <>
+                <Text style={styles.anchorFieldLabel}>2k time (min : sec)</Text>
+                <View style={styles.mmssRow}>
+                  <TextInput style={[styles.input, styles.mmssInput]} value={row2kM} onChangeText={setRow2kM} keyboardType="number-pad" placeholder="7" placeholderTextColor={Theme.textMut} />
+                  <TextInput style={[styles.input, styles.mmssInput]} value={row2kS} onChangeText={setRow2kS} keyboardType="number-pad" placeholder="30" placeholderTextColor={Theme.textMut} />
+                </View>
+              </>
+            ) : anchorKey === 'bike' ? (
+              <TextInput style={styles.input} value={ftpWatts} onChangeText={setFtpWatts} keyboardType="number-pad" placeholder="e.g. 220" placeholderTextColor={Theme.textMut} />
+            ) : (
+              <>
+                <Text style={styles.anchorFieldLabel}>Recent race or hard-effort distance (miles)</Text>
+                <TextInput style={styles.input} value={runMiles} onChangeText={setRunMiles} keyboardType="decimal-pad" placeholder="5" placeholderTextColor={Theme.textMut} />
+                <Text style={styles.anchorFieldLabel}>Time (min : sec)</Text>
+                <View style={styles.mmssRow}>
+                  <TextInput style={[styles.input, styles.mmssInput]} value={runMin} onChangeText={setRunMin} keyboardType="number-pad" placeholder="35" placeholderTextColor={Theme.textMut} />
+                  <TextInput style={[styles.input, styles.mmssInput]} value={runSec} onChangeText={setRunSec} keyboardType="number-pad" placeholder="0" placeholderTextColor={Theme.textMut} />
+                </View>
+              </>
+            )}
+            <Button
+              variant="secondary"
+              style={{ marginTop: 12 }}
+              onPress={handleSaveAnchor}
+              disabled={savingAnchor}
+              busy={savingAnchor}
+              accessibilityLabel="Save threshold"
+            >
+              {savingAnchor ? <ActivityIndicator color={Theme.accent} /> : 'Save Threshold'}
+            </Button>
+          </View>
+        ) : null}
+
         {isTriathlon ? (
           <>
             <Text style={styles.sectionLabel}>RACE DISTANCE</Text>
@@ -428,7 +604,7 @@ export default function PreferencesScreen() {
               ))}
             </View>
 
-            <Text style={styles.sectionLabel}>RACE VERT (METRES, OPTIONAL)</Text>
+            <Text style={styles.sectionLabel}>RACE VERT (METERS, OPTIONAL)</Text>
             <TextInput
               style={styles.input}
               value={ultraVert}
@@ -746,6 +922,28 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 8,
   },
+  anchorCard: {
+    marginTop: 20,
+    backgroundColor: Theme.panel,
+    borderWidth: 1,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
+    padding: 16,
+  },
+  anchorHint: {
+    fontSize: 12,
+    color: Theme.textMut,
+    lineHeight: 17,
+    marginBottom: 12,
+  },
+  anchorFieldLabel: {
+    fontSize: 11,
+    color: Theme.textMut,
+    marginBottom: 4,
+    marginTop: 8,
+  },
+  mmssRow: { flexDirection: 'row', gap: 8 },
+  mmssInput: { flex: 1 },
   chip: {
     backgroundColor: Theme.panel,
     borderWidth: 1,
