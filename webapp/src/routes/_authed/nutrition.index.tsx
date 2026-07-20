@@ -7,25 +7,11 @@ import { targetsProgress, type Macros, type Per100g } from '../../lib/macros';
 import { addDays, toDateInputValue } from '../../lib/day';
 import type { FoodItem, MealType } from '../../lib/schemas';
 import { MEAL_LABEL } from '../../lib/format';
+import { MacroBar } from '../../components/MacroBar';
 import {
   MEAL_ORDER, sumDay, useAddManualFood, useDayLog, useDeleteLogEntry,
   useFoodSearch, useLogFood, useNutritionCoaching, useNutritionTargets, type DayLogEntry,
 } from '../../features/nutrition/queries';
-
-function MacroBar({ label, logged, target, pct }: { label: string; logged: number; target: number | null; pct: number }) {
-  return (
-    <div className="macro">
-      <div className="m-head">
-        <span>{label}</span>
-        <span><b>{logged}</b>{target != null ? ` / ${target}g` : 'g'}</span>
-      </div>
-      <div className="track">
-        <div className="fill" style={{ width: `${pct}%` }} />
-        {target != null && <div className="target" />}
-      </div>
-    </div>
-  );
-}
 
 function FuelBand({ logged, target, dayTypeLabel }: { logged: Macros; target: Partial<Macros> | null; dayTypeLabel: string | null }) {
   const p = targetsProgress(logged, target);

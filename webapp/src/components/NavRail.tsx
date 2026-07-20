@@ -4,6 +4,7 @@ import { signOut } from '../lib/auth';
 import { useUserProfile } from '../lib/useAuthUser';
 
 const links = [
+  { to: '/', label: 'Dashboard' },
   { to: '/calendar', label: 'Calendar' },
   { to: '/log', label: 'Log' },
   { to: '/history', label: 'History' },

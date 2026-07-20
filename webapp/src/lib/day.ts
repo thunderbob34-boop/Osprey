@@ -33,3 +33,10 @@ export function loggedAtFor(dateStr: string, now: Date = new Date()): string {
   noon.setHours(12, 0, 0, 0);
   return noon.toISOString();
 }
+
+/** Whole local days between today and a target "YYYY-MM-DD" date (negative if in the past). */
+export function daysUntil(dateStr: string, now: Date = new Date()): number {
+  const today = new Date(now); today.setHours(0, 0, 0, 0);
+  const target = parseLocal(dateStr);
+  return Math.round((target.getTime() - today.getTime()) / 86_400_000);
+}

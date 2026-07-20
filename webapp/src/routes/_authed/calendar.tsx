@@ -12,6 +12,7 @@ import { computeRacePhase } from '../../lib/race-phase';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { PageHeader } from '../../components/PageHeader';
 import { AddRaceForm } from '../../components/AddRaceForm';
+import { RaceCountdown } from '../../components/RaceCountdown';
 import { SessionEditor } from '../../features/calendar/SessionEditor';
 import { SESSION_TYPE_LABEL, INTENSITY_LABEL } from '../../lib/format';
 
@@ -28,12 +29,6 @@ function monthRange(anchor: Date): { fromISO: string; toISO: string; cells: Date
   for (let i = 0; i < 42; i++) { const d = new Date(start); d.setDate(start.getDate() + i); cells.push(d); }
   const iso = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   return { fromISO: iso(cells[0]), toISO: iso(cells[41]), cells };
-}
-
-function daysUntil(dateISO: string): number {
-  const today = new Date(); today.setHours(0, 0, 0, 0);
-  const target = new Date(`${dateISO}T00:00:00`);
-  return Math.round((target.getTime() - today.getTime()) / 86_400_000);
 }
 
 type Selection = { kind: 'session'; data: TrainingSession } | { kind: 'race'; data: RaceEvent } | null;
@@ -162,18 +157,7 @@ function CalendarPage() {
         </section>
 
         <aside className="cal-aside">
-          {nextRace.data && (
-            <div className="race-countdown">
-              <div className="days">T–{Math.max(0, daysUntil(nextRace.data.event_date))}</div>
-              <div className="lab">Days to race</div>
-              <div className="name">{nextRace.data.name}</div>
-              <div className="meta">
-                {new Date(`${nextRace.data.event_date}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                {nextRace.data.distance_km ? ` · ${nextRace.data.distance_km}km` : ''}
-                {nextRace.data.goal_time_s ? ` · Goal ${formatRaceTimeSec(nextRace.data.goal_time_s)}` : ''}
-              </div>
-            </div>
-          )}
+          {nextRace.data && <RaceCountdown race={nextRace.data} />}
 
           {phaseInfo && (
             <div className="detail-card">

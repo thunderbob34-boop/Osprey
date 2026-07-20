@@ -8,21 +8,15 @@ import { sameWeekDates } from '../../lib/session-edit';
 import { toDateInputValue } from '../../lib/day';
 import { buildRacePredictor, formatRaceTimeSec } from '../../lib/predictions';
 import { computeRacePhase } from '../../lib/race-phase';
+import { targetsProgress } from '../../lib/macros';
 import type { TrainingSession } from '../../lib/schemas';
 import { PageHeader } from '../../components/PageHeader';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { Badge } from '../../components/Badge';
+import { MacroBar } from '../../components/MacroBar';
+import { RaceCountdown } from '../../components/RaceCountdown';
+import { WeekStrip } from '../../components/WeekStrip';
 import { SESSION_TYPE_LABEL, INTENSITY_LABEL, formatMinutes, formatDistanceKm } from '../../lib/format';
-
-function daysUntil(dateISO: string): number {
-  const today = new Date(); today.setHours(0, 0, 0, 0);
-  const target = new Date(`${dateISO}T00:00:00`);
-  return Math.round((target.getTime() - today.getTime()) / 86_400_000);
-}
-
-function pct(eaten: number, target: number | null): number {
-  return target != null && target > 0 ? Math.min(100, Math.round((eaten / target) * 100)) : 0;
-}
 
 // Shared week-query state, threaded into both TodayHero and WeekStrip so the
 // month/completions fetch in DashboardPage happens exactly once.
@@ -109,7 +103,7 @@ function StatBand({ userId }: { userId: string }) {
   );
 }
 
-function WeekStrip({ weekSessions, completedIds, todayISO, isPending, isError, error, onRetry }: WeekSlice & { completedIds: Set<string> }) {
+function ThisWeekCard({ weekSessions, completedIds, todayISO, isPending, isError, error, onRetry }: WeekSlice & { completedIds: Set<string> }) {
   return (
     <div className="detail-card">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
@@ -122,27 +116,7 @@ function WeekStrip({ weekSessions, completedIds, todayISO, isPending, isError, e
       ) : isPending ? (
         <p className="loading-line">Loading…</p>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', border: '1px solid var(--line)' }}>
-          {buildWeekStrip(weekSessions, completedIds, todayISO).map((day, i) => (
-            <div
-              key={day.dateISO}
-              style={{
-                padding: '12px 10px',
-                borderRight: i < 6 ? '1px solid var(--line)' : 'none',
-                background: day.isToday ? 'var(--amber-veil)' : 'transparent',
-              }}
-            >
-              <div style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: 'var(--mut)', marginBottom: 8 }}>
-                {new Date(`${day.dateISO}T00:00:00`).toLocaleDateString('en-US', { weekday: 'short' })}
-              </div>
-              {day.session && (
-                <Badge variant={day.done ? 'amber' : 'default'}>
-                  {day.done ? '✓ ' : ''}{SESSION_TYPE_LABEL[day.session.session_type]}
-                </Badge>
-              )}
-            </div>
-          ))}
-        </div>
+        <WeekStrip days={buildWeekStrip(weekSessions, completedIds, todayISO)} />
       )}
     </div>
   );
@@ -178,18 +152,7 @@ function NextRaceCard({ userId }: { userId: string }) {
 
   return (
     <>
-      {nextRace.data && (
-        <div className="race-countdown">
-          <div className="days">T–{Math.max(0, daysUntil(nextRace.data.event_date))}</div>
-          <div className="lab">Days to race</div>
-          <div className="name">{nextRace.data.name}</div>
-          <div className="meta">
-            {new Date(`${nextRace.data.event_date}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-            {nextRace.data.distance_km ? ` · ${nextRace.data.distance_km}km` : ''}
-            {nextRace.data.goal_time_s ? ` · Goal ${formatRaceTimeSec(nextRace.data.goal_time_s)}` : ''}
-          </div>
-        </div>
-      )}
+      {nextRace.data && <RaceCountdown race={nextRace.data} />}
 
       {phase && (
         <div className="detail-card">
@@ -209,21 +172,6 @@ function NextRaceCard({ userId }: { userId: string }) {
   );
 }
 
-function MacroBar({ label, eaten, target }: { label: string; eaten: number; target: number | null }) {
-  return (
-    <div className="macro">
-      <div className="m-head">
-        <span>{label}</span>
-        <span><b>{eaten}</b>{target != null ? ` / ${target}g` : 'g'}</span>
-      </div>
-      <div className="track">
-        <div className="fill" style={{ width: `${pct(eaten, target)}%` }} />
-        {target != null && <div className="target" />}
-      </div>
-    </div>
-  );
-}
-
 function FuelCard({ userId, todayISO }: { userId: string; todayISO: string }) {
   const day = useDayLog(userId, todayISO);
   const targets = useNutritionTargets(userId);
@@ -234,6 +182,7 @@ function FuelCard({ userId, todayISO }: { userId: string; todayISO: string }) {
   if (!targets.data) return null; // no targets set yet — nothing to show
 
   const t = targets.data;
+  const p = targetsProgress(eaten, { calories: t.calories ?? undefined, proteinG: t.protein_g ?? undefined, carbsG: t.carbs_g ?? undefined, fatG: t.fat_g ?? undefined });
 
   return (
     <div className="fuel-band" style={{ marginBottom: 0 }}>
@@ -244,9 +193,9 @@ function FuelCard({ userId, todayISO }: { userId: string; todayISO: string }) {
       </div>
       <div className="fuel-macros">
         {day.isError && <p className="err-line" role="alert">Couldn't load today's food log.</p>}
-        <MacroBar label="Protein" eaten={eaten.proteinG} target={t.protein_g} />
-        <MacroBar label="Carbs" eaten={eaten.carbsG} target={t.carbs_g} />
-        <MacroBar label="Fat" eaten={eaten.fatG} target={t.fat_g} />
+        <MacroBar label="Protein" {...p.protein} />
+        <MacroBar label="Carbs" {...p.carbs} />
+        <MacroBar label="Fat" {...p.fat} />
         <Link className="link-amber" to="/nutrition">Open Fuel Desk ›</Link>
       </div>
     </div>
@@ -290,7 +239,7 @@ function DashboardPage() {
 
         <StatBand userId={userId} />
 
-        <WeekStrip
+        <ThisWeekCard
           weekSessions={weekSessions}
           completedIds={completedIds}
           todayISO={todayISO}
