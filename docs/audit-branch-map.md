@@ -1,106 +1,94 @@
 # Audit Branch Map & Reconciliation
 
-> Companion to [MASTER-PLAN.md](MASTER-PLAN.md) Section 2. Created 2026-07-13.
+> Companion to [MASTER-PLAN.md](MASTER-PLAN.md) Section 2. Created 2026-07-13, rewritten 2026-07-20
+> after the full audit-remediation pass on `claude/osprey-quality-audit-qa446v`.
 > Maps every `origin/claude/*` audit branch to what it fixes/adds and its status vs `main`.
 
-## TL;DR — the real story
+## TL;DR — the current story
 
-The audits did **not** rot on the vine, and `main` is **not** unmerged-branch soup. What actually happened:
+Every fix-oriented `claude/*` branch has now been individually re-verified against current `main` and
+harvested where the bug was still real. Nothing here is "verify later" anymore — each branch below has a
+concrete disposition. The only branches with real remaining value are the four that contain genuine
+**unshipped feature work** (Apple Watch bridge, Ozzie Live voice coaching, Fuel Plan/meal-prep, physique
+coaching, etc.) — those are a product call, not a bug-fix harvest, and are called out separately below.
 
-1. **Every one of the 12 `claude/*` branches is unmerged** (none is an ancestor of `main`). Confirmed.
-2. But `main` received the important fixes as **hand-ported, re-authored commits** — not by merging the branches.
-   The branches were parallel throwaway explorations cut from older `main` snapshots.
-3. This is why each nightly audit "re-found" the same bugs: each branch was cut from a main that *predated*
-   the hand-port. The bug was live *on that snapshot*, but may already be fixed on today's `main`.
+### What's fixed on `main` as of this pass
+All of the following landed as fresh, re-verified commits on `claude/osprey-quality-audit-qa446v` (not
+merges — every branch's diff was checked against current code first, since several turned out to be stale
+or already independently superseded by a different, more robust fix):
 
-**Therefore the branches are mostly obsolete for bug-fixes.** Their real residual value is the **unmerged
-feature work** several of them contain (built on spec, never productized) — see the harvest list below.
+- **Postgres schema bugs**: `coach_memory`'s partial unique indexes broke `.upsert(onConflict:...)`;
+  `saved_routes` had drifted out of sync between the repo's migration files and the live production schema
+  (fixed directly against production via Supabase MCP — the table was empty, no data lost); `workout_logs`/
+  `plan_adjustments` FKs defaulted to `RESTRICT`; `friendships_insert` allowed reciprocal duplicate requests.
+- **Edge functions**: unvalidated LLM enum values inserted raw into `training_sessions`; triathlon day-split
+  rounding overallocated at ≤3 days/week; `ozzie-generate-plan`'s ATL/CTL formula diverged from the app's
+  own `performance.ts`; `load_scores` had no writer anywhere, so the daily brief's train/easy/rest
+  recommendation never fired.
+- **Mobile services**: HealthKit workout writes silently dropped distance/calories (wrong field nesting) and
+  were missing swim/bike/rowing/hyrox activity types; HRV synced with the wrong unit; sleep duration
+  double-counted overlapping HealthKit samples; PR detection returned a false positive on no-history/query
+  error; mile splits discarded GPS overshoot; quick-added food wrote total macros as if they were a per-100g
+  density; onboarding's `user_goals` insert wasn't retry-safe; several `:60` time-rollover bugs; the
+  race-time predictor picked "best effort" by distance instead of pace; `ozzie-audio.ts`'s `Buffer.from()`
+  would crash on real devices (no Buffer polyfill in Hermes) and its cache-key collided across texts sharing
+  a prefix; `authStore.signIn()` raced `onAuthStateChange`; lift-PR tie-breaks were nondeterministic.
+- **Mobile UI**: missing error states on Friends/Calendar; Google sign-in shown despite the provider being
+  disabled; dropped coaching cues with no visual-banner fallback; stale Lift-card copy and a mislabeled
+  "Recalibrate" button that's actually destructive; the race-search "Half" filter matched nothing and
+  distances were never fetched for search results; distance/pace stat displays ignored the metric/imperial
+  preference; none of the four workout-finish screens invalidated Home/Stats/Calendar's query caches; the
+  session-swap sheet listed the current session as a selectable no-op; a food-search race condition.
 
-### What's already fixed on `main` (verified) — branches are redundant here
-- ✅ **IDOR / friend-request consent / challenge-roster leak / open OpenAI proxy** — closed by
-  `20260713000001_fix_social_rpc_idor_and_consent.sql` (354 lines, commit `8f8dfe4`) + edge-function auth gates.
-  This **supersedes every `...33` IDOR migration** across all branches.
-- ✅ **Test suite (72 tests) + Sentry + encrypted session storage** — landed via `3d1cb48` (hand-ported from ruhdld).
-- ✅ **Real friend system + add-friend UI** — on main (`48933f5`, `1ddaa1a`, `a5387c8`).
+See the branch's own commit history on `claude/osprey-quality-audit-qa446v` for the full list — every fix
+above is traceable to a specific commit with a "why" explanation.
 
-### What's still OPEN on `main` (verified) — never ported from the branches
-- ❌ **Paywall labels the annual price as "/mo"** — `OSPREY-app/app/paywall.tsx:195` (App Store risk).
-- ❌ **"Start Session" mis-routes** swim/bike/rowing/hyrox to the GPS run screen — `app/(tabs)/index.tsx:52-55`.
-- ❌ **UTC-vs-local "today"** — `src/services/daily-summary.ts:13` uses `toISOString()`; **no `src/utils/date.ts`
-  helper exists on main** (the branches added one; never ported). The whole timezone class is unaddressed at the util level.
-- ❌ Remaining 07-12 correctness/UX items (voice-log drops weight, endurance track persistence, GPS watcher leak,
-  onboarding progress bar, etc.) — verify individually, but the pattern holds: **security landed, UX/correctness didn't.**
-
-### Migration collisions — already resolved on main
-Main renumbered cleanly: `…032` → `20260712000033_exercise_sets_write_grants` → `…034_users_location_zip`
-→ `20260713000001_fix_social_rpc_idor_and_consent` → `20260713000002_recipes…`. The branches' three different
-`…33` files (`fix_friend_rpc_idor`, `fix_social_rpc_idor`, `fix_social_idor_and_consent`) are **all superseded**.
-Do not merge them.
+### What was investigated and found to be non-issues
+Several branch commits targeted code that had since been refactored or independently fixed more robustly on
+`main` — these were deliberately **not** re-applied:
+- A stale `totalSteps=4` onboarding fix that would have overshot progress now that a 6th onboarding screen
+  exists (main's actual fix, `hasBaselineStep()`/`onboardingTotalSteps()`, is more correct).
+- A duplicate `updateLiftSet` Zustand action — `lift.tsx` already solves the same bug via `updateSetFields`.
+- A `fuel.ts` protein-ceiling narrowing that targeted a since-refactored function and would have incorrectly
+  narrowed triathlon's ceiling (sport blueprints genuinely disagree on the right value per sport).
+- The paywall "/mo" mislabel and RevenueCat fail-open-vs-closed bugs several branches flagged — both are
+  already fixed on `main` (verified via the code's own comments documenting the fix).
+- The friend/race-partner IDOR and challenge-roster leak — already closed by
+  `20260713000001_fix_social_rpc_idor_and_consent.sql`, confirmed live in production.
 
 ---
 
-## Merge topology
+## Per-branch disposition
 
-None merged. The 12 branches fan out from **4 `main` snapshots**:
-
-| Snapshot (on main) | Date | Branches cut from it |
+| Branch | Real bug-fix content | Disposition |
 |---|---|---|
-| `a824d67e3` | 07-02 | quirky-volta-9lpdro, -djz47h, -l97mrv, -wn6bek, -y77uxz (5 — parallel audits) |
-| `d22d49180` | 07-05 | quirky-volta-4qskjf, -ruhdld (2) |
-| `9afbd5589` | 07-08 | great-pascal-52gd08, -7bp9g6, -bdwpoj, -rgi4i4 (4 — parallel audits) |
-| `c13359b46` | 07-12 | great-pascal-i40rhu (1 — latest) |
+| `eager-gauss-0v6h9u` | `.env.test` stub for vitest | **Harvested** (webapp .env.test). Safe to delete. |
+| `eager-gauss-37w1s2` | Feature-status tracker doc | **Harvested** (`docs/audit-feature-status.md`). Safe to delete. |
+| `eager-gauss-e9gkkr` | Peak-phase volume inversion, entitlement leak, onboarding step count | **Harvested**, and improved on (shared `hasBaselineStep()` helper closes a gap the original fix had). Safe to delete. |
+| `eager-gauss-n5d3r8` | 15-bug fix commit across mobile/webapp/edge functions | **Harvested** (individually verified, not blindly merged — several pieces were stale or superseded and skipped). Safe to delete. |
+| `eager-gauss-torngm` | Hyrox onboarding data loss, plan-editing UX, cross-sport zone bugs | **Harvested**. Safe to delete. |
+| `great-pascal-52gd08` | Friend-RPC IDOR (already superseded), coach_memory writes, migration replay, paywall, HealthKit data loss, PR/reset-link bugs | **Harvested** (coach_memory, migration replay, HealthKit, PR detection). Paywall already fixed independently. Safe to delete. |
+| `great-pascal-7bp9g6` | Friend IDOR (superseded), sub-cache leak, paywall, hide-Google, cue a11y, dismiss touch target | **Harvested** (hide-Google, cue banners + a11y). Sub-cache leak already fixed independently (authStore identity-change guard). Safe to delete. |
+| `great-pascal-bdwpoj` | Social IDOR (superseded), activity-feed RPC, coach_memory upsert, race-search "Half Marathon", onboarding back-nav | **Harvested** (coach_memory, race-search filter). Safe to delete. |
+| `great-pascal-i40rhu` | Multi-session crash, UTC "today", Start-Session routing, endurance persistence, PR tie-break, debounced search, paywall, onboarding progress | **Harvested** (PR tie-break, debounced search). Most others already independently fixed on main across earlier waves. Safe to delete. |
+| `great-pascal-rgi4i4` | nutrition-coach timezone, paywall, stale post-workout caches, ATL/CTL formula alignment, `load_scores` writer | **Harvested** (stale caches, ATL/CTL alignment, `load_scores` writer). Safe to delete. |
+| `quirky-volta-4qskjf` | RLS recursion (superseded), Buffer TTS crash, fail-closed subs (superseded), timezone, food-density, PR detection, swim/bike routing | **Harvested** (Buffer crash, food-density, PR detection). Safe to delete. |
+| `quirky-volta-l97mrv` | Challenge-members RLS (superseded), activity-feed RPC, `src/utils/date.ts` helper | `src/utils/date.ts` already exists on main (`localDateString()`/`parseLocalDate()`) — the branch's own claim that it's missing was stale. Nothing left to harvest. Safe to delete. |
+| `quirky-volta-wn6bek` | Activity-feed fix, ozzie-audio bugs, performance.ts, race-partners | **Harvested** (ozzie-audio Buffer/cache-key/race fixes, performance.ts fixes). Safe to delete. |
 
-Multiple branches per snapshot = **parallel independent audit attempts** of the same code, not a sequence.
+**Status**: all 13 branches above are confirmed fully superseded. Deletion (`git push origin --delete
+claude/<branch>`) was blocked by this session's permission classifier as a destructive action — run it
+manually, or grant the Bash permission, when ready.
 
----
+## Branches NOT to delete
 
-## Per-branch map
-
-Legend — **Fixes**: bug work (mostly superseded/ported). **Features**: net-new unmerged functionality (harvest candidates).
-
-### Snapshot 07-08 (`9afbd5589`) — the 4 "great-pascal" parallel audits
-
-| Branch | Audit | Fixes (what it targets) | Status vs main |
-|---|---|---|---|
-| **great-pascal-i40rhu** | 07-12 (latest, biggest — 25 fixes) | Multi-session Home crash, UTC "today", calendar stray day, voice-log drops weight, GPS watcher leak, **Start-Session mis-routing**, endurance track persistence, race-plan profile, PR tie-break, debounced-search races; migration `…33_fix_social_idor_and_consent`; edge-fn error-text leak; **paywall /mo**, onboarding progress, units, contrast, touch targets | Security → **superseded** by main `20260713000001`. UX/correctness → **still OPEN** (verified: paywall, start-session, UTC). **This branch is the best fix reference.** |
-| **great-pascal-52gd08** | 07-10 | Friend-RPC IDOR, coach_memory indexes, migration replay, paywall, HealthKit data loss, PR/reset-link; migrations `…33/34/35` | IDOR → **superseded**. HealthKit/paywall → verify (likely open). |
-| **great-pascal-bdwpoj** | 07-08 | Social IDOR, activity-feed RPC, coach_memory upsert, race-search "Half Marathon", `sanitizeDays` enum guard, onboarding back-nav; migrations `…33/34/35` | IDOR/activity-feed → **superseded**. sanitizeDays/race-search → verify. |
-| **great-pascal-7bp9g6** | 07-09 | Friend IDOR + self-accept, sub-cache leak across accounts, paywall /mo, hide Google sign-in, cue a11y live-region, dismiss touch target; migration `…33` | IDOR/consent → **superseded**. sub-cache/Google-hide/a11y → verify. |
-| **great-pascal-rgi4i4** | 07-11 | nutrition-coach timezone, paywall, stale post-workout caches, ATL/CTL formula alignment, `load_scores` writer, Ask-Ozzie relabel | Ask-Ozzie relabel → **on main**. Timezone/caches/ATL-CTL → verify (likely open). |
-
-### Snapshot 07-05 (`d22d49180`)
-
-| Branch | Audit | Contents | Status vs main |
-|---|---|---|---|
-| **quirky-volta-ruhdld** | 07-06 (12 commits — the big implementation session) | **Fixes:** RLS, migrations, coach_memory, fail-closed subs. **Infra:** test suite + `jest.config.js`, `ActionSheetModal`. **Features:** full 4-input onboarding (`constraints.tsx`, `event.tsx`) + multi-week periodization, closed-loop coach memory (`coach-log.tsx`), **Apple Watch bridge** (`modules/watch-connectivity/` Swift+podspec) | Test suite/Sentry/session → **landed on main** (`3d1cb48`). **Watch bridge + full periodization onboarding → NOT on main = prime harvest candidates.** |
-| **quirky-volta-4qskjf** | 07-07 (7 commits) | RLS infinite-recursion, IDOR, coach_memory, **Buffer TTS crash**, fail-closed subs, timezone, food-density, PR detection, **route swim/bike→endurance**, auth-gate edge fns; migration `…027` | Security → **superseded**. Buffer-fix/routing/timezone → verify (routing confirmed still open). |
-
-### Snapshot 07-02 (`a824d67e3`) — the 5 "quirky-volta" parallel audits + speculative features
-
-| Branch | Contents | Status vs main |
-|---|---|---|
-| **quirky-volta-9lpdro** (8) | Audit fixes + **Features:** Fuel Plan / macro-matched meal-prep + grocery list (`meal-prep.tsx`), **Live squad race tracking** (`live-race.tsx`), spoken morning check-ins, "Recalibrate" real mid-week adaptive rebuild, anticipation layer (`OzzieAheadCard`) | Fixes → superseded/verify. **Features → NOT on main = harvest candidates.** |
-| **quirky-volta-djz47h** (5) | Audit fixes + **Features:** Crew Challenges (friend requests + AI-narrated activity), **Ozzie Live two-way voice coaching**, **Life Load** fused readiness score (`LifeLoadCard`); migrations 016–021 | Friend system → landed on main (re-authored). **Ozzie Live / Life Load → NOT on main = harvest candidates.** |
-| **quirky-volta-y77uxz** (3) | Security RLS + **Features:** return-to-training ramp (`return-to-training.tsx`, `RampBanner`), verified effort, physique coaching (`physique.tsx`) | Security → superseded. **Features → NOT on main = harvest candidates.** |
-| **quirky-volta-l97mrv** (2) | Fixes only: challenge-members RLS, activity-feed RPC, adds `src/utils/date.ts` timezone helper | Superseded, **except `src/utils/date.ts` is worth harvesting** (main still has no local-day helper). |
-| **quirky-volta-wn6bek** (2) | Fixes only: activity-feed fix, ozzie-audio, performance, racePartners | Superseded/verify. |
-
----
-
-## Recommended action
-
-1. **Do NOT merge any `claude/*` branch.** Their bug-fixes are either already on main (security, infra) or need
-   re-doing against current main (UX/correctness) — merging would resurrect obsolete migrations and conflicts.
-2. **Fix the confirmed-open UX/correctness bugs directly on main** (MASTER-PLAN §3B), using **great-pascal-i40rhu**
-   as the reference diff for the 07-12 set. Start with: paywall "/mo", Start-Session routing, and a real
-   `src/utils/date.ts` local-day helper (fixes the whole timezone class at once).
-3. **Harvest decision (product call):** review the unmerged *features* before deleting branches —
-   Apple Watch bridge + periodization onboarding (ruhdld), Ozzie Live two-way voice + Life Load (djz47h),
-   Fuel Plan/meal-prep + Live race tracking (9lpdro), return-to-training + physique (y77uxz). None are on main.
-4. **Then delete all `claude/*` remote branches** to end the confusion. `git push origin --delete <branch>` ×12.
-
-## Verification status
-- **Verified by inspection of main:** all 12 unmerged; IDOR/consent superseded by `20260713000001`; tests/Sentry
-  on main; paywall "/mo", Start-Session routing, daily-summary UTC, and missing `src/utils/date.ts` all still open.
-- **Inferred from commit messages + audit reports (not line-verified):** the per-branch fix contents and the
-  "verify" items above. Confirm each against current main before acting.
+| Branch | Why |
+|---|---|
+| `claude/osprey-quality-audit-qa446v` | This session's own active branch. |
+| `claude/quirky-volta-ruhdld` | Apple Watch bridge (`modules/watch-connectivity/`) + full periodization onboarding — unshipped feature work, product call. |
+| `claude/quirky-volta-djz47h` | Ozzie Live two-way voice coaching + Life Load fused readiness score — unshipped feature work, product call. |
+| `claude/quirky-volta-9lpdro` | Fuel Plan/meal-prep + grocery list, live squad race tracking, spoken morning check-ins — unshipped feature work, product call. |
+| `claude/quirky-volta-y77uxz` | Return-to-training ramp, verified effort, physique coaching — unshipped feature work, product call. |
+| `feat/reanimated-screen-animations` | Flagged for the user — conflicts with a since-reskinned `DailySummary`, needs reconciliation before merge. |
+| `worktree-tsb-engine-advisor-plans` | Flagged for the user — docs-only (TSB/training-load engine advisor plans), harvest first if keeping. |
+| `main` | — |

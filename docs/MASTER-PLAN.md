@@ -135,31 +135,37 @@ This is the "old" side of old → new. All of the following is built and merged 
 
 ## SECTION 2 — the audit branches (RESOLVED — see full map)
 
-> **Investigated 2026-07-13 → [audit-branch-map.md](audit-branch-map.md).** The original worry
-> ("fix-branches never merged, bugs re-appearing") turned out to be half-true, and the good half matters.
+> **Investigated 2026-07-13, harvested and closed out 2026-07-20 → [audit-branch-map.md](audit-branch-map.md).**
+> The original worry ("fix-branches never merged, bugs re-appearing") is now fully resolved.
 
-**What's actually true:** all 12 `claude/*` branches are unmerged — but `main` got the important fixes as
-**hand-ported, re-authored commits**, not by merging the branches. Each nightly audit re-found the same bugs
-because each branch was cut from an *older* `main` snapshot that predated the hand-port.
+**What's actually true:** every fix-oriented `claude/*` branch has been individually re-verified against
+current `main` and its still-open bugs harvested as fresh, re-authored commits on
+`claude/osprey-quality-audit-qa446v` — not by merging the branches (several branch-era fixes were stale or
+already independently superseded by something more robust, and were deliberately skipped rather than
+blindly applied).
 
 **Verified against current `main`:**
 - ✅ **Security is fixed** — IDOR / friend-consent / roster-leak / open OpenAI proxy closed by
   `20260713000001_fix_social_rpc_idor_and_consent.sql` (`8f8dfe4`). **Supersedes every branch's `...33` migration.**
-- ✅ **Tests (72) + Sentry + encrypted session** landed via `3d1cb48`. Migrations renumbered cleanly (no collision).
-- ❌ **UX/correctness fixes were NOT ported** — paywall "/mo", Start-Session mis-routing, UTC "today"
-  (no `src/utils/date.ts` helper on main) are all still live. Security landed; the rest didn't.
+- ✅ **Tests + Sentry + encrypted session** landed. Migrations renumbered cleanly (no collision).
+- ✅ **UX/correctness fixes are now ported** — paywall "/mo" and RevenueCat fail-open were already
+  independently fixed; Start-Session routing, HealthKit data loss, PR detection/tie-breaks, `ozzie-audio.ts`'s
+  Buffer crash, race-search filtering, dropped coaching cues, stale post-workout query caches, and the
+  `coach_memory`/`saved_routes`/FK/`friendships` Postgres bugs were all fixed in this pass.
 
-### Task 2.1 — What to do (revised)
-1. **Do NOT merge any `claude/*` branch** — their fixes are obsolete or need re-doing; merging resurrects dead migrations.
-2. **Fix the confirmed-open UX/correctness bugs directly on `main`** (§3B), using branch `great-pascal-i40rhu`
-   (the 07-12 audit) as the reference diff. Harvest `src/utils/date.ts` from `quirky-volta-l97mrv` to kill the timezone class.
-3. **Product decision — harvest unmerged FEATURES** before deleting branches. Several branches built net-new
-   features on spec that never reached main: Apple Watch bridge + periodization onboarding (`ruhdld`),
-   Ozzie Live two-way voice + Life Load readiness (`djz47h`), Fuel Plan/meal-prep + Live race tracking (`9lpdro`),
-   return-to-training + physique coaching (`y77uxz`). See the map for the full list.
-4. **Then delete all 12 `claude/*` remote branches** to end the confusion.
+### Task 2.1 — Status
+1. **No `claude/*` branch was merged** — every fix was re-verified and re-authored against current `main` instead.
+2. **UX/correctness bugs are fixed on `main`'s working branch** — see the per-branch disposition table in
+   [audit-branch-map.md](audit-branch-map.md) for exactly which bug came from which branch.
+3. **Product decision — unmerged FEATURES still need a call**, unrelated to this bug-fix pass: Apple Watch
+   bridge + periodization onboarding (`ruhdld`), Ozzie Live two-way voice + Life Load readiness (`djz47h`),
+   Fuel Plan/meal-prep + Live race tracking (`9lpdro`), return-to-training + physique coaching (`y77uxz`).
+   These branches are intentionally kept, not deleted.
+4. **13 fully-superseded `claude/*` branches are ready to delete** (`git push origin --delete claude/<branch>`)
+   — see the full list in audit-branch-map.md. Deletion itself wasn't run in the harvest pass (a destructive
+   remote-branch operation), so it's still pending as a manual step.
 
-The full branch-by-branch table, verification status, and harvest list live in [audit-branch-map.md](audit-branch-map.md).
+The full branch-by-branch table and disposition live in [audit-branch-map.md](audit-branch-map.md).
 
 ---
 
