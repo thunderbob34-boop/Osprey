@@ -206,7 +206,7 @@ The full branch-by-branch table, verification status, and harvest list live in [
 - [x] GPS watcher leak on fast unmount. **Fixed** `caf6b3c` (cancellation flag in `useRunTracking`).
 - [x] UTC-vs-local "today" — **Fixed** `fb80acb`: added tested `src/utils/date.ts` `localDateString()`, applied in `daily-summary.ts`. `calendar.ts` stray-day leak **Fixed** in follow-up (tested `clampDaysToMonth`).
 - [x] `ozzie-generate-plan` idempotency race. **Fixed.** Crash on duplicate weeks resolved (`79e676f`); the TOCTOU race is now closed by the decided invariant — **one active plan per user**: migration `20260714000001` (partial unique index on `training_plans(user_id) WHERE status='active'`, with a dedup step so it applies cleanly on live data) + the edge fn catches the `23505` and reuses the concurrently-created plan. *Deployed 2026-07-14 (index verified live; 1 duplicate plan archived).*
-- [ ] Race-plan branch hardcodes `intermediate`/4-run/1-lift, ignores athlete profile.
+- [x] Race-plan branch hardcoding `intermediate`/4-run/1-lift regardless of athlete — **Fixed.** Now reads the athlete's own `user_goals` row (`primary_goal`, `weekly_run_days`, `weekly_lift_days`, `fitness_level`) and routes it through `routeDisciplineDays` before defaulting, instead of overwriting a non-runner's profile with running defaults.
 - [x] `toggleKudo` non-atomic race; activity-feed fallback scoping; `useSubscription` refresh propagation. **Fixed:** kudo insert now treats the `23505` conflict as "present" (kudos already has `UNIQUE(share_id, from_user)`); `useSubscription` rewritten on a shared `useSyncExternalStore` so a paywall refresh propagates to every mounted screen; activity-feed fallback made explicitly own-scoped (it was already RLS-bounded to `user_id = auth.uid()`, never a leak — the `get_activity_feed` RPC is the real path and exists on main).
 
 **UX:**
@@ -216,11 +216,36 @@ The full branch-by-branch table, verification status, and harvest list live in [
 
 ### 3C. 🔵 The coaching-engine fidelity gap (biggest architectural item — flagged in 5 audits)
 
-- [ ] **Sport-science calculators (`src/services/calculators/*`) are dead code.** Plan generation is 100% LLM prompt.
-  Called "the single biggest gap." Wire the verified calculators (pace zones, carb targets, thresholds) into generation.
-- [ ] **No real taper/periodization applied** — `computeRacePhase` is decorative; `ultraTaperWeeklyVolumes` never called.
-- [ ] Nutrition targets ignore the bodyweight g/kg model.
-- [ ] "Ask Ozzie" is still a read-only stub (over-promised as two-way chat; relabeled but not built).
+**Re-audited 2026-07-20 — the calculators/taper/nutrition items below were found stale; the app had
+already wired them in since this section was last written. Verify against current code before
+re-flagging, not just this doc.**
+
+- [x] **Sport-science calculators are wired into generation, not dead code.** `src/services/calculators/*`
+  feed `envelope.ts` → `build-envelope.ts`'s `invokeGeneratePlan`, which posts the computed envelope
+  (target weekly load, HR zones, fuel g/day, strength/hyrox/crossfit guidance) to `ozzie-generate-plan`
+  as hard prompt constraints — confirmed consumed server-side (`generateWeekDays`'s `envelopeGuidance`
+  string), not decorative. The one genuinely dead file, `calculators/index.ts` (a zero-importer re-export
+  barrel), was deleted 2026-07-20; the individual submodules it re-exported remain actively imported
+  elsewhere and are untouched.
+- [x] **Real taper/periodization is applied.** `computeRacePhase` (`plan.ts`) and `ultraTaperWeeklyVolumes`
+  (`calculators/ultra.ts`) both feed `envelopeFromInputs`, not just existing standalone. Separately,
+  `periodization.ts`'s Peak-phase volume factor was inverted (1.1 — *higher* than Build's 1.0, contradicting
+  every sport blueprint's "Peak eases volume" language) — fixed to 0.9 2026-07-20, with a regression test
+  guarding Peak < Build.
+- [x] **Nutrition targets now use the bodyweight g/kg model.** `ozzie-nutrition-coach`'s `computeTarget()`
+  used fixed per-goal calorie/protein buckets regardless of the athlete's actual size — bodyweight was
+  already fetched via `body_metrics` for the weight-trend adjustment, just never used for the targets
+  themselves. Rewritten 2026-07-20 to use `docs/coaching/_index.md`'s g/kg formulas: protein 1.6–2.2 g/kg
+  by goal, carbs 3–12 g/kg by today's load tier (easy/moderate/high/peak, from running.md/ultra.md's daily
+  fueling tables).
+- [ ] **Still genuinely open: no real training-load aggregation.** `build-envelope.ts`'s `invokeGeneratePlan`
+  hardcodes `baselineLoad: 200` with an explicit `// Phase 2 will thread real CTL; Base default for now`
+  comment — there's no ATL/CTL-style rolling load calculation reading actual `workout_logs` history to
+  compute `baselineLoad`/`prevWeekLoad` for a returning athlete. Every plan regeneration starts from the
+  same generic Base-phase default regardless of the athlete's real recent training. This needs new
+  aggregation infrastructure, not attempted in this pass.
+- [ ] "Ask Ozzie" is still a read-only stub (over-promised as two-way chat; relabeled but not built) — still
+  open; the webapp chat route is hidden behind a flag pending OpenAI billing.
 
 ### 3D. Systemic: timezone handling (a class of bug, not one bug)
 
