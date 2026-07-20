@@ -172,6 +172,7 @@ async function computeTrainingLoad(supabase: ReturnType<typeof createClient>, us
     .from('workout_logs')
     .select('started_at, tss')
     .eq('user_id', userId)
+    .is('deleted_at', null)
     .gte('started_at', since.toISOString())
     .order('started_at', { ascending: true });
 
@@ -230,6 +231,7 @@ async function rescheduleMissedSessions(
   const { data: linkedWorkouts } = await supabase
     .from('workout_logs')
     .select('session_id')
+    .is('deleted_at', null)
     .in(
       'session_id',
       sessions.map((s) => s.id),

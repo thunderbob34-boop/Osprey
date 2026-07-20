@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { toDateInputValue, localDayRange, addDays, loggedAtFor } from '../src/lib/day';
+import { toDateInputValue, toDateTimeInputValue, localDayRange, addDays, loggedAtFor } from '../src/lib/day';
 
 describe('day', () => {
   it('toDateInputValue uses local date, not UTC', () => {
@@ -20,5 +20,11 @@ describe('day', () => {
     const now = new Date(2026, 6, 13, 9, 15);
     expect(loggedAtFor('2026-07-13', now)).toBe(now.toISOString());
     expect(new Date(loggedAtFor('2026-07-10', now)).getTime()).toBe(new Date(2026, 6, 10, 12, 0, 0).getTime());
+  });
+  it('toDateTimeInputValue uses local date and time, not UTC (audit regression)', () => {
+    // 2026-07-13T23:30 local — a UTC-based default would prefill a datetime-local
+    // input with the 14th for negative-offset users, recording the workout on the wrong day.
+    const d = new Date(2026, 6, 13, 23, 30);
+    expect(toDateTimeInputValue(d)).toBe('2026-07-13T23:30');
   });
 });

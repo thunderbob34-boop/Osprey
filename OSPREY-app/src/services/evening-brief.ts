@@ -58,11 +58,16 @@ export async function reconcileEveningBrief(userId: string, tomorrowWeather?: To
   const fireAt = new Date(now.getFullYear(), now.getMonth(), now.getDate(), EVENING_HOUR, 0, 0, 0);
   if (fireAt.getTime() <= now.getTime()) return; // 8pm already passed today
 
+  // A day can hold more than one session (see daily-summary.ts); `.maybeSingle()`
+  // throws on 2+ rows, which silently fell through to the `data == null` "rest day"
+  // fallback below on any multi-session day. Order + limit(1) to match the pattern.
   const { data } = await supabase
     .from('training_sessions')
     .select('session_type, intensity, planned_minutes, description')
     .eq('user_id', userId)
     .eq('session_date', tomorrowDateString())
+    .order('created_at', { ascending: true })
+    .limit(1)
     .maybeSingle();
 
   const sessionType = data?.session_type ?? 'rest';

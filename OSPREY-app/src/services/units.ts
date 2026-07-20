@@ -57,8 +57,8 @@ export function formatFluidOz(oz: number, units: UnitSystem): string {
 export function formatPacePerUnit(totalSeconds: number | null, km: number | null, units: UnitSystem): string | null {
   if (!totalSeconds || !km || km <= 0) return null;
   const distance = units === 'metric' ? km : kmToMiles(km);
-  const secPerUnit = totalSeconds / distance;
-  const min = Math.floor(secPerUnit / 60);
-  const sec = Math.round(secPerUnit % 60);
+  const totalSec = Math.round(totalSeconds / distance);
+  const min = Math.floor(totalSec / 60);
+  const sec = totalSec % 60;
   return `${min}:${String(sec).padStart(2, '0')} /${units === 'metric' ? 'km' : 'mi'}`;
 }

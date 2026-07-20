@@ -35,16 +35,17 @@ const KM_PER_MILE = 1.609344;
 
 function formatGoalPace(goalTimeS: number, distanceKm: number): string {
   const miles = distanceKm / KM_PER_MILE;
-  const secPerMile = goalTimeS / miles;
-  const min = Math.floor(secPerMile / 60);
-  const sec = Math.round(secPerMile % 60);
+  const totalSec = Math.round(goalTimeS / miles);
+  const min = Math.floor(totalSec / 60);
+  const sec = totalSec % 60;
   return `${min}:${String(sec).padStart(2, '0')} /mi`;
 }
 
 function formatTime(totalSeconds: number): string {
-  const h = Math.floor(totalSeconds / 3600);
-  const m = Math.floor((totalSeconds % 3600) / 60);
-  const s = Math.round(totalSeconds % 60);
+  const total = Math.round(totalSeconds);
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
   if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   return `${m}:${String(s).padStart(2, '0')}`;
 }

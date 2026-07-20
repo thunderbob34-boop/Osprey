@@ -41,6 +41,7 @@ function DayPicker({
             accessibilityRole="button"
             accessibilityLabel={`${day} ${label}`}
             accessibilityState={{ selected: value === day }}
+            hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}
           >
             <Text style={[styles.dayBtnText, value === day && styles.dayBtnTextActive]}>
               {day}

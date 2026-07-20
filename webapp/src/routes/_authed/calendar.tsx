@@ -40,6 +40,12 @@ function CalendarPage() {
   const [addingRace, setAddingRace] = useState<string | null>(null); // holds a default date, or null when closed
   const [editing, setEditing] = useState(false); // true = SessionEditor open for `selected`
   const [addDate, setAddDate] = useState<string | null>(null); // set = SessionEditor open in add mode for this date
+  const [flash, setFlash] = useState<string | null>(null); // brief confirmation after save/delete/add
+
+  function showFlash(action: 'saved' | 'deleted' | 'added') {
+    setFlash(action === 'saved' ? 'Session saved.' : action === 'deleted' ? 'Session deleted.' : 'Session added.');
+    window.setTimeout(() => setFlash(null), 3000);
+  }
 
   // Editing and an in-progress "add" form both key off the current selection: picking a
   // different session/race always exits edit mode, and — since the add affordance clears
@@ -195,7 +201,8 @@ function CalendarPage() {
                   userId={userId}
                   session={selected.data}
                   monthSessions={sessions.data ?? []}
-                  onDone={() => { setEditing(false); setSelected(null); }}
+                  onDone={(action) => { setEditing(false); setSelected(null); showFlash(action); }}
+                  onCancel={() => setEditing(false)}
                 />
               ) : (
                 <div className="detail-card">
@@ -260,12 +267,13 @@ function CalendarPage() {
               userId={userId}
               addDate={addDate}
               monthSessions={sessions.data ?? []}
-              onDone={() => setAddDate(null)}
+              onDone={(action) => { setAddDate(null); showFlash(action); }}
+              onCancel={() => setAddDate(null)}
             />
           )}
 
           {!selected && !addDate && (
-            <p style={{ color: 'var(--mut)', fontSize: 13.5 }}>Select a session or race on the calendar to see details.</p>
+            <p style={{ color: 'var(--mut)', fontSize: 13.5 }}>{flash ?? 'Select a session or race on the calendar to see details.'}</p>
           )}
 
           <div className="detail-card">

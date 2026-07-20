@@ -1,10 +1,10 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useUserGoal, useUpdateGoalParams, useUnits } from './queries';
 import { formatWeightKg, parseWeightInput, type UnitSystem } from '../../lib/units';
 import { phaseOrBase, type RacePhaseName } from '../../lib/race-phase';
 import { strengthWorkingLoads } from '../../lib/strength-loads';
 import { crossfitStrengthLoads, ENERGY_SYSTEM_ZONES, BENCHMARK_BY_PHASE, franTier, type BenchmarkTier } from '../../lib/crossfit-zones';
-import { hyroxStationWeights, compromisedSplitFromThresholdMile, HYROX_DIVISIONS, type HyroxDivision, type HyroxStationWeights } from '../../lib/hyrox-loads';
+import { hyroxStationWeights, compromisedSplitFromThresholdMile, HYROX_DIVISIONS, MILES_PER_KM, type HyroxDivision, type HyroxStationWeights } from '../../lib/hyrox-loads';
 import { parseLiftParams, parseCrossfitParams, parseHyroxParams, validKg, validFranSec } from '../../lib/goal-params';
 import { formatMinSec } from '../../lib/training-zones';
 import { ErrorPanel } from '../../components/ErrorPanel';
@@ -17,6 +17,20 @@ const bareWeight = (kg: number, units: UnitSystem) => formatWeightKg(kg, units).
 function parseValidWeightKg(text: string, units: UnitSystem): number | null {
   const kg = parseWeightInput(text, units);
   return kg != null && validKg(kg) ? kg : null;
+}
+
+// A weight-input string seeded from the stored kg value, re-seeded whenever the
+// user's unit system changes (not on every stored-value change, so an in-progress
+// edit survives a background refetch) — otherwise a value typed in one unit system
+// is silently reinterpreted in another after a units toggle.
+function useWeightInputState(storedKg: number | null, unitSystem: UnitSystem): [string, (v: string) => void] {
+  const [value, setValue] = useState(() => (storedKg != null ? bareWeight(storedKg, unitSystem) : ''));
+  const mounted = useRef(false);
+  useEffect(() => {
+    if (mounted.current) setValue(storedKg != null ? bareWeight(storedKg, unitSystem) : '');
+    mounted.current = true;
+  }, [unitSystem, storedKg]);
+  return [value, setValue];
 }
 
 function parseMinSec(text: string): number | null {
@@ -76,6 +90,8 @@ export function StrengthZones({ userId }: { userId: string }) {
         <HyroxZones
           goalParams={goal.data.goalParams}
           thresholdSecPerMile={goal.data.thresholdAnchor.run?.thresholdSecPerMile ?? null}
+          unitSystem={unitSystem}
+          phaseLabel={phaseLabel}
           onSave={save}
           saving={update.isPending}
         />
@@ -88,13 +104,15 @@ export function StrengthZones({ userId }: { userId: string }) {
 // ---------- shared 1RM row (used by lift + crossfit) ----------
 
 function LiftInputRow({
-  label, unitSystem, value, onChange, onSave, saving, children,
+  label, unitSystem, value, onChange, onSave, onClear, hasStored, saving, children,
 }: {
   label: string;
   unitSystem: UnitSystem;
   value: string;
   onChange: (v: string) => void;
   onSave: (kg: number) => void;
+  onClear: () => void;
+  hasStored: boolean;
   saving: boolean;
   children?: ReactNode;
 }) {
@@ -116,6 +134,7 @@ function LiftInputRow({
         <button className="btn" type="button" disabled={saving || kg == null} onClick={() => { if (kg != null) onSave(kg); }}>
           Save
         </button>
+        {hasStored && <button className="btn" type="button" disabled={saving} onClick={onClear}>Clear</button>}
       </div>
     </div>
   );
@@ -134,9 +153,9 @@ function LiftZones({
   saving: boolean;
 }) {
   const stored = parseLiftParams(goalParams).oneRepMaxKg;
-  const [squat, setSquat] = useState(() => (stored.squat != null ? bareWeight(stored.squat, unitSystem) : ''));
-  const [bench, setBench] = useState(() => (stored.bench != null ? bareWeight(stored.bench, unitSystem) : ''));
-  const [deadlift, setDeadlift] = useState(() => (stored.deadlift != null ? bareWeight(stored.deadlift, unitSystem) : ''));
+  const [squat, setSquat] = useWeightInputState(stored.squat, unitSystem);
+  const [bench, setBench] = useWeightInputState(stored.bench, unitSystem);
+  const [deadlift, setDeadlift] = useWeightInputState(stored.deadlift, unitSystem);
 
   const effSquat = parseValidWeightKg(squat, unitSystem) ?? stored.squat;
   const effBench = parseValidWeightKg(bench, unitSystem) ?? stored.bench;
@@ -146,10 +165,10 @@ function LiftZones({
   const ladder = (orm: number | null) =>
     orm == null ? null : [70, 80, 90].map((p) => `${p}% ${formatWeightKg(Math.round((orm * p) / 100), unitSystem)}`).join(' · ');
 
-  const rows: { key: 'squat' | 'bench' | 'deadlift'; label: string; value: string; setValue: (v: string) => void; eff: number | null; working: number }[] = [
-    { key: 'squat', label: 'Squat', value: squat, setValue: setSquat, eff: effSquat, working: working.loads.squat },
-    { key: 'bench', label: 'Bench', value: bench, setValue: setBench, eff: effBench, working: working.loads.bench },
-    { key: 'deadlift', label: 'Deadlift', value: deadlift, setValue: setDeadlift, eff: effDeadlift, working: working.loads.deadlift },
+  const rows: { key: 'squat' | 'bench' | 'deadlift'; label: string; value: string; setValue: (v: string) => void; eff: number | null; hasStored: boolean; working: number }[] = [
+    { key: 'squat', label: 'Squat', value: squat, setValue: setSquat, eff: effSquat, hasStored: stored.squat != null, working: working.loads.squat },
+    { key: 'bench', label: 'Bench', value: bench, setValue: setBench, eff: effBench, hasStored: stored.bench != null, working: working.loads.bench },
+    { key: 'deadlift', label: 'Deadlift', value: deadlift, setValue: setDeadlift, eff: effDeadlift, hasStored: stored.deadlift != null, working: working.loads.deadlift },
   ];
 
   return (
@@ -159,7 +178,7 @@ function LiftZones({
         Phase: {phaseLabel}. Working loads and zones are computed from your current 1RMs.
       </p>
       {rows.map((row) => (
-        <LiftInputRow key={row.key} label={row.label} unitSystem={unitSystem} value={row.value} onChange={row.setValue} saving={saving} onSave={(kg) => onSave({ oneRepMaxKg: { [row.key]: kg } })}>
+        <LiftInputRow key={row.key} label={row.label} unitSystem={unitSystem} value={row.value} onChange={row.setValue} saving={saving} hasStored={row.hasStored} onSave={(kg) => onSave({ oneRepMaxKg: { [row.key]: kg } })} onClear={() => onSave({ oneRepMaxKg: { [row.key]: null } })}>
           {row.eff != null ? (
             <div style={{ color: 'var(--mut)' }}>
               Working {formatWeightKg(row.working, unitSystem)} · {working.workingPercent1RM}% 1RM · {working.zoneName}
@@ -188,9 +207,9 @@ function CrossfitZones({
   saving: boolean;
 }) {
   const stored = parseCrossfitParams(goalParams);
-  const [backSquat, setBackSquat] = useState(() => (stored.oneRepMaxKg.backSquat != null ? bareWeight(stored.oneRepMaxKg.backSquat, unitSystem) : ''));
-  const [deadlift, setDeadlift] = useState(() => (stored.oneRepMaxKg.deadlift != null ? bareWeight(stored.oneRepMaxKg.deadlift, unitSystem) : ''));
-  const [press, setPress] = useState(() => (stored.oneRepMaxKg.press != null ? bareWeight(stored.oneRepMaxKg.press, unitSystem) : ''));
+  const [backSquat, setBackSquat] = useWeightInputState(stored.oneRepMaxKg.backSquat, unitSystem);
+  const [deadlift, setDeadlift] = useWeightInputState(stored.oneRepMaxKg.deadlift, unitSystem);
+  const [press, setPress] = useWeightInputState(stored.oneRepMaxKg.press, unitSystem);
   const [fran, setFran] = useState(() => (stored.franSec != null ? formatMinSec(stored.franSec) : ''));
 
   const effBackSquat = parseValidWeightKg(backSquat, unitSystem) ?? stored.oneRepMaxKg.backSquat;
@@ -203,10 +222,10 @@ function CrossfitZones({
   const effFranSec = liveFranSec ?? stored.franSec;
   const tier = effFranSec != null ? franTier(effFranSec) : null;
 
-  const rows: { key: 'backSquat' | 'deadlift' | 'press'; label: string; value: string; setValue: (v: string) => void; eff: number | null; working: number }[] = [
-    { key: 'backSquat', label: 'Back squat', value: backSquat, setValue: setBackSquat, eff: effBackSquat, working: working.loads.backSquat },
-    { key: 'deadlift', label: 'Deadlift', value: deadlift, setValue: setDeadlift, eff: effDeadlift, working: working.loads.deadlift },
-    { key: 'press', label: 'Press', value: press, setValue: setPress, eff: effPress, working: working.loads.press },
+  const rows: { key: 'backSquat' | 'deadlift' | 'press'; label: string; value: string; setValue: (v: string) => void; eff: number | null; hasStored: boolean; working: number }[] = [
+    { key: 'backSquat', label: 'Back squat', value: backSquat, setValue: setBackSquat, eff: effBackSquat, hasStored: stored.oneRepMaxKg.backSquat != null, working: working.loads.backSquat },
+    { key: 'deadlift', label: 'Deadlift', value: deadlift, setValue: setDeadlift, eff: effDeadlift, hasStored: stored.oneRepMaxKg.deadlift != null, working: working.loads.deadlift },
+    { key: 'press', label: 'Press', value: press, setValue: setPress, eff: effPress, hasStored: stored.oneRepMaxKg.press != null, working: working.loads.press },
   ];
 
   return (
@@ -215,7 +234,7 @@ function CrossfitZones({
       <p style={{ color: 'var(--mut)' }}>Phase: {phaseLabel}.</p>
 
       {rows.map((row) => (
-        <LiftInputRow key={row.key} label={row.label} unitSystem={unitSystem} value={row.value} onChange={row.setValue} saving={saving} onSave={(kg) => onSave({ oneRepMaxKg: { [row.key]: kg } })}>
+        <LiftInputRow key={row.key} label={row.label} unitSystem={unitSystem} value={row.value} onChange={row.setValue} saving={saving} hasStored={row.hasStored} onSave={(kg) => onSave({ oneRepMaxKg: { [row.key]: kg } })} onClear={() => onSave({ oneRepMaxKg: { [row.key]: null } })}>
           {row.eff != null ? (
             <div style={{ color: 'var(--mut)' }}>
               Working {formatWeightKg(row.working, unitSystem)} · {working.workingPercent1RM}% 1RM · {working.zoneName}
@@ -235,6 +254,9 @@ function CrossfitZones({
           <button className="btn" type="button" disabled={saving || liveFranSec == null} onClick={() => { if (liveFranSec != null) onSave({ franSec: liveFranSec }); }}>
             Save
           </button>
+          {stored.franSec != null && (
+            <button className="btn" type="button" disabled={saving} onClick={() => onSave({ franSec: null })}>Clear</button>
+          )}
         </div>
       </div>
 
@@ -273,10 +295,12 @@ function CrossfitZones({
 // ---------- hyrox ----------
 
 function HyroxZones({
-  goalParams, thresholdSecPerMile, onSave, saving,
+  goalParams, thresholdSecPerMile, unitSystem, phaseLabel, onSave, saving,
 }: {
   goalParams: unknown;
   thresholdSecPerMile: number | null;
+  unitSystem: UnitSystem;
+  phaseLabel: string;
   onSave: (patch: Record<string, unknown>) => void;
   saving: boolean;
 }) {
@@ -285,10 +309,12 @@ function HyroxZones({
   return (
     <div style={{ marginTop: 10, paddingTop: 18, borderTop: '1px solid var(--line-soft)' }}>
       <h3>Hyrox</h3>
+      <p style={{ color: 'var(--mut)' }}>Phase: {phaseLabel}.</p>
 
       <div className="settings-row">
-        <span className="k">Division</span>
+        <label className="k" htmlFor="se-hyrox-division">Division</label>
         <select
+          id="se-hyrox-division"
           value={division ?? ''}
           disabled={saving}
           onChange={(e) => { if (e.target.value) onSave({ division: e.target.value }); }}
@@ -298,6 +324,9 @@ function HyroxZones({
             <option key={d} value={d}>{DIVISION_LABEL[d]}</option>
           ))}
         </select>
+        {division && (
+          <button className="btn" type="button" disabled={saving} onClick={() => onSave({ division: null })}>Clear</button>
+        )}
       </div>
 
       <div className="settings-row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 8 }}>
@@ -325,7 +354,13 @@ function HyroxZones({
         {thresholdSecPerMile != null ? (
           (() => {
             const split = compromisedSplitFromThresholdMile(thresholdSecPerMile);
-            return <div style={{ color: 'var(--mut)' }}>{formatMinSec(split.min)}–{formatMinSec(split.max)} /km off the station work</div>;
+            // The predictor works in sec/km (the blueprint's compromised-pace unit); convert to
+            // sec/mile for imperial athletes so it matches every other pace shown in the app.
+            const shown = unitSystem === 'imperial'
+              ? { min: split.min / MILES_PER_KM, max: split.max / MILES_PER_KM }
+              : split;
+            const unit = unitSystem === 'imperial' ? '/mi' : '/km';
+            return <div style={{ color: 'var(--mut)' }}>{formatMinSec(Math.round(shown.min))}–{formatMinSec(Math.round(shown.max))} {unit} off the station work</div>;
           })()
         ) : (
           <p style={{ color: 'var(--mut)' }}>Set your Run anchor above to see your predicted compromised pace.</p>

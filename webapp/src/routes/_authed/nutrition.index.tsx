@@ -48,7 +48,22 @@ function QuickAdd({ userId, dateStr }: { userId: string; dateStr: string }) {
   const quantityG = Number(qty);
   const canLog = selected != null && Number.isFinite(quantityG) && quantityG > 0 && !logFood.isPending;
 
+  // Each macro field is either blank or a finite, non-negative number — blank
+  // fields become null in submitManual, garbage (e.g. "12g", "-5") previously
+  // passed straight through Number() into the shared food_items table.
+  function isValidMacroField(v: string): boolean {
+    if (v === '') return true;
+    const n = Number(v);
+    return Number.isFinite(n) && n >= 0;
+  }
+  const manualMacrosValid =
+    isValidMacroField(manual.calories) &&
+    isValidMacroField(manual.protein) &&
+    isValidMacroField(manual.carbs) &&
+    isValidMacroField(manual.fat);
+
   async function submitManual() {
+    if (!manualMacrosValid) return;
     const per100g: Per100g = {
       calories: manual.calories === '' ? null : Number(manual.calories),
       proteinG: manual.protein === '' ? null : Number(manual.protein),
@@ -128,7 +143,7 @@ function QuickAdd({ userId, dateStr }: { userId: string; dateStr: string }) {
           {addManual.isError && <p className="err-line" role="alert">{friendlyMessage(addManual.error)}</p>}
           <div className="log-form-actions">
             <button className="btn ghost" type="button" onClick={() => setManualOpen(false)} disabled={addManual.isPending}>Cancel</button>
-            <button className="btn" type="button" disabled={manual.name.trim() === '' || addManual.isPending} onClick={() => void submitManual()}>
+            <button className="btn" type="button" disabled={manual.name.trim() === '' || !manualMacrosValid || addManual.isPending} onClick={() => void submitManual()}>
               {addManual.isPending ? 'Saving…' : 'Save food'}
             </button>
           </div>

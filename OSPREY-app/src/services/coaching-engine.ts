@@ -128,7 +128,8 @@ export function checkCues(
 }
 
 function formatPaceSec(secPerMile: number): string {
-  const m = Math.floor(secPerMile / 60);
-  const s = Math.round(secPerMile % 60);
+  const total = Math.round(secPerMile);
+  const m = Math.floor(total / 60);
+  const s = total % 60;
   return `${m}:${String(s).padStart(2, '0')}`;
 }

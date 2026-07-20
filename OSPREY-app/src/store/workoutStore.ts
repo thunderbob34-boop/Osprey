@@ -197,8 +197,11 @@ export function formatDuration(totalSeconds: number): string {
 
 export function formatPace(secondsPerMile: number): string {
   if (!Number.isFinite(secondsPerMile) || secondsPerMile <= 0) return '--:--';
-  const minutes = Math.floor(secondsPerMile / 60);
-  const seconds = Math.round(secondsPerMile % 60);
+  // Round the total first, then split — rounding minutes/seconds independently
+  // can produce an invalid "M:60" when the seconds remainder rounds up to 60.
+  const total = Math.round(secondsPerMile);
+  const minutes = Math.floor(total / 60);
+  const seconds = total % 60;
   return `${minutes}:${String(seconds).padStart(2, '0')}`;
 }
 

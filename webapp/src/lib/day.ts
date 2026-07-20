@@ -9,6 +9,13 @@ export function toDateInputValue(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
+/** For <input type="datetime-local">, which reads/writes in local time, not UTC. */
+export function toDateTimeInputValue(d: Date): string {
+  const hh = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  return `${toDateInputValue(d)}T${hh}:${mm}`;
+}
+
 function parseLocal(dateStr: string): Date {
   const [y, m, d] = dateStr.split('-').map(Number);
   return new Date(y, m - 1, d);
