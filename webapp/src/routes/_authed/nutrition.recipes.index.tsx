@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { PageHeader } from '../../components/PageHeader';
 import { EmptyState } from '../../components/EmptyState';
 import { ErrorPanel } from '../../components/ErrorPanel';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { recipePerServing, useCreateRecipe, useDeleteRecipe, useRecipes } from '../../features/nutrition/recipes';
 
 function RecipeList() {
@@ -10,6 +12,7 @@ function RecipeList() {
   const recipes = useRecipes(userId);
   const create = useCreateRecipe(userId);
   const remove = useDeleteRecipe(userId);
+  const [confirming, setConfirming] = useState<{ id: string; name: string } | null>(null);
 
   async function createNew() {
     const r = await create.mutateAsync({ name: 'New recipe', servings: 1 });
@@ -55,7 +58,7 @@ function RecipeList() {
                     <td className="num">{per ? `${per.carbsG}g` : '—'}</td>
                     <td className="num">{per ? `${per.fatG}g` : '—'}</td>
                     <td className="num">
-                      <button className="icon-btn" type="button" aria-label={`Delete ${r.name}`} onClick={() => void remove.mutateAsync(r.id)}>✕</button>
+                      <button className="icon-btn" type="button" aria-label={`Delete ${r.name}`} onClick={() => setConfirming({ id: r.id, name: r.name })}>✕</button>
                     </td>
                   </tr>
                 );
@@ -65,6 +68,15 @@ function RecipeList() {
           </div>
         </div>
       )}
+
+      <ConfirmDialog
+        open={confirming != null}
+        title={`Delete "${confirming?.name}"?`}
+        message="This can't be undone."
+        pending={remove.isPending}
+        onConfirm={() => { if (confirming) void remove.mutateAsync(confirming.id).finally(() => setConfirming(null)); }}
+        onCancel={() => setConfirming(null)}
+      />
     </>
   );
 }

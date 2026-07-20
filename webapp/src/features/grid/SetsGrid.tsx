@@ -4,6 +4,7 @@ import { formatWeightKg, parseWeightInput, kgToLb, type UnitSystem } from '../..
 import type { Exercise } from '../../lib/schemas';
 import { useExerciseSearch } from '../log/queries';
 import { Combobox } from '../../components/Combobox';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { friendlyMessage } from '../../lib/errorMessage';
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 export function SetsGrid({ units, initialRows, onCommitRow, onDeleteRow }: Props) {
   const [state, dispatch] = useReducer(gridReducer, undefined, emptyGrid);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [confirmingId, setConfirmingId] = useState<string | null>(null); // row.localId pending delete confirmation
   const loaded = useRef(false);
   useEffect(() => {
     if (!loaded.current && initialRows.length) { dispatch({ type: 'load', rows: initialRows }); loaded.current = true; }
@@ -53,6 +55,22 @@ export function SetsGrid({ units, initialRows, onCommitRow, onDeleteRow }: Props
         onBlur={() => commitLatest(row.localId)}
       />
     );
+  }
+
+  // Only a saved (dbId-bearing) row needs confirmation — an unsaved row hasn't
+  // persisted anything yet, so removing it locally is not a destructive action.
+  function requestDelete(row: SetRow) {
+    if (row.dbId) setConfirmingId(row.localId);
+    else dispatch({ type: 'removeRow', localId: row.localId });
+  }
+
+  function confirmDelete() {
+    const row = state.rows.find((r) => r.localId === confirmingId);
+    if (row) {
+      if (row.dbId) onDeleteRow(row.dbId);
+      dispatch({ type: 'removeRow', localId: row.localId });
+    }
+    setConfirmingId(null);
   }
 
   return (
@@ -97,7 +115,7 @@ export function SetsGrid({ units, initialRows, onCommitRow, onDeleteRow }: Props
                   className="icon-btn"
                   type="button"
                   aria-label="Delete set"
-                  onClick={() => { if (row.dbId) onDeleteRow(row.dbId); dispatch({ type: 'removeRow', localId: row.localId }); }}
+                  onClick={() => requestDelete(row)}
                 >
                   ✕
                 </button>
@@ -117,6 +135,14 @@ export function SetsGrid({ units, initialRows, onCommitRow, onDeleteRow }: Props
         <button className="btn" type="button" onClick={() => dispatch({ type: 'duplicateLast' })}>Duplicate last (⏎)</button>
       </div>
       <p className="grid-hint">Rows save when you leave a cell · {formatWeightKg(100, units)} = 100kg reference</p>
+
+      <ConfirmDialog
+        open={confirmingId != null}
+        title="Delete this set?"
+        message="This can't be undone."
+        onConfirm={confirmDelete}
+        onCancel={() => setConfirmingId(null)}
+      />
     </div>
   );
 }

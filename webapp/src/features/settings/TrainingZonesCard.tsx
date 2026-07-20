@@ -4,6 +4,7 @@ import { setAnchorEntry, clearAnchorEntry, type AnchorKey, type ThresholdAnchorM
 import { parseSwimBaseline, parseRowingBaseline, parseRunBaseline, parseFTPBaseline } from '../../lib/baseline';
 import { swimPaceZones, runningPaceZones, rowingTrainingZones, cyclingPowerZones, formatMinSec, type Range } from '../../lib/training-zones';
 import { ErrorPanel } from '../../components/ErrorPanel';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { StrengthZones } from './StrengthZones';
 
 const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
@@ -44,6 +45,7 @@ function SportZone({ row, map, onSave, saving }: { row: Row; map: ThresholdAncho
   const [a, setA] = useState(''); const [b, setB] = useState('');
   const [c, setC] = useState(''); const [d, setD] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [confirmingClear, setConfirmingClear] = useState(false);
 
   // Parse current inputs → the anchor value (or null) for a live preview.
   let preview: number | null = null;
@@ -82,8 +84,18 @@ function SportZone({ row, map, onSave, saving }: { row: Row; map: ThresholdAncho
       {error ? <span className="err-line">{error}</span> : null}
       <div style={{ display: 'flex', gap: 8 }}>
         <button className="btn" type="button" disabled={saving || preview == null} onClick={save}>Save</button>
-        {entry && <button className="btn" type="button" disabled={saving} onClick={() => onSave(clearAnchorEntry(map, row.key))}>Clear</button>}
+        {entry && <button className="btn ghost" type="button" disabled={saving} onClick={() => setConfirmingClear(true)}>Clear</button>}
       </div>
+
+      <ConfirmDialog
+        open={confirmingClear}
+        title={`Clear your ${row.title.toLowerCase()} zone?`}
+        message="Ozzie will fall back to estimating this from your training until you set it again."
+        confirmLabel="Clear"
+        pending={saving}
+        onConfirm={() => { onSave(clearAnchorEntry(map, row.key)); setConfirmingClear(false); }}
+        onCancel={() => setConfirmingClear(false)}
+      />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useCreateSession, useDeleteSession, useUpdateSession } from './queries'
 import { sameWeekDates, weekIdForDate, type SessionEdits } from '../../lib/session-edit';
 import { SESSION_TYPE_LABEL, INTENSITY_LABEL, formatDateShort } from '../../lib/format';
 import { friendlyMessage } from '../../lib/errorMessage';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import type { TrainingSession } from '../../lib/schemas';
 
 interface Props {
@@ -31,6 +32,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
   const [description, setDescription] = useState(session?.description ?? '');
   const [moveTo, setMoveTo] = useState(session?.session_date ?? '');
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
 
   const update = useUpdateSession(userId);
   const del = useDeleteSession(userId);
@@ -79,12 +81,13 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
 
   async function handleDelete() {
     if (!session) return;
-    if (!window.confirm('Delete this session?')) return;
     try {
       await del.mutateAsync(session.id);
       onDone();
     } catch {
       // surfaced via del.error below
+    } finally {
+      setConfirmingDelete(false);
     }
   }
 
@@ -154,7 +157,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
 
       <div className="log-form-actions" style={{ gap: 10, marginTop: 16 }}>
         {session && (
-          <button className="btn ghost" type="button" style={{ marginRight: 'auto' }} onClick={() => void handleDelete()} disabled={pending}>
+          <button className="btn ghost" type="button" style={{ marginRight: 'auto' }} onClick={() => setConfirmingDelete(true)} disabled={pending}>
             {del.isPending ? 'Deleting…' : 'Delete'}
           </button>
         )}
@@ -168,6 +171,15 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
           {session ? (update.isPending ? 'Saving…' : 'Save') : (create.isPending ? 'Adding…' : 'Add session')}
         </button>
       </div>
+
+      <ConfirmDialog
+        open={confirmingDelete}
+        title="Delete this session?"
+        message="This can't be undone."
+        pending={del.isPending}
+        onConfirm={() => void handleDelete()}
+        onCancel={() => setConfirmingDelete(false)}
+      />
     </div>
   );
 }
