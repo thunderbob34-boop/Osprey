@@ -4,15 +4,16 @@ import { signOut } from '../lib/auth';
 import { useUserProfile } from '../lib/useAuthUser';
 
 const links = [
-  { to: '/calendar', label: 'Calendar' },
-  { to: '/log', label: 'Log' },
-  { to: '/history', label: 'History' },
-  { to: '/nutrition', label: 'Nutrition' },
+  { to: '/', label: 'Home', exact: true },
+  { to: '/calendar', label: 'Calendar', exact: false },
+  { to: '/log', label: 'Log', exact: false },
+  { to: '/history', label: 'History', exact: false },
+  { to: '/nutrition', label: 'Nutrition', exact: false },
   // Ask Ozzie (chat) hidden until OpenAI billing is turned on — the /chat route
   // also redirects to '/' (see chat.tsx). Re-enable: restore this link + drop
   // the beforeLoad redirect. The page, data layer, and edge fn are all intact.
-  // { to: '/chat', label: 'Ask Ozzie' },
-  { to: '/settings', label: 'Settings' },
+  // { to: '/chat', label: 'Ask Ozzie', exact: false },
+  { to: '/settings', label: 'Settings', exact: false },
 ] as const;
 
 export function NavRail() {
@@ -27,7 +28,13 @@ export function NavRail() {
       </div>
       <div className="rail-links">
         {links.map((l) => (
-          <Link key={l.to} to={l.to} className="rail-link" activeProps={{ className: 'rail-link active' }}>
+          <Link
+            key={l.to}
+            to={l.to}
+            className="rail-link"
+            activeProps={{ className: 'rail-link active' }}
+            activeOptions={{ exact: l.exact }}
+          >
             {l.label}
           </Link>
         ))}
