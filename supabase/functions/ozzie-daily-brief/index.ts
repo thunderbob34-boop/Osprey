@@ -148,6 +148,75 @@ function deriveWorkoutTimeConsistency(
   return bestCount >= 3 ? { hour: bestHour, count: bestCount } : null;
 }
 
+/**
+ * load_scores had no writer anywhere in the codebase — buildContext's read
+ * always came back empty, so the tsb-based train/easy/rest recommendation
+ * (below) never actually fired. Compute it the same way
+ * ozzie-generate-plan/index.ts's computeTrainingLoad does (kept in sync with
+ * OSPREY-app/src/services/performance.ts's alpha = 1/tau formula) and upsert
+ * it into load_scores so both the brief and any future reader see real data.
+ */
+async function computeAndStoreTrainingLoad(
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+  today: string,
+): Promise<{ atl: number; ctl: number; tsb: number }> {
+  const since = new Date();
+  since.setDate(since.getDate() - 84);
+
+  const { data } = await supabase
+    .from('workout_logs')
+    .select('started_at, tss')
+    .eq('user_id', userId)
+    .is('deleted_at', null)
+    .gte('started_at', since.toISOString())
+    .order('started_at', { ascending: true });
+
+  const rows = (data ?? []) as Array<{ started_at: string; tss: number | null }>;
+
+  const tssMap: Record<string, number> = {};
+  for (const row of rows) {
+    const date = row.started_at.slice(0, 10);
+    tssMap[date] = (tssMap[date] ?? 0) + (row.tss ?? 0);
+  }
+
+  const TAU_ATL = 7;
+  const TAU_CTL = 42;
+  let atl = 0;
+  let ctl = 0;
+  let weeklyTss = 0;
+
+  for (let i = 0; i < 84; i++) {
+    const d = new Date(since);
+    d.setDate(d.getDate() + i);
+    const dateStr = d.toISOString().slice(0, 10);
+    const tss = tssMap[dateStr] ?? 0;
+    atl = atl + (tss - atl) / TAU_ATL;
+    ctl = ctl + (tss - ctl) / TAU_CTL;
+    if (i >= 84 - 7) weeklyTss += tss;
+  }
+
+  const result = {
+    atl: Math.round(atl * 10) / 10,
+    ctl: Math.round(ctl * 10) / 10,
+    tsb: Math.round((ctl - atl) * 10) / 10,
+  };
+
+  await supabase.from('load_scores').upsert(
+    {
+      user_id: userId,
+      score_date: today,
+      atl: result.atl,
+      ctl: result.ctl,
+      tsb: result.tsb,
+      weekly_tss: Math.round(weeklyTss * 10) / 10,
+    },
+    { onConflict: 'user_id,score_date' },
+  );
+
+  return result;
+}
+
 async function buildContext(
   supabase: ReturnType<typeof createClient>,
   userId: string,
@@ -158,10 +227,10 @@ async function buildContext(
   const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
   const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
-  const [userRes, recoveryRes, loadRes, sessionRes, workoutsRes, goalsRes, workoutTimesRes, foodLogRes, memoriesRes] = await Promise.all([
+  const [userRes, recoveryRes, load, sessionRes, workoutsRes, goalsRes, workoutTimesRes, foodLogRes, memoriesRes] = await Promise.all([
     supabase.from('users').select('display_name, experience_tier').eq('id', userId).single(),
     supabase.from('recovery_scores').select('score, recommendation, hrv_ms, sleep_hours').eq('user_id', userId).eq('score_date', today).maybeSingle(),
-    supabase.from('load_scores').select('atl, ctl, tsb').eq('user_id', userId).eq('score_date', today).maybeSingle(),
+    computeAndStoreTrainingLoad(supabase, userId, today),
     supabase.from('training_sessions').select('session_type, intensity, planned_minutes, planned_distance_km, description').eq('user_id', userId).eq('session_date', today).maybeSingle(),
     supabase.from('workout_logs').select('id').eq('user_id', userId).is('deleted_at', null).gte('started_at', sevenDaysAgo),
     supabase.from('user_goals').select('primary_goal').eq('user_id', userId).maybeSingle(),
@@ -183,7 +252,7 @@ async function buildContext(
           sleepHours: recoveryRes.data.sleep_hours,
         }
       : null,
-    load: loadRes.data ? { atl: loadRes.data.atl, ctl: loadRes.data.ctl, tsb: loadRes.data.tsb } : null,
+    load,
     todaySession: sessionRes.data
       ? {
           sessionType: sessionRes.data.session_type,

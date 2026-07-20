@@ -45,6 +45,24 @@ Rules:
 - Zone guidance: apply the pace bands (if given) ONLY to the athlete's primary-sport sessions (run/swim/rowing). For bike, cross, and easy-cardio / cross-training sessions — and for ALL cardio when no pace bands are given (e.g. weight-loss or general-fitness plans) — target the HR zones instead. Never pace-clamp a cross-training session.
 - Respond ONLY with valid JSON: {"days": [{"dayOffset": 0-6, "session_type": string, "intensity": string, "planned_minutes": number|null, "planned_distance_km": number|null, "description": string, "ozzie_notes": string, "lift_prescription": {"exercises": [{"name": string, "sets": number, "reps": string, "loadKg": number|null, "note": string|null}]}|null, "interval_prescription": {"segments": [{"reps": number, "distanceM": number|null, "durationS": number|null, "effort": string, "restS": number, "label": string}]}|null}]} where dayOffset 0 = Monday.`;
 
+// Must match session_type_enum / intensity_enum in supabase/migrations —
+// the LLM is prompted to stay within these, but nothing stops it from
+// hallucinating a value, and inserting an out-of-enum string fails the
+// whole training_sessions insert (Postgres rejects the row, not just the
+// bad field). Sanitize before insert instead of trusting the model.
+const SESSION_TYPES = new Set([
+  'run', 'lift', 'cross', 'rest', 'race', 'swim', 'bike', 'rowing', 'hyrox',
+]);
+const INTENSITIES = new Set(['easy', 'moderate', 'threshold', 'interval', 'race', 'rest']);
+
+function sanitizeSessionType(value: string): string {
+  return SESSION_TYPES.has(value) ? value : 'cross';
+}
+
+function sanitizeIntensity(value: string): string {
+  return INTENSITIES.has(value) ? value : 'moderate';
+}
+
 interface GoalsContext {
   primaryGoal: string | null;
   weeklyRunDays: number;
@@ -184,8 +202,12 @@ async function computeTrainingLoad(supabase: ReturnType<typeof createClient>, us
     tssMap[date] = (tssMap[date] ?? 0) + (row.tss ?? 0);
   }
 
-  const alphaAtl = 1 - Math.exp(-1 / 7);
-  const alphaCtl = 1 - Math.exp(-1 / 42);
+  // Matches OSPREY-app/src/services/performance.ts's computeAtlCtlTsb exactly
+  // (alpha = 1/tau, not the continuous-decay 1-exp(-1/tau)) so the plan
+  // generator's training-load read and the user-facing Performance dashboard
+  // never disagree on the same athlete's ATL/CTL/TSB.
+  const TAU_ATL = 7;
+  const TAU_CTL = 42;
   let atl = 0;
   let ctl = 0;
 
@@ -194,8 +216,8 @@ async function computeTrainingLoad(supabase: ReturnType<typeof createClient>, us
     d.setDate(d.getDate() + i);
     const dateStr = d.toISOString().slice(0, 10);
     const tss = tssMap[dateStr] ?? 0;
-    atl = atl + alphaAtl * (tss - atl);
-    ctl = ctl + alphaCtl * (tss - ctl);
+    atl = atl + (tss - atl) / TAU_ATL;
+    ctl = ctl + (tss - ctl) / TAU_CTL;
   }
 
   return {
@@ -529,15 +551,34 @@ Deno.serve(async (req: Request) => {
       let primaryDaysForStorage: number;
 
       if (isTriathlon) {
-        // Split days roughly evenly across all four disciplines, each
-        // guaranteed at least 1 day whenever the weekly total allows it.
         const total = prefs.daysPerWeek;
-        const weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
-        const weeklySwimDays = Math.max(1, Math.round(total * 0.2));
-        const weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
-        const weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
-        routed = { weeklyRunDays, weeklyLiftDays, weeklySwimDays, weeklyBikeDays, weeklyRowDays: 0 };
-        primaryDaysForStorage = weeklyRunDays;
+        if (total <= 3) {
+          // Math.max(1, ...) on all four shares overallocates once total
+          // drops to 3 or below (e.g. total=3 sums to 4 days). Not enough
+          // days to guarantee every discipline gets one anyway — drop lift
+          // first (secondary for a triathlon-primary goal) and round-robin
+          // swim/bike/run so the total always sums to exactly `total`.
+          const priority: Array<'run' | 'bike' | 'swim'> = ['run', 'bike', 'swim'];
+          const counts = { run: 0, bike: 0, swim: 0 };
+          for (let i = 0; i < total; i++) counts[priority[i % priority.length]]++;
+          routed = {
+            weeklyRunDays: counts.run,
+            weeklyLiftDays: 0,
+            weeklySwimDays: counts.swim,
+            weeklyBikeDays: counts.bike,
+            weeklyRowDays: 0,
+          };
+          primaryDaysForStorage = counts.run;
+        } else {
+          // Split days roughly evenly across all four disciplines, each
+          // guaranteed at least 1 day whenever the weekly total allows it.
+          const weeklyBikeDays = Math.max(1, Math.round(total * 0.3));
+          const weeklySwimDays = Math.max(1, Math.round(total * 0.2));
+          const weeklyLiftDays = Math.max(1, Math.round(total * 0.2));
+          const weeklyRunDays = Math.max(1, total - weeklyBikeDays - weeklySwimDays - weeklyLiftDays);
+          routed = { weeklyRunDays, weeklyLiftDays, weeklySwimDays, weeklyBikeDays, weeklyRowDays: 0 };
+          primaryDaysForStorage = weeklyRunDays;
+        }
       } else {
         const primaryDays = prefs.daysPerWeek >= 2 ? Math.ceil(prefs.daysPerWeek * 0.6) : 2;
         const liftDays = prefs.daysPerWeek >= 2 ? Math.floor(prefs.daysPerWeek * 0.4) : 1;
@@ -789,23 +830,24 @@ Deno.serve(async (req: Request) => {
     const sessionRows = finalDays.map((day) => {
       const sessionDate = new Date(weekStart);
       sessionDate.setUTCDate(weekStart.getUTCDate() + day.dayOffset);
+      const sessionType = sanitizeSessionType(day.session_type);
       return {
         week_id: weekId,
         user_id: userId,
         session_date: toDateString(sessionDate),
-        session_type: day.session_type,
-        intensity: day.intensity,
+        session_type: sessionType,
+        intensity: sanitizeIntensity(day.intensity),
         planned_minutes: day.planned_minutes,
         planned_distance_km: day.planned_distance_km,
         description: day.description,
         ozzie_notes: day.ozzie_notes,
         fuel: (day as { fuel?: unknown }).fuel ?? null,
-        lift_prescription: day.session_type === 'lift' ? day.lift_prescription ?? null : null,
+        lift_prescription: sessionType === 'lift' ? day.lift_prescription ?? null : null,
         interval_prescription:
-          day.session_type === 'swim' ||
-          day.session_type === 'bike' ||
-          day.session_type === 'run' ||
-          day.session_type === 'rowing'
+          sessionType === 'swim' ||
+          sessionType === 'bike' ||
+          sessionType === 'run' ||
+          sessionType === 'rowing'
             ? day.interval_prescription ?? null
             : null,
       };
