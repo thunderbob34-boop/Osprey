@@ -153,7 +153,7 @@ function LiftZones({
   ];
 
   return (
-    <div style={{ marginTop: 10, paddingTop: 18, borderTop: '1px solid #232329' }}>
+    <div style={{ marginTop: 10, paddingTop: 18, borderTop: '1px solid var(--line-soft)' }}>
       <h3>Strength</h3>
       <p style={{ color: 'var(--mut)' }}>
         Phase: {phaseLabel}. Working loads and zones are computed from your current 1RMs.
@@ -210,7 +210,7 @@ function CrossfitZones({
   ];
 
   return (
-    <div style={{ marginTop: 10, paddingTop: 18, borderTop: '1px solid #232329' }}>
+    <div style={{ marginTop: 10, paddingTop: 18, borderTop: '1px solid var(--line-soft)' }}>
       <h3>CrossFit</h3>
       <p style={{ color: 'var(--mut)' }}>Phase: {phaseLabel}.</p>
 
@@ -283,7 +283,7 @@ function HyroxZones({
   const { division } = parseHyroxParams(goalParams);
 
   return (
-    <div style={{ marginTop: 10, paddingTop: 18, borderTop: '1px solid #232329' }}>
+    <div style={{ marginTop: 10, paddingTop: 18, borderTop: '1px solid var(--line-soft)' }}>
       <h3>Hyrox</h3>
 
       <div className="settings-row">

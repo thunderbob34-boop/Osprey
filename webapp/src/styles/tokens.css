@@ -1,6 +1,26 @@
 :root {
   --ink: #09090B; --panel: #101014; --line: #3F3F46;
+  /* Darker hairline divider than --line — used for dense-table/row dividers
+     where the full border color reads too heavy. Was hardcoded as #232329
+     in ~14 places before this token existed. */
+  --line-soft: #232329;
   --amber: #c8793a; --amber-bright: #d98b4a;
+  /* Amber wash for hover/today-highlight backgrounds — was hardcoded as
+     rgba(200,121,58,0.07) / rgba(200,121,58,0.1) at slightly different
+     alphas in different places. Two strengths, one source hue. */
+  --amber-veil: rgba(200, 121, 58, 0.07);
+  --amber-veil-strong: rgba(200, 121, 58, 0.1);
   --text: #FAFAFA; --text-soft: #c9cbd1; --mut: #A1A1AA;
+  /* The only red in the product — race-intensity. Was a raw hex amid an
+     otherwise token-based intensity map. */
+  --danger: #ff5f57;
+  /* Text color on filled-amber surfaces (buttons, selected chips, badges). */
+  --on-amber: #000;
+  /* Hard offset drop-shadow color — a separate concept from --on-amber even
+     though both happen to be true black today. */
+  --shadow-color: #000;
+  /* Track/background fill behind a progress bar or macro bar — distinct
+     from --line-soft, which is a hairline border, not a fill. */
+  --track: #2c2f36;
   --border-w: 2px; --tap: 44px;
 }

@@ -129,7 +129,7 @@ function WeekStrip({ weekSessions, completedIds, todayISO, isPending, isError, e
               style={{
                 padding: '12px 10px',
                 borderRight: i < 6 ? '1px solid var(--line)' : 'none',
-                background: day.isToday ? 'rgba(200,121,58,0.07)' : 'transparent',
+                background: day.isToday ? 'var(--amber-veil)' : 'transparent',
               }}
             >
               <div style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: 'var(--mut)', marginBottom: 8 }}>

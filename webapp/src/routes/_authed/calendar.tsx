@@ -17,7 +17,7 @@ import { SESSION_TYPE_LABEL, INTENSITY_LABEL } from '../../lib/format';
 
 const INTENSITY_COLOR: Record<string, string> = {
   easy: 'var(--mut)', moderate: 'var(--text-soft)', threshold: 'var(--amber)',
-  interval: 'var(--amber-bright)', race: '#ff5f57', rest: 'var(--line)',
+  interval: 'var(--amber-bright)', race: 'var(--danger)', rest: 'var(--line)',
 };
 
 function monthRange(anchor: Date): { fromISO: string; toISO: string; cells: Date[] } {
