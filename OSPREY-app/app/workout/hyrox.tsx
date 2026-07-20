@@ -12,8 +12,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Button, Card } from '@/components/ui';
 import { useAuthStore } from '@/store/authStore';
 import { hyroxStationWeights, type HyroxDivision } from '@/services/calculators/hyrox';
@@ -274,8 +273,8 @@ export default function HyroxWorkoutScreen() {
                   style={[
                     styles.overviewCheck,
                     selected && {
-                      backgroundColor: isRun ? Theme.accent : Colors.red,
-                      borderColor: isRun ? Theme.accent : Colors.red,
+                      backgroundColor: isRun ? Theme.accent : StatusPalette.danger,
+                      borderColor: isRun ? Theme.accent : StatusPalette.danger,
                     },
                   ]}
                 >
@@ -313,21 +312,21 @@ export default function HyroxWorkoutScreen() {
 
   // ── Running ───────────────────────────────────────────────────────────────
   const currentIsRun = currentSegment?.type === 'run';
-  const accentColor = sessionComplete ? Colors.green : currentIsRun ? Theme.accent : Colors.red;
+  const accentColor = sessionComplete ? StatusPalette.success : currentIsRun ? Theme.accent : StatusPalette.danger;
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={[styles.sessionBadge, { borderColor: accentColor + '55' }]}>
           <Text style={styles.sessionIcon}>💪</Text>
-          <Text style={[styles.sessionLabel, { color: Colors.red }]}>HYROX IN PROGRESS</Text>
+          <Text style={[styles.sessionLabel, { color: StatusPalette.danger }]}>HYROX IN PROGRESS</Text>
         </View>
 
         <View style={styles.progressStrip}>
           {segments.map((seg, i) => {
             const done = seg.completedAtMs != null;
             const isCurrent = i === segmentIndex && !sessionComplete;
-            const tint = seg.type === 'run' ? Theme.accent : Colors.red;
+            const tint = seg.type === 'run' ? Theme.accent : StatusPalette.danger;
             return (
               <View
                 key={`${seg.type}-${seg.index}`}
@@ -348,7 +347,7 @@ export default function HyroxWorkoutScreen() {
         </View>
 
         {sessionComplete ? (
-          <Card style={{ ...styles.segmentCard, borderColor: Colors.borderGreen }}>
+          <Card style={{ ...styles.segmentCard, borderColor: StatusPalette.success + '66' }}>
             <Text style={styles.segmentDoneIcon}>✓</Text>
             <Text style={styles.segmentDoneText}>
               {isFullRace ? 'Full race complete' : 'Workout complete'} — nice work
@@ -526,7 +525,7 @@ const styles = StyleSheet.create({
   segmentIcon: { fontSize: 40, marginTop: 4 },
   segmentLabel: { fontSize: 26, fontWeight: '900', color: Theme.text, textAlign: 'center' },
   segmentTarget: { fontSize: 15, fontWeight: '700', color: Theme.textSoft },
-  segmentDoneIcon: { fontSize: 32, color: Colors.green, fontWeight: '900' },
+  segmentDoneIcon: { fontSize: 32, color: StatusPalette.success, fontWeight: '900' },
   segmentDoneText: { fontSize: 15, fontWeight: '700', color: Theme.text, textAlign: 'center' },
   completeBtn: {
     marginTop: 10,
@@ -538,7 +537,7 @@ const styles = StyleSheet.create({
   },
   // Fill is the dynamic accentColor, but this button only renders in the
   // !sessionComplete branch, so the fill is only ever Theme.accent or
-  // Colors.red (green is unreachable here) — same dual-fill situation as
+  // StatusPalette.danger (green is unreachable here) — same dual-fill situation as
   // overviewCheckMark above, resolved the same way: Theme.ink.
   completeBtnText: {
     fontSize: 15,
@@ -570,7 +569,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 19,
     fontWeight: '700',
-    color: Colors.red,
+    color: StatusPalette.danger,
     textAlign: 'center',
     textAlignVertical: 'center',
   },

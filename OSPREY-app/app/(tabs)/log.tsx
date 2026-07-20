@@ -15,8 +15,7 @@ import {
 import Svg, { Polyline } from 'react-native-svg';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette, IntensityPalette, ChartPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import HydrationCard from '@/components/HydrationCard';
@@ -802,12 +801,11 @@ export default function LogTab() {
                         <Text style={styles.recentChipMeta}>{meal.calories ?? 0} cal</Text>
                       </TouchableOpacity>
                     ))}
-                    {/* NOT converted to <Button>: gold here is functional (distinguishes
-                        this action from the accent-colored recent-meal chips beside it),
-                        and the primitive only offers ink/accent spinner+text colors — a
-                        gold treatment isn't expressible without overriding both the fill
-                        and the label, at which point it's not really using the primitive.
-                        Left hand-rolled to preserve the gold semantics. */}
+                    {/* NOT converted to <Button>: this needs a color distinct from the
+                        accent-colored recent-meal chips beside it, and the primitive only
+                        offers ink/accent spinner+text colors. Uses ChartPalette.neutral (a
+                        cool blue-gray already in the new theme) instead of the old gold —
+                        same "this is a different kind of action" intent, new palette. */}
                     <TouchableOpacity
                       style={[styles.recentChip, styles.copyYesterdayChip]}
                       onPress={handleCopyYesterday}
@@ -817,10 +815,10 @@ export default function LogTab() {
                       accessibilityState={{ disabled: copyYesterday.isPending, busy: copyYesterday.isPending }}
                     >
                       {copyYesterday.isPending ? (
-                        <ActivityIndicator color={Colors.gold} size="small" />
+                        <ActivityIndicator color={ChartPalette.neutral} size="small" />
                       ) : (
                         <>
-                          <Text style={[styles.recentChipName, { color: Colors.gold }]}>
+                          <Text style={[styles.recentChipName, { color: ChartPalette.neutral }]}>
                             ⧉ Copy yesterday
                           </Text>
                           <Text style={styles.recentChipMeta}>all meals</Text>
@@ -1088,7 +1086,7 @@ const styles = StyleSheet.create({
   scrollContent: { padding: 24, paddingBottom: 48 },
   title: { fontSize: 28, fontWeight: '900', color: Theme.text, marginBottom: 4 },
   subtitle: { fontSize: 14, color: Theme.textMut, lineHeight: 20, marginBottom: 20 },
-  errorText: { fontSize: 13, color: Colors.red, marginBottom: 16 },
+  errorText: { fontSize: 13, color: StatusPalette.danger, marginBottom: 16 },
   nutritionCard: {
     marginBottom: 16,
     gap: 8,
@@ -1107,9 +1105,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
-  dayTypeChipRest: { backgroundColor: Colors.goldDim, borderColor: 'rgba(200,154,0,0.3)' },
+  // Rest uses IntensityPalette.rest (derived from EffortPalette.rest = Theme.textMut)
+  // instead of the old gold — this chip means the same "rest" every session-intensity
+  // chip elsewhere in the app already renders, so it should read as the same color.
+  dayTypeChipRest: { backgroundColor: IntensityPalette.rest.bg, borderColor: `${IntensityPalette.rest.fg}4D` },
   dayTypeChipText: { fontSize: 10, fontWeight: '700', color: Theme.accent, fontFamily: 'SpaceGrotesk_700Bold' },
-  dayTypeChipTextRest: { color: Colors.gold },
+  dayTypeChipTextRest: { color: IntensityPalette.rest.fg },
   macroRow: { flexDirection: 'row', alignItems: 'baseline', gap: 6 },
   macroValue: { fontSize: 20, fontWeight: '800', color: Theme.text },
   macroUnit: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
@@ -1181,8 +1182,8 @@ const styles = StyleSheet.create({
   recentChipName: { fontSize: 12, fontWeight: '700', color: Theme.accent },
   recentChipMeta: { fontSize: 10, color: Theme.textMut, fontWeight: '600' },
   copyYesterdayChip: {
-    borderColor: 'rgba(200,154,0,0.3)',
-    backgroundColor: Colors.goldDim,
+    borderColor: `${ChartPalette.neutral}4D`,
+    backgroundColor: `${ChartPalette.neutral}26`,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -1208,7 +1209,7 @@ const styles = StyleSheet.create({
   svgWrap: { width: '100%', alignItems: 'center' },
   chartDateRange: { fontSize: 9, color: Theme.textMut, textAlign: 'right', marginTop: -4, marginBottom: 4 },
   inputError: {
-    borderColor: Colors.red,
+    borderColor: StatusPalette.danger,
   },
   input: {
     backgroundColor: Theme.panel,

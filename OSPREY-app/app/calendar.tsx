@@ -10,8 +10,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { format } from 'date-fns';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette, IntensityPalette } from '@/constants/theme';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useCalendarMonth } from '@/hooks/useCalendarMonth';
 import type { CalendarDay } from '@/services/calendar';
@@ -211,7 +210,7 @@ export default function CalendarScreen() {
             >
               <Text style={styles.sheetCardIcon}>🏁</Text>
               <View style={styles.sheetCardBody}>
-                <Text style={[styles.sheetCardLabel, { color: Colors.gold }]}>RACE DAY</Text>
+                <Text style={[styles.sheetCardLabel, { color: IntensityPalette.race.fg }]}>RACE DAY</Text>
                 <Text style={styles.sheetCardTitle}>{selectedDay.raceName}</Text>
                 <Text style={styles.sheetCardDesc}>View in Race Hub →</Text>
               </View>
@@ -239,7 +238,7 @@ export default function CalendarScreen() {
             <View style={[styles.sheetCard, styles.sheetCardDone]}>
               <Text style={styles.sheetCardIcon}>✅</Text>
               <View style={styles.sheetCardBody}>
-                <Text style={[styles.sheetCardLabel, { color: Colors.green }]}>COMPLETED</Text>
+                <Text style={[styles.sheetCardLabel, { color: StatusPalette.success }]}>COMPLETED</Text>
                 <Text style={styles.sheetCardTitle}>
                   {selectedDay.completedTypes.map(formatSessionType).join(', ')}
                 </Text>
@@ -321,7 +320,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 4,
     borderRadius: 2,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: Theme.line,
     marginBottom: 4,
   },
   sheetTitle: { fontSize: 18, fontWeight: '800', color: Theme.text },
@@ -336,12 +335,15 @@ const styles = StyleSheet.create({
     padding: 14,
   },
   sheetCardDone: {
-    backgroundColor: Colors.surfaceGreen,
-    borderColor: Colors.borderGreen,
+    backgroundColor: StatusPalette.success + '0F',
+    borderColor: StatusPalette.success + '33',
   },
+  // Race intensity reads as IntensityPalette.race (max effort, red) everywhere
+  // else in the app — using the old celebratory gold here made this the one
+  // place "race" meant a different color than every session-intensity chip.
   sheetCardRace: {
-    backgroundColor: Colors.surfaceGold,
-    borderColor: Colors.borderGold,
+    backgroundColor: IntensityPalette.race.fg + '0F',
+    borderColor: IntensityPalette.race.fg + '33',
   },
   sheetCardIcon: { fontSize: 24 },
   sheetCardBody: { flex: 1, gap: 2 },
