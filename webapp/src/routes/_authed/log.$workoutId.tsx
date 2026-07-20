@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { useSets, useWorkout, useCommitSet, useDeleteSet, useUpdateWorkout } from '../../features/log/queries';
 import { useUnits } from '../../features/settings/queries';
@@ -14,6 +15,7 @@ function WorkoutEditor() {
   const commit = useCommitSet(workoutId);
   const del = useDeleteSet(workoutId);
   const patch = useUpdateWorkout(workoutId);
+  const [effortError, setEffortError] = useState<string | null>(null);
 
   if (workout.isPending || sets.isPending || units.isPending) return <p className="loading-line">Loading…</p>;
   if (workout.isError) return <ErrorPanel error={workout.error as Error} onRetry={() => void workout.refetch()} />;
@@ -42,8 +44,20 @@ function WorkoutEditor() {
               id="effort"
               inputMode="numeric"
               defaultValue={workout.data.perceived_effort ?? ''}
-              onBlur={(e) => { const n = Number(e.target.value); patch.mutate({ perceived_effort: e.target.value && n >= 1 && n <= 10 ? n : null }); }}
+              onChange={() => setEffortError(null)}
+              onBlur={(e) => {
+                const raw = e.target.value.trim();
+                if (raw === '') { patch.mutate({ perceived_effort: null }); return; }
+                const n = Number(raw);
+                if (!Number.isInteger(n) || n < 1 || n > 10) {
+                  setEffortError('Effort must be a whole number from 1 to 10.');
+                  e.target.value = workout.data.perceived_effort != null ? String(workout.data.perceived_effort) : '';
+                  return;
+                }
+                patch.mutate({ perceived_effort: n });
+              }}
             />
+            {effortError && <p className="err-line" role="alert">{effortError}</p>}
           </div>
           <div className="field span-full">
             <label htmlFor="notes">Notes</label>

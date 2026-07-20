@@ -12,8 +12,14 @@ interface Props {
   addDate?: string; // add mode — exactly one of session/addDate is set
 }
 
-function toNumOrNull(raw: string): number | null {
-  return raw.trim() === '' ? null : Number(raw);
+type FieldResult<T> = { ok: true; value: T } | { ok: false; error: string };
+
+function parseNonNegative(raw: string, label: string): FieldResult<number | null> {
+  const trimmed = raw.trim();
+  if (trimmed === '') return { ok: true, value: null };
+  const n = Number(trimmed);
+  if (!Number.isFinite(n) || n < 0) return { ok: false, error: `${label} must be a non-negative number.` };
+  return { ok: true, value: n };
 }
 
 export function SessionEditor({ userId, monthSessions, onDone, session, addDate }: Props) {
@@ -23,6 +29,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
   const [distanceKm, setDistanceKm] = useState(session?.planned_distance_km != null ? String(session.planned_distance_km) : '');
   const [description, setDescription] = useState(session?.description ?? '');
   const [moveTo, setMoveTo] = useState(session?.session_date ?? '');
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const update = useUpdateSession(userId);
   const del = useDeleteSession(userId);
@@ -39,18 +46,30 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
     );
   }
 
-  const fields = (): Omit<SessionEdits, 'session_date'> => ({
-    session_type: sessionType,
-    intensity,
-    planned_minutes: minutes.trim() === '' ? null : Math.round(Number(minutes)),
-    planned_distance_km: toNumOrNull(distanceKm),
-    description,
-  });
+  function buildFields(): FieldResult<Omit<SessionEdits, 'session_date'>> {
+    const minutesResult = parseNonNegative(minutes, 'Minutes');
+    if (!minutesResult.ok) return minutesResult;
+    const distanceResult = parseNonNegative(distanceKm, 'Distance');
+    if (!distanceResult.ok) return distanceResult;
+    return {
+      ok: true,
+      value: {
+        session_type: sessionType,
+        intensity,
+        planned_minutes: minutesResult.value != null ? Math.round(minutesResult.value) : null,
+        planned_distance_km: distanceResult.value,
+        description,
+      },
+    };
+  }
 
   async function handleSave() {
     if (!session) return;
+    const built = buildFields();
+    if (!built.ok) { setValidationError(built.error); return; }
+    setValidationError(null);
     try {
-      await update.mutateAsync({ id: session.id, current: session, edits: { ...fields(), session_date: moveTo } });
+      await update.mutateAsync({ id: session.id, current: session, edits: { ...built.value, session_date: moveTo } });
       onDone();
     } catch {
       // surfaced via update.error below
@@ -70,8 +89,11 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
 
   async function handleAdd() {
     if (weekId === null || !addDate) return;
+    const built = buildFields();
+    if (!built.ok) { setValidationError(built.error); return; }
+    setValidationError(null);
     try {
-      await create.mutateAsync({ weekId, session_date: addDate, ...fields() });
+      await create.mutateAsync({ weekId, session_date: addDate, ...built.value });
       onDone();
     } catch {
       // surfaced via create.error below
@@ -79,6 +101,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
   }
 
   const error = session ? (update.error ?? del.error) : create.error;
+  const errorMessage = validationError ?? (error ? (error as Error).message : null);
   const pending = session ? (update.isPending || del.isPending) : create.isPending;
 
   return (
@@ -99,12 +122,12 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
 
       <div className="settings-row">
         <span className="k">Minutes</span>
-        <input type="number" min="0" step="1" style={{ width: 90 }} value={minutes} onChange={(e) => setMinutes(e.target.value)} />
+        <input type="number" min="0" step="1" style={{ width: 90 }} value={minutes} onChange={(e) => { setMinutes(e.target.value); setValidationError(null); }} />
       </div>
 
       <div className="settings-row">
         <span className="k">Distance (km)</span>
-        <input type="number" min="0" step="0.1" style={{ width: 90 }} value={distanceKm} onChange={(e) => setDistanceKm(e.target.value)} />
+        <input type="number" min="0" step="0.1" style={{ width: 90 }} value={distanceKm} onChange={(e) => { setDistanceKm(e.target.value); setValidationError(null); }} />
       </div>
 
       <div className="field" style={{ marginTop: 14 }}>
@@ -126,7 +149,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
         </div>
       )}
 
-      {error && <p className="err-line" role="alert" style={{ marginTop: 12 }}>{(error as Error).message}</p>}
+      {errorMessage && <p className="err-line" role="alert" style={{ marginTop: 12 }}>{errorMessage}</p>}
 
       <div className="log-form-actions" style={{ gap: 10, marginTop: 16 }}>
         {session && (

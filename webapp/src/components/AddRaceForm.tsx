@@ -1,10 +1,20 @@
 import { useState, type FormEvent } from 'react';
 import { useCreateRaceEvent } from '../features/races/queries';
+import { toDateInputValue } from '../lib/day';
 
 interface Props {
   userId: string;
   defaultDate?: string;
   onDone: () => void;
+}
+
+function validate(eventDate: string, distanceKm: string): string | null {
+  if (eventDate && eventDate < toDateInputValue(new Date())) return "Race date can't be in the past.";
+  if (distanceKm.trim() !== '') {
+    const n = Number(distanceKm);
+    if (!Number.isFinite(n) || n < 0) return 'Distance must be a non-negative number.';
+  }
+  return null;
 }
 
 export function AddRaceForm({ userId, defaultDate, onDone }: Props) {
@@ -13,9 +23,13 @@ export function AddRaceForm({ userId, defaultDate, onDone }: Props) {
   const [eventDate, setEventDate] = useState(defaultDate ?? '');
   const [distanceKm, setDistanceKm] = useState('');
   const [raceUrl, setRaceUrl] = useState('');
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   async function submit(e: FormEvent) {
     e.preventDefault();
+    const err = validate(eventDate, distanceKm);
+    if (err) { setValidationError(err); return; }
+    setValidationError(null);
     try {
       await create.mutateAsync({
         name,
@@ -39,18 +53,20 @@ export function AddRaceForm({ userId, defaultDate, onDone }: Props) {
         </div>
         <div className="field">
           <label htmlFor="race-date">Date</label>
-          <input id="race-date" type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} required />
+          <input id="race-date" type="date" value={eventDate} onChange={(e) => { setEventDate(e.target.value); setValidationError(null); }} required />
         </div>
         <div className="field">
           <label htmlFor="race-distance">Distance (km)</label>
-          <input id="race-distance" type="number" step="0.1" min="0" value={distanceKm} onChange={(e) => setDistanceKm(e.target.value)} />
+          <input id="race-distance" type="number" step="0.1" min="0" value={distanceKm} onChange={(e) => { setDistanceKm(e.target.value); setValidationError(null); }} />
         </div>
         <div className="field span-full">
           <label htmlFor="race-url">Race URL (optional)</label>
           <input id="race-url" type="url" value={raceUrl} onChange={(e) => setRaceUrl(e.target.value)} placeholder="https://…" />
         </div>
       </div>
-      {create.isError && <p className="err-line" role="alert" style={{ marginBottom: 12 }}>{(create.error as Error).message}</p>}
+      {(validationError || create.isError) && (
+        <p className="err-line" role="alert" style={{ marginBottom: 12 }}>{validationError ?? (create.error as Error).message}</p>
+      )}
       <div className="log-form-actions">
         <button className="btn ghost" type="button" onClick={onDone} disabled={create.isPending}>Cancel</button>
         <button className="btn" type="submit" disabled={create.isPending}>{create.isPending ? 'Saving…' : 'Add race'}</button>
