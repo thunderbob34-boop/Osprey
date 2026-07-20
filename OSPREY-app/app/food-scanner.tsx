@@ -12,8 +12,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, StatusPalette } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import { lookupBarcode } from '@/services/food-lookup';
 
@@ -218,7 +217,7 @@ const styles = StyleSheet.create({
   statusBox: { marginTop: 20, alignItems: 'center', gap: 10 },
   statusText: { color: Theme.text, fontSize: 14, fontWeight: '600' },
   errorText: {
-    color: Colors.red,
+    color: StatusPalette.danger,
     fontSize: 14,
     fontWeight: '600',
     textAlign: 'center',

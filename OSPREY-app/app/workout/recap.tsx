@@ -11,8 +11,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import * as Haptics from 'expo-haptics';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, StatusPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { useAuthStore } from '@/store/authStore';
 import { fetchWorkoutRecap } from '@/services/workouts';
@@ -335,10 +334,10 @@ const styles = StyleSheet.create({
     color: Theme.text,
     fontSize: 14,
   },
-  shareErrorText: { fontSize: 12, color: Colors.red },
+  shareErrorText: { fontSize: 12, color: StatusPalette.danger },
   shareBtnText: { fontSize: 14, fontWeight: '700', color: Theme.ink },
   sharedRow: { alignItems: 'center', paddingVertical: 4 },
-  sharedText: { fontSize: 13, fontWeight: '700', color: Colors.green },
+  sharedText: { fontSize: 13, fontWeight: '700', color: StatusPalette.success },
   footer: { padding: 16, borderTopWidth: 1, borderTopColor: Theme.line },
   errorText: { color: Theme.textMut, marginBottom: 16 },
 });

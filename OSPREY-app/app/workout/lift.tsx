@@ -14,8 +14,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Button, Card } from '@/components/ui';
 import {
   useWorkoutStore,
@@ -636,7 +635,7 @@ export default function LiftWorkoutScreen() {
         <ScrollView contentContainerStyle={styles.warmupWrap}>
           <View style={styles.warmupHeaderRow}>
             <View style={styles.warmupTitleRow}>
-              <Ionicons name="flame" size={22} color={Colors.amber} />
+              <Ionicons name="flame" size={22} color={StatusPalette.warning} />
               <Text style={styles.warmupTitle}>Warm Up First</Text>
             </View>
             <TouchableOpacity
@@ -775,7 +774,7 @@ export default function LiftWorkoutScreen() {
                   {/*
                     SKIP: not converted to <Button> — this is an icon+text+spinner
                     button with a bespoke pill layout (minWidth 36, 16px radius) and
-                    a non-accent active fill (Colors.red when recording), none of
+                    a non-accent active fill (StatusPalette.danger when recording), none of
                     which the primitive's style prop can express without fighting
                     its own defaults.
                   */}
@@ -1031,7 +1030,7 @@ const styles = StyleSheet.create({
     minWidth: 36,
     alignItems: 'center',
   },
-  micBtnActive: { backgroundColor: Colors.red, borderColor: Colors.red },
+  micBtnActive: { backgroundColor: StatusPalette.danger, borderColor: StatusPalette.danger },
   micBtnText: { fontSize: 13, fontWeight: '700', color: Theme.accent },
   micBtnTextActive: { fontSize: 13, fontWeight: '700', color: '#fff' },
   removeBtn: { padding: 4 },
@@ -1103,7 +1102,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     alignItems: 'center',
   },
-  logBtnDone: { backgroundColor: Colors.green },
+  logBtnDone: { backgroundColor: StatusPalette.success },
   logBtnText: { fontSize: 13, fontWeight: '800', color: Theme.text },
   addSetBtn: { marginTop: 4, alignSelf: 'flex-start' },
   addSetText: { fontSize: 12, color: Theme.accent, fontWeight: '700' },

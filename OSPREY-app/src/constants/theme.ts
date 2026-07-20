@@ -127,3 +127,13 @@ export const ChartPalette = {
   race: '#d4c44a',
   neutral: '#7d8aa5',
 } as const;
+
+// Semantic status colours — the gap that kept ~24 files importing the old
+// src/constants/colors.ts system for nothing but Colors.red/green/amber.
+// Values match those old tokens exactly so migrating call sites is a pure
+// rename, not a visual change.
+export const StatusPalette = {
+  danger: '#ff4444',
+  success: '#4cde80',
+  warning: '#f5a623',
+} as const;

@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, StatusPalette } from '@/constants/theme';
 import type { WeatherCoachResult } from '@/services/weather-coach';
 
 interface WeatherCoachCardProps {
@@ -16,13 +15,13 @@ const SEVERITY_STYLE = {
   alert: {
     bg: 'rgba(255,68,68,0.07)',
     border: 'rgba(255,68,68,0.3)',
-    accent: Colors.red,
+    accent: StatusPalette.danger,
     icon: 'thermometer' as const,
   },
   caution: {
     bg: 'rgba(245,166,35,0.08)',
     border: 'rgba(245,166,35,0.3)',
-    accent: Colors.amber,
+    accent: StatusPalette.warning,
     icon: 'water' as const,
   },
   info: {
@@ -78,7 +77,7 @@ export default function WeatherCoachCard({
         </TouchableOpacity>
       ) : alreadyIndoors ? (
         <View style={styles.movedRow}>
-          <Ionicons name="checkmark-circle" size={14} color={Colors.green} />
+          <Ionicons name="checkmark-circle" size={14} color={StatusPalette.success} />
           <Text style={styles.movedText}>Moved indoors</Text>
         </View>
       ) : null}
@@ -147,6 +146,6 @@ const styles = StyleSheet.create({
   movedText: {
     fontSize: 12,
     fontWeight: '700',
-    color: Colors.green,
+    color: StatusPalette.success,
   },
 });

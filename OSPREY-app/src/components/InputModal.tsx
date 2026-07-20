@@ -9,8 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import FieldError from '@/components/FieldError';
 
 interface InputModalProps {
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
   // Functional validation red — no Theme token exists for it, and this
   // program keeps validation red as-is everywhere it appears (see
   // FieldError.tsx, log.tsx, food-scanner.tsx).
-  inputError: { borderColor: Colors.red },
+  inputError: { borderColor: StatusPalette.danger },
   actions: { flexDirection: 'row', gap: 10, marginTop: 4 },
   // Hand-rolled outline/secondary variant — mirrors Button's non-primary
   // styling. Cannot use <Button> here: this row needs two buttons side by

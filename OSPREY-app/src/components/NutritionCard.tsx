@@ -1,8 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
 import { Card } from '@/components/ui';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, StatusPalette } from '@/constants/theme';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatFluidOz, mlToOz } from '@/services/units';
@@ -73,7 +72,7 @@ export default function NutritionCard({
           <View style={[styles.hydrationSection, hydrationEmphasized && styles.hydrationSectionEmphasized]}>
             <View style={styles.hydrationHeaderRow}>
               <View style={styles.titleRow}>
-                <Ionicons name="water" size={14} color={hydrationMet ? Colors.green : Theme.accent} />
+                <Ionicons name="water" size={14} color={hydrationMet ? StatusPalette.success : Theme.accent} />
                 <Text style={styles.sectionLabel}>HYDRATION</Text>
               </View>
               <Text style={styles.amount}>
@@ -85,7 +84,7 @@ export default function NutritionCard({
               <View
                 style={[
                   styles.fill,
-                  { width: `${hydrationProgress * 100}%`, backgroundColor: hydrationMet ? Colors.green : Theme.accent },
+                  { width: `${hydrationProgress * 100}%`, backgroundColor: hydrationMet ? StatusPalette.success : Theme.accent },
                 ]}
               />
             </View>

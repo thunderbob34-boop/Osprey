@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, StatusPalette } from '@/constants/theme';
 import { useDisplayZones } from '@/hooks/useDisplayZones';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import type { HrZoneInfo } from '@/services/coaching/envelope';
@@ -147,7 +146,7 @@ export function ZonesCard(): JSX.Element | null {
           <View key={row.label} style={styles.row}>
             <View style={styles.rowLeft}>
               <View
-                style={[styles.dot, { backgroundColor: row.tone === 'aerobic' ? Colors.green : Colors.amber }]}
+                style={[styles.dot, { backgroundColor: row.tone === 'aerobic' ? StatusPalette.success : StatusPalette.warning }]}
               />
               <Text style={styles.rowLabel}>{row.label}</Text>
             </View>

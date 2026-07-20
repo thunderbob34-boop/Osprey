@@ -13,8 +13,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth, EffortPalette } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, EffortPalette, StatusPalette } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useAuthStore } from '@/store/authStore';
@@ -771,7 +770,7 @@ const styles = StyleSheet.create({
   intervalCompleteBtnText: { fontSize: 14, fontWeight: '800', color: Theme.ink },
   // FUNCTIONAL: green = interval completed (HR-zone "easy" convention doing
   // double duty per the plan's Design Decisions — intentional, not a bug).
-  intervalDoneIcon: { fontSize: 32, color: Colors.green, fontWeight: '900' },
+  intervalDoneIcon: { fontSize: 32, color: StatusPalette.success, fontWeight: '900' },
   intervalDoneText: { fontSize: 15, fontWeight: '700', color: Theme.text },
 
   ozzieBtn: {

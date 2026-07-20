@@ -14,8 +14,7 @@ import {
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { PRIVACY_POLICY_URL, SUPPORT_EMAIL } from '@/constants/links';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
@@ -651,7 +650,7 @@ export default function SettingsTab() {
             accessibilityState={{ disabled: deleting, busy: deleting }}
           >
             {deleting ? (
-              <ActivityIndicator color={Colors.red} />
+              <ActivityIndicator color={StatusPalette.danger} />
             ) : (
               <Text style={styles.dangerBtnText}>Delete Account</Text>
             )}
@@ -757,7 +756,7 @@ const styles = StyleSheet.create({
   dangerLabel: {
     fontSize: 10,
     fontWeight: '700',
-    color: Colors.red,
+    color: StatusPalette.danger,
     letterSpacing: 1,
     textTransform: 'uppercase',
     fontFamily: 'SpaceGrotesk_700Bold',
@@ -772,7 +771,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   dangerBtnDisabled: { opacity: 0.5 },
-  dangerBtnText: { fontSize: 14, fontWeight: '800', color: Colors.red },
+  dangerBtnText: { fontSize: 14, fontWeight: '800', color: StatusPalette.danger },
   versionText: {
     marginTop: 20,
     textAlign: 'center',

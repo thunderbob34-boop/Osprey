@@ -13,8 +13,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import DateField from '@/components/DateField';
 import FieldError from '@/components/FieldError';
@@ -1087,7 +1086,7 @@ const styles = StyleSheet.create({
   add: { color: Theme.accent, fontSize: 24, fontWeight: '700' },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
   empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginTop: 8 },
-  errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
+  errorText: { color: StatusPalette.danger, fontSize: 14, marginTop: 16 },
 
   nextCard: {
     backgroundColor: Theme.panel,
@@ -1234,7 +1233,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   inputError: {
-    borderColor: Colors.red,
+    borderColor: StatusPalette.danger,
   },
   input: {
     backgroundColor: Theme.ink,
@@ -1314,8 +1313,8 @@ const styles = StyleSheet.create({
     fontFamily: 'SpaceGrotesk_700Bold',
   },
   deltaValue: { fontSize: 18, fontWeight: '800', marginTop: 2 },
-  deltaValueGood: { color: Colors.green },
-  deltaValueMiss: { color: Colors.amber },
+  deltaValueGood: { color: StatusPalette.success },
+  deltaValueMiss: { color: StatusPalette.warning },
   deltaSubtext: { color: Theme.textMut, fontSize: 12, marginTop: 2 },
   feelRow: { flexDirection: 'row', gap: 6, flexWrap: 'wrap' },
   feelChip: {

@@ -12,8 +12,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import RunMap from '@/components/RunMap';
@@ -543,7 +542,7 @@ function IntervalGuidanceCard({
       ? paceStatusForBand(progress.stepPaceSecPerMile, band)
       : null;
   const statusColor =
-    paceStatus === 'in_band' ? Colors.green : paceStatus == null ? Colors.textMuted : Colors.amber;
+    paceStatus === 'in_band' ? StatusPalette.success : paceStatus == null ? Theme.textMut : StatusPalette.warning;
   const statusText =
     paceStatus === 'in_band'
       ? 'On target'

@@ -11,8 +11,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useActivity } from '@/hooks/useActivity';
 import { useAuthStore } from '@/store/authStore';
@@ -175,7 +174,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Theme.ink },
   scroll: { padding: 16, paddingBottom: 32, gap: 12 },
   empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginTop: 24 },
-  errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
+  errorText: { color: StatusPalette.danger, fontSize: 14, marginTop: 16 },
 
   card: {
     backgroundColor: Theme.panel,

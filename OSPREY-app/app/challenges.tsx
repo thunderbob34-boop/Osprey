@@ -13,8 +13,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import DateField from '@/components/DateField';
 import FieldError from '@/components/FieldError';
@@ -507,7 +506,7 @@ const styles = StyleSheet.create({
   add: { color: Theme.accent, fontSize: 24, fontWeight: '700' },
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
   empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginTop: 8 },
-  errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
+  errorText: { color: StatusPalette.danger, fontSize: 14, marginTop: 16 },
   sectionLabel: {
     color: Theme.accent,
     fontSize: 10,
@@ -538,7 +537,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   inputError: {
-    borderColor: Colors.red,
+    borderColor: StatusPalette.danger,
   },
   input: {
     backgroundColor: Theme.ink,
@@ -596,7 +595,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: Colors.green,
+    backgroundColor: StatusPalette.success,
     marginTop: 5,
     marginLeft: 8,
   },

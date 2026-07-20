@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Card } from '@/components/ui';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatFluidOz, mlToOz } from '@/services/units';
@@ -29,7 +28,7 @@ export default function HydrationCard({ ounces, targetOz, onAdd, emphasized }: H
     <Card emphasis={emphasized} style={styles.card}>
       <View style={styles.headerRow}>
         <View style={styles.titleRow}>
-          <Ionicons name="water" size={15} color={met ? Colors.green : Theme.accent} />
+          <Ionicons name="water" size={15} color={met ? StatusPalette.success : Theme.accent} />
           <Text style={styles.label}>HYDRATION</Text>
         </View>
         <Text style={styles.amount}>
@@ -42,7 +41,7 @@ export default function HydrationCard({ ounces, targetOz, onAdd, emphasized }: H
         <View
           style={[
             styles.fill,
-            { width: `${progress * 100}%`, backgroundColor: met ? Colors.green : Theme.accent },
+            { width: `${progress * 100}%`, backgroundColor: met ? StatusPalette.success : Theme.accent },
           ]}
         />
       </View>

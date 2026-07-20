@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, StatusPalette } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
 import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
@@ -783,7 +782,7 @@ const styles = StyleSheet.create({
   },
   replaceWarning: {
     fontSize: 12,
-    color: Colors.amber,
+    color: StatusPalette.warning,
     textAlign: 'center',
     lineHeight: 17,
     marginTop: 20,

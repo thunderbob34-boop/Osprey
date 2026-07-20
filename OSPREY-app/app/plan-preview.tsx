@@ -11,8 +11,7 @@ import {
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, EffortPalette, IntensityPalette } from '@/constants/theme';
+import { Theme, Radius, EffortPalette, IntensityPalette, StatusPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { ZonesCard } from '@/components/ZonesCard';
 import { useAuthStore } from '@/store/authStore';
@@ -735,6 +734,6 @@ const styles = StyleSheet.create({
   hydrationLine: { fontSize: 12, color: Theme.textSoft, fontWeight: '600' },
 
   // ── FUNCTIONAL — weather-severity legend, not brand. Leave untouched. ──
-  heatNote: { fontSize: 12, color: Colors.amber, fontWeight: '600', lineHeight: 17 },
-  heatNoteAlert: { color: Colors.red },
+  heatNote: { fontSize: 12, color: StatusPalette.warning, fontWeight: '600', lineHeight: 17 },
+  heatNoteAlert: { color: StatusPalette.danger },
 });

@@ -1,5 +1,5 @@
 import { Text, StyleSheet } from 'react-native';
-import { Colors } from '@/constants/colors';
+import { StatusPalette } from '@/constants/theme';
 
 /** Inline validation message rendered under a form field. */
 export default function FieldError({ message }: { message?: string | null }) {
@@ -10,7 +10,7 @@ export default function FieldError({ message }: { message?: string | null }) {
 const styles = StyleSheet.create({
   text: {
     fontSize: 12,
-    color: Colors.red,
+    color: StatusPalette.danger,
     marginTop: -6,
     marginBottom: 4,
   },

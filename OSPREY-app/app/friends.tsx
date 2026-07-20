@@ -13,8 +13,7 @@ import {
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
@@ -346,7 +345,7 @@ const styles = StyleSheet.create({
     color: Theme.text,
     fontSize: 15,
   },
-  searchError: { color: Colors.red, fontSize: 13 },
+  searchError: { color: StatusPalette.danger, fontSize: 13 },
 
   // Nested inside searchCard (now Theme.panel) — recedes to ink so it
   // doesn't read as another panel stacked on top of the card.

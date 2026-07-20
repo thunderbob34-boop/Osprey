@@ -12,8 +12,7 @@ import {
 import Svg, { Line, Path, Polyline, Rect } from 'react-native-svg';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
-import { Theme, ChartPalette, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, ChartPalette, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { useStats } from '@/hooks/useStats';
 import { useDeleteWorkoutLog } from '@/hooks/useTodayLog';
 import { usePerformance } from '@/hooks/usePerformance';
@@ -349,7 +348,7 @@ export default function StatsTab() {
                         label="FORM"
                         sublabel="TSB"
                         value={perf.tsb > 0 ? `+${perf.tsb.toFixed(1)}` : perf.tsb.toFixed(1)}
-                        color={perf.tsb >= 0 ? Colors.green : Colors.red}
+                        color={perf.tsb >= 0 ? StatusPalette.success : StatusPalette.danger}
                       />
                     </View>
 
@@ -606,7 +605,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   navChipText: { fontSize: 12, fontWeight: '700', color: Theme.accent },
-  errorText: { fontSize: 13, color: Colors.red },
+  errorText: { fontSize: 13, color: StatusPalette.danger },
   statsRow: { flexDirection: 'row', gap: 10, marginBottom: 24 },
   statBlock: {
     flex: 1,

@@ -5,8 +5,7 @@ import { useRouter } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import { usePlanAdaptation } from '@/hooks/usePlanAdaptation';
 import { pickTrackingMode } from '@/utils/trackingModePicker';
@@ -96,7 +95,7 @@ export default function WorkoutTab() {
 
   const bannerBg = alert?.severity === 'warning' ? 'rgba(245,176,65,0.15)' : Theme.panel;
 
-  const bannerBorder = alert?.severity === 'warning' ? Colors.amber : Theme.accent;
+  const bannerBorder = alert?.severity === 'warning' ? StatusPalette.warning : Theme.accent;
 
   return (
     <SafeAreaView style={styles.container}>

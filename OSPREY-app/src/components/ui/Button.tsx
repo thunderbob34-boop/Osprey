@@ -1,10 +1,10 @@
 // OSPREY-app/src/components/ui/Button.tsx
 import React, { useRef } from 'react';
 import { Animated, Pressable, StyleProp, Text, ViewStyle } from 'react-native';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 
 type ButtonProps = {
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'danger';
   onPress: () => void;
   /**
    * A string is wrapped in the themed `<Text>` below. Anything else renders
@@ -55,6 +55,8 @@ export function Button({
   }
 
   const isPrimary = variant === 'primary';
+  const isDanger = variant === 'danger';
+  const accentColor = isDanger ? StatusPalette.danger : Theme.accent;
 
   return (
     <Animated.View
@@ -73,9 +75,9 @@ export function Button({
         accessibilityState={{ disabled: !!disabled, busy: !!busy }}
         style={[
           {
-            backgroundColor: isPrimary ? Theme.accent : 'transparent',
+            backgroundColor: isPrimary ? accentColor : 'transparent',
             borderWidth: BorderWidth.card,
-            borderColor: Theme.accent,
+            borderColor: accentColor,
             borderRadius: Radius.card,
             paddingVertical: 12,
             paddingHorizontal: 18,
@@ -86,7 +88,7 @@ export function Button({
         ]}
       >
         {typeof children === 'string' ? (
-          <Text style={{ color: isPrimary ? Theme.ink : Theme.accent, fontWeight: '800', fontSize: 14 }}>
+          <Text style={{ color: isPrimary ? Theme.ink : accentColor, fontWeight: '800', fontSize: 14 }}>
             {children}
           </Text>
         ) : (

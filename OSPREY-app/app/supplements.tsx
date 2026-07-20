@@ -14,8 +14,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
@@ -298,7 +297,7 @@ const styles = StyleSheet.create({
   },
   addTitle: { color: Theme.text, fontSize: 15, fontWeight: '800' },
   inputError: {
-    borderColor: Colors.red,
+    borderColor: StatusPalette.danger,
   },
   input: {
     backgroundColor: Theme.ink,

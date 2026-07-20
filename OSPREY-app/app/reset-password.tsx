@@ -13,8 +13,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import * as Linking from 'expo-linking';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { supabase } from '@/services/supabase';
 import { useAuthStore } from '@/store/authStore';
 
@@ -184,7 +183,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: Theme.text,
   },
-  errorText: { color: Colors.red, fontSize: 13, textAlign: 'center' },
+  errorText: { color: StatusPalette.danger, fontSize: 13, textAlign: 'center' },
   submitBtn: {
     backgroundColor: Theme.accent,
     borderWidth: BorderWidth.card,

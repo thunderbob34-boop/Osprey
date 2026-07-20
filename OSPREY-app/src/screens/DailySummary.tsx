@@ -12,14 +12,17 @@ import {
   Modal,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
 import type { DailySummaryProps, TrainingReadiness } from '@/types/daily-summary';
 import NutritionCard from '@/components/NutritionCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, kmToMiles } from '@/services/units';
 import { Card, Badge, Button } from '@/components/ui';
-import { Theme, Radius, ReadinessPalette } from '@/constants/theme';
+import { Theme, Radius, ReadinessPalette, StatusPalette } from '@/constants/theme';
+
+// Deliberately darker than StatusPalette.danger — tuned for the large tank
+// fill, not a small status dot. Not in theme.ts since nothing else uses it.
+const RECOVERY_TANK_LOW = '#cc2222';
 
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
 
@@ -29,10 +32,10 @@ function BodyBatteryTank({ score, recommendation }: { score: number; recommendat
   const fillPercent = Math.max(0, Math.min(100, score));
   const isGreen = recommendation === 'train';
   const fillColor = isGreen
-    ? Colors.green
+    ? StatusPalette.success
     : recommendation === 'easy'
-    ? Colors.amber
-    : Colors.recoveryRed;
+    ? StatusPalette.warning
+    : RECOVERY_TANK_LOW;
 
   return (
     <View style={styles.batteryWrapper}>
@@ -208,10 +211,10 @@ export default function DailySummaryScreen({
                     {
                       color:
                         recovery.recommendation === 'train'
-                          ? Colors.green
+                          ? StatusPalette.success
                           : recovery.recommendation === 'easy'
-                            ? Colors.amber
-                            : Colors.recoveryRed,
+                            ? StatusPalette.warning
+                            : RECOVERY_TANK_LOW,
                     },
                   ]}
                 >
@@ -927,7 +930,7 @@ const styles = StyleSheet.create({
   },
   sheetRowLast: { borderBottomWidth: 0 },
   sheetRowText: { fontSize: 15, fontWeight: '600', color: Theme.text },
-  sheetRowTextDestructive: { color: Colors.red },
+  sheetRowTextDestructive: { color: StatusPalette.danger },
   sheetCloseBtn: {
     marginTop: 16,
     borderWidth: 1,

@@ -18,8 +18,7 @@ import { parseHyroxParams, type HyroxDivision } from '@/services/coaching/hyrox-
 import { parseStrengthParams } from '@/services/coaching/strength-params';
 import { parseCrossfitParams } from '@/services/coaching/crossfit-params';
 import { bestE1rmForLift, fetchLiftAnalytics } from '@/services/lift-analytics';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius } from '@/constants/theme';
+import { Theme, Radius, StatusPalette } from '@/constants/theme';
 
 const HEALTH = '/(onboarding)/health';
 const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
@@ -341,7 +340,7 @@ const styles = StyleSheet.create({
   input: { backgroundColor: Theme.ink, borderWidth: 1, borderColor: Theme.line, borderRadius: Radius.card, paddingHorizontal: 14, paddingVertical: 12, color: Theme.text, fontSize: 16 },
   timeInput: { flex: 1, textAlign: 'center' },
   colon: { color: Theme.textMut, fontSize: 18, fontWeight: '700' },
-  error: { fontSize: 12, color: Colors.red, marginTop: 4 },
+  error: { fontSize: 12, color: StatusPalette.danger, marginTop: 4 },
   skip: { fontSize: 13, color: Theme.textMut, textAlign: 'center', marginTop: 16, textDecorationLine: 'underline' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {

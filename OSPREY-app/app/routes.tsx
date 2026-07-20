@@ -12,8 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
@@ -275,7 +274,7 @@ const styles = StyleSheet.create({
   scroll: { padding: 20, paddingBottom: 48, gap: 10 },
   subtitle: { color: Theme.textMut, fontSize: 13, lineHeight: 19, marginBottom: 4 },
   empty: { color: Theme.textMut, fontSize: 14, lineHeight: 20, marginTop: 8 },
-  errorText: { color: Colors.red, fontSize: 14, marginTop: 16 },
+  errorText: { color: StatusPalette.danger, fontSize: 14, marginTop: 16 },
 
   formCard: {
     backgroundColor: Theme.panel,
@@ -295,7 +294,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
     marginTop: 6,
   },
-  inputError: { borderColor: Colors.red },
+  inputError: { borderColor: StatusPalette.danger },
   input: {
     backgroundColor: Theme.ink,
     borderWidth: 1,

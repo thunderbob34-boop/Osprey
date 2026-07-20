@@ -14,8 +14,7 @@ import {
 } from 'react-native';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
 import { useAuthStore } from '@/store/authStore';
 import { PRIVACY_POLICY_URL, TERMS_OF_USE_URL } from '@/constants/links';
 
@@ -306,7 +305,7 @@ const styles = StyleSheet.create({
     color: Theme.text,
   },
   errorText: {
-    color: Colors.red,
+    color: StatusPalette.danger,
     fontSize: 13,
     textAlign: 'center',
   },
