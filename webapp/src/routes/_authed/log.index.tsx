@@ -3,6 +3,7 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useCreateWorkout, useWeekSessions } from '../../features/log/queries';
 import { PageHeader } from '../../components/PageHeader';
 import { SESSION_TYPE_LABEL } from '../../lib/format';
+import { friendlyMessage } from '../../lib/errorMessage';
 
 function LogLauncher() {
   const { userId } = Route.useRouteContext();
@@ -39,7 +40,7 @@ function LogLauncher() {
             </select>
           </div>
         </div>
-        {create.isError && <p className="err-line" role="alert" style={{ marginBottom: 14 }}>{(create.error as Error).message}</p>}
+        {create.isError && <p className="err-line" role="alert" style={{ marginBottom: 14 }}>{friendlyMessage(create.error)}</p>}
         <div className="log-form-actions">
           <button className="btn" type="button" onClick={() => void start()} disabled={create.isPending}>
             {create.isPending ? 'Creating…' : 'Start logging'}

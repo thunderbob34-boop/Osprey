@@ -1,5 +1,4 @@
-import { Link, useNavigate } from '@tanstack/react-router';
-import { useQueryClient } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
 import { signOut } from '../lib/auth';
 import { useUserProfile } from '../lib/useAuthUser';
 
@@ -17,8 +16,6 @@ const links = [
 ] as const;
 
 export function NavRail() {
-  const navigate = useNavigate();
-  const qc = useQueryClient();
   const { data: profile } = useUserProfile();
 
   return (
@@ -40,10 +37,10 @@ export function NavRail() {
             {profile.email}
           </div>
         )}
-        <button
-          className="rail-signout"
-          onClick={() => { void signOut().then(() => { qc.clear(); navigate({ to: '/login' }); }); }}
-        >
+        {/* Cache clear + redirect to /login happen in _authed.tsx's onAuthStateChange
+            listener, the single place that reacts to a session ending — whether
+            from this button or from a token refresh failure elsewhere. */}
+        <button className="rail-signout" onClick={() => void signOut()}>
           Sign out
         </button>
       </div>

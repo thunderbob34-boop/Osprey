@@ -8,6 +8,7 @@ import type { FoodItem, MealType } from '../../lib/schemas';
 import { MEAL_LABEL } from '../../lib/format';
 import { useFoodSearch } from '../../features/nutrition/queries';
 import { Combobox } from '../../components/Combobox';
+import { friendlyMessage } from '../../lib/errorMessage';
 import {
   recipePerServing, recipeTotals, useAddIngredient, useLogRecipeServing,
   useRecipe, useRemoveIngredient, useUpdateIngredient, useUpdateRecipe,
@@ -135,7 +136,7 @@ function Builder() {
                 </select>
               </div>
             </div>
-            {logServing.isError && <p className="err-line" role="alert" style={{ marginTop: 10 }}>{(logServing.error as Error).message}</p>}
+            {logServing.isError && <p className="err-line" role="alert" style={{ marginTop: 10 }}>{friendlyMessage(logServing.error)}</p>}
             {logServing.isSuccess && <p className="grid-hint" style={{ marginTop: 10 }}>Logged ✓</p>}
             <button
               className="btn small" type="button" style={{ width: '100%', marginTop: 12 }} disabled={!canLog}

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
-import { WorkoutLogSchema, type WorkoutLog } from '../../lib/schemas';
+import { WorkoutLogSchema, parseListLenient, type WorkoutLog } from '../../lib/schemas';
 
 export const PAGE_SIZE = 50;
 export interface HistoryFilter { type: string | null; from: string | null; to: string | null; page: number; }
@@ -19,7 +18,7 @@ export function useHistory(userId: string, f: HistoryFilter) {
       if (f.to) q = q.lte('started_at', `${f.to}T23:59:59Z`);
       const { data, error, count } = await q;
       if (error) throw error;
-      return { rows: z.array(WorkoutLogSchema).parse(data), count: count ?? 0 };
+      return { rows: parseListLenient(WorkoutLogSchema, data ?? []), count: count ?? 0 };
     },
   });
 }

@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useCreateRaceEvent } from '../features/races/queries';
 import { toDateInputValue } from '../lib/day';
+import { friendlyMessage } from '../lib/errorMessage';
 
 interface Props {
   userId: string;
@@ -65,7 +66,7 @@ export function AddRaceForm({ userId, defaultDate, onDone }: Props) {
         </div>
       </div>
       {(validationError || create.isError) && (
-        <p className="err-line" role="alert" style={{ marginBottom: 12 }}>{validationError ?? (create.error as Error).message}</p>
+        <p className="err-line" role="alert" style={{ marginBottom: 12 }}>{validationError ?? friendlyMessage(create.error)}</p>
       )}
       <div className="log-form-actions">
         <button className="btn ghost" type="button" onClick={onDone} disabled={create.isPending}>Cancel</button>

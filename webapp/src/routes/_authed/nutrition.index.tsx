@@ -9,6 +9,7 @@ import type { FoodItem, MealType } from '../../lib/schemas';
 import { MEAL_LABEL } from '../../lib/format';
 import { MacroBar } from '../../components/MacroBar';
 import { Combobox } from '../../components/Combobox';
+import { friendlyMessage } from '../../lib/errorMessage';
 import {
   MEAL_ORDER, sumDay, useAddManualFood, useDayLog, useDeleteLogEntry,
   useFoodSearch, useLogFood, useNutritionCoaching, useNutritionTargets, type DayLogEntry,
@@ -106,7 +107,7 @@ function QuickAdd({ userId, dateStr }: { userId: string; dateStr: string }) {
           {logFood.isPending ? 'Logging…' : 'Log it'}
         </button>
       </div>
-      {logFood.isError && <p className="err-line" role="alert">{(logFood.error as Error).message}</p>}
+      {logFood.isError && <p className="err-line" role="alert">{friendlyMessage(logFood.error)}</p>}
 
       {manualOpen && (
         <div className="card" style={{ maxWidth: 640, marginBottom: 28 }}>
@@ -124,7 +125,7 @@ function QuickAdd({ userId, dateStr }: { userId: string; dateStr: string }) {
             <div className="field"><label htmlFor="m-f">Fat g</label>
               <input id="m-f" inputMode="decimal" value={manual.fat} onChange={(e) => setManual({ ...manual, fat: e.target.value })} /></div>
           </div>
-          {addManual.isError && <p className="err-line" role="alert">{(addManual.error as Error).message}</p>}
+          {addManual.isError && <p className="err-line" role="alert">{friendlyMessage(addManual.error)}</p>}
           <div className="log-form-actions">
             <button className="btn ghost" type="button" onClick={() => setManualOpen(false)} disabled={addManual.isPending}>Cancel</button>
             <button className="btn" type="button" disabled={manual.name.trim() === '' || addManual.isPending} onClick={() => void submitManual()}>
@@ -243,7 +244,7 @@ function FuelDesk() {
 
       <QuickAdd userId={userId} dateStr={dateStr} />
 
-      {del.isError && <p className="err-line" role="alert">{(del.error as Error).message}</p>}
+      {del.isError && <p className="err-line" role="alert">{friendlyMessage(del.error)}</p>}
       {dayLog.isError ? (
         <ErrorPanel error={dayLog.error as Error} onRetry={() => void dayLog.refetch()} />
       ) : (dayLog.data ?? []).length === 0 && !dayLog.isLoading ? (

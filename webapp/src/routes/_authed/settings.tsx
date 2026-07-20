@@ -5,6 +5,7 @@ import { useUserProfile } from '../../lib/useAuthUser';
 import { PageHeader } from '../../components/PageHeader';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { TrainingZonesCard } from '../../features/settings/TrainingZonesCard';
+import { friendlyMessage } from '../../lib/errorMessage';
 
 const TIER_LABEL: Record<string, string> = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' };
 
@@ -40,7 +41,7 @@ function LocationCard({ userId }: { userId: string }) {
         </div>
       </div>
       <p style={{ color: 'var(--mut)', fontSize: 12, marginTop: 10 }}>Used to find real tune-up races near you on the Calendar.</p>
-      {update.isError && <p className="err-line" role="alert" style={{ marginTop: 10 }}>{(update.error as Error).message}</p>}
+      {update.isError && <p className="err-line" role="alert" style={{ marginTop: 10 }}>{friendlyMessage(update.error)}</p>}
     </div>
   );
 }
@@ -92,7 +93,7 @@ function SettingsPage() {
               ))}
             </div>
           </div>
-          {update.isError && <p className="err-line" role="alert" style={{ marginTop: 12 }}>{(update.error as Error).message}</p>}
+          {update.isError && <p className="err-line" role="alert" style={{ marginTop: 12 }}>{friendlyMessage(update.error)}</p>}
         </div>
       )}
 

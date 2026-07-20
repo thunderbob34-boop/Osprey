@@ -1,8 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
-import { TrainingSessionSchema, RaceEventSchema } from '../../lib/schemas';
+import { TrainingSessionSchema, RaceEventSchema, parseListLenient } from '../../lib/schemas';
 import { matchTuneUpWeeks, parseGoalDistanceFromText, type TuneUpWeek } from '../../lib/tuneups';
 import type { TrainingSession } from '../../lib/schemas';
 import { sessionUpdatePayload, type SessionEdits } from '../../lib/session-edit';
@@ -15,7 +14,7 @@ export function useMonthSessions(userId: string, fromISO: string, toISO: string)
       const { data, error } = await supabase.from('training_sessions').select('*')
         .eq('user_id', userId).gte('session_date', fromISO).lte('session_date', toISO).order('session_date');
       if (error) throw error;
-      return z.array(TrainingSessionSchema).parse(data);
+      return parseListLenient(TrainingSessionSchema, data ?? []);
     },
   });
 }
@@ -44,7 +43,7 @@ export function useMonthRaceEvents(userId: string, fromISO: string, toISO: strin
         .eq('user_id', userId).is('deleted_at', null)
         .gte('event_date', fromISO).lte('event_date', toISO).order('event_date');
       if (error) throw error;
-      return z.array(RaceEventSchema).parse(data);
+      return parseListLenient(RaceEventSchema, data ?? []);
     },
   });
 }

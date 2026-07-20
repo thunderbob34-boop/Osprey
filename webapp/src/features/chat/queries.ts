@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
+import { parseListLenient } from '../../lib/schemas';
 import { titleFromFirstMessage } from './model';
 
 const ConversationSchema = z.object({
@@ -29,7 +30,7 @@ export function useConversations(userId: string) {
         .eq('user_id', userId)
         .order('updated_at', { ascending: false });
       if (error) throw error;
-      return z.array(ConversationSchema).parse(data);
+      return parseListLenient(ConversationSchema, data ?? []);
     },
   });
 }
@@ -46,7 +47,7 @@ export function useMessages(conversationId: string | null) {
         .eq('conversation_id', conversationId!)
         .order('created_at', { ascending: true });
       if (error) throw error;
-      return z.array(ChatMessageSchema).parse(data);
+      return parseListLenient(ChatMessageSchema, data ?? []);
     },
   });
 }

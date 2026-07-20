@@ -4,6 +4,7 @@ import { formatWeightKg, parseWeightInput, kgToLb, type UnitSystem } from '../..
 import type { Exercise } from '../../lib/schemas';
 import { useExerciseSearch } from '../log/queries';
 import { Combobox } from '../../components/Combobox';
+import { friendlyMessage } from '../../lib/errorMessage';
 
 interface Props {
   units: UnitSystem;
@@ -31,7 +32,7 @@ export function SetsGrid({ units, initialRows, onCommitRow, onDeleteRow }: Props
       dispatch({ type: 'markSaved', localId: row.localId, dbId });
       setErrors((e) => ({ ...e, [row.localId]: '' }));
     } catch (err) {
-      setErrors((e) => ({ ...e, [row.localId]: (err as Error).message }));
+      setErrors((e) => ({ ...e, [row.localId]: friendlyMessage(err) }));
     }
   }
 

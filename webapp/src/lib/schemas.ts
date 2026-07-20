@@ -1,5 +1,20 @@
 import { z } from 'zod';
 
+/**
+ * Validates a list row-by-row instead of z.array(schema).parse(data) — a single
+ * malformed row (a stale column, a bad migration) no longer blanks the whole
+ * list with a ZodError. Bad rows are dropped and logged, not silently kept.
+ */
+export function parseListLenient<T>(schema: z.ZodType<T>, data: unknown[]): T[] {
+  const rows: T[] = [];
+  for (const item of data) {
+    const result = schema.safeParse(item);
+    if (result.success) rows.push(result.data);
+    else console.error('Dropped invalid row from list', result.error, item);
+  }
+  return rows;
+}
+
 export const SessionTypeEnum = z.enum(['run', 'lift', 'cross', 'rest', 'race', 'swim', 'bike', 'rowing', 'hyrox']);
 export const WorkoutStatusEnum = z.enum(['planned', 'completed', 'skipped', 'partial']);
 export const IntensityEnum = z.enum(['easy', 'moderate', 'threshold', 'interval', 'race', 'rest']);

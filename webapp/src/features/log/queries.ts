@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
-import { ExerciseSchema, ExerciseSetSchema, TrainingSessionSchema, WorkoutLogSchema, type WorkoutLog } from '../../lib/schemas';
+import { ExerciseSchema, ExerciseSetSchema, TrainingSessionSchema, WorkoutLogSchema, parseListLenient, type WorkoutLog } from '../../lib/schemas';
 import { toDateInputValue } from '../../lib/day';
 
 export function useCreateWorkout(userId: string) {
@@ -41,7 +41,7 @@ export function useSets(workoutId: string) {
       const { data, error } = await supabase.from('exercise_sets')
         .select('*, exercises(name)').eq('workout_id', workoutId).order('created_at', { ascending: true });
       if (error) throw error;
-      return z.array(SetWithExercise).parse(data);
+      return parseListLenient(SetWithExercise, data ?? []);
     },
   });
 }
@@ -105,7 +105,7 @@ export function useExerciseSearch(term: string) {
     queryFn: async () => {
       const { data, error } = await supabase.from('exercises').select('*').ilike('name', `%${term.trim()}%`).order('name').limit(10);
       if (error) throw error;
-      return z.array(ExerciseSchema).parse(data);
+      return parseListLenient(ExerciseSchema, data ?? []);
     },
   });
 }
@@ -122,7 +122,7 @@ export function useWeekSessions(userId: string) {
       const { data, error } = await supabase.from('training_sessions').select('*')
         .eq('user_id', userId).gte('session_date', iso(monday)).lte('session_date', iso(sunday)).order('session_date');
       if (error) throw error;
-      return z.array(TrainingSessionSchema).parse(data);
+      return parseListLenient(TrainingSessionSchema, data ?? []);
     },
   });
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useCreateSession, useDeleteSession, useUpdateSession } from './queries';
 import { sameWeekDates, weekIdForDate, type SessionEdits } from '../../lib/session-edit';
 import { SESSION_TYPE_LABEL, INTENSITY_LABEL, formatDateShort } from '../../lib/format';
+import { friendlyMessage } from '../../lib/errorMessage';
 import type { TrainingSession } from '../../lib/schemas';
 
 interface Props {
@@ -101,7 +102,7 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
   }
 
   const error = session ? (update.error ?? del.error) : create.error;
-  const errorMessage = validationError ?? (error ? (error as Error).message : null);
+  const errorMessage = validationError ?? (error ? friendlyMessage(error) : null);
   const pending = session ? (update.isPending || del.isPending) : create.isPending;
 
   return (

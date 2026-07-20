@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
-import { FoodItemSchema, FoodLogEntrySchema, NutritionTargetsSchema, type FoodItem, type MealType, type NutritionTargets } from '../../lib/schemas';
+import { FoodItemSchema, FoodLogEntrySchema, NutritionTargetsSchema, parseListLenient, type FoodItem, type MealType, type NutritionTargets } from '../../lib/schemas';
 import { localDayRange, loggedAtFor } from '../../lib/day';
 import { macrosFor, round1, type Macros, type Per100g } from '../../lib/macros';
 
@@ -25,7 +25,7 @@ export function useDayLog(userId: string, dateStr: string) {
         .lt('logged_at', end)
         .order('logged_at');
       if (error) throw error;
-      return z.array(DayLogEntrySchema).parse(data);
+      return parseListLenient(DayLogEntrySchema, data ?? []);
     },
   });
 }
@@ -94,7 +94,7 @@ export function useFoodSearch(term: string) {
         .order('name')
         .limit(15);
       if (error) throw error;
-      return z.array(FoodItemSchema).parse(data);
+      return parseListLenient(FoodItemSchema, data ?? []);
     },
   });
 }

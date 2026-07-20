@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
-import { FoodItemSchema, RecipeIngredientSchema, RecipeSchema, type MealType, type Recipe } from '../../lib/schemas';
+import { FoodItemSchema, RecipeIngredientSchema, RecipeSchema, parseListLenient, type MealType, type Recipe } from '../../lib/schemas';
 import { perServing, scale, sumIngredientMacros, type Macros } from '../../lib/macros';
 import { loggedAtFor } from '../../lib/day';
 
@@ -34,7 +34,7 @@ export function useRecipes(userId: string) {
     queryFn: async (): Promise<RecipeWithIngredients[]> => {
       const { data, error } = await supabase.from('user_recipes').select(RECIPE_SELECT).eq('user_id', userId).order('name');
       if (error) throw error;
-      return z.array(RecipeWithIngredientsSchema).parse(data);
+      return parseListLenient(RecipeWithIngredientsSchema, data ?? []);
     },
   });
 }
