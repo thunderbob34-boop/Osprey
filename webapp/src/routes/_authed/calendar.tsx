@@ -13,7 +13,7 @@ import { ErrorPanel } from '../../components/ErrorPanel';
 import { PageHeader } from '../../components/PageHeader';
 import { AddRaceForm } from '../../components/AddRaceForm';
 import { SessionEditor } from '../../features/calendar/SessionEditor';
-import { SESSION_TYPE_LABEL, INTENSITY_LABEL } from '../../lib/format';
+import { SESSION_TYPE_LABEL, INTENSITY_LABEL, formatRaceDistance } from '../../lib/format';
 
 const INTENSITY_COLOR: Record<string, string> = {
   easy: 'var(--mut)', moderate: 'var(--text-soft)', threshold: 'var(--amber)',
@@ -169,7 +169,7 @@ function CalendarPage() {
               <div className="name">{nextRace.data.name}</div>
               <div className="meta">
                 {new Date(`${nextRace.data.event_date}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                {nextRace.data.distance_km ? ` · ${nextRace.data.distance_km}km` : ''}
+                {formatRaceDistance(nextRace.data.distance_km) ? ` · ${formatRaceDistance(nextRace.data.distance_km)}` : ''}
                 {nextRace.data.goal_time_s ? ` · Goal ${formatRaceTimeSec(nextRace.data.goal_time_s)}` : ''}
               </div>
             </div>
@@ -262,7 +262,7 @@ function CalendarPage() {
               <div className="tag">{selected.data.event_date}</div>
               <h3>{selected.data.name}</h3>
               <p>
-                {selected.data.distance_km ? `${selected.data.distance_km}km` : 'Distance TBD'}
+                {formatRaceDistance(selected.data.distance_km) ?? 'Distance TBD'}
                 {selected.data.goal_time_s ? ` · Goal ${formatRaceTimeSec(selected.data.goal_time_s)}` : ''}
                 {selected.data.result_time_s ? ` · Result ${formatRaceTimeSec(selected.data.result_time_s)}` : ''}
               </p>

@@ -12,7 +12,7 @@ import type { TrainingSession } from '../../lib/schemas';
 import { PageHeader } from '../../components/PageHeader';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { Badge } from '../../components/Badge';
-import { SESSION_TYPE_LABEL, INTENSITY_LABEL, formatMinutes, formatDistanceKm } from '../../lib/format';
+import { SESSION_TYPE_LABEL, INTENSITY_LABEL, formatMinutes, formatDistanceKm, formatRaceDistance } from '../../lib/format';
 
 function daysUntil(dateISO: string): number {
   const today = new Date(); today.setHours(0, 0, 0, 0);
@@ -211,7 +211,7 @@ function NextRaceCard({ userId }: { userId: string }) {
           <div className="name">{nextRace.data.name}</div>
           <div className="meta">
             {new Date(`${nextRace.data.event_date}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-            {nextRace.data.distance_km ? ` · ${nextRace.data.distance_km}km` : ''}
+            {formatRaceDistance(nextRace.data.distance_km) ? ` · ${formatRaceDistance(nextRace.data.distance_km)}` : ''}
             {nextRace.data.goal_time_s ? ` · Goal ${formatRaceTimeSec(nextRace.data.goal_time_s)}` : ''}
           </div>
         </div>

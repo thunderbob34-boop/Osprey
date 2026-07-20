@@ -1,4 +1,5 @@
 import type { UnitSystem } from './units';
+import { LADDER } from './tuneups';
 
 export const SESSION_TYPE_LABEL: Record<string, string> = {
   run: 'Run', lift: 'Lift', cross: 'Cross-train', rest: 'Rest', race: 'Race',
@@ -28,6 +29,18 @@ export function formatSeconds(s: number | null): string | null {
 export function formatDistanceKm(km: number | null, units: UnitSystem): string | null {
   if (km == null) return null;
   return units === 'imperial' ? `${(km * 0.621371).toFixed(1)} mi` : `${km.toFixed(1)} km`;
+}
+
+const RACE_DISTANCE_LABEL: Record<string, string> = {
+  '5K': '5K', '10K': '10K', Half: 'Half Marathon', Marathon: 'Marathon',
+};
+
+const DISTANCE_MATCH_TOLERANCE_KM = 0.15;
+
+export function formatRaceDistance(km: number | null): string | null {
+  if (km == null) return null;
+  const match = LADDER.find((rung) => Math.abs(rung.km - km) < DISTANCE_MATCH_TOLERANCE_KM);
+  return match ? RACE_DISTANCE_LABEL[match.label] : `${km.toFixed(1)}km`;
 }
 
 export function formatWeekday(dateStr: string): string {
