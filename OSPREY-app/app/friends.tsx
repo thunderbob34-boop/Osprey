@@ -19,6 +19,7 @@ import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
 import { useFriends } from '@/hooks/useFriends';
 import { normalizePhoneNumber, searchUserByEmailOrPhone, type FriendSearchResult } from '@/services/friends';
+import { friendlyError } from '@/utils/errorMessage';
 
 function timeAgo(isoStr: string): string {
   const posted = new Date(isoStr);
@@ -62,7 +63,7 @@ export default function FriendsScreen() {
         setResult(found);
       }
     } catch (err) {
-      setSearchError(err instanceof Error ? err.message : 'Search failed. Try again.');
+      setSearchError(friendlyError(err, 'Search failed. Try again.'));
     } finally {
       setSearching(false);
     }
@@ -95,19 +96,19 @@ export default function FriendsScreen() {
     if (!result) return;
     sendRequest.mutate(result.userId, {
       onSuccess: () => setResult({ ...result, friendshipStatus: 'pending' }),
-      onError: (err) => Alert.alert('Request failed', err instanceof Error ? err.message : 'Try again.'),
+      onError: (err) => Alert.alert('Request failed', friendlyError(err, 'Try again.')),
     });
   }
 
   function handleAccept(friendshipId: string) {
     acceptRequest.mutate(friendshipId, {
-      onError: (err) => Alert.alert('Error', err instanceof Error ? err.message : 'Try again.'),
+      onError: (err) => Alert.alert('Error', friendlyError(err, 'Try again.')),
     });
   }
 
   function handleDecline(friendshipId: string) {
     removeFriendship.mutate(friendshipId, {
-      onError: (err) => Alert.alert('Error', err instanceof Error ? err.message : 'Try again.'),
+      onError: (err) => Alert.alert('Error', friendlyError(err, 'Try again.')),
     });
   }
 
@@ -119,7 +120,7 @@ export default function FriendsScreen() {
         style: 'destructive',
         onPress: () => {
           removeFriend.mutate(friendUserId, {
-            onError: (err) => Alert.alert('Error', err instanceof Error ? err.message : 'Try again.'),
+            onError: (err) => Alert.alert('Error', friendlyError(err, 'Try again.')),
           });
         },
       },

@@ -28,6 +28,7 @@ import {
   type SupplementReminder,
 } from '@/services/supplements';
 import { requestNotificationPermission } from '@/services/notifications';
+import { friendlyError } from '@/utils/errorMessage';
 
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
 const MINUTES = [0, 15, 30, 45];
@@ -58,7 +59,7 @@ export default function SupplementsScreen() {
     try {
       setReminders(await fetchSupplementReminders(userId));
     } catch (err) {
-      Alert.alert('Reminders', err instanceof Error ? err.message : 'Could not load reminders.');
+      Alert.alert('Reminders', friendlyError(err, 'Could not load reminders.'));
     } finally {
       setLoading(false);
     }
@@ -95,7 +96,7 @@ export default function SupplementsScreen() {
       await load();
       await reconcileSupplementReminders(userId);
     } catch (err) {
-      Alert.alert('Reminders', err instanceof Error ? err.message : 'Could not save reminder.');
+      Alert.alert('Reminders', friendlyError(err, 'Could not save reminder.'));
     } finally {
       setSaving(false);
     }
@@ -110,7 +111,7 @@ export default function SupplementsScreen() {
       );
       await reconcileSupplementReminders(userId);
     } catch (err) {
-      Alert.alert('Reminders', err instanceof Error ? err.message : 'Could not update.');
+      Alert.alert('Reminders', friendlyError(err, 'Could not update.'));
     }
   }
 
@@ -132,7 +133,7 @@ export default function SupplementsScreen() {
       setReminders((prev) => prev.filter((r) => r.id !== reminder.id));
       await reconcileSupplementReminders(userId);
     } catch (err) {
-      Alert.alert('Reminders', err instanceof Error ? err.message : 'Could not delete.');
+      Alert.alert('Reminders', friendlyError(err, 'Could not delete.'));
     }
   }
 

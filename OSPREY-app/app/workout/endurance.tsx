@@ -38,6 +38,7 @@ import {
   requestHealthKitAuthorization,
 } from '@/services/healthkit';
 import type { IntervalEffort, IntervalPrescription } from '@/types/workout';
+import { friendlyError } from '@/utils/errorMessage';
 
 type DistanceUnit = 'meters' | 'yards' | 'km' | 'miles';
 
@@ -386,7 +387,7 @@ export default function EnduranceWorkoutScreen() {
       if (isGpsTracking) resetGpsWorkout();
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
       setSaving(false);
     }
   }

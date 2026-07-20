@@ -23,6 +23,7 @@ import {
 } from '@/services/subscriptions';
 import { useSubscription } from '@/hooks/useSubscription';
 import { PRIVACY_POLICY_URL, TERMS_OF_USE_URL } from '@/constants/links';
+import { friendlyError } from '@/utils/errorMessage';
 
 function packageLabel(pkg: PurchasesPackage): string {
   switch (pkg.packageType) {
@@ -143,7 +144,7 @@ export default function PaywallScreen() {
       }
     } catch (err: unknown) {
       if (err && typeof err === 'object' && 'userCancelled' in err) return;
-      Alert.alert('Purchase failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Purchase failed', friendlyError(err, 'Try again.'));
     } finally {
       setPurchasing(false);
     }

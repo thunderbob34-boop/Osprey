@@ -7,6 +7,7 @@ import { useAuthStore } from '@/store/authStore';
 import { completeOnboarding, generateInitialPlan } from '@/services/onboarding';
 import { isHealthKitSupported, requestHealthKitAuthorization } from '@/services/healthkit';
 import { Theme, Radius } from '@/constants/theme';
+import { friendlyError } from '@/utils/errorMessage';
 
 export default function HealthScreen() {
   const router = useRouter();
@@ -45,7 +46,7 @@ export default function HealthScreen() {
     } catch (err) {
       Alert.alert(
         'Setup failed',
-        err instanceof Error ? err.message : 'Could not save your profile. Try again.',
+        friendlyError(err, 'Could not save your profile. Try again.'),
       );
     } finally {
       setLoading(false);

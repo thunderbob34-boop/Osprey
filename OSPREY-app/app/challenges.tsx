@@ -32,6 +32,7 @@ import {
   formatChallengeValue,
   type ChallengeType,
 } from '@/services/challenges';
+import { friendlyError } from '@/utils/errorMessage';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -192,7 +193,7 @@ export default function ChallengesScreen() {
       });
       resetForm();
     } catch (err) {
-      Alert.alert('Create failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Create failed', friendlyError(err, 'Try again.'));
     }
   }
 

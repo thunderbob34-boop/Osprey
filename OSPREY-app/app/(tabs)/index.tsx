@@ -17,6 +17,7 @@ import { useAuthStore } from '@/store/authStore';
 import { reconcileEveningBrief } from '@/services/evening-brief';
 import type { SessionData } from '@/types/daily-summary';
 import type { SwappableSessionType } from '@/services/plan';
+import { friendlyError } from '@/utils/errorMessage';
 
 export default function HomeTab() {
   const router = useRouter();
@@ -80,7 +81,7 @@ export default function HomeTab() {
       { sessionId, newType },
       {
         onError: (err) => {
-          Alert.alert('Swap failed', err instanceof Error ? err.message : 'Try again.');
+          Alert.alert('Swap failed', friendlyError(err, 'Try again.'));
         },
       },
     );
@@ -93,7 +94,7 @@ export default function HomeTab() {
       { sessionId, availableMinutes },
       {
         onError: (err) => {
-          Alert.alert('Compress failed', err instanceof Error ? err.message : 'Try again.');
+          Alert.alert('Compress failed', friendlyError(err, 'Try again.'));
         },
       },
     );
@@ -101,7 +102,7 @@ export default function HomeTab() {
 
   function handleAcceptDeload() {
     acceptDeload()?.catch((err) => {
-      Alert.alert('De-load failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('De-load failed', friendlyError(err, 'Try again.'));
     });
   }
 
@@ -110,7 +111,7 @@ export default function HomeTab() {
     if (!sessionId) return;
     moveIndoors.mutate(sessionId, {
       onError: (err) => {
-        Alert.alert('Could not move session', err instanceof Error ? err.message : 'Try again.');
+        Alert.alert('Could not move session', friendlyError(err, 'Try again.'));
       },
     });
   }
@@ -122,7 +123,7 @@ export default function HomeTab() {
     <DailySummaryScreen
       isLoading={isLoading}
       isRefreshing={isRefetching}
-      error={error?.message ?? null}
+      error={error ? friendlyError(error, "Couldn't load your daily summary.") : null}
       onRetry={() => refetch()}
       onRefresh={() => refetch()}
       onStartSession={handleStartSession}

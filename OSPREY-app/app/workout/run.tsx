@@ -52,6 +52,7 @@ import {
   type CoachingState,
 } from '@/services/coaching-engine';
 import { useSubscription } from '@/hooks/useSubscription';
+import { friendlyError } from '@/utils/errorMessage';
 
 export default function RunWorkoutScreen() {
   const router = useRouter();
@@ -280,7 +281,7 @@ export default function RunWorkoutScreen() {
       reset();
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
       setSaving(false);
     }
   }

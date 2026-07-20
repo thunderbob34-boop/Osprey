@@ -24,6 +24,7 @@ import {
   deriveHyroxSplits,
   type HyroxSegment,
 } from '@/types/hyrox';
+import { friendlyError } from '@/utils/errorMessage';
 
 const DIVISIONS: { id: HyroxDivision; label: string }[] = [
   { id: 'open_men', label: 'Open Men' },
@@ -157,7 +158,7 @@ export default function HyroxWorkoutScreen() {
       });
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
       setSaving(false);
     }
   }

@@ -5,6 +5,7 @@ import { makeRedirectUri } from 'expo-auth-session';
 import { supabase } from '@/services/supabase';
 import { clearOfflineCache } from '@/services/offline-cache';
 import { resetRevenueCat } from '@/services/subscriptions';
+import { friendlyError } from '@/utils/errorMessage';
 
 // WebBrowser is optional — only available in native builds
 let WebBrowser: any = null;
@@ -216,7 +217,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       if ((err as { code?: string })?.code === 'ERR_REQUEST_CANCELED') {
         return { error: null };
       }
-      return { error: err instanceof Error ? err.message : 'Apple sign-in failed.' };
+      return { error: friendlyError(err, 'Apple sign-in failed.') };
     } finally {
       set({ loading: false });
     }
@@ -262,7 +263,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       await get().fetchProfile();
       return { error: null };
     } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Google sign-in failed.' };
+      return { error: friendlyError(err, 'Google sign-in failed.') };
     } finally {
       set({ loading: false });
     }
@@ -311,7 +312,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       });
       return { error: null };
     } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Could not delete account.' };
+      return { error: friendlyError(err, 'Could not delete account.') };
     } finally {
       set({ loading: false });
     }

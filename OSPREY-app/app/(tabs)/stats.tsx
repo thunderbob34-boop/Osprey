@@ -23,6 +23,7 @@ import { kgToLb } from '@/services/body-metrics';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, milesToKm, type UnitSystem } from '@/services/units';
 import type { SportType } from '@/types/stats';
+import { friendlyError } from '@/utils/errorMessage';
 
 const SESSION_ICON: Record<string, string> = {
   run:    '🏃',
@@ -209,7 +210,7 @@ export default function StatsTab() {
         onPress: () =>
           deleteWorkoutLog.mutate(id, {
             onError: (err) =>
-              Alert.alert('Delete failed', err instanceof Error ? err.message : 'Try again.'),
+              Alert.alert('Delete failed', friendlyError(err, 'Try again.')),
           }),
       },
     ]);

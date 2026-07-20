@@ -39,6 +39,7 @@ import { generateWarmup, type WarmupDrill } from '@/services/warmup';
 import { LIFT_TEMPLATES, getWorkedMuscleGroups, type LiftTemplate } from '@/services/lift-templates';
 import MuscleDiagram from '@/components/MuscleDiagram';
 import type { LiftExercise } from '@/types/workout';
+import { friendlyError } from '@/utils/errorMessage';
 
 export default function LiftWorkoutScreen() {
   const router = useRouter();
@@ -384,7 +385,7 @@ export default function LiftWorkoutScreen() {
       }
       setRecordingExercise(exerciseIndex);
     } catch (err) {
-      Alert.alert('Could not start recording', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Could not start recording', friendlyError(err, 'Try again.'));
     }
   }
 
@@ -406,7 +407,7 @@ export default function LiftWorkoutScreen() {
       if (reps != null) fields.reps = String(reps);
       updateSetFields(exerciseIndex, targetIndex, fields);
     } catch (err) {
-      Alert.alert('Voice log failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Voice log failed', friendlyError(err, 'Try again.'));
     } finally {
       setParsingVoice(false);
     }
@@ -432,7 +433,7 @@ export default function LiftWorkoutScreen() {
       reset();
       router.replace({ pathname: '/workout/recap', params: { workoutId } });
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
       setSaving(false);
     }
   }

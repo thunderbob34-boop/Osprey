@@ -31,6 +31,7 @@ import {
   type ChecklistItem,
   type RaceEvent,
 } from '@/services/races';
+import { friendlyError } from '@/utils/errorMessage';
 
 const DISTANCE_PRESETS: { label: string; km: number }[] = [
   { label: '5K', km: 5 },
@@ -619,7 +620,7 @@ export default function RacesScreen() {
       });
       resetForm();
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
     }
   }
 
@@ -633,7 +634,7 @@ export default function RacesScreen() {
           : 'No active training plan to link yet — generate one from the home screen first.',
       );
     } catch (err) {
-      Alert.alert('Link failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Link failed', friendlyError(err, 'Try again.'));
     }
   }
 
@@ -653,7 +654,7 @@ export default function RacesScreen() {
     try {
       await recordResult.mutateAsync({ raceId: race.id, resultTimeS: seconds });
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
     }
   }
 
@@ -677,7 +678,7 @@ export default function RacesScreen() {
       });
       setLogisticsRaceId(null);
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
     }
   }
 
@@ -685,7 +686,7 @@ export default function RacesScreen() {
     try {
       await generateBriefing.mutateAsync(race);
     } catch (err) {
-      Alert.alert('Generate failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Generate failed', friendlyError(err, 'Try again.'));
     }
   }
 
@@ -702,7 +703,7 @@ export default function RacesScreen() {
       });
       setRetroRaceId(null);
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
     }
   }
 
@@ -710,7 +711,7 @@ export default function RacesScreen() {
     try {
       await generateRetro.mutateAsync({ race, feelScore });
     } catch (err) {
-      Alert.alert('Generate failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Generate failed', friendlyError(err, 'Try again.'));
     }
   }
 

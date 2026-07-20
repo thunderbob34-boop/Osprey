@@ -23,6 +23,7 @@ import { extractFunctionErrorMessage } from '@/services/supabase';
 import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { createRaceEvent } from '@/services/races';
 import { useAuthStore } from '@/store/authStore';
+import { friendlyError } from '@/utils/errorMessage';
 
 /** Best-effort conversion of a race distance label ("5K", "Half Marathon") to km. */
 function distanceLabelToKm(label: string): number | null {
@@ -173,7 +174,7 @@ export default function RaceEventScreen() {
         params: { sessions: JSON.stringify(sessions) },
       });
     } catch (err) {
-      Alert.alert('Error', err instanceof Error ? err.message : 'Failed to generate plan. Try again.');
+      Alert.alert('Error', friendlyError(err, 'Failed to generate plan. Try again.'));
     } finally {
       setGenerating(false);
     }
@@ -249,7 +250,7 @@ export default function RaceEventScreen() {
         },
       ]);
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
     } finally {
       setSavingRace(false);
     }

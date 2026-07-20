@@ -29,6 +29,7 @@ import type {
   TriathlonDistance,
 } from '@/types/preferences';
 import type { PrimaryGoal } from '@/types/onboarding';
+import { friendlyError } from '@/utils/errorMessage';
 
 interface GoalOption {
   value: TrainingGoal;
@@ -328,7 +329,7 @@ export default function PreferencesScreen() {
         params: { sessions: JSON.stringify(sessions) },
       });
     } catch (err) {
-      Alert.alert('Error', err instanceof Error ? err.message : 'Something went wrong.');
+      Alert.alert('Error', friendlyError(err, 'Something went wrong.'));
     } finally {
       setLoading(false);
     }

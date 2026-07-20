@@ -22,6 +22,7 @@ import { formatWeightKg } from '@/services/units';
 import { lbToKg } from '@/services/body-metrics';
 import { HYROX_STATIONS } from '@/types/hyrox';
 import { shareWorkout } from '@/services/activity';
+import { friendlyError } from '@/utils/errorMessage';
 
 export default function WorkoutRecapScreen() {
   const router = useRouter();
@@ -49,7 +50,7 @@ export default function WorkoutRecapScreen() {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
       setShared(true);
     } catch (err) {
-      setShareError(err instanceof Error ? err.message : 'Could not share. Try again.');
+      setShareError(friendlyError(err, 'Could not share. Try again.'));
     } finally {
       setSharing(false);
     }

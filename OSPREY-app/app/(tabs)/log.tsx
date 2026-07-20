@@ -29,6 +29,7 @@ import { useWeightLog } from '@/hooks/useWeightLog';
 import { kgToLb, lbToKg } from '@/services/body-metrics';
 import { formatWeightKg, kmToMiles, milesToKm } from '@/services/units';
 import { estimateMealFromPhoto } from '@/services/meal-photo';
+import { friendlyError } from '@/utils/errorMessage';
 
 const WORKOUT_TYPES: { value: QuickWorkoutType; label: string }[] = [
   { value: 'run', label: 'Run' },
@@ -99,11 +100,7 @@ function WeightChart({ points, width }: { points: number[]; width: number }) {
 }
 
 function getErrorMessage(err: unknown): string {
-  if (err instanceof Error) return err.message;
-  if (typeof err === 'object' && err && 'message' in err) {
-    return String((err as { message: unknown }).message);
-  }
-  return 'Try again.';
+  return friendlyError(err, 'Try again.');
 }
 
 export default function LogTab() {

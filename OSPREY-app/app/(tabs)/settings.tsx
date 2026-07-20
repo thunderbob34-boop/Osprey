@@ -44,6 +44,7 @@ import {
   enableCalendarBlocking,
   isCalendarBlockingEnabled,
 } from '@/services/calendar-blocking';
+import { friendlyError } from '@/utils/errorMessage';
 
 const HEALTH_CONNECTED_KEY = 'osprey:health-connected';
 const HEALTH_LAST_SYNCED_KEY = 'osprey:health-last-synced';
@@ -140,7 +141,7 @@ export default function SettingsTab() {
       }
       setCalBlockEnabled(true);
     } catch (err) {
-      Alert.alert('Calendar', err instanceof Error ? err.message : 'Something went wrong.');
+      Alert.alert('Calendar', friendlyError(err, 'Something went wrong.'));
     } finally {
       setCalBlockLoading(false);
     }
@@ -158,7 +159,7 @@ export default function SettingsTab() {
       }
       setSuppRemindersEnabled(next);
     } catch (err) {
-      Alert.alert('Notifications', err instanceof Error ? err.message : 'Something went wrong.');
+      Alert.alert('Notifications', friendlyError(err, 'Something went wrong.'));
     } finally {
       setSuppRemindersLoading(false);
     }
@@ -176,7 +177,7 @@ export default function SettingsTab() {
       }
       setRaceWeekEnabled(next);
     } catch (err) {
-      Alert.alert('Notifications', err instanceof Error ? err.message : 'Something went wrong.');
+      Alert.alert('Notifications', friendlyError(err, 'Something went wrong.'));
     } finally {
       setRaceWeekLoading(false);
     }
@@ -194,7 +195,7 @@ export default function SettingsTab() {
       }
       setEveningBriefEnabledState(next);
     } catch (err) {
-      Alert.alert('Notifications', err instanceof Error ? err.message : 'Something went wrong.');
+      Alert.alert('Notifications', friendlyError(err, 'Something went wrong.'));
     } finally {
       setEveningBriefLoading(false);
     }
@@ -220,7 +221,7 @@ export default function SettingsTab() {
       setNudgeHour(hour);
       setNudgeEnabled(true);
     } catch (err) {
-      Alert.alert('Notifications', err instanceof Error ? err.message : 'Something went wrong.');
+      Alert.alert('Notifications', friendlyError(err, 'Something went wrong.'));
     } finally {
       setNudgeLoading(false);
     }
@@ -256,7 +257,7 @@ export default function SettingsTab() {
       setHealthLastSynced(now);
       Alert.alert('Apple Health', `Connected — ${parts.join(' ')}`);
     } catch (err) {
-      Alert.alert('Apple Health', err instanceof Error ? err.message : 'Something went wrong.');
+      Alert.alert('Apple Health', friendlyError(err, 'Something went wrong.'));
     } finally {
       setHealthSyncing(false);
     }
@@ -269,7 +270,7 @@ export default function SettingsTab() {
       setPlusActive(restored);
       Alert.alert('Restore', restored ? 'Purchases restored.' : 'No active subscription found.');
     } catch (err) {
-      Alert.alert('Restore failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Restore failed', friendlyError(err, 'Try again.'));
     } finally {
       setLoading(false);
     }
@@ -289,7 +290,7 @@ export default function SettingsTab() {
       const { email } = await requestDataExport();
       Alert.alert('Export sent', `Check ${email} in a few minutes for your data.`);
     } catch (err) {
-      Alert.alert('Export failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Export failed', friendlyError(err, 'Try again.'));
     } finally {
       setExporting(false);
     }

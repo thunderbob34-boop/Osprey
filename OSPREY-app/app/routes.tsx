@@ -20,6 +20,7 @@ import { useSavedRoutes } from '@/hooks/useSavedRoutes';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, kmToMiles, milesToKm } from '@/services/units';
 import { SUGGESTED_ROUTE_TAGS, type SavedRoute } from '@/types/routes';
+import { friendlyError } from '@/utils/errorMessage';
 
 export default function RoutesScreen() {
   const { data: routes, isLoading, error, addRoute, removeRoute } = useSavedRoutes();
@@ -77,7 +78,7 @@ export default function RoutesScreen() {
       });
       resetForm();
     } catch (err) {
-      Alert.alert('Save failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Save failed', friendlyError(err, 'Try again.'));
     }
   }
 

@@ -17,6 +17,7 @@ import { useActivity } from '@/hooks/useActivity';
 import { useAuthStore } from '@/store/authStore';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm } from '@/services/units';
+import { friendlyError } from '@/utils/errorMessage';
 
 function formatWorkoutType(type: string): string {
   switch (type) {
@@ -61,7 +62,7 @@ export default function ActivityScreen() {
     try {
       await kudo.mutateAsync(card.shareId);
     } catch (err) {
-      Alert.alert('Kudo failed', err instanceof Error ? err.message : 'Try again.');
+      Alert.alert('Kudo failed', friendlyError(err, 'Try again.'));
     } finally {
       setKudoingId(null);
     }
