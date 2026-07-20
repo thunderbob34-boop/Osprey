@@ -9,6 +9,7 @@ import type { TrainingSession, RaceEvent } from '../../lib/schemas';
 import { buildRacePredictor, formatRaceTimeSec } from '../../lib/predictions';
 import { buildRunSignupSearchUrl } from '../../lib/racesearch';
 import { computeRacePhase } from '../../lib/race-phase';
+import { raceRunwayLabel } from '../../lib/race-runway';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { PageHeader } from '../../components/PageHeader';
 import { AddRaceForm } from '../../components/AddRaceForm';
@@ -172,6 +173,9 @@ function CalendarPage() {
                 {formatRaceDistance(nextRace.data.distance_km) ? ` · ${formatRaceDistance(nextRace.data.distance_km)}` : ''}
                 {nextRace.data.goal_time_s ? ` · Goal ${formatRaceTimeSec(nextRace.data.goal_time_s)}` : ''}
               </div>
+              {!phaseInfo && (
+                <p className="runway">{raceRunwayLabel(Math.round(daysUntil(nextRace.data.event_date) / 7))}</p>
+              )}
             </div>
           )}
 

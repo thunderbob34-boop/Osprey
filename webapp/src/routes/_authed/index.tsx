@@ -8,6 +8,7 @@ import { sameWeekDates } from '../../lib/session-edit';
 import { toDateInputValue } from '../../lib/day';
 import { buildRacePredictor, formatRaceTimeSec } from '../../lib/predictions';
 import { computeRacePhase } from '../../lib/race-phase';
+import { raceRunwayLabel } from '../../lib/race-runway';
 import type { TrainingSession } from '../../lib/schemas';
 import { PageHeader } from '../../components/PageHeader';
 import { ErrorPanel } from '../../components/ErrorPanel';
@@ -202,11 +203,14 @@ function NextRaceCard({ userId }: { userId: string }) {
     ? predictor.predictions.find((p) => p.label === 'Marathon') ?? null
     : null;
 
+  const daysToRace = nextRace.data ? daysUntil(nextRace.data.event_date) : null;
+  const weeksToRace = daysToRace != null ? Math.round(daysToRace / 7) : null;
+
   return (
     <>
       {nextRace.data && (
         <div className="race-countdown">
-          <div className="days">T–{Math.max(0, daysUntil(nextRace.data.event_date))}</div>
+          <div className="days">T–{Math.max(0, daysToRace ?? 0)}</div>
           <div className="lab">Days to race</div>
           <div className="name">{nextRace.data.name}</div>
           <div className="meta">
@@ -214,6 +218,7 @@ function NextRaceCard({ userId }: { userId: string }) {
             {formatRaceDistance(nextRace.data.distance_km) ? ` · ${formatRaceDistance(nextRace.data.distance_km)}` : ''}
             {nextRace.data.goal_time_s ? ` · Goal ${formatRaceTimeSec(nextRace.data.goal_time_s)}` : ''}
           </div>
+          {!phase && weeksToRace != null && <p className="runway">{raceRunwayLabel(weeksToRace)}</p>}
         </div>
       )}
 
