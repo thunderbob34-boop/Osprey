@@ -150,6 +150,7 @@ export default function LogTab() {
   const [foodResults, setFoodResults] = useState<FoodItemResult[]>([]);
   const [searching, setSearching] = useState(false);
   const searchDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchRequestId = useRef(0);
   const [analyzingPhoto, setAnalyzingPhoto] = useState(false);
   const [photoConfidenceNote, setPhotoConfidenceNote] = useState<string | null>(null);
 
@@ -224,15 +225,22 @@ export default function LogTab() {
       return;
     }
 
+    // Clearing the timer above only cancels a pending (not-yet-fired) search
+    // — it doesn't cancel a fetch that's already in flight from an earlier
+    // debounce firing. Without this guard, a fast typist can have two
+    // searches racing (e.g. "chick" then "chicken breast"), and whichever
+    // network response lands last wins even if it's for the stale query.
+    const requestId = ++searchRequestId.current;
     searchDebounce.current = setTimeout(async () => {
       setSearching(true);
       try {
         const results = await searchFoodByName(text);
+        if (requestId !== searchRequestId.current) return;
         setFoodResults(results);
       } catch {
-        setFoodResults([]);
+        if (requestId === searchRequestId.current) setFoodResults([]);
       } finally {
-        setSearching(false);
+        if (requestId === searchRequestId.current) setSearching(false);
       }
     }, 300);
   }

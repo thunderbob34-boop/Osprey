@@ -16,7 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Button } from '@/components/ui';
-import { parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
+import { fetchRaceDistances, parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
 
 const DISTANCE_FILTERS = ['All', '5K', '10K', 'Half', 'Full'] as const;
 type DistanceFilter = (typeof DISTANCE_FILTERS)[number];
@@ -31,7 +31,11 @@ function formatDate(dateStr: string): string {
 function matchesFilter(result: RaceSearchResult, filter: DistanceFilter): boolean {
   if (filter === 'All') return true;
   if (filter === 'Full') return result.distances.some((d) => d === 'Marathon');
-  if (filter === 'Half') return result.distances.some((d) => d === 'Half');
+  // race-search.ts's parseDistances normalizes to the canonical 'Half
+  // Marathon' string, not 'Half' — comparing against 'Half' directly never
+  // matched anything, silently emptying every result when this filter chip
+  // was selected.
+  if (filter === 'Half') return result.distances.some((d) => d === 'Half Marathon');
   return result.distances.includes(filter);
 }
 
@@ -84,8 +88,14 @@ export default function RaceSearchScreen() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Guards against out-of-order responses: a fast typist can fire a second
+  // search before the first one's fetch resolves, and without this the
+  // slower, now-stale request can resolve after the newer one and clobber
+  // `results` with results for a query the user has already changed.
+  const searchIdRef = useRef(0);
 
   const runSearch = useCallback(async (q: string) => {
+    const requestId = ++searchIdRef.current;
     setLoading(true);
     setError(null);
     try {
@@ -96,14 +106,25 @@ export default function RaceSearchScreen() {
         query: q || undefined,
         startDateMin: todayStr,
       });
+      if (requestId !== searchIdRef.current) return;
       if (data.length === 0 && !q) {
         setError(null);
       }
-      setResults(data);
+
+      // The race list endpoint never returns per-race distances (see
+      // fetchRaceDistances' docstring in race-search.ts) — every result
+      // starts with distances: [], which silently emptied all non-"All"
+      // filter chips and left distance badges permanently blank. Backfill
+      // per race from the detail endpoint before showing results.
+      const withDistances = await Promise.all(
+        data.map(async (race) => ({ ...race, distances: await fetchRaceDistances(race.raceId) })),
+      );
+      if (requestId !== searchIdRef.current) return;
+      setResults(withDistances);
     } catch {
-      setError("Couldn't load races. Check your connection.");
+      if (requestId === searchIdRef.current) setError("Couldn't load races. Check your connection.");
     } finally {
-      setLoading(false);
+      if (requestId === searchIdRef.current) setLoading(false);
     }
   }, []);
 

@@ -36,7 +36,7 @@ const CARDS: Card[] = [
   {
     icon: 'dumbbell',
     title: 'Lift',
-    desc: 'Log sets, rest timer, Ozzie encouragement',
+    desc: 'Log sets, rest timer, PR tracking',
     route: '/workout/lift',
   },
   {
@@ -112,10 +112,10 @@ export default function WorkoutTab() {
               <Button
                 variant="secondary"
                 onPress={() => router.push('/preferences')}
-                accessibilityLabel="Recalibrate plan"
+                accessibilityLabel="Regenerate plan"
                 style={styles.bannerButton}
               >
-                Recalibrate →
+                Regenerate Plan →
               </Button>
               <TouchableOpacity
                 onPress={dismissAlert}

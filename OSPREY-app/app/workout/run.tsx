@@ -10,6 +10,7 @@ import {
   Linking,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
@@ -26,6 +27,7 @@ import {
   isResumableWorkout,
 } from '@/store/workoutStore';
 import { useAuthStore } from '@/store/authStore';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { fetchIntervalPrescription, saveRunWorkout } from '@/services/workouts';
 import { expandIntervalSteps, type IntervalStep } from '@/services/intervals';
 import {
@@ -56,6 +58,7 @@ import { friendlyError } from '@/utils/errorMessage';
 
 export default function RunWorkoutScreen() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const params = useLocalSearchParams<{ sessionId?: string; origin?: string }>();
   const userId = useAuthStore((s) => s.user?.id);
 
@@ -127,14 +130,22 @@ export default function RunWorkoutScreen() {
     const next = intervalSteps[stepIndex + 1];
     if (next) {
       setStepIndex(stepIndex + 1);
-      ozzieSpeak(runCueForStep(next, paceBands), 'workout').catch(() => undefined);
+      const cue = runCueForStep(next, paceBands);
+      if (OZZIE_VOICE_ENABLED) {
+        ozzieSpeak(cue, 'workout').catch(() => undefined);
+      } else {
+        showCueBanner(cue);
+      }
     } else {
       setIntervalsDone(true);
-      ozzieSpeak('Intervals complete. Great work — cruise it home easy.', 'workout').catch(
-        () => undefined,
-      );
+      const doneCue = 'Intervals complete. Great work — cruise it home easy.';
+      if (OZZIE_VOICE_ENABLED) {
+        ozzieSpeak(doneCue, 'workout').catch(() => undefined);
+      } else {
+        showCueBanner(doneCue);
+      }
     }
-  }, [elapsed, distanceMeters, intervalSteps, stepIndex, intervalsDone, status, paceBands]);
+  }, [elapsed, distanceMeters, intervalSteps, stepIndex, intervalsDone, status, paceBands, showCueBanner]);
 
   useEffect(() => {
     return () => {
@@ -174,7 +185,12 @@ export default function RunWorkoutScreen() {
     startWorkout('run', params.sessionId ?? null);
     if (intervalSteps?.[0]) {
       stepStartRef.current = { elapsedS: 0, distanceM: 0 };
-      ozzieSpeak(runCueForStep(intervalSteps[0], paceBands), 'workout').catch(() => undefined);
+      const cue = runCueForStep(intervalSteps[0], paceBands);
+      if (OZZIE_VOICE_ENABLED) {
+        ozzieSpeak(cue, 'workout').catch(() => undefined);
+      } else {
+        showCueBanner(cue);
+      }
     }
   }
 
@@ -225,10 +241,17 @@ export default function RunWorkoutScreen() {
         showCueBanner(cue.text);
       }
     }
-  }, [elapsed, isPlus, status, distanceMeters, heartRate, startedAt, pausedAt, accumulatedPauseMs, intervalSteps, paceBands]);
+  }, [elapsed, isPlus, status, distanceMeters, heartRate, startedAt, pausedAt, accumulatedPauseMs, intervalSteps, paceBands, showCueBanner]);
 
   const miles = metersToMiles(distanceMeters);
-  const pace = miles > 0 ? formatPace(elapsed / miles) : '--:--';
+  // Distance/pace STAT DISPLAY only — the coaching-cue distance drift check
+  // above (checkCues) intentionally keeps using raw `miles`, since pace
+  // bands and cue text are mile-based internally regardless of what the
+  // athlete sees on screen.
+  const { units } = useUnitPreference();
+  const displayDistance = units === 'metric' ? distanceMeters / 1000 : miles;
+  const distanceUnitLabel = units === 'metric' ? 'km' : 'mi';
+  const pace = displayDistance > 0 ? formatPace(elapsed / displayDistance) : '--:--';
   const coordinates = trackPoints.map((p) => ({ latitude: p.lat, longitude: p.lon }));
   const region =
     coordinates.length > 0
@@ -283,6 +306,13 @@ export default function RunWorkoutScreen() {
         heartRate,
       });
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+      // Home/Stats/Calendar all cache off these keys — without invalidating
+      // them, a completed workout doesn't show up anywhere until an
+      // unrelated refetch happens to fire.
+      queryClient.invalidateQueries({ queryKey: ['daily-summary', userId] });
+      queryClient.invalidateQueries({ queryKey: ['stats', userId] });
+      queryClient.invalidateQueries({ queryKey: ['calendar-month', userId] });
+      queryClient.invalidateQueries({ queryKey: ['performance', userId] });
       reset();
       router.replace({ pathname: '/workout/recap', params: { workoutId, origin: params.origin } });
     } catch (err) {
@@ -394,8 +424,8 @@ export default function RunWorkoutScreen() {
       </View>
 
       <View style={styles.statsRow}>
-        <StatBlock label="DISTANCE" value={`${miles.toFixed(2)} mi`} />
-        <StatBlock label="PACE" value={pace} accent />
+        <StatBlock label="DISTANCE" value={`${displayDistance.toFixed(2)} ${distanceUnitLabel}`} />
+        <StatBlock label="PACE" value={pace === '--:--' ? pace : `${pace} /${distanceUnitLabel}`} accent />
         <StatBlock label="TIME" value={formatDuration(elapsed)} />
         <StatBlock label="HR" value={heartRate ? `${heartRate}` : '--'} />
       </View>
@@ -427,7 +457,7 @@ export default function RunWorkoutScreen() {
       ) : null}
 
       {status === 'paused' ? (
-        <View style={styles.pausedBanner}>
+        <View style={styles.pausedBanner} accessibilityRole="alert" accessibilityLiveRegion="polite">
           <Text style={styles.pausedText}>
             Paused — Ozzie says take a breath, then resume when ready.
           </Text>
@@ -435,7 +465,7 @@ export default function RunWorkoutScreen() {
       ) : null}
 
       {!OZZIE_VOICE_ENABLED && cueBannerText ? (
-        <View style={styles.cueBanner}>
+        <View style={styles.cueBanner} accessibilityRole="alert" accessibilityLiveRegion="polite">
           <OzzieAvatar size={18} />
           <Text style={styles.cueBannerText}>{cueBannerText}</Text>
         </View>

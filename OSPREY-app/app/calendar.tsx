@@ -39,7 +39,7 @@ export default function CalendarScreen() {
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth());
 
-  const { data: days, isLoading } = useCalendarMonth(year, month);
+  const { data: days, isLoading, error } = useCalendarMonth(year, month);
 
   const dayMap = useMemo(() => {
     const map = new Map<string, CalendarDay>();
@@ -130,6 +130,8 @@ export default function CalendarScreen() {
 
       {isLoading ? (
         <ActivityIndicator color={Theme.accent} style={{ marginTop: 24 }} />
+      ) : error ? (
+        <Text style={styles.errorText}>Couldn&apos;t load calendar. Try again.</Text>
       ) : (
         <View style={styles.grid}>
           {cells.map((cell, i) => {
@@ -262,6 +264,7 @@ export default function CalendarScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Theme.ink },
+  errorText: { color: StatusPalette.danger, fontSize: 14, marginTop: 16, textAlign: 'center' },
   monthNav: {
     flexDirection: 'row',
     alignItems: 'center',

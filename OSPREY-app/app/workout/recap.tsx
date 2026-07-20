@@ -103,17 +103,22 @@ export default function WorkoutRecapScreen() {
   // of an empty "MILE SPLITS" list.
   const showSplits = isRun && data.splits.length > 0;
   const showSessionSummary = isEndurance || (isRun && !showSplits);
-  const distanceMiles =
+  // Ignored `units` here and always converted to miles, even though `units`
+  // is already in scope (and already threaded into the recap query above).
+  const displayDistance =
     data.workout.totalDistanceKm != null
-      ? Math.round(data.workout.totalDistanceKm * 0.621371 * 10) / 10
+      ? units === 'metric'
+        ? Math.round(data.workout.totalDistanceKm * 10) / 10
+        : Math.round(data.workout.totalDistanceKm * 0.621371 * 10) / 10
       : null;
+  const distanceUnitLabel = units === 'metric' ? 'km' : 'mi';
 
   const SESSION_LABELS: Record<string, { title: string; stat: string }> = {
-    run:    { title: 'Run Recap',    stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
+    run:    { title: 'Run Recap',    stat: displayDistance != null ? `${displayDistance} ${distanceUnitLabel}` : '' },
     lift:   { title: 'Lift Recap',   stat: '' },
     swim:   { title: 'Swim Recap',   stat: '' },
     bike:   { title: 'Bike Recap',   stat: '' },
-    rowing: { title: 'Rowing Recap', stat: distanceMiles != null ? `${distanceMiles} mi` : '' },
+    rowing: { title: 'Rowing Recap', stat: displayDistance != null ? `${displayDistance} ${distanceUnitLabel}` : '' },
     hyrox:  { title: 'Hyrox Recap',  stat: '' },
     cross:  { title: 'Cross Training Recap', stat: '' },
   };

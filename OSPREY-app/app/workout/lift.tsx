@@ -12,6 +12,7 @@ import {
   Modal,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Theme, Radius, BorderWidth, StatusPalette } from '@/constants/theme';
@@ -43,6 +44,7 @@ import { friendlyError } from '@/utils/errorMessage';
 
 export default function LiftWorkoutScreen() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const params = useLocalSearchParams<{ sessionId?: string; origin?: string }>();
   const userId = useAuthStore((s) => s.user?.id);
 
@@ -430,6 +432,13 @@ export default function LiftWorkoutScreen() {
         exercises: liftExercises,
       });
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+      // Home/Stats/Calendar/Lift-analytics all cache off these keys —
+      // without invalidating them, a completed workout doesn't show up
+      // anywhere until an unrelated refetch happens to fire.
+      queryClient.invalidateQueries({ queryKey: ['daily-summary', userId] });
+      queryClient.invalidateQueries({ queryKey: ['stats', userId] });
+      queryClient.invalidateQueries({ queryKey: ['calendar-month', userId] });
+      queryClient.invalidateQueries({ queryKey: ['lift-analytics', userId] });
       reset();
       router.replace({ pathname: '/workout/recap', params: { workoutId, origin: params.origin } });
     } catch (err) {

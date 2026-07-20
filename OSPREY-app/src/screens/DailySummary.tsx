@@ -24,6 +24,21 @@ import { Theme, Radius, ReadinessPalette, StatusPalette } from '@/constants/them
 // fill, not a small status dot. Not in theme.ts since nothing else uses it.
 const RECOVERY_TANK_LOW = '#cc2222';
 
+// The "Adjust Session" sheet's SWAP TO list — filtered against
+// session.sessionType at render time so the athlete's current session type
+// never shows up as a selectable (no-op) swap target.
+const SWAP_OPTIONS: {
+  type: 'run' | 'lift' | 'cross' | 'rest';
+  text: string;
+  label: string;
+  destructive?: boolean;
+}[] = [
+  { type: 'run', text: '🏃 Run', label: 'Swap to Run' },
+  { type: 'lift', text: '🏋️ Lift', label: 'Swap to Lift' },
+  { type: 'cross', text: '🔁 Cross Training', label: 'Swap to Cross Training' },
+  { type: 'rest', text: '😴 Make it a Rest Day', label: 'Make it a rest day', destructive: true },
+];
+
 export type { RecoveryData, SessionData, QuickStats } from '@/types/daily-summary';
 
 // ─── Body Battery Tank ────────────────────────────────────────────────────────
@@ -430,40 +445,19 @@ export default function DailySummaryScreen({
             <>
               <Text style={styles.sheetSectionLabel}>SWAP TO</Text>
               <View style={styles.sheetRowGroup}>
-                <TouchableOpacity
-                  style={styles.sheetRow}
-                  onPress={() => handleSwap('run')}
-                  accessibilityRole="button"
-                  accessibilityLabel="Swap to Run"
-                >
-                  <Text style={styles.sheetRowText}>🏃 Run</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.sheetRow}
-                  onPress={() => handleSwap('lift')}
-                  accessibilityRole="button"
-                  accessibilityLabel="Swap to Lift"
-                >
-                  <Text style={styles.sheetRowText}>🏋️ Lift</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.sheetRow}
-                  onPress={() => handleSwap('cross')}
-                  accessibilityRole="button"
-                  accessibilityLabel="Swap to Cross Training"
-                >
-                  <Text style={styles.sheetRowText}>🔁 Cross Training</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[styles.sheetRow, styles.sheetRowLast]}
-                  onPress={() => handleSwap('rest')}
-                  accessibilityRole="button"
-                  accessibilityLabel="Make it a rest day"
-                >
-                  <Text style={[styles.sheetRowText, styles.sheetRowTextDestructive]}>
-                    😴 Make it a Rest Day
-                  </Text>
-                </TouchableOpacity>
+                {SWAP_OPTIONS.filter((opt) => opt.type !== session.sessionType).map((opt, i, visible) => (
+                  <TouchableOpacity
+                    key={opt.type}
+                    style={[styles.sheetRow, i === visible.length - 1 && styles.sheetRowLast]}
+                    onPress={() => handleSwap(opt.type)}
+                    accessibilityRole="button"
+                    accessibilityLabel={opt.label}
+                  >
+                    <Text style={[styles.sheetRowText, opt.destructive && styles.sheetRowTextDestructive]}>
+                      {opt.text}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
               </View>
             </>
           ) : null}

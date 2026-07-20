@@ -28,6 +28,12 @@ try {
   // Module not available — continue without it
 }
 
+// Google is disabled in Supabase Auth pending a Google Cloud OAuth client
+// (see docs/TODO.md's Auth-providers checklist) — showing the button anyway
+// means every tap fails with an auth error. Flip this once the provider is
+// enabled in the Supabase dashboard.
+const GOOGLE_SIGN_IN_ENABLED = false;
+
 type Mode = 'signin' | 'signup';
 
 export default function SignInScreen() {
@@ -234,17 +240,19 @@ export default function SignInScreen() {
             />
           ) : null}
 
-          <TouchableOpacity
-            style={styles.googleBtn}
-            onPress={handleGoogle}
-            disabled={loading}
-            accessibilityRole="button"
-            accessibilityLabel="Continue with Google"
-            accessibilityState={{ disabled: loading, busy: loading }}
-          >
-            <Ionicons name="logo-google" size={18} color="#4285F4" />
-            <Text style={styles.googleBtnText}>Continue with Google</Text>
-          </TouchableOpacity>
+          {GOOGLE_SIGN_IN_ENABLED ? (
+            <TouchableOpacity
+              style={styles.googleBtn}
+              onPress={handleGoogle}
+              disabled={loading}
+              accessibilityRole="button"
+              accessibilityLabel="Continue with Google"
+              accessibilityState={{ disabled: loading, busy: loading }}
+            >
+              <Ionicons name="logo-google" size={18} color="#4285F4" />
+              <Text style={styles.googleBtnText}>Continue with Google</Text>
+            </TouchableOpacity>
+          ) : null}
 
           {mode === 'signup' ? (
             <Text style={styles.legalText}>

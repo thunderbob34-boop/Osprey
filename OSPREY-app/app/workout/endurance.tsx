@@ -11,6 +11,7 @@ import {
   View,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Theme, Radius, BorderWidth, EffortPalette, StatusPalette } from '@/constants/theme';
@@ -103,6 +104,7 @@ function formatMMSS(totalSeconds: number): string {
 
 export default function EnduranceWorkoutScreen() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { sessionType, sessionId, mode, origin } = useLocalSearchParams<{
     sessionType: EnduranceType;
     sessionId?: string;
@@ -163,7 +165,11 @@ export default function EnduranceWorkoutScreen() {
   const [sessionStarted, setSessionStarted] = useState(type !== 'cross');
   const [wodScore, setWodScore] = useState('');
   const [floorsClimbed, setFloorsClimbed] = useState('');
-  const lastAutoCueMs = useRef(0);
+  // Init to mount time, not 0 (epoch) — starting at epoch made
+  // `nowMs - lastAutoCueMs.current` astronomically larger than
+  // AUTO_CUE_INTERVAL_MS on the very first tick, firing the first
+  // auto-cue almost instantly instead of after a real 10-minute wait.
+  const lastAutoCueMs = useRef(Date.now());
   const speakingRef = useRef(false);
 
   // Most Cross Training activities (CrossFit, yoga, HIIT, mobility) are
@@ -242,8 +248,13 @@ export default function EnduranceWorkoutScreen() {
     cuedStepRef.current = stepIndex;
     stepEndAtRef.current = currentStep.durationS != null ? Date.now() + currentStep.durationS * 1000 : null;
     setStepRemainingS(currentStep.durationS);
-    ozzieSpeak(ozzieCueForStep(currentStep), 'workout').catch(() => undefined);
-  }, [currentStep, stepIndex]);
+    const cue = ozzieCueForStep(currentStep);
+    if (OZZIE_VOICE_ENABLED) {
+      ozzieSpeak(cue, 'workout').catch(() => undefined);
+    } else {
+      showCueBanner(cue);
+    }
+  }, [currentStep, stepIndex, showCueBanner]);
 
   function advanceStep() {
     if (completedRef.current) return;
@@ -255,9 +266,12 @@ export default function EnduranceWorkoutScreen() {
       setIntervalsComplete(true);
       setStepRemainingS(null);
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
-      ozzieSpeak("That's the full set — nice work. Wrap up and save when you're ready.", 'workout').catch(
-        () => undefined,
-      );
+      const doneCue = "That's the full set — nice work. Wrap up and save when you're ready.";
+      if (OZZIE_VOICE_ENABLED) {
+        ozzieSpeak(doneCue, 'workout').catch(() => undefined);
+      } else {
+        showCueBanner(doneCue);
+      }
       // Auto-fill total distance if every segment was distance-based.
       const p = prescriptionRef.current;
       if (p) {
@@ -314,7 +328,7 @@ export default function EnduranceWorkoutScreen() {
         showCueBanner(cues[idx]);
       }
     }
-  }, [elapsed, isPlus, type, hasIntervals]);
+  }, [elapsed, isPlus, type, hasIntervals, showCueBanner]);
 
   async function handleManualCue() {
     const cues = ENCOURAGEMENTS[type];
@@ -385,6 +399,13 @@ export default function EnduranceWorkoutScreen() {
         trackPoints: isGpsTracking ? gpsTrackPoints : [],
       });
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+      // Home/Stats/Calendar/Performance all cache off these keys — without
+      // invalidating them, a completed workout doesn't show up anywhere
+      // until an unrelated refetch happens to fire.
+      queryClient.invalidateQueries({ queryKey: ['daily-summary', userId] });
+      queryClient.invalidateQueries({ queryKey: ['stats', userId] });
+      queryClient.invalidateQueries({ queryKey: ['calendar-month', userId] });
+      queryClient.invalidateQueries({ queryKey: ['performance', userId] });
       if (isGpsTracking) resetGpsWorkout();
       router.replace({ pathname: '/workout/recap', params: { workoutId, origin } });
     } catch (err) {
@@ -561,7 +582,11 @@ export default function EnduranceWorkoutScreen() {
         ) : null}
 
         {!OZZIE_VOICE_ENABLED && cueBannerText ? (
-          <View style={styles.cueBanner}>
+          <View
+            style={styles.cueBanner}
+            accessibilityRole="alert"
+            accessibilityLiveRegion="polite"
+          >
             <OzzieAvatar size={18} />
             <Text style={styles.cueBannerText}>{cueBannerText}</Text>
           </View>
