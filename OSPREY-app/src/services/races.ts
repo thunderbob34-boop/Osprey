@@ -79,17 +79,21 @@ function daysUntil(dateStr: string): number {
 export function goalPacePerMile(goalTimeS: number | null, distanceKm: number | null): string | null {
   if (!goalTimeS || !distanceKm || distanceKm <= 0) return null;
   const miles = distanceKm / KM_PER_MILE;
-  const secPerMile = goalTimeS / miles;
+  // Round the whole pace first — rounding `sec` after the %60 split can push
+  // it to exactly 60 (e.g. 5:59.6/mi rounds sec to 60, displaying "5:60").
+  const secPerMile = Math.round(goalTimeS / miles);
   const min = Math.floor(secPerMile / 60);
-  const sec = Math.round(secPerMile % 60);
+  const sec = secPerMile % 60;
   return `${min}:${String(sec).padStart(2, '0')}`;
 }
 
 export function formatRaceTime(totalSeconds: number | null): string | null {
   if (totalSeconds == null) return null;
-  const h = Math.floor(totalSeconds / 3600);
-  const m = Math.floor((totalSeconds % 3600) / 60);
-  const s = Math.round(totalSeconds % 60);
+  // Round the whole total first, same :60-rollover reasoning as above.
+  const rounded = Math.round(totalSeconds);
+  const h = Math.floor(rounded / 3600);
+  const m = Math.floor((rounded % 3600) / 60);
+  const s = rounded % 60;
   if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   return `${m}:${String(s).padStart(2, '0')}`;
 }
@@ -99,7 +103,7 @@ export function parseRaceTime(text: string): number | null {
   const trimmed = text.trim();
   if (!trimmed) return null;
   const parts = trimmed.split(':').map((p) => Number(p));
-  if (parts.some((n) => Number.isNaN(n))) return null;
+  if (parts.some((n) => Number.isNaN(n) || n < 0)) return null;
   if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
   if (parts.length === 2) return parts[0] * 60 + parts[1];
   if (parts.length === 1) return parts[0] * 60; // bare number = minutes

@@ -58,10 +58,40 @@ async function ensureCacheDir() {
   }
 }
 
+/** Cheap non-crypto hash so two texts sharing the same 60-char prefix (a
+ * common shape for Ozzie's templated cues, e.g. "One mile down. 7:32 pace.")
+ * don't collide onto the same cache file and play the wrong audio. */
+function simpleHash(text: string): string {
+  let hash = 0;
+  for (let i = 0; i < text.length; i++) {
+    hash = (hash * 31 + text.charCodeAt(i)) | 0;
+  }
+  return Math.abs(hash).toString(36);
+}
+
 function cacheKey(text: string, profile: AudioProfile): string {
-  // Simple hash: profile + first 60 chars of text, sanitized for filename
   const sanitized = text.slice(0, 60).replace(/[^a-zA-Z0-9]/g, '_');
-  return `${CACHE_DIR}${profile}_${sanitized}.mp3`;
+  return `${CACHE_DIR}${profile}_${sanitized}_${simpleHash(text)}.mp3`;
+}
+
+/** Pure-JS Uint8Array → base64 — React Native/Hermes has no global `Buffer`
+ * (unlike Node), so `Buffer.from(...)` throws ReferenceError at runtime. */
+const BASE64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+function uint8ArrayToBase64(bytes: Uint8Array): string {
+  let result = '';
+  for (let i = 0; i < bytes.length; i += 3) {
+    const b0 = bytes[i];
+    const b1 = i + 1 < bytes.length ? bytes[i + 1] : undefined;
+    const b2 = i + 2 < bytes.length ? bytes[i + 2] : undefined;
+    const triplet = (b0 << 16) | ((b1 ?? 0) << 8) | (b2 ?? 0);
+
+    result += BASE64_CHARS[(triplet >> 18) & 0x3f];
+    result += BASE64_CHARS[(triplet >> 12) & 0x3f];
+    result += b1 !== undefined ? BASE64_CHARS[(triplet >> 6) & 0x3f] : '=';
+    result += b2 !== undefined ? BASE64_CHARS[triplet & 0x3f] : '=';
+  }
+  return result;
 }
 
 async function getCachedAudio(path: string): Promise<string | null> {
@@ -127,11 +157,7 @@ export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient'
     await ensureCacheDir();
 
     // Stop any currently playing audio
-    if (currentSound) {
-      await currentSound.stopAsync();
-      await currentSound.unloadAsync();
-      currentSound = null;
-    }
+    await stopCurrentSound();
 
     // Check cache first
     const cachePath = cacheKey(text, profile);
@@ -142,7 +168,7 @@ export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient'
       const audioData = await fetchTTS(text, profile);
       await FileSystem.writeAsStringAsync(
         cachePath,
-        Buffer.from(audioData).toString('base64'),
+        uint8ArrayToBase64(audioData),
         { encoding: FileSystem.EncodingType.Base64 }
       );
       audioPath = cachePath;
@@ -173,14 +199,30 @@ export async function ozzieSpeak(text: string, profile: AudioProfile = 'ambient'
 }
 
 /**
+ * Stops and unloads the current sound, if any. Nulls out `currentSound`
+ * synchronously (before the awaits) so a concurrent caller — ozzieSpeak
+ * starting a new cue while ozzieStop() is mid-flight, e.g. a rapid
+ * pause-then-cue tap — sees it already cleared and skips a redundant
+ * stopAsync/unloadAsync on an object expo-av has already unloaded, which
+ * throws.
+ */
+async function stopCurrentSound(): Promise<void> {
+  const sound = currentSound;
+  currentSound = null;
+  if (!sound) return;
+  try {
+    await sound.stopAsync();
+    await sound.unloadAsync();
+  } catch (err) {
+    console.error('[Ozzie] stop error:', err);
+  }
+}
+
+/**
  * Stop Ozzie mid-speech (e.g. user pauses workout)
  */
 export async function ozzieStop() {
-  if (currentSound) {
-    await currentSound.stopAsync();
-    await currentSound.unloadAsync();
-    currentSound = null;
-  }
+  await stopCurrentSound();
 }
 
 /**
@@ -207,7 +249,7 @@ export async function ozziePrewarm() {
         await ensureCacheDir();
         await FileSystem.writeAsStringAsync(
           path,
-          Buffer.from(audioData).toString('base64'),
+          uint8ArrayToBase64(audioData),
           { encoding: FileSystem.EncodingType.Base64 }
         );
       } catch {

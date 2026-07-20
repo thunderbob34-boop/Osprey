@@ -59,15 +59,21 @@ export async function completeOnboarding(userId: string, draft: OnboardingDraft)
 
   if (userError) throw userError;
 
-  const { error: goalsError } = await supabase.from('user_goals').insert({
-    user_id: userId,
-    primary_goal: draft.primaryGoal,
-    weekly_run_days: draft.weeklyRunDays,
-    weekly_lift_days: draft.weeklyLiftDays,
-    fitness_level: draft.experienceTier,
-    threshold_anchor: draft.thresholdAnchor,
-    goal_params: draft.goalParams ?? null,
-  });
+  // user_goals.user_id is unique — a plain insert throws a constraint
+  // violation if completeOnboarding is retried (network hiccup, user backs
+  // out and re-submits) after the first insert already went through.
+  const { error: goalsError } = await supabase.from('user_goals').upsert(
+    {
+      user_id: userId,
+      primary_goal: draft.primaryGoal,
+      weekly_run_days: draft.weeklyRunDays,
+      weekly_lift_days: draft.weeklyLiftDays,
+      fitness_level: draft.experienceTier,
+      threshold_anchor: draft.thresholdAnchor,
+      goal_params: draft.goalParams ?? null,
+    },
+    { onConflict: 'user_id' },
+  );
 
   if (goalsError) throw goalsError;
 

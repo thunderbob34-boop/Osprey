@@ -98,9 +98,15 @@ export async function fetchLiftAnalytics(userId: string, weeksBack = 8): Promise
     .slice(0, 5);
 
   // ── e1RM per (exercise, date), then best-per-exercise for PRs ──
+  // The query has no ORDER BY, so `rows` arrives in unspecified order — sort
+  // chronologically first so Map insertion order (and therefore the tie-break
+  // below) is deterministic instead of varying call to call.
+  const sortedRows = [...rows].sort((a, b) =>
+    a.started_at < b.started_at ? -1 : a.started_at > b.started_at ? 1 : 0,
+  );
   const e1rmByExerciseDate = new Map<string, Map<string, number>>();
   const setCountByExercise = new Map<string, number>();
-  for (const row of rows) {
+  for (const row of sortedRows) {
     if (row.reps == null || row.weight_kg == null || row.reps <= 0) continue;
     const date = row.started_at.slice(0, 10);
     const e1rm = estimate1RM(row.weight_kg, row.reps);
@@ -114,8 +120,11 @@ export async function fetchLiftAnalytics(userId: string, weeksBack = 8): Promise
     .map(([exerciseName, byDate]) => {
       let bestE1rmKg = 0;
       let achievedOn = '';
+      // Strict `>` (not `>=`) so a tie keeps the earliest date it was
+      // first achieved — byDate iterates in chronological insertion order
+      // now that sortedRows is sorted above.
       for (const [date, e1rm] of byDate) {
-        if (e1rm >= bestE1rmKg) {
+        if (e1rm > bestE1rmKg) {
           bestE1rmKg = e1rm;
           achievedOn = date;
         }

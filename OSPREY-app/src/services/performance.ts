@@ -226,7 +226,11 @@ export async function fetchPerformanceData(
   bestBikeTimeS: number;
 }> {
   const since = new Date();
-  since.setDate(since.getDate() - days);
+  // -(days - 1), not -days: the daily-loads loop below fills `days` entries
+  // starting at `since`, so `since` must be the FIRST day of a `days`-day
+  // window ending today — off by one here silently dropped today from the
+  // window entirely.
+  since.setDate(since.getDate() - (days - 1));
 
   const { data, error } = await supabase
     .from('workout_logs')
@@ -236,6 +240,8 @@ export async function fetchPerformanceData(
     // and the race predictor for every OSPREY+ user.
     .select('started_at, total_duration_s, total_distance_km, session_type, tss')
     .eq('user_id', userId)
+    .is('deleted_at', null)
+    .in('status', ['completed', 'partial'])
     .gte('started_at', since.toISOString())
     .order('started_at', { ascending: true });
 
@@ -249,10 +255,13 @@ export async function fetchPerformanceData(
 
   let bestRunMiles = 0;
   let bestRunTimeS = 0;
+  let bestRunPaceSecPerMile = Infinity;
   let bestSwimMiles = 0;
   let bestSwimTimeS = 0;
+  let bestSwimPaceSecPerMile = Infinity;
   let bestBikeMiles = 0;
   let bestBikeTimeS = 0;
+  let bestBikePaceSecPerMile = Infinity;
 
   for (const row of rows) {
     const date = row.started_at.slice(0, 10);
@@ -261,13 +270,21 @@ export async function fetchPerformanceData(
 
     if (row.total_distance_km && row.total_duration_s > 0) {
       const miles = row.total_distance_km * KM_TO_MILES;
-      if (row.session_type === 'run' && miles > bestRunMiles) {
+      // Riegel's predictor extrapolates from your highest-quality (fastest)
+      // reference effort, not your longest one — picking by distance used
+      // to let a slow long run outrank a genuinely fast race/time-trial as
+      // the predictor's base, skewing every prediction pessimistic.
+      const paceSecPerMile = row.total_duration_s / miles;
+      if (row.session_type === 'run' && paceSecPerMile < bestRunPaceSecPerMile) {
+        bestRunPaceSecPerMile = paceSecPerMile;
         bestRunMiles = miles;
         bestRunTimeS = row.total_duration_s;
-      } else if (row.session_type === 'swim' && miles > bestSwimMiles) {
+      } else if (row.session_type === 'swim' && paceSecPerMile < bestSwimPaceSecPerMile) {
+        bestSwimPaceSecPerMile = paceSecPerMile;
         bestSwimMiles = miles;
         bestSwimTimeS = row.total_duration_s;
-      } else if (row.session_type === 'bike' && miles > bestBikeMiles) {
+      } else if (row.session_type === 'bike' && paceSecPerMile < bestBikePaceSecPerMile) {
+        bestBikePaceSecPerMile = paceSecPerMile;
         bestBikeMiles = miles;
         bestBikeTimeS = row.total_duration_s;
       }
@@ -455,9 +472,13 @@ export function readinessFromTsb(tsb: number, ctl: number): TrainingReadiness {
 // ── Format helpers ────────────────────────────────────────────────────────────
 
 export function formatRaceTimeSec(totalS: number): string {
-  const h = Math.floor(totalS / 3600);
-  const m = Math.floor((totalS % 3600) / 60);
-  const s = Math.round(totalS % 60);
+  // Round the whole total first — rounding `s` after the %60 split can push
+  // it to exactly 60 (e.g. 119.6s: m=1, s=round(59.6)=60 → "1:60" instead
+  // of rolling over to "2:00").
+  const rounded = Math.round(totalS);
+  const h = Math.floor(rounded / 3600);
+  const m = Math.floor((rounded % 3600) / 60);
+  const s = rounded % 60;
   if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   return `${m}:${String(s).padStart(2, '0')}`;
 }

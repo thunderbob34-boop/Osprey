@@ -227,14 +227,19 @@ export async function saveQuickFood(userId: string, input: QuickFoodInput): Prom
   let foodItemId = input.foodItemId;
 
   if (!foodItemId) {
+    // input.calories/proteinG/carbsG/fatG are totals for the entered
+    // quantity, but food_items stores density (per 100g) — writing the raw
+    // totals silently mislabeled any non-100g quantity as its density.
+    const quantityG = input.quantityG ?? 100;
+    const densityScale = 100 / quantityG;
     const { data: foodItem, error: foodItemError } = await supabase
       .from('food_items')
       .insert({
         name: input.name,
-        calories_per_100g: input.calories,
-        protein_g: input.proteinG ?? null,
-        carbs_g: input.carbsG ?? null,
-        fat_g: input.fatG ?? null,
+        calories_per_100g: Math.round(input.calories * densityScale * 10) / 10,
+        protein_g: input.proteinG != null ? Math.round(input.proteinG * densityScale * 10) / 10 : null,
+        carbs_g: input.carbsG != null ? Math.round(input.carbsG * densityScale * 10) / 10 : null,
+        fat_g: input.fatG != null ? Math.round(input.fatG * densityScale * 10) / 10 : null,
         source: 'manual',
       })
       .select('id')

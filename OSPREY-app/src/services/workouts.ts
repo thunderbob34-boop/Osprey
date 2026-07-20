@@ -71,7 +71,11 @@ function buildRunSplits(trackPoints: TrackPoint[], totalDurationS: number) {
       });
       mile += 1;
       mileStartIndex = i;
-      mileDistance = 0;
+      // Carry the overshoot past mileMeters into the next split instead of
+      // discarding it — segments rarely land exactly on the mile boundary,
+      // and resetting to 0 each time systematically under-counts distance,
+      // making every split calibrated to slightly more than a true mile.
+      mileDistance = Math.max(0, mileDistance - mileMeters);
     }
   }
 
@@ -98,25 +102,37 @@ async function detectSetPr(
   reps: number,
   excludeWorkoutId?: string,
 ): Promise<boolean> {
-  const { data: workouts } = await supabase
+  const { data: workouts, error: workoutsError } = await supabase
     .from('workout_logs')
     .select('id')
     .eq('user_id', userId)
     .is('deleted_at', null);
 
+  if (workoutsError) {
+    console.error('[detectSetPr] workout lookup failed', workoutsError);
+    return false;
+  }
+
   const workoutIds = (workouts ?? [])
     .map((row) => row.id as string)
     .filter((id) => id !== excludeWorkoutId);
 
-  if (workoutIds.length === 0) return true;
+  // No prior workout history (or none for this exercise) — not a PR, just
+  // a first attempt. Returning true here used to fire a false "New PR!" on
+  // the very first set ever logged for an exercise.
+  if (workoutIds.length === 0) return false;
 
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('exercise_sets')
     .select('weight_kg, reps')
     .eq('exercise_id', exerciseId)
     .in('workout_id', workoutIds);
 
-  if (!data || data.length === 0) return true;
+  if (error) {
+    console.error('[detectSetPr] set history lookup failed', error);
+    return false;
+  }
+  if (!data || data.length === 0) return false;
 
   const best = data.reduce((max, row) => {
     const score = (row.weight_kg ?? 0) * (row.reps ?? 0);

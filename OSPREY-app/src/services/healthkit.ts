@@ -62,6 +62,29 @@ function fetchSamples(
   });
 }
 
+/** Merges overlapping/adjacent sample intervals and returns their total duration in hours. */
+function mergeIntervalHours(samples: HealthValue[]): number {
+  const sorted = samples
+    .map((s) => ({ start: new Date(s.startDate).getTime(), end: new Date(s.endDate).getTime() }))
+    .sort((a, b) => a.start - b.start);
+
+  let totalMs = 0;
+  let curStart = sorted[0].start;
+  let curEnd = sorted[0].end;
+  for (let i = 1; i < sorted.length; i++) {
+    const { start, end } = sorted[i];
+    if (start <= curEnd) {
+      curEnd = Math.max(curEnd, end);
+    } else {
+      totalMs += curEnd - curStart;
+      curStart = start;
+      curEnd = end;
+    }
+  }
+  totalMs += curEnd - curStart;
+  return totalMs / 3600000;
+}
+
 /**
  * Pulls last night's HRV, resting HR, and sleep duration from HealthKit and
  * writes a recovery_scores row for today using a simple v1 scoring formula.
@@ -74,9 +97,13 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
   const today = localDateString();
 
   const [hrvSamples, restingHrSamples, sleepSamples] = await Promise.all([
+    // HKQuantityTypeIdentifierHeartRateVariabilitySDNN is a duration
+    // quantity (SDNN of NN intervals), not a discrete `count` — react-
+    // native-health has no millisecond unit, so request `second` and scale
+    // to ms below, the same way native HealthKit apps report HRV.
     fetchSamples(AppleHealthKit.getHeartRateVariabilitySamples, {
       startDate: since,
-      unit: AppleHealthKit.Constants.Units.count,
+      unit: AppleHealthKit.Constants.Units.second,
     }),
     fetchSamples(AppleHealthKit.getRestingHeartRateSamples, { startDate: since }),
     fetchSamples(AppleHealthKit.getSleepSamples, { startDate: since }),
@@ -86,17 +113,15 @@ export async function syncRecoveryFromHealthKit(userId: string): Promise<boolean
     return false; // nothing new to sync
   }
 
-  const hrvMs = hrvSamples.length > 0 ? hrvSamples[hrvSamples.length - 1].value : null;
+  const hrvMs = hrvSamples.length > 0 ? hrvSamples[hrvSamples.length - 1].value * 1000 : null;
   const restingHr = restingHrSamples.length > 0 ? restingHrSamples[restingHrSamples.length - 1].value : null;
 
-  const sleepHours =
-    sleepSamples.length > 0
-      ? sleepSamples.reduce((sum, s) => {
-          const start = new Date(s.startDate).getTime();
-          const end = new Date(s.endDate).getTime();
-          return sum + (end - start) / 3600000;
-        }, 0)
-      : null;
+  // HealthKit returns multiple, often-overlapping sleep-stage samples per
+  // night (stage tracking splits "asleep" into core/deep/REM, and multiple
+  // sources — iPhone + Watch — can each log their own overlapping bracket),
+  // so summing sample durations directly double-counts. Merge overlapping
+  // intervals first.
+  const sleepHours = sleepSamples.length > 0 ? mergeIntervalHours(sleepSamples) : null;
 
   // v1 scoring: simple weighted heuristic, not a clinical algorithm.
   let score = 70;
@@ -143,6 +168,10 @@ const ACTIVITY_BY_SESSION_TYPE: Record<string, HealthActivity> = {
   run: AppleHealthKit.Constants.Activities.Running,
   lift: AppleHealthKit.Constants.Activities.TraditionalStrengthTraining,
   cross: AppleHealthKit.Constants.Activities.FunctionalStrengthTraining,
+  swim: AppleHealthKit.Constants.Activities.Swimming,
+  bike: AppleHealthKit.Constants.Activities.Cycling,
+  rowing: AppleHealthKit.Constants.Activities.Rowing,
+  hyrox: AppleHealthKit.Constants.Activities.HighIntensityIntervalTraining,
 };
 
 /**
@@ -166,10 +195,16 @@ export async function writeWorkoutToHealthKit(params: {
         type: activityType,
         startDate: params.startedAt,
         endDate: params.endedAt,
-        metadata: {
-          distanceMeters: params.distanceMeters ?? undefined,
-          calories: params.calories ?? undefined,
-        },
+        // The native bridge reads these as top-level fields (energyBurned/
+        // distance + their *Unit siblings), NOT nested under `metadata` —
+        // nesting them there silently drops distance/calories from the
+        // saved HealthKit workout since the bridge ignores unknown keys.
+        ...(params.calories != null
+          ? { energyBurned: params.calories, energyBurnedUnit: 'calorie' as const }
+          : {}),
+        ...(params.distanceMeters != null
+          ? { distance: params.distanceMeters, distanceUnit: 'meter' as const }
+          : {}),
       },
       (err) => resolve(!err),
     );

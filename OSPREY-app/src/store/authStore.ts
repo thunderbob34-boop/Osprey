@@ -192,8 +192,14 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   signIn: async (email, password) => {
     set({ loading: true });
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (!error) {
+      // signInWithPassword resolving doesn't guarantee onAuthStateChange
+      // has already fired to populate `user` in the store — fetchProfile()
+      // reads get().user, so calling it before setting `user` here raced
+      // the listener and could silently no-op the profile fetch right
+      // after a successful sign-in. Set it from the response directly.
+      set({ session: data.session, user: data.user });
       await get().fetchProfile();
     }
     set({ loading: false });
