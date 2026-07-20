@@ -7,6 +7,7 @@
 // ozzie_insights so repeat calls the same day are free.
 
 import { createClient } from 'jsr:@supabase/supabase-js@2';
+import { computeTarget, type PrimaryGoal, type TodaySession } from './targets.ts';
 
 const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY') ?? '';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
@@ -36,8 +37,6 @@ Rules:
 - Never give medical advice, never suggest extreme restriction or disordered eating patterns. This is a fitness app, not a diet app — frame food as fuel for training.
 - Respond ONLY with valid JSON matching this shape: {"tip": string}`;
 
-type PrimaryGoal = 'run' | 'lift' | 'hybrid' | 'weight_loss' | 'general_fitness';
-
 // Weekly weight change (kg/wk) computed from recent vs. prior readings, plus
 // a plain-language summary and the calorie nudge it produced. `direction` is
 // null when there aren't enough readings to trust a trend yet.
@@ -52,7 +51,7 @@ interface WeightTrend {
 interface NutritionContext {
   displayName: string;
   primaryGoal: PrimaryGoal | null;
-  todaySession: { sessionType: string; plannedMinutes: number | null } | null;
+  todaySession: TodaySession | null;
   loggedToday: { calories: number; proteinG: number; carbsG: number; fatG: number };
   weightTrend: WeightTrend;
   target: { calories: number; proteinG: number; carbsG: number; fatG: number };
@@ -150,63 +149,6 @@ function computeWeightTrend(rows: BodyMetricRow[], primaryGoal: PrimaryGoal | nu
   return { direction, kgPerWeek: rounded, latestKg: latest.kg, calorieAdjustment: adjustment, note };
 }
 
-// Session intensity multipliers for calorie bump (cal/min of planned activity).
-// Endurance sessions (swim/bike/run) burn more than strength sessions.
-const SESSION_CAL_PER_MIN: Record<string, number> = {
-  run:   7,    // ~420 cal/hr moderate run
-  swim:  8,    // slightly higher — open water or pool
-  bike:  6,    // moderate cycling
-  lift:  4,    // strength session
-  cross: 5,
-  race:  9,    // race effort
-  rest:  0,
-};
-
-function computeTarget(
-  primaryGoal: PrimaryGoal | null,
-  todaySession: { sessionType: string; plannedMinutes: number | null } | null,
-  weightTrend: WeightTrend,
-): { calories: number; proteinG: number; carbsG: number; fatG: number } {
-  // Hybrid-athlete baselines (Nick Bare / Man of Iron protocol):
-  // 240g protein, ~2740 cal on training days, ~3040 on long days.
-  // General / weight-loss goals start lower; pure endurance splits carbs higher.
-
-  let proteinG = 200; // solid base for any active person
-  let calories = 2400;
-
-  if (primaryGoal === 'hybrid' || primaryGoal === 'lift') {
-    // Bodybuilder-endurance hybrid: high protein, moderate surplus
-    proteinG = 240;
-    calories = 2740;
-  } else if (primaryGoal === 'run') {
-    proteinG = 180;
-    calories = 2600;
-  } else if (primaryGoal === 'weight_loss') {
-    proteinG = 200;
-    calories = 2100;
-  }
-  // 'general_fitness' keeps the defaults (200g / 2400)
-
-  // Activity bump based on session type and planned duration
-  if (todaySession && todaySession.sessionType !== 'rest') {
-    const minutes = todaySession.plannedMinutes ?? 45;
-    const ratePerMin = SESSION_CAL_PER_MIN[todaySession.sessionType] ?? 5;
-    calories += Math.round(minutes * ratePerMin);
-  }
-
-  // Weight-trend correction — self-corrects when the scale doesn't match the goal.
-  // Floor protects against unsafe lowballing if multiple negatives stack.
-  calories = Math.max(1600, calories + weightTrend.calorieAdjustment);
-
-  // Fat: ~26% of calories; carbs: remainder after protein and fat
-  const proteinCals = proteinG * 4;
-  const fatG = Math.round((calories * 0.26) / 9);
-  const remainingCals = Math.max(0, calories - proteinCals - fatG * 9);
-  const carbsG = Math.round(remainingCals / 4);
-
-  return { calories: Math.round(calories), proteinG, carbsG, fatG };
-}
-
 async function buildContext(
   supabase: ReturnType<typeof createClient>,
   userId: string,
@@ -260,7 +202,7 @@ async function buildContext(
     todaySession,
     loggedToday,
     weightTrend,
-    target: computeTarget(primaryGoal, todaySession, weightTrend),
+    target: computeTarget(primaryGoal, todaySession, weightTrend.calorieAdjustment, weightTrend.latestKg),
   };
 }
 

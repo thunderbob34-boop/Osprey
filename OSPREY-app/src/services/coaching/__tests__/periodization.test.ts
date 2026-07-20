@@ -25,4 +25,10 @@ describe('targetWeeklyLoad', () => {
     const taper = targetWeeklyLoad({ baselineLoad: base, phase: 'Taper', weekNumber: 11, prevWeekLoad: peak });
     expect(taper).toBeLessThan(peak * 0.8);
   });
+
+  it('eases volume in Peak relative to Build, per every sport blueprint', () => {
+    const build = targetWeeklyLoad({ baselineLoad: base, phase: 'Build', weekNumber: 1, prevWeekLoad: null });
+    const peak = targetWeeklyLoad({ baselineLoad: base, phase: 'Peak', weekNumber: 1, prevWeekLoad: null });
+    expect(peak).toBeLessThan(build);
+  });
 });
