@@ -24,7 +24,7 @@ import { useRacePartners } from '@/hooks/useRacePartners';
 import { useRaces } from '@/hooks/useRaces';
 import { useSubscription } from '@/hooks/useSubscription';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
-import { formatDistanceKm, formatPacePerUnit, milesToKm } from '@/services/units';
+import { formatPacePerUnit, milesToKm } from '@/services/units';
 import { formatRaceDistance, RACE_DISTANCE_LADDER, raceRunwayLabel } from '@/services/race-display';
 import {
   DEFAULT_CHECKLIST,
