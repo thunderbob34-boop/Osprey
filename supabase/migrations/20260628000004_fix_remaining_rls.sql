@@ -44,23 +44,8 @@ CREATE POLICY friendships_delete ON friendships
   FOR DELETE TO authenticated
   USING (requester_id = auth.uid() OR addressee_id = auth.uid());
 
--- ── saved_routes: 001 never enabled RLS for this user-owned table ──
-ALTER TABLE saved_routes ENABLE ROW LEVEL SECURITY;
-GRANT SELECT, INSERT, UPDATE, DELETE ON saved_routes TO authenticated;
-
-CREATE POLICY saved_routes_select ON saved_routes
-  FOR SELECT TO authenticated
-  USING (user_id = auth.uid() OR is_public = true);
-
-CREATE POLICY saved_routes_insert ON saved_routes
-  FOR INSERT TO authenticated
-  WITH CHECK (user_id = auth.uid());
-
-CREATE POLICY saved_routes_update ON saved_routes
-  FOR UPDATE TO authenticated
-  USING (user_id = auth.uid())
-  WITH CHECK (user_id = auth.uid());
-
-CREATE POLICY saved_routes_delete ON saved_routes
-  FOR DELETE TO authenticated
-  USING (user_id = auth.uid());
+-- saved_routes: RLS/grants/policy are set up in migration
+-- 20260703000023_saved_routes.sql, which creates the table itself. This
+-- file used to duplicate that setup against 001's now-removed schema
+-- (referencing a since-removed is_public column that 023's schema
+-- never had).
