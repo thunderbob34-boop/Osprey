@@ -10,7 +10,7 @@ import { buildRacePredictor, formatRaceTimeSec } from '../../lib/predictions';
 import { buildRunSignupSearchUrl } from '../../lib/racesearch';
 import { computeRacePhase } from '../../lib/race-phase';
 import { raceRunwayLabel } from '../../lib/race-runway';
-import { isBeyondGeneratedHorizon } from '../../lib/calendar-cells';
+import { isBeyondGeneratedHorizon, latestGeneratedDate } from '../../lib/calendar-cells';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { PageHeader } from '../../components/PageHeader';
 import { AddRaceForm } from '../../components/AddRaceForm';
@@ -77,6 +77,7 @@ function CalendarPage() {
     return m;
   }, [sessions.data]);
   const sessionDates = useMemo(() => (sessions.data ?? []).map((s) => s.session_date), [sessions.data]);
+  const latestSessionDate = useMemo(() => latestGeneratedDate(sessionDates), [sessionDates]);
   const racesByDate = useMemo(() => {
     const m = new Map<string, RaceEvent[]>();
     for (const r of raceEvents.data ?? []) { const arr = m.get(r.event_date) ?? []; arr.push(r); m.set(r.event_date, arr); }
@@ -87,6 +88,11 @@ function CalendarPage() {
   const predictor = bestRun.data ? buildRacePredictor(bestRun.data.miles, bestRun.data.timeS) : null;
   const selectedTuneUp = selected?.kind === 'session' ? tuneUpBySessionId.get(selected.data.id) : undefined;
   const isRunGoal = ['run', 'ultra', 'triathlon'].includes(userGoal.data?.primaryGoal ?? '');
+  // Hoisted (rather than called inline at each JSX use) to match index.tsx's
+  // NextRaceCard, which computes these once per render for the same reason.
+  const daysToRace = nextRace.data ? daysUntil(nextRace.data.event_date) : null;
+  const weeksToRace = daysToRace != null ? Math.round(daysToRace / 7) : null;
+  const nextRaceDistanceLabel = nextRace.data ? formatRaceDistance(nextRace.data.distance_km) : null;
   const phaseInfo = userGoal.data
     ? computeRacePhase({
         targetRace: userGoal.data.targetRace,
@@ -149,7 +155,7 @@ function CalendarPage() {
                     );
                   })}
                   {inMonth && daySessions.length === 0 && (
-                    isBeyondGeneratedHorizon(dISO, sessionDates) ? (
+                    isBeyondGeneratedHorizon(dISO, latestSessionDate) ? (
                       <span className="cal-horizon">Not yet generated</span>
                     ) : (
                       <button
@@ -171,16 +177,16 @@ function CalendarPage() {
         <aside className="cal-aside">
           {nextRace.data && (
             <div className="race-countdown">
-              <div className="days">T–{Math.max(0, daysUntil(nextRace.data.event_date))}</div>
+              <div className="days">T–{Math.max(0, daysToRace ?? 0)}</div>
               <div className="lab">Days to race</div>
               <div className="name">{nextRace.data.name}</div>
               <div className="meta">
                 {new Date(`${nextRace.data.event_date}T00:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                {formatRaceDistance(nextRace.data.distance_km) ? ` · ${formatRaceDistance(nextRace.data.distance_km)}` : ''}
+                {nextRaceDistanceLabel ? ` · ${nextRaceDistanceLabel}` : ''}
                 {nextRace.data.goal_time_s ? ` · Goal ${formatRaceTimeSec(nextRace.data.goal_time_s)}` : ''}
               </div>
-              {!phaseInfo && (
-                <p className="runway">{raceRunwayLabel(Math.round(daysUntil(nextRace.data.event_date) / 7))}</p>
+              {!phaseInfo && weeksToRace != null && (
+                <p className="runway">{raceRunwayLabel(weeksToRace)}</p>
               )}
             </div>
           )}
