@@ -52,6 +52,7 @@ export function AddRaceForm({ userId, defaultDate, onDone }: Props) {
       </div>
       {create.isError && <p className="err-line" role="alert" style={{ marginBottom: 12 }}>{(create.error as Error).message}</p>}
       <div className="log-form-actions">
+        <button className="btn ghost" type="button" onClick={onDone} disabled={create.isPending}>Cancel</button>
         <button className="btn" type="submit" disabled={create.isPending}>{create.isPending ? 'Saving…' : 'Add race'}</button>
       </div>
     </form>

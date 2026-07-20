@@ -6,12 +6,11 @@ import { ErrorPanel } from '../../components/ErrorPanel';
 import { targetsProgress, type Macros, type Per100g } from '../../lib/macros';
 import { addDays, toDateInputValue } from '../../lib/day';
 import type { FoodItem, MealType } from '../../lib/schemas';
+import { MEAL_LABEL } from '../../lib/format';
 import {
   MEAL_ORDER, sumDay, useAddManualFood, useDayLog, useDeleteLogEntry,
   useFoodSearch, useLogFood, useNutritionCoaching, useNutritionTargets, type DayLogEntry,
 } from '../../features/nutrition/queries';
-
-const MEAL_LABEL: Record<MealType, string> = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner', snack: 'Snack' };
 
 function MacroBar({ label, logged, target, pct }: { label: string; logged: number; target: number | null; pct: number }) {
   return (
@@ -142,6 +141,7 @@ function QuickAdd({ userId, dateStr }: { userId: string; dateStr: string }) {
           </div>
           {addManual.isError && <p className="err-line" role="alert">{(addManual.error as Error).message}</p>}
           <div className="log-form-actions">
+            <button className="btn ghost" type="button" onClick={() => setManualOpen(false)} disabled={addManual.isPending}>Cancel</button>
             <button className="btn" type="button" disabled={manual.name.trim() === '' || addManual.isPending} onClick={() => void submitManual()}>
               {addManual.isPending ? 'Saving…' : 'Save food'}
             </button>

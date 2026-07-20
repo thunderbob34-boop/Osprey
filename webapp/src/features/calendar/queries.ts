@@ -6,6 +6,7 @@ import { TrainingSessionSchema, RaceEventSchema } from '../../lib/schemas';
 import { matchTuneUpWeeks, parseGoalDistanceFromText, type TuneUpWeek } from '../../lib/tuneups';
 import type { TrainingSession } from '../../lib/schemas';
 import { sessionUpdatePayload, type SessionEdits } from '../../lib/session-edit';
+import { toDateInputValue } from '../../lib/day';
 
 export function useMonthSessions(userId: string, fromISO: string, toISO: string) {
   return useQuery({
@@ -53,7 +54,7 @@ export function useNextRaceEvent(userId: string) {
   return useQuery({
     queryKey: ['next-race-event', userId],
     queryFn: async () => {
-      const today = new Date().toISOString().slice(0, 10);
+      const today = toDateInputValue(new Date());
       const { data, error } = await supabase.from('race_events')
         .select('id, user_id, name, distance_km, event_date, goal_time_s, result_time_s, notes')
         .eq('user_id', userId).is('deleted_at', null)

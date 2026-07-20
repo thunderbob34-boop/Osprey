@@ -5,13 +5,12 @@ import { ErrorPanel } from '../../components/ErrorPanel';
 import { toDateInputValue } from '../../lib/day';
 import { macrosFor } from '../../lib/macros';
 import type { FoodItem, MealType } from '../../lib/schemas';
+import { MEAL_LABEL } from '../../lib/format';
 import { useFoodSearch } from '../../features/nutrition/queries';
 import {
   recipePerServing, recipeTotals, useAddIngredient, useLogRecipeServing,
   useRecipe, useRemoveIngredient, useUpdateIngredient, useUpdateRecipe,
 } from '../../features/nutrition/recipes';
-
-const MEAL_LABEL: Record<MealType, string> = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner', snack: 'Snack' };
 
 function IngredientSearch({ onPick }: { onPick: (f: FoodItem) => void }) {
   const [term, setTerm] = useState('');

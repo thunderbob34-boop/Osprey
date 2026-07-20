@@ -205,6 +205,15 @@
 .tuneup-block p { margin-bottom: 10px; }
 .btn.small { font-size: 12px; padding: 8px 16px; }
 
+/* ---------- login ---------- */
+.login-wrap { min-height: 100vh; display: grid; place-items: center; }
+.login-card { width: 360px; }
+.login-card h1 { font-size: 28px; text-transform: uppercase; margin-bottom: 24px; }
+.login-card .field { margin-bottom: 16px; }
+.login-error { color: var(--amber); font-size: 13px; margin-bottom: 14px; }
+.login-card .btn.ghost { width: 100%; margin-top: 10px; }
+.login-submit { width: 100%; }
+
 /* ---------- log form ---------- */
 .log-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 18px; }
 .field label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); font-weight: 700; margin-bottom: 7px; }

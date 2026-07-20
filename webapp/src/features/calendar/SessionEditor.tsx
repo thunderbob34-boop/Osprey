@@ -134,6 +134,12 @@ export function SessionEditor({ userId, monthSessions, onDone, session, addDate 
             {del.isPending ? 'Deleting…' : 'Delete'}
           </button>
         )}
+        {/* Add mode had no way out except a successful submit — the editor
+            never rendered its own cancel, and the calendar route only
+            supplied one for edit mode. */}
+        <button className="btn ghost" type="button" onClick={onDone} disabled={pending}>
+          Cancel
+        </button>
         <button className="btn" type="button" onClick={() => void (session ? handleSave() : handleAdd())} disabled={pending}>
           {session ? (update.isPending ? 'Saving…' : 'Save') : (create.isPending ? 'Adding…' : 'Add session')}
         </button>

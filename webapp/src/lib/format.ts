@@ -1,8 +1,13 @@
 import type { UnitSystem } from './units';
+import type { MealType } from './schemas';
 
 export const SESSION_TYPE_LABEL: Record<string, string> = {
   run: 'Run', lift: 'Lift', cross: 'Cross-train', rest: 'Rest', race: 'Race',
   swim: 'Swim', bike: 'Bike', rowing: 'Row', hyrox: 'Hyrox',
+};
+
+export const MEAL_LABEL: Record<MealType, string> = {
+  breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner', snack: 'Snack',
 };
 
 export const INTENSITY_LABEL: Record<string, string> = {
