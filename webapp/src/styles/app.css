@@ -174,6 +174,9 @@
 .cal-cell { min-height: 96px; padding: 6px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 3px; }
 .cal-cell.out { opacity: 0.32; }
 .cal-cell .daynum { font-size: 11px; color: var(--mut); font-variant-numeric: tabular-nums; }
+.cal-add { opacity: 0; transition: opacity 0.12s; }
+.cal-cell:hover .cal-add, .cal-add:focus-visible { opacity: 1; }
+.cal-horizon { font-size: 10px; color: var(--mut); opacity: 0.45; padding: 3px 6px; }
 .cal-chip {
   display: block; width: 100%; text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px;
   padding: 3px 6px; border: 1px solid var(--line); background: var(--panel); color: var(--text-soft); cursor: pointer; font-family: inherit;

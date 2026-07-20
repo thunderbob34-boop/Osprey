@@ -10,6 +10,7 @@ import { buildRacePredictor, formatRaceTimeSec } from '../../lib/predictions';
 import { buildRunSignupSearchUrl } from '../../lib/racesearch';
 import { computeRacePhase } from '../../lib/race-phase';
 import { raceRunwayLabel } from '../../lib/race-runway';
+import { isBeyondGeneratedHorizon } from '../../lib/calendar-cells';
 import { ErrorPanel } from '../../components/ErrorPanel';
 import { PageHeader } from '../../components/PageHeader';
 import { AddRaceForm } from '../../components/AddRaceForm';
@@ -75,6 +76,7 @@ function CalendarPage() {
     for (const s of sessions.data ?? []) { const arr = m.get(s.session_date) ?? []; arr.push(s); m.set(s.session_date, arr); }
     return m;
   }, [sessions.data]);
+  const sessionDates = useMemo(() => (sessions.data ?? []).map((s) => s.session_date), [sessions.data]);
   const racesByDate = useMemo(() => {
     const m = new Map<string, RaceEvent[]>();
     for (const r of raceEvents.data ?? []) { const arr = m.get(r.event_date) ?? []; arr.push(r); m.set(r.event_date, arr); }
@@ -147,14 +149,18 @@ function CalendarPage() {
                     );
                   })}
                   {inMonth && daySessions.length === 0 && (
-                    <button
-                      className="btn ghost"
-                      type="button"
-                      style={{ display: 'block', width: '100%', textAlign: 'left', padding: '3px 6px', fontSize: 10.5 }}
-                      onClick={() => { setAddDate(dISO); setSelected(null); }}
-                    >
-                      + Add
-                    </button>
+                    isBeyondGeneratedHorizon(dISO, sessionDates) ? (
+                      <span className="cal-horizon">Not yet generated</span>
+                    ) : (
+                      <button
+                        className="btn ghost cal-add"
+                        type="button"
+                        style={{ display: 'block', width: '100%', textAlign: 'left', padding: '3px 6px', fontSize: 10.5 }}
+                        onClick={() => { setAddDate(dISO); setSelected(null); }}
+                      >
+                        + Add
+                      </button>
+                    )
                   )}
                 </div>
               );
