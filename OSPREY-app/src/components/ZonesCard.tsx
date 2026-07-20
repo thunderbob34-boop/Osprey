@@ -96,8 +96,8 @@ function rowsForZones(zones: ZoneSet | null, hrZones: HrZoneInfo, units: UnitSys
       ];
     case 'cycling':
       return [
-        { label: 'Endurance', value: intRange(zones.bands.z2Endurance, 'w'), tone: 'aerobic' },
-        { label: 'Threshold', value: intRange(zones.bands.z4Threshold, 'w'), tone: 'threshold' },
+        { label: 'Endurance', value: intRange(zones.bands.z2Endurance, 'W'), tone: 'aerobic' },
+        { label: 'Threshold', value: intRange(zones.bands.z4Threshold, 'W'), tone: 'threshold' },
       ];
     case 'triathlon': {
       const rows: ZoneRow[] = [];
@@ -108,7 +108,7 @@ function rowsForZones(zones: ZoneSet | null, hrZones: HrZoneInfo, units: UnitSys
         rows.push({ label: 'Swim', value: `~${swim100(zones.swim.cssSecPer100, units)}`, tone: 'threshold' });
       }
       if (zones.bike) {
-        rows.push({ label: 'Bike', value: `~${Math.round(zones.bike.ftpWatts)} w`, tone: 'threshold' });
+        rows.push({ label: 'Bike', value: `~${Math.round(zones.bike.ftpWatts)} W`, tone: 'threshold' });
       }
       return rows;
     }

@@ -312,7 +312,7 @@ export default function RunWorkoutScreen() {
       return;
     }
 
-    Alert.alert('End workout?', 'Save this run and see your recap.', [
+    Alert.alert('End workout?', 'Save this run and see your recap, or discard it.', [
       { text: 'Cancel', style: 'cancel' },
       { text: 'Discard & Exit', style: 'destructive', onPress: handleDiscard },
       { text: 'End & Save', onPress: handleEndWorkout },

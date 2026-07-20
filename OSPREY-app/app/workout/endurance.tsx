@@ -418,7 +418,7 @@ export default function EnduranceWorkoutScreen() {
       return;
     }
 
-    Alert.alert('End session?', 'Save this workout and see your recap.', [
+    Alert.alert('End workout?', 'Save this workout and see your recap, or discard it.', [
       { text: 'Cancel', style: 'cancel' },
       { text: 'Discard & Exit', style: 'destructive', onPress: handleDiscard },
       { text: 'End & Save', onPress: handleEnd },

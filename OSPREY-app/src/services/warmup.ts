@@ -10,7 +10,7 @@ const RUN_POOL: WarmupDrill[] = [
   { name: 'Butt kicks', durationLabel: '20 sec' },
   { name: 'Ankle circles', durationLabel: '10 each direction' },
   { name: 'Easy jog to build into pace', durationLabel: '3-5 min' },
-  { name: 'A-skips', durationLabel: '15m' },
+  { name: 'A-skips', durationLabel: '15 meters' },
   { name: 'Hip circles', durationLabel: '10 each direction' },
 ];
 

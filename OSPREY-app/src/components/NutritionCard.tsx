@@ -62,7 +62,7 @@ export default function NutritionCard({
         <MacroBlock value={targets.protein} unit="g" label="Protein" />
         <MacroBlock value={targets.carbs} unit="g" label="Carbs" />
         <MacroBlock value={targets.fat} unit="g" label="Fat" />
-        <MacroBlock value={targets.calories} unit="kcal" label="Calories" />
+        <MacroBlock value={targets.calories} unit="cal" label="Calories" />
       </View>
       {data?.tip ? <Text style={styles.tip}>{data.tip}</Text> : null}
 

@@ -128,7 +128,7 @@ export function AppLoadingScreen() {
       </Animated.Text>
 
       <Animated.Text style={[styles.tagline, { opacity: taglineOpacity }]}>
-        AI Fitness Coach
+        Your coach in your corner.
       </Animated.Text>
 
       <View style={styles.dotsGap} />

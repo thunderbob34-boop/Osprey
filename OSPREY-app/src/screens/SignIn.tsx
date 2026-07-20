@@ -110,7 +110,7 @@ export default function SignInScreen() {
         {/* Ozzie wordmark */}
         <View style={styles.brandBlock}>
           <Text style={styles.osprey}>OSPREY</Text>
-          <Text style={styles.tagline}>Your coach, your hype man, your guy.</Text>
+          <Text style={styles.tagline}>Your coach in your corner.</Text>
         </View>
 
         {/* Form */}
@@ -177,7 +177,7 @@ export default function SignInScreen() {
               accessibilityState={{ disabled: resetSending, busy: resetSending }}
             >
               <Text style={styles.forgotPasswordText}>
-                {resetSending ? 'Sending...' : 'Forgot password?'}
+                {resetSending ? 'Sending…' : 'Forgot password?'}
               </Text>
             </TouchableOpacity>
           ) : null}

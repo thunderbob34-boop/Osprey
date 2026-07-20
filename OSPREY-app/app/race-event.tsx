@@ -214,7 +214,7 @@ export default function RaceEventScreen() {
 
   function handleAddToMyRaces() {
     if (!userId) {
-      Alert.alert('Sign in required', 'Sign in to save races to your race hub.');
+      Alert.alert('Sign in required', 'Sign in to save races to your Races list.');
       return;
     }
     const parsedDate = parseRaceDate(result!.date);
@@ -238,7 +238,7 @@ export default function RaceEventScreen() {
       });
       queryClient.invalidateQueries({ queryKey: ['races-upcoming'] });
       queryClient.invalidateQueries({ queryKey: ['races-past'] });
-      Alert.alert('Race saved 🎉', `${result!.name} is in your race hub.`, [
+      Alert.alert('Race saved 🎉', `${result!.name} is saved to your Races.`, [
         { text: 'Stay here', style: 'cancel' },
         {
           text: 'View My Races',
@@ -329,7 +329,7 @@ export default function RaceEventScreen() {
         <View style={styles.loadingOverlay}>
           <View style={styles.loadingCard}>
             <ActivityIndicator color={Theme.accent} size="large" />
-            <Text style={styles.loadingText}>Building your {result.name} training plan...</Text>
+            <Text style={styles.loadingText}>Building your {result.name} training plan…</Text>
           </View>
         </View>
       ) : null}

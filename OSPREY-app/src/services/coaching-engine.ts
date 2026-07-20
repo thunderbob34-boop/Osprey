@@ -26,7 +26,7 @@ const MILE_SPLIT_CUES: Record<number, string[]> = {
   2:  ['Two miles. Nice. Keep the effort controlled.'],
   3:  ['Three miles done. Check your form — relax those shoulders.'],
   4:  ['Four miles. You\'re in the grind now. Stay patient.'],
-  5:  ['Five miles. Halfway there if this is a 10K. Stay steady.'],
+  5:  ['Five miles in. Strong and steady — keep the effort honest.'],
   6:  ['Six miles. You\'ve got this — keep that pace honest.'],
   8:  ['Eight miles. This is where it gets earned. Drive through.'],
   10: ['Ten miles. You\'re doing what most people won\'t. Keep going.'],

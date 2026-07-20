@@ -93,7 +93,7 @@ const FEATURES = [
   { icon: '🏆', title: 'Group Challenges', desc: 'Create unlimited mileage, workout, and duration challenges with friends.' },
   { icon: '🔔', title: 'Live Run Coaching', desc: 'Automatic mile-split callouts, pace alerts, and HR zone cues mid-run.' },
   { icon: '📈', title: 'Performance Intelligence', desc: 'Fitness/fatigue/form trends (CTL/ATL/TSB), injury risk score, race time predictor.' },
-  { icon: '📆', title: 'AI Plan Generation', desc: 'Adaptive weekly training plans powered by GPT-4o-mini.' },
+  { icon: '📆', title: 'AI Plan Generation', desc: 'Adaptive weekly training plans, rebuilt by Ozzie every week.' },
 ];
 
 export default function PaywallScreen() {
@@ -186,7 +186,7 @@ export default function PaywallScreen() {
         <View style={styles.logoWrap}>
           <OzzieMascot size={72} />
           <Text style={styles.logoTitle}>OSPREY+</Text>
-          <Text style={styles.logoTagline}>Your AI coach, fully unleashed.</Text>
+          <Text style={styles.logoTagline}>Your coach in your corner.</Text>
         </View>
 
         <Card style={styles.featuresCard}>

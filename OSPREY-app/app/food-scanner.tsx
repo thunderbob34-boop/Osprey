@@ -147,7 +147,7 @@ export default function FoodScannerScreen() {
         {!scanning ? (
           <View style={styles.statusBox}>
             <ActivityIndicator color={Theme.accent} />
-            <Text style={styles.statusText}>Looking up product...</Text>
+            <Text style={styles.statusText}>Looking up product…</Text>
           </View>
         ) : error ? (
           <View style={styles.statusBox}>

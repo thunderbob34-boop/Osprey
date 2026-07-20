@@ -867,7 +867,7 @@ export default function LogTab() {
               {analyzingPhoto ? (
                 <View style={styles.analyzingRow}>
                   <ActivityIndicator color={Theme.accent} />
-                  <Text style={styles.analyzingText}>Ozzie's looking at your photo...</Text>
+                  <Text style={styles.analyzingText}>Ozzie's looking at your photo…</Text>
                 </View>
               ) : null}
 

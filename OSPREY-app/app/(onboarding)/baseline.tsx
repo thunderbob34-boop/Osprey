@@ -152,7 +152,7 @@ export default function BaselineScreen() {
   }
 
   const title =
-    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : primaryGoal === 'hyrox' ? 'Your division, and a recent hard run' : primaryGoal === 'lift' ? 'Know your current maxes?' : primaryGoal === 'crossfit' ? 'Know your crossfit numbers?' : 'A recent hard run?';
+    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : primaryGoal === 'hyrox' ? 'Your division, and a recent hard run' : primaryGoal === 'lift' ? 'Know your current maxes?' : primaryGoal === 'crossfit' ? 'Know your CrossFit numbers?' : 'A recent hard run?';
 
   return (
     <OnboardingShell

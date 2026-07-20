@@ -13,7 +13,7 @@ export default function ModeScreen() {
     <OnboardingShell
       step={2}
       totalSteps={5}
-      title="How would you describe yourself as a trainer right now?"
+      title="How would you describe your training right now?"
       hint="This sets how I talk to you and what metrics I focus on. You can change it any time."
       onContinue={() => router.push('/(onboarding)/goals')}
     >
@@ -27,18 +27,18 @@ export default function ModeScreen() {
       <OptionCard
         icon="📈"
         title="Building consistency"
-        description="Training regularly for 1–2 years. I'm ready for structure and want to see the metrics."
+        description="You've trained consistently for 1–2 years. I'll add structure and show you the metrics."
         selected={experienceTier === 'intermediate'}
         onPress={() => setExperienceTier('intermediate')}
       />
       <OptionCard
         icon="🏆"
-        title="I have a training base"
+        title="Racing and chasing PRs"
         description="You train regularly with race goals or lifting PRs. I'll get into the data and push you."
         selected={experienceTier === 'advanced'}
         onPress={() => setExperienceTier('advanced')}
       />
-      <Text style={styles.note}>You can change this any time in Settings → Training Preferences</Text>
+      <Text style={styles.note}>You can change this any time in Settings → Training Preferences.</Text>
     </OnboardingShell>
   );
 }

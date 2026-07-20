@@ -223,7 +223,7 @@ export default function PreferencesScreen() {
 
       const hyroxParams = isHyrox ? parseHyroxParams({ division, targetTimeMinutes: '' }) : null;
       if (hyroxParams && !hyroxParams.ok) {
-        Alert.alert('Check your hyrox details', hyroxParams.error);
+        Alert.alert('Check your HYROX details', hyroxParams.error);
         return;
       }
       const hyroxParamsValue = hyroxParams && hyroxParams.ok ? hyroxParams.value : null;
@@ -232,7 +232,7 @@ export default function PreferencesScreen() {
         ? parseCrossfitParams({ backSquat, deadlift: crossfitDeadlift, press, competing, fran })
         : null;
       if (crossfitParams && !crossfitParams.ok) {
-        Alert.alert('Check your crossfit numbers', crossfitParams.error);
+        Alert.alert('Check your CrossFit numbers', crossfitParams.error);
         return;
       }
       const crossfitParamsValue = crossfitParams && crossfitParams.ok ? crossfitParams.value : null;
@@ -298,7 +298,7 @@ export default function PreferencesScreen() {
           .update({ goal_params: hyroxParamsValue })
           .eq('user_id', userId);
         if (goalParamsError) {
-          Alert.alert('Could not save your hyrox details', goalParamsError.message);
+          Alert.alert('Could not save your HYROX details', goalParamsError.message);
           return;
         }
       }
@@ -310,7 +310,7 @@ export default function PreferencesScreen() {
           .update({ goal_params: crossfitParamsValue })
           .eq('user_id', userId);
         if (goalParamsError) {
-          Alert.alert('Could not save your crossfit numbers', goalParamsError.message);
+          Alert.alert('Could not save your CrossFit numbers', goalParamsError.message);
           return;
         }
       }
@@ -357,7 +357,7 @@ export default function PreferencesScreen() {
         </TouchableOpacity>
         <Text style={styles.title}>Build Your Plan</Text>
         <Text style={styles.subtitle}>
-          Ozzie needs to know your training goals to build a smart schedule.
+          Ozzie needs to know your training goals to build a smart plan.
         </Text>
 
         <Text style={styles.sectionLabel}>PRIMARY GOAL</Text>
@@ -650,7 +650,7 @@ export default function PreferencesScreen() {
           {loading ? (
             <>
               <ActivityIndicator color={Theme.ink} style={{ marginRight: 8 }} />
-              <Text style={styles.generateBtnText}>Ozzie is building your schedule...</Text>
+              <Text style={styles.generateBtnText}>Ozzie is building your plan…</Text>
             </>
           ) : (
             <Text style={styles.generateBtnText}>

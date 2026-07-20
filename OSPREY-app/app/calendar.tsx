@@ -206,13 +206,13 @@ export default function CalendarScreen() {
               }}
               activeOpacity={0.8}
               accessibilityRole="button"
-              accessibilityLabel={`Race day: ${selectedDay.raceName}. View in race hub`}
+              accessibilityLabel={`Race day: ${selectedDay.raceName}. View in Races`}
             >
               <Text style={styles.sheetCardIcon}>🏁</Text>
               <View style={styles.sheetCardBody}>
                 <Text style={[styles.sheetCardLabel, { color: IntensityPalette.race.fg }]}>RACE DAY</Text>
                 <Text style={styles.sheetCardTitle}>{selectedDay.raceName}</Text>
-                <Text style={styles.sheetCardDesc}>View in Race Hub →</Text>
+                <Text style={styles.sheetCardDesc}>View in Races →</Text>
               </View>
             </TouchableOpacity>
           ) : null}

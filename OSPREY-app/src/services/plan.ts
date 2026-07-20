@@ -153,6 +153,24 @@ const SWAP_INTENSITY: Record<SwappableSessionType, string> = {
   rest: 'rest',
 };
 
+// Plain-language labels for Ozzie's voice — session_type is an internal
+// enum ('cross', 'rest') that shouldn't leak into what the athlete reads.
+const SESSION_TYPE_SPOKEN_LABEL: Record<string, string> = {
+  run: 'run',
+  lift: 'lift session',
+  cross: 'cross training',
+  rest: 'rest day',
+  swim: 'swim',
+  bike: 'bike ride',
+  rowing: 'row',
+  hyrox: 'HYROX session',
+  race: 'race',
+};
+
+function spokenSessionType(type: string): string {
+  return SESSION_TYPE_SPOKEN_LABEL[type] ?? type;
+}
+
 export async function swapTodaySession(
   userId: string,
   sessionId: string,
@@ -190,8 +208,8 @@ export async function swapTodaySession(
 
   const ozzieReason =
     triggeredBy === 'trend_deload'
-      ? `Ozzie de-loaded this session from ${original.session_type} to ${newType} — training load was climbing toward the danger zone.`
-      : `You swapped today's session from ${original.session_type} to ${newType}.`;
+      ? `Ozzie de-loaded this session from ${spokenSessionType(original.session_type)} to ${spokenSessionType(newType)} — training load was climbing toward the danger zone.`
+      : `You swapped today's session from ${spokenSessionType(original.session_type)} to ${spokenSessionType(newType)}.`;
 
   await supabase.from('plan_adjustments').insert({
     user_id: userId,
@@ -289,7 +307,7 @@ export async function compressTodaySession(
     triggered_by: 'user_request',
     original_json: { planned_minutes: originalMinutes, planned_distance_km: original.planned_distance_km },
     adjusted_json: { planned_minutes: availableMinutes, planned_distance_km: newDistanceKm },
-    ozzie_reason: `You compressed today's ${original.session_type} from ${originalMinutes} to ${availableMinutes} minutes.`,
+    ozzie_reason: `You compressed today's ${spokenSessionType(original.session_type)} from ${originalMinutes} to ${availableMinutes} minutes.`,
   });
 
   await invalidateTodayDailyBrief(userId).catch(() => undefined);

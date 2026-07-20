@@ -818,7 +818,7 @@ export default function LiftWorkoutScreen() {
                   accessibilityRole="button"
                   accessibilityLabel="Cancel voice recording"
                 >
-                  <Text style={styles.recordingHint}>Listening... say "weight for reps" — tap Stop when done</Text>
+                  <Text style={styles.recordingHint}>Listening… say something like "185 for 10" — tap Stop when done</Text>
                 </TouchableOpacity>
               ) : null}
 
