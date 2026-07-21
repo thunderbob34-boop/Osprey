@@ -3,11 +3,8 @@
     "target": "ES2022", "lib": ["ES2022", "DOM", "DOM.Iterable"], "module": "ESNext",
     "moduleResolution": "bundler", "jsx": "react-jsx", "strict": true,
     "noUnusedLocals": true, "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true, "noEmit": true, "types": ["vite/client", "vitest/globals", "node"],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["../OSPREY-app/src/*"]
-    }
+    "noUnusedParameters": true,
+    "skipLibCheck": true, "noEmit": true, "types": ["vite/client", "vitest/globals", "node"]
   },
   "include": ["src", "tests"],
   "exclude": ["node_modules"]

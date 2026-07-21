@@ -174,7 +174,7 @@ const RACE_DISTANCES: { label: string; miles: number }[] = [
 ];
 
 export function buildRacePredictor(
-  dailyLoads: DailyLoad[],
+  _dailyLoads: DailyLoad[],
   bestRunMiles: number,
   bestRunTimeS: number,
 ): RacePredictor | null {
