@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Button } from '@/components/ui';
@@ -26,6 +27,8 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatPacePerUnit, milesToKm } from '@/services/units';
 import { formatRaceDistance, RACE_DISTANCE_LADDER, raceRunwayLabel } from '@/services/race-display';
+import { extractFunctionErrorMessage } from '@/services/supabase';
+import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import {
   DEFAULT_CHECKLIST,
   formatRaceTime,
@@ -539,6 +542,8 @@ function PartnersPanel({ race, onClose }: PartnersPanelProps) {
 // ─── Main screen ─────────────────────────────────────────────────────────────
 
 export default function RacesScreen() {
+  const queryClient = useQueryClient();
+  const [buildingPlanRaceId, setBuildingPlanRaceId] = useState<string | null>(null);
   const router = useRouter();
   const { isPlus } = useSubscription();
   const {
@@ -629,6 +634,50 @@ export default function RacesScreen() {
       );
     } catch (err) {
       Alert.alert('Link failed', err instanceof Error ? err.message : 'Try again.');
+    }
+  }
+
+  function handleBuildPlan(race: RaceEvent) {
+    const weeks = Math.max(1, Math.round(race.daysUntil / 7));
+    Alert.alert(
+      'Build Training Plan',
+      `Ozzie will build a ${weeks}-week training plan targeting ${race.name}. This will replace your current plan. Continue?`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Build Plan', onPress: () => buildPlanForRace(race, weeks) },
+      ],
+    );
+  }
+
+  async function buildPlanForRace(race: RaceEvent, weeks: number) {
+    setBuildingPlanRaceId(race.id);
+    try {
+      const { data, error } = await invokeGeneratePlan({
+        raceTarget: {
+          raceName: race.name,
+          raceDate: race.eventDate,
+          distance: formatRaceDistance(race.distanceKm ?? 0, units) ?? 'Running',
+          weeksOut: weeks,
+        },
+        force: true,
+      });
+      if (error) {
+        const message = await extractFunctionErrorMessage(error);
+        Alert.alert('Plan generation failed', message);
+        return;
+      }
+      queryClient.invalidateQueries({ queryKey: ['daily-summary'] });
+      queryClient.invalidateQueries({ queryKey: ['calendar-month'] });
+      queryClient.invalidateQueries({ queryKey: ['stats'] });
+      const sessions = data?.sessions ?? [];
+      router.push({
+        pathname: '/plan-preview',
+        params: { sessions: JSON.stringify(sessions) },
+      });
+    } catch (err) {
+      Alert.alert('Error', err instanceof Error ? err.message : 'Failed to generate plan. Try again.');
+    } finally {
+      setBuildingPlanRaceId(null);
     }
   }
 
@@ -891,6 +940,16 @@ export default function RacesScreen() {
                           </Text>
                           <View style={styles.actionRow}>
                             <View style={styles.actionGroup}>
+                              <TouchableOpacity
+                                onPress={() => handleBuildPlan(race)}
+                                disabled={buildingPlanRaceId === race.id}
+                                accessibilityRole="button"
+                                accessibilityLabel={`Build a training plan for ${race.name}`}
+                              >
+                                <Text style={styles.actionLink}>
+                                  {buildingPlanRaceId === race.id ? 'Building…' : 'Build plan'}
+                                </Text>
+                              </TouchableOpacity>
                               <TouchableOpacity
                                 onPress={() => handleLinkToPlan(race)}
                                 accessibilityRole="button"
