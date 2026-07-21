@@ -64,6 +64,41 @@ export function useNextRaceEvent(userId: string) {
   });
 }
 
+export interface BuildPlanForRaceInput {
+  raceName: string;
+  raceDate: string;
+  distance: string;
+  weeksOut: number;
+}
+
+/**
+ * Mirrors usePlanSync (features/home/queries.ts) — same edge function, same
+ * already-CORS-fixed supabase.functions.invoke call shape — but as a
+ * user-triggered mutation instead of a background sync-on-mount query, and
+ * with raceTarget/force in the body so the plan regenerates around this
+ * specific race instead of just healing the current week.
+ */
+export function useBuildPlanForRace(userId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (input: BuildPlanForRaceInput) => {
+      const { data, error } = await supabase.functions.invoke('ozzie-generate-plan', {
+        method: 'POST',
+        body: { raceTarget: input, force: true },
+      });
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      void qc.invalidateQueries({ queryKey: ['sessions', userId] });
+      void qc.invalidateQueries({ queryKey: ['completions', userId] });
+      void qc.invalidateQueries({ queryKey: ['daily-summary', userId] });
+      void qc.invalidateQueries({ queryKey: ['today-brief', userId] });
+      void qc.invalidateQueries({ queryKey: ['race-events', userId] });
+    },
+  });
+}
+
 /** Best logged run in the last N days — feeds the Riegel race-time predictor. */
 export function useBestRun(userId: string, days = 84) {
   return useQuery({

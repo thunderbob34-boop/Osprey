@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import {
   useMonthSessions, useCompletions, useMonthRaceEvents, useNextRaceEvent, useBestRun,
-  useGoalDistanceKm, useTuneUpWeeks,
+  useGoalDistanceKm, useTuneUpWeeks, useBuildPlanForRace,
 } from '../../features/calendar/queries';
 import { useLocationZip, useUserGoal } from '../../features/settings/queries';
 import type { TrainingSession, RaceEvent } from '../../lib/schemas';
@@ -69,6 +69,7 @@ function CalendarPage() {
   const tuneUpWeeks = useTuneUpWeeks(sessions.data, goalDistanceKm.data);
   const locationZip = useLocationZip(userId);
   const userGoal = useUserGoal(userId);
+  const buildPlanForRace = useBuildPlanForRace(userId);
 
   const iso = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   const sessionsByDate = useMemo(() => {
@@ -283,6 +284,26 @@ function CalendarPage() {
                 {selected.data.result_time_s ? ` · Result ${formatRaceTimeSec(selected.data.result_time_s)}` : ''}
               </p>
               {selected.data.notes && <p style={{ marginTop: 10 }}>{selected.data.notes}</p>}
+              <button
+                className="btn ghost small"
+                type="button"
+                disabled={buildPlanForRace.isPending}
+                onClick={() => {
+                  const weeksOut = Math.max(1, Math.round(daysUntil(selected.data.event_date) / 7));
+                  if (!window.confirm(`Ozzie will build a ${weeksOut}-week training plan targeting ${selected.data.name}. This will replace your current plan. Continue?`)) return;
+                  buildPlanForRace.mutate({
+                    raceName: selected.data.name,
+                    raceDate: selected.data.event_date,
+                    distance: formatRaceDistance(selected.data.distance_km) ?? 'Running',
+                    weeksOut,
+                  });
+                }}
+              >
+                {buildPlanForRace.isPending ? 'Building…' : 'Build plan for this race'}
+              </button>
+              {buildPlanForRace.isError && (
+                <p className="err-line" style={{ marginTop: 8 }}>Couldn't build a plan. Try again.</p>
+              )}
             </div>
           )}
 
