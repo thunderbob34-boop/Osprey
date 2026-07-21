@@ -1,5 +1,6 @@
 import React from 'react';
 import Svg, { Circle, Ellipse, Path } from 'react-native-svg';
+import { Theme } from '@/constants/theme';
 
 interface OzzieAvatarProps {
   size?: number;
@@ -35,9 +36,9 @@ export default function OzzieAvatar({ size = 40 }: OzzieAvatarProps) {
       <Path d="M45 41 Q33 36 20 38 Q17 42 20 46 Q33 50 45 46 Z" fill="#0D1117" />
       <Path d="M55 41 Q67 36 80 38 Q83 42 80 46 Q67 50 55 46 Z" fill="#0D1117" />
 
-      {/* ── Teal brand accent along the stripe brow ── */}
-      <Path d="M45 41 Q33 36 20 38" stroke="#00c8c8" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.85" />
-      <Path d="M55 41 Q67 36 80 38" stroke="#00c8c8" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.85" />
+      {/* ── Brand accent along the stripe brow ── */}
+      <Path d="M45 41 Q33 36 20 38" stroke={Theme.accent} strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.85" />
+      <Path d="M55 41 Q67 36 80 38" stroke={Theme.accent} strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.85" />
 
       {/* ── Big blue eyes (larger than the stripe = cute) ── */}
       <Circle cx="33" cy="43" r="8.5" fill="#3BA9E0" stroke="#0D1117" strokeWidth="1.5" />
