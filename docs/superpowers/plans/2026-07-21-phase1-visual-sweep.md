@@ -106,11 +106,15 @@ with:
       <Path d="M55 41 Q67 36 80 38" stroke={Theme.accent} strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.85" />
 ```
 
-- [ ] **Step 6: Verify no teal remains anywhere in the components directory**
+- [ ] **Step 6: Verify no teal remains in the mascot components**
 
-Run: `cd "OSPREY-app" && grep -rn "00c8c8" src/ app/ || echo "CLEAN — no teal literals remain"`
+Run: `cd "OSPREY-app" && grep -rn "00c8c8" src/components/ || echo "CLEAN — no teal in components/"`
 
-Expected: `CLEAN — no teal literals remain`
+Expected: `CLEAN — no teal in components/`
+
+Two teal hits remain elsewhere in the app and are **expected at this step** — do not "fix" them here:
+- `src/constants/colors.ts:6` — the old palette's own definition. It legitimately holds teal and stays until every screen is off `colors.ts`.
+- `src/services/calendar-blocking.ts:60` — handled by Task 3, Step 4.
 
 - [ ] **Step 7: Typecheck and test**
 
@@ -280,13 +284,14 @@ git commit -m "fix(mobile): migrate Log's gold chips to neutral"
 
 ---
 
-### Task 3: Migrate the Calendar RACE DAY card off gold
+### Task 3: Migrate the Calendar off old-brand colour (gold card + teal device calendar)
 
-The race-day detail sheet renders in old-brand gold surface/border/text — the same class of decorative race-gold already migrated on the Settings screen during the design program.
+Two old-brand leftovers on the calendar surface. The race-day detail sheet renders in gold surface/border/text — the same class of decorative race-gold already migrated on the Settings screen during the design program. Separately, the OSPREY calendar that the app *creates on the user's device* is registered in old-brand teal, so every blocked workout shows up teal in Apple/Google Calendar — arguably the most publicly visible old-brand pixel in the product.
 
 **Files:**
 - Modify: `OSPREY-app/app/calendar.tsx:214` (label colour)
 - Modify: `OSPREY-app/app/calendar.tsx:343-344` (card surface + border)
+- Modify: `OSPREY-app/src/services/calendar-blocking.ts:60` (device-calendar colour)
 
 **Interfaces:**
 - Consumes: `Theme` from `@/constants/theme` (verify it is already imported; `calendar.tsx` is a migrated screen so it almost certainly is).
@@ -330,23 +335,53 @@ with:
 
 The `${fg}26` hex-alpha derivation is the pattern `theme.ts` already uses for `IntensityPalette` chip surfaces, so this matches the established house style rather than inventing a new tinting approach.
 
-- [ ] **Step 4: Verify**
+- [ ] **Step 4: Recolour the device calendar OSPREY creates**
 
-Run: `cd "OSPREY-app" && grep -n "Colors.gold\|surfaceGold\|borderGold" app/calendar.tsx || echo "CLEAN — no gold remains in calendar.tsx"`
+`src/services/calendar-blocking.ts` registers a real calendar on the user's device (Apple/Google Calendar) with a colour swatch, currently hardcoded old-brand teal. Every workout OSPREY blocks out shows up in that colour in the user's own calendar app.
 
-Expected: `CLEAN — no gold remains in calendar.tsx`
+Add this import alongside the file's existing imports:
 
-- [ ] **Step 5: Typecheck and test**
+```ts
+import { Theme } from '@/constants/theme';
+```
+
+Then at line 60, replace:
+
+```ts
+    color: '#00c8c8',
+```
+
+with:
+
+```ts
+    color: Theme.accent,
+```
+
+**Note on existing installs:** `createCalendarAsync` only runs when OSPREY's calendar does not yet exist, so an athlete who already enabled calendar blocking keeps their teal calendar until it is removed and recreated. That is acceptable — recolouring an existing device calendar behind the user's back would be a surprising side effect, and the swatch is user-editable in their calendar app. Do not add migration code for it.
+
+- [ ] **Step 5: Verify both**
+
+Run:
+
+```bash
+cd "OSPREY-app"
+grep -n "Colors.gold\|surfaceGold\|borderGold" app/calendar.tsx || echo "CLEAN — no gold in calendar.tsx"
+grep -n "00c8c8" src/services/calendar-blocking.ts || echo "CLEAN — no teal in calendar-blocking.ts"
+```
+
+Expected: both `CLEAN` lines.
+
+- [ ] **Step 6: Typecheck and test**
 
 Run: `cd "OSPREY-app" && npx tsc --noEmit && TZ=Asia/Kolkata npx jest`
 Expected: typecheck silent; 355 passed.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 cd "OSPREY-app"
-git add app/calendar.tsx
-git commit -m "fix(mobile): migrate the calendar race-day card off old-brand gold"
+git add app/calendar.tsx src/services/calendar-blocking.ts
+git commit -m "fix(mobile): migrate the calendar off old-brand gold and teal"
 ```
 
 ---
@@ -1058,10 +1093,12 @@ Expected: typecheck silent; 366 passed.
 
 ```bash
 cd "OSPREY-app"
-grep -rn "00c8c8" src/ app/ || echo "no teal"
-grep -rn "Colors.gold\|goldDim\|surfaceGold\|borderGold\|rgba(200,154,0" src/ app/ || echo "no gold"
+grep -rn "00c8c8" src/ app/ | grep -v "src/constants/colors.ts" || echo "no teal outside the old palette"
+grep -rn "Colors.gold\|goldDim\|surfaceGold\|borderGold\|rgba(200,154,0" src/ app/ | grep -v "src/constants/colors.ts" || echo "no gold outside the old palette"
 ```
-Expected: `no teal` and `no gold`.
+Expected: `no teal outside the old palette` and `no gold outside the old palette`.
+
+`src/constants/colors.ts` is excluded on purpose — it is the old palette's own definition file and legitimately still declares `teal`/`gold`. It stays until every screen is off it, which is beyond this phase.
 
 - [ ] **Visual check in the Expo web preview**
 
