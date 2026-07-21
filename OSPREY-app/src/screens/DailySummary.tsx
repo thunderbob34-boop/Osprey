@@ -65,9 +65,10 @@ export default function DailySummaryScreen({
   userName = 'Athlete',
   recovery,
   session = {
-    type: 'No Session Planned',
-    duration: 'Free day',
-    ozzieNote: "Ozzie is still crunching today's read.",
+    type: 'No Plan Yet',
+    duration: 'Ready when you are',
+    ozzieNote:
+      "Tell me your sport and goal and I'll build your first week — paces, sessions, and fuel included.",
   },
   weekDistanceKm = 0,
   weekTargetKm,
@@ -83,6 +84,7 @@ export default function DailySummaryScreen({
   isRefreshing = false,
   onRefresh,
   onStartSession,
+  onBuildPlan,
   onSwapSession,
   onCompressSession,
   fuelStatus,
@@ -321,12 +323,22 @@ export default function DailySummaryScreen({
           <View style={styles.sessionActionsRow}>
             <Button
               variant="primary"
-              onPress={() => onStartSession?.(session)}
+              onPress={() => (session.sessionType ? onStartSession?.(session) : onBuildPlan?.())}
               disabled={session.sessionType === 'rest'}
-              accessibilityLabel={session.sessionType === 'rest' ? 'Rest day' : 'Start session'}
+              accessibilityLabel={
+                session.sessionType === 'rest'
+                  ? 'Rest day'
+                  : session.sessionType
+                  ? 'Start session'
+                  : 'Build my plan'
+              }
               style={{ flex: 1 }}
             >
-              {session.sessionType === 'rest' ? 'Rest Day' : 'Start Session →'}
+              {session.sessionType === 'rest'
+                ? 'Rest Day'
+                : session.sessionType
+                ? 'Start Session →'
+                : 'Build My Plan →'}
             </Button>
             {(onSwapSession || onCompressSession) &&
             session.sessionId &&

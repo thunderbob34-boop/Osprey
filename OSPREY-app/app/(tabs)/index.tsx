@@ -68,8 +68,15 @@ export default function HomeTab() {
           params: { sessionType: session.sessionType, sessionId },
         });
         return;
-      default:
+      case 'run':
         router.push({ pathname: '/workout/run', params: { sessionId } });
+        return;
+      default:
+        // No sessionType means there is no generated plan — the Home CTA
+        // renders "Build My Plan" and calls onBuildPlan instead, so this is
+        // only reachable if a future session type is added without routing.
+        // Send them to the plan rather than starting an unplanned GPS run.
+        router.push('/plan-preview');
     }
   }
 
@@ -126,6 +133,7 @@ export default function HomeTab() {
       onRetry={() => refetch()}
       onRefresh={() => refetch()}
       onStartSession={handleStartSession}
+      onBuildPlan={() => router.push('/plan-preview')}
       onSwapSession={handleSwapSession}
       onCompressSession={handleCompressSession}
       fuelStatus={fuelStatus}

@@ -86,6 +86,7 @@ export interface DailySummaryProps extends Partial<DailySummaryData> {
   isRefreshing?: boolean;
   onRefresh?: () => void;
   onStartSession?: (session: SessionData) => void;
+  onBuildPlan?: () => void;
   onSwapSession?: (newType: 'run' | 'lift' | 'cross' | 'rest') => void;
   onCompressSession?: (availableMinutes: number) => void;
   fuelStatus?: FuelStatusData;
