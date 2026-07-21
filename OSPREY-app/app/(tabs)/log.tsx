@@ -16,7 +16,7 @@ import Svg, { Polyline } from 'react-native-svg';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { Theme, Radius, BorderWidth, EffortPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import FieldError from '@/components/FieldError';
 import HydrationCard from '@/components/HydrationCard';
@@ -802,12 +802,13 @@ export default function LogTab() {
                         <Text style={styles.recentChipMeta}>{meal.calories ?? 0} cal</Text>
                       </TouchableOpacity>
                     ))}
-                    {/* NOT converted to <Button>: gold here is functional (distinguishes
-                        this action from the accent-colored recent-meal chips beside it),
-                        and the primitive only offers ink/accent spinner+text colors — a
-                        gold treatment isn't expressible without overriding both the fill
-                        and the label, at which point it's not really using the primitive.
-                        Left hand-rolled to preserve the gold semantics. */}
+                    {/* NOT converted to <Button>: this is a secondary utility action, so
+                        it reads neutral against the amber recent-meal chips beside it —
+                        the Button primitive only offers ink/accent treatments, and a
+                        neutral one isn't expressible without overriding both the fill and
+                        the label. (Was gold when the neighbouring chips were teal; once
+                        those migrated to amber, warm-on-warm stopped reading as a
+                        distinction — see the 2026-07-21 experience audit.) */}
                     <TouchableOpacity
                       style={[styles.recentChip, styles.copyYesterdayChip]}
                       onPress={handleCopyYesterday}
@@ -817,10 +818,10 @@ export default function LogTab() {
                       accessibilityState={{ disabled: copyYesterday.isPending, busy: copyYesterday.isPending }}
                     >
                       {copyYesterday.isPending ? (
-                        <ActivityIndicator color={Colors.gold} size="small" />
+                        <ActivityIndicator color={EffortPalette.rest} size="small" />
                       ) : (
                         <>
-                          <Text style={[styles.recentChipName, { color: Colors.gold }]}>
+                          <Text style={[styles.recentChipName, { color: EffortPalette.rest }]}>
                             ⧉ Copy yesterday
                           </Text>
                           <Text style={styles.recentChipMeta}>all meals</Text>
@@ -1107,9 +1108,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
-  dayTypeChipRest: { backgroundColor: Colors.goldDim, borderColor: 'rgba(200,154,0,0.3)' },
+  dayTypeChipRest: { backgroundColor: 'transparent', borderColor: Theme.line },
   dayTypeChipText: { fontSize: 10, fontWeight: '700', color: Theme.accent, fontFamily: 'SpaceGrotesk_700Bold' },
-  dayTypeChipTextRest: { color: Colors.gold },
+  dayTypeChipTextRest: { color: EffortPalette.rest },
   macroRow: { flexDirection: 'row', alignItems: 'baseline', gap: 6 },
   macroValue: { fontSize: 20, fontWeight: '800', color: Theme.text },
   macroUnit: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
@@ -1181,8 +1182,8 @@ const styles = StyleSheet.create({
   recentChipName: { fontSize: 12, fontWeight: '700', color: Theme.accent },
   recentChipMeta: { fontSize: 10, color: Theme.textMut, fontWeight: '600' },
   copyYesterdayChip: {
-    borderColor: 'rgba(200,154,0,0.3)',
-    backgroundColor: Colors.goldDim,
+    borderColor: Theme.line,
+    backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
   },
