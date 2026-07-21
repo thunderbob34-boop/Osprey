@@ -88,7 +88,24 @@ redeploy anytime (it needs no migration and no app-build coupling). Only browser
 lacked CORS: the webapp calls exactly one edge fn today (`ozzie-nutrition-coach`); the new `ozzie-chat` (its own
 branch) already ships with CORS.
 
-### ⚠️ Pending since the 2026-07-14 deploy — `ozzie-generate-plan` must be REDEPLOYED at go-live
+### ✅ DONE 2026-07-21 — the Phase-3 atomic deploy SHIPPED (`ozzie-generate-plan` v22 → v23 + all 5 migrations)
+
+**The whole "pending since 2026-07-14" bundle below is now DEPLOYED.** History kept for context; the ⚠️ no longer applies.
+
+Applied via MCP `apply_migration` (not `db push` — history drift), all additive + idempotent, in order:
+`sport_primary_goals` (swim/rowing/hyrox) · `cycling_primary_goal` · `ultra_primary_goal` · `crossfit_primary_goal` · `goal_params` (JSONB col on `user_goals`).
+**Verified:** `primary_goal_enum` now holds all 12 values (`run, lift, hybrid, weight_loss, general_fitness, triathlon, swim, rowing, hyrox, cycling, ultra, crossfit`); `user_goals.goal_params` exists as `jsonb`.
+
+Then `supabase functions deploy ozzie-generate-plan --use-api` (bundles all 6 modular files: index/validate/goals/guidance/backtoback/date).
+**Verified live:** v23 ACTIVE, `verify_jwt: true` preserved · OPTIONS preflight → `200` + `access-control-allow-origin: *` (the F1 CORS fix survived) · bogus JWT → `401` (auth gate intact) · real signed-in app load → `POST 200` in ~2.1-2.4 s, no 500s · 51/51 Deno unit tests green on the exact deployed source.
+
+**What this unblocks:** hyrox/ultra/powerlifting/crossfit athletes now get their sport's real coaching guidance (`hyroxGuidance()` etc.) instead of a generic run/lift plan. REC-002's Hyrox session type rode along.
+
+⚠️ **Found during this deploy, NOT fixed:** `ozzie-daily-brief` has **no CORS handling at all** (no OPTIONS handler, no ACAO headers) but `OSPREY-app/src/services/daily-summary.ts:149` invokes it — so on any browser surface (Expo web preview, and the webapp if it ever calls it) the preflight `405`s and the daily brief silently never loads. Native iOS/Android is unaffected (RN doesn't enforce CORS). **This is the 4th instance of the same "written mobile-first, later gains a browser caller, nobody added CORS" pattern** (after `ozzie-nutrition-coach` and `ozzie-generate-plan`). Fix is ~5 lines mirroring `ozzie-race-briefing:75-82`.
+
+<details><summary>Historical context — the pending bundle (now shipped)</summary>
+
+### ⚠️ (HISTORICAL) Pending since the 2026-07-14 deploy — `ozzie-generate-plan` must be REDEPLOYED at go-live
 
 The coaching-engine work landed on `main` after that deploy, so the **live** `ozzie-generate-plan` is now stale.
 Redeploy it (`supabase functions deploy ozzie-generate-plan`) as part of the app go-live, and apply the one new
@@ -216,6 +233,8 @@ migration. What changed and why the app + edge fn must ship together (atomic):
 
 Each piece is backward-compatible on its own, but the app build that exposes sport selection needs **both** the
 migrations applied **and** the fn redeployed, or a selected sport fails to persist / no-ops.
+
+</details>
 
 ---
 
