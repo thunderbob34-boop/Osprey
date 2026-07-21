@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
 import { toDateInputValue, localDayRange } from '../../lib/day';
+import { computeAtlCtlTsb, type DailyLoad, type LoadSeriesPoint } from '../../lib/fitness-load';
 
 const DailySummaryRow = z.object({
   recovery_score: z.coerce.number().nullable(),
@@ -119,5 +120,63 @@ export function usePlanSync(userId: string) {
     // safe rather than necessary.
     staleTime: 60 * 60 * 1000,
     retry: 1,
+  });
+}
+
+/**
+ * Sums workout_logs.tss per calendar day and fills every day in the window
+ * (0 TSS on rest days), matching OSPREY-app's fetchPerformanceData exactly —
+ * see that file's own comment on why the date basis must stay UTC-consistent
+ * on both sides of this join (row.started_at.slice(0,10) is UTC; so is the
+ * generated date range below — localizing only one side zeroes every day).
+ * A null tss is treated as 0, not estimated — unlike mobile's estimateTss
+ * fallback, this chart only shows real recorded numbers.
+ */
+export function fillDailyLoads(rows: { started_at: string; tss: number | null }[], days: number): DailyLoad[] {
+  const tssMap: Record<string, number> = {};
+  for (const row of rows) {
+    const date = row.started_at.slice(0, 10);
+    tssMap[date] = (tssMap[date] ?? 0) + (row.tss ?? 0);
+  }
+
+  const since = new Date();
+  since.setDate(since.getDate() - days);
+
+  const result: DailyLoad[] = [];
+  for (let i = 0; i < days; i++) {
+    const d = new Date(since);
+    d.setDate(d.getDate() + i);
+    const dateStr = d.toISOString().slice(0, 10);
+    result.push({ date: dateStr, tss: tssMap[dateStr] ?? 0 });
+  }
+  return result;
+}
+
+const FITNESS_LOAD_WINDOW_DAYS = 84;
+
+/**
+ * The webapp's own client-side CTL/ATL/TSB series — deliberately NOT read
+ * from v_daily_summary.atl/.ctl or the load_scores table (see this plan's
+ * Global Constraints: load_scores is a dead table, silently null for every
+ * user). Mirrors OSPREY-app's fetchPerformanceData + computeAtlCtlTsb.
+ */
+export function useFitnessLoadSeries(userId: string) {
+  return useQuery({
+    queryKey: ['fitness-load-series', userId],
+    queryFn: async (): Promise<LoadSeriesPoint[]> => {
+      const since = new Date();
+      since.setDate(since.getDate() - FITNESS_LOAD_WINDOW_DAYS);
+      const { data, error } = await supabase
+        .from('workout_logs')
+        .select('started_at, tss')
+        .eq('user_id', userId)
+        .is('deleted_at', null)
+        .gte('started_at', since.toISOString())
+        .order('started_at', { ascending: true });
+      if (error) throw error;
+      const dailyLoads = fillDailyLoads((data ?? []) as { started_at: string; tss: number | null }[], FITNESS_LOAD_WINDOW_DAYS);
+      return computeAtlCtlTsb(dailyLoads);
+    },
+    staleTime: 30 * 60 * 1000,
   });
 }
