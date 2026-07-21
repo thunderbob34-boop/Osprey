@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useMonthSessions, useCompletions, useNextRaceEvent, useBestRun } from '../../features/calendar/queries';
-import { useDailySummary, useTodayBrief } from '../../features/home/queries';
+import { useDailySummary, useTodayBrief, useFitnessLoadSeries } from '../../features/home/queries';
 import { useUnits, useUserGoal } from '../../features/settings/queries';
 import { useDayLog, sumDay, useNutritionTargets } from '../../features/nutrition/queries';
 import { pickTodaySession, buildWeekStrip } from '../../features/home/model';
@@ -94,6 +94,53 @@ function StatBandEmpty() {
     <div className="empty-state">
       <h3>No training stats yet</h3>
       <p>Recovery, form, and weekly mileage show up here once you've logged a few sessions.</p>
+    </div>
+  );
+}
+
+const CHART_H = 90;
+const CHART_PAD = { t: 8, b: 8, l: 4, r: 4 };
+
+// Hand-rolled SVG polyline, mirroring OSPREY-app's own FitnessChart
+// (app/(tabs)/stats.tsx) exactly — no charting library, matching mobile's
+// proven zero-dependency approach for the identical chart.
+function FitnessChart({ series, width }: { series: { date: string; atl: number; ctl: number }[]; width: number }) {
+  if (series.length < 2 || width <= 0) return null;
+
+  const maxVal = Math.max(1, ...series.map((s) => Math.max(s.atl, s.ctl)));
+  const innerW = width - CHART_PAD.l - CHART_PAD.r;
+  const innerH = CHART_H - CHART_PAD.t - CHART_PAD.b;
+
+  const xOf = (i: number) => CHART_PAD.l + (i / (series.length - 1)) * innerW;
+  const yOf = (val: number) => CHART_PAD.t + innerH - (val / maxVal) * innerH;
+
+  const ctlPoints = series.map((s, i) => `${xOf(i)},${yOf(s.ctl)}`).join(' ');
+  const atlPoints = series.map((s, i) => `${xOf(i)},${yOf(s.atl)}`).join(' ');
+
+  return (
+    <svg width={width} height={CHART_H} viewBox={`0 0 ${width} ${CHART_H}`}>
+      <polyline points={ctlPoints} fill="none" stroke="var(--amber)" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" opacity={0.9} />
+      <polyline points={atlPoints} fill="none" stroke="var(--mut)" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" opacity={0.75} />
+    </svg>
+  );
+}
+
+function FitnessTrendCard({ userId }: { userId: string }) {
+  const series = useFitnessLoadSeries(userId);
+  if (series.isError) return null; // best-effort — the rest of the dashboard doesn't depend on this
+  if (series.isPending) return <p className="loading-line">Loading…</p>;
+  if (!series.data || series.data.length < 2) return null; // not enough history yet — no empty chart
+
+  return (
+    <div className="detail-card">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+        <div className="tag" style={{ marginBottom: 0 }}>Fitness trend (12 weeks)</div>
+        <div style={{ display: 'flex', gap: 14, fontSize: 11, color: 'var(--mut)' }}>
+          <span><span style={{ color: 'var(--amber)' }}>●</span> Fitness (CTL)</span>
+          <span><span style={{ color: 'var(--mut)' }}>●</span> Fatigue (ATL)</span>
+        </div>
+      </div>
+      <FitnessChart series={series.data} width={640} />
     </div>
   );
 }
@@ -338,6 +385,8 @@ function DashboardPage() {
         />
 
         <StatBand userId={userId} />
+
+        <FitnessTrendCard userId={userId} />
 
         <WeekStrip
           weekSessions={weekSessions}
