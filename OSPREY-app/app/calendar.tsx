@@ -16,11 +16,16 @@ import ScreenHeader from '@/components/ScreenHeader';
 import { useCalendarMonth } from '@/hooks/useCalendarMonth';
 import type { CalendarDay } from '@/services/calendar';
 
-const SESSION_ICON: Record<string, string> = {
+// Exported for the parity test in app/__tests__/calendar-icons.test.ts. Must
+// stay in sync with plan-preview.tsx's SESSION_ICONS — both render the same
+// plan, and a missing key renders a bare fallback dot instead of the session.
+export const SESSION_ICON: Record<string, string> = {
   run: '🏃',
   lift: '🏋️',
   swim: '🏊',
   bike: '🚴',
+  rowing: '🚣',
+  hyrox: '🏋️‍♂️',
   cross: '🔁',
   race: '🏁',
   rest: '😴',
@@ -174,7 +179,7 @@ export default function CalendarScreen() {
       )}
 
       <View style={styles.legend}>
-        <Text style={styles.legendText}>🏃 Run  🏋️ Lift  🏊 Swim  🚴 Bike  🔁 Cross  🏁 Race</Text>
+        <Text style={styles.legendText}>🏃 Run  🏋️ Lift  🏊 Swim  🚴 Bike  🚣 Rowing  🏋️‍♂️ Hyrox  🔁 Cross  🏁 Race</Text>
         <Text style={styles.legendText}>Faded = planned · Solid = completed</Text>
       </View>
 
