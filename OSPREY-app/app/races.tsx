@@ -656,7 +656,7 @@ export default function RacesScreen() {
         raceTarget: {
           raceName: race.name,
           raceDate: race.eventDate,
-          distance: formatRaceDistance(race.distanceKm ?? 0, units) ?? 'Running',
+          distance: race.distanceKm ? formatRaceDistance(race.distanceKm, units) : 'Running',
           weeksOut: weeks,
         },
         force: true,
