@@ -14,7 +14,7 @@
 - **User decision (binding):** Log's gold chips migrate to a **neutral** tone (`EffortPalette.rest`, which is `Theme.textMut`). This deliberately reverses the earlier "gold is functional" call — the code comment asserting that reasoning must be removed, not left contradicting the code.
 - Ink/amber tokens only, from `@/constants/theme`: `Theme.ink #09090B`, `Theme.panel`, `Theme.line`, `Theme.accent #c8793a`, `Theme.accentBright`, `Theme.text`, `Theme.textSoft`, `Theme.textMut`, `Radius.card` (4), `BorderWidth.card` (2).
 - **Functional color stays functional.** Do NOT touch: danger red, validation red, `EffortPalette`/`IntensityPalette` ramps, zone dots, `ChartPalette`. Only brand-decorative color moves.
-- Every task ends with `npx tsc --noEmit` clean and `TZ=Asia/Kolkata npx jest` fully green from `OSPREY-app/`.
+- **Tasks 1-6 (mobile app)** end with `npx tsc --noEmit` clean and `TZ=Asia/Kolkata npx jest` fully green from `OSPREY-app/`. **Task 7 (edge function)** has no Jest suite — it ends with `deno check` (count unchanged vs. the pre-existing baseline) and `deno test --allow-all` green from its own function directory, per its own steps.
 - Commit messages: short, imperative, `fix(mobile):` or `feat(mobile):` prefix. Edge-function task uses `fix(edge):`.
 - Do not touch `webapp/`, and do not modify any file already modified-and-uncommitted outside this plan's scope. Run `git status` first; if unexpected files are dirty, report rather than committing them.
 - **Do not deploy anything.** Task 7 changes edge-function source only; deployment needs separate explicit user permission.
