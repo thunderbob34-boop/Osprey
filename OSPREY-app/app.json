@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#060912"
+      "backgroundColor": "#09090B"
     },
     "ios": {
       "bundleIdentifier": "com.SillyGoose.OSPREY",
@@ -48,7 +48,7 @@
       "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#060912"
+        "backgroundColor": "#09090B"
       },
       "permissions": [
         "android.permission.ACCESS_COARSE_LOCATION",
