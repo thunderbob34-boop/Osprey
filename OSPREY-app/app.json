@@ -15,7 +15,7 @@
     "ios": {
       "bundleIdentifier": "com.SillyGoose.OSPREY",
       "appleTeamId": "8YVWCVPW8J",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "supportsTablet": false,
       "requireFullScreen": true,
       "usesAppleSignIn": true,
