@@ -1,5 +1,10 @@
 import { buildHyroxPrescription } from '@/services/coaching/hyrox';
-import { hyroxStationWeights, predictCompromisedRunSplit } from '@/services/calculators/hyrox';
+import {
+  hyroxStationWeights,
+  predictCompromisedRunSplit,
+  isDoublesDivision,
+  type HyroxDivision,
+} from '@/services/calculators/hyrox';
 
 const base = () => ({
   sport: 'hyrox', phase: 'Base', weekNumber: 1, totalWeeks: 8, baselineLoad: 200, prevWeekLoad: null,
@@ -25,5 +30,34 @@ describe('buildHyroxPrescription', () => {
   it('is null when hyroxParams is absent (paramless hyrox → generic plan)', () => {
     expect(buildHyroxPrescription({ ...base(), hyroxParams: null })).toBeNull();
     expect(buildHyroxPrescription({ ...base(), hyroxParams: undefined })).toBeNull();
+  });
+
+  describe('doubles divisions', () => {
+    const forDivision = (division: HyroxDivision) =>
+      buildHyroxPrescription({ ...base(), hyroxParams: { division, targetTimeMinutes: null } } as any)!;
+
+    it('races at Open loads — a doubles pair does not get a lighter sled', () => {
+      expect(forDivision('doubles_men').stationWeights).toEqual(hyroxStationWeights('open_men'));
+      expect(forDivision('doubles_women').stationWeights).toEqual(hyroxStationWeights('open_women'));
+    });
+
+    it('a mixed pair races the WOMEN\'S Open loads, not the men\'s', () => {
+      // The one rule that is easy to get backwards, so pin it explicitly.
+      expect(forDivision('doubles_mixed').stationWeights).toEqual(hyroxStationWeights('open_women'));
+      expect(forDivision('doubles_mixed').stationWeights).not.toEqual(hyroxStationWeights('open_men'));
+    });
+
+    it('still prescribes the full compromised run split — running is NOT shared', () => {
+      // Both partners run all 8 x 1km, so the run prescription is identical to an
+      // individual race. Halving it here would under-prepare every doubles athlete.
+      expect(forDivision('doubles_mixed').compromisedRunSplitSecPerKm)
+        .toEqual(buildHyroxPrescription(base())!.compromisedRunSplitSecPerKm);
+    });
+
+    it('classifies divisions correctly', () => {
+      expect(isDoublesDivision('doubles_mixed')).toBe(true);
+      expect(isDoublesDivision('open_men')).toBe(false);
+      expect(isDoublesDivision('pro_women')).toBe(false);
+    });
   });
 });

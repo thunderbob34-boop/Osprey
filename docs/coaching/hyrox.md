@@ -44,6 +44,30 @@ Hyrox is a compromised-running race: your run splits are decided by how much the
 
 Wall balls are 100 reps in every division; only ball weight and target height change.
 
+> ✅ **The four Pro sled figures were checked and confirmed correct (2026-07-20).** An
+> independent source (hyroxfitness.com's divisions page) had given Pro M 175/125 and Pro W
+> 125/100, disagreeing with the table above. A direct check against hyrox.com's own official
+> "Weights, Distances and Repetitions" table confirmed every figure above — all four divisions,
+> both sled stations — exactly matches the authoritative source; hyroxfitness.com's numbers were
+> the incorrect ones. See `~/.claude/skills/hyrox-trainer-experience/benchmark/audit-checklist.md`
+> row 14 for the full verification record.
+
+**Doubles & Relay (team formats)**
+
+| Format | Athletes | Running | Stations | Loads |
+|---|---|---|---|---|
+| Doubles | 2 | **Not split** — both partners run all 8 × 1km together (full 8 km each) | One race's reps shared freely; unlimited swaps, only one works at a time | Open |
+| Mixed Doubles | 2 (1 M, 1 W) | as above | as above | **Women's Open** |
+| Relay | 4 | Split — each athlete takes 2 runs | Each athlete takes the 2 stations between their runs (≈2 km each) | not established |
+
+Doubles pacing is set by the **slower partner on the day** — surging just forces a catch-up later.
+Swap in short frequent blocks on high-fatigue stations (~15–20 reps, or 200–250 m), **except the
+sleds**, where one partner completing a full length is usually faster because momentum matters.
+Split by strength rather than evenly: the stronger runner can absorb more station load to bank time.
+
+Relay is **not modelled in code** — its loads are not established by any source consulted, and
+`OSPREY-app/src/services/race-search.ts` currently filters `'relay'` out of race search entirely.
+
 **Macrocycle**
 
 | Phase | Weeks out | Emphasis | Looks like |

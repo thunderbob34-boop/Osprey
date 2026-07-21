@@ -16,7 +16,7 @@ import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Button, Card } from '@/components/ui';
 import { useAuthStore } from '@/store/authStore';
-import { hyroxStationWeights, type HyroxDivision } from '@/services/calculators/hyrox';
+import { hyroxStationWeights, isDoublesDivision, type HyroxDivision } from '@/services/calculators/hyrox';
 import { saveHyroxWorkout } from '@/services/workouts';
 import {
   HYROX_RUN_ICON,
@@ -31,6 +31,9 @@ const DIVISIONS: { id: HyroxDivision; label: string }[] = [
   { id: 'open_women', label: 'Open Women' },
   { id: 'pro_men', label: 'Pro Men' },
   { id: 'pro_women', label: 'Pro Women' },
+  { id: 'doubles_men', label: 'Doubles Men' },
+  { id: 'doubles_women', label: 'Doubles Women' },
+  { id: 'doubles_mixed', label: 'Doubles Mixed' },
 ];
 
 type Phase = 'division' | 'overview' | 'running';
@@ -238,6 +241,14 @@ export default function HyroxWorkoutScreen() {
             ? '8km running, 8 stations'
             : `${selectedRunCount} run${selectedRunCount === 1 ? '' : 's'}, ${selectedStationCount} station${selectedStationCount === 1 ? '' : 's'}`}
         </Text>
+        {division && isDoublesDivision(division) ? (
+          // The most-misunderstood thing about doubles: the running is NOT shared.
+          // Both partners run every leg, so this screen still lists all 8 runs at
+          // full distance; only the station reps are split between you.
+          <Text style={styles.doublesNote}>
+            You both run all 8 × 1km — only the station reps are shared. Log your own share.
+          </Text>
+        ) : null}
 
         <View style={styles.overviewToolbar}>
           <Text style={styles.overviewHint}>Tap to skip a segment — just practicing, not the full race?</Text>
@@ -443,6 +454,14 @@ const styles = StyleSheet.create({
   overviewBack: { fontSize: 15, fontWeight: '700', color: Theme.accent },
   overviewTitle: { fontSize: 26, fontWeight: '900', color: Theme.text, paddingHorizontal: 20, marginTop: 8 },
   overviewSubtitle: { fontSize: 13, color: Theme.textMut, paddingHorizontal: 20, marginTop: 4, marginBottom: 12 },
+  doublesNote: {
+    fontSize: 12,
+    lineHeight: 17,
+    color: Theme.accent,
+    paddingHorizontal: 20,
+    marginTop: -6,
+    marginBottom: 12,
+  },
   overviewToolbar: { paddingHorizontal: 20, marginBottom: 12, gap: 8 },
   overviewHint: { fontSize: 12, color: Theme.textMut, lineHeight: 17 },
   overviewQuickActions: { flexDirection: 'row', gap: 16 },

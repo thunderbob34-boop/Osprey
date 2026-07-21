@@ -31,6 +31,9 @@ const DIVISION_LABEL: Record<HyroxDivision, string> = {
   open_women: 'Open Women',
   pro_men: 'Pro Men',
   pro_women: 'Pro Women',
+  doubles_men: 'Doubles Men',
+  doubles_women: 'Doubles Women',
+  doubles_mixed: 'Doubles Mixed',
 };
 
 const STATION_LABEL: Record<keyof HyroxStationWeights, string> = {

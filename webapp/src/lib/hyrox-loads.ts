@@ -6,13 +6,29 @@ export interface Range {
   max: number;
 }
 
-export type HyroxDivision = 'open_men' | 'open_women' | 'pro_men' | 'pro_women';
+export type HyroxDivision =
+  | 'open_men'
+  | 'open_women'
+  | 'pro_men'
+  | 'pro_women'
+  // Doubles: two athletes share ONE race's station workload, but BOTH run every
+  // 1km leg together — running is not split, so a doubles athlete still covers
+  // the full 8km. Open loads; a mixed pair races the women's Open loads.
+  // No `pro_doubles_*` yet — not a weight dispute (resolved, see
+  // HYROX_STATION_WEIGHTS below), but Pro Doubles' own format rules are
+  // unresearched, a separate gap.
+  | 'doubles_men'
+  | 'doubles_women'
+  | 'doubles_mixed';
 
 export const HYROX_DIVISIONS: readonly HyroxDivision[] = [
   'open_men',
   'open_women',
   'pro_men',
   'pro_women',
+  'doubles_men',
+  'doubles_women',
+  'doubles_mixed',
 ];
 
 export const MILES_PER_KM = 0.621371;
@@ -25,6 +41,11 @@ export interface HyroxStationWeights {
   wallBallKg: number;
 }
 
+// ✅ RESOLVED 2026-07-20 — the Pro sled figures below were disputed against a
+// secondary source but are confirmed correct against hyrox.com's own official
+// rules. See the full verification note in
+// OSPREY-app/src/services/calculators/hyrox.ts (this file is a maintained
+// port; tests/hyrox-loads.test.ts enforces parity, so do not diverge here).
 const HYROX_STATION_WEIGHTS: Record<HyroxDivision, HyroxStationWeights> = {
   open_men: {
     sledPushKg: 152,
@@ -54,7 +75,34 @@ const HYROX_STATION_WEIGHTS: Record<HyroxDivision, HyroxStationWeights> = {
     sandbagLungesKg: 20,
     wallBallKg: 6,
   },
+  // Doubles races at Open loads; a mixed pair races the women's Open loads.
+  doubles_men: {
+    sledPushKg: 152,
+    sledPullKg: 103,
+    farmersCarryPerHandKg: 24,
+    sandbagLungesKg: 20,
+    wallBallKg: 6,
+  },
+  doubles_women: {
+    sledPushKg: 102,
+    sledPullKg: 78,
+    farmersCarryPerHandKg: 16,
+    sandbagLungesKg: 10,
+    wallBallKg: 4,
+  },
+  doubles_mixed: {
+    sledPushKg: 102,
+    sledPullKg: 78,
+    farmersCarryPerHandKg: 16,
+    sandbagLungesKg: 10,
+    wallBallKg: 4,
+  },
 };
+
+/** True when a division shares one race's station workload across two athletes. */
+export function isDoublesDivision(division: HyroxDivision): boolean {
+  return division === 'doubles_men' || division === 'doubles_women' || division === 'doubles_mixed';
+}
 
 export function hyroxStationWeights(division: HyroxDivision): HyroxStationWeights {
   return HYROX_STATION_WEIGHTS[division];
