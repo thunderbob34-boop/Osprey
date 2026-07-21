@@ -14,6 +14,7 @@ export interface SessionData {
   duration: string;
   distanceKm?: number | null;
   zone?: string;
+  intensity?: string | null;
   ozzieNote: string;
   whyReasoning?: string | null;
   sessionId?: string | null;

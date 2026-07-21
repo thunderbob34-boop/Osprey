@@ -315,6 +315,7 @@ function mapSession(
     duration: session.planned_minutes ? `${session.planned_minutes} min` : '—',
     distanceKm: session.planned_distance_km,
     zone: intensityToZone(session.intensity),
+    intensity: session.intensity,
     ozzieNote: dailyBrief.text ?? session.ozzie_notes ?? fallbackNote,
     whyReasoning: dailyBrief.whyReasoning,
     sessionId: session.id,
