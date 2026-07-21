@@ -261,11 +261,13 @@ with:
     backgroundColor: 'transparent',
 ```
 
-- [ ] **Step 6: Verify no gold remains in log.tsx**
+- [ ] **Step 6: Verify no *functional* gold remains in log.tsx**
 
-Run: `cd "OSPREY-app" && grep -n "gold\|rgba(200,154,0" "app/(tabs)/log.tsx" || echo "CLEAN — no gold remains in log.tsx"`
+Run: `cd "OSPREY-app" && grep -n "Colors.gold\|goldDim\|rgba(200,154,0" "app/(tabs)/log.tsx" || echo "CLEAN — no functional gold in log.tsx"`
 
-Expected: `CLEAN — no gold remains in log.tsx`
+Expected: `CLEAN — no functional gold in log.tsx`
+
+This greps for gold **token references**, not the word. Step 3's replacement comment deliberately mentions gold once, in a past-tense sentence explaining why the colour changed — that history is the point of the comment and must stay.
 
 - [ ] **Step 7: Typecheck and test**
 
