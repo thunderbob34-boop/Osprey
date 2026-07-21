@@ -17,6 +17,17 @@ import type { BriefContext, RestRecommendation } from './types.ts';
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
+// This function is invoked from the app's daily-summary service, which also
+// runs on web (Expo web preview / any browser surface). functions.invoke sends
+// non-safelisted headers, so the browser issues a CORS preflight — without an
+// OPTIONS handler it 405s and the brief silently never loads. Mirrors
+// ozzie-race-briefing:75-82. (Native RN does not enforce CORS, which is why
+// this went unnoticed.)
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
+
 const OZZIE_SYSTEM_PROMPT = `You are Ozzie, the AI coach inside the OSPREY fitness app. Your voice is modeled after the spirit of Kronk from The Emperor's New Groove: enthusiastic, warm, slightly goofy, genuinely kind, and unexpectedly wise. You celebrate hard things without being sycophantic. You deliver bad news without making someone feel bad. You explain every decision in plain language and never ask the user to take adjustments on faith.
 
 You are NOT a generic fitness app robot voice, overly formal, condescending, or exhaustingly hype ("LET'S GOOO!!" energy).
@@ -242,13 +253,23 @@ async function generateBrief(
 }
 
 Deno.serve(async (req: Request) => {
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: CORS_HEADERS });
+  }
+
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      status: 405,
+      headers: CORS_HEADERS,
+    });
   }
 
   const authHeader = req.headers.get('Authorization');
   if (!authHeader) {
-    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), { status: 401 });
+    return new Response(JSON.stringify({ error: 'Missing Authorization header' }), {
+      status: 401,
+      headers: CORS_HEADERS,
+    });
   }
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
@@ -256,7 +277,10 @@ Deno.serve(async (req: Request) => {
   const { data: authData, error: authError } = await supabase.auth.getUser(token);
 
   if (authError || !authData?.user) {
-    return new Response(JSON.stringify({ error: 'Invalid session' }), { status: 401 });
+    return new Response(JSON.stringify({ error: 'Invalid session' }), {
+      status: 401,
+      headers: CORS_HEADERS,
+    });
   }
 
   const userId = authData.user.id;
@@ -301,7 +325,7 @@ Deno.serve(async (req: Request) => {
           habit_tip: cachedContext?.habit_tip ?? null,
           cached: true,
         }),
-        { headers: { 'Content-Type': 'application/json' } },
+        { headers: { 'Content-Type': 'application/json', ...CORS_HEADERS } },
       );
     }
 
@@ -349,13 +373,13 @@ Deno.serve(async (req: Request) => {
         habit_tip,
         cached: false,
       }),
-      { headers: { 'Content-Type': 'application/json' } },
+      { headers: { 'Content-Type': 'application/json', ...CORS_HEADERS } },
     );
   } catch (err) {
     console.error('ozzie-daily-brief error', err);
     return new Response(JSON.stringify({ error: 'Something went wrong. Please try again.' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...CORS_HEADERS },
     });
   }
 });
