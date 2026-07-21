@@ -89,9 +89,13 @@ Schedule against appetite. Two are S and could join Phase 1 if desired: **#13 ra
 
 ---
 
-## Open questions for the user
+## Decisions — answered by the user 2026-07-21
 
-1. **Log's gold chips** — keep as functional, or migrate? (Reverses an earlier deliberate decision; see Phase 1 item 1.)
-2. **Icon/splash assets** — do you have source files, or should the amber re-color be derived from the existing PNGs?
-3. **Free-vs-Plus** — which of the Phase 4/5 surfaces should a free account see?
-4. **Phase 2 deploy** — needs your go-ahead; it is the one item that changes production behavior.
+All four open questions are resolved. These are binding for execution:
+
+1. **Log's gold chips → migrate to neutral.** Replace gold with a neutral / `EffortPalette.rest` tone; keep the rest-day vs training-day distinction, drop the warm-on-warm clash. *(Supersedes the earlier "gold is functional" call.)*
+2. **Icon/splash → rebuild clean as vector.** No source assets exist; redraw Ozzie as SVG matching the current silhouette in ink/amber, then export `icon-1024` / `adaptive-icon` / `splash` / `favicon` at proper sizes. Also fixes the existing pixelation. **User reviews before it lands.**
+3. **Free vs Plus → a free account sees its own session numbers.** Today's paces, %1RM loads, Hyrox splits, and fuel targets are FREE — that is the core coaching promise and the day-one "this app knows me" moment. OSPREY+ keeps the *analytics* layer: CTL/ATL trends, injury risk, race predictors, history. Applies to Phase 4 and anything new that renders envelope data.
+4. **Phase 2 deploy → approved.** Run the atomic deploy (function + 5 migrations) per `docs/DEPLOY-CHECKLIST.md` §2, then smoke-test plan generation for all four affected sports.
+
+**Execution order (user-chosen):** Phase 2 deploy → Phase 1 visual sweep → icon/splash rebuild.
