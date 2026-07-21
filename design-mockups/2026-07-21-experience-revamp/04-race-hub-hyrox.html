@@ -1,0 +1,71 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Race Hub — Hyrox event</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+  .hero .name { font-size: 24px; font-weight: 900; letter-spacing: -0.4px; }
+  .hero .meta { font-size: 13px; color: var(--soft); margin-top: 3px; }
+  .hero .runway { display: flex; align-items: center; gap: 10px; margin-top: 9px; }
+  .hero .runway b { font-size: 26px; font-weight: 900; color: var(--accent-bright); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .hero .runway span { font-size: 12px; color: var(--mut); font-weight: 700; line-height: 15.5px; }
+  .stations { padding: 0; }
+  .stations .head { padding: 11px 14px 8px; }
+  .st { display: flex; align-items: center; gap: 10px; padding: 5px 14px; border-top: 1px solid #1c1c22; font-size: 12.5px; }
+  .st .n { color: var(--mut); font-weight: 800; width: 14px; font-size: 11px; }
+  .st .nm { font-weight: 700; }
+  .st b { margin-left: auto; color: var(--soft); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 12.5px; }
+  .pacing { display: flex; gap: 8px; margin-top: 8px; }
+  .card.hero { padding: 10px 14px; }
+  .acts .btn { padding: 10px 16px; font-size: 14.5px; }
+  .ph { flex: 1; border: 1.5px solid var(--line); border-radius: var(--r); padding: 8px 9px; }
+  .ph .k { font-size: 9.5px; letter-spacing: 0.7px; text-transform: uppercase; color: var(--mut); font-weight: 800; }
+  .ph .v { font-size: 14.5px; font-weight: 800; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .ph.hot { border-color: var(--accent); } .ph.hot .v { color: var(--accent-bright); }
+  .acts { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+</style></head>
+<body>
+  <div class="pushhead">
+    <svg class="ic back" width="24" height="24" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    <div class="title">Race Hub</div>
+  </div>
+  <div class="screen" style="padding-top:12px;">
+    <div class="card accent hero">
+      <div class="spread">
+        <span class="eyebrow">Your Next Race</span>
+        <span class="chip amber" style="padding:3px 8px;font-size:11px;">Open Men</span>
+      </div>
+      <div class="name" style="margin-top:4px;">HYROX Chicago</div>
+      <div class="meta">Saturday, Nov 14 · Navy Pier · target 1:15:00</div>
+      <div class="runway"><b>16 wks</b><span>full build runway — base now, race-pace from week 8</span></div>
+    </div>
+
+    <div class="card stations" style="margin-top:11px;">
+      <div class="head spread">
+        <span class="eyebrow">Race Standard — Open Men</span>
+        <span style="font-size:11px;color:var(--mut);font-weight:700;">official</span>
+      </div>
+      <div class="st"><span class="n">1</span><span class="nm">SkiErg</span><b>1000 m</b></div>
+      <div class="st"><span class="n">2</span><span class="nm">Sled Push</span><b>50 m · 152 kg</b></div>
+      <div class="st"><span class="n">3</span><span class="nm">Sled Pull</span><b>50 m · 103 kg</b></div>
+      <div class="st"><span class="n">4</span><span class="nm">Burpee Broad Jump</span><b>80 m</b></div>
+      <div class="st"><span class="n">5</span><span class="nm">Rowing</span><b>1000 m</b></div>
+      <div class="st"><span class="n">6</span><span class="nm">Farmers Carry</span><b>200 m · 2×24 kg</b></div>
+      <div class="st"><span class="n">7</span><span class="nm">Sandbag Lunges</span><b>100 m · 20 kg</b></div>
+      <div class="st"><span class="n">8</span><span class="nm">Wall Balls</span><b>100 × 6 kg</b></div>
+    </div>
+
+    <div class="card" style="margin-top:11px;">
+      <span class="eyebrow">Pace Plan for 1:15</span>
+      <div class="pacing">
+        <div class="ph"><div class="k">Runs 1–3</div><div class="v">6:25 /km</div></div>
+        <div class="ph hot"><div class="k">Runs 4–6</div><div class="v">6:10 /km</div></div>
+        <div class="ph"><div class="k">Runs 7–8</div><div class="v">send it</div></div>
+      </div>
+      <div style="font-size:11.5px;color:var(--mut);margin-top:8px;line-height:16px;">Start controlled — banked seconds die in the sled lanes. Built from your threshold, phased like the fastest Open fields race it.</div>
+    </div>
+
+    <div class="acts">
+      <div class="btn primary">Build my plan around this race →</div>
+      <div class="btn secondary">Race-day checklist &amp; pacing card</div>
+    </div>
+  </div>
+</body></html>

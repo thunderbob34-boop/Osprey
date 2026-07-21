@@ -1,0 +1,102 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Home — sport-aware</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+  .greet { font-size: 28px; font-weight: 900; letter-spacing: -0.5px; }
+  .date { font-size: 13.5px; font-weight: 700; color: var(--accent); margin-top: 2px; }
+  .race-strip { margin-top: 12px; display: flex; align-items: center; gap: 10px;
+    border: 1.5px solid var(--line); border-radius: var(--r); padding: 9px 12px; background: var(--panel); }
+  .race-strip b { font-size: 13px; font-weight: 800; }
+  .race-strip .meta { font-size: 11.5px; color: var(--mut); margin-top: 1px; }
+  .race-strip .weeks { margin-left: auto; text-align: right; }
+  .race-strip .weeks b { color: var(--accent-bright); font-size: 15px; }
+  .race-strip .weeks span { display: block; font-size: 10px; color: var(--mut); letter-spacing: 0.6px; text-transform: uppercase; font-weight: 700; }
+  .session-title { font-size: 26px; font-weight: 900; margin: 6px 0 8px; letter-spacing: -0.4px; }
+  .chips { display: flex; gap: 7px; flex-wrap: wrap; }
+  .ozzie { display: flex; gap: 10px; border: 1.5px solid var(--accent); border-radius: var(--r);
+    padding: 10px 12px; margin-top: 10px; box-shadow: 2px 2px 0 rgba(0,0,0,0.55); }
+  .ozzie .txt { font-size: 13.5px; line-height: 19px; color: var(--soft); }
+  .ozzie .avatar { width: 26px; height: 26px; border-radius: 50%; background: #17171d;
+    border: 1.5px solid var(--line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .numbers { display: flex; gap: 7px; margin-top: 10px; }
+  .numcard { flex: 1; border: 1.5px solid var(--line); border-radius: var(--r); padding: 7px 9px; }
+  .numcard .v { font-size: 14px; font-weight: 800; }
+  .numcard .k { font-size: 9.5px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--mut); font-weight: 700; margin-top: 1px; }
+  .actions { display: flex; gap: 9px; margin-top: 12px; }
+  .actions .primary { flex: 1.6; }
+  .actions .secondary { flex: 1; }
+  .battery { margin-top: 12px; display: flex; align-items: center; gap: 12px; }
+  .battery .bar { flex: 1; height: 7px; border-radius: 4px; background: #1d1d24; overflow: hidden; }
+  .battery .fill { width: 68%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-bright)); }
+  .battery .v { font-weight: 900; font-size: 16px; color: var(--accent-bright); }
+</style></head>
+<body>
+  <div class="screen">
+    <div class="spread">
+      <div>
+        <div class="greet">Morning, Gucci Maine.</div>
+        <div class="date">Tuesday, July 21</div>
+      </div>
+      <svg class="ic" width="24" height="24" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+
+    <!-- NEW: the athlete's race identity lives at the top of Home -->
+    <div class="race-strip">
+      <svg class="ic" width="20" height="20" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+      <div>
+        <b>HYROX Chicago · Open Men</b>
+        <div class="meta">Sat, Nov 14 · target 1:15:00</div>
+      </div>
+      <div class="weeks"><b>16 wks</b><span>full runway</span></div>
+    </div>
+
+    <!-- Sport-aware today's session -->
+    <div class="card accent" style="margin-top:12px;">
+      <div class="spread">
+        <span class="eyebrow">Today's Session</span>
+        <span style="font-size:12.5px;font-weight:700;color:var(--accent-bright);">Full week ›</span>
+      </div>
+      <div class="session-title">Compromised Run</div>
+      <div class="chips">
+        <span class="chip">6 × 1km</span>
+        <span class="chip">45 min</span>
+        <span class="chip amber"><span class="dot" style="background:var(--moderate)"></span>Zone 3</span>
+        <span class="chip amber">Race-specific</span>
+      </div>
+      <div class="ozzie">
+        <div class="avatar"><svg class="ic soft" width="13" height="13" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="9" cy="10" r="1.2"/><circle cx="15" cy="10" r="1.2"/><path d="M9 15c1 1 5 1 6 0"/></svg></div>
+        <div class="txt">Every km at your race split, straight off 15 wall balls — this is the session that decides your Hyrox. Legs heavy is the point.</div>
+      </div>
+      <!-- Coaching numbers at the point of need -->
+      <div class="numbers">
+        <div class="numcard"><div class="v">6:10–6:25</div><div class="k">Split /km</div></div>
+        <div class="numcard"><div class="v">15 × 6 kg</div><div class="k">Wall balls / rep</div></div>
+        <div class="numcard"><div class="v">60 g</div><div class="k">Carbs before</div></div>
+      </div>
+      <div class="actions">
+        <div class="btn primary">Start Session →</div>
+        <div class="btn secondary">Adjust</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px;">
+      <div class="spread">
+        <span class="eyebrow dim">Body Battery</span>
+        <span style="font-size:11px;color:var(--mut);">from Apple Health</span>
+      </div>
+      <div class="battery">
+        <span class="v">68</span>
+        <div class="bar"><div class="fill"></div></div>
+        <span style="font-size:12px;color:var(--soft);font-weight:700;">Ready</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div class="active"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <div><svg width="24" height="24" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+    <div><svg width="24" height="24" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+    <div><svg width="24" height="24" viewBox="0 0 24 24"><line x1="6" y1="20" x2="6" y2="14"/><line x1="12" y1="20" x2="12" y2="8"/><line x1="18" y1="20" x2="18" y2="4"/></svg></div>
+    <div><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+  </div>
+</body></html>

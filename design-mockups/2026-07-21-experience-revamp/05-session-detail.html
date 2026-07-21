@@ -1,0 +1,77 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Session Detail — Compromised Run</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+  .sesh { font-size: 26px; font-weight: 900; letter-spacing: -0.4px; }
+  .chips { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 9px; }
+  .why { display: flex; gap: 10px; margin-top: 12px; }
+  .why .avatar { width: 26px; height: 26px; border-radius: 50%; background: #17171d;
+    border: 1.5px solid var(--line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .why .txt { font-size: 13.5px; line-height: 19px; color: var(--soft); }
+  .work { padding: 0; }
+  .work .head { padding: 11px 14px 7px; }
+  .step { display: flex; gap: 11px; padding: 9px 14px; border-top: 1px solid #1c1c22; }
+  .step .tick { width: 22px; height: 22px; border: 1.5px solid var(--line); border-radius: var(--r); flex-shrink: 0; margin-top: 1px; }
+  .step .t { font-size: 14.5px; font-weight: 800; }
+  .step .d { font-size: 12px; color: var(--mut); margin-top: 1px; line-height: 16px; }
+  .step .tag { margin-left: auto; flex-shrink: 0; align-self: center; font-size: 11px; font-weight: 800;
+    color: var(--accent-bright); font-variant-numeric: tabular-nums; }
+  .step.main { background: rgba(200,121,58,0.06); }
+  .step.main .tick { border-color: var(--accent); }
+  .fuel { display: flex; gap: 8px; margin-top: 4px; }
+  .f { flex: 1; border: 1.5px solid var(--line); border-radius: var(--r); padding: 8px 9px; }
+  .f .v { font-size: 14.5px; font-weight: 800; }
+  .f .k { font-size: 9.5px; letter-spacing: 0.7px; text-transform: uppercase; color: var(--mut); font-weight: 800; margin-top: 2px; }
+</style></head>
+<body>
+  <div class="pushhead">
+    <svg class="ic back" width="24" height="24" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    <div class="title">Tuesday · Week 1 of 16</div>
+  </div>
+  <div class="screen" style="padding-top:12px;">
+    <div class="sesh">Compromised Run</div>
+    <div class="chips">
+      <span class="chip">45 min</span>
+      <span class="chip">~6 km</span>
+      <span class="chip amber"><span class="dot" style="background:var(--moderate)"></span>Zone 3</span>
+      <span class="chip amber">Race-specific</span>
+    </div>
+
+    <div class="why">
+      <div class="avatar"><svg class="ic soft" width="13" height="13" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="9" cy="10" r="1.2"/><circle cx="15" cy="10" r="1.2"/><path d="M9 15c1 1 5 1 6 0"/></svg></div>
+      <div class="txt">Hyrox is won on the runs you do tired. Six race-pace kilometres, each straight off wall balls — teaching your legs the exact feeling of lap 5.</div>
+    </div>
+
+    <div class="card work" style="margin-top:12px;">
+      <div class="head"><span class="eyebrow">The Work</span></div>
+      <div class="step">
+        <div class="tick"></div>
+        <div><div class="t">Warm-up</div><div class="d">8 min build to Zone 2 + leg swings, hip circles</div></div>
+        <span class="tag">8 min</span>
+      </div>
+      <div class="step main">
+        <div class="tick"></div>
+        <div><div class="t">6 × (1 km @ 6:10–6:25 + 15 wall balls)</div><div class="d">6 kg ball · walk 30 s between rounds, no more</div></div>
+        <span class="tag">~32 min</span>
+      </div>
+      <div class="step">
+        <div class="tick"></div>
+        <div><div class="t">Cooldown</div><div class="d">5 min easy jog, let the heart rate fall</div></div>
+        <span class="tag">5 min</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:11px;">
+      <span class="eyebrow">Fuel This Session</span>
+      <div class="fuel" style="margin-top:8px;">
+        <div class="f"><div class="v">60 g carbs</div><div class="k">90 min before</div></div>
+        <div class="f"><div class="v">Water</div><div class="k">During</div></div>
+        <div class="f"><div class="v">25 g protein</div><div class="k">Within 1 hr after</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <div class="btn primary">Start Session →</div>
+    </div>
+  </div>
+</body></html>

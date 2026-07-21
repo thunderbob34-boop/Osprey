@@ -1,0 +1,106 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Stats — first-week state</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+  .pills { display: flex; gap: 7px; margin-top: 10px; }
+  .pill { display: flex; align-items: center; gap: 5px; border: 1.5px solid var(--accent); border-radius: 999px;
+    padding: 6px 12px; font-size: 12.5px; font-weight: 800; color: var(--accent-bright); }
+  .ring { width: 62px; height: 62px; flex-shrink: 0; }
+  .firstweek { display: flex; gap: 13px; align-items: center; }
+  .firstweek .big { font-size: 16px; font-weight: 900; }
+  .firstweek .msg { font-size: 12px; color: var(--mut); line-height: 16.5px; margin-top: 2px; }
+  .split { margin-top: 4px; }
+  .split .barwrap { display: flex; height: 14px; border-radius: var(--r); overflow: hidden; margin-top: 8px; }
+  .split .seg-c { background: var(--accent); }
+  .split .seg-s { background: #5b7fa6; }
+  .split .legend { display: flex; gap: 14px; margin-top: 7px; font-size: 11.5px; color: var(--soft); font-weight: 700; }
+  .bands { margin-top: 4px; }
+  .band { display: flex; align-items: center; gap: 9px; padding: 4.5px 0; font-size: 12.5px; }
+  .band .label { color: var(--soft); width: 88px; font-weight: 700; }
+  .band .bar { flex: 1; height: 7px; border-radius: 3px; background: #1d1d24; overflow: hidden; position: relative; }
+  .band .fill { position: absolute; inset: 0; }
+  .band .time { width: 62px; text-align: right; color: var(--mut); font-variant-numeric: tabular-nums; font-size: 11.5px; font-weight: 700; }
+  .band.you .label, .band.you .time { color: var(--accent-bright); }
+  .vol { display: flex; align-items: flex-end; gap: 10px; height: 64px; margin-top: 10px; }
+  .vol .wk { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+  .vol .bar { width: 100%; border-radius: 3px 3px 0 0; }
+  .vol .stub { height: 5px; background: #23232b; }
+  .vol .planned { border: 1.5px dashed var(--line); background: transparent; height: 42px; }
+  .vol .lbl { font-size: 9.5px; color: var(--mut); font-weight: 700; }
+</style></head>
+<body>
+  <div class="screen">
+    <div class="h1">Stats</div>
+    <div class="sub">Training trends and progress at a glance.</div>
+    <div class="pills">
+      <span class="pill"><svg class="ic" width="14" height="14" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Races</span>
+      <span class="pill"><svg class="ic" width="14" height="14" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</span>
+      <span class="pill"><svg class="ic" width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Pacing</span>
+    </div>
+
+    <!-- Replaces the wall of zeros: progress toward the first real stats -->
+    <div class="card accent firstweek" style="margin-top:13px;">
+      <svg class="ring" viewBox="0 0 62 62">
+        <circle cx="31" cy="31" r="26" stroke="#22222a" stroke-width="6" fill="none"/>
+        <circle cx="31" cy="31" r="26" stroke="#c8793a" stroke-width="6" fill="none"
+          stroke-dasharray="163" stroke-dashoffset="109" stroke-linecap="round" transform="rotate(-90 31 31)"/>
+        <text x="31" y="36" text-anchor="middle" fill="#FAFAFA" font-size="15" font-weight="800" font-family="-apple-system">2/6</text>
+      </svg>
+      <div>
+        <div class="big">First week underway</div>
+        <div class="msg">Log 4 more sessions and your fitness score, load chart, and race predictor unlock with real numbers.</div>
+      </div>
+    </div>
+
+    <!-- hybrd-parity: cardio/strength split, planned vs done -->
+    <div class="card split" style="margin-top:11px;">
+      <div class="spread">
+        <span class="eyebrow">This Week's Intensity</span>
+        <span style="font-size:11px;color:var(--mut);font-weight:700;">planned</span>
+      </div>
+      <div class="barwrap">
+        <div class="seg-c" style="width:68%"></div>
+        <div class="seg-s" style="width:32%"></div>
+      </div>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--accent);margin-right:5px;"></span>Engine 68%</span>
+        <span><span class="dot" style="background:#5b7fa6;margin-right:5px;"></span>Strength 32%</span>
+        <span style="margin-left:auto;color:var(--mut);">Hyrox build ✓</span>
+      </div>
+    </div>
+
+    <!-- Content while empty: division finish bands = value before any data -->
+    <div class="card bands" style="margin-top:11px;">
+      <div class="spread">
+        <span class="eyebrow">Open Men — Where 1:15 Lands</span>
+      </div>
+      <div style="margin-top:7px;">
+        <div class="band"><span class="label">Elite</span><div class="bar"><div class="fill" style="background:#3d3d46;width:24%"></div></div><span class="time">&lt; 0:55</span></div>
+        <div class="band"><span class="label">Strong</span><div class="bar"><div class="fill" style="background:#3d3d46;width:44%"></div></div><span class="time">0:55–1:15</span></div>
+        <div class="band you"><span class="label">Your target</span><div class="bar"><div class="fill" style="background:var(--accent);width:58%"></div></div><span class="time">1:15:00</span></div>
+        <div class="band"><span class="label">First timer</span><div class="bar"><div class="fill" style="background:#3d3d46;width:78%"></div></div><span class="time">1:30–1:45</span></div>
+      </div>
+      <div style="font-size:11px;color:var(--mut);margin-top:7px;line-height:15px;">Top 25% of Open Men — ambitious and reachable on a 16-week runway.</div>
+    </div>
+
+    <!-- Empty weeks read as absence, planned week as intent -->
+    <div class="card" style="margin-top:11px;">
+      <span class="eyebrow dim">Weekly Volume</span>
+      <div class="vol">
+        <div class="wk"><div class="bar stub"></div><span class="lbl">Jun 28</span></div>
+        <div class="wk"><div class="bar stub"></div><span class="lbl">Jul 5</span></div>
+        <div class="wk"><div class="bar stub"></div><span class="lbl">Jul 12</span></div>
+        <div class="wk"><div class="bar" style="height:18px;background:var(--accent);"></div><span class="lbl">Jul 19</span></div>
+        <div class="wk"><div class="bar planned"></div><span class="lbl" style="color:var(--accent-bright);">this wk</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div><svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <div><svg width="24" height="24" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+    <div><svg width="24" height="24" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+    <div class="active"><svg width="24" height="24" viewBox="0 0 24 24"><line x1="6" y1="20" x2="6" y2="14"/><line x1="12" y1="20" x2="12" y2="8"/><line x1="18" y1="20" x2="18" y2="4"/></svg></div>
+    <div><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+  </div>
+</body></html>

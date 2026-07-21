@@ -1,0 +1,95 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>This Week's Plan — Hyrox-aware</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+  .stats { display: flex; text-align: center; margin-top: 4px; }
+  .stats > div { flex: 1; }
+  .stats .v { font-size: 26px; font-weight: 900; color: var(--accent-bright); }
+  .stats .k { font-size: 11px; color: var(--mut); font-weight: 700; margin-top: 1px; }
+  .typecount { display: flex; justify-content: center; gap: 18px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .typecount .t { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; }
+  .zones .zrow { display: flex; align-items: center; gap: 8px; padding: 5px 0; font-size: 14px; }
+  .zones .zrow b { margin-left: auto; font-variant-numeric: tabular-nums; font-size: 14.5px; }
+  .zones .note { font-size: 12px; color: var(--mut); line-height: 17px; margin-top: 7px; padding-top: 8px; border-top: 1px solid var(--line); }
+  .day { display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-bottom: 1px solid #1c1c22; }
+  .day:last-child { border-bottom: none; }
+  .day .icwrap { width: 34px; height: 34px; border: 1.5px solid var(--line); border-radius: var(--r);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .day.key .icwrap { border-color: var(--accent); }
+  .day .dname { font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--mut); font-weight: 800; }
+  .day .sname { font-size: 15px; font-weight: 800; margin-top: 1px; }
+  .day .why { font-size: 11.5px; color: var(--mut); margin-top: 1px; }
+  .day .right { margin-left: auto; text-align: right; flex-shrink: 0; }
+  .day .dur { font-size: 13px; font-weight: 800; color: var(--soft); font-variant-numeric: tabular-nums; }
+  .day .zone { font-size: 10.5px; font-weight: 700; margin-top: 2px; display: flex; align-items: center; gap: 4px; justify-content: flex-end; color: var(--mut); }
+</style></head>
+<body>
+  <div class="pushhead">
+    <svg class="ic back" width="24" height="24" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    <div class="title">This Week's Plan</div>
+  </div>
+  <div class="screen" style="padding-top:12px;">
+    <div class="card">
+      <div class="stats">
+        <div><div class="v">6</div><div class="k">Sessions</div></div>
+        <div><div class="v">11.2</div><div class="k">Miles</div></div>
+        <div><div class="v">5</div><div class="k">Hours</div></div>
+      </div>
+      <div class="typecount">
+        <span class="t"><svg class="ic" width="15" height="15" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>3 runs</span>
+        <span class="t"><svg class="ic" width="15" height="15" viewBox="0 0 24 24"><rect x="2" y="9" width="4" height="6" rx="1"/><rect x="18" y="9" width="4" height="6" rx="1"/><line x1="6" y1="12" x2="18" y2="12"/></svg>2 lifts</span>
+        <span class="t"><svg class="ic" width="15" height="15" viewBox="0 0 24 24"><rect x="3" y="14" width="12" height="6" rx="1"/><path d="M15 17h6"/><path d="M18 14v6"/><path d="M6 14V8l4-3"/></svg>1 hyrox</span>
+      </div>
+    </div>
+
+    <div class="card zones" style="margin-top:11px;">
+      <div class="row" style="gap:8px;">
+        <span class="eyebrow">Your Numbers</span>
+        <span class="chip amber" style="padding:2px 7px;font-size:10.5px;">Estimated</span>
+      </div>
+      <div style="margin-top:6px;">
+        <div class="zrow"><span class="dot" style="background:var(--easy)"></span>Easy runs <b>10:30–11:30 /mi</b></div>
+        <div class="zrow"><span class="dot" style="background:var(--moderate)"></span>Compromised split <b>6:10–6:25 /km</b></div>
+        <div class="zrow"><span class="dot" style="background:var(--hard)"></span>Threshold <b>~9:30 /mi</b></div>
+        <div class="zrow"><svg class="ic" width="13" height="13" viewBox="0 0 24 24"><rect x="3" y="14" width="12" height="6" rx="1"/><path d="M15 17h6"/><path d="M6 14V8l4-3"/></svg>Open Men sleds <b>152 / 103 kg</b></div>
+      </div>
+      <div class="note">Estimated from your experience level — log a few efforts and these sharpen automatically.</div>
+    </div>
+
+    <div class="eyebrow dim" style="margin:13px 2px 7px;">Schedule</div>
+    <div class="card" style="padding:0;">
+      <div class="day">
+        <div class="icwrap"><svg class="ic mut" width="17" height="17" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+        <div><div class="dname">Monday</div><div class="sname" style="color:var(--mut);font-weight:700;">Rest Day</div></div>
+      </div>
+      <div class="day key">
+        <div class="icwrap"><svg class="ic" width="17" height="17" viewBox="0 0 24 24"><rect x="3" y="14" width="12" height="6" rx="1"/><path d="M15 17h6"/><path d="M18 14v6"/><path d="M6 14V8l4-3"/></svg></div>
+        <div><div class="dname">Tuesday</div><div class="sname">Compromised Run 6×1km</div><div class="why">Race splits on heavy legs — the Hyrox signature</div></div>
+        <div class="right"><div class="dur">45m</div><div class="zone"><span class="dot" style="background:var(--moderate);width:6px;height:6px;"></span>Zone 3</div></div>
+      </div>
+      <div class="day">
+        <div class="icwrap"><svg class="ic" width="17" height="17" viewBox="0 0 24 24"><rect x="2" y="9" width="4" height="6" rx="1"/><rect x="18" y="9" width="4" height="6" rx="1"/><line x1="6" y1="12" x2="18" y2="12"/></svg></div>
+        <div><div class="dname">Wednesday</div><div class="sname">Lower Body — Hips</div><div class="why">Sled power comes from here</div></div>
+        <div class="right"><div class="dur">60m</div><div class="zone"><span class="dot" style="background:var(--hard);width:6px;height:6px;"></span>Heavy</div></div>
+      </div>
+      <div class="day">
+        <div class="icwrap"><svg class="ic" width="17" height="17" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div><div class="dname">Thursday</div><div class="sname">Easy Run</div><div class="why">Aerobic base, conversational</div></div>
+        <div class="right"><div class="dur">30m</div><div class="zone"><span class="dot" style="background:var(--easy);width:6px;height:6px;"></span>Zone 2</div></div>
+      </div>
+      <div class="day">
+        <div class="icwrap"><svg class="ic" width="17" height="17" viewBox="0 0 24 24"><rect x="2" y="9" width="4" height="6" rx="1"/><rect x="18" y="9" width="4" height="6" rx="1"/><line x1="6" y1="12" x2="18" y2="12"/></svg></div>
+        <div><div class="dname">Friday</div><div class="sname">Station Strength-Endurance</div><div class="why">Lunges + carries + wall balls, race loads</div></div>
+        <div class="right"><div class="dur">50m</div><div class="zone"><span class="dot" style="background:var(--moderate);width:6px;height:6px;"></span>Zone 3</div></div>
+      </div>
+      <div class="day">
+        <div class="icwrap"><svg class="ic" width="17" height="17" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div><div class="dname">Saturday</div><div class="sname">Long Run</div><div class="why">Engine for the back half</div></div>
+        <div class="right"><div class="dur">70m</div><div class="zone"><span class="dot" style="background:var(--easy);width:6px;height:6px;"></span>Zone 2</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:12px 16px 20px;flex-shrink:0;">
+    <div class="btn primary">Done</div>
+  </div>
+</body></html>
