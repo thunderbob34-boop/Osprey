@@ -45,7 +45,7 @@
     },
     "android": {
       "package": "com.sillygoose.osprey",
-      "versionCode": 1,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#060912"
@@ -105,7 +105,15 @@
         "@bacons/apple-targets"
       ],
       "@react-native-community/datetimepicker",
-      "@sentry/react-native"
+      "@sentry/react-native",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "1.9.25"
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
