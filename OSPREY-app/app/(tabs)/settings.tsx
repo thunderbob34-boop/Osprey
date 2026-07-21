@@ -576,6 +576,19 @@ export default function SettingsTab() {
           <Text style={styles.cardLabel}>About & Support</Text>
           <TouchableOpacity
             style={styles.planRow}
+            onPress={() => router.push('/hyrox-quiz')}
+            accessibilityRole="button"
+            accessibilityLabel="Hyrox knowledge quiz"
+          >
+            <View style={styles.planRowLeft}>
+              <Text style={styles.cardValue}>Hyrox Knowledge Quiz</Text>
+              <Text style={styles.planRowSub}>Test what you know about the race format</Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
+          </TouchableOpacity>
+          <View style={styles.rowDivider} />
+          <TouchableOpacity
+            style={styles.planRow}
             onPress={() => Linking.openURL(PRIVACY_POLICY_URL).catch(() => undefined)}
             accessibilityRole="button"
             accessibilityLabel="Privacy policy"
