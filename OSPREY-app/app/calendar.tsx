@@ -211,7 +211,7 @@ export default function CalendarScreen() {
             >
               <Text style={styles.sheetCardIcon}>🏁</Text>
               <View style={styles.sheetCardBody}>
-                <Text style={[styles.sheetCardLabel, { color: Colors.gold }]}>RACE DAY</Text>
+                <Text style={[styles.sheetCardLabel, { color: Theme.accent }]}>RACE DAY</Text>
                 <Text style={styles.sheetCardTitle}>{selectedDay.raceName}</Text>
                 <Text style={styles.sheetCardDesc}>View in Race Hub →</Text>
               </View>
@@ -340,8 +340,8 @@ const styles = StyleSheet.create({
     borderColor: Colors.borderGreen,
   },
   sheetCardRace: {
-    backgroundColor: Colors.surfaceGold,
-    borderColor: Colors.borderGold,
+    backgroundColor: `${Theme.accent}26`,
+    borderColor: Theme.accent,
   },
   sheetCardIcon: { fontSize: 24 },
   sheetCardBody: { flex: 1, gap: 2 },

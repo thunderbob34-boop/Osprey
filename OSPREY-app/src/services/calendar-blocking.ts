@@ -2,6 +2,7 @@ import * as Calendar from 'expo-calendar';
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from '@/services/supabase';
+import { Theme } from '@/constants/theme';
 
 const BLOCK_DAYS = 7;
 const DEFAULT_HOUR = 18; // 6pm fallback when we can't infer a usual time
@@ -57,7 +58,7 @@ async function getOrCreateOspreyCalendar(userId: string): Promise<string> {
   const source = await resolveSource();
   const newCalendarId = await Calendar.createCalendarAsync({
     title: CALENDAR_TITLE,
-    color: '#00c8c8',
+    color: Theme.accent,
     entityType: Calendar.EntityTypes.EVENT,
     sourceId: (source as Calendar.Source).id,
     source: source as Calendar.Source,
