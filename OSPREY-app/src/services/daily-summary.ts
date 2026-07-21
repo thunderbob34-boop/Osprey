@@ -101,6 +101,26 @@ async function fetchTodaySession(userId: string): Promise<TodaySessionRow | null
   return data;
 }
 
+/**
+ * True if the user has EVER had a training session generated (any date), used
+ * only to disambiguate the "no session today" state: a genuinely fresh account
+ * that has never had a plan vs. an established athlete whose plan simply has no
+ * session scheduled today. Read AFTER invokeGeneratePlan() so a user who just
+ * received their very first plan (even if today is a rest day in it) reads
+ * `true`, not `false`.
+ */
+async function fetchHasEverPlanned(userId: string): Promise<boolean> {
+  const { data, error } = await supabase
+    .from('training_sessions')
+    .select('id')
+    .eq('user_id', userId)
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data != null;
+}
+
 interface DailyBrief {
   text: string | null;
   whyReasoning: string | null;
@@ -258,9 +278,10 @@ async function fetchHabitStreak(userId: string): Promise<number> {
   return streak;
 }
 
-function mapSession(
+export function mapSession(
   session: TodaySessionRow | null,
   dailyBrief: DailyBrief,
+  hasEverPlanned: boolean,
 ): DailySummaryData['session'] {
   const fallbackNote =
     dailyBrief.text ??
@@ -289,10 +310,33 @@ function mapSession(
       };
     }
 
+    // No session today and no rest/easy recommendation. This branch serves two
+    // very different athletes — split them so neither sees a false promise.
+    if (!hasEverPlanned) {
+      // Genuinely fresh: no plan has ever been generated. Offer to build one.
+      // Matches DailySummaryScreen's own no-plan fallback copy; sessionType
+      // stays null so the Home CTA reads "Build My Plan" and routes to the
+      // plan builder (not a phantom GPS run — see the 2026-07-21 audit F1/F-A).
+      return {
+        type: 'No Plan Yet',
+        duration: 'Ready when you are',
+        ozzieNote:
+          "Tell me your sport and goal and I'll build your first week — paces, sessions, and fuel included.",
+        whyReasoning: null,
+        sessionId: null,
+        sessionType: null,
+      };
+    }
+
+    // Established athlete whose plan simply has nothing scheduled today. Use the
+    // real brief if there is one, else an honest open-day line — never the
+    // "still crunching" placeholder, which falsely implies a plan is coming.
     return {
-      type: 'No Session Planned',
-      duration: 'Free day',
-      ozzieNote: fallbackNote,
+      type: 'Nothing Scheduled',
+      duration: 'Open day',
+      ozzieNote:
+        dailyBrief.text ??
+        'Nothing on the calendar today — an easy shakeout or full rest both work.',
       whyReasoning: dailyBrief.whyReasoning,
       sessionId: null,
       sessionType: null,
@@ -329,6 +373,7 @@ function mapDailySummary(
   dailyBrief: DailyBrief,
   monthDistanceKm: number,
   streakDays: number,
+  hasEverPlanned: boolean,
   weekTargetKm?: number,
 ): DailySummaryData {
   const recommendation = normalizeRecommendation(row.recovery_recommendation);
@@ -343,7 +388,7 @@ function mapDailySummary(
             label: recommendationLabel(recommendation),
           }
         : undefined,
-    session: mapSession(session, dailyBrief),
+    session: mapSession(session, dailyBrief, hasEverPlanned),
     weekDistanceKm: row.week_distance_km ?? 0,
     weekTargetKm,
     habitTip: dailyBrief.habitTip,
@@ -371,11 +416,17 @@ export async function fetchDailySummary(userId: string): Promise<DailySummaryDat
   // detects/reschedules any missed sessions earlier in the current week
   // regardless of whether today already has a session planned.
   await invokeGeneratePlan();
-  const session = await fetchTodaySession(userId);
+  // Both read AFTER generation: fetchTodaySession sees a just-created plan, and
+  // hasEverPlanned reads `true` for a user who just received their first plan
+  // (even if today is a rest day in it) rather than misclassifying them fresh.
+  const [session, hasEverPlanned] = await Promise.all([
+    fetchTodaySession(userId),
+    fetchHasEverPlanned(userId),
+  ]);
 
   // Fetched after session resolution so the brief's own context query sees
   // the just-generated/rescheduled plan instead of a stale snapshot.
   const dailyBrief = await fetchDailyBrief(userId);
 
-  return mapDailySummary(row, session, dailyBrief, monthDistanceKm, streakDays, weekTargetKm);
+  return mapDailySummary(row, session, dailyBrief, monthDistanceKm, streakDays, hasEverPlanned, weekTargetKm);
 }
