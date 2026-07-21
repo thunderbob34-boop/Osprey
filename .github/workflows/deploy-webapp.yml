@@ -25,10 +25,32 @@ jobs:
           cache-dependency-path: webapp/package-lock.json
       - run: npm ci
         working-directory: webapp
+      # webapp's cross-repo parity tests (zone-parity.test.ts, fitness-load-parity.test.ts,
+      # hyrox-loads.test.ts) import OSPREY-app/src files by relative path. Vite/tsc resolve
+      # the nearest tsconfig.json for any file it transforms, which for those files is
+      # OSPREY-app/tsconfig.json — and that extends "expo/tsconfig.base", resolvable only
+      # once OSPREY-app's own node_modules exist. Without this, typecheck/test fail with
+      # "TSConfckParseError: failed to resolve extends: expo/tsconfig.base".
+      - name: Cache OSPREY-app dependencies
+        id: osprey-app-cache
+        uses: actions/cache@v4
+        with:
+          path: OSPREY-app/node_modules
+          key: osprey-app-node-modules-${{ hashFiles('OSPREY-app/package-lock.json') }}
+      - name: Install OSPREY-app dependencies
+        if: steps.osprey-app-cache.outputs.cache-hit != 'true'
+        run: npm ci
+        working-directory: OSPREY-app
       - run: npm run typecheck
         working-directory: webapp
       - run: npm test
         working-directory: webapp
+        env:
+          # src/lib/supabase.ts calls createClient() at module load time, so any test
+          # that transitively imports it (chat-send.test.ts, etc.) needs real values here
+          # even though the test itself never touches the network.
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - run: npm run build
         working-directory: webapp
         env:
