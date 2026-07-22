@@ -8,6 +8,7 @@
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 import { validateAndClamp } from './validate.ts';
 import { routeDisciplineDays, type DisciplineDays } from './goals.ts';
+import { resolveForceRebuild, buildPreferencesGoalsUpsert, resolveRaceWeeksPlanned } from './regenerate.ts';
 import { hrGuidance, type HrZoneInfo, strengthGuidance, hyroxGuidance, crossfitGuidance } from './guidance.ts';
 import { enforceBackToBackLongRuns } from './backtoback.ts';
 import { zonedDateString, mondayOfWeek, toDateString } from './date.ts';
@@ -466,7 +467,7 @@ Deno.serve(async (req: Request) => {
     // silent background call fired every time the home screen loads.
     const rawBody = await req.text();
     const body = rawBody ? JSON.parse(rawBody) : {};
-    const forceRebuild = body.force === true && (Boolean(body.preferences) || Boolean(body.raceTarget));
+    const forceRebuild = resolveForceRebuild(body);
 
     // Idempotency: does an active plan already have a week starting this Monday?
     const { data: existingWeek } = await supabase
@@ -578,14 +579,13 @@ Deno.serve(async (req: Request) => {
       const { error: goalsUpsertError } = await supabase.from('user_goals').upsert(
         {
           user_id: userId,
-          primary_goal: goals.primaryGoal,
-          target_race: null,
-          target_date: null,
-          total_weeks_planned: null,
-          weekly_run_days: primaryDaysForStorage,
-          weekly_lift_days: goals.weeklyLiftDays,
-          fitness_level: goals.fitnessLevel,
-          goal_params: (prefs.goalParams as unknown) ?? null,
+          ...buildPreferencesGoalsUpsert(
+            mappedGoal,
+            primaryDaysForStorage,
+            goals.weeklyLiftDays,
+            goals.fitnessLevel,
+            (prefs.goalParams as unknown) ?? null,
+          ),
         },
         { onConflict: 'user_id' },
       );
@@ -597,7 +597,7 @@ Deno.serve(async (req: Request) => {
       const race = body.raceTarget;
       const { data: raceGoalsRow } = await supabase
         .from('user_goals')
-        .select('primary_goal, weekly_run_days, weekly_lift_days, fitness_level')
+        .select('primary_goal, weekly_run_days, weekly_lift_days, fitness_level, target_date, total_weeks_planned')
         .eq('user_id', userId)
         .maybeSingle();
 
@@ -623,7 +623,7 @@ Deno.serve(async (req: Request) => {
           primary_goal: goals.primaryGoal,
           target_race: goals.targetRace,
           target_date: race.raceDate ?? null,
-          total_weeks_planned: race.weeksOut ?? null,
+          total_weeks_planned: resolveRaceWeeksPlanned(race, raceGoalsRow?.target_date, raceGoalsRow?.total_weeks_planned),
           weekly_run_days: rgPrimaryDays,
           weekly_lift_days: goals.weeklyLiftDays,
           fitness_level: goals.fitnessLevel,
