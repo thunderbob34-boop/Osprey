@@ -10,28 +10,18 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { format } from 'date-fns';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
+import { SESSION_ICON, SESSION_ICON_FALLBACK } from '@/constants/session-icons';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useCalendarMonth } from '@/hooks/useCalendarMonth';
 import type { CalendarDay } from '@/services/calendar';
 
-// Exported for the parity test in app/__tests__/calendar-icons.test.ts. Must
-// stay in sync with plan-preview.tsx's SESSION_ICONS — both render the same
-// plan, and a missing key renders a bare fallback dot instead of the session.
-export const SESSION_ICON: Record<string, string> = {
-  run: '🏃',
-  lift: '🏋️',
-  swim: '🏊',
-  bike: '🚴',
-  rowing: '🚣',
-  hyrox: '🏋️‍♂️',
-  cross: '🔁',
-  race: '🏁',
-  rest: '😴',
-};
-
 const WEEKDAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+/** The legend under the grid — the types an athlete can actually see here. */
+const LEGEND_TYPES = ['run', 'lift', 'swim', 'bike', 'rowing', 'hyrox', 'cross', 'race'] as const;
 
 function formatSessionType(type: string): string {
   return type.charAt(0).toUpperCase() + type.slice(1);
@@ -145,11 +135,11 @@ export default function CalendarScreen() {
             const hasCompleted = (day?.completedTypes.length ?? 0) > 0;
             // Race day trumps everything — it's the day you circled.
             const icon = day?.raceName
-              ? '🏁'
+              ? SESSION_ICON.race
               : hasCompleted
-                ? SESSION_ICON[day!.completedTypes[0]] ?? '✓'
+                ? SESSION_ICON[day!.completedTypes[0]] ?? SESSION_ICON_FALLBACK
                 : day?.plannedType
-                  ? SESSION_ICON[day.plannedType] ?? '•'
+                  ? SESSION_ICON[day.plannedType] ?? SESSION_ICON_FALLBACK
                   : null;
 
             const dayLabelParts = [`${monthLabel.split(' ')[0]} ${cell.day}`];
@@ -168,9 +158,16 @@ export default function CalendarScreen() {
               >
                 <Text style={[styles.cellDay, isToday && styles.cellDayToday]}>{cell.day}</Text>
                 {icon ? (
-                  <Text style={[styles.cellIcon, (hasCompleted || day?.raceName) && styles.cellIconDone]}>
-                    {icon}
-                  </Text>
+                  // Done vs planned is carried by colour, not transparency. It
+                  // used to be opacity 0.45 vs 1 on a multicolour emoji against
+                  // near-black — the single most important fact on this screen,
+                  // encoded in a way the legend had to explain in words.
+                  <MaterialCommunityIcons
+                    name={icon}
+                    size={14}
+                    color={hasCompleted || day?.raceName ? Theme.accent : Theme.textMut}
+                    style={styles.cellIcon}
+                  />
                 ) : null}
               </TouchableOpacity>
             );
@@ -179,8 +176,24 @@ export default function CalendarScreen() {
       )}
 
       <View style={styles.legend}>
-        <Text style={styles.legendText}>🏃 Run  🏋️ Lift  🏊 Swim  🚴 Bike  🚣 Rowing  🏋️‍♂️ Hyrox  🔁 Cross  🏁 Race</Text>
-        <Text style={styles.legendText}>Faded = planned · Solid = completed</Text>
+        <View style={styles.legendKeyRow}>
+          {LEGEND_TYPES.map((type) => (
+            <View key={type} style={styles.legendKey}>
+              <MaterialCommunityIcons name={SESSION_ICON[type]} size={13} color={Theme.textSoft} />
+              <Text style={styles.legendText}>{formatSessionType(type)}</Text>
+            </View>
+          ))}
+        </View>
+        <View style={styles.legendKeyRow}>
+          <View style={styles.legendKey}>
+            <MaterialCommunityIcons name="run" size={13} color={Theme.textMut} />
+            <Text style={styles.legendText}>Planned</Text>
+          </View>
+          <View style={styles.legendKey}>
+            <MaterialCommunityIcons name="run" size={13} color={Theme.accent} />
+            <Text style={styles.legendText}>Completed</Text>
+          </View>
+        </View>
       </View>
 
       {/* ── Day detail sheet ── */}
@@ -214,7 +227,12 @@ export default function CalendarScreen() {
               accessibilityRole="button"
               accessibilityLabel={`Race day: ${selectedDay.raceName}. View in race hub`}
             >
-              <Text style={styles.sheetCardIcon}>🏁</Text>
+              <MaterialCommunityIcons
+                name={SESSION_ICON.race}
+                size={24}
+                color={Theme.accent}
+                style={styles.sheetCardIcon}
+              />
               <View style={styles.sheetCardBody}>
                 <Text style={[styles.sheetCardLabel, { color: Theme.accent }]}>RACE DAY</Text>
                 <Text style={styles.sheetCardTitle}>{selectedDay.raceName}</Text>
@@ -225,9 +243,12 @@ export default function CalendarScreen() {
 
           {selectedDay?.plannedType ? (
             <View style={styles.sheetCard}>
-              <Text style={styles.sheetCardIcon}>
-                {SESSION_ICON[selectedDay.plannedType] ?? '•'}
-              </Text>
+              <MaterialCommunityIcons
+                name={SESSION_ICON[selectedDay.plannedType] ?? SESSION_ICON_FALLBACK}
+                size={24}
+                color={Theme.textMut}
+                style={styles.sheetCardIcon}
+              />
               <View style={styles.sheetCardBody}>
                 <Text style={styles.sheetCardLabel}>PLANNED</Text>
                 <Text style={styles.sheetCardTitle}>
@@ -242,7 +263,12 @@ export default function CalendarScreen() {
 
           {selectedDay && selectedDay.completedTypes.length > 0 ? (
             <View style={[styles.sheetCard, styles.sheetCardDone]}>
-              <Text style={styles.sheetCardIcon}>✅</Text>
+              <MaterialCommunityIcons
+                name="check-circle"
+                size={24}
+                color={Colors.green}
+                style={styles.sheetCardIcon}
+              />
               <View style={styles.sheetCardBody}>
                 <Text style={[styles.sheetCardLabel, { color: Colors.green }]}>COMPLETED</Text>
                 <Text style={styles.sheetCardTitle}>
@@ -300,9 +326,10 @@ const styles = StyleSheet.create({
   },
   cellDay: { fontSize: 13, color: Theme.textSoft, fontWeight: '600' },
   cellDayToday: { color: Theme.accent, fontWeight: '800' },
-  cellIcon: { fontSize: 14, opacity: 0.45 },
-  cellIconDone: { opacity: 1 },
-  legend: { padding: 20, gap: 4, marginTop: 'auto' },
+  cellIcon: { marginTop: 1 },
+  legend: { padding: 20, gap: 8, marginTop: 'auto' },
+  legendKeyRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 12 },
+  legendKey: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   legendText: { fontSize: 11, color: Theme.textMut, textAlign: 'center' },
 
   // Day detail sheet
@@ -348,7 +375,7 @@ const styles = StyleSheet.create({
     backgroundColor: `${Theme.accent}26`,
     borderColor: Theme.accent,
   },
-  sheetCardIcon: { fontSize: 24 },
+  sheetCardIcon: { width: 26, textAlign: 'center' },
   sheetCardBody: { flex: 1, gap: 2 },
   sheetCardLabel: {
     fontSize: 10,

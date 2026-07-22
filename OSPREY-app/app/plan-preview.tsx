@@ -17,6 +17,7 @@ import { Colors } from '@/constants/colors';
 import { Theme, Radius, EffortPalette, IntensityPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { ZonesCard } from '@/components/ZonesCard';
+import { SESSION_ICON, SESSION_ICON_FALLBACK } from '@/constants/session-icons';
 import { useDisplayZones } from '@/hooks/useDisplayZones';
 import { intensityZoneLabel, sessionPaceBand } from '@/services/session-pace';
 import type { ZoneSet } from '@/services/coaching/zones';
@@ -356,19 +357,6 @@ export default function PlanPreviewScreen() {
     return sum + s.planned_distance_km;
   }, 0);
 
-  // Vector icons, not emoji: emoji can't take the accent colour and render
-  // differently on every platform.
-  const SESSION_ICONS: Record<string, IconName> = {
-    run: 'run',
-    lift: 'dumbbell',
-    swim: 'swim',
-    bike: 'bike',
-    rowing: 'rowing',
-    hyrox: 'arm-flex',
-    cross: 'sync',
-    rest: 'sleep',
-  };
-
   // Local date, not toISOString() — that flips to tomorrow before local
   // midnight for anyone west of UTC (e.g. ~5pm Pacific), misattributing
   // today's macro/weather annotations to the wrong day.
@@ -522,7 +510,7 @@ export default function PlanPreviewScreen() {
                 {Object.entries(sessionCounts).map(([type, count]) => (
                   <View key={type} style={styles.typeChip}>
                     <MaterialCommunityIcons
-                      name={SESSION_ICONS[type] ?? 'circle-small'}
+                      name={SESSION_ICON[type] ?? 'circle-small'}
                       size={18}
                       color={Theme.accent}
                     />
@@ -569,7 +557,7 @@ export default function PlanPreviewScreen() {
                       </View>
                       <View style={styles.sessionRight}>
                         <MaterialCommunityIcons
-                          name={SESSION_ICONS[session.session_type] ?? 'circle-small'}
+                          name={SESSION_ICON[session.session_type] ?? SESSION_ICON_FALLBACK}
                           size={20}
                           color={Theme.accent}
                         />

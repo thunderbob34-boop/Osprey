@@ -15,6 +15,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { Theme, ChartPalette, Radius, BorderWidth } from '@/constants/theme';
+import { SESSION_ICON, SESSION_ICON_FALLBACK } from '@/constants/session-icons';
 import { useStats } from '@/hooks/useStats';
 import { useDeleteWorkoutLog } from '@/hooks/useTodayLog';
 import { usePerformance } from '@/hooks/usePerformance';
@@ -26,21 +27,6 @@ import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, milesToKm, type UnitSystem } from '@/services/units';
 import type { SportType } from '@/types/stats';
 
-type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
-
-// Vector icons, not emoji: emoji can't take the accent colour and render
-// differently on every platform, which broke the amber icon system used by
-// the tab bar, the nav chips above, and the Workout tab's sport cards.
-const SESSION_ICON: Record<string, IconName> = {
-  run:    'run',
-  lift:   'dumbbell',
-  swim:   'swim',
-  bike:   'bike',
-  cross:  'sync',
-  race:   'flag-checkered',
-  rowing: 'rowing',
-  hyrox:  'arm-flex',
-};
 
 /** "0h" hides real work — a 25-minute session is not zero. Sub-hour reads in minutes. */
 function formatHours(hours: number): string {
@@ -427,7 +413,7 @@ export default function StatsTab() {
                           <View key={split.leg} style={styles.predictorRow}>
                             <View style={styles.predictorLegRow}>
                               <MaterialCommunityIcons
-                                name={SESSION_ICON[split.leg] ?? 'circle-small'}
+                                name={SESSION_ICON[split.leg] ?? SESSION_ICON_FALLBACK}
                                 size={16}
                                 color={Theme.accent}
                               />
@@ -580,7 +566,7 @@ export default function StatsTab() {
                     ]}
                   >
                     <MaterialCommunityIcons
-                      name={SESSION_ICON[w.sessionType] ?? 'circle-small'}
+                      name={SESSION_ICON[w.sessionType] ?? SESSION_ICON_FALLBACK}
                       size={20}
                       color={Theme.accent}
                       style={styles.workoutIcon}
