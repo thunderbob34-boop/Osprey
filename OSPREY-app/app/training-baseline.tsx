@@ -101,7 +101,7 @@ export default function TrainingBaselineScreen() {
   const soloKey = primaryGoal ? anchorKeyForGoal(primaryGoal) : null;
   const keys: AnchorKey[] = primaryGoal === 'triathlon' ? ['run', 'swim', 'bike'] : soloKey ? [soloKey] : [];
 
-  if (goalLoading || anchor.isLoading || !display) {
+  if (goalLoading || (keys.length > 0 && (anchor.isLoading || !display))) {
     return (
       <SafeAreaView style={styles.container}>
         <ScreenHeader title="Training Baseline" />
@@ -134,7 +134,13 @@ export default function TrainingBaselineScreen() {
                 key={key}
                 anchorKey={key}
                 entry={map[key]}
-                hrZones={display.hrZones}
+                // Non-null by construction: this branch only runs when keys.length > 0,
+                // and the loading gate above waits on `display` whenever keys.length > 0
+                // — but that's a fact about two separate keys.length checks, which TS's
+                // control-flow analysis doesn't correlate across, so it still sees
+                // `display` as possibly null here without this assertion (mirrors the
+                // existing userId! convention used elsewhere in this same file).
+                hrZones={display!.hrZones}
                 units={units}
                 saving={update.isPending}
                 onSave={(value) => {
