@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import type { ComponentProps } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,6 +14,7 @@ import {
   Platform,
 } from 'react-native';
 import Svg, { Polyline } from 'react-native-svg';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/colors';
@@ -49,11 +51,16 @@ function formatSessionType(type: string): string {
   return type.charAt(0).toUpperCase() + type.slice(1);
 }
 
-const WORKOUT_ENTRY_ICON: Record<string, string> = {
-  run: '🏃',
-  lift: '🏋️',
-  cross: '🔁',
-  race: '🏁',
+type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
+
+// Vector icons, not emoji: emoji can't take the accent colour and render
+// differently on every platform, which broke the amber icon system this
+// screen sits inside (tab bar, Workout tab's sport cards).
+const WORKOUT_ENTRY_ICON: Record<string, IconName> = {
+  run: 'run',
+  lift: 'dumbbell',
+  cross: 'sync',
+  race: 'flag-checkered',
 };
 
 function formatTime(iso: string): string {
@@ -521,6 +528,11 @@ export default function LogTab() {
                       nutrition.dayType === 'rest' && styles.dayTypeChipRest,
                     ]}
                   >
+                    <MaterialCommunityIcons
+                      name={nutrition.dayType === 'rest' ? 'sleep' : 'dumbbell'}
+                      size={11}
+                      color={nutrition.dayType === 'rest' ? EffortPalette.rest : Theme.accent}
+                    />
                     <Text
                       style={[
                         styles.dayTypeChipText,
@@ -528,8 +540,8 @@ export default function LogTab() {
                       ]}
                     >
                       {nutrition.dayType === 'training'
-                        ? `🏋️ Training day${nutrition.todaySessionType ? ` · ${formatSessionType(nutrition.todaySessionType)}` : ''}`
-                        : '😴 Rest day target'}
+                        ? `Training day${nutrition.todaySessionType ? ` · ${formatSessionType(nutrition.todaySessionType)}` : ''}`
+                        : 'Rest day target'}
                     </Text>
                   </View>
                 ) : null}
@@ -595,7 +607,12 @@ export default function LogTab() {
                       accessibilityRole="button"
                       accessibilityLabel={`Edit ${formatSessionType(w.sessionType)} workout`}
                     >
-                      <Text style={styles.entryIcon}>{WORKOUT_ENTRY_ICON[w.sessionType] ?? '🏃'}</Text>
+                      <MaterialCommunityIcons
+                        name={WORKOUT_ENTRY_ICON[w.sessionType] ?? 'run'}
+                        size={18}
+                        color={Theme.accent}
+                        style={styles.entryIcon}
+                      />
                       <View style={{ flex: 1 }}>
                         <Text style={styles.entryPrimary}>{formatSessionType(w.sessionType)}</Text>
                         <Text style={styles.entrySecondary}>
@@ -628,7 +645,12 @@ export default function LogTab() {
                       accessibilityRole="button"
                       accessibilityLabel={`Edit ${f.name}`}
                     >
-                      <Text style={styles.entryIcon}>🍽</Text>
+                      <MaterialCommunityIcons
+                        name="silverware-fork-knife"
+                        size={18}
+                        color={Theme.accent}
+                        style={styles.entryIcon}
+                      />
                       <View style={{ flex: 1 }}>
                         <Text style={styles.entryPrimary}>{f.name}</Text>
                         <Text style={styles.entrySecondary}>
@@ -671,7 +693,10 @@ export default function LogTab() {
               accessibilityLabel="Log a workout"
               accessibilityState={{ expanded: openSection === 'workout' }}
             >
-              <Text style={styles.actionTitle}>🏃 Log a Workout</Text>
+              <View style={styles.actionTitleRow}>
+                <MaterialCommunityIcons name="run" size={18} color={Theme.accent} />
+                <Text style={styles.actionTitle}>Log a Workout</Text>
+              </View>
               <Text style={styles.actionChevron}>{openSection === 'workout' ? '−' : '+'}</Text>
             </TouchableOpacity>
           </Card>
@@ -776,7 +801,10 @@ export default function LogTab() {
               accessibilityLabel="Log food"
               accessibilityState={{ expanded: openSection === 'food' }}
             >
-              <Text style={styles.actionTitle}>🍽 Log Food</Text>
+              <View style={styles.actionTitleRow}>
+                <MaterialCommunityIcons name="silverware-fork-knife" size={18} color={Theme.accent} />
+                <Text style={styles.actionTitle}>Log Food</Text>
+              </View>
               <Text style={styles.actionChevron}>{openSection === 'food' ? '−' : '+'}</Text>
             </TouchableOpacity>
           </Card>
@@ -1013,7 +1041,10 @@ export default function LogTab() {
               accessibilityLabel="Log weight"
               accessibilityState={{ expanded: openSection === 'weight' }}
             >
-              <Text style={styles.actionTitle}>⚖️ Log Weight</Text>
+              <View style={styles.actionTitleRow}>
+                <MaterialCommunityIcons name="scale-bathroom" size={18} color={Theme.accent} />
+                <Text style={styles.actionTitle}>Log Weight</Text>
+              </View>
               <Text style={styles.actionChevron}>{openSection === 'weight' ? '−' : '+'}</Text>
             </TouchableOpacity>
           </Card>
@@ -1101,6 +1132,9 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   dayTypeChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
     backgroundColor: Theme.panel,
     borderWidth: BorderWidth.card,
     borderColor: Theme.line,
@@ -1131,7 +1165,7 @@ const styles = StyleSheet.create({
   cardLabel: { fontSize: 10, fontWeight: '700', color: Theme.textMut, letterSpacing: 1, fontFamily: 'SpaceGrotesk_700Bold' },
   emptyText: { fontSize: 13, color: Theme.textMut },
   entryRow: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 4 },
-  entryIcon: { fontSize: 18, width: 22, textAlign: 'center' },
+  entryIcon: { width: 22, textAlign: 'center' },
   entryPrimary: { fontSize: 14, fontWeight: '700', color: Theme.text },
   entrySecondary: { fontSize: 12, color: Theme.textSoft },
   entryDeleteBtn: { padding: 10, marginLeft: 2 },
@@ -1152,6 +1186,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 16,
   },
+  actionTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   actionTitle: { fontSize: 15, fontWeight: '700', color: Theme.text },
   actionChevron: { fontSize: 18, fontWeight: '800', color: Theme.accent },
   form: {

@@ -41,6 +41,13 @@ export default function NutritionCard({
       }
     : FALLBACK;
 
+  // Only real, fetched intake counts. While the first fetch is in flight the
+  // targets above are FALLBACK placeholders, and pairing those with a "0 /"
+  // would read as a real — and wrong — intake number.
+  const logged = data?.loggedToday ?? null;
+  const calorieProgress =
+    logged && targets.calories > 0 ? Math.min(1, logged.calories / targets.calories) : 0;
+
   const fuelTip = showFuelTip ? fuelCardCopy(fuelStatus) : null;
   const hydrationProgress =
     hydration && hydration.targetOz > 0 ? Math.min(1, hydration.ounces / hydration.targetOz) : 0;
@@ -54,12 +61,21 @@ export default function NutritionCard({
       </View>
 
       <View style={styles.macroGrid}>
-        <MacroBlock value={targets.protein} unit="g" label="Protein" />
-        <MacroBlock value={targets.carbs} unit="g" label="Carbs" />
-        <MacroBlock value={targets.fat} unit="g" label="Fat" />
-        <MacroBlock value={targets.calories} unit="kcal" label="Calories" />
+        <MacroBlock target={targets.protein} logged={logged?.proteinG} unit="g" label="Protein" />
+        <MacroBlock target={targets.carbs} logged={logged?.carbsG} unit="g" label="Carbs" />
+        <MacroBlock target={targets.fat} logged={logged?.fatG} unit="g" label="Fat" />
+        {/* kcal is implied by the label — spelling it out overflows the column
+            once the logged number reaches four digits. */}
+        <MacroBlock target={targets.calories} logged={logged?.calories} unit="" label="Calories" />
       </View>
-      {data?.tip ? <Text style={styles.tip}>{data.tip}</Text> : null}
+      {logged ? (
+        <View style={styles.track}>
+          <View style={[styles.fill, { width: `${calorieProgress * 100}%`, backgroundColor: Theme.accent }]} />
+        </View>
+      ) : null}
+      {/* Ozzie's nutrition tip deliberately lives on the Log tab only. It used
+          to render here too — the same paragraph, verbatim, one scroll apart —
+          and it also restated the deterministic fuel tip below. */}
 
       {hydration ? (
         <>
@@ -135,12 +151,30 @@ function fuelCardCopy(fuelStatus?: FuelStatusData): { title: string; body: strin
   };
 }
 
-function MacroBlock({ value, unit, label }: { value: number; unit: string; label: string }) {
+function MacroBlock({
+  target,
+  logged,
+  unit,
+  label,
+}: {
+  target: number;
+  /** Undefined until the real intake has loaded — then the block shows progress, not just the target. */
+  logged?: number;
+  unit: string;
+  label: string;
+}) {
   return (
     <View style={styles.macroBlock}>
       <View style={styles.macroValueRow}>
-        <Text style={styles.macroNumber}>{value}</Text>
-        <Text style={styles.macroUnit}>{unit}</Text>
+        <Text style={styles.macroNumber}>{logged != null ? Math.round(logged) : target}</Text>
+        {logged != null ? (
+          <Text style={styles.macroTarget}>
+            /{target}
+            {unit}
+          </Text>
+        ) : (
+          <Text style={styles.macroUnit}>{unit}</Text>
+        )}
       </View>
       <Text style={styles.macroLabel}>{label}</Text>
     </View>
@@ -179,7 +213,8 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   macroNumber: {
-    fontSize: 22,
+    // 18, not 22: the column has to hold "2431/2880" once a full day is logged.
+    fontSize: 18,
     fontWeight: '800',
     color: Theme.accent,
   },
@@ -187,16 +222,15 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Theme.textMut,
   },
+  macroTarget: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: Theme.textMut,
+  },
   macroLabel: {
     fontSize: 11,
     color: Theme.textMut,
     marginTop: 2,
-  },
-  tip: {
-    fontSize: 12,
-    color: Theme.textSoft,
-    lineHeight: 17,
-    fontStyle: 'italic',
   },
   divider: {
     height: 1,
