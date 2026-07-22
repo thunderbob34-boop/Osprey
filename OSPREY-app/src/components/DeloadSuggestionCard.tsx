@@ -1,5 +1,7 @@
 import { ActivityIndicator, Alert, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { format } from 'date-fns';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import type { WeekSession } from '@/services/plan';
@@ -38,7 +40,10 @@ export default function DeloadSuggestionCard({ session, daysToHighRisk, isAccept
 
   return (
     <Card emphasis style={styles.card}>
-      <Text style={styles.title}>⚠️ Ozzie noticed your load climbing</Text>
+      <View style={styles.titleRow}>
+        <MaterialCommunityIcons name="alert" size={16} color={Colors.amber} />
+        <Text style={styles.title}>Ozzie noticed your load climbing</Text>
+      </View>
       <Text style={styles.subtitle}>
         Projected to hit the danger zone {urgency}. Consider de-loading {dayLabel} {session.description || session.session_type}.
       </Text>
@@ -81,6 +86,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     gap: 8,
   } as ViewStyle,
+  titleRow: { flexDirection: 'row', alignItems: 'center', gap: 7 },
   title: {
     fontSize: 15,
     fontWeight: '700',

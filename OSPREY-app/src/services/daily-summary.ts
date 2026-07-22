@@ -60,7 +60,17 @@ function formatSessionType(sessionType: string): string {
   }
 }
 
-function loadLabelFromTsb(tsb: number | null): string {
+/**
+ * `row.tsb` (from v_daily_summary) is ALWAYS null — its source table,
+ * load_scores, exists but nothing ever writes to it, confirmed via
+ * `select count(tsb) from v_daily_summary` returning 0 across every row in
+ * production. So this always falls through to '—' when fed from the service
+ * row below. It stays exported so the Home screen can call it a second time
+ * with a REAL tsb from usePerformance() — the same CTL/ATL/TSB pipeline
+ * Stats' Fitness & Form card and the ReadinessCard already use, computed
+ * directly from workout_logs rather than the dead table.
+ */
+export function loadLabelFromTsb(tsb: number | null): string {
   if (tsb == null) return '—';
   if (tsb > 5) return 'Fresh';
   if (tsb >= -10) return 'Moderate';

@@ -6,6 +6,7 @@ import BuildPlanBanner from '@/components/BuildPlanBanner';
 import DeloadSuggestionCard from '@/components/DeloadSuggestionCard';
 import WeatherCoachCard from '@/components/WeatherCoachCard';
 import { useDailySummary } from '@/hooks/useDailySummary';
+import { loadLabelFromTsb } from '@/services/daily-summary';
 import { routeForSession } from '@/services/session-route';
 import { useWeatherCoach } from '@/hooks/useWeatherCoach';
 import { useSavedRoutes } from '@/hooks/useSavedRoutes';
@@ -98,6 +99,18 @@ export default function HomeTab() {
   const hasPlan = Boolean(data?.session?.sessionId);
   const alreadyIndoors = /\((Treadmill|Trainer|Indoor)\)/i.test(data?.session?.type ?? '');
 
+  // The "Load" quick stat's own source (v_daily_summary.tsb) is permanently
+  // null — load_scores, the table behind it, is never written to. Re-derive it
+  // from usePerformance()'s CTL/ATL/TSB pipeline instead, which is real (it's
+  // computed straight from workout_logs) and already fetched on this screen
+  // for trainingReadiness. Gated the same way as everywhere else that pipeline
+  // is surfaced (Stats' Fitness & Form, the race predictor) — perf.ctl > 0 is
+  // usePerformance's own "enough history to mean anything" check — so this
+  // doesn't silently turn a paid metric free.
+  const quickStats = data?.quickStats
+    ? { ...data.quickStats, load: isPlus && perf && perf.ctl > 0 ? loadLabelFromTsb(perf.tsb) : '—' }
+    : data?.quickStats;
+
   return (
     <DailySummaryScreen
       isLoading={isLoading}
@@ -116,7 +129,7 @@ export default function HomeTab() {
       weekDistanceKm={data?.weekDistanceKm}
       weekTargetKm={data?.weekTargetKm}
       habitTip={data?.habitTip}
-      quickStats={data?.quickStats}
+      quickStats={quickStats}
       trainingReadiness={isPlus ? (perf?.trainingReadiness ?? null) : null}
       onActivityPress={() => router.push('/activity')}
       // Ask Ozzie hidden until OpenAI billing is on — omitting this prop hides

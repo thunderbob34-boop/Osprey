@@ -11,8 +11,9 @@ import {
   RefreshControl,
   Modal,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
+import { SESSION_ICON } from '@/constants/session-icons';
 import type { DailySummaryProps, TrainingReadiness } from '@/types/daily-summary';
 import NutritionCard from '@/components/NutritionCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
@@ -455,37 +456,41 @@ export default function DailySummaryScreen({
               <Text style={styles.sheetSectionLabel}>SWAP TO</Text>
               <View style={styles.sheetRowGroup}>
                 <TouchableOpacity
-                  style={styles.sheetRow}
+                  style={[styles.sheetRow, styles.sheetRowInner]}
                   onPress={() => handleSwap('run')}
                   accessibilityRole="button"
                   accessibilityLabel="Swap to Run"
                 >
-                  <Text style={styles.sheetRowText}>🏃 Run</Text>
+                  <MaterialCommunityIcons name={SESSION_ICON.run} size={18} color={Theme.accent} />
+                  <Text style={styles.sheetRowText}>Run</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={styles.sheetRow}
+                  style={[styles.sheetRow, styles.sheetRowInner]}
                   onPress={() => handleSwap('lift')}
                   accessibilityRole="button"
                   accessibilityLabel="Swap to Lift"
                 >
-                  <Text style={styles.sheetRowText}>🏋️ Lift</Text>
+                  <MaterialCommunityIcons name={SESSION_ICON.lift} size={18} color={Theme.accent} />
+                  <Text style={styles.sheetRowText}>Lift</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={styles.sheetRow}
+                  style={[styles.sheetRow, styles.sheetRowInner]}
                   onPress={() => handleSwap('cross')}
                   accessibilityRole="button"
                   accessibilityLabel="Swap to Cross Training"
                 >
-                  <Text style={styles.sheetRowText}>🔁 Cross Training</Text>
+                  <MaterialCommunityIcons name={SESSION_ICON.cross} size={18} color={Theme.accent} />
+                  <Text style={styles.sheetRowText}>Cross Training</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={[styles.sheetRow, styles.sheetRowLast]}
+                  style={[styles.sheetRow, styles.sheetRowInner, styles.sheetRowLast]}
                   onPress={() => handleSwap('rest')}
                   accessibilityRole="button"
                   accessibilityLabel="Make it a rest day"
                 >
+                  <MaterialCommunityIcons name={SESSION_ICON.rest} size={18} color={Colors.red} />
                   <Text style={[styles.sheetRowText, styles.sheetRowTextDestructive]}>
-                    😴 Make it a Rest Day
+                    Make it a Rest Day
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -1005,6 +1010,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Theme.line,
   },
+  sheetRowInner: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   sheetRowLast: { borderBottomWidth: 0 },
   sheetRowText: { fontSize: 15, fontWeight: '600', color: Theme.text },
   sheetRowTextDestructive: { color: Colors.red },
