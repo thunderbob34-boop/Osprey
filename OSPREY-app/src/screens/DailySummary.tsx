@@ -109,6 +109,13 @@ export default function DailySummaryScreen({
   const [whyExpanded, setWhyExpanded] = useState(false);
   const [adjustSheetOpen, setAdjustSheetOpen] = useState(false);
 
+  // Only surface the "why" when it's grounded in real data (a recovery score).
+  // With nothing synced, the daily brief falls back to a generic "keep logging"
+  // line — a non-answer we deliberately hide rather than show as weak reasoning.
+  // (Its other data source, load_scores/TSB, is a dead table, so a recovery
+  // score is the substance signal in practice.)
+  const showWhy = !!session.whyReasoning && !!recovery;
+
   function handleSwap(newType: 'run' | 'lift' | 'cross' | 'rest') {
     setAdjustSheetOpen(false);
     onSwapSession?.(newType);
@@ -318,23 +325,24 @@ export default function DailySummaryScreen({
           <Card emphasis style={{ marginBottom: 14 }}>
             <TouchableOpacity
               style={styles.ozzieNote}
-              activeOpacity={session.whyReasoning ? 0.7 : 1}
-              onPress={() => session.whyReasoning && setWhyExpanded((v) => !v)}
-              accessibilityRole={session.whyReasoning ? 'button' : undefined}
-              accessibilityLabel={session.whyReasoning ? (whyExpanded ? 'Hide reasoning' : 'Why this session') : undefined}
+              activeOpacity={showWhy ? 0.7 : 1}
+              onPress={() => showWhy && setWhyExpanded((v) => !v)}
+              accessibilityRole={showWhy ? 'button' : undefined}
+              accessibilityLabel={showWhy ? (whyExpanded ? 'Hide reasoning' : 'Why this session') : undefined}
             >
               <OzzieAvatar size={24} />
               <View style={styles.ozzieNoteBody}>
                 <Text style={styles.ozzieNoteText}>{session.ozzieNote}</Text>
-                {session.whyReasoning ? (
+                {showWhy ? (
                   <Text style={styles.whyToggleText}>
                     {whyExpanded ? 'Hide reasoning ▴' : 'Why this session? ▾'}
                   </Text>
                 ) : null}
               </View>
             </TouchableOpacity>
-            {whyExpanded && session.whyReasoning ? (
+            {whyExpanded && showWhy ? (
               <View style={styles.whyPanel}>
+                <Text style={styles.whyLabel}>WHY THIS SESSION</Text>
                 <Text style={styles.whyPanelText}>{session.whyReasoning}</Text>
               </View>
             ) : null}
@@ -869,15 +877,22 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   whyPanel: {
-    marginTop: 10,
-    paddingTop: 10,
+    marginTop: 12,
+    paddingTop: 12,
     borderTopWidth: 1,
     borderTopColor: Theme.line,
   },
+  whyLabel: {
+    fontSize: 10.5,
+    fontWeight: '800',
+    letterSpacing: 1,
+    color: Theme.accent,
+    marginBottom: 5,
+  },
   whyPanelText: {
-    fontSize: 12,
-    color: Theme.textMut,
-    lineHeight: 18,
+    fontSize: 13.5,
+    color: Theme.textSoft,
+    lineHeight: 20,
   },
   sessionActionsRow: {
     flexDirection: 'row',
