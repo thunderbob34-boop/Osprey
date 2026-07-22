@@ -16,10 +16,6 @@ function kmToMiles(km: number): number {
   return Math.round(km * MILES_PER_KM * 10) / 10;
 }
 
-function round1(n: number): number {
-  return Math.round(n * 10) / 10;
-}
-
 export async function fetchStats(userId: string): Promise<StatsData> {
   const since = startOfWeek(subWeeks(new Date(), WEEKS_BACK - 1), { weekStartsOn: 1 });
 
@@ -69,17 +65,22 @@ export async function fetchStats(userId: string): Promise<StatsData> {
 
   const weeklySportVolume: WeeklySportPoint[] = Array.from(weeklySportBuckets.entries()).map(
     ([weekStartIso, bucket]) => {
+      // Kept unrounded. Rounding to one decimal here turned every session under
+      // three minutes into 0.0, which dropped it out of the chart's `hours > 0`
+      // filter entirely — the workout still counted in "WORKOUTS 2" but had no
+      // bar. The screen formats for display instead, so short sessions render
+      // as short bars.
       const hoursBySport: Partial<Record<SportType, number>> = {};
       let totalHours = 0;
       for (const [sport, v] of Object.entries(bucket) as [SportType, { hours: number; km: number }][]) {
-        hoursBySport[sport] = round1(v.hours);
+        hoursBySport[sport] = v.hours;
         totalHours += v.hours;
       }
       return {
         weekStartIso,
         label: format(new Date(weekStartIso), 'MMM d'),
         hoursBySport,
-        totalHours: round1(totalHours),
+        totalHours,
       };
     },
   );
@@ -95,9 +96,11 @@ export async function fetchStats(userId: string): Promise<StatsData> {
   }
 
   const sportTotalsPeriod: SportPeriodTotal[] = Array.from(sportTotalsMap.entries())
+    // Unrounded for the same reason as the weekly buckets: the legend used to
+    // read "Lift · 0h" for a real session. The screen formats it.
     .map(([sessionType, v]) => ({
       sessionType,
-      hours: round1(v.hours),
+      hours: v.hours,
       miles: v.km > 0 ? kmToMiles(v.km) : null,
     }))
     .sort((a, b) => b.hours - a.hours);

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { ComponentProps } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -11,7 +12,7 @@ import {
 } from 'react-native';
 import Svg, { Line, Path, Polyline, Rect } from 'react-native-svg';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { Theme, ChartPalette, Radius, BorderWidth } from '@/constants/theme';
 import { useStats } from '@/hooks/useStats';
@@ -25,16 +26,34 @@ import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm, milesToKm, type UnitSystem } from '@/services/units';
 import type { SportType } from '@/types/stats';
 
-const SESSION_ICON: Record<string, string> = {
-  run:    '🏃',
-  lift:   '🏋️',
-  swim:   '🏊',
-  bike:   '🚴',
-  cross:  '🔁',
-  race:   '🏁',
-  rowing: '🚣',
-  hyrox:  '💪',
+type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
+
+// Vector icons, not emoji: emoji can't take the accent colour and render
+// differently on every platform, which broke the amber icon system used by
+// the tab bar, the nav chips above, and the Workout tab's sport cards.
+const SESSION_ICON: Record<string, IconName> = {
+  run:    'run',
+  lift:   'dumbbell',
+  swim:   'swim',
+  bike:   'bike',
+  cross:  'sync',
+  race:   'flag-checkered',
+  rowing: 'rowing',
+  hyrox:  'arm-flex',
 };
+
+/** "0h" hides real work — a 25-minute session is not zero. Sub-hour reads in minutes. */
+function formatHours(hours: number): string {
+  if (hours <= 0) return '0h';
+  if (hours < 1) return `${Math.round(hours * 60)}m`;
+  return `${Math.round(hours * 10) / 10}h`;
+}
+
+/** Same rule for the 30-day total, which arrives already in whole minutes. */
+function formatMinutes(minutes: number): string {
+  if (minutes < 60) return `${Math.round(minutes)} min`;
+  return `${Math.round(minutes / 60)} hr`;
+}
 
 // Fixed stacking order (bottom to top) + color per sport for the per-sport
 // volume chart.
@@ -164,13 +183,29 @@ function SportVolumeChart({
 }: {
   weeks: Array<{ weekStartIso: string; label: string; totalHours: number; hoursBySport: Partial<Record<SportType, number>> }>;
 }) {
+  const windowHours = weeks.reduce((sum, w) => sum + w.totalHours, 0);
+
+  // With no volume anywhere in the window every segment is filtered out, so the
+  // only thing left in each column is the empty track — and a full-height track
+  // reads as a full-height bar. Six of them claimed six weeks of maximum volume
+  // for an athlete who had trained zero. Say nothing instead.
+  if (windowHours <= 0) {
+    return (
+      <Text style={styles.chartEmpty}>
+        No training logged in the last {weeks.length} weeks. Your first logged session starts the chart.
+      </Text>
+    );
+  }
+
+  // Floor of 1h so a single short session doesn't scale up to a full-height
+  // column — a 2-minute lift should look like 2 minutes.
   const maxHours = Math.max(1, ...weeks.map((w) => w.totalHours));
 
   return (
     <View style={styles.chartBars}>
       {weeks.map((week) => (
         <View key={week.weekStartIso} style={styles.barColumn}>
-          <Text style={styles.barValue}>{week.totalHours > 0 ? `${week.totalHours}h` : ''}</Text>
+          <Text style={styles.barValue}>{week.totalHours > 0 ? formatHours(week.totalHours) : ''}</Text>
           <View style={[styles.barTrack, styles.stackedBarTrack]}>
             {SPORT_ORDER.filter((sport) => (week.hoursBySport[sport] ?? 0) > 0).map((sport) => (
               <View
@@ -274,11 +309,7 @@ export default function StatsTab() {
                 value={formatDistanceKm(milesToKm(data?.totalMiles30d ?? 0), units)}
                 sub="Last 30 days"
               />
-              <StatBlock
-                label="TIME"
-                value={`${Math.round((data?.totalMinutes30d ?? 0) / 60)} hr`}
-                sub="Last 30 days"
-              />
+              <StatBlock label="TIME" value={formatMinutes(data?.totalMinutes30d ?? 0)} sub="Last 30 days" />
             </View>
 
             <View style={styles.chartCard}>
@@ -292,7 +323,7 @@ export default function StatsTab() {
                         style={[styles.legendDot, { backgroundColor: SPORT_COLOR[total.sessionType] }]}
                       />
                       <Text style={styles.sportLegendText}>
-                        {SPORT_LABEL[total.sessionType]} · {total.hours}h
+                        {SPORT_LABEL[total.sessionType]} · {formatHours(total.hours)}
                         {total.miles != null ? ` · ${formatDistanceKm(milesToKm(total.miles), units)}` : ''}
                       </Text>
                     </View>
@@ -307,72 +338,83 @@ export default function StatsTab() {
                 <ActivityIndicator color={Theme.accent} style={{ marginTop: 8 }} />
               ) : perf ? (
                 <>
-                  {/* Injury risk banner — only shown when not in the safe zone */}
-                  {perf.injuryRisk.level !== 'low' ? (
+                  {/* Injury risk banner — only for the two levels that are
+                      actually a warning. 'undertrained' is not one: it means
+                      there isn't enough training to compute anything. Shown
+                      here it said "can't assess load" directly above a card
+                      that then assessed it as 0.0 / 0.0 / 0.0, with FORM in
+                      green. The Fitness & Form card carries that case now. */}
+                  {perf.injuryRisk.level === 'high' || perf.injuryRisk.level === 'moderate' ? (
                     <View
                       style={[
                         styles.riskBanner,
-                        perf.injuryRisk.level === 'high'
-                          ? styles.riskBannerHigh
-                          : perf.injuryRisk.level === 'moderate'
-                          ? styles.riskBannerMod
-                          : styles.riskBannerInfo,
+                        perf.injuryRisk.level === 'high' ? styles.riskBannerHigh : styles.riskBannerMod,
                       ]}
                     >
-                      <Text style={styles.riskIcon}>
-                        {perf.injuryRisk.level === 'high'
-                          ? '⚠️'
-                          : perf.injuryRisk.level === 'moderate'
-                          ? '📊'
-                          : 'ℹ️'}
-                      </Text>
+                      <MaterialCommunityIcons
+                        name={perf.injuryRisk.level === 'high' ? 'alert' : 'chart-line-variant'}
+                        size={16}
+                        color={perf.injuryRisk.level === 'high' ? Colors.red : Theme.accent}
+                      />
                       <Text style={styles.riskText}>{perf.injuryRisk.message}</Text>
                     </View>
                   ) : null}
 
                   <Text style={styles.sectionLabel}>FITNESS & FORM</Text>
                   <View style={styles.fitnessCard}>
-                    <View style={styles.fitnessMetrics}>
-                      <FitnessMetric
-                        label="FITNESS"
-                        sublabel="CTL"
-                        value={perf.ctl.toFixed(1)}
-                        color={ChartPalette.run}
-                      />
-                      <FitnessMetric
-                        label="FATIGUE"
-                        sublabel="ATL"
-                        value={perf.atl.toFixed(1)}
-                        color={ChartPalette.neutral}
-                      />
-                      <FitnessMetric
-                        label="FORM"
-                        sublabel="TSB"
-                        value={perf.tsb > 0 ? `+${perf.tsb.toFixed(1)}` : perf.tsb.toFixed(1)}
-                        color={perf.tsb >= 0 ? Colors.green : Colors.red}
-                      />
-                    </View>
-
-                    {perf.series.length >= 2 ? (
+                    {perf.injuryRisk.level === 'undertrained' ? (
+                      <Text style={styles.fitnessEmpty}>
+                        {perf.injuryRisk.message} Fitness and form need roughly two weeks of logged
+                        sessions before the numbers mean anything.
+                      </Text>
+                    ) : (
                       <>
-                        <View style={styles.chartLegend}>
-                          <View style={styles.legendItem}>
-                            <View style={[styles.legendDot, { backgroundColor: ChartPalette.run }]} />
-                            <Text style={styles.legendText}>Fitness (CTL)</Text>
-                          </View>
-                          <View style={styles.legendItem}>
-                            <View style={[styles.legendDot, { backgroundColor: ChartPalette.neutral }]} />
-                            <Text style={styles.legendText}>Fatigue (ATL)</Text>
-                          </View>
+                        <View style={styles.fitnessMetrics}>
+                          <FitnessMetric
+                            label="FITNESS"
+                            sublabel="CTL"
+                            value={perf.ctl.toFixed(1)}
+                            color={ChartPalette.run}
+                          />
+                          <FitnessMetric
+                            label="FATIGUE"
+                            sublabel="ATL"
+                            value={perf.atl.toFixed(1)}
+                            color={ChartPalette.neutral}
+                          />
+                          <FitnessMetric
+                            label="FORM"
+                            sublabel="TSB"
+                            value={perf.tsb > 0 ? `+${perf.tsb.toFixed(1)}` : perf.tsb.toFixed(1)}
+                            color={perf.tsb >= 0 ? Colors.green : Colors.red}
+                          />
                         </View>
-                        <View style={styles.svgWrap} onLayout={(e) => setChartWidth(e.nativeEvent.layout.width)}>
-                          <FitnessChart series={perf.series} width={chartWidth} />
-                        </View>
-                        <Text style={styles.chartDateRange}>
-                          {perf.series[0]?.date} — {perf.series[perf.series.length - 1]?.date}
-                        </Text>
+
+                        {perf.series.length >= 2 ? (
+                          <>
+                            <View style={styles.chartLegend}>
+                              <View style={styles.legendItem}>
+                                <View style={[styles.legendDot, { backgroundColor: ChartPalette.run }]} />
+                                <Text style={styles.legendText}>Fitness (CTL)</Text>
+                              </View>
+                              <View style={styles.legendItem}>
+                                <View style={[styles.legendDot, { backgroundColor: ChartPalette.neutral }]} />
+                                <Text style={styles.legendText}>Fatigue (ATL)</Text>
+                              </View>
+                            </View>
+                            <View
+                              style={styles.svgWrap}
+                              onLayout={(e) => setChartWidth(e.nativeEvent.layout.width)}
+                            >
+                              <FitnessChart series={perf.series} width={chartWidth} />
+                            </View>
+                            <Text style={styles.chartDateRange}>
+                              {perf.series[0]?.date} — {perf.series[perf.series.length - 1]?.date}
+                            </Text>
+                          </>
+                        ) : null}
                       </>
-                    ) : null}
+                    )}
                   </View>
 
                   {perf.triathlonPredictor ? (
@@ -383,9 +425,14 @@ export default function StatsTab() {
                       <View style={styles.predictorCard}>
                         {perf.triathlonPredictor.splits.map((split) => (
                           <View key={split.leg} style={styles.predictorRow}>
-                            <Text style={styles.predictorDist}>
-                              {SESSION_ICON[split.leg]} {split.label}
-                            </Text>
+                            <View style={styles.predictorLegRow}>
+                              <MaterialCommunityIcons
+                                name={SESSION_ICON[split.leg] ?? 'circle-small'}
+                                size={16}
+                                color={Theme.accent}
+                              />
+                              <Text style={styles.predictorDist}>{split.label}</Text>
+                            </View>
                             {split.predictedTimeS != null ? (
                               <Text style={styles.predictorTime}>
                                 {formatRaceTimeSec(split.predictedTimeS)}
@@ -532,7 +579,12 @@ export default function StatsTab() {
                       index === data.recentWorkouts.length - 1 && styles.workoutRowLast,
                     ]}
                   >
-                    <Text style={styles.workoutIcon}>{SESSION_ICON[w.sessionType] ?? '•'}</Text>
+                    <MaterialCommunityIcons
+                      name={SESSION_ICON[w.sessionType] ?? 'circle-small'}
+                      size={20}
+                      color={Theme.accent}
+                      style={styles.workoutIcon}
+                    />
                     <View style={styles.workoutInfo}>
                       <Text style={styles.workoutType}>{formatSessionType(w.sessionType)}</Text>
                       <Text style={styles.workoutMeta}>
@@ -643,10 +695,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 4,
   },
+  // Plain panel, matching every other card on the tab. The amber wash it used
+  // to carry made the volume chart the loudest thing on the screen, which is
+  // the wrong place to point the eye when the chart has little to show.
   chartCard: {
-    backgroundColor: Theme.accent + '1A',
+    backgroundColor: Theme.panel,
     borderWidth: BorderWidth.card,
-    borderColor: Theme.accent + '59',
+    borderColor: Theme.line,
     borderRadius: Radius.card,
     padding: 16,
     marginBottom: 24,
@@ -660,15 +715,17 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   chartBars: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', height: 140 },
+  chartEmpty: { fontSize: 13, color: Theme.textSoft, lineHeight: 19, paddingVertical: 8 },
   barColumn: { flex: 1, alignItems: 'center', height: '100%', justifyContent: 'flex-end' },
   barValue: { fontSize: 10, fontWeight: '700', color: Theme.accent, marginBottom: 4 },
   barTrack: {
     width: 18,
     flex: 1,
-    // The unfilled track behind the stacked bars. Was a raw rgba byte-identical
-    // to the OLD Colors.bgCard — a leftover the migration missed, caught by the
-    // no-old-colours screen test. Same call as OnboardingShell's progressTrack.
-    backgroundColor: Theme.line,
+    // The unfilled track behind the stacked bars — ink, so it reads as an empty
+    // slot recessed into the panel. It was Theme.line (#3F3F46), a border colour
+    // used as a fill: light enough that an empty track was indistinguishable
+    // from a full bar.
+    backgroundColor: Theme.ink,
     borderRadius: 6,
     justifyContent: 'flex-end',
     overflow: 'hidden',
@@ -707,14 +764,10 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.accent + '12',
     borderColor: Theme.accent + '40',
   },
-  riskBannerInfo: {
-    backgroundColor: Theme.panel,
-    borderColor: Theme.line,
-  },
-  riskIcon: { fontSize: 16 },
   riskText: { flex: 1, fontSize: 13, color: Theme.textSoft, lineHeight: 18 },
 
   // ── Fitness card ──
+  fitnessEmpty: { fontSize: 13, color: Theme.textSoft, lineHeight: 19 },
   fitnessCard: {
     backgroundColor: Theme.panel,
     borderWidth: BorderWidth.card,
@@ -766,6 +819,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Theme.line,
   },
+  predictorLegRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   predictorDist: { fontSize: 14, fontWeight: '700', color: Theme.text },
   predictorTime: { fontSize: 14, fontWeight: '800', color: Theme.accent },
   predictorPlaceholder: { fontSize: 11, color: Theme.textMut, fontStyle: 'italic' },
@@ -860,7 +914,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Theme.line,
   },
   workoutRowLast: { borderBottomWidth: 0 },
-  workoutIcon: { fontSize: 20 },
+  workoutIcon: { width: 26, textAlign: 'center' },
   workoutInfo: { flex: 1 },
   workoutType: { fontSize: 14, fontWeight: '700', color: Theme.text },
   workoutMeta: { fontSize: 12, color: Theme.textSoft, marginTop: 2 },
