@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
@@ -45,7 +46,7 @@ function isValidDate(s: string): boolean {
 }
 
 function countdownLabel(daysUntil: number): string {
-  if (daysUntil === 0) return 'Today! 🏁';
+  if (daysUntil === 0) return 'Today!';
   if (daysUntil === 1) return 'Tomorrow';
   return `${daysUntil} days out`;
 }
@@ -204,7 +205,7 @@ function LogisticsPanel({
               <ActivityIndicator color={Theme.accent} size="small" />
             ) : (
               <Text style={styles.generateBtnText}>
-                {!isPlus ? '🔒 OSPREY+' : race.ozzieBriefingText ? '↺ Refresh' : 'Generate'}
+                {!isPlus ? 'OSPREY+' : race.ozzieBriefingText ? '↺ Refresh' : 'Generate'}
               </Text>
             )}
           </TouchableOpacity>
@@ -397,7 +398,7 @@ function RetroPanel({
               <ActivityIndicator color={Theme.accent} size="small" />
             ) : (
               <Text style={styles.generateBtnText}>
-                {!isPlus ? '🔒 OSPREY+' : race.ozzieRetroText ? '↺ Refresh' : 'Generate'}
+                {!isPlus ? 'OSPREY+' : race.ozzieRetroText ? '↺ Refresh' : 'Generate'}
               </Text>
             )}
           </TouchableOpacity>
@@ -759,6 +760,103 @@ export default function RacesScreen() {
   }
 
   const nextRace = upcoming?.[0];
+  // The hero card above already IS upcoming[0]; listing it again below made a
+  // single-race screen show the same race twice, both reading "115 days out".
+  const laterRaces = upcoming?.slice(1) ?? [];
+
+  // The next race is rendered as a hero card AND as a list row; both need the
+  // same actions and expandable panels. Plain functions rather than nested
+  // components so they close over the handlers and per-race open state
+  // without remounting the panels on every parent render.
+  const renderRaceActions = (race: RaceEvent) => (
+      <View style={styles.actionRow}>
+        <View style={styles.actionGroup}>
+          <TouchableOpacity
+            onPress={() => handleBuildPlan(race)}
+            disabled={buildingPlanRaceId === race.id}
+            accessibilityRole="button"
+            accessibilityLabel={`Build a training plan for ${race.name}`}
+          >
+            <Text style={styles.actionLink}>
+              {buildingPlanRaceId === race.id ? 'Building…' : 'Build plan'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleLinkToPlan(race)}
+            accessibilityRole="button"
+            accessibilityLabel={`Link ${race.name} to training plan`}
+          >
+            <Text style={styles.actionLink}>Link to plan</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              setLogisticsRaceId((id) => (id === race.id ? null : race.id))
+            }
+            accessibilityRole="button"
+            accessibilityLabel={`${logisticsRaceId === race.id ? 'Hide' : 'Show'} logistics for ${race.name}`}
+            accessibilityState={{ expanded: logisticsRaceId === race.id }}
+          >
+            <Text
+              style={[
+                styles.actionLink,
+                logisticsRaceId === race.id && styles.actionLinkActive,
+              ]}
+            >
+              Logistics
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              setPartnersRaceId((id) => (id === race.id ? null : race.id))
+            }
+            accessibilityRole="button"
+            accessibilityLabel={`${partnersRaceId === race.id ? 'Hide' : 'Show'} training partners for ${race.name}`}
+            accessibilityState={{ expanded: partnersRaceId === race.id }}
+          >
+            <Text
+              style={[
+                styles.actionLink,
+                partnersRaceId === race.id && styles.actionLinkActive,
+              ]}
+            >
+              Partners
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          onPress={() => handleDelete(race)}
+          hitSlop={8}
+          accessibilityRole="button"
+          accessibilityLabel={`Remove ${race.name}`}
+        >
+          <Text style={styles.actionDelete}>Remove</Text>
+        </TouchableOpacity>
+      </View>
+  );
+
+  const renderRacePanels = (race: RaceEvent) => (
+    <>
+      {logisticsRaceId === race.id ? (
+        <LogisticsPanel
+          race={race}
+          onClose={() => setLogisticsRaceId(null)}
+          onSave={handleSaveLogistics}
+          onGenerateBriefing={handleGenerateBriefing}
+          isSaving={saveLogistics.isPending}
+          isGenerating={generateBriefing.isPending}
+          isPlus={isPlus}
+          onPaywall={() => router.push('/paywall')}
+        />
+      ) : null}
+
+      {partnersRaceId === race.id ? (
+        <PartnersPanel
+          race={race}
+          onClose={() => setPartnersRaceId(null)}
+        />
+      ) : null}
+    </>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -879,7 +977,7 @@ export default function RacesScreen() {
           ) : null}
 
           <View style={styles.discoverCard}>
-            <Text style={styles.discoverEmoji}>🔍</Text>
+            <MaterialCommunityIcons name="magnify" size={22} color={Theme.accent} />
             <View style={styles.discoverBody}>
               <Text style={styles.discoverTitle}>Find Your Next Race</Text>
               <Text style={styles.discoverSub}>
@@ -922,13 +1020,21 @@ export default function RacesScreen() {
                     ) : null}
                   </View>
                   <Text style={styles.nextRunway}>{raceRunwayLabel(Math.round(nextRace.daysUntil / 7))}</Text>
+                  {/* The hero used to be read-only, so the next race was only
+                      actionable via its duplicate row in the list below. Now
+                      that the list starts at the second race, the actions have
+                      to live here or the athlete's main race becomes
+                      unmanageable — no plan, no logistics, no way to remove it. */}
+                  {renderRaceActions(nextRace)}
                 </View>
               ) : null}
 
-              {upcoming && upcoming.length > 0 ? (
+              {nextRace ? renderRacePanels(nextRace) : null}
+
+              {laterRaces.length > 0 ? (
                 <>
-                  <Text style={styles.sectionLabel}>UPCOMING</Text>
-                  {upcoming.map((race) => (
+                  <Text style={styles.sectionLabel}>ALSO UPCOMING</Text>
+                  {laterRaces.map((race) => (
                     <View key={race.id}>
                       <View style={styles.raceRow}>
                         <View style={{ flex: 1 }}>
@@ -938,95 +1044,21 @@ export default function RacesScreen() {
                             {race.distanceKm ? ` · ${formatRaceDistance(race.distanceKm, units)}` : ''}
                             {race.location ? ` · ${race.location}` : ''}
                           </Text>
-                          <View style={styles.actionRow}>
-                            <View style={styles.actionGroup}>
-                              <TouchableOpacity
-                                onPress={() => handleBuildPlan(race)}
-                                disabled={buildingPlanRaceId === race.id}
-                                accessibilityRole="button"
-                                accessibilityLabel={`Build a training plan for ${race.name}`}
-                              >
-                                <Text style={styles.actionLink}>
-                                  {buildingPlanRaceId === race.id ? 'Building…' : 'Build plan'}
-                                </Text>
-                              </TouchableOpacity>
-                              <TouchableOpacity
-                                onPress={() => handleLinkToPlan(race)}
-                                accessibilityRole="button"
-                                accessibilityLabel={`Link ${race.name} to training plan`}
-                              >
-                                <Text style={styles.actionLink}>Link to plan</Text>
-                              </TouchableOpacity>
-                              <TouchableOpacity
-                                onPress={() =>
-                                  setLogisticsRaceId((id) => (id === race.id ? null : race.id))
-                                }
-                                accessibilityRole="button"
-                                accessibilityLabel={`${logisticsRaceId === race.id ? 'Hide' : 'Show'} logistics for ${race.name}`}
-                                accessibilityState={{ expanded: logisticsRaceId === race.id }}
-                              >
-                                <Text
-                                  style={[
-                                    styles.actionLink,
-                                    logisticsRaceId === race.id && styles.actionLinkActive,
-                                  ]}
-                                >
-                                  Logistics
-                                </Text>
-                              </TouchableOpacity>
-                              <TouchableOpacity
-                                onPress={() =>
-                                  setPartnersRaceId((id) => (id === race.id ? null : race.id))
-                                }
-                                accessibilityRole="button"
-                                accessibilityLabel={`${partnersRaceId === race.id ? 'Hide' : 'Show'} training partners for ${race.name}`}
-                                accessibilityState={{ expanded: partnersRaceId === race.id }}
-                              >
-                                <Text
-                                  style={[
-                                    styles.actionLink,
-                                    partnersRaceId === race.id && styles.actionLinkActive,
-                                  ]}
-                                >
-                                  Partners
-                                </Text>
-                              </TouchableOpacity>
-                            </View>
-                            <TouchableOpacity
-                              onPress={() => handleDelete(race)}
-                              hitSlop={8}
-                              accessibilityRole="button"
-                              accessibilityLabel={`Remove ${race.name}`}
-                            >
-                              <Text style={styles.actionDelete}>Remove</Text>
-                            </TouchableOpacity>
-                          </View>
+                          {renderRaceActions(race)}
                         </View>
                       </View>
 
-                      {logisticsRaceId === race.id ? (
-                        <LogisticsPanel
-                          race={race}
-                          onClose={() => setLogisticsRaceId(null)}
-                          onSave={handleSaveLogistics}
-                          onGenerateBriefing={handleGenerateBriefing}
-                          isSaving={saveLogistics.isPending}
-                          isGenerating={generateBriefing.isPending}
-                          isPlus={isPlus}
-                          onPaywall={() => router.push('/paywall')}
-                        />
-                      ) : null}
-
-                      {partnersRaceId === race.id ? (
-                        <PartnersPanel
-                          race={race}
-                          onClose={() => setPartnersRaceId(null)}
-                        />
-                      ) : null}
+                      {renderRacePanels(race)}
                     </View>
                   ))}
                 </>
-              ) : !showForm ? (
+              ) : null}
+
+              {/* Keyed on nextRace, not on the "also upcoming" list: with one
+                  race on file that list is empty by design, and hanging the
+                  empty state off it printed "No upcoming races" directly under
+                  the race it was counting down. */}
+              {!nextRace && !showForm ? (
                 <Text style={styles.empty}>
                   No upcoming races. Tap + to add one — Ozzie will count down the days and pace your
                   goal.
@@ -1124,7 +1156,6 @@ const styles = StyleSheet.create({
     gap: 10,
     marginBottom: 4,
   },
-  discoverEmoji: { fontSize: 22 },
   discoverBody: { gap: 2 },
   discoverTitle: { color: Theme.text, fontSize: 15, fontWeight: '800' },
   discoverSub: { color: Theme.textMut, fontSize: 12, lineHeight: 17 },
@@ -1183,8 +1214,11 @@ const styles = StyleSheet.create({
   },
   raceName: { color: Theme.text, fontSize: 15, fontWeight: '700' },
   raceMeta: { color: Theme.textMut, fontSize: 12, marginTop: 3, lineHeight: 17 },
-  actionRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 },
-  actionGroup: { flexDirection: 'row', gap: 18, flexWrap: 'wrap', flexShrink: 1 },
+  // flex-start, not center: the action group wraps to two lines on a phone, and
+  // centring left "Remove" — the one destructive action — floating in the gap
+  // between them, attached to neither. It now anchors to the first line.
+  actionRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: 10, gap: 12 },
+  actionGroup: { flexDirection: 'row', gap: 18, rowGap: 8, flexWrap: 'wrap', flex: 1 },
   actionLink: { color: Theme.accent, fontSize: 13, fontWeight: '700' },
   actionLinkActive: { color: Theme.accentBright },
   actionDelete: { color: Theme.textMut, fontSize: 13, fontWeight: '700' },
