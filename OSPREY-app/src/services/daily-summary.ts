@@ -104,7 +104,7 @@ async function fetchTodaySession(userId: string): Promise<TodaySessionRow | null
  * received their very first plan (even if today is a rest day in it) reads
  * `true`, not `false`.
  */
-async function fetchHasEverPlanned(userId: string): Promise<boolean> {
+export async function fetchHasEverPlanned(userId: string): Promise<boolean> {
   const { data, error } = await supabase
     .from('training_sessions')
     .select('id')

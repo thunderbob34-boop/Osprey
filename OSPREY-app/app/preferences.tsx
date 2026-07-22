@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { ComponentProps } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -11,12 +12,13 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import { extractFunctionErrorMessage, supabase } from '@/services/supabase';
 import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
+import { fetchHasEverPlanned } from '@/services/daily-summary';
 import { useAuthStore } from '@/store/authStore';
 import { ONBOARDING_GOAL_TO_PREFERENCES } from '@/services/onboarding';
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
@@ -31,9 +33,12 @@ import type {
 } from '@/types/preferences';
 import type { PrimaryGoal } from '@/types/onboarding';
 
+type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
+
 interface GoalOption {
   value: TrainingGoal;
   label: string;
+  icon: IconName;
 }
 
 interface LevelOption {
@@ -41,19 +46,23 @@ interface LevelOption {
   label: string;
 }
 
+// Every goal gets a DISTINCT glyph. As emoji, two pairs collided: triathlon
+// and swim were the byte-identical U+1F3CA, and hybrid/hyrox were U+1F3CB and
+// the same codepoint plus a ZWJ gender modifier. Four of the twelve choices
+// that decide the whole plan were two indistinguishable pictures.
 const GOAL_OPTIONS: GoalOption[] = [
-  { value: 'hybrid', label: '🏋️ Hybrid Athlete' },
-  { value: 'run_performance', label: '🏃 Run Performance' },
-  { value: 'ultra', label: '⛰️ Ultra' },
-  { value: 'strength', label: '💪 Strength Focus' },
-  { value: 'triathlon', label: '🏊 Triathlon / Multisport' },
-  { value: 'swim', label: '🏊 Swimming' },
-  { value: 'rowing', label: '🚣 Rowing' },
-  { value: 'hyrox', label: '🏋️‍♂️ Hyrox' },
-  { value: 'crossfit', label: '🤸 CrossFit' },
-  { value: 'cycling', label: '🚴 Cycling' },
-  { value: 'weight_loss', label: '🔥 Weight Loss' },
-  { value: 'general', label: '⚡ General Fitness' },
+  { value: 'hybrid', label: 'Hybrid Athlete', icon: 'weight-lifter' },
+  { value: 'run_performance', label: 'Run Performance', icon: 'run-fast' },
+  { value: 'ultra', label: 'Ultra', icon: 'terrain' },
+  { value: 'strength', label: 'Strength Focus', icon: 'dumbbell' },
+  { value: 'triathlon', label: 'Triathlon / Multisport', icon: 'medal' },
+  { value: 'swim', label: 'Swimming', icon: 'swim' },
+  { value: 'rowing', label: 'Rowing', icon: 'rowing' },
+  { value: 'hyrox', label: 'Hyrox', icon: 'arm-flex' },
+  { value: 'crossfit', label: 'CrossFit', icon: 'human-handsup' },
+  { value: 'cycling', label: 'Cycling', icon: 'bike' },
+  { value: 'weight_loss', label: 'Weight Loss', icon: 'scale-bathroom' },
+  { value: 'general', label: 'General Fitness', icon: 'lightning-bolt' },
 ];
 
 const TRIATHLON_DISTANCE_OPTIONS: { value: TriathlonDistance; label: string }[] = [
@@ -123,10 +132,13 @@ export default function PreferencesScreen() {
   const [fran, setFran] = useState('');
   const [loading, setLoading] = useState(false);
   const [loadingPrefs, setLoadingPrefs] = useState(true);
-  // Whether a plan-builder session has run before via this screen — a good
-  // proxy for "you already have an active plan," since onboarding itself
-  // never writes to osprey_preferences (it goes straight to user_goals).
-  const [hasGeneratedBefore, setHasGeneratedBefore] = useState(false);
+  // Whether generating will REPLACE an existing plan. This used to key off
+  // user_metadata.osprey_preferences, which only this screen writes — so every
+  // athlete who got their plan through onboarding (the normal path) was
+  // classified as a first-timer and saw no replace warning, while the form
+  // above them was pre-filled from their saved user_goals. It now asks the
+  // question directly: do any training sessions exist?
+  const [hasExistingPlan, setHasExistingPlan] = useState(false);
 
   const isTriathlon = primaryGoal === 'triathlon';
   const isUltra = primaryGoal === 'ultra';
@@ -138,9 +150,13 @@ export default function PreferencesScreen() {
     async function loadSaved() {
       try {
         const { data } = await supabase.auth.getUser();
+        if (data.user?.id) {
+          const planned = await fetchHasEverPlanned(data.user.id).catch(() => false);
+          if (planned) setHasExistingPlan(true);
+        }
         const saved = data.user?.user_metadata?.osprey_preferences;
         if (saved) {
-          setHasGeneratedBefore(true);
+          setHasExistingPlan(true);
           if (saved.primaryGoal) setPrimaryGoal(saved.primaryGoal);
           if (saved.experienceLevel) setExperienceLevel(saved.experienceLevel);
           if (saved.daysPerWeek) setDaysPerWeek(saved.daysPerWeek);
@@ -379,6 +395,11 @@ export default function PreferencesScreen() {
               accessibilityLabel={opt.label}
               accessibilityState={{ selected: primaryGoal === opt.value }}
             >
+              <MaterialCommunityIcons
+                name={opt.icon}
+                size={15}
+                color={primaryGoal === opt.value ? Theme.accent : Theme.textSoft}
+              />
               <Text
                 style={[styles.chipText, primaryGoal === opt.value && styles.chipTextSelected]}
               >
@@ -455,7 +476,7 @@ export default function PreferencesScreen() {
                 accessibilityState={{ checked: gutTrained }}
               >
                 <Text style={[styles.chipText, gutTrained && styles.chipTextSelected]}>
-                  🥤 Practiced high-carb race fueling
+                  Practiced high-carb race fueling
                 </Text>
               </TouchableOpacity>
             </View>
@@ -535,7 +556,7 @@ export default function PreferencesScreen() {
                 accessibilityState={{ checked: competing }}
               >
                 <Text style={[styles.chipText, competing && styles.chipTextSelected]}>
-                  🏆 Training to compete (Open, regionals, etc.)
+                  Training to compete (Open, regionals, etc.)
                 </Text>
               </TouchableOpacity>
             </View>
@@ -624,7 +645,7 @@ export default function PreferencesScreen() {
                 accessibilityState={{ checked: includeSwim }}
               >
                 <Text style={[styles.chipText, includeSwim && styles.chipTextSelected]}>
-                  🏊 Swim Sessions
+                  Swim Sessions
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -635,14 +656,14 @@ export default function PreferencesScreen() {
                 accessibilityState={{ checked: includeBike }}
               >
                 <Text style={[styles.chipText, includeBike && styles.chipTextSelected]}>
-                  🚴 Bike Sessions
+                  Bike Sessions
                 </Text>
               </TouchableOpacity>
             </View>
           </>
         )}
 
-        {hasGeneratedBefore ? (
+        {hasExistingPlan ? (
           <Text style={styles.replaceWarning}>
             This replaces your current plan going forward — past sessions already logged are untouched.
           </Text>
@@ -662,7 +683,7 @@ export default function PreferencesScreen() {
             </>
           ) : (
             <Text style={styles.generateBtnText}>
-              {hasGeneratedBefore ? 'Regenerate My Plan →' : 'Generate My Plan →'}
+              {hasExistingPlan ? 'Regenerate My Plan →' : 'Generate My Plan →'}
             </Text>
           )}
         </Button>
@@ -670,10 +691,10 @@ export default function PreferencesScreen() {
         <Button
           variant="secondary"
           onPress={() => router.back()}
-          accessibilityLabel={hasGeneratedBefore ? 'Cancel' : 'Skip for now'}
+          accessibilityLabel={hasExistingPlan ? 'Cancel' : 'Skip for now'}
           style={styles.skipBtn}
         >
-          {hasGeneratedBefore ? 'Cancel' : 'Skip for now'}
+          {hasExistingPlan ? 'Cancel' : 'Skip for now'}
         </Button>
       </ScrollView>
     </SafeAreaView>
@@ -754,6 +775,9 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   chip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 7,
     backgroundColor: Theme.panel,
     borderWidth: 1,
     borderColor: Theme.line,
