@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
@@ -311,7 +311,10 @@ export default function RunWorkoutScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.warmupWrap}>
           <View style={styles.warmupHeaderRow}>
-            <Text style={styles.warmupTitle}>🔥 Warm Up First</Text>
+            <View style={styles.warmupTitleRow}>
+              <MaterialCommunityIcons name="fire" size={22} color={Theme.accent} />
+              <Text style={styles.warmupTitle}>Warm Up First</Text>
+            </View>
             <TouchableOpacity
               onPress={handleExit}
               hitSlop={12}
@@ -518,8 +521,11 @@ function IntervalGuidanceCard({
     band && progress.stepPaceSecPerMile != null
       ? paceStatusForBand(progress.stepPaceSecPerMile, band)
       : null;
+  // green/amber are functional pace-status signals and stay. The neutral case
+  // was Colors.textMuted — an old-palette *text* token the ink migration
+  // missed, not a state colour.
   const statusColor =
-    paceStatus === 'in_band' ? Colors.green : paceStatus == null ? Colors.textMuted : Colors.amber;
+    paceStatus === 'in_band' ? Colors.green : paceStatus == null ? Theme.textMut : Colors.amber;
   const statusText =
     paceStatus === 'in_band'
       ? 'On target'
@@ -678,6 +684,7 @@ const styles = StyleSheet.create({
   warmupHint: { fontSize: 12, color: Theme.textMut, textAlign: 'center', marginTop: -4 },
   warmupWrap: { flex: 1, padding: 24, gap: 14 },
   warmupHeaderRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  warmupTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   warmupTitle: { fontSize: 22, fontWeight: '800', color: Theme.text },
   warmupSubtitle: { fontSize: 13, color: Theme.textMut, lineHeight: 18, marginBottom: 6 },
   warmupRow: {

@@ -1,4 +1,13 @@
+import type { ComponentProps } from 'react';
+import type { MaterialCommunityIcons } from '@expo/vector-icons';
 import type { HyroxStationWeights } from '@/services/calculators/hyrox';
+
+/**
+ * Station icons are vector glyphs, not emoji. Emoji can't take the accent
+ * colour and render differently on every platform, which matters most here —
+ * these are read mid-race, at a glance, between stations.
+ */
+type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
 
 export type HyroxStationId =
   | 'skierg'
@@ -13,24 +22,24 @@ export type HyroxStationId =
 export interface HyroxStationDef {
   id: HyroxStationId;
   label: string;
-  icon: string;
+  icon: IconName;
   target: (weights: HyroxStationWeights) => string;
 }
 
 /** The 8 stations, in official race order (docs/coaching/hyrox.md §2) — each preceded by a 1km run. */
 export const HYROX_STATIONS: HyroxStationDef[] = [
-  { id: 'skierg',            label: 'SkiErg',            icon: '⛷️', target: () => '1000m' },
-  { id: 'sled_push',         label: 'Sled Push',         icon: '🛷', target: (w) => `50m · ${w.sledPushKg}kg` },
-  { id: 'sled_pull',         label: 'Sled Pull',         icon: '🪢', target: (w) => `50m · ${w.sledPullKg}kg` },
-  { id: 'burpee_broad_jump', label: 'Burpee Broad Jump', icon: '🐸', target: () => '80m' },
-  { id: 'rowing',            label: 'Rowing',            icon: '🚣', target: () => '1000m' },
-  { id: 'farmers_carry',     label: 'Farmers Carry',     icon: '🧳', target: (w) => `200m · ${w.farmersCarryPerHandKg}kg/hand` },
-  { id: 'sandbag_lunges',    label: 'Sandbag Lunges',    icon: '🎒', target: (w) => `100m · ${w.sandbagLungesKg}kg` },
-  { id: 'wall_balls',        label: 'Wall Balls',        icon: '🏐', target: (w) => `100 reps · ${w.wallBallKg}kg` },
+  { id: 'skierg',            label: 'SkiErg',            icon: 'ski',           target: () => '1000m' },
+  { id: 'sled_push',         label: 'Sled Push',         icon: 'sledding',      target: (w) => `50m · ${w.sledPushKg}kg` },
+  { id: 'sled_pull',         label: 'Sled Pull',         icon: 'transfer-right', target: (w) => `50m · ${w.sledPullKg}kg` },
+  { id: 'burpee_broad_jump', label: 'Burpee Broad Jump', icon: 'human-handsdown', target: () => '80m' },
+  { id: 'rowing',            label: 'Rowing',            icon: 'rowing',        target: () => '1000m' },
+  { id: 'farmers_carry',     label: 'Farmers Carry',     icon: 'weight',        target: (w) => `200m · ${w.farmersCarryPerHandKg}kg/hand` },
+  { id: 'sandbag_lunges',    label: 'Sandbag Lunges',    icon: 'sack',          target: (w) => `100m · ${w.sandbagLungesKg}kg` },
+  { id: 'wall_balls',        label: 'Wall Balls',        icon: 'volleyball',    target: (w) => `100 reps · ${w.wallBallKg}kg` },
 ];
 
 /** Shared run-segment icon — every run between stations is identical (1km, no target weight). */
-export const HYROX_RUN_ICON = '🏃';
+export const HYROX_RUN_ICON: IconName = 'run';
 
 export type HyroxSegmentType = 'run' | 'station';
 

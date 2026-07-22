@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import type { ComponentProps } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -10,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
@@ -46,9 +47,11 @@ function formatDuration(totalSeconds: number): string {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
-function segmentIcon(segment: HyroxSegment): string {
+type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
+
+function segmentIcon(segment: HyroxSegment): IconName {
   if (segment.type === 'run') return HYROX_RUN_ICON;
-  return HYROX_STATIONS.find((s) => s.id === segment.stationId)?.icon ?? '💪';
+  return HYROX_STATIONS.find((s) => s.id === segment.stationId)?.icon ?? 'arm-flex';
 }
 
 function segmentLabel(segment: HyroxSegment): string {
@@ -293,7 +296,12 @@ export default function HyroxWorkoutScreen() {
                   {selected ? <Text style={styles.overviewCheckMark}>✓</Text> : null}
                 </View>
                 <Text style={styles.overviewIndex}>{i + 1}</Text>
-                <Text style={[styles.overviewIcon, !selected && styles.dimmed]}>{segmentIcon(segment)}</Text>
+                <MaterialCommunityIcons
+                  name={segmentIcon(segment)}
+                  size={20}
+                  color={selected ? Theme.accent : Theme.textMut}
+                  style={styles.overviewIcon}
+                />
                 <View style={{ flex: 1 }}>
                   <Text style={[styles.overviewLabel, isRun && styles.overviewLabelRun, !selected && styles.dimmed]}>
                     {segmentLabel(segment)}
@@ -330,7 +338,7 @@ export default function HyroxWorkoutScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={[styles.sessionBadge, { borderColor: accentColor + '55' }]}>
-          <Text style={styles.sessionIcon}>💪</Text>
+          <MaterialCommunityIcons name="arm-flex" size={20} color={Colors.red} />
           <Text style={[styles.sessionLabel, { color: Colors.red }]}>HYROX IN PROGRESS</Text>
         </View>
 
@@ -370,7 +378,12 @@ export default function HyroxWorkoutScreen() {
             <Text style={[styles.segmentProgress, { color: accentColor }]}>
               {currentIsRun ? 'RUN' : 'STATION'} · SEGMENT {segmentIndex + 1} OF {segments.length}
             </Text>
-            <Text style={styles.segmentIcon}>{segmentIcon(currentSegment)}</Text>
+            <MaterialCommunityIcons
+              name={segmentIcon(currentSegment)}
+              size={40}
+              color={accentColor}
+              style={styles.segmentIcon}
+            />
             <Text style={styles.segmentLabel}>{segmentLabel(currentSegment)}</Text>
             <Text style={styles.segmentTarget}>
               {currentIsRun ? '1km' : weights ? HYROX_STATIONS[currentSegment.index - 1].target(weights) : ''}
@@ -494,7 +507,7 @@ const styles = StyleSheet.create({
   },
   overviewCheckMark: { fontSize: 12, fontWeight: '900', color: Theme.ink },
   overviewIndex: { width: 18, fontSize: 12, fontWeight: '800', color: Theme.textMut, textAlign: 'center' },
-  overviewIcon: { fontSize: 22 },
+  overviewIcon: { width: 24, textAlign: 'center' },
   overviewLabel: { fontSize: 15, fontWeight: '800', color: Theme.text },
   overviewLabelRun: { color: Theme.accent },
   overviewTarget: { fontSize: 12, color: Theme.textMut, marginTop: 1 },
@@ -530,7 +543,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
-  sessionIcon: { fontSize: 20 },
   sessionLabel: { fontSize: 11, fontWeight: '800', fontFamily: 'SpaceGrotesk_700Bold', letterSpacing: 1.2 },
   timerBlock: { alignItems: 'center', gap: 6 },
   timerValue: { fontSize: 60, fontWeight: '800', color: Theme.text, letterSpacing: -2 },
@@ -542,7 +554,7 @@ const styles = StyleSheet.create({
     padding: 22,
   },
   segmentProgress: { fontSize: 11, fontWeight: '800', fontFamily: 'SpaceGrotesk_700Bold', letterSpacing: 0.8 },
-  segmentIcon: { fontSize: 40, marginTop: 4 },
+  segmentIcon: { marginTop: 4 },
   segmentLabel: { fontSize: 26, fontWeight: '900', color: Theme.text, textAlign: 'center' },
   segmentTarget: { fontSize: 15, fontWeight: '700', color: Theme.textSoft },
   segmentDoneIcon: { fontSize: 32, color: Colors.green, fontWeight: '900' },

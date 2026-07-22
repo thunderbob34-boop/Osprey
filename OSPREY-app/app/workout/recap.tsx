@@ -12,6 +12,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Theme, Radius } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { useAuthStore } from '@/store/authStore';
@@ -122,7 +123,7 @@ export default function WorkoutRecapScreen() {
       <ScrollView contentContainerStyle={styles.content}>
         {data.hasPr ? (
           <Card emphasis style={styles.prBanner}>
-            <Text style={styles.prEmoji}>🏆</Text>
+            <MaterialCommunityIcons name="trophy" size={36} color={Theme.accent} style={styles.prIcon} />
             <Text style={styles.prTitle}>New PR!</Text>
             <Text style={styles.prSub}>Ozzie flagged a personal record in this session.</Text>
           </Card>
@@ -262,7 +263,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
-  prEmoji: { fontSize: 36, marginBottom: 6 },
+  prIcon: { marginBottom: 6 },
   prTitle: { fontSize: 24, fontWeight: '900', color: Theme.accent },
   prSub: { fontSize: 13, color: Theme.textSoft, textAlign: 'center', marginTop: 4 },
   badge: {

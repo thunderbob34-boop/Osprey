@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import type { ComponentProps } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -10,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth, EffortPalette } from '@/constants/theme';
@@ -55,31 +56,38 @@ function metersToUnit(meters: number, unit: DistanceUnit): number {
 // Scheme B (approved design change): sessions are de-colored — every type
 // reads as neutral panel/line chrome, differentiated by label + icon only.
 // Cross-training's old gold accent is intentionally gone.
-const SESSION_META: Record<EnduranceType, { icon: string; label: string }> = {
-  swim:   { icon: '🏊', label: 'SWIM' },
-  bike:   { icon: '🚴', label: 'BIKE' },
-  run:    { icon: '🏃', label: 'RUN' },
-  rowing: { icon: '🚣', label: 'ROW' },
-  cross:  { icon: '🔁', label: 'CROSS' },
+// Vector icons, not emoji: emoji can't take the accent colour and render
+// differently on every platform, which is exactly the "differentiated by
+// label + icon only" the Scheme B note above depends on.
+type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
+
+const SESSION_META: Record<EnduranceType, { icon: IconName; label: string }> = {
+  swim:   { icon: 'swim',   label: 'SWIM' },
+  bike:   { icon: 'bike',   label: 'BIKE' },
+  run:    { icon: 'run',    label: 'RUN' },
+  rowing: { icon: 'rowing', label: 'ROW' },
+  cross:  { icon: 'sync',   label: 'CROSS' },
 };
 
 interface CrossActivity {
   id: string;
   label: string;
-  icon: string;
+  icon: IconName;
 }
 
 // Rowing moved out to its own EnduranceType/Workout-tab card — it has a
 // full coaching blueprint + training-zone calculator, same tier as Swim/Bike.
 const CROSS_ACTIVITIES: CrossActivity[] = [
-  { id: 'crossfit',   label: 'CrossFit',           icon: '🏋️' },
-  { id: 'yoga',       label: 'Yoga',                icon: '🧘' },
-  { id: 'hiit',       label: 'HIIT',                icon: '🔥' },
-  { id: 'mobility',   label: 'Mobility / Stretch',  icon: '🤸' },
-  { id: 'elliptical', label: 'Elliptical',          icon: '🌀' },
-  { id: 'stairs',     label: 'Stair Climber',       icon: '🪜' },
-  { id: 'hiking',     label: 'Hiking',              icon: '🥾' },
-  { id: 'other',      label: 'Other',               icon: '🔁' },
+  { id: 'crossfit',   label: 'CrossFit',            icon: 'dumbbell' },
+  { id: 'yoga',       label: 'Yoga',                icon: 'meditation' },
+  { id: 'hiit',       label: 'HIIT',                icon: 'lightning-bolt' },
+  { id: 'mobility',   label: 'Mobility / Stretch',  icon: 'human-handsup' },
+  // 'orbit' for its elliptical path — MDI has no elliptical-trainer glyph, and
+  // the nearest hand/gesture icons read as "tap", not as a machine.
+  { id: 'elliptical', label: 'Elliptical',          icon: 'orbit' },
+  { id: 'stairs',     label: 'Stair Climber',       icon: 'stairs-up' },
+  { id: 'hiking',     label: 'Hiking',              icon: 'hiking' },
+  { id: 'other',      label: 'Other',               icon: 'sync' },
 ];
 
 // The handful of Cross Training activities where distance is a real metric
@@ -428,7 +436,7 @@ export default function EnduranceWorkoutScreen() {
                 accessibilityRole="button"
                 accessibilityLabel={`Start ${activity.label}`}
               >
-                <Text style={styles.activityTileIcon}>{activity.icon}</Text>
+                <MaterialCommunityIcons name={activity.icon} size={30} color={Theme.accent} />
                 <Text style={styles.activityTileLabel}>{activity.label}</Text>
               </TouchableOpacity>
             ))}
@@ -449,7 +457,7 @@ export default function EnduranceWorkoutScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={[styles.sessionBadge, { borderColor: Theme.line }]}>
-          <Text style={styles.sessionIcon}>{badgeMeta.icon}</Text>
+          <MaterialCommunityIcons name={badgeMeta.icon} size={20} color={Theme.accent} />
           <Text style={[styles.sessionLabel, { color: Theme.accent }]}>
             {hasIntervals
               ? `${badgeMeta.label} · OZZIE'S SET`
@@ -649,7 +657,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 8,
   },
-  activityTileIcon: { fontSize: 30 },
   activityTileLabel: {
     fontSize: 13,
     fontWeight: '700',
@@ -669,7 +676,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
-  sessionIcon: { fontSize: 20 },
   sessionLabel: {
     fontSize: 11,
     fontWeight: '800',
