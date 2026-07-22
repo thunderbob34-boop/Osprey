@@ -9,6 +9,12 @@ import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import { usePlanAdaptation } from '@/hooks/usePlanAdaptation';
+import { useDailySummary } from '@/hooks/useDailySummary';
+import { useDisplayZones } from '@/hooks/useDisplayZones';
+import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { routeForSession } from '@/services/session-route';
+import { sessionPaceBand } from '@/services/session-pace';
+import { formatDistanceKm } from '@/services/units';
 import { pickTrackingMode } from '@/utils/trackingModePicker';
 
 // Keyed by the alert's own message text — once the underlying training-load
@@ -80,6 +86,19 @@ const CARDS: Card[] = [
 export default function WorkoutTab() {
   const router = useRouter();
   const alert = usePlanAdaptation();
+  // Shares Home's react-query cache (same key), so this is a read, not a refetch.
+  const { data: summary } = useDailySummary();
+  const { units } = useUnitPreference();
+  const displayZones = useDisplayZones();
+  // Only a real, startable planned session — a rest day or an unplanned day has
+  // nothing to launch here, and the sport list below is the right answer then.
+  const planned =
+    summary?.session?.sessionId && summary.session.sessionType && summary.session.sessionType !== 'rest'
+      ? summary.session
+      : null;
+  // Same target band Home shows, so the pace doesn't disappear on the screen
+  // where the athlete is actually about to run it.
+  const plannedPaceBand = sessionPaceBand(planned?.intensity, displayZones?.zones ?? null, units);
   const [dismissedMessage, setDismissedMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -130,6 +149,38 @@ export default function WorkoutTab() {
             </View>
           </View>
         )}
+
+        {/* Today's prescribed session — the reason most people open this tab.
+            Without it, picking a sport below starts an ad-hoc workout and
+            silently drops the target pace/zone the coaching engine computed. */}
+        {planned ? (
+          <TouchableOpacity
+            style={styles.plannedCard}
+            onPress={() => {
+              Haptics.selectionAsync().catch(() => undefined);
+              router.push(routeForSession(planned.sessionType, planned.sessionId));
+            }}
+            accessibilityRole="button"
+            accessibilityLabel={`Start today's session, ${planned.type}`}
+          >
+            <Text style={styles.plannedLabel}>TODAY&apos;S SESSION</Text>
+            <Text style={styles.plannedTitle}>{planned.type}</Text>
+            <View style={styles.plannedChips}>
+              <Text style={styles.plannedChip}>{planned.duration}</Text>
+              {planned.distanceKm != null ? (
+                <Text style={styles.plannedChip}>{formatDistanceKm(planned.distanceKm, units)}</Text>
+              ) : null}
+              {planned.zone ? (
+                <Text style={[styles.plannedChip, styles.plannedChipAccent]}>
+                  {plannedPaceBand ? `${planned.zone} · ${plannedPaceBand}` : planned.zone}
+                </Text>
+              ) : null}
+            </View>
+            <Text style={styles.plannedCta}>Start planned session →</Text>
+          </TouchableOpacity>
+        ) : null}
+
+        {planned ? <Text style={styles.orLabel}>OR START SOMETHING ELSE</Text> : null}
 
         {CARDS.map((card) => (
           <TouchableOpacity
@@ -191,6 +242,63 @@ const styles = StyleSheet.create({
     borderColor: Theme.line,
     borderRadius: Radius.card,
     padding: 18,
+    marginBottom: 12,
+  },
+  // Today's planned session — accented so it reads as the primary action,
+  // distinct from the neutral ad-hoc sport cards below it.
+  plannedCard: {
+    backgroundColor: Theme.panel,
+    borderWidth: BorderWidth.card,
+    borderColor: Theme.accent,
+    borderRadius: Radius.card,
+    padding: 18,
+    marginBottom: 18,
+  },
+  plannedLabel: {
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 1,
+    color: Theme.accent,
+    marginBottom: 6,
+  },
+  plannedTitle: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: Theme.text,
+    letterSpacing: -0.3,
+    marginBottom: 10,
+  },
+  plannedChips: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 12,
+  },
+  plannedChip: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: Theme.text,
+    borderWidth: 1,
+    borderColor: Theme.line,
+    borderRadius: Radius.card,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    overflow: 'hidden',
+  },
+  plannedChipAccent: {
+    color: Theme.accent,
+    borderColor: Theme.accent,
+  },
+  plannedCta: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: Theme.accent,
+  },
+  orLabel: {
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 1,
+    color: Theme.textMut,
     marginBottom: 12,
   },
   cardText: { flex: 1 },

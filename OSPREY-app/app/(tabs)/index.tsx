@@ -6,6 +6,7 @@ import BuildPlanBanner from '@/components/BuildPlanBanner';
 import DeloadSuggestionCard from '@/components/DeloadSuggestionCard';
 import WeatherCoachCard from '@/components/WeatherCoachCard';
 import { useDailySummary } from '@/hooks/useDailySummary';
+import { routeForSession } from '@/services/session-route';
 import { useWeatherCoach } from '@/hooks/useWeatherCoach';
 import { useSavedRoutes } from '@/hooks/useSavedRoutes';
 import { useHydration } from '@/hooks/useHydration';
@@ -47,37 +48,9 @@ export default function HomeTab() {
   }, [userId, tomorrowMaxF, tomorrowPrecip]);
 
   function handleStartSession(session: SessionData) {
-    const sessionId = session.sessionId ?? undefined;
-    // Mirror the per-sport routing in the Workout tab (app/(tabs)/workout.tsx)
-    // so starting today's session from Home lands on the same screen as picking
-    // it manually — previously everything non-lift fell through to the GPS run
-    // screen, mis-routing swim/bike/rowing/cross/hyrox sessions.
-    switch (session.sessionType) {
-      case 'lift':
-        router.push({ pathname: '/workout/lift', params: { sessionId } });
-        return;
-      case 'hyrox':
-        router.push('/workout/hyrox');
-        return;
-      case 'swim':
-      case 'bike':
-      case 'rowing':
-      case 'cross':
-        router.push({
-          pathname: '/workout/endurance',
-          params: { sessionType: session.sessionType, sessionId },
-        });
-        return;
-      case 'run':
-        router.push({ pathname: '/workout/run', params: { sessionId } });
-        return;
-      default:
-        // No sessionType means there is no generated plan — the Home CTA
-        // renders "Build My Plan" and calls onBuildPlan instead, so this is
-        // only reachable if a future session type is added without routing.
-        // Send them to the plan rather than starting an unplanned GPS run.
-        router.push('/plan-preview');
-    }
+    // Shared with the Workout tab's "Today's session" shortcut so both doors
+    // into the same prescribed session always land on the same screen.
+    router.push(routeForSession(session.sessionType, session.sessionId));
   }
 
   function handleSwapSession(newType: SwappableSessionType) {
