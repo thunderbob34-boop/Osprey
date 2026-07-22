@@ -12,7 +12,7 @@ import {
   View,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
@@ -238,7 +238,7 @@ export default function RaceEventScreen() {
       });
       queryClient.invalidateQueries({ queryKey: ['races-upcoming'] });
       queryClient.invalidateQueries({ queryKey: ['races-past'] });
-      Alert.alert('Race saved 🎉', `${result!.name} is in your race hub.`, [
+      Alert.alert('Race saved', `${result!.name} is in your race hub.`, [
         { text: 'Stay here', style: 'cancel' },
         {
           text: 'View My Races',
@@ -263,13 +263,17 @@ export default function RaceEventScreen() {
         <View style={styles.heroSection}>
           <Text style={styles.heroName}>{result.name}</Text>
           {(result.city || result.state) ? (
-            <Text style={styles.heroLocation}>
-              📍 {result.city ? `${result.city}, ${result.state}` : result.state}
-            </Text>
+            <View style={styles.heroLocationRow}>
+              <MaterialCommunityIcons name="map-marker" size={13} color={Theme.textSoft} />
+              <Text style={styles.heroLocation}>
+                {result.city ? `${result.city}, ${result.state}` : result.state}
+              </Text>
+            </View>
           ) : null}
           {result.date ? (
             <View style={styles.datePill}>
-              <Text style={styles.datePillText}>📅 {formatDate(result.date)}</Text>
+              <MaterialCommunityIcons name="calendar" size={13} color={Theme.accent} />
+              <Text style={styles.datePillText}>{formatDate(result.date)}</Text>
             </View>
           ) : null}
         </View>
@@ -367,6 +371,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     lineHeight: 32,
   },
+  heroLocationRow: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   heroLocation: {
     color: Theme.textSoft,
     fontSize: 15,
@@ -374,6 +379,9 @@ const styles = StyleSheet.create({
   },
   // Pill radius (20) is a shape KEEP, not card chrome.
   datePill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
     alignSelf: 'flex-start',
     backgroundColor: Theme.panel,
     borderWidth: 1,

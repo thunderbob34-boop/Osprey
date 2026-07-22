@@ -15,6 +15,8 @@ import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useActivity } from '@/hooks/useActivity';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { SESSION_ICON, SESSION_ICON_FALLBACK } from '@/constants/session-icons';
 import { useAuthStore } from '@/store/authStore';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatDistanceKm } from '@/services/units';
@@ -22,15 +24,15 @@ import { formatDistanceKm } from '@/services/units';
 function formatWorkoutType(type: string): string {
   switch (type) {
     case 'run':
-      return '🏃 Run';
+      return 'Run';
     case 'lift':
-      return '🏋️ Lift';
+      return 'Lift';
     case 'cross':
-      return '🔁 Cross';
+      return 'Cross';
     case 'rowing':
-      return '🚣 Rowing';
+      return 'Rowing';
     case 'race':
-      return '🏁 Race';
+      return 'Race';
     default:
       return type;
   }
@@ -121,6 +123,11 @@ export default function ActivityScreen() {
               </View>
 
               <View style={styles.cardBody}>
+                <MaterialCommunityIcons
+                  name={SESSION_ICON[card.sessionType] ?? SESSION_ICON_FALLBACK}
+                  size={15}
+                  color={Theme.accent}
+                />
                 <Text style={styles.cardWorkout}>{formatWorkoutType(card.sessionType)}</Text>
                 {card.durationMinutes ? (
                   <Text style={styles.cardStat}>{card.durationMinutes} min</Text>
@@ -153,9 +160,11 @@ export default function ActivityScreen() {
                     <ActivityIndicator size="small" color={Theme.accent} />
                   ) : (
                     <>
-                      <Text style={[styles.kudoEmoji, card.hasKudo && styles.kudoEmojiActive]}>
-                        ❤️
-                      </Text>
+                      <MaterialCommunityIcons
+                        name={card.hasKudo ? 'heart' : 'heart-outline'}
+                        size={15}
+                        color={card.hasKudo ? Theme.accent : Theme.textMut}
+                      />
                       <Text style={[styles.kudoText, card.hasKudo && styles.kudoTextActive]}>
                         {card.kudoCount > 0 ? card.kudoCount : ''}
                       </Text>
@@ -211,8 +220,6 @@ const styles = StyleSheet.create({
   // Selected state has a second cue (kudoTextActive turns accent + bold),
   // so the container itself is border-only — no tint fill.
   kudoBtnActive: { borderColor: Theme.accent },
-  kudoEmoji: { fontSize: 14 },
-  kudoEmojiActive: { fontSize: 15 },
   kudoText: { color: Theme.textMut, fontSize: 12, fontWeight: '600' },
   kudoTextActive: { color: Theme.accent, fontWeight: '700' },
 });

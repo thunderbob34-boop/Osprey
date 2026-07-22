@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { ComponentProps } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -11,7 +12,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import type { PurchasesPackage } from 'react-native-purchases';
 import OzzieMascot from '@/components/OzzieMascot';
 import { Card } from '@/components/ui';
@@ -87,13 +88,15 @@ function periodLabel(pkg: PurchasesPackage): string {
   }
 }
 
-const FEATURES = [
-  { icon: '🤖', title: 'AI Race Briefings', desc: 'Ozzie preps you the morning of every race with personalized strategy.' },
-  { icon: '📋', title: 'Race Retrospectives', desc: 'Post-race coaching debrief from Ozzie — what worked, what to fix.' },
-  { icon: '🏆', title: 'Group Challenges', desc: 'Create unlimited mileage, workout, and duration challenges with friends.' },
-  { icon: '🔔', title: 'Live Run Coaching', desc: 'Automatic mile-split callouts, pace alerts, and HR zone cues mid-run.' },
-  { icon: '📈', title: 'Performance Intelligence', desc: 'Fitness/fatigue/form trends (CTL/ATL/TSB), injury risk score, race time predictor.' },
-  { icon: '📆', title: 'AI Plan Generation', desc: 'Adaptive weekly training plans powered by GPT-4o-mini.' },
+type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
+
+const FEATURES: { icon: IconName; title: string; desc: string }[] = [
+  { icon: 'robot-outline', title: 'AI Race Briefings', desc: 'Ozzie preps you the morning of every race with personalized strategy.' },
+  { icon: 'clipboard-text-outline', title: 'Race Retrospectives', desc: 'Post-race coaching debrief from Ozzie — what worked, what to fix.' },
+  { icon: 'trophy-outline', title: 'Group Challenges', desc: 'Create unlimited mileage, workout, and duration challenges with friends.' },
+  { icon: 'bell-ring-outline', title: 'Live Run Coaching', desc: 'Automatic mile-split callouts, pace alerts, and HR zone cues mid-run.' },
+  { icon: 'chart-line', title: 'Performance Intelligence', desc: 'Fitness/fatigue/form trends (CTL/ATL/TSB), injury risk score, race time predictor.' },
+  { icon: 'calendar-sync-outline', title: 'AI Plan Generation', desc: 'Adaptive weekly training plans powered by GPT-4o-mini.' },
 ];
 
 export default function PaywallScreen() {
@@ -182,7 +185,7 @@ export default function PaywallScreen() {
               key={f.title}
               style={[styles.featureRow, i < FEATURES.length - 1 && styles.featureRowBorder]}
             >
-              <Text style={styles.featureIcon}>{f.icon}</Text>
+              <MaterialCommunityIcons name={f.icon} size={22} color={Theme.accent} style={styles.featureIcon} />
               <View style={styles.featureText}>
                 <Text style={styles.featureTitle}>{f.title}</Text>
                 <Text style={styles.featureDesc}>{f.desc}</Text>
@@ -317,7 +320,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Theme.line,
   },
-  featureIcon: { fontSize: 22, width: 28, textAlign: 'center' },
+  featureIcon: { width: 28, textAlign: 'center' },
   featureText: { flex: 1 },
   featureTitle: { fontSize: 14, fontWeight: '700', color: Theme.text },
   featureDesc: { fontSize: 12, color: Theme.textSoft, lineHeight: 17, marginTop: 2 },

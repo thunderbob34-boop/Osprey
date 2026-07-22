@@ -14,6 +14,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
@@ -182,7 +183,7 @@ export default function SupplementsScreen() {
                       accessibilityRole="button"
                       accessibilityLabel={`Delete ${reminder.name} reminder`}
                     >
-                      <Text style={styles.delete}>🗑</Text>
+                      <MaterialCommunityIcons name="trash-can-outline" size={18} color={Theme.textMut} />
                     </TouchableOpacity>
                   </Card>
                 ))

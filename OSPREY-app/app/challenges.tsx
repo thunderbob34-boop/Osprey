@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Button } from '@/components/ui';
@@ -54,11 +55,17 @@ function daysLeftLabel(daysLeft: number, status: Challenge['status']): string {
   return `${daysLeft} days left`;
 }
 
-function medalFor(rank: number): string {
-  if (rank === 1) return '🥇';
-  if (rank === 2) return '🥈';
-  if (rank === 3) return '🥉';
-  return `#${rank}`;
+/**
+ * Podium rank. MDI has one medal glyph, so gold/silver/bronze is carried by
+ * colour rather than three different pictures — the distinction the 🥇🥈🥉
+ * emoji made, kept, but in glyphs that take a colour and render identically
+ * on every platform. Off the podium there is no medal, just the number.
+ */
+function medalFor(rank: number): { color: string } | null {
+  if (rank === 1) return { color: '#D4AF37' };
+  if (rank === 2) return { color: '#B8B8C0' };
+  if (rank === 3) return { color: '#B08D57' };
+  return null;
 }
 
 const CHALLENGE_TYPES: ChallengeType[] = ['mileage', 'workouts', 'duration', 'lift_volume', 'streak'];
@@ -113,7 +120,16 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
           const isMe = entry.userId === currentUserId;
           return (
             <View key={entry.userId} style={[styles.lbRow, isMe && styles.lbRowMe]}>
-              <Text style={styles.lbMedal}>{medalFor(entry.rank)}</Text>
+              {medalFor(entry.rank) ? (
+                <MaterialCommunityIcons
+                  name="medal"
+                  size={16}
+                  color={medalFor(entry.rank)!.color}
+                  style={styles.lbMedal}
+                />
+              ) : (
+                <Text style={styles.lbMedal}>#{entry.rank}</Text>
+              )}
               <Text style={[styles.lbName, isMe && styles.lbNameMe]} numberOfLines={1}>
                 {isMe ? 'You' : entry.displayName}
               </Text>

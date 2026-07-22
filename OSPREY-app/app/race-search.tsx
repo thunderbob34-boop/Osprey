@@ -12,7 +12,7 @@ import {
   View,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { parseRaceDate, searchRaces, type RaceSearchResult } from '@/services/race-search';
@@ -53,11 +53,11 @@ function RaceCard({ item, onPress }: RaceCardProps) {
           {item.name}
         </Text>
         <Text style={styles.cardMeta}>
-          <Text style={styles.metaIcon}>📍 </Text>
+          <MaterialCommunityIcons name="map-marker" size={12} color={Theme.textMut} />
           {item.city ? `${item.city}, ${item.state}` : item.state || 'Location TBD'}
         </Text>
         <Text style={styles.cardMeta}>
-          <Text style={styles.metaIcon}>📅 </Text>
+          <MaterialCommunityIcons name="calendar" size={12} color={Theme.textMut} />
           {formatDate(item.date)}
         </Text>
         {item.distances.length > 0 ? (
@@ -144,7 +144,7 @@ export default function RaceSearchScreen() {
       </View>
 
       <View style={styles.searchRow}>
-        <Text style={styles.searchIcon}>🔍</Text>
+        <MaterialCommunityIcons name="magnify" size={18} color={Theme.textMut} />
         <TextInput
           style={styles.searchInput}
           placeholder="Search races by name or city"
