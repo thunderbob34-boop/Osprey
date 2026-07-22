@@ -24,6 +24,16 @@ const ALL_TRACKABLE_GROUPS = [
   'Chest', 'Back', 'Shoulders', 'Biceps', 'Triceps', 'Legs', 'Glutes', 'Hamstrings', 'Calves', 'Core',
 ];
 
+// The exercise table mixes body regions with the muscles inside them — Back
+// Squat is "Legs" while Calf Raise is "Calves" and Romanian Deadlift is
+// "Hamstrings". Only for the legend: a region is redundant once one of its own
+// members is named. "Legs" is the only such overlap in the table's 14 groups
+// (Back/Biceps/Triceps etc. are all disjoint there), so this stays deliberately
+// small rather than inventing a hierarchy the data doesn't have.
+const REGION_MEMBERS: Record<string, string[]> = {
+  Legs: ['Hamstrings', 'Calves', 'Glutes'],
+};
+
 // Right-side geometry; the left side is the same path mirrored, so the
 // figure is guaranteed symmetric.
 const MIRROR = 'translate(120,0) scale(-1,1)';
@@ -220,7 +230,17 @@ export default function MuscleDiagram({ workedGroups }: MuscleDiagramProps) {
     ? new Set(ALL_TRACKABLE_GROUPS)
     : workedGroups;
 
-  const legendGroups = Array.from(workedGroups).sort();
+  // "Calves, Core, Hamstrings, Legs" — the exercise table categorises Back
+  // Squat as the region "Legs" but Calf Raise and Romanian Deadlift as the
+  // muscles inside it, so the legend listed a region alongside its own members.
+  // Drop the region when something more specific is already named; keep it when
+  // it's the only thing we know (a squat-only day still reads "Legs").
+  const legendGroups = Array.from(workedGroups)
+    .filter((group) => {
+      const members = REGION_MEMBERS[group];
+      return !members || !members.some((m) => workedGroups.has(m));
+    })
+    .sort();
 
   return (
     <View style={styles.card}>

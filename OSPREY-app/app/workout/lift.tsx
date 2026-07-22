@@ -79,7 +79,13 @@ export default function LiftWorkoutScreen() {
   const [search, setSearch] = useState('');
   // Ozzie's prescribed workout for this plan session (exerciseId → coach cue).
   const [isPrescribed, setIsPrescribed] = useState(false);
-  const [prescriptionCues, setPrescriptionCues] = useState<Record<string, string>>({});
+  // Kept structured rather than as one pre-joined string: the setup list wants
+  // the sets×reps alone, the in-session card wants it with Ozzie's note. When
+  // this was a single joined string the setup list had nothing to show but the
+  // parsed lower bound, so a prescribed "3×8-12" was announced as "3 × 8".
+  const [prescriptionCues, setPrescriptionCues] = useState<
+    Record<string, { setsReps: string; note: string | null }>
+  >({});
   // Plate calculator (tap a set number) + live PR detection.
   const [plateModal, setPlateModal] = useState<{ exerciseName: string; weightLbs: number } | null>(null);
   const [prExercises, setPrExercises] = useState<Set<string>>(new Set());
@@ -156,13 +162,21 @@ export default function LiftWorkoutScreen() {
 
         // Ozzie's prescription: match each prescribed name to the library so
         // sets save against real exercise ids. Unmatched names are skipped.
-        let plan: Array<{ exercise: { id: string; name: string }; sets: number; reps: number; cue: string }> = [];
+        let plan: Array<{
+          exercise: { id: string; name: string };
+          sets: number;
+          reps: number;
+          cue: { setsReps: string; note: string | null };
+        }> = [];
         if (prescription) {
           plan = prescription.exercises.flatMap((p) => {
             const match = fullLibrary.find((e) => e.name.toLowerCase() === p.name.toLowerCase());
             if (!match) return [];
+            // The set rows need a single number to pre-fill; `reps` is that.
+            // `cue.setsReps` keeps what was actually prescribed ("8-12",
+            // "30-60 sec") for every place that only displays it.
             const repsNum = parseInt(p.reps, 10) || 8;
-            const cue = [`${p.sets}×${p.reps}`, p.note].filter(Boolean).join(' · ');
+            const cue = { setsReps: `${p.sets}×${p.reps}`, note: p.note ?? null };
             return [{ exercise: match, sets: Math.max(1, Math.min(6, p.sets)), reps: repsNum, cue }];
           });
         }
@@ -576,7 +590,10 @@ export default function LiftWorkoutScreen() {
                   <View style={{ flex: 1 }}>
                     <Text style={styles.previewExerciseName}>{exercise.name}</Text>
                     <Text style={styles.previewExerciseMeta}>
-                      {exercise.sets.length} × {exercise.sets[0]?.reps ?? 8}
+                      {/* What Ozzie actually prescribed ("3×8-12", "3×30-60 sec"),
+                          not the single number the set rows pre-fill with. */}
+                      {prescriptionCues[exercise.exerciseId]?.setsReps ??
+                        `${exercise.sets.length}×${exercise.sets[0]?.reps ?? 8}`}
                     </Text>
                   </View>
                   <TouchableOpacity
@@ -759,7 +776,11 @@ export default function LiftWorkoutScreen() {
                       </View>
                     ) : null}
                   </View>
-                  {cue ? <Text style={styles.exerciseCue}>{cue}</Text> : null}
+                  {cue ? (
+                    <Text style={styles.exerciseCue}>
+                      {[cue.setsReps, cue.note].filter(Boolean).join(' · ')}
+                    </Text>
+                  ) : null}
                 </View>
                 <View style={styles.exerciseActions}>
                   {/*
