@@ -23,7 +23,8 @@ import { useTrainingGoal } from '@/hooks/useTrainingGoal';
 import { goalLabel } from '@/constants/sports';
 import type { UnitSystem } from '@/services/units';
 import { useAuthStore } from '@/store/authStore';
-import { hasOspreyPlus, restorePurchases } from '@/services/subscriptions';
+import { useSubscription } from '@/hooks/useSubscription';
+import { restorePurchases } from '@/services/subscriptions';
 import {
   isHealthKitSupported,
   requestHealthKitAuthorization,
@@ -87,7 +88,11 @@ export default function SettingsTab() {
       .join(' · ') || 'Goal, days per week, and long run day';
   const userId = useAuthStore((s) => s.user?.id);
   const { units, setUnits } = useUnitPreference();
-  const [plusActive, setPlusActive] = useState<boolean | null>(null);
+  // Shared with every other screen — was a second, independent hasOspreyPlus()
+  // poll that bypassed useSubscription()'s FREE_FOR_ALL override, so Settings
+  // could show "Free tier" + an Upgrade button while the rest of the app
+  // already treated the athlete as fully entitled.
+  const { isPlus: plusActive, isLoading: plusLoading, refresh: refreshSubscription } = useSubscription();
   const [loading, setLoading] = useState(false);
   const [healthConnected, setHealthConnected] = useState(false);
   const [healthLastSynced, setHealthLastSynced] = useState<string | null>(null);
@@ -105,10 +110,6 @@ export default function SettingsTab() {
   const [eveningBriefLoading, setEveningBriefLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [exporting, setExporting] = useState(false);
-
-  useEffect(() => {
-    hasOspreyPlus().then(setPlusActive).catch(() => setPlusActive(false));
-  }, []);
 
   useEffect(() => {
     isDailyNudgeScheduled().then(setNudgeEnabled).catch(() => undefined);
@@ -281,7 +282,7 @@ export default function SettingsTab() {
     setLoading(true);
     try {
       const restored = await restorePurchases();
-      setPlusActive(restored);
+      refreshSubscription();
       Alert.alert('Restore', restored ? 'Purchases restored.' : 'No active subscription found.');
     } catch (err) {
       Alert.alert('Restore failed', err instanceof Error ? err.message : 'Try again.');
@@ -355,7 +356,7 @@ export default function SettingsTab() {
 
         <Card style={styles.card}>
           <Text style={styles.cardLabel}>OSPREY+</Text>
-          {plusActive == null ? (
+          {plusLoading ? (
             <ActivityIndicator color={Theme.accent} />
           ) : (
             <Text style={styles.cardValue}>
