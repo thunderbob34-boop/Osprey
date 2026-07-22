@@ -18,11 +18,14 @@ type Brief = { insight_text: string; why_reasoning: string; habit_tip: string | 
 export function templateBrief(
   context: BriefContext,
   rest: RestRecommendation,
-  weather: string | null,
+  /** Intentionally unused — the app's Weather Coach card owns the forecast, so
+   *  the brief no longer repeats it (see the note chain below). Kept in the
+   *  signature so this stays call-compatible with the LLM path's generateBrief. */
+  _weather: string | null,
   schedule: string | null,
 ): Brief {
   const name = context.displayName || 'there';
-  const session = describeSession(context.todaySession);
+  const session = describeSession(context.todaySession, context.units);
 
   // ── Core line, driven by the (already-computed) rest recommendation ──
   let core: string;
@@ -40,8 +43,12 @@ export function templateBrief(
 
   // ── One contextual note, chosen by priority (weather → schedule → trend →
   //    memory). The model would pick by relevance; the template picks by rank. ──
+  // Weather is deliberately NOT surfaced here. The app renders a dedicated
+  // Weather Coach card right below this note, and duplicating the forecast
+  // turned the brief into a multi-day data dump ("today: high 96F, rain 19%;
+  // tomorrow: ...") that buried the coaching and broke this brief's own
+  // 2-3-sentence rule. The card owns weather; the brief stays a brief.
   const note =
-    weatherNote(weather) ??
     scheduleNote(schedule) ??
     trendNote(context) ??
     memoryNote(context);
@@ -83,9 +90,8 @@ function buildHabitTip(context: BriefContext): string | null {
 }
 
 // ── Contextual notes ──
-function weatherNote(weather: string | null): string | null {
-  return weather ? `Sky check: ${weather}` : null;
-}
+// (No weatherNote: the Weather Coach card owns the forecast — see the note
+//  chain above for why the brief no longer repeats it.)
 
 function scheduleNote(schedule: string | null): string | null {
   return schedule ? `Calendar-wise: ${schedule}` : null;
@@ -106,11 +112,23 @@ function memoryNote(context: BriefContext): string | null {
 }
 
 // ── Small helpers ──
-function describeSession(s: BriefContext['todaySession']): string | null {
+const MILES_PER_KM = 0.621371;
+
+/** Distance in the athlete's own units, so the brief matches the UI's chips. */
+function describeDistance(km: number, units: BriefContext['units']): string {
+  return units === 'metric'
+    ? `${round1(km)} km`
+    : `${round1(km * MILES_PER_KM)} mi`;
+}
+
+function describeSession(
+  s: BriefContext['todaySession'],
+  units: BriefContext['units'],
+): string | null {
   if (!s) return null;
   const bits: string[] = [];
   if (s.plannedMinutes) bits.push(`${s.plannedMinutes} min`);
-  if (s.plannedDistanceKm) bits.push(`${round1(s.plannedDistanceKm)} km`);
+  if (s.plannedDistanceKm) bits.push(describeDistance(s.plannedDistanceKm, units));
   const detail = bits.length ? ` (${bits.join(', ')})` : '';
   const intensity = s.intensity && s.intensity !== 'none' ? `${s.intensity} ` : '';
   return `your ${intensity}${s.sessionType}${detail}`;

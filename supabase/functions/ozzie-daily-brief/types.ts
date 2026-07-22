@@ -6,6 +6,10 @@
 export interface BriefContext {
   displayName: string;
   experienceTier: string;
+  /** The athlete's own unit preference (users.units) — the brief must speak in
+   *  the same units the app's UI shows, or a chip reading "4.3 mi" ends up next
+   *  to a brief saying "7 km" for the same session. */
+  units: 'imperial' | 'metric';
   recovery: { score: number; recommendation: string; hrvMs: number | null; sleepHours: number | null } | null;
   load: { atl: number | null; ctl: number | null; tsb: number | null } | null;
   todaySession: {

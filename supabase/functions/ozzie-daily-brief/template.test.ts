@@ -6,6 +6,7 @@ function ctx(overrides: Partial<BriefContext> = {}): BriefContext {
   return {
     displayName: 'Sam',
     experienceTier: 'intermediate',
+    units: 'imperial',
     recovery: null,
     load: null,
     todaySession: null,
@@ -58,13 +59,33 @@ Deno.test('the why grounds in recovery when present, TSB otherwise, and admits w
   assert(templateBrief(ctx(), 'train', null, null).why_reasoning.includes('No recovery or load data'));
 });
 
-Deno.test('weather note wins over the weekly-trend note', () => {
+// The Weather Coach card owns the forecast. The brief used to prepend
+// "Sky check: <full multi-day forecast>", which duplicated that card and blew
+// past the brief's own 2-3-sentence rule — so weather is no longer surfaced
+// here at all, and the next-priority note (trend) is free to show.
+Deno.test('weather is never surfaced in the brief — the Weather Coach card owns it', () => {
   const b = templateBrief(
     ctx({ recentWorkoutCount7d: 5, workoutCountPrior7d: 3 }),
     'train', 'heat spike Thursday', null,
   );
-  assert(b.insight_text.includes('heat spike Thursday'));
-  assert(!b.insight_text.includes('up from 3'), 'trend note should be suppressed when weather is present');
+  assert(!b.insight_text.includes('heat spike Thursday'), 'brief must not repeat the forecast');
+  assert(!b.insight_text.includes('Sky check'), 'the Sky check dump is gone');
+  assert(b.insight_text.includes('up from 3'), 'the trend note now shows instead');
+});
+
+Deno.test('session distance speaks the athlete\'s own units', () => {
+  const session = {
+    sessionType: 'run', intensity: 'threshold',
+    plannedMinutes: 40, plannedDistanceKm: 7, description: 'Threshold Run',
+  };
+  // 7 km -> 4.3 mi. An imperial athlete must never read "7 km" next to a
+  // UI chip that says "4.3 mi" for the same session.
+  const imperial = templateBrief(ctx({ units: 'imperial', todaySession: session }), 'train', null, null);
+  assert(imperial.insight_text.includes('4.3 mi'), imperial.insight_text);
+  assert(!imperial.insight_text.includes('km'), 'imperial brief must not mention km');
+
+  const metric = templateBrief(ctx({ units: 'metric', todaySession: session }), 'train', null, null);
+  assert(metric.insight_text.includes('7 km'), metric.insight_text);
 });
 
 Deno.test('a memory surfaces when nothing higher-priority is available', () => {

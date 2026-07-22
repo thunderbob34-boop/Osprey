@@ -41,7 +41,8 @@ Rules:
 - You will be given a "restRecommendation" of either "train", "easy", or "rest". Your insight_text and why_reasoning MUST agree with it — never contradict it. If it's "rest", explain rest as part of training, not a failure. If it's "easy", say so plainly without being alarming.
 - Never give medical advice or diagnose injury. Flag patterns and suggest consulting a professional if something seems concerning.
 - You will be given "workoutTimeConsistency" (the hour-of-day the user most often trains, and how many recent sessions fall there) and "foodLogCount14d". If workoutTimeConsistency shows 3+ sessions clustered in the same hour AND foodLogCount14d is under 3, include a "habit_tip": one short, concrete sentence suggesting the user stack food logging onto that already-consistent workout time (e.g. "You're consistently training around 7am — try logging breakfast right after, since you're already in the habit loop."). Otherwise set habit_tip to null. Never invent a time that isn't in the data.
-- You may be given a "weather" string with the local forecast, today's best outdoor window, and any upcoming heat spike. When present, weave it into the brief like a coach who checked the sky before you woke up: if a heat spike is 1-2 days out, tell them to start hydrating NOW (extra fluids + electrolytes today, not on the hot day); if today is hot, recommend the best time window, shade, or moving the session indoors; if rain is likely, suggest the driest window or an indoor swap. Never invent weather that isn't in the data, and skip weather talk entirely when it's unremarkable.
+- You may be given a "weather" string. The app already shows a dedicated Weather Coach card with the forecast and the best outdoor window, so DO NOT repeat it: never list a multi-day forecast, temperatures, or rain percentages. At most, allude to it in ONE short clause when it genuinely changes today's plan (e.g. "get out early before it bakes") — and skip weather entirely when it's unremarkable. Never invent weather that isn't in the data.
+- Distances and paces MUST use the athlete's own units, given as "units" in the data ("imperial" = miles, "metric" = kilometers). The app's UI shows their preference, so a brief that says "7 km" next to a screen reading "4.3 mi" is a bug. Convert before you write.
 - You may be given a "schedule" string describing a calendar conflict with the user's usual training window, plus the free windows we computed from their calendar. When present, mention it like a coach who checked their calendar: name the conflict briefly and recommend ONE specific free window from the data for today's session. Only ever suggest times that appear in the schedule string — never invent a window. If it says no open window remains, suggest a shortened version of today's session rather than skipping.
 - You are given "recentWorkoutCount7d" (sessions in the last 7 days) and "workoutCountPrior7d" (the 7 days before that). Frame consistency as a week-over-week trend, never as a streak to protect: if this week is up or steady, give it one specific, non-sycophantic nod; if this week is down, treat today as a clean reset with zero guilt — no "getting back on track" or "don't break the chain" language. Skip the comparison entirely when both weeks are 0.
 - You may be given "recentMemories" — a short list of notable things that happened recently or in past weeks/months (PRs, race results), each with a one-line summary and the date it happened. This is your long-term memory as a coach. If one is genuinely relevant to today (e.g. today's session targets the same lift that was PR'd, or a race just happened and today is the first session back), reference it specifically and naturally, the way a coach who remembers your history would ("Last month you PR'd Bench Press — let's see where it is today"). Never force a reference when nothing is relevant — skip it silently rather than shoehorning an unrelated memory in. Never invent a memory that isn't in the list.
@@ -170,7 +171,7 @@ async function buildContext(
   const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
   const [userRes, recoveryRes, loadRes, sessionRes, workoutsRes, goalsRes, workoutTimesRes, foodLogRes, memoriesRes] = await Promise.all([
-    supabase.from('users').select('display_name, experience_tier').eq('id', userId).single(),
+    supabase.from('users').select('display_name, experience_tier, units').eq('id', userId).single(),
     supabase.from('recovery_scores').select('score, recommendation, hrv_ms, sleep_hours').eq('user_id', userId).eq('score_date', today).maybeSingle(),
     supabase.from('load_scores').select('atl, ctl, tsb').eq('user_id', userId).eq('score_date', today).maybeSingle(),
     supabase.from('training_sessions').select('session_type, intensity, planned_minutes, planned_distance_km, description').eq('user_id', userId).eq('session_date', today).maybeSingle(),
@@ -181,11 +182,15 @@ async function buildContext(
     supabase.from('coach_memory').select('summary, occurred_on').eq('user_id', userId).gte('occurred_on', ninetyDaysAgo).order('occurred_on', { ascending: false }).limit(5),
   ]);
 
-  const user = userRes.data as { display_name: string; experience_tier: string } | null;
+  const user = userRes.data as
+    | { display_name: string; experience_tier: string; units: string | null }
+    | null;
 
   return {
     displayName: user?.display_name ?? 'there',
     experienceTier: user?.experience_tier ?? 'beginner',
+    // Mirrors the app's own default in services/units.ts (imperial when unset).
+    units: user?.units === 'metric' ? 'metric' : 'imperial',
     recovery: recoveryRes.data
       ? {
           score: recoveryRes.data.score,
