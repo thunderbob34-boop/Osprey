@@ -20,6 +20,8 @@ import { Card, Button } from '@/components/ui';
 import { PRIVACY_POLICY_URL, SUPPORT_EMAIL } from '@/constants/links';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { useTrainingGoal } from '@/hooks/useTrainingGoal';
+import { blueprintSport } from '@/services/coaching/zones';
+import type { PrimaryGoalEnum } from '@/services/coaching/goal-map';
 import { goalLabel } from '@/constants/sports';
 import type { UnitSystem } from '@/services/units';
 import { useAuthStore } from '@/store/authStore';
@@ -560,6 +562,25 @@ export default function SettingsTab() {
             </View>
             <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>
+
+          {blueprintSport(goal?.primaryGoal ?? '') != null ||
+          (goal?.primaryGoal as PrimaryGoalEnum | undefined) === 'triathlon' ? (
+            <>
+              <View style={styles.rowDivider} />
+              <TouchableOpacity
+                style={styles.planRow}
+                onPress={() => router.push('/training-baseline')}
+                accessibilityRole="button"
+                accessibilityLabel="Training baseline"
+              >
+                <View style={styles.planRowLeft}>
+                  <Text style={styles.cardValue}>Training Baseline</Text>
+                  <Text style={styles.planRowSub}>Sharpen your training paces</Text>
+                </View>
+                <Text style={styles.chevron}>›</Text>
+              </TouchableOpacity>
+            </>
+          ) : null}
 
           {/* Hyrox-only, and here rather than under About & Support: it's a
               coaching feature, not legal boilerplate, and a runner has no use
