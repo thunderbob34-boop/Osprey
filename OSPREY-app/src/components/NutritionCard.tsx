@@ -1,25 +1,20 @@
-import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '@/constants/colors';
 import { Card } from '@/components/ui';
 import { Theme, Radius } from '@/constants/theme';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
-import { formatFluidOz, mlToOz } from '@/services/units';
+import { formatFluidOz } from '@/services/units';
 import type { FuelStatusData } from '@/types/daily-summary';
 
 // Shown only while the very first fetch is in flight or if it fails —
 // real targets always come from ozzie-nutrition-coach once loaded, which
 // adapts to the user's goal, today's session, and their weight trend.
 const FALLBACK = { protein: 200, carbs: 220, fat: 70, calories: 2400 };
-// Metric quick-adds are round ml amounts, not conversions of the imperial
-// ones — matches how a metric user would actually think about a glass/bottle.
-const QUICK_ADDS_OZ = [8, 16, 24];
-const QUICK_ADDS_ML = [250, 500, 750];
 
 interface NutritionCardProps {
   hydration?: { ounces: number; targetOz: number };
-  onAddHydration?: (ounces: number) => void;
   /** Highlight the hydration section, e.g. on heat-alert days. */
   hydrationEmphasized?: boolean;
   fuelStatus?: FuelStatusData;
@@ -29,7 +24,6 @@ interface NutritionCardProps {
 
 export default function NutritionCard({
   hydration,
-  onAddHydration,
   hydrationEmphasized,
   fuelStatus,
   showFuelTip = true,
@@ -88,19 +82,6 @@ export default function NutritionCard({
                   { width: `${hydrationProgress * 100}%`, backgroundColor: hydrationMet ? Colors.green : Theme.accent },
                 ]}
               />
-            </View>
-            <View style={styles.quickAddRow}>
-              {(units === 'metric' ? QUICK_ADDS_ML : QUICK_ADDS_OZ).map((amount) => (
-                <TouchableOpacity
-                  key={amount}
-                  style={styles.quickAddBtn}
-                  onPress={() => onAddHydration?.(units === 'metric' ? mlToOz(amount) : amount)}
-                  accessibilityRole="button"
-                  accessibilityLabel={`Add ${amount} ${unitLabel} of water`}
-                >
-                  <Text style={styles.quickAddText}>+{amount} {unitLabel}</Text>
-                </TouchableOpacity>
-              ))}
             </View>
           </View>
         </>
@@ -252,17 +233,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   fill: { height: 6, borderRadius: 3 },
-  quickAddRow: { flexDirection: 'row', gap: 8 },
-  quickAddBtn: {
-    flex: 1,
-    backgroundColor: Theme.panel,
-    borderWidth: 1,
-    borderColor: Theme.line,
-    borderRadius: Radius.card,
-    paddingVertical: 8,
-    alignItems: 'center',
-  },
-  quickAddText: { fontSize: 12, fontWeight: '700', color: Theme.text },
   fuelTipTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   fuelTipTitle: { fontSize: 13, fontWeight: '800', color: Theme.text },
   fuelTipBody: { fontSize: 12, color: Theme.textSoft, lineHeight: 17 },

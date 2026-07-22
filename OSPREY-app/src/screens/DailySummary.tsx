@@ -98,7 +98,6 @@ export default function DailySummaryScreen({
   headerBanner,
   weatherCard,
   hydration,
-  onAddHydration,
   hydrationEmphasized,
 }: DailySummaryProps) {
   const weekProgress = weekTargetKm ? Math.min(1, weekDistanceKm / weekTargetKm) : 0;
@@ -376,7 +375,6 @@ export default function DailySummaryScreen({
         {/* ── Nutrition (fuel targets + hydration + meal timing) ── */}
         <NutritionCard
           hydration={hydration}
-          onAddHydration={onAddHydration}
           hydrationEmphasized={hydrationEmphasized}
           fuelStatus={fuelStatus}
           showFuelTip={session.sessionType !== 'rest'}
