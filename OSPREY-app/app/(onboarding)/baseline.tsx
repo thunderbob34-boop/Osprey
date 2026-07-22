@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import OnboardingShell from '@/components/onboarding/OnboardingShell';
+import { TimeRow, NumberField } from '@/components/BaselineInputs';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import { useAuthStore } from '@/store/authStore';
 import {
@@ -312,42 +313,10 @@ export default function BaselineScreen() {
   );
 }
 
-function TimeRow({ label, m, s, setM, setS }: { label: string; m: string; s: string; setM: (v: string) => void; setS: (v: string) => void }) {
-  return (
-    <View style={styles.field}>
-      <Text style={styles.label}>{label}</Text>
-      <View style={styles.timeRow}>
-        <TextInput style={[styles.input, styles.timeInput]} value={m} onChangeText={setM} keyboardType="number-pad" placeholder="min" placeholderTextColor={Theme.textMut} />
-        <Text style={styles.colon}>:</Text>
-        <TextInput style={[styles.input, styles.timeInput]} value={s} onChangeText={setS} keyboardType="number-pad" placeholder="sec" placeholderTextColor={Theme.textMut} />
-      </View>
-    </View>
-  );
-}
-
-function NumberField({ label, value, onChangeText, placeholder }: { label: string; value: string; onChangeText: (v: string) => void; placeholder?: string }) {
-  return (
-    <View style={styles.field}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput
-        style={styles.input}
-        value={value}
-        onChangeText={onChangeText}
-        keyboardType="decimal-pad"
-        placeholder={placeholder}
-        placeholderTextColor={Theme.textMut}
-      />
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   field: { gap: 6, marginBottom: 12 },
   label: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
-  timeRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   input: { backgroundColor: Theme.ink, borderWidth: 1, borderColor: Theme.line, borderRadius: Radius.card, paddingHorizontal: 14, paddingVertical: 12, color: Theme.text, fontSize: 16 },
-  timeInput: { flex: 1, textAlign: 'center' },
-  colon: { color: Theme.textMut, fontSize: 18, fontWeight: '700' },
   error: { fontSize: 12, color: Colors.red, marginTop: 4 },
   skip: { fontSize: 13, color: Theme.textMut, textAlign: 'center', marginTop: 16, textDecorationLine: 'underline' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
