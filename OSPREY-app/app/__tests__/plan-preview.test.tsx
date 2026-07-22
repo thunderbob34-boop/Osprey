@@ -200,15 +200,25 @@ describe('plan-preview — session-type icons and mileage rollup', () => {
   // and the AI plan-generator's own type list in the same pass) — it silently
   // fell back to a bare circle for both instead of crashing, which is exactly
   // the kind of gap that's easy to miss without a direct assertion.
+  // Asserts on the icon's `name` prop rather than a glyph: these were emoji
+  // until the vector-icon sweep, and pinning literal characters made the test
+  // fail on a pure presentation change while still not proving the mapping.
+  // The fallback is 'circle-small', so naming it keeps the original intent.
+  const iconNames = () =>
+    screen.UNSAFE_getAllByProps({}).reduce<string[]>((names, node) => {
+      const name = (node.props as { name?: unknown }).name;
+      return typeof name === 'string' ? [...names, name] : names;
+    }, []);
+
   it('renders a real icon for a hyrox session, not the "unknown type" fallback', () => {
     render(<PlanPreview />);
-    // Appears twice: the session row and the "THIS WEEK" summary type chip.
-    expect(screen.getAllByText('🏋️‍♂️').length).toBeGreaterThan(0);
+    expect(iconNames()).toContain('arm-flex');
   });
 
   it('renders a real icon for a rowing session, not the "unknown type" fallback', () => {
     render(<PlanPreview />);
-    expect(screen.getAllByText('🚣').length).toBeGreaterThan(0);
+    expect(iconNames()).toContain('rowing');
+    expect(iconNames()).not.toContain('circle-small');
   });
 
   it('counts a hyrox session\'s planned_distance_km toward the week\'s mileage total (real running distance), but not rowing\'s (erg distance)', () => {

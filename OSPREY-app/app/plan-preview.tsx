@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
+import type { ComponentProps } from 'react';
 import { format } from 'date-fns';
 import {
   ActivityIndicator,
@@ -10,17 +11,21 @@ import {
   View,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useQueryClient } from '@tanstack/react-query';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius, EffortPalette, IntensityPalette } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { ZonesCard } from '@/components/ZonesCard';
+import { useDisplayZones } from '@/hooks/useDisplayZones';
+import { intensityZoneLabel, sessionPaceBand } from '@/services/session-pace';
+import type { ZoneSet } from '@/services/coaching/zones';
 import { useAuthStore } from '@/store/authStore';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import { useHydration } from '@/hooks/useHydration';
 import { useWeatherCoach } from '@/hooks/useWeatherCoach';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
-import { formatDistanceKm, formatFluidOz, formatPacePerUnit, kmToMiles, type UnitSystem } from '@/services/units';
+import { formatDistanceKm, formatFluidOz, kmToMiles, type UnitSystem } from '@/services/units';
 import { estimateDayMacros, type DayMacroEstimate } from '@/services/nutrition-estimate';
 import { totalIntervalDistanceM } from '@/services/intervals';
 import type { WeatherSeverity } from '@/services/weather-coach';
@@ -45,6 +50,8 @@ interface SessionPreview {
   lift_prescription?: LiftPrescription | null;
   interval_prescription?: IntervalPrescription | null;
 }
+
+type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
 
 // Keep in sync with HEAT_CAUTION_F in services/weather-coach.ts.
 const HEAT_CAUTION_F = 85;
@@ -79,11 +86,32 @@ function formatDistance(session: SessionPreview, units: UnitSystem): string | nu
   return null;
 }
 
-/** Target pace — run sessions only, derived from distance + duration. */
-function formatPace(session: SessionPreview, units: UnitSystem): string | null {
+/**
+ * The coaching pace for this session — the athlete's own zone band, the same
+ * value Home's chip and the in-run target strip show.
+ *
+ * This row used to print planned_minutes ÷ planned_distance and label it the
+ * target pace. That is the session's implied AVERAGE: for a threshold session
+ * whose 40 minutes include easy warm-up and cool-down segments it read
+ * 9:12/mi against a ~7:30/mi threshold, so every row on the screen contradicted
+ * the zones card directly above it — and an athlete following it would never
+ * reach threshold. Duration and distance are both already on the row, so the
+ * average was derivable anyway; the zone band is the number that was missing.
+ *
+ * sessionPaceBand deliberately returns null for moderate/interval/race, which
+ * have no single clean band — those rows show the zone alone rather than a
+ * guessed pace.
+ */
+function formatZonePace(
+  session: SessionPreview,
+  zones: ZoneSet | null,
+  units: UnitSystem,
+): string | null {
   if (session.session_type !== 'run' && session.session_type !== 'race') return null;
-  if (!session.planned_distance_km || !session.planned_minutes) return null;
-  return formatPacePerUnit(session.planned_minutes * 60, session.planned_distance_km, units);
+  const zone = intensityZoneLabel(session.intensity);
+  const band = sessionPaceBand(session.intensity, zones, units);
+  if (!zone) return band;
+  return band ? `${zone} · ${band}` : zone;
 }
 
 /** Weekday name from the session's own date — not row order, which breaks for
@@ -200,18 +228,28 @@ function SessionDetailPanel({
             </View>
           </View>
           {hydrationTargetOz != null ? (
-            <Text style={styles.hydrationLine}>
-              💧 {formatFluidOz(hydrationTargetOz, units)} {units === 'metric' ? 'ml' : 'oz'} water target
-            </Text>
+            <View style={styles.hydrationRow}>
+              <Ionicons name="water" size={13} color={Theme.accent} />
+              <Text style={styles.hydrationLine}>
+                {formatFluidOz(hydrationTargetOz, units)} {units === 'metric' ? 'ml' : 'oz'} water target
+              </Text>
+            </View>
           ) : null}
         </View>
       ) : null}
 
       {/* ── Anything else ── */}
       {weatherNote ? (
-        <Text style={[styles.heatNote, weatherNote.severity === 'alert' && styles.heatNoteAlert]}>
-          {weatherNote.severity === 'alert' ? '🔴' : '⚠️'} {weatherNote.text}
-        </Text>
+        <View style={styles.heatNoteRow}>
+          <MaterialCommunityIcons
+            name={weatherNote.severity === 'alert' ? 'alert-octagon' : 'alert'}
+            size={13}
+            color={weatherNote.severity === 'alert' ? Colors.red : Colors.amber}
+          />
+          <Text style={[styles.heatNote, weatherNote.severity === 'alert' && styles.heatNoteAlert]}>
+            {weatherNote.text}
+          </Text>
+        </View>
       ) : null}
     </View>
   );
@@ -236,6 +274,9 @@ export default function PlanPreviewScreen() {
   const { data: hydration } = useHydration();
   const { data: weatherCoach } = useWeatherCoach(nutritionCoaching?.todaySessionType ?? null);
   const { units } = useUnitPreference();
+  // Same zones ZonesCard renders below, so the schedule rows and the zones
+  // card can't state different paces for the same intensity.
+  const displayZones = useDisplayZones();
 
   useEffect(() => {
     if (!isViewOnly || !userId) return;
@@ -315,15 +356,17 @@ export default function PlanPreviewScreen() {
     return sum + s.planned_distance_km;
   }, 0);
 
-  const SESSION_ICONS: Record<string, string> = {
-    run: '🏃',
-    lift: '🏋️',
-    swim: '🏊',
-    bike: '🚴',
-    rowing: '🚣',
-    hyrox: '🏋️‍♂️',
-    cross: '🔁',
-    rest: '😴',
+  // Vector icons, not emoji: emoji can't take the accent colour and render
+  // differently on every platform.
+  const SESSION_ICONS: Record<string, IconName> = {
+    run: 'run',
+    lift: 'dumbbell',
+    swim: 'swim',
+    bike: 'bike',
+    rowing: 'rowing',
+    hyrox: 'arm-flex',
+    cross: 'sync',
+    rest: 'sleep',
   };
 
   // Local date, not toISOString() — that flips to tomorrow before local
@@ -478,7 +521,11 @@ export default function PlanPreviewScreen() {
               <View style={styles.typesRow}>
                 {Object.entries(sessionCounts).map(([type, count]) => (
                   <View key={type} style={styles.typeChip}>
-                    <Text style={styles.typeIcon}>{SESSION_ICONS[type]}</Text>
+                    <MaterialCommunityIcons
+                      name={SESSION_ICONS[type] ?? 'circle-small'}
+                      size={18}
+                      color={Theme.accent}
+                    />
                     <Text style={styles.typeCount}>{count}</Text>
                   </View>
                 ))}
@@ -492,7 +539,7 @@ export default function PlanPreviewScreen() {
               {sessions.map((session, idx) => {
                 const dayName = dayNameForDate(session.session_date);
                 const distance = formatDistance(session, units);
-                const pace = formatPace(session, units);
+                const pace = formatZonePace(session, displayZones?.zones ?? null, units);
                 const isExpanded = expandedDate === session.session_date;
                 const isLast = idx === sessions.length - 1;
 
@@ -521,7 +568,11 @@ export default function PlanPreviewScreen() {
                         ) : null}
                       </View>
                       <View style={styles.sessionRight}>
-                        <Text style={styles.sessionIcon}>{SESSION_ICONS[session.session_type] ?? '○'}</Text>
+                        <MaterialCommunityIcons
+                          name={SESSION_ICONS[session.session_type] ?? 'circle-small'}
+                          size={20}
+                          color={Theme.accent}
+                        />
                         {session.planned_minutes ? (
                           <Text style={styles.sessionTime}>{session.planned_minutes}m</Text>
                         ) : null}
@@ -555,8 +606,11 @@ export default function PlanPreviewScreen() {
 
           <View style={styles.footer}>
             {isViewOnly ? (
-              <Button variant="primary" onPress={() => router.back()} accessibilityLabel="Done">
-                Done
+              // Secondary: this screen is a read-only look at the week, reached
+              // from "Full week ›". Nothing is committed here, so the button
+              // that closes it shouldn't carry the weight of a primary action.
+              <Button variant="secondary" onPress={() => router.back()} accessibilityLabel="Close">
+                Close
               </Button>
             ) : (
               <Button variant="primary" onPress={goHome} accessibilityLabel="Let's go">
@@ -649,7 +703,6 @@ const styles = StyleSheet.create({
   summaryName: { fontSize: 11, color: Theme.textMut, marginTop: 4 },
   typesRow: { flexDirection: 'row', gap: 8, justifyContent: 'center' },
   typeChip: { alignItems: 'center', gap: 4 },
-  typeIcon: { fontSize: 20 },
   typeCount: { fontSize: 12, fontWeight: '700', color: Theme.accent },
   scheduleLabel: {
     fontSize: 10,
@@ -676,7 +729,6 @@ const styles = StyleSheet.create({
   sessionDesc: { fontSize: 12, color: Theme.textSoft },
   sessionDistance: { fontSize: 11, color: Theme.accent, fontWeight: '600', marginTop: 2 },
   sessionRight: { alignItems: 'flex-end', gap: 4 },
-  sessionIcon: { fontSize: 18 },
   sessionTime: { fontSize: 11, color: Theme.textMut, fontWeight: '600' },
   noteCard: {
     padding: 12,
@@ -737,9 +789,11 @@ const styles = StyleSheet.create({
   },
   macroValue: { fontSize: 16, fontWeight: '900', color: Theme.accent },
   macroLabel: { fontSize: 10, color: Theme.textMut, marginTop: 2, textAlign: 'center' },
+  hydrationRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   hydrationLine: { fontSize: 12, color: Theme.textSoft, fontWeight: '600' },
 
   // ── FUNCTIONAL — weather-severity legend, not brand. Leave untouched. ──
-  heatNote: { fontSize: 12, color: Colors.amber, fontWeight: '600', lineHeight: 17 },
+  heatNoteRow: { flexDirection: 'row', alignItems: 'flex-start', gap: 6 },
+  heatNote: { flex: 1, fontSize: 12, color: Colors.amber, fontWeight: '600', lineHeight: 17 },
   heatNoteAlert: { color: Colors.red },
 });
