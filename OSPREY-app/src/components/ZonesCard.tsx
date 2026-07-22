@@ -1,76 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius } from '@/constants/theme';
 import { useDisplayZones } from '@/hooks/useDisplayZones';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
-import type { HrZoneInfo } from '@/services/coaching/envelope';
-import type { ZoneSet } from '@/services/coaching/zones';
-import type { UnitSystem } from '@/services/units';
-import {
-  paceMi,
-  paceRangeMi,
-  swim100,
-  swim100Range,
-  rowing500Range,
-  intRange,
-} from '@/services/pace-format';
-
-interface ZoneRow {
-  label: string;
-  value: string;
-  tone: 'aerobic' | 'threshold';
-}
-
-/** Builds the card's rows by switching on the resolved ZoneSet's kind, falling
- * back to HR bands when there are no pace/power zones at all (weight_loss,
- * general, or cycling with no self-reported FTP). Triathlon is compact —
- * one row per discipline showing just its threshold anchor, not a full
- * easy+threshold pair per discipline. */
-function rowsForZones(zones: ZoneSet | null, hrZones: HrZoneInfo, units: UnitSystem): ZoneRow[] {
-  if (!zones) {
-    return [
-      { label: 'Easy', value: intRange(hrZones.bands.z2Endurance, 'bpm'), tone: 'aerobic' },
-      { label: 'Threshold', value: intRange(hrZones.bands.z4Threshold, 'bpm'), tone: 'threshold' },
-    ];
-  }
-  switch (zones.kind) {
-    case 'run':
-      return [
-        { label: 'Easy', value: paceRangeMi(zones.bands.easy, units), tone: 'aerobic' },
-        { label: 'Threshold', value: `~${paceMi(zones.thresholdSecPerMile, units)}`, tone: 'threshold' },
-      ];
-    case 'swim':
-      return [
-        { label: 'Aerobic', value: swim100Range(zones.bands.z2Aerobic, units), tone: 'aerobic' },
-        { label: 'Threshold', value: swim100Range(zones.bands.z3Threshold, units), tone: 'threshold' },
-      ];
-    case 'rowing':
-      return [
-        { label: 'UT2', value: rowing500Range(zones.bands.ut2.splitSecPer500), tone: 'aerobic' },
-        { label: 'AT', value: rowing500Range(zones.bands.at.splitSecPer500), tone: 'threshold' },
-      ];
-    case 'cycling':
-      return [
-        { label: 'Endurance', value: intRange(zones.bands.z2Endurance, 'w'), tone: 'aerobic' },
-        { label: 'Threshold', value: intRange(zones.bands.z4Threshold, 'w'), tone: 'threshold' },
-      ];
-    case 'triathlon': {
-      const rows: ZoneRow[] = [];
-      if (zones.run) {
-        rows.push({ label: 'Run', value: `~${paceMi(zones.run.thresholdSecPerMile, units)}`, tone: 'threshold' });
-      }
-      if (zones.swim) {
-        rows.push({ label: 'Swim', value: `~${swim100(zones.swim.cssSecPer100, units)}`, tone: 'threshold' });
-      }
-      if (zones.bike) {
-        rows.push({ label: 'Bike', value: `~${Math.round(zones.bike.ftpWatts)} w`, tone: 'threshold' });
-      }
-      return rows;
-    }
-    default:
-      return [];
-  }
-}
+import { rowsForZones } from '@/services/coaching/zone-rows';
 
 /** Compact "Your zones" card for the plan-preview — renders nothing while the
  * hook is loading, for a `lift` goal, or on any read error (useDisplayZones
@@ -79,20 +13,30 @@ function rowsForZones(zones: ZoneSet | null, hrZones: HrZoneInfo, units: UnitSys
 export function ZonesCard(): JSX.Element | null {
   const display = useDisplayZones();
   const { units } = useUnitPreference();
+  const router = useRouter();
 
   if (!display) return null;
   const rows = rowsForZones(display.zones, display.hrZones, units);
   if (rows.length === 0) return null;
   const isEstimated = display.confidence === 'estimated';
 
+  function goToBaseline() {
+    router.push('/training-baseline');
+  }
+
   return (
     <View style={styles.card}>
       <View style={styles.headerRow}>
         <Text style={styles.label}>YOUR ZONES</Text>
         {isEstimated ? (
-          <View style={styles.tag}>
+          <TouchableOpacity
+            style={styles.tag}
+            onPress={goToBaseline}
+            accessibilityRole="button"
+            accessibilityLabel="Estimated zones — tap to set your real training baseline"
+          >
             <Text style={styles.tagText}>Estimated</Text>
-          </View>
+          </TouchableOpacity>
         ) : null}
       </View>
 
@@ -111,9 +55,11 @@ export function ZonesCard(): JSX.Element | null {
       </View>
 
       {isEstimated ? (
-        <Text style={styles.nudge}>
-          Estimated from your experience level — log a few efforts and these sharpen automatically.
-        </Text>
+        <TouchableOpacity onPress={goToBaseline} accessibilityRole="button" accessibilityLabel="Set your real training baseline">
+          <Text style={styles.nudge}>
+            Estimated from your experience level — log a few efforts and these sharpen automatically.
+          </Text>
+        </TouchableOpacity>
       ) : null}
     </View>
   );
