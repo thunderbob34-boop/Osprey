@@ -8,6 +8,27 @@ import type { PrimaryGoal } from '@/types/onboarding';
 // Hyrox trains via running + strength, so it keeps the "Run days" label.
 // CrossFit is WOD-based with no running component, so it gets a generic
 // "Training days" label instead of the run default.
+// Athlete-facing name for a discipline, for read-out lines like Settings'
+// "Hyrox · 5 days/week · intermediate". Deliberately plain-language, matching
+// the coaching-copy convention in CLAUDE.md.
+const GOAL_LABEL: Record<PrimaryGoal, string> = {
+  run: 'Run',
+  lift: 'Strength',
+  hybrid: 'Hybrid',
+  weight_loss: 'Weight loss',
+  general_fitness: 'General fitness',
+  swim: 'Swim',
+  rowing: 'Rowing',
+  hyrox: 'Hyrox',
+  cycling: 'Cycling',
+  ultra: 'Ultra',
+  crossfit: 'CrossFit',
+};
+
+export function goalLabel(goal: PrimaryGoal | null): string | null {
+  return goal ? GOAL_LABEL[goal] ?? null : null;
+}
+
 export function primaryDayLabel(goal: PrimaryGoal | null): string {
   if (goal === 'swim') return 'Swim days per week';
   if (goal === 'rowing') return 'Row days per week';

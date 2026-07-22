@@ -19,6 +19,8 @@ import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Card, Button } from '@/components/ui';
 import { PRIVACY_POLICY_URL, SUPPORT_EMAIL } from '@/constants/links';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { useTrainingGoal } from '@/hooks/useTrainingGoal';
+import { goalLabel } from '@/constants/sports';
 import type { UnitSystem } from '@/services/units';
 import { useAuthStore } from '@/store/authStore';
 import { hasOspreyPlus, restorePurchases } from '@/services/subscriptions';
@@ -71,6 +73,18 @@ export default function SettingsTab() {
   const signOut = useAuthStore((s) => s.signOut);
   const deleteAccount = useAuthStore((s) => s.deleteAccount);
   const profile = useAuthStore((s) => s.profile);
+  const { data: goal } = useTrainingGoal();
+
+  // What the athlete's preferences actually ARE. This line used to read
+  // "Goal, days per week · intermediate" — two field names joined to one value.
+  const trainingSummary =
+    [
+      goalLabel(goal?.primaryGoal ?? null),
+      goal?.daysPerWeek ? `${goal.daysPerWeek} days/week` : null,
+      profile?.experience_tier ?? null,
+    ]
+      .filter(Boolean)
+      .join(' · ') || 'Goal, days per week, and long run day';
   const userId = useAuthStore((s) => s.user?.id);
   const { units, setUnits } = useUnitPreference();
   const [plusActive, setPlusActive] = useState<boolean | null>(null);
@@ -541,14 +555,31 @@ export default function SettingsTab() {
           >
             <View style={styles.planRowLeft}>
               <Text style={styles.cardValue}>Training Preferences</Text>
-              <Text style={styles.planRowSub}>
-                {profile?.experience_tier
-                  ? `Goal, days per week · ${profile.experience_tier}`
-                  : 'Goal, days per week, long run day'}
-              </Text>
+              <Text style={styles.planRowSub}>{trainingSummary}</Text>
             </View>
             <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>
+
+          {/* Hyrox-only, and here rather than under About & Support: it's a
+              coaching feature, not legal boilerplate, and a runner has no use
+              for a quiz on the Hyrox race format. */}
+          {goal?.primaryGoal === 'hyrox' ? (
+            <>
+              <View style={styles.rowDivider} />
+              <TouchableOpacity
+                style={styles.planRow}
+                onPress={() => router.push('/hyrox-quiz')}
+                accessibilityRole="button"
+                accessibilityLabel="Hyrox knowledge quiz"
+              >
+                <View style={styles.planRowLeft}>
+                  <Text style={styles.cardValue}>Hyrox Knowledge Quiz</Text>
+                  <Text style={styles.planRowSub}>Test what you know about the race format</Text>
+                </View>
+                <Text style={styles.chevron}>›</Text>
+              </TouchableOpacity>
+            </>
+          ) : null}
         </Card>
 
         <Card style={styles.card}>
@@ -574,19 +605,6 @@ export default function SettingsTab() {
 
         <Card style={styles.card}>
           <Text style={styles.cardLabel}>About & Support</Text>
-          <TouchableOpacity
-            style={styles.planRow}
-            onPress={() => router.push('/hyrox-quiz')}
-            accessibilityRole="button"
-            accessibilityLabel="Hyrox knowledge quiz"
-          >
-            <View style={styles.planRowLeft}>
-              <Text style={styles.cardValue}>Hyrox Knowledge Quiz</Text>
-              <Text style={styles.planRowSub}>Test what you know about the race format</Text>
-            </View>
-            <Text style={styles.chevron}>›</Text>
-          </TouchableOpacity>
-          <View style={styles.rowDivider} />
           <TouchableOpacity
             style={styles.planRow}
             onPress={() => Linking.openURL(PRIVACY_POLICY_URL).catch(() => undefined)}
@@ -714,8 +732,10 @@ const styles = StyleSheet.create({
   // paddingVertical: 12, and ink label all come from the primary variant now).
   primaryBtn: { marginTop: 4 },
   btnSpacing: { marginTop: 4 },
-  linkBtn: { alignItems: 'center', paddingVertical: 6 },
-  linkText: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
+  // Left-aligned and accented like every other control on this screen. Centred
+  // grey text read as a caption, not something you could tap.
+  linkBtn: { alignSelf: 'flex-start', paddingVertical: 6, minHeight: 44, justifyContent: 'center' },
+  linkText: { fontSize: 13, color: Theme.accent, fontWeight: '700' },
   switchRow: {
     flexDirection: 'row',
     alignItems: 'center',
