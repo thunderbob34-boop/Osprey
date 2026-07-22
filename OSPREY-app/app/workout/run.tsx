@@ -16,7 +16,9 @@ import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import RunMap from '@/components/RunMap';
+import SessionTargetStrip from '@/components/SessionTargetStrip';
 import { useRunTracking } from '@/hooks/useRunTracking';
+import { useDisplayZones } from '@/hooks/useDisplayZones';
 import {
   useWorkoutStore,
   getElapsedSeconds,
@@ -25,7 +27,7 @@ import {
   metersToMiles,
 } from '@/store/workoutStore';
 import { useAuthStore } from '@/store/authStore';
-import { fetchIntervalPrescription, saveRunWorkout } from '@/services/workouts';
+import { fetchIntervalPrescription, fetchSessionTarget, saveRunWorkout, type SessionTarget } from '@/services/workouts';
 import { expandIntervalSteps, type IntervalStep } from '@/services/intervals';
 import {
   computeStepProgress,
@@ -81,6 +83,11 @@ export default function RunWorkoutScreen() {
   const { isPlus } = useSubscription();
   const { cueBannerText, showCueBanner } = useCueBanner();
 
+  // What the engine prescribed. Shown for every planned session, unlike the
+  // interval card below, which only exists on the few that have intervals.
+  const [sessionTarget, setSessionTarget] = useState<SessionTarget | null>(null);
+  const displayZones = useDisplayZones();
+
   // Structured in-run guidance (Ozzie-prescribed intervals for today's session)
   const [intervalSteps, setIntervalSteps] = useState<IntervalStep[] | null>(null);
   const [paceBands, setPaceBands] = useState<PaceBands | null>(null);
@@ -97,6 +104,7 @@ export default function RunWorkoutScreen() {
         if (prescription) setIntervalSteps(expandIntervalSteps(prescription));
       })
       .catch(() => undefined);
+    fetchSessionTarget(params.sessionId).then(setSessionTarget).catch(() => undefined);
     if (userId) {
       fetchPaceBands(userId).then(setPaceBands).catch(() => undefined);
     }
@@ -365,6 +373,10 @@ export default function RunWorkoutScreen() {
           <Text style={styles.sessionLabel}>RUN IN PROGRESS</Text>
         </View>
       </View>
+
+      {sessionTarget ? (
+        <SessionTargetStrip target={sessionTarget} zones={displayZones?.zones ?? null} />
+      ) : null}
 
       <View style={styles.statsRow}>
         <StatBlock label="DISTANCE" value={`${miles.toFixed(2)} mi`} />

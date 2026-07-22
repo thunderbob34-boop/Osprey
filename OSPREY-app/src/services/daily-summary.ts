@@ -4,6 +4,7 @@ import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
 import { fetchWeekTargetKm } from '@/services/workouts';
 import { getCachedWeatherBriefSummary } from '@/services/weather-context';
 import { getScheduleBriefSummary } from '@/services/schedule-context';
+import { intensityZoneLabel } from '@/services/session-pace';
 import { localDateString } from '@/utils/date';
 import type {
   DailySummaryData,
@@ -38,19 +39,8 @@ function recommendationLabel(recommendation: RecoveryRecommendation): string {
 const ZONE_SESSION_TYPES = new Set(['run', 'swim', 'bike', 'rowing']);
 
 function intensityToZone(intensity: string): string | undefined {
-  switch (intensity) {
-    case 'easy':
-      return 'Zone 2';
-    case 'moderate':
-      return 'Zone 3';
-    case 'threshold':
-      return 'Zone 4';
-    case 'interval':
-    case 'race':
-      return 'Zone 5';
-    default:
-      return undefined;
-  }
+  // Shared with the in-run target strip, which shows the same "Zone 4" label.
+  return intensityZoneLabel(intensity);
 }
 
 function formatSessionType(sessionType: string): string {

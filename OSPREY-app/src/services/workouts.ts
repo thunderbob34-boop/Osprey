@@ -627,6 +627,38 @@ export async function fetchIntervalPrescription(sessionId: string): Promise<Inte
     : null;
 }
 
+export interface SessionTarget {
+  description: string | null;
+  intensity: string | null;
+  plannedMinutes: number | null;
+  plannedDistanceKm: number | null;
+}
+
+/**
+ * What the coaching engine prescribed for this session.
+ *
+ * The in-workout screens used to show only `interval_prescription`, which most
+ * sessions don't have — an easy run, a long run, and a recovery run all
+ * carried a duration/distance/intensity that the athlete never saw once the
+ * workout started, even though Home had just shown it to them.
+ */
+export async function fetchSessionTarget(sessionId: string): Promise<SessionTarget | null> {
+  const { data, error } = await supabase
+    .from('training_sessions')
+    .select('description, intensity, planned_minutes, planned_distance_km')
+    .eq('id', sessionId)
+    .maybeSingle();
+
+  if (error || !data) return null;
+  return {
+    description: (data.description as string | null) ?? null,
+    intensity: (data.intensity as string | null) ?? null,
+    plannedMinutes: (data.planned_minutes as number | null) ?? null,
+    // numeric comes back as a string from PostgREST.
+    plannedDistanceKm: data.planned_distance_km == null ? null : Number(data.planned_distance_km),
+  };
+}
+
 export async function fetchExerciseLibrary(): Promise<LibraryExercise[]> {
   // Full library for the in-session exercise picker, grouped by muscle.
   return withCache(['exercise-library', 'full'], async () => {

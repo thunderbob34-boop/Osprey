@@ -3,6 +3,27 @@ import type { UnitSystem } from '@/services/units';
 import { paceMi, paceRangeMi, swim100, swim100Range, rowing500Range, intRange } from '@/services/pace-format';
 
 /**
+ * The generic zone label for a prescribed intensity. Lives here beside
+ * `sessionPaceBand` because the two are always rendered together — Home, the
+ * Workout tab, and the in-run target strip all show "Zone 4 · ~7:30/mi".
+ */
+export function intensityZoneLabel(intensity: string | null | undefined): string | undefined {
+  switch (intensity) {
+    case 'easy':
+      return 'Zone 2';
+    case 'moderate':
+      return 'Zone 3';
+    case 'threshold':
+      return 'Zone 4';
+    case 'interval':
+    case 'race':
+      return 'Zone 5';
+    default:
+      return undefined;
+  }
+}
+
+/**
  * The athlete's OWN pace band for today's session, to render beside the
  * generic zone label ("Zone 2" → "Zone 2 · 9:00–10:00/mi").
  *
