@@ -3,8 +3,11 @@ import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius } from '@/constants/theme';
 import { useDisplayZones } from '@/hooks/useDisplayZones';
+import { useTrainingGoal } from '@/hooks/useTrainingGoal';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { rowsForZones } from '@/services/coaching/zone-rows';
+import { blueprintSport } from '@/services/coaching/zones';
+import type { PrimaryGoalEnum } from '@/services/coaching/goal-map';
 
 /** Compact "Your zones" card for the plan-preview — renders nothing while the
  * hook is loading, for a `lift` goal, or on any read error (useDisplayZones
@@ -12,6 +15,7 @@ import { rowsForZones } from '@/services/coaching/zone-rows';
  * which is fine — "no card" is the correct display for all three). */
 export function ZonesCard(): JSX.Element | null {
   const display = useDisplayZones();
+  const { data: goal } = useTrainingGoal();
   const { units } = useUnitPreference();
   const router = useRouter();
 
@@ -19,6 +23,18 @@ export function ZonesCard(): JSX.Element | null {
   const rows = rowsForZones(display.zones, display.hrZones, units);
   if (rows.length === 0) return null;
   const isEstimated = display.confidence === 'estimated';
+
+  // useTrainingGoal() types primaryGoal via the onboarding-only PrimaryGoal union, which
+  // omits 'triathlon' (see @/types/onboarding vs. the superset PrimaryGoalEnum documented
+  // in goal-map.ts) even though user_goals.primary_goal really can hold it. Widen to the
+  // proper superset here rather than casting to a bare string — same pattern used in
+  // app/(tabs)/settings.tsx and app/training-baseline.tsx.
+  const primaryGoal = (goal?.primaryGoal ?? null) as PrimaryGoalEnum | null;
+  // "Estimated" can be true for goals with no pace/power anchor at all (weight_loss /
+  // general_fitness fall back to an estimated-max-HR band) — training-baseline.tsx has
+  // nothing to show those goals. Only offer the tap when it leads somewhere real; this
+  // mirrors the exact condition Settings uses to hide its own "Training Baseline" row.
+  const canSetBaseline = blueprintSport(primaryGoal ?? '') != null || primaryGoal === 'triathlon';
 
   function goToBaseline() {
     router.push('/training-baseline');
@@ -29,14 +45,20 @@ export function ZonesCard(): JSX.Element | null {
       <View style={styles.headerRow}>
         <Text style={styles.label}>YOUR ZONES</Text>
         {isEstimated ? (
-          <TouchableOpacity
-            style={styles.tag}
-            onPress={goToBaseline}
-            accessibilityRole="button"
-            accessibilityLabel="Estimated zones — tap to set your real training baseline"
-          >
-            <Text style={styles.tagText}>Estimated</Text>
-          </TouchableOpacity>
+          canSetBaseline ? (
+            <TouchableOpacity
+              style={styles.tag}
+              onPress={goToBaseline}
+              accessibilityRole="button"
+              accessibilityLabel="Estimated zones — tap to set your real training baseline"
+            >
+              <Text style={styles.tagText}>Estimated</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.tag}>
+              <Text style={styles.tagText}>Estimated</Text>
+            </View>
+          )
         ) : null}
       </View>
 
@@ -55,11 +77,17 @@ export function ZonesCard(): JSX.Element | null {
       </View>
 
       {isEstimated ? (
-        <TouchableOpacity onPress={goToBaseline} accessibilityRole="button" accessibilityLabel="Set your real training baseline">
+        canSetBaseline ? (
+          <TouchableOpacity onPress={goToBaseline} accessibilityRole="button" accessibilityLabel="Set your real training baseline">
+            <Text style={styles.nudge}>
+              Estimated from your experience level — log a few efforts and these sharpen automatically.
+            </Text>
+          </TouchableOpacity>
+        ) : (
           <Text style={styles.nudge}>
             Estimated from your experience level — log a few efforts and these sharpen automatically.
           </Text>
-        </TouchableOpacity>
+        )
       ) : null}
     </View>
   );

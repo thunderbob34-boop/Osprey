@@ -83,6 +83,9 @@ export default function TrainingBaselineScreen() {
     onSuccess: () => {
       setShowRebuildOffer(false);
       queryClient.invalidateQueries({ queryKey: ['display-zones', userId] });
+      queryClient.invalidateQueries({ queryKey: ['daily-summary'] });
+      queryClient.invalidateQueries({ queryKey: ['calendar-month'] });
+      queryClient.invalidateQueries({ queryKey: ['stats'] });
     },
     onError: (err) => {
       Alert.alert('Rebuild failed', err instanceof Error ? err.message : 'Something went wrong.');
