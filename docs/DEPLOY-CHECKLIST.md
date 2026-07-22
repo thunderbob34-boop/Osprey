@@ -327,3 +327,6 @@ column, so the repo can be rebuilt from it). Reconciliation options, to be chose
   long-term but the biggest change; best done deliberately pre-launch.
 
 Until reconciled: **apply new migrations via MCP `apply_migration`, not `db push`.**
+
+### ✅ DONE 2026-07-21 — ozzie-daily-brief CORS fix DEPLOYED (v13 → v14)
+The mobile-first-no-CORS bug found during the Phase-3 deploy (4th instance of the pattern) is now live. `supabase functions deploy ozzie-daily-brief --use-api` (bundles index/types/template + _shared/llm.ts). Verified live: OPTIONS preflight → 200 + `access-control-allow-origin: *` (was 405 no-ACAO — the reason the daily brief silently never loaded on any browser surface), bogus JWT → 401 (auth gate intact), verify_jwt:true preserved. Function still DEFAULTS to the $0 deterministic template (no OpenAI call), so this deploy adds no LLM cost.
