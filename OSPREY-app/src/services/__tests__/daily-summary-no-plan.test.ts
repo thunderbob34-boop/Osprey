@@ -42,10 +42,41 @@ describe('mapSession — no session today', () => {
       planned_distance_km: 5,
       description: 'Easy Run',
       ozzie_notes: null,
+      lift_prescription: null,
     };
     const s = mapSession(session, noBrief, /* hasEverPlanned */ false);
     expect(s.type).toBe('Easy Run');
     expect(s.sessionType).toBe('run');
     expect(s.intensity).toBe('easy');
+  });
+
+  it('a cardio session gets a Zone chip and no exercise list', () => {
+    const run: TodaySessionRow = {
+      id: 'r', session_type: 'run', intensity: 'threshold', planned_minutes: 40,
+      planned_distance_km: 8, description: 'Threshold Run', ozzie_notes: null, lift_prescription: null,
+    };
+    const s = mapSession(run, noBrief, true);
+    expect(s.zone).toBe('Zone 4');
+    expect(s.exercises).toBeNull();
+  });
+
+  it('a strength session shows its exercises and NO cardio Zone chip', () => {
+    const lift: TodaySessionRow = {
+      id: 'l', session_type: 'lift', intensity: 'moderate', planned_minutes: 60,
+      planned_distance_km: null, description: 'Lower Body Strength', ozzie_notes: null,
+      lift_prescription: {
+        exercises: [
+          { name: 'Back Squat', sets: 3, reps: '8-12', note: 'Focus on form.' },
+          { name: 'Romanian Deadlift', sets: 3, reps: '8-12', note: null },
+        ],
+      },
+    };
+    const s = mapSession(lift, noBrief, true);
+    // "Zone N" is a cardio concept — a lift must not show it.
+    expect(s.zone).toBeUndefined();
+    expect(s.exercises).toEqual([
+      { name: 'Back Squat', sets: 3, reps: '8-12' },
+      { name: 'Romanian Deadlift', sets: 3, reps: '8-12' },
+    ]);
   });
 });

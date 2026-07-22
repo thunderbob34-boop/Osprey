@@ -174,7 +174,7 @@ export default function DailySummaryScreen({
       >
         {/* ── Header ── */}
         <View style={styles.header}>
-          <View>
+          <View style={styles.headerLeft}>
             <Text style={styles.greeting}>{greeting}, {userName}.</Text>
             <Text style={styles.date}>{formatDate()}</Text>
           </View>
@@ -297,6 +297,23 @@ export default function DailySummaryScreen({
               </View>
             ) : null}
           </View>
+
+          {/* Strength sessions: show the prescribed lifts (the coaching engine
+              already computed them) instead of a cardio zone. */}
+          {session.exercises && session.exercises.length > 0 ? (
+            <View style={styles.exerciseList}>
+              {session.exercises.map((exercise, i) => (
+                <View key={`${exercise.name}-${i}`} style={styles.exerciseRow}>
+                  <Text style={styles.exerciseName} numberOfLines={1}>
+                    {exercise.name}
+                  </Text>
+                  <Text style={styles.exerciseMeta}>
+                    {exercise.sets}×{exercise.reps}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          ) : null}
 
           {/* Ozzie note — tap to see the reasoning */}
           <Card emphasis style={{ marginBottom: 14 }}>
@@ -630,10 +647,18 @@ const styles = StyleSheet.create({
     color: Theme.accent,
     marginTop: 2,
   },
+  headerLeft: {
+    // Take the available width and let a long greeting wrap, so the action
+    // buttons on the right never get pushed off the screen edge.
+    flex: 1,
+    minWidth: 0,
+    paddingRight: 8,
+  },
   headerRight: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    flexShrink: 0,
   },
   activityBtn: {
     width: 40,
@@ -798,6 +823,32 @@ const styles = StyleSheet.create({
   },
   sessionChipAccentText: {
     color: Theme.accent,
+  },
+  exerciseList: {
+    marginBottom: 14,
+    borderTopWidth: 1,
+    borderTopColor: Theme.line,
+  },
+  exerciseRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#1c1c22',
+  },
+  exerciseName: {
+    flex: 1,
+    fontSize: 14,
+    fontWeight: '600',
+    color: Theme.text,
+    marginRight: 12,
+  },
+  exerciseMeta: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: Theme.accent,
+    fontVariant: ['tabular-nums'],
   },
   ozzieNote: {
     flexDirection: 'row',

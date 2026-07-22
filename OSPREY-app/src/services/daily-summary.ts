@@ -32,6 +32,11 @@ function recommendationLabel(recommendation: RecoveryRecommendation): string {
   }
 }
 
+// "Zone N" is a pace/HR-zone concept — meaningful only for cardio sessions.
+// For strength (lift) the card shows the prescribed exercises instead, and for
+// hyrox/crossfit "Zone N" is the wrong vocabulary, so the chip is suppressed.
+const ZONE_SESSION_TYPES = new Set(['run', 'swim', 'bike', 'rowing']);
+
 function intensityToZone(intensity: string): string | undefined {
   switch (intensity) {
     case 'easy':
@@ -87,7 +92,7 @@ async function fetchTodaySession(userId: string): Promise<TodaySessionRow | null
   const { data, error } = await supabase
     .from('training_sessions')
     .select(
-      'id, session_type, intensity, planned_minutes, planned_distance_km, description, ozzie_notes',
+      'id, session_type, intensity, planned_minutes, planned_distance_km, description, ozzie_notes, lift_prescription',
     )
     .eq('user_id', userId)
     .eq('session_date', todayDateString())
@@ -358,8 +363,17 @@ export function mapSession(
     type: session.description ?? formatSessionType(session.session_type),
     duration: session.planned_minutes ? `${session.planned_minutes} min` : '—',
     distanceKm: session.planned_distance_km,
-    zone: intensityToZone(session.intensity),
+    // Only cardio sessions get a "Zone N" chip; strength shows its exercises.
+    zone: ZONE_SESSION_TYPES.has(session.session_type)
+      ? intensityToZone(session.intensity)
+      : undefined,
     intensity: session.intensity,
+    exercises:
+      session.lift_prescription?.exercises.map((e) => ({
+        name: e.name,
+        sets: e.sets,
+        reps: e.reps,
+      })) ?? null,
     ozzieNote: dailyBrief.text ?? session.ozzie_notes ?? fallbackNote,
     whyReasoning: dailyBrief.whyReasoning,
     sessionId: session.id,

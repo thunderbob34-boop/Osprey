@@ -1,5 +1,13 @@
 import type React from 'react';
 import type { ReadinessTone } from '@/constants/theme';
+import type { LiftPrescription } from '@/types/workout';
+
+/** One exercise line for the Home session card (name + set×rep summary). */
+export interface SessionExercise {
+  name: string;
+  sets: number;
+  reps: string;
+}
 
 export type RecoveryRecommendation = 'train' | 'easy' | 'rest';
 
@@ -15,6 +23,9 @@ export interface SessionData {
   distanceKm?: number | null;
   zone?: string;
   intensity?: string | null;
+  /** For strength sessions: the prescribed lifts (name + sets×reps), shown on
+   *  the Home card. Cardio sessions leave this null and show a pace/zone chip. */
+  exercises?: SessionExercise[] | null;
   ozzieNote: string;
   whyReasoning?: string | null;
   sessionId?: string | null;
@@ -55,6 +66,7 @@ export interface TodaySessionRow {
   planned_distance_km: number | null;
   description: string | null;
   ozzie_notes: string | null;
+  lift_prescription: LiftPrescription | null;
 }
 
 export interface DailySummaryData {
