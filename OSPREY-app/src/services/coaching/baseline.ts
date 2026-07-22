@@ -69,9 +69,11 @@ export function parseFTPBaseline(ftpWatts: number): ParseResult {
   return { ok: true, value: Math.round(ftpWatts) };
 }
 
+export type AnchorKey = 'run' | 'swim' | 'row' | 'bike';
+
 // The stored anchor key for a primary goal, or null if the goal has no endurance
 // anchor to collect. Reuses blueprintSport (run/hybrid/hyrox→run, swim, rowing, cycling).
-export function anchorKeyForGoal(goal: string): 'run' | 'swim' | 'row' | 'bike' | null {
+export function anchorKeyForGoal(goal: string): AnchorKey | null {
   if (goal === 'cycling') return 'bike';
   const bp = blueprintSport(goal);
   if (bp === 'rowing') return 'row';
@@ -86,4 +88,22 @@ export function toSelfReportAnchor(map: ThresholdAnchorMap | null | undefined): 
     splitSecPer500: map?.row?.splitSecPer500 ?? null,
     ftpWatts: map?.bike?.ftpWatts ?? null,
   };
+}
+
+// Pure merge: writes/overwrites one sport's anchor entry, leaving the rest of
+// the map untouched. Mirrors webapp/src/lib/threshold-anchor.ts's setAnchorEntry
+// exactly (mobile's own parallel copy — different bundler/package, same logic).
+export function setAnchorEntry(
+  map: ThresholdAnchorMap,
+  key: AnchorKey,
+  value: NonNullable<ThresholdAnchorMap[AnchorKey]>,
+): ThresholdAnchorMap {
+  return { ...map, [key]: value } as ThresholdAnchorMap;
+}
+
+// Pure delete: removes one sport's anchor entry, reverting it to the tier estimate.
+export function clearAnchorEntry(map: ThresholdAnchorMap, key: AnchorKey): ThresholdAnchorMap {
+  const next = { ...map };
+  delete next[key];
+  return next;
 }

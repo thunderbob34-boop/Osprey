@@ -5,6 +5,8 @@ import {
   parseFTPBaseline,
   anchorKeyForGoal,
   toSelfReportAnchor,
+  setAnchorEntry,
+  clearAnchorEntry,
 } from '@/services/coaching/baseline';
 
 describe('parseSwimBaseline', () => {
@@ -104,5 +106,36 @@ describe('toSelfReportAnchor bike', () => {
     expect(toSelfReportAnchor({ bike: { ftpWatts: 240, source: 'self_report' } })).toEqual({
       thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: null, ftpWatts: 240,
     });
+  });
+});
+
+describe('setAnchorEntry', () => {
+  it('adds a new entry without touching other sports', () => {
+    const map = { swim: { cssSecPer100: 95, source: 'self_report' as const } };
+    const next = setAnchorEntry(map, 'run', { thresholdSecPerMile: 664, source: 'self_report' });
+    expect(next.swim).toEqual({ cssSecPer100: 95, source: 'self_report' });
+    expect(next.run).toEqual({ thresholdSecPerMile: 664, source: 'self_report' });
+  });
+  it('overwrites an existing entry for the same sport', () => {
+    const map = { run: { thresholdSecPerMile: 700, source: 'self_report' as const } };
+    const next = setAnchorEntry(map, 'run', { thresholdSecPerMile: 664, source: 'self_report' });
+    expect(next.run).toEqual({ thresholdSecPerMile: 664, source: 'self_report' });
+  });
+});
+
+describe('clearAnchorEntry', () => {
+  it('removes the entry for the given sport, leaving others intact', () => {
+    const map = {
+      run: { thresholdSecPerMile: 664, source: 'self_report' as const },
+      swim: { cssSecPer100: 95, source: 'self_report' as const },
+    };
+    const next = clearAnchorEntry(map, 'run');
+    expect(next.run).toBeUndefined();
+    expect(next.swim).toEqual({ cssSecPer100: 95, source: 'self_report' });
+  });
+  it('is a no-op when the sport has no entry', () => {
+    const map = { swim: { cssSecPer100: 95, source: 'self_report' as const } };
+    const next = clearAnchorEntry(map, 'run');
+    expect(next).toEqual({ swim: { cssSecPer100: 95, source: 'self_report' } });
   });
 });
