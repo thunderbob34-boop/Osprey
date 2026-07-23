@@ -35,7 +35,11 @@ Rename `src/hooks/useDisplayZones.ts` → `src/hooks/useDisplayEnvelope.ts` (mec
 
 `DisplayZones` interface (renamed `DisplayEnvelope`) grows additively — every existing field keeps its exact name and type; new fields append.
 
-`ZonesCard.tsx` gains an explicit guard (`if (!display.zones && !isHrOnlySport) ...` — exact condition is an implementation detail; must reproduce "no card for lift/crossfit/hyrox" while still showing the HR-fallback card for weight_loss/general/cycling-without-FTP exactly as today) so its rendered behavior is unchanged for every sport, verified against today's behavior for each of: run, swim, rowing, cycling (with and without FTP), triathlon, ultra, hybrid, weight_loss, general, lift, crossfit, hyrox.
+`ZonesCard.tsx` gains an explicit guard.
+
+> **Correction made during plan-writing (2026-07-23):** this section originally claimed lift/crossfit/hyrox all currently show "no card." Tracing `resolveZones`/`blueprintSport` line-by-line shows that's only true for **lift**. `blueprintSport('hyrox')` maps to `'run'`, so hyrox athletes see a real run-pace zones card today, same as run/hybrid/ultra. `blueprintSport('crossfit')` matches no branch, so `zones` stays `null` and crossfit falls into the same HR-fallback bucket as weight_loss/general/cycling-without-FTP — it already shows a card, just an HR-bpm one. **The only sport where the card's presence changes is `lift`** (the sole case where the old hook's `if (sport === 'lift') return null` short-circuited before a `DisplayZones` value ever existed). The guard is therefore just `if (!display || display.sport === 'lift') return null;` — using `display.sport` (populated atomically by the same hook call that computes zones/hrZones) rather than a separate `useTrainingGoal()` read, which would race against the hook's own load (a lift athlete could flash an HR-fallback card during the window where `useTrainingGoal()` hasn't resolved yet but `useDisplayEnvelope()` has).
+
+Verify against today's behavior for each of: run, swim, rowing, cycling (with and without FTP), triathlon, ultra, hybrid, weight_loss, general_fitness, lift, crossfit, hyrox — confirming only `lift` newly changes (still no card) and the other 11 render identically (real zones or HR-fallback, whichever they show today).
 
 ## Component 2 — `app/your-numbers.tsx`
 
