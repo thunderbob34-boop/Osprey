@@ -81,13 +81,14 @@ export interface PlanSyncResult {
  * healing itself — see benchmark/osprey-webapp-ux-pass.md F1 in the
  * hyrox-trainer-experience skill.
  *
- * Deliberately posts no `envelope` — that requires re-deriving mobile's full
- * threshold/rowing/hyrox-params assembly (build-envelope.ts), which is a
- * separate, larger port. An envelope-less call is an already-supported,
- * documented path server-side (ozzie-generate-plan/index.ts's `envelope?`
- * handling throughout) and is exactly what "no-envelope regenerations" means
- * in that file's own comments — it still creates/reschedules a real week,
- * just without the extra pacing/fueling guidance an envelope adds.
+ * Builds and posts a real `envelope` via `buildEnvelope(userId)` from
+ * `../../lib/build-envelope`, which derives mobile's full threshold/rowing/
+ * hyrox-params assembly. Falls back to an envelope-less body (`{}`) only for
+ * ultra athletes (whose sport isn't supported by this port — see `buildEnvelope`'s
+ * own `isUltraGoal` guard), an already-supported, documented path server-side
+ * (ozzie-generate-plan/index.ts's `envelope?` handling throughout) — it still
+ * creates/reschedules a real week, just without the extra pacing/fueling
+ * guidance an envelope adds.
  *
  * Mounted once in the `_authed` layout (not per-page) so it fires regardless
  * of which route the user lands on first.
