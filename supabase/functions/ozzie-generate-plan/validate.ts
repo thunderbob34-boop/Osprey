@@ -22,7 +22,7 @@ type FuelPlan = {
   longSessionCarbGPerHour: number;
 };
 type StrengthLike = { oneRepMaxKg: { squat: number; bench: number; deadlift: number }; workingPercent1RM: number; zone: { percent1RM: [number, number] }; prilepin: { repsPerSet: [number, number] } };
-interface EnvelopeLike { hardSessionShareMax: number; zones: Zones | null; fuel: FuelPlan; strength?: StrengthLike | null; }
+interface EnvelopeLike { hardSessionShareMax: number; zones: Zones | null; fuel: FuelPlan; strength?: StrengthLike | null; hyrox?: { compromisedRunSplitSecPerKm: Band } | null; }
 
 const KM_TO_MI = 0.621371;
 const HARD = new Set(['interval', 'threshold']);
@@ -73,6 +73,36 @@ function carbDayType(intensity: string): 'easy' | 'moderate' | 'high' | 'peak' {
   return 'easy'; // easy / rest / anything else
 }
 
+// Shared clamp-and-round math for pace-clamping a session's distance to fit a band
+// at a fixed duration. `perKm` converts sec/km → the band's own unit (mi/100m/500m
+// via KIND_UNIT_PER_KM); pass 1 for a band already expressed directly in sec/km
+// (Hyrox's compromised-run split has no such conversion table — it's already sec/km).
+// Returns null when the implied pace is already inside the band (nothing to clamp).
+function clampToDistanceBand(
+  minutes: number,
+  distanceKm: number,
+  band: Band,
+  perKm: number,
+): { distanceKm: number; implied: number; target: number } | null {
+  const implied = (minutes * 60) / (distanceKm * perKm);
+  const target = Math.min(band.max, Math.max(band.min, implied));
+  if (target === implied) return null;
+  const newKm = (minutes * 60) / (target * perKm);
+  // Round toward the safe side of whichever edge we clamped to — see the pace-clamp
+  // step's own comment for why plain round-to-nearest can overshoot back across it.
+  const roundedKm = target === band.min ? Math.floor(newKm * 10) / 10 : Math.ceil(newKm * 10) / 10;
+  return { distanceKm: roundedKm, implied, target };
+}
+
+// Appends a short, fixed, always-accurate clarifier when a clamp changes a session's
+// distance. The LLM's own ozzie_notes prose is never rewritten (it's still true) —
+// this just stays honest about the corrected number without parsing or guessing
+// whether the original prose happened to cite one.
+function withClampNote(d: PlanDay): string {
+  const notes = typeof d.ozzie_notes === 'string' ? d.ozzie_notes : '';
+  return `${notes} (Nudged slightly to match your pace zone.)`;
+}
+
 export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { days: PlanDay[]; changed: string[] } {
   const changed: string[] = [];
 
@@ -107,34 +137,34 @@ export function validateAndClamp(days: PlanDay[], envelope: EnvelopeLike): { day
   });
 
   // (b) clamp pace into the band by scaling distance for the fixed duration.
-  // paceZoneForSession picks the applicable pace zone per day's session_type
-  // (single-sport zones clamp only their own type; a triathlon composite routes
-  // swim/run to their sub-zone and leaves bike/lift/cross unclamped). Runs after
-  // polarization so a demoted session is clamped into the band matching its
-  // FINAL (post-demotion) intensity.
+  // Hyrox compromised-run sessions clamp against envelope.hyrox's own band (already
+  // sec/km, perKm=1) instead of paceZoneForSession/bandFor's per-intensity tables —
+  // hyroxGuidance() tags these session_type:"hyrox" specifically, so they never match
+  // paceZoneForSession's sessionType==='run' check even though a Hyrox athlete's
+  // zones.kind IS 'run' (their compromised-run pace is deliberately slower than open-
+  // run pace, so clamping against the run band would be wrong anyway — see the design
+  // spec). Everything else routes through the existing per-sport pace-zone path,
+  // unchanged. Runs after polarization so a demoted session is clamped into the band
+  // matching its FINAL (post-demotion) intensity.
   const z = envelope.zones;
+  const hyroxBand = envelope.hyrox?.compromisedRunSplitSecPerKm;
   out = out.map((d) => {
+    if (d.session_type === 'hyrox' && hyroxBand && d.planned_minutes && d.planned_distance_km) {
+      const result = clampToDistanceBand(d.planned_minutes, d.planned_distance_km, hyroxBand, 1);
+      if (result) {
+        changed.push(`day${d.dayOffset}: pace ${Math.round(result.implied)}→${Math.round(result.target)} (hyrox)`);
+        return { ...d, planned_distance_km: result.distanceKm, ozzie_notes: withClampNote(d) };
+      }
+      return d;
+    }
     const pz = paceZoneForSession(z, d.session_type);
     if (pz && d.planned_minutes && d.planned_distance_km) {
-      const perKm = KIND_UNIT_PER_KM[pz.kind];
       const band = bandFor(d.intensity, pz);
       if (band) {
-        const implied = (d.planned_minutes * 60) / (d.planned_distance_km * perKm);
-        const target = Math.min(band.max, Math.max(band.min, implied));
-        if (target !== implied) {
-          const newKm = (d.planned_minutes * 60) / (target * perKm);
-          // Round toward the safe side of whichever edge we clamped to.
-          // Plain round-to-nearest can overshoot back across the edge (e.g.
-          // rounding distance up also speeds up the recomputed pace, which
-          // can undershoot a band.min floor by a couple of seconds/mile) —
-          // floor when we clamped up to band.min (less distance -> slower,
-          // stays >= min), ceil when we clamped down to band.max (more
-          // distance -> faster, stays <= max).
-          const roundedKm = target === band.min
-            ? Math.floor(newKm * 10) / 10
-            : Math.ceil(newKm * 10) / 10;
-          changed.push(`day${d.dayOffset}: pace ${Math.round(implied)}→${Math.round(target)} (${pz.kind})`);
-          return { ...d, planned_distance_km: roundedKm };
+        const result = clampToDistanceBand(d.planned_minutes, d.planned_distance_km, band, KIND_UNIT_PER_KM[pz.kind]);
+        if (result) {
+          changed.push(`day${d.dayOffset}: pace ${Math.round(result.implied)}→${Math.round(result.target)} (${pz.kind})`);
+          return { ...d, planned_distance_km: result.distanceKm, ozzie_notes: withClampNote(d) };
         }
       }
     }

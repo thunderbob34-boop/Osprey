@@ -281,3 +281,72 @@ Deno.test('guardrail leaves a comp lift with orm=0 untouched (partial-provide li
   assertEquals((out[0] as any).lift_prescription.exercises[0].loadKg, 60); // bench orm=0 → not clamped into [0,0]
   assertEquals(changed.length, 0);
 });
+
+const hyroxEnvelope = {
+  hardSessionShareMax: 0.2,
+  zones: { kind: 'run', thresholdSecPerMile: 450,
+    bands: { easy: { min: 510, max: 570 }, marathonPace: { min: 465, max: 480 }, tenKPace: { min: 435, max: 445 }, fiveKPace: { min: 420, max: 430 } } },
+  fuel: {
+    dailyCarbGByDayType: { easy: { min: 210, max: 350 }, moderate: { min: 350, max: 490 }, high: { min: 560, max: 700 }, peak: { min: 700, max: 840 } },
+    proteinG: { min: 112, max: 154 },
+    longSessionCarbGPerHour: 60,
+  },
+  hyrox: { compromisedRunSplitSecPerKm: { min: 390, max: 420 } },
+};
+
+Deno.test('hyrox: in-band compromised-run pace is left untouched', () => {
+  // 5 km in 34 min => 2040s/5km = 408 s/km, inside [390, 420].
+  const day = { dayOffset: 0, session_type: 'hyrox', intensity: 'threshold', planned_minutes: 34, planned_distance_km: 5 };
+  const { days, changed } = validateAndClamp([day], hyroxEnvelope as never);
+  assertEquals(days[0].planned_distance_km, 5);
+  assertEquals(changed.length, 0);
+});
+
+Deno.test('hyrox: implied-too-fast compromised-run clamps up into the band (floor branch)', () => {
+  // 5 km in 30 min => 1800s/5km = 360 s/km, faster than the band min (390). Even though
+  // this athlete's zones.kind is 'run' (a real RunZone with an easy band of 510-570
+  // sec/MILE), the result below must land in the hyrox band (sec/KM), never the run one —
+  // proving the hyrox branch takes priority over paceZoneForSession, which never matches
+  // session_type 'hyrox' in the first place.
+  const day = { dayOffset: 0, session_type: 'hyrox', intensity: 'threshold', planned_minutes: 30, planned_distance_km: 5 };
+  const { days, changed } = validateAndClamp([day], hyroxEnvelope as never);
+  const implied = (days[0].planned_minutes! * 60) / days[0].planned_distance_km!; // sec/km directly, no unit conversion
+  assert(implied >= 390 && implied <= 421, `implied ${implied} not in compromised-run band`);
+  assert(changed.some((c) => c.includes('hyrox')), `expected a 'hyrox' entry in changed, got: ${JSON.stringify(changed)}`);
+});
+
+Deno.test('hyrox: implied-too-slow compromised-run clamps down into the band (ceil branch)', () => {
+  // 3 km in 25 min => 1500s/3km = 500 s/km, slower than the band max (420).
+  const day = { dayOffset: 0, session_type: 'hyrox', intensity: 'threshold', planned_minutes: 25, planned_distance_km: 3 };
+  const { days, changed } = validateAndClamp([day], hyroxEnvelope as never);
+  const implied = (days[0].planned_minutes! * 60) / days[0].planned_distance_km!; // sec/km directly
+  assert(implied >= 390 && implied <= 420, `implied ${implied} not in compromised-run band`);
+  assert(changed.some((c) => c.includes('hyrox')), `expected a 'hyrox' entry in changed, got: ${JSON.stringify(changed)}`);
+});
+
+Deno.test("hyrox: with no envelope.hyrox band, a hyrox session is left untouched (matches today's behavior)", () => {
+  const noHyroxEnvelope = { ...hyroxEnvelope, hyrox: undefined };
+  const day = { dayOffset: 0, session_type: 'hyrox', intensity: 'threshold', planned_minutes: 30, planned_distance_km: 5 };
+  const { days, changed } = validateAndClamp([day], noHyroxEnvelope as never);
+  assertEquals(days[0].planned_distance_km, 5);
+  assertEquals(changed.length, 0);
+});
+
+Deno.test('hyrox clamp appends the clarifier note to ozzie_notes', () => {
+  const day = { dayOffset: 0, session_type: 'hyrox', intensity: 'threshold', planned_minutes: 30, planned_distance_km: 5, ozzie_notes: 'Compromised running today.' };
+  const { days } = validateAndClamp([day], hyroxEnvelope as never);
+  assertEquals(days[0].ozzie_notes, 'Compromised running today. (Nudged slightly to match your pace zone.)');
+});
+
+Deno.test('an existing run-clamp also appends the clarifier note to ozzie_notes', () => {
+  const day = { dayOffset: 0, session_type: 'run', intensity: 'easy', planned_minutes: 40, planned_distance_km: 10, ozzie_notes: 'Building your base.' };
+  const { days } = validateAndClamp([day], envelope as never);
+  assertEquals(days[0].ozzie_notes, 'Building your base. (Nudged slightly to match your pace zone.)');
+});
+
+Deno.test('no clamp fires => ozzie_notes is untouched (no clarifier appended)', () => {
+  // A bike session is never pace-clamped (prompt-only), so its notes must survive verbatim.
+  const day = { dayOffset: 0, session_type: 'bike', intensity: 'threshold', planned_minutes: 60, planned_distance_km: 30, ozzie_notes: 'Steady-state endurance ride.' };
+  const { days } = validateAndClamp([day], cyclingEnvelope as never);
+  assertEquals(days[0].ozzie_notes, 'Steady-state endurance ride.');
+});
