@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import * as web from '../src/lib/strength-loads';
 import { buildStrengthPrescription, prilepinRange, attemptSelector } from '../src/lib/strength-loads';
 import { buildStrengthPrescription as mobileBuild } from '../../OSPREY-app/src/services/coaching/strength';
-import { intensityZoneForPercent1RM as mZone, INTENSITY_ZONES as mZones, prilepinRange as mobilePrilepin, attemptSelector as mobileAttempt } from '../../OSPREY-app/src/services/calculators/powerlifting';
+import { intensityZoneForPercent1RM as mZone, INTENSITY_ZONES as mZones, prilepinRange as mobilePrilepin, attemptSelector as mobileAttempt, powerliftingDailyNutrition as mobilePowerliftingNutrition } from '../../OSPREY-app/src/services/calculators/powerlifting';
 
 describe('strength-loads parity + loads', () => {
   it('intensityZoneForPercent1RM matches OSPREY-app across the range', () => {
@@ -64,5 +64,16 @@ describe('buildStrengthPrescription parity (webapp port === OSPREY-app original)
     const webResult = buildStrengthPrescription({ sport: 'lift', phase: 'Base', bodyWeightKg: 82, strengthParams });
     const mobileResult = mobileBuild({ sport: 'lift', phase: 'Base', bodyWeightKg: 82, strengthParams } as any);
     expect(webResult).toEqual(mobileResult);
+  });
+});
+
+// If this ever fails, the webapp port has DRIFTED from the mobile source of
+// truth. Re-sync powerliftingDailyNutrition in webapp/src/lib/strength-loads.ts
+// to the OSPREY-app original.
+describe('powerliftingDailyNutrition parity (webapp port === OSPREY-app original)', () => {
+  it('matches mobile across representative body weights', () => {
+    for (const bodyWeightKg of [55, 75, 95]) {
+      expect(web.powerliftingDailyNutrition(bodyWeightKg)).toEqual(mobilePowerliftingNutrition(bodyWeightKg));
+    }
   });
 });

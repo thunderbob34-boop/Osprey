@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import * as web from '../src/lib/hyrox-loads';
 import { buildHyroxPrescription } from '../src/lib/hyrox-loads';
 import { buildHyroxPrescription as mobileBuild } from '../../OSPREY-app/src/services/coaching/hyrox';
-import { predictCompromisedRunSplit as mSplit, hyroxStationWeights as mW } from '../../OSPREY-app/src/services/calculators/hyrox';
+import { predictCompromisedRunSplit as mSplit, hyroxStationWeights as mW, hyroxDailyNutrition as mobileHyroxNutrition, hyroxInRaceCarbGPerHour as mobileHyroxCarbPerHour } from '../../OSPREY-app/src/services/calculators/hyrox';
 
 describe('hyrox-loads parity', () => {
   it('compromised split matches OSPREY-app', () => {
@@ -54,5 +54,22 @@ describe('buildHyroxPrescription parity (webapp port === OSPREY-app original)', 
     const webResult = buildHyroxPrescription(input);
     const mobileResult = mobileBuild({ ...input, selfReportAnchor: null } as any);
     expect(webResult).toEqual(mobileResult);
+  });
+});
+
+// If this ever fails, the webapp port has DRIFTED from the mobile source of
+// truth. Re-sync hyroxDailyNutrition/hyroxInRaceCarbGPerHour in
+// webapp/src/lib/hyrox-loads.ts to the OSPREY-app originals.
+describe('hyroxDailyNutrition + hyroxInRaceCarbGPerHour parity (webapp port === OSPREY-app original)', () => {
+  it('hyroxDailyNutrition matches mobile across representative body weights', () => {
+    for (const bodyWeightKg of [55, 75, 95]) {
+      expect(web.hyroxDailyNutrition(bodyWeightKg)).toEqual(mobileHyroxNutrition(bodyWeightKg));
+    }
+  });
+
+  it('hyroxInRaceCarbGPerHour matches mobile across both branches (60min under the 75-min threshold, 90min over it)', () => {
+    for (const raceDurationMinutes of [60, 90]) {
+      expect(web.hyroxInRaceCarbGPerHour(raceDurationMinutes)).toEqual(mobileHyroxCarbPerHour(raceDurationMinutes));
+    }
   });
 });
