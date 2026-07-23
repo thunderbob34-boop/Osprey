@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import * as web from '../src/lib/crossfit-zones';
 import { buildCrossfitPrescription } from '../src/lib/crossfit-zones';
-import { ENERGY_SYSTEM_ZONES as mES, CROSSFIT_BENCHMARKS as mB, franTier as mFran } from '../../OSPREY-app/src/services/calculators/crossfit';
+import { ENERGY_SYSTEM_ZONES as mES, CROSSFIT_BENCHMARKS as mB, franTier as mFran, crossfitDailyNutrition as mobileCrossfitNutrition } from '../../OSPREY-app/src/services/calculators/crossfit';
 import { buildCrossfitPrescription as mobileBuild } from '../../OSPREY-app/src/services/coaching/crossfit';
 
 describe('crossfit-zones parity + loads', () => {
@@ -48,5 +48,16 @@ describe('buildCrossfitPrescription parity (webapp port === OSPREY-app original)
     const crossfitParams = { oneRepMaxKg: { backSquat: null, deadlift: null, press: null }, competing: false, franSec: null };
     const input = { sport: 'crossfit', phase: 'Build' as const, crossfitParams };
     expect(buildCrossfitPrescription(input)).toEqual(mobileBuild(input as any));
+  });
+});
+
+// If this ever fails, the webapp port has DRIFTED from the mobile source of
+// truth. Re-sync crossfitDailyNutrition in webapp/src/lib/crossfit-zones.ts
+// to the OSPREY-app original.
+describe('crossfitDailyNutrition parity (webapp port === OSPREY-app original)', () => {
+  it('matches mobile across representative body weights', () => {
+    for (const bodyWeightKg of [55, 75, 95]) {
+      expect(web.crossfitDailyNutrition(bodyWeightKg)).toEqual(mobileCrossfitNutrition(bodyWeightKg));
+    }
   });
 });
