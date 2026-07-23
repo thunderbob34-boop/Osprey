@@ -316,12 +316,12 @@ export function useDisplayEnvelope(): DisplayEnvelope | null {
 - [ ] **Step 4: Run tests to verify they pass**
 
 Run: `cd OSPREY-app && TZ=Asia/Kolkata npx jest src/hooks/__tests__/useDisplayEnvelope.test.ts`
-Expected: PASS, 14 tests.
+Expected: PASS, 15 tests. (Plan-writing undercounted this block-by-block: "wiring" has 5 cases not 4, "hyrox/crossfit threading" has 4 not 3 — 4+5+2+4=15. Trust the actual count from the run, not this number, if they ever diverge again.)
 
 - [ ] **Step 5: Run the full suite to confirm nothing else broke**
 
 Run: `cd OSPREY-app && TZ=Asia/Kolkata npx jest`
-Expected: PASS, 43 test suites (42 existing + this one), 396 tests (382 existing + 14 new).
+Expected: PASS, 43 test suites (42 existing + this one), 397 tests (382 existing + 15 new).
 
 - [ ] **Step 6: Commit**
 
@@ -432,7 +432,7 @@ This file has no import of the hook itself (it only shares the query-cache key b
 - [ ] **Step 7: Run the full suite**
 
 Run: `cd OSPREY-app && TZ=Asia/Kolkata npx jest`
-Expected: PASS, 43 test suites, 396 tests — in particular `src/screens/__tests__/DailySummary.test.tsx` and `app/__tests__/plan-preview.test.tsx` (the only two of these six files with dedicated test coverage) stay green with zero test-file changes, proving the rename didn't alter behavior.
+Expected: PASS, 43 test suites, 397 tests — in particular `src/screens/__tests__/DailySummary.test.tsx` and `app/__tests__/plan-preview.test.tsx` (the only two of these six files with dedicated test coverage) stay green with zero test-file changes, proving the rename didn't alter behavior.
 
 - [ ] **Step 8: Typecheck**
 
@@ -696,7 +696,7 @@ Expected: PASS, 8 tests.
 - [ ] **Step 7: Run the full suite + typecheck**
 
 Run: `cd OSPREY-app && TZ=Asia/Kolkata npx jest && npx tsc --noEmit`
-Expected: PASS, 44 test suites, 404 tests. No typecheck errors — confirms nothing else still imports the deleted `useDisplayZones.ts`.
+Expected: PASS, 44 test suites, 405 tests (397 after Task 2 + 8 new). No typecheck errors — confirms nothing else still imports the deleted `useDisplayZones.ts`.
 
 - [ ] **Step 8: Commit**
 
@@ -932,7 +932,7 @@ Expected: PASS, 5 tests.
 - [ ] **Step 5: Run the full suite + typecheck**
 
 Run: `cd OSPREY-app && TZ=Asia/Kolkata npx jest && npx tsc --noEmit`
-Expected: PASS, 45 test suites, 409 tests. No typecheck errors.
+Expected: PASS, 45 test suites, 410 tests (405 after Task 3 + 5 new). No typecheck errors.
 
 - [ ] **Step 6: Commit**
 
@@ -1399,7 +1399,7 @@ Expected: PASS, 12 tests (5 from Task 4 + 7 new).
 - [ ] **Step 9: Run the full suite + typecheck**
 
 Run: `cd OSPREY-app && TZ=Asia/Kolkata npx jest && npx tsc --noEmit`
-Expected: PASS, 46 test suites, 429 tests (409 after Task 4 + 13 new selector tests + 7 new screen tests — recount exactly from the actual run, this is the expected arithmetic). No typecheck errors.
+Expected: PASS, 46 test suites, 430 tests (410 after Task 4 + 13 new selector tests + 7 new screen tests — recount exactly from the actual run; this plan has already had two count-arithmetic slips caught only after the fact, so treat every "Expected" count in this document as a sanity check to verify against the real run, not a number to trust blindly). No typecheck errors.
 
 - [ ] **Step 10: Commit**
 
@@ -1442,7 +1442,7 @@ In `OSPREY-app/app/(tabs)/settings.tsx`, insert immediately after the "Training 
 - [ ] **Step 2: Run the full suite + typecheck**
 
 Run: `cd OSPREY-app && TZ=Asia/Kolkata npx jest && npx tsc --noEmit`
-Expected: PASS, same 46 test suites, 429 tests (settings.tsx has no dedicated test file, so this is a compile-only check). No typecheck errors.
+Expected: PASS, same 46 test suites, 430 tests (settings.tsx has no dedicated test file, so this is a compile-only check). No typecheck errors.
 
 - [ ] **Step 3: Commit**
 
