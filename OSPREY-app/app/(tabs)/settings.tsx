@@ -563,6 +563,20 @@ export default function SettingsTab() {
             <Text style={styles.chevron}>›</Text>
           </TouchableOpacity>
 
+          <View style={styles.rowDivider} />
+          <TouchableOpacity
+            style={styles.planRow}
+            onPress={() => router.push('/your-numbers')}
+            accessibilityRole="button"
+            accessibilityLabel="Your numbers"
+          >
+            <View style={styles.planRowLeft}>
+              <Text style={styles.cardValue}>Your Numbers</Text>
+              <Text style={styles.planRowSub}>Working loads, fuel targets, and your full prescription</Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
+          </TouchableOpacity>
+
           {blueprintSport(goal?.primaryGoal ?? '') != null ||
           (goal?.primaryGoal as PrimaryGoalEnum | undefined) === 'triathlon' ? (
             <>
