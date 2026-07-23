@@ -1,12 +1,14 @@
 jest.mock('@/hooks/useDisplayEnvelope', () => ({ useDisplayEnvelope: jest.fn() }));
-jest.mock('@/hooks/useTrainingGoal', () => ({ useTrainingGoal: jest.fn(() => ({ data: { primaryGoal: 'run' } })) }));
+jest.mock('@/hooks/useTrainingGoal', () => ({ useTrainingGoal: jest.fn() }));
 jest.mock('@/hooks/useUnitPreference', () => ({ useUnitPreference: () => ({ units: 'imperial' }) }));
 
 import { renderWithProviders as render, screen } from '@/test-utils/render';
 import YourNumbersScreen from '@/../app/your-numbers';
 import { useDisplayEnvelope, type DisplayEnvelope } from '@/hooks/useDisplayEnvelope';
+import { useTrainingGoal } from '@/hooks/useTrainingGoal';
 
 const mockDisplay = useDisplayEnvelope as jest.Mock;
+const mockGoal = useTrainingGoal as jest.Mock;
 
 function envelope(overrides: Partial<DisplayEnvelope>): DisplayEnvelope {
   return {
@@ -35,6 +37,10 @@ function envelope(overrides: Partial<DisplayEnvelope>): DisplayEnvelope {
     ...overrides,
   };
 }
+
+beforeEach(() => {
+  mockGoal.mockReturnValue({ data: { primaryGoal: 'run' } });
+});
 
 describe('YourNumbersScreen — training context + fuel (every sport)', () => {
   it('renders a loading state when the envelope has not resolved yet', () => {
@@ -69,5 +75,102 @@ describe('YourNumbersScreen — training context + fuel (every sport)', () => {
     mockDisplay.mockReturnValue(envelope({ sport: 'lift', fuel: { ...envelope({}).fuel, longSessionCarbGPerHour: 0 } }));
     render(<YourNumbersScreen />);
     expect(screen.queryByText(/g\/hr/)).toBeNull();
+  });
+});
+
+describe('YourNumbersScreen — Strength section', () => {
+  it('shows an empty state for a paramless lifter', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'lift' } });
+    mockDisplay.mockReturnValue(envelope({ sport: 'lift', strength: null }));
+    render(<YourNumbersScreen />);
+    expect(screen.getByText(/enter your squat, bench, and deadlift 1RMs/)).toBeTruthy();
+  });
+
+  it('shows working loads, zone, Prilepin, and fat target for a real lifter', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'lift' } });
+    mockDisplay.mockReturnValue(envelope({
+      sport: 'lift',
+      strength: {
+        oneRepMaxKg: { squat: 140, bench: 100, deadlift: 180 },
+        workingPercent1RM: 80,
+        zone: { name: 'Strength-Volume', percent1RM: [75, 85], reps: [3, 6], rpe: [7, 8], rir: [2, 3] },
+        prilepin: { repsPerSet: [2, 4], totalReps: [10, 20] },
+        fatG: { min: 56, max: 105 },
+        attempts: null,
+      },
+    }));
+    render(<YourNumbersScreen />);
+    expect(screen.getByText('Strength-Volume · 80% 1RM')).toBeTruthy();
+    // Working load = round(140 * 80 / 100) = 112kg. Imperial units, so the
+    // screen shows formatWeightKg(112, 'imperial') = `${kgToLb(112)} lbs`.
+    // kgToLb(112) = round(112 * 2.2046226218 * 10) / 10 = 246.9.
+    expect(screen.getByText('246.9 lbs')).toBeTruthy();
+  });
+});
+
+describe('YourNumbersScreen — Hyrox section', () => {
+  it('shows an empty state without a division', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'hyrox' } });
+    mockDisplay.mockReturnValue(envelope({ sport: 'hyrox', hyrox: null }));
+    render(<YourNumbersScreen />);
+    expect(screen.getByText(/pick your division/)).toBeTruthy();
+  });
+
+  it('shows division, station weights, and compromised pace', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'hyrox' } });
+    mockDisplay.mockReturnValue(envelope({
+      sport: 'hyrox',
+      hyrox: {
+        division: 'open_men',
+        compromisedRunSplitSecPerKm: { min: 295, max: 310 },
+        stationWeights: { sledPushKg: 152, sledPullKg: 103, farmersCarryPerHandKg: 24, sandbagLungesKg: 20, wallBallKg: 6 },
+        sodiumMgPerHour: { min: 500, max: 1000 },
+        caffeineMg: { min: 210, max: 420 },
+      },
+    }));
+    render(<YourNumbersScreen />);
+    expect(screen.getByText('Open Men')).toBeTruthy();
+    expect(screen.getByText('Sled push')).toBeTruthy();
+    expect(screen.getByText(/4:55.*5:10\/km/)).toBeTruthy();
+  });
+});
+
+describe('YourNumbersScreen — CrossFit section', () => {
+  it('shows an empty state without goal params', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'crossfit' } });
+    mockDisplay.mockReturnValue(envelope({ sport: 'crossfit', crossfit: null }));
+    render(<YourNumbersScreen />);
+    expect(screen.getByText(/enter your CrossFit numbers/)).toBeTruthy();
+  });
+
+  it('shows strength loads, energy systems, and Fran tier', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'crossfit' } });
+    mockDisplay.mockReturnValue(envelope({
+      sport: 'crossfit',
+      crossfit: {
+        strengthLoadsKg: { backSquat: 109, deadlift: 140, press: 47 },
+        workingPercent1RM: 78,
+        zoneName: 'Hypertrophy',
+        energySystems: [
+          { system: 'Phosphagen / alactic', minDurationSec: 0, maxDurationSec: 15, workToRest: '1:5-1:10', purpose: 'Power, speed' },
+        ],
+        benchmark: { name: 'Fran', timeDomain: 'short', athleteFranSec: 200, franTier: 'intermediate' },
+      },
+    }));
+    render(<YourNumbersScreen />);
+    expect(screen.getByText('Phosphagen / alactic')).toBeTruthy();
+    expect(screen.getByText('Fran')).toBeTruthy();
+    expect(screen.getByText('Intermediate')).toBeTruthy();
+  });
+});
+
+describe('YourNumbersScreen — endurance sports show no sport-specific section', () => {
+  it('renders no Strength/Hyrox/CrossFit heading for a run goal', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'run' } });
+    mockDisplay.mockReturnValue(envelope({ sport: 'run' }));
+    render(<YourNumbersScreen />);
+    expect(screen.queryByText('STRENGTH')).toBeNull();
+    expect(screen.queryByText('HYROX')).toBeNull();
+    expect(screen.queryByText('CROSSFIT')).toBeNull();
   });
 });
