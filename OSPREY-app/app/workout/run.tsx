@@ -18,7 +18,7 @@ import OzzieAvatar from '@/components/OzzieAvatar';
 import RunMap from '@/components/RunMap';
 import SessionTargetStrip from '@/components/SessionTargetStrip';
 import { useRunTracking } from '@/hooks/useRunTracking';
-import { useDisplayZones } from '@/hooks/useDisplayZones';
+import { useDisplayEnvelope } from '@/hooks/useDisplayEnvelope';
 import {
   useWorkoutStore,
   getElapsedSeconds,
@@ -86,7 +86,7 @@ export default function RunWorkoutScreen() {
   // What the engine prescribed. Shown for every planned session, unlike the
   // interval card below, which only exists on the few that have intervals.
   const [sessionTarget, setSessionTarget] = useState<SessionTarget | null>(null);
-  const displayZones = useDisplayZones();
+  const displayZones = useDisplayEnvelope();
 
   // Structured in-run guidance (Ozzie-prescribed intervals for today's session)
   const [intervalSteps, setIntervalSteps] = useState<IntervalStep[] | null>(null);

@@ -18,7 +18,7 @@ import type { DailySummaryProps, TrainingReadiness } from '@/types/daily-summary
 import NutritionCard from '@/components/NutritionCard';
 import OzzieAvatar from '@/components/OzzieAvatar';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
-import { useDisplayZones } from '@/hooks/useDisplayZones';
+import { useDisplayEnvelope } from '@/hooks/useDisplayEnvelope';
 import { formatDistanceKm, kmToMiles } from '@/services/units';
 import { sessionPaceBand } from '@/services/session-pace';
 import { Card, Badge, Button } from '@/components/ui';
@@ -104,7 +104,7 @@ export default function DailySummaryScreen({
   const weekProgress = weekTargetKm ? Math.min(1, weekDistanceKm / weekTargetKm) : 0;
   const greeting = getGreeting();
   const { units } = useUnitPreference();
-  const displayZones = useDisplayZones();
+  const displayZones = useDisplayEnvelope();
   const paceBand = sessionPaceBand(session.intensity, displayZones?.zones ?? null, units);
 
   const [whyExpanded, setWhyExpanded] = useState(false);

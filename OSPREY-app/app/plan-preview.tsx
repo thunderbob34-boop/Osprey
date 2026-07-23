@@ -18,7 +18,7 @@ import { Theme, Radius, EffortPalette, IntensityPalette } from '@/constants/them
 import { Card, Button } from '@/components/ui';
 import { ZonesCard } from '@/components/ZonesCard';
 import { SESSION_ICON, SESSION_ICON_FALLBACK } from '@/constants/session-icons';
-import { useDisplayZones } from '@/hooks/useDisplayZones';
+import { useDisplayEnvelope } from '@/hooks/useDisplayEnvelope';
 import { intensityZoneLabel, sessionPaceBand } from '@/services/session-pace';
 import type { ZoneSet } from '@/services/coaching/zones';
 import { useAuthStore } from '@/store/authStore';
@@ -277,7 +277,7 @@ export default function PlanPreviewScreen() {
   const { units } = useUnitPreference();
   // Same zones ZonesCard renders below, so the schedule rows and the zones
   // card can't state different paces for the same intensity.
-  const displayZones = useDisplayZones();
+  const displayZones = useDisplayEnvelope();
 
   useEffect(() => {
     if (!isViewOnly || !userId) return;

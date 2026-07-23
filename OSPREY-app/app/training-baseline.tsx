@@ -10,7 +10,7 @@ import { TimeRow, NumberField } from '@/components/BaselineInputs';
 import { useAuthStore } from '@/store/authStore';
 import { useTrainingGoal } from '@/hooks/useTrainingGoal';
 import { useThresholdAnchor, useUpdateThresholdAnchor } from '@/hooks/useThresholdAnchor';
-import { useDisplayZones } from '@/hooks/useDisplayZones';
+import { useDisplayEnvelope } from '@/hooks/useDisplayEnvelope';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { supabase, extractFunctionErrorMessage } from '@/services/supabase';
 import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
@@ -50,7 +50,7 @@ export default function TrainingBaselineScreen() {
   const userId = useAuthStore((s) => s.user?.id);
   const { data: goal, isLoading: goalLoading } = useTrainingGoal();
   const { units } = useUnitPreference();
-  const display = useDisplayZones();
+  const display = useDisplayEnvelope();
   const anchor = useThresholdAnchor();
   const update = useUpdateThresholdAnchor();
   const queryClient = useQueryClient();
@@ -82,7 +82,7 @@ export default function TrainingBaselineScreen() {
     },
     onSuccess: () => {
       setShowRebuildOffer(false);
-      queryClient.invalidateQueries({ queryKey: ['display-zones', userId] });
+      queryClient.invalidateQueries({ queryKey: ['display-envelope', userId] });
       queryClient.invalidateQueries({ queryKey: ['daily-summary'] });
       queryClient.invalidateQueries({ queryKey: ['calendar-month'] });
       queryClient.invalidateQueries({ queryKey: ['stats'] });

@@ -10,7 +10,7 @@ import { Theme, Radius, BorderWidth } from '@/constants/theme';
 import { Button } from '@/components/ui';
 import { usePlanAdaptation } from '@/hooks/usePlanAdaptation';
 import { useDailySummary } from '@/hooks/useDailySummary';
-import { useDisplayZones } from '@/hooks/useDisplayZones';
+import { useDisplayEnvelope } from '@/hooks/useDisplayEnvelope';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { routeForSession } from '@/services/session-route';
 import { sessionPaceBand } from '@/services/session-pace';
@@ -89,7 +89,7 @@ export default function WorkoutTab() {
   // Shares Home's react-query cache (same key), so this is a read, not a refetch.
   const { data: summary } = useDailySummary();
   const { units } = useUnitPreference();
-  const displayZones = useDisplayZones();
+  const displayZones = useDisplayEnvelope();
   // Only a real, startable planned session — a rest day or an unplanned day has
   // nothing to launch here, and the sport list below is the right answer then.
   const planned =

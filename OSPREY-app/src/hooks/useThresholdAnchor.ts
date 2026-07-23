@@ -38,13 +38,14 @@ export function useUpdateThresholdAnchor() {
       if (error) throw error;
       if (!data || data.length === 0) throw new Error('Could not save — no goals record found for your account.');
     },
-    // A saved/cleared anchor invalidates its own cache AND the derived display-zones
-    // cache (Task 2's key) — every other open/next-visited screen (Home, run screen,
-    // plan-preview) reflects the correction immediately, no restart needed.
+    // A saved/cleared anchor invalidates its own cache AND the derived
+    // display-envelope cache — every other open/next-visited screen (Home,
+    // run screen, plan-preview) reflects the correction immediately, no
+    // restart needed.
     onSuccess: () =>
       Promise.all([
         queryClient.invalidateQueries({ queryKey: ['threshold-anchor', userId] }),
-        queryClient.invalidateQueries({ queryKey: ['display-zones', userId] }),
+        queryClient.invalidateQueries({ queryKey: ['display-envelope', userId] }),
       ]),
   });
 }
