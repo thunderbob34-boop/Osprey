@@ -157,6 +157,38 @@ describe('YourNumbersScreen — Strength section', () => {
     expect(screen.getAllByText('Deadlift').length).toBe(2);
     expect(screen.getAllByText('Bench').length).toBe(1);
   });
+
+  it('shows the attempt row for a lift with a real goal-third even though that lift has no 1RM', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'lift' } });
+    mockDisplay.mockReturnValue(envelope({
+      sport: 'lift',
+      strength: {
+        oneRepMaxKg: { squat: 140, bench: 0, deadlift: 180 },
+        workingPercent1RM: 95,
+        zone: { name: 'Peak / Test', percent1RM: [93, 100], reps: [1, 1], rpe: [9, 10], rir: [0, 1] },
+        prilepin: { repsPerSet: [1, 1], totalReps: [1, 3] },
+        fatG: { min: 56, max: 105 },
+        attempts: {
+          squat: { opener: { min: 160.2, max: 163.8 }, second: { min: 171, max: 172.8 }, third: { min: 180, max: 183.6 } },
+          // Bench has NO 1RM (oneRepMaxKg.bench = 0 above) but a REAL goal-third was set —
+          // attemptSelector ran on a real, nonzero goalThirdKg despite oneRepMaxKg being 0
+          // for this lift. This is the exact case that discriminates the correct fix (gates
+          // on attempts[key].third.max) from the wrong one (gates on oneRepMaxKg[key]),
+          // which would incorrectly hide this row.
+          bench: { opener: { min: 106.8, max: 109.2 }, second: { min: 114, max: 115.2 }, third: { min: 120, max: 122.4 } },
+          deadlift: { opener: { min: 195.8, max: 200.2 }, second: { min: 209, max: 211.2 }, third: { min: 220, max: 224.4 } },
+        },
+      },
+    }));
+    render(<YourNumbersScreen />);
+    // Squat/Deadlift: real 1RM + real attempts -> label appears twice (working-load row + attempt row).
+    expect(screen.getAllByText('Squat').length).toBe(2);
+    expect(screen.getAllByText('Deadlift').length).toBe(2);
+    // Bench: NO 1RM (working-load row shows "Not set") but a REAL attempt plan -> label still
+    // appears twice, proving the attempt row is gated on attempts' own magnitude, not oneRepMaxKg.
+    expect(screen.getAllByText('Bench').length).toBe(2);
+    expect(screen.getByText('Not set')).toBeTruthy(); // Bench's working-load row, and the only "Not set" on this fixture
+  });
 });
 
 describe('YourNumbersScreen — Hyrox section', () => {
