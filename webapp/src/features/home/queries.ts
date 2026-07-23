@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
 import { toDateInputValue, localDayRange } from '../../lib/day';
 import { computeAtlCtlTsb, type DailyLoad, type LoadSeriesPoint } from '../../lib/fitness-load';
+import { buildEnvelope } from '../../lib/build-envelope';
 
 const DailySummaryRow = z.object({
   recovery_score: z.coerce.number().nullable(),
@@ -98,9 +99,10 @@ export function usePlanSync(userId: string) {
   return useQuery({
     queryKey: ['plan-sync', userId, todayISO],
     queryFn: async (): Promise<PlanSyncResult | null> => {
+      const envelope = await buildEnvelope(userId);
       const { data, error } = await supabase.functions.invoke('ozzie-generate-plan', {
         method: 'POST',
-        body: {},
+        body: envelope ? { envelope } : {},
       });
       if (error) throw error;
 

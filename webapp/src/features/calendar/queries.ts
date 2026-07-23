@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { z } from 'zod';
 import { supabase } from '../../lib/supabase';
 import { TrainingSessionSchema, RaceEventSchema } from '../../lib/schemas';
+import { buildEnvelope } from '../../lib/build-envelope';
 import { matchTuneUpWeeks, parseGoalDistanceFromText, type TuneUpWeek } from '../../lib/tuneups';
 import type { TrainingSession } from '../../lib/schemas';
 import { sessionUpdatePayload, type SessionEdits } from '../../lib/session-edit';
@@ -82,9 +83,10 @@ export function useBuildPlanForRace(userId: string) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (input: BuildPlanForRaceInput) => {
+      const envelope = await buildEnvelope(userId, { raceDate: input.raceDate, weeksOut: input.weeksOut });
       const { data, error } = await supabase.functions.invoke('ozzie-generate-plan', {
         method: 'POST',
-        body: { raceTarget: input, force: true },
+        body: { raceTarget: input, force: true, ...(envelope ? { envelope } : {}) },
       });
       if (error) throw error;
       return data;
