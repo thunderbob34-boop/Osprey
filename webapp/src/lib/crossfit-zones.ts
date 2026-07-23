@@ -3,6 +3,7 @@
 // Keep in sync; parity: tests/crossfit-zones.test.ts.
 import type { RacePhaseName } from './race-phase';
 import { intensityZoneForPercent1RM } from './strength-loads';
+import type { CrossfitGoalParams } from './goal-params';
 
 export interface EnergySystemZone {
   system: string;
@@ -58,5 +59,49 @@ export function crossfitStrengthLoads(
     workingPercent1RM: pct,
     zoneName: intensityZoneForPercent1RM(pct)?.name ?? 'Strength-Volume',
     loads: { backSquat: load(oneRepMaxKg.backSquat), deadlift: load(oneRepMaxKg.deadlift), press: load(oneRepMaxKg.press) },
+  };
+}
+
+export function crossfitDailyNutrition(bodyWeightKg: number) {
+  return {
+    carbG: { min: 4 * bodyWeightKg, max: 8 * bodyWeightKg },
+    proteinG: { min: 1.6 * bodyWeightKg, max: 2.2 * bodyWeightKg },
+  };
+}
+
+export interface CrossfitPrescription {
+  strengthLoadsKg: { backSquat: number; deadlift: number; press: number };
+  workingPercent1RM: number;
+  zoneName: string;
+  energySystems: EnergySystemZone[];
+  benchmark: { name: string; timeDomain: string; athleteFranSec: number | null; franTier: BenchmarkTier | null };
+}
+
+interface CrossfitPrescriptionInput {
+  sport: string;
+  phase: RacePhaseName;
+  crossfitParams?: CrossfitGoalParams | null;
+}
+
+// Ported from OSPREY-app/src/services/coaching/crossfit.ts's buildCrossfitPrescription.
+export function buildCrossfitPrescription(input: CrossfitPrescriptionInput): CrossfitPrescription | null {
+  if (input.sport !== 'crossfit') return null;
+  const p = input.crossfitParams;
+  if (!p) return null;
+  const pct = CROSSFIT_PHASE_PERCENT[input.phase];
+  const zone = intensityZoneForPercent1RM(pct);
+  const load = (orm: number | null) => (orm && orm > 0 ? Math.round((orm * pct) / 100) : 0);
+  const name = BENCHMARK_BY_PHASE[input.phase];
+  return {
+    strengthLoadsKg: { backSquat: load(p.oneRepMaxKg.backSquat), deadlift: load(p.oneRepMaxKg.deadlift), press: load(p.oneRepMaxKg.press) },
+    workingPercent1RM: pct,
+    zoneName: zone?.name ?? 'Strength-Volume',
+    energySystems: ENERGY_SYSTEM_ZONES,
+    benchmark: {
+      name,
+      timeDomain: CROSSFIT_BENCHMARKS.find((b) => b.name === name)?.timeDomain ?? 'short',
+      athleteFranSec: p.franSec,
+      franTier: p.franSec != null ? franTier(p.franSec) : null,
+    },
   };
 }
