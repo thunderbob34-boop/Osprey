@@ -75,6 +75,17 @@ describe('computeEnvelope parity (webapp port === OSPREY-app original, non-ultra
     const webInput = { ...emptyBase, sport: 'rowing', ...noSportParams };
     expect(webCompute(webInput)).toEqual(mobileCompute(mobileInput as any));
   });
+
+  it('matches with a fractional baselineLoad (mobile rounds it into scaledBaseline before targetWeeklyLoad)', () => {
+    // phase=Peak (non-1.0 factor) + prevWeekLoad=null (no progression cap to mask the
+    // rounding) is required for this case to actually distinguish Math.round(baselineLoad)
+    // from a raw baselineLoad: 305.5*1.1 rounds to 336, but Math.round(305.5)*1.1 rounds to
+    // 337 — the two only diverge once the fractional part survives to interact with a
+    // non-integer phase factor.
+    const mobileInput = { ...base, sport: 'run', phase: 'Peak' as const, prevWeekLoad: null, baselineLoad: 305.5, ultraParams: null, ...noSportParams };
+    const webInput = { ...base, sport: 'run', phase: 'Peak' as const, prevWeekLoad: null, baselineLoad: 305.5, ...noSportParams };
+    expect(webCompute(webInput)).toEqual(mobileCompute(mobileInput as any));
+  });
 });
 
 // computeEnvelope above calls resolveZones internally but discards its second return

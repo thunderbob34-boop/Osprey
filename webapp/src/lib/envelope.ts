@@ -127,7 +127,7 @@ export function resolveZones(input: EnvelopeInput): { zones: ZoneSet | null; zon
 
 export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
   const load = Math.round(targetWeeklyLoad({
-    baselineLoad: input.baselineLoad,
+    baselineLoad: Math.round(input.baselineLoad),
     phase: input.phase,
     weekNumber: input.weekNumber,
     prevWeekLoad: input.prevWeekLoad,
