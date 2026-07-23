@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { computeEnvelope as webCompute } from '../src/lib/envelope';
-import { computeEnvelope as mobileCompute } from '../../OSPREY-app/src/services/coaching/envelope';
+import { computeEnvelope as webCompute, resolveZones as webResolveZones } from '../src/lib/envelope';
+import { computeEnvelope as mobileCompute, resolveZones as mobileResolveZones } from '../../OSPREY-app/src/services/coaching/envelope';
 
 // If this test ever fails, the webapp port has DRIFTED from the mobile source
 // of truth (for every non-ultra sport — ultra is explicitly excluded).
@@ -74,5 +74,143 @@ describe('computeEnvelope parity (webapp port === OSPREY-app original, non-ultra
     const mobileInput = { ...emptyBase, sport: 'rowing', ultraParams: null, ...noSportParams };
     const webInput = { ...emptyBase, sport: 'rowing', ...noSportParams };
     expect(webCompute(webInput)).toEqual(mobileCompute(mobileInput as any));
+  });
+});
+
+// computeEnvelope above calls resolveZones internally but discards its second return
+// value (zonesConfidence), so the parity coverage above never exercises resolveZones'
+// confidence signal directly. This block calls resolveZones itself and asserts the FULL
+// { zones, zonesConfidence } return value, with inputs picked so each sport actually
+// lands on both 'measured' and 'estimated' — not just whichever value the shared `base`
+// object above happens to produce for it.
+describe('resolveZones confidence parity (webapp port === OSPREY-app original)', () => {
+  const base = {
+    phase: 'Build' as const,
+    weekNumber: 5,
+    totalWeeks: 12,
+    baselineLoad: 300,
+    prevWeekLoad: 280,
+    bestRunMiles: 6,
+    bestRunTimeS: 2700,
+    fitnessLevel: 'intermediate',
+    bodyWeightKg: 75,
+    rowingSplitSecPer500: 115,
+    selfReportAnchor: { thresholdSecPerMile: null, cssSecPer100: null, splitSecPer500: null, ftpWatts: null },
+    maxHR: 185,
+  };
+  const noAnchor = base.selfReportAnchor;
+  const noSportParams = { strengthParams: null, hyroxParams: null, crossfitParams: null };
+
+  it('run: tier-estimate fallback with no logged data and no self-report', () => {
+    const input = { ...base, sport: 'run', bestRunMiles: null, bestRunTimeS: null };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('estimated');
+  });
+
+  it('run: measured — derived from logged best-effort data, no self-report', () => {
+    const input = { ...base, sport: 'run' };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('measured');
+  });
+
+  it('run: measured — self-reported threshold, no logged data', () => {
+    const input = { ...base, sport: 'run', bestRunMiles: null, bestRunTimeS: null, selfReportAnchor: { ...noAnchor, thresholdSecPerMile: 420 } };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('measured');
+  });
+
+  it('swim: tier-estimate fallback with no self-report (swim has no logged-data path)', () => {
+    const input = { ...base, sport: 'swim' };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('estimated');
+  });
+
+  it('swim: measured — self-reported CSS', () => {
+    const input = { ...base, sport: 'swim', selfReportAnchor: { ...noAnchor, cssSecPer100: 90 } };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('measured');
+  });
+
+  it('rowing: tier-estimate fallback with no logged split and no self-report', () => {
+    const input = { ...base, sport: 'rowing', rowingSplitSecPer500: null };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('estimated');
+  });
+
+  it('rowing: measured — derived from a logged split, no self-report', () => {
+    const input = { ...base, sport: 'rowing' };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('measured');
+  });
+
+  it('rowing: measured — self-reported split overrides absent logged data', () => {
+    const input = { ...base, sport: 'rowing', rowingSplitSecPer500: null, selfReportAnchor: { ...noAnchor, splitSecPer500: 110 } };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('measured');
+  });
+
+  it('cycling: no FTP anywhere -> zones stay null and confidence stays estimated', () => {
+    const input = { ...base, sport: 'cycling' };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zones).toBeNull();
+    expect(result.zonesConfidence).toBe('estimated');
+  });
+
+  it('cycling: measured — self-reported FTP produces power zones', () => {
+    const input = { ...base, sport: 'cycling', selfReportAnchor: { ...noAnchor, ftpWatts: 220 } };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zones).not.toBeNull();
+    expect(result.zonesConfidence).toBe('measured');
+  });
+
+  it('triathlon: measured — every shown leg self-reported', () => {
+    const input = { ...base, sport: 'triathlon', selfReportAnchor: { thresholdSecPerMile: 420, cssSecPer100: 90, splitSecPer500: null, ftpWatts: 220 } };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('measured');
+  });
+
+  it('triathlon: estimated overall when the swim leg falls to tier, even with run self-reported', () => {
+    const input = {
+      ...base, sport: 'triathlon', bestRunMiles: null, bestRunTimeS: null,
+      selfReportAnchor: { ...noAnchor, thresholdSecPerMile: 420 },
+    };
+    const mobileInput = { ...input, ultraParams: null, ...noSportParams };
+    const webInput = { ...input, ...noSportParams };
+    const result = webResolveZones(webInput);
+    expect(result).toEqual(mobileResolveZones(mobileInput as any));
+    expect(result.zonesConfidence).toBe('estimated');
   });
 });
