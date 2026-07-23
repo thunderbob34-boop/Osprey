@@ -106,6 +106,57 @@ describe('YourNumbersScreen — Strength section', () => {
     // kgToLb(112) = round(112 * 2.2046226218 * 10) / 10 = 246.9.
     expect(screen.getByText('246.9 lbs')).toBeTruthy();
   });
+
+  it('shows attempt plans for every lift that has a real goal-third', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'lift' } });
+    mockDisplay.mockReturnValue(envelope({
+      sport: 'lift',
+      strength: {
+        oneRepMaxKg: { squat: 140, bench: 100, deadlift: 180 },
+        workingPercent1RM: 95,
+        zone: { name: 'Peak / Test', percent1RM: [93, 100], reps: [1, 1], rpe: [9, 10], rir: [0, 1] },
+        prilepin: { repsPerSet: [1, 2], totalReps: [4, 10] },
+        fatG: { min: 56, max: 105 },
+        attempts: {
+          squat: { opener: { min: 160.2, max: 163.8 }, second: { min: 171, max: 172.8 }, third: { min: 180, max: 183.6 } },
+          bench: { opener: { min: 106.8, max: 109.2 }, second: { min: 114, max: 115.2 }, third: { min: 120, max: 122.4 } },
+          deadlift: { opener: { min: 195.8, max: 200.2 }, second: { min: 209, max: 211.2 }, third: { min: 220, max: 224.4 } },
+        },
+      },
+    }));
+    render(<YourNumbersScreen />);
+    expect(screen.getByText('ATTEMPT PLAN')).toBeTruthy();
+    // 3 lifts each render an attempt row plus a working-load row -> "Squat"/"Bench"/"Deadlift" each appear twice
+    expect(screen.getAllByText('Squat').length).toBe(2);
+    expect(screen.getAllByText('Bench').length).toBe(2);
+    expect(screen.getAllByText('Deadlift').length).toBe(2);
+  });
+
+  it('omits the attempt row for a lift with no 1RM and no goal-third, even though other lifts have real attempts', () => {
+    mockGoal.mockReturnValue({ data: { primaryGoal: 'lift' } });
+    mockDisplay.mockReturnValue(envelope({
+      sport: 'lift',
+      strength: {
+        oneRepMaxKg: { squat: 140, bench: 0, deadlift: 180 },
+        workingPercent1RM: 95,
+        zone: { name: 'Peak / Test', percent1RM: [93, 100], reps: [1, 1], rpe: [9, 10], rir: [0, 1] },
+        prilepin: { repsPerSet: [1, 2], totalReps: [4, 10] },
+        fatG: { min: 56, max: 105 },
+        attempts: {
+          squat: { opener: { min: 160.2, max: 163.8 }, second: { min: 171, max: 172.8 }, third: { min: 180, max: 183.6 } },
+          bench: { opener: { min: 0, max: 0 }, second: { min: 0, max: 0 }, third: { min: 0, max: 0 } },
+          deadlift: { opener: { min: 195.8, max: 200.2 }, second: { min: 209, max: 211.2 }, third: { min: 220, max: 224.4 } },
+        },
+      },
+    }));
+    render(<YourNumbersScreen />);
+    expect(screen.getByText('ATTEMPT PLAN')).toBeTruthy();
+    // Squat and Deadlift each render twice (working-load row + attempt row); Bench renders only
+    // once (working-load row says "Not set" — no 1RM), since its attempt plan is all zeros.
+    expect(screen.getAllByText('Squat').length).toBe(2);
+    expect(screen.getAllByText('Deadlift').length).toBe(2);
+    expect(screen.getAllByText('Bench').length).toBe(1);
+  });
 });
 
 describe('YourNumbersScreen — Hyrox section', () => {

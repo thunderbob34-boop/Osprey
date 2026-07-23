@@ -185,7 +185,7 @@ function StrengthSection({ strength, units }: { strength: StrengthPrescription |
       {strength.attempts ? (
         <>
           <Text style={styles.subLabel}>ATTEMPT PLAN</Text>
-          {STRENGTH_LIFTS.map(({ key, label }) => {
+          {STRENGTH_LIFTS.filter(({ key }) => (strength.attempts![key].third.max ?? 0) > 0).map(({ key, label }) => {
             const plan = strength.attempts![key];
             return (
               <View key={key} style={styles.attemptBlock}>
