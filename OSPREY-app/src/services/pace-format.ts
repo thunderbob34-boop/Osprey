@@ -1,7 +1,7 @@
 import { formatMinSec, type Range } from '@/services/calculators/types';
 import type { UnitSystem } from '@/services/units';
 
-// Canonical mile↔km ratio (matches useDisplayZones.ts / services/units.ts).
+// Canonical mile↔km ratio (matches useDisplayEnvelope.ts / services/units.ts).
 export const MILES_PER_KM = 0.621371;
 // 100 yd = 91.44 m — swim pace/100yd is *faster* (fewer seconds) than /100m
 // because the pool distance is shorter, so this factor is < 1.

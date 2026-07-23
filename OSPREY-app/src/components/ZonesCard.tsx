@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius } from '@/constants/theme';
-import { useDisplayZones } from '@/hooks/useDisplayZones';
+import { useDisplayEnvelope } from '@/hooks/useDisplayEnvelope';
 import { useTrainingGoal } from '@/hooks/useTrainingGoal';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { rowsForZones } from '@/services/coaching/zone-rows';
@@ -10,16 +10,18 @@ import { blueprintSport } from '@/services/coaching/zones';
 import type { PrimaryGoalEnum } from '@/services/coaching/goal-map';
 
 /** Compact "Your zones" card for the plan-preview — renders nothing while the
- * hook is loading, for a `lift` goal, or on any read error (useDisplayZones
- * returns null in all three cases; there's no way to tell them apart here,
- * which is fine — "no card" is the correct display for all three). */
+ * hook is loading, on any read error, or for a `lift` goal (the only sport
+ * with no pace/power blueprint AND no HR-fallback use case — every other
+ * sport shows either real zones or the HR-bpm fallback card). Guards on
+ * `display.sport` rather than a separate useTrainingGoal() read so there's
+ * no race between the two hooks' load times. */
 export function ZonesCard(): JSX.Element | null {
-  const display = useDisplayZones();
+  const display = useDisplayEnvelope();
   const { data: goal } = useTrainingGoal();
   const { units } = useUnitPreference();
   const router = useRouter();
 
-  if (!display) return null;
+  if (!display || display.sport === 'lift') return null;
   const rows = rowsForZones(display.zones, display.hrZones, units);
   if (rows.length === 0) return null;
   const isEstimated = display.confidence === 'estimated';
