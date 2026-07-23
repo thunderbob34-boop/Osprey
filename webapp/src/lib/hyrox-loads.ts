@@ -1,5 +1,6 @@
 // Ported from OSPREY-app/src/services/calculators/hyrox.ts + coaching/hyrox.ts (compromised-split wrapper).
 // Keep in sync; parity: tests/hyrox-loads.test.ts.
+import { resolveRunningAnchor } from './anchor';
 
 export interface Range {
   min: number;
@@ -118,4 +119,71 @@ export function compromisedSplitFromThresholdMile(
   return predictCompromisedRunSplit(
     Math.round(thresholdSecPerMile * MILES_PER_KM),
   );
+}
+
+export function hyroxDailyNutrition(bodyWeightKg: number) {
+  return {
+    carbG: { min: 5 * bodyWeightKg, max: 8 * bodyWeightKg },
+    proteinG: { min: 1.6 * bodyWeightKg, max: 2.2 * bodyWeightKg },
+  };
+}
+
+export function hyroxInRaceCarbGPerHour(raceDurationMinutes: number): Range {
+  return raceDurationMinutes > 75 ? { min: 30, max: 60 } : { min: 0, max: 0 };
+}
+
+export function hyroxSodiumMgPerHour(): Range {
+  return { min: 500, max: 1000 };
+}
+
+export function hyroxCaffeineMg(bodyWeightKg: number): Range {
+  return { min: 3 * bodyWeightKg, max: 6 * bodyWeightKg };
+}
+
+// Mirrors OSPREY-app/src/services/coaching/hyrox-params.ts's HyroxGoalParams
+// shape but with a nullable `division` — webapp's own goal-params.ts
+// parseHyroxParams always returns an object (division:null when unset)
+// rather than mobile's toHyroxParams returning null outright.
+// buildHyroxPrescription's `division` check below handles both shapes
+// identically via optional chaining, so no adaptation is needed at the
+// build-envelope.ts call boundary beyond passing the parsed object through.
+export interface HyroxPrescriptionParams {
+  division: HyroxDivision | null;
+  targetTimeMinutes: number | null;
+}
+
+export interface HyroxPrescription {
+  division: HyroxDivision;
+  compromisedRunSplitSecPerKm: Range;
+  stationWeights: HyroxStationWeights;
+  sodiumMgPerHour: Range;
+  caffeineMg: Range;
+}
+
+interface HyroxPrescriptionInput {
+  sport: string;
+  bodyWeightKg: number;
+  hyroxParams?: HyroxPrescriptionParams | null;
+  selfReportAnchor?: { thresholdSecPerMile: number | null } | null;
+  bestRunMiles: number | null;
+  bestRunTimeS: number | null;
+  fitnessLevel: string;
+}
+
+// Ported from OSPREY-app/src/services/coaching/hyrox.ts's buildHyroxPrescription.
+export function buildHyroxPrescription(input: HyroxPrescriptionInput): HyroxPrescription | null {
+  if (input.sport !== 'hyrox') return null;
+  const division = input.hyroxParams?.division;
+  if (!division) return null;
+  const thresholdSecPerMile =
+    input.selfReportAnchor?.thresholdSecPerMile ??
+    resolveRunningAnchor({ bestRunMiles: input.bestRunMiles, bestRunTimeS: input.bestRunTimeS, fitnessLevel: input.fitnessLevel }).thresholdSecPerMile;
+  const thresholdSecPerKm = Math.round(thresholdSecPerMile * MILES_PER_KM);
+  return {
+    division,
+    compromisedRunSplitSecPerKm: predictCompromisedRunSplit(thresholdSecPerKm),
+    stationWeights: hyroxStationWeights(division),
+    sodiumMgPerHour: hyroxSodiumMgPerHour(),
+    caffeineMg: hyroxCaffeineMg(input.bodyWeightKg),
+  };
 }
