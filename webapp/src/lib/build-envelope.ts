@@ -65,6 +65,11 @@ export function resolveGoalInputs(dbGoal: string | null | undefined, goalParamsR
   };
 }
 
+// Extracted for direct test coverage of the ultra safety guard in buildEnvelope below.
+export function isUltraGoal(sport: string): boolean {
+  return sport === 'ultra';
+}
+
 interface EnvelopeInputs {
   sport: string;
   race: { targetDate: string; totalWeeksPlanned: number } | null;
@@ -163,7 +168,7 @@ export async function buildEnvelope(
   // (ultra is deliberately excluded from every parity test in this port). Return null and
   // let the caller post no envelope at all — exactly today's pre-this-plan behavior for
   // every webapp user, so this is not a regression for ultra athletes specifically.
-  if (goalInputs.sport === 'ultra') return null;
+  if (isUltraGoal(goalInputs.sport)) return null;
 
   let race = g?.target_date && g?.total_weeks_planned ? { targetDate: g.target_date, totalWeeksPlanned: g.total_weeks_planned } : null;
   // A brand-new race target hasn't been persisted to user_goals yet — this very

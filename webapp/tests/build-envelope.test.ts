@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { resolveGoalInputs } from '../src/lib/build-envelope';
+import { resolveGoalInputs, isUltraGoal } from '../src/lib/build-envelope';
 
 describe('resolveGoalInputs', () => {
   it('defaults to run when dbGoal is null, with no sport-specific params', () => {
@@ -32,5 +32,27 @@ describe('resolveGoalInputs', () => {
   it('parses crossfit params when goal_params is a real (even empty) object', () => {
     const result = resolveGoalInputs('crossfit', {});
     expect(result.crossfitParams).toEqual({ oneRepMaxKg: { backSquat: null, deadlift: null, press: null }, competing: false, franSec: null });
+  });
+});
+
+describe('isUltraGoal', () => {
+  it('returns true for ultra', () => {
+    expect(isUltraGoal('ultra')).toBe(true);
+  });
+
+  it('returns false for run', () => {
+    expect(isUltraGoal('run')).toBe(false);
+  });
+
+  it('returns false for lift', () => {
+    expect(isUltraGoal('lift')).toBe(false);
+  });
+
+  it('returns false for hyrox', () => {
+    expect(isUltraGoal('hyrox')).toBe(false);
+  });
+
+  it('returns false for crossfit', () => {
+    expect(isUltraGoal('crossfit')).toBe(false);
   });
 });
