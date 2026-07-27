@@ -106,6 +106,26 @@ export function currentWeekStartDate(now: Date = new Date()): string {
   return localDateString(monday);
 }
 
+/**
+ * Whether the athlete has an active training plan at all — independent of
+ * whether the current week has been materialized yet. fetchCurrentWeekSessions
+ * returns [] both for "never had a plan" and for "active plan, but this
+ * Monday's week hasn't been generated", and callers were treating the second
+ * case as the first.
+ */
+export async function fetchHasActivePlan(userId: string): Promise<boolean> {
+  const { data, error } = await supabase
+    .from('training_plans')
+    .select('id')
+    .eq('user_id', userId)
+    .eq('status', 'active')
+    .is('deleted_at', null)
+    .limit(1);
+
+  if (error) throw error;
+  return (data ?? []).length > 0;
+}
+
 /** The active plan's current week (Monday-start), sessions in date order. */
 export async function fetchCurrentWeekSessions(userId: string): Promise<WeekSession[]> {
   const weekStartStr = currentWeekStartDate();

@@ -77,6 +77,14 @@ export interface DailySummaryData {
   weekTargetKm?: number;
   quickStats: QuickStats;
   habitTip?: string | null;
+  /**
+   * True once a plan has ever been generated for this athlete — the same
+   * signal mapSession uses to tell "never had a plan" apart from "nothing
+   * scheduled today". Home's build-a-plan banner reads this rather than
+   * re-deriving it from today's session, so the two can't contradict each
+   * other on a rest day or a week the generator hasn't filled in yet.
+   */
+  hasEverPlanned: boolean;
 }
 
 export interface TrainingReadiness {

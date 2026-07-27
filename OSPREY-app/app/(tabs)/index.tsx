@@ -96,7 +96,15 @@ export default function HomeTab() {
     });
   }
 
-  const hasPlan = Boolean(data?.session?.sessionId);
+  // Two different questions, so two different flags. hasSessionToday gates
+  // actions that need a concrete session to act on (move indoors); hasPlan
+  // gates the "build your first plan" banner. Deriving the banner from
+  // today's session made Home offer a first-run CTA to athletes with an
+  // active plan any day the schedule was empty — a rest day, or a week the
+  // generator hadn't filled in yet — directly above a session card that
+  // correctly read "Nothing Scheduled / Open day".
+  const hasSessionToday = Boolean(data?.session?.sessionId);
+  const hasPlan = data?.hasEverPlanned ?? false;
   const alreadyIndoors = /\((Treadmill|Trainer|Indoor)\)/i.test(data?.session?.type ?? '');
 
   // The "Load" quick stat's own source (v_daily_summary.tsb) is permanently
@@ -129,6 +137,7 @@ export default function HomeTab() {
       weekDistanceKm={data?.weekDistanceKm}
       weekTargetKm={data?.weekTargetKm}
       habitTip={data?.habitTip}
+      hasEverPlanned={hasPlan}
       quickStats={quickStats}
       trainingReadiness={isPlus ? (perf?.trainingReadiness ?? null) : null}
       onActivityPress={() => router.push('/activity')}
@@ -145,7 +154,7 @@ export default function HomeTab() {
         weatherCoach ? (
           <WeatherCoachCard
             weather={weatherCoach}
-            onMoveIndoors={hasPlan ? handleMoveIndoors : undefined}
+            onMoveIndoors={hasSessionToday ? handleMoveIndoors : undefined}
             movingIndoors={moveIndoors.isPending}
             alreadyIndoors={alreadyIndoors}
           />
