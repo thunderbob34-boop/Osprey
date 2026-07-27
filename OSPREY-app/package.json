@@ -10,7 +10,7 @@
     "build:preview": "eas build --profile preview --platform ios",
     "build:prod": "eas build --profile production --platform ios",
     "submit:ios": "eas submit --platform ios",
-    "lint": "eslint src --ext .ts,.tsx",
+    "lint": "eslint src app --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "test": "TZ=Asia/Kolkata jest"
   },
