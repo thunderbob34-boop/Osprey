@@ -262,7 +262,7 @@ export default function DailySummaryScreen({
           </Card>
         )}
 
-        {/* ── Training Readiness (OSPREY+) ── */}
+        {/* ── Training Readiness ── */}
         {trainingReadiness ? (
           <ReadinessCard readiness={trainingReadiness} />
         ) : null}

@@ -6,7 +6,7 @@ import { render as rtlRender, type RenderOptions } from '@testing-library/react-
  * Shared render helper for SCREEN tests.
  *
  * Screens reach react-query through nested cards and hooks (NutritionCard,
- * HydrationCard, useSubscription…), so rendering one bare throws on a missing
+ * HydrationCard, useHydration…), so rendering one bare throws on a missing
  * QueryClientProvider — an error about infrastructure, not about the thing
  * under test. This wraps every render in a fresh client.
  *

@@ -12,7 +12,6 @@ jest.mock('expo-apple-authentication', () => ({}));
 jest.mock('expo-auth-session', () => ({ makeRedirectUri: () => 'osprey://' }));
 jest.mock('expo-web-browser', () => ({}));
 jest.mock('@/services/offline-cache', () => ({ clearOfflineCache: jest.fn() }));
-jest.mock('@/services/subscriptions', () => ({ resetRevenueCat: jest.fn() }));
 
 const user = (id: string) => ({ id, email: `${id}@osprey.app`, user_metadata: {} });
 const mockProfileRow = { id: 'u1', display_name: 'Alex', onboarding_complete: true, experience_tier: 'intermediate' };

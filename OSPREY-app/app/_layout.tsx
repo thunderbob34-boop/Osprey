@@ -6,7 +6,6 @@ import * as Sentry from '@sentry/react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, SpaceGrotesk_500Medium, SpaceGrotesk_700Bold } from '@expo-google-fonts/space-grotesk';
 import { useAuthStore } from '@/store/authStore';
-import { initRevenueCat } from '@/services/subscriptions';
 import { reconcileSupplementReminders } from '@/services/supplements';
 import { reconcileRaceWeekReminders } from '@/services/notifications';
 import { syncCalendarBlocks } from '@/services/calendar-blocking';
@@ -44,7 +43,6 @@ function RootLayout() {
 
   useEffect(() => {
     if (userId) {
-      initRevenueCat(userId).catch(() => undefined);
       reconcileSupplementReminders(userId).catch(() => undefined);
       reconcileRaceWeekReminders(userId).catch(() => undefined);
       syncCalendarBlocks(userId).catch(() => undefined);
@@ -78,7 +76,6 @@ function RootLayout() {
         <Stack.Screen name="activity" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="friends" options={{ presentation: 'fullScreenModal' }} />
         <Stack.Screen name="challenges" options={{ presentation: 'fullScreenModal' }} />
-        <Stack.Screen name="paywall" options={{ presentation: 'modal' }} />
         <Stack.Screen name="preferences" options={{ presentation: 'modal', headerShown: false }} />
         <Stack.Screen name="race-search" options={{ presentation: 'modal', headerShown: false }} />
         <Stack.Screen name="race-event" options={{ presentation: 'modal', headerShown: false }} />

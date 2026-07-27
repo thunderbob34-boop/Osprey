@@ -14,7 +14,6 @@ import { useHydration } from '@/hooks/useHydration';
 import { useFuelStatus } from '@/hooks/useFuelStatus';
 import { usePerformance } from '@/hooks/usePerformance';
 import { usePlanDeload } from '@/hooks/usePlanDeload';
-import { useSubscription } from '@/hooks/useSubscription';
 import { useAuthStore } from '@/store/authStore';
 import { reconcileEveningBrief } from '@/services/evening-brief';
 import type { SessionData } from '@/types/daily-summary';
@@ -25,7 +24,6 @@ export default function HomeTab() {
   const userId = useAuthStore((s) => s.user?.id);
   const { data, isLoading, isRefetching, error, refetch, swapSession, compressSession, moveIndoors } = useDailySummary();
   const { data: fuelStatus } = useFuelStatus();
-  const { isPlus } = useSubscription();
   const { data: perf } = usePerformance();
   const { suggestion: deloadSuggestion, isAccepting: isDeloadAccepting, accept: acceptDeload, dismiss: dismissDeload } = usePlanDeload();
   const { data: savedRoutes } = useSavedRoutes();
@@ -111,12 +109,11 @@ export default function HomeTab() {
   // null — load_scores, the table behind it, is never written to. Re-derive it
   // from usePerformance()'s CTL/ATL/TSB pipeline instead, which is real (it's
   // computed straight from workout_logs) and already fetched on this screen
-  // for trainingReadiness. Gated the same way as everywhere else that pipeline
-  // is surfaced (Stats' Fitness & Form, the race predictor) — perf.ctl > 0 is
-  // usePerformance's own "enough history to mean anything" check — so this
-  // doesn't silently turn a paid metric free.
+  // for trainingReadiness. perf.ctl > 0 is usePerformance's own "enough
+  // history to mean anything" check — without it a brand-new account would
+  // read a confident load label off two workouts.
   const quickStats = data?.quickStats
-    ? { ...data.quickStats, load: isPlus && perf && perf.ctl > 0 ? loadLabelFromTsb(perf.tsb) : '—' }
+    ? { ...data.quickStats, load: perf && perf.ctl > 0 ? loadLabelFromTsb(perf.tsb) : '—' }
     : data?.quickStats;
 
   return (
@@ -139,7 +136,7 @@ export default function HomeTab() {
       habitTip={data?.habitTip}
       hasEverPlanned={hasPlan}
       quickStats={quickStats}
-      trainingReadiness={isPlus ? (perf?.trainingReadiness ?? null) : null}
+      trainingReadiness={perf?.trainingReadiness ?? null}
       onActivityPress={() => router.push('/activity')}
       // Ask Ozzie hidden until OpenAI billing is on — omitting this prop hides
       // the header avatar button (DailySummary gates it on onOzziePress). The
