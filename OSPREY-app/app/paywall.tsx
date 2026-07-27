@@ -96,7 +96,10 @@ const FEATURES: { icon: IconName; title: string; desc: string }[] = [
   { icon: 'trophy-outline', title: 'Group Challenges', desc: 'Create unlimited mileage, workout, and duration challenges with friends.' },
   { icon: 'bell-ring-outline', title: 'Live Run Coaching', desc: 'Automatic mile-split callouts, pace alerts, and HR zone cues mid-run.' },
   { icon: 'chart-line', title: 'Performance Intelligence', desc: 'Fitness/fatigue/form trends (CTL/ATL/TSB), injury risk score, race time predictor.' },
-  { icon: 'calendar-sync-outline', title: 'AI Plan Generation', desc: 'Adaptive weekly training plans powered by GPT-4o-mini.' },
+  // Names the benefit, not the vendor's model. The old copy ("powered by
+  // GPT-4o-mini") turned every model change into a store-copy change, and
+  // "mini" reads as a downgrade on a paid tier.
+  { icon: 'calendar-sync-outline', title: 'AI Plan Generation', desc: 'A fresh, adaptive plan every week — rebuilt around the training you actually did.' },
 ];
 
 export default function PaywallScreen() {

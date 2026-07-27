@@ -83,7 +83,10 @@ export default function SettingsTab() {
   const trainingSummary =
     [
       goalLabel(goal?.primaryGoal ?? null),
-      goal?.daysPerWeek ? `${goal.daysPerWeek} days/week` : null,
+      // "training days", not bare "days" — daysPerWeek is the primary
+      // discipline's days PLUS lift days, so next to the goal label ("Run")
+      // a bare "5 days/week" read as five run days when it was 4 run + 1 lift.
+      goal?.daysPerWeek ? `${goal.daysPerWeek} training days/week` : null,
       profile?.experience_tier ?? null,
     ]
       .filter(Boolean)
