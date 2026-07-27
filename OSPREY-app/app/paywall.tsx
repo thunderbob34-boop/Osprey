@@ -107,13 +107,17 @@ export default function PaywallScreen() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [purchasing, setPurchasing] = useState(false);
   const [restoring, setRestoring] = useState(false);
+  const [offeringsLoading, setOfferingsLoading] = useState(true);
 
   useEffect(() => {
-    getOfferings().then((o) => {
-      const pkgs = o?.current?.availablePackages ?? [];
-      setPackages(pkgs);
-      setSelectedId(pkgs[0]?.identifier ?? null);
-    }).catch(() => undefined);
+    getOfferings()
+      .then((o) => {
+        const pkgs = o?.current?.availablePackages ?? [];
+        setPackages(pkgs);
+        setSelectedId(pkgs[0]?.identifier ?? null);
+      })
+      .catch(() => undefined)
+      .finally(() => setOfferingsLoading(false));
   }, []);
 
   const selectedPackage = packages.find((p) => p.identifier === selectedId) ?? packages[0];
@@ -122,6 +126,18 @@ export default function PaywallScreen() {
   const pricePeriodLabel = selectedPackage ? periodLabel(selectedPackage) : '';
 
   async function handleSubscribe() {
+    // With no package there is nothing to buy — purchaseOspreyPlus bails at
+    // its own no-package guard and returns false, which the branch below
+    // reported as "Your payment was not completed." Nothing was ever charged
+    // or even attempted; that message sends people to check their card for a
+    // problem that is on our side (offerings failed to load).
+    if (!selectedPackage) {
+      Alert.alert(
+        'Plans unavailable',
+        "Couldn't reach the App Store to load subscription options. Check your connection and try again.",
+      );
+      return;
+    }
     setPurchasing(true);
     try {
       const success = await purchaseOspreyPlus(selectedId ?? undefined);
@@ -228,14 +244,22 @@ export default function PaywallScreen() {
         ) : null}
 
         <TouchableOpacity
-          style={[styles.subscribeBtn, purchasing && styles.subscribeBtnLoading]}
+          style={[
+            styles.subscribeBtn,
+            (purchasing || offeringsLoading) && styles.subscribeBtnLoading,
+          ]}
           onPress={handleSubscribe}
-          disabled={purchasing || restoring}
+          // Held until the App Store answers, so the priceless fallback label
+          // never flashes as if it were the real offer.
+          disabled={purchasing || restoring || offeringsLoading}
           accessibilityRole="button"
           accessibilityLabel={priceString ? `Start for ${priceString} ${pricePeriodLabel}`.trim() : 'Subscribe to OSPREY+'}
-          accessibilityState={{ disabled: purchasing || restoring, busy: purchasing }}
+          accessibilityState={{
+            disabled: purchasing || restoring || offeringsLoading,
+            busy: purchasing || offeringsLoading,
+          }}
         >
-          {purchasing ? (
+          {purchasing || offeringsLoading ? (
             <ActivityIndicator color={Theme.ink} />
           ) : (
             <>
