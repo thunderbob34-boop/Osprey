@@ -1,11 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import OnboardingShell, { OptionCard } from '@/components/onboarding/OnboardingShell';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import type { PrimaryGoal } from '@/types/onboarding';
-import { Theme, Radius, BorderWidth } from '@/constants/theme';
-import { primaryDayLabel } from '@/constants/sports';
-import { anchorKeyForGoal } from '@/services/coaching/baseline';
 
 const GOALS: Array<{ id: PrimaryGoal; icon: string; title: string; desc: string }> = [
   { id: 'run', icon: '🏃', title: 'Run better', desc: '5K, 10K, half, full marathon' },
@@ -20,61 +16,21 @@ const GOALS: Array<{ id: PrimaryGoal; icon: string; title: string; desc: string 
   { id: 'weight_loss', icon: '⚖️', title: 'Lose weight', desc: 'Performance + body composition' },
 ];
 
-function DayPicker({
-  label,
-  value,
-  onChange,
-}: {
-  label: string;
-  value: number;
-  onChange: (v: number) => void;
-}) {
-  return (
-    <View style={styles.dayPicker}>
-      <Text style={styles.dayLabel}>{label}</Text>
-      <View style={styles.dayRow}>
-        {[0, 1, 2, 3, 4, 5, 6, 7].map((day) => (
-          <TouchableOpacity
-            key={day}
-            style={[styles.dayBtn, value === day && styles.dayBtnActive]}
-            onPress={() => onChange(day)}
-            accessibilityRole="button"
-            accessibilityLabel={`${day} ${label}`}
-            accessibilityState={{ selected: value === day }}
-          >
-            <Text style={[styles.dayBtnText, value === day && styles.dayBtnTextActive]}>
-              {day}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </View>
-  );
-}
-
+// WS1: one question per screen (docs/design-references/RUNNA-app-teardown.md
+// Part II). Weekly schedule used to live on this same screen as two day-picker
+// widgets — split into days.tsx/split.tsx so this screen is just the goal.
 export default function GoalsScreen() {
   const router = useRouter();
   const primaryGoal = useOnboardingStore((s) => s.primaryGoal);
-  const weeklyRunDays = useOnboardingStore((s) => s.weeklyRunDays);
-  const weeklyLiftDays = useOnboardingStore((s) => s.weeklyLiftDays);
   const setPrimaryGoal = useOnboardingStore((s) => s.setPrimaryGoal);
-  const setWeeklyRunDays = useOnboardingStore((s) => s.setWeeklyRunDays);
-  const setWeeklyLiftDays = useOnboardingStore((s) => s.setWeeklyLiftDays);
 
   return (
     <OnboardingShell
       step={3}
-      totalSteps={5}
+      totalSteps={13}
       title="What's your main goal right now?"
       hint="This shapes your entire plan. You can always change it later."
-      continueDisabled={weeklyRunDays + weeklyLiftDays === 0}
-      onContinue={() =>
-        router.push(
-          anchorKeyForGoal(primaryGoal) || primaryGoal === 'lift' || primaryGoal === 'crossfit'
-            ? '/(onboarding)/baseline'
-            : '/(onboarding)/health'
-        )
-      }
+      onContinue={() => router.push('/(onboarding)/race')}
     >
       {GOALS.map((goal) => (
         <OptionCard
@@ -86,78 +42,6 @@ export default function GoalsScreen() {
           onPress={() => setPrimaryGoal(goal.id)}
         />
       ))}
-
-      <View style={styles.scheduleCard}>
-        <Text style={styles.scheduleTitle}>WEEKLY SCHEDULE</Text>
-        <DayPicker label={primaryDayLabel(primaryGoal)} value={weeklyRunDays} onChange={setWeeklyRunDays} />
-        <DayPicker label="Lift days per week" value={weeklyLiftDays} onChange={setWeeklyLiftDays} />
-      </View>
-      {weeklyRunDays + weeklyLiftDays === 0 ? (
-        <Text style={styles.zeroDaysHint}>Pick at least one training day to continue.</Text>
-      ) : null}
     </OnboardingShell>
   );
 }
-
-const styles = StyleSheet.create({
-  zeroDaysHint: {
-    fontSize: 12,
-    color: Theme.textMut,
-    textAlign: 'center',
-    marginTop: 8,
-  },
-  scheduleCard: {
-    marginTop: 8,
-    backgroundColor: Theme.panel,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.line,
-    borderRadius: Radius.card,
-    padding: 16,
-    gap: 16,
-  },
-  scheduleTitle: {
-    fontSize: 10,
-    fontWeight: '700',
-    fontFamily: 'SpaceGrotesk_700Bold',
-    color: Theme.accent,
-    letterSpacing: 1,
-  },
-  dayPicker: {
-    gap: 8,
-  },
-  dayLabel: {
-    fontSize: 13,
-    color: Theme.textMut,
-    fontWeight: '600',
-  },
-  // All 8 buttons (0-7) have to fit one row. Fixed 34pt widths + 6pt gaps
-  // needed 314pt inside a 306pt card on a 390pt iPhone, so "7" wrapped onto
-  // a line of its own (and worse on a 375pt SE). Letting them flex keeps the
-  // row intact at any width; aspectRatio holds them square.
-  dayRow: {
-    flexDirection: 'row',
-    gap: 5,
-  },
-  dayBtn: {
-    flex: 1,
-    aspectRatio: 1,
-    maxWidth: 40,
-    borderRadius: Radius.card,
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    borderWidth: 1,
-    borderColor: Theme.line,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  dayBtnActive: {
-    borderColor: Theme.accent,
-  },
-  dayBtnText: {
-    fontSize: 13,
-    fontWeight: '700',
-    color: Theme.textMut,
-  },
-  dayBtnTextActive: {
-    color: Theme.accent,
-  },
-});

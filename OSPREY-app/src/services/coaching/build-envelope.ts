@@ -2,7 +2,13 @@ import { supabase } from '@/services/supabase';
 import { computeRacePhase, RaceGoal } from '@/services/plan';
 import { computeEnvelope, CoachingEnvelope } from './envelope';
 import { selectBestRunEffort, selectBestRowingSplit } from './anchor';
-import { toSelfReportAnchor, type SelfReportAnchor, type ThresholdAnchorMap } from './baseline';
+import {
+  toSelfReportAnchor,
+  anchorKeyForGoal,
+  type SelfReportAnchor,
+  type ThresholdAnchorMap,
+  type AnchorConfidence,
+} from './baseline';
 import { toUltraParams, type UltraGoalParams } from './ultra-params';
 import { toStrengthParams, type StrengthGoalParams } from './strength-params';
 import { toHyroxParams, type HyroxGoalParams } from './hyrox-params';
@@ -33,6 +39,10 @@ interface EnvelopeInputs {
   strengthParams?: StrengthGoalParams | null;
   hyroxParams?: HyroxGoalParams | null;
   crossfitParams?: CrossfitGoalParams | null;
+  // Confidence of the anchor driving THIS sport's zones (run/row only — see
+  // envelope.ts's EnvelopeInput doc). Optional for the same reason strengthParams
+  // is: keeps existing envelopeFromInputs test literals compiling unchanged.
+  anchorConfidence?: AnchorConfidence | null;
 }
 
 // Pure: inputs → envelope. No-race plans run a Base maintenance macrocycle.
@@ -62,6 +72,7 @@ export function envelopeFromInputs(i: EnvelopeInputs, now: Date = new Date()): C
     hyroxParams: i.hyroxParams,
     crossfitParams: i.crossfitParams,
     weeksRemaining: phaseInfo?.weeksRemaining ?? null,
+    anchorConfidence: i.anchorConfidence ?? null,
   });
 }
 
@@ -119,6 +130,7 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
     if (maxHrRes.error) console.warn('[build-envelope] workout_logs (maxHR) query failed:', maxHrRes.error.message);
 
     const g = goalsRes.data;
+    const thresholdAnchor = g?.threshold_anchor as ThresholdAnchorMap | null;
     const recentRuns = (runsRes.data ?? [])
       .filter((r) => r.total_distance_km && r.total_duration_s)
       .map((r) => ({ distanceMiles: (r.total_distance_km as number) * MILES_PER_KM, timeS: r.total_duration_s as number }));
@@ -128,9 +140,17 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       .filter((r) => r.total_distance_km && r.total_duration_s)
       .map((r) => ({ distanceKm: r.total_distance_km as number, timeS: r.total_duration_s as number }));
     const rowingSplit = selectBestRowingSplit(recentRows);
+    const resolvedGoal = resolveGoalInputs(postedGoal, g?.primary_goal, g?.goal_params);
+    // WS1: whichever anchor key drives this sport's zones (run/row only — swim/
+    // bike stay self-report and carry no confidence). anchorKeyForGoal returns
+    // null for sports with no endurance anchor at all (e.g. pure lift), which
+    // correctly resolves to no confidence signal below.
+    const anchorKey = anchorKeyForGoal(resolvedGoal.sport);
+    const anchorConfidence: AnchorConfidence | null =
+      anchorKey === 'run' || anchorKey === 'row' ? thresholdAnchor?.[anchorKey]?.confidence ?? null : null;
 
     inputs = {
-      ...resolveGoalInputs(postedGoal, g?.primary_goal, g?.goal_params),
+      ...resolvedGoal,
       race: g?.target_date && g?.total_weeks_planned ? { targetDate: g.target_date, totalWeeksPlanned: g.total_weeks_planned } : null,
       fitnessLevel: g?.fitness_level ?? 'beginner',
       bodyWeightKg: weightRes.data?.weight_kg ?? 70,
@@ -139,8 +159,9 @@ export async function invokeGeneratePlan(extraBody: Record<string, unknown> = {}
       bestRunMiles: bestEffort?.distanceMiles ?? null,
       bestRunTimeS: bestEffort?.timeS ?? null,
       rowingSplitSecPer500: rowingSplit,
-      selfReportAnchor: toSelfReportAnchor(g?.threshold_anchor as ThresholdAnchorMap | null),
+      selfReportAnchor: toSelfReportAnchor(thresholdAnchor),
       maxHR: (maxHrRes.data?.max_heart_rate as number | null) ?? null,
+      anchorConfidence,
     };
   }
 

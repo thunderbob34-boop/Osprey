@@ -2,72 +2,53 @@ import { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import OnboardingShell from '@/components/onboarding/OnboardingShell';
-import { TimeRow, NumberField } from '@/components/BaselineInputs';
+import { NumberField } from '@/components/BaselineInputs';
 import { useOnboardingStore } from '@/store/onboardingStore';
 import { useAuthStore } from '@/store/authStore';
-import {
-  parseSwimBaseline,
-  parseRowingBaseline,
-  parseRunBaseline,
-  parseFTPBaseline,
-  anchorKeyForGoal,
-  type ThresholdAnchorMap,
-} from '@/services/coaching/baseline';
-import { estimateFTPFromTwentyMinPower } from '@/services/calculators/triathlon';
 import { parseUltraParams, type UltraRaceDistance } from '@/services/coaching/ultra-params';
 import { parseHyroxParams, HYROX_DIVISIONS, type HyroxDivision } from '@/services/coaching/hyrox-params';
 import { parseStrengthParams } from '@/services/coaching/strength-params';
 import { parseCrossfitParams } from '@/services/coaching/crossfit-params';
 import { bestE1rmForLift, fetchLiftAnalytics } from '@/services/lift-analytics';
+import { nextAfterEventParams } from '@/services/onboarding-routes';
 import { Colors } from '@/constants/colors';
 import { Theme, Radius } from '@/constants/theme';
 
-const HEALTH = '/(onboarding)/health';
-const num = (s: string) => (s.trim() === '' ? NaN : Number(s));
-const mmss = (m: string, s: string) => num(m) * 60 + num(s);
 const ULTRA_DISTANCES: UltraRaceDistance[] = ['50k', '50mi', '100k', '100mi'];
 const HYROX_DIVISION_LABEL: Record<HyroxDivision, string> = {
-  open_men: 'Open M',
-  open_women: 'Open W',
-  pro_men: 'Pro M',
-  pro_women: 'Pro W',
-  doubles_men: 'Dbl M',
-  doubles_women: 'Dbl W',
-  doubles_mixed: 'Dbl Mix',
+  open_men: 'Open M', open_women: 'Open W', pro_men: 'Pro M', pro_women: 'Pro W',
+  doubles_men: 'Dbl M', doubles_women: 'Dbl W', doubles_mixed: 'Dbl Mix',
 };
 const HYROX_DIVISION_OPTIONS: { value: HyroxDivision; label: string }[] = HYROX_DIVISIONS.map((value) => ({
   value,
   label: HYROX_DIVISION_LABEL[value],
 }));
 
-export default function BaselineScreen() {
+// The sport-specific structured inputs each blueprint needs beyond the shared
+// engine (docs/coaching/_index.md's 4 inputs): ultra race shape, lift maxes,
+// hyrox division, crossfit numbers. Split out of the old baseline.tsx, which
+// combined these with the endurance threshold anchor on one screen — that
+// screen is now anchor.tsx; this one is everything anchor.tsx doesn't cover.
+// Locked as one screen per sport (not one screen per field) — three lifts is
+// one question with three numbers, not three questions.
+export default function EventParamsScreen() {
   const router = useRouter();
   const userId = useAuthStore((s) => s.user?.id);
   const primaryGoal = useOnboardingStore((s) => s.primaryGoal);
-  const setThresholdAnchor = useOnboardingStore((s) => s.setThresholdAnchor);
   const setGoalParams = useOnboardingStore((s) => s.setGoalParams);
-  const key = anchorKeyForGoal(primaryGoal);
 
-  // Fields (times as minutes + seconds; run distance in miles).
-  const [swim400m, setSwim400m] = useState(''); const [swim400s, setSwim400s] = useState('');
-  const [swim200m, setSwim200m] = useState(''); const [swim200s, setSwim200s] = useState('');
-  const [row2kM, setRow2kM] = useState(''); const [row2kS, setRow2kS] = useState('');
-  const [runMiles, setRunMiles] = useState(''); const [runMin, setRunMin] = useState(''); const [runSec, setRunSec] = useState('');
-  const [ftp, setFtp] = useState(''); const [twentyMin, setTwentyMin] = useState('');
   const [ultraDistance, setUltraDistance] = useState<UltraRaceDistance>('50k');
   const [ultraVert, setUltraVert] = useState('');
   const [gutTrained, setGutTrained] = useState(false);
   const [division, setDivision] = useState<HyroxDivision>('open_men');
   const [squat, setSquat] = useState(''); const [bench, setBench] = useState(''); const [deadlift, setDeadlift] = useState('');
   const [goalSquat, setGoalSquat] = useState(''); const [goalBench, setGoalBench] = useState(''); const [goalDeadlift, setGoalDeadlift] = useState('');
-  // CrossFit's deadlift is a separate field from lift's (different GoalParams shape) —
-  // named distinctly to avoid colliding with the `deadlift` state above.
   const [backSquat, setBackSquat] = useState(''); const [crossfitDeadlift, setCrossfitDeadlift] = useState(''); const [press, setPress] = useState('');
   const [competing, setCompeting] = useState(false); const [fran, setFran] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  // Hybrid pre-fill: seed each 1RM from the athlete's logged sets (best e1RM
-  // per lift) when a value exists. They can still edit before continuing.
+  // Hybrid pre-fill: seed each 1RM from the athlete's logged sets when a value
+  // exists — they can still edit before continuing.
   useEffect(() => {
     if (primaryGoal !== 'lift' || !userId) return;
     let cancelled = false;
@@ -90,88 +71,37 @@ export default function BaselineScreen() {
     };
   }, [primaryGoal, userId]);
 
-  function onSkip() {
-    // Preserve any ultra race params (distance/vert/fueling) the athlete already
-    // entered on this screen even when skipping the optional recent-effort anchor.
-    if (primaryGoal === 'ultra') {
-      const u = parseUltraParams({ raceDistance: ultraDistance, vertGainM: ultraVert, gutTrained });
-      if (u.ok) setGoalParams(u.value);
-    }
-    router.push(HEALTH);
-  }
-
   function onContinue() {
     setError(null);
+    const next = nextAfterEventParams(primaryGoal);
     if (primaryGoal === 'ultra') {
       const u = parseUltraParams({ raceDistance: ultraDistance, vertGainM: ultraVert, gutTrained });
       if (!u.ok) return setError(u.error);
       setGoalParams(u.value);
-      // The recent hard-effort anchor is optional for ultra — only require it
-      // (and only error on it) if the athlete actually started filling it in.
-      const hasRunInput = runMiles.trim() !== '' || runMin.trim() !== '' || runSec.trim() !== '';
-      if (!hasRunInput) {
-        router.push(HEALTH);
-        return;
-      }
-    }
-    if (primaryGoal === 'lift') {
+    } else if (primaryGoal === 'lift') {
       const s = parseStrengthParams({ squat, bench, deadlift, goalSquat, goalBench, goalDeadlift });
       if (!s.ok) return setError(s.error);
       setGoalParams(s.value);
-      router.push(HEALTH);
-      return;
-    }
-    if (primaryGoal === 'crossfit') {
-      // No run anchor for crossfit — mirrors the lift branch above (early-return),
-      // not the ultra/hyrox fall-through into run-anchor collection.
+    } else if (primaryGoal === 'crossfit') {
       const c = parseCrossfitParams({ backSquat, deadlift: crossfitDeadlift, press, competing, fran });
       if (!c.ok) return setError(c.error);
       setGoalParams(c.value);
-      router.push(HEALTH);
-      return;
-    }
-    if (primaryGoal === 'hyrox') {
+    } else if (primaryGoal === 'hyrox') {
       const h = parseHyroxParams({ division, targetTimeMinutes: '' });
       if (!h.ok) return setError(h.error);
       setGoalParams(h.value);
     }
-    let value: number;
-    let anchor: ThresholdAnchorMap;
-    if (key === 'swim') {
-      const r = parseSwimBaseline(mmss(swim400m, swim400s), mmss(swim200m, swim200s));
-      if (!r.ok) return setError(r.error);
-      value = r.value; anchor = { swim: { cssSecPer100: value, source: 'self_report' } };
-    } else if (key === 'row') {
-      const r = parseRowingBaseline(mmss(row2kM, row2kS));
-      if (!r.ok) return setError(r.error);
-      value = r.value; anchor = { row: { splitSecPer500: value, source: 'self_report' } };
-    } else if (key === 'bike') {
-      // FTP entered directly, or derived from 20-min power (0.95×) when FTP is blank.
-      const ftpW = num(ftp) || (num(twentyMin) ? estimateFTPFromTwentyMinPower(num(twentyMin)) : NaN);
-      const r = parseFTPBaseline(ftpW);
-      if (!r.ok) return setError(r.error);
-      value = r.value; anchor = { bike: { ftpWatts: value, source: 'self_report' } };
-    } else {
-      const r = parseRunBaseline(num(runMiles), mmss(runMin, runSec));
-      if (!r.ok) return setError(r.error);
-      value = r.value; anchor = { run: { thresholdSecPerMile: value, source: 'self_report' } };
-    }
-    setThresholdAnchor(anchor);
-    router.push(HEALTH);
+    router.push(next);
   }
 
   const title =
-    key === 'swim' ? 'Know your swim times?' : key === 'row' ? 'Know your 2k?' : key === 'bike' ? 'Know your FTP?' : primaryGoal === 'ultra' ? 'Your ultra race, and a recent hard effort' : primaryGoal === 'hyrox' ? 'Your division, and a recent hard run' : primaryGoal === 'lift' ? 'Know your current maxes?' : primaryGoal === 'crossfit' ? 'Know your crossfit numbers?' : 'A recent hard run?';
+    primaryGoal === 'ultra' ? 'Your ultra race' :
+    primaryGoal === 'hyrox' ? 'Your division' :
+    primaryGoal === 'lift' ? 'Know your current maxes?' :
+    'Know your crossfit numbers?';
 
   return (
-    <OnboardingShell
-      step={4}
-      totalSteps={5}
-      title={title}
-      hint="Optional — it sharpens your training zones. Skip and Ozzie estimates from your experience, then refines as you log."
-      onContinue={onContinue}
-      continueLabel="Use these numbers →"
-    >
+    <OnboardingShell step={12} totalSteps={13} title={title} onContinue={onContinue} continueLabel="Continue →">
       {primaryGoal === 'ultra' ? (
         <>
           <View style={styles.field}>
@@ -186,23 +116,14 @@ export default function BaselineScreen() {
                   accessibilityLabel={d}
                   accessibilityState={{ selected: ultraDistance === d }}
                 >
-                  <Text style={[styles.chipText, ultraDistance === d && styles.chipTextSelected]}>
-                    {d}
-                  </Text>
+                  <Text style={[styles.chipText, ultraDistance === d && styles.chipTextSelected]}>{d}</Text>
                 </Pressable>
               ))}
             </View>
           </View>
           <View style={styles.field}>
             <Text style={styles.label}>Total race vert, metres (optional)</Text>
-            <TextInput
-              style={styles.input}
-              value={ultraVert}
-              onChangeText={setUltraVert}
-              keyboardType="number-pad"
-              placeholder="e.g. 2000"
-              placeholderTextColor={Theme.textMut}
-            />
+            <TextInput style={styles.input} value={ultraVert} onChangeText={setUltraVert} keyboardType="number-pad" placeholder="e.g. 2000" placeholderTextColor={Theme.textMut} />
           </View>
           <View style={styles.field}>
             <Text style={styles.label}>Fueling</Text>
@@ -219,26 +140,6 @@ export default function BaselineScreen() {
                 </Text>
               </Pressable>
             </View>
-          </View>
-        </>
-      ) : null}
-
-      {key === 'swim' ? (
-        <>
-          <TimeRow label="400m time" m={swim400m} s={swim400s} setM={setSwim400m} setS={setSwim400s} />
-          <TimeRow label="200m time" m={swim200m} s={swim200s} setM={setSwim200m} setS={setSwim200s} />
-        </>
-      ) : key === 'row' ? (
-        <TimeRow label="2k time" m={row2kM} s={row2kS} setM={setRow2kM} setS={setRow2kS} />
-      ) : key === 'bike' ? (
-        <>
-          <View style={styles.field}>
-            <Text style={styles.label}>FTP (watts)</Text>
-            <TextInput style={styles.input} value={ftp} onChangeText={setFtp} keyboardType="number-pad" placeholder="240" placeholderTextColor={Theme.textMut} />
-          </View>
-          <View style={styles.field}>
-            <Text style={styles.label}>…or your best 20-min power (watts)</Text>
-            <TextInput style={styles.input} value={twentyMin} onChangeText={setTwentyMin} keyboardType="number-pad" placeholder="253" placeholderTextColor={Theme.textMut} />
           </View>
         </>
       ) : primaryGoal === 'lift' ? (
@@ -273,42 +174,27 @@ export default function BaselineScreen() {
           </View>
           <NumberField label="Fran time — seconds (optional)" value={fran} onChangeText={setFran} placeholder="240" />
         </>
-      ) : (
-        <>
-          {primaryGoal === 'hyrox' ? (
-            <View style={styles.field}>
-              <Text style={styles.label}>Division</Text>
-              <View style={styles.chipRow}>
-                {HYROX_DIVISION_OPTIONS.map((d) => (
-                  <Pressable
-                    key={d.value}
-                    style={[styles.chip, division === d.value && styles.chipSelected]}
-                    onPress={() => setDivision(d.value)}
-                    accessibilityRole="button"
-                    accessibilityLabel={d.label}
-                    accessibilityState={{ selected: division === d.value }}
-                  >
-                    <Text style={[styles.chipText, division === d.value && styles.chipTextSelected]}>
-                      {d.label}
-                    </Text>
-                  </Pressable>
-                ))}
-              </View>
-            </View>
-          ) : null}
-          <View style={styles.field}>
-            <Text style={styles.label}>Distance (miles)</Text>
-            <TextInput style={styles.input} value={runMiles} onChangeText={setRunMiles} keyboardType="decimal-pad" placeholder="6.2" placeholderTextColor={Theme.textMut} />
+      ) : primaryGoal === 'hyrox' ? (
+        <View style={styles.field}>
+          <Text style={styles.label}>Division</Text>
+          <View style={styles.chipRow}>
+            {HYROX_DIVISION_OPTIONS.map((d) => (
+              <Pressable
+                key={d.value}
+                style={[styles.chip, division === d.value && styles.chipSelected]}
+                onPress={() => setDivision(d.value)}
+                accessibilityRole="button"
+                accessibilityLabel={d.label}
+                accessibilityState={{ selected: division === d.value }}
+              >
+                <Text style={[styles.chipText, division === d.value && styles.chipTextSelected]}>{d.label}</Text>
+              </Pressable>
+            ))}
           </View>
-          <TimeRow label="Time" m={runMin} s={runSec} setM={setRunMin} setS={setRunSec} />
-        </>
-      )}
+        </View>
+      ) : null}
 
       {error ? <Text style={styles.error}>{error}</Text> : null}
-
-      <Pressable onPress={onSkip} accessibilityRole="button">
-        <Text style={styles.skip}>Skip — estimate for me</Text>
-      </Pressable>
     </OnboardingShell>
   );
 }
@@ -318,16 +204,8 @@ const styles = StyleSheet.create({
   label: { fontSize: 13, color: Theme.textMut, fontWeight: '600' },
   input: { backgroundColor: Theme.ink, borderWidth: 1, borderColor: Theme.line, borderRadius: Radius.card, paddingHorizontal: 14, paddingVertical: 12, color: Theme.text, fontSize: 16 },
   error: { fontSize: 12, color: Colors.red, marginTop: 4 },
-  skip: { fontSize: 13, color: Theme.textMut, textAlign: 'center', marginTop: 16, textDecorationLine: 'underline' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  chip: {
-    backgroundColor: Theme.ink,
-    borderWidth: 1,
-    borderColor: Theme.line,
-    borderRadius: 24,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-  },
+  chip: { backgroundColor: Theme.ink, borderWidth: 1, borderColor: Theme.line, borderRadius: 24, paddingHorizontal: 16, paddingVertical: 10 },
   chipSelected: { borderColor: Theme.accent },
   chipText: { fontSize: 14, fontWeight: '600', color: Theme.textMut },
   chipTextSelected: { color: Theme.accent },

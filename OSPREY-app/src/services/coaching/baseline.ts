@@ -2,14 +2,26 @@ import { computeCSSPer100 } from '@/services/calculators/swimming';
 import { deriveThresholdSecPerMile } from './anchor';
 import { blueprintSport } from './zones';
 
-export type AnchorSource = 'self_report';
+// Widened for WS1's HealthKit-derived anchors: 'derived' (confirmed HealthKit
+// proposal) and 'estimate' (tier fallback, no logged effort at all) join the
+// original 'self_report'. Matches webapp/src/lib/threshold-anchor.ts's zod
+// SourceEnum exactly — an unrecognized value there makes parseThresholdAnchor
+// fail closed and blank the athlete's ENTIRE anchor map across every sport, so
+// this union and that enum must never drift apart. Do not add a 4th value
+// (e.g. a 'timetrial' kind) without widening both.
+export type AnchorSource = 'self_report' | 'derived' | 'estimate';
+
+// How much extrapolation the derivation trusts: driven by the source effort's
+// duration vs the ~60-min threshold construct, and how many efforts backed it.
+// See coaching/anchor-policy.ts. Optional — self-reported anchors don't carry one.
+export type AnchorConfidence = 'low' | 'moderate' | 'high';
 
 // Stored shape of user_goals.threshold_anchor (rowing key is `row`, not `rowing`).
 export interface ThresholdAnchorMap {
-  run?: { thresholdSecPerMile: number; source: AnchorSource };
-  swim?: { cssSecPer100: number; source: AnchorSource };
-  row?: { splitSecPer500: number; source: AnchorSource };
-  bike?: { ftpWatts: number; source: AnchorSource };
+  run?: { thresholdSecPerMile: number; source: AnchorSource; confidence?: AnchorConfidence };
+  swim?: { cssSecPer100: number; source: AnchorSource; confidence?: AnchorConfidence };
+  row?: { splitSecPer500: number; source: AnchorSource; confidence?: AnchorConfidence };
+  bike?: { ftpWatts: number; source: AnchorSource; confidence?: AnchorConfidence };
 }
 
 // Flat shape consumed by computeEnvelope (see envelope.ts EnvelopeInput).

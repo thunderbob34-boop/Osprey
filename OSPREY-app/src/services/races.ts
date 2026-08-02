@@ -67,6 +67,23 @@ interface RaceEventRow {
 
 const KM_PER_MILE = 1.609344;
 
+/**
+ * Best-effort conversion of a race distance label ("5K", "Half Marathon") to km.
+ * Shared by app/race-event.tsx (searched-race confirm flow) and the onboarding
+ * race screen, so there's one canonical mapping instead of two copies drifting.
+ */
+export function distanceLabelToKm(label: string): number | null {
+  const lower = label.toLowerCase();
+  if (lower.includes('half') && lower.includes('marathon')) return 21.1;
+  if (lower.includes('marathon')) return 42.2;
+  const kMatch = lower.match(/(\d+(?:\.\d+)?)\s*k/);
+  if (kMatch) return Number(kMatch[1]);
+  const mileMatch = lower.match(/(\d+(?:\.\d+)?)\s*mile/);
+  if (mileMatch) return Number(mileMatch[1]) * 1.609;
+  if (lower.includes('mile')) return 1.6;
+  return null;
+}
+
 function daysUntil(dateStr: string): number {
   const today = new Date();
   today.setHours(0, 0, 0, 0);

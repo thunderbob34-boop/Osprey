@@ -20,6 +20,10 @@ const PERMISSIONS: HealthKitPermissions = {
       AppleHealthKit.Constants.Permissions.StepCount,
       AppleHealthKit.Constants.Permissions.DistanceWalkingRunning,
       AppleHealthKit.Constants.Permissions.Workout,
+      // WS1: lets onboarding's body-weight screen propose a value instead of
+      // only asking — build-envelope.ts silently defaults to 70kg when this is
+      // absent, quietly falsifying every per-kg fuel number for the athlete.
+      AppleHealthKit.Constants.Permissions.Weight,
     ],
     write: [AppleHealthKit.Constants.Permissions.Workout],
   },
@@ -217,6 +221,26 @@ export async function fetchHealthKitWorkouts(sinceISO: string): Promise<HealthKi
           calories: w.calories > 0 ? Math.round(w.calories) : null,
         }));
       resolve(workouts);
+    });
+  });
+}
+
+/**
+ * Most recent logged body weight (kg), for onboarding's body-weight screen to
+ * propose instead of asking blank. HealthKit has no kilogram HealthUnit — reads
+ * grams and converts, since react-native-health's Units enum only offers
+ * gram/pound (see node_modules/react-native-health/src/constants/Units.js).
+ */
+export async function fetchLatestBodyWeightKg(): Promise<number | null> {
+  if (!isHealthKitSupported() || !initialized) return null;
+
+  return new Promise((resolve) => {
+    AppleHealthKit.getLatestWeight({ unit: AppleHealthKit.Constants.Units.gram }, (err, result) => {
+      if (err || result?.value == null) {
+        resolve(null);
+        return;
+      }
+      resolve(Math.round((result.value / 1000) * 100) / 100);
     });
   });
 }
