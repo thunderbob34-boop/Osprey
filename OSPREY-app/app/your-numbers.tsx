@@ -37,6 +37,9 @@ const IN_SESSION_LABEL: Record<string, string> = {
   triathlon: 'on race day',
   hyrox: 'on race day',
   crossfit: 'on long metcons',
+  rowing: 'on long rows',
+  weight_loss: 'in your longer sessions',
+  general_fitness: 'in your longer sessions',
 };
 
 export default function YourNumbersScreen() {
