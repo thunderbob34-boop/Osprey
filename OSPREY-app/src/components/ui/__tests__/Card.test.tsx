@@ -66,7 +66,7 @@ describe('Card', () => {
 
     it('lets a caller override a default — style is composed last', () => {
       render(<Card style={{ padding: 0 }}><Text>Body</Text></Card>);
-      // paywall.tsx relies on exactly this to get edge-to-edge feature rows.
+      // Feature-list cards rely on exactly this to get edge-to-edge rows.
       expect(rootStyle().padding).toBe(0);
     });
   });

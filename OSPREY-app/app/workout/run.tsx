@@ -52,7 +52,6 @@ import {
   makeCoachingState,
   type CoachingState,
 } from '@/services/coaching-engine';
-import { useSubscription } from '@/hooks/useSubscription';
 
 export default function RunWorkoutScreen() {
   const router = useRouter();
@@ -80,7 +79,6 @@ export default function RunWorkoutScreen() {
   const allDrillsChecked = warmupDrills.length > 0 && checkedDrills.size === warmupDrills.length;
   const coachingStateRef = useRef<CoachingState>(makeCoachingState());
   const speakingRef = useRef(false);
-  const { isPlus } = useSubscription();
   const { cueBannerText, showCueBanner } = useCueBanner();
 
   // What the engine prescribed. Shown for every planned session, unlike the
@@ -196,9 +194,9 @@ export default function RunWorkoutScreen() {
     return () => clearInterval(timer);
   }, [startedAt, pausedAt, accumulatedPauseMs, status]);
 
-  // Auto coaching cues (OSPREY+ only)
+  // Auto coaching cues
   useEffect(() => {
-    if (!isPlus || status !== 'active' || speakingRef.current) return;
+    if (status !== 'active' || speakingRef.current) return;
 
     const miles = metersToMiles(distanceMeters);
     const currentElapsed = getElapsedSeconds({ startedAt, pausedAt, accumulatedPauseMs, status });
@@ -222,7 +220,7 @@ export default function RunWorkoutScreen() {
         showCueBanner(cue.text);
       }
     }
-  }, [elapsed, isPlus, status, distanceMeters, heartRate, startedAt, pausedAt, accumulatedPauseMs]);
+  }, [elapsed, status, distanceMeters, heartRate, startedAt, pausedAt, accumulatedPauseMs]);
 
   const miles = metersToMiles(distanceMeters);
   const pace = miles > 0 ? formatPace(elapsed / miles) : '--:--';

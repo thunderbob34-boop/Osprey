@@ -25,8 +25,6 @@ import type { PrimaryGoalEnum } from '@/services/coaching/goal-map';
 import { goalLabel } from '@/constants/sports';
 import type { UnitSystem } from '@/services/units';
 import { useAuthStore } from '@/store/authStore';
-import { useSubscription } from '@/hooks/useSubscription';
-import { restorePurchases } from '@/services/subscriptions';
 import {
   isHealthKitSupported,
   requestHealthKitAuthorization,
@@ -83,19 +81,16 @@ export default function SettingsTab() {
   const trainingSummary =
     [
       goalLabel(goal?.primaryGoal ?? null),
-      goal?.daysPerWeek ? `${goal.daysPerWeek} days/week` : null,
+      // "training days", not bare "days" — daysPerWeek is the primary
+      // discipline's days PLUS lift days, so next to the goal label ("Run")
+      // a bare "5 days/week" read as five run days when it was 4 run + 1 lift.
+      goal?.daysPerWeek ? `${goal.daysPerWeek} training days/week` : null,
       profile?.experience_tier ?? null,
     ]
       .filter(Boolean)
       .join(' · ') || 'Goal, days per week, and long run day';
   const userId = useAuthStore((s) => s.user?.id);
   const { units, setUnits } = useUnitPreference();
-  // Shared with every other screen — was a second, independent hasOspreyPlus()
-  // poll that bypassed useSubscription()'s FREE_FOR_ALL override, so Settings
-  // could show "Free tier" + an Upgrade button while the rest of the app
-  // already treated the athlete as fully entitled.
-  const { isPlus: plusActive, isLoading: plusLoading, refresh: refreshSubscription } = useSubscription();
-  const [loading, setLoading] = useState(false);
   const [healthConnected, setHealthConnected] = useState(false);
   const [healthLastSynced, setHealthLastSynced] = useState<string | null>(null);
   const [healthSyncing, setHealthSyncing] = useState(false);
@@ -280,19 +275,6 @@ export default function SettingsTab() {
     }
   }
 
-  async function handleRestore() {
-    setLoading(true);
-    try {
-      const restored = await restorePurchases();
-      refreshSubscription();
-      Alert.alert('Restore', restored ? 'Purchases restored.' : 'No active subscription found.');
-    } catch (err) {
-      Alert.alert('Restore failed', err instanceof Error ? err.message : 'Try again.');
-    } finally {
-      setLoading(false);
-    }
-  }
-
   function handleSignOut() {
     Alert.alert('Sign out?', 'You can sign back in any time.', [
       { text: 'Cancel', style: 'cancel' },
@@ -355,37 +337,6 @@ export default function SettingsTab() {
         <Text style={styles.subtitle}>
           {profile?.display_name ? `Signed in as ${profile.display_name}` : 'Account settings'}
         </Text>
-
-        <Card style={styles.card}>
-          <Text style={styles.cardLabel}>OSPREY+</Text>
-          {plusLoading ? (
-            <ActivityIndicator color={Theme.accent} />
-          ) : (
-            <Text style={styles.cardValue}>
-              {plusActive ? 'Active — all features unlocked' : 'Free tier'}
-            </Text>
-          )}
-          {!plusActive ? (
-            <Button
-              variant="primary"
-              onPress={() => router.push('/paywall')}
-              accessibilityLabel="Upgrade to OSPREY+"
-              style={styles.btnSpacing}
-            >
-              Upgrade to OSPREY+
-            </Button>
-          ) : null}
-          <TouchableOpacity
-            style={styles.linkBtn}
-            onPress={handleRestore}
-            disabled={loading}
-            accessibilityRole="button"
-            accessibilityLabel="Restore purchases"
-            accessibilityState={{ disabled: loading, busy: loading }}
-          >
-            <Text style={styles.linkText}>Restore purchases</Text>
-          </TouchableOpacity>
-        </Card>
 
         {isHealthKitSupported() ? (
           <Card style={styles.card}>

@@ -455,8 +455,17 @@ Deno.serve(async (req: Request) => {
   }
 
   const userId = authData.user.id;
-  const { data: tzRow } = await supabase.from('users').select('timezone').eq('id', userId).maybeSingle();
+  const { data: tzRow } = await supabase
+    .from('users')
+    .select('timezone, experience_tier')
+    .eq('id', userId)
+    .maybeSingle();
   const timeZone = tzRow?.timezone ?? 'America/Chicago';
+  // The athlete's own answer, for the branches below that would otherwise
+  // invent a fitness level when user_goals has no row yet. users.experience_tier
+  // is set by onboarding and by the Build Your Plan screen, so it always
+  // reflects something they actually chose.
+  const athleteTier = tzRow?.experience_tier ?? null;
   const todayStr = zonedDateString(timeZone);
   const weekStart = mondayOfWeek(todayStr);
   const weekStartStr = toDateString(weekStart);
@@ -572,7 +581,7 @@ Deno.serve(async (req: Request) => {
         weeklyBikeDays: routed.weeklyBikeDays,
         weeklyRowDays: routed.weeklyRowDays,
         triathlonDistance: isTriathlon ? prefs.triathlonDistance ?? 'sprint' : null,
-        fitnessLevel: prefs.experienceLevel ?? 'beginner',
+        fitnessLevel: prefs.experienceLevel ?? athleteTier ?? 'beginner',
         targetRace: null,
       };
 
@@ -613,7 +622,11 @@ Deno.serve(async (req: Request) => {
         weeklySwimDays: rgRouted.weeklySwimDays,
         weeklyBikeDays: rgRouted.weeklyBikeDays,
         weeklyRowDays: rgRouted.weeklyRowDays,
-        fitnessLevel: raceGoalsRow?.fitness_level ?? 'intermediate',
+        // This upsert WRITES the value back to user_goals, so a hardcoded
+        // default here didn't just shape one plan — it persisted a fitness
+        // level the athlete never chose, permanently disagreeing with the
+        // users.experience_tier the app shows them. Prefer their own answer.
+        fitnessLevel: raceGoalsRow?.fitness_level ?? athleteTier ?? 'intermediate',
         targetRace: `${race.raceName} (${race.distance})`,
       };
 
@@ -651,7 +664,7 @@ Deno.serve(async (req: Request) => {
         weeklySwimDays: bgRouted.weeklySwimDays,
         weeklyBikeDays: bgRouted.weeklyBikeDays,
         weeklyRowDays: bgRouted.weeklyRowDays,
-        fitnessLevel: goalsRow?.fitness_level ?? 'beginner',
+        fitnessLevel: goalsRow?.fitness_level ?? athleteTier ?? 'beginner',
         targetRace: goalsRow?.target_race ?? null,
       };
     }

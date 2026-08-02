@@ -406,6 +406,7 @@ function mapDailySummary(
     weekDistanceKm: row.week_distance_km ?? 0,
     weekTargetKm,
     habitTip: dailyBrief.habitTip,
+    hasEverPlanned,
     quickStats: {
       streak: streakDays > 0 ? `${streakDays} day streak` : '—',
       monthDistanceKm: monthDistanceKm,

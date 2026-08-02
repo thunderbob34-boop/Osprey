@@ -76,6 +76,7 @@ export default function DailySummaryScreen({
   weekDistanceKm = 0,
   weekTargetKm,
   habitTip,
+  hasEverPlanned = false,
   quickStats = {
     streak: '—',
     monthDistanceKm: 0,
@@ -261,7 +262,7 @@ export default function DailySummaryScreen({
           </Card>
         )}
 
-        {/* ── Training Readiness (OSPREY+) ── */}
+        {/* ── Training Readiness ── */}
         {trainingReadiness ? (
           <ReadinessCard readiness={trainingReadiness} />
         ) : null}
@@ -350,15 +351,27 @@ export default function DailySummaryScreen({
           </Card>
 
           <View style={styles.sessionActionsRow}>
+            {/* An empty day means two different things. A fresh athlete needs
+                the plan builder; one who already has a plan just has nothing
+                scheduled today, and offering to "build" one reads as though
+                their block is gone — so send them to the week view instead. */}
             <Button
               variant="primary"
-              onPress={() => (session.sessionType ? onStartSession?.(session) : onBuildPlan?.())}
+              onPress={() =>
+                session.sessionType
+                  ? onStartSession?.(session)
+                  : hasEverPlanned
+                  ? (onViewWeekPress ?? onBuildPlan)?.()
+                  : onBuildPlan?.()
+              }
               disabled={session.sessionType === 'rest'}
               accessibilityLabel={
                 session.sessionType === 'rest'
                   ? 'Rest day'
                   : session.sessionType
                   ? 'Start session'
+                  : hasEverPlanned
+                  ? 'View this week'
                   : 'Build my plan'
               }
               style={{ flex: 1 }}
@@ -367,6 +380,8 @@ export default function DailySummaryScreen({
                 ? 'Rest Day'
                 : session.sessionType
                 ? 'Start Session →'
+                : hasEverPlanned
+                ? 'View This Week →'
                 : 'Build My Plan →'}
             </Button>
             {(onSwapSession || onCompressSession) &&

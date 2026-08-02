@@ -69,7 +69,6 @@ jest.mock('@/hooks/useStats', () => ({
 jest.mock('@/hooks/usePerformance', () => ({
   usePerformance: () => ({ data: mockPerf, isLoading: false }),
 }));
-jest.mock('@/hooks/useSubscription', () => ({ useSubscription: () => ({ isPlus: true }) }));
 jest.mock('@/hooks/useLiftAnalytics', () => ({ useLiftAnalytics: () => ({ data: null }) }));
 jest.mock('@/hooks/useTodayLog', () => ({ useDeleteWorkoutLog: () => ({ mutate: jest.fn() }) }));
 jest.mock('@/hooks/useUnitPreference', () => ({

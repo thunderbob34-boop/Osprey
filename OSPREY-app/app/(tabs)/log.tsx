@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import type { ComponentProps } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -24,7 +23,9 @@ import FieldError from '@/components/FieldError';
 import HydrationCard from '@/components/HydrationCard';
 import { useRecentMeals, useTodayLog } from '@/hooks/useTodayLog';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
+import { WORKOUT_TYPES } from '@/types/log';
 import type { MealType, QuickWorkoutType, RecentMeal } from '@/types/log';
+import { SESSION_ICON, SESSION_ICON_FALLBACK } from '@/constants/session-icons';
 import { searchFoodByName, type FoodItemResult } from '@/services/food-lookup';
 import { useNutritionCoaching } from '@/hooks/useNutritionCoaching';
 import { useHydration } from '@/hooks/useHydration';
@@ -32,13 +33,6 @@ import { useWeightLog } from '@/hooks/useWeightLog';
 import { kgToLb, lbToKg } from '@/services/body-metrics';
 import { formatWeightKg, kmToMiles, milesToKm } from '@/services/units';
 import { estimateMealFromPhoto } from '@/services/meal-photo';
-
-const WORKOUT_TYPES: { value: QuickWorkoutType; label: string }[] = [
-  { value: 'run', label: 'Run' },
-  { value: 'lift', label: 'Lift' },
-  { value: 'cross', label: 'Cross' },
-  { value: 'race', label: 'Race' },
-];
 
 const MEAL_TYPES: { value: MealType; label: string }[] = [
   { value: 'breakfast', label: 'Breakfast' },
@@ -50,18 +44,6 @@ const MEAL_TYPES: { value: MealType; label: string }[] = [
 function formatSessionType(type: string): string {
   return type.charAt(0).toUpperCase() + type.slice(1);
 }
-
-type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
-
-// Vector icons, not emoji: emoji can't take the accent colour and render
-// differently on every platform, which broke the amber icon system this
-// screen sits inside (tab bar, Workout tab's sport cards).
-const WORKOUT_ENTRY_ICON: Record<string, IconName> = {
-  run: 'run',
-  lift: 'dumbbell',
-  cross: 'sync',
-  race: 'flag-checkered',
-};
 
 function formatTime(iso: string): string {
   return new Date(iso).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
@@ -608,7 +590,7 @@ export default function LogTab() {
                       accessibilityLabel={`Edit ${formatSessionType(w.sessionType)} workout`}
                     >
                       <MaterialCommunityIcons
-                        name={WORKOUT_ENTRY_ICON[w.sessionType] ?? 'run'}
+                        name={SESSION_ICON[w.sessionType] ?? SESSION_ICON_FALLBACK}
                         size={18}
                         color={Theme.accent}
                         style={styles.entryIcon}

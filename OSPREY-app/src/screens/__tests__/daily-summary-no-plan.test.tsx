@@ -21,3 +21,29 @@ describe('DailySummary with no planned session', () => {
     expect(screen.queryByText(/still crunching/i)).toBeNull();
   });
 });
+
+// An empty day is not the same as an empty account. An athlete mid-block hits
+// this on a rest day, or on a Monday before the generator has written the new
+// week — telling them to "Build My Plan" read as though their training block
+// had vanished, and pointed at a builder that would start them over.
+describe('DailySummary with a plan but nothing scheduled today', () => {
+  const emptyDay = {
+    type: 'Nothing Scheduled',
+    duration: 'Open day',
+    ozzieNote: 'Nothing on the calendar today.',
+    sessionId: null,
+    sessionType: null,
+  };
+
+  it('sends an established athlete to their week, not the plan builder', () => {
+    render(<DailySummaryScreen userName="Test" session={emptyDay} hasEverPlanned />);
+    expect(screen.getByText(/View This Week/i)).toBeTruthy();
+    expect(screen.queryByText(/Build My Plan/i)).toBeNull();
+  });
+
+  it('still offers the builder to an athlete who has never had a plan', () => {
+    render(<DailySummaryScreen userName="Test" session={emptyDay} hasEverPlanned={false} />);
+    expect(screen.getByText(/Build My Plan/i)).toBeTruthy();
+    expect(screen.queryByText(/View This Week/i)).toBeNull();
+  });
+});

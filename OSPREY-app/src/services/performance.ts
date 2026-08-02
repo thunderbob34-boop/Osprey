@@ -233,7 +233,7 @@ export async function fetchPerformanceData(
     // NB: the column is `total_distance_km` — a prior version of this query
     // selected a nonexistent `distance_meters` column, which made Postgrest
     // error on every call and silently broke fitness/fatigue, injury risk,
-    // and the race predictor for every OSPREY+ user.
+    // and the race predictor for every athlete.
     .select('started_at, total_duration_s, total_distance_km, session_type, tss')
     .eq('user_id', userId)
     .gte('started_at', since.toISOString())

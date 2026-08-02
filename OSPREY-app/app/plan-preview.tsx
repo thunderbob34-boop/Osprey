@@ -34,6 +34,7 @@ import type { IntervalPrescription, LiftPrescription } from '@/types/workout';
 import {
   computeRacePhase,
   fetchCurrentWeekSessions,
+  fetchHasActivePlan,
   fetchRaceGoal,
   type RaceGoal,
   type RacePhaseInfo,
@@ -266,6 +267,7 @@ export default function PlanPreviewScreen() {
   // own (e.g. from Settings) fetches the active plan's current week live.
   const isViewOnly = !sessionsJson;
   const [liveSessions, setLiveSessions] = useState<WeekSession[] | null>(null);
+  const [hasActivePlan, setHasActivePlan] = useState(false);
   const [loading, setLoading] = useState(isViewOnly);
   const [loadError, setLoadError] = useState(false);
   const [raceGoal, setRaceGoal] = useState<RaceGoal | null>(null);
@@ -284,9 +286,18 @@ export default function PlanPreviewScreen() {
     let cancelled = false;
     setLoading(true);
     setLoadError(false);
-    fetchCurrentWeekSessions(userId)
-      .then((data) => {
-        if (!cancelled) setLiveSessions(data);
+    // Fetched together so the empty state can tell "no plan at all" apart
+    // from "active plan, this week not generated yet" — see the two branches
+    // below. A failure to answer the plan question alone isn't fatal; the
+    // week's sessions are what this screen is actually for.
+    Promise.all([
+      fetchCurrentWeekSessions(userId),
+      fetchHasActivePlan(userId).catch(() => false),
+    ])
+      .then(([data, planExists]) => {
+        if (cancelled) return;
+        setLiveSessions(data);
+        setHasActivePlan(planExists);
       })
       .catch(() => {
         if (!cancelled) setLoadError(true);
@@ -427,14 +438,36 @@ export default function PlanPreviewScreen() {
         </View>
       ) : isViewOnly && sessions.length === 0 ? (
         <View style={styles.center}>
-          <Text style={styles.errorText}>No active plan yet.</Text>
-          <Button
-            variant="primary"
-            onPress={() => router.replace('/preferences')}
-            accessibilityLabel="Build my plan"
-          >
-            Build My Plan →
-          </Button>
+          {hasActivePlan ? (
+            // The plan is alive — this Monday's week just hasn't been built
+            // yet. Saying "no active plan" here told athletes mid-block that
+            // months of training had vanished, and pointed them at a builder
+            // that would start them over.
+            <>
+              <Text style={styles.errorText}>
+                This week isn&apos;t built yet. Ozzie writes each week&apos;s sessions as it
+                starts — pull to refresh, or check back shortly.
+              </Text>
+              <Button
+                variant="secondary"
+                onPress={() => router.back()}
+                accessibilityLabel="Back to home"
+              >
+                Back to Home
+              </Button>
+            </>
+          ) : (
+            <>
+              <Text style={styles.errorText}>No active plan yet.</Text>
+              <Button
+                variant="primary"
+                onPress={() => router.replace('/preferences')}
+                accessibilityLabel="Build my plan"
+              >
+                Build My Plan →
+              </Button>
+            </>
+          )}
         </View>
       ) : (
         <>

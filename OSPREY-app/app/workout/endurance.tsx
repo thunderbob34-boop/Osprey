@@ -30,7 +30,6 @@ import { useCueBanner } from '@/hooks/useCueBanner';
 import { ENCOURAGEMENTS } from '@/services/ozzie-cues';
 import { formatDuration, useWorkoutStore } from '@/store/workoutStore';
 import { useRunTracking } from '@/hooks/useRunTracking';
-import { useSubscription } from '@/hooks/useSubscription';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { pickTrackingMode } from '@/utils/trackingModePicker';
 import {
@@ -116,7 +115,6 @@ export default function EnduranceWorkoutScreen() {
     mode?: string;
   }>();
   const userId = useAuthStore((s) => s.user?.id);
-  const { isPlus } = useSubscription();
   const { units: unitPreference } = useUnitPreference();
   const { cueBannerText, showCueBanner } = useCueBanner();
 
@@ -299,10 +297,10 @@ export default function EnduranceWorkoutScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [intervalSteps, sessionStarted]);
 
-  // Auto cues every 10 minutes (OSPREY+ only) — skip while running a structured set,
+  // Auto cues every 10 minutes  — skip while running a structured set,
   // Ozzie is already narrating each interval.
   useEffect(() => {
-    if (!isPlus || speakingRef.current || hasIntervals) return;
+    if (speakingRef.current || hasIntervals) return;
     const nowMs = Date.now();
     if (elapsed > 0 && nowMs - lastAutoCueMs.current >= AUTO_CUE_INTERVAL_MS) {
       lastAutoCueMs.current = nowMs;
@@ -315,7 +313,7 @@ export default function EnduranceWorkoutScreen() {
         showCueBanner(cues[idx]);
       }
     }
-  }, [elapsed, isPlus, type, hasIntervals]);
+  }, [elapsed, type, hasIntervals]);
 
   async function handleManualCue() {
     const cues = ENCOURAGEMENTS[type];

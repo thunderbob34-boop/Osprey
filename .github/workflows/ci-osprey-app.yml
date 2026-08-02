@@ -1,0 +1,56 @@
+name: OSPREY-app CI
+
+# Nothing ran against pull requests before this: deploy-webapp.yml is
+# path-filtered to webapp/** and only fires on push to main, deploy-website.yml
+# is disabled, and pages-build-deployment is GitHub's own job. So the app's
+# 392-test suite, its typecheck and its lint were only ever run by hand.
+
+on:
+  pull_request:
+    paths:
+      - 'OSPREY-app/**'
+      - '.github/workflows/ci-osprey-app.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'OSPREY-app/**'
+      - '.github/workflows/ci-osprey-app.yml'
+
+# A second push to the same branch makes the first run's answer irrelevant.
+concurrency:
+  group: osprey-app-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: typecheck · lint · test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: OSPREY-app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: OSPREY-app/package-lock.json
+
+      - run: npm ci
+
+      # Each step runs even if an earlier one failed — one push should report
+      # every problem it introduced, not just the first one to trip.
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        if: '!cancelled()'
+        run: npm run lint
+
+      # jest is pinned to TZ=Asia/Kolkata by the npm script: a positive-offset
+      # zone is what catches local-midnight dates that toISOString() would
+      # render as the previous day (see plan.test.ts).
+      - name: Test
+        if: '!cancelled()'
+        run: npm test

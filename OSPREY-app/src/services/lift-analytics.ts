@@ -67,19 +67,26 @@ export async function fetchLiftAnalytics(userId: string, weeksBack = 8): Promise
 
   if (error) throw error;
 
-  const rows: RawSetRow[] = (data ?? []).map((row) => {
-    const workout = row.workout_logs as unknown as { started_at: string } | { started_at: string }[];
-    const exercise = row.exercises as unknown as { name: string; muscle_group: string } | { name: string; muscle_group: string }[];
-    const startedAt = Array.isArray(workout) ? workout[0]?.started_at : workout?.started_at;
-    const ex = Array.isArray(exercise) ? exercise[0] : exercise;
-    return {
-      reps: row.reps as number | null,
-      weight_kg: row.weight_kg as number | null,
-      started_at: startedAt ?? '',
-      exercise_name: ex?.name ?? 'Unknown',
-      muscle_group: ex?.muscle_group ?? 'Other',
-    };
-  });
+  const rows: RawSetRow[] = (data ?? [])
+    .map((row) => {
+      const workout = row.workout_logs as unknown as { started_at: string } | { started_at: string }[];
+      const exercise = row.exercises as unknown as { name: string; muscle_group: string } | { name: string; muscle_group: string }[];
+      const startedAt = Array.isArray(workout) ? workout[0]?.started_at : workout?.started_at;
+      const ex = Array.isArray(exercise) ? exercise[0] : exercise;
+      return {
+        reps: row.reps as number | null,
+        weight_kg: row.weight_kg as number | null,
+        started_at: startedAt ?? '',
+        exercise_name: ex?.name ?? 'Unknown',
+        muscle_group: ex?.muscle_group ?? 'Other',
+      };
+    })
+    // Every figure below is keyed by the workout's date — week volume, the
+    // per-day e1RM map, the PR's achievedOn. A row whose embedded workout
+    // came back empty carried '' through to the Stats PR card, which rendered
+    // it as the literal text "Est. 1RM · Invalid Date". The !inner join makes
+    // that unlikely, so drop such a row rather than render nonsense from it.
+    .filter((row) => Boolean(row.started_at));
 
   // ── This week's volume by muscle group ──
   const thisWeekStart = mondayStart(new Date());
