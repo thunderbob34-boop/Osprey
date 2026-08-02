@@ -4,7 +4,6 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import { makeRedirectUri } from 'expo-auth-session';
 import { supabase } from '@/services/supabase';
 import { clearOfflineCache } from '@/services/offline-cache';
-import { resetRevenueCat } from '@/services/subscriptions';
 
 // WebBrowser is optional — only available in native builds
 let WebBrowser: any = null;
@@ -105,8 +104,23 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
 
     supabase.auth.onAuthStateChange(async (_event, session) => {
-      set({ session, user: session?.user ?? null, profileReady: false });
+      const previousUserId = get().user?.id;
+      const nextUserId = session?.user?.id;
+      // TOKEN_REFRESHED fires on every hourly refresh with the same user.
+      // Clearing profileReady on those made (tabs)/_layout — which renders
+      // null until the profile is ready — unmount the entire tab UI to a
+      // black screen while the profile was re-fetched. Only a genuine
+      // identity change should put us back into the not-ready state.
+      const identityChanged = previousUserId !== nextUserId;
+      set({
+        session,
+        user: session?.user ?? null,
+        ...(identityChanged ? { profileReady: false } : {}),
+      });
+
       if (session?.user) {
+        // Still re-fetch on a same-user event so a profile edited elsewhere
+        // lands, but without blanking the UI while it's in flight.
         await get().fetchProfile();
       } else {
         set({ profile: null, profileReady: true, profileError: null });
@@ -270,7 +284,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   signOut: async () => {
     await supabase.auth.signOut();
-    await resetRevenueCat();
     await clearOfflineCache();
     set({
       session: null,
@@ -300,8 +313,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
       // The auth user no longer exists, so signOut may 4xx — clean up locally.
       await supabase.auth.signOut().catch(() => undefined);
-      await resetRevenueCat();
-      await clearOfflineCache();
+        await clearOfflineCache();
       set({
         session: null,
         user: null,

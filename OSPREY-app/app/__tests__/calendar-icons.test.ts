@@ -1,4 +1,5 @@
 import { SESSION_ICON, SESSION_ICON_FALLBACK } from '@/constants/session-icons';
+import { WORKOUT_TYPES } from '@/types/log';
 
 /**
  * calendar.tsx, plan-preview.tsx and the Stats tab render the same plan and
@@ -31,6 +32,39 @@ describe('SESSION_ICON', () => {
 
   it('never resolves a real session type to the unknown-type fallback', () => {
     for (const type of EMITTABLE) {
+      expect(SESSION_ICON[type]).not.toBe(SESSION_ICON_FALLBACK);
+    }
+  });
+});
+
+/**
+ * The Log tab's manual entry is the other half of the same invariant. It kept
+ * a FOURTH private icon map (missing swim/bike/rowing/hyrox, falling back to
+ * 'run'), and its type list was still the original four while swim/bike and
+ * rowing/hyrox had been added to session_type_enum and given live runners.
+ * A pool swim could only be filed as "Cross", and editing an existing swim
+ * showed no selected type at all.
+ */
+describe('manual workout logging covers the session types', () => {
+  // Everything an athlete can log by hand — a rest day is not a workout.
+  const LOGGABLE = ['run', 'lift', 'swim', 'bike', 'rowing', 'hyrox', 'cross', 'race'];
+
+  it('offers a chip for every loggable session type', () => {
+    const values: string[] = WORKOUT_TYPES.map((t) => t.value);
+    expect(new Set(values)).toEqual(new Set(LOGGABLE));
+  });
+
+  it('can round-trip every loggable type through the edit path', () => {
+    // handleEditWorkout seeds the chip state from the stored session_type; a
+    // type with no chip leaves the row with nothing selected and no way back.
+    for (const type of LOGGABLE) {
+      expect(WORKOUT_TYPES.some((t) => t.value === type)).toBe(true);
+    }
+  });
+
+  it('renders each loggable type with its own shared icon, never a guess', () => {
+    for (const type of LOGGABLE) {
+      expect(SESSION_ICON[type]).toBeTruthy();
       expect(SESSION_ICON[type]).not.toBe(SESSION_ICON_FALLBACK);
     }
   });

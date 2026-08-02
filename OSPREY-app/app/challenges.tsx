@@ -21,7 +21,6 @@ import DateField from '@/components/DateField';
 import FieldError from '@/components/FieldError';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useAuthStore } from '@/store/authStore';
-import { useSubscription } from '@/hooks/useSubscription';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import {
   useChallengeLeaderboard,
@@ -149,7 +148,6 @@ function LeaderboardPanel({ challenge, currentUserId, onClose }: LeaderboardPane
 export default function ChallengesScreen() {
   const router = useRouter();
   const currentUserId = useAuthStore((s) => s.user?.id);
-  const { isPlus } = useSubscription();
   const { challenges, friends, isLoading, error, create, leave, remove } = useChallenges();
 
   // ── form state ──
@@ -184,10 +182,6 @@ export default function ChallengesScreen() {
   }
 
   async function handleCreate() {
-    if (!isPlus) {
-      router.push('/paywall');
-      return;
-    }
     const errors: Record<string, string> = {};
     if (!formName.trim()) errors.name = 'What are you competing for?';
     if (!isValidDate(formStart)) errors.start = 'Pick a start date.';

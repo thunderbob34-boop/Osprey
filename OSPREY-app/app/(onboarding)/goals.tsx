@@ -130,14 +130,18 @@ const styles = StyleSheet.create({
     color: Theme.textMut,
     fontWeight: '600',
   },
+  // All 8 buttons (0-7) have to fit one row. Fixed 34pt widths + 6pt gaps
+  // needed 314pt inside a 306pt card on a 390pt iPhone, so "7" wrapped onto
+  // a line of its own (and worse on a 375pt SE). Letting them flex keeps the
+  // row intact at any width; aspectRatio holds them square.
   dayRow: {
     flexDirection: 'row',
-    gap: 6,
-    flexWrap: 'wrap',
+    gap: 5,
   },
   dayBtn: {
-    width: 34,
-    height: 34,
+    flex: 1,
+    aspectRatio: 1,
+    maxWidth: 40,
     borderRadius: Radius.card,
     backgroundColor: 'rgba(255,255,255,0.04)',
     borderWidth: 1,

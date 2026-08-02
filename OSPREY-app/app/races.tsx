@@ -24,7 +24,6 @@ import InputModal from '@/components/InputModal';
 import ScreenHeader from '@/components/ScreenHeader';
 import { useRacePartners } from '@/hooks/useRacePartners';
 import { useRaces } from '@/hooks/useRaces';
-import { useSubscription } from '@/hooks/useSubscription';
 import { useUnitPreference } from '@/hooks/useUnitPreference';
 import { formatPacePerUnit, milesToKm } from '@/services/units';
 import { formatRaceDistance, RACE_DISTANCE_LADDER, raceRunwayLabel } from '@/services/race-display';
@@ -86,8 +85,6 @@ interface LogisticsPanelProps {
   onGenerateBriefing: (race: RaceEvent) => Promise<void>;
   isSaving: boolean;
   isGenerating: boolean;
-  isPlus: boolean;
-  onPaywall: () => void;
 }
 
 function LogisticsPanel({
@@ -97,8 +94,6 @@ function LogisticsPanel({
   onGenerateBriefing,
   isSaving,
   isGenerating,
-  isPlus,
-  onPaywall,
 }: LogisticsPanelProps) {
   const [form, setForm] = useState<LogisticsState>(() => initLogistics(race));
 
@@ -194,18 +189,18 @@ function LogisticsPanel({
               bordered-pill recipe. Converting would add a visible border box
               that isn't there today. */}
           <TouchableOpacity
-            onPress={() => (isPlus ? onGenerateBriefing(race) : onPaywall())}
+            onPress={() => onGenerateBriefing(race)}
             disabled={isGenerating}
             style={styles.generateBtn}
             accessibilityRole="button"
-            accessibilityLabel={!isPlus ? 'Unlock OSPREY+ to generate race briefing' : race.ozzieBriefingText ? 'Refresh race briefing' : 'Generate race briefing'}
+            accessibilityLabel={race.ozzieBriefingText ? 'Refresh race briefing' : 'Generate race briefing'}
             accessibilityState={{ disabled: isGenerating, busy: isGenerating }}
           >
             {isGenerating ? (
               <ActivityIndicator color={Theme.accent} size="small" />
             ) : (
               <Text style={styles.generateBtnText}>
-                {!isPlus ? 'OSPREY+' : race.ozzieBriefingText ? '↺ Refresh' : 'Generate'}
+                {race.ozzieBriefingText ? '↺ Refresh' : 'Generate'}
               </Text>
             )}
           </TouchableOpacity>
@@ -275,8 +270,6 @@ interface RetroPanelProps {
   onGenerateRetro: (race: RaceEvent, feelScore: number | null) => Promise<void>;
   isSaving: boolean;
   isGenerating: boolean;
-  isPlus: boolean;
-  onPaywall: () => void;
 }
 
 function RetroPanel({
@@ -286,8 +279,6 @@ function RetroPanel({
   onGenerateRetro,
   isSaving,
   isGenerating,
-  isPlus,
-  onPaywall,
 }: RetroPanelProps) {
   const [form, setForm] = useState<RetroState>(() => initRetro(race));
 
@@ -387,18 +378,18 @@ function RetroPanel({
           {/* Hand-rolled, not <Button>: same reasoning as the Logistics panel's
               generate button — generateBtn has no border/fill of its own. */}
           <TouchableOpacity
-            onPress={() => (isPlus ? onGenerateRetro(race, form.feelScore) : onPaywall())}
+            onPress={() => onGenerateRetro(race, form.feelScore)}
             disabled={isGenerating}
             style={styles.generateBtn}
             accessibilityRole="button"
-            accessibilityLabel={!isPlus ? 'Unlock OSPREY+ to generate race retrospective' : race.ozzieRetroText ? "Refresh Ozzie's take" : "Generate Ozzie's take"}
+            accessibilityLabel={race.ozzieRetroText ? "Refresh Ozzie's take" : "Generate Ozzie's take"}
             accessibilityState={{ disabled: isGenerating, busy: isGenerating }}
           >
             {isGenerating ? (
               <ActivityIndicator color={Theme.accent} size="small" />
             ) : (
               <Text style={styles.generateBtnText}>
-                {!isPlus ? 'OSPREY+' : race.ozzieRetroText ? '↺ Refresh' : 'Generate'}
+                {race.ozzieRetroText ? '↺ Refresh' : 'Generate'}
               </Text>
             )}
           </TouchableOpacity>
@@ -546,7 +537,6 @@ export default function RacesScreen() {
   const queryClient = useQueryClient();
   const [buildingPlanRaceId, setBuildingPlanRaceId] = useState<string | null>(null);
   const router = useRouter();
-  const { isPlus } = useSubscription();
   const {
     upcoming,
     past,
@@ -844,8 +834,6 @@ export default function RacesScreen() {
           onGenerateBriefing={handleGenerateBriefing}
           isSaving={saveLogistics.isPending}
           isGenerating={generateBriefing.isPending}
-          isPlus={isPlus}
-          onPaywall={() => router.push('/paywall')}
         />
       ) : null}
 
@@ -1118,8 +1106,6 @@ export default function RacesScreen() {
                           onGenerateRetro={handleGenerateRetro}
                           isSaving={saveRetro.isPending}
                           isGenerating={generateRetro.isPending}
-                          isPlus={isPlus}
-                          onPaywall={() => router.push('/paywall')}
                         />
                       ) : null}
                     </View>

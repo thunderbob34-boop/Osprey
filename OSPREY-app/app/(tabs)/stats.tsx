@@ -19,7 +19,6 @@ import { SESSION_ICON, SESSION_ICON_FALLBACK } from '@/constants/session-icons';
 import { useStats } from '@/hooks/useStats';
 import { useDeleteWorkoutLog } from '@/hooks/useTodayLog';
 import { usePerformance } from '@/hooks/usePerformance';
-import { useSubscription } from '@/hooks/useSubscription';
 import { useLiftAnalytics } from '@/hooks/useLiftAnalytics';
 import { formatRaceTimeSec } from '@/services/performance';
 import { kgToLb } from '@/services/body-metrics';
@@ -215,7 +214,6 @@ function SportVolumeChart({
 export default function StatsTab() {
   const router = useRouter();
   const { data, isLoading, error } = useStats();
-  const { isPlus } = useSubscription();
   const { data: perf, isLoading: perfLoading } = usePerformance();
   const { data: liftStats } = useLiftAnalytics();
   const { units } = useUnitPreference();
@@ -318,9 +316,8 @@ export default function StatsTab() {
               ) : null}
             </View>
 
-            {/* ── Performance Intelligence (OSPREY+) ── */}
-            {isPlus ? (
-              perfLoading ? (
+            {/* ── Performance Intelligence ── */}
+            {perfLoading ? (
                 <ActivityIndicator color={Theme.accent} style={{ marginTop: 8 }} />
               ) : perf ? (
                 <>
@@ -464,25 +461,7 @@ export default function StatsTab() {
                     </>
                   ) : null}
                 </>
-              ) : null
-            ) : (
-              /* Gate upsell for non-plus users */
-              <TouchableOpacity
-                style={styles.upsellCard}
-                onPress={() => router.push('/paywall')}
-                accessibilityRole="button"
-                accessibilityLabel="Unlock Performance Intelligence"
-              >
-                <Text style={styles.upsellIcon}>📈</Text>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.upsellTitle}>Performance Intelligence</Text>
-                  <Text style={styles.upsellDesc}>
-                    Fitness/fatigue/form trends, injury risk score, and race time predictions.
-                  </Text>
-                </View>
-                <Text style={styles.upsellArrow}>→</Text>
-              </TouchableOpacity>
-            )}
+              ) : null}
 
             {liftStats && (liftStats.weekVolumeKg > 0 || liftStats.prs.length > 0) ? (
               <>
@@ -814,21 +793,6 @@ const styles = StyleSheet.create({
   predictorTotalValue: { fontSize: 16, fontWeight: '800', color: Theme.accent },
 
   // ── Upsell card ──
-  upsellCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    backgroundColor: Theme.panel,
-    borderWidth: BorderWidth.card,
-    borderColor: Theme.accent,
-    borderRadius: Radius.card,
-    padding: 16,
-    marginBottom: 24,
-  },
-  upsellIcon: { fontSize: 28 },
-  upsellTitle: { fontSize: 14, fontWeight: '700', color: Theme.accent, marginBottom: 3 },
-  upsellDesc: { fontSize: 12, color: Theme.textSoft, lineHeight: 17 },
-  upsellArrow: { fontSize: 18, color: Theme.accent, fontWeight: '700' },
 
   // ── Lift analytics ──
   liftCard: {

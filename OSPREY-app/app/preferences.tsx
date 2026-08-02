@@ -280,12 +280,25 @@ export default function PreferencesScreen() {
         data: { osprey_preferences: preferences },
       });
 
-      // Also update experience_tier in the users table
+      // The athlete's level lives in two columns: users.experience_tier (what
+      // this screen and Settings display) and user_goals.fitness_level (what
+      // ozzie-generate-plan actually builds from, via build-envelope). Writing
+      // only the first let them drift — an athlete who moved themselves to
+      // Intermediate here kept getting beginner-shaped plans, with the UI
+      // showing the level the engine wasn't using. Both are written together.
       if (userId) {
-        await supabase
-          .from('users')
-          .update({ experience_tier: EXPERIENCE_TIER_MAP[experienceLevel] })
-          .eq('id', userId);
+        const tier = EXPERIENCE_TIER_MAP[experienceLevel];
+        const [{ error: userError }, { error: goalsError }] = await Promise.all([
+          supabase.from('users').update({ experience_tier: tier }).eq('id', userId),
+          supabase.from('user_goals').update({ fitness_level: tier }).eq('user_id', userId),
+        ]);
+        if (userError || goalsError) {
+          Alert.alert(
+            'Could not save your experience level',
+            (userError ?? goalsError)?.message ?? 'Try again.',
+          );
+          return;
+        }
       }
 
       // Persist goal_params BEFORE generating: invokeGeneratePlan builds the
