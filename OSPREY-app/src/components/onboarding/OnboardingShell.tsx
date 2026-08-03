@@ -138,6 +138,42 @@ export function OptionCard({
   );
 }
 
+// A row of tappable day-count buttons (0-7), extracted from the old goals.tsx
+// so days.tsx and split.tsx (its one-question-per-screen split) share one
+// widget instead of two copies.
+export function DayCountPicker({
+  label,
+  value,
+  onChange,
+  hint,
+}: {
+  label: string;
+  value: number;
+  onChange: (v: number) => void;
+  hint?: string;
+}) {
+  return (
+    <View style={styles.dayPicker}>
+      <Text style={styles.dayLabel}>{label}</Text>
+      <View style={styles.dayRow}>
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((day) => (
+          <TouchableOpacity
+            key={day}
+            style={[styles.dayBtn, value === day && styles.dayBtnActive]}
+            onPress={() => onChange(day)}
+            accessibilityRole="button"
+            accessibilityLabel={`${day} ${label}`}
+            accessibilityState={{ selected: value === day }}
+          >
+            <Text style={[styles.dayBtnText, value === day && styles.dayBtnTextActive]}>{day}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      {hint ? <Text style={styles.dayHint}>{hint}</Text> : null}
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -266,5 +302,49 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     width: 20,
     textAlign: 'center',
+  },
+  dayPicker: {
+    gap: 8,
+  },
+  dayLabel: {
+    fontSize: 13,
+    color: Theme.textMut,
+    fontWeight: '600',
+  },
+  // All 8 buttons (0-7) fit one row via flex-to-fit rather than wrap — mirrors
+  // origin/main PR #7's fix to this exact widget's predecessor in goals.tsx:
+  // fixed widths + gaps didn't fit a 306pt card on a 390pt iPhone (worse on a
+  // 375pt SE), so "7" wrapped onto its own line. flex+aspectRatio keeps all 8
+  // on one row and square at any width.
+  dayRow: {
+    flexDirection: 'row',
+    gap: 5,
+  },
+  dayBtn: {
+    flex: 1,
+    aspectRatio: 1,
+    maxWidth: 40,
+    borderRadius: Radius.card,
+    backgroundColor: 'rgba(255,255,255,0.04)',
+    borderWidth: 1,
+    borderColor: Theme.line,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dayBtnActive: {
+    borderColor: Theme.accent,
+  },
+  dayBtnText: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: Theme.textMut,
+  },
+  dayBtnTextActive: {
+    color: Theme.accent,
+  },
+  dayHint: {
+    fontSize: 11,
+    color: Theme.textMut,
+    marginTop: 2,
   },
 });

@@ -1,13 +1,18 @@
 import { z } from 'zod';
 
 const SourceEnum = z.enum(['self_report', 'derived', 'estimate']);
+// WS1: how much extrapolation a 'derived' anchor trusts (mobile's
+// coaching/anchor-policy.ts). Optional — self-reported anchors don't carry one,
+// and z.object() strips unknown keys rather than failing, so this can be added
+// without breaking anchors written before this field existed.
+const ConfidenceEnum = z.enum(['low', 'moderate', 'high']);
 
 export const ThresholdAnchorSchema = z
   .object({
-    run: z.object({ thresholdSecPerMile: z.number(), source: SourceEnum }),
-    swim: z.object({ cssSecPer100: z.number(), source: SourceEnum }),
-    row: z.object({ splitSecPer500: z.number(), source: SourceEnum }),
-    bike: z.object({ ftpWatts: z.number(), source: SourceEnum }),
+    run: z.object({ thresholdSecPerMile: z.number(), source: SourceEnum, confidence: ConfidenceEnum.optional() }),
+    swim: z.object({ cssSecPer100: z.number(), source: SourceEnum, confidence: ConfidenceEnum.optional() }),
+    row: z.object({ splitSecPer500: z.number(), source: SourceEnum, confidence: ConfidenceEnum.optional() }),
+    bike: z.object({ ftpWatts: z.number(), source: SourceEnum, confidence: ConfidenceEnum.optional() }),
   })
   .partial();
 

@@ -21,21 +21,8 @@ import ScreenHeader from '@/components/ScreenHeader';
 import { fetchRaceDistances, getCachedRace, parseRaceDate, stripHtml, type RaceSearchResult } from '@/services/race-search';
 import { extractFunctionErrorMessage } from '@/services/supabase';
 import { invokeGeneratePlan } from '@/services/coaching/build-envelope';
-import { createRaceEvent } from '@/services/races';
+import { createRaceEvent, distanceLabelToKm } from '@/services/races';
 import { useAuthStore } from '@/store/authStore';
-
-/** Best-effort conversion of a race distance label ("5K", "Half Marathon") to km. */
-function distanceLabelToKm(label: string): number | null {
-  const lower = label.toLowerCase();
-  if (lower.includes('half') && lower.includes('marathon')) return 21.1;
-  if (lower.includes('marathon')) return 42.2;
-  const kMatch = lower.match(/(\d+(?:\.\d+)?)\s*k/);
-  if (kMatch) return Number(kMatch[1]);
-  const mileMatch = lower.match(/(\d+(?:\.\d+)?)\s*mile/);
-  if (mileMatch) return Number(mileMatch[1]) * 1.609;
-  if (lower.includes('mile')) return 1.6;
-  return null;
-}
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return '';

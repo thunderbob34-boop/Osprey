@@ -1,4 +1,5 @@
-import type { SelfReportAnchor } from './baseline';
+import type { SelfReportAnchor, AnchorConfidence } from './baseline';
+import { anchorPolicy } from './anchor-policy';
 import { runningPaceZones } from '@/services/calculators/running';
 import { swimPaceZones } from '@/services/calculators/swimming';
 import { rowingTrainingZones } from '@/services/calculators/rowing';
@@ -54,6 +55,13 @@ export interface EnvelopeInput {
   hyroxParams?: import('./hyrox-params').HyroxGoalParams | null;
   crossfitParams?: import('./crossfit-params').CrossfitGoalParams | null;
   weeksRemaining?: number | null;
+  /**
+   * Confidence of whichever anchor is driving THIS sport's zones (run or row —
+   * the only two WS1 derives from HealthKit; swim/bike stay self-report and pass
+   * null here). A 'low' confidence provisionally caps hardSessionShareMax for
+   * weeks 1-3 — see anchor-policy.ts's module doc for why.
+   */
+  anchorConfidence?: AnchorConfidence | null;
 }
 
 export type ZonesConfidence = 'measured' | 'estimated';
@@ -142,6 +150,17 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
 
   const { zones } = resolveZones(input);
 
+  // A 'low'-confidence derived anchor (run/row only — see anchor-policy.ts) is
+  // both uncertain and biased slow. Treat it as provisional: halve the
+  // polarization cap for weeks 1-3 rather than prescribing aggressive threshold
+  // work off a short extrapolation, then revert to the standard cap from week 4.
+  const bp = blueprintSport(input.sport);
+  const anchorDrivesThisSport = bp === 'run' || bp === 'rowing';
+  const hardShareMultiplier =
+    anchorDrivesThisSport && input.anchorConfidence != null && input.weekNumber <= 3
+      ? anchorPolicy(input.anchorConfidence).hardShareMultiplier
+      : 1;
+
   const hr = resolveMaxHR(input.maxHR ?? null);
   const hrZones: HrZoneInfo = { maxHR: hr.maxHR, source: hr.source, bands: ultraHRZones(hr.maxHR) };
 
@@ -155,7 +174,7 @@ export function computeEnvelope(input: EnvelopeInput): CoachingEnvelope {
     weekNumber: input.weekNumber,
     totalWeeks: input.totalWeeks,
     targetWeeklyLoad: load,
-    hardSessionShareMax: 0.2,
+    hardSessionShareMax: 0.2 * hardShareMultiplier,
     zones,
     hrZones,
     fuel: computeFuel(input.sport, input.bodyWeightKg, input.ultraParams?.gutTrained ?? false),

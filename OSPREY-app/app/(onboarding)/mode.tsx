@@ -4,6 +4,11 @@ import OnboardingShell, { OptionCard } from '@/components/onboarding/OnboardingS
 import { useOnboardingStore } from '@/store/onboardingStore';
 import { Theme } from '@/constants/theme';
 
+// Self-assessment stays self-report — unlike days/anchor/weight below, "how
+// would you describe yourself" is a subjective read on your own training, not
+// a fact HealthKit can propose without silently overriding how the athlete
+// actually experiences their training. Repositioned from step 2 to after
+// goal+race so the copy can reference "the plan" concretely.
 export default function ModeScreen() {
   const router = useRouter();
   const experienceTier = useOnboardingStore((s) => s.experienceTier);
@@ -11,11 +16,11 @@ export default function ModeScreen() {
 
   return (
     <OnboardingShell
-      step={2}
-      totalSteps={5}
+      step={5}
+      totalSteps={13}
       title="How would you describe yourself as a trainer right now?"
       hint="This sets how I talk to you and what metrics I focus on. You can change it any time."
-      onContinue={() => router.push('/(onboarding)/goals')}
+      onContinue={() => router.push('/(onboarding)/days')}
     >
       <OptionCard
         icon="🌱"

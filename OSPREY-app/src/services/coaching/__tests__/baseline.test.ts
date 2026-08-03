@@ -121,6 +121,16 @@ describe('setAnchorEntry', () => {
     const next = setAnchorEntry(map, 'run', { thresholdSecPerMile: 664, source: 'self_report' });
     expect(next.run).toEqual({ thresholdSecPerMile: 664, source: 'self_report' });
   });
+
+  // WS1: a HealthKit-confirmed anchor is stored as source 'derived' with a
+  // confidence tier — must round-trip exactly like the 'self_report' shape
+  // above, since this is the same map the athlete's account persists and the
+  // webapp reads (mirrored schema in webapp/src/lib/threshold-anchor.ts).
+  it("round-trips a 'derived' source with a confidence field", () => {
+    const map = {};
+    const next = setAnchorEntry(map, 'run', { thresholdSecPerMile: 480, source: 'derived', confidence: 'low' });
+    expect(next.run).toEqual({ thresholdSecPerMile: 480, source: 'derived', confidence: 'low' });
+  });
 });
 
 describe('clearAnchorEntry', () => {
