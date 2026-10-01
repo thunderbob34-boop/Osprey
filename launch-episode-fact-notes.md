@@ -2,7 +2,7 @@
 
 Prepared 2026-10-01. These notes cover the research rounds, what changed in each, every claim in the script with its sources, and everything unresolved with how it was hedged.
 
-## Status: ROUND 3 IN PROGRESS
+## Status: Round 7 (final regression check) in progress
 
 This file will be updated when Round 3 finishes.
 ## Round 1: live search pass (search-engine extracts; page fetches blocked)
@@ -111,6 +111,29 @@ It raised three low-confidence guards. All three were applied because they make 
 Unverifiable from memory but not disputed: the $5,000 sequence, already the top spot-check item; 1897 vs. 1896 for the buyout (Carlson gives 1897); whether anyone mentioned the tear-up story before O'Neill, which "as far as historians can tell" covers; the bamboo lifespan date, which is hedged.
 
 Because these wording edits were made, a confirmation round was run on the final text.
+## Round 6: confirmation round on the final text (no live search possible)
+
+**Result: 0 corrections (no high- or medium-confidence findings). The stop condition is met.** A fresh reviewer re-walked the whole chronology and the physics and found everything consistent: Swan Feb 1879 → Edison Oct 1879; Southwick letters in late 1887 → law 4 June 1888 → Brown, West Orange and Columbia (30 July 1888) → Kemmler hearing July 1889 → execution 6 Aug 1890; GE April 1892 → fair contract the same year; Buffalo 16 Nov 1896.
+
+Three optional low-confidence notes were **deliberately not applied**:
+1. "That's the second myth": a pedant could count three. You asked for this to be framed as the *second* myth-bust, and the bulb is the first.
+2. Tesla's New York stint may have run into early 1885. "About six months… in 1884" is a fair simplification.
+3. Latimer's patent was filed in 1881 and granted Jan 1882. "Patented… in 1882" is accurate.
+
+Still flagged as unverifiable from memory and already on the spot-check list: the $5,000 letters; who coined "Westinghoused"; the date of the bamboo lifespan figure; whether the winning 1892 bid round was formally in GE's name.
+## Final pre-publish audit (blind, editorial)
+
+Following the script-final-read and final-audit skills, a blind auditor with no context checked format, runtime, title promise, the full-circle rule and structure. It graded the script **B** and found these, now fixed:
+- **Runtime over target** (1,702 words): cut the Tesla epilogue (the research is kept in the claims table), the repeated one-mile line, a doubled "prove AC was a killer", and a Latimer clause. Now ~1,590 words, about 10 minutes.
+- **"Using Tesla's AC system" at Niagara** re-did the over-crediting that §05 corrects: removed.
+- **The closing list led with Westinghouse** and left out Gaulard and Gibbs: now "Gaulard and Gibbs and Stanley and Tesla and Westinghouse…"
+- **The title's "jab" concession came at ~8.5 minutes**: moved into the cold open, so early leavers still hear it.
+- **The launch episode never said the channel premise**: added a closing line, "Somebody did it first, and that's what this channel is about." It makes no factual claim.
+- **The reading notes pointed at a spot-check list that didn't exist**: the list is now at the top of this file.
+- **Visual guidance**: added a reading note to avoid animal or execution imagery for the dog and Kemmler beats.
+- Minor cadence fixes: "witnesses" said twice, a comma splice, repeated "to be fair".
+
+The auditor also suggested "another myth" instead of "the second myth". **Kept "second big myth"**, because the brief asks for this to be framed as the second myth-bust.
 ## Unresolved items and how each was handled
 
 | Item | What's unresolved | How it's handled |
@@ -180,11 +203,14 @@ Because these wording edits were made, a confirmation round was run on the final
 | 07 | GE built AC equipment alongside Westinghouse | V / B | Hughes; GE history (GE–Westinghouse patent pool, 1896) |
 | 07 | Same year (1892), Westinghouse came in well under GE's bid to light the 1893 Chicago World's Fair and won | V, **corrected R2, R3** | Smithsonian; IEEE Spectrum; Jonnes. The brief's "roughly half" was dropped because $399k vs. $554k ≈ 72% |
 | 07 | Millions of visitors; fairground lit "largely" by AC | B | The fair's attendance is usually given as ~27 million admissions (Chicago History Museum; Britannica) |
-| 07 | Niagara: Westinghouse built the generators using Tesla's AC (polyphase) system; power reached Buffalo in Nov 1896, more than 20 miles away (vs. Edison plants within about a mile) | B | IEEE Milestone "Adams Hydroelectric Generating Plant, 1895"; Carlson; Buffalo History Museum. The plant ran from 1895; Buffalo transmission began 15–16 Nov 1896; ~20–26 miles depending on the measure |
-| 08 | Tesla died Jan 1943, Hotel New Yorker, nearly broke | V (death) / B (finances) | Carlson; PBS *American Experience: Tesla* (2016); NYT obituary, 8 Jan 1943 |
-| 08 | The royalty tear-up story first appears in a posthumous biography, with no documents behind it | B (hedged "as far as historians can tell") | Carlson (2013); the story's source is John J. O'Neill, *Prodigal Genius* (1944) |
-| 08 | Westinghouse bought out his royalty deal for a lump sum in 1897 | B | Carlson (~$216,000, not spoken) |
-| 08 | In his last years the Westinghouse company paid his rent | B | Carlson; PBS (from ~1934 a consulting fee plus his hotel bill) |
-| 08 | Edison held over a thousand US patents; he wasn't first with the bulb, and today's wall power isn't his system | B | Edison Papers (1,093 US patents) |
+| 07 | Niagara: Westinghouse built the generators for the hydroelectric plant; power reached Buffalo in Nov 1896, more than 20 miles away | B | IEEE Milestone "Adams Hydroelectric Generating Plant, 1895"; Carlson; Buffalo History Museum. The plant ran from 1895; Buffalo transmission began 15–16 Nov 1896; ~20–26 miles depending on the measure |
+| ~~08~~ (cut) | Tesla died Jan 1943, Hotel New Yorker, nearly broke | V (death) / B (finances) | Carlson; PBS *American Experience: Tesla* (2016); NYT obituary, 8 Jan 1943 |
+| ~~08~~ (cut) | The royalty tear-up story first appears in a posthumous biography, with no documents behind it | B (hedged "as far as historians can tell") | Carlson (2013); the story's source is John J. O'Neill, *Prodigal Genius* (1944) |
+| ~~08~~ (cut) | Westinghouse bought out his royalty deal for a lump sum in 1897 | B | Carlson (~$216,000, not spoken) |
+| ~~08~~ (cut) | In his last years the Westinghouse company paid his rent | B | Carlson; PBS (from ~1934 a consulting fee plus his hotel bill) |
+| 01/08 | Edison held over a thousand US patents (now said in the cold open); he wasn't first with the bulb, and today's wall power isn't his system | B | Edison Papers (1,093 US patents) |
 | 08 | DC has made a comeback on very long lines thanks to modern electronics (HVDC) | B | US DOE; IEEE; any HVDC overview |
 | 08 | Household AC everywhere; US 120V/60Hz, UK/Europe 230V/50Hz; chargers convert to DC | V | IEC World Plugs (iec.ch); US DOE |
+| 08 | Closing credit list: Gaulard and Gibbs, Stanley, Tesla, Westinghouse, "and a string of engineers" | B | Same sources as §04 and §05 (IEEE Milestone; Hughes; Carlson). Ordered by contribution, per the final audit |
+
+Rows marked ~~08~~ (cut) were verified for the Tesla epilogue (death Jan 1943 at the Hotel New Yorker; the tear-up story traced to O'Neill's 1944 *Prodigal Genius*; the 1897 ~$216,000 royalty buyout; Westinghouse paying his rent from ~1934, per Carlson and PBS). The paragraph was **cut in the final audit** for runtime and because it's a separate Tesla story. The research stands, and it's ready for a Tesla episode.
