@@ -1,0 +1,64 @@
+# The Man Who Invented Nothing
+
+READING NOTES
+- Runtime is about 10 minutes at a relaxed pace, roughly 1,650 spoken words.
+- Tone is calm and matter-of-fact. Keep the electric chair section plain and flat, no drama in the voice, the facts carry it.
+- Say Kemmler as KEM-ler, Gaulard as go-LAR, Thomson-Houston as TOM-son HOO-ston.
+- Every hedge in here is on purpose. Read "as Tesla told it", "something like", "appears to", "usually counted as", "neck and neck", "as far as historians can tell" and "effectively" exactly as written, because they are what keeps the channel credible.
+- The World's Fair line no longer says "roughly half". The two most-repeated bids ($399,000 vs $554,000) work out to about 72 percent, so the script just says Westinghouse came in well under. Don't put "half" on screen.
+- Good on-screen text moments are Feb 3 1879, Oct 1879, Pearl Street 1882, Great Barrington 1886, May 1888, late 1887, July 1888, Aug 6 1890, 1892, 1893, Nov 1896, Jan 1943, and 120V/60Hz vs 230V/50Hz.
+- Before you publish, check the short "spot-check before publishing" list at the top of the fact notes. The web search budget ran out mid-research, so a handful of lines rest on standard history rather than a live re-check this session.
+
+## 01 Cold Open
+
+Ask almost anybody who invented the lightbulb and you'll get the same answer, Thomas Edison, but Edison didn't invent the lightbulb, plenty of people had glowing electric lamps before he got one to work, and the fair way to say it is that Edison built the first one that was commercially practical, which is a big deal, and we'll give him full credit for it. But here's the part most people never hear, the lightbulb wasn't even the real fight, the real fight was over how to power it, and that's a fight Edison lost.
+
+## 02 Davy and Swan
+
+The story starts in England in the early 1800s with a chemist named Humphry Davy, who ran current from a huge battery between two pieces of carbon and got an arc of light across the gap. That's the arc light, and decades later, once there were generators to run it, it ended up in lighthouses and streets, but it was way too bright for your living room. Meanwhile inventor after inventor tried running current through a strip of carbon or platinum until it glowed, and the usual problem was that the strip burned up or melted before it was any use.
+
+Then on February 3rd, 1879, an English chemist named Joseph Swan stood up in front of about seven hundred people at the Literary and Philosophical Society in Newcastle and showed them a working bulb that glowed, a carbon filament inside a glass bulb with the air pumped out, and that was months before Edison had a bulb that worked.
+
+## 03 What Edison Actually Did
+
+Now, to be fair to Edison, what he did really matters. The early lamps mostly used thick, low-resistance carbon, which meant they needed a lot of current, which meant thick, expensive copper wire running to every lamp. Edison went the other way, a thin, high-resistance carbon filament that ran on much less current, inside a better vacuum so it didn't burn away. He got one working in October 1879 and he got his carbon filament patent in January 1880, and the first ones lasted something like half a day, but within a year or two his bamboo filaments were lasting hundreds of hours, with the best ones passing a thousand.
+
+And then he did the thing nobody else had pulled off, which is he built the whole system around the bulb, the screw-in socket, the switches, the fuses, the meters, the generators, and the wires running under the street. In 1882 he switched on the Pearl Street Station in lower Manhattan, and that's usually counted as the start of the electric utility business in America, power sold from a central plant to ordinary customers. And to be fair to Swan, he was selling his bulbs in Britain at the same time, neck and neck, until the two of them merged their British companies in 1883 instead of fighting it out in court.
+
+One more name worth knowing is Lewis Latimer, a Black inventor and draftsman who patented a better way of making carbon filaments in 1882, and here's the twist, he did it while working for Edison's competitor, Hiram Maxim's company, and Edison's company hired him in 1884.
+
+## 04 The Real Fight
+
+But a lightbulb on its own is just a glass ornament, right? You need electricity coming into the building, and Edison's system ran on direct current, DC, which flows one way down the wire at a steady voltage.
+
+Now you'll hear people say alternating current won because it travels farther, and that's not really it. Electricity loses energy as heat in the wires, and that loss climbs fast the more current you push, so the trick to sending power a long way is a very high voltage with a small current. Alternating current flips direction back and forth many times a second, and you can step it up and down with a transformer, which is basically two coils of wire around an iron core. So with AC you step the voltage way up at the power plant, send it miles down the wires without losing much, and step it back down before it gets to your house. But DC back then had no practical way to do that, so Edison's system had to send power at roughly the same low voltage people used at home, and that meant an Edison power plant had to sit within about a mile of its customers.
+
+And here's a twist that fits this channel, George Westinghouse didn't invent the AC system either. The transformer design he bought into came out of Europe, from Lucien Gaulard and John Gibbs, and it was his engineer William Stanley who turned it into a practical system for Westinghouse, lighting up shops and offices on the main street of Great Barrington, Massachusetts, on alternating current in 1886.
+
+## 05 It Wasn't Tesla Versus Edison
+
+Now, a lot of people picture this as Tesla versus Edison, two geniuses going head to head, and that's the second myth in this story. Tesla did work for Edison's company, briefly, in New York in 1884, and as Tesla told it, he was promised fifty thousand dollars to improve the company's generators, and when he delivered, he was told the offer had been a joke, so he quit, and that story comes only from Tesla himself, years later.
+
+What actually put Tesla in the war was a patent, in May 1888 he got patents on an AC induction motor, a motor that ran on alternating current, which was a missing piece of the AC system, and that same year Westinghouse bought the rights. So the fight in the newspapers wasn't Tesla against Edison, it was Westinghouse against Edison, and Tesla was the guy whose patents they were fighting over.
+
+## 06 The Smear Campaign
+
+And Edison's side fought dirty. Back in late 1887, New York was looking for something to replace hanging, and when a state commission asked Edison for advice, he first wrote back that he was against capital punishment altogether, and then about a month later he recommended alternating current and pointed them to Westinghouse's machines. The next year, 1888, an electrical engineer named Harold Brown started a public campaign to prove AC was a killer, and Edison let Brown use his lab in West Orange, New Jersey, where they electrocuted animal after animal, mostly dogs, to make AC look like the killer. That July, in a lecture hall at Columbia College in New York, Brown electrocuted a dog in front of an audience, first with DC, which it survived, and then with AC, which killed it, and Edison's camp even floated a word for getting killed by electricity, getting "Westinghoused."
+
+And there's more, New York had passed its electric chair law in 1888, Harold Brown ended up supplying the equipment, and letters show he asked Edison for five thousand dollars to make it happen and then thanked him once it was arranged, and that money appears to have come through Edison's company. Westinghouse refused to sell his generators for executions, so Brown got Westinghouse generators anyway, secondhand, through another rival company, Thomson-Houston.
+
+The first man sentenced to the chair was William Kemmler, and when he appealed, Edison testified in 1889 that alternating current would kill instantly and painlessly. On August 6th, 1890, at Auburn Prison in New York, Kemmler was given seventeen seconds of current, and he didn't die, witnesses saw he was still breathing, so they switched it back on, and witnesses said the room smelled of burning flesh. The New York Times called it far worse than hanging.
+
+## 07 How AC Won Anyway
+
+And AC won anyway, because the physics was on its side. In 1892 Edison's company merged with Thomson-Houston to form General Electric, and that's the same rival that helped Brown get those generators. Edison's name came off the company, the Thomson-Houston side ended up running it, Edison was effectively out of the electric lighting business, and General Electric went on to build AC equipment right alongside Westinghouse.
+
+The next year, 1893, the World's Fair in Chicago needed lighting, and Westinghouse came in well under General Electric's bid and won the contract, so millions of visitors walked through a fairground lit by alternating current. Then there's Niagara Falls, Westinghouse built the generators for a huge hydroelectric plant there using Tesla's AC system, and in November 1896 its power reached Buffalo, more than twenty miles away, which is exactly the kind of distance Edison's low-voltage DC couldn't cover.
+
+## 08 Every Outlet On Earth
+
+Tesla died in January 1943 in a room at the Hotel New Yorker, nearly broke, and you'll hear that Westinghouse cheated him, or that he tore up his royalty contract to save Westinghouse's company. As far as historians can tell, that tear-up story first shows up in a biography written after he died, with no paperwork behind it, and the cheated story doesn't hold up well either, because Westinghouse bought out his patents for a lump sum in the late 1890s, and in his last years the Westinghouse company was paying his rent.
+
+Now, to be fair, the title of this video is a bit of a jab, because Edison held over a thousand US patents and plenty of them were genuinely his, but the two things everybody hands him in this story are the lightbulb and the power in your walls, and he wasn't first on either one.
+
+Oh, one more thing, DC has made a comeback on some very long power lines, thanks to modern electronics, but the outlet in your wall is AC, a hundred and twenty volts at sixty hertz in the US, and two hundred and thirty volts at fifty hertz in the UK and Europe, and your phone charger turns it into DC inside the plug. So every time you plug something in, you're using the system Edison spent years trying to scare people away from, and the people who made it possible, Westinghouse and Tesla and Stanley and a string of engineers most of us have never heard of, none of them are the name on the lightbulb.
