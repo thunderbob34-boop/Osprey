@@ -56,6 +56,29 @@ Worked the "still needs checking" list. What I found and what changed:
 **A cadence pass ran in parallel** (blind read-aloud check against your speaking samples, per the script-final-read skill). It found 24 rhythm defects: written-sounding clauses, full stops for effect, a scene-setting line about the electric chair, and the short §04 that was folded into the AC/DC section. All were fixed without changing facts or hedges.
 
 **Corrections this round: 17.** Another round was required.
+## Round 3: fresh independent review of the revised script (no live search possible)
+
+**Method.** A new reviewer agent got only the revised script and the same instructions, with no knowledge of Rounds 1–2. A second blind read-aloud check ran alongside it.
+
+| # | Problem found | Confidence | Change made |
+|---|---|---|---|
+| 1 | "AC won because it travels farther… that's not really it," followed by an explanation of AC going miles, reads as confirming the myth it just dismissed. It needs to say what the myth gets wrong. | Medium | "That's only half right, AC doesn't travel any better on its own, the advantage was that you could easily change its voltage" |
+| 2 | Tesla worked for Edison's companies from 1882 (Continental Edison, Paris/Strasbourg), then ~6 months in New York from June 1884 to early 1885 | Medium | "Edison's companies, first in Europe and then for about six months in New York, starting in 1884" |
+| 3 | "Tesla was the guy whose patents they were fighting over" overstated: the 1888–90 public fight was over AC lighting systems and safety, not the motor patents | Medium | "Tesla's patents were one of the big things Westinghouse brought into it" |
+| 4 | World's Fair chronology: the bids and award were in spring 1892; the fair opened May 1893 | Medium | "That same year [1892], Westinghouse came in well under General Electric's bid to light the 1893 World's Fair… so when the fair opened…" |
+| 5 | "He wasn't first on either one" contradicted §03's Pearl Street line, since Edison *was* first with US central-station lighting | Medium | "He wasn't first with the bulb, and the power in your walls today isn't even his system" |
+| 6 | Latimer's employer was the US Electric Lighting Co., where Maxim was chief engineer, not "Maxim's company" | Low | Named the company and Maxim's role |
+| 7 | Brush arc-light central stations sold service before Pearl Street | Low | "Usually counted as the start of the electric utility business in America, at least for lighting homes and offices" |
+| 8 | The 1897 deal bought out Tesla's *royalty arrangement* (Westinghouse already held the patent rights from 1888) | Low | "Westinghouse bought out his royalty deal for a lump sum in 1897" |
+| 9 | Edison's July 1889 testimony was at the habeas-corpus challenge to the chair, not an "appeal" as such | Low | "When his lawyers challenged the electric chair in court, Edison testified…" |
+| 10 | "Westinghoused" placed right after the July 1888 demo implies it dates from then; it's likely 1889 | Unverifiable/low | Added "Before long," to loosen the timing |
+| 11 | Ediswan: litigation was likely begun or threatened in Britain before the merger | Unverifiable/low | "Instead of fighting it out further in court" |
+
+**Items the reviewer could not recall but did not dispute**, already backed by Round 1 sources: the $5,000 letters (Essig, Edison Papers record); the Columbia demo order, DC survived then AC killed (Discover, BHR); "instant, painless" (Smithsonian extract: "assuring the judge that electrocution would be painless"; the 1989 feature: "would 'in every case' produce instant, painless death").
+
+**Cadence re-check:** 9 defects, all fixed. Examples: two thoughts glued together with "and", a recycled "twist", "war" swapped for the script's own word "fight", a stacked double closing line, and one "right?" added after the transformer explanation. You asked for the closing idea, "the people who made it possible aren't the name on the lightbulb", and it stays as the last line in its own breath.
+
+**Corrections this round: 5 medium + 6 low.** Another round was required.
 ## Every script claim, with sources
 
 **Status key**
