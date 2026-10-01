@@ -1,10 +1,30 @@
 # Launch Episode Fact Notes — "The Man Who Invented Nothing"
 
-Prepared 2026-10-01. These notes cover the research rounds, what changed in each, every claim in the script with its sources, and everything unresolved with how it was hedged.
+Prepared 2026-10-01. Contents: research rounds and what changed each round; the blind pre-publish audit; unresolved items and how each was hedged; and every script claim with its sources.
 
-## Status: Round 8 (confirmation) in progress
+## Summary
 
-This file will be updated when Round 3 finishes.
+- **Rounds run: 8.** Round 1 was a live web-search pass. Rounds 2–8 were independent blind reviews by fresh reviewer agents, plus a blind editorial audit between Rounds 6 and 7.
+- **Corrections by round:** R1: 4 · R2: 17 · R3: 11 (5 medium + 6 low) · R4: 0 · R5: 0 · R6: 0 · (audit fixes) · R7: 1 · **R8: 0**.
+- **Stop condition:** a full round with no new corrections. It was first met at Rounds 4–6. Wording guards from 4 and 5 and the audit edits changed the text afterward, so Rounds 6 and 8 re-confirmed it. **Round 8 is clean on the final text.**
+- **Correction definition:** a "correction" is a high- or medium-confidence finding (one the reviewer would bet on). Optional low-confidence guards are logged in each round, with whether they were applied.
+- **Big caveat:** live sourcing was limited. The container's network policy blocked every page fetch (Rutgers, Smithsonian, Wikipedia, archive.org, loc.gov…), so Round 1 worked from search-engine extracts. Then the session's 200-search budget ran out mid-Round 1, because five Job 3 research agents were searching in parallel. Rounds 2–8 could not search. They are expert-knowledge reviews, not source checks. Each claim's status in the table at the bottom tells you which kind of check it got.
+
+## Spot-check before publishing
+
+These script lines rest on standard history that every reviewer confirmed, but nobody opened a source for them this session. Ten minutes with these sources closes the gap. They are in priority order.
+
+1. **The $5,000** (§06): Brown asked Edison for $5,000 to cover the generators (March 1889) and thanked him in May; the money came via Edison Electric. → Essig, *Edison and the Electric Chair*, ch. "Criminal Economy"; Edison Papers document D8933AAN4. If you can't confirm it, swap in: "letters published in 1889 showed Brown had been working with Edison's company and with Thomson-Houston behind the scenes."
+2. **Bulb lifespans** (§03): "something like half a day" (13.5 h, Oct 1879) and bamboo lamps "hundreds of hours, the best passing a thousand". → Smithsonian NMAH *Lighting a Revolution*; Friedel & Israel.
+3. **Ediswan 1883** (§03). → Science Museum Group collection pages; Oxford DNB entry for Swan.
+4. **Gaulard–Gibbs → Stanley, Great Barrington, March 1886** (§04). → IEEE Milestone "Alternating Current Electrification, 1886" (ethw.org).
+5. **Tesla in Paris from 1882, New York ~6 months in 1884; the $50,000 "practical joke" in *My Inventions*** (§05). → Carlson; Tesla, *My Inventions* (1919), ch. 3.
+6. **NY electric chair law, 1888** (§06). → Death Penalty Information Center, New York page; Moran.
+7. **GE merger, April 1892; Edison's name dropped; Coffin in charge** (§07). → Edison Papers biographical essays; Carlson; Jonnes.
+8. **World's Fair contract awarded in 1892, Westinghouse "well under" GE** (§07). → Smithsonian; IEEE Spectrum; Jonnes.
+9. **Niagara: Westinghouse generators; Buffalo, Nov 1896, 20+ miles** (§07). → IEEE Milestone "Adams Hydroelectric Generating Plant, 1895"; Buffalo History Museum.
+10. **1,093 US patents** (§01). → Edison Papers.
+
 ## Round 1: live search pass (search-engine extracts; page fetches blocked)
 
 Worked the "still needs checking" list. What I found and what changed:
@@ -148,6 +168,17 @@ The auditor also suggested "another myth" instead of "the second myth". **Kept "
 The reviewer re-confirmed the rest, adding from memory: Friedel & Israel give 13.5 hours for the first lamp ("not the 40-hour legend"); West Orange tests also included calves and a horse (not spoken); the Latimer patent was assigned to Maxim's company.
 
 Because a correction was made, another round was required.
+## Round 8: confirmation round on the final text (no live search possible)
+
+**Result: 0 corrections (no high- or medium-confidence findings). The stop condition is met on the final script.** The reviewer re-walked every date, figure and the physics, and confirmed the hedges cover the soft spots.
+
+Four low-confidence notes were **not applied**:
+1. Swan's 1879 lamp is often described as a thin carbon *rod* (his cotton-thread filament came in 1880). "Filament" is defensible and widely used, but if you want to be pedantic, say "a thin carbon rod".
+2. Closing line: "the name people think of when they think of the lightbulb" works literally. An alternative that may land better is "…when they flip on a light". This is optional wording, not a fact.
+3. The West Orange experiments started in July 1888 and continued after Columbia. The sentence order simplifies this but doesn't misstate it.
+4. Some bidding for the fair was by Edison General Electric before the April 1892 merger; the award came after. "General Electric's bid" is acceptable.
+
+Still unverifiable from memory, all on the spot-check list: the $5,000 letters; the exact date of Edison's first reply to Southwick; whether Swan's lamp was lit at the 3 Feb 1879 lecture or only at his Dec 1878 Newcastle Chemical Society talk (this is in your verified list; reviewer flagged it but didn't dispute it).
 ## Unresolved items and how each was handled
 
 | Item | What's unresolved | How it's handled |
@@ -164,6 +195,7 @@ Because a correction was made, another round was required.
 | Kemmler voltages | Sources give 1,000–1,300 V, then ~2,000 V | No voltages spoken |
 | Holborn Viaduct (London, early 1882) predates Pearl Street | True, and it was also Edison's | "In America" qualifier |
 | Anticipated comments: Galileo Ferraris's induction motor (1885–88) and Hungary's ZBD closed-core transformer (1884–85) | Real parallel inventors. The script never claims Tesla or Stanley was first, so nothing is wrong. | Consider a pinned comment, or a future episode ("Tesla wasn't the only one") |
+| Swan, 3 Feb 1879 | In your verified list. Round 8 reviewer noted some accounts put Swan's first lit demonstration at his Dec 1878 Newcastle Chemical Society talk, with the Feb 1879 Lit & Phil lecture as the big public one (not disputed, just flagged) | Kept as given. If you want it bulletproof, say "in early 1879… showed about seven hundred people" or confirm with the Lit & Phil's own history page |
 | Topsy the elephant (1903) | Rutgers Edison Papers "Myth Buster" essay says Edison had nothing to do with it | Excluded, as instructed |
 
 ## Ideas surfaced along the way (for future videos)
