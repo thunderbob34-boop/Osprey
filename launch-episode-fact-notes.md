@@ -2,7 +2,7 @@
 
 Prepared 2026-10-01. These notes cover the research rounds, what changed in each, every claim in the script with its sources, and everything unresolved with how it was hedged.
 
-## Status: Round 7 (final regression check) in progress
+## Status: Round 8 (confirmation) in progress
 
 This file will be updated when Round 3 finishes.
 ## Round 1: live search pass (search-engine extracts; page fetches blocked)
@@ -134,6 +134,20 @@ Following the script-final-read and final-audit skills, a blind auditor with no 
 - Minor cadence fixes: "witnesses" said twice, a comma splice, repeated "to be fair".
 
 The auditor also suggested "another myth" instead of "the second myth". **Kept "second big myth"**, because the brief asks for this to be framed as the second myth-bust.
+## Round 7: regression check after the audit edits (no live search possible)
+
+**Result: 1 medium-confidence correction.** The closing line "none of them are the name on the lightbulb" is literally false for Westinghouse, whose name was printed on millions of bulbs (Westinghouse lamps from the 1893 Fair on, and later the Westinghouse Lamp Co.).
+
+| # | Finding | Confidence | Change |
+|---|---|---|---|
+| 1 | "The name on the lightbulb" is literally false for Westinghouse | Medium | "None of them are the name people think of when they think of the lightbulb". This keeps your intended closing idea |
+| 2 | The Ganz team (ZBD transformer, 1884–85) and Ferraris (rotating-field motor) are commenter magnets; "a string of engineers" covers them | Low | Added "on both sides of the Atlantic" (no new names) |
+| 3 | Brown was self-taught and billed himself as an electrical engineer (Essig, Moran) | Low | "A self-styled electrical engineer named Harold Brown" |
+| 4 | "Physics was on its side" next to the GE merger could imply physics caused the merger | Low | Not changed. The merger sentence states facts only |
+
+The reviewer re-confirmed the rest, adding from memory: Friedel & Israel give 13.5 hours for the first lamp ("not the 40-hour legend"); West Orange tests also included calves and a horse (not spoken); the Latimer patent was assigned to Maxim's company.
+
+Because a correction was made, another round was required.
 ## Unresolved items and how each was handled
 
 | Item | What's unresolved | How it's handled |
@@ -190,7 +204,7 @@ The auditor also suggested "another myth" instead of "the second myth". **Kept "
 | 05 | May 1888 induction-motor patents; Westinghouse bought the rights in 1888 | V | USPTO (US 381,968 and related, 1 May 1888); Carlson; IEEE |
 | 05 | The public fight was Westinghouse vs. Edison; Tesla's patents were one of the big things Westinghouse brought into it | V / R3 wording | Edison Papers; Smithsonian (King 2011) |
 | 06 | Late 1887: state commission asked Edison; he first said he opposed capital punishment; ~a month later recommended AC and pointed to Westinghouse's machines | R1 | Edison Papers doc D8704AEP (Southwick to Edison, 8 Nov 1887); "Edison and 'The Chair'" (1989 feature); Smithsonian (King 2011); Essig |
-| 06 | 1888, Harold Brown's public anti-AC campaign | R1 | Reynolds & Bernstein, *Business History Review*; Edison Papers |
+| 06 | 1888, "self-styled electrical engineer" Harold Brown's public anti-AC campaign | R1 (+ Essig/Moran on "self-styled") | Reynolds & Bernstein, *Business History Review*; Edison Papers |
 | 06 | Edison let Brown use the West Orange lab; animals, mostly dogs, electrocuted | R1 | Edison Papers "The Current Wars" ("a number of animals, chiefly dogs"); Discover Magazine |
 | 06 | July 1888, Columbia College: dog survived DC, killed with AC, in front of an audience | R1 | Discover Magazine; Reynolds & Bernstein; Edison Papers (the date of 30 July 1888 is in Discover and the BHR abstract) |
 | 06 | "Before long", Edison's camp floated "Westinghoused" | R1-h | Scientific American blog; American Heritage; Essig. Who coined it is disputed, hence "Edison's camp" |
@@ -211,6 +225,6 @@ The auditor also suggested "another myth" instead of "the second myth". **Kept "
 | 01/08 | Edison held over a thousand US patents (now said in the cold open); he wasn't first with the bulb, and today's wall power isn't his system | B | Edison Papers (1,093 US patents) |
 | 08 | DC has made a comeback on very long lines thanks to modern electronics (HVDC) | B | US DOE; IEEE; any HVDC overview |
 | 08 | Household AC everywhere; US 120V/60Hz, UK/Europe 230V/50Hz; chargers convert to DC | V | IEC World Plugs (iec.ch); US DOE |
-| 08 | Closing credit list: Gaulard and Gibbs, Stanley, Tesla, Westinghouse, "and a string of engineers" | B | Same sources as §04 and §05 (IEEE Milestone; Hughes; Carlson). Ordered by contribution, per the final audit |
+| 08 | Closing credit list: Gaulard and Gibbs, Stanley, Tesla, Westinghouse, "and a string of engineers on both sides of the Atlantic"; "none of them are the name people think of when they think of the lightbulb" (corrected R7: Westinghouse's name *was* literally on bulbs) | B | Same sources as §04 and §05 (IEEE Milestone; Hughes; Carlson). Ordered by contribution, per the final audit |
 
 Rows marked ~~08~~ (cut) were verified for the Tesla epilogue (death Jan 1943 at the Hotel New Yorker; the tear-up story traced to O'Neill's 1944 *Prodigal Genius*; the 1897 ~$216,000 royalty buyout; Westinghouse paying his rent from ~1934, per Carlson and PBS). The paragraph was **cut in the final audit** for runtime and because it's a separate Tesla story. The research stands, and it's ready for a Tesla episode.
