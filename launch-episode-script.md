@@ -37,7 +37,7 @@ And here's the same thing again, George Westinghouse didn't invent the AC system
 
 ## 05 It Wasn't Tesla Versus Edison
 
-Now, a lot of people picture this as Tesla versus Edison, two geniuses going head to head, and that's the second myth in this story. Tesla did work for Edison's companies, first in Europe and then for about six months in New York, starting in 1884, and as Tesla told it, he was promised fifty thousand dollars to improve the company's generators, and when he delivered, he was told the offer had been a joke, so he quit. Now, that story comes only from Tesla himself, years later.
+Now, a lot of people picture this as Tesla versus Edison, two geniuses going head to head, and that's the second myth in this story. Tesla did work for Edison's companies, first in Paris starting in 1882, and then for about six months in New York in 1884, and as Tesla told it, he was promised fifty thousand dollars to improve the company's generators, and when he delivered, the offer turned out to have been a joke, so he quit. Now, that story comes only from Tesla himself, years later.
 
 What actually put Tesla in the fight was his patents, in May 1888 he got patents on an AC induction motor, a motor that ran on alternating current, which was a missing piece of the AC system, and that same year Westinghouse bought the rights. So the fight in the newspapers wasn't Tesla against Edison, it was Westinghouse against Edison, and Tesla's patents were one of the big things Westinghouse brought into it.
 
@@ -53,7 +53,7 @@ The first man sentenced to the chair was William Kemmler, and when his lawyers c
 
 And AC won anyway, because the physics was on its side. In 1892 Edison's company merged with Thomson-Houston to form General Electric, and that's the same rival that helped Brown get those generators. Edison's name came off the company, the Thomson-Houston side ended up running it, Edison was effectively out of the electric lighting business, and General Electric went on to build AC equipment right alongside Westinghouse.
 
-That same year, Westinghouse came in well under General Electric's bid to light the 1893 World's Fair in Chicago and won the contract, so when the fair opened, millions of visitors walked through a fairground lit by alternating current. Then there's Niagara Falls, Westinghouse built the generators for a huge hydroelectric plant there using Tesla's AC system, and in November 1896 its power reached Buffalo, more than twenty miles away, when an Edison plant had to sit within about a mile of its customers.
+That same year, Westinghouse came in well under General Electric's bid to light the 1893 World's Fair in Chicago and won the contract, so when the fair opened, millions of visitors walked through a fairground lit largely by alternating current. Then there's Niagara Falls, Westinghouse built the generators for a huge hydroelectric plant there using Tesla's AC system, and in November 1896 its power reached Buffalo, more than twenty miles away, when an Edison plant had to sit within about a mile of its customers.
 
 ## 08 Every Outlet On Earth
 

@@ -96,6 +96,21 @@ It raised five optional low-confidence wording guards. Three were applied, becau
 Also tightened for precision: the $5,000 was "to cover buying the generators" (Essig: the state wouldn't reimburse Brown until after the first execution), replacing the vague "to make it happen".
 
 Because three words-only edits were made, one more confirmation round was run.
+## Round 5: fresh independent review (no live search possible)
+
+**Result: 0 high- or medium-confidence corrections.** The reviewer re-confirmed the whole chain from memory: Southwick letters Nov and 19 Dec 1887; Brown's campaign from June 1888; Columbia on 30 July 1888 (survived DC up to ~1,000 V, killed by 330 V AC); the 1888 law; Edison's July 1889 testimony; Kemmler on 6 Aug 1890; GE 1892; the fair bid in 1892; Buffalo in Nov 1896; Tesla's death in Jan 1943; 1,093 patents.
+
+It raised three low-confidence guards. All three were applied because they make the wording more exact:
+
+| # | Guard | Applied wording |
+|---|---|---|
+| 1 | "Starting in 1884" could be heard as dating Tesla's whole Edison stint | "first in Paris starting in 1882, and then for about six months in New York in 1884" |
+| 2 | "As Tesla told it" should match Tesla's own words. *My Inventions* says only that the promise "turned out to be a practical joke"; being told so to his face is from later retellings | "the offer turned out to have been a joke" |
+| 3 | Westinghouse's contract covered the incandescent lighting; some arc and exhibit power came from others, partly DC | "a fairground lit largely by alternating current" |
+
+Unverifiable from memory but not disputed: the $5,000 sequence, already the top spot-check item; 1897 vs. 1896 for the buyout (Carlson gives 1897); whether anyone mentioned the tear-up story before O'Neill, which "as far as historians can tell" covers; the bamboo lifespan date, which is hedged.
+
+Because these wording edits were made, a confirmation round was run on the final text.
 ## Unresolved items and how each was handled
 
 | Item | What's unresolved | How it's handled |
@@ -147,8 +162,8 @@ Because three words-only edits were made, one more confirmation round was run.
 | 04 | Edison's DC had no practical step-up method, ran at near-household voltage; plants within about a mile | V | Edison Papers; Hughes; Smithsonian (King 2011) |
 | 04 | Westinghouse bought into the Gaulard–Gibbs transformer from Europe; William Stanley made it a practical system; Main Street, Great Barrington, Mass., 1886 | B | IEEE Milestone "Alternating Current Electrification, 1886" (Great Barrington, 20 March 1886); Hughes, *Networks of Power*; Jonnes, *Empires of Light* |
 | 05 | Tesla vs. Edison personal rivalry is largely myth | V | Edison Papers "The Current Wars"; Carlson (2013) |
-| 05 | Tesla worked for Edison's companies, first in Europe (from 1882), then ~6 months in New York from 1884 | V / B | Carlson; Tesla, *My Inventions* (1919) |
-| 05 | $50,000 promise turned out to be "a joke", per Tesla only | V, **corrected R2** | Tesla, *My Inventions* (1919): "the Manager" made the promise. The Edison-in-person version is from O'Neill (1944). The script no longer names Edison as the promiser |
+| 05 | Tesla worked for Edison's companies, first in Paris from 1882, then ~6 months in New York in 1884 | V / B | Carlson; Tesla, *My Inventions* (1919) |
+| 05 | $50,000 promise "turned out to have been a joke", per Tesla only | V, **corrected R2, R5** | Tesla, *My Inventions* (1919): "the Manager" made the promise. The Edison-in-person version is from O'Neill (1944). The script no longer names Edison as the promiser |
 | 05 | May 1888 induction-motor patents; Westinghouse bought the rights in 1888 | V | USPTO (US 381,968 and related, 1 May 1888); Carlson; IEEE |
 | 05 | The public fight was Westinghouse vs. Edison; Tesla's patents were one of the big things Westinghouse brought into it | V / R3 wording | Edison Papers; Smithsonian (King 2011) |
 | 06 | Late 1887: state commission asked Edison; he first said he opposed capital punishment; ~a month later recommended AC and pointed to Westinghouse's machines | R1 | Edison Papers doc D8704AEP (Southwick to Edison, 8 Nov 1887); "Edison and 'The Chair'" (1989 feature); Smithsonian (King 2011); Essig |
@@ -164,7 +179,7 @@ Because three words-only edits were made, one more confirmation round was run.
 | 07 | 1892: Edison General Electric + Thomson-Houston → General Electric; Edison's name dropped; Thomson-Houston side (Charles Coffin) ran it; Edison effectively out of electric lighting | B (hedged "effectively") | Edison Papers (biographical essays on 1892); GE corporate history; Jonnes; Carlson |
 | 07 | GE built AC equipment alongside Westinghouse | V / B | Hughes; GE history (GE–Westinghouse patent pool, 1896) |
 | 07 | Same year (1892), Westinghouse came in well under GE's bid to light the 1893 Chicago World's Fair and won | V, **corrected R2, R3** | Smithsonian; IEEE Spectrum; Jonnes. The brief's "roughly half" was dropped because $399k vs. $554k ≈ 72% |
-| 07 | Millions of visitors | B | The fair's attendance is usually given as ~27 million admissions (Chicago History Museum; Britannica) |
+| 07 | Millions of visitors; fairground lit "largely" by AC | B | The fair's attendance is usually given as ~27 million admissions (Chicago History Museum; Britannica) |
 | 07 | Niagara: Westinghouse built the generators using Tesla's AC (polyphase) system; power reached Buffalo in Nov 1896, more than 20 miles away (vs. Edison plants within about a mile) | B | IEEE Milestone "Adams Hydroelectric Generating Plant, 1895"; Carlson; Buffalo History Museum. The plant ran from 1895; Buffalo transmission began 15–16 Nov 1896; ~20–26 miles depending on the measure |
 | 08 | Tesla died Jan 1943, Hotel New Yorker, nearly broke | V (death) / B (finances) | Carlson; PBS *American Experience: Tesla* (2016); NYT obituary, 8 Jan 1943 |
 | 08 | The royalty tear-up story first appears in a posthumous biography, with no documents behind it | B (hedged "as far as historians can tell") | Carlson (2013); the story's source is John J. O'Neill, *Prodigal Genius* (1944) |
