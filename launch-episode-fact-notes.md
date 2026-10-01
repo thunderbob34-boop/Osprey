@@ -79,6 +79,45 @@ Worked the "still needs checking" list. What I found and what changed:
 **Cadence re-check:** 9 defects, all fixed. Examples: two thoughts glued together with "and", a recycled "twist", "war" swapped for the script's own word "fight", a stacked double closing line, and one "right?" added after the transformer explanation. You asked for the closing idea, "the people who made it possible aren't the name on the lightbulb", and it stays as the last line in its own breath.
 
 **Corrections this round: 5 medium + 6 low.** Another round was required.
+## Round 4: fresh independent review (no live search possible)
+
+**Result: 0 high- or medium-confidence corrections.** The reviewer went through every dated and specific claim and found them consistent with the standard scholarship. It also independently confirmed several details from memory: Edison's 19 Dec 1887 reply naming "Geo. Westinghouse"; GE formed April 1892 with Coffin in charge; the World's Fair award in May 1892; the ~$216,000 buyout in 1897; Westinghouse paying Tesla's rent and a stipend from 1934; 1,093 US patents.
+
+It raised five optional low-confidence wording guards. Three were applied, because they remove claims rather than add them:
+
+| # | Low-confidence guard | Applied? |
+|---|---|---|
+| 1 | "First commercially practical" may draw "Swan did it first" comments (Edison's first commercial install, SS *Columbia* in May 1880, likely predates Swan's 1881 sales, so the claim holds) | **No.** This is your required consensus phrasing, and §03's "neck and neck" already gives Swan his due |
+| 2 | Swan's 1879 lamp was a thick, low-resistance carbon rod, which ties §02 to §03's "early lamps" | No. Optional; nothing wrong as written |
+| 3 | Pearl Street's first customers were mostly businesses, so "homes and offices" was loose | **Yes:** "at least for indoor electric light" |
+| 4 | "Fighting it out *further* in court" implies a lawsuit had already been filed (uncertain) | **Yes:** the court clause was removed entirely ("…merged their British companies in 1883") |
+| 5 | Expect comments about Galileo Ferraris (induction motor, 1885–88) and the Hungarian ZBD transformer (1884–85) | No. That would add material and length. Logged under Unresolved as anticipated comments and future-episode material |
+
+Also tightened for precision: the $5,000 was "to cover buying the generators" (Essig: the state wouldn't reimburse Brown until after the first execution), replacing the vague "to make it happen".
+
+Because three words-only edits were made, one more confirmation round was run.
+## Unresolved items and how each was handled
+
+| Item | What's unresolved | How it's handled |
+|---|---|---|
+| The dog "Dash" | Your brief lists a dog named Dash. Two targeted searches found the July 1888 Columbia dog described only as a ~76 lb Newfoundland mix, never by name. | Name dropped; the dog is unnamed in the script |
+| Who coined "Westinghoused" | Sources split between Edison himself and his lawyer or associates. Edison is recorded proposing "ampermort", "dynamort" and "electromort". Likely 1889. | "Before long, Edison's camp even floated a word…" |
+| The $5,000 | Essig quotes Brown's March 1889 letter to Edison and a May thank-you. Edison's reply has never surfaced. No reviewer could confirm it from memory. | Hedged "letters show he asked… that money appears to have come through Edison's company". **First item on the spot-check list** |
+| World's Fair "roughly half" | Your brief says to say "roughly half", but $399k vs. $554k ≈ 72%. "Half" only works against GE's higher first bid, which wasn't confirmed this session. | Replaced with "came in well under General Electric's bid". Reading notes say not to put "half" on screen |
+| *The Current War* (2019) | Your brief says the film amplified the Tesla-vs-Edison myth. Two reviewers independently note it's framed as Edison vs. Westinghouse, with Tesla supporting. | Film not mentioned. The myth is attributed to "a lot of people" |
+| Tesla's $50,000 | In Tesla's 1919 account "the Manager" made the promise; the Edison-in-person version is O'Neill's (1944). | "He was promised… he was told the offer had been a joke", plus "as Tesla told it" and "that story comes only from Tesla himself" |
+| Westinghouse funding Kemmler's appeal (one search summary gave "$100,000") | No strong source traced | Not used |
+| "Brazil" as the generators' origin | Not found in any strong source | Not used |
+| Woodward & Evans | Patent dates confirmed by The Canadian Encyclopedia, and so is Edison buying the rights. Only one strong source this session, and **no source for any price**. | Left out of the script. A good Short once a second source is opened |
+| Kemmler voltages | Sources give 1,000–1,300 V, then ~2,000 V | No voltages spoken |
+| Holborn Viaduct (London, early 1882) predates Pearl Street | True, and it was also Edison's | "In America" qualifier |
+| Anticipated comments: Galileo Ferraris's induction motor (1885–88) and Hungary's ZBD closed-core transformer (1884–85) | Real parallel inventors. The script never claims Tesla or Stanley was first, so nothing is wrong. | Consider a pinned comment, or a future episode ("Tesla wasn't the only one") |
+| Topsy the elephant (1903) | Rutgers Edison Papers "Myth Buster" essay says Edison had nothing to do with it | Excluded, as instructed |
+
+## Ideas surfaced along the way (for future videos)
+- **Woodward & Evans** (Toronto, 1874) as a Short, once the price question is settled or dropped.
+- **Lewis Latimer** as his own episode: he drafted Bell's telephone patent drawings (1876) and wrote one of the first books on incandescent lighting (1890). *(Not checked this session.)*
+- **Ferraris vs. Tesla** and **ZBD vs. Stanley**: AC's own "somebody did it first" sequel.
 ## Every script claim, with sources
 
 **Status key**
@@ -100,37 +139,37 @@ Worked the "still needs checking" list. What I found and what changed:
 | 03 | First ones lasted "something like half a day" | B (hedged) | Edison Papers and Smithsonian NMAH (the 13.5-hour test lamp of Oct 1879). Several popular sources say 14.5 or 40 hours, hence the hedge |
 | 03 | Within a year or two, bamboo filaments lasted hundreds of hours, the best passing a thousand | B (hedged) | Smithsonian NMAH; Friedel & Israel (bamboo adopted from late 1880; ~1,200 hours is the best-quoted figure) |
 | 03 | Edison built the system: screw socket, switches, fuses, meters, generators, underground wiring | V (meters, generators: B) | Edison Papers; IEEE Milestone "Pearl Street Station, 1882"; Hughes |
-| 03 | Pearl Street Station, 1882, lower Manhattan, usually counted as the start of the US electric utility business | V / B (framing) | IEEE Milestone "Pearl Street Station"; Edison Papers. Wording per the Round 2 correction |
-| 03 | Swan selling bulbs in Britain at the same time; British companies merged in 1883 (Edison & Swan United Electric Light Co., "Ediswan") instead of litigating | B | Science Museum Group (Ediswan collection); Oxford DNB (Swan); Friedel & Israel |
-| 03 | Lewis Latimer, Black inventor and draftsman; 1882 patent on carbon-filament manufacture; working for Hiram Maxim's US Electric Lighting Co.; hired by Edison's company in 1884 | R1 | Lemelson-MIT; Lewis Latimer House Museum; SCI blog |
+| 03 | Pearl Street Station, 1882, lower Manhattan, "usually counted as the start of the electric utility business in America, at least for indoor electric light" | V / B (framing) | IEEE Milestone "Pearl Street Station"; Edison Papers. Wording per the Round 2–4 corrections (Brush arc-light central stations came earlier, hence the indoor-light qualifier) |
+| 03 | Swan selling bulbs in Britain at the same time, "neck and neck"; British companies merged in 1883 (Edison & Swan United Electric Light Co., "Ediswan") | B | Science Museum Group (Ediswan collection); Oxford DNB (Swan); Friedel & Israel |
+| 03 | Lewis Latimer, Black inventor and draftsman; 1882 patent on carbon-filament manufacture; working for the US Electric Lighting Co., where Hiram Maxim was chief engineer; hired by Edison's company in 1884 | R1 | Lemelson-MIT; Lewis Latimer House Museum; SCI blog |
 | 04 | Edison's system ran on DC | V | Edison Papers "The Current Wars" |
-| 04 | "AC travels farther" is not really it; losses climb with current, so long-distance needs high voltage and low current; transformers step AC up and down; two coils on an iron core | V (physics) | Any intro physics text (P = I²R); US Energy Information Administration and DOE explainers |
+| 04 | "AC travels farther" is only half right, since AC doesn't travel better on its own and the advantage was changing voltage; losses climb with current, so long-distance needs high voltage and low current; transformers step AC up and down; two coils on an iron core | V (physics) | Any intro physics text (P = I²R); US Energy Information Administration and DOE explainers |
 | 04 | Edison's DC had no practical step-up method, ran at near-household voltage; plants within about a mile | V | Edison Papers; Hughes; Smithsonian (King 2011) |
 | 04 | Westinghouse bought into the Gaulard–Gibbs transformer from Europe; William Stanley made it a practical system; Main Street, Great Barrington, Mass., 1886 | B | IEEE Milestone "Alternating Current Electrification, 1886" (Great Barrington, 20 March 1886); Hughes, *Networks of Power*; Jonnes, *Empires of Light* |
 | 05 | Tesla vs. Edison personal rivalry is largely myth | V | Edison Papers "The Current Wars"; Carlson (2013) |
-| 05 | Tesla worked briefly for Edison's company in New York in 1884 | V | Carlson; Tesla, *My Inventions* (1919) |
+| 05 | Tesla worked for Edison's companies, first in Europe (from 1882), then ~6 months in New York from 1884 | V / B | Carlson; Tesla, *My Inventions* (1919) |
 | 05 | $50,000 promise turned out to be "a joke", per Tesla only | V, **corrected R2** | Tesla, *My Inventions* (1919): "the Manager" made the promise. The Edison-in-person version is from O'Neill (1944). The script no longer names Edison as the promiser |
 | 05 | May 1888 induction-motor patents; Westinghouse bought the rights in 1888 | V | USPTO (US 381,968 and related, 1 May 1888); Carlson; IEEE |
-| 05 | The public fight was Westinghouse vs. Edison | V | Edison Papers; Smithsonian (King 2011) |
+| 05 | The public fight was Westinghouse vs. Edison; Tesla's patents were one of the big things Westinghouse brought into it | V / R3 wording | Edison Papers; Smithsonian (King 2011) |
 | 06 | Late 1887: state commission asked Edison; he first said he opposed capital punishment; ~a month later recommended AC and pointed to Westinghouse's machines | R1 | Edison Papers doc D8704AEP (Southwick to Edison, 8 Nov 1887); "Edison and 'The Chair'" (1989 feature); Smithsonian (King 2011); Essig |
 | 06 | 1888, Harold Brown's public anti-AC campaign | R1 | Reynolds & Bernstein, *Business History Review*; Edison Papers |
 | 06 | Edison let Brown use the West Orange lab; animals, mostly dogs, electrocuted | R1 | Edison Papers "The Current Wars" ("a number of animals, chiefly dogs"); Discover Magazine |
 | 06 | July 1888, Columbia College: dog survived DC, killed with AC, in front of an audience | R1 | Discover Magazine; Reynolds & Bernstein; Edison Papers (the date of 30 July 1888 is in Discover and the BHR abstract) |
-| 06 | Edison's camp floated "Westinghoused" | R1-h | Scientific American blog; American Heritage; Essig. Who coined it is disputed, hence "Edison's camp" |
+| 06 | "Before long", Edison's camp floated "Westinghoused" | R1-h | Scientific American blog; American Heritage; Essig. Who coined it is disputed, hence "Edison's camp" |
 | 06 | New York passed its electric chair law in 1888 | B | NY Electrical Execution Act, June 1888: Death Penalty Information Center; Moran, *Executioner's Current* |
-| 06 | Brown supplied the equipment; asked Edison for $5,000 and thanked him once it was arranged; money appears to have come via Edison's company | R1-h | Essig ch. "Criminal Economy" (quotes Brown's March 1889 letter, "if $5,000 is made available"); Edison Papers record D8933AAN4 (Brown to Edison, 1889); Edison Papers volume notes (Project MUSE). Hedged "appears" because Edison's reply has never surfaced |
+| 06 | Brown supplied the equipment; asked Edison for $5,000 to cover buying the generators and thanked him once it was arranged; money appears to have come via Edison's company | R1-h | Essig ch. "Criminal Economy" (quotes Brown's March 1889 letter, "if $5,000 is made available"); Edison Papers record D8933AAN4 (Brown to Edison, 1889); Edison Papers volume notes (Project MUSE). Hedged "appears" because Edison's reply has never surfaced |
 | 06 | Westinghouse refused to sell; Brown got used Westinghouse generators through Thomson-Houston | R1 | Essig; Reynolds & Bernstein (the *New York Sun* letters, Aug 1889); Smithsonian (King 2011) |
-| 06 | Kemmler appealed; Edison testified in 1889 that AC would kill instantly and painlessly | R1 | Smithsonian (King 2011); "Edison and 'The Chair'" (1989); American Heritage, "Edison and the Electric Chair" (2000) |
+| 06 | Kemmler's lawyers challenged the chair in court; Edison testified (July 1889) that AC would kill instantly and painlessly | R1 | Smithsonian (King 2011); "Edison and 'The Chair'" (1989); American Heritage, "Edison and the Electric Chair" (2000) |
 | 06 | 6 Aug 1890, Auburn Prison, 17 seconds, survived, still breathing, current reapplied, smell of burning flesh; NYT: "far worse than hanging" | R1 | Death Penalty Information Center; Smithsonian (King 2011); *New York Times*, 7 Aug 1890 |
 | 07 | 1892: Edison General Electric + Thomson-Houston → General Electric; Edison's name dropped; Thomson-Houston side (Charles Coffin) ran it; Edison effectively out of electric lighting | B (hedged "effectively") | Edison Papers (biographical essays on 1892); GE corporate history; Jonnes; Carlson |
 | 07 | GE built AC equipment alongside Westinghouse | V / B | Hughes; GE history (GE–Westinghouse patent pool, 1896) |
-| 07 | 1893 Chicago World's Fair: Westinghouse came in well under GE's bid and won | V, **corrected R2** | Smithsonian; IEEE Spectrum; Jonnes. The brief's "roughly half" was dropped because $399k vs. $554k ≈ 72% |
+| 07 | Same year (1892), Westinghouse came in well under GE's bid to light the 1893 Chicago World's Fair and won | V, **corrected R2, R3** | Smithsonian; IEEE Spectrum; Jonnes. The brief's "roughly half" was dropped because $399k vs. $554k ≈ 72% |
 | 07 | Millions of visitors | B | The fair's attendance is usually given as ~27 million admissions (Chicago History Museum; Britannica) |
-| 07 | Niagara: Westinghouse built the generators using Tesla's AC (polyphase) system; power reached Buffalo in Nov 1896, more than 20 miles away | B | IEEE Milestone "Adams Hydroelectric Generating Plant, 1895"; Carlson; Buffalo History Museum. The plant ran from 1895; Buffalo transmission began 15–16 Nov 1896; ~20–26 miles depending on the measure |
+| 07 | Niagara: Westinghouse built the generators using Tesla's AC (polyphase) system; power reached Buffalo in Nov 1896, more than 20 miles away (vs. Edison plants within about a mile) | B | IEEE Milestone "Adams Hydroelectric Generating Plant, 1895"; Carlson; Buffalo History Museum. The plant ran from 1895; Buffalo transmission began 15–16 Nov 1896; ~20–26 miles depending on the measure |
 | 08 | Tesla died Jan 1943, Hotel New Yorker, nearly broke | V (death) / B (finances) | Carlson; PBS *American Experience: Tesla* (2016); NYT obituary, 8 Jan 1943 |
 | 08 | The royalty tear-up story first appears in a posthumous biography, with no documents behind it | B (hedged "as far as historians can tell") | Carlson (2013); the story's source is John J. O'Neill, *Prodigal Genius* (1944) |
-| 08 | Westinghouse bought out his patents in a lump sum in the late 1890s | B | Carlson (1897 buyout; the ~$216,000 figure is not spoken) |
+| 08 | Westinghouse bought out his royalty deal for a lump sum in 1897 | B | Carlson (~$216,000, not spoken) |
 | 08 | In his last years the Westinghouse company paid his rent | B | Carlson; PBS (from ~1934 a consulting fee plus his hotel bill) |
-| 08 | Edison held over a thousand US patents | B | Edison Papers (1,093 US patents) |
+| 08 | Edison held over a thousand US patents; he wasn't first with the bulb, and today's wall power isn't his system | B | Edison Papers (1,093 US patents) |
 | 08 | DC has made a comeback on very long lines thanks to modern electronics (HVDC) | B | US DOE; IEEE; any HVDC overview |
 | 08 | Household AC everywhere; US 120V/60Hz, UK/Europe 230V/50Hz; chargers convert to DC | V | IEC World Plugs (iec.ch); US DOE |
