@@ -1,7 +1,7 @@
 # Monopoly Was Invented by a Woman
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 931 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 915 spoken words.
 - Tone is calm and matter-of-fact. Let the irony sit on its own, no sarcasm about Darrow or Parker Brothers.
 - Say Magie as MAG-ee (check before recording if you can find a reliable recording of the name), Darrow as DARE-oh.
 - Every hedge in here is on purpose. Read "sold it as his own", "a folk version", "stole is NPR's word" and "about thirty years" exactly as written. Never say Darrow copied her board or stole it in our own voice, the game changed hands for decades before he got it. Leave out how much Parker Brothers paid Magie, that number wasn't checked.

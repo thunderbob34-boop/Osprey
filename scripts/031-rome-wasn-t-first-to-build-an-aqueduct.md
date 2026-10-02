@@ -1,7 +1,7 @@
 # Rome Wasn't First to Build an Aqueduct
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 745 spoken words. The research is solid on Rome but thin on Assyria, so this one runs short on purpose.
+- Runtime is about 5 minutes at a relaxed pace, roughly 743 spoken words. The research is solid on Rome but thin on Assyria, so this one runs short on purpose.
 - Tone is calm and matter-of-fact. Rome keeps full credit for its engineering, it just wasn't first.
 - Say Sennacherib as sen-ACK-er-ib, Nineveh as NIN-uh-vuh, Jerwan as jer-WAHN, Assyrian as uh-SEER-ee-an, Aqua Appia as AH-kwuh AP-ee-uh, Aqua Marcia as AH-kwuh MAR-see-uh, Pont du Gard as pon doo GAR, Nîmes as NEEM, Eupalinos as yoo-PAL-ih-nos, Samos as SAY-moss, Anio Novus as AH-nee-oh NO-vus, Bruun as BROON.
 - Every hedge in here is on purpose. Read "about 400 years", "around 703 to 690 BCE", "more than two million", "as it's described", "about 57 miles", "estimates vary widely", "roughly half a billion to about a billion", "about 8 to 16 feet" and "around 15 to 20 inches" exactly as written. Never say 1.2 billion liters as a fact, and never say Rome's aqueducts dropped "inches per mile."

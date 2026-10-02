@@ -1,6 +1,6 @@
 # Notes: Columbus Was Late
 Research entry: episode-research.md — "## New topic detail" section, entry "### 1."
-Spoken words: 929
+Spoken words: 931
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

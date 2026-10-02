@@ -1,6 +1,6 @@
 # Notes: The Doctor Who Beat Ether Day by Four Years
 Research entry: episode-research.md — "# Job 3" section, entry "### 41."
-Spoken words: 922
+Spoken words: 935
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

@@ -1,6 +1,6 @@
 # Notes: Monopoly Was Invented by a Woman
 Research entry: episode-research.md — "## New topic detail" section, entry "### 4."
-Spoken words: 931
+Spoken words: 915
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

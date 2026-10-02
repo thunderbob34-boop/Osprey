@@ -17,3 +17,9 @@ Spoken words: 855
 
 Hedges kept: "the first person on record" (repeated, with "not the first person ever"); "who really built the first one is murky"; "weeks later" for Metius; "three to four times"; full credit to Galileo for turning it on the sky.
 Left out on purpose (unverified / keep off air in research): any claim that Lipperhey definitely built the first telescope; any date for the Janssen claim or for when Janssen supposedly built one; what Galileo saw beyond Jupiter's moons (not in entry).
+
+## Review
+- Fact fixes: 1: "who really built the first one is murky, and nobody has settled it" became "and the records don't settle it" (the entry says murky, nothing more). The dates (25 Sept and 2 Oct 1608, a week apart), the 3 to 4x magnification, the refusal reason, the binocular payment, 1609 and 1610 all match.
+- Cadence fixes: 6 joins, e.g. "Now here's the part that matters. The States General refused his patent. And the reason they gave..." and "Galileo built his in 1609. So Galileo...".
+- Format fixes: Word count updated (852 to 855).
+- Remaining concerns for Gus: Runs 855 words, under 900; the research is the limit.

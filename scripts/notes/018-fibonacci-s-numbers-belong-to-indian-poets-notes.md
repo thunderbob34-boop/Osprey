@@ -20,3 +20,9 @@ Spoken words: 905
 
 Hedges kept: "historians say" (repeated, with Devlin named as the main source); "probably" learned in North Africa; "there's no proof he knew"; "somewhere between 600 and 800"; "before 1135"; "around 1150"; "about fifty years"; "survives through Gopala" / "secondhand"; "nobody should call him a thief".
 Left out on purpose (unverified / keep off air in research): any claim that Indian knowledge reached Leonardo (unknown); Pingala or any earlier Indian lineage (not in this entry); Lucas's first name and nationality and Libri's profession (not in entry); nature examples such as sunflowers or shells (not in entry).
+
+## Review
+- Fact fixes: 2: (a) the title "Fibonacci's Numbers Belong to Indian Poets" claimed ownership and called the people poets, when the entry calls them scholars of Sanskrit verse; retitled to "Fibonacci's Numbers Started in Indian Poetry", and "counted out by poets and scholars in India" became "by scholars of poetry in India". (b) Parmanand Singh was called "a historian", which isn't in the entry; the label was dropped.
+- Cadence fixes: 4 joins, e.g. the counting run "Two beats, there are two ways... Three beats, there are three ways. Four beats, there are five." is now said as one run; joined "Liber Abaci was a real book doing real work. The point here isn't...".
+- Format fixes: Title line changed (file name left as is to match the manifest path). Word count updated (904 to 905).
+- Remaining concerns for Gus: The manifest title still says "Belong to Indian Poets"; update it if the title is used elsewhere. The "most famous number pattern in nature" hook is the entry's approved line, but the research says nothing about nature.

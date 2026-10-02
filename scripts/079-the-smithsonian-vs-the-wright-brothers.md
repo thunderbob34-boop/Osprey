@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-The Wright brothers' first flight lasted twelve seconds, and for years afterward the Smithsonian gave the credit to somebody else's machine. Now, this one runs a little differently from most of our episodes, because by the mainstream view the Wrights really were first, but the fight over who got the credit went on for decades. It got so bad that Orville sent the plane to London in protest, and when it finally came home to the Smithsonian, it came with a contract that's still in force.
+The Wright brothers' first flight lasted twelve seconds, and for years the Smithsonian gave the credit to somebody else's machine. Now, this one runs a little differently from most of our episodes, because by the mainstream view the Wrights really were first, but the fight over who got the credit went on for decades. It got so bad that Orville sent the plane to London in protest, and when it finally came home to the Smithsonian, it came with a contract that's still in force.
 
 ## 02 December 17th, 1903
 
@@ -28,7 +28,7 @@ Their brother Lorin took the news to the Dayton Journal, and the city editor, a 
 
 Now here's the part that matters. There was another flying machine in this story, Langley's Aerodrome, and for years the Smithsonian had a label on it that called it capable of flight. And that label rested on tests done in 1914, by engineers who were in a patent fight with the Wrights.
 
-So think about that for a second. The tests that backed up the label were run by a Wright rival, years after the Wrights had already flown. And Orville did not take that quietly. He didn't take it quietly at all. In 1928 he lent the original Flyer to the Science Museum in London, in protest, so for years the Wright Flyer wasn't even in the country it flew in.
+So think about that for a second, the tests that backed up the label were run by a Wright rival, years after the Wrights had already flown. And Orville did not take that quietly. He didn't take it quietly at all. In 1928 he lent the original Flyer to the Science Museum in London, in protest, so for years the Wright Flyer wasn't even in the country it flew in.
 
 And it took until 1942 for the Smithsonian to back down, and it retracted the claim in its report that year. So from those 1914 tests to the 1942 retraction, the Smithsonian's label favored somebody else's machine, and for the last part of that stretch the Wrights' own Flyer was sitting in a museum in another country.
 

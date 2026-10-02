@@ -1,6 +1,6 @@
 # Notes: Henry Ford Didn't Invent the Car
 Research entry: episode-research.md — "# Job 3" section, entry "### 31."
-Spoken words: 948
+Spoken words: 949
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

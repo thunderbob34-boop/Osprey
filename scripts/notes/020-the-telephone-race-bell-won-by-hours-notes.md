@@ -18,3 +18,9 @@ Spoken words: 1,068
 
 Hedges kept: "a few hours later, according to the Patent Office record"; Gray's filing always "a caveat"; "some accounts say to Bell himself"; "an allegation, not proof"; "the speech came through badly" / "albeit badly"; "his work in the invention", not "the inventor"; "the official record says he won it".
 Left out on purpose (unverified / keep off air in research): Canada's House of Commons counter-motion (unverified); the Reis demonstration date of 26 Oct 1861 and the "Gurkensalat" sentence (unverified); Bell's 10 March 1876 "Mr. Watson" call (not re-checked); Evenson's book (removed from sources).
+
+## Review
+- Fact fixes: 1: "he did it because a caveat was cheaper" stated Meucci's motive. The entry only says the caveat was cheaper than a full application, so the causal "because" was cut. Every date, entry number (5th vs 39th), the $100 allegation, both affidavits and the H.Res.269 wording match the entry. The title is supported by the LoC "a few hours later" record, and the script keeps the hedge.
+- Cadence fixes: 6 joins, e.g. "built a device he called the telephon. It could carry musical tones..."; softened the button "And that should have been the end of it." into a joined clause.
+- Format fixes: none (count unchanged at 1,068).
+- Remaining concerns for Gus: none

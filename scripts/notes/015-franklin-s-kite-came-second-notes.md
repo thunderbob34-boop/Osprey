@@ -22,3 +22,9 @@ Spoken words: 941
 
 Hedges kept: "according to Franklin"; "according to Priestley's account"; "nobody knows the exact day"; "about a month"; "as far as we can tell"; "a few skeptics even doubt the kite flight happened as told" with the minority-view note; "later writers credit Thales", "secondhand", "traditionally".
 Left out on purpose (unverified / keep off air in research): naming Tom Tucker, his book, and the word "hoax" (the entry says to use only the "a few skeptics" line, if at all); the kite's key and any lightning-rod invention claim (not in entry); any exact date for the kite.
+
+## Review
+- Fact fixes: 2: (a) the title and script said the kite "came second", but the entry and script both have Delor repeating the experiment in Paris on 18 May, so the kite was at least third. Retitled to "Franklin's Kite Wasn't First" and changed "it came second" / "he just happened to be second" to "it wasn't first". (b) "the best evidence we have for the kite is Franklin" ignored Priestley's account, which the script itself cites; now "the kite rests on Franklin's own account and Priestley's".
+- Cadence fixes: 5 fixes, e.g. cut the button "and it was a retired soldier with an iron rod and some wine bottles"; replaced the zinger "the name on it is a tradition, not a record" with a plain line; joined "That's about a month after Marly. And according to Franklin...".
+- Format fixes: Title line changed (file name left as is to match the manifest path). Reading-notes hedge list now includes "as far as we can tell" and "traditionally", which were in the text but not listed. Word count updated (946 to 941).
+- Remaining concerns for Gus: The manifest title still says "Franklin's Kite Came Second"; update it if the title is used elsewhere (thumbnail, upload).

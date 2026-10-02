@@ -21,3 +21,9 @@ Spoken words: 930
 
 Hedges kept: "oldest surviving" / "the oldest known book printed that way" for the Jikji; "in the 1040s"; "no later than 1455"; "about four hundred years"; "there's no clear evidence Gutenberg knew about any of it"; Bi Sheng called "a craftsman".
 Left out on purpose (unverified / keep off air in research): Bi Sheng as "a commoner" (unverified); the earlier Korean metal-type book of about 1234 to 1241 and Yi Gyu-bo's postscript (unverified, Wikipedia-only); Gutenberg's nationality and city (not in entry).
+
+## Review
+- Fact fixes: 1: the close credited "a craftsman in China and a group of monks in Korea" as the ones who did it first. The Jikji is only the oldest *surviving* metal-type book (earlier Korean metal type is unverified), so the close now says "woodblock printers and a craftsman in China, and printers in Korea". All arithmetic checks (1455-1377 = 78, 1455-868 = 587, about 400 from the 1040s).
+- Cadence fixes: 5 joins, e.g. "Now here's where movable type comes in. In the 1040s..." and the Diamond Sutra run of short sentences.
+- Format fixes: Word count updated (926 to 930).
+- Remaining concerns for Gus: none

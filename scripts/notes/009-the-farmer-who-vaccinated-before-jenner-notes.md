@@ -1,6 +1,6 @@
 # Notes: The Farmer Who Vaccinated Before Jenner
 Research entry: episode-research.md — "# Job 3" section, entry "### 42."
-Spoken words: 929
+Spoken words: 933
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

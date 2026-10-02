@@ -1,7 +1,7 @@
 # The Farmer Who Vaccinated Before Jenner
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 929 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 933 spoken words.
 - Tone is calm and matter-of-fact. Onesimus was enslaved, so say it plainly and with respect, no dramatics, the facts carry it.
 - Say Jesty as JES-tee, Yetminster as YET-min-ster, Nelmes as NELMZ, Phipps as FIPS, Onesimus as oh-NESS-ih-mus, Boylston as BOYL-stun, variolation as vair-ee-oh-LAY-shun.
 - Every hedge in here is on purpose. Read "by the 1500s", "somewhere between 1465 and 1572", "that's how the museums put it", "the son of Jenner's gardener" and "mild smallpox" exactly as written.

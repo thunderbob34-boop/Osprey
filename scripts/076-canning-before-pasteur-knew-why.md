@@ -1,10 +1,10 @@
 # Canning Before Pasteur Knew Why
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 871 spoken words. It runs a bit short on purpose rather than padding.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 872 spoken words. It runs a bit short on purpose rather than padding.
 - Tone is warm and plain. Appert is the hero, Pasteur is not a villain, he explained it, he didn't steal anything.
 - Say Appert as ah-PAIR, Nicolas as nee-koh-LAH, Massy as mah-SEE, Durand as dyoo-RAND, Donkin as DON-kin.
-- Every hedge in here is on purpose. Read "the story goes", "what's documented is this", "is shakier", "it's often dated to 1795", "French authorities paid him", "about fifty years later" and "in exchange for publishing" exactly as written. Never say "he won Napoleon's prize."
+- Every hedge in here is on purpose. Read "the story goes", "here's what's documented", "is shakier", "a lot less certain", "often dated to 1795", "French authorities paid him", "about fifty years later", "in exchange for publishing" and "in the sources we checked" exactly as written. Never say "he won Napoleon's prize."
 - No sensitivity issues. Use period images of glass bottles, the title page of Appert's book, and text cards.
 - Good on-screen text moments are 1795 (with a question mark), 1810, 12,000 francs, August 25 1810, 1811, 1812, 1813, and about 50 years.
 

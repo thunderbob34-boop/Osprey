@@ -1,6 +1,6 @@
 # Notes: Air Conditioning Wasn't Built for People
 Research entry: episode-research.md — "# Job 3" section, entry "### 8."
-Spoken words: 937
+Spoken words: 953
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

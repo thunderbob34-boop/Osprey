@@ -1,7 +1,7 @@
 # The Doctor Who Beat Ether Day by Four Years
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 922 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 935 spoken words.
 - Tone is calm and matter-of-fact. The surgery talk stays plain, no wincing in the voice, the facts carry it.
 - Say Venable as VEN-uh-bul, Magendie as mah-zhahn-DEE, Hanaoka Seishu as hah-nah-OH-kah SAY-shoo, Kan Aiya as KAHN eye-YAH, mafutsusan as mah-foo-TSOO-sahn, tsusensan as TSOO-sen-sahn.
 - Every hedge in here is on purpose. Read "many doctors", "some saw it as a sign", "some opposed anesthesia", "the way I see it" and "the way I'd put it" exactly as written. Never say doctors thought screaming was a good sign, that line has no source behind it.

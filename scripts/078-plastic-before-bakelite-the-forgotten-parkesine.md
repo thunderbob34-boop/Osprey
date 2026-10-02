@@ -1,10 +1,10 @@
 # Plastic Before Bakelite: The Forgotten Parkesine
 
 READING NOTES
-- Runtime is about 4 and a half minutes at a relaxed pace, roughly 720 spoken words. It runs short on purpose, the research is thin and nothing was padded.
+- Runtime is about 4 and a half minutes at a relaxed pace, roughly 714 spoken words. It runs short on purpose, the research is thin and nothing was padded.
 - Tone is calm and fair. Bakelite keeps its title as the first fully synthetic plastic, and the script says so plainly. Parkesine is the first man-made plastic, not the first fully synthetic one.
 - Say Parkesine as PARKS-een, Baekeland as BAKE-land, Yonkers as YON-kers, nitrocellulose as NY-troh-SEL-yoo-lohs, Hyatt as HY-ut.
-- Every hedge in here is on purpose. Read "first man-made plastic", "semi-synthetic", "first fully synthetic plastic" (only about Bakelite), "according to Britannica", "other sources give different dates" and "by the museum's own record" exactly as written. Never call Parkesine "fully synthetic", even though one museum page does.
+- Every hedge in here is on purpose. Read "first man-made plastic", "semi-synthetic", "first fully synthetic plastic" (only about Bakelite), "according to Britannica", "other sources give different dates", "by the museum's own record" and "widely called" exactly as written. Never call Parkesine "fully synthetic", even though one museum page does.
 - No sensitivity issues. Use museum images of Parkesine objects and Bakelite, period images of the 1862 Exhibition, and text cards.
 - Good on-screen text moments are 1861, 1862, 1870, 1907, 1993, 45 years, and semi-synthetic vs fully synthetic.
 
@@ -20,9 +20,9 @@ So that's a big name with a big honor behind it, right? And nothing in this vide
 
 ## 03 Parkes and Parkesine
 
-Here's who came before. A British inventor named Alexander Parkes made a material he called Parkesine, and according to Britannica he patented it in 1861, though other sources give different dates. And in 1862 he showed it at the International Exhibition in London, in South Kensington. And the Science Museum in London has a bronze medal from that 1862 Exhibition in its collection, and by the museum's own record it was awarded to Parkes, so somebody at that exhibition noticed what he'd brought.
+Here's who came before. A British inventor named Alexander Parkes made a material he called Parkesine, and according to Britannica he patented it in 1861, though other sources give different dates. And in 1862 he showed it at the International Exhibition in London, in South Kensington. And the Science Museum Group in Britain has a bronze medal from that 1862 Exhibition in its collection, and by the museum's own record it was awarded to Parkes.
 
-Parkesine was made from nitrocellulose, which is cellulose, the stuff plants are built from, treated with acid, and the thing that made it a plastic is that you could heat it, mold it into a shape, and it would hold that shape. So that's a moldable, man-made material, on show in London, in 1862, forty-five years before Bakelite.
+Parkesine was made from nitrocellulose, which is cellulose, the stuff plants are built from, after it's been chemically treated, and the thing that made it a plastic is that you could heat it, mold it into a shape, and it would hold that shape. So that's a moldable, man-made material, on show in London, in 1862, forty-five years before Bakelite.
 
 And it didn't stop with Parkes. John Wesley Hyatt came along with celluloid, which was patented in 1870, so there were at least two of these early plastics around well before 1907. Put the dates in a row and it goes Parkesine on show in 1862, celluloid patented in 1870, and Bakelite in 1907, so by the time Bakelite showed up, man-made plastics had already been around for more than forty years.
 
@@ -30,7 +30,7 @@ And it didn't stop with Parkes. John Wesley Hyatt came along with celluloid, whi
 
 Now here's the part that matters, and it's why Bakelite still gets to keep a title. Parkesine and celluloid were what's called semi-synthetic. They started from cellulose out of plants, and then got treated and turned into something new, so they're man-made, but they're built on a natural starting material. Bakelite didn't start from a plant material like that, so it's the first fully synthetic plastic, and that title stands.
 
-So the fair way to put it is this. Parkesine was the first man-made plastic, and Bakelite was the first fully synthetic plastic. Both of those are true at the same time, right? And to be fair, even one museum page gets this tangled up and calls Parkesine fully synthetic, and that's not right on the chemistry, so we're not going to say it.
+So the fair way to put it is this, Parkesine was the first man-made plastic, and Bakelite was the first fully synthetic plastic. Both of those are true at the same time, right? And to be fair, even one museum page gets this tangled up and calls Parkesine fully synthetic, and that's not right on the chemistry, so we're not going to say it.
 
 ## 05 Why You've Never Heard of It
 

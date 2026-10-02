@@ -1,7 +1,7 @@
 # McDonald's Didn't Invent Fast Food
 
 READING NOTES
-- Runtime is about 6 to 7 minutes at a relaxed pace, roughly 1,016 spoken words.
+- Runtime is about 6 to 7 minutes at a relaxed pace, roughly 1,022 spoken words.
 - Tone is calm and matter-of-fact, a little lighter than usual. It's burgers, let it be easy, but no jokes at anybody's expense.
 - Say Kroc as KROHK, Des Plaines as deh PLAINZ, Hardart as HAR-dart, Quisisana as kwee-zee-ZAH-nah, Yoshinoya as yoh-shee-NOH-yah, Nihonbashi as nee-hohn-BAH-shee, thermopolium as ther-moh-POH-lee-um (plural thermopolia, ther-moh-POH-lee-uh), Nereid as NEER-ee-id.
 - Every hedge in here is on purpose. Read "usually called", "often considered", "according to the company", "widely credited", "one of the first", "reportedly", "about eighty" and "nearly two thousand years ago" exactly as written. Never call Red's the first drive-through flat out, and keep Yoshinoya as the company's own account.

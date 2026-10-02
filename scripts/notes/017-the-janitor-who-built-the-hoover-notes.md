@@ -19,3 +19,9 @@ Spoken words: 885
 
 Hedges kept: "patented in 1908" with "the patent details vary a little depending on which source you read"; "the portable upright electric vacuum, not the vacuum cleaner itself"; "nobody seems to know how much he earned".
 Left out on purpose (unverified / keep off air in research): any patent number (889,823 vs 935,558 unresolved); Spangler's age (60) and the cousin Susan Hoover link (not pinned to a source); grant-year detail beyond "patented in 1908".
+
+## Review
+- Fact fixes: 1: "Nobody seems to know how much he earned" overstated the entry, which only lists the amount as unknown to our research; now "I couldn't pin down how much he earned from it", and the reading-notes hedge list was updated to match.
+- Cadence fixes: 5 joins, e.g. "Now here's the part that matters. Spangler had... He didn't have the money... And that's where William H. Hoover comes in." into one breath; cut the callback button "The guy who built the thing, out of a fan motor and a pillowcase, was the janitor." down to a plain joined clause.
+- Format fixes: Hedge list in reading notes updated. Word count updated (890 to 885).
+- Remaining concerns for Gus: Runs 885 words, under 900. No patent number, Spangler's age, or cousin link on air, as the entry requires.

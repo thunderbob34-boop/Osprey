@@ -20,3 +20,9 @@ Spoken words: 955
 
 Hedges kept: "about two centuries earlier"; "around the year 1000"; "about six hundred years"; "mainly through later writers" / "secondhand"; Jia Xian's book is lost and known through Yang Hui; "Britannica's word for it is that he reinvented"; "nothing in the record here says he copied anybody"; Pascal's real contribution acknowledged.
 Left out on purpose (unverified / keep off air in research): Pingala and any Indian lineage (unchecked; India left out entirely); the "Tartaglia's triangle" and "Khayyam's triangle" names (inferred, MacTutor only); Pascal's birth year and nationality (not in entry).
+
+## Review
+- Fact fixes: 1: changed "nothing in the record here says he copied anybody" to "nothing in what we found says he copied anybody" (the entry is silent on copying). Also softened "the name went to the person who wrote it down" to "the person who wrote the well-known book" so Pascal isn't reduced to a transcriber. All dates and gaps (1654-1261 = 393, about 600 from Jia Xian) check out; title supported.
+- Cadence fixes: 5 joins, e.g. "Now here's the part that matters. Yang Hui didn't claim it. In that 1261 book..." into one breath; folded the stand-alone "Even the Chinese name goes to the guy who passed it along." button into the preceding sentence.
+- Format fixes: Word count updated (952 to 955).
+- Remaining concerns for Gus: Runs 955 words, short by design. Pascal's birth year is not in the entry; the "born almost six hundred years after" line is the entry's own approved hook, so it stays.

@@ -19,3 +19,9 @@ Spoken words: 896
 
 Hedges kept: "by about 1600 BC" and "the researchers' estimate"; "more than three thousand years"; never calling the Mesoamerican method vulcanization; Goodyear's 1839 process "still the industrial process"; Hancock attributed to "Britain's Science Museum Group" and flagged as one strong source; "nobody's saying Hancock had the idea first".
 Left out on purpose (unverified / keep off air in research): any claim that the ancient chemistry matches modern vulcanization (contested); naming the Aztec or Maya specifically (Nat Geo headline is phrased as a question); ballgame sacrifice/beheading material from the Nat Geo URL; Goodyear's birth year and the tire company's history (not in entry).
+
+## Review
+- Fact fixes: 1: Hancock section said his November 1843 filing "got there first on paper". The entry only supports the filing date preceding the 1844 grant of Goodyear's US patent (his US filing date isn't in the research), so it now says the filing date is before Goodyear's patent was granted in 1844. Everything else (1600 BC as the researchers' estimate, no 'vulcanization' for the ancient method, Science 1999, MIT/Nat Geo recipe tuning) matches.
+- Cadence fixes: 6 joins, e.g. "Now here's the part that matters. It wasn't one product. They didn't just make rubber, they tuned it." into one breath; "He got his US patent for it in 1844." joined to the line before.
+- Format fixes: Word count updated (898 to 896).
+- Remaining concerns for Gus: Runs 896 words, under 900; the research doesn't support more without padding. The Hancock detail is single-source (Science Museum Group) and is attributed on air.

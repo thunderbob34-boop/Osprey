@@ -1,7 +1,7 @@
 # Columbus Was Late
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 929 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 931 spoken words.
 - Tone is calm and matter-of-fact. This one is about who got there first among Europeans, so keep the Indigenous point plain and early, never as an afterthought.
 - Say L'Anse aux Meadows as lahnss-oh-MED-ohz, Groningen as GROH-ning-en, Leif Erikson as LAYF ERR-ik-sun.
 - Every hedge in here is on purpose. Read "first known European", "Norse", "may have been older", "short-lived", "the sagas, not the wood" and "a year when wood was cut" exactly as written. Don't put Leif Erikson's name on the 1021 date, on screen or in the voice.

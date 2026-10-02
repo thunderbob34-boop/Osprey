@@ -20,3 +20,9 @@ Spoken words: 840
 
 Hedges kept: "the first monolingual English dictionary" (never just "first English word list"); "about three thousand" with the range explained; "over forty thousand"; "around 1580"; "drew on earlier school texts"; bilingual lists acknowledged.
 Left out on purpose (unverified / keep off air in research): an exact headword count (unknown); quoting the full title word for word beyond the fragments in the entry.
+
+## Review
+- Fact fixes: 2: (a) "nobody agrees on the exact count" overstated the sources; now "the sources don't agree on the exact count". (b) "it skipped everyday vocabulary completely" dropped "completely" (the entry says it skipped everyday words to explain the hard ones, no more). Also replaced the riddle line "the first book called an English dictionary wasn't the first one" (Cockeram's title isn't in the entry) with a plain statement.
+- Cadence fixes: 6 joins, e.g. "His name was Robert Cawdrey. Around 1580 he was..." and the choppy "It was scale and precision. Over forty thousand words..." run.
+- Format fixes: Word count updated (839 to 840).
+- Remaining concerns for Gus: Runs 840 words, the shortest in the batch; the research doesn't support more.

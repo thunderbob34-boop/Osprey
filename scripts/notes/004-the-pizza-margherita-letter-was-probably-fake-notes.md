@@ -1,6 +1,6 @@
 # Notes: The Pizza Margherita Letter Was Probably Fake
 Research entry: episode-research.md — "# Job 3" section, entry "### 60."
-Spoken words: 934
+Spoken words: 932
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

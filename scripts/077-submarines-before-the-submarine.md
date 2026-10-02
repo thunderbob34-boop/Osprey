@@ -1,7 +1,7 @@
 # Submarines Before the Submarine
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 817 spoken words. It runs a bit short on purpose rather than padding.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 818 spoken words. It runs a bit short on purpose rather than padding.
 - Tone is calm with a bit of fun in it, it's a sneak attack that didn't go off. Holland is rightly the father of the modern submarine, so the framing is "earlier submarines," never "the real inventor."
 - Say Drebbel as DREB-ul, Bushnell as BUSH-nul.
 - Every hedge in here is on purpose. Read "around 1620", "reportedly", "later accounts", "it wouldn't bite", "one of the earliest" and "earlier submarines" exactly as written. Don't explain why the screw failed, that's disputed. Don't call Drebbel's boat the first submarine ever.
@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-In 1776, one man in a one-man submarine slipped under the flagship of the British fleet in New York harbor, and that was the first submarine attack in history. It happened during the American Revolution, and it didn't work, the screw that was supposed to fix the bomb to the ship's hull wouldn't bite, so the bomb drifted off and went off harmlessly. The man who usually gets called the father of the modern submarine is John Philip Holland, and he earned that, but there were submarines in the water long before his.
+In 1776, one man in a little one-man submarine slipped under the flagship of the British fleet in New York harbor, and that was the first submarine attack in history. It happened during the American Revolution, and it didn't work, the screw that was supposed to fix the bomb to the ship's hull wouldn't bite, so the bomb drifted off and went off harmlessly. The man who usually gets called the father of the modern submarine is John Philip Holland, and he earned that, but there were submarines in the water long before his.
 
 ## 02 The Famous Version
 

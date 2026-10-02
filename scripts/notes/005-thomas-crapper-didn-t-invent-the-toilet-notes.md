@@ -1,6 +1,6 @@
 # Notes: Thomas Crapper Didn't Invent the Toilet
 Research entry: episode-research.md — "# Job 3" section, entry "### 4."
-Spoken words: 925
+Spoken words: 924
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

@@ -1,6 +1,6 @@
 # Notes: McDonald's Didn't Invent Fast Food
 Research entry: episode-research.md — "# Job 3" section, entry "### 65."
-Spoken words: 1016
+Spoken words: 1022
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
