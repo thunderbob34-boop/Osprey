@@ -1,7 +1,7 @@
 # The Supreme Court Case That Took Radio from Marconi
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 841 spoken words.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 842 spoken words.
 - Tone is calm and careful. This one is about getting a famous myth exactly right, so the voice should sound like someone reading the court record, not someone cheering for Tesla. Marconi gets real credit.
 - Say Guglielmo Marconi as gool-YEL-mo mar-KO-nee. John Stone Stone is his real name, say both Stones.
 - Every hedge in here is on purpose. Read "key parts", "the broad claims", "had been done before", "did not decide who invented radio" and "the Court wrote" exactly as written. Only say "the Supreme Court said Tesla invented radio" as the myth being corrected, and never put it on screen as a claim.
@@ -28,7 +28,7 @@ And that's what the Court found. It held the broad claims of Marconi's tuning pa
 
 ## 04 John Stone Stone
 
-Now here's the part that matters. The Court wrote that Stone showed antenna tuning before Marconi. Stone, not Tesla. Tesla's patent is in there, and it matters, but the name the Court specifically wrote about showing antenna tuning first was John Stone Stone, and most of us have never heard of him.
+Now here's the part that matters. The Court wrote that Stone showed antenna tuning before Marconi, Stone, not Tesla, and Tesla's patent is in there, and it matters, but the name the Court specifically wrote about showing antenna tuning first was John Stone Stone, and most of us have never heard of him.
 
 So if you only remember one name from this ruling besides Marconi, the court record gives you a pretty good reason to make it Stone.
 

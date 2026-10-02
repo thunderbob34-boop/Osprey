@@ -34,13 +34,13 @@ But it wasn't, because ten years later, a patent examiner named Zenas Wilber sig
 
 Now, to be fair, that's an allegation, not proof, and there are real problems with it. In October 1885, just months before, Wilber had sworn the opposite, in his own earlier affidavit. So he swore one thing, and then he swore the other thing. He also admitted to alcoholism, and he admitted he owed Bailey money. The Washington Post went back over all of this in 2008, and people have argued about it ever since.
 
-So I'm not going to tell you Bell cheated, because the evidence doesn't get you there. What I can tell you is that a man who examined these filings gave two sworn statements that contradict each other, and only one of them can be true.
+So I'm not going to tell you Bell cheated, because the evidence doesn't get you there. What I can tell you is that a patent examiner gave two sworn statements that contradict each other, and only one of them can be true.
 
 ## 05 Before Gray and Bell
 
 And there's more, because Bell had rivals before Gray, and they were earlier than Valentine's Day 1876 by years.
 
-In Germany in 1861, a man named Johann Philipp Reis built a device he called the telephon. It could carry musical tones, and it could carry speech too, but the speech came through badly. The Smithsonian has one of his transmitters in its collection, and it describes it that way, speech, albeit badly. So it wasn't a telephone the way we'd think of it, but he had the name, and he had sound going down a wire, fifteen years before Bell's patent, right?
+In Germany in 1861, a man named Johann Philipp Reis built a device he called the telephon. It could carry musical tones, and it could carry speech too, but the speech came through badly. The Smithsonian has one of his transmitters in its collection, and it describes it that way, speech, albeit badly. So it wasn't a telephone the way we'd think of it, but he had the name, and he had a device carrying tones and some speech, fifteen years before Bell's patent, right?
 
 And in New York there was Antonio Meucci. In 1871, Meucci filed a caveat, the same kind of notice Gray filed, and he did it because a caveat was cheaper than a full patent application. But a caveat had to be renewed, and Meucci couldn't afford to keep renewing it, so in 1874 it lapsed. That's two years before Bell's patent.
 
@@ -50,7 +50,7 @@ Now, careful with that one, right? It says his work in the invention, not that h
 
 ## 06 Fair Credit to Bell
 
-Now, to be fair to Bell, the record favors him. He filed a full patent application, Gray filed a caveat, and by the office's own records Bell's was in first, and Bell's patent was granted. The bribery story is an allegation from a man who swore both ways. And Reis's device carried speech badly, and Meucci's caveat lapsed, so neither of them ended up with a telephone patent.
+Now, to be fair to Bell, the record favors him. He filed a full patent application, Gray filed a caveat, and by the office's own records Bell's was in first, and Bell's patent was granted. The bribery story is an allegation from a man who swore both ways. And Reis's device carried speech badly, and Meucci's caveat lapsed.
 
 So Bell won the race that counted on paper, and the official record says he won it. But it was a race, and it was close, and there were people on the track before he was.
 

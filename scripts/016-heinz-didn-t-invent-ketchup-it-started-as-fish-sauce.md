@@ -20,7 +20,7 @@ But ketchup was around for a long, long time before Heinz, and for most of that 
 
 ## 03 The Fish Sauce
 
-The word ketchup traces back to a fermented fish sauce from southern China, called kê-tsiap in the Hokkien dialect. Fermented just means it was left to sit and change over time, the same basic idea behind soy sauce or yogurt, so this was a sauce made from fish that was left to age. So the name of the thing on your fries comes from a sauce made from fish. That's not a joke, that's where the word comes from, and you'll find it in Smithsonian, National Geographic, NPR and History.com, all telling the same story.
+The word ketchup traces back to a fermented fish sauce from southern China, called kê-tsiap in the Hokkien dialect. Fermented just means it was left to sit and change over time, the same basic idea behind soy sauce or yogurt. So the name of the thing on your fries comes from a sauce made from fish. That's not a joke, that's where the word comes from, and you'll find it in Smithsonian, National Geographic, NPR and History.com, all telling the same story.
 
 Now, how exactly that sauce and that word got from Asia to England isn't nailed down. The usual explanation is that British traders brought it home, and that's a reasonable guess, but nobody has the paperwork for it, so I'm not going to tell you it happened on a particular ship. What we do know is that ketchup had reached England by the early 1700s.
 

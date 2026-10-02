@@ -29,11 +29,11 @@ And it was nothing like Johnson's. Cawdrey's dictionary had only about three tho
 
 And he told you who it was for. The full title of the book is long, but it names its readers, and that includes ladies, gentlewomen, and what it calls unskilful persons, spelled the old way, with a v where we'd put a u. There's a surviving copy of it at the Folger Shakespeare Library, so this isn't a book we only know about secondhand. It's a real book, title and all.
 
-So think about the difference. Cawdrey had about three thousand hard words, and Johnson, a hundred and fifty-one years later, had over forty thousand. One was a little guide to difficult words for people who needed help with them, and the other was over forty thousand words, right? But the little one came first.
+So think about the difference. Cawdrey had about three thousand hard words, a little guide for people who needed help with them, and Johnson, a hundred and fifty-one years later, had over forty thousand, right? But the little one came first.
 
 ## 05 Careful With the Word First
 
-Now, to be fair, I want to be careful with what first means here. Cawdrey's was the first monolingual English dictionary, English to English. Before that there were bilingual word lists, like Latin to English, so people were already putting words in alphabetical lists with their meanings. And Cawdrey drew on earlier school texts when he put his together, so he didn't come up with all of it out of nowhere either.
+Now, to be fair, I want to be careful with what first means here. Cawdrey's was the first monolingual English dictionary, English to English. Before that there were bilingual word lists, like Latin to English, so people were already making lists of words with their meanings in another language. And Cawdrey drew on earlier school texts when he put his together, so he didn't come up with all of it out of nowhere either.
 
 And there's one more twist. Cawdrey didn't even call his book a dictionary. He called it A Table Alphabeticall. The first person to actually call his book a dictionary was Henry Cockeram, in 1623, almost twenty years after Cawdrey, and that's in the same Lady Margaret Hall write-up. So the first English dictionary wasn't called a dictionary, and the first book called an English dictionary wasn't the first one. And neither of them was Johnson's.
 

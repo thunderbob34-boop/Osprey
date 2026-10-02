@@ -1,6 +1,6 @@
 # Notes: 3,000 Years Before Goodyear: The Real Inventors of Rubber
 Research entry: 100-episode-lineup.md, heading "### 13. 3,000 Years Before Goodyear: The Real Inventors of Rubber"
-Spoken words: 905
+Spoken words: 898
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

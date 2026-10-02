@@ -28,7 +28,7 @@ So here's how that works, and it's simpler than it sounds. Say a short syllable 
 
 Now here's who actually wrote it down. A scholar named Virahanka, who lived somewhere between 600 and 800, gave the rule, and he gave the numbers, three, five, eight, thirteen, twenty-one. Then a scholar named Gopala, who lived before 1135, cited Virahanka. And then Hemachandra, around 1150, stated the rule outright, and that's about fifty years before Leonardo's book.
 
-Now, to be fair, Virahanka's own text is lost. His rule survives through Gopala, who quoted him, so we're getting Virahanka secondhand. But all three of these men came before 1202, and that's not a guess, that's from a peer-reviewed paper by a historian named Parmanand Singh, published in the journal Historia Mathematica in 1985. The title of it is The so-called Fibonacci numbers in ancient and medieval India. And a separate paper on the origin of the sequence, hosted by the University of St Andrews, also puts Hemachandra around 1150 and ties it to the same poetry.
+Now, to be fair, Virahanka's own text is lost. His rule survives through Gopala, who cited him, so we're getting Virahanka secondhand. But all three of these men came before 1202, and that's not a guess, that's from a peer-reviewed paper by a historian named Parmanand Singh, published in the journal Historia Mathematica in 1985. The title of it is The so-called Fibonacci numbers in ancient and medieval India. And a separate paper on the origin of the sequence, hosted by the University of St Andrews, also puts Hemachandra around 1150 and ties it to the same poetry.
 
 So the Indian scholars were first by centuries, with Virahanka, and still first by about fifty years, if you only count Hemachandra, right?
 

@@ -1,7 +1,7 @@
 # Gutenberg Wasn't First
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 927 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 926 spoken words.
 - Tone is calm and respectful on both sides. Gutenberg did change Europe, and the script says so. The point is only that movable type, and even metal movable type, came first in Asia.
 - Say Jikji as JIK-jee, Heungdeok as HUNG-dok, Cheongju as CHUNG-joo, Bi Sheng as bee SHUNG, Shen Kuo as shun KWAW, Mengxi bitan as mung-shee bee-TAHN, Dunhuang as dwun-HWAHNG, Mogao as moh-GOW, Wang Jie as wahng JYEH, and Gutenberg as GOO-ten-burg.
 - Every hedge in here is on purpose. Read "oldest surviving", "the oldest known book printed that way", "in the 1040s", "no later than 1455", "about seventy-eight years" and "there's no clear evidence Gutenberg knew about any of it" exactly as written.
@@ -22,7 +22,7 @@ And what Gutenberg brought was a whole system for doing that at scale. He had a 
 
 ## 03 The Diamond Sutra
 
-Let's go in order. Before movable type, there was woodblock printing, where you carve a whole page into a block of wood, ink it, and press paper onto it. And the oldest dated printed book we have was made that way. It's a Buddhist text called the Diamond Sutra, and it's in the British Library in London. It was finished on May 11th, 868, it was paid for by a man named Wang Jie, and it was found in the Mogao caves at Dunhuang, in China. The British Library calls it the world's earliest dated printed book.
+Let's go in order. Before movable type, there was woodblock printing, where you carve a whole page into a block of wood, ink it, and press paper onto it. And the oldest dated printed book we have was made that way. It's a Buddhist text called the Diamond Sutra, and it's held by the British Library. It was finished on May 11th, 868, it was paid for by a man named Wang Jie, and it was found in the Mogao caves at Dunhuang, in China. The British Library calls it the world's earliest dated printed book.
 
 So that's printing, almost six hundred years before Gutenberg's Bible. It isn't movable type, it's a carved block, but it's a printed book with a date on it, and that date is 868.
 

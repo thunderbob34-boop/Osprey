@@ -1,6 +1,6 @@
 # Notes: The Supreme Court Case That Took Radio from Marconi
 Research entry: episode-research.md, "## New topic detail" section, entry "### 9." (Marconi, Tesla, and the Supreme Court Radio Fight)
-Spoken words: 841
+Spoken words: 842
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
