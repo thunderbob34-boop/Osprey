@@ -1,0 +1,20 @@
+# Notes: Gunpowder Before Europe Knew It
+Research entry: episode-research.md, "# Job 3" section, entry "### 18." (Gunpowder)
+Spoken words: 699
+
+| Claim in script | Source(s) named in the research entry |
+|---|---|
+| Gunpowder almost certainly discovered by Chinese alchemists, probably 9th century, late Tang | Britannica, "Gunpowder"; entry on-air version |
+| Around 850 CE | History.com, "Firearms" / fireworks history |
+| Saltpeter and sulfur were staples of elixir labs; found while experimenting with elixir ingredients | Entry "Inferred" note (consensus, plausible) |
+| Mid-800s Daoist text warns mixing saltpeter and sulfur burned people's faces and burned down houses; it is a warning, not a discovery account | Entry on-air version and "Inferred" note (Zhenyuan miaodao yaolüe) |
+| Composition about 75 : 15 : 10 | Britannica, "Gunpowder" |
+| Early use in fireworks and signals | Britannica, "Gunpowder" |
+| Wujing Zongyao, Song military manual, 1044, earliest known written formula | Clemson open textbook, Gunpowder in Medieval China; entry "Confirmed" |
+| The "elixir of immortality/life" story is the usual version; no text records anyone looking for immortality and finding gunpowder | History.com and Smithsonian (elixir framing); entry "Inferred" note |
+
+Plain explanation added (no new claims): gunpowder is saltpeter, sulfur and charcoal, with the 75 : 15 : 10 split read as saltpeter : charcoal : sulfur; saltpeter feeds the fire so the mix burns fast; an elixir glossed as a potion for long life. The "cannons and muskets" picture in section 02 is framing of the popular image, not a factual claim about Europe.
+
+Hedges kept: "probably" (9th century, and the cold-open "probably stumbled on"), "almost certainly", "around the year 850", "earliest known" formula, "while they were experimenting with elixir ingredients" (no eureka scene), "plausible" and "general consensus" for the immortality framing; the warning text is called Daoist, never Buddhist.
+
+Left out on purpose (unverified / keep off air in research): Roger Bacon's recipe (~1267) and the "Black Berthold" (Berthold Schwarz) legend, both marked [prior knowledge, not re-verified], so the script names no European credited figure and makes no date comparison with Europe; Needham as a cited authority (not fetched); the text's full title, kept out to spare the read. Runs short (699 words) because the entry can't fill more without padding.

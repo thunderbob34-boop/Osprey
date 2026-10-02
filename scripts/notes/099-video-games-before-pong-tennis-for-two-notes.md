@@ -1,0 +1,20 @@
+# Notes: Video Games Before Pong: Tennis for Two
+Research entry: 100-episode-lineup.md, heading "### 99. Video Games Before Pong: Tennis for Two"
+Spoken words: 638
+
+| Claim in script | Source(s) named in the research entry |
+|---|---|
+| Pong (Atari, 1972) popularly called the first video game | Entry "Credited" line |
+| William Higinbotham, nuclear physicist, built Tennis for Two for Brookhaven's visitors' day, October 18, 1958, on an analog computer and an oscilloscope | Brookhaven National Laboratory, "The First Video Game?"; Computer History Museum |
+| Hundreds of visitors lined up to play | Brookhaven National Laboratory |
+| Brookhaven's history page is titled "The First Video Game?" with a question mark | Brookhaven National Laboratory (source title) |
+| Manhattan Project background, attributed to Brookhaven's own history | Entry hedge (BNL history; attributed as required) |
+| Alexander Douglas's OXO, tic-tac-toe on Cambridge's EDSAC, 1952, built for research, not fun | Computer History Museum timeline 1952; CHM "Inventing a New Medium" |
+| OXO and others came earlier as computer games | Entry hedge |
+| Tennis for Two: "one of the first, and the first built purely for fun" (BNL's framing) | Entry hedge; Brookhaven National Laboratory |
+| CHM covers both Tennis for Two and OXO | Computer History Museum |
+| "Fourteen years" (1958 to 1972), "six years" (1952 to 1958) | Entry on-air line; arithmetic |
+| What an oscilloscope is | Plain explanation, no new claim |
+
+Hedges kept: "first video game" treated as definition-dependent ("depends on what you count"); Tennis for Two as "one of the first, and the first built purely for fun", credited to Brookhaven's framing; Manhattan Project line attributed to Brookhaven; OXO "built for research, not for fun"; OXO "isn't the only one" earlier.
+Left out on purpose (unverified / keep off air in research): anything about what Higinbotham did on the Manhattan Project; how the game was played or controlled; any later history of Tennis for Two; any claim about Pong's sales or influence (not in the entry); the Smithsonian source used only as background, with no specific claim attributed to it on air.

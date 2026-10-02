@@ -1,0 +1,21 @@
+# Notes: The Clock Tower Before Europe's Clocks
+Research entry: episode-research.md — "# Job 3" section, entry "### 35." (Timekeeping)
+Spoken words: 870
+
+| Claim in script | Source(s) named in the research entry |
+|---|---|
+| Su Song's water-driven astronomical clock tower, Kaifeng, 1088, had an escapement-type mechanism | Britannica "Su Song" and "Clock"; ETHW timeline |
+| Yi Xing (725) had an earlier one | Britannica "Clock"; ETHW timeline |
+| Europe is credited with the mechanical clock | Entry "Best angle" (swap angle) |
+| Huygens made the first working pendulum clock in 1656 | Britannica "When was the pendulum clock invented?"; Museo Galileo |
+| Galileo designed a pendulum clock before his death in 1642; his son Vincenzio tried to build it | Britannica; Museo Galileo; Science Museum Group drawing |
+| 2013 University of Basel find in the Valley of the Kings: limestone flake, black-painted half-circle in 12 sections, central hole for a peg (gnomon) | Basel press release via ScienceDaily; Archaeology magazine (AIA) |
+| Dated to the 13th century BCE; found among the huts of the tomb workmen; probably timed their work | ScienceDaily; Archaeology magazine; entry's "Inferred: say probably" |
+| Press release says "one of the world's oldest," not the oldest | ScienceDaily (Basel press release) |
+| Egyptians used sundials and shadow clocks by about 1500 BCE | The Met, "Telling Time in Ancient Egypt"; NIST |
+| NIST's popular timeline says obelisks built as early as 3500 BCE; Britannica: obelisks known from the 4th dynasty (about 2575 to 2465 BCE), none survive from then, earliest surviving is Senusret I's (1918 to 1875 BCE) | NIST "A Walk Through Time"; Britannica "Obelisk" |
+| Plain explanation: what an escapement does; what an astronomical clock is | Plain non-contestable explanation |
+
+Hedges kept: "escapement-type mechanism", "an early kind of escapement", "one of the world's oldest sundials, not the oldest", "probably used to time their work", "by around 1500 BCE", "tried to build it", "that 3500 BCE date doesn't hold up".
+Left out on purpose (unverified / keep off air in research): the manifest hook's "early 1090s" and "about two centuries before Europe's mechanical clocks" (the European tower-clock date is marked unverified, so no date is given for Europe's first mechanical clocks and the script compares only to Huygens 1656); the Thutmose III green-schist sundial in Berlin (single specialist source); the obelisks-as-shadow-clocks-3500-BCE claim (contradicted by Britannica; mentioned only to set it aside); the Basel team members' names (initials only in the entry); any detail of Su Song's tower beyond water drive, astronomical clock and escapement-type mechanism.
+Note: runs short (about 5 and a half minutes). The entry was a Fit 2/5 topic swapped to Su Song, and its Su Song detail is thin.

@@ -1,0 +1,20 @@
+# Notes: Daguerre Didn't Take the First Photo
+Research entry: episode-research.md, "## New topic detail" section, entry "### 5." (Daguerre Didn't Take the First Photograph)
+Spoken words: 588
+
+| Claim in script | Source(s) named in the research entry |
+|---|---|
+| Louis Daguerre; daguerreotype announced 1839; commonly treated as the invention of photography | Entry "Credited" line; Britannica, "Who invented the photograph and why?" |
+| Niépce, View from the Window at Le Gras, 1826 or 1827, earliest surviving camera photograph | Harry Ransom Center press release and magazine piece; Britannica, "Nicéphore Niépce" |
+| First permanent photograph; process called heliography | Britannica, "Nicéphore Niépce" / "Who invented the photograph and why?" |
+| Pewter plate coated with bitumen of Judea; exposed at least 8 hours | Harry Ransom Center (object, date, process) |
+| Held at the Harry Ransom Center, University of Texas at Austin, which owns it | Harry Ransom Center; entry "Evidence strength" |
+| Niépce made earlier attempts that were lost | Entry "Hedges needed on air" |
+| Daguerre built on Niépce's work; his process was faster and practical | Britannica (Daguerre building on it); entry "Hedges needed on air" |
+| Fox Talbot was a separate parallel inventor | Entry "Hedges needed on air" |
+
+Plain explanation added (no new claims): bitumen of Judea glossed as a kind of natural asphalt; "not point and shoot" and "left it there for hours" restate the eight-hour exposure; "more than ten years before" is 1839 minus 1826/27.
+
+Hedges kept: "earliest surviving" (never "first photograph ever"), "1826 or 1827", "at least eight hours", "earlier attempts" that were lost, "commonly treated as" the invention.
+
+Left out on purpose (unverified / keep off air in research): the Niépce-Daguerre partnership from 1829 and Niépce's death in 1833 (entry says these did not appear in the session's extracts, verify first), so the script doesn't say they were partners; Fox Talbot's first names, nationality and dates (not in the entry); the Ransom Center's 2010 conservation check-up and 2012 travel details (no specifics in the entry); the Getty window exhibition. Runs short (588 words) because the entry can't fill more without padding.

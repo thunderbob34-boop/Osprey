@@ -1,0 +1,20 @@
+# Notes: The Smartphone Before the iPhone: IBM Simon
+Research entry: 100-episode-lineup.md — heading "### 74. The Smartphone Before the iPhone: IBM Simon"
+Spoken words: 795
+
+| Claim in script | Source(s) named in the research entry |
+|---|---|
+| iPhone (2007) popularly called the first smartphone | Entry "Credited" line |
+| IBM/BellSouth Simon Personal Communicator, shown late 1992 at COMDEX | Computer History Museum; entry "Actually first" |
+| On sale from 16 August 1994; thirteen years before the iPhone | TIME retrospective; CHM; Science Museum Group (1994-1995) |
+| Cellphone with a touchscreen and built-in apps: address book, calendar, mail, fax, notepad, sketch pad | CHM; Smithsonian NMAH; Science Museum Group; TIME |
+| Simon is in the collections of CHM, Smithsonian NMAH and the Science Museum Group | CHM; Smithsonian NMAH; Science Museum Group |
+| About $900 with a two-year contract, $1,100 without | TIME ("the $1,100/$900 price") |
+| Battery about an hour; off the market within about six months; roughly 50,000 sold; exact sales unknown | TIME (attributed on air, as the entry requires) |
+| Nobody called it a smartphone at the time; earlier PDAs had touchscreens; "first" depends on definition | Entry's required hedge; "Inferred: first" note |
+| "Widely considered the first smartphone" | Entry's required hedge |
+| Plain explanation: COMDEX was a computer trade show; the shown-to-on-sale gap (late 1992 to August 1994) | Plain explanation / arithmetic from entry dates |
+
+Hedges kept: "widely considered the first smartphone", "about $900", "about an hour", "about six months", "roughly 50,000", "according to TIME's look back", "nobody knows the exact sales", "depends on how you define a smartphone".
+Left out on purpose (unverified / keep off air in research): the manifest hook's "same year as the first PlayStation" (not in the research entry, so not used); any Apple or iPhone details beyond the 2007 date and the popular credit; any explanation of why the Simon failed (the entry gives no cause, so the script says "whatever the reasons were"); calling it "the first smartphone" without the hedge.
+Note: runs short (about 5 minutes). The entry is thin and the brief says not to pad.
