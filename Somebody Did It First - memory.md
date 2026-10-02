@@ -34,3 +34,12 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 
 ## Sources (policy and licensing, checked 2026-10-02)
 See the "Sources checked" table in `production-game-plan.md`. Re-check any row older than 30 days before a video ships.
+
+## Higgsfield costs (measured 2026-10-02 on Gus's account, Plus plan)
+| Item | Model | Credits | Notes |
+|---|---|---|---|
+| Full narration, 828 words (script 107) | text2speech_v2 / ElevenLabs, voice "Grady" | 14.25 | Three parts (2,048-character limit per request); 6 min 10 s of audio (~134 wpm). seed_audio priced at ~32 for the same text. |
+| 5-second video clip, 720p | Kling 3.0 | 10 | Seedance 2.5 priced at 35 for the same clip. |
+| Image | Nano Banana Pro | 4 | from spend history |
+| Image | Nano Banana 2 | 1.5 | price check only, nothing generated |
+| Image | GPT Image 2.5 (low) | 0.25 | price check only, nothing generated |
