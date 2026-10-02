@@ -1,6 +1,6 @@
 # Notes: Lewis and Clark Were Twelve Years Late
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 107."
-Spoken words: 826
+Spoken words: 828
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -39,3 +39,8 @@ Left out on purpose (unverified / keep off air in research): the exact day Macke
 - Low items noted, not changed: on-air "one extract gives July 20th" is research-speak ("one source" would sound more natural); "which is why the claim is first European, north of Mexico" is a loose gloss, since "north of Mexico" mainly answers earlier Spanish crossings in Mexico rather than the Spanish coastal presence; "at Monticello" and "summer 1802" are supported by Monticello and LOC.
 
 - Main-session follow-up: the on-air "one extract gives July 20th" (research-speak) is now "not every source agrees on the exact day".
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: "not every source agrees on the exact day" is accurate and natural, and the reading notes still say to read "July 1793". Arithmetic (July 1793 to November 1805 = about twelve years) holds; cold open, section 08 and title agree. Inscription, party size, knighthood and Jefferson dates check out. Word count was 826 in the file's reading notes and Spoken words line (the follow-up edit left it); now 828 after the fix below.
+- Fixes made: Section 05 "which is why the claim is first European, north of Mexico" softened to "which is part of why the claim is...", since "north of Mexico" mainly answers earlier Spanish crossings through Mexico, not only the coastal presence. Reading-notes line "one extract gives July 20th" reworded to "at least one source" (not spoken). Counts updated to 828.
+- Low items: none new

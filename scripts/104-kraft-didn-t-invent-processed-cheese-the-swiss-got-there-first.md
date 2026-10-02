@@ -1,7 +1,7 @@
 # Kraft Didn't Invent Processed Cheese: The Swiss Got There First
 
 READING NOTES
-- Runtime is about 3 minutes at a relaxed pace, roughly 483 spoken words.
+- Runtime is about 3 minutes at a relaxed pace, roughly 480 spoken words.
 - Tone is calm and fair. There is no villain in this one, and Kraft reached processed cheese on his own as far as the literature says.
 - Say Gerber as GAIR-ber, Stettler as STET-ler, Thun as TOON, Emmentaler as EM-en-tah-ler.
 - Every hedge in here is on purpose. Read "around 1911", "some accounts say 1912 or 1913", "as far as the literature says", "as it's described", "according to Britannica" and "working independently" exactly as written. Never say Kraft copied or stole, and do not mention a Swiss patent or name a Swiss company.
@@ -14,7 +14,7 @@ Ask where processed cheese came from and a lot of people will say Kraft, and Jam
 
 ## 02 Kraft's Patent
 
-According to Britannica and the Harvard Business School's profile of him, Kraft started a wholesale cheese-delivery business in Chicago in 1903. He filed his patent on March 25th, 1916, and the title was Process of sterilizing cheese and an improved product produced by such process. What it describes is heat plus continuous stirring of Cheddar cheese, and the goal was to be able to keep the cheese indefinitely. That was the first US patent for the process, according to Britannica, so Kraft really does have that, and nothing I say about the Swiss takes it away from him.
+According to Britannica and the Harvard Business School's profile of him, Kraft started a wholesale cheese-delivery business in Chicago in 1903. He filed his patent on March 25th, 1916, and the title was Process of sterilizing cheese and an improved product produced by such process. What it describes is heat plus continuous stirring of Cheddar cheese, and the goal was to be able to keep the cheese indefinitely. That's a real US patent, number 1,186,524, so Kraft really does have that, and nothing I say about the Swiss takes it away from him.
 
 ## 03 Kraft's Customers
 
@@ -30,4 +30,4 @@ Now here's the part that matters. The Swiss recipe used sodium citrate to keep t
 
 ## 06 Close
 
-So the plain version is, two men in Switzerland, Gerber and Stettler, melted Emmentaler with sodium citrate around 1911, and Kraft, a Chicago cheese salesman, filed a US patent for a processed cheese process in March of 1916, using heat and stirring and Cheddar. Somebody did it first, and Kraft arrived at it by himself, as far as the literature says.
+So the plain version is, two men in Switzerland, Gerber and Stettler, melted Emmentaler with sodium citrate around 1911, and Kraft, a Chicago cheese salesman, filed a US patent for his own way of processing cheese in March of 1916, using heat and stirring and Cheddar. Somebody did it first, and Kraft arrived at it by himself, as far as the literature says.

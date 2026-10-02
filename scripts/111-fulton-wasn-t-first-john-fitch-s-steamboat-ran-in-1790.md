@@ -29,7 +29,7 @@ Now, to be fair, Fitch wasn't the only person working on this, James Rumsey got 
 
 So the reason Fulton gets the credit is that Britannica says Fitch "was unable to make it a commercial success." Fitch's service was real, but it was short-lived and it was unprofitable, and Fulton's Clermont in 1807 is the one Britannica calls the first profitable venture in steam navigation. That's what Fulton did, he made a steamboat pay, and a boat that runs and a boat that pays for itself are two different problems, right? Fitch got a boat running and Fulton is the one who made one pay.
 
-And Fulton didn't do it alone. He was born in Pennsylvania in 1765, and in Paris in 1801 he met Robert Livingston, the American minister, the man who held a twenty-year steamboat monopoly in New York. Fulton came back to New York in December 1806 to supervise a boat the two of them had planned in Paris, and the Clermont was built in New York City with Livingston's financial backing. It went from New York City to Albany, about 150 miles, in 32 hours, carrying paying passengers.
+And Fulton didn't do it alone. He was born in Pennsylvania in 1765, and in Paris in 1801 he met Robert Livingston, the American minister, the man who held a twenty-year steamboat monopoly in New York. Fulton came back to New York in December 1806 to supervise a boat the two of them had planned in Paris, and the Clermont was built in New York City with Livingston's financial backing. It went from New York City to Albany, about 150 miles, in 32 hours, and it went on to carry paying passengers.
 
 And I'm not saying Fulton copied Fitch, because nothing we found says that, and we don't know whether Fulton ever knew about Fitch's work.
 

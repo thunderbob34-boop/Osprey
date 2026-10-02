@@ -34,3 +34,8 @@ Left out on purpose (unverified / keep off air in research): "knockoff", "copy" 
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) Section 06 said Hydrox "ended up owned by Kellogg's, and then it went out of production" with a 1999 or 2003 range; the chronology breaks if 1999 is right (Kellogg's did not own it then) and the Kellogg's ownership rested on KCUR plus unnamed extracts. Cut the Kellogg's clause; the line now says only that it went out of production, with the 1999 or 2003 hedge. Spoken words now 499 (notes count had been stale).
 - Low items noted, not changed: the Hoboken grocer and March 6 detail rests on Wharton only but is attributed on air; "Sunshine" 1947 rename is KC Public Library only but attributed.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Section 06 now says only that Hydrox went out of production, with the "1999 or 2003" hedge; no Kellogg's clause, no chronology problem, reads in one breath. 1908 to 2015 is 107 years, so "more than a century" holds. No contradiction with title, cold open or close. Word count 499 matches.
+- Fixes made: none
+- Low items: none new

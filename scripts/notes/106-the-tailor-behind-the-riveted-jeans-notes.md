@@ -36,3 +36,8 @@ Left out on purpose (unverified / keep off air in research): any patent fee or d
 - Low items noted, not changed: Cold-open line "never put a single rivet in a pair of pants" is a figurative hook and cannot be proven literally (it means he did not come up with the rivets); patent term and "riveted trousers" wording follows the Smithsonian and company pages.
 
 - Main-session follow-up: cold open "never put a single rivet in a pair of pants" (unprovable literally) is now "didn't come up with the rivets". Retitle applied to file name, manifest and lineup.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Retitle "The Tailor Behind the Riveted Jeans" is consistent with the "riveted version" hedge and the script body. Cold open "didn't come up with the rivets" is accurate and reads naturally; the cold open then clarifies invented/denim/canvas, so no contradiction with section 02, 04 or 08. Patent facts (No. 139,121, May 20 1873, half assigned, 17-year term) check out. Word count 798 matches. No banned words or dashes.
+- Fixes made: none
+- Low items: none new

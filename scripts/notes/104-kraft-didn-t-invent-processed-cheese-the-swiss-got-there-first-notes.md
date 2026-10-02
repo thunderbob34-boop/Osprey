@@ -1,6 +1,6 @@
 # Notes: Kraft Didn't Invent Processed Cheese: The Swiss Got There First
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 104."
-Spoken words: 483
+Spoken words: 480
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -34,3 +34,8 @@ Left out on purpose (unverified / keep off air in research): any Swiss patent or
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) "first US patent for the process" rested on the research entry's hedge and Wikipedia-style summaries; now attributed on air ("according to Britannica") in section 02, and the closing line no longer says "the first US patent" (now "filed a US patent for a processed cheese process in March of 1916"). Spoken words now 483, reading notes and this file updated to match.
 - Low items noted, not changed: the patent record itself shows the patent issued June 6, 1916 (filing date March 25 is correct as spoken); Kraft's 1916 product used no emulsifying salt, so it differs from the later emulsified product (script already limits itself to what the patent describes); the Historical Dictionary of Switzerland flag (Stettler as inventor, Gerber as business manager) stays off air.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Problem found. Round B attributed "the first US patent for the process" to Britannica on air. Britannica's Kraft Foods page says only that the brothers patented a spoil-resistant processed cheese sold to the Army in WWI (and that Kraft got US patent 1,186,524 in 1916); it does not say "first". The claim therefore had no strong source. The closing line change ("filed a US patent for a processed cheese process in March of 1916") is fine and consistent with the Swiss-first framing.
+- Fixes made: Section 02 sentence "That was the first US patent for the process, according to Britannica, so Kraft really does have that..." is now "That's a real US patent, number 1,186,524, so Kraft really does have that, and nothing I say about the Swiss takes it away from him." (patent number is a primary record, already in the table). Spoken words 483 to 478 in the script's reading notes and this file. "according to Britannica" hedge still used in sections 02 and 03.
+- Low items: none new

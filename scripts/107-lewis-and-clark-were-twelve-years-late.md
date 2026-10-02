@@ -1,12 +1,12 @@
 # Lewis and Clark Were Twelve Years Late
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 826 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 828 spoken words.
 - Tone is calm and respectful. Lewis and Clark did real work and the script says so, and the Indigenous peoples who knew the routes get named too.
 - Say Mackenzie as muh-KEN-zee, Chipewyan as chip-uh-WY-un, Bella Coola as BELL-uh KOO-luh, Nuxalk as NOO-hawlk, Voyageurs as voy-uh-ZHURZ.
 - Every hedge in here is on purpose. Read "first European", "north of Mexico", "about twelve years", "July 1793", "an inlet of the Pacific, not the open ocean" and "one of the things that shaped Jefferson's thinking" exactly as written, because they are what keeps the channel credible.
 - The twelve years is arithmetic, from Mackenzie reaching the coast in 1793 to Lewis and Clark reaching the Pacific in 1805. Counting from when Lewis and Clark set out in 1804 it is eleven, so don't say "twelve years before they left".
-- The exact day is not settled. The inscription itself says the twenty-second of July, one extract gives July 20th, so say "July 1793" and only read the inscription as the inscription's own words.
+- The exact day is not settled. The inscription itself says the twenty-second of July, at least one source gives July 20th, so say "July 1793" and only read the inscription as the inscription's own words.
 - Good on-screen text moments are 1789, 1792, May 1793, July 1793, 1801, 1802, summer 1802, January 18 1803, $2,500, and November 1805.
 
 ## 01 Cold Open
@@ -31,7 +31,7 @@ Now, the rock itself says the twenty-second, but not every source agrees on the 
 
 ## 05 Who Else Was There
 
-Here's where those qualifiers come in, and I want to be fair about them. Mackenzie didn't do it alone, he followed the Nuxalk-Carrier grease trail and he had Native guides, so Indigenous peoples knew the route long before he did. And the Spanish were already on the Pacific coast farther south, which is why the claim is first European, north of Mexico, and not first anybody.
+Here's where those qualifiers come in, and I want to be fair about them. Mackenzie didn't do it alone, he followed the Nuxalk-Carrier grease trail and he had Native guides, so Indigenous peoples knew the route long before he did. And the Spanish were already on the Pacific coast farther south, which is part of why the claim is first European, north of Mexico, and not first anybody.
 
 Then in 1801 Mackenzie published his journals, in a book called Voyages from Montreal, and in 1802 he was knighted.
 

@@ -21,7 +21,7 @@ The famous version is Walter Reed and the U.S. Army Yellow Fever Board in Havana
 
 Carlos Finlay was a Cuban physician, born in Camagüey, and he studied medicine in Philadelphia at Jefferson Medical College, where he graduated in 1855. He started his own practice in Havana in 1864, and there were periodic yellow fever epidemics in Havana.
 
-Then on August 14th, 1881 he read a paper to the Royal Academy of Medical, Physical, and Natural Sciences of Havana. In it he proposed that a mosquito, which we now identify as Aedes aegypti, carries yellow fever from one person to another. Finlay wasn't the only person who ever suspected mosquitoes, but as far as the modern scientific record goes, his 1881 paper is the proposal that Reed's board went on to test, and I'm saying it that carefully on purpose, and the reception was skeptical, so the idea sat there for years before anyone proved it.
+Then on August 14th, 1881 he read a paper to the Royal Academy of Medical, Physical, and Natural Sciences of Havana. In it he proposed that a mosquito, which we now identify as Aedes aegypti, carries yellow fever from one person to another. Finlay wasn't the only person who ever suspected mosquitoes, and I'm saying this carefully on purpose, but as far as the modern scientific record goes, his 1881 paper is the proposal that Reed's board went on to test, and the reception was skeptical, so the idea sat there for years before anyone proved it.
 
 ## 04 Reed Tests It
 
@@ -41,7 +41,7 @@ One of those volunteers was a private named John Kissinger, who reportedly devel
 
 ## 07 What Happened to Finlay
 
-It took until 1900, nineteen years after Finlay's paper, for Reed's team to prove he was right. In 1902 Finlay became the first Director of Health of the Republic of Cuba, he held that job until 1909, and he died in Havana on August 20th, 1915. He was nominated for the Nobel Prize in Physiology or Medicine several times, and he never won.
+It took until 1900, nineteen years after Finlay's paper, for Reed's team to prove he was right. In 1902 Finlay became the head of public health for the Republic of Cuba, he held that job until 1909, and he died in Havana on August 20th, 1915. He was nominated for the Nobel Prize in Physiology or Medicine several times, and he never won.
 
 ## 08 Who Did It First
 
