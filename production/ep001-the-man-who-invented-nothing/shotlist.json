@@ -965,7 +965,8 @@
   "fields": {
    "kind": "portrait",
    "label": "George Westinghouse",
-   "asset": "loc-gov-item-93511337"
+   "asset": "loc-gov-item-93511337",
+   "lower": "George Westinghouse"
   },
   "visual": "Slow push-in on the Westinghouse portrait.",
   "source": {
@@ -987,7 +988,8 @@
   "fields": {
    "kind": "object",
    "label": "Gaulard and Gibbs transformer (Smithsonian)",
-   "asset": "americanhistory-si-edu-collections-object-nmah-713060"
+   "asset": "americanhistory-si-edu-collections-object-nmah-713060",
+   "lower": "Lucien Gaulard and John Gibbs's transformer"
   },
   "visual": "Museum object, slow push-in.",
   "source": {
@@ -1009,7 +1011,8 @@
   "fields": {
    "kind": "portrait",
    "label": "William Stanley",
-   "asset": "commons-wikimedia-org-wiki-file-william-stanley-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-william-stanley-jpg",
+   "lower": "William Stanley"
   },
   "visual": "Slow push-in on the Stanley portrait.",
   "source": {
@@ -1044,7 +1047,8 @@
   "fields": {
    "kind": "portrait",
    "label": "Nikola Tesla, c. 1893",
-   "asset": "commons-wikimedia-org-wiki-file-nikola-tesla-by-sarony-c1893"
+   "asset": "commons-wikimedia-org-wiki-file-nikola-tesla-by-sarony-c1893",
+   "lower": "Nikola Tesla"
   },
   "visual": "Slow push-in on the Tesla portrait.",
   "source": {
@@ -1391,7 +1395,7 @@
    "kind": "photo",
    "label": "Old Columbia College, New York (library building)",
    "asset": "loc-gov-item-2014650160",
-   "lower": "Old Columbia College, New York (library building)"
+   "lower": "Columbia College campus (library building shown)"
   },
   "visual": "Building print, slow push-in.",
   "source": {
@@ -2118,7 +2122,8 @@
    "kind": "object",
    "label": "Gaulard and Gibbs transformer (Smithsonian)",
    "crop": "quick cuts on each name: Gaulard & Gibbs transformer, Stanley (04-t), Tesla (05-a), Westinghouse (04-r)",
-   "asset": "americanhistory-si-edu-collections-object-nmah-713060"
+   "asset": "americanhistory-si-edu-collections-object-nmah-713060",
+   "lower": "Gaulard and Gibbs · Stanley · Tesla · Westinghouse"
   },
   "visual": "Montage cut on each name.",
   "source": {
