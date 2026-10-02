@@ -201,6 +201,20 @@ With search working again, every line on the spot-check list was checked against
 - **Swan, 3 Feb 1879:** confirmed by the IET's *Electronics & Power* history article and the Natural History Society of Northumbria: 700+ people at the Lit & Phil, with Sir William Armstrong presiding.
 
 **Corrections this round: 2.** A confirmation round followed.
+## Round 10: confirmation review with limited search
+
+**Result: 1 medium-confidence correction.** The reviewer could run up to 8 searches.
+
+| # | Finding | Confidence | Change |
+|---|---|---|---|
+| 1 | The Smithsonian's *Lighting a Revolution* describes Swan's 1879 lamp as using a **carbon rod** (low-resistance, high-current, quick to soot the glass), not a filament. Calling it a "filament" also blurs the script's own §03 contrast with Edison's thin high-resistance filament. Earlier rounds raised this at low confidence; the Smithsonian source makes it medium. | Medium | "A thin carbon rod inside a glass bulb with the air pumped out" |
+| 2 | The Smithsonian puts the commercial bamboo lamp at ~600 hours. The 1,000+ figure (ETHW's "as much as 1,200") is the best result, and thinly sourced. | Low | "With some reportedly passing a thousand" |
+| 3 | Tesla's New York stint ran June 1884 to early 1885 | Low | "For about six months in New York starting in 1884" |
+| 4 | The closing list names AC people, so "the name people think of when they think of the lightbulb" is true but empty | Low | "…when they think of electric light" |
+
+The reviewer independently confirmed the newly worded $5,000 line against Essig's quotation of Brown's May 1889 letter.
+
+**Corrections this round: 1 (plus 3 low-confidence guards applied).** A confirmation round followed.
 ## Unresolved items and how each was handled
 
 | Item | What's unresolved | How it's handled |
@@ -240,11 +254,11 @@ With search working again, every line on the spot-check list was checked against
 | 02 | Davy, early 1800s, battery current between two carbons, arc of light | V (hedged date) | Royal Institution history; Britannica "arc lamp" |
 | 02 | Arc lighting reached lighthouses and streets decades later, once there were generators | B | South Foreland lighthouse arc lamp (1858) and Jablochkoff/Brush street lighting (1870s): Science Museum Group; Britannica "arc lamp"; Round 2 reviewer |
 | 02 | Many inventors tried carbon or platinum incandescence; filaments burned up or melted | B | Friedel & Israel ch. 1; Smithsonian NMAH *Lighting a Revolution* |
-| 02 | Swan, 3 Feb 1879, Newcastle Lit & Phil, ~700 people, carbon filament in evacuated bulb, months before Edison | V | Newcastle Lit & Phil history; Science Museum Group; Swan biography (Oxford DNB) |
+| 02 | Swan, 3 Feb 1879, Newcastle Lit & Phil, ~700 people, thin carbon rod in an evacuated bulb (corrected R10), months before Edison | V / R9 / R10 | Newcastle Lit & Phil history; Science Museum Group; Swan biography (Oxford DNB) |
 | 03 | Early lamps used thick, low-resistance carbon → high current → thick copper; Edison's thin high-resistance filament + better vacuum | V | Friedel & Israel; Edison Papers; Hughes, *Networks of Power* |
 | 03 | Working bulb Oct 1879; carbon-filament patent granted Jan 1880 (US 223,898) | V | Edison Papers; USPTO |
 | 03 | First ones lasted "something like half a day" | **R9** | Rutgers Edison Papers, "The Carbon-Filament Lamp" (https://edison.rutgers.edu/life-of-edison/biographical-essays/lighting/the-carbon-filament-lamp): the 22 Oct 1879 lamp burned 13½ hours; ETHW, "Edison's Incandescent Lamp" (https://ethw.org/Edison's_Incandescent_Lamp) |
-| 03 | Within a year or two, bamboo filaments lasted hundreds of hours, the best passing a thousand | **R9** (hedged; 1,200-h figure has one strong source) | ETHW, "Early Light Bulbs" (https://ethw.org/Early_Light_Bulbs): bamboo "as much as 1,200 hours", the standard for ~10 years; Smithsonian NMAH, "Edison bamboo filament incandescent lamp" (https://americanhistory.si.edu/collections/object/nmah_995668) |
+| 03 | Within a year or two, bamboo filaments lasted hundreds of hours, "with some reportedly passing a thousand" (corrected R10: Smithsonian gives ~600 h for commercial lamps) | **R9/R10** (hedged) | ETHW, "Early Light Bulbs" (https://ethw.org/Early_Light_Bulbs): bamboo "as much as 1,200 hours", the standard for ~10 years; Smithsonian NMAH, "Edison bamboo filament incandescent lamp" (https://americanhistory.si.edu/collections/object/nmah_995668) |
 | 03 | Edison built the system: screw socket, switches, fuses, meters, generators, underground wiring | V (meters, generators: B) | Edison Papers; IEEE Milestone "Pearl Street Station, 1882"; Hughes |
 | 03 | Pearl Street Station, 1882, lower Manhattan, "usually counted as the start of the electric utility business in America, at least for indoor electric light" | V / B (framing) | IEEE Milestone "Pearl Street Station"; Edison Papers. Wording per the Round 2–4 corrections (Brush arc-light central stations came earlier, hence the indoor-light qualifier) |
 | 03 | Swan selling bulbs in Britain at the same time, "neck and neck"; British companies merged in 1883 | **R9** | Science Museum Group, "The Edison Swan Electric Co. Ltd" (https://collection.sciencemuseumgroup.org.uk/people/ap8665/the-edison-swan-electric-co-ltd); Grace's Guide (https://www.gracesguide.co.uk/Edison_Swan_Electric_Co): registered 26 Oct 1883 after Edison's infringement action against Swan; Rutgers Edison Papers company page |
@@ -254,7 +268,7 @@ With search working again, every line on the spot-check list was checked against
 | 04 | Edison's DC had no practical step-up method, ran at near-household voltage; plants within about a mile | V | Edison Papers; Hughes; Smithsonian (King 2011) |
 | 04 | Westinghouse bought into the Gaulard–Gibbs transformer from Europe; William Stanley made it a practical system; offices and stores on Main Street, Great Barrington, 1886 | **R9** | IEEE Milestone "Alternating Current Electrification, 1886" (https://ethw.org/Milestones:Alternating_Current_Electrification,_1886): 20 March 1886, offices and stores on Main Street, Stanley's parallel connection; Berkshire County Historical Society, "William Stanley Lighted a Town" (https://berkshirehistory.org/wp-content/uploads/2018/11/Berkshire-History-Vol-VI-No-1-William-Stanley-Lighted-a-Town.pdf); *Invention & Technology*, "'St. George' Westinghouse" (https://www.inventionandtech.com/node/85909): US rights bought 1885 |
 | 05 | Tesla vs. Edison personal rivalry is largely myth | V | Edison Papers "The Current Wars"; Carlson (2013) |
-| 05 | Tesla worked for Edison's companies, first in Paris from 1882, then ~6 months in New York in 1884 | **R9** | MIT, "Tesla" (https://web.mit.edu/most/Public/Tesla1/etradict.htm) and the Nikola Tesla Museum, Belgrade (https://www.muzejnikoletesle-konkurs.rs/en/about-nikola-tesla/): Continental Edison, Paris, autumn 1882; arrived New York 6 June 1884; Edison Machine Works |
+| 05 | Tesla worked for Edison's companies, first in Paris from 1882, then ~6 months in New York starting in 1884 | **R9** | MIT, "Tesla" (https://web.mit.edu/most/Public/Tesla1/etradict.htm) and the Nikola Tesla Museum, Belgrade (https://www.muzejnikoletesle-konkurs.rs/en/about-nikola-tesla/): Continental Edison, Paris, autumn 1882; arrived New York 6 June 1884; Edison Machine Works |
 | 05 | $50,000 promise "turned out to have been a joke", per Tesla only | **R9**, corrected R2, R5 | Tesla, *My Inventions* (1919), text at http://www.tfcbooks.com/tesla/my_inventions.htm and Tesla Universe, "My Inventions IV" (https://teslauniverse.com/nikola-tesla/articles/my-inventions-iv-discovery-tesla-coil-and-transformer): "the Manager" made the promise. The Edison-in-person version is from O'Neill (1944). The script no longer names Edison as the promiser |
 | 05 | May 1888 induction-motor patents; Westinghouse bought the rights in 1888 | V | USPTO (US 381,968 and related, 1 May 1888); Carlson; IEEE |
 | 05 | The public fight was Westinghouse vs. Edison; Tesla's patents were one of the big things Westinghouse brought into it | V / R3 wording | Edison Papers; Smithsonian (King 2011) |
@@ -280,6 +294,6 @@ With search working again, every line on the spot-check list was checked against
 | 01/08 | Edison held over a thousand US patents; he wasn't first with the bulb, and today's wall power isn't his system | **R9** | Rutgers Edison Papers, "Edison's Patents" (https://edison.rutgers.edu/research/edison-s-patents): 1,093 US patents; PBS *American Experience*, "Edison's Miracle of Light: patents" (https://www.pbs.org/wgbh/americanexperience/features/light-patents) |
 | 08 | DC has made a comeback on very long lines thanks to modern electronics (HVDC) | B | US DOE; IEEE; any HVDC overview |
 | 08 | Household AC everywhere; US 120V/60Hz, UK/Europe 230V/50Hz; chargers convert to DC | V | IEC World Plugs (iec.ch); US DOE |
-| 08 | Closing credit list: Gaulard and Gibbs, Stanley, Tesla, Westinghouse, "and a string of engineers on both sides of the Atlantic"; "none of them are the name people think of when they think of the lightbulb" (corrected R7: Westinghouse's name *was* literally on bulbs) | B | Same sources as §04 and §05 (IEEE Milestone; Hughes; Carlson). Ordered by contribution, per the final audit |
+| 08 | Closing credit list: Gaulard and Gibbs, Stanley, Tesla, Westinghouse, "and a string of engineers on both sides of the Atlantic"; "none of them are the name people think of when they think of electric light" (corrected R7: Westinghouse's name *was* literally on bulbs; R10 wording) | B | Same sources as §04 and §05 (IEEE Milestone; Hughes; Carlson). Ordered by contribution, per the final audit |
 
 Rows marked ~~08~~ (cut) were verified for the Tesla epilogue (death Jan 1943 at the Hotel New Yorker; the tear-up story traced to O'Neill's 1944 *Prodigal Genius*; the 1897 ~$216,000 royalty buyout; Westinghouse paying his rent from ~1934, per Carlson and PBS). The paragraph was **cut in the final audit** for runtime and because it's a separate Tesla story. The research stands, and it's ready for a Tesla episode.
