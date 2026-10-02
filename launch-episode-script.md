@@ -12,7 +12,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-Ask almost anybody who invented the lightbulb and you'll get the same answer, Thomas Edison, but Edison didn't invent the lightbulb, plenty of people had glowing electric lamps before he got one to work, and the fair way to say it is that Edison built the first one that was commercially practical, which is a big deal, and we'll give him full credit for it. And yes, the title of this video is a bit of a jab, Edison held over a thousand US patents and plenty of them were genuinely his. But here's the part most people never hear, the lightbulb wasn't even the real fight, the real fight was over how to power it, and that's a fight Edison lost.
+Ask almost anybody who invented the lightbulb and you'll get the same answer, Thomas Edison, but Edison didn't invent the lightbulb, plenty of people had glowing electric lamps before he got one to work, and the fair way to say it is that Edison built the first one that was commercially practical, which is a big deal, and we'll give him full credit for it. And yes, the title of this video is a bit of a jab, Edison held over a thousand US patents and plenty of them were really his. But here's the part most people never hear, the lightbulb wasn't even the real fight, the real fight was over how to power it, and that's a fight Edison lost.
 
 ## 02 Davy and Swan
 
