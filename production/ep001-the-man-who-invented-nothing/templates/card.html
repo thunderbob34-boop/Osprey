@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFE7D6; --paper2:#E4D9C2; --ink:#1D1B18; --muted:#5E564A;
+    --red:#A8261B; --gold:#9A7B3C; --blue:#2F5D7C; --rule:#C9BBA0;
+    --serif:'Libre Baskerville',Georgia,serif; --sans:'Inter',Arial,sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1920px;height:1080px;overflow:hidden}
+  body{background:var(--paper);color:var(--ink);font-family:var(--serif);position:relative}
+  body::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(60,40,10,.18) 100%);}
+  .frame{position:absolute;inset:56px;border:2px solid var(--rule)}
+  .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 200px}
+  .kicker{font-family:var(--sans);font-weight:600;letter-spacing:.28em;text-transform:uppercase;font-size:26px;color:var(--muted)}
+  .rule{width:120px;height:3px;background:var(--red);margin:34px auto}
+  h1{font-size:96px;line-height:1.08;font-weight:700}
+  h2{font-size:72px;line-height:1.15;font-weight:700}
+  .sub{font-family:var(--serif);font-style:italic;font-size:40px;color:var(--muted);margin-top:28px;line-height:1.35}
+  /* datecard */
+  .tl{position:absolute;left:220px;right:220px;top:560px;height:4px;background:var(--ink)}
+  .pin{margin-left:-24px}
+  .pin{position:absolute;top:-22px;width:48px;height:48px;border-radius:50%;border:4px solid var(--ink);background:var(--paper)}
+  .pin.first{background:var(--red);border-color:var(--red)}
+  .lab{position:absolute;width:640px;text-align:center}
+  .lab .who{font-family:var(--sans);font-weight:800;font-size:40px;letter-spacing:.02em}
+  .lab .when{font-family:var(--serif);font-size:64px;font-weight:700;margin-top:12px}
+  .gap{position:absolute;left:0;right:0;top:640px;text-align:center;font-family:var(--sans);font-weight:800;font-size:44px;color:var(--red);letter-spacing:.06em;text-transform:uppercase}
+  .firsttag{font-family:var(--sans);font-weight:800;color:var(--red);font-size:24px;letter-spacing:.3em;margin-top:10px}
+  /* date */
+  .bigdate{font-family:var(--serif);font-size:150px;font-weight:700;line-height:1}
+  /* quote */
+  .q{font-family:var(--serif);font-style:italic;font-size:76px;line-height:1.25;max-width:1400px}
+  .q::before{content:"\201C";color:var(--red)} .q::after{content:"\201D";color:var(--red)}
+  .attr{font-family:var(--sans);font-weight:600;font-size:32px;color:var(--muted);margin-top:44px;letter-spacing:.06em}
+  /* compare */
+  .cols{position:absolute;inset:150px 160px;display:grid;grid-template-columns:1fr 4px 1fr;gap:80px;align-items:center}
+  .col h3{font-family:var(--sans);font-weight:800;font-size:56px;margin-bottom:34px}
+  .col p{font-family:var(--serif);font-size:44px;line-height:1.45;color:var(--ink)}
+  .vr{height:70%;background:var(--rule)}
+  /* placeholder for archival */
+  body.ph{background:#2B2924;color:#EDE6D6}
+  body.ph::before{display:none}
+  .phbox{position:absolute;inset:90px;border:4px dashed #8B8170;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 140px}
+  .phtag{font-family:var(--mono);font-size:30px;letter-spacing:.2em;color:#E0B85A}
+  .phlabel{font-family:var(--serif);font-size:62px;font-weight:700;margin-top:30px;line-height:1.2}
+  .phsrc{font-family:var(--sans);font-size:28px;color:#B9AF9C;margin-top:34px;line-height:1.5;max-width:1400px}
+  .caption{position:absolute;left:96px;bottom:86px;background:rgba(29,27,24,.88);color:#F3ECDD;font-family:var(--sans);font-weight:600;font-size:28px;padding:12px 22px;letter-spacing:.02em}
+  svg text{font-family:var(--sans)}
+</style>
+</head>
+<body>
+<script>
+const D = JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1)))));
+const f = D.fields || {};
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const svgWrap = inner => `<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="ar" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" refX="24" refY="15" orient="auto"><path d="M0,0 L30,15 L0,30 z" fill="#1D1B18"/></marker>
+  <marker id="arR" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" refX="24" refY="15" orient="auto"><path d="M0,0 L30,15 L0,30 z" fill="#A8261B"/></marker></defs>${inner}</svg>`;
+const T = (x,y,s,size=34,anchor='middle',w=600,fill='#1D1B18') => `<text x="${x}" y="${y}" font-size="${size}" font-weight="${w}" text-anchor="${anchor}" fill="${fill}">${esc(s)}</text>`;
+const coil = (x,y,n,h=200) => { let p=''; for(let i=0;i<n;i++){const yy=y+i*(h/n); p+=`<ellipse cx="${x}" cy="${yy+h/n/2}" rx="46" ry="${h/n/2-2}" fill="none" stroke="#9A7B3C" stroke-width="7"/>`;} return p; };
+
+const diagrams = {
+  arc_light: () => svgWrap(`
+    ${T(960,170,'THE ARC LIGHT',40,'middle',800)}
+    <rect x="520" y="470" width="360" height="40" rx="6" fill="#1D1B18"/>
+    <rect x="1040" y="470" width="360" height="40" rx="6" fill="#1D1B18"/>
+    <path d="M880,490 C920,440 1000,540 1040,490" stroke="#E0A030" stroke-width="16" fill="none"/>
+    <circle cx="960" cy="490" r="95" fill="#F2C14E" opacity=".25"/>
+    ${T(700,580,'carbon',34)} ${T(1220,580,'carbon',34)} ${T(960,400,'arc of light across the gap',34,'middle',600,'#A8261B')}
+    <line x1="520" y1="490" x2="400" y2="490" stroke="#1D1B18" stroke-width="5"/><line x1="1400" y1="490" x2="1520" y2="490" stroke="#1D1B18" stroke-width="5"/>
+    <path d="M400,490 V760 H1520 V490" fill="none" stroke="#1D1B18" stroke-width="5"/>
+    <rect x="860" y="720" width="200" height="80" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${T(960,773,'BATTERY',30,'middle',800)}
+    ${T(960,900,'Humphry Davy, England, early 1800s',34,'middle',600,'#5E564A')}`),
+  filament_thick_vs_thin: () => svgWrap(`
+    ${T(480,170,'EARLY LAMPS',38,'middle',800)} ${T(1440,170,"EDISON'S LAMP",38,'middle',800)}
+    <line x1="960" y1="140" x2="960" y2="940" stroke="#C9BBA0" stroke-width="4"/>
+    <circle cx="480" cy="420" r="150" fill="none" stroke="#1D1B18" stroke-width="6"/><rect x="430" y="340" width="100" height="150" fill="#1D1B18"/>
+    ${T(480,620,'thick, low-resistance carbon',34)} ${T(480,672,'lots of current',34,'middle',800,'#A8261B')}
+    <line x1="200" y1="820" x2="760" y2="820" stroke="#B87333" stroke-width="44"/>${T(480,905,'thick, expensive copper wire',32,'middle',600,'#5E564A')}
+    <circle cx="1440" cy="420" r="150" fill="none" stroke="#1D1B18" stroke-width="6"/><path d="M1400,500 C1400,330 1480,330 1480,500" fill="none" stroke="#1D1B18" stroke-width="6"/>
+    ${T(1440,620,'thin, high-resistance filament',34)} ${T(1440,672,'much less current',34,'middle',800,'#2F5D7C')}
+    <line x1="1160" y1="820" x2="1720" y2="820" stroke="#B87333" stroke-width="10"/>${T(1440,905,'better vacuum, so it lasts',32,'middle',600,'#5E564A')}`),
+  dc_vs_ac_flow: () => svgWrap(`
+    ${T(300,330,'DC',64,'start',800)} ${T(300,380,'direct current',30,'start',600,'#5E564A')}
+    <line x1="620" y1="320" x2="1640" y2="320" stroke="#1D1B18" stroke-width="5"/>
+    ${[0,1,2,3,4].map(i=>`<line x1="${680+i*200}" y1="320" x2="${790+i*200}" y2="320" stroke="#9A7B3C" stroke-width="12" marker-end="url(#ar)"/>`).join('')}
+    ${T(1130,410,'flows one way, steady voltage',34)}
+    ${T(300,700,'AC',64,'start',800)} ${T(300,750,'alternating current',30,'start',600,'#5E564A')}
+    <path d="M620,690 ${Array.from({length:10},(_,i)=>`Q${671+i*102},${i%2?790:590} ${722+i*102},690`).join(' ')}" fill="none" stroke="#A8261B" stroke-width="8"/>
+    ${T(1130,860,'flips direction back and forth, many times a second',34)}`),
+  power_loss: () => svgWrap(`
+    ${T(960,160,'WHY HIGH VOLTAGE',42,'middle',800)}
+    ${T(960,215,'loss as heat in the wires climbs fast as current goes up',32,'middle',600,'#5E564A')}
+    <line x1="300" y1="880" x2="1600" y2="880" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>
+    <line x1="300" y1="880" x2="300" y2="300" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>
+    <path d="M300,875 Q1000,860 1550,330" fill="none" stroke="#A8261B" stroke-width="10"/>
+    ${T(950,945,'current in the wire',32)} <text x="230" y="590" font-size="32" font-weight="600" text-anchor="middle" transform="rotate(-90 230 590)">heat lost</text>
+    <circle cx="470" cy="868" r="18" fill="#2F5D7C"/><line x1="470" y1="850" x2="520" y2="590" stroke="#2F5D7C" stroke-width="4"/>${T(380,520,'high voltage + small current',32,'start',800,'#2F5D7C')}${T(380,560,'= small loss',32,'start',800,'#2F5D7C')}`),
+  transformer: () => svgWrap(`
+    ${T(960,140,'ALTERNATING CURRENT + TRANSFORMERS',40,'middle',800)}
+    <rect x="150" y="380" width="230" height="200" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${T(265,490,'POWER',30,'middle',800)}${T(265,528,'PLANT',30,'middle',800)}
+    <rect x="460" y="360" width="190" height="240" fill="none" stroke="#5E564A" stroke-width="18"/>${coil(470,380,6)}${coil(640,380,10)}
+    ${T(555,660,'STEP UP',32,'middle',800,'#A8261B')}
+    <line x1="700" y1="480" x2="1220" y2="480" stroke="#A8261B" stroke-width="6" stroke-dasharray="22 12"/>
+    ${T(960,445,'very high voltage, small current',30,'middle',800,'#A8261B')}${T(960,540,'miles of wire, little loss',30,'middle',600,'#5E564A')}
+    <rect x="1270" y="360" width="190" height="240" fill="none" stroke="#5E564A" stroke-width="18"/>${coil(1280,380,10)}${coil(1450,380,6)}
+    ${T(1365,660,'STEP DOWN',32,'middle',800,'#2F5D7C')}
+    <path d="M1560,600 V430 L1650,360 L1740,430 V600 Z" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${T(1650,660,'HOME',30,'middle',800)}
+    ${T(960,820,'a transformer is two coils of wire around an iron core',34,'middle',600)}`),
+  dc_one_mile: () => svgWrap(`
+    ${T(960,140,"EDISON'S DC: STUCK CLOSE TO HOME",40,'middle',800)}
+    <circle cx="960" cy="560" r="330" fill="#9A7B3C" opacity=".12" stroke="#9A7B3C" stroke-width="5" stroke-dasharray="18 12"/>
+    <rect x="900" y="510" width="120" height="100" fill="#1D1B18"/>${T(960,660,'DC plant',30,'middle',800)}
+    ${[[700,420],[1180,400],[760,760],[1230,720],[960,300]].map(([x,y])=>`<path d="M${x-24},${y+24} V${y} L${x},${y-22} L${x+24},${y} V${y+24} Z" fill="#EFE7D6" stroke="#1D1B18" stroke-width="4"/>`).join('')}
+    <line x1="960" y1="560" x2="1290" y2="560" stroke="#1D1B18" stroke-width="4" marker-end="url(#ar)"/>${T(1130,545,'about a mile',32,'middle',800)}
+    ${T(960,960,'low voltage, the same as people used at home',34,'middle',600,'#5E564A')}`),
+  induction_motor: () => svgWrap(`
+    ${T(960,150,'AC INDUCTION MOTOR',42,'middle',800)}
+    <circle cx="960" cy="540" r="260" fill="none" stroke="#1D1B18" stroke-width="10"/>
+    ${[0,90,180,270].map(a=>`<rect x="930" y="300" width="60" height="90" fill="#9A7B3C" transform="rotate(${a} 960 540)"/>`).join('')}
+    <circle cx="960" cy="540" r="120" fill="#EFE7D6" stroke="#5E564A" stroke-width="8"/><circle cx="960" cy="540" r="18" fill="#1D1B18"/>
+    <path d="M960,370 A170,170 0 0 1 1130,540" fill="none" stroke="#A8261B" stroke-width="8" marker-end="url(#arR)"/>
+    ${T(960,900,'runs on alternating current',36,'middle',600)} ${T(960,950,'Tesla patents, May 1888',32,'middle',800,'#A8261B')}`),
+  edison_system: () => svgWrap(`
+    ${T(960,140,'THE WHOLE SYSTEM',44,'middle',800)}
+    ${[['generator'],['wires under','the street'],['meter'],['fuse'],['switch'],['socket'],['bulb']].map((s,i)=>`<rect x="${110+i*250}" y="480" width="210" height="120" rx="10" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${s.length>1?T(215+i*250,535,s[0],28,'middle',800)+T(215+i*250,570,s[1],28,'middle',800):T(215+i*250,552,s[0],30,'middle',800)}${i<6?`<line x1="${322+i*250}" y1="540" x2="${356+i*250}" y2="540" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>`:''}`).join('')}
+    ${T(960,760,'Edison built everything around the bulb',36,'middle',600,'#5E564A')}`)
+};
+const maps = {
+  pearl_street_radius: () => svgWrap(`
+    <rect x="0" y="0" width="1920" height="1080" fill="#E4D9C2"/>
+    <path d="M520,1080 C560,800 700,520 960,300 C1180,120 1300,60 1400,0 L1920,0 L1920,1080 Z" fill="#EFE7D6" stroke="#5E564A" stroke-width="4"/>
+    ${T(1500,980,'LOWER MANHATTAN (schematic)',28,'middle',600,'#5E564A')}
+    <circle cx="1180" cy="620" r="210" fill="#A8261B" opacity=".10" stroke="#A8261B" stroke-width="5" stroke-dasharray="16 10"/>
+    <circle cx="1180" cy="620" r="16" fill="#A8261B"/>${T(1180,590,'Pearl Street Station, 1882',34,'middle',800)}`),
+  niagara_buffalo: () => svgWrap(`
+    <rect x="0" y="0" width="1920" height="1080" fill="#E4D9C2"/>
+    <path d="M0,200 C400,260 700,180 1000,260 C1300,340 1600,260 1920,300" fill="none" stroke="#2F5D7C" stroke-width="40" opacity=".5"/>
+    ${T(260,170,'Lake Erie',30,'start',600,'#2F5D7C')}
+    <circle cx="560" cy="380" r="18" fill="#1D1B18"/>${T(560,345,'Buffalo',40,'middle',800)}
+    <circle cx="1360" cy="760" r="18" fill="#A8261B"/>${T(1360,820,'Niagara Falls',40,'middle',800)}
+    <line x1="1340" y1="745" x2="580" y2="395" stroke="#A8261B" stroke-width="8" stroke-dasharray="26 14" marker-end="url(#arR)"/>
+    ${T(1000,520,'about 20 miles',42,'middle',800,'#A8261B')} ${T(1000,950,'November 1896',44,'middle',800)}`),
+  great_barrington: () => svgWrap(`
+    <rect x="0" y="0" width="1920" height="1080" fill="#E4D9C2"/>
+    <line x1="200" y1="560" x2="1720" y2="560" stroke="#5E564A" stroke-width="36"/>${T(960,505,'Main Street, Great Barrington, Massachusetts',38,'middle',800)}
+    ${[0,1,2,3,4,5].map(i=>`<rect x="${280+i*240}" y="610" width="180" height="150" fill="#EFE7D6" stroke="#1D1B18" stroke-width="4"/><circle cx="${370+i*240}" cy="660" r="16" fill="#F2C14E"/>`).join('')}
+    ${T(960,880,'shops and offices lit by alternating current, 1886',36,'middle',600,'#5E564A')}`)
+};
+
+let html='';
+const t=D.template;
+if(t==='title'){ html=`<div class="frame"></div><div class="center"><div class="kicker">Somebody Did It First</div><div class="rule"></div><h1>${esc(f.title)}</h1>${f.subtitle?`<div class="sub">${esc(f.subtitle)}</div>`:''}</div>`; }
+else if(t==='datecard'){ html=`<div class="frame"></div><div class="kicker" style="position:absolute;top:150px;width:100%;text-align:center">Who did it first</div>
+  <div class="tl"><div class="pin first" style="left:12%"></div><div class="pin" style="left:84%"></div></div>
+  <div class="lab" style="left:77px;top:300px"><div class="who">${esc(f.left_label)}</div><div class="when">${esc(f.left_date)}</div><div class="firsttag">FIRST</div></div>
+  <div class="lab" style="left:1143px;top:300px"><div class="who">${esc(f.right_label)}</div><div class="when">${esc(f.right_date)}</div></div>
+  <div class="gap">${esc(f.gap)}</div>`; }
+else if(t==='date'){ html=`<div class="frame"></div><div class="center"><div class="bigdate">${esc(f.date)}</div><div class="rule"></div><div class="sub" style="font-style:normal;color:var(--ink)">${esc(f.caption)}</div></div>`; }
+else if(t==='quote'){ html=`<div class="frame"></div><div class="center"><div class="q">${esc(f.quote)}</div><div class="attr">${esc(f.attribution)}</div></div>`; }
+else if(t==='text'){ html=`<div class="frame"></div><div class="center"><h2>${esc(f.headline)}</h2>${f.sub?`<div class="rule"></div><div class="sub">${esc(f.sub)}</div>`:''}</div>`; }
+else if(t==='compare'){ html=`<div class="cols"><div class="col"><h3>${esc(f.left_title)}</h3>${(f.left_lines||[]).map(l=>`<p>${esc(l)}</p>`).join('')}</div><div class="vr"></div><div class="col"><h3>${esc(f.right_title)}</h3>${(f.right_lines||[]).map(l=>`<p>${esc(l)}</p>`).join('')}</div></div>`; }
+else if(t==='diagram'){ html=(diagrams[f.variant]||(()=>`<div class="center"><h2>diagram: ${esc(f.variant)}</h2></div>`))(); }
+else if(t==='map'){ html=(maps[f.variant]||(()=>`<div class="center"><h2>map: ${esc(f.variant)}</h2></div>`))(); }
+else if(t==='endcard'){ html=`<div class="frame"></div><div class="center"><div class="kicker">Somebody Did It First</div><div class="rule"></div><h2>${esc(f.line)}</h2></div>`; }
+else if(t==='archival'||t==='illustration'){ document.body.classList.add('ph'); const s=D.source||{};
+  html=`<div class="phbox"><div class="phtag">${t==='illustration'?'ILLUSTRATION · TO GENERATE':'ARCHIVAL '+esc((f.kind||'image').toUpperCase())+' · TO FETCH'}</div>
+  <div class="phlabel">${esc(f.label||f.scene||'')}</div>
+  <div class="phsrc">${esc(s.institution||'')}${s.item?' · '+esc(s.item):''}${s.rights?'<br>'+esc(s.rights):''}${s.verified===false?'<br><b style="color:#E0B85A">SOURCE NOT YET CONFIRMED</b>':''}</div></div>`; }
+else { html=`<div class="center"><h2>${esc(t)}</h2></div>`; }
+document.body.insertAdjacentHTML('beforeend',html);
+document.fonts.ready.then(()=>{document.body.setAttribute('data-ready','1')});
+</script>
+</body>
+</html>
