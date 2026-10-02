@@ -1,6 +1,6 @@
 # Notes: Kraft Didn't Invent Processed Cheese: The Swiss Got There First
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 104."
-Spoken words: 481
+Spoken words: 483
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): any Swiss patent or
 - Cadence fixes: 3. Merged the one-fact Kraft section into the patent section, moved the Army and 1917 supply material to follow the patent (strict chronological order instead of a detour after the key point), and tidied the cold-open concession.
 - Format fixes: word count corrected to 481; section count now six; runtime line corrected to 3 minutes.
 - Remaining concerns for Gus: the script says "two men" for Gerber and Stettler (title says "The Swiss Got There First", no "chemists"), which is right given the Historical Dictionary of Switzerland flag that Gerber was a business manager and Stettler the inventor. Consider whether you want to say that on air; it is single-source so it is not in the script.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) "first US patent for the process" rested on the research entry's hedge and Wikipedia-style summaries; now attributed on air ("according to Britannica") in section 02, and the closing line no longer says "the first US patent" (now "filed a US patent for a processed cheese process in March of 1916"). Spoken words now 483, reading notes and this file updated to match.
+- Low items noted, not changed: the patent record itself shows the patent issued June 6, 1916 (filing date March 25 is correct as spoken); Kraft's 1916 product used no emulsifying salt, so it differs from the later emulsified product (script already limits itself to what the patent describes); the Historical Dictionary of Switzerland flag (Stettler as inventor, Gerber as business manager) stays off air.

@@ -1,7 +1,7 @@
 # Kraft Didn't Invent Processed Cheese: The Swiss Got There First
 
 READING NOTES
-- Runtime is about 3 minutes at a relaxed pace, roughly 481 spoken words.
+- Runtime is about 3 minutes at a relaxed pace, roughly 483 spoken words.
 - Tone is calm and fair. There is no villain in this one, and Kraft reached processed cheese on his own as far as the literature says.
 - Say Gerber as GAIR-ber, Stettler as STET-ler, Thun as TOON, Emmentaler as EM-en-tah-ler.
 - Every hedge in here is on purpose. Read "around 1911", "some accounts say 1912 or 1913", "as far as the literature says", "as it's described", "according to Britannica" and "working independently" exactly as written. Never say Kraft copied or stole, and do not mention a Swiss patent or name a Swiss company.

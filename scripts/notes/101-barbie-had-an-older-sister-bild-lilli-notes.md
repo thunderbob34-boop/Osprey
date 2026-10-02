@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): "tobacco shop" deta
 - Cadence fixes: 6. Joined "Then in 1955 she became a doll" into the previous breath, merged the choppy "It sold." into the sales paragraph, trimmed the "I'm not going to go past it" speech in section 04, added a "right?" in section 07, and replaced the crafted closing line ("the company that got the credit ended up with the rights to the original") with a plain "Somebody did it first, and that was Lilli."
 - Format fixes: word count corrected to 598; reading-notes hedge list now includes "the Library of Congress says" and "Britannica describes". Body is under 700 words (research is thin; not padded).
 - Remaining concerns for Gus: none.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "co-founded Mattel in 1945 with her husband" omits Harold Matson, the third co-founder (not false); "eleven-inch" is Britannica's figure, Lilli is often given as about 11.5 inches elsewhere; the Greiner and Hausser lawsuit chain rests on Britannica alone but is already hedged ("reportedly", "according to Britannica").

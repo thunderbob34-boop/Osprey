@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): who held the patent
 - Cadence fixes: 4. Merged choppy opening in 02 and the one-line paragraph in 03, folded 04 into one breath, added a "right?" in 06.
 - Format fixes: word count corrected 585 to 549; reading notes hedge text now matches (reportedly applies only to the lukewarm reaction); Émile accent restored. No dashes, no banned words.
 - Remaining concerns for Gus: script is 549 words, under the 700 floor, because the entry is thin and the one extra item (changed his mind) is single-source; not padded. The "reportedly" on Eiffel's first reaction itself rests on the official Eiffel Tower site alone, which the entry accepts with that hedge.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: a search turned up the patent record (INPI 1BB164364, Google Arts & Culture) naming Eiffel, Nouguier and Koechlin, so "the sources don't agree" about patent names is now arguably resolved, but staying silent is safe; the title says "two employees' sketch" while the script credits Koechlin with the sketch (ETH Library says Koechlin and Nouguier together), which is a minor tension.

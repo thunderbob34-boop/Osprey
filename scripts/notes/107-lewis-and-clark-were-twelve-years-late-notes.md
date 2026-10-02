@@ -1,6 +1,6 @@
 # Notes: Lewis and Clark Were Twelve Years Late
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 107."
-Spoken words: 831
+Spoken words: 826
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -33,3 +33,9 @@ Left out on purpose (unverified / keep off air in research): the exact day Macke
 - Cadence fixes: 3. Removed crafted prequel button, redundant "one of the two men who would lead" restatement, merged choppy lines in 03.
 - Format fixes: word count corrected 899 to 831; hedge phrase in reading notes updated to match the script. No dashes, no banned words.
 - Remaining concerns for Gus: none. (Section 04 reads the inscription with "twenty-second of July" and then says to say "July 1793"; that is the entry's own hedge, so it is kept as written.)
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: on-air "one extract gives July 20th" is research-speak ("one source" would sound more natural); "which is why the claim is first European, north of Mexico" is a loose gloss, since "north of Mexico" mainly answers earlier Spanish crossings in Mexico rather than the Spanish coastal presence; "at Monticello" and "summer 1802" are supported by Monticello and LOC.
+
+- Main-session follow-up: the on-air "one extract gives July 20th" (research-speak) is now "not every source agrees on the exact day".

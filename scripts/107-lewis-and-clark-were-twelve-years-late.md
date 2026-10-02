@@ -1,7 +1,7 @@
 # Lewis and Clark Were Twelve Years Late
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 831 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 826 spoken words.
 - Tone is calm and respectful. Lewis and Clark did real work and the script says so, and the Indigenous peoples who knew the routes get named too.
 - Say Mackenzie as muh-KEN-zee, Chipewyan as chip-uh-WY-un, Bella Coola as BELL-uh KOO-luh, Nuxalk as NOO-hawlk, Voyageurs as voy-uh-ZHURZ.
 - Every hedge in here is on purpose. Read "first European", "north of Mexico", "about twelve years", "July 1793", "an inlet of the Pacific, not the open ocean" and "one of the things that shaped Jefferson's thinking" exactly as written, because they are what keeps the channel credible.
@@ -27,7 +27,7 @@ His second attempt left Fort Chipewyan in 1792, and on May 9th, 1793, according 
 
 In July 1793 he reached the Pacific coast at Dean Channel, near Bella Coola in British Columbia, and that made his party the first Europeans to cross North America north of Mexico. He painted his name on a rock there, and the words, as Parks Canada and the Canadian Encyclopedia give them, were, Alexander Mackenzie, from Canada by land, the twenty-second of July, one thousand seven hundred and ninety-three. The Canadian Encyclopedia says he wrote it in vermilion and grease, and that surveyors later inscribed the words.
 
-Now, the exact day varies depending on the source, the rock itself says July 22nd and one extract gives July 20th, so we're just going to say July 1793. And one more careful thing, what he reached was an inlet of the Pacific, not the open ocean.
+Now, the rock itself says the twenty-second, but not every source agrees on the exact day, so we're just going to say July 1793. And one more careful thing, what he reached was an inlet of the Pacific, not the open ocean.
 
 ## 05 Who Else Was There
 

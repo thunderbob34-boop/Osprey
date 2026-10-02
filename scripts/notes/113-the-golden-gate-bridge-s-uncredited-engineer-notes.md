@@ -1,4 +1,5 @@
-# Notes: The Golden Gate Bridge's Forgotten Designer
+# Notes: The Golden Gate Bridge's Uncredited Engineer
+_(Originally titled "The Golden Gate Bridge's Forgotten Designer". Retitled after Re-check B: the bridge district now credits Ellis, so "forgotten" overstated it, but Strauss never credited him.)_
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 113."
 Spoken words: 576
 
@@ -32,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): the Purdue "almost 
 - Cadence fixes: 4. Joined the choppy opener of section 06; merged short sentences in 03 and 04; renamed section 02 heading to match its content; removed "Here's what separate institutions say."
 - Format fixes: reading notes word count updated to 576; hedge list now matches phrases actually spoken ("sole designer" rather than "not the sole designer"). No em/en dashes, no banned words.
 - Remaining concerns for Gus: Script is 576 words, under the 700 floor; not padded because the remaining entry material is marked do-not-use. Section 06 restates earlier points on purpose and could be cut if you want it tighter. Sources are search extracts, and the entry advises a page-level read.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: the title "Forgotten Designer" reads stronger than the script's own careful claim (directed the design calculations, significant credit, not sole designer); the script handles this on air in the cold open, so the title was left as fixed. "Never officially recognized" is attributed to the district and is fine.
