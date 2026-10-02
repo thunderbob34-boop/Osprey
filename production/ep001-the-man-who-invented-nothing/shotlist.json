@@ -40,27 +40,14 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "and the fair way to say it is that Edison built the first one that was commercially practical,",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "The first commercially practical lamp",
-   "sub": "Edison gets full credit for that"
-  },
-  "visual": "Text card; the concession lands plainly.",
-  "source": null
- },
- {
-  "id": "01-d",
-  "section": "01",
-  "section_name": "Cold Open",
-  "text": "which is a big deal, and we'll give him full credit for it.",
   "type": "object",
   "template": "archival",
   "fields": {
    "kind": "object",
-   "label": "Edison lamp used on 31 December 1879"
+   "label": "Edison lamp used on 31 December 1879",
+   "crop": "push-in on the bulb"
   },
-  "visual": "Museum object on a clean background, slow push-in.",
+  "visual": "Edison lamp object, slow push-in, on \"commercially practical\".",
   "source": {
    "institution": "Smithsonian National Museum of American History",
    "item": "Edison \"New Year's Eve\" Lamp",
@@ -71,18 +58,40 @@
   }
  },
  {
+  "id": "01-d",
+  "section": "01",
+  "section_name": "Cold Open",
+  "text": "which is a big deal, and we'll give him full credit for it.",
+  "type": "text",
+  "template": "text",
+  "fields": {
+   "headline": "The first commercially practical lamp",
+   "sub": "The fair way to say it. Full credit to Edison for that"
+  },
+  "visual": "Card: the hedged credit, landing on \"full credit\".",
+  "source": null
+ },
+ {
   "id": "01-e",
   "section": "01",
   "section_name": "Cold Open",
   "text": "And yes, the title of this video is a bit of a jab,",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "The title is a bit of a jab",
-   "sub": ""
+   "kind": "portrait",
+   "label": "Thomas Edison, c. 1880",
+   "crop": "slow push-in on the face"
   },
-  "visual": "Short text card, no dwell.",
-  "source": null
+  "visual": "Edison portrait, slow push-in.",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division",
+   "item": "[Thomas Edison, head-and-shoulders portrait, facing left]",
+   "url": "https://www.loc.gov/item/89714703/",
+   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
+   "credit": "Library of Congress Prints and Photographs Division, LC-USZ62-98067",
+   "verified": true
+  }
  },
  {
   "id": "01-f",
@@ -93,7 +102,7 @@
   "template": "archival",
   "fields": {
    "kind": "patent",
-   "label": "Edison's electric lamp patent, US 223,898"
+   "label": "One of Edison's 1,000+ US patents: the electric lamp, 1880"
   },
   "visual": "Patent first page, highlight the title line 'Electric Lamp', slow push-in.",
   "source": {
@@ -186,14 +195,14 @@
   "id": "02-d",
   "section": "02",
   "section_name": "Davy and Swan",
-  "text": "and decades later, once there were generators to run it, it ended up in lighthouses and streets,",
+  "text": "and decades later, once there were generators to run it, it ended up in lighthouses and streets, but it was way too bright for your living room.",
   "type": "object",
   "template": "archival",
   "fields": {
    "kind": "object",
    "label": "Carbon arc lamp (Science Museum Group)"
   },
-  "visual": "Museum object, slow push-in.",
+  "visual": "Carbon arc lamp object, holds through \"too bright for your living room\".",
   "source": {
    "institution": "Science Museum Group",
    "item": "Carbon arc lamp",
@@ -205,43 +214,15 @@
   "notes": "Not Davy's lamp; it is a later arc lamp, and the label says only what the object is. If the license is not usable, switch to a text card."
  },
  {
-  "id": "02-e",
-  "section": "02",
-  "section_name": "Davy and Swan",
-  "text": "but it was way too bright for your living room.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "Too bright for the living room",
-   "sub": ""
-  },
-  "visual": "Text card.",
-  "source": null
- },
- {
   "id": "02-f",
   "section": "02",
   "section_name": "Davy and Swan",
-  "text": "Meanwhile inventor after inventor tried running current through a strip of carbon or platinum until it glowed,",
+  "text": "Meanwhile inventor after inventor tried running current through a strip of carbon or platinum until it glowed, and the usual problem was that the strip burned up or melted before it was any use.",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "Current through carbon or platinum",
-   "sub": "Until it glowed"
-  },
-  "visual": "Text card.",
-  "source": null
- },
- {
-  "id": "02-g",
-  "section": "02",
-  "section_name": "Davy and Swan",
-  "text": "and the usual problem was that the strip burned up or melted before it was any use.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "The usual problem: it burned up or melted",
-   "sub": ""
+   "headline": "Current through carbon or platinum, until it glowed",
+   "sub": "The usual problem: it burned up or melted"
   },
   "visual": "Text card.",
   "source": null
@@ -336,7 +317,7 @@
    "left_date": "Feb 3, 1879",
    "right_label": "Edison gets a bulb working",
    "right_date": "Oct 1879",
-   "gap": "about 8 months"
+   "gap": "more than 8 months"
   },
   "visual": "Datecard: two dates on a timeline, gap counts up to 'about 8 months'.",
   "source": null,
@@ -410,21 +391,14 @@
   "section": "03",
   "section_name": "What Edison Actually Did",
   "text": "inside a better vacuum so it didn't burn away.",
-  "type": "object",
-  "template": "archival",
+  "type": "diagram",
+  "template": "diagram",
   "fields": {
-   "kind": "object",
-   "label": "Edison lamp used on 31 December 1879"
+   "variant": "filament_thick_vs_thin",
+   "step": 4
   },
-  "visual": "Museum object, slow push-in. Reused from 01-d.",
-  "source": {
-   "institution": "Smithsonian National Museum of American History",
-   "item": "Edison \"New Year's Eve\" Lamp",
-   "url": "https://americanhistory.si.edu/collections/object/nmah_704361",
-   "rights": "CC0 (Smithsonian Open Access, as stated by the source)",
-   "credit": "Edison \"New Year's Eve\" Lamp, 1879, Smithsonian National Museum of American History",
-   "verified": true
-  }
+  "visual": "Filament diagram completes: better vacuum added.",
+  "source": null
  },
  {
   "id": "03-f",
@@ -508,42 +482,35 @@
   "section": "03",
   "section_name": "What Edison Actually Did",
   "text": "which is he built the whole system around the bulb, the screw-in socket,",
-  "type": "object",
-  "template": "archival",
+  "type": "diagram",
+  "template": "diagram",
   "fields": {
-   "kind": "object",
-   "label": "Edison keyed lamp socket, 1880"
+   "variant": "edison_system",
+   "highlight": [
+    5,
+    6
+   ]
   },
-  "visual": "Museum object, slow push-in.",
-  "source": {
-   "institution": "Smithsonian National Museum of American History",
-   "item": "Edison friction-type keyed lamp socket",
-   "url": "https://americanhistory.si.edu/collections/object/nmah_996375",
-   "rights": "Not stated in the search result. Smithsonian Open Access is usually CC0; confirm on the object page",
-   "credit": "Edison friction-type keyed lamp socket, 1880, Smithsonian National Museum of American History",
-   "verified": false
-  }
+  "visual": "System diagram: bulb and socket light up.",
+  "source": null
  },
  {
   "id": "03-l",
   "section": "03",
   "section_name": "What Edison Actually Did",
   "text": "the switches, the fuses, the meters,",
-  "type": "object",
-  "template": "archival",
+  "type": "diagram",
+  "template": "diagram",
   "fields": {
-   "kind": "object",
-   "label": "Edison fuse block and fuse"
+   "variant": "edison_system",
+   "highlight": [
+    2,
+    3,
+    4
+   ]
   },
-  "visual": "Museum object, slow push-in.",
-  "source": {
-   "institution": "Smithsonian National Museum of American History",
-   "item": "Edison fuse block and fuse",
-   "url": "https://americanhistory.si.edu/collections/object/nmah_712838",
-   "rights": "Not stated in the search result. Smithsonian Open Access is usually CC0; confirm on the object page",
-   "credit": "Edison fuse block and fuse, Smithsonian National Museum of American History",
-   "verified": false
-  },
+  "visual": "System diagram: meter, fuse, switch light up.",
+  "source": null,
   "notes": "The script names switches, fuses and meters in one breath; the fuse block is the object. A meter (Smithsonian 'Edison chemical-type electric meter', nmah_712826, seen in search) is a possible second image."
  },
  {
@@ -551,21 +518,17 @@
   "section": "03",
   "section_name": "What Edison Actually Did",
   "text": "the generators, and the wires running under the street.",
-  "type": "object",
-  "template": "archival",
+  "type": "diagram",
+  "template": "diagram",
   "fields": {
-   "kind": "object",
-   "label": "Edison type Z direct current dynamo"
+   "variant": "edison_system",
+   "highlight": [
+    0,
+    1
+   ]
   },
-  "visual": "Museum object, slow push-in.",
-  "source": {
-   "institution": "Smithsonian National Museum of American History",
-   "item": "Edison type \"Z\" direct current dynamo",
-   "url": "https://americanhistory.si.edu/collections/object/nmah_1287625",
-   "rights": "Not stated in the search result. Smithsonian Open Access is usually CC0; confirm on the object page",
-   "credit": "Edison type Z direct current dynamo, Smithsonian National Museum of American History",
-   "verified": false
-  }
+  "visual": "System diagram: generator and street wires light up.",
+  "source": null
  },
  {
   "id": "03-n",
@@ -593,28 +556,14 @@
   "id": "03-o",
   "section": "03",
   "section_name": "What Edison Actually Did",
-  "text": "and that's usually counted as the start of the electric utility business in America,",
+  "text": "and that's usually counted as the start of the electric utility business in America, at least for the kind of electric light you'd put in a home or office.",
   "type": "text",
   "template": "text",
   "fields": {
    "headline": "Pearl Street, 1882",
-   "sub": "Usually counted as the start of the electric utility business in America"
+   "sub": "Usually counted as the start of the electric utility business in America, at least for home and office light"
   },
   "visual": "Text card; hedge kept in the sub.",
-  "source": null
- },
- {
-  "id": "03-p",
-  "section": "03",
-  "section_name": "What Edison Actually Did",
-  "text": "at least for the kind of electric light you'd put in a home or office.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "At least for home or office electric light",
-   "sub": ""
-  },
-  "visual": "Text card; hedge kept.",
   "source": null
  },
  {
@@ -677,14 +626,15 @@
   "id": "03-t",
   "section": "03",
   "section_name": "What Edison Actually Did",
-  "text": "who patented a better way of making carbon filaments in 1882,",
+  "text": "who patented a better way of making carbon filaments in 1882, and here's the twist, he did it while working for an Edison competitor, the US Electric Lighting Company,",
   "type": "document",
   "template": "archival",
   "fields": {
    "kind": "patent",
-   "label": "Latimer's carbon patent, US 252,386 (1882)"
+   "label": "Latimer's carbon patent, US 252,386 (1882)",
+   "crop": "slow pan across the page"
   },
-  "visual": "Patent first page, highlight the title 'Process of Manufacturing Carbons'.",
+  "visual": "Latimer patent drawing, slow pan across the page.",
   "source": {
    "institution": "US Patent Office via Google Patents",
    "item": "US252386A - Process of Manufacturing Carbons",
@@ -693,20 +643,6 @@
    "credit": "Lewis H. Latimer, US Patent 252,386, 1882 (assigned to the US Electric Lighting Company)",
    "verified": true
   }
- },
- {
-  "id": "03-u",
-  "section": "03",
-  "section_name": "What Edison Actually Did",
-  "text": "and here's the twist, he did it while working for an Edison competitor, the US Electric Lighting Company,",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "Working for an Edison competitor",
-   "sub": "The US Electric Lighting Company"
-  },
-  "visual": "Text card.",
-  "source": null
  },
  {
   "id": "03-v",
@@ -727,14 +663,22 @@
   "section": "04",
   "section_name": "The Real Fight",
   "text": "But a lightbulb on its own is just a glass ornament, right?",
-  "type": "text",
-  "template": "text",
+  "type": "object",
+  "template": "archival",
   "fields": {
-   "headline": "A lightbulb alone is a glass ornament",
-   "sub": ""
+   "kind": "object",
+   "label": "Edison lamp used on 31 December 1879",
+   "crop": "tight on the glass bulb"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Lamp object, tight on the glass: \"just a glass ornament\".",
+  "source": {
+   "institution": "Smithsonian National Museum of American History",
+   "item": "Edison \"New Year's Eve\" Lamp",
+   "url": "https://americanhistory.si.edu/collections/object/nmah_704361",
+   "rights": "CC0 (Smithsonian Open Access, as stated by the source)",
+   "credit": "Edison \"New Year's Eve\" Lamp, 1879, Smithsonian National Museum of American History",
+   "verified": true
+  }
  },
  {
   "id": "04-b",
@@ -758,7 +702,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "dc_vs_ac_flow"
+   "variant": "dc_vs_ac_flow",
+   "step": 1
   },
   "visual": "DC half of the diagram: steady one-way flow.",
   "source": null
@@ -768,41 +713,42 @@
   "section": "04",
   "section_name": "The Real Fight",
   "text": "Now you'll hear people say alternating current won because it travels farther,",
-  "type": "text",
-  "template": "text",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "headline": "The claim: AC won because it travels farther",
-   "sub": ""
+   "left_title": "The claim",
+   "left_lines": [
+    "AC won because it travels farther"
+   ],
+   "right_title": "The real advantage",
+   "right_lines": [
+    "AC voltage was easy to change"
+   ],
+   "step": 1
   },
-  "visual": "Text card.",
+  "visual": "Compare card: the claim alone.",
   "source": null
  },
  {
   "id": "04-e",
   "section": "04",
   "section_name": "The Real Fight",
-  "text": "and that's only half right, AC doesn't travel any better on its own,",
-  "type": "text",
-  "template": "text",
+  "text": "and that's only half right, AC doesn't travel any better on its own, the advantage was that you could easily change its voltage.",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "headline": "AC doesn't travel any better on its own",
-   "sub": ""
+   "left_title": "The claim",
+   "left_lines": [
+    "AC won because it travels farther",
+    "Only half right"
+   ],
+   "right_title": "The real advantage",
+   "right_lines": [
+    "AC voltage was easy to change"
+   ],
+   "step": 2
   },
-  "visual": "Text card.",
-  "source": null
- },
- {
-  "id": "04-f",
-  "section": "04",
-  "section_name": "The Real Fight",
-  "text": "the advantage was that you could easily change its voltage.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "The advantage: it was easy to change its voltage",
-   "sub": ""
-  },
-  "visual": "Text card.",
+  "visual": "Compare card: the real advantage lights up.",
   "source": null
  },
  {
@@ -841,7 +787,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "dc_vs_ac_flow"
+   "variant": "dc_vs_ac_flow",
+   "step": 2
   },
   "visual": "AC half of the diagram: flow flips back and forth.",
   "source": null
@@ -920,26 +867,12 @@
   "id": "04-o",
   "section": "04",
   "section_name": "The Real Fight",
-  "text": "But DC back then had no practical way to do that,",
+  "text": "But DC back then had no practical way to do that, so Edison's system had to send power at roughly the same low voltage people used at home,",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "No practical way to step DC up or down",
-   "sub": "Back then"
-  },
-  "visual": "Text card.",
-  "source": null
- },
- {
-  "id": "04-p",
-  "section": "04",
-  "section_name": "The Real Fight",
-  "text": "so Edison's system had to send power at roughly the same low voltage people used at home,",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "Roughly the same low voltage people used at home",
-   "sub": ""
+   "headline": "No practical way to step DC up or down, back then",
+   "sub": "So it ran at roughly the same low voltage people used at home"
   },
   "visual": "Text card.",
   "source": null
@@ -1025,27 +958,13 @@
   "id": "04-u",
   "section": "04",
   "section_name": "The Real Fight",
-  "text": "lighting up shops and offices on the main street of Great Barrington, Massachusetts,",
+  "text": "lighting up shops and offices on the main street of Great Barrington, Massachusetts, on alternating current in 1886.",
   "type": "map",
   "template": "map",
   "fields": {
    "variant": "great_barrington"
   },
-  "visual": "Map pin drops on Great Barrington, Massachusetts.",
-  "source": null
- },
- {
-  "id": "04-v",
-  "section": "04",
-  "section_name": "The Real Fight",
-  "text": "on alternating current in 1886.",
-  "type": "date",
-  "template": "date",
-  "fields": {
-   "date": "1886",
-   "caption": "Great Barrington, Massachusetts: shops and offices lit by alternating current"
-  },
-  "visual": "Date stamp.",
+  "visual": "Great Barrington schematic with the year.",
   "source": null
  },
  {
@@ -1116,39 +1035,33 @@
   "section": "05",
   "section_name": "It Wasn't Tesla Versus Edison",
   "text": "and as Tesla told it, he was promised fifty thousand dollars to improve the company's generators,",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "As Tesla told it, he was promised $50,000",
-   "sub": "To improve the company's generators"
+   "kind": "portrait",
+   "label": "Nikola Tesla, c. 1893",
+   "crop": "lower third: As Tesla told it, he was promised $50,000"
   },
-  "visual": "Text card; hedge kept as the headline opener.",
-  "source": null
+  "visual": "Tesla portrait with lower-third text, keeping \"As Tesla told it\".",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Nikola Tesla by Sarony c1893.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Nikola_Tesla_by_Sarony_c1893.jpg",
+   "rights": "Public domain in the United States (published before 1 January 1931), per the file page; may not be public domain in every country",
+   "credit": "Napoleon Sarony, c. 1893, via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "05-f",
   "section": "05",
   "section_name": "It Wasn't Tesla Versus Edison",
-  "text": "and when he delivered, the offer turned out to have been a joke, so he quit.",
+  "text": "and when he delivered, the offer turned out to have been a joke, so he quit. Now, that story comes only from Tesla himself, years later.",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "The offer turned out to have been a joke",
-   "sub": "As Tesla told it"
-  },
-  "visual": "Text card.",
-  "source": null
- },
- {
-  "id": "05-g",
-  "section": "05",
-  "section_name": "It Wasn't Tesla Versus Edison",
-  "text": "Now, that story comes only from Tesla himself, years later.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "That story comes only from Tesla himself",
-   "sub": "Years later"
+   "headline": "As Tesla told it, the offer was a joke",
+   "sub": "A story that comes only from Tesla himself, years later"
   },
   "visual": "Text card.",
   "source": null
@@ -1243,8 +1156,8 @@
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "One of the big things Westinghouse brought in",
-   "sub": "Tesla's patents"
+   "headline": "Tesla's patents",
+   "sub": "One of the big things Westinghouse brought into the fight"
   },
   "visual": "Text card.",
   "source": null
@@ -1416,11 +1329,11 @@
   "type": "compare",
   "template": "compare",
   "fields": {
-   "left_title": "DC",
+   "left_title": "Brown's demo: DC first",
    "left_lines": [
     "Survived"
    ],
-   "right_title": "AC",
+   "right_title": "Brown's demo: AC second",
    "right_lines": [
     "Killed"
    ]
@@ -1453,7 +1366,7 @@
   "template": "date",
   "fields": {
    "date": "1888",
-   "caption": "New York passes its electric chair law"
+   "caption": "New York had already passed its electric chair law"
   },
   "visual": "Date stamp.",
   "source": null
@@ -1506,84 +1419,101 @@
   "section": "06",
   "section_name": "The Smear Campaign",
   "text": "out of Edison's company, partly to buy the generators,",
-  "type": "text",
-  "template": "text",
+  "type": "document",
+  "template": "archival",
   "fields": {
-   "headline": "Partly to buy the generators",
-   "sub": "Money from Edison's company"
+   "kind": "document",
+   "label": "Harold Brown to Thomas Edison, 27 March 1889",
+   "crop": "detail of the letter"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Letter detail, slow pan.",
+  "source": {
+   "institution": "Thomas A. Edison Papers, Rutgers University",
+   "item": "Harold P. Brown to Thomas A. Edison, 27 March 1889 (document D8933AAN4)",
+   "url": "https://edisondigital.rutgers.edu/document/D8933AAN4",
+   "rights": "Not stated. This URL comes from the fact notes, not from a search result seen this session; check the Edison Papers reuse terms",
+   "credit": "Thomas A. Edison Papers, Rutgers University, D8933AAN4",
+   "verified": false
+  }
  },
  {
   "id": "06-p",
   "section": "06",
   "section_name": "The Smear Campaign",
   "text": "and then thanked him for a note to the company's president that got it arranged.",
-  "type": "text",
-  "template": "text",
+  "type": "document",
+  "template": "archival",
   "fields": {
-   "headline": "Brown thanks Edison for a note to the president",
-   "sub": "Of Edison's company. It got the matter arranged"
+   "kind": "document",
+   "label": "Harold Brown to Thomas Edison, 27 March 1889",
+   "crop": "second detail of the letter"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Letter, second detail.",
+  "source": {
+   "institution": "Thomas A. Edison Papers, Rutgers University",
+   "item": "Harold P. Brown to Thomas A. Edison, 27 March 1889 (document D8933AAN4)",
+   "url": "https://edisondigital.rutgers.edu/document/D8933AAN4",
+   "rights": "Not stated. This URL comes from the fact notes, not from a search result seen this session; check the Edison Papers reuse terms",
+   "credit": "Thomas A. Edison Papers, Rutgers University, D8933AAN4",
+   "verified": false
+  }
  },
  {
   "id": "06-q",
   "section": "06",
   "section_name": "The Smear Campaign",
   "text": "Westinghouse refused to sell his generators for executions,",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "Westinghouse refused to sell generators for executions",
-   "sub": ""
+   "kind": "portrait",
+   "label": "George Westinghouse",
+   "crop": "push-in"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Westinghouse portrait: he refused.",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division",
+   "item": "[George Westinghouse, half-length portrait, facing front]",
+   "url": "https://www.loc.gov/item/93511337/",
+   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
+   "credit": "Photo by Joseph G. Gessford, Library of Congress, LC-USZ62-93492",
+   "verified": true
+  }
  },
  {
   "id": "06-r",
   "section": "06",
   "section_name": "The Smear Campaign",
   "text": "so Brown got Westinghouse generators anyway, secondhand, through another rival company, Thomson-Houston.",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "Secondhand, through rival company Thomson-Houston",
-   "sub": ""
+   "kind": "portrait",
+   "label": "Harold P. Brown",
+   "crop": "push-in"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Harold Brown portrait.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Harold Pitney Brown engineer 1857 1932.png",
+   "url": "https://commons.wikimedia.org/wiki/File:Harold_Pitney_Brown_engineer_1857_1932.png",
+   "rights": "Not stated in the search result. Read the file page license and source",
+   "credit": "Harold P. Brown, via Wikimedia Commons (confirm source and license on the file page)",
+   "verified": false
+  }
  },
  {
   "id": "06-s",
   "section": "06",
   "section_name": "The Smear Campaign",
-  "text": "The first man sentenced to the chair was William Kemmler,",
+  "text": "The first man sentenced to the chair was William Kemmler, and when his lawyers challenged the electric chair in court,",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "William Kemmler, first sentenced to the chair",
-   "sub": ""
+   "headline": "William Kemmler, first man sentenced to the chair",
+   "sub": "His lawyers challenged it in court"
   },
   "visual": "Text card. No portrait of Kemmler.",
-  "source": null,
-  "notes": "SENSITIVE BEAT. No animal or execution imagery. Plain, flat treatment; text or building only."
- },
- {
-  "id": "06-t",
-  "section": "06",
-  "section_name": "The Smear Campaign",
-  "text": "and when his lawyers challenged the electric chair in court,",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "Kemmler's lawyers challenge the chair in court",
-   "sub": ""
-  },
-  "visual": "Text card.",
   "source": null,
   "notes": "SENSITIVE BEAT. No animal or execution imagery. Plain, flat treatment; text or building only."
  },
@@ -1656,7 +1586,7 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Auburn Prison, New York (exterior)"
+   "label": "Auburn Prison, New York (exterior; date to confirm, label \"modern photograph\" if it is one)"
   },
   "visual": "Same exterior, slow pull-out.",
   "source": {
@@ -1689,13 +1619,13 @@
   "section": "07",
   "section_name": "How AC Won Anyway",
   "text": "And AC won anyway, because the physics was on its side.",
-  "type": "text",
-  "template": "text",
+  "type": "diagram",
+  "template": "diagram",
   "fields": {
-   "headline": "AC won anyway",
-   "sub": "The physics was on its side"
+   "variant": "transformer",
+   "step": 5
   },
-  "visual": "Text card.",
+  "visual": "Full AC transformer chain: the physics that won.",
   "source": null
  },
  {
@@ -1720,7 +1650,7 @@
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "The same rival that helped Brown get those generators",
+   "headline": "Thomson-Houston: the same rival that helped Brown get those generators",
    "sub": ""
   },
   "visual": "Text card.",
@@ -1735,7 +1665,7 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Charles A. Coffin, Thomson-Houston"
+   "label": "Charles A. Coffin of Thomson-Houston"
   },
   "visual": "Slow push-in on the Coffin portrait.",
   "source": {
@@ -1767,17 +1697,11 @@
   "section": "07",
   "section_name": "How AC Won Anyway",
   "text": "and General Electric went on to build AC equipment right alongside Westinghouse.",
-  "type": "compare",
-  "template": "compare",
+  "type": "text",
+  "template": "text",
   "fields": {
-   "left_title": "General Electric",
-   "left_lines": [
-    "Built AC equipment"
-   ],
-   "right_title": "Westinghouse",
-   "right_lines": [
-    "Built AC equipment"
-   ]
+   "headline": "GE and Westinghouse both built AC equipment",
+   "sub": ""
   },
   "visual": "Compare card: both sides light up together.",
   "source": null
@@ -1901,14 +1825,22 @@
   "section": "08",
   "section_name": "Every Outlet On Earth",
   "text": "are the lightbulb and the power in your walls,",
-  "type": "text",
-  "template": "text",
+  "type": "object",
+  "template": "archival",
   "fields": {
-   "headline": "The lightbulb and the power in your walls",
-   "sub": ""
+   "kind": "object",
+   "label": "Edison lamp used on 31 December 1879",
+   "crop": "push-in"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "The lamp: the first thing everybody hands Edison.",
+  "source": {
+   "institution": "Smithsonian National Museum of American History",
+   "item": "Edison \"New Year's Eve\" Lamp",
+   "url": "https://americanhistory.si.edu/collections/object/nmah_704361",
+   "rights": "CC0 (Smithsonian Open Access, as stated by the source)",
+   "credit": "Edison \"New Year's Eve\" Lamp, 1879, Smithsonian National Museum of American History",
+   "verified": true
+  }
  },
  {
   "id": "08-c",
@@ -1922,7 +1854,7 @@
    "left_date": "Feb 3, 1879",
    "right_label": "Edison gets a bulb working",
    "right_date": "Oct 1879",
-   "gap": "about 8 months"
+   "gap": "more than 8 months"
   },
   "visual": "Datecard repeated from 02-l as a callback; same arithmetic.",
   "source": null
@@ -1932,13 +1864,13 @@
   "section": "08",
   "section_name": "Every Outlet On Earth",
   "text": "and the power in your walls today isn't even his system.",
-  "type": "text",
-  "template": "text",
+  "type": "diagram",
+  "template": "diagram",
   "fields": {
-   "headline": "The power in your walls isn't his system",
-   "sub": ""
+   "variant": "dc_vs_ac_flow",
+   "step": 2
   },
-  "visual": "Text card.",
+  "visual": "AC row: the power in your walls.",
   "source": null
  },
  {
@@ -2030,13 +1962,13 @@
   "section": "08",
   "section_name": "Every Outlet On Earth",
   "text": "So the thing in your wall is the system Edison spent years trying to scare people away from.",
-  "type": "text",
-  "template": "text",
+  "type": "diagram",
+  "template": "diagram",
   "fields": {
-   "headline": "The system Edison tried to scare people away from",
-   "sub": ""
+   "variant": "transformer",
+   "step": 5
   },
-  "visual": "Text card.",
+  "visual": "The AC system, complete.",
   "source": null
  },
  {
@@ -2044,28 +1976,44 @@
   "section": "08",
   "section_name": "Every Outlet On Earth",
   "text": "And the people who made it possible, Gaulard and Gibbs and Stanley and Tesla and Westinghouse",
-  "type": "text",
-  "template": "text",
+  "type": "object",
+  "template": "archival",
   "fields": {
-   "headline": "Gaulard, Gibbs, Stanley, Tesla, Westinghouse",
-   "sub": "The people who made it possible"
+   "kind": "object",
+   "label": "Gaulard and Gibbs transformer (Smithsonian)",
+   "crop": "quick cuts on each name: Gaulard & Gibbs transformer, Stanley (04-t), Tesla (05-a), Westinghouse (04-r)"
   },
-  "visual": "Text card; the names appear as they are said.",
-  "source": null
+  "visual": "Montage cut on each name.",
+  "source": {
+   "institution": "Smithsonian National Museum of American History",
+   "item": "Gaulard & Gibbs transformer",
+   "url": "https://americanhistory.si.edu/collections/object/nmah_713060",
+   "rights": "Not stated in the search result. Smithsonian Open Access is usually CC0; confirm on the object page",
+   "credit": "Gaulard & Gibbs transformer, Smithsonian National Museum of American History",
+   "verified": false
+  }
  },
  {
   "id": "08-l",
   "section": "08",
   "section_name": "Every Outlet On Earth",
   "text": "and a string of engineers on both sides of the Atlantic most of us have never heard of,",
-  "type": "text",
-  "template": "text",
+  "type": "object",
+  "template": "archival",
   "fields": {
-   "headline": "Engineers on both sides of the Atlantic",
-   "sub": "Most of us have never heard of them"
+   "kind": "object",
+   "label": "Gaulard and Gibbs transformer (Smithsonian)",
+   "crop": "slow push-in on the transformer"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Transformer object, slow push-in.",
+  "source": {
+   "institution": "Smithsonian National Museum of American History",
+   "item": "Gaulard & Gibbs transformer",
+   "url": "https://americanhistory.si.edu/collections/object/nmah_713060",
+   "rights": "Not stated in the search result. Smithsonian Open Access is usually CC0; confirm on the object page",
+   "credit": "Gaulard & Gibbs transformer, Smithsonian National Museum of American History",
+   "verified": false
+  }
  },
  {
   "id": "08-m",
