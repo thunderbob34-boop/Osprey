@@ -1,6 +1,6 @@
 # Notes: China Had Restaurants 500 Years Before Paris
 Research entry: episode-research.md — "# Job 3" section, entry "### 63." (Restaurant)
-Spoken words: 784
+Spoken words: 800
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

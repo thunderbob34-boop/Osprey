@@ -1,4 +1,4 @@
-# The Woman Who Discovered the Greenhouse Effect
+# The Woman Who Showed Carbon Dioxide Traps Heat, Three Years Before Tyndall
 
 READING NOTES
 - Runtime is about 4 minutes at a relaxed pace, roughly 762 spoken words.

@@ -1,7 +1,7 @@
 # The Bug Collector Who Invented Daylight Saving Time
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 908 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 926 spoken words.
 - Tone is light and easygoing, Hudson is a charming oddball and the story can smile a little, but no mocking him and no sarcasm about Franklin or Willett.
 - Say Willett as WILL-it.
 - Every hedge in here is on purpose. Read "as far as the record shows", "on his own", "may have been the first in the world", "a local claim" and "might be closer to a time-zone change" exactly as written. The Port Arthur section stays a claim, never a fact, so don't put "first in the world" on screen for it.
@@ -28,16 +28,16 @@ So on October 16th, 1895, Hudson presented a paper to the Wellington Philosophic
 
 Now, to be fair to William Willett, he's not a fake name in this story at all. In 1907 Willett published a pamphlet called "The Waste of Daylight", and he campaigned for moving the clocks, and as far as the record shows, he came up with the idea on his own, he wasn't copying Hudson. So you've got two men on opposite sides of the world landing on the same idea about twelve years apart, and neither one needed the other to get there.
 
-But here's the difference between them, Willett campaigned, and Willett is the reason Britain adopted daylight saving time, so if you live in Britain and you change your clocks, that's really his doing. Hudson had the idea first, Willett is the one who got a country to listen. Both of those things are true, and you can give Willett full credit for the campaign without handing him the idea.
+But here's the difference between them, Willett campaigned, and his campaign is a big part of why Britain adopted daylight saving time, so if you live in Britain and you change your clocks, that's a lot of his doing. Hudson had the idea first, Willett is the one who got a country to listen. Both of those things are true, and you can give Willett full credit for the campaign without handing him the idea.
 
 ## 05 Who Switched First
 
-And there's more, because proposing it and doing it are two different things, right? Writing a paper is one thing, and getting a whole country to move every clock it has is another thing. The first country to actually adopt daylight saving time nationally was Germany, on April 30th, 1916, and that was in the middle of the First World War.
+And there's more, because proposing it and doing it are two different things, right? Writing a paper is one thing, and getting a whole country to move every clock it has is another thing. The first countries to actually adopt daylight saving time nationally were Germany and its ally Austria-Hungary, both on April 30th, 1916, and that was in the middle of the First World War.
 
 Oh, one more thing, there's a town in Ontario, Canada, called Port Arthur, which is now Thunder Bay, and it's locally claimed as the first place in the world to actually change its clocks, back in 1908. A Thunder Bay city archivist has said it may have been the first in the world, and that's about as strong as it gets. Sources don't even agree on the date, some say May 1st and some say July 1st, and the way the CBC describes it, the town switched over to Eastern time, which means it might be closer to a time-zone change than daylight saving time. So treat Port Arthur as a local claim, an interesting one, but a claim.
 
 ## 06 The Bug Collector Did It First
 
-So let's put it in order. Franklin wrote a joke about getting up early in 1784, and it wasn't about clocks. Hudson proposed moving the clocks two hours on October 16th, 1895, in Wellington, and the society he pitched it to ridiculed the idea. Willett came up with it on his own and put out his pamphlet in 1907, and he campaigned for it and he's the reason Britain adopted it, and Germany was the first country to do it nationally in 1916.
+So let's put it in order. Franklin wrote a joke about getting up early in 1784, and it wasn't about clocks. Hudson proposed moving the clocks two hours on October 16th, 1895, in Wellington, and the society he pitched it to ridiculed the idea. Willett came up with it on his own and put out his pamphlet in 1907, and he campaigned for it and his campaign is a big part of why Britain adopted it, and Germany and Austria-Hungary were the first countries to do it nationally in 1916.
 
 So the next time you lose that hour of sleep in the spring, the man who first proposed it was a New Zealand postal worker who wanted a little more daylight after work so he could go out and hunt insects. Somebody did it first, and his name was George Vernon Hudson.

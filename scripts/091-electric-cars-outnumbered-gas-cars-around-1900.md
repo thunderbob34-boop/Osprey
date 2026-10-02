@@ -1,7 +1,7 @@
 # Electric Cars Outnumbered Gas Cars Around 1900
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 813 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 814 spoken words.
 - Tone is calm and a little surprised at the numbers. Modern electric car makers get fair credit, nobody is called a fake.
 - Say Lohner as LOH-ner, Porsche as POR-shuh, Semper Vivus as SEM-per VEE-vus.
 - Every hedge in here is on purpose. Read "around 1900", "roughly a third", "outnumbered", "not a headcount of every car on the road", "not sales figures", "the 1830s", "according to Britannica", "according to Porsche" and "by about 1905" exactly as written. Only say "outsold" in the line that rules it out, and never put a single year on Anderson's carriage.
@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-Around 1900, of the cars being built in America, the gas-powered one was the least common kind. Most people think of the electric car as a modern thing, something companies like Tesla started, and to be fair, today's electric cars are a real achievement. But around 1900, roughly one in three cars on American roads was electric, and gasoline cars were actually in last place, behind steam.
+Around 1900, of the cars being built in America, the gas-powered one was the least common kind. Most people think of the electric car as a modern thing, something companies like Tesla started, and to be fair, today's electric cars are a real achievement. But around 1900, roughly one in three cars being built in America was electric, and gasoline cars were actually in last place, behind steam.
 
 ## 02 The Modern Version
 

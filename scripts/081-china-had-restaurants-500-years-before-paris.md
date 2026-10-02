@@ -1,10 +1,10 @@
 # China Had Restaurants 500 Years Before Paris
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 784 spoken words. It runs short on purpose rather than padding.
+- Runtime is about 5 minutes at a relaxed pace, roughly 800 spoken words. It runs short on purpose rather than padding.
 - Tone is warm and easy, it's a food story. Boulanger isn't a fraud, the point is there's no evidence for his shop, so say "no evidence," never "never existed."
 - Say Boulanger as boo-lahn-ZHAY, Chevallier as sheh-VAL-ee-ay, Mathurin Roze de Chantoiseau as mah-tyoo-RAN ROHZ duh shahn-twah-ZOH, bouillon as BOO-yon, Hangzhou as HAHNG-joe, Kaifeng as KY-fung, Kiefer as KEE-fer.
-- Every hedge in here is on purpose. Read "the version you'll usually hear", "no contemporary evidence", "around 1766", "some sources give 1767", "the first documented", "by 1235", "more than five hundred years", "argues", "historians argue", "in every way that matters" and "the date we can actually stand on" exactly as written.
+- Every hedge in here is on purpose. Read "the version you'll usually hear", "no contemporary evidence", "around 1766", "some sources give 1767", "the first documented", "by 1235", "more than five hundred years", "argues", "historians argue", "in every way that matters" and "the date we're sticking with" exactly as written.
 - No sensitivity issues. Use period images of Paris and Song-dynasty paintings of city life, the book covers, and text cards.
 - Good on-screen text moments are restaurant = restorative broth, 1765, around 1766, 1235, Hangzhou, more than 500 years, and the 2002 Kiefer paper.
 
@@ -32,7 +32,7 @@ But Paris was centuries late. In Song-dynasty China, the capital cities had a th
 
 And a lot of those restaurants were run by families who had fled the old northern capital, Kaifeng, and they brought their regional cooking with them. So you've got people who moved south, opened restaurants, and kept cooking the food from back home, which is a story you could tell about a lot of cities today, right?
 
-And Hangzhou didn't have a handful of these, Columbia University's teaching materials on the Song describe the city as having innumerable restaurants. And that guide is from 1235, which is more than five hundred years before Roze de Chantoiseau. And since so many of those cooks came down from Kaifeng, you might guess the restaurants go back even further up there, and maybe they do, but the date we can actually stand on is 1235, so that's the one we're using.
+And Hangzhou didn't have a handful of these, Columbia University's teaching materials on the Song describe the city as having innumerable restaurants. And that guide is from 1235, which is more than five hundred years before Roze de Chantoiseau. And since so many of those cooks came down from Kaifeng, it's no surprise the restaurants go back even further up there, because there's an older memoir of Kaifeng, written by a man who fled it, that talks about its famous restaurants too, but 1235 is the guide we're using here, so that's the date we're sticking with.
 
 ## 05 Were They Really Restaurants
 
