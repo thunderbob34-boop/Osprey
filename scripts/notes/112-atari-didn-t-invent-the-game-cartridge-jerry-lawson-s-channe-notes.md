@@ -1,6 +1,6 @@
 # Notes: Atari Didn't Invent the Game Cartridge: Jerry Lawson's Channel F
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 112."
-Spoken words: 773
+Spoken words: 677
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -25,3 +25,9 @@ Left out on purpose (unverified / keep off air in research): the "yellow" cartri
 ## Deepening (2026-10-02)
 - New facts added: (1) Lawson's own coin-op arcade game on a Fairchild microprocessor led his bosses to task him with a gaming division (Smithsonian Magazine; The Strong). (2) Alpex 1974 prototype pitched to Fairchild, and Lawson's team took an Alpex prototype and developed it into the Channel F (Smithsonian Magazine; The Strong). This resolves the entry's "Alpex origin not re-verified" note, and it is why the script says "led the team". (3) 1976 manual calls it the Fairchild Video Entertainment System (The Strong archives; CHM title). (4) Video Soft, 1980, cartridges for the Atari 2600 and other systems (The Strong; Smithsonian Magazine extract). (5) IGDA recognition in 2011 and death in 2011 (Smithsonian Magazine; The Strong).
 - Looked for but not usable: "yellow" cartridge and spring-loaded door (Smithsonian Magazine extract only this pass; kept off air); Demolition Derby name, early 1975 date, F8 chip, pizza parlor test, "among the earliest microprocessor-driven games" (appeared in extracts without a clear page-level source; left out); Lawson's childhood in Queens, TV and radio repair, ham radio (page-level source not isolated; left out); Video Soft as "first Black-owned video game company" (Strong only; left out); Atari VCS renamed 2600 in 1982 (one Strong extract; left out); Stanford mentoring (one extract); school named for him in 2012 (one extract). Note that this pass saw only search extracts, not full pages.
+
+## Review
+- Fact fixes: (1) Cold open "a lot of them will say the Atari 2600" was unsourced; replaced with the entry's "widely remembered" framing. (2) "engineer at Fairchild, the company that made semiconductors and microprocessors" cut to "worked at Fairchild" (semiconductors not in entry). (3) "in 1976 Lawson led a team of engineers who took an Alpex prototype" had a year the entry does not attach to the team; now "Lawson's team took an Alpex prototype and developed it into the Channel F". (4) Removed "Channel F is the name it's known by now" (unsupported); replaced with the Strong manual title and the CHM page title as stated in the entry. (5) Removed "if you remember 8-track tapes, you already know how you'd put a game into the Channel F" (extrapolation). (6) Removed "he left Fairchild" (entry says only that he founded Video Soft in 1980). (7) Removed "for his work" after IGDA honor. (8) "a year earlier" tightened to "the year before" (Nov 1976 vs 1977 is under a year apart in practice).
+- Cadence fixes: 3. Dropped repeated "widely remembered" sentence at the top of section 02; joined the short sentences in sections 04 and 06; removed the closing "and that's what this channel is about" button.
+- Format fixes: reading notes word count updated to 677. No em/en dashes, no banned words.
+- Remaining concerns for Gus: Script is 677 words, under the 700 floor; the entry has nothing further that is verified and not marked off-air, so it was not padded. Alpex origin and Video Soft/IGDA lines rest on search extracts (two sources each), per the entry.

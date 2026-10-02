@@ -1,6 +1,6 @@
 # Notes: Kraft Didn't Invent Processed Cheese: The Swiss Got There First
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 104."
-Spoken words: 530
+Spoken words: 481
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -24,3 +24,9 @@ Left out on purpose (unverified / keep off air in research): any Swiss patent or
 - Looked for but not usable: IMPORTANT FLAG: the Historical Dictionary of Switzerland (hls-dhs-dss.ch, 'Gerber, Walter') appeared this pass and, per the extract, says Walter Gerber (b. Feb 28, 1879, Thun; d. Aug 7, 1942, Lucerne; father Friedrich a leather and later cheese merchant) took over the firm's business management around 1908 with his associate Fritz Stettler, and that Stettler invented the Schmelzkaese manufacturing process in 1911. If that is right, Gerber was a businessman rather than a chemist, and the HLS credits Stettler as the inventor, which sits awkwardly with the fixed title 'Two Swiss Chemists' and the line 'two chemists'. It is a single source, so I did not put it on air, but the main session should decide whether to soften 'chemists' (the review and MSU extracts say only 'Swiss researchers' or name both men). Also not used: the Garstin 1921 phosphate patent (appeared again in an unattributed extract, still one source); 1912-13 date source (an extract from a food-science article, page not identified); Velveeta, Phenix merger and 1937 macaroni and cheese (single publisher or conflicting dates).
 
 - Main-session follow-up: retitled from "...: Two Swiss Chemists" and "chemists" removed from the spoken text. The Historical Dictionary of Switzerland describes Gerber as the firm's business manager, so "chemists" was not safe.
+
+## Review
+- Fact fixes: 3. Cut "the company grew out of that business" (not in entry); cut "So the American version had a big customer early" (inference); removed the flat "with no sodium citrate in it" so the no-Swiss-ingredient point stays behind "as far as the literature says" as the entry requires.
+- Cadence fixes: 3. Merged the one-fact Kraft section into the patent section, moved the Army and 1917 supply material to follow the patent (strict chronological order instead of a detour after the key point), and tidied the cold-open concession.
+- Format fixes: word count corrected to 481; section count now six; runtime line corrected to 3 minutes.
+- Remaining concerns for Gus: the script says "two men" for Gerber and Stettler (title says "The Swiss Got There First", no "chemists"), which is right given the Historical Dictionary of Switzerland flag that Gerber was a business manager and Stettler the inventor. Consider whether you want to say that on air; it is single-source so it is not in the script.

@@ -1,6 +1,6 @@
 # Notes: Barbie Had an Older Sister: Bild Lilli
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 101."
-Spoken words: 669
+Spoken words: 598
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -27,3 +27,9 @@ Left out on purpose (unverified / keep off air in research): "tobacco shop" deta
 ## Deepening (2026-10-02)
 - New facts added: Handler co-founded Mattel in 1945 with her husband (Smithsonian Magazine, plus Britannica-set result); paper dolls, daughter Barbara, grown-up-doll idea, Barbie named for Barbara (Smithsonian Magazine, Britannica); first display March 9 1959 at the American International Toy Fair in New York (Britannica; Smithsonian Magazine for March 1959 Toy Fair); toy-industry skepticism (both); first-year sales given as two conflicting figures, 300,000 (Smithsonian Magazine) and 351,000 at 3 dollars (Britannica), used with a sources-differ hedge. Page-level attribution inside the search extracts was not displayed, so each pairing is by domain, not by page quote.
 - Looked for but not usable: Lilli cartoon began June 24, 1952 as a one-column filler by cartoonist Reinhard Beuthien when BILD launched, and the doll was made by O. & M. Hausser of Neustadt bei Coburg (Deutsche Digitale Bibliothek only, single strong source, so lead only); Ken, Jack Ryan and Handler's souvenir story (History.com or non-strong sources); sales record (Britannica only); the exact 'all-male committee' wording.
+
+## Review
+- Fact fixes: 3. Cut the unsupported "decided there should be a doll girls could put those hopes onto" (entry only gives the paper-doll observation and the baby-doll market); cut the invented cause for toy-trade skepticism ("because this was a grown-up doll...") and "Handler went ahead anyway"; cut the unqualified "was a hit".
+- Cadence fixes: 6. Joined "Then in 1955 she became a doll" into the previous breath, merged the choppy "It sold." into the sales paragraph, trimmed the "I'm not going to go past it" speech in section 04, added a "right?" in section 07, and replaced the crafted closing line ("the company that got the credit ended up with the rights to the original") with a plain "Somebody did it first, and that was Lilli."
+- Format fixes: word count corrected to 598; reading-notes hedge list now includes "the Library of Congress says" and "Britannica describes". Body is under 700 words (research is thin; not padded).
+- Remaining concerns for Gus: none.

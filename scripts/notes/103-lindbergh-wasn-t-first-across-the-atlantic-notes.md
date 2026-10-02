@@ -1,6 +1,6 @@
 # Notes: Lindbergh Wasn't First Across the Atlantic
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 103."
-Spoken words: 904
+Spoken words: 808
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -17,7 +17,7 @@ Spoken words: 904
 | Lindbergh ordered his plane from Ryan Airlines, San Diego, February 1927; finished late April | Smithsonian NASM, "Charles Lindbergh"; NASM Spirit of St. Louis object page |
 | Landed at Le Bourget to a crowd of about 100,000 | Smithsonian NASM; a second page (National Archives blog result set) gave the same figure. Page-level attribution not displayed |
 | May 8, 1927: Nungesser and Coli took off from Le Bourget in The White Bird for Paris to New York, disappeared, last sighted over Ireland | National Archives (NARA) blog "Aiding in the Search for The White Bird"; Britannica "Charles Nungesser" |
-| NC-4 set out from Rockaway May 8, 1919 with NC-1 and NC-3; by Nova Scotia, Newfoundland, Azores, Lisbon, to England | Naval History and Heritage Command (H-gram 030 and NC-4 page); Smithsonian NASM |
+| NC-4 set out from Rockaway May 8, 1919 with NC-1 and NC-3; by stages via Newfoundland, Azores, Lisbon, to England | Naval History and Heritage Command (H-gram 030 and NC-4 page); Smithsonian NASM |
 | NC-4 crew of six; Read commander and navigator; Stone, Coast Guard, pilot | Smithsonian NASM Pioneers of Flight; Naval History and Heritage Command |
 | NC-1 and NC-3 forced landings; NC-1 crew rescued by Greek freighter; NC-3 crew sailed 205 miles to the Azores | Naval History and Heritage Command; Smithsonian NASM |
 | NC-4 at Horta May 17, Lisbon May 27, via Ferrol Spain, Plymouth May 31, 1919 | Naval History and Heritage Command; Smithsonian NASM |
@@ -33,3 +33,9 @@ Left out on purpose (unverified / keep off air in research): "over 100 had prece
 ## Deepening (2026-10-02)
 - New facts added: Orteig Prize details and Ryan Airlines order (NASM); Le Bourget crowd about 100,000 (NASM, flagged for page-level check); Nungesser and Coli disappearance May 8, 1927 (NARA blog, Britannica); NC-4 crew, route, stops and dates, NC-1 and NC-3 fates (NHHC, NASM); Alcock and Brown wartime captivity, flight conditions, landing, knighthood by George V, Alcock's death at Rouen Dec 18 1919, Brown to 1948 (Britannica, RAF Museum, Science Museum Group).
 - Looked for but not usable: Who flew as pilot vs navigator on the Vimy (not shown in results); '1,890 miles' (one summary); the 'first words' quote at Le Bourget (single); nine St. Louis investors (single); ticker-tape parade June 13, 1927 (single); NC-4 '24 days' (one summary, and inclusive-day counting is ambiguous); 'over 100 had crossed' (still unsourced); Library of Congress Alcock and Brown page (text never displayed).
+
+## Review
+- Fact fixes: 9. Removed "Nova Scotia" from the NC-4 route; removed "Francois" (first name not in entry); removed "a few hours after takeoff" and "for the same prize" from the Nungesser and Coli passage, and cut "nobody had won the prize yet" and the claim that it "matters to how big his landing was"; replaced "Clouds and rain separated the three boats on the way to the Azores" and "battered craft" with the entry's "forced landings in clouds and rain"; cut Alcock "thought he was landing on a flat field" and "tail in the air" (entry says only that soft ground tipped the Vimy onto its nose, and who piloted is not stated); cut "near the Dardanelles", "by antiaircraft fire", "in France" and "after a reconnaissance flight" from the POW details; cut "Le Bourget Field outside Paris" down to "Le Bourget"; changed "sent back to England" to "sent home" (entry says repatriated).
+- Cadence fixes: 5. Joined the choppy "That makes him..." line, made the Nungesser and Coli section one flat paragraph with a "Now back to 1919" signpost, moved "right?" into the flight-time line, joined the Alcock death and Brown 1948 sentences, and replaced the crafted close ("and both of their cats are still around") with the plain "somebody did it first".
+- Format fixes: word count corrected to 808; runtime line corrected to 5 and a half minutes; "Britannica notes" added to the hedge list.
+- Remaining concerns for Gus: the Le Bourget crowd of about 100,000 is attributed to the Smithsonian in the entry only at domain level (page text not displayed), so the "about" and "according to the Smithsonian" hedges must stay.

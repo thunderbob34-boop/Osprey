@@ -1,6 +1,6 @@
 # Notes: Lewis and Clark Were Twelve Years Late
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 107."
-Spoken words: 899
+Spoken words: 831
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

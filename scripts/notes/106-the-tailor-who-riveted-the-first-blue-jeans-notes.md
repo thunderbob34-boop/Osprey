@@ -1,6 +1,6 @@
 # Notes: The Tailor Who Riveted the First Blue Jeans
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 106."
-Spoken words: 853
+Spoken words: 802
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

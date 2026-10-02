@@ -1,6 +1,6 @@
 # Notes: Hydrox Came Before Oreo
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 102."
-Spoken words: 619
+Spoken words: 507
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -14,7 +14,6 @@ Spoken words: 619
 | As far as these sources go, first chocolate sandwich cookie of its kind in the US | Entry hedge wording; KCUR; Wharton |
 | Oreo came four years later; "knockoff" is an inference | Entry "Hedges needed on air" and "Inferred" |
 | First Oreo sale was to a grocer in Hoboken, New Jersey | Knowledge at Wharton / Wharton Global Youth Program (University of Pennsylvania); a Duke Libraries blog also appeared. Page-level text not displayed, and the Wharton pages are one institution |
-| Nabisco = National Biscuit Company | Knowledge at Wharton; Britannica "Nabisco" |
 | Loose-Wiles Biscuit Company formed in Kansas City in 1902 by the Loose brothers and John Wiles; Sunshine was the trade name on its crackers; company renamed Sunshine in 1947 | Kansas City Public Library, KC History (kchistory.org) company pages; KCUR (Loose-Wiles later became Sunshine); Smithsonian NMAH Sunshine Biscuit records appeared |
 | Hydrox ended up owned by Kellogg's and went out of production; sources differ, 1999 or 2003 | KCUR (1999); search extracts (Kellogg's pulled the plug 2003); NPR 2015 |
 | 2015: Leaf Brands brought Hydrox back | NPR 2015 and Planet Money episode 652 (same publisher); KCUR and WashU Common Reader also appeared |
@@ -25,3 +24,9 @@ Left out on purpose (unverified / keep off air in research): "knockoff", "copy" 
 ## Deepening (2026-10-02)
 - New facts added: Company behind Hydrox was Loose-Wiles Biscuit Company (formed Kansas City 1902), Sunshine as trade name, renamed Sunshine 1947 (Kansas City Public Library KC History; KCUR); first Oreo sale to a Hoboken, New Jersey grocer (Wharton pages, Duke blog appeared); Hydrox later owned by Kellogg's and discontinued, 1999 or 2003 with a sources-differ hedge (KCUR, search extracts); revived in 2015 by Leaf Brands (NPR, KCUR). This updates the entry's 'say only Sunshine Biscuits' hedge: on air I say Sunshine Biscuits made it and explain that the 1908 company was Loose-Wiles.
 - Looked for but not usable: A documented reason Hydrox faded; Hydrox name origin and lard/kosher difference (still lead only); month of the Hydrox launch; Duke blog and the Hoboken grocer's name (not named in results); Oreo 'copycat' claim (NPR and KCUR extracts use it, but it is an inference, kept off air).
+
+## Review
+- Fact fixes: 6. Cold open now carries "as far as these sources go" (it said flatly "it wasn't the first"); cut "Nabisco being the National Biscuit Company" (not in entry); cut "packages of the new cookie" (entry says only a grocer in Hoboken); changed "one of its principal products" to "its principal product, crackers"; cut the invented reason for the 1947 rename ("better known than Loose-Wiles"); cut the "knockoff" mention entirely rather than put the word on air; close now says "came four years later" instead of "follow-up". Also dropped the Smithsonian archive aside and the Kassoff pronunciation (never spoken).
+- Cadence fixes: 4. Removed the "we'll get to why" tease in the cold open, joined the choppy 2015 revival paragraph into section 06, trimmed the Close into one breath, softened the section 05 lecture.
+- Format fixes: word count corrected to 507; runtime line corrected to 3 and a half minutes; hedge list extended; Hydrox March-1912 grocer detail attributed to Wharton on air.
+- Remaining concerns for Gus: "Hydrox ended up with Kellogg's" and the 1999 or 2003 range rest on KCUR plus unnamed extracts, so keep the "sources differ" hedge as read.

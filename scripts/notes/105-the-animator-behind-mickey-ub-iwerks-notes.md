@@ -1,6 +1,6 @@
 # Notes: The Animator Behind Mickey: Ub Iwerks
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 105."
-Spoken words: 666
+Spoken words: 616
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -25,3 +25,9 @@ Left out on purpose (unverified / keep off air in research): "chief animator" (n
 ## Deepening (2026-10-02)
 - New facts added: Kansas City partnership (Britannica 1922 Laugh-O-gram; WDFM earlier commercial art venture); the Oswald loss and Iwerks staying (WDFM, Britannica); 700 drawings a day (Britannica, WDFM, so the entry's single-source flag is now cleared, still attributed on air); 1930 studio, 1936 closure, 1940 return (Britannica, WDFM); Britannica's drew/created/voiced split for Steamboat Willie (Britannica, Smithsonian NMAH).
 - Looked for but not usable: Why Iwerks left in 1930 and the Pat Powers deal (WDFM only); Mortimer to Mickey rename (single source, "one story is"); Academy technical awards 1960 and 1965 and The Birds nomination (Britannica kids only, Oscars page text not displayed); Iwerks birth date and 1919 meeting (WDFM only); the staff count (WDFM says about half, another extract says nearly all, so the script says only "a lot"); who drew the first sketch (still not found). Two-source material ran out, so the script stops at about 670 words rather than pad.
+
+## Review
+- Fact fixes: 4. Cut "Iwerks is a name a lot of people haven't heard" from the cold open and close (not a research fact); cut "this isn't a boss and a stranger he hired" (colour not in the entry); cut "700 a day is a lot of pencil work for one man"; rephrased the Oswald consequence ("So Walt needed a new character") to plain description of the situation.
+- Cadence fixes: 4. Replaced the crafted closing line about "the half a lot of people haven't heard of" with a flat summary; made the cold-open concession a plain "to be fair"; joined the 700-drawings paragraph into one breath; reduced the Iwerks-later recap to one sentence.
+- Format fixes: word count corrected to 616; runtime line corrected to 4 minutes.
+- Remaining concerns for Gus: the 1930, 1936 and 1940 facts rest on Britannica Kids and the Walt Disney Family Museum; the script says "Britannica" for brevity. "Somebody did it first" is not said in this one on purpose, since the Smithsonian and Britannica both already name Iwerks.

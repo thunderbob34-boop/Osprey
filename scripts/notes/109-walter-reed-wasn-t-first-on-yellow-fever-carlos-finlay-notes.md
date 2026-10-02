@@ -1,6 +1,6 @@
 # Notes: Walter Reed Wasn't First on Yellow Fever: Carlos Finlay
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 109."
-Spoken words: 804
+Spoken words: 766
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -29,3 +29,9 @@ Left out on purpose (unverified / keep off air in research): the "seven nominati
 - New facts added: board membership and May 1900 formation (UVA Today; CDC EID; NMHM); Finlay's birthplace, Jefferson 1855, Havana practice 1864 (Jefferson archives; Britannica; Smithsonian); Finlay tried to persuade Reed (Britannica; CDC EID); Carter's 1898 extrinsic incubation work and Reed's remark about it, why Finlay's experiments fell short, 12-day figure (PMC2866391; CDC EID); Carroll, Lazear, Camp Lazear, Kissinger and Moran (UVA Today; NMHM; CDC EID); Finlay's Director of Health years and death date (Jefferson archives; Britannica).
 - Caveat: the search tool returned blended summaries, so each fact's sources are the pages that appeared in the results for that query, not a line-by-line attribution. The main session should spot-check Carter/Reed quote wording and the Kissinger "first controlled case" wording before recording.
 - Looked for but not usable: Finlay supplying mosquito eggs to the board (one unnamed summary said so, a follow-up search found no source); consent form in English and Spanish (not tied to a named source); the $500 bonus anecdote (one source, from the Clara Maass page, not Reed-board specific); Finlay's 1886 publication of experimental evidence (single summary line); Finlay refused entry to Havana University (single summary line); the 102-inoculation figure and the Nobel nomination count remain off air per the entry.
+
+## Review
+- Fact fixes: 6. Cut "so this was not an abstract question for him" (interpretation; entry only says periodic epidemics in Havana). Section 04 "When the board got to Cuba in 1900" changed to the entry's "In 1900 Finlay tried to persuade Reed". Section 05 said "nobody yet knew about the extrinsic incubation period", which contradicted Carter's 1898 work in the next paragraph; now "his work lacked any knowledge of" it, per the entry. Cut "he called that the period of extrinsic incubation" (entry does not say Carter coined the term). Removed "allowed to feed" (entry: "fed on Carroll") and "the rest of the board". Close changed from "Somebody did it first" to "Somebody proposed it first" so it does not claim more than the body (Finlay proposed, Reed proved).
+- Cadence fixes: 4. Merged one-line paragraph in 03 into the previous breath, cut "a story about how the two fit together", dropped crafted "right? That's the plain fact of it" ending in 07 and moved a "right?" to the cold open, retitled section 07 to match its contents (it covered Finlay's later career, not only the Nobel).
+- Format fixes: word count corrected 804 to the current count; no dashes, no banned words.
+- Remaining concerns for Gus: the entry itself asks for a spot-check of the Reed/Carter remark wording ("said later ... did more than anything else") and the Kissinger "first controlled case" wording before recording; both are kept hedged ("said later", "reportedly").

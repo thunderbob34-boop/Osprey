@@ -1,6 +1,6 @@
 # Notes: The Golden Gate Bridge's Forgotten Designer
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 113."
-Spoken words: 653
+Spoken words: 576
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -26,3 +26,9 @@ Left out on purpose (unverified / keep off air in research): the Purdue "almost 
 ## Deepening (2026-10-02)
 - New facts added: (1) Strauss's own 1921 concept was a hybrid cantilever-suspension bridge, later modified into a simple suspension bridge with a 4,200 foot main span (district extract; Britannica Strauss). (2) Strauss assigned Ellis to work with Moisseiff on the calculations (district extract), and Britannica independently calls Ellis responsible for much of the mathematical computations, so Ellis's role now has three institutions (district, Purdue, Britannica). (3) Completed 1937 (Britannica; LOC report date; context only).
 - Looked for but not usable: the 11 volumes of calculations, circular slide rule and hand-crank adding machine (Purdue-side extracts only); "almost single-handedly" and "every nut and bolt" (still unattributed to a page); the December 1931 Strauss quote "nothing unusual" (seen only in extracts without a clear page, and the Wesleyan feature; kept off air); Strauss pressuring Ellis from October 1931 (Purdue extract and Wesleyan, motive-adjacent so kept off air); recalled copies of the engineers' report that credited Ellis, and Ellis vanishing from promotional material (one extract, kept off air); "not recognized until the 1980s" (one extract, ambiguous); Clifford Paine placed in charge, Moisseiff and Ammann persuading Strauss by 1929, and Moisseiff's 1925 concern (district extract only); Ellis's Illinois professorship and 1921 Strauss Engineering vice presidency, born Parkman, Maine (Purdue only); the word "dismissed" (appeared in extracts without a clear page, so the script still says "ended Ellis's involvement"). Note that this pass saw only search extracts, not full pages.
+
+## Review
+- Fact fixes: (1) Cut "he was a professor before Strauss hired him" (the entry only has Britannica calling him "a professor"; the earlier Illinois professorship is Purdue-only and on the do-not-use list). (2) Cut the claim that the two source wordings are "why we say directed the design calculations" (the district's own wording in the entry is "assigned ... to work in collaboration with Moisseiff"); now says both wordings are kept and neither is exceeded. (3) Soft inference "somebody had to do the calculations for it" reworded to "that's where the design calculations come in". (4) Deflection theory gloss shortened to "how a suspension bridge bends under its load". (5) Cold open "something you don't hear very often" removed (editorial).
+- Cadence fixes: 4. Joined the choppy opener of section 06; merged short sentences in 03 and 04; renamed section 02 heading to match its content; removed "Here's what separate institutions say."
+- Format fixes: reading notes word count updated to 576; hedge list now matches phrases actually spoken ("sole designer" rather than "not the sole designer"). No em/en dashes, no banned words.
+- Remaining concerns for Gus: Script is 576 words, under the 700 floor; not padded because the remaining entry material is marked do-not-use. Section 06 restates earlier points on purpose and could be cut if you want it tighter. Sources are search extracts, and the entry advises a page-level read.

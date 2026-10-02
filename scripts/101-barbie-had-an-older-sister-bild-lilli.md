@@ -1,7 +1,7 @@
 # Barbie Had an Older Sister: Bild Lilli
 
 READING NOTES
-- Runtime is about 4 minutes at a relaxed pace, roughly WCOUNT spoken words.
+- Runtime is about 4 minutes at a relaxed pace, roughly 598 spoken words.
 - Tone is calm and matter-of-fact, and fair to Ruth Handler throughout. This is not a takedown, so keep the lawsuit section plain and flat.
 - Say Bild as BILT, Lilli as LIL-ee, Zeitung as TSY-toong, Greiner as GRY-ner, Hausser as HOW-ser, Mattel as muh-TELL.
 - Every hedge in here is on purpose. Read "modeled on", "inspired by", "reportedly", "according to Britannica", "the way the Smithsonian tells it", "the Library of Congress says", "Britannica describes", "sources differ" and "says" exactly as written. Do not swap in any stronger word, and do not say what Mattel paid, because the research has no figure. The first-year sales numbers are two different figures from two sources, so give both and do not pick one.
@@ -28,7 +28,7 @@ Handler saw a Lilli doll on a 1956 trip to Europe, and the Library of Congress s
 
 ## 05 Toy Fair 1959
 
-Barbie was first shown on March 9th, 1959, according to Britannica, at the American International Toy Fair in New York City, and the Smithsonian also puts her first display at the Toy Fair in March of 1959. People in the toy business were skeptical, and Handler pitched it to them anyway, a glamour doll for American girls.
+Barbie was first shown on March 9th, 1959, according to Britannica, at the American International Toy Fair in New York City, and the Smithsonian also puts her first display at the Toy Fair in March of 1959. People in the toy business were skeptical of the doll, according to both the Smithsonian and Britannica.
 
 Sources differ on the first-year sales, the Smithsonian says three hundred thousand Barbie dolls and Britannica says three hundred fifty-one thousand at three dollars each, so I'll just say it was around three hundred thousand or a bit more.
 
