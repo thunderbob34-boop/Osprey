@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): the lawsuit's outco
 - Searched: Britannica: Jackson, Dansville, 1863, "probably the first ready-to-eat cereal", baked, crumbled, rebaked, soaked in milk overnight; Smithsonian: Kellogg's "granula" in the late 1870s or early 1880s, Jackson sued, renamed Granola → confirmed → https://www.britannica.com/topic/breakfast-cereal , https://www.smithsonianmag.com/smart-news/first-breakfast-cereal-granula-had-be-soaked-being-eaten-180962340/
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): corn flakes in the 1890s (consistent with the standard 1894-98 dating; note W.K. Kellogg co-developed them, which the script doesn't contradict).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Corn flakes were co-developed with his brother W.K. Kellogg, who founded the Kellogg's company; the script doesn't contradict this, but "Kellogg is the corn flakes name" blurs the brothers.

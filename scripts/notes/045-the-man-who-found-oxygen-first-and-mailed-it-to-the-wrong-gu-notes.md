@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): any claim that Lavo
 - Searched: Scheele made it 1771, book 1777, Priestley first to publish → confirmed → https://www.britannica.com/biography/Carl-Wilhelm-Scheele
 - Fixes: (1) "Priestley published his in 1774" → "Priestley had his in print by 1775" (strong sources put his published account in 1775; "by 1775" is true either way); (2) "A copy of the letter turned up among Scheele's papers after he died" → the letter was thought lost until a French chemist found it in the archives of the French Academy of Sciences in Paris and published it in 1890 (the entry's "copy among Scheele's papers" line had no strong source; the Paris find is documented). Draft at the Royal Swedish Academy kept. Word count 775 → 794.
 - Not search-verified (checked against research/knowledge only): silver carbonate method in the letter (Yale Chem 125 per entry); ACS National Historic Chemical Landmark; Lavoisier naming oxygen; phlogiston gloss.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (medium) "Priestley holds the official credit" changed to "Priestley is the name that usually gets the credit, the American Chemical Society even named..." (there is no official credit; an ACS landmark isn't one). Word count 794 to 799.
+- Low items noted, not changed: Scheele was born in Swedish Pomerania (Stralsund), "Swedish" is standard; Priestley may have made the gas unknowingly before 1774; Bayen and Sendivogius claims not mentioned (fringe).

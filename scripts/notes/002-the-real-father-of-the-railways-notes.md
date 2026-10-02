@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): the run's duration 
 - Searched: Trevithick died 22 Apr 1833 in Dartford in poverty; local factory workers raised money so he avoided a pauper's funeral → confirmed → https://ethw.org/Richard_Trevithick ; https://www.asme.org/topics-resources/content/richard-trevithick ; https://www.britannica.com/summary/Richard-Trevithick
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): Locomotion No. 1 / Stockton & Darlington 27 Sept 1825; Rainhill Oct 1829 and Robert Stephenson's role on Rocket; Salamanca 1812 at Middleton; Puffing Billy 1813-14 and oldest surviving; the 500-guinea wager (already "the story goes").
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "nearly five miles an hour" is Trevithick's figure for while the engine was working, not an average over the run (already hedged and duration kept off air); Puffing Billy as "oldest surviving steam locomotive in the world" is the standard Science Museum line, fine as is.

@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): "roof cisterns" at 
 - Searched: Harington installed a flush lavatory for the queen (Richmond) and described it in The Metamorphosis of Ajax, 1596 → confirmed → https://www.britannica.com/biography/John-Harington
 - Fixes: none. (Sources split on where and exactly when the queen's toilet was built, his own house near Bath vs Richmond, but "built a flushing toilet with a cistern for Queen Elizabeth I" and 1596 are both supported.)
 - Not search-verified (checked against research/knowledge only): the ballcock patent; Reyburn 1969; Knossos dates; Indus Valley (already hedged); Cumming 1775; "crap" predating Crapper; the 1917 troops story (already "may").
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "crap" is older than Crapper in its older chaff/residue sense (c. 1400s); the excrement sense is 1840s, around his birth (1836) and well before his business, so the line holds. Harington's queen's toilet (Richmond vs Kelston, exact year) is debated, already noted in Re-check A.

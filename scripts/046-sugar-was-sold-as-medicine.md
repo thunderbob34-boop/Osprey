@@ -1,7 +1,7 @@
 # Sugar Was Sold as Medicine
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 701 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 719 spoken words.
 - Tone is light and curious. This one has no villain and no single credited name, so keep it easy.
 - Say Sidney Mintz as SID-nee MINTS, śarkarā as SHAR-kuh-rah, Gupta as GOOP-tuh.
 - Every hedge in here is on purpose. Read "thousands of years ago", "at least by the start of the common era", "possibly", "by the Gupta period at the latest", "already" and "in outline" exactly as written. Don't give a year for New Guinea and don't name the Gupta era as the date sugar crystals were invented.
@@ -11,7 +11,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-When sugar first reached Europe, you didn't buy it at the grocer, you bought it at the apothecary, next to the spices and the medicines. It was a luxury, it sat on the shelf beside pepper and cinnamon, and it was prescribed for coughs and fevers. And by the time Europe got its hands on it, people on the other side of the world had been growing sugarcane for thousands of years, and people in India had worked out how to turn it into crystals.
+When sugar first reached medieval Europe, you didn't buy it at the grocer, you bought it at the apothecary, next to the spices and the medicines. It was a luxury, it sat on the shelf beside pepper and cinnamon, and it was prescribed for coughs and fevers. And by the time Europe got its hands on it, people on the other side of the world had been growing sugarcane for thousands of years, and people in India had worked out how to turn it into crystals.
 
 ## 02 Sugar at the Apothecary
 
@@ -31,7 +31,7 @@ And then there's the part that turned cane into the sugar we'd recognize. Somebo
 
 And here's a fun one, the word sugar itself goes back to India. It comes from the Sanskrit word śarkarā, which means grit, which is pretty much what a pile of sugar crystals looks like, so every time you say sugar, you're using a word that started out in India meaning grit.
 
-And Greek and Roman writers already knew about Indian sugar by the 1st century AD, so the Mediterranean world had heard about it, and then Persians and Arabs spread the refining technique before Europe saw it. The evidence for that is solid in outline, even if a lot of the specific dates are fuzzy.
+And Greek and Roman writers already knew about Indian sugar by the 1st century AD, so the Mediterranean world had heard about it, and their doctors wrote about it as a medicine, and then Persians and Arabs spread the refining technique west, long before medieval Europe was buying it. The evidence for that is solid in outline, even if a lot of the specific dates are fuzzy.
 
 ## 05 The Gupta Myth
 
@@ -39,4 +39,4 @@ Now, there's one more myth in here, and it's a small one, but you'll run into it
 
 ## 06 Who Was First
 
-So who did sugar first? Farmers in New Guinea domesticated sugarcane, thousands of years ago. People in India worked out how to boil the juice into crystals, at least by the start of the common era and possibly around 500 BCE, and they gave us the word, from śarkarā, grit. Greek and Roman writers knew about it by the 1st century AD, and Persians and Arabs spread the refining before Europe saw it. And when it finally got to medieval Europe, it went on the apothecary's shelf, next to the pepper and cinnamon, as a medicine for coughs and fevers. Somebody did it first, and it was New Guinea and India, long before Europe.
+So who did sugar first? Farmers in New Guinea domesticated sugarcane, thousands of years ago. People in India worked out how to boil the juice into crystals, at least by the start of the common era and possibly around 500 BCE, and they gave us the word, from śarkarā, grit. Greek and Roman writers knew about it by the 1st century AD, and Persians and Arabs spread the refining west, long before medieval Europe was buying it. And when it finally got to medieval Europe, it went on the apothecary's shelf, next to the pepper and cinnamon, as a medicine for coughs and fevers. Somebody did it first, and it was New Guinea and India, long before Europe.

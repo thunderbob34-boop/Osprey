@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): "109 km in 3 min 10
 - Searched: Albert II, 14 June 1949, 83 miles, died on impact (parachute failure), rhesus monkey → confirmed → https://www.nasa.gov/history/a-brief-history-of-animals-in-space/
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): Laika, Sputnik 2, 3 Nov 1957, first animal to orbit (standard); ~62-mile Kármán line.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Albert I (June 1948) flew first but didn't reach space; "the monkeys came after" is still true.

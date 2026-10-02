@@ -1,10 +1,10 @@
 # Wegener's Big Idea Was 300 Years Old
 
 READING NOTES
-- Runtime is about 4 and a half minutes at a relaxed pace, roughly 687 spoken words. It runs short on purpose, the research is thin and nothing was padded.
+- Runtime is about 4 and a half minutes at a relaxed pace, roughly 689 spoken words. It runs short on purpose, the research is thin and nothing was padded.
 - Tone is calm and fair. Wegener keeps his credit for building the scientific case. The earlier people noticed the fit, they didn't prove anything, so the framing is "first to notice," never "first to prove."
 - Say Wegener as VAY-guh-ner, Ortelius as or-TAY-lee-us, Thesaurus Geographicus as thuh-SOR-us jee-oh-GRAF-ih-kus, Snider-Pellegrini as SNY-der pel-eh-GREE-nee, Romm as ROM.
-- Every hedge in here is on purpose. Read "suggested", "guessed from the shape of the coasts", "first to notice, not first to prove", "a forerunner", "widely taught" and "we don't know" exactly as written. Don't say anything about Noah's flood, that link wasn't verified.
+- Every hedge in here is on purpose. Read "suggested", "guessed from the shape of the coasts", "first to notice, not first to prove", "a forerunner", "widely taught" and "we're sticking to the maps" exactly as written. Don't say anything about Noah's flood, that link wasn't verified.
 - No sensitivity issues. Use the Ortelius world map, the 1858 before-and-after maps, Wegener's maps, and text cards.
 - Good on-screen text moments are 1596, the Ortelius quote, 1858, 1912, more than 300 years, Nature 1994, and fossils, rocks, glaciers, shelf edges.
 
@@ -30,7 +30,7 @@ And this isn't just a nice story somebody dug up. The US Geological Survey tells
 
 And he wasn't the only one. Other people noticed the fit over the years too, and one of them is Antonio Snider-Pellegrini. In 1858 he published a pair of before-and-after maps, one with the Americas and Africa joined together, and one with them pulled apart.
 
-Now, to be fair, we don't know what Snider-Pellegrini thought pushed them apart, so we're not going to guess. What we do know is that in 1858, more than fifty years before Wegener, there was a published map showing the Americas and Africa joined together, and another showing them split, and that's the whole idea, drawn out on the page. And the US Geological Survey tells that part too, and so does a short history of plate tectonics from a research group called IRIS, which lists Ortelius, Bacon, Franklin and Snider-Pellegrini as people who noticed the fit.
+Now, to be fair, we're not going to get into what Snider-Pellegrini thought pushed them apart, we're sticking to the maps. What we do know is that in 1858, more than fifty years before Wegener, there was a published map showing the Americas and Africa joined together, and another showing them split, and that's the whole idea, drawn out on the page. And the US Geological Survey tells that part too, and so does a short history of plate tectonics from a research group called IRIS, which lists Ortelius, Bacon, Franklin and Snider-Pellegrini as people who noticed the fit.
 
 ## 05 What Wegener Actually Did
 

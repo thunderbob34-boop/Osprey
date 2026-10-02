@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): the story that Lema
 - Searched: historians called the IAU background notes "bad history" (Helge Kragh, quoted by Science); Lemaître 1927, two years before Hubble → confirmed → https://www.science.org/content/article/move-over-hubble-discovery-expanding-cosmos-assigned-little-known-belgian-astronomer ; counter-paper https://arxiv.org/pdf/1909.07731
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): French, little-read Belgian journal; Slipher redshifts in the 1910s; Hubble 1929 as the convincing data.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Alexander Friedmann (1922) published expanding-universe solutions before Lemaître; the cold open's "first to publish that the universe is expanding" holds because Friedmann offered models, not a claim about the real universe, but a commenter may raise him. Eddington's 1930-31 promotion of Lemaître also helped convince people, not just Hubble's data.

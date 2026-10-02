@@ -1,6 +1,6 @@
 # Notes: Henry Ford Didn't Invent the Car
 Research entry: episode-research.md — "# Job 3" section, entry "### 31."
-Spoken words: 949
+Spoken words: 948
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): the exact chassis-l
 - Searched: Siegfried Marcus car, ASME landmark ca. 1875 vs Vienna museum 1888/89 → confirmed the dispute as stated → https://www.asme.org/about-asme/engineering-history/landmarks/203-siegfried-marcus-car ; https://ethw.org/ASME-Landmark:Siegfried_Marcus_Car
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): Benz 29 Jan 1886, DRP 37435, UNESCO register, 0.75 hp; Ford born 30 July 1863 so 22 on that date (correct); Cugnot 1769/1770 and the surviving fardier in Paris; meatpacker disassembly lines; 1913 phase-in (magnetos April 1913); 12.5 hours to 93 minutes.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: 1 (high). Sections 06 and 08 said "a Model T came off the line about every 93 minutes", which reads as one car every 93 minutes (about 15 a day). The 93-minute figure is the time to assemble one Model T (chassis), down from about 12.5 hours; the line turned out cars far more often than that. Now "putting a Model T together took about 93 minutes" (06) and "putting a Model T together on it took about 93 minutes" (08). Reading-notes hedge changed to "about 93 minutes". Word count 949 to 948.
+- Low items noted, not changed: The 12.5 hours and 93 minutes are chassis assembly figures specifically; "building a Model T" is the usual popular shorthand. "UNESCO isn't a car company... an independent body" is fine, though the nomination itself came from Germany.

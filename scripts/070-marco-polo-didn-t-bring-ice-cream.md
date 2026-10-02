@@ -1,7 +1,7 @@
 # Marco Polo Didn't Bring Ice Cream
 
 READING NOTES
-- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 757 spoken words. The research is narrow, so this one runs under the usual length on purpose rather than padding.
+- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 770 spoken words. The research is narrow, so this one runs under the usual length on purpose rather than padding.
 - Tone is calm and curious. No mocking Marco Polo or Catherine, the stories got pinned on them.
 - Say Ibn Abi Usaybi'a as IB-un AH-bee oo-SAY-bee-ah, Ibn Bakhtawayh as IB-un bahk-TAH-way, Zimara as zee-MAH-rah, Padua as PAD-yoo-uh, Giambattista della Porta as jahm-bah-TEES-tah DEL-uh POR-tuh, Magia Naturalis as MAH-jee-uh nah-too-RAH-lis, Antonio Latini as an-TOE-nee-oh lah-TEE-nee, Lo scalco alla moderna as low SKAHL-ko AH-lah mo-DAIR-nah, sorbetto as sor-BET-oh, Catherine de' Medici as deh MED-ih-chee, Jurafsky as jur-AF-skee, Quinzio as KWIN-zee-oh.
 - Every hedge in here is on purpose. Read "no evidence", "not likely true", "chills water", "as the Stanford linguist Dan Jurafsky lays it out", "take it as his account", "again going by Jurafsky", "some of the first", "among the first published", "we don't know exactly how", "a fair guess, not a fact", "poorly sourced" and "nobody knows" exactly as written. Never say the Arab physician froze food or invented ice cream.
@@ -16,7 +16,7 @@ Marco Polo didn't bring ice cream back from China, and food historians can't fin
 
 So here are the two stories most people have heard. The first one is that Marco Polo, the famous traveler, went to China and brought ice cream back with him, and the second one is that Catherine de' Medici carried ice cream with her to France.
 
-And food historians have looked hard at both of these. PBS calls both stories not likely true, and History.com notes that European ices only show up in Italy in the early 1600s, which is about a century after Catherine. And the food historian Jeri Quinzio wrote a myth-busting history called Of Sugar and Snow that goes after stories like these. So the plain fact is that food historians find no evidence for either the Marco Polo story or the Catherine de' Medici story.
+And food historians have looked hard at both of these. PBS calls both stories not likely true, and History.com notes that ices don't really show up as a dessert in Italy until the early 1600s, long after a teenage Catherine had left Florence for France in the 1530s. And the food historian Jeri Quinzio wrote a myth-busting history called Of Sugar and Snow that goes after stories like these. So the plain fact is that food historians find no evidence for either the Marco Polo story or the Catherine de' Medici story.
 
 ## 03 The Trick
 
@@ -36,7 +36,7 @@ Then, again going by Jurafsky, in 1530, a professor at Padua named Zimara wrote 
 
 By 1589, Giambattista della Porta was describing how to freeze wine to a slush in snow and saltpetre, in the expanded edition of his book Magia Naturalis. And that's the actual freezing method, ice and saltpetre together, written down in Italy in the 1500s.
 
-And then more than a century later, in the 1690s, Antonio Latini, who was steward to the Spanish viceroy in Naples, printed some of the first sorbetto recipes in a book called Lo scalco alla moderna, and that's some of the first, among the first published, not the first ever. And his recipes included chocolate, and even aubergine, which is eggplant.
+And then more than a century later, in the 1690s, Antonio Latini, who was steward to the first minister of the Spanish viceroy in Naples, printed some of the first sorbetto recipes in a book called Lo scalco alla moderna, and that's some of the first, among the first published, not the first ever. And his recipes included chocolate, and even aubergine, which is eggplant.
 
 Now, we don't know exactly how the idea got from the Arab physicians to the Italian professors. The chain makes sense, but parts of it are filled in rather than written down, so that link is a fair guess, not a fact.
 

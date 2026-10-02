@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): "oldest bridge in d
 - Searched: Thangtong Gyalpo (1385-1464) iron-chain bridges in Tibet and Bhutan; Chushul Chakzam over the Yarlung Tsangpo, 1430 (about 370 years before 1801, so "about three hundred and fifty years" for "the 1400s" holds) → confirmed → https://en.wikipedia.org/wiki/Chushul_Chakzam , https://en.wikipedia.org/wiki/Thang_Tong_Gyalpo
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Finley's 1808 patent; LoC print title; Arkadiko date, construction and ministry attribution; Tacoma Narrows dates, Billah and Scanlan 1991, WSDOT torsional flutter.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Chinese iron-chain bridges (e.g. Ming-era Yunnan) may predate or parallel Thangtong; the script never calls him the absolute first, so fine. Finley-to-Menai influence re-confirmed (Wikipedia, Maryland SHA, encyclopedia.com).

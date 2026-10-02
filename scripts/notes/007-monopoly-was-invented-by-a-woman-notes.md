@@ -28,3 +28,7 @@ Left out on purpose (unverified / keep off air in research): Parker Brothers buy
 - Searched: Darrow got the game through a Quaker friend and sold it as his own; Magie patented The Landlord's Game in 1904; Atlantic City Quakers' version; NPR headline wording → confirmed; the full NPR headline is "Ever Cheat At Monopoly? So Did Its Creator: He Stole The Idea From A Woman", so "stole is NPR's word" is accurate → https://www.npr.org/2015/03/03/382662772/ever-cheat-at-monopoly-so-did-its-creator-he-stole-the-idea-from-a-woman ; https://www.britannica.com/topic/Landlords-Game
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): patent number 748,626 (matches the patent record as I know it, Jan 1904); square track and Go to Jail corner; 1924 revised patent; Smithsonian headline; 1935 sale.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: none

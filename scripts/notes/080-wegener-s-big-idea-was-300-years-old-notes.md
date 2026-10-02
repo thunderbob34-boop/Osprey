@@ -1,6 +1,6 @@
 # Notes: Wegener's Big Idea Was 300 Years Old
 Research entry: 100-episode-lineup.md — heading "### 80. Wegener's Big Idea Was 300 Years Old"
-Spoken words: 687
+Spoken words: 689
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

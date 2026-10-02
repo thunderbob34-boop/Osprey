@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): the 8,000 to 10,000
 - Searched: Mintz, Sweetness and Power (1985), five uses: medicine, spice-condiment, decorative material, sweetener, preservative → confirmed → https://www.supersummary.com/sweetness-and-power/summary/ ; https://followthethings.com/?p=17465
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): New Guinea domestication; Indian crystal sugar by the start of the common era / possibly ~500 BCE (The Conversation per entry); śarkarā = grit (standard); Greek and Roman knowledge by the 1st century AD (Dioscorides, Pliny); Persian/Arab spread; apothecary, pepper/cinnamon, coughs and fevers (Mintz per entry); Gupta-myth framing.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (medium) the script said Persians and Arabs spread refining "before Europe saw it" (sections 04 and 06) and the cold open said "when sugar first reached Europe", which contradicts its own line that Greek and Roman writers knew it by the 1st century AD (Dioscorides and Pliny describe it as a medicine). Cold open now "first reached medieval Europe"; section 04 now "...had heard about it, and their doctors wrote about it as a medicine, and then Persians and Arabs spread the refining technique west, long before medieval Europe was buying it"; section 06 likewise. Word count 701 to 719.
+- Low items noted, not changed: none

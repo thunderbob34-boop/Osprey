@@ -1,28 +1,28 @@
 # The "First Skyscraper" Was Chosen by Committee
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 855 spoken words. Every verified detail is in, so it runs under the usual length rather than padded.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 875 spoken words. Every verified detail is in, so it runs under the usual length rather than padded.
 - Tone is calm and a little dry. Jenney isn't the villain here, the title was handed out by a committee, and the script says so.
 - Say Jenney as JEN-ee, Tallmadge as TAL-mij, Ditherington as DITH-er-ing-tun, Shrewsbury as SHROHZ-bree, Bessemer as BESS-uh-mer, Phipps as FIPS.
-- Every hedge in here is on purpose. Read "usually called", "from the late 1880s", "mostly iron", "a mix of masonry and iron", "the iron skeleton idea", "that mill isn't tall" and "a working paper" exactly as written. Never call the Home Insurance Building "steel-framed," and never call the Shrewsbury mill an earlier skyscraper.
+- Every hedge in here is on purpose. Read "usually called", "made official", "since the 1890s", "from the late 1880s", "mostly iron", "a mix of masonry and iron", "the iron skeleton idea", "that mill isn't tall" and "a working paper" exactly as written. Never call the Home Insurance Building "steel-framed," and never call the Shrewsbury mill an earlier skyscraper.
 - Visuals: period photos of the Home Insurance Building and its demolition, the Field Building, the Ditherington flax mill, and 120 Broadway's Equitable Building. A text card for the 1931 committee and the 1932 dissent.
 - Good on-screen text moments are 1885, 1931, 46 years, 1932, 1796 to 1797, 1868 to 1870, seven stories, and 120 Broadway.
 
 ## 01 Cold Open
 
-The building that's usually called the world's first skyscraper got that title from a committee, forty-six years after it was finished, and the committee was set up by the people who were tearing it down to build something new. And a group of engineers who watched it come down put out a report disagreeing. And on top of that, there was an iron-framed building in England, and an office building with a passenger elevator in New York, years before this one went up.
+The building that's usually called the world's first skyscraper got that title made official by a committee, forty-six years after it was finished, and the committee was set up by the people who were tearing it down to build something new. And a group of engineers who watched it come down put out a report disagreeing. And on top of that, there was an iron-framed building in England, and an office building with a passenger elevator in New York, years before this one went up.
 
 ## 02 The Famous Version
 
 The building is the Home Insurance Building in Chicago, finished in 1885, designed by William Le Baron Jenney. And if you look up the first skyscraper, that's the name you'll usually get, Home Insurance Building, Chicago, 1885, Jenney.
 
-You'll also sometimes hear that it had a revolutionary steel frame, and that's the part we'll come back to, because it isn't really true. But the reason it's on the list at all, the reason it's the answer people give, goes back to one committee in 1931.
+You'll also sometimes hear that it had a revolutionary steel frame, and that's the part we'll come back to, because it isn't really true. And Jenney and his backers had been pushing the claim that it came first since the 1890s, but the reason it's the answer people give today, the thing that made it official, goes back to one committee in 1931.
 
 ## 03 The Committee
 
 So in 1931, the Home Insurance Building was being torn down, to make way for a new tower called the Field Building. And the Marshall Field estate, which was putting up that new tower, appointed a committee to decide whether the building they were tearing down was the first skyscraper, and the committee was headed by an architect named Thomas Tallmadge.
 
-And the committee ruled for the Home Insurance Building, it picked it over the Tacoma Building, from the late 1880s. So that's forty-six years after the building was finished, and the title came from a committee appointed by the people replacing it, right?
+And the committee ruled for the Home Insurance Building, it picked it over the Tacoma Building, from the late 1880s. So that's forty-six years after the building was finished, and the official title came from a committee appointed by the people replacing it, right?
 
 Now here's the part that matters, a committee of the Western Society of Engineers watched the demolition, and in 1932 they issued a dissenting report. So the engineers who watched the building come apart disagreed with the committee, and they put that in writing.
 
@@ -44,7 +44,7 @@ And then there's the elevator side of it. In New York, the Equitable Life Assura
 
 Now, to be fair to Jenney, his building was a real contender. The definition of a skyscraper is fuzzy, so there's room to argue about it, and the Home Insurance Building did use iron columns and beams, with some steel beams up top, and when the committee looked at it next to the Tacoma Building, it picked Jenney's.
 
-So the fair way to say it is that the Home Insurance Building belongs in this story, and it's a reasonable building to put on the list. What it isn't is the clear, settled first, because the title came from a committee appointed by the developer replacing it, the engineers who watched it come down disagreed, and both the iron frame and the elevator office building came before it.
+So the fair way to say it is that the Home Insurance Building belongs in this story, and it's a reasonable building to put on the list. What it isn't is the clear, settled first, because the official title came from a committee appointed by the developer replacing it, the engineers who watched it come down disagreed, and both the iron frame and the elevator office building came before it.
 
 ## 07 Who Did It First
 

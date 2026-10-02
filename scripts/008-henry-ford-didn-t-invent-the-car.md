@@ -1,11 +1,11 @@
 # Henry Ford Didn't Invent the Car
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 949 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 948 spoken words.
 - Tone is calm and matter-of-fact. Ford gets real credit here, the moving line is his team's, so no gotcha voice.
 - Say Benz as BENTS, Cugnot as koon-YOH, fardier as far-DYAY, Musee des Arts et Metiers as myoo-ZAY dayz AR ay may-TYAY, Siegfried Marcus as ZEEG-freed MAR-kus, Technisches Museum Wien as TEK-nish-es moo-ZAY-um VEEN.
 - Spell it Carl Benz on screen, that's how the UNESCO register spells it.
-- Every hedge in here is on purpose. Read "about every 93 minutes", "about twelve and a half hours", "an early assembly line", "considered", "in 1913" and "disputed" exactly as written. Don't give a month for the chassis line, the sources disagree, and leave out Daimler and Maybach and anything about why the Marcus car's record is muddled, none of that was checked.
+- Every hedge in here is on purpose. Read "about 93 minutes", "about twelve and a half hours", "an early assembly line", "considered", "in 1913" and "disputed" exactly as written. Don't give a month for the chassis line, the sources disagree, and leave out Daimler and Maybach and anything about why the Marcus car's record is muddled, none of that was checked.
 - Visuals: for the meatpacking line, no slaughterhouse imagery. Use text cards or the factory floor.
 - Good on-screen text moments are Jan 29 1886, DRP 37435, 0.75 hp, 1769 and 1770, 1901, 1913, early 1914, 93 minutes vs 12.5 hours, and ca. 1875 vs 1888/89.
 
@@ -37,7 +37,7 @@ And even before that, Chicago meatpackers had moving disassembly lines. That's t
 
 Now, to be fair to Henry Ford, what his team did in 1913 is a really, really big deal. They made the line move, and they phased it in through 1913, starting with smaller parts like magnetos in April, and then the chassis later that year, so instead of the work staying in one place, the line itself carried the work past the workers.
 
-And look at what that did, under the old stationary method, building a Model T took about twelve and a half hours. By early 1914, with the moving line, a Model T came off the line about every 93 minutes. About twelve and a half hours, down to about 93 minutes, right? That's the thing Ford actually did, and it changed how the car got made. So the fair way to say it is that Ford didn't invent the car, and he didn't invent the assembly line, but his team made the line move, and that's a real achievement, and it's his.
+And look at what that did, under the old stationary method, building a Model T took about twelve and a half hours. By early 1914, with the moving line, putting a Model T together took about 93 minutes. About twelve and a half hours, down to about 93 minutes, right? That's the thing Ford actually did, and it changed how the car got made. So the fair way to say it is that Ford didn't invent the car, and he didn't invent the assembly line, but his team made the line move, and that's a real achievement, and it's his.
 
 ## 07 One Disputed Name
 
@@ -45,4 +45,4 @@ Oh, one more thing, and I'm putting this in as a disputed side note and nothing 
 
 ## 08 Who Was First
 
-So here's where it lands. Henry Ford gets the credit for the car and for the assembly line, but on January 29th, 1886, Carl Benz applied for the patent that UNESCO's register calls the automobile's birth certificate, when Ford was twenty-two. Nicolas-Joseph Cugnot had a steam wagon moving under its own power in 1769. Ransom Olds was building cars on a progressive line by 1901, and Chicago meatpackers had moving disassembly lines before that. And what Ford's team did in 1913 was make the line move, and by early 1914 a Model T came off it about every 93 minutes. Somebody did it first, and for the car and the line, it was somebody other than Henry Ford.
+So here's where it lands. Henry Ford gets the credit for the car and for the assembly line, but on January 29th, 1886, Carl Benz applied for the patent that UNESCO's register calls the automobile's birth certificate, when Ford was twenty-two. Nicolas-Joseph Cugnot had a steam wagon moving under its own power in 1769. Ransom Olds was building cars on a progressive line by 1901, and Chicago meatpackers had moving disassembly lines before that. And what Ford's team did in 1913 was make the line move, and by early 1914 putting a Model T together on it took about 93 minutes. Somebody did it first, and for the car and the line, it was somebody other than Henry Ford.

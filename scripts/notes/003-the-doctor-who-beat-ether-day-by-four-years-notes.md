@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): the "screams were a
 - Searched: none (the Doctors' Day hook was already source-checked above with UTMB and congress.gov; the search budget went to riskier claims in other scripts).
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): Long 30 Mar 1842, James Venable, published 1849; Morton 16 Oct 1846, Ether Dome; Hanaoka Seishu 13 Oct 1804, Kan Aiya, tsusensan/mafutsusan; Magendie quote and the "erroneous yet pervasive Western view" quote (taken from the PubMed/PMC reviews named in the research); 38- and 42-year gaps (arithmetic correct). No banned words or dashes.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: William E. Clarke's ether tooth extraction in Rochester (January 1842) is sometimes put ahead of Long; the script never calls Long the first ever and names Hanaoka as earlier, so it stands, but a pedant may raise Clarke in comments.

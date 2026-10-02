@@ -35,3 +35,7 @@ Left out on purpose (unverified / keep off air in research): the banner's home i
 - Searched: Britannica proto-gun channeling gunpowder through a cylinder; mid-13th-century bamboo tubes propelling projectiles → confirmed → https://www.britannica.com/summary/gunpowder
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): 1132 siege of De'an (standard, Needham/Andrade); Andrade's "true gun" definition (Princeton 2016); Wuwei cannon 1214 to 1227 and Chen Bingying's 1259 argument. Prior concern stands: banner, Heilongjiang and Xanadu details still rest on Wikipedia-tier sources; consistent with Needham/Andrade as I know them.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "the next time fire lances show up is 1132" reads as if no mention exists in between; 1132 is the first recorded battlefield use. Title is defensible (guns as a technology are consensus Chinese) but still stronger than the body's hedges.

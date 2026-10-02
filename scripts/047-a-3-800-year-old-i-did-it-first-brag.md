@@ -1,7 +1,7 @@
 # A 3,800-Year-Old "I Did It First" Brag
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 776 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 852 spoken words.
 - Tone is light and a little amused. The king's brag is the fun of it, so let the quote land plainly, no voice for it.
 - Say Zimri-Lim as ZIM-ree LIM, Mari as MAH-ree, Terqa as TER-kah, Kibri-Dagan as KIB-ree DAH-gahn, Euphrates as yoo-FRAY-teez, cuneiform as kyoo-NAY-ih-form, Cullen as KULL-en, Gorrie as GOR-ee, Yasmah-Addu as YAHS-mah AH-doo.
 - Every hedge in here is on purpose. Read "about 3,800 years ago", "around 1780 BC", "the king's own boast", "only about the Euphrates", "on his stretch of the river", "as far as what I found for this video", "under one common way of dating it", "usually dated to 1748" and "designed it but never built it" exactly as written. Never say Zimri-Lim was Sumerian, and never say this was definitely the first icehouse in the world. Always keep "on the bank of the Euphrates" with the brag, the tablet does not claim the whole world.

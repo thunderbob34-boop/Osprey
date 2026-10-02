@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): the Niépce-Daguerr
 - Searched: View from the Window at Le Gras, pewter plate with bitumen of Judea, at least eight hours, held by the Harry Ransom Center, 1826/1827 → confirmed (HRC says 1826; other sources 1827 or "1826 or 1827", so the script's hedge is right) → https://www.hrc.utexas.edu/niepce-heliograph/ ; https://www.britannica.com/topic/12-Key-Dates-in-the-History-of-Photography
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): Daguerre 1839 announcement; Britannica "first permanent photograph" wording; earlier lost Niépce attempts; Fox Talbot as a parallel inventor. (Side note: HRC says the plate is on permanent display in its lobby, so "you can go and look at it" would now be supported if Gus wants it back.)
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: newer research suggests Le Gras exposure may have run for days, but "at least eight hours" covers it; HRC says the plate is on display (optional to restore "go and see it").

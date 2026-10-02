@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): Leif Erikson's name
 - Searched: Kuitems et al. 2021, Nature: AD 1021, three trees converge on the same year, 993 cosmic-ray event, and the quote "the only secure calendar date for the presence of Europeans across the Atlantic before the voyages of Columbus" → confirmed verbatim → https://www.nature.com/articles/s41586-021-03972-8 ; https://www.rug.nl/research/centre-for-isotope-research/echoes/media/news/2021/europeans-in-the-americas-1000-years-ago?lang=en
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): coverage by Science, Nat Geo and Smithsonian; metal-blade cut marks; "may have been older / short-lived" (already hedged). The 471 vs "about four hundred and seventy" wording stays as flagged.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "the journal Nature put it this way" and "Nature calls it": the quote is the authors' (Kuitems et al.) in a paper published in Nature, not the journal's own voice; could read "the paper in Nature". "About four hundred and seventy" vs 471 already flagged.

@@ -36,3 +36,7 @@ Left out on purpose (unverified / keep off air in research): the NYT 27 March 20
 - Searched: Charles Cros pli cacheté April 30, 1877, paléophone, never built, lacked resources, weeks before Edison → confirmed → https://www.nps.gov/edis/learn/historyculture/origins-of-sound-recording-charles-cros.htm
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Scott a Paris typesetter; 1857 patent and the March 24/25 wrinkle; April 9, 1860 date; Haber and Cornell at LBNL; "roughly twenty seconds"; Edison 1877.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: the 2008 version is often described as a young girl rather than a woman; fine as is.

@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): the manifest hook's
 - Searched: Ibn al-Nafis manuscript found 1924 by al-Tatawi in Berlin; Servetus's Christianismi Restitutio (1553), burned at Geneva, three copies survive → confirmed → https://pmc.ncbi.nlm.nih.gov/articles/PMC6077055/ , https://pmc.ncbi.nlm.nih.gov/articles/PMC2612469/
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): birth around 1210 to 1213, death 1288; ~1242 commentary date; Britannica's "first accurate description in Europe" wording; Harvey 1628.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Realdo Colombo (1559) also described the pulmonary transit before Harvey, and Harvey cited him; the script says "a second man", not "the only other", so not wrong, but a commenter may mention him. Andrea Alpago's 1547 Latin translations of some Ibn al-Nafis work are part of the "still debated" transmission question already hedged.

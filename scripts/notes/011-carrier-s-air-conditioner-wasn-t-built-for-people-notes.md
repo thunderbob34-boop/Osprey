@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): "wrinkling" paper (
 - Searched: none (search budget ran out before this script).
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): Carrier 17 July 1902 at Sackett-Wilhelms (already attributed to Carrier's company history); humidity not wrinkling; Gorrie by about 1841, ice pans; patent petition 1848, US Patent 8,080 in 1851 (matches standard record, May 1851); NMAH patent model; chief backer died 1851; died 1855 at 51 (born Oct 1803, died June 1855, correct); Tudor suspicion (already "Gorrie believed"); Statuary Hall statue; Stuart Cramer 1906. Worth one search before recording if budget allows: the "first US patent for mechanical refrigeration" superlative, and whether the Gorrie statue currently stands in the Statuary Hall room itself or elsewhere in the Capitol as part of the National Statuary Hall Collection.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Gorrie's birth year is split between 1802 and 1803 (most sources, incl. Wikipedia and Find a Grave, say Oct 3, 1803, giving "fifty-one"); keep, but a commenter may say 52. Close is literally accurate but the "Somebody did it first" frame may make viewers hear Gorrie as the first ever to cool a room for people (Drebbel cooled a hall at Westminster in 1620); the script never says so. Search used: 1 (Gorrie birth year).

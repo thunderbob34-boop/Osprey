@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): the Duyfken's first
 - Searched: Hartog 25 Oct 1616, de Vlamingh 1697 found it "half buried in sand", 81 years, Rijksmuseum → confirmed; described as "the oldest European artefact recovered from Australian shores" / "earliest surviving Western object in Australia" → https://museum.wa.gov.au/explore/dirk-hartog/hartogs-plate ; https://www.rijksmuseum.nl/en/research/our-research/history/1600-1700/hartog-plate
 - Fixes: (1) "landed at the Pennefather River" → "landed at what's generally thought to be the Pennefather River" (and "probably" in the close and on-screen line), per ANMM; (2) "more than three hundred kilometers" → "about three hundred kilometers" (ANMM ~300 km; "more than" overstated it); (3) "the oldest European object ever left in Australia" → "the oldest known European object from Australia" ("ever left" is unknowable; sources say oldest recovered/surviving). Word count 876 → 880.
 - Not search-verified (checked against research/knowledge only): Madjedbebe 65,000 years (Clarkson et al., Nature 2017) and the 50,000-year floor; Cook 1770 charting the east coast and claiming it for Britain; Portuguese/Makassan theories unproven; arithmetic 164/154/81 rechecked.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "at least the third group" is fine but Tasman, Dampier etc. also preceded Cook, so it's an undercount, not an error; Hartog plate was nailed to a post (script says "nailed it up", fine).

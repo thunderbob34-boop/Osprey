@@ -1,7 +1,7 @@
 # The Parachute Before the Parachutist
 
 READING NOTES
-- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 784 spoken words. The research is short, so this one runs short on purpose.
+- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 816 spoken words. The research is short, so this one runs short on purpose.
 - Tone is calm and a little amused at the 2000 jump, but say the cutaway plainly, it was a safety call, not a failure.
 - Say Garnerin as gar-neh-RAN, Parc Monceau as park mon-SO, Vrančić as VRAN-chich, Veranzio as veh-RAN-tsee-oh, Machinae Novae as MAH-kee-nye NO-vye, Homo Volans as HO-mo VO-lahns.
 - Every hedge in here is on purpose. Read "around 1485", "first recorded", "about 3,200 feet", "early 1600s", "a drawing", "about 2,000 feet", "might have crushed him", "partly", "as far as the record goes", "as far as anyone knows", "the oldest parachute drawing we know of", "about fifteen years" and "nobody knows who drew it" exactly as written. Never say Vrančić jumped from a tower, not even as a legend, and never say Leonardo's design was the first one used.
@@ -10,13 +10,13 @@ READING NOTES
 
 ## 01 Cold Open
 
-About five hundred years after Leonardo da Vinci drew a parachute, a man finally jumped with it, and it worked. The man who gets the credit for the parachute is André-Jacques Garnerin, who made the first recorded parachute jump in 1797, and that credit is fair, but the parachute was on paper for about three hundred years before he jumped, in sketches from Renaissance Italy, the famous one by Leonardo, and then in a book by a Croatian-Venetian bishop.
+About five hundred years after Leonardo da Vinci drew a parachute, a man finally jumped with it, and it worked. The man who gets the credit for the parachute is André-Jacques Garnerin, who made the first recorded parachute jump from a balloon in 1797, and that credit is fair, but the parachute was on paper for about three hundred years before he jumped, in sketches from Renaissance Italy, the famous one by Leonardo, and then in a book by a Croatian-Venetian bishop.
 
 ## 02 The Famous Version
 
-So here's the version most people know, if they know one. On October 22nd, 1797, André-Jacques Garnerin went up over Parc Monceau in Paris in a hydrogen balloon, and at about 3,200 feet he cut himself loose from the balloon and came down under a parachute. That's the first recorded parachute descent, and Britannica and the Smithsonian both back that up.
+So here's the version most people know, if they know one. On October 22nd, 1797, André-Jacques Garnerin went up over Parc Monceau in Paris in a hydrogen balloon, and at about 3,200 feet he cut himself loose from the balloon and came down under a parachute. That's the first recorded parachute descent from a balloon, and Britannica and the Smithsonian both back that up.
 
-And that's a real first, nobody before him has a documented jump, so when people say Garnerin made the first parachute jump, that's right. But the parachute itself, the idea and the drawing of it, is a lot older than 1797.
+And that's a real first, there are stories of earlier jumps off towers, but nobody before him has a documented jump like that, cutting loose high in the sky, so when people say Garnerin made the first parachute jump from the sky, that's right. But the parachute itself, the idea and the drawing of it, is a lot older than 1797.
 
 ## 03 Leonardo's Pyramid
 
@@ -40,4 +40,4 @@ So the fair way to say it is that Leonardo's parachute was tested, and it flew, 
 
 ## 06 Who Drew It First
 
-So the plain version is this. An unnamed Italian drew a cone-shaped parachute in the 1470s, Leonardo da Vinci sketched a pyramid-shaped parachute around 1485, Faust Vrančić published his Homo Volans engraving of a framed square parachute in the early 1600s, and André-Jacques Garnerin made the first recorded parachute jump over Paris on October 22nd, 1797. And in 2000, Adrian Nicholas built Leonardo's version, rode it down from 10,000 feet to about 2,000, and it flew. Garnerin was the first to jump, but somebody did it first on paper, and the famous one is Leonardo, even if an Italian nobody can name beat him to it by about fifteen years.
+So the plain version is this. An unnamed Italian drew a cone-shaped parachute in the 1470s, Leonardo da Vinci sketched a pyramid-shaped parachute around 1485, Faust Vrančić published his Homo Volans engraving of a framed square parachute in the early 1600s, and André-Jacques Garnerin made the first recorded parachute jump from a balloon, over Paris, on October 22nd, 1797. And in 2000, Adrian Nicholas built Leonardo's version, rode it down from 10,000 feet to about 2,000, and it flew. Garnerin was the first to jump from the sky, but somebody did it first on paper, and the famous one is Leonardo, even if an Italian nobody can name beat him to it by about fifteen years.

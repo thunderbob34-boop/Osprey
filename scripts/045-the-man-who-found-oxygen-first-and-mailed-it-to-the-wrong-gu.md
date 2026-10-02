@@ -1,7 +1,7 @@
 # The Man Who Found Oxygen First and Mailed It to the Wrong Guy
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 794 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 799 spoken words.
 - Tone is calm and a little wry, but no villain. Lavoisier did not steal anything as far as anyone can show, so keep the letter section plain and let the silence do the work.
 - Say Scheele as SHAY-luh, Lavoisier as luh-VWAH-zee-ay, Priestley as PREEST-lee, dephlogisticated as dee-flo-JIS-tih-kay-tid.
 - Every hedge in here is on purpose. Read "around 1771 to 1772", "in print by 1775", "as far as anyone knows", "there's no record he replied or credited it", "we don't know" and "usually shared" exactly as written. Never say Lavoisier stole it or copied it.
@@ -15,7 +15,7 @@ The man who discovered oxygen first lost the credit because his book was slow to
 
 ## 02 The Famous Version
 
-If you learned who discovered oxygen in school, you probably learned one of two names. The first is Joseph Priestley, who made the gas on August 1st, 1774, and called it dephlogisticated air. Back then chemists thought burning things gave off a substance they called phlogiston, so that name made sense to them at the time. And Priestley holds the official credit, the American Chemical Society named his discovery of oxygen a National Historic Chemical Landmark.
+If you learned who discovered oxygen in school, you probably learned one of two names. The first is Joseph Priestley, who made the gas on August 1st, 1774, and called it dephlogisticated air. Back then chemists thought burning things gave off a substance they called phlogiston, so that name made sense to them at the time. And Priestley is the name that usually gets the credit, the American Chemical Society even named his discovery of oxygen a National Historic Chemical Landmark.
 
 The second name is Lavoisier, who's the one who named it oxygen and explained what it actually was. So between the two of them, Priestley made it and published it, and Lavoisier named it and explained it, and that's the story that stuck. But neither of them was the first to make it.
 

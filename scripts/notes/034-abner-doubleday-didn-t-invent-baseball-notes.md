@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): nothing in the entr
 - Searched: Graves 5 years old in 1839; Doubleday at West Point; Mills letter 30 Dec 1907 → confirmed → https://sabr.org/bioproj/person/abner-doubleday/ , https://sabr.org/bioproj/person/a-g-mills/
 - Fixes: (1) Cold open "the oldest known mention of it in America is a town law" → "one of the oldest known mentions". (2) Section 05 "That's the oldest known mention of baseball in America" → names the 1786 Princeton diary as the Library of Congress's earliest and calls Pittsfield "one of the oldest". Reading notes: hedge list and on-screen list updated, word count 877 → 917. Note: the manifest hook in script-final.json doesn't say "oldest", so no hook change needed.
 - Not search-verified (checked against research/knowledge only): Newbery 1744 Pocket-Book verse and woodcut; Bray diary, Easter Monday 31 March 1755 (Easter 1755 was 30 March, consistent); Pittsfield 80 yards; Hall of Fame "creation myth" wording; Cartwright contested.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "rounders and similar games": some historians (e.g. David Block) treat rounders as a sibling of English base-ball rather than its parent; already hedged by "similar" and "historians have to piece together". George Ewing's 1778 Valley Forge "base" letter is sometimes cited as an earlier American mention, though it may mean prisoner's base; script attributes the 1786 earliest to the Library of Congress.

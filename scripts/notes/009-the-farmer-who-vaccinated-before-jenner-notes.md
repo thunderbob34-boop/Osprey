@@ -30,3 +30,7 @@ Left out on purpose: the 1805 recognition of Jesty by the Original Vaccine Pock 
 - Searched: CDC EID on Ming variolation, "no later than the Chenghua-Longqing period (1465-1572)" → confirmed, matches "by sometime between 1465 and 1572" → https://wwwnc.cdc.gov/eid/article/32/10/26-0729_article
 - Fixes: 1. The close said flatly "Edward Jenner is the father of vaccination", which states as fact the title the episode argues against; changed to "Edward Jenner is called the father of vaccination". Word count 933 to 934; hedge list updated.
 - Not search-verified (checked against research/knowledge only): Jenner 14 May 1796, Nelmes, Phipps age 8; Phipps' cottage; Jesty 1774, Yetminster, wife and two sons; The Lancet title "Benjamin Jesty: the first vaccinator revealed" (URL in research); China and India by the 1500s.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "the knowledge didn't come from a European doctor": Mather first heard of it from Onesimus, but he also read the Timonius and Pylarini reports from Constantinople in the Royal Society's Philosophical Transactions before 1721, so Onesimus was his first source, not his only one.

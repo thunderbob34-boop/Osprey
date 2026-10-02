@@ -28,3 +28,7 @@ Left out on purpose (unverified / keep off air in research): the journal name of
 - Searched: Rocco 1858, Usi e costumi vol. 2 (de Bourcard), thin slices of mozzarella, basil, sometimes tomato → confirmed, Italian secondary only → https://angeloforgione.com/2022/03/16/inesattezze_pizza_pomodoro_mozzarella/
 - Fixes: 1. Section 06 "That's genuinely unknown" changed to "That's really unknown" (banned word). Word count unchanged (932).
 - Not search-verified (checked against research/knowledge only): nothing else of substance. The research's pre-air flag still stands: get the published Nowak article and the 1858 text in hand.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Letter analysis still rests on Nowak plus a secondary summary (pre-air flag stands, no change needed to the wording).

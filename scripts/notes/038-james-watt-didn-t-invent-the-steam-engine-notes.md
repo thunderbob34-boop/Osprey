@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): Thomas Savery's 169
 - Searched: Britannica: Watt saw the waste in 1764, conceived the separate condenser in 1765, fuel costs dropped by about 75 percent → confirmed → https://www.britannica.com/technology/separate-condenser
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Newcomen engine near Dudley Castle 1712 (ASME); Watt born 1736; 1769 patent; ASME "first successful Newcomen engine".
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Thomas Savery's 1698 steam pump predates Newcomen; the script never calls Newcomen the absolute first, and Savery was deliberately left out (not re-verified), so a commenter may raise it.

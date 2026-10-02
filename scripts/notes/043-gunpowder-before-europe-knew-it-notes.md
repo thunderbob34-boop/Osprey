@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): Roger Bacon's recip
 - Searched: Wujing Zongyao 1044 earliest known formula; mid-9th-century text warning that heating saltpeter, sulfur (and other ingredients) with honey burned hands and faces and burned a house down → confirmed → https://opentextbooks.clemson.edu/sciencetechnologyandsociety/chapter/gunpowder-in-medieval-china/ ; https://www.history.com/articles/firearms ; https://www.britannica.com/summary/gunpowder
 - Fixes: none. (One search snippet calls the text's author Buddhist; the standard attribution, Needham's Zhenyuan miaodao yaolüe, is a Daoist text, so "Daoist" stands.)
 - Not search-verified (checked against research/knowledge only): 75 : 15 : 10 composition; late Tang 9th-century dating and "around 850" (History.com per entry); fireworks and signals as early uses (Britannica per entry). Title/Europe concern from the first review still stands (not a fact error).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: the 9th-century warning text's mix was sulfur, realgar and saltpeter heated with honey, and it burned hands and faces; the script simplifies to saltpeter and sulfur; title's Europe angle still not argued in the body (title itself is true).

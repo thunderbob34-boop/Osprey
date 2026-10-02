@@ -34,3 +34,7 @@ Left out on purpose (unverified / keep off air in research): calling Red's flatl
 - Searched: Quisisana built it, Swiss-designed and German-made, June 9 opening → supported (secondary summaries of the Hardart/Diehl book) → https://www.inquirer.com/history/horn-hardart-automat-opening-philadelphia-20250613.html ; https://en.wikipedia.org/wiki/Quisisana
 - Fixes: 1. "that was the first drive-through with a two-way speaker" changed to "that's usually credited as the first drive-through with a two-way speaker" (flat superlative resting on History.com plus company lore; not search-verified here). Word count 1,022 to 1,024; hedge list updated.
 - Not search-verified (checked against research/knowledge only; search budget ran out): In-N-Out 1948 (now hedged); Red's 1947; Pig Stand 1921 and 1931 (already hedged); Yoshinoya (already company's account); McDonald's 1940/1948/1955/1961; Pompeii thermopolium, Nereid on a seahorse, 2019/Dec 2020, about 80.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Pig Stand 1931 line says it "tried a drive-thru window" and then that food may not have been handed through a window; slightly self-undercutting but hedged with "reportedly" and "might not count". Automat opening date given elsewhere as June 12, 1902; already hedged as "the opening date usually given".

@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): "a campfire on a be
 - Searched: Corning "about 4,000 years ago" in Mesopotamia → confirmed → https://whatson.cmog.org/exhibitions-galleries/origins-glassmaking ; beads from the third millennium BC, core-formed and cast vessels in Egypt and Mesopotamia by the 15th century BC → confirmed → https://www.metmuseum.org/toah/hd/rgls/hd_rgls.htm , https://www.smithsonianmag.com/science-nature/a-brief-scientific-history-of-glass-180979117/
 - Fixes: (1) 02 "in Phoenicia, which is in what's now Lebanon or Israel" → "and that river is in what's now northern Israel" (Corning identifies the Belus as the Na'aman). Word count 709 → 710.
 - Not search-verified (checked against research/knowledge only): Natural History Book 36; "merchants" wording; the non-peer-reviewed plausibility argument.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: none
