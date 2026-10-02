@@ -1,7 +1,7 @@
 # Hydrox Came Before Oreo
 
 READING NOTES
-- Runtime is about 3 and a half minutes at a relaxed pace, roughly 507 spoken words.
+- Runtime is about 3 and a half minutes at a relaxed pace, roughly 499 spoken words.
 - Tone is light and matter-of-fact. This one is told with dates only, so let the dates carry it and do not add any attitude about Oreo.
 - Say Hydrox as HY-drox, Nabisco as NAB-iss-co, KCUR as K-C-U-R, Loose-Wiles as LOOSE-WYLZ, Hoboken as HO-bo-ken.
 - Every hedge in here is on purpose. Read "widely treated as", "as far as these sources go", "came four years later", "was actually introduced first, in 1908", "according to Knowledge at Wharton", "sources differ", "1999 or 2003" and "according to NPR" exactly as written. Never call the Oreo a copy, a knockoff or an imitation, because that is an inference the research does not support.
@@ -30,7 +30,7 @@ Now, here's the part where I have to be careful. What the sources give us is the
 
 ## 06 What Happened to Hydrox
 
-Hydrox did not stay on the shelves. It ended up owned by Kellogg's, and then it went out of production, and sources differ on when, some say 1999 and some say 2003, so I'll say 1999 or 2003 and leave it there. Then in 2015, according to NPR, a company called Leaf Brands brought Hydrox back, which was more than a century after it first came out.
+Hydrox did not stay on the shelves. It went out of production, and sources differ on when, some say 1999 and some say 2003, so I'll say 1999 or 2003 and leave it there. Then in 2015, according to NPR, a company called Leaf Brands brought Hydrox back, which was more than a century after it first came out.
 
 ## 07 Close
 

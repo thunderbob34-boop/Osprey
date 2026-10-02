@@ -1,6 +1,6 @@
 # Notes: Hydrox Came Before Oreo
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 102."
-Spoken words: 507
+Spoken words: 499
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): "knockoff", "copy" 
 - Cadence fixes: 4. Removed the "we'll get to why" tease in the cold open, joined the choppy 2015 revival paragraph into section 06, trimmed the Close into one breath, softened the section 05 lecture.
 - Format fixes: word count corrected to 507; runtime line corrected to 3 and a half minutes; hedge list extended; Hydrox March-1912 grocer detail attributed to Wharton on air.
 - Remaining concerns for Gus: "Hydrox ended up with Kellogg's" and the 1999 or 2003 range rest on KCUR plus unnamed extracts, so keep the "sources differ" hedge as read.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Section 06 said Hydrox "ended up owned by Kellogg's, and then it went out of production" with a 1999 or 2003 range; the chronology breaks if 1999 is right (Kellogg's did not own it then) and the Kellogg's ownership rested on KCUR plus unnamed extracts. Cut the Kellogg's clause; the line now says only that it went out of production, with the 1999 or 2003 hedge. Spoken words now 499 (notes count had been stale).
+- Low items noted, not changed: the Hoboken grocer and March 6 detail rests on Wharton only but is attributed on air; "Sunshine" 1947 rename is KC Public Library only but attributed.

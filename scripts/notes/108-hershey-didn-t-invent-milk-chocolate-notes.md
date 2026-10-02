@@ -1,6 +1,6 @@
 # Notes: Hershey Didn't Invent Milk Chocolate
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 108."
-Spoken words: 660
+Spoken words: 662
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): Peter as a former c
 - Cadence fixes: 4. Rewrote the "help came from next door" setup, merged choppy lines in 04 and 06, folded 07 into one breath, cut "I'd say both of those count".
 - Format fixes: word count corrected 796 to 660; reading notes hedge list matched to script (removed "by some Swiss accounts"). No dashes, no banned words.
 - Remaining concerns for Gus: script is 660 words, under the 700 floor, because the entry is thin and the cut material was unsupported; not padded.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: Section 03 said flatly "The man who got there first was Daniel Peter"; earlier milk-and-chocolate drinks and mixtures existed, so it now reads "The man usually credited with getting there first". Spoken words now 662.
+- Low items noted, not changed: "trial and error that took years" (no number given, consistent with the reading note); Peter's 1911 merger with Cailler and Kohler is undated on air.

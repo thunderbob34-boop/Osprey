@@ -1,6 +1,6 @@
 # Notes: Fulton Wasn't First: John Fitch's Steamboat Ran in 1790
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 111."
-Spoken words: 752
+Spoken words: 756
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): "stole"; any claim 
 - Cadence fixes: 5. Rhetorical "So why does Fulton get the credit?" turned into a statement; joined the "That's the claim" fragments in 02; joined short sentences in 03 Rumsey paragraph; removed the crafted last line of the cold open ("But the steamboat running on a timetable was Fitch's..."); cut the sign-off button.
 - Format fixes: reading notes word count updated to 752, on-screen date order fixed (March 1787 before Aug 1787). No em/en dashes, no banned words.
 - Remaining concerns for Gus: Section 05 (the 1798 New York act) rests chiefly on one primary legal text (Gibbons v. Ogden via LOC) plus Britannica for the Livingston monopoly; the entry says it may be dropped under a strict two-source rule. It is stated flat with no motive. Cut the whole section if you want strict two-source.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: Section 05 gave the 1798 New York act's stated reason as Fitch not "making the necessary improvements". The Gibbons v. Ogden record (and the act's text, Laws of 1798 ch. 55) says Fitch was dead or had withdrawn "without having made any attempt" to use his privilege. Changed to "without having made any attempt to use his privilege". Spoken words now 756. Britannica's "first profitable venture in steam navigation" quote and its paying-passengers line were re-verified.
+- Low items noted, not changed: the 32-hour maiden run to Albany is described as carrying paying passengers (Britannica says so, though regular fare service began in early September 1807); Fitch's 1790 service is attributed to Britannica and NPS only.

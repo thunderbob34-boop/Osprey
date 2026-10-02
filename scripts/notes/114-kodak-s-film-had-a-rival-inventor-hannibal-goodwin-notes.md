@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): any settlement amou
 - Cadence fixes: 3. Joined the choppy "That question went to court" opener; merged the section 02 closing fragment; folded the old section 05 hedge into the plain version.
 - Format fixes: sections reduced from 6 to 5; reading notes updated (count 568, Ansco pronunciation, "as the opinion describes it" and "we won't guess" removed from hedge list, 1910 and 1913 date cards adjusted). Companion table rows for the removed Ansco, decree date and merit-quote lines no longer apply. No em/en dashes, no banned words.
 - Remaining concerns for Gus: Script is 568 words, under the 700 floor, because the single-source and conflicting material was removed rather than padded. The 1914 holding and claim numbers rest on the CourtListener opinion (an extract).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "Eastman reached the market with his own patents" and Reichenbach's 1889 process rest on the entry's hedge line only, stated softly; the claim numbers and 1913 decree rest on the CourtListener opinion, a primary record.

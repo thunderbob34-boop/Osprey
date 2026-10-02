@@ -1,7 +1,7 @@
 # Fulton Wasn't First: John Fitch's Steamboat Ran in 1790
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 752 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 756 spoken words.
 - Tone is calm and matter-of-fact, and fair to Fulton throughout. This is not a story about a thief, so keep the voice level.
 - Say Clermont as KLAIR-mont, Rumsey as RUM-zee, Bardstown as BARDZ-town, Livingston as LIV-ing-stun.
 - Every hedge in here is on purpose. Read "first commercially successful", "advertised, regular passenger service", "the first profitable venture in steam navigation", "was unable to make it a commercial success", "short-lived", "we don't know" and "on the suggestion that" exactly as written, because they are what keeps the channel credible.
@@ -35,7 +35,7 @@ And I'm not saying Fulton copied Fitch, because nothing we found says that, and 
 
 ## 05 New York
 
-There's one more piece of this, and it's a legal one. In Gibbons against Ogden, the Supreme Court's record says that in March 1798 New York passed an act on the suggestion that Fitch was dead or had left the state without making the necessary improvements, and that was a few months before Fitch actually died. The exclusive right in New York later went to Livingston and Fulton, and I'm not putting a motive on any of that, it's just what the record says.
+There's one more piece of this, and it's a legal one. In Gibbons against Ogden, the Supreme Court's record says that in March 1798 New York passed an act on the suggestion that Fitch was dead or had left the state without having made any attempt to use his privilege, and that was a few months before Fitch actually died. The exclusive right in New York later went to Livingston and Fulton, and I'm not putting a motive on any of that, it's just what the record says.
 
 ## 06 The Plain Version
 

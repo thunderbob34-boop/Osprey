@@ -1,7 +1,7 @@
 # Hershey Didn't Invent Milk Chocolate
 
 READING NOTES
-- Runtime is about 4 minutes at a relaxed pace, roughly 660 spoken words.
+- Runtime is about 4 minutes at a relaxed pace, roughly 662 spoken words.
 - Tone is friendly and matter-of-fact. The twist is that the company itself says it, so there is no gotcha, and Hershey gets full credit for what he did do.
 - Say Hershey as HER-shee, Vevey as vuh-VAY, Daniel Peter as DAN-yul PAY-ter, Henri Nestlé as on-REE NESS-lay, Cailler as kie-YAY.
 - Every hedge in here is on purpose. Read "around 1875 or 1876", "the mid-1870s", "added milk", "the Swiss news site swissinfo and Nestlé's own history" and "first to make milk chocolate from fresh milk" exactly as written, because they are what keeps the channel credible.
@@ -18,7 +18,7 @@ The popular belief is that Hershey created milk chocolate and, in a way, made Am
 
 ## 03 Daniel Peter
 
-The man who got there first was Daniel Peter, a chocolate maker in Vevey, Switzerland. He added milk to chocolate and sold it in the mid-1870s, and that's about as exact as we can honestly get, because Britannica and the Hershey archive both say 1876 and Swiss sources say 1875, so around 1875 or 1876.
+The man usually credited with getting there first was Daniel Peter, a chocolate maker in Vevey, Switzerland. He added milk to chocolate and sold it in the mid-1870s, and that's about as exact as we can honestly get, because Britannica and the Hershey archive both say 1876 and Swiss sources say 1875, so around 1875 or 1876.
 
 Now, there are a couple of details that sources disagree on, like what kind of milk Peter used, so we're just going to say he added milk, and leave it there. The Hershey archive adds that in Switzerland milk chocolate was made as a luxury item in 1876.
 

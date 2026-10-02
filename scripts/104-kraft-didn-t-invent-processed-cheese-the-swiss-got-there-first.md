@@ -14,7 +14,7 @@ Ask where processed cheese came from and a lot of people will say Kraft, and Jam
 
 ## 02 Kraft's Patent
 
-According to Britannica and the Harvard Business School's profile of him, Kraft started a wholesale cheese-delivery business in Chicago in 1903. He filed his patent on March 25th, 1916, and the title was Process of sterilizing cheese and an improved product produced by such process. What it describes is heat plus continuous stirring of Cheddar cheese, and the goal was to be able to keep the cheese indefinitely. That was the first US patent for the process, so Kraft really does have that, and nothing I say about the Swiss takes it away from him.
+According to Britannica and the Harvard Business School's profile of him, Kraft started a wholesale cheese-delivery business in Chicago in 1903. He filed his patent on March 25th, 1916, and the title was Process of sterilizing cheese and an improved product produced by such process. What it describes is heat plus continuous stirring of Cheddar cheese, and the goal was to be able to keep the cheese indefinitely. That was the first US patent for the process, according to Britannica, so Kraft really does have that, and nothing I say about the Swiss takes it away from him.
 
 ## 03 Kraft's Customers
 
@@ -30,4 +30,4 @@ Now here's the part that matters. The Swiss recipe used sodium citrate to keep t
 
 ## 06 Close
 
-So the plain version is, two men in Switzerland, Gerber and Stettler, melted Emmentaler with sodium citrate around 1911, and Kraft, a Chicago cheese salesman, filed the first US patent for a processed cheese process in March of 1916, using heat and stirring and Cheddar. Somebody did it first, and Kraft arrived at it by himself, as far as the literature says.
+So the plain version is, two men in Switzerland, Gerber and Stettler, melted Emmentaler with sodium citrate around 1911, and Kraft, a Chicago cheese salesman, filed a US patent for a processed cheese process in March of 1916, using heat and stirring and Cheddar. Somebody did it first, and Kraft arrived at it by himself, as far as the literature says.

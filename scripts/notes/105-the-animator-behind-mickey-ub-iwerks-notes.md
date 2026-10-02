@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): "chief animator" (n
 - Cadence fixes: 4. Replaced the crafted closing line about "the half a lot of people haven't heard of" with a flat summary; made the cold-open concession a plain "to be fair"; joined the 700-drawings paragraph into one breath; reduced the Iwerks-later recap to one sentence.
 - Format fixes: word count corrected to 616; runtime line corrected to 4 minutes.
 - Remaining concerns for Gus: the 1930, 1936 and 1940 facts rest on Britannica Kids and the Walt Disney Family Museum; the script says "Britannica" for brevity. "Somebody did it first" is not said in this one on purpose, since the Smithsonian and Britannica both already name Iwerks.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Plane Crazy May 15 1928 was a test screening (general release 1929), and the script's "first appeared" could be read as a public release before Steamboat Willie; attributed to Britannica and the script never calls it a release. "Britannica has them founding" Laugh-O-gram is Britannica's own wording (verified); most Disney histories say Walt founded it and Iwerks joined. Mintz "took the character away" omits that Universal held the rights; attributed to the sources.
