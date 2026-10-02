@@ -24,7 +24,7 @@ One more thing about that spring, because it matters to how big his landing was.
 
 ## 04 The Navy's NC-4
 
-The first aircraft to fly across the Atlantic at all, with stops, was the US Navy's NC-4 flying boat. Three Navy flying boats, NC-1, NC-3 and NC-4, left Rockaway, New York, in May of 1919, and NC-4 left on May 8th, and it went across by stages, by way of Nova Scotia, Newfoundland, the Azores, and Lisbon, and on to England. Its crew was six men, with Lieutenant Commander Albert Read as commanding officer and navigator and Lieutenant Elmer Stone of the Coast Guard as pilot.
+The first aircraft to fly across the Atlantic at all, with stops, was the US Navy's NC-4 flying boat. Three Navy flying boats, NC-1, NC-3 and NC-4, set out from Rockaway, New York, on May 8th, 1919, and NC-4 went across by stages, by way of Nova Scotia, Newfoundland, the Azores, and Lisbon, and on to England. Its crew was six men, with Lieutenant Commander Albert Read as commanding officer and navigator and Lieutenant Elmer Stone of the Coast Guard as pilot.
 
 The other two didn't make it. Clouds and rain separated the three boats on the way to the Azores, and NC-1 and NC-3 both made forced landings at sea. NC-1's crew was rescued by a Greek freighter, and the crew of NC-3 sailed their battered craft two hundred and five miles to the Azores. So only one of the Navy's NC flying boats finished the whole thing, and that was NC-4, which landed at Horta in the Azores on May 17th, reached Lisbon on May 27th, stopped at Ferrol in Spain, and arrived at Plymouth, England, on May 31st, 1919.
 
