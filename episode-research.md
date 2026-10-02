@@ -1,14 +1,15 @@
 # Episode Research — "Somebody Did It First" (Jobs 3 and 4)
 
-Prepared 2026-10-01.
+Prepared 2026-10-01; provisional episodes re-verified 2026-10-02.
 
-## Read this first: how much of this is actually verified
+## Read this first: how this was verified
 
-The research ran in a cloud container, not on your Mac. Direct page fetches were blocked by the container's network policy (Wikipedia, Smithsonian, Britannica, Rutgers, archive.org, loc.gov and the rest all returned "egress blocked"), so every check went through a web-search tool that returns search-engine extracts of pages rather than full reads. Then the session's web-search budget (200 searches, shared by every research agent) ran out partway through. That leaves three tiers, and the table below marks which one each episode is in:
+The research ran in a cloud container, not on your Mac. Direct page fetches were blocked by the container's network policy, so every check went through a web-search tool that returns search-engine extracts of pages rather than full reads.
 
-- **Checked** — verified this session against two or more strong sources (journals, museums, universities, Britannica, Smithsonian, Nat Geo and similar) via search extracts. Wikipedia and content-farm blogs were not counted as one of the two.
-- **Partly** — the main claim was checked, but one half or one supporting detail rests on background knowledge.
-- **Provisional** — searches had run out, so the verdict comes from the researcher's background knowledge of the standard scholarship. The sources listed are the right places to confirm, but nobody opened them this session. **Do not script these as confirmed until two sources are checked.** That is 25 episodes, and they are the obvious first job for the next session (raise the search limit, `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION`, or allow-list the source domains in the environment's network settings).
+- **First pass (2026-10-01):** 37 episodes were checked against two or more strong sources (journals, museums, universities, Britannica, Smithsonian, Nat Geo and similar). Wikipedia and content-farm blogs were never counted as one of the two. Then the 200-search budget ran out, leaving 25 episodes provisional and 3 only partly checked.
+- **Second pass (2026-10-02, after the search limit was raised):** those 28 episodes (#5–12, 26, 30–39, 47–52, 63–65) were re-verified the same way. Every source listed in them was seen in search results this pass. Memory-only sources were replaced or removed, and any detail still unconfirmed is marked "(unverified)" inline with a hedge. Each of those entries ends with a "What changed from the provisional draft" line.
+- **Reading the quarter method notes:** the notes at the top of each quarter below describe the first pass. Where a note says an episode is unverified, the 2026-10-02 entry supersedes it.
+- **Remaining soft spots:** a handful of supporting details are still marked "(unverified)", e.g. a ~1234 Korean metal-type book, Reis's exact demo date, the Z3 demo date, the Lebombo bone's age, and Song-era singing waiters. Keep those off air or hedge as noted. #10's Arkadiko claim has only one strong source.
 
 ## Summary table
 
@@ -20,14 +21,14 @@ Verdict key: **Confirmed** / **Needs correction** (corrected version in the entr
 | 2 | Aqueduct | Needs correction: 1.2bn L/day exceeds scholarly estimates; Rome dropped feet per mile, not inches (inches is Pont du Gard) | 4 | Checked |
 | 3 | Water Pressure | Needs correction: cut da Vinci → check valve lineage (check valves go back to Ctesibius); Greek showers were gravity-fed | 4 | Checked |
 | 4 | Toilet | Needs correction: Knossos flushed with collected rainwater, not "roof cisterns" | 5 | Checked |
-| 5 | Sewers | Confirmed (small wording hedge) | 3 | Partly |
-| 6 | Hot Water | Needs correction: "bathing lost for centuries" is a myth; medieval bathhouses thrived | 2 | Provisional |
-| 7 | Heating | Disputed: ondol "500+ years before the hypocaust" not safely datable | 3 | Provisional |
-| 8 | Air Conditioning | Needs correction: core right (humidity, Sackett-Wilhelms, 1902); wording fixes | 5 | Provisional |
-| 9 | Concrete | Needs correction: Nabataeans ~6500 BCE is wrong (they flourished ~300 BCE–100 CE); Roman marine concrete holds | 3 | Provisional |
-| 10 | Bridge | Needs correction: Arkadiko "oldest in daily use" overstated; Tacoma = flutter is right | 2 | Provisional |
-| 11 | Skyscraper | Needs correction: no "1986 campaign" found; likely the 1931 Marshall Field estate committee | 4 | Provisional |
-| 12 | Glass | Needs correction: frame Pliny as legend; glass is Mesopotamian, far earlier | 4 | Provisional |
+| 5 | Sewers | Confirmed (small wording hedge; Cloaca Maxima 500s BCE) | 3 | Checked |
+| 6 | Hot Water | Needs correction: "bathing lost for centuries" is a myth; Paris alone had more than two dozen bathhouses in the 1200s | 2 | Checked |
+| 7 | Heating | Disputed: ondol "500+ years before the hypocaust" can't be safely dated; Greek heated floors (Gela, Gortys) predate Rome's Sergius Orata | 3 | Checked |
+| 8 | Air Conditioning | Needs correction (wording): core right (humidity, Sackett-Wilhelms, 1902); Gorrie was cooling sickrooms with ice from ~1841 | 5 | Checked |
+| 9 | Concrete | Needs correction: "Nabataeans ~6500 BCE" traces to construction-industry blogs (they flourished ~300 BCE–100 CE); Roman marine concrete holds | 3 | Checked |
+| 10 | Bridge | Needs correction: Arkadiko is "among the oldest still used"; Tacoma = flutter is right | 2 (≈4 if pivoted) | Checked (Arkadiko: 1 strong source) |
+| 11 | Skyscraper | Needs correction: no "1986 campaign"; the "first" label came from a 1931 Marshall Field estate committee (Thomas Tallmadge), disputed in 1932 | 4 | Checked |
+| 12 | Glass | Needs correction: frame Pliny as an unverifiable legend (not an impossible one); glass is Mesopotamian, 3rd millennium BCE | 4 | Checked |
 | 13 | Lighting | Confirmed (see launch episode) | 5 | Checked (launch notes) |
 | 14 | Weapons | Needs correction: Kathu Pan ~500k holds; "300k years further back" matches no find (Schöningen redated 2025 to ~200k) | 3 | Checked |
 | 15 | Sword | Confirmed | 2 | Checked |
@@ -41,20 +42,20 @@ Verdict key: **Confirmed** / **Needs correction** (corrected version in the entr
 | 23 | Warship | Needs correction: Constitution is oldest commissioned warship *afloat*; HMS Victory older | 3 | Checked |
 | 24 | Explosives | Disputed: no copy of the "merchant of death" obituary has been found; hedge it | 4 | Checked |
 | 25 | Tank | Confirmed (Little Willie); de Mole angle holds with nuance | 4 | Checked |
-| 26 | Military Communication | Confirmed (add an ITU/Smithsonian citation) | 3 | Partly (1 strong source) |
+| 26 | Military Communication | Confirmed (Titanic sent CQD then SOS; first US SOS: Arapahoe, Aug 1909; say years, not exact days) | 3 | Checked |
 | 27 | Wheel | Needs correction: "300 years" was about chariots; potter's wheels and carts overlap ~3500 BCE | 3 | Checked |
 | 28 | Road | Needs correction: say "oldest known paved road", ~4,500 years; "royal sarcophagi" detail weak | 3 | Checked |
 | 29 | Ship | Confirmed as "oldest surviving boat" | 3 | Checked |
-| 30 | Train | Confirmed | 5 | Provisional |
-| 31 | Car | Needs correction (wording): Benz = first practical gasoline car; Olds' line was "early", not "first" | 5 | Provisional |
-| 32 | Flight | Needs correction: first flight 120 ft/12 s, 852 ft was 4th; "hometown paper refused" too absolute | 4 | Provisional |
-| 33 | Space Travel | Confirmed (109 km, flies recovered alive) | 4 | Provisional |
-| 34 | Navigation | Disputed: Polynesian–Native American contact real, direction unknown | 4 | Provisional |
-| 35 | Timekeeping | Needs correction: Basel sundial "one of the oldest"; cut 3500 BCE obelisk line | 2 | Provisional |
-| 36 | Writing | Needs correction: "3/4" untraceable; ~85–90% of early Uruk tablets administrative | 4 | Provisional |
-| 37 | Printing Press | Confirmed | 5 | Provisional |
-| 38 | Telephone | Needs correction: Gray filed a caveat, not an application; "by hours" contested; H.Res. 269 doesn't say Meucci invented it | 5 | Provisional |
-| 39 | Computer | Needs correction: moth real, but Hopper didn't find it and it isn't the origin of "bug"; lead with ENIAC-wasn't-first | 3 (5 reworked) | Provisional |
+| 30 | Train | Confirmed (bonus: Rocket was built under Robert Stephenson, George's son) | 5 | Checked |
+| 31 | Car | Needs correction (wording): Benz = first practical gasoline car; Smithsonian says Olds' factory was first to use an assembly line | 5 | Checked |
+| 32 | Flight | Needs correction: first flight 120 ft/12 s, 852 ft was the 4th; "hometown paper refused" is a family account, say "reportedly" | 4 | Checked |
+| 33 | Space Travel | Confirmed; altitude hedged "about 67 miles" (sources differ) | 4 | Checked |
+| 34 | Navigation | Disputed: Polynesian–Native American contact is real (~1200 CE), direction unknown | 4 | Checked |
+| 35 | Timekeeping | Needs correction: Basel sundial is "one of the oldest"; Britannica contradicts the 3500 BCE obelisk line | 2 (≈4 with swap) | Checked |
+| 36 | Writing | Needs correction: "3/4" untraceable; Englund gives ~85% administrative, ~15% word lists | 4 | Checked |
+| 37 | Printing Press | Confirmed | 5 | Checked |
+| 38 | Telephone | Confirmed (call Gray's filing a "caveat"; LoC: Bell 5th entry, Gray 39th, "a few hours later") | 5 | Checked |
+| 39 | Computer | Needs correction: moth real, but the logbook was "probably not Hopper's" and it isn't the origin of "bug"; lead with ENIAC-wasn't-first | 3 (5 reworked) | Checked |
 | 40 | Medicine | Needs correction: Borneo amputation (31k yrs) may beat trepanation as oldest surgery; hedge | 3 | Checked |
 | 41 | Anesthesia | Needs correction: "screams a good sign" unsourced; use the documented "pain was seen as useful" version; Long 1842 holds | 5 | Checked |
 | 42 | Vaccines | Confirmed (Phipps; Jesty 1774) | 5 | Checked |
@@ -62,12 +63,12 @@ Verdict key: **Confirmed** / **Needs correction** (corrected version in the entr
 | 44 | Refrigeration | Needs correction: Zimri-Lim, king of Mari (Syria), ~1780 BCE, not "Sumerian" | 4 | Checked |
 | 45 | Cooking | Confirmed (hedge: "may have" cooked) | 3 | Checked |
 | 46 | Farming | Disputed: fig domestication claim challenged in Science; hedge | 3 | Checked |
-| 47 | Money | Needs correction: drop "tally sticks 30,000 years" as money | 3 | Provisional |
-| 48 | Music | Needs correction: Hohle Fels flute ~35–40k; Divje Babe disputed | 3 | Provisional |
-| 49 | Recorded Sound | Confirmed | 5 | Provisional |
-| 50 | Clothing | Disputed: "dyed" flax fibers contested | 2 | Provisional |
-| 51 | Electricity | Needs correction: Dalibard (May 1752) before Franklin's kite; Thales attribution is late | 5 | Provisional |
-| 52 | Internet | Confirmed | 4 | Provisional |
+| 47 | Money | Needs correction: drop "tally sticks 30,000 years" as money; Croesus's own coins may be post-Croesus | 3 | Checked |
+| 48 | Music | Needs correction: Hohle Fels ~35k (not 40k); oldest undisputed flutes ~42k (Geissenklösterle); Divje Babe likely carnivore-chewed | 2 | Checked |
+| 49 | Recorded Sound | Confirmed (bonus: Charles Cros's playback design, 30 Apr 1877, also beat Edison) | 5 | Checked |
+| 50 | Clothing | Disputed: "dyed", and even "flax", are contested | 2 | Checked |
+| 51 | Electricity | Needs correction: Dalibard (10 May 1752) before Franklin's kite; Thales attribution is late | 5 | Checked |
+| 52 | Internet | Confirmed (hedge who "invented" packet switching) | 4 | Checked |
 | 53 | Bread | Confirmed | 3 | Checked |
 | 54 | Salt and Spices | Confirmed (as a myth-bust) | 2 | Checked |
 | 55 | Sugar | Needs correction: "Gupta era" too precise; "India, by the start of the common era or earlier" | 4 | Checked |
@@ -78,11 +79,11 @@ Verdict key: **Confirmed** / **Needs correction** (corrected version in the entr
 | 60 | Pizza | Needs correction: earlier description is Emmanuele Rocco, 1858; the royal letter is likely forged | 5 | Checked |
 | 61 | Ice Cream | Needs correction (minor): Ibn Abi Usaybi'a recorded chilling water, not freezing food | 4 | Checked |
 | 62 | Food Preservation | Disputed: no formal open "prize"; Appert paid 12,000 francs (1810) on condition he publish | 4 | Checked |
-| 63 | Restaurant | Confirmed (Paris part); Song China part provisional | 4 | Partly |
-| 64 | Diner | Confirmed | 2 | Provisional |
-| 65 | Fast Food | Needs correction: "first drive-through" contested; hedge | 5 | Provisional |
+| 63 | Restaurant | Confirmed (Paris: Roze de Chantoiseau; Song China had restaurants by 1235 in Hangzhou) | 4 | Checked |
+| 64 | Diner | Confirmed | 2 | Checked |
+| 65 | Fast Food | Needs correction: "first drive-through" contested; Yoshinoya 1899 is company-sourced; Pompeii thermopolium dug 2019–2020 | 5 | Checked |
 
-**Tally of the 65 planned fun facts:** 20 Confirmed · 35 Needs correction · 8 Disputed · 2 Wrong (cut). Of the 20 "Confirmed", 6 are provisional (13 is covered by the launch notes; 30, 33, 37, 49, 52 and 64 still need their two sources opened). By check status: 37 Checked, 3 Partly, 25 Provisional.
+**Tally of the 65 planned fun facts:** 21 Confirmed · 34 Needs correction · 8 Disputed · 2 Wrong (cut). All 65 are now checked against sources (#13 via the launch-episode notes). The 2026-10-02 pass moved #38 Telephone from Needs correction to Confirmed and dropped #48 Music from fit 3 to 2; no other verdict changed.
 
 
 ---
@@ -171,121 +172,177 @@ Each entry gives the planned fun fact, the verdict, the corrected on-air line, w
 
 ### 5. Sewers — Fit 3/5
 - **Planned fun fact:** Indus Valley brick-lined sewers ~2500 BCE, ~2,000 years before Rome's Cloaca Maxima.
-- **Verdict:** Confirmed (with a small wording hedge). The Indus half is supported by sources gathered this session. The Cloaca Maxima date comes from background knowledge.
-- **Corrected / on-air version:** "By around 2600 to 2500 BCE, cities like Mohenjo-daro had covered, brick-lined street drains that took wastewater from nearly every house. Rome's famous Cloaca Maxima was begun around 600 BCE, roughly 2,000 years later. It started out as an open channel and was only vaulted over later."
+- **Verdict:** Confirmed (with a small wording hedge) (verified 2026-10-02)
+- **Corrected / on-air version:** "By around 2600 to 2500 BCE, cities like Mohenjo-daro had covered, brick-lined street drains that took wastewater from nearly every house. Rome's famous Cloaca Maxima was begun in the 500s BCE, about 2,000 years later. And it started out as an open channel, basically a stream bed lined with stone. The Romans only vaulted it over centuries later."
 - **Confirmed vs. inferred vs. unknown:**
-  - *Confirmed:* Indus brick drains c. 2600 BCE, with nearly every house connected (Harappa.com, the MDPI review, UNESCO, from item 1).
-  - *Background knowledge [not verified this session]:* Ancient tradition (Livy) dates the Cloaca Maxima to the Tarquin kings, around the 6th c. BCE. It was originally an open drainage canal, covered later. So "~2,000 years before" holds.
-  - *Caveat:* Mesopotamia (Uruk, c. 3200 BCE latrines on clay sewer pipes) may be earlier still, so don't say "first sewers ever."
+  - *Confirmed:* Indus brick drains c. 2600 BCE, with nearly every house connected (Harappa.com, the MDPI review, UNESCO; sourced in the earlier pass).
+  - *Confirmed:* Cloaca Maxima began in the 6th century BCE as an open channel made by lining an existing stream bed with stone. Enclosure with a stone barrel vault began in the 3rd century BCE (Britannica). Its first job was draining the marshy valley that became the Forum; it became a sewer later (Smithsonian). Tradition ties it to the Tarquin kings (Tarquinius Priscus, c. 600 BCE).
+  - *Inferred:* "about 2,000 years" (2600/2500 BCE vs. c. 600–500 BCE ≈ 1,900–2,100 years). Fine as a round number.
+  - *Minor discrepancy:* One non-institutional site (turismoroma/archeoroma extract) puts the vault in the 2nd–1st c. BCE rather than the 3rd. On air, say "centuries later" rather than a date.
+  - *Caveat:* Mesopotamia (Uruk, c. 3200 BCE latrines on clay sewer pipes) may be earlier still, so don't say "first sewers ever." This was not re-verified this pass.
 - **Sources:**
-  - Harappa.com — "Ancient Indus City Drains" (https://www.harappa.com/blog/ancient-indus-city-drains) (search extract).
-  - MDPI *Water* 2023 — "Wastewater Management: From Ancient Greece to Modern Times and Future" (https://www.mdpi.com/2073-4441/15/1/43) — Indus sewerage c. 2600–1900 BC (search extract).
-  - Britannica — "Cloaca Maxima" (https://www.britannica.com/topic/Cloaca-Maxima) — 6th c. BCE date **[not verified this session]**.
-- **Best "Somebody Did It First" angle:** Rome's Cloaca Maxima is the famous "first great sewer," and the Indus Valley beat it by about two millennia. No individual is credited.
-- **Fit score:** 3/5 — solid "earlier than you think," but it overlaps heavily with Plumbing (#1). Consider merging 1 and 5 into one episode.
+  - Harappa.com — "Ancient Indus City Drains" (https://www.harappa.com/blog/ancient-indus-city-drains) — Indus covered drains, house connections (earlier pass).
+  - MDPI *Water* 2023 — "Wastewater Management: From Ancient Greece to Modern Times and Future" (https://www.mdpi.com/2073-4441/15/1/43) — Indus sewerage c. 2600–1900 BC (earlier pass).
+  - Britannica (Students) — "Cloaca Maxima" (https://kids.britannica.com/students/assembly/view/342104) — open channel built in the 6th c. BC by lining a stream bed with stone; barrel vault from the 3rd c. BC; still in use. This replaces the britannica.com/topic URL from the draft, which did not surface in search and could not be fetched (egress blocked).
+  - Smithsonian Magazine — "How the Ancient Romans Went to the Bathroom" (https://www.smithsonianmag.com/history/how-the-ancient-romans-went-to-the-bathroom-180979056/) — built in the 6th c. BCE, first to drain swamp water for the Forum, later a sewer. The extract mixed this with another Smithsonian page ("Urine for a Treat…", https://www.smithsonianmag.com/travel/five-fascinating-sewer-tours-180955201/), so the attribution is to Smithsonian generally.
+  - J.N. Hopkins, "The Cloaca Maxima and the monumental manipulation of water in archaic Rome" (2007) (https://www.researchgate.net/publication/265225213_The_Cloaca_Maxima_and_the_monumental_manipulation_of_water_in_archaic_Rome) — scholarly lead for the open-drain-then-vaulted sequence; only the title and abstract were seen.
+- **Best "Somebody Did It First" angle:** Rome's Cloaca Maxima is the famous "first great sewer." The Indus Valley beat it by about two millennia, and Rome's version wasn't even a covered sewer at first. No individual is credited.
+- **Fit score:** 3/5 — solid "earlier than you think," but it overlaps heavily with Plumbing (#1). Consider merging 1 and 5.
+- **What changed from the provisional draft:** Cloaca half now verified (Britannica + Smithsonian). Replaced the unverified britannica.com/topic URL with the Britannica Students page that surfaced. Added the "stream bed lined with stone" and "began as marsh drainage" details. Date phrased as "500s BCE."
 
 ### 6. Hot Water / Bathing — Fit 2/5
 - **Planned fun fact:** After Rome fell, heated communal bathing was lost in Europe for centuries, replaced by fear that open pores let in disease.
-- **Verdict:** Needs correction (as written it's essentially a myth). Based on background knowledge; **not verified this session**.
-- **Corrected / on-air version:** "The idea that Europe stopped bathing when Rome fell is a myth. Medieval towns were full of public bathhouses, called 'stews,' with hot water and steam. Paris had dozens of them by the late 1200s. The great retreat from bathing came much later, in the 1400s to 1600s. Plague doctors warned that hot water opened the pores to disease, bathhouses picked up a reputation for vice and syphilis, and firewood got expensive. Meanwhile, Roman-style hot bathing never stopped in Byzantium or in the Islamic world's hammams."
+- **Verdict:** Needs correction (verified 2026-10-02)
+- **Corrected / on-air version:** "The idea that Europe stopped bathing when Rome fell is a myth. Medieval towns had public bathhouses, called 'stews' in England and 'étuves' in France, with steam and hot water. Paris's tax roll of 1292 lists more than two dozen of them. The real retreat from public bathing came later. During plague outbreaks, people feared that hot water opened the pores and let disease in. In the 1500s, syphilis and the bathhouses' reputation as fronts for brothels closed many more. And Roman-style hot bathing never stopped in the Islamic world's hammams."
 - **Confirmed vs. inferred vs. unknown:**
-  - *Background knowledge:* Bathhouse guilds (étuveurs) are regulated in Étienne Boileau's *Livre des métiers* (c. 1268). The Paris tax roll of 1292 lists roughly two to three dozen étuves. Southwark "stews" are well documented. Fears about bathing tied to plague and pores, and closures, run 14th–17th c. The hammam continued from Roman/Byzantine baths.
-  - *Unknown here:* the exact Paris bathhouse count (26 vs. 32 vary by source). Say "dozens."
-- **Sources (leads):**
-  - Virginia Smith, *Clean: A History of Personal Hygiene and Purity* (Oxford Univ. Press, 2007) **[not verified this session]**.
-  - Katherine Ashenburg, *The Dirt on Clean* (2007) **[not verified this session]**.
-  - Smithsonian Magazine has run "medieval people bathed more than you think" pieces. Search smithsonianmag.com for "medieval bathhouses" **[not verified this session]**.
-- **Best "Somebody Did It First" angle:** It's a myth-bust, not a did-it-first story. The only "first" angle is that the hammam kept Roman bathing alive while Europe let it go, which is weak. Stronger replacement: **"The Shower."** William Feetham's 1767 English hand-pump shower is often credited as the first modern shower, but Greek gymnasium showers (4th–2nd c. BC) came first. This links neatly to #3.
-- **Fit score:** 2/5 — a good myth-bust but no credited inventor. Recommend reframing or replacing.
+  - *Confirmed:* Medieval Europeans bathed and frequented bathhouses, public and private, some of them fronts for brothels (JSTOR Daily; National Geographic). Public baths closed during the Black Death because hot water was believed to open the pores to plague (JSTOR Daily / Nat Geo extract). Mass closures of bathhouses in the 1500s were tied to syphilis; Erasmus noted in the 1520s that almost all public baths in Brabant had shut (search extract of the Nat Geo baths-vs-showers piece; the attribution within the merged extract is not certain). Southwark "stews" were regulated by ordinances under the Bishop of Winchester, said to date from 1162 (British History Online, quoting older London histories).
+  - *Partly confirmed:* the Paris 1292 tax roll lists 26 or 27 étuves, depending on the source. Say "more than two dozen." The étuveurs' statute appears in Étienne Boileau's *Livre des métiers* (c. 1268), but one extract says it was inserted after Boileau's death, in a 14th-century hand. Don't credit it to Boileau on air. The sources for these were a CNRS project page, a Gallica scan and French secondary sites, not two strong English-language sources.
+  - *Not verified this pass:* hammam continuity from Roman/Byzantine baths (widely accepted, but no source surfaced). Hedge: "bathhouses kept going in the Islamic world." Firewood cost as a cause is (unverified); drop it.
+  - The "Southwark stews" were licensed brothels by the period the sources describe. Don't present them as plain bathhouses.
+- **Sources:**
+  - JSTOR Daily — "Scrub-a-Dub in a Medieval Tub" (https://daily.jstor.org/scrub-a-dub-in-a-medieval-tub/) — medieval people bathed; bathhouses public and private; plague-era closures over fear of open pores.
+  - National Geographic — "What life in medieval Europe was really like" (https://www.nationalgeographic.com/history/article/what-life-in-medieval-europe-was-really-like) — medieval people delighted in bathing.
+  - National Geographic — "We swapped baths for showers—but which one is better for you?" (https://www.nationalgeographic.com/history/article/baths-showers-clean-history-health-psychology) — plague, closed pores and the decline of bathing.
+  - Britannica (Beyond) — "Did people in the Georgian Era really have a fear of water/baths?" (https://beyond.britannica.com/did-people-in-the-georgian-era-really-have-a-fear-of-water-baths) — the later "fear of water" era (title only seen).
+  - British History Online — "Southwark: Winchester House and Barclay's Brewery" (https://www.british-history.ac.uk/old-new-london/vol6/pp29-44) — Southwark stews under the Bishop of Winchester; 1162 ordinances.
+  - CNRS Centre Roland Mousnier — Paris tax-roll project (https://centrerolandmousnier.cnrs.fr/parispub_an_l_1026_8_introduction/) and Gallica (BnF) scan of the *Livre des métiers* (https://gallica.bnf.fr/ark:/12148/btv1b90617243.image) — leads for the 1292 étuves count and the étuveurs statute. The count itself came through a merged extract.
+  - Removed: Virginia Smith *Clean* and Ashenburg *The Dirt on Clean*. Neither surfaced in this pass; they are still good offline checks.
+- **Best "Somebody Did It First" angle:** It's a myth-bust, not a did-it-first story. Possible replacement: **"The Shower."** William Feetham's 1767 hand-pump shower (London stove maker) is often called the first mechanical shower, but Greeks and Romans had communal showers. Only blogs and Wikipedia surfaced for this, so it is (unverified) by strong sources; re-check before using.
+- **Fit score:** 2/5 — a good myth-bust with no credited inventor.
+- **What changed from the provisional draft:** Verdict unchanged, now sourced (JSTOR Daily, Nat Geo ×2, British History Online). Paris count tightened from "dozens" to "more than two dozen" (26–27). Flagged that the étuveurs statute may postdate Boileau. Added the syphilis/Erasmus detail. Dropped the firewood claim and the two unseen books.
 
 ### 7. Heating (Ondol vs. Hypocaust) — Fit 3/5
 - **Planned fun fact:** Korea's Ondol underfloor heating predates Rome's hypocaust by 500+ years.
-- **Verdict:** Disputed. Based on background knowledge; **not verified this session**.
-- **Corrected / on-air version:** "Korea's ondol, which runs smoke from a kitchen fire through channels under a stone floor, goes back more than 2,000 years. Some archaeologists trace it, or something like it, much further. It's roughly as old as Rome's hypocaust, possibly older. And the Roman hypocaust itself wasn't a Roman original: Greek bathhouses were heating their floors before the Romans popularized it."
+- **Verdict:** Disputed (verified 2026-10-02)
+- **Corrected / on-air version:** "Korea's ondol runs smoke from a kitchen fire through flues under a stone floor. Korea's heritage agency says its roots go back to the Bronze Age, and archaeologists have found ondol-type flues at sites across the peninsula from the 200s BCE onward. Rome's hypocaust, the heated floor of the bathhouses, is credited by Pliny to a businessman named Sergius Orata around 100 BCE. But Orata wasn't first either. Greek bathhouses in Arcadia and Sicily already had simple heated floors. So the ondol is at least as old as the hypocaust, and its roots may go back much further."
 - **Confirmed vs. inferred vs. unknown:**
-  - *Background knowledge:* Partial-floor heated flues ("gudeul," "kang"-type heated platforms) appear in the Korean peninsula, Manchuria and the Russian Far East (Krounovka/Okjeo-related cultures) around the late 1st millennium BCE. Full-floor ondol is much later (Goryeo/Joseon). One often-repeated claim, a Neolithic ondol at Seopohang (Unggi) c. 5000 BCE, comes from a single site, is contested, and is what feeds the "500+ years earlier" line.
-  - Pliny credits Sergius Orata (c. 90s BCE) with "hanging baths" (*balneae pensiles*). Greek precursor heated floors (e.g., Olympia, Gortys in Arcadia) are generally dated to the 3rd–2nd c. BCE.
-  - *Unknown:* a secure date for the earliest true ondol. Don't put a "500 years" margin on air.
-- **Sources (leads):**
-  - Pliny the Elder, *Natural History* 9.168 (Sergius Orata) **[not verified this session]**.
-  - Fikret Yegül, *Bathing in the Roman World* (Cambridge UP, 2010) — Greek precursors to the hypocaust **[not verified this session]**.
-  - Korean Heritage Service (heritage.go.kr) entry on ondol, inscribed as National Intangible Cultural Heritage in 2018 **[not verified this session]**.
-- **Best "Somebody Did It First" angle:** Sergius Orata is the named Roman "inventor" of the hypocaust. Greek bath-builders had heated floors before him, and East Asian heated-floor systems are of comparable or greater age. It's a decent story with fuzzy dates.
-- **Fit score:** 3/5 — a named credited person (Orata), but weak dating on both sides, so heavy hedging is needed.
+  - *Confirmed:* Ondol has roots in a hearth-and-flue heating system going back to the Bronze Age and Proto-Three Kingdoms period. Examples are found across the peninsula at sites from the 3rd c. BCE to the 1st c. CE, and the practice has been transmitted for more than 2,000 years. It was designated National Intangible Cultural Heritage in 2018 (Korea Heritage Service; korea.net; Britannica has an "ondol" entry).
+  - *Confirmed:* Pliny and Valerius Maximus credit Sergius Orata, a contemporary of the orator L. Crassus before the Social (Marsic) War, i.e. c. 90s BCE, with *balneae pensiles* (heated suspended floors) (Smith's *Dictionary of Greek and Roman Antiquities* via Perseus/LacusCurtius). "Elementary types are found in some Hellenistic baths (Gortys in Arcadia; Gela in Sicily)," and the fully developed system originated in central Italy, already present c. 100 BCE in the Stabian Baths at Pompeii (Oxford Classical Dictionary, "hypocaust").
+  - *Unverified / contested:* Neolithic ondol-like "gudeul" at Sonbong/Unggi (North Korea), c. 5000 BCE. This surfaced only from Wikipedia and blogs. It is the source of the "500+ years" line. Keep it off air, or say "some claim much older evidence."
+  - *Unverified:* a precise Gortys date (c. 250 BCE comes from blogs and Wikipedia only). Say "Hellenistic Greek baths."
+  - *Unknown:* a secure date for the earliest true ondol, so no year margin on air.
+- **Sources:**
+  - Korea Heritage Service — "Ondol (Underfloor Heating)" heritage entry (https://english.khs.go.kr/chaen/search/selectGeneralSearchDetail.do?mn=EN_02_02&sCcebKdcd=17&ccebAsno=0001350000000&sCcebCtcd=ZZ) — Bronze Age roots; examples from the 3rd c. BCE to the 1st c. CE; more than 2,000 years of transmission.
+  - Korea.net — "Ondol becomes national intangible heritage item" (https://www.korea.net/NewsFocus/Culture/view?articleId=156191) — 2018 designation; how it works.
+  - Britannica — "Ondol" (https://www.britannica.com/technology/ondol) — entry exists; the extract did not attribute specific dates to it.
+  - Oxford Classical Dictionary (Oxford Research Encyclopedias) — "Hypocaust" (https://oxfordre.com/classics/display/10.1093/acrefore/9780199381135.001.0001/acrefore-9780199381135-e-3202) — Hellenistic precursors at Gortys and Gela; fully developed system c. 100 BCE in Italy.
+  - Smith's *Dictionary of Greek and Roman Antiquities* (1875), "Balneae," via LacusCurtius (https://penelope.uchicago.edu/Thayer/E/Roman/Texts/secondary/SMIGRA*/Balneae.html) and Perseus (https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0063:id%3Dbalneae-cn) — Pliny and Valerius Maximus credit Sergius Orata with *balneae pensiles*.
+  - Removed: Yegül *Bathing in the Roman World* (did not surface). The Pliny citation is kept via Smith's dictionary; the passage itself was not read.
+- **Best "Somebody Did It First" angle:** Sergius Orata is the named Roman credited with the heated floor. Hellenistic Greek baths had elementary versions before him, and Korea's flue-heated floors are of comparable age with possibly much older roots. A decent story with fuzzy dates.
+- **Fit score:** 3/5 — a named credited person (Orata), but weak dating on the Korean side, so heavy hedging is needed.
+- **What changed from the provisional draft:** Verdict unchanged (Disputed), now sourced. The Greek-precursor claim is confirmed by the OCD and names Gela (Sicily) alongside Gortys; Olympia dropped as a precursor (its hypocaust is 1st c. BCE, Roman era). The Neolithic site is now named Sonbong/Unggi rather than "Seopohang" and flagged as Wikipedia-only. The Krounovka/Okjeo detail is dropped (nothing surfaced).
 
 ### 8. Air Conditioning — Fit 5/5
 - **Planned fun fact:** Willis Carrier built it in 1902 to stop humidity wrinkling paper at a Brooklyn printing plant (Sackett-Wilhelms), not to cool people.
-- **Verdict:** Needs correction (small wording issue; the core is correct). Based on background knowledge; **not verified this session**.
-- **Corrected / on-air version:** "Willis Carrier's 1902 system at the Sackett-Wilhelms printing plant in Brooklyn wasn't built for comfort. It controlled humidity so paper stopped swelling and shrinking, which was throwing multicolor printing out of alignment. But Carrier wasn't the first to cool a room with a machine. In the 1840s, Florida doctor John Gorrie was blowing air over ice to cool his yellow-fever and malaria patients, and in 1851 he patented an ice-making machine. Even the phrase 'air conditioning' wasn't Carrier's. A textile-mill engineer, Stuart Cramer, coined it in 1906."
+- **Verdict:** Needs correction (small wording issue; core correct) (verified 2026-10-02)
+- **Corrected / on-air version:** "Willis Carrier's 1902 system at the Sackett-Wilhelms printing plant in Brooklyn wasn't built for comfort. Humid summer air made the paper soak up moisture, which threw off the layered, multicolor inking. Carrier blew air over chilled pipes to dry it out; the cooling was a side effect. But Carrier wasn't the first to chill a room for people. Around 1840, Florida doctor John Gorrie was cooling his yellow-fever patients' sickrooms with ice. He built a machine to make the ice himself, and in 1851 he got the first U.S. patent for mechanical refrigeration. His backers died or walked away, the press mocked him, and he died broke in 1855. Even the phrase 'air conditioning' isn't Carrier's. A North Carolina textile-mill engineer, Stuart Cramer, coined it in 1906."
 - **Confirmed vs. inferred vs. unknown:**
-  - *Background knowledge:* Sackett-Wilhelms Lithographing & Publishing Co., Brooklyn, 1902. The problem was paper dimensional change causing misregistered color printing; "wrinkling" isn't the right description. Gorrie: Apalachicola, cooled sickrooms in the 1840s, US Patent 8,080 (1851) for an ice machine. Cramer coined "air conditioning" in 1906; Carrier's 1906 patent was "Apparatus for Treating Air."
-  - *Unknown:* whether Gorrie's apparatus ever ran continuously as "air conditioning." Frame it as "mechanically cooled a room."
-- **Sources (leads):**
-  - Carrier Corporation history page, "Willis Carrier" (carrier.com/carrier/en/worldwide/about/history) **[not verified this session]**.
-  - US Patent 8,080, J. Gorrie, "Improved process for the artificial production of ice" (1851) **[not verified this session]**.
-  - Smithsonian Magazine / Smithsonian National Museum of American History on Gorrie and early cooling **[not verified this session]**.
-  - Florida State Parks — John Gorrie Museum State Park (floridastateparks.org) **[not verified this session]**.
-- **Best "Somebody Did It First" angle:** Carrier is the "father of air conditioning." Gorrie was mechanically cooling hospital rooms 60 years earlier, and someone else named the field. Well documented, and Gorrie died broke and obscure, which helps the story.
+  - *Confirmed:* Carrier, July 17, 1902, Sackett-Wilhelms Lithographing & Publishing Co., Brooklyn. Paper absorbed moisture, which made layered inking hard. Air was blown across chilled pipes to lower humidity, and cooling was a side benefit (Carrier corporate history; Library of Congress business-history guide on his patent; History.com).
+  - *Confirmed:* Gorrie, Apalachicola physician, cooled sickrooms (ice in a pan hung from the ceiling) for malaria/yellow fever patients by about 1841. U.S. Patent No. 8,080 (1851) for mechanical refrigeration/ice making, the first such U.S. patent. His chief backer died in 1851, investors fell away amid press ridicule, and he died in 1855 at 51 (Florida State Parks; Smithsonian NMAH patent model; Smithsonian Magazine "Chilly Reception"; Architect of the Capitol, which notes his statue in Statuary Hall).
+  - *Confirmed:* Stuart W. Cramer, Charlotte textile engineer, coined "air conditioning" in 1906 in a patent filing and a paper to the American Cotton Manufacturers Association (ASHRAE; NCpedia).
+  - *Correction to the planned fact:* "wrinkling" is wrong. The problem was moisture uptake that misregistered the color inking.
+  - *Hedge:* Gorrie's room cooling used ice (and air blown over it); his machine made the ice. Don't say his machine was an air conditioner. "He mechanically made ice to cool sickrooms" is accurate. Gorrie's suspicion that ice magnate Frederic Tudor smeared him is only his suspicion; if used, say "Gorrie believed…"
+- **Sources:**
+  - Library of Congress — "Patent for the Air Conditioner Issued to Willis H. Carrier" (https://guides.loc.gov/this-month-in-business-history/february/patent-air-conditioner-willis-carrier) — Carrier, 1902, Sackett-Wilhelms.
+  - Carrier Corporation — "Invention of Air Conditioning" (https://www.carrier.com/us/en/history/invention-of-air-conditioning/) — humidity and paper; chilled pipes; July 17, 1902 (corporate, not independent).
+  - Smithsonian NMAH — "Gorrie Ice Machine, Patent Model" (https://www.si.edu/object/gorrie-ice-machine-patent-model:nmah_846192) — first U.S. patent for a mechanical refrigerating/ice machine; patent petition 1848.
+  - Smithsonian Magazine — "Chilly Reception" (https://www.smithsonianmag.com/history/chilly-reception-66099329/) — 1841 sickroom cooling, backer's death, ridicule, died 1855 (extract merged with PBS; attribution approximate).
+  - Florida State Parks — "John Gorrie Museum State Park history" (https://www.floridastateparks.org/parks-and-trails/john-gorrie-museum-state-park/history) — Patent No. 8080 (1851); ice-pan sickroom cooling.
+  - Architect of the Capitol — "John Gorrie Statue" (https://www.aoc.gov/explore-capitol-campus/art/john-gorrie-statue) — ice and cooled air in treating tropical disease; Statuary Hall.
+  - ASHRAE — "Air Conditioning and Refrigeration Timeline" (https://www.ashrae.org/about/mission-and-vision/ashrae-industry-history/air-conditioning-and-refrigeration-timeline) and NCpedia — "Cramer, Stuart Warren" (https://www.ncpedia.org/biography/cramer-stuart-warren) — Cramer coined "air conditioning" in 1906.
+  - Also surfaced: Smithsonian Magazine "The Unexpected History of the Air Conditioner" (https://www.smithsonianmag.com/smithsonian-institution/unexpected-history-air-conditioner-180972108/) and DOE "History of Air Conditioning" (https://www.energy.gov/articles/history-air-conditioning) — titles only.
+- **Best "Somebody Did It First" angle:** Carrier is the "father of air conditioning." Gorrie was cooling hospital rooms 60 years earlier, held the first U.S. refrigeration patent, and died broke. Someone else even named the field. Very well documented.
 - **Fit score:** 5/5 — a famous credited name and a documented earlier doer with a sympathetic underdog story.
+- **What changed from the provisional draft:** Now verified with 6+ strong sources. Gorrie's start date tightened to about 1841. "Blowing air over ice" softened to "cooling sickrooms with ice." Added that Gorrie's patent was the first U.S. refrigeration patent and that he died in 1855. Cramer confirmed, with the North Carolina detail.
 
 ### 9. Concrete — Fit 3/5
 - **Planned fun fact:** Nabataeans built concrete structures ~6500 BCE. Roman seawater concrete still standing after 2,000 years (MIT/Utah studies).
-- **Verdict:** Needs correction (the Nabataean date is wrong; the Roman part is correct). Based on background knowledge; **not verified this session**.
-- **Corrected / on-air version:** "Romans get the credit for concrete, but people were burning limestone into lime plaster about 9,000 years ago. Neolithic villages in the Near East poured lime-plaster floors. The Nabataeans, the builders of Petra, later used waterproof lime mortars in their cisterns, but that was in the last few centuries BC, not 6500 BC. What Rome really mastered was underwater concrete. A University of Utah-led study found that seawater slowly grows new minerals inside Roman harbor concrete, making it stronger. An MIT-led study found that lumps of lime mixed in hot let it heal its own cracks."
+- **Verdict:** Needs correction (verified 2026-10-02)
+- **Corrected / on-air version:** "Romans get the credit for concrete, but people were burning limestone into lime more than 10,000 years ago. By about 9,000 years ago, Neolithic villages in the Near East were laying hard lime-plaster floors. One at Çayönü in Turkey was even ground and polished like terrazzo. You'll see claims online that the Nabataeans, the builders of Petra, made concrete in 6500 BC. They didn't. The Nabataeans show up around the 300s BC. What Rome really mastered was concrete that survives the sea. A University of Utah-led team found that seawater slowly grows new minerals inside Roman harbor concrete, reinforcing it. An MIT team found that lumps of lime, from mixing quicklime in hot, let it heal its own cracks."
 - **Confirmed vs. inferred vs. unknown:**
-  - *Wrong:* "Nabataeans ~6500 BCE." The Nabataeans flourished around the 4th c. BCE to 106 CE. The 6500 BCE figure is a widely copied web claim with no archaeological basis that I know of. It probably conflates Neolithic lime plaster with the Nabataeans.
-  - *Background knowledge:* PPNB lime-plaster floors (e.g., Yiftahel, Israel; terrazzo floors at Çayönü, Turkey) date c. 7000 BCE. That is lime plaster, not true concrete, so hedge.
-  - *Roman studies:* Jackson et al., *American Mineralogist* 2017 (Univ. of Utah; aluminous tobermorite and phillipsite growing in seawater). Seymour, Masic et al., *Science Advances* 2023 (MIT; lime clasts, hot mixing, self-healing).
-- **Sources (leads):**
-  - Jackson, M.D. et al. (2017), "Phillipsite and Al-tobermorite mineral cements produced through low-temperature water-rock reactions in Roman marine concrete," *American Mineralogist* 102(7) **[not verified this session]**.
-  - Seymour, L.M. et al. (2023), "Hot mixing: Mechanistic insights into the durability of ancient Roman concrete," *Science Advances* 9(1) **[not verified this session]**.
-  - Smithsonian — "How Has Roman Concrete Lasted for Millennia? A 1,900-Year-Old Latrine Offers New Clues" (https://www.smithsonianmag.com/smart-news/how-has-roman-concrete-lasted-for-millennia-a-1900-year-old-latrine-offers-new-clues-about-the-materials-impressive-durability-180989115/). Its URL surfaced in a search this session, but its content was not checked.
-- **Best "Somebody Did It First" angle:** "Romans invented concrete" is the credited myth. Lime binders go back to the Neolithic, and Greek and Hellenistic builders used lime mortars before Rome. The Roman edge was pozzolana and marine concrete. Moderately solid, though "lime plaster vs. concrete" needs careful wording.
-- **Fit score:** 3/5 — myth-bust with no single credited person. The Nabataean hook has to go.
+  - *Wrong:* "Nabataeans ~6500 BCE." The Nabataeans arrived at Petra around the 4th c. BCE and were annexed by Rome in 106 CE (Met Museum; Nat Geo). The 6500 BCE line traces to industry and content-farm pages (InterNACHI, concrete-contractor blogs), not to archaeology.
+  - *Confirmed:* Lime production by firing goes back to the Natufian/Epipaleolithic (c. 10,000 BCE; lime plaster covering burials about 12,000 years ago). Widespread lime-plaster floors and walls date to the Pre-Pottery Neolithic B (9th–7th millennium BCE). A lime kiln at Nesher-Ramla is about 10,400 years old. Yiftahel plaster floors date to c. 7000 BC; the Çayönü "terrazzo building" is c. 7250–6750 BCE, with burned-and-slaked lime mortar, ground and polished (Cambridge *Evolutionary Human Sciences*; *Int. J. Architectural Heritage* 2023; ScienceDirect/J. Archaeological Science reports).
+  - *Confirmed:* Jackson et al. 2017, *American Mineralogist* 102:1435–1450: Al-tobermorite and phillipsite keep forming as seawater percolates through Roman marine concrete, reinforcing it (University of Utah news; Berkeley Lab). Seymour, Masic et al. 2023, *Science Advances*: hot mixing with quicklime leaves lime clasts that self-heal cracks (MIT News; *Science Advances*; Smithsonian).
+  - *Hedge:* Neolithic lime plaster is not concrete in the Roman sense. Say "lime plaster" or "lime-mortar floors," not "concrete." Nabataean hydraulic-lime cisterns are plausible but (unverified) this pass; omit them.
+  - "Utah" is correct for Jackson (with Berkeley Lab collaborators). "MIT" is correct for Masic.
+- **Sources:**
+  - Jackson, M.D. et al. (2017), *American Mineralogist* preprint (http://www.minsocam.org/msa/ammin/AM_Preprints/5993JacksonPreprintJul.pdf) — Al-tobermorite and phillipsite growth in seawater.
+  - University of Utah — "How seawater strengthens ancient Roman concrete" (https://unews.utah.edu/articles/roman-concrete/) — same, Utah-led.
+  - Seymour, L.M. et al. (2023), "Hot mixing…," *Science Advances* (https://www.science.org/doi/10.1126/sciadv.add1602) — lime clasts, hot mixing, self-healing.
+  - MIT News — "Riddle solved: Why was Roman concrete so durable?" (https://news.mit.edu/2023/roman-concrete-durability-lime-casts-0106) — same.
+  - Smithsonian Magazine — "'Self-Healing' Concrete May Have Preserved Ancient Roman Structures" (https://www.smithsonianmag.com/smart-news/self-healing-concrete-may-have-preserved-ancient-roman-structures-180981411/) — popular corroboration.
+  - Met Museum — "Nabataean Kingdom and Petra" (https://www.metmuseum.org/essays/nabataean-kingdom-and-petra) and National Geographic — "Ancient Petra Jordan's Lost Oasis" (https://www.nationalgeographic.com/history/history-magazine/article/petra) — Nabataean dates (4th c. BC arrival; annexed 106 AD).
+  - Cambridge *Evolutionary Human Sciences* — "Lime plaster cover of the dead 12,000 years ago" (https://www.cambridge.org/core/journals/evolutionary-human-sciences/article/lime-plaster-cover-of-the-dead-12000-years-ago-new-evidence-for-the-origins-of-lime-plaster-technology/FE59B9E8B995488761D6EE9589D22CCC) — earliest lime plaster.
+  - *International Journal of Architectural Heritage* (2023) — "Mortar and Concrete: Precursors to Modern Materials" (https://www.tandfonline.com/doi/full/10.1080/15583058.2023.2235319) — Çayönü terrazzo floor; Yiftahel plaster floors.
+  - ScienceDirect (*J. Archaeological Science: Reports*) — "A 10,400-year-old sunken lime kiln… Nesher-Ramla" (https://www.sciencedirect.com/science/article/abs/pii/S2352409X17301992) — early lime burning.
+  - Removed: the Smithsonian "1,900-year-old latrine" article. It did not surface in this pass; the self-healing Smithsonian piece replaces it.
+- **Best "Somebody Did It First" angle:** "Romans invented concrete" is the credited myth. Lime binders and polished lime floors go back to the Neolithic. The Roman edge was pozzolanic and marine concrete. Also a bonus myth-bust: the viral "Nabataeans 6500 BC" date.
+- **Fit score:** 3/5 — a myth-bust with no single credited person.
+- **What changed from the provisional draft:** Verdict unchanged, now sourced (9 sources). Lime-burning origin pushed back to about 12,000–10,000 years ago; Çayönü's polished floor added. Nabataean 6500 BC traced to industry blogs. Both Roman studies verified. The unchecked Smithsonian latrine URL was dropped.
 
 ### 10. Bridge — Fit 2/5
 - **Planned fun fact:** Greece's Arkadiko Bridge (~1300 BCE) is the oldest in daily use; Tacoma Narrows (1940) was torsional flutter, not simple resonance.
-- **Verdict:** Needs correction (the Arkadiko claim is overstated; the Tacoma claim is correct). Based on background knowledge; **not verified this session**.
-- **Corrected / on-air version:** "Greece's Arkadiko Bridge, a Mycenaean stone bridge from around 1300 to 1200 BCE, is among the oldest bridges in the world still used. Locals still walk across it. And the famous Tacoma Narrows collapse of 1940 wasn't simple resonance, like a singer shattering a glass, despite what generations of physics textbooks said. It was aeroelastic flutter: the wind and the twisting deck fed each other's motion until the deck tore itself apart."
+- **Verdict:** Needs correction (verified 2026-10-02)
+- **Corrected / on-air version:** "Greece's Arkadiko Bridge is a Mycenaean bridge from around 1300 BCE, built from huge, unmortared 'Cyclopean' boulders. It's among the oldest bridges in the world still in use, and Greece's culture ministry says locals still use it. And the famous Tacoma Narrows collapse of 1940 wasn't simple resonance, like a singer shattering a glass, despite what generations of physics textbooks said. It was torsional flutter: the wind and the twisting deck fed each other's motion until the bridge tore itself apart."
 - **Confirmed vs. inferred vs. unknown:**
-  - *Background knowledge:* Arkadiko (Kazarma) Bridge, Argolis, Late Helladic IIIB, corbelled arch. It is used by locals as a footpath and track, so "daily use" is unproven. Say "still in use."
-  - Tacoma: K.Y. Billah & R.H. Scanlan, "Resonance, Tacoma Narrows bridge failure, and undergraduate physics textbooks," *Am. J. Phys.* 59(2), 1991. This is the standard debunk of the resonance story.
-- **Sources (leads):**
-  - Billah & Scanlan (1991), *American Journal of Physics* 59:118–124 **[not verified this session]**.
-  - Washington State DOT — "Tacoma Narrows Bridge history" (wsdot.wa.gov) **[not verified this session]**.
-  - Greek Ministry of Culture "Odysseus" portal / Britannica entry on Mycenaean roads for Arkadiko **[not verified this session]**.
-- **Best "Somebody Did It First" angle:** Weak. "Oldest bridge" is a superlative fact, and Tacoma is a myth-bust. Possible did-it-first replacement: the **suspension bridge.** James Finley's 1801 Jacob's Creek chain bridge is often called the first modern suspension bridge, but Tibetan engineer Thangtong Gyalpo built iron-chain suspension bridges in the 1400s. That has a named early builder, but **verify before using**.
-- **Fit score:** 2/5 — interesting facts but no credited-person story. Consider pivoting to Thangtong Gyalpo.
+  - *Confirmed:* Arkadiko (Kazarma) bridge, 22 × 5.6 × 4 m, Cyclopean limestone without binding material, c. 1300 BC, on the Mycenaean road linking Mycenae, Tiryns and Epidaurus, still used by the local population (Greek Ministry of Culture "Odysseus" portal). Only one strong source surfaced for the "still used" detail.
+  - *Not supported:* "oldest in daily use." "Daily" and "oldest" are unproven, so say "among the oldest still in use."
+  - *Confirmed:* Tacoma Narrows opened July 1, 1940 and collapsed November 7, 1940. The primary cause was torsional flutter (WSDOT). Billah & Scanlan, *Am. J. Phys.* 59 (1991) 118–124: self-excitation or negative damping in torsion, "not a case of resonance," contrary to undergraduate textbooks (Semantic Scholar record; AAPT/Physics Today discussions).
+- **Sources:**
+  - Hellenic Ministry of Culture and Sports — Odysseus portal, Kazarma Mycenaean bridge (http://odysseus.culture.gr/h/2/eh251.jsp?obj_id=1710) — date, construction, still in local use. **Only one strong source for Arkadiko.**
+  - K.Y. Billah & R.H. Scanlan (1991), *American Journal of Physics* 59:118–124 (https://www.semanticscholar.org/paper/Resonance,-Tacoma-Narrows-bridge-failure,-and-undergraduate-physics-textbooks/937cd56aca1ebe07044f87f96630cda82f723d0c) — the resonance debunk.
+  - Washington State DOT — "Tacoma Narrows Bridge history — Lessons from failure" (https://wsdot.wa.gov/tnbhistory/bridges-failure.htm) — torsional flutter as the primary explanation; dates.
+  - Physics Today — "The Tacoma Narrows Bridge collapse" (https://physicstoday.aip.org/quick-study/the-tacoma-narrows-bridge-collapse-1760014552637) — corroborating (title seen).
+  - For the replacement angle: Britannica — "Thang-stong rgyal-po" (https://www.britannica.com/biography/Thang-stong-rgyal-po) and Treasury of Lives — "Tangtong Gyelpo" (https://treasuryoflives.org/biographies/view/biography/P2778) — a 15th-century builder of iron-chain bridges over the Tsangpo. Smithsonian NMAH archives — "James Finley's Bridge, First Bridge 1801, over Jacobs Creek" (https://americanhistory.si.edu/collections/archival-item/sova-nmah-ac-1013-ref3090) and Library of Congress print "Chain Bridge invented by James Finley" (https://www.loc.gov/resource/pga.14002/) — Finley's 1801 chain bridge, "first modern suspension bridge"; patent 1808.
+- **Best "Somebody Did It First" angle:** The original pair is weak (a superlative and a myth-bust). A strong replacement is **the suspension bridge**. James Finley (Jacob's Creek, Pennsylvania, 1801; patent 1808) is credited with the first modern chain suspension bridge, which became a model for Telford's Menai bridge. Thangtong Gyalpo was building iron-chain suspension bridges in Tibet and Bhutan in the 1400s, about 350 years earlier. Britannica and the Treasury of Lives support Thangtong; the Smithsonian and Library of Congress support Finley. Hedge: Thangtong's bridges were chain-supported walkways, so "iron-chain suspension bridges" rather than "the same design."
+- **Fit score:** 2/5 as planned. The suspension-bridge pivot would be about 4/5 (named credited person, named earlier builder, both sourced).
+- **What changed from the provisional draft:** Arkadiko and Tacoma facts verified. Arkadiko rests on one strong source. The Thangtong Gyalpo / Finley pivot moved from "verify before using" to sourced.
 
 ### 11. Skyscraper — Fit 4/5
 - **Planned fun fact:** Chicago's Home Insurance Building (1885) as "first skyscraper" is largely a myth; Bessemer steel made skyscrapers possible. (Check the "1986 publicity campaign" detail.)
-- **Verdict:** Needs correction. Based on background knowledge; **not verified this session**.
-- **Corrected / on-air version:** "Chicago's 10-story Home Insurance Building, finished in 1885, is often called the first skyscraper. That title came mostly from a committee set up by the Marshall Field estate when the building was demolished in 1931. It decided the building was the first to use skeleton-frame construction. But iron-framed buildings existed long before. A flax mill in Shrewsbury, England had an all-iron internal frame in 1797, and New York had elevator-served office towers in the 1870s. And the Home Insurance Building was mostly iron. Steel beams only went into its upper floors."
+- **Verdict:** Needs correction (verified 2026-10-02)
+- **Corrected / on-air version:** "Chicago's Home Insurance Building, finished in 1885, is usually called the first skyscraper. That title was cemented in 1931, when the building was being torn down to make way for the Field Building. The Marshall Field estate, which was putting up the new tower, appointed a committee under architect Thomas Tallmadge, and it ruled in Home Insurance's favor. A committee of the Western Society of Engineers that watched the demolition issued a dissenting report. And iron-framed buildings existed long before. A flax mill in Shrewsbury, England, finished in 1797, is called the world's first iron-framed building. New York had a seven-story office building with passenger elevators by 1870. The Home Insurance Building was mostly iron, too. Steel beams went into only its upper floors."
 - **Confirmed vs. inferred vs. unknown:**
-  - *Background knowledge:* William Le Baron Jenney, 1884–85. Demolished 1931. The Marshall Field Estate investigating committee (1931) affirmed its "first skeleton construction" status. Bessemer steel beams (Carnegie-Phipps) were used above the 6th floor; the rest was cast and wrought iron. Ditherington Flax Mill (1797) is the "grandfather of skyscrapers." Earlier elevator buildings include the Equitable Life Building, NYC (1870).
-  - *Unknown / likely wrong:* the "1986 publicity campaign." I know of no such event. It is probably a garbled version of the **1931 Marshall Field Estate committee**, which really did produce the "first skyscraper" label. Cut "1986."
-  - *Hedge:* "Bessemer steel made skyscrapers possible" is too strong as a single cause. Cheap structural steel (Bessemer, then open-hearth), the safety elevator (Otis, 1850s) and fireproofing together did it.
-- **Sources (leads):**
-  - Chicago Architecture Center — Home Insurance Building entry (architecture.org) **[not verified this session]**.
-  - Britannica — "Home Insurance Building" and "skyscraper" (britannica.com) **[not verified this session]**.
-  - Historic England — Ditherington Flax Mill, "grandfather of skyscrapers" (historicengland.org.uk) **[not verified this session]**.
-  - Carol Willis, *Form Follows Finance* (1995), on the contested "first skyscraper" debate **[not verified this session]**.
-- **Best "Somebody Did It First" angle:** William Le Baron Jenney and the Home Insurance Building get the credit. Iron skeleton framing (Ditherington, 1797) and tall elevator buildings (NYC, 1870s) came first. The "first" label was itself handed out by a committee 46 years later. Moderately solid; architectural historians debate the definition.
-- **Fit score:** 4/5 — a famous "first" with a named architect and a manufactured-credit backstory. The fuzzy definition of "skyscraper" holds it back from a 5.
+  - *Confirmed:* Built 1885 (Jenney), demolished 1931 for the Field Building. The Marshall Field estate trustees appointed a committee headed by Thomas E. Tallmadge to decide whether it was the first skyscraper, and the committee ruled for it over the Tacoma Building (1888). The Western Society of Engineers issued a dissenting report in 1932 (Encyclopedia of Chicago; Jason Barr, Rutgers, "The People v. Jenney" working paper; Chicagology quoting period press).
+  - *Confirmed:* lower floors used cast-iron columns and wrought-iron beams; upper floors used Bessemer steel beams from Carnegie-Phipps (Chicagology, Barr; Britannica Students is consistent). Treat it as a "masonry-iron hybrid" (Barr).
+  - *Confirmed:* Ditherington (Shrewsbury Flaxmill Maltings), designed by Charles Bage, built 1796–97, "first iron-framed building in the world," "paved the way for the modern skyscrapers" (Historic England ×2).
+  - *Confirmed:* Equitable Life Assurance Building, 120 Broadway, 1868–70, was the first office building in New York with a passenger elevator (NYC Landmarks Preservation Commission; Museum of the City of New York; Skyscraper Museum).
+  - *Wrong / cut:* the "1986 publicity campaign." Nothing surfaced; the real event is the 1931 Field-estate committee.
+  - *Hedge:* "Bessemer steel made skyscrapers possible" is too strong. Say "cheap steel, safety elevators and fireproofing together." The combination is inferred, not sourced this pass.
+  - Ditherington is a 5-story mill, not tall. Frame it as "the iron skeleton idea," not "an earlier skyscraper."
+  - History.com says it had a "revolutionary steel frame." That repeats the myth and contradicts the iron-mostly evidence; don't use it.
+- **Sources:**
+  - Encyclopedia of Chicago (Newberry Library / Chicago History Museum) — "Skyscrapers" (http://www.encyclopedia.chicagohistory.org/pages/1149.html) — first-skyscraper debate context (title and extract only).
+  - Jason M. Barr (Rutgers–Newark), "The People v. Jenney: Revisiting the Debate about the First Skyscraper," working paper, 2024 (https://buildingtheskyline.org/wp-content/uploads/2024/06/Barr_Revisiting-Jenney_WP_20June24.pdf) — Tallmadge/Field-estate committee 1931; Western Society of Engineers dissent 1932; masonry-iron hybrid. Academic working paper, not peer-reviewed.
+  - Historic England — list entry 1270576, "Shrewsbury Flaxmill Maltings: Spinning Mill" (https://historicengland.org.uk/listing/the-list/list-entry/1270576) and "The History of Shrewsbury Flaxmill Maltings" (https://historicengland.org.uk/campaigns/visit/shrewsbury-flax-mill/history/) — 1796–97, Bage, first iron-framed building, path to skyscrapers.
+  - NYC Landmarks Preservation Commission designation report (http://s-media.nyc.gov/agencies/lpc/lp/1942.pdf) and Museum of the City of New York blog (https://blog.mcny.org/2012/01/10/100-years-ago-the-equitable-building-fire-2/) — Equitable Building 1868–70, first NYC office building with a passenger elevator.
+  - Britannica — "William Le Baron Jenney" (https://www.britannica.com/biography/William-Le-Baron-Jenney) and Britannica Students — "Home Insurance Building" (https://kids.britannica.com/students/article/Home-Insurance-Building/326554) — basic facts (extract merged).
+  - Chicagology — "Home Insurance Building" (https://chicagology.com/goldenage/goldenage076/) — Tallmadge committee verdict; iron/steel split (enthusiast site quoting period sources; supporting only).
+  - Removed: Carol Willis *Form Follows Finance*, the Chicago Architecture Center entry and the Britannica "skyscraper" entry as cited support. Architecture.org pages surfaced but their content wasn't extracted.
+- **Best "Somebody Did It First" angle:** Jenney and the Home Insurance Building get the credit. Iron framing (Ditherington, 1797) and elevator office towers (NYC, 1870) came first, and the "first" label was awarded 46 years later by a committee set up by the developer replacing it, over engineers' objections. Strong.
+- **Fit score:** 4/5 — a famous "first" with a named architect and a manufactured-credit backstory, now with a named committee chair and a dissent. Still held back by the fuzzy definition of "skyscraper."
+- **What changed from the provisional draft:** Verdict unchanged. Committee confirmed and named (Tallmadge), with the Western Society of Engineers' 1932 dissent added. "1986" confirmed as unsupported and cut. Ditherington dated 1796–97 and attributed to Bage. Equitable confirmed as 1868–70 and seven stories.
 
 ### 12. Glass — Fit 4/5
 - **Planned fun fact:** Pliny's story of Phoenician sailors melting sand under a cooking pot on natron blocks.
-- **Verdict:** Needs correction (frame it as legend). Based on background knowledge; **not verified this session**.
-- **Corrected / on-air version:** "The Roman writer Pliny the Elder said glass was discovered by accident. Phoenician merchants carrying natron set their cooking pots on blocks of it on a beach, and the heat fused the sand into glass. It's a great story and almost certainly untrue: a campfire on a beach doesn't get anywhere near hot enough. The real first glassmakers were in Mesopotamia, making glass beads by around 2500 BCE and the first glass vessels around 1500 BCE. That's more than a thousand years before the Phoenicians supposedly stumbled on it."
+- **Verdict:** Needs correction (frame it as legend) (verified 2026-10-02)
+- **Corrected / on-air version:** "The Roman writer Pliny the Elder said glass was discovered by accident. Merchants carrying natron landed on a beach in what's now Lebanon or Israel and propped their cooking pots on lumps of it. The heat fused the natron and sand into a stream of glass. It's a great story, but even the Corning Museum of Glass says nobody really knows how glass was first made. What we do know is that people in Mesopotamia were making glass beads by the third millennium BCE. Glass vessels followed in Mesopotamia and Egypt by the 1400s BCE. That's long before Pliny wrote his story in the first century AD."
 - **Confirmed vs. inferred vs. unknown:**
-  - *Background knowledge:* Pliny, *Natural History* 36.190–191 (the Belus river, Syria-Phoenicia). The Corning Museum of Glass treats the story as legend. Earliest glass beads date to the mid-3rd millennium BCE in Mesopotamia and Syria. Core-formed vessels appear c. 1500 BCE in Mesopotamia, then Egypt (Thutmose III era).
-  - *Unknown:* the exact first-glass date. Say "around 4,500 years ago," not a hard year.
-- **Sources (leads):**
-  - Corning Museum of Glass — "All About Glass," origins of glassmaking (cmog.org) **[not verified this session]**.
-  - Pliny the Elder, *Natural History* 36.65 (190–191), LacusCurtius/Perseus translation **[not verified this session]**.
-  - Metropolitan Museum of Art Heilbrunn Timeline — "Glass in Antiquity" / Mesopotamian glass (metmuseum.org) **[not verified this session]**.
-- **Best "Somebody Did It First" angle:** Pliny's Phoenicians get the legendary credit. The Mesopotamians actually did it, 1,000+ years before the setting the legend implies. Strong institutional backing (Corning, the Met).
+  - *Confirmed:* Pliny, *Natural History* 36.65 (190–191): merchants with a cargo of natron used lumps of it to prop up cauldrons on the shore near the Belus river (Phoenicia), and it fused with the sand to make glass (LacusCurtius/Perseus texts; Loeb). The Corning Museum of Glass retells it as a legend and says "no one really knows how glass came to be made."
+  - *Confirmed:* glass beads date to the third millennium BCE (Smithsonian "A Brief Scientific History of Glass"; Corning "Origins of Glassmaking"). Core-formed and cast glass vessels appear in Egypt and Mesopotamia by the 15th c. BCE (Met, "Roman Glass" essay; Corning core-forming guide).
+  - *Not supported / cut:* "a campfire on a beach doesn't get anywhere near hot enough." No strong source surfaced. One non-peer-reviewed source (arXiv, "Materials Science in Ancient Rome") argues that the alkali-silica mix lowers the melting point enough to make the story chemically plausible. So don't call it impossible; call it a legend no one can verify.
+  - *Unknown:* the exact date of the first glass. Corning says about 4,000 years ago and Smithsonian says the third millennium BCE (4,000–5,000 years ago), so say "more than 4,000 years ago." The "around 2500 BCE" figure is (unverified) as a precise year.
+  - *Wording:* Pliny says "merchants" (Phoenician setting), not specifically "sailors."
+- **Sources:**
+  - Corning Museum of Glass — "How was the first glass believed to be made?" (https://libanswers.cmog.org/faq/143701) — Pliny's legend; "no one really knows."
+  - Corning Museum of Glass — "Origins of Glassmaking" (https://whatson.cmog.org/exhibitions-galleries/origins-glassmaking) — Mesopotamian origin about 4,000 years ago (extract merged; attribution approximate).
+  - Metropolitan Museum of Art — "Roman Glass" essay (https://www.metmuseum.org/essays/roman-glass) — core-formed and cast vessels in Egypt and Mesopotamia from the 15th c. BC.
+  - Smithsonian Magazine — "A Brief Scientific History of Glass" (https://www.smithsonianmag.com/science-nature/a-brief-scientific-history-of-glass-180979117/) — glass beads from the third millennium BCE; Late Bronze Age take-off.
+  - Pliny the Elder, *Natural History* Book 36, LacusCurtius (https://penelope.uchicago.edu/Thayer/L/Roman/Texts/Pliny_the_Elder/36*.html) — primary text (the extract's paraphrase came via Smith's *Dictionary of Greek and Roman Geography* on Perseus, https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.04.0064%3Aentry%3Dphoenicia-geo).
+  - Removed: the Met "Heilbrunn Timeline: Glass in Antiquity" lead (did not surface); the Met "Roman Glass" essay replaces it.
+- **Best "Somebody Did It First" angle:** Pliny's Phoenician merchants hold the legendary credit. Mesopotamian glassmakers were actually doing it well over a thousand years before the Phoenician-era setting, and roughly 2,000+ years before Pliny wrote. Strong institutional backing (Corning, Met, Smithsonian).
 - **Fit score:** 4/5 — a classic credited origin myth with a documented earlier reality. No famous person, but Pliny's tale is the hook.
+- **What changed from the provisional draft:** Verdict unchanged, now sourced. Cut the "campfire not hot enough" line (unsupported, possibly wrong). "Sailors" became "merchants." First-glass date softened to "more than 4,000 years ago / third millennium BCE." Vessels phrased as "by the 1400s BCE" in Mesopotamia and Egypt.
 
 ### 13. Lighting — Fit 5/5
 - **Planned fun fact:** Edison didn't invent the bulb. (Covered in the launch episode; brief entry only.)
@@ -523,18 +580,28 @@ Each entry gives the planned fun fact, the verdict, the corrected on-air line, w
 
 ### 26. Military Communication — Fit 3/5
 - **Planned fun fact:** SOS doesn't stand for anything, chosen for its simple Morse pattern; adopted by Germany 1905 (internationally 1906 Berlin convention, effective 1908).
-- **Verdict:** Confirmed
-- **Corrected / on-air version:** "SOS doesn't stand for 'Save Our Souls' or anything else. It was chosen because three dots, three dashes, three dots is impossible to mistake. Germany put it into its radio regulations on April 1, 1905. The 1906 International Radiotelegraph Convention in Berlin adopted it worldwide, effective July 1, 1908. Even so, Marconi operators kept using their company's own call, CQD, for years. On the Titanic in 1912, the operators sent CQD first and then switched to SOS."
+- **Verdict:** Confirmed (verified 2026-10-02)
+- **Corrected / on-air version:** "SOS doesn't stand for 'Save Our Souls' or 'Save Our Ship.' It isn't even three letters. It's one unbroken pattern, dot-dot-dot dash-dash-dash dot-dot-dot, picked because it's simple and impossible to mistake. Germany put it in its radio rules in 1905. In 1906, about thirty nations meeting in Berlin made it the international distress signal, and that treaty took effect in 1908. But Marconi's operators had their own call, CQD, and they kept using it. On the night the Titanic sank in 1912, Jack Phillips started with CQD and only later added SOS. Even the first SOS from an American ship didn't come until August 1909."
 - **Confirmed vs. inferred vs. unknown:**
-  - *Confirmed:* German regulations effective 1 Apr 1905; Berlin convention signed 3 Nov 1906, effective 1 Jul 1908.
-  - *Confirmed:* both texts specify a continuous 3-dot/3-dash/3-dot signal with no letter meaning. "Save Our Souls" and similar are later folk backronyms.
-  - *Unverified this session:* the Titanic CQD-then-SOS sequence, and "first SOS used in 1909 (Slavonia/Arapahoe)." Both are **[prior knowledge, not re-verified]**; the search budget ran out. The Titanic detail is very widely documented, but get an institutional cite (e.g., Library of Congress or Smithsonian) before air.
+  - *Confirmed (ITU + Smithsonian Libraries + Nat Geo + Britannica):* SOS came from German national radio regulations of 1905 and was adopted internationally at the 1906 Berlin conference. The convention was signed 3 Nov 1906. SOS is a continuous signal, not letters, and is not an acronym.
+  - *Confirmed (Nat Geo + PBS + Britannica):* Marconi's company announced CQD in 1904. On Titanic, Phillips sent CQD first and later SOS as well. The US formally adopted SOS only after Titanic. Nat Geo says the 1908 ratification covered all conference members except the US.
+  - *Supported by one specialist source only:* "effective 1 July 1908." That date comes from Thomas H. White's transcription of the convention (earlyradiohistory.us). The ITU holds the original convention PDF, which appeared in search but wasn't read. Nat Geo independently gives "ratified 1908", so on air say "took effect in 1908" without the day.
+  - *Unverified:* the exact date of 1 April 1905 for the German rules. No strong source surfaced that gives the day. On air, say "1905".
+  - *Minor discrepancy:* ITU pages say 29 or 30 states signed. Say "about thirty nations."
+  - *Confirmed with one strong source:* the first recorded **American** SOS came from the SS Arapahoe on 11 Aug 1909, off Cape Hatteras/Diamond Shoals, sent by operator T. D. Haubner. Source: NC Dept. of Natural & Cultural Resources.
+  - *Disputed / unverified:* RMS Slavonia, 10 June 1909, as the "first SOS ever." This rests on Wikipedia and weak sites, and a June 1909 NYT report reportedly gives Slavonia's call as CQD. Don't say Slavonia sent the first SOS. If you mention it, say "Slavonia is sometimes credited, but contemporary reports say it sent CQD."
 - **Sources:**
-  - Thomas H. White, "Distress Signalling (1913)," Early Radio History (https://www.earlyradiohistory.us/1913dist.htm) — a well-regarded specialist history (WebFetch blocked; seen in the search listing only)
-  - 1906 International Radiotelegraph Convention text: dates and signal spec via Wikipedia extracts that quote the convention. The ITU's historical collection holds the official text (not fetched).
-  - **Only one strong source could be confirmed this session.** Add ITU/Smithsonian/LoC before marking it final.
-- **Best "Somebody Did It First" angle:** Marconi's CQD was the famous British/Marconi distress call, but Germany's SOS was the official international standard four years before Titanic. Marconi's operators clung to CQD anyway. The "SOS = Save Our Souls" myth-bust adds a second hook.
-- **Fit score:** 3/5 — a good myth-bust and a Germany-vs-Marconi rivalry, but no single wrongly credited inventor. (Who chose SOS is itself obscure.)
+  - ITU — "International Radiotelegraph Conference (Berlin, 1906)" (https://www.itu.int/en/history/Pages/RadioConferences.aspx?conf=4.36) and ITU's "Maritime journey" piece (https://www.itu.int/hub/2022/06/seafarer-day-itu-maritime-publications/): signed 3 Nov 1906, about 30 states, SOS established as the distress signal.
+  - ITU News "Pioneers' Page" (https://www.itu.int/itunews/manager/display.asp?lang=en&year=2006&issue=06&ipage=pioneers): German 1905 origin; continuous signal chosen as simple and unmistakable; Marconi CQD from 1904; Titanic used both.
+  - Smithsonian Libraries blog — "SOS Established" (https://blog.library.si.edu/blog/2009/10/03/sos-established-international-distress-code-designated-in-1906/): 1906 international designation.
+  - National Geographic — "Why Titanic's first call for help wasn't an SOS signal" (https://www.nationalgeographic.com/history/article/why-titanic-first-call-help-not-sos-signal): not an acronym; 1908 ratification by all members except the US; Titanic sent CQD first.
+  - Britannica — "SOS" (https://www.britannica.com/topic/SOS-signal) and "Jack Phillips" (https://www.britannica.com/biography/Jack-Phillips): signal history; Phillips's CQD/SOS calls.
+  - PBS American Experience — "Wireless Signals" (https://www.pbs.org/wgbh/americanexperience/features/rescue-wireless-signals/): CQD = "seeking you, distress"; Republic 1909 (CQD); US adopted SOS after Titanic.
+  - NC Dept. of Natural & Cultural Resources — "Distress Signal SOS First Heard at Hatteras, 1909" (https://www.ncdcr.gov/blog/2015/08/11/distress-signal-sos-first-heard-at-hatteras-1909): Arapahoe, 11 Aug 1909, first recorded American SOS.
+  - Specialist (not counted as strong): Thomas H. White, earlyradiohistory.us, "Berlin International Wireless Telegraph Convention" (https://earlyradiohistory.us/1906conv.htm): effective 1 July 1908.
+- **Best "Somebody Did It First" angle:** Marconi's CQD is the call people associate with the early wireless era and with Titanic. Germany's SOS had been the official international standard since 1906/1908, but British Marconi operators kept using their company's own call. The "Save Our Souls" myth-bust is the second hook. Evidence is solid on both points.
+- **Fit score:** 3/5 — A good myth-bust and a Germany-vs-Marconi rivalry, but no single wrongly credited inventor. Who in Germany chose SOS is still obscure.
+- **What changed from the provisional draft:** The verdict stays Confirmed, now with 5+ strong sources (ITU, Smithsonian Libraries, Nat Geo, Britannica, PBS). The Titanic CQD-then-SOS sequence is now verified. "First SOS 1909" is narrowed to "first *American* SOS, Arapahoe, 11 Aug 1909." Slavonia is demoted to disputed. The day-level dates (1 Apr 1905, 1 Jul 1908) are softened to years on air.
 
 ---
 
@@ -631,251 +698,282 @@ Each entry gives the planned fun fact, the verdict, the corrected on-air line, w
 
 ### 30. Train — Fit 5/5
 - **Planned fun fact:** Trevithick's 1804 locomotive at Pen-y-darren came more than two decades before Stephenson's Rocket (1829).
-- **Verdict:** Confirmed (provisional, not web-verified this pass)
-- **Corrected / on-air version:** "On 21 February 1804, at the Pen-y-darren ironworks in south Wales, Richard Trevithick's steam locomotive pulled about 10 tons of iron, five wagons and roughly 70 people along about 9¾ miles of tramway. That's the first steam locomotive known to haul a load on rails, 25 years before Stephenson's Rocket. The catch: it was so heavy it kept cracking the cast-iron rails, so it went back to being a stationary engine. Trevithick proved it could work. George Stephenson made it pay."
+- **Verdict:** Confirmed (verified 2026-10-02)
+- **Corrected / on-air version:** "On 21 February 1804, at the Penydarren ironworks in south Wales, Richard Trevithick's steam locomotive pulled five wagons with ten tons of iron and about seventy men who'd hitched a ride, nearly ten miles down the tramroad to Abercynon. It's the first known railway journey by steam locomotive, 25 years before Stephenson's Rocket won at Rainhill. The catch: the engine was so heavy it kept cracking the cast-iron rails, so it was a technical win, not a business one. Trevithick died in poverty in 1833. Local workers paid for his funeral so he wouldn't get a pauper's burial. Trevithick proved it could work. The Stephensons made it pay."
 - **Confirmed vs. inferred vs. unknown:**
-  - **High confidence, from my own knowledge:**
-    - Pen-y-darren run on 21 Feb 1804, from Merthyr Tydfil to Abercynon.
-    - Locomotion No. 1 opened the Stockton & Darlington Railway on 27 Sept 1825.
-    - Rocket won the Rainhill Trials in Oct 1829.
-    - Other earlier locomotives: Blenkinsop and Murray's *Salamanca* (Middleton Railway, 1812) was the first commercially successful steam locomotive. Hedley's *Puffing Billy* (about 1813–14) is the oldest surviving locomotive and is at the Science Museum. Stephenson's own first engine was *Blücher* (1814).
-    - Trevithick also ran the "Puffing Devil" steam road carriage in 1801.
-  - **Check:** The load figures (10 tons, 70 men, 9¾ miles, about 4 hours) vary a little between sources.
-  - **Unknown:** Whether Trevithick's Coalbrookdale engine (around 1802–03) ever ran on rails.
-- **Sources (to verify, URLs from memory):**
-  - Science Museum Group — Richard Trevithick and Puffing Billy collection pages (https://collection.sciencemuseumgroup.org.uk). Search "Trevithick" and "Puffing Billy".
-  - Amgueddfa Cymru – Museum Wales — Trevithick locomotive replica and Pen-y-darren history (https://museum.wales). The replica is at the National Waterfront Museum, Swansea.
-  - National Railway Museum — Rocket, Locomotion No. 1 (https://www.railwaymuseum.org.uk).
-  - Britannica — "Richard Trevithick" (https://www.britannica.com/biography/Richard-Trevithick).
-- **Best "Somebody Did It First" angle:**
-  - Who gets the credit: George Stephenson, "Father of the Railways," and *Rocket* in popular memory.
-  - Who did it first: Trevithick ran a rail locomotive 25 years earlier, and Murray, Blenkinsop and Hedley all ran working engines before Locomotion. Trevithick died broke in 1833.
-  - Strong, well-documented, with a clear emotional hook.
-- **Fit score:** 5/5 — Famous credited name plus a well-documented earlier inventor who died poor.
+  - *Confirmed (Museum Wales + Britannica + ETHW/ASME):* the run on 21 Feb 1804 from Penydarren (Merthyr) to the canal at Abercynon; five wagons, 10 tons of iron, 70 men; 9¾ miles at nearly 5 mph. It broke the cast-iron tramplates, so it was a technological rather than commercial success.
+  - *Confirmed (Britannica + NRM + Science Museum Group):* Locomotion No. 1 opened the Stockton & Darlington on 27 Sept 1825. Rocket won the Rainhill Trials in Oct 1829. Note that Rocket was built under the direction of George's son **Robert** Stephenson.
+  - *Confirmed (Science Museum Group + Britannica):* Puffing Billy (1813–14; Hedley, Forster, Hackworth) is the world's oldest surviving steam locomotive. The Middleton Railway in Leeds (Blenkinsop/Murray's Salamanca, 1812) was the first commercially successful use of steam locomotives.
+  - *Confirmed (Britannica summary, ETHW, ASME, Science Museum Group person record):* Trevithick died 22 Apr 1833 in Dartford in poverty, and local workers paid for his funeral and burial.
+  - *Variation, hedge:* the run's duration (about 4 hours, or 3 h 35 min in a non-institutional source) and "nearly 10" vs "9¾" miles. Say "nearly ten miles" and skip the duration.
+  - *Inferred / tradition:* the 500-guinea wager between Homfray and a rival ironmaster. Sources disagree on whether the rival was Crawshay or Hill. If used, say "the story goes there was a bet."
+  - *Not re-checked this pass:* Stephenson's Blücher (1814) and Trevithick's 1801 "Puffing Devil" road carriage. Mark both (unverified) if used.
+  - *Unknown:* whether Trevithick's Coalbrookdale engine (around 1802–03) ran on rails.
+- **Sources:**
+  - Amgueddfa Cymru – Museum Wales — "Richard Trevithick's steam locomotive" (https://museum.wales/blog/1012/Richard-Trevithickrsquos-steam-locomotive/) and "Birth of the Railway Locomotive" (https://museum.wales/blog/2189/Birth-of-the-Railway-Locomotive/): date, route, load, 9¾ miles, about 5 mph, rails fractured, "real father of the railways."
+  - Britannica — "Penydarren tramroad" (https://www.britannica.com/place/Penydarren-tramroad): the 1804 run.
+  - Science Museum Group — model of Trevithick's Pen-y-Darren locomotive (https://collection.sciencemuseumgroup.org.uk/objects/co27505/model-of-trevithicks-first-railway-locomotive-pen-y-darren) and Trevithick person record (https://collection.sciencemuseumgroup.org.uk/people/ap269/trevithick-richard).
+  - National Railway Museum — "Stephenson's Rocket, Rainhill and the rise of the locomotive" (https://www.railwaymuseum.org.uk/objects-and-stories/stephensons-rocket-rainhill-and-rise-locomotive) and Britannica "Rainhill Trials" (https://www.britannica.com/topic/Rainhill-Trials): Rocket and Rainhill, Oct 1829.
+  - Science Museum Group — "Puffing Billy" (https://collection.sciencemuseumgroup.org.uk/objects/co26701/puffing-billy-locomotive-with-tender-and-rails); Britannica "William Hedley" (https://www.britannica.com/biography/William-Hedley): oldest surviving locomotive; early adhesion locomotive.
+  - Britannica — "Richard Trevithick summary" (https://www.britannica.com/summary/Richard-Trevithick); ASME — "Richard Trevithick" (https://www.asme.org/topics-resources/content/richard-trevithick); ETHW (https://ethw.org/Richard_Trevithick): death in poverty, 1833.
+- **Best "Somebody Did It First" angle:** George Stephenson, the "Father of the Railways," and Rocket get the popular credit. Trevithick hauled a load on rails 25 years earlier, and Museum Wales itself calls him "the real father of the railways." Blenkinsop/Murray (1812) and Hedley (1813–14) also ran working engines before Locomotion. Bonus twist: Rocket was largely Robert Stephenson's engine, not George's. Very solid, with an emotional ending: Trevithick died broke.
+- **Fit score:** 5/5 — A famous credited name, a well-documented earlier inventor who died poor, and a national museum on record taking his side.
+- **What changed from the provisional draft:** No change to the verdict; now verified with 4+ strong sources. All memory-only URLs were replaced with found pages. The Robert Stephenson nuance and the funeral detail were added. Duration and wager are flagged as hedges.
 
 ### 31. Car — Fit 5/5
 - **Planned fun fact:** Karl Benz patented the first true automobile in 1886, not Ford. Ford's breakthrough was the moving assembly line (1913).
-- **Verdict:** Needs correction (small wording fixes only; not web-verified this pass)
-- **Corrected / on-air version:** "Henry Ford didn't invent the car. Karl Benz patented his three-wheeled, gasoline-powered Motorwagen in January 1886, when Ford was 22. Nicolas-Joseph Cugnot had a steam-powered vehicle crawling around Paris in 1769. Ford didn't invent the assembly line either. Ransom Olds was building cars on a stationary line by 1901, and Chicago meatpackers were running moving 'disassembly' lines decades earlier. What Ford's team did in 1913 was make the line move for whole cars, cutting the time to build a Model T chassis from about 12 hours to about 90 minutes."
+- **Verdict:** Needs correction (verified 2026-10-02). Wording fixes only; the core fact holds.
+- **Corrected / on-air version:** "Henry Ford didn't invent the car. On 29 January 1886, Carl Benz applied for a German patent on a 'vehicle powered by a gas engine,' a three-wheeler. That patent is now on UNESCO's Memory of the World register as the automobile's 'birth certificate.' Ford was 22. And a French army engineer, Nicolas-Joseph Cugnot, had a steam-powered wagon moving under its own power in 1769. Ford didn't invent the assembly line either. Ransom Olds was building Curved Dash Oldsmobiles on a progressive line, cars rolled from station to station on dollies, by 1901, and Chicago meatpackers had moving 'disassembly' lines before that. What Ford's team did in 1913 was make the line move. By early 1914 a Model T came off it about every 93 minutes, down from about twelve and a half hours."
 - **Confirmed vs. inferred vs. unknown:**
-  - **High confidence, from my own knowledge:**
-    - Benz's German patent DRP 37435 was filed 29 Jan 1886.
-    - Cugnot's *fardier à vapeur* dates to 1769–70; one survives at the Musée des Arts et Métiers, Paris.
-    - Daimler and Maybach built a motorized carriage in 1886 independently.
-    - Ford's Highland Park moving line was phased in during 1913, with chassis assembly by late 1913. Ford engineers themselves cited the meatpacking lines as inspiration.
-  - **Hedge — Olds:** That Ransom Olds' line for the Curved Dash Olds (1901) was the "first assembly line" is mostly repeated from automotive-industry sources. Say "an early stationary assembly line," not "the first."
-  - **Hedge — "true automobile":** Phrase it as "the first practical gasoline-powered automobile."
-  - **Disputed — Siegfried Marcus:** Vienna, petrol-engine handcarts and cars. The "second Marcus car" was once dated to 1875, but later research suggests about 1888–89. Nazi-era censorship (Marcus was of Jewish descent) muddied the record. Treat him as a disputed side note only.
-  - **Check:** The 12½-hours-to-93-minutes figure is the commonly cited Ford one. Check the exact numbers.
-- **Sources (to verify, URLs from memory):**
-  - Mercedes-Benz Group / Mercedes-Benz Classic — "Benz Patent Motor Car," DRP 37435 (https://group.mercedes-benz.com). Search "Patent Motor Car 1886".
-  - The Henry Ford museum — Model T and moving assembly line (https://www.thehenryford.org); Ford Motor Company, "100 Years of the Moving Assembly Line" (https://corporate.ford.com).
-  - Musée des Arts et Métiers — Cugnot fardier (https://www.arts-et-metiers.net).
-  - Britannica — "automobile: history" (https://www.britannica.com/technology/automobile/History-of-the-automobile).
-- **Best "Somebody Did It First" angle:**
-  - Who gets the credit: Ford, for both the car and the assembly line.
-  - Who did it first: Benz (the car), Cugnot (a self-propelled vehicle), and Olds plus the meatpackers (the line).
-  - Very solid evidence. Classic "Ford perfected it" structure, like Heinz and ketchup.
+  - *Confirmed (Mercedes-Benz Group + UNESCO):* the patent application DRP 37435 was filed 29 Jan 1886; it is on UNESCO's Memory of the World register; single-cylinder engine, three wheels, 0.75 hp. (The Mercedes source is a company source; UNESCO is the independent one.)
+  - *Confirmed (Musée des Arts et Métiers + Britannica):* Cugnot's fardier dates to 1769 (first) and 1770 (second); the second survives at the Musée des Arts et Métiers in Paris.
+  - *Confirmed (The Henry Ford + History.com + PBS + Ford corporate):* moving lines were phased in through 1913 (magnetos in April, chassis in August/October). The figure is about 93 minutes per car by early 1914 versus 12½ hours under the stationary method. Ford engineers cited the slaughterhouse disassembly line. **Hedge:** sources differ on the chassis-line date (August vs. 7 Oct 1913), so just say "1913."
+  - *Confirmed (Smithsonian NMAH + Britannica):* Olds built a progressive assembly system without a power conveyor by 1901; the Curved Dash is considered the first mass-produced gasoline car. NMAH says outright "his factory was the first to build cars on an assembly line." Saying "an early assembly line" stays safe.
+  - *Disputed (ASME, Technisches Museum Wien, Britannica):* the Siegfried Marcus car. ASME's landmark listing still says "ca. 1875," but the Technisches Museum Wien now dates it to 1888/89 because the engine was delivered in 1888. Use it only as a disputed side note. The claim that Nazi-era censorship muddied the record (Marcus was of Jewish descent) was **not** re-checked this pass. Mark it (unverified), or leave it out.
+  - *Not re-checked:* Daimler and Maybach's 1886 motor carriage (Britannica "Daimler" appeared but wasn't examined). Mark it (unverified) if used.
+- **Sources:**
+  - UNESCO Memory of the World — "Patent DRP 37435 'Vehicle with gas engine operation' submitted by Carl Benz, 1886" (https://www.unesco.org/en/memory-world/patent-drp-37435-vehicle-gas-engine-operation-submitted-carl-benz-1886): patent and date.
+  - Mercedes-Benz Group — "Benz Patent Motor Car: The first automobile (1885–1886)" (https://group.mercedes-benz.com/company/tradition/company-history/1885-1886.html): patent and vehicle specs (company source).
+  - Musée des Arts et Métiers — "Fardier à vapeur" (https://www.arts-et-metiers.net/musee/fardier-vapeur); Britannica — "Nicolas-Joseph Cugnot" (https://www.britannica.com/biography/Nicolas-Joseph-Cugnot): 1769/1770 vehicles; the surviving example.
+  - The Henry Ford — "K-12 Research Guide: Assembly Line" (https://askus.thehenryford.org/K12/faq/433848) and "Henry Ford: Assembly Line" (https://www.thehenryford.org/collections/explore/sets/detail/henry-ford-assembly-line); Ford — "Assembly Line Revolution" (https://corporate.ford.com/articles/history/moving-assembly-line/); History.com — "Moving assembly line debuts at Ford factory" (https://www.history.com/this-day-in-history/october-7/moving-assembly-line-at-ford); PBS — "A Science Odyssey: Ford installs first moving assembly line" (https://www.pbs.org/wgbh/aso/databank/entries/dt13as.html): 1913 phase-in, 93 minutes vs 12½ hours, meatpacking inspiration.
+  - Smithsonian NMAH — "Race to the Museum: Oldsmobile curved-dash runabout, 1903" (https://americanhistory.si.edu/explore/stories/race-museum-oldsmobile-curved-dash-runabout-1903); Britannica — "Oldsmobile" (https://www.britannica.com/technology/Oldsmobile): Olds' progressive line and mass production, 1901.
+  - Technisches Museum Wien — "Marcus Car, 1888/1889" (https://www.technischesmuseum.at/object/marcus-wagen-1888-1889); ASME landmark 203 (https://www.asme.org/about-asme/engineering-history/landmarks/203-siegfried-marcus-car): the dating dispute.
+- **Best "Somebody Did It First" angle:** Ford gets popular credit for both the car and the assembly line. Benz did the car first (and Cugnot the self-propelled vehicle). Olds and the meatpackers did the line first, and the Smithsonian itself says Olds' factory was the first to build cars on an assembly line. Very solid on both layers.
 - **Fit score:** 5/5 — A famous wrong credit, with two well-documented layers of earlier inventors.
+- **What changed from the provisional draft:** The verdict stays Needs correction (wording only). All facts are now verified with strong sources. "12 hours to 90 minutes for a chassis" is corrected to "about 12½ hours to about 93 minutes per car by early 1914." UNESCO was added as an independent Benz source. The Olds hedge can be loosened slightly because the Smithsonian says "first." The Marcus Nazi-censorship point is flagged unverified.
 
 ### 32. Flight — Fit 4/5
 - **Planned fun fact:** The Wright brothers' 1903 flight covered 852 feet, and their hometown paper refused to report it.
-- **Verdict:** Needs correction (not web-verified this pass)
+- **Verdict:** Needs correction (verified 2026-10-02)
 - **Corrected / on-air version:**
-  - "On 17 December 1903 the Wrights made four flights. The first, with Orville at the controls, lasted 12 seconds and covered 120 feet. Shorter than the wingspan of a 747. The longest, with Wilbur in the last attempt of the day, went 852 feet in 59 seconds."
-  - "Orville wired home: 'Success four flights… longest 57 seconds… inform press.' The telegraph office garbled 59 into 57. According to the family's account, the Dayton Journal's man, Frank Tunison, shrugged it off: 57 seconds? If it had been 57 minutes, that might be news."
-  - "Hedge: another Dayton paper, the Daily News, did run a short item the next day, and the Norfolk Virginian-Pilot ran a wildly inaccurate scoop."
+  - "On 17 December 1903 the Wrights made four flights. The first, with Orville at the controls, lasted 12 seconds and covered 120 feet, shorter than the wingspan of a 747. The longest, Wilbur in the last attempt of the day, went 852 feet in 59 seconds. Then a gust flipped the Flyer and wrecked it."
+  - "Orville wired their father: 'Success four flights Thursday morning … longest 57 seconds inform press home Christmas.' The telegraph garbled 59 seconds into 57, and misspelled Orville's name. Their brother Lorin took it to the Dayton Journal, and the city editor, Frank Tunison, brushed it off. As the family later told it, he said that if it had been 57 *minutes*, it might have been news."
+  - Hedge to say on air: "Not every paper missed it. The Dayton Daily News ran a story the next day, and the Journal finally ran it on the 19th."
+  - The 747 comparison is safe (a 747's wingspan is about 195–225 ft) but wasn't re-checked this pass.
 - **Confirmed vs. inferred vs. unknown:**
-  - **High confidence, from my own knowledge:**
-    - The four flights: 120 ft / 12 s (Orville), then roughly 175 ft and 200 ft, then 852 ft / 59 s (Wilbur).
-    - The telegram's "57 seconds" error. The original telegram is in the Library of Congress Wright papers.
-  - **Inferred, family account only:** The Tunison quote comes from the Wright family's account, as told in Fred C. Kelly's authorized biography *The Wright Brothers* (1943). It is a family recollection, not a contemporaneous record, so attribute it.
-  - **Fix needed:** "Their hometown paper refused" is too absolute. My understanding is that the *Dayton Daily News* ran a short piece on 18 Dec 1903 (headline along the lines of "Dayton Boys Emulate Great Santos-Dumont"). **Verify this before airing.**
-  - **Disputed — Whitehead:** Gustave Whitehead's claimed flight on 14 Aug 1901 in Bridgeport, CT rests mainly on a *Bridgeport Herald* article. There are no photographs.
-    - In 2013, *Jane's All the World's Aircraft* (an editorial by Paul Jackson) backed Whitehead, and Connecticut passed a law crediting him.
-    - Smithsonian senior curator Tom Crouch rejected the claim.
-    - The 1948 Smithsonian–Wright estate agreement says the Smithsonian may not state that any earlier aircraft was capable of carrying a man under its own power in controlled flight, or the Flyer could be reclaimed. Whitehead supporters cite this as a conflict of interest.
-    - On air: "a disputed claim the Smithsonian rejects, and the Smithsonian is contractually barred from endorsing."
-- **Sources (to verify, URLs from memory):**
-  - Smithsonian National Air and Space Museum — 1903 Wright Flyer; "The Wright Brothers & The Invention of the Aerial Age" (https://airandspace.si.edu). The four flights, distances and times.
-  - Library of Congress — Wilbur and Orville Wright Papers, including the 17 Dec 1903 telegram (https://www.loc.gov/collections/wilbur-and-orville-wright-papers/).
-  - National Park Service — Wright Brothers National Memorial (https://www.nps.gov/wrbr/).
-  - Fred C. Kelly, *The Wright Brothers* (1943). Source of the Tunison anecdote; a family-authorized account.
-  - Smithsonian Magazine / NASM — Tom Crouch's rebuttal of the Whitehead claim (2013); the text of the 1948 Smithsonian–Wright estate agreement.
-- **Best "Somebody Did It First" angle:**
-  - The Wrights *are* first by mainstream consensus, so the twist runs the other way.
-  - The Smithsonian itself spent decades claiming *Langley's* Aerodrome was "the first man-carrying aeroplane capable of sustained free flight." That claim rested on Glenn Curtiss's modified 1914 tests of the Aerodrome.
-  - In protest, Orville sent the Flyer to London's Science Museum in 1928. It only came back in 1948 under the contract that still bars the Smithsonian from crediting anyone earlier.
-  - Whitehead works as a disputed coda.
+  - *Confirmed (NASM + NPS + LoC):* four flights: 120 ft / 12 s (Orville), 175 ft / 12 s, 200 ft / 15 s, and 852 ft / 59 s (Wilbur). Wind then damaged the Flyer.
+  - *Confirmed (LoC):* the telegram text; the "57 instead of 59 seconds" error and the misspelled name; the original is in the Wright Papers, LoC Manuscript Division.
+  - *Confirmed (NPS):* Lorin delivered the news to the Dayton Journal.
+  - *Inferred / family account:* the Tunison "57 minutes" quip. It turned up only in newspaper retrospectives (Dayton Daily News, Baltimore Sun) and traces to the Wright family account in Fred C. Kelly's authorized biography (1943). No institutional source found. Attribute it: "as the family later told it."
+  - *Supported but not by an institutional source:* that the Dayton Daily News ran an accurate story on 18 Dec and the Journal ran it on 19 Dec. This comes from the Dayton Daily News's own retrospective (a self-interested source) and a Wright-history blog. Hedge: "reportedly."
+  - *Confirmed (Smithsonian NASM/SI + NPR + CT General Assembly):* Whitehead's claimed flight of 14 Aug 1901. Jane's All the World's Aircraft (editor Paul Jackson) backed Whitehead in 2013; Connecticut passed legislation honoring him; Smithsonian curator Tom Crouch rejects the claim; the one named witness, James Dickie, later called the story a hoax.
+  - *Confirmed (Smithsonian NASM + SI):* the Smithsonian's Langley Aerodrome "capable" label rested on 1914 tests by engineers in a patent fight with the Wrights. Orville lent the Flyer to London's Science Museum in 1928 in protest. The Smithsonian retracted in its 1942 report. The 1948 transfer agreement says the Flyer reverts to the estate if the Smithsonian credits an earlier machine as "capable of carrying a man under its own power in controlled flight." (Curtiss's name as the tester wasn't in the extracts; the 1914 tests were. Say "a Wright rival's 1914 tests," or name Curtiss as (unverified).)
+- **Sources:**
+  - Smithsonian NASM — "1903 Wright Flyer" (https://airandspace.si.edu/collection-objects/1903-wright-flyer/nasm_A19610048000) and "What Happened to the Original Wright Flyer?" (https://airandspace.si.edu/stories/editorial/what-happened-original-wright-flyer): flights; the 1928 London loan; the 1942 retraction; the 1948 return.
+  - National Park Service — "Four Powered Flights" (https://www.nps.gov/places/3-four-powered-flights.htm); "Lorin Wright's Life Story" (https://www.nps.gov/daav/learn/historyculture/lorinwrightslifestory.htm): flight distances and times; Lorin and the Dayton Journal.
+  - Library of Congress — telegram from Orville Wright, 17 Dec 1903 (https://www.loc.gov/item/2003680165); "Today in History – December 17" (https://www.loc.gov/item/today-in-history/december-17/): telegram text and transmission errors.
+  - Smithsonian Magazine (Air & Space) — "Yes, the Wright Brothers Really Were the First to Fly" (https://www.smithsonianmag.com/air-space-magazine/who-flew-first-290750/); NASM — "Debunking Gustave Whitehead's Claim" (https://airandspace.si.edu/stories/editorial/flight-claims-gustave-whitehead); SI fact sheet "First in Flight . . . Still the Wrights" (https://www.si.edu/newsdesk/factsheets/first-flight-still-wrights): the 1948 contract clause, Langley, and the Whitehead rebuttal.
+  - NPR — "Historian Propels Connecticut To Claim 'First In Flight'" (https://www.npr.org/2013/03/19/174634237/historian-propels-connecticut-to-claim-first-in-flight): the 2013 Jane's editorial and Connecticut's action.
+  - Not strong (newspaper retrospective): Dayton Daily News — "When the Wright brothers shocked the world, the Dayton media flubbed it" (https://www.daytondailynews.com/local/when-the-wright-brothers-shocked-the-world-the-dayton-media-flubbed-it/article_e04cee61-d3bf-57c7-8043-2c8b452069aa.html): Tunison and the Dayton coverage.
+  - Removed: Fred C. Kelly, *The Wright Brothers* (1943), is cited only as the origin of the anecdote. It wasn't seen this pass.
+- **Best "Somebody Did It First" angle:** Mainstream consensus says the Wrights really were first, so the twist runs the other way. For decades the Smithsonian credited Langley's Aerodrome instead, based on a rival's rigged-up 1914 tests. Orville exiled the Flyer to London in protest (1928), and it came home in 1948 only under a contract that still bars the Smithsonian from crediting anyone earlier. Whitehead works as a disputed coda: Jane's and Connecticut back him, the Smithsonian rejects him, and his supporters point to the contract.
 - **Fit score:** 4/5 — A strong "credit fight" story, but the famous names are probably genuinely first. Frame it as a fight over credit, not a dethroning.
+- **What changed from the provisional draft:** The verdict stays Needs correction. Flight figures, the telegram, the Langley/1928/1942/1948 story and the Whitehead details are now verified with strong sources. Two corrections: the second flight was 175 ft in 12 s and the third 200 ft in 15 s (now confirmed). The Tunison quote stays family-account only. The Dayton Daily News coverage is supported only by newspaper sources; "reportedly" is added. The Norfolk Virginian-Pilot scoop wasn't re-checked; drop it, or mark it (unverified).
 
 ### 33. Space Travel — Fit 4/5
 - **Planned fun fact:** Fruit flies on a captured V-2 in 1947 were the first animals in space (20 Feb 1947, White Sands; NASA source).
-- **Verdict:** Confirmed (provisional, not web-verified this pass)
-- **Corrected / on-air version:** "Before Laika, before the monkeys, the first animals known to reach space were fruit flies. On 20 February 1947, the US launched a captured German V-2 rocket from White Sands, New Mexico, carrying fruit flies and some seeds. It reached about 109 km (68 miles), past the 100 km Kármán line, in a little over three minutes. The capsule parachuted back down, and the flies came home alive. That's more than ten years before Laika."
+- **Verdict:** Confirmed (verified 2026-10-02). The altitude figure needs a hedge.
+- **Corrected / on-air version:** "Before Laika, before the monkeys, the first animals we know reached space were fruit flies. On 20 February 1947, the US launched a captured German V-2 from White Sands, New Mexico, with fruit flies and seeds aboard, to see what cosmic rays would do to living things. By NASA's and Britain's Royal Observatory's accounts, it went about 67 miles up, past the 62-mile line where space is usually said to begin. The capsule parachuted back, and the flies came home alive. That's more than ten years before Laika."
 - **Confirmed vs. inferred vs. unknown:**
-  - **High confidence, from my own knowledge:**
-    - NASA's "A Brief History of Animals in Space" gives 20 Feb 1947, a V-2, fruit flies, 109 km in 3 min 10 s, the "Blossom" capsule parachute ejection, and the flies recovered alive.
-    - 109 km is above the Kármán line (100 km).
-    - Laika (Sputnik 2, 3 Nov 1957) was the first animal to *orbit*. She did not survive.
-    - Albert II (14 June 1949) was the first monkey or primate in space. He died on impact.
-  - **Hedge:** Say "first animals *known* to reach space." Earlier V-2 flights in 1946 carried seeds and fungal spores, which are not animals.
-- **Sources (to verify, URLs from memory):**
-  - NASA History — "A Brief History of Animals in Space" (https://history.nasa.gov/animals.html; possibly moved under nasa.gov/history).
-  - White Sands Missile Range Museum — V-2 program history (https://www.wsmr-history.org).
-  - A second institutional confirmation is still needed: NASM or a peer-reviewed space-biology history.
-- **Best "Somebody Did It First" angle:**
-  - Who gets the credit: Laika, as "the first animal in space."
-  - Who did it first: US fruit flies on a captured Nazi V-2, a decade earlier.
-  - Well documented, assuming the NASA page holds up on re-check.
+  - *Confirmed (NASA + Royal Museums Greenwich + Nat Geo timeline):* 20 Feb 1947; a captured V-2; White Sands; fruit flies plus seeds; the Blossom project's ejected canister came down by parachute; flies recovered alive.
+  - *Confirmed (RMG):* Laika (Sputnik 2, 3 Nov 1957) was the first animal to *orbit*. *Confirmed (NASA):* Albert II (14 June 1949) reached about 83 miles and died on impact.
+  - *Altitude, hedge:* RMG says 67 miles. A NASA-domain extract says 68 miles in 3 min 10 s, which is about 109 km. History.com says 42 miles (68 km), which looks like a unit mix-up. One NASA chronology extract says "106 miles" for a Blossom canister, possibly a different Blossom flight. Majority view: about 67–68 miles. On air, say "about 67 miles" and attribute it, and don't state "109 km in 3 min 10 s" as fact.
+  - *Hedge:* "first animals *known* to reach space." Earlier 1946 V-2 flights carried seeds and fungal spores, not animals. That 1946 detail wasn't re-checked; omit it, or mark it (unverified).
+- **Sources:**
+  - NASA History — "A Brief History of Animals in Space" (https://www.nasa.gov/history/a-brief-history-of-animals-in-space/): Blossom project fruit flies recovered alive; Albert II (WebFetch blocked; search extract only).
+  - NASA History — "Aeronautics and Astronautics Chronology, 1945-49" (https://www.hq.nasa.gov/office/pao/History/Timeline/1945-49.html): V-2 No. 20, the 20 Feb 1947 Blossom launch.
+  - Royal Museums Greenwich — "What was the first animal in space?" (https://www.rmg.co.uk/stories/space-astronomy/what-was-first-animal-space): fruit flies, 20 Feb 1947, White Sands, 67 miles, parachute recovery; Laika first to orbit.
+  - National Geographic — "A visual timeline of every animal ever sent into space" (https://www.nationalgeographic.com/magazine/graphics/a-visual-timeline-of-every-animal-ever-sent-into-space): corroborating timeline (seen in results; content not extracted).
+  - History.com — "What was the first animal in space?" (https://www.history.com/articles/what-was-the-first-animal-in-space): confirms the event; its 42-mile altitude is the outlier.
+  - Removed: the White Sands Missile Range Museum (wsmr-history.org), which wasn't found this pass.
+- **Best "Somebody Did It First" angle:** Laika gets the credit as "the first animal in space." US fruit flies on a captured Nazi V-2 got there a decade earlier, and came back alive. Well documented by NASA and RMG.
 - **Fit score:** 4/5 — A famous myth (Laika) and a hooky correction, though the "doer" is a bug, not a person.
+- **What changed from the provisional draft:** The verdict stays Confirmed, with two strong sources (NASA and RMG). The altitude is changed from a flat "109 km in 3 min 10 s" to an attributed "about 67 miles," because sources disagree. The White Sands museum source was replaced with RMG.
 
 ### 34. Navigation — Fit 4/5
 - **Planned fun fact:** Polynesian navigators crossed the Pacific by stars, waves and birds, and Marshall Islands stick charts (mattang, rebbelib, meddo) mapped ocean swells. The planned angle: Polynesians reached the Americas before Columbus (sweet potato; the 2020 *Nature* genomics study by Ioannidis et al., contact around 1200 CE).
-- **Verdict:** Disputed (the Americas claim). The wayfinding and stick-chart parts hold up.
+- **Verdict:** Disputed (verified 2026-10-02). The Americas claim is disputed; the wayfinding and stick-chart parts are Confirmed.
 - **Corrected / on-air version:**
-  - "Polynesian navigators settled a triangle of ocean bigger than Russia (Hawai'i, Aotearoa/New Zealand, Rapa Nui) without compass or chart. They steered by stars, swell patterns, clouds and birds. Marshall Islanders even built 'maps' of ocean swells out of sticks and shells."
-  - "And around 1200 CE, Polynesians and Native Americans met. Their DNA shows it. A 2020 study in *Nature* found Native American ancestry in Eastern Polynesian islanders dating to about that time, centuries before Columbus. What the genes can't tell us is who sailed to whom."
+  - "Polynesian navigators settled a vast triangle of ocean, from Hawai'i to Aotearoa/New Zealand to Rapa Nui, without compass or chart. They steered by stars, swells, clouds and birds. Marshall Islanders even built 'maps' of ocean swells out of sticks and shells: curved sticks for swells, shells for islands."
+  - "In the 1950s, historian Andrew Sharp argued that Polynesians must have found their islands by accident, drifting. In 1976 the voyaging canoe Hōkūle'a sailed from Hawai'i to Tahiti with master navigator Mau Piailug, using no instruments at all."
+  - "Around 1200 CE, Polynesians and Native Americans met. A 2020 study in *Nature* found Native American DNA in Eastern Polynesian islanders, dating to about then, centuries before Columbus. What the genes can't tell us is who sailed to whom."
 - **Confirmed vs. inferred vs. unknown:**
-  - **Stick charts:** *Mattang* (abstract teaching charts of swell patterns), *meddo* (part of an island chain) and *rebbelib* (the whole Ratak or Ralik chain). High confidence; widely documented by museums.
-  - **The 2020 study:** Ioannidis et al. 2020, *Nature* 583:572–577, "Native American gene flow into Polynesia predating Easter Island settlement." It found a Native American component most similar to the Zenú of Colombia, with the earliest contact signal dated to about 1150–1230 CE.
-    - **The planned angle overstates it.** The study's own title says gene flow *into* Polynesia. The authors say the data fit either Polynesians reaching South America and returning, or South Americans drifting west. Do NOT say "Polynesians reached the Americas" as fact.
-  - **Sweet potato:** It was in Polynesia before Columbus (carbonized remains in the Cook Islands from about 1000 CE). The Quechua *cumal* / Polynesian *kumara* word link is suggestive but debated. A 2018 *Current Biology* paper (Muñoz-Rodríguez et al.) argued for natural dispersal; this is contested.
-  - **Strong, well-supported story:** Andrew Sharp's 1950s–60s theory said Polynesian settlement was accidental drift. The Hōkūle'a refuted it in 1976 by sailing Hawai'i–Tahiti with Mau Piailug navigating without instruments.
-- **Sources (to verify, URLs from memory):**
-  - Ioannidis, A.G. et al. 2020, *Nature* 583:572–577, doi:10.1038/s41586-020-2487-2 (https://www.nature.com/articles/s41586-020-2487-2).
-  - Polynesian Voyaging Society — Hōkūle'a 1976 voyage (https://www.hokulea.com).
-  - Smithsonian NMNH or British Museum — Marshall Islands stick charts (https://www.britishmuseum.org/collection; search "stick chart").
-  - Smithsonian Magazine coverage of Ioannidis 2020, for the plain-language hedging on direction.
-- **Best "Somebody Did It First" angle:**
-  - Who gets the credit: European "Age of Discovery" navigators, as the first true open-ocean navigators.
-  - Who did it first: Polynesian wayfinders, centuries earlier, without instruments.
-  - The contact-with-the-Americas part is genetic and real but has no direction.
-  - Norse Vinland (L'Anse aux Meadows, tree-ring dated to 1021 CE in *Nature* 2021) is an alternative, firmer "before Columbus" peg.
-- **Fit score:** 4/5 — Strong "before Columbus" and "before European navigators" framing, but the headline Americas claim must be hedged.
+  - *Confirmed (LoC + British Museum + Met + Penn Museum):* the three chart types. Mattang is a teaching chart of swell interference. Rebbelib covers a large area, both chains. Meddo covers a section of a chain. Curved sticks are swells and shells are islands.
+  - *Confirmed (Nature, Stanford, Smithsonian Mag, Science, Nat Geo):* Ioannidis et al. 2020, *Nature* 583:572–577, "Native American gene flow into Polynesia predating Easter Island settlement." The Native American source is closest to Indigenous groups of coastal Colombia/Ecuador; admixture is dated about 1150 (South Marquesas) to about 1380 (Rapa Nui); contact around AD 1200. The researchers say they can't tell where the encounter happened, and note that Latin American fishermen have drifted to Polynesia. "Polynesians reached the Americas" remains **unproven**. A 2024 *Nature* paper on ancient Rapanui genomes also finds pre-European contact (seen in results; not examined in detail).
+  - *Confirmed (Hōkūle'a/PVS + U. Hawai'i + Britannica + PBS):* Sharp's 1956 accidental-settlement theory. Hōkūle'a left Hawai'i on 1 May 1976, made landfall at Mataiva on 1 June, and reached Papeete on 4 June, with Mau Piailug navigating without instruments. Say it "challenged" or "helped overturn" the drift theory rather than "refuted" it outright.
+  - *Confirmed but contested in interpretation:* the sweet potato was in Polynesia before Columbus (carbonized remains at Mangaia, Cook Islands, about 1000 CE; Smithsonian/Science and a peer-reviewed PMC paper). Muñoz-Rodríguez et al. 2018 (*Current Biology*; Oxford) argued for natural long-distance dispersal predating humans, which is contested. The cumal/kumara word link wasn't re-checked; mark it (unverified) or omit.
+  - *Alternative peg, confirmed:* Norse presence at L'Anse aux Meadows in 1021 CE (Kuitems et al., *Nature* 2021, dated by the 993 cosmic-ray tree-ring spike). Precisely, trees were cut there in 1021; it doesn't say the settlement was founded that year.
+- **Sources:**
+  - Ioannidis et al. 2020, *Nature* (https://www.nature.com/articles/s41586-020-2487-2): the study itself.
+  - Stanford Medicine — "Polynesians, Native Americans made contact before European arrival" (https://med.stanford.edu/news/all-news/2020/07/polynesians-and-native-americans-made-early-contact.html); Smithsonian Magazine — "Native Americans and Polynesians Met Around 1200 A.D." (https://www.smithsonianmag.com/science-nature/native-americans-polynesians-meet-180975269/); Science — "Polynesians steering by the stars met Native Americans long before Europeans arrived" (https://www.science.org/content/article/polynesians-steering-stars-met-native-americans-long-europeans-arrived): plain-language summaries and the direction caveat.
+  - Nature (2024) — "Ancient Rapanui genomes reveal resilience and pre-European contact with the Americas" (https://www.nature.com/articles/s41586-024-07881-4): an independent later confirmation of contact.
+  - Library of Congress — "The Unique Seafaring Charts of the Marshall Islands" (https://blogs.loc.gov/maps/2021/11/the-unique-seafaring-charts-of-the-marshall-islands/); British Museum — chart ('rebbelib') (https://www.britishmuseum.org/collection/object/E_Oc1944-02-931); Met — Rebbilib (https://www.metmuseum.org/art/collection/search/311297); Penn Museum Expedition (https://www.penn.museum/sites/expedition/marshall-islands-cartography/): stick charts.
+  - Polynesian Voyaging Society — 1976 50th-anniversary post (https://hokulea.com/polynesian-voyaging-society-honors-the-50th-anniversary-of-hokule%CA%BBas-1976-maiden-voyage-to-tahiti/) and "Voyaging into Polynesia's Past: 1976" (https://archive.hokulea.com/1976.html); Britannica — "Mau Piailug" (https://www.britannica.com/biography/Mau-Piailug); PBS — "Wayfinders: Polynesian History and Origin" (https://www.pbs.org/wayfinders/polynesian7.html): the Sharp theory and the 1976 voyage.
+  - Muñoz-Rodríguez et al. 2018, *Current Biology* (https://www.cell.com/current-biology/fulltext/S0960-9822(18)30321-X); Nature news, "Sweet potato migrated to Polynesia thousands of years before people did" (https://www.nature.com/articles/d41586-018-04488-4); PMC paper on pre-Columbian sweet potato dispersal (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8046222/): the sweet potato debate.
+  - Kuitems et al. 2021, *Nature* — "Evidence for European presence in the Americas in AD 1021" (https://www.nature.com/articles/s41586-021-03972-8); Nat Geo coverage (https://www.nationalgeographic.com/history/article/ancient-solar-storm-pinpoints-viking-settlement-americas-exactly-1000-years-ago): the Norse peg.
+- **Best "Somebody Did It First" angle:** European "Age of Discovery" navigators get the credit as the great open-ocean navigators. Polynesian wayfinders were doing it centuries earlier without instruments, and Western scholars like Sharp even claimed it was luck until Hōkūle'a showed otherwise. The Americas contact is genetically real but has no known direction. For a firmer "before Columbus" peg, use the Norse at L'Anse aux Meadows (1021).
+- **Fit score:** 4/5 — Strong "before European navigators" framing; the headline Americas claim must stay hedged.
+- **What changed from the provisional draft:** The verdict stays Disputed (for the Americas claim); everything else is now verified. Corrections: Native American ancestry is "closest to coastal Colombia/Ecuador groups" (Stanford), not specifically "the Zenú"; dates range about 1150–1380 by island. A 2024 *Nature* Rapanui paper was added. "Bigger than Russia" was dropped (not re-checked). The cumal/kumara link is marked unverified.
 
 ### 35. Timekeeping — Fit 2/5
 - **Planned fun fact:** The oldest sundial dates to about 1200 BCE in the Valley of the Kings (found in 2013, University of Basel), and obelisks served as shadow clocks around 3500 BCE.
-- **Verdict:** Needs correction
-- **Corrected / on-air version:** "In 2013, a University of Basel team working in the Valley of the Kings found a sundial painted on a flat limestone flake, from around the 13th century BCE. It was probably used to time the workers cutting royal tombs. It's *one of* the oldest Egyptian sundials ever found, not the oldest. A shadow clock from Thutmose III's reign, around 1450 BCE, is older still."
+- **Verdict:** Needs correction (verified 2026-10-02)
+- **Corrected / on-air version:** "In 2013, a University of Basel team digging in the Valley of the Kings found a sundial painted on a flat piece of limestone: a half-circle split into twelve sections, with a hole for a peg to cast a shadow. It dates to the 13th century BCE, and it was found among the huts of the workmen who cut the royal tombs. It's *one of* the oldest Egyptian sundials, not the oldest. Egyptians were already using shadow clocks by around 1500 BCE."
 - **Confirmed vs. inferred vs. unknown:**
-  - **Basel find:** As I recall it: a limestone ostracon with a half-circle divided into 12 sections, Ramesside era (about 13th century BCE), with Egyptologist Susanne Bickel's team. The Basel press release said "one of the oldest," not "the oldest." **Verify the wording.**
-  - **Older shadow clock:** One from the reign of Thutmose III (about 1479–1425 BCE) is commonly cited as the oldest known (Berlin collection).
-  - **The "obelisks around 3500 BCE" line is weak.** It appears in the popular NIST/Smithsonian "A Walk Through Time" timeline, but 3500 BCE is before the unified Egyptian state. The earliest obelisks date to the Old Kingdom, about 2600–2400 BCE. The idea that they were *used* as shadow clocks is speculative. Cut it, or say "some historians think tall obelisks may have doubled as shadow clocks."
-- **Sources (to verify, URLs from memory):**
-  - University of Basel — 2013 press release on the Valley of the Kings sundial (https://www.unibas.ch; search "sundial Valley of the Kings 2013").
-  - NIST — "A Walk Through Time: Early Clocks" (https://www.nist.gov/pml/time-and-frequency-division/popular-links/walk-through-time). Origin of the 3500 BCE obelisk claim; flag it as popular, not scholarly.
-  - Live Science / Science coverage of the 2013 find. A second confirmation is still needed.
+  - *Confirmed (Basel press release via ScienceDaily + Archaeology magazine/AIA + Live Science):* 2013 find by the Basel team (S. Bickel, E. Paulin-Grothe): a limestone flake with a black-painted semicircle in 12 sections and a central gnomon hole; 13th century BCE; Ramesside workmen's huts. The press release says "one of the world's oldest," not "the oldest." (Some Swiss popular sources, e.g. infoclio's "Ra – the world's oldest sundial," overstate it.)
+  - *Inferred:* that it timed tomb workers' shifts. Its location among the workmen's huts suggests this. Say "probably."
+  - *Confirmed (Met + NIST):* New Kingdom evidence for sundials and shadow clocks from about 1500 BCE, so the Basel dial is not the oldest.
+  - *Supported by one specialist source only:* the specific green-schist sundial from Thutmose III's reign in Berlin's Egyptian Museum. Source: an arXiv paper, Vodolazhskaya, "Reconstruction of Ancient Egyptian Sundials." Hedge: "Egypt has shadow clocks that are older," rather than naming the Berlin object as fact.
+  - *Wrong as planned:* "obelisks as shadow clocks around 3500 BCE." This comes from NIST's popular "Walk Through Time," which says obelisks were "built as early as 3500 BCE." Britannica says obelisks are known from the 4th dynasty (about 2575–2465 BCE), none survive from that era, and the earliest surviving one is Senusret I's (1918–1875 BCE). Cut it, or say "some think tall obelisks may have doubled as rough shadow clocks."
+  - *Confirmed (Britannica + ETHW):* the suggested swap angles. Su Song's water-driven astronomical clock tower (Kaifeng, 1088) had an escapement-type mechanism, with Yi Xing (725) earlier. Galileo designed a pendulum clock before his death in 1642; his son Vincenzio tried to build it; Huygens made the first working pendulum clock in 1656 (Britannica, Museo Galileo, Science Museum Group drawing). Not re-checked: "late 13th-century European tower clocks" (likely fine, but mark it (unverified)).
+- **Sources:**
+  - University of Basel press release via ScienceDaily — "One of world's oldest sun dial dug up in Kings' Valley, Upper Egypt" (https://www.sciencedaily.com/releases/2013/03/130314085052.htm): the find, its dating, and the "one of the oldest" wording.
+  - Archaeology magazine (Archaeological Institute of America) — "Early Egyptian Sundial Discovered" (https://archaeology.org/news/2013/03/15/130315-egypt-valley-kings-workers-sundial/) and July/Aug 2013 artifact note (https://archaeology.org/issues/july-august-2013/artifacts/egypt-limestone-sundial-valley-kings/): second confirmation.
+  - Live Science — "Ancient Egyptian Sundial Discovered at Valley of the Kings" (https://www.livescience.com/28057-ancient-egyptian-sundial-discovered.html): corroborating (not counted as strong).
+  - The Met — "Telling Time in Ancient Egypt" (https://www.metmuseum.org/essays/telling-time-in-ancient-egypt): sundials and shadow clocks from the New Kingdom, about 1500 BCE.
+  - NIST — "A Walk Through Time – Early Clocks" (https://www.nist.gov/pml/time-and-frequency-division/popular-links/walk-through-time/walk-through-time-early-clocks): origin of the 3500 BCE obelisk line (popular, not scholarly).
+  - Britannica — "Obelisk" (https://www.britannica.com/technology/obelisk): obelisk chronology contradicting 3500 BCE.
+  - Vodolazhskaya, "Reconstruction of Ancient Egyptian Sundials" (https://arxiv.org/pdf/1408.0987): the Thutmose III sundial in Berlin (specialist, single source).
+  - Britannica — "Su Song" (https://www.britannica.com/biography/Su-Song) and "Clock" (https://www.britannica.com/technology/clock); ETHW timeline (https://ethw.org/Timeline_of_mechanical_engineering_innovation): Su Song 1088, Yi Xing 725.
+  - Britannica — "When was the pendulum clock invented?" (https://www.britannica.com/question/When-was-the-pendulum-clock-invented); Museo Galileo — "Application of the pendulum to the clock" (https://catalogue.museogalileo.it/object/ApplicationPendulumToClock.html): Galileo vs. Huygens.
 - **Best "Somebody Did It First" angle:**
-  - The current fact has no wrongly credited person.
-  - **Suggested stronger angle:** The mechanical clock. Europe is credited with clockwork (late 13th-century tower clocks), but Su Song's water-driven astronomical clock tower at Kaifeng (1088) used an escapement-like mechanism, and Yi Xing's (725 CE) came earlier still.
-  - **Alternative:** Huygens gets the credit for the pendulum clock (1656), but Galileo designed one in 1641–42 that his son tried to build.
+  - The planned fact has no wrongly credited person.
+  - A stronger swap: Europe is credited with the mechanical clock, but Su Song's clock tower (1088) used an escapement-type mechanism, and Yi Xing's (725) came earlier still.
+  - An alternative swap: Huygens is credited with the pendulum clock (1656), but Galileo designed one first.
+  - Both swaps are well supported.
 - **Fit score:** 2/5 for the planned fact. About 4/5 if swapped to Su Song versus European clockmakers, or to Galileo versus Huygens.
+- **What changed from the provisional draft:** The verdict stays Needs correction. The Basel find and its "one of the oldest" wording are now verified with two sources. The 3500 BCE obelisk claim is now actively contradicted by Britannica. The Thutmose III Berlin dial is downgraded to single-source and hedged. Both swap angles are now verified. The on-air line now cites "shadow clocks by about 1500 BCE" (Met) instead of naming the Berlin object.
 
 ### 36. Writing — Fit 4/5
 - **Planned fun fact:** The earliest cuneiform was mostly receipts and inventories; "about 3/4 of deciphered tablets are administrative."
-- **Verdict:** Needs correction
-- **Corrected / on-air version:** "Writing wasn't invented for poetry. It was invented for accounting. In the oldest tablets from Uruk in Iraq, about 5,000 years old, roughly 85 to 90 percent are bookkeeping: rations, livestock, grain, labor. Nearly all the rest are word lists used to train scribes. And the Sumerians may not even have been first. Inscribed labels from a royal tomb at Abydos, Egypt, may be just as old or older."
+- **Verdict:** Needs correction (verified 2026-10-02)
+- **Corrected / on-air version:** "Writing wasn't invented for poetry. It was invented for bookkeeping. Across the oldest tablets from Uruk in Iraq, more than 5,000 years old, about 85 percent are administrative records: grain, animals, metals, labor, beer rations. The other 15 percent or so are word lists used to train scribes. In the very oldest layer, almost nothing *but* accounts survives. And the Sumerians may not even have been first. Tiny bone and ivory labels from a tomb at Abydos in Egypt date to around 3300 to 3200 BC, and scholars still argue over which came first."
 - **Confirmed vs. inferred vs. unknown:**
-  - **"3/4" has no traceable source.** I could not tie it to any scholar, so cut it.
-  - **The usable figure:** Robert Englund's work (CDLI, UCLA; *Texts from the Late Uruk Period*, 1998) puts proto-cuneiform from Uruk IV/III (about 3300–3000 BCE) at about 85–90% administrative, with nearly all the rest being lexical lists. **Verify the exact figure Englund gives before quoting a number.** Safer on air: "the vast majority."
-  - **Independent inventions of writing:** Mesopotamia, Egypt, China and Mesoamerica is the standard scholarly list.
-  - **Egypt's priority:** The Abydos tomb U-j bone and ivory labels (excavated by Günter Dreyer; published 1998) are dated to about 3320–3150 BCE. That puts Egypt's earliest writing roughly as early as Uruk, so the priority is disputed and the dates overlap.
-  - **China:** Oracle bones date to about 1250 BCE.
-  - **Mesoamerica:** About 900–300 BCE. The Cascajal block (about 900 BCE) is debated.
-- **Sources (to verify, URLs from memory):**
-  - CDLI (Cuneiform Digital Library Initiative) — Englund's proto-cuneiform overview (https://cdli.mpiwg-berlin.mpg.de).
-  - Englund, R.K. 1998, "Texts from the Late Uruk Period," in *Mesopotamien: Späturuk-Zeit und Frühdynastische Zeit* (OBO 160/1).
-  - The British Museum — early writing / proto-cuneiform tablets (https://www.britishmuseum.org).
-  - Penn Museum / Oriental Institute (ISAC, Chicago), *Visible Language* exhibition catalogue (2010, ed. Christopher Woods). Independent inventions, and Abydos U-j versus Uruk. Free PDF from ISAC.
+  - **Confirmed (Englund, the field's lead authority on proto-cuneiform):** "The numbers generally cited... 85% administrative and 15% lexical texts, represent averages; less than 1% of the earliest, the Uruk IV tablets, are of the lexical genre, while close to 20% of the following Uruk III tablets" are lexical. So the planned "3/4" understates it and has no traceable source. Cut "3/4". Note: the 85/15 figure traces to one research tradition (Englund / the ATU project in Berlin); no independent second count was found. That's normal for this corpus, but the on-air line should say "about."
+  - **Confirmed:** Abydos tomb U-j (Umm el-Qa'ab), excavated by Günter Dreyer of the German Archaeological Institute, produced small bone and ivory labels with 1 to 4 signs each, dated to about 3300–3200 BCE (Naqada IIIA2). They are called the earliest evidence of writing in Egypt.
+  - **Confirmed:** Scholarly priority between Egypt and Mesopotamia is unresolved. The sources describe them as developing "at more or less the same time" in the late 4th millennium BCE. Nat Geo adds that it's still debated whether the U-j signs are writing proper. Hedge: "neck and neck."
+  - **Confirmed:** ISAC's *Visible Language* (2010) treats Mesopotamia, Egypt, China and Mesoamerica as the four "pristine" (independent) inventions of writing.
+  - **Unverified this pass:** China's oracle bones at about 1250 BCE and the Cascajal block at about 900 BCE. If used on air, say "China's oldest writing is roughly 3,000-plus years old."
+  - **Unverified:** exact Uruk IV/III date brackets. "More than 5,000 years old" is safe.
+- **Sources:**
+  - CDLI — Robert K. Englund, "Accounting in Proto-Cuneiform" (Oxford Handbook of Cuneiform Culture, 2011), author PDF (https://cdli.earth/files-up/publications/englund2011a.pdf) — the 85%/15% averages; under 1% lexical in Uruk IV, about 20% in Uruk III
+  - CDLI — Englund 2004 project paper (https://cdli.earth/files-up/publications/englund2004a.pdf) and MPIWG Preprint 183 (https://www.mpiwg-berlin.mpg.de/Preprints/P183.PDF) — the great majority of archaic texts are administrative (animals, grain, metals, land, beer); lexical lists were scribal teaching tools
+  - ISAC (Univ. of Chicago) — *Visible Language: Inventions of Writing in the Ancient Middle East and Beyond*, OIMP 32 (https://isac.uchicago.edu/research/publications/oimp/oimp-32-visible-language-inventions-writing-ancient-middle-east-and) — four independent inventions; Uruk and Egyptian early writing
+  - National Geographic — "How hieroglyphs became the sacred script of the ancient Egyptians" (https://www.nationalgeographic.com/history/article/ancient-egypt-hieroglyphs) — U-j tags as the earliest Egyptian writing; still debated whether they are writing proper
+  - ISAC — *Before the Pyramids*, OIMP 33 (https://isac.uchicago.edu/research/publications/oimp/oimp-33-pyramids-origins-egyptian-civilization) — the U-j bone label, about 3200 BC
+  - ISAC Oriental Institute *News & Notes* 207, Fall 2010 (https://isac.uchicago.edu/sites/default/files/uploads/shared/docs/nn207.pdf) — Egypt and Mesopotamia developed writing at about the same time; which came first is debated
 - **Best "Somebody Did It First" angle:**
   - Who gets the credit: the Sumerians, as "the inventors of writing."
-  - Who might have been first: Egypt's Abydos labels, which are as early or earlier. Writing was also invented independently at least three more times.
-  - A properly scholarly priority dispute. Hedge it as "neck and neck."
-- **Fit score:** 4/5 — A famous credit (Sumer) with a credible contender (Egypt), plus the hooky "invented for accounting" fact.
+  - Who might have been first: Egypt's Abydos U-j labels, about as old and possibly older.
+  - How solid: it is a real, open priority question in the scholarship, not a myth-bust. Present it as "neck and neck," not "Egypt was first."
+- **Fit score:** 4/5 — A famous credit (Sumer), a credible contender (Egypt), and a strong verified hook ("invented for accounting").
+- **What changed from the provisional draft:** Verdict unchanged. The "85–90%" figure is corrected to Englund's stated average of 85% administrative, 15% lexical, with the Uruk IV/III split added. URLs from memory (CDLI homepage, British Museum, the OBO 160/1 book) were replaced with documents found this pass. China and Mesoamerica dates are marked unverified.
 
 ### 37. Printing Press — Fit 5/5
 - **Planned fun fact:** Bi Sheng invented clay movable type around 1040 (recorded in Shen Kuo's *Dream Pool Essays*), and Korea's *Jikji* (1377) predates Gutenberg (1450s). The Diamond Sutra (868, woodblock, British Library) is also in scope.
-- **Verdict:** Confirmed (provisional, not web-verified this pass)
+- **Verdict:** Confirmed (verified 2026-10-02)
 - **Corrected / on-air version:**
-  - "Gutenberg's press in the 1450s changed Europe, but movable type was 400 years old by then. Around the 1040s, a Chinese commoner named Bi Sheng was printing with fired clay characters. We only know because the scholar Shen Kuo wrote it down in his *Dream Pool Essays*."
-  - "In 1377, Buddhist monks in Cheongju, Korea, printed the *Jikji* with movable *metal* type. That's about 78 years before the Gutenberg Bible, and it's the oldest surviving book of its kind."
-  - "Woodblock printing is older still. The British Library's Diamond Sutra is dated 868 CE. It's the oldest dated printed book in the world."
+  - "Gutenberg's press in the 1450s changed Europe, but movable type was 400 years old by then. In the 1040s, a Chinese craftsman named Bi Sheng was printing with characters made of baked clay. We only know because the scholar Shen Kuo described it in his *Dream Pool Essays*."
+  - "In 1377, at Heungdeok Temple in Cheongju, Korea, monks printed a Buddhist text called the *Jikji* with movable *metal* type. That's 78 years before the Gutenberg Bible. UNESCO calls it the oldest known book printed that way."
+  - "And woodblock printing is older still. The British Library's Diamond Sutra was finished on 11 May 868. It's the world's earliest dated printed book."
 - **Confirmed vs. inferred vs. unknown:**
-  - **High confidence, from my own knowledge:**
-    - Bi Sheng's clay type is from the Qingli reign (1041–48), described in Shen Kuo's *Mengxi Bitan* (about 1088).
-    - The *Jikji* (full title *Baegun hwasang chorok buljo jikji simche yojeol*, vol. 2) was printed at Heungdeok Temple, Cheongju, in 1377. It is on UNESCO's Memory of the World register (2001) and held by the Bibliothèque nationale de France.
-    - The Diamond Sutra is dated 11 May 868 (Xiantong 9). Aurel Stein brought it from Dunhuang in 1907.
-    - The Gutenberg Bible dates to about 1454–55.
-  - **Nuance — older metal type:** Korean records (Yi Gyu-bo) describe metal-type printing of a ritual text around 1234, but no copy survives. Say "oldest *surviving*."
-  - **Fairness to Gutenberg:** His real advances were the hand mould for casting type, oil-based ink, and the screw press. There is no evidence he knew of Asian printing.
-- **Sources (to verify, URLs from memory):**
-  - British Library — "The Diamond Sutra" (https://www.bl.uk/collection-items/the-diamond-sutra).
-  - UNESCO Memory of the World — *Jikji* entry (https://www.unesco.org/en/memory-world; search "Jikji").
-  - Bibliothèque nationale de France — *Jikji* catalogue record (https://gallica.bnf.fr).
-  - Britannica — "Bi Sheng" and "printing: history" (https://www.britannica.com/biography/Bi-Sheng).
+  - **Confirmed:**
+    - Bi Sheng (Pi Sheng): baked-clay movable type, about 1041–48. Shen Kuo's *Mengxi bitan* contains "the first description of movable type."
+    - *Jikji*: printed in 1377 at Heungdeok-sa, Cheongju, with cast metal type. On UNESCO's Memory of the World register since 4 Sept 2001. Held by the BnF. "78 years before the Gutenberg Bible."
+    - Diamond Sutra: woodblock printed, completed 11 May 868, sponsored by Wang Jie, found in the Dunhuang Mogao caves. The British Library calls it "the world's earliest dated printed book."
+    - Gutenberg: his innovations were a type mould for precise mass casting, a type-metal alloy, an adapted press and an oil-based ink. The 42-line Bible was completed no later than 1455.
+  - **Unverified:**
+    - Bi Sheng as "a commoner." Only found in non-institutional sources this pass. Say "a craftsman" or just "Bi Sheng."
+    - Earlier Korean metal-type printing (*Sangjeong Gogeum Yemun*, about 1234–41, postscript by Yi Gyu-bo). Found only on Wikipedia and content sites. If used, say "Korean records suggest metal type was used even earlier, but no copy survives." Keep "oldest *surviving*" for the *Jikji* either way.
+  - **Inferred:** that Gutenberg had no knowledge of Asian printing. This is standard but was not sourced this pass. Say "there's no clear evidence Gutenberg knew of it."
+- **Sources:**
+  - British Library / International Dunhuang Programme — "The Diamond Sutra" (https://idp.bl.uk/blog/the-diamond-sutra/) and collection record Or.8210/P.2 (https://idp.bl.uk/collection/51FDAEAFB4A24E2E9981692A98130BC8/) — dated 11 May 868; earliest dated printed book
+  - UNESCO Memory of the World — *Baegun hwasang chorok buljo jikji simche yojeol* (vol. II) (https://www.unesco.org/en/memory-world/baegun-hwasang-chorok-buljo-jikji-simche-yojeol-volii-second-volume-anthology-great-buddhist-priests) — 1377, metal type, register entry
+  - Bibliothèque nationale de France — "Jikji, a treasure of the world of printing" (https://www.bnf.fr/en/jikji-treasure-world-printing) — Heungdeok-sa, 1377, cast metal type, 78 years before Gutenberg
+  - Library of Congress blog — "From Jikji to Gutenberg" (https://blogs.loc.gov/preservation/2023/05/jikji-gutenberg/) — the Jikji-Gutenberg comparison
+  - Britannica — "Pi Sheng" (https://www.britannica.com/biography/Pi-Sheng) and "Shen Kuo" (https://www.britannica.com/biography/Shen-Kuo) — clay type 1041–48; *Mengxi bitan* first describes movable type
+  - Library of Congress — "The History of Printing in Asia..." (https://blogs.loc.gov/international-collections/2021/06/the-history-of-printing-in-asia-according-to-library-of-congress-asian-collections-part-1/) — second institutional source on Asian printing history
+  - Britannica — "Gutenberg Bible" (https://www.britannica.com/topic/Gutenberg-Bible) and "Johannes Gutenberg summary" (https://www.britannica.com/summary/Johannes-Gutenberg) — completed by 1455; mould, alloy, press, oil-based ink
 - **Best "Somebody Did It First" angle:**
   - Who gets the credit: Gutenberg, as "inventor of the printing press and movable type."
-  - Who did it first: Bi Sheng (ceramic type, about 1040), the Korean monks (metal type, 1377), and Chinese woodblock printers (868 and earlier).
-  - Very solid evidence: physical artifacts in the British Library and the BnF.
-- **Fit score:** 5/5 — A famous credited name with multiple well-documented earlier inventors.
+  - Who did it first: Bi Sheng (clay type in the 1040s), Korean printers (surviving metal-type book from 1377) and Chinese woodblock printers (868).
+  - How solid: very solid, with physical artifacts at the BL and the BnF and UNESCO recognition. Be fair to Gutenberg: his casting system and press made printing mass-scale.
+- **Fit score:** 5/5 — A famous credited name with several well-documented earlier inventors.
+- **What changed from the provisional draft:** No change to the verdict; now verified. The UNESCO and BnF URLs were replaced with the exact pages found. The 1234 metal type and "commoner" are now marked unverified.
 
 ### 38. Telephone — Fit 5/5
 - **Planned fun fact:** Bell and Elisha Gray filed on the same day (14 Feb 1876), and Bell's was processed first by hours. Also in scope: the caveat-versus-patent-application nuance, Antonio Meucci (2002 House Resolution 269: what it actually says and its limits), and Johann Philipp Reis (1861).
-- **Verdict:** Needs correction (not web-verified this pass)
+- **Verdict:** Confirmed, with a wording fix: Gray filed a caveat, not a patent (verified 2026-10-02)
 - **Corrected / on-air version:**
-  - "On Valentine's Day 1876, two filings about transmitting speech reached the US Patent Office on the same day. Bell's lawyer filed a full patent application. Elisha Gray filed a *caveat*, which is basically a notice saying 'I'm working on this, don't patent it out from under me.' Bell's filing was logged earlier in the day's list. Gray's came later. Whether that was really hours apart, and whether a patent examiner later leaked Gray's idea to Bell, has been argued over for 150 years."
-  - "Bell wasn't the only rival. In Germany, Johann Philipp Reis built a device he called the 'Telephon' in 1861 that could carry music and fragments of speech. In New York, Italian immigrant Antonio Meucci filed his own caveat in 1871 but couldn't afford to renew it after 1874. In 2002 the US House passed a resolution honoring Meucci's 'work in the invention of the telephone.' Careful: it doesn't say he invented it."
+  - "On Valentine's Day 1876, two filings about sending speech by wire reached the US Patent Office. Bell's lawyer filed a full patent application. It was the fifth entry of the day. A few hours later, Elisha Gray's lawyer filed a *caveat*, which is basically a notice saying 'I'm working on this.' It was the 39th entry. Bell got the patent on March 7th. Ten years later, a patent examiner swore he'd shown Bell's lawyer Gray's papers, but he'd sworn the opposite a year earlier. People have argued about it ever since."
+  - "And Bell had rivals before Gray. In Germany in 1861, Johann Philipp Reis built a device he called the 'telephon.' It could carry tones and music, though speech came through badly. In New York, Antonio Meucci filed a caveat in 1871 but couldn't afford to keep renewing it, and it lapsed in 1874. In 2002, the US House passed a resolution saying Meucci's 'work in the invention of the telephone should be acknowledged.' Careful: it says 'in' the invention. It doesn't name him the inventor."
 - **Confirmed vs. inferred vs. unknown:**
-  - **High confidence:**
-    - Both filings were dated 14 Feb 1876. Bell's was an application; Gray's was a caveat.
-    - Bell's patent, No. 174,465, was issued 7 March 1876.
-    - Bell's first intelligible speech ("Mr. Watson, come here…") was on 10 March 1876, using a liquid (variable-resistance) transmitter like the one in Gray's caveat.
-    - In 1886, examiner Zenas Wilber gave an affidavit saying he had shown Bell Gray's caveat. His affidavits were contradictory.
-  - **Contested:** The "by hours" claim. My understanding is that it rests on the order of entries in the Patent Office cash book (Bell's listed about 5th that day, Gray's about 39th). Exact arrival times are not documented. Use "earlier that day" or "reportedly hours earlier."
-  - **H.Res. 269 (107th Congress), passed 11 June 2002:** It resolves that Meucci's "life and achievements… should be recognized, and his work in the invention of the telephone should be acknowledged." It is non-binding and House-only. It does **not** declare him the inventor, though many outlets reported that it did.
-  - **Canada:** Its House of Commons passed a counter-motion days later affirming Bell. **Verify.**
-  - **Reis:** 1861 device, demonstrated to the Physical Society of Frankfurt on 26 Oct 1861. It transmitted tones reliably and speech only intermittently ("Das Pferd frisst keinen Gurkensalat").
-- **Sources (to verify, URLs from memory):**
-  - Congress.gov — H.Res.269, 107th Congress (https://www.congress.gov/bill/107th-congress/house-resolution/269). Exact text.
-  - Library of Congress — Alexander Graham Bell Family Papers (https://www.loc.gov/collections/alexander-graham-bell-papers/). Patent 174,465 and notebooks.
-  - Smithsonian NMAH — Elisha Gray and Bell telephone collections (https://americanhistory.si.edu).
-  - Britannica — "telephone: history"; "Johann Philipp Reis"; "Antonio Meucci".
-  - A. Edward Evenson, *The Telephone Patent Conspiracy of 1876* (McFarland, 2000). Detailed account of the filing-order and Wilber controversy; one author's argument.
+  - **Confirmed:**
+    - 14 Feb 1876: Bell's application was the 5th entry and Gray's caveat the 39th, "just a few hours later" (Library of Congress).
+    - Bell's patent was granted 7 March 1876.
+    - A caveat was a confidential declaration of intent to patent an unperfected idea.
+  - **Contested:** "a few hours" is the official record's reading of the day-book order. Exact clock times are not documented in what I found. Say "a few hours later, according to the Patent Office record."
+  - **Confirmed (allegation, not proof):** Examiner Zenas Wilber's 8 April 1886 affidavit said he showed Gray's caveat to Bell's lawyer, Marcellus Bailey (some accounts say to Bell), for $100. It contradicted his own Oct 1885 affidavit. He admitted to alcoholism and to owing Bailey money. Present it as a contested allegation.
+  - **Confirmed:** H.Res.269 (107th Congress), sponsored by Vito Fossella, agreed to on 11 June 2002. Operative text: "the life and achievements of Antonio Meucci should be recognized, and his work in the invention of the telephone should be acknowledged." It is a House-only "sense of the House" resolution.
+  - **Confirmed:** Meucci's 1871 caveat was cheaper than a full patent application. He couldn't renew it, and it expired in 1874.
+  - **Confirmed:** Reis's apparatus (about 1861) was called a "telefon/telephon." It transmitted musical tones; speech came through "badly."
+  - **Unverified:** Canada's House of Commons counter-motion affirming Bell, reportedly about 10 days later. Found only on Wikipedia and Scribd. Leave it out, or say "Canada's Parliament reportedly answered with its own motion."
+  - **Unverified:** the Reis demonstration date (26 Oct 1861, Frankfurt Physical Society) and the "Gurkensalat" sentence. Say "in 1861."
+  - **Not re-checked:** Bell's 10 March 1876 "Mr. Watson" call. It is standard and low-risk, but unsourced this pass.
+  - Evenson's *The Telephone Patent Conspiracy of 1876* was not found in search this pass; removed from sources.
+- **Sources:**
+  - Library of Congress — "Who is credited with inventing the telephone?" (https://www.loc.gov/everyday-mysteries/item/who-is-credited-with-inventing-the-telephone/) — 5th vs 39th entry; Gray "a few hours later"; caveat definition; Meucci's lapsed caveat
+  - Library of Congress — Bell Papers timeline 1870–1879 (https://www.loc.gov/collections/alexander-graham-bell-papers/articles-and-essays/timeline/1870-to-1879/) — the 1876 filings and patent (page itself blocked to fetch; seen in search results)
+  - Congress.gov — H.Res.269, 107th Congress (https://www.congress.gov/bill/107th-congress/house-resolution/269) and GovInfo text (https://www.govinfo.gov/content/pkg/BILLS-107hres269ih/pdf/BILLS-107hres269ih.pdf) — exact wording, sponsor, agreed 11 June 2002
+  - Britannica — "Elisha Gray" (https://www.britannica.com/biography/Elisha-Gray) — the Gray-Bell same-day filing
+  - PBS American Experience — "Inventors" (https://www.pbs.org/wgbh/americanexperience/features/inventors/) — filing order and caveat
+  - ETHW (IEEE History Center) — "Antonio Meucci" (https://ethw.org/Antonio_Meucci) and "Johann Phillip Reis" (https://ethw.org/Johann_Phillip_Reis) — Meucci's 1871 caveat and its cost; Reis's 1861 device
+  - Britannica — "Johann Philipp Reis" (https://www.britannica.com/biography/Johann-Philipp-Reis) — the "telephone" name; tones transmitted
+  - Smithsonian NMAH — "Reis telephone transmitter" (https://americanhistory.si.edu/collections/object/nmah_708626) — the object; the Reis device transmitted speech "albeit badly"
+  - The Washington Post — "The Bell Telephone: Patent Nonsense?" (20 Feb 2008) (https://www.washingtonpost.com/archive/style/2008/02/20/the-bell-telephone-patent-nonsense/9e23b5c8-77ba-4b21-8eb8-72091e8f02e2/) — Wilber affidavit, the $100 claim, the earlier contradictory affidavit (newspaper, not academic)
 - **Best "Somebody Did It First" angle:**
   - Who gets the credit: Bell.
-  - Who arguably did it first or at the same time: Gray (the same day; the liquid transmitter), Meucci (an 1871 caveat), and Reis (a working device in 1861 that carried partial speech).
-  - Famous, well documented, and genuinely contested.
+  - Who arguably was first or level with him: Gray (same day), Meucci (an 1871 caveat) and Reis (a working tone and partial-speech device in 1861).
+  - How solid: famous, well documented and genuinely contested. The Patent Office record favors Bell; the bribery claim is an allegation.
 - **Fit score:** 5/5 — The textbook case for the channel premise.
+- **What changed from the provisional draft:** Verdict moved from Needs correction to Confirmed. The Library of Congress explicitly documents the 5th/39th entries and "a few hours later," so the planned fact stands once "caveat" is used for Gray's filing. Canada's counter-motion and the Reis date remain unverified. Evenson's book was removed; the WaPo, ETHW, PBS and govinfo sources were added.
 
 ### 39. Computer — Fit 3/5 as planned (5/5 with the suggested angle)
 - **Planned fun fact:** In 1947 a moth was found in the Harvard Mark II, logged as the "first actual case of bug being found." The logbook is at the Smithsonian NMAH (9 Sept 1947). Also in scope: Hopper didn't find it herself; the word "bug" predates it (Edison, 1878); and the stronger first-computer angles (Babbage and Lovelace, Zuse's Z3 in 1941, the Atanasoff-Berry Computer with the 1973 *Honeywell v. Sperry Rand* ruling, Colossus in 1943–44).
-- **Verdict:** Needs correction (the moth is real but its common framing is wrong; not web-verified this pass)
-- **Corrected / on-air version (moth):** "On 9 September 1947, operators of Harvard's Mark II computer pulled a moth out of Relay #70 and taped it into the logbook: 'First actual case of bug being found.' The joke only works because engineers already called glitches 'bugs.' Thomas Edison was using the word in letters back in 1878. Grace Hopper didn't find the moth, but she loved telling the story, which is why it stuck to her."
+- **Verdict:** Needs correction: the moth is real, but the usual "Hopper found the first bug" framing is wrong (verified 2026-10-02)
+- **Corrected / on-air version (moth):** "On 9 September 1947, the team running Harvard's Mark II computer found a moth stuck in Relay 70, Panel F, and taped it into the logbook: 'First actual case of bug being found.' The joke only works because engineers already called glitches 'bugs.' Thomas Edison was doing it in 1878. Grace Hopper was on that team, and she loved telling the story, but the Smithsonian says the logbook probably wasn't even hers."
+- **Corrected / on-air version (lead angle):** "ENIAC gets called the first computer. But in 1973 a US federal judge ruled that ENIAC's inventors 'did not themselves first invent the automatic electronic digital computer, but instead derived that subject matter from one Dr. John Vincent Atanasoff' of Iowa State. Meanwhile, Konrad Zuse had a working program-controlled computer in Berlin in 1941. And Britain's Colossus was breaking German codes at Bletchley Park in 1944."
 - **Confirmed vs. inferred vs. unknown:**
-  - **The moth, high confidence:** The logbook page reads "1545 Relay #70 Panel F (moth) in relay. First actual case of bug being found." NMAH holds it; it was transferred in 1994. Hopper was on the team but didn't make the find. Edison wrote "bugs" in letters in 1878, for example to Theodore Puskas. Some older retellings date the moth to 1945; NMAH says 1947.
-  - **The stronger angle, high confidence on the facts:**
-    - **ENIAC** (1945–46) is popularly called "the first computer."
-    - **Zuse's Z3** (Berlin, demonstrated 12 May 1941) was a working programmable, automatic digital computer. It was electromechanical and was destroyed in 1943.
-    - **Atanasoff-Berry Computer** (Iowa State, about 1939–42) was electronic and digital but not programmable.
-    - **Honeywell v. Sperry Rand** (D. Minn., Judge Earl Larson, decided 19 Oct 1973) invalidated the ENIAC patent. Larson found that Eckert and Mauchly "did not themselves first invent the automatic electronic digital computer, but instead derived that subject matter from one Dr. John Vincent Atanasoff." Mauchly had visited Atanasoff in June 1941.
-    - **Colossus** (Bletchley Park; operational early 1944) was the first programmable electronic digital computer. It was kept secret until the 1970s.
-    - **Babbage and Lovelace:** The Analytical Engine was designed from 1837 but never built. Lovelace's Note G (1843) is often called the first published program.
-  - **Check:** The exact quote from the Larson ruling is from my own knowledge. Verify it against the published opinion (180 USPQ 673).
-- **Sources (to verify, URLs from memory):**
-  - Smithsonian NMAH — "Log Book With Computer Bug" (https://americanhistory.si.edu/collections/search/object/nmah_334663).
-  - Naval History and Heritage Command — the bug logbook / Grace Hopper (https://www.history.navy.mil).
-  - Iowa State University — Atanasoff-Berry Computer history and the *Honeywell v. Sperry Rand* decision (https://jva.cs.iastate.edu ; https://www.cs.iastate.edu).
-  - The National Museum of Computing (Bletchley Park) — Colossus (https://www.tnmoc.org).
-  - Deutsches Museum / Konrad Zuse Internet Archive — Z3 (https://www.deutsches-museum.de).
-  - Computer History Museum — timeline of computer history (https://www.computerhistory.org/timeline/computers/).
+  - **Confirmed:**
+    - Moth: 9 Sept 1947, Harvard Mark II, Relay 70 Panel F, "first actual case of bug being found." Held by NMAH.
+    - NMAH says the log book "was probably not Hopper's," but she and the team popularized "bug" and "debug."
+    - Edison wrote to Puskas in Nov 1878 about "'Bugs'—as such little faults and difficulties are called."
+  - **Confirmed:** Judge Earl Larson's opinion, distributed 19 Oct 1973, includes the exact quote above (Iowa State's ABC site quotes it). It voided the ENIAC patent. Mauchly visited Atanasoff in 1941 and saw the ABC working.
+  - **Confirmed:** Zuse's Z3 was an electromechanical relay computer, program-controlled by punched tape and working in 1941.
+  - **Confirmed:** The Colossus prototype first ran in Dec 1943 at Dollis Hill and moved to Bletchley Park in Jan 1944. IEEE calls it the first large-scale programmable electronic digital computer, though one restricted to codebreaking.
+  - **Unverified:**
+    - The exact Z3 demonstration date (12 May 1941). Sources differ, and one says "completed December 1941." Say "in 1941."
+    - Colossus being "secret until the 1970s." Say "kept secret for decades."
+    - The ABC being "not programmable." Accurate as I understand it, but not sourced this pass. Omit it or say "a special-purpose machine."
+    - The NMAH 1994 transfer date. Dropped.
+    - The Babbage/Lovelace details (1837 design, 1843 Note G). Not re-checked; keep them as a passing mention: "designed in the 1830s, never built."
+- **Sources:**
+  - Smithsonian NMAH — "Log Book With Computer Bug" (https://americanhistory.si.edu/collections/object/nmah_334663; also https://www.si.edu/object/log-book-computer-bug:nmah_334663) — date, relay, inscription; "probably not Hopper's"
+  - Computer History Museum — "September 9: First Instance of Actual Computer Bug Being Found" (https://www.computerhistory.org/tdih/september/9/) — date and Mark II details
+  - Naval History and Heritage Command — NH 96566-KN "The First 'Computer Bug'" (https://www.history.navy.mil/our-collections/photography/numerical-list-of-images/nhhc-series/nh-series/NH-96000/NH-96566-KN.html) — the logbook photo
+  - IEEE Spectrum — "Did You Know? Edison Coined the Term 'Bug'" (https://spectrum.ieee.org/did-you-know-edison-coined-the-term-bug) — the Nov 1878 Puskas letter quote
+  - Iowa State University — "Atanasoff-Berry Computer Court Case" (https://jva.cs.iastate.edu/courtcase.php) — Larson opinion of 19 Oct 1973, the exact quote, the 1941 Mauchly visit
+  - Britannica — "John Vincent Atanasoff" (https://www.britannica.com/biography/John-Vincent-Atanasoff) and CHM — "Atanasoff-Berry Computer" (https://www.computerhistory.org/revolution/birth-of-the-computer/4/99) — the ABC and the ruling, independent of ISU
+  - Britannica — "Zuse computer" (https://www.britannica.com/technology/Zuse-computer) and CHM — "June 22: Konrad Zuse Born" (https://www.computerhistory.org/tdih/june/22/) — the Z3 relay machine, program-controlled, 1941
+  - ETHW (IEEE) — "Milestones: The Colossus Computers, 1944–1945" (https://ethw.org/Milestones:The_Colossus_Computers,_1944-1945) and IEEE Spectrum — "The Computer That Helped Win World War II" (https://spectrum.ieee.org/colossus-computer-ieee-milestone) — Dec 1943 prototype, Bletchley Jan 1944, programmable electronic
 - **Best "Somebody Did It First" angle:** Swap the lead to "ENIAC wasn't first."
-  - A US federal judge ruled in 1973 that ENIAC's inventors had derived their key ideas from Iowa State's John Atanasoff, which invalidated the patent.
-  - Konrad Zuse had a programmable computer running in Berlin in 1941.
-  - Britain's Colossus was cracking Nazi codes in 1944 but stayed secret for 30 years.
-  - Use the moth as the cold open.
-  - Legally documented and very hooky.
-- **Fit score:** 3/5 for the moth alone, which is a myth-bust about a word, not a person. **5/5** if the episode leads with ENIAC versus Atanasoff, Zuse and Colossus.
+  - A federal court ruled in 1973 that ENIAC's key ideas came from John Atanasoff.
+  - Zuse had a program-controlled computer in 1941.
+  - Colossus was codebreaking by 1944.
+  - Use the moth (and "Hopper didn't find it; Edison said 'bug' first") as the cold open.
+  - How solid: legally documented and well sourced.
+- **Fit score:** 3/5 for the moth alone (a myth-bust about a word, not a person); **5/5** leading with ENIAC versus Atanasoff, Zuse and Colossus.
+- **What changed from the provisional draft:** No verdict change; now verified. The Larson quote is now confirmed verbatim via Iowa State. NMAH's own line "probably not Hopper's" log book was added. The Z3 demo date, "secret until the 1970s" and the 1994 transfer are marked unverified or dropped. The tnmoc.org and Deutsches Museum URLs were replaced with IEEE/ETHW, Britannica and CHM pages found this pass.
 
 ---
 
@@ -1022,108 +1120,178 @@ Each entry gives the planned fun fact, the verdict, the corrected on-air line, w
 
 ### 47. Money — Fit 3/5
 - **Planned fun fact:** Lydian electrum coins ~600 BCE; tally sticks ~30,000 years.
-- **Verdict:** Needs correction (provisional — UNVERIFIED THIS SESSION)
-- **Corrected / on-air version (provisional):** "The first coins were lumps of electrum, a natural gold-silver mix, stamped in Lydia (in today's Turkey) in the late 600s BCE, before the famously rich King Croesus. But money is older than coins. Mesopotamians were paying in silver measured by weight, the shekel, more than a thousand years earlier, and Hammurabi's laws set fines in silver. Notched 'tally' bones like the Lebombo bone (about 40,000+ years) or the Ishango bone (about 20,000 years) are counting tools, not money."
-- **Confirmed vs. inferred vs. unknown:** Not checked this session. From background knowledge:
-  - Lydian or Ionian electrum coinage starts around 630–600 BCE (Artemision deposit at Ephesus). Croesus (reigned about 560–546 BCE) is usually credited with the first separate gold and silver coins.
-  - "Tally sticks ~30,000 years" probably refers to the Dolní Věstonice wolf bone (about 30,000 years, 55 notches, found 1937). The Ishango bone is about 20,000 years old (it was once dated about 9,000). The Lebombo bone is about 43,000–44,000 years old (d'Errico et al., *PNAS* 2012, Border Cave).
-  - None of these are money. Calling a tally bone "money" is wrong. Silver by weight as money in Mesopotamia, from the 3rd millennium BCE, is well established in the literature.
-- **Sources (to verify — not checked):**
-  - British Museum — early Lydian/Ionian electrum coins (britishmuseum.org collection pages) — dates.
-  - Britannica — "coin" / "money" entries — Lydia; Croesus.
-  - Royal Belgian Institute of Natural Sciences — Ishango bone (naturalsciences.be) — age.
-  - d'Errico et al. 2012, *PNAS*, "Early evidence of San material culture represented by organic artifacts from Border Cave" — Lebombo bone date.
-  - Penn Museum or Metropolitan Museum essays on Mesopotamian silver as currency.
-- **Best "Somebody Did It First" angle:** "Croesus is the byword for coin wealth ('rich as Croesus'), but Lydian coins predate him, and Mesopotamian silver money predates coins by more than a thousand years." Moderate. Drop the tally-stick claim or reframe it as "counting before money."
-- **Fit score:** 3/5 — "rich as Croesus" gives a famous hook, but the real story is "money before coins," not a single wrongly credited inventor.
+- **Verdict:** Needs correction (verified 2026-10-02)
+- **Corrected / on-air version:** "The first coins were little bean-shaped lumps of electrum, a natural gold-silver mix, stamped in Lydia, in today's Turkey, in the late 600s BC. That's before King Croesus, the guy we still say is 'rich as Croesus.' Croesus gets credit for the first pure gold and pure silver coins, and some scholars now think even those were struck after him, under the Persians. But money is far older than coins. By about 2500 BC, Mesopotamians were valuing goods in silver weighed out in shekels. 'Shekel' comes from the word 'to weigh.' Hammurabi's laws priced injuries in shekels. Notched bones like Africa's Ishango bone, about 20,000 years old, are counting tools, not money."
+- **Confirmed vs. inferred vs. unknown:**
+  - **Confirmed:**
+    - Lydia was the first state to mint coins, in electrum, in the 7th century BCE. Britannica says "at the end of the seventh century"; ANS gives about 650 BCE. Range: about 650–600 BCE.
+    - The Artemision foundation deposit at Ephesus shows electrum coins before Croesus, possibly under Gyges.
+    - Croesus (reigned c. 560–546 BCE) is credited with separate gold and silver coins. Britannica notes "some recent scholarship suggests that this bimetallic series was struck... under Croesus' Persian successors."
+  - **Confirmed:** silver by weight as money in Mesopotamia by about 2500 BCE (Penn Museum *Expedition*). Shekel from *shaqalu*, "to weigh out," about 8.4 g. Hammurabi's code (about 1750 BCE) sets payments and penalties in shekels (Yale Avalon translation).
+  - **Confirmed:** Ishango bone, about 20,000 years old, held by the Royal Belgian Institute of Natural Sciences. Its dating is debated because of volcanic disturbance of the carbon dates.
+  - **Unverified:**
+    - Lebombo bone at about 42,000–44,000 years. Only Wikipedia and secondary sites confirmed the age; the d'Errico et al. 2012 PNAS paper was confirmed only by title via a non-institutional site. If used, say "around 40,000 years."
+    - The Dolní Věstonice "30,000-year" wolf bone was not checked. Drop it.
+  - **Wrong in the plan:** treating tally sticks as money. They are counting devices.
+- **Sources:**
+  - Britannica — "Coin: Origins of coins" (https://www.britannica.com/money/coin/Origins-of-coins) — electrum at the end of the 7th c. BCE; Artemision deposit predates Croesus; Croesus's bimetallic series and the Persian-successor caveat
+  - Metropolitan Museum of Art — "Sardis" essay (https://www.metmuseum.org/essays/sardis) — Lydia first to mint coins (7th c. BCE), electrum, Sardis gold production
+  - American Numismatic Society — "Ancient Greece and the Mediterranean World" (https://numismatics.org/ancient-greece-and-the-mediterranean-world/) — earliest electrum coins about 650 BCE, struck to weight standards
+  - British Museum — Money Gallery (Room 68) large-print guide (https://www.britishmuseum.org/sites/default/files/2021-05/Money_Gallery_LPG_2020_Room_68.pdf) — early Lydian coinage (appeared in results; exact wording not inspected)
+  - Penn Museum *Expedition* — "Hanging in the Balance" (https://www.penn.museum/documents/publications/expedition/47-2/Hanging.pdf; https://www.penn.museum/sites/expedition/hanging-in-the-balance-2/) — silver by weight by 2500 BCE; shekel etymology and weight; Hammurabi on false weights
+  - Antiquity (Cambridge) — Roberts, "Early weight systems, markets and trade" (https://www.cambridge.org/core/journals/antiquity/article/early-weight-systems-markets-and-trade/0F2BCC73CCE40B35C5BDB90A488A48C4) — weighed-metal money before coinage
+  - Yale Avalon Project — Code of Hammurabi (https://avalon.law.yale.edu/ancient/hamcode.asp) — payments and penalties in shekels
+  - Royal Belgian Institute of Natural Sciences — "The Ishango Bone" (https://www.naturalsciences.be/en/museum/exhibitions-activities/exhibitions/250-years-of-natural-sciences/the-ishango-bone) — held in Brussels; about 20,000 years old (only one strong source for the Ishango age)
+- **Best "Somebody Did It First" angle:** "Croesus is the byword for coin wealth, but Lydian electrum coins came before him, and even 'his' gold and silver coins may be Persian. Meanwhile Mesopotamians were paying in weighed silver almost 2,000 years earlier." Drop the tally-stick-as-money claim; reframe it as "counting before money."
+- **Fit score:** 3/5 — "Rich as Croesus" is a famous hook, and the new Persian-successor twist helps, but the core story is "money before coins," not one wrongly credited inventor.
+- **What changed from the provisional draft:** Verdict unchanged; now verified. Added Britannica's caveat that Croesus's gold and silver coins may be post-Croesus. Mesopotamian silver money is now dated to about 2500 BCE (Penn). "Fines in silver" became "payments and penalties in shekels." Lebombo's age is marked unverified and Dolní Věstonice dropped. All sources are now ones seen this pass.
 
-### 48. Music — Fit 3/5
+### 48. Music — Fit 2/5
 - **Planned fun fact:** Vulture-bone flute ~40,000 years (Hohle Fels); disputed Divje Babe "flute" ~50,000+.
-- **Verdict:** Needs correction (provisional — UNVERIFIED THIS SESSION)
-- **Corrected / on-air version (provisional):** "The oldest undisputed musical instruments are bird-bone and mammoth-ivory flutes from caves in southwest Germany. The Hohle Fels vulture-bone flute was published in 2009 as at least 35,000 years old, and flutes from the nearby Geissenklösterle cave have been dated to about 40,000+ years. Then there's the 'Neanderthal flute' from Divje Babe in Slovenia, a cave-bear bone with holes, around 50,000–60,000 years old. Some researchers say Neanderthals made it; others say the holes were bitten by a carnivore. If it's a flute, Neanderthals made music first."
-- **Confirmed vs. inferred vs. unknown:** Not checked this session. From background knowledge:
-  - Conard, Malina and Münzel, *Nature* 2009: the Hohle Fels flute is ">35,000 years."
-  - Higham et al., *Journal of Human Evolution* 2012: Geissenklösterle dated about 42,000–43,000 years.
-  - Divje Babe: Ivan Turk (excavator) argues it's Neanderthal-made. d'Errico and others argue the holes are carnivore damage. The dispute is unresolved.
-  - "~40,000 years" for Hohle Fels specifically is a slight overstatement. Say "around 40,000 years" for the Swabian flutes as a group.
-- **Sources (to verify — not checked):**
-  - Nature — Conard et al. 2009, "New flutes document the earliest musical tradition in southwestern Germany."
-  - *Journal of Human Evolution* — Higham et al. 2012 (Geissenklösterle dating).
-  - Smithsonian / Nat Geo coverage of the Divje Babe debate; d'Errico et al. critiques.
-- **Best "Somebody Did It First" angle:** "*Homo sapiens* gets credit for inventing music, but Neanderthals may have done it first." It is genuinely disputed and must be hedged.
-- **Fit score:** 3/5 — the Neanderthal-vs-us angle is hooky but contested, and there's no single wrongly credited person.
+- **Verdict:** Needs correction (Hohle Fels age overstated); the Divje Babe part is Disputed, and most specialists lean against it (verified 2026-10-02)
+- **Corrected / on-air version:** "The oldest undisputed musical instruments are flutes from caves in southwest Germany, carved from bird bone and mammoth ivory. The Hohle Fels vulture-bone flute was published in 2009 as about 35,000 years old. Flutes from the nearby Geissenklösterle cave were redated in 2012 to around 42,000 years. Then there's the so-called 'Neanderthal flute' from Divje Babe in Slovenia, a young cave bear's thighbone with holes in it, from a Neanderthal layer that's even older. Its excavators say Neanderthals made it. Most specialists think a hyena chewed it. So did Neanderthals make music first? Maybe, but the evidence is probably a chew toy."
+- **Confirmed vs. inferred vs. unknown:**
+  - **Confirmed:** Conard, Malina & Münzel, *Nature* 460:737–740 (2009). The Hohle Fels flutes are "around 35,000 years old," from Aurignacian layers spanning about 42,000–35,000 BP. "~40,000 years for Hohle Fels" is an overstatement.
+  - **Confirmed:** Higham et al., *Journal of Human Evolution* (2012), dated the Geissenklösterle Aurignacian (swan-bone and mammoth-ivory flutes) to about 42,000–43,000 years. The Early Aurignacian there begins about 42,500 cal BP. The exact "42–43k" for the flutes comes via the study's press coverage; on air say "around 40,000 years, possibly 42,000."
+  - **Confirmed (dispute exists):**
+    - Divje Babe I: cave-bear cub femur with holes, found 1995 in a Neanderthal-associated layer.
+    - Ivan Turk and colleagues argue it was made by Neanderthals (papers in *L'Anthropologie* 2006 and 2018).
+    - The carnivore-damage hypothesis has peer-reviewed support: Chase and Nowell; Diedrich 2015 on hyena scavenging; an *Antiquity* paper using cave-bear bone assemblages.
+    - National Geographic (2015) quotes April Nowell: "most paleoanthropologists accept" that it's a carnivore-chewed bone.
+  - **Unknown / inconsistent:** the Divje Babe age. Nat Geo (2015) calls it "43,000-year-old"; other sources say about 50,000–60,000. Say "older than the German flutes" or "tens of thousands of years older, depending on who's dating it," and don't quote a number.
+- **Sources:**
+  - Nature — Conard, Malina & Münzel 2009, "New flutes document the earliest musical tradition in southwestern Germany" (https://www.nature.com/articles/nature08169) — Hohle Fels flutes, about 35,000 years
+  - Journal of Human Evolution (ScienceDirect) — Higham et al. 2012, "Testing models for the beginnings of the Aurignacian and the advent of figurative art and music: The radiocarbon chronology of Geißenklösterle" (https://www.sciencedirect.com/science/article/abs/pii/S0047248412000425) — Early Aurignacian about 42,500 cal BP at the flute site
+  - University of Tübingen — Geißenklösterle excavation page (https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/geosciences/work-groups/prehistory-and-archaeological-sciences/ina/early-prehistory-quaternary-ecology/research/excavations/germany/geissenkloesterle/) — bird-bone and ivory flutes; among the world's oldest evidence of music
+  - National Geographic — "Was 'Earliest Musical Instrument' Just a Chewed-Up Bone?" (2015) (https://www.nationalgeographic.com/science/article/150331-neanderthals-music-oldest-instrument-bones-flutes-archaeology-science) — Nowell: most accept carnivore chewing; gives its age as 43,000 years
+  - Antiquity (Cambridge) — "A Middle Palaeolithic origin of music? Using cave-bear bone accumulations to assess the Divje Babe I bone 'flute'" (https://www.cambridge.org/core/journals/antiquity/article/abs/middle-palaeolithic-origin-of-music-using-cavebear-bone-accumulations-to-assess-the-divje-babe-i-bone-flute/BBC06D3F89468C9ECE4F0DF8CB6E9A00) — skeptical assessment
+  - Diedrich 2015, "'Neanderthal bone flutes': simply products of Ice Age spotted hyena scavenging..." (PMC open access) (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4448875/) — the hyena-chewing case
+  - L'Anthropologie (ScienceDirect) — Turk et al. 2018, "The Mousterian Musical Instrument from the Divje babe I cave" (https://www.sciencedirect.com/science/article/abs/pii/S0003552118300633) — the pro-flute case from the excavators
+- **Best "Somebody Did It First" angle:** "*Homo sapiens* gets credit for the first instruments. Did Neanderthals beat us?" Present it as an open question where the majority answer is "probably not." The solid "first" is the German flutes, which aren't a wrongly credited case.
+- **Fit score:** 2/5 (down from 3) — the Neanderthal claim now looks like a minority view, so the "somebody did it first" payoff is weak and needs heavy hedging. It's better as a segment inside another episode.
+- **What changed from the provisional draft:** The Hohle Fels age is corrected to about 35,000 (Nature 2009). Found that most paleoanthropologists (per Nowell in Nat Geo) favor the carnivore explanation, and that the Divje Babe age is reported inconsistently (43k vs 50–60k). Fit lowered from 3 to 2. All sources are now found and linked.
 
 ### 49. Recorded Sound — Fit 5/5
 - **Planned fun fact:** Scott de Martinville's phonautograph (1857 patent) recorded sound before Edison but couldn't play it back; 2008 First Sounds playback by LBNL (Au Clair de la Lune, 1860).
-- **Verdict:** Confirmed (PROVISIONAL — UNVERIFIED THIS SESSION; do not script as confirmed until two sources are checked)
-- **Corrected / on-air version (provisional):** "Everyone says Thomas Edison invented sound recording in 1877. But 20 years earlier, Parisian printer Édouard-Léon Scott de Martinville patented the phonautograph (1857). It traced sound waves as squiggles on soot-blackened paper. He never meant for them to be played back. In 2008, the First Sounds group worked with Lawrence Berkeley National Laboratory scientists to scan those squiggles and turn them into sound. Out came a voice singing 'Au Clair de la Lune,' recorded on April 9, 1860, 17 years before Edison. It was first thought to be a young woman. Played at the corrected speed, it's probably Scott himself, singing slowly."
-- **Confirmed vs. inferred vs. unknown:** Not checked this session. From background knowledge:
-  - French patent dated 25 March 1857.
-  - First Sounds (David Giovannoni, Patrick Feaster and others) and LBNL's Carl Haber and Earl Cornell announced the playback in March 2008.
-  - The recording is dated 9 April 1860.
-  - The singer was first presented as a woman or child, then re-identified in 2009 (after the speed correction) as likely a man, probably Scott.
-  - Also check: Charles Cros proposed a playback device (the "paleophone") in April 1877, months before Edison, but never built it. That's a bonus "did it first."
-- **Sources (to verify — not checked):**
-  - firstsounds.org — the original announcement and the 1860 recording.
-  - Lawrence Berkeley National Laboratory (lbl.gov) news on the Haber/Cornell playback, 2008.
-  - Library of Congress / National Recording Registry or Smithsonian coverage.
-  - *New York Times*, 27 March 2008, "Researchers Play Tune Recorded Before Edison" (lead only).
-- **Best "Somebody Did It First" angle:** Edison is credited, but Scott recorded human voice about 17–20 years earlier, and modern scientists finally "played" it 150 years later. This is one of the strongest hooks in the batch, if it checks out (expected).
-- **Fit score:** 5/5 — a famous credited name, a documented earlier inventor, and a dramatic 2008 reveal.
+- **Verdict:** Confirmed (verified 2026-10-02)
+- **Corrected / on-air version:** "Everyone says Thomas Edison invented sound recording in 1877. But in 1857, a Parisian typesetter named Édouard-Léon Scott de Martinville patented the phonautograph. It traced sound waves as squiggles in soot. He never meant for them to be played back; they were for looking at. In 2008, the First Sounds team and Berkeley Lab scientists Carl Haber and Earl Cornell scanned one of those squiggles and turned it into sound. Out came a voice singing 'Au Clair de la Lune,' recorded on April 9, 1860, 17 years before Edison's phonograph. At first it sounded like a woman. But they'd played it at double speed. Slowed down correctly, it's a man singing slowly, possibly Scott himself. And here's a bonus: a Frenchman named Charles Cros sealed a design for playing recordings back in an envelope at the French Academy of Sciences in April 1877, months before Edison. He just never built it."
+- **Confirmed vs. inferred vs. unknown:**
+  - **Confirmed:**
+    - Scott (a French typographer) patented the phonautograph in March 1857. First Sounds says the application was deposited 24 March; other sources give 25 March. Say "1857."
+    - It traced sound as wavy lines in soot on paper or glass, with no playback intended.
+    - In March 2008, First Sounds released the 9 April 1860 "Au Clair de la Lune," recovered with LBNL's optical/"virtual stylus" method (Haber and Cornell). It is the oldest recognizable recording of a human voice.
+  - **Confirmed:** the speed correction. A misread reference frequency had doubled the playback speed. Corrected (2009, per NPR and First Sounds), it is a roughly 20-second recording of a man singing slowly, "possibly Scott himself." Keep "possibly."
+  - **Confirmed:** Charles Cros deposited a sealed packet (*pli cacheté*) at the Académie des sciences on 30 April 1877 describing playback from traced sound waves (later called the "paléophone"). He lacked the resources to build it. Edison's phonograph followed later in 1877 (NPS, Britannica).
+  - **Inferred:** "17 years before Edison" (1860 vs 1877) is simple arithmetic from confirmed dates.
+  - The NYT 27 March 2008 article could not be checked (search access blocked); removed from sources.
+- **Sources:**
+  - First Sounds — "Édouard-Léon Scott de Martinville's phonautograms" (https://www.firstsounds.org/sounds/scott.php), "Retrieving Sound from Soot" (https://firstsounds.org/sounds/approach.php), "Édouard-Léon Scott in his own words" (http://www.firstsounds.org/features/scott.php) — the 1860 recording, the speed correction, the March 1857 patent deposit
+  - NPR — "1860 'Phonautograph' Is Earliest Known Recording" (2008) (https://www.npr.org/2008/04/04/89380697/1860-phonautograph-is-earliest-known-recording) and "Reconsidering Earliest Known Recording" (2009) (https://www.npr.org/2009/06/01/104797243/reconsidering-earliest-known-recording) — Haber/Cornell (LBNL) playback; the female-to-male speed correction
+  - Smithsonian NMAH — "Picturing Sound: Édouard-Léon Scott de Martinville" (Hear My Voice) (https://americanhistory.si.edu/documentsgallery/exhibitions/hear-my-voice/2.html) — Scott and the phonautograph
+  - Library of Congress — Recorded Sound Section, "A Recorded Sound Timeline" (https://www.loc.gov/static/managed-content/uploads/sites/6/2017/02/recorded_sound_timeline-2013.pdf) — the 1857 phonautograph patent
+  - Britannica — "Phonautograph" (https://www.britannica.com/technology/phonautograph) — the device, soot tracings
+  - Berkeley Lab News Center (2013) (https://newscenter.lbl.gov/2013/04/25/alexander-graham-bell/) — LBNL's Haber optical-recovery work (context, not the 1860 recording itself)
+  - National Park Service, Thomas Edison NHP — "Origins of Sound Recording: Charles Cros" (https://www.nps.gov/edis/learn/historyculture/origins-of-sound-recording-charles-cros.htm) — Cros's sealed packet, 30 April 1877, before Edison; never prototyped
+  - Britannica — "Charles Cros" (https://www.britannica.com/biography/Charles-Cros) — second source on Cros's 1877 proposal
+- **Best "Somebody Did It First" angle:** Edison gets credit for recording sound. Scott recorded a human voice 17 years earlier (patent 20 years earlier), and Cros designed playback months before Edison. Edison's real first was a machine that both recorded *and* played back. Very solid, with institutional sources on every key point.
+- **Fit score:** 5/5 — A famous credited name, a documented earlier inventor, a 2008 reveal and a bonus second "first."
+- **What changed from the provisional draft:** No verdict change; now verified (Confirmed with two or more strong sources per claim). Added the 24 vs 25 March patent-date wrinkle and Cros's exact deposit date (30 April 1877, NPS). The NYT source was dropped (unverifiable); NPR, NMAH, LoC, NPS and Britannica added.
 
 ### 50. Clothing — Fit 2/5
 - **Planned fun fact:** Dyed wild flax fibers ~30,000 years old, Dzudzuana Cave, Georgia.
-- **Verdict:** Disputed (provisional — UNVERIFIED THIS SESSION)
-- **Corrected / on-air version (provisional):** "In a cave in the country of Georgia, researchers found microscopic flax fibers about 30,000 years old. Some were twisted, and some looked colored, which the team took as signs of thread and dye. Critics argue the fibers might not be worked flax at all, and the colors could have other explanations. So treat '30,000-year-old dyed thread' as a possibility, not a fact."
-- **Confirmed vs. inferred vs. unknown:** Not checked this session. From background knowledge:
-  - Kvavadze et al., *Science* 2009 ("30,000-Year-Old Wild Flax Fibers"): fibers dated about 30,000–36,000 years ago; some described as twisted or knotted and colored (black, grey, turquoise, pink).
-  - A *Science* technical comment (Bergfjord et al., 2010) questioned the identification and interpretation, and the authors responded.
-  - "Dyed" is the weakest part of the claim.
-  - Separately, louse-genetics studies (e.g., Toups et al., *Molecular Biology and Evolution* 2011) estimate clothing use at about 170,000 years ago (inferred, indirect).
-- **Sources (to verify — not checked):**
-  - Science — Kvavadze et al. 2009; Bergfjord et al. 2010 Comment and Response.
-  - Harvard Gazette / Harvard Peabody coverage (Ofer Bar-Yosef was a co-author).
-  - Toups et al. 2011, *Molecular Biology and Evolution* (lice and clothing origins).
-- **Best "Somebody Did It First" angle:** Weak. "Clothing is far older than you think" is a "first found" fact. There's no credited person. **Suggested replacement:** "Levi Strauss didn't invent riveted jeans; tailor Jacob Davis came up with the rivets and partnered with Strauss on the 1873 patent." Or "Charles Goodyear vs. Thomas Hancock" on vulcanized rubber. Either needs verification.
-- **Fit score:** 2/5 — mostly an "oldest X found" fact, and the key detail ("dyed") is contested.
+- **Verdict:** Disputed (verified 2026-10-02)
+- **Corrected / on-air version:** "In a cave in the country of Georgia, researchers found more than a thousand microscopic flax fibers, the oldest from layers dated to as much as 36,000 years ago. Some were twisted and knotted. A few were colored black, grey, turquoise and pink, and the team concluded they had been dyed. Other scientists pushed back. Some questioned whether the fibers are even flax, and some think the colors could have come from natural staining. So call it 'possibly the oldest dyed thread ever found', not a sure thing. And clothing itself may be far older. Genetic studies of body lice, which live in clothes, suggest people were wearing clothing at least 83,000 years ago, and possibly as early as 170,000."
+- **Confirmed vs. inferred vs. unknown:**
+  - **Confirmed:**
+    - Kvavadze et al. was published in *Science* on 11 Sep 2009, with co-authors Bar-Yosef (Harvard), Belfer-Cohen and Boaretto. The paper reports more than 1,000 wild flax fibers from Upper Paleolithic layers at Dzudzuana. Occupation phases are dated about 32–26k, 23–19k and 13–11k years BP, and fibers come from layers as early as about 36k.
+    - Some fibers are twisted or knotted, and a small number are colored black, grey, turquoise or pink. The authors interpret these as dyed.
+    - Bergfjord et al. published a *Science* comment in 2010 arguing that the microscope features don't prove flax and could fit other bast fibers. Kvavadze et al. published a response.
+  - **Contested:**
+    - That the fibers were *dyed*. Science news coverage reports that some scholars think the color could come from natural processes.
+    - That they are *flax*. This is the Bergfjord critique.
+  - **Corrected detail:** The lice estimate is "at least 83,000 and possibly as early as 170,000 years ago" (Toups et al. 2011), not a flat 170,000.
+  - **Inferred:** That these fibers were used for clothing at all. The authors list cords, baskets *or* garments.
+- **Sources:**
+  - Science, Kvavadze et al., "30,000-Year-Old Wild Flax Fibers" (2009) (https://www.science.org/doi/10.1126/science.1175404). Fiber count, dates, twisted and colored fibers, the authors' dye interpretation.
+  - Science, Bergfjord et al., "Comment on '30,000-Year-Old Wild Flax Fibers'" (2010) (https://www.science.org/doi/10.1126/science.1186345). The challenge to the flax identification.
+  - Response to Comment, *Science* 2010, via Harvard ADS (https://ui.adsabs.harvard.edu/abs/2010Sci...328.1634K/abstract) and Bar-Ilan University CRIS (https://cris.biu.ac.il/en/publications/response-to-comment-on-30000-year-old-wild-flax-fibers/). The authors' rebuttal.
+  - Science News, Michael Balter, "Clothes Make the (Hu) Man" (2009) (https://www.science.org/doi/10.1126/science.325_1329a). Independent news summary: >1,000 fibers, up to 36k years, colors, and the dye skepticism.
+  - Harvard Gazette, "Oldest-known fibers to be used by humans discovered" (2009) (https://news.harvard.edu/gazette/story/2009/09/oldest-known-fibers-discovered/). University coverage. Seen in results; the page itself was blocked.
+  - Toups et al., "Origin of Clothing Lice Indicates Early Clothing Use by Anatomically Modern Humans in Africa", *Mol. Biol. Evol.* 2011 (University of Florida repository PDF: https://ufdcimages.uflib.ufl.edu/IR/00/00/05/66/00001/Mol_Biol_Evol-2011-Toups-29-32.pdf). The 83k–170k estimate.
+  - Strong-source count: 4+ (Science paper, Science comment, Science news, Mol. Biol. Evol.).
+- **Best "Somebody Did It First" angle:** Still weak. This is an "oldest found" fact with no wrongly credited person. The suggested replacements (Levi Strauss vs. Jacob Davis on riveted jeans; Goodyear vs. Hancock on vulcanized rubber) were **not checked in this pass**. Verify them separately before any swap.
+- **Fit score:** 2/5. Unchanged. It's an "oldest X" fact, and its key detail ("dyed") is contested.
+- **What changed from the provisional draft:** The verdict stays Disputed, now on evidence. Added that the critique also questions whether the fibers are flax, and that use for clothing is only one of the authors' options. Corrected the lice figure to "at least 83k, possibly 170k". All sources are now confirmed URLs.
+
+---
 
 ### 51. Electricity — Fit 5/5
 - **Planned fun fact:** Greeks knew static from amber (Thales via later sources); Franklin's 1752 kite tested whether lightning was electrical.
-- **Verdict:** Needs correction (provisional — UNVERIFIED THIS SESSION)
-- **Corrected / on-air version (provisional):** "Ancient Greeks noticed rubbed amber attracts light objects. Our word 'electric' comes from *elektron*, Greek for amber. Later writers credit Thales with the observation, but nothing he wrote survives. Benjamin Franklin is famous for proving lightning is electricity with a kite in June 1752. But it was his idea that someone else tested first. On May 10, 1752, at Marly-la-Ville near Paris, following Franklin's published proposal, Thomas-François Dalibard's team drew sparks from a tall iron rod during a storm. The man who actually drew the sparks was Coiffier, an ex-soldier, while Dalibard was away. That was about a month before Franklin's kite. Franklin's own account of the kite wasn't published until that October."
-- **Confirmed vs. inferred vs. unknown:** Not checked this session. From background knowledge:
-  - Dalibard's Marly experiment on 10 May 1752 is well documented.
-  - Delor repeated it in Paris around 18 May.
-  - Franklin's kite took place in June 1752 (exact date unknown). He reported it in the *Pennsylvania Gazette* on 19 October 1752; Priestley gave a fuller account in 1767.
-  - Some historians (e.g., Tom Tucker, *Bolt of Fate*, 2003) question whether the kite experiment happened as described. Hedge with "according to Franklin."
-  - The Thales attribution comes through later authors (Aristotle on magnets; Diogenes Laertius). The amber attribution is later still.
-- **Sources (to verify — not checked):**
-  - Franklin Institute (fi.edu) — "Ben Franklin's Famous Kite Experiment" (lead).
-  - Britannica — Thomas-François Dalibard; Benjamin Franklin; "electricity" history.
-  - Library of Congress / Founders Online (founders.archives.gov) — Franklin's 19 Oct 1752 *Pennsylvania Gazette* letter.
-  - Smithsonian Magazine coverage of the kite and Dalibard.
-- **Best "Somebody Did It First" angle:** Franklin is credited. The French ran his experiment first and succeeded, with a forgotten ex-dragoon at the rod, and Franklin's own kite proof was reported months later. Very hooky.
-- **Fit score:** 5/5 — a famous American icon, a documented earlier success, and a nice twist that it was Franklin's own idea.
+- **Verdict:** Needs correction (verified 2026-10-02). The facts hold up, but the framing needs fixing because Franklin's kite was not the first proof.
+- **Corrected / on-air version:** "Ancient Greeks noticed that rubbed amber pulls in bits of straw and feathers. Our word 'electric' comes from *elektron*, Greek for amber. English physician William Gilbert coined the Latin *electricus* in 1600. Later writers credit the philosopher Thales with the amber observation, but nothing Thales wrote survives. We only have it secondhand, centuries later. Benjamin Franklin is famous for proving lightning is electricity with a kite in June 1752. But the first people to prove his idea weren't Franklin. On May 10, 1752, at Marly-la-Ville near Paris, Thomas-François Dalibard's team followed Franklin's published proposal and set up a tall iron rod insulated with wine bottles and silk. When a storm passed, a retired dragoon named Coiffier, standing in for Dalibard, drew sparks from it. Eight days later, Delor repeated it in Paris. That was about a month before Franklin's kite, which, according to Franklin, he flew before news from France reached him. His own account of the kite wasn't printed until October."
+- **Confirmed vs. inferred vs. unknown:**
+  - **Confirmed:**
+    - Marly-la-Ville, 10 May 1752: a retired dragoon, Coiffier, followed Dalibard's instructions and drew sparks from an insulated iron rod.
+    - Dalibard reported it to the Académie des Sciences three days later and credited Franklin's proposal.
+    - Delor repeated it in Paris on 18 May.
+    - Franklin's kite took place in June 1752, per Priestley; the exact day is unknown.
+    - Franklin's kite account was dated 19 Oct 1752 (Founders Online, "The Kite Experiment, 19 October 1752").
+    - News of the French success was printed in the *Pennsylvania Gazette* on 27 Aug 1752.
+    - No writings by Thales survive. His views on amber and the magnet come through Aristotle and Diogenes Laertius, who cites Aristotle and Hippias.
+    - "Electric" comes from *elektron* (amber), and Gilbert's *De Magnete* (1600) coined *electricus*.
+  - **Inferred / hedge:**
+    - That Franklin flew the kite *before* hearing of Marly. This rests on Franklin's own account, so say "according to Franklin".
+    - Tom Tucker's *Bolt of Fate* (2003) argues the kite experiment was a hoax. It's a minority view: History News Network reports that Franklin scholars such as I. Bernard Cohen don't share it. Say "a few skeptics even doubt the kite flight happened as told" if used at all.
+  - **Unknown:** The exact date of the kite flight.
+- **Sources:**
+  - Founders Online (US National Archives), "Thomas-François Dalibard: Report of an Experiment with Lightning" (https://founders.archives.gov/documents/Franklin/01-04-02-0105). Marly, 10 May 1752, and Delor on 18 May.
+  - Founders Online, "The Kite Experiment, 19 October 1752" (https://founders.archives.gov/documents/Franklin/01-04-02-0135). Franklin's own kite account and its date.
+  - APS News (American Physical Society), "May 10, 1752: First Experiment to Draw Electricity from Lightning" (https://www.aps.org/apsnews/2000/05/electricity-from-lightning-1752). Dalibard's success a month before the kite; the kite in June per Priestley.
+  - Smithsonian NMAH, "Electrical Years: Part 2" (Electric Dr. Franklin exhibition) (https://americanhistory.si.edu/explore/exhibitions/electric-dr-franklin/online/electrical-years-2). The Marly experiment.
+  - Physics Today (AIP), "Benjamin Franklin and lightning rods" (https://physicstoday.aip.org/features/benjamin-franklin-and-lightning-rods). The retired dragoon, the insulated rod, the timeline.
+  - The Franklin Institute, "Benjamin Franklin and the Kite Experiment" (https://fi.edu/en/science-and-education/benjamin-franklin/kite-key-experiment). The kite story. Museum source.
+  - Internet Encyclopedia of Philosophy, "Thales of Miletus" (https://iep.utm.edu/thales/). No writings survive; the amber and magnet attribution comes via Aristotle and Diogenes Laertius.
+  - Britannica, "Thales of Miletus" (https://www.britannica.com/biography/Thales-of-Miletus). Supporting.
+  - Britannica Students, "electricity" (https://kids.britannica.com/students/article/electricity/274145). Thales and amber, about 600 BC, as the traditional attribution.
+  - History News Network, "Did Franklin Really Fake the Kite Experiment?" (https://historynewsnetwork.org/article/1770). Context on Tucker's minority view.
+  - Strong-source count: 5+ for the Marly priority (Founders Online ×2, APS, Smithsonian NMAH, Physics Today) and 2 for Thales (IEP, Britannica).
+- **Best "Somebody Did It First" angle:** Franklin gets the credit. A French team, with a forgotten ex-soldier at the rod, ran Franklin's own proposed experiment and succeeded first, on 10 May 1752. Franklin's kite came about a month later, and his account was printed in October. The evidence is very solid, from primary documents via the National Archives.
+- **Fit score:** 5/5. Unchanged.
+- **What changed from the provisional draft:** No change to the verdict or the story. It is now verified with primary sources. Added Gilbert's 1600 coinage and the 27 Aug *Pennsylvania Gazette* report of the French success. Swapped the "Smithsonian Magazine" and "LoC" placeholders for confirmed APS, Smithsonian NMAH, Physics Today and Founders Online pages.
+
+---
 
 ### 52. Internet — Fit 4/5
 - **Planned fun fact:** ARPANET's first message (Oct 29, 1969, UCLA to SRI) was "lo" after a crash on "login."
-- **Verdict:** Confirmed (PROVISIONAL — UNVERIFIED THIS SESSION; do not script as confirmed until two sources are checked)
-- **Corrected / on-air version (provisional):** "On the night of October 29, 1969, UCLA student programmer Charley Kline, working in Leonard Kleinrock's lab, tried to log in to a computer at the Stanford Research Institute. He typed 'L,' then 'O,' and the system crashed. The first message ever sent over the ARPANET was 'lo.' But ARPANET's key idea, chopping data into 'packets,' wasn't American-first only. Paul Baran at RAND and Donald Davies at Britain's National Physical Laboratory came up with it independently in the early-to-mid 1960s. Davies coined the word 'packet,' and NPL built its own packet network. France's CYCLADES network, led by Louis Pouzin, pioneered ideas that shaped TCP/IP. And the 'web' (Tim Berners-Lee, 1989–91) is a different thing from the internet."
-- **Confirmed vs. inferred vs. unknown:** Not checked this session. From background knowledge:
-  - The "lo" story, the 29 Oct 1969 date, Kline at UCLA and Bill Duvall at SRI are well documented (UCLA, Computer History Museum, Kleinrock's own accounts).
-  - Baran's "On Distributed Communications" was published 1962–64.
-  - Davies proposed packet switching in 1965–66 and coined "packet." The NPL local network ran from about 1969–70.
-  - CYCLADES dates from 1972–73.
-  - Cerf and Kahn published TCP in 1974.
-  - Priority in packet-switching theory (Kleinrock's queuing work vs. Baran/Davies) is a historically contested claim. Hedge it.
-- **Sources (to verify — not checked):**
-  - Computer History Museum (computerhistory.org) — Internet history timeline; packet switching.
-  - UCLA Samueli / Kleinrock Internet Heritage Site — the "lo" message.
-  - Britannica — Paul Baran; Donald Davies; ARPANET.
-  - National Physical Laboratory (npl.co.uk) — Davies and the NPL network.
-  - IEEE (ieee.org / ETHW) — milestones for packet switching and CYCLADES.
-- **Best "Somebody Did It First" angle:** "America's ARPANET is called the first internet, but Brits (Davies) and a RAND engineer (Baran) invented packet switching independently, and the French (Pouzin) pioneered the end-to-end design TCP/IP used. And Berners-Lee invented the web, not the internet." Strong. The "lo" crash is the cold open.
-- **Fit score:** 4/5 — a strong multi-claimant story with a great cold open, but no single famous wrongly credited person; the priority fights are nuanced.
+- **Verdict:** Confirmed (verified 2026-10-02)
+- **Corrected / on-air version:** "On the night of October 29, 1969, at about 10:30 p.m., UCLA student programmer Charley Kline, working in Leonard Kleinrock's lab, tried to log in to a computer at the Stanford Research Institute, where programmer Bill Duvall was waiting. He typed 'L,' then 'O,' and the system crashed. The first message ever sent over the ARPANET was 'lo.' They got the full login working about an hour later. But ARPANET's key idea, chopping data into 'packets,' wasn't an ARPANET original. Paul Baran at the RAND Corporation described it in detail in 1964. Donald Davies at Britain's National Physical Laboratory came up with it independently in 1965 and coined the word 'packet.' Davies's team built a working packet network at NPL that was running by 1970. Then in the early 1970s, France's CYCLADES network, led by Louis Pouzin, pioneered the 'datagram' approach, and Vint Cerf has cited it as a key influence on TCP/IP. One more thing: the World Wide Web, which Tim Berners-Lee proposed in 1989, isn't the internet. It's an application that runs on top of it."
+- **Confirmed vs. inferred vs. unknown:**
+  - **Confirmed:**
+    - 29 Oct 1969, about 22:30. Kline was at UCLA's SDS Sigma 7, Duvall at SRI's SDS 940. "L" and "O" went through, then the system crashed, and the full login worked about an hour later (Kleinrock/UCLA).
+    - Baran's 11-volume RAND "On Distributed Communications" (1964).
+    - Davies began work in 1965, coined "packet", and published in 1966–67. He learned of Baran's work only afterwards, so the two were independent.
+    - The NPL Mark I network was built 1966–69 and operational by 1970.
+    - Pouzin and CYCLADES created the datagram network, and Cerf cites it as an influence on TCP/IP (QEPrize, Internet Hall of Fame, CHM).
+    - Berners-Lee's proposal dates from March 1989, and the web/internet distinction comes from CERN and W3C.
+  - **Contested / hedge:** Kleinrock has claimed credit for packet-switching theory from his 1961–62 work. Davies and later analysts disputed this. The extracts that described the dispute came from Wikipedia and EBSCO Research Starters, which are not strong sources, so don't adjudicate it on air. Say "who invented packet switching is still argued over; Baran and Davies are usually credited with the core idea."
+  - **Dropped:** The specific "1972–73" date for CYCLADES. Sources say "early 1970s", so use that.
+- **Sources:**
+  - Leonard Kleinrock / UCLA CS, "The Day the Infant Internet Uttered its First Words" (https://www.lk.cs.ucla.edu/internet_first_words.html). Date, time, Kline, Duvall, "lo", the crash, the login an hour later.
+  - Computer History Museum press release, ARPANET 40th anniversary (https://computerhistory.org/press-releases/museum-celebrates-arpanet-anniversary/). The first ARPANET transmission. A second institution.
+  - UCLA Samueli, Internet50 press (https://samueli.ucla.edu/internet50-press/). Supporting.
+  - Britannica, "Donald Davies" (https://www.britannica.com/biography/Donald-Davies) and "Paul Baran" (https://www.britannica.com/biography/Paul-Baran). Independent invention, the 1964 RAND volumes, Davies coining "packet".
+  - National Physical Laboratory, "Packet Switching: The first steps on the road to the information society" (https://www.npl.co.uk/getattachment/de2d9db5-999d-4a75-99ce-6730b8c204a6/UK-role-in-Packet-Switching-(1).pdf). The NPL network, Mark I operational by 1970.
+  - ETHW (IEEE History Center), "Packet Switching" (https://ethw.org/Packet_Switching). Baran and Davies.
+  - Science Museum (UK), "From ARPANET to the Internet" (https://www.sciencemuseum.org.uk/objects-and-stories/arpanet-internet). Supporting.
+  - Queen Elizabeth Prize, "Louis Pouzin" (https://qeprize.org/winners/louis-pouzin), and Internet Hall of Fame, "Louis Pouzin" (https://www.internethalloffame.org/inductee/louis-pouzin/). CYCLADES, the datagram, the TCP/IP influence.
+  - Computer History Museum, "Louis Pouzin - CHM Revolution" (https://www.computerhistory.org/revolution/networking/19/375/2107). Supporting.
+  - CERN, "A short history of the Web" (https://home.cern/science/computing/the-birth-of-the-web/short-history-web/), and W3C, "Web at 25: 25 things you probably didn't know about the Web" (https://www.w3.org/webat25/news/webfacts). The March 1989 proposal and the web vs. internet distinction.
+  - Strong-source count: 2+ for every main claim (UCLA/Kleinrock + CHM for "lo"; Britannica + NPL + ETHW for packet switching; QEPrize + CHM for Pouzin; CERN + W3C for the web).
+- **Best "Somebody Did It First" angle:** America's ARPANET gets called "the first internet". A RAND engineer (Baran) and a British government scientist (Davies) independently invented packet switching, and NPL ran a packet network in the same era. A Frenchman (Pouzin) pioneered the datagram design that TCP/IP drew on. Berners-Lee invented the web, not the internet. The evidence is solid; only the Kleinrock priority fight needs a hedge.
+- **Fit score:** 4/5. Unchanged.
+- **What changed from the provisional draft:** No change to the verdict; it is now verified. Added the 22:30 time, the login an hour later, the NPL Mark I dates (operational by 1970) and Baran's 1964 date. Softened the CYCLADES date to "early 1970s". All sources are confirmed URLs; the Science Museum, QEPrize, Internet Hall of Fame, CERN and W3C pages are new.
+
+---
 
 ---
 
@@ -1268,43 +1436,97 @@ Each entry gives the planned fun fact, the verdict, the corrected on-air line, w
 
 ### 63. Restaurant — Fit 4/5
 - **Planned fun fact:** "Restaurant" meant a restorative broth; Boulanger 1765 origin disputed (Rebecca Spang, "The Invention of the Restaurant", 2000 — Mathurin Roze de Chantoiseau ~1766 as the real founder). Also the older angle: Song dynasty Kaifeng/Hangzhou restaurants with menus (~11th-12th c.), which arguably did it first.
-- **Verdict:** Confirmed (Paris part). The Song part is PROVISIONAL and was not checked against strong sources.
-- **Corrected / on-air version:** "In 18th-century Paris, a *restaurant* wasn't a place. It was a restorative broth, a concentrated meat bouillon for people with weak constitutions. The usual story says a soup-seller named Boulanger opened the first restaurant in 1765. Historian Rebecca Spang went looking and found no contemporary evidence for Boulanger's shop. The first documented 'restaurateur' was Mathurin Roze de Chantoiseau, around 1766. He sold restorative broths at individual tables and listed his business in his own trade directory. But Paris was hundreds of years late. In 12th-century China, the Song-dynasty capitals Kaifeng and Hangzhou had restaurants with long lists of dishes, waiters taking orders, and places catering to different budgets and regional cuisines." Hedge for China: "Historians argue these were restaurants in every way that matters."
-- **Confirmed vs. inferred vs. unknown:** Confirmed: "restaurant" originally meant a restorative bouillon; Spang's book (Harvard UP, 2000) debunks the Boulanger story and puts Roze de Chantoiseau first (HUP page; Paris Food History blog). Date: sources give 1766 or 1767, so say "around 1766". Spang's argument is about Boulanger *lacking documentation*, not that he definitely never existed. Phrase it as "no evidence". PROVISIONAL: Song restaurants with menus, waiters and specialised eateries. Search extracts only reached Wikipedia, a Wikipedia mirror and China Daily, none of which count. Strong sources to cite: Meng Yuanlao's *Dongjing meng Hua lu* (1147), a memoir of Kaifeng; Wu Zimu's *Mengliang lu* (1274), on Hangzhou; Jacques Gernet, *Daily Life in China on the Eve of the Mongol Invasion* (1962); Michael Freeman, "Sung", in K.C. Chang (ed.), *Food in Chinese Culture* (Yale 1977); Nicholas Kiefer, "Economics and the Origin of the Restaurant", *Cornell HRA Quarterly* (2002). Check them before airing.
+- **Verdict:** Confirmed (verified 2026-10-02). Paris half from the earlier pass; Song half verified now. One detail, the singing waiters, is unverified.
+- **Corrected / on-air version:** "In 18th-century Paris, a *restaurant* wasn't a place. It was a restorative broth, a concentrated meat bouillon for people with weak constitutions. The usual story says a soup-seller named Boulanger opened the first restaurant in 1765. Historian Rebecca Spang went looking and found no contemporary evidence for Boulanger's shop. The first documented 'restaurateur' was Mathurin Roze de Chantoiseau, around 1766. But Paris was centuries late. In Song-dynasty China, the capital cities had a thriving restaurant trade. A guide to the capital Hangzhou written in 1235 describes restaurant after restaurant, each with its own house menu, many specializing in noodles or seafood. A lot of them were run by families who had fled the old northern capital, Kaifeng, bringing their regional cooking with them. That's more than 500 years before Roze de Chantoiseau." Hedge for China: "Historians argue these were restaurants in every way that matters: customers choosing from a menu, paying for a meal, at a place built for it."
+- **Confirmed vs. inferred vs. unknown:**
+  - **Paris (from the earlier pass, sources kept):** "Restaurant" meant a restorative bouillon. Spang finds no evidence for Boulanger and puts Roze de Chantoiseau first, around 1766 (sources give 1766 or 1767). Phrase it as "no evidence", not "never existed".
+  - **Song, confirmed:**
+    - A primary source, *The Attractions of the Capital* (1235), describes Hangzhou restaurants: most run by people from the old capital, noodles and seafood as specialties, each with its own house menu, some originally set up to serve southerners unused to northern food (Columbia University, Asia for Educators).
+    - Hangzhou had "innumerable restaurants" (Columbia AFE).
+    - Kiefer (2002, peer-reviewed, Cornell HRA Quarterly) argues that restaurants as we know them existed in Southern Song China. By contemporary accounts, 13th-century Hangzhou had a lively restaurant scene serving locals and travellers, so the restaurant was not a French Revolution invention.
+  - **Inferred:**
+    - Kaifeng (Northern Song, before 1127) already had restaurants. This follows from the Columbia text saying the Hangzhou restaurants were run by people from the old capital, and from Meng Yuanlao's *Dongjing meng Hua lu* (1147), a memoir of Kaifeng. The memoir's text was only seen via Wikipedia and Project Gutenberg listings, so it doesn't count as verified content.
+    - The safe date to air is "by the 1200s in Hangzhou", which is more than 500 years before Paris. The earlier "about 600 years" works only if you count from Kaifeng in the early 1100s, so hedge it as "centuries earlier".
+  - **Unverified:**
+    - Waiters memorizing orders for 20 dishes and singing them out in the kitchen. The quote is attributed to Meng Yuanlao but was found only via Wikipedia and an uncited search summary. Leave it out, or say "one memoir of the time describes waiters who…" only after someone checks Gernet or the Columbia PDF directly.
+    - Freeman's argument that the Song developed a true "cuisine" (in *Food in Chinese Culture*, Yale). This was seen only via Wikipedia, and the book exists (WorldCat), but don't quote it.
+    - Gernet's *Daily Life in China on the Eve of the Mongol Invasion* is confirmed as a real book (Stanford UP / De Gruyter), but its restaurant content was not seen in extracts.
 - **Sources:**
-  - Harvard University Press, Rebecca Spang, *The Invention of the Restaurant* (https://www.hup.harvard.edu/books/9780674241770). Book description: broth origin, Roze de Chantoiseau.
-  - Paris Food History blog (Jim Chevallier, food historian), "Boulanger and the restaurant: the snowballing of a myth" (http://parisfoodhistory.blogspot.com/2018/07/boulanger-and-restaurant-snowballing-of.html) and "The inventor of the restaurant" (https://parisfoodhistory.blogspot.com/2018/05/the-inventor-of-restaurant-eighteenth.html). Independent support. A blog by a published food historian; medium strength.
-  - Song China: **no strong source verified this session.** See the list above.
-- **Best "Somebody Did It First" angle:** Boulanger (and Paris) gets the credit. Roze de Chantoiseau is the documented Paris pioneer, and Song China had full-service restaurants with menus about 600 years before Paris. The Paris correction is strong; the China priority is widely accepted by food historians but needs source confirmation here.
-- **Fit score:** 4/5. A named, credited "inventor" who may not have existed, a documented replacement, and a much earlier civilisation.
+  - (Paris, kept from the earlier pass) Harvard University Press, Rebecca Spang, *The Invention of the Restaurant* (https://www.hup.harvard.edu/books/9780674241770). Broth origin, Roze de Chantoiseau.
+  - (Paris, kept) Paris Food History blog, Jim Chevallier, "Boulanger and the restaurant: the snowballing of a myth" (http://parisfoodhistory.blogspot.com/2018/07/boulanger-and-restaurant-snowballing-of.html) and "The inventor of the restaurant" (https://parisfoodhistory.blogspot.com/2018/05/the-inventor-of-restaurant-eighteenth.html). Medium strength.
+  - Columbia University, Asia for Educators, "The Cities of the Song – Hangzhou" (https://afe.easia.columbia.edu/songdynasty-module/cities-hangzhou.html). Restaurants in Song Hangzhou.
+  - Columbia University, Asia for Educators, primary-source excerpts from *The Attractions of the Capital* (1235) (https://afe.easia.columbia.edu/ps/china/attractions_song_capital.pdf). House menus, specialties, owners from the old capital.
+  - Nicholas M. Kiefer, "Economics and the Origin of the Restaurant", *Cornell Hotel and Restaurant Administration Quarterly* 43(4), 2002, pp. 58–64 (SAGE: https://journals.sagepub.com/doi/abs/10.1177/0010880402434006; author PDF: https://kiefer.economics.cornell.edu/Restaurant.PDF). Restaurants in Southern Song Hangzhou centuries before Paris.
+  - Jacques Gernet, *Daily Life in China on the Eve of the Mongol Invasion, 1250–1276* (De Gruyter/Stanford UP: https://www.degruyterbrill.com/document/doi/10.1515/9781503620742/html?lang=en). The book's existence and subject were confirmed; its restaurant passages were not seen.
+  - Strong-source count for Song: 2 (Columbia AFE, which carries the 1235 primary source; Kiefer, peer-reviewed).
+- **Best "Somebody Did It First" angle:** Boulanger (and Paris) gets the credit. Roze de Chantoiseau is the documented Paris pioneer, and Song-dynasty Hangzhou had menu-driven restaurants by 1235, more than five centuries before Paris. The evidence is solid on both halves now; just keep the singing-waiter anecdote out until it's checked.
+- **Fit score:** 4/5. Unchanged.
+- **What changed from the provisional draft:** The Song half went from provisional to confirmed with two strong sources (Columbia AFE with the 1235 primary text; Kiefer 2002). Reframed the China date as "by 1235 in Hangzhou, more than 500 years before Paris". Moved the "waiters taking orders" detail and the Freeman quote to unverified. Dropped "12th-century" as the headline date.
+
+---
 
 ### 64. Diner — Fit 2/5
 - **Planned fun fact:** Walter Scott's night lunch wagon in Providence, 1872 (American Diner Museum, Smithsonian); Greek-owned diners came later. Verify.
-- **Verdict:** Confirmed, PROVISIONAL. Not checked this session (search budget exhausted, WebFetch blocked). Re-check before scripting.
-- **Corrected / on-air version (provisional):** "The American diner didn't start as a railroad car. It started in 1872 in Providence, Rhode Island, when Walter Scott turned a horse-drawn freight wagon into a night-time food cart. He parked it outside the *Providence Journal* offices and sold sandwiches, pie and coffee to newspapermen and night-shift workers after the restaurants closed. Lunch wagons spread across New England. Then came prefabricated 'lunch cars' from builders like the Worcester Lunch Car Company (1906), and only later the name 'diner', borrowed from railroad dining cars. Greek immigrant owners became the face of the diner much later, especially in the post-war New York and New Jersey area."
-- **Confirmed vs. inferred vs. unknown:** From background knowledge (not checked this session): Walter Scott, Providence, 1872, horse-drawn wagon serving night workers outside the Providence Journal. This is the standard account from diner historian Richard J.S. Gutman (*American Diner Then and Now*), echoed by the Smithsonian NMAH and Johnson & Wales University's culinary museum, which holds Gutman's collection. The Smithsonian/Gutman detail that Scott had sold food from a basket since the 1850s is also from memory. Samuel Jones's walk-in lunch wagon (Worcester, 1880s) and Charles Palmer's 1891 lunch-wagon patent are also from memory. The Greek-owned-diner era (mid-20th century, NY/NJ) is inferred from general knowledge. Note that the "American Diner Museum" is a small Providence nonprofit, not a major institution.
-- **Sources (to verify; NOT accessed this session):**
-  - Richard J.S. Gutman, *American Diner Then and Now* (Johns Hopkins University Press, 2000).
-  - Smithsonian National Museum of American History, diner/lunch wagon collections (americanhistory.si.edu). Exact page URL not verified.
-  - Johnson & Wales University Culinary Arts Museum (Gutman diner collection). URL not verified.
-  - **No sources checked this session. Do not air until two of these are confirmed.**
-- **Best "Somebody Did It First" angle:** Weak. Possible framings: "the diner is credited to the railroad dining car, but it began as a horse-drawn lunch wagon", or "Greek families are synonymous with diners, but a Providence Yankee started it". Neither involves a famous wrongly credited person. Consider folding this into Fast Food (#65) as one segment, or replacing it with a stronger topic. One option is the sandwich: the Earl of Sandwich gets credit, but bread-wrapped meals are ancient (e.g., Hillel's matzo sandwich). That would need its own check.
-- **Fit score:** 2/5. A good origin story with no did-it-first conflict.
+- **Verdict:** Confirmed (verified 2026-10-02). Minor corrections to the supporting details.
+- **Corrected / on-air version:** "The American diner didn't start as a railroad car. It started in 1872 in Providence, Rhode Island. Walter Scott, who'd been selling food and newspapers on the street since he was a teenager, fitted out an old horse-drawn freight wagon and parked it outside the *Providence Journal* office. He sold food after the restaurants closed to newspapermen, night-shift workers and theatergoers. Customers ordered at the window and ate on the curb. Lunch wagons spread through New England. In Worcester, Massachusetts, Samuel Jones built one you could step inside in 1887, and in 1906 the Worcester Lunch Car Company started mass-producing them. Only later did they get the name 'diner', borrowed from railroad dining cars. Today New Jersey has more diners than any other state, and many of them are run by Greek immigrant families."
+- **Confirmed vs. inferred vs. unknown:**
+  - **Confirmed:**
+    - Walter Scott, Providence, 1872. A night lunch wagon (a converted freight wagon) serving late-shift workers, newspapermen and theatergoers after restaurants closed; customers ate on the curb (Smithsonian Magazine profile of diner historian Richard Gutman; NPS National Register documentation).
+    - Samuel Jones brought the lunch wagon to Worcester in 1884 and built the first walk-in lunch cart in 1887. Charles Palmer received the first lunch-wagon patent; the NPS form shows dates of 1890 and 1891 in different places, so say "around 1890" if you use it.
+    - The Worcester Lunch Car Company was founded 1906 by Philip Duprey and Grenville Stoddard and built 651 diners through 1957 (Worcester Historical Museum records).
+  - **Medium (single or non-strong source):**
+    - Scott selling food from a basket since the mid-1850s, and the *Journal* office at 2 Weybosset Street. Seen in a non-institutional extract; say "since he was a teenager" or omit.
+    - The name "diner" from railroad dining cars. History.com covers diners resembling railcars; the 1920s–30s naming detail is from etymonline and blogs. Say "later borrowed from railroad dining cars" without a date.
+  - **Confirmed (modern):** New Jersey has the most diners (about 600), and many have Greek-immigrant family owners (Nat Geo; NPR).
+  - **Inferred:** The specifically "post-war" timing of the Greek-owner era. Not pinned down in strong sources; say "in the 20th century" or "today".
+  - The "American Diner Museum" was not used as a source.
+- **Sources:**
+  - Smithsonian Magazine, "A Life Devoted to the American Diner" (https://www.smithsonianmag.com/arts-culture/a-life-devoted-to-the-american-diner-472278/). Scott, 1872, Providence, the night lunch wagon, its customers.
+  - National Park Service, National Register of Historic Places Multiple Property Documentation Form, NRHP 64500250 (diners) (https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500250_text). Scott 1872, Jones 1884/1887, Palmer's patent, Worcester.
+  - Worcester Historical Museum, "Worcester Lunch Car Company Records" finding aid (https://worcesterhistorical.com/wp-content/uploads/2020/04/worcester-lunch-car-company-1998.163.pdf). The company's history. Museum archive.
+  - History.com, "Why Do Classic Diners Look Like Railcars?" (https://www.history.com/articles/diners-look-like-trains-chrome-origins). The railcar styling and name link. Medium.
+  - National Geographic, "Meet the people behind New Jersey's iconic diners" (https://www.nationalgeographic.com/travel/article/photo-story-the-people-behind-new-jerseys-iconic-diners). Greek family owners, NJ diner count.
+  - NPR, "New Jersey diners adapt to survive in state dubbed 'diner capital of the world'" (https://www.npr.org/transcripts/1241959475). Supporting.
+  - Strong-source count: 2 for Scott 1872 (Smithsonian Magazine, NPS); 2 for Jones and Worcester (NPS, Worcester Historical Museum); 2 for the Greek-owned NJ diners (Nat Geo, NPR).
+- **Best "Somebody Did It First" angle:** Still weak. "It wasn't the railroad car, it was a horse-drawn night wagon" is a myth-correction, not a credit-theft story. Recommend folding it into #65 Fast Food as a 30-second segment or replacing it. The sandwich idea (Earl of Sandwich vs. earlier bread-wrapped meals) was **not checked in this pass**.
+- **Fit score:** 2/5. Unchanged.
+- **What changed from the provisional draft:** The verdict stays Confirmed, now verified. Replaced the unverified Gutman book, the NMAH and Johnson & Wales placeholders with confirmed Smithsonian Magazine, NPS, Worcester Historical Museum, Nat Geo and NPR pages. Added Jones's 1884 arrival in Worcester and noted the 1890/1891 date conflict for Palmer's patent. Softened "post-war" for the Greek owners. Named the Worcester Lunch Car founders.
+
+---
 
 ### 65. Fast Food — Fit 5/5
 - **Planned fun fact:** White Castle (1921, Wichita) standardized fast food; Yoshinoya (1899, Tokyo fish market); Red's Giant Hamburg (1947, Springfield, MO, Route 66) as first drive-through. Drive-through "first" is contested (Pig Stand Texas 1921 drive-in / 1931 drive-through window claims, In-N-Out 1948 two-way speaker), verify. Also the did-it-first angle: Automats (Horn & Hardart 1902), Roman thermopolia (Pompeii, 2020 excavation), McDonald's credited with fast food but White Castle did it first.
-- **Verdict:** Needs correction. PROVISIONAL: not checked this session.
-- **Corrected / on-air version (provisional):** "McDonald's gets the credit for fast food. Its 'Speedee Service System' launched in 1948, and Ray Kroc franchised it from 1955. But White Castle opened in Wichita, Kansas, in 1921 with a cheap, identical burger, a standardised kitchen, and a chain built to look the same everywhere. It's usually called the first fast-food hamburger chain. Tokyo's Yoshinoya was dishing out quick beef bowls to fish-market workers from 1899. Horn & Hardart's coin-operated Automat opened in Philadelphia in 1902. And the drive-through? Red's Giant Hamburg on Route 66 in Springfield, Missouri, is often called the first in 1947, but Texas's Pig Stand chain claims a drive-through window in the 1930s, so call Red's 'one of the first'. Two thousand years earlier, the people of Pompeii were grabbing hot food from street-counter snack bars called *thermopolia*. One beautifully painted example was unearthed in 2020."
-- **Confirmed vs. inferred vs. unknown:** From background knowledge (not checked this session): White Castle founded 1921 in Wichita by Walt Anderson and Billy Ingram, widely described as the first fast-food hamburger chain; Yoshinoya founded 1899 at the Nihonbashi fish market (company history); Horn & Hardart's first Automat in Philadelphia, 1902 (the Smithsonian NMAH holds an Automat section; the technology came from Germany's Quisisana company, Berlin ~1895); McDonald's brothers' Speedee system 1948 and Kroc 1955; Pompeii Regio V thermopolium announced by the Archaeological Park of Pompeii, late December 2020. Disputed: "first drive-through". Red's Giant Hamburg (1947) vs. Pig Stand's claimed 1931 California window vs. In-N-Out (1948, first two-way speaker). Drive-*in* (Pig Stand, Dallas 1921) is a different thing from drive-*through*; don't conflate them. Also, Yoshinoya (1899) predates White Castle as a quick-service eatery, but it was a single shop at the time, not a chain. Keep the claims distinct: "first fast-food *chain*" (White Castle) vs. "quick food" (ancient).
-- **Sources (to verify; NOT accessed this session):**
-  - David Gerard Hogan, *Selling 'em by the Sack: White Castle and the Creation of American Food* (NYU Press, 1997). White Castle as the first fast-food chain.
-  - Smithsonian NMAH, Horn & Hardart Automat collection (americanhistory.si.edu). URL not verified.
-  - Parco Archeologico di Pompei, Dec 2020 thermopolium announcement (pompeiisites.org), and Smithsonian or Nat Geo coverage of it. URLs not verified.
-  - Yoshinoya Holdings corporate history (yoshinoya-holdings.com). Company source only.
-  - Red's Giant Hamburg: Route 66 histories (e.g., NPS Route 66 Corridor Preservation, nps.gov). URL not verified; the "first" claim comes mainly from local and Route 66 lore.
-  - **No sources checked this session. Do not air until each claim has two sources.**
-- **Best "Somebody Did It First" angle:** McDonald's and Ray Kroc get the credit for fast food. White Castle did the standardised burger chain 27 years earlier, and Pompeii's thermopolia did street fast food 2,000 years earlier. This is one of the strongest premise fits in the batch. The White Castle priority is well established in food history; the drive-through "first" must be hedged.
-- **Fit score:** 5/5. Famous credited brand and person, a well-documented earlier chain, and a spectacular ancient visual (the 2020 Pompeii counter).
+- **Verdict:** Needs correction (verified 2026-10-02). The core is confirmed; the drive-through "first", the Yoshinoya sourcing and the Pompeii dates need hedges or fixes.
+- **Corrected / on-air version:** "McDonald's gets the credit for fast food. The McDonald brothers launched their 'Speedee Service System' in San Bernardino in 1948, and Ray Kroc opened his first franchise in 1955. But White Castle opened in Wichita, Kansas, in 1921. Walt Anderson's flattened, fast-griddled burgers came with a written prep manual, paper hats and strict cleanliness rules, and by 1931 there were 116 White Castles in 11 states. It's usually called the first fast-food chain. Horn & Hardart opened its coin-operated Automat in Philadelphia in 1902, using machines imported from Germany. In Tokyo, according to the company, Yoshinoya was serving quick beef bowls to fish-market workers from 1899. And the drive-through? Red's Giant Hamburg on Route 66 in Springfield, Missouri, is widely credited as the first in 1947. But a Pig Stand in San Diego tried a 'Drive-Thru' window in 1931, and In-N-Out added the two-way speaker in 1948, so call Red's 'one of the first'. Nearly 2,000 years ago, the people of Pompeii were grabbing hot food from street-counter snack bars called *thermopolia*. One beautifully painted example was fully dug out and unveiled in 2020."
+- **Confirmed vs. inferred vs. unknown:**
+  - **Confirmed:**
+    - White Castle, Wichita, 1921, Anderson and Ingram. Anderson's griddle method, prep manual, paper hats and cleanliness rules; 116 locations in 11 states by 1931; "often considered the original American fast-food chain" (Kansas Historical Society, Britannica, Ohio History Connection, which holds the company archives).
+    - McDonald's opened 1940; the Speedee system came in 1948; Kroc opened in Des Plaines in 1955 and bought the company in 1961 (Library of Congress, Britannica).
+    - Horn & Hardart's first Automat opened at 818 Chestnut St., Philadelphia, in 1902 (opening date given as 9 June) with "waiterless restaurant" equipment from Berlin. The Quisisana company built the machine, which was Swiss-designed and German-made (NYPL, Britannica, Smithsonian Magazine).
+    - The Pompeii Regio V thermopolium: a counter painted with a Nereid on a seahorse, among about 80 thermopolia known at Pompeii. **Correction:** it was *partially* excavated in 2019, and the full excavation was announced in late December 2020 (Smithsonian, Pompeii Archaeological Park press kit).
+    - Red's Giant Hamburg, 1947, is "widely credited" as the first drive-thru (History.com).
+    - Pig Stand opened its first drive-*in* (carhops) on the Dallas–Fort Worth highway in 1921 (History.com).
+    - In-N-Out, 1948, Baldwin Park, was the first two-way speaker drive-thru (History.com; Britannica entry seen).
+  - **Medium (non-strong sources only):** Pig Stand No. 21 in San Diego tried a "Drive-Thru" window in 1931. The food was reportedly brought out by the cook rather than handed through a window, so it may not count as a true drive-through.
+  - **Company source only:** Yoshinoya founded 1899 at Nihonbashi, serving fish-market workers. Found only in Tokyo Weekender, encyclopedia.com (International Directory of Company Histories) and Wikipedia. Say "according to the company".
+  - Keep distinct: first fast-food *chain* (White Castle), quick food (ancient), first drive-*in* (Pig Stand 1921), first drive-*through* (contested).
+- **Sources:**
+  - Kansas Historical Society, Kansapedia "White Castle" (https://www.kansashistory.gov/kansapedia/white-castle/16716) and "Walter Anderson" (https://www.kshs.org/p/walter-anderson/19353). Founding, method, standardization.
+  - Britannica, "White Castle" (https://www.britannica.com/topic/White-Castle). Founding and first-chain status.
+  - Ohio History Connection, "A Century of Sliders, The Company Archives Tell the Story" (https://www.ohiohistory.org/a-century-of-sliders-the-company-archives-tell-the-story/). Supporting; holds the company archives.
+  - Library of Congress Research Guide, "McDonald's Founded in 1940" (https://guides.loc.gov/this-month-in-business-history/may/mcdonalds-founded). 1940, Speedee 1948, Kroc 1954–55, the 1961 buyout.
+  - Britannica, "Ray Kroc" (https://www.britannica.com/money/Ray-Kroc). Supporting.
+  - NYPL, "Before the Big Mac: Horn & Hardart Automats" (https://www.nypl.org/blog/2010/12/08/horn-hardart-automats). 1902, 818 Chestnut St., Berlin equipment.
+  - Britannica, "Horn & Hardart Automat" (https://www.britannica.com/topic/Horn-and-Hardart-Automat), and Smithsonian Magazine, "Meet Me at the Automat" (https://www.smithsonianmag.com/arts-culture/meet-me-at-the-automat-47804151/). Supporting.
+  - Smithsonian Magazine, "Ancient Pompeiians Stopped at This 'Snack Bar' to Feast on Snails, Fish and Wine" (https://www.smithsonianmag.com/smart-news/fast-food-joint-pompeii-served-snails-fish-and-wine-new-finds-suggest-180976651/). The 2020 thermopolium finds.
+  - Parco Archeologico di Pompei, "Discoveries continue at the Regio V site" press kit (https://pompeiisites.org/en/press-kit-en/discoveries-continue-at-the-regio-v-site/). Official site source.
+  - History.com, "How Drive-Thru Dining Changed Fast Food" (https://www.history.com/articles/drive-thru-dining-history-in-n-out-burger). Pig Stand drive-in 1921, Red's 1947 "widely credited", In-N-Out 1948 two-way intercom.
+  - Britannica, "In-N-Out Burger" (https://www.britannica.com/topic/In-N-Out-Burger). Seen in results, supporting; content not extracted.
+  - Tokyo Weekender, "The (Surprisingly Long) History of Yoshinoya" (https://www.tokyoweekender.com/food-and-drink/history-of-yoshinoya-japans-beef-bowl-icon/), and encyclopedia.com, "Yoshinoya D & C Company Ltd." (https://www.encyclopedia.com/books/politics-and-business-magazines/yoshinoya-d-c-company-ltd). Yoshinoya 1899. **Not strong; only a company-history-level claim.**
+  - Strong-source count: White Castle 3 (KSHS, Britannica, Ohio History); McDonald's 2 (LoC, Britannica); Automat 3 (NYPL, Britannica, Smithsonian); Pompeii 2 (Smithsonian, Pompeii Park); drive-through 1 strong-ish (History.com) plus a Britannica entry seen; Yoshinoya 0 strong.
+- **Best "Somebody Did It First" angle:** McDonald's and Ray Kroc get the credit. White Castle built the standardized burger chain 27 years before Speedee, the Automat was doing fast service in 1902, and Pompeii's thermopolia served street food nearly 2,000 years ago. White Castle's priority is well established by state historical societies and Britannica. Hedge the drive-through "first" and Yoshinoya.
+- **Fit score:** 5/5. Unchanged.
+- **What changed from the provisional draft:** The verdict stays Needs correction, now on evidence. Fixed the Pompeii framing (partly dug in 2019, fully excavated and announced in 2020). Clarified that Pig Stand's 1931 window may not have handed food through a window. Downgraded Yoshinoya to "according to the company". Added White Castle's 116 stores by 1931 and the Automat's address and opening date. Replaced the Hogan book, NPS Route 66 and NMAH placeholders with confirmed KSHS, Britannica, LoC, NYPL and History.com pages.
 
 ---
 
@@ -1314,24 +1536,24 @@ Each entry gives the planned fun fact, the verdict, the corrected on-air line, w
 
 # Job 4: Ranking the lineup for "Somebody Did It First"
 
-The old plan was built as "Evolution of [Thing]", so about a third of it is "oldest X ever found" facts with nobody wrongly credited. The ranking below favors a famous credited name, a well-documented earlier person, and a clean story you can say without hedging half of it. Where an episode is still **Provisional** (sources not opened this session), it's marked, and its two sources need checking before it gets scripted.
+The old plan was built as "Evolution of [Thing]", so about a third of it is "oldest X ever found" facts with nobody wrongly credited. The ranking below favors a famous credited name, a well-documented earlier person, and a clean story you can say without hedging half of it. As of the 2026-10-02 pass, every episode in this ranking is checked against two or more strong sources.
 
 ## The 15 strongest candidates for episodes 2–16
 
 | Order | Episode | Credited → Actually first | Why it's strong | Status |
 |---|---|---|---|---|
-| 1 | #49 Recorded Sound | Edison → Scott de Martinville (1857 phonautograph) | Direct sequel to the launch: Edison again, and the 1860 recording was played back in 2008 by Berkeley Lab scientists, so you have audio for the video. | Provisional |
+| 1 | #49 Recorded Sound | Edison → Scott de Martinville (1857 phonautograph) | Direct sequel to the launch: Edison again, and the 1860 recording was played back in 2008 by First Sounds with Berkeley Lab, so you have audio for the video. Bonus: Charles Cros's playback design (April 1877) also beat Edison. | Checked |
 | 2 | #41 Anesthesia | Morton (1846 Ether Dome) → Crawford Long (1842), Hanaoka Seishū (1804) | Famous public credit, documented earlier surgery, a bitter priority war, and US Doctors' Day is March 30 because of Long. | Checked |
-| 3 | #38 Telephone | Bell → Elisha Gray, Antonio Meucci, Philipp Reis | The textbook case for the channel, as long as it's told carefully: Gray filed a caveat, and H.Res. 269 honors Meucci without saying he invented the telephone. | Provisional |
+| 3 | #38 Telephone | Bell → Elisha Gray, Antonio Meucci, Philipp Reis | The textbook case for the channel, as long as it's told carefully: Gray filed a caveat (the Library of Congress has Bell as the 5th entry that day and Gray's caveat the 39th, "a few hours later"), and H.Res. 269 honors Meucci without saying he invented the telephone. | Checked |
 | 4 | #42 Vaccines | Jenner → Benjamin Jesty (1774), plus centuries of variolation in China, India, the Ottoman world and West Africa (Onesimus) | Huge name, excellent evidence, several layers of "first". | Checked |
-| 5 | #37 Printing Press | Gutenberg → Bi Sheng (~1040), Korea's Jikji (1377) | Artifacts you can show (Jikji is at the BnF), and a hard date gap of 70+ years for metal type. | Provisional |
-| 6 | #51 Electricity | Franklin's kite → Dalibard at Marly-la-Ville, May 1752 | Franklin's own idea was tested first in France, weeks before the kite, and the man at the rod was a forgotten ex-dragoon. | Provisional |
-| 7 | #30 Train | George Stephenson / Rocket → Richard Trevithick (1804) | A 25-year gap, a famous name, and Trevithick died broke. | Provisional |
-| 8 | #31 Car | Ford → Karl Benz (1886); Ransom Olds and the meatpackers on the assembly line | Classic "he perfected it" Heinz-style structure, with two layers. | Provisional |
-| 9 | #8 Air Conditioning | Willis Carrier → John Gorrie (1840s ice machine for patients) | Carrier's first system wasn't even for people; Gorrie got there first and died obscure. | Provisional |
+| 5 | #37 Printing Press | Gutenberg → Bi Sheng (~1040), Korea's Jikji (1377) | Artifacts you can show (Jikji is at the BnF), and a hard date gap of 70+ years for metal type. | Checked |
+| 6 | #51 Electricity | Franklin's kite → Dalibard at Marly-la-Ville, May 1752 | Franklin's own idea was tested first in France, weeks before the kite, and the man at the rod was a forgotten ex-dragoon. | Checked |
+| 7 | #30 Train | George Stephenson / Rocket → Richard Trevithick (1804) | A 25-year gap, a famous name, and Trevithick died in poverty (workers paid for his funeral). Museum Wales calls him "the real father of the railways." | Checked |
+| 8 | #31 Car | Ford → Karl Benz (1886); Ransom Olds and the meatpackers on the assembly line | Classic "he perfected it" Heinz-style structure, with two layers. The Smithsonian says Olds' factory was the first to build cars on an assembly line. | Checked |
+| 9 | #8 Air Conditioning | Willis Carrier → John Gorrie (cooling sickrooms with ice from ~1841; first US ice-machine patent, 1851) | Carrier's first system wasn't even for people; Gorrie got there first and died broke in 1855. | Checked |
 | 10 | #4 Toilet | Thomas Crapper → John Harington (1596), Alexander Cumming (S-trap, 1775), Minoans | A myth everyone half-knows, a funny name, and solid evidence. | Checked |
-| 11 | #39 Computer (reworked) | ENIAC → Atanasoff-Berry Computer, Zuse's Z3 (1941), Colossus (1943–44) | A 1973 federal court ruling (Honeywell v. Sperry Rand) actually voided the ENIAC patent on these grounds. Drop the moth lead. | Provisional |
-| 12 | #65 Fast Food | McDonald's / Ray Kroc → White Castle (1921), Pompeii's thermopolia | Famous credit, clear earlier chain; keep the drive-through "first" hedged. | Provisional |
+| 11 | #39 Computer (reworked) | ENIAC → Atanasoff-Berry Computer, Zuse's Z3 (1941), Colossus (1943–44) | A 1973 federal court ruling (Honeywell v. Sperry Rand) actually voided the ENIAC patent on these grounds. Drop the moth lead. | Checked |
+| 12 | #65 Fast Food | McDonald's / Ray Kroc → White Castle (1921), Pompeii's thermopolia | Famous credit, clear earlier chain; keep the drive-through "first" hedged. | Checked |
 | 13 | #60 Pizza | Raffaele Esposito / Margherita for the queen (1889) → Neapolitan pizzaioli described in 1858 | The royal letter behind the legend looks forged (Zachary Nowak). That's a rare documented fake. | Checked |
 | 14 | #24 Explosives | Alfred Nobel → Ascanio Sobrero (nitroglycerin, 1847) | NobelPrize.org itself credits Sobrero, and the "merchant of death" obituary is its own myth-bust (no copy has ever been found). | Checked |
 | 15 | #44 Refrigeration | Carrier / Gorrie → William Cullen (1748), Oliver Evans (1805), Jacob Perkins (1834) | Cold open: a Mari king, Zimri-Lim, inscribed that he built an icehouse "which never before had any king built", so it's a 3,800-year-old "I did it first" claim with the receipt still around. | Checked |
@@ -1347,19 +1569,19 @@ These have no "credited person wasn't first" story as planned:
 | # | Topic | Problem | Rework or cut |
 |---|---|---|---|
 | 6 | Hot Water | Myth-bust only, and the planned fact is itself a myth | Rework as "The Shower": Feetham's 1767 pump shower vs. Greek gymnasium showers (needs checking), or cut |
-| 10 | Bridge | "Oldest bridge" superlative | Rework: Thangtong Gyalpo's 1400s iron-chain suspension bridges vs. James Finley 1801 (needs checking) |
+| 10 | Bridge | "Oldest bridge" superlative | Rework: Thangtong Gyalpo's 1400s iron-chain suspension bridges vs. James Finley 1801 (now sourced: Britannica, Treasury of Lives, Smithsonian; fit ≈4) |
 | 15 | Sword | Oldest-artifact fact | Cut, or fold the Venice monastery mislabeled-sword story into a "museum mistakes" episode |
 | 16 | Armor | Planned fact is wrong; no credit story | Cut |
 | 20 | Rifle | Inventor unknown; attributions are traditional | Fold into #19 Gun |
 | 22 | Castle | Superlative fact, contested | Cut |
-| 35 | Timekeeping | Planned facts shaky; no credited person | Rework: Su Song's 1088 astronomical clock vs. European clockmakers, or Galileo vs. Huygens on the pendulum clock |
+| 35 | Timekeeping | Planned facts shaky; no credited person | Rework: Su Song's 1088 astronomical clock vs. European clockmakers, or Galileo vs. Huygens on the pendulum clock (both now sourced: Britannica, ETHW, Museo Galileo; fit ≈4) |
 | 50 | Clothing | Contested "dyed" claim; no credited person | Rework: Jacob Davis vs. Levi Strauss on riveted jeans (needs checking) |
 | 54 | Salt and Spices | Myth-bust only | Cut, or rework around Ramesses II's peppercorns (needs checking) |
 | 58 | Cheese | "Oldest cheese" record story | Cut, or fold into a food-records compilation |
 | 64 | Diner | No famous wrong credit | Fold into #65 Fast Food |
 | 43 | Hospital | Planned fact is wrong | Reframe as a myth-bust ("the famous first hospital may never have existed"), or cut |
 
-**Middle tier (fit 3), which works as "earlier than you think" but not as "someone else did it":** #1 Plumbing and #5 Sewers (merge them), #7 Heating, #9 Concrete, #14 Weapons, #17 Bow, #23 Warship, #27 Wheel, #28 Road, #29 Ship, #40 Medicine, #45 Cooking, #46 Farming, #47 Money, #48 Music, #53 Bread. These are good Shorts material or compilation segments ("5 things older than you think").
+**Middle tier (fit 3), which works as "earlier than you think" but not as "someone else did it":** #1 Plumbing and #5 Sewers (merge them), #7 Heating, #9 Concrete, #14 Weapons, #17 Bow, #23 Warship, #27 Wheel, #28 Road, #29 Ship, #40 Medicine, #45 Cooking, #46 Farming, #47 Money, #53 Bread. (#48 Music dropped to fit 2 on re-verification: the Neanderthal "flute" is most likely a carnivore-chewed bone, which leaves only an "oldest flute" record story.) These are good Shorts material or compilation segments ("5 things older than you think").
 
 ## Up to 10 new topics: strong "credited person wasn't first" stories
 
