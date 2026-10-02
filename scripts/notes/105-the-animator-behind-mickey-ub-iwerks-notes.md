@@ -20,7 +20,7 @@ Spoken words: 666
 | 1930 Iwerks left to run his own studio; closed 1936; directed for others; returned to Disney 1940, stayed until his death | Britannica (kids, "Ub Iwerks"); Walt Disney Family Museum blog |
 
 Hedges kept: "according to the Smithsonian", "Britannica says", "probably", "co-created", "tasked with designing", "the way the sources describe it", "around 1928", "Britannica says" on the 700 drawings, "one of the few who stayed". 
-Left out on purpose (unverified / keep off air in research): "chief animator" (not in the confirmed list); who drew the first sketch; Plane Crazy test showing vs release; any claim that Steamboat Willie was the first sound cartoon (cut in the entry); "stole" and "fraud".; why Iwerks left in 1930 (WDFM only); Mortimer Mouse name story; Academy awards; Iwerks birth date and 1919 meeting; "chief animator" 
+Left out on purpose (unverified / keep off air in research): "chief animator" (not in the confirmed list); who drew the first sketch; Plane Crazy test showing vs release; any claim that Steamboat Willie was the first sound cartoon (cut in the entry); "stole" and "fraud"; why Iwerks left in 1930 (WDFM only); Mortimer Mouse name story; Academy awards; Iwerks birth date and 1919 meeting; "chief animator" 
 
 ## Deepening (2026-10-02)
 - New facts added: Kansas City partnership (Britannica 1922 Laugh-O-gram; WDFM earlier commercial art venture); the Oswald loss and Iwerks staying (WDFM, Britannica); 700 drawings a day (Britannica, WDFM, so the entry's single-source flag is now cleared, still attributed on air); 1930 studio, 1936 closure, 1940 return (Britannica, WDFM); Britannica's drew/created/voiced split for Steamboat Willie (Britannica, Smithsonian NMAH).

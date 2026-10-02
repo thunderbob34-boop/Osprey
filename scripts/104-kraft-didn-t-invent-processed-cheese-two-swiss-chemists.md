@@ -14,7 +14,7 @@ Ask where processed cheese came from and a lot of people will say Kraft, and Jam
 
 ## 02 Kraft
 
-James L. Kraft started out in the cheese business in Chicago in 1903, in a wholesale cheese-delivery business, and that's how both Britannica and the Harvard Business School's profile of him tell it. So when I call him a Chicago cheese salesman, that's what he was doing before the patent, and the company grew out of that business.
+James L. Kraft started a wholesale cheese-delivery business in Chicago in 1903, and that's how both Britannica and the Harvard Business School's profile of him tell it. So when I call him a Chicago cheese salesman, that's what he was doing before the patent, and the company grew out of that business.
 
 ## 03 Kraft's Patent
 
