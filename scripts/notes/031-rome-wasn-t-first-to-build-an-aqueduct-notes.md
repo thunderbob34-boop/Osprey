@@ -34,3 +34,7 @@ Left out on purpose (unverified / keep off air in research): OPEN ITEM: the Jerw
 - Searched: Smithsonian on Anio Novus carrying less than thought, about 370 gallons per second → confirmed → https://www.smithsonianmag.com/smart-news/how-much-water-did-romes-aqueducts-really-carry-180955568/
 - Fixes: none.
 - Not search-verified (search budget ran out; checked against research, the main-session source check above, and knowledge): eleven aqueducts; Aqua Appia 312 BCE; Aqua Marcia 144 to 140 BCE, ~91 km; Bruun 1991/2013 figures; Rome 8 to 16 ft/mile (0.15 to 0.30%); Nîmes ~31 miles at ~15 to 20 in/mile (consistent with the ~12.6 m total fall over ~50 km); Jerwan 703 to 690 BCE, 2 million+ stones, inscription; Eupalinos c. 530 BCE.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none (housekeeping only: replaced the stale "Before lock: the Jerwan sources... Open them before this one records" reading-note line with a note that the main-session source check closed it; no spoken text changed)
+- Low items noted, not changed: Rome's Aqua Virgo had a very gentle fall (on the order of a foot per mile), so "for Rome itself that's not right" leans on the word "typically"; it is fine as worded.

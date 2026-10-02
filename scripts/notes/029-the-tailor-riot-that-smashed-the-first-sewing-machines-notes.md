@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): Thimonnier dying in
 - Searched: Walter Hunt lockstitch c. 1833/1834, abandoned 1838 over fear for seamstresses, applied 2 April 1853, patent model No. 11,161 dated 1854 at NMAH → confirmed → https://americanhistory.si.edu/collections/object/nmah_1070410 ; https://www.britannica.com/biography/Walter-Hunt
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): Howe patent no. 4,750 (1846). Note: Smithsonian Magazine uses "torch-waving" and Britannica's sewing-machine article has used "burned"; the script's "destroyed / smashed" is the conservative wording and stays.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: 1 (medium). Sections 05 and 06 said "the courts sided with Howe". Hunt's 1853 application was turned down by the Commissioner of Patents (Charles Mason, 1854) on grounds of abandonment, not by a court (https://ismacs.net/singer_sewing_machine_company/genius_rewarded_part_2.html ; https://lemelson.mit.edu/resources/walter-hunt). Changed to "in 1854 the patent office turned him down because he'd waited too long, so Howe's patent stood" and "the patent office turned him down for waiting too long". Word count 864 to 875.
+- Low items noted, not changed: "The first sewing machines to actually go to work": Balthasar Krems and Josef Madersperger had earlier machines, but Britannica's "first functional" for Thimonnier supports the wording.

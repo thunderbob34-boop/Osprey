@@ -1,7 +1,7 @@
 # Heinz Didn't Invent Ketchup - It Started as Fish Sauce
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 883 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 903 spoken words.
 - Tone is light and friendly, this is the channel's signature example. Heinz is the man who made ketchup a product, not a fraud.
 - Say kê-tsiap as KAY-tsyahp, Hokkien as HOH-kee-en, and The Compleat Housewife as "the complete housewife".
 - Every hedge in here is on purpose. Read "traces back to", "the usual explanation", "by the early 1700s", "the earliest English ketchup recipe people usually point to", "the earliest published tomato ketchup recipe historians usually cite" and "about sixty-four years" exactly as written. Never say Mease's recipe was "the first ever".
@@ -32,7 +32,7 @@ And it didn't stop at anchovies. In Britain in the 1700s, mushroom ketchup was c
 
 ## 05 The Tomato Shows Up
 
-Now here's the part that matters for Heinz. Tomatoes didn't show up in published ketchup recipes until 1812, that's the year a Philadelphia scientist named James Mease published a recipe for tomato ketchup, and that's the earliest published tomato ketchup recipe historians usually cite.
+Now here's the part that matters for Heinz. The tomato version historians usually start with is from 1812, that's the year a Philadelphia scientist named James Mease published a recipe for tomato ketchup, and that's the earliest published tomato ketchup recipe historians usually cite.
 
 And I want to be careful with that wording, it's the earliest one historians usually cite, not necessarily the first anybody ever made, because people cook things long before anybody writes them down, and there are claims floating around online about an earlier one that I couldn't confirm in any strong source. So the safe thing to say is that by 1812, tomato ketchup was in print, in America.
 
@@ -40,9 +40,9 @@ So, 1812 for the tomato recipe, and 1876 for Heinz. That's about sixty-four year
 
 ## 06 Fair Credit to Heinz
 
-Now, to be fair to Heinz, what he did really matters. He didn't invent ketchup, but he commercialized it, he standardized it, and he promoted it, and that's how one version of one sauce became the thing everybody pictures when you say the word. He sold it in glass bottles, and he was part of the push for pure food, the movement about what was actually going into the things people ate, and the Library of Congress has written about exactly that, ketchup and the pure food movement, and Heinz is part of that story.
+Now, to be fair to Heinz, what he did really matters. He didn't invent ketchup, and other companies were already bottling and selling it before him, but he commercialized it on a huge scale, he standardized it, and he promoted it, and that's how one version of one sauce became the thing everybody pictures when you say the word. He sold it in glass bottles, and he was part of the push for pure food, the movement about what was actually going into the things people ate, and the Library of Congress has written about exactly that, ketchup and the pure food movement, and Heinz is part of that story.
 
-So the fair way to put it is, Heinz didn't create ketchup, he made ketchup into a product. He took a sauce that had been fish, then anchovies, then mushrooms and walnuts and oysters, then tomato, and turned it into one thing in one bottle that everybody knows. That's a big deal, it just isn't inventing it.
+So the fair way to put it is, Heinz didn't create ketchup, he made his ketchup into the product everybody pictures. He took a sauce that had been fish, then anchovies, then mushrooms and walnuts and oysters, then tomato, and turned it into one thing in one bottle that everybody knows. That's a big deal, it just isn't inventing it.
 
 ## 07 Who Did It First
 

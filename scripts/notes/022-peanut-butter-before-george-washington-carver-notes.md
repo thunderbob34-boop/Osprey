@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): The Aztec peanut-pa
 - Searched: "most food historians" credit Kellogg's 1895 nut-butter process patent; Bayle, St. Louis, 1894; Andean/Inca peanut pastes → confirmed (History.com now states Bayle sold it in 1894 outright; the script's "may have" is more cautious, kept) → https://www.history.com/articles/who-invented-peanut-butter
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): Kellogg's "nutmeal" naming (History.com describes the 1895 compound as nut butter plus powdery nutmeal and grains; script wording "a paste called nutmeal" is loose but left as is).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Edson's patent is titled for peanut-candy, the paste was the step before candy (script wording is fair); Kellogg "a paste called nutmeal" is loose (already noted by Re-check A).

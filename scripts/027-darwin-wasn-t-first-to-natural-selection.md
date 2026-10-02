@@ -1,7 +1,7 @@
 # Darwin Wasn't First to Natural Selection
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 899 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
+- Runtime is about 6 minutes at a relaxed pace, roughly 899 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
 - Tone is calm and fair. This is a "first in print" story, not a theft story. Darwin comes out of it well, and so does Matthew.
 - Say Wells as WELLZ, Arboriculture as AR-bor-ih-kul-cher, Ternate as ter-NAH-tay, Linnean as lin-NEE-an.
 - Every hedge in here is on purpose. Read "first in print", "as a general idea", "the first we know of", "only for human races", "brief", "influenced almost no one", "independently", "a principle of natural selection" and "on the fringe" exactly as written. Never say Darwin stole, copied or plagiarized anything.

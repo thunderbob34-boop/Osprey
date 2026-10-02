@@ -1,11 +1,11 @@
 # Johnson's Dictionary Wasn't First
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 851 spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 856 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is calm and friendly. Johnson's dictionary was a huge achievement, and the script says so. The point is only that it wasn't first.
-- Say Cawdrey as KAW-dree, Oakham as OH-kum, Rutland as RUT-lund, Cockeram as KOCK-er-um, and Alphabeticall as al-fa-BET-ih-kul.
-- Every hedge in here is on purpose. Read "the first monolingual English dictionary", "about three thousand", "over forty thousand", "around 1580" and "drew on earlier school texts" exactly as written. Never say Cawdrey's was the first English word list of any kind.
-- Good on-screen text moments are 1604, 1623, 1755, "151 years", "about 3,000 words" vs "40,000+ words", and the old spelling "vnskilfull".
+- Say Cawdrey as KAW-dree, Oakham as OH-kum, Rutland as RUT-lund, Cockeram as KOCK-er-um, Bodleian as BOD-lee-un, and Alphabeticall as al-fa-BET-ih-kul.
+- Every hedge in here is on purpose. Read "the first monolingual English dictionary", "about twenty-five hundred", "over forty thousand" and "drew on earlier school texts" exactly as written. Never say Cawdrey's was the first English word list of any kind.
+- Good on-screen text moments are 1604, 1623, 1755, "151 years", "about 2,500 words" vs "40,000+ words", and the old spelling "vnskilfull".
 
 ## 01 Cold Open
 
@@ -19,17 +19,17 @@ But being the biggest, or the most famous, isn't the same as being the first, ri
 
 ## 03 Robert Cawdrey
 
-His name was Robert Cawdrey, and around 1580 he was a schoolmaster at Oakham, in Rutland, in England, and later on he was living in Coventry. And in 1604 he published a book called A Table Alphabeticall.
+His name was Robert Cawdrey, and he'd started out as a schoolmaster at Oakham, in Rutland, in England, and later on he was living in Coventry. And in 1604 he published a book called A Table Alphabeticall.
 
 Now here's the part that matters, A Table Alphabeticall is the first monolingual English dictionary. Monolingual just means one language, so it's English words explained in English, which is what you and I think of when we think of a dictionary. The British Library calls it the first single-language English dictionary, and Lady Margaret Hall, a college at Oxford, says plainly in its write-up of Johnson's dictionary that Johnson wasn't the first. 1604 to 1755 is a hundred and fifty-one years.
 
 ## 04 What Was In It
 
-And it was nothing like Johnson's. Cawdrey's dictionary had only about three thousand words in it, and I say about because the sources don't agree on the exact count, they give anywhere from about twenty-five hundred to three thousand, so about three thousand is the safe way to say it. And it skipped everyday vocabulary, so if a word was ordinary, a word everybody already knew, he left it out. What he explained were the hard words, the borrowed ones, the words coming into English from other languages that ordinary readers might trip over.
+And it was nothing like Johnson's. Cawdrey's dictionary had only about twenty-five hundred words in it, and I say about because the sources don't agree on the exact count, they give anywhere from about twenty-five hundred to three thousand, and the usual count for the first edition is about twenty-five hundred. And it skipped everyday vocabulary, so if a word was ordinary, a word everybody already knew, he left it out. What he explained were the hard words, the borrowed ones, the words coming into English from other languages that ordinary readers might trip over.
 
-And he told you who it was for. The full title of the book is long, but it names its readers, and that includes ladies, gentlewomen, and what it calls unskilful persons, spelled the old way, with a v where we'd put a u. There's a surviving copy of it at the Folger Shakespeare Library, so this isn't a book we only know about secondhand, it's a real book, title and all.
+And he told you who it was for. The full title of the book is long, but it names its readers, and that includes ladies, gentlewomen, and what it calls unskilful persons, spelled the old way, with a v where we'd put a u. The only known copy of the first edition is at the Bodleian Library in Oxford, so this isn't a book we only know about secondhand, it's a real book, title and all.
 
-So think about the difference. Cawdrey had about three thousand hard words, a little guide for people who needed help with them, and Johnson, a hundred and fifty-one years later, had over forty thousand, right? But the little one came first.
+So think about the difference. Cawdrey had about twenty-five hundred hard words, a little guide for people who needed help with them, and Johnson, a hundred and fifty-one years later, had over forty thousand, right? But the little one came first.
 
 ## 05 Careful With the Word First
 
@@ -45,4 +45,4 @@ He just didn't do it first. He did it bigger, and he did it more precisely, and 
 
 ## 07 Who Did It First
 
-So here's the order. Before 1604, there were bilingual word lists, like Latin to English. In 1604, Robert Cawdrey, a schoolmaster, published A Table Alphabeticall, the first monolingual English dictionary, with about three thousand hard words. In 1623, Henry Cockeram was the first to call an English to English book a dictionary. And in 1755, Samuel Johnson published his dictionary, with over forty thousand words. Johnson gets the credit for scale and precision, and he deserves it. Somebody did it first, and it was a schoolmaster with about three thousand hard words.
+So here's the order. Before 1604, there were bilingual word lists, like Latin to English. In 1604, Robert Cawdrey, a schoolmaster, published A Table Alphabeticall, the first monolingual English dictionary, with about twenty-five hundred hard words. In 1623, Henry Cockeram was the first to call an English to English book a dictionary. And in 1755, Samuel Johnson published his dictionary, with over forty thousand words. Johnson gets the credit for scale and precision, and he deserves it. Somebody did it first, and it was a schoolmaster with about twenty-five hundred hard words.

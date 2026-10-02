@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): The 1849 New York H
 - Searched: T.J. Stiles, Pulitzer-winning Vanderbilt biographer, "there is no truth to the tale" → confirmed → https://www.history.com/articles/who-invented-potato-chip-saratoga
 - Fixes: none.
 - Not search-verified (checked against research/knowledge only): Kitchiner as "an English doctor" (he styled himself Dr. and is usually so described); LoC and Leeds holdings; Crum's heritage; "historians agree" on Crum popularizing the chip.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Kitchiner's medical degree is doubtful (he styled himself Dr.); "historians agree" on Crum is a little strong.

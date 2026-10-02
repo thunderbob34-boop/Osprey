@@ -36,3 +36,7 @@ Left out on purpose (unverified / keep off air in research): Any claim the const
 - Searched: Britannica, Morgan's was not the first traffic signal (London 1868); Lester Wire, Salt Lake City 1912 handmade red/green box; Cleveland electric signal 5 Aug 1914 → confirmed → https://www.britannica.com/biography/Garrett-Morgan ; https://www.history.com/this-day-in-history/first-electric-traffic-signal-installed
 - Fixes: (1) Section 04: "Smithsonian flags that as unconfirmed" overstated what Smithsonian says (it writes "some reports claim the man was killed"); changed to "Smithsonian only puts that down as what some reports claim". (2) Section 06: removed an accidental duplicated sentence ("He made a better signal. He made a better signal, and..."). (3) Reading notes: replaced the stale "Before lock: Smithsonian only" line with a note that the IET page is the second source and the open item is closed. Word count unchanged at 898.
 - Not search-verified (checked against research/knowledge only): Great George St / Bridge St corner; Knight as railway engineer and manager (Smithsonian calls him a railway manager); USPTO "Of courage and caution" title (appeared in results); US 1,475,024 number and 1923 date.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Some accounts suggest the London signal stayed in place longer than a month; the cited Smithsonian and IET pages say it was removed shortly after, so left as is.

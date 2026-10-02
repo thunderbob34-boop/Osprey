@@ -1,7 +1,7 @@
 # Galileo Didn't Invent the Telescope
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 855 spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 864 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is calm and admiring of Galileo. He gets full credit for turning the telescope on the sky. The point is only that he didn't invent it.
 - Say Lipperhey as LIP-er-high, Middelburg as MID-ul-burg, Zeeland as ZAY-lahnt, States General as "states general", Metius as MAY-tee-us, and Sacharias Janssen as sah-KAR-ee-us YAHN-sen.
 - Every hedge in here is on purpose. Read "the first person on record", "three to four times", "weeks later" and "who really built the first one is murky" exactly as written. Never say Lipperhey definitely built the first telescope ever.
@@ -43,8 +43,8 @@ But either way you slice it, Lipperhey and Metius were both asking for patents i
 
 Now, to be fair to Galileo, what he did with it really matters. He didn't invent the telescope, but in 1609 he built improved instruments, and then he did the thing that made the telescope famous, he turned it on the sky. In 1610 he found the moons of Jupiter, and that's real, and it's huge, and he deserves full credit for it.
 
-So the fair way to say it is, Galileo didn't invent the telescope, he improved it, and he pointed it at the sky and found the moons of Jupiter. Lipperhey is the first on record, and Galileo is the one who turned it on the sky.
+So the fair way to say it is, Galileo didn't invent the telescope, he improved it, and he pointed it at the sky and found the moons of Jupiter. Lipperhey is the first on record, and Galileo is the one who made it famous by what he found in the sky.
 
 ## 07 Who Did It First
 
-So here's the order. On September 25th, 1608, Zeeland wrote to the Dutch States General. On October 2nd, 1608, the States General discussed Hans Lipperhey's patent application for a device with a convex lens and a concave lens that magnified three to four times. A few weeks later, Jacob Metius applied too, and later Sacharias Janssen's family claimed it. The patent was refused because the device couldn't be kept secret, and Lipperhey was paid to build binocular versions. In 1609, Galileo built his improved telescopes, and in 1610 he found the moons of Jupiter. Galileo gets the credit for the sky. Somebody did it first, and the first one on record was a spectacle maker in Middelburg.
+So here's the order. On September 25th, 1608, Zeeland wrote to the Dutch States General. On October 2nd, 1608, the States General discussed Hans Lipperhey's patent application for a device with a convex lens and a concave lens that magnified three to four times. A few weeks later, Jacob Metius applied too, and later Sacharias Janssen's family claimed it. The patent was refused because the device couldn't be kept secret, and Lipperhey was paid to build binocular versions. In 1609, Galileo built his improved telescopes, and in 1610 he found the moons of Jupiter. Galileo gets the credit for what he found in the sky. Somebody did it first, and the first one on record was a spectacle maker in Middelburg.

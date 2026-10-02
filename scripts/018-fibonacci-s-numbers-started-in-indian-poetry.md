@@ -1,16 +1,16 @@
 # Fibonacci's Numbers Started in Indian Poetry
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 905 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 923 spoken words.
 - Tone is curious and fair. Leonardo of Pisa didn't steal anything, and the script says so twice on purpose.
 - Say Virahanka as vih-rah-HUN-kah, Gopala as GOH-pah-lah, Hemachandra as hay-mah-CHUN-drah, Liber Abaci as LEE-ber AH-bah-chee, filius Bonacci as FEE-lee-us boh-NAH-chee, Guglielmo Libri as gool-YEL-moh LEE-bree, and Lucas as loo-KAH.
-- Every hedge in here is on purpose. Read "historians say", "probably", "there's no proof", "somewhere between 600 and 800", "before 1135", "around 1150", "about fifty years" and "survives through Gopala" exactly as written.
+- Every hedge in here is on purpose. Read "historians say", "one source points to", "probably", "there's no proof", "somewhere between 600 and 800", "before 1135", "around 1150", "about fifty years" and "survives through Gopala" exactly as written.
 - Visuals: write the sequence on screen as it's read, and show the short and long beat patterns as dots and dashes in section 03.
-- Good on-screen text moments are 600 to 800 CE, before 1135, c. 1150, 1202, 1838, the 1870s, and the numbers 1, 2, 3, 5, 8, 13, 21.
+- Good on-screen text moments are 600 to 800 CE, before 1135, c. 1150, 1202, 1506, 1838, the 1870s, and the numbers 1, 2, 3, 5, 8, 13, 21.
 
 ## 01 Cold Open
 
-The most famous number pattern in nature is named after a man who didn't discover it, using a nickname he never used. The pattern is the Fibonacci sequence, and the man is Leonardo of Pisa, who put it in a book in 1202. But scholars in India who studied the rhythms of Sanskrit poetry had the same numbers hundreds of years earlier, and on top of that, historians say the name Fibonacci wasn't even attached to Leonardo until 1838. So both halves of the name have a problem.
+The most famous number pattern in nature is named after a man who didn't discover it, using a nickname he never used. The pattern is the Fibonacci sequence, and the man is Leonardo of Pisa, who put it in a book in 1202. But scholars in India who studied the rhythms of Sanskrit poetry had the same numbers hundreds of years earlier, and on top of that, historians say the name Fibonacci wasn't even attached to Leonardo until centuries after he died. So both halves of the name have a problem.
 
 ## 02 The Fibonacci Version
 
@@ -40,7 +40,7 @@ And Liber Abaci was a real book doing real work, so the point here isn't that Le
 
 ## 06 The Name He Never Used
 
-And there's more, because even the name is late, Leonardo of Pisa never called himself Fibonacci. Historians say that nickname, which is short for filius Bonacci, son of Bonacci, wasn't attached to him until 1838, and the name that comes up is Guglielmo Libri. That's over six hundred years after his book.
+And there's more, because even the name is late, Leonardo of Pisa never called himself Fibonacci. Historians say that nickname, which is short for filius Bonacci, son of Bonacci, caught on through a writer named Guglielmo Libri in 1838, over six hundred years after his book, and one source points to a notary calling him Fibonacci back in 1506, which is still about three hundred years after his book.
 
 Now, that detail traces back mainly to one historian, Keith Devlin, and his book about Leonardo, called The Man of Numbers, so I'm going to keep saying historians say, because it's coming through Devlin. But two different outlets carry it, the Notices of the American Mathematical Society and Scientific American, and they both say the nickname came centuries later.
 
@@ -48,4 +48,4 @@ And the label Fibonacci sequence came later still, in the 1870s, from a man name
 
 ## 07 Who Did It First
 
-So here's the order. Virahanka, somewhere between 600 and 800, gave the rule for counting the rhythms of Sanskrit verse, with the numbers three, five, eight, thirteen, twenty-one. Gopala cited him before 1135, and Hemachandra stated the rule around 1150. Leonardo of Pisa wrote Liber Abaci in 1202, with his rabbit puzzle. Historians say the nickname Fibonacci showed up in 1838, and the name Fibonacci sequence in the 1870s. Leonardo didn't steal anything, and his book mattered. Somebody did it first, and it was Indian scholars counting beats in poetry.
+So here's the order. Virahanka, somewhere between 600 and 800, gave the rule for counting the rhythms of Sanskrit verse, with the numbers three, five, eight, thirteen, twenty-one. Gopala cited him before 1135, and Hemachandra stated the rule around 1150. Leonardo of Pisa wrote Liber Abaci in 1202, with his rabbit puzzle. Historians say the nickname Fibonacci caught on in 1838, centuries after him, and the name Fibonacci sequence in the 1870s. Leonardo didn't steal anything, and his book mattered. Somebody did it first, and it was Indian scholars counting beats in poetry.
