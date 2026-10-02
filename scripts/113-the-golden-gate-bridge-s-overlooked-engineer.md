@@ -1,7 +1,7 @@
-# The Golden Gate Bridge's Uncredited Engineer
+# The Golden Gate Bridge's Overlooked Engineer
 
 READING NOTES
-- Runtime is about 4 minutes at a relaxed pace, roughly 576 spoken words.
+- Runtime is about 4 minutes at a relaxed pace, roughly 597 spoken words.
 - Tone is calm and matter-of-fact. Strauss was a real chief engineer and this is not an attack on him. The claim is that Ellis's design leadership was left out, not that Strauss did nothing.
 - Say Strauss as STROWSS (rhymes with house), Moisseiff as MOY-seff, Ellis as EL-iss, Purdue as PER-doo.
 - Every hedge in here is on purpose. Read "significant credit", "directed the design calculations", "much of the mathematical computations", "early 1920s", "eventually", "sole designer" and "we won't guess" exactly as written, because they are what keeps the channel credible.
@@ -12,7 +12,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-The Golden Gate Bridge's own operators now say that Joseph Strauss, the chief engineer whose name and statue are tied to the bridge, never officially recognized Charles Ellis, the engineer who directed the design calculations for the suspension bridge. The bridge district's own website says, and I'll read it exactly, "the record clearly demonstrates that he deserves significant credit for the suspension bridge design." That's careful wording, it says significant credit, it doesn't say sole designer, and we're going to stay as careful as the district is.
+The Golden Gate Bridge's own operators now say that Charles Ellis, the engineer who directed the design calculations for the suspension bridge, was never officially recognized for his leadership in the design, even though Joseph Strauss, the chief engineer, has his name and statue tied to the bridge. The bridge district's own website says, and I'll read it exactly, "the record clearly demonstrates that he deserves significant credit for the suspension bridge design." That's careful wording, it says significant credit, it doesn't say sole designer, and we're going to stay as careful as the district is.
 
 ## 02 Fair Credit to Strauss
 
@@ -34,8 +34,8 @@ In December 1931 Strauss ended Ellis's involvement with the project, and why it 
 
 ## 06 What the Record Says
 
-The district, the people who run the bridge, say Strauss never officially recognized Ellis, Purdue University's archives, which have an entry on Ellis, also point to his design role, and Britannica names him among the engineers who worked with Strauss. So that's the bridge's operators, a university archive, and an encyclopedia, and they line up on the main point, right? What nobody has settled, at least in what we found, is exactly how the credit divides up between Ellis, Moisseiff, and Strauss, and that's why the district's wording matters, because it says significant credit and not all of it.
+The district, the people who run the bridge, say Ellis was never officially recognized for his leadership in the design, Purdue University's archives, which have an entry on Ellis, also point to his design role, and Britannica names him among the engineers who worked with Strauss. So that's the bridge's operators, a university archive, and an encyclopedia, and they line up on the main point, right? What nobody has settled, at least in what we found, is exactly how the credit divides up between Ellis, Moisseiff, and Strauss, and that's why the district's wording matters, because it says significant credit and not all of it.
 
 ## 07 The Plain Version
 
-So here's the plain version, Strauss was the chief engineer and the name tied to the Golden Gate Bridge, Ellis was the engineer he hired in the early 1920s who directed the design calculations, and the bridge district's own website says Strauss never officially recognized him. Ellis went on to teach at Purdue, and the district now says the record clearly demonstrates that he deserves significant credit for the suspension bridge design.
+So here's the plain version, Strauss was the chief engineer and the name tied to the Golden Gate Bridge, Ellis was the engineer he hired in the early 1920s who directed the design calculations, and the bridge district's own website says he was never officially recognized for his leadership in the design. Ellis went on to teach at Purdue, and the district now says the record clearly demonstrates that he deserves significant credit for the suspension bridge design.

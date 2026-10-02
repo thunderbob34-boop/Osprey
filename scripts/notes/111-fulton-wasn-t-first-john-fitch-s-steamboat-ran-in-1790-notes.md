@@ -1,6 +1,6 @@
 # Notes: Fulton Wasn't First: John Fitch's Steamboat Ran in 1790
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 111."
-Spoken words: 756
+Spoken words: 761
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -37,3 +37,8 @@ Left out on purpose (unverified / keep off air in research): "stole"; any claim 
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: Section 05 gave the 1798 New York act's stated reason as Fitch not "making the necessary improvements". The Gibbons v. Ogden record (and the act's text, Laws of 1798 ch. 55) says Fitch was dead or had withdrawn "without having made any attempt" to use his privilege. Changed to "without having made any attempt to use his privilege". Spoken words now 756. Britannica's "first profitable venture in steam navigation" quote and its paying-passengers line were re-verified.
 - Low items noted, not changed: the 32-hour maiden run to Albany is described as carrying paying passengers (Britannica says so, though regular fare service began in early September 1807); Fitch's 1790 service is attributed to Britannica and NPS only.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Section 05 wording "without having made any attempt to use his privilege" re-verified against the Gibbons v. Ogden text (the March 27, 1798 act, "on the suggestion that Fitch was dead, or had withdrawn from the State, without having made any attempt to use his privilege", repealing his grant and giving Livingston twenty years). "A few months before Fitch actually died" (March to July 1798) is fine. No contradiction with the title, cold open or close.
+- Fixes made: Section 04 "in 32 hours, carrying paying passengers" changed to "in 32 hours, and it went on to carry paying passengers", so it no longer says the maiden run itself carried fare-paying passengers (Round B low item). Spoken words 756 to 761.
+- Low items: Fitch's 1790 service rests on Britannica and NPS; "left the state" is a plain paraphrase of "withdrawn from the State".

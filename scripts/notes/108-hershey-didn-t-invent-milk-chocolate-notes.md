@@ -35,3 +35,8 @@ Left out on purpose (unverified / keep off air in research): Peter as a former c
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: Section 03 said flatly "The man who got there first was Daniel Peter"; earlier milk-and-chocolate drinks and mixtures existed, so it now reads "The man usually credited with getting there first". Spoken words now 662.
 - Low items noted, not changed: "trial and error that took years" (no number given, consistent with the reading note); Peter's 1911 merger with Cailler and Kohler is undated on air.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: "The man usually credited with getting there first was Daniel Peter" is accurate, reads in one breath, and agrees with the cold open, the 1875/1876 hedge and the close. No new problems.
+- Fixes made: none
+- Low items: "trial and error that took years" gives no number, consistent with the reading note; Peter's company merger with Cailler and Kohler is undated on air (fine).

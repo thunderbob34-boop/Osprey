@@ -1,6 +1,6 @@
 # Scripts: "Somebody Did It First"
 
-All 100 recording scripts. Episode 1 is `../launch-episode-script.md`; this folder has 2–100. Each script is one file in your recording format: the title, then READING NOTES, then numbered sections containing only spoken words. Each one has a matching file in `notes/` that maps every claim to its sources, lists the hedges kept and what was left out on purpose, and logs every review round.
+All 114 recording scripts. Episode 1 is `../launch-episode-script.md`; this folder has 2–114 (101–114 are the History Channel-inspired additions). Each script is one file in your recording format: the title, then READING NOTES, then numbered sections containing only spoken words. Each one has a matching file in `notes/` that maps every claim to its sources, lists the hedges kept and what was left out on purpose, and logs every review round.
 
 ## How these were checked
 
@@ -9,11 +9,12 @@ All 100 recording scripts. Episode 1 is `../launch-episode-script.md`; this fold
 - **Re-check A (double check):** every script's claims were re-checked against live sources.
 - **Re-check B (triple check):** a blind, adversarial pass on every script, read cold before seeing the notes, as if by a pedantic commenter with a history degree.
 - **Re-check C and D:** every script changed in B was confirmed again, then every line changed in C. Any new on-air fact that rested only on Wikipedia was cut or attributed. D found nothing high or medium; its small hedges were applied.
+- **101–114:** written from fresh research, expanded with a second research pass, then put through review, a blind check against live sources, and a confirmation pass.
 - **Titles:** 25 titles were changed during review and the re-checks where the old one claimed more than the evidence supports. File names match the current titles. Use only the current title for upload.
 
 ## Read this before recording
 
-- **These run short.** Total 83,827 spoken words across 99 scripts, an average of about 847 per script. That's roughly 5 minutes at your pace (range ~3.4–6.8 minutes), not the 8–10 you targeted. The writers were told never to pad. See the length decision in `../production-game-plan.md`.
+- **These run short.** Total 93,044 spoken words across 113 scripts, an average of about 823 per script. That's roughly 5 minutes at your pace (range ~3.0–6.8 minutes), not the 8–10 you targeted. The writers were told never to pad. See the length decision in `../production-game-plan.md`.
 - **The "Open check" column** is what's still worth doing before you record that episode: a source to pull, a pronunciation, or a title caution. "none" means nothing is open.
 - **Read every hedge as written.** Each script's reading notes list them.
 
@@ -121,3 +122,17 @@ All 100 recording scripts. Episode 1 is `../launch-episode-script.md`; this fold
 | 98 | [The Ice Cream Cone Wasn't Born at the 1904 World's Fair](098-the-ice-cream-cone-wasn-t-born-at-the-1904-world-s-fair.md) | 755 | 4.7 | A pedant may cite 1825 French edible cones or an 1807 engraving; the script hedges "earliest claimant". Marchiony's patent day varies (Dec 13 or 15), so say only December 1903. |
 | 99 | [Video Games Before Pong: Tennis for Two](099-video-games-before-pong-tennis-for-two.md) | 678 | 4.2 | none |
 | 100 | [Before Google There Was RankDex](100-before-google-there-was-rankdex.md) | 781 | 4.9 | Baidu being built on RankDex rests on Li's and Baidu's own account. Forbes says only "around the same time", so don't say Li inspired Page. Research rates it weakest. |
+| 101 | [Barbie Had an Older Sister: Bild Lilli](101-barbie-had-an-older-sister-bild-lilli.md) | 598 | 3.7 | none |
+| 102 | [Hydrox Came Before Oreo](102-hydrox-came-before-oreo.md) | 499 | 3.1 | Keep "1999 or 2003" as said (sources differ on when Hydrox ended). The Hoboken first-sale detail rests on search summaries. |
+| 103 | [Lindbergh Wasn't First Across the Atlantic](103-lindbergh-wasn-t-first-across-the-atlantic.md) | 808 | 5.0 | The Le Bourget crowd of about 100,000 is attributed to the Smithsonian at domain level only; keep "about". |
+| 104 | [Kraft Didn't Invent Processed Cheese: The Swiss Got There First](104-kraft-didn-t-invent-processed-cheese-the-swiss-got-there-fir.md) | 480 | 3.0 | One Swiss source (single) calls Gerber the firm's business manager and Stettler the inventor; the script just says "two men". |
+| 105 | [The Animator Behind Mickey: Ub Iwerks](105-the-animator-behind-mickey-ub-iwerks.md) | 616 | 3.9 | Plane Crazy's May 1928 showing was a test screening. Britannica's "founded" for Disney and Iwerks at Laugh-O-gram is generous. |
+| 106 | [The Tailor Behind the Riveted Jeans](106-the-tailor-behind-the-riveted-jeans.md) | 798 | 5.0 | none |
+| 107 | [Lewis and Clark Were Twelve Years Late](107-lewis-and-clark-were-twelve-years-late.md) | 828 | 5.2 | none |
+| 108 | [Hershey Didn't Invent Milk Chocolate](108-hershey-didn-t-invent-milk-chocolate.md) | 662 | 4.1 | none |
+| 109 | [Walter Reed Wasn't First on Yellow Fever: Carlos Finlay](109-walter-reed-wasn-t-first-on-yellow-fever-carlos-finlay.md) | 776 | 4.8 | Confirm the pronunciation of Finlay (the reading notes guess fin-LAY). |
+| 110 | [The Eiffel Tower Started as Two Employees' Sketch](110-the-eiffel-tower-started-as-two-employees-sketch.md) | 549 | 3.4 | Eiffel's first-reaction line rests on the official Eiffel Tower site alone ("reportedly"). Confirm the pronunciations Koechlin and Nouguier. |
+| 111 | [Fulton Wasn't First: John Fitch's Steamboat Ran in 1790](111-fulton-wasn-t-first-john-fitch-s-steamboat-ran-in-1790.md) | 761 | 4.8 | The 1798 New York act section rests on the Gibbons v. Ogden record plus Britannica. Regular fare service began in September 1807. |
+| 112 | [Atari Didn't Invent the Game Cartridge: Jerry Lawson's Channel F](112-atari-didn-t-invent-the-game-cartridge-jerry-lawson-s-channe.md) | 677 | 4.2 | none |
+| 113 | [The Golden Gate Bridge's Overlooked Engineer](113-the-golden-gate-bridge-s-overlooked-engineer.md) | 597 | 3.7 | Sources were search extracts; read the bridge district's report page once before recording. |
+| 114 | [Kodak's Film Had a Rival Inventor: Hannibal Goodwin](114-kodak-s-film-had-a-rival-inventor-hannibal-goodwin.md) | 568 | 3.5 | The 1914 holding and claim numbers rest on the court opinion (a primary record) via a CourtListener extract. |

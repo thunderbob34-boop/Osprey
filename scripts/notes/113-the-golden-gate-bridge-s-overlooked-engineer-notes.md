@@ -1,7 +1,7 @@
-# Notes: The Golden Gate Bridge's Uncredited Engineer
+# Notes: The Golden Gate Bridge's Overlooked Engineer
 _(Originally titled "The Golden Gate Bridge's Forgotten Designer". Retitled after Re-check B: the bridge district now credits Ellis, so "forgotten" overstated it, but Strauss never credited him.)_
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 113."
-Spoken words: 576
+Spoken words: 597
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -37,3 +37,10 @@ Left out on purpose (unverified / keep off air in research): the Purdue "almost 
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: none
 - Low items noted, not changed: the title "Forgotten Designer" reads stronger than the script's own careful claim (directed the design calculations, significant credit, not sole designer); the script handles this on air in the cold open, so the title was left as fixed. "Never officially recognized" is attributed to the district and is fine.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: The retitle to "Uncredited Engineer" matches the script (Ellis never officially recognized, while the district now says he deserves significant credit). Problem found: the script attributed to the district the statement that "Strauss never officially recognized Ellis" (cold open, Section 06, Section 07). Search extracts of the district's own report give the line as "[Ellis] has never been officially recognized ... for his leadership efforts in the design of the bridge. However, the record clearly demonstrates that he deserves significant credit for the suspension bridge design", with no named subject doing the not-recognizing. Attributing it to Strauss specifically was a stretch on the district's behalf.
+- Fixes made: cold open, Section 06 and Section 07 now say Ellis "was never officially recognized for his leadership in the design" (passive, as the district words it), and the cold open keeps Strauss's name and statue as a separate clause. Quote line unchanged. Spoken words 576 to 597.
+- Low items: the title "Uncredited" is still slightly stronger than the script's own final point (the district now credits him); it is defensible given "never officially recognized" but the main session may prefer "Overlooked". Reading note "Do not say Ellis designed the bridge alone" still honored.
+
+- Main-session follow-up: retitled "Overlooked Engineer" (from "Uncredited"), since the district now credits Ellis.

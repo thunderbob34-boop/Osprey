@@ -1,7 +1,7 @@
 # Walter Reed Wasn't First on Yellow Fever: Carlos Finlay
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 777 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 776 spoken words.
 - Tone is respectful and even-handed. This is "proposed versus proved", so neither man gets cut down, and Reed is never accused of stealing anything. The Lazear section is plain and flat, no swelling.
 - Say Finlay as fin-LAY, Aedes aegypti as AY-deez ay-JIP-tie, Havana as huh-VAN-uh, Camagüey as kah-mah-GWAY, Agramonte as ah-gruh-MON-tay, Lazear as luh-ZEER, Carroll as CARE-ul.
 - Every hedge in here is on purpose. Read "proposed", "proved", "widely credited", "as far as the modern scientific record goes", "nominated several times", "the proof really was Reed's", "said later", "reportedly" and "the first controlled case" exactly as written, because they are what keeps the channel credible.

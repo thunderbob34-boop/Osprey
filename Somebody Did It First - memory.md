@@ -6,7 +6,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 - **Premise:** someone gets the credit, but someone else did it first. Credibility is the main asset and the defense against being lumped in with AI slop.
 - **Format:** faceless. Narrated by Gus in his own voice (recommended; decision pending). Archive-documentary visuals.
 - **Persona:** Gus's own spoken cadence, per `script-final-read`. No character persona.
-- **Scripts:** `scripts/` (2–100) and `launch-episode-script.md` (1). Index and runtimes: `scripts/README.md`. Research: `episode-research.md`, `100-episode-lineup.md`, and each script's `scripts/notes/`.
+- **Scripts:** `scripts/` (2–114; 101–114 are the History Channel-inspired additions) and `launch-episode-script.md` (1). Index and runtimes: `scripts/README.md`. Research: `episode-research.md`, `100-episode-lineup.md`, and each script's `scripts/notes/`.
 
 ## Standing rules
 - **Fact-check record:** all 99 scripts went through review, Re-check A (live sources), Re-check B (blind adversarial), then Re-check C and D on everything B changed. The last pass (D) found no high or medium issues.
@@ -28,7 +28,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 2. Length decision: ship ~5-minute episodes first (recommended) vs. research to 8–10 minutes before launch.
 3. Pilot go-ahead: the full production package for Episode 1 (shot list, visuals, animatic, Resolve timeline).
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).
-5. Pronunciations to confirm: Magie (7), Chevedden (55), Tawell (97). Others are confirmed in each script's reading notes.
+5. Pronunciations to confirm: Magie (7), Chevedden (55), Tawell (97), Finlay (109), Koechlin and Nouguier (110). Others are confirmed in each script's reading notes.
 6. Pre-recording source pulls, per the "Open check" column in `scripts/README.md`. The biggest are: the Nowak paper and the 1858 Usi e costumi text (4, pizza); a second strong source naming John Loud (53); a Sasson page reference for the Kibri-Dagan letter (47); and a second source for the Dunhuang banner and the Heilongjiang and Xanadu guns (49).
 7. New repo: Gus will create an empty private `somebody-did-it-first` repo and give the Claude GitHub app access to it. The channel work then moves out of Osprey's `research/somebody-did-it-first` branch. Until then, that branch is the safe copy.
 

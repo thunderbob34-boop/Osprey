@@ -1,7 +1,7 @@
 # Fulton Wasn't First: John Fitch's Steamboat Ran in 1790
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 756 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 761 spoken words.
 - Tone is calm and matter-of-fact, and fair to Fulton throughout. This is not a story about a thief, so keep the voice level.
 - Say Clermont as KLAIR-mont, Rumsey as RUM-zee, Bardstown as BARDZ-town, Livingston as LIV-ing-stun.
 - Every hedge in here is on purpose. Read "first commercially successful", "advertised, regular passenger service", "the first profitable venture in steam navigation", "was unable to make it a commercial success", "short-lived", "we don't know" and "on the suggestion that" exactly as written, because they are what keeps the channel credible.
