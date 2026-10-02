@@ -17,6 +17,7 @@
 <asset id="g_02-c" name="02-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-c.png"/></asset>
 <asset id="g_02-d" name="02-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-d.png"/></asset>
 <asset id="g_02-f" name="02-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-f.png"/></asset>
+<asset id="g_02-f2" name="02-f2" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-f2.png"/></asset>
 <asset id="g_02-h" name="02-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-h.png"/></asset>
 <asset id="g_02-i" name="02-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-i.png"/></asset>
 <asset id="g_02-j" name="02-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-j.png"/></asset>
@@ -73,7 +74,6 @@
 <asset id="g_05-l" name="05-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-l.png"/></asset>
 <asset id="g_05-m" name="05-m" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-m.png"/></asset>
 <asset id="g_06-a" name="06-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-a.png"/></asset>
-<asset id="g_06-b" name="06-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-b.png"/></asset>
 <asset id="g_06-c" name="06-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-c.png"/></asset>
 <asset id="g_06-d" name="06-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-d.png"/></asset>
 <asset id="g_06-e" name="06-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-e.png"/></asset>
@@ -84,7 +84,6 @@
 <asset id="g_06-j" name="06-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-j.png"/></asset>
 <asset id="g_06-k" name="06-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-k.png"/></asset>
 <asset id="g_06-l" name="06-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-l.png"/></asset>
-<asset id="g_06-m" name="06-m" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-m.png"/></asset>
 <asset id="g_06-n" name="06-n" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-n.png"/></asset>
 <asset id="g_06-o" name="06-o" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-o.png"/></asset>
 <asset id="g_06-p" name="06-p" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-p.png"/></asset>
@@ -147,7 +146,8 @@
 <video ref="g_02-b" offset="1289/30s" name="02-b" start="0s" duration="119/30s"></video>
 <video ref="g_02-c" offset="1408/30s" name="02-c" start="0s" duration="128/30s"></video>
 <video ref="g_02-d" offset="1536/30s" name="02-d" start="0s" duration="268/30s"></video>
-<video ref="g_02-f" offset="1804/30s" name="02-f" start="0s" duration="337/30s"></video>
+<video ref="g_02-f" offset="1804/30s" name="02-f" start="0s" duration="169/30s"></video>
+<video ref="g_02-f2" offset="1973/30s" name="02-f2" start="0s" duration="168/30s"></video>
 <video ref="g_02-h" offset="2141/30s" name="02-h" start="0s" duration="109/30s"></video>
 <video ref="g_02-i" offset="75s" name="02-i" start="0s" duration="169/30s"></video>
 <video ref="g_02-j" offset="2419/30s" name="02-j" start="0s" duration="79/30s"></video>
@@ -203,8 +203,7 @@
 <video ref="g_05-k" offset="9919/30s" name="05-k" start="0s" duration="89/30s"></video>
 <video ref="g_05-l" offset="10008/30s" name="05-l" start="0s" duration="168/30s"></video>
 <video ref="g_05-m" offset="10176/30s" name="05-m" start="0s" duration="145/30s"></video>
-<video ref="g_06-a" offset="10321/30s" name="06-a" start="0s" duration="211/30s"><asset-clip ref="vo_06" lane="-1" offset="0s" start="0s" duration="3601/30s" name="VO 06" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="06 The Smear Campaign"/></video>
-<video ref="g_06-b" offset="10532/30s" name="06-b" start="0s" duration="106/30s"></video>
+<video ref="g_06-a" offset="10321/30s" name="06-a" start="0s" duration="317/30s"><asset-clip ref="vo_06" lane="-1" offset="0s" start="0s" duration="3601/30s" name="VO 06" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="06 The Smear Campaign"/></video>
 <video ref="g_06-c" offset="10638/30s" name="06-c" start="0s" duration="129/30s"></video>
 <video ref="g_06-d" offset="10767/30s" name="06-d" start="0s" duration="187/30s"></video>
 <video ref="g_06-e" offset="10954/30s" name="06-e" start="0s" duration="176/30s"></video>
@@ -214,8 +213,7 @@
 <video ref="g_06-i" offset="11576/30s" name="06-i" start="0s" duration="106/30s"></video>
 <video ref="g_06-j" offset="11682/30s" name="06-j" start="0s" duration="152/30s"></video>
 <video ref="g_06-k" offset="11834/30s" name="06-k" start="0s" duration="176/30s"></video>
-<video ref="g_06-l" offset="12010/30s" name="06-l" start="0s" duration="153/30s"></video>
-<video ref="g_06-m" offset="12163/30s" name="06-m" start="0s" duration="82/30s"></video>
+<video ref="g_06-l" offset="12010/30s" name="06-l" start="0s" duration="235/30s"></video>
 <video ref="g_06-n" offset="12245/30s" name="06-n" start="0s" duration="152/30s"></video>
 <video ref="g_06-o" offset="12397/30s" name="06-o" start="0s" duration="106/30s"></video>
 <video ref="g_06-p" offset="12503/30s" name="06-p" start="0s" duration="176/30s"></video>

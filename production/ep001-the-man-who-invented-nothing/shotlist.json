@@ -105,16 +105,17 @@
   "template": "archival",
   "fields": {
    "kind": "patent",
-   "label": "One of Edison's 1,000+ US patents: the electric lamp, 1880",
-   "asset": "patents-google-com-patent-us223898a-en"
+   "label": "One of Edison's 1,000+ US patents: the phonograph, 1878",
+   "asset": "patents-google-com-patent-us200521a-en",
+   "lower": "One of Edison's 1,000+ US patents"
   },
-  "visual": "Patent first page, highlight the title line 'Electric Lamp', slow push-in.",
+  "visual": "Phonograph patent drawing, slow pan.",
   "source": {
    "institution": "US Patent Office via Google Patents",
-   "item": "US223898A - Electric lamp",
-   "url": "https://patents.google.com/patent/US223898A/en",
-   "rights": "US patent granted 27 January 1880; US patent drawings are generally not subject to copyright",
-   "credit": "Thomas A. Edison, US Patent 223,898, 1880",
+   "item": "US200521A - Improvement in phonograph or speaking machines",
+   "url": "https://patents.google.com/patent/US200521A/en",
+   "rights": "US patent drawings are generally not subject to copyright",
+   "credit": "US Patent 200,521 (T. A. Edison, 1878)",
    "verified": true
   }
  },
@@ -223,12 +224,26 @@
   "id": "02-f",
   "section": "02",
   "section_name": "Davy and Swan",
-  "text": "Meanwhile inventor after inventor tried running current through a strip of carbon or platinum until it glowed, and the usual problem was that the strip burned up or melted before it was any use.",
+  "text": "Meanwhile inventor after inventor tried running current through a strip of carbon or platinum until it glowed,",
   "type": "text",
   "template": "text",
   "fields": {
    "headline": "Current through carbon or platinum, until it glowed",
-   "sub": "The usual problem: it burned up or melted"
+   "sub": ""
+  },
+  "visual": "Text card.",
+  "source": null
+ },
+ {
+  "id": "02-f2",
+  "section": "02",
+  "section_name": "Davy and Swan",
+  "text": "and the usual problem was that the strip burned up or melted before it was any use.",
+  "type": "text",
+  "template": "text",
+  "fields": {
+   "headline": "The usual problem: it burned up or melted",
+   "sub": "Before it was any use"
   },
   "visual": "Text card.",
   "source": null
@@ -266,7 +281,8 @@
   "fields": {
    "kind": "photo",
    "label": "Literary and Philosophical Society, Newcastle (modern photograph of the building)",
-   "asset": "commons-wikimedia-org-wiki-file-bolbec-hall-and-the-literary"
+   "asset": "commons-wikimedia-org-wiki-file-bolbec-hall-and-the-literary",
+   "lower": "The Lit & Phil, Newcastle (modern photograph)"
   },
   "visual": "Photo of the building, slow push-in.",
   "source": {
@@ -564,7 +580,8 @@
   "fields": {
    "kind": "photo",
    "label": "Pearl Street Station, c. 1885",
-   "asset": "commons-wikimedia-org-wiki-file-edision-powerplant-pearl-str"
+   "asset": "commons-wikimedia-org-wiki-file-edision-powerplant-pearl-str",
+   "lower": "Pearl Street Station, lower Manhattan, 1882 (photo c. 1885)"
   },
   "visual": "Period photo, slow push-in.",
   "source": {
@@ -1044,14 +1061,23 @@
   "section": "05",
   "section_name": "It Wasn't Tesla Versus Edison",
   "text": "and that's the second big myth in this story.",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "Myth: Tesla versus Edison",
-   "sub": ""
+   "kind": "portrait",
+   "label": "Nikola Tesla, c. 1893",
+   "asset": "commons-wikimedia-org-wiki-file-nikola-tesla-by-sarony-c1893",
+   "lower": "Myth: Tesla versus Edison"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Tesla portrait, lower-third.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Nikola Tesla by Sarony c1893.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Nikola_Tesla_by_Sarony_c1893.jpg",
+   "rights": "Public domain in the United States (published before 1 January 1931), per the file page; may not be public domain in every country",
+   "credit": "Napoleon Sarony, c. 1893, via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "05-c",
@@ -1083,8 +1109,8 @@
   "fields": {
    "kind": "portrait",
    "label": "Nikola Tesla, c. 1893",
-   "crop": "lower third: As Tesla told it, he was promised $50,000",
-   "asset": "commons-wikimedia-org-wiki-file-nikola-tesla-by-sarony-c1893"
+   "asset": "commons-wikimedia-org-wiki-file-nikola-tesla-by-sarony-c1893",
+   "lower": "As Tesla told it: promised $50,000"
   },
   "visual": "Tesla portrait with lower-third text, keeping \"As Tesla told it\".",
   "source": {
@@ -1230,16 +1256,16 @@
   "id": "06-a",
   "section": "06",
   "section_name": "The Smear Campaign",
-  "text": "And Edison's side fought dirty. Back in late 1887, New York was looking for something to replace hanging,",
+  "text": "And Edison's side fought dirty. Back in late 1887, New York was looking for something to replace hanging, and when a state commission asked Edison for advice,",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "portrait",
    "label": "Thomas Edison, c. 1880",
-   "lower": "Late 1887: New York looks for something to replace hanging",
+   "lower": "Late 1887: a New York state commission asks Edison for advice",
    "asset": "loc-gov-item-89714703"
   },
-  "visual": "Edison portrait: \"fought dirty\".",
+  "visual": "Edison portrait held, lower-third.",
   "source": {
    "institution": "Library of Congress, Prints and Photographs Division",
    "item": "[Thomas Edison, head-and-shoulders portrait, facing left]",
@@ -1248,20 +1274,6 @@
    "credit": "Library of Congress Prints and Photographs Division, LC-USZ62-98067",
    "verified": true
   }
- },
- {
-  "id": "06-b",
-  "section": "06",
-  "section_name": "The Smear Campaign",
-  "text": "and when a state commission asked Edison for advice,",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "A New York state commission asks Edison for advice",
-   "sub": "Late 1887"
-  },
-  "visual": "Card.",
-  "source": null
  },
  {
   "id": "06-c",
@@ -1324,7 +1336,8 @@
   "fields": {
    "kind": "photo",
    "label": "Edison Laboratory, West Orange, New Jersey (20th-century survey photograph)",
-   "asset": "loc-gov-item-nj0982"
+   "asset": "loc-gov-item-nj0982",
+   "lower": "Edison's West Orange laboratory (20th-century photograph)"
   },
   "visual": "Building exterior or interior of the lab, slow push-in.",
   "source": {
@@ -1377,7 +1390,8 @@
   "fields": {
    "kind": "photo",
    "label": "Old Columbia College, New York (library building)",
-   "asset": "loc-gov-item-2014650160"
+   "asset": "loc-gov-item-2014650160",
+   "lower": "Old Columbia College, New York (library building)"
   },
   "visual": "Building print, slow push-in.",
   "source": {
@@ -1416,43 +1430,39 @@
   "section": "06",
   "section_name": "The Smear Campaign",
   "text": "Before long, Edison's camp even floated a word for being executed with electricity, getting \"Westinghoused.\"",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "Edison's camp floated a word: \"Westinghoused\"",
-   "sub": "For being executed with electricity"
+   "kind": "portrait",
+   "label": "Thomas Edison, c. 1880",
+   "asset": "loc-gov-item-89714703",
+   "lower": "Edison's camp floats a word: \"Westinghoused\""
   },
-  "visual": "Text card.",
-  "source": null,
+  "visual": "Edison portrait, slow push-in, lower-third.",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division",
+   "item": "[Thomas Edison, head-and-shoulders portrait, facing left]",
+   "url": "https://www.loc.gov/item/89714703/",
+   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
+   "credit": "Library of Congress Prints and Photographs Division, LC-USZ62-98067",
+   "verified": true
+  },
   "notes": "Who coined it is disputed (fact notes), so the card says 'Edison's camp' as the script does."
  },
  {
   "id": "06-l",
   "section": "06",
   "section_name": "The Smear Campaign",
-  "text": "And there's more, New York had passed its electric chair law in 1888,",
-  "type": "date",
-  "template": "date",
-  "fields": {
-   "date": "1888",
-   "caption": "New York had already passed its electric chair law"
-  },
-  "visual": "Date stamp.",
-  "source": null
- },
- {
-  "id": "06-m",
-  "section": "06",
-  "section_name": "The Smear Campaign",
-  "text": "Harold Brown ended up supplying the equipment,",
+  "text": "And there's more, New York had passed its electric chair law in 1888, Harold Brown ended up supplying the equipment,",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "portrait",
    "label": "Harold P. Brown",
-   "asset": "commons-wikimedia-org-wiki-file-harold-pitney-brown-engineer"
+   "asset": "commons-wikimedia-org-wiki-file-harold-pitney-brown-engineer",
+   "lower": "New York had already passed its electric chair law, 1888"
   },
-  "visual": "Slow push-in on the Brown portrait. Reused from 06-e.",
+  "visual": "Brown portrait, lower-third.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Harold Pitney Brown engineer 1857 1932.png",
@@ -1603,7 +1613,7 @@
   "fields": {
    "kind": "portrait",
    "label": "Thomas Edison, c. 1880",
-   "lower": "1889: Edison testifies AC would kill \"instantly and painlessly\"",
+   "lower": "1889: Edison testifies AC would kill instantly and painlessly",
    "asset": "loc-gov-item-89714703"
   },
   "visual": "Edison portrait, lower-third.",
@@ -1627,7 +1637,7 @@
   "fields": {
    "kind": "photo",
    "label": "Auburn Prison, New York (exterior; date to confirm, label \"modern photograph\" if it is one)",
-   "lower": "August 6, 1890: Auburn Prison, New York",
+   "lower": "August 6, 1890. Auburn Prison, New York (modern photograph)",
    "asset": "commons-wikimedia-org-wiki-file-auburnprisonfront-crop-jpg"
   },
   "visual": "Auburn exterior, lower-third. No interior or execution imagery.",
@@ -1762,7 +1772,8 @@
   "fields": {
    "kind": "portrait",
    "label": "Charles A. Coffin of Thomson-Houston",
-   "asset": "commons-wikimedia-org-wiki-file-charles-a-coffin-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-charles-a-coffin-jpg",
+   "lower": "Charles A. Coffin of Thomson-Houston"
   },
   "visual": "Slow push-in on the Coffin portrait.",
   "source": {
@@ -1824,7 +1835,8 @@
   "fields": {
    "kind": "engraving",
    "label": "The grand court at night, World's Columbian Exposition, 1893 (Harper's Weekly)",
-   "asset": "loc-gov-item-90713957"
+   "asset": "loc-gov-item-90713957",
+   "lower": "1893 World's Fair, Chicago"
   },
   "visual": "Period engraving, slow push-in.",
   "source": {

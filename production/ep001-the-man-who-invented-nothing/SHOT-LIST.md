@@ -1,6 +1,6 @@
 # The Man Who Invented Nothing: shot list
 
-Total runtime 9:37.0 (117 beats). Narration: Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f), text2speech_v2 / seed_speech. Each beat is timed from the real narration length of its section, split by word count.
+Total runtime 9:37.0 (116 beats). Narration: Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f), text2speech_v2 / seed_speech. Each beat is timed from the real narration length of its section, split by word count.
 
 | Beat | In | Dur | Narration (start) | On screen | Route | Source / credit |
 |---|---|---|---|---|---|---|
@@ -9,14 +9,15 @@ Total runtime 9:37.0 (117 beats). Narration: Holden (Higgsfield preset 3c9d6053-
 | 01-c | 0:10.6 | 5.6s | and the fair way to say it is that… | Edison lamp object, slow push-in, on &quot;commercially practical&quot;. | archival (fetch) | Edison &quot;New Year&#x27;s Eve&quot; Lamp, 1879, Smithsonian National Museum of American History ✅ |
 | 01-d | 0:16.2 | 4.0s | which is a big deal, and we&#x27;ll give him… | Card: the hedged credit, landing on &quot;full credit&quot;. | code graphic |  |
 | 01-e | 0:20.2 | 4.1s | And yes, the title of this video is a… | Edison portrait, slow push-in. | archival (fetch) | Library of Congress Prints and Photographs Division, LC-USZ62-98067 ✅ |
-| 01-f | 0:24.3 | 4.4s | Edison held over a thousand US patents and plenty… | Patent first page, highlight the title line &#x27;Electric Lamp&#x27;, slow push-in. | archival (fetch) | Thomas A. Edison, US Patent 223,898, 1880 ✅ |
+| 01-f | 0:24.3 | 4.4s | Edison held over a thousand US patents and plenty… | Phonograph patent drawing, slow pan. | archival (fetch) | US Patent 200,521 (T. A. Edison, 1878) ✅ |
 | 01-g | 0:28.7 | 4.7s | But here&#x27;s the part most people never hear, the… | Text card. | code graphic |  |
 | 01-h | 0:33.3 | 4.7s | the real fight was over how to power it,… | Text card; the sub appears on the last words. | code graphic |  |
 | 02-a | 0:38.0 | 5.0s | The story starts in England in the early 1800s… | Slow push-in on the Davy portrait. | archival (fetch) | Portrait of Sir Humphry Davy, via Wikimedia Commons (confirm artist and license on the file page) ⚠️ unconfirmed |
 | 02-b | 0:43.0 | 4.0s | who ran current from a huge battery between two… | Arc-light diagram: battery feeds two carbon rods, rods glow. | code graphic |  |
 | 02-c | 0:46.9 | 4.3s | and got an arc of light across the gap.… | Same diagram, the arc jumps the gap and brightens. | code graphic |  |
 | 02-d | 0:51.2 | 8.9s | and decades later, once there were generators to run… | Carbon arc lamp object, holds through &quot;too bright for your living room&quot;. | archival (fetch) | Carbon arc lamp, Science Museum Group Collection ⚠️ unconfirmed |
-| 02-f | 1:00.1 | 11.2s | Meanwhile inventor after inventor tried running current through a… | Text card. | code graphic |  |
+| 02-f | 1:00.1 | 5.6s | Meanwhile inventor after inventor tried running current through a… | Text card. | code graphic |  |
+| 02-f2 | 1:05.8 | 5.6s | and the usual problem was that the strip burned… | Text card. | code graphic |  |
 | 02-h | 1:11.4 | 3.6s | Then on February 3rd, 1879, an English chemist named… | Swan portrait with date lower-third. | archival (fetch) | Tyne &amp; Wear Archives &amp; Museums, Swan Collection, via Wikimedia Commons ✅ |
 | 02-i | 1:15.0 | 5.6s | stood up in front of about seven hundred people… | Photo of the building, slow push-in. | archival (fetch) | Photographer per file page, geograph.org.uk, via Wikimedia Commons ⚠️ unconfirmed |
 | 02-j | 1:20.6 | 2.6s | and showed them a working bulb that glowed, | Swan carbon-rod lamp. | archival (fetch) | Swan electric lamp, 1878-1879, Science Museum Group Collection ⚠️ unconfirmed |
@@ -62,7 +63,7 @@ Total runtime 9:37.0 (117 beats). Narration: Holden (Higgsfield preset 3c9d6053-
 | 04-t | 4:31.1 | 5.4s | and it was his engineer William Stanley who turned… | Slow push-in on the Stanley portrait. | archival (fetch) | William Stanley, via Wikimedia Commons (confirm source and license on the file page) ⚠️ unconfirmed |
 | 04-u | 4:36.5 | 6.1s | lighting up shops and offices on the main street… | Great Barrington schematic with the year. | code graphic |  |
 | 05-a | 4:42.6 | 6.3s | Now, a lot of people picture this as Tesla… | Slow push-in on the Tesla portrait. | archival (fetch) | Napoleon Sarony, c. 1893, via Wikimedia Commons ✅ |
-| 05-b | 4:48.9 | 3.3s | and that&#x27;s the second big myth in this story. | Text card. | code graphic |  |
+| 05-b | 4:48.9 | 3.3s | and that&#x27;s the second big myth in this story. | Tesla portrait, lower-third. | archival (fetch) | Napoleon Sarony, c. 1893, via Wikimedia Commons ✅ |
 | 05-c | 4:52.3 | 8.9s | Tesla did work for Edison&#x27;s companies, first in Paris… | Compare: Tesla at Edison companies, Paris then New York. | code graphic |  |
 | 05-e | 5:01.2 | 6.0s | and as Tesla told it, he was promised fifty… | Tesla portrait with lower-third text, keeping &quot;As Tesla told it&quot;. | archival (fetch) | Napoleon Sarony, c. 1893, via Wikimedia Commons ✅ |
 | 05-f | 5:07.2 | 9.7s | and when he delivered, the offer turned out to… | Tesla portrait held, lower-third. | archival (fetch) | Napoleon Sarony, c. 1893, via Wikimedia Commons ✅ |
@@ -72,8 +73,7 @@ Total runtime 9:37.0 (117 beats). Narration: Holden (Higgsfield preset 3c9d6053-
 | 05-k | 5:30.6 | 3.0s | and that same year Westinghouse bought the rights. | Tesla patent, lower-third. | archival (fetch) | Nikola Tesla, US Patent 381,968, 1888 ✅ |
 | 05-l | 5:33.6 | 5.6s | So the fight in the newspapers wasn&#x27;t Tesla against… | Compare card: left side dims, right side lights up. | code graphic |  |
 | 05-m | 5:39.2 | 4.8s | and Tesla&#x27;s patents were one of the big things… | Text card. | code graphic |  |
-| 06-a | 5:44.0 | 7.0s | And Edison&#x27;s side fought dirty. Back in late 1887,… | Edison portrait: &quot;fought dirty&quot;. | archival (fetch) | Library of Congress Prints and Photographs Division, LC-USZ62-98067 ✅ |
-| 06-b | 5:51.1 | 3.5s | and when a state commission asked Edison for advice, | Card. | code graphic |  |
+| 06-a | 5:44.0 | 10.6s | And Edison&#x27;s side fought dirty. Back in late 1887,… | Edison portrait held, lower-third. | archival (fetch) | Library of Congress Prints and Photographs Division, LC-USZ62-98067 ✅ |
 | 06-c | 5:54.6 | 4.3s | he first wrote back that he was against capital… | Text card. | code graphic |  |
 | 06-d | 5:58.9 | 6.2s | and then about a month later he recommended alternating… | Text card. | code graphic |  |
 | 06-e | 6:05.1 | 5.9s | The next year, 1888, a self-styled electrical engineer named… | Slow push-in on the Brown portrait. | archival (fetch) | Harold P. Brown, via Wikimedia Commons (confirm source and license on the file page) ⚠️ unconfirmed |
@@ -82,9 +82,8 @@ Total runtime 9:37.0 (117 beats). Narration: Holden (Higgsfield preset 3c9d6053-
 | 06-h | 6:21.2 | 4.7s | That July, in a lecture hall at Columbia College… | Date stamp. | code graphic |  |
 | 06-i | 6:25.9 | 3.5s | Brown electrocuted a dog in front of an audience, | Building print, slow push-in. | archival (fetch) | Photomechanical print, 1882-1910, Library of Congress ⚠️ unconfirmed |
 | 06-j | 6:29.4 | 5.1s | first with DC, which it survived, and then with… | Compare card, plain text, no imagery. | code graphic |  |
-| 06-k | 6:34.5 | 5.9s | Before long, Edison&#x27;s camp even floated a word for… | Text card. | code graphic |  |
-| 06-l | 6:40.3 | 5.1s | And there&#x27;s more, New York had passed its electric… | Date stamp. | code graphic |  |
-| 06-m | 6:45.4 | 2.7s | Harold Brown ended up supplying the equipment, | Slow push-in on the Brown portrait. Reused from 06-e. | archival (fetch) | Harold P. Brown, via Wikimedia Commons (confirm source and license on the file page) ⚠️ unconfirmed |
+| 06-k | 6:34.5 | 5.9s | Before long, Edison&#x27;s camp even floated a word for… | Edison portrait, slow push-in, lower-third. | archival (fetch) | Library of Congress Prints and Photographs Division, LC-USZ62-98067 ✅ |
+| 06-l | 6:40.3 | 7.8s | And there&#x27;s more, New York had passed its electric… | Brown portrait, lower-third. | archival (fetch) | Harold P. Brown, via Wikimedia Commons (confirm source and license on the file page) ⚠️ unconfirmed |
 | 06-n | 6:48.2 | 5.1s | and letters show he asked Edison to help him… | Letter page, highlight the line asking for $5,000. | archival (fetch) | Thomas A. Edison Papers, Rutgers University, D8933AAN4 ⚠️ unconfirmed |
 | 06-o | 6:53.2 | 3.5s | out of Edison&#x27;s company, partly to buy the generators, | Letter detail, slow pan. | archival (fetch) | Thomas A. Edison Papers, Rutgers University, D8933AAN4 ⚠️ unconfirmed |
 | 06-p | 6:56.8 | 5.9s | and then thanked him for a note to the… | Letter, second detail. | archival (fetch) | Thomas A. Edison Papers, Rutgers University, D8933AAN4 ⚠️ unconfirmed |
