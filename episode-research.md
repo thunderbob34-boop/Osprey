@@ -619,7 +619,7 @@ Each entry gives the planned fun fact, the verdict, the corrected on-air line, w
 
 > **READ FIRST: how much of this was checked.**
 > - **Episodes 27–29 were web-checked**, but only through search-engine extracts of the pages, not full reads. WebFetch and curl were blocked: asce.org, wikipedia.org, si.edu and britannica.com all returned EGRESS_BLOCKED or a proxy 403.
-> - **Episodes 30–39 were NOT web-checked in this pass.** Partway through episode 29, every WebSearch call came back "session has used its web search budget (200 of 200)". That budget is shared across the whole session, and nothing else could reach the web.
+> - **(Superseded: all of these were re-verified against sources on 2026-10-02.)** **Episodes 30–39 were NOT web-checked in this pass.** Partway through episode 29, every WebSearch call came back "session has used its web search budget (200 of 200)". That budget is shared across the whole session, and nothing else could reach the web.
 > - The 30–39 entries are written from my own knowledge of the history. Each one says exactly what still has to be checked before the script locks.
 > - The verdicts for 30–39 are my best call, but treat them as **provisional**. Nothing in 30–39 counts as "Confirmed" under the two-source rule until someone re-runs the checks.
 > - Source URLs in 30–39 are written from memory. Most are stable institutional pages, but check each link before citing it.
