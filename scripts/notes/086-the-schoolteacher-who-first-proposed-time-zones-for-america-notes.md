@@ -1,4 +1,5 @@
-# Notes: The Schoolteacher Who Invented Time Zones
+# Notes: The Schoolteacher Who First Proposed Time Zones for America
+_(Originally titled "The Schoolteacher Who Invented Time Zones". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: 100-episode-lineup.md, heading "### 86. The Schoolteacher Who Invented Time Zones"
 Spoken words: 962
 

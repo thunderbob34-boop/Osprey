@@ -1,4 +1,5 @@
-# Notes: Leonardo Solved the Heart Valve 450 Years Early
+# Notes: Leonardo Saw How the Heart Valve Closes, 450 Years Early
+_(Originally titled "Leonardo Solved the Heart Valve 450 Years Early". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: episode-research.md — "# Job 3" section, entry "### 3." (Water Pressure; Leonardo aortic-valve portion only)
 Spoken words: 755
 

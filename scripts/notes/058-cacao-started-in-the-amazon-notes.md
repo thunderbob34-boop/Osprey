@@ -1,4 +1,5 @@
-# Notes: Chocolate Started in the Amazon
+# Notes: Cacao Started in the Amazon
+_(Originally titled "Chocolate Started in the Amazon". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: episode-research.md — "# Job 3" section, entry "### 57." (Chocolate)
 Spoken words: 842 (after review)
 

@@ -1,4 +1,5 @@
-# Notes: The Pen That Wrote on Leather: Ballpoint Before Bíró
+# Notes: The Ballpoint Pen Patented 50 Years Before Bíró
+_(Originally titled "The Pen That Wrote on Leather: Ballpoint Before Bíró". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: 100-episode-lineup.md — heading "### 53. The Pen That Wrote on Leather: Ballpoint Before Bíró"
 Spoken words: 905 (after re-check A)
 

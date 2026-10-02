@@ -1,4 +1,5 @@
-# Notes: Kaldi's Goats Never Existed
+# Notes: There's No Evidence for Kaldi's Goats
+_(Originally titled "Kaldi's Goats Never Existed". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: episode-research.md — "# Job 3" section, entry "### 56." (Coffee)
 Spoken words: 1037 (after re-check A)
 

@@ -1,4 +1,5 @@
-# Notes: The Supreme Court Case That Took Radio from Marconi
+# Notes: The Supreme Court Case That Struck Down Marconi's Tuning Claims
+_(Originally titled "The Supreme Court Case That Took Radio from Marconi". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: episode-research.md, "## New topic detail" section, entry "### 9." (Marconi, Tesla, and the Supreme Court Radio Fight)
 Spoken words: 872
 

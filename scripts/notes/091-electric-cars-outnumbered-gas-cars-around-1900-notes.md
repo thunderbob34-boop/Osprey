@@ -1,4 +1,5 @@
-# Notes: Electric Cars Were Winning in 1900
+# Notes: Electric Cars Outnumbered Gas Cars Around 1900
+_(Originally titled "Electric Cars Were Winning in 1900". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: 100-episode-lineup.md, heading "### 91. Electric Cars Were Winning in 1900"
 Spoken words: 822
 

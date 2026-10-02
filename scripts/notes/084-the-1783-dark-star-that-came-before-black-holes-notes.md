@@ -1,4 +1,5 @@
-# Notes: Black Holes Were Predicted in 1783
+# Notes: The 1783 Dark Star That Came Before Black Holes
+_(Originally titled "Black Holes Were Predicted in 1783". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: 100-episode-lineup.md, heading "### 84. Black Holes Were Predicted in 1783"
 Spoken words: 918
 

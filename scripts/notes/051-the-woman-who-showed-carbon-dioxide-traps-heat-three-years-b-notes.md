@@ -1,4 +1,5 @@
-# Notes: The Woman Who Discovered the Greenhouse Effect
+# Notes: The Woman Who Showed Carbon Dioxide Traps Heat, Three Years Before Tyndall
+_(Originally titled "The Woman Who Discovered the Greenhouse Effect". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: 100-episode-lineup.md, heading "### 51. The Woman Who Discovered the Greenhouse Effect"
 Spoken words: 767 (after re-check C)
 

@@ -1,4 +1,5 @@
-# Notes: Polynesians Reached the Americas
+# Notes: Polynesians and Native Americans Met Before Columbus
+_(Originally titled "Polynesians Reached the Americas". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: episode-research.md — "# Job 3" section, entry "### 34." (Navigation)
 Spoken words: 1094 (after re-check C)
 

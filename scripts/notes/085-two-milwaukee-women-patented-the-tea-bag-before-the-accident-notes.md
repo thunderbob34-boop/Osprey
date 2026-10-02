@@ -1,4 +1,5 @@
-# Notes: The Tea Bag Wasn't an Accident - Two Milwaukee Women Patented It
+# Notes: Two Milwaukee Women Patented the Tea Bag Before the "Accident"
+_(Originally titled "The Tea Bag Wasn't an Accident - Two Milwaukee Women Patented It". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: 100-episode-lineup.md, heading "### 85. The Tea Bag Wasn't an Accident — Two Milwaukee Women Patented It"
 Spoken words: 898
 

@@ -1,4 +1,5 @@
-# Notes: Pythagoras' Theorem Was 1,000 Years Old
+# Notes: Pythagoras' Theorem Was in Use 1,000 Years Before Him
+_(Originally titled "Pythagoras' Theorem Was 1,000 Years Old". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: episode-research.md — "## New topic detail" section, entry "### 8."
 Spoken words: 706 (after re-check A)
 

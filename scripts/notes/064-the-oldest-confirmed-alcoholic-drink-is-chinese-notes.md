@@ -1,4 +1,5 @@
-# Notes: The First Alcoholic Drink Was Chinese
+# Notes: The Oldest Confirmed Alcoholic Drink Is Chinese
+_(Originally titled "The First Alcoholic Drink Was Chinese". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: episode-research.md — "# Job 3" section, entry "### 59." (Beer and Wine)
 Spoken words: 824
 

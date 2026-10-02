@@ -1,4 +1,5 @@
-# Notes: The Trebuchet Wasn't Medieval European
+# Notes: The Trebuchet Didn't Start in Medieval Europe
+_(Originally titled "The Trebuchet Wasn't Medieval European". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: episode-research.md — "# Job 3" section, entry "### 21." (Artillery)
 Spoken words: 797 (after review)
 

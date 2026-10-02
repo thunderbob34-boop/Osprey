@@ -1,4 +1,5 @@
-# Notes: Koch Didn't Discover the Cholera Germ
+# Notes: Koch Didn't Discover the Cholera Germ First
+_(Originally titled "Koch Didn't Discover the Cholera Germ". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: 100-episode-lineup.md — heading "### 57. Koch Didn't Discover the Cholera Germ"
 Spoken words: 811 (after re-check A)
 

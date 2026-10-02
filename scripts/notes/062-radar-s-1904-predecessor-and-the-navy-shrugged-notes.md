@@ -1,4 +1,5 @@
-# Notes: Radar Was Invented in 1904, and the Navy Shrugged
+# Notes: Radar's 1904 Predecessor, and the Navy Shrugged
+_(Originally titled "Radar Was Invented in 1904, and the Navy Shrugged". Retitled in review so the title doesn't claim more than the evidence supports.)_
 Research entry: 100-episode-lineup.md — heading "### 62. Radar Was Invented in 1904, and the Navy Shrugged"
 Spoken words: 930
 
