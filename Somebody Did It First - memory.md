@@ -4,7 +4,9 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 
 ## Channel
 - **Premise:** someone gets the credit, but someone else did it first. Credibility is the main asset and the defense against being lumped in with AI slop.
-- **Format:** faceless. Narrated by Gus in his own voice (recommended; decision pending). Archive-documentary visuals.
+- **Format:** faceless. Archive-documentary visuals.
+- **Narrator (decided by Gus, 2026-10-02):** AI voice **Holden** (Higgsfield preset `3c9d6053-6334-592c-8997-4e325286af3f`) on **text2speech_v2 / Seed Speech**. That's about 9.5 credits per ~830-word episode. Send the text in pieces of under 2,048 characters, split at sentence breaks, and join the audio in the timeline.
+- **Disclosure (required on every upload):** in YouTube Studio, answer **Yes** to "altered or synthetic content", because the narration is a synthetic voice. Never skip it.
 - **Persona:** Gus's own spoken cadence, per `script-final-read`. No character persona.
 - **Scripts:** `scripts/` (2–114; 101–114 are the History Channel-inspired additions) and `launch-episode-script.md` (1). Index and runtimes: `scripts/README.md`. Research: `episode-research.md`, `100-episode-lineup.md`, and each script's `scripts/notes/`.
 
@@ -24,7 +26,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 - **Length:** scripts currently average ~5 minutes. Mid-rolls need 8+ minutes. Extending means more research, never padding.
 
 ## Open items waiting on Gus
-1. Narrator decision: Gus (recommended) vs. AI voice.
+1. ~~Narrator decision~~: decided 2026-10-02. Holden on Seed Speech (see Channel).
 2. Length decision: ship ~5-minute episodes first (recommended) vs. research to 8–10 minutes before launch.
 3. Pilot go-ahead: the full production package for Episode 1 (shot list, visuals, animatic, Resolve timeline).
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).

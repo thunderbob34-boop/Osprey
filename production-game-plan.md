@@ -4,7 +4,7 @@ Prepared 2026-10-02. Every policy and licensing fact below was checked against a
 
 ## The three decisions
 
-1. **Who narrates:** you do. My recommendation is below.
+1. **Who narrates:** **decided 2026-10-02: the AI voice "Holden" on Higgsfield's Seed Speech engine** (about 9.5 credits per episode). Every upload must tick YouTube's "altered or synthetic content" disclosure. The original comparison is kept below for reference.
 2. **What's on screen:** an "archive documentary" look. Real photos, documents, patents, newspapers and museum objects, tied together with clean graphics. We never fake a photo of a real person or event.
 3. **How long:** the scripts run about 5 minutes. We either ship them at that length or deepen the research to reach 8–10 minutes. That's your call, and the trade-off is below.
 
@@ -18,7 +18,7 @@ Prepared 2026-10-02. Every policy and licensing fact below was checked against a
 | AI clone of your own voice | Fast; good for fixing a single flubbed line. | YouTube's disclosure rules list "synthetically generating a person's voice to narrate a video" as something creators must disclose. A disclosure label on a channel built on credibility works against you. | Not recommended |
 | Stock AI voice | Cheapest and fastest. | Since 15 July 2025, YouTube's "inauthentic content" rule targets mass-produced videos (examples include slideshows with the same narration, and text-to-speech videos with little original input). A faceless channel with 100 videos and a stock AI voice is exactly what that rule is watching for, and it's the "AI slop" look you're trying to avoid. | No |
 
-**How recording works:** the pipeline hands you a timeline that's already cut, with an empty `VO` track. In DaVinci Resolve: File > Import > Timeline, pick the file, and record straight into the VO track. You never build the edit yourself.
+**How narration works now:** the pipeline generates Holden's narration and drops it on the `VO` track, so you review it instead of recording. (If you ever record a line yourself, the old way still works:) the pipeline hands you a timeline that's already cut, with an empty `VO` track. In DaVinci Resolve: File > Import > Timeline, pick the file, and record straight into the VO track. You never build the edit yourself.
 
 **Gear:** a decent USB or XLR mic, a quiet small room with soft surfaces, and the same mic distance every time. Your recording pace on the first video sets the timing for every timeline after it.
 
