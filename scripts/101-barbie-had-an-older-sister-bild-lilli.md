@@ -1,7 +1,7 @@
 # Barbie Had an Older Sister: Bild Lilli
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly WCOUNT spoken words.
+- Runtime is about 4 and a half minutes at a relaxed pace, roughly 669 spoken words.
 - Tone is calm and matter-of-fact, and fair to Ruth Handler throughout. This is not a takedown, so keep the lawsuit section plain and flat.
 - Say Bild as BILT, Lilli as LIL-ee, Zeitung as TSY-toong, Greiner as GRY-ner, Hausser as HOW-ser, Mattel as muh-TELL.
 - Every hedge in here is on purpose. Read "modeled on", "inspired by", "reportedly", "according to Britannica", "the way the Smithsonian tells it", "sources differ" and "says" exactly as written. Do not swap in any stronger word, and do not say what Mattel paid, because the research has no figure. The first-year sales numbers are two different figures from two sources, so give both and do not pick one.

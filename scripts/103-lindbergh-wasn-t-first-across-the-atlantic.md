@@ -1,7 +1,7 @@
 # Lindbergh Wasn't First Across the Atlantic
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly WCOUNT spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 904 spoken words.
 - Tone is calm and respectful. Lindbergh's record is real and the script says exactly what it is, so do not play it down in the voice.
 - Say Alcock as AL-kok, Clifden as KLIF-den, Orteig as or-TAYG, Le Bourget as luh boor-ZHAY, Nungesser as noon-zhes-SAIR, Coli as KOH-lee, Azores as AY-zorz, Horta as OR-ta, Ferrol as feh-ROL, Rouen as roo-AHN.
 - Every hedge in here is on purpose. Read "first SOLO nonstop", "first nonstop", "at all, with stops", "by stages", "about sixteen hours", "sources differ", "about a hundred thousand", "according to the Smithsonian" and "toy" exactly as written. Lindbergh's record is the first solo nonstop crossing and nothing broader, and the cats were toy mascots, not live animals.

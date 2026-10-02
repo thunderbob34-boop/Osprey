@@ -1,6 +1,6 @@
 # Notes: Lewis and Clark Were Twelve Years Late
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 107."
-Spoken words: 606
+Spoken words: 899
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -14,6 +14,16 @@ Spoken words: 606
 | Summer 1802 Jefferson read the book at Monticello, Lewis his secretary; a few months later asked Congress for money for the expedition | Library of Congress Maps blog; Monticello "Political Origins of the Lewis and Clark Expedition"; entry fun fact |
 | Book was one influence, not the only one | Entry "Hedges" |
 | About twelve years (1793 to 1805) | Entry "Inferred" (arithmetic; eleven if counted from the 1804 departure) |
+| 1789 trip ended at the Arctic Ocean, not the Pacific; Mackenzie was disappointed | Canadian Encyclopedia "Sir Alexander Mackenzie (Explorer)"; Britannica (Mackenzie, kids and main) |
+| 1793 party: Alexander Mackay, six voyageurs, two Indigenous hunters; set out May 9 1793 | Canadian Encyclopedia (Mackenzie and "The Explorations of Alexander Mackenzie"); Dictionary of Canadian Biography, "Mackay, Alexander" |
+| Route: Peace and Parsnip, then Fraser; Carrier advised finishing overland; borrowed canoes from the Nuxalk; followed Bella Coola River to the sea | Canadian Encyclopedia; Parks Canada "Explorations of Sir Alexander Mackenzie" and Mackenzie-Grease Trail article |
+| Inscription text "Alexander Mackenzie, from Canada by land, the twenty-second of July, one thousand seven hundred and ninety-three"; vermilion and grease; later inscribed by surveyors | Parks Canada / Historic Places; Canadian Encyclopedia |
+| Knighted in 1802 | Canadian Encyclopedia; Britannica (Mackenzie, kids) |
+| Jefferson's confidential message to Congress January 18 1803 asking $2,500; officer with ten or twelve men might explore "even to the Western Ocean"; Lewis as secretary knew of it | National Archives, "Jefferson's Secret Message to Congress"; Monticello; Library of Congress exhibit (Jefferson to Lewis) |
 
-Hedges kept: "first European", "north of Mexico", "about twelve years", "July 1793", "an inlet of the Pacific, not the open ocean", "one of the things that shaped his thinking".
-Left out on purpose (unverified / keep off air in research): the exact day Mackenzie first saw salt water; the 1924 national historic site designation (not needed); the NPS "Little Known Fact 1" page (text not read).
+Hedges kept: "first European", "north of Mexico", "about twelve years", "July 1793", "an inlet of the Pacific, not the open ocean", "one of the things that shaped his thinking", "according to the Canadian Encyclopedia", "as Parks Canada and the Canadian Encyclopedia give them", "the rock itself says July 22nd". 
+Left out on purpose (unverified / keep off air in research): the exact day Mackenzie first saw salt water; the 1924 national historic site designation (not needed); the NPS "Little Known Fact 1" page (text not read).; 12 days and 285 km overland and the 74-day trip length; Mackenzie mistook the Fraser for the Columbia; Lewis carrying an American edition of the book west; Mackenzie's call for Britain to claim the Columbia; the "River of Disappointment" name; Gallatin urging secrecy 
+
+## Deepening (2026-10-02)
+- New facts added: 1789 Arctic trip; 1793 party and May 9 start; route and Carrier advice; Nuxalk canoes; full inscription wording, vermilion and grease, later inscribed by surveyors; knighted 1802; Jefferson's January 18 1803 confidential message, $2,500, "even to the Western Ocean", Lewis as secretary (two sources each, as in the claim table).
+- Looked for but not usable: Lewis carrying Mackenzie's book west and Mackenzie's call for Britain to claim the Columbia (one extract, could not tell which page said it); journey length in days and kilometres (one extract each); the Fraser mistaken for the Columbia (one extract); the River of Disappointment name (the Canadian Encyclopedia calls it doubtful); Gallatin urging secrecy (Monticello only); NPS "Little Known Fact 1" text (title only again); the exact arrival day (July 20 vs 22 still unresolved, script still says July 1793).

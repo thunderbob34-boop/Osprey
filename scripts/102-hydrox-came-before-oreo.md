@@ -1,7 +1,7 @@
 # Hydrox Came Before Oreo
 
 READING NOTES
-- Runtime is about 4 minutes at a relaxed pace, roughly WCOUNT spoken words.
+- Runtime is about 4 minutes at a relaxed pace, roughly 619 spoken words.
 - Tone is light and matter-of-fact. This one is told with dates only, so let the dates carry it and do not add any attitude about Oreo.
 - Say Hydrox as HY-drox, Nabisco as NAB-iss-co, KCUR as K-C-U-R, Loose-Wiles as LOOSE-WYLZ, Hoboken as HO-bo-ken, Kassoff as KASS-off.
 - Every hedge in here is on purpose. Read "widely treated as", "came four years later", "as far as these sources go", "was actually introduced first, in 1908", "sources differ" and "1999 or 2003" exactly as written. Never call the Oreo a copy, a knockoff or an imitation, because that is an inference the research does not support.
