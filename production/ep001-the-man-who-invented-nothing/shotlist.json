@@ -1598,16 +1598,23 @@
   "section": "06",
   "section_name": "The Smear Campaign",
   "text": "Edison testified in 1889 that alternating current would kill instantly and painlessly.",
-  "type": "text",
+  "type": "archival",
   "template": "archival",
   "fields": {
-   "headline": "A New York state commission asks Edison for advice",
-   "sub": "Late 1887",
+   "kind": "portrait",
+   "label": "Thomas Edison, c. 1880",
    "lower": "1889: Edison testifies AC would kill \"instantly and painlessly\"",
-   "asset": "x"
+   "asset": "loc-gov-item-89714703"
   },
   "visual": "Edison portrait, lower-third.",
-  "source": null,
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division",
+   "item": "[Thomas Edison, head-and-shoulders portrait, facing left]",
+   "url": "https://www.loc.gov/item/89714703/",
+   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
+   "credit": "Library of Congress Prints and Photographs Division, LC-USZ62-98067",
+   "verified": true
+  },
   "notes": "SENSITIVE BEAT. No animal or execution imagery. Plain, flat treatment; text or building only."
  },
  {

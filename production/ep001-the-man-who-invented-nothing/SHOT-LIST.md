@@ -91,7 +91,7 @@ Total runtime 9:37.0 (117 beats). Narration: Holden (Higgsfield preset 3c9d6053-
 | 06-q | 7:02.6 | 3.1s | Westinghouse refused to sell his generators for executions, | Westinghouse portrait: he refused. | archival (fetch) | Photo by Joseph G. Gessford, Library of Congress, LC-USZ62-93492 ✅ |
 | 06-r | 7:05.7 | 4.7s | so Brown got Westinghouse generators anyway, secondhand, through another… | Harold Brown portrait. | archival (fetch) | Harold P. Brown, via Wikimedia Commons (confirm source and license on the file page) ⚠️ unconfirmed |
 | 06-s | 7:10.4 | 7.8s | The first man sentenced to the chair was William… | Text card. No portrait of Kemmler. | code graphic |  |
-| 06-u | 7:18.3 | 4.7s | Edison testified in 1889 that alternating current would kill… | Edison portrait, lower-third. | archival (fetch) |  |
+| 06-u | 7:18.3 | 4.7s | Edison testified in 1889 that alternating current would kill… | Edison portrait, lower-third. | archival (fetch) | Library of Congress Prints and Photographs Division, LC-USZ62-98067 ✅ |
 | 06-v | 7:23.0 | 3.9s | On August 6th, 1890, at Auburn Prison in New… | Auburn exterior, lower-third. No interior or execution imagery. | archival (fetch) | Auburn Prison front, via Wikimedia Commons (confirm date and license) ⚠️ unconfirmed |
 | 06-w | 7:26.9 | 4.3s | Kemmler was given seventeen seconds of current, and he… | Text card, held flat. | code graphic |  |
 | 06-x | 7:31.2 | 4.7s | witnesses saw he was still breathing, so they switched… | Text card, plain. No imagery of the execution. | code graphic |  |
