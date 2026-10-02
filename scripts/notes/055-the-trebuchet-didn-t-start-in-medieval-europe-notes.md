@@ -21,3 +21,10 @@ Left out on purpose (unverified / keep off air in research): the names of the Mu
 - Cadence fixes: 2. The signpost and statement are joined in 05 ("And there's more, because...") and in 06.
 - Format fixes: word count updated to 797.
 - Remaining concerns for Gus: 797 spoken words, under the 900 floor, reported, not padded. Chevedden's pronunciation (sheh-VED-en) is a best guess.
+
+
+## Re-check A (2026-10-02)
+- Searched: Britannica, trebuchets appeared in China between the 5th and 3rd centuries BCE; traction type pulled by people on ropes; counterpoise engines appeared in the 12th century → confirmed → https://www.britannica.com/technology/trebuchet
+- Searched: earliest written record of the counterweight trebuchet is Byzantine historian Niketas Choniates (siege of Zevgminon, 1165); Chevedden's Dumbarton Oaks paper title confirmed → confirmed. Chevedden himself argues for earlier use (Nicaea 1097), which the script doesn't contradict → https://www.researchgate.net/publication/242247621_The_Invention_of_the_Counterweight_Trebuchet_A_Study_in_Cultural_Diffusion ; https://en.wikipedia.org/wiki/Niketas_Choniates
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): reached the Mediterranean by the 6th century CE, Muslim engineers at Xiangyang in the 1270s (siege 1268 to 1273; engineers arrived c. 1272), the "Hybrid or Counterpoise?" transitional-trebuchet study.

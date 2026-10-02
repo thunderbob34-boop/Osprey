@@ -27,3 +27,10 @@ Left out on purpose (unverified / keep off air in research): the cumal/kumara wo
 - Cadence fixes: 3. The stick-chart list in 03 is now one run instead of four short sentences, the opening of 04 is one breath, and the opening of 07 is joined.
 - Format fixes: word count updated to 1,068; reading-notes hedge line rewritten for the new title.
 - Remaining concerns for Gus: "almost three centuries before Columbus" relies on 1492 (general knowledge, not in the entry) and the "around 1200" contact date. Admixture dates run to about 1380, so don't stretch it. The manifest still lists the old title.
+
+
+## Re-check A (2026-10-02)
+- Searched: Ioannidis et al. 2020 (Nature): single contact event in eastern Polynesia around AD 1200; admixture dated from about 1150 (South Marquesas) to about 1380 (Rapa Nui); Native American source closest to present-day Colombia → confirmed → https://pubmed.ncbi.nlm.nih.gov/32641827/ ; 2024 Nature Rapanui genomes paper confirmed → https://www.nature.com/articles/s41586-024-07881-4
+- Also surfaced: a published critique, "Did ancient Americans settle in Polynesia? The evidence doesn't stack up" → https://phys.org/news/2020-07-ancient-americans-polynesia-evidence-doesnt.html
+- Fixes: (1) Cold open "the proof is in people's DNA" → "the evidence is in people's DNA", and 07 "the DNA proves it" → "the DNA shows it", since the 2020 finding has had published pushback (the 2024 paper supports it, but "proof" overstates). Hedges added to the reading-notes list. Word count unchanged at 1,068.
+- Not search-verified (checked against research/knowledge only; session search budget ran out): Hōkūle'a dates (1 May, 1 June Mataiva, 4 June Papeete 1976) and Mau Piailug, Andrew Sharp 1956, stick-chart types, Mangaia sweet potato c. 1000 CE, 2018 Current Biology study, L'Anse aux Meadows 1021 and the 993 event. All match standard scholarship.

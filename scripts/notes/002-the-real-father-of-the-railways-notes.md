@@ -27,3 +27,9 @@ Left out on purpose (unverified / keep off air in research): the run's duration 
 - Cadence fixes: 5. Joined choppy stops in the cold open ("it wasn't a Stephenson engine, it was built by..."), 02 ("goes like this, on September 27th..."), 04 ("it's a big one, the engine was so heavy..."), 06 (death and funeral now one breath); folded the "Not the first one people remember..." fragment into the sentence before it.
 - Format fixes: word count updated to 999. Title checked: "The Real Father of the Railways" is Museum Wales's own phrase, which the script attributes, so it stays.
 - Remaining concerns for Gus: none. Length is 999 spoken words, under the 1,200 target but inside the allowed range; not padded.
+
+## Re-check A (2026-10-02)
+- Searched: Penydarren 21 Feb 1804, about 9.75 miles, ten tons of iron in five wagons, seventy men, "nearly five miles an hour", and Museum Wales calling Trevithick "the real father of the railways" → confirmed (Museum Wales quotes Trevithick's own "nearly five miles an hour") → https://museum.wales/blog/1012/Richard-Trevithickrsquos-steam-locomotive/
+- Searched: Trevithick died 22 Apr 1833 in Dartford in poverty; local factory workers raised money so he avoided a pauper's funeral → confirmed → https://ethw.org/Richard_Trevithick ; https://www.asme.org/topics-resources/content/richard-trevithick ; https://www.britannica.com/summary/Richard-Trevithick
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Locomotion No. 1 / Stockton & Darlington 27 Sept 1825; Rainhill Oct 1829 and Robert Stephenson's role on Rocket; Salamanca 1812 at Middleton; Puffing Billy 1813-14 and oldest surviving; the 500-guinea wager (already "the story goes").

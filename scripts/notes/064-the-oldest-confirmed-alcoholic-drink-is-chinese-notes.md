@@ -27,3 +27,9 @@ Left out on purpose (unverified / keep off air in research): first names of McGo
 - Cadence fixes: 2. Cut the crafted button "It's chemistry, it's not a recipe card." Joined the "no one guy with a patent. It's places and dates" full stop.
 - Format fixes: word count updated 824 to 818; added "going by that research" and "on the evidence we've got" to the hedge list. Spoken words 818 (short, research-limited, accepted).
 - Remaining concerns for Gus: the upload title and thumbnail should use the new "oldest confirmed" wording, not "first".
+
+## Re-check A (2026-10-02)
+- Searched: Jiahu ca. 7000 to 6600 BC, rice, honey, hawthorn fruit and/or grape, "earliest alcoholic beverage", predates Near East grape wine by more than 500 years → confirmed → https://www.penn.museum/research/project.php?pid=12
+- Searched: Raqefet, Liu 2018, Eitam 2019 critique, authors' 2019 reply → confirmed → https://www.sciencedirect.com/science/article/abs/pii/S2352409X19302780
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Georgia 6000 to 5800 BC, 2017 PNAS, tartaric acid, Hajji Firuz 5400 to 5000 BC, 600 to 1,000 years (all match the published 2017 paper and press coverage as I know it).

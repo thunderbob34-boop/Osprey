@@ -27,3 +27,11 @@ Left out on purpose (unverified / keep off air in research): the banner's home i
 - Cadence fixes: 4 joins of choppy stops (sections 03, 04, 05); added 1 "right?" (now 2 in 681 words).
 - Format fixes: word count updated to 681. No dashes. Under 900; the entry can't support more (the Europe comparison is marked not re-verified).
 - Remaining concerns for Gus: (1) the title "The First Gun Was Chinese" is stronger than the script, which says the fire lance is not a true gun; the script's own claim is "the oldest surviving metal guns are Chinese". Consider "The Oldest Guns Are Chinese" or similar. (2) The entry says the banner, Heilongjiang, Xanadu and Wuwei details came only from Wikipedia and secondary extracts this session; worth a second strong source before air.
+
+## Re-check A (2026-10-02)
+- Searched: Dunhuang silk banner c. 950, demon aiming a fire lance at the Buddha, earliest depiction → confirmed, but only via Wikipedia and secondary sites (no institutional page surfaced) → https://en.wikipedia.org/wiki/Fire_lance ; https://warhistory.org/article/fire-spears-fire-tubes-and-the-true-gun-part-i
+- Searched: Xanadu gun 1298 inscription (oldest extant gun bearing a date), Heilongjiang hand cannon no later than 1288 by context, no inscription → confirmed, Wikipedia-level sources only → https://en.wikipedia.org/wiki/Xanadu_Gun ; https://en.wikipedia.org/wiki/Heilongjiang_hand_cannon
+- Searched: fire lance as proto-gun by ~1150 → confirmed (Archaeology Magazine); 1132 De'an not in snippets → https://archaeology.org/issues/may-june-2020/collection/fire-lances-cannons/weapons-of-the-ancient-world/
+- Searched: Britannica proto-gun channeling gunpowder through a cylinder; mid-13th-century bamboo tubes propelling projectiles → confirmed → https://www.britannica.com/summary/gunpowder
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): 1132 siege of De'an (standard, Needham/Andrade); Andrade's "true gun" definition (Princeton 2016); Wuwei cannon 1214 to 1227 and Chen Bingying's 1259 argument. Prior concern stands: banner, Heilongjiang and Xanadu details still rest on Wikipedia-tier sources; consistent with Needham/Andrade as I know them.

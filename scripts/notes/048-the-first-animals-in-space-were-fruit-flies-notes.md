@@ -25,3 +25,9 @@ Left out on purpose (unverified / keep off air in research): "109 km in 3 min 10
 - Cadence fixes: 2 joins of choppy stops (section 03 altitude run, section 05 opener); added 1 "right?" (now 2 in 550 words).
 - Format fixes: word count updated to 550. No dashes. Under 900; the entry can't support more.
 - Remaining concerns for Gus: Albert II is called "a monkey" in the script; the entry implies it ("before the monkeys") but never states it outright. It's standard, but note it if you want strictly entry-only wording.
+
+## Re-check A (2026-10-02)
+- Searched: 20 Feb 1947 V-2, White Sands, fruit flies and seeds, Blossom, cosmic rays, parachute recovery, 67 miles → confirmed → https://www.rmg.co.uk/stories/space-astronomy/what-was-first-animal-space ; https://howthingsfly.si.edu/ask-an-explainer/what-was-first-animal-be-launched-spaceship
+- Searched: Albert II, 14 June 1949, 83 miles, died on impact (parachute failure), rhesus monkey → confirmed → https://www.nasa.gov/history/a-brief-history-of-animals-in-space/
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Laika, Sputnik 2, 3 Nov 1957, first animal to orbit (standard); ~62-mile Kármán line.

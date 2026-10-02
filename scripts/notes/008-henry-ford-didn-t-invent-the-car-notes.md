@@ -25,3 +25,9 @@ Left out on purpose (unverified / keep off air in research): the exact chassis-l
 - Cadence fixes: 2. Joined "They made the line move, and they phased it in..." and "look at what that did, under the old stationary method..." (06).
 - Format fixes: word count updated to 949. Title checked, stays.
 - Remaining concerns for Gus: the meatpacking line describes an animal carcass being taken apart. It's plain and brief, but keep the visual note (no slaughterhouse imagery). Length is 949 words, short of target, not padded.
+
+## Re-check A (2026-10-02)
+- Searched: NMAH on Olds: "Olds' factory was the first to build cars on an assembly line", not a moving conveyor, cars on dollies station to station → confirmed → https://americanhistory.si.edu/explore/stories/race-museum-oldsmobile-curved-dash-runabout-1903
+- Searched: Siegfried Marcus car, ASME landmark ca. 1875 vs Vienna museum 1888/89 → confirmed the dispute as stated → https://www.asme.org/about-asme/engineering-history/landmarks/203-siegfried-marcus-car ; https://ethw.org/ASME-Landmark:Siegfried_Marcus_Car
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Benz 29 Jan 1886, DRP 37435, UNESCO register, 0.75 hp; Ford born 30 July 1863 so 22 on that date (correct); Cugnot 1769/1770 and the surviving fardier in Paris; meatpacker disassembly lines; 1913 phase-in (magnetos April 1913); 12.5 hours to 93 minutes.

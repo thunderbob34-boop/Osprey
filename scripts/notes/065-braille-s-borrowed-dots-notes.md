@@ -23,3 +23,8 @@ Left out on purpose (unverified / keep off air in research): the Library of Cong
 - Cadence fixes: 4. A one-line paragraph ("But Braille didn't start from nothing...") joined onto the paragraph before it. Joined "around 1821. That's the usual date". Rhetorical question plus fragment "And it's a funny thing, right? A story about who did it first..." made into one breath. The closing zinger "Somebody did it first, and Braille made it work." now names Barbier plainly and keeps the fair credit to Braille.
 - Format fixes: word count updated 774 to 784; added "probably not how it happened" to the hedge list. Spoken words 784 (short, research-limited, accepted).
 - Remaining concerns for Gus: the 05 debunk rests mainly on Perkins/Campsie (the entry says so, and the script says so on air). Keep it framed that way.
+
+## Re-check A (2026-10-02)
+- Searched: Perkins/Campsie debunk (soldier story speculation by Pierre Henri; in 1833 Barbier wrote to the school asking whether the inventor was a student or a teacher, never having met him) → confirmed → https://www.perkins.org/braille-barbier/
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): 12-dot cell; around 1821 arrival; 1824 at fifteen; 1829 publication; AFB's 13 to 16; Royal Institute for Blind Youth (all standard).

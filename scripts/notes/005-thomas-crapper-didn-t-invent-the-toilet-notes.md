@@ -24,3 +24,9 @@ Left out on purpose (unverified / keep off air in research): "roof cisterns" at 
 - Cadence fixes: 2. Joined "like a toilet in your house, the water came from rainwater..." (03) and "he wrote about it, he described it in a pamphlet..." (04).
 - Format fixes: word count updated to 924. Title checked against the entry ("Crapper ... didn't invent the toilet"), stays.
 - Remaining concerns for Gus: the entry marks Indus Valley drained latrines as "Inferred", but its own on-air version includes them, so they stay with "even earlier" and "one review says". Most sources are tagged "search extract" in the research. Length is 924 words, short of target, not padded.
+
+## Re-check A (2026-10-02)
+- Searched: Smithsonian "Three True Things About Sanitary Engineer Thomas Crapper" → confirms he didn't invent the flush toilet and that Harington built a flushing toilet in 1596 for his godmother Elizabeth I → https://www.smithsonianmag.com/smart-news/three-true-things-about-sanitary-engineer-thomas-crapper-180965008/ (the search summary didn't show the ballcock line itself)
+- Searched: Harington installed a flush lavatory for the queen (Richmond) and described it in The Metamorphosis of Ajax, 1596 → confirmed → https://www.britannica.com/biography/John-Harington
+- Fixes: none. (Sources split on where and exactly when the queen's toilet was built, his own house near Bath vs Richmond, but "built a flushing toilet with a cistern for Queen Elizabeth I" and 1596 are both supported.)
+- Not search-verified (checked against research/knowledge only): the ballcock patent; Reyburn 1969; Knossos dates; Indus Valley (already hedged); Cumming 1775; "crap" predating Crapper; the 1917 troops story (already "may").

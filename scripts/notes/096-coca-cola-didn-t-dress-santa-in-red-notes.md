@@ -25,3 +25,8 @@ Left out on purpose (unverified / keep off air in research): White Rock's 1915/1
 - Cadence fixes: 2. "in 1931. And Sundblom's Santa..." joined; one of four "Now," section openers changed to "As for the modern Santa".
 - Format fixes: word count updated 718 to 727; hedge list updated to include the "probably" lines and the very-first-red-Santa line.
 - Remaining concerns for Gus: 727 spoken words, well under the 900 floor, because the research is thin; not padded. Moore's first name and the poem's title are not in the entry, so the script says only "a Christmas poem by Moore, from 1823"; don't ad-lib them.
+
+## Re-check A (2026-10-02)
+- Searched: Coca-Cola history page: Sundblom from 1931, inspired by Moore's 1823 poem, "Santa appeared in a red coat before Sundblom painted him" → confirmed → https://www.coca-colacompany.com/about-us/history/haddon-sundblom-and-the-coca-cola-santas ; NMAH piece exists → https://americanhistory.si.edu/explore/stories/how-santa-brought-coca-cola-cold
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Nast in Harper's Weekly 1860s to 1880s and the 1881 Santa (standard; search results also mention Nast's 1881 fur-trimmed red suit, but the script's cautious wording is kept); Smithsonian Magazine article titles; Britannica "popularized, didn't invent" framing.

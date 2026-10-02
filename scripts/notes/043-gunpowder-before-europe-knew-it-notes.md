@@ -24,3 +24,8 @@ Left out on purpose (unverified / keep off air in research): Roger Bacon's recip
 - Cadence fixes: 6. Fixed the rhetorical question + "Because..." fragment in section 03 ("why would an alchemist have saltpeter... Because those two were staples") into one sentence; joined choppy stops in sections 03, 04, 05 and 06; added 1 "right?" (now 2 in 697 words).
 - Format fixes: word count updated to 697. No dashes. Under 900 words; the entry can't support more (Bacon/Berthold angle is marked not re-verified).
 - Remaining concerns for Gus: the title promises a Europe comparison but the script makes none, because the Bacon/Black Berthold material is unverified. If you want the Europe angle, verify Bacon's ~1267 recipe first; otherwise consider a title that doesn't lean on Europe.
+
+## Re-check A (2026-10-02)
+- Searched: Wujing Zongyao 1044 earliest known formula; mid-9th-century text warning that heating saltpeter, sulfur (and other ingredients) with honey burned hands and faces and burned a house down → confirmed → https://opentextbooks.clemson.edu/sciencetechnologyandsociety/chapter/gunpowder-in-medieval-china/ ; https://www.history.com/articles/firearms ; https://www.britannica.com/summary/gunpowder
+- Fixes: none. (One search snippet calls the text's author Buddhist; the standard attribution, Needham's Zhenyuan miaodao yaolüe, is a Daoist text, so "Daoist" stands.)
+- Not search-verified (checked against research/knowledge only): 75 : 15 : 10 composition; late Tang 9th-century dating and "around 850" (History.com per entry); fireworks and signals as early uses (Britannica per entry). Title/Europe concern from the first review still stands (not a fact error).

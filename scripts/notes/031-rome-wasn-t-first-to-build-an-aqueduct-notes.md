@@ -29,3 +29,8 @@ Left out on purpose (unverified / keep off air in research): OPEN ITEM: the Jerw
 
 ## Source check, 2026-10-02 (main session)
 - **Jerwan aqueduct, verified.** World History Encyclopedia has images of the aqueduct and its inscription (https://www.worldhistory.org/image/3022/jerwan-aqueduct/, https://www.worldhistory.org/image/3024/jerwan-aqueduct-inscription/). Britannica (Students) has an entry on the Jerwan aqueduct. "Back to Sennacherib's Aqueduct at Jerwan: A Reassessment of the Textual Evidence" is a scholarly paper on it (ResearchGate). Together they cover Sennacherib, 703–690 BC, more than two million dressed stones, and the royal inscription ("Over steep-sided valleys I spanned an aqueduct of white limestone blocks"). Keep "about 400 years before Rome's first aqueduct". Don't say "world's first aqueduct": some call it the oldest, but the research also notes Samos.
+
+## Re-check A (2026-10-02)
+- Searched: Smithsonian on Anio Novus carrying less than thought, about 370 gallons per second → confirmed → https://www.smithsonianmag.com/smart-news/how-much-water-did-romes-aqueducts-really-carry-180955568/
+- Fixes: none.
+- Not search-verified (search budget ran out; checked against research, the main-session source check above, and knowledge): eleven aqueducts; Aqua Appia 312 BCE; Aqua Marcia 144 to 140 BCE, ~91 km; Bruun 1991/2013 figures; Rome 8 to 16 ft/mile (0.15 to 0.30%); Nîmes ~31 miles at ~15 to 20 in/mile (consistent with the ~12.6 m total fall over ~50 km); Jerwan 703 to 690 BCE, 2 million+ stones, inscription; Eupalinos c. 530 BCE.

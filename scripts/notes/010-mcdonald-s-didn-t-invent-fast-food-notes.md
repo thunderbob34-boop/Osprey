@@ -27,3 +27,10 @@ Left out on purpose (unverified / keep off air in research): calling Red's flatl
 - Cadence fixes: 2. Joined "from Berlin, and the company that built them was called Quisisana" (04) and "this is the oldest one, nearly two thousand years ago..." (06).
 - Format fixes: word count updated to 1,022; the hedge list now includes "which is the opening date usually given". Title checked, stays.
 - Remaining concerns for Gus: the Pig Stand 1931 window and Yoshinoya rest on weak sources, and both are hedged on air. Length is 1,022 words, short of target, not padded.
+
+## Re-check A (2026-10-02)
+- Searched: White Castle, Anderson and Ingram, Wichita 1921; 116 locations in 11 states by 1931 → confirmed by Kansapedia → https://www.kansashistory.gov/kansapedia/white-castle/16716 (note: encyclopedia.com gives "115 outlets in ten states" by 1931, so the KSHS figure is the one to cite)
+- Searched: Horn & Hardart first Automat, 818 Chestnut St., 1902, equipment from Berlin → confirmed → https://www.nypl.org/blog/2010/12/08/horn-hardart-automats ; https://www.britannica.com/topic/Horn-and-Hardart-Automat
+- Searched: Quisisana built it, Swiss-designed and German-made, June 9 opening → supported (secondary summaries of the Hardart/Diehl book) → https://www.inquirer.com/history/horn-hardart-automat-opening-philadelphia-20250613.html ; https://en.wikipedia.org/wiki/Quisisana
+- Fixes: 1. "that was the first drive-through with a two-way speaker" changed to "that's usually credited as the first drive-through with a two-way speaker" (flat superlative resting on History.com plus company lore; not search-verified here). Word count 1,022 to 1,024; hedge list updated.
+- Not search-verified (checked against research/knowledge only; search budget ran out): In-N-Out 1948 (now hedged); Red's 1947; Pig Stand 1921 and 1931 (already hedged); Yoshinoya (already company's account); McDonald's 1940/1948/1955/1961; Pompeii thermopolium, Nereid on a seahorse, 2019/Dec 2020, about 80.

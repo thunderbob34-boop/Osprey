@@ -26,3 +26,11 @@ Left out on purpose (unverified / keep off air in research): any claim the Arab 
 - Cadence fixes: 4. Cut the rhetorical question "So if not them, then where did it come from?" Joined choppy full stops in 02 (the two stories; PBS and History.com) and 06 ("Oh, one more thing.").
 - Format fixes: word count updated 755 to 753; added "take it as his account", "again going by Jurafsky", "a fair guess, not a fact" and "poorly sourced" to the hedge list. Spoken words 753 (short, research-limited, accepted).
 - Remaining concerns for Gus: the Ibn Abi Usaybi'a / 1029 / Zimara chain rests on one blog (Jurafsky's) per the entry, and is attributed on air.
+
+## Re-check A (2026-10-02)
+- Searched: della Porta freezing in snow and saltpetre, "by 1558" → wrong edition. Magia Naturalis first came out in 1558, but the snow-and-nitre freezing is in the "Chaos" section of the expanded second edition of 1589 → https://www.chemistryworld.com/opinion/della-portas-salt-bath/4012036.article
+- Searched: History.com, early 1600s ices "a century after a teenaged Catherine de Medici departed Florence"; PBS "not likely to be true" → confirmed → https://www.history.com/articles/where-do-ice-cream-sorbet-frozen-desserts-come-from ; https://www.pbs.org/food/the-history-kitchen/explore-the-delicious-history-of-ice-cream/
+- Searched: Ibn Abi Usaybi'a crediting Ibn Bakhtawayh (1029) on saltpetre cooling → confirmed on Jurafsky's blog and elsewhere → http://languageoffood.blogspot.com/2011/07/ice-cream.html
+- Searched: Latini, Lo scalco alla moderna, Naples 1692 and 1694, sorbetto recipes including eggplant → confirmed → https://en.wikipedia.org/wiki/Antonio_Latini (chocolate not shown in the results; kept from the research entry)
+- Fixes: (1) "By 1558" changed to "By 1589 ... in the expanded edition of his book Magia Naturalis" in 05, and "by 1558" to "by 1589" in 07; on-screen text 1558 changed to 1589. "More than a century later, in the 1690s" still holds (1589 to 1692). Word count 753 to 757.
+- Not search-verified (checked against research/knowledge only): Zimara 1530 (Jurafsky, attributed); Quinzio's Of Sugar and Snow; Tang-dynasty claims being poorly sourced.

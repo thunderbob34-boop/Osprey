@@ -22,3 +22,10 @@ Left out on purpose (unverified / keep off air in research): the town of the Roj
 - Cadence fixes: 2. "I'll say this plainly. Police found..." joined into one breath; closing line made plain instead of a callback.
 - Format fixes: word count updated 936 to 960; hedge list updated to include "probably a big part of why".
 - Remaining concerns for Gus: 960 spoken words (short, by design). No date for Scotland Yard's adoption of Galton-Henry is in the research, so the script never says Argentina beat Scotland Yard in time; keep it that way if ad-libbing.
+
+## Re-check A (2026-10-02)
+- Searched: 1892 Rojas case, bloody thumbprint on a door, mother confessed, "first homicide solved by fingerprint evidence" → confirmed → https://www.nlm.nih.gov/exhibition/visibleproofs/galleries/cases/vucetich.html ; https://www.ojp.gov/pdffiles1/nij/225321.pdf
+- Searched: Faulds Nature letter 28 Oct 1880 ("On the Skin-Furrows of the Hand"), crime-scene identification proposal → confirmed → https://www.nature.com/articles/022605a0
+- Searched: Herschel 1858 Konai handprint → confirmed, but the 1858 contract was made at Jungipoor (Herschel was in Hooghly later, when he wrote the 1877 letter) → https://www.gutenberg.org/files/34859/34859-h/34859-h.htm (Herschel, The Origin of Finger-printing); Fingerprint Sourcebook ch. 1
+- Fixes: (1) "a British administrator in Hooghly named William Herschel. In 1858..." changed to "a British administrator in Bengal" so the 1858 contract isn't placed in Hooghly (it was at Jungipoor); "the Hooghly Letter" kept. Word count unchanged (960).
+- Not search-verified (checked against research/knowledge only): Hooghly Letter date 15 Aug 1877; Galton's statistical work; Galton-Henry adopted by Scotland Yard; Faulds-Herschel dispute and the Nature "Origin of Finger-Printing" piece (nature.com/articles/098268a0 is a 1916 Nature item matching Herschel's book title; "keeps its own record" is loose but not wrong); Vucetich "first workable" (NLM wording per research).

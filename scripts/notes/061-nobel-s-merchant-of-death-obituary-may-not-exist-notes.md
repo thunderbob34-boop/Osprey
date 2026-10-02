@@ -25,3 +25,10 @@ Left out on purpose (unverified / keep off air in research): the claim that a re
 - Cadence fixes: 3. Joined split breaths in 03 ("here's something else, even respected places..."), 05 (a one-line paragraph merged into the paragraph before it) and 07.
 - Format fixes: word count updated to 725; runtime changed from 6 to about 5 minutes.
 - Remaining concerns for Gus: 725 spoken words, under the 900 floor, reported, not padded. "Newspapers did confuse the brothers" is in the entry's on-air version but not its confirmed list. Title checked: "May Not Exist" matches the research's "never found".
+
+
+## Re-check A (2026-10-02)
+- Searched: "merchant of death" obituary: historians have yet to find an original copy (History.com); Britannica question page and the older Smithsonian piece "Blame Sloppy Journalism for the Nobel Prizes" exist → confirmed → https://www.history.com/articles/did-a-premature-obituary-inspire-the-nobel-prize ; https://www.britannica.com/question/Why-was-Alfred-Nobel-called-the-merchant-of-death ; https://www.smithsonianmag.com/smart-news/blame-sloppy-journalism-for-the-nobel-prizes-1172688/
+- Searched: Sobrero discovered nitroglycerin in Turin in 1847 and warned it was too dangerous to handle; Nobel invented dynamite in 1867 → confirmed → https://www.nobelprize.org/alfred-nobel/alfred-nobel-life-and-philosophy/ ; https://www.acs.org/molecule-of-the-week/archive/n/nitroglycerin.html
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Kenne Fant (already hedged "reportedly"), the 1895 will, Ludvig's 1888 death in Cannes, the Smithsonian Sobrero headline, Nobel's public credit to Sobrero on NobelPrize.org's Sobrero page, kieselguhr.

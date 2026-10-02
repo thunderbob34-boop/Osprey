@@ -27,3 +27,8 @@ Left out on purpose (unverified / keep off air in research): the "screams were a
 
 ## Source check, 2026-10-02 (main session)
 - **Doctors' Day, verified.** It was first observed in Winder, Georgia, on 30 March 1933, chosen to mark Long's 1842 operation (University of Texas Medical Branch, https://www.utmb.edu/celebrate/doctors-day). Congress designated National Doctors Day as 30 March in S.J.Res. 366, Public Law 101-473, signed 30 Oct 1990 (https://www.congress.gov/bill/101st-congress/senate-joint-resolution/366/all-info). The reviewer's hedges ("the reason usually given", "if that's right") were removed, and the script now states it plainly.
+
+## Re-check A (2026-10-02)
+- Searched: none (the Doctors' Day hook was already source-checked above with UTMB and congress.gov; the search budget went to riskier claims in other scripts).
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Long 30 Mar 1842, James Venable, published 1849; Morton 16 Oct 1846, Ether Dome; Hanaoka Seishu 13 Oct 1804, Kan Aiya, tsusensan/mafutsusan; Magendie quote and the "erroneous yet pervasive Western view" quote (taken from the PubMed/PMC reviews named in the research); 38- and 42-year gaps (arithmetic correct). No banned words or dashes.

@@ -23,3 +23,8 @@ Left out on purpose (unverified / keep off air in research): the exact issue day
 - Cadence fixes: 2. Recap list in section 06 joined into one breath; section 05 ending made plain.
 - Format fixes: word count updated 752 to 749; hedge list now includes "on the evidence we have".
 - Remaining concerns for Gus: 749 spoken words, well under the 900 floor, because the research is thin; not padded. Section 05 is a single short paragraph, fine for one take.
+
+## Re-check A (2026-10-02)
+- Searched: Marshall 1888 Cookery Book, "Cornets with Cream", "can also be filled with any cream or water ice", Smithsonian "earliest claimant" → confirmed → https://www.smithsonianmag.com/smart-news/amazing-portable-edible-ice-cream-cone-180964939/ ; https://www.english-heritage.org.uk/visit/inspire-me/victorian-ice-cream/
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Marchiony US 746,971 (filed 22 Sept 1903, issued December 1903; matches standard record); Hamwi/zalabia story; LOC research-guide listing; Marchiony's 1896 claim (kept as his claim).

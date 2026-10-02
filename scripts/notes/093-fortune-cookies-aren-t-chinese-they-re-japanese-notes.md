@@ -24,3 +24,8 @@ Left out on purpose (unverified / keep off air in research): the WWII internment
 - Cadence fixes: 1. The three-stop "even the American part is a fight. Who first served... One side says..." run joined into one breath.
 - Format fixes: word count updated 803 to 819; hedge list now includes "as it's been reported".
 - Remaining concerns for Gus: 819 spoken words, under the 900 floor, because the research is thin; not padded. Section 06 is a single paragraph, fine for one take.
+
+## Re-check A (2026-10-02)
+- Searched: tsujiura senbei near Kyoto by the 1870s; Nakamachi; 1878 storybook illustrations of a senbei shop; Benkyodo opened 1906 and made the cookies for Hagiwara's Tea Garden → all confirmed → https://www.history.com/articles/fortune-cookies-invented-chinese-japanese ; https://www.kqed.org/news/11742748/unwrapping-the-california-origins-of-the-fortune-cookie ; https://americanhistory.si.edu/explore/stories/origins-fortune-cookie
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): "bigger and darker, sesame and miso"; late-1990s date of Nakamachi's work; David Jung in Los Angeles; 1983 Court of Historical Review siding with San Francisco (matches standard accounts).

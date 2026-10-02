@@ -26,3 +26,10 @@ Left out on purpose (unverified / keep off air in research): the word "broke" in
 - Cadence fixes: 1. "Oh, one more thing about that patent. According to..." joined into one breath; "it's a nice thing to know" filler cut.
 - Format fixes: word count updated 793 to 777.
 - Remaining concerns for Gus: 777 spoken words, well under the 900 floor, because the research is thin; not padded. The title's "Broke Student" is not supported by the research (only the attributed girlfriend-paid-the-fee line); the spoken script never says "broke", but consider retitling (e.g. "Television Was Patented in 1884 by a Student"). "Patented in 1884" is fine: the patent was effective 6 January 1884, granted 15 January 1885, and the script gives both dates.
+
+## Re-check A (2026-10-02)
+- Searched: DRP 30105 "Elektrisches Teleskop", effective 6 Jan 1884, granted 15 Jan 1885, Nipkow a 23-year-old student in Berlin, idea at the end of 1883 → confirmed → https://www.dpma.de/docs/postergalerieneu/05_mechanischesfernsehen.pdf ; https://patents.google.com/patent/DE30105C/de
+- Searched: Fernsehsender Paul Nipkow, Berlin, regular service from 22 March 1935 → confirmed (Early Television Museum; more widely documented than "one museum source", but the hedge is harmless) → https://www.earlytelevision.org/german_prewar.html
+- Searched: ETHW first TV-like patent 1884, Baird 1926 (26 Jan, Royal Institution, two Nipkow disks), Farnsworth 1927 → confirmed → https://ethw.org/Television ; https://ethw.org/Milestones:First_Public_Demonstration_of_Television,_1926 . Zworykin "1928": ETHW results show his kinescope application in 1929 and iconoscope 1933; 1928 is as listed in the research's ETHW Television summary and is said only as the credited date, so left as is.
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Christmas Eve 1883 exact date (DPMA/Early Television Museum per research); girlfriend paid the fee (attributed single source); "one may assume" quote.

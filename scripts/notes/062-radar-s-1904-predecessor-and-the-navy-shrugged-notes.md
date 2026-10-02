@@ -26,3 +26,9 @@ Left out on purpose (unverified / keep off air in research): any statement of ho
 - Cadence fixes: 4. Rhetorical question plus fragment "So does any of this take anything away from Robert Watson-Watt? Not really, no." joined into one statement. "Now, why ships on a river?" turned into a lead-in clause. Cold open "the engineers who keep the official record of these things" made plain ("the big engineering organization, the IEEE"). Crafted close of 05 ("the navy that saw it had said no thanks") flattened.
 - Format fixes: word count updated 930 to 925; "the only source we have on it" added to the hedge list in the reading notes. Spoken words 925 (short, research-limited, accepted).
 - Remaining concerns for Gus: the title change means the thumbnail/upload title should match. "Navy Shrugged" is fine, since the entry confirms no interest from the German navy.
+
+## Re-check A (2026-10-02)
+- Searched: 17 May 1904 Cologne demo, barge near Hohenzollern Bridge at several hundred metres, bell indicator, IEEE Milestone "Radar Predecessor, 1904" → confirmed → https://ethw.org/Milestones:Radar_Predecessor,_1904 (also notes a Kölnische Zeitung report dated 18 May; the 17 May demo date stands)
+- Searched: Hülsmeyer showed it to the German navy, no interest → confirmed (Britannica: "demonstrated it to the German navy but failed to arouse any interest") → https://www.britannica.com/biography/Christian-Hulsmeyer
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): 30 April 1904 patent date; Daventry 26 Feb 1935; Britannica's Watson-Watt entry naming Hülsmeyer 1904; several countries developing radar independently in the 1930s. (The Rhine-collision motive also appears in the ETHW milestone material, so "the only source we have" is conservative, not wrong; left as is.)

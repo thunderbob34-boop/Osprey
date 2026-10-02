@@ -25,3 +25,8 @@ Left out on purpose (unverified / keep off air in research): Leif Erikson's name
 - Cadence fixes: 3. The cold open's "Not roughly when, not sometime around..." fragment now runs on from the sentence before it. "The trick is finding that one ring, and in the year 993..." is joined. The stacked "Three trees, the same year, 1021. That's..." is now one breath.
 - Format fixes: word count updated to 931. Title checked, stays.
 - Remaining concerns for Gus: the close says "about four hundred and seventy years" while the rest of the script says 471. Both are supported (the entry uses "about 470" too), but a viewer may notice. Length is 931 words, short of target, not padded.
+
+## Re-check A (2026-10-02)
+- Searched: Kuitems et al. 2021, Nature: AD 1021, three trees converge on the same year, 993 cosmic-ray event, and the quote "the only secure calendar date for the presence of Europeans across the Atlantic before the voyages of Columbus" → confirmed verbatim → https://www.nature.com/articles/s41586-021-03972-8 ; https://www.rug.nl/research/centre-for-isotope-research/echoes/media/news/2021/europeans-in-the-americas-1000-years-ago?lang=en
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): coverage by Science, Nat Geo and Smithsonian; metal-blade cut marks; "may have been older / short-lived" (already hedged). The 471 vs "about four hundred and seventy" wording stays as flagged.

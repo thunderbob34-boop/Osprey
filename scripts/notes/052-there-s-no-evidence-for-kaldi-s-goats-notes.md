@@ -24,3 +24,11 @@ Left out on purpose (unverified / keep off air in research): Hattox and al-Jazir
 - Cadence fixes: 3. Two rhetorical question + answer pairs joined into one breath ("So where does Kaldi come from, and the honest answer is..."; "then who was drinking it first, and the answer is..."), and the choppy opening of 07 joined into one breath.
 - Format fixes: word count updated to 1,035; hedge list updated.
 - Remaining concerns for Gus: runs short (1,035 words, about 7 minutes) by design. The manifest still lists the old title.
+
+
+## Re-check A (2026-10-02)
+- Searched: Ukers 1922 quotes Nairon: "took care of camels, or as others say, of goats", monks of a monastery in Ayaman/Arabia Felix → confirmed, but the search extract words the place line "the Kingdom of Ayaman, that is Arabia Felix", not "which is" → https://www.gutenberg.org/files/28500/28500-h/28500-h.htm ; https://en.wikipedia.org/wiki/Kaldi
+- Searched: Fredholm 2010, Kaldi story "appears to occur first" in Nairon (Maronite professor of oriental languages); "local sources for the legend are lacking" → confirmed → https://www.researchgate.net/publication/46394171_Notes_on_the_History_of_Caffeine_Use
+- Searched: JSTOR Daily title "How Coffee Went from a Mystical Sacrament to an Everyday Drink"; Sufis in Yemen used it in night-time rituals → confirmed → https://daily.jstor.org/how-coffee-went-from-a-mystical-sacrament-to-an-everyday-drink/
+- Fixes: (1) Section 04 dropped the quote marks on "Ayaman, which is Arabia Felix" (two extracts word it differently, so it's now a paraphrase: "a place Nairon calls Ayaman, and he says that's Arabia Felix"); on-screen text list changed to "Ayaman" and "Arabia Felix". Word count 1,035 → 1,037.
+- Not search-verified (checked against research/knowledge only): 1671 date and Rome (also in the search results), University of Bologna catalogue, Britannica's 15th-century Yemen Sufi dating, NCA "Yemen and Mocha", "roughly 800 years" (legend usually set c. 850 CE; arithmetic holds), coffee plant native to Ethiopia.

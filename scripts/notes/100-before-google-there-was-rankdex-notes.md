@@ -24,3 +24,10 @@ Left out on purpose (unverified / keep off air in research): any claim that Goog
 - Cadence fixes: 3 joins ("let me say it plainly. The link idea says...", "Page wasn't sitting around... They were both...", "Oh, one more thing. Ranking things...").
 - Format fixes: word count updated 760 to 767; hedge list now includes "something a lot like".
 - Remaining concerns for Gus: 767 spoken words, under the 900 floor, because the research is thin and contested; not padded. "at IDD for Dow Jones" is a light reading of the entry's "IDD/Dow Jones"; don't expand on the company relationship. The research rates this topic "Contested, Fit 3/5", its weakest pick.
+
+## Re-check A (2026-10-02)
+- Searched: US 6,285,999 cites US 5,920,859 (Yanhong Li, "Hypertext document retrieval system and method") → confirmed → https://patents.google.com/patent/US6285999 ; https://patents.google.com/patent/US5920859
+- Searched: Li at IDD (a Dow Jones unit), RankDex in 1996; Forbes "The Man Who's Beating Google" (2009) → confirmed, but the Forbes piece says Page and Brin were working on a similar algorithm "around the same time", not that Li came first or inspired Page → https://www.forbes.com/forbes/2009/1005/technology-baidu-robin-li-man-whos-beating-google.html
+- Searched: Robin Li on the 2010 TIME 100 → confirmed → https://content.time.com/time/specials/packages/article/0,28804,1984685_1984864_1985434,00.html
+- Fixes: (1) "And as Forbes and TIME tell it, Li's work came first, and it's said to have inspired Page" → "And some accounts go further and say Li's work came first and inspired Page, but that's a claim, and the dates I'm about to give you make it hard to back up" (Forbes says "around the same time"; the claim no longer leans on Forbes/TIME). Hedge list updated. Word count 767 → 781.
+- Not search-verified (checked against research/knowledge only; session search budget ran out): Page's 10 Jan 1997 priority date (matches the provisional application on the patent); Li's filing 5 Feb 1997 and grant 6 July 1999; BackRub in 1996; RankDex anchor-text method vs recursive PageRank; Garfield citation indexing 1950s-60s; Li built Baidu on the technology.

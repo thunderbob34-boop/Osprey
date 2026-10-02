@@ -27,3 +27,8 @@ Left out on purpose (unverified / keep off air in research): "wrinkling" paper (
 - Cadence fixes: 4. Joined "paper, not people, and somebody else..." (03), "the same year as the patent, and then the other investors fell away..." (05), "Oh, one more thing, even the phrase..." and "in 1906, and he used it in a patent filing" (06).
 - Format fixes: title line and notes title changed; word count updated to 953; the date attribution added to the hedge list. The file name still uses the old slug. Rename it only if the manifest is updated too.
 - Remaining concerns for Gus: the research marks the "Chilly Reception" attribution as approximate (already noted above). Length is 953 words, short of target, not padded.
+
+## Re-check A (2026-10-02)
+- Searched: none (search budget ran out before this script).
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Carrier 17 July 1902 at Sackett-Wilhelms (already attributed to Carrier's company history); humidity not wrinkling; Gorrie by about 1841, ice pans; patent petition 1848, US Patent 8,080 in 1851 (matches standard record, May 1851); NMAH patent model; chief backer died 1851; died 1855 at 51 (born Oct 1803, died June 1855, correct); Tudor suspicion (already "Gorrie believed"); Statuary Hall statue; Stuart Cramer 1906. Worth one search before recording if budget allows: the "first US patent for mechanical refrigeration" superlative, and whether the Gorrie statue currently stands in the Statuary Hall room itself or elsewhere in the Capitol as part of the National Statuary Hall Collection.

@@ -22,3 +22,10 @@ Left out on purpose (unverified / keep off air in research): the 2017 UNSW "firs
 - Cadence fixes: 3. Joined split breaths in 04, 05 ("used the relationship, but they don't show...") and 06.
 - Format fixes: word count updated to 707.
 - Remaining concerns for Gus: 707 spoken words, the shortest in the batch, under the 900 floor, reported, not padded. Section 05 mentions the 2017 "world's first trigonometry" headline only to say Scientific American called it hype. The entry says to "avoid" that claim, so if you'd rather not raise it at all, cut that paragraph (about 50 words) and drop "2017" from the on-screen list.
+
+
+## Re-check A (2026-10-02)
+- Searched: Plimpton 322, 15 rows, Neugebauer and Sachs 1945 reading as Pythagorean triples, Columbia's Plimpton collection, about 1,000 years before Pythagoras → confirmed → https://www.britannica.com/topic/Plimpton-322 ; https://magazine.columbia.edu/article/babylon-revisited ; Scientific American "Don't Fall for Babylonian Trigonometry Hype" exists → https://blogs.scientificamerican.com/roots-of-unity/dont-fall-for-babylonian-trigonometry-hype/
+- Searched: YBC 7289, c. 1800 to 1600 BCE, root 2 correct to about six decimal places; the MAA/Yale write-up says the scribe was likely a student who copied the value rather than computing it → https://old.maa.org/press/periodicals/convergence/the-best-known-old-babylonian-tablet ; Historia Mathematica paper confirmed → https://www.sciencedirect.com/science/article/pii/S0315086022000477
+- Fixes: (1) "worked out to about six decimal places" → "accurate to about six decimal places"; "the scribe got a really, really accurate answer" → "the number on it is really, really accurate"; 06 "working out the square root of 2" → "writing down the square root of 2", since the scribe probably copied the value. Word count 707 → 706.
+- Not search-verified (checked against research/knowledge only): Pythagoras c. 570 to 495 BCE, no surviving writings, attribution centuries later.

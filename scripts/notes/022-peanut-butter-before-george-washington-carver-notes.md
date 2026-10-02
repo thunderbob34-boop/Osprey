@@ -26,3 +26,10 @@ Left out on purpose (unverified / keep off air in research): The Aztec peanut-pa
 - Cadence fixes: 6. Joined "Edson didn't call it peanut butter. He called it peanut-candy." into one breath; joined the Bayle "may have" lines; replaced the rhetorical "So where does that leave Carver?" with "Now, as for Carver"; cut the crafted button "The myth isn't doing him any favors, it's just putting the wrong thing on his name"; joined the opening of the close ("So here's the plain version, people in the Andes..."); dropped "the strange thing is that" from the cold open.
 - Format fixes: word count updated 932 to 911 in reading notes and in this file. Format otherwise clean (7 sections, no dashes). Length 911 is above the 900 floor.
 - Remaining concerns for Gus: none.
+
+## Re-check A (2026-10-02)
+- Searched: Edson born 7 Feb 1849, Bedford QC, pharmacist; US 306,727 issued 21 Oct 1884 for "peanut-candy"; "consistency like that of butter, lard, or ointment" → confirmed → https://thecanadianencyclopedia.ca/en/article/marcellus-gilmore-edson ; https://patents.google.com/patent/US306727A/en
+- Searched: Carver 1916 bulletin "How to Grow the Peanut and 105 Ways..." includes a peanut butter recipe; Carver did not invent peanut butter → confirmed → https://www.history.com/articles/who-invented-peanut-butter ; https://www.smithsonianmag.com/history/search-george-washington-carvers-true-legacy-180971538/
+- Searched: "most food historians" credit Kellogg's 1895 nut-butter process patent; Bayle, St. Louis, 1894; Andean/Inca peanut pastes → confirmed (History.com now states Bayle sold it in 1894 outright; the script's "may have" is more cautious, kept) → https://www.history.com/articles/who-invented-peanut-butter
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Kellogg's "nutmeal" naming (History.com describes the 1895 compound as nut butter plus powdery nutmeal and grains; script wording "a paste called nutmeal" is loose but left as is).

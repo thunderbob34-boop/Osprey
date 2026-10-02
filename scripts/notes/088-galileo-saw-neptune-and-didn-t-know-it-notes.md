@@ -1,6 +1,6 @@
 # Notes: Galileo Saw Neptune and Didn't Know It
 Research entry: 100-episode-lineup.md, heading "### 88. Galileo Saw Neptune and Didn't Know It"
-Spoken words: 799
+Spoken words: 804
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -23,3 +23,8 @@ Left out on purpose (unverified / keep off air in research): "His notebooks surv
 - Cadence fixes: 2. Joined "They discovered Neptune. But they weren't..." into one breath; added one "right?" (now 3).
 - Format fixes: reading-notes hedge list now also names "nobody can say for sure, that's an interpretation" and "the first person we know of", both used in the script; word count updated 805 to 799.
 - Remaining concerns for Gus: 799 words, under 900. The script quotes the Nature paper as saying Galileo "also detected its motion" and frames that as the paper's reading. That's per the entry, but read it carefully alongside the "don't say he noticed" hedge.
+
+## Re-check A (2026-10-02)
+- Searched: Kowal & Drake, Nature 287, 311-313 (1980) → confirms Galileo observed Neptune on 28 Dec 1612 and 28 Jan 1613, and that "Galileo also detected the motion of Neptune"; the abstract says the latter (January 1613) observation "differs by 1 arc min from the predicted position" → https://www.nature.com/articles/287311a0 ; https://ui.adsabs.harvard.edu/abs/1980Natur.287..311K/abstract
+- Fixes: (1) "the position Galileo drew comes within one arcminute of where Neptune should have been" changed to "the position Galileo recorded in January 1613 is only about one arcminute off from where Neptune should have been": the paper gives the figure for the January observation and says "differs by 1 arc min", not "within". On-screen text suggestion updated to "about 1 arcminute off". Word count 799 to 804.
+- Not search-verified (checked against research/knowledge only): Le Verrier/Adams prediction and Galle's 23 Sept 1846 find; NASA's "recorded as a star in December 1612" wording; Kowal and Drake's 1979 identification date.

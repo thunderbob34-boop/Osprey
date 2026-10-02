@@ -21,3 +21,10 @@ Left out on purpose (unverified / keep off air in research): the journal name of
 - Cadence fixes: 3. Joined "...Pizza Margherita, and he found three problems with it", "the name it's addressed to, it's addressed using his wife's surname", and "described the pizzas of Naples, and he described pizzas topped with...".
 - Format fixes: word count updated to 932; "he thinks is probably fake" added to the hedge list. Title checked: "Probably Fake" carries the entry's own hedge, and the research calls the forgery case "fairly strong (but argued)", so it stays, though it could also be attributed ("A Historian Says...") if Gus wants it extra safe.
 - Remaining concerns for Gus: the research's own pre-air flag stands. Only one strong source (Nowak) supports the letter analysis, and the 1858 Rocco text has Italian secondary sources only. Get the published Nowak article and the Usi e costumi text before airing. Length is 932 words, short of target, not padded.
+
+## Re-check A (2026-10-02)
+- Searched: Nowak 2014 paper title and venue → confirmed, Food, Culture & Society 17(1):103-124 → https://www.researchgate.net/publication/263340437_Folklore_Fakelore_History_Invented_Tradition_and_the_Origins_of_the_Pizza_Margherita
+- Searched: the three problems (seal in the wrong place; Galli signature doesn't match others on file; addressed "Raffaele Esposito Brandi") and the Brandi family taking over the pizzeria in the 1930s → confirmed, but only via a secondary summary of Nowak → https://www.scottspizzatours.com/blog/the-real-story-of-pizza-margherita/
+- Searched: Rocco 1858, Usi e costumi vol. 2 (de Bourcard), thin slices of mozzarella, basil, sometimes tomato → confirmed, Italian secondary only → https://angeloforgione.com/2022/03/16/inesattezze_pizza_pomodoro_mozzarella/
+- Fixes: 1. Section 06 "That's genuinely unknown" changed to "That's really unknown" (banned word). Word count unchanged (932).
+- Not search-verified (checked against research/knowledge only): nothing else of substance. The research's pre-air flag still stands: get the published Nowak article and the 1858 text in hand.

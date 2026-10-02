@@ -23,3 +23,10 @@ Left out on purpose (unverified / keep off air in research): anything about how 
 - Cadence fixes: 2. In 05, "We know... We don't know how. We don't know if..." is now one breath with the repetition kept, and the opening of 07 is joined.
 - Format fixes: word count updated to 842; hedge list updated; a short-length note added to the runtime line.
 - Remaining concerns for Gus: 842 spoken words, under the 900 floor, reported, not padded. The manifest still lists the old title.
+
+
+## Re-check A (2026-10-02)
+- Searched: Zarrillo et al. 2018, Nature Ecology & Evolution: Santa Ana-La Florida, Mayo-Chinchipe, cacao use 5,300 to 2,100 years ago, three lines of evidence (starch grains, theobromine, ancient DNA), at least 1,500 years before Central America; UBC headline → confirmed → https://news.ubc.ca/2018/10/sweet-discovery-new-ubc-study-pushes-back-the-origins-of-chocolate/ ; https://www.sciencenews.org/article/ancient-south-americans-tasted-chocolate-1500-years-anyone-else
+- Searched: Lanaud et al. 2024, Scientific Reports: 352 ceramic items, domestication in the Ecuadorian Amazon by at least 5,300 years ago, use outside the Amazon (Pacific coast) going back about 5,000 years → confirmed → https://www.nature.com/articles/s41598-024-53010-6
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Zarrillo at UBC (UBC News is the source), the Cortés/Aztec/Maya popular-credit framing.

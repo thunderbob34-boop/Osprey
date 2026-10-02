@@ -1,12 +1,12 @@
 # Galileo Saw Neptune and Didn't Know It
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 799 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 804 spoken words.
 - Tone is calm and a little amused. Galileo isn't a fool here, and Le Verrier, Adams and Galle keep full credit for the discovery. The story is "saw it first", not "found it first".
 - Say Galilei as gal-ih-LAY-ee, Le Verrier as luh-VAIR-ee-ay, Galle as GAH-luh, Kowal as KOH-wahl.
 - Every hedge in here is on purpose. Read "saw it first, not found it first", "his notes record it shifting", "observed", "never identified it as a planet", "nobody can say for sure, that's an interpretation" and "the first person we know of" exactly as written. Don't say Galileo noticed or understood that it moved.
 - Visuals: Galileo's notebook pages (the Jupiter drawings), a simple sky chart showing Jupiter, its moons and Neptune nearby, portraits of Le Verrier, Adams and Galle. Nothing sensitive.
-- Good on-screen text moments are Dec 28 1612, Jan 28 1613, Sept 23 1846, 1979 to 1980, and "within 1 arcminute".
+- Good on-screen text moments are Dec 28 1612, Jan 28 1613, Sept 23 1846, 1979 to 1980, and "about 1 arcminute off".
 
 ## 01 Cold Open
 
@@ -30,7 +30,7 @@ And whether Galileo actually noticed that it had moved, and thought it meant som
 
 And this isn't a legend somebody made up. In 1979 and 1980, two researchers, Charles Kowal and Stillman Drake, went back through Galileo's observations and identified Neptune in them, and they published it in the journal Nature in 1980. NASA's own Neptune pages say it too, that Galileo recorded Neptune in his notebook as a star in December 1612.
 
-And here's the detail that makes it convincing, according to the Nature paper, the position Galileo drew comes within one arcminute of where Neptune should have been. An arcminute is a sixtieth of a degree, which is a tiny slice of the sky, so that's a really, really close match. And the Nature paper goes as far as saying Galileo also detected its motion, and that's how they read his notes, but whether Galileo himself thought anything of it is a different question, so we'll stick with what's on the page.
+And here's the detail that makes it convincing, according to the Nature paper, the position Galileo recorded in January 1613 is only about one arcminute off from where Neptune should have been. An arcminute is a sixtieth of a degree, which is a tiny slice of the sky, so that's a really, really close match. And the Nature paper goes as far as saying Galileo also detected its motion, and that's how they read his notes, but whether Galileo himself thought anything of it is a different question, so we'll stick with what's on the page.
 
 ## 05 Saw It, Didn't Discover It
 

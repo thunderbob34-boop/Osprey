@@ -28,3 +28,9 @@ Left out on purpose (unverified / keep off air in research): the Edison lab pate
 - Cadence fixes: 3 joins of choppy stops (sections 02, 03, 04); added 1 "right?" (now 2 in 679 words).
 - Format fixes: word count updated to 679. No dashes. Under 900; the entry can't support more.
 - Remaining concerns for Gus: none.
+
+## Re-check A (2026-10-02)
+- Searched: Le Prince birth year → Science Museum Group gives 1842, Wikipedia and genealogy sources give 28 August 1841 (Metz) → sources conflict → https://collection.sciencemuseumgroup.org.uk/people/cp104449/louis-aime-augustin-le ; https://en.wikipedia.org/wiki/Louis_Le_Prince
+- Searched (same results): disappearance 16 Sept 1890, declared legally dead 1897, first motion pictures in Leeds 1888 → confirmed by SMG.
+- Fixes: (1) "was born in 1842" → "was born in France in the early 1840s" (birth year differs by source). Word count 679 → 683.
+- Not search-verified (checked against research/knowledge only): 14 Oct 1888 Roundhay Garden Scene in the in-laws' garden; single-lens camera; two frames with Adolphe's notes (SMG object page title seen in results); Dijon to Paris train; Lumière 1895 screening; Edison Kinetograph/Kinetoscope; family's Edison suspicion.

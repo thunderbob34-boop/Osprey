@@ -23,3 +23,10 @@ Left out on purpose (unverified / keep off air in research): the hook's "before 
 - Cadence fixes: 3. The cold-open fragment "Not a little before, either" is joined, the "Rise and fall, right?" fragment is folded into the sentence before it, and the opening of 07 is joined.
 - Format fixes: word count updated to 809; reading-notes Caselli line clarified.
 - Remaining concerns for Gus: 809 spoken words, under the 900 floor, reported, not padded. The Bell 1876 patent date is common knowledge but wasn't separately sourced (the entry says "about a decade" is the safe wording, and "33 years" is arithmetic on it).
+
+
+## Re-check A (2026-10-02)
+- Searched: Bain British patent 27 May 1843; US 5,957 on 5 Dec 1848; pendulum timing → confirmed → https://ethw.org/Fax_Machines ; Britannica Bain as facsimile pioneer → https://www.britannica.com/biography/Alexander-Bain-Scottish-inventor
+- Searched: first commercial fax service, Paris to Lyon, 1865, Caselli pantelegraph; IEEE paper "The Caselli pantelegraph and its successors, 1859–1871" → confirmed → https://ieeexplore.ieee.org/abstract/document/6487588/
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Bain from Caithness, Bell's 1876 patent (common knowledge), Coopersmith's book "Faxed".

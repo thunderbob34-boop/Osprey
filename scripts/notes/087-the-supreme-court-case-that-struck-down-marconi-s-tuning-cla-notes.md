@@ -1,6 +1,6 @@
 # Notes: The Supreme Court Case That Took Radio from Marconi
 Research entry: episode-research.md, "## New topic detail" section, entry "### 9." (Marconi, Tesla, and the Supreme Court Radio Fight)
-Spoken words: 845
+Spoken words: 872
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -25,3 +25,8 @@ Left out on purpose (unverified / keep off air in research): Lodge 1894, Jagadis
 - Cadence fixes: 2. Joined "did not decide who invented radio. It wasn't even about that. The case was about..." into one breath; added one "right?" (now 3).
 - Format fixes: title changed (file name and manifest title still use the old wording); word count updated 842 to 845.
 - Remaining concerns for Gus: 845 words, under 900. The Lodge/Bose/Popov earlier-wireless material stays out (the entry marks it not re-verified). Don't use the old "Took Radio from Marconi" title for upload.
+
+## Re-check A (2026-10-02)
+- Searched: Marconi Wireless Telegraph Co. v. United States, 320 U.S. 1 → decided 21 June 1943 (argued 9 and 12 April 1943); Lodge 609,154, Stone 714,756 and Tesla's patent all in the opinion; the Court held that "neither Marconi's tuning of the two antenna circuits nor his use of the Lodge variable inductance to that end involved any invention over Stone"; it also wrote that "Tesla had shown the tuning of the antenna circuit at the transmitter" and that "tuning of the antenna circuit was nothing new", Lodge having taught it → https://supreme.justia.com/cases/federal/us/320/1/ ; https://www.law.cornell.edu/supremecourt/text/320/1 ; https://www.loc.gov/item/usrep320001/
+- Fixes: (1) Section 04 said the Court "specifically wrote about" Stone, "not Tesla", as showing antenna tuning before Marconi. That overstated it: the opinion also says Tesla showed antenna-circuit tuning and Lodge taught it. Section 04 now says Stone was the main patent the Court measured Marconi against ("no invention over Stone") and that the Court wrote Tesla had shown antenna tuning as well. (2) Recap "the Court wrote that Stone showed antenna tuning before Marconi" changed to "the Court wrote that Marconi's antenna tuning involved no invention over Stone". Word count 845 to 872.
+- Not search-verified (checked against research/knowledge only): patent 763,772 number; Tesla's death January 1943; Nobel 1909; the case being about government infringement liability and the four-circuit claims (consistent with the opinion's syllabus).

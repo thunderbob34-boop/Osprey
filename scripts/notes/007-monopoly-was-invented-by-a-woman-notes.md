@@ -23,3 +23,8 @@ Left out on purpose (unverified / keep off air in research): Parker Brothers buy
 - Cadence fixes: 2. Joined "you'd recognise it, it had a square track..." (03). In 04, joined "think about that for a second, the world's most famous game..." and cut the crafted button "It started as a warning, and it ended up as the thing it was warning about."
 - Format fixes: word count updated to 915. Title checked: it matches the entry's own heading ("Monopoly Was Invented by a Woman 30 Years Earlier"), and the script carries the "folk descendant" nuance, so it stays.
 - Remaining concerns for Gus: the pronunciation of Magie is unconfirmed (already flagged in the reading notes). Length is 915 words, short of target, not padded.
+
+## Re-check A (2026-10-02)
+- Searched: Darrow got the game through a Quaker friend and sold it as his own; Magie patented The Landlord's Game in 1904; Atlantic City Quakers' version; NPR headline wording → confirmed; the full NPR headline is "Ever Cheat At Monopoly? So Did Its Creator: He Stole The Idea From A Woman", so "stole is NPR's word" is accurate → https://www.npr.org/2015/03/03/382662772/ever-cheat-at-monopoly-so-did-its-creator-he-stole-the-idea-from-a-woman ; https://www.britannica.com/topic/Landlords-Game
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): patent number 748,626 (matches the patent record as I know it, Jan 1904); square track and Go to Jail corner; 1924 revised patent; Smithsonian headline; 1935 sale.

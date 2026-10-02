@@ -28,3 +28,9 @@ Left out on purpose (unverified / keep off air in research): any claim that this
 - Cadence fixes: 5. Fixed the rhetorical "So who was he?" opener in section 02; joined choppy stops in sections 03 and 05; added 2 "right?" (now 3 in 776 words).
 - Format fixes: word count updated to 776; reading-notes hedge list corrected to match the script's actual wording ("designed it but never built it") and to include the added hedges. No dashes. Under 900; the entry can't support more.
 - Remaining concerns for Gus: the episode lineup's credit framing for the fridge (Gorrie as the popular name) is the entry's own framing, not a sourced claim about public belief; it's phrased as "a name you'll sometimes hear", which is safe.
+
+## Re-check A (2026-10-02)
+- Searched: Louvre AO 20161 → clay tablet, c. 1780 BCE, Old Babylonian, founding of an icehouse at Terqa by Zimri-Lim of Mari → confirmed → https://collections.louvre.fr/en/recherche?q=Zimri-Lim
+- Searched: "which never before had any king built" and Kibri-Dagan → quote confirmed via Lapham's Quarterly (Sasson); Kibri-Dagan confirmed as governor of Terqa, but the ice-melting complaint itself did not show in snippets → https://www.laphamsquarterly.org/roundtable/do-you-want-build-icehouse ; https://en.wikipedia.org/wiki/Terqa
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): the Kibri-Dagan ice-melting letter (single source, Lapham's, per entry); reign dates 1775 to 1761 BCE (middle chronology); Cullen 1748 Glasgow, Evans 1805, Perkins 1834, Gorrie 1851 Patent 8080 and his Statuary Hall statue (all match standard histories).

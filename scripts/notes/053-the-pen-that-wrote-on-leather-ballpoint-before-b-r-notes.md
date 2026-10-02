@@ -23,3 +23,12 @@ Left out on purpose (unverified / keep off air in research): the hook's "leather
 - Cadence fixes: 5. Joined split breaths in 01 ("he was trying to mark leather, and it was too coarse to write a letter with anyway"), 03, 04, 05 ("here's the twist, the ballpoint...") and 06.
 - Format fixes: word count updated to 864. Title checked; it's supported (the pen was meant for marking leather).
 - Remaining concerns for Gus: 864 spoken words, under the 900 floor, reported, not padded. The research entry asks for a second independent strong source naming John J. Loud before script lock; only the primary patent names him. That's still open.
+
+
+## Re-check A (2026-10-02)
+- Searched: Loud patent US 392,046 granted 30 Oct 1888; rotating steel ball in a socket; too coarse for letter-writing; never commercially exploited, patent lapsed → confirmed → https://patents.google.com/patent/US392046A/en ; https://en.wikipedia.org/wiki/Ballpoint_pen
+- Searched: what the patent says the pen was for → the patent's own text is "marking on rough surfaces such as wood, coarse wrapping-paper, and other articles"; "leather" comes from secondary retellings (Wikipedia: "rough surfaces such as leather, as Loud intended"), not the patent → https://patents.google.com/patent/US392046A/en
+- Searched: Britannica, ballpoints date from the late 19th century, commercial models in 1895, Bíró (Hungarian) patented the first satisfactory model in 1938 → confirmed → https://www.britannica.com/technology/ballpoint-pen
+- Searched: a second strong institutional source naming John J. Loud (Britannica, Smithsonian, Science Museum, LoC, ETHW) → none found. The Smithsonian has a "Trade catalogs from John J. Loud" record (https://americanhistory.si.edu/collections/search/object/SILNMAHTL_44748) but nothing ties it to the pen patentee. STILL OPEN.
+- Fixes: (1) "Leather" was stated as the pen's purpose four times. The patent names wood and coarse wrapping paper, so 01, 03 and 06 now give the patent's words and treat leather as "the way it usually gets told/retold", and the closing line says "a pen for marking rough surfaces". Two hedges added to the reading-notes list. Word count 864 → 905. Producer flag: the title "The Pen That Wrote on Leather" leans on the retold version, not the patent; consider a retitle (e.g. "The Ballpoint Before Bíró").
+- Not search-verified (checked against research/knowledge only): filing date 4 Feb 1888 (Google Patents per the entry), Bíró as a journalist, RAF/altitude story, government licence, Miles Martin Pen Co.

@@ -23,3 +23,8 @@ Left out on purpose (unverified / keep off air in research): the Greek showers a
 - Cadence fixes: 3. One-sentence paragraph ("But Leonardo da Vinci saw the same thing...") joined to the paragraph before it. Choppy "Then he pumped... And what he saw..." made into one breath. Cut the button "and it's impressive enough on its own".
 - Format fixes: word count updated 748 to 752; added "nearly five hundred years later" to the hedge list. Spoken words 752 (short, research-limited, accepted).
 - Remaining concerns for Gus: the entry's sources for the Leonardo details are marked "search extract", meaning the full pages weren't read. Plain explanations not in the entry (what the aorta is, sinuses of Valsalva as "the little pockets at the base of the aorta", seeds as a flow tracer) are basic anatomy and physics and make no new claim.
+
+## Re-check A (2026-10-02)
+- Searched: wax cast of an ox heart, glass model of the aortic sinus, water with grass seeds, eddies that help close the valve, c. 1512 to 1513 → confirmed (RCT says he "then made a glass model") → https://www.rct.uk/collection/exhibitions/leonardo-da-vinci/the-queens-gallery-palace-of-holyroodhouse/the-aortic-valve
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Bellhouse and Bellhouse, Nature 1968 (and 1969 follow-up); Gharib et al. 2002, Experiments in Fluids; Circulation Research review; check-valve point (all match the standard citations).

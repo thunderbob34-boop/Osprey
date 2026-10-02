@@ -7,7 +7,7 @@ Spoken words: 836
 | Darwin, On the Origin of Species, 1859 | Entry 'Credited' line |
 | Patrick Matthew, Scottish landowner, appendix to On Naval Timber and Arboriculture, 1831; 28 years before Origin | Britannica, Patrick Matthew; Darwin Online 1831 Matthew text |
 | Matthew's passage was brief, buried in a forestry book, influenced almost no one | Entry 'Evidence strength' line; Royal Society Notes and Records |
-| Darwin's letter to the Gardeners' Chronicle, April 7 1860, admitted Matthew "anticipated" him; said he hadn't known the book | Britannica, Patrick Matthew |
+| Darwin's letter to the Gardeners' Chronicle, April 1860 (dated 13 April, published 21 April, replying to Matthew's 7 April letter), admitted Matthew "anticipated" him; said he hadn't known the book | Britannica, Patrick Matthew |
 | Darwin acknowledged Matthew's 1831 priority in print in 1860 | Britannica, Patrick Matthew |
 | Darwin Correspondence Project holds an 1864 letter from Matthew | Darwin Correspondence Project, letter from Patrick Matthew 1864 |
 | Plagiarism claim is fringe and got a critical review in Evolution | Evolution (OUP) review |
@@ -24,3 +24,10 @@ Left out on purpose (unverified / keep off air in research): Mike Sutton is not 
 - Cadence fixes: 9. Joined "Here's the version most of us learned. In 1859..."; "Scottish landowner. And in 1831..."; "twenty-eight years before Origin of Species. And this isn't..."; "Matthew's passage was brief. It was..."; "here's the part that matters. Darwin didn't hide from this. On April 7th..."; "got there first. And Darwin said..."; "working it out on his own. He developed it independently."; "where Darwin was at that point. He'd had..."; "plain version of who did it first. Patrick Matthew...". Cut the button "He put it on the record himself."
 - Format fixes: word count updated 838 to 827. Length 827 is under the 900 floor (reported; research is narrow, not padded).
 - Remaining concerns for Gus: none.
+
+## Re-check A (2026-10-02)
+- Searched: Gardeners' Chronicle exchange → 7 April 1860 is Matthew's own letter ("Nature's law of selection"); Darwin's reply is dated 13 April and was published 21 April 1860, acknowledging Matthew "anticipated" him and that he hadn't known the book → http://darwin-online.org.uk/converted/Ancillary/1860_Matthew_A143.html ; https://www.britannica.com/biography/Patrick-Matthew
+- Searched: Matthew's letter to Darwin dated 6 June 1864 in the Darwin Correspondence Project → confirmed → https://www.darwinproject.ac.uk/letter/DCP-LETT-4522.xml
+- Searched: critical review in Evolution of Sutton's plagiarism book (2022) → confirmed → https://academic.oup.com/evolut/article/76/9/2218/6966260
+- Fixes: (1) Section 04 said "on April 7th, 1860... Darwin wrote a letter to the Gardeners' Chronicle"; April 7 is Matthew's letter, not Darwin's. Changed to "in April 1860, after Origin of Species was out, Matthew wrote to the Gardeners' Chronicle about his book, and Darwin wrote back to the same paper, and in his letter he admitted...". Reading-notes on-screen text "April 7 1860" → "April 1860"; claim table updated. Word count 827 → 836.
+- Not search-verified (checked against research/knowledge only): 1842 to 1844 sketches; Wallace's Ternate essay reaching Darwin 18 June 1858 (the traditional date; some historians argue it arrived earlier, but 18 June is the standard account); Linnean Society 1 July 1858.

@@ -25,3 +25,10 @@ Left out on purpose (unverified / keep off air in research): any claim that Oldb
 - Cadence fixes: 2. Cold open "wasn't the first comic Americans ever read. Fifty-three years before..." joined into one breath; back-to-back "Now, to be fair" in sections 04 and 05 varied to "And to be fair".
 - Format fixes: word count updated 817 to 826; hedge list updated.
 - Remaining concerns for Gus: 826 spoken words, under the 900 floor, because the research is thin; not padded. Arithmetic checked: 1842 to 1895 is 53, 1837 to 1895 is 58 ("nearly sixty").
+
+## Re-check A (2026-10-02)
+- Searched: Oldbuck 1841 English edition and 1842 Brother Jonathan reprint, and where the piracy came from → the 1841 English edition was copied from Aubert's unauthorized Paris edition, and the 1842 US edition reprinted that English edition → https://www.princeton.edu/~graphicarts/2008/02/the_first_comic_strip_publishe.html (result title only; WebFetch blocked) ; https://en.wikipedia.org/wiki/Rodolphe_T%C3%B6pffer (Brother Jonathan Extra, 14 Sept 1842)
+- Searched: Yellow Kid first in Truth 1894, New York World from 5 May 1895 → confirmed → https://news.osu.edu/history-of-comics-begins-with-yellow-kid/ ; https://cartoons.osu.edu/digital_albums/yellowkid/
+- Searched: Töpffer Vieux Bois drawn 1827, Histoire de Mr. Jabot published 1833 (Geneva), Les Amours de Mr. Vieux Bois 1837 → confirmed → https://www.loc.gov/pictures/item/11024232/ ; https://www.loc.gov/item/11024226
+- Fixes: (1) "That American edition was unauthorized too, it was copied from a pirated French edition" changed to "it was a reprint of that English version, and the English version had itself been copied from a pirated French edition" (the US edition reprinted the 1841 London edition; the London one copied Aubert's pirated French edition). Word count 826 → 839.
+- Not search-verified (checked against research/knowledge only): Britannica's credit wording for the Yellow Kid and Töpffer; Library of Congress catalog record of the US edition.

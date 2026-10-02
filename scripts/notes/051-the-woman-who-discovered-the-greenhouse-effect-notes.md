@@ -27,3 +27,8 @@ Left out on purpose (unverified / keep off air in research): that she "wasn't al
 - Cadence fixes: 7. Joined the choppy run in section 04 ("But Foote didn't read it. Joseph Henry... read it aloud for her. And then the paper was left out... That's not a rumor, by the way.") into breaths; joined "And she didn't stop at the jars. She made the jump..." in section 03; folded the one-line paragraph about the journal into the paragraph before; joined stops in sections 01 and 05; added 1 "right?" (now 2 in 697 words).
 - Format fixes: word count updated to 697. No dashes. Under 900; the entry can't support more.
 - Remaining concerns for Gus: the title says she "discovered the greenhouse effect", which is stronger than the entry's on-air hedge ("first to show CO2 traps heat and connect it to Earth's climate"). The script itself is hedged correctly, but the title may draw "not the full mechanism" comments.
+
+## Re-check A (2026-10-02)
+- Searched: Foote's paper presented 23 Aug 1856 at the AAAS by Joseph Henry, left out of the Proceedings, printed in full in the American Journal of Science and Arts, quote "an atmosphere of that gas would give to our earth a high temperature" → confirmed → https://www.aps.org/apsnews/2023/07/carbon-dioxide-atmosphere-eunice-foote ; https://www.climate.gov/news-features/features/happy-200th-birthday-eunice-foote-hidden-climate-science-pioneer
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Tyndall 1859 and "father of climate science" label; Arrhenius 1896 first CO2 calculation; paper title and November 1856 issue; CO2 cylinder hottest and slowest to cool; unknown whether Tyndall knew her work. Title concern from the first review still stands (not a fact error).

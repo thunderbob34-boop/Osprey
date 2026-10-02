@@ -24,3 +24,10 @@ Left out on purpose (unverified / keep off air in research): anything about what
 - Cadence fixes: 3. Removed the stand-alone "Hundreds of people." paragraph by folding the repetition beat into the previous breath; "EDSAC. That's six years before..." and "built for research, not for fun. It was a computer game..." joined.
 - Format fixes: word count updated 638 to 640.
 - Remaining concerns for Gus: 640 spoken words, the shortest in this batch and well under the 900 floor, because the research is thin; not padded.
+
+## Re-check A (2026-10-02)
+- Searched: BNL "The First Video Game?": 18 Oct 1958 visitors' day, analog computer and oscilloscope, hundreds waited in line, Higinbotham a nuclear physicist → confirmed → https://www.bnl.gov/about/history/firstvideo.php
+- Searched: OXO 1952, A.S. Douglas, EDSAC, built for academic study of human-computer interaction → confirmed → https://www.computerhistory.org/timeline/1952/
+- Searched: whether BNL frames Tennis for Two as "the first built purely for fun" → not found; BNL instead says it "was preceded by several other inventions, one in the late 1940s and two in the early 1950s" and that no single one should get the "first video game" title → https://www.bnl.gov/about/history/firstvideo.php
+- Fixes: (1) Section 04 "Brookhaven's way of framing Tennis for Two is that it was one of the first, and the first one built purely for fun" → now cites BNL's own "preceded by several other inventions" line and says "one of the first, and it was built for visitors to have fun with, not for research" (the "first built purely for fun" framing wasn't on BNL's page, and late-1940s/early-1950s entertainment devices make it doubtful). (2) Section 05 "Tennis for Two in 1958 is the one Brookhaven points to" → "is one of the famous early ones, and Brookhaven's own page says even it had forerunners". Hedge list updated. Word count 640 → 678.
+- Not search-verified (checked against research/knowledge only): Manhattan Project line (attributed to BNL; matches standard biography); Pong 1972.

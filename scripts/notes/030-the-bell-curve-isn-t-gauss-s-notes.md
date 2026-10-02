@@ -26,3 +26,8 @@ Left out on purpose (unverified / keep off air in research): The "predicted his 
 - Cadence fixes: 7. Joined "Here's the version most people pick up... The bell curve..."; "a real reason his name stuck. Gauss linked..."; "working in London. And on November 12th..."; turned the fragment "Seventy-six years." into "that's seventy-six years" while keeping the repetition beat; joined "didn't have it. That came from... James Stirling"; joined "a warning label. The story goes..."; joined the opening of the close.
 - Format fixes: word count updated 803 to 801. Length 801 is under the 900 floor (reported; the death-prediction legend stays off air, not padded).
 - Remaining concerns for Gus: none.
+
+## Re-check A (2026-10-02)
+- Searched: 12 Nov 1733 seven-page Latin pamphlet "Approximatio ad Summam Terminorum Binomii", privately circulated, first derivation of the normal curve; 1933 Nature article "De Moivre's Miscellanea Analytica, and the Origin of the Normal Curve" → confirmed → https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/ ; https://www.nature.com/articles/132713a0
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Doctrine of Chances 2nd ed. 1738; Stirling's sqrt(2 pi); Laplace 1774 and 1812; Gauss 1809; Slaughter's Coffee House (MacTutor, already hedged); ScienceDirect "historical error" quote.

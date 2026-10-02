@@ -25,3 +25,9 @@ Left out on purpose (unverified / keep off air in research): The 1849 New York H
 - Cadence fixes: 11. Joined "Here's how the story usually goes. It's 1853..."; "too thick. So Crum..."; "here's the part that matters. Vanderbilt has..."; the Stiles concession run, and replaced its button "loses its millionaire" with a plain statement; "potatoes fried in slices. And in later editions..."; "thirty-six years before the Saratoga story. And we're going to be careful..."; "invented the chip. Smithsonian says that explicitly."; replaced the rhetorical "So where does that leave George Crum? Well..." with "Now, as for George Crum"; "a real part of this story. He didn't need..."; "here's the honest part. Nobody knows..."; the opening of the close.
 - Format fixes: word count updated 723 to 722. Length 722 is well under the 900 floor (reported; the research is narrow and the 1849 "Eliza" lead and the 1889 line stay off air, so not padded).
 - Remaining concerns for Gus: none.
+
+## Re-check A (2026-10-02)
+- Searched: Kitchiner, The Cook's Oracle, 1817; "potatoes fried in slices", later editions "or shavings"; earliest known chip recipe → confirmed → https://www.history.com/articles/who-invented-potato-chip-saratoga ; https://www.smithsonianmag.com/arts-culture/curious-history-potato-chip-180979232/
+- Searched: T.J. Stiles, Pulitzer-winning Vanderbilt biographer, "there is no truth to the tale" → confirmed → https://www.history.com/articles/who-invented-potato-chip-saratoga
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Kitchiner as "an English doctor" (he styled himself Dr. and is usually so described); LoC and Leeds holdings; Crum's heritage; "historians agree" on Crum popularizing the chip.

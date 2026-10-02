@@ -23,3 +23,8 @@ Left out on purpose (unverified / keep off air in research): any claim that Lipp
 - Cadence fixes: 6 joins, e.g. "Now here's the part that matters. The States General refused his patent. And the reason they gave..." and "Galileo built his in 1609. So Galileo...".
 - Format fixes: Word count updated (852 to 855).
 - Remaining concerns for Gus: Runs 855 words, under 900; the research is the limit.
+
+## Re-check A (2026-10-02)
+- Searched: none. The session-wide web search budget was exhausted before this script was reached, so everything below was checked against the research entry and standard references only.
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Zeeland letter to the States General 25 Sept 1608; States General discussion 2 Oct 1608; convex + concave lenses, about 3x to 4x; patent refused (Dec 1608) because the device couldn't be kept secret, with payment for binocular versions; Metius applying weeks later (mid-Oct 1608); Janssen family's later claim (son's 1655 testimony); Galileo's improved telescopes 1609 and Jupiter's moons 1610; NASA / Rice Galileo Project / AIP / Britannica agreement. All match standard accounts (e.g. Van Helden). Lipperhey was German-born (Wesel) but worked in Middelburg; "Dutch spectacle maker" is fine as used.

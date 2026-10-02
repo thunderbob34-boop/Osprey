@@ -24,3 +24,12 @@ Left out on purpose (unverified / keep off air in research): the name of Pacini'
 - Cadence fixes: 6. Fragments joined in 03 ("he didn't just say..., he said..."; "So that's two people in two countries in the same year..."), 04 and 06; "Not Koch, not 1884, Pacini, 1854" turned into a repetition beat; the crafted closing button "his name is on the germ" replaced with the plain fact.
 - Format fixes: word count updated to 810.
 - Remaining concerns for Gus: 810 spoken words, under the 900 floor, reported, not padded. Snow's water pump in 1854 comes from the entry's hook line, not its confirmed list; it's widely known, but it isn't separately sourced in the entry.
+
+
+## Re-check A (2026-10-02)
+- Searched: Pacini, Florence, 1854, vibrios in the intestines of cholera victims, said the vibrio was the cause; Koch 1884 first to isolate and culture it; 1965 ruling "Vibrio cholerae Pacini 1854" → confirmed → https://pmc.ncbi.nlm.nih.gov/articles/PMC1446732/ ; https://epi-snow.ph.ucla.edu/Stream5_additionalitems_g.html
+- Searched: UCLA page title "First Discoverer of Vibrio Cholerae" → confirmed → https://epi-snow.ph.ucla.edu/Stream5_additionalitems_g.html
+- Searched: "Persistence of Memory and the Comma Bacillus" → exists, but it's a cover-art essay (Polyxeni Potter, EID Nov 2011) about cholera in Haiti, not a history article on Pacini → https://wwwnc.cdc.gov/eid/article/17/11/ac-1711_article
+- Searched: "The enigma of Pacini's Vibrio cholerae discovery" → confirmed, Carboni, J Med Microbiol 70(11), 2021; it also ties Pacini and Snow to the same 1854 year and says Snow identified a water pump → https://pubmed.ncbi.nlm.nih.gov/34738888/
+- Fixes: (1) "a CDC journal article on this history is even titled..." → "an essay about cholera in a CDC journal is even titled...", since the piece is a cover-art essay, not a history of Pacini. Word count 810 → 811.
+- Not search-verified (checked against research/knowledge only): Koch in Egypt and India 1883 to 1884, "published in an Italian journal few people read", Koch "probably" unaware.

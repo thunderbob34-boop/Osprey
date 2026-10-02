@@ -24,3 +24,9 @@ Left out on purpose (unverified / keep off air in research): Thimonnier dying in
 - Cadence fixes: 8. Joined "Here's the version most people know. In 1846..."; "you can see why. A patent..."; cut the punchy fragment "Not even close." after "right?"; joined "didn't just build one. He had about 80..."; joined the riot opener into one breath; joined "Hunt didn't patent it. He dropped it in 1838..." and turned the Paris/New York contrast from three short lines into one sentence; joined the opening of the close; replaced the crafted closer "a Frenchman whose factory lasted about a year" with "it was Barthélemy Thimonnier in Paris".
 - Format fixes: word count updated 868 to 864. Length 864 is under the 900 floor (reported; poorhouse death and second attack stay off air as single-source, not padded).
 - Remaining concerns for Gus: none.
+
+## Re-check A (2026-10-02)
+- Searched: Thimonnier 1830 patent; 1831 went to Paris and built 80 machines for army clothing; mob of tailors wrecked them → confirmed → https://www.britannica.com/biography/Barthelemy-Thimonnier ; https://www.smithsonianmag.com/arts-culture/the-many-many-designs-of-the-sewing-machine-2142740/ ; Science Museum Group copy https://collection.sciencemuseumgroup.org.uk/objects/co44718/
+- Searched: Walter Hunt lockstitch c. 1833/1834, abandoned 1838 over fear for seamstresses, applied 2 April 1853, patent model No. 11,161 dated 1854 at NMAH → confirmed → https://americanhistory.si.edu/collections/object/nmah_1070410 ; https://www.britannica.com/biography/Walter-Hunt
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Howe patent no. 4,750 (1846). Note: Smithsonian Magazine uses "torch-waving" and Britannica's sewing-machine article has used "burned"; the script's "destroyed / smashed" is the conservative wording and stays.

@@ -1,7 +1,7 @@
 # Johnson's Dictionary Wasn't First
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 840 spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 851 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is calm and friendly. Johnson's dictionary was a huge achievement, and the script says so. The point is only that it wasn't first.
 - Say Cawdrey as KAW-dree, Oakham as OH-kum, Rutland as RUT-lund, Cockeram as KOCK-er-um, and Alphabeticall as al-fa-BET-ih-kul.
 - Every hedge in here is on purpose. Read "the first monolingual English dictionary", "about three thousand", "over forty thousand", "around 1580" and "drew on earlier school texts" exactly as written. Never say Cawdrey's was the first English word list of any kind.
@@ -35,7 +35,7 @@ So think about the difference. Cawdrey had about three thousand hard words, a li
 
 Now, to be fair, I want to be careful with what first means here. Cawdrey's was the first monolingual English dictionary, English to English. Before that there were bilingual word lists, like Latin to English, so people were already making lists of words with their meanings in another language. And Cawdrey drew on earlier school texts when he put his together, so he didn't come up with all of it out of nowhere either.
 
-And there's one more twist, Cawdrey didn't even call his book a dictionary, he called it A Table Alphabeticall. The first person to actually call his book a dictionary was Henry Cockeram, in 1623, almost twenty years after Cawdrey, and that's in the same Lady Margaret Hall write-up. So the first one wasn't called a dictionary, the first one to use the word came about nineteen years later, and neither of them was Johnson's.
+And there's one more twist, Cawdrey didn't even call his book a dictionary, he called it A Table Alphabeticall. The first person to actually call one of these English to English books a dictionary was Henry Cockeram, in 1623, almost twenty years after Cawdrey, and that's in the same Lady Margaret Hall write-up. So the first one wasn't called a dictionary, the first English to English one to use the word came about nineteen years later, and neither of them was Johnson's.
 
 ## 06 Fair Credit to Johnson
 
@@ -45,4 +45,4 @@ He just didn't do it first. He did it bigger, and he did it more precisely, and 
 
 ## 07 Who Did It First
 
-So here's the order. Before 1604, there were bilingual word lists, like Latin to English. In 1604, Robert Cawdrey, a schoolmaster, published A Table Alphabeticall, the first monolingual English dictionary, with about three thousand hard words. In 1623, Henry Cockeram was the first to call his book a dictionary. And in 1755, Samuel Johnson published his dictionary, with over forty thousand words. Johnson gets the credit for scale and precision, and he deserves it. Somebody did it first, and it was a schoolmaster with about three thousand hard words.
+So here's the order. Before 1604, there were bilingual word lists, like Latin to English. In 1604, Robert Cawdrey, a schoolmaster, published A Table Alphabeticall, the first monolingual English dictionary, with about three thousand hard words. In 1623, Henry Cockeram was the first to call an English to English book a dictionary. And in 1755, Samuel Johnson published his dictionary, with over forty thousand words. Johnson gets the credit for scale and precision, and he deserves it. Somebody did it first, and it was a schoolmaster with about three thousand hard words.

@@ -24,3 +24,9 @@ Left out on purpose: the 1805 recognition of Jesty by the Original Vaccine Pock 
 - Cadence fixes: 1. The Onesimus intro is joined into one breath ("...shows up in America, because there was an enslaved West African man...").
 - Format fixes: word count updated to 933; the hedge list now says "by sometime between 1465 and 1572". Title checked: The Lancet calls Jesty "the first vaccinator", so it stays.
 - Remaining concerns for Gus: none new. The 1805 recognition and the Ottoman layer stay out, as the writer noted. Length is 933 words, short of target, not padded.
+
+## Re-check A (2026-10-02)
+- Searched: Boylston 1721, prompted by Mather, who learned of inoculation from Onesimus; about 250 inoculated, 6 died → consistent with "248 ... 6 died" (and the script already says "the numbers that come down to us") → https://www.britannica.com/biography/Zabdiel-Boylston ; https://curiosity.lib.harvard.edu/contagion/feature/the-boston-smallpox-epidemic-1721
+- Searched: CDC EID on Ming variolation, "no later than the Chenghua-Longqing period (1465-1572)" → confirmed, matches "by sometime between 1465 and 1572" → https://wwwnc.cdc.gov/eid/article/32/10/26-0729_article
+- Fixes: 1. The close said flatly "Edward Jenner is the father of vaccination", which states as fact the title the episode argues against; changed to "Edward Jenner is called the father of vaccination". Word count 933 to 934; hedge list updated.
+- Not search-verified (checked against research/knowledge only): Jenner 14 May 1796, Nelmes, Phipps age 8; Phipps' cottage; Jesty 1774, Yetminster, wife and two sons; The Lancet title "Benjamin Jesty: the first vaccinator revealed" (URL in research); China and India by the 1500s.

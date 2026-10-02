@@ -24,3 +24,8 @@ Left out on purpose (unverified / keep off air in research): the Niépce-Daguerr
 - Cadence fixes: 5 joins of choppy stops (e.g. "The exposure took at least eight hours. So this was not point and shoot. He set the camera up..." now one breath; the Fox Talbot run in section 05); added 1 "right?" (now 2 in 585 words).
 - Format fixes: word count updated to 585. No dashes. Under 900 words; the entry can't support more without the unverified partnership dates.
 - Remaining concerns for Gus: the 1829 partnership and Niépce's 1833 death are left out pending verification; if you verify them in Britannica, they would strengthen the fair-credit section.
+
+## Re-check A (2026-10-02)
+- Searched: View from the Window at Le Gras, pewter plate with bitumen of Judea, at least eight hours, held by the Harry Ransom Center, 1826/1827 → confirmed (HRC says 1826; other sources 1827 or "1826 or 1827", so the script's hedge is right) → https://www.hrc.utexas.edu/niepce-heliograph/ ; https://www.britannica.com/topic/12-Key-Dates-in-the-History-of-Photography
+- Fixes: none.
+- Not search-verified (checked against research/knowledge only): Daguerre 1839 announcement; Britannica "first permanent photograph" wording; earlier lost Niépce attempts; Fox Talbot as a parallel inventor. (Side note: HRC says the plate is on permanent display in its lobby, so "you can go and look at it" would now be supported if Gus wants it back.)

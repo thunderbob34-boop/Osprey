@@ -1,7 +1,7 @@
 # The Supreme Court Case That Struck Down Marconi's Tuning Claims
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 845 spoken words.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 872 spoken words.
 - Tone is calm and careful. This one is about getting a famous myth exactly right, so the voice should sound like someone reading the court record, not someone cheering for Tesla. Marconi gets real credit.
 - Say Guglielmo Marconi as gool-YEL-mo mar-KO-nee. John Stone Stone is his real name, say both Stones.
 - Every hedge in here is on purpose. Read "key parts", "the broad claims", "had been done before", "did not decide who invented radio" and "the Court wrote" exactly as written. Only say "the Supreme Court said Tesla invented radio" as the myth being corrected, and never put it on screen as a claim.
@@ -28,7 +28,7 @@ And that's what the Court found. It held the broad claims of Marconi's tuning pa
 
 ## 04 John Stone Stone
 
-Now here's the part that matters. The Court wrote that Stone showed antenna tuning before Marconi, Stone, not Tesla, and Tesla's patent is in there, and it matters, but the one the Court specifically wrote about, as showing antenna tuning before Marconi, was John Stone Stone.
+Now here's the part that matters. The earlier patent the Court kept measuring Marconi against was John Stone Stone's, Stone, not Tesla. The Court wrote that Marconi's tuning of his antenna circuits didn't involve any invention over Stone. And Tesla's patent is in there too, and it matters, the Court wrote that Tesla had shown antenna tuning as well, but the main comparison in that part of the ruling was Stone.
 
 So if you only remember one name from this ruling besides Marconi, the court record gives you a pretty good reason to make it Stone.
 
@@ -44,4 +44,4 @@ Oh, one more thing, the ruling came in June 1943, and Tesla had died in January 
 
 ## 06 Who Did It First
 
-So let's put it in order. Marconi got the Nobel Prize in 1909 and he's the name people think of when they think of radio, and he made long-distance wireless practical. But on June 21st, 1943, in Marconi Wireless Telegraph Company versus the United States, the Supreme Court held the broad claims of his tuning patent, number 763,772, invalid, because earlier work by Oliver Lodge, John Stone Stone and Nikola Tesla anticipated them, and the Court wrote that Stone showed antenna tuning before Marconi. It didn't decide who invented radio, it decided that key parts of that patent had been done before. Somebody did it first, and according to the Supreme Court, on tuning it was Lodge, Stone and Tesla.
+So let's put it in order. Marconi got the Nobel Prize in 1909 and he's the name people think of when they think of radio, and he made long-distance wireless practical. But on June 21st, 1943, in Marconi Wireless Telegraph Company versus the United States, the Supreme Court held the broad claims of his tuning patent, number 763,772, invalid, because earlier work by Oliver Lodge, John Stone Stone and Nikola Tesla anticipated them, and the Court wrote that Marconi's antenna tuning involved no invention over Stone. It didn't decide who invented radio, it decided that key parts of that patent had been done before. Somebody did it first, and according to the Supreme Court, on tuning it was Lodge, Stone and Tesla.

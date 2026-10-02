@@ -23,3 +23,9 @@ Left out on purpose (unverified / keep off air in research): the hook's "won the
 - Cadence fixes: 4. Joined split breaths in 01, 02 ("two men, and the first is..."), 03 and 07.
 - Format fixes: word count updated to 762; runtime changed from 6 to about 5 minutes.
 - Remaining concerns for Gus: 762 spoken words, under the 900 floor, reported, not padded. Title checked: "Nearly Invented" is fair given the research's "zipper-like, not a modern zipper".
+
+
+## Re-check A (2026-10-02)
+- Searched: Howe 1851 US Patent 8,540 "Automatic Continuous Clothing Closure", little uptake through lack of marketing; Judson's "clasp locker" 1893; Sundback Hookless No. 2 1913, on sale 1914, patent granted 1917; Goodrich gave it the name zipper → confirmed → https://blog.library.si.edu/blog/2010/05/03/the-up-an-down-history-of-the-zipper/ ; https://americanhistory.si.edu/collections/object/nmah_860486 ; https://www.britannica.com/art/zipper
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): "clasps on a cord" description of Howe's device (primary patent per the entry), B.G. Work by name, the 1923 date for the name, the Goodrich boot at the Smithsonian.
