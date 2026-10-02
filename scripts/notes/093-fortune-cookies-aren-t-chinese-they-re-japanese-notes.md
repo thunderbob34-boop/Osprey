@@ -1,6 +1,6 @@
 # Notes: Fortune Cookies Aren't Chinese - They're Japanese
 Research entry: 100-episode-lineup.md, heading "### 93. Fortune Cookies Aren't Chinese — They're Japanese"
-Spoken words: 797
+Spoken words: 803
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

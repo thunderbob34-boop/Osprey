@@ -1,6 +1,6 @@
 # Notes: James Watt Didn't Invent the Steam Engine
 Research entry: episode-research.md, "## New topic detail" section, entry "### 2."
-Spoken words: 721
+Spoken words: 723
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

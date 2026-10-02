@@ -1,7 +1,7 @@
 # Air Conditioning Wasn't Built for People
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 937 spoken words.
 - Tone is calm and matter-of-fact. Gorrie's ending is sad, keep it plain and flat, the facts carry it.
 - Say Sackett-Wilhelms as SACK-it WIL-helmz, Gorrie as GOR-ee, Apalachicola as ap-uh-latch-ih-KOH-luh, Cramer as KRAY-mer, Tudor as TOO-der.
 - Every hedge in here is on purpose. Read "by about 1841", "Gorrie believed", "his machine made the ice" and "the cooling was a side effect" exactly as written. Never call Gorrie's machine an air conditioner, and never say the paper was wrinkling, the problem was moisture throwing off the colour printing.
@@ -32,7 +32,7 @@ In Apalachicola, Florida, there was a doctor named John Gorrie, and by about 184
 
 And Gorrie went further than that, he built a machine to make the ice himself. He filed his patent petition in 1848, and in 1851 he got US Patent Number 8,080 for it, and that's the first US patent for mechanical refrigeration, a machine that makes ice. The Smithsonian's National Museum of American History has his patent model, so this isn't a legend either, it's a patent with a model in a museum.
 
-Now, I want to be careful here, because people sometimes say Gorrie invented the air conditioner, and that's not right either. His machine made the ice, and the ice cooled the rooms, so his machine wasn't an air conditioner. But a doctor deliberately cooling a room so sick people would be more comfortable, by about 1841, that's cooling a room for people, sixty years before Carrier cooled a room for paper.
+Now, I want to be careful here, because people sometimes say Gorrie invented the air conditioner, and that's not right either. His machine made the ice, and the ice cooled the rooms, so his machine wasn't an air conditioner. But a doctor deliberately cooling a room to help treat sick people, by about 1841, that's cooling a room for people, sixty years before Carrier cooled a room for paper.
 
 ## 05 How It Went for Gorrie
 

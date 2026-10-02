@@ -4,7 +4,7 @@ READING NOTES
 - Runtime is about 5 and a half minutes at a relaxed pace, roughly 841 spoken words.
 - Tone is calm and careful. This one is about getting a famous myth exactly right, so the voice should sound like someone reading the court record, not someone cheering for Tesla. Marconi gets real credit.
 - Say Guglielmo Marconi as gool-YEL-mo mar-KO-nee. John Stone Stone is his real name, say both Stones.
-- Every hedge in here is on purpose. Read "key parts", "the broad claims", "had been done before", "it did not decide who invented radio" and "the Court wrote" exactly as written. Never say or put on screen "the Supreme Court said Tesla invented radio".
+- Every hedge in here is on purpose. Read "key parts", "the broad claims", "had been done before", "did not decide who invented radio" and "the Court wrote" exactly as written. Only say "the Supreme Court said Tesla invented radio" as the myth being corrected, and never put it on screen as a claim.
 - Visuals: the first page of 320 U.S. 1 from the Library of Congress, the patent numbers as text cards, period portraits of Marconi, Tesla, Lodge and Stone. Nothing sensitive.
 - Good on-screen text moments are 1909 Nobel Prize, US Patent 763,772, 320 U.S. 1, June 21 1943, January 1943, and the three earlier patents: Lodge 609,154, Stone 714,756, Tesla 645,576.
 

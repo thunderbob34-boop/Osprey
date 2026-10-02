@@ -1,7 +1,7 @@
 # Kaldi's Goats Never Existed
 
 READING NOTES
-- Runtime is about 7 minutes at a relaxed pace, roughly 1,010 spoken words. The research is solid but narrow, so this one runs short rather than padded.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,014 spoken words. The research is solid but narrow, so this one runs short rather than padded.
 - Tone is calm and a little amused. Nobody's a villain here, the legend just got retold until the details changed.
 - Say Kaldi as KAL-dee, Antoine Faustus Nairon as an-TWAHN FAW-stus nay-RON, Maronite as MARE-oh-nite, Arabia Felix as uh-RAY-bee-uh FEE-licks, Ayaman as AY-uh-man, Sufi as SOO-fee, Ukers as YOO-kers, Fredholm as FRED-holm.
 - Every hedge in here is on purpose. Read "no evidence", "the earliest known", "roughly 800 years", "appears to occur first", "seems to have been made popular", "nobody has shown that" and "as far as the evidence goes" exactly as written.

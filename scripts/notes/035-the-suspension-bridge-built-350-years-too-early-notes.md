@@ -1,6 +1,6 @@
 # Notes: The Suspension Bridge Built 350 Years Too Early
 Research entry: episode-research.md, "# Job 3" section, entry "### 10." (Bridge; suspension-bridge replacement angle)
-Spoken words: 824
+Spoken words: 826
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

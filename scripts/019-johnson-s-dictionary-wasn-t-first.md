@@ -1,7 +1,7 @@
 # Johnson's Dictionary Wasn't First
 
 READING NOTES
-- Runtime is about MINUTES minutes at a relaxed pace, roughly WORDCOUNT spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 850 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is calm and friendly. Johnson's dictionary was a huge achievement, and the script says so. The point is only that it wasn't first.
 - Say Cawdrey as KAW-dree, Oakham as OH-kum, Rutland as RUT-lund, Cockeram as KOCK-er-um, and Alphabeticall as al-fa-BET-ih-kul.
 - Every hedge in here is on purpose. Read "the first monolingual English dictionary", "about three thousand", "over forty thousand", "around 1580" and "drew on earlier school texts" exactly as written. Never say Cawdrey's was the first English word list of any kind.

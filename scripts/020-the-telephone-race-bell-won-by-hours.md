@@ -1,7 +1,7 @@
 # The Telephone Race Bell Won by Hours
 
 READING NOTES
-- Runtime is about MINUTES minutes at a relaxed pace, roughly WORDCOUNT spoken words.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,079 spoken words.
 - Tone is calm and even-handed. The record favors Bell, and the script says so. The bribery story is an allegation, so read it flat, not as a reveal.
 - Say Meucci as meh-OO-chee, Johann Philipp Reis as YOH-hahn FIL-ip RICE, Zenas Wilber as ZEE-nus WIL-ber, Marcellus as mar-SEL-us, and Fossella as fuh-SEL-uh.
 - Every hedge in here is on purpose. Read "a few hours later, according to the Patent Office record", "some accounts say", "an allegation, not proof", "came through badly" and "work in the invention" exactly as written. Gray's filing is always a caveat, never a patent application.

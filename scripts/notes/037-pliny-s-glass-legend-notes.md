@@ -1,6 +1,6 @@
 # Notes: Pliny's Glass Legend
 Research entry: episode-research.md, "# Job 3" section, entry "### 12." (Glass)
-Spoken words: 710
+Spoken words: 711
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

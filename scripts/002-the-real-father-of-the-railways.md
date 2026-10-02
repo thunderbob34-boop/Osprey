@@ -1,7 +1,7 @@
 # The Real Father of the Railways
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 6 to 7 minutes at a relaxed pace, roughly 1,001 spoken words.
 - Tone is calm and matter-of-fact. The ending, where Trevithick dies poor, stays plain and flat, no sad music voice, the facts carry it.
 - Say Trevithick as treh-VITH-ick, Penydarren as pen-uh-DARR-en, Merthyr as MER-thur, Abercynon as ab-er-KUN-un, Hackworth as HACK-worth.
 - Every hedge in here is on purpose. Read "about seventy", "nearly ten miles", "nearly five miles an hour", "first known", "the story goes", "largely" and "counted as" exactly as written. Don't say how long the run took, the sources disagree, and don't put a duration on screen.

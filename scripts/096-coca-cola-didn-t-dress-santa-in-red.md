@@ -1,7 +1,7 @@
 # Coca-Cola Didn't Dress Santa in Red
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 716 spoken words. The research is short, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 718 spoken words. The research is short, so this one runs short rather than padded.
 - Tone is warm and easy, it's a Christmas episode. Coca-Cola is not the bad guy here, the company corrects the myth itself, and it gets full credit for making Santa's look famous worldwide.
 - Say Haddon Sundblom as HAD-un SUND-blum, and Thomas Nast as NAST, rhymes with "fast."
 - Every hedge in here is on purpose. Read "Nast created the look, and red versions were around long before Coke", "mostly black and white", "popularized" and "standardized" exactly as written.
@@ -27,15 +27,13 @@ Think about that for a second. This is a story that makes Coca-Cola look good, i
 
 ## 04 Thomas Nast
 
-So where does the modern Santa come from? A lot of it comes from a cartoonist named Thomas Nast, who drew Santa for Harper's Weekly from the 1860s through the 1880s, including a Santa from 1881. The Smithsonian calls Nast the Civil War cartoonist who created the modern image of Santa Claus, and Nast's drawings set the look we still think of, the plump Santa with the fur trim and the belt. And the Smithsonian has another piece, The Evolving Face of Santa, that walks through how his look changed, so the point is that Santa's look was built up over time, by more than one artist, long before 1931, right?
+Now, the modern Santa, a lot of his look comes from a cartoonist named Thomas Nast, who drew Santa for Harper's Weekly from the 1860s through the 1880s, including a Santa from 1881. The Smithsonian calls Nast the Civil War cartoonist who created the modern image of Santa Claus, and Nast's drawings set the look we still think of, the plump Santa with the fur trim and the belt. And the Smithsonian has another piece, The Evolving Face of Santa, that walks through how his look changed, so the point is that Santa's look was built up over time, by more than one artist, long before 1931, right?
 
 Now, I want to be careful here, because Harper's Weekly was mostly black and white, so I'm not going to tell you Nast's original drawings from the 1860s showed a red suit. What I can tell you is that Nast created the look, and red versions were around long before Coke. Red-suited Santas showed up in prints, on cards and in illustrations well before 1931, and that's what Coca-Cola's own history is pointing to.
 
 ## 05 Fair Credit to Coke
 
-Now, to be fair to Coca-Cola, what they did is a really, really big deal, and every source agrees on it. Coca-Cola popularized Santa's look and standardized it, all over the world. Standardized just means they made one version of Santa the standard one, the one people everywhere picture, so when you think of Santa today, the one in your head probably owes a lot to Sundblom's paintings. Britannica's way of putting it is that Coke didn't invent the red Santa, but it did popularize him.
-
-So the credit Coke gets for making that Santa famous is earned. It's just the red that isn't theirs.
+Now, to be fair to Coca-Cola, what they did is a really, really big deal, and every source agrees on it. Coca-Cola popularized Santa's look and standardized it, all over the world. Standardized just means they made one version of Santa the standard one, the one people everywhere picture, so when you think of Santa today, the one in your head probably owes a lot to Sundblom's paintings. Britannica's way of putting it is that Coke didn't invent the red Santa, but it did popularize him, so the credit Coke gets for making that Santa famous is earned, it's just that the red was there before Coke got to him.
 
 ## 06 Who Did It First
 

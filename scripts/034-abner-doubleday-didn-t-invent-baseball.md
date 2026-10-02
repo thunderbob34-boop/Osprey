@@ -1,7 +1,7 @@
 # Abner Doubleday Didn't Invent Baseball
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 883 spoken words. The research is solid but short, so it runs under the usual length rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 885 spoken words. The research is solid but short, so it runs under the usual length rather than padded.
 - Tone is easygoing and fair. Nobody in this story is a villain, it's a commission that believed a letter.
 - Say Newbery as NEW-bur-ee. Pittsfield is PITS-field.
 - Every hedge in here is on purpose. Read "dated December 1907 and widely reported as 1908", "a game called base-ball", "the oldest known mention", "and similar" and "no single inventor" exactly as written. Never say "the British invented baseball," and don't name anyone else as the real inventor, including Alexander Cartwright.
@@ -22,7 +22,7 @@ Now here's the part that matters, the commission's answer rested on a letter. A 
 
 And there are two problems with that letter. The first is Graves himself, in 1839, the year he was describing, Abner Graves was five years old. So the whole official story came down to what a man remembered, or said he remembered, from when he was five.
 
-The second problem is Doubleday. Abner Doubleday was at West Point from 1838 to 1842, so in 1839, the year he was supposed to be in Cooperstown inventing baseball, he was a cadet at the military academy.
+The second problem is Doubleday. Abner Doubleday was at West Point from 1838 to 1842, so in 1839, the year he was supposed to be in Cooperstown inventing baseball, he was a cadet at the military academy, right?
 
 And it isn't just outside critics saying this is a myth. The Library of Congress covers the game's older roots in its baseball exhibition, Britannica calls the Doubleday story discredited, and the Baseball Hall of Fame's own collection calls the Cooperstown story baseball's creation myth. So even the Hall of Fame says it's a myth, right?
 
@@ -38,7 +38,7 @@ So let's go back to who was playing it first. The earliest record in this story 
 
 And there's more. In England, a man named William Bray wrote in his diary that he played base ball on Easter Monday, March 31st, 1755. So it's in a children's book, and then it's in a man's diary, and both of those are more than eighty years before 1839.
 
-Then in America, in 1791, the town of Pittsfield, Massachusetts passed a law, and that law banned people from playing base ball within eighty yards of the new meeting house, to protect its windows. That's the oldest known mention of baseball in America, and it's not a celebration of the game, it's a town trying to stop it from breaking glass. And that's forty-eight years before the date the commission picked.
+Then in America, in 1791, the town of Pittsfield, Massachusetts passed a law, and that law banned people from playing base ball within eighty yards of the new meeting house, to protect its windows. That's the oldest known mention of baseball in America, and it's not a celebration of the game, it's a town trying to stop it from breaking glass, right? And that's forty-eight years before the date the commission picked.
 
 ## 06 Nobody Invented It
 

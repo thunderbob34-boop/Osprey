@@ -1,10 +1,10 @@
 # Columbus Didn't Prove the Earth Was Round
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 876 spoken words. The research is solid but short, so it runs under the usual length rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 877 spoken words. The research is solid but short, so it runs under the usual length rather than padded.
 - Tone is easygoing, a grade-school myth getting gently put right. No mocking of Columbus or of people who learned the myth.
 - Say Eratosthenes as air-uh-TOSS-thuh-neez, Cyrene as sy-REE-nee, Syene as sy-EE-nee, and stadion as STAY-dee-on.
-- Every hedge in here is on purpose. Read "around 240 BC", "roughly forty thousand kilometers", "remarkably close, maybe within a few percent", "depends on which stadion", "as the historian Jeffrey Burton Russell put it" and "a few thousand miles" exactly as written. Never say Eratosthenes got it "exactly right."
+- Every hedge in here is on purpose. Read "around 240 BC", "roughly forty thousand kilometers", "remarkably close, maybe within a few percent", "depends on which stadion", "The historian Jeffrey Burton Russell put it this way" and "a few thousand miles" exactly as written. Never say Eratosthenes got it "exactly right."
 - Visuals: a simple diagram of two cities and two sun angles for section 04, period portraits and maps, a text card for the Russell line.
 - Good on-screen text moments are 1492, around 240 BC, 7.2 degrees, 1/50 of a circle, about 40,000 km, 154 to 215 meters, and 1828.
 
@@ -36,7 +36,7 @@ And his answer comes out at roughly forty thousand kilometers, which is about tw
 
 And this is where the story really flips. The experts who doubted Columbus didn't think the world was flat. They thought it was bigger than he did. Columbus badly underestimated the size of the planet, and he underestimated how much ocean there was, and that's why he thought Japan was only a few thousand miles west of Europe.
 
-So when the experts said the trip was too far, they were right about the distance, and Columbus was the one who had the planet's size wrong. The people the myth calls the flat Earth crowd were actually the ones with the better numbers.
+So when the experts said the trip was too far, they were right about the distance, and Columbus was the one who had the planet's size wrong. The people the myth calls the flat Earth crowd were actually the ones with the better numbers, right?
 
 ## 06 Fair to Columbus
 
@@ -46,6 +46,4 @@ And whatever else you think about him, he did make the voyage in 1492, and that'
 
 ## 07 Who Did It First
 
-So here's how it actually lines up. Educated Greeks knew the Earth was round centuries before Columbus. Eratosthenes measured how big around it was, around 240 BC, and got remarkably close. The experts who doubted Columbus in 1492 thought the world was bigger than he did, and they were right. And the flat Earth story got attached to him in 1828, by a writer dressing up his biography.
-
-Somebody did it first, and that's what this channel is about.
+So here's how it actually lines up. Educated Greeks knew the Earth was round centuries before Columbus. Eratosthenes measured how big around it was, around 240 BC, and got remarkably close. The experts who doubted Columbus in 1492 thought the world was bigger than he did, and they were right. And the flat Earth story got attached to him in 1828, by a writer dressing up his biography. Somebody did it first, and that's what this channel is about.

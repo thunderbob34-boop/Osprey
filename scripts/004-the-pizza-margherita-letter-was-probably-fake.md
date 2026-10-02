@@ -1,7 +1,7 @@
 # The Pizza Margherita Letter Was Probably Fake
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 934 spoken words.
 - Tone is calm and a little amused, never mocking. Nobody here is being called a crook, the forgery is one historian's argument, and the script says so.
 - Say Raffaele Esposito as rah-fah-EH-leh es-POH-zee-toh, Margherita as mar-geh-REE-tah, Brandi as BRAHN-dee, Emmanuele Rocco as em-mah-noo-EH-leh ROCK-oh, Francesco de Bourcard as fran-CHES-koh deh boor-KAR, Nowak as NOH-vak, pizzaiolo as peet-sigh-OH-loh.
 - Every hedge in here is on purpose. Read "probably", "likely", "Nowak thinks", "his argument, not proven", "supposedly", "sometimes tomato" and "we don't know" exactly as written. Never say the 1858 writer called it a Margherita, he didn't.

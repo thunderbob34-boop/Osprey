@@ -31,9 +31,7 @@ And the Smithsonian calls Marshall the earliest claimant. That's careful wording
 
 And there's more, because before the fair there was a patent too. In New York, a man named Italo Marchiony filed for a patent on September 22nd, 1903, and he was granted US Patent 746,971 in December 1903, for a mold that made edible ice cream cups. And you can look this one up yourself, the patent is on Google Patents under the plain title Mold, with Marchiony's name on it, and the Library of Congress lists patent 746,971 in its research guide on the history of ice cream, so this part isn't a story somebody told later, it's a government document from 1903.
 
-Now, I want to be careful with this one, because his patent gets brought into the cone story, and his patent drawing shows a molded cup, not a rolled waffle cone. So the fair way to say it is that he patented an edible ice cream cup. And Marchiony said he'd been selling them since 1896, but that's his own claim, and I haven't seen anything that backs it up, so I'll leave it as what he said.
-
-But either way, a man in New York had a patent on an edible ice cream cup the year before the fair, and a cookbook in London had edible cornets you could fill with ice sixteen years before it.
+Now, I want to be careful with this one, because his patent gets brought into the cone story, and his patent drawing shows a molded cup, not a rolled waffle cone. So the fair way to say it is that he patented an edible ice cream cup. And Marchiony said he'd been selling them since 1896, but that's his own claim, and I haven't seen anything that backs it up, so I'll leave it as what he said. But either way, a man in New York had a patent on an edible ice cream cup the year before the fair, and a cookbook in London had edible cornets you could fill with ice sixteen years before it.
 
 ## 05 Fair Credit to the Fair
 

@@ -1,7 +1,7 @@
 # Before Google There Was RankDex
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 759 spoken words. The research is short and the priority question is murky, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 760 spoken words. The research is short and the priority question is murky, so this one runs short rather than padded.
 - Tone is calm and careful. This is a "parallel inventor" story, not a "Google copied" story, and the script says so more than once. Page and Brin get full credit.
 - Say Robin Li as ROB-in LEE, Yanhong as YAHN-hong, Baidu as BY-doo, and RankDex as RANK-dex.
 - Every hedge in here is on purpose. Read "parallel inventors", "said to have inspired", "as Forbes and TIME tell it", "by a few weeks", "nobody copied anybody that I can show you" and "a different method" exactly as written.
@@ -15,9 +15,7 @@ The patent behind Google's PageRank cites a link-ranking patent by a man named R
 
 ## 02 The Google Version
 
-The famous version is Larry Page and Sergey Brin, PageRank, and Google, ranking web pages by the links pointing to them. And it really was a big idea, so let me say it plainly. The link idea says, don't just look at the page itself, look at who's pointing to it, because a link from one page to another is a bit like a vote, right? So a page lots of other pages link to is probably worth showing near the top.
-
-And that idea is what everybody associates with Google, so the credit went to Page and Brin, and it stuck.
+The famous version is Larry Page and Sergey Brin, PageRank, and Google, ranking web pages by the links pointing to them. And it really was a big idea, so let me say it plainly. The link idea says, don't just look at the page itself, look at who's pointing to it, because a link from one page to another is a bit like a vote, right? So a page lots of other pages link to is probably worth showing near the top. And that idea is what everybody associates with Google, so the credit went to Page and Brin, and it stuck.
 
 ## 03 Robin Li and RankDex
 
@@ -37,7 +35,7 @@ So Page wasn't sitting around waiting for Li's patent to show up. They were both
 
 And there's more, because the two methods weren't the same either. RankDex added up how relevant the incoming links were, using the anchor text, which is the clickable words in a link. So if a lot of links pointing to a page said the words you searched for, that page went up.
 
-PageRank was a different method. Its scores are recursive, which means a page's score depends on the scores of the pages linking to it, and their scores depend on the pages linking to them, and so on. So a link from an important page counts for more. Both of them rank by links, but they do it in different ways, and that's another reason I'm calling them parallel and not the same thing.
+PageRank was a different method. Its scores are recursive, which means a page's score depends on the scores of the pages linking to it, and their scores depend on the pages linking to them, and so on. So a link from an important page counts for more. Both of them rank by links, right? But they do it in different ways, and that's another reason I'm calling them parallel and not the same thing.
 
 ## 06 Older Than Both of Them
 

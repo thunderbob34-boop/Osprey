@@ -1,7 +1,7 @@
 # The Janitor Who Built the Hoover
 
 READING NOTES
-- Runtime is about MINUTES minutes at a relaxed pace, roughly WORDCOUNT spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 890 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is warm and plain. Spangler is the underdog, Hoover is the businessman who backed him, and nobody in this story is a crook.
 - Say Spangler as SPANG-ler.
 - Every hedge in here is on purpose. Read "patented in 1908", "the portable upright electric vacuum", "not the vacuum cleaner itself" and "nobody seems to know how much" exactly as written.

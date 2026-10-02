@@ -1,7 +1,7 @@
 # Polynesians Reached the Americas
 
 READING NOTES
-- Runtime is about 7 minutes at a relaxed pace, roughly 1091 spoken words.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,091 spoken words.
 - Tone is calm and respectful. The navigators are the heroes, and the honest "we don't know who sailed to whom" is part of the story, not a letdown.
 - Say L'Anse aux Meadows as LAHNS oh MED-ohs, Hōkūle'a as ho-KOO-leh-ah, Mau Piailug as MAU pee-EYE-loog, Aotearoa as ah-oh-teh-ah-ROH-ah, Rapa Nui as RAH-pah NOO-ee, Rapanui (the people) the same way run together, Mataiva as mah-tah-EE-vah, Papeete as pah-pay-AY-tay, Marquesas as mar-KAY-sas, Mangaia as mahn-GAI-ah, Ioannidis as yo-ah-NEE-dis, mattang as MAH-tahng, rebbelib as REB-eh-lib, meddo as MED-oh.
 - Every hedge in here is on purpose. Read "around 1200", "about 1150", "about 1380", "closest to", "can't tell us who sailed to whom", "helped overturn", "still unproven", "contested" and "not necessarily the year anybody first got there" exactly as written. The title is a bit ahead of the evidence, and the script says so out loud in the cold open. Keep that line.

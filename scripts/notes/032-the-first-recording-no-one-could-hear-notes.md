@@ -1,6 +1,6 @@
 # Notes: The First Recording No One Could Hear
 Research entry: episode-research.md, "# Job 3" section, entry "### 49." (Recorded Sound)
-Spoken words: 1009
+Spoken words: 1011
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

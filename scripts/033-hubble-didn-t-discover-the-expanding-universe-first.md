@@ -1,7 +1,7 @@
 # Hubble Didn't Discover the Expanding Universe First
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 797 spoken words. The research for this one is narrow, so it runs under the usual length rather than padded.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 799 spoken words. The research for this one is narrow, so it runs under the usual length rather than padded.
 - Tone is calm and fair. This is not a takedown of Hubble, his data is what convinced people, and the script says so.
 - Say Georges Lemaître as ZHORZH luh-MET-ruh, Vesto Slipher as VES-toh SLY-fer.
 - Every hedge in here is on purpose. Read "about seventy-eight percent", "recommend", "it can't force anybody", "widely accepted" and "some historians" exactly as written. Don't say the IAU "renamed" the law, it recommended a new name.
@@ -22,7 +22,7 @@ And it stuck to Hubble for a pretty plain reason, his 1929 observations were the
 
 Now here's the part most people never hear. Two years earlier, in 1927, a Belgian astronomer named Georges Lemaître published that the universe is expanding. And Lemaître wasn't only an astronomer, he was also a Catholic priest. He didn't just say the universe was getting bigger either, he worked out the same relationship between how far away something is and how fast it's moving away, the velocity and distance relation, the same rule that would end up being called Hubble's law.
 
-And part of the reason it didn't get the attention is where he published, he wrote it in French, in a Belgian journal that not many people read. So the idea was out there, in print, with a date on it, but it was out there in a place most astronomers weren't looking.
+And part of the reason it didn't get the attention is where he published, he wrote it in French, in a Belgian journal that not many people read. So the idea was out there, in print, with a date on it, but it was out there in a place most astronomers weren't looking, right?
 
 And the priority claim, the idea that Lemaître got there first, is widely accepted today, and it's what the 2018 vote was about.
 
@@ -42,7 +42,7 @@ Slipher's redshift measurements are the groundwork underneath both of them, Lema
 
 So in October 2018, the members of the International Astronomical Union, the IAU, voted on whether to change the name, and about seventy-eight percent voted to recommend renaming Hubble's law the Hubble-Lemaître law. The journals Nature and Science both reported it, and a vote like that is the field itself putting on record who got there first.
 
-Now, two things to be careful about here. First, the IAU recommends the new name, it can't force anybody to use it, so you'll still hear people say Hubble's law. And second, not everybody liked how it was done. Some historians argued that the background material the IAU put out to explain the change was bad history, and there's a paper making the case against renaming the law at all. So the vote happened, and most of the members who voted backed it, but the argument over how to tell the story didn't stop.
+Now, two things to be careful about here. First, the IAU recommends the new name, it can't force anybody to use it, so you'll still hear people say Hubble's law. And second, not everybody liked how it was done. Some historians argued that the background material the IAU put out to explain the change was bad history, and there's a paper making the case against renaming the law at all. So the vote happened, and most of the members who voted backed it, but the argument over how to tell the story didn't stop, right?
 
 ## 07 Who Did It First
 

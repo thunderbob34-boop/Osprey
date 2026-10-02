@@ -1,10 +1,10 @@
 # Electric Cars Were Winning in 1900
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 798 spoken words.
 - Tone is calm and a little surprised at the numbers. Modern electric car makers get fair credit, nobody is called a fake.
 - Say Lohner as LOH-ner, Porsche as POR-shuh, Semper Vivus as SEM-per VEE-vus.
-- Every hedge in here is on purpose. Read "around 1900", "roughly a third", "outnumbered", "share of the cars, not sales", "the 1830s", "according to Britannica", "according to Porsche" and "by about 1905" exactly as written. Never say "outsold", and never put a single year on Anderson's carriage.
+- Every hedge in here is on purpose. Read "around 1900", "roughly a third", "outnumbered", "share of cars on the road, not sales", "the 1830s", "according to Britannica", "according to Porsche" and "by about 1905" exactly as written. Only say "outsold" in the line that rules it out, and never put a single year on Anderson's carriage.
 - Visuals: period photos of early electric cars and New York electric cabs, a simple bar or pie graphic of 40 percent steam, 38 percent electric, 22 percent gasoline labeled "share of cars, around 1900", Paris 1900 Exposition images. Nothing sensitive.
 - Good on-screen text moments are the 1830s, around 1900, 40% steam / 38% electric / 22% gasoline, 60+ electric taxis, Paris 1900, and about 1905.
 
@@ -26,22 +26,22 @@ The story goes back to the 1830s, to a Scottish inventor named Robert Anderson, 
 
 Now here's the part that matters. By around 1900, electric cars made up roughly a third of the cars in America. The US Department of Energy says about a third, and Britannica says about a third. And Britannica gives a breakdown, according to Britannica, about forty percent of American cars were steam, about thirty-eight percent were electric, and about twenty-two percent were gasoline.
 
-So gasoline was last. Steam was first, electric was right behind it, and gasoline was in third place out of three, right? And to be careful about it, those numbers are the share of cars on the road, not sales, so the right way to say it is that electric cars outnumbered gas cars, not that they outsold them. We don't have yearly sales numbers here, we've got the share of the cars that were out there.
+So gasoline was last. Steam was first, and a steam car is what it sounds like, it boils water and the steam drives it, the same basic idea as a steam locomotive. Electric was right behind steam, and gasoline was in third place out of three, right? And to be careful about it, those numbers are the share of cars on the road, not sales, so the right way to say it is that electric cars outnumbered gas cars, not that they outsold them. We don't have yearly sales numbers here, we've got the share of the cars that were out there.
 
-And there's more. In New York City there was a fleet of more than sixty electric taxis. So this wasn't one oddball machine somewhere, there were electric cabs working in the biggest city in the country.
+And there's more. In New York City there was a fleet of more than sixty electric taxis. So this wasn't one oddball machine somewhere, there were electric cabs working in New York City, and National Geographic has written about that fleet as a forgotten piece of the city's history. And the Smithsonian's National Museum of American History covers these early electric cars too, in its America on the Move exhibition, so this is well documented, it's just not well known.
 
 ## 05 Porsche's Electric Car
 
-Oh, one more thing, and this one surprises people. In 1900, at the Paris Exposition, Ferdinand Porsche showed a car called the Lohner-Porsche, and it had electric motors in the wheel hubs, meaning the motors sat right in the wheels themselves. And there was another Porsche car, the Semper Vivus, that's described as the first functional hybrid, gas and electric together. Now, that hybrid claim comes mainly from Porsche's own newsroom, so that's according to Porsche, and you should hear it that way. But the Porsche name, the one you think of with sports cars, was on an electric car in 1900.
+Oh, one more thing, and this one surprises people. According to Porsche's own history, in 1900, at the Paris Exposition, Ferdinand Porsche showed a car called the Lohner-Porsche, and it had electric motors in the wheel hubs, meaning the motors sat right in the wheels themselves. And Porsche describes another of his cars, the Semper Vivus, as the first functional hybrid, gas and electric together. Now, these Porsche details come mainly from Porsche's own newsroom, and that first-hybrid claim especially, so that's according to Porsche, and you should hear it that way. But by the company's own account, the Porsche name was on an electric car in 1900.
 
 ## 06 To Be Fair
 
-Now, to be fair, gasoline did win, and it won fast. By about 1905 gas cars were dominant, so the electric lead didn't last long at all. And the modern electric car makers, Tesla and the rest, did build something those early cars never were, they made electric cars that people buy in big numbers again, and that's a real accomplishment.
+Now, to be fair, gasoline did win, and it won fast. By about 1905 gas cars were dominant, so the electric car's moment didn't last long at all. And today's electric cars are a very different machine from anything on the road in 1900, and the people who built them, Tesla and the rest, deserve real credit for that.
 
 But they didn't invent the electric car. The idea goes back to the 1830s, and around 1900 electric cars outnumbered gasoline cars on American roads.
 
 ## 07 Who Did It First
 
-So let's put it in order. In the 1830s a Scottish inventor named Robert Anderson built a crude electric carriage that ran on batteries you couldn't recharge. Around 1900, roughly a third of American cars were electric, according to Britannica about forty percent steam, thirty-eight percent electric and twenty-two percent gasoline, and New York had more than sixty electric taxis. In 1900 Porsche showed an electric car in Paris. And by about 1905, gasoline had taken over.
+So let's put it in order. In the 1830s a Scottish inventor named Robert Anderson built a crude electric carriage that ran on batteries you couldn't recharge. Around 1900, roughly a third of American cars were electric, according to Britannica about forty percent steam, thirty-eight percent electric and twenty-two percent gasoline, and New York had more than sixty electric taxis. In 1900, according to Porsche, Ferdinand Porsche showed an electric car in Paris. And by about 1905, gasoline had taken over.
 
-So the electric car isn't the new kid, it's one of the oldest kinds of car there is, and for a while it was beating gasoline. Somebody did it first, and it was more than a hundred years ago.
+So the electric car isn't the new kid, it goes back to the 1830s, and for a while it was ahead of gasoline. Somebody did it first, and it was a Scottish inventor named Robert Anderson.

@@ -1,7 +1,7 @@
 # Pliny's Glass Legend
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 710 spoken words. The research is short and there's no famous inventor to build on, so this runs well under the usual length rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 711 spoken words. The research is short and there's no famous inventor to build on, so this runs well under the usual length rather than padded.
 - Tone is relaxed and curious. This one has no villain and no famous inventor, it's a good story meeting the evidence.
 - Say Pliny as PLIN-ee, natron as NAY-tron, Belus as BEE-lus, Phoenicia as fuh-NEE-shuh, Mesopotamia as mes-uh-puh-TAY-mee-uh.
 - Every hedge in here is on purpose. Read "nobody really knows", "more than four thousand years ago", "by the fourteen hundreds BC", "we can't call it impossible" and "nobody can check it" exactly as written. Pliny's people are "merchants", not sailors. Never say a beach fire couldn't get hot enough, that claim was cut.
@@ -30,7 +30,7 @@ But what we can check is how old glass is, and it's a lot older than Pliny. Peop
 
 And there's more. By the fourteen hundreds BC, people in Mesopotamia and in Egypt were making glass vessels, actual containers. Some were what's called core-formed, where the glass is built up around a core that's taken out afterward, and some were cast, which means shaped in a mold. The Metropolitan Museum of Art dates those to the fourteen hundreds BC, and the Smithsonian describes glassmaking really taking off in what's called the Late Bronze Age, which is that same stretch of history.
 
-So glass beads were being made more than two thousand years before Pliny wrote his story, and glass vessels were being made well over a thousand years before he wrote it.
+So glass beads were being made more than two thousand years before Pliny wrote his story, and glass vessels were being made well over a thousand years before he wrote it, right?
 
 ## 05 Fair Credit to Pliny
 

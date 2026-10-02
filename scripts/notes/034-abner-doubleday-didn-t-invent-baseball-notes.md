@@ -1,6 +1,6 @@
 # Notes: Abner Doubleday Didn't Invent Baseball
 Research entry: 100-episode-lineup.md, heading "### 34. Abner Doubleday Didn't Invent Baseball"
-Spoken words: 883
+Spoken words: 885
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

@@ -1,7 +1,7 @@
 # The First Recording No One Could Hear
 
 READING NOTES
-- Runtime is about 7 minutes at a relaxed pace, roughly 1,009 spoken words. The research is solid but narrow, so this one runs short on purpose.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,011 spoken words. The research is solid but narrow, so this one runs short on purpose.
 - Tone is calm and curious. The speed mix-up in section 05 is the fun part, so let it land, but don't play it for laughs.
 - Say Édouard-Léon Scott de Martinville as ay-DWAR lay-OHN SKOT duh mar-tan-VEEL, phonautograph as foh-NOH-toh-graf, Au Clair de la Lune as oh CLAIR duh lah LOON, Charles Cros as SHARL KROH, pli cacheté as PLEE cash-TAY, paléophone as pay-LAY-oh-fone, and Académie des sciences as ah-kah-day-MEE day see-AHNSS.
 - Every hedge in here is on purpose. Read "possibly Scott himself", "roughly twenty seconds", "oldest recognizable recording" and "we'll just say 1857" exactly as written. Never say "it's definitely Scott singing."
@@ -18,7 +18,7 @@ The version most of us got goes like this, in 1877 Thomas Edison builds the phon
 
 ## 03 Scott and the Phonautograph
 
-His name was Édouard-Léon Scott de Martinville, he was a typesetter in Paris, and in 1857 he patented a machine called the phonautograph. What it did was trace sound, sound went into the machine and it drew the sound waves as wavy lines in a layer of soot, on paper or on glass. So what you got out of it was a picture of a sound, a squiggle on a page.
+His name was Édouard-Léon Scott de Martinville, he was a typesetter in Paris, and in 1857 he patented a machine called the phonautograph. What it did was trace sound, sound went into the machine and it drew the sound waves as wavy lines in a layer of soot, on paper or on glass. So what you got out of it was a picture of a sound, a squiggle on a page, right?
 
 Now here's the part that matters, Scott never meant for anybody to play those squiggles back. They were for looking at. He wanted to see sound, not play it back, and as far as he was concerned the job was done once the line was on the paper.
 
@@ -44,7 +44,7 @@ Now, to be fair to Edison, there's a real first in his story, and it's an import
 
 But even the playback idea has somebody ahead of Edison. On April 30th, 1877, a Frenchman named Charles Cros deposited a sealed packet at the French Academy of Sciences, the Académie des sciences. The French call that a pli cacheté, and it's basically a sealed, dated envelope, so if anybody argues later about who thought of something first, there's a record. And what was inside Cros's packet was a design for playing back sound from traced sound waves, the very kind of squiggle Scott had been making. Later on it got called the paléophone.
 
-The catch is Cros never built it. He didn't have the resources to make a working machine, so he had the idea on paper, and Edison's phonograph came along later that same year, 1877, and Edison had one that worked.
+The catch is Cros never built it, right? He didn't have the resources to make a working machine, so he had the idea on paper, and Edison's phonograph came along later that same year, 1877, and Edison had one that worked.
 
 ## 07 Who Did It First
 

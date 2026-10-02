@@ -1,10 +1,10 @@
 # The Doctor Who Beat Ether Day by Four Years
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 922 spoken words.
 - Tone is calm and matter-of-fact. The surgery talk stays plain, no wincing in the voice, the facts carry it.
 - Say Venable as VEN-uh-bul, Magendie as mah-zhahn-DEE, Hanaoka Seishu as hah-nah-OH-kah SAY-shoo, Kan Aiya as KAHN eye-YAH, mafutsusan as mah-foo-TSOO-sahn, tsusensan as TSOO-sen-sahn.
-- Every hedge in here is on purpose. Read "many doctors", "some saw it", "some opposed it" and "the way I'd put it" exactly as written. Never say doctors thought screaming was a good sign, that line has no source behind it.
+- Every hedge in here is on purpose. Read "many doctors", "some saw it as a sign", "some opposed anesthesia", "the way I see it" and "the way I'd put it" exactly as written. Never say doctors thought screaming was a good sign, that line has no source behind it.
 - Leave out the other names people bring up in the ether fight. They weren't checked for this episode.
 - Visuals: no surgical or tumor imagery. Use text cards, period portraits, and period engravings of the buildings.
 - Good on-screen text moments are Oct 13 1804, March 30 1842, 1849, Oct 16 1846, and March 30, National Doctors' Day.

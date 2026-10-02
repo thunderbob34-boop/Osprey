@@ -1,7 +1,7 @@
 # Thomas Crapper Didn't Invent the Toilet
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 925 spoken words.
 - Tone is calm and matter-of-fact with a little room to smile. The name is funny on its own, so don't push the jokes, just say it straight.
 - Say Knossos as NOSS-oss, Harington as HAIR-ing-tun, Ajax as AY-jax, Reyburn as RAY-burn.
 - Every hedge in here is on purpose. Read "about 3,500 years ago", "about 1700 to 1450 BC", "may come from", "partly tongue-in-cheek", "one review" and "even earlier" exactly as written. Knossos had no cistern, so never say "roof cisterns", say rainwater from the roof.

@@ -1,7 +1,7 @@
 # McDonald's Didn't Invent Fast Food
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 6 to 7 minutes at a relaxed pace, roughly 1,016 spoken words.
 - Tone is calm and matter-of-fact, a little lighter than usual. It's burgers, let it be easy, but no jokes at anybody's expense.
 - Say Kroc as KROHK, Des Plaines as deh PLAINZ, Hardart as HAR-dart, Quisisana as kwee-zee-ZAH-nah, Yoshinoya as yoh-shee-NOH-yah, Nihonbashi as nee-hohn-BAH-shee, thermopolium as ther-moh-POH-lee-um (plural thermopolia, ther-moh-POH-lee-uh), Nereid as NEER-ee-id.
 - Every hedge in here is on purpose. Read "usually called", "often considered", "according to the company", "widely credited", "one of the first", "reportedly", "about eighty" and "nearly two thousand years ago" exactly as written. Never call Red's the first drive-through flat out, and keep Yoshinoya as the company's own account.
@@ -22,7 +22,7 @@ But it didn't start there, right? The fast-food burger chain, the standardized o
 
 White Castle opened in Wichita, Kansas, in 1921, started by Walt Anderson and a partner named Ingram. And Anderson had a method, flattened burgers cooked fast on a griddle, and it wasn't just the burger, it was the whole system around it. There was a written prep manual, so every location made the food the same way, there were paper hats, and there were strict cleanliness rules.
 
-And that's the thing that makes it a fast-food chain and not just a burger stand. A written manual means the food is the same wherever you go, and that's the whole idea of a chain. By 1931 there were 116 White Castles in eleven states, and it's usually called the first fast-food chain, the Kansas Historical Society and Britannica and the Ohio History Connection, which holds the company's archives, all back that up. It's often considered the original American fast-food chain. So White Castle in 1921 is twenty-seven years before the Speedee system in 1948, and by 1931 it was already in eleven states.
+And that's the thing that makes it a fast-food chain and not just a burger stand. A written manual means the food is the same wherever you go, and that's the whole idea of a chain, right? By 1931 there were 116 White Castles in eleven states, and it's usually called the first fast-food chain, the Kansas Historical Society and Britannica and the Ohio History Connection, which holds the company's archives, all back that up. It's often considered the original American fast-food chain. So White Castle in 1921 is twenty-seven years before the Speedee system in 1948, and by 1931 it was already in eleven states.
 
 ## 04 Even Faster
 
@@ -30,7 +30,7 @@ And there's more, because if you mean fast food in the sense of getting your foo
 
 The machines came from Germany, from Berlin. The company that built them was called Quisisana, and the machine was designed in Switzerland and made in Germany. So in 1902, in Philadelphia, people were getting food out of a machine with no waiter at all.
 
-And over in Tokyo, according to the company, Yoshinoya was serving quick beef bowls to fish-market workers in Nihonbashi from 1899. Now I want to be clear, that's the company's own account, and the research couldn't find a strong independent source for it, so take it as the company's story.
+And over in Tokyo, according to the company, Yoshinoya was serving quick beef bowls to fish-market workers in Nihonbashi from 1899. Now I want to be clear, that's the company's own account, and there's no strong independent source for it that we could find, so take it as the company's story.
 
 ## 05 The Drive-Through
 
@@ -52,4 +52,4 @@ Now, to be fair to McDonald's, the Speedee Service System in 1948 was a real sys
 
 ## 08 Who Was First
 
-So here's where it lands. McDonald's gets the credit for fast food, with the Speedee system in 1948 and Ray Kroc's first franchise in 1955. But White Castle opened in Wichita in 1921, with a written prep manual, paper hats and strict cleanliness rules, and by 1931 it had 116 restaurants in eleven states, and it's usually called the first fast-food chain. Horn and Hardart's Automat was serving food with no waiter in Philadelphia in 1902, and nearly two thousand years ago, Pompeii had about eighty street-counter snack bars. Somebody did it first, and in the burger business it was White Castle, seventeen years before Speedee.
+So here's where it lands. McDonald's gets the credit for fast food, with the Speedee system in 1948 and Ray Kroc's first franchise in 1955. But White Castle opened in Wichita in 1921, with a written prep manual, paper hats and strict cleanliness rules, and by 1931 it had 116 restaurants in eleven states, and it's usually called the first fast-food chain. Horn and Hardart's Automat was serving food with no waiter in Philadelphia in 1902, and nearly two thousand years ago, Pompeii had street-counter snack bars, about eighty of them that we know of. Somebody did it first, and in the burger business it was White Castle, seventeen years before Speedee.

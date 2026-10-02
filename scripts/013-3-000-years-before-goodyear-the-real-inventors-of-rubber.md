@@ -1,7 +1,7 @@
 # 3,000 Years Before Goodyear: The Real Inventors of Rubber
 
 READING NOTES
-- Runtime is about MINUTES minutes at a relaxed pace, roughly WORDCOUNT spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 905 spoken words.
 - Tone is calm and impressed. The ancient rubber makers are the heroes, and Goodyear is the man who found the industrial version, not a villain.
 - Say Castilla elastica as kas-TEE-yah eh-LAS-tih-kah, Ipomoea alba as ip-oh-MEE-ah AL-bah, Mesoamerica as MEZ-oh-uh-MAIR-ih-kuh, Hosler as HOZE-ler, and Tarkanian as tar-KAY-nee-un.
 - Every hedge in here is on purpose. Read "by about 1600 BC", "the researchers' estimate", "more than three thousand years", "according to Britain's Science Museum Group", and "that's not vulcanization" exactly as written. Never call the ancient method vulcanization, on screen or in an ad-lib.
@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-Charles Goodyear got the name on the tire, but someone was making bouncing rubber balls three thousand years before he was born. And these weren't lucky accidents either, the people of ancient Mexico and Central America had a recipe for rubber, and they changed the recipe depending on what they were making, a bouncier rubber for balls and a tougher rubber for the soles of sandals. So this is a story about a famous American inventor who really did figure something out, and the people who figured out their own version of it more than three thousand years before him.
+Charles Goodyear got the name on the tire, but someone was making bouncing rubber balls three thousand years before he was born. And these weren't lucky accidents either, the people of ancient Mexico and Central America had a recipe for rubber, and they changed the recipe depending on what they were making, a bouncier rubber for balls and a tougher rubber for the soles of sandals. So this is a story about a famous inventor who really did figure something out, and the people who figured out their own version of it more than three thousand years before him.
 
 ## 02 The Goodyear Version
 
@@ -34,7 +34,7 @@ That's the part I keep coming back to. They didn't stumble onto a sticky materia
 
 Now, to be fair to Goodyear, what he did was real, and it's not the same thing. The Science paper credits organic compounds in the vine juice for what happens to the latex, not sulfur, and not sulfur and heat, so that's not vulcanization. It's a different chemistry that gets you to a similar result, which is rubber you can actually use.
 
-So you shouldn't say the ancient Mesoamericans invented vulcanization, because they didn't, they invented their own way of making rubber. And Goodyear's 1839 discovery still stands as the industrial process, the sulfur and heat method, and that's still the industrial process. That's a big deal, and he deserves full credit for it. He just didn't invent rubber, and he wasn't the first person to turn tree sap into a material people could rely on.
+So you shouldn't say the ancient Mesoamericans invented vulcanization, because they didn't, they invented their own way of making rubber. And Goodyear's 1839 discovery, the sulfur and heat method, still stands as the industrial process. That's a big deal, and he deserves full credit for it. He just didn't invent rubber, and he wasn't the first person to turn tree sap into a material people could rely on.
 
 ## 06 The Race in England
 

@@ -1,7 +1,7 @@
 # Kellogg Didn't Invent Breakfast Cereal
 
 READING NOTES
-- Runtime is about 4 and a half minutes at a relaxed pace, roughly 644 spoken words. The research is short and the lawsuit details are unknown, so this runs well under the usual length rather than padded. It could pair with another short episode or run as a short.
+- Runtime is about 4 and a half minutes at a relaxed pace, roughly 645 spoken words. The research is short and the lawsuit details are unknown, so this runs well under the usual length rather than padded.
 - Tone is light and easygoing, it's a breakfast story. The lawsuit is told plainly with no made-up drama.
 - Say Granula as GRAN-yuh-luh, Dansville as DANZ-vil.
 - Every hedge in here is on purpose. Read "probably the first ready-to-eat cereal", "late 1870s or early 1880s" and "Jackson sued, and Kellogg changed the name" exactly as written. Don't add any amount, ruling or courtroom detail about the lawsuit, because none is known.
@@ -22,7 +22,7 @@ Now, Kellogg's real fame came from corn flakes, in the 1890s. That's the thing h
 
 The man who made it was James Caleb Jackson. He ran a water-cure sanitarium, which was a kind of health resort, in Dansville, New York. And in 1863 he came up with something he called Granula.
 
-Here's how he made it. He took graham flour, which is a coarse whole wheat flour, and baked it into brittle cakes. Then he broke those up into crumbs, and baked them again. And what you ended up with was so hard that you had to soak it in milk overnight before you could eat it. So this was not a pour-it-and-eat-it situation, this was plan-ahead-the-night-before cereal.
+Here's how he made it. He took graham flour, which is a coarse whole wheat flour, and baked it into brittle cakes. Then he broke those up into crumbs, and baked them again. And what you ended up with was so hard that you had to soak it in milk overnight before you could eat it. So this was not a pour-it-and-eat-it situation, this was plan-ahead-the-night-before cereal, right?
 
 And Britannica says Jackson's Granula was probably the first ready-to-eat cereal. I want to keep that word, probably, because that's how Britannica puts it. But it's the earliest one in this story by a long way, and it's 1863.
 
@@ -42,6 +42,4 @@ So the fair way to say it is that Kellogg is the corn flakes name, and that's ea
 
 ## 06 Who Did It First
 
-So here's how it lines up. In 1863, James Caleb Jackson made Granula at his sanitarium in Dansville, New York, out of graham flour baked, crumbled and baked again, and it was so hard you had to soak it overnight. Britannica calls it probably the first ready-to-eat cereal. In the late 1870s or early 1880s, Kellogg made a similar cereal with the same name, Jackson sued, and Kellogg changed it to granola. And Kellogg's real fame came later, with corn flakes, in the 1890s.
-
-Somebody did it first, and that's what this channel is about.
+So here's how it lines up. In 1863, James Caleb Jackson made Granula at his sanitarium in Dansville, New York, out of graham flour baked, crumbled and baked again, and it was so hard you had to soak it overnight. Britannica calls it probably the first ready-to-eat cereal. In the late 1870s or early 1880s, Kellogg made a similar cereal with the same name, Jackson sued, and Kellogg changed it to granola. And Kellogg's real fame came later, with corn flakes, in the 1890s. Somebody did it first, and that's what this channel is about.

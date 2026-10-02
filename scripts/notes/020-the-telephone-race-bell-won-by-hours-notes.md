@@ -1,6 +1,6 @@
 # Notes: The Telephone Race Bell Won by Hours
 Research entry: episode-research.md, "# Job 3" section, entry "### 38." (Telephone)
-Spoken words: 1078
+Spoken words: 1079
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

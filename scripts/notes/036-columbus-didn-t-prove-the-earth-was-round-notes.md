@@ -1,6 +1,6 @@
 # Notes: Columbus Didn't Prove the Earth Was Round
 Research entry: 100-episode-lineup.md, heading "### 36. Columbus Didn't Prove the Earth Was Round"
-Spoken words: 876
+Spoken words: 877
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

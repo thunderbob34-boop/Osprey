@@ -1,7 +1,7 @@
 # Henry Ford Didn't Invent the Car
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 948 spoken words.
 - Tone is calm and matter-of-fact. Ford gets real credit here, the moving line is his team's, so no gotcha voice.
 - Say Benz as BENTS, Cugnot as koon-YOH, fardier as far-DYAY, Musee des Arts et Metiers as myoo-ZAY dayz AR ay may-TYAY, Siegfried Marcus as ZEEG-freed MAR-kus, Technisches Museum Wien as TEK-nish-es moo-ZAY-um VEEN.
 - Spell it Carl Benz on screen, that's how the UNESCO register spells it.
@@ -29,15 +29,13 @@ And there's more, because if you mean any vehicle that moves under its own power
 
 ## 05 The Assembly Line
 
-Now here's the part that most people really don't know. Ford didn't invent the assembly line either.
-
-Ransom Olds was building Curved Dash Oldsmobiles on a progressive line by 1901, and what that means is the cars rolled from station to station on dollies, so the car moved to the workers instead of the workers moving around the car. There wasn't a power conveyor pulling the line along, but it was an early assembly line, and the Curved Dash is considered the first mass-produced gasoline car. And the Smithsonian's National Museum of American History says it outright, Olds's factory was the first to build cars on an assembly line.
+Now here's the part that most people really don't know, Ford didn't invent the assembly line either. Ransom Olds was building Curved Dash Oldsmobiles on a progressive line by 1901, and what that means is the cars rolled from station to station on dollies, so the car moved to the workers instead of the workers moving around the car. There wasn't a power conveyor pulling the line along, but it was an early assembly line, and the Curved Dash is considered the first mass-produced gasoline car. And the Smithsonian's National Museum of American History says it outright, Olds's factory was the first to build cars on an assembly line.
 
 And even before that, Chicago meatpackers had moving disassembly lines. That's the same idea in reverse, instead of a car getting put together piece by piece as it moves along, an animal carcass gets taken apart piece by piece as it moves along. And Ford's own engineers cited that slaughterhouse disassembly line when they talked about where the idea came from.
 
 ## 06 What Ford Actually Did
 
-Now, to be fair to Henry Ford, what his team did in 1913 is a really, really big deal. They made the line move. They phased it in through 1913, starting with smaller parts like magnetos in April, and then the chassis later that year, so instead of cars getting pushed from station to station, the line itself carried the work past the workers.
+Now, to be fair to Henry Ford, what his team did in 1913 is a really, really big deal. They made the line move. They phased it in through 1913, starting with smaller parts like magnetos in April, and then the chassis later that year, so instead of the work staying in one place, the line itself carried the work past the workers.
 
 And look at what that did. Under the old stationary method, building a Model T took about twelve and a half hours. By early 1914, with the moving line, a Model T came off the line about every 93 minutes. About twelve and a half hours, down to about 93 minutes, right? That's the thing Ford actually did, and it changed how the car got made. So the fair way to say it is that Ford didn't invent the car, and he didn't invent the assembly line, but his team made the line move, and that's a real achievement, and it's his.
 

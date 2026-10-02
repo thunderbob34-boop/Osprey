@@ -31,9 +31,7 @@ Now, to be fair, I want to be careful here. Cooke and Wheatstone were the first 
 
 And that brings us to January 1845. The UK National Archives has the case on record as the murder of Sarah Hart, who also went by Ann Lawrence, by a man named John Tawell.
 
-I'll keep this plain. Tawell got on a train at Slough, thinking he'd escaped. But the police sent his description ahead by telegraph, and the message got to Paddington before he did, so when he got off at Paddington, officers were waiting for him. King's College London calls it the first capture of a criminal by telecommunications, and the Science Museum's blog covers the same case. So the train was fast, and the wire was faster, right?
-
-And as King's College London tells it, people started calling the telegraph wires "the cords that hanged John Tawell."
+I'll keep this plain. Tawell got on a train at Slough, thinking he'd escaped. But the police sent his description ahead by telegraph, and the message got to Paddington before he did, so when he got off at Paddington, officers were waiting for him. King's College London calls it the first capture of a criminal by telecommunications, and the Science Museum's blog covers the same case. So the train was fast, and the wire was faster, right? And as King's College London tells it, people started calling the telegraph wires "the cords that hanged John Tawell."
 
 ## 05 What About Morse Code
 

@@ -1,10 +1,10 @@
 # The Farmer Who Vaccinated Before Jenner
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 929 spoken words.
 - Tone is calm and matter-of-fact. Onesimus was enslaved, so say it plainly and with respect, no dramatics, the facts carry it.
 - Say Jesty as JES-tee, Yetminster as YET-min-ster, Nelmes as NELMZ, Phipps as FIPS, Onesimus as oh-NESS-ih-mus, Boylston as BOYL-stun, variolation as vair-ee-oh-LAY-shun.
-- Every hedge in here is on purpose. Read "by the 1500s", "the son of Jenner's gardener" and "mild smallpox" exactly as written.
+- Every hedge in here is on purpose. Read "by the 1500s", "somewhere between 1465 and 1572", "that's how the museums put it", "the son of Jenner's gardener" and "mild smallpox" exactly as written.
 - Visuals: no close-up smallpox images and no lesions. Use text cards, period portraits, the Phipps cottage, and period engravings of cows and farms.
 - Good on-screen text moments are 1774, 22 years, May 14 1796, James Phipps age 8, by the 1500s, 1721, and 248 inoculated / 6 died.
 
@@ -16,7 +16,7 @@ Twenty-two years before Edward Jenner made history, a farmer in Dorset, in Engla
 
 So here's the famous version. On May 14th, 1796, Edward Jenner took cowpox matter from the hand of a milkmaid named Sarah Nelmes, and he scratched it into an eight-year-old boy named James Phipps. And James Phipps was the son of Jenner's gardener, that's how the museums put it, though you'll see some biographies call his father a labourer who worked for Jenner, so either way, the boy's family worked for him.
 
-Then, weeks later, Jenner exposed the boy to smallpox, the real thing, and Phipps didn't get sick. So the cowpox had protected him, and that's the experiment that's in every history book, the boy, the milkmaid, the date, May 14th, 1796. And it stuck to Jenner the way a good story does, with a named patient and a clear test, and he became the father of vaccination. Oh, and here's a nice detail about James Phipps, Jenner later gave him a cottage, and that cottage is still known as James Phipps' Cottage today.
+Then, weeks later, Jenner exposed the boy to smallpox, the real thing, and Phipps didn't get sick. So the cowpox had protected him, and that's the experiment the history books tell, the boy, the milkmaid, the date, May 14th, 1796. And it stuck to Jenner the way a good story does, with a named patient and a clear test, and he became the father of vaccination. Oh, and here's a nice detail about James Phipps, Jenner later gave him a cottage, and that cottage is still known as James Phipps' Cottage today.
 
 ## 03 Benjamin Jesty, 1774
 

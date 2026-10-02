@@ -1,7 +1,7 @@
 # Heinz Didn't Invent Ketchup - It Started as Fish Sauce
 
 READING NOTES
-- Runtime is about MINUTES minutes at a relaxed pace, roughly WORDCOUNT spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 882 spoken words.
 - Tone is light and friendly, this is the channel's signature example. Heinz is the man who made ketchup a product, not a fraud.
 - Say kê-tsiap as KAY-tsyahp, Hokkien as HOH-kee-en, and The Compleat Housewife as "the complete housewife".
 - Every hedge in here is on purpose. Read "traces back to", "the usual explanation", "by the early 1700s", "the earliest published tomato ketchup recipe historians usually cite" and "about sixty-four years" exactly as written. Never say Mease's recipe was "the first ever".

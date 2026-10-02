@@ -1,7 +1,7 @@
 # Franklin's Kite Came Second
 
 READING NOTES
-- Runtime is about MINUTES minutes at a relaxed pace, roughly WORDCOUNT spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 946 spoken words.
 - Tone is warm toward Franklin. It was his idea and the French said so. The point is only that somebody else ran the experiment first.
 - Say Coiffier as kwah-FYAY, Thomas-François Dalibard as toh-MAH frahn-SWAH dah-lee-BAR, Marly-la-Ville as mar-LEE lah VEEL, Delor as deh-LOR, Académie des Sciences as ah-kah-day-MEE day see-AHNSS, Thales as THAY-leez, Diogenes Laertius as dye-OJ-uh-neez lay-ER-shus, elektron as eh-LEK-tron, and electricus as eh-LEK-trih-kus.
 - Every hedge in here is on purpose. Read "according to Franklin", "according to Priestley's account", "nobody knows the exact day", "about a month", "later writers credit", "secondhand" and "a few skeptics" exactly as written.

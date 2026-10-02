@@ -1,6 +1,6 @@
 # Notes: Kellogg Didn't Invent Breakfast Cereal
 Research entry: 100-episode-lineup.md, heading "### 40. Kellogg Didn't Invent Breakfast Cereal"
-Spoken words: 644
+Spoken words: 645
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

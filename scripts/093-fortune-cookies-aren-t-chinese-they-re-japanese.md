@@ -1,8 +1,8 @@
 # Fortune Cookies Aren't Chinese - They're Japanese
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 797 spoken words. The research is short, so this one runs short rather than padded.
-- Tone is light and friendly. Nobody is a villain here, and Chinese-American restaurants get real credit for making the cookie famous.
+- Runtime is about 6 minutes at a relaxed pace, roughly 803 spoken words. The research is short, so this one runs short rather than padded.
+- Tone is light and friendly. Nobody is a villain here, and Chinese-American restaurants get real credit for putting the cookie in front of most Americans.
 - Say tsujiura senbei as tsoo-jee-OO-rah SEN-bay, Yasuko Nakamachi as yah-SOO-ko nah-kah-MAH-chee, Benkyodo as BEN-kyoh-doh, Makoto Hagiwara as mah-KOH-toh hah-gee-WAH-rah, Kyoto as KYOH-toh, and KQED as the four letters.
 - Every hedge in here is on purpose. Read "most likely came from Japan", "traces back to Japan", "as her research has been reported", "one example", "still disputed" and "a publicity stunt" exactly as written.
 - Don't name a single inventor, and don't ad-lib anything about World War Two or internment camps as the reason the cookie changed hands. That link wasn't verified.
@@ -11,7 +11,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-Nobody in China expects a fortune cookie with dessert, and yet most Americans think of the fortune cookie as Chinese, because a Chinese restaurant is usually where they get one. But when people went looking for where the fortune cookie actually came from, the trail didn't lead to China, it led to Japan, to a bakery near a shrine in Kyoto. So the fair way to say it is that the fortune cookie most likely came from Japan, by way of Japanese-American bakers in California, and Chinese-American restaurants are what made it famous.
+Nobody in China expects a fortune cookie with dessert, and yet most Americans think of the fortune cookie as Chinese, because a Chinese restaurant is usually where they get one. But when people went looking for where the fortune cookie actually came from, the trail didn't lead to China, it led to Japan, to a bakery near a shrine in Kyoto. So the fair way to say it is that the fortune cookie most likely came from Japan, by way of Japanese-American bakers in California, and Chinese-American restaurants are where most people met it.
 
 ## 02 The Version Everybody Knows
 
@@ -29,7 +29,7 @@ Now, they weren't quite the same as the ones we get now. The Japanese version wa
 
 Now here's the part that matters, which is how anybody knows this. A Japanese researcher named Yasuko Nakamachi traced these crackers in the late 1990s to a family bakery near a Shinto shrine outside Kyoto. And as her research has been reported, she also found a storybook illustration from 1878 showing them being made.
 
-So that's a picture from 1878 of these crackers being made in Japan, and that's a long way, in miles and in years, from a fortune cookie at the end of a meal in an American restaurant. So this isn't just a guess, it's a researcher going out and finding the bakery and finding the picture.
+So that's a picture from 1878 of these crackers being made in Japan, and that's a long way, in miles and in years, from a fortune cookie at the end of a meal in an American restaurant, and this isn't just a guess, it's a researcher going out and finding the bakery and finding the picture.
 
 And it isn't only her, either. The Smithsonian's National Museum of American History tells the fortune cookie's story the same way, Japanese origins and Japanese bakers in California, and National Geographic and KQED back up the Japanese roots and the California bakers. So when I say the fortune cookie most likely came from Japan, that's not me being clever, that's where the people who've looked into it ended up.
 
@@ -45,6 +45,6 @@ In 1983 there was a mock trial over it, a Court of Historical Review, and it sid
 
 ## 07 Who Did It First
 
-Now, to be fair to Chinese-American restaurants, they're the reason most of us have ever opened one of these, right? The vanilla and butter cookie you get after dinner is the version Americans know, and Chinese-American restaurants are what made it famous. That's real, and it's a big part of the story.
+Now, to be fair to Chinese-American restaurants, they're the reason most of us have ever opened one of these, right? The vanilla and butter cookie you get after dinner is the version Americans know, and Chinese-American restaurants are what put it in front of most of us. That's real, and it's a big part of the story.
 
 But the folded cracker with a fortune in it most likely traces back to Japan, to crackers made near Kyoto by the 1870s, and Japanese-American bakers in California were making them here from the early 1900s, before Chinese-American restaurants picked them up. Somebody did it first, and the trail on this one leads back to Kyoto.

@@ -1,6 +1,6 @@
 # Notes: Harvey Didn't Find It First: The Heart Doctor From Damascus
 Research entry: 100-episode-lineup.md, heading "### 39. Harvey Didn't Find It First: The Heart Doctor From Damascus"
-Spoken words: 829
+Spoken words: 831
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

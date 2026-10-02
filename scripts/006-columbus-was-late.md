@@ -1,10 +1,10 @@
 # Columbus Was Late
 
 READING NOTES
-- Runtime is about N minutes at a relaxed pace, roughly W spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 929 spoken words.
 - Tone is calm and matter-of-fact. This one is about who got there first among Europeans, so keep the Indigenous point plain and early, never as an afterthought.
 - Say L'Anse aux Meadows as lahnss-oh-MED-ohz, Groningen as GROH-ning-en, Leif Erikson as LAYF ERR-ik-sun.
-- Every hedge in here is on purpose. Read "first known Europeans", "Norse", "may have been older", "short-lived", "the sagas, not the wood" and "a year when wood was cut" exactly as written. Don't put Leif Erikson's name on the 1021 date, on screen or in the voice.
+- Every hedge in here is on purpose. Read "first known European", "Norse", "may have been older", "short-lived", "the sagas, not the wood" and "a year when wood was cut" exactly as written. Don't put Leif Erikson's name on the 1021 date, on screen or in the voice.
 - Good on-screen text moments are 1021, 993, 1492, 471 years, 2021, Nature, and the quote "the only secure calendar date for the presence of Europeans across the Atlantic before the voyages of Columbus."
 
 ## 01 Cold Open
@@ -47,6 +47,6 @@ So the honest way to say it is that the Norse were there in 1021, and not that L
 
 ## 07 Who Was First
 
-And to be fair to Columbus, nothing about this takes away his voyage in 1492, he still crossed the Atlantic, that still happened. It just means he wasn't the first European to make it across.
+And to be fair to Columbus, nothing about this takes away his voyage in 1492, he still crossed the Atlantic, that still happened. It just means he wasn't the first known European to make it across, the Norse were.
 
 So here's where it lands. Christopher Columbus gets the credit as the European who discovered America in 1492, but Indigenous peoples had been there for thousands of years, and among Europeans, the Norse were at L'Anse aux Meadows in Newfoundland cutting wood with metal blades in 1021, which is four hundred and seventy-one years earlier. A solar storm in 993 left a mark in the tree rings, three trees gave the same year, and Nature calls it the only secure date for Europeans across the Atlantic before Columbus. Somebody did it first, and it was the Norse, about four hundred and seventy years before Columbus ever set sail.

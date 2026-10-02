@@ -1,7 +1,7 @@
 # Harvey Didn't Find It First: The Heart Doctor From Damascus
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 829 spoken words. The research is short, so this runs under the usual length rather than padded.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 831 spoken words. The research is short, so this runs under the usual length rather than padded.
 - Tone is calm and respectful. Keep the Servetus execution flat and plain, one sentence of fact, no drama in the voice.
 - Say Ibn al-Nafis as IB-un al-nah-FEES, Michael Servetus as sur-VEE-tus, Christianismi Restitutio as kris-tee-ah-NIS-mee res-tih-TOO-tee-oh, De Motu Cordis as day MOH-too KOR-dis, Galen as GAY-len.
 - Every hedge in here is on purpose. Read "about 1242", "the mid-1200s", "around 1210 to 1213", "the lung circuit", "on his own", "no known evidence" and "still debated" exactly as written. Never say Ibn al-Nafis or Servetus discovered "the circulation of the blood," and never suggest Harvey or Servetus copied anyone.
@@ -18,7 +18,7 @@ The version most of us learned goes like this, in 1628 a doctor named William Ha
 
 ## 03 Two Loops
 
-So here's the plain version of what your heart does. The right side of your heart pumps blood out to your lungs, and the left side pumps it out to the rest of your body. So there are really two loops, a short one through the lungs, and a big one through the whole body.
+So here's the plain version of what your heart does. The right side of your heart pumps blood out to your lungs, and the left side pumps it out to the rest of your body. So there are really two loops, a short one through the lungs, and a big one through the whole body, right?
 
 And for a long time, the old teaching, going back to Galen, was that blood got from the right side of the heart to the left side through invisible pores in the wall between them.
 
@@ -32,7 +32,7 @@ And he said no to Galen's invisible pores. He rejected the idea that blood seeps
 
 And then it disappeared, at least as far as Europe was concerned. His work wasn't translated in his own time, and Europe didn't know about it until his manuscript was rediscovered in 1924. That's nearly seven hundred years after he wrote it.
 
-Now, to be fair, some scholars argue about whether any knowledge of his work reached Europe before that, and that question is still debated, nobody has settled it. But there's no known evidence that Harvey or Servetus, who we're about to get to, ever saw what Ibn al-Nafis wrote. So I'm not saying anybody copied him. I'm saying he got there first.
+Now, to be fair, some scholars argue about whether any knowledge of his work reached Europe before that, and that question is still debated, nobody has settled it. But there's no known evidence that Harvey or Servetus, who we're about to get to, ever saw what Ibn al-Nafis wrote. So I'm not saying anybody copied him. I'm saying he got there first, right?
 
 ## 06 Servetus and the Burned Book
 

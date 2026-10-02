@@ -1,6 +1,6 @@
 # Notes: Hubble Didn't Discover the Expanding Universe First
 Research entry: episode-research.md, "## New topic detail" section, entry "### 7."
-Spoken words: 797
+Spoken words: 799
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
