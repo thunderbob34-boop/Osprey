@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): Bi Sheng as "a comm
 - Searched: Jikji printed 1377 at Heungdeok-sa, Cheongju, with cast metal movable type; UNESCO "oldest known"; 78 years before the Gutenberg Bible; on the register since 4 Sept 2001 → confirmed → https://www.bnf.fr/en/jikji-treasure-world-printing ; https://www.unesco.org/en/memory-world/baegun-hwasang-chorok-buljo-jikji-simche-yojeol-volii-second-volume-anthology-great-buddhist-priests ; https://blogs.loc.gov/preservation/2023/05/jikji-gutenberg/
 - Fixes: banned word removed in section 02, "genuinely clever" → "really clever" (word count unchanged at 930).
 - Not search-verified (checked against research/knowledge only): Diamond Sutra 11 May 868, Wang Jie, Dunhuang, BL "earliest dated printed book" (standard, matches BL record Or.8210/P.2); Bi Sheng 1040s via Shen Kuo's Mengxi bitan; Gutenberg Bible no later than 1455; Gutenberg's mould/alloy/press/oil ink; arithmetic (78, about 587, about 400).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "the only reason we know about Bi Sheng is Shen Kuo" is essentially right but slightly absolute.

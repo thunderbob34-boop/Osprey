@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): Canada's House of C
 - Searched: none. The session-wide web search budget was exhausted before this script was reached, so everything below was checked against the research entry and standard references only.
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): 14 Feb 1876 filings, Bell's application 5th entry and Gray's caveat 39th; "a few hours" correctly framed as inferred from entry order; Bell's patent granted 7 March 1876 (21 days after filing); Wilber affidavit 8 April 1886 contradicting his October 1885 affidavit, $100, alcoholism, debt to Bailey; Reis's 1861 "Telephon" carrying speech badly (Smithsonian); Meucci caveat 1871, lapsed 1874, caveats cheaper than full applications; H.Res. 269, 11 June 2002, sponsored by Vito Fossella, quoted "resolved" line matches the text; sense-of-the-House status. All match standard accounts.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: none

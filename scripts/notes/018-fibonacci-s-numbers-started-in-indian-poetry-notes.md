@@ -36,3 +36,7 @@ Left out on purpose (unverified / keep off air in research): any claim that Indi
 
 ## Main-session fix (2026-10-02)
 - Removed a doubled sentence in section 06 ("He didn't have the name. He didn't have the name, and...").
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) the 1838 nickname date. Wikipedia's Fibonacci article (citing Drozdyuk & Drozdyuk 2010) reports a 1506 notary of the Holy Roman Empire, Perizolo, calling him "Lionardo Fibonacci", so 1838 (Libri) is the first modern use, not the first use. Cold open now says the name wasn't attached to him "until centuries after he died"; section 06 says it "caught on through a writer named Guglielmo Libri in 1838" and adds "one source points to a notary calling him Fibonacci back in 1506, which is still about three hundred years after his book"; section 07 says "caught on in 1838, centuries after him". 1506 added to on-screen moments and "one source points to" to the hedge list. Word count 905 → 923.
+- Low items noted, not changed: "He probably learned Hindu-Arabic mathematics in North Africa" is over-hedged (Leonardo says himself he was taught at Bugia), harmless; Liber Abaci 1202 survives only in the 1228 revision; Pingala's earlier hint is left out on purpose.

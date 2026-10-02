@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): any patent number (
 - Searched: none. The session-wide web search budget was exhausted before this script was reached, so everything below was checked against the research entry and standard references only.
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Spangler a janitor in Canton, Ohio, 1907 prototype with ceiling-fan motor and pillowcase; patented 1908 (US 889,823, granted 2 June 1908; kept off air as the entry requires); William H. Hoover a leather goods / harness maker; Electric Suction Sweeper Company took the patent and kept Spangler on (NMAH record); Booth's British patent 30 Aug 1901, horse-drawn "Puffing Billy"; Smithsonian magazine headline. All match standard accounts; the script does not claim Booth was the first powered cleaner, which is correct (Thurman 1899 and others came earlier).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "the portable upright electric vacuum" reads as a first; other heavy electric cleaners existed by 1905 (e.g. Chapman and Skinner), but Spangler's portable upright is the standard credit. Spangler first set up the Electric Suction Sweeper Co. himself in 1907-08 before Hoover bought in; "Hoover's company" is a fair shorthand.

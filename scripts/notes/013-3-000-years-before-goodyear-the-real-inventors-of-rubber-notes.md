@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): any claim that the 
 - Searched: Thomas Hancock provisional patent 21 Nov 1843 after examining Goodyear's samples (single-source flag) → confirmed by Science Museum Group, which also says Hancock suspected sulphur from the samples → https://collection.sciencemuseumgroup.org.uk/people/ap30249/hancock-thomas
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Goodyear 1839 discovery and 1844 US patent (standard; patent granted 15 June 1844); "organic compounds in the vine juice, not sulfur" attribution to the Science paper (per research entry); National Geographic coverage; bouncy balls / sandal soles / adhesives detail (matches the MIT 2010 story's subject).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "provisional patent" is the Science Museum Group's wording; English provisional protection only formally existed from 1852, so a pedant may call it anachronistic (it is attributed on air, so left); the 2010 MIT work describes pure-latex bands/adhesive uses, "adhesives" is a fair summary.
