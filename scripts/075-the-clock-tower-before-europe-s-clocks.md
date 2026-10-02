@@ -1,7 +1,7 @@
-# The Clock Tower Before Europe's Clocks
+# The Clock Tower Centuries Before Huygens
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 870 spoken words. It runs short on purpose, the research is thin and nothing was padded.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 866 spoken words. It runs short on purpose, the research is thin and nothing was padded.
 - Tone is calm and curious. Nobody in this one is a fraud, Huygens really did build the first working pendulum clock, so keep the credit fair all the way through.
 - Say Su Song as SOO SUNG, Kaifeng as KY-fung, Yi Xing as EE SHING, Huygens as HOY-gens, Vincenzio as vin-CHEN-zee-oh, Basel as BAH-zul, Senusret as SEN-oo-sret.
 - Every hedge in here is on purpose. Read "escapement-type mechanism", "an early kind of escapement", "one of the oldest", "probably", "by around 1500 BCE" and "tried to build it" exactly as written. Don't say or show "the oldest sundial" or "the first clock."
@@ -25,13 +25,13 @@ And that's where Su Song comes in. In 1088, in Kaifeng, Su Song's astronomical c
 
 And here's the part that matters, that's 1088, which is more than five hundred years before Huygens built his working pendulum clock in 1656. And Su Song wasn't even the first in China, because there was an earlier one, from Yi Xing, in 725, more than three hundred and fifty years before Su Song's tower.
 
-So the honest way to say it is that China had escapement-type mechanisms in water-driven clocks centuries before Huygens and his pendulum. I'm saying escapement-type on purpose, because it's an early kind of escapement working with water, and that's the fair way to put it.
+So the honest way to say it is that China had escapement-type mechanisms centuries before Huygens and his pendulum. I'm saying escapement-type on purpose, because it's an early kind of escapement working with water, and that's the fair way to put it.
 
 ## 04 Fair Credit, and Galileo
 
 Now, to be fair to Europe, Huygens did something real. He made the first working pendulum clock, in 1656, and that's his, nobody's taking that away.
 
-But even that one has a somebody-got-there-first twist. Galileo designed a pendulum clock before he died in 1642, and his son Vincenzio tried to build it. So Galileo had the design first, right? His son tried to make it real, and Huygens is the one who made a pendulum clock that actually worked, in 1656, and that's why it's Huygens' name on it. Designed first, built first, those aren't the same thing, and both of them deserve to be said out loud.
+But even that one has a somebody-got-there-first twist. Galileo designed a pendulum clock before he died in 1642, and his son Vincenzio tried to build it. So Galileo had the design first, right? His son tried to make it real, and Huygens is the one who made a pendulum clock that actually worked, in 1656, and that's why it's Huygens' name on it. Galileo designed one first and Huygens built the first one that worked, and both of those are true.
 
 ## 05 Way Further Back
 
@@ -39,7 +39,7 @@ Oh, one more thing, and this goes way further back than any of them. In 2013 a t
 
 It dates to the 13th century BCE, and they found it among the huts of the workmen who cut the royal tombs, so it was probably used to time their work. Now, to be fair, the team's own press release called it one of the world's oldest sundials, not the oldest, because Egyptians were already using sundials and shadow clocks by around 1500 BCE. So it's one of the oldest. It's one of the oldest, and it's not even the oldest, and that tells you how long people have been working on this problem, right?
 
-And there's one claim in this part of the story to be careful with. A popular timeline from NIST, the US standards agency, says Egyptian obelisks were being built as early as 3500 BCE, and you'll see that tied to the idea of obelisks as shadow clocks. But Britannica says obelisks are known from Egypt's 4th dynasty, about 2575 to 2465 BCE, none survive from that time, and the earliest one that does survive is Senusret I's, from 1918 to 1875 BCE. So that 3500 BCE date doesn't hold up, and we're leaving it out.
+And there's one claim in this part of the story to be careful with. A popular timeline from NIST, the US standards agency, says Egyptian obelisks were being built as early as 3500 BCE, and you'll see that tied to the idea of obelisks as shadow clocks. But Britannica says obelisks are known from Egypt's 4th dynasty, about 2575 to 2465 BCE, none survive from that time, and the earliest one that does survive is Senusret I's, from 1918 to 1875 BCE. So that 3500 BCE date doesn't hold up, and we're not using it.
 
 ## 06 Who Had It First
 

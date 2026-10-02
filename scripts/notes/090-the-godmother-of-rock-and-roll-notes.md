@@ -1,6 +1,6 @@
 # Notes: The Godmother of Rock and Roll
 Research entry: 100-episode-lineup.md, heading "### 90. The Godmother of Rock and Roll"
-Spoken words: 872
+Spoken words: 852
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 872
 
 Hedges kept: "some music scholars call" (never "the first"); "a strong claim to"; "Rocket 88" "often billed as"; "gradual evolution" with "earlier competitors" attributed to the Library of Congress; influence on Elvis "according to her biographer" Gayle Wald via NPR; Elvis "never claimed" to invent it and the title was given to him.
 Left out on purpose (unverified / keep off air in research): any single "first rock and roll record" stated as fact; anything about Elvis's background or Memphis origins (not in the entry); Sun Records named as Phillips's studio (entry says only "Sam Phillips's Memphis studio"); details of Tharpe's life beyond the entry. Runs under the 1,200-word target because the entry is thin.
+
+## Review
+- Fact fixes: (1) Cut "the big institutions are on her side on this one" (it overreads what the sources back, which is the Godmother label). (2) "there isn't one first record... from a lot of people" changed to "there isn't one agreed first record, it came together over time", matching the LoC "gradual evolution" hedge. (3) Close "she was playing this music years before him" changed to "playing electric guitar in clubs years before him"; the entry backs electric-guitar gospel in clubs, not "this music" as in rock and roll.
+- Cadence fixes: 2. Fixed the rhetorical question + fragment ("So there isn't one first record, right? It came together...") into one breath; added one "right?" (now 3).
+- Format fixes: word count updated 872 to 852.
+- Remaining concerns for Gus: 852 words, under 900.

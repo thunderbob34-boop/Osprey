@@ -1,6 +1,6 @@
 # Notes: Kellogg Didn't Invent Breakfast Cereal
 Research entry: 100-episode-lineup.md, heading "### 40. Kellogg Didn't Invent Breakfast Cereal"
-Spoken words: 645
+Spoken words: 651 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -19,3 +19,9 @@ Plain explanation added (no new claims): a sanitarium is a kind of health resort
 Hedges kept: "probably the first ready-to-eat cereal"; "late 1870s or early 1880s"; "Jackson sued, and Kellogg changed the name" with no ruling, amount or court detail; clear that the myth is "Kellogg invented cereal", not corn flakes.
 
 Left out on purpose (unverified / keep off air in research): the lawsuit's outcome and specifics (unknown); Jackson's commercial sales (inferred only); anything from the PMC "Dr. Jackson's Granula" article (details not extracted). The manifest hook's "Kellogg's name is on half the cereal aisle" became "Kellogg is the name most people think of when they think of breakfast cereal", since "half the aisle" is not in the entry. Runs about 640 words because the entry is short; not padded.
+
+## Review
+- Fact fixes: (1) Cold open said flatly "the man who made the first cold cereal"; the entry requires "probably" / "widely considered". Now "what's probably the first cold cereal" (hedge added to reading notes). (2) Sections 04 and 05 said granola came from Kellogg "having to stop using" / "having to back off" Jackson's name, which implies a court outcome the entry marks unknown; both now say Kellogg changed the name after Jackson sued. (3) New closing keeps "probably" ("it was probably Dr. Jackson, in Dansville, in 1863").
+- Cadence fixes: 6. Joined stops in 01, 03 (Jackson intro; the graham-flour method as one breath), 04 (Kellogg's granula line; "changed the name, he changed it to granola"); replaced the closing button.
+- Format fixes: word count updated 645 to 651; hedge list updated.
+- Remaining concerns for Gus: runs 651 words, well under 900 (short entry; lawsuit details unknown).

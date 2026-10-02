@@ -1,6 +1,6 @@
 # Notes: The Schoolteacher Who Invented Time Zones
 Research entry: 100-episode-lineup.md, heading "### 86. The Schoolteacher Who Invented Time Zones"
-Spoken words: 916
+Spoken words: 915
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -19,3 +19,9 @@ Spoken words: 916
 
 Hedges kept: "first to propose" (never "his zones are the ones we use"); "was never accepted" attributed to Britannica; Allen's plan "drew on" both; how much Allen borrowed from Dowd framed as unknown; "about four minutes"; "a railroad decision, not a law"; federal law "came later" (no date).
 Left out on purpose (unverified / keep off air in research): the cause of Dowd's 1904 death, including the popular "killed by a train" story (not verified); the year federal standard-time law passed (not in entry); any count of local times before 1883 (not in entry). Runs under the 1,200-word target because the entry is thin.
+
+## Review
+- Fact fixes: (1) Retitled from "The Schoolteacher Who Invented Time Zones" to "The Schoolteacher Who First Proposed Time Zones"; the entry says to frame it as "first to propose", and Britannica says his system was never accepted. (2) "nobody can really pin down" how much Allen borrowed softened to "isn't clear" (the entry lists it as inferred, not unknowable).
+- Cadence fixes: 2. Joined "So first, here's why anybody needed this. For most of history..." into one breath; added one "right?" (now 3).
+- Format fixes: title changed (file name and manifest title still use "Invented"); word count updated 916 to 915.
+- Remaining concerns for Gus: none on facts. The geography explanation for the four minutes (New York sitting east of its zone's reference line) is plain explanation, not from the entry. It's correct, but you can cut it if you want only entry facts.

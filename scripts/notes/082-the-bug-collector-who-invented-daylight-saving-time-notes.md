@@ -1,6 +1,6 @@
 # Notes: The Bug Collector Who Invented Daylight Saving Time
 Research entry: 100-episode-lineup.md, heading "### 82. The Bug Collector Who Invented Daylight Saving Time"
-Spoken words: 924
+Spoken words: 908
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -17,3 +17,9 @@ Spoken words: 924
 
 Hedges kept: Franklin essay framed as satire about waking early, with Smithsonian's "erroneous" attribution; Willett "on his own" / "as far as the record shows"; Willett credited fully for the campaign and Britain's adoption; Port Arthur "locally claimed", "may have been the first in the world" attributed to a city archivist, date conflict stated, "might be closer to a time-zone change", "treat Port Arthur as a local claim".
 Left out on purpose (unverified / keep off air in research): Port Arthur stated as fact; any exact Port Arthur start date; Britain's adoption date; any details of Franklin's essay beyond its subject (no candle or other specifics); any biography of Hudson or Willett beyond the entry. Runs under the 1,200-word target because the entry can't fill more without padding.
+
+## Review
+- Fact fixes: (1) "they didn't take him seriously either" cut; the entry says the society ridiculed the idea, not him. (2) Closing recap "ridiculed him" changed to "ridiculed the idea". (3) "Willett ... campaigned until Britain adopted it" changed to "he campaigned for it and he's the reason Britain adopted it" (the entry doesn't support a campaign-until-adoption sequence). (4) Cut the invented callback "did it during a war, not so anybody could go hunting bugs".
+- Cadence fixes: 3. Joined the one-line "And the society ridiculed it." paragraph into the previous breath; cut the crafted war/bug-hunting button; added one "right?" (now 3).
+- Format fixes: word count updated 924 to 908. Title kept: "invented" is the research heading's own word and the entry backs Hudson as first to propose; title not changed.
+- Remaining concerns for Gus: 908 words, under the 1,200 target but over 900. If you want the title tighter, "First Proposed" is the strictest wording.

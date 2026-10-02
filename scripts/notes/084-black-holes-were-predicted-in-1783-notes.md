@@ -1,6 +1,6 @@
 # Notes: Black Holes Were Predicted in 1783
 Research entry: 100-episode-lineup.md, heading "### 84. Black Holes Were Predicted in 1783"
-Spoken words: 917
+Spoken words: 918
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 917
 
 Hedges kept: year only ("1783", no month, because the extracts disagree between May and 27 November); "about five hundred times"; "the first to imagine a star too heavy for light to escape"; "not the same thing as a modern black hole"; Wheeler "popularized" the name; Laplace "a similar proposal"; full credit to Einstein, Schwarzschild and Wheeler for the modern concept.
 Left out on purpose (unverified / keep off air in research): the exact month of the paper; the date of the first black hole photo; nationalities of Schwarzschild and Laplace (not in the entry); any Michell biography beyond "English clergyman" (and the hook's "country parson in Yorkshire"); Queens' College details beyond supporting the prediction. Runs under the 1,200-word target rather than pad.
+
+## Review
+- Fact fixes: (1) Retitled from "Black Holes Were Predicted in 1783" to "The 1783 Dark Star That Came Before Black Holes"; the entry's hedge says a dark star is not a modern black hole and to say "first to imagine a star too heavy for light to escape". (2) Closing line "the idea that sounds like the most modern thing in physics was first written down in the 1700s" reworded to the entry's hedge: "the first person to imagine a star too heavy for light to escape was a parson in the 1700s".
+- Cadence fixes: 4. Joined the choppy run "So it's natural... But the idea..." into one breath; joined "treating light as particles. A modern black hole..."; folded the "That's the fair way to say it." button into the previous sentence; added one "right?" (now 3).
+- Format fixes: title changed (file name and manifest title still use the old wording); word count updated 917 to 918.
+- Remaining concerns for Gus: the file name and manifest still say "Black Holes Were Predicted in 1783". Don't use that as the upload title or thumbnail text.

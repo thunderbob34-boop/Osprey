@@ -1,6 +1,6 @@
 # Notes: The Internet's First Message Was "lo"
 Research entry: episode-research.md, "# Job 3" section, entry "### 52." (Internet)
-Spoken words: 1025
+Spoken words: 1013
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 1025
 
 Hedges kept: "about ten thirty", "about an hour later", Davies "independently", "still argued over", "usually credited with the core idea", NPL "running by 1970", CYCLADES "the early 1970s" (not 1972-73), Cerf "has cited" it as an influence.
 Left out on purpose (unverified / keep off air in research): Kleinrock's 1961-62 priority claim and the dispute itself (only weak sources; script refers to "other claims" without naming or judging); the dropped "1972-73" CYCLADES date; any description of Cerf's own role in TCP/IP beyond "internet pioneer"; no claims about what Kline typed beyond L and O. Runs under the 1,200-word target rather than pad.
+
+## Review
+- Fact fixes: (1) Cut "it's how pretty much everything you do online still moves around" (not in entry). (2) Cut "most people have never heard the name Pouzin" (unsupported). (3) Cold open no longer says "somebody did that first" (kept the brand line to the close only) and now says Baran and Davies worked it out "independently of each other", matching the entry.
+- Cadence fixes: 5. Joined "He types an L... He types an O... And then the system crashes." into one breath; removed the "Eleven volumes." fragment; moved "right?" after "one in America and one in Britain" so it isn't a question then a fragment; joined the three choppy lines opening section 03.
+- Format fixes: word count updated 1,025 to 1,013.
+- Remaining concerns for Gus: the title says "The Internet's First Message" but the entry only supports ARPANET's first message (the script calls ARPANET "the internet's ancestor" throughout). The title is a common framing and I left it, but "ARPANET's First Message Was 'lo'" is the strict version if you want it.

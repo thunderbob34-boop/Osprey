@@ -1,7 +1,7 @@
 # Writing Was Invented for Accounting
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 840 spoken words. It runs short on purpose, the research is tight and nothing was padded.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 836 spoken words. It runs short on purpose, the research is tight and nothing was padded.
 - Tone is calm and curious. This isn't a myth-bust where somebody gets exposed, it's a "you'd never guess why" story, and the Egypt part is an open question, so keep it even.
 - Say Uruk as OO-rook, Englund as ENG-lund, Abydos as uh-BY-doss, Umm el-Qa'ab as oom el-KAHB, Dreyer as DRY-er, lexical as LEX-ih-kul.
 - Every hedge in here is on purpose. Read "about 85 percent", "more than 5,000 years old", "averages", "around 3300 to 3200 BC", "may not even have been first", "still debated", "neck and neck" and "which came first is still argued over" exactly as written. Never say or show "Egypt was first."

@@ -10,13 +10,13 @@ READING NOTES
 
 ## 01 Cold Open
 
-Fifty years before Pasteur explained why food spoils, a Paris confectioner was already sealing it in glass bottles and boiling it, and it worked. His name was Nicolas Appert, and he had no idea why it worked, he just knew that it did. Pasteur is the household name, and he deserves to be, because he's the one who explained what was going on, but somebody was killing off spoilage with heat in sealed containers a long time before anybody could say why.
+About fifty years before Pasteur explained why food spoils, a Paris confectioner was already sealing it in glass bottles and boiling it, and it worked. His name was Nicolas Appert, and he had no idea why it worked, he just knew that it did. Pasteur is the household name, and he deserves to be, because he's the one who explained what was going on, but somebody was killing off spoilage with heat in sealed containers a long time before anybody could say why.
 
 ## 02 The Famous Version
 
-So there are really two famous versions here. The first one is the big-name version, Louis Pasteur, the scientist who explained that tiny living things, microbes, are what make food go bad, and whose name we still use for heating food to kill them, pasteurisation. And if you ask most people who figured out how to stop food from spoiling, that's the name you'll get.
+So there are really two famous versions here. The first one is the big-name version, Louis Pasteur, the scientist who explained that tiny living things, microbes, are what make food go bad, and whose name we still use for heating food to kill them, pasteurisation. And if you ask most people who figured out how to stop food from spoiling, that's probably the name you'll get.
 
-And the second famous version is a story you'll hear about canning itself. The story goes that Napoleon offered a prize to anybody who could find a way to preserve food for his army, and a Paris confectioner named Nicolas Appert won it. It's a great story, right? An emperor, an army, a prize, and a candy maker who beats everybody. And part of it is true, but part of it is shakier than it sounds.
+And the second famous version is a story you'll hear about canning itself. The story goes that Napoleon offered a prize to anybody who could find a way to preserve food for his army, and a Paris confectioner named Nicolas Appert won it. It's a great story, right, an emperor and an army and a prize and a candy maker who beats everybody, and part of it is true, but part of it is shakier than it sounds.
 
 ## 03 What's Documented
 
@@ -38,10 +38,10 @@ So, to be fair to Pasteur, what he did is a really big deal. He explained it. He
 
 And there's more, because Appert wasn't the only one in 1810. Over in London, also in 1810, an Englishman named Peter Durand got a patent dated August 25th for the same basic idea, but using tin cans instead of glass. So the same basic idea shows up in two countries in the same year, one in glass and one in tin, right?
 
-Durand sold that patent in 1811 to two men, Bryan Donkin and John Hall, and their firm opened the world's first canning factory in 1813. So if you're asking who holds the tin can patent, that's Durand, and if you're asking who got the tin can into a factory, that's Donkin and Hall. But if you're asking who worked out the method first, sealing the food and heating it, that's Appert, and he did it in glass.
+Durand sold that patent in 1811 to two men, Bryan Donkin and John Hall, and their firm opened a canning factory in 1813. So if you're asking who holds the tin can patent, that's Durand, and if you're asking who got the tin can into a factory, that's Donkin and Hall. But if you're asking who worked out the method first, sealing the food and heating it, that's Appert, and he did it in glass.
 
 ## 06 Who Did It First
 
-So the plain version goes like this. Pasteur explained why food spoils, about fifty years after Appert, and that's his, and it's a big deal. Durand patented the tin can in 1810, and Donkin and Hall opened the first canning factory in 1813. But a Paris confectioner named Nicolas Appert was sealing food in corked glass bottles and boiling them before all of that, French authorities paid him 12,000 francs in 1810 to publish how he did it, and he published it that same year.
+So the plain version goes like this. Pasteur explained why food spoils, about fifty years after Appert, and that's his, and it's a big deal. Durand patented the tin can in 1810, and Donkin and Hall opened their canning factory in 1813. But a Paris confectioner named Nicolas Appert was sealing food in corked glass bottles and boiling them before all of that, French authorities paid him 12,000 francs in 1810 to publish how he did it, and he published it that same year.
 
-He never knew why it worked. He never knew why it worked, and it worked anyway. Somebody did it first, and in this case it was a confectioner in Paris, about fifty years before anybody could explain it.
+He didn't know why it worked. He didn't know why it worked, and it worked anyway. Somebody did it first, and in this case it was a confectioner in Paris, about fifty years before anybody could explain it.

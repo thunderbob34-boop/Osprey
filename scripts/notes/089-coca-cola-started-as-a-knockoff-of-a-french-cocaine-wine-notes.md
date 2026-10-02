@@ -1,6 +1,6 @@
 # Notes: Coca-Cola Started as a Knockoff of a French Cocaine Wine
 Research entry: 100-episode-lineup.md, heading "### 89. Coca-Cola Started as a Knockoff of a French Cocaine Wine"
-Spoken words: 843
+Spoken words: 836
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -17,3 +17,9 @@ Spoken words: 843
 
 Hedges kept: "the first big hit"; "not the first cocaine tonic, but the most successful"; "sources disagree"; "imitated" and "copied", explicitly not "stole"; "built on Mariani's idea"; how closely Pemberton copied the recipe vs the general idea framed as unknown; full credit to Pemberton for the formula; "one of the most famous" rather than "the most famous".
 Left out on purpose (unverified / keep off air in research): the cocaine content of early Coca-Cola (not researched; avoid); the date Pemberton first made French Wine Coca (not in entry); the Smithsonian "make you smarter" claim (background source only, not an entry claim); anything sensational about cocaine. Runs under the 1,200-word target because the entry is thin.
+
+## Review
+- Fact fixes: (1) Cut "the copy ended up bigger than the original"; the entry's hedge says Pemberton did invent the Coca-Cola formula, so calling Coca-Cola itself "the copy" contradicted it. The overtaking claim stays.
+- Cadence fixes: 2. Joined "one new idea. But the idea wasn't new..." into one breath; added one "right?" (now 3).
+- Format fixes: word count updated 843 to 836. Title kept: Coca-Cola grew straight out of French Wine Coca, which the NLM calls an imitation, so "started as a knockoff" holds.
+- Remaining concerns for Gus: 836 words, under 900. "Cocaine wine" in the title is the research heading's wording (PBS uses it too); the script itself says "coca" throughout.

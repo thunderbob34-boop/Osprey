@@ -1,6 +1,6 @@
 # Notes: The Sewing-Machine Guy Who Nearly Invented the Zipper
 Research entry: 100-episode-lineup.md — heading "### 59. The Sewing-Machine Guy Who Nearly Invented the Zipper"
-Spoken words: 788
+Spoken words: 762 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -17,3 +17,9 @@ Spoken words: 788
 
 Hedges kept: "zipper-like", "not a modern zipper", "popularly called", "never marketed", "closer ancestor", "we don't know why", "as far as the sources go".
 Left out on purpose (unverified / keep off air in research): the hook's "won the sewing-machine wars" and "left it in a drawer" (not in the research; the entry says don't claim why Howe dropped it); calling Howe "the inventor of the sewing machine" (entry says only "famous sewing-machine inventor"); claims about how well Judson's fastener worked or sold. Plain explanation added: how a modern zipper's interlocking teeth and slider work. Research is thin, so this runs under the 900-word floor rather than padding.
+
+## Review
+- Fact fixes: (1) Cut the guessed reasons "maybe he was too busy, maybe he didn't think it would sell". The entry says don't suggest why Howe dropped it, and voicing guesses invites viewers to repeat them. (2) Cold-open "he never did anything with it" narrowed to "he never marketed it", which is what the entry supports. (3) "Judson came up with the slide fastener" (twice) changed to "Judson had his slide fastener", so it doesn't claim he invented all slide fasteners. (4) "The fastener had been around... since 1851" changed to "the idea had been patented... since 1851", because Howe's was never marketed. (5) "You can go look at his patent model in the Smithsonian" changed to "is in the Smithsonian's collection", because display isn't verified. (6) The crafted closing button changed to the plain fact (Elias Howe, zipper-like closure, 1851).
+- Cadence fixes: 4. Joined split breaths in 01, 02 ("two men, and the first is..."), 03 and 07.
+- Format fixes: word count updated to 762; runtime changed from 6 to about 5 minutes.
+- Remaining concerns for Gus: 762 spoken words, under the 900 floor, reported, not padded. Title checked: "Nearly Invented" is fair given the research's "zipper-like, not a modern zipper".

@@ -1,7 +1,7 @@
 # The Smartphone Before the iPhone: IBM Simon
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 795 spoken words. It runs short on purpose, the research is thin and nothing was padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 792 spoken words. It runs short on purpose, the research is thin and nothing was padded.
 - Tone is friendly and a little amazed. Simon isn't a hidden genius story, it's a phone that was early and didn't sell, so no sneering at it and no sneering at Apple.
 - Say BellSouth as BELL-south, COMDEX as COM-dex.
 - Every hedge in here is on purpose. Read "widely considered the first smartphone", "about $900", "according to TIME", "about an hour", "about six months", "roughly 50,000" and "nobody knows the exact sales" exactly as written. The battery, months and sales figures are TIME's, so keep the attribution.
@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-Thirteen years before the iPhone, you could buy a touchscreen phone with apps on it, and it wasn't made by Apple, it was made by IBM. It was called the Simon, it had a touchscreen and email and a calendar and an address book, and it's widely considered the first smartphone. The iPhone is the one everybody remembers as the first smartphone, and it deserves to be remembered, but there was a phone with a touchscreen and apps on sale first, and it's sitting in three museums right now.
+Thirteen years before the iPhone, you could buy a touchscreen phone with apps on it, and it wasn't made by Apple, it came from IBM. It was called the Simon, it had a touchscreen and email and a calendar and an address book, and it's widely considered the first smartphone. The iPhone is the one everybody remembers as the first smartphone, and it deserves to be remembered, but there was a phone with a touchscreen and apps on sale first, and it's sitting in three museums right now.
 
 ## 02 The Famous Version
 
@@ -28,7 +28,7 @@ And it's not a story that lives on some forum somewhere. The Simon is in the col
 
 ## 04 Why You Never Had One
 
-Now here's why you've probably never heard of it. According to TIME's look back at the Simon, it cost about $900 with a two-year contract and $1,100 without one, the battery lasted about an hour, and it was off the market within about six months, after roughly 50,000 sales.
+Now here's why you've probably never heard of it. According to TIME's look back at the Simon, it cost about $900 with a two-year contract, the battery lasted about an hour, and it was off the market within about six months, after roughly 50,000 sales.
 
 An hour of battery. An hour of battery on a phone that was also your calendar and your address book and your fax machine. And at about $900 on a contract, in 1994, that's a lot of money for something that needed charging that often, and whatever the reasons were, it didn't last on the shelves. Now, to be fair, those numbers come from TIME's retrospective, and nobody knows the exact sales, so roughly 50,000 is the honest way to say it.
 
@@ -42,4 +42,4 @@ But if your definition is a phone with a touchscreen and built-in apps that a re
 
 So the plain version goes like this. The iPhone came out in 2007 and gets called the first smartphone, and it's the one that caught on. But on August 16th, 1994, you could buy an IBM Simon, a cellphone with a touchscreen, an address book, a calendar, mail, fax, a notepad and a sketch pad, for about $900 on a contract, with a battery that lasted about an hour, and within about six months it was gone.
 
-Somebody did it first, and in this case it was IBM, thirteen years before the iPhone.
+Somebody did it first, and in this case it was IBM and BellSouth, thirteen years before the iPhone.

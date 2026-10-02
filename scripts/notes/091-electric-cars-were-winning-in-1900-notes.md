@@ -1,6 +1,6 @@
 # Notes: Electric Cars Were Winning in 1900
 Research entry: 100-episode-lineup.md, heading "### 91. Electric Cars Were Winning in 1900"
-Spoken words: 798
+Spoken words: 800
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -17,3 +17,9 @@ Spoken words: 798
 
 Hedges kept: "around 1900"; "roughly a third"; "outnumbered", never "outsold"; "share of cars on the road, not sales"; Anderson's date as "the 1830s" with "sources differ on the exact year"; the 40/38/22 split "according to Britannica"; every Lohner-Porsche and Semper Vivus detail "according to Porsche"; "by about 1905". The cold-open hook was reworded from "the least popular choice on the lot" to "the least common kind" on American roads, because the entry says the figures are share of cars, not sales.
 Left out on purpose (unverified / keep off air in research): Anderson's exact year; any reason gasoline won (not in entry); any claim about modern EV sales or range; History.com material (supporting only); any Porsche detail stated without attribution. Runs under the 1,200-word target because the entry is thin.
+
+## Review
+- Fact fixes: (1) Retitled from "Electric Cars Were Winning in 1900" to "Electric Cars Outnumbered Gas Cars Around 1900"; by the entry's own figures steam was first (40%) and electric second (38%), so "winning" wasn't supported, and the entry asks for "outnumbered". (2) Cold open "In 1900" changed to "Around 1900", matching the entry's hedge.
+- Cadence fixes: 3. Joined "So gasoline was last. Steam was first..."; joined "But they didn't invent the electric car. The idea goes back..."; added one "right?" (now 3).
+- Format fixes: title changed (file name and manifest title still use "Winning"); word count updated 798 to 800.
+- Remaining concerns for Gus: 800 words, under 900. Don't use the old "Winning" title for upload. Every Lohner-Porsche and Semper Vivus detail is still attributed to Porsche, as the entry requires.

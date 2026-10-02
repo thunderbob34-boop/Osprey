@@ -26,9 +26,9 @@ And that's the thing that makes it a fast-food chain and not just a burger stand
 
 ## 04 Even Faster
 
-And there's more, because if you mean fast food in the sense of getting your food without waiting on anybody, there's something even older. On June 9th, 1902, Horn and Hardart opened its first Automat, at 818 Chestnut Street in Philadelphia. And an Automat was a coin-operated restaurant, a waiterless restaurant, you put a coin in the machine and you got your food, no waiter involved.
+And there's more, because if you mean fast food in the sense of getting your food without waiting on anybody, there's something even older. In 1902, on June 9th, which is the opening date usually given, Horn and Hardart opened its first Automat, at 818 Chestnut Street in Philadelphia. And an Automat was a coin-operated restaurant, a waiterless restaurant, you put a coin in the machine and you got your food, no waiter involved.
 
-The machines came from Germany, from Berlin. The company that built them was called Quisisana, and the machine was designed in Switzerland and made in Germany. So in 1902, in Philadelphia, people were getting food out of a machine with no waiter at all.
+The machines came from Germany, from Berlin, and the company that built them was called Quisisana, and the machine was designed in Switzerland and made in Germany. So in 1902, in Philadelphia, people were getting food out of a machine with no waiter at all.
 
 And over in Tokyo, according to the company, Yoshinoya was serving quick beef bowls to fish-market workers in Nihonbashi from 1899. Now I want to be clear, that's the company's own account, and there's no strong independent source for it that we could find, so take it as the company's story.
 
@@ -42,9 +42,9 @@ So the fair thing to say is that Red's is one of the first, not the first, full 
 
 ## 06 Pompeii
 
-Oh, one more thing, and this is the oldest one. Nearly two thousand years ago, the people of Pompeii were grabbing hot food from street-counter snack bars called thermopolia. A single one is called a thermopolium, and there are about eighty of them known at Pompeii.
+Oh, one more thing, and this is the oldest one, nearly two thousand years ago, the people of Pompeii were grabbing hot food from street-counter snack bars called thermopolia. A single one is called a thermopolium, and there are about eighty of them known at Pompeii.
 
-And one of them, in a part of the site called Regio Five, has a counter painted with a Nereid riding a seahorse, and a Nereid is a sea nymph from Greek myth. It was partly dug out in 2019, and then the full excavation was announced at the end of December 2020. So that's a fast-food counter, or the closest thing to one, with a painting on the front, and it's been fully dug out in just the last few years.
+And one of them, in a part of the site called Regio Five, has a counter painted with a Nereid riding a seahorse, and a Nereid is a sea nymph from Greek myth. It was partly dug out in 2019, and then the full excavation was announced at the end of December 2020. So that's a fast-food counter, or the closest thing to one, with a painting on the front, and it was only fully dug out in 2020.
 
 ## 07 Fair Credit
 
@@ -52,4 +52,4 @@ Now, to be fair to McDonald's, the Speedee Service System in 1948 was a real sys
 
 ## 08 Who Was First
 
-So here's where it lands. McDonald's gets the credit for fast food, with the Speedee system in 1948 and Ray Kroc's first franchise in 1955. But White Castle opened in Wichita in 1921, with a written prep manual, paper hats and strict cleanliness rules, and by 1931 it had 116 restaurants in eleven states, and it's usually called the first fast-food chain. Horn and Hardart's Automat was serving food with no waiter in Philadelphia in 1902, and nearly two thousand years ago, Pompeii had street-counter snack bars, about eighty of them that we know of. Somebody did it first, and in the burger business it was White Castle, seventeen years before Speedee.
+So here's where it lands. McDonald's gets the credit for fast food, with the Speedee system in 1948 and Ray Kroc's first franchise in 1955. But White Castle opened in Wichita in 1921, with a written prep manual, paper hats and strict cleanliness rules, and by 1931 it had 116 restaurants in eleven states, and it's usually called the first fast-food chain. Horn and Hardart's Automat was serving food with no waiter in Philadelphia in 1902, and nearly two thousand years ago, Pompeii had street-counter snack bars, about eighty of them that we know of. Somebody did it first, and in the burger business it was White Castle, twenty-seven years before Speedee.

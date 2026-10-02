@@ -1,6 +1,6 @@
 # Notes: Galileo Saw Neptune and Didn't Know It
 Research entry: 100-episode-lineup.md, heading "### 88. Galileo Saw Neptune and Didn't Know It"
-Spoken words: 805
+Spoken words: 799
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -17,3 +17,9 @@ Spoken words: 805
 
 Hedges kept: "saw it first, not found it first"; "observed" vs "discovered"; "his notes record it shifting"; whether he noticed the motion is "an interpretation"; Nature's "detected its motion" kept as the paper's reading only; "the first person we know of to see it"; full discovery credit to Le Verrier, Adams and Galle.
 Left out on purpose (unverified / keep off air in research): "His notebooks survive in Florence" from the manifest fun fact, because the only source for Florence is Space.com, which the entry marks "lead only, not a strong source" (script says only that his notebooks survive); the Space.com "Galileo discovered Neptune" theory; nationalities of Le Verrier, Adams and Galle and the year of the prediction (not in the entry). Runs under the 1,200-word target because the entry is thin.
+
+## Review
+- Fact fixes: (1) "the most famous astronomer there is" softened to "maybe the most famous astronomer there is". (2) "A mathematician named Urbain Le Verrier" changed to "A man named..." and "an astronomer named Johann Galle" to just "Johann Galle" (the entry gives neither job title). (3) "there it was" changed to "he found it". (4) Cut "to make Galileo look good" (an unsupported motive).
+- Cadence fixes: 2. Joined "They discovered Neptune. But they weren't..." into one breath; added one "right?" (now 3).
+- Format fixes: reading-notes hedge list now also names "nobody can say for sure, that's an interpretation" and "the first person we know of", both used in the script; word count updated 805 to 799.
+- Remaining concerns for Gus: 799 words, under 900. The script quotes the Nature paper as saying Galileo "also detected its motion" and frames that as the paper's reading. That's per the entry, but read it carefully alongside the "don't say he noticed" hedge.
