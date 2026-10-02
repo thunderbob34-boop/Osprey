@@ -82,7 +82,7 @@ This follows your youtube-pipeline process:
 
 ## What I need from you
 
-1. **Narrator:** you (recommended), or tell me otherwise.
+1. ~~**Narrator**~~: decided. Holden on Seed Speech.
 2. **Length:** ship at ~5 minutes first (recommended), or research everything to 8–10 minutes before launch.
 3. **Pilot:** say go, and I'll build the full package for Episode 1 (shot list, every visual, animatic and Resolve timeline) as the template for the other 99.
 
