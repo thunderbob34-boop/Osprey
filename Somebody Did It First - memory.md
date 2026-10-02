@@ -43,3 +43,6 @@ See the "Sources checked" table in `production-game-plan.md`. Re-check any row o
 | Image | Nano Banana Pro | 4 | from spend history |
 | Image | Nano Banana 2 | 1.5 | price check only, nothing generated |
 | Image | GPT Image 2.5 (low) | 0.25 | price check only, nothing generated |
+| Cold-open paragraph (~100 words), voice "Holden" | text2speech_v2 / ElevenLabs | 1.95 | Gus's pick (2026-10-02). Full episode ≈ 14 credits. |
+| Same paragraph, voice "Holden" | text2speech_v2 / Seed Speech | 1.3 | Full episode ≈ 9.5 credits. MiniMax costs the same as ElevenLabs. Holden works only on ElevenLabs, MiniMax and Seed Speech. |
+| Same paragraph, priced only | Cozy Voice 0.65 · Vibe Voice 1.3 · Seed Audio 4.3 | n/a | Holden isn't available on Cozy or Vibe, and the six male presets tried on Cozy were all rejected. |
