@@ -16,6 +16,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 - **Leave out** anything marked unverified, single-source keep-off-air, or cut.
 - **Fair credit:** the credited person always gets their real due ("he perfected it", not "he was a fraud") unless the research documents a fraud.
 - **Banned in spoken text:** "genuinely", "dive in", "game changer", "unpack", "in today's video", "level up". No em dashes.
+- **Visual system (pilot, 2026-10-02):** archive-paper palette: paper #EFE7D6, ink #1D1B18, red #A8261B, brass #9A7B3C, blue #2F5D7C. Fonts: Libre Baskerville (headlines), Inter (labels). Templates live in `production/ep001-the-man-who-invented-nothing/templates/` (card.html, render.mjs, build.py). Diagrams build step by step with the narration. Lower-thirds name every person and caption any modern photo. No more than 2 text cards in a row, and no stretch longer than 12 seconds without a picture.
 - **Visuals:**
   - Real archival material first: Library of Congress, Smithsonian Open Access (CC0), the Met (CC0), NASA (no logos), US patents, and public-domain film and print (US-published 1930 or earlier).
   - AI only for scenes with no surviving image, in one illustrated channel style tagged "Illustration".
@@ -28,7 +29,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 ## Open items waiting on Gus
 1. ~~Narrator decision~~: decided 2026-10-02. Holden on Seed Speech (see Channel).
 2. Length decision: ship ~5-minute episodes first (recommended) vs. research to 8–10 minutes before launch.
-3. Pilot go-ahead: the full production package for Episode 1 (shot list, visuals, animatic, Resolve timeline).
+3. ~~Pilot~~: built 2026-10-02 in `production/ep001-the-man-who-invented-nothing/` (116 beats, 9:37, Holden narration, validated FCPXML, five blind reviews). **Still open:** 53 archival/stock beats from 32 items are placeholders, because the cloud network blocks loc.gov, wikimedia.org, si.edu and Higgsfield's CDN (d8j0ntlcm91z4.cloudfront.net). Either allow those hosts in the environment's network settings, or Gus downloads the files into `assets/` (names are in PENDING-ASSETS.md). The 8 narration MP3s go in `vo/`. Rights are confirmed for 11 of the 32 items.
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).
 5. Pronunciations to confirm: Magie (7), Chevedden (55), Tawell (97), Finlay (109), Koechlin and Nouguier (110). Others are confirmed in each script's reading notes.
 6. Pre-recording source pulls, per the "Open check" column in `scripts/README.md`. The biggest are: the Nowak paper and the 1858 Usi e costumi text (4, pizza); a second strong source naming John Loud (53); a Sasson page reference for the Kibri-Dagan letter (47); and a second source for the Dunhuang banner and the Heilongjiang and Xanadu guns (49).
