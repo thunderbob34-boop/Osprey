@@ -4,26 +4,28 @@ Prepared 2026-10-01. Contents: research rounds and what changed each round; the 
 
 ## Summary
 
-- **Rounds run: 8.** Round 1 was a live web-search pass. Rounds 2–8 were independent blind reviews by fresh reviewer agents, plus a blind editorial audit between Rounds 6 and 7.
-- **Corrections by round:** R1: 4 · R2: 17 · R3: 11 (5 medium + 6 low) · R4: 0 · R5: 0 · R6: 0 · (audit fixes) · R7: 1 · **R8: 0**.
-- **Stop condition:** a full round with no new corrections. It was first met at Rounds 4–6. Wording guards from 4 and 5 and the audit edits changed the text afterward, so Rounds 6 and 8 re-confirmed it. **Round 8 is clean on the final text.**
-- **Correction definition:** a "correction" is a high- or medium-confidence finding (one the reviewer would bet on). Optional low-confidence guards are logged in each round, with whether they were applied.
-- **Big caveat:** live sourcing was limited. The container's network policy blocked every page fetch (Rutgers, Smithsonian, Wikipedia, archive.org, loc.gov…), so Round 1 worked from search-engine extracts. Then the session's 200-search budget ran out mid-Round 1, because five Job 3 research agents were searching in parallel. Rounds 2–8 could not search. They are expert-knowledge reviews, not source checks. Each claim's status in the table at the bottom tells you which kind of check it got.
+- **Rounds run: 13.**
+  - Round 1: a live web-search pass.
+  - Rounds 2–8: independent blind reviews without search (the budget had run out), with a blind editorial audit between 6 and 7.
+  - Round 9 (2026-10-02, search limit raised): every spot-check line verified against sources.
+  - Rounds 10–13: fresh reviewers with limited search.
+- **Corrections by round:**
 
-## Spot-check before publishing
+  | R1 | R2 | R3 | R4 | R5 | R6 | audit | R7 | R8 | R9 | R10 | R11 | R12 | R13 |
+  |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+  | 4 | 17 | 11 | 0 | 0 | 0 | fixes | 1 | 0 | 2 | 1 | 2 | 2 | **0** |
 
-These script lines rest on standard history that every reviewer confirmed, but nobody opened a source for them this session. Ten minutes with these sources closes the gap. They are in priority order.
+- **Stop condition** (a full round with no new corrections): **met at Round 13 on the final text.**
+- A "correction" is a high- or medium-confidence finding. Optional low-confidence guards are logged per round, with whether they were applied.
+- **Sourcing:** every contested line is now verified against sources ("R1" or "R9" in the claims table). Page fetches are still blocked in this container, so all source checks are from search-engine extracts. The few remaining "B" rows are uncontested background (arc lighting, HVDC and the like).
 
-1. **The $5,000** (§06): Brown asked Edison for $5,000 to cover the generators (March 1889) and thanked him in May; the money came via Edison Electric. → Essig, *Edison and the Electric Chair*, ch. "Criminal Economy"; Edison Papers document D8933AAN4. If you can't confirm it, swap in: "letters published in 1889 showed Brown had been working with Edison's company and with Thomson-Houston behind the scenes."
-2. **Bulb lifespans** (§03): "something like half a day" (13.5 h, Oct 1879) and bamboo lamps "hundreds of hours, the best passing a thousand". → Smithsonian NMAH *Lighting a Revolution*; Friedel & Israel.
-3. **Ediswan 1883** (§03). → Science Museum Group collection pages; Oxford DNB entry for Swan.
-4. **Gaulard–Gibbs → Stanley, Great Barrington, March 1886** (§04). → IEEE Milestone "Alternating Current Electrification, 1886" (ethw.org).
-5. **Tesla in Paris from 1882, New York ~6 months in 1884; the $50,000 "practical joke" in *My Inventions*** (§05). → Carlson; Tesla, *My Inventions* (1919), ch. 3.
-6. **NY electric chair law, 1888** (§06). → Death Penalty Information Center, New York page; Moran.
-7. **GE merger, April 1892; Edison's name dropped; Coffin in charge** (§07). → Edison Papers biographical essays; Carlson; Jonnes.
-8. **World's Fair contract awarded in 1892, Westinghouse "well under" GE** (§07). → Smithsonian; IEEE Spectrum; Jonnes.
-9. **Niagara: Westinghouse generators; Buffalo, Nov 1896, 20+ miles** (§07). → IEEE Milestone "Adams Hydroelectric Generating Plant, 1895"; Buffalo History Museum.
-10. **1,093 US patents** (§01). → Edison Papers.
+## Spot-check list: verified 2026-10-02
+
+All ten lines are confirmed; see Round 9 for sources. Only two needed changes.
+1. **The $5,000:** documented in Brown's own letters (*Papers of Thomas A. Edison*; Edison Papers D8933AAN4). The script now names the chain: Brown asked Edison to help get $5,000 out of Edison's company, then thanked him for a note to the company's president, Johnson. No hedge needed.
+2. **Buffalo:** sources give 20, 22 or 26 miles, so the script says "some twenty miles away".
+
+Everything else was confirmed as written: the 13½-hour lamp, Ediswan 1883, Great Barrington 1886, Tesla's employment and the "practical joke", the 1888 law, GE 1892, the 1892 fair contract, and 1,093 patents.
 
 ## Round 1: live search pass (search-engine extracts; page fetches blocked)
 
@@ -240,6 +242,18 @@ The reviewer independently confirmed the newly worded $5,000 line against Essig'
 | 5 | "Selling at the same time, neck and neck" slightly undercuts Edison as "first commercially practical" (Edison's first commercial install, SS *Columbia*, was May 1880; Swan's sales came in 1881) | Low | "Swan, meanwhile, was **soon** selling his own bulbs in Britain, neck and neck" |
 
 **Corrections this round: 2.** A confirmation round followed.
+## Round 13: confirmation review on the final text (with limited search)
+
+**Result: 0 corrections. The stop condition is met on the final script.** With searches, the reviewer re-confirmed the three claims it doubted most:
+- **Columbia:** the same dog survived DC rising from 300 to 1,000 V, then 330 V AC killed it.
+- **The $5,000:** Brown's 27 March 1889 letter asks Edison's help getting $5,000 from Edison Electric, and his 13 May letter thanks him for "your note to Mr. Johnson".
+- **The commission letters:** Southwick wrote 8 Nov 1887; Edison refused; Southwick wrote again 5 Dec; Edison's 19 Dec 1887 reply recommends "alternating machines… Geo. Westinghouse". "About a month later" holds.
+
+Four low-confidence notes were **not applied** because they are fair simplifications:
+1. Tesla's patents were a strategic asset rather than equipment in use during 1888–90.
+2. "Nobody else had pulled off" the whole system: Edison's integrated incandescent system at scale was the first.
+3. The earliest AC plants generated at ~500–2,000 V and only stepped down at the customer. "Step it up at the plant" describes how AC works generally.
+4. Swan used the same Sprengel-pump vacuum, so "better vacuum" is relative to earlier lamps.
 ## Unresolved items and how each was handled
 
 | Item | What's unresolved | How it's handled |
