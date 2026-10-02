@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-The building that's usually called the world's first skyscraper got that title made official by a committee, forty-six years after it was finished, and the committee was set up by the people who were tearing it down to build something new. And a group of engineers who watched it come down put out a report disagreeing. And on top of that, there was an iron-framed building in England, and an office building with a passenger elevator in New York, years before this one went up.
+The building that's usually called the world's first skyscraper had that title made official by a committee, forty-six years after it was finished, and the committee was set up by the people who were tearing it down to build something new. And a group of engineers who watched it come down put out a report disagreeing. And on top of that, there was an iron-framed building in England, and an office building with a passenger elevator in New York, years before this one went up.
 
 ## 02 The Famous Version
 

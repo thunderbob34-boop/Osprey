@@ -9,6 +9,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 - **Scripts:** `scripts/` (2–100) and `launch-episode-script.md` (1). Index and runtimes: `scripts/README.md`. Research: `episode-research.md`, `100-episode-lineup.md`, and each script's `scripts/notes/`.
 
 ## Standing rules
+- **Fact-check record:** all 99 scripts went through review, Re-check A (live sources), Re-check B (blind adversarial), then Re-check C and D on everything B changed. The last pass (D) found no high or medium issues.
 - **Facts:** every factual line traces to two strong sources in the research or notes. Wikipedia, Grokipedia and content farms never count. Keep every hedge as written ("reportedly", "as X told it", "about", "one of the oldest", "widely considered").
 - **Leave out** anything marked unverified, single-source keep-off-air, or cut.
 - **Fair credit:** the credited person always gets their real due ("he perfected it", not "he was a fraud") unless the research documents a fraud.
@@ -27,7 +28,9 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 2. Length decision: ship ~5-minute episodes first (recommended) vs. research to 8–10 minutes before launch.
 3. Pilot go-ahead: the full production package for Episode 1 (shot list, visuals, animatic, Resolve timeline).
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).
-5. Pronunciations to confirm: Magie, Nowak, Tawell, Chevedden (flagged in reading notes).
+5. Pronunciations to confirm: Magie (7), Chevedden (55), Tawell (97). Others are confirmed in each script's reading notes.
+6. Pre-recording source pulls, per the "Open check" column in `scripts/README.md`. The biggest are: the Nowak paper and the 1858 Usi e costumi text (4, pizza); a second strong source naming John Loud (53); a Sasson page reference for the Kibri-Dagan letter (47); and a second source for the Dunhuang banner and the Heilongjiang and Xanadu guns (49).
+7. History Channel topic mining ("That Built" franchise + Hazardous History) as a topic map only, after the fact-check. Research the best 10–15 to the two-source standard.
 
 ## Sources (policy and licensing, checked 2026-10-02)
 See the "Sources checked" table in `production-game-plan.md`. Re-check any row older than 30 days before a video ships.
