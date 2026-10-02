@@ -1,4 +1,4 @@
-# Gunpowder Before Europe Knew It
+# Gunpowder Started in China, as a Warning
 
 READING NOTES
 - Runtime is about 5 minutes at a relaxed pace, roughly 697 spoken words.

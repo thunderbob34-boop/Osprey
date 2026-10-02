@@ -1,6 +1,6 @@
 # Notes: Fibonacci's Numbers Started in Indian Poetry
 Research entry: 100-episode-lineup.md, heading "### 18. Fibonacci's Numbers Belong to Indian Poets"
-Spoken words: 900
+Spoken words: 904
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -50,3 +50,5 @@ Left out on purpose (unverified / keep off air in research): any claim that Indi
 - Round C changes confirmed / problems: confirmed. Removal of the 1506 notary clause leaves 06 flowing (Libri 1838, Devlin hedge, AMS Notices and Scientific American, Lucas 1870s); 1202 to 1838 over six hundred years, 1202 to 1870s more than six hundred years, 1150 to 1202 about fifty; no banned words or dashes; count 900 verified.
 - Fixes made: none
 - Low items: none
+
+- Main-session follow-up: "the most famous number pattern" softened to "one of the most famous number patterns" in the cold open and section 06 (a superlative the research does not back).

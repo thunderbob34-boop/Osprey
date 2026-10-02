@@ -1,4 +1,4 @@
-# The First Gun Was Chinese
+# The Oldest Guns Are Chinese
 
 READING NOTES
 - Runtime is about 4 minutes at a relaxed pace, roughly 681 spoken words.

@@ -1,4 +1,4 @@
-# Fortune Cookies Aren't Chinese - They're Japanese
+# Fortune Cookies Most Likely Started in Japan
 
 READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 828 spoken words. The research is short, so this one runs short rather than padded.

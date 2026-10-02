@@ -1,7 +1,7 @@
 # Fibonacci's Numbers Started in Indian Poetry
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 900 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 904 spoken words.
 - Tone is curious and fair. Leonardo of Pisa didn't steal anything, and the script says so twice on purpose.
 - Say Virahanka as vih-rah-HUN-kah, Gopala as GOH-pah-lah, Hemachandra as hay-mah-CHUN-drah, Liber Abaci as LEE-ber AH-bah-chee, filius Bonacci as FEE-lee-us boh-NAH-chee, Guglielmo Libri as gool-YEL-moh LEE-bree, and Lucas as loo-KAH.
 - Every hedge in here is on purpose. Read "historians say", "probably", "there's no proof", "somewhere between 600 and 800", "before 1135", "around 1150", "about fifty years" and "survives through Gopala" exactly as written.
@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-The most famous number pattern in nature is named after a man who didn't discover it, using a nickname he never used. The pattern is the Fibonacci sequence, and the man is Leonardo of Pisa, who put it in a book in 1202. But scholars in India who studied the rhythms of Sanskrit poetry had the same numbers hundreds of years earlier, and on top of that, historians say the name Fibonacci wasn't even attached to Leonardo until centuries after he died. So both halves of the name have a problem.
+One of the most famous number patterns in nature is named after a man who didn't discover it, using a nickname he never used. The pattern is the Fibonacci sequence, and the man is Leonardo of Pisa, who put it in a book in 1202. But scholars in India who studied the rhythms of Sanskrit poetry had the same numbers hundreds of years earlier, and on top of that, historians say the name Fibonacci wasn't even attached to Leonardo until centuries after he died. So both halves of the name have a problem.
 
 ## 02 The Fibonacci Version
 
@@ -36,7 +36,7 @@ So the Indian scholars were first by centuries, with Virahanka, and still first 
 
 Now, Leonardo of Pisa didn't steal this. He probably learned Hindu-Arabic mathematics in North Africa, that's the system behind the zero through nine digits we all use now, but there's no proof he knew anything about the Indian work on poetry. His numbers came out of a puzzle about rabbits, and nobody should call him a thief.
 
-And Liber Abaci was a real book doing real work, so the point here isn't that Leonardo was a fraud, he wasn't, the point is that the most famous number pattern there is was counted out by scholars of poetry in India, centuries before he wrote it down, and their names aren't on it.
+And Liber Abaci was a real book doing real work, so the point here isn't that Leonardo was a fraud, he wasn't, the point is that one of the most famous number patterns there is was counted out by scholars of poetry in India, centuries before he wrote it down, and their names aren't on it.
 
 ## 06 The Name He Never Used
 

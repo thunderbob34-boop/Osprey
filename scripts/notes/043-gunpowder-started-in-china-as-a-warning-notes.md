@@ -1,4 +1,5 @@
-# Notes: Gunpowder Before Europe Knew It
+# Notes: Gunpowder Started in China, as a Warning
+_(Originally titled "Gunpowder Before Europe Knew It". Retitled after the 2026-10-02 checks so the title doesn't claim more than the script supports.)_
 Research entry: episode-research.md, "# Job 3" section, entry "### 18." (Gunpowder)
 Spoken words: 697
 

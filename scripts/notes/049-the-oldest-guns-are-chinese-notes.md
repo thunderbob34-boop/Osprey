@@ -1,4 +1,5 @@
-# Notes: The First Gun Was Chinese
+# Notes: The Oldest Guns Are Chinese
+_(Originally titled "The First Gun Was Chinese". Retitled after the 2026-10-02 checks so the title doesn't claim more than the script supports.)_
 Research entry: episode-research.md, "# Job 3" section, entry "### 19." (Gun)
 Spoken words: 681
 

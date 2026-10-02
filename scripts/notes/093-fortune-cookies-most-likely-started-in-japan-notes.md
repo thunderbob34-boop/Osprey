@@ -1,4 +1,5 @@
-# Notes: Fortune Cookies Aren't Chinese - They're Japanese
+# Notes: Fortune Cookies Most Likely Started in Japan
+_(Originally titled "Fortune Cookies Aren't Chinese - They're Japanese". Retitled after the 2026-10-02 checks to match the script's "most likely".)_
 Research entry: 100-episode-lineup.md, heading "### 93. Fortune Cookies Aren't Chinese — They're Japanese"
 Spoken words: 828
 
