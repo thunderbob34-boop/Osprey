@@ -1,6 +1,6 @@
 # Notes: Before Snow White: The Animated Features Disney Didn't Make First
 Research entry: 100-episode-lineup.md, heading "### 25. Before Snow White: The Animated Features Disney Didn't Make First"
-Spoken words: 850
+Spoken words: 858
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

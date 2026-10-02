@@ -25,3 +25,10 @@ Left out on purpose (unverified / keep off air in research): the planned "three 
 - Cadence fixes: 2. A rhetorical question followed by a fragment list ("...something important, right? A king's name, a prayer...") was joined into one breath; one "right?" removed (4 in about 840 words was too many).
 - Format fixes: reading notes said 840 and the notes file said 844; both now 836 (actual count).
 - Remaining concerns for Gus: runs short at 836 words, which is fine; not padded. The cold open's first line ("The oldest writing we have...") is the manifest hook and sits a little awkwardly next to the Egypt "neck and neck" section; it's accurate for Uruk but you may want "The oldest writing from Uruk".
+
+## Re-check A (2026-10-02)
+- Searched: Englund's 85% administrative / 15% lexical as averages; under 1% lexical in Uruk IV, close to 20% in Uruk III → confirmed → https://cdli.earth/files-up/publications/englund2011a.pdf
+- Searched: Abydos tomb U-j labels, Dreyer / German Archaeological Institute, bone and ivory, 1 to 4 signs, about 3320 BC, earliest evidence of writing in Egypt → confirmed (secondary summaries consistent with the entry's ISAC/Nat Geo sources) → https://the-past.com/shorts/the-picture-desk/the-discovery-of-tomb-u-j/ ; https://www.worldhistory.org/Egyptian_Hieroglyphs/
+- Searched: Visible Language (2010, Oriental Institute/ISAC) treats Mesopotamia, Egypt, China, Mesoamerica as the four pristine, independent inventions → confirmed → https://isac.uchicago.edu/research/publications/oimp/oimp-32-visible-language-inventions-writing-ancient-middle-east-and
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Uruk tablets "more than 5,000 years old"; administrative contents (grain, animals, metals, land, labor, beer rations); "still debated whether the U-j signs are writing proper". Cold-open line "the oldest writing we have" left as is: U-j labels are also goods labels, so the bookkeeping point holds either way.

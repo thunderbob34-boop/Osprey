@@ -1,6 +1,6 @@
 # Notes: Pythagoras' Theorem Was 1,000 Years Old
 Research entry: episode-research.md — "## New topic detail" section, entry "### 8."
-Spoken words: 707 (after review)
+Spoken words: 706 (after re-check A)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

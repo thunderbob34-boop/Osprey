@@ -26,3 +26,10 @@ Left out on purpose (unverified / keep off air in research): any claim that Indi
 - Cadence fixes: 4 joins, e.g. the counting run "Two beats, there are two ways... Three beats, there are three ways. Four beats, there are five." is now said as one run; joined "Liber Abaci was a real book doing real work. The point here isn't...".
 - Format fixes: Title line changed (file name left as is to match the manifest path). Word count updated (904 to 905).
 - Remaining concerns for Gus: The manifest title still says "Belong to Indian Poets"; update it if the title is used elsewhere. The "most famous number pattern in nature" hook is the entry's approved line, but the research says nothing about nature.
+
+## Re-check A (2026-10-02)
+- Searched: none. The session-wide web search budget was exhausted before this script was reached, so everything below was checked against the research entry and standard references only.
+- Fixes: none
+- Flag for Gus (not changed, style call): section 06 ends "He didn't have the name. He didn't have the name, and he didn't have the numbers first." The doubled sentence looks like a leftover from the cadence pass; drop the first "He didn't have the name." unless the repeat is on purpose.
+- Caveat noted, no change: some writers report a 1506 notarial mention of "Lionardo Fibonacci" (Perizolo), which would make 1838 the first modern use rather than the first use. The script already says "historians say" and names Devlin as the main source, which covers it.
+- Not search-verified (checked against research/knowledge only): Singh 1985, Historia Mathematica, "The so-called Fibonacci numbers in ancient and medieval India"; Virahanka 600-800, Gopala before 1135, Hemachandra c. 1150; Liber Abaci 1202 and the rabbit problem; Lucas naming the sequence in the 1870s; North Africa (Bugia) learning; Libri 1838 via Devlin / AMS Notices / Scientific American; the syllable-count arithmetic (1, 2, 3, 5, 8, 13, 21 checks out).

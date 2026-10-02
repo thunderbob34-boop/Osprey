@@ -1,7 +1,7 @@
 # Koch Didn't Discover the Cholera Germ First
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 810 spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 811 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is calm and fair. Koch is not a thief here, he very probably never knew about Pacini, so keep it "he finished the job", never "he stole it".
 - Say Filippo Pacini as fee-LEEP-oh pah-CHEE-nee, Robert Koch as ROH-bert KOKH (or KOHK), Vibrio cholerae as VIB-ree-oh KOL-er-eye, Florence as normal.
 - Every hedge in here is on purpose. Read "described", "identified", "probably", "as far as anybody can tell" and "first to grow it in pure culture" exactly as written. Don't say Pacini "proved" anything.
@@ -21,7 +21,7 @@ And it stuck because Koch didn't just see the thing, he nailed it down, right? K
 
 ## 03 Pacini, 1854
 
-Now here's the part that matters. Thirty years before Koch, in 1854, an Italian anatomist named Filippo Pacini, working in Florence, looked at the intestines of cholera victims, and under the microscope he described tiny comma-shaped vibrios. And he didn't just say he'd seen something odd, he said the cause of cholera was a living organism, something that reproduced. And that comma shape stuck, a CDC journal article on this history is even titled Persistence of Memory and the Comma Bacillus.
+Now here's the part that matters. Thirty years before Koch, in 1854, an Italian anatomist named Filippo Pacini, working in Florence, looked at the intestines of cholera victims, and under the microscope he described tiny comma-shaped vibrios. And he didn't just say he'd seen something odd, he said the cause of cholera was a living organism, something that reproduced. And that comma shape stuck, an essay about cholera in a CDC journal is even titled Persistence of Memory and the Comma Bacillus.
 
 So in 1854 Pacini had described the germ and said it was alive and that it was the cause, and that's the same year John Snow traced cholera in London to a water pump. So that's two people in two countries in the same year, both getting close to the truth about cholera from different directions.
 

@@ -25,3 +25,10 @@ Note: runs short (about 5 and a half minutes). The entry was a Fit 2/5 topic swa
 - Cadence fixes: 2. The crafted button "Designed first, built first, those aren't the same thing, and both of them deserve to be said out loud" became a plain "Galileo designed one first and Huygens built the first one that worked, and both of those are true"; "we're leaving it out" (said while mentioning it) became "we're not using it".
 - Format fixes: word count changed from 870 to 866.
 - Remaining concerns for Gus: runs short at 866 words, which is fine. The filename still carries the old title. The obelisk/3500 BCE paragraph is accurate but is a detour; cut it if the episode feels long.
+
+## Re-check A (2026-10-02)
+- Searched: Su Song's water-driven clock tower 1088 with escapement; Yi Xing 725 escapement → confirmed → https://www.britannica.com/biography/Su-Song ; https://ethw.org/Timeline_of_mechanical_engineering_innovation
+- Searched: Basel 2013 Valley of the Kings sundial, limestone, painted black, central peg hole, 13th century BC, near workmen's huts, "one of the world's oldest" → confirmed → https://www.livescience.com/28057-ancient-egyptian-sundial-discovered.html ; https://archaeology.org/news/2013/03/15/130315-egypt-valley-kings-workers-sundial/
+- Searched: Britannica obelisks: 4th dynasty (c. 2575 to 2465 BCE), none survive, earliest surviving Senusret I (1918 to 1875 BCE) → confirmed → https://www.britannica.com/technology/obelisk
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Huygens 1656 pendulum clock; Galileo's design before 1642 and Vincenzio's attempt; Egyptian shadow clocks by about 1500 BCE; NIST's 3500 BCE obelisk line.

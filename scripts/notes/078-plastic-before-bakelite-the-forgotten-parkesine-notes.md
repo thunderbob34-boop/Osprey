@@ -26,3 +26,9 @@ Note: runs short (about 4 and a half minutes). The entry is thin and the brief s
 - Cadence fixes: 1 ("So the fair way to put it is this. Parkesine..." is now one breath).
 - Format fixes: word count changed from 720 to 714; "widely called" added to the hedge list.
 - Remaining concerns for Gus: runs short at 714 words, which is fine; not padded. The bronze medal is still single-source (Science Museum Group) and is attributed on air; cut it for zero single-source lines. The section 04 aside that "one museum page" calls Parkesine fully synthetic only mentions that wording to correct it. Cut it if you'd rather not point at the Science Museum at all.
+
+## Re-check A (2026-10-02)
+- Searched: Britannica date for the Parkesine patent → Britannica says 1861 ("In 1861 the British inventor Alexander Parkes patented Parkesine"); other sources say 1856 or 1862, so the attributed wording stands → https://www.britannica.com/technology/Parkesine
+- Searched: 1862 International Exhibition and bronze medal; Parkesine Company 1866 to 1868 failure → confirmed by more than one source (no longer single-source) → https://blog.sciencemuseum.org.uk/alexander-parkes-materials-man-and-polymath/ ; https://plasticshof.org/members/alexander-parkes/
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Bakelite 1907, Yonkers; ACS first National Historic Chemical Landmark 1993; Hyatt celluloid patent 1870; semi-synthetic vs fully synthetic distinction.

@@ -1,6 +1,6 @@
 # Notes: The Pen That Wrote on Leather: Ballpoint Before Bíró
 Research entry: 100-episode-lineup.md — heading "### 53. The Pen That Wrote on Leather: Ballpoint Before Bíró"
-Spoken words: 864 (after review)
+Spoken words: 905 (after re-check A)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

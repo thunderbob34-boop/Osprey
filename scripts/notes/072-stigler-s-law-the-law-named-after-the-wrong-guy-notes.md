@@ -26,3 +26,10 @@ Left out on purpose (unverified / keep off air in research): the title of Merton
 - Cadence fixes: 3. "Now, to be fair, it's a joke law" was a misused concession (4th "to be fair") and is now "Now, I should say this up front, it's a joke law"; removed the crafted "made it come true the day it was published" button; replaced the closing "that's what this channel is about" button with a plainer last line.
 - Format fixes: word count 939 changed to 896 after edits; "about" in the hedge list (not used as a hedge) changed to "roughly", which is used.
 - Remaining concerns for Gus: under 900 words (896) after cuts; not padded. The filename still carries the old title. The de Moivre and Halley's Comet lines rest on one bare line in the research ("Also in this batch"), so they stay as name-checks only.
+
+## Re-check A (2026-10-02)
+- Searched: Stigler 1980, Transactions NY Acad Sci 39, Merton festschrift, Stigler credits Merton, Merton 1957 "Priorities in Scientific Discovery" → confirmed → https://en.wikipedia.org/wiki/Stephen_Stigler (citation: Trans. NY Acad. Sci. 39:147-58)
+- Searched: Kragh called the IAU background notes "bad history" → confirmed → https://www.science.org/content/article/move-over-hubble-discovery-expanding-cosmos-assigned-little-known-belgian-astronomer ; https://arxiv.org/abs/1809.02557
+- Searched: Plimpton 322, thought to come from Larsa, 1822 to 1762 BC, Columbia, Pythagorean triples; "trigonometry" is the UNSW authors' reading → confirmed → https://www.unsw.edu.au/newsroom/news/2017/08/mathematical-mystery-of-ancient-clay-tablet-solved ; https://www.britannica.com/topic/Plimpton-322
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Lemaître 1927 vs Hubble 1929; IAU 2018 vote 78% of 4,060 (from the research entry's Nature/Science sources); de Moivre and Halley's Comet Chinese records name-checks; Stigler at the University of Chicago.

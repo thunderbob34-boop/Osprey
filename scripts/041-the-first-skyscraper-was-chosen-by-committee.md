@@ -1,12 +1,12 @@
 # The "First Skyscraper" Was Chosen by Committee
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 853 spoken words. Every verified detail is in, so it runs under the usual length rather than padded.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 855 spoken words. Every verified detail is in, so it runs under the usual length rather than padded.
 - Tone is calm and a little dry. Jenney isn't the villain here, the title was handed out by a committee, and the script says so.
 - Say Jenney as JEN-ee, Tallmadge as TAL-mij, Ditherington as DITH-er-ing-tun, Shrewsbury as SHROHZ-bree, Bessemer as BESS-uh-mer, Phipps as FIPS.
-- Every hedge in here is on purpose. Read "usually called", "mostly iron", "a mix of masonry and iron", "the iron skeleton idea", "that mill isn't tall" and "a working paper" exactly as written. Never call the Home Insurance Building "steel-framed," and never call the Shrewsbury mill an earlier skyscraper.
+- Every hedge in here is on purpose. Read "usually called", "from the late 1880s", "mostly iron", "a mix of masonry and iron", "the iron skeleton idea", "that mill isn't tall" and "a working paper" exactly as written. Never call the Home Insurance Building "steel-framed," and never call the Shrewsbury mill an earlier skyscraper.
 - Visuals: period photos of the Home Insurance Building and its demolition, the Field Building, the Ditherington flax mill, and 120 Broadway's Equitable Building. A text card for the 1931 committee and the 1932 dissent.
-- Good on-screen text moments are 1885, 1888, 1931, 46 years, 1932, 1796 to 1797, 1868 to 1870, seven stories, and 120 Broadway.
+- Good on-screen text moments are 1885, 1931, 46 years, 1932, 1796 to 1797, 1868 to 1870, seven stories, and 120 Broadway.
 
 ## 01 Cold Open
 
@@ -22,7 +22,7 @@ You'll also sometimes hear that it had a revolutionary steel frame, and that's t
 
 So in 1931, the Home Insurance Building was being torn down, to make way for a new tower called the Field Building. And the Marshall Field estate, which was putting up that new tower, appointed a committee to decide whether the building they were tearing down was the first skyscraper, and the committee was headed by an architect named Thomas Tallmadge.
 
-And the committee ruled for the Home Insurance Building, it picked it over the Tacoma Building, from 1888. So that's forty-six years after the building was finished, and the title came from a committee appointed by the people replacing it, right?
+And the committee ruled for the Home Insurance Building, it picked it over the Tacoma Building, from the late 1880s. So that's forty-six years after the building was finished, and the title came from a committee appointed by the people replacing it, right?
 
 Now here's the part that matters, a committee of the Western Society of Engineers watched the demolition, and in 1932 they issued a dissenting report. So the engineers who watched the building come apart disagreed with the committee, and they put that in writing.
 

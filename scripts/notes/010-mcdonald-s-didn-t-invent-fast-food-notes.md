@@ -1,6 +1,6 @@
 # Notes: McDonald's Didn't Invent Fast Food
 Research entry: episode-research.md — "# Job 3" section, entry "### 65."
-Spoken words: 1022
+Spoken words: 1024
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -19,7 +19,7 @@ Spoken words: 1022
 | Pompeii thermopolia; about 80 known; Regio V counter painted with a Nereid on a seahorse; partly excavated 2019, full excavation announced late Dec 2020 | Smithsonian Magazine (Pompeii snack bar article); Parco Archeologico di Pompei press kit |
 | Plain explanation only: what an Automat, carhop, two-way speaker and a Nereid are; why a written manual makes a chain | General, non-contestable |
 
-Hedges kept: "usually called", "often considered", "according to the company", "widely credited", "one of the first", "reportedly", "about eighty ... that we know of", "nearly two thousand years ago".
+Hedges kept: "usually called", "often considered", "according to the company", "widely credited", "usually credited as the first" (In-N-Out speaker), "one of the first", "reportedly", "about eighty ... that we know of", "nearly two thousand years ago".
 Left out on purpose (unverified / keep off air in research): calling Red's flatly "the first" drive-through; Yoshinoya as an independently confirmed fact; the Song-dynasty material (unchecked); the "Diner" topic folded into this one in Job 4 was not drawn on.
 
 ## Review

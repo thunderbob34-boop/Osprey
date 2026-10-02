@@ -1,16 +1,16 @@
 # Abner Doubleday Didn't Invent Baseball
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 877 spoken words. The research is solid but short, so it runs under the usual length rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 917 spoken words.
 - Tone is easygoing and fair. Nobody in this story is a villain, it's a commission that believed a letter.
 - Say Newbery as NEW-bur-ee. Pittsfield is PITS-field.
-- Every hedge in here is on purpose. Read "dated December 1907 and widely reported as 1908", "a game called base-ball", "the oldest known mention", "and similar" and "no single inventor" exactly as written. Never say "the British invented baseball," and don't name anyone else as the real inventor, including Alexander Cartwright.
+- Every hedge in here is on purpose. Read "dated December 1907 and widely reported as 1908", "a game called base-ball", "one of the oldest known mentions", "not quite the oldest mention in America", "and similar" and "no single inventor" exactly as written. Never say "the British invented baseball," and don't name anyone else as the real inventor, including Alexander Cartwright.
 - Visuals: the 1744 Pocket-Book page and woodcut (Library of Congress has it), period images of Cooperstown and West Point, a text card for the Pittsfield bylaw.
-- Good on-screen text moments are 1839, December 1907 / 1908, 1838 to 1842, age 5, 1744, March 31 1755, 1791, and 80 yards.
+- Good on-screen text moments are 1839, December 1907 / 1908, 1838 to 1842, age 5, 1744, March 31 1755, 1786 (Princeton diary), 1791, and 80 yards.
 
 ## 01 Cold Open
 
-Baseball's official birthplace was picked by a commission that trusted one man's letter, and the man that letter named as the inventor was a student at West Point that year. The story you've probably heard is that Abner Doubleday invented baseball in Cooperstown, New York, in 1839, and it's one of the most famous origin stories in American sports. But a game called base-ball shows up in print nearly a hundred years before that, and the oldest known mention of it in America is a town law telling people not to play it near the windows.
+Baseball's official birthplace was picked by a commission that trusted one man's letter, and the man that letter named as the inventor was a student at West Point that year. The story you've probably heard is that Abner Doubleday invented baseball in Cooperstown, New York, in 1839, and it's one of the most famous origin stories in American sports. But a game called base-ball shows up in print nearly a hundred years before that, and one of the oldest known mentions of it in America is a town law telling people not to play it near the windows.
 
 ## 02 The Famous Version
 
@@ -38,7 +38,7 @@ So let's go back to who was playing it first. The earliest record in this story 
 
 And there's more, an Englishman named William Bray wrote in his diary that he played base ball on Easter Monday, March 31st, 1755. So it's in a children's book, and then it's in a man's diary, and both of those are more than eighty years before 1839.
 
-Then in America, in 1791, the town of Pittsfield, Massachusetts passed a law, and that law banned people from playing base ball within eighty yards of the new meeting house, to protect its windows. That's the oldest known mention of baseball in America, and it's not a celebration of the game, it's a town trying to stop it from breaking glass, right? And that's forty-eight years before the date the commission picked.
+Then in America, in 1791, the town of Pittsfield, Massachusetts passed a law, and that law banned people from playing base ball within eighty yards of the new meeting house, to protect its windows. Now, it's not quite the oldest mention in America, because a student at Princeton wrote in his diary in 1786 that he played baste ball on campus, and the Library of Congress counts that diary as the earliest, but the Pittsfield law is one of the oldest, and it's not a celebration of the game, it's a town trying to stop it from breaking glass, right? And that's forty-eight years before the date the commission picked.
 
 ## 06 Nobody Invented It
 

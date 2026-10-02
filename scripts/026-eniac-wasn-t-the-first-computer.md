@@ -1,10 +1,10 @@
 # ENIAC Wasn't the First Computer
 
 READING NOTES
-- Runtime is about 7 minutes at a relaxed pace, roughly 1,013 spoken words.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,021 spoken words.
 - Tone is calm and matter-of-fact. The court ruling carries this one, so read the quote slowly and plainly. ENIAC and Grace Hopper both get treated fairly.
 - Say ENIAC as EE-nee-ack, Atanasoff as uh-TAN-uh-soff, Mauchly as MOCK-lee, Konrad Zuse as KON-rahd TSOO-zuh, Puskas as POOSH-kahsh, Colossus as kuh-LOSS-us, Dollis Hill as DOLL-iss HILL.
-- Every hedge in here is on purpose. Read "in 1941", "a special-purpose machine", "kept secret for decades", "restricted to codebreaking", "probably wasn't even hers" and "designed a computing machine in the 1830s, but it was never built" exactly as written. Don't give a day or month for the Z3.
+- Every hedge in here is on purpose. Read "in 1941", "a special-purpose machine", "kept secret for decades", "restricted to codebreaking", "probably wasn't even hers" and "designed a computing machine in the 1830s, but it was never built" and "one of the reasons it gave" exactly as written. Don't give a day or month for the Z3.
 - Good on-screen text moments are the Larson quote, Oct 19 1973, 1941, Dec 1943, Jan 1944, Sept 9 1947, Relay 70 Panel F, "First actual case of bug being found," and Nov 1878.
 
 ## 01 Cold Open
@@ -47,7 +47,7 @@ And Grace Hopper was on that team, and she loved telling the story, but the Smit
 
 ## 07 Fair Credit
 
-Now, to be fair, none of this means ENIAC wasn't a real achievement, and nobody's saying it was. The 1973 ruling was about who first invented the electronic digital computer and whether that patent should stand, and the court said no, it shouldn't, because the key ideas came from Atanasoff.
+Now, to be fair, none of this means ENIAC wasn't a real achievement, and nobody's saying it was. The 1973 ruling was about who first invented the electronic digital computer and whether that patent should stand, and the court said no, it shouldn't, and one of the reasons it gave was that the key ideas came from Atanasoff.
 
 And if you want to go back even further than all of them, Charles Babbage designed a computing machine in the 1830s, but it was never built. So the idea of a machine that could compute was around for a long time, it just took a long time to actually build one that worked, and in the early 1940s people got there in Iowa and in Berlin and in Britain, and ENIAC is the one that ended up with the name.
 

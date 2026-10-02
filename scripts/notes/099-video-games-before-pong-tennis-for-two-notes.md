@@ -1,6 +1,6 @@
 # Notes: Video Games Before Pong: Tennis for Two
 Research entry: 100-episode-lineup.md, heading "### 99. Video Games Before Pong: Tennis for Two"
-Spoken words: 640
+Spoken words: 678
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

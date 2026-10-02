@@ -24,3 +24,8 @@ Left out on purpose (unverified / keep off air in research): Thomas Savery's 169
 - Cadence fixes: 5. Joined stops in 04 (1764/1765 line; 1769/fifty-seven years/half a century as one breath) and 05 (seventy-five percent; improver line); replaced the "that's what this channel is about" button.
 - Format fixes: word count updated 723 to 721.
 - Remaining concerns for Gus: runs 721 words (under 900). If Gus wants "pumping water" back (it's true of Newcomen engines and is in the manifest hook), the research entry needs a source added for it first. The atmospheric-engine and heat-cool-heat explanation in 03 is plain mechanics, not from a listed source.
+
+## Re-check A (2026-10-02)
+- Searched: Britannica: Watt saw the waste in 1764, conceived the separate condenser in 1765, fuel costs dropped by about 75 percent → confirmed → https://www.britannica.com/technology/separate-condenser
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Newcomen engine near Dudley Castle 1712 (ASME); Watt born 1736; 1769 patent; ASME "first successful Newcomen engine".

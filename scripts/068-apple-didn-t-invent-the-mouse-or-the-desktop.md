@@ -1,12 +1,12 @@
 # Apple Didn't Invent the Mouse (or the Desktop)
 
 READING NOTES
-- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 856 spoken words. The research is narrow, so this one runs under the usual length on purpose rather than padding.
+- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 889 spoken words. The research is narrow, so this one runs under the usual length on purpose rather than padding.
 - Tone is calm and fair. Apple is not the villain here. Don't say Apple stole anything, the script doesn't, and the on-screen text shouldn't either.
 - Say Engelbart as ENG-el-bart, PARC as park, Alto as AL-toh.
 - Every hedge in here is on purpose. Read "mid-1960s", "according to Smithsonian magazine", "that comes from one source, so take it as their account", "reinforced work Apple already had under way" and "licensed" exactly as written. Don't put a dollar figure on the SRI license anywhere, on screen or in the description.
 - Visuals: archive footage of the 1968 demo, the Computer History Museum's photo of the wooden prototype, the patent drawing for US 3,541,541, photos of the Xerox Alto, and text cards.
-- Good on-screen text moments are mid-1960s, US 3,541,541, "X-Y position indicator for a display system", 1967 filed, Dec 9 1968, 90 minutes, Nov 17 1970, 1973, Dec 1979, 1983 Lisa, and 1984 Macintosh.
+- Good on-screen text moments are mid-1960s, US 3,541,541, "X-Y position indicator for a display system", 1967 filed, Dec 9 1968, 90 minutes, Nov 17 1970, 1973, Dec 1979, 1981 Star, 1983 Lisa, and 1984 Macintosh.
 
 ## 01 Cold Open
 
@@ -30,7 +30,7 @@ That's a mouse, links, windows and shared editing, all in one demonstration, in 
 
 ## 05 Xerox and the Alto
 
-And there's more, because the desktop didn't start at Apple either. Over at Xerox's research lab, PARC, they built a computer called the Alto in 1973, and the Alto had a mouse and a desktop of icons, folders and documents. So the screen with little pictures of folders that you click on, that was running at Xerox about ten years before the Lisa. IEEE Spectrum, the engineering magazine, ran a piece on the Alto with the title Fifty Years Later, We're Still Living in the Xerox Alto's World, and you can see why. And in December 1979, Steve Jobs and some Apple engineers visited PARC.
+And there's more, because the desktop didn't start at Apple either. Over at Xerox's research lab, PARC, they built a computer called the Alto in 1973, and the Alto had a mouse and windows on a screen you could point at and click, and that was running at Xerox about ten years before the Lisa. And the full desktop, the little pictures of documents and folders that you click on, came on Xerox's next machine, the Star, which went on sale in 1981, two years before the Lisa. IEEE Spectrum, the engineering magazine, ran a piece on the Alto with the title Fifty Years Later, We're Still Living in the Xerox Alto's World, and you can see why. And in December 1979, Steve Jobs and some Apple engineers visited PARC.
 
 ## 06 Fair Credit to Apple
 
@@ -42,4 +42,4 @@ Oh, one more thing, according to Smithsonian magazine, Engelbart never received 
 
 ## 07 The Box With Two Wheels
 
-So the plain version is this. Douglas Engelbart and Bill English built the first mouse in the mid-1960s, a wooden box with two metal wheels, Engelbart's patent called it an X-Y position indicator for a display system, filed in 1967 and issued in 1970, and on December 9th, 1968, he showed the mouse, links, windows and shared editing in about ninety minutes. Xerox's Alto had a mouse and a desktop in 1973, Apple visited in 1979, and the Lisa and the Macintosh came in 1983 and 1984. Somebody did it first, and for the mouse, that was Engelbart and English.
+So the plain version is this. Douglas Engelbart and Bill English built the first mouse in the mid-1960s, a wooden box with two metal wheels, Engelbart's patent called it an X-Y position indicator for a display system, filed in 1967 and issued in 1970, and on December 9th, 1968, he showed the mouse, links, windows and shared editing in about ninety minutes. Xerox's Alto had a mouse and windows in 1973, Xerox's Star had the desktop of folders in 1981, Apple visited in 1979, and the Lisa and the Macintosh came in 1983 and 1984. Somebody did it first, and for the mouse, that was Engelbart and English.

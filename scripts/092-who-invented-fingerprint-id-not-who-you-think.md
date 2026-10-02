@@ -21,7 +21,7 @@ And that's probably a big part of why the credit stuck to those two names, becau
 
 ## 03 Herschel in India
 
-This part of the story starts with a British administrator in Hooghly named William Herschel. In 1858 Herschel had a local contractor named Rajyadhar Konai put his handprint on a contract, so that's 1858, and it was a handprint, not a fingerprint yet. But Herschel kept at it, and later on he was using fingerprints as signatures, and he described what he'd been doing in a letter dated August 15th, 1877, which people now call the Hooghly Letter.
+This part of the story starts with a British administrator in Bengal named William Herschel. In 1858 Herschel had a local contractor named Rajyadhar Konai put his handprint on a contract, so that's 1858, and it was a handprint, not a fingerprint yet. But Herschel kept at it, and later on he was using fingerprints as signatures, and he described what he'd been doing in a letter dated August 15th, 1877, which people now call the Hooghly Letter.
 
 Now, to be fair, that isn't crime-solving, that's using a print the way you'd use a signature, to show that one particular person agreed to something. But using a print as a signature only makes sense if your print is yours and nobody else's, so that idea was already there in Herschel's work, starting with that contract in 1858.
 

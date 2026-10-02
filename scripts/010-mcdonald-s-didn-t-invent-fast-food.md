@@ -1,10 +1,10 @@
 # McDonald's Didn't Invent Fast Food
 
 READING NOTES
-- Runtime is about 6 to 7 minutes at a relaxed pace, roughly 1,022 spoken words.
+- Runtime is about 6 to 7 minutes at a relaxed pace, roughly 1,024 spoken words.
 - Tone is calm and matter-of-fact, a little lighter than usual. It's burgers, let it be easy, but no jokes at anybody's expense.
 - Say Kroc as KROHK, Des Plaines as deh PLAINZ, Hardart as HAR-dart, Quisisana as kwee-zee-ZAH-nah, Yoshinoya as yoh-shee-NOH-yah, Nihonbashi as nee-hohn-BAH-shee, thermopolium as ther-moh-POH-lee-um (plural thermopolia, ther-moh-POH-lee-uh), Nereid as NEER-ee-id.
-- Every hedge in here is on purpose. Read "which is the opening date usually given", "usually called", "often considered", "according to the company", "widely credited", "one of the first", "reportedly", "about eighty" and "nearly two thousand years ago" exactly as written. Never call Red's the first drive-through flat out, and keep Yoshinoya as the company's own account.
+- Every hedge in here is on purpose. Read "which is the opening date usually given", "usually called", "often considered", "according to the company", "widely credited", "usually credited as the first drive-through with a two-way speaker", "one of the first", "reportedly", "about eighty" and "nearly two thousand years ago" exactly as written. Never call Red's the first drive-through flat out, and keep Yoshinoya as the company's own account.
 - Keep these apart in the voice and on screen: first fast-food chain (White Castle), first drive-in (Pig Stand 1921), first drive-through (contested), and quick food in general (ancient).
 - Good on-screen text moments are 1921 Wichita, 116 restaurants / 11 states / 1931, 1940, 1948 Speedee, 1955 Des Plaines, 1961, June 9 1902 / 818 Chestnut St., 1899, 1947, 1931, 1948, and 2019 / 2020 Pompeii.
 
@@ -36,7 +36,7 @@ And over in Tokyo, according to the company, Yoshinoya was serving quick beef bo
 
 Now let's talk about the drive-through, because this is where it gets complicated. Red's Giant Hamburg, on Route 66 in Springfield, Missouri, is widely credited as the first drive-through, in 1947, but there are other names in the running.
 
-In 1931, a Pig Stand in San Diego reportedly tried a drive-thru window. Now, the sources for that one aren't the strongest, and the food was reportedly brought out by the cook rather than handed through a window, so it might not count as a real drive-through at all. And then in 1948, In-N-Out, in Baldwin Park, added the two-way speaker, the thing where you order into a box and somebody inside hears you, and that was the first drive-through with a two-way speaker.
+In 1931, a Pig Stand in San Diego reportedly tried a drive-thru window. Now, the sources for that one aren't the strongest, and the food was reportedly brought out by the cook rather than handed through a window, so it might not count as a real drive-through at all. And then in 1948, In-N-Out, in Baldwin Park, added the two-way speaker, the thing where you order into a box and somebody inside hears you, and that's usually credited as the first drive-through with a two-way speaker.
 
 So the fair thing to say is that Red's is one of the first, not the first, full stop. And don't mix it up with the drive-in, either. Pig Stand opened its first drive-in in 1921, on the highway between Dallas and Fort Worth, with carhops bringing the food out to your car, and that's a drive-in, not a drive-through, it's a different thing.
 

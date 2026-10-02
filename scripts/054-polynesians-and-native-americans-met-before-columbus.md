@@ -11,7 +11,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-Polynesians and Native Americans met around the year 1200, almost three centuries before Columbus, and the proof is in people's DNA. When most of us think about who the great ocean navigators were, we think of Columbus and the European explorers, but Polynesian navigators were crossing open ocean without a compass or a chart centuries before any of them. Now, I want to be straight with you up front, the meeting is real, but who sailed to whom is still an open question, and I'll show you exactly why.
+Polynesians and Native Americans met around the year 1200, almost three centuries before Columbus, and the evidence is in people's DNA. When most of us think about who the great ocean navigators were, we think of Columbus and the European explorers, but Polynesian navigators were crossing open ocean without a compass or a chart centuries before any of them. Now, I want to be straight with you up front, the meeting is real, but who sailed to whom is still an open question, and I'll show you exactly why.
 
 ## 02 The Credit Europe Gets
 
@@ -49,4 +49,4 @@ And if you want a firm date for somebody reaching the Americas before Columbus, 
 
 ## 07 The Plain Fact
 
-So here's the plain fact, Polynesian navigators settled a huge triangle of the Pacific without compass or chart, steering by stars and swells and clouds and birds, and in 1976 Mau Piailug took Hōkūle'a from Hawai'i to Tahiti with no instruments at all. And around 1200, almost three centuries before Columbus, Polynesians and Native Americans met, and the DNA proves it, even though it can't tell us who made the trip. The European explorers get the credit for the great age of ocean navigation, and they earned their part of it. Somebody did it first, and it was the navigators of the Pacific, centuries earlier.
+So here's the plain fact, Polynesian navigators settled a huge triangle of the Pacific without compass or chart, steering by stars and swells and clouds and birds, and in 1976 Mau Piailug took Hōkūle'a from Hawai'i to Tahiti with no instruments at all. And around 1200, almost three centuries before Columbus, Polynesians and Native Americans met, and the DNA shows it, even though it can't tell us who made the trip. The European explorers get the credit for the great age of ocean navigation, and they earned their part of it. Somebody did it first, and it was the navigators of the Pacific, centuries earlier.

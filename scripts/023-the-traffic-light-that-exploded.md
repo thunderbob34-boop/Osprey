@@ -7,7 +7,7 @@ READING NOTES
 - Every hedge in here is on purpose. Read "as Smithsonian Magazine tells it", "badly burned", "December 1868", "about a month", "widely regarded" and "not the first" exactly as written. Never say the policeman was killed, and never give a single install day.
 - Visuals for the explosion: no injury imagery. Use text cards, period street images of Westminster, and drawings or photos of the signal itself.
 - Good on-screen text moments are December 1868, January 1869, 55 years, Great George Street and Bridge Street, 1912 Salt Lake City, Aug 5 1914 Cleveland, and 1923 US Patent 1,475,024.
-- Before lock: the explosion details come from Smithsonian Magazine only. The research asks for a second outlet (for example Westminster Council's green plaque list or a London newspaper archive) before this one records.
+- The explosion details now have two sources: Smithsonian Magazine and the IET's Savoy Place "100 Ideas: Traffic signals" page. The second-outlet open item is closed.
 
 ## 01 Cold Open
 
@@ -31,7 +31,7 @@ Now you'll see different install dates for this, some say December 9th and some 
 
 And here's where it goes wrong, the lamps ran on gas, and a gas lamp works by burning gas, so the lamp needs a supply of gas running to it the whole time, and a leak anywhere in that is a real danger. And in January 1869, as Smithsonian Magazine tells it, leaking gas exploded and burned the policeman who was operating it, and the signal was taken away. So the first traffic light in the world went up in December and was gone after January, it lasted about a month.
 
-Now, you'll see some accounts say the policeman was killed, and Smithsonian flags that as unconfirmed, so we're not going to say it. What we can say is that he was badly burned, and that the signal came down after that.
+Now, you'll see some accounts say the policeman was killed, and Smithsonian only puts that down as what some reports claim, so we're not going to say it. What we can say is that he was badly burned, and that the signal came down after that.
 
 ## 05 Before Morgan in America
 
@@ -43,7 +43,7 @@ So by the time Morgan got his patent in 1923, London had tried a gas-lit signal 
 
 Now, to be fair to Garrett Morgan, none of this takes anything away from him. He was a real innovator, and the Smithsonian's Lemelson Center and the US Patent and Trademark Office both have pieces on him and his patent, and the patent office's piece is called Of Courage and Caution. His patent was for a three-position signal, which was a better design, and that's a real contribution.
 
-The problem is just the word first. Morgan's name gets attached to the invention of the traffic light, and the fair thing to say is that he improved it, he didn't start it. He made a better signal. He made a better signal, and he got a patent for it, and that's worth remembering on its own without giving him something that belongs to somebody else.
+The problem is just the word first. Morgan's name gets attached to the invention of the traffic light, and the fair thing to say is that he improved it, he didn't start it. He made a better signal, and he got a patent for it, and that's worth remembering on its own without giving him something that belongs to somebody else.
 
 ## 07 Who Did It First
 

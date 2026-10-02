@@ -1,6 +1,6 @@
 # Notes: Canning Before Pasteur Knew Why
 Research entry: episode-research.md — "# Job 3" section, entry "### 62." (Food Preservation)
-Spoken words: 872
+Spoken words: 895
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -26,3 +26,10 @@ Note: runs a bit short (about 5 and a half minutes) rather than padding.
 - Cadence fixes: 1. A rhetorical question followed by a fragment list ("It's a great story, right? An emperor, an army, a prize...") is now one breath.
 - Format fixes: word count changed from 871 to 872. The hedge list named "what's documented is this" and "it's often dated to 1795", which aren't the script's wording; it now lists "here's what's documented", "often dated to 1795", "a lot less certain" and "in the sources we checked".
 - Remaining concerns for Gus: runs short at 872 words, which is fine. The research's own on-air line calls Donkin and Hall's 1813 factory "the world's first canning factory" while also confirming Appert's Massy cannery from 1812. That conflict should be settled before anyone says "first canning factory" on screen.
+
+## Re-check A (2026-10-02)
+- Searched: Durand patent 25 Aug 1810; sale to Donkin and Hall → sale date conflicts (1811 in Grace's Guide; 1812 in Wikipedia/John Hall sources); Bermondsey factory selling by spring 1813 → https://www.gracesguide.co.uk/Peter_Durand ; https://en.wikipedia.org/wiki/Peter_Durand ; https://en.wikipedia.org/wiki/Bryan_Donkin
+- Searched: what Durand's patent covered → vessels of "glass, pottery, tin or other suitable metals", communicated to him by a foreigner; not a tin-only patent → https://en.wikipedia.org/wiki/Peter_Durand ; https://spo.nmfs.noaa.gov/Fishery%20Leaflets/leaflet78.pdf
+- Searched: House of Appert at Massy, first commercial cannery, 1812; 1810 award paid on condition of publishing; Smithsonian "father of canning... knew his process worked, but not why" → confirmed → https://www.britannica.com/place/House-of-Appert ; https://www.smithsonianmag.com/smart-news/father-canning-knew-his-process-worked-not-why-it-worked-180961960/
+- Fixes: (1) "an Englishman named Peter Durand got a patent... using tin cans instead of glass" was overstated: the patent covered glass, pottery and tin, and his nationality is uncertain; now "a merchant named Peter Durand... his patent covered tin as well as glass and pottery", and "one in glass and one in tin" became "the London patent is the one that opened the door to tin". (2) "sold that patent in 1811" now "in 1811 or 1812 depending on which source you read" (sources conflict). (3) "opened a canning factory in 1813" now "had a canning factory going by 1813" (factory set up earlier, selling by spring 1813). (4) "who holds the tin can patent" / "Durand patented the tin can" now "the patent that covered tin" / "got a patent that covered tin". Word count 872 to 895; hedges added to the reading notes.
+- Not search-verified (checked against research/knowledge only): 12,000 francs from the Ministry of the Interior (Britannica per the entry); book title; 1795 prize dating dispute; "about fifty years" to Pasteur.

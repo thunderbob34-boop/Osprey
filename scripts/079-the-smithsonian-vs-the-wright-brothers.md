@@ -1,10 +1,10 @@
 # The Smithsonian vs. the Wright Brothers
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 943 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 950 spoken words.
 - Tone is calm and a little wry. This one runs the other way from most episodes. The Wrights really were first by the mainstream view, and the fight is over credit, so don't play it as a dethroning. Keep the Whitehead section even and flat, it's a disputed claim, not a reveal.
 - Say Tunison as TUN-ih-sun, Lorin as LOR-in, Langley as LANG-lee, Aerodrome as AIR-oh-drome, Dickie as DICK-ee.
-- Every hedge in here is on purpose. Read "as the family later told it", "reportedly", "a Wright rival", "a rival's 1914 tests", "engineers who were in a patent fight with the Wrights", "claimed" and "the mainstream view" exactly as written. Don't name who ran the 1914 tests.
+- Every hedge in here is on purpose. Read "as the family later told it", "reportedly", "a Wright rival", "a rival's 1914 tests", "engineers who were in a patent fight with the Wrights", "claimed", "one of the two witnesses named in the newspaper story" and "the mainstream view" exactly as written. Don't name who ran the 1914 tests.
 - No crash imagery as real footage. Use the famous first-flight photo, the telegram, period newspapers, the Smithsonian and Science Museum, and text cards.
 - Good on-screen text moments are December 17 1903, 120 feet in 12 seconds, 852 feet in 59 seconds, the telegram text, 57 vs 59, 1914, 1928, 1942, 1948, the contract wording, and August 14 1901.
 
@@ -42,7 +42,7 @@ So the Smithsonian is the place the Flyer lives, and the Smithsonian is also the
 
 Which brings us to one more name, Gustave Whitehead. Whitehead's supporters say he flew on August 14th, 1901, more than two years before the Wrights. And in 2013 Jane's All the World's Aircraft, with its editor Paul Jackson, backed Whitehead's claim, and Connecticut passed legislation honoring him, and NPR reported at the time that it was a historian's work that pushed Connecticut to claim first in flight for itself. So that's a serious aviation reference and a whole state on Whitehead's side, right?
 
-Now, to be fair, the other side of this is strong. The Smithsonian's curator Tom Crouch rejects the claim, and the one named witness to the flight, a man named James Dickie, later called the story a hoax. And Whitehead's supporters point to that 1948 contract and say the Smithsonian can't be neutral, and the Smithsonian says the evidence just isn't there. The Smithsonian even put out a fact sheet with the title First in Flight, Still the Wrights, and its Air and Space magazine ran a piece called Yes, the Wright Brothers Really Were the First to Fly. So the plain way to say it is that Whitehead's flight is claimed, it's disputed, and the mainstream view is still that the Wrights were first.
+Now, to be fair, the other side of this is strong. The Smithsonian's curator Tom Crouch rejects the claim, and one of the two witnesses named in the newspaper story, a man named James Dickie, later said he wasn't there and called the story imaginary. And Whitehead's supporters point to that 1948 contract and say the Smithsonian can't be neutral, and the Smithsonian says the evidence just isn't there. The Smithsonian even put out a fact sheet with the title First in Flight, Still the Wrights, and its Air and Space magazine ran a piece called Yes, the Wright Brothers Really Were the First to Fly. So the plain way to say it is that Whitehead's flight is claimed, it's disputed, and the mainstream view is still that the Wrights were first.
 
 ## 07 First in Flight
 

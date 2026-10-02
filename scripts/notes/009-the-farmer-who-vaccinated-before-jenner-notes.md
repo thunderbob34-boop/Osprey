@@ -1,6 +1,6 @@
 # Notes: The Farmer Who Vaccinated Before Jenner
 Research entry: episode-research.md — "# Job 3" section, entry "### 42."
-Spoken words: 933
+Spoken words: 934
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -16,7 +16,7 @@ Spoken words: 933
 | 1721 Boston epidemic, Mather and Zabdiel Boylston: 248 inoculated, 6 died | Britannica "Zabdiel Boylston"; NLM |
 | Plain explanation only: what cowpox and variolation are | General, non-contestable |
 
-Hedges kept: "by the 1500s", "somewhere between 1465 and 1572", "that's how the museums put it" / "the son of Jenner's gardener", "mild smallpox".
+Hedges kept: "is called the father of vaccination" (close), "by the 1500s", "somewhere between 1465 and 1572", "that's how the museums put it" / "the son of Jenner's gardener", "mild smallpox".
 Left out on purpose: the 1805 recognition of Jesty by the Original Vaccine Pock Institution and the Ottoman inoculation layer. Both appear only in the entry's "Best angle" line, not in its confirmed list, and no source is attached to them, so they were kept off air. They're easy adds if the producer confirms them.
 
 ## Review

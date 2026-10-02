@@ -24,3 +24,9 @@ Note: runs short (about 4 and a half minutes). The entry is thin and the brief s
 - Cadence fixes: 1. Removed the crafted closing button "First to notice and first to build the case are two different things, and the second one is Wegener's", which repeated the line before it.
 - Format fixes: word count changed from 720 to 687; "widely taught" added to the hedge list.
 - Remaining concerns for Gus: runs short at 687 words, the shortest in this batch. Not padded, but you might pair it with another episode or accept a roughly 4.5-minute runtime. The title is kept: Ortelius (1596) is 316 years before Wegener (1912).
+
+## Re-check A (2026-10-02)
+- Searched: USGS on Ortelius 1596 Thesaurus Geographicus ("torn away from Europe and Africa by earthquakes and floods", "the vestiges of the rupture reveal themselves...") and Snider-Pellegrini's two 1858 maps → confirmed → https://pubs.usgs.gov/gip/dynamic/historical.html
+- Searched: Romm, Nature 367:407-408 (1994), "A new forerunner for continental drift" → confirmed → https://www.nature.com/articles/367407a0
+- Fixes: none (USGS calls Ortelius "Dutch"; he was from Antwerp, so "Flemish" is accurate and stays)
+- Not search-verified (checked against research/knowledge only): Wegener 1912; Wegener's evidence (fossils, rocks, glaciers, shelf edges); IRIS list naming Bacon and Franklin.

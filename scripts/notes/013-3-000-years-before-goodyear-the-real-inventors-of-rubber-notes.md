@@ -25,3 +25,10 @@ Left out on purpose (unverified / keep off air in research): any claim that the 
 - Cadence fixes: 6 joins, e.g. "Now here's the part that matters. It wasn't one product. They didn't just make rubber, they tuned it." into one breath; "He got his US patent for it in 1844." joined to the line before.
 - Format fixes: Word count updated (898 to 896).
 - Remaining concerns for Gus: Runs 896 words, under 900; the research doesn't support more without padding. The Hancock detail is single-source (Science Museum Group) and is attributed on air.
+
+## Re-check A (2026-10-02)
+- Searched: Hosler, Burkett & Tarkanian, Science, 18 June 1999; Castilla elastica latex + Ipomoea alba juice; processing by about 1600 BC → confirmed → https://www.science.org/doi/10.1126/science.284.5422.1988 ; https://news.mit.edu/1999/rubber
+- Searched: MIT News headline "A good many years before Goodyear" (the recipe-tuning follow-up research) → confirmed, 2010 story → https://news.mit.edu/2010/mayaball-0524
+- Searched: Thomas Hancock provisional patent 21 Nov 1843 after examining Goodyear's samples (single-source flag) → confirmed by Science Museum Group, which also says Hancock suspected sulphur from the samples → https://collection.sciencemuseumgroup.org.uk/people/ap30249/hancock-thomas
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Goodyear 1839 discovery and 1844 US patent (standard; patent granted 15 June 1844); "organic compounds in the vine juice, not sulfur" attribution to the Science paper (per research entry); National Geographic coverage; bouncy balls / sandal soles / adhesives detail (matches the MIT 2010 story's subject).

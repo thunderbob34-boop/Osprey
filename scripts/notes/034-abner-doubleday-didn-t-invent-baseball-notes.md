@@ -1,6 +1,6 @@
 # Notes: Abner Doubleday Didn't Invent Baseball
 Research entry: 100-episode-lineup.md, heading "### 34. Abner Doubleday Didn't Invent Baseball"
-Spoken words: 877 (after review)
+Spoken words: 917 (after re-check A)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -27,3 +27,9 @@ Left out on purpose (unverified / keep off air in research): nothing in the entr
 - Cadence fixes: 5. Joined stops in 02 (two places) and 05 ("And there's more, an Englishman..."); cut a doubled "right?" in 03; replaced the "that's what this channel is about" closing button with a plain statement.
 - Format fixes: word count updated 885 to 877.
 - Remaining concerns for Gus: runs 877 words (under 900); research is short, not padded.
+
+## Re-check A (2026-10-02)
+- Searched: Pittsfield 1791 bylaw as "the oldest known mention of baseball in America" → CONTRADICTED: John Rhea Smith's Princeton diary, 22 March 1786 ("play baste ball in the campus"), which the Library of Congress presents as the earliest mention in America; Pittsfield was the earliest known as of its 2004 discovery → https://www.loc.gov/exhibitions/baseball-americana/about-this-exhibition/origins-and-early-days/baseballs-roots/earliest-mention-of-baseball/ , https://en.wikipedia.org/wiki/History_of_baseball_in_the_United_States
+- Searched: Graves 5 years old in 1839; Doubleday at West Point; Mills letter 30 Dec 1907 → confirmed → https://sabr.org/bioproj/person/abner-doubleday/ , https://sabr.org/bioproj/person/a-g-mills/
+- Fixes: (1) Cold open "the oldest known mention of it in America is a town law" → "one of the oldest known mentions". (2) Section 05 "That's the oldest known mention of baseball in America" → names the 1786 Princeton diary as the Library of Congress's earliest and calls Pittsfield "one of the oldest". Reading notes: hedge list and on-screen list updated, word count 877 → 917. Note: the manifest hook in script-final.json doesn't say "oldest", so no hook change needed.
+- Not search-verified (checked against research/knowledge only): Newbery 1744 Pocket-Book verse and woodcut; Bray diary, Easter Monday 31 March 1755 (Easter 1755 was 30 March, consistent); Pittsfield 80 yards; Hall of Fame "creation myth" wording; Cartwright contested.

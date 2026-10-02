@@ -25,3 +25,8 @@ Left out on purpose (unverified / keep off air in research): any patent number (
 - Cadence fixes: 5 joins, e.g. "Now here's the part that matters. Spangler had... He didn't have the money... And that's where William H. Hoover comes in." into one breath; cut the callback button "The guy who built the thing, out of a fan motor and a pillowcase, was the janitor." down to a plain joined clause.
 - Format fixes: Hedge list in reading notes updated. Word count updated (890 to 885).
 - Remaining concerns for Gus: Runs 885 words, under 900. No patent number, Spangler's age, or cousin link on air, as the entry requires.
+
+## Re-check A (2026-10-02)
+- Searched: none. The session-wide web search budget was exhausted before this script was reached, so everything below was checked against the research entry and standard references only.
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Spangler a janitor in Canton, Ohio, 1907 prototype with ceiling-fan motor and pillowcase; patented 1908 (US 889,823, granted 2 June 1908; kept off air as the entry requires); William H. Hoover a leather goods / harness maker; Electric Suction Sweeper Company took the patent and kept Spangler on (NMAH record); Booth's British patent 30 Aug 1901, horse-drawn "Puffing Billy"; Smithsonian magazine headline. All match standard accounts; the script does not claim Booth was the first powered cleaner, which is correct (Thurman 1899 and others came earlier).

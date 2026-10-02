@@ -1,6 +1,6 @@
 # Notes: Cook Wasn't First: Who Really Found Australia
 Research entry: 100-episode-lineup.md, heading "### 42. Cook Wasn't First: Who Really Found Australia"
-Spoken words: 876
+Spoken words: 880
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,7 +18,7 @@ Spoken words: 876
 
 Plain explanation added (no new claims): Cape York described as the peninsula at the top of Australia; trepang glossed as sea cucumbers; "east coast, the other side of the continent" follows from the landing places in the entry.
 
-Hedges kept: "at least the third group", "at least fifty thousand years" (safe floor), "possibly sixty-five thousand" and "still debated", "first recorded European landing" (never "first European"), earlier visits "none of those are proven", "the earliest one that survives".
+Hedges kept: "at least the third group", "at least fifty thousand years" (safe floor), "possibly sixty-five thousand" and "still debated", "first recorded European landing" (never "first European"), earlier visits "none of those are proven", "the earliest one that survives"; added in Re-check A: "generally thought to be" / "probably" (Pennefather River), "about three hundred kilometers", "oldest known".
 
 Left out on purpose (unverified / keep off air in research): the Duyfken's first meeting with Aboriginal people and the violence there (entry says handle only with more sourcing); the name of Hartog's ship and de Vlamingh's first name (not in the entry); any claim that the Portuguese or Makassans landed first; anything about what the dish was nailed to.
 

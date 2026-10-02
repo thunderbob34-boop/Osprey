@@ -1,10 +1,10 @@
 # Pascal Wasn't First: The Triangle That Is 600 Years Older Than Pascal
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 955 spoken words. The research is thin on purpose here, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 966 spoken words. The research is thin on purpose here, so this one runs short rather than padded.
 - Tone is calm and a little amused. Nobody in this story is a villain, and Yang Hui is the hero for naming his source.
 - Say al-Karaji as al-ka-RAH-jee, Jia Xian as jyah SHYEN, Yang Hui as yahng HWAY, Xiangjie Jiuzhang Suanfa as shyahng-jyeh jyoh-jahng swahn-fah, Omar Khayyam as OH-mar kye-YAHM, and Traité du triangle arithmétique as treh-TAY doo tree-AHNG-gluh ah-reet-may-TEEK.
-- Every hedge in here is on purpose. Read "about two centuries earlier", "around the year 1000", "about six hundred years", "mainly through later writers", "secondhand" and "Britannica's word for it" exactly as written.
+- Every hedge in here is on purpose. Read "about two centuries earlier", "around the year 1000", "about six hundred years", "mainly through later writers", "secondhand", "probably Persian" and "Britannica's word for it" exactly as written.
 - Leave India out of this one. Don't ad-lib anything about Pingala or Indian scholars drawing the triangle, that wasn't checked.
 - Visuals: build the triangle row by row on screen during section 02. Period manuscript pages work well for Yang Hui.
 - Good on-screen text moments are around 1000, mid-1000s, 1261, 1654, 1665, and the first five rows of the triangle.
@@ -33,11 +33,11 @@ Now here's the part that matters, Yang Hui didn't claim it, because in that 1261
 
 The catch is that Jia Xian's own book is lost, so we don't have his triangle in his own book, we know about it through Yang Hui, because Yang Hui wrote down where it came from. So the triangle is named after Pascal in the West and after Yang Hui in China, and Yang Hui is the one who told us it wasn't his, so even the Chinese name goes to the guy who passed it along.
 
-## 05 Even Earlier, in Persia
+## 05 Even Earlier, in Baghdad
 
-And there's more, because Jia Xian wasn't the only one, and he wasn't the earliest either. Around the year 1000, a mathematician in Persia named al-Karaji worked out the triangle, and Britannica's history of the binomial theorem puts him at about that date, which is before Jia Xian. Now, the same problem comes up again, al-Karaji's work survives mainly through later writers, so just like Jia Xian, we're hearing about him secondhand.
+And there's more, because Jia Xian wasn't the only one, and he wasn't the earliest either. Around the year 1000, a mathematician named al-Karaji, who was probably Persian and held an official post in Baghdad, worked out the triangle, and Britannica's history of the binomial theorem puts him at about that date, which is before Jia Xian. Now, the same problem comes up again, al-Karaji's work survives mainly through later writers, so just like Jia Xian, we're hearing about him secondhand.
 
-And then Omar Khayyam, who lived in the 1000s and into the 1100s, studied the triangle too. So before Pascal was ever born, this pattern had been worked out in Persia around 1000, laid out as a triangle in China in the mid-1000s, studied again by Khayyam, and printed in China in 1261 with a note saying where it came from, right? That's a long chain of people, and none of them is the name in the textbook.
+And then Omar Khayyam, who lived in the 1000s and into the 1100s, studied the triangle too. So before Pascal was ever born, this pattern had been worked out in Baghdad around 1000, laid out as a triangle in China in the mid-1000s, studied again by Khayyam, and printed in China in 1261 with a note saying where it came from, right? That's a long chain of people, and none of them is the name in the textbook.
 
 ## 06 Fair Credit to Pascal
 
@@ -47,4 +47,4 @@ But reinventing something and being first to it are two different things. Pascal
 
 ## 07 Who Did It First
 
-So, in order, al-Karaji worked out the triangle in Persia around the year 1000, Jia Xian laid it out as a triangle in China in the mid-1000s, Yang Hui printed it in 1261 and named Jia Xian as his source, and Pascal wrote his treatise in 1654, about six hundred years after Jia Xian. Pascal did the proofs and the probability, and he gets the credit for that. Somebody did it first, and in this case it was several people, in Persia and in China, hundreds of years before the name we use.
+So, in order, al-Karaji worked out the triangle in Baghdad around the year 1000, Jia Xian laid it out as a triangle in China in the mid-1000s, Yang Hui printed it in 1261 and named Jia Xian as his source, and Pascal wrote his treatise in 1654, about six hundred years after Jia Xian. Pascal did the proofs and the probability, and he gets the credit for that. Somebody did it first, and in this case it was several people, in the Islamic world and in China, hundreds of years before the name we use.

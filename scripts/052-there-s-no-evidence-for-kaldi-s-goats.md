@@ -1,13 +1,13 @@
 # There's No Evidence for Kaldi's Goats
 
 READING NOTES
-- Runtime is about 7 minutes at a relaxed pace, roughly 1,035 spoken words. The research is solid but narrow, so this one runs short rather than padded.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,037 spoken words. The research is solid but narrow, so this one runs short rather than padded.
 - Tone is calm and a little amused. Nobody's a villain here, the legend just got retold until the details changed.
 - Say Kaldi as KAL-dee, Antoine Faustus Nairon as an-TWAHN FAW-stus nay-RON, Maronite as MARE-oh-nite, Arabia Felix as uh-RAY-bee-uh FEE-licks, Ayaman as AY-uh-man, Sufi as SOO-fee, Ukers as YOO-kers, Fredholm as FRED-holm.
 - Every hedge in here is on purpose. Read "no evidence", "the earliest known", "roughly 800 years", "appears to occur first", "as far as that history can tell", "seems to have been made popular", "nobody has shown that" and "as far as the evidence goes" exactly as written.
 - Don't ad-lib that Ukers invented the name Kaldi. Nobody has shown who first attached it. And leave out any named Sufi figures or the 1500s Arabic account of coffee's beginnings, those weren't checked.
 - Visuals: the 1671 title page (a scan is on Wikimedia Commons) is the hero image. Period engravings of coffee and old maps labelled Arabia Felix work well.
-- Good on-screen text moments are 1671, the Latin title, "the most wholesome drink", "or, as others say, of goats", "Ayaman, which is Arabia Felix", 1922, 2010, and the 1400s.
+- Good on-screen text moments are 1671, the Latin title, "the most wholesome drink", "or, as others say, of goats", "Ayaman" and "Arabia Felix", 1922, 2010, and the 1400s.
 
 ## 01 Cold Open
 
@@ -29,7 +29,7 @@ And that book is real, it's not one of those sources that only exists because so
 
 And there's more, because the story in Nairon's book isn't quite the story you've heard. In 1922 a writer named William Ukers put out a big book called All About Coffee, and he quoted Nairon's version, and in that version the man is a keeper of camels, "or, as others say, of goats." So the oldest version we have isn't even sure which animals he was looking after.
 
-He's a herder who brings his complaint to the monks at a monastery, in a place Nairon calls "Ayaman, which is Arabia Felix," and Arabia Felix is an old name for Yemen. And he doesn't have a name, he's just the herder. So think about what that does to the story. The two things the modern version is surest about are the name Kaldi and the country Ethiopia, and neither one is in the oldest version anybody's found. The herder has no name, he lives in Yemen, and he might have been watching camels.
+He's a herder who brings his complaint to the monks at a monastery, in a place Nairon calls Ayaman, and he says that's Arabia Felix, and Arabia Felix is an old name for Yemen. And he doesn't have a name, he's just the herder. So think about what that does to the story. The two things the modern version is surest about are the name Kaldi and the country Ethiopia, and neither one is in the oldest version anybody's found. The herder has no name, he lives in Yemen, and he might have been watching camels.
 
 ## 05 Where The Name Came From
 

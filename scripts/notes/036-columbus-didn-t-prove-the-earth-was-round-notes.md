@@ -1,6 +1,6 @@
 # Notes: Columbus Didn't Prove the Earth Was Round
 Research entry: 100-episode-lineup.md, heading "### 36. Columbus Didn't Prove the Earth Was Round"
-Spoken words: 885 (after review)
+Spoken words: 913 (after re-check A)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -27,3 +27,9 @@ Left out on purpose (unverified / keep off air in research): the hook's "librari
 - Cadence fixes: 6. Joined stops in 01 (opening two sentences), 03 ("wasn't about the shape at all, it was about the size"), 05 (doubters/bigger/underestimated as one breath), 06 (never set out to prove), 07 timeline; replaced the "that's what this channel is about" button with a plain closing.
 - Format fixes: word count updated 877 to 885.
 - Remaining concerns for Gus: runs 885 words (under 900). "the normal educated view ... for well over a thousand years" in 03 leans on the Russell quote said just before it; keep the two together if editing.
+
+## Re-check A (2026-10-02)
+- Searched: Russell's wording → he wrote "with extraordinary few exceptions no educated person in the history of Western Civilization from the third century B.C. onward believed that the Earth was flat"; the script's version dropped the qualifier while presenting it as his words → https://en.wikipedia.org/wiki/Myth_of_the_flat_Earth , http://www.veritas-ucsb.org/library/russell/FlatEarth.html
+- Searched: Eratosthenes' accuracy → Britannica (Students): stadion length doubtful, result "may have varied by 0.5 to 17 percent" from the modern value; local stadia 154 to 215 m → "maybe within a few percent" overstated → https://kids.britannica.com/students/article/Eratosthenes/322583 ; NASA "first to calculate" → https://imagine.gsfc.nasa.gov/features/cosmic/earth_info.html ; APS https://www.aps.org/apsnews/2006/06/eratosthenes-measures-earth
+- Fixes: (1) 03 Russell quote restored to his wording with "with extraordinary few exceptions". (2) 04 "his answer comes out at roughly forty thousand kilometers" → "with one common conversion his answer comes out at roughly..." (3) 04 "remarkably close, maybe within a few percent" → "Britannica puts his error anywhere from about half a percent to about seventeen percent, so ... he got close, maybe very close, but not exactly right". (4) 07 "got remarkably close" → "got close". Reading-notes hedge and on-screen lists updated; word count 885 → 913.
+- Not search-verified (checked against research/knowledge only): Irving 1828 biography; 7.2 degrees / Syene and Alexandria; doubters thought the Earth bigger; Columbus's Japan estimate.

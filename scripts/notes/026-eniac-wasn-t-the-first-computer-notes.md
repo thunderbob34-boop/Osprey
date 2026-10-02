@@ -1,6 +1,6 @@
 # Notes: ENIAC Wasn't the First Computer
 Research entry: episode-research.md, "# Job 3" section, entry "### 39."
-Spoken words: 1,013
+Spoken words: 1,021
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

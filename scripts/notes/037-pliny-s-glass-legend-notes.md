@@ -1,6 +1,6 @@
 # Notes: Pliny's Glass Legend
 Research entry: episode-research.md, "# Job 3" section, entry "### 12." (Glass)
-Spoken words: 709 (after review)
+Spoken words: 710 (after re-check A)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -24,3 +24,9 @@ Left out on purpose (unverified / keep off air in research): "a campfire on a be
 - Cadence fixes: 6. Joined stops in 02 (Pliny intro; natron definition folded into the merchants sentence instead of a standalone line), 03 ("Now here's the part that matters, the Corning..."; "it's a legend, and nobody can check it"); merged the one-sentence "So glass beads..." paragraph in 04; replaced the closing button with a plain line.
 - Format fixes: word count updated 711 to 709.
 - Remaining concerns for Gus: runs 709 words, well under 900 (short entry, no named inventor). The Corning "about 4,000 years ago" attribution is marked "attribution approximate" in the research, so if it goes on screen, credit it loosely. A batch note at the end of the research quarter calls items 6-12 unchecked background knowledge, but entry 12 itself says "verified 2026-10-02" and lists sources, so the entry was treated as authoritative.
+
+## Re-check A (2026-10-02)
+- Searched: Corning tells Pliny's story as legend and says "No one really knows how glass came to be made"; Belus river is today's Na'aman River (near Acre, northern Israel) → confirmed → https://libanswers.cmog.org/faq/143701
+- Searched: Corning "about 4,000 years ago" in Mesopotamia → confirmed → https://whatson.cmog.org/exhibitions-galleries/origins-glassmaking ; beads from the third millennium BC, core-formed and cast vessels in Egypt and Mesopotamia by the 15th century BC → confirmed → https://www.metmuseum.org/toah/hd/rgls/hd_rgls.htm , https://www.smithsonianmag.com/science-nature/a-brief-scientific-history-of-glass-180979117/
+- Fixes: (1) 02 "in Phoenicia, which is in what's now Lebanon or Israel" → "and that river is in what's now northern Israel" (Corning identifies the Belus as the Na'aman). Word count 709 → 710.
+- Not search-verified (checked against research/knowledge only): Natural History Book 36; "merchants" wording; the non-peer-reviewed plausibility argument.

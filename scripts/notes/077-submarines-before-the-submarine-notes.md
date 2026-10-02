@@ -25,3 +25,10 @@ Note: runs a bit short (about 5 and a half minutes) rather than padding.
 - Cadence fixes: 1 small one ("one man in a one-man submarine" now "a little one-man submarine"). The rest already reads as joined breaths with natural repetition beats.
 - Format fixes: word count changed from 817 to 818.
 - Remaining concerns for Gus: runs short at 818 words, which is fine; not padded.
+
+## Re-check A (2026-10-02)
+- Searched: Turtle, night of 6 to 7 Sept 1776, Ezra Lee, HMS Eagle (Howe's flagship), first attempt at an underwater attack, cause of the failure disputed → confirmed → https://www.history.navy.mil/research/histories/ship-histories/danfs/t/turtle-i.html ; https://www.smithsonianmag.com/history/to-defeat-the-royal-navy-during-the-american-revolution-a-rebel-inventor-designed-a-secret-weapon-a-bomb-carrying-submarine-180989400/
+- Searched: Drebbel's diving boat 1620, greased leather, oars, Thames, 12 to 15 ft, Westminster to Greenwich → confirmed (Britannica states these flatly; script's "reportedly" is the safer reading) → https://kids.britannica.com/students/article/Cornelis-van-Drebbel/321804
+- Searched: Holland launched 1898; USS Holland acquired 11 April 1900, commissioned 12 Oct 1900 → confirmed → https://www.history.navy.mil/research/histories/ship-histories/danfs/h/holland-i.html ; https://www.britannica.com/topic/Holland-submarine
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Bushnell a Yale student designing 1771 to 1775; Britannica's "father of the modern submarine" wording; Smithsonian "world's first combat submarine" (title seen in search results, confirmed).

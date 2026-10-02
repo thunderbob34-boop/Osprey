@@ -1,16 +1,16 @@
 # Halley Didn't Discover Halley's Comet
 
 READING NOTES
-- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 711 spoken words. The research is short, so this one runs short on purpose.
+- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 714 spoken words. The research is short, so this one runs short on purpose.
 - Tone is calm and a little warm. Halley is not the villain here, he never claimed to discover it, and the script says so.
 - Say Shiji as SHUR-jee, Bayeux as by-YUH (or bay-YOO), Edmond as ED-mund.
-- Every hedge in here is on purpose. Read "first certain", "nearly two thousand years", "technically not a tapestry, it's an embroidery", "earlier sightings are uncertain" and "never claimed" exactly as written. Don't say anyone saw it before 240 BCE.
+- Every hedge in here is on purpose. Read "first certain", "nearly two thousand years", "technically not a tapestry, it's an embroidery", "earlier sightings are uncertain", "we know for sure" and "never claimed" exactly as written. Don't say anyone saw it before 240 BCE.
 - Visuals: the comet panel of the Bayeux Tapestry, period portraits of Halley, NASA and ESA comet images, and text cards. Don't name who spotted the 1758 return on screen, that wasn't checked.
 - Good on-screen text moments are 240 BCE, broom star, 1066, 1531 / 1607 / 1682, 1705, 1742, and 1758.
 
 ## 01 Cold Open
 
-Halley's Comet was being written down by Chinese court astronomers nearly two thousand years before Edmond Halley was born. Everybody knows the name, and it has his name on it, but he didn't discover it, and to be fair to him, he never said he did. What Halley actually did was work out that this comet keeps coming back, and that's a real achievement, but the first people to write it down were in China, and they called it a broom star.
+Halley's Comet was being written down by Chinese court astronomers nearly two thousand years before Edmond Halley was born. Everybody knows the name, and it has his name on it, but he didn't discover it, and to be fair to him, he never said he did. What Halley actually did was work out that this comet keeps coming back, and that's a real achievement, but the first people we know for sure wrote it down were in China, and they called it a broom star.
 
 ## 02 The Famous Version
 

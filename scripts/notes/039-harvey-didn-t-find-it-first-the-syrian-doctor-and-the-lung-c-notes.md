@@ -27,3 +27,8 @@ Left out on purpose (unverified / keep off air in research): the manifest hook's
 - Cadence fixes: 8. Merged the one-sentence Galen paragraph in 03; joined stops in 04 ("Now here's the part that matters, Ibn al-Nafis..."; Galen's pores; "by about 1242, and I say about because..."), 05 ("not saying anybody copied him, I'm saying..."), 06 ("didn't put it in a medical book, he put it inside..."), 07; replaced the closing button with the plain fact.
 - Format fixes: title; word count updated 831 to 838.
 - Remaining concerns for Gus: runs 838 words (under 900). "Nearly four hundred years" is arithmetic from the approximate 1242 date (one PMC source title says "about 300 years before Harvey"); the dates support "nearly four hundred", but "centuries before" is the safest wording if anyone pushes back.
+
+## Re-check A (2026-10-02)
+- Searched: Ibn al-Nafis manuscript found 1924 by al-Tatawi in Berlin; Servetus's Christianismi Restitutio (1553), burned at Geneva, three copies survive → confirmed → https://pmc.ncbi.nlm.nih.gov/articles/PMC6077055/ , https://pmc.ncbi.nlm.nih.gov/articles/PMC2612469/
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): birth around 1210 to 1213, death 1288; ~1242 commentary date; Britannica's "first accurate description in Europe" wording; Harvey 1628.

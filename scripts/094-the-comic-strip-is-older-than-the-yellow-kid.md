@@ -1,7 +1,7 @@
 # The Comic Strip Is Older Than the Yellow Kid
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 826 spoken words. The research is short, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 839 spoken words. The research is short, so this one runs short rather than padded.
 - Tone is light and a little amused. Outcault isn't a villain, he gets real credit for the first successful newspaper comic strip.
 - Say Rodolphe Töpffer as roh-DOLF TUHP-fer, Histoire de Mr. Vieux Bois as ee-STWAHR duh muh-SYUR vyuh BWAH, Les Amours as layz ah-MOOR, Mr. Jabot as muh-SYUR zhah-BOH, Outcault as OUT-kawlt, and Obadiah Oldbuck as oh-buh-DYE-uh OLD-buck.
 - Every hedge in here is on purpose. Read "the first successful newspaper comic strip", "the comic strip form", "albums, books", "that's their headline, their claim", "I think the reason the credit stuck", "as opposed to the newspaper strip" and "unauthorized" exactly as written.
@@ -29,7 +29,7 @@ Then from 1833 he started publishing these picture stories as albums, starting w
 
 Now here's the part that matters for America. In 1841 an unauthorized English version of one of Töpffer's stories came out, with a new name, The Adventures of Mr. Obadiah Oldbuck. Unauthorized means nobody asked Töpffer, so it was a pirated copy.
 
-And then in 1842 it was reprinted in the United States, as a supplement to a magazine called Brother Jonathan, and a supplement is just an extra piece that came along with the magazine, so people picked up their copy of Brother Jonathan and there was a comic with it. That American edition was unauthorized too, it was copied from a pirated French edition, so this story reached American readers as a bootleg. The Library of Congress has the American edition in its catalog, and Princeton University's Graphic Arts collection calls it the first comic strip published in America. And to be fair, that's their headline, their claim, and I haven't seen it checked against every other American publication from the 1840s, so I'll leave it as Princeton's claim. But either way, Americans were reading Mr. Obadiah Oldbuck in 1842, and the Yellow Kid's run in the World was 1895, and that's fifty-three years.
+And then in 1842 it was reprinted in the United States, as a supplement to a magazine called Brother Jonathan, and a supplement is just an extra piece that came along with the magazine, so people picked up their copy of Brother Jonathan and there was a comic with it. That American edition was unauthorized too, it was a reprint of that English version, and the English version had itself been copied from a pirated French edition, so this story reached American readers as a bootleg. The Library of Congress has the American edition in its catalog, and Princeton University's Graphic Arts collection calls it the first comic strip published in America. And to be fair, that's their headline, their claim, and I haven't seen it checked against every other American publication from the 1840s, so I'll leave it as Princeton's claim. But either way, Americans were reading Mr. Obadiah Oldbuck in 1842, and the Yellow Kid's run in the World was 1895, and that's fifty-three years.
 
 ## 05 Fair Credit to Outcault
 

@@ -1,12 +1,12 @@
 # Marco Polo Didn't Bring Ice Cream
 
 READING NOTES
-- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 753 spoken words. The research is narrow, so this one runs under the usual length on purpose rather than padding.
+- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 757 spoken words. The research is narrow, so this one runs under the usual length on purpose rather than padding.
 - Tone is calm and curious. No mocking Marco Polo or Catherine, the stories got pinned on them.
 - Say Ibn Abi Usaybi'a as IB-un AH-bee oo-SAY-bee-ah, Ibn Bakhtawayh as IB-un bahk-TAH-way, Zimara as zee-MAH-rah, Padua as PAD-yoo-uh, Giambattista della Porta as jahm-bah-TEES-tah DEL-uh POR-tuh, Magia Naturalis as MAH-jee-uh nah-too-RAH-lis, Antonio Latini as an-TOE-nee-oh lah-TEE-nee, Lo scalco alla moderna as low SKAHL-ko AH-lah mo-DAIR-nah, sorbetto as sor-BET-oh, Catherine de' Medici as deh MED-ih-chee, Jurafsky as jur-AF-skee, Quinzio as KWIN-zee-oh.
 - Every hedge in here is on purpose. Read "no evidence", "not likely true", "chills water", "as the Stanford linguist Dan Jurafsky lays it out", "take it as his account", "again going by Jurafsky", "some of the first", "among the first published", "we don't know exactly how", "a fair guess, not a fact", "poorly sourced" and "nobody knows" exactly as written. Never say the Arab physician froze food or invented ice cream.
 - Visuals: period maps, portraits of Marco Polo and Catherine de' Medici, title pages of Magia Naturalis and Lo scalco alla moderna, and text cards.
-- Good on-screen text moments are 1029, 13th century, 1530, 1558, early 1600s, 1690s, and salt + ice = colder than ice.
+- Good on-screen text moments are 1029, 13th century, 1530, 1589, early 1600s, 1690s, and salt + ice = colder than ice.
 
 ## 01 Cold Open
 
@@ -34,7 +34,7 @@ Now, to be fair, and this is important, that's chilling water, not freezing food
 
 Then, again going by Jurafsky, in 1530, a professor at Padua named Zimara wrote the cooling trick up as a new discovery, a new discovery, about five hundred years after that physician in 1029.
 
-By 1558, Giambattista della Porta was describing how to freeze wine to a slush in snow and saltpetre, in his book Magia Naturalis. And that's the actual freezing method, ice and saltpetre together, written down in Italy in the 1500s.
+By 1589, Giambattista della Porta was describing how to freeze wine to a slush in snow and saltpetre, in the expanded edition of his book Magia Naturalis. And that's the actual freezing method, ice and saltpetre together, written down in Italy in the 1500s.
 
 And then more than a century later, in the 1690s, Antonio Latini, who was steward to the Spanish viceroy in Naples, printed some of the first sorbetto recipes in a book called Lo scalco alla moderna, and that's some of the first, among the first published, not the first ever. And his recipes included chocolate, and even aubergine, which is eggplant.
 
@@ -46,4 +46,4 @@ Oh, one more thing, you'll sometimes hear that frozen milk dishes go back to Chi
 
 ## 07 Salt and Ice
 
-So the plain version is this. Marco Polo didn't bring ice cream back from China, Catherine de' Medici didn't carry it to France, and food historians find no evidence for either story. An Arab physician in the 13th century recorded that saltpetre chills water, crediting a physician from 1029, Zimara in Padua wrote it up in 1530, della Porta was describing how to freeze wine to slush in snow and saltpetre by 1558, and Latini printed some of the first sorbetto recipes in Naples in the 1690s. Somebody did it first, and it was a string of physicians and scholars, not Marco Polo.
+So the plain version is this. Marco Polo didn't bring ice cream back from China, Catherine de' Medici didn't carry it to France, and food historians find no evidence for either story. An Arab physician in the 13th century recorded that saltpetre chills water, crediting a physician from 1029, Zimara in Padua wrote it up in 1530, della Porta was describing how to freeze wine to slush in snow and saltpetre by 1589, and Latini printed some of the first sorbetto recipes in Naples in the 1690s. Somebody did it first, and it was a string of physicians and scholars, not Marco Polo.

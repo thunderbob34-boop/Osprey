@@ -25,3 +25,8 @@ Left out on purpose (unverified / keep off air in research): the lawsuit's outco
 - Cadence fixes: 6. Joined stops in 01, 03 (Jackson intro; the graham-flour method as one breath), 04 (Kellogg's granula line; "changed the name, he changed it to granola"); replaced the closing button.
 - Format fixes: word count updated 645 to 651; hedge list updated.
 - Remaining concerns for Gus: runs 651 words, well under 900 (short entry; lawsuit details unknown).
+
+## Re-check A (2026-10-02)
+- Searched: Britannica: Jackson, Dansville, 1863, "probably the first ready-to-eat cereal", baked, crumbled, rebaked, soaked in milk overnight; Smithsonian: Kellogg's "granula" in the late 1870s or early 1880s, Jackson sued, renamed Granola → confirmed → https://www.britannica.com/topic/breakfast-cereal , https://www.smithsonianmag.com/smart-news/first-breakfast-cereal-granula-had-be-soaked-being-eaten-180962340/
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): corn flakes in the 1890s (consistent with the standard 1894-98 dating; note W.K. Kellogg co-developed them, which the script doesn't contradict).

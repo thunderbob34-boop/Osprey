@@ -14,7 +14,7 @@ Seventy-eight years before the Gutenberg Bible, Buddhist monks in Korea printed 
 
 ## 02 The Gutenberg Version
 
-The way most of us learned it, Johannes Gutenberg invented the printing press and movable type, full stop. And there's real truth in part of that, because his famous 42-line Bible was completed no later than 1455, and what he built to make it was genuinely clever.
+The way most of us learned it, Johannes Gutenberg invented the printing press and movable type, full stop. And there's real truth in part of that, because his famous 42-line Bible was completed no later than 1455, and what he built to make it was really clever.
 
 So here's what movable type means, just so we're on the same page. Instead of carving a whole page out of one block, you make every letter or character as its own little piece, you line the pieces up to set a page, you print it, and then you break the page apart and reuse the same pieces for the next one. That's the idea, and it's a really, really good idea, because you only have to make the pieces once, right?
 

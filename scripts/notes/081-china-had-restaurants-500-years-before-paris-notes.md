@@ -26,3 +26,10 @@ Note: runs short (about 5 minutes) rather than padding.
 - Cadence fixes: 1 (the "in every way that matters" sentence and the list after it are now one breath).
 - Format fixes: word count changed from 785 to 784. The hedge list named "the usual story" and "more than 500 years", which aren't the script's wording; it now lists "the version you'll usually hear", "more than five hundred years", "some sources give 1767", "historians argue" and "the date we can actually stand on".
 - Remaining concerns for Gus: runs short at 784 words, which is fine. The filename still carries the old title "the-first-restaurants-were-in-china".
+
+## Re-check A (2026-10-02)
+- Searched: Kiefer, "Economics and the Origin of the Restaurant", Cornell HRA Quarterly 43(4), Aug 2002; 13th-century Hangzhou lively restaurant scene for locals and travellers; not an artifact of the French Revolution → confirmed → https://journals.sagepub.com/doi/abs/10.1177/0010880402434006 ; https://kiefer.economics.cornell.edu/Restaurant.PDF
+- Searched: The Attractions of the Capital (1235): restaurants run mostly by people from the old capital, noodle and seafood specialties, house menus → confirmed → https://afe.easia.columbia.edu/ps/china/attractions_song_capital.pdf
+- Searched: Spang found no Boulanger in the records, "doesn't mean he didn't exist"; Roze de Chantoiseau appears in contemporary directories → confirmed → https://www.nationalgeographic.com/culture/article/who-invented-the-first-modern-restaurant
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Columbia AFE "innumerable restaurants" wording; Chevallier's "snowballing of a myth" title; 1766/1767 date for Roze de Chantoiseau; restorative-broth meaning.

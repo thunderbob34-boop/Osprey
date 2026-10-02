@@ -26,3 +26,9 @@ Left out on purpose (unverified / keep off air in research): the story that Lema
 - Cadence fixes: 6. Merged three one-sentence paragraphs (02 "it stuck to Hubble", 03 priority claim, 04 "fair way to say it"); joined "Now here's the part most people never hear, two years earlier..."; joined the 07 timeline; replaced the "that's what this channel is about" button with the plain fact.
 - Format fixes: word count updated 799 to 785.
 - Remaining concerns for Gus: runs 785 words (under 900) because the entry is short; not padded.
+
+## Re-check A (2026-10-02)
+- Searched: IAU electronic vote closed 26 Oct 2018, 78% of 4,060 votes in favour of recommending "Hubble-Lemaître law" → confirmed → https://iauarchive.eso.org/news/pressreleases/detail/iau1812/
+- Searched: historians called the IAU background notes "bad history" (Helge Kragh, quoted by Science); Lemaître 1927, two years before Hubble → confirmed → https://www.science.org/content/article/move-over-hubble-discovery-expanding-cosmos-assigned-little-known-belgian-astronomer ; counter-paper https://arxiv.org/pdf/1909.07731
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): French, little-read Belgian journal; Slipher redshifts in the 1910s; Hubble 1929 as the convincing data.

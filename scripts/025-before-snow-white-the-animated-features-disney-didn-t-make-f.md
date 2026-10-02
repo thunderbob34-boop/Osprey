@@ -1,10 +1,10 @@
 # Before Snow White: The Animated Features Disney Didn't Make First
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 850 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
+- Runtime is about 6 minutes at a relaxed pace, roughly 858 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
 - Tone is warm and matter-of-fact. Disney gets his real firsts said out loud, and Lotte Reiniger is the center of the story.
-- Say Lotte Reiniger as LOT-tuh RYE-nig-er, Achmed as AHK-med, Quirino Cristiani as kee-REE-no kris-tee-AH-nee, El Apóstol as el ah-POSE-tole, Giannalberto Bendazzi as jahn-al-BAIR-toe ben-DAHT-see, Émile Cohl as ay-MEEL COAL, Fantasmagorie as fan-taz-ma-go-REE.
-- Every hedge in here is on purpose. Read "may not even have been the second", "reportedly the first", "reportedly isn't certain", "about three years", "oldest animated feature film that still survives", "one of the earliest fully drawn animated films" and "as far as we know" exactly as written. Never call Fantasmagorie "the first cartoon," and never call El Apóstol the first animated feature without "reportedly."
+- Say Lotte Reiniger as LOT-tuh RYE-nig-er, Achmed as AHK-med, Quirino Cristiani as kee-REE-no kris-tee-AH-nee, El Apóstol as el ah-POSE-tole, Émile Cohl as ay-MEEL COAL, Fantasmagorie as fan-taz-ma-go-REE.
+- Every hedge in here is on purpose. Read "may not even have been the second", "reportedly the first", "comes secondhand", "about three years", "oldest animated feature film that still survives", "one of the earliest fully drawn animated films" and "as far as we know" exactly as written. Never call Fantasmagorie "the first cartoon," and never call El Apóstol the first animated feature without "reportedly."
 - Good on-screen text moments are 1908 Paris, Nov 9 1917 Buenos Aires, 1926 Germany, about 3 years, and 1937.
 
 ## 01 Cold Open
@@ -29,7 +29,7 @@ So a full decade before Disney's first feature, there was already an animated fe
 
 And there's more, because Reiniger's film is the oldest one that survives, and that's a careful way of saying it, because there's one that's reportedly even older, and it's lost.
 
-On November 9th, 1917, a film called El Apóstol premiered in Buenos Aires, in Argentina, made by an animator named Quirino Cristiani. It's reportedly the first animated feature, but nobody can sit down and watch it today, because the film is lost, and on top of that, Giannalberto Bendazzi, the leading scholar on it, reportedly isn't certain it was a full animated feature at all.
+On November 9th, 1917, a film called El Apóstol premiered in Buenos Aires, in Argentina, made by an animator named Quirino Cristiani. It's reportedly the first animated feature, but nobody can sit down and watch it today, because the film is lost, it was destroyed in a studio fire in 1926, so everything we know about it comes secondhand, from old ads and people who wrote about it, not from the film itself.
 
 So that's why we say reportedly. If El Apóstol was a full animated feature, then Snow White was at least third, and if it wasn't, Prince Achmed is still a full decade ahead of Snow White, so either way Snow White isn't first.
 

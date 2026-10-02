@@ -1,6 +1,6 @@
 # Notes: Darwin Wasn't First to Natural Selection
 Research entry: episode-research.md, "## New topic detail" section, entry "### 6."
-Spoken words: 827
+Spoken words: 836
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

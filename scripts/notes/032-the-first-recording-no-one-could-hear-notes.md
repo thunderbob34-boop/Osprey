@@ -29,3 +29,10 @@ Left out on purpose (unverified / keep off air in research): the NYT 27 March 20
 - Cadence fixes: 7. Joined choppy stops in 03 ("...play those squiggles back, they were for looking at, and..."), 03 date aside, 05 (two joins), 06 (paléophone line); trimmed a repeated "1877"; removed the closing button "and that's what this channel is about" and folded "somebody did it first" into the last real sentence.
 - Format fixes: word count in reading notes updated 1,011 to 992. No dashes, headings fine.
 - Remaining concerns for Gus: none. Length 992 is fine (research is narrow).
+
+## Re-check A (2026-10-02)
+- Searched: 2009 speed correction (timecode read at 500 Hz played at double speed; 250 Hz gives a low male voice; possibly Scott) → confirmed → https://www.firstsounds.org/sounds/scott.php , https://www.loc.gov/static/programs/national-recording-preservation-board/documents/phonautograms.pdf
+- Searched: 1860 Au Clair de la Lune is the oldest recognizable recording of a human voice, educed 2008 by First Sounds → confirmed → https://en.wikipedia.org/wiki/Phonautograph , https://www.npr.org/2008/04/04/89380697/1860-phonautograph-is-earliest-known-recording
+- Searched: Charles Cros pli cacheté April 30, 1877, paléophone, never built, lacked resources, weeks before Edison → confirmed → https://www.nps.gov/edis/learn/historyculture/origins-of-sound-recording-charles-cros.htm
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Scott a Paris typesetter; 1857 patent and the March 24/25 wrinkle; April 9, 1860 date; Haber and Cornell at LBNL; "roughly twenty seconds"; Edison 1877.

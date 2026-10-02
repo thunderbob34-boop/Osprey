@@ -1,10 +1,10 @@
 # The Man Who Filmed First, Then Vanished: Louis Le Prince
 
 READING NOTES
-- Runtime is about 4 minutes at a relaxed pace, roughly 679 spoken words.
+- Runtime is about 4 minutes at a relaxed pace, roughly 683 spoken words.
 - Tone is calm and matter-of-fact. The disappearance is the hook, but keep it flat, no mystery-show voice, and no guessing.
 - Say Louis Aimé Augustin Le Prince as LOO-ee eh-MAY oh-goos-TAN luh PRANSS, Lumière as LOO-mee-air, Roundhay as ROUND-ay, Dijon as DEE-zhon, Adolphe as ah-DOLF, Kinetoscope as kih-NET-oh-scope, Kinetograph as kih-NET-oh-graf.
-- Every hedge in here is on purpose. Read "oldest surviving film", "never showed his films publicly", "by the museums' account", "speculation", "no evidence" and "we don't know" exactly as written. Never say "the first film ever", and never suggest Edison was behind the disappearance or took the camera.
+- Every hedge in here is on purpose. Read "in the early 1840s", "oldest surviving film", "never showed his films publicly", "by the museums' account", "speculation", "no evidence" and "we don't know" exactly as written. Never say "the first film ever", and never suggest Edison was behind the disappearance or took the camera.
 - Visuals: frames from Roundhay Garden Scene, the Science Museum Group frames with Adolphe's notes, period photos of Leeds and Dijon station, text cards for the dates. No reenactment of a crime.
 - Good on-screen text moments are October 14 1888, Leeds, 1895, September 16 1890, Dijon to Paris, and 1897.
 - Sourcing: every line traces to the sources in the notes file for this episode.
@@ -21,7 +21,7 @@ But neither of them shot the oldest film that survives, that was Le Prince, and 
 
 ## 03 Roundhay Garden Scene
 
-Louis Aimé Augustin Le Prince was born in 1842, and on the 14th of October, 1888, he filmed what's now called Roundhay Garden Scene. He shot it in the garden of his in-laws' home in Leeds, with a single-lens camera he built himself, and it's the oldest surviving film in the world.
+Louis Aimé Augustin Le Prince was born in France in the early 1840s, and on the 14th of October, 1888, he filmed what's now called Roundhay Garden Scene. He shot it in the garden of his in-laws' home in Leeds, with a single-lens camera he built himself, and it's the oldest surviving film in the world.
 
 The Science Museum Group in Britain holds two frames from it, with notes written on by his son, Adolphe. And Leeds, the city, still tells the story, its museums call it the oldest surviving film.
 

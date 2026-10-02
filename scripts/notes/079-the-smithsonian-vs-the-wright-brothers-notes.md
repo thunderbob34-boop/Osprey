@@ -1,6 +1,6 @@
 # Notes: The Smithsonian vs. the Wright Brothers
 Research entry: episode-research.md — "# Job 3" section, entry "### 32." (Flight)
-Spoken words: 943
+Spoken words: 950
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -27,3 +27,8 @@ Left out on purpose (unverified / keep off air in research): Glenn Curtiss's nam
 - Cadence fixes: 1 ("So think about that for a second. The tests..." is now one breath).
 - Format fixes: word count changed from 944 to 943. The hedge list named "a Wright rival's 1914 tests", which isn't in the script; it now lists the actual wording ("a Wright rival", "a rival's 1914 tests", "engineers who were in a patent fight with the Wrights").
 - Remaining concerns for Gus: The entry doesn't explicitly date Connecticut's legislation; the script says Jane's acted "in 2013" and Connecticut "passed legislation", which is fine as written, so don't add a year for Connecticut on screen.
+
+## Re-check A (2026-10-02)
+- Searched: Whitehead witnesses → the 1901 Bridgeport Herald story named two witnesses, James Dickie and Andrew Cellie; in 1936 Dickie said "the entire story... was imaginary" and "I was not present"; Cellie was never found → https://airandspace.si.edu/stories/editorial/flight-claims-gustave-whitehead ; https://www.si.edu/newsdesk/factsheets/first-flight-still-wrights
+- Fixes: (1) "the one named witness to the flight, a man named James Dickie, later called the story a hoax" was wrong on "the one named witness" (there were two); now "one of the two witnesses named in the newspaper story, a man named James Dickie, later said he wasn't there and called the story imaginary" (his own documented word, per NASM). Word count 943 to 950; hedge added to the reading notes.
+- Not search-verified (checked against research/knowledge only): four flights' distances and times; telegram wording and 57/59 garble; Tunison quip; 1914 tests, 1928 London loan, 1942 retraction, 1948 agreement wording; Jane's 2013 and Connecticut; Dayton papers (already "reportedly").

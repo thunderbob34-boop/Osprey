@@ -1,6 +1,6 @@
 # Notes: Kaldi's Goats Never Existed
 Research entry: episode-research.md — "# Job 3" section, entry "### 56." (Coffee)
-Spoken words: 1035 (after review)
+Spoken words: 1037 (after re-check A)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

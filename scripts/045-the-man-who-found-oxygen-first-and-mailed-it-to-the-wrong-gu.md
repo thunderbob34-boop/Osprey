@@ -1,10 +1,10 @@
 # The Man Who Found Oxygen First and Mailed It to the Wrong Guy
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 775 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 794 spoken words.
 - Tone is calm and a little wry, but no villain. Lavoisier did not steal anything as far as anyone can show, so keep the letter section plain and let the silence do the work.
 - Say Scheele as SHAY-luh, Lavoisier as luh-VWAH-zee-ay, Priestley as PREEST-lee, dephlogisticated as dee-flo-JIS-tih-kay-tid.
-- Every hedge in here is on purpose. Read "around 1771 to 1772", "as far as anyone knows", "there's no record he replied or credited it", "we don't know" and "usually shared" exactly as written. Never say Lavoisier stole it or copied it.
+- Every hedge in here is on purpose. Read "around 1771 to 1772", "in print by 1775", "as far as anyone knows", "there's no record he replied or credited it", "we don't know" and "usually shared" exactly as written. Never say Lavoisier stole it or copied it.
 - Visuals: period portraits of the three men, a page of Scheele's 1777 book, period lab glassware, a text card of the letter date.
 - Good on-screen text moments are around 1771 to 1772, August 1 1774, September 30 1774, 1777, and "fire air" vs "dephlogisticated air" vs "oxygen".
 - Sourcing: every line traces to the sources in the notes file for this episode.
@@ -23,7 +23,7 @@ The second name is Lavoisier, who's the one who named it oxygen and explained wh
 
 Carl Wilhelm Scheele was a Swedish apothecary, basically a pharmacist, and he made oxygen around 1771 to 1772. Sources differ on the exact year, so I'm giving you the range, but either way that's two to three years before Priestley. Scheele called it fire air, which is a pretty good name for it, because it's the part of the air that keeps a fire going.
 
-The reason he doesn't get the credit is that he didn't get it into print in time, because Scheele's account didn't come out until his book was published in 1777, and Priestley published his in 1774. So Priestley made it second and published it first, and in science, publishing first is usually how you get your name on something.
+The reason he doesn't get the credit is that he didn't get it into print in time, because Scheele's account didn't come out until his book was published in 1777, and Priestley had his in print by 1775. So Priestley made it second and published it first, and in science, publishing first is usually how you get your name on something.
 
 And think about the names for a second, right? Scheele called it fire air, Priestley called it dephlogisticated air, and Lavoisier called it oxygen. That's one gas with three names, and the name that stuck came from the one man of the three who wasn't first to make it and wasn't first to publish it.
 
@@ -31,7 +31,7 @@ And think about the names for a second, right? Scheele called it fire air, Pries
 
 Now here's the part that matters. On September 30th, 1774, Scheele wrote a letter to Lavoisier, and that's about two months after Priestley made the gas and three years before Scheele's book came out. And in that letter Scheele explained how to make the new gas, using a method with silver carbonate, so he basically handed Lavoisier the recipe.
 
-And as far as anyone knows, Lavoisier never answered, there's no record he replied, and there's no record he credited it. A copy of the letter turned up among Scheele's papers after he died, and a draft of it is kept at the Royal Swedish Academy of Sciences.
+And as far as anyone knows, Lavoisier never answered, there's no record he replied, and there's no record he credited it. The letter itself was thought to be lost, until a French chemist found it in the archives of the French Academy of Sciences, in Paris, and published it in 1890, and a draft of it is kept at the Royal Swedish Academy of Sciences.
 
 Now, to be fair to Lavoisier, we don't know whether he read the letter, and we don't know whether he did anything with it. Nobody can show that he took the idea, and I'm not going to say he did. All we can say is that the letter was sent, and there's no record he replied or credited it, right? And that's the whole story of the letter, and it's still a pretty rough one for Scheele.
 

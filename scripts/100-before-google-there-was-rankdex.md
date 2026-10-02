@@ -1,10 +1,10 @@
 # Before Google There Was RankDex
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 767 spoken words. The research is short and the priority question is murky, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 781 spoken words. The research is short and the priority question is murky, so this one runs short rather than padded.
 - Tone is calm and careful. This is a "parallel inventor" story, not a "Google copied" story, and the script says so more than once. Page and Brin get full credit.
 - Say Robin Li as ROB-in LEE, Yanhong as YAHN-hong, Baidu as BY-doo, and RankDex as RANK-dex.
-- Every hedge in here is on purpose. Read "parallel inventors", "said to have inspired", "as Forbes and TIME tell it", "by a few weeks", "nobody copied anybody that I can show you", "something a lot like" and "a different method" exactly as written.
+- Every hedge in here is on purpose. Read "parallel inventors", "some accounts go further", "that's a claim", "by a few weeks", "nobody copied anybody that I can show you", "something a lot like" and "a different method" exactly as written.
 - Never say or show "Google copied." Patent numbers and dates on screen are fine, they're all from the patents themselves.
 - Visuals: the first pages of both patents from Google Patents, and simple link-arrow diagrams for the two methods. No company logos full screen.
 - Good on-screen text moments are 1996, January 10 1997, February 5 1997, July 6 1999, US 5,920,859, US 6,285,999, and the 1950s and 60s for citation indexing.
@@ -23,7 +23,7 @@ But in 1996, a man named Robin Li, also known as Yanhong Li, built something cal
 
 He filed a US patent on it on February 5th, 1997, number 5,920,859, called Hypertext document retrieval system and method, and it was granted on July 6th, 1999. And here's the part that matters, the patent family behind Google's PageRank cites Li's patent. That's on the patents themselves, so it's not somebody's opinion, it's in the record.
 
-And as Forbes and TIME tell it, Li's work came first, and it's said to have inspired Page. Forbes ran a profile of him in 2009 called The Man Who's Beating Google, and TIME put him on its TIME 100 list in 2010, so this isn't a fringe story.
+And some accounts go further and say Li's work came first and inspired Page, but that's a claim, and the dates I'm about to give you make it hard to back up. Forbes ran a profile of him in 2009 called The Man Who's Beating Google, and TIME put him on its TIME 100 list in 2010, so this isn't a fringe story.
 
 ## 04 Now, to Be Fair to Page
 

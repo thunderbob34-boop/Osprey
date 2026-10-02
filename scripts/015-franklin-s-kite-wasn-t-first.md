@@ -1,7 +1,7 @@
 # Franklin's Kite Wasn't First
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 941 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 954 spoken words.
 - Tone is warm toward Franklin. It was his idea and the French said so. The point is only that somebody else ran the experiment first.
 - Say Coiffier as kwah-FYAY, Thomas-François Dalibard as toh-MAH frahn-SWAH dah-lee-BAR, Marly-la-Ville as mar-LEE lah VEEL, Delor as deh-LOR, Académie des Sciences as ah-kah-day-MEE day see-AHNSS, Thales as THAY-leez, Diogenes Laertius as dye-OJ-uh-neez lay-ER-shus, elektron as eh-LEK-tron, and electricus as eh-LEK-trih-kus.
 - Every hedge in here is on purpose. Read "according to Franklin", "according to Priestley's account", "nobody knows the exact day", "about a month", "as far as we can tell", "later writers credit", "secondhand", "traditionally" and "a few skeptics" exactly as written.
@@ -44,7 +44,7 @@ So the fair way to say it is, Franklin had the idea and published the method, an
 
 Oh, one more thing, while we're on electricity, the word electric has its own credit problem. Ancient Greeks noticed that if you rubbed amber, it would pull in little bits of straw and feathers, and our word electric comes from elektron, which is Greek for amber. Then in 1600, an English physician named William Gilbert coined the Latin word electricus, in his book De Magnete.
 
-You'll often hear that the Greek philosopher Thales discovered the amber trick, traditionally around 600 BC. Now, later writers credit Thales with that, but nothing Thales wrote survives, not a word. We only have it secondhand, through Aristotle and through a later writer named Diogenes Laertius, centuries after Thales. So the amber story is old and it's real, but putting Thales's name on it is tradition, because we don't have it from Thales himself.
+You'll often hear that the Greek philosopher Thales discovered the amber trick, traditionally around 600 BC. Now, later writers credit Thales with that, but nothing Thales wrote survives, not a word. We only have it secondhand, through Aristotle, who tells it with a magnet, and through a later writer named Diogenes Laertius, who's the one who adds the amber, centuries after Thales. So the amber story is old and it's real, but putting Thales's name on it is tradition, because we don't have it from Thales himself.
 
 ## 07 Who Did It First
 

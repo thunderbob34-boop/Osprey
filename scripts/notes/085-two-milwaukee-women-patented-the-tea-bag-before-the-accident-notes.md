@@ -1,6 +1,6 @@
 # Notes: The Tea Bag Wasn't an Accident - Two Milwaukee Women Patented It
 Research entry: 100-episode-lineup.md, heading "### 85. The Tea Bag Wasn't an Accident — Two Milwaukee Women Patented It"
-Spoken words: 882
+Spoken words: 898
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -24,3 +24,10 @@ Left out on purpose (unverified / keep off air in research): TodayIFoundOut and 
 - Cadence fixes: 3. Joined the patent number sentence to "and what they designed was"; joined "a really good one, they were just trying..."; added one "right?" (now 3).
 - Format fixes: title changed (file name and manifest title still use the old wording); word count updated 876 to 882.
 - Remaining concerns for Gus: 882 words, under 900 (the entry is thin; not padded). Don't use the old "Wasn't an Accident" title for upload.
+
+## Re-check A (2026-10-02)
+- Searched: Lawson and Molaren, Milwaukee, 1901 "Tea-Leaf Holder", "spoil the pleasure of the drink" → names, city, 1901 filing and the quote confirmed in Smithsonian, which puts the quote in quotation marks but doesn't say it comes from the patent → https://www.smithsonianmag.com/smart-news/ever-wonder-who-invented-tea-bag-180961469/
+- Searched: patent US 723,287 text → granted 24 Mar 1903; the patent's own printed header reads "R. C. LAWSON & M. McLAREN"; Google Patents' "Molaren" looks like an OCR misreading of "McLaren"; the spec text found describes a single-cup holder but the "pleasure" wording wasn't found in the patent excerpts → https://patentimages.storage.googleapis.com/d1/db/93/00278d81f2d7f3/US723287.pdf ; https://patents.google.com/patent/US723287A/en
+- Fixes: (1) Second inventor's name changed to Mary McLaren (the printed patent header), with one spoken line that some histories spell it Molaren, because the script tells viewers to pull the patent up and "see both of their names on it". Pronunciation note updated. (2) "And they said why they made it ... in their words" changed to "the reason they made it is simple ... as Smithsonian Magazine puts it", because the quote couldn't be traced to the patent itself; hedge added to the reading-notes list. Word count 882 to 898.
+- Not search-verified (checked against research/knowledge only): Sullivan 1908 silk-sample story and switch to gauze; TIME telling two origin stories; "stitched open-mesh fabric".
+- Search budget note: the follow-up search to confirm "McLaren" against a second source was blocked (session search limit), so the spelling rests on the patent's printed header.

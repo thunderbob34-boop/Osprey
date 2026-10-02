@@ -40,7 +40,7 @@ So that's 1858, which is three decades before the queen's supposed visit in 1889
 
 ## 06 Fair Credit
 
-Now, to be fair to Raffaele Esposito, here's what we actually don't know. We don't know whether Esposito served the queen anything at all. That's genuinely unknown, so I'm not going to tell you he didn't, maybe he did. And Nowak's case is about the letter and how the story got told, it's not a case against Esposito himself. So the fair version is this, maybe Esposito made a pizza for a queen and maybe he didn't, nobody knows, but the letter that's supposed to prove it looks like it was probably made up later, and the pizza itself was already being described in Naples in 1858.
+Now, to be fair to Raffaele Esposito, here's what we actually don't know. We don't know whether Esposito served the queen anything at all. That's really unknown, so I'm not going to tell you he didn't, maybe he did. And Nowak's case is about the letter and how the story got told, it's not a case against Esposito himself. So the fair version is this, maybe Esposito made a pizza for a queen and maybe he didn't, nobody knows, but the letter that's supposed to prove it looks like it was probably made up later, and the pizza itself was already being described in Naples in 1858.
 
 ## 07 Who Was First
 

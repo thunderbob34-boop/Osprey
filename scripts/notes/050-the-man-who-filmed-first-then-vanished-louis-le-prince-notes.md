@@ -1,6 +1,6 @@
 # Notes: The Man Who Filmed First, Then Vanished: Louis Le Prince
 Research entry: 100-episode-lineup.md, heading "### 50. The Man Who Filmed First, Then Vanished: Louis Le Prince"
-Spoken words: 679
+Spoken words: 683
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -19,7 +19,7 @@ Spoken words: 679
 
 Plain explanation added (no new claims): "declared legally dead" glossed as the law treating a long-missing person as dead; 1890 to 1897 is seven years; Britannica's article on the first motion picture camera cited only as showing the credit question is not simple.
 
-Hedges kept: "oldest surviving film" (never "first film ever"), "never showed his films publicly", "by the museums' account" for the US trip, "speculation" and "no evidence" for the murder theories, "I'm not going to say Edison took his camera", "we don't know what happened to him".
+Hedges kept: "oldest surviving film" (never "first film ever"), "never showed his films publicly", "by the museums' account" for the US trip, "speculation" and "no evidence" for the murder theories, "I'm not going to say Edison took his camera", "we don't know what happened to him"; added in Re-check A: "born in France in the early 1840s" (birth year differs by source).
 
 Left out on purpose (unverified / keep off air in research): the Edison lab patent caveat filed weeks after the disappearance (untraceable to a strong source); any claim he was about to go public in the US; any suggestion Edison was involved or stole the camera; the film's length and what it shows (not in the entry). Runs short (680 words) because the entry can't fill more without padding.
 

@@ -1,11 +1,11 @@
 # Darwin Wasn't First to Natural Selection
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 827 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
+- Runtime is about 5 minutes at a relaxed pace, roughly 836 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
 - Tone is calm and fair. This is a "first in print" story, not a theft story. Darwin comes out of it well, and so does Matthew.
 - Say Arboriculture as AR-bor-ih-kul-cher, Ternate as ter-NAH-tay, Linnean as lin-NEE-an.
 - Every hedge in here is on purpose. Read "first in print", "brief", "influenced almost no one", "independently", "a principle of natural selection" and "on the fringe" exactly as written. Never say Darwin stole, copied or plagiarized anything.
-- Good on-screen text moments are 1831 On Naval Timber and Arboriculture, 28 years, April 7 1860 Gardeners' Chronicle, "anticipated", 1842 to 1844, June 18 1858, July 1 1858, and 1859 On the Origin of Species.
+- Good on-screen text moments are 1831 On Naval Timber and Arboriculture, 28 years, April 1860 Gardeners' Chronicle, "anticipated", 1842 to 1844, June 18 1858, July 1 1858, and 1859 On the Origin of Species.
 
 ## 01 Cold Open
 
@@ -27,7 +27,7 @@ Now, to be fair to everybody, Matthew's passage was brief, it was a short stretc
 
 ## 04 Darwin Admits It
 
-And here's the part that matters, Darwin didn't hide from this, on April 7th, 1860, after Origin of Species was out, Darwin wrote a letter to the Gardeners' Chronicle, and in it he admitted that Matthew had anticipated him. Anticipated, meaning Matthew had got there first, and Darwin said he hadn't known about Matthew's book.
+And here's the part that matters, Darwin didn't hide from this, in April 1860, after Origin of Species was out, Matthew wrote to the Gardeners' Chronicle about his book, and Darwin wrote back to the same paper, and in his letter he admitted that Matthew had anticipated him. Anticipated, meaning Matthew had got there first, and Darwin said he hadn't known about Matthew's book.
 
 So this one doesn't need any guessing, Darwin acknowledged Matthew's 1831 priority in print in 1860. Britannica covers it, and the Darwin Correspondence Project at Cambridge has a letter Matthew sent to Darwin himself in 1864.
 

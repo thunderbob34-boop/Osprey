@@ -24,3 +24,9 @@ Note: runs short (about 5 minutes). The entry is thin and the brief says not to 
 - Cadence fixes: none needed; it already reads in one-breath paragraphs with natural repetition ("An hour of battery. An hour of battery on a phone...").
 - Format fixes: word count changed from 795 to 792.
 - Remaining concerns for Gus: runs short at 792 words, which is fine; not padded. The manifest hook ("same year as the first PlayStation") isn't in the research and stays out.
+
+## Re-check A (2026-10-02)
+- Searched: on sale 16 August 1994; shown at COMDEX 1992; about 50,000 sold; battery about an hour → confirmed → https://en.wikipedia.org/wiki/IBM_Simon (secondary; TIME is the entry's attributed source)
+- Searched: Simon held by Smithsonian NMAH, Science Museum Group (1994-1995, IBM with BellSouth) and Computer History Museum; CHM gives $899 → confirmed → https://americanhistory.si.edu/collections/object/nmah_1191542 ; https://collection.sciencemuseumgroup.org.uk/objects/co8361064/simon-mobile-communicator-1994-1995 ; https://www.computerhistory.org/revolution/mobile-computing/18/341/1733
+- Fixes: none (note: CHM's page says talk time under 30 minutes; the script's "about an hour" is attributed to TIME, so it stands)
+- Not search-verified (checked against research/knowledge only): off the market within about six months; "nobody called it a smartphone at the time"; earlier touchscreen PDAs; iPhone 2007.

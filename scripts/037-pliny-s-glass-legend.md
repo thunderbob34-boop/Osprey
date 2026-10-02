@@ -1,7 +1,7 @@
 # Pliny's Glass Legend
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 709 spoken words. The research is short and there's no famous inventor to build on, so this runs well under the usual length rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 710 spoken words. The research is short and there's no famous inventor to build on, so this runs well under the usual length rather than padded.
 - Tone is relaxed and curious. This one has no villain and no famous inventor, it's a good story meeting the evidence.
 - Say Pliny as PLIN-ee, natron as NAY-tron, Belus as BEE-lus, Phoenicia as fuh-NEE-shuh, Mesopotamia as mes-uh-puh-TAY-mee-uh.
 - Every hedge in here is on purpose. Read "nobody really knows", "more than four thousand years ago", "by the fourteen hundreds BC", "we can't call it impossible" and "nobody can check it" exactly as written. Pliny's people are "merchants", not sailors. Never say a beach fire couldn't get hot enough, that claim was cut.
@@ -14,7 +14,7 @@ The Romans told a great story about how glass was discovered, a story about merc
 
 ## 02 Pliny's Story
 
-The story comes from Pliny the Elder, a Roman writer, in the first century AD, and in his Natural History, in Book 36, he says glass was discovered by accident. Merchants carrying a cargo of natron, which is a kind of natural soda, landed on the shore near the Belus river, in Phoenicia, which is in what's now Lebanon or Israel. And they propped their cooking pots up on lumps of the natron, and the heat of the fire fused the natron with the sand on the beach, and out ran a stream of glass.
+The story comes from Pliny the Elder, a Roman writer, in the first century AD, and in his Natural History, in Book 36, he says glass was discovered by accident. Merchants carrying a cargo of natron, which is a kind of natural soda, landed on the shore near the Belus river, in Phoenicia, and that river is in what's now northern Israel. And they propped their cooking pots up on lumps of the natron, and the heat of the fire fused the natron with the sand on the beach, and out ran a stream of glass.
 
 And you can see why it stuck, right? It's got an accident, a cooking fire, and glass turning up where nobody was trying to make it. One small thing, you'll often hear this told with sailors, but Pliny says merchants, so we'll say merchants.
 

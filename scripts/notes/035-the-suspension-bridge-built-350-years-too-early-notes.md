@@ -25,3 +25,9 @@ Left out on purpose (unverified / keep off air in research): "oldest bridge in d
 - Cadence fixes: 5. Joined stops in 02 ("So first, what we're talking about, a suspension bridge is..."), 03 (walkways line), 05 (ministry line), 06 ("torsional just means twisting"); replaced the "that's what this channel is about" button with "so somebody did it first, a long time before Finley" (doesn't claim Thangtong was the absolute first, which the entry doesn't).
 - Format fixes: word count updated 826 to 835.
 - Remaining concerns for Gus: runs 835 words (under 900). Arkadiko's "still used" rests on one source (Greek Ministry of Culture), which the script attributes. Sections 05 and 06 (Arkadiko, Tacoma) are side material from the entry's original pairing, not part of the Finley/Thangtong "first" claim; fine to keep, but they're the natural cut if Gus wants it tighter.
+
+## Re-check A (2026-10-02)
+- Searched: Finley's Jacob's Creek bridge (1801) as model for Telford's Menai bridge (1826) → confirmed → https://roads.maryland.gov/OPPEN/VIII-HD.pdf , https://en.wikipedia.org/wiki/James_Finley_(engineer)
+- Searched: Thangtong Gyalpo (1385-1464) iron-chain bridges in Tibet and Bhutan; Chushul Chakzam over the Yarlung Tsangpo, 1430 (about 370 years before 1801, so "about three hundred and fifty years" for "the 1400s" holds) → confirmed → https://en.wikipedia.org/wiki/Chushul_Chakzam , https://en.wikipedia.org/wiki/Thang_Tong_Gyalpo
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Finley's 1808 patent; LoC print title; Arkadiko date, construction and ministry attribution; Tacoma Narrows dates, Billah and Scanlan 1991, WSDOT torsional flutter.

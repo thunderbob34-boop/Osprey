@@ -1,6 +1,6 @@
 # Notes: Electric Cars Were Winning in 1900
 Research entry: 100-episode-lineup.md, heading "### 91. Electric Cars Were Winning in 1900"
-Spoken words: 800
+Spoken words: 813
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -23,3 +23,10 @@ Left out on purpose (unverified / keep off air in research): Anderson's exact ye
 - Cadence fixes: 3. Joined "So gasoline was last. Steam was first..."; joined "But they didn't invent the electric car. The idea goes back..."; added one "right?" (now 3).
 - Format fixes: title changed (file name and manifest title still use "Winning"); word count updated 798 to 800.
 - Remaining concerns for Gus: 800 words, under 900. Don't use the old "Winning" title for upload. Every Lohner-Porsche and Semper Vivus detail is still attributed to Porsche, as the entry requires.
+
+## Re-check A (2026-10-02)
+- Searched: Britannica 40% steam / 38% electric / 22% gasoline → confirmed, Britannica words it as "40 percent of American automobiles" at the turn of the century → https://www.britannica.com/technology/automobile/Early-electric-automobiles
+- Searched: what the 40/38/22 split counts → it matches the 1900 Census count of US-built vehicles (1,681 steam, 1,575 electric, 936 gasoline of 4,192 = 40.1/37.6/22.3%), i.e. production that year, not cars on the road → https://aoghs.org/transportation/first-auto-show/ (citing the 1900 Census of Manufactures); census volume https://www.census.gov/library/publications/1902/dec/vol-10-manufactures.html
+- Searched: DoE "around a third of all vehicles on the road" by 1900 → confirmed → https://www.energy.gov/articles/history-electric-car
+- Fixes: (1) Section 04 gloss "those numbers are the share of cars on the road, not sales" was wrong: the split is the 1900 production count. Now says the numbers line up with the 1900 census count of cars built that year, not a headcount of cars on the road and not sales. (2) Cold-open hook changed from "the cars on American roads" to "the cars being built in America". (3) Section 06 "electric cars outnumbered gasoline cars on American roads" changed to "America was building more electric cars than gasoline ones". (4) Reading-notes hedge list and graphic label updated to match. Word count 800 to 813. The DoE "a third of vehicles on the road" line is unchanged. Title "Outnumbered" still holds for cars built in 1900.
+- Not search-verified (checked against research/knowledge only): Robert Anderson 1830s crude carriage, non-rechargeable cells; NYC 60+ electric taxis; Lohner-Porsche 1900 Paris and Semper Vivus (attributed to Porsche); gas dominant by about 1905.

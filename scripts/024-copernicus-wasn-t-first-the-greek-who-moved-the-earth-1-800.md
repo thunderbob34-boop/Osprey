@@ -35,9 +35,9 @@ So the fair way to say it is that Aristarchus was first with the idea, as far as
 
 And now here's the part most people never hear. Copernicus's handwritten manuscript of De revolutionibus still survives, it's in the Jagiellonian Library in Kraków, in Poland. And in that manuscript, Copernicus actually mentioned Aristarchus by name.
 
-Then the passage was crossed out, and when the book was printed in 1543, Aristarchus isn't in it at all. Britannica notes it, and the University of Rochester's library has written about it too, the mention was there in the handwritten version and it was gone from the first printed edition.
+Then the passage was crossed out, and when the book was printed in 1543, that passage isn't in it. Britannica notes it, and the University of Rochester's library has written about it too, the mention was there in the handwritten version and it was gone from the first printed edition.
 
-Now, it would be easy to turn that into a story about Copernicus hiding where he got the idea, and we're not going to do that, because nobody knows who crossed it out or why. All we can say is that it was crossed out. So Copernicus had written Aristarchus's name into his own draft, and it didn't make it into print, and for the readers of that 1543 book, the Greek who had the idea first just wasn't there.
+Now, it would be easy to turn that into a story about Copernicus hiding where he got the idea, and we're not going to do that, because nobody knows who crossed it out or why. All we can say is that it was crossed out. So Copernicus had written Aristarchus's name into his own draft, and it didn't make it into print, and for the readers of that 1543 book, the Greek who had the idea first wasn't credited with it.
 
 ## 06 Who Did It First
 

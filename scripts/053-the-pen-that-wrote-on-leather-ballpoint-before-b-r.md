@@ -1,17 +1,17 @@
 # The Pen That Wrote on Leather: Ballpoint Before Bíró
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 864 spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 905 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is calm and friendly. Bíró is not the bad guy here, he made the ballpoint that actually worked.
 - Say László Bíró as LAH-slo BEE-roh. "Biro" the pen is said the same way, BYE-roh is how a lot of British people say it, either is fine, just keep it consistent.
-- Every hedge in here is on purpose. Read "the patent itself", "from what's been found", "first practical", "by 1895" and "that's about all we know about him" exactly as written.
+- Every hedge in here is on purpose. Read "the patent itself", "the way it usually gets told", "the way it usually gets retold", "from what's been found", "first practical", "by 1895" and "that's about all we know about him" exactly as written.
 - Don't call Loud a leather tanner, and don't guess at his job, where he lived, or what became of him. The research only says what the pen was for. Don't add a year for the RAF pens or say what war it was, neither was in the checked sources.
 - Visuals: the 1888 patent drawing (US 392,046 on Google Patents) is the hero image. Use the Science Museum Group record for Bíró and period RAF stills, no combat imagery needed.
 - Good on-screen text moments are Feb 4 1888, Oct 30 1888, US Patent 392,046, 1895, 1938, and "50 years".
 
 ## 01 Cold Open
 
-A lot of people hold a ballpoint pen and call it a biro, after László Bíró, the man most people think invented it. But fifty years before Bíró's patent, a man named John Loud got an American patent for a pen with a ball in the tip, and he wasn't trying to write letters with it, he was trying to mark leather, and it was too coarse to write a letter with anyway.
+A lot of people hold a ballpoint pen and call it a biro, after László Bíró, the man most people think invented it. But fifty years before Bíró's patent, a man named John Loud got an American patent for a pen with a ball in the tip, and he wasn't trying to write letters with it, he was trying to mark rough surfaces, the patent says wood and coarse wrapping paper, and the way it usually gets told, leather, and it was too coarse to write a letter with anyway.
 
 ## 02 The Biro
 
@@ -23,7 +23,7 @@ And it's easy to see why he gets the credit, right? He's got a patent, he's got 
 
 Now here's the part that matters. On February 4th, 1888, a man named John J. Loud filed for a US patent, and on October 30th, 1888, he got it, patent number 392,046. His pen used a rotating steel ball held in a socket, and that's the same basic idea, a ball in the tip that rolls and lays down ink.
 
-But Loud wasn't trying to make a pen for writing, his pen was meant for marking rough surfaces, things like leather and wood, and it was too coarse for writing letters. So the very first thing anybody would want a pen for, writing on paper, was the thing his pen couldn't really do.
+But Loud wasn't trying to make a pen for writing, his pen was meant for marking rough surfaces, and the patent itself names wood and coarse wrapping paper, and the way it usually gets retold, leather too, and it was too coarse for writing letters. So the very first thing anybody would want a pen for, writing on paper, was the thing his pen couldn't really do.
 
 And that's about all we know about him. The patent itself is the primary document, it's still there with his name on it, but there's a lot about John Loud we don't know, including what he did for a living and what happened to him after. So I'm not going to make him into a character, he's a name on a patent from 1888, and that patent is what matters.
 
@@ -45,4 +45,4 @@ So it wasn't the first ballpoint, it was the one that worked well enough for a g
 
 ## 06 The Plain Fact
 
-So here's the plain fact, László Bíró patented his ballpoint in 1938, and he made the first one that really worked for writing, and the RAF is a big part of why it took off in Britain. But on February 4th, 1888, John J. Loud filed for a patent on a pen with a rotating steel ball in a socket, and he got it that October, fifty years before Bíró. His pen was for marking leather and wood, it was too coarse for letters, and from what's been found, it never went anywhere. Somebody did it first, and fifty years before Bíró, it was John J. Loud, with a pen for marking leather.
+So here's the plain fact, László Bíró patented his ballpoint in 1938, and he made the first one that really worked for writing, and the RAF is a big part of why it took off in Britain. But on February 4th, 1888, John J. Loud filed for a patent on a pen with a rotating steel ball in a socket, and he got it that October, fifty years before Bíró. His pen was for marking rough surfaces, wood and coarse wrapping paper in the patent's own words, it was too coarse for letters, and from what's been found, it never went anywhere. Somebody did it first, and fifty years before Bíró, it was John J. Loud, with a pen for marking rough surfaces.

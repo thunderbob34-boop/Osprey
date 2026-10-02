@@ -1,7 +1,7 @@
 # Before Morse: The Telegraph That Caught a Killer
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 753 spoken words. The research is short, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 767 spoken words. The research is short, so this one runs short rather than padded.
 - Tone is calm and plain. Keep the murder flat and short, the facts carry it. Morse gets real credit, his system and his code won out.
 - Say Slough as SLOW, rhyming with "cow." Say Tawell as TAW-ul (worth a quick check before recording). Wheatstone as WEET-stun, West Drayton as west DRAY-tun.
 - Every hedge in here is on purpose. Read "the first commercial", "not the first electric telegraph experiment of any kind", "about thirteen miles", "about three months", "independently", "as King's College London tells it" and "as a question, not a claim" exactly as written.
@@ -11,7 +11,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-The first criminal ever caught by telecommunications was outrun by a wire, and it wasn't Morse's wire. In January 1845 a murderer got on a train at Slough thinking he'd gotten away, but police sent his description ahead by telegraph, and officers were waiting for him when he got off at Paddington. And the telegraph that did it wasn't Samuel Morse's, it was a British one, built by two men named William Fothergill Cooke and Charles Wheatstone.
+The first criminal ever caught by telecommunications was outrun by a wire, and it wasn't Morse's wire. In January 1845 a murderer got on a train at Slough thinking he'd gotten away, but police sent his description ahead by telegraph, and a policeman was waiting for him when he got off at Paddington. And the telegraph that did it wasn't Samuel Morse's, it was a British one, built by two men named William Fothergill Cooke and Charles Wheatstone.
 
 ## 02 The Morse Version
 
@@ -31,7 +31,7 @@ Now, to be fair, and I want to be careful here, Cooke and Wheatstone were the fi
 
 And that brings us to January 1845. The UK National Archives has the case on record as the murder of Sarah Hart, who also went by Ann Lawrence, by a man named John Tawell.
 
-I'll keep this plain, Tawell got on a train at Slough thinking he'd escaped, but the police sent his description ahead by telegraph, and the message got to Paddington before he did, so when he got off at Paddington, officers were waiting for him. King's College London calls it the first capture of a criminal by telecommunications, and the Science Museum's blog covers the same case, so that's the telegraph beating a train to the station, right? And as King's College London tells it, people started calling the telegraph wires "the cords that hanged John Tawell."
+I'll keep this plain, Tawell got on a train at Slough thinking he'd escaped, but the police sent his description ahead by telegraph, and the message got to Paddington before he did, so when he got off at Paddington, a plain-clothes policeman was waiting for him, and he followed Tawell until he was arrested the next morning. King's College London calls it the first capture of a criminal by telecommunications, and the Science Museum's blog covers the same case, so that's the telegraph beating a train to the station, right? And as King's College London tells it, people started calling the telegraph wires "the cords that hanged John Tawell."
 
 ## 05 What About Morse Code
 

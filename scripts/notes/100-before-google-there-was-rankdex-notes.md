@@ -1,6 +1,6 @@
 # Notes: Before Google There Was RankDex
 Research entry: episode-research.md, "## New topic detail" section, entry "### 10." (Before Google: Robin Li's RankDex)
-Spoken words: 767
+Spoken words: 781
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

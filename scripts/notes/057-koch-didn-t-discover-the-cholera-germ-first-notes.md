@@ -1,6 +1,6 @@
 # Notes: Koch Didn't Discover the Cholera Germ
 Research entry: 100-episode-lineup.md — heading "### 57. Koch Didn't Discover the Cholera Germ"
-Spoken words: 810 (after review)
+Spoken words: 811 (after re-check A)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

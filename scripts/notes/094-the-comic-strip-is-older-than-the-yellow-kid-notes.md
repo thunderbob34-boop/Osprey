@@ -1,6 +1,6 @@
 # Notes: The Comic Strip Is Older Than the Yellow Kid
 Research entry: 100-episode-lineup.md, heading "### 94. The Comic Strip Is Older Than the Yellow Kid"
-Spoken words: 826
+Spoken words: 839
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

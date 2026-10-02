@@ -1,10 +1,10 @@
 # Video Games Before Pong: Tennis for Two
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 640 spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 678 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is light and a little amused. Pong isn't a villain, and the "first video game" title is a definition fight, so the script never hands it to anybody outright.
 - Say Higinbotham as HIG-in-bot-um, Brookhaven as BROOK-hay-vun, EDSAC as ED-sack, and OXO as the three letters, O-X-O.
-- Every hedge in here is on purpose. Read "one of the first", "the first built purely for fun", "Brookhaven's own history says", "built for research, not for fun" and "depends on what you count" exactly as written.
+- Every hedge in here is on purpose. Read "one of the first", "preceded by several other inventions", "even it had forerunners", "Brookhaven's own history says", "built for research, not for fun" and "depends on what you count" exactly as written.
 - Keep the Manhattan Project line attributed to Brookhaven, and don't ad-lib anything about what Higinbotham did there.
 - Visuals: Brookhaven's photos of the 1958 setup and the oscilloscope screen, and a simple tic-tac-toe card for OXO.
 - Good on-screen text moments are October 18 1958, 1952, 1972, and "14 years."
@@ -29,11 +29,11 @@ It ran on an analog computer, and the picture was on an oscilloscope, which is a
 
 Now, to be fair, I have to slow down here, because Tennis for Two wasn't the first computer game either. In 1952, a man named Alexander Douglas made OXO, which is tic-tac-toe, on a computer at Cambridge called EDSAC, and that's six years before Tennis for Two.
 
-But OXO was built for research, not for fun, so it was a computer game, but it was there to study something, not to entertain anybody. So Brookhaven's way of framing Tennis for Two is that it was one of the first, and the first one built purely for fun, and that's the way I'll say it too.
+But OXO was built for research, not for fun, so it was a computer game, but it was there to study something, not to entertain anybody. And Brookhaven itself is careful about this, its own history page says Tennis for Two was preceded by several other inventions, one in the late 1940s and two in the early 1950s, so the way I'll say it is that Tennis for Two was one of the first, and it was built for visitors to have fun with, not for research.
 
 ## 05 It Depends on What You Count
 
-And that's the honest answer on the whole question, right? Who made the first video game depends on what you count. If you count any game on a computer, OXO in 1952 comes earlier, and it isn't the only one. If you count a game built just for people to have fun with, Tennis for Two in 1958 is the one Brookhaven points to, and the Computer History Museum covers both Tennis for Two and OXO in its own history of computer games. And either way, Pong, in 1972, wasn't first. Pong deserves its place, it's the one people remember, but it came along fourteen years after people were already lining up to play tennis at Brookhaven.
+And that's the honest answer on the whole question, right? Who made the first video game depends on what you count. If you count any game on a computer, OXO in 1952 comes earlier, and it isn't the only one. If you count a game built for people to have fun with, Tennis for Two in 1958 is one of the famous early ones, and Brookhaven's own page says even it had forerunners, and the Computer History Museum covers both Tennis for Two and OXO in its own history of computer games. And either way, Pong, in 1972, wasn't first. Pong deserves its place, it's the one people remember, but it came along fourteen years after people were already lining up to play tennis at Brookhaven.
 
 ## 06 Who Did It First
 

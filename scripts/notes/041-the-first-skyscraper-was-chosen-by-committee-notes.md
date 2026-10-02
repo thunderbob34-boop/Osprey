@@ -1,6 +1,6 @@
 # Notes: The "First Skyscraper" Was Chosen by Committee
 Research entry: episode-research.md, "# Job 3" section, entry "### 11." (Skyscraper)
-Spoken words: 853 (after review)
+Spoken words: 855 (after re-check A)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -27,3 +27,10 @@ Left out on purpose (unverified / keep off air in research): the "1986 publicity
 - Cadence fixes: 7. Removed the redundant third "committee" line in 01; joined stops in 03 (Tallmadge; "ruled for ... it picked it over the Tacoma Building"; "Now here's the part that matters, a committee..."), 04, 05 ("isn't tall, it's five stories"); replaced the closing button with a plain line.
 - Format fixes: word count updated 848 to the new count.
 - Remaining concerns for Gus: runs under 900 words. The 1931 committee and 1932 dissent rest mainly on Barr's working paper (not peer-reviewed) plus the Encyclopedia of Chicago (title/extract only) and Chicagology (enthusiast site); the script attributes the hybrid description to Barr but states the committee facts flatly, which the entry marks Confirmed. "Revolutionary steel frame" is said only as the myth, not attributed.
+
+## Re-check A (2026-10-02)
+- Searched: 1931 Tallmadge committee for the Marshall Field estate trustees (report 22 Nov 1931) and 1932 Western Society of Engineers dissent → confirmed (Barr working paper) → https://buildingtheskyline.org/wp-content/uploads/2024/06/Barr_Revisiting-Jenney_WP_20June24.pdf
+- Searched: Tacoma Building date → completed 1889 (built 1887-89), not "1888" as the research had it → https://en.wikipedia.org/wiki/Tacoma_Building_(Chicago)
+- Searched: Equitable Life Assurance Building, 120 Broadway, 1868-70, seven stories, first office building with passenger elevators → confirmed → https://en.wikipedia.org/wiki/Equitable_Life_Building_(Manhattan)
+- Fixes: (1) 03 "the Tacoma Building, from 1888" → "from the late 1880s"; 1888 removed from the on-screen list; hedge added. Word count 853 → 855.
+- Not search-verified (checked against research/knowledge only): Ditherington 1796-97, Bage, Historic England wording; iron/steel split and Carnegie-Phipps; "watched the demolition" detail on the WSE committee (in the research entry's on-air version, not in the search result).
