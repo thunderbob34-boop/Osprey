@@ -140,13 +140,15 @@ for b in beats:
     words = b['text'].split()
     md.append(f"| {b['id']} | {tc(b['start_frame'])} | {b['frames'] / FPS:.1f}s | {q(' '.join(words[:9]))}{'…' if len(words) > 9 else ''} | {q(b.get('visual', ''))} | {route} | {q(cred)} |")
 (EP / 'SHOT-LIST.md').write_text('\n'.join(md) + '\n')
-pend = [b for b in beats if b['template'] in ('archival', 'illustration')]
+import os.path as _p
+have = lambda a: any(_p.exists(EP / 'assets' / f'{a}.{e}') for e in ('jpg','jpeg','png','webp'))
+pend = [b for b in beats if b['template'] in ('archival', 'illustration') and not have((b.get('fields') or {}).get('asset',''))]
 pm = ['# Assets still to fetch', '',
-      'These beats show a dark placeholder card in the animatic until the real image is dropped into `graphics/` under the same file name (1920×1080; letterbox on the paper colour #EFE7D6 if needed). Then re-run `python3 templates/build.py --skip-render`.', '',
-      '| Beat | What | Institution / item | Rights | URL | Status |', '|---|---|---|---|---|---|']
+      'These beats show a dark placeholder card until the real image is saved in `assets/` under the file name below (any size; it is fitted to the frame automatically, with the lower-third and credit added). Then re-run `python3 templates/build.py`. One image can serve several beats.', '',
+      '| Beat | Save as | What | Institution / item | Rights | URL | Status |', '|---|---|---|---|---|---|---|']
 for b in pend:
     s = b.get('source') or {}
-    pm.append(f"| {b['id']} | {q((b.get('fields') or {}).get('label', ''))} | {q(s.get('institution', ''))}: {q(s.get('item', ''))} | {q(s.get('rights', ''))} | {s.get('url', '')} | {'confirmed' if s.get('verified') else 'needs a source'} |")
+    pm.append(f"| {b['id']} | assets/{(b.get('fields') or {}).get('asset', '')}.jpg | {q((b.get('fields') or {}).get('label', ''))} | {q(s.get('institution', ''))}: {q(s.get('item', ''))} | {q(s.get('rights', ''))} | {s.get('url', '')} | {'confirmed' if s.get('verified') else 'needs a source'} |")
 (EP / 'PENDING-ASSETS.md').write_text('\n'.join(pm) + '\n')
 
 print(f'beats={len(beats)} runtime={tc(TOTAL)} animatic={dur:.2f}s clips={n_clips} markers={n_markers} pending_assets={len(pend)}')

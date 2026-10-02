@@ -50,6 +50,9 @@
   .phtag{font-family:var(--mono);font-size:30px;letter-spacing:.2em;color:#E0B85A}
   .phlabel{font-family:var(--serif);font-size:62px;font-weight:700;margin-top:30px;line-height:1.2}
   .phsrc{font-family:var(--sans);font-size:28px;color:#B9AF9C;margin-top:34px;line-height:1.5;max-width:1400px}
+  .lower{position:absolute;left:96px;right:96px;bottom:96px;background:rgba(29,27,24,.9);color:#F3ECDD;font-family:var(--serif);font-size:44px;line-height:1.3;padding:22px 34px;border-left:8px solid var(--red)}
+  .credit{position:absolute;right:70px;bottom:40px;font-family:var(--sans);font-size:20px;color:rgba(243,236,221,.8);text-shadow:0 1px 3px #000}
+  .photo{position:absolute;inset:0;background:#141210 center/contain no-repeat}
   .caption{position:absolute;left:96px;bottom:86px;background:rgba(29,27,24,.88);color:#F3ECDD;font-family:var(--sans);font-weight:600;font-size:28px;padding:12px 22px;letter-spacing:.02em}
   svg text{font-family:var(--sans)}
 </style>
@@ -85,7 +88,7 @@ const diagrams = {
     <g data-s="3" data-ghost="1">${T(1440,170,"EDISON'S LAMP",38,'middle',800)}<line x1="960" y1="140" x2="960" y2="940" stroke="#C9BBA0" stroke-width="4"/>
     <circle cx="1440" cy="420" r="150" fill="none" stroke="#1D1B18" stroke-width="6"/><path d="M1400,500 C1400,330 1480,330 1480,500" fill="none" stroke="#1D1B18" stroke-width="6"/>
     ${T(1440,620,'thin, high-resistance filament',34)} ${T(1440,672,'much less current',34,'middle',800,'#2F5D7C')}
-    <line x1="1160" y1="820" x2="1720" y2="820" stroke="#B87333" stroke-width="10"/>${T(1440,905,'thinner copper wire',32,'middle',600,'#5E564A')}</g><g data-s="4">${T(1440,990,'+ a better vacuum, so it lasts',32,'middle',800,'#2F5D7C')}</g>`),
+    <line x1="1160" y1="820" x2="1720" y2="820" stroke="#B87333" stroke-width="10"/>${T(1440,905,'thinner copper wire',32,'middle',600,'#5E564A')}</g><g data-s="4">${T(1440,970,'+ a better vacuum, so it lasts',32,'middle',800,'#2F5D7C')}</g>`),
   dc_vs_ac_flow: () => svgWrap(`
     ${T(300,330,'DC',64,'start',800)} ${T(300,380,'direct current',30,'start',600,'#5E564A')}
     <line x1="620" y1="320" x2="1640" y2="320" stroke="#1D1B18" stroke-width="5"/>
@@ -127,7 +130,7 @@ const diagrams = {
     ${T(1290,330,'stator',30,'start',800,'#5E564A')}<line x1="1285" y1="320" x2="1195" y2="400" stroke="#5E564A" stroke-width="3"/>
     ${T(560,560,'rotor',30,'end',800,'#5E564A')}<line x1="570" y1="550" x2="840" y2="540" stroke="#5E564A" stroke-width="3"/>
     ${T(1260,620,'rotating magnetic field',30,'start',800,'#A8261B')}
-    ${T(960,900,'a motor that runs on alternating current',36,'middle',600)} ${T(960,950,'the missing piece of the AC system',34,'middle',800,'#A8261B')}`),
+    ${T(960,900,'a motor that runs on alternating current',36,'middle',600)} ${T(960,950,'a missing piece of the AC system',34,'middle',800,'#A8261B')}`),
   edison_system: () => svgWrap(`
     ${T(960,140,'THE WHOLE SYSTEM',44,'middle',800)}
     ${[['generator'],['wires under','the street'],['meter'],['fuse'],['switch'],['socket'],['bulb']].map((s,i)=>`<rect x="${110+i*250}" y="480" width="210" height="120" rx="10" fill="${(f.highlight||[]).includes(i)?'#F2C14E':'#EFE7D6'}" stroke="#1D1B18" stroke-width="${(f.highlight||[]).includes(i)?9:5}"/>${s.length>1?T(215+i*250,535,s[0],28,'middle',800)+T(215+i*250,570,s[1],28,'middle',800):T(215+i*250,552,s[0],30,'middle',800)}${i<6?`<line x1="${322+i*250}" y1="540" x2="${356+i*250}" y2="540" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>`:''}`).join('')}
@@ -148,7 +151,7 @@ const maps = {
     <circle cx="960" cy="420" r="18" fill="#A8261B"/>${T(990,410,'Niagara Falls',40,'start',800)}
     <circle cx="900" cy="900" r="18" fill="#1D1B18"/>${T(940,915,'Buffalo',40,'start',800)}
     <line x1="945" y1="440" x2="905" y2="870" stroke="#A8261B" stroke-width="8" stroke-dasharray="26 14" marker-end="url(#arR)"/>
-    ${T(860,660,'about 20 miles',42,'end',800,'#A8261B')} ${T(1600,1000,'November 1896',44,'middle',800)}
+    ${T(860,660,'about 20 miles',42,'end',800,'#A8261B')} ${T(1500,860,'November 1896',44,'middle',800)}
     ${T(1800,120,'N',36,'middle',800)}<line x1="1800" y1="200" x2="1800" y2="135" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>
     ${T(1500,1050,'schematic, not to scale',22,'middle',600,'#5E564A')}`),
   great_barrington: () => svgWrap(`
@@ -161,9 +164,9 @@ const maps = {
 let html='';
 const t=D.template;
 if(t==='title'){ html=`<div class="frame"></div><div class="center"><div class="kicker">Somebody Did It First</div><div class="rule"></div><h1>${esc(f.title)}</h1>${f.subtitle?`<div class="sub">${esc(f.subtitle)}</div>`:''}</div>`; }
-else if(t==='datecard'){ html=`<div class="frame"></div><div class="kicker" style="position:absolute;top:150px;width:100%;text-align:center">Who did it first</div>
+else if(t==='datecard'){ html=`<div class="frame"></div><div class="kicker" style="position:absolute;top:150px;width:100%;text-align:center">${esc(f.kicker||'Who did it first')}</div>
   <div class="tl"><div class="pin first" style="left:12%"></div><div class="pin" style="left:84%"></div></div>
-  <div class="lab" style="left:77px;top:300px"><div class="who">${esc(f.left_label)}</div><div class="when">${esc(f.left_date)}</div><div class="firsttag">FIRST</div></div>
+  <div class="lab" style="left:77px;top:300px"><div class="who">${esc(f.left_label)}</div><div class="when">${esc(f.left_date)}</div>${f.firsttag===false?'':'<div class="firsttag">FIRST</div>'}</div>
   <div class="lab" style="left:1143px;top:300px"><div class="who">${esc(f.right_label)}</div><div class="when">${esc(f.right_date)}</div></div>
   <div class="gap">${esc(f.gap)}</div>`; }
 else if(t==='date'){ html=`<div class="frame"></div><div class="center"><div class="bigdate">${esc(f.date)}</div><div class="rule"></div><div class="sub" style="font-style:normal;color:var(--ink)">${esc(f.caption)}</div></div>`; }
@@ -173,9 +176,11 @@ else if(t==='compare'){ html=`<div class="cols"><div class="col"><h3>${esc(f.lef
 else if(t==='diagram'){ html=(diagrams[f.variant]||(()=>`<div class="center"><h2>diagram: ${esc(f.variant)}</h2></div>`))(); }
 else if(t==='map'){ html=(maps[f.variant]||(()=>`<div class="center"><h2>map: ${esc(f.variant)}</h2></div>`))(); }
 else if(t==='endcard'){ html=`<div class="frame"></div><div class="center"><h2>${esc(f.line)}</h2><div class="rule"></div></div>`; }
+else if((t==='archival'||t==='illustration') && D.img){ const s=D.source||{}; document.body.style.background='#141210';
+  html=`<div class="photo" style="background-image:url('${D.img}')"></div>${f.lower?`<div class="lower">${esc(f.lower)}</div>`:''}<div class="credit">${esc(s.credit||s.institution||'')}</div>`; }
 else if(t==='archival'||t==='illustration'){ document.body.classList.add('ph'); const s=D.source||{};
-  html=`<div class="phbox"><div class="phtag">${t==='illustration'?'ILLUSTRATION · TO GENERATE':'ARCHIVAL '+esc((f.kind||'image').toUpperCase())+' · TO FETCH'}</div>
-  <div class="phlabel">${esc(f.label||f.scene||'')}</div>${f.crop?`<div class="phsrc" style="color:#E0B85A">${esc(f.crop)}</div>`:''}
+  html=(f.lower?`<div class="lower" style="z-index:2">${esc(f.lower)}</div>`:'')+`<div class="phbox"><div class="phtag">${t==='illustration'?'ILLUSTRATION · TO GENERATE':'ARCHIVAL '+esc((f.kind||'image').toUpperCase())+' · TO FETCH'}</div>
+  <div class="phlabel">${esc(f.label||f.scene||'')}</div>${f.crop?`<div class="phsrc" style="color:#E0B85A">${esc(f.crop)}</div>`:''}${f.asset?`<div class="phsrc">save as assets/${esc(f.asset)}.jpg</div>`:''}
   <div class="phsrc">${esc(s.institution||'')}${s.item?' · '+esc(s.item):''}${s.rights?'<br>'+esc(s.rights):''}${s.verified===false?'<br><b style="color:#E0B85A">SOURCE NOT YET CONFIRMED</b>':''}</div></div>`; }
 else { html=`<div class="center"><h2>${esc(t)}</h2></div>`; }
 document.body.insertAdjacentHTML('beforeend',html);

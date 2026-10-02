@@ -12,7 +12,10 @@ const card = url.pathToFileURL(path.join(here,'card.html')).href;
 let n=0;
 for (const b of beats) {
   if (only.length && !only.includes(b.id)) continue;
-  await page.goto(card + '?n=' + (n++) + '#' + b64(b));
+  const a = b.fields && b.fields.asset;
+  const hit = a && ['jpg','jpeg','png','webp'].map(e=>path.join(here,'..','assets',a+'.'+e)).find(f=>fs.existsSync(f));
+  const data = hit ? {...b, img: url.pathToFileURL(hit).href} : b;
+  await page.goto(card + '?n=' + (n++) + '#' + b64(data));
   await page.waitForSelector('body[data-ready="1"]', {timeout:20000});
   await page.screenshot({ path: path.join(outDir, b.id + '.png') });
 }

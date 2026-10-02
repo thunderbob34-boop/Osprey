@@ -8,7 +8,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Thomas Edison, c. 1880"
+   "label": "Thomas Edison, c. 1880",
+   "asset": "loc-gov-item-89714703"
   },
   "visual": "Slow push-in on the Edison portrait as the familiar answer is named.",
   "source": {
@@ -45,7 +46,8 @@
   "fields": {
    "kind": "object",
    "label": "Edison lamp used on 31 December 1879",
-   "crop": "push-in on the bulb"
+   "crop": "push-in on the bulb",
+   "asset": "americanhistory-si-edu-collections-object-nmah-704361"
   },
   "visual": "Edison lamp object, slow push-in, on \"commercially practical\".",
   "source": {
@@ -81,7 +83,8 @@
   "fields": {
    "kind": "portrait",
    "label": "Thomas Edison, c. 1880",
-   "crop": "slow push-in on the face"
+   "crop": "slow push-in on the face",
+   "asset": "loc-gov-item-89714703"
   },
   "visual": "Edison portrait, slow push-in.",
   "source": {
@@ -102,7 +105,8 @@
   "template": "archival",
   "fields": {
    "kind": "patent",
-   "label": "One of Edison's 1,000+ US patents: the electric lamp, 1880"
+   "label": "One of Edison's 1,000+ US patents: the electric lamp, 1880",
+   "asset": "patents-google-com-patent-us223898a-en"
   },
   "visual": "Patent first page, highlight the title line 'Electric Lamp', slow push-in.",
   "source": {
@@ -151,7 +155,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Humphry Davy"
+   "label": "Humphry Davy",
+   "asset": "commons-wikimedia-org-wiki-file-portrait-of-sir-humphry-davy"
   },
   "visual": "Slow push-in on the Davy portrait.",
   "source": {
@@ -200,7 +205,8 @@
   "template": "archival",
   "fields": {
    "kind": "object",
-   "label": "Carbon arc lamp (Science Museum Group)"
+   "label": "Carbon arc lamp (Science Museum Group)",
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co8413282-carbo"
   },
   "visual": "Carbon arc lamp object, holds through \"too bright for your living room\".",
   "source": {
@@ -232,14 +238,23 @@
   "section": "02",
   "section_name": "Davy and Swan",
   "text": "Then on February 3rd, 1879, an English chemist named Joseph Swan",
-  "type": "date",
-  "template": "date",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "date": "February 3, 1879",
-   "caption": "Joseph Swan, Newcastle, England"
+   "kind": "portrait",
+   "label": "Joseph Swan",
+   "lower": "February 3, 1879: Joseph Swan, Newcastle",
+   "asset": "commons-wikimedia-org-wiki-file-a-portrait-of-joseph-swan-96"
   },
-  "visual": "Date stamp slams in.",
-  "source": null
+  "visual": "Swan portrait with date lower-third.",
+  "source": {
+   "institution": "Wikimedia Commons (Tyne & Wear Archives & Museums, Swan Collection, Discovery Museum)",
+   "item": "File:A Portrait of Joseph Swan (9672405418).jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:A_Portrait_of_Joseph_Swan_(9672405418).jpg",
+   "rights": "No known copyright restrictions, per the uploading institution",
+   "credit": "Tyne & Wear Archives & Museums, Swan Collection, via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "02-i",
@@ -250,7 +265,8 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Literary and Philosophical Society, Newcastle (modern photograph of the building)"
+   "label": "Literary and Philosophical Society, Newcastle (modern photograph of the building)",
+   "asset": "commons-wikimedia-org-wiki-file-bolbec-hall-and-the-literary"
   },
   "visual": "Photo of the building, slow push-in.",
   "source": {
@@ -268,20 +284,22 @@
   "section": "02",
   "section_name": "Davy and Swan",
   "text": "and showed them a working bulb that glowed,",
-  "type": "archival",
+  "type": "object",
   "template": "archival",
   "fields": {
-   "kind": "portrait",
-   "label": "Joseph Swan"
+   "kind": "object",
+   "label": "Swan carbon-rod lamp, 1878-79 (Science Museum Group)",
+   "crop": "wide on the lamp",
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co42487-swan-el"
   },
-  "visual": "Slow push-in on the Swan portrait.",
+  "visual": "Swan carbon-rod lamp.",
   "source": {
-   "institution": "Wikimedia Commons (Tyne & Wear Archives & Museums, Swan Collection, Discovery Museum)",
-   "item": "File:A Portrait of Joseph Swan (9672405418).jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:A_Portrait_of_Joseph_Swan_(9672405418).jpg",
-   "rights": "No known copyright restrictions, per the uploading institution",
-   "credit": "Tyne & Wear Archives & Museums, Swan Collection, via Wikimedia Commons",
-   "verified": true
+   "institution": "Science Museum Group",
+   "item": "Swan electric lamp",
+   "url": "https://collection.sciencemuseumgroup.org.uk/objects/co42487/swan-electric-lamp-electric-lamp",
+   "rights": "Not stated in the search result. Check the Science Museum Group object page license",
+   "credit": "Swan electric lamp, 1878-1879, Science Museum Group Collection",
+   "verified": false
   }
  },
  {
@@ -293,7 +311,9 @@
   "template": "archival",
   "fields": {
    "kind": "object",
-   "label": "Swan carbon-rod lamp, 1878-79 (Science Museum Group)"
+   "label": "Swan carbon-rod lamp, 1878-79 (Science Museum Group)",
+   "crop": "tight on the carbon rod",
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co42487-swan-el"
   },
   "visual": "Museum object, slow push-in.",
   "source": {
@@ -317,7 +337,9 @@
    "left_date": "Feb 3, 1879",
    "right_label": "Edison gets a bulb working",
    "right_date": "Oct 1879",
-   "gap": "more than 8 months"
+   "gap": "months earlier",
+   "kicker": "Swan vs. Edison, 1879",
+   "firsttag": false
   },
   "visual": "Datecard: two dates on a timeline, gap counts up to 'about 8 months'.",
   "source": null,
@@ -332,7 +354,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Thomas Edison with phonograph, c. 1878"
+   "label": "Thomas Edison with phonograph, c. 1878",
+   "asset": "loc-gov-pictures-item-89714876"
   },
   "visual": "Slow push-in on the Edison portrait.",
   "source": {
@@ -438,7 +461,8 @@
   "template": "archival",
   "fields": {
    "kind": "object",
-   "label": "Edison bamboo filament lamp, ca. 1883"
+   "label": "Edison bamboo filament lamp, ca. 1883",
+   "asset": "americanhistory-si-edu-collections-object-nmah-704500"
   },
   "visual": "Museum object, slow push-in.",
   "source": {
@@ -539,7 +563,8 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Pearl Street Station, c. 1885"
+   "label": "Pearl Street Station, c. 1885",
+   "asset": "commons-wikimedia-org-wiki-file-edision-powerplant-pearl-str"
   },
   "visual": "Period photo, slow push-in.",
   "source": {
@@ -557,14 +582,24 @@
   "section": "03",
   "section_name": "What Edison Actually Did",
   "text": "and that's usually counted as the start of the electric utility business in America, at least for the kind of electric light you'd put in a home or office.",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "Pearl Street, 1882",
-   "sub": "Usually counted as the start of the electric utility business in America, at least for home and office light"
+   "kind": "photo",
+   "label": "Pearl Street Station, c. 1885",
+   "lower": "Usually counted as the start of the electric utility business in America, for home and office light",
+   "crop": "hold, slow push-in",
+   "asset": "commons-wikimedia-org-wiki-file-edision-powerplant-pearl-str"
   },
-  "visual": "Text card; hedge kept in the sub.",
-  "source": null
+  "visual": "Pearl Street photo held, lower-third.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Edision PowerPlant, Pearl Street NYC.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Edision_PowerPlant,_Pearl_Street_NYC.jpg",
+   "rights": "Not stated in the search result (listed as c. 1885). Read the file page license; confirm the building shown is the Pearl Street Station",
+   "credit": "Pearl Street power plant, c. 1885, via Wikimedia Commons (confirm on the file page)",
+   "verified": false
+  }
  },
  {
   "id": "03-q",
@@ -575,7 +610,8 @@
   "template": "archival",
   "fields": {
    "kind": "object",
-   "label": "Swan United Electric Light Co. lamps (Science Museum Group)"
+   "label": "Swan United Electric Light Co. lamps (Science Museum Group)",
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co42475-swan-un"
   },
   "visual": "Museum object, slow push-in.",
   "source": {
@@ -610,7 +646,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Lewis Latimer, 1882"
+   "label": "Lewis Latimer, 1882",
+   "asset": "commons-wikimedia-org-wiki-file-lewis-latimer-jpg"
   },
   "visual": "Slow push-in on the Latimer portrait.",
   "source": {
@@ -632,7 +669,9 @@
   "fields": {
    "kind": "patent",
    "label": "Latimer's carbon patent, US 252,386 (1882)",
-   "crop": "slow pan across the page"
+   "crop": "slow pan across the page",
+   "lower": "Working for US Electric Lighting Co., an Edison competitor",
+   "asset": "patents-google-com-patent-us252386a-en"
   },
   "visual": "Latimer patent drawing, slow pan across the page.",
   "source": {
@@ -668,7 +707,8 @@
   "fields": {
    "kind": "object",
    "label": "Edison lamp used on 31 December 1879",
-   "crop": "tight on the glass bulb"
+   "crop": "tight on the glass bulb",
+   "asset": "americanhistory-si-edu-collections-object-nmah-704361"
   },
   "visual": "Lamp object, tight on the glass: \"just a glass ornament\".",
   "source": {
@@ -868,13 +908,20 @@
   "section": "04",
   "section_name": "The Real Fight",
   "text": "But DC back then had no practical way to do that, so Edison's system had to send power at roughly the same low voltage people used at home,",
-  "type": "text",
-  "template": "text",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "headline": "No practical way to step DC up or down, back then",
-   "sub": "So it ran at roughly the same low voltage people used at home"
+   "left_title": "AC",
+   "left_lines": [
+    "Easy to step up and down"
+   ],
+   "right_title": "DC, back then",
+   "right_lines": [
+    "No practical way to do that",
+    "Stuck near household voltage"
+   ]
   },
-  "visual": "Text card.",
+  "visual": "Compare: AC vs DC back then.",
   "source": null
  },
  {
@@ -900,7 +947,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "George Westinghouse"
+   "label": "George Westinghouse",
+   "asset": "loc-gov-item-93511337"
   },
   "visual": "Slow push-in on the Westinghouse portrait.",
   "source": {
@@ -921,7 +969,8 @@
   "template": "archival",
   "fields": {
    "kind": "object",
-   "label": "Gaulard and Gibbs transformer (Smithsonian)"
+   "label": "Gaulard and Gibbs transformer (Smithsonian)",
+   "asset": "americanhistory-si-edu-collections-object-nmah-713060"
   },
   "visual": "Museum object, slow push-in.",
   "source": {
@@ -942,7 +991,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "William Stanley"
+   "label": "William Stanley",
+   "asset": "commons-wikimedia-org-wiki-file-william-stanley-jpg"
   },
   "visual": "Slow push-in on the Stanley portrait.",
   "source": {
@@ -976,7 +1026,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Nikola Tesla, c. 1893"
+   "label": "Nikola Tesla, c. 1893",
+   "asset": "commons-wikimedia-org-wiki-file-nikola-tesla-by-sarony-c1893"
   },
   "visual": "Slow push-in on the Tesla portrait.",
   "source": {
@@ -996,8 +1047,8 @@
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "The second big myth",
-   "sub": "Tesla versus Edison"
+   "headline": "Myth: Tesla versus Edison",
+   "sub": ""
   },
   "visual": "Text card.",
   "source": null
@@ -1006,28 +1057,20 @@
   "id": "05-c",
   "section": "05",
   "section_name": "It Wasn't Tesla Versus Edison",
-  "text": "Tesla did work for Edison's companies, first in Paris starting in 1882,",
-  "type": "date",
-  "template": "date",
+  "text": "Tesla did work for Edison's companies, first in Paris starting in 1882, and then for about six months in New York starting in 1884,",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "date": "1882",
-   "caption": "Tesla works for Edison's companies, first in Paris"
+   "left_title": "Paris",
+   "left_lines": [
+    "From 1882: Edison's companies"
+   ],
+   "right_title": "New York",
+   "right_lines": [
+    "From 1884: about six months"
+   ]
   },
-  "visual": "Date stamp.",
-  "source": null
- },
- {
-  "id": "05-d",
-  "section": "05",
-  "section_name": "It Wasn't Tesla Versus Edison",
-  "text": "and then for about six months in New York starting in 1884,",
-  "type": "date",
-  "template": "date",
-  "fields": {
-   "date": "1884",
-   "caption": "About six months in New York"
-  },
-  "visual": "Date stamp.",
+  "visual": "Compare: Tesla at Edison companies, Paris then New York.",
   "source": null
  },
  {
@@ -1040,7 +1083,8 @@
   "fields": {
    "kind": "portrait",
    "label": "Nikola Tesla, c. 1893",
-   "crop": "lower third: As Tesla told it, he was promised $50,000"
+   "crop": "lower third: As Tesla told it, he was promised $50,000",
+   "asset": "commons-wikimedia-org-wiki-file-nikola-tesla-by-sarony-c1893"
   },
   "visual": "Tesla portrait with lower-third text, keeping \"As Tesla told it\".",
   "source": {
@@ -1057,14 +1101,24 @@
   "section": "05",
   "section_name": "It Wasn't Tesla Versus Edison",
   "text": "and when he delivered, the offer turned out to have been a joke, so he quit. Now, that story comes only from Tesla himself, years later.",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "As Tesla told it, the offer was a joke",
-   "sub": "A story that comes only from Tesla himself, years later"
+   "kind": "portrait",
+   "label": "Nikola Tesla, c. 1893",
+   "lower": "As Tesla told it, the offer was a joke. A story only from Tesla himself, years later.",
+   "crop": "hold",
+   "asset": "commons-wikimedia-org-wiki-file-nikola-tesla-by-sarony-c1893"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Tesla portrait held, lower-third.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Nikola Tesla by Sarony c1893.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Nikola_Tesla_by_Sarony_c1893.jpg",
+   "rights": "Public domain in the United States (published before 1 January 1931), per the file page; may not be public domain in every country",
+   "credit": "Napoleon Sarony, c. 1893, via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "05-h",
@@ -1075,7 +1129,8 @@
   "template": "archival",
   "fields": {
    "kind": "patent",
-   "label": "Tesla's AC motor patent, US 381,968 (1888)"
+   "label": "Tesla's AC motor patent, US 381,968 (1888)",
+   "asset": "patents-google-com-patent-us381968a-en"
   },
   "visual": "Patent first page, slow push-in.",
   "source": {
@@ -1119,14 +1174,23 @@
   "section": "05",
   "section_name": "It Wasn't Tesla Versus Edison",
   "text": "and that same year Westinghouse bought the rights.",
-  "type": "text",
-  "template": "text",
+  "type": "document",
+  "template": "archival",
   "fields": {
-   "headline": "Westinghouse buys the rights that same year",
-   "sub": "1888"
+   "kind": "patent",
+   "label": "Tesla's AC motor patent, US 381,968 (1888)",
+   "lower": "1888: Westinghouse buys the rights to Tesla's AC motor patents",
+   "asset": "patents-google-com-patent-us381968a-en"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Tesla patent, lower-third.",
+  "source": {
+   "institution": "US Patent Office via Google Patents",
+   "item": "US381968A - Electro-magnetic motor",
+   "url": "https://patents.google.com/patent/US381968A/en",
+   "rights": "US patent granted 1 May 1888; US patent drawings are generally not subject to copyright",
+   "credit": "Nikola Tesla, US Patent 381,968, 1888",
+   "verified": true
+  }
  },
  {
   "id": "05-l",
@@ -1167,27 +1231,15 @@
   "section": "06",
   "section_name": "The Smear Campaign",
   "text": "And Edison's side fought dirty. Back in late 1887, New York was looking for something to replace hanging,",
-  "type": "date",
-  "template": "date",
-  "fields": {
-   "date": "Late 1887",
-   "caption": "New York looks for something to replace hanging"
-  },
-  "visual": "Date stamp.",
-  "source": null
- },
- {
-  "id": "06-b",
-  "section": "06",
-  "section_name": "The Smear Campaign",
-  "text": "and when a state commission asked Edison for advice,",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Thomas Edison, c. 1880"
+   "label": "Thomas Edison, c. 1880",
+   "lower": "Late 1887: New York looks for something to replace hanging",
+   "asset": "loc-gov-item-89714703"
   },
-  "visual": "Slow push-in on the Edison portrait. Reused from 01-a.",
+  "visual": "Edison portrait: \"fought dirty\".",
   "source": {
    "institution": "Library of Congress, Prints and Photographs Division",
    "item": "[Thomas Edison, head-and-shoulders portrait, facing left]",
@@ -1196,6 +1248,20 @@
    "credit": "Library of Congress Prints and Photographs Division, LC-USZ62-98067",
    "verified": true
   }
+ },
+ {
+  "id": "06-b",
+  "section": "06",
+  "section_name": "The Smear Campaign",
+  "text": "and when a state commission asked Edison for advice,",
+  "type": "text",
+  "template": "text",
+  "fields": {
+   "headline": "A New York state commission asks Edison for advice",
+   "sub": "Late 1887"
+  },
+  "visual": "Card.",
+  "source": null
  },
  {
   "id": "06-c",
@@ -1234,7 +1300,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Harold P. Brown"
+   "label": "Harold P. Brown",
+   "asset": "commons-wikimedia-org-wiki-file-harold-pitney-brown-engineer"
   },
   "visual": "Slow push-in on the Brown portrait.",
   "source": {
@@ -1256,7 +1323,8 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Edison Laboratory, West Orange, New Jersey (20th-century survey photograph)"
+   "label": "Edison Laboratory, West Orange, New Jersey (20th-century survey photograph)",
+   "asset": "loc-gov-item-nj0982"
   },
   "visual": "Building exterior or interior of the lab, slow push-in.",
   "source": {
@@ -1308,7 +1376,8 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Old Columbia College, New York (library building)"
+   "label": "Old Columbia College, New York (library building)",
+   "asset": "loc-gov-item-2014650160"
   },
   "visual": "Building print, slow push-in.",
   "source": {
@@ -1380,7 +1449,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Harold P. Brown"
+   "label": "Harold P. Brown",
+   "asset": "commons-wikimedia-org-wiki-file-harold-pitney-brown-engineer"
   },
   "visual": "Slow push-in on the Brown portrait. Reused from 06-e.",
   "source": {
@@ -1401,7 +1471,8 @@
   "template": "archival",
   "fields": {
    "kind": "document",
-   "label": "Harold Brown to Thomas Edison, 27 March 1889"
+   "label": "Harold Brown and Thomas Edison correspondence, 1889 (Thomas A. Edison Papers)",
+   "asset": "edisondigital-rutgers-edu-document-d8933aan4"
   },
   "visual": "Letter page, highlight the line asking for $5,000.",
   "source": {
@@ -1423,8 +1494,9 @@
   "template": "archival",
   "fields": {
    "kind": "document",
-   "label": "Harold Brown to Thomas Edison, 27 March 1889",
-   "crop": "detail of the letter"
+   "label": "Harold Brown and Thomas Edison correspondence, 1889 (Thomas A. Edison Papers)",
+   "crop": "detail of the letter",
+   "asset": "edisondigital-rutgers-edu-document-d8933aan4"
   },
   "visual": "Letter detail, slow pan.",
   "source": {
@@ -1445,8 +1517,9 @@
   "template": "archival",
   "fields": {
    "kind": "document",
-   "label": "Harold Brown to Thomas Edison, 27 March 1889",
-   "crop": "second detail of the letter"
+   "label": "Harold Brown and Thomas Edison correspondence, 1889 (Thomas A. Edison Papers)",
+   "crop": "second detail of the letter",
+   "asset": "edisondigital-rutgers-edu-document-d8933aan4"
   },
   "visual": "Letter, second detail.",
   "source": {
@@ -1468,7 +1541,8 @@
   "fields": {
    "kind": "portrait",
    "label": "George Westinghouse",
-   "crop": "push-in"
+   "crop": "push-in",
+   "asset": "loc-gov-item-93511337"
   },
   "visual": "Westinghouse portrait: he refused.",
   "source": {
@@ -1490,7 +1564,9 @@
   "fields": {
    "kind": "portrait",
    "label": "Harold P. Brown",
-   "crop": "push-in"
+   "crop": "push-in",
+   "lower": "Through another rival company: Thomson-Houston",
+   "asset": "commons-wikimedia-org-wiki-file-harold-pitney-brown-engineer"
   },
   "visual": "Harold Brown portrait.",
   "source": {
@@ -1523,12 +1599,14 @@
   "section_name": "The Smear Campaign",
   "text": "Edison testified in 1889 that alternating current would kill instantly and painlessly.",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Edison testifies: AC would kill instantly and painlessly",
-   "sub": "1889"
+   "headline": "A New York state commission asks Edison for advice",
+   "sub": "Late 1887",
+   "lower": "1889: Edison testifies AC would kill \"instantly and painlessly\"",
+   "asset": "x"
   },
-  "visual": "Text card.",
+  "visual": "Edison portrait, lower-third.",
   "source": null,
   "notes": "SENSITIVE BEAT. No animal or execution imagery. Plain, flat treatment; text or building only."
  },
@@ -1537,14 +1615,23 @@
   "section": "06",
   "section_name": "The Smear Campaign",
   "text": "On August 6th, 1890, at Auburn Prison in New York,",
-  "type": "date",
-  "template": "date",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "date": "August 6, 1890",
-   "caption": "Auburn Prison, New York"
+   "kind": "photo",
+   "label": "Auburn Prison, New York (exterior; date to confirm, label \"modern photograph\" if it is one)",
+   "lower": "August 6, 1890: Auburn Prison, New York",
+   "asset": "commons-wikimedia-org-wiki-file-auburnprisonfront-crop-jpg"
   },
-  "visual": "Date stamp.",
-  "source": null,
+  "visual": "Auburn exterior, lower-third. No interior or execution imagery.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:AuburnPrisonFront crop.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:AuburnPrisonFront_crop.jpg",
+   "rights": "Not stated in the search result, and the photo's date is unknown, so it may not be a period view. Look for a verified 1880s-1890s exterior; if none, replace the beat with a text card",
+   "credit": "Auburn Prison front, via Wikimedia Commons (confirm date and license)",
+   "verified": false
+  },
   "notes": "SENSITIVE BEAT. No animal or execution imagery. Plain, flat treatment; text or building only."
  },
  {
@@ -1586,7 +1673,9 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Auburn Prison, New York (exterior; date to confirm, label \"modern photograph\" if it is one)"
+   "label": "Auburn Prison, New York (exterior; date to confirm, label \"modern photograph\" if it is one)",
+   "crop": "same exterior, slow pull-out",
+   "asset": "commons-wikimedia-org-wiki-file-auburnprisonfront-crop-jpg"
   },
   "visual": "Same exterior, slow pull-out.",
   "source": {
@@ -1665,7 +1754,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Charles A. Coffin of Thomson-Houston"
+   "label": "Charles A. Coffin of Thomson-Houston",
+   "asset": "commons-wikimedia-org-wiki-file-charles-a-coffin-jpg"
   },
   "visual": "Slow push-in on the Coffin portrait.",
   "source": {
@@ -1682,28 +1772,14 @@
   "id": "07-e",
   "section": "07",
   "section_name": "How AC Won Anyway",
-  "text": "Edison was effectively out of the electric lighting business,",
+  "text": "Edison was effectively out of the electric lighting business, and General Electric went on to build AC equipment right alongside Westinghouse.",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "Edison was effectively out of electric lighting",
-   "sub": ""
+   "headline": "Edison: effectively out of electric lighting",
+   "sub": "GE went on to build AC equipment alongside Westinghouse"
   },
   "visual": "Text card; 'effectively' kept.",
-  "source": null
- },
- {
-  "id": "07-f",
-  "section": "07",
-  "section_name": "How AC Won Anyway",
-  "text": "and General Electric went on to build AC equipment right alongside Westinghouse.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "GE and Westinghouse both built AC equipment",
-   "sub": ""
-  },
-  "visual": "Compare card: both sides light up together.",
   "source": null
  },
  {
@@ -1711,14 +1787,24 @@
   "section": "07",
   "section_name": "How AC Won Anyway",
   "text": "That same year, Westinghouse came in well under General Electric's bid",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "Westinghouse came in well under General Electric's bid",
-   "sub": "1892"
+   "kind": "engraving",
+   "label": "The grand court at night, World's Columbian Exposition, 1893 (Harper's Weekly)",
+   "lower": "Westinghouse came in well under General Electric's bid",
+   "crop": "wide",
+   "asset": "loc-gov-item-90713957"
   },
-  "visual": "Text card.",
-  "source": null,
+  "visual": "Fair engraving, lower-third.",
+  "source": {
+   "institution": "Library of Congress",
+   "item": "Columbian Exposition--the grand court at night--electrical illumination of MacMonnies's fountain and the administration building / drawn by Charles Graham.",
+   "url": "https://www.loc.gov/item/90713957",
+   "rights": "Not stated in the search result (Harper's Weekly illustration, 24 June 1893); check the rights advisory on the item page",
+   "credit": "Drawn by Charles Graham, Harper's Weekly, 24 June 1893, Library of Congress",
+   "verified": false
+  },
   "notes": "Never show 'half'. The usual figures ($399,000 vs $554,000) are about 72 percent, so the card says 'well under' and shows no ratio."
  },
  {
@@ -1730,7 +1816,8 @@
   "template": "archival",
   "fields": {
    "kind": "engraving",
-   "label": "The grand court at night, World's Columbian Exposition, 1893 (Harper's Weekly)"
+   "label": "The grand court at night, World's Columbian Exposition, 1893 (Harper's Weekly)",
+   "asset": "loc-gov-item-90713957"
   },
   "visual": "Period engraving, slow push-in.",
   "source": {
@@ -1751,7 +1838,8 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Electrical Building, World's Columbian Exposition, Chicago"
+   "label": "Electrical Building, World's Columbian Exposition, Chicago",
+   "asset": "loc-gov-item-2003681665"
   },
   "visual": "Period view, slow push-in.",
   "source": {
@@ -1773,7 +1861,8 @@
   "template": "archival",
   "fields": {
    "kind": "object",
-   "label": "Westinghouse Niagara Falls generator, 1895"
+   "label": "Westinghouse Niagara Falls generator, 1895",
+   "asset": "americanhistory-si-edu-collections-object-nmah-1281694"
   },
   "visual": "Museum object, slow push-in.",
   "source": {
@@ -1808,7 +1897,8 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Thomas Edison, c. 1900-1920"
+   "label": "Thomas Edison, c. 1900-1920",
+   "asset": "loc-gov-resource-det-4a25922"
   },
   "visual": "Slow push-in on the Edison portrait.",
   "source": {
@@ -1830,7 +1920,8 @@
   "fields": {
    "kind": "object",
    "label": "Edison lamp used on 31 December 1879",
-   "crop": "push-in"
+   "crop": "push-in",
+   "asset": "americanhistory-si-edu-collections-object-nmah-704361"
   },
   "visual": "The lamp: the first thing everybody hands Edison.",
   "source": {
@@ -1854,7 +1945,9 @@
    "left_date": "Feb 3, 1879",
    "right_label": "Edison gets a bulb working",
    "right_date": "Oct 1879",
-   "gap": "more than 8 months"
+   "gap": "months earlier",
+   "kicker": "Swan vs. Edison, 1879",
+   "firsttag": false
   },
   "visual": "Datecard repeated from 02-l as a callback; same arithmetic.",
   "source": null
@@ -1878,28 +1971,44 @@
   "section": "08",
   "section_name": "Every Outlet On Earth",
   "text": "Oh, one more thing, DC has made a comeback on some very long power lines, thanks to modern electronics,",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "DC is back on some very long power lines",
-   "sub": "Thanks to modern electronics"
+   "kind": "stock",
+   "label": "High-voltage DC transmission line (modern)",
+   "asset": "high-voltage-dc-transmission-line-modern"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Stock: long-distance HVDC line.",
+  "source": {
+   "institution": "Licensed stock footage (to pick)",
+   "item": "High-voltage DC transmission line (modern)",
+   "url": "",
+   "rights": "Licensed stock",
+   "credit": "Stock footage",
+   "verified": false
+  }
  },
  {
   "id": "08-f",
   "section": "08",
   "section_name": "Every Outlet On Earth",
   "text": "but the outlet in your wall is AC,",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "The outlet in your wall is AC",
-   "sub": ""
+   "kind": "stock",
+   "label": "Wall outlet close-up (US)",
+   "asset": "wall-outlet-close-up-us"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Stock: a US wall outlet.",
+  "source": {
+   "institution": "Licensed stock footage (to pick)",
+   "item": "Wall outlet close-up (US)",
+   "url": "",
+   "rights": "Licensed stock",
+   "credit": "Stock footage",
+   "verified": false
+  }
  },
  {
   "id": "08-g",
@@ -1948,14 +2057,22 @@
   "section": "08",
   "section_name": "Every Outlet On Earth",
   "text": "and your phone charger turns it into DC inside the plug.",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "Your phone charger turns it into DC",
-   "sub": "Inside the plug"
+   "kind": "stock",
+   "label": "Phone charger plugged into a wall",
+   "asset": "phone-charger-plugged-into-a-wall"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Stock: phone charger in the wall.",
+  "source": {
+   "institution": "Licensed stock footage (to pick)",
+   "item": "Phone charger plugged into a wall",
+   "url": "",
+   "rights": "Licensed stock",
+   "credit": "Stock footage",
+   "verified": false
+  }
  },
  {
   "id": "08-j",
@@ -1981,7 +2098,8 @@
   "fields": {
    "kind": "object",
    "label": "Gaulard and Gibbs transformer (Smithsonian)",
-   "crop": "quick cuts on each name: Gaulard & Gibbs transformer, Stanley (04-t), Tesla (05-a), Westinghouse (04-r)"
+   "crop": "quick cuts on each name: Gaulard & Gibbs transformer, Stanley (04-t), Tesla (05-a), Westinghouse (04-r)",
+   "asset": "americanhistory-si-edu-collections-object-nmah-713060"
   },
   "visual": "Montage cut on each name.",
   "source": {
@@ -2003,7 +2121,8 @@
   "fields": {
    "kind": "object",
    "label": "Gaulard and Gibbs transformer (Smithsonian)",
-   "crop": "slow push-in on the transformer"
+   "crop": "slow push-in on the transformer",
+   "asset": "americanhistory-si-edu-collections-object-nmah-713060"
   },
   "visual": "Transformer object, slow push-in.",
   "source": {
