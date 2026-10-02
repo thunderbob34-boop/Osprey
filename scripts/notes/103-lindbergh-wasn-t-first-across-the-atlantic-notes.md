@@ -39,3 +39,7 @@ Left out on purpose (unverified / keep off air in research): "over 100 had prece
 - Cadence fixes: 5. Joined the choppy "That makes him..." line, made the Nungesser and Coli section one flat paragraph with a "Now back to 1919" signpost, moved "right?" into the flight-time line, joined the Alcock death and Brown 1948 sentences, and replaced the crafted close ("and both of their cats are still around") with the plain "somebody did it first".
 - Format fixes: word count corrected to 808; runtime line corrected to 5 and a half minutes; "Britannica notes" added to the hedge list.
 - Remaining concerns for Gus: the Le Bourget crowd of about 100,000 is attributed to the Smithsonian in the entry only at domain level (page text not displayed), so the "about" and "according to the Smithsonian" hedges must stay.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Nungesser and Coli "last sighted over Ireland" is the usual statement (NARA, Britannica) and a spot search agreed, though the last point seen in France was Etretat; Brown "shot down twice" confirmed (Science Museum Group biography); "about eight years" and "about two weeks" arithmetic checked and fine.

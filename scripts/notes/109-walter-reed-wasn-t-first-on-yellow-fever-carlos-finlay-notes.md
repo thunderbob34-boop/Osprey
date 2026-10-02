@@ -1,6 +1,6 @@
 # Notes: Walter Reed Wasn't First on Yellow Fever: Carlos Finlay
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 109."
-Spoken words: 766
+Spoken words: 777
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -35,3 +35,8 @@ Left out on purpose (unverified / keep off air in research): the "seven nominati
 - Cadence fixes: 4. Merged one-line paragraph in 03 into the previous breath, cut "a story about how the two fit together", dropped crafted "right? That's the plain fact of it" ending in 07 and moved a "right?" to the cold open, retitled section 07 to match its contents (it covered Finlay's later career, not only the Nobel).
 - Format fixes: word count corrected 804 to the current count; no dashes, no banned words.
 - Remaining concerns for Gus: the entry itself asks for a spot-check of the Reed/Carter remark wording ("said later ... did more than anything else") and the Kissinger "first controlled case" wording before recording; both are kept hedged ("said later", "reportedly").
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Section 03 said that as far as the modern record goes Finlay "was the first to propose the mosquito as the carrier", and the close said "Somebody proposed it first". Earlier suggestions by others are well documented (Nott 1848 for insects, Beauperthuy 1854 for the mosquito; Godoy and Tarradath 2010; Hektoen; ScienceDirect history review), so the absolute was overstated. Section 03 now says Finlay "wasn't the only person who ever suspected mosquitoes, but as far as the modern scientific record goes, his 1881 paper is the proposal that Reed's board went on to test" (no one is named, per the reading notes). Close changed to "Somebody was there before the proof". Word count 766 to 777, reading notes updated.
+- Checked and kept: Reed's remark to Carter ("your own work in Mississippi did more to impress me with the importance of an intermediate host", a letter quoted in the Carter biography, PMC2866391) so "said later" with the paraphrase is fine; Kissinger "reportedly developed the first controlled case" matches "what is thought to be the first case of controlled yellow fever" (UVA Today, NMHM), and Kissinger and Moran declining payment is documented in Reed's own words; Lazear is described neutrally (bitten, fell ill).
+- Low items noted, not changed: Finlay's 1902-1909 post is "chief sanitation officer" in some sources and "first Director of Health" in others (two sources cited, left as is); Carter's observation was 1898 but published 1900, so "by then" is loose; a stray double comma was removed.

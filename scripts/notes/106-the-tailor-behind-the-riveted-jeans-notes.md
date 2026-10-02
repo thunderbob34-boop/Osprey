@@ -1,6 +1,6 @@
-# Notes: The Tailor Who Riveted the First Blue Jeans
+# Notes: The Tailor Behind the Riveted Jeans
 Research entry: 100-episode-lineup.md, section "## History Channel-inspired additions (101–114)", entry "### 106."
-Spoken words: 802
+Spoken words: 798
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -30,3 +30,9 @@ Left out on purpose (unverified / keep off air in research): any patent fee or d
 - Cadence fixes: 6. Dropped invented asides ("a detail I like", "Strauss isn't a man looking for something to do"), the crafted "the tailor ended up running production for the businessman he'd written to", and the repeated section 07 recap sentence; merged choppy lines in 02, 03 and 05.
 - Format fixes: word count corrected 853 to 802; reading notes now list all hedges actually used. No dashes, no banned words.
 - Remaining concerns for Gus: none
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Title promised "the first blue jeans", which contradicts the script's own hedge (denim and canvas work pants already existed, Davis's 1870 pants were canvas, and the reading notes say never "jeans" in general). H1 changed to "The Tailor Behind the Riveted Jeans" in the script and this notes file. The filename, manifest and research entry still carry the old title and should be updated if the video title is changed to match.
+- Low items noted, not changed: Cold-open line "never put a single rivet in a pair of pants" is a figurative hook and cannot be proven literally (it means he did not come up with the rivets); patent term and "riveted trousers" wording follows the Smithsonian and company pages.
+
+- Main-session follow-up: cold open "never put a single rivet in a pair of pants" (unprovable literally) is now "didn't come up with the rivets". Retitle applied to file name, manifest and lineup.

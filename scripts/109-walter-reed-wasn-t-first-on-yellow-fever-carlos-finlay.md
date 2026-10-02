@@ -1,7 +1,7 @@
 # Walter Reed Wasn't First on Yellow Fever: Carlos Finlay
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 766 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 777 spoken words.
 - Tone is respectful and even-handed. This is "proposed versus proved", so neither man gets cut down, and Reed is never accused of stealing anything. The Lazear section is plain and flat, no swelling.
 - Say Finlay as fin-LAY, Aedes aegypti as AY-deez ay-JIP-tie, Havana as huh-VAN-uh, Camagüey as kah-mah-GWAY, Agramonte as ah-gruh-MON-tay, Lazear as luh-ZEER, Carroll as CARE-ul.
 - Every hedge in here is on purpose. Read "proposed", "proved", "widely credited", "as far as the modern scientific record goes", "nominated several times", "the proof really was Reed's", "said later", "reportedly" and "the first controlled case" exactly as written, because they are what keeps the channel credible.
@@ -21,7 +21,7 @@ The famous version is Walter Reed and the U.S. Army Yellow Fever Board in Havana
 
 Carlos Finlay was a Cuban physician, born in Camagüey, and he studied medicine in Philadelphia at Jefferson Medical College, where he graduated in 1855. He started his own practice in Havana in 1864, and there were periodic yellow fever epidemics in Havana.
 
-Then on August 14th, 1881 he read a paper to the Royal Academy of Medical, Physical, and Natural Sciences of Havana. In it he proposed that a mosquito, which we now identify as Aedes aegypti, carries yellow fever from one person to another. As far as the modern scientific record goes, Finlay was the first to propose the mosquito as the carrier of yellow fever, and I'm saying it that carefully on purpose, and the reception was skeptical, so the idea sat there for years before anyone proved it.
+Then on August 14th, 1881 he read a paper to the Royal Academy of Medical, Physical, and Natural Sciences of Havana. In it he proposed that a mosquito, which we now identify as Aedes aegypti, carries yellow fever from one person to another. Finlay wasn't the only person who ever suspected mosquitoes, but as far as the modern scientific record goes, his 1881 paper is the proposal that Reed's board went on to test, and I'm saying it that carefully on purpose, and the reception was skeptical, so the idea sat there for years before anyone proved it.
 
 ## 04 Reed Tests It
 
@@ -31,7 +31,7 @@ Now, to be fair to Reed, he wasn't just repeating Finlay. In 1900 Finlay tried t
 
 And there's something else that's fair to say about Finlay's side. His own experiments were inconsistent and had methodological flaws, and notably, his work lacked any knowledge of the extrinsic incubation period, which just means a mosquito needs some time after feeding on a sick person before it can pass the disease on.
 
-Now here's the part that matters, because that gap had been spotted by then, by a doctor named Henry Rose Carter. In 1898 Carter showed that after a first case of yellow fever there was a wait of about ten to sixteen days before secondary cases appeared,, and that's the extrinsic incubation period. Reed said later that Carter's work in Mississippi did more than anything else to impress on him that an intermediate host mattered in yellow fever. And the later analyses of Finlay's experiments say he didn't consistently feed mosquitoes on patients in the first three days of their illness, and he fed them on his volunteers too soon afterward, and he never considered that the mosquito itself needed time. The board's experiments put that gap at twelve days. So the proof really was Reed's.
+Now here's the part that matters, because that gap had been spotted by then, by a doctor named Henry Rose Carter. In 1898 Carter showed that after a first case of yellow fever there was a wait of about ten to sixteen days before secondary cases appeared, and that's the extrinsic incubation period. Reed said later that Carter's work in Mississippi did more than anything else to impress on him that an intermediate host mattered in yellow fever. And the later analyses of Finlay's experiments say he didn't consistently feed mosquitoes on patients in the first three days of their illness, and he fed them on his volunteers too soon afterward, and he never considered that the mosquito itself needed time. The board's experiments put that gap at twelve days. So the proof really was Reed's.
 
 ## 06 What the Proof Cost
 
@@ -45,4 +45,4 @@ It took until 1900, nineteen years after Finlay's paper, for Reed's team to prov
 
 ## 08 Who Did It First
 
-So, the plain fact, on August 14th, 1881 Carlos Finlay proposed to Havana's medical academy that a mosquito carries yellow fever, and in 1900 Walter Reed's board proved it with controlled experiments on volunteers. Finlay proposed it, Reed proved it, and Reed acknowledged Finlay along the way. Somebody proposed it first, and that's what this channel is about.
+So, the plain fact, on August 14th, 1881 Carlos Finlay proposed to Havana's medical academy that a mosquito carries yellow fever, and in 1900 Walter Reed's board proved it with controlled experiments on volunteers. Finlay proposed it, Reed proved it, and Reed acknowledged Finlay along the way. Somebody was there before the proof, and that's what this channel is about.

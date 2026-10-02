@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): the "yellow" cartri
 - Cadence fixes: 3. Dropped repeated "widely remembered" sentence at the top of section 02; joined the short sentences in sections 04 and 06; removed the closing "and that's what this channel is about" button.
 - Format fixes: reading notes word count updated to 677. No em/en dashes, no banned words.
 - Remaining concerns for Gus: Script is 677 words, under the 700 floor; the entry has nothing further that is verified and not marked off-air, so it was not padded. Alpex origin and Video Soft/IGDA lines rest on search extracts (two sources each), per the entry.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "The man behind the Channel F" is loose but is immediately fenced by "led the team" and the Alpex lines; Nov 1976 release, Alpex 1974 prototype, Video Soft 1980 and the March 2011 IGDA honor (Lawson died April 9, 2011) all check out in a spot search; "analog" for the Odyssey is attributed to the Smithsonian on air.

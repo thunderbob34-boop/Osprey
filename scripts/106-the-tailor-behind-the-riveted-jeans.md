@@ -1,7 +1,7 @@
-# The Tailor Who Riveted the First Blue Jeans
+# The Tailor Behind the Riveted Jeans
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 802 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 798 spoken words.
 - Tone is calm and matter-of-fact. Strauss is not a villain in this story, so keep him fair the whole way through.
 - Say Strauss as STROWSS (rhymes with house), Latvian as LAT-vee-un, Bavaria as buh-VAIR-ee-uh.
 - Every hedge in here is on purpose. Read "the riveted version", "as the company and museum account of his story tells it", "the company's history and the Online Nevada encyclopedia", "that's how Smithsonian Magazine tells it", "a shared one" and "not a thief" exactly as written, because they are what keeps the channel credible.
@@ -11,7 +11,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-Ask anybody who invented blue jeans and you'll get the same answer, Levi Strauss, because his name is on the pants, but the most famous name in jeans never put a single rivet in a pair of pants. The idea of putting metal rivets in them came from a tailor named Jacob Davis, and Strauss only got involved because Davis wrote him a letter. Now, to be fair, we have to be careful with the word invented, because denim cloth and canvas work pants were already around before any of this, so what Davis came up with was the riveted version, and Strauss was not a thief, he was a supplier and a businessman who said yes. But the patent names Davis as the inventor, and that's the part most people never hear.
+Ask anybody who invented blue jeans and you'll get the same answer, Levi Strauss, because his name is on the pants, but the most famous name in jeans didn't come up with the rivets. The idea of putting metal rivets in them came from a tailor named Jacob Davis, and Strauss only got involved because Davis wrote him a letter. Now, to be fair, we have to be careful with the word invented, because denim cloth and canvas work pants were already around before any of this, so what Davis came up with was the riveted version, and Strauss was not a thief, he was a supplier and a businessman who said yes. But the patent names Davis as the inventor, and that's the part most people never hear.
 
 ## 02 The Famous Version
 
