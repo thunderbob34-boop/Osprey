@@ -1,5 +1,7 @@
 # History Channel Topic Map: 24 New Candidates for "Somebody Did It First"
 
+**Status 2026-10-02:** the top 15 (plus reserve Walter Reed/Carlos Finlay) were researched to the two-source standard. 14 passed and are now episodes 101–114 in `100-episode-lineup.md`, with full entries there. Fritos needs a second strong source. Steamboat Willie was cut, because whether it was first depends on how you define sound.
+
 Prepared 2026-10-02. Phase 1, topic mining only. No scripts.
 
 ## What this is
