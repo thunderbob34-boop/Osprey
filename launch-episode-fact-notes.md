@@ -215,6 +215,18 @@ With search working again, every line on the spot-check list was checked against
 The reviewer independently confirmed the newly worded $5,000 line against Essig's quotation of Brown's May 1889 letter.
 
 **Corrections this round: 1 (plus 3 low-confidence guards applied).** A confirmation round followed.
+## Round 11: confirmation review with limited search
+
+**Result: 1 high- and 1 medium-confidence correction.**
+
+| # | Finding | Confidence | Change |
+|---|---|---|---|
+| 1 | Round 10's "**thin** carbon rod" was wrong. Swan's 1879 rod was thick-ish and low-resistance, which is exactly §03's point about "thick, low-resistance carbon". *(My error in applying Round 10.)* | High | "A carbon rod inside a glass bulb" |
+| 2 | **The $5,000 purpose.** Brown's 27 March 1889 letter (Edison Papers D8933AAN4) asked for $5,000 *from the Edison Electric Light Co.*, which wouldn't release it without Edison's approval. It was to cover both a proposed Johns Hopkins test (Westinghouse AC vs. Thomson-Houston DC equipment) and buying the execution dynamos. "To cover buying the generators" was too narrow. | Medium | "Letters show he asked Edison to sign off on five thousand dollars from Edison's company, partly to buy the generators, and then thanked him for a note to the company's president that got it arranged." |
+| 3 | "Westinghoused" was proposed for being *executed* by electricity, not for any electrical death | Low | "A word for being executed with electricity" |
+| 4 | Buffalo distance is given as 20–26 miles; someone may post 26 | Low | Not changed. "Some twenty" matches the IEEE Milestone's 20 |
+
+**Corrections this round: 2.** A confirmation round followed.
 ## Unresolved items and how each was handled
 
 | Item | What's unresolved | How it's handled |
@@ -254,7 +266,7 @@ The reviewer independently confirmed the newly worded $5,000 line against Essig'
 | 02 | Davy, early 1800s, battery current between two carbons, arc of light | V (hedged date) | Royal Institution history; Britannica "arc lamp" |
 | 02 | Arc lighting reached lighthouses and streets decades later, once there were generators | B | South Foreland lighthouse arc lamp (1858) and Jablochkoff/Brush street lighting (1870s): Science Museum Group; Britannica "arc lamp"; Round 2 reviewer |
 | 02 | Many inventors tried carbon or platinum incandescence; filaments burned up or melted | B | Friedel & Israel ch. 1; Smithsonian NMAH *Lighting a Revolution* |
-| 02 | Swan, 3 Feb 1879, Newcastle Lit & Phil, ~700 people, thin carbon rod in an evacuated bulb (corrected R10), months before Edison | V / R9 / R10 | Newcastle Lit & Phil history; Science Museum Group; Swan biography (Oxford DNB) |
+| 02 | Swan, 3 Feb 1879, Newcastle Lit & Phil, ~700 people, carbon rod in an evacuated bulb (corrected R10, R11), months before Edison | V / R9 / R10 | Newcastle Lit & Phil history; Science Museum Group; Swan biography (Oxford DNB) |
 | 03 | Early lamps used thick, low-resistance carbon → high current → thick copper; Edison's thin high-resistance filament + better vacuum | V | Friedel & Israel; Edison Papers; Hughes, *Networks of Power* |
 | 03 | Working bulb Oct 1879; carbon-filament patent granted Jan 1880 (US 223,898) | V | Edison Papers; USPTO |
 | 03 | First ones lasted "something like half a day" | **R9** | Rutgers Edison Papers, "The Carbon-Filament Lamp" (https://edison.rutgers.edu/life-of-edison/biographical-essays/lighting/the-carbon-filament-lamp): the 22 Oct 1879 lamp burned 13½ hours; ETHW, "Edison's Incandescent Lamp" (https://ethw.org/Edison's_Incandescent_Lamp) |
@@ -276,9 +288,9 @@ The reviewer independently confirmed the newly worded $5,000 line against Essig'
 | 06 | 1888, "self-styled electrical engineer" Harold Brown's public anti-AC campaign | R1 (+ Essig/Moran on "self-styled") | Reynolds & Bernstein, *Business History Review*; Edison Papers |
 | 06 | Edison let Brown use the West Orange lab; animals, mostly dogs, electrocuted | R1 | Edison Papers "The Current Wars" ("a number of animals, chiefly dogs"); Discover Magazine |
 | 06 | July 1888, Columbia College: dog survived DC, killed with AC, in front of an audience | R1 | Discover Magazine; Reynolds & Bernstein; Edison Papers (the date of 30 July 1888 is in Discover and the BHR abstract) |
-| 06 | "Before long", Edison's camp floated "Westinghoused" | R1-h | Scientific American blog; American Heritage; Essig. Who coined it is disputed, hence "Edison's camp" |
+| 06 | "Before long", Edison's camp floated "Westinghoused" as a word for being executed with electricity | R1 / R9 (Essig: Edison's lawyer proposed it) | Scientific American blog; American Heritage; Essig. Who coined it is disputed, hence "Edison's camp" |
 | 06 | New York passed its electric chair law in 1888 | **R9** | Boston College, "Old Sparky: The Electric Chair as Spectacle, Symbol, and State Power" (https://ejournals.bc.edu/index.php/mhj/article/download/21481/13699); Capital Punishment UK (https://capitalpunishmentuk.org/the-electric-chair/): Ch. 489, Laws of 1888, signed 4 June 1888 |
-| 06 | Brown supplied the equipment; asked Edison for $5,000 to cover buying the generators; then thanked him for a note to the president of Edison's company that got it arranged | **R9** (corrected wording) | *Papers of Thomas A. Edison*, vol. (Project MUSE, https://muse.jhu.edu/pub/1/oa_monograph/chapter/2914549): Brown's 27 March 1889 letter ("if $5,000 is made available") and his May 1889 letter: "Thanks to your note to Mr. Johnson [president of Edison Electric] I have been able to arrange the matter satisfactorily; have supplied the State with Westinghouse execution dynamos"; Edison Papers document D8933AAN4 (https://edisondigital.rutgers.edu/document/D8933AAN4); Essig, "The Unmasking of Harold Brown" |
+| 06 | Brown supplied the equipment; asked Edison to sign off on $5,000 from Edison's company, partly to buy the generators; then thanked him for a note to the company's president that got it arranged | **R9/R11** (corrected wording) | *Papers of Thomas A. Edison* (Project MUSE, https://muse.jhu.edu/pub/1/oa_monograph/chapter/2914549) and Edison Papers D8933AAN4 (https://edisondigital.rutgers.edu/document/D8933AAN4): Brown's 27 March 1889 letter asks for $5,000 from Edison Electric (for a Johns Hopkins test and the execution dynamos), and his May 1889 letter says "Thanks to your note to Mr. Johnson [president of Edison Electric] I have been able to arrange the matter satisfactorily"; Essig, "The Unmasking of Harold Brown" |
 | 06 | Westinghouse refused to sell; Brown got used Westinghouse generators through Thomson-Houston | R1 | Essig; Reynolds & Bernstein (the *New York Sun* letters, Aug 1889); Smithsonian (King 2011) |
 | 06 | Kemmler's lawyers challenged the chair in court; Edison testified (July 1889) that AC would kill instantly and painlessly | R1 | Smithsonian (King 2011); "Edison and 'The Chair'" (1989); American Heritage, "Edison and the Electric Chair" (2000) |
 | 06 | 6 Aug 1890, Auburn Prison, 17 seconds, survived, still breathing, current reapplied, smell of burning flesh; NYT: "far worse than hanging" | R1 | Death Penalty Information Center; Smithsonian (King 2011); *New York Times*, 7 Aug 1890 |
