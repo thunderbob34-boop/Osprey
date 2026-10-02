@@ -4,7 +4,7 @@ READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 953 spoken words.
 - Tone is calm and matter-of-fact. Gorrie's ending is sad, keep it plain and flat, the facts carry it.
 - Say Sackett-Wilhelms as SACK-it WIL-helmz, Gorrie as GOR-ee, Apalachicola as ap-uh-latch-ih-KOH-luh, Cramer as KRAY-mer, Tudor as TOO-der.
-- Every hedge in here is on purpose. Read "by about 1841", "Gorrie believed", "his machine made the ice" and "the cooling was a side effect" exactly as written. Never call Gorrie's machine an air conditioner, and never say the paper was wrinkling, the problem was moisture throwing off the colour printing.
+- Every hedge in here is on purpose. Read "at least that's the date Carrier's own company history gives", "by about 1841", "Gorrie believed", "his machine made the ice" and "the cooling was a side effect" exactly as written. Never call Gorrie's machine an air conditioner, and never say the paper was wrinkling, the problem was moisture throwing off the colour printing.
 - Visuals: no sick patients. Use text cards, the patent model, period portraits, and the Statuary Hall statue.
 - Good on-screen text moments are July 17 1902, Sackett-Wilhelms, about 1841, US Patent No. 8,080, 1851, 1855, and 1906 "air conditioning".
 

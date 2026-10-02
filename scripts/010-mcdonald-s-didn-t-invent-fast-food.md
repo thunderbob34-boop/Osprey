@@ -4,7 +4,7 @@ READING NOTES
 - Runtime is about 6 to 7 minutes at a relaxed pace, roughly 1,022 spoken words.
 - Tone is calm and matter-of-fact, a little lighter than usual. It's burgers, let it be easy, but no jokes at anybody's expense.
 - Say Kroc as KROHK, Des Plaines as deh PLAINZ, Hardart as HAR-dart, Quisisana as kwee-zee-ZAH-nah, Yoshinoya as yoh-shee-NOH-yah, Nihonbashi as nee-hohn-BAH-shee, thermopolium as ther-moh-POH-lee-um (plural thermopolia, ther-moh-POH-lee-uh), Nereid as NEER-ee-id.
-- Every hedge in here is on purpose. Read "usually called", "often considered", "according to the company", "widely credited", "one of the first", "reportedly", "about eighty" and "nearly two thousand years ago" exactly as written. Never call Red's the first drive-through flat out, and keep Yoshinoya as the company's own account.
+- Every hedge in here is on purpose. Read "which is the opening date usually given", "usually called", "often considered", "according to the company", "widely credited", "one of the first", "reportedly", "about eighty" and "nearly two thousand years ago" exactly as written. Never call Red's the first drive-through flat out, and keep Yoshinoya as the company's own account.
 - Keep these apart in the voice and on screen: first fast-food chain (White Castle), first drive-in (Pig Stand 1921), first drive-through (contested), and quick food in general (ancient).
 - Good on-screen text moments are 1921 Wichita, 116 restaurants / 11 states / 1931, 1940, 1948 Speedee, 1955 Des Plaines, 1961, June 9 1902 / 818 Chestnut St., 1899, 1947, 1931, 1948, and 2019 / 2020 Pompeii.
 

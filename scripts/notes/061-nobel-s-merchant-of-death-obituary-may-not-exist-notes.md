@@ -1,6 +1,6 @@
 # Notes: Nobel's "Merchant of Death" Obituary May Not Exist
 Research entry: episode-research.md — "# Job 3" section, entry "### 24." (Explosives)
-Spoken words: 730
+Spoken words: 725 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -19,3 +19,9 @@ Spoken words: 730
 
 Hedges kept: "never found a copy", "no original copy has been found", "can't be confirmed", "reportedly" (Kenne Fant), "some sources say 1846", "we don't know" (influence on the 1895 will), "may not exist" (never "didn't exist").
 Left out on purpose (unverified / keep off air in research): the claim that a real notice existed with milder wording (couldn't be verified from a strong source); the newspaper's name; anything Nobel supposedly said or felt on reading it beyond the legend as told; the observation that NobelPrize.org's biography pages didn't mention the obituary in searches (a search observation, not a finding). Plain explanation added: kieselguhr is a crumbly earth that soaks up the liquid. Research is thin, so this runs under the 900-word floor rather than padding.
+
+## Review
+- Fact fixes: (1) Cold open said Nobel "didn't discover the explosive his name is tied to", which in plain listening means dynamite, and Nobel did invent dynamite. It now says he didn't discover nitroglycerin, "the explosive that went into his dynamite". (2) Cut the legend embellishment "shaken by how the world was going to remember him" (not in the entry's telling, and the reading notes bar ad-libbing what Nobel felt). (3) "Even some respected places" changed to "even respected places", since the entry gives only one example (the older Smithsonian piece). (4) The closing button "the famous man said so himself" now names Sobrero as first.
+- Cadence fixes: 3. Joined split breaths in 03 ("here's something else, even respected places..."), 05 (a one-line paragraph merged into the paragraph before it) and 07.
+- Format fixes: word count updated to 725; runtime changed from 6 to about 5 minutes.
+- Remaining concerns for Gus: 725 spoken words, under the 900 floor, reported, not padded. "Newspapers did confuse the brothers" is in the entry's on-air version but not its confirmed list. Title checked: "May Not Exist" matches the research's "never found".

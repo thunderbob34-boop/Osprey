@@ -1,7 +1,7 @@
 # Nobel's "Merchant of Death" Obituary May Not Exist
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 730 spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 725 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is calm and fair. Nobel is not the villain, and he never claimed to discover nitroglycerin. The myth-bust is about a story told about him, not by him.
 - Say Ludvig as LOOD-vig, Cannes as KAN, Ascanio Sobrero as ah-SKAH-nee-oh so-BRAIR-oh, Turin as TOOR-in, kieselguhr as KEE-zul-goor, Kenne Fant as KEN-eh FAHNT.
 - Every hedge in here is on purpose. Read "never found a copy", "can't be confirmed", "reportedly", "some sources say 1846", "we don't know" and "may not exist" exactly as written. Don't say the obituary definitely never existed, only that nobody has found it.
@@ -11,11 +11,11 @@ READING NOTES
 
 ## 01 Cold Open
 
-There's a famous story about how the Nobel Prize got started, a newspaper ran Alfred Nobel's obituary by mistake while he was still alive and called him the merchant of death, and he was so shaken he rewrote his will and created the prizes. The problem is that nobody has ever found that obituary. Historians have looked, and no copy has turned up. And while we're at it, Nobel didn't discover the explosive his name is tied to either, somebody else did that, twenty years before dynamite.
+There's a famous story about how the Nobel Prize got started, a newspaper ran Alfred Nobel's obituary by mistake while he was still alive and called him the merchant of death, and he was so shaken he rewrote his will and created the prizes. The problem is that nobody has ever found that obituary. Historians have looked, and no copy has turned up. And while we're at it, Nobel didn't discover nitroglycerin either, that's the explosive that went into his dynamite, and somebody else discovered it twenty years before dynamite.
 
 ## 02 The Story Everyone Tells
 
-So here's the story the way it usually gets told. In 1888 Alfred Nobel's brother Ludvig died in Cannes, and a French paper thought it was Alfred who'd died, and it ran an obituary calling him "the merchant of death." Alfred read it, he was shaken by how the world was going to remember him, and he rewrote his will and created the Nobel Prizes.
+So here's the story the way it usually gets told. In 1888 Alfred Nobel's brother Ludvig died in Cannes, and a French paper thought it was Alfred who'd died, and it ran an obituary calling him "the merchant of death." Alfred read it, and he was so shaken that he rewrote his will and created the Nobel Prizes.
 
 And it's a great story, right? It's got a mistake, a shock, a man reading what people really think of him, and a happy ending where he changes his legacy. It's got a lesson built right into it, and that's exactly why it's worth checking.
 
@@ -25,7 +25,7 @@ Now here's the part that matters. Historians have never found a copy of that obi
 
 So the famous headline, merchant of death, can't be confirmed, and neither can the idea that an obituary like that is what inspired the prizes. Maybe it happened and maybe it didn't, but nobody has the newspaper, and without the newspaper, it's a story, not a fact.
 
-And here's something else. Even some respected places have told the story as if it's settled. There's an older Smithsonian piece with the headline Blame Sloppy Journalism for the Nobel Prizes, and it repeats the legend without questioning it. So it's been told by serious places too, and it still hasn't been backed up with an actual copy of the obituary.
+And here's something else, even respected places have told the story as if it's settled, there's an older Smithsonian piece with the headline Blame Sloppy Journalism for the Nobel Prizes, and it repeats the legend without questioning it. So it's been told by serious places too, and it still hasn't been backed up with an actual copy of the obituary.
 
 ## 04 What We Do Know
 
@@ -35,9 +35,7 @@ And Nobel did write the will that created the prizes, in 1895. What we don't kno
 
 ## 05 The Man Who Discovered Nitroglycerin
 
-And there's more, because the explosive in this story isn't Nobel's discovery either. Nitroglycerin was discovered in 1847, in Turin, by an Italian chemist named Ascanio Sobrero, and some sources say 1846. Sobrero judged it too dangerous for practical use.
-
-And he was horrified by what came next. The Smithsonian ran a piece on him with the headline The Man Who Invented Nitroglycerin Was Horrified By Dynamite. So the man who actually discovered the stuff thought it was too dangerous to use, and then he was horrified by what it turned into.
+And there's more, because the explosive in this story isn't Nobel's discovery either. Nitroglycerin was discovered in 1847, in Turin, by an Italian chemist named Ascanio Sobrero, and some sources say 1846. Sobrero judged it too dangerous for practical use, and he was horrified by what came next. The Smithsonian ran a piece on him with the headline The Man Who Invented Nitroglycerin Was Horrified By Dynamite. So the man who actually discovered the stuff thought it was too dangerous to use, and then he was horrified by what it turned into.
 
 ## 06 What Nobel Actually Did
 
@@ -47,4 +45,4 @@ And here's the part I like. Nobel never claimed to have discovered nitroglycerin
 
 ## 07 The Plain Fact
 
-So here's the plain fact. Ascanio Sobrero discovered nitroglycerin in Turin in 1847, and Alfred Nobel turned it into dynamite and patented it in 1867, and he said publicly that Sobrero came first. Ludvig Nobel died in 1888, and newspapers did mix up the brothers, but historians have never found a copy of the merchant of death obituary, and we don't know if anything like it shaped the 1895 will. Somebody did it first, and in this case the famous man said so himself.
+So here's the plain fact, Ascanio Sobrero discovered nitroglycerin in Turin in 1847, and Alfred Nobel turned it into dynamite and patented it in 1867, and he said publicly that Sobrero came first. Ludvig Nobel died in 1888, and newspapers did mix up the brothers, but historians have never found a copy of the merchant of death obituary, and we don't know if anything like it shaped the 1895 will. Somebody did it first, and it was Ascanio Sobrero, and Nobel said so himself.

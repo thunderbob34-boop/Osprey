@@ -1,16 +1,16 @@
-# The First Restaurants Were in China
+# China Had Restaurants 500 Years Before Paris
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 785 spoken words. It runs short on purpose rather than padding.
+- Runtime is about 5 minutes at a relaxed pace, roughly 784 spoken words. It runs short on purpose rather than padding.
 - Tone is warm and easy, it's a food story. Boulanger isn't a fraud, the point is there's no evidence for his shop, so say "no evidence," never "never existed."
 - Say Boulanger as boo-lahn-ZHAY, Chevallier as sheh-VAL-ee-ay, Mathurin Roze de Chantoiseau as mah-tyoo-RAN ROHZ duh shahn-twah-ZOH, bouillon as BOO-yon, Hangzhou as HAHNG-joe, Kaifeng as KY-fung, Kiefer as KEE-fer.
-- Every hedge in here is on purpose. Read "the usual story", "no contemporary evidence", "around 1766", "the first documented", "by 1235", "more than 500 years", "argues" and "in every way that matters" exactly as written.
+- Every hedge in here is on purpose. Read "the version you'll usually hear", "no contemporary evidence", "around 1766", "some sources give 1767", "the first documented", "by 1235", "more than five hundred years", "argues", "historians argue", "in every way that matters" and "the date we can actually stand on" exactly as written.
 - No sensitivity issues. Use period images of Paris and Song-dynasty paintings of city life, the book covers, and text cards.
 - Good on-screen text moments are restaurant = restorative broth, 1765, around 1766, 1235, Hangzhou, more than 500 years, and the 2002 Kiefer paper.
 
 ## 01 Cold Open
 
-In 1700s Paris a restaurant wasn't a place you went, it was a soup you drank. The word meant a restorative broth, and the place we now call a restaurant usually gets credited to Paris, to a soup-seller named Boulanger in 1765. But the evidence for Boulanger's shop isn't there, and more than five hundred years before Paris, a city in China already had restaurant after restaurant, each with its own menu.
+In 1700s Paris a restaurant wasn't a place you went, it was a soup you drank. The word meant a restorative broth, and the place we now call a restaurant usually gets credited to Paris, to a soup-seller named Boulanger in 1765. But a historian who went looking found no contemporary evidence for Boulanger's shop, and more than five hundred years before Paris, a city in China already had restaurant after restaurant, each with its own menu.
 
 ## 02 The Famous Version
 
@@ -24,7 +24,7 @@ In 18th-century Paris, a restaurant was a restorative broth, a concentrated meat
 
 And here's the part that matters about Boulanger. The historian Rebecca Spang went looking for him, for her book The Invention of the Restaurant, and she found no contemporary evidence for Boulanger's shop. Now, to be fair, that's not the same as saying Boulanger never existed, she didn't find evidence, and that's all we're saying. But the first documented restaurateur in Paris is someone else, a man named Mathurin Roze de Chantoiseau, around 1766, and some sources give 1767.
 
-And the food historian Jim Chevallier, who writes about Paris food history, has written about the Boulanger story too, and he calls the way it grew over the years the snowballing of a myth. So even inside the Paris story, the name everybody repeats isn't the name in the records.
+And Jim Chevallier, who writes the Paris Food History blog, has written about the Boulanger story too, and he calls the way it grew over the years the snowballing of a myth. So even inside the Paris story, the name everybody repeats isn't the name in the records.
 
 ## 04 Hangzhou, 1235
 
@@ -38,7 +38,7 @@ And Hangzhou didn't have a handful of these, Columbia University's teaching mate
 
 Now, to be fair, you could ask whether those were really restaurants, or just places that sold food. And that's exactly what a Cornell economist named Nicholas Kiefer looked at, in a peer-reviewed paper in 2002, and he argues that restaurants as we know them existed in Southern Song China. By the accounts of the time, 13th-century Hangzhou had a lively restaurant scene serving locals and travelers, so the restaurant wasn't an invention of the French Revolution era.
 
-So the way historians put it is that these were restaurants in every way that matters. Customers chose from a menu, they paid for a meal, and they ate it at a place built for that. That's a restaurant. That's a restaurant the way we use the word today, and it was in Hangzhou by 1235.
+So historians argue that these were restaurants in every way that matters, customers chose from a menu, they paid for a meal, and they ate it at a place built for that. That's a restaurant. That's a restaurant the way we use the word today, and it was in Hangzhou by 1235.
 
 And to be fair to Paris, the word is theirs, and the soup is theirs, and Roze de Chantoiseau really is the first documented restaurateur there. Paris just wasn't first.
 

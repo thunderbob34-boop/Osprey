@@ -4,7 +4,8 @@ READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 935 spoken words.
 - Tone is calm and matter-of-fact. The surgery talk stays plain, no wincing in the voice, the facts carry it.
 - Say Venable as VEN-uh-bul, Magendie as mah-zhahn-DEE, Hanaoka Seishu as hah-nah-OH-kah SAY-shoo, Kan Aiya as KAHN eye-YAH, mafutsusan as mah-foo-TSOO-sahn, tsusensan as TSOO-sen-sahn.
-- Every hedge in here is on purpose. Read "many doctors", "some saw it as a sign", "some opposed anesthesia", "the way I see it" and "the way I'd put it" exactly as written. Never say doctors thought screaming was a good sign, that line has no source behind it.
+- Every hedge in here is on purpose. Read "the reason you'll usually see given", "the reason usually given", "if that's right", "many doctors", "some saw it as a sign", "some opposed anesthesia", "the way I see it" and "the way I'd put it" exactly as written. Never say doctors thought screaming was a good sign, that line has no source behind it.
+- Before this airs, the producer should find a source for Doctors' Day falling on March 30 because of Long's operation. The research has that link only in its angle line with no source attached, so the script hedges it and leans on the plain fact that the dates match.
 - Leave out the other names people bring up in the ether fight. They weren't checked for this episode.
 - Visuals: no surgical or tumor imagery. Use text cards, period portraits, and period engravings of the buildings.
 - Good on-screen text moments are Oct 13 1804, March 30 1842, 1849, Oct 16 1846, and March 30, National Doctors' Day.

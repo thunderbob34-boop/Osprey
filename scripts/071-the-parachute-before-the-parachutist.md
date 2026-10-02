@@ -1,7 +1,7 @@
 # The Parachute Before the Parachutist
 
 READING NOTES
-- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 705 spoken words. The research is short, so this one runs short on purpose.
+- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 707 spoken words. The research is short, so this one runs short on purpose.
 - Tone is calm and a little amused at the 2000 jump, but say the cutaway plainly, it was a safety call, not a failure.
 - Say Garnerin as gar-neh-RAN, Parc Monceau as park mon-SO, Vrančić as VRAN-chich, Veranzio as veh-RAN-tsee-oh, Machinae Novae as MAH-kee-nye NO-vye, Homo Volans as HO-mo VO-lahns.
 - Every hedge in here is on purpose. Read "around 1485", "first recorded", "about 3,200 feet", "early 1600s", "a drawing", "about 2,000 feet", "might have crushed him", "partly", "as far as the record goes" and "as far as anyone knows" exactly as written. Never say Vrančić jumped from a tower, not even as a legend, and never say Leonardo's design was the first one used.

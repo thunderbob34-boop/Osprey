@@ -1,10 +1,10 @@
 # The Smithsonian vs. the Wright Brothers
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 944 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 943 spoken words.
 - Tone is calm and a little wry. This one runs the other way from most episodes. The Wrights really were first by the mainstream view, and the fight is over credit, so don't play it as a dethroning. Keep the Whitehead section even and flat, it's a disputed claim, not a reveal.
 - Say Tunison as TUN-ih-sun, Lorin as LOR-in, Langley as LANG-lee, Aerodrome as AIR-oh-drome, Dickie as DICK-ee.
-- Every hedge in here is on purpose. Read "as the family later told it", "reportedly", "a Wright rival's 1914 tests", "engineers in a patent fight with the Wrights", "claimed" and "the mainstream view" exactly as written. Don't name who ran the 1914 tests.
+- Every hedge in here is on purpose. Read "as the family later told it", "reportedly", "a Wright rival", "a rival's 1914 tests", "engineers who were in a patent fight with the Wrights", "claimed" and "the mainstream view" exactly as written. Don't name who ran the 1914 tests.
 - No crash imagery as real footage. Use the famous first-flight photo, the telegram, period newspapers, the Smithsonian and Science Museum, and text cards.
 - Good on-screen text moments are December 17 1903, 120 feet in 12 seconds, 852 feet in 59 seconds, the telegram text, 57 vs 59, 1914, 1928, 1942, 1948, the contract wording, and August 14 1901.
 

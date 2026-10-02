@@ -1,7 +1,7 @@
 # The "First Skyscraper" Was Chosen by Committee
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 848 spoken words. Every verified detail is in, so it runs under the usual length rather than padded.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 853 spoken words. Every verified detail is in, so it runs under the usual length rather than padded.
 - Tone is calm and a little dry. Jenney isn't the villain here, the title was handed out by a committee, and the script says so.
 - Say Jenney as JEN-ee, Tallmadge as TAL-mij, Ditherington as DITH-er-ing-tun, Shrewsbury as SHROHZ-bree, Bessemer as BESS-uh-mer, Phipps as FIPS.
 - Every hedge in here is on purpose. Read "usually called", "mostly iron", "a mix of masonry and iron", "the iron skeleton idea", "that mill isn't tall" and "a working paper" exactly as written. Never call the Home Insurance Building "steel-framed," and never call the Shrewsbury mill an earlier skyscraper.
@@ -48,4 +48,4 @@ So the fair way to say it is that the Home Insurance Building belongs in this st
 
 ## 07 Who Did It First
 
-So here's how it lines up. A flax mill in Shrewsbury, designed by Charles Bage, was built in 1796 and 1797, and it's called the first iron-framed building in the world. The Equitable Building in New York, finished in 1870, was a seven-story office building with a passenger elevator. The Home Insurance Building in Chicago was finished in 1885, mostly iron, with steel in its upper floors. And in 1931, forty-six years later, a committee appointed by the Marshall Field estate named it the first skyscraper, and in 1932 the Western Society of Engineers issued a dissent. So somebody did it first, and the iron frame and the elevator office building were both there before Jenney's building went up.
+So here's how it lines up. A flax mill in Shrewsbury, designed by Charles Bage, was built in 1796 and 1797, and it's called the first iron-framed building in the world. The Equitable Building in New York, finished in 1870, was a seven-story office building with a passenger elevator. The Home Insurance Building in Chicago was finished in 1885, mostly iron, with steel in its upper floors. And in 1931, forty-six years later, a committee appointed by the Marshall Field estate named it the first skyscraper, and in 1932 a committee of the Western Society of Engineers issued a dissent. So somebody did it first, and the iron frame and the elevator office building were both there before Jenney's building went up.

@@ -4,7 +4,7 @@ READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 933 spoken words.
 - Tone is calm and matter-of-fact. Onesimus was enslaved, so say it plainly and with respect, no dramatics, the facts carry it.
 - Say Jesty as JES-tee, Yetminster as YET-min-ster, Nelmes as NELMZ, Phipps as FIPS, Onesimus as oh-NESS-ih-mus, Boylston as BOYL-stun, variolation as vair-ee-oh-LAY-shun.
-- Every hedge in here is on purpose. Read "by the 1500s", "somewhere between 1465 and 1572", "that's how the museums put it", "the son of Jenner's gardener" and "mild smallpox" exactly as written.
+- Every hedge in here is on purpose. Read "by the 1500s", "by sometime between 1465 and 1572", "that's how the museums put it", "the son of Jenner's gardener" and "mild smallpox" exactly as written.
 - Visuals: no close-up smallpox images and no lesions. Use text cards, period portraits, the Phipps cottage, and period engravings of cows and farms.
 - Good on-screen text moments are 1774, 22 years, May 14 1796, James Phipps age 8, by the 1500s, 1721, and 248 inoculated / 6 died.
 

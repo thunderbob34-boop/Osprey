@@ -4,7 +4,7 @@ READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 932 spoken words.
 - Tone is calm and a little amused, never mocking. Nobody here is being called a crook, the forgery is one historian's argument, and the script says so.
 - Say Raffaele Esposito as rah-fah-EH-leh es-POH-zee-toh, Margherita as mar-geh-REE-tah, Brandi as BRAHN-dee, Emmanuele Rocco as em-mah-noo-EH-leh ROCK-oh, Francesco de Bourcard as fran-CHES-koh deh boor-KAR, Nowak as NOH-vak, pizzaiolo as peet-sigh-OH-loh.
-- Every hedge in here is on purpose. Read "probably", "likely", "Nowak thinks", "his argument, not proven", "supposedly", "sometimes tomato" and "we don't know" exactly as written. Never say the 1858 writer called it a Margherita, he didn't.
+- Every hedge in here is on purpose. Read "he thinks is probably fake", "probably", "likely", "Nowak thinks", "his argument, not proven", "supposedly", "sometimes tomato" and "we don't know" exactly as written. Never say the 1858 writer called it a Margherita, he didn't.
 - Before this airs, the producer should have the published Nowak article and the 1858 Usi e costumi text in hand. The research found only one strong source for the letter analysis.
 - Good on-screen text moments are 1889, 1858, Usi e costumi di Napoli e contorni (vol. 2), the three problems with the letter (seal, handwriting, the name Brandi), and the 1930s.
 

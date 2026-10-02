@@ -1,4 +1,4 @@
-# Notes: Air Conditioning Wasn't Built for People
+# Notes: Carrier's Air Conditioner Wasn't Built for People
 Research entry: episode-research.md — "# Job 3" section, entry "### 8."
 Spoken words: 953
 

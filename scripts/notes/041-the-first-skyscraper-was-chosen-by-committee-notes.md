@@ -1,6 +1,6 @@
 # Notes: The "First Skyscraper" Was Chosen by Committee
 Research entry: episode-research.md, "# Job 3" section, entry "### 11." (Skyscraper)
-Spoken words: 848
+Spoken words: 853 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -21,3 +21,9 @@ Plain explanation added (no new claims): a flax mill processes flax; "iron-frame
 Hedges kept: "usually called"; "mostly iron"; "a mix of masonry and iron"; Barr's paper flagged as a working paper; the mill is "not tall" and framed as "the iron skeleton idea", not an earlier skyscraper; Jenney credited as a real contender.
 
 Left out on purpose (unverified / keep off air in research): the "1986 publicity campaign" (cut, nothing surfaced); "Bessemer steel made skyscrapers possible" and the "cheap steel, safety elevators and fireproofing together" line (the combination is inferred, not sourced); History.com's "revolutionary steel frame" (named only as the myth); Carol Willis, the Chicago Architecture Center and Britannica "skyscraper" as cited support (removed in research). Building heights in stories for Home Insurance and Tacoma left out because they aren't in the entry.
+
+## Review
+- Fact fixes: (1) Section 06 "The Home Insurance Building did use a metal frame" conflicted with the entry's "masonry-iron hybrid" framing; now "did use iron columns and beams, with some steel beams up top". (2) Section 06 "that's a big part of why this argument keeps going" (unsupported causal claim) softened to "so there's room to argue about it"; "an important early tall building" (not in entry) changed to "belongs in this story". (3) Section 07 "the Western Society of Engineers issued a dissent" corrected to "a committee of the Western Society of Engineers", matching the entry.
+- Cadence fixes: 7. Removed the redundant third "committee" line in 01; joined stops in 03 (Tallmadge; "ruled for ... it picked it over the Tacoma Building"; "Now here's the part that matters, a committee..."), 04, 05 ("isn't tall, it's five stories"); replaced the closing button with a plain line.
+- Format fixes: word count updated 848 to the new count.
+- Remaining concerns for Gus: runs under 900 words. The 1931 committee and 1932 dissent rest mainly on Barr's working paper (not peer-reviewed) plus the Encyclopedia of Chicago (title/extract only) and Chicagology (enthusiast site); the script attributes the hybrid description to Barr but states the committee facts flatly, which the entry marks Confirmed. "Revolutionary steel frame" is said only as the myth, not attributed.
