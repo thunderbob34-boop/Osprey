@@ -1,7 +1,7 @@
 # Kodak's Film Had a Rival Inventor: Hannibal Goodwin
 
 READING NOTES
-- Runtime is about 4 minutes at a relaxed pace, roughly 474 spoken words.
+- Runtime is about 3 minutes at a relaxed pace, roughly 474 spoken words.
 - Tone is calm and matter-of-fact. Eastman is not a villain in this story. He reached the market first and he built the business, and the script says so.
 - Say Goodwin as GOOD-win, Reichenbach as RYE-ken-bock, Newark as NEW-ark, pellicle as PEL-ih-kul.
 - Every hedge in here is on purpose. Read "flexible celluloid photographic film", "certain claims", "held that Kodak had infringed" and "we won't guess" exactly as written, because they are what keep the channel credible.

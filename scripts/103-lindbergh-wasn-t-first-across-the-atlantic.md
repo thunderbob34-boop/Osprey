@@ -3,7 +3,7 @@
 READING NOTES
 - Runtime is about 3 minutes at a relaxed pace, roughly 444 spoken words.
 - Tone is calm and respectful. Lindbergh's record is real and the script says exactly what it is, so do not play it down in the voice.
-- Say Alcock as AL-kok, Clifden as KLIF-den, Orteig as or-TAYG.
+- Say Alcock as AL-kok, Clifden as KLIF-den.
 - Every hedge in here is on purpose. Read "first SOLO nonstop", "first nonstop", "at all, with stops", "by stages", "about sixteen hours", "sources differ" and "toy" exactly as written. Lindbergh's record is the first solo nonstop crossing and nothing broader, and the cats were toy mascots, not live animals.
 - Visuals: period photos of the aircraft, maps and text cards. Nothing sensitive here.
 - Good on-screen text moments are May 8 1919, June 14-15 1919, May 20-21 1927, 3,610 miles, about 33.5 hours, about 16 hours, 10,000 pounds, 25,000 dollars, Lucky Jim and Twinkletoes.

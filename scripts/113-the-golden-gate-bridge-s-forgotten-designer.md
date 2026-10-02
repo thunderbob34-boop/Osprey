@@ -1,7 +1,7 @@
 # The Golden Gate Bridge's Forgotten Designer
 
 READING NOTES
-- Runtime is about 4 minutes at a relaxed pace, roughly 473 spoken words.
+- Runtime is about 3 minutes at a relaxed pace, roughly 473 spoken words.
 - Tone is calm and matter-of-fact. Strauss was a real chief engineer and this is not an attack on him. The claim is that Ellis's design leadership was left out, not that Strauss did nothing.
 - Say Strauss as STROWSS (rhymes with house), Moisseiff as MOY-seff, Ellis as EL-iss.
 - Every hedge in here is on purpose. Read "significant credit", "directed the design calculations", "early 1920s", "not the sole designer" and "we won't guess" exactly as written, because they are what keeps the channel credible.
