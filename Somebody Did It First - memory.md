@@ -30,7 +30,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).
 5. Pronunciations to confirm: Magie (7), Chevedden (55), Tawell (97). Others are confirmed in each script's reading notes.
 6. Pre-recording source pulls, per the "Open check" column in `scripts/README.md`. The biggest are: the Nowak paper and the 1858 Usi e costumi text (4, pizza); a second strong source naming John Loud (53); a Sasson page reference for the Kibri-Dagan letter (47); and a second source for the Dunhuang banner and the Heilongjiang and Xanadu guns (49).
-7. History Channel topic mining ("That Built" franchise + Hazardous History) as a topic map only, after the fact-check. Research the best 10–15 to the two-source standard.
+7. New repo: Gus will create an empty private `somebody-did-it-first` repo and give the Claude GitHub app access to it. The channel work then moves out of Osprey's `research/somebody-did-it-first` branch. Until then, that branch is the safe copy.
 
 ## Sources (policy and licensing, checked 2026-10-02)
 See the "Sources checked" table in `production-game-plan.md`. Re-check any row older than 30 days before a video ships.
