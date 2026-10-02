@@ -24,3 +24,9 @@ Left out on purpose (unverified / keep off air in research): any single "first r
 - Cadence fixes: 2. Fixed the rhetorical question + fragment ("So there isn't one first record, right? It came together...") into one breath; added one "right?" (now 3).
 - Format fixes: word count updated 872 to 852.
 - Remaining concerns for Gus: 852 words, under 900.
+
+## Re-check A (2026-10-02)
+- Searched: Tharpe electric-guitar gospel in clubs, late 1930s → Britannica: she joined the 1938 Cotton Club revue and "blended traditional gospel with jazz tempos on her electric guitar, introducing gospel to nightclubs"; supports the script line (some biographers think her 1938 guitar was acoustic, but Britannica's wording backs it) → https://www.britannica.com/biography/Sister-Rosetta-Tharpe ; https://www.pbs.org/wnet/americanmasters/timeline-the-years-of-sister-rosetta-tharpe/2487/
+- Searched: "Rocket 88" session date and label → 5 March 1951 session at Sam Phillips's Memphis Recording Service, released on Chess, "often cited as one of the first rock and roll records" → https://www.loc.gov/static/programs/national-recording-preservation-board/documents/Rocket-88_Propes.pdf ; https://www.britannica.com/topic/Rocket-88
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): 1944 "Strange Things Happening Every Day" with Sammy Price; influence on Elvis per Gayle Wald via NPR; Hall of Fame first class 1986 with Little Richard; Tharpe's 2018 Early Influences induction.

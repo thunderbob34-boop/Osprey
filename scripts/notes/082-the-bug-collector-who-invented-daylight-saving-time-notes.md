@@ -23,3 +23,9 @@ Left out on purpose (unverified / keep off air in research): Port Arthur stated 
 - Cadence fixes: 3. Joined the one-line "And the society ridiculed it." paragraph into the previous breath; cut the crafted war/bug-hunting button; added one "right?" (now 3).
 - Format fixes: word count updated 924 to 908. Title kept: "invented" is the research heading's own word and the entry backs Hudson as first to propose; title not changed.
 - Remaining concerns for Gus: 908 words, under the 1,200 target but over 900. If you want the title tighter, "First Proposed" is the strictest wording.
+
+## Re-check A (2026-10-02)
+- Searched: Hudson's paper to the Wellington Philosophical Society, 16 Oct 1895, and its reception → date confirmed; "the idea was ridiculed by a number of society members" (so "ridiculed the idea" is right; strictly it was some members, not a formal society verdict, which the script's wording carries) → https://teara.govt.nz/en/biographies/3h42/hudson-george-vernon
+- Searched: Germany first to adopt DST, 1916, WWI → confirmed as the standard institutional framing (Austria-Hungary started the same day, 30 April 1916, but Britannica and National Geographic name Germany as first; left as is) → https://www.britannica.com/today-in-history/March-31-How-WWI-Invented-Daylight-Saving-Time ; https://www.nationalgeographic.com/science/article/daylight-saving-time
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): two-hour shift (standard account; Te Ara search summary didn't quote the figure); Hudson as postal worker; Franklin 1784 satire and Smithsonian's "erroneous"; Willett's 1907 pamphlet and independent invention; Port Arthur 1908 claim and CBC wording.

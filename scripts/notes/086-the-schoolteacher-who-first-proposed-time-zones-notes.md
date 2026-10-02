@@ -25,3 +25,8 @@ Left out on purpose (unverified / keep off air in research): the cause of Dowd's
 - Cadence fixes: 2. Joined "So first, here's why anybody needed this. For most of history..." into one breath; added one "right?" (now 3).
 - Format fixes: title changed (file name and manifest title still use "Invented"); word count updated 916 to 915.
 - Remaining concerns for Gus: none on facts. The geography explanation for the four minutes (New York sitting east of its zone's reference line) is plain explanation, not from the entry. It's correct, but you can cut it if you want only entry facts.
+
+## Re-check A (2026-10-02)
+- Searched: Fleming's "Terrestrial Time" 1876, 24 zones; Dowd's 1870 four-zone pamphlet → both confirmed; Fleming's plan was worldwide, Dowd's US only → https://www.britannica.com/science/time/Standard-time ; https://www.smithsonianmag.com/smithsonian-institution/sandford-fleming-sets-the-worlds-clock-389930/ ; https://thecanadianencyclopedia.ca/en/article/invention-of-standard-time-feature
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Dowd's 1869 proposal; Temple Grove Seminary / Skidmore; Britannica "never accepted"; Allen's plan; 18 Nov 1883 switch and the two noons about four minutes apart in New York (New York sits about 1 degree east of 75 W, which is about 4 minutes, so the geography explanation is correct); federal law later (1918).

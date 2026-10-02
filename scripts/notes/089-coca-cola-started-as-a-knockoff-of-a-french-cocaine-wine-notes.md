@@ -23,3 +23,8 @@ Left out on purpose (unverified / keep off air in research): the cocaine content
 - Cadence fixes: 2. Joined "one new idea. But the idea wasn't new..." into one breath; added one "right?" (now 3).
 - Format fixes: word count updated 843 to 836. Title kept: Coca-Cola grew straight out of French Wine Coca, which the NLM calls an imitation, so "started as a knockoff" holds.
 - Remaining concerns for Gus: 836 words, under 900. "Cocaine wine" in the title is the research heading's wording (PBS uses it too); the script itself says "coca" throughout.
+
+## Re-check A (2026-10-02)
+- Searched: Pemberton's French Wine Coca based on Vin Mariani; Atlanta prohibition 1886 → confirmed: "In 1886 the city of Atlanta introduced prohibition", Pemberton dropped the wine and named the new version Coca-Cola; Vin Mariani dates from 1863 → https://www.nlm.nih.gov/exhibition/pickyourpoison/exhibition-cocaine.html ; https://www.georgiaencyclopedia.org/articles/business-economy/john-stith-pemberton-1831-1888/
+- Fixes: none (note: the Atlanta/Fulton County local-option vote was in late 1885 and took effect in 1886; "in 1886 Atlanta adopted prohibition" matches how NLM and the New Georgia Encyclopedia put it, so left as is)
+- Not search-verified (checked against research/knowledge only): Mariani Corsican-born; Bordeaux wine base; Pope Leo XIII's gold medal and portrait in ads; NMAH Vin Mariani object; NLM's "inferior imitation" wording; kola nut added; Coca-Cola later overtaking Vin Mariani.

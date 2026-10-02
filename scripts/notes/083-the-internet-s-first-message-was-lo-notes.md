@@ -24,3 +24,8 @@ Left out on purpose (unverified / keep off air in research): Kleinrock's 1961-62
 - Cadence fixes: 5. Joined "He types an L... He types an O... And then the system crashes." into one breath; removed the "Eleven volumes." fragment; moved "right?" after "one in America and one in Britain" so it isn't a question then a fragment; joined the three choppy lines opening section 03.
 - Format fixes: word count updated 1,025 to 1,013.
 - Remaining concerns for Gus: the title says "The Internet's First Message" but the entry only supports ARPANET's first message (the script calls ARPANET "the internet's ancestor" throughout). The title is a common framing and I left it, but "ARPANET's First Message Was 'lo'" is the strict version if you want it.
+
+## Re-check A (2026-10-02)
+- Searched: none (search budget spent on higher-risk claims elsewhere in the batch).
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): 29 Oct 1969, about 10:30 p.m., Kline at UCLA's SDS Sigma 7 and Duvall at SRI's SDS 940, "lo" then crash, login about an hour later (all match Kleinrock's own account); Baran's 1964 eleven-volume "On Distributed Communications"; Davies 1965, coined "packet", published 1966-67, learned of Baran afterwards; NPL Mark I network running by about 1970; CYCLADES/Pouzin datagram and Cerf's citation; Berners-Lee March 1989. All match standard scholarship; nothing found to change.

@@ -24,3 +24,8 @@ Left out on purpose (unverified / keep off air in research): the exact month of 
 - Cadence fixes: 4. Joined the choppy run "So it's natural... But the idea..." into one breath; joined "treating light as particles. A modern black hole..."; folded the "That's the fair way to say it." button into the previous sentence; added one "right?" (now 3).
 - Format fixes: title changed (file name and manifest title still use the old wording); word count updated 917 to 918.
 - Remaining concerns for Gus: the file name and manifest still say "Black Holes Were Predicted in 1783". Don't use that as the upload title or thumbnail text.
+
+## Re-check A (2026-10-02)
+- Searched: none (search budget spent on higher-risk claims elsewhere in the batch).
+- Fixes: none
+- Not search-verified (checked against research/knowledge only): Michell's 1783 paper to Cavendish, read to the Royal Society (27 Nov 1783) and printed in Phil. Trans. (1784 volume; the script's "in 1783 he wrote a paper ... published" is fine); 500 times the Sun's radius at solar density; binary-star detection idea; Laplace 1796; Schwarzschild 1916; Wheeler popularizing "black hole" in 1967; Michell as rector of Thornhill, Yorkshire ("country parson in Yorkshire"); first black hole image 2019 (so "more than two hundred years" holds). All match standard scholarship.

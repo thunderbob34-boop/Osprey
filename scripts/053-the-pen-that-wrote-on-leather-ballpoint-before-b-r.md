@@ -1,4 +1,4 @@
-# The Pen That Wrote on Leather: Ballpoint Before Bíró
+# The Ballpoint Pen Patented 50 Years Before Bíró
 
 READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 905 spoken words. The research is thin, so this one runs short rather than padded.
