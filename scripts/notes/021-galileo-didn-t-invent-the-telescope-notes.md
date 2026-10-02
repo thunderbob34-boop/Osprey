@@ -1,6 +1,6 @@
 # Notes: Galileo Didn't Invent the Telescope
 Research entry: episode-research.md, "## New topic detail" section, entry "### 3." (Galileo Didn't Invent the Telescope)
-Spoken words: 855
+Spoken words: 864
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -32,3 +32,8 @@ Left out on purpose (unverified / keep off air in research): any claim that Lipp
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) "Galileo is the one who turned it on the sky" and "Galileo gets the credit for the sky" implied he was first to point a telescope upward, on a channel about who did it first; Thomas Harriot drew the Moon through a telescope on 26 July 1609 (Old Style), months before Galileo's observations. Now "Galileo is the one who made it famous by what he found in the sky" and "Galileo gets the credit for what he found in the sky". Harriot not named on air (not in the research). Word count 855 → 864.
 - Low items noted, not changed: Galileo's first telescope was summer 1609, so "about a year" from October 1608 is about ten months; fine as "about".
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed: yes. "Galileo is the one who made it famous by what he found in the sky" and "gets the credit for what he found in the sky" no longer claim he was first to point a telescope up. Section 06 still says "he turned it on the sky" as part of what made it famous, not as a first, which is fine. Dates (25 Sept, 2 Oct 1608), 3 to 4x, 1609, 1610 and the Metius/Janssen hedges all check.
+- Fixes made: none. Notes file "Spoken words" line (855) updated to 864.
+- Low items: the cold open's "A year before Galileo turned a telescope to the sky" and section 03's "about a year before Galileo built his" are loose, since Galileo's first telescope was summer 1609 (about nine to ten months after October 1608) and his sky observations came in autumn 1609; "about a year" holds. If a pedant matters, "less than a year" would be tighter for the build.

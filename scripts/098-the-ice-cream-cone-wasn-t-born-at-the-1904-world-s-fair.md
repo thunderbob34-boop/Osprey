@@ -1,7 +1,7 @@
 # The Ice Cream Cone Wasn't Born at the 1904 World's Fair
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 756 spoken words. The research is short, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 755 spoken words. The research is short, so this one runs short rather than padded.
 - Tone is light and summery. Nobody's a fraud here, the fair gets real credit for making the cone popular.
 - Say Ernest Hamwi as ERN-ist HAHM-wee, zalabia as zah-LAH-bee-uh, Italo Marchiony as EE-tah-loh mar-kee-OH-nee, and Agnes Marshall as AG-nis MAR-shul.
 - Every hedge in here is on purpose. Read "often told as", "popularized there", "the earliest claimant", "an edible ice cream cup", "he said", "on the evidence we have" and "December 1903" exactly as written.
@@ -25,7 +25,7 @@ Now here's the part that matters. In 1888, in London, Agnes Marshall published M
 
 So that's an edible cone, filled with an ice, in a published London cookbook in 1888. Now, to be fair, what the recipe proves is that she said you could fill them with ice cream, it doesn't prove how people actually ate them in 1888, so I'll stick to what she wrote.
 
-And the Smithsonian calls Marshall the earliest claimant. That's careful wording, and it's on purpose, because earliest claimant means she's the earliest one anybody has found, not proof that nobody did it before her.
+And the Smithsonian calls Marshall the earliest claimant. That's careful wording, and it's on purpose, because earliest claimant isn't the same thing as first, it's not proof that nobody did it before her.
 
 ## 04 The Man With the Mold
 

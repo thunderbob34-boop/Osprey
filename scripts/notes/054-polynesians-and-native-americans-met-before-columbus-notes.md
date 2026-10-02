@@ -38,3 +38,8 @@ Left out on purpose (unverified / keep off air in research): the cumal/kumara wo
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (medium) Section 05 gave admixture at about 1150 in the South Marquesas but the contact itself at around 1200, which reads as mixing before meeting. Added "and those are rough dates, so don't let the 1150 and the 1200 trip you up, they overlap." Word count 1,068 to 1,086.
 - Low items noted, not changed: The Marshall Islands stick charts are Micronesian, not Polynesian; the script never calls them Polynesian, but they sit inside the Polynesian section. "Coastal Colombia and Ecuador" is the Stanford press wording; the paper's abstract says present-day Colombia (already hedged "closest to").
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Round B 1150/1200 line was clunky and could read as mixing before meeting; the 2020 Nature study gives rough dates with margins (PubMed 32641827).
+- Fixes made: 05 now 'rough dates, each with a margin either side, so the 1150 and the 1200 overlap and don't contradict each other'; 01 'the meeting is real' softened to 'the evidence for the meeting is strong' to match the 'evidence' and 'unproven' hedges. Word count 1,086 to 1,094.
+- Low items: Marshall Islands stick charts are Micronesian, sit in the Polynesian section; 'coastal Colombia and Ecuador' is press wording.

@@ -35,3 +35,8 @@ Left out on purpose (unverified / keep off air in research): The "predicted his 
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: 1 (medium). Section 04 said "de Moivre's version was missing a piece... de Moivre didn't have it" about the square root of two pi. In the 1733 Approximatio itself de Moivre gives the constant and credits Stirling for it (MacTutor, https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/ ; Nature 1933, https://www.nature.com/articles/132713a0). Changed to "de Moivre didn't work out every piece himself... that piece came from another mathematician, James Stirling, and de Moivre gave him the credit for it right there in the pamphlet". Word count 801 to 812.
 - Low items noted, not changed: Robert Adrain also derived the normal error law in 1808, a year before Gauss; Laplace's 1774 memoir is better known for a different error curve, though it does use the normal approximation; "every report card" is loose.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Stirling/pamphlet fix confirmed: de Moivre credits Stirling for the sqrt(2 pi) constant in the 1733 Approximatio (MacTutor, Nature 1933); reads in one breath; no contradiction with cold open or close. Arithmetic 1809-1733=76 ok.
+- Fixes made: none
+- Low items: Adrain 1808 and Laplace 1774 memoir nuance (carried from B); 'every report card' loose.

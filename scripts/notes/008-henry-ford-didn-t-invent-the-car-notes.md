@@ -1,6 +1,6 @@
 # Notes: Henry Ford Didn't Invent the Car
 Research entry: episode-research.md — "# Job 3" section, entry "### 31."
-Spoken words: 948
+Spoken words: 949
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -17,7 +17,7 @@ Spoken words: 948
 | Siegfried Marcus car: ASME landmark says ca. 1875; Technisches Museum Wien says 1888/89 because the engine was delivered in 1888; disputed | Technisches Museum Wien "Marcus Car, 1888/1889"; ASME landmark 203 |
 | Plain explanation only: what a progressive/moving line and a disassembly line are | General, non-contestable |
 
-Hedges kept: "about every 93 minutes", "about twelve and a half hours", "an early assembly line", "considered", "in 1913" (no chassis month), "disputed" (Marcus), "on one dating".
+Hedges kept: "about 93 minutes", "about twelve and a half hours", "an early assembly line", "considered", "in 1913" (no chassis month), "disputed" (Marcus), "on one dating".
 Left out on purpose (unverified / keep off air in research): the exact chassis-line date (August vs 7 Oct 1913); the claim that Nazi-era censorship muddied the Marcus record (not re-checked); Daimler and Maybach's 1886 motor carriage (not re-checked).
 
 ## Review
@@ -35,3 +35,8 @@ Left out on purpose (unverified / keep off air in research): the exact chassis-l
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: 1 (high). Sections 06 and 08 said "a Model T came off the line about every 93 minutes", which reads as one car every 93 minutes (about 15 a day). The 93-minute figure is the time to assemble one Model T (chassis), down from about 12.5 hours; the line turned out cars far more often than that. Now "putting a Model T together took about 93 minutes" (06) and "putting a Model T together on it took about 93 minutes" (08). Reading-notes hedge changed to "about 93 minutes". Word count 949 to 948.
 - Low items noted, not changed: The 12.5 hours and 93 minutes are chassis assembly figures specifically; "building a Model T" is the usual popular shorthand. "UNESCO isn't a car company... an independent body" is fine, though the nomination itself came from Germany.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed: yes. "putting a Model T together took about 93 minutes" (06) and "on it took about 93 minutes" (08) now correctly mean time to assemble one car, down from about 12.5 hours; no contradiction with the cold open or close. 1886 - 1769 = 117, Ford 22 on 29 Jan 1886 (born 30 July 1863), 1913 phase-in unchanged.
+- Fixes made: (low-medium) section 08 said "Henry Ford gets the credit for the car and for the assembly line", which read as the script endorsing it; now "usually gets the credit". Word count 948 to 949. Stale hedge in this file's hedge list ("about every 93 minutes") corrected to "about 93 minutes".
+- Low items: Ford at 22 is said three times (cold open, 03, 08); fine as the channel's refrain. The 12.5 hours and 93 minutes are chassis figures; "building a Model T" stays as the popular shorthand.

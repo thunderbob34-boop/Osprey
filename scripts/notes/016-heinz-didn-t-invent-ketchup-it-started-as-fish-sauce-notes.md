@@ -1,6 +1,6 @@
 # Notes: Heinz Didn't Invent Ketchup - It Started as Fish Sauce
 Research entry: 100-episode-lineup.md, heading "### 16. Heinz Didn't Invent Ketchup — It Started as Fish Sauce"
-Spoken words: 883
+Spoken words: 903
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -34,3 +34,8 @@ Left out on purpose (unverified / keep off air in research): the 1801 Sandy Addi
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) section 05, "Tomatoes didn't show up in published ketchup recipes until 1812" was absolute and contradicted the script's own hedge two lines later (an earlier claimed recipe exists, e.g. the 1801 Sugar House Book claim); now "The tomato version historians usually start with is from 1812". (2) section 06, "he commercialized it" / "he made ketchup into a product" implied Heinz was first to sell ketchup; bottled ketchup was sold nationally from 1837 (Jonas Yerkes) and by many firms before 1876 (Hagley Library, "Catch up, Ketchup!"; Wikipedia, Heinz Tomato Ketchup). Now "other companies were already bottling and selling it before him, but he commercialized it on a huge scale" and "he made his ketchup into the product everybody pictures". Word count 883 → 903.
 - Low items noted, not changed: Eliza Smith's 1727 anchovy katchup as "the earliest English ketchup recipe people usually point to" is hedged; fine.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed: yes. (1) "The tomato version historians usually start with is from 1812" no longer contradicts the hedge about an unconfirmed earlier recipe. (2) "other companies were already bottling and selling it before him, but he commercialized it on a huge scale" is accurate and now has two sources: Hagley Library, "Catch up, Ketchup!" (Jonas Yerkes distributing bottled ketchup nationally by 1837, others following) and Andrew F. Smith, Pure Ketchup (Univ. of South Carolina Press, 1996; the Sears catalog's "hundreds of brands" by 1897). It is also consistent with the cold open ("decades before Heinz bottled a drop" is about the 1812 recipe, not about bottling) and with sections 06 and 07.
+- Fixes made: none to the script. The notes file's "Spoken words" line was stale at 883; corrected to 903 to match the script.
+- Low items: the cold open's "Heinz bottled a drop" is loose next to "other companies were already bottling"; it reads fine aloud and "before Heinz" is true, so left. Smith's book was confirmed only through search listings, not page text; the Yerkes/other-brands point rests mainly on Hagley, so if Gus wants a second page-level source, add one before recording.

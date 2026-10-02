@@ -1,6 +1,6 @@
 # Notes: Darwin Wasn't First to Natural Selection
 Research entry: episode-research.md, "## New topic detail" section, entry "### 6."
-Spoken words: 899
+Spoken words: 897
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -35,3 +35,8 @@ Left out on purpose (unverified / keep off air in research): Mike Sutton is not 
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: 1 (high). "First in print" ignored William Charles Wells, whom Darwin's own Historical Sketch (Origin, 4th ed. 1866 onward) calls "the first recognition which has been indicated" of natural selection, in 1818, applied only to human races (https://darwin-online.org.uk/converted/published/1866_Origin_F385/1866_Origin_F385.html ; https://en.wikipedia.org/wiki/William_Charles_Wells). Cold open "the man who was is a name almost nobody has heard" changed to "the main name ahead of him is one almost nobody has heard"; added one paragraph to section 03 naming Wells and saying Matthew is "the first we know of to put it in print as a general idea for living things"; section 06 "the second one is Wallace" changed to "the big one is Wallace" and "that's two people besides Darwin" to "leaving Wells aside, that's two people besides Darwin"; close now "first in print as a general idea". Reading notes: Wells pronunciation, new hedges, 1818 on-screen. Word count 836 to 899, runtime 5 to 6 minutes.
 - Low items noted, not changed: The 1858 Linnean presentation was arranged by Lyell and Hooker and was a set of papers read together ("joint paper" is a fair shorthand). Darwin first worked out the idea in 1838; the 1842/1844 sketches are fine as stated.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed: yes. The Wells paragraph is accurate and attributed to Darwin ("Darwin himself later pointed to"): Wells's essay on a white woman with partly dark skin was read to the Royal Society in 1813 and printed in 1818 in Two Essays, and Darwin's Historical Sketch calls it the first recognition of natural selection, applied to human races only (Darwin Online; Linda Hall Library; checked by search this round). "the first we know of to put it in print as a general idea for living things" and the "first in print as a general idea" close are consistent with the cold open, which says Matthew was not the first and names "the main name ahead of him".
+- Fixes made: (low-medium) section 07 said "the two of them presented it together in 1858", which implies Darwin and Wallace were both there; neither was (Lyell and Hooker arranged the Linnean Society reading). Now "their work was presented together in 1858". Word count 899 to 897.
+- Low items: the cold open's "put natural selection in print" is softened by the same sentence group's "wasn't the first person to put the idea in print"; fine. Wells was "a doctor" who lived in London, born in Charleston; "a doctor" is enough.

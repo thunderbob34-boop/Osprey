@@ -1,6 +1,6 @@
 # Notes: The Tailor Riot That Smashed the First Sewing Machines
 Research entry: 100-episode-lineup.md, heading "### 29. The Tailor Riot That Smashed the First Sewing Machines"
-Spoken words: 875
+Spoken words: 876
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -34,3 +34,8 @@ Left out on purpose (unverified / keep off air in research): Thimonnier dying in
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: 1 (medium). Sections 05 and 06 said "the courts sided with Howe". Hunt's 1853 application was turned down by the Commissioner of Patents (Charles Mason, 1854) on grounds of abandonment, not by a court (https://ismacs.net/singer_sewing_machine_company/genius_rewarded_part_2.html ; https://lemelson.mit.edu/resources/walter-hunt). Changed to "in 1854 the patent office turned him down because he'd waited too long, so Howe's patent stood" and "the patent office turned him down for waiting too long". Word count 864 to 875.
 - Low items noted, not changed: "The first sewing machines to actually go to work": Balthasar Krems and Josef Madersperger had earlier machines, but Britannica's "first functional" for Thimonnier supports the wording.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed: yes. "in 1854 the patent office turned him down because he'd waited too long" and "the patent office turned him down for waiting too long" are accurate: Commissioner Charles Mason refused Hunt's 2 April 1853 application on grounds of abandonment (decision 1 May 1854; ISMACS "Genius Rewarded", encyclopedia.com, Lemelson-MIT; confirmed by search this round), not a court. "so Howe's patent stood" and "in the eyes of the law, the lockstitch patent was Howe's" are fine.
+- Fixes made: (low-medium) section 03 said the 80-machine shop was "sixteen years before Howe's patent" while the cold open says "Fifteen years before" for the same shop (1831 to 1846). Now "about fifteen years before Howe's patent" in section 03. Word count 875 to 876.
+- Low items: "The first sewing machines to actually go to work" (cold open) stays, backed by Britannica's "first functional" for Thimonnier; Krems and Madersperger noted in Round B. Hunt's "early 1830s" hedge and "more than a decade before Howe" (1834 to 1846 = 12) hold.

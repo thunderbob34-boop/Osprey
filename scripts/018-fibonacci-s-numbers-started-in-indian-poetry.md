@@ -1,7 +1,7 @@
 # Fibonacci's Numbers Started in Indian Poetry
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 923 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 900 spoken words.
 - Tone is curious and fair. Leonardo of Pisa didn't steal anything, and the script says so twice on purpose.
 - Say Virahanka as vih-rah-HUN-kah, Gopala as GOH-pah-lah, Hemachandra as hay-mah-CHUN-drah, Liber Abaci as LEE-ber AH-bah-chee, filius Bonacci as FEE-lee-us boh-NAH-chee, Guglielmo Libri as gool-YEL-moh LEE-bree, and Lucas as loo-KAH.
 - Every hedge in here is on purpose. Read "historians say", "probably", "there's no proof", "somewhere between 600 and 800", "before 1135", "around 1150", "about fifty years" and "survives through Gopala" exactly as written.

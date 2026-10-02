@@ -1,6 +1,6 @@
 # Notes: Fibonacci's Numbers Started in Indian Poetry
 Research entry: 100-episode-lineup.md, heading "### 18. Fibonacci's Numbers Belong to Indian Poets"
-Spoken words: 905
+Spoken words: 900
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -40,3 +40,8 @@ Left out on purpose (unverified / keep off air in research): any claim that Indi
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) the 1838 nickname date. Wikipedia's Fibonacci article (citing Drozdyuk & Drozdyuk 2010) reports a 1506 notary of the Holy Roman Empire, Perizolo, calling him "Lionardo Fibonacci", so 1838 (Libri) is the first modern use, not the first use. Cold open now says the name wasn't attached to him "until centuries after he died"; section 06 says it "caught on through a writer named Guglielmo Libri in 1838" and adds "one source points to a notary calling him Fibonacci back in 1506, which is still about three hundred years after his book"; section 07 says "caught on in 1838, centuries after him". 1506 added to on-screen moments and "one source points to" to the hedge list. Word count 905 → 923.
 - Low items noted, not changed: "He probably learned Hindu-Arabic mathematics in North Africa" is over-hedged (Leonardo says himself he was taught at Bugia), harmless; Liber Abaci 1202 survives only in the 1228 revision; Pingala's earlier hint is left out on purpose.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: the 1838 hedging is right, but the new "one source points to a notary calling him Fibonacci back in 1506" rested only on Wikipedia (citing Drozdyuk and Drozdyuk 2010). Two searches found no second strong source (search snippets repeated the Wikipedia wording; a MacTutor mention was not confirmable without opening the page). Under the source standard it can't stay as an on-air fact.
+- Fixes made: removed the 1506 notary clause from section 06 and dropped 1506 from the on-screen list and "one source points to" from the hedge list. What remains is accurate either way: Libri in 1838 is where the nickname "caught on" (hedged "historians say", via Devlin / AMS Notices / Scientific American), the cold open's "centuries after he died" is true even if a 1506 mention exists, and section 07's "caught on in 1838" is unchanged. Word count 923 to 900.
+- Low items: if Gus wants the 1506 detail back, get Drozdyuk and Drozdyuk (2010) or the MacTutor page and one more strong source first. The "most famous number pattern in nature" hook and "probably learned in North Africa" notes from earlier rounds stand.

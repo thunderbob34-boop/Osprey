@@ -1,6 +1,6 @@
 # Notes: Sugar Was Sold as Medicine
 Research entry: episode-research.md, "# Job 3" section, entry "### 55." (Sugar)
-Spoken words: 701
+Spoken words: 719
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -34,3 +34,8 @@ Left out on purpose (unverified / keep off air in research): the 8,000 to 10,000
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (medium) the script said Persians and Arabs spread refining "before Europe saw it" (sections 04 and 06) and the cold open said "when sugar first reached Europe", which contradicts its own line that Greek and Roman writers knew it by the 1st century AD (Dioscorides and Pliny describe it as a medicine). Cold open now "first reached medieval Europe"; section 04 now "...had heard about it, and their doctors wrote about it as a medicine, and then Persians and Arabs spread the refining technique west, long before medieval Europe was buying it"; section 06 likewise. Word count 701 to 719.
 - Low items noted, not changed: none
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Round B changes confirmed: 'medieval Europe' framing in 01/04/06 now consistent with Greek and Roman knowledge by the 1st century AD; Persians/Arabs spreading refining west supported (Britannica Students, PMC).
+- Fixes made: 04 and 06 'their doctors wrote about it as a medicine' was not directly confirmed for Greek/Roman doctors as a group; 04 now 'some of them described it as a medicine' (Dioscorides and Pliny). Word count unchanged at 719 (notes line corrected from 701).
+- Low items: Sugar spread details rest partly on PMC reviews; dates stay fuzzy as hedged.

@@ -36,3 +36,8 @@ Left out on purpose (unverified / keep off air in research): the claim that a re
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (medium) Section 03 said History.com AND Britannica both say no original copy has been found; Britannica's question page actually tells the story as fact, so Britannica was dropped from that line. (medium) "Newspapers really did confuse the two brothers" / "the mix-up is real" / "newspapers did mix up the brothers" stated as fact what is only part of the unverified story (the Nobel Foundation has said no documentation has been found); 04 now says "the story says newspapers confused the two brothers, but nobody has turned up the paper that did it", the "mix-up is real" clause was cut, and 07 says "the story says the papers mixed up the brothers". "The story says" added to the reading-notes hedge list. Word count 725 to 732.
 - Low items noted, not changed: none
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Round B changes confirmed: Britannica dropped from the 'no copy found' line; 'the story says' hedges on the brothers mix-up in 04 and 07 read naturally and agree with the cold open. NobelPrize.org Sobrero page confirmed to say Nobel openly cited Sobrero as inventor and that Sobrero was mortified; that page gives 1846, script says 1847 with 'some sources say 1846', fine.
+- Fixes made: none
+- Low items: none

@@ -1,7 +1,7 @@
 # The Tailor Riot That Smashed the First Sewing Machines
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 875 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
+- Runtime is about 6 minutes at a relaxed pace, roughly 876 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
 - Tone is calm and matter-of-fact. Keep the riot plain and flat, the facts carry it. Howe keeps his real credit.
 - Say Barthélemy Thimonnier as bar-TAY-luh-mee tee-MON-ee-ay.
 - Every hedge in here is on purpose. Read "about 80", "about a year", "smashed" and "destroyed" (never "burned"), "the early 1830s", and "more than a decade" exactly as written. The manifest hook said "burned it out," and that was changed on purpose because the sources say destroyed.

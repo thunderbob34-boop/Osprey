@@ -1,6 +1,6 @@
 # Notes: Johnson's Dictionary Wasn't First
 Research entry: 100-episode-lineup.md, heading "### 19. Johnson's Dictionary Wasn't First"
-Spoken words: 851
+Spoken words: 856
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -36,3 +36,8 @@ Left out on purpose (unverified / keep off air in research): an exact headword c
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) "around 1580 he was a schoolmaster at Oakham" was wrong: Cawdrey became a schoolmaster at Oakham in 1563, was ordained 1565/1570 and was rector of South Luffenham from 22 Oct 1571 until deprived in 1587 (Wikipedia, Robert Cawdrey; LEME, Univ. of Toronto). Now "he'd started out as a schoolmaster at Oakham" with no date; "around 1580" removed from the hedge list. (2) the Folger line implied a surviving 1604 copy there; the only known copy of the 1604 first edition is at the Bodleian (Wikipedia, A Table Alphabeticall; John Simpson's 2007 Bodleian edition, made from that sole copy), and the Folger record appears to be a facsimile/later edition. Now "The only known copy of the first edition is at the Bodleian Library in Oxford"; Bodleian pronunciation added. (3) "about three thousand ... is the safe way to say it" overstated: the first edition is usually counted at 2,543 headwords (Wikipedia, A Table Alphabeticall; later editions grew past 3,000). Now "about twenty-five hundred" throughout (the 2,500-3,000 range sentence is kept), on-screen text "about 2,500 words". Word count 851 → 856.
 - Low items noted, not changed: Coote's English Schoole-maister (1596) already had an English-English hard-word list; "drew on earlier school texts" covers it; the Coventry detail stays as researched.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed: yes. "he'd started out as a schoolmaster at Oakham" has no date and is safe. "The only known copy of the first edition is at the Bodleian Library in Oxford" matches the sole-surviving-copy statement in John Simpson's Bodleian facsimile edition (2007) and the Bodleian listing (confirmed by search this round). "about twenty-five hundred" matches the usual 2,543-headword count for the first edition, and the sentence still says the sources vary from about 2,500 to 3,000. 1604 to 1755 = 151 and Cockeram 1623 = 19 years after both hold; nothing contradicts the cold open or close.
+- Fixes made: none. Notes file "Spoken words" line (851) updated to 856.
+- Low items: Cawdrey's 2,543 count and the Bodleian copy rest on Simpson's edition plus Wikipedia-level summaries; the on-air wording ("about", "the only known copy") is hedged enough. Coote's 1596 English Schoole-maister is covered by "drew on earlier school texts".

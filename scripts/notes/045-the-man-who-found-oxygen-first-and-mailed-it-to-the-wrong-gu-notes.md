@@ -37,3 +37,8 @@ Left out on purpose (unverified / keep off air in research): any claim that Lavo
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (medium) "Priestley holds the official credit" changed to "Priestley is the name that usually gets the credit, the American Chemical Society even named..." (there is no official credit; an ACS landmark isn't one). Word count 794 to 799.
 - Low items noted, not changed: Scheele was born in Swedish Pomerania (Stralsund), "Swedish" is standard; Priestley may have made the gas unknowingly before 1774; Bayen and Sendivogius claims not mentioned (fringe).
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: 'Usually gets the credit' confirmed. Draft at Royal Swedish Academy and Paris find by Grimaux 1890 confirmed (journals.physiology.org, redalyc).
+- Fixes made: 01 cold open implied the unanswered letter caused the lost credit, which also sits badly with the no-theft stance; now says he lost the credit because his book was slow, and the letter is a separate sentence ('as far as anyone knows, he never got an answer'). Word count 799 to 792.
+- Low items: Priestley may have made the gas earlier than 1774 (carried from B).
