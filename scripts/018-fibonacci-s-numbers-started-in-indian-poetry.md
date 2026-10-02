@@ -44,7 +44,7 @@ And there's more, because even the name is late, Leonardo of Pisa never called h
 
 Now, that detail traces back mainly to one historian, Keith Devlin, and his book about Leonardo, called The Man of Numbers, so I'm going to keep saying historians say, because it's coming through Devlin. But two different outlets carry it, the Notices of the American Mathematical Society and Scientific American, and they both say the nickname came centuries later.
 
-And the label Fibonacci sequence came later still, in the 1870s, from a man named Lucas. So the man didn't use the name, and the sequence didn't get the name until more than six hundred years after he wrote it down. He didn't have the name. He didn't have the name, and he didn't have the numbers first.
+And the label Fibonacci sequence came later still, in the 1870s, from a man named Lucas. So the man didn't use the name, and the sequence didn't get the name until more than six hundred years after he wrote it down. He didn't have the name, and he didn't have the numbers first.
 
 ## 07 Who Did It First
 

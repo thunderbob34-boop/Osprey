@@ -1,7 +1,7 @@
 # The Tank Britain Rejected
 
 READING NOTES
-- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 905 spoken words. The research is solid but narrow, so this one runs a little short on purpose.
+- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 907 spoken words. The research is solid but narrow, so this one runs a little short on purpose.
 - Tone is calm and fair. De Mole is the overlooked man, but the Royal Commission also found his design had no influence on the real tanks, and the script has to say that plainly.
 - Say de Mole as duh MOLE, Lancelot as LAN-suh-lot, Tritton as TRIT-un, Bovington as BOV-ing-tun, Swinton as SWIN-tun.
 - Every hedge in here is on purpose. Read "first tank prototype ever completed", "oldest surviving tank", "about six weeks", "widely quoted", "I'll give you the gist rather than the exact words", "in some ways did it better", "no evidence" and "as far as the Commission could find" exactly as written.
@@ -45,4 +45,4 @@ Now, to be fair to Britain, the people who built Little Willie did build the fir
 
 ## 07 Who Was First
 
-So the plain version is this. Lancelot de Mole, a South Australian engineer, came up with his tank in 1911 and sent the plans to the British War Office in 1912, a tracked, armored vehicle that could cross trenches, and they shelved it. Little Willie came in 1915, the first tank prototype ever completed, and it never saw combat and it still survives at Bovington. The Commission in 1919, in that widely quoted line, said his 1912 design got there ahead of the tank Britain used in 1916, and in some ways did it better, and it also found no evidence that his design shaped the tanks they built. Somebody did it first, and that somebody was Lancelot de Mole.
+So the plain version is this. Lancelot de Mole, a South Australian engineer, came up with his tank in 1911 and sent the plans to the British War Office in 1912, a tracked, armored vehicle that could cross trenches, and they shelved it. Little Willie came in 1915, the first tank prototype ever completed, and it never saw combat and it still survives at Bovington. The Commission in 1919, in that widely quoted line, said his 1912 design got there ahead of the tank Britain used in 1916, and in some ways did it better, and it also found no evidence that his design shaped the tanks they built. Somebody did it before Britain did, and that somebody was Lancelot de Mole.

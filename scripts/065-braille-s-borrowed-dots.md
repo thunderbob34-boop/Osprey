@@ -1,7 +1,7 @@
 # Braille's Borrowed Dots
 
 READING NOTES
-- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 784 spoken words. The research is short, so this one runs short on purpose.
+- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 785 spoken words. The research is short, so this one runs short on purpose.
 - Tone is warm and matter-of-fact. Braille is the hero of this story, and the point is that he improved something, not that he took it.
 - Say Barbier as bar-BYAY, Louis Braille as LOO-ee BRAIL (the usual English way), Campsie as KAMP-see, Perkins as PER-kins.
 - Every hedge in here is on purpose. Read "around 1821", "the usual date", "reached Braille's school", "archivists now say", "probably not how it happened", "according to Perkins", "may also be a myth" and "isn't backed by primary sources" exactly as written. Never say Barbier showed his system to young Louis, and never say it was made for soldiers as a fact.
@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-Braille wasn't the first raised-dot alphabet, a teenager took someone else's dot code and cut it in half, and that teenager was Louis Braille, and he was only fifteen. Now, that's not a knock on Braille, what he did was brilliant, but the dots weren't his idea first, they came from a man named Charles Barbier. And here's the strange part, the famous story about Barbier, the one you'll find in a lot of places, may not be true either.
+Braille wasn't the first raised-dot writing system, a teenager took someone else's dot code and cut it in half, and that teenager was Louis Braille, and he was only fifteen. Now, that's not a knock on Braille, what he did was brilliant, but the dots weren't his idea first, they came from a man named Charles Barbier. And here's the strange part, the famous story about Barbier, the one you'll find in a lot of places, may not be true either.
 
 ## 02 The Famous Version
 

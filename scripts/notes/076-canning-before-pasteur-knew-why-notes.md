@@ -1,6 +1,6 @@
 # Notes: Canning Before Pasteur Knew Why
 Research entry: episode-research.md — "# Job 3" section, entry "### 62." (Food Preservation)
-Spoken words: 895
+Spoken words: 919
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

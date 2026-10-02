@@ -26,7 +26,7 @@ Now, how exactly that sauce and that word got from Asia to England isn't nailed 
 
 ## 04 The English Ketchups
 
-And once it got to England, it changed. The word was already turning up in English print around 1700, and the earliest English ketchup recipe people usually point to is in a cookbook by Eliza Smith, called The Compleat Housewife, from 1727, and her version is spelled katchup, with an a, and it's made with anchovies. So it's still a fish sauce, just a British one, made with a small, salty fish.
+And once it got to England, it changed. The word was already turning up in English print by the late 1600s, and the earliest English ketchup recipe people usually point to is in a cookbook by Eliza Smith, called The Compleat Housewife, from 1727, and her version is spelled katchup, with an a, and it's made with anchovies. So it's still a fish sauce, just a British one, made with a small, salty fish.
 
 And it didn't stop at anchovies. In Britain in the 1700s, mushroom ketchup was common, and so was walnut ketchup, and so was oyster ketchup. So for most of the 1700s, if you'd asked somebody in Britain for ketchup, they might have handed you something made from mushrooms or walnuts or oysters, and not a tomato anywhere near it, right? Ketchup was more of a type of sauce than one particular flavor.
 

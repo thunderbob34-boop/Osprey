@@ -1,7 +1,7 @@
 # Submarines Before the Submarine
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 818 spoken words. It runs a bit short on purpose rather than padding.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 849 spoken words. It runs a bit short on purpose rather than padding.
 - Tone is calm with a bit of fun in it, it's a sneak attack that didn't go off. Holland is rightly the father of the modern submarine, so the framing is "earlier submarines," never "the real inventor."
 - Say Drebbel as DREB-ul, Bushnell as BUSH-nul.
 - Every hedge in here is on purpose. Read "around 1620", "reportedly", "later accounts", "it wouldn't bite", "one of the earliest" and "earlier submarines" exactly as written. Don't explain why the screw failed, that's disputed. Don't call Drebbel's boat the first submarine ever.
@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-In 1776, one man in a little one-man submarine slipped under the flagship of the British fleet in New York harbor, and that was the first submarine attack in history. It happened during the American Revolution, and it didn't work, the screw that was supposed to fix the bomb to the ship's hull wouldn't bite, so the bomb drifted off and went off harmlessly. The man who usually gets called the father of the modern submarine is John Philip Holland, and he earned that, but there were submarines in the water long before his.
+In 1776, one man in a little one-man submarine slipped under the flagship of the British fleet in New York harbor, and that was the first submarine attack in history. It happened during the American Revolution, and it didn't work, the screw that was supposed to fix the bomb to the ship's hull wouldn't bite, so he had to give up and head back, and the bomb he let go of on the way drifted off and went off harmlessly. The man who usually gets called the father of the modern submarine is John Philip Holland, and he earned that, but there were submarines in the water long before his.
 
 ## 02 The Famous Version
 
@@ -30,7 +30,7 @@ And then there's the one that actually went to war. David Bushnell was a student
 
 So on the night of September 6th going into the 7th, 1776, during the Revolution, a man named Ezra Lee climbed into the Turtle and went after the British flagship, HMS Eagle, in New York harbor. And he made it. He made it all the way under the flagship of the British fleet, in a one-man submarine, which is a pretty wild thing to do in 1776, right?
 
-But the screw that was supposed to fix the bomb to the hull wouldn't bite. Now, exactly why it wouldn't bite is disputed, there are a couple of explanations floating around and the sources don't agree, so we're just going to say it wouldn't bite. And so the bomb drifted off and exploded harmlessly.
+But the screw that was supposed to fix the bomb to the hull wouldn't bite. Now, exactly why it wouldn't bite is disputed, there are a couple of explanations floating around and the sources don't agree, so we're just going to say it wouldn't bite. So he had to give up and head back, and the bomb he let go of on the way drifted off and exploded harmlessly.
 
 And here's the part that matters, it failed, but it still counts. The US Navy's own history command describes the Turtle as the first vessel used for an underwater attack, and it has published the naval documents from the time, and Smithsonian magazine calls the Turtle the world's first combat submarine, so that's why it's called the first submarine attack in history. That was 1776, and the US Navy didn't commission its first submarine until 1900, so that's 124 years.
 

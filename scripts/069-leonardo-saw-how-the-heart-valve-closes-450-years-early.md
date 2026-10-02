@@ -1,7 +1,7 @@
 # Leonardo Saw How the Heart Valve Closes, 450 Years Early
 
 READING NOTES
-- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 752 spoken words. The research is thin, so this one runs short on purpose.
+- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 755 spoken words. The research is thin, so this one runs short on purpose.
 - Tone is calm and curious. Keep the anatomy plain, no gore.
 - Say Valsalva as val-SAL-vuh, Bellhouse as BELL-house, Gharib as ga-REEB, Caltech as KAL-tek.
 - Every hedge in here is on purpose. Read "around 1513", "about 450 years", "the late 1960s", "nearly five hundred years later", "rebuilt" and "has nothing to do with plumbing valves" exactly as written. Don't say Leonardo invented the check valve or any plumbing valve.
@@ -36,11 +36,11 @@ Then, in 1968 and 1969, Bellhouse confirmed the mechanism, and that's about 450 
 
 And there's more. In 2002, a team led by a professor named Gharib at Caltech rebuilt Leonardo's model and published it in a journal called Experiments in Fluids. So modern engineers took his idea seriously enough to build it again, nearly five hundred years later.
 
-And his aortic work has fed into the design of prosthetic heart valves and surgery on the root of the aorta, where the role of those sinuses of Valsalva is recognized. So this isn't just a nice old drawing, it's work that still matters to heart surgery.
+And his aortic work still gets cited by people working on prosthetic heart valves and surgery on the root of the aorta, where the role of those sinuses of Valsalva is recognized. So this isn't just a nice old drawing, it's work that heart researchers still point back to.
 
 ## 06 Not the Plumbing
 
-Now, to be fair, you might run into a bigger version of this story online, that Leonardo's valve work gave us the modern check valve, the one-way valve you find in plumbing, and that's wrong, because one-way valves like that are far older than Leonardo. His aortic work has influenced heart valve design, and it has nothing to do with plumbing valves. So keep it about the heart, because the heart part is the part that's true.
+Now, to be fair, you might run into a bigger version of this story online, that Leonardo's valve work gave us the modern check valve, the one-way valve you find in plumbing, and that's wrong, because one-way valves like that are far older than Leonardo. His aortic work gets cited in heart valve research, and it has nothing to do with plumbing valves. So keep it about the heart, because the heart part is the part that's true.
 
 ## 07 The Seeds in the Glass
 

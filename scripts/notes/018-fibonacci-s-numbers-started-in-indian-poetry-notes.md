@@ -33,3 +33,6 @@ Left out on purpose (unverified / keep off air in research): any claim that Indi
 - Flag for Gus (not changed, style call): section 06 ends "He didn't have the name. He didn't have the name, and he didn't have the numbers first." The doubled sentence looks like a leftover from the cadence pass; drop the first "He didn't have the name." unless the repeat is on purpose.
 - Caveat noted, no change: some writers report a 1506 notarial mention of "Lionardo Fibonacci" (Perizolo), which would make 1838 the first modern use rather than the first use. The script already says "historians say" and names Devlin as the main source, which covers it.
 - Not search-verified (checked against research/knowledge only): Singh 1985, Historia Mathematica, "The so-called Fibonacci numbers in ancient and medieval India"; Virahanka 600-800, Gopala before 1135, Hemachandra c. 1150; Liber Abaci 1202 and the rabbit problem; Lucas naming the sequence in the 1870s; North Africa (Bugia) learning; Libri 1838 via Devlin / AMS Notices / Scientific American; the syllable-count arithmetic (1, 2, 3, 5, 8, 13, 21 checks out).
+
+## Main-session fix (2026-10-02)
+- Removed a doubled sentence in section 06 ("He didn't have the name. He didn't have the name, and...").

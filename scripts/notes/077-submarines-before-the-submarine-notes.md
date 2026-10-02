@@ -1,6 +1,6 @@
 # Notes: Submarines Before the Submarine
 Research entry: 100-episode-lineup.md — heading "### 77. Submarines Before the Submarine"
-Spoken words: 818
+Spoken words: 849
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

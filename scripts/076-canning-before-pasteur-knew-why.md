@@ -1,10 +1,10 @@
 # Canning Before Pasteur Knew Why
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 895 spoken words. It runs a bit short on purpose rather than padding.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 919 spoken words. It runs a bit short on purpose rather than padding.
 - Tone is warm and plain. Appert is the hero, Pasteur is not a villain, he explained it, he didn't steal anything.
 - Say Appert as ah-PAIR, Nicolas as nee-koh-LAH, Massy as mah-SEE, Durand as dyoo-RAND, Donkin as DON-kin.
-- Every hedge in here is on purpose. Read "the story goes", "here's what's documented", "is shakier", "a lot less certain", "often dated to 1795", "French authorities paid him", "about fifty years later", "in exchange for publishing", "in the sources we checked", "in 1811 or 1812 depending on which source you read", "covered tin as well as glass and pottery" and "going by 1813" exactly as written. Never say "he won Napoleon's prize", and never say Durand invented the tin can.
+- Every hedge in here is on purpose. Read "the story goes", "here's what's documented", "is shakier", "a lot less certain", "often dated to 1795", "French authorities paid him", "about fifty years later", "in exchange for publishing", "in the sources we checked", "in 1811 or 1812 depending on which source you read", "covered tin as well as glass and pottery", "may not have been his own" and "going by 1813" exactly as written. Never say "he won Napoleon's prize", and never say Durand invented the tin can.
 - No sensitivity issues. Use period images of glass bottles, the title page of Appert's book, and text cards.
 - Good on-screen text moments are 1795 (with a question mark), 1810, 12,000 francs, August 25 1810, 1811 or 1812, 1812 (Massy), 1813, and about 50 years.
 
@@ -36,7 +36,7 @@ So, to be fair to Pasteur, what he did is a really big deal. He explained it. He
 
 ## 05 And There's More, The Tin Can
 
-And there's more, because Appert wasn't the only one in 1810. Over in London, also in 1810, a merchant named Peter Durand got a patent dated August 25th for the same basic idea, and his patent covered tin as well as glass and pottery. So the same basic idea shows up in two countries in the same year, and the London patent is the one that opened the door to tin, right?
+And there's more, because Appert wasn't the only one in 1810. Over in London, also in 1810, a merchant named Peter Durand got a patent dated August 25th for the same basic idea, and the patent itself says the idea was passed on to him by somebody from abroad, so it may not have been his own, and his patent covered tin as well as glass and pottery. So the same basic idea shows up in two countries in the same year, and the London patent is the one that opened the door to tin, right?
 
 Durand sold that patent, in 1811 or 1812 depending on which source you read, to two men, Bryan Donkin and John Hall, and their firm had a canning factory going by 1813. So if you're asking who holds the patent that covered tin, that's Durand, and if you're asking who got the tin can into a factory, that's Donkin and Hall. But if you're asking who worked out the method first, sealing the food and heating it, that's Appert, and he did it in glass.
 
