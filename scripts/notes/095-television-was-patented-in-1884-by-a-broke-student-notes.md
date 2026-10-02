@@ -20,3 +20,9 @@ Spoken words: 793
 
 Hedges kept: "a concept", "probably never built", "one may assume", Baird credited with the first working TV, girlfriend fee "according to the German Patent Office", 1935 station "according to the Early Television Museum" and called a single museum source.
 Left out on purpose (unverified / keep off air in research): the word "broke" in the spoken script (the title and hook use it, but the research only supports the attributed fee detail, so the cold open says "a student in Berlin"); any claim Nipkow built a prototype; any detail of how Farnsworth's or Zworykin's systems worked beyond "electronic".
+
+## Review
+- Fact fixes: (1) Cut "without the moving parts" as the description of electronic TV (not in the entry); now "a different way of doing it from Baird's mechanical television". (2) "there's no evidence for that" (that Nipkow built a working TV) overstated the entry, which marks it unknown; now "that just isn't known". (3) "the disk at the heart of it already had Nipkow's name on it" implied the name was in use by 1926, which the entry doesn't say; now "was Nipkow's disk". (4) The girlfriend-fee line had a tag that leaned on the single source's authority ("it's their own record of their own patent"); replaced with plain single-source attribution.
+- Cadence fixes: 1. "Oh, one more thing about that patent. According to..." joined into one breath; "it's a nice thing to know" filler cut.
+- Format fixes: word count updated 793 to 777.
+- Remaining concerns for Gus: 777 spoken words, well under the 900 floor, because the research is thin; not padded. The title's "Broke Student" is not supported by the research (only the attributed girlfriend-paid-the-fee line); the spoken script never says "broke", but consider retitling (e.g. "Television Was Patented in 1884 by a Student"). "Patented in 1884" is fine: the patent was effective 6 January 1884, granted 15 January 1885, and the script gives both dates.

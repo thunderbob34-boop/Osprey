@@ -17,3 +17,9 @@ Spoken words: 752
 
 Hedges kept: "often told as"; "popularized there", not "invented there"; "the earliest claimant", explained as not proof nobody was earlier; Marchiony's patent described as "an edible ice cream cup"; patent date given only as "December 1903"; Marchiony's 1896 start given as "his own claim"; the recipe "said" cornets could be filled, without claiming how people ate them in 1888.
 Left out on purpose (unverified / keep off air in research): the exact issue day of Marchiony's patent (sources differ, Dec 13 vs Dec 15); any confirmation of Marchiony's 1896 sales; penny licks (in the Smithsonian source list but with no detail in the entry); names of the other fair claimants beyond Hamwi (not in the entry).
+
+## Review
+- Fact fixes: (1) "she was known for exactly this" implied Marshall was known for cornets/cones specifically; the "Queen of Ices" nickname supports only that she was known for ices, so now "she was known for ices". (2) Cut the crafted "the story we all heard picked the wrong one"; now "the usual story mixes them up". Everything else checks: 1888 to 1904 is 16 years, Marchiony's patent given only as "December 1903" with the 22 September 1903 filing date, cup not cone, 1896 kept as his own claim, "earliest claimant" explained correctly.
+- Cadence fixes: 2. Recap list in section 06 joined into one breath; section 05 ending made plain.
+- Format fixes: word count updated 752 to 749; hedge list now includes "on the evidence we have".
+- Remaining concerns for Gus: 749 spoken words, well under the 900 floor, because the research is thin; not padded. Section 05 is a single short paragraph, fine for one take.

@@ -10,21 +10,21 @@ READING NOTES
 
 ## 01 Cold Open
 
-The first message ever sent over the internet's ancestor was "lo", and that's not because anybody chose it, it's because the computer crashed two letters into typing "login". That was on ARPANET, the American network that usually gets called the first internet, and it's a great story and it really happened. But the big idea that made ARPANET work, chopping data up into little pieces called packets, wasn't an ARPANET original, somebody did that first, and actually two different people did, on opposite sides of the Atlantic, without knowing about each other.
+The first message ever sent over the internet's ancestor was "lo", and that's not because anybody chose it, it's because the computer crashed two letters into typing "login". That was on ARPANET, the American network that usually gets called the first internet, and it's a great story and it really happened. But the big idea that made ARPANET work, chopping data up into little pieces called packets, wasn't an ARPANET original, two different people had already worked it out, on opposite sides of the Atlantic, independently of each other.
 
 ## 02 The Night of "lo"
 
 So here's the night itself. It's October 29th, 1969, at about ten thirty at night, and a UCLA student programmer named Charley Kline, working in Leonard Kleinrock's lab, is sitting at UCLA's computer, an SDS Sigma 7. On the other end, at the Stanford Research Institute, a programmer named Bill Duvall is waiting at another computer, an SDS 940. And the plan is simple, Kline is going to log in to the SRI computer from UCLA.
 
-So he types an L, and it goes through. He types an O, and it goes through. And then the system crashes. So the first message ever sent over the ARPANET was "lo", L, O, and that was it, and they got the full login working about an hour later.
+So he types an L and it goes through, he types an O and it goes through, and then the system crashes. So the first message ever sent over the ARPANET was "lo", L, O, and that was it, and they got the full login working about an hour later.
 
 And it's easy to see why this story gets told every anniversary, right? It's a funny story, the first words of the internet's ancestor were basically "lo" by accident, and it comes straight from the people who were there. The UCLA account comes from Kleinrock himself, and the Computer History Museum marks it as the first ARPANET transmission, so this part of the story is solid.
 
 ## 03 The Packet Idea
 
-Now here's the part that matters. ARPANET's key idea was chopping data into packets. And what that means is, instead of holding open one dedicated line between two computers the whole time, like an old phone call, you cut your message up into small pieces, each piece gets sent across the network, and the pieces get put back together at the other end. That's packet switching, and it's how pretty much everything you do online still moves around.
+Now here's the part that matters, ARPANET's key idea was chopping data into packets, and what that means is, instead of holding open one dedicated line between two computers the whole time, like an old phone call, you cut your message up into small pieces, each piece gets sent across the network, and the pieces get put back together at the other end, and that's packet switching.
 
-But ARPANET didn't come up with it. Paul Baran at the RAND Corporation described the idea in detail in 1964, in an eleven-volume set of reports called "On Distributed Communications". Eleven volumes. And then in 1965, over in Britain, at the National Physical Laboratory, a scientist named Donald Davies came up with the same idea independently, and he's the one who coined the word "packet". Davies published his work in 1966 and 1967, and he only found out about Baran's work afterwards, so the two of them got there on their own, right? One in America and one in Britain.
+But ARPANET didn't come up with it. Paul Baran at the RAND Corporation described the idea in detail in 1964, in an eleven-volume set of reports called "On Distributed Communications", eleven volumes of it. And then in 1965, over in Britain, at the National Physical Laboratory, a scientist named Donald Davies came up with the same idea independently, and he's the one who coined the word "packet". Davies published his work in 1966 and 1967, and he only found out about Baran's work afterwards, so the two of them got there on their own, one in America and one in Britain, right?
 
 And Davies didn't just write about it either. His team at the National Physical Laboratory built a working packet network of their own, the NPL Mark I network, they built it from 1966 to 1969 and it was running by 1970. So a British government lab had its own packet network going in the same era as ARPANET.
 
@@ -40,7 +40,7 @@ So the fair way to say it is, ARPANET is the internet's ancestor and it earned t
 
 And there's more. In the early 1970s, France had a network of its own called CYCLADES, and it was led by a man named Louis Pouzin. CYCLADES pioneered what's called the datagram approach, and the basic idea is that every packet just carries its own address and travels on its own, instead of the network setting up a fixed path ahead of time.
 
-And that matters, because the rules computers use to talk to each other on today's internet are called TCP/IP, and the internet pioneer Vint Cerf has cited CYCLADES as a key influence on TCP/IP. So a French network helped shape the rules the internet runs on, and most people have never heard the name Pouzin.
+And that matters, because the rules computers use to talk to each other on today's internet are called TCP/IP, and the internet pioneer Vint Cerf has cited CYCLADES as a key influence on TCP/IP. So a French network helped shape the rules the internet runs on, and the man who led it was Louis Pouzin.
 
 ## 06 The Web Isn't the Internet
 

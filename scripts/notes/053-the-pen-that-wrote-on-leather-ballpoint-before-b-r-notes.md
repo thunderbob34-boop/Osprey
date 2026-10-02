@@ -1,6 +1,6 @@
 # Notes: The Pen That Wrote on Leather: Ballpoint Before Bíró
 Research entry: 100-episode-lineup.md — heading "### 53. The Pen That Wrote on Leather: Ballpoint Before Bíró"
-Spoken words: 855
+Spoken words: 864 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -17,3 +17,9 @@ Spoken words: 855
 
 Hedges kept: "from what's been found" (never sold, lapsed), "the patent itself" as the primary record, "that's about all we know about him", "first practical", "by 1895", no reason given for failure beyond "too coarse for writing letters".
 Left out on purpose (unverified / keep off air in research): the hook's "leather tanner" (research says don't call Loud that); Loud's nationality beyond holding a US patent, his occupation and fate; any year or war for the RAF adoption (not in the entry); Bíró's later life, partners or where he lived (not in the entry); the physics of why other pens leak at altitude. Flag for producer: the entry says only one source (the primary patent) names Loud, and asks for a second strong source naming him before script lock.
+
+## Review
+- Fact fixes: (1) Closing "the RAF helped make it a hit" narrowed to "the RAF is a big part of why it took off in Britain", which is what the entry says. (2) Restored "from what's been found" on the closing "it never went anywhere". (3) Closing line now names Loud and keeps "fifty years before Bíró" instead of a crafted "whose name almost nobody knows" button.
+- Cadence fixes: 5. Joined split breaths in 01 ("he was trying to mark leather, and it was too coarse to write a letter with anyway"), 03, 04, 05 ("here's the twist, the ballpoint...") and 06.
+- Format fixes: word count updated to 864. Title checked; it's supported (the pen was meant for marking leather).
+- Remaining concerns for Gus: 864 spoken words, under the 900 floor, reported, not padded. The research entry asks for a second independent strong source naming John J. Loud before script lock; only the primary patent names him. That's still open.

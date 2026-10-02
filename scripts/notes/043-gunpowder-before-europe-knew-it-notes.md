@@ -1,6 +1,6 @@
 # Notes: Gunpowder Before Europe Knew It
 Research entry: episode-research.md, "# Job 3" section, entry "### 18." (Gunpowder)
-Spoken words: 699
+Spoken words: 697
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

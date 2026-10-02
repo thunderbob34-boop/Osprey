@@ -1,4 +1,4 @@
-# The Schoolteacher Who Invented Time Zones
+# The Schoolteacher Who First Proposed Time Zones
 
 READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 916 spoken words.
@@ -14,7 +14,7 @@ Before 1883, every American town ran on its own clock, and the man who first pro
 
 ## 02 Every Town Had Its Own Noon
 
-So first, here's why anybody needed this. For most of history, time was local. Noon was when the sun was highest in the sky where you were standing, and since the sun gets to its highest point a little later the farther west you go, every town's noon was a little different from the next town's. If you're living in one town and never going anywhere fast, that's fine, nobody cares that the town down the line is a few minutes off.
+So first, here's why anybody needed this, because for most of history, time was local. Noon was when the sun was highest in the sky where you were standing, and since the sun gets to its highest point a little later the farther west you go, every town's noon was a little different from the next town's. If you're living in one town and never going anywhere fast, that's fine, nobody cares that the town down the line is a few minutes off.
 
 But then you've got railroads, and railroads run on timetables, and a timetable only works if everybody agrees what time it is, right? If every town along the line has its own noon, the schedule turns into a mess. So the railroads had a real problem, and somebody needed to come up with a way for everybody to share the same clock.
 
@@ -34,7 +34,7 @@ But Dowd's proposal came in 1869, and Fleming's work came in 1876, so if the que
 
 ## 05 The Day of Two Noons
 
-And there's more, because the plan the railroads actually used in 1883 wasn't Dowd's and it wasn't Fleming's either. It was William F. Allen's, and Allen's plan drew on Dowd's ideas and Fleming's ideas. How much Allen borrowed from Dowd exactly, nobody can really pin down, but he drew on both of them.
+And there's more, because the plan the railroads actually used in 1883 wasn't Dowd's and it wasn't Fleming's either. It was William F. Allen's, and Allen's plan drew on Dowd's ideas and Fleming's ideas. How much Allen actually borrowed from Dowd isn't clear, but he drew on both of them.
 
 So on November 18th, 1883, the railroads in the United States and Canada switched over to standard time, and that day got a name, the Day of Two Noons, and here's why. In New York, local noon came first, the old noon, by the sun, and then about four minutes later the railroads' new standard noon arrived. So people in New York got noon twice in one day, about four minutes apart. And the reason is just geography, right? A time zone sets one clock time for a whole stretch of the map, and New York sat a little east of the line its zone's time was set by, so the sun hit its high point over New York a few minutes before the new standard noon came around. And this isn't a legend either, the Library of Congress has a whole research guide called "The Day of Two Noons", and the Smithsonian's National Museum of American History tells the same story, two noons, about four minutes apart, in New York.
 

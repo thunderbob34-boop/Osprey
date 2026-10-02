@@ -1,4 +1,4 @@
-# Electric Cars Were Winning in 1900
+# Electric Cars Outnumbered Gas Cars Around 1900
 
 READING NOTES
 - Runtime is about 5 minutes at a relaxed pace, roughly 798 spoken words.
@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-In 1900, if you looked at the cars on American roads, the gas-powered one was the least common kind. Most people think of the electric car as a modern thing, something companies like Tesla started, and to be fair, today's electric cars are a real achievement. But around 1900, roughly one in three cars on American roads was electric, and gasoline cars were actually in last place, behind steam.
+Around 1900, if you looked at the cars on American roads, the gas-powered one was the least common kind. Most people think of the electric car as a modern thing, something companies like Tesla started, and to be fair, today's electric cars are a real achievement. But around 1900, roughly one in three cars on American roads was electric, and gasoline cars were actually in last place, behind steam.
 
 ## 02 The Modern Version
 
@@ -26,7 +26,7 @@ The story goes back to the 1830s, to a Scottish inventor named Robert Anderson, 
 
 Now here's the part that matters. By around 1900, electric cars made up roughly a third of the cars in America. The US Department of Energy says about a third, and Britannica says about a third. And Britannica gives a breakdown, according to Britannica, about forty percent of American cars were steam, about thirty-eight percent were electric, and about twenty-two percent were gasoline.
 
-So gasoline was last. Steam was first, and a steam car is what it sounds like, it boils water and the steam drives it, the same basic idea as a steam locomotive. Electric was right behind steam, and gasoline was in third place out of three, right? And to be careful about it, those numbers are the share of cars on the road, not sales, so the right way to say it is that electric cars outnumbered gas cars, not that they outsold them. We don't have yearly sales numbers here, we've got the share of the cars that were out there.
+So gasoline was last and steam was first, and a steam car is what it sounds like, it boils water and the steam drives it, the same basic idea as a steam locomotive. Electric was right behind steam, and gasoline was in third place out of three, right? And to be careful about it, those numbers are the share of cars on the road, not sales, so the right way to say it is that electric cars outnumbered gas cars, not that they outsold them. We don't have yearly sales numbers here, we've got the share of the cars that were out there.
 
 And there's more. In New York City there was a fleet of more than sixty electric taxis. So this wasn't one oddball machine somewhere, there were electric cabs working in New York City, and National Geographic has written about that fleet as a forgotten piece of the city's history. And the Smithsonian's National Museum of American History covers these early electric cars too, in its America on the Move exhibition, so this is well documented, it's just not well known.
 
@@ -38,7 +38,7 @@ Oh, one more thing, and this one surprises people. According to Porsche's own hi
 
 Now, to be fair, gasoline did win, and it won fast. By about 1905 gas cars were dominant, so the electric car's moment didn't last long at all. And today's electric cars are a very different machine from anything on the road in 1900, and the people who built them, Tesla and the rest, deserve real credit for that.
 
-But they didn't invent the electric car. The idea goes back to the 1830s, and around 1900 electric cars outnumbered gasoline cars on American roads.
+But they didn't invent the electric car, the idea goes back to the 1830s, and around 1900 electric cars outnumbered gasoline cars on American roads.
 
 ## 07 Who Did It First
 

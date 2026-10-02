@@ -1,6 +1,6 @@
 # Notes: Cook Wasn't First: Who Really Found Australia
 Research entry: 100-episode-lineup.md, heading "### 42. Cook Wasn't First: Who Really Found Australia"
-Spoken words: 909
+Spoken words: 876
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

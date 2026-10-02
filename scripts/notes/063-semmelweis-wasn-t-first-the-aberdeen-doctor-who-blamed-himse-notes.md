@@ -20,3 +20,9 @@ Spoken words: 908
 
 Hedges kept: Gordon framed as "first to say doctors were spreading it", explicitly "not the first to invent handwashing"; Holmes "didn't run a trial"; "we don't know whether Semmelweis ever read either of them"; the midwife line kept as a paraphrase, not a quote.
 Left out on purpose (unverified / keep off air in research): anything about Semmelweis's later life, rejection or death; death-rate figures (none in the entry); Gordon's exact "foretell" wording (entry gives only the gist); any claim Semmelweis copied anyone.
+
+## Review
+- Fact fixes: (1) "Nobody can show that he knew about Gordon or about Holmes" stated more than the entry, which only marks this as unknown; changed to "we just don't know if he knew about Gordon or about Holmes". Everything else checks out: 1789 to 1792 epidemic, 1795 treatise, the quote, the midwife paraphrase, Holmes on Feb 13 1843 citing Gordon, 1847, and the "more than fifty years" and "four years" arithmetic. Title is supported (Gordon first to say doctors were spreading it, which is the credit Semmelweis gets in the entry's "Credited" line).
+- Cadence fixes: 4. Rhetorical question plus answer "So what did Semmelweis actually do that the other two didn't? He brought..." turned into one statement. Choppy full stops joined in 02 ("...is real, but the idea...") and 05 (Holmes "didn't run a trial" run). "the most remarkable thing about him" swapped for plainer "the thing that gets me about him".
+- Format fixes: word count updated 908 to 911 after edits; added the two attributions ("calls Gordon the first", "as the University of Iowa's medical library puts it") to the hedge list. Spoken words 911 (short, research-limited, accepted).
+- Remaining concerns for Gus: none.

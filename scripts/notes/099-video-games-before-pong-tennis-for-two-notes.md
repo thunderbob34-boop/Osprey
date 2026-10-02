@@ -18,3 +18,9 @@ Spoken words: 638
 
 Hedges kept: "first video game" treated as definition-dependent ("depends on what you count"); Tennis for Two as "one of the first, and the first built purely for fun", credited to Brookhaven's framing; Manhattan Project line attributed to Brookhaven; OXO "built for research, not for fun"; OXO "isn't the only one" earlier.
 Left out on purpose (unverified / keep off air in research): anything about what Higinbotham did on the Manhattan Project; how the game was played or controlled; any later history of Tennis for Two; any claim about Pong's sales or influence (not in the entry); the Smithsonian source used only as background, with no specific claim attributed to it on air.
+
+## Review
+- Fact fixes: none. Checked: 18 October 1958, 1952 OXO on EDSAC by Alexander Douglas, Atari 1972, 14 and 6 year gaps, Manhattan Project line attributed to Brookhaven, "one of the first, and the first built purely for fun" framing kept, "first video game" never handed to anyone outright.
+- Cadence fixes: 3. Removed the stand-alone "Hundreds of people." paragraph by folding the repetition beat into the previous breath; "EDSAC. That's six years before..." and "built for research, not for fun. It was a computer game..." joined.
+- Format fixes: word count updated 638 to 640.
+- Remaining concerns for Gus: 640 spoken words, the shortest in this batch and well under the 900 floor, because the research is thin; not padded.

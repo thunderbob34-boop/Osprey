@@ -1,10 +1,10 @@
 # Radar's 1904 Predecessor, and the Navy Shrugged
 
 READING NOTES
-- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 930 spoken words. The research is thin, so this one runs short on purpose.
+- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 925 spoken words. The research is thin, so this one runs short on purpose.
 - Tone is calm and matter-of-fact. The navy saying no is the twist, so say it flat and let it sit.
 - Say Hülsmeyer as HOOLS-my-er, Telemobiloskop as teh-leh-MO-bee-lo-skop, Hohenzollern as HO-en-tsol-ern, Daventry as DAV-en-tree, Cologne as ko-LONE.
-- Every hedge in here is on purpose. Read "first to demonstrate and patent", "not modern radar", "in any practical way", "several hundred metres", "according to IEEE Spectrum", "first practical air-defence radar" and "on their own" exactly as written. Never say Hülsmeyer "invented modern radar."
+- Every hedge in here is on purpose. Read "first to demonstrate and patent", "not modern radar", "in any practical way", "several hundred metres", "according to IEEE Spectrum", "the only source we have on it", "first practical air-defence radar" and "on their own" exactly as written. Never say Hülsmeyer "invented modern radar."
 - Visuals: period photos of Cologne, the Rhine and the Hohenzollern Bridge, patent drawings, and text cards. No wartime combat footage needed.
 - Good on-screen text moments are April 30 1904, May 17 1904, Telemobiloskop, IEEE Milestone: Radar Predecessor 1904, and Feb 26 1935.
 

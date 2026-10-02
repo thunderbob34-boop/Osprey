@@ -9,7 +9,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-Four hundred and seventy-one years before Columbus, somebody was cutting wood with metal tools in Newfoundland, and the tree rings say exactly when. Not roughly when, not sometime around the year a thousand, but one exact year, 1021. So if you grew up hearing that Christopher Columbus was the European who discovered America in 1492, the plain fact is that other Europeans, the Norse, got there first, and the people who were really there first, the Indigenous peoples of the Americas, had been there for thousands of years before either of them.
+Four hundred and seventy-one years before Columbus, somebody was cutting wood with metal tools in Newfoundland, and the tree rings say exactly when, not roughly when, not sometime around the year a thousand, but one exact year, 1021. So if you grew up hearing that Christopher Columbus was the European who discovered America in 1492, the plain fact is that other Europeans, the Norse, got there first, and the people who were really there first, the Indigenous peoples of the Americas, had been there for thousands of years before either of them.
 
 ## 02 The Famous Version
 
@@ -27,9 +27,9 @@ So in 2021 a team at the University of Groningen published a paper in the journa
 
 And here's how it works, and it's worth understanding, because this is the reason we get one exact year and not a guess. A tree adds one ring every year it grows, so if you can find one ring and know exactly what year it is, you can count outward from there, one ring per year, all the way to the bark, and the last ring tells you the year the tree was cut.
 
-The trick is finding that one ring. And in the year 993 there was a burst of cosmic rays, people call it a solar storm, and it left a spike of carbon-14 in the air, and the trees growing that year took it in. So the ring from 993 has a marker in it, a spike you can measure. The team found that 993 spike in the wood, and then they counted the rings outward from there. So it's not a rough date with a plus or minus on it, it's a count, one ring at a time, and a count gives you one year.
+The trick is finding that one ring, and in the year 993 there was a burst of cosmic rays, people call it a solar storm, and it left a spike of carbon-14 in the air, and the trees growing that year took it in. So the ring from 993 has a marker in it, a spike you can measure. The team found that 993 spike in the wood, and then they counted the rings outward from there. So it's not a rough date with a plus or minus on it, it's a count, one ring at a time, and a count gives you one year.
 
-And they did it on three different trees, and all three gave the same cutting year, 1021. Three trees, the same year, 1021. That's four hundred and seventy-one years before Columbus.
+And they did it on three different trees, and all three gave the same cutting year, 1021, three trees and the same year, 1021, and that's four hundred and seventy-one years before Columbus.
 
 ## 05 What That Date Means
 

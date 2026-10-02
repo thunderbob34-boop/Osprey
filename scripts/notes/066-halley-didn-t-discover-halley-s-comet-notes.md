@@ -17,3 +17,9 @@ Spoken words: 731
 
 Hedges kept: "first certain"; "nearly two thousand years"; "earlier sightings are uncertain"; "technically not a tapestry, it's an embroidery"; "never claimed".
 Left out on purpose (unverified / keep off air in research): who first spotted the 1758 return (Palitzsch, "not checked this pass"); the 613 BCE and Greek reports (uncertain); Halley's birth year and biography (not in entry); any claim that Halley was the first to show a comet returns.
+
+## Review
+- Fact fixes: none needed. 240 BCE "first certain", Shiji, broom star, 1066 Bayeux (with the embroidery note), 1531/1607/1682, 1705, 1742, 1758 all match the entry. Arithmetic checks: 1607-1531 = 76 and 1682-1607 = 75 ("about seventy-five or seventy-six years"), 1758-1742 = 16. "Nearly two thousand years before Halley was born" is the entry's own hook line, and the script doesn't state his birth year (not in the entry). The 1758 spotter (Palitzsch, not checked) is correctly left out. Title is supported.
+- Cadence fixes: 5. Rhetorical question plus answer "So if he didn't discover it, why is his name on it?" turned into a signposted statement. Section 06 was stacked short sentences ("And here's the sad part. Halley never saw... He died in 1742...") and is now two breaths, with the repeated button "He said it would come back, and it did..." cut. "And then he did the thing that made it count." (crafted lead-in) cut. Joined full stops in 02 and 03.
+- Format fixes: word count updated 731 to 711. Spoken words 711 (short, research-limited, accepted).
+- Remaining concerns for Gus: none.

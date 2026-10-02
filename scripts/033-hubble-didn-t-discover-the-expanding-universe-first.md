@@ -1,7 +1,7 @@
 # Hubble Didn't Discover the Expanding Universe First
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 799 spoken words. The research for this one is narrow, so it runs under the usual length rather than padded.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 785 spoken words. The research for this one is narrow, so it runs under the usual length rather than padded.
 - Tone is calm and fair. This is not a takedown of Hubble, his data is what convinced people, and the script says so.
 - Say Georges Lemaître as ZHORZH luh-MET-ruh, Vesto Slipher as VES-toh SLY-fer.
 - Every hedge in here is on purpose. Read "about seventy-eight percent", "recommend", "it can't force anybody", "widely accepted" and "some historians" exactly as written. Don't say the IAU "renamed" the law, it recommended a new name.
@@ -14,29 +14,23 @@ The first person to publish that the universe is expanding wasn't Edwin Hubble, 
 
 ## 02 The Famous Version
 
-The version a lot of us learned goes like this, in 1929 Edwin Hubble showed that the universe is expanding, and the rule that came out of it got his name, Hubble's law. And the rule itself is simple enough to say in one breath, the farther away a galaxy is, the faster it's moving away from us. That's what an expanding universe looks like from where we're sitting, everything far away is moving away, and the farther it is, the faster it goes, right?
-
-And it stuck to Hubble for a pretty plain reason, his 1929 observations were the data that convinced people, and the name went with the data.
+The version a lot of us learned goes like this, in 1929 Edwin Hubble showed that the universe is expanding, and the rule that came out of it got his name, Hubble's law. And the rule itself is simple enough to say in one breath, the farther away a galaxy is, the faster it's moving away from us. That's what an expanding universe looks like from where we're sitting, everything far away is moving away, and the farther it is, the faster it goes, right? And it's not hard to see why it stuck to Hubble, his 1929 observations were the data that convinced people.
 
 ## 03 The Priest Who Published First
 
-Now here's the part most people never hear. Two years earlier, in 1927, a Belgian astronomer named Georges Lemaître published that the universe is expanding. And Lemaître wasn't only an astronomer, he was also a Catholic priest. He didn't just say the universe was getting bigger either, he worked out the same relationship between how far away something is and how fast it's moving away, the velocity and distance relation, the same rule that would end up being called Hubble's law.
+Now here's the part most people never hear, two years earlier, in 1927, a Belgian astronomer named Georges Lemaître published that the universe is expanding. And Lemaître wasn't only an astronomer, he was also a Catholic priest. He didn't just say the universe was getting bigger either, he worked out the same relationship between how far away something is and how fast it's moving away, the velocity and distance relation, the same rule that would end up being called Hubble's law.
 
-And part of the reason it didn't get the attention is where he published, he wrote it in French, in a Belgian journal that not many people read. So the idea was out there, in print, with a date on it, but it was out there in a place most astronomers weren't looking, right?
-
-And the priority claim, the idea that Lemaître got there first, is widely accepted today, and it's what the 2018 vote was about.
+And one thing worth knowing is where he published, he wrote it in French, in a Belgian journal that not many people read. So the idea was out there, in print, with a date on it, it just wasn't somewhere many people were reading, right? And the priority claim, the idea that Lemaître got there first, is widely accepted today, and it's what the 2018 vote was about.
 
 ## 04 Fair Credit to Hubble
 
-Now, to be fair to Hubble, his part of this is real and it's big. Lemaître published the idea and worked out the relation, but Hubble's 1929 observations were the convincing data, the measurements that got astronomers to accept that this is actually what the universe is doing. An idea can sit in print for years, and it's the evidence that gets people to believe it, and Hubble brought the evidence.
-
-So the fair way to say it is, Lemaître published first, and Hubble's observations are what made people believe it.
+Now, to be fair to Hubble, his part of this is real and it's big. Lemaître published the idea and worked out the relation, but Hubble's 1929 observations were the convincing data, the measurements that got astronomers to accept that this is actually what the universe is doing. An idea can sit in print for years, and it's the evidence that gets people to believe it, and Hubble brought the evidence. So the fair way to say it is, Lemaître published first, and Hubble's observations are what made people believe it.
 
 ## 05 And Before Both of Them
 
 And there's more, because neither of them was working from scratch. Back in the 1910s, an astronomer named Vesto Slipher was measuring what's called redshift. When something is moving away from you, the light coming off it gets stretched toward the red end of the spectrum, so if you measure how far the light has shifted toward the red, you can tell how fast that thing is moving away.
 
-Slipher's redshift measurements are the groundwork underneath both of them, Lemaître's work and Hubble's work both sit on top of those measurements. So even in the story of who was first, there's somebody who was there first, doing the measuring that the famous names built on.
+Slipher's redshift measurements are the groundwork underneath both of them, Lemaître's work and Hubble's work both sit on top of those measurements. So even in this story there's somebody earlier, doing the measuring that both of the famous names built on.
 
 ## 06 The 2018 Vote
 
@@ -46,6 +40,6 @@ Now, two things to be careful about here. First, the IAU recommends the new name
 
 ## 07 Who Did It First
 
-So here's where it actually lands. In the 1910s Vesto Slipher measured the redshifts. In 1927 Georges Lemaître, a Belgian astronomer and priest, published that the universe is expanding and worked out the relation between distance and speed. And in 1929 Edwin Hubble brought the observations that convinced everybody.
+So here's where it actually lands. In the 1910s Vesto Slipher measured the redshifts, in 1927 Georges Lemaître, a Belgian astronomer and priest, published that the universe is expanding and worked out the relation between distance and speed. And in 1929 Edwin Hubble brought the observations that convinced people.
 
-Hubble deserves his place in that story, but Lemaître published it first, and in 2018 most of the astronomers who voted said the name should show that. Somebody did it first, and that's what this channel is about.
+Hubble deserves his place in that story, but Lemaître published it first, and in 2018 most of the IAU members who voted said the name should show that, so somebody did it first, and it was a Belgian priest, two years ahead of Hubble.

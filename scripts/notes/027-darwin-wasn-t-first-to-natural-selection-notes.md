@@ -1,6 +1,6 @@
 # Notes: Darwin Wasn't First to Natural Selection
 Research entry: episode-research.md, "## New topic detail" section, entry "### 6."
-Spoken words: 838
+Spoken words: 827
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 838
 
 Hedges kept: "first in print", "a principle of natural selection", "brief", "influenced almost no one" / "barely influenced anybody", "independently", "on the fringe"; never called plagiarism.
 Left out on purpose (unverified / keep off air in research): Mike Sutton is not named (his claim is mentioned only as fringe). Contents of Matthew's 1864 letter (not in the entry). Any detail of the Royal Society paper beyond its use as scholarly assessment.
+
+## Review
+- Fact fixes: 3. (1) "So natural selection was first presented as a joint paper" contradicted the episode's own point (Matthew was in print in 1831); changed to "Darwin's version first went public as a joint paper". (2) Cut "the second one is a lot more famous" about Wallace (not in the research entry). (3) Closer "Darwin was the one who said so" replaced with "Somebody did it first in print, and it was Patrick Matthew", which restores the "first in print" hedge on the close and drops a crafted ending.
+- Cadence fixes: 9. Joined "Here's the version most of us learned. In 1859..."; "Scottish landowner. And in 1831..."; "twenty-eight years before Origin of Species. And this isn't..."; "Matthew's passage was brief. It was..."; "here's the part that matters. Darwin didn't hide from this. On April 7th..."; "got there first. And Darwin said..."; "working it out on his own. He developed it independently."; "where Darwin was at that point. He'd had..."; "plain version of who did it first. Patrick Matthew...". Cut the button "He put it on the record himself."
+- Format fixes: word count updated 838 to 827. Length 827 is under the 900 floor (reported; research is narrow, not padded).
+- Remaining concerns for Gus: none.

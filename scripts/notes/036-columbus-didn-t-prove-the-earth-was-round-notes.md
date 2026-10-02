@@ -1,6 +1,6 @@
 # Notes: Columbus Didn't Prove the Earth Was Round
 Research entry: 100-episode-lineup.md, heading "### 36. Columbus Didn't Prove the Earth Was Round"
-Spoken words: 877
+Spoken words: 885 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -21,3 +21,9 @@ Plain explanation added (no new claims): how a 7.2-degree difference becomes "mu
 Hedges kept: "around 240 BC"; "roughly forty thousand kilometers"; "remarkably close, maybe within a few percent" (not "exact"); "depends on which stadion he meant"; Russell's line attributed to him by name.
 
 Left out on purpose (unverified / keep off air in research): the hook's "librarian" and "a stick" (neither is in the entry; the cold open says "a Greek scholar" and "the angles of shadows"); the distance between Syene and Alexandria; where Columbus actually landed; any detail of Aristotle's observations; Eratosthenes' exact error (marked unknown).
+
+## Review
+- Fact fixes: none. Every claim checked against the entry (17 centuries = 240 BC to 1492; 7.2 degrees = 1/50; 40,000 km to about 25,000 miles; 154 to 215 m stadion; Irving 1828; Russell quote attributed; NASA "first to calculate"). Writer had already dropped the hook's unsupported "librarian" and "stick".
+- Cadence fixes: 6. Joined stops in 01 (opening two sentences), 03 ("wasn't about the shape at all, it was about the size"), 05 (doubters/bigger/underestimated as one breath), 06 (never set out to prove), 07 timeline; replaced the "that's what this channel is about" button with a plain closing.
+- Format fixes: word count updated 877 to 885.
+- Remaining concerns for Gus: runs 885 words (under 900). "the normal educated view ... for well over a thousand years" in 03 leans on the Russell quote said just before it; keep the two together if editing.

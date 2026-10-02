@@ -17,3 +17,9 @@ Spoken words: 774
 
 Hedges kept: "around 1821", "the usual date", "reached Braille's school" (never "Barbier showed it to young Louis" as fact), "archivists now say", "according to Perkins", "may also be a myth", "isn't backed by primary sources", and the note that the debunk rests mainly on Perkins and Campsie.
 Left out on purpose (unverified / keep off air in research): the Library of Congress NLS blog (researcher saw only its title); any detail of Braille's blindness, life or death (not in entry); Campsie's first name (not in entry); any claim about who Barbier was beyond the dot system.
+
+## Review
+- Fact fixes: none needed. Ages (15, and AFB's 13 to 16), 1821 as "the usual date", 1824, 1829, 1833, the 12-to-6 cell, the Perkins/Campsie debunk (hedged and attributed), and the note that History.com and AFB still repeat the soldier story all match the entry. The script never says Barbier showed it to young Louis as fact. Title is supported.
+- Cadence fixes: 4. A one-line paragraph ("But Braille didn't start from nothing...") joined onto the paragraph before it. Joined "around 1821. That's the usual date". Rhetorical question plus fragment "And it's a funny thing, right? A story about who did it first..." made into one breath. The closing zinger "Somebody did it first, and Braille made it work." now names Barbier plainly and keeps the fair credit to Braille.
+- Format fixes: word count updated 774 to 784; added "probably not how it happened" to the hedge list. Spoken words 784 (short, research-limited, accepted).
+- Remaining concerns for Gus: the 05 debunk rests mainly on Perkins/Campsie (the entry says so, and the script says so on air). Keep it framed that way.

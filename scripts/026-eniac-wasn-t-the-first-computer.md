@@ -1,7 +1,7 @@
 # ENIAC Wasn't the First Computer
 
 READING NOTES
-- Runtime is about 7 minutes at a relaxed pace, roughly 1,018 spoken words.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,013 spoken words.
 - Tone is calm and matter-of-fact. The court ruling carries this one, so read the quote slowly and plainly. ENIAC and Grace Hopper both get treated fairly.
 - Say ENIAC as EE-nee-ack, Atanasoff as uh-TAN-uh-soff, Mauchly as MOCK-lee, Konrad Zuse as KON-rahd TSOO-zuh, Puskas as POOSH-kahsh, Colossus as kuh-LOSS-us, Dollis Hill as DOLL-iss HILL.
 - Every hedge in here is on purpose. Read "in 1941", "a special-purpose machine", "kept secret for decades", "restricted to codebreaking", "probably wasn't even hers" and "designed a computing machine in the 1830s, but it was never built" exactly as written. Don't give a day or month for the Z3.
@@ -13,7 +13,7 @@ In 1973 a federal judge ruled that the men behind the famous ENIAC did not first
 
 ## 02 The Famous Version
 
-Here's the version most people know. ENIAC gets called the first computer, and the men who built it held a patent on it. And a patent, if you've never dealt with one, is the government saying this idea is yours and nobody else can use it without your permission, for a set number of years. So a patent on the electronic digital computer would be a very, very big patent to hold.
+Here's the version most people know, ENIAC gets called the first computer, and the men who built it held a patent on it. And a patent, if you've never dealt with one, is the government saying this idea is yours and nobody else can use it without your permission, for a set number of years. So a patent on the electronic digital computer would be a very, very big patent to hold.
 
 But a patent can be challenged, and one of the questions a court can ask is a simple one, did the people holding this patent really come up with it first? And in this case, a federal judge went through the history and answered that question.
 
@@ -35,13 +35,13 @@ You'll see a very specific date for the Z3's first demonstration, and the source
 
 And then there's Britain. In December 1943, a machine called Colossus first ran at Dollis Hill, and in January 1944 it moved to Bletchley Park, where it was breaking German codes. The IEEE, which is the big professional organization for electrical engineers, calls Colossus the first large-scale programmable electronic digital computer, though one restricted to codebreaking.
 
-So why don't more people know about it? Because Colossus was kept secret for decades, and it's hard to get credit for a machine nobody's allowed to talk about.
+And Colossus was kept secret for decades, and it's hard to get credit for a machine nobody's allowed to talk about.
 
 ## 06 The Moth
 
-Oh, one more thing, because computers come with a second famous first that doesn't hold up either. You've probably heard that Grace Hopper found the first computer bug, an actual moth stuck in a machine. And the moth is real. On September 9th, 1947, the team running Harvard's Mark II computer found a moth stuck in Relay 70, Panel F, and they taped it into the logbook with a note, "First actual case of bug being found."
+Oh, one more thing, because computers come with a second famous first that doesn't hold up either. You've probably heard that Grace Hopper found the first computer bug, an actual moth stuck in a machine. And the moth is real, on September 9th, 1947, the team running Harvard's Mark II computer found a moth stuck in Relay 70, Panel F, and they taped it into the logbook with a note, "First actual case of bug being found."
 
-But read that note again. First actual case of bug being found. The joke only works because engineers already called glitches bugs. Thomas Edison was doing it in 1878, in a letter to a man named Puskas in November of that year he wrote about "Bugs, as such little faults and difficulties are called." So the word was around for close to seventy years before the moth.
+But read that note again, first actual case of bug being found, and the joke only works because engineers already called glitches bugs, right? Thomas Edison was doing it in 1878, in a letter to a man named Puskas in November of that year he wrote about "Bugs, as such little faults and difficulties are called." So the word was around for close to seventy years before the moth.
 
 And Grace Hopper was on that team, and she loved telling the story, but the Smithsonian, which has the logbook, says the logbook probably wasn't even hers. What the Smithsonian does credit is that she and the team helped popularize the words bug and debug. So she didn't find the first bug, and the moth wasn't the first bug, but she did a lot to make the word stick.
 
@@ -53,4 +53,4 @@ And if you want to go back even further than all of them, Charles Babbage design
 
 ## 08 Who Did It First
 
-So here's the plain version. In 1941 John Mauchly visited John Vincent Atanasoff at Iowa State and saw the Atanasoff-Berry Computer working. That same year Konrad Zuse had his program-controlled Z3 working in Berlin, and by early 1944 Colossus was breaking German codes at Bletchley Park. In 1973 Judge Earl Larson ruled that ENIAC's inventors did not themselves first invent the automatic electronic digital computer, and voided their patent. Somebody did it first, and a federal court said his name was John Vincent Atanasoff.
+So here's the plain version, in 1941 John Mauchly visited John Vincent Atanasoff at Iowa State and saw the Atanasoff-Berry Computer working. That same year Konrad Zuse had his program-controlled Z3 working in Berlin, and by early 1944 Colossus was breaking German codes at Bletchley Park. In 1973 Judge Earl Larson ruled that ENIAC's inventors did not themselves first invent the automatic electronic digital computer, and voided their patent. Somebody did it first, and the name the federal court pointed to was John Vincent Atanasoff.

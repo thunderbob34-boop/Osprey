@@ -24,7 +24,7 @@ Sister Rosetta Tharpe was a gospel performer, and from the late 1930s she was pl
 
 And in 1944 she recorded a song called "Strange Things Happening Every Day", with a pianist named Sammy Price, and some music scholars call that the first rock and roll song. Some, not all, and we'll come back to why that matters. But it's 1944, and that's about a decade before the mid-1950s explosion everybody remembers.
 
-And she's known as the Godmother of Rock and Roll, that's the label that gets put on her, and it's not just fans saying it, Britannica uses it and NPR has called her that too, and PBS gave her a whole American Masters timeline of her career. So this isn't a fringe idea somebody cooked up, the big institutions are on her side on this one.
+And she's known as the Godmother of Rock and Roll, that's the label that gets put on her, and it's not just fans saying it, Britannica uses it and NPR has called her that too, and PBS gave her a whole American Masters timeline of her career.
 
 ## 04 Who She Influenced
 
@@ -36,7 +36,7 @@ So you've got a gospel singer playing electric guitar in clubs in the late 1930s
 
 And there's more, because "the first rock and roll record" is one of those arguments that never really ends. There's another record that gets this title a lot, and it's called "Rocket 88", by Jackie Brenston and his Delta Cats, with Ike Turner. It was recorded on March 5th, 1951, at Sam Phillips's studio in Memphis, and it came out on Chess, and it's often billed as the first rock and roll record.
 
-But even the Library of Congress, in its own essay on "Rocket 88", says rock and roll was a gradual evolution, and that there were earlier competitors. So there isn't one first record, right? It came together over time, from a lot of people. That's why we say some music scholars call Tharpe's 1944 song the first rock and roll song, and that she has a strong claim to it, instead of saying it's settled. But either way, "Strange Things Happening Every Day" was 1944 and "Rocket 88" was 1951, so if you're going to argue about firsts, she's in the argument, and she's early.
+But even the Library of Congress, in its own essay on "Rocket 88", says rock and roll was a gradual evolution, and that there were earlier competitors. So there isn't one agreed first record, it came together over time, right? That's why we say some music scholars call Tharpe's 1944 song the first rock and roll song, and that she has a strong claim to it, instead of saying it's settled. But either way, "Strange Things Happening Every Day" was 1944 and "Rocket 88" was 1951, so if you're going to argue about firsts, she's in the argument, and she's early.
 
 ## 06 The Hall of Fame
 
@@ -48,4 +48,4 @@ So the woman who influenced Elvis and Little Richard and Johnny Cash, the woman 
 
 So let's put it in order. From the late 1930s, Sister Rosetta Tharpe was playing electric-guitar gospel in clubs. In 1944 she recorded "Strange Things Happening Every Day" with Sammy Price, and some music scholars call that the first rock and roll song. In 1951 "Rocket 88" was recorded in Memphis, and it's often billed as the first rock and roll record, though the Library of Congress calls it a gradual evolution. In the mid-1950s Elvis became the King, a title he was given, and he never claimed he invented rock and roll. In 1986 the Hall of Fame inducted its first class, and in 2018 Sister Rosetta Tharpe finally went in, under Early Influences.
 
-Elvis is the King, and he earned his place, but she was playing this music years before him. Somebody did it first, and her name was Sister Rosetta Tharpe.
+Elvis is the King, and he earned his place, but she was playing electric guitar in clubs years before him. Somebody did it first, and her name was Sister Rosetta Tharpe.

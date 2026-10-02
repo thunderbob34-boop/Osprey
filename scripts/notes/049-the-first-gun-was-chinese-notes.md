@@ -1,6 +1,6 @@
 # Notes: The First Gun Was Chinese
 Research entry: episode-research.md, "# Job 3" section, entry "### 19." (Gun)
-Spoken words: 678
+Spoken words: 681
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -21,3 +21,9 @@ Plain explanation added (no new claims): how a fire lance works (gunpowder in a 
 Hedges kept: "around 950", "the first gunpowder weapon we can actually see", "proto-gun", "not a true gun" (never "the fire lance was the first gun"), "no later than 1288" and "going by where it was found", Wuwei "debated", "the dates at the very start are fuzzy".
 
 Left out on purpose (unverified / keep off air in research): the banner's home in the Musée Guimet, Paris, and the Walter de Milemete 1326 manuscript as Europe's first gun picture (both marked [prior knowledge, not re-verified]), so the script makes no dated comparison with Europe. Note for review: the entry says the banner, Heilongjiang, Xanadu and Wuwei details were seen only in Wikipedia and secondary extracts this session, though its own "Confirmed" line lists the banner and Xanadu gun; worth a second strong source before air. Runs short (678 words) because the entry can't fill more without padding.
+
+## Review
+- Fact fixes: (1) closing zinger "somebody put it on a banner" cut and the close hedged to "on the evidence we have, it starts in China". No other fact problems found: the "first gun" wording is correctly hedged throughout (fire lance = proto-gun, not a true gun), and the Wuwei/Chen Bingying debate is kept.
+- Cadence fixes: 4 joins of choppy stops (sections 03, 04, 05); added 1 "right?" (now 2 in 681 words).
+- Format fixes: word count updated to 681. No dashes. Under 900; the entry can't support more (the Europe comparison is marked not re-verified).
+- Remaining concerns for Gus: (1) the title "The First Gun Was Chinese" is stronger than the script, which says the fire lance is not a true gun; the script's own claim is "the oldest surviving metal guns are Chinese". Consider "The Oldest Guns Are Chinese" or similar. (2) The entry says the banner, Heilongjiang, Xanadu and Wuwei details came only from Wikipedia and secondary extracts this session; worth a second strong source before air.

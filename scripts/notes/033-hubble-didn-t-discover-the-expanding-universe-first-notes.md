@@ -1,6 +1,6 @@
 # Notes: Hubble Didn't Discover the Expanding Universe First
 Research entry: episode-research.md, "## New topic detail" section, entry "### 7."
-Spoken words: 799
+Spoken words: 785 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -20,3 +20,9 @@ Plain explanation added (no new claims): what the velocity-distance rule means i
 Hedges kept: "about seventy-eight percent"; "recommend" (not "renamed"); "it can't force anybody to use it"; "widely accepted"; "some historians"; Hubble credited for the convincing data.
 
 Left out on purpose (unverified / keep off air in research): the story that Lemaître's 1931 English translation dropped his expansion-rate estimate, and that he made the cut himself (marked "not re-verified this session"; also no "cover-up" framing). Nothing about the Hubble Space Telescope or other Hubble biography, since it isn't in the entry. Runs under 900 words because the entry is short; not padded.
+
+## Review
+- Fact fixes: (1) Section 03 "part of the reason it didn't get the attention is where he published" was a causal claim the entry doesn't make; now just states where he published (French, little-read Belgian journal). (2) Section 02 "the name went with the data" (unsupported claim about why the law was named) softened to "it's not hard to see why it stuck to Hubble". (3) Section 05 "somebody who was there first" overclaimed Slipher's role; now "somebody earlier, doing the measuring both famous names built on". (4) Section 07 "convinced everybody" changed to "convinced people"; "most of the astronomers who voted" changed to "most of the IAU members who voted" (the voters were IAU members).
+- Cadence fixes: 6. Merged three one-sentence paragraphs (02 "it stuck to Hubble", 03 priority claim, 04 "fair way to say it"); joined "Now here's the part most people never hear, two years earlier..."; joined the 07 timeline; replaced the "that's what this channel is about" button with the plain fact.
+- Format fixes: word count updated 799 to 785.
+- Remaining concerns for Gus: runs 785 words (under 900) because the entry is short; not padded.

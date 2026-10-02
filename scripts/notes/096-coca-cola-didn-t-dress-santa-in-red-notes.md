@@ -19,3 +19,9 @@ Spoken words: 718
 
 Hedges kept: "Nast created the look, and red versions were around long before Coke" (verbatim); "mostly black and white"; no claim that Nast's 1860s prints were red; Coke credited for popularizing and standardizing.
 Left out on purpose (unverified / keep off air in research): White Rock's 1915/1923 red Santa ads (not verified); Snopes material on Nast's 1881 red suit and Weir 1837-38 (lead only); the exact first full-color red Santa (inferred, unknown); the poem's title and Moore's first name (not in the entry, so the script says only "a Christmas poem by Moore, from 1823").
+
+## Review
+- Fact fixes: (1) "that's what Coca-Cola's own history is pointing to" claimed to know which red Santas Coke's page means; now "that fits with what Coca-Cola's own history says". (2) Hedged the speculation on why the myth stuck ("probably"). (3) Close replaced the cold-open callback with the entry's honest gap: nobody can point to the very first red Santa (the entry marks it unknown), but it came before Coca-Cola.
+- Cadence fixes: 2. "in 1931. And Sundblom's Santa..." joined; one of four "Now," section openers changed to "As for the modern Santa".
+- Format fixes: word count updated 718 to 727; hedge list updated to include the "probably" lines and the very-first-red-Santa line.
+- Remaining concerns for Gus: 727 spoken words, well under the 900 floor, because the research is thin; not padded. Moore's first name and the poem's title are not in the entry, so the script says only "a Christmas poem by Moore, from 1823"; don't ad-lib them.

@@ -10,13 +10,13 @@ READING NOTES
 
 ## 01 Cold Open
 
-In 1612 Galileo looked straight at a new planet, wrote it down, and moved on. The planet was Neptune, and the credit for discovering Neptune goes to astronomers in the 1840s, and they earned it, we'll give them their due. But more than two hundred years before anybody discovered Neptune, the most famous astronomer there is had already drawn it in his notebook, he just didn't know what it was.
+In 1612 Galileo looked straight at a new planet, wrote it down, and moved on. The planet was Neptune, and the credit for discovering Neptune goes to astronomers in the 1840s, and they earned it, we'll give them their due. But more than two hundred years before anybody discovered Neptune, maybe the most famous astronomer there is had already drawn it in his notebook, he just didn't know what it was.
 
 ## 02 The Famous Discovery
 
-So here's the story of how Neptune got found, and it's a great one. A mathematician named Urbain Le Verrier predicted where Neptune should be by doing the math, not by looking, he worked it out on paper. And then on September 23rd, 1846, an astronomer named Johann Galle pointed a telescope where the math said to look, and there it was. And John Couch Adams shares the credit for the prediction.
+So here's the story of how Neptune got found, and it's a great one. A man named Urbain Le Verrier predicted where Neptune should be by doing the math, not by looking, he worked it out on paper. And then on September 23rd, 1846, Johann Galle pointed a telescope where the math said to look, and he found it. And John Couch Adams shares the credit for the prediction.
 
-And that's why it's a famous story, right? It's a planet that got predicted with math before anybody knew it was there, and that's a really impressive thing, and nobody here is taking it away from Le Verrier or Adams or Galle. They discovered Neptune. But they weren't the first people to see it.
+And that's why it's a famous story, right? It's a planet that got predicted with math before anybody knew it was there, and that's a really impressive thing, and nobody here is taking it away from Le Verrier or Adams or Galle. They discovered Neptune, but they weren't the first people to see it.
 
 ## 03 What Galileo Wrote Down
 
@@ -28,7 +28,7 @@ And whether Galileo actually noticed that it had moved, and thought it meant som
 
 ## 04 How We Know
 
-And this isn't a legend somebody made up to make Galileo look good. In 1979 and 1980, two researchers, Charles Kowal and Stillman Drake, went back through Galileo's observations and identified Neptune in them, and they published it in the journal Nature in 1980. NASA's own Neptune pages say it too, that Galileo recorded Neptune in his notebook as a star in December 1612.
+And this isn't a legend somebody made up. In 1979 and 1980, two researchers, Charles Kowal and Stillman Drake, went back through Galileo's observations and identified Neptune in them, and they published it in the journal Nature in 1980. NASA's own Neptune pages say it too, that Galileo recorded Neptune in his notebook as a star in December 1612.
 
 And here's the detail that makes it convincing, according to the Nature paper, the position Galileo drew comes within one arcminute of where Neptune should have been. An arcminute is a sixtieth of a degree, which is a tiny slice of the sky, so that's a really, really close match. And the Nature paper goes as far as saying Galileo also detected its motion, and that's how they read his notes, but whether Galileo himself thought anything of it is a different question, so we'll stick with what's on the page.
 

@@ -1,4 +1,4 @@
-# Fibonacci's Numbers Belong to Indian Poets
+# Fibonacci's Numbers Started in Indian Poetry
 
 READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 904 spoken words.
@@ -22,13 +22,13 @@ And the way it usually gets told, the sequence comes from a book called Liber Ab
 
 But the numbers were already sitting in India, and they didn't come from rabbits, they came from poetry. Scholars of Sanskrit verse were counting rhythms, made up of short syllables and long syllables, and they wanted to know how many different rhythms you could make.
 
-So here's how that works, and it's simpler than it sounds. Say a short syllable counts as one beat and a long syllable counts as two. If you want a rhythm that's one beat long, there's only one way, one short. Two beats, there are two ways, two shorts or one long. Three beats, there are three ways. Four beats, there are five. Five beats, there are eight. And if you keep going, you get thirteen and twenty-one, and every answer is the two before it added together. It's the same sequence, it just shows up when you count the rhythms of a line of verse.
+So here's how that works, and it's simpler than it sounds. Say a short syllable counts as one beat and a long syllable counts as two. If you want a rhythm that's one beat long, there's only one way, one short, and for two beats there are two ways, two shorts or one long, three beats gets you three ways, four beats gets you five, five beats gets you eight, and if you keep going, you get thirteen and twenty-one, and every answer is the two before it added together. It's the same sequence, it just shows up when you count the rhythms of a line of verse.
 
 ## 04 Virahanka, Gopala and Hemachandra
 
 Now here's who actually wrote it down. A scholar named Virahanka, who lived somewhere between 600 and 800, gave the rule, and he gave the numbers, three, five, eight, thirteen, twenty-one. Then a scholar named Gopala, who lived before 1135, cited Virahanka. And then Hemachandra, around 1150, stated the rule outright, and that's about fifty years before Leonardo's book.
 
-Now, to be fair, Virahanka's own text is lost. His rule survives through Gopala, who cited him, so we're getting Virahanka secondhand. But all three of these men came before 1202, and that's not a guess, that's from a peer-reviewed paper by a historian named Parmanand Singh, published in the journal Historia Mathematica in 1985. The title of it is The so-called Fibonacci numbers in ancient and medieval India. And a separate paper on the origin of the sequence, hosted by the University of St Andrews, also puts Hemachandra around 1150 and ties it to the same poetry.
+Now, to be fair, Virahanka's own text is lost. His rule survives through Gopala, who cited him, so we're getting Virahanka secondhand. But all three of these men came before 1202, and that's not a guess, that's from a peer-reviewed paper by Parmanand Singh, published in the journal Historia Mathematica in 1985, and the title of it is The so-called Fibonacci numbers in ancient and medieval India. And a separate paper on the origin of the sequence, hosted by the University of St Andrews, also puts Hemachandra around 1150 and ties it to the same poetry.
 
 So the Indian scholars were first by centuries, with Virahanka, and still first by about fifty years, if you only count Hemachandra, right?
 
@@ -36,11 +36,11 @@ So the Indian scholars were first by centuries, with Virahanka, and still first 
 
 Now, Leonardo of Pisa didn't steal this. He probably learned Hindu-Arabic mathematics in North Africa, that's the system behind the zero through nine digits we all use now, but there's no proof he knew anything about the Indian work on poetry. His numbers came out of a puzzle about rabbits, and nobody should call him a thief.
 
-And Liber Abaci was a real book doing real work. The point here isn't that Leonardo was a fraud, he wasn't. The point is that the most famous number pattern there is was counted out by poets and scholars in India, centuries before he wrote it down, and their names aren't on it.
+And Liber Abaci was a real book doing real work, so the point here isn't that Leonardo was a fraud, he wasn't, the point is that the most famous number pattern there is was counted out by scholars of poetry in India, centuries before he wrote it down, and their names aren't on it.
 
 ## 06 The Name He Never Used
 
-And there's more, because even the name is late. Leonardo of Pisa never called himself Fibonacci. Historians say that nickname, which is short for filius Bonacci, son of Bonacci, wasn't attached to him until 1838, and the name that comes up is Guglielmo Libri. That's over six hundred years after his book.
+And there's more, because even the name is late, Leonardo of Pisa never called himself Fibonacci. Historians say that nickname, which is short for filius Bonacci, son of Bonacci, wasn't attached to him until 1838, and the name that comes up is Guglielmo Libri. That's over six hundred years after his book.
 
 Now, that detail traces back mainly to one historian, Keith Devlin, and his book about Leonardo, called The Man of Numbers, so I'm going to keep saying historians say, because it's coming through Devlin. But two different outlets carry it, the Notices of the American Mathematical Society and Scientific American, and they both say the nickname came centuries later.
 

@@ -1,6 +1,6 @@
 # Notes: Abner Doubleday Didn't Invent Baseball
 Research entry: 100-episode-lineup.md, heading "### 34. Abner Doubleday Didn't Invent Baseball"
-Spoken words: 885
+Spoken words: 877 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -21,3 +21,9 @@ Plain explanation added (no new claims): what a woodcut is.
 Hedges kept: "dated December 1907 and widely reported as 1908"; "a game called base-ball"; "the oldest known mention"; "rounders and similar games"; "no single inventor"; exact family tree flagged as pieced together; explicitly not "the British invented baseball"; Cartwright not offered as a replacement.
 
 Left out on purpose (unverified / keep off air in research): nothing in the entry was marked unverified. Left out anything not in the entry: who Mills was, Doubleday's later career, where the Hall of Fame is, John Thorn's first name or role in finding the bylaw. The hook's "old man's letter" became "one man's letter", since Graves' age when he wrote isn't in the entry (only that he was 5 in 1839).
+
+## Review
+- Fact fixes: (1) Cold open "people were playing a game called base-ball for nearly a hundred years before that" overstated the 1744 book (it proves the name and a game, not who was playing); now "shows up in print nearly a hundred years before that". (2) "Britannica calls the Doubleday story discredited" read as a direct quote; now "treats ... as discredited". (3) Section 04 "none of this started with him" / "It's not his fault the commission believed it" went beyond the entry; now "the claim in this story doesn't come from him, it came from Graves' letter and the commission's report". (4) "In England, a man named William Bray" changed to "an Englishman named William Bray" (the entry gives his nationality, not where he played).
+- Cadence fixes: 5. Joined stops in 02 (two places) and 05 ("And there's more, an Englishman..."); cut a doubled "right?" in 03; replaced the "that's what this channel is about" closing button with a plain statement.
+- Format fixes: word count updated 885 to 877.
+- Remaining concerns for Gus: runs 877 words (under 900); research is short, not padded.

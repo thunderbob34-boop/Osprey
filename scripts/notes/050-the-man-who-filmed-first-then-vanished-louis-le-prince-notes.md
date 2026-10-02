@@ -1,6 +1,6 @@
 # Notes: The Man Who Filmed First, Then Vanished: Louis Le Prince
 Research entry: 100-episode-lineup.md, heading "### 50. The Man Who Filmed First, Then Vanished: Louis Le Prince"
-Spoken words: 680
+Spoken words: 679
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -22,3 +22,9 @@ Plain explanation added (no new claims): "declared legally dead" glossed as the 
 Hedges kept: "oldest surviving film" (never "first film ever"), "never showed his films publicly", "by the museums' account" for the US trip, "speculation" and "no evidence" for the murder theories, "I'm not going to say Edison took his camera", "we don't know what happened to him".
 
 Left out on purpose (unverified / keep off air in research): the Edison lab patent caveat filed weeks after the disappearance (untraceable to a strong source); any claim he was about to go public in the US; any suggestion Edison was involved or stole the camera; the film's length and what it shows (not in the entry). Runs short (680 words) because the entry can't fill more without padding.
+
+## Review
+- Fact fixes: (1) "the Lumières were the ones who showed films to the public" changed to "the Lumières put on the famous public screening" (the original implied they were the only or first to show films publicly, which the entry doesn't support). Dates and arithmetic checked: 1888 to 1895 = 7, 1890 to 1897 = 7. Edison is correctly kept clear of the disappearance and the camera; the patent-caveat detail stays out.
+- Cadence fixes: 3 joins of choppy stops (sections 02, 03, 04); added 1 "right?" (now 2 in 679 words).
+- Format fixes: word count updated to 679. No dashes. Under 900; the entry can't support more.
+- Remaining concerns for Gus: none.

@@ -1,6 +1,6 @@
 # Notes: ENIAC Wasn't the First Computer
 Research entry: episode-research.md, "# Job 3" section, entry "### 39."
-Spoken words: 1018
+Spoken words: 1,013
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -22,3 +22,9 @@ Spoken words: 1018
 
 Hedges kept: "in 1941" (no Z3 day), "a special-purpose machine", "kept secret for decades", "restricted to codebreaking", "probably wasn't even hers", "designed a computing machine in the 1830s, but it was never built".
 Left out on purpose (unverified / keep off air in research): Z3 demo date (12 May 1941, unverified). "Secret until the 1970s" (unverified). ABC "not programmable" (unsourced). NMAH 1994 transfer date (dropped). Babbage/Lovelace specifics (1837 design, Note G) not re-checked. ENIAC's own build dates and the second ENIAC inventor's name (not in the entry). The case name Honeywell v. Sperry Rand appears only in the planned-fact line, so it was left off air.
+
+## Review
+- Fact fixes: 1 (minor). The closer "a federal court said his name was John Vincent Atanasoff" overstated the ruling slightly (the court found ENIAC's inventors derived the subject matter from Atanasoff; it did not name a first inventor in those words). Changed to "the name the federal court pointed to was John Vincent Atanasoff". All other claims check against the entry, including the verbatim Larson quote, the Edison/Puskas line and the 69-year gap.
+- Cadence fixes: 6. Joined "Here's the version most people know. ENIAC..."; replaced the rhetorical "So why don't more people know about it? Because..." with a plain statement; joined "And the moth is real. On September 9th..."; joined "read that note again. First actual case... The joke only works..." into one breath and added one "right?" there (the script had one in about 1,000 words); joined the opening of the close.
+- Format fixes: word count updated 1,018 to 1,013.
+- Remaining concerns for Gus: the batch note in episode-research.md under Quarter 3 still says episodes 30 to 39 are "from model knowledge only" and need re-checking, but entry 39 itself is marked "verified 2026-10-02" with sources. Worth confirming that stale note doesn't apply before recording.

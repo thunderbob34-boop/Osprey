@@ -1,7 +1,7 @@
 # The First Animals in Space Were Fruit Flies
 
 READING NOTES
-- Runtime is about 4 minutes at a relaxed pace, roughly 549 spoken words.
+- Runtime is about 4 minutes at a relaxed pace, roughly 550 spoken words.
 - Tone is light and curious through the fruit flies, then plain and flat for Albert II and Laika. No sad music cue, the facts carry it.
 - Say V-2 as VEE-two, Laika as LIE-kuh, Sputnik as SPUT-nik.
 - Every hedge in here is on purpose. Read "the first animals we know", "about 67 miles", "by NASA's and the Royal Observatory's accounts", "usually said to begin" and "about 83 miles" exactly as written. Don't give the altitude in kilometers or a flight time.
@@ -23,7 +23,7 @@ But first to orbit and first to reach space are two different things, right? And
 
 On February 20th, 1947, the United States launched a captured German V-2 rocket from White Sands, New Mexico, and on board were fruit flies and seeds. The point was to see what cosmic rays would do to living things, and this was part of what was called the Blossom project.
 
-By NASA's and the Royal Observatory's accounts, it went about 67 miles up. Now, space is usually said to begin at about 62 miles up, so 67 miles puts those flies past the line. And then the canister came back down by parachute, and the flies were recovered alive.
+By NASA's and the Royal Observatory's accounts, it went about 67 miles up, and space is usually said to begin at about 62 miles up, so 67 miles puts those flies past the line, right? And then the canister came back down by parachute, and the flies were recovered alive.
 
 Now, I'm saying about 67 miles on purpose. Sources don't all agree on the exact altitude, and you'll see a few different numbers out there, but most of them land around 67 or 68 miles, so about 67 is the safe way to say it. And I'm saying the first animals we know reached space on purpose too, because that's what the record shows.
 
@@ -33,7 +33,7 @@ And the monkeys came after. On June 14th, 1949, a monkey called Albert II went u
 
 ## 05 Fair Credit to Laika
 
-Now, to be fair to Laika, the first still stands. Laika was the first animal to orbit the Earth, in 1957, and that's a different and bigger thing than going straight up and coming back down. So the fair way to say it is that the fruit flies were the first animals we know reached space, and Laika was the first animal to orbit. Both of those are true, they're just not the same thing.
+Now, to be fair to Laika, the first still stands, Laika was the first animal to orbit the Earth, in 1957, and that's a different and bigger thing than going straight up and coming back down. So the fair way to say it is that the fruit flies were the first animals we know reached space, and Laika was the first animal to orbit. Both of those are true, they're just not the same thing.
 
 ## 06 Who Was First
 

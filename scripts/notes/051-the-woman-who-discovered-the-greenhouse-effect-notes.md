@@ -1,6 +1,6 @@
 # Notes: The Woman Who Discovered the Greenhouse Effect
 Research entry: 100-episode-lineup.md, heading "### 51. The Woman Who Discovered the Greenhouse Effect"
-Spoken words: 694
+Spoken words: 697
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -21,3 +21,9 @@ Plain explanation added (no new claims): the greenhouse effect glossed as some g
 Hedges kept: "a man read it for her" (not "wasn't allowed"), "we don't know why she didn't read it herself", "more rigorous" for Tyndall, "didn't discover the full mechanism", "nobody knows whether Tyndall knew about her work", "I'm not going to say he copied her", "first to show carbon dioxide traps heat and connect it to Earth's climate".
 
 Left out on purpose (unverified / keep off air in research): that she "wasn't allowed" to present because she was a woman (soften per entry); any claim Tyndall knew of or copied her work; her birth year and suffrage activity (only implied by source titles, not stated in the entry). Runs short (694 words) because the entry can't fill more without padding.
+
+## Review
+- Fact fixes: (1) the paraphrase of her quote, "if the air around the Earth had more of this gas in it", changed to "if the Earth had an atmosphere of this gas", which stays closer to her actual words ("an atmosphere of that gas"); (2) "That's the greenhouse idea" softened to "the basic greenhouse idea", in line with the entry's hedge that she did not discover the full mechanism. Arithmetic checked: 1856 to 1859 = 3.
+- Cadence fixes: 7. Joined the choppy run in section 04 ("But Foote didn't read it. Joseph Henry... read it aloud for her. And then the paper was left out... That's not a rumor, by the way.") into breaths; joined "And she didn't stop at the jars. She made the jump..." in section 03; folded the one-line paragraph about the journal into the paragraph before; joined stops in sections 01 and 05; added 1 "right?" (now 2 in 697 words).
+- Format fixes: word count updated to 697. No dashes. Under 900; the entry can't support more.
+- Remaining concerns for Gus: the title says she "discovered the greenhouse effect", which is stronger than the entry's on-air hedge ("first to show CO2 traps heat and connect it to Earth's climate"). The script itself is hedged correctly, but the title may draw "not the full mechanism" comments.

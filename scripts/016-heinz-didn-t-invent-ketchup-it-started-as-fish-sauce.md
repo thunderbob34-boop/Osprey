@@ -10,7 +10,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-The ketchup on your fries started life as fish sauce, and Heinz showed up about sixty-four years after the first tomato version. Now, Heinz is the name on the bottle, and he earned a lot of that, but he didn't invent ketchup, and he didn't invent tomato ketchup either. The word goes back to a fish sauce from southern China, the British were making ketchup out of fish and mushrooms and walnuts all through the 1700s, and a scientist in Philadelphia published a tomato ketchup recipe decades before Heinz bottled a drop.
+The ketchup on your fries started life as fish sauce, and Heinz showed up about sixty-four years after the earliest tomato recipe historians usually cite. Now, Heinz is the name on the bottle, and he earned a lot of that, but he didn't invent ketchup, and he didn't invent tomato ketchup either. The word goes back to a fish sauce from southern China, the British were making ketchup out of fish and mushrooms and walnuts in the 1700s, and a scientist in Philadelphia published a tomato ketchup recipe decades before Heinz bottled a drop.
 
 ## 02 The Heinz Version
 
@@ -20,7 +20,7 @@ But ketchup was around for a long, long time before Heinz, and for most of that 
 
 ## 03 The Fish Sauce
 
-The word ketchup traces back to a fermented fish sauce from southern China, called kê-tsiap in the Hokkien dialect. Fermented just means it was left to sit and change over time, the same basic idea behind soy sauce or yogurt. So the name of the thing on your fries comes from a sauce made from fish. That's not a joke, that's where the word comes from, and you'll find it in Smithsonian, National Geographic, NPR and History.com, all telling the same story.
+The word ketchup traces back to a fermented fish sauce from southern China, called kê-tsiap in the Hokkien dialect. Fermented just means it was left to sit and change over time, the same basic idea behind soy sauce or yogurt. So the name of the thing on your fries comes from a sauce made from fish, and that's not a joke, that's where the word comes from, and you'll find it in Smithsonian, National Geographic, NPR and History.com, all telling the same story.
 
 Now, how exactly that sauce and that word got from Asia to England isn't nailed down. The usual explanation is that British traders brought it home, and that's a reasonable guess, but nobody has the paperwork for it, so I'm not going to tell you it happened on a particular ship. What we do know is that ketchup had reached England by the early 1700s.
 
@@ -32,18 +32,18 @@ And it didn't stop at anchovies. In Britain in the 1700s, mushroom ketchup was c
 
 ## 05 The Tomato Shows Up
 
-Now here's the part that matters for Heinz. Tomatoes didn't show up in published ketchup recipes until 1812. That's the year a Philadelphia scientist named James Mease published a recipe for tomato ketchup, and that's the earliest published tomato ketchup recipe historians usually cite.
+Now here's the part that matters for Heinz. Tomatoes didn't show up in published ketchup recipes until 1812, that's the year a Philadelphia scientist named James Mease published a recipe for tomato ketchup, and that's the earliest published tomato ketchup recipe historians usually cite.
 
-And I want to be careful with that wording. It's the earliest one historians usually cite, not necessarily the first anybody ever made, because people cook things long before anybody writes them down, and there are claims floating around online about an earlier one that I couldn't confirm in any strong source. So the safe thing to say is that by 1812, tomato ketchup was in print, in America.
+And I want to be careful with that wording, it's the earliest one historians usually cite, not necessarily the first anybody ever made, because people cook things long before anybody writes them down, and there are claims floating around online about an earlier one that I couldn't confirm in any strong source. So the safe thing to say is that by 1812, tomato ketchup was in print, in America.
 
-So, 1812 for the tomato recipe, and 1876 for Heinz. That's about sixty-four years between the earliest tomato ketchup recipe historians usually cite and Heinz starting to sell his. Tomato ketchup was already a thing before Heinz ever got into it.
+So, 1812 for the tomato recipe, and 1876 for Heinz. That's about sixty-four years between the earliest tomato ketchup recipe historians usually cite and Heinz starting to sell his, so tomato ketchup was already a thing before Heinz ever got into it.
 
 ## 06 Fair Credit to Heinz
 
-Now, to be fair to Heinz, what he did really matters. He didn't invent ketchup, but he commercialized it, he standardized it, and he promoted it, and that's how one version of one sauce became the thing everybody pictures when you say the word. He sold it in glass bottles, and he was part of the push for pure food, the movement about what was actually going into the things people ate, and the Library of Congress has written about exactly that, ketchup and the pure food movement, with Heinz right in the middle of it.
+Now, to be fair to Heinz, what he did really matters. He didn't invent ketchup, but he commercialized it, he standardized it, and he promoted it, and that's how one version of one sauce became the thing everybody pictures when you say the word. He sold it in glass bottles, and he was part of the push for pure food, the movement about what was actually going into the things people ate, and the Library of Congress has written about exactly that, ketchup and the pure food movement, and Heinz is part of that story.
 
 So the fair way to put it is, Heinz didn't create ketchup, he made ketchup into a product. He took a sauce that had been fish, then anchovies, then mushrooms and walnuts and oysters, then tomato, and turned it into one thing in one bottle that everybody knows. That's a big deal, it just isn't inventing it.
 
 ## 07 Who Did It First
 
-So here's the order. The word traces back to kê-tsiap, a fermented fish sauce from southern China. Ketchup reached England by the early 1700s, Eliza Smith printed an anchovy katchup in 1727, and the British were making mushroom, walnut and oyster ketchups all through the 1700s. In 1812, James Mease published the earliest tomato ketchup recipe historians usually cite. And in 1876, about sixty-four years later, Heinz started selling his. Heinz made it famous, and he gets the credit for that, but the first ketchup didn't have a tomato in it. Somebody did it first.
+So here's the order. The word traces back to kê-tsiap, a fermented fish sauce from southern China. Ketchup reached England by the early 1700s, Eliza Smith printed an anchovy katchup in 1727, and mushroom, walnut and oyster ketchups were common in Britain in the 1700s. In 1812, James Mease published the earliest tomato ketchup recipe historians usually cite. And in 1876, about sixty-four years later, Heinz started selling his. Heinz made it famous, and he gets the credit for that, but the first ketchup didn't have a tomato in it. Somebody did it first.

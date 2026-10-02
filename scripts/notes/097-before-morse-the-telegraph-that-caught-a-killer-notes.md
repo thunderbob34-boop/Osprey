@@ -22,3 +22,9 @@ Spoken words: 746
 
 Hedges kept: "first commercial" / "first permanent commercial"; "not the first electric telegraph experiment of any kind"; "about thirteen miles"; Morse "independently"; the "cords that hanged" line attributed "as King's College London tells it"; Vail framed "as a question, not a claim".
 Left out on purpose (unverified / keep off air in research): any earlier experimental telegraphs by name (not researched); how the description was worded or what Tawell wore; Tawell's trial and execution (not in the entry beyond the quoted phrase); geography beyond Slough, Paddington and West Drayton. Before recording, check the exact wording of "the cords that hanged John Tawell" on the KCL page, as the research asks.
+
+## Review
+- Fact fixes: (1) "three months" from the 12 June 1837 patent to Vail's September 1837 demonstration is approximate (no day given); now "about three months". (2) Close "Somebody did it first, and it was two men..." dropped the entry's required hedge; now "for the first commercial telegraph it was two men...". (3) Cut the crafted "the train was fast, and the wire was faster" zinger, replaced with a plain line.
+- Cadence fixes: 3 joins. "I'll keep this plain. Tawell got on... But the police..." made one breath; "to be fair, I want to be careful here. Cooke and Wheatstone..." and "Oh, one more thing... Even the name Morse code..." joined.
+- Format fixes: word count updated 746 to 753; hedge list now includes "about three months".
+- Remaining concerns for Gus: 753 spoken words, well under the 900 floor, because the research is thin; not padded. Still check "the cords that hanged John Tawell" against the KCL page wording before recording (flagged by the research). The entry supports the Tawell telegraph being Cooke and Wheatstone's only through the KCL ("The King's invention") and Science Museum source titles, not an explicit line; it's very likely right, but it's an inference.

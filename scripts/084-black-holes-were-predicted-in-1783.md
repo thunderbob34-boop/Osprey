@@ -1,4 +1,4 @@
-# Black Holes Were Predicted in 1783
+# The 1783 Dark Star That Came Before Black Holes
 
 READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 917 spoken words.
@@ -16,7 +16,7 @@ More than two hundred years before the first black hole photo, a country parson 
 
 So here's the version most of us learned. Einstein comes up with general relativity, his theory of gravity, and in 1916 a physicist named Karl Schwarzschild works out a solution to Einstein's equations that describes what we'd now call a black hole. Then decades later, in 1967, John Wheeler popularizes the name "black hole", and the name sticks.
 
-And it's easy to see why that's the story everybody tells, right? Black holes feel like the most modern idea in physics, they feel like something that needs Einstein, and the name itself is from the 1960s. So it's natural to assume the idea is that new too. But the idea of a star whose light can't get out is a lot older than that.
+And it's easy to see why that's the story everybody tells, right? Black holes feel like the most modern idea in physics, they feel like something that needs Einstein, and the name itself is from the 1960s, so it's natural to assume the idea is that new too, but the idea of a star whose light can't get out is a lot older than that.
 
 ## 03 The Parson and the Dark Star
 
@@ -34,7 +34,7 @@ That's a really good idea, because you're finding the dark thing by watching wha
 
 ## 05 To Be Fair
 
-Now, to be fair, Michell's dark star is not the same thing as a modern black hole, and that matters. Michell was using Newton's physics and treating light as particles. A modern black hole comes out of Einstein's relativity, and it has what's called an event horizon, a boundary that nothing gets back out of, and it doesn't have a surface sitting there giving off light that just falls back in. So Michell didn't predict the modern black hole, he was the first to imagine a star too heavy for light to escape. That's the fair way to say it.
+Now, to be fair, Michell's dark star is not the same thing as a modern black hole, and that matters. Michell was using Newton's physics and treating light as particles, and a modern black hole comes out of Einstein's relativity, and it has what's called an event horizon, a boundary that nothing gets back out of, and it doesn't have a surface sitting there giving off light that just falls back in. So Michell didn't predict the modern black hole, he was the first to imagine a star too heavy for light to escape, and that's the fair way to say it.
 
 So the credit for the modern black hole really does go to Einstein's relativity and to Schwarzschild's 1916 solution, and Wheeler gave it the name people use. Those are real contributions and nobody here is taking them away.
 
@@ -44,4 +44,4 @@ And Michell wasn't completely alone either. In 1796 the scientist Pierre-Simon L
 
 So let's put it in order. In 1783 an English clergyman named John Michell sent a paper to Henry Cavendish, it was read to the Royal Society and published, and in it he described dark stars whose light could not reach us, a star as dense as the Sun but about five hundred times wider, and he even said you could find them by watching visible stars circle something you can't see. Laplace made a similar proposal in 1796. Schwarzschild worked out his solution to Einstein's equations in 1916, and Wheeler popularized the name black hole in 1967.
 
-So the idea that sounds like the most modern thing in physics was first written down in the 1700s, by a parson, using Newton's physics. Somebody did it first, and it was John Michell.
+So the first person to imagine a star too heavy for light to escape was a parson in the 1700s, using Newton's physics. Somebody did it first, and it was John Michell.

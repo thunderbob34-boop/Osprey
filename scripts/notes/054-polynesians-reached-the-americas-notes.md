@@ -1,6 +1,6 @@
 # Notes: Polynesians Reached the Americas
 Research entry: episode-research.md — "# Job 3" section, entry "### 34." (Navigation)
-Spoken words: 1091
+Spoken words: 1068 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -21,3 +21,9 @@ Spoken words: 1091
 
 Hedges kept: "around 1200", "about 1150", "about 1380", "closest to", "can't tell us who sailed to whom", researchers "can't tell where the meeting happened", "still unproven", "challenged ... and helped overturn" (not "refuted"), sweet potato dispersal idea "contested", Norse date is when trees were cut, "not necessarily the year anybody first got there". The cold open says outright that the title's "reached the Americas" is still open.
 Left out on purpose (unverified / keep off air in research): the cumal/kumara word link (unverified); "bigger than Russia" size comparison (dropped in research); "the Zenú" as the specific Native American group (corrected to coastal Colombia/Ecuador); Columbus's year (not in entry; only "almost three centuries before"). Plain explanation added: sweet potatoes come from the Americas; Papeete is in Tahiti; Aotearoa is New Zealand, Rapa Nui is Easter Island. Producer flag: the manifest title states as fact what the research marks unproven; consider "Polynesians Met the Americas" or similar.
+
+## Review
+- Fact fixes: (1) Retitled from "Polynesians Reached the Americas" to "Polynesians and Native Americans Met Before Columbus", since the research calls the direction unknown and "reached the Americas" unproven. The cold-open line quoting the old title was cut, and the reading notes now say not to ad-lib "reached the Americas" (file name and manifest title unchanged). (2) "For a long time, plenty of people in the West didn't believe..." narrowed to "some scholars in the West", since the entry names Sharp and "Western scholars like Sharp". (3) "Hōkūle'a set out to test that" changed to "sailed from Hawai'i to Tahiti", because the voyage's purpose isn't stated in the entry. (4) The mattang "how swells bend" changed to "how swells run into each other", since the entry says swell interference, not bending. (5) "You can see real ones today at the Library of Congress..." changed to "museums like the British Museum and the Met have real ones in their collections", because display isn't verified. (6) "Columbus wasn't the first to get there from either direction" changed to "wasn't the first European over there either". (7) Cut the crafted "and that was the instrument".
+- Cadence fixes: 3. The stick-chart list in 03 is now one run instead of four short sentences, the opening of 04 is one breath, and the opening of 07 is joined.
+- Format fixes: word count updated to 1,068; reading-notes hedge line rewritten for the new title.
+- Remaining concerns for Gus: "almost three centuries before Columbus" relies on 1492 (general knowledge, not in the entry) and the "around 1200" contact date. Admixture dates run to about 1380, so don't stretch it. The manifest still lists the old title.

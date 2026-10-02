@@ -1,6 +1,6 @@
 # Notes: Daguerre Didn't Take the First Photo
 Research entry: episode-research.md, "## New topic detail" section, entry "### 5." (Daguerre Didn't Take the First Photograph)
-Spoken words: 588
+Spoken words: 585
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

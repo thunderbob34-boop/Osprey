@@ -1,4 +1,4 @@
-# Notes: Franklin's Kite Came Second
+# Notes: Franklin's Kite Wasn't First
 Research entry: episode-research.md, "# Job 3" section, entry "### 51." (Electricity)
 Spoken words: 946
 

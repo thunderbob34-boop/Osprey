@@ -1,7 +1,7 @@
 # Video Games Before Pong: Tennis for Two
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 638 spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 640 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is light and a little amused. Pong isn't a villain, and the "first video game" title is a definition fight, so the script never hands it to anybody outright.
 - Say Higinbotham as HIG-in-bot-um, Brookhaven as BROOK-hay-vun, EDSAC as ED-sack, and OXO as the three letters, O-X-O.
 - Every hedge in here is on purpose. Read "one of the first", "the first built purely for fun", "Brookhaven's own history says", "built for research, not for fun" and "depends on what you count" exactly as written.
@@ -23,15 +23,13 @@ And that's the version that stuck, right? If you ask somebody where video games 
 
 So here's what happened. William Higinbotham was a nuclear physicist at Brookhaven, and Brookhaven's own history says he had worked on the Manhattan Project. And for the lab's visitors' day on October 18th, 1958, he put together a game called Tennis for Two.
 
-It ran on an analog computer, and the picture was on an oscilloscope, which is a screen scientists use to show a signal as a line or a dot moving across it. So you had a little tennis game on a lab instrument, at an open house at a nuclear lab, and according to Brookhaven, hundreds of visitors lined up to play it.
-
-Hundreds of people. Hundreds of people standing in line at a nuclear lab to play tennis on a science screen, in 1958, fourteen years before Pong.
+It ran on an analog computer, and the picture was on an oscilloscope, which is a screen scientists use to show a signal as a line or a dot moving across it. So you had a little tennis game on a lab instrument, at an open house at a nuclear lab, and according to Brookhaven, hundreds of visitors lined up to play it, hundreds of people, hundreds of people standing in line at a nuclear lab to play tennis on a science screen, in 1958, fourteen years before Pong.
 
 ## 04 Even Earlier: OXO
 
-Now, to be fair, I have to slow down here, because Tennis for Two wasn't the first computer game either. In 1952, a man named Alexander Douglas made OXO, which is tic-tac-toe, on a computer at Cambridge called EDSAC. That's six years before Tennis for Two.
+Now, to be fair, I have to slow down here, because Tennis for Two wasn't the first computer game either. In 1952, a man named Alexander Douglas made OXO, which is tic-tac-toe, on a computer at Cambridge called EDSAC, and that's six years before Tennis for Two.
 
-But OXO was built for research, not for fun. It was a computer game, but it was there to study something, not to entertain anybody. So Brookhaven's way of framing Tennis for Two is that it was one of the first, and the first one built purely for fun, and that's the way I'll say it too.
+But OXO was built for research, not for fun, so it was a computer game, but it was there to study something, not to entertain anybody. So Brookhaven's way of framing Tennis for Two is that it was one of the first, and the first one built purely for fun, and that's the way I'll say it too.
 
 ## 05 It Depends on What You Count
 

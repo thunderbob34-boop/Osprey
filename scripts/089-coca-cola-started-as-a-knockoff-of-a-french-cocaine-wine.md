@@ -16,7 +16,7 @@ Coca-Cola began as an American copy of a French wine laced with coca, one that e
 
 So here's the version most people know. In 1886, in Atlanta, a man named John Pemberton came up with a new tonic drink, and that drink became Coca-Cola, and it went on to be one of the most famous brands in the world. And a tonic, back then, was a drink sold as something that was good for you, sort of halfway between a drink and a medicine.
 
-And it's easy to see why that's the story people remember, right? Coca-Cola is huge, and when something is that big, people want it to have a simple beginning, one man, one city, one new idea. But the idea wasn't new, and it wasn't even American.
+And it's easy to see why that's the story people remember, right? Coca-Cola is huge, and when something is that big, people want it to have a simple beginning, one man, one city, one new idea, but the idea wasn't new, and it wasn't even American.
 
 ## 03 Vin Mariani
 
@@ -36,7 +36,7 @@ So the question is how closely Pemberton copied Mariani's actual recipe, as oppo
 
 And there's more, because then Atlanta changed the rules. In 1886 Atlanta adopted prohibition, which means alcohol was banned, and Pemberton's French Wine Coca was a wine, so that was a problem. So Pemberton reworked it into something without alcohol, a non-alcoholic version, and that non-alcoholic drink was Coca-Cola.
 
-So Coca-Cola, one of the most famous soft drinks there is, was what Pemberton made when Atlanta banned alcohol, and the wine it replaced was itself an imitation of a French one. And later on, Coca-Cola went on to overtake Vin Mariani, the copy ended up bigger than the original.
+So Coca-Cola, one of the most famous soft drinks there is, was what Pemberton made when Atlanta banned alcohol, and the wine it replaced was itself an imitation of a French one. And later on, Coca-Cola went on to overtake Vin Mariani.
 
 ## 06 To Be Fair
 

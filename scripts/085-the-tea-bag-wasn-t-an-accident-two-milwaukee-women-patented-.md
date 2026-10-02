@@ -1,4 +1,4 @@
-# The Tea Bag Wasn't an Accident - Two Milwaukee Women Patented It
+# Two Milwaukee Women Patented the Tea Bag Before the "Accident"
 
 READING NOTES
 - Runtime is about 5 and a half minutes at a relaxed pace, roughly 876 spoken words.
@@ -22,13 +22,13 @@ And you can see why that story gets passed around, right? It's a good little sto
 
 Now here's the part that matters. On August 26th, 1901, two women in Milwaukee, Roberta C. Lawson and Mary Molaren, filed a patent for something they called a "Tea-Leaf Holder". And a patent, if you've never dealt with one, is basically a public record that says this is my invention, here's how it works, and here's the date I brought it to the government. You file it, the patent office looks it over, and if they grant it, it gets a number and it goes on the record.
 
-Their patent was granted on March 24th, 1903, as US Patent number 723,287. And what they designed was a stitched pouch made of open-mesh fabric, meant for brewing one cup of tea, one single cup, not a whole pot. So the water gets in through the mesh, the tea brews, and the leaves stay in the pouch instead of out in your cup. So there are two dates on this, right? There's the day they filed, August 26th, 1901, and the day it was granted, March 24th, 1903, and both of those dates come before 1908. And that's a tea bag, that's a tea bag on file with the government in 1901.
+Their patent was granted on March 24th, 1903, as US Patent number 723,287, and what they designed was a stitched pouch made of open-mesh fabric, meant for brewing one cup of tea, one single cup, not a whole pot. So the water gets in through the mesh, the tea brews, and the leaves stay in the pouch instead of out in your cup. So there are two dates on this, right? There's the day they filed, August 26th, 1901, and the day it was granted, March 24th, 1903, and both of those dates come before 1908. And that's a tea bag, that's a tea bag on file with the government in 1901.
 
 ## 04 Why They Made It
 
-And they said why they made it. With loose tea, the leaves end up floating around in your cup, and they wanted to stop that, because, in their words, those floating leaves "would spoil the pleasure of the drink". That's a really plain reason, and it's a really good one. They were trying to make a cup of tea without leaves floating in it.
+And they said why they made it. With loose tea, the leaves end up floating around in your cup, and they wanted to stop that, because, in their words, those floating leaves "would spoil the pleasure of the drink". That's a really plain reason, and it's a really good one, they were just trying to make a cup of tea without leaves floating in it.
 
-So the thing in the famous story that happened by accident in 1908 was something these two women had designed on purpose, written down, and filed with the government seven years earlier, and it was granted five years before the accident story.
+So the thing in the famous story that supposedly happened by accident in 1908 was something these two women had designed on purpose, written down, and filed with the government seven years earlier, and it was granted five years before the accident story.
 
 ## 05 To Be Fair
 
@@ -40,4 +40,4 @@ And Sullivan isn't a fraud in this story either. Smithsonian Magazine says Sulli
 
 So let's put it in order. On August 26th, 1901, Roberta C. Lawson and Mary Molaren of Milwaukee filed a patent for a Tea-Leaf Holder, a stitched mesh pouch for brewing one cup, because floating leaves would spoil the pleasure of the drink. On March 24th, 1903, it was granted as US Patent 723,287. And in 1908, the story goes, Thomas Sullivan's customers dunked his silk sample pouches by accident, and Sullivan gets the credit for popularizing the tea bag.
 
-So the next time you drop a tea bag in a mug, the earliest patent for it that the usual histories cite has two women's names on it, and it wasn't an accident. Somebody did it first, and it was Roberta Lawson and Mary Molaren.
+So the next time you drop a tea bag in a mug, the earliest patent for it that the usual histories cite has two women's names on it, and it wasn't an accident. Somebody did it first, years before Sullivan, and it was Roberta Lawson and Mary Molaren.

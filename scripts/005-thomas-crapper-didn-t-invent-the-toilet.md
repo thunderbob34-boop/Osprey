@@ -14,7 +14,7 @@ Thomas Crapper's name is on every toilet joke you've ever heard, and a lot of pe
 
 ## 02 The Famous Version
 
-The famous version goes like this, a plumber named Thomas Crapper invents the flush toilet, puts his name on it, and his name becomes the slang. It's a perfect story, because the name does all the work, right? You hear Crapper and toilet in the same sentence and your brain just files it as true.
+The famous version goes like this, a man named Thomas Crapper invents the flush toilet, puts his name on it, and his name becomes the slang. It's a perfect story, because the name does all the work, right? You hear Crapper and toilet in the same sentence and your brain just files it as true.
 
 And a lot of that comes from one book. In 1969 a writer named Wallace Reyburn published a book called Flushed with Pride, and it's partly tongue-in-cheek, it's partly a joke, and it helped spread the idea that Crapper invented the toilet. So a book that was partly kidding ended up being where a lot of people's facts came from.
 
@@ -22,15 +22,15 @@ And a lot of that comes from one book. In 1969 a writer named Wallace Reyburn pu
 
 So who did it first? Well, it depends how far back you want to go, so let's start way back. The palace at Knossos, on the island of Crete, had latrines that were flushed with water and drained into stone sewers, and that's about 3,500 years ago, somewhere around 1700 to 1450 BC.
 
-Now, I want to be careful here, because you'll hear people say the Minoans had a flush toilet with roof cisterns, and that's overstated. It didn't have a cistern and a valve like a toilet in your house. The water came from rainwater channelled from the roof, and through the drains, or somebody poured water in, and either way it flushed the waste into a sewer. So it's not a modern toilet, but it's water carrying waste away, about 3,500 years ago.
+Now, I want to be careful here, because you'll hear people say the Minoans had a flush toilet with roof cisterns, and that's overstated. It didn't have a cistern and a valve like a toilet in your house, the water came from rainwater channelled from the roof, and through the drains, or somebody poured water in, and either way it flushed the waste into a sewer. So it's not a modern toilet, but it's water carrying waste away, about 3,500 years ago.
 
 And Knossos wasn't even the earliest. Homes in the Indus Valley had drained latrines even earlier, and one review says almost every house there had its own bathroom, including a lavatory. So the idea of a toilet that carries waste away with water is a lot older than Thomas Crapper, it's thousands of years older.
 
 ## 04 Harington, 1596
 
-But if you want the thing we'd actually recognise, a bowl with a tank of water behind it, the name you want is Sir John Harington. In 1596, Harington built a flushing toilet with a cistern for Queen Elizabeth I, and a cistern is just the tank, the water sits up there and when you let it go it flushes the bowl. So that's a cistern-fed bowl, a working model, built for the Queen of England, in 1596.
+But if you want the thing we'd actually recognise, a bowl fed by a tank of water, the name you want is Sir John Harington. In 1596, Harington built a flushing toilet with a cistern for Queen Elizabeth I, and a cistern is just the tank, the water sits up there and when you let it go it flushes the bowl. So that's a cistern-fed bowl, a working model, built for the Queen of England, in 1596.
 
-And he wrote about it. He described it in a pamphlet called The Metamorphosis of Ajax, so it's not some legend that got attached to him later, it's on paper, in 1596.
+And he wrote about it, he described it in a pamphlet called The Metamorphosis of Ajax, so it's not some legend that got attached to him later, it's on paper, in 1596.
 
 So that's a flushing toilet with a cistern, nearly three centuries before Thomas Crapper's patents, built for a queen, right? If anybody gets to be called the inventor of the flush toilet with a tank, it's a lot closer to Harington than it is to Crapper.
 

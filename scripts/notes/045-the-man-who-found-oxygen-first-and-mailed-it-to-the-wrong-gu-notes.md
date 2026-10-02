@@ -1,6 +1,6 @@
 # Notes: The Man Who Found Oxygen First and Mailed It to the Wrong Guy
 Research entry: 100-episode-lineup.md, heading "### 45. The Man Who Found Oxygen First and Mailed It to the Wrong Guy"
-Spoken words: 781
+Spoken words: 775
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

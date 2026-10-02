@@ -1,6 +1,6 @@
 # Notes: The Potato Chip Wasn't Invented to Spite a Millionaire
 Research entry: 100-episode-lineup.md, heading "### 28. The Potato Chip Wasn't Invented to Spite a Millionaire"
-Spoken words: 723
+Spoken words: 722
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -19,3 +19,9 @@ Spoken words: 723
 
 Hedges kept: "often named as", "the earliest known published recipe", "later editions", "about Vanderbilt specifically" ("his part of it"), "helped popularize", "nobody knows for sure"; Crum not called a fraud.
 Left out on purpose (unverified / keep off air in research): The 1849 New York Herald "Eliza, the cook" lead (unverified, mentioned only as unconfirmed leads, unnamed). Smithsonian's speculation that chips were reinvented many times (inferred). The 1889 "best cook in the country" line (the entry doesn't say who said it about whom). Legend embellishments (the diner loving the chips) not in the entry.
+
+## Review
+- Fact fixes: 2. (1) "long before anybody at Moon's Lake House got annoyed about thick fries" told the legend as if it happened; changed to "long before the Saratoga story is supposed to have happened". (2) "frying thin slices of potato" added "thin", which the 1817 first-edition wording ("potatoes fried in slices") doesn't support; changed to "frying potatoes in slices".
+- Cadence fixes: 11. Joined "Here's how the story usually goes. It's 1853..."; "too thick. So Crum..."; "here's the part that matters. Vanderbilt has..."; the Stiles concession run, and replaced its button "loses its millionaire" with a plain statement; "potatoes fried in slices. And in later editions..."; "thirty-six years before the Saratoga story. And we're going to be careful..."; "invented the chip. Smithsonian says that explicitly."; replaced the rhetorical "So where does that leave George Crum? Well..." with "Now, as for George Crum"; "a real part of this story. He didn't need..."; "here's the honest part. Nobody knows..."; the opening of the close.
+- Format fixes: word count updated 723 to 722. Length 722 is well under the 900 floor (reported; the research is narrow and the 1849 "Eliza" lead and the 1889 line stay off air, so not padded).
+- Remaining concerns for Gus: none.

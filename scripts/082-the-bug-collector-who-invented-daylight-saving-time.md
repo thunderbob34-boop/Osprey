@@ -22,9 +22,7 @@ And it's easy to see why the Franklin story stuck, because Franklin is a name ev
 
 So here's who actually came first. George Vernon Hudson was a New Zealand postal worker, and he was also an entomologist, which is a scientist who studies insects, and he was serious about it. Now here's the part that matters, he had a day job, so his insect hunting had to happen after work, and the thing you need for hunting bugs after work is daylight. He wanted more of it in the evening, he wanted more of it so he could get out and collect.
 
-So on October 16th, 1895, Hudson presented a paper to the Wellington Philosophical Society, and in it he proposed shifting the clocks two hours for the season. Two hours, not one, so his version was twice the size of the hour you lose every spring. And the way that works is simple, the sun does exactly what it was going to do anyway, but if every clock moves forward two hours, then when you walk out of work at the same time on the clock, there's two more hours of daylight left in the day. That's the whole idea of daylight saving time, and that's what Hudson put in front of the Wellington Philosophical Society in 1895.
-
-And the society ridiculed it. They didn't take the idea seriously, and they didn't take him seriously either.
+So on October 16th, 1895, Hudson presented a paper to the Wellington Philosophical Society, and in it he proposed shifting the clocks two hours for the season. Two hours, not one, so his version was twice the size of the hour you lose every spring. And the way that works is simple, the sun does exactly what it was going to do anyway, but if every clock moves forward two hours, then when you walk out of work at the same time on the clock, there's two more hours of daylight left in the day. That's the whole idea of daylight saving time, and that's what Hudson put in front of the Wellington Philosophical Society in 1895, and the society ridiculed the idea, they just didn't take it seriously.
 
 ## 04 Willett
 
@@ -34,12 +32,12 @@ But here's the difference between them, Willett campaigned, and Willett is the r
 
 ## 05 Who Switched First
 
-And there's more, because proposing it and doing it are two different things, right? Writing a paper is one thing, and getting a whole country to move every clock it has is another thing. The first country to actually adopt daylight saving time nationally was Germany, on April 30th, 1916, and that was in the middle of the First World War. So the first country to actually do it nationally did it during a war, not so anybody could go hunting bugs after work.
+And there's more, because proposing it and doing it are two different things, right? Writing a paper is one thing, and getting a whole country to move every clock it has is another thing. The first country to actually adopt daylight saving time nationally was Germany, on April 30th, 1916, and that was in the middle of the First World War.
 
 Oh, one more thing, there's a town in Ontario, Canada, called Port Arthur, which is now Thunder Bay, and it's locally claimed as the first place in the world to actually change its clocks, back in 1908. A Thunder Bay city archivist has said it may have been the first in the world, and that's about as strong as it gets. Sources don't even agree on the date, some say May 1st and some say July 1st, and the way the CBC describes it, the town switched over to Eastern time, which means it might be closer to a time-zone change than daylight saving time. So treat Port Arthur as a local claim, an interesting one, but a claim.
 
 ## 06 The Bug Collector Did It First
 
-So let's put it in order. Franklin wrote a joke about getting up early in 1784, and it wasn't about clocks. Hudson proposed moving the clocks two hours on October 16th, 1895, in Wellington, and the society he pitched it to ridiculed him. Willett came up with it on his own in 1907 and campaigned until Britain adopted it, and Germany was the first country to do it nationally in 1916.
+So let's put it in order. Franklin wrote a joke about getting up early in 1784, and it wasn't about clocks. Hudson proposed moving the clocks two hours on October 16th, 1895, in Wellington, and the society he pitched it to ridiculed the idea. Willett came up with it on his own and put out his pamphlet in 1907, and he campaigned for it and he's the reason Britain adopted it, and Germany was the first country to do it nationally in 1916.
 
 So the next time you lose that hour of sleep in the spring, the man who first proposed it was a New Zealand postal worker who wanted a little more daylight after work so he could go out and hunt insects. Somebody did it first, and his name was George Vernon Hudson.

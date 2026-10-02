@@ -1,4 +1,4 @@
-# The Supreme Court Case That Took Radio from Marconi
+# The Supreme Court Case That Struck Down Marconi's Tuning Claims
 
 READING NOTES
 - Runtime is about 5 and a half minutes at a relaxed pace, roughly 842 spoken words.
@@ -16,7 +16,7 @@ In 1943 the US Supreme Court struck down key claims of Marconi's famous radio pa
 
 So here's the version you've probably heard. Marconi invented radio, he won a Nobel Prize in 1909, and that's the end of the story. And it's easy to see why that's the version that stuck, right? Marconi is the name on the history books, he's got the Nobel Prize, and a Nobel Prize is about as official as credit gets.
 
-But there's a second version going around too, and it goes like this, the Supreme Court said Tesla invented radio. And you can see where it comes from, PBS, for its program on Tesla, has a page called "Who Invented Radio?" that walks through the 1943 ruling and Tesla's patent. But that one-line version overstates what actually happened. So this episode is about both of them, what the Court really did, and what it didn't do.
+But there's a second version going around too, and it goes like this, the Supreme Court said Tesla invented radio. And it's not made up out of nothing, there really was a ruling in 1943, and PBS, on the site for its Tesla program, has a page called "Who Invented Radio?" that walks through that ruling and Tesla's patent. But that one-line version overstates what actually happened. So this episode is about both of them, what the Court really did, and what it didn't do.
 
 ## 03 What the Court Actually Ruled
 
@@ -28,13 +28,13 @@ And that's what the Court found. It held the broad claims of Marconi's tuning pa
 
 ## 04 John Stone Stone
 
-Now here's the part that matters. The Court wrote that Stone showed antenna tuning before Marconi, Stone, not Tesla, and Tesla's patent is in there, and it matters, but the name the Court specifically wrote about showing antenna tuning first was John Stone Stone, and most of us have never heard of him.
+Now here's the part that matters. The Court wrote that Stone showed antenna tuning before Marconi, Stone, not Tesla, and Tesla's patent is in there, and it matters, but the one the Court specifically wrote about, as showing antenna tuning before Marconi, was John Stone Stone.
 
 So if you only remember one name from this ruling besides Marconi, the court record gives you a pretty good reason to make it Stone.
 
 ## 05 What It Didn't Decide
 
-Now, to be fair, this case did not decide who invented radio. It wasn't even about that. The case was about whether the United States government owed money for using Marconi's company's patents, it was about the government's liability for patent infringement, and the part about tuning covered what are called the four-circuit tuning claims. So the Court wasn't handing out a title, it was deciding whether certain claims in one patent held up.
+Now, to be fair, this case did not decide who invented radio, it wasn't even about that, the case was about whether the United States government owed money for using Marconi's company's patents, it was about the government's liability for patent infringement, and the part about tuning covered what are called the four-circuit tuning claims. So the Court wasn't handing out a title, it was deciding whether certain claims in one patent held up.
 
 And that's why "the Supreme Court said Tesla invented radio" goes too far. The Court said Tesla, and Lodge, and Stone had done key parts of Marconi's tuning patent before him. That's a big thing to say, but it's a different thing from saying Tesla invented radio.
 

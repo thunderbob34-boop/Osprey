@@ -1,23 +1,23 @@
 # Semmelweis Wasn't First: The Aberdeen Doctor Who Blamed Himself
 
 READING NOTES
-- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 908 spoken words. The research is solid but narrow, so this one runs a little short on purpose.
+- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 911 spoken words. The research is solid but narrow, so this one runs a little short on purpose.
 - Tone is calm and serious. This is about mothers dying after childbirth, so keep the voice plain and steady, and let Gordon's own words do the work. No drama on the quote.
 - Say Semmelweis as ZEM-el-vice, Ignaz as IG-nahts, puerperal as pyoo-ER-per-al, Aberdeen as ab-er-DEEN.
-- Every hedge in here is on purpose. Read "first to say doctors were spreading it", "not the first to invent handwashing", "wash and fumigate their clothes", "we don't know whether Semmelweis ever read either of them" and "didn't run a trial" exactly as written. Never say Gordon invented handwashing.
+- Every hedge in here is on purpose. Read "first to say doctors were spreading it", "not the first to invent handwashing", "wash and fumigate their clothes", "we don't know whether Semmelweis ever read either of them", "didn't run a trial", "calls Gordon the first" and "as the University of Iowa's medical library puts it" exactly as written. Never say Gordon invented handwashing.
 - Read the quote word for word: "I myself was the means of carrying the infection to a great number of women." The midwife prediction is a paraphrase, so don't put quote marks on it on screen.
 - Visuals: no images of sick or dying patients. Use the title page of Gordon's 1795 treatise, period portraits, period images of Aberdeen, Boston and Vienna, and text cards.
 - Good on-screen text moments are 1789 to 1792, 1795, the Gordon quote, Feb 13 1843, and 1847.
 
 ## 01 Cold Open
 
-Fifty years before Semmelweis, a Scottish doctor confessed in print that he had been the one carrying a deadly fever from mother to mother. Ignaz Semmelweis is the name that gets the credit for working out that doctors were spreading childbed fever and that washing stops it, and he deserves a lot of that credit, but he wasn't the first to say doctors were spreading it. That was a doctor in Aberdeen named Alexander Gordon, and the most remarkable thing about him is that he said it about himself.
+Fifty years before Semmelweis, a Scottish doctor confessed in print that he had been the one carrying a deadly fever from mother to mother. Ignaz Semmelweis is the name that gets the credit for working out that doctors were spreading childbed fever and that washing stops it, and he deserves a lot of that credit, but he wasn't the first to say doctors were spreading it. That was a doctor in Aberdeen named Alexander Gordon, and the thing that gets me about him is that he said it about himself.
 
 ## 02 The Famous Version
 
 So here's the version most people know. Childbed fever, the medical name is puerperal fever, was an infection that could hit a woman after she gave birth, and it could kill her. In Vienna in 1847, a doctor named Ignaz Semmelweis worked out that doctors were carrying it from patient to patient, and he had them wash their hands in a chlorine solution, and he had the death numbers to show it worked. And that story gets told a lot, because it's a good story, one doctor figures it out and changes medicine.
 
-And the Semmelweis part of that is real. But the idea that doctors and midwives were the ones carrying this disease from one mother to the next, that idea was in print more than fifty years earlier, in Scotland.
+And the Semmelweis part of that is real, but the idea that doctors and midwives were the ones carrying this disease from one mother to the next, that idea was in print more than fifty years earlier, in Scotland.
 
 ## 03 Aberdeen, 1789 to 1792
 
@@ -37,13 +37,13 @@ So he had the pattern, he had the cause, he had the advice to wash, and he had t
 
 And there's more, because Gordon isn't the only person who got there before Semmelweis. In Boston, on February 13th, 1843, Oliver Wendell Holmes Sr. made the same case, and he published it as The Contagiousness of Puerperal Fever. And Holmes didn't come up with it in a vacuum, he discussed Gordon and cited him. So the idea traveled, it went from Aberdeen to Boston, and it was there four years before Semmelweis in Vienna.
 
-Now, to be fair, Holmes reached his conclusion before Semmelweis, but he didn't run a trial. He made the argument, he didn't test a fix and count the results. And that difference matters for what comes next.
+Now, to be fair, Holmes reached his conclusion before Semmelweis, but he didn't run a trial, he made the argument but he didn't test a fix and count the results, and that difference matters for what comes next.
 
 ## 06 Fair Credit to Semmelweis
 
-So what did Semmelweis actually do that the other two didn't? He brought chlorinated handwashing and he brought hard death-rate data showing that it worked. Gordon told people to wash and fumigate their clothes, and Holmes made the case on paper, but Semmelweis put a specific fix in place and had the numbers to prove it, and that's a real contribution, and it's fair that his name is attached to handwashing.
+Now, what Semmelweis actually did that the other two didn't is he brought chlorinated handwashing and he brought hard death-rate data showing that it worked. Gordon told people to wash and fumigate their clothes, and Holmes made the case on paper, but Semmelweis put a specific fix in place and had the numbers to prove it, and that's a real contribution, and it's fair that his name is attached to handwashing.
 
-So the fair way to say it is that Gordon was the first to say doctors were spreading it, and Gordon was not the first to invent handwashing. Those are two different firsts, right? And one more honest thing, we don't know whether Semmelweis ever read either of them. Nobody can show that he knew about Gordon or about Holmes, so this isn't a story about somebody stealing an idea, it's a story about the same thing being worked out more than once, and the first one not being the name we remember.
+So the fair way to say it is that Gordon was the first to say doctors were spreading it, and Gordon was not the first to invent handwashing. Those are two different firsts, right? And one more honest thing, we don't know whether Semmelweis ever read either of them, we just don't know if he knew about Gordon or about Holmes, so this isn't a story about somebody stealing an idea, it's a story about the same thing being worked out more than once, and the first one not being the name we remember.
 
 ## 07 The Doctor Who Blamed Himself
 

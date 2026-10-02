@@ -1,6 +1,6 @@
 # Notes: Pliny's Glass Legend
 Research entry: episode-research.md, "# Job 3" section, entry "### 12." (Glass)
-Spoken words: 711
+Spoken words: 709 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Plain explanation added (no new claims): natron is a natural soda; what core-for
 Hedges kept: "nobody really knows"; "more than four thousand years ago" (no precise year); "by the fourteen hundreds BC"; "we can't call it impossible" / "nobody can check it"; "merchants" not "sailors"; the plausibility argument flagged as not peer-reviewed.
 
 Left out on purpose (unverified / keep off air in research): "a campfire on a beach doesn't get anywhere near hot enough" (cut as unsupported, possibly wrong); "around 2500 BCE" as a precise date (marked unverified); the Met "Heilbrunn Timeline" lead (did not surface). Also left out Pliny's fuller narrative details that aren't in the entry. Runs about 700 words because the entry is short and there is no named inventor; not padded.
+
+## Review
+- Fact fixes: (1) Section 03 "There's no strong evidence it's impossible" overstated the entry, which only says no strong source surfaced for the "not hot enough" claim; now "Nobody's turned up a strong source saying it couldn't work". (2) Section 05 "long before his merchants ever landed on that beach" treated the legend's landing as a real, datable event; now "long before Pliny ever wrote his story down".
+- Cadence fixes: 6. Joined stops in 02 (Pliny intro; natron definition folded into the merchants sentence instead of a standalone line), 03 ("Now here's the part that matters, the Corning..."; "it's a legend, and nobody can check it"); merged the one-sentence "So glass beads..." paragraph in 04; replaced the closing button with a plain line.
+- Format fixes: word count updated 711 to 709.
+- Remaining concerns for Gus: runs 709 words, well under 900 (short entry, no named inventor). The Corning "about 4,000 years ago" attribution is marked "attribution approximate" in the research, so if it goes on screen, credit it loosely. A batch note at the end of the research quarter calls items 6-12 unchecked background knowledge, but entry 12 itself says "verified 2026-10-02" and lists sources, so the entry was treated as authoritative.

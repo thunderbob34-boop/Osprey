@@ -1,10 +1,10 @@
 # The Tank Britain Rejected
 
 READING NOTES
-- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 867 spoken words. The research is solid but narrow, so this one runs a little short on purpose.
+- Runtime is about 5 to 6 minutes at a relaxed pace, roughly 886 spoken words. The research is solid but narrow, so this one runs a little short on purpose.
 - Tone is calm and fair. De Mole is the overlooked man, but the Royal Commission also found his design had no influence on the real tanks, and the script has to say that plainly.
 - Say de Mole as duh MOLE, Lancelot as LAN-suh-lot, Tritton as TRIT-un, Bovington as BOV-ing-tun, Swinton as SWIN-tun.
-- Every hedge in here is on purpose. Read "first tank prototype ever completed", "oldest surviving tank", "about six weeks", "widely quoted", "might have had a better tank, sooner" and "no evidence" exactly as written.
+- Every hedge in here is on purpose. Read "first tank prototype ever completed", "oldest surviving tank", "about six weeks", "widely quoted", "I'll give you the gist rather than the exact words", "might have had a better tank, sooner", "no evidence" and "as far as the Commission could find" exactly as written.
 - Say "about nine hundred and sixty-five pounds" and put £965 on screen. Don't use any other figure.
 - Visuals: no combat footage needed. Use photos of Little Willie at the Tank Museum, the de Mole model at the Australian War Memorial, period photos of the War Office, and text cards.
 - Good on-screen text moments are 1911, 1912, 1915, 1917, 1919, £965, and CBE 1920.
@@ -17,7 +17,7 @@ Three years before Britain built its first tank, an Australian engineer sent the
 
 So here's the version most people know. The tank is a British invention, from the First World War, and the names that go with it are William Tritton and Walter Wilson, who built Little Willie, along with Swinton, and Churchill's Landships Committee.
 
-And Little Willie really does matter. It was built in 1915, it was the first tank prototype ever completed, it never saw combat, and it's the oldest surviving tank. You can still go and see it today at the Tank Museum in Bovington, in England. So when people say Britain built the first tank, they're pointing at something real.
+And Little Willie really does matter, it was built in 1915, it was the first tank prototype ever completed, it never saw combat, and it's the oldest surviving tank. You can still go and see it today at the Tank Museum in Bovington, in England. So when people say Britain built the first tank, they're pointing at something real.
 
 ## 03 Lancelot de Mole
 
@@ -35,14 +35,14 @@ After the war, Britain set up a Royal Commission on Awards to Inventors, which w
 
 The Commission looked at de Mole's claim, and there's a line of praise from its findings that's widely quoted, so I'll give you the gist rather than the exact words, which is that if his design had been taken up, Britain might have had a better tank, sooner. That's a big thing for an official commission to say about a man the War Office had turned down, right? And there's a paper trail for his claim, the State Library of South Australia holds a letter about it in its collection.
 
-And here's the twist that cuts the other way. The same Commission found no evidence that his work had any influence on the tanks Britain actually built. So de Mole wasn't robbed of his idea, the British tank wasn't copied from him, Tritton and Wilson and the Landships Committee got there on their own. De Mole was just there first, on paper, and nobody used it.
+And here's the twist that cuts the other way. The same Commission found no evidence that his work had any influence on the tanks Britain actually built. So as far as the Commission could find, de Mole wasn't robbed of his idea, there's no evidence the British tank was copied from him, and Tritton and Wilson and the Landships Committee got there without him. De Mole was just there first, on paper, and nobody used it.
 
 ## 06 What He Got
 
-So what did de Mole get for all this? The Commission gave him about nine hundred and sixty-five pounds, and that was for his expenses. And in 1920 he was made a CBE, which is a British honour, Commander of the Order of the British Empire. So he got his costs back and an honour, and his name in the record, and that's about it.
+Now, as for what de Mole got for all this, the Commission gave him about nine hundred and sixty-five pounds, and that was for his expenses. And in 1920 he was made a CBE, which is a British honour, Commander of the Order of the British Empire. So he got money for his expenses and an honour, and his name in the record, and that's about it.
 
-Now, to be fair to Britain, the people who built Little Willie did build the first tank prototype ever completed, and they built it without de Mole's help. That's their achievement and it stands. But a few years before them, a man in Australia had the idea, drew it up and sent it in, and was told no.
+Now, to be fair to Britain, the people who built Little Willie did build the first tank prototype ever completed, and the Commission found no evidence they took anything from de Mole, so that's their achievement and it stands. But a few years before them, a man in Australia had the idea, drew it up and sent it in, and was told no.
 
 ## 07 Who Was First
 
-So the plain version is this. Lancelot de Mole, a South Australian engineer, came up with his tank in 1911 and sent the plans to the British War Office in 1912, a tracked, armored vehicle that could cross trenches, and they shelved it. Little Willie came in 1915, the first tank prototype ever completed, and it never saw combat and it still survives at Bovington. The Commission in 1919, in that widely quoted line, said Britain might have had a better tank, sooner, if his design had been taken up, and it also said his design didn't shape the tanks they built. Somebody did it first, and that somebody was Lancelot de Mole.
+So the plain version is this. Lancelot de Mole, a South Australian engineer, came up with his tank in 1911 and sent the plans to the British War Office in 1912, a tracked, armored vehicle that could cross trenches, and they shelved it. Little Willie came in 1915, the first tank prototype ever completed, and it never saw combat and it still survives at Bovington. The Commission in 1919, in that widely quoted line, said Britain might have had a better tank, sooner, if his design had been taken up, and it also found no evidence that his design shaped the tanks they built. Somebody did it first, and that somebody was Lancelot de Mole.

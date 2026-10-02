@@ -1,6 +1,6 @@
 # Notes: Sugar Was Sold as Medicine
 Research entry: episode-research.md, "# Job 3" section, entry "### 55." (Sugar)
-Spoken words: 713
+Spoken words: 701
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
