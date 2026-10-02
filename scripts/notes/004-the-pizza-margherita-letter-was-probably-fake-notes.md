@@ -15,3 +15,9 @@ Spoken words: 932
 
 Hedges kept: "probably", "likely", "Nowak thinks", "his argument, not proven", "supposedly", "sometimes tomato", "we don't know".
 Left out on purpose (unverified / keep off air in research): the journal name of Nowak's paper (from memory); the "1830s" reference (not checked); the 1866 date (later edition only); any claim that de Bourcard named the Margherita. Pre-air flag from the research: only one strong source (Nowak) was found. Cite the published Nowak article and the primary 1858 Usi e costumi text before airing.
+
+## Review
+- Fact fixes: 3. Cut "The queen loves it" from the legend (not in the entry). Replaced "There's no confession, there's no proof of who did it or when" with "Nobody has proven who did it, and nobody has proven when" (the entry says only that the Brandi forgery is Nowak's unproven hypothesis; nothing about a confession). Cold open now attributes the verdict: "a letter he thinks is probably fake" instead of stating "a letter that's probably fake" in the channel's own voice.
+- Cadence fixes: 3. Joined "...Pizza Margherita, and he found three problems with it", "the name it's addressed to, it's addressed using his wife's surname", and "described the pizzas of Naples, and he described pizzas topped with...".
+- Format fixes: word count updated to 932; "he thinks is probably fake" added to the hedge list. Title checked: "Probably Fake" carries the entry's own hedge, and the research calls the forgery case "fairly strong (but argued)", so it stays, though it could also be attributed ("A Historian Says...") if Gus wants it extra safe.
+- Remaining concerns for Gus: the research's own pre-air flag stands. Only one strong source (Nowak) supports the letter analysis, and the 1858 Rocco text has Italian secondary sources only. Get the published Nowak article and the Usi e costumi text before airing. Length is 932 words, short of target, not padded.

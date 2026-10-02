@@ -17,3 +17,9 @@ Spoken words: 915
 
 Hedges kept: "sold it as his own", "a folk version" / "folk descendant", "stole is NPR's word", "about thirty years", "it's not as simple as Darrow ... copying her board".
 Left out on purpose (unverified / keep off air in research): Parker Brothers buying Magie's patent, reportedly for $500 (not re-verified). Any claim that Darrow copied her board directly. Henry George is not named because the entry only says "Georgist".
+
+## Review
+- Fact fixes: none. The patent number, 1904, 1924, 1935, the Georgist purpose, the folk-version chain and the attributed NPR "stole" all match the entry, and $500 stays out.
+- Cadence fixes: 2. Joined "you'd recognise it, it had a square track..." (03). In 04, joined "think about that for a second, the world's most famous game..." and cut the crafted button "It started as a warning, and it ended up as the thing it was warning about."
+- Format fixes: word count updated to 915. Title checked: it matches the entry's own heading ("Monopoly Was Invented by a Woman 30 Years Earlier"), and the script carries the "folk descendant" nuance, so it stays.
+- Remaining concerns for Gus: the pronunciation of Magie is unconfirmed (already flagged in the reading notes). Length is 915 words, short of target, not padded.

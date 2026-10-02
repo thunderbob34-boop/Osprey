@@ -18,3 +18,9 @@ Spoken words: 924
 
 Hedges kept: "about 3,500 years ago", "about 1700 to 1450 BC", "may come from", "partly tongue-in-cheek", "one review", "even earlier".
 Left out on purpose (unverified / keep off air in research): "roof cisterns" at Knossos (overstated); a hard 1700 BC date; the Indus Valley c. 2600 BCE date (inferred only); Richmond Palace (search extract only, not needed). No claim about Crapper's nationality, which the entry doesn't give.
+
+## Review
+- Fact fixes: 2. "a plumber named Thomas Crapper" became "a man named Thomas Crapper" (the entry calls him a sanitary engineer, never a plumber). "a bowl with a tank of water behind it" became "a bowl fed by a tank of water" (the entry says cistern-fed bowl and doesn't say where the tank sat).
+- Cadence fixes: 2. Joined "like a toilet in your house, the water came from rainwater..." (03) and "he wrote about it, he described it in a pamphlet..." (04).
+- Format fixes: word count updated to 924. Title checked against the entry ("Crapper ... didn't invent the toilet"), stays.
+- Remaining concerns for Gus: the entry marks Indus Valley drained latrines as "Inferred", but its own on-air version includes them, so they stay with "even earlier" and "one review says". Most sources are tagged "search extract" in the research. Length is 924 words, short of target, not padded.

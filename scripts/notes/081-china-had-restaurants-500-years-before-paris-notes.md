@@ -1,6 +1,6 @@
-# Notes: The First Restaurants Were in China
+# Notes: China Had Restaurants 500 Years Before Paris
 Research entry: episode-research.md — "# Job 3" section, entry "### 63." (Restaurant)
-Spoken words: 785
+Spoken words: 784
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -20,3 +20,9 @@ Spoken words: 785
 Hedges kept: "the usual story", "no contemporary evidence" (not "never existed"), "around 1766, and some sources give 1767", "the first documented restaurateur", "by 1235", "more than five hundred years", "he argues", "the way historians put it ... in every way that matters", "the date we can actually stand on is 1235".
 Left out on purpose (unverified / keep off air in research): the singing waiters memorizing 20-dish orders (unverified); Freeman's "true cuisine" argument (seen only via Wikipedia); Gernet's restaurant passages (not seen); Meng Yuanlao's Kaifeng memoir content (not verified); "about 600 years" and "12th-century" dates (Kaifeng restaurants are inferred, so the script uses 1235 and says anything earlier is a guess); the detail about restaurants set up for southerners unused to northern food (left out to avoid garbling it); the hook's "early-1700s" narrowed to "1700s" to match the entry.
 Note: runs short (about 5 minutes) rather than padding.
+
+## Review
+- Fact fixes: (1) Retitled from "The First Restaurants Were in China" to "China Had Restaurants 500 Years Before Paris": the research only compares Song China with Paris and never establishes that China was first anywhere. (2) Cold open "the evidence for Boulanger's shop isn't there" was stronger than the entry; now "a historian who went looking found no contemporary evidence for Boulanger's shop". (3) Jim Chevallier was called a "food historian", which the entry doesn't say; now "who writes the Paris Food History blog" (the entry rates that source medium strength). (4) "the way historians put it" changed to "historians argue", the entry's exact hedge.
+- Cadence fixes: 1 (the "in every way that matters" sentence and the list after it are now one breath).
+- Format fixes: word count changed from 785 to 784. The hedge list named "the usual story" and "more than 500 years", which aren't the script's wording; it now lists "the version you'll usually hear", "more than five hundred years", "some sources give 1767", "historians argue" and "the date we can actually stand on".
+- Remaining concerns for Gus: runs short at 784 words, which is fine. The filename still carries the old title "the-first-restaurants-were-in-china".

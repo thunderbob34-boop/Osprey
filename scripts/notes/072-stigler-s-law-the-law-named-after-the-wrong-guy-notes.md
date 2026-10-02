@@ -1,6 +1,6 @@
-# Notes: Stigler's Law: Why Nothing Is Named After Who Found It First
+# Notes: Stigler's Law: The Law Named After the Wrong Guy
 Research entry: 100-episode-lineup.md — heading "### 72. Stigler's Law: Why Nothing Is Named After Who Found It First"
-Spoken words: 939
+Spoken words: 896
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -20,3 +20,9 @@ Spoken words: 939
 
 Hedges kept: "tongue-in-cheek", "it's a joke law", "published first" (not "stole"), Kragh's "bad history", "a table of Pythagorean triples", "some researchers read it as early trigonometry, but that reading is debated", "roughly 1822 to 1762 BCE", "more than a thousand years".
 Left out on purpose (unverified / keep off air in research): the title of Merton's 1957 paper (inferred from secondary sources only); any claim that Hubble stole or copied; Hubble's first name and any detail of his 1929 work (not in the entry); any detail on de Moivre or the Chinese comet records beyond the names. The IAU vote is described as a recommendation, not a rename.
+
+## Review
+- Fact fixes: (1) cold open said Stigler was "the first person" to say the idea wasn't his, a superlative the entry doesn't support; now just "Stigler himself said the idea was really Robert Merton's". (2) Cut the counterfactual "if it had been called Merton's Law it would've broken its own rule... made it come true the day it was published" (an invented inference); now the joke is stated plainly: the idea was Merton's, the name is Stigler's. (3) "the examples I used at the start of this video" corrected to "earlier" (they're in section 02). (4) Title retitled from "Why Nothing Is Named After Who Found It First" to "The Law Named After the Wrong Guy", because the research says the law is tongue-in-cheek, not a finding, so the title shouldn't state it as fact.
+- Cadence fixes: 3. "Now, to be fair, it's a joke law" was a misused concession (4th "to be fair") and is now "Now, I should say this up front, it's a joke law"; removed the crafted "made it come true the day it was published" button; replaced the closing "that's what this channel is about" button with a plainer last line.
+- Format fixes: word count 939 changed to 896 after edits; "about" in the hedge list (not used as a hedge) changed to "roughly", which is used.
+- Remaining concerns for Gus: under 900 words (896) after cuts; not padded. The filename still carries the old title. The de Moivre and Halley's Comet lines rest on one bare line in the research ("Also in this batch"), so they stay as name-checks only.

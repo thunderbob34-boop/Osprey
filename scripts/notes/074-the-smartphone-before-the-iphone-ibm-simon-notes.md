@@ -1,6 +1,6 @@
 # Notes: The Smartphone Before the iPhone: IBM Simon
 Research entry: 100-episode-lineup.md — heading "### 74. The Smartphone Before the iPhone: IBM Simon"
-Spoken words: 795
+Spoken words: 792
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 795
 Hedges kept: "widely considered the first smartphone", "about $900", "about an hour", "about six months", "roughly 50,000", "according to TIME's look back", "nobody knows the exact sales", "depends on how you define a smartphone".
 Left out on purpose (unverified / keep off air in research): the manifest hook's "same year as the first PlayStation" (not in the research entry, so not used); any Apple or iPhone details beyond the 2007 date and the popular credit; any explanation of why the Simon failed (the entry gives no cause, so the script says "whatever the reasons were"); calling it "the first smartphone" without the hedge.
 Note: runs short (about 5 minutes). The entry is thin and the brief says not to pad.
+
+## Review
+- Fact fixes: (1) Cut "$1,100 without [a contract]": the entry lists a "$1,100/$900 price" but never says which price went with which terms. (2) Closing credit "it was IBM" changed to "IBM and BellSouth", matching the entry's IBM/BellSouth credit. (3) "it was made by IBM" changed to "it came from IBM" (section 03 already says IBM worked with BellSouth).
+- Cadence fixes: none needed; it already reads in one-breath paragraphs with natural repetition ("An hour of battery. An hour of battery on a phone...").
+- Format fixes: word count changed from 795 to 792.
+- Remaining concerns for Gus: runs short at 792 words, which is fine; not padded. The manifest hook ("same year as the first PlayStation") isn't in the research and stays out.

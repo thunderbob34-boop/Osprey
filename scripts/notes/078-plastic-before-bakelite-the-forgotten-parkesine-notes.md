@@ -1,6 +1,6 @@
 # Notes: Plastic Before Bakelite: The Forgotten Parkesine
 Research entry: 100-episode-lineup.md — heading "### 78. Plastic Before Bakelite: The Forgotten Parkesine"
-Spoken words: 720
+Spoken words: 714
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -20,3 +20,9 @@ Spoken words: 720
 Hedges kept: "first man-made plastic", "semi-synthetic", "first fully synthetic plastic" (Bakelite only), "according to Britannica ... though other sources give different dates", "by the museum's own record", "widely called".
 Left out on purpose (unverified / keep off air in research): calling Parkesine "the first fully synthetic plastic" (the Science Museum wording the entry says not to repeat); any detail of Baekeland's chemistry or career (not in the entry); any account of why Parkes's business failed beyond expensive, cracked and flammable. The bronze medal is single-sourced (Science Museum); it is kept but explicitly attributed to the museum's record. Cut that sentence if you want zero single-source lines.
 Note: runs short (about 4 and a half minutes). The entry is thin and the brief says not to pad.
+
+## Review
+- Fact fixes: (1) The medal is held by the "Science Museum Group" (the entry's source), not specifically "the Science Museum in London". (2) Cut "so somebody at that exhibition noticed what he'd brought", an unsupported inference from a single-source medal. (3) "treated with acid" changed to "chemically treated": nitrocellulose chemistry isn't in the entry, so the plain explanation is kept generic.
+- Cadence fixes: 1 ("So the fair way to put it is this. Parkesine..." is now one breath).
+- Format fixes: word count changed from 720 to 714; "widely called" added to the hedge list.
+- Remaining concerns for Gus: runs short at 714 words, which is fine; not padded. The bronze medal is still single-source (Science Museum Group) and is attributed on air; cut it for zero single-source lines. The section 04 aside that "one museum page" calls Parkesine fully synthetic only mentions that wording to correct it. Cut it if you'd rather not point at the Science Museum at all.

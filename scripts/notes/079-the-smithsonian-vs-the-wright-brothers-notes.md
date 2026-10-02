@@ -1,6 +1,6 @@
 # Notes: The Smithsonian vs. the Wright Brothers
 Research entry: episode-research.md — "# Job 3" section, entry "### 32." (Flight)
-Spoken words: 944
+Spoken words: 943
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -21,3 +21,9 @@ Spoken words: 944
 
 Hedges kept: "as the family later told it", "reportedly" (Dayton Daily News and Journal coverage, editor brushing it off in the recap), "a Wright rival's 1914 tests" / "engineers who were in a patent fight with the Wrights", "Whitehead's supporters say", "claimed", "disputed", "by the mainstream view".
 Left out on purpose (unverified / keep off air in research): Glenn Curtiss's name as the 1914 tester (not in the extracts, marked unverified); the 747 wingspan comparison (not re-checked this pass); the Norfolk Virginian-Pilot scoop (dropped in the research); Fred C. Kelly's 1943 biography as a source (not seen); any detail about Langley himself or whether the Aerodrome flew before 1903 (not in the entry); the name of the historian behind Connecticut's move (not in the entry).
+
+## Review
+- Fact fixes: (1) Cold open "for years afterward the Smithsonian gave the credit" implied it started right after 1903; the entry ties the Aerodrome label to the 1914 tests, so "afterward" was dropped. Arithmetic checked: 14 Aug 1901 to 17 Dec 1903 is "more than two years".
+- Cadence fixes: 1 ("So think about that for a second. The tests..." is now one breath).
+- Format fixes: word count changed from 944 to 943. The hedge list named "a Wright rival's 1914 tests", which isn't in the script; it now lists the actual wording ("a Wright rival", "a rival's 1914 tests", "engineers who were in a patent fight with the Wrights").
+- Remaining concerns for Gus: The entry doesn't explicitly date Connecticut's legislation; the script says Jane's acted "in 2013" and Connecticut "passed legislation", which is fine as written, so don't add a year for Connecticut on screen.

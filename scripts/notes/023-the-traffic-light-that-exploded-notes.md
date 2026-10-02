@@ -27,3 +27,6 @@ Left out on purpose (unverified / keep off air in research): Any claim the const
 - Cadence fixes: 5. Joined "Here's the version most people know. In 1923..." and "here's where it goes wrong. The lamps..." and "here's the plain version. The first..." into single breaths; cut the tag "and that's close enough for anybody"; replaced the crafted closer "a railway engineer with a set of gas lamps" with the plain "it was John Peake Knight in London".
 - Format fixes: word count updated 903 to 898. Length is 898, two words under the 900 floor (reported, not padded).
 - Remaining concerns for Gus: the open item stands. The explosion and the "blew up in a policeman's face" detail rest on Smithsonian Magazine only; the research asks for a second outlet (Westminster green plaque list or a London newspaper archive) before recording.
+
+## Source check, 2026-10-02 (main session)
+- **Gas-signal explosion: second source found.** The IET's Savoy Place "100 Ideas: Traffic signals" (https://savoyplace.theiet.org/100-ideas-gallery/100-ideas/traffic-signals/) and Smithsonian Magazine both cover the 9 Dec 1868 signal outside Parliament and the explosion less than a month later that badly burned the operator. The "as Smithsonian Magazine tells it" hedge can stay or go; the claim now has two sources.

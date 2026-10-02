@@ -19,3 +19,9 @@ Spoken words: 931
 
 Hedges kept: "first known European", "Norse", "a year when wood was cut", "may have been older", "short-lived", "the sagas, not the wood".
 Left out on purpose (unverified / keep off air in research): Leif Erikson's name on the 1021 date; any founding date or length of stay; overlap material on Polynesian navigation and ships (entry says keep this one about the discovery claim). Researchers' individual names left out of the voice to keep it simple (Kuitems, Dee et al. are in the entry if wanted on screen).
+
+## Review
+- Fact fixes: none. Every date, number and the Nature quote match the entry, the "first European" and Leif Erikson hedges are in place, and 1492 - 1021 = 471.
+- Cadence fixes: 3. The cold open's "Not roughly when, not sometime around..." fragment now runs on from the sentence before it. "The trick is finding that one ring, and in the year 993..." is joined. The stacked "Three trees, the same year, 1021. That's..." is now one breath.
+- Format fixes: word count updated to 931. Title checked, stays.
+- Remaining concerns for Gus: the close says "about four hundred and seventy years" while the rest of the script says 471. Both are supported (the entry uses "about 470" too), but a viewer may notice. Length is 931 words, short of target, not padded.

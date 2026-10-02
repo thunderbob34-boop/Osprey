@@ -979,7 +979,7 @@ Each entry gives the planned fun fact, the verdict, the corrected on-air line, w
 
 #### Batch notes
 
-\* Episodes 30–39 are from model knowledge only. They were NOT web-verified because the session WebSearch budget was used up (200/200). Re-check before the scripts lock.
+\* (Superseded: episodes 30–39 were re-verified against sources on 2026-10-02; see each entry.) Originally: episodes 30–39 were from model knowledge only. They were NOT web-verified because the session WebSearch budget was used up (200/200). Re-check before the scripts lock.
 
 ---
 

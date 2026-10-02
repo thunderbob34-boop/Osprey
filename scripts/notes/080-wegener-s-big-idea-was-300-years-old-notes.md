@@ -1,6 +1,6 @@
 # Notes: Wegener's Big Idea Was 300 Years Old
 Research entry: 100-episode-lineup.md — heading "### 80. Wegener's Big Idea Was 300 Years Old"
-Spoken words: 720
+Spoken words: 687
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 720
 Hedges kept: "suggested", "guessed from the shape of the coasts", "first to notice, not first to prove", "a forerunner", "we don't know what Snider-Pellegrini thought pushed them apart", "widely taught".
 Left out on purpose (unverified / keep off air in research): the claim that Snider-Pellegrini credited Noah's flood (not verified this pass, not mentioned at all); any detail on Bacon or Franklin beyond their names (the entry gives none, so no first names); anything about later plate tectonics or how Wegener's idea was received (not in the entry).
 Note: runs short (about 4 and a half minutes). The entry is thin and the brief says not to pad.
+
+## Review
+- Fact fixes: (1) "a Flemish mapmaker who looked at his own maps" was unsupported; now "looked at a world map", matching his quote. (2) "the next big one is Antonio Snider-Pellegrini" implied a ranking the entry doesn't give (IRIS lists Bacon and Franklin in between); now "one of them is". (3) Cut the analogy "Wegener and continental drift go together the way Edison and the lightbulb do", which slipped in an outside claim.
+- Cadence fixes: 1. Removed the crafted closing button "First to notice and first to build the case are two different things, and the second one is Wegener's", which repeated the line before it.
+- Format fixes: word count changed from 720 to 687; "widely taught" added to the hedge list.
+- Remaining concerns for Gus: runs short at 687 words, the shortest in this batch. Not padded, but you might pair it with another episode or accept a roughly 4.5-minute runtime. The title is kept: Ortelius (1596) is 316 years before Wegener (1912).

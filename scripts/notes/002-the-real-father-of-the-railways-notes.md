@@ -21,3 +21,9 @@ Spoken words: 999
 
 Hedges kept: "about seventy", "nearly ten miles", "nearly five miles an hour", "first known", "the story goes" (wager), "counted as", "largely".
 Left out on purpose (unverified / keep off air in research): the run's duration (sources vary); which rival ironmaster took the bet; Stephenson's Blücher (1814) and Trevithick's 1801 "Puffing Devil" (not re-checked); the Coalbrookdale engine (unknown). Also no claim that Locomotion No. 1 was a Stephenson engine, since the entry doesn't say so.
+
+## Review
+- Fact fixes: 2. Removed "He died so poor that" (the entry gives poverty and the funeral as two facts, not cause and effect) and restated it as the entry does. Changed "the man who ran the first known steam locomotive on rails" to "the man behind the first known railway journey by steam locomotive", matching the entry's wording (the entry lists his Coalbrookdale engine's rail status as unknown).
+- Cadence fixes: 5. Joined choppy stops in the cold open ("it wasn't a Stephenson engine, it was built by..."), 02 ("goes like this, on September 27th..."), 04 ("it's a big one, the engine was so heavy..."), 06 (death and funeral now one breath); folded the "Not the first one people remember..." fragment into the sentence before it.
+- Format fixes: word count updated to 999. Title checked: "The Real Father of the Railways" is Museum Wales's own phrase, which the script attributes, so it stays.
+- Remaining concerns for Gus: none. Length is 999 spoken words, under the 1,200 target but inside the allowed range; not padded.

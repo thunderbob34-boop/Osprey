@@ -1,6 +1,6 @@
 # Notes: Submarines Before the Submarine
 Research entry: 100-episode-lineup.md — heading "### 77. Submarines Before the Submarine"
-Spoken words: 817
+Spoken words: 818
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -19,3 +19,9 @@ Spoken words: 817
 Hedges kept: "around 1620", "reportedly" (depth, route, King James watching), "later accounts", "one of the earliest submarines we know about", "it wouldn't bite" (no cause given), "earlier submarines, not the real inventors".
 Left out on purpose (unverified / keep off air in research): the manifest hook's "hand-cranked wooden egg" (not in the entry) and "125 years ahead of schedule" (the entry's dates give 124 years to the 1900 commissioning, so the script says 124); the cause of the screw failure (copper sheathing vs an iron fitting, disputed); calling Drebbel's boat "the first submarine" or "first practical submarine"; Drebbel's design details (unknown).
 Note: runs a bit short (about 5 and a half minutes) rather than padding.
+
+## Review
+- Fact fixes: none. Every date, name and figure matches the entry, and 1776 to 1900 is 124 years. The hedges ("reportedly", "later accounts", "wouldn't bite" with no cause given, "one of the earliest", "earlier submarines") are all present.
+- Cadence fixes: 1 small one ("one man in a one-man submarine" now "a little one-man submarine"). The rest already reads as joined breaths with natural repetition beats.
+- Format fixes: word count changed from 817 to 818.
+- Remaining concerns for Gus: runs short at 818 words, which is fine; not padded.

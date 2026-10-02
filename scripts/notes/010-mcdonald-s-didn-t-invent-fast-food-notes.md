@@ -21,3 +21,9 @@ Spoken words: 1022
 
 Hedges kept: "usually called", "often considered", "according to the company", "widely credited", "one of the first", "reportedly", "about eighty ... that we know of", "nearly two thousand years ago".
 Left out on purpose (unverified / keep off air in research): calling Red's flatly "the first" drive-through; Yoshinoya as an independently confirmed fact; the Song-dynasty material (unchecked); the "Diner" topic folded into this one in Job 4 was not drawn on.
+
+## Review
+- Fact fixes: 3. The close's "White Castle, seventeen years before Speedee" became "twenty-seven years before Speedee" (White Castle opened in 1921 and Speedee came in 1948; seventeen years only works from the 1931 store count). The Automat's June 9th date is now hedged as "the opening date usually given" (the entry says "opening date given as 9 June"). "fully dug out in just the last few years" became "only fully dug out in 2020" (2020 is six years back, and the entry dates it to 2020).
+- Cadence fixes: 2. Joined "from Berlin, and the company that built them was called Quisisana" (04) and "this is the oldest one, nearly two thousand years ago..." (06).
+- Format fixes: word count updated to 1,022; the hedge list now includes "which is the opening date usually given". Title checked, stays.
+- Remaining concerns for Gus: the Pig Stand 1931 window and Yoshinoya rest on weak sources, and both are hedged on air. Length is 1,022 words, short of target, not padded.

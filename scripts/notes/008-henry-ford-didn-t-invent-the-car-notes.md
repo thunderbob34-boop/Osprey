@@ -19,3 +19,9 @@ Spoken words: 949
 
 Hedges kept: "about every 93 minutes", "about twelve and a half hours", "an early assembly line", "considered", "in 1913" (no chassis month), "disputed" (Marcus), "on one dating".
 Left out on purpose (unverified / keep off air in research): the exact chassis-line date (August vs 7 Oct 1913); the claim that Nazi-era censorship muddied the Marcus record (not re-checked); Daimler and Maybach's 1886 motor carriage (not re-checked).
+
+## Review
+- Fact fixes: none. The Benz date and patent number, Ford at 22, Cugnot 1769/1770, Olds 1901, the NMAH quote, the 1913 phase-in with no chassis month, 93 minutes vs 12.5 hours, and the Marcus dispute all match the entry. 1886 - 1769 = 117 ("more than a century") checks out.
+- Cadence fixes: 2. Joined "They made the line move, and they phased it in..." and "look at what that did, under the old stationary method..." (06).
+- Format fixes: word count updated to 949. Title checked, stays.
+- Remaining concerns for Gus: the meatpacking line describes an animal carcass being taken apart. It's plain and brief, but keep the visual note (no slaughterhouse imagery). Length is 949 words, short of target, not padded.
