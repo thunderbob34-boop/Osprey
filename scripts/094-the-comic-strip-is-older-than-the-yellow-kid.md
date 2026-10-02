@@ -1,10 +1,10 @@
 # The Comic Strip Is Older Than the Yellow Kid
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 839 spoken words. The research is short, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 844 spoken words. The research is short, so this one runs short rather than padded.
 - Tone is light and a little amused. Outcault isn't a villain, he gets real credit for the first successful newspaper comic strip.
 - Say Rodolphe Töpffer as roh-DOLF TUHP-fer, Histoire de Mr. Vieux Bois as ee-STWAHR duh muh-SYUR vyuh BWAH, Les Amours as layz ah-MOOR, Mr. Jabot as muh-SYUR zhah-BOH, Outcault as OUT-kawlt, and Obadiah Oldbuck as oh-buh-DYE-uh OLD-buck.
-- Every hedge in here is on purpose. Read "the first successful newspaper comic strip", "the comic strip form", "albums, books", "that's their headline, their claim", "I think the reason the credit stuck", "as opposed to the newspaper strip" and "unauthorized" exactly as written.
+- Every hedge in here is on purpose. Read "the first successful newspaper comic strip", "the comic strip form", "albums, books", "that's their headline, their claim", "I think the reason the credit stuck", "as opposed to the newspaper strip", "the name historians usually start with" and "unauthorized" exactly as written.
 - Don't call Oldbuck "the first comic in America" as our own claim. It's Princeton's claim and the script attributes it.
 - Visuals: Töpffer's pages and the Brother Jonathan Oldbuck pages are public domain and great on screen. Use a Yellow Kid panel for the famous version.
 - Good on-screen text moments are 1827, 1833, 1837, 1841, 1842, 1894, 1895, and "53 years."
@@ -39,4 +39,4 @@ What Töpffer did was the comic strip form, telling a story in a sequence of dra
 
 ## 06 Who Did It First
 
-So here's the plain version. Richard Outcault's the Yellow Kid, first in Truth magazine in 1894 and then in the New York World in 1895, was the first successful newspaper comic strip. But a Geneva schoolmaster named Rodolphe Töpffer was drawing picture stories in 1827 and publishing them from 1833, and a pirated English version of one of them was sold in the United States in 1842 as The Adventures of Mr. Obadiah Oldbuck. Somebody did it first, and for the comic strip form, as opposed to the newspaper strip, that was a schoolteacher in Geneva, and Americans were reading a pirated copy of his work in 1842.
+So here's the plain version. Richard Outcault's the Yellow Kid, first in Truth magazine in 1894 and then in the New York World in 1895, was the first successful newspaper comic strip. But a Geneva schoolmaster named Rodolphe Töpffer was drawing picture stories in 1827 and publishing them from 1833, and a pirated English version of one of them was sold in the United States in 1842 as The Adventures of Mr. Obadiah Oldbuck. Somebody did it first, and for the comic strip form, as opposed to the newspaper strip, the name historians usually start with is a schoolteacher in Geneva, and Americans were reading a pirated copy of his work in 1842.

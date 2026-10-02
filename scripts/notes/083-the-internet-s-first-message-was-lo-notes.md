@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): Kleinrock's 1961-62
 - Searched: none (search budget spent on higher-risk claims elsewhere in the batch).
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): 29 Oct 1969, about 10:30 p.m., Kline at UCLA's SDS Sigma 7 and Duvall at SRI's SDS 940, "lo" then crash, login about an hour later (all match Kleinrock's own account); Baran's 1964 eleven-volume "On Distributed Communications"; Davies 1965, coined "packet", published 1966-67, learned of Baran afterwards; NPL Mark I network running by about 1970; CYCLADES/Pouzin datagram and Cerf's citation; Berners-Lee March 1989. All match standard scholarship; nothing found to change.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: title says "Internet's" where strictly it is ARPANET (already flagged; script says "internet's ancestor" throughout); "usually gets called the first internet" is loose; Kleinrock's 1961-64 queuing work is the main rival packet-switching claim, covered by "still argued over".

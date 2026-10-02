@@ -1,7 +1,7 @@
 # Television Was Patented in 1884 by a Broke Student
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 777 spoken words. The research is short, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 776 spoken words. The research is short, so this one runs short rather than padded.
 - Tone is calm and curious. Baird, Farnsworth and Zworykin all get real credit, and Nipkow gets credit for the idea, not for building a television.
 - Say Paul Nipkow as POWL NIP-koh, Zworykin as ZVOR-ih-kin, Elektrisches Teleskop as eh-LEK-trish-es tay-lay-SKOHP, Fernsehsender as FAIRN-zay-zen-der, and IEEE as eye-triple-E.
 - Every hedge in here is on purpose. Read "according to the German Patent Office", "one may assume", "probably never built", "a concept" and "according to the Early Television Museum" exactly as written.
@@ -11,7 +11,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-People have argued for decades over who invented television, John Logie Baird or Philo Farnsworth or Vladimir Zworykin, and it's been a long-running credit fight. But underneath all three of them there's a student in Berlin named Paul Nipkow, who patented the basic idea in 1884, more than forty years before anyone saw a TV picture. Now, to be fair, Nipkow patented an idea, he probably never built one, but the idea is the one that the first working television was built around.
+People have argued for decades over who invented television, John Logie Baird or Philo Farnsworth or Vladimir Zworykin, and it's been a long-running credit fight. But underneath all three of them there's a student in Berlin named Paul Nipkow, who patented the basic idea in 1884, more than forty years before the first working television. Now, to be fair, Nipkow patented an idea, he probably never built one, but the idea is the one that the first working television was built around.
 
 ## 02 The Credit Fight
 
@@ -45,4 +45,4 @@ And according to the Early Television Museum, in 1935 there was a television sta
 
 ## 07 Who Did It First
 
-So here's the plain version. Baird gets the credit for the first working television, in 1926, and Farnsworth and Zworykin get credit for electronic television in 1927 and 1928, and all three of them earned it. But the first patent for a TV-like system went to a student in Berlin named Paul Nipkow, for a spinning disk that broke a picture into points, an idea that came to him on Christmas Eve, 1883. Somebody did it first, and in this case he did it on paper, more than forty years before anybody saw a picture.
+So here's the plain version. Baird gets the credit for the first working television, in 1926, and Farnsworth and Zworykin get credit for electronic television in 1927 and 1928, and all three of them earned it. But the first patent for a TV-like system went to a student in Berlin named Paul Nipkow, for a spinning disk that broke a picture into points, an idea that came to him on Christmas Eve, 1883. Somebody did it first, and in this case he did it on paper, more than forty years before the first working television.

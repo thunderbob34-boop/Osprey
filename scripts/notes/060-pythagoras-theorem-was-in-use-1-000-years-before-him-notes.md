@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): the 2017 UNSW "firs
 - Searched: YBC 7289, c. 1800 to 1600 BCE, root 2 correct to about six decimal places; the MAA/Yale write-up says the scribe was likely a student who copied the value rather than computing it → https://old.maa.org/press/periodicals/convergence/the-best-known-old-babylonian-tablet ; Historia Mathematica paper confirmed → https://www.sciencedirect.com/science/article/pii/S0315086022000477
 - Fixes: (1) "worked out to about six decimal places" → "accurate to about six decimal places"; "the scribe got a really, really accurate answer" → "the number on it is really, really accurate"; 06 "working out the square root of 2" → "writing down the square root of 2", since the scribe probably copied the value. Word count 707 → 706.
 - Not search-verified (checked against research/knowledge only): Pythagoras c. 570 to 495 BCE, no surviving writings, attribution centuries later.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Plimpton 322's rows give two of the three numbers in each triple (short side and diagonal) plus a ratio column, so "those rows are Pythagorean triples" is the standard simplification, not a literal description.

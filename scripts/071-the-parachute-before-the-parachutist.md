@@ -1,10 +1,10 @@
 # The Parachute Before the Parachutist
 
 READING NOTES
-- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 816 spoken words. The research is short, so this one runs short on purpose.
+- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 837 spoken words. The research is short, so this one runs short on purpose.
 - Tone is calm and a little amused at the 2000 jump, but say the cutaway plainly, it was a safety call, not a failure.
-- Say Garnerin as gar-neh-RAN, Parc Monceau as park mon-SO, Vrančić as VRAN-chich, Veranzio as veh-RAN-tsee-oh, Machinae Novae as MAH-kee-nye NO-vye, Homo Volans as HO-mo VO-lahns.
-- Every hedge in here is on purpose. Read "around 1485", "first recorded", "about 3,200 feet", "early 1600s", "a drawing", "about 2,000 feet", "might have crushed him", "partly", "as far as the record goes", "as far as anyone knows", "the oldest parachute drawing we know of", "about fifteen years" and "nobody knows who drew it" exactly as written. Never say Vrančić jumped from a tower, not even as a legend, and never say Leonardo's design was the first one used.
+- Say Garnerin as gar-neh-RAN, Lenormand as leh-nor-MAHN, Montpellier as mon-pel-YAY, Parc Monceau as park mon-SO, Vrančić as VRAN-chich, Veranzio as veh-RAN-tsee-oh, Machinae Novae as MAH-kee-nye NO-vye, Homo Volans as HO-mo VO-lahns.
+- Every hedge in here is on purpose. Read "around 1485", "first recorded", "from a balloon", "about 3,200 feet", "early 1600s", "a drawing", "about 2,000 feet", "might have crushed him", "partly", "as far as the record goes", "as far as anyone knows", "the oldest parachute drawing we know of", "about fifteen years" and "nobody knows who drew it" exactly as written. Never say Vrančić jumped from a tower, not even as a legend, and never say Leonardo's design was the first one used.
 - Visuals: Leonardo's parachute sketch, the Homo Volans engraving from the Library of Congress, period prints of Garnerin's balloon, photos of Adrian Nicholas's 2000 jump if licensable, and text cards.
 - Good on-screen text moments are 1470s anonymous Italian manuscript, c. 1485, early 1600s, Homo Volans, Oct 22 1797, about 3,200 ft, June 26 2000, 10,000 ft, 2,000 ft, and 185 lb.
 
@@ -16,7 +16,7 @@ About five hundred years after Leonardo da Vinci drew a parachute, a man finally
 
 So here's the version most people know, if they know one. On October 22nd, 1797, André-Jacques Garnerin went up over Parc Monceau in Paris in a hydrogen balloon, and at about 3,200 feet he cut himself loose from the balloon and came down under a parachute. That's the first recorded parachute descent from a balloon, and Britannica and the Smithsonian both back that up.
 
-And that's a real first, there are stories of earlier jumps off towers, but nobody before him has a documented jump like that, cutting loose high in the sky, so when people say Garnerin made the first parachute jump from the sky, that's right. But the parachute itself, the idea and the drawing of it, is a lot older than 1797.
+And that's a real first, though to be fair, back in 1783 a Frenchman named Louis-Sébastien Lenormand jumped off an observatory tower in Montpellier with a framed parachute, in front of a crowd, and still nobody before Garnerin has a documented jump like his, cutting loose high in the sky, so when people say Garnerin made the first parachute jump from the sky, that's right. But the parachute itself, the idea and the drawing of it, is a lot older than 1797.
 
 ## 03 Leonardo's Pyramid
 

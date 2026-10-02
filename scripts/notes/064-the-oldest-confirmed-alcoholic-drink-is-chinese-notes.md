@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): first names of McGo
 - Searched: Raqefet, Liu 2018, Eitam 2019 critique, authors' 2019 reply → confirmed → https://www.sciencedirect.com/science/article/abs/pii/S2352409X19302780
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Georgia 6000 to 5800 BC, 2017 PNAS, tartaric acid, Hajji Firuz 5400 to 5000 BC, 600 to 1,000 years (all match the published 2017 paper and press coverage as I know it).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "more than five hundred years before the oldest confirmed ones from the Near East" is true but understated (Jiahu is ~1,000 years before Georgia/Hajji Firuz), and Georgia is South Caucasus rather than Near East strictly.

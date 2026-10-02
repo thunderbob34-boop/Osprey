@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): any claim that Goog
 - Searched: Robin Li on the 2010 TIME 100 → confirmed → https://content.time.com/time/specials/packages/article/0,28804,1984685_1984864_1985434,00.html
 - Fixes: (1) "And as Forbes and TIME tell it, Li's work came first, and it's said to have inspired Page" → "And some accounts go further and say Li's work came first and inspired Page, but that's a claim, and the dates I'm about to give you make it hard to back up" (Forbes says "around the same time"; the claim no longer leans on Forbes/TIME). Hedge list updated. Word count 767 → 781.
 - Not search-verified (checked against research/knowledge only; session search budget ran out): Page's 10 Jan 1997 priority date (matches the provisional application on the patent); Li's filing 5 Feb 1997 and grant 6 July 1999; BackRub in 1996; RankDex anchor-text method vs recursive PageRank; Garfield citation indexing 1950s-60s; Li built Baidu on the technology.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "Li later built Baidu on that technology" rests on Li's/Baidu's own account; "household name in the West" for Page is loose; IDD/Dow Jones relationship kept light as flagged.

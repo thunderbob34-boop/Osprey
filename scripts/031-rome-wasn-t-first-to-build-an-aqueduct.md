@@ -6,7 +6,7 @@ READING NOTES
 - Say Sennacherib as sen-ACK-er-ib, Nineveh as NIN-uh-vuh, Jerwan as jer-WAHN, Assyrian as uh-SEER-ee-an, Aqua Appia as AH-kwuh AP-ee-uh, Aqua Marcia as AH-kwuh MAR-see-uh, Pont du Gard as pon doo GAR, Nîmes as NEEM, Eupalinos as yoo-PAL-ih-nos, Samos as SAY-moss, Anio Novus as AH-nee-oh NO-vus, Bruun as BROON.
 - Every hedge in here is on purpose. Read "about 400 years", "around 703 to 690 BCE", "more than two million", "as it's described", "about 57 miles", "estimates vary widely", "roughly half a billion to about a billion", "about 8 to 16 feet" and "around 15 to 20 inches" exactly as written. Never say 1.2 billion liters as a fact, and never say Rome's aqueducts dropped "inches per mile."
 - Good on-screen text moments are around 703 to 690 BCE, 2,000,000+ stones, c. 530 BCE, 312 BCE, 144 to 140 BCE, 11 aqueducts, 57 miles / 91 km, 8 to 16 ft per mile, and 15 to 20 inches per mile.
-- Before lock: the Jerwan sources in the research are leads (World History Encyclopedia, and the 1935 Oriental Institute volume by Jacobsen and Lloyd, which was not opened). Open them before this one records.
+- The Jerwan facts were checked in the main-session source check (World History Encyclopedia images of the aqueduct and its inscription, Britannica, and a scholarly reassessment paper). The open item is closed. Still never call it the world's first aqueduct.
 
 ## 01 Cold Open
 

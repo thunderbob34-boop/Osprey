@@ -28,3 +28,7 @@ Left out on purpose (unverified / keep off air in research): the Greek showers a
 - Searched: wax cast of an ox heart, glass model of the aortic sinus, water with grass seeds, eddies that help close the valve, c. 1512 to 1513 → confirmed (RCT says he "then made a glass model") → https://www.rct.uk/collection/exhibitions/leonardo-da-vinci/the-queens-gallery-palace-of-holyroodhouse/the-aortic-valve
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Bellhouse and Bellhouse, Nature 1968 (and 1969 follow-up); Gharib et al. 2002, Experiments in Fluids; Circulation Research review; check-valve point (all match the standard citations).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (medium) "His aortic work has fed into the design of prosthetic heart valves..." and "has influenced heart valve design" stated a causal influence the sources don't show (the design work rests on Bellhouse and later research; Leonardo's drawings get cited). Softened to "still gets cited by people working on prosthetic heart valves and surgery on the root of the aorta", "work that heart researchers still point back to", and in 06 "gets cited in heart valve research". Word count 752 to 755.
+- Low items noted, not changed: Whether Leonardo actually built and ran the glass model is debated by some scholars, but the Royal Collection says he "then made a glass model", so kept.

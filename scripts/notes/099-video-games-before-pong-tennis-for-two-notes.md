@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): anything about what
 - Searched: whether BNL frames Tennis for Two as "the first built purely for fun" → not found; BNL instead says it "was preceded by several other inventions, one in the late 1940s and two in the early 1950s" and that no single one should get the "first video game" title → https://www.bnl.gov/about/history/firstvideo.php
 - Fixes: (1) Section 04 "Brookhaven's way of framing Tennis for Two is that it was one of the first, and the first one built purely for fun" → now cites BNL's own "preceded by several other inventions" line and says "one of the first, and it was built for visitors to have fun with, not for research" (the "first built purely for fun" framing wasn't on BNL's page, and late-1940s/early-1950s entertainment devices make it doubtful). (2) Section 05 "Tennis for Two in 1958 is the one Brookhaven points to" → "is one of the famous early ones, and Brookhaven's own page says even it had forerunners". Hedge list updated. Word count 640 → 678.
 - Not search-verified (checked against research/knowledge only): Manhattan Project line (attributed to BNL; matches standard biography); Pong 1972.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "nuclear physicist" is BNL's wording (he headed the instrumentation division); the Magnavox Odyssey (May 1972) and Computer Space (1971) also preceded Pong, unmentioned but not contradicted.

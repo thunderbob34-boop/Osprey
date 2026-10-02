@@ -1,6 +1,6 @@
 # Notes: Nobel's "Merchant of Death" Obituary May Not Exist
 Research entry: episode-research.md — "# Job 3" section, entry "### 24." (Explosives)
-Spoken words: 725 (after review)
+Spoken words: 732 (after re-check B)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): the claim that a re
 - Searched: Sobrero discovered nitroglycerin in Turin in 1847 and warned it was too dangerous to handle; Nobel invented dynamite in 1867 → confirmed → https://www.nobelprize.org/alfred-nobel/alfred-nobel-life-and-philosophy/ ; https://www.acs.org/molecule-of-the-week/archive/n/nitroglycerin.html
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Kenne Fant (already hedged "reportedly"), the 1895 will, Ludvig's 1888 death in Cannes, the Smithsonian Sobrero headline, Nobel's public credit to Sobrero on NobelPrize.org's Sobrero page, kieselguhr.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (medium) Section 03 said History.com AND Britannica both say no original copy has been found; Britannica's question page actually tells the story as fact, so Britannica was dropped from that line. (medium) "Newspapers really did confuse the two brothers" / "the mix-up is real" / "newspapers did mix up the brothers" stated as fact what is only part of the unverified story (the Nobel Foundation has said no documentation has been found); 04 now says "the story says newspapers confused the two brothers, but nobody has turned up the paper that did it", the "mix-up is real" clause was cut, and 07 says "the story says the papers mixed up the brothers". "The story says" added to the reading-notes hedge list. Word count 725 to 732.
+- Low items noted, not changed: none

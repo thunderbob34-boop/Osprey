@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): the hook's "before 
 - Searched: first commercial fax service, Paris to Lyon, 1865, Caselli pantelegraph; IEEE paper "The Caselli pantelegraph and its successors, 1859–1871" → confirmed → https://ieeexplore.ieee.org/abstract/document/6487588/
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Bain from Caithness, Bell's 1876 patent (common knowledge), Coopersmith's book "Faxed".
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: none

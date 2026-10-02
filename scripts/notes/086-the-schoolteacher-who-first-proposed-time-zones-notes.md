@@ -1,6 +1,6 @@
 # Notes: The Schoolteacher Who Invented Time Zones
 Research entry: 100-episode-lineup.md, heading "### 86. The Schoolteacher Who Invented Time Zones"
-Spoken words: 915
+Spoken words: 962
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): the cause of Dowd's
 - Searched: Fleming's "Terrestrial Time" 1876, 24 zones; Dowd's 1870 four-zone pamphlet → both confirmed; Fleming's plan was worldwide, Dowd's US only → https://www.britannica.com/science/time/Standard-time ; https://www.smithsonianmag.com/smithsonian-institution/sandford-fleming-sets-the-worlds-clock-389930/ ; https://thecanadianencyclopedia.ca/en/article/invention-of-standard-time-feature
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Dowd's 1869 proposal; Temple Grove Seminary / Skidmore; Britannica "never accepted"; Allen's plan; 18 Nov 1883 switch and the two noons about four minutes apart in New York (New York sits about 1 degree east of 75 W, which is about 4 minutes, so the geography explanation is correct); federal law later (1918).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Title "The Schoolteacher Who First Proposed Time Zones" changed to "... First Proposed Time Zones for America", and the two body lines that said Dowd was first to propose time zones without qualification (section 04 "who first proposed time zones", section 06 "the first man to propose time zones") now say "for the United States". Reason: Italian mathematician Quirico Filopanti proposed 24 worldwide hourly zones in his 1858 book "Miranda!", eleven years before Dowd, though it went unnoticed (https://en.wikipedia.org/wiki/Quirico_Filopanti). (2) Added one hedged sentence in section 04 crediting Filopanti's 1858 sketch and saying hardly anybody knew of it until long after his death. Pronunciation and hedge list updated. Word count 915 to 962. File name and manifest still say "Invented"/old title.
+- Low items noted, not changed: "every American town ran on its own clock" is a slight simplification (railroads already ran on a few dozen railroad times); Fleming's "Terrestrial Time" circulated 1876 and was printed more widely later.

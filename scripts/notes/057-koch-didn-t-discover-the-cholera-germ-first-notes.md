@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): the name of Pacini'
 - Searched: "The enigma of Pacini's Vibrio cholerae discovery" → confirmed, Carboni, J Med Microbiol 70(11), 2021; it also ties Pacini and Snow to the same 1854 year and says Snow identified a water pump → https://pubmed.ncbi.nlm.nih.gov/34738888/
 - Fixes: (1) "a CDC journal article on this history is even titled..." → "an essay about cholera in a CDC journal is even titled...", since the piece is a cover-art essay, not a history of Pacini. Word count 810 → 811.
 - Not search-verified (checked against research/knowledge only): Koch in Egypt and India 1883 to 1884, "published in an Italian journal few people read", Koch "probably" unaware.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Cold open "an Italian scientist was already looking at the germ": "already" implies Pacini's work came before Snow's pump in 1854, which isn't established; "the same year" is the safe part. "Made the case that convinced science" smooths over real resistance to Koch (Pettenkofer, 1892).

@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): the title of Merton
 - Searched: Plimpton 322, thought to come from Larsa, 1822 to 1762 BC, Columbia, Pythagorean triples; "trigonometry" is the UNSW authors' reading → confirmed → https://www.unsw.edu.au/newsroom/news/2017/08/mathematical-mystery-of-ancient-clay-tablet-solved ; https://www.britannica.com/topic/Plimpton-322
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Lemaître 1927 vs Hubble 1929; IAU 2018 vote 78% of 4,060 (from the research entry's Nature/Science sources); de Moivre and Halley's Comet Chinese records name-checks; Stigler at the University of Chicago.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Plimpton 322's Larsa provenance is stated flatly (it was bought from a dealer, so it is only thought to come from Larsa); the tablet lists two numbers of each triple plus a ratio column, so "a table of Pythagorean triples" is a slight simplification; Hubble's law is the velocity-distance relation rather than "the idea that the universe is expanding"; Stigler is now emeritus at Chicago.

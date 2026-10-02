@@ -28,3 +28,7 @@ Left out on purpose (unverified / keep off air in research): the Library of Cong
 - Searched: Perkins/Campsie debunk (soldier story speculation by Pierre Henri; in 1833 Barbier wrote to the school asking whether the inventor was a student or a teacher, never having met him) → confirmed → https://www.perkins.org/braille-barbier/
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): 12-dot cell; around 1821 arrival; 1824 at fifteen; 1829 publication; AFB's 13 to 16; Royal Institute for Blind Youth (all standard).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (medium) Cold open called Barbier's code the first raised-dot "alphabet". Barbier's sonography was phonetic (it coded sounds, not letters), and making it spell was one of Braille's improvements, so "alphabet" was wrong. Now "Braille wasn't the first raised-dot writing system". Word count 784 to 785.
+- Low items noted, not changed: "in 1833 Barbier wrote that he didn't know who Braille was" slightly compresses Perkins (Barbier asked whether the inventor was a student or a teacher, never having met him).

@@ -32,3 +32,7 @@ Note: runs short (about 5 and a half minutes). The entry was a Fit 2/5 topic swa
 - Searched: Britannica obelisks: 4th dynasty (c. 2575 to 2465 BCE), none survive, earliest surviving Senusret I (1918 to 1875 BCE) → confirmed → https://www.britannica.com/technology/obelisk
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Huygens 1656 pendulum clock; Galileo's design before 1642 and Vincenzio's attempt; Egyptian shadow clocks by about 1500 BCE; NIST's 3500 BCE obelisk line.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Huygens's 1656 clock was built to his design by Salomon Coster (patent 1657); Basel's release wording is "one of the oldest ancient Egyptian sundials" in some versions rather than "world's oldest" (same meaning); Su Song's tower was finished around 1090/1092, with 1088 the usual date for the working model.

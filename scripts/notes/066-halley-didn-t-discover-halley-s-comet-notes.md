@@ -28,3 +28,7 @@ Left out on purpose (unverified / keep off air in research): who first spotted t
 - Searched: 240 BCE Shiji "broom star" as first certain record → confirmed; NASA also notes possible records of the 467 BCE apparition "in Greece and China" → https://www.nasa.gov/history/955-years-ago-halleys-comet-and-the-battle-of-hastings/
 - Fixes: (1) Cold open "the first people to write it down were in China" overstated, since possible earlier records include Greek ones; now "the first people we know for sure wrote it down were in China". Added "we know for sure" to the hedge list; word count 711 to 714.
 - Not search-verified (checked against research/knowledge only): 1705 Synopsis; 1531/1607/1682; 1758 prediction; Halley's death in 1742; Bayeux 1066 and embroidery note (all standard). Note: the comet was first sighted on 25 Dec 1758 and reached perihelion in March 1759, so "returned in 1758" is fine.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Halley died Jan 1742 and the comet was first recovered 25 Dec 1758 with perihelion March 1759, so "sixteen years" and "right on schedule, in 1758" are the standard simplification (Halley himself said about 1758).

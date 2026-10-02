@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): anything about Semm
 - Searched: Gordon quote "I myself was the means of carrying the infection to a great number of women", epidemic Dec 1789 to Mar 1792, 1795 treatise, wash and fumigate apparel, "foretell" by midwife, half a century ahead of Holmes and Semmelweis → all confirmed → https://blog.lib.uiowa.edu/needtoknow/2018/09/05/alexander-gordon-puerperal-fever-september-2018-notes-from-the-john-martin-rare-book-room-hardin-library/ ; https://embryo.asu.edu/pages/contagiousness-puerperal-fever-1843-oliver-wendell-holmes
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Holmes 13 Feb 1843 date (standard; read to the Boston Society for Medical Improvement); Semmelweis 1847 chlorine handwashing; Harvard digitization; PubMed review wording.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "first to say doctors were spreading it" rests on the PubMed review's attribution (Gordon is the standard answer); Holmes did gather case reports even though he ran no trial.

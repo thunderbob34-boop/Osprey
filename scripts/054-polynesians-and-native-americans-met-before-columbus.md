@@ -1,7 +1,7 @@
 # Polynesians and Native Americans Met Before Columbus
 
 READING NOTES
-- Runtime is about 7 minutes at a relaxed pace, roughly 1,068 spoken words.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,086 spoken words.
 - Tone is calm and respectful. The navigators are the heroes, and the honest "we don't know who sailed to whom" is part of the story, not a letdown.
 - Say L'Anse aux Meadows as LAHNS oh MED-ohs, Hōkūle'a as ho-KOO-leh-ah, Mau Piailug as MAU pee-EYE-loog, Aotearoa as ah-oh-teh-ah-ROH-ah, Rapa Nui as RAH-pah NOO-ee, Rapanui (the people) the same way run together, Mataiva as mah-tah-EE-vah, Papeete as pah-pay-AY-tay, Marquesas as mar-KAY-sas, Mangaia as mahn-GAI-ah, Ioannidis as yo-ah-NEE-dis, mattang as MAH-tahng, rebbelib as REB-eh-lib, meddo as MED-oh.
 - Every hedge in here is on purpose. Read "around 1200", "about 1150", "about 1380", "closest to", "can't tell us who sailed to whom", "helped overturn", "still unproven", "contested", "the evidence is in people's DNA", "the DNA shows it" and "not necessarily the year anybody first got there" exactly as written. The cold open says out loud that who sailed to whom is still open. Keep that line, and don't ad-lib "Polynesians reached the Americas" anywhere, the research calls that unproven.
@@ -37,7 +37,7 @@ Now, to be fair, one voyage doesn't settle a whole argument by itself, so the ca
 
 So that's the navigation, and now for the part in the title. In 2020 a team of researchers, Ioannidis and colleagues, published a study in Nature, and what they found was Native American DNA in people from Eastern Polynesian islands. The Native American ancestry is closest to Indigenous groups from coastal Colombia and Ecuador.
 
-And they could date when that mixing happened, roughly, island by island. In the South Marquesas they put it at about 1150, and on Rapa Nui at about 1380, and they put the contact itself at around 1200. So around the year 1200, Polynesians and Native Americans met and their families mixed, and that's centuries before Columbus, almost three centuries. And it's not just one study, either. In 2024 another paper in Nature looked at ancient genomes from the Rapanui people, the people of Rapa Nui, and it also found contact with the Americas before any Europeans arrived.
+And they could date when that mixing happened, roughly, island by island. In the South Marquesas they put it at about 1150, and on Rapa Nui at about 1380, and they put the contact itself at around 1200, and those are rough dates, so don't let the 1150 and the 1200 trip you up, they overlap. So around the year 1200, Polynesians and Native Americans met and their families mixed, and that's centuries before Columbus, almost three centuries. And it's not just one study, either. In 2024 another paper in Nature looked at ancient genomes from the Rapanui people, the people of Rapa Nui, and it also found contact with the Americas before any Europeans arrived.
 
 ## 06 Who Sailed To Whom
 

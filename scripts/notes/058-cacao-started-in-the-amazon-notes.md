@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): anything about how 
 - Searched: Lanaud et al. 2024, Scientific Reports: 352 ceramic items, domestication in the Ecuadorian Amazon by at least 5,300 years ago, use outside the Amazon (Pacific coast) going back about 5,000 years → confirmed → https://www.nature.com/articles/s41598-024-53010-6
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Zarrillo at UBC (UBC News is the source), the Cortés/Aztec/Maya popular-credit framing.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Theobromine also occurs in some related plants, so on its own it isn't cacao-specific; the script uses it as one of three lines, which is fine.

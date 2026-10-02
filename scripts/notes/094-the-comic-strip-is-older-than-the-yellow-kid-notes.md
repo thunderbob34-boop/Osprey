@@ -1,6 +1,6 @@
 # Notes: The Comic Strip Is Older Than the Yellow Kid
 Research entry: 100-episode-lineup.md, heading "### 94. The Comic Strip Is Older Than the Yellow Kid"
-Spoken words: 839
+Spoken words: 844
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): any claim that Oldb
 - Searched: Töpffer Vieux Bois drawn 1827, Histoire de Mr. Jabot published 1833 (Geneva), Les Amours de Mr. Vieux Bois 1837 → confirmed → https://www.loc.gov/pictures/item/11024232/ ; https://www.loc.gov/item/11024226
 - Fixes: (1) "That American edition was unauthorized too, it was copied from a pirated French edition" changed to "it was a reprint of that English version, and the English version had itself been copied from a pirated French edition" (the US edition reprinted the 1841 London edition; the London one copied Aubert's pirated French edition). Word count 826 → 839.
 - Not search-verified (checked against research/knowledge only): Britannica's credit wording for the Yellow Kid and Töpffer; Library of Congress catalog record of the US edition.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Close said "for the comic strip form ... that was a schoolteacher in Geneva", an absolute first for the form that a commenter could challenge with Hogarth or Rowlandson sequences; now "the name historians usually start with is a schoolteacher in Geneva" (Töpffer's standing as the usual starting point is standard: Britannica, Kunzle). Hedge added to reading notes. Word count 839 -> 844.
+- Low items noted, not changed: "first successful newspaper comic strip" is the conventional credit; early Hogan's Alley was a single-panel cartoon, not a sequential strip, which pedants note; Töpffer's 1837 Vieux Bois printing is sometimes dated 1839 for publication.

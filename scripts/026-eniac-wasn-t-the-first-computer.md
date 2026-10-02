@@ -1,10 +1,10 @@
 # ENIAC Wasn't the First Computer
 
 READING NOTES
-- Runtime is about 7 minutes at a relaxed pace, roughly 1,021 spoken words.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,038 spoken words.
 - Tone is calm and matter-of-fact. The court ruling carries this one, so read the quote slowly and plainly. ENIAC and Grace Hopper both get treated fairly.
 - Say ENIAC as EE-nee-ack, Atanasoff as uh-TAN-uh-soff, Mauchly as MOCK-lee, Konrad Zuse as KON-rahd TSOO-zuh, Puskas as POOSH-kahsh, Colossus as kuh-LOSS-us, Dollis Hill as DOLL-iss HILL.
-- Every hedge in here is on purpose. Read "in 1941", "a special-purpose machine", "kept secret for decades", "restricted to codebreaking", "probably wasn't even hers" and "designed a computing machine in the 1830s, but it was never built" and "one of the reasons it gave" exactly as written. Don't give a day or month for the Z3.
+- Every hedge in here is on purpose. Read "in 1941", "while it was still being finished", "up close", "a special-purpose machine", "kept secret for decades", "restricted to codebreaking", "probably wasn't even hers" and "designed a computing machine in the 1830s, but it was never built" and "one of the reasons it gave" exactly as written. Don't give a day or month for the Z3.
 - Good on-screen text moments are the Larson quote, Oct 19 1973, 1941, Dec 1943, Jan 1944, Sept 9 1947, Relay 70 Panel F, "First actual case of bug being found," and Nov 1878.
 
 ## 01 Cold Open
@@ -21,7 +21,7 @@ But a patent can be challenged, and one of the questions a court can ask is a si
 
 The judge was Earl Larson, and his opinion was distributed on October 19th, 1973. And in it he wrote that ENIAC's inventors "did not themselves first invent the automatic electronic digital computer, but instead derived that subject matter from one Dr. John Vincent Atanasoff." I'll read that again because it's the whole story. They "did not themselves first invent the automatic electronic digital computer, but instead derived that subject matter from one Dr. John Vincent Atanasoff."
 
-Atanasoff was at Iowa State, and the machine he worked on is known as the Atanasoff-Berry Computer, the ABC. And here's the part that matters, in 1941, John Mauchly, one of the men behind ENIAC, visited Atanasoff and saw the ABC working. So this wasn't two people happening to have the same idea at the same time, one of the ENIAC inventors had seen the earlier machine working.
+Atanasoff was at Iowa State, and the machine he worked on is known as the Atanasoff-Berry Computer, the ABC. And here's the part that matters, in 1941, John Mauchly, one of the men behind ENIAC, visited Atanasoff, stayed for several days, and saw the ABC while it was still being finished. So this wasn't two people happening to have the same idea at the same time, one of the ENIAC inventors had seen the earlier machine up close and talked through how it worked.
 
 And the ruling voided the ENIAC patent. That's not a blog post or a historian's opinion, that's a federal court, and Iowa State, Britannica and the Computer History Museum all cover it. Now, to be fair, the ABC was a special-purpose machine, but the court's question was who first invented the electronic digital computer, and the court's answer was Atanasoff.
 
@@ -53,4 +53,4 @@ And if you want to go back even further than all of them, Charles Babbage design
 
 ## 08 Who Did It First
 
-So here's the plain version, in 1941 John Mauchly visited John Vincent Atanasoff at Iowa State and saw the Atanasoff-Berry Computer working. That same year Konrad Zuse had his program-controlled Z3 working in Berlin, and by early 1944 Colossus was breaking German codes at Bletchley Park. In 1973 Judge Earl Larson ruled that ENIAC's inventors did not themselves first invent the automatic electronic digital computer, and voided their patent. Somebody did it first, and the name the federal court pointed to was John Vincent Atanasoff.
+So here's the plain version, in 1941 John Mauchly visited John Vincent Atanasoff at Iowa State and saw the Atanasoff-Berry Computer up close. That same year Konrad Zuse had his program-controlled Z3 working in Berlin, and by early 1944 Colossus was breaking German codes at Bletchley Park. In 1973 Judge Earl Larson ruled that ENIAC's inventors did not themselves first invent the automatic electronic digital computer, and voided their patent. Somebody did it first, and the name the federal court pointed to was John Vincent Atanasoff.

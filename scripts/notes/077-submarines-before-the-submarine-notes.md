@@ -32,3 +32,7 @@ Note: runs a bit short (about 5 and a half minutes) rather than padding.
 - Searched: Holland launched 1898; USS Holland acquired 11 April 1900, commissioned 12 Oct 1900 → confirmed → https://www.history.navy.mil/research/histories/ship-histories/danfs/h/holland-i.html ; https://www.britannica.com/topic/Holland-submarine
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Bushnell a Yale student designing 1771 to 1775; Britannica's "father of the modern submarine" wording; Smithsonian "world's first combat submarine" (title seen in search results, confirmed).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: Medium: cold open and section 04 said the screw wouldn't bite "so the bomb drifted off", which compresses the sequence wrongly; Lee gave up, headed back, and released the magazine during the retreat, where it drifted and exploded. Both lines now say "so he had to give up and head back, and the bomb he let go of on the way drifted off and went off/exploded harmlessly". Word count 818 to 849.
+- Low items noted, not changed: No British record of the attack survives, and a few historians doubt it happened as told (the script leans on NHHC and Smithsonian attribution, which is adequate); Holland VI was launched in 1897, with trials in 1898 ("his 1898 boat" follows Britannica).

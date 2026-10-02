@@ -30,3 +30,7 @@ Note: runs short (about 5 minutes). The entry is thin and the brief says not to 
 - Searched: Simon held by Smithsonian NMAH, Science Museum Group (1994-1995, IBM with BellSouth) and Computer History Museum; CHM gives $899 → confirmed → https://americanhistory.si.edu/collections/object/nmah_1191542 ; https://collection.sciencemuseumgroup.org.uk/objects/co8361064/simon-mobile-communicator-1994-1995 ; https://www.computerhistory.org/revolution/mobile-computing/18/341/1733
 - Fixes: none (note: CHM's page says talk time under 30 minutes; the script's "about an hour" is attributed to TIME, so it stands)
 - Not search-verified (checked against research/knowledge only): off the market within about six months; "nobody called it a smartphone at the time"; earlier touchscreen PDAs; iPhone 2007.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "it's sitting in three museums right now" in the cold open could read as "on display" (section 03 correctly says "in the collection"); the Simon was built by Mitsubishi for IBM; 1994 to mid-2007 is just under thirteen years.

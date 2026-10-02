@@ -34,3 +34,7 @@ Left out on purpose (unverified / keep off air in research): any claim the Arab 
 - Searched: Latini, Lo scalco alla moderna, Naples 1692 and 1694, sorbetto recipes including eggplant → confirmed → https://en.wikipedia.org/wiki/Antonio_Latini (chocolate not shown in the results; kept from the research entry)
 - Fixes: (1) "By 1558" changed to "By 1589 ... in the expanded edition of his book Magia Naturalis" in 05, and "by 1558" to "by 1589" in 07; on-screen text 1558 changed to 1589. "More than a century later, in the 1690s" still holds (1589 to 1692). Word count 753 to 757.
 - Not search-verified (checked against research/knowledge only): Zimara 1530 (Jurafsky, attributed); Quinzio's Of Sugar and Snow; Tang-dynasty claims being poorly sourced.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (medium) Latini was steward to Don Stefano (Esteban) Carrillo y Salcedo, first minister to the Spanish viceroy of Naples, not to the viceroy himself (https://en.wikipedia.org/wiki/Antonio_Latini); now "steward to the first minister of the Spanish viceroy in Naples". (medium) "European ices only show up in Italy in the early 1600s, which is about a century after Catherine": Catherine left Florence in 1533, so early 1600s is about 70 years, and "only ... early 1600s" clashed with della Porta freezing wine to slush in 1589 later in the script. Now "ices don't really show up as a dessert in Italy until the early 1600s, long after a teenage Catherine had left Florence for France in the 1530s." Word count 757 to 770.
+- Low items noted, not changed: none

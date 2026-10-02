@@ -1,6 +1,6 @@
 # Notes: Electric Cars Were Winning in 1900
 Research entry: 100-episode-lineup.md, heading "### 91. Electric Cars Were Winning in 1900"
-Spoken words: 813
+Spoken words: 814
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): Anderson's exact ye
 - Searched: DoE "around a third of all vehicles on the road" by 1900 → confirmed → https://www.energy.gov/articles/history-electric-car
 - Fixes: (1) Section 04 gloss "those numbers are the share of cars on the road, not sales" was wrong: the split is the 1900 production count. Now says the numbers line up with the 1900 census count of cars built that year, not a headcount of cars on the road and not sales. (2) Cold-open hook changed from "the cars on American roads" to "the cars being built in America". (3) Section 06 "electric cars outnumbered gasoline cars on American roads" changed to "America was building more electric cars than gasoline ones". (4) Reading-notes hedge list and graphic label updated to match. Word count 800 to 813. The DoE "a third of vehicles on the road" line is unchanged. Title "Outnumbered" still holds for cars built in 1900.
 - Not search-verified (checked against research/knowledge only): Robert Anderson 1830s crude carriage, non-rechargeable cells; NYC 60+ electric taxis; Lohner-Porsche 1900 Paris and Semper Vivus (attributed to Porsche); gas dominant by about 1905.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Cold-open line "roughly one in three cars on American roads was electric, and gasoline cars were actually in last place, behind steam" changed to "roughly one in three cars being built in America was electric ...": it paired the steam-first ranking (1900 census production count) with "on American roads", which contradicted section 04's "not a headcount of every car on the road" and the reworked hook. Word count 813 to 814. Title checked: "Outnumbered Gas Cars Around 1900" agrees with the body (1,575 electric vs 936 gasoline built in 1900).
+- Low items noted, not changed: recap "roughly a third of American cars were electric, according to Britannica ..." still reads as cars generally (Britannica and DoE word it that way, so attributed); closing "it was ... Robert Anderson" leans on the DoE framing, while Jedlik (c. 1828), Davenport and Stratingh (1835) built small electric models in the same era.

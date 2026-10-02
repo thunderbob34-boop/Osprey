@@ -31,3 +31,7 @@ Left out on purpose (unverified / keep off air in research): TodayIFoundOut and 
 - Fixes: (1) Second inventor's name changed to Mary McLaren (the printed patent header), with one spoken line that some histories spell it Molaren, because the script tells viewers to pull the patent up and "see both of their names on it". Pronunciation note updated. (2) "And they said why they made it ... in their words" changed to "the reason they made it is simple ... as Smithsonian Magazine puts it", because the quote couldn't be traced to the patent itself; hedge added to the reading-notes list. Word count 882 to 898.
 - Not search-verified (checked against research/knowledge only): Sullivan 1908 silk-sample story and switch to gauze; TIME telling two origin stories; "stitched open-mesh fabric".
 - Search budget note: the follow-up search to confirm "McLaren" against a second source was blocked (session search limit), so the spelling rests on the patent's printed header.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: earlier tea-infuser and cloth-pouch ideas exist, covered by "the earliest tea-bag patent the usual histories cite"; "McLaren" rests on the printed patent header (Re-check A).

@@ -1,6 +1,6 @@
 # Notes: The Bug Collector Who Invented Daylight Saving Time
 Research entry: 100-episode-lineup.md, heading "### 82. The Bug Collector Who Invented Daylight Saving Time"
-Spoken words: 908
+Spoken words: 926
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): Port Arthur stated 
 - Searched: Germany first to adopt DST, 1916, WWI → confirmed as the standard institutional framing (Austria-Hungary started the same day, 30 April 1916, but Britannica and National Geographic name Germany as first; left as is) → https://www.britannica.com/today-in-history/March-31-How-WWI-Invented-Daylight-Saving-Time ; https://www.nationalgeographic.com/science/article/daylight-saving-time
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): two-hour shift (standard account; Te Ara search summary didn't quote the figure); Hudson as postal worker; Franklin 1784 satire and Smithsonian's "erroneous"; Willett's 1907 pamphlet and independent invention; Port Arthur 1908 claim and CBC wording.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Section 05 "The first country ... was Germany" changed to "The first countries ... were Germany and its ally Austria-Hungary, both on April 30th, 1916" (Austria-Hungary started the same day); recap changed to match. (2) "Willett is the reason Britain adopted daylight saving time ... that's really his doing" softened to "his campaign is a big part of why Britain adopted daylight saving time ... that's a lot of his doing", recap to match: Britain adopted it in 1916 after Willett's death and weeks after Germany, so the war was the immediate trigger. Word count 908 to 926.
+- Low items noted, not changed: "first person to actually stand up and propose" rests on Hudson being the standard first modern proposal (fine); "about twelve years apart" counts to Willett's 1907 pamphlet, though Willett first had the idea around 1905; the society ridicule was from some members (Re-check A).

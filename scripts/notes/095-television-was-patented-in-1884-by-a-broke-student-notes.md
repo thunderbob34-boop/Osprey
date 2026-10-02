@@ -1,6 +1,6 @@
 # Notes: Television Was Patented in 1884 by a Broke Student
 Research entry: 100-episode-lineup.md, heading "### 95. Television Was Patented in 1884 by a Broke Student"
-Spoken words: 777
+Spoken words: 776
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -33,3 +33,7 @@ Left out on purpose (unverified / keep off air in research): the word "broke" in
 - Searched: ETHW first TV-like patent 1884, Baird 1926 (26 Jan, Royal Institution, two Nipkow disks), Farnsworth 1927 → confirmed → https://ethw.org/Television ; https://ethw.org/Milestones:First_Public_Demonstration_of_Television,_1926 . Zworykin "1928": ETHW results show his kinescope application in 1929 and iconoscope 1933; 1928 is as listed in the research's ETHW Television summary and is said only as the credited date, so left as is.
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Christmas Eve 1883 exact date (DPMA/Early Television Museum per research); girlfriend paid the fee (attributed single source); "one may assume" quote.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Cold open and close said the 1884 patent came "more than forty years before anyone saw a TV picture"; crude transmitted images predate Baird (Rosing's 1911 CRT patterns; Baird's own 1924-25 images), so both now say "more than forty years before the first working television", matching the 1926 framing used throughout. Word count 777 -> 776. Title note: "Broke Student" is in fact supported; the DPMA's own page (https://www.dpma.de/english/our_office/publications/milestones/inventionsthatmadehistory/nipkow-scheibe/index.html) calls Nipkow a very poor student who played piano in pubs and could not afford the fee; the earlier retitle suggestion can be dropped.
+- Low items noted, not changed: Zworykin "1928" is soft (his key milestones are 1923 filing, 1929 kinescope, 1933 iconoscope); kept because it is said as the credited/IEEE-listed date.

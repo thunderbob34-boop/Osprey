@@ -28,3 +28,7 @@ Left out on purpose (unverified / keep off air in research): the cocaine content
 - Searched: Pemberton's French Wine Coca based on Vin Mariani; Atlanta prohibition 1886 → confirmed: "In 1886 the city of Atlanta introduced prohibition", Pemberton dropped the wine and named the new version Coca-Cola; Vin Mariani dates from 1863 → https://www.nlm.nih.gov/exhibition/pickyourpoison/exhibition-cocaine.html ; https://www.georgiaencyclopedia.org/articles/business-economy/john-stith-pemberton-1831-1888/
 - Fixes: none (note: the Atlanta/Fulton County local-option vote was in late 1885 and took effect in 1886; "in 1886 Atlanta adopted prohibition" matches how NLM and the New Georgia Encyclopedia put it, so left as is)
 - Not search-verified (checked against research/knowledge only): Mariani Corsican-born; Bordeaux wine base; Pope Leo XIII's gold medal and portrait in ads; NMAH Vin Mariani object; NLM's "inferior imitation" wording; kola nut added; Coca-Cola later overtaking Vin Mariani.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: the prohibition vote was November 1885, effective July 1886, and Coca-Cola was first sold in May 1886, slightly before it took effect; "in 1886 Atlanta adopted prohibition" matches NLM and the New Georgia Encyclopedia (Re-check A), so left.

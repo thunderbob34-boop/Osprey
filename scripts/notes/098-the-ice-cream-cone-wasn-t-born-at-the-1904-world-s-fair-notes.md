@@ -1,6 +1,6 @@
 # Notes: The Ice Cream Cone Wasn't Born at the 1904 World's Fair
 Research entry: 100-episode-lineup.md, heading "### 98. The Ice Cream Cone Wasn't Born at the 1904 World's Fair"
-Spoken words: 749
+Spoken words: 762
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -28,3 +28,7 @@ Left out on purpose (unverified / keep off air in research): the exact issue day
 - Searched: Marshall 1888 Cookery Book, "Cornets with Cream", "can also be filled with any cream or water ice", Smithsonian "earliest claimant" → confirmed → https://www.smithsonianmag.com/smart-news/amazing-portable-edible-ice-cream-cone-180964939/ ; https://www.english-heritage.org.uk/visit/inspire-me/victorian-ice-cream/
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Marchiony US 746,971 (filed 22 Sept 1903, issued December 1903; matches standard record); Hamwi/zalabia story; LOC research-guide listing; Marchiony's 1896 claim (kept as his claim).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Close said "on the evidence we have, it was her" (first to do the cone); an 1807 Debucourt engraving (Frascati) appears to show a woman eating from a cone, and an 1825 French cookbook describes rolling cones from little waffles (Wikipedia, Ice cream cone; whatscookingamerica.net). Marshall is the earliest known recipe that says to fill an edible cone with ice, so the close now says "the earliest recipe anybody's found that says to fill an edible cone with ice is hers". Hedge added to reading notes. Word count 749 -> 762.
+- Low items noted, not changed: Cold open "the woman with the earliest claim to it" kept (matches Smithsonian "earliest claimant"); a pedant may still mention the 1807 engraving.

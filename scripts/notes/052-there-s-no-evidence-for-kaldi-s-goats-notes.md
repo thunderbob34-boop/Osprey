@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): Hattox and al-Jazir
 - Searched: JSTOR Daily title "How Coffee Went from a Mystical Sacrament to an Everyday Drink"; Sufis in Yemen used it in night-time rituals → confirmed → https://daily.jstor.org/how-coffee-went-from-a-mystical-sacrament-to-an-everyday-drink/
 - Fixes: (1) Section 04 dropped the quote marks on "Ayaman, which is Arabia Felix" (two extracts word it differently, so it's now a paraphrase: "a place Nairon calls Ayaman, and he says that's Arabia Felix"); on-screen text list changed to "Ayaman" and "Arabia Felix". Word count 1,035 → 1,037.
 - Not search-verified (checked against research/knowledge only): 1671 date and Rome (also in the search results), University of Bologna catalogue, Britannica's 15th-century Yemen Sufi dating, NCA "Yemen and Mocha", "roughly 800 years" (legend usually set c. 850 CE; arithmetic holds), coffee plant native to Ethiopia.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "Sufi monasteries" is a loose rendering of Britannica's "Sufi shrines/circles"; fine for a general audience.

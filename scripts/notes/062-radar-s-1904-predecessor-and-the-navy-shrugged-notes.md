@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): any statement of ho
 - Searched: Hülsmeyer showed it to the German navy, no interest → confirmed (Britannica: "demonstrated it to the German navy but failed to arouse any interest") → https://www.britannica.com/biography/Christian-Hulsmeyer
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): 30 April 1904 patent date; Daventry 26 Feb 1935; Britannica's Watson-Watt entry naming Hülsmeyer 1904; several countries developing radar independently in the 1930s. (The Rhine-collision motive also appears in the ETHW milestone material, so "the only source we have" is conservative, not wrong; left as is.)
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "the only source we have on it" for the Rhine-collision motive is conservative (ETHW also carries it); "first to demonstrate and patent" leans on the IEEE Milestone, which is fine.

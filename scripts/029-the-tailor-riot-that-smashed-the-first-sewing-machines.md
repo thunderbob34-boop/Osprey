@@ -1,7 +1,7 @@
 # The Tailor Riot That Smashed the First Sewing Machines
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 864 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
+- Runtime is about 6 minutes at a relaxed pace, roughly 875 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
 - Tone is calm and matter-of-fact. Keep the riot plain and flat, the facts carry it. Howe keeps his real credit.
 - Say Barthélemy Thimonnier as bar-TAY-luh-mee tee-MON-ee-ay.
 - Every hedge in here is on purpose. Read "about 80", "about a year", "smashed" and "destroyed" (never "burned"), "the early 1830s", and "more than a decade" exactly as written. The manifest hook said "burned it out," and that was changed on purpose because the sources say destroyed.
@@ -40,13 +40,13 @@ And there's more, because Howe wasn't first in America either. In New York in th
 
 And here's the part that matters, Hunt didn't patent it, he dropped it in 1838, because he was afraid it would put seamstresses out of work. Think about that next to what happened in Paris, because in Paris the people afraid of losing their jobs smashed the machines, and in New York the inventor himself was afraid of the same thing, and he walked away from his own machine.
 
-Then, years later, in 1853, Hunt did apply for a patent, but by then it was too late, and when it came down to it, the courts sided with Howe. The Smithsonian's National Museum of American History has Walter Hunt's patent model of a sewing machine, and it's dated 1854.
+Then, years later, in 1853, Hunt did apply for a patent, but by then it was too late, and in 1854 the patent office turned him down because he'd waited too long, so Howe's patent stood. The Smithsonian's National Museum of American History has Walter Hunt's patent model of a sewing machine, and it's dated 1854.
 
 You'll see dates for Hunt's machine that don't agree, some say 1832, some 1833, some 1834, so the safe thing to say is the early 1830s.
 
 ## 06 Fair Credit to Howe
 
-Now, to be fair to Elias Howe, his patent was real, and it was for the lockstitch. And when Hunt finally did try for a patent, the courts sided with Howe, so in the eyes of the law, the lockstitch patent was Howe's. That's a real thing to have done, and Britannica covers Howe's 1846 patent.
+Now, to be fair to Elias Howe, his patent was real, and it was for the lockstitch. And when Hunt finally did try for a patent, the patent office turned him down for waiting too long, so in the eyes of the law, the lockstitch patent was Howe's. That's a real thing to have done, and Britannica covers Howe's 1846 patent.
 
 But a patent isn't the same as being first. Howe was first with the lockstitch patent, he wasn't first with the machine. Thimonnier had a working shop of them in Paris in 1830, and Walter Hunt had a lockstitch machine in New York more than a decade before Howe's patent, and he chose not to patent it at the time.
 

@@ -28,3 +28,7 @@ Left out on purpose (unverified / keep off air in research): the names of the Mu
 - Searched: earliest written record of the counterweight trebuchet is Byzantine historian Niketas Choniates (siege of Zevgminon, 1165); Chevedden's Dumbarton Oaks paper title confirmed → confirmed. Chevedden himself argues for earlier use (Nicaea 1097), which the script doesn't contradict → https://www.researchgate.net/publication/242247621_The_Invention_of_the_Counterweight_Trebuchet_A_Study_in_Cultural_Diffusion ; https://en.wikipedia.org/wiki/Niketas_Choniates
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): reached the Mediterranean by the 6th century CE, Muslim engineers at Xiangyang in the 1270s (siege 1268 to 1273; engineers arrived c. 1272), the "Hybrid or Counterpoise?" transitional-trebuchet study.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Origin of the counterweight type in the Byzantine/Islamic world is Chevedden's argument and the mainstream view, but not unanimous.

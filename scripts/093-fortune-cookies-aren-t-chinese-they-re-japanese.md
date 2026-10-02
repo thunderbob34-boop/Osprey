@@ -1,7 +1,7 @@
 # Fortune Cookies Aren't Chinese - They're Japanese
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 819 spoken words. The research is short, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 828 spoken words. The research is short, so this one runs short rather than padded.
 - Tone is light and friendly. Nobody is a villain here, and Chinese-American restaurants get real credit for putting the cookie in front of most Americans.
 - Say tsujiura senbei as tsoo-jee-OO-rah SEN-bay, Yasuko Nakamachi as yah-SOO-ko nah-kah-MAH-chee, Benkyodo as BEN-kyoh-doh, Makoto Hagiwara as mah-KOH-toh hah-gee-WAH-rah, Kyoto as KYOH-toh, and KQED as the four letters.
 - Every hedge in here is on purpose. Read "most likely came from Japan", "traces back to Japan", "as her research has been reported", "as it's been reported", "one example", "still disputed" and "a publicity stunt" exactly as written.
@@ -21,7 +21,7 @@ But that's an assumption about where the cookie gets served, not about where the
 
 ## 03 Fortune Crackers in Kyoto
 
-By the 1870s, confectioners near Kyoto, Japan were making something called tsujiura senbei, which means fortune crackers. They were folded crackers with a fortune tucked into the bend, so the basic idea, a folded cookie with a little paper message tucked inside it, was already there in Japan in the 1870s, decades before fortune cookies showed up in American Chinese restaurants.
+By the 1870s, confectioners near Kyoto, Japan were making something called tsujiura senbei, which means fortune crackers. They were folded crackers with a fortune tucked into the bend, not inside the hollow the way ours are, so the basic idea, a folded cookie with a little paper message tucked into the fold, was already there in Japan in the 1870s, decades before fortune cookies showed up in American Chinese restaurants.
 
 Now, they weren't quite the same as the ones we get now. The Japanese version was bigger and darker, and it was flavored with sesame and miso instead of vanilla and butter, so it would have tasted pretty different. But the fold was there and the fortune was there, and that's the part that makes it a fortune cookie.
 

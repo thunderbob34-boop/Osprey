@@ -1,7 +1,7 @@
 # The Bell Curve Isn't Gauss's
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 801 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
+- Runtime is about 5 minutes at a relaxed pace, roughly 812 spoken words. The research is narrow, so this one runs short on purpose rather than padding.
 - Tone is calm and friendly, no math-class voice. Gauss keeps his real credit for tying the curve to measurement error.
 - Say de Moivre as duh MWAH-vruh, Gauss as GOWSS, Laplace as la-PLAHSS, Stirling as STUR-ling, Doctrine of Chances as written.
 - Every hedge in here is on purpose. Read "the story goes", "as an approximation", "not as a law of errors", "one statistics reference" and "a historical error" exactly as written. The coffee house line stays a "story goes" line.
@@ -31,7 +31,7 @@ So that's 1733, and Gauss is 1809, that's seventy-six years. Seventy-six years b
 
 Now, to be fair, there are a couple of things de Moivre didn't do. He treated the curve as an approximation, a shortcut for working out odds, not as a law of errors the way Gauss later did. That's the big difference, and it's the reason Gauss gets talked about the way he does.
 
-And there's more, de Moivre's version was missing a piece. The formula for the bell curve has a constant in it, the square root of two pi, and de Moivre didn't have it, that came from another mathematician, James Stirling.
+And there's more, de Moivre didn't work out every piece himself. The formula for the bell curve has a constant in it, the square root of two pi, and that piece came from another mathematician, James Stirling, and de Moivre gave him the credit for it right there in the pamphlet.
 
 And there's one more name in the middle, the mathematician Laplace developed the curve further, starting in 1774, and again in 1812. So the line goes de Moivre in 1733, Laplace from 1774, and Gauss in 1809, and it's the last of those three names that ended up on it.
 

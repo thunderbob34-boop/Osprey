@@ -1,10 +1,10 @@
 # Nobel's "Merchant of Death" Obituary May Not Exist
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 725 spoken words. The research is thin, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 732 spoken words. The research is thin, so this one runs short rather than padded.
 - Tone is calm and fair. Nobel is not the villain, and he never claimed to discover nitroglycerin. The myth-bust is about a story told about him, not by him.
 - Say Ludvig as LOOD-vig, Cannes as KAN, Ascanio Sobrero as ah-SKAH-nee-oh so-BRAIR-oh, Turin as TOOR-in, kieselguhr as KEE-zul-goor, Kenne Fant as KEN-eh FAHNT.
-- Every hedge in here is on purpose. Read "never found a copy", "can't be confirmed", "reportedly", "some sources say 1846", "we don't know" and "may not exist" exactly as written. Don't say the obituary definitely never existed, only that nobody has found it.
+- Every hedge in here is on purpose. Read "never found a copy", "can't be confirmed", "reportedly", "some sources say 1846", "we don't know", "the story says" and "may not exist" exactly as written. Don't say the obituary definitely never existed, only that nobody has found it.
 - Don't ad-lib the newspaper's name, the exact wording of a "real" milder notice, or anything Nobel supposedly said when he read it. None of that was verified.
 - Visuals: period portraits of Alfred and Ludvig Nobel and Sobrero, an 1895 will image, period dynamite advertising. No explosion casualties or war imagery.
 - Good on-screen text moments are 1847, 1867, 1888, 1895, and the words "merchant of death" with a question mark.
@@ -21,7 +21,7 @@ And it's a great story, right? It's got a mistake, a shock, a man reading what p
 
 ## 03 The Missing Obituary
 
-Now here's the part that matters. Historians have never found a copy of that obituary, History.com and Britannica both say no original copy has been found, and a Nobel biographer named Kenne Fant reportedly said the same thing.
+Now here's the part that matters. Historians have never found a copy of that obituary, History.com says no original copy has been found, and a Nobel biographer named Kenne Fant reportedly said the same thing.
 
 So the famous headline, merchant of death, can't be confirmed, and neither can the idea that an obituary like that is what inspired the prizes. Maybe it happened and maybe it didn't, but nobody has the newspaper, and without the newspaper, it's a story, not a fact.
 
@@ -29,9 +29,9 @@ And here's something else, even respected places have told the story as if it's 
 
 ## 04 What We Do Know
 
-Now, to be fair to the story, parts of it are true. Ludvig Nobel really did die in 1888, and newspapers really did confuse the two brothers, so the setup is real. What's missing is the specific obituary with those specific words, and the proof that it changed anything.
+Now, to be fair to the story, parts of it are true. Ludvig Nobel really did die in 1888, so the setup is real, and the story says newspapers confused the two brothers, but nobody has turned up the paper that did it. What's missing is the specific obituary with those specific words, and the proof that it changed anything.
 
-And Nobel did write the will that created the prizes, in 1895. What we don't know is whether any obituary had anything to do with it. So the honest version is that the will is real, the brother's death is real, the mix-up is real, and the merchant of death obituary may not exist.
+And Nobel did write the will that created the prizes, in 1895. What we don't know is whether any obituary had anything to do with it. So the honest version is that the will is real, the brother's death is real, and the merchant of death obituary may not exist.
 
 ## 05 The Man Who Discovered Nitroglycerin
 
@@ -45,4 +45,4 @@ And here's the part I like. Nobel never claimed to have discovered nitroglycerin
 
 ## 07 The Plain Fact
 
-So here's the plain fact, Ascanio Sobrero discovered nitroglycerin in Turin in 1847, and Alfred Nobel turned it into dynamite and patented it in 1867, and he said publicly that Sobrero came first. Ludvig Nobel died in 1888, and newspapers did mix up the brothers, but historians have never found a copy of the merchant of death obituary, and we don't know if anything like it shaped the 1895 will. Somebody did it first, and it was Ascanio Sobrero, and Nobel said so himself.
+So here's the plain fact, Ascanio Sobrero discovered nitroglycerin in Turin in 1847, and Alfred Nobel turned it into dynamite and patented it in 1867, and he said publicly that Sobrero came first. Ludvig Nobel died in 1888, and the story says the papers mixed up the brothers, but historians have never found a copy of the merchant of death obituary, and we don't know if anything like it shaped the 1895 will. Somebody did it first, and it was Ascanio Sobrero, and Nobel said so himself.

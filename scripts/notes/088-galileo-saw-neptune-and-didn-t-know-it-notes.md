@@ -28,3 +28,7 @@ Left out on purpose (unverified / keep off air in research): "His notebooks surv
 - Searched: Kowal & Drake, Nature 287, 311-313 (1980) → confirms Galileo observed Neptune on 28 Dec 1612 and 28 Jan 1613, and that "Galileo also detected the motion of Neptune"; the abstract says the latter (January 1613) observation "differs by 1 arc min from the predicted position" → https://www.nature.com/articles/287311a0 ; https://ui.adsabs.harvard.edu/abs/1980Natur.287..311K/abstract
 - Fixes: (1) "the position Galileo drew comes within one arcminute of where Neptune should have been" changed to "the position Galileo recorded in January 1613 is only about one arcminute off from where Neptune should have been": the paper gives the figure for the January observation and says "differs by 1 arc min", not "within". On-screen text suggestion updated to "about 1 arcminute off". Word count 799 to 804.
 - Not search-verified (checked against research/knowledge only): Le Verrier/Adams prediction and Galle's 23 Sept 1846 find; NASA's "recorded as a star in December 1612" wording; Kowal and Drake's 1979 identification date.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Galileo also observed it on 27 January 1613 per some accounts; script's two dates match Kowal and Drake's abstract.

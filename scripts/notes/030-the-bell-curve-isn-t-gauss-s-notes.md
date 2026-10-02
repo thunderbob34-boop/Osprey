@@ -1,6 +1,6 @@
 # Notes: The Bell Curve Isn't Gauss's
 Research entry: 100-episode-lineup.md, heading "### 30. The Bell Curve Isn't Gauss's"
-Spoken words: 801
+Spoken words: 812
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

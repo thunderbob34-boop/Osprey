@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): White Rock's 1915/1
 - Searched: Coca-Cola history page: Sundblom from 1931, inspired by Moore's 1823 poem, "Santa appeared in a red coat before Sundblom painted him" → confirmed → https://www.coca-colacompany.com/about-us/history/haddon-sundblom-and-the-coca-cola-santas ; NMAH piece exists → https://americanhistory.si.edu/explore/stories/how-santa-brought-coca-cola-cold
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Nast in Harper's Weekly 1860s to 1880s and the 1881 Santa (standard; search results also mention Nast's 1881 fur-trimmed red suit, but the script's cautious wording is kept); Smithsonian Magazine article titles; Britannica "popularized, didn't invent" framing.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "every source agrees" on Coke popularizing the look is a mild absolute; Coke used Santa in ads in the 1920s before Sundblom (script never says otherwise).

@@ -1,10 +1,10 @@
 # The Ice Cream Cone Wasn't Born at the 1904 World's Fair
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 749 spoken words. The research is short, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 762 spoken words. The research is short, so this one runs short rather than padded.
 - Tone is light and summery. Nobody's a fraud here, the fair gets real credit for making the cone popular.
 - Say Ernest Hamwi as ERN-ist HAHM-wee, zalabia as zah-LAH-bee-uh, Italo Marchiony as EE-tah-loh mar-kee-OH-nee, and Agnes Marshall as AG-nis MAR-shul.
-- Every hedge in here is on purpose. Read "often told as", "popularized there", "the earliest claimant", "an edible ice cream cup", "he said", "on the evidence we have" and "December 1903" exactly as written.
+- Every hedge in here is on purpose. Read "often told as", "popularized there", "the earliest claimant", "an edible ice cream cup", "he said", "on the evidence we have", "the earliest recipe anybody's found" and "December 1903" exactly as written.
 - Don't give an exact day for Marchiony's patent being granted. Sources disagree, so it's "December 1903" on screen too.
 - Visuals: the 1888 cookbook page and the 1903 patent drawing are both great on screen. Show the patent drawing so viewers can see it's a cup, not a cone.
 - Good on-screen text moments are 1888, "Cornets with Cream", "Queen of Ices", September 22 1903, December 1903, US Patent 746,971, 1896 (his claim), and 1904.
@@ -39,4 +39,4 @@ Now, to be fair to the 1904 World's Fair, something real did happen there. The i
 
 ## 06 Who Did It First
 
-So here's the plain version. The ice cream cone was popularized at the 1904 St. Louis World's Fair, where several people claimed it, and a man in New York named Italo Marchiony patented a mold for edible ice cream cups in December 1903. And in 1888, in London, Agnes Marshall, the Queen of Ices, published a recipe for Cornets with Cream, horn-shaped cookies she said could be filled with any cream or water ice. Somebody did it first, and on the evidence we have, it was her.
+So here's the plain version. The ice cream cone was popularized at the 1904 St. Louis World's Fair, where several people claimed it, and a man in New York named Italo Marchiony patented a mold for edible ice cream cups in December 1903. And in 1888, in London, Agnes Marshall, the Queen of Ices, published a recipe for Cornets with Cream, horn-shaped cookies she said could be filled with any cream or water ice. Somebody did it first, and on the evidence we have, the earliest recipe anybody's found that says to fill an edible cone with ice is hers.

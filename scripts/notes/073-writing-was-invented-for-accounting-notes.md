@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): the planned "three 
 - Searched: Visible Language (2010, Oriental Institute/ISAC) treats Mesopotamia, Egypt, China, Mesoamerica as the four pristine, independent inventions → confirmed → https://isac.uchicago.edu/research/publications/oimp/oimp-32-visible-language-inventions-writing-ancient-middle-east-and
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Uruk tablets "more than 5,000 years old"; administrative contents (grain, animals, metals, land, labor, beer rations); "still debated whether the U-j signs are writing proper". Cold-open line "the oldest writing we have" left as is: U-j labels are also goods labels, so the bookkeeping point holds either way.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "the field's lead authority" is a superlative ("a leading authority" would be safer); whether the Uruk scribes wrote Sumerian is itself debated, so "the Sumerians" is the conventional shorthand.

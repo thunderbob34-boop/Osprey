@@ -32,3 +32,7 @@ Left out on purpose (unverified / keep off air in research): Gunther Burstyn's 1
 - Searched: Little Willie finished Nov 1915, oldest surviving tank, never saw service, at Bovington → confirmed → https://tankmuseum.org/article/little-willie/
 - Fixes: (1) The gist of the Commission's praise ("if his design had been taken up, Britain might have had a better tank, sooner") was a counterfactual the quoted line doesn't make; changed in 05 and 07 to the closer gist, that his 1912 design got there ahead of the tank Britain used in 1916 and in some ways did it better. Still given as gist, not exact words. Hedge list updated; word count 886 to 905.
 - Not search-verified (checked against research/knowledge only): 1915 resubmission; 1917 Melbourne model misplaced about six weeks, now at the AWM; State Library of SA letter.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (medium) Closing line "Somebody did it first, and that somebody was Lancelot de Mole" read as a world first, but Gunther Burstyn submitted his Motorgeschütz tank design to the Austro-Hungarian war ministry in 1911, before de Mole's 1912 submission. Scoped to "Somebody did it before Britain did, and that somebody was Lancelot de Mole." Burstyn still not named on air. Word count 905 to 907.
+- Low items noted, not changed: "first tank prototype ever completed" for Little Willie is the Tank Museum's framing; Russia's Vezdekhod (1915) and the Lincoln No. 1 Machine are occasionally argued, low risk.

@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): the exact month of 
 - Searched: none (search budget spent on higher-risk claims elsewhere in the batch).
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Michell's 1783 paper to Cavendish, read to the Royal Society (27 Nov 1783) and printed in Phil. Trans. (1784 volume; the script's "in 1783 he wrote a paper ... published" is fine); 500 times the Sun's radius at solar density; binary-star detection idea; Laplace 1796; Schwarzschild 1916; Wheeler popularizing "black hole" in 1967; Michell as rector of Thornhill, Yorkshire ("country parson in Yorkshire"); first black hole image 2019 (so "more than two hundred years" holds). All match standard scholarship.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Phil. Trans. printing was the 1784 volume ("in 1783 he wrote a paper ... published" is fine).

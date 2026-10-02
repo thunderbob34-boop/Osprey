@@ -32,3 +32,7 @@ Note: runs short (about 4 and a half minutes). The entry is thin and the brief s
 - Searched: 1862 International Exhibition and bronze medal; Parkesine Company 1866 to 1868 failure → confirmed by more than one source (no longer single-source) → https://blog.sciencemuseum.org.uk/alexander-parkes-materials-man-and-polymath/ ; https://plasticshof.org/members/alexander-parkes/
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Bakelite 1907, Yonkers; ACS first National Historic Chemical Landmark 1993; Hyatt celluloid patent 1870; semi-synthetic vs fully synthetic distinction.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "first man-made plastic" is the standard claim, but vulcanite/ebonite (1840s to 1850s) is sometimes counted as an earlier semi-synthetic; Bakelite was patented 1907 and announced in 1909.

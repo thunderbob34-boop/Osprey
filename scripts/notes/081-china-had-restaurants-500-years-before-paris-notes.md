@@ -33,3 +33,7 @@ Note: runs short (about 5 minutes) rather than padding.
 - Searched: Spang found no Boulanger in the records, "doesn't mean he didn't exist"; Roze de Chantoiseau appears in contemporary directories → confirmed → https://www.nationalgeographic.com/culture/article/who-invented-the-first-modern-restaurant
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): Columbia AFE "innumerable restaurants" wording; Chevallier's "snowballing of a myth" title; 1766/1767 date for Roze de Chantoiseau; restorative-broth meaning.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: Medium: "you might guess the restaurants go back even further up there [Kaifeng], and maybe they do" presented as a guess something that is documented: Meng Yuanlao's Dongjing Meng Hua Lu (preface 1147), written by a refugee from Kaifeng, describes the old capital's famous restaurants and over a hundred dishes (checked: https://en.wikipedia.org/wiki/Dongjing_Meng_Hua_Lu). Now it says there's an older memoir of Kaifeng, written by a man who fled it, that talks about its famous restaurants too, and that 1235 is the guide we're using. No new date is given on air. Reading-notes hedge "the date we can actually stand on" swapped for "the date we're sticking with". Word count 784 to 800.
+- Low items noted, not changed: "historians argue" sits right after an economist (Kiefer); "In 1700s Paris a restaurant wasn't a place you went" was true only for the earlier part of the century.

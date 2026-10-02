@@ -1,6 +1,6 @@
 # Notes: The Tailor Riot That Smashed the First Sewing Machines
 Research entry: 100-episode-lineup.md, heading "### 29. The Tailor Riot That Smashed the First Sewing Machines"
-Spoken words: 864
+Spoken words: 875
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

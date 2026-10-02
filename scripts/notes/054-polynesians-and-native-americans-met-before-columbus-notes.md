@@ -1,6 +1,6 @@
 # Notes: Polynesians Reached the Americas
 Research entry: episode-research.md — "# Job 3" section, entry "### 34." (Navigation)
-Spoken words: 1068 (after review)
+Spoken words: 1086 (after re-check B)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -34,3 +34,7 @@ Left out on purpose (unverified / keep off air in research): the cumal/kumara wo
 - Also surfaced: a published critique, "Did ancient Americans settle in Polynesia? The evidence doesn't stack up" → https://phys.org/news/2020-07-ancient-americans-polynesia-evidence-doesnt.html
 - Fixes: (1) Cold open "the proof is in people's DNA" → "the evidence is in people's DNA", and 07 "the DNA proves it" → "the DNA shows it", since the 2020 finding has had published pushback (the 2024 paper supports it, but "proof" overstates). Hedges added to the reading-notes list. Word count unchanged at 1,068.
 - Not search-verified (checked against research/knowledge only; session search budget ran out): Hōkūle'a dates (1 May, 1 June Mataiva, 4 June Papeete 1976) and Mau Piailug, Andrew Sharp 1956, stick-chart types, Mangaia sweet potato c. 1000 CE, 2018 Current Biology study, L'Anse aux Meadows 1021 and the 993 event. All match standard scholarship.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (medium) Section 05 gave admixture at about 1150 in the South Marquesas but the contact itself at around 1200, which reads as mixing before meeting. Added "and those are rough dates, so don't let the 1150 and the 1200 trip you up, they overlap." Word count 1,068 to 1,086.
+- Low items noted, not changed: The Marshall Islands stick charts are Micronesian, not Polynesian; the script never calls them Polynesian, but they sit inside the Polynesian section. "Coastal Colombia and Ecuador" is the Stanford press wording; the paper's abstract says present-day Colombia (already hedged "closest to").

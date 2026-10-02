@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): the town of the Roj
 - Searched: Herschel 1858 Konai handprint → confirmed, but the 1858 contract was made at Jungipoor (Herschel was in Hooghly later, when he wrote the 1877 letter) → https://www.gutenberg.org/files/34859/34859-h/34859-h.htm (Herschel, The Origin of Finger-printing); Fingerprint Sourcebook ch. 1
 - Fixes: (1) "a British administrator in Hooghly named William Herschel. In 1858..." changed to "a British administrator in Bengal" so the 1858 contract isn't placed in Hooghly (it was at Jungipoor); "the Hooghly Letter" kept. Word count unchanged (960).
 - Not search-verified (checked against research/knowledge only): Hooghly Letter date 15 Aug 1877; Galton's statistical work; Galton-Henry adopted by Scotland Yard; Faulds-Herschel dispute and the Nature "Origin of Finger-Printing" piece (nature.com/articles/098268a0 is a 1916 Nature item matching Herschel's book title; "keeps its own record" is loose but not wrong); Vucetich "first workable" (NLM wording per research).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: Henry's classification was built with Azizul Haque and Hem Chandra Bose in India, who go uncredited (not claimed otherwise); "Nature itself keeps its own record" is loose wording; "bitter public fight" fairly describes the 1894+ exchanges.

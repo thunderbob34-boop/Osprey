@@ -35,3 +35,7 @@ Left out on purpose (unverified / keep off air in research): the "$40,000 licens
 - Searched: Apple licensed from SRI; Engelbart got a one-time lump sum, no royalties → confirmed → https://www.smithsonianmag.com/smart-news/the-creator-of-the-computer-mouse-never-received-any-royalties-7133825/
 - Fixes: (1) Section 05 now says the Alto (1973) had a mouse and point-and-click windows about ten years before the Lisa, and the full desktop of document and folder pictures came on Xerox's Star, on sale in 1981, two years before the Lisa. (2) Close in 07 matched ("Alto had a mouse and windows in 1973, Xerox's Star had the desktop of folders in 1981"). Added "1981 Star" to on-screen text; word count 856 to 889.
 - Not search-verified (checked against research/knowledge only): patent US 3,541,541 dates and title; Dec 1979 PARC visit and Stanford "reinforced" wording; Lisa 1983 and Mac 1984 (all standard).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: "all in one afternoon" (the demo was in the afternoon session, fine); "windows" for the 1968 split-screen views is the standard description.

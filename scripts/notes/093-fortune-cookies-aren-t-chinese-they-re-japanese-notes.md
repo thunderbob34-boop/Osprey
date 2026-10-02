@@ -1,6 +1,6 @@
 # Notes: Fortune Cookies Aren't Chinese - They're Japanese
 Research entry: 100-episode-lineup.md, heading "### 93. Fortune Cookies Aren't Chinese — They're Japanese"
-Spoken words: 819
+Spoken words: 828
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -29,3 +29,7 @@ Left out on purpose (unverified / keep off air in research): the WWII internment
 - Searched: tsujiura senbei near Kyoto by the 1870s; Nakamachi; 1878 storybook illustrations of a senbei shop; Benkyodo opened 1906 and made the cookies for Hagiwara's Tea Garden → all confirmed → https://www.history.com/articles/fortune-cookies-invented-chinese-japanese ; https://www.kqed.org/news/11742748/unwrapping-the-california-origins-of-the-fortune-cookie ; https://americanhistory.si.edu/explore/stories/origins-fortune-cookie
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): "bigger and darker, sesame and miso"; late-1990s date of Nakamachi's work; David Jung in Los Angeles; 1983 Court of Historical Review siding with San Francisco (matches standard accounts).
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: (1) Section 03 said the Japanese crackers had "a little paper message tucked inside it", contradicting "tucked into the bend" a breath earlier; History.com (https://www.history.com/articles/fortune-cookies-invented-chinese-japanese) says the fortune sat in the bend "instead of its hollow inside". Now "a fortune tucked into the bend, not inside the hollow the way ours are, so the basic idea, a folded cookie with a little paper message tucked into the fold, was already there". Word count 819 -> 828.
+- Low items noted, not changed: "Nobody in China" is an absolute (fine as a hook); the shrine (Fushimi Inari) is today inside Kyoto city, so "just outside Kyoto" is the source's framing; title states flatly what the script hedges as "most likely".

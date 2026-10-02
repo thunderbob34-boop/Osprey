@@ -30,3 +30,7 @@ Left out on purpose (unverified / keep off air in research): any single "first r
 - Searched: "Rocket 88" session date and label → 5 March 1951 session at Sam Phillips's Memphis Recording Service, released on Chess, "often cited as one of the first rock and roll records" → https://www.loc.gov/static/programs/national-recording-preservation-board/documents/Rocket-88_Propes.pdf ; https://www.britannica.com/topic/Rocket-88
 - Fixes: none
 - Not search-verified (checked against research/knowledge only): 1944 "Strange Things Happening Every Day" with Sammy Price; influence on Elvis per Gayle Wald via NPR; Hall of Fame first class 1986 with Little Richard; Tharpe's 2018 Early Influences induction.
+
+## Re-check B (2026-10-02)
+- High/medium findings fixed: none
+- Low items noted, not changed: some biographers think Tharpe's 1938 guitar was acoustic; "late 1930s electric" rests on Britannica (Re-check A). "Rocket 88" session date is given as 3 or 5 March 1951 in some sources; LoC essay says 5 March.
