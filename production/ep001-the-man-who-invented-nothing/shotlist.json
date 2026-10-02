@@ -26,14 +26,23 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "but Edison didn't invent the lightbulb, plenty of people had glowing electric lamps before he got one to work,",
-  "type": "title",
-  "template": "title",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "title": "The Man Who Invented Nothing",
-   "subtitle": "Edison, the lightbulb, and the fight he lost"
+   "kind": "portrait",
+   "label": "Thomas Edison, c. 1880",
+   "crop": "slow push-in on the face",
+   "asset": "loc-gov-item-89714703"
   },
-  "visual": "Episode title card holds as the first myth is knocked down.",
-  "source": null,
+  "visual": "Edison portrait, slow push-in.",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division",
+   "item": "[Thomas Edison, head-and-shoulders portrait, facing left]",
+   "url": "https://www.loc.gov/item/89714703/",
+   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
+   "credit": "Library of Congress Prints and Photographs Division, LC-USZ62-98067",
+   "verified": true
+  },
   "notes": "Used once, for the episode title."
  },
  {
@@ -78,23 +87,14 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "And yes, the title of this video is a bit of a jab,",
-  "type": "archival",
-  "template": "archival",
+  "type": "title",
+  "template": "title",
   "fields": {
-   "kind": "portrait",
-   "label": "Thomas Edison, c. 1880",
-   "crop": "slow push-in on the face",
-   "asset": "loc-gov-item-89714703"
+   "title": "The Man Who Invented Nothing",
+   "subtitle": "Edison, the lightbulb, and the fight he lost"
   },
-  "visual": "Edison portrait, slow push-in.",
-  "source": {
-   "institution": "Library of Congress, Prints and Photographs Division",
-   "item": "[Thomas Edison, head-and-shoulders portrait, facing left]",
-   "url": "https://www.loc.gov/item/89714703/",
-   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
-   "credit": "Library of Congress Prints and Photographs Division, LC-USZ62-98067",
-   "verified": true
-  }
+  "visual": "Episode title card holds as the first myth is knocked down.",
+  "source": null
  },
  {
   "id": "01-f",

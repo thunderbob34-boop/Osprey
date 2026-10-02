@@ -5,10 +5,10 @@ Total runtime 9:37.0 (116 beats). Narration: Holden (Higgsfield preset 3c9d6053-
 | Beat | In | Dur | Narration (start) | On screen | Route | Source / credit |
 |---|---|---|---|---|---|---|
 | 01-a | 0:00.0 | 4.7s | Ask almost anybody who invented the lightbulb and you&#x27;ll… | Slow push-in on the Edison portrait as the familiar answer is named. | archival (fetch) | Library of Congress Prints and Photographs Division, LC-USZ62-98067 ✅ |
-| 01-b | 0:04.7 | 5.9s | but Edison didn&#x27;t invent the lightbulb, plenty of people… | Episode title card holds as the first myth is knocked down. | code graphic |  |
+| 01-b | 0:04.7 | 5.9s | but Edison didn&#x27;t invent the lightbulb, plenty of people… | Edison portrait, slow push-in. | archival (fetch) | Library of Congress Prints and Photographs Division, LC-USZ62-98067 ✅ |
 | 01-c | 0:10.6 | 5.6s | and the fair way to say it is that… | Edison lamp object, slow push-in, on &quot;commercially practical&quot;. | archival (fetch) | Edison &quot;New Year&#x27;s Eve&quot; Lamp, 1879, Smithsonian National Museum of American History ✅ |
 | 01-d | 0:16.2 | 4.0s | which is a big deal, and we&#x27;ll give him… | Card: the hedged credit, landing on &quot;full credit&quot;. | code graphic |  |
-| 01-e | 0:20.2 | 4.1s | And yes, the title of this video is a… | Edison portrait, slow push-in. | archival (fetch) | Library of Congress Prints and Photographs Division, LC-USZ62-98067 ✅ |
+| 01-e | 0:20.2 | 4.1s | And yes, the title of this video is a… | Episode title card holds as the first myth is knocked down. | code graphic |  |
 | 01-f | 0:24.3 | 4.4s | Edison held over a thousand US patents and plenty… | Phonograph patent drawing, slow pan. | archival (fetch) | US Patent 200,521 (T. A. Edison, 1878) ✅ |
 | 01-g | 0:28.7 | 4.7s | But here&#x27;s the part most people never hear, the… | Text card. | code graphic |  |
 | 01-h | 0:33.3 | 4.7s | the real fight was over how to power it,… | Text card; the sub appears on the last words. | code graphic |  |
