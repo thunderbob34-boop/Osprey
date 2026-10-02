@@ -1,6 +1,6 @@
 # Notes: The Bell Curve Isn't Gauss's
 Research entry: 100-episode-lineup.md, heading "### 30. The Bell Curve Isn't Gauss's"
-Spoken words: 803
+Spoken words: 801
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -20,3 +20,9 @@ Spoken words: 803
 
 Hedges kept: "the story goes" (coffee house, attributed to MacTutor only), "as an approximation", "not as a law of errors", "one statistics reference", "a historical error".
 Left out on purpose (unverified / keep off air in research): The "predicted his own death" legend (unknown/legend, and the entry gives no detail). Gauss's 1777 birth date (not re-checked).
+
+## Review
+- Fact fixes: 1 (minor). "Gauss wasn't even the next one to pick it up" implied a complete chain of who picked it up next, which the entry doesn't establish; replaced with "there's one more name in the middle" before the Laplace 1774/1812 line. Arithmetic checked: 1809 minus 1733 is 76; Nature 1933 to now is "almost a hundred years".
+- Cadence fixes: 7. Joined "Here's the version most people pick up... The bell curve..."; "a real reason his name stuck. Gauss linked..."; "working in London. And on November 12th..."; turned the fragment "Seventy-six years." into "that's seventy-six years" while keeping the repetition beat; joined "didn't have it. That came from... James Stirling"; joined "a warning label. The story goes..."; joined the opening of the close.
+- Format fixes: word count updated 803 to 801. Length 801 is under the 900 floor (reported; the death-prediction legend stays off air, not padded).
+- Remaining concerns for Gus: none.

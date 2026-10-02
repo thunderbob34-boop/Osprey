@@ -1,10 +1,10 @@
-# Leonardo Solved the Heart Valve 450 Years Early
+# Leonardo Saw How the Heart Valve Closes, 450 Years Early
 
 READING NOTES
-- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 748 spoken words. The research is thin, so this one runs short on purpose.
+- Runtime is about 4 to 5 minutes at a relaxed pace, roughly 752 spoken words. The research is thin, so this one runs short on purpose.
 - Tone is calm and curious. Keep the anatomy plain, no gore.
 - Say Valsalva as val-SAL-vuh, Bellhouse as BELL-house, Gharib as ga-REEB, Caltech as KAL-tek.
-- Every hedge in here is on purpose. Read "around 1513", "about 450 years", "the late 1960s", "rebuilt" and "has nothing to do with plumbing valves" exactly as written. Don't say Leonardo invented the check valve or any plumbing valve.
+- Every hedge in here is on purpose. Read "around 1513", "about 450 years", "the late 1960s", "nearly five hundred years later", "rebuilt" and "has nothing to do with plumbing valves" exactly as written. Don't say Leonardo invented the check valve or any plumbing valve.
 - Visuals: no real surgery footage or open hearts. Use Leonardo's drawing of the aortic valve from the Royal Collection (RCIN 919082), simple animated diagrams of a valve closing, and text cards.
 - Good on-screen text moments are c. 1512 to 1513, RCIN 919082, 1968, about 450 years, and 2002.
 
@@ -14,9 +14,7 @@ Around 1513, Leonardo da Vinci worked out a glass model of the aorta, with grass
 
 ## 02 The Famous Version
 
-So here's the version you'd find in the medical history. The way the aortic valve closes, the mechanism behind it, is usually credited to two researchers, both named Bellhouse, who published it in the science journal Nature in 1968, and to later work that used imaging to watch the flow. And that's real science, and it's fair that they get credit for it.
-
-But Leonardo da Vinci saw the same thing about 450 years before them, and he did it with a model he built himself, so this one is a lot older than the textbook date.
+So here's the version you'd find in the medical history. The way the aortic valve closes, the mechanism behind it, is usually credited to two researchers, both named Bellhouse, who published it in the science journal Nature in 1968, and to later work that used imaging to watch the flow. And that's real science, and it's fair that they get credit for it, but Leonardo da Vinci saw the same thing about 450 years before them, and he did it with a model he built himself, so this one is a lot older than the textbook date.
 
 ## 03 What the Valve Does
 
@@ -26,7 +24,7 @@ The question is how it closes so well, and part of the answer is swirls in the b
 
 ## 04 The Glass Model
 
-Now here's the part that matters. Leonardo injected wax into an ox heart, and he built a glass model of the root of the aorta, the part right where the valve sits. Then he pumped water through it with grass seeds in the water, so he could see how the water moved. And what he saw were swirling eddies, little whirlpools, that help the aortic valve snap shut.
+Now here's the part that matters. Leonardo injected wax into an ox heart, and he built a glass model of the root of the aorta, the part right where the valve sits, and then he pumped water through it with grass seeds in the water so he could see how the water moved, and what he saw were swirling eddies, little whirlpools, that help the aortic valve snap shut.
 
 His drawing of it is still around, it's in the Royal Collection in Britain, catalogued as RCIN 919082, and it's dated to about 1512 to 1513. So this isn't a legend, you can look at the page.
 
@@ -42,7 +40,7 @@ And his aortic work has fed into the design of prosthetic heart valves and surge
 
 ## 06 Not the Plumbing
 
-Now, to be fair, you might run into a bigger version of this story online, that Leonardo's valve work gave us the modern check valve, the one-way valve you find in plumbing, and the research says that's wrong. His aortic work has influenced heart valve design, and it has nothing to do with plumbing valves. So keep it about the heart, because the heart part is true, and it's impressive enough on its own.
+Now, to be fair, you might run into a bigger version of this story online, that Leonardo's valve work gave us the modern check valve, the one-way valve you find in plumbing, and that's wrong, because one-way valves like that are far older than Leonardo. His aortic work has influenced heart valve design, and it has nothing to do with plumbing valves. So keep it about the heart, because the heart part is the part that's true.
 
 ## 07 The Seeds in the Glass
 

@@ -1,6 +1,6 @@
 # Notes: The Tailor Riot That Smashed the First Sewing Machines
 Research entry: 100-episode-lineup.md, heading "### 29. The Tailor Riot That Smashed the First Sewing Machines"
-Spoken words: 868
+Spoken words: 864
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 868
 
 Hedges kept: "about 80", "about a year", "destroyed" / "smashed" (never "burned"; the manifest hook's "burned it out" was changed), "the early 1830s", "more than a decade". Thimonnier is called "a Frenchman," not "a French tailor," since the entry doesn't state his trade.
 Left out on purpose (unverified / keep off air in research): Thimonnier dying in a poorhouse (1857) and the second mob attack (single-source, Smithsonian Magazine only). "Torch-waving" detail. Any motive for Hunt beyond what Britannica and the NMAH report.
+
+## Review
+- Fact fixes: 1. "Howe was first with the patent" was wrong on the episode's own facts (Thimonnier patented his machine in 1830); changed to "Howe was first with the lockstitch patent". Arithmetic checked: 15 years (1831 to 1846) in the cold open and 16 years (1830 to 1846) in section 03 are both correct for what each refers to.
+- Cadence fixes: 8. Joined "Here's the version most people know. In 1846..."; "you can see why. A patent..."; cut the punchy fragment "Not even close." after "right?"; joined "didn't just build one. He had about 80..."; joined the riot opener into one breath; joined "Hunt didn't patent it. He dropped it in 1838..." and turned the Paris/New York contrast from three short lines into one sentence; joined the opening of the close; replaced the crafted closer "a Frenchman whose factory lasted about a year" with "it was Barthélemy Thimonnier in Paris".
+- Format fixes: word count updated 868 to 864. Length 864 is under the 900 floor (reported; poorhouse death and second attack stay off air as single-source, not padded).
+- Remaining concerns for Gus: none.

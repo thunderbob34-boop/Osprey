@@ -21,7 +21,7 @@ And I'll say this now, the 1935 sale is real. Darrow did sell the game to Parker
 
 In 1904, a woman named Lizzie Magie, Elizabeth Magie, patented a game called The Landlord's Game. It's US patent number 748,626, and a patent is primary evidence, it's a government record with her name and a date on it, so this part isn't a legend, it's on file.
 
-And if you saw her board you'd recognise it. It had a square track running around the edge, and it had a Go to Jail corner. And then in 1924 she revised the patent, so she was still working on this game twenty years after she first patented it.
+And if you saw her board you'd recognise it, it had a square track running around the edge, and it had a Go to Jail corner. And then in 1924 she revised the patent, so she was still working on this game twenty years after she first patented it.
 
 ## 04 What It Was For
 
@@ -29,7 +29,7 @@ Now here's the part that matters, and it's the part that turns this from a trivi
 
 And land monopoly is pretty much what it sounds like, it's when a small number of people own the land, and everybody else has to pay them to live on it or use it. So her game was built to show people how that works and why it's a problem. One Smithsonian headline put it this way, Monopoly was designed to teach the 99 percent about income inequality.
 
-So think about that for a second. The world's most famous game about buying up property and bankrupting everybody else started life as a game about why that's bad, right? It started as a warning, and it ended up as the thing it was warning about.
+So think about that for a second, the world's most famous game about buying up property and bankrupting everybody else started life as a game about why that's bad, right?
 
 ## 05 How It Got to Darrow
 

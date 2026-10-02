@@ -1,6 +1,6 @@
 # Notes: Galileo Didn't Invent the Telescope
 Research entry: episode-research.md, "## New topic detail" section, entry "### 3." (Galileo Didn't Invent the Telescope)
-Spoken words: 852
+Spoken words: 855
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

@@ -1,6 +1,6 @@
 # Notes: Fibonacci's Numbers Started in Indian Poetry
 Research entry: 100-episode-lineup.md, heading "### 18. Fibonacci's Numbers Belong to Indian Poets"
-Spoken words: 904
+Spoken words: 905
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

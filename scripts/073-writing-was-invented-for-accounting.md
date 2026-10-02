@@ -16,19 +16,19 @@ The oldest writing we have wasn't poetry or prayers, it was bookkeeping for grai
 
 So here's the version most of us got in school. Writing was invented in Mesopotamia by the Sumerians, and the oldest tablets come from a city called Uruk, in what's now Iraq. Those tablets are clay, and they're more than 5,000 years old.
 
-And when people picture the first writing, they tend to picture something important, right? A king's name, a prayer to a god, a story somebody wanted to remember. That's the part of the story that's off, and the people who've spent their careers reading these tablets are the ones who'll tell you so.
+And when people picture the first writing, they tend to picture something important, like a king's name or a prayer to a god or a story somebody wanted to remember, right? And that's the part of the story that's off, and the people who've spent their careers reading these tablets are the ones who'll tell you so.
 
 ## 03 What the Tablets Actually Say
 
 The scholar to know here is Robert Englund, the field's lead authority on what's called proto-cuneiform, which is the earliest stage of that writing. And the numbers generally cited for the oldest tablets from Uruk are about 85 percent administrative records and about 15 percent lexical texts.
 
-Now, administrative just means records of stuff, grain, animals, metals, land, labor, and beer rations, so the bulk of the oldest writing on Earth is basically receipts and inventories. And lexical texts are word lists, and those were teaching tools, lists that student scribes copied out to learn the signs. So even the part that isn't accounting is mostly training people to do the accounting, right?
+Now, administrative just means records of stuff, grain, animals, metals, land, labor, and beer rations, so the bulk of the oldest writing from Uruk is basically receipts and inventories. And lexical texts are word lists, and those were teaching tools, lists used to train student scribes. So even the part that isn't accounting is mostly there to train the scribes, right?
 
-And here's the part that matters. Englund points out that 85 and 15 are averages. In the very oldest layer, the tablets called Uruk IV, less than 1 percent are word lists, and close to 20 percent of the next layer, Uruk III, are word lists. So in the very oldest layer, almost nothing but accounts survives. Now, to be fair, those figures come out of one research tradition, Englund and the project he worked with in Berlin, and nobody has done a separate independent count, which is pretty normal for a body of tablets like this, so the honest way to say it is about 85 percent.
+And here's the part that matters. Englund points out that 85 and 15 are averages. In the very oldest layer, the tablets called Uruk IV, less than 1 percent are word lists, and close to 20 percent of the next layer, Uruk III, are word lists. So in the very oldest layer, almost nothing but accounts survives. Now, to be fair, those figures come out of one research tradition, Englund and the project he worked with in Berlin, and no separate independent count turned up, which is pretty normal for a body of tablets like this, so the honest way to say it is about 85 percent.
 
 ## 04 Fair Credit to Sumer
 
-None of this makes the Sumerians look small. Turning a pile of grain records into a system of signs that could be taught and copied and passed down is a big deal, right? And the word lists show they were training people to do it on purpose.
+None of this makes the Sumerians look small. Turning a pile of grain records into a system of signs that could be taught and copied and passed down is a big deal. And the word lists show they were training people to do it on purpose.
 
 And scholars do count Mesopotamia as one of the places where writing was invented from scratch. A 2010 book out of the University of Chicago, called Visible Language, treats writing as being invented independently four times, in Mesopotamia, in Egypt, in China and in Mesoamerica. And that's worth slowing down on, because it means the idea isn't that one people came up with writing and everybody else borrowed it, it means writing got invented separately more than once, and Mesopotamia is one of those times. So the Sumerians have a real claim, they just weren't writing poetry when they made it.
 
@@ -40,6 +40,6 @@ Now, to be fair, it's still debated whether those signs on the U-j labels count 
 
 ## 06 Grain and Beer
 
-So the plain version goes like this. The oldest writing we have from Uruk is mostly bookkeeping, about 85 percent of it, records of grain and animals and metals and labor and beer, and in the very oldest layer it's almost nothing but accounts, and most of the rest is word lists that were there to teach the next scribes how to keep those records. The Sumerians get the credit for writing, and they earned a share of it, but a set of little bone and ivory labels in an Egyptian tomb is right there with them, and nobody can say for sure who was first.
+So the plain version goes like this. The oldest writing we have from Uruk is mostly bookkeeping, about 85 percent of it, records of grain and animals and metals and labor and beer, and in the very oldest layer it's almost nothing but accounts, and most of the rest is word lists that were there to train the next scribes. The Sumerians get the credit for writing, and they earned a share of it, but a set of little bone and ivory labels in an Egyptian tomb is right there with them, and nobody can say for sure who was first.
 
 Somebody did it first, and in this case the people who study it still can't say for sure whether that was in Iraq or in Egypt.

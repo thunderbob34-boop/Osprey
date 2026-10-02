@@ -1,6 +1,6 @@
 # Notes: Franklin's Kite Wasn't First
 Research entry: episode-research.md, "# Job 3" section, entry "### 51." (Electricity)
-Spoken words: 946
+Spoken words: 941
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

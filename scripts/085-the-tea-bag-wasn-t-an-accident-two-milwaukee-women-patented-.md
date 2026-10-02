@@ -1,7 +1,7 @@
 # Two Milwaukee Women Patented the Tea Bag Before the "Accident"
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 876 spoken words.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 882 spoken words.
 - Tone is warm and plain. Sullivan isn't a villain, he gets real credit for popularizing the tea bag, and the script never says he copied anybody.
 - Say Molaren as mo-LAR-en. Lawson is as written.
 - Every hedge in here is on purpose. Read "the story goes", "supposedly", "gets credit for popularizing", "the earliest tea-bag patent the usual histories cite", "there's no sign" and "probably came up with his on his own" exactly as written. Don't say Lawson and Molaren were the first people ever to put tea in cloth, and don't say they made money from it.
@@ -34,7 +34,7 @@ So the thing in the famous story that supposedly happened by accident in 1908 wa
 
 Now, to be fair, there are a few things we can't say here. We can't say Lawson and Molaren were the first people in history to ever put tea leaves in a piece of cloth, nobody can prove that, so the fair way to say it is that theirs is the earliest tea-bag patent the usual histories cite. And there's no sign that they made money from it or turned it into a business, there's no sign they ever sold it at all. But the patent itself isn't a rumor, it's still there, it's a primary source, and you can pull it up by its number, 723,287, and see both of their names on it.
 
-And Sullivan isn't a fraud in this story either. Smithsonian Magazine says Sullivan gets credit for popularizing the tea bag, and popularizing something is a real thing, it's the difference between an idea sitting in a patent file and an idea people actually use. And Sullivan probably came up with his on his own. So you've got the same idea showing up twice, once on purpose in Milwaukee and once, as the story goes, by accident in New York.
+And Sullivan isn't a fraud in this story either. Smithsonian Magazine says Sullivan gets credit for popularizing the tea bag, and popularizing something is a real thing, it's the difference between an idea sitting in a patent file and an idea people actually use. And Sullivan probably came up with his on his own. So you've got the same idea showing up twice, once on purpose in Milwaukee and once, as the story goes, by accident in New York, right?
 
 ## 06 Who Did It First
 

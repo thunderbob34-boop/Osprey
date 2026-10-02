@@ -30,15 +30,15 @@ Now, to be fair, there's a reason Jenner's name is the one people know. Jenner r
 
 And there's more, because the idea of protecting people by giving them a disease on purpose is older than Jesty and older than Jenner, by a long way. Cowpox is a related disease you could catch from cows, and the whole point of using it is that it's much milder than smallpox. But before cowpox, there was something called variolation, and variolation means deliberately giving someone a mild case of smallpox itself, the idea being that a mild case now protects you from a bad case later.
 
-And people in China and India were doing that by the 1500s, and for China, a paper in the CDC's own journal puts the practice somewhere between 1465 and 1572, during the Ming era. So the basic idea, give people a controlled dose of the disease so they don't get the deadly version, was being practised centuries before a farmer in Dorset went to his neighbor's cows.
+And people in China and India were doing that by the 1500s, and for China, a paper in the CDC's own journal puts the practice there by sometime between 1465 and 1572, during the Ming era. So the basic idea, give people a controlled dose of the disease so they don't get the deadly version, was being practised centuries before a farmer in Dorset went to his neighbor's cows.
 
 ## 05 Onesimus
 
-Now here's the part of the story that a lot of people have never heard, and it's the part that brought this idea to America. There was an enslaved West African man named Onesimus, and he taught inoculation to Cotton Mather, in Boston. So the knowledge didn't come from a European doctor, it came from an enslaved man who already knew it.
+Now here's the part of the story that a lot of people have never heard, and it's the part where this idea shows up in America, because there was an enslaved West African man named Onesimus, and he taught inoculation to Cotton Mather, in Boston. So the knowledge didn't come from a European doctor, it came from an enslaved man who already knew it.
 
 And in 1721, during a smallpox epidemic in Boston, it was put to use, with Cotton Mather and Zabdiel Boylston, and the numbers that come down to us are that 248 people were inoculated, and 6 of them died. So 248 people, 6 deaths, in Boston, in 1721, and that's seventy-five years before Edward Jenner's experiment with James Phipps.
 
-So Onesimus is a really, really important name in this story, right? He's one of the people who did it before the famous name, and he's a name most people never hear.
+So Onesimus is a really, really important name in this story, right? He's one of the people who knew this before the famous name, and he's a name most people never hear.
 
 ## 06 Who Was First
 

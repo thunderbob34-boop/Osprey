@@ -35,9 +35,9 @@ And even before that, Chicago meatpackers had moving disassembly lines. That's t
 
 ## 06 What Ford Actually Did
 
-Now, to be fair to Henry Ford, what his team did in 1913 is a really, really big deal. They made the line move. They phased it in through 1913, starting with smaller parts like magnetos in April, and then the chassis later that year, so instead of the work staying in one place, the line itself carried the work past the workers.
+Now, to be fair to Henry Ford, what his team did in 1913 is a really, really big deal. They made the line move, and they phased it in through 1913, starting with smaller parts like magnetos in April, and then the chassis later that year, so instead of the work staying in one place, the line itself carried the work past the workers.
 
-And look at what that did. Under the old stationary method, building a Model T took about twelve and a half hours. By early 1914, with the moving line, a Model T came off the line about every 93 minutes. About twelve and a half hours, down to about 93 minutes, right? That's the thing Ford actually did, and it changed how the car got made. So the fair way to say it is that Ford didn't invent the car, and he didn't invent the assembly line, but his team made the line move, and that's a real achievement, and it's his.
+And look at what that did, under the old stationary method, building a Model T took about twelve and a half hours. By early 1914, with the moving line, a Model T came off the line about every 93 minutes. About twelve and a half hours, down to about 93 minutes, right? That's the thing Ford actually did, and it changed how the car got made. So the fair way to say it is that Ford didn't invent the car, and he didn't invent the assembly line, but his team made the line move, and that's a real achievement, and it's his.
 
 ## 07 One Disputed Name
 

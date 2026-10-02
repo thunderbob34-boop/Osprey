@@ -1,7 +1,7 @@
 # Electric Cars Outnumbered Gas Cars Around 1900
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 798 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 800 spoken words.
 - Tone is calm and a little surprised at the numbers. Modern electric car makers get fair credit, nobody is called a fake.
 - Say Lohner as LOH-ner, Porsche as POR-shuh, Semper Vivus as SEM-per VEE-vus.
 - Every hedge in here is on purpose. Read "around 1900", "roughly a third", "outnumbered", "share of cars on the road, not sales", "the 1830s", "according to Britannica", "according to Porsche" and "by about 1905" exactly as written. Only say "outsold" in the line that rules it out, and never put a single year on Anderson's carriage.
@@ -20,7 +20,7 @@ But the electric car isn't new at all. It's older than most people would ever gu
 
 ## 03 The 1830s
 
-The story goes back to the 1830s, to a Scottish inventor named Robert Anderson, who built a crude electric carriage. Sources differ on the exact year, so the fair way to say it is the 1830s. And it was crude, it ran on batteries that couldn't be recharged, so once they were used up, that was it, and it wasn't practical. So this isn't a car you'd want to drive, but it's an electric carriage, and it's from the 1830s.
+The story goes back to the 1830s, to a Scottish inventor named Robert Anderson, who built a crude electric carriage. Sources differ on the exact year, so the fair way to say it is the 1830s. And it was crude, it ran on batteries that couldn't be recharged, so once they were used up, that was it, and it wasn't practical. So this isn't a car you'd want to drive, but it's an electric carriage, and it's from the 1830s, right?
 
 ## 04 The Numbers in 1900
 

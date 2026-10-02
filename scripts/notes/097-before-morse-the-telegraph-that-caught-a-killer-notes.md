@@ -1,6 +1,6 @@
 # Notes: Before Morse: The Telegraph That Caught a Killer
 Research entry: 100-episode-lineup.md, heading "### 97. Before Morse: The Telegraph That Caught a Killer"
-Spoken words: 746
+Spoken words: 753
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

@@ -1,6 +1,6 @@
 # Notes: The Ice Cream Cone Wasn't Born at the 1904 World's Fair
 Research entry: 100-episode-lineup.md, heading "### 98. The Ice Cream Cone Wasn't Born at the 1904 World's Fair"
-Spoken words: 752
+Spoken words: 749
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

@@ -1,7 +1,7 @@
 # The Internet's First Message Was "lo"
 
 READING NOTES
-- Runtime is about 7 minutes at a relaxed pace, roughly 1,025 spoken words.
+- Runtime is about 7 minutes at a relaxed pace, roughly 1,013 spoken words.
 - Tone is calm and a little amused at the crash, then matter-of-fact for the packet switching part. Nobody here is a villain, it's a story about credit being spread across a lot of people.
 - Say Kleinrock as KLINE-rock, Kline as KLINE, Duvall as doo-VAL, Pouzin as poo-ZAN, CYCLADES as SICK-la-deez.
 - Every hedge in here is on purpose. Read "about ten thirty", "about an hour later", "independently", "still argued over", "usually credited with the core idea", "running by 1970" and "the early 1970s" exactly as written. Don't put a sharper year on CYCLADES than "early 1970s", and don't take a side on who invented packet switching beyond that line.

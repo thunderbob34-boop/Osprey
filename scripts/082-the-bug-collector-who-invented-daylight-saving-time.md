@@ -1,7 +1,7 @@
 # The Bug Collector Who Invented Daylight Saving Time
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 924 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 908 spoken words.
 - Tone is light and easygoing, Hudson is a charming oddball and the story can smile a little, but no mocking him and no sarcasm about Franklin or Willett.
 - Say Willett as WILL-it.
 - Every hedge in here is on purpose. Read "as far as the record shows", "on his own", "may have been the first in the world", "a local claim" and "might be closer to a time-zone change" exactly as written. The Port Arthur section stays a claim, never a fact, so don't put "first in the world" on screen for it.
@@ -22,7 +22,7 @@ And it's easy to see why the Franklin story stuck, because Franklin is a name ev
 
 So here's who actually came first. George Vernon Hudson was a New Zealand postal worker, and he was also an entomologist, which is a scientist who studies insects, and he was serious about it. Now here's the part that matters, he had a day job, so his insect hunting had to happen after work, and the thing you need for hunting bugs after work is daylight. He wanted more of it in the evening, he wanted more of it so he could get out and collect.
 
-So on October 16th, 1895, Hudson presented a paper to the Wellington Philosophical Society, and in it he proposed shifting the clocks two hours for the season. Two hours, not one, so his version was twice the size of the hour you lose every spring. And the way that works is simple, the sun does exactly what it was going to do anyway, but if every clock moves forward two hours, then when you walk out of work at the same time on the clock, there's two more hours of daylight left in the day. That's the whole idea of daylight saving time, and that's what Hudson put in front of the Wellington Philosophical Society in 1895, and the society ridiculed the idea, they just didn't take it seriously.
+So on October 16th, 1895, Hudson presented a paper to the Wellington Philosophical Society, and in it he proposed shifting the clocks two hours for the season. Two hours, not one, so his version was twice the size of the hour you lose every spring, right? And the way that works is simple, the sun does exactly what it was going to do anyway, but if every clock moves forward two hours, then when you walk out of work at the same time on the clock, there's two more hours of daylight left in the day. That's the whole idea of daylight saving time, and that's what Hudson put in front of the Wellington Philosophical Society in 1895, and the society ridiculed the idea, they just didn't take it seriously.
 
 ## 04 Willett
 

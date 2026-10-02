@@ -1,10 +1,10 @@
 # Galileo Saw Neptune and Didn't Know It
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 805 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 799 spoken words.
 - Tone is calm and a little amused. Galileo isn't a fool here, and Le Verrier, Adams and Galle keep full credit for the discovery. The story is "saw it first", not "found it first".
 - Say Galilei as gal-ih-LAY-ee, Le Verrier as luh-VAIR-ee-ay, Galle as GAH-luh, Kowal as KOH-wahl.
-- Every hedge in here is on purpose. Read "saw it first, not found it first", "his notes record it shifting", "observed" and "never identified it as a planet" exactly as written. Don't say Galileo noticed or understood that it moved.
+- Every hedge in here is on purpose. Read "saw it first, not found it first", "his notes record it shifting", "observed", "never identified it as a planet", "nobody can say for sure, that's an interpretation" and "the first person we know of" exactly as written. Don't say Galileo noticed or understood that it moved.
 - Visuals: Galileo's notebook pages (the Jupiter drawings), a simple sky chart showing Jupiter, its moons and Neptune nearby, portraits of Le Verrier, Adams and Galle. Nothing sensitive.
 - Good on-screen text moments are Dec 28 1612, Jan 28 1613, Sept 23 1846, 1979 to 1980, and "within 1 arcminute".
 
@@ -34,7 +34,7 @@ And here's the detail that makes it convincing, according to the Nature paper, t
 
 ## 05 Saw It, Didn't Discover It
 
-Now, to be fair, there's a difference between seeing something and discovering it, and that difference matters here. Galileo observed Neptune, but he never discovered it, because he never identified it as a planet, to him it was a star. So the honest way to tell this is that Galileo saw it first, not found it first.
+Now, to be fair, there's a difference between seeing something and discovering it, and that difference matters here. Galileo observed Neptune, but he never discovered it, because he never identified it as a planet, to him it was a star, right? So the honest way to tell this is that Galileo saw it first, not found it first.
 
 And Le Verrier and Adams did something Galileo never did, they worked out there had to be a planet there and where to find it, and Galle went and found it, and that's a discovery. Galileo had the planet in his notebook more than two hundred years earlier and didn't know what he had.
 

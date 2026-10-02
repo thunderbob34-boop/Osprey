@@ -1,6 +1,6 @@
 # Notes: Before Google There Was RankDex
 Research entry: episode-research.md, "## New topic detail" section, entry "### 10." (Before Google: Robin Li's RankDex)
-Spoken words: 760
+Spoken words: 767
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 760
 
 Hedges kept: "parallel inventors" / "the West mostly forgot", never "Google copied"; Page's earlier priority date stated plainly ("by a few weeks"); BackRub 1996 included; influence on Page only "as Forbes and TIME tell it" and "said to have inspired"; methods described as different; Garfield included as the older root.
 Left out on purpose (unverified / keep off air in research): any claim that Google copied Li or that Li's patent proves priority; detail on IDD's corporate relationship to Dow Jones (the script says only "at IDD for Dow Jones"); anything about Baidu's size, market or founding date (not in the entry); anything about Brin's role in the patents.
+
+## Review
+- Fact fixes: (1) Cold open said "Larry Page filed his own patent a few weeks before Li filed his"; the entry gives Page's patent a priority date of 10 Jan 1997, not a filing date, so now "Larry Page's own patent has a priority date a few weeks before Li filed his". Same issue in section 04 ("they both filed in early 1997"), now "both of their patents date from early 1997". (2) "the same big idea" contradicted section 05 (the entry says the methods differ); now "the same basic idea". (3) Garfield line softened from "something that had already been done" to "something a lot like what had already been done", since citation indexing is a precedent, not the same method.
+- Cadence fixes: 3 joins ("let me say it plainly. The link idea says...", "Page wasn't sitting around... They were both...", "Oh, one more thing. Ranking things...").
+- Format fixes: word count updated 760 to 767; hedge list now includes "something a lot like".
+- Remaining concerns for Gus: 767 spoken words, under the 900 floor, because the research is thin and contested; not padded. "at IDD for Dow Jones" is a light reading of the entry's "IDD/Dow Jones"; don't expand on the company relationship. The research rates this topic "Contested, Fit 3/5", its weakest pick.

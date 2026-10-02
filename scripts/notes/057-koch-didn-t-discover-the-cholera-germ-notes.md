@@ -1,6 +1,6 @@
 # Notes: Koch Didn't Discover the Cholera Germ
 Research entry: 100-episode-lineup.md — heading "### 57. Koch Didn't Discover the Cholera Germ"
-Spoken words: 817
+Spoken words: 810 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 817
 
 Hedges kept: "described" / "identified", never "proved"; Koch "probably" didn't know; "as far as anybody can tell"; Koch credited as "first to grow it in pure culture" and the one who "made the case that convinced science"; no suggestion of stealing.
 Left out on purpose (unverified / keep off air in research): the name of Pacini's journal, the Broad Street pump name and Snow's methods, cholera death tolls, Koch's nationality and other discoveries (not in the entry), the contents of the Journal of Medical Microbiology reassessment (lead only). Plain explanation added: what "pure culture" means; that a formal biological name can carry the describer's name and year. Research is thin, so this runs under the 900-word floor rather than padding.
+
+## Review
+- Fact fixes: (1) Retitled from "Koch Didn't Discover the Cholera Germ" to "Koch Didn't Discover the Cholera Germ First". The script itself says Koch found the same germ on his own, so the research supports "not first", not "didn't discover" (file name and manifest title unchanged). (2) "People who had died of cholera" changed back to the entry's "cholera victims". (3) "Things he called vibrios" changed to "comma-shaped vibrios", so it doesn't claim he coined the word. (4) "That's why Koch gets the credit" changed to "part of why" (his pure-culture work is the other reason). (5) Cut the claim that Pacini's story has "an ending most forgotten scientists never get" (unsupported generalization). (6) Cut the claim about what the Journal of Medical Microbiology paper argues (it's a "lead" in the research and its contents weren't examined); it now says only "scientists are still writing about it". (7) "Giving the credit to the man who saw it first" changed to "putting the name of the man who described it first right on the germ", keeping "described".
+- Cadence fixes: 6. Fragments joined in 03 ("he didn't just say..., he said..."; "So that's two people in two countries in the same year..."), 04 and 06; "Not Koch, not 1884, Pacini, 1854" turned into a repetition beat; the crafted closing button "his name is on the germ" replaced with the plain fact.
+- Format fixes: word count updated to 810.
+- Remaining concerns for Gus: 810 spoken words, under the 900 floor, reported, not padded. Snow's water pump in 1854 comes from the entry's hook line, not its confirmed list; it's widely known, but it isn't separately sourced in the entry.

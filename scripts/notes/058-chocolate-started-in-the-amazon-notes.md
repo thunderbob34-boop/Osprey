@@ -1,6 +1,6 @@
 # Notes: Chocolate Started in the Amazon
 Research entry: episode-research.md — "# Job 3" section, entry "### 57." (Chocolate)
-Spoken words: 823
+Spoken words: 842 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -17,3 +17,9 @@ Spoken words: 823
 
 Hedges kept: "about 5,300 years", "at least 1,500 years", "about 5,000 years ago", "used" (not "made chocolate"), "we don't know how", "nobody's calling it a chocolate bar", "domesticated" flagged as resting partly on genetics, "first known".
 Left out on purpose (unverified / keep off air in research): anything about how the Maya, Aztecs or Olmec prepared or used cacao (drinks, spices, currency); whether Cortés actually introduced it to Europe (entry only says he gets the credit); the Science News headline's "tasted" (conflicts with the "we don't know how it was consumed" hedge). Plain explanation added: Mesoamerica defined; theobromine is a chemical found in cacao. Research covers one tight finding, so this runs under the 900-word floor rather than padding.
+
+## Review
+- Fact fixes: (1) Retitled from "Chocolate Started in the Amazon" to "Cacao Started in the Amazon". The research hedges that we don't know how cacao was used ("nobody's calling it a chocolate bar"), so the title now claims only cacao use. The script's "when I say chocolate started in the Amazon" line is reworded to match (file name and manifest title unchanged). (2) In the cold open, "about 1,500 years before anybody in Central America" changed to the entry's "at least 1,500 years before the first known cacao use in Central America", and the same fix was made in 07. (3) "Chocolate is older than the Aztecs and the Maya" changed to "people using cacao is older...". (4) "Zarrillo is from UBC" changed to "was at UBC" (the entry says only that it's the lead author's institution). (5) Added "as far as anyone knows" to the closing "somebody did it first".
+- Cadence fixes: 2. In 05, "We know... We don't know how. We don't know if..." is now one breath with the repetition kept, and the opening of 07 is joined.
+- Format fixes: word count updated to 842; hedge list updated; a short-length note added to the runtime line.
+- Remaining concerns for Gus: 842 spoken words, under the 900 floor, reported, not padded. The manifest still lists the old title.

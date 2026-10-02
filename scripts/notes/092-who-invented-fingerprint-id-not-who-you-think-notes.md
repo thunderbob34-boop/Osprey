@@ -1,6 +1,6 @@
 # Notes: Who Invented Fingerprint ID? Not Who You Think
 Research entry: 100-episode-lineup.md, heading "### 92. Who Invented Fingerprint ID? Not Who You Think"
-Spoken words: 936
+Spoken words: 960
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

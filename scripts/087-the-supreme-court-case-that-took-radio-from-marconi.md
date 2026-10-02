@@ -1,7 +1,7 @@
 # The Supreme Court Case That Struck Down Marconi's Tuning Claims
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 842 spoken words.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 845 spoken words.
 - Tone is calm and careful. This one is about getting a famous myth exactly right, so the voice should sound like someone reading the court record, not someone cheering for Tesla. Marconi gets real credit.
 - Say Guglielmo Marconi as gool-YEL-mo mar-KO-nee. John Stone Stone is his real name, say both Stones.
 - Every hedge in here is on purpose. Read "key parts", "the broad claims", "had been done before", "did not decide who invented radio" and "the Court wrote" exactly as written. Only say "the Supreme Court said Tesla invented radio" as the myth being corrected, and never put it on screen as a claim.
@@ -36,7 +36,7 @@ So if you only remember one name from this ruling besides Marconi, the court rec
 
 Now, to be fair, this case did not decide who invented radio, it wasn't even about that, the case was about whether the United States government owed money for using Marconi's company's patents, it was about the government's liability for patent infringement, and the part about tuning covered what are called the four-circuit tuning claims. So the Court wasn't handing out a title, it was deciding whether certain claims in one patent held up.
 
-And that's why "the Supreme Court said Tesla invented radio" goes too far. The Court said Tesla, and Lodge, and Stone had done key parts of Marconi's tuning patent before him. That's a big thing to say, but it's a different thing from saying Tesla invented radio.
+And that's why "the Supreme Court said Tesla invented radio" goes too far. The Court said Tesla, and Lodge, and Stone had done key parts of Marconi's tuning patent before him. That's a big thing to say, but it's a different thing from saying Tesla invented radio, right?
 
 And Marconi still did something real. Marconi made long-distance wireless practical, and that's a real accomplishment, nobody's taking that away from him, and this ruling didn't take it away either.
 

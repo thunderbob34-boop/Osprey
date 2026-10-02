@@ -1,7 +1,7 @@
 # The Godmother of Rock and Roll
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 872 spoken words.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 852 spoken words.
 - Tone is warm and respectful. Elvis is not the bad guy here, he never claimed to invent anything, and the script says so. The late Hall of Fame recognition should be said plainly, not angrily.
 - Say Tharpe as THARP, Brenston as BREN-stun.
 - Every hedge in here is on purpose. Read "some music scholars call", "a strong claim to", "often billed as", "gradual evolution", "according to her biographer" and "never claimed" exactly as written. Never say on screen that any one record was "the first rock and roll record".
@@ -22,7 +22,7 @@ Now, to be fair to Elvis, he never claimed he invented rock and roll. The title 
 
 Sister Rosetta Tharpe was a gospel performer, and from the late 1930s she was playing electric-guitar gospel in clubs. So that's gospel music, on an electric guitar, in nightclubs, in the late 1930s, years and years before Elvis.
 
-And in 1944 she recorded a song called "Strange Things Happening Every Day", with a pianist named Sammy Price, and some music scholars call that the first rock and roll song. Some, not all, and we'll come back to why that matters. But it's 1944, and that's about a decade before the mid-1950s explosion everybody remembers.
+And in 1944 she recorded a song called "Strange Things Happening Every Day", with a pianist named Sammy Price, and some music scholars call that the first rock and roll song. Some, not all, and we'll come back to why that matters. But it's 1944, and that's about a decade before the mid-1950s explosion everybody remembers, right?
 
 And she's known as the Godmother of Rock and Roll, that's the label that gets put on her, and it's not just fans saying it, Britannica uses it and NPR has called her that too, and PBS gave her a whole American Masters timeline of her career.
 

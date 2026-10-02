@@ -1,7 +1,7 @@
 # Gutenberg Wasn't First
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 926 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 930 spoken words.
 - Tone is calm and respectful on both sides. Gutenberg did change Europe, and the script says so. The point is only that movable type, and even metal movable type, came first in Asia.
 - Say Jikji as JIK-jee, Heungdeok as HUNG-dok, Cheongju as CHUNG-joo, Bi Sheng as bee SHUNG, Shen Kuo as shun KWAW, Mengxi bitan as mung-shee bee-TAHN, Dunhuang as dwun-HWAHNG, Mogao as moh-GOW, Wang Jie as wahng JYEH, and Gutenberg as GOO-ten-burg.
 - Every hedge in here is on purpose. Read "oldest surviving", "the oldest known book printed that way", "in the 1040s", "no later than 1455", "about seventy-eight years" and "there's no clear evidence Gutenberg knew about any of it" exactly as written.

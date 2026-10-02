@@ -1,6 +1,6 @@
 # Notes: Coca-Cola Didn't Dress Santa in Red
 Research entry: 100-episode-lineup.md, heading "### 96. Coca-Cola Didn't Dress Santa in Red"
-Spoken words: 718
+Spoken words: 727
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

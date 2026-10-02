@@ -1,6 +1,6 @@
 # Notes: Pascal Wasn't First: The Triangle That Is 600 Years Older Than Pascal
 Research entry: 100-episode-lineup.md, heading "### 12. Pascal Wasn't First: The Triangle That Is 600 Years Older Than Pascal"
-Spoken words: 952
+Spoken words: 955
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

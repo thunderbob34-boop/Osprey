@@ -14,7 +14,7 @@ Two men filed paperwork on the telephone at the US Patent Office on the same day
 
 ## 02 The Bell Version
 
-Here's the version everybody knows. Alexander Graham Bell invented the telephone, he got the patent, and the rest is history. And honestly, the record backs a lot of that up. Bell did get the patent, and it was granted on March 7th, 1876.
+Here's the version everybody knows. Alexander Graham Bell invented the telephone, he got the patent, and the rest is history. And honestly, the record backs a lot of that up, Bell did get the patent, and it was granted on March 7th, 1876.
 
 But the way he got there was a lot closer than most people know, and there were other names in the race, some of them earlier than Bell. So let's start with the day it all came to a head, which happened to be Valentine's Day.
 
@@ -24,9 +24,9 @@ On February 14th, 1876, two filings about sending speech by wire reached the US 
 
 Now here's the part that matters, a caveat is not a patent application. A caveat was a confidential declaration that you intended to patent an idea you hadn't perfected yet. So it's basically a notice that says, I'm working on this, right? So Bell filed for a patent, and Gray filed a notice that he was working on one, and Bell's was in first.
 
-And I want to be careful about the few hours. That comes from the order of the entries in the office's day book, fifth and thirty-ninth. The exact clock times aren't documented in anything I found, so a few hours later, according to the Patent Office record, is as precise as anyone should get. The Library of Congress tells it this way, and Britannica and PBS both cover the same-day filings too.
+And I want to be careful about the few hours, because that comes from the order of the entries in the office's day book, fifth and thirty-ninth. The exact clock times aren't documented in anything I found, so a few hours later, according to the Patent Office record, is as precise as anyone should get. The Library of Congress tells it this way, and Britannica and PBS both cover the same-day filings too.
 
-So Bell got his patent on March 7th, 1876, less than a month after he filed. And that should have been the end of it.
+So Bell got his patent on March 7th, 1876, less than a month after he filed, and you'd think that would have been the end of it.
 
 ## 04 The Examiner's Affidavit
 
@@ -40,17 +40,17 @@ So I'm not going to tell you Bell cheated, because the evidence doesn't get you 
 
 And there's more, because Bell had rivals before Gray, and they were earlier than Valentine's Day 1876 by years.
 
-In Germany in 1861, a man named Johann Philipp Reis built a device he called the telephon. It could carry musical tones, and it could carry speech too, but the speech came through badly. The Smithsonian has one of his transmitters in its collection, and it describes it that way, speech, albeit badly. So it wasn't a telephone the way we'd think of it, but he had the name, and he had a device carrying tones and some speech, fifteen years before Bell's patent, right?
+In Germany in 1861, a man named Johann Philipp Reis built a device he called the telephon, and it could carry musical tones, and it could carry speech too, but the speech came through badly. The Smithsonian has one of his transmitters in its collection, and it describes it that way, speech, albeit badly. So it wasn't a telephone the way we'd think of it, but he had the name, and he had a device carrying tones and some speech, fifteen years before Bell's patent, right?
 
-And in New York there was Antonio Meucci. In 1871, Meucci filed a caveat, the same kind of notice Gray filed, and he did it because a caveat was cheaper than a full patent application. But a caveat had to be renewed, and Meucci couldn't afford to keep renewing it, so in 1874 it lapsed. That's two years before Bell's patent.
+And in New York there was Antonio Meucci. In 1871, Meucci filed a caveat, the same kind of notice Gray filed, and a caveat was cheaper than a full patent application. But a caveat had to be renewed, and Meucci couldn't afford to keep renewing it, so in 1874 it lapsed. That's two years before Bell's patent.
 
 Then on June 11th, 2002, the US House of Representatives agreed to a resolution about him. It was House Resolution 269, sponsored by Congressman Vito Fossella, and the key line says, the life and achievements of Antonio Meucci should be recognized, and his work in the invention of the telephone should be acknowledged.
 
-Now, careful with that one, right? It says his work in the invention, not that he was the inventor, and it's a House-only resolution, a statement of the sense of the House, not a law. So it doesn't name Meucci the inventor of the telephone. It says his work should be acknowledged, and that's all it says.
+Now, careful with that one, right? It says his work in the invention, not that he was the inventor, and it's a House-only resolution, a statement of the sense of the House, not a law. So it doesn't name Meucci the inventor of the telephone, it says his work should be acknowledged, and that's all it says.
 
 ## 06 Fair Credit to Bell
 
-Now, to be fair to Bell, the record favors him. He filed a full patent application, Gray filed a caveat, and by the office's own records Bell's was in first, and Bell's patent was granted. The bribery story is an allegation from a man who swore both ways. And Reis's device carried speech badly, and Meucci's caveat lapsed.
+Now, to be fair to Bell, the record favors him. He filed a full patent application, Gray filed a caveat, and by the office's own records Bell's was in first, and Bell's patent was granted. The bribery story is an allegation from a man who swore both ways, and Reis's device carried speech badly, and Meucci's caveat lapsed.
 
 So Bell won the race that counted on paper, and the official record says he won it. But it was a race, and it was close, and there were people on the track before he was.
 

@@ -1,7 +1,7 @@
 # 3,000 Years Before Goodyear: The Real Inventors of Rubber
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 898 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 896 spoken words.
 - Tone is calm and impressed. The ancient rubber makers are the heroes, and Goodyear is the man who found the industrial version, not a villain.
 - Say Castilla elastica as kas-TEE-yah eh-LAS-tih-kah, Ipomoea alba as ip-oh-MEE-ah AL-bah, Mesoamerica as MEZ-oh-uh-MAIR-ih-kuh, Hosler as HOZE-ler, and Tarkanian as tar-KAY-nee-un.
 - Every hedge in here is on purpose. Read "by about 1600 BC", "the researchers' estimate", "more than three thousand years", "according to Britain's Science Museum Group", and "that's not vulcanization" exactly as written. Never call the ancient method vulcanization, on screen or in an ad-lib.

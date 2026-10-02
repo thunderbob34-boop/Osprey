@@ -1,7 +1,7 @@
 # Coca-Cola Started as a Knockoff of a French Cocaine Wine
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 843 spoken words.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 836 spoken words.
 - Tone is calm and matter-of-fact, keep the cocaine part plain and historical, no jokes about drugs and no sensational voice. Pemberton gets real credit for inventing the Coca-Cola formula.
 - Say Angelo Mariani as AN-jeh-lo mar-ee-AH-nee, Vin Mariani as VAN mar-ee-AH-nee, Pemberton as PEM-ber-tun, Leo XIII as "Leo the Thirteenth".
 - Every hedge in here is on purpose. Read "the first big hit", "not the first cocaine tonic, but the most successful", "imitated", "copied", "built on Mariani's idea" and "how closely" exactly as written. Never say "stole", and never say how much cocaine was in early Coca-Cola.
@@ -34,7 +34,7 @@ So the question is how closely Pemberton copied Mariani's actual recipe, as oppo
 
 ## 05 Prohibition
 
-And there's more, because then Atlanta changed the rules. In 1886 Atlanta adopted prohibition, which means alcohol was banned, and Pemberton's French Wine Coca was a wine, so that was a problem. So Pemberton reworked it into something without alcohol, a non-alcoholic version, and that non-alcoholic drink was Coca-Cola.
+And there's more, because then Atlanta changed the rules. In 1886 Atlanta adopted prohibition, which means alcohol was banned, and Pemberton's French Wine Coca was a wine, so that was a problem, right? So Pemberton reworked it into something without alcohol, a non-alcoholic version, and that non-alcoholic drink was Coca-Cola.
 
 So Coca-Cola, one of the most famous soft drinks there is, was what Pemberton made when Atlanta banned alcohol, and the wine it replaced was itself an imitation of a French one. And later on, Coca-Cola went on to overtake Vin Mariani.
 

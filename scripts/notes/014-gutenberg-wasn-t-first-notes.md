@@ -1,6 +1,6 @@
 # Notes: Gutenberg Wasn't First
 Research entry: episode-research.md, "# Job 3" section, entry "### 37." (Printing Press)
-Spoken words: 926
+Spoken words: 930
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

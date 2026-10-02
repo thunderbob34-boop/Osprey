@@ -1,6 +1,6 @@
 # Notes: Television Was Patented in 1884 by a Broke Student
 Research entry: 100-episode-lineup.md, heading "### 95. Television Was Patented in 1884 by a Broke Student"
-Spoken words: 793
+Spoken words: 777
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

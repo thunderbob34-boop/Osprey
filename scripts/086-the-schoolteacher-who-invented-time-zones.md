@@ -1,7 +1,7 @@
 # The Schoolteacher Who First Proposed Time Zones
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 916 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 915 spoken words.
 - Tone is calm and friendly. Fleming gets real credit for the worldwide system, Allen gets credit for the plan the railroads used, and Dowd gets credit for being first to propose it. Nobody is a villain.
 - Say Dowd to rhyme with "loud". Saratoga is sare-uh-TOE-guh.
 - Every hedge in here is on purpose. Read "first to propose", "was never accepted", "drew on", "about four minutes", "a railroad decision, not a law" and "that came later" exactly as written. Never say the zones we use today are Dowd's zones.
@@ -28,7 +28,7 @@ Now here's the part that matters, Britannica says Dowd's own system was never ac
 
 ## 04 Fleming
 
-Now, to be fair to Sandford Fleming, he isn't credited for nothing. Fleming's work "Terrestrial Time" came out in 1876, and the credit Fleming gets is for something bigger than Dowd's plan, it isn't just the United States, it's a worldwide system of twenty-four time zones. Dowd's plan was US only, and Fleming's was the whole planet. So Fleming's credit is for the worldwide system, and that's a real and big contribution, and it's fair to give it to him.
+Now, to be fair to Sandford Fleming, he isn't credited for nothing. Fleming's work "Terrestrial Time" came out in 1876, and the credit Fleming gets is for something bigger than Dowd's plan, it isn't just the United States, it's a worldwide system of twenty-four time zones. Dowd's plan was US only, and Fleming's was the whole planet, right? So Fleming's credit is for the worldwide system, and that's a real and big contribution, and it's fair to give it to him.
 
 But Dowd's proposal came in 1869, and Fleming's work came in 1876, so if the question is who first proposed time zones, the answer is the schoolteacher in Saratoga Springs, about seven years earlier.
 

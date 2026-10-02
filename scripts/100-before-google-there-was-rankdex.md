@@ -1,21 +1,21 @@
 # Before Google There Was RankDex
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 760 spoken words. The research is short and the priority question is murky, so this one runs short rather than padded.
+- Runtime is about 5 minutes at a relaxed pace, roughly 767 spoken words. The research is short and the priority question is murky, so this one runs short rather than padded.
 - Tone is calm and careful. This is a "parallel inventor" story, not a "Google copied" story, and the script says so more than once. Page and Brin get full credit.
 - Say Robin Li as ROB-in LEE, Yanhong as YAHN-hong, Baidu as BY-doo, and RankDex as RANK-dex.
-- Every hedge in here is on purpose. Read "parallel inventors", "said to have inspired", "as Forbes and TIME tell it", "by a few weeks", "nobody copied anybody that I can show you" and "a different method" exactly as written.
+- Every hedge in here is on purpose. Read "parallel inventors", "said to have inspired", "as Forbes and TIME tell it", "by a few weeks", "nobody copied anybody that I can show you", "something a lot like" and "a different method" exactly as written.
 - Never say or show "Google copied." Patent numbers and dates on screen are fine, they're all from the patents themselves.
 - Visuals: the first pages of both patents from Google Patents, and simple link-arrow diagrams for the two methods. No company logos full screen.
 - Good on-screen text moments are 1996, January 10 1997, February 5 1997, July 6 1999, US 5,920,859, US 6,285,999, and the 1950s and 60s for citation indexing.
 
 ## 01 Cold Open
 
-The patent behind Google's PageRank cites a link-ranking patent by a man named Robin Li, who was ranking web pages by their links in 1996, and who went on to found Baidu. Now, I'm going to be careful with this one, because Larry Page filed his own patent a few weeks before Li filed his, so this isn't a story about Google copying anybody. It's a story about two people coming up with the same big idea at almost the same time, and only one of them being a household name in the West.
+The patent behind Google's PageRank cites a link-ranking patent by a man named Robin Li, who was ranking web pages by their links in 1996, and who went on to found Baidu. Now, I'm going to be careful with this one, because Larry Page's own patent has a priority date a few weeks before Li filed his, so this isn't a story about Google copying anybody, it's a story about two people coming up with the same basic idea at almost the same time, and only one of them being a household name in the West.
 
 ## 02 The Google Version
 
-The famous version is Larry Page and Sergey Brin, PageRank, and Google, ranking web pages by the links pointing to them. And it really was a big idea, so let me say it plainly. The link idea says, don't just look at the page itself, look at who's pointing to it, because a link from one page to another is a bit like a vote, right? So a page lots of other pages link to is probably worth showing near the top. And that idea is what everybody associates with Google, so the credit went to Page and Brin, and it stuck.
+The famous version is Larry Page and Sergey Brin, PageRank, and Google, ranking web pages by the links pointing to them. And it really was a big idea, so let me say it plainly, the link idea says, don't just look at the page itself, look at who's pointing to it, because a link from one page to another is a bit like a vote, right? So a page lots of other pages link to is probably worth showing near the top. And that idea is what everybody associates with Google, so the credit went to Page and Brin, and it stuck.
 
 ## 03 Robin Li and RankDex
 
@@ -29,7 +29,7 @@ And as Forbes and TIME tell it, Li's work came first, and it's said to have insp
 
 Now, to be fair, and this matters a lot, Larry Page's PageRank patent, number 6,285,999, has a priority date of January 10th, 1997. A priority date is basically the date that counts for who filed first, and January 10th comes before Li's February 5th filing, by a few weeks. And Page and Brin's early project, BackRub, was already running in 1996 too.
 
-So Page wasn't sitting around waiting for Li's patent to show up. They were both working on it in 1996, and they both filed in early 1997, and nobody copied anybody that I can show you. They're parallel inventors, two people getting to the same place at almost the same time, and Li is the one the West mostly forgot.
+So Page wasn't sitting around waiting for Li's patent to show up, they were both working on it in 1996, and both of their patents date from early 1997, and nobody copied anybody that I can show you. They're parallel inventors, two people getting to the same place at almost the same time, and Li is the one the West mostly forgot.
 
 ## 05 Not Quite the Same Idea
 
@@ -39,7 +39,7 @@ PageRank was a different method. Its scores are recursive, which means a page's 
 
 ## 06 Older Than Both of Them
 
-Oh, one more thing. Ranking things by who points to them is older than the web. Back in the 1950s and 60s a man named Eugene Garfield built citation indexing, which tracks which scientific papers cite which other papers, so you can see which papers get pointed to the most. So Li and Page were both doing, for web pages, something that had already been done with scientific papers.
+Oh, one more thing, ranking things by who points to them is older than the web. Back in the 1950s and 60s a man named Eugene Garfield built citation indexing, which tracks which scientific papers cite which other papers, so you can see which papers get pointed to the most. So Li and Page were both doing, for web pages, something a lot like what had already been done with scientific papers.
 
 ## 07 Who Did It First
 

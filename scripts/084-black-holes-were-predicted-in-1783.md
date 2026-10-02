@@ -1,7 +1,7 @@
 # The 1783 Dark Star That Came Before Black Holes
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 917 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 918 spoken words.
 - Tone is calm and curious. Michell is the hero, but Einstein, Schwarzschild and Wheeler get real credit, and the script is careful that a "dark star" is not the same thing as a modern black hole.
 - Say Michell as MITCH-ul, Cavendish as KAV-en-dish, Laplace as la-PLAHSS, Schwarzschild as SHVARTS-shilt.
 - Every hedge in here is on purpose. Read "1783" (never a month), "about five hundred times", "the first to imagine", "not the same thing as a modern black hole", "popularized" and "a similar proposal" exactly as written.
@@ -22,7 +22,7 @@ And it's easy to see why that's the story everybody tells, right? Black holes fe
 
 John Michell was an English clergyman, and in 1783 he wrote a paper and sent it to the scientist Henry Cavendish, and it was read to the Royal Society and published in the Society's journal, Philosophical Transactions. And in that paper Michell proposed what he called "dark stars", stars with gravity so strong that their light could not reach us, or in the words the Royal Society's own history blog uses, their light "could not arrive at us". And this isn't some fringe claim somebody dug up online, the Royal Society writes about it, and so does a peer-reviewed journal of astronomy history.
 
-Now here's how you get there with the physics of the time, which was Newton's physics. If you throw a ball up in the air it comes back down, because gravity pulls it back, and the heavier the thing you're standing on, the harder it pulls, and the faster you'd have to throw to get away from it. Michell treated light as being made of particles, so in his picture gravity pulls on light the same way it pulls on that ball. So if a star is heavy enough, even light can't get away from it, it goes out and it gets pulled back.
+Now here's how you get there with the physics of the time, which was Newton's physics. If you throw a ball up in the air it comes back down, because gravity pulls it back, and the heavier the thing you're standing on, the harder it pulls, and the faster you'd have to throw to get away from it, right? Michell treated light as being made of particles, so in his picture gravity pulls on light the same way it pulls on that ball. So if a star is heavy enough, even light can't get away from it, it goes out and it gets pulled back.
 
 And he didn't just wave his hands at it either, he put a number on it. Michell calculated that a star as dense as our Sun, but about five hundred times wider, would pull back all of its own light. So same density as the Sun, just about five hundred times wider, and that's enough to keep every bit of its own light from getting out.
 

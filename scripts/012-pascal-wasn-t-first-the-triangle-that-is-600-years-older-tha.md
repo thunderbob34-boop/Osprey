@@ -1,7 +1,7 @@
 # Pascal Wasn't First: The Triangle That Is 600 Years Older Than Pascal
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 952 spoken words. The research is thin on purpose here, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 955 spoken words. The research is thin on purpose here, so this one runs short rather than padded.
 - Tone is calm and a little amused. Nobody in this story is a villain, and Yang Hui is the hero for naming his source.
 - Say al-Karaji as al-ka-RAH-jee, Jia Xian as jyah SHYEN, Yang Hui as yahng HWAY, Xiangjie Jiuzhang Suanfa as shyahng-jyeh jyoh-jahng swahn-fah, Omar Khayyam as OH-mar kye-YAHM, and Traité du triangle arithmétique as treh-TAY doo tree-AHNG-gluh ah-reet-may-TEEK.
 - Every hedge in here is on purpose. Read "about two centuries earlier", "around the year 1000", "about six hundred years", "mainly through later writers", "secondhand" and "Britannica's word for it" exactly as written.

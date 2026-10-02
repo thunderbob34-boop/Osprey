@@ -21,3 +21,9 @@ Spoken words: 855
 
 Hedges kept: "mid-1960s"; "according to Smithsonian magazine ... one source"; "reinforced work Apple already had under way"; "licensed"; explicit "that's not what the record says" against the "Apple stole it" claim; "more than fifteen years" (the hook's "fifteen years" is 16 to the Macintosh).
 Left out on purpose (unverified / keep off air in research): the "$40,000 license" figure and any amount Apple paid SRI; "video calls" from the hook (not in the entry's confirmed list of demo contents); SRI's full name and location; any claim that Apple stole from Xerox.
+
+## Review
+- Fact fixes: none needed. Mid-1960s (1964 vs 1965 handled), US 3,541,541, filed 1967, issued 17 Nov 1970, 9 Dec 1968 demo and its contents (the writer correctly swapped the hook's unverified "video calls" for "windows"), Alto 1973, PARC visit Dec 1979, Lisa 1983, Mac 1984, "licensed", no dollar figure, and the single-source royalties line attributed to Smithsonian magazine. Arithmetic checks: Dec 1968 to Jan 1984 is just over fifteen years ("more than fifteen"); 1973 to 1983 is ten; mid-1960s to 1984 is "about twenty". Title is supported.
+- Cadence fixes: 3. Joined choppy full stops: "never called it a mouse. The patent is...", "under way. So Apple wasn't starting from nothing...", "Oh, one more thing. According to...". Also "take it as theirs" made plainer as "take it as their account".
+- Format fixes: word count updated 855 to 856; added the single-source line to the hedge list. Spoken words 856 (short, research-limited, accepted).
+- Remaining concerns for Gus: "all in one afternoon" and "a man in San Francisco" come from the entry's hook line, not its confirmed list (the confirmed length is 90 minutes, which the script also says). Low risk, but cut "afternoon" if you want to be strict.

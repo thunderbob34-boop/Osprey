@@ -1,6 +1,6 @@
 # Notes: The Janitor Who Built the Hoover
 Research entry: 100-episode-lineup.md, heading "### 17. The Janitor Who Built the Hoover"
-Spoken words: 890
+Spoken words: 885
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

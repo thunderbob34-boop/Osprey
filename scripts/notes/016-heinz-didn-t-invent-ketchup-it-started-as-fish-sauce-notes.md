@@ -1,6 +1,6 @@
 # Notes: Heinz Didn't Invent Ketchup - It Started as Fish Sauce
 Research entry: 100-episode-lineup.md, heading "### 16. Heinz Didn't Invent Ketchup — It Started as Fish Sauce"
-Spoken words: 869
+Spoken words: 871
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
