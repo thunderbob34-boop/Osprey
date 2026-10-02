@@ -43,3 +43,8 @@ Left out on purpose (unverified / keep off air in research): the cumal/kumara wo
 - Round B changes confirmed / problems: Round B 1150/1200 line was clunky and could read as mixing before meeting; the 2020 Nature study gives rough dates with margins (PubMed 32641827).
 - Fixes made: 05 now 'rough dates, each with a margin either side, so the 1150 and the 1200 overlap and don't contradict each other'; 01 'the meeting is real' softened to 'the evidence for the meeting is strong' to match the 'evidence' and 'unproven' hedges. Word count 1,086 to 1,094.
 - Low items: Marshall Islands stick charts are Micronesian, sit in the Polynesian section; 'coastal Colombia and Ecuador' is press wording.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed: 1150/1200 overlap line (rough dates with margins, Ioannidis et al., Nature 2020) and 'evidence for the meeting is strong' both read cleanly aloud and match the cold open, section 06 and the close. No problems.
+- Fixes made: none
+- Low items: none new

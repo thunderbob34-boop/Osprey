@@ -1,6 +1,6 @@
 # Notes: The Bug Collector Who Invented Daylight Saving Time
 Research entry: 100-episode-lineup.md, heading "### 82. The Bug Collector Who Invented Daylight Saving Time"
-Spoken words: 936
+Spoken words: 942
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -38,3 +38,10 @@ Left out on purpose (unverified / keep off air in research): Port Arthur stated 
 - Round B changes confirmed / problems: Austria-Hungary 'both on April 30th, 1916' was not supported by Britannica or National Geographic (both name Germany as first); only History.com says both. Medium. The softened Willett line ('a big part of why Britain adopted') confirmed, matches Section 04 and the recap. Cold read: 'the society ridiculed the idea' overstated Te Ara, which says a number of society members ridiculed it.
 - Fixes made: Section 05 now 'The first country ... was Germany, on April 30th, 1916, and its ally Austria-Hungary went along with it that spring' (no exact Austrian date); recap matches ('with Austria-Hungary joining it that spring'). Section 03 and recap now say 'a number of the society's members ridiculed the idea' (Te Ara, https://teara.govt.nz/en/biographies/3h42/hudson-george-vernon). Words 926 to 936.
 - Low items: title still says 'Invented' (Hudson was first to propose); 'about twelve years apart' counts to the 1907 pamphlet.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed: Germany 30 April 1916 with Austria-Hungary 'that spring' (no exact Austrian date) matches the recap; 'a number of the society's members ridiculed the idea' matches Te Ara in section 03 and the recap. No problems.
+- Fixes made: none
+- Low items: recap says Willett came up with it 'on his own' without the 'as far as the record shows' hedge used in section 04
+
+- Main-session follow-up: the recap now carries the "as far as the record shows" hedge on Willett coming up with it on his own.

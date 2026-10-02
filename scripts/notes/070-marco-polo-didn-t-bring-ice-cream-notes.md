@@ -43,3 +43,8 @@ Left out on purpose (unverified / keep off air in research): any claim the Arab 
 - Round B changes confirmed / problems: (1) Catherine/early-1600s line confirmed and no longer clashes with della Porta 1589 (History.com says "a century after a teenaged Catherine"; the script's "long after ... 1530s" is safe). (2) Latini "steward to the first minister of the Spanish viceroy in Naples" rests only on Wikipedia (no second strong source turned up in search), so under the source standard it could not stay as a new on-air fact.
 - Fixes made: Section 05 now says "Antonio Latini, a steward in Naples, printed some of the first sorbetto recipes" (his book's title, Lo scalco, means "the steward", so the role is safe). Word count 770 to 761; reading notes and "Spoken words" line updated.
 - Low items: "his recipes included chocolate" is not shown in anything found (eggplant is); it comes from the research entry, so left, but worth a check before recording.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed: Latini 'a steward in Naples' is safe (the book title Lo scalco means the steward) and the Catherine/early-1600s line does not clash with della Porta 1589. No problems.
+- Fixes made: none
+- Low items: Round C's open check on 'his recipes included chocolate' is now closed: Quinzio's Early Ices and Ice Creams chapter (University of California Press) and the Wikipedia/Met listings place chocolate and eggplant sorbetto recipes in Latini's 1693/1694 volumes; left as written.

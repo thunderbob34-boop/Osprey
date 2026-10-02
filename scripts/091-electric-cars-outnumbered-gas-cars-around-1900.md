@@ -1,7 +1,7 @@
 # Electric Cars Outnumbered Gas Cars Around 1900
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 818 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 822 spoken words.
 - Tone is calm and a little surprised at the numbers. Modern electric car makers get fair credit, nobody is called a fake.
 - Say Lohner as LOH-ner, Porsche as POR-shuh, Semper Vivus as SEM-per VEE-vus.
 - Every hedge in here is on purpose. Read "around 1900", "roughly a third", "outnumbered", "not a headcount of every car on the road", "not sales figures", "the 1830s", "according to Britannica", "according to Porsche", "by the usual account" and "by about 1905" exactly as written. Only say "outsold" in the line that rules it out, and never put a single year on Anderson's carriage.
@@ -42,6 +42,6 @@ But they didn't invent the electric car, the idea goes back to the 1830s, and ar
 
 ## 07 Who Did It First
 
-So let's put it in order. In the 1830s a Scottish inventor named Robert Anderson built a crude electric carriage that ran on batteries you couldn't recharge. Around 1900, roughly a third of American cars were electric, according to Britannica about forty percent steam, thirty-eight percent electric and twenty-two percent gasoline, and New York had more than sixty electric taxis. In 1900, according to Porsche, Ferdinand Porsche showed an electric car in Paris. And by about 1905, gasoline had taken over.
+So let's put it in order. In the 1830s a Scottish inventor named Robert Anderson built a crude electric carriage that ran on batteries you couldn't recharge. Around 1900, roughly a third of the cars being built in America were electric, according to Britannica about forty percent steam, thirty-eight percent electric and twenty-two percent gasoline, and New York had more than sixty electric taxis. In 1900, according to Porsche, Ferdinand Porsche showed an electric car in Paris. And by about 1905, gasoline had taken over.
 
 So the electric car isn't the new kid, it goes back to the 1830s, and for a while it was ahead of gasoline. Somebody did it first, and by the usual account it was a Scottish inventor named Robert Anderson.

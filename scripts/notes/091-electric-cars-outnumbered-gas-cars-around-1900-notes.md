@@ -1,6 +1,6 @@
 # Notes: Electric Cars Were Winning in 1900
 Research entry: 100-episode-lineup.md, heading "### 91. Electric Cars Were Winning in 1900"
-Spoken words: 818
+Spoken words: 822
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -39,3 +39,10 @@ Left out on purpose (unverified / keep off air in research): Anderson's exact ye
 - Round B changes confirmed / problems: cold-open 'being built in America' change confirmed; consistent with section 04 (census production count) and section 06. Cold read: the close 'it was Robert Anderson' is an unhedged first that a commenter could challenge (Jedlik, Davenport, Stratingh).
 - Fixes made: closing line now 'by the usual account it was a Scottish inventor named Robert Anderson'; hedge added to reading notes. Words 814 to 818.
 - Low items: section 04 first sentence ('roughly a third of the cars in America', DoE/Britannica wording) is on-the-road framing, then clarified in the next paragraph; attributed, left.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed: close 'by the usual account it was a Scottish inventor named Robert Anderson' reads naturally and matches the 1830s hedge in section 03 and the recap. No problems.
+- Fixes made: none
+- Low items: recap says 'roughly a third of American cars were electric' without 'built', while cold open and section 06 say built; section 04 clarifies it as a production count
+
+- Main-session follow-up: the recap now says "roughly a third of the cars being built in America were electric", which matches the census build count.

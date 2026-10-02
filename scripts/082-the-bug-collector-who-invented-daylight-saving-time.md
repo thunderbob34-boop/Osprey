@@ -1,7 +1,7 @@
 # The Bug Collector Who Invented Daylight Saving Time
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 936 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 942 spoken words.
 - Tone is light and easygoing, Hudson is a charming oddball and the story can smile a little, but no mocking him and no sarcasm about Franklin or Willett.
 - Say Willett as WILL-it.
 - Every hedge in here is on purpose. Read "as far as the record shows", "on his own", "may have been the first in the world", "a local claim" and "might be closer to a time-zone change" exactly as written. The Port Arthur section stays a claim, never a fact, so don't put "first in the world" on screen for it.
@@ -38,6 +38,6 @@ Oh, one more thing, there's a town in Ontario, Canada, called Port Arthur, which
 
 ## 06 The Bug Collector Did It First
 
-So let's put it in order. Franklin wrote a joke about getting up early in 1784, and it wasn't about clocks. Hudson proposed moving the clocks two hours on October 16th, 1895, in Wellington, and a number of the society's members ridiculed the idea. Willett came up with it on his own and put out his pamphlet in 1907, and he campaigned for it and his campaign is a big part of why Britain adopted it, and Germany was the first country to do it nationally in 1916, with Austria-Hungary joining it that spring.
+So let's put it in order. Franklin wrote a joke about getting up early in 1784, and it wasn't about clocks. Hudson proposed moving the clocks two hours on October 16th, 1895, in Wellington, and a number of the society's members ridiculed the idea. Willett, as far as the record shows, came up with it on his own and put out his pamphlet in 1907, and he campaigned for it and his campaign is a big part of why Britain adopted it, and Germany was the first country to do it nationally in 1916, with Austria-Hungary joining it that spring.
 
 So the next time you lose that hour of sleep in the spring, the man who first proposed it was a New Zealand postal worker who wanted a little more daylight after work so he could go out and hunt insects. Somebody did it first, and his name was George Vernon Hudson.

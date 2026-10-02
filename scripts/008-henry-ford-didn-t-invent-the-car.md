@@ -1,7 +1,7 @@
 # Henry Ford Didn't Invent the Car
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 949 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 947 spoken words.
 - Tone is calm and matter-of-fact. Ford gets real credit here, the moving line is his team's, so no gotcha voice.
 - Say Benz as BENTS, Cugnot as koon-YOH, fardier as far-DYAY, Musee des Arts et Metiers as myoo-ZAY dayz AR ay may-TYAY, Siegfried Marcus as ZEEG-freed MAR-kus, Technisches Museum Wien as TEK-nish-es moo-ZAY-um VEEN.
 - Spell it Carl Benz on screen, that's how the UNESCO register spells it.
@@ -37,7 +37,7 @@ And even before that, Chicago meatpackers had moving disassembly lines. That's t
 
 Now, to be fair to Henry Ford, what his team did in 1913 is a really, really big deal. They made the line move, and they phased it in through 1913, starting with smaller parts like magnetos in April, and then the chassis later that year, so instead of the work staying in one place, the line itself carried the work past the workers.
 
-And look at what that did, under the old stationary method, building a Model T took about twelve and a half hours. By early 1914, with the moving line, putting a Model T together took about 93 minutes. About twelve and a half hours, down to about 93 minutes, right? That's the thing Ford actually did, and it changed how the car got made. So the fair way to say it is that Ford didn't invent the car, and he didn't invent the assembly line, but his team made the line move, and that's a real achievement, and it's his.
+And look at what that did, under the old stationary method, putting together a Model T chassis took about twelve and a half hours. By early 1914, with the moving line, it took about 93 minutes. About twelve and a half hours, down to about 93 minutes, right? That's the thing Ford actually did, and it changed how the car got made. So the fair way to say it is that Ford didn't invent the car, and he didn't invent the assembly line, but his team made the line move, and that's a real achievement, and it's his.
 
 ## 07 One Disputed Name
 

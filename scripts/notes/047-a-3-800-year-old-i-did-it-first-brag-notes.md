@@ -1,6 +1,6 @@
 # Notes: A 3,800-Year-Old "I Did It First" Brag
 Research entry: episode-research.md, "# Job 3" section, entry "### 44." (Refrigeration)
-Spoken words: 868 (after re-check C)
+Spoken words: 842 (after re-check D)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -43,3 +43,10 @@ Left out on purpose (unverified / keep off air in research): any claim that this
 - Round B changes confirmed / problems: Round B 'on the bank of the Euphrates' qualifier confirmed. Problem: the on-air quote read 'which never before had any king built'; the Sasson translation (Lapham's Quarterly) reads 'which never before has any king built on a bank of the Euphrates'. Also the Yasmah-Addu ice letters rest only on Lapham's (Shamshi-Adad and Aplahanda letters); no second source found.
 - Fixes made: 03 quote now 'has' and 'on a bank of the Euphrates' (reading-notes on-screen quote matched); 03 Yasmah-Addu line now 'according to one account of the Mari letters' (single source, hedged); 02 now says the c. 1780 BC tablet date sits just before the usual 1775 reign start and 'shows how rough these ancient dates are'. Word count 852 to 868.
 - Low items: Kibri-Dagan ice-melting letter still single-sourced (Lapham's); Cullen used an air pump.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: quote fix ('has' / 'on a bank of the Euphrates') confirmed and matches the reading notes. Problem: the 03 Yasmah-Addu ice-letters sentence ('according to one account of the Mari letters ... collecting ice and setting servants to guard it') still rested on a single source, Lapham's Quarterly; two more searches found only Lapham's and Wikipedia, so it fails the two-strong-source standard.
+- Fixes made: removed that sentence from 03 (now 'And the brag is about the building, and all I can say is that, as far as what I found for this video, there's no earlier icehouse on the record...'); removed Yasmah-Addu from the pronunciation list; recounted, 868 to 834, updated in the script's reading notes and this file's Spoken words line. No banned words or dashes.
+- Low items: Kibri-Dagan ice-melting letter is still single-sourced (Lapham's), carried from C; the 1780 BC tablet date sitting before the usual 1775 reign start is hedged on air.
+
+- Main-session follow-up: the Kibri-Dagan ice-melting letter only turned up in Lapham's Quarterly (Sasson) and Wikipedia, so the line is now attributed: "According to one account of the Mari letters...". Before recording, a page reference from Sasson, *From the Mari Archives* (2015), would make it two-source.

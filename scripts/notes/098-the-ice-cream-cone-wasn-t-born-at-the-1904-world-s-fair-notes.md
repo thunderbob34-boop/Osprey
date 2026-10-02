@@ -38,3 +38,8 @@ Left out on purpose (unverified / keep off air in research): the exact issue day
 - Fixes made: close now 'on the evidence we have, the earliest claimant is Agnes Marshall, in London, in 1888', which matches the Smithsonian's 'earliest claimant' wording and the explanation in section 03; removed the old hedge from the reading notes. Words 762 to 756.
 - Low items: cold open 'the woman with the earliest claim to it' matches the close; a pedant may still cite the 1825 French mention.
 - Main-session follow-up: section 03 glossed "earliest claimant" as "the earliest one anybody has found", which the 1825 French cornet mentions contradict. It now reads "earliest claimant isn't the same thing as first, it's not proof that nobody did it before her." The Smithsonian Magazine piece ("The Amazing, Portable, Edible Ice Cream Cone") is the source for "earliest claimant". Words now 755.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed: 'on the evidence we have, the earliest claimant is Agnes Marshall' in the close, 'earliest claimant isn't the same thing as first, it's not proof that nobody did it before her' in section 03, and 'the woman with the earliest claim' in the cold open are all consistent; 1888 to 1904 is sixteen years. No problems.
+- Fixes made: none
+- Low items: a pedant may still cite 1825 French cornet mentions, covered by the claimant hedge

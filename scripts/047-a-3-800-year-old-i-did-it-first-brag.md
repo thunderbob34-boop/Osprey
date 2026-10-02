@@ -1,10 +1,10 @@
 # A 3,800-Year-Old "I Did It First" Brag
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 868 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 842 spoken words.
 - Tone is light and a little amused. The king's brag is the fun of it, so let the quote land plainly, no voice for it.
-- Say Zimri-Lim as ZIM-ree LIM, Mari as MAH-ree, Terqa as TER-kah, Kibri-Dagan as KIB-ree DAH-gahn, Euphrates as yoo-FRAY-teez, cuneiform as kyoo-NAY-ih-form, Cullen as KULL-en, Gorrie as GOR-ee, Yasmah-Addu as YAHS-mah AH-doo.
-- Every hedge in here is on purpose. Read "about 3,800 years ago", "around 1780 BC", "the king's own boast", "only about the Euphrates", "on his stretch of the river", "as far as what I found for this video", "under one common way of dating it", "usually dated to 1748" and "designed it but never built it" exactly as written. Never say Zimri-Lim was Sumerian, and never say this was definitely the first icehouse in the world. Always keep "on the bank of the Euphrates" with the brag, the tablet does not claim the whole world.
+- Say Zimri-Lim as ZIM-ree LIM, Mari as MAH-ree, Terqa as TER-kah, Kibri-Dagan as KIB-ree DAH-gahn, Euphrates as yoo-FRAY-teez, cuneiform as kyoo-NAY-ih-form, Cullen as KULL-en, Gorrie as GOR-ee.
+- Every hedge in here is on purpose. Read "about 3,800 years ago", "around 1780 BC", "the king's own boast", "only about the Euphrates", "on his stretch of the river", "as far as what I found for this video", "under one common way of dating it", "usually dated to 1748" and "designed it but never built it" and "according to one account of the Mari letters" exactly as written. Never say Zimri-Lim was Sumerian, and never say this was definitely the first icehouse in the world. Always keep "on the bank of the Euphrates" with the brag, the tablet does not claim the whole world.
 - Visuals: the Louvre tablet AO 20161, maps of the Euphrates and Syria, cuneiform close-ups, period portraits and patent drawings for the inventors.
 - Good on-screen text moments are about 3,800 years ago, c. 1780 BC, Louvre AO 20161, "which never before has any king built ... on a bank of the Euphrates", 1748, 1805, 1834, and 1851, US Patent 8080.
 - Sourcing: every line traces to the sources in the notes file for this episode.
@@ -23,9 +23,9 @@ The icehouse itself was at a town called Terqa, which was part of the Mari kingd
 
 Now here's the part that makes this tablet so good, the king doesn't just say he built an icehouse, right? In the translation by the scholar Sasson, from 1984, he says he built an icehouse "which never before has any king built," and the line goes on, on a bank of the Euphrates. He didn't just want to build it, he wanted it on the record that he built it first, at least on his stretch of the river.
 
-And there's more. There's a letter from one of his governors, a man named Kibri-Dagan, complaining to the king about the ice melting. So the king's bragging about his icehouse, and meanwhile his governor is writing to tell him the ice is melting. That's about as human as a 3,800-year-old document gets, right?
+And there's more. According to one account of the Mari letters, there's a letter from one of his governors, a man named Kibri-Dagan, complaining to the king about the ice melting. So the king's bragging about his icehouse, and meanwhile his governor is writing to tell him the ice is melting. That's about as human as a 3,800-year-old document gets, right?
 
-Now, to be fair to the people who came before him, we don't actually know whether this was the first icehouse in the world. That's the king's own boast, and even the boast is only about the Euphrates. And keeping ice wasn't new either, because according to one account of the Mari letters, letters to Yasmah-Addu, who ruled Mari before Zimri-Lim, already talk about collecting ice and setting servants to guard it. So the brag is about the building, and all I can say is that, as far as what I found for this video, there's no earlier icehouse on the record, and the king was very confident about it.
+Now, to be fair to the people who came before him, we don't actually know whether this was the first icehouse in the world. That's the king's own boast, and even the boast is only about the Euphrates. And the brag is about the building, and all I can say is that, as far as what I found for this video, there's no earlier icehouse on the record, and the king was very confident about it.
 
 ## 04 Making Cold Without Ice
 

@@ -39,3 +39,8 @@ Left out on purpose (unverified / keep off air in research): the cause of Dowd's
 - Round B changes confirmed / problems: the 'for the United States' qualifier in title and sections 04 and 06 is correct and consistent. The new Filopanti sentence (24 zones in a book in 1858, hardly anybody knew until long after his death) rested on Wikipedia only; searches found no strong source for the 1858 date or the obscurity claim. Treccani (Italian national encyclopedia, 'Fusi orari') does say the initial idea seems to have come from Filopanti. Medium.
 - Fixes made: Filopanti sentence now reads 'Italy's national encyclopedia says the first idea of twenty-four worldwide zones seems to have come from an Italian named Quirico Filopanti, even before Fleming, though it's Fleming's version that the world ended up taking up.' No date and no obscurity claim. Reading-notes hedge 'hardly anybody knew about it' replaced with 'seems to have come from'. Words unchanged at 962.
 - Low items: Filopanti rests on one strong source (Treccani), kept hedged and attributed; filename and manifest still carry the old title.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed: Filopanti sentence is attributed to Italy's national encyclopedia (Treccani), hedged with 'seems to have come from', has no date or obscurity claim, and fits the 'for the United States' framing in the title, cold open and close. Day of Two Noons geography checked (New York east of the 75th meridian, so local noon comes first). No problems.
+- Fixes made: none
+- Low items: Filopanti rests on one strong source, kept attributed and hedged

@@ -45,3 +45,8 @@ Left out on purpose (unverified / keep off air in research): any claim that Indi
 - Round B changes confirmed / problems: the 1838 hedging is right, but the new "one source points to a notary calling him Fibonacci back in 1506" rested only on Wikipedia (citing Drozdyuk and Drozdyuk 2010). Two searches found no second strong source (search snippets repeated the Wikipedia wording; a MacTutor mention was not confirmable without opening the page). Under the source standard it can't stay as an on-air fact.
 - Fixes made: removed the 1506 notary clause from section 06 and dropped 1506 from the on-screen list and "one source points to" from the hedge list. What remains is accurate either way: Libri in 1838 is where the nickname "caught on" (hedged "historians say", via Devlin / AMS Notices / Scientific American), the cold open's "centuries after he died" is true even if a 1506 mention exists, and section 07's "caught on in 1838" is unchanged. Word count 923 to 900.
 - Low items: if Gus wants the 1506 detail back, get Drozdyuk and Drozdyuk (2010) or the MacTutor page and one more strong source first. The "most famous number pattern in nature" hook and "probably learned in North Africa" notes from earlier rounds stand.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed. Removal of the 1506 notary clause leaves 06 flowing (Libri 1838, Devlin hedge, AMS Notices and Scientific American, Lucas 1870s); 1202 to 1838 over six hundred years, 1202 to 1870s more than six hundred years, 1150 to 1202 about fifty; no banned words or dashes; count 900 verified.
+- Fixes made: none
+- Low items: none

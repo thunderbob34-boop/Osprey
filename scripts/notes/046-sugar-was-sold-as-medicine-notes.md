@@ -39,3 +39,8 @@ Left out on purpose (unverified / keep off air in research): the 8,000 to 10,000
 - Round B changes confirmed / problems: Round B changes confirmed: 'medieval Europe' framing in 01/04/06 now consistent with Greek and Roman knowledge by the 1st century AD; Persians/Arabs spreading refining west supported (Britannica Students, PMC).
 - Fixes made: 04 and 06 'their doctors wrote about it as a medicine' was not directly confirmed for Greek/Roman doctors as a group; 04 now 'some of them described it as a medicine' (Dioscorides and Pliny). Word count unchanged at 719 (notes line corrected from 701).
 - Low items: Sugar spread details rest partly on PMC reviews; dates stay fuzzy as hedged.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed. 'some of them described it as a medicine' in 04 is supportable (Dioscorides, Pliny) and consistent with the medieval-Europe framing in 01 and 06; no banned words or dashes; count 719 verified.
+- Fixes made: none
+- Low items: none

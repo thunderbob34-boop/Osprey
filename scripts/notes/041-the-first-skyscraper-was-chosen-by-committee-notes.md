@@ -43,3 +43,8 @@ Left out on purpose (unverified / keep off air in research): the "1986 publicity
 - Round B changes confirmed / problems: 'Made official' / 'pushing the claim since the 1890s' confirmed: Barr (Building the Skyline 'The Jenney Myth'; CTBUH paper) dates Jenney's PR campaign to the mid-1890s, so 'since the 1890s' is safe. No contradiction in 01, 02, 03, 06.
 - Fixes made: 04: 'it's a working paper, it's not peer-reviewed' was stale because Barr's argument now has a 2025 Journal of Urban History article; now says it's a working paper, an early version of his research, and the split is backed by other sources. Word count 875 to 878.
 - Low items: All 1890s sourcing is Barr (one author, two venues); title says 'chosen by committee' while body says 'made official', acceptable. Manifest hook still says 'got that title from a committee'.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed. The 04 working-paper line reads naturally and keeps the hedge, 'backed up by other sources too'; 1931 - 1885 = 46, 1797 to 1885 is nearly ninety, 1870 to 1885 is fifteen; no steel-framed wording; no banned words or dashes; count 878 verified.
+- Fixes made: none
+- Low items: none

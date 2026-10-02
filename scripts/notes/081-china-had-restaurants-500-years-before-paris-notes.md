@@ -1,6 +1,6 @@
 # Notes: China Had Restaurants 500 Years Before Paris
 Research entry: episode-research.md — "# Job 3" section, entry "### 63." (Restaurant)
-Spoken words: 749
+Spoken words: 747
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -42,3 +42,8 @@ Note: runs short (about 5 minutes) rather than padding.
 - Round B changes confirmed / problems: Round B's Kaifeng memoir sentence was a new on-air fact (an older Kaifeng memoir, by a refugee, talking about its famous restaurants, and a claim that restaurants there go back further) resting on Wikipedia; a search returned only a Harvard library catalogue record and a summary, not two strong sources for the restaurant content. Medium.
 - Fixes made: cut the Kaifeng memoir sentence and the 'no surprise they go back further' inference. Section 04 now ends 'And that guide is from 1235, which is more than five hundred years before Roze de Chantoiseau, and that's the date we're sticking with.' Words 800 to 749; reading notes and Spoken words updated.
 - Low items: none new.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed: Kaifeng memoir cut is clean, section 04 now ends on '...more than five hundred years before Roze de Chantoiseau, and that's the date we're sticking with' (1235 to 1766 is 531 years) and reads in one breath. Cold read found one slip: section 05 said the restaurant 'wasn't an invention of the French Revolution era', but Boulanger 1765 and Roze de Chantoiseau 1766 are pre-Revolution. Low-medium.
+- Fixes made: section 05 now 'so the restaurant wasn't an invention of 1700s Paris.' Words 749 to 747; reading notes and Spoken words updated.
+- Low items: none new

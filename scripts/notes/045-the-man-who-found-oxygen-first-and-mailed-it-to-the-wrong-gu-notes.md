@@ -42,3 +42,8 @@ Left out on purpose (unverified / keep off air in research): any claim that Lavo
 - Round B changes confirmed / problems: 'Usually gets the credit' confirmed. Draft at Royal Swedish Academy and Paris find by Grimaux 1890 confirmed (journals.physiology.org, redalyc).
 - Fixes made: 01 cold open implied the unanswered letter caused the lost credit, which also sits badly with the no-theft stance; now says he lost the credit because his book was slow, and the letter is a separate sentence ('as far as anyone knows, he never got an answer'). Word count 799 to 792.
 - Low items: Priestley may have made the gas earlier than 1774 (carried from B).
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed. Cold open now says he lost the credit because his book was slow, with the letter as a separate sentence; consistent with 03, 04 and 06; no theft wording; no banned words or dashes; count 792 verified.
+- Fixes made: none
+- Low items: none

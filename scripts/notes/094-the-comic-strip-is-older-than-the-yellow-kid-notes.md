@@ -41,3 +41,8 @@ Left out on purpose (unverified / keep off air in research): any claim that Oldb
 - Round B changes confirmed / problems: 'the name historians usually start with' close confirmed; consistent with section 05 and the hedge list. Cold read: 'in 1827 he drew Histoire de Mr. Vieux Bois ... in 1837 Les Amours de Mr. Vieux Bois came out' reads as two separate works; searches (LOC, Princeton) confirm it is the same story, drawn 1827 and first published in 1837 under that title. Medium (misleading).
 - Fixes made: section 03 now 'in 1837 the Vieux Bois story was published too, under the title Les Amours de Mr. Vieux Bois, the loves of Mr. Vieux Bois.' Words 844 to 852.
 - Low items: 'first successful newspaper comic strip' is conventional; early Hogan's Alley was a single panel.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed: section 03 now makes clear the 1827 drawing and the 1837 Les Amours de Mr. Vieux Bois are the same story; 1837 to 1895 is 58 years, so 'nearly sixty' is right, and 1842 to 1895 is 53, matching the cold open and section 04. No problems.
+- Fixes made: none
+- Low items: none new

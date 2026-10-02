@@ -1,6 +1,6 @@
 # Notes: Henry Ford Didn't Invent the Car
 Research entry: episode-research.md — "# Job 3" section, entry "### 31."
-Spoken words: 949
+Spoken words: 947
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -40,3 +40,10 @@ Left out on purpose (unverified / keep off air in research): the exact chassis-l
 - Round B changes confirmed: yes. "putting a Model T together took about 93 minutes" (06) and "on it took about 93 minutes" (08) now correctly mean time to assemble one car, down from about 12.5 hours; no contradiction with the cold open or close. 1886 - 1769 = 117, Ford 22 on 29 Jan 1886 (born 30 July 1863), 1913 phase-in unchanged.
 - Fixes made: (low-medium) section 08 said "Henry Ford gets the credit for the car and for the assembly line", which read as the script endorsing it; now "usually gets the credit". Word count 948 to 949. Stale hedge in this file's hedge list ("about every 93 minutes") corrected to "about 93 minutes".
 - Low items: Ford at 22 is said three times (cold open, 03, 08); fine as the channel's refrain. The 12.5 hours and 93 minutes are chassis figures; "building a Model T" stays as the popular shorthand.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed. 'usually gets the credit' in 08 reads fine and matches the cold open and 02; Ford 22 on 29 Jan 1886 checks; 1886 - 1769 = 117; no banned words or dashes; count 949 verified.
+- Fixes made: none
+- Low items: 93 minutes / 12.5 hours are chassis figures, 'building a Model T' stays as shorthand (carried from C).
+
+- Main-session follow-up: the 12.5-hour and 93-minute figures are for chassis assembly, so section 05 now says "putting together a Model T chassis".

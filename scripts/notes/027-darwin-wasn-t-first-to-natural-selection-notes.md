@@ -40,3 +40,8 @@ Left out on purpose (unverified / keep off air in research): Mike Sutton is not 
 - Round B changes confirmed: yes. The Wells paragraph is accurate and attributed to Darwin ("Darwin himself later pointed to"): Wells's essay on a white woman with partly dark skin was read to the Royal Society in 1813 and printed in 1818 in Two Essays, and Darwin's Historical Sketch calls it the first recognition of natural selection, applied to human races only (Darwin Online; Linda Hall Library; checked by search this round). "the first we know of to put it in print as a general idea for living things" and the "first in print as a general idea" close are consistent with the cold open, which says Matthew was not the first and names "the main name ahead of him".
 - Fixes made: (low-medium) section 07 said "the two of them presented it together in 1858", which implies Darwin and Wallace were both there; neither was (Lyell and Hooker arranged the Linnean Society reading). Now "their work was presented together in 1858". Word count 899 to 897.
 - Low items: the cold open's "put natural selection in print" is softened by the same sentence group's "wasn't the first person to put the idea in print"; fine. Wells was "a doctor" who lived in London, born in Charleston; "a doctor" is enough.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed. 'their work was presented together in 1858' is accurate and consistent with 06 (Wallace essay received 18 June 1858, Linnean reading 1 July 1858); 1859 - 1831 = 28; Wells hedge intact; no banned words or dashes; count 897 verified.
+- Fixes made: none
+- Low items: none

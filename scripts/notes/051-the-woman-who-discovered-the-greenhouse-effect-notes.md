@@ -41,3 +41,8 @@ Left out on purpose (unverified / keep off air in research): that she "wasn't al
 - Round B changes confirmed / problems: Fourier addition confirmed: 1820s general idea, Tyndall 1859 gases, 'three years ahead on carbon dioxide' consistent with title, cold open and close (AIP climate history, APS News, AIP library). Title now retitled in the script; this notes file's heading still shows the old title.
 - Fixes made: 01 cold open said she 'figured out that carbon dioxide could warm the planet', stronger than her one-line inference; now 'showed that carbon dioxide traps heat, and she suggested it could warm the planet', matching the title. Word count 762 to 767.
 - Low items: Notes heading and manifest title are the old 'Discovered the Greenhouse Effect' wording.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed. Cold open 'showed that carbon dioxide traps heat, and she suggested it could warm the planet' matches the title, 03, 05 and 06; three years (1856 to 1859) holds; no banned words or dashes; count 767 verified.
+- Fixes made: none
+- Low items: Notes file heading still says the old title (cosmetic).

@@ -39,3 +39,8 @@ Left out on purpose (unverified / keep off air in research): Thimonnier dying in
 - Round B changes confirmed: yes. "in 1854 the patent office turned him down because he'd waited too long" and "the patent office turned him down for waiting too long" are accurate: Commissioner Charles Mason refused Hunt's 2 April 1853 application on grounds of abandonment (decision 1 May 1854; ISMACS "Genius Rewarded", encyclopedia.com, Lemelson-MIT; confirmed by search this round), not a court. "so Howe's patent stood" and "in the eyes of the law, the lockstitch patent was Howe's" are fine.
 - Fixes made: (low-medium) section 03 said the 80-machine shop was "sixteen years before Howe's patent" while the cold open says "Fifteen years before" for the same shop (1831 to 1846). Now "about fifteen years before Howe's patent" in section 03. Word count 875 to 876.
 - Low items: "The first sewing machines to actually go to work" (cold open) stays, backed by Britannica's "first functional" for Thimonnier; Krems and Madersperger noted in Round B. Hunt's "early 1830s" hedge and "more than a decade before Howe" (1834 to 1846 = 12) hold.
+
+## Re-check D (2026-10-02)
+- Round C changes confirmed / problems: confirmed. 'about fifteen years before Howe's patent' in 03 now agrees with the cold open's 'Fifteen years before' (1831 to 1846); hedges intact; no banned words or dashes; count 876 verified.
+- Fixes made: none
+- Low items: none
