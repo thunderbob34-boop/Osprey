@@ -4,11 +4,11 @@ READING NOTES
 - Runtime is about 10 minutes at a relaxed pace, roughly 1,600 spoken words.
 - Tone is calm and matter-of-fact. Keep the electric chair section plain and flat, no drama in the voice, the facts carry it.
 - Say Kemmler as KEM-ler, Gaulard as go-LAR, Thomson-Houston as TOM-son HOO-ston.
-- Every hedge in here is on purpose. Read "as Tesla told it", "something like", "appears to", "usually counted as", "neck and neck", "before long" and "effectively" exactly as written, because they are what keeps the channel credible.
+- Every hedge in here is on purpose. Read "as Tesla told it", "something like", "usually counted as", "neck and neck", "before long" and "effectively" exactly as written, because they are what keeps the channel credible.
 - World's Fair: say "well under," never "half," and don't put "half" on screen (the usual figures, $399,000 vs $554,000, are about 72 percent).
 - Visuals for the dog demonstration and the Kemmler execution: no animal or execution imagery. Use text cards, period newspaper headlines, or period stills of the people and buildings, which also keeps the video ad-friendly.
 - Good on-screen text moments are Feb 3 1879, Oct 1879, Pearl Street 1882, Great Barrington 1886, May 1888, late 1887, July 1888, Aug 6 1890, 1892, 1893, Nov 1896, and 120V/60Hz vs 230V/50Hz.
-- Before you publish, run through the "Spot-check before publishing" list at the top of the fact notes (about ten lines, the $5,000 letters first). The web search budget ran out mid-research, so those lines rest on standard history confirmed by independent review rounds rather than a live source check.
+- Sourcing: every line traces to sources in the fact notes, including the ten spot-check lines verified on 2026-10-02.
 
 ## 01 Cold Open
 
@@ -46,7 +46,7 @@ What actually put Tesla in the fight was his patents. In May 1888 he got patents
 
 And Edison's side fought dirty. Back in late 1887, New York was looking for something to replace hanging, and when a state commission asked Edison for advice, he first wrote back that he was against capital punishment altogether, and then about a month later he recommended alternating current and pointed them to Westinghouse's machines. The next year, 1888, a self-styled electrical engineer named Harold Brown started a public campaign to prove AC was a killer, and Edison let Brown use his lab in West Orange, New Jersey, where they electrocuted animal after animal, mostly dogs. That July, in a lecture hall at Columbia College in New York, Brown electrocuted a dog in front of an audience, first with DC, which it survived, and then with AC, which killed it. Before long, Edison's camp even floated a word for getting killed by electricity, getting "Westinghoused."
 
-And there's more, New York had passed its electric chair law in 1888, Harold Brown ended up supplying the equipment, and letters show he asked Edison for five thousand dollars to cover buying the generators and then thanked him once it was arranged, and that money appears to have come through Edison's company. Westinghouse refused to sell his generators for executions, so Brown got Westinghouse generators anyway, secondhand, through another rival company, Thomson-Houston.
+And there's more, New York had passed its electric chair law in 1888, Harold Brown ended up supplying the equipment, and letters show he asked Edison for five thousand dollars to cover buying the generators, and then thanked him for a note to the president of Edison's company that got it arranged. Westinghouse refused to sell his generators for executions, so Brown got Westinghouse generators anyway, secondhand, through another rival company, Thomson-Houston.
 
 The first man sentenced to the chair was William Kemmler, and when his lawyers challenged the electric chair in court, Edison testified in 1889 that alternating current would kill instantly and painlessly. On August 6th, 1890, at Auburn Prison in New York, Kemmler was given seventeen seconds of current, and he didn't die, witnesses saw he was still breathing, so they switched it back on, and people in the room said it smelled of burning flesh. The New York Times called it far worse than hanging.
 
@@ -54,7 +54,7 @@ The first man sentenced to the chair was William Kemmler, and when his lawyers c
 
 And AC won anyway, because the physics was on its side. In 1892 Edison's company merged with Thomson-Houston to form General Electric, and that's the same rival that helped Brown get those generators. Edison's name came off the company, the Thomson-Houston side ended up running it, Edison was effectively out of the electric lighting business, and General Electric went on to build AC equipment right alongside Westinghouse.
 
-That same year, Westinghouse came in well under General Electric's bid to light the 1893 World's Fair in Chicago and won the contract, so when the fair opened, millions of visitors walked through a fairground lit largely by alternating current. Then there's Niagara Falls, Westinghouse built the generators for a huge hydroelectric plant there, and in November 1896 its power reached Buffalo, more than twenty miles away.
+That same year, Westinghouse came in well under General Electric's bid to light the 1893 World's Fair in Chicago and won the contract, so when the fair opened, millions of visitors walked through a fairground lit largely by alternating current. Then there's Niagara Falls, Westinghouse built the generators for a huge hydroelectric plant there, and in November 1896 its power reached Buffalo, some twenty miles away.
 
 ## 08 Every Outlet On Earth
 
