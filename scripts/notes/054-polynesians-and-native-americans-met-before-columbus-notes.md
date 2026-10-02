@@ -1,6 +1,6 @@
 # Notes: Polynesians Reached the Americas
 Research entry: episode-research.md — "# Job 3" section, entry "### 34." (Navigation)
-Spoken words: 1086 (after re-check B)
+Spoken words: 1094 (after re-check C)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

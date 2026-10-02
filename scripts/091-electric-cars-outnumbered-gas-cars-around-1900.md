@@ -1,10 +1,10 @@
 # Electric Cars Outnumbered Gas Cars Around 1900
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 814 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 818 spoken words.
 - Tone is calm and a little surprised at the numbers. Modern electric car makers get fair credit, nobody is called a fake.
 - Say Lohner as LOH-ner, Porsche as POR-shuh, Semper Vivus as SEM-per VEE-vus.
-- Every hedge in here is on purpose. Read "around 1900", "roughly a third", "outnumbered", "not a headcount of every car on the road", "not sales figures", "the 1830s", "according to Britannica", "according to Porsche" and "by about 1905" exactly as written. Only say "outsold" in the line that rules it out, and never put a single year on Anderson's carriage.
+- Every hedge in here is on purpose. Read "around 1900", "roughly a third", "outnumbered", "not a headcount of every car on the road", "not sales figures", "the 1830s", "according to Britannica", "according to Porsche", "by the usual account" and "by about 1905" exactly as written. Only say "outsold" in the line that rules it out, and never put a single year on Anderson's carriage.
 - Visuals: period photos of early electric cars and New York electric cabs, a simple bar or pie graphic of 40 percent steam, 38 percent electric, 22 percent gasoline labeled "cars built in the US, 1900", Paris 1900 Exposition images. Nothing sensitive.
 - Good on-screen text moments are the 1830s, around 1900, 40% steam / 38% electric / 22% gasoline, 60+ electric taxis, Paris 1900, and about 1905.
 
@@ -44,4 +44,4 @@ But they didn't invent the electric car, the idea goes back to the 1830s, and ar
 
 So let's put it in order. In the 1830s a Scottish inventor named Robert Anderson built a crude electric carriage that ran on batteries you couldn't recharge. Around 1900, roughly a third of American cars were electric, according to Britannica about forty percent steam, thirty-eight percent electric and twenty-two percent gasoline, and New York had more than sixty electric taxis. In 1900, according to Porsche, Ferdinand Porsche showed an electric car in Paris. And by about 1905, gasoline had taken over.
 
-So the electric car isn't the new kid, it goes back to the 1830s, and for a while it was ahead of gasoline. Somebody did it first, and it was a Scottish inventor named Robert Anderson.
+So the electric car isn't the new kid, it goes back to the 1830s, and for a while it was ahead of gasoline. Somebody did it first, and by the usual account it was a Scottish inventor named Robert Anderson.

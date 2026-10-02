@@ -1,6 +1,6 @@
 # Notes: The Ice Cream Cone Wasn't Born at the 1904 World's Fair
 Research entry: 100-episode-lineup.md, heading "### 98. The Ice Cream Cone Wasn't Born at the 1904 World's Fair"
-Spoken words: 762
+Spoken words: 756
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -32,3 +32,8 @@ Left out on purpose (unverified / keep off air in research): the exact issue day
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) Close said "on the evidence we have, it was her" (first to do the cone); an 1807 Debucourt engraving (Frascati) appears to show a woman eating from a cone, and an 1825 French cookbook describes rolling cones from little waffles (Wikipedia, Ice cream cone; whatscookingamerica.net). Marshall is the earliest known recipe that says to fill an edible cone with ice, so the close now says "the earliest recipe anybody's found that says to fill an edible cone with ice is hers". Hedge added to reading notes. Word count 749 -> 762.
 - Low items noted, not changed: Cold open "the woman with the earliest claim to it" kept (matches Smithsonian "earliest claimant"); a pedant may still mention the 1807 engraving.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: the new close ('the earliest recipe anybody's found that says to fill an edible cone with ice is hers') is still an absolute, and a search turned up edible cones in French cookbooks as early as 1825 (the Smithsonian itself says Marshall probably was not the only one), so a commenter could cite that. Medium.
+- Fixes made: close now 'on the evidence we have, the earliest claimant is Agnes Marshall, in London, in 1888', which matches the Smithsonian's 'earliest claimant' wording and the explanation in section 03; removed the old hedge from the reading notes. Words 762 to 756.
+- Low items: cold open 'the woman with the earliest claim to it' matches the close; a pedant may still cite the 1825 French mention.

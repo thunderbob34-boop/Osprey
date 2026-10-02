@@ -1,6 +1,6 @@
 # Notes: Leonardo Solved the Heart Valve 450 Years Early
 Research entry: episode-research.md — "# Job 3" section, entry "### 3." (Water Pressure; Leonardo aortic-valve portion only)
-Spoken words: 748
+Spoken words: 755
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -32,3 +32,8 @@ Left out on purpose (unverified / keep off air in research): the Greek showers a
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (medium) "His aortic work has fed into the design of prosthetic heart valves..." and "has influenced heart valve design" stated a causal influence the sources don't show (the design work rests on Bellhouse and later research; Leonardo's drawings get cited). Softened to "still gets cited by people working on prosthetic heart valves and surgery on the root of the aorta", "work that heart researchers still point back to", and in 06 "gets cited in heart valve research". Word count 752 to 755.
 - Low items noted, not changed: Whether Leonardo actually built and ran the glass model is debated by some scholars, but the Royal Collection says he "then made a glass model", so kept.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: the softened "still gets cited by people working on prosthetic heart valves and surgery on the root of the aorta" holds up (Annals of Thoracic Surgery "Leonardo da Vinci and the Sinuses of Valsalva"; valve-prosthesis patent literature on sinus vortices; Circulation Research review). It claims citation only, not causal influence, and 06 ("gets cited in heart valve research") agrees. Search also re-confirmed wax cast of ox heart, glass model, pumped water with grass seeds, eddies closing the valve, c. 1512 to 1513 (https://www.rct.uk/collection/exhibitions/leonardo-da-vinci/the-queens-gallery-palace-of-holyroodhouse/the-aortic-valve).
+- Fixes made: none to the script. "Spoken words" line in this file corrected from a stale 748 to 755.
+- Low items: none new.

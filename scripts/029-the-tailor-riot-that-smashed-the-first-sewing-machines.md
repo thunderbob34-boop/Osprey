@@ -22,7 +22,7 @@ And you can see why, a patent has a name and a date and a number on it, it's a c
 
 His name was Barthélemy Thimonnier, and he was from France, and in 1830 he patented a sewing machine. His used a chain stitch, which is a different kind of stitch where a single thread loops through itself, one loop after another, like a chain.
 
-And Thimonnier didn't just build one, he had about 80 of these machines running in Paris, and they were making uniforms for the French Army. So this isn't somebody tinkering with a prototype in his back room, this is a working shop full of sewing machines, sixteen years before Howe's patent, doing real work for a real customer.
+And Thimonnier didn't just build one, he had about 80 of these machines running in Paris, and they were making uniforms for the French Army. So this isn't somebody tinkering with a prototype in his back room, this is a working shop full of sewing machines, about fifteen years before Howe's patent, doing real work for a real customer.
 
 And if you want to see what one looked like, the Science Museum Group in Britain has a copy of Thimonnier's 1830 chain-stitch machine in its collection.
 

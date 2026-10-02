@@ -1,7 +1,7 @@
 # The Comic Strip Is Older Than the Yellow Kid
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 844 spoken words. The research is short, so this one runs short rather than padded.
+- Runtime is about 6 minutes at a relaxed pace, roughly 852 spoken words. The research is short, so this one runs short rather than padded.
 - Tone is light and a little amused. Outcault isn't a villain, he gets real credit for the first successful newspaper comic strip.
 - Say Rodolphe Töpffer as roh-DOLF TUHP-fer, Histoire de Mr. Vieux Bois as ee-STWAHR duh muh-SYUR vyuh BWAH, Les Amours as layz ah-MOOR, Mr. Jabot as muh-SYUR zhah-BOH, Outcault as OUT-kawlt, and Obadiah Oldbuck as oh-buh-DYE-uh OLD-buck.
 - Every hedge in here is on purpose. Read "the first successful newspaper comic strip", "the comic strip form", "albums, books", "that's their headline, their claim", "I think the reason the credit stuck", "as opposed to the newspaper strip", "the name historians usually start with" and "unauthorized" exactly as written.
@@ -23,7 +23,7 @@ And I think the reason the credit stuck is pretty easy to see, right? It ran in 
 
 But the comic strip form is older than that, and our story starts in Switzerland, with a schoolmaster in Geneva named Rodolphe Töpffer. Töpffer drew picture stories, which is a story told in a sequence of drawings, one after another, and in 1827 he drew one called Histoire de Mr. Vieux Bois, the story of Mr. Vieux Bois.
 
-Then from 1833 he started publishing these picture stories as albums, starting with Mr. Jabot, and in 1837 Les Amours de Mr. Vieux Bois came out, the loves of Mr. Vieux Bois. So by 1837 this Geneva schoolmaster had published picture stories, more than one of them, and that was nearly sixty years before the Yellow Kid ran in the World.
+Then from 1833 he started publishing these picture stories as albums, starting with Mr. Jabot, and in 1837 the Vieux Bois story was published too, under the title Les Amours de Mr. Vieux Bois, the loves of Mr. Vieux Bois. So by 1837 this Geneva schoolmaster had published picture stories, more than one of them, and that was nearly sixty years before the Yellow Kid ran in the World.
 
 ## 04 The Bootleg
 

@@ -1,6 +1,6 @@
 # Notes: Electric Cars Were Winning in 1900
 Research entry: 100-episode-lineup.md, heading "### 91. Electric Cars Were Winning in 1900"
-Spoken words: 814
+Spoken words: 818
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -34,3 +34,8 @@ Left out on purpose (unverified / keep off air in research): Anderson's exact ye
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) Cold-open line "roughly one in three cars on American roads was electric, and gasoline cars were actually in last place, behind steam" changed to "roughly one in three cars being built in America was electric ...": it paired the steam-first ranking (1900 census production count) with "on American roads", which contradicted section 04's "not a headcount of every car on the road" and the reworked hook. Word count 813 to 814. Title checked: "Outnumbered Gas Cars Around 1900" agrees with the body (1,575 electric vs 936 gasoline built in 1900).
 - Low items noted, not changed: recap "roughly a third of American cars were electric, according to Britannica ..." still reads as cars generally (Britannica and DoE word it that way, so attributed); closing "it was ... Robert Anderson" leans on the DoE framing, while Jedlik (c. 1828), Davenport and Stratingh (1835) built small electric models in the same era.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: cold-open 'being built in America' change confirmed; consistent with section 04 (census production count) and section 06. Cold read: the close 'it was Robert Anderson' is an unhedged first that a commenter could challenge (Jedlik, Davenport, Stratingh).
+- Fixes made: closing line now 'by the usual account it was a Scottish inventor named Robert Anderson'; hedge added to reading notes. Words 814 to 818.
+- Low items: section 04 first sentence ('roughly a third of the cars in America', DoE/Britannica wording) is on-the-road framing, then clarified in the next paragraph; attributed, left.

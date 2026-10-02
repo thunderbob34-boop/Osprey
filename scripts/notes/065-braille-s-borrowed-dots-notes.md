@@ -1,6 +1,6 @@
 # Notes: Braille's Borrowed Dots
 Research entry: 100-episode-lineup.md — heading "### 65. Braille's Borrowed Dots"
-Spoken words: 774
+Spoken words: 785
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -32,3 +32,8 @@ Left out on purpose (unverified / keep off air in research): the Library of Cong
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (medium) Cold open called Barbier's code the first raised-dot "alphabet". Barbier's sonography was phonetic (it coded sounds, not letters), and making it spell was one of Braille's improvements, so "alphabet" was wrong. Now "Braille wasn't the first raised-dot writing system". Word count 784 to 785.
 - Low items noted, not changed: "in 1833 Barbier wrote that he didn't know who Braille was" slightly compresses Perkins (Barbier asked whether the inventor was a student or a teacher, never having met him).
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: "first raised-dot writing system" in the cold open is accurate (Barbier's sonography was phonetic, not an alphabet) and matches section 06. No contradictions.
+- Fixes made: none to the script. "Spoken words" line in this file corrected from a stale 774 to 785 (matches the script).
+- Low items: "in 1833 Barbier wrote that he didn't know who Braille was" compresses Perkins slightly (he asked whether the inventor was a student or a teacher), left hedged with "according to Perkins".

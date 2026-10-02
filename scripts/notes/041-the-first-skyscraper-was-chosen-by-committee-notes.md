@@ -1,6 +1,6 @@
 # Notes: The "First Skyscraper" Was Chosen by Committee
 Research entry: episode-research.md, "# Job 3" section, entry "### 11." (Skyscraper)
-Spoken words: 875 (after re-check B)
+Spoken words: 878 (after re-check C)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

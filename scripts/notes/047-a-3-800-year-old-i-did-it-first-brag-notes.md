@@ -1,6 +1,6 @@
 # Notes: A 3,800-Year-Old "I Did It First" Brag
 Research entry: episode-research.md, "# Job 3" section, entry "### 44." (Refrigeration)
-Spoken words: 776
+Spoken words: 868 (after re-check C)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

@@ -1,6 +1,6 @@
 # Notes: The Tank Britain Rejected
 Research entry: episode-research.md — "# Job 3" section, entry "### 25." (Tank)
-Spoken words: 867
+Spoken words: 907
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -36,3 +36,8 @@ Left out on purpose (unverified / keep off air in research): Gunther Burstyn's 1
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (medium) Closing line "Somebody did it first, and that somebody was Lancelot de Mole" read as a world first, but Gunther Burstyn submitted his Motorgeschütz tank design to the Austro-Hungarian war ministry in 1911, before de Mole's 1912 submission. Scoped to "Somebody did it before Britain did, and that somebody was Lancelot de Mole." Burstyn still not named on air. Word count 905 to 907.
 - Low items noted, not changed: "first tank prototype ever completed" for Little Willie is the Tank Museum's framing; Russia's Vezdekhod (1915) and the Lincoln No. 1 Machine are occasionally argued, low risk.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: closing line "Somebody did it before Britain did, and that somebody was Lancelot de Mole" is scoped correctly (avoids Burstyn's 1911 Austro-Hungarian design), and agrees with the cold open's "Three years before Britain built its first tank" (1912 to 1915). Tank Museum source for Little Willie was already confirmed in Re-check A (https://tankmuseum.org/article/little-willie/), so the pre-air tankmuseum.org concern is resolved.
+- Fixes made: none to the script. "Spoken words" line in this file corrected from a stale 867 to 907.
+- Low items: "first tank prototype ever completed" is stated flat in the cold open as well as hedged-by-attribution elsewhere; it is the Tank Museum's framing (Vezdekhod 1915 is occasionally argued).

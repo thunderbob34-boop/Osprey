@@ -1,6 +1,6 @@
 # Notes: The Comic Strip Is Older Than the Yellow Kid
 Research entry: 100-episode-lineup.md, heading "### 94. The Comic Strip Is Older Than the Yellow Kid"
-Spoken words: 844
+Spoken words: 852
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -36,3 +36,8 @@ Left out on purpose (unverified / keep off air in research): any claim that Oldb
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) Close said "for the comic strip form ... that was a schoolteacher in Geneva", an absolute first for the form that a commenter could challenge with Hogarth or Rowlandson sequences; now "the name historians usually start with is a schoolteacher in Geneva" (Töpffer's standing as the usual starting point is standard: Britannica, Kunzle). Hedge added to reading notes. Word count 839 -> 844.
 - Low items noted, not changed: "first successful newspaper comic strip" is the conventional credit; early Hogan's Alley was a single-panel cartoon, not a sequential strip, which pedants note; Töpffer's 1837 Vieux Bois printing is sometimes dated 1839 for publication.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: 'the name historians usually start with' close confirmed; consistent with section 05 and the hedge list. Cold read: 'in 1827 he drew Histoire de Mr. Vieux Bois ... in 1837 Les Amours de Mr. Vieux Bois came out' reads as two separate works; searches (LOC, Princeton) confirm it is the same story, drawn 1827 and first published in 1837 under that title. Medium (misleading).
+- Fixes made: section 03 now 'in 1837 the Vieux Bois story was published too, under the title Les Amours de Mr. Vieux Bois, the loves of Mr. Vieux Bois.' Words 844 to 852.
+- Low items: 'first successful newspaper comic strip' is conventional; early Hogan's Alley was a single panel.

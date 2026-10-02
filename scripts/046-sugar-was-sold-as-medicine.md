@@ -31,7 +31,7 @@ And then there's the part that turned cane into the sugar we'd recognize. Somebo
 
 And here's a fun one, the word sugar itself goes back to India. It comes from the Sanskrit word śarkarā, which means grit, which is pretty much what a pile of sugar crystals looks like, so every time you say sugar, you're using a word that started out in India meaning grit.
 
-And Greek and Roman writers already knew about Indian sugar by the 1st century AD, so the Mediterranean world had heard about it, and their doctors wrote about it as a medicine, and then Persians and Arabs spread the refining technique west, long before medieval Europe was buying it. The evidence for that is solid in outline, even if a lot of the specific dates are fuzzy.
+And Greek and Roman writers already knew about Indian sugar by the 1st century AD, so the Mediterranean world had heard about it, and some of them described it as a medicine, and then Persians and Arabs spread the refining technique west, long before medieval Europe was buying it. The evidence for that is solid in outline, even if a lot of the specific dates are fuzzy.
 
 ## 05 The Gupta Myth
 

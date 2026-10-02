@@ -37,3 +37,8 @@ Left out on purpose (unverified / keep off air in research): the word "broke" in
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) Cold open and close said the 1884 patent came "more than forty years before anyone saw a TV picture"; crude transmitted images predate Baird (Rosing's 1911 CRT patterns; Baird's own 1924-25 images), so both now say "more than forty years before the first working television", matching the 1926 framing used throughout. Word count 777 -> 776. Title note: "Broke Student" is in fact supported; the DPMA's own page (https://www.dpma.de/english/our_office/publications/milestones/inventionsthatmadehistory/nipkow-scheibe/index.html) calls Nipkow a very poor student who played piano in pubs and could not afford the fee; the earlier retitle suggestion can be dropped.
 - Low items noted, not changed: Zworykin "1928" is soft (his key milestones are 1923 filing, 1929 kinescope, 1933 iconoscope); kept because it is said as the credited/IEEE-listed date.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: 'more than forty years before the first working television' confirmed in cold open, section 07 and 1884 to 1926 arithmetic (42); 'about fifty years' after the 1885 grant to 1935 is right. Title 'Broke Student' backed by the DPMA page named in Round B but the script never says it; no contradiction. No new problems.
+- Fixes made: none
+- Low items: Zworykin '1928' soft (said only as the credited date); title's 'broke' rests on one source (DPMA).

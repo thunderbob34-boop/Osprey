@@ -1,6 +1,6 @@
 # Notes: China Had Restaurants 500 Years Before Paris
 Research entry: episode-research.md — "# Job 3" section, entry "### 63." (Restaurant)
-Spoken words: 800
+Spoken words: 749
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -37,3 +37,8 @@ Note: runs short (about 5 minutes) rather than padding.
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: Medium: "you might guess the restaurants go back even further up there [Kaifeng], and maybe they do" presented as a guess something that is documented: Meng Yuanlao's Dongjing Meng Hua Lu (preface 1147), written by a refugee from Kaifeng, describes the old capital's famous restaurants and over a hundred dishes (checked: https://en.wikipedia.org/wiki/Dongjing_Meng_Hua_Lu). Now it says there's an older memoir of Kaifeng, written by a man who fled it, that talks about its famous restaurants too, and that 1235 is the guide we're using. No new date is given on air. Reading-notes hedge "the date we can actually stand on" swapped for "the date we're sticking with". Word count 784 to 800.
 - Low items noted, not changed: "historians argue" sits right after an economist (Kiefer); "In 1700s Paris a restaurant wasn't a place you went" was true only for the earlier part of the century.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Round B's Kaifeng memoir sentence was a new on-air fact (an older Kaifeng memoir, by a refugee, talking about its famous restaurants, and a claim that restaurants there go back further) resting on Wikipedia; a search returned only a Harvard library catalogue record and a summary, not two strong sources for the restaurant content. Medium.
+- Fixes made: cut the Kaifeng memoir sentence and the 'no surprise they go back further' inference. Section 04 now ends 'And that guide is from 1235, which is more than five hundred years before Roze de Chantoiseau, and that's the date we're sticking with.' Words 800 to 749; reading notes and Spoken words updated.
+- Low items: none new.

@@ -1,6 +1,6 @@
 # Notes: The Woman Who Discovered the Greenhouse Effect
 Research entry: 100-episode-lineup.md, heading "### 51. The Woman Who Discovered the Greenhouse Effect"
-Spoken words: 697
+Spoken words: 767 (after re-check C)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

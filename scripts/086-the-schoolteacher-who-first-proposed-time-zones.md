@@ -4,7 +4,7 @@ READING NOTES
 - Runtime is about 6 minutes at a relaxed pace, roughly 962 spoken words.
 - Tone is calm and friendly. Fleming gets real credit for the worldwide system, Allen gets credit for the plan the railroads used, and Dowd gets credit for being first to propose it. Nobody is a villain.
 - Say Dowd to rhyme with "loud". Saratoga is sare-uh-TOE-guh. Quirico Filopanti is KWEE-ree-ko fee-lo-PAHN-tee.
-- Every hedge in here is on purpose. Read "first to propose", "for the United States", "hardly anybody knew about it", "was never accepted", "drew on", "about four minutes", "a railroad decision, not a law" and "that came later" exactly as written. Never say the zones we use today are Dowd's zones.
+- Every hedge in here is on purpose. Read "first to propose", "for the United States", "seems to have come from", "was never accepted", "drew on", "about four minutes", "a railroad decision, not a law" and "that came later" exactly as written. Never say the zones we use today are Dowd's zones.
 - Visuals: Dowd's maps (Skidmore Saratoga Memory Project), period railroad timetables, station clocks, a map of the four US zones. Nothing sensitive.
 - Good on-screen text moments are 1869, 1870, four zones, 1876, "Terrestrial Time", 24 zones, Nov 18 1883, and "The Day of Two Noons".
 
@@ -30,7 +30,7 @@ Now here's the part that matters, Britannica says Dowd's own system was never ac
 
 Now, to be fair to Sandford Fleming, he isn't credited for nothing. Fleming's work "Terrestrial Time" came out in 1876, and the credit Fleming gets is for something bigger than Dowd's plan, it isn't just the United States, it's a worldwide system of twenty-four time zones. Dowd's plan was US only, and Fleming's was the whole planet, right? So Fleming's credit is for the worldwide system, and that's a real and big contribution, and it's fair to give it to him.
 
-But Dowd's proposal came in 1869, and Fleming's work came in 1876, so if the question is who first proposed time zones for the United States, the answer is the schoolteacher in Saratoga Springs, about seven years earlier. And to be fair, an Italian named Quirico Filopanti had already sketched twenty-four worldwide zones in a book back in 1858, but hardly anybody knew about it until long after his death, so it didn't shape what came next.
+But Dowd's proposal came in 1869, and Fleming's work came in 1876, so if the question is who first proposed time zones for the United States, the answer is the schoolteacher in Saratoga Springs, about seven years earlier. And to be fair, Italy's national encyclopedia says the first idea of twenty-four worldwide zones seems to have come from an Italian named Quirico Filopanti, even before Fleming, though it's Fleming's version that the world ended up taking up.
 
 ## 05 The Day of Two Noons
 

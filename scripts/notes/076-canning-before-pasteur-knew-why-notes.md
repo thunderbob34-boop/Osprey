@@ -37,3 +37,8 @@ Note: runs a bit short (about 5 and a half minutes) rather than padding.
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: Medium: "Appert wasn't the only one in 1810" plus Durand's patent "for the same basic idea" implied an independent rival invention, but Durand's patent says the idea was communicated to him by a foreigner. Added "and the patent itself says the idea was passed on to him by somebody from abroad, so it may not have been his own". Word count 895 to 919; "may not have been his own" added to the reading-notes hedge list.
 - Low items noted, not changed: Pasteurisation (mild heat) and Appert's full boiling aren't quite the same process; the reading notes' "about 5 and a half minutes" runtime is a touch short for 919 words.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: "the patent itself says the idea was passed on to him by somebody from abroad, so it may not have been his own" is accurate. The patent (No. 3372, 25 Aug 1810) reads "an invention communicated to him by a certain foreigner residing abroad" (https://www.gracesguide.co.uk/Peter_Durand ; NOAA Fishery Leaflet 78 https://spo.nmfs.noaa.gov/Fishery%20Leaflets/leaflet78.pdf). It does not contradict "Appert wasn't the only one in 1810" because the script goes on to say the same idea shows up in two countries. Reads fine in one breath.
+- Fixes made: none.
+- Low items: pasteurisation (mild heat) and Appert's boiling are not quite the same process, but the script frames it as what people picture. Runtime note "about 5 and a half minutes" is a touch short for 919 words.

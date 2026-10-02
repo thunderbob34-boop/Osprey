@@ -33,3 +33,8 @@ Left out on purpose (unverified / keep off air in research): the WWII internment
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) Section 03 said the Japanese crackers had "a little paper message tucked inside it", contradicting "tucked into the bend" a breath earlier; History.com (https://www.history.com/articles/fortune-cookies-invented-chinese-japanese) says the fortune sat in the bend "instead of its hollow inside". Now "a fortune tucked into the bend, not inside the hollow the way ours are, so the basic idea, a folded cookie with a little paper message tucked into the fold, was already there". Word count 819 -> 828.
 - Low items noted, not changed: "Nobody in China" is an absolute (fine as a hook); the shrine (Fushimi Inari) is today inside Kyoto city, so "just outside Kyoto" is the source's framing; title states flatly what the script hedges as "most likely".
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: the 'fortune tucked into the bend, not inside the hollow' fix is confirmed; History.com carries the same wording ('a fortune tucked into the bend, instead of its hollow inside'), and it no longer contradicts the next clause. No new problems.
+- Fixes made: none
+- Low items: title states flatly what the script hedges as 'most likely'; the title uses a spaced hyphen, not a dash.

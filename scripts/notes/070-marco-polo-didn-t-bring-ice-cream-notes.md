@@ -1,6 +1,6 @@
 # Notes: Marco Polo Didn't Bring Ice Cream
 Research entry: episode-research.md — "# Job 3" section, entry "### 61." (Ice Cream)
-Spoken words: 755
+Spoken words: 761
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -38,3 +38,8 @@ Left out on purpose (unverified / keep off air in research): any claim the Arab 
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (medium) Latini was steward to Don Stefano (Esteban) Carrillo y Salcedo, first minister to the Spanish viceroy of Naples, not to the viceroy himself (https://en.wikipedia.org/wiki/Antonio_Latini); now "steward to the first minister of the Spanish viceroy in Naples". (medium) "European ices only show up in Italy in the early 1600s, which is about a century after Catherine": Catherine left Florence in 1533, so early 1600s is about 70 years, and "only ... early 1600s" clashed with della Porta freezing wine to slush in 1589 later in the script. Now "ices don't really show up as a dessert in Italy until the early 1600s, long after a teenage Catherine had left Florence for France in the 1530s." Word count 757 to 770.
 - Low items noted, not changed: none
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: (1) Catherine/early-1600s line confirmed and no longer clashes with della Porta 1589 (History.com says "a century after a teenaged Catherine"; the script's "long after ... 1530s" is safe). (2) Latini "steward to the first minister of the Spanish viceroy in Naples" rests only on Wikipedia (no second strong source turned up in search), so under the source standard it could not stay as a new on-air fact.
+- Fixes made: Section 05 now says "Antonio Latini, a steward in Naples, printed some of the first sorbetto recipes" (his book's title, Lo scalco, means "the steward", so the role is safe). Word count 770 to 761; reading notes and "Spoken words" line updated.
+- Low items: "his recipes included chocolate" is not shown in anything found (eggplant is); it comes from the research entry, so left, but worth a check before recording.

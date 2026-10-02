@@ -1,7 +1,7 @@
 # The Man Who Found Oxygen First and Mailed It to the Wrong Guy
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 799 spoken words.
+- Runtime is about 5 minutes at a relaxed pace, roughly 792 spoken words.
 - Tone is calm and a little wry, but no villain. Lavoisier did not steal anything as far as anyone can show, so keep the letter section plain and let the silence do the work.
 - Say Scheele as SHAY-luh, Lavoisier as luh-VWAH-zee-ay, Priestley as PREEST-lee, dephlogisticated as dee-flo-JIS-tih-kay-tid.
 - Every hedge in here is on purpose. Read "around 1771 to 1772", "in print by 1775", "as far as anyone knows", "there's no record he replied or credited it", "we don't know" and "usually shared" exactly as written. Never say Lavoisier stole it or copied it.
@@ -11,7 +11,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-The man who discovered oxygen first lost the credit because his book was slow to come out, and because his most important letter went unanswered. His name was Carl Wilhelm Scheele, and he made oxygen two or three years before Priestley did, and on September 30th, 1774, he wrote to the chemist Antoine Lavoisier and explained how to make it. As far as anyone knows, he never got an answer.
+The man who discovered oxygen first lost the credit because his book was slow to come out. His name was Carl Wilhelm Scheele, and he made oxygen two or three years before Priestley did, and on September 30th, 1774, he wrote to the chemist Antoine Lavoisier and explained how to make it, and as far as anyone knows, he never got an answer.
 
 ## 02 The Famous Version
 

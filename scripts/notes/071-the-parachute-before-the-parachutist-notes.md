@@ -1,6 +1,6 @@
 # Notes: The Parachute Before the Parachutist
 Research entry: 100-episode-lineup.md — heading "### 71. The Parachute Before the Parachutist"
-Spoken words: 708
+Spoken words: 837
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -35,3 +35,8 @@ Left out on purpose (unverified / keep off air in research): Vrančić jumping f
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (high) "nobody before him has a documented jump" was false: Louis-Sébastien Lenormand jumped from the Montpellier observatory tower with a framed parachute on 26 Dec 1783 before a crowd including Joseph Montgolfier (https://www.britannica.com/biography/Louis-Sebastien-Lenormand ; https://en.wikipedia.org/wiki/Louis-S%C3%A9bastien_Lenormand). Garnerin's first is now scoped to "from a balloon" / "from the sky" in 01, 02 and 06, and 02 names Lenormand's 1783 tower jump. Pronunciations for Lenormand and Montpellier and "from a balloon" added to the reading notes. Word count 784 to 837.
 - Low items noted, not changed: Nicholas rig weight (185 lb per Britannica; some sources say 187 lb).
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Lenormand's 26 Dec 1783 jump from the Montpellier observatory tower with a rigid-framed parachute before a crowd is confirmed by Britannica and Europeana (https://www.britannica.com/biography/Louis-Sebastien-Lenormand ; https://www.europeana.eu/en/stories/meet-the-worlds-first-parachuting-family), so the new line meets the two-source standard. Problem found: the closing line said "Garnerin was the first to jump from the sky" flat, while 01 and 02 say "first recorded ... from a balloon".
+- Fixes made: closing now "Garnerin made the first recorded jump from the sky". Word count unchanged at 837. "Spoken words" line in this file corrected from a stale 708 to 837.
+- Low items: cold open "a man finally jumped with it, and it worked" sits slightly against the later "only partly came down under it" (Nicholas cut away at about 2,000 ft); it is explained in section 05 and the close says "it flew". Nicholas rig weight 185 vs 187 lb in some sources.

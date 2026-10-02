@@ -1,6 +1,6 @@
 # Notes: The Bug Collector Who Invented Daylight Saving Time
 Research entry: 100-episode-lineup.md, heading "### 82. The Bug Collector Who Invented Daylight Saving Time"
-Spoken words: 926
+Spoken words: 936
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -33,3 +33,8 @@ Left out on purpose (unverified / keep off air in research): Port Arthur stated 
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: (1) Section 05 "The first country ... was Germany" changed to "The first countries ... were Germany and its ally Austria-Hungary, both on April 30th, 1916" (Austria-Hungary started the same day); recap changed to match. (2) "Willett is the reason Britain adopted daylight saving time ... that's really his doing" softened to "his campaign is a big part of why Britain adopted daylight saving time ... that's a lot of his doing", recap to match: Britain adopted it in 1916 after Willett's death and weeks after Germany, so the war was the immediate trigger. Word count 908 to 926.
 - Low items noted, not changed: "first person to actually stand up and propose" rests on Hudson being the standard first modern proposal (fine); "about twelve years apart" counts to Willett's 1907 pamphlet, though Willett first had the idea around 1905; the society ridicule was from some members (Re-check A).
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: Austria-Hungary 'both on April 30th, 1916' was not supported by Britannica or National Geographic (both name Germany as first); only History.com says both. Medium. The softened Willett line ('a big part of why Britain adopted') confirmed, matches Section 04 and the recap. Cold read: 'the society ridiculed the idea' overstated Te Ara, which says a number of society members ridiculed it.
+- Fixes made: Section 05 now 'The first country ... was Germany, on April 30th, 1916, and its ally Austria-Hungary went along with it that spring' (no exact Austrian date); recap matches ('with Austria-Hungary joining it that spring'). Section 03 and recap now say 'a number of the society's members ridiculed the idea' (Te Ara, https://teara.govt.nz/en/biographies/3h42/hudson-george-vernon). Words 926 to 936.
+- Low items: title still says 'Invented' (Hudson was first to propose); 'about twelve years apart' counts to the 1907 pamphlet.

@@ -1,7 +1,7 @@
 # The Woman Who Showed Carbon Dioxide Traps Heat, Three Years Before Tyndall
 
 READING NOTES
-- Runtime is about 4 minutes at a relaxed pace, roughly 762 spoken words.
+- Runtime is about 4 minutes at a relaxed pace, roughly 767 spoken words.
 - Tone is calm and fair. Keep it about the science and the credit, not about today's climate politics, and give Tyndall his due.
 - Say Eunice Newton Foote as YOO-niss NOO-ton FOOT, Tyndall as TIN-dull, Svante Arrhenius as SVAHN-tuh ah-RAY-nee-us, Joseph Fourier as FOOR-ee-ay.
 - Every hedge in here is on purpose. Read "a man read it for her", "we don't know why", "more rigorous", "first to show", "nobody knows whether Tyndall knew about her work" exactly as written. Never say she "wasn't allowed" to present, never say Tyndall copied her, and never say she discovered the full mechanism. Keep Fourier in, he had the general idea of the air keeping the planet warm in the 1820s, and her first is the carbon dioxide part.
@@ -11,7 +11,7 @@ READING NOTES
 
 ## 01 Cold Open
 
-In 1856, three years before the father of climate science published, a woman with some glass jars and thermometers figured out that carbon dioxide could warm the planet. Her name was Eunice Newton Foote, and she didn't even present her own discovery, a man read it aloud for her at a science meeting, and then the paper was left out of the meeting's official proceedings.
+In 1856, three years before the father of climate science published, a woman with some glass jars and thermometers showed that carbon dioxide traps heat, and she suggested it could warm the planet. Her name was Eunice Newton Foote, and she didn't even present her own discovery, a man read it aloud for her at a science meeting, and then the paper was left out of the meeting's official proceedings.
 
 ## 02 The Famous Version
 

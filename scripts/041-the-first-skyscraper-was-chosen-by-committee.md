@@ -1,7 +1,7 @@
 # The "First Skyscraper" Was Chosen by Committee
 
 READING NOTES
-- Runtime is about 5 and a half minutes at a relaxed pace, roughly 875 spoken words. Every verified detail is in, so it runs under the usual length rather than padded.
+- Runtime is about 5 and a half minutes at a relaxed pace, roughly 878 spoken words. Every verified detail is in, so it runs under the usual length rather than padded.
 - Tone is calm and a little dry. Jenney isn't the villain here, the title was handed out by a committee, and the script says so.
 - Say Jenney as JEN-ee, Tallmadge as TAL-mij, Ditherington as DITH-er-ing-tun, Shrewsbury as SHROHZ-bree, Bessemer as BESS-uh-mer, Phipps as FIPS.
 - Every hedge in here is on purpose. Read "usually called", "made official", "since the 1890s", "from the late 1880s", "mostly iron", "a mix of masonry and iron", "the iron skeleton idea", "that mill isn't tall" and "a working paper" exactly as written. Never call the Home Insurance Building "steel-framed," and never call the Shrewsbury mill an earlier skyscraper.
@@ -30,7 +30,7 @@ Now here's the part that matters, a committee of the Western Society of Engineer
 
 And here's what was inside it, the lower floors used cast iron columns and wrought iron beams. Steel beams, Bessemer steel from the Carnegie-Phipps company, went into only the upper floors. So the building was mostly iron, not steel, right?
 
-A researcher at Rutgers named Jason Barr has looked at this whole debate in a working paper, and he describes the building as a hybrid, a mix of masonry and iron. And I want to say that it's a working paper, it's not peer-reviewed, but the iron and steel split is backed up by other sources too. So that revolutionary steel frame you'll hear about just doesn't hold up, it's repeating the myth.
+A researcher at Rutgers named Jason Barr has looked at this whole debate in a working paper, and he describes the building as a hybrid, a mix of masonry and iron. And I want to say that it's a working paper, an early version of his research, but the iron and steel split is backed up by other sources too. So that revolutionary steel frame you'll hear about just doesn't hold up, it's repeating the myth.
 
 ## 05 Who Was First
 

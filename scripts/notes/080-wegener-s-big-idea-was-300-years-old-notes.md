@@ -34,3 +34,8 @@ Note: runs short (about 4 and a half minutes). The entry is thin and the brief s
 ## Re-check B (2026-10-02)
 - High/medium findings fixed: Medium: "we don't know what Snider-Pellegrini thought pushed them apart" was false as a statement about history (his 1858 book gives a catastrophist, flood-based explanation; only this research pass hadn't verified it). Now "we're not going to get into what Snider-Pellegrini thought pushed them apart, we're sticking to the maps", which still keeps the flood claim off air. Reading-notes hedge "we don't know" swapped for "we're sticking to the maps". Word count 687 to 689.
 - Low items noted, not changed: Frank Bursley Taylor proposed drift in 1908 to 1910, just before Wegener (the script's "first to build a full scientific case" still holds); Ortelius was from Antwerp, so "Flemish" is fine.
+
+## Re-check C (2026-10-02)
+- Round B changes confirmed / problems: "we're not going to get into what Snider-Pellegrini thought pushed them apart, we're sticking to the maps" is accurate (no false claim of ignorance), keeps the flood link off air, and reads naturally. Dates hold: 1596 to 1912 = 316 years, 1858 to 1912 = 54 years, matching the title and "more than three hundred / fifty".
+- Fixes made: none.
+- Low items: Frank Bursley Taylor proposed drift in 1908 to 1910, just before Wegener, but "first to build a full scientific case" still stands. Close line "somebody did it first ... Ortelius" should be read as "first to notice", as the script's own section 05 frames it.
