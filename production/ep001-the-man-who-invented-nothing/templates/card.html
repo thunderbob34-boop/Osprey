@@ -70,22 +70,22 @@ const diagrams = {
     ${T(960,170,'THE ARC LIGHT',40,'middle',800)}
     <rect x="520" y="470" width="360" height="40" rx="6" fill="#1D1B18"/>
     <rect x="1040" y="470" width="360" height="40" rx="6" fill="#1D1B18"/>
-    <path d="M880,490 C920,440 1000,540 1040,490" stroke="#E0A030" stroke-width="16" fill="none"/>
-    <circle cx="960" cy="490" r="95" fill="#F2C14E" opacity=".25"/>
-    ${T(700,580,'carbon',34)} ${T(1220,580,'carbon',34)} ${T(960,400,'arc of light across the gap',34,'middle',600,'#A8261B')}
+    <g data-s="2"><path d="M880,490 C920,440 1000,540 1040,490" stroke="#E0A030" stroke-width="16" fill="none"/>
+    <circle cx="960" cy="490" r="95" fill="#F2C14E" opacity=".25"/>${T(960,400,'arc of light across the gap',34,'middle',600,'#A8261B')}</g>
+    ${T(700,580,'carbon',34)} ${T(1220,580,'carbon',34)}
     <line x1="520" y1="490" x2="400" y2="490" stroke="#1D1B18" stroke-width="5"/><line x1="1400" y1="490" x2="1520" y2="490" stroke="#1D1B18" stroke-width="5"/>
     <path d="M400,490 V760 H1520 V490" fill="none" stroke="#1D1B18" stroke-width="5"/>
     <rect x="860" y="720" width="200" height="80" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${T(960,773,'BATTERY',30,'middle',800)}
     ${T(960,900,'Humphry Davy, England, early 1800s',34,'middle',600,'#5E564A')}`),
   filament_thick_vs_thin: () => svgWrap(`
-    ${T(480,170,'EARLY LAMPS',38,'middle',800)} ${T(1440,170,"EDISON'S LAMP",38,'middle',800)}
-    <line x1="960" y1="140" x2="960" y2="940" stroke="#C9BBA0" stroke-width="4"/>
+    ${T(480,170,'EARLY LAMPS',38,'middle',800)}
     <circle cx="480" cy="420" r="150" fill="none" stroke="#1D1B18" stroke-width="6"/><rect x="430" y="340" width="100" height="150" fill="#1D1B18"/>
     ${T(480,620,'thick, low-resistance carbon',34)} ${T(480,672,'lots of current',34,'middle',800,'#A8261B')}
-    <line x1="200" y1="820" x2="760" y2="820" stroke="#B87333" stroke-width="44"/>${T(480,905,'thick, expensive copper wire',32,'middle',600,'#5E564A')}
+    <g data-s="2"><line x1="200" y1="820" x2="760" y2="820" stroke="#B87333" stroke-width="44"/>${T(480,905,'thick, expensive copper wire',32,'middle',600,'#5E564A')}</g>
+    <g data-s="3">${T(1440,170,"EDISON'S LAMP",38,'middle',800)}<line x1="960" y1="140" x2="960" y2="940" stroke="#C9BBA0" stroke-width="4"/>
     <circle cx="1440" cy="420" r="150" fill="none" stroke="#1D1B18" stroke-width="6"/><path d="M1400,500 C1400,330 1480,330 1480,500" fill="none" stroke="#1D1B18" stroke-width="6"/>
     ${T(1440,620,'thin, high-resistance filament',34)} ${T(1440,672,'much less current',34,'middle',800,'#2F5D7C')}
-    <line x1="1160" y1="820" x2="1720" y2="820" stroke="#B87333" stroke-width="10"/>${T(1440,905,'better vacuum, so it lasts',32,'middle',600,'#5E564A')}`),
+    <line x1="1160" y1="820" x2="1720" y2="820" stroke="#B87333" stroke-width="10"/>${T(1440,905,'better vacuum, so it lasts',32,'middle',600,'#5E564A')}</g>`),
   dc_vs_ac_flow: () => svgWrap(`
     ${T(300,330,'DC',64,'start',800)} ${T(300,380,'direct current',30,'start',600,'#5E564A')}
     <line x1="620" y1="320" x2="1640" y2="320" stroke="#1D1B18" stroke-width="5"/>
@@ -101,18 +101,17 @@ const diagrams = {
     <line x1="300" y1="880" x2="300" y2="300" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>
     <path d="M300,875 Q1000,860 1550,330" fill="none" stroke="#A8261B" stroke-width="10"/>
     ${T(950,945,'current in the wire',32)} <text x="230" y="590" font-size="32" font-weight="600" text-anchor="middle" transform="rotate(-90 230 590)">heat lost</text>
-    <circle cx="470" cy="868" r="18" fill="#2F5D7C"/><line x1="470" y1="850" x2="520" y2="590" stroke="#2F5D7C" stroke-width="4"/>${T(380,520,'high voltage + small current',32,'start',800,'#2F5D7C')}${T(380,560,'= small loss',32,'start',800,'#2F5D7C')}`),
+    <g data-s="2"><circle cx="470" cy="868" r="18" fill="#2F5D7C"/><line x1="470" y1="850" x2="520" y2="590" stroke="#2F5D7C" stroke-width="4"/>${T(380,520,'high voltage + small current',32,'start',800,'#2F5D7C')}${T(380,560,'= small loss',32,'start',800,'#2F5D7C')}</g>`),
   transformer: () => svgWrap(`
     ${T(960,140,'ALTERNATING CURRENT + TRANSFORMERS',40,'middle',800)}
-    <rect x="150" y="380" width="230" height="200" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${T(265,490,'POWER',30,'middle',800)}${T(265,528,'PLANT',30,'middle',800)}
     <rect x="460" y="360" width="190" height="240" fill="none" stroke="#5E564A" stroke-width="18"/>${coil(470,380,6)}${coil(640,380,10)}
-    ${T(555,660,'STEP UP',32,'middle',800,'#A8261B')}
-    <line x1="700" y1="480" x2="1220" y2="480" stroke="#A8261B" stroke-width="6" stroke-dasharray="22 12"/>
-    ${T(960,445,'very high voltage, small current',30,'middle',800,'#A8261B')}${T(960,540,'miles of wire, little loss',30,'middle',600,'#5E564A')}
     <rect x="1270" y="360" width="190" height="240" fill="none" stroke="#5E564A" stroke-width="18"/>${coil(1280,380,10)}${coil(1450,380,6)}
-    ${T(1365,660,'STEP DOWN',32,'middle',800,'#2F5D7C')}
-    <path d="M1560,600 V430 L1650,360 L1740,430 V600 Z" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${T(1650,660,'HOME',30,'middle',800)}
-    ${T(960,820,'a transformer is two coils of wire around an iron core',34,'middle',600)}`),
+    <g data-s="2">${T(960,820,'a transformer is two coils of wire around an iron core',34,'middle',600)}</g>
+    <g data-s="3"><rect x="150" y="380" width="230" height="200" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${T(265,490,'POWER',30,'middle',800)}${T(265,528,'PLANT',30,'middle',800)}${T(555,660,'STEP UP',32,'middle',800,'#A8261B')}</g>
+    <g data-s="4"><line x1="700" y1="480" x2="1220" y2="480" stroke="#A8261B" stroke-width="6" stroke-dasharray="22 12"/>
+    ${T(960,445,'very high voltage, small current',30,'middle',800,'#A8261B')}${T(960,540,'miles of wire, little loss',30,'middle',600,'#5E564A')}</g>
+    <g data-s="5">${T(1365,660,'STEP DOWN',32,'middle',800,'#2F5D7C')}
+    <path d="M1560,600 V430 L1650,360 L1740,430 V600 Z" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${T(1650,660,'HOME',30,'middle',800)}</g>`),
   dc_one_mile: () => svgWrap(`
     ${T(960,140,"EDISON'S DC: STUCK CLOSE TO HOME",40,'middle',800)}
     <circle cx="960" cy="560" r="330" fill="#9A7B3C" opacity=".12" stroke="#9A7B3C" stroke-width="5" stroke-dasharray="18 12"/>
@@ -165,7 +164,7 @@ else if(t==='datecard'){ html=`<div class="frame"></div><div class="kicker" styl
 else if(t==='date'){ html=`<div class="frame"></div><div class="center"><div class="bigdate">${esc(f.date)}</div><div class="rule"></div><div class="sub" style="font-style:normal;color:var(--ink)">${esc(f.caption)}</div></div>`; }
 else if(t==='quote'){ html=`<div class="frame"></div><div class="center"><div class="q">${esc(f.quote)}</div><div class="attr">${esc(f.attribution)}</div></div>`; }
 else if(t==='text'){ html=`<div class="frame"></div><div class="center"><h2>${esc(f.headline)}</h2>${f.sub?`<div class="rule"></div><div class="sub">${esc(f.sub)}</div>`:''}</div>`; }
-else if(t==='compare'){ html=`<div class="cols"><div class="col"><h3>${esc(f.left_title)}</h3>${(f.left_lines||[]).map(l=>`<p>${esc(l)}</p>`).join('')}</div><div class="vr"></div><div class="col"><h3>${esc(f.right_title)}</h3>${(f.right_lines||[]).map(l=>`<p>${esc(l)}</p>`).join('')}</div></div>`; }
+else if(t==='compare'){ html=`<div class="cols"><div class="col"><h3>${esc(f.left_title)}</h3>${(f.left_lines||[]).map(l=>`<p>${esc(l)}</p>`).join('')}</div><div class="vr"></div><div class="col" data-s="2"><h3>${esc(f.right_title)}</h3>${(f.right_lines||[]).map(l=>`<p>${esc(l)}</p>`).join('')}</div></div>`; }
 else if(t==='diagram'){ html=(diagrams[f.variant]||(()=>`<div class="center"><h2>diagram: ${esc(f.variant)}</h2></div>`))(); }
 else if(t==='map'){ html=(maps[f.variant]||(()=>`<div class="center"><h2>map: ${esc(f.variant)}</h2></div>`))(); }
 else if(t==='endcard'){ html=`<div class="frame"></div><div class="center"><div class="kicker">Somebody Did It First</div><div class="rule"></div><h2>${esc(f.line)}</h2></div>`; }
@@ -175,6 +174,7 @@ else if(t==='archival'||t==='illustration'){ document.body.classList.add('ph'); 
   <div class="phsrc">${esc(s.institution||'')}${s.item?' · '+esc(s.item):''}${s.rights?'<br>'+esc(s.rights):''}${s.verified===false?'<br><b style="color:#E0B85A">SOURCE NOT YET CONFIRMED</b>':''}</div></div>`; }
 else { html=`<div class="center"><h2>${esc(t)}</h2></div>`; }
 document.body.insertAdjacentHTML('beforeend',html);
+if (f.step) document.querySelectorAll('[data-s]').forEach(e=>{ if (+e.getAttribute('data-s') > +f.step) e.style.visibility='hidden'; });
 document.fonts.ready.then(()=>{document.body.setAttribute('data-ready','1')});
 </script>
 </body>

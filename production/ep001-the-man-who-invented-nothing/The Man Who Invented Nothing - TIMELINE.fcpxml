@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<fcpxml version="1.10">
+<resources>
+<format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>
+<format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>
+<asset id="g_01-a" name="01-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/01-a.png"/></asset>
+<asset id="g_01-b" name="01-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/01-b.png"/></asset>
+<asset id="g_01-c" name="01-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/01-c.png"/></asset>
+<asset id="g_01-d" name="01-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/01-d.png"/></asset>
+<asset id="g_01-e" name="01-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/01-e.png"/></asset>
+<asset id="g_01-f" name="01-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/01-f.png"/></asset>
+<asset id="g_01-g" name="01-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/01-g.png"/></asset>
+<asset id="g_01-h" name="01-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/01-h.png"/></asset>
+<asset id="g_02-a" name="02-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-a.png"/></asset>
+<asset id="g_02-b" name="02-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-b.png"/></asset>
+<asset id="g_02-c" name="02-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-c.png"/></asset>
+<asset id="g_02-d" name="02-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-d.png"/></asset>
+<asset id="g_02-e" name="02-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-e.png"/></asset>
+<asset id="g_02-f" name="02-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-f.png"/></asset>
+<asset id="g_02-g" name="02-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-g.png"/></asset>
+<asset id="g_02-h" name="02-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-h.png"/></asset>
+<asset id="g_02-i" name="02-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-i.png"/></asset>
+<asset id="g_02-j" name="02-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-j.png"/></asset>
+<asset id="g_02-k" name="02-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-k.png"/></asset>
+<asset id="g_02-l" name="02-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/02-l.png"/></asset>
+<asset id="g_03-a" name="03-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-a.png"/></asset>
+<asset id="g_03-b" name="03-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-b.png"/></asset>
+<asset id="g_03-c" name="03-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-c.png"/></asset>
+<asset id="g_03-d" name="03-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-d.png"/></asset>
+<asset id="g_03-e" name="03-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-e.png"/></asset>
+<asset id="g_03-f" name="03-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-f.png"/></asset>
+<asset id="g_03-g" name="03-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-g.png"/></asset>
+<asset id="g_03-h" name="03-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-h.png"/></asset>
+<asset id="g_03-i" name="03-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-i.png"/></asset>
+<asset id="g_03-j" name="03-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-j.png"/></asset>
+<asset id="g_03-k" name="03-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-k.png"/></asset>
+<asset id="g_03-l" name="03-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-l.png"/></asset>
+<asset id="g_03-m" name="03-m" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-m.png"/></asset>
+<asset id="g_03-n" name="03-n" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-n.png"/></asset>
+<asset id="g_03-o" name="03-o" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-o.png"/></asset>
+<asset id="g_03-p" name="03-p" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-p.png"/></asset>
+<asset id="g_03-q" name="03-q" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-q.png"/></asset>
+<asset id="g_03-r" name="03-r" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-r.png"/></asset>
+<asset id="g_03-s" name="03-s" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-s.png"/></asset>
+<asset id="g_03-t" name="03-t" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-t.png"/></asset>
+<asset id="g_03-u" name="03-u" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-u.png"/></asset>
+<asset id="g_03-v" name="03-v" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/03-v.png"/></asset>
+<asset id="g_04-a" name="04-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-a.png"/></asset>
+<asset id="g_04-b" name="04-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-b.png"/></asset>
+<asset id="g_04-c" name="04-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-c.png"/></asset>
+<asset id="g_04-d" name="04-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-d.png"/></asset>
+<asset id="g_04-e" name="04-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-e.png"/></asset>
+<asset id="g_04-f" name="04-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-f.png"/></asset>
+<asset id="g_04-g" name="04-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-g.png"/></asset>
+<asset id="g_04-h" name="04-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-h.png"/></asset>
+<asset id="g_04-i" name="04-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-i.png"/></asset>
+<asset id="g_04-j" name="04-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-j.png"/></asset>
+<asset id="g_04-k" name="04-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-k.png"/></asset>
+<asset id="g_04-l" name="04-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-l.png"/></asset>
+<asset id="g_04-m" name="04-m" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-m.png"/></asset>
+<asset id="g_04-n" name="04-n" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-n.png"/></asset>
+<asset id="g_04-o" name="04-o" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-o.png"/></asset>
+<asset id="g_04-p" name="04-p" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-p.png"/></asset>
+<asset id="g_04-q" name="04-q" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-q.png"/></asset>
+<asset id="g_04-r" name="04-r" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-r.png"/></asset>
+<asset id="g_04-s" name="04-s" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-s.png"/></asset>
+<asset id="g_04-t" name="04-t" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-t.png"/></asset>
+<asset id="g_04-u" name="04-u" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-u.png"/></asset>
+<asset id="g_04-v" name="04-v" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/04-v.png"/></asset>
+<asset id="g_05-a" name="05-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-a.png"/></asset>
+<asset id="g_05-b" name="05-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-b.png"/></asset>
+<asset id="g_05-c" name="05-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-c.png"/></asset>
+<asset id="g_05-d" name="05-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-d.png"/></asset>
+<asset id="g_05-e" name="05-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-e.png"/></asset>
+<asset id="g_05-f" name="05-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-f.png"/></asset>
+<asset id="g_05-g" name="05-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-g.png"/></asset>
+<asset id="g_05-h" name="05-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-h.png"/></asset>
+<asset id="g_05-i" name="05-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-i.png"/></asset>
+<asset id="g_05-j" name="05-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-j.png"/></asset>
+<asset id="g_05-k" name="05-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-k.png"/></asset>
+<asset id="g_05-l" name="05-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-l.png"/></asset>
+<asset id="g_05-m" name="05-m" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/05-m.png"/></asset>
+<asset id="g_06-a" name="06-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-a.png"/></asset>
+<asset id="g_06-b" name="06-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-b.png"/></asset>
+<asset id="g_06-c" name="06-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-c.png"/></asset>
+<asset id="g_06-d" name="06-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-d.png"/></asset>
+<asset id="g_06-e" name="06-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-e.png"/></asset>
+<asset id="g_06-f" name="06-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-f.png"/></asset>
+<asset id="g_06-g" name="06-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-g.png"/></asset>
+<asset id="g_06-h" name="06-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-h.png"/></asset>
+<asset id="g_06-i" name="06-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-i.png"/></asset>
+<asset id="g_06-j" name="06-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-j.png"/></asset>
+<asset id="g_06-k" name="06-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-k.png"/></asset>
+<asset id="g_06-l" name="06-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-l.png"/></asset>
+<asset id="g_06-m" name="06-m" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-m.png"/></asset>
+<asset id="g_06-n" name="06-n" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-n.png"/></asset>
+<asset id="g_06-o" name="06-o" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-o.png"/></asset>
+<asset id="g_06-p" name="06-p" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-p.png"/></asset>
+<asset id="g_06-q" name="06-q" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-q.png"/></asset>
+<asset id="g_06-r" name="06-r" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-r.png"/></asset>
+<asset id="g_06-s" name="06-s" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-s.png"/></asset>
+<asset id="g_06-t" name="06-t" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-t.png"/></asset>
+<asset id="g_06-u" name="06-u" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-u.png"/></asset>
+<asset id="g_06-v" name="06-v" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-v.png"/></asset>
+<asset id="g_06-w" name="06-w" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-w.png"/></asset>
+<asset id="g_06-x" name="06-x" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-x.png"/></asset>
+<asset id="g_06-y" name="06-y" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-y.png"/></asset>
+<asset id="g_06-z" name="06-z" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/06-z.png"/></asset>
+<asset id="g_07-a" name="07-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-a.png"/></asset>
+<asset id="g_07-b" name="07-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-b.png"/></asset>
+<asset id="g_07-c" name="07-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-c.png"/></asset>
+<asset id="g_07-d" name="07-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-d.png"/></asset>
+<asset id="g_07-e" name="07-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-e.png"/></asset>
+<asset id="g_07-f" name="07-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-f.png"/></asset>
+<asset id="g_07-g" name="07-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-g.png"/></asset>
+<asset id="g_07-h" name="07-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-h.png"/></asset>
+<asset id="g_07-i" name="07-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-i.png"/></asset>
+<asset id="g_07-j" name="07-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-j.png"/></asset>
+<asset id="g_07-k" name="07-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/07-k.png"/></asset>
+<asset id="g_08-a" name="08-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-a.png"/></asset>
+<asset id="g_08-b" name="08-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-b.png"/></asset>
+<asset id="g_08-c" name="08-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-c.png"/></asset>
+<asset id="g_08-d" name="08-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-d.png"/></asset>
+<asset id="g_08-e" name="08-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-e.png"/></asset>
+<asset id="g_08-f" name="08-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-f.png"/></asset>
+<asset id="g_08-g" name="08-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-g.png"/></asset>
+<asset id="g_08-h" name="08-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-h.png"/></asset>
+<asset id="g_08-i" name="08-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-i.png"/></asset>
+<asset id="g_08-j" name="08-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-j.png"/></asset>
+<asset id="g_08-k" name="08-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-k.png"/></asset>
+<asset id="g_08-l" name="08-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-l.png"/></asset>
+<asset id="g_08-m" name="08-m" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-m.png"/></asset>
+<asset id="g_08-n" name="08-n" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/graphics/08-n.png"/></asset>
+<asset id="vo_01" name="VO 01" start="0s" duration="38s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/vo/01-cold-open.mp3"/></asset>
+<asset id="vo_02" name="VO 02" start="0s" duration="1586/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/vo/02-davy-and-swan.mp3"/></asset>
+<asset id="vo_03" name="VO 03" start="0s" duration="95s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/vo/03-what-edison-actually-did.mp3"/></asset>
+<asset id="vo_04" name="VO 04" start="0s" duration="2902/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/vo/04-the-real-fight.mp3"/></asset>
+<asset id="vo_05" name="VO 05" start="0s" duration="1843/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/vo/05-it-wasnt-tesla-versus-edison.mp3"/></asset>
+<asset id="vo_06" name="VO 06" start="0s" duration="3601/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/vo/06-the-smear-campaign.mp3"/></asset>
+<asset id="vo_07" name="VO 07" start="0s" duration="1664/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/vo/07-how-ac-won-anyway.mp3"/></asset>
+<asset id="vo_08" name="VO 08" start="0s" duration="1724/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep001-the-man-who-invented-nothing/vo/08-every-outlet-on-earth.mp3"/></asset>
+</resources>
+<library>
+<event name="Somebody Did It First">
+<project name="The Man Who Invented Nothing">
+<sequence format="r1" duration="577s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+<spine>
+<video ref="g_01-a" offset="0s" name="01-a" start="0s" duration="140/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="38s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></video>
+<video ref="g_01-b" offset="140/30s" name="01-b" start="0s" duration="178/30s"></video>
+<video ref="g_01-c" offset="318/30s" name="01-c" start="0s" duration="168/30s"></video>
+<video ref="g_01-d" offset="486/30s" name="01-d" start="0s" duration="121/30s"></video>
+<video ref="g_01-e" offset="607/30s" name="01-e" start="0s" duration="122/30s"></video>
+<video ref="g_01-f" offset="729/30s" name="01-f" start="0s" duration="131/30s"></video>
+<video ref="g_01-g" offset="860/30s" name="01-g" start="0s" duration="140/30s"></video>
+<video ref="g_01-h" offset="1000/30s" name="01-h" start="0s" duration="140/30s"></video>
+<video ref="g_02-a" offset="38s" name="02-a" start="0s" duration="149/30s"><asset-clip ref="vo_02" lane="-1" offset="0s" start="0s" duration="1586/30s" name="VO 02" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="02 Davy and Swan"/></video>
+<video ref="g_02-b" offset="1289/30s" name="02-b" start="0s" duration="119/30s"></video>
+<video ref="g_02-c" offset="1408/30s" name="02-c" start="0s" duration="128/30s"></video>
+<video ref="g_02-d" offset="1536/30s" name="02-d" start="0s" duration="169/30s"></video>
+<video ref="g_02-e" offset="1705/30s" name="02-e" start="0s" duration="99/30s"></video>
+<video ref="g_02-f" offset="1804/30s" name="02-f" start="0s" duration="169/30s"></video>
+<video ref="g_02-g" offset="1973/30s" name="02-g" start="0s" duration="168/30s"></video>
+<video ref="g_02-h" offset="2141/30s" name="02-h" start="0s" duration="109/30s"></video>
+<video ref="g_02-i" offset="75s" name="02-i" start="0s" duration="169/30s"></video>
+<video ref="g_02-j" offset="2419/30s" name="02-j" start="0s" duration="79/30s"></video>
+<video ref="g_02-k" offset="2498/30s" name="02-k" start="0s" duration="119/30s"></video>
+<video ref="g_02-l" offset="2617/30s" name="02-l" start="0s" duration="109/30s"></video>
+<video ref="g_03-a" offset="2726/30s" name="03-a" start="0s" duration="119/30s"><asset-clip ref="vo_03" lane="-1" offset="0s" start="0s" duration="95s" name="VO 03" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="03 What Edison Actually Did"/></video>
+<video ref="g_03-b" offset="2845/30s" name="03-b" start="0s" duration="174/30s"></video>
+<video ref="g_03-c" offset="3019/30s" name="03-c" start="0s" duration="108/30s"></video>
+<video ref="g_03-d" offset="3127/30s" name="03-d" start="0s" duration="173/30s"></video>
+<video ref="g_03-e" offset="110s" name="03-e" start="0s" duration="98/30s"></video>
+<video ref="g_03-f" offset="3398/30s" name="03-f" start="0s" duration="184/30s"></video>
+<video ref="g_03-g" offset="3582/30s" name="03-g" start="0s" duration="108/30s"></video>
+<video ref="g_03-h" offset="123s" name="03-h" start="0s" duration="152/30s"></video>
+<video ref="g_03-i" offset="3842/30s" name="03-i" start="0s" duration="65/30s"></video>
+<video ref="g_03-j" offset="3907/30s" name="03-j" start="0s" duration="119/30s"></video>
+<video ref="g_03-k" offset="4026/30s" name="03-k" start="0s" duration="141/30s"></video>
+<video ref="g_03-l" offset="4167/30s" name="03-l" start="0s" duration="65/30s"></video>
+<video ref="g_03-m" offset="4232/30s" name="03-m" start="0s" duration="98/30s"></video>
+<video ref="g_03-n" offset="4330/30s" name="03-n" start="0s" duration="130/30s"></video>
+<video ref="g_03-o" offset="4460/30s" name="03-o" start="0s" duration="152/30s"></video>
+<video ref="g_03-p" offset="4612/30s" name="03-p" start="0s" duration="162/30s"></video>
+<video ref="g_03-q" offset="4774/30s" name="03-q" start="0s" duration="152/30s"></video>
+<video ref="g_03-r" offset="4926/30s" name="03-r" start="0s" duration="119/30s"></video>
+<video ref="g_03-s" offset="5045/30s" name="03-s" start="0s" duration="141/30s"></video>
+<video ref="g_03-t" offset="5186/30s" name="03-t" start="0s" duration="119/30s"></video>
+<video ref="g_03-u" offset="5305/30s" name="03-u" start="0s" duration="195/30s"></video>
+<video ref="g_03-v" offset="5500/30s" name="03-v" start="0s" duration="76/30s"></video>
+<video ref="g_04-a" offset="5576/30s" name="04-a" start="0s" duration="122/30s"><asset-clip ref="vo_04" lane="-1" offset="0s" start="0s" duration="2902/30s" name="VO 04" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="04 The Real Fight"/></video>
+<video ref="g_04-b" offset="5698/30s" name="04-b" start="0s" duration="153/30s"></video>
+<video ref="g_04-c" offset="5851/30s" name="04-c" start="0s" duration="112/30s"></video>
+<video ref="g_04-d" offset="5963/30s" name="04-d" start="0s" duration="122/30s"></video>
+<video ref="g_04-e" offset="6085/30s" name="04-e" start="0s" duration="132/30s"></video>
+<video ref="g_04-f" offset="6217/30s" name="04-f" start="0s" duration="102/30s"></video>
+<video ref="g_04-g" offset="6319/30s" name="04-g" start="0s" duration="184/30s"></video>
+<video ref="g_04-h" offset="6503/30s" name="04-h" start="0s" duration="183/30s"></video>
+<video ref="g_04-i" offset="6686/30s" name="04-i" start="0s" duration="112/30s"></video>
+<video ref="g_04-j" offset="6798/30s" name="04-j" start="0s" duration="112/30s"></video>
+<video ref="g_04-k" offset="6910/30s" name="04-k" start="0s" duration="112/30s"></video>
+<video ref="g_04-l" offset="7022/30s" name="04-l" start="0s" duration="132/30s"></video>
+<video ref="g_04-m" offset="7154/30s" name="04-m" start="0s" duration="92/30s"></video>
+<video ref="g_04-n" offset="7246/30s" name="04-n" start="0s" duration="122/30s"></video>
+<video ref="g_04-o" offset="7368/30s" name="04-o" start="0s" duration="112/30s"></video>
+<video ref="g_04-p" offset="7480/30s" name="04-p" start="0s" duration="173/30s"></video>
+<video ref="g_04-q" offset="7653/30s" name="04-q" start="0s" duration="173/30s"></video>
+<video ref="g_04-r" offset="7826/30s" name="04-r" start="0s" duration="143/30s"></video>
+<video ref="g_04-s" offset="7969/30s" name="04-s" start="0s" duration="163/30s"></video>
+<video ref="g_04-t" offset="8132/30s" name="04-t" start="0s" duration="163/30s"></video>
+<video ref="g_04-u" offset="8295/30s" name="04-u" start="0s" duration="132/30s"></video>
+<video ref="g_04-v" offset="8427/30s" name="04-v" start="0s" duration="51/30s"></video>
+<video ref="g_05-a" offset="8478/30s" name="05-a" start="0s" duration="190/30s"><asset-clip ref="vo_05" lane="-1" offset="0s" start="0s" duration="1843/30s" name="VO 05" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="05 It Wasn&#x27;t Tesla Versus Edison"/></video>
+<video ref="g_05-b" offset="8668/30s" name="05-b" start="0s" duration="100/30s"></video>
+<video ref="g_05-c" offset="8768/30s" name="05-c" start="0s" duration="134/30s"></video>
+<video ref="g_05-d" offset="8902/30s" name="05-d" start="0s" duration="134/30s"></video>
+<video ref="g_05-e" offset="9036/30s" name="05-e" start="0s" duration="179/30s"></video>
+<video ref="g_05-f" offset="9215/30s" name="05-f" start="0s" duration="179/30s"></video>
+<video ref="g_05-g" offset="9394/30s" name="05-g" start="0s" duration="112/30s"></video>
+<video ref="g_05-h" offset="9506/30s" name="05-h" start="0s" duration="111/30s"></video>
+<video ref="g_05-i" offset="9617/30s" name="05-i" start="0s" duration="123/30s"></video>
+<video ref="g_05-j" offset="9740/30s" name="05-j" start="0s" duration="179/30s"></video>
+<video ref="g_05-k" offset="9919/30s" name="05-k" start="0s" duration="89/30s"></video>
+<video ref="g_05-l" offset="10008/30s" name="05-l" start="0s" duration="168/30s"></video>
+<video ref="g_05-m" offset="10176/30s" name="05-m" start="0s" duration="145/30s"></video>
+<video ref="g_06-a" offset="10321/30s" name="06-a" start="0s" duration="211/30s"><asset-clip ref="vo_06" lane="-1" offset="0s" start="0s" duration="3601/30s" name="VO 06" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="06 The Smear Campaign"/></video>
+<video ref="g_06-b" offset="10532/30s" name="06-b" start="0s" duration="106/30s"></video>
+<video ref="g_06-c" offset="10638/30s" name="06-c" start="0s" duration="129/30s"></video>
+<video ref="g_06-d" offset="10767/30s" name="06-d" start="0s" duration="187/30s"></video>
+<video ref="g_06-e" offset="10954/30s" name="06-e" start="0s" duration="176/30s"></video>
+<video ref="g_06-f" offset="371s" name="06-f" start="0s" duration="211/30s"></video>
+<video ref="g_06-g" offset="11341/30s" name="06-g" start="0s" duration="94/30s"></video>
+<video ref="g_06-h" offset="11435/30s" name="06-h" start="0s" duration="141/30s"></video>
+<video ref="g_06-i" offset="11576/30s" name="06-i" start="0s" duration="106/30s"></video>
+<video ref="g_06-j" offset="11682/30s" name="06-j" start="0s" duration="152/30s"></video>
+<video ref="g_06-k" offset="11834/30s" name="06-k" start="0s" duration="176/30s"></video>
+<video ref="g_06-l" offset="12010/30s" name="06-l" start="0s" duration="153/30s"></video>
+<video ref="g_06-m" offset="12163/30s" name="06-m" start="0s" duration="82/30s"></video>
+<video ref="g_06-n" offset="12245/30s" name="06-n" start="0s" duration="152/30s"></video>
+<video ref="g_06-o" offset="12397/30s" name="06-o" start="0s" duration="106/30s"></video>
+<video ref="g_06-p" offset="12503/30s" name="06-p" start="0s" duration="176/30s"></video>
+<video ref="g_06-q" offset="12679/30s" name="06-q" start="0s" duration="93/30s"></video>
+<video ref="g_06-r" offset="12772/30s" name="06-r" start="0s" duration="141/30s"></video>
+<video ref="g_06-s" offset="12913/30s" name="06-s" start="0s" duration="118/30s"></video>
+<video ref="g_06-t" offset="13031/30s" name="06-t" start="0s" duration="117/30s"></video>
+<video ref="g_06-u" offset="13148/30s" name="06-u" start="0s" duration="141/30s"></video>
+<video ref="g_06-v" offset="13289/30s" name="06-v" start="0s" duration="117/30s"></video>
+<video ref="g_06-w" offset="13406/30s" name="06-w" start="0s" duration="129/30s"></video>
+<video ref="g_06-x" offset="13535/30s" name="06-x" start="0s" duration="141/30s"></video>
+<video ref="g_06-y" offset="13676/30s" name="06-y" start="0s" duration="129/30s"></video>
+<video ref="g_06-z" offset="13805/30s" name="06-z" start="0s" duration="117/30s"></video>
+<video ref="g_07-a" offset="13922/30s" name="07-a" start="0s" duration="138/30s"><asset-clip ref="vo_07" lane="-1" offset="0s" start="0s" duration="1664/30s" name="VO 07" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="07 How AC Won Anyway"/></video>
+<video ref="g_07-b" offset="14060/30s" name="07-b" start="0s" duration="137/30s"></video>
+<video ref="g_07-c" offset="14197/30s" name="07-c" start="0s" duration="138/30s"></video>
+<video ref="g_07-d" offset="14335/30s" name="07-d" start="0s" duration="163/30s"></video>
+<video ref="g_07-e" offset="14498/30s" name="07-e" start="0s" duration="112/30s"></video>
+<video ref="g_07-f" offset="487s" name="07-f" start="0s" duration="5s"></video>
+<video ref="g_07-g" offset="492s" name="07-g" start="0s" duration="138/30s"></video>
+<video ref="g_07-h" offset="14898/30s" name="07-h" start="0s" duration="5s"></video>
+<video ref="g_07-i" offset="15048/30s" name="07-i" start="0s" duration="213/30s"></video>
+<video ref="g_07-j" offset="15261/30s" name="07-j" start="0s" duration="175/30s"></video>
+<video ref="g_07-k" offset="15436/30s" name="07-k" start="0s" duration="5s"></video>
+<video ref="g_08-a" offset="15586/30s" name="08-a" start="0s" duration="97/30s"><asset-clip ref="vo_08" lane="-1" offset="0s" start="0s" duration="1724/30s" name="VO 08" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="08 Every Outlet On Earth"/></video>
+<video ref="g_08-b" offset="15683/30s" name="08-b" start="0s" duration="87/30s"></video>
+<video ref="g_08-c" offset="15770/30s" name="08-c" start="0s" duration="68/30s"></video>
+<video ref="g_08-d" offset="15838/30s" name="08-d" start="0s" duration="106/30s"></video>
+<video ref="g_08-e" offset="15944/30s" name="08-e" start="0s" duration="184/30s"></video>
+<video ref="g_08-f" offset="16128/30s" name="08-f" start="0s" duration="78/30s"></video>
+<video ref="g_08-g" offset="16206/30s" name="08-g" start="0s" duration="106/30s"></video>
+<video ref="g_08-h" offset="16312/30s" name="08-h" start="0s" duration="136/30s"></video>
+<video ref="g_08-i" offset="16448/30s" name="08-i" start="0s" duration="107/30s"></video>
+<video ref="g_08-j" offset="16555/30s" name="08-j" start="0s" duration="174/30s"></video>
+<video ref="g_08-k" offset="16729/30s" name="08-k" start="0s" duration="155/30s"></video>
+<video ref="g_08-l" offset="16884/30s" name="08-l" start="0s" duration="174/30s"></video>
+<video ref="g_08-m" offset="17058/30s" name="08-m" start="0s" duration="145/30s"></video>
+<video ref="g_08-n" offset="17203/30s" name="08-n" start="0s" duration="107/30s"></video>
+</spine>
+</sequence>
+</project>
+</event>
+</library>
+</fcpxml>

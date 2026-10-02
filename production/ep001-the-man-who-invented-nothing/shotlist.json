@@ -162,7 +162,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "arc_light"
+   "variant": "arc_light",
+   "step": 1
   },
   "visual": "Arc-light diagram: battery feeds two carbon rods, rods glow.",
   "source": null
@@ -175,7 +176,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "arc_light"
+   "variant": "arc_light",
+   "step": 2
   },
   "visual": "Same diagram, the arc jumps the gap and brightens.",
   "source": null
@@ -369,7 +371,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "filament_thick_vs_thin"
+   "variant": "filament_thick_vs_thin",
+   "step": 1
   },
   "visual": "Diagram, thick low-resistance carbon side highlighted: lots of current.",
   "source": null
@@ -382,7 +385,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "filament_thick_vs_thin"
+   "variant": "filament_thick_vs_thin",
+   "step": 2
   },
   "visual": "Same diagram, thick copper wire highlighted.",
   "source": null
@@ -395,7 +399,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "filament_thick_vs_thin"
+   "variant": "filament_thick_vs_thin",
+   "step": 3
   },
   "visual": "Same diagram, thin high-resistance filament side highlighted: little current.",
   "source": null
@@ -808,7 +813,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "power_loss"
+   "variant": "power_loss",
+   "step": 1
   },
   "visual": "Power-loss diagram: heat loss in the wire climbs fast with current.",
   "source": null
@@ -821,7 +827,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "power_loss"
+   "variant": "power_loss",
+   "step": 2
   },
   "visual": "Same diagram: high voltage with small current shows low loss.",
   "source": null
@@ -847,7 +854,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "transformer"
+   "variant": "transformer",
+   "step": 1
   },
   "visual": "Transformer diagram builds in.",
   "source": null
@@ -860,7 +868,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "transformer"
+   "variant": "transformer",
+   "step": 2
   },
   "visual": "Same diagram, the two coils and the iron core highlighted.",
   "source": null
@@ -873,7 +882,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "transformer"
+   "variant": "transformer",
+   "step": 3
   },
   "visual": "Step-up end at the plant highlighted.",
   "source": null
@@ -886,7 +896,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "transformer"
+   "variant": "transformer",
+   "step": 4
   },
   "visual": "Long line highlighted.",
   "source": null
@@ -899,7 +910,8 @@
   "type": "diagram",
   "template": "diagram",
   "fields": {
-   "variant": "transformer"
+   "variant": "transformer",
+   "step": 5
   },
   "visual": "Step-down end at the house highlighted.",
   "source": null
@@ -1625,21 +1637,14 @@
   "section": "06",
   "section_name": "The Smear Campaign",
   "text": "witnesses saw he was still breathing, so they switched it back on,",
-  "type": "archival",
-  "template": "archival",
+  "type": "text",
+  "template": "text",
   "fields": {
-   "kind": "photo",
-   "label": "Auburn Prison, New York (exterior)"
+   "headline": "Witnesses saw he was still breathing",
+   "sub": "So they switched it back on"
   },
-  "visual": "Exterior of the prison only, slow push-in.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:AuburnPrisonFront crop.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:AuburnPrisonFront_crop.jpg",
-   "rights": "Not stated in the search result, and the photo's date is unknown, so it may not be a period view. Look for a verified 1880s-1890s exterior; if none, replace the beat with a text card",
-   "credit": "Auburn Prison front, via Wikimedia Commons (confirm date and license)",
-   "verified": false
-  },
+  "visual": "Text card, plain. No imagery of the execution.",
+  "source": null,
   "notes": "SENSITIVE BEAT. No animal or execution imagery. Plain, flat treatment; text or building only. Exterior only, never the chair or the execution room. The only Library of Congress Auburn items found were the electric chair interior and an execution film, both avoided. This Commons exterior is of unknown date; replace with a verified period exterior or a text card."
  },
  {
@@ -1979,7 +1984,8 @@
    "right_title": "UK and Europe",
    "right_lines": [
     "230 V, 50 Hz"
-   ]
+   ],
+   "step": 1
   },
   "visual": "Compare card, the US side highlighted.",
   "source": null
@@ -1999,7 +2005,8 @@
    "right_title": "UK and Europe",
    "right_lines": [
     "230 V, 50 Hz"
-   ]
+   ],
+   "step": 2
   },
   "visual": "Same compare card, the UK and Europe side highlighted.",
   "source": null
