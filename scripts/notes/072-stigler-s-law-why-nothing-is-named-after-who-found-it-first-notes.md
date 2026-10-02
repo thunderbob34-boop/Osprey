@@ -1,6 +1,6 @@
 # Notes: Stigler's Law: Why Nothing Is Named After Who Found It First
 Research entry: 100-episode-lineup.md — heading "### 72. Stigler's Law: Why Nothing Is Named After Who Found It First"
-Spoken words: 937
+Spoken words: 939
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|

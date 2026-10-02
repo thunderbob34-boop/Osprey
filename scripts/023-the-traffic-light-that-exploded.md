@@ -1,7 +1,7 @@
 # The Traffic Light That Exploded
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 903 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 898 spoken words.
 - Tone is calm and matter-of-fact. Keep the explosion section plain and flat, no drama in the voice. Garrett Morgan gets honored here, not debunked.
 - Say Knight as NITE, Lemelson as LEM-el-son.
 - Every hedge in here is on purpose. Read "as Smithsonian Magazine tells it", "badly burned", "December 1868", "about a month", "widely regarded" and "not the first" exactly as written. Never say the policeman was killed, and never give a single install day.
@@ -15,7 +15,7 @@ The first traffic light lasted about a month, and then, as Smithsonian Magazine 
 
 ## 02 The Famous Version
 
-Here's the version most people know. In 1923 Garrett Morgan got a US patent, number 1,475,024, for a traffic signal, and over the years that turned into Garrett Morgan invented the traffic light. And you can see why it sticks, a patent is a nice clean thing to point at, it has a name and a number and a date on it.
+Here's the version most people know, in 1923 Garrett Morgan got a US patent, number 1,475,024, for a traffic signal, and over the years that turned into Garrett Morgan invented the traffic light. And you can see why it sticks, a patent is a nice clean thing to point at, it has a name and a number and a date on it.
 
 But Britannica says it plainly, Morgan's signal was not the first traffic signal. What Morgan patented was a better signal, a three-position signal, and that's a real improvement, but a better signal is not the same thing as the first signal, right? To find the first one you have to go back across the ocean and more than half a century earlier.
 
@@ -25,11 +25,11 @@ In December 1868, a signal went up outside the Houses of Parliament in London, a
 
 During the day it was a semaphore, which is the kind of signal railways used, with arms that move into different positions to tell you to stop or go. And at night, when you couldn't see the arms, it used gas lamps, a red one and a green one. And none of it ran on its own, a police officer stood there and worked it by hand.
 
-Now you'll see different install dates for this, some say December 9th and some say December 10th, so we're just going to say December 1868, and that's close enough for anybody.
+Now you'll see different install dates for this, some say December 9th and some say December 10th, so we're just going to say December 1868.
 
 ## 04 The Explosion
 
-And here's where it goes wrong. The lamps ran on gas, and a gas lamp works by burning gas, so the lamp needs a supply of gas running to it the whole time, and a leak anywhere in that is a real danger. And in January 1869, as Smithsonian Magazine tells it, leaking gas exploded and burned the policeman who was operating it, and the signal was taken away. So the first traffic light in the world went up in December and was gone after January, it lasted about a month.
+And here's where it goes wrong, the lamps ran on gas, and a gas lamp works by burning gas, so the lamp needs a supply of gas running to it the whole time, and a leak anywhere in that is a real danger. And in January 1869, as Smithsonian Magazine tells it, leaking gas exploded and burned the policeman who was operating it, and the signal was taken away. So the first traffic light in the world went up in December and was gone after January, it lasted about a month.
 
 Now, you'll see some accounts say the policeman was killed, and Smithsonian flags that as unconfirmed, so we're not going to say it. What we can say is that he was badly burned, and that the signal came down after that.
 
@@ -47,4 +47,4 @@ The problem is just the word first. Morgan's name gets attached to the invention
 
 ## 07 Who Did It First
 
-So here's the plain version. The first traffic signal went up outside Parliament in London in December 1868, designed by a railway engineer named John Peake Knight. It was a railway-style semaphore by day and red and green gas lamps by night, worked by hand by a policeman. In January 1869 it exploded, the policeman was badly burned, and the signal came down. Lester Wire built an electric one in Salt Lake City in 1912, Cleveland put one in on August 5th, 1914, and Garrett Morgan got his patent in 1923, fifty-five years after London. Somebody did it first, and it was a railway engineer with a set of gas lamps.
+So here's the plain version, the first traffic signal went up outside Parliament in London in December 1868, designed by a railway engineer named John Peake Knight. It was a railway-style semaphore by day and red and green gas lamps by night, worked by hand by a policeman. In January 1869, as Smithsonian Magazine tells it, it exploded, the policeman was badly burned, and the signal came down. Lester Wire built an electric one in Salt Lake City in 1912, Cleveland put one in on August 5th, 1914, and Garrett Morgan got his patent in 1923, fifty-five years after London. Somebody did it first, and it was John Peake Knight in London.

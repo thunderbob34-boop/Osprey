@@ -17,21 +17,21 @@ Every math student learns Pascal's triangle, and Pascal was born almost six hund
 
 If it's been a while since school, the triangle is easy to build. You put a 1 at the top, every row starts and ends with a 1, and every number in between is just the two numbers right above it added together. So the rows go one, then one one, then one two one, then one three three one, then one four six four one, and you can keep going down as far as you want.
 
-And the reason anybody cares is that those rows are the numbers you get when you multiply out something like a plus b, times itself, over and over, so the triangle hands you the answer without doing all the multiplying. That's what mathematicians call the binomial theorem. And the same numbers also tell you how many ways there are to pick a few things out of a group, which is exactly the kind of thing you need when you start working out odds, right? So it's a simple little pattern that turns out to be really, really useful.
+And the reason anybody cares is that those rows are the numbers you get when you multiply out something like a plus b, times itself, over and over, so the triangle hands you the answer without doing all the multiplying. That's what mathematicians call the binomial theorem. And the same numbers also tell you how many ways there are to pick a few things out of a group, which is exactly the kind of thing you need when you start working out odds, right? So it's a simple little pattern, and it turns out to be really, really useful.
 
 ## 03 The Pascal Version
 
 The version most of us learned goes through Blaise Pascal and his treatise, Traité du triangle arithmétique, which is Treatise on the Arithmetical Triangle. He wrote it in 1654 and it was published in 1665, and the triangle carries his name because of that treatise.
 
-And Pascal's book earned some of that. What he wrote was a systematic treatment of the triangle, with proofs, and he put it to work on questions of probability. So when a teacher says Pascal's triangle, they're naming the man who wrote a serious book about it. They're just not naming the first person to work it out.
+And Pascal's book earned some of that, because what he wrote was a systematic treatment of the triangle, with proofs, and he put it to work on questions of probability. So when a teacher says Pascal's triangle, they're naming the man who wrote a serious book about it, they're just not naming the first person to work it out.
 
 ## 04 Yang Hui and Jia Xian
 
 In China the same triangle is called Yang Hui's triangle, after a mathematician named Yang Hui who printed it in 1261, in a book called Xiangjie Jiuzhang Suanfa. That's almost four hundred years before Pascal wrote his treatise, and Britannica credits Yang Hui with popularizing the triangle.
 
-Now here's the part that matters. Yang Hui didn't claim it. In that 1261 book he said he got the triangle from Jia Xian, a mathematician who had worked it out about two centuries earlier, in the middle of the 1000s. Jia Xian laid those numbers out as a triangle, down to the sixth row, and that puts him about six hundred years ahead of Pascal's treatise.
+Now here's the part that matters, Yang Hui didn't claim it, because in that 1261 book he said he got the triangle from Jia Xian, a mathematician who had worked it out about two centuries earlier, in the middle of the 1000s. Jia Xian laid those numbers out as a triangle, down to the sixth row, and that puts him about six hundred years ahead of Pascal's treatise.
 
-The catch is that Jia Xian's own book is lost, so we don't have his triangle in his own book, we know about it through Yang Hui, because Yang Hui wrote down where it came from. So the triangle is named after Pascal in the West and after Yang Hui in China, and Yang Hui is the one who told us it wasn't his. Even the Chinese name goes to the guy who passed it along.
+The catch is that Jia Xian's own book is lost, so we don't have his triangle in his own book, we know about it through Yang Hui, because Yang Hui wrote down where it came from. So the triangle is named after Pascal in the West and after Yang Hui in China, and Yang Hui is the one who told us it wasn't his, so even the Chinese name goes to the guy who passed it along.
 
 ## 05 Even Earlier, in Persia
 
@@ -41,9 +41,9 @@ And then Omar Khayyam, who lived in the 1000s and into the 1100s, studied the tr
 
 ## 06 Fair Credit to Pascal
 
-Now, to be fair to Pascal, there's nothing in the record here that says he copied anybody. Britannica's word for it is that he reinvented the triangle in 1665, and what he brought to it was real, a systematic treatise, proofs, and the probability work. That's a big deal, and it's a fair reason for a math teacher to bring up his name.
+Now, to be fair to Pascal, nothing in what we found says he copied anybody. Britannica's word for it is that he reinvented the triangle in 1665, and what he brought to it was real, a systematic treatise, proofs, and the probability work. That's a big deal, and it's a fair reason for a math teacher to bring up his name.
 
-But reinventing something and being first to it are two different things. Pascal's name ended up on the triangle because of his treatise, the same way Yang Hui's name ended up on it in China because of his book, and in both places the name went to the person who wrote it down, not the person who worked it out first.
+But reinventing something and being first to it are two different things. Pascal's name ended up on the triangle because of his treatise, the same way Yang Hui's name ended up on it in China because of his book, and in both places the name went to the person who wrote the well-known book, not the person who worked it out first.
 
 ## 07 Who Did It First
 

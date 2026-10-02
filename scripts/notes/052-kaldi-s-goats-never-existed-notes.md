@@ -1,6 +1,6 @@
 # Notes: Kaldi's Goats Never Existed
 Research entry: episode-research.md — "# Job 3" section, entry "### 56." (Coffee)
-Spoken words: 1014
+Spoken words: 1035 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -18,3 +18,9 @@ Spoken words: 1014
 
 Hedges kept: "no evidence", "the earliest known", "roughly 800 years", "appears to occur first", "local sources for the legend are lacking", "seems to have been made popular", "nobody has shown that" (Ukers), "as far as the evidence goes", plant native to Ethiopia vs. drink first documented in Yemen.
 Left out on purpose (unverified / keep off air in research): Hattox and al-Jaziri's 1587 account and named Sufi figures such as al-Dhabhani (not checked this session); any claim that Ukers invented the name Kaldi; the legend's supposed date in years (only "roughly 800 years after" is in the entry); the herder's complaint content and any "Kaldi tasted the cherries himself" embellishment (not in the entry). Plain explanation added: "Sufis are Muslim mystics", "Arabia Felix is an old name for Yemen" (the latter is in the entry).
+
+## Review
+- Fact fixes: (1) Retitled from "Kaldi's Goats Never Existed" to "There's No Evidence for Kaldi's Goats", since the research supports "no evidence", not proof of nonexistence (file name and manifest title left unchanged). (2) Cut "a scientist" for Fredholm (his job isn't in the entry). (3) Hedged "nobody has turned up the story in older sources" with "as far as that history can tell" (it paraphrases Fredholm's "local sources are lacking"). (4) Added "as far as the evidence goes" to the closing "somebody did it first" line about the Yemeni Sufis.
+- Cadence fixes: 3. Two rhetorical question + answer pairs joined into one breath ("So where does Kaldi come from, and the honest answer is..."; "then who was drinking it first, and the answer is..."), and the choppy opening of 07 joined into one breath.
+- Format fixes: word count updated to 1,035; hedge list updated.
+- Remaining concerns for Gus: runs short (1,035 words, about 7 minutes) by design. The manifest still lists the old title.

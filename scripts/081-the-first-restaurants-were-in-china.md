@@ -1,7 +1,7 @@
 # The First Restaurants Were in China
 
 READING NOTES
-- Runtime is about 5 minutes at a relaxed pace, roughly 776 spoken words. It runs short on purpose rather than padding.
+- Runtime is about 5 minutes at a relaxed pace, roughly 785 spoken words. It runs short on purpose rather than padding.
 - Tone is warm and easy, it's a food story. Boulanger isn't a fraud, the point is there's no evidence for his shop, so say "no evidence," never "never existed."
 - Say Boulanger as boo-lahn-ZHAY, Chevallier as sheh-VAL-ee-ay, Mathurin Roze de Chantoiseau as mah-tyoo-RAN ROHZ duh shahn-twah-ZOH, bouillon as BOO-yon, Hangzhou as HAHNG-joe, Kaifeng as KY-fung, Kiefer as KEE-fer.
 - Every hedge in here is on purpose. Read "the usual story", "no contemporary evidence", "around 1766", "the first documented", "by 1235", "more than 500 years", "argues" and "in every way that matters" exactly as written.
@@ -24,7 +24,7 @@ In 18th-century Paris, a restaurant was a restorative broth, a concentrated meat
 
 And here's the part that matters about Boulanger. The historian Rebecca Spang went looking for him, for her book The Invention of the Restaurant, and she found no contemporary evidence for Boulanger's shop. Now, to be fair, that's not the same as saying Boulanger never existed, she didn't find evidence, and that's all we're saying. But the first documented restaurateur in Paris is someone else, a man named Mathurin Roze de Chantoiseau, around 1766, and some sources give 1767.
 
-And the Paris food historian Jim Chevallier has written about the Boulanger story too, and he calls the way it grew over the years the snowballing of a myth. So even inside the Paris story, the name everybody repeats isn't the name in the records.
+And the food historian Jim Chevallier, who writes about Paris food history, has written about the Boulanger story too, and he calls the way it grew over the years the snowballing of a myth. So even inside the Paris story, the name everybody repeats isn't the name in the records.
 
 ## 04 Hangzhou, 1235
 
@@ -32,7 +32,7 @@ But Paris was centuries late. In Song-dynasty China, the capital cities had a th
 
 And a lot of those restaurants were run by families who had fled the old northern capital, Kaifeng, and they brought their regional cooking with them. So you've got people who moved south, opened restaurants, and kept cooking the food from back home, which is a story you could tell about a lot of cities today, right?
 
-And Hangzhou didn't have a handful of these. Columbia University's teaching materials on the Song describe the city as having innumerable restaurants. That's 1235, and that's more than five hundred years before Roze de Chantoiseau. And since so many of those cooks came down from Kaifeng, you might guess the restaurants go back even further up there, and maybe they do, but the date we can actually stand on is 1235, so that's the one we're using.
+And Hangzhou didn't have a handful of these, Columbia University's teaching materials on the Song describe the city as having innumerable restaurants. And that guide is from 1235, which is more than five hundred years before Roze de Chantoiseau. And since so many of those cooks came down from Kaifeng, you might guess the restaurants go back even further up there, and maybe they do, but the date we can actually stand on is 1235, so that's the one we're using.
 
 ## 05 Were They Really Restaurants
 

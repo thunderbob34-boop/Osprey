@@ -1,6 +1,6 @@
 # Notes: The Traffic Light That Exploded
 Research entry: 100-episode-lineup.md, heading "### 23. The Traffic Light That Exploded"
-Spoken words: 903
+Spoken words: 898
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -21,3 +21,9 @@ Spoken words: 903
 
 Hedges kept: "as Smithsonian Magazine tells it" (explosion), "badly burned" (never killed), "December 1868" (no single day), "about a month", "widely regarded", "not the first"; Morgan honored as a real innovator.
 Left out on purpose (unverified / keep off air in research): Any claim the constable died (unconfirmed). Morgan's other inventions (not in the entry). OPEN ITEM: the research asks for a second outlet on the explosion (e.g. Westminster Council green plaque list or a London newspaper archive) before script lock; the reading notes flag this.
+
+## Review
+- Fact fixes: 1. Restored the "as Smithsonian Magazine tells it" hedge on the explosion in the closing section (the close stated the explosion flatly, and the research marks the explosion details as single-publication).
+- Cadence fixes: 5. Joined "Here's the version most people know. In 1923..." and "here's where it goes wrong. The lamps..." and "here's the plain version. The first..." into single breaths; cut the tag "and that's close enough for anybody"; replaced the crafted closer "a railway engineer with a set of gas lamps" with the plain "it was John Peake Knight in London".
+- Format fixes: word count updated 903 to 898. Length is 898, two words under the 900 floor (reported, not padded).
+- Remaining concerns for Gus: the open item stands. The explosion and the "blew up in a policeman's face" detail rest on Smithsonian Magazine only; the research asks for a second outlet (Westminster green plaque list or a London newspaper archive) before recording.

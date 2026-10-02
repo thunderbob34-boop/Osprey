@@ -1,6 +1,6 @@
 # Notes: Peanut Butter Before George Washington Carver
 Research entry: 100-episode-lineup.md, heading "### 22. Peanut Butter Before George Washington Carver"
-Spoken words: 932
+Spoken words: 911
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -20,3 +20,9 @@ Spoken words: 932
 
 Hedges kept: "may not have invented peanut butter", "most food historians", "may have been selling" / "a may have", "long before", "the first patent in this story" (never "Edson invented peanut butter"); Kellogg given only as applying in 1895; Carver treated with respect.
 Left out on purpose (unverified / keep off air in research): The Aztec peanut-paste claim (dropped in research). Edson's possible Canadian patent (inferred, no number). The grant date of Kellogg's patent (unknown). National Peanut Board (lead-only industry source) not cited on air. No details of Carver's other scientific work, since the entry doesn't list them.
+
+## Review
+- Fact fixes: 1. Cut "one of the most believed food stories in America" from the cold open (an unsourced superlative from the research's "why it works" pitch line, not a sourced claim); replaced with "plenty of people really do believe that".
+- Cadence fixes: 6. Joined "Edson didn't call it peanut butter. He called it peanut-candy." into one breath; joined the Bayle "may have" lines; replaced the rhetorical "So where does that leave Carver?" with "Now, as for Carver"; cut the crafted button "The myth isn't doing him any favors, it's just putting the wrong thing on his name"; joined the opening of the close ("So here's the plain version, people in the Andes..."); dropped "the strange thing is that" from the cold open.
+- Format fixes: word count updated 932 to 911 in reading notes and in this file. Format otherwise clean (7 sections, no dashes). Length 911 is above the 900 floor.
+- Remaining concerns for Gus: none.

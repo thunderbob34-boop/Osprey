@@ -1,7 +1,7 @@
 # Stigler's Law: Why Nothing Is Named After Who Found It First
 
 READING NOTES
-- Runtime is about 6 minutes at a relaxed pace, roughly 940 spoken words.
+- Runtime is about 6 minutes at a relaxed pace, roughly 939 spoken words.
 - Tone is light and amused, because the law is a joke that proves itself, but keep the Hubble and Lemaître section even-handed. Nobody stole anything in this episode.
 - Say Stigler as STIG-ler, Lemaître as leh-MET-ruh, Kragh as KRAHG, Plimpton as PLIMP-tun, Larsa as LAR-suh, de Moivre as duh MWAH-vruh.
 - Every hedge in here is on purpose. Read "tongue-in-cheek", "it's a joke law", "published first", "about", "a table of Pythagorean triples" and "some researchers read it as" exactly as written. Don't call Plimpton 322 trigonometry on screen, and don't say or show that Hubble stole anything.
@@ -32,7 +32,7 @@ Now, to be fair to Stigler, he's the one who gave it the name and the one-line v
 
 Now let's try it on something big, the expanding universe. For a long time the idea that the universe is expanding went by the name Hubble's law, after the astronomer Hubble, but a Belgian priest named Georges Lemaître had published the expansion in 1927, two years before Hubble did.
 
-And in 2018 the International Astronomical Union, which is the big international body for astronomers, put it to a vote, and 78 percent of 4,060 electronic votes came in favor of recommending a new name, the Hubble-Lemaître law. So Hubble keeps his name on it, and Lemaître finally gets his added.
+And in 2018 the International Astronomical Union, which is the big international body for astronomers, put it to a vote, and 78 percent of 4,060 electronic votes came in favor of recommending a new name, the Hubble-Lemaître law. So under that recommendation, Hubble keeps his name on it, and Lemaître gets his added.
 
 Now, to be fair to Hubble, this is not a story where somebody stole something. The historian Helge Kragh called the background notes the astronomers put out with that vote "bad history," so the honest way to say it is the plain way, Lemaître published first, and that's all we're saying.
 

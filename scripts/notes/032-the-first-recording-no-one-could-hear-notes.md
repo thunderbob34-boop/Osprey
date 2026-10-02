@@ -1,6 +1,6 @@
 # Notes: The First Recording No One Could Hear
 Research entry: episode-research.md, "# Job 3" section, entry "### 49." (Recorded Sound)
-Spoken words: 1011
+Spoken words: 992 (after review)
 
 | Claim in script | Source(s) named in the research entry |
 |---|---|
@@ -23,3 +23,9 @@ Plain explanation added (no new claims): what a stylus is; what a sealed dated e
 Hedges kept: "possibly Scott himself"; "roughly twenty seconds"; "oldest recognizable recording"; "we'll just say 1857" for the 24/25 March wrinkle.
 
 Left out on purpose (unverified / keep off air in research): the NYT 27 March 2008 article (dropped as unverifiable). Nothing in the entry was marked unverified beyond that. The manifest hook's "nobody heard it until 2008" is kept as stated in the entry; nothing was said about where in Paris the recording was made, how the phonautograph's mechanism worked internally, or what Edison first recorded, because none of that is in the entry.
+
+## Review
+- Fact fixes: (1) Section 02 claimed the "record = replay" assumption "kept the first recordings hidden for so long", an unsupported causal claim; reworded to say Scott simply wasn't trying to hear anything. (2) Section 03 "He wanted to see sound" cut as an inference beyond "they were for looking at". (3) Section 05 "a different recording entirely" (it's the same recording) changed to "sounds like a different recording". (4) Section 06 "the very kind of squiggle Scott had been making" cut; the entry says Cros described playback from traced sound waves but does not tie it to Scott's tracings.
+- Cadence fixes: 7. Joined choppy stops in 03 ("...play those squiggles back, they were for looking at, and..."), 03 date aside, 05 (two joins), 06 (paléophone line); trimmed a repeated "1877"; removed the closing button "and that's what this channel is about" and folded "somebody did it first" into the last real sentence.
+- Format fixes: word count in reading notes updated 1,011 to 992. No dashes, headings fine.
+- Remaining concerns for Gus: none. Length 992 is fine (research is narrow).

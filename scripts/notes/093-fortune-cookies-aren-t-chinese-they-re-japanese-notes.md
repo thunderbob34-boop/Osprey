@@ -18,3 +18,9 @@ Spoken words: 803
 
 Hedges kept: "most likely came from Japan", "traces back to Japan", "as her research has been reported" for the 1878 storybook, first US server "still disputed", mock court called "a publicity stunt" with "no authority", no single inventor named.
 Left out on purpose (unverified / keep off air in research): the WWII internment explanation for the handoff to Chinese-American restaurants (inferred, not verified); any named first US maker (unknown); Atlas Obscura material (lead only); NPR/Jennifer 8. Lee material (background only, no specific claim in the entry). Title written with a plain hyphen instead of the em dash in the manifest title, per the no-dash rule.
+
+## Review
+- Fact fixes: (1) Cold open put the bakery "near a shrine in Kyoto"; the entry says near a Shinto shrine outside Kyoto, now "just outside Kyoto". (2) "a researcher going out and finding the bakery and finding the picture" overstated the 1878 storybook, which the entry says must be attributed; now "tracing the crackers to an actual bakery, and, as it's been reported, to an actual picture". (3) Source attribution split correctly: National Geographic supports the Japanese roots, KQED the California bakers (script had both backing both). (4) Close restored the "most likely" hedge ("the trail most likely leads back to Japan, to a bakery near Kyoto").
+- Cadence fixes: 1. The three-stop "even the American part is a fight. Who first served... One side says..." run joined into one breath.
+- Format fixes: word count updated 803 to 819; hedge list now includes "as it's been reported".
+- Remaining concerns for Gus: 819 spoken words, under the 900 floor, because the research is thin; not padded. Section 06 is a single paragraph, fine for one take.
