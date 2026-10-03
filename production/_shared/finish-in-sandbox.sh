@@ -2,18 +2,20 @@
 # Runs INSIDE the Higgsfield sandbox (it can reach the image hosts and the narration CDN; this workspace can't).
 # Usage: EP=<episode folder> TITLE_ENC=<url-encoded title> PUT=<presigned upload url> bash finish-in-sandbox.sh
 set -e
+# Re-runs reuse fin/ep/assets and fin/clips (clips whose data is unchanged are skipped). Delete fin/ for a clean run.
 R="https://raw.githubusercontent.com/thunderbob34-boop/osprey/research/somebody-did-it-first/production"
-rm -rf fin && mkdir -p fin/_shared fin/ep/assets fin/ep/vo && cd fin
+mkdir -p fin/_shared fin/ep/assets fin/ep/vo && cd fin
 for f in motion.html motion.mjs; do curl -sfL "$R/_shared/$f" -o _shared/$f; done
 curl -sfL "$R/$EP/remote-beats.json" -o rb.json
 curl -sfL "$R/$EP/vo/vo-manifest.json" -o vo.json
 curl -sfL "$R/$EP/${TITLE_ENC}%20-%20PICTURE.mp4" -o picture.mp4
 python3 - <<'PY'
-import json,subprocess,os
+import json,subprocess,os,time
 rb=json.load(open('rb.json'))
 for k,v in rb['images'].items():
     out=f'ep/assets/{k}.jpg'
-    subprocess.run(['curl','-sfL','-A','SomebodyDidItFirstBot/0.1 (research)','-o',out,v['url']],check=True)
+    if os.path.exists(out) and os.path.getsize(out)>10000: continue   # already fetched (Wikimedia rate-limits repeat fetches)
+    subprocess.run(['curl','-sfL','--retry','6','--retry-delay','5','--retry-all-errors','-A','SomebodyDidItFirstBot/0.1 (research)','-o',out,v['url']],check=True); time.sleep(1)
     subprocess.run(['ffmpeg','-loglevel','error','-y','-i',out,'-vf','scale=min(2400\\,iw):-2',out+'.tmp.jpg'],check=True); os.replace(out+'.tmp.jpg',out)
 beats=[]
 for b in rb['beats']:
