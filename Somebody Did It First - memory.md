@@ -58,6 +58,10 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
      - Runtimes and beats: ep2 5:43 (75), ep3 5:34 (76), ep4 5:11 (67), ep5 5:20 (69).
      - The photo beats are rendered and composited in the Higgsfield sandbox (`production/_shared/finish-in-sandbox.sh`), because this workspace can't reach Wikimedia.
      - The repo's PICTURE.mp4 files still carry placeholder cards on the photo beats.
+   - **Status at end of 2026-10-03:**
+     - All four v3 cuts passed a blind review, with every High and Medium finding fixed and each episode rebuilt.
+     - Each was finished with real images and narration, then checked automatically: faces clear of the time bar and lower-third, audio level about -14 dB mean, no blank frames.
+     - The links went to Gus in chat. **Waiting on Gus:** his verdict on the v3 direction across eps 2–5.
    - Earlier runtimes (v2): ep2 5:51 (77), ep3 5:42 (75), ep4 5:39 (74), ep5 5:23 (66).
    - Stranger tests (now asking "is it entertaining?") ran 2–3 times per episode. None found a High problem in its final pass, and every Medium was fixed. Reviewers still rate the cuts "mostly" entertaining, limited by the missing real images.
    - **Still open:** 94 archival beats are placeholders (ep2 31, ep3 23, ep4 16, ep5 24). The network blocks the image hosts and the narration CDN, so the previews are silent and show dark "to fetch" cards.
