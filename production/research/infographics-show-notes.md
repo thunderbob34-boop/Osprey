@@ -50,6 +50,13 @@ Endings:
 ## Shorts
 Their recent Shorts are mostly "what happens if / when" body and science topics. History Shorts do well too: "The Brazen Bull" has 511K views.
 
+## A Short, scene by scene ("The Brazen Bull", 511K views; Higgsfield video analysis)
+- 23 seconds, 6 scenes, one about every 4 seconds.
+- One sentence per scene, and the picture shows exactly that sentence.
+- The camera holds still in every shot: wide establishing shot, then medium, close-up, close-up, medium close-up, extreme close-up.
+- The first line names the thing and says why it matters ("a terrifying execution device used by the ancient Greeks").
+- There is no outro in the clip analysed.
+
 ## What we take
 - Tell one person's story, on one day, in time order. Start at the moment, not with a lecture.
 - Say each fact once. Hedge once, at the source ("Nowak thinks..."), and move on.
