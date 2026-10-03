@@ -334,7 +334,7 @@
     "lon": 14.25,
     "span": 0.9
    },
-   "span": 0.16,
+   "span": 0.3,
    "caption": "The legend, as usually told",
    "note": "Natural Earth · positions approximate · the line is the legend, not a documented route"
   },
@@ -764,7 +764,7 @@
     "lon": 14.25,
     "span": 0.9
    },
-   "span": 0.16,
+   "span": 0.3,
    "caption": "If the palace is writing to thank him",
    "note": "Natural Earth · positions approximate · the line is the legend, not a documented route"
   },
@@ -839,7 +839,7 @@
     }
    ],
    "from": false,
-   "span": 0.16,
+   "span": 0.3,
    "caption": "You'd expect it addressed to Raffaele Esposito",
    "note": "Natural Earth · positions approximate · the line is the legend, not a documented route"
   },
@@ -1191,30 +1191,20 @@
   "section_name": "Who Made It Up",
   "text": "So that's how I'm going to say it, probably fake,",
   "type": "flow",
-  "template": "flow",
+  "template": "scene",
   "fields": {
-   "title": "The careful version",
-   "steps": [
-    {
-     "label": "Probably fake",
-     "sub": "The letter"
-    },
-    {
-     "label": "Likely the Brandi family",
-     "sub": "Who made it up"
+   "scene": "letter",
+   "tag": "ILLUSTRATION · Not the actual letter",
+   "params": {
+    "title": "Nowak's argument, not proven",
+    "highlight": [],
+    "stamp": "PROBABLY FAKE",
+    "at": {
+     "stamp": 0.6
     }
-   ],
-   "step": 1,
-   "highlight": 1,
-   "caption": "Nowak's argument, not proven",
-   "arrows": false,
-   "bgmap": {
-    "lat": 40.84,
-    "lon": 14.25,
-    "span": 0.4
    }
   },
-  "visual": "Flow, box 1: \"Probably fake\".",
+  "visual": "The illustrated letter; a red PROBABLY FAKE stamp lands on it.",
   "source": null,
   "notes": "highlight is 1-based; step N shows the first N boxes."
  },
@@ -1733,7 +1723,7 @@
     "lon": 14.25,
     "span": 0.9
    },
-   "span": 0.16,
+   "span": 0.3,
    "caption": "We don't know whether he served the queen anything",
    "note": "Natural Earth · positions approximate · the line is the legend, not a documented route"
   },
@@ -1808,7 +1798,7 @@
     }
    ],
    "from": false,
-   "span": 0.16,
+   "span": 0.3,
    "caption": "Unknown: maybe he did",
    "note": "Natural Earth · positions approximate · the line is the legend, not a documented route"
   },
