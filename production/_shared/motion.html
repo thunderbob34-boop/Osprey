@@ -206,7 +206,7 @@ TPL.archival = {
   },
   draw(t){ (f.counters||[]).forEach((k,i)=>{ const el=document.querySelector(`.chip[data-i="${i}"]`); const p=eOut(seg(t,k.at??(0.8+i*0.9),(k.at??(0.8+i*0.9))+.45)); el.style.opacity=p; el.style.transform=`translateX(${(1-p)*-40}px) scale(${lerp(.9,1,eBack(p))})`; });
     const z=D.img?(f.zoom||{}):{}; const s0=z.scale?Math.max(1,z.scale*.92):1.0, s1=z.scale||(D.img?1.08:1.05); const p=eIO(clamp(t/DUR)); const sc=lerp(s0,s1,p);
-    const ox=((z.x??50)-50)*-.6*(sc-1)*19.2, oy=((z.y??50)-50)*-.6*(sc-1)*10.8;
+    const ox=((z.x??50)-50)*-.6*(sc-1)*19.2, oy=((z.y??50)-50)*-.6*(sc-1)*10.8*(D.timebar&&(z.y??50)<50?0:1);   // with the time bar the photo grows from the top, so a high focus needs no downward shift
     ph.style.transform=`translate(${ox}px,${oy}px) scale(${sc})`; const lo=document.getElementById('lo'); if(lo){ const q=eOut(seg(t,.25,.75)); lo.style.opacity=q; lo.style.transform=`translateX(${(1-q)*-80}px)`; } }
 };
 TPL.illustration = TPL.archival;
