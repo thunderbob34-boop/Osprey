@@ -10,7 +10,7 @@
    "title": "The Real Father of the Railways",
    "subtitle": "Trevithick, Stephenson, and the first known steam railway journey"
   },
-  "visual": "Episode title card holds as the question is asked.",
+  "visual": "Episode title: words build in as the question is asked.",
   "source": null
  },
  {
@@ -18,15 +18,21 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "it's George Stephenson, the man people call the Father of the Railways,",
-  "type": "archival",
+  "type": "engraving",
   "template": "archival",
   "fields": {
    "kind": "engraving",
    "label": "George Stephenson, engraving",
    "lower": "George Stephenson (19th-century engraving)",
-   "asset": "library-si-edu-image-gallery-73444"
+   "asset": "library-si-edu-image-gallery-73444",
+   "crop": "Slow push-in on the face",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 38
+   }
   },
-  "visual": "Slow push-in on the George Stephenson engraving.",
+  "visual": "Slow push-in on the George Stephenson engraving; name slides in as the lower third.",
   "source": {
    "institution": "Smithsonian Libraries and Archives",
    "item": "Portrait of George Stephenson (engraving published by Johnson, Wilson & Co., after John Lucas)",
@@ -47,9 +53,15 @@
    "kind": "object",
    "label": "Rocket locomotive (Science Museum Group)",
    "lower": "Rocket (museum object)",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co26704-rocket"
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co26704-rocket",
+   "crop": "Slow push-in on the engine",
+   "zoom": {
+    "scale": 1.3,
+    "x": 55,
+    "y": 55
+   }
   },
-  "visual": "Rocket object, slow push-in.",
+  "visual": "Push-in on the real Rocket in its museum.",
   "source": {
    "institution": "Science Museum Group",
    "item": "Rocket locomotive (object 1862-5)",
@@ -64,39 +76,75 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "a steam engine in Wales hauled ten tons of iron and about seventy men who hitched a ride,",
-  "type": "object",
-  "template": "archival",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "kind": "object",
-   "label": "Conjectural model of the Penydarren locomotive (Science Museum Group)",
-   "lower": "Conjectural model of the Penydarren locomotive",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co27505-model-o"
+   "title": "South Wales",
+   "caption": "A steam engine in Wales",
+   "pins": [
+    {
+     "name": "Penydarren, Merthyr",
+     "lat": 51.7508,
+     "lon": -3.3758,
+     "sub": "Wales",
+     "pulse": true
+    }
+   ],
+   "labels": [
+    {
+     "name": "Bristol Channel",
+     "lat": 51.33,
+     "lon": -3.6,
+     "kind": "sea",
+     "fit": true
+    },
+    {
+     "name": "Wales",
+     "lat": 52.0,
+     "lon": -3.9,
+     "kind": "region"
+    },
+    {
+     "name": "Cardiff",
+     "lat": 51.4815,
+     "lon": -3.18,
+     "kind": "city"
+    }
+   ],
+   "from": {
+    "lat": 53.5,
+    "lon": -2.5,
+    "span": 6.5
+   },
+   "span": 1.0,
+   "rivers": true,
+   "borders": true,
+   "note": "Coastlines: Natural Earth · position approximate"
   },
-  "visual": "Locomotive model, slow push-in.",
-  "source": {
-   "institution": "Science Museum Group",
-   "item": "Model of Trevithick's first railway locomotive 'Pen-y-Darren' (conjectural model, 1:8, Walter W. Mason; object 1934-312)",
-   "url": "https://collection.sciencemuseumgroup.org.uk/objects/co27505/model-of-trevithicks-first-railway-locomotive-pen-y-darren",
-   "rights": "Not stated in the search result. Check the Science Museum Group object page licence",
-   "credit": "Model of Trevithick's first railway locomotive 'Pen-y-Darren', Science Museum Group Collection",
-   "verified": false
-  },
-  "notes": "A later conjectural model, labelled as such. No picture of the 1804 run itself is used."
+  "visual": "Fly-in from Britain down to south Wales: the camera drops onto the Merthyr area, a pin lands, coastline of the Bristol Channel in view.",
+  "source": null,
+  "notes": "Neutral hook map: only \"Wales\" and Merthyr are named, no new claims. Penydarren is named in the narration later."
  },
  {
   "id": "01-e",
   "section": "01",
   "section_name": "Cold Open",
   "text": "and it wasn't a Stephenson engine, it was built by a man named Richard Trevithick,",
-  "type": "archival",
+  "type": "portrait",
   "template": "archival",
   "fields": {
    "kind": "portrait",
    "label": "Richard Trevithick, 1816",
    "lower": "Richard Trevithick (portrait by John Linnell, 1816)",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait"
+   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait",
+   "crop": "Head and shoulders, wide",
+   "zoom": {
+    "scale": 1.25,
+    "x": 50,
+    "y": 40
+   }
   },
-  "visual": "Slow push-in on the Trevithick portrait.",
+  "visual": "Trevithick portrait pushes in; name caption slides in on first mention.",
   "source": {
    "institution": "Wikimedia Commons (photo credit Science Museum; original in the Science Museum Group, Bennet Woodcroft Bequest)",
    "item": "File:Richard Trevithick portrait.jpg",
@@ -111,24 +159,14 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "and Museum Wales, the national museum, has its own name for him,",
-  "type": "photo",
-  "template": "archival",
+  "type": "text",
+  "template": "text",
   "fields": {
-   "kind": "photo",
-   "label": "Replica of the Penydarren locomotive (modern photograph)",
-   "lower": "Replica of Trevithick's locomotive (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-1804-pen"
+   "headline": "Museum Wales, the national museum",
+   "sub": "Has its own name for him"
   },
-  "visual": "Modern photograph of the replica locomotive.",
-  "source": {
-   "institution": "Wikimedia Commons (Flickr transfer)",
-   "item": "File:Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_(6635994787).jpg",
-   "rights": "Not stated in the search result. The result says only that it is a Creative Commons licence from Flickr; read the file page for the exact licence and attribution",
-   "credit": "Photographer per file page, via Wikimedia Commons (replica locomotive, Swansea)",
-   "verified": false
-  },
-  "notes": "Modern photo of a replica, labelled as such."
+  "visual": "Kinetic text: Museum Wales has its own name for him.",
+  "source": null
  },
  {
   "id": "01-g",
@@ -141,7 +179,7 @@
    "quote": "The real father of the railways",
    "attribution": "Museum Wales"
   },
-  "visual": "Quote card, held a beat.",
+  "visual": "Typewriter quote, attributed to Museum Wales.",
   "source": null,
   "notes": "Words are Museum Wales's own phrase, as the script attributes."
  },
@@ -153,10 +191,10 @@
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "Full credit to the Stephensons",
-   "sub": "They did something that really matters"
+   "headline": "The Stephensons did something that really matters",
+   "sub": "To be fair"
   },
-  "visual": "Text card.",
+  "visual": "Kinetic text: the Stephensons did something that really matters.",
   "source": null
  },
  {
@@ -164,15 +202,42 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "and we'll give them full credit for it, but Trevithick got there first,",
-  "type": "archival",
+  "type": "compare",
+  "template": "compare",
+  "fields": {
+   "left_title": "The Stephensons",
+   "left_lines": [
+    "Full credit for what they did"
+   ],
+   "right_title": "Trevithick",
+   "right_lines": [
+    "Got there first"
+   ],
+   "step": 2
+  },
+  "visual": "Compare card: full credit to the Stephensons, but Trevithick got there first.",
+  "source": null
+ },
+ {
+  "id": "01-j",
+  "section": "01",
+  "section_name": "Cold Open",
+  "text": "and the way his story ends is not the way you'd want it to end.",
+  "type": "portrait",
   "template": "archival",
   "fields": {
    "kind": "portrait",
    "label": "Richard Trevithick, 1816",
    "lower": "Richard Trevithick",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait"
+   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait",
+   "crop": "Tight crop on the face (different framing from 01-e)",
+   "zoom": {
+    "scale": 2.2,
+    "x": 47,
+    "y": 30
+   }
   },
-  "visual": "Trevithick portrait, slow push-out.",
+  "visual": "Slow, tight push-in on Trevithick as the sentence about his ending lands.",
   "source": {
    "institution": "Wikimedia Commons (photo credit Science Museum; original in the Science Museum Group, Bennet Woodcroft Bequest)",
    "item": "File:Richard Trevithick portrait.jpg",
@@ -183,42 +248,24 @@
   }
  },
  {
-  "id": "01-j",
-  "section": "01",
-  "section_name": "Cold Open",
-  "text": "and the way his story ends is not the way you'd want it to end.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "His ending isn't the one you'd want",
-   "sub": ""
-  },
-  "visual": "Text card.",
-  "source": null
- },
- {
   "id": "02-a",
   "section": "02",
   "section_name": "The Version Everybody Knows",
   "text": "The version most people half remember goes like this, on September 27th, 1825,",
-  "type": "timeline",
-  "template": "timeline",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "The version most people remember",
-   "events": [
-    {
-     "date": "Sept 27, 1825",
-     "label": "Locomotion No. 1 opens the Stockton and Darlington Railway"
-    },
-    {
-     "date": "Oct 1829",
-     "label": "The Rainhill Trials"
-    }
-   ],
-   "highlight": 0,
-   "step": 1
+   "scene": "calendar",
+   "tag": "ILLUSTRATION · Calendar graphic",
+   "params": {
+    "month": "September",
+    "day": 27,
+    "year": "1825",
+    "flips": 4,
+    "title": "The version most people half remember"
+   }
   },
-  "visual": "Timeline: the 1825 event appears.",
+  "visual": "Tear-off calendar pages flip to September 27, 1825.",
   "source": null
  },
  {
@@ -232,9 +279,15 @@
    "kind": "object",
    "label": "Locomotion No. 1 (Science Museum Group)",
    "lower": "Locomotion No. 1 (museum object)",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co205767-steam"
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co205767-steam",
+   "crop": "Slow push-in on the engine",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 55
+   }
   },
-  "visual": "Locomotion No. 1 object, slow push-in.",
+  "visual": "Push-in on Locomotion No. 1 in its museum.",
   "source": {
    "institution": "Science Museum Group",
    "item": "Steam locomotive No. 1 'Locomotion', Stockton & Darlington Railway",
@@ -264,9 +317,9 @@
     }
    ],
    "highlight": 1,
-   "step": 2
+   "scale": "years"
   },
-  "visual": "Same timeline, the 1829 event is added.",
+  "visual": "Years-scaled timeline: the axis draws from 1825 to October 1829, the Rainhill Trials highlighted.",
   "source": null
  },
  {
@@ -274,38 +327,21 @@
   "section": "02",
   "section_name": "The Version Everybody Knows",
   "text": "and the winner was Rocket. And Rocket is the engine with the Stephenson name on it,",
-  "type": "object",
-  "template": "archival",
-  "fields": {
-   "kind": "object",
-   "label": "Rocket locomotive (Science Museum Group)",
-   "lower": "Rocket (museum object)",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co26704-rocket"
-  },
-  "visual": "Rocket object, slow push-in.",
-  "source": {
-   "institution": "Science Museum Group",
-   "item": "Rocket locomotive (object 1862-5)",
-   "url": "https://collection.sciencemuseumgroup.org.uk/objects/co26704/rocket-locomotive",
-   "rights": "Image credited to \"The Board of Trustees of the Science Museum\" (as shown on the object page). Reuse licence not stated in the search result; check the object page",
-   "credit": "Rocket locomotive, Science Museum Group Collection",
-   "verified": false
-  }
- },
- {
-  "id": "02-e",
-  "section": "02",
-  "section_name": "The Version Everybody Knows",
-  "text": "so you've got a famous engine and a famous contest",
-  "type": "archival",
+  "type": "engraving",
   "template": "archival",
   "fields": {
    "kind": "engraving",
    "label": "Print of the Rainhill Trials locomotives",
    "lower": "Rainhill Trials locomotives (lithograph print)",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co26876-rocket"
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co26876-rocket",
+   "crop": "Push-in on the locomotives",
+   "zoom": {
+    "scale": 1.4,
+    "x": 50,
+    "y": 55
+   }
   },
-  "visual": "Print of the Rainhill Trials, slow pan.",
+  "visual": "Push-in on the Rainhill Trials lithograph.",
   "source": {
    "institution": "Science Museum Group",
    "item": "'Rocket', 'Novelty' and 'Sans Pareil' at the Rainhill Trials (lithograph by Maclure, Macdonald and Macgregor; object 1903-101)",
@@ -316,19 +352,83 @@
   }
  },
  {
+  "id": "02-e",
+  "section": "02",
+  "section_name": "The Version Everybody Knows",
+  "text": "so you've got a famous engine and a famous contest and the Stephenson name",
+  "type": "flow",
+  "template": "flow",
+  "fields": {
+   "title": "What you have got",
+   "arrows": false,
+   "steps": [
+    {
+     "label": "A famous engine",
+     "sub": "Rocket"
+    },
+    {
+     "label": "A famous contest",
+     "sub": "The Rainhill Trials"
+    },
+    {
+     "label": "The Stephenson name",
+     "sub": ""
+    }
+   ]
+  },
+  "visual": "Three boxes pop in side by side: famous engine, famous contest, the Stephenson name.",
+  "source": null
+ },
+ {
   "id": "02-f",
   "section": "02",
   "section_name": "The Version Everybody Knows",
-  "text": "and the Stephenson name sitting right on top of it,",
-  "type": "archival",
+  "text": "sitting right on top of it, and that's the picture most people have",
+  "type": "flow",
+  "template": "flow",
+  "fields": {
+   "title": "What you have got",
+   "arrows": false,
+   "step": 3,
+   "highlight": 2,
+   "steps": [
+    {
+     "label": "A famous engine",
+     "sub": "Rocket"
+    },
+    {
+     "label": "A famous contest",
+     "sub": "The Rainhill Trials"
+    },
+    {
+     "label": "The Stephenson name",
+     "sub": "Sitting right on top of it"
+    }
+   ]
+  },
+  "visual": "Same three boxes: the first two already shown, the Stephenson name pops in highlighted on top.",
+  "source": null
+ },
+ {
+  "id": "02-g",
+  "section": "02",
+  "section_name": "The Version Everybody Knows",
+  "text": "when they hear the Father of the Railways.",
+  "type": "engraving",
   "template": "archival",
   "fields": {
    "kind": "engraving",
    "label": "George Stephenson, engraving",
    "lower": "George Stephenson",
-   "asset": "library-si-edu-image-gallery-73444"
+   "asset": "library-si-edu-image-gallery-73444",
+   "crop": "Tighter crop than 01-b, off-centre on the face",
+   "zoom": {
+    "scale": 1.8,
+    "x": 42,
+    "y": 30
+   }
   },
-  "visual": "George Stephenson engraving, slow push-in.",
+  "visual": "Tighter push-in on the Stephenson engraving: the picture most people have.",
   "source": {
    "institution": "Smithsonian Libraries and Archives",
    "item": "Portrait of George Stephenson (engraving published by Johnson, Wilson & Co., after John Lucas)",
@@ -339,31 +439,63 @@
   }
  },
  {
-  "id": "02-g",
-  "section": "02",
-  "section_name": "The Version Everybody Knows",
-  "text": "and that's the picture most people have when they hear the Father of the Railways.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "The picture most people have of the Father of the Railways",
-   "sub": "Stephenson, Rocket, Rainhill"
-  },
-  "visual": "Text card.",
-  "source": null
- },
- {
   "id": "02-h",
   "section": "02",
   "section_name": "The Version Everybody Knows",
   "text": "But to see who was actually first, you have to go back before any of that,",
-  "type": "text",
-  "template": "text",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "headline": "To see who was first, go back before all that",
-   "sub": ""
+   "title": "Before any of that",
+   "caption": "The famous contest was at Rainhill",
+   "pins": [
+    {
+     "name": "Rainhill",
+     "lat": 53.413,
+     "lon": -2.764,
+     "sub": "The famous contest",
+     "at": 0.6
+    },
+    {
+     "name": "Penydarren ironworks",
+     "lat": 51.7508,
+     "lon": -3.3758,
+     "sub": "Twenty-five years earlier",
+     "at": 99
+    }
+   ],
+   "labels": [
+    {
+     "name": "Irish Sea",
+     "lat": 53.6,
+     "lon": -4.8,
+     "kind": "sea"
+    },
+    {
+     "name": "Bristol Channel",
+     "lat": 51.25,
+     "lon": -4.3,
+     "kind": "sea"
+    },
+    {
+     "name": "Wales",
+     "lat": 52.3,
+     "lon": -4.3,
+     "kind": "region"
+    },
+    {
+     "name": "England",
+     "lat": 52.4,
+     "lon": -1.5,
+     "kind": "region"
+    }
+   ],
+   "span": 3.6,
+   "rivers": true,
+   "borders": true,
+   "note": "Coastlines: Natural Earth · positions approximate"
   },
-  "visual": "Text card.",
+  "visual": "Map flies in over Britain and drops a pin on Rainhill, the famous contest; south Wales waits off to the south-west.",
   "source": null
  },
  {
@@ -375,39 +507,185 @@
   "template": "pinmap",
   "fields": {
    "title": "Back to south Wales",
+   "caption": "Twenty-five years before Rainhill: an ironworks in south Wales",
+   "from": false,
    "pins": [
     {
-     "name": "Penydarren ironworks, Merthyr",
-     "lat": 51.751,
-     "lon": -3.366,
-     "first": false
+     "name": "Rainhill",
+     "lat": 53.413,
+     "lon": -2.764,
+     "sub": "The famous contest",
+     "at": 0.05
     },
     {
-     "name": "Rainhill",
-     "lat": 53.416,
-     "lon": -2.763,
-     "first": false
+     "name": "Penydarren ironworks",
+     "lat": 51.7508,
+     "lon": -3.3758,
+     "sub": "An ironworks in south Wales",
+     "at": 2.1,
+     "pulse": true
     }
    ],
-   "connect": false,
-   "caption": "Twenty-five years before Rainhill: an ironworks in south Wales"
+   "routes": [
+    {
+     "points": [
+      [
+       53.413,
+       -2.764
+      ],
+      [
+       52.6,
+       -3.15
+      ],
+      [
+       51.7508,
+       -3.3758
+      ]
+     ],
+     "style": "dash",
+     "at": 0.2,
+     "dur": 2.2,
+     "label": "Back twenty-five years",
+     "lx": 30
+    }
+   ],
+   "labels": [
+    {
+     "name": "Irish Sea",
+     "lat": 53.6,
+     "lon": -4.8,
+     "kind": "sea",
+     "at": 0
+    },
+    {
+     "name": "Bristol Channel",
+     "lat": 51.25,
+     "lon": -4.3,
+     "kind": "sea",
+     "at": 0
+    },
+    {
+     "name": "Wales",
+     "lat": 52.3,
+     "lon": -4.3,
+     "kind": "region",
+     "at": 0
+    },
+    {
+     "name": "England",
+     "lat": 52.4,
+     "lon": -1.5,
+     "kind": "region",
+     "at": 0
+    }
+   ],
+   "span": 3.6,
+   "rivers": true,
+   "borders": true,
+   "note": "Dashed line is a jump back in time, not a route · positions approximate"
   },
-  "visual": "Schematic map: Merthyr in Wales and Rainhill in England.",
+  "visual": "Same map continues: a dashed line jumps back from Rainhill to south Wales and a pulsing pin lands on the Penydarren ironworks.",
   "source": null,
-  "notes": "Pin positions are schematic and approximate (Merthyr/Penydarren area, Abercynon town); the dashed line is not the tramroad route."
+  "notes": "The dashed line is labelled as a jump back in time, not a route."
  },
  {
   "id": "03-a",
   "section": "03",
   "section_name": "Penydarren, 1804",
   "text": "On February 21st, 1804, at the Penydarren ironworks in Merthyr, in south Wales,",
-  "type": "date",
-  "template": "date",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "date": "Feb 21, 1804",
-   "caption": "Penydarren ironworks, Merthyr, south Wales"
+   "title": "Penydarren ironworks, Merthyr",
+   "from": {
+    "lat": 52.3,
+    "lon": -3.9,
+    "span": 3.5
+   },
+   "pins": [
+    {
+     "name": "Penydarren ironworks, Merthyr",
+     "lat": 51.7508,
+     "lon": -3.3758,
+     "sub": "February 21, 1804",
+     "pulse": true
+    },
+    {
+     "name": "Abercynon",
+     "lat": 51.6443,
+     "lon": -3.3275,
+     "at": 99
+    }
+   ],
+   "routes": [
+    {
+     "points": [
+      [
+       51.7508,
+       -3.3758
+      ],
+      [
+       51.738,
+       -3.368
+      ],
+      [
+       51.718,
+       -3.359
+      ],
+      [
+       51.705,
+       -3.355
+      ],
+      [
+       51.69,
+       -3.348
+      ],
+      [
+       51.677,
+       -3.343
+      ],
+      [
+       51.668,
+       -3.334
+      ],
+      [
+       51.658,
+       -3.33
+      ],
+      [
+       51.6443,
+       -3.3275
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "icon": "train",
+     "label": "The tramroad (route approximate)",
+     "lx": 30
+    }
+   ],
+   "labels": [
+    {
+     "name": "Cardiff",
+     "lat": 51.4815,
+     "lon": -3.18,
+     "kind": "city",
+     "fit": true
+    },
+    {
+     "name": "Bristol Channel",
+     "lat": 51.4,
+     "lon": -3.0,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "span": 0.45,
+   "rivers": true,
+   "borders": true,
+   "note": "Route approximate · Coastlines: Natural Earth"
   },
-  "visual": "Date stamp.",
+  "visual": "Camera flies from south Wales down into the Merthyr valley and a pulsing pin lands on Penydarren, with the Bristol Channel to the south.",
   "source": null
  },
  {
@@ -421,9 +699,15 @@
    "kind": "object",
    "label": "Conjectural model of the Penydarren locomotive (Science Museum Group)",
    "lower": "Conjectural model of the Penydarren locomotive",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co27505-model-o"
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co27505-model-o",
+   "crop": "Slow push-in on the model",
+   "zoom": {
+    "scale": 1.35,
+    "x": 50,
+    "y": 55
+   }
   },
-  "visual": "Locomotive model on its rails, slow pan.",
+  "visual": "Slow push-in on the conjectural museum model of the locomotive.",
   "source": {
    "institution": "Science Museum Group",
    "item": "Model of Trevithick's first railway locomotive 'Pen-y-Darren' (conjectural model, 1:8, Walter W. Mason; object 1934-312)",
@@ -431,67 +715,132 @@
    "rights": "Not stated in the search result. Check the Science Museum Group object page licence",
    "credit": "Model of Trevithick's first railway locomotive 'Pen-y-Darren', Science Museum Group Collection",
    "verified": false
-  }
+  },
+  "notes": "A later conjectural model, labelled as such. No picture of the 1804 run itself is used."
  },
  {
   "id": "03-c",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "and a tramroad is basically an early track, iron plates laid down for wagons to run along.",
-  "type": "object",
-  "template": "archival",
+  "text": "and a tramroad is basically an early track,",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "kind": "object",
-   "label": "Tramplate (Museum Wales)",
-   "lower": "A tramroad iron plate (Museum Wales collection)",
-   "asset": "museum-wales-collections-online-object-b0bd28a0-4e12-35e5-94"
+   "scene": "plateway",
+   "tag": "ILLUSTRATION · Simplified cross-section, not to scale",
+   "params": {
+    "title": "A tramroad, simplified",
+    "at": {
+     "block": 0.8,
+     "wheel": 1.8,
+     "plate": 99,
+     "edge": 99
+    }
+   }
   },
-  "visual": "Tramroad plate, slow push-in.",
-  "source": {
-   "institution": "Museum Wales (Amgueddfa Cymru)",
-   "item": "Tramplate",
-   "url": "https://museum.wales/collections/online/object/b0bd28a0-4e12-35e5-94c5-193f9f1ff459/Tramplate/",
-   "rights": "Not stated in the search result. Check the Collections Online record licence",
-   "credit": "Museum Wales Collections Online",
-   "verified": false
-  },
-  "notes": "Generic tramplate shown for \"iron plates\". Museum Wales also lists a Penydarren tramplate (accession 46.209/1); confirm this record is that one and, if so, change the lower to \"A Penydarren tramroad plate\"."
+  "visual": "Cross-section of a tramroad builds in: stone blocks and a plain wagon wheel roll into view.",
+  "source": null
  },
  {
   "id": "03-d",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "And that day his engine pulled five wagons with ten tons of iron on them,",
-  "type": "stat",
-  "template": "stat",
+  "text": "iron plates laid down for wagons to run along.",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "number": "10 tons",
-   "label": "of iron, in five wagons",
-   "sub": "Pulled by Trevithick's locomotive"
+   "scene": "plateway",
+   "tag": "ILLUSTRATION · Simplified cross-section, not to scale",
+   "params": {
+    "title": "A tramroad, simplified",
+    "at": {
+     "block": 0.1,
+     "wheel": 0.1,
+     "plate": 0.5,
+     "edge": 1.8
+    }
+   }
   },
-  "visual": "Stat card.",
+  "visual": "Same cross-section continues: the L-shaped iron plate and its upright edge are called out.",
   "source": null
  },
  {
   "id": "03-e",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "plus about seventy men who climbed on and hitched a ride,",
-  "type": "stat",
-  "template": "stat",
+  "text": "And that day his engine pulled five wagons with ten tons of iron on them,",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "number": "About 70",
-   "label": "men climbed on and hitched a ride",
-   "sub": ""
+   "scene": "tram_run",
+   "tag": "ILLUSTRATION · Simplified, generic engine · No picture of the 1804 run survives",
+   "params": {
+    "title": "February 21, 1804",
+    "wagons": 5,
+    "men": null,
+    "load": 1,
+    "speed": 140,
+    "counters": [
+     {
+      "text": "5 wagons",
+      "at": 2.4
+     },
+     {
+      "text": "10 tons of iron",
+      "at": 3.5
+     }
+    ],
+    "at": {
+     "men": 99
+    }
+   }
   },
-  "visual": "Stat card.",
+  "visual": "An early engine pulls five loaded wagons along a plateway; counters pop in: 5 wagons, 10 tons of iron.",
   "source": null
  },
  {
   "id": "03-f",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "nearly ten miles down the line to the canal at Abercynon, at nearly five miles an hour.",
+  "text": "plus about seventy men who climbed on and hitched a ride,",
+  "type": "scene",
+  "template": "scene",
+  "fields": {
+   "scene": "tram_run",
+   "tag": "ILLUSTRATION · Simplified, generic engine · No picture of the 1804 run survives",
+   "params": {
+    "title": "February 21, 1804",
+    "wagons": 5,
+    "men": null,
+    "load": 1,
+    "speed": 140,
+    "counters": [
+     {
+      "text": "5 wagons",
+      "at": 0.1
+     },
+     {
+      "text": "10 tons of iron",
+      "at": 0.2
+     },
+     {
+      "text": "about 70 men",
+      "at": 0.7
+     }
+    ],
+    "at": {
+     "men": 0.9
+    }
+   }
+  },
+  "visual": "Same run continues: the two counters are already up, riders climb onto the wagons and \"about 70 men\" pops in.",
+  "source": null
+ },
+ {
+  "id": "03-g",
+  "section": "03",
+  "section_name": "Penydarren, 1804",
+  "text": "nearly ten miles down the line to the canal at Abercynon,",
   "type": "pinmap",
   "template": "pinmap",
   "fields": {
@@ -499,29 +848,96 @@
    "pins": [
     {
      "name": "Penydarren ironworks, Merthyr",
-     "lat": 51.751,
-     "lon": -3.366,
-     "first": false
+     "lat": 51.7508,
+     "lon": -3.3758,
+     "at": 0.8
     },
     {
      "name": "Abercynon",
-     "lat": 51.646,
-     "lon": -3.329,
-     "first": false
+     "lat": 51.6443,
+     "lon": -3.3275,
+     "sub": "The canal",
+     "at": 3.3
     }
    ],
-   "connect": true,
-   "caption": "Nearly ten miles down the line, to the canal at Abercynon"
+   "routes": [
+    {
+     "points": [
+      [
+       51.7508,
+       -3.3758
+      ],
+      [
+       51.738,
+       -3.368
+      ],
+      [
+       51.718,
+       -3.359
+      ],
+      [
+       51.705,
+       -3.355
+      ],
+      [
+       51.69,
+       -3.348
+      ],
+      [
+       51.677,
+       -3.343
+      ],
+      [
+       51.668,
+       -3.334
+      ],
+      [
+       51.658,
+       -3.33
+      ],
+      [
+       51.6443,
+       -3.3275
+      ]
+     ],
+     "style": "rail",
+     "at": 1.4,
+     "dur": 2.2,
+     "icon": "train",
+     "label": "The tramroad (route approximate)",
+     "lx": 30
+    }
+   ],
+   "labels": [
+    {
+     "name": "Cardiff",
+     "lat": 51.4815,
+     "lon": -3.18,
+     "kind": "city",
+     "fit": true
+    },
+    {
+     "name": "Bristol Channel",
+     "lat": 51.4,
+     "lon": -3.0,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "span": 0.45,
+   "rivers": true,
+   "borders": true,
+   "note": "Route approximate · Coastlines: Natural Earth"
   },
-  "visual": "Schematic map: dashed line from Merthyr to Abercynon.",
+  "visual": "Map zooms into the valley; the tramroad route draws from Penydarren down to the canal at Abercynon with a train icon riding the head.",
   "source": null,
-  "notes": "Pin positions are schematic and approximate (Merthyr/Penydarren area, Abercynon town); the dashed line is not the tramroad route."
+  "notes": "Route points are approximate (places.json: medium confidence); the note says so."
  },
  {
-  "id": "03-g",
+  "id": "03-h",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "Now, nearly five miles an hour doesn't sound like much, right?",
+  "text": "at nearly five miles an hour. Now, nearly five miles an hour doesn't sound like much, right?",
   "type": "stat",
   "template": "stat",
   "fields": {
@@ -529,104 +945,148 @@
    "label": "miles an hour",
    "sub": "Doesn't sound like much"
   },
-  "visual": "Stat card.",
+  "visual": "\"Nearly 5\" counts up, with \"miles an hour\".",
   "source": null
- },
- {
-  "id": "03-h",
-  "section": "03",
-  "section_name": "Penydarren, 1804",
-  "text": "But the speed isn't the point, the point is that a steam engine pulled ten tons of iron",
-  "type": "photo",
-  "template": "archival",
-  "fields": {
-   "kind": "photo",
-   "label": "Replica of the Penydarren locomotive (modern photograph)",
-   "lower": "Replica (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-1804-pen"
-  },
-  "visual": "Replica locomotive, slow push-in.",
-  "source": {
-   "institution": "Wikimedia Commons (Flickr transfer)",
-   "item": "File:Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_(6635994787).jpg",
-   "rights": "Not stated in the search result. The result says only that it is a Creative Commons licence from Flickr; read the file page for the exact licence and attribution",
-   "credit": "Photographer per file page, via Wikimedia Commons (replica locomotive, Swansea)",
-   "verified": false
-  }
  },
  {
   "id": "03-i",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "and about seventy people on rails for nearly ten miles,",
-  "type": "photo",
-  "template": "archival",
+  "text": "But the speed isn't the point, the point is that a steam engine pulled ten tons of iron",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "kind": "photo",
-   "label": "Penydarren tramway (modern photograph)",
-   "lower": "Penydarren tramway (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-penydarren-tramway-at-quaker"
+   "scene": "tram_run",
+   "tag": "ILLUSTRATION · Simplified, generic engine · No picture of the 1804 run survives",
+   "params": {
+    "title": "The point",
+    "wagons": 5,
+    "men": null,
+    "load": 1,
+    "speed": 140,
+    "counters": [
+     {
+      "text": "10 tons of iron",
+      "at": 4.6
+     }
+    ],
+    "at": {
+     "men": 99
+    }
+   }
   },
-  "visual": "Modern photograph of the tramway, slow pan.",
-  "source": {
-   "institution": "Wikimedia Commons (geograph.org.uk upload)",
-   "item": "File:Penydarren tramway at Quakers Yard Viaduct - geograph.org.uk - 85780.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Penydarren_tramway_at_Quakers_Yard_Viaduct_-_geograph.org.uk_-_85780.jpg",
-   "rights": "Not stated in the search result. Geograph uploads are usually CC BY-SA 2.0; confirm on the file page",
-   "credit": "Photographer per file page, geograph.org.uk, via Wikimedia Commons",
-   "verified": false
-  }
+  "visual": "The engine runs along the plateway with its loaded wagons; \"10 tons of iron\" pops in as the words are spoken.",
+  "source": null
  },
  {
   "id": "03-j",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "and that run on February 21st, 1804 is the first known railway journey by steam locomotive,",
-  "type": "text",
-  "template": "text",
+  "text": "and about seventy people on rails for nearly ten miles,",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "headline": "First known railway journey by steam locomotive",
-   "sub": "February 21, 1804, Penydarren"
+   "scene": "tram_run",
+   "tag": "ILLUSTRATION · Simplified, generic engine · No picture of the 1804 run survives",
+   "params": {
+    "title": "The point",
+    "wagons": 5,
+    "men": null,
+    "load": 1,
+    "speed": 140,
+    "counters": [
+     {
+      "text": "10 tons of iron",
+      "at": 0.1
+     },
+     {
+      "text": "about 70 men",
+      "at": 0.2
+     },
+     {
+      "text": "nearly 10 miles",
+      "at": 2.3
+     }
+    ],
+    "at": {
+     "men": 0.1
+    }
+   }
   },
-  "visual": "Text card.",
+  "visual": "Same run: tons and riders already shown, \"nearly 10 miles\" pops in on cue.",
   "source": null
  },
  {
   "id": "03-k",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "not the first one people remember but the first one we know of,",
-  "type": "compare",
-  "template": "compare",
+  "text": "and that run on February 21st, 1804 is the first known railway journey by steam locomotive,",
+  "type": "date",
+  "template": "date",
   "fields": {
-   "left_title": "The first people remember",
-   "left_lines": [
-    "Locomotion No. 1 and Rocket"
-   ],
-   "right_title": "The first we know of",
-   "right_lines": [
-    "Penydarren, Feb 21, 1804"
-   ],
-   "step": 2
+   "date": "Feb 21, 1804",
+   "caption": "First known railway journey by steam locomotive"
   },
-  "visual": "Compare card, both sides.",
-  "source": null
+  "visual": "Date stamps in: Feb 21, 1804, with \"First known railway journey by steam locomotive\".",
+  "source": null,
+  "notes": "Hedge kept: \"first known\", as the narration says."
  },
  {
   "id": "03-l",
   "section": "03",
   "section_name": "Penydarren, 1804",
+  "text": "not the first one people remember but the first one we know of,",
+  "type": "compare",
+  "template": "compare",
+  "fields": {
+   "left_title": "Not the first one people remember",
+   "left_lines": [
+    "Locomotion No. 1 and Rocket"
+   ],
+   "right_title": "The first one we know of",
+   "right_lines": [
+    "Penydarren, February 21, 1804"
+   ],
+   "step": 2
+  },
+  "visual": "Compare: not the first one people remember, but the first one we know of.",
+  "source": null
+ },
+ {
+  "id": "03-m",
+  "section": "03",
+  "section_name": "Penydarren, 1804",
   "text": "and it happened in Wales, twenty-five years before Rocket.",
+  "type": "stat",
+  "template": "stat",
+  "fields": {
+   "number": "25 years",
+   "label": "before Rocket",
+   "sub": "It happened in Wales"
+  },
+  "visual": "\"25 years\" counts up, with \"before Rocket\".",
+  "source": null
+ },
+ {
+  "id": "03-n",
+  "section": "03",
+  "section_name": "Penydarren, 1804",
+  "text": "There's also a story that gets told about this run, and I want to be careful with it.",
   "type": "photo",
   "template": "archival",
   "fields": {
    "kind": "photo",
    "label": "Penydarren ironworks, 1876 (later photograph)",
    "lower": "Penydarren ironworks in 1876 (later photograph)",
-   "asset": "museum-wales-collections-online-object-c7873268-cc6c-32d5-8f"
+   "asset": "museum-wales-collections-online-object-c7873268-cc6c-32d5-8f",
+   "crop": "Slow push-in, wide",
+   "zoom": {
+    "scale": 1.2,
+    "x": 50,
+    "y": 50
+   }
   },
-  "visual": "Photograph of the ironworks, slow push-in.",
+  "visual": "Slow push-in on a later photograph of the Penydarren ironworks, labelled with its year.",
   "source": {
    "institution": "Museum Wales (Amgueddfa Cymru)",
    "item": "Penydarren ironworks, photograph (contact print from a glass negative, summer 1876, Robert Thompson Crawshay)",
@@ -638,128 +1098,96 @@
   "notes": "A later photograph, labelled with its year. Two Museum Wales records share the title \"Penydarren ironworks, photograph\"; confirm this URL is the summer 1876 R. T. Crawshay print before using the lower."
  },
  {
-  "id": "03-m",
-  "section": "03",
-  "section_name": "Penydarren, 1804",
-  "text": "There's also a story that gets told about this run, and I want to be careful with it.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "A story told about this run",
-   "sub": "Handle with care"
-  },
-  "visual": "Text card.",
-  "source": null
- },
- {
-  "id": "03-n",
-  "section": "03",
-  "section_name": "Penydarren, 1804",
-  "text": "The story goes there was a bet on it, five hundred guineas, between an ironmaster named Homfray",
-  "type": "photo",
-  "template": "archival",
-  "fields": {
-   "kind": "photo",
-   "label": "Penydarren tramway (modern photograph)",
-   "lower": "The story goes: a 500-guinea bet between Homfray and a rival ironmaster (Penydarren tramway, modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-penydarren-tramway-at-quaker"
-  },
-  "visual": "Penydarren tramway (modern photograph)",
-  "source": {
-   "institution": "Wikimedia Commons (geograph.org.uk upload)",
-   "item": "File:Penydarren tramway at Quakers Yard Viaduct - geograph.org.uk - 85780.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Penydarren_tramway_at_Quakers_Yard_Viaduct_-_geograph.org.uk_-_85780.jpg",
-   "rights": "Not stated in the search result. Geograph uploads are usually CC BY-SA 2.0; confirm on the file page",
-   "credit": "Photographer per file page, geograph.org.uk, via Wikimedia Commons",
-   "verified": false
-  }
- },
- {
   "id": "03-o",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "and a rival ironmaster, but the sources don't even agree on who the rival was,",
-  "type": "text",
-  "template": "archival",
+  "text": "The story goes there was a bet on it, five hundred guineas,",
+  "type": "stat",
+  "template": "stat",
   "fields": {
-   "kind": "photo",
-   "label": "Penydarren ironworks, 1876 (later photograph)",
-   "lower": "The story goes: sources don't agree on who the rival was (Penydarren ironworks, 1876 photograph)",
-   "asset": "museum-wales-collections-online-object-c7873268-cc6c-32d5-8f",
-   "crop": "Slow push-in",
-   "zoom": {
-    "scale": 1.3,
-    "x": 50,
-    "y": 50
-   }
+   "number": "500 guineas",
+   "label": "The story goes there was a bet",
+   "sub": "The story, not something nailed down"
   },
-  "visual": "Slow push-in",
-  "source": {
-   "institution": "Museum Wales (Amgueddfa Cymru)",
-   "item": "Penydarren ironworks, photograph (contact print from a glass negative, summer 1876, Robert Thompson Crawshay)",
-   "url": "https://museum.wales/collections/online/object/c7873268-cc6c-32d5-8f5c-029ca5b6f6fc/Penydarren-ironworks-photograph/",
-   "rights": "Not stated in the search result. Check the Collections Online record licence",
-   "credit": "Museum Wales Collections Online",
-   "verified": false
-  }
+  "visual": "\"500 guineas\" counts up under \"The story goes there was a bet\".",
+  "source": null,
+  "notes": "Hedge kept: \"the story goes\"."
  },
  {
   "id": "03-p",
+  "section": "03",
+  "section_name": "Penydarren, 1804",
+  "text": "between an ironmaster named Homfray and a rival ironmaster, but the sources don't even agree on who the rival was,",
+  "type": "compare",
+  "template": "compare",
+  "fields": {
+   "left_title": "Homfray",
+   "left_lines": [
+    "An ironmaster"
+   ],
+   "right_title": "A rival ironmaster",
+   "right_lines": [
+    "Sources don't agree on who"
+   ],
+   "step": 2
+  },
+  "visual": "Compare: Homfray, an ironmaster, against a rival ironmaster the sources do not agree on.",
+  "source": null,
+  "notes": "Name caption for Homfray on first mention."
+ },
+ {
+  "id": "03-q",
   "section": "03",
   "section_name": "Penydarren, 1804",
   "text": "so treat that as the story people tell and not as something anybody has nailed down.",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "A story, not something nailed down",
-   "sub": ""
+   "headline": "Treat it as the story people tell",
+   "sub": "Not something anybody has nailed down"
   },
-  "visual": "Text card.",
+  "visual": "Kinetic text: treat it as the story people tell.",
   "source": null
  },
  {
   "id": "04-a",
   "section": "04",
   "section_name": "The Catch",
-  "text": "Now here's the catch, and it's a big one, the engine was so heavy",
-  "type": "photo",
-  "template": "archival",
+  "text": "Now here's the catch, and it's a big one, the engine was so heavy it kept cracking the rails.",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "kind": "photo",
-   "label": "Replica of the Penydarren locomotive (modern photograph)",
-   "lower": "Replica (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-1804-pen",
-   "crop": "Tight crop on the replica's cylinder and wheels (not the 03-h framing)",
-   "zoom": {
-    "scale": 2.0,
-    "x": 45,
-    "y": 60
+   "scene": "rail_crack",
+   "tag": "ILLUSTRATION · Simplified, generic engine",
+   "params": {
+    "title": "The catch",
+    "caption": "The rails kept cracking",
+    "weight": "Heavy"
    }
   },
-  "visual": "Replica locomotive, slow push-in.",
-  "source": {
-   "institution": "Wikimedia Commons (Flickr transfer)",
-   "item": "File:Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_(6635994787).jpg",
-   "rights": "Not stated in the search result. The result says only that it is a Creative Commons licence from Flickr; read the file page for the exact licence and attribution",
-   "credit": "Photographer per file page, via Wikimedia Commons (replica locomotive, Swansea)",
-   "verified": false
-  }
+  "visual": "The engine rolls onto a cast-iron plate and the plate cracks.",
+  "source": null
  },
  {
   "id": "04-b",
   "section": "04",
   "section_name": "The Catch",
-  "text": "it kept cracking the rails. Those plates were cast iron,",
+  "text": "Those plates were cast iron, and cast iron is hard but it's brittle,",
   "type": "object",
   "template": "archival",
   "fields": {
    "kind": "object",
    "label": "Tramplate (Museum Wales)",
    "lower": "A tramroad plate (Museum Wales collection)",
-   "asset": "museum-wales-collections-online-object-b0bd28a0-4e12-35e5-94"
+   "asset": "museum-wales-collections-online-object-b0bd28a0-4e12-35e5-94",
+   "crop": "Slow push-in on the plate",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 50
+   }
   },
-  "visual": "Tramroad plate, slow pan.",
+  "visual": "Slow push-in on a real tramroad plate from the Museum Wales collection.",
   "source": {
    "institution": "Museum Wales (Amgueddfa Cymru)",
    "item": "Tramplate",
@@ -767,17 +1195,19 @@
    "rights": "Not stated in the search result. Check the Collections Online record licence",
    "credit": "Museum Wales Collections Online",
    "verified": false
-  }
+  },
+  "notes": "Generic tramplate shown for \"plates\". Museum Wales also lists a Penydarren tramplate (accession 46.209/1); confirm this record is that one and, if so, change the lower to \"A Penydarren tramroad plate\"."
  },
  {
   "id": "04-c",
   "section": "04",
   "section_name": "The Catch",
-  "text": "and cast iron is hard but it's brittle, it cracks instead of bending,",
+  "text": "it cracks instead of bending, and Trevithick's engine was breaking the track it was running on,",
   "type": "flow",
   "template": "flow",
   "fields": {
    "title": "Why the track kept breaking",
+   "highlight": 3,
    "steps": [
     {
      "label": "Cast iron plates",
@@ -795,50 +1225,13 @@
      "label": "Engine breaks the track",
      "sub": "The track it was running on"
     }
-   ],
-   "step": 3,
-   "highlight": 2,
-   "caption": ""
+   ]
   },
-  "visual": "Flow diagram builds to three boxes: plates, hard but brittle, cracks.",
+  "visual": "Four boxes pop in one after another: cast iron plates, hard but brittle, cracks, the engine breaks the track.",
   "source": null
  },
  {
   "id": "04-d",
-  "section": "04",
-  "section_name": "The Catch",
-  "text": "and Trevithick's engine was breaking the track it was running on,",
-  "type": "flow",
-  "template": "flow",
-  "fields": {
-   "title": "Why the track kept breaking",
-   "steps": [
-    {
-     "label": "Cast iron plates",
-     "sub": "The track"
-    },
-    {
-     "label": "Hard but brittle",
-     "sub": ""
-    },
-    {
-     "label": "Cracks",
-     "sub": "Instead of bending"
-    },
-    {
-     "label": "Engine breaks the track",
-     "sub": "The track it was running on"
-    }
-   ],
-   "step": 4,
-   "highlight": 3,
-   "caption": ""
-  },
-  "visual": "Same flow, fourth box added.",
-  "source": null
- },
- {
-  "id": "04-e",
   "section": "04",
   "section_name": "The Catch",
   "text": "and you can't run a railway on track that keeps breaking, right?",
@@ -848,23 +1241,50 @@
    "headline": "You can't run a railway on track that keeps breaking",
    "sub": ""
   },
-  "visual": "Text card.",
+  "visual": "Kinetic text: you can't run a railway on track that keeps breaking.",
+  "source": null
+ },
+ {
+  "id": "04-e",
+  "section": "04",
+  "section_name": "The Catch",
+  "text": "So the Penydarren run worked, it really worked, but it was a technical win and not a business one.",
+  "type": "compare",
+  "template": "compare",
+  "fields": {
+   "left_title": "A technical win",
+   "left_lines": [
+    "The Penydarren run worked"
+   ],
+   "right_title": "A business",
+   "right_lines": [
+    "Not this one"
+   ],
+   "step": 2
+  },
+  "visual": "Compare: a technical win against a business.",
   "source": null
  },
  {
   "id": "04-f",
   "section": "04",
   "section_name": "The Catch",
-  "text": "So the Penydarren run worked, it really worked, but it was a technical win",
+  "text": "It proved a steam locomotive could pull a real load on rails,",
   "type": "object",
   "template": "archival",
   "fields": {
    "kind": "object",
    "label": "Conjectural model of the Penydarren locomotive (Science Museum Group)",
    "lower": "Conjectural model of the Penydarren locomotive",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co27505-model-o"
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co27505-model-o",
+   "crop": "Tight crop on one end of the model (different from 03-b)",
+   "zoom": {
+    "scale": 2.0,
+    "x": 30,
+    "y": 55
+   }
   },
-  "visual": "Locomotive model, slow push-in.",
+  "visual": "Tight push-in on the conjectural model: it proved a steam locomotive could pull a real load.",
   "source": {
    "institution": "Science Museum Group",
    "item": "Model of Trevithick's first railway locomotive 'Pen-y-Darren' (conjectural model, 1:8, Walter W. Mason; object 1934-312)",
@@ -872,68 +1292,53 @@
    "rights": "Not stated in the search result. Check the Science Museum Group object page licence",
    "credit": "Model of Trevithick's first railway locomotive 'Pen-y-Darren', Science Museum Group Collection",
    "verified": false
-  }
+  },
+  "notes": "A later conjectural model, labelled as such."
  },
  {
   "id": "04-g",
   "section": "04",
   "section_name": "The Catch",
-  "text": "and not a business one. It proved a steam locomotive could pull a real load on rails,",
+  "text": "and it didn't turn into a business, and that's the difference between doing something first",
   "type": "compare",
   "template": "compare",
   "fields": {
-   "left_title": "A technical win",
+   "left_title": "Doing something first",
    "left_lines": [
-    "Proved a steam locomotive could pull a real load on rails"
+    "Trevithick did this part"
    ],
-   "right_title": "A business",
+   "right_title": "Doing something that lasts",
    "right_lines": [
-    "It didn't turn into one"
+    ""
    ],
-   "step": 2
+   "step": 1
   },
-  "visual": "Compare card, both sides.",
+  "visual": "Compare, step 1: doing something first, with \"something that lasts\" ghosted.",
   "source": null
  },
  {
   "id": "04-h",
   "section": "04",
   "section_name": "The Catch",
-  "text": "and it didn't turn into a business, and that's the difference between doing something first",
-  "type": "text",
-  "template": "text",
+  "text": "and doing something that lasts. Trevithick did the first part,",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "headline": "Doing something first vs. something that lasts",
-   "sub": ""
+   "left_title": "Doing something first",
+   "left_lines": [
+    "Trevithick did this part"
+   ],
+   "right_title": "Doing something that lasts",
+   "right_lines": [
+    "The part the story moves on to"
+   ],
+   "step": 2
   },
-  "visual": "Text card.",
+  "visual": "Compare, step 2: the right side, something that lasts, is revealed.",
   "source": null
  },
  {
   "id": "04-i",
-  "section": "04",
-  "section_name": "The Catch",
-  "text": "and doing something that lasts. Trevithick did the first part,",
-  "type": "archival",
-  "template": "archival",
-  "fields": {
-   "kind": "portrait",
-   "label": "Richard Trevithick, 1816",
-   "lower": "Richard Trevithick",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait"
-  },
-  "visual": "Trevithick portrait, slow push-in.",
-  "source": {
-   "institution": "Wikimedia Commons (photo credit Science Museum; original in the Science Museum Group, Bennet Woodcroft Bequest)",
-   "item": "File:Richard Trevithick portrait.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_portrait.jpg",
-   "rights": "Public domain in the United States (published before 1 January 1931), as stated on the Commons file page",
-   "credit": "Richard Trevithick by John Linnell, 1816, oil on canvas, Science Museum Group (Bennet Woodcroft Bequest), via Wikimedia Commons",
-   "verified": true
-  }
- },
- {
-  "id": "04-j",
   "section": "04",
   "section_name": "The Catch",
   "text": "he did the first part twenty-five years before the famous engine,",
@@ -952,13 +1357,13 @@
     }
    ],
    "highlight": 0,
-   "step": 2
+   "scale": "years"
   },
-  "visual": "Two-event timeline, 1804 highlighted.",
+  "visual": "Years-scaled timeline: February 1804 on the left, October 1829 on the right, a long gap between them.",
   "source": null
  },
  {
-  "id": "04-k",
+  "id": "04-j",
   "section": "04",
   "section_name": "The Catch",
   "text": "and then the story kind of moves on without him.",
@@ -968,7 +1373,7 @@
    "headline": "Then the story moves on without him",
    "sub": ""
   },
-  "visual": "Text card.",
+  "visual": "Kinetic text: then the story moves on without him.",
   "source": null
  },
  {
@@ -976,36 +1381,24 @@
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "Now, to be fair to everybody who came after, this doesn't go straight from Trevithick to Stephenson,",
-  "type": "timeline",
-  "template": "timeline",
+  "type": "flow",
+  "template": "flow",
   "fields": {
-   "title": "Who came in between",
-   "events": [
+   "title": "Not a straight line",
+   "arrows": false,
+   "caption": "It doesn't go straight from Trevithick to Stephenson",
+   "steps": [
     {
-     "date": "Feb 21, 1804",
-     "label": "Penydarren: first known railway journey by steam locomotive"
+     "label": "Trevithick",
+     "sub": ""
     },
     {
-     "date": "1812",
-     "label": "Middleton Railway, Leeds: Salamanca"
-    },
-    {
-     "date": "1813-14",
-     "label": "Puffing Billy: oldest surviving steam locomotive"
-    },
-    {
-     "date": "Sept 27, 1825",
-     "label": "Locomotion No. 1 opens the Stockton and Darlington"
-    },
-    {
-     "date": "Oct 1829",
-     "label": "Rocket wins at Rainhill"
+     "label": "Stephenson",
+     "sub": ""
     }
-   ],
-   "highlight": 0,
-   "step": 1
+   ]
   },
-  "visual": "Timeline starts with the 1804 Penydarren run.",
+  "visual": "Two boxes pop in apart, with the caption that it doesn't go straight from one to the other.",
   "source": null
  },
  {
@@ -1013,13 +1406,179 @@
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "there are other names in between that most people have never heard.",
-  "type": "text",
-  "template": "text",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "headline": "Other names in between",
-   "sub": "Most people have never heard them"
+   "title": "Between Penydarren and Rainhill",
+   "pins": [
+    {
+     "name": "Middleton Railway, Leeds",
+     "lat": 53.7751,
+     "lon": -1.5386,
+     "sub": "Salamanca, 1812 · Blenkinsop and Murray",
+     "at": 99
+    },
+    {
+     "name": "Wylam, Northumberland",
+     "lat": 54.977,
+     "lon": -1.814,
+     "sub": "Puffing Billy, 1813-14 · Hedley, Forster and Hackworth",
+     "at": 99
+    },
+    {
+     "name": "Rainhill",
+     "lat": 53.413,
+     "lon": -2.764,
+     "sub": "October 1829: Rocket wins",
+     "at": 99,
+     "side": "left"
+    }
+   ],
+   "routes": [
+    {
+     "points": [
+      [
+       54.67,
+       -1.728
+      ],
+      [
+       54.662,
+       -1.715
+      ],
+      [
+       54.648,
+       -1.69
+      ],
+      [
+       54.634,
+       -1.656
+      ],
+      [
+       54.628,
+       -1.64
+      ],
+      [
+       54.6,
+       -1.595
+      ],
+      [
+       54.54,
+       -1.564
+      ],
+      [
+       54.515,
+       -1.485
+      ],
+      [
+       54.52,
+       -1.4
+      ],
+      [
+       54.545,
+       -1.345
+      ],
+      [
+       54.566,
+       -1.32
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "dur": 3.0,
+     "icon": "train",
+     "label": "Stockton and Darlington Railway, 1825",
+     "lx": 70,
+     "ly": 25
+    },
+    {
+     "points": [
+      [
+       53.402,
+       -2.965
+      ],
+      [
+       53.406,
+       -2.945
+      ],
+      [
+       53.404,
+       -2.91
+      ],
+      [
+       53.411,
+       -2.885
+      ],
+      [
+       53.413,
+       -2.764
+      ],
+      [
+       53.444,
+       -2.65
+      ],
+      [
+       53.462,
+       -2.588
+      ],
+      [
+       53.472,
+       -2.47
+      ],
+      [
+       53.481,
+       -2.37
+      ],
+      [
+       53.483,
+       -2.336
+      ],
+      [
+       53.477,
+       -2.257
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "dur": 2.0,
+     "icon": "train",
+     "label": "Liverpool and Manchester line",
+     "lx": 80,
+     "ly": 70
+    }
+   ],
+   "labels": [
+    {
+     "name": "Irish Sea",
+     "lat": 53.8,
+     "lon": -5.0,
+     "kind": "sea"
+    },
+    {
+     "name": "North Sea",
+     "lat": 55.0,
+     "lon": 0.9,
+     "kind": "sea"
+    },
+    {
+     "name": "Penydarren (Trevithick, 1804)",
+     "lat": 51.7508,
+     "lon": -3.3758,
+     "kind": "city",
+     "at": 0.0
+    }
+   ],
+   "span": 2.5,
+   "rivers": true,
+   "borders": true,
+   "note": "Routes approximate · Coastlines: Natural Earth",
+   "caption": "Other names in between",
+   "from": {
+    "lat": 51.9,
+    "lon": -3.4,
+    "span": 2.2
+   }
   },
-  "visual": "Text card.",
+  "visual": "The camera flies north out of south Wales (Penydarren label slips off the bottom) into northern England, where the map waits for the other names.",
   "source": null
  },
  {
@@ -1027,15 +1586,191 @@
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "In 1812, at the Middleton Railway in Leeds, an engine called Salamanca, from Blenkinsop and Murray, was running,",
-  "type": "archival",
+  "type": "pinmap",
+  "template": "pinmap",
+  "fields": {
+   "title": "Between Penydarren and Rainhill",
+   "pins": [
+    {
+     "name": "Middleton Railway, Leeds",
+     "lat": 53.7751,
+     "lon": -1.5386,
+     "sub": "Salamanca, 1812 · Blenkinsop and Murray",
+     "at": 0.7
+    },
+    {
+     "name": "Wylam, Northumberland",
+     "lat": 54.977,
+     "lon": -1.814,
+     "sub": "Puffing Billy, 1813-14 · Hedley, Forster and Hackworth",
+     "at": 99
+    },
+    {
+     "name": "Rainhill",
+     "lat": 53.413,
+     "lon": -2.764,
+     "sub": "October 1829: Rocket wins",
+     "at": 99,
+     "side": "left"
+    }
+   ],
+   "routes": [
+    {
+     "points": [
+      [
+       54.67,
+       -1.728
+      ],
+      [
+       54.662,
+       -1.715
+      ],
+      [
+       54.648,
+       -1.69
+      ],
+      [
+       54.634,
+       -1.656
+      ],
+      [
+       54.628,
+       -1.64
+      ],
+      [
+       54.6,
+       -1.595
+      ],
+      [
+       54.54,
+       -1.564
+      ],
+      [
+       54.515,
+       -1.485
+      ],
+      [
+       54.52,
+       -1.4
+      ],
+      [
+       54.545,
+       -1.345
+      ],
+      [
+       54.566,
+       -1.32
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "dur": 3.0,
+     "icon": "train",
+     "label": "Stockton and Darlington Railway, 1825",
+     "lx": 70,
+     "ly": 25
+    },
+    {
+     "points": [
+      [
+       53.402,
+       -2.965
+      ],
+      [
+       53.406,
+       -2.945
+      ],
+      [
+       53.404,
+       -2.91
+      ],
+      [
+       53.411,
+       -2.885
+      ],
+      [
+       53.413,
+       -2.764
+      ],
+      [
+       53.444,
+       -2.65
+      ],
+      [
+       53.462,
+       -2.588
+      ],
+      [
+       53.472,
+       -2.47
+      ],
+      [
+       53.481,
+       -2.37
+      ],
+      [
+       53.483,
+       -2.336
+      ],
+      [
+       53.477,
+       -2.257
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "dur": 2.0,
+     "icon": "train",
+     "label": "Liverpool and Manchester line",
+     "lx": 80,
+     "ly": 70
+    }
+   ],
+   "labels": [
+    {
+     "name": "Irish Sea",
+     "lat": 53.8,
+     "lon": -5.0,
+     "kind": "sea"
+    },
+    {
+     "name": "North Sea",
+     "lat": 55.0,
+     "lon": 0.9,
+     "kind": "sea"
+    }
+   ],
+   "span": 2.5,
+   "rivers": true,
+   "borders": true,
+   "note": "Routes approximate · Coastlines: Natural Earth",
+   "caption": "1812: the Middleton Railway, Leeds",
+   "from": false
+  },
+  "visual": "Same map: a pulsing pin lands on the Middleton Railway in Leeds, Salamanca, 1812, Blenkinsop and Murray.",
+  "source": null,
+  "notes": "Name caption for Blenkinsop and Murray on first mention."
+ },
+ {
+  "id": "05-d",
+  "section": "05",
+  "section_name": "Who Made It Pay",
+  "text": "and that's counted as the first commercially successful use of steam locomotives,",
+  "type": "painting",
   "template": "archival",
   "fields": {
    "kind": "painting",
    "label": "Blenkinsop locomotive at Middleton Colliery (George Walker, 1814)",
    "lower": "Blenkinsop and Murray's type of locomotive at Middleton (watercolour by George Walker, 1814)",
-   "asset": "commons-wikimedia-org-wiki-file-middleton-colliery-1814-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-middleton-colliery-1814-jpg",
+   "crop": "Slow push-in on the locomotive",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 55
+   }
   },
-  "visual": "Period watercolour, slow push-in.",
+  "visual": "Push-in on the 1814 watercolour of a Blenkinsop locomotive at Middleton.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Middleton Colliery 1814.jpg (George Walker, The Costume of Yorkshire)",
@@ -1044,73 +1779,368 @@
    "credit": "George Walker, The Costume of Yorkshire, via Wikimedia Commons",
    "verified": true
   },
-  "notes": "The watercolour is dated 1814 and shows a Blenkinsop locomotive at Middleton Colliery, not specifically Salamanca in 1812, so the lower says so. Names on screen are the script's own: Blenkinsop and Murray."
- },
- {
-  "id": "05-d",
-  "section": "05",
-  "section_name": "Who Made It Pay",
-  "text": "and that's counted as the first commercially successful use of steam locomotives,",
-  "type": "timeline",
-  "template": "timeline",
-  "fields": {
-   "title": "Who came in between",
-   "events": [
-    {
-     "date": "Feb 21, 1804",
-     "label": "Penydarren: first known railway journey by steam locomotive"
-    },
-    {
-     "date": "1812",
-     "label": "Middleton Railway, Leeds: Salamanca"
-    },
-    {
-     "date": "1813-14",
-     "label": "Puffing Billy: oldest surviving steam locomotive"
-    },
-    {
-     "date": "Sept 27, 1825",
-     "label": "Locomotion No. 1 opens the Stockton and Darlington"
-    },
-    {
-     "date": "Oct 1829",
-     "label": "Rocket wins at Rainhill"
-    }
-   ],
-   "highlight": 1,
-   "step": 2
-  },
-  "visual": "Timeline: the 1812 Middleton event is added.",
-  "source": null
+  "notes": "The watercolour is dated 1814 and shows a Blenkinsop locomotive at Middleton Colliery, not specifically Salamanca in 1812, so the lower says so."
  },
  {
   "id": "05-e",
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "so that's the first time steam on rails actually paid.",
-  "type": "text",
-  "template": "text",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "headline": "Counted as the first time steam on rails paid",
-   "sub": ""
+   "title": "Between Penydarren and Rainhill",
+   "pins": [
+    {
+     "name": "Middleton Railway, Leeds",
+     "lat": 53.7751,
+     "lon": -1.5386,
+     "sub": "Salamanca, 1812 · Blenkinsop and Murray",
+     "at": 0.05
+    },
+    {
+     "name": "Wylam, Northumberland",
+     "lat": 54.977,
+     "lon": -1.814,
+     "sub": "Puffing Billy, 1813-14 · Hedley, Forster and Hackworth",
+     "at": 99
+    },
+    {
+     "name": "Rainhill",
+     "lat": 53.413,
+     "lon": -2.764,
+     "sub": "October 1829: Rocket wins",
+     "at": 99,
+     "side": "left"
+    }
+   ],
+   "routes": [
+    {
+     "points": [
+      [
+       54.67,
+       -1.728
+      ],
+      [
+       54.662,
+       -1.715
+      ],
+      [
+       54.648,
+       -1.69
+      ],
+      [
+       54.634,
+       -1.656
+      ],
+      [
+       54.628,
+       -1.64
+      ],
+      [
+       54.6,
+       -1.595
+      ],
+      [
+       54.54,
+       -1.564
+      ],
+      [
+       54.515,
+       -1.485
+      ],
+      [
+       54.52,
+       -1.4
+      ],
+      [
+       54.545,
+       -1.345
+      ],
+      [
+       54.566,
+       -1.32
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "dur": 3.0,
+     "icon": "train",
+     "label": "Stockton and Darlington Railway, 1825",
+     "lx": 70,
+     "ly": 25
+    },
+    {
+     "points": [
+      [
+       53.402,
+       -2.965
+      ],
+      [
+       53.406,
+       -2.945
+      ],
+      [
+       53.404,
+       -2.91
+      ],
+      [
+       53.411,
+       -2.885
+      ],
+      [
+       53.413,
+       -2.764
+      ],
+      [
+       53.444,
+       -2.65
+      ],
+      [
+       53.462,
+       -2.588
+      ],
+      [
+       53.472,
+       -2.47
+      ],
+      [
+       53.481,
+       -2.37
+      ],
+      [
+       53.483,
+       -2.336
+      ],
+      [
+       53.477,
+       -2.257
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "dur": 2.0,
+     "icon": "train",
+     "label": "Liverpool and Manchester line",
+     "lx": 80,
+     "ly": 70
+    }
+   ],
+   "labels": [
+    {
+     "name": "Irish Sea",
+     "lat": 53.8,
+     "lon": -5.0,
+     "kind": "sea"
+    },
+    {
+     "name": "North Sea",
+     "lat": 55.0,
+     "lon": 0.9,
+     "kind": "sea"
+    }
+   ],
+   "span": 2.5,
+   "rivers": true,
+   "borders": true,
+   "note": "Routes approximate · Coastlines: Natural Earth",
+   "caption": "Counted as the first commercially successful use of steam locomotives",
+   "from": false
   },
-  "visual": "Text card, hedge in the headline.",
-  "source": null
+  "visual": "Same map: the Middleton pin is back with the hedged caption \"Counted as the first commercially successful use of steam locomotives\".",
+  "source": null,
+  "notes": "Hedge kept: \"counted as\"."
  },
  {
   "id": "05-f",
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "Then in 1813 and 1814 there's Puffing Billy, from Hedley, Forster and Hackworth,",
+  "type": "pinmap",
+  "template": "pinmap",
+  "fields": {
+   "title": "Between Penydarren and Rainhill",
+   "pins": [
+    {
+     "name": "Middleton Railway, Leeds",
+     "lat": 53.7751,
+     "lon": -1.5386,
+     "sub": "Salamanca, 1812 · Blenkinsop and Murray",
+     "at": 0.05
+    },
+    {
+     "name": "Wylam, Northumberland",
+     "lat": 54.977,
+     "lon": -1.814,
+     "sub": "Puffing Billy, 1813-14 · Hedley, Forster and Hackworth",
+     "at": 0.7
+    },
+    {
+     "name": "Rainhill",
+     "lat": 53.413,
+     "lon": -2.764,
+     "sub": "October 1829: Rocket wins",
+     "at": 99,
+     "side": "left"
+    }
+   ],
+   "routes": [
+    {
+     "points": [
+      [
+       54.67,
+       -1.728
+      ],
+      [
+       54.662,
+       -1.715
+      ],
+      [
+       54.648,
+       -1.69
+      ],
+      [
+       54.634,
+       -1.656
+      ],
+      [
+       54.628,
+       -1.64
+      ],
+      [
+       54.6,
+       -1.595
+      ],
+      [
+       54.54,
+       -1.564
+      ],
+      [
+       54.515,
+       -1.485
+      ],
+      [
+       54.52,
+       -1.4
+      ],
+      [
+       54.545,
+       -1.345
+      ],
+      [
+       54.566,
+       -1.32
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "dur": 3.0,
+     "icon": "train",
+     "label": "Stockton and Darlington Railway, 1825",
+     "lx": 70,
+     "ly": 25
+    },
+    {
+     "points": [
+      [
+       53.402,
+       -2.965
+      ],
+      [
+       53.406,
+       -2.945
+      ],
+      [
+       53.404,
+       -2.91
+      ],
+      [
+       53.411,
+       -2.885
+      ],
+      [
+       53.413,
+       -2.764
+      ],
+      [
+       53.444,
+       -2.65
+      ],
+      [
+       53.462,
+       -2.588
+      ],
+      [
+       53.472,
+       -2.47
+      ],
+      [
+       53.481,
+       -2.37
+      ],
+      [
+       53.483,
+       -2.336
+      ],
+      [
+       53.477,
+       -2.257
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "dur": 2.0,
+     "icon": "train",
+     "label": "Liverpool and Manchester line",
+     "lx": 80,
+     "ly": 70
+    }
+   ],
+   "labels": [
+    {
+     "name": "Irish Sea",
+     "lat": 53.8,
+     "lon": -5.0,
+     "kind": "sea"
+    },
+    {
+     "name": "North Sea",
+     "lat": 55.0,
+     "lon": 0.9,
+     "kind": "sea"
+    }
+   ],
+   "span": 2.5,
+   "rivers": true,
+   "borders": true,
+   "note": "Routes approximate · Coastlines: Natural Earth",
+   "caption": "1813 and 1814: Puffing Billy",
+   "from": false
+  },
+  "visual": "Same map: a pulsing pin lands at Wylam, Northumberland: Puffing Billy, 1813-14, Hedley, Forster and Hackworth.",
+  "source": null,
+  "notes": "Name captions for Hedley, Forster and Hackworth on first mention."
+ },
+ {
+  "id": "05-g",
+  "section": "05",
+  "section_name": "Who Made It Pay",
+  "text": "and Puffing Billy is still around, it's the oldest surviving steam locomotive in the world.",
   "type": "object",
   "template": "archival",
   "fields": {
    "kind": "object",
    "label": "Puffing Billy (Science Museum Group)",
    "lower": "Puffing Billy, 1813-14: Hedley, Forster and Hackworth",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co26701-puffing"
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co26701-puffing",
+   "crop": "Slow push-in on the engine",
+   "zoom": {
+    "scale": 1.25,
+    "x": 50,
+    "y": 55
+   }
   },
-  "visual": "Puffing Billy object, slow push-in.",
+  "visual": "Push-in on the real Puffing Billy in its museum.",
   "source": {
    "institution": "Science Museum Group",
    "item": "'Puffing Billy' Locomotive with Tender and Rails",
@@ -1121,123 +2151,369 @@
   }
  },
  {
-  "id": "05-g",
-  "section": "05",
-  "section_name": "Who Made It Pay",
-  "text": "and Puffing Billy is still around, it's the oldest surviving steam locomotive in the world.",
-  "type": "timeline",
-  "template": "timeline",
-  "fields": {
-   "title": "Who came in between",
-   "events": [
-    {
-     "date": "Feb 21, 1804",
-     "label": "Penydarren: first known railway journey by steam locomotive"
-    },
-    {
-     "date": "1812",
-     "label": "Middleton Railway, Leeds: Salamanca"
-    },
-    {
-     "date": "1813-14",
-     "label": "Puffing Billy: oldest surviving steam locomotive"
-    },
-    {
-     "date": "Sept 27, 1825",
-     "label": "Locomotion No. 1 opens the Stockton and Darlington"
-    },
-    {
-     "date": "Oct 1829",
-     "label": "Rocket wins at Rainhill"
-    }
-   ],
-   "highlight": 2,
-   "step": 3
-  },
-  "visual": "Timeline: the 1813-14 Puffing Billy event is added.",
-  "source": null
- },
- {
   "id": "05-h",
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "And then in 1825 Locomotion No. 1 opens the Stockton and Darlington,",
-  "type": "archival",
-  "template": "archival",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "kind": "engraving",
-   "label": "Stockton and Darlington locomotive and cars, 1826 engraving",
-   "lower": "Stockton and Darlington Railway locomotive and cars (engraving, 1826)",
-   "asset": "loc-gov-item-2006675893"
+   "title": "Between Penydarren and Rainhill",
+   "pins": [
+    {
+     "name": "Middleton Railway, Leeds",
+     "lat": 53.7751,
+     "lon": -1.5386,
+     "sub": "Salamanca, 1812 · Blenkinsop and Murray",
+     "at": 0.05
+    },
+    {
+     "name": "Wylam, Northumberland",
+     "lat": 54.977,
+     "lon": -1.814,
+     "sub": "Puffing Billy, 1813-14 · Hedley, Forster and Hackworth",
+     "at": 0.05
+    },
+    {
+     "name": "Rainhill",
+     "lat": 53.413,
+     "lon": -2.764,
+     "sub": "October 1829: Rocket wins",
+     "at": 99,
+     "side": "left"
+    }
+   ],
+   "routes": [
+    {
+     "points": [
+      [
+       54.67,
+       -1.728
+      ],
+      [
+       54.662,
+       -1.715
+      ],
+      [
+       54.648,
+       -1.69
+      ],
+      [
+       54.634,
+       -1.656
+      ],
+      [
+       54.628,
+       -1.64
+      ],
+      [
+       54.6,
+       -1.595
+      ],
+      [
+       54.54,
+       -1.564
+      ],
+      [
+       54.515,
+       -1.485
+      ],
+      [
+       54.52,
+       -1.4
+      ],
+      [
+       54.545,
+       -1.345
+      ],
+      [
+       54.566,
+       -1.32
+      ]
+     ],
+     "style": "rail",
+     "at": 0.3,
+     "dur": 3.0,
+     "icon": "train",
+     "label": "Stockton and Darlington Railway, 1825",
+     "lx": 70,
+     "ly": 25
+    },
+    {
+     "points": [
+      [
+       53.402,
+       -2.965
+      ],
+      [
+       53.406,
+       -2.945
+      ],
+      [
+       53.404,
+       -2.91
+      ],
+      [
+       53.411,
+       -2.885
+      ],
+      [
+       53.413,
+       -2.764
+      ],
+      [
+       53.444,
+       -2.65
+      ],
+      [
+       53.462,
+       -2.588
+      ],
+      [
+       53.472,
+       -2.47
+      ],
+      [
+       53.481,
+       -2.37
+      ],
+      [
+       53.483,
+       -2.336
+      ],
+      [
+       53.477,
+       -2.257
+      ]
+     ],
+     "style": "rail",
+     "at": 99,
+     "dur": 2.0,
+     "icon": "train",
+     "label": "Liverpool and Manchester line",
+     "lx": 80,
+     "ly": 70
+    }
+   ],
+   "labels": [
+    {
+     "name": "Irish Sea",
+     "lat": 53.8,
+     "lon": -5.0,
+     "kind": "sea"
+    },
+    {
+     "name": "North Sea",
+     "lat": 55.0,
+     "lon": 0.9,
+     "kind": "sea"
+    }
+   ],
+   "span": 2.5,
+   "rivers": true,
+   "borders": true,
+   "note": "Routes approximate · Coastlines: Natural Earth",
+   "caption": "1825: the Stockton and Darlington",
+   "from": false
   },
-  "visual": "Period engraving, slow pan.",
-  "source": {
-   "institution": "Library of Congress, Prints and Photographs Division",
-   "item": "[Rear and side view of George Stephenson's steam locomotive and railroad cars of the Stockton and Darlington Railway] (engraving by William Strickland, 1826)",
-   "url": "https://www.loc.gov/item/2006675893/",
-   "rights": "No known restrictions on publication (rights advisory as stated by the Library of Congress)",
-   "credit": "Library of Congress Prints and Photographs Division, LC-USZ62-110386",
-   "verified": true
-  },
-  "notes": "A 1826 engraving of an S&D locomotive and cars; the label does not claim it shows Locomotion No. 1 itself, and does not call it a Stephenson engine (the notes make no such claim)."
+  "visual": "Same map: the Stockton and Darlington route draws across County Durham with a train icon riding the head.",
+  "source": null,
+  "notes": "Route approximate (places.json: medium confidence); note says so."
  },
  {
   "id": "05-i",
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "and in October 1829 Rocket wins at Rainhill.",
-  "type": "timeline",
-  "template": "timeline",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "title": "Who came in between",
-   "events": [
+   "title": "Between Penydarren and Rainhill",
+   "pins": [
     {
-     "date": "Feb 21, 1804",
-     "label": "Penydarren: first known railway journey by steam locomotive"
+     "name": "Middleton Railway, Leeds",
+     "lat": 53.7751,
+     "lon": -1.5386,
+     "sub": "Salamanca, 1812 · Blenkinsop and Murray",
+     "at": 0.05
     },
     {
-     "date": "1812",
-     "label": "Middleton Railway, Leeds: Salamanca"
+     "name": "Wylam, Northumberland",
+     "lat": 54.977,
+     "lon": -1.814,
+     "sub": "Puffing Billy, 1813-14 · Hedley, Forster and Hackworth",
+     "at": 0.05
     },
     {
-     "date": "1813-14",
-     "label": "Puffing Billy: oldest surviving steam locomotive"
-    },
-    {
-     "date": "Sept 27, 1825",
-     "label": "Locomotion No. 1 opens the Stockton and Darlington"
-    },
-    {
-     "date": "Oct 1829",
-     "label": "Rocket wins at Rainhill"
+     "name": "Rainhill",
+     "lat": 53.413,
+     "lon": -2.764,
+     "sub": "October 1829: Rocket wins",
+     "at": 1.2,
+     "side": "left"
     }
    ],
-   "highlight": 4,
-   "step": 5
+   "routes": [
+    {
+     "points": [
+      [
+       54.67,
+       -1.728
+      ],
+      [
+       54.662,
+       -1.715
+      ],
+      [
+       54.648,
+       -1.69
+      ],
+      [
+       54.634,
+       -1.656
+      ],
+      [
+       54.628,
+       -1.64
+      ],
+      [
+       54.6,
+       -1.595
+      ],
+      [
+       54.54,
+       -1.564
+      ],
+      [
+       54.515,
+       -1.485
+      ],
+      [
+       54.52,
+       -1.4
+      ],
+      [
+       54.545,
+       -1.345
+      ],
+      [
+       54.566,
+       -1.32
+      ]
+     ],
+     "style": "rail",
+     "at": -3,
+     "dur": 2.0,
+     "lx": 70,
+     "ly": 25
+    },
+    {
+     "points": [
+      [
+       53.402,
+       -2.965
+      ],
+      [
+       53.406,
+       -2.945
+      ],
+      [
+       53.404,
+       -2.91
+      ],
+      [
+       53.411,
+       -2.885
+      ],
+      [
+       53.413,
+       -2.764
+      ],
+      [
+       53.444,
+       -2.65
+      ],
+      [
+       53.462,
+       -2.588
+      ],
+      [
+       53.472,
+       -2.47
+      ],
+      [
+       53.481,
+       -2.37
+      ],
+      [
+       53.483,
+       -2.336
+      ],
+      [
+       53.477,
+       -2.257
+      ]
+     ],
+     "style": "rail",
+     "at": 0.1,
+     "dur": 2.0,
+     "icon": "train",
+     "label": "Liverpool and Manchester line",
+     "lx": 80,
+     "ly": 70
+    }
+   ],
+   "labels": [
+    {
+     "name": "Irish Sea",
+     "lat": 53.8,
+     "lon": -5.0,
+     "kind": "sea"
+    },
+    {
+     "name": "North Sea",
+     "lat": 55.0,
+     "lon": 0.9,
+     "kind": "sea"
+    }
+   ],
+   "span": 2.5,
+   "rivers": true,
+   "borders": true,
+   "note": "Routes approximate · Coastlines: Natural Earth",
+   "caption": "October 1829: Rainhill",
+   "from": false
   },
-  "visual": "Timeline completes with 1825 and 1829.",
-  "source": null
+  "visual": "Same map: the Liverpool and Manchester line draws with a train icon; a pulsing pin lands on Rainhill, October 1829, Rocket wins.",
+  "source": null,
+  "notes": "Route approximate (places.json: medium confidence); note says so. No opening date is shown for the line."
  },
  {
   "id": "05-j",
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "And there's more, because even Rocket isn't quite what people think.",
-  "type": "object",
+  "type": "engraving",
   "template": "archival",
   "fields": {
-   "kind": "object",
-   "label": "Rocket locomotive (Science Museum Group)",
-   "lower": "Rocket (museum object)",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co26704-rocket"
+   "kind": "engraving",
+   "label": "Rocket, lithograph print",
+   "lower": "Rocket (lithograph print)",
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co421074-the-ro",
+   "crop": "Slow push-in on the engine",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 55
+   }
   },
-  "visual": "Rocket object, slow push-in.",
+  "visual": "Push-in on Rocket: even Rocket is not quite what people think.",
   "source": {
    "institution": "Science Museum Group",
-   "item": "Rocket locomotive (object 1862-5)",
-   "url": "https://collection.sciencemuseumgroup.org.uk/objects/co26704/rocket-locomotive",
-   "rights": "Image credited to \"The Board of Trustees of the Science Museum\" (as shown on the object page). Reuse licence not stated in the search result; check the object page",
-   "credit": "Rocket locomotive, Science Museum Group Collection",
+   "item": "\"The Rocket\" (lithograph print)",
+   "url": "https://collection.sciencemuseumgroup.org.uk/objects/co421074/the-rocket-print-lithograph",
+   "rights": "Not stated in the search result. Check the Science Museum Group object page licence",
+   "credit": "\"The Rocket\", Science Museum Group Collection",
    "verified": false
   }
  },
@@ -1246,38 +2522,35 @@
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "Rocket, the engine that's supposed to be the proof of George Stephenson,",
-  "type": "archival",
-  "template": "archival",
+  "type": "text",
+  "template": "text",
   "fields": {
-   "kind": "engraving",
-   "label": "George Stephenson, engraving",
-   "lower": "George Stephenson",
-   "asset": "library-si-edu-image-gallery-73444"
+   "headline": "Rocket: supposed to be the proof of George Stephenson",
+   "sub": ""
   },
-  "visual": "George Stephenson engraving, slow push-in.",
-  "source": {
-   "institution": "Smithsonian Libraries and Archives",
-   "item": "Portrait of George Stephenson (engraving published by Johnson, Wilson & Co., after John Lucas)",
-   "url": "https://library.si.edu/image-gallery/73444",
-   "rights": "No Copyright - United States (as stated by Smithsonian Libraries)",
-   "credit": "Portrait of George Stephenson, Smithsonian Libraries and Archives",
-   "verified": true
-  }
+  "visual": "Kinetic text: Rocket, the engine that's supposed to be the proof of George Stephenson.",
+  "source": null
  },
  {
   "id": "05-l",
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "was built under the direction of his son, Robert Stephenson.",
-  "type": "archival",
+  "type": "engraving",
   "template": "archival",
   "fields": {
    "kind": "engraving",
    "label": "Robert Stephenson, engraving",
    "lower": "Robert Stephenson, George Stephenson's son",
-   "asset": "library-si-edu-image-gallery-73445"
+   "asset": "library-si-edu-image-gallery-73445",
+   "crop": "Slow push-in on the face",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 38
+   }
   },
-  "visual": "Robert Stephenson engraving, slow push-in.",
+  "visual": "Robert Stephenson engraving pushes in; name caption on first mention.",
   "source": {
    "institution": "Smithsonian Libraries and Archives",
    "item": "Portrait of Robert Stephenson (engraving by Daniel J. Pound after Mayall)",
@@ -1306,81 +2579,60 @@
    ],
    "step": 2
   },
-  "visual": "Compare card, both sides.",
-  "source": null
+  "visual": "Compare: George Stephenson, the father, against Robert Stephenson, the son, under whose direction Rocket was built.",
+  "source": null,
+  "notes": "Hedge kept: \"largely\"."
  },
  {
   "id": "05-n",
   "section": "05",
   "section_name": "Who Made It Pay",
-  "text": "So here's the fair way to put it, Trevithick proved it could work,",
-  "type": "archival",
-  "template": "archival",
+  "text": "So here's the fair way to put it, Trevithick proved it could work, and the Stephensons made it pay.",
+  "type": "flow",
+  "template": "flow",
   "fields": {
-   "kind": "portrait",
-   "label": "Richard Trevithick, 1816",
-   "lower": "Richard Trevithick",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait"
+   "title": "The fair way to put it",
+   "arrows": true,
+   "steps": [
+    {
+     "label": "Trevithick",
+     "sub": "Proved it could work"
+    },
+    {
+     "label": "The Stephensons",
+     "sub": "Made it pay"
+    }
+   ]
   },
-  "visual": "Trevithick portrait, slow push-in.",
-  "source": {
-   "institution": "Wikimedia Commons (photo credit Science Museum; original in the Science Museum Group, Bennet Woodcroft Bequest)",
-   "item": "File:Richard Trevithick portrait.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_portrait.jpg",
-   "rights": "Public domain in the United States (published before 1 January 1931), as stated on the Commons file page",
-   "credit": "Richard Trevithick by John Linnell, 1816, oil on canvas, Science Museum Group (Bennet Woodcroft Bequest), via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Two boxes with an arrow: Trevithick proved it could work, the Stephensons made it pay.",
+  "source": null
  },
  {
   "id": "05-o",
   "section": "05",
   "section_name": "Who Made It Pay",
-  "text": "and the Stephensons made it pay. And making it pay is a really big deal,",
-  "type": "archival",
-  "template": "archival",
-  "fields": {
-   "kind": "engraving",
-   "label": "Rocket, lithograph print",
-   "lower": "Rocket (lithograph print)",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co421074-the-ro"
-  },
-  "visual": "Print of Rocket, slow pan.",
-  "source": {
-   "institution": "Science Museum Group",
-   "item": "\"The Rocket\" (lithograph print)",
-   "url": "https://collection.sciencemuseumgroup.org.uk/objects/co421074/the-rocket-print-lithograph",
-   "rights": "Not stated in the search result. Check the Science Museum Group object page licence",
-   "credit": "\"The Rocket\", Science Museum Group Collection",
-   "verified": false
-  }
- },
- {
-  "id": "05-p",
-  "section": "05",
-  "section_name": "Who Made It Pay",
-  "text": "because that's the difference between a demonstration and a railway,",
+  "text": "And making it pay is a really big deal, because that's the difference between a demonstration",
   "type": "compare",
   "template": "compare",
   "fields": {
    "left_title": "A demonstration",
    "left_lines": [
-    "One day in Wales"
+    ""
    ],
    "right_title": "A railway",
    "right_lines": [
-    "Something that runs"
+    ""
    ],
    "step": 1
   },
-  "visual": "Compare card, left side only (right ghosted).",
+  "visual": "Compare, step 1: \"A demonstration\" against \"A railway\", the right side ghosted.",
   "source": null
  },
  {
-  "id": "05-q",
+  "id": "05-p",
   "section": "05",
   "section_name": "Who Made It Pay",
-  "text": "a demonstration is one day in Wales and a railway is something that runs.",
+  "text": "and a railway, a demonstration is one day in Wales and a railway is something that runs.",
   "type": "compare",
   "template": "compare",
   "fields": {
@@ -1394,61 +2646,81 @@
    ],
    "step": 2
   },
-  "visual": "Same compare card, both sides.",
+  "visual": "Compare, step 2: one day in Wales against something that runs.",
+  "source": null
+ },
+ {
+  "id": "05-q",
+  "section": "05",
+  "section_name": "Who Made It Pay",
+  "text": "The Stephensons earned a lot of their reputation,",
+  "type": "text",
+  "template": "text",
+  "fields": {
+   "headline": "The Stephensons earned a lot of their reputation",
+   "sub": ""
+  },
+  "visual": "Kinetic text: the Stephensons earned a lot of their reputation.",
   "source": null
  },
  {
   "id": "05-r",
   "section": "05",
   "section_name": "Who Made It Pay",
-  "text": "The Stephensons earned a lot of their reputation, I'm not taking that away from them,",
-  "type": "archival",
-  "template": "archival",
+  "text": "I'm not taking that away from them, I'm just saying they weren't first.",
+  "type": "timeline",
+  "template": "timeline",
   "fields": {
-   "kind": "engraving",
-   "label": "George Stephenson, engraving",
-   "lower": "George Stephenson",
-   "asset": "library-si-edu-image-gallery-73444"
+   "title": "Who came in between",
+   "events": [
+    {
+     "date": "Feb 21, 1804",
+     "label": "Penydarren"
+    },
+    {
+     "date": "1812",
+     "label": "Middleton Railway, Leeds"
+    },
+    {
+     "date": "1813-14",
+     "label": "Puffing Billy"
+    },
+    {
+     "date": "Sept 27, 1825",
+     "label": "Locomotion No. 1 opens the Stockton and Darlington"
+    },
+    {
+     "date": "Oct 1829",
+     "label": "Rocket wins at Rainhill"
+    }
+   ],
+   "highlight": 0,
+   "scale": "years"
   },
-  "visual": "George Stephenson engraving, slow push-out.",
-  "source": {
-   "institution": "Smithsonian Libraries and Archives",
-   "item": "Portrait of George Stephenson (engraving published by Johnson, Wilson & Co., after John Lucas)",
-   "url": "https://library.si.edu/image-gallery/73444",
-   "rights": "No Copyright - United States (as stated by Smithsonian Libraries)",
-   "credit": "Portrait of George Stephenson, Smithsonian Libraries and Archives",
-   "verified": true
-  }
- },
- {
-  "id": "05-s",
-  "section": "05",
-  "section_name": "Who Made It Pay",
-  "text": "I'm just saying they weren't first.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "The Stephensons earned a lot of their reputation. They weren't first.",
-   "sub": ""
-  },
-  "visual": "Text card.",
+  "visual": "Years-scaled timeline from 1804 to October 1829: the five dates pop in as the axis draws, Penydarren highlighted.",
   "source": null,
-  "notes": "Only 6 words, kept on its own so the line lands."
+  "notes": "Labels kept short: \"first known\" is not repeated here because this beat only says the Stephensons were not first."
  },
  {
   "id": "06-a",
   "section": "06",
   "section_name": "How It Ended",
   "text": "And this is the part that stays with you, Richard Trevithick died on April 22nd, 1833,",
-  "type": "archival",
+  "type": "portrait",
   "template": "archival",
   "fields": {
    "kind": "portrait",
    "label": "Richard Trevithick, 1816",
-   "lower": "Richard Trevithick, 1771-1833",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait"
+   "lower": "Richard Trevithick (portrait by John Linnell, 1816)",
+   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait",
+   "crop": "Slightly tighter and off-centre (different from 01-e and 01-j)",
+   "zoom": {
+    "scale": 1.6,
+    "x": 55,
+    "y": 35
+   }
   },
-  "visual": "Trevithick portrait, held plain.",
+  "visual": "Slow push-in on the Trevithick portrait as the date of his death is given.",
   "source": {
    "institution": "Wikimedia Commons (photo credit Science Museum; original in the Science Museum Group, Bennet Woodcroft Bequest)",
    "item": "File:Richard Trevithick portrait.jpg",
@@ -1466,27 +2738,53 @@
   "type": "pinmap",
   "template": "pinmap",
   "fields": {
-   "title": "Where he died",
+   "title": "From Wales to Dartford",
+   "caption": "Richard Trevithick died in Dartford, April 22, 1833",
    "pins": [
     {
-     "name": "Penydarren ironworks, Merthyr",
-     "lat": 51.751,
-     "lon": -3.366,
-     "first": false
+     "name": "Penydarren, Merthyr",
+     "lat": 51.7508,
+     "lon": -3.3758,
+     "sub": "The 1804 run",
+     "at": 0.3
     },
     {
      "name": "Dartford",
-     "lat": 51.446,
-     "lon": 0.217,
-     "first": false
+     "lat": 51.4466,
+     "lon": 0.2178,
+     "sub": "Died here, April 22, 1833",
+     "at": 1.8,
+     "pulse": true
     }
    ],
-   "connect": false,
-   "caption": "Richard Trevithick died in Dartford, April 22, 1833"
+   "labels": [
+    {
+     "name": "Bristol Channel",
+     "lat": 51.1,
+     "lon": -3.9,
+     "kind": "sea"
+    },
+    {
+     "name": "English Channel",
+     "lat": 50.75,
+     "lon": -1.2,
+     "kind": "sea"
+    },
+    {
+     "name": "London",
+     "lat": 51.5074,
+     "lon": -0.1278,
+     "kind": "city"
+    }
+   ],
+   "span": 2.0,
+   "rivers": true,
+   "borders": true,
+   "note": "Coastlines: Natural Earth · positions approximate"
   },
-  "visual": "Schematic map: Dartford, with Penydarren for reference.",
+  "visual": "Map flies in over southern Britain: a pin on Penydarren in Wales, then a pulsing pin lands on Dartford, east of London.",
   "source": null,
-  "notes": "Pin positions are schematic and approximate (Merthyr/Penydarren area, Abercynon town); the dashed line is not the tramroad route."
+  "notes": "No route line drawn, so it does not imply a journey."
  },
  {
   "id": "06-c",
@@ -1499,7 +2797,7 @@
    "headline": "Local workers paid for his funeral and burial",
    "sub": "So he wouldn't get a pauper's burial"
   },
-  "visual": "Text card, plain and still.",
+  "visual": "Kinetic text: local workers paid for his funeral and burial, so he wouldn't get a pauper's burial.",
   "source": null
  },
  {
@@ -1513,9 +2811,15 @@
    "kind": "object",
    "label": "Conjectural model of the Penydarren locomotive (Science Museum Group)",
    "lower": "Conjectural model of the Penydarren locomotive",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co27505-model-o"
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co27505-model-o",
+   "crop": "Medium crop, off-centre (different from 03-b and 04-f)",
+   "zoom": {
+    "scale": 1.5,
+    "x": 65,
+    "y": 50
+   }
   },
-  "visual": "Locomotive model, slow push-in.",
+  "visual": "Push-in on the conjectural model: the man behind the first known railway journey by steam locomotive.",
   "source": {
    "institution": "Science Museum Group",
    "item": "Model of Trevithick's first railway locomotive 'Pen-y-Darren' (conjectural model, 1:8, Walter W. Mason; object 1934-312)",
@@ -1523,7 +2827,8 @@
    "rights": "Not stated in the search result. Check the Science Museum Group object page licence",
    "credit": "Model of Trevithick's first railway locomotive 'Pen-y-Darren', Science Museum Group Collection",
    "verified": false
-  }
+  },
+  "notes": "A later conjectural model, labelled as such."
  },
  {
   "id": "06-e",
@@ -1536,7 +2841,7 @@
    "quote": "The real father of the railways",
    "attribution": "Museum Wales"
   },
-  "visual": "Quote card.",
+  "visual": "Typewriter quote again, attributed to Museum Wales.",
   "source": null
  },
  {
@@ -1544,38 +2849,63 @@
   "section": "06",
   "section_name": "How It Ended",
   "text": "needed local workers to pay for his funeral. That's how it ended for him,",
-  "type": "archival",
-  "template": "archival",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "kind": "portrait",
-   "label": "Richard Trevithick, 1816",
-   "lower": "Richard Trevithick",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait"
+   "left_title": "Trevithick",
+   "left_lines": [
+    "Needed local workers to pay for his funeral"
+   ],
+   "right_title": "The Stephenson name",
+   "right_lines": [
+    "Went on to be the one in the history books"
+   ],
+   "step": 1
   },
-  "visual": "Trevithick portrait, held plain.",
-  "source": {
-   "institution": "Wikimedia Commons (photo credit Science Museum; original in the Science Museum Group, Bennet Woodcroft Bequest)",
-   "item": "File:Richard Trevithick portrait.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_portrait.jpg",
-   "rights": "Public domain in the United States (published before 1 January 1931), as stated on the Commons file page",
-   "credit": "Richard Trevithick by John Linnell, 1816, oil on canvas, Science Museum Group (Bennet Woodcroft Bequest), via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Compare, step 1: Trevithick needed local workers to pay for his funeral; the Stephenson side is ghosted.",
+  "source": null
  },
  {
   "id": "06-g",
   "section": "06",
   "section_name": "How It Ended",
   "text": "and meanwhile the Stephenson name went on to be the one in the history books.",
-  "type": "archival",
+  "type": "compare",
+  "template": "compare",
+  "fields": {
+   "left_title": "Trevithick",
+   "left_lines": [
+    "Needed local workers to pay for his funeral"
+   ],
+   "right_title": "The Stephenson name",
+   "right_lines": [
+    "Went on to be the one in the history books"
+   ],
+   "step": 2
+  },
+  "visual": "Compare, step 2: the Stephenson name is revealed, the one in the history books.",
+  "source": null
+ },
+ {
+  "id": "06-h",
+  "section": "06",
+  "section_name": "How It Ended",
+  "text": "So when somebody tells you George Stephenson gave us the railway, the plain fact is that",
+  "type": "engraving",
   "template": "archival",
   "fields": {
    "kind": "engraving",
    "label": "George Stephenson, engraving",
    "lower": "George Stephenson",
-   "asset": "library-si-edu-image-gallery-73444"
+   "asset": "library-si-edu-image-gallery-73444",
+   "crop": "Medium crop, off-centre (different from 01-b and 02-g)",
+   "zoom": {
+    "scale": 1.5,
+    "x": 55,
+    "y": 40
+   }
   },
-  "visual": "George Stephenson engraving, slow push-in.",
+  "visual": "Slow push-in on the Stephenson engraving as the viewer imagines hearing his name.",
   "source": {
    "institution": "Smithsonian Libraries and Archives",
    "item": "Portrait of George Stephenson (engraving published by Johnson, Wilson & Co., after John Lucas)",
@@ -1586,31 +2916,17 @@
   }
  },
  {
-  "id": "06-h",
-  "section": "06",
-  "section_name": "How It Ended",
-  "text": "So when somebody tells you George Stephenson gave us the railway,",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "When someone says Stephenson gave us the railway",
-   "sub": "The plain fact:"
-  },
-  "visual": "Text card.",
-  "source": null
- },
- {
   "id": "06-i",
   "section": "06",
   "section_name": "How It Ended",
-  "text": "the plain fact is that on February 21st, 1804, at Penydarren, in south Wales,",
+  "text": "on February 21st, 1804, at Penydarren, in south Wales,",
   "type": "date",
   "template": "date",
   "fields": {
    "date": "Feb 21, 1804",
    "caption": "Penydarren, south Wales"
   },
-  "visual": "Date stamp.",
+  "visual": "Date stamps in: Feb 21, 1804, Penydarren, south Wales.",
   "source": null
  },
  {
@@ -1622,26 +2938,94 @@
   "template": "pinmap",
   "fields": {
    "title": "Penydarren to Abercynon",
+   "caption": "Ten tons of iron and about seventy men, nearly ten miles",
    "pins": [
     {
      "name": "Penydarren ironworks, Merthyr",
-     "lat": 51.751,
-     "lon": -3.366,
-     "first": false
+     "lat": 51.7508,
+     "lon": -3.3758,
+     "at": 1.5
     },
     {
      "name": "Abercynon",
-     "lat": 51.646,
-     "lon": -3.329,
-     "first": false
+     "lat": 51.6443,
+     "lon": -3.3275,
+     "sub": "The canal",
+     "at": 4.7
     }
    ],
-   "connect": true,
-   "caption": "Ten tons of iron and about seventy men, nearly ten miles"
+   "routes": [
+    {
+     "points": [
+      [
+       51.7508,
+       -3.3758
+      ],
+      [
+       51.738,
+       -3.368
+      ],
+      [
+       51.718,
+       -3.359
+      ],
+      [
+       51.705,
+       -3.355
+      ],
+      [
+       51.69,
+       -3.348
+      ],
+      [
+       51.677,
+       -3.343
+      ],
+      [
+       51.668,
+       -3.334
+      ],
+      [
+       51.658,
+       -3.33
+      ],
+      [
+       51.6443,
+       -3.3275
+      ]
+     ],
+     "style": "rail",
+     "at": 2.4,
+     "dur": 2.6,
+     "icon": "train",
+     "label": "The tramroad (route approximate)",
+     "lx": 30
+    }
+   ],
+   "labels": [
+    {
+     "name": "Cardiff",
+     "lat": 51.4815,
+     "lon": -3.18,
+     "kind": "city",
+     "fit": true
+    },
+    {
+     "name": "Bristol Channel",
+     "lat": 51.4,
+     "lon": -3.0,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "span": 0.45,
+   "rivers": true,
+   "borders": true,
+   "note": "Route approximate · Coastlines: Natural Earth"
   },
-  "visual": "Schematic map: dashed line from Merthyr to Abercynon.",
+  "visual": "Map flies back to the Merthyr valley and the tramroad route draws again, train icon riding the head, ten tons and about seventy men nearly ten miles.",
   "source": null,
-  "notes": "Pin positions are schematic and approximate (Merthyr/Penydarren area, Abercynon town); the dashed line is not the tramroad route."
+  "notes": "Route approximate (places.json: medium confidence); note says so."
  },
  {
   "id": "06-k",
@@ -1651,15 +3035,15 @@
   "type": "datecard",
   "template": "datecard",
   "fields": {
+   "kicker": "Penydarren and Rainhill",
    "left_label": "Trevithick at Penydarren",
    "left_date": "Feb 21, 1804",
    "right_label": "Rocket wins at Rainhill",
    "right_date": "Oct 1829",
    "gap": "twenty-five years",
-   "kicker": "Penydarren and Rainhill",
    "firsttag": false
   },
-  "visual": "Datecard: two dates, the gap counts up.",
+  "visual": "Datecard: a line draws from Feb 21, 1804 to Oct 1829, then \"twenty-five years\" appears.",
   "source": null,
   "notes": "firsttag false: the script calls the run \"the first known\" journey, so no red FIRST stamp."
  },
@@ -1673,7 +3057,7 @@
   "fields": {
    "line": "Somebody did it first."
   },
-  "visual": "End card holds on the channel line.",
+  "visual": "End card stamps in: Somebody did it first.",
   "source": null
  }
 ]

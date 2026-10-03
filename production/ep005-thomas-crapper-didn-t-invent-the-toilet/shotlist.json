@@ -10,23 +10,29 @@
    "title": "Thomas Crapper Didn't Invent the Toilet",
    "subtitle": "The name that stuck"
   },
-  "visual": "Episode title card as the famous name is introduced.",
+  "visual": "Title card: words build in.",
   "source": null
  },
  {
   "id": "01-b",
   "section": "01",
   "section_name": "Cold Open",
-  "text": "and a lot of people will tell you, with a straight face, that he invented the toilet",
+  "text": "and a lot of people will tell you, with a straight face,",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "portrait",
    "label": "Thomas Crapper",
    "lower": "Thomas Crapper",
-   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "zoom": {
+    "scale": 1.1,
+    "x": 50,
+    "y": 50
+   },
+   "crop": "Full portrait, slow push-in"
   },
-  "visual": "Slow push-in on the Crapper portrait as the popular claim is stated.",
+  "visual": "Slow push-in on the Crapper portrait while the popular claim is set up.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Thomas Crapper.jpg",
@@ -40,30 +46,117 @@
   "id": "01-c",
   "section": "01",
   "section_name": "Cold Open",
-  "text": "and that's why we call it what we call it.",
-  "type": "text",
-  "template": "text",
+  "text": "that he invented the toilet and that's why we call it what we call it.",
+  "type": "flow",
+  "template": "flow",
   "fields": {
-   "headline": "Many people say he gave the toilet its name",
-   "sub": "The popular claim, not the history"
+   "title": "The popular claim",
+   "steps": [
+    {
+     "label": "He invented the toilet",
+     "sub": "What a lot of people will tell you"
+    },
+    {
+     "label": "That's why we call it what we call it",
+     "sub": "The popular claim, not the history"
+    }
+   ],
+   "highlight": 1,
+   "caption": "What many people say"
   },
-  "visual": "Text card: the claim, attributed to 'a lot of people'.",
+  "visual": "Two boxes pop in, joined by an arrow: the claim, then the supposed result.",
   "source": null
  },
  {
   "id": "01-d",
   "section": "01",
   "section_name": "Cold Open",
-  "text": "But a man in England built a flushing toilet for Queen Elizabeth I nearly three centuries before Crapper's patents,",
+  "text": "But a man in England built a flushing toilet",
+  "type": "pinmap",
+  "template": "pinmap",
+  "fields": {
+   "title": "England",
+   "caption": "In England",
+   "pins": [
+    {
+     "name": "Kelston, near Bath",
+     "lat": 51.4048,
+     "lon": -2.4256,
+     "pulse": true,
+     "at": 1.3
+    }
+   ],
+   "labels": [
+    {
+     "name": "England",
+     "lat": 52.9,
+     "lon": -1.6,
+     "kind": "region",
+     "size": 40
+    },
+    {
+     "name": "Wales",
+     "lat": 52.2,
+     "lon": -3.9,
+     "kind": "region",
+     "size": 30
+    },
+    {
+     "name": "English Channel",
+     "lat": 50.1,
+     "lon": -1.6,
+     "kind": "sea",
+     "size": 26
+    },
+    {
+     "name": "Bristol Channel",
+     "lat": 51.3,
+     "lon": -4.3,
+     "kind": "sea",
+     "size": 22
+    },
+    {
+     "name": "London",
+     "lat": 51.5074,
+     "lon": -0.1278,
+     "kind": "city",
+     "size": 26,
+     "fit": true
+    }
+   ],
+   "from": {
+    "lat": 54.5,
+    "lon": -4.0,
+    "span": 14
+   },
+   "span": 4,
+   "rivers": true,
+   "borders": true
+  },
+  "visual": "Map flies in over England and drops a pin near Bath. The man is not named yet.",
+  "source": null,
+  "notes": "Kelston, near Bath is Harington's house (places.json, medium confidence). The narration does not name it, so the pin carries no sub and no name for him yet."
+ },
+ {
+  "id": "01-e",
+  "section": "01",
+  "section_name": "Cold Open",
+  "text": "for Queen Elizabeth I nearly three centuries before Crapper's patents,",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "painting",
    "label": "Queen Elizabeth I (Darnley Portrait)",
    "lower": "Queen Elizabeth I",
-   "asset": "commons-wikimedia-org-wiki-file-elizabeth-i-darnley-portrait"
+   "asset": "commons-wikimedia-org-wiki-file-elizabeth-i-darnley-portrait",
+   "zoom": {
+    "scale": 1.15,
+    "x": 50,
+    "y": 50
+   },
+   "crop": "Wide, slow push-in"
   },
-  "visual": "Elizabeth I portrait, slow push-in, as the queen is named.",
+  "visual": "Elizabeth I portrait, slow push-in, lower-third names her.",
   "source": {
    "institution": "Wikimedia Commons (National Portrait Gallery, London)",
    "item": "File:Elizabeth I Darnley Portrait.jpg",
@@ -71,11 +164,10 @@
    "rights": "Public domain photographic reproduction, as described in the search result; re-read the file page tag before use",
    "credit": "Darnley Portrait of Elizabeth I, National Portrait Gallery, London, via Wikimedia Commons",
    "verified": true
-  },
-  "notes": "The man is not named in this beat; the portrait is of the queen only."
+  }
  },
  {
-  "id": "01-e",
+  "id": "01-f",
   "section": "01",
   "section_name": "Cold Open",
   "text": "and the word \"crap\" is older than Crapper is.",
@@ -85,11 +177,11 @@
    "headline": "The word \"crap\" is older than Crapper",
    "sub": ""
   },
-  "visual": "Text card.",
+  "visual": "Kinetic words: the word crap is older than Crapper.",
   "source": null
  },
  {
-  "id": "01-f",
+  "id": "01-g",
   "section": "01",
   "section_name": "Cold Open",
   "text": "Now, to be fair, Thomas Crapper was a real person who really did make toilets better,",
@@ -99,9 +191,15 @@
    "kind": "portrait",
    "label": "Thomas Crapper",
    "lower": "Thomas Crapper",
-   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "zoom": {
+    "scale": 1.5,
+    "x": 38,
+    "y": 40
+   },
+   "crop": "Closer crop, left of centre"
   },
-  "visual": "Crapper portrait again, slow push-out.",
+  "visual": "Closer push-in on the Crapper portrait: a real person.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Thomas Crapper.jpg",
@@ -112,7 +210,7 @@
   }
  },
  {
-  "id": "01-g",
+  "id": "01-h",
   "section": "01",
   "section_name": "Cold Open",
   "text": "and we'll give him his due, but he wasn't first, not even close.",
@@ -120,9 +218,9 @@
   "template": "text",
   "fields": {
    "headline": "Crapper wasn't first, not even close",
-   "sub": "Full credit for what he really did"
+   "sub": "He still gets his due"
   },
-  "visual": "Text card; sub lands on 'his due'.",
+  "visual": "Kinetic words: not first, not even close.",
   "source": null
  },
  {
@@ -140,15 +238,19 @@
      "sub": "The popular story"
     },
     {
+     "label": "He puts his name on it",
+     "sub": ""
+    },
+    {
      "label": "His name becomes the slang",
-     "sub": "He puts his name on it"
+     "sub": ""
     }
    ],
    "step": 1,
    "highlight": 0,
    "caption": "The story as it is usually told"
   },
-  "visual": "Two-box flow, first box lit: the famous version.",
+  "visual": "Flow: first box pops in, the other two ghosted.",
   "source": null
  },
  {
@@ -166,15 +268,19 @@
      "sub": "The popular story"
     },
     {
+     "label": "He puts his name on it",
+     "sub": ""
+    },
+    {
      "label": "His name becomes the slang",
-     "sub": "He puts his name on it"
+     "sub": ""
     }
    ],
-   "step": 2,
-   "highlight": 1,
+   "step": 3,
+   "highlight": 2,
    "caption": "The story as it is usually told"
   },
-  "visual": "Same flow, second box added.",
+  "visual": "Same flow, the last box lands: his name becomes the slang.",
   "source": null
  },
  {
@@ -182,21 +288,21 @@
   "section": "02",
   "section_name": "The Famous Version",
   "text": "It's a perfect story, because the name does all the work, right?",
-  "type": "text",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "portrait",
    "label": "Thomas Crapper",
    "lower": "Thomas Crapper",
    "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
-   "crop": "Tight crop on the face, slow push-in (closer than 01-b and 01-f)",
    "zoom": {
     "scale": 1.8,
     "x": 50,
     "y": 30
-   }
+   },
+   "crop": "Tight on the face, slow push-in"
   },
-  "visual": "Crapper portrait, tight push-in.",
+  "visual": "Tight push-in on the Crapper portrait.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Thomas Crapper.jpg",
@@ -212,189 +318,98 @@
   "section_name": "The Famous Version",
   "text": "You hear Crapper and toilet in the same sentence and your brain just files it as true.",
   "type": "text",
-  "template": "archival",
+  "template": "text",
   "fields": {
-   "kind": "portrait",
-   "label": "Thomas Crapper",
-   "lower": "Thomas Crapper",
-   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
-   "crop": "Wide, full portrait (02-c before it is the tight crop)"
+   "headline": "Crapper and toilet, in the same sentence",
+   "sub": "The brain files it as true"
   },
-  "visual": "Wide, full portrait (02-c before it is the tight crop)",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Thomas Crapper.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
-   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
-   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Kinetic words.",
+  "source": null
  },
  {
   "id": "02-e",
   "section": "02",
   "section_name": "The Famous Version",
   "text": "And a lot of that comes from one book. In 1969 a writer named Wallace Reyburn",
-  "type": "flow",
-  "template": "flow",
+  "type": "date",
+  "template": "date",
   "fields": {
-   "title": "Where the myth spread",
-   "steps": [
-    {
-     "label": "Wallace Reyburn",
-     "sub": "A writer, 1969"
-    },
-    {
-     "label": "Flushed with Pride",
-     "sub": "Partly tongue-in-cheek"
-    },
-    {
-     "label": "The idea spreads",
-     "sub": "Crapper invented the toilet"
-    },
-    {
-     "label": "A lot of people's facts",
-     "sub": "From a book partly kidding"
-    }
-   ],
-   "step": 1,
-   "highlight": 0,
-   "caption": "Flushed with Pride, 1969"
+   "date": "1969",
+   "caption": "A writer named Wallace Reyburn"
   },
-  "visual": "Flow build, step 1: 1969, Wallace Reyburn.",
+  "visual": "The year 1969 stamps in with the writer's name.",
   "source": null
  },
  {
   "id": "02-f",
   "section": "02",
   "section_name": "The Famous Version",
-  "text": "published a book called Flushed with Pride, and it's partly tongue-in-cheek,",
-  "type": "flow",
-  "template": "flow",
+  "text": "published a book called Flushed with Pride, and it's partly tongue-in-cheek, it's partly a joke,",
+  "type": "title",
+  "template": "title",
   "fields": {
-   "title": "Where the myth spread",
-   "steps": [
-    {
-     "label": "Wallace Reyburn",
-     "sub": "A writer, 1969"
-    },
-    {
-     "label": "Flushed with Pride",
-     "sub": "Partly tongue-in-cheek"
-    },
-    {
-     "label": "The idea spreads",
-     "sub": "Crapper invented the toilet"
-    },
-    {
-     "label": "A lot of people's facts",
-     "sub": "From a book partly kidding"
-    }
-   ],
-   "step": 2,
-   "highlight": 1,
-   "caption": "Flushed with Pride, 1969"
+   "title": "Flushed with Pride",
+   "subtitle": "A book that's partly tongue-in-cheek, partly a joke"
   },
-  "visual": "Flow build, step 2: the book title and its hedge.",
+  "visual": "Book title builds in word by word.",
   "source": null
  },
  {
   "id": "02-g",
   "section": "02",
   "section_name": "The Famous Version",
-  "text": "it's partly a joke, and it helped spread the idea that Crapper invented the toilet.",
-  "type": "flow",
-  "template": "flow",
+  "text": "and it helped spread the idea that Crapper invented the toilet.",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "Where the myth spread",
-   "steps": [
-    {
-     "label": "Wallace Reyburn",
-     "sub": "A writer, 1969"
-    },
-    {
-     "label": "Flushed with Pride",
-     "sub": "Partly tongue-in-cheek"
-    },
-    {
-     "label": "The idea spreads",
-     "sub": "Crapper invented the toilet"
-    },
-    {
-     "label": "A lot of people's facts",
-     "sub": "From a book partly kidding"
-    }
-   ],
-   "step": 3,
-   "highlight": 2,
-   "caption": "Flushed with Pride, 1969"
+   "scene": "ripple",
+   "tag": "ILLUSTRATION · Simplified, not data",
+   "params": {
+    "title": "It helped spread the idea",
+    "left": "Flushed with Pride",
+    "leftSub": "The idea that Crapper invented the toilet",
+    "right": " ",
+    "rightSub": " "
+   }
   },
-  "visual": "Flow build, step 3: the idea spreads.",
-  "source": null
+  "visual": "Red ripples spread out from the book and light up dots as the idea travels.",
+  "source": null,
+  "notes": "ripple has a fixed right-hand silent node; both its labels are blanked here. A dedicated 'book spreads the idea' scene would be cleaner (see report)."
  },
  {
   "id": "02-h",
   "section": "02",
   "section_name": "The Famous Version",
   "text": "So a book that was partly kidding ended up being where a lot of people's facts came from.",
-  "type": "flow",
-  "template": "flow",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "title": "Where the myth spread",
-   "steps": [
-    {
-     "label": "Wallace Reyburn",
-     "sub": "A writer, 1969"
-    },
-    {
-     "label": "Flushed with Pride",
-     "sub": "Partly tongue-in-cheek"
-    },
-    {
-     "label": "The idea spreads",
-     "sub": "Crapper invented the toilet"
-    },
-    {
-     "label": "A lot of people's facts",
-     "sub": "From a book partly kidding"
-    }
+   "left_title": "Flushed with Pride",
+   "left_lines": [
+    "A book that was partly kidding"
    ],
-   "step": 4,
-   "highlight": 3,
-   "caption": "Flushed with Pride, 1969"
+   "right_title": "A lot of people's facts",
+   "right_lines": [
+    "Came from that book"
+   ],
+   "step": 2
   },
-  "visual": "Flow build, step 4: people's facts came from it.",
-  "source": null,
-  "notes": "No book cover shown: the 1969 cover is a copyrighted toilet illustration."
+  "visual": "Compare card: the book on the left, where it ends up on the right.",
+  "source": null
  },
  {
   "id": "03-a",
   "section": "03",
   "section_name": "Knossos",
   "text": "So who did it first? Well, it depends how far back you want to go,",
-  "type": "text",
-  "template": "archival",
+  "type": "title",
+  "template": "title",
   "fields": {
-   "kind": "photo",
-   "label": "Palace of Knossos, Crete (modern photograph)",
-   "lower": "Palace of Knossos, Crete (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-knossos-palace-jpg",
-   "crop": "Slow push-in, wide view of the site",
-   "zoom": {
-    "scale": 1.2,
-    "x": 50,
-    "y": 50
-   }
+   "title": "So who did it first?",
+   "subtitle": "It depends how far back you want to go"
   },
-  "visual": "Slow push-in, wide view of the site",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Knossos palace.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Knossos_palace.jpg",
-   "rights": "CC BY-SA 4.0, as stated in the search result (photographer Theofanis Ampatzidis, 17 August 2017)",
-   "credit": "Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0",
-   "verified": true
-  }
+  "visual": "Title-style card: the question, then the answer is a distance.",
+  "source": null
  },
  {
   "id": "03-b",
@@ -405,21 +420,59 @@
   "template": "pinmap",
   "fields": {
    "title": "Knossos, Crete",
+   "caption": "The palace at Knossos, on the island of Crete",
    "pins": [
     {
-     "name": "Knossos, Crete",
+     "name": "Palace of Knossos",
      "lat": 35.298,
-     "lon": 25.163,
-     "first": false
+     "lon": 25.1631,
+     "sub": "Island of Crete",
+     "pulse": true,
+     "at": 1.6
     }
    ],
-   "connect": false,
-   "caption": "The palace at Knossos, on the island of Crete",
-   "span": 5
+   "labels": [
+    {
+     "name": "Mediterranean Sea",
+     "lat": 33.0,
+     "lon": 23.0,
+     "kind": "sea",
+     "size": 32
+    },
+    {
+     "name": "Aegean Sea",
+     "lat": 37.0,
+     "lon": 25.6,
+     "kind": "sea",
+     "size": 28
+    },
+    {
+     "name": "Greece",
+     "lat": 38.0,
+     "lon": 22.0,
+     "kind": "region",
+     "size": 34
+    },
+    {
+     "name": "Turkey",
+     "lat": 37.6,
+     "lon": 31.0,
+     "kind": "region",
+     "size": 34
+    }
+   ],
+   "from": {
+    "lat": 39.0,
+    "lon": 18.0,
+    "span": 16
+   },
+   "span": 5,
+   "rivers": true,
+   "borders": true
   },
-  "visual": "Schematic map with one pin: Knossos, Crete.",
+  "visual": "Mediterranean fly-in to Crete; a pin lands on Knossos.",
   "source": null,
-  "notes": "Knossos is at about 35.298 N, 25.163 E. 'first' is false so no FIRST tag."
+  "notes": "Pin name and coordinates from places.json (knossos, high confidence). Sea and country labels are orientation only."
  },
  {
   "id": "03-c",
@@ -433,14 +486,14 @@
    "label": "Palace of Knossos, Crete (modern photograph)",
    "lower": "Palace of Knossos, Crete (modern photograph)",
    "asset": "commons-wikimedia-org-wiki-file-knossos-palace-jpg",
-   "crop": "Different crop from 03-a: close on the stonework",
    "zoom": {
     "scale": 1.8,
     "x": 40,
     "y": 55
-   }
+   },
+   "crop": "Close on the stonework"
   },
-  "visual": "Modern photo of the Knossos ruins, slow push-in.",
+  "visual": "Slow push-in on the ruins at Knossos (modern photograph).",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Knossos palace.jpg",
@@ -448,21 +501,21 @@
    "rights": "CC BY-SA 4.0, as stated in the search result (photographer Theofanis Ampatzidis, 17 August 2017)",
    "credit": "Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0",
    "verified": true
-  },
-  "notes": "Modern photo of the site, not of the latrines. Some Knossos photos include early-20th-century restorations; the label says only 'modern photograph'."
+  }
  },
  {
   "id": "03-d",
   "section": "03",
   "section_name": "Knossos",
   "text": "and that's about 3,500 years ago, somewhere around 1700 to 1450 BC.",
-  "type": "date",
-  "template": "date",
+  "type": "stat",
+  "template": "stat",
   "fields": {
-   "date": "About 1700 to 1450 BC",
-   "caption": "Water-flushed latrines at Knossos, about 3,500 years ago"
+   "number": "About 3,500",
+   "label": "years ago",
+   "sub": "Somewhere around 1700 to 1450 BC"
   },
-  "visual": "Date stamp with the hedged range.",
+  "visual": "About 3,500 counts up, with the 1700 to 1450 BC range underneath.",
   "source": null
  },
  {
@@ -476,9 +529,15 @@
    "kind": "photo",
    "label": "Palace of Knossos, Crete (modern photograph)",
    "lower": "Palace of Knossos, Crete (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-minoan-palace-of-knossos-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-minoan-palace-of-knossos-jpg",
+   "zoom": {
+    "scale": 1.15,
+    "x": 50,
+    "y": 50
+   },
+   "crop": "Wide, slow push-in"
   },
-  "visual": "Second Knossos photo, slow pan, as the careful caveat begins.",
+  "visual": "Wide push-in on the Knossos ruins.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Minoan Palace of Knossos.jpg",
@@ -489,22 +548,21 @@
   }
  },
  {
-  "id": "03-e2",
+  "id": "03-f",
   "section": "03",
   "section_name": "Knossos",
   "text": "the Minoans had a flush toilet with roof cisterns, and that's overstated.",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "The Minoan flush-toilet claim is overstated",
-   "sub": "Careful: this is not a modern toilet"
+   "headline": "A flush toilet with roof cisterns?",
+   "sub": "That's overstated"
   },
-  "visual": "Text card. The headline carries the hedge; the phrase from the narration is deliberately not shown on screen.",
-  "source": null,
-  "notes": "The narration here contains the myth's wording. Keep that wording off screen: the card names the claim only as 'the Minoan flush-toilet claim'."
+  "visual": "Kinetic words: the roof-cisterns claim, flagged as overstated.",
+  "source": null
  },
  {
-  "id": "03-f",
+  "id": "03-g",
   "section": "03",
   "section_name": "Knossos",
   "text": "It didn't have a cistern and a valve like a toilet in your house,",
@@ -523,119 +581,77 @@
    ],
    "step": 2
   },
-  "visual": "Compare card: a modern toilet versus Knossos.",
-  "source": null
- },
- {
-  "id": "03-g",
-  "section": "03",
-  "section_name": "Knossos",
-  "text": "the water came from rainwater channelled from the roof,",
-  "type": "flow",
-  "template": "flow",
-  "fields": {
-   "title": "How Knossos flushed",
-   "steps": [
-    {
-     "label": "Rainwater from the roof",
-     "sub": "Channelled through the drains"
-    },
-    {
-     "label": "Or somebody poured water in",
-     "sub": ""
-    },
-    {
-     "label": "Waste flushed into a sewer",
-     "sub": "Either way"
-    }
-   ],
-   "step": 1,
-   "highlight": 0,
-   "caption": "No cistern, no valve"
-  },
-  "visual": "Flow build, step 1: rainwater from the roof, through the drains.",
+  "visual": "Compare card: your house has a cistern and valve; Knossos has neither.",
   "source": null
  },
  {
   "id": "03-h",
   "section": "03",
   "section_name": "Knossos",
-  "text": "and through the drains, or somebody poured water in,",
-  "type": "flow",
-  "template": "flow",
+  "text": "the water came from rainwater channelled from the roof, and through the drains,",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "How Knossos flushed",
-   "steps": [
-    {
-     "label": "Rainwater from the roof",
-     "sub": "Channelled through the drains"
-    },
-    {
-     "label": "Or somebody poured water in",
-     "sub": ""
-    },
-    {
-     "label": "Waste flushed into a sewer",
-     "sub": "Either way"
+   "scene": "knossos_drain",
+   "tag": "ILLUSTRATION · Simplified cross-section, not a reconstruction",
+   "params": {
+    "title": "Knossos, simplified",
+    "mode": "rain",
+    "at": {
+     "rain": 0.2,
+     "flow": 1.6,
+     "c1": 0.6,
+     "c2": 99
     }
-   ],
-   "step": 2,
-   "highlight": 1,
-   "caption": "No cistern, no valve"
+   }
   },
-  "visual": "Flow build, step 2: or somebody poured water in.",
-  "source": null
- },
- {
-  "id": "03-h2",
-  "section": "03",
-  "section_name": "Knossos",
-  "text": "and either way it flushed the waste into a sewer.",
-  "type": "flow",
-  "template": "flow",
-  "fields": {
-   "title": "How Knossos flushed",
-   "steps": [
-    {
-     "label": "Rainwater from the roof",
-     "sub": "Channelled through the drains"
-    },
-    {
-     "label": "Or somebody poured water in",
-     "sub": ""
-    },
-    {
-     "label": "Waste flushed into a sewer",
-     "sub": "Either way"
-    }
-   ],
-   "step": 3,
-   "highlight": 2,
-   "caption": "No cistern, no valve"
-  },
-  "visual": "Flow build, step 3: waste into a sewer.",
+  "visual": "Cross-section: rain on the roof runs down a channel toward the stone sewer. No cistern.",
   "source": null
  },
  {
   "id": "03-i",
   "section": "03",
   "section_name": "Knossos",
+  "text": "or somebody poured water in, and either way it flushed the waste into a sewer.",
+  "type": "scene",
+  "template": "scene",
+  "fields": {
+   "scene": "knossos_drain",
+   "tag": "ILLUSTRATION · Simplified cross-section, not a reconstruction",
+   "params": {
+    "title": "Knossos, simplified",
+    "mode": "pour",
+    "at": {
+     "pour": 0.3,
+     "flow": 1.2,
+     "c1": 0.5,
+     "c2": 3.2
+    }
+   }
+  },
+  "visual": "Same cross-section: a jar is poured in and the water runs on into the stone sewer.",
+  "source": null
+ },
+ {
+  "id": "03-j",
+  "section": "03",
+  "section_name": "Knossos",
   "text": "So it's not a modern toilet, but it's water carrying waste away, about 3,500 years ago.",
-  "type": "text",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "photo",
    "label": "Palace of Knossos, Crete (modern photograph)",
    "lower": "Not a modern toilet, but water carrying waste away (Knossos, modern photograph)",
    "asset": "commons-wikimedia-org-wiki-file-palace-of-knossos-jpg",
-   "crop": "Push-in",
    "zoom": {
     "scale": 1.3,
     "x": 50,
     "y": 50
-   }
+   },
+   "crop": "Push-in"
   },
-  "visual": "Push-in",
+  "visual": "Slow push-in on the Knossos site.",
   "source": {
    "institution": "Wikimedia Commons (Flickr, cavorite)",
    "item": "File:Palace of Knossos.jpg",
@@ -646,7 +662,7 @@
   }
  },
  {
-  "id": "03-j",
+  "id": "03-k",
   "section": "03",
   "section_name": "Knossos",
   "text": "And Knossos wasn't even the earliest. Homes in the Indus Valley had drained latrines even earlier,",
@@ -654,29 +670,77 @@
   "template": "pinmap",
   "fields": {
    "title": "Drained latrines, even earlier",
+   "caption": "The Indus Valley: drained latrines even earlier than Knossos",
    "pins": [
     {
-     "name": "Knossos, Crete",
+     "name": "Palace of Knossos",
      "lat": 35.298,
-     "lon": 25.163,
-     "first": false
+     "lon": 25.1631,
+     "sub": "Island of Crete",
+     "pulse": true,
+     "at": 0.1
     },
     {
-     "name": "Indus Valley (Mohenjo-daro)",
+     "name": "Mohenjo-daro",
      "lat": 27.329,
      "lon": 68.139,
-     "first": false
+     "sub": "Indus Valley",
+     "pulse": true,
+     "at": 2.0
     }
    ],
-   "connect": false,
-   "caption": "The Indus Valley: drained latrines even earlier than Knossos"
+   "labels": [
+    {
+     "name": "Mediterranean Sea",
+     "lat": 33.8,
+     "lon": 19.0,
+     "kind": "sea",
+     "size": 30
+    },
+    {
+     "name": "Egypt",
+     "lat": 26.5,
+     "lon": 30.0,
+     "kind": "region",
+     "size": 30
+    },
+    {
+     "name": "Iran",
+     "lat": 32.5,
+     "lon": 54.0,
+     "kind": "region",
+     "size": 34
+    },
+    {
+     "name": "Pakistan",
+     "lat": 30.8,
+     "lon": 69.8,
+     "kind": "region",
+     "size": 28
+    },
+    {
+     "name": "Arabian Sea",
+     "lat": 21.5,
+     "lon": 64.0,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "from": {
+    "lat": 35.3,
+    "lon": 25.2,
+    "span": 5
+   },
+   "span": 8,
+   "rivers": true,
+   "borders": true
   },
-  "visual": "Schematic map: Knossos and the Indus Valley.",
+  "visual": "The map pulls out from Crete across the Middle East to the Indus Valley and drops a second pin.",
   "source": null,
-  "notes": "Mohenjo-daro is at about 27.329 N, 68.139 E and stands in for the Indus Valley. No Indus date is shown: the notes leave the c. 2600 BCE date out."
+  "notes": "Mohenjo-daro stands in for the Indus Valley (places.json, high confidence). No Indus date is shown, since the narration gives none."
  },
  {
-  "id": "03-k",
+  "id": "03-l",
   "section": "03",
   "section_name": "Knossos",
   "text": "and one review says almost every house there had its own bathroom, including a lavatory.",
@@ -686,9 +750,15 @@
    "kind": "photo",
    "label": "Mohenjo-daro, an Indus Valley city (modern photograph)",
    "lower": "Mohenjo-daro, an Indus Valley city (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-street-mohenjodaro-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-street-mohenjodaro-jpg",
+   "zoom": {
+    "scale": 1.25,
+    "x": 50,
+    "y": 50
+   },
+   "crop": "Slow push-in"
   },
-  "visual": "Modern photo of a street at Mohenjo-daro, slow push-in.",
+  "visual": "Slow push-in on a street at Mohenjo-daro (modern photograph).",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Street - Mohenjodaro.JPG",
@@ -697,49 +767,98 @@
    "credit": "Saqib Qayyum, via Wikimedia Commons (confirm license on the file page)",
    "verified": false
   },
-  "notes": "Illustrates the place only, not the review's claim. If rights are unusable, fall back to a text card: 'One review: almost every house had a bathroom'."
- },
- {
-  "id": "03-l",
-  "section": "03",
-  "section_name": "Knossos",
-  "text": "So the idea of a toilet that carries waste away with water",
-  "type": "archival",
-  "template": "archival",
-  "fields": {
-   "kind": "photo",
-   "label": "Palace of Knossos, Crete (modern photograph)",
-   "lower": "Palace of Knossos, Crete (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-minoan-palace-of-knossos-jpg",
-   "crop": "Different crop from 03-e: wide"
-  },
-  "visual": "Different crop from 03-e: wide",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Minoan Palace of Knossos.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Minoan_Palace_of_Knossos.jpg",
-   "rights": "CC BY-SA 3.0 Unported, as stated in the search result (uploader Lemur12)",
-   "credit": "Lemur12, via Wikimedia Commons, CC BY-SA 3.0",
-   "verified": true
-  }
+  "notes": "Rights on this photo are unconfirmed (see episode.json gaps)."
  },
  {
   "id": "03-m",
+  "section": "03",
+  "section_name": "Knossos",
+  "text": "So the idea of a toilet that carries waste away with water",
+  "type": "pinmap",
+  "template": "pinmap",
+  "fields": {
+   "title": "Water carrying waste away",
+   "caption": "A toilet that carries waste away with water",
+   "pins": [
+    {
+     "name": "Palace of Knossos",
+     "lat": 35.298,
+     "lon": 25.1631,
+     "sub": "Island of Crete",
+     "pulse": true,
+     "at": 0.2
+    },
+    {
+     "name": "Mohenjo-daro",
+     "lat": 27.329,
+     "lon": 68.139,
+     "sub": "Indus Valley",
+     "pulse": true,
+     "at": 0.6
+    }
+   ],
+   "labels": [
+    {
+     "name": "Mediterranean Sea",
+     "lat": 33.8,
+     "lon": 19.0,
+     "kind": "sea",
+     "size": 30
+    },
+    {
+     "name": "Egypt",
+     "lat": 26.5,
+     "lon": 30.0,
+     "kind": "region",
+     "size": 30
+    },
+    {
+     "name": "Iran",
+     "lat": 32.5,
+     "lon": 54.0,
+     "kind": "region",
+     "size": 34
+    },
+    {
+     "name": "Pakistan",
+     "lat": 30.8,
+     "lon": 69.8,
+     "kind": "region",
+     "size": 28
+    },
+    {
+     "name": "Arabian Sea",
+     "lat": 21.5,
+     "lon": 64.0,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "from": false,
+   "span": 8,
+   "rivers": true,
+   "borders": true
+  },
+  "visual": "Same wide map, no fly-in: both pins pulse.",
+  "source": null
+ },
+ {
+  "id": "03-n",
   "section": "03",
   "section_name": "Knossos",
   "text": "is a lot older than Thomas Crapper, it's thousands of years older.",
   "type": "datecard",
   "template": "datecard",
   "fields": {
+   "kicker": "Water carrying waste away",
    "left_label": "Water-flushed latrines at Knossos",
    "left_date": "About 1700 to 1450 BC",
    "right_label": "Crapper's patents",
    "right_date": "Late 1800s",
    "gap": "thousands of years older",
-   "kicker": "Water carrying waste away",
    "firsttag": false
   },
-  "visual": "Datecard: Knossos versus Crapper, gap in the script's words.",
+  "visual": "A line draws between the two dates, then the gap label appears.",
   "source": null
  },
  {
@@ -747,45 +866,51 @@
   "section": "04",
   "section_name": "Harington, 1596",
   "text": "But if you want the thing we'd actually recognise, a bowl fed by a tank of water,",
-  "type": "flow",
-  "template": "flow",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "title": "A cistern-fed bowl",
-   "steps": [
-    {
-     "label": "A tank of water",
-     "sub": "The cistern"
-    },
-    {
-     "label": "You let the water go",
-     "sub": ""
-    },
-    {
-     "label": "It flushes the bowl",
-     "sub": ""
-    }
-   ],
-   "step": 1,
-   "highlight": 0,
-   "caption": "What a cistern does"
+   "kind": "engraving",
+   "label": "Harington's flushing toilet, as shown in The Metamorphosis of Ajax (engraving)",
+   "lower": "Harington's flush toilet, from The Metamorphosis of Ajax (engraving)",
+   "asset": "commons-wikimedia-org-wiki-file-a-new-discourse-of-a-stale-s",
+   "zoom": {
+    "scale": 1.15,
+    "x": 50,
+    "y": 50
+   },
+   "crop": "Wide, slow push-in"
   },
-  "visual": "Flow build, step 1: a bowl fed by a tank of water.",
-  "source": null
+  "visual": "Slow push-in on the engraving of Harington's design: a bowl fed by a tank.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:A New Discourse of a Stale Subject, called the Metamorphosis of Ajax - Harington's flush toilet.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:A_New_Discourse_of_a_Stale_Subject,_called_the_Metamorphosis_of_Ajax_-_Harington's_flush_toilet.jpg",
+   "rights": "Public domain: published before 1 January 1931 and author died more than 100 years ago, as stated on the file page",
+   "credit": "Harington's flush toilet, from A New Discourse of a Stale Subject, called the Metamorphosis of Ajax, via Wikimedia Commons",
+   "verified": true
+  },
+  "notes": "Confirm on the file page which edition the engraving comes from before the lower-third wording is final."
  },
  {
   "id": "04-b",
   "section": "04",
   "section_name": "Harington, 1596",
-  "text": "the name you want is Sir John Harington. In 1596, Harington built a flushing toilet with a cistern",
+  "text": "the name you want is Sir John Harington.",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "portrait",
    "label": "Sir John Harington (portrait)",
    "lower": "Sir John Harington",
-   "asset": "commons-wikimedia-org-wiki-file-hieronimo-custodis-portrait"
+   "asset": "commons-wikimedia-org-wiki-file-hieronimo-custodis-portrait",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 35
+   },
+   "crop": "Slow push-in on the face"
   },
-  "visual": "Harington portrait, slow push-in on the name.",
+  "visual": "Harington portrait, lower-third names him.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Hieronimo Custodis - Portrait of Sir John Harrington.Jpeg",
@@ -799,97 +924,129 @@
   "id": "04-c",
   "section": "04",
   "section_name": "Harington, 1596",
-  "text": "for Queen Elizabeth I, and a cistern is just the tank,",
-  "type": "archival",
-  "template": "archival",
+  "text": "In 1596, Harington built a flushing toilet with a cistern for Queen Elizabeth I,",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "kind": "painting",
-   "label": "Queen Elizabeth I (Darnley Portrait)",
-   "lower": "Queen Elizabeth I",
-   "asset": "commons-wikimedia-org-wiki-file-elizabeth-i-darnley-portrait"
+   "title": "Harington, 1596",
+   "caption": "Kelston, near Bath: Harington's house",
+   "pins": [
+    {
+     "name": "Kelston, near Bath",
+     "lat": 51.4048,
+     "lon": -2.4256,
+     "sub": "Sir John Harington's house",
+     "pulse": true,
+     "at": 1.2
+    }
+   ],
+   "labels": [
+    {
+     "name": "England",
+     "lat": 52.9,
+     "lon": -1.6,
+     "kind": "region",
+     "size": 40
+    },
+    {
+     "name": "Wales",
+     "lat": 52.2,
+     "lon": -3.9,
+     "kind": "region",
+     "size": 30
+    },
+    {
+     "name": "English Channel",
+     "lat": 50.1,
+     "lon": -1.6,
+     "kind": "sea",
+     "size": 26
+    },
+    {
+     "name": "Bristol Channel",
+     "lat": 51.3,
+     "lon": -4.3,
+     "kind": "sea",
+     "size": 22
+    },
+    {
+     "name": "London",
+     "lat": 51.5074,
+     "lon": -0.1278,
+     "kind": "city",
+     "size": 26,
+     "fit": true
+    }
+   ],
+   "from": {
+    "lat": 53.0,
+    "lon": -3.0,
+    "span": 9
+   },
+   "span": 2.5,
+   "rivers": true,
+   "borders": true
   },
-  "visual": "Elizabeth I portrait, slow push-out.",
-  "source": {
-   "institution": "Wikimedia Commons (National Portrait Gallery, London)",
-   "item": "File:Elizabeth I Darnley Portrait.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Elizabeth_I_Darnley_Portrait.jpg",
-   "rights": "Public domain photographic reproduction, as described in the search result; re-read the file page tag before use",
-   "credit": "Darnley Portrait of Elizabeth I, National Portrait Gallery, London, via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Map flies from England to the Bath area and drops a pin on Harington's house.",
+  "source": null,
+  "notes": "Kelston is Harington's house per places.json (medium confidence; the house does not survive, so the pin is the village). The caption does not say where the Queen's toilet stood."
  },
  {
   "id": "04-d",
   "section": "04",
   "section_name": "Harington, 1596",
-  "text": "the water sits up there and when you let it go",
-  "type": "flow",
-  "template": "flow",
+  "text": "and a cistern is just the tank, the water sits up there",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "A cistern-fed bowl",
-   "steps": [
-    {
-     "label": "A tank of water",
-     "sub": "The cistern"
-    },
-    {
-     "label": "You let the water go",
-     "sub": ""
-    },
-    {
-     "label": "It flushes the bowl",
-     "sub": ""
+   "scene": "toilet_cistern",
+   "tag": "ILLUSTRATION · Simplified diagram of a cistern-fed bowl",
+   "params": {
+    "title": "A cistern-fed bowl",
+    "at": {
+     "cistern": 0.3,
+     "bowl": 30,
+     "pull": 30
     }
-   ],
-   "step": 2,
-   "highlight": 1,
-   "caption": "What a cistern does"
+   }
   },
-  "visual": "Flow build, step 2: you let the water go.",
+  "visual": "Diagram: the tank sits above the bowl, full of water.",
   "source": null
  },
  {
   "id": "04-e",
   "section": "04",
   "section_name": "Harington, 1596",
-  "text": "it flushes the bowl. So that's a cistern-fed bowl, a working model,",
-  "type": "flow",
-  "template": "flow",
+  "text": "and when you let it go it flushes the bowl.",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "A cistern-fed bowl",
-   "steps": [
-    {
-     "label": "A tank of water",
-     "sub": "The cistern"
-    },
-    {
-     "label": "You let the water go",
-     "sub": ""
-    },
-    {
-     "label": "It flushes the bowl",
-     "sub": ""
+   "scene": "toilet_cistern",
+   "tag": "ILLUSTRATION · Simplified diagram of a cistern-fed bowl",
+   "params": {
+    "title": "A cistern-fed bowl",
+    "at": {
+     "cistern": 0.0,
+     "bowl": 0.2,
+     "pull": 1.1
     }
-   ],
-   "step": 3,
-   "highlight": 2,
-   "caption": "What a cistern does"
+   }
   },
-  "visual": "Flow build, step 3: it flushes the bowl.",
+  "visual": "Same diagram: the water lets go and flushes the bowl.",
   "source": null
  },
  {
   "id": "04-f",
   "section": "04",
   "section_name": "Harington, 1596",
-  "text": "built for the Queen of England, in 1596.",
+  "text": "So that's a cistern-fed bowl, a working model, built for the Queen of England, in 1596.",
   "type": "date",
   "template": "date",
   "fields": {
    "date": "1596",
-   "caption": "Harington builds a flushing toilet with a cistern for Queen Elizabeth I"
+   "caption": "A working model, built for the Queen of England"
   },
-  "visual": "Date stamp: 1596.",
+  "visual": "1596 stamps in.",
   "source": null
  },
  {
@@ -897,15 +1054,21 @@
   "section": "04",
   "section_name": "Harington, 1596",
   "text": "And he wrote about it, he described it in a pamphlet called The Metamorphosis of Ajax,",
-  "type": "document",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "document",
    "label": "The Metamorphosis of Ajax, Harington (1814 edition)",
    "lower": "The Metamorphosis of Ajax (1814 edition)",
-   "asset": "wellcomecollection-org-works-ez5d5rs4"
+   "asset": "wellcomecollection-org-works-ez5d5rs4",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 40
+   },
+   "crop": "Slow push-in on the title page"
   },
-  "visual": "Wellcome copy of the 1814 edition, slow push-in on the title.",
+  "visual": "Slow push-in on the Ajax pamphlet (1814 edition).",
   "source": {
    "institution": "Wellcome Collection",
    "item": "The metamorphosis of Ajax, a Cloacinean satire: with the Anatomy and Apology ... To which is added Ulysses upon Ajax (Sir John Harington, Chiswick: C. Whittingham, 1814)",
@@ -914,31 +1077,33 @@
    "credit": "The metamorphosis of Ajax (1814 edition), Wellcome Collection",
    "verified": true
   },
-  "notes": "This is a later edition, not the 1596 printing, and the lower says so. If a 1596 title page with a clear license turns up (British Library, Huntington, Library of Congress catalogue it), swap it in."
+  "notes": "This is a later edition, not the 1596 printing, and the lower says so."
  },
  {
   "id": "04-h",
   "section": "04",
   "section_name": "Harington, 1596",
   "text": "so it's not some legend that got attached to him later, it's on paper, in 1596.",
-  "type": "archival",
-  "template": "archival",
+  "type": "flow",
+  "template": "flow",
   "fields": {
-   "kind": "engraving",
-   "label": "Harington's flushing toilet, as shown in The Metamorphosis of Ajax (engraving)",
-   "lower": "Harington's flush toilet, from The Metamorphosis of Ajax (engraving)",
-   "asset": "commons-wikimedia-org-wiki-file-a-new-discourse-of-a-stale-s"
+   "title": "Legend or record?",
+   "steps": [
+    {
+     "label": "Not some legend that got attached to him later",
+     "sub": ""
+    },
+    {
+     "label": "It's on paper",
+     "sub": "In 1596"
+    }
+   ],
+   "arrows": false,
+   "highlight": 1,
+   "caption": "Described in The Metamorphosis of Ajax"
   },
-  "visual": "Engraving of Harington's toilet design, slow pan.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:A New Discourse of a Stale Subject, called the Metamorphosis of Ajax - Harington's flush toilet.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:A_New_Discourse_of_a_Stale_Subject,_called_the_Metamorphosis_of_Ajax_-_Harington's_flush_toilet.jpg",
-   "rights": "Public domain: published before 1 January 1931 and author died more than 100 years ago, as stated on the file page",
-   "credit": "Harington's flush toilet, from A New Discourse of a Stale Subject, called the Metamorphosis of Ajax, via Wikimedia Commons",
-   "verified": true
-  },
-  "notes": "Confirm on the file page which edition the engraving comes from before the lower-third wording is final."
+  "visual": "Two boxes: not a later legend, it's on paper.",
+  "source": null
  },
  {
   "id": "04-i",
@@ -948,31 +1113,37 @@
   "type": "datecard",
   "template": "datecard",
   "fields": {
+   "kicker": "Flushing toilet with a cistern",
    "left_label": "Harington's flushing toilet with a cistern",
    "left_date": "1596",
    "right_label": "Crapper's patents",
    "right_date": "Late 1800s",
    "gap": "nearly three centuries",
-   "kicker": "Flushing toilet with a cistern",
    "firsttag": false
   },
-  "visual": "Datecard: 1596 versus the late 1800s, gap in the script's words.",
+  "visual": "Line draws from 1596 to the late 1800s, gap label lands.",
   "source": null
  },
  {
   "id": "04-j",
   "section": "04",
   "section_name": "Harington, 1596",
-  "text": "built for a queen, right? If anybody gets to be called the inventor",
+  "text": "built for a queen, right? If anybody gets to be called the inventor of the flush toilet",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "painting",
    "label": "Queen Elizabeth I (Darnley Portrait)",
    "lower": "Queen Elizabeth I",
-   "asset": "commons-wikimedia-org-wiki-file-elizabeth-i-darnley-portrait"
+   "asset": "commons-wikimedia-org-wiki-file-elizabeth-i-darnley-portrait",
+   "zoom": {
+    "scale": 1.9,
+    "x": 50,
+    "y": 22
+   },
+   "crop": "Tight on the face (wider on the first use in 01-e)"
   },
-  "visual": "Elizabeth I portrait again, slow push-in.",
+  "visual": "Close push-in on Elizabeth I.",
   "source": {
    "institution": "Wikimedia Commons (National Portrait Gallery, London)",
    "item": "File:Elizabeth I Darnley Portrait.jpg",
@@ -986,14 +1157,14 @@
   "id": "04-k",
   "section": "04",
   "section_name": "Harington, 1596",
-  "text": "of the flush toilet with a tank, it's a lot closer to Harington than it is to Crapper.",
+  "text": "with a tank, it's a lot closer to Harington than it is to Crapper.",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "If anyone is the inventor, Harington is closer",
-   "sub": "Of the flush toilet with a tank"
+   "headline": "Closer to Harington than to Crapper",
+   "sub": "For the flush toilet with a tank"
   },
-  "visual": "Text card; 'if anybody' is kept in the headline.",
+  "visual": "Kinetic words.",
   "source": null
  },
  {
@@ -1007,202 +1178,169 @@
    "headline": "A flushing toilet isn't the whole job",
    "sub": ""
   },
-  "visual": "Text card.",
+  "visual": "Kinetic words.",
   "source": null
  },
  {
   "id": "05-b",
   "section": "05",
   "section_name": "Cumming and the S-Bend",
-  "text": "If you've got a pipe running straight from your bathroom down to a sewer,",
-  "type": "flow",
-  "template": "flow",
+  "text": "If you've got a pipe running straight from your bathroom down to a sewer, you've also got a pipe",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "A straight pipe",
-   "steps": [
-    {
-     "label": "Your bathroom",
-     "sub": ""
-    },
-    {
-     "label": "A pipe straight down",
-     "sub": "To a sewer"
-    },
-    {
-     "label": "The sewer",
-     "sub": ""
-    },
-    {
-     "label": "A pipe straight back up",
-     "sub": "Into your bathroom"
-    },
-    {
-     "label": "Everything that smells",
-     "sub": "Comes right back up it"
+   "scene": "pipe_straight",
+   "tag": "ILLUSTRATION · Simplified diagram, not to scale",
+   "params": {
+    "title": "A pipe straight to the sewer",
+    "at": {
+     "down": 0.8,
+     "up": 30
     }
-   ],
-   "step": 3,
-   "highlight": 1,
-   "caption": "Why a flush isn't enough"
+   }
   },
-  "visual": "Flow build, steps 1 to 3: bathroom, pipe down, sewer.",
+  "visual": "Cross-section: bathroom, a straight pipe and the sewer; waste goes down.",
   "source": null
  },
  {
   "id": "05-c",
   "section": "05",
   "section_name": "Cumming and the S-Bend",
-  "text": "you've also got a pipe running straight from the sewer back up into your bathroom,",
-  "type": "flow",
-  "template": "flow",
+  "text": "running straight from the sewer back up into your bathroom, and everything that smells comes right back up it.",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "A straight pipe",
-   "steps": [
-    {
-     "label": "Your bathroom",
-     "sub": ""
-    },
-    {
-     "label": "A pipe straight down",
-     "sub": "To a sewer"
-    },
-    {
-     "label": "The sewer",
-     "sub": ""
-    },
-    {
-     "label": "A pipe straight back up",
-     "sub": "Into your bathroom"
-    },
-    {
-     "label": "Everything that smells",
-     "sub": "Comes right back up it"
+   "scene": "pipe_straight",
+   "tag": "ILLUSTRATION · Simplified diagram, not to scale",
+   "params": {
+    "title": "A pipe straight to the sewer",
+    "at": {
+     "down": 0.2,
+     "up": 3.0
     }
-   ],
-   "step": 4,
-   "highlight": 3,
-   "caption": "Why a flush isn't enough"
+   }
   },
-  "visual": "Flow build, step 4: the pipe back up.",
+  "visual": "Same diagram: the smell rises straight back up the pipe.",
   "source": null
  },
  {
   "id": "05-d",
   "section": "05",
   "section_name": "Cumming and the S-Bend",
-  "text": "and everything that smells comes right back up it.",
-  "type": "flow",
-  "template": "flow",
+  "text": "The fix for that is the S-bend, a bend in the pipe",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "A straight pipe",
-   "steps": [
-    {
-     "label": "Your bathroom",
-     "sub": ""
-    },
-    {
-     "label": "A pipe straight down",
-     "sub": "To a sewer"
-    },
-    {
-     "label": "The sewer",
-     "sub": ""
-    },
-    {
-     "label": "A pipe straight back up",
-     "sub": "Into your bathroom"
-    },
-    {
-     "label": "Everything that smells",
-     "sub": "Comes right back up it"
+   "scene": "sbend",
+   "tag": "ILLUSTRATION · Simplified diagram, not to scale",
+   "params": {
+    "title": "The S-bend",
+    "at": {
+     "water": 30,
+     "smell": 30
     }
-   ],
-   "step": 5,
-   "highlight": 4,
-   "caption": "Why a flush isn't enough"
+   }
   },
-  "visual": "Flow build, step 5: the smell comes back up.",
+  "visual": "The straight pipe is replaced by a bent pipe.",
   "source": null
  },
  {
   "id": "05-e",
   "section": "05",
   "section_name": "Cumming and the S-Bend",
-  "text": "The fix for that is the S-bend, a bend in the pipe",
-  "type": "flow",
-  "template": "flow",
+  "text": "that holds a little water in it all the time, and that water blocks the smell from coming back up.",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "The S-bend",
-   "steps": [
-    {
-     "label": "A bend in the pipe",
-     "sub": ""
-    },
-    {
-     "label": "It holds a little water",
-     "sub": "All the time"
-    },
-    {
-     "label": "The water blocks the smell",
-     "sub": "It can't come back up"
+   "scene": "sbend",
+   "tag": "ILLUSTRATION · Simplified diagram, not to scale",
+   "params": {
+    "title": "The S-bend",
+    "at": {
+     "water": 0.3,
+     "smell": 4.4
     }
-   ],
-   "step": 1,
-   "highlight": 0,
-   "caption": "The fix"
+   }
   },
-  "visual": "Flow build, step 1: the S-bend, a bend in the pipe.",
+  "visual": "Water settles in the bend, then the smell rises and is blocked.",
   "source": null
  },
  {
   "id": "05-f",
   "section": "05",
   "section_name": "Cumming and the S-Bend",
-  "text": "that holds a little water in it all the time,",
-  "type": "flow",
-  "template": "archival",
+  "text": "And the S-bend was patented in 1775 by a man named Alexander Cumming.",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "kind": "patent",
-   "label": "Alexander Cumming's S-bend flush toilet patent, 1775 (patent drawing)",
-   "lower": "Alexander Cumming's S-bend, 1775 (patent drawing)",
-   "asset": "commons-wikimedia-org-wiki-file-cummings-s-bend-jpg",
-   "crop": "Push-in on the bend in the pipe",
-   "zoom": {
-    "scale": 1.6,
-    "x": 50,
-    "y": 60
-   }
+   "title": "London, 1775",
+   "caption": "S-bend patented, 1775",
+   "pins": [
+    {
+     "name": "Bond Street, London",
+     "lat": 51.5115,
+     "lon": -0.1425,
+     "sub": "Alexander Cumming, 1775",
+     "pulse": true,
+     "at": 1.3
+    }
+   ],
+   "labels": [
+    {
+     "name": "England",
+     "lat": 52.8,
+     "lon": -1.8,
+     "kind": "region",
+     "size": 40
+    },
+    {
+     "name": "English Channel",
+     "lat": 50.2,
+     "lon": -0.6,
+     "kind": "sea",
+     "size": 26
+    },
+    {
+     "name": "North Sea",
+     "lat": 53.0,
+     "lon": 2.8,
+     "kind": "sea",
+     "size": 26
+    }
+   ],
+   "from": {
+    "lat": 53.0,
+    "lon": -2.0,
+    "span": 9
+   },
+   "span": 3,
+   "rivers": true,
+   "borders": true
   },
-  "visual": "Push-in on the bend in the pipe",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Cummings S-bend.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Cummings_S-bend.jpg",
-   "rights": "Public domain: published before 1 January 1931; Creative Commons Public Domain Mark 1.0, as stated on the file page",
-   "credit": "Alexander Cumming's S-bend flush toilet patent, 1775, via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Map flies in on London; a pin on Bond Street carries Cumming's name and 1775.",
+  "source": null,
+  "notes": "Bond Street is Cumming's watch-shop street per places.json (medium confidence, no street number). The narration only says he patented it; the pin is a place label, not a claim about where."
  },
  {
   "id": "05-g",
   "section": "05",
   "section_name": "Cumming and the S-Bend",
-  "text": "and that water blocks the smell from coming back up.",
-  "type": "flow",
+  "text": "So the key piece that makes an indoor toilet livable",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "patent",
    "label": "Alexander Cumming's S-bend flush toilet patent, 1775 (patent drawing)",
-   "lower": "The water in the bend blocks the smell",
+   "lower": "Alexander Cumming's S-bend patent, 1775 (patent drawing)",
    "asset": "commons-wikimedia-org-wiki-file-cummings-s-bend-jpg",
-   "crop": "Closer still on the water held in the bend",
    "zoom": {
-    "scale": 2.2,
+    "scale": 1.6,
     "x": 50,
-    "y": 65
-   }
+    "y": 60
+   },
+   "crop": "Push-in on the bend in the pipe"
   },
-  "visual": "Closer still on the water held in the bend",
+  "visual": "Slow push-in on the S-bend in Cumming's patent drawing.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Cummings S-bend.jpg",
@@ -1216,67 +1354,15 @@
   "id": "05-h",
   "section": "05",
   "section_name": "Cumming and the S-Bend",
-  "text": "And the S-bend was patented in 1775 by a man named Alexander Cumming.",
-  "type": "archival",
-  "template": "archival",
+  "text": "was patented in 1775, long before Thomas Crapper was making toilets.",
+  "type": "stat",
+  "template": "stat",
   "fields": {
-   "kind": "portrait",
-   "label": "Alexander Cumming",
-   "lower": "Alexander Cumming, S-bend patent, 1775",
-   "asset": "commons-wikimedia-org-wiki-file-alexander-cumming-clockmaker"
+   "number": "1775",
+   "label": "Alexander Cumming patents the S-bend",
+   "sub": "Long before Thomas Crapper was making toilets"
   },
-  "visual": "Cumming portrait with the date lower-third.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Alexander Cumming Clockmaker.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Alexander_Cumming_Clockmaker.jpg",
-   "rights": "Not stated in the search result (portrait dated before 1814, so public domain is likely); read the file page",
-   "credit": "Portrait of Alexander Cumming, via Wikimedia Commons (confirm on the file page)",
-   "verified": false
-  },
-  "notes": "Rights not confirmed; if unusable, use the S-bend patent drawing here and drop the portrait."
- },
- {
-  "id": "05-i",
-  "section": "05",
-  "section_name": "Cumming and the S-Bend",
-  "text": "So the key piece that makes an indoor toilet livable was patented in 1775,",
-  "type": "document",
-  "template": "archival",
-  "fields": {
-   "kind": "patent",
-   "label": "Alexander Cumming's S-bend flush toilet patent, 1775 (patent drawing)",
-   "lower": "Alexander Cumming's S-bend patent, 1775 (patent drawing)",
-   "asset": "commons-wikimedia-org-wiki-file-cummings-s-bend-jpg",
-   "crop": "Full drawing, held wide"
-  },
-  "visual": "Cumming's patent drawing, slow pan.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Cummings S-bend.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Cummings_S-bend.jpg",
-   "rights": "Public domain: published before 1 January 1931; Creative Commons Public Domain Mark 1.0, as stated on the file page",
-   "credit": "Alexander Cumming's S-bend flush toilet patent, 1775, via Wikimedia Commons",
-   "verified": true
-  }
- },
- {
-  "id": "05-j",
-  "section": "05",
-  "section_name": "Cumming and the S-Bend",
-  "text": "long before Thomas Crapper was making toilets.",
-  "type": "datecard",
-  "template": "datecard",
-  "fields": {
-   "left_label": "Cumming patents the S-bend",
-   "left_date": "1775",
-   "right_label": "Crapper's work on toilets",
-   "right_date": "Late 1800s",
-   "gap": "long before",
-   "kicker": "The S-bend and Crapper",
-   "firsttag": false
-  },
-  "visual": "Datecard: 1775 versus the late 1800s.",
+  "visual": "1775 stamps in.",
   "source": null
  },
  {
@@ -1288,11 +1374,17 @@
   "template": "archival",
   "fields": {
    "kind": "portrait",
-   "label": "Thomas Crapper, sanitary engineer",
-   "lower": "Thomas Crapper, sanitary engineer",
-   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg"
+   "label": "Thomas Crapper",
+   "lower": "Thomas Crapper",
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "zoom": {
+    "scale": 1.35,
+    "x": 62,
+    "y": 45
+   },
+   "crop": "Right of centre, medium push-in"
   },
-  "visual": "Crapper portrait, slow push-in.",
+  "visual": "Medium push-in on the Crapper portrait.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Thomas Crapper.jpg",
@@ -1307,33 +1399,53 @@
   "section": "06",
   "section_name": "What Crapper Actually Did",
   "text": "he's a real sanitary engineer who did real work.",
-  "type": "text",
-  "template": "text",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "headline": "A real sanitary engineer who did real work",
-   "sub": ""
+   "title": "Crapper, sanitary engineer",
+   "caption": "A real sanitary engineer who did real work",
+   "pins": [
+    {
+     "name": "Chelsea, London",
+     "lat": 51.4915,
+     "lon": -0.1685,
+     "sub": "Thomas Crapper, sanitary engineer",
+     "pulse": true,
+     "at": 1.0
+    }
+   ],
+   "labels": [
+    {
+     "name": "England",
+     "lat": 51.95,
+     "lon": -1.4,
+     "kind": "region",
+     "size": 36
+    }
+   ],
+   "from": {
+    "lat": 52.5,
+    "lon": -1.8,
+    "span": 5
+   },
+   "span": 1.2,
+   "rivers": true,
+   "borders": true
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Map flies in on London and drops a pin in Chelsea.",
+  "source": null,
+  "notes": "places.json marks the Chelsea coordinate low confidence, so it is labelled 'Chelsea, London' only, no street."
  },
  {
   "id": "06-c",
   "section": "06",
   "section_name": "What Crapper Actually Did",
-  "text": "He came along in the late 1800s, and he held patents on improvements, things like the ballcock,",
+  "text": "He came along in the late 1800s, and he held patents on improvements,",
   "type": "timeline",
   "template": "timeline",
   "fields": {
    "title": "Where Crapper fits",
    "events": [
-    {
-     "date": "Even earlier",
-     "label": "Indus Valley"
-    },
-    {
-     "date": "About 1700 to 1450 BC",
-     "label": "Knossos"
-    },
     {
      "date": "1596",
      "label": "Harington"
@@ -1347,85 +1459,74 @@
      "label": "Crapper: improvements"
     }
    ],
-   "highlight": 4,
-   "step": 5
+   "highlight": 2
   },
-  "visual": "Timeline of the five dates already narrated, Crapper's lit.",
+  "visual": "Timeline draws left to right, and Crapper's late 1800s lights up last.",
   "source": null,
-  "notes": "Every event shown has already been narrated by this point (Knossos and Indus in 03, Harington in 04, Cumming in 05)."
+  "notes": "No scale:years here: 'Late 1800s' has no single year, so it would be plotted at 1800 and shrink the Cumming-to-Crapper gap."
  },
  {
   "id": "06-d",
   "section": "06",
   "section_name": "What Crapper Actually Did",
-  "text": "which is the float in the tank that shuts the water off when the tank is full,",
-  "type": "flow",
-  "template": "flow",
+  "text": "things like the ballcock, which is the float in the tank that shuts the water off when the tank is full, and on fittings.",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "The ballcock",
-   "steps": [
-    {
-     "label": "The float in the tank",
-     "sub": "A ballcock"
-    },
-    {
-     "label": "The tank is full",
-     "sub": ""
-    },
-    {
-     "label": "The float shuts the water off",
-     "sub": ""
-    }
-   ],
-   "step": 3,
-   "highlight": 2,
-   "caption": "What a ballcock does"
+   "scene": "ballcock",
+   "tag": "ILLUSTRATION · Simplified diagram of a ballcock",
+   "params": {
+    "title": "The ballcock"
+   }
   },
-  "visual": "Three-box flow: the float in the tank shuts the water off when it's full.",
+  "visual": "Tank fills, the float rises and the water shuts off.",
   "source": null
  },
  {
   "id": "06-e",
   "section": "06",
   "section_name": "What Crapper Actually Did",
-  "text": "and on fittings. So he made the toilet better, he really did, he just didn't invent it.",
-  "type": "document",
-  "template": "archival",
+  "text": "So he made the toilet better, he really did, he just didn't invent it.",
+  "type": "flow",
+  "template": "flow",
   "fields": {
-   "kind": "portrait",
-   "label": "Thomas Crapper",
-   "lower": "Thomas Crapper",
-   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
-   "crop": "Slow push-in from the full portrait",
-   "zoom": {
-    "scale": 1.3,
-    "x": 50,
-    "y": 40
-   }
+   "title": "What Crapper did",
+   "steps": [
+    {
+     "label": "He made the toilet better",
+     "sub": "He really did"
+    },
+    {
+     "label": "He didn't invent it",
+     "sub": ""
+    }
+   ],
+   "arrows": false,
+   "highlight": 1,
+   "caption": "A real engineer, not the inventor"
   },
-  "visual": "Crapper portrait, slow push-in: he made the toilet better.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Thomas Crapper.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
-   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
-   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
-   "verified": true
-  },
-  "notes": "Illustration of what a ballcock patent looks like. The lower says plainly it is not Crapper's. Skip if the label feels clumsy; a text card works."
+  "visual": "Two boxes: made it better, didn't invent it.",
+  "source": null
  },
  {
   "id": "06-f",
   "section": "06",
   "section_name": "What Crapper Actually Did",
   "text": "And what about the word? Well, \"crap\" as a word is older than he is,",
-  "type": "text",
-  "template": "text",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "headline": "The word \"crap\" is older than Crapper",
-   "sub": ""
+   "left_title": "The word \"crap\"",
+   "left_lines": [
+    "Older than Crapper"
+   ],
+   "right_title": "Thomas Crapper",
+   "right_lines": [
+    "Not where the word came from"
+   ],
+   "step": 1
   },
-  "visual": "Text card.",
+  "visual": "Compare card: the word on the left, the right side ghosted.",
   "source": null
  },
  {
@@ -1433,13 +1534,20 @@
   "section": "06",
   "section_name": "What Crapper Actually Did",
   "text": "so he's not where the word came from.",
-  "type": "text",
-  "template": "text",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "headline": "Crapper isn't where \"crap\" came from",
-   "sub": ""
+   "left_title": "The word \"crap\"",
+   "left_lines": [
+    "Older than Crapper"
+   ],
+   "right_title": "Thomas Crapper",
+   "right_lines": [
+    "Not where the word came from"
+   ],
+   "step": 2
   },
-  "visual": "Text card.",
+  "visual": "Compare card: the right side is revealed.",
   "source": null
  },
  {
@@ -1447,24 +1555,101 @@
   "section": "06",
   "section_name": "What Crapper Actually Did",
   "text": "The word \"crapper\" for the toilet may come from American troops in 1917,",
-  "type": "archival",
-  "template": "archival",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "kind": "photo",
-   "label": "American troops marching through London, 1917 (illustrative photograph)",
-   "lower": "American troops in London, 1917 (illustrative photograph)",
-   "asset": "loc-gov-item-2004682822"
+   "title": "1917",
+   "caption": "The word \"crapper\" may come from American troops in 1917",
+   "pins": [],
+   "routes": [
+    {
+     "points": [
+      [
+       40.4,
+       -73.9
+      ],
+      [
+       41.5,
+       -60.0
+      ],
+      [
+       44.0,
+       -45.0
+      ],
+      [
+       47.0,
+       -30.0
+      ],
+      [
+       49.0,
+       -18.0
+      ],
+      [
+       49.8,
+       -9.0
+      ],
+      [
+       50.0,
+       -4.8
+      ],
+      [
+       49.9,
+       -3.0
+      ],
+      [
+       50.2,
+       -1.6
+      ],
+      [
+       50.7,
+       -1.1
+      ]
+     ],
+     "style": "dash",
+     "icon": "ship",
+     "label": "American troops, 1917",
+     "lx": -40,
+     "ly": -50,
+     "at": 1.0,
+     "dur": 3.2
+    }
+   ],
+   "labels": [
+    {
+     "name": "United States",
+     "lat": 39.5,
+     "lon": -98.0,
+     "kind": "region",
+     "size": 34
+    },
+    {
+     "name": "Atlantic Ocean",
+     "lat": 43.0,
+     "lon": -40.0,
+     "kind": "sea",
+     "size": 36
+    },
+    {
+     "name": "England",
+     "lat": 53.2,
+     "lon": -1.0,
+     "kind": "region",
+     "size": 30
+    }
+   ],
+   "from": {
+    "lat": 46.0,
+    "lon": -30.0,
+    "span": 70
+   },
+   "span": 20,
+   "rivers": false,
+   "borders": true,
+   "note": "Schematic route · Coastlines: Natural Earth"
   },
-  "visual": "Photo of American troops in London in 1917, slow push-in.",
-  "source": {
-   "institution": "Library of Congress, Prints and Photographs Division",
-   "item": "U.S. troops marching through London for the first time in history",
-   "url": "https://www.loc.gov/item/2004682822",
-   "rights": "Not stated in the search result; read the LOC rights statement on the item page",
-   "credit": "U.S. troops marching through London, c. 17 September 1917 (stereograph published by Realistic Travels), Library of Congress",
-   "verified": false
-  },
-  "notes": "Illustrative only: it shows the troops, not any toilets or cisterns, and the lower says so."
+  "visual": "A dashed ship route crosses the Atlantic from the United States to England. Caption keeps the 'may'.",
+  "source": null,
+  "notes": "Route is schematic: no port is named, and the narration gives no route. The 'may' is carried by the caption."
  },
  {
   "id": "06-i",
@@ -1474,10 +1659,10 @@
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "The word \"crapper\" may come from 1917 troops",
-   "sub": "A \"may\", not a for-sure"
+   "headline": "A \"may\", not a for-sure",
+   "sub": "Seeing T. Crapper on toilet cisterns"
   },
-  "visual": "Text card; the hedge sits in the headline.",
+  "visual": "Kinetic words: a may, not a for-sure.",
   "source": null
  },
  {
@@ -1485,21 +1670,21 @@
   "section": "06",
   "section_name": "What Crapper Actually Did",
   "text": "but it's a nice idea, that the name on the tank is where the slang came from.",
-  "type": "text",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "photo",
    "label": "American troops marching through London, 1917 (illustrative photograph)",
    "lower": "American troops in London, 1917 (illustrative photograph)",
    "asset": "loc-gov-item-2004682822",
-   "crop": "Different crop, slow push-out",
    "zoom": {
-    "scale": 1.5,
-    "x": 60,
-    "y": 45
-   }
+    "scale": 1.15,
+    "x": 50,
+    "y": 50
+   },
+   "crop": "Slow push-in"
   },
-  "visual": "Different crop, slow push-out",
+  "visual": "Slow push-in on the 1917 photo of American troops in London.",
   "source": {
    "institution": "Library of Congress, Prints and Photographs Division",
    "item": "U.S. troops marching through London for the first time in history",
@@ -1507,78 +1692,65 @@
    "rights": "Not stated in the search result; read the LOC rights statement on the item page",
    "credit": "U.S. troops marching through London, c. 17 September 1917 (stereograph published by Realistic Travels), Library of Congress",
    "verified": false
-  }
+  },
+  "notes": "Illustrative only: it shows the troops, not any toilets or cisterns, and the lower says so. Rights on this photo are unconfirmed."
  },
  {
   "id": "06-k",
   "section": "06",
   "section_name": "What Crapper Actually Did",
   "text": "So his name may well be in the slang, it's just not because he invented the thing.",
-  "type": "archival",
-  "template": "archival",
+  "type": "text",
+  "template": "text",
   "fields": {
-   "kind": "portrait",
-   "label": "Thomas Crapper",
-   "lower": "Thomas Crapper",
-   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
-   "crop": "Slow push-in",
-   "zoom": {
-    "scale": 1.3,
-    "x": 50,
-    "y": 35
-   }
+   "headline": "His name may well be in the slang",
+   "sub": "Just not because he invented it"
   },
-  "visual": "Slow push-in",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Thomas Crapper.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
-   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
-   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Kinetic words, keeping the 'may well'.",
+  "source": null
  },
  {
   "id": "07-a",
   "section": "07",
   "section_name": "Who Was First",
   "text": "So here's where it lands. Thomas Crapper was a real sanitary engineer",
-  "type": "archival",
-  "template": "archival",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "kind": "portrait",
-   "label": "Thomas Crapper, sanitary engineer",
-   "lower": "Thomas Crapper, sanitary engineer",
-   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
-   "crop": "Tight face crop, slow push-in",
-   "zoom": {
-    "scale": 1.8,
-    "x": 50,
-    "y": 30
-   }
+   "left_title": "Thomas Crapper",
+   "left_lines": [
+    "A real sanitary engineer"
+   ],
+   "right_title": "What he didn't do",
+   "right_lines": [
+    "Invent the toilet"
+   ],
+   "step": 1
   },
-  "visual": "Crapper portrait holds, no move.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Thomas Crapper.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
-   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
-   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Compare card: Crapper on the left, the right side ghosted.",
+  "source": null
  },
  {
   "id": "07-b",
   "section": "07",
   "section_name": "Who Was First",
   "text": "who patented improvements in the late 1800s, like the ballcock, and he didn't invent the toilet.",
-  "type": "text",
-  "template": "text",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "headline": "Crapper improved the toilet, he didn't invent it",
-   "sub": "Patented improvements in the late 1800s, like the ballcock"
+   "left_title": "Thomas Crapper",
+   "left_lines": [
+    "A real sanitary engineer",
+    "Patented improvements in the late 1800s",
+    "Like the ballcock"
+   ],
+   "right_title": "What he didn't do",
+   "right_lines": [
+    "Invent the toilet"
+   ],
+   "step": 2
   },
-  "visual": "Text card.",
+  "visual": "Compare card: the right side is revealed.",
   "source": null
  },
  {
@@ -1586,92 +1758,145 @@
   "section": "07",
   "section_name": "Who Was First",
   "text": "About 3,500 years ago the palace at Knossos was flushing waste with water into stone sewers,",
-  "type": "archival",
-  "template": "archival",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "kind": "photo",
-   "label": "Palace of Knossos, Crete (modern photograph)",
-   "lower": "Palace of Knossos, Crete (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-knossos-palace-jpg"
+   "scene": "knossos_drain",
+   "tag": "ILLUSTRATION · Simplified cross-section, not a reconstruction",
+   "params": {
+    "title": "Knossos, simplified",
+    "mode": "both",
+    "at": {
+     "rain": 0.3,
+     "pour": 1.2,
+     "flow": 1.5,
+     "c1": 99,
+     "c2": 3.0
+    }
+   }
   },
-  "visual": "Knossos photo, slow push-in.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Knossos palace.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Knossos_palace.jpg",
-   "rights": "CC BY-SA 4.0, as stated in the search result (photographer Theofanis Ampatzidis, 17 August 2017)",
-   "credit": "Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0",
-   "verified": true
-  }
+  "visual": "Cross-section again: water runs through the building into the stone sewer.",
+  "source": null
  },
  {
   "id": "07-d",
   "section": "07",
   "section_name": "Who Was First",
   "text": "and the Indus Valley had drained latrines even earlier.",
-  "type": "archival",
-  "template": "archival",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "kind": "photo",
-   "label": "Mohenjo-daro, an Indus Valley city (modern photograph)",
-   "lower": "Mohenjo-daro, an Indus Valley city (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-street-mohenjodaro-jpg"
+   "title": "Even earlier",
+   "caption": "Drained latrines in the Indus Valley, even earlier",
+   "pins": [
+    {
+     "name": "Palace of Knossos",
+     "lat": 35.298,
+     "lon": 25.1631,
+     "sub": "Island of Crete",
+     "pulse": true,
+     "at": 0.1
+    },
+    {
+     "name": "Mohenjo-daro",
+     "lat": 27.329,
+     "lon": 68.139,
+     "sub": "Indus Valley",
+     "pulse": true,
+     "at": 0.9
+    }
+   ],
+   "labels": [
+    {
+     "name": "Mediterranean Sea",
+     "lat": 33.8,
+     "lon": 19.0,
+     "kind": "sea",
+     "size": 30
+    },
+    {
+     "name": "Egypt",
+     "lat": 26.5,
+     "lon": 30.0,
+     "kind": "region",
+     "size": 30
+    },
+    {
+     "name": "Iran",
+     "lat": 32.5,
+     "lon": 54.0,
+     "kind": "region",
+     "size": 34
+    },
+    {
+     "name": "Pakistan",
+     "lat": 30.8,
+     "lon": 69.8,
+     "kind": "region",
+     "size": 28
+    },
+    {
+     "name": "Arabian Sea",
+     "lat": 21.5,
+     "lon": 64.0,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "from": {
+    "lat": 35.3,
+    "lon": 25.2,
+    "span": 5
+   },
+   "span": 8,
+   "rivers": true,
+   "borders": true
   },
-  "visual": "Mohenjo-daro photo, slow push-in.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Street - Mohenjodaro.JPG",
-   "url": "https://commons.wikimedia.org/wiki/File:Street_-_Mohenjodaro.JPG",
-   "rights": "Not stated in the search result (photographer Saqib Qayyum, 8 March 2014); read the file page license",
-   "credit": "Saqib Qayyum, via Wikimedia Commons (confirm license on the file page)",
-   "verified": false
-  }
+  "visual": "Map pulls out from Knossos to the Indus Valley.",
+  "source": null
  },
  {
   "id": "07-e",
   "section": "07",
   "section_name": "Who Was First",
   "text": "In 1596, Sir John Harington built a flushing toilet with a cistern for Queen Elizabeth I,",
-  "type": "archival",
-  "template": "archival",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "kind": "portrait",
-   "label": "Sir John Harington (portrait)",
-   "lower": "Sir John Harington",
-   "asset": "commons-wikimedia-org-wiki-file-hieronimo-custodis-portrait"
+   "scene": "toilet_cistern",
+   "tag": "ILLUSTRATION · Simplified diagram of a cistern-fed bowl",
+   "params": {
+    "title": "A cistern-fed bowl",
+    "at": {
+     "cistern": 0.3,
+     "bowl": 1.0,
+     "pull": 2.3
+    }
+   }
   },
-  "visual": "Harington portrait, slow push-in.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Hieronimo Custodis - Portrait of Sir John Harrington.Jpeg",
-   "url": "https://commons.wikimedia.org/wiki/File:Hieronimo_Custodis_-_Portrait_of_Sir_John_Harrington.Jpeg",
-   "rights": "Public domain: the artist died in 1593 (life plus 100 years or fewer), as stated on the file page",
-   "credit": "Hieronimo Custodis, Portrait of Sir John Harrington, via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Cistern diagram again: the tank lets go and flushes the bowl.",
+  "source": null
  },
  {
   "id": "07-f",
   "section": "07",
   "section_name": "Who Was First",
   "text": "and in 1775 Alexander Cumming patented the S-bend.",
-  "type": "document",
-  "template": "archival",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "kind": "patent",
-   "label": "Alexander Cumming's S-bend flush toilet patent, 1775 (patent drawing)",
-   "lower": "Alexander Cumming's S-bend patent, 1775 (patent drawing)",
-   "asset": "commons-wikimedia-org-wiki-file-cummings-s-bend-jpg"
+   "scene": "sbend",
+   "tag": "ILLUSTRATION · Simplified diagram, not to scale",
+   "params": {
+    "title": "The S-bend",
+    "at": {
+     "water": 0.2,
+     "smell": 1.3
+    }
+   }
   },
-  "visual": "Cumming's patent drawing, slow pan.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Cummings S-bend.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Cummings_S-bend.jpg",
-   "rights": "Public domain: published before 1 January 1931; Creative Commons Public Domain Mark 1.0, as stated on the file page",
-   "credit": "Alexander Cumming's S-bend flush toilet patent, 1775, via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "S-bend diagram again: the water blocks the smell.",
+  "source": null
  },
  {
   "id": "07-g",
@@ -1698,16 +1923,11 @@
     {
      "date": "1775",
      "label": "Cumming: S-bend"
-    },
-    {
-     "date": "Late 1800s",
-     "label": "Crapper: improvements"
     }
    ],
-   "highlight": null,
-   "step": 5
+   "highlight": null
   },
-  "visual": "Full timeline, all five dates, no single item lit.",
+  "visual": "Timeline draws and the somebodies pop in one by one.",
   "source": null
  },
  {
@@ -1720,7 +1940,7 @@
   "fields": {
    "line": "Somebody did it first."
   },
-  "visual": "End card holds on the channel line.",
+  "visual": "Series end card stamps in.",
   "source": null
  }
 ]
