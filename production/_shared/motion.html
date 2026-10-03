@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- engine: 96045c001bec87d68e03f6037ff26c4a (bump this only for changes that affect every template; for one template, delete those clips' .key files) -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -123,8 +124,8 @@ TPL.datecard = {
       <line x1="${x0}" y1="${y}" x2="${lerp(x0,x1,lp)}" y2="${y}" stroke="#1D1B18" stroke-width="6"/>
       <circle cx="${x0}" cy="${y}" r="${26*pinL}" fill="#A8261B"/>
       <circle cx="${x1}" cy="${y}" r="${26*pinR}" fill="#EFE7D6" stroke="#1D1B18" stroke-width="6" opacity="${pinR>0?1:0}"/>
-      <g opacity="${ll}" transform="translate(0,${(1-ll)*20})">${T(x0,y-150,f.left_label,38,'middle',800)}${T(x0,y-70,f.left_date,66,'middle',700,'#1D1B18','font-family="Libre Baskerville"')}</g>
-      <g opacity="${rl}" transform="translate(0,${(1-rl)*20})">${T(x1,y-150,f.right_label,38,'middle',800)}${T(x1,y-70,f.right_date,66,'middle',700,'#1D1B18','font-family="Libre Baskerville"')}</g>
+      <g opacity="${ll}" transform="translate(0,${(1-ll)*20})">${T(x0-40,y-150,f.left_label,38,'start',800)}${T(x0-40,y-70,f.left_date,66,'start',700,'#1D1B18','font-family="Libre Baskerville"')}</g>
+      <g opacity="${rl}" transform="translate(0,${(1-rl)*20})">${T(x1+40,y-150,f.right_label,38,'end',800)}${T(x1+40,y-70,f.right_date,66,'end',700,'#1D1B18','font-family="Libre Baskerville"')}</g>
       <g opacity="${gp}"><path d="M${x0},${y+60} v20 H${x1} v-20" fill="none" stroke="#A8261B" stroke-width="4"/>${T(960,y+150,(f.gap||'').toUpperCase(),50,'middle',900,'#A8261B','letter-spacing="4"')}</g>`; }
 };
 

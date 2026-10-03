@@ -8,7 +8,8 @@ const here = path.dirname(url.fileURLToPath(import.meta.url));
 const [,, timedPath, clipDir, posterDir, workersArg, ...only] = process.argv;
 const beats = JSON.parse(fs.readFileSync(timedPath, 'utf8'));
 fs.mkdirSync(clipDir, { recursive: true }); fs.mkdirSync(posterDir, { recursive: true });
-const tplHash = crypto.createHash('md5').update(fs.readFileSync(path.join(here, 'motion.html'))).digest('hex');
+const tplSrc = fs.readFileSync(path.join(here, 'motion.html'), 'utf8');
+const tplHash = (tplSrc.match(/<!-- engine: (\w+)/) || [])[1] || crypto.createHash('md5').update(tplSrc).digest('hex');
 const card = url.pathToFileURL(path.join(here, 'motion.html')).href;
 const todo = beats.filter(b => {
   if (only.length && !only.includes(b.id)) return false;
