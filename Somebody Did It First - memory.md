@@ -30,12 +30,16 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 1. ~~Narrator decision~~: decided 2026-10-02. Holden on Seed Speech (see Channel).
 2. ~~Length decision~~: decided 2026-10-03. Ship at natural length, about 5 minutes (episode 1 runs 9:37). No padding. Extend later only with new verified research, for the episodes that perform.
 3. ~~Pilot~~: built 2026-10-02 in `production/ep001-the-man-who-invented-nothing/` (116 beats, 9:37, Holden narration, validated FCPXML, five blind reviews). **Still open:** 53 archival/stock beats from 32 items are placeholders, because the cloud network blocks loc.gov, wikimedia.org, si.edu and Higgsfield's CDN (d8j0ntlcm91z4.cloudfront.net). Either allow those hosts in the environment's network settings, or Gus downloads the files into `assets/` (names are in PENDING-ASSETS.md). The 8 narration MP3s go in `vo/`. Rights are confirmed for 11 of the 32 items.
-3b. Episodes 2-5: built 2026-10-03 in `production/ep002-…` to `ep005-…` with the shared kit (`production/_shared/`).
-   - Runtimes and beats: ep2 5:51 (77), ep3 5:43 (71), ep4 5:39 (64), ep5 5:23 (70).
-   - Each has Holden narration, a validated FCPXML, an animatic, A/B thumbnails, PENDING-ASSETS and a README. Narration cost 43.6 credits for all four; the balance is 270.94.
-   - Blind reviews found no High problems. Every Medium was fixed. All four ended on a clean pass, and ep3 was clean twice in a row.
-   - **Still open:** 124 archival beats across the four are placeholders, for the same network reason as the pilot. Rights are stated for only some items; see each README.
+3b. Episodes 2-5: rebuilt 2026-10-03 as motion cuts after Gus said the first version looked like a slideshow (see "Caught by Gus").
+   - Every beat is now an animated clip: maps with routes, illustrated scenes, kinetic type and Ken Burns push-ins.
+   - Each episode folder has PREVIEW.mp4 (with section labels), PICTURE.mp4 (clean; the Resolve timeline cuts it once per beat), TIMELINE.fcpxml (DTD-valid), SHOT-LIST, PENDING-ASSETS, README and A/B thumbnails.
+   - Per-beat clips are a local build cache, gitignored at about 270MB per episode.
+   - Runtimes and beats: ep2 5:51 (77), ep3 5:42 (75), ep4 5:39 (74), ep5 5:23 (66).
+   - Stranger tests (now asking "is it entertaining?") ran 2–3 times per episode. None found a High problem in its final pass, and every Medium was fixed. Reviewers still rate the cuts "mostly" entertaining, limited by the missing real images.
+   - **Still open:** 94 archival beats are placeholders (ep2 31, ep3 23, ep4 16, ep5 24). The network blocks the image hosts and the narration CDN, so the previews are silent and show dark "to fetch" cards.
+   - Allowing these hosts unblocks both: d8j0ntlcm91z4.cloudfront.net, upload.wikimedia.org, commons.wikimedia.org, tile.loc.gov, www.loc.gov, ids.si.edu, collections.sciencemuseumgroup.org.uk, archive.org, iiif.wellcomecollection.org.
    - Ep4 must not air until the Nowak article and the 1858 text are in hand.
+   - Narration cost for eps 2–5: 43.6 credits, plus 1.8 for the ep3 re-read.
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).
 5. Pronunciations to confirm: Magie (7), Chevedden (55), Tawell (97), Finlay (109), Koechlin and Nouguier (110). Others are confirmed in each script's reading notes.
 6. Pre-recording source pulls, per the "Open check" column in `scripts/README.md`. The biggest are: the Nowak paper and the 1858 Usi e costumi text (4, pizza); a second strong source naming John Loud (53); a Sasson page reference for the Kibri-Dagan letter (47); and a second source for the Dunhuang banner and the Heilongjiang and Xanadu guns (49).
