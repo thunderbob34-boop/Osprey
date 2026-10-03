@@ -65,7 +65,7 @@
    "zoom": {
     "scale": 1.3,
     "x": 50,
-    "y": 36
+    "y": 35
    }
   },
   "visual": "Slow push-in on the Vanderbilt daguerreotype; name slides in as the lower third.",
@@ -111,7 +111,7 @@
    "zoom": {
     "scale": 1.3,
     "x": 50,
-    "y": 36
+    "y": 29
    }
   },
   "visual": "Push-in on the George Stephenson engraving; name in the lower third.",
@@ -257,7 +257,7 @@
    "zoom": {
     "scale": 1.3,
     "x": 50,
-    "y": 40
+    "y": 26
    }
   },
   "visual": "Push-in on the Linnell portrait; name in the lower third.",
@@ -545,7 +545,7 @@
    "asset": "rainhill_iln",
    "crop": "Close push-in toward the right of the print",
    "zoom": {
-    "scale": 1.6,
+    "scale": 1.25,
     "x": 70,
     "y": 45
    }
@@ -577,7 +577,7 @@
    "zoom": {
     "scale": 1.6,
     "x": 50,
-    "y": 32
+    "y": 29
    }
   },
   "visual": "Second, closer crop of the Stephenson engraving.",
@@ -772,7 +772,7 @@
    "asset": "ironworks_1811",
    "crop": "Slow push-in on the ironworks",
    "zoom": {
-    "scale": 1.3,
+    "scale": 1.15,
     "x": 50,
     "y": 55
    }
@@ -1171,7 +1171,7 @@
    "asset": "ironworks_1811",
    "crop": "Close push-in on the left of the print",
    "zoom": {
-    "scale": 1.7,
+    "scale": 1.15,
     "x": 28,
     "y": 40
    }
@@ -1247,7 +1247,7 @@
    "asset": "replica_2",
    "crop": "Push-in on the wheels",
    "zoom": {
-    "scale": 1.6,
+    "scale": 1.3,
     "x": 45,
     "y": 72
    }
@@ -1299,7 +1299,7 @@
    "asset": "tramroad_merthyrvale",
    "crop": "Slow push-in along the old trackbed",
    "zoom": {
-    "scale": 1.25,
+    "scale": 1.2,
     "x": 50,
     "y": 62
    }
@@ -1415,7 +1415,7 @@
    "zoom": {
     "scale": 1.7,
     "x": 50,
-    "y": 35
+    "y": 26
    }
   },
   "visual": "Second, closer crop of the Linnell portrait.",
@@ -2484,7 +2484,7 @@
    "zoom": {
     "scale": 1.25,
     "x": 50,
-    "y": 45
+    "y": 29
    }
   },
   "visual": "Third crop of the Stephenson engraving, wider.",
@@ -2512,9 +2512,9 @@
    "asset": "robert_stephenson",
    "crop": "Slow push-in on the face",
    "zoom": {
-    "scale": 1.3,
+    "scale": 1.6,
     "x": 50,
-    "y": 38
+    "y": 30
    }
   },
   "visual": "Push-in on the Robert Stephenson photograph; name in the lower third.",
@@ -2762,7 +2762,7 @@
    "zoom": {
     "scale": 1.4,
     "x": 50,
-    "y": 45
+    "y": 26
    }
   },
   "visual": "Third crop of the Linnell portrait.",
@@ -2790,7 +2790,7 @@
    "asset": "replica_2",
    "crop": "Push-in on the right side of the replica",
    "zoom": {
-    "scale": 1.4,
+    "scale": 1.3,
     "x": 60,
     "y": 55
    }
@@ -2844,7 +2844,7 @@
    "zoom": {
     "scale": 2.0,
     "x": 50,
-    "y": 38
+    "y": 26
    }
   },
   "visual": "Fourth, closest crop of the Linnell portrait.",
@@ -2904,7 +2904,7 @@
    "zoom": {
     "scale": 1.5,
     "x": 50,
-    "y": 30
+    "y": 29
    }
   },
   "visual": "Fourth crop of the Stephenson engraving.",
@@ -2995,7 +2995,7 @@
    "asset": "rainhill_iln",
    "crop": "Push-in on the left of the print",
    "zoom": {
-    "scale": 1.3,
+    "scale": 1.25,
     "x": 35,
     "y": 50
    }
