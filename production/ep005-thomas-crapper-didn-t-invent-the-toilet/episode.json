@@ -5,10 +5,76 @@
   "credits": 10.6,
   "vo": "Knossos was respelled in the TTS text only, for pronunciation.",
   "gaps": [
-   "No 1596 first-edition title page of The Metamorphosis of Ajax with a clear licence was found. The beat uses the Wellcome 1814 edition, labelled \"1814 edition\".",
-   "Unconfirmed rights: the Cumming portrait, the Mohenjo-daro photo, the Library of Congress 1917 troops photo, and the Cahill ballcock patent.",
-   "Clean imagery on purpose: no toilets in use, and no catalogue pages."
+   "No picture of a straight pipe to the sewer; section 05 opens on type cards and an undated set of water-closet engravings.",
+   "Cumming's 1775 S-bend drawing exists only as a 355px copy, shown once at full frame.",
+   "No 1800s ballcock drawing; the ballcock is explained with type cards.",
+   "No image of Reyburn's Flushed with Pride (copyright); a title card stands in."
   ],
   "review": "It ran several times on the motion cut. No pass found a High problem. Fixes made: card runs broken with Crapper, Harington and Knossos images; the recap shows Harington's portrait and Cumming's patent drawing; Knossos callouts point at the right things; map labels moved apart; the \"roof cisterns\" card reads as the claim that's overstated, matching the narration."
+ },
+ "timebar": {
+  "range": [
+   -2600,
+   2000
+  ],
+  "marks": [
+   [
+    -1600,
+    "Knossos"
+   ],
+   [
+    1596,
+    "Harington"
+   ],
+   [
+    1775,
+    "S-bend"
+   ],
+   [
+    1880,
+    "Crapper",
+    "end"
+   ],
+   [
+    1917,
+    "US troops"
+   ],
+   [
+    1969,
+    "Reyburn's book",
+    "start"
+   ]
+  ],
+  "scale": [
+   [
+    -2600,
+    0
+   ],
+   [
+    -1400,
+    0.22
+   ],
+   [
+    1500,
+    0.3
+   ],
+   [
+    2000,
+    1
+   ]
+  ],
+  "ticks": [
+   -2000,
+   -1500,
+   1500,
+   1600,
+   1700,
+   1800,
+   1900,
+   2000
+  ],
+  "gaps": [
+   50
+  ]
  }
 }
