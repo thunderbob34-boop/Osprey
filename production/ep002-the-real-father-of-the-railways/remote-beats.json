@@ -1,68 +1,12 @@
 {
 "images": {
-"replica_3": {
-"title": "Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Richard_Trevithick_1804_Pen_y_Darren_locomotive_%286635994787%29.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_%286635994787%29.jpg",
-"license": "CC BY-SA 2.0",
-"credit": "Hugh Llewelyn / Wikimedia Commons",
-"caption": "The Penydarren replica (modern photograph)"
-},
-"trevithick": {
-"title": "Richard Trevithick portrait.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Richard_Trevithick_portrait.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_portrait.jpg",
-"license": "Public domain",
-"credit": "John Linnell, 1816 / Wikimedia Commons",
-"caption": "Richard Trevithick (portrait by John Linnell, 1816)"
-},
-"ironworks_1811": {
-"title": "Penydarran iron works.jpeg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Penydarran_iron_works.jpeg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Penydarran_iron_works.jpeg",
-"license": "Public domain",
-"credit": "John George Wood, 1811 / Wikimedia Commons",
-"caption": "Penydarren ironworks, 1811 (print by John George Wood)"
-},
-"replica_1": {
-"title": "Replica of Trevithick's Penydarren locomotive - 2022-08-22.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Replica_of_Trevithick%27s_Penydarren_locomotive_-_2022-08-22.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Replica_of_Trevithick%27s_Penydarren_locomotive_-_2022-08-22.jpg",
+"replica_2": {
+"title": "Penydarren replica at NRM 01.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Penydarren_replica_at_NRM_01.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Penydarren_replica_at_NRM_01.jpg",
 "license": "CC BY-SA 4.0",
-"credit": "The wub / Wikimedia Commons",
-"caption": "A working replica of Trevithick's Penydarren locomotive (modern photograph)"
-},
-"vanderbilt": {
-"title": "Cornelius Vanderbilt Daguerrotype2.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cornelius_Vanderbilt_Daguerrotype2.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Cornelius_Vanderbilt_Daguerrotype2.jpg",
-"license": "Public domain",
-"credit": "Mathew Brady studio / Wikimedia Commons",
-"caption": "Cornelius Vanderbilt (daguerreotype, Mathew Brady studio)"
-},
-"lmr_view": {
-"title": "Coloured View on the Liverpool and Manchester Railway, 1831.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Coloured_View_on_the_Liverpool_and_Manchester_Railway%2C_1831.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Coloured_View_on_the_Liverpool_and_Manchester_Railway%2C_1831.jpg",
-"license": "Public domain",
-"credit": "S.G. Hughes after T.T. Bury, 1831 / Wikimedia Commons",
-"caption": "The Liverpool and Manchester Railway, 1831 (coloured print after T. T. Bury)"
-},
-"middleton_collier": {
-"title": "The Collier.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Collier.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:The_Collier.jpg",
-"license": "Public domain",
-"credit": "George Walker, 1814 / Wikimedia Commons",
-"caption": "A Blenkinsop and Murray engine at Middleton, Leeds (George Walker, 1814)"
-},
-"robert_stephenson": {
-"title": "Robert Stephenson by Maull & Polybank, 1856.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Robert_Stephenson_by_Maull_%26_Polybank%2C_1856.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Robert_Stephenson_by_Maull_%26_Polybank%2C_1856.jpg",
-"license": "Public domain",
-"credit": "Maull & Polyblank, 1856 / Wikimedia Commons",
-"caption": "Robert Stephenson (photograph, 1856)"
+"credit": "Thryduulf / Wikimedia Commons",
+"caption": "The Penydarren replica (modern photograph)"
 },
 "george_stephenson": {
 "title": "George Stephenson in Lives of the Engineers.jpg",
@@ -72,6 +16,14 @@
 "credit": "William Holl after John Lucas / Wikimedia Commons",
 "caption": "George Stephenson (engraving after John Lucas)"
 },
+"replica_3": {
+"title": "Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Richard_Trevithick_1804_Pen_y_Darren_locomotive_%286635994787%29.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_%286635994787%29.jpg",
+"license": "CC BY-SA 2.0",
+"credit": "Hugh Llewelyn / Wikimedia Commons",
+"caption": "The Penydarren replica (modern photograph)"
+},
 "sd_opening": {
 "title": "StocktonDarlingtonOpening.jpg",
 "url": "https://commons.wikimedia.org/wiki/Special:FilePath/StocktonDarlingtonOpening.jpg?width=2400",
@@ -80,29 +32,13 @@
 "credit": "John Dobbin / Wikimedia Commons",
 "caption": "Opening of the Stockton and Darlington Railway, 1825 (painting by John Dobbin)"
 },
-"rainhill_iln": {
-"title": "Rainhill Trials in the Illustrated London News.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Rainhill_Trials_in_the_Illustrated_London_News.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Rainhill_Trials_in_the_Illustrated_London_News.jpg",
+"lmr_view": {
+"title": "Coloured View on the Liverpool and Manchester Railway, 1831.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Coloured_View_on_the_Liverpool_and_Manchester_Railway%2C_1831.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Coloured_View_on_the_Liverpool_and_Manchester_Railway%2C_1831.jpg",
 "license": "Public domain",
-"credit": "Illustrated London News / Wikimedia Commons",
-"caption": "The Rainhill Trials, October 1829 (Illustrated London News)"
-},
-"trevithick_monument": {
-"title": "Richard Trevithick monument in Merthyr Tydfil.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Richard_Trevithick_monument_in_Merthyr_Tydfil.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_monument_in_Merthyr_Tydfil.jpg",
-"license": "CC BY-SA 4.0",
-"credit": "14GTR / Wikimedia Commons",
-"caption": "The Trevithick monument in Merthyr Tydfil (modern photograph)"
-},
-"locomotion": {
-"title": "Locomotion No.1, Darlington.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Locomotion_No.1%2C_Darlington.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Locomotion_No.1%2C_Darlington.jpg",
-"license": "CC BY-SA 4.0",
-"credit": "Kim Traynor / Wikimedia Commons",
-"caption": "Locomotion No. 1, Darlington (modern photograph)"
+"credit": "S.G. Hughes after T.T. Bury, 1831 / Wikimedia Commons",
+"caption": "The Liverpool and Manchester Railway, 1831 (coloured print after T. T. Bury)"
 },
 "puffing_billy": {
 "title": "Puffing Billy locomotive.jpg",
@@ -112,13 +48,21 @@
 "credit": "TarnishedPath / Wikimedia Commons",
 "caption": "Puffing Billy, the oldest surviving steam locomotive (modern photograph)"
 },
-"replica_2": {
-"title": "Penydarren replica at NRM 01.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Penydarren_replica_at_NRM_01.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Penydarren_replica_at_NRM_01.jpg",
+"rainhill_iln": {
+"title": "Rainhill Trials in the Illustrated London News.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Rainhill_Trials_in_the_Illustrated_London_News.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Rainhill_Trials_in_the_Illustrated_London_News.jpg",
+"license": "Public domain",
+"credit": "Illustrated London News / Wikimedia Commons",
+"caption": "The Rainhill Trials, October 1829 (Illustrated London News)"
+},
+"locomotion": {
+"title": "Locomotion No.1, Darlington.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Locomotion_No.1%2C_Darlington.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Locomotion_No.1%2C_Darlington.jpg",
 "license": "CC BY-SA 4.0",
-"credit": "Thryduulf / Wikimedia Commons",
-"caption": "The Penydarren replica (modern photograph)"
+"credit": "Kim Traynor / Wikimedia Commons",
+"caption": "Locomotion No. 1, Darlington (modern photograph)"
 },
 "tramroad_merthyrvale": {
 "title": "Former Merthyr Tramroad, Merthyr Vale - geograph.org.uk - 3025356.jpg",
@@ -128,6 +72,54 @@
 "credit": "Jaggery / geograph.org.uk",
 "caption": "The former Merthyr Tramroad at Merthyr Vale (modern photograph)"
 },
+"middleton_collier": {
+"title": "The Collier.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Collier.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:The_Collier.jpg",
+"license": "Public domain",
+"credit": "George Walker, 1814 / Wikimedia Commons",
+"caption": "A Blenkinsop and Murray engine at Middleton, Leeds (George Walker, 1814)"
+},
+"vanderbilt": {
+"title": "Cornelius Vanderbilt Daguerrotype2.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cornelius_Vanderbilt_Daguerrotype2.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Cornelius_Vanderbilt_Daguerrotype2.jpg",
+"license": "Public domain",
+"credit": "Mathew Brady studio / Wikimedia Commons",
+"caption": "Cornelius Vanderbilt (daguerreotype, Mathew Brady studio)"
+},
+"ironworks_1811": {
+"title": "Penydarran iron works.jpeg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Penydarran_iron_works.jpeg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Penydarran_iron_works.jpeg",
+"license": "Public domain",
+"credit": "John George Wood, 1811 / Wikimedia Commons",
+"caption": "Penydarren ironworks, 1811 (print by John George Wood)"
+},
+"trevithick": {
+"title": "Richard Trevithick portrait.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Richard_Trevithick_portrait.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_portrait.jpg",
+"license": "Public domain",
+"credit": "John Linnell, 1816 / Wikimedia Commons",
+"caption": "Richard Trevithick (portrait by John Linnell, 1816)"
+},
+"replica_1": {
+"title": "Replica of Trevithick's Penydarren locomotive - 2022-08-22.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Replica_of_Trevithick%27s_Penydarren_locomotive_-_2022-08-22.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Replica_of_Trevithick%27s_Penydarren_locomotive_-_2022-08-22.jpg",
+"license": "CC BY-SA 4.0",
+"credit": "The wub / Wikimedia Commons",
+"caption": "A working replica of Trevithick's Penydarren locomotive (modern photograph)"
+},
+"trevithick_monument": {
+"title": "Richard Trevithick monument in Merthyr Tydfil.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Richard_Trevithick_monument_in_Merthyr_Tydfil.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_monument_in_Merthyr_Tydfil.jpg",
+"license": "CC BY-SA 4.0",
+"credit": "14GTR / Wikimedia Commons",
+"caption": "The Trevithick monument in Merthyr Tydfil (modern photograph)"
+},
 "rocket": {
 "title": "Stephenson's Rocket Science Museum 2017-02-27.jpg",
 "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Stephenson%27s_Rocket_Science_Museum_2017-02-27.jpg?width=2400",
@@ -135,6 +127,14 @@
 "license": "CC BY 2.0",
 "credit": "Les Chatfield / Wikimedia Commons",
 "caption": "Rocket, the original engine, at the Science Museum, London (modern photograph)"
+},
+"robert_stephenson": {
+"title": "Robert Stephenson by Maull & Polybank, 1856.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Robert_Stephenson_by_Maull_%26_Polybank%2C_1856.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Robert_Stephenson_by_Maull_%26_Polybank%2C_1856.jpg",
+"license": "Public domain",
+"credit": "Maull & Polyblank, 1856 / Wikimedia Commons",
+"caption": "Robert Stephenson (photograph, 1856)"
 }
 },
 "beats": [
@@ -150,7 +150,7 @@
 "zoom": {
 "scale": 1.3,
 "x": 50,
-"y": 36
+"y": 35
 }
 },
 "source": {
@@ -211,7 +211,7 @@
 "zoom": {
 "scale": 1.3,
 "x": 50,
-"y": 36
+"y": 29
 }
 },
 "source": {
@@ -394,7 +394,7 @@
 "zoom": {
 "scale": 1.3,
 "x": 50,
-"y": 40
+"y": 26
 }
 },
 "source": {
@@ -819,7 +819,7 @@
 "asset": "rainhill_iln",
 "crop": "Close push-in toward the right of the print",
 "zoom": {
-"scale": 1.6,
+"scale": 1.25,
 "x": 70,
 "y": 45
 }
@@ -882,7 +882,7 @@
 "zoom": {
 "scale": 1.6,
 "x": 50,
-"y": 32
+"y": 29
 }
 },
 "source": {
@@ -941,7 +941,7 @@
 "asset": "ironworks_1811",
 "crop": "Slow push-in on the ironworks",
 "zoom": {
-"scale": 1.3,
+"scale": 1.15,
 "x": 50,
 "y": 55
 }
@@ -1343,7 +1343,7 @@
 "asset": "ironworks_1811",
 "crop": "Close push-in on the left of the print",
 "zoom": {
-"scale": 1.7,
+"scale": 1.15,
 "x": 28,
 "y": 40
 }
@@ -1404,7 +1404,7 @@
 "asset": "replica_2",
 "crop": "Push-in on the wheels",
 "zoom": {
-"scale": 1.6,
+"scale": 1.3,
 "x": 45,
 "y": 72
 }
@@ -1465,7 +1465,7 @@
 "asset": "tramroad_merthyrvale",
 "crop": "Slow push-in along the old trackbed",
 "zoom": {
-"scale": 1.25,
+"scale": 1.2,
 "x": 50,
 "y": 62
 }
@@ -1650,7 +1650,7 @@
 "zoom": {
 "scale": 1.7,
 "x": 50,
-"y": 35
+"y": 26
 }
 },
 "source": {
@@ -2016,7 +2016,7 @@
 "zoom": {
 "scale": 1.25,
 "x": 50,
-"y": 45
+"y": 29
 }
 },
 "source": {
@@ -2075,9 +2075,9 @@
 "asset": "robert_stephenson",
 "crop": "Slow push-in on the face",
 "zoom": {
-"scale": 1.3,
+"scale": 1.6,
 "x": 50,
-"y": 38
+"y": 30
 }
 },
 "source": {
@@ -2260,7 +2260,7 @@
 "zoom": {
 "scale": 1.4,
 "x": 50,
-"y": 45
+"y": 26
 }
 },
 "source": {
@@ -2319,7 +2319,7 @@
 "asset": "replica_2",
 "crop": "Push-in on the right side of the replica",
 "zoom": {
-"scale": 1.4,
+"scale": 1.3,
 "x": 60,
 "y": 55
 }
@@ -2382,7 +2382,7 @@
 "zoom": {
 "scale": 2.0,
 "x": 50,
-"y": 38
+"y": 26
 }
 },
 "source": {
@@ -2504,7 +2504,7 @@
 "zoom": {
 "scale": 1.5,
 "x": 50,
-"y": 30
+"y": 29
 }
 },
 "source": {
@@ -2634,7 +2634,7 @@
 "asset": "rainhill_iln",
 "crop": "Push-in on the left of the print",
 "zoom": {
-"scale": 1.3,
+"scale": 1.25,
 "x": 35,
 "y": 50
 }

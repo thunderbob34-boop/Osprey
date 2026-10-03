@@ -4,96 +4,94 @@
 <resources>
 <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>
 <format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>
-<asset id="pic" name="The Real Father of the Railways - PICTURE" start="0s" duration="10534/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/The%20Real%20Father%20of%20the%20Railways%20-%20PICTURE.mp4"/></asset>
-<asset id="vo_01" name="VO 01" start="0s" duration="1280/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/01-cold-open.mp3"/></asset>
-<asset id="vo_02" name="VO 02" start="0s" duration="1344/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/02-the-version-everybody-knows.mp3"/></asset>
-<asset id="vo_03" name="VO 03" start="0s" duration="2317/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/03-penydarren-1804.mp3"/></asset>
-<asset id="vo_04" name="VO 04" start="0s" duration="1297/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/04-the-catch.mp3"/></asset>
-<asset id="vo_05" name="VO 05" start="0s" duration="2627/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/05-who-made-it-pay.mp3"/></asset>
+<asset id="pic" name="The Real Father of the Railways - PICTURE" start="0s" duration="10296/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/The%20Real%20Father%20of%20the%20Railways%20-%20PICTURE.mp4"/></asset>
+<asset id="vo_01" name="VO 01" start="0s" duration="1562/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/01-cold-open.mp3"/></asset>
+<asset id="vo_02" name="VO 02" start="0s" duration="1463/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/02-the-version-everybody-knows.mp3"/></asset>
+<asset id="vo_03" name="VO 03" start="0s" duration="2125/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/03-penydarren-1804.mp3"/></asset>
+<asset id="vo_04" name="VO 04" start="0s" duration="1093/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/04-the-catch.mp3"/></asset>
+<asset id="vo_05" name="VO 05" start="0s" duration="2384/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/05-who-made-it-pay.mp3"/></asset>
 <asset id="vo_06" name="VO 06" start="0s" duration="1669/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/06-how-it-ended.mp3"/></asset>
 </resources>
 <library>
 <event name="Somebody Did It First">
 <project name="The Real Father of the Railways">
-<sequence format="r1" duration="10534/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+<sequence format="r1" duration="10296/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
 <spine>
-<asset-clip ref="pic" offset="0s" name="01-a" start="0s" duration="156/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="1280/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
-<asset-clip ref="pic" offset="156/30s" name="01-b" start="156/30s" duration="118/30s"></asset-clip>
-<asset-clip ref="pic" offset="274/30s" name="01-c" start="274/30s" duration="97/30s"></asset-clip>
-<asset-clip ref="pic" offset="371/30s" name="01-d" start="371/30s" duration="176/30s"></asset-clip>
-<asset-clip ref="pic" offset="547/30s" name="01-e" start="547/30s" duration="147/30s"></asset-clip>
-<asset-clip ref="pic" offset="694/30s" name="01-f" start="694/30s" duration="117/30s"></asset-clip>
-<asset-clip ref="pic" offset="811/30s" name="01-g" start="811/30s" duration="88/30s"></asset-clip>
-<asset-clip ref="pic" offset="899/30s" name="01-h" start="899/30s" duration="107/30s"></asset-clip>
-<asset-clip ref="pic" offset="1006/30s" name="01-i" start="1006/30s" duration="127/30s"></asset-clip>
-<asset-clip ref="pic" offset="1133/30s" name="01-j" start="1133/30s" duration="147/30s"></asset-clip>
-<asset-clip ref="pic" offset="1280/30s" name="02-a" start="1280/30s" duration="147/30s"><asset-clip ref="vo_02" lane="-1" offset="1280/30s" start="0s" duration="1344/30s" name="VO 02" audioRole="dialogue"/><marker start="1280/30s" duration="1/30s" value="02 The Version Everybody Knows"/></asset-clip>
-<asset-clip ref="pic" offset="1427/30s" name="02-b" start="1427/30s" duration="135/30s"></asset-clip>
-<asset-clip ref="pic" offset="1562/30s" name="02-c" start="1562/30s" duration="181/30s"></asset-clip>
-<asset-clip ref="pic" offset="1743/30s" name="02-d" start="1743/30s" duration="181/30s"></asset-clip>
-<asset-clip ref="pic" offset="1924/30s" name="02-e" start="1924/30s" duration="158/30s"></asset-clip>
-<asset-clip ref="pic" offset="2082/30s" name="02-f" start="2082/30s" duration="147/30s"></asset-clip>
-<asset-clip ref="pic" offset="2229/30s" name="02-g" start="2229/30s" duration="3s"></asset-clip>
-<asset-clip ref="pic" offset="2319/30s" name="02-h" start="2319/30s" duration="181/30s"></asset-clip>
-<asset-clip ref="pic" offset="2500/30s" name="02-i" start="2500/30s" duration="124/30s"></asset-clip>
-<asset-clip ref="pic" offset="2624/30s" name="03-a" start="2624/30s" duration="134/30s"><asset-clip ref="vo_03" lane="-1" offset="2624/30s" start="0s" duration="2317/30s" name="VO 03" audioRole="dialogue"/><marker start="2624/30s" duration="1/30s" value="03 Penydarren, 1804"/></asset-clip>
-<asset-clip ref="pic" offset="2758/30s" name="03-b" start="2758/30s" duration="93/30s"></asset-clip>
-<asset-clip ref="pic" offset="2851/30s" name="03-c" start="2851/30s" duration="82/30s"></asset-clip>
-<asset-clip ref="pic" offset="2933/30s" name="03-d" start="2933/30s" duration="93/30s"></asset-clip>
-<asset-clip ref="pic" offset="3026/30s" name="03-e" start="3026/30s" duration="154/30s"></asset-clip>
-<asset-clip ref="pic" offset="106s" name="03-f" start="106s" duration="113/30s"></asset-clip>
-<asset-clip ref="pic" offset="3293/30s" name="03-g" start="3293/30s" duration="114/30s"></asset-clip>
-<asset-clip ref="pic" offset="3407/30s" name="03-h" start="3407/30s" duration="175/30s"></asset-clip>
-<asset-clip ref="pic" offset="3582/30s" name="03-i" start="3582/30s" duration="185/30s"></asset-clip>
-<asset-clip ref="pic" offset="3767/30s" name="03-j" start="3767/30s" duration="103/30s"></asset-clip>
-<asset-clip ref="pic" offset="129s" name="03-k" start="129s" duration="165/30s"></asset-clip>
-<asset-clip ref="pic" offset="4035/30s" name="03-l" start="4035/30s" duration="134/30s"></asset-clip>
-<asset-clip ref="pic" offset="4169/30s" name="03-m" start="4169/30s" duration="92/30s"></asset-clip>
-<asset-clip ref="pic" offset="4261/30s" name="03-n" start="4261/30s" duration="186/30s"></asset-clip>
-<asset-clip ref="pic" offset="4447/30s" name="03-o" start="4447/30s" duration="123/30s"></asset-clip>
-<asset-clip ref="pic" offset="4570/30s" name="03-p" start="4570/30s" duration="93/30s"></asset-clip>
-<asset-clip ref="pic" offset="4663/30s" name="03-q" start="4663/30s" duration="113/30s"></asset-clip>
-<asset-clip ref="pic" offset="4776/30s" name="03-r" start="4776/30s" duration="165/30s"></asset-clip>
-<asset-clip ref="pic" offset="4941/30s" name="04-a" start="4941/30s" duration="6s"><asset-clip ref="vo_04" lane="-1" offset="4941/30s" start="0s" duration="1297/30s" name="VO 04" audioRole="dialogue"/><marker start="4941/30s" duration="1/30s" value="04 The Catch"/></asset-clip>
-<asset-clip ref="pic" offset="5121/30s" name="04-b" start="5121/30s" duration="123/30s"></asset-clip>
-<asset-clip ref="pic" offset="5244/30s" name="04-c" start="5244/30s" duration="151/30s"></asset-clip>
-<asset-clip ref="pic" offset="5395/30s" name="04-d" start="5395/30s" duration="114/30s"></asset-clip>
-<asset-clip ref="pic" offset="5509/30s" name="04-e" start="5509/30s" duration="6s"></asset-clip>
-<asset-clip ref="pic" offset="5689/30s" name="04-f" start="5689/30s" duration="114/30s"></asset-clip>
-<asset-clip ref="pic" offset="5803/30s" name="04-g" start="5803/30s" duration="142/30s"></asset-clip>
-<asset-clip ref="pic" offset="5945/30s" name="04-h" start="5945/30s" duration="94/30s"></asset-clip>
-<asset-clip ref="pic" offset="6039/30s" name="04-i" start="6039/30s" duration="104/30s"></asset-clip>
-<asset-clip ref="pic" offset="6143/30s" name="04-j" start="6143/30s" duration="95/30s"></asset-clip>
-<asset-clip ref="pic" offset="6238/30s" name="05-a" start="6238/30s" duration="188/30s"><asset-clip ref="vo_05" lane="-1" offset="6238/30s" start="0s" duration="2627/30s" name="VO 05" audioRole="dialogue"/><marker start="6238/30s" duration="1/30s" value="05 Who Made It Pay"/></asset-clip>
-<asset-clip ref="pic" offset="6426/30s" name="05-b" start="6426/30s" duration="132/30s"></asset-clip>
-<asset-clip ref="pic" offset="6558/30s" name="05-c" start="6558/30s" duration="199/30s"></asset-clip>
-<asset-clip ref="pic" offset="6757/30s" name="05-d" start="6757/30s" duration="132/30s"></asset-clip>
-<asset-clip ref="pic" offset="6889/30s" name="05-e" start="6889/30s" duration="111/30s"></asset-clip>
-<asset-clip ref="pic" offset="7000/30s" name="05-f" start="7000/30s" duration="143/30s"></asset-clip>
-<asset-clip ref="pic" offset="7143/30s" name="05-g" start="7143/30s" duration="166/30s"></asset-clip>
-<asset-clip ref="pic" offset="7309/30s" name="05-h" start="7309/30s" duration="132/30s"></asset-clip>
-<asset-clip ref="pic" offset="7441/30s" name="05-i" start="7441/30s" duration="88/30s"></asset-clip>
-<asset-clip ref="pic" offset="7529/30s" name="05-j" start="7529/30s" duration="122/30s"></asset-clip>
-<asset-clip ref="pic" offset="7651/30s" name="05-k" start="7651/30s" duration="132/30s"></asset-clip>
-<asset-clip ref="pic" offset="7783/30s" name="05-l" start="7783/30s" duration="111/30s"></asset-clip>
-<asset-clip ref="pic" offset="7894/30s" name="05-m" start="7894/30s" duration="165/30s"></asset-clip>
-<asset-clip ref="pic" offset="8059/30s" name="05-n" start="8059/30s" duration="7s"></asset-clip>
-<asset-clip ref="pic" offset="8269/30s" name="05-o" start="8269/30s" duration="177/30s"></asset-clip>
-<asset-clip ref="pic" offset="8446/30s" name="05-p" start="8446/30s" duration="187/30s"></asset-clip>
-<asset-clip ref="pic" offset="8633/30s" name="05-q" start="8633/30s" duration="89/30s"></asset-clip>
-<asset-clip ref="pic" offset="8722/30s" name="05-r" start="8722/30s" duration="143/30s"></asset-clip>
-<asset-clip ref="pic" offset="8865/30s" name="06-a" start="8865/30s" duration="179/30s"><asset-clip ref="vo_06" lane="-1" offset="8865/30s" start="0s" duration="1669/30s" name="VO 06" audioRole="dialogue"/><marker start="8865/30s" duration="1/30s" value="06 How It Ended"/></asset-clip>
-<asset-clip ref="pic" offset="9044/30s" name="06-b" start="9044/30s" duration="123/30s"></asset-clip>
-<asset-clip ref="pic" offset="9167/30s" name="06-c" start="9167/30s" duration="112/30s"></asset-clip>
-<asset-clip ref="pic" offset="9279/30s" name="06-d" start="9279/30s" duration="135/30s"></asset-clip>
-<asset-clip ref="pic" offset="9414/30s" name="06-e" start="9414/30s" duration="157/30s"></asset-clip>
-<asset-clip ref="pic" offset="9571/30s" name="06-f" start="9571/30s" duration="157/30s"></asset-clip>
-<asset-clip ref="pic" offset="9728/30s" name="06-g" start="9728/30s" duration="168/30s"></asset-clip>
-<asset-clip ref="pic" offset="9896/30s" name="06-h" start="9896/30s" duration="179/30s"></asset-clip>
-<asset-clip ref="pic" offset="10075/30s" name="06-i" start="10075/30s" duration="101/30s"></asset-clip>
-<asset-clip ref="pic" offset="10176/30s" name="06-j" start="10176/30s" duration="168/30s"></asset-clip>
-<asset-clip ref="pic" offset="10344/30s" name="06-k" start="10344/30s" duration="78/30s"></asset-clip>
-<asset-clip ref="pic" offset="10422/30s" name="06-l" start="10422/30s" duration="112/30s"></asset-clip>
+<asset-clip ref="pic" offset="0s" name="01-a" start="0s" duration="133/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="1562/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
+<asset-clip ref="pic" offset="133/30s" name="01-b" start="133/30s" duration="144/30s"></asset-clip>
+<asset-clip ref="pic" offset="277/30s" name="01-c" start="277/30s" duration="144/30s"></asset-clip>
+<asset-clip ref="pic" offset="421/30s" name="01-d" start="421/30s" duration="188/30s"></asset-clip>
+<asset-clip ref="pic" offset="609/30s" name="01-e" start="609/30s" duration="111/30s"></asset-clip>
+<asset-clip ref="pic" offset="24s" name="01-f" start="24s" duration="155/30s"></asset-clip>
+<asset-clip ref="pic" offset="875/30s" name="01-g" start="875/30s" duration="111/30s"></asset-clip>
+<asset-clip ref="pic" offset="986/30s" name="01-h" start="986/30s" duration="100/30s"></asset-clip>
+<asset-clip ref="pic" offset="1086/30s" name="01-i" start="1086/30s" duration="122/30s"></asset-clip>
+<asset-clip ref="pic" offset="1208/30s" name="01-j" start="1208/30s" duration="99/30s"></asset-clip>
+<asset-clip ref="pic" offset="1307/30s" name="01-k" start="1307/30s" duration="133/30s"></asset-clip>
+<asset-clip ref="pic" offset="48s" name="01-l" start="48s" duration="122/30s"></asset-clip>
+<asset-clip ref="pic" offset="1562/30s" name="02-a" start="1562/30s" duration="136/30s"><asset-clip ref="vo_02" lane="-1" offset="1562/30s" start="0s" duration="1463/30s" name="VO 02" audioRole="dialogue"/><marker start="1562/30s" duration="1/30s" value="02 The Version Everybody Knows"/></asset-clip>
+<asset-clip ref="pic" offset="1698/30s" name="02-b" start="1698/30s" duration="125/30s"></asset-clip>
+<asset-clip ref="pic" offset="1823/30s" name="02-c" start="1823/30s" duration="188/30s"></asset-clip>
+<asset-clip ref="pic" offset="2011/30s" name="02-d" start="2011/30s" duration="126/30s"></asset-clip>
+<asset-clip ref="pic" offset="2137/30s" name="02-e" start="2137/30s" duration="125/30s"></asset-clip>
+<asset-clip ref="pic" offset="2262/30s" name="02-f" start="2262/30s" duration="178/30s"></asset-clip>
+<asset-clip ref="pic" offset="2440/30s" name="02-g" start="2440/30s" duration="146/30s"></asset-clip>
+<asset-clip ref="pic" offset="2586/30s" name="02-h" start="2586/30s" duration="157/30s"></asset-clip>
+<asset-clip ref="pic" offset="2743/30s" name="02-i" start="2743/30s" duration="167/30s"></asset-clip>
+<asset-clip ref="pic" offset="97s" name="02-j" start="97s" duration="115/30s"></asset-clip>
+<asset-clip ref="pic" offset="3025/30s" name="03-a" start="3025/30s" duration="104/30s"><asset-clip ref="vo_03" lane="-1" offset="3025/30s" start="0s" duration="2125/30s" name="VO 03" audioRole="dialogue"/><marker start="3025/30s" duration="1/30s" value="03 Penydarren, 1804"/></asset-clip>
+<asset-clip ref="pic" offset="3129/30s" name="03-b" start="3129/30s" duration="125/30s"></asset-clip>
+<asset-clip ref="pic" offset="3254/30s" name="03-c" start="3254/30s" duration="177/30s"></asset-clip>
+<asset-clip ref="pic" offset="3431/30s" name="03-d" start="3431/30s" duration="156/30s"></asset-clip>
+<asset-clip ref="pic" offset="3587/30s" name="03-e" start="3587/30s" duration="115/30s"></asset-clip>
+<asset-clip ref="pic" offset="3702/30s" name="03-f" start="3702/30s" duration="177/30s"></asset-clip>
+<asset-clip ref="pic" offset="3879/30s" name="03-g" start="3879/30s" duration="104/30s"></asset-clip>
+<asset-clip ref="pic" offset="3983/30s" name="03-h" start="3983/30s" duration="146/30s"></asset-clip>
+<asset-clip ref="pic" offset="4129/30s" name="03-i" start="4129/30s" duration="146/30s"></asset-clip>
+<asset-clip ref="pic" offset="4275/30s" name="03-j" start="4275/30s" duration="167/30s"></asset-clip>
+<asset-clip ref="pic" offset="4442/30s" name="03-k" start="4442/30s" duration="135/30s"></asset-clip>
+<asset-clip ref="pic" offset="4577/30s" name="03-l" start="4577/30s" duration="94/30s"></asset-clip>
+<asset-clip ref="pic" offset="4671/30s" name="03-m" start="4671/30s" duration="166/30s"></asset-clip>
+<asset-clip ref="pic" offset="4837/30s" name="03-n" start="4837/30s" duration="126/30s"></asset-clip>
+<asset-clip ref="pic" offset="4963/30s" name="03-o" start="4963/30s" duration="187/30s"></asset-clip>
+<asset-clip ref="pic" offset="5150/30s" name="04-a" start="5150/30s" duration="92/30s"><asset-clip ref="vo_04" lane="-1" offset="5150/30s" start="0s" duration="1093/30s" name="VO 04" audioRole="dialogue"/><marker start="5150/30s" duration="1/30s" value="04 The Catch"/></asset-clip>
+<asset-clip ref="pic" offset="5242/30s" name="04-b" start="5242/30s" duration="102/30s"></asset-clip>
+<asset-clip ref="pic" offset="5344/30s" name="04-c" start="5344/30s" duration="133/30s"></asset-clip>
+<asset-clip ref="pic" offset="5477/30s" name="04-d" start="5477/30s" duration="163/30s"></asset-clip>
+<asset-clip ref="pic" offset="188s" name="04-e" start="188s" duration="113/30s"></asset-clip>
+<asset-clip ref="pic" offset="5753/30s" name="04-f" start="5753/30s" duration="173/30s"></asset-clip>
+<asset-clip ref="pic" offset="5926/30s" name="04-g" start="5926/30s" duration="143/30s"></asset-clip>
+<asset-clip ref="pic" offset="6069/30s" name="04-h" start="6069/30s" duration="174/30s"></asset-clip>
+<asset-clip ref="pic" offset="6243/30s" name="05-a" start="6243/30s" duration="170/30s"><asset-clip ref="vo_05" lane="-1" offset="6243/30s" start="0s" duration="2384/30s" name="VO 05" audioRole="dialogue"/><marker start="6243/30s" duration="1/30s" value="05 Who Made It Pay"/></asset-clip>
+<asset-clip ref="pic" offset="6413/30s" name="05-b" start="6413/30s" duration="159/30s"></asset-clip>
+<asset-clip ref="pic" offset="6572/30s" name="05-c" start="6572/30s" duration="114/30s"></asset-clip>
+<asset-clip ref="pic" offset="6686/30s" name="05-d" start="6686/30s" duration="136/30s"></asset-clip>
+<asset-clip ref="pic" offset="6822/30s" name="05-e" start="6822/30s" duration="125/30s"></asset-clip>
+<asset-clip ref="pic" offset="6947/30s" name="05-f" start="6947/30s" duration="147/30s"></asset-clip>
+<asset-clip ref="pic" offset="7094/30s" name="05-g" start="7094/30s" duration="171/30s"></asset-clip>
+<asset-clip ref="pic" offset="7265/30s" name="05-h" start="7265/30s" duration="136/30s"></asset-clip>
+<asset-clip ref="pic" offset="7401/30s" name="05-i" start="7401/30s" duration="91/30s"></asset-clip>
+<asset-clip ref="pic" offset="7492/30s" name="05-j" start="7492/30s" duration="125/30s"></asset-clip>
+<asset-clip ref="pic" offset="7617/30s" name="05-k" start="7617/30s" duration="136/30s"></asset-clip>
+<asset-clip ref="pic" offset="7753/30s" name="05-l" start="7753/30s" duration="113/30s"></asset-clip>
+<asset-clip ref="pic" offset="7866/30s" name="05-m" start="7866/30s" duration="159/30s"></asset-clip>
+<asset-clip ref="pic" offset="8025/30s" name="05-n" start="8025/30s" duration="125/30s"></asset-clip>
+<asset-clip ref="pic" offset="8150/30s" name="05-o" start="8150/30s" duration="102/30s"></asset-clip>
+<asset-clip ref="pic" offset="8252/30s" name="05-p" start="8252/30s" duration="137/30s"></asset-clip>
+<asset-clip ref="pic" offset="8389/30s" name="05-q" start="8389/30s" duration="124/30s"></asset-clip>
+<asset-clip ref="pic" offset="8513/30s" name="05-r" start="8513/30s" duration="114/30s"></asset-clip>
+<asset-clip ref="pic" offset="8627/30s" name="06-a" start="8627/30s" duration="179/30s"><asset-clip ref="vo_06" lane="-1" offset="8627/30s" start="0s" duration="1669/30s" name="VO 06" audioRole="dialogue"/><marker start="8627/30s" duration="1/30s" value="06 How It Ended"/></asset-clip>
+<asset-clip ref="pic" offset="8806/30s" name="06-b" start="8806/30s" duration="123/30s"></asset-clip>
+<asset-clip ref="pic" offset="8929/30s" name="06-c" start="8929/30s" duration="112/30s"></asset-clip>
+<asset-clip ref="pic" offset="9041/30s" name="06-d" start="9041/30s" duration="135/30s"></asset-clip>
+<asset-clip ref="pic" offset="9176/30s" name="06-e" start="9176/30s" duration="157/30s"></asset-clip>
+<asset-clip ref="pic" offset="9333/30s" name="06-f" start="9333/30s" duration="157/30s"></asset-clip>
+<asset-clip ref="pic" offset="9490/30s" name="06-g" start="9490/30s" duration="168/30s"></asset-clip>
+<asset-clip ref="pic" offset="9658/30s" name="06-h" start="9658/30s" duration="123/30s"></asset-clip>
+<asset-clip ref="pic" offset="9781/30s" name="06-i" start="9781/30s" duration="157/30s"></asset-clip>
+<asset-clip ref="pic" offset="9938/30s" name="06-j" start="9938/30s" duration="134/30s"></asset-clip>
+<asset-clip ref="pic" offset="10072/30s" name="06-k" start="10072/30s" duration="112/30s"></asset-clip>
+<asset-clip ref="pic" offset="10184/30s" name="06-l" start="10184/30s" duration="112/30s"></asset-clip>
 </spine>
 </sequence>
 </project>
