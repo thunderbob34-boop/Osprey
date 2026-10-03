@@ -4,86 +4,89 @@
 <resources>
 <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>
 <format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>
-<asset id="pic" name="Thomas Crapper Didn&#x27;t Invent the Toilet - PICTURE" start="0s" duration="9683/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/Thomas%20Crapper%20Didn't%20Invent%20the%20Toilet%20-%20PICTURE.mp4"/></asset>
-<asset id="vo_01" name="VO 01" start="0s" duration="937/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/01-cold-open.mp3"/></asset>
-<asset id="vo_02" name="VO 02" start="0s" duration="1159/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/02-the-famous-version.mp3"/></asset>
-<asset id="vo_03" name="VO 03" start="0s" duration="2029/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/03-knossos.mp3"/></asset>
-<asset id="vo_04" name="VO 04" start="0s" duration="1652/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/04-harington-1596.mp3"/></asset>
+<asset id="pic" name="Thomas Crapper Didn&#x27;t Invent the Toilet - PICTURE" start="0s" duration="9596/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/Thomas%20Crapper%20Didn't%20Invent%20the%20Toilet%20-%20PICTURE.mp4"/></asset>
+<asset id="vo_01" name="VO 01" start="0s" duration="932/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/01-cold-open.mp3"/></asset>
+<asset id="vo_02" name="VO 02" start="0s" duration="1135/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/02-the-famous-version.mp3"/></asset>
+<asset id="vo_03" name="VO 03" start="0s" duration="1998/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/03-knossos.mp3"/></asset>
+<asset id="vo_04" name="VO 04" start="0s" duration="1663/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/04-harington-1596.mp3"/></asset>
 <asset id="vo_05" name="VO 05" start="0s" duration="1233/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/05-cumming-and-the-s-bend.mp3"/></asset>
-<asset id="vo_06" name="VO 06" start="0s" duration="1466/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/06-what-crapper-actually-did.mp3"/></asset>
+<asset id="vo_06" name="VO 06" start="0s" duration="1428/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/06-what-crapper-actually-did.mp3"/></asset>
 <asset id="vo_07" name="VO 07" start="0s" duration="1207/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/07-who-was-first.mp3"/></asset>
 </resources>
 <library>
 <event name="Somebody Did It First">
 <project name="Thomas Crapper Didn&#x27;t Invent the Toilet">
-<sequence format="r1" duration="9683/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+<sequence format="r1" duration="9596/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
 <spine>
-<asset-clip ref="pic" offset="0s" name="01-a" start="0s" duration="108/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="937/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
-<asset-clip ref="pic" offset="108/30s" name="01-b" start="108/30s" duration="119/30s"></asset-clip>
-<asset-clip ref="pic" offset="227/30s" name="01-c" start="227/30s" duration="148/30s"></asset-clip>
-<asset-clip ref="pic" offset="375/30s" name="01-d" start="375/30s" duration="89/30s"></asset-clip>
-<asset-clip ref="pic" offset="464/30s" name="01-e" start="464/30s" duration="98/30s"></asset-clip>
-<asset-clip ref="pic" offset="562/30s" name="01-f" start="562/30s" duration="89/30s"></asset-clip>
-<asset-clip ref="pic" offset="651/30s" name="01-g" start="651/30s" duration="158/30s"></asset-clip>
-<asset-clip ref="pic" offset="809/30s" name="01-h" start="809/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="937/30s" name="02-a" start="937/30s" duration="262/30s"><asset-clip ref="vo_02" lane="-1" offset="937/30s" start="0s" duration="1159/30s" name="VO 02" audioRole="dialogue"/><marker start="937/30s" duration="1/30s" value="02 The Famous Version"/></asset-clip>
-<asset-clip ref="pic" offset="1199/30s" name="02-c" start="1199/30s" duration="292/30s"></asset-clip>
-<asset-clip ref="pic" offset="1491/30s" name="02-e" start="1491/30s" duration="162/30s"></asset-clip>
-<asset-clip ref="pic" offset="1653/30s" name="02-f" start="1653/30s" duration="151/30s"></asset-clip>
-<asset-clip ref="pic" offset="1804/30s" name="02-g" start="1804/30s" duration="111/30s"></asset-clip>
-<asset-clip ref="pic" offset="1915/30s" name="02-h" start="1915/30s" duration="181/30s"></asset-clip>
-<asset-clip ref="pic" offset="2096/30s" name="03-a" start="2096/30s" duration="160/30s"><asset-clip ref="vo_03" lane="-1" offset="2096/30s" start="0s" duration="2029/30s" name="VO 03" audioRole="dialogue"/><marker start="2096/30s" duration="1/30s" value="03 Knossos"/></asset-clip>
-<asset-clip ref="pic" offset="2256/30s" name="03-b" start="2256/30s" duration="5s"></asset-clip>
-<asset-clip ref="pic" offset="2406/30s" name="03-c" start="2406/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="2534/30s" name="03-d" start="2534/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="2662/30s" name="03-e" start="2662/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="93s" name="03-f" start="93s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="2918/30s" name="03-g" start="2918/30s" duration="5s"></asset-clip>
-<asset-clip ref="pic" offset="3068/30s" name="03-h" start="3068/30s" duration="139/30s"></asset-clip>
-<asset-clip ref="pic" offset="3207/30s" name="03-i" start="3207/30s" duration="160/30s"></asset-clip>
-<asset-clip ref="pic" offset="3367/30s" name="03-j" start="3367/30s" duration="171/30s"></asset-clip>
-<asset-clip ref="pic" offset="3538/30s" name="03-k" start="3538/30s" duration="171/30s"></asset-clip>
-<asset-clip ref="pic" offset="3709/30s" name="03-l" start="3709/30s" duration="160/30s"></asset-clip>
-<asset-clip ref="pic" offset="3869/30s" name="03-m" start="3869/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="3997/30s" name="03-n" start="3997/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="4125/30s" name="04-a" start="4125/30s" duration="181/30s"><asset-clip ref="vo_04" lane="-1" offset="4125/30s" start="0s" duration="1652/30s" name="VO 04" audioRole="dialogue"/><marker start="4125/30s" duration="1/30s" value="04 Harington, 1596"/></asset-clip>
-<asset-clip ref="pic" offset="4306/30s" name="04-b" start="4306/30s" duration="85/30s"></asset-clip>
-<asset-clip ref="pic" offset="4391/30s" name="04-c" start="4391/30s" duration="5s"></asset-clip>
-<asset-clip ref="pic" offset="4541/30s" name="04-d" start="4541/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="4669/30s" name="04-e" start="4669/30s" duration="106/30s"></asset-clip>
-<asset-clip ref="pic" offset="4775/30s" name="04-f" start="4775/30s" duration="171/30s"></asset-clip>
-<asset-clip ref="pic" offset="4946/30s" name="04-g" start="4946/30s" duration="170/30s"></asset-clip>
-<asset-clip ref="pic" offset="5116/30s" name="04-h" start="5116/30s" duration="171/30s"></asset-clip>
-<asset-clip ref="pic" offset="5287/30s" name="04-i" start="5287/30s" duration="160/30s"></asset-clip>
-<asset-clip ref="pic" offset="5447/30s" name="04-j" start="5447/30s" duration="181/30s"></asset-clip>
-<asset-clip ref="pic" offset="5628/30s" name="04-k" start="5628/30s" duration="149/30s"></asset-clip>
-<asset-clip ref="pic" offset="5777/30s" name="05-a" start="5777/30s" duration="128/30s"><asset-clip ref="vo_05" lane="-1" offset="5777/30s" start="0s" duration="1233/30s" name="VO 05" audioRole="dialogue"/><marker start="5777/30s" duration="1/30s" value="05 Cumming and the S-Bend"/></asset-clip>
-<asset-clip ref="pic" offset="5905/30s" name="05-b" start="5905/30s" duration="202/30s"></asset-clip>
-<asset-clip ref="pic" offset="6107/30s" name="05-c" start="6107/30s" duration="201/30s"></asset-clip>
-<asset-clip ref="pic" offset="6308/30s" name="05-d" start="6308/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="6436/30s" name="05-e" start="6436/30s" duration="213/30s"></asset-clip>
-<asset-clip ref="pic" offset="6649/30s" name="05-f" start="6649/30s" duration="138/30s"></asset-clip>
-<asset-clip ref="pic" offset="6787/30s" name="05-g" start="6787/30s" duration="106/30s"></asset-clip>
-<asset-clip ref="pic" offset="6893/30s" name="05-h" start="6893/30s" duration="117/30s"></asset-clip>
-<asset-clip ref="pic" offset="7010/30s" name="06-a" start="7010/30s" duration="105/30s"><asset-clip ref="vo_06" lane="-1" offset="7010/30s" start="0s" duration="1466/30s" name="VO 06" audioRole="dialogue"/><marker start="7010/30s" duration="1/30s" value="06 What Crapper Actually Did"/></asset-clip>
-<asset-clip ref="pic" offset="7115/30s" name="06-b" start="7115/30s" duration="85/30s"></asset-clip>
-<asset-clip ref="pic" offset="240s" name="06-c" start="240s" duration="124/30s"></asset-clip>
-<asset-clip ref="pic" offset="7324/30s" name="06-d" start="7324/30s" duration="229/30s"></asset-clip>
-<asset-clip ref="pic" offset="7553/30s" name="06-e" start="7553/30s" duration="133/30s"></asset-clip>
-<asset-clip ref="pic" offset="7686/30s" name="06-f" start="7686/30s" duration="143/30s"></asset-clip>
-<asset-clip ref="pic" offset="7829/30s" name="06-g" start="7829/30s" duration="76/30s"></asset-clip>
-<asset-clip ref="pic" offset="7905/30s" name="06-h" start="7905/30s" duration="124/30s"></asset-clip>
-<asset-clip ref="pic" offset="8029/30s" name="06-i" start="8029/30s" duration="123/30s"></asset-clip>
-<asset-clip ref="pic" offset="8152/30s" name="06-j" start="8152/30s" duration="162/30s"></asset-clip>
-<asset-clip ref="pic" offset="8314/30s" name="06-k" start="8314/30s" duration="162/30s"></asset-clip>
-<asset-clip ref="pic" offset="8476/30s" name="07-a" start="8476/30s" duration="146/30s"><asset-clip ref="vo_07" lane="-1" offset="8476/30s" start="0s" duration="1207/30s" name="VO 07" audioRole="dialogue"/><marker start="8476/30s" duration="1/30s" value="07 Who Was First"/></asset-clip>
-<asset-clip ref="pic" offset="8622/30s" name="07-b" start="8622/30s" duration="195/30s"></asset-clip>
-<asset-clip ref="pic" offset="8817/30s" name="07-c" start="8817/30s" duration="195/30s"></asset-clip>
-<asset-clip ref="pic" offset="9012/30s" name="07-d" start="9012/30s" duration="110/30s"></asset-clip>
-<asset-clip ref="pic" offset="9122/30s" name="07-e" start="9122/30s" duration="195/30s"></asset-clip>
-<asset-clip ref="pic" offset="9317/30s" name="07-f" start="9317/30s" duration="98/30s"></asset-clip>
-<asset-clip ref="pic" offset="9415/30s" name="07-g" start="9415/30s" duration="158/30s"></asset-clip>
-<asset-clip ref="pic" offset="9573/30s" name="07-h" start="9573/30s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="0s" name="01-a" start="0s" duration="114/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="932/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
+<asset-clip ref="pic" offset="114/30s" name="01-b" start="114/30s" duration="124/30s"></asset-clip>
+<asset-clip ref="pic" offset="238/30s" name="01-c" start="238/30s" duration="156/30s"></asset-clip>
+<asset-clip ref="pic" offset="394/30s" name="01-d" start="394/30s" duration="93/30s"></asset-clip>
+<asset-clip ref="pic" offset="487/30s" name="01-e" start="487/30s" duration="103/30s"></asset-clip>
+<asset-clip ref="pic" offset="590/30s" name="01-f" start="590/30s" duration="93/30s"></asset-clip>
+<asset-clip ref="pic" offset="683/30s" name="01-g" start="683/30s" duration="125/30s"></asset-clip>
+<asset-clip ref="pic" offset="808/30s" name="01-h" start="808/30s" duration="124/30s"></asset-clip>
+<asset-clip ref="pic" offset="932/30s" name="02-a" start="932/30s" duration="149/30s"><asset-clip ref="vo_02" lane="-1" offset="932/30s" start="0s" duration="1135/30s" name="VO 02" audioRole="dialogue"/><marker start="932/30s" duration="1/30s" value="02 The Famous Version"/></asset-clip>
+<asset-clip ref="pic" offset="1081/30s" name="02-b" start="1081/30s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="1191/30s" name="02-c" start="1191/30s" duration="109/30s"></asset-clip>
+<asset-clip ref="pic" offset="1300/30s" name="02-d" start="1300/30s" duration="170/30s"></asset-clip>
+<asset-clip ref="pic" offset="49s" name="02-e" start="49s" duration="159/30s"></asset-clip>
+<asset-clip ref="pic" offset="1629/30s" name="02-f" start="1629/30s" duration="149/30s"></asset-clip>
+<asset-clip ref="pic" offset="1778/30s" name="02-g" start="1778/30s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="1888/30s" name="02-h" start="1888/30s" duration="179/30s"></asset-clip>
+<asset-clip ref="pic" offset="2067/30s" name="03-a" start="2067/30s" duration="165/30s"><asset-clip ref="vo_03" lane="-1" offset="2067/30s" start="0s" duration="1998/30s" name="VO 03" audioRole="dialogue"/><marker start="2067/30s" duration="1/30s" value="03 Knossos"/></asset-clip>
+<asset-clip ref="pic" offset="2232/30s" name="03-b" start="2232/30s" duration="153/30s"></asset-clip>
+<asset-clip ref="pic" offset="2385/30s" name="03-c" start="2385/30s" duration="132/30s"></asset-clip>
+<asset-clip ref="pic" offset="2517/30s" name="03-d" start="2517/30s" duration="132/30s"></asset-clip>
+<asset-clip ref="pic" offset="2649/30s" name="03-e" start="2649/30s" duration="143/30s"></asset-clip>
+<asset-clip ref="pic" offset="2792/30s" name="03-f" start="2792/30s" duration="186/30s"></asset-clip>
+<asset-clip ref="pic" offset="2978/30s" name="03-g" start="2978/30s" duration="143/30s"></asset-clip>
+<asset-clip ref="pic" offset="3121/30s" name="03-h" start="3121/30s" duration="165/30s"></asset-clip>
+<asset-clip ref="pic" offset="3286/30s" name="03-i" start="3286/30s" duration="175/30s"></asset-clip>
+<asset-clip ref="pic" offset="3461/30s" name="03-j" start="3461/30s" duration="176/30s"></asset-clip>
+<asset-clip ref="pic" offset="3637/30s" name="03-k" start="3637/30s" duration="165/30s"></asset-clip>
+<asset-clip ref="pic" offset="3802/30s" name="03-l" start="3802/30s" duration="131/30s"></asset-clip>
+<asset-clip ref="pic" offset="3933/30s" name="03-m" start="3933/30s" duration="132/30s"></asset-clip>
+<asset-clip ref="pic" offset="4065/30s" name="04-a" start="4065/30s" duration="184/30s"><asset-clip ref="vo_04" lane="-1" offset="4065/30s" start="0s" duration="1663/30s" name="VO 04" audioRole="dialogue"/><marker start="4065/30s" duration="1/30s" value="04 Harington, 1596"/></asset-clip>
+<asset-clip ref="pic" offset="4249/30s" name="04-b" start="4249/30s" duration="86/30s"></asset-clip>
+<asset-clip ref="pic" offset="4335/30s" name="04-c" start="4335/30s" duration="151/30s"></asset-clip>
+<asset-clip ref="pic" offset="4486/30s" name="04-d" start="4486/30s" duration="130/30s"></asset-clip>
+<asset-clip ref="pic" offset="4616/30s" name="04-e" start="4616/30s" duration="108/30s"></asset-clip>
+<asset-clip ref="pic" offset="4724/30s" name="04-f" start="4724/30s" duration="173/30s"></asset-clip>
+<asset-clip ref="pic" offset="4897/30s" name="04-g" start="4897/30s" duration="172/30s"></asset-clip>
+<asset-clip ref="pic" offset="5069/30s" name="04-h" start="5069/30s" duration="173/30s"></asset-clip>
+<asset-clip ref="pic" offset="5242/30s" name="04-i" start="5242/30s" duration="162/30s"></asset-clip>
+<asset-clip ref="pic" offset="5404/30s" name="04-j" start="5404/30s" duration="173/30s"></asset-clip>
+<asset-clip ref="pic" offset="5577/30s" name="04-k" start="5577/30s" duration="151/30s"></asset-clip>
+<asset-clip ref="pic" offset="5728/30s" name="05-a" start="5728/30s" duration="128/30s"><asset-clip ref="vo_05" lane="-1" offset="5728/30s" start="0s" duration="1233/30s" name="VO 05" audioRole="dialogue"/><marker start="5728/30s" duration="1/30s" value="05 Cumming and the S-Bend"/></asset-clip>
+<asset-clip ref="pic" offset="5856/30s" name="05-b" start="5856/30s" duration="148/30s"></asset-clip>
+<asset-clip ref="pic" offset="6004/30s" name="05-c" start="6004/30s" duration="160/30s"></asset-clip>
+<asset-clip ref="pic" offset="6164/30s" name="05-d" start="6164/30s" duration="95/30s"></asset-clip>
+<asset-clip ref="pic" offset="6259/30s" name="05-e" start="6259/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="6387/30s" name="05-f" start="6387/30s" duration="106/30s"></asset-clip>
+<asset-clip ref="pic" offset="6493/30s" name="05-g" start="6493/30s" duration="107/30s"></asset-clip>
+<asset-clip ref="pic" offset="220s" name="05-h" start="220s" duration="138/30s"></asset-clip>
+<asset-clip ref="pic" offset="6738/30s" name="05-i" start="6738/30s" duration="106/30s"></asset-clip>
+<asset-clip ref="pic" offset="6844/30s" name="05-j" start="6844/30s" duration="117/30s"></asset-clip>
+<asset-clip ref="pic" offset="6961/30s" name="06-a" start="6961/30s" duration="148/30s"><asset-clip ref="vo_06" lane="-1" offset="6961/30s" start="0s" duration="1428/30s" name="VO 06" audioRole="dialogue"/><marker start="6961/30s" duration="1/30s" value="06 What Crapper Actually Did"/></asset-clip>
+<asset-clip ref="pic" offset="7109/30s" name="06-b" start="7109/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="7237/30s" name="06-c" start="7237/30s" duration="108/30s"></asset-clip>
+<asset-clip ref="pic" offset="7345/30s" name="06-d" start="7345/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="7473/30s" name="06-e" start="7473/30s" duration="138/30s"></asset-clip>
+<asset-clip ref="pic" offset="7611/30s" name="06-f" start="7611/30s" duration="148/30s"></asset-clip>
+<asset-clip ref="pic" offset="7759/30s" name="06-g" start="7759/30s" duration="78/30s"></asset-clip>
+<asset-clip ref="pic" offset="7837/30s" name="06-h" start="7837/30s" duration="129/30s"></asset-clip>
+<asset-clip ref="pic" offset="7966/30s" name="06-i" start="7966/30s" duration="108/30s"></asset-clip>
+<asset-clip ref="pic" offset="8074/30s" name="06-j" start="8074/30s" duration="148/30s"></asset-clip>
+<asset-clip ref="pic" offset="8222/30s" name="06-k" start="8222/30s" duration="167/30s"></asset-clip>
+<asset-clip ref="pic" offset="8389/30s" name="07-a" start="8389/30s" duration="146/30s"><asset-clip ref="vo_07" lane="-1" offset="8389/30s" start="0s" duration="1207/30s" name="VO 07" audioRole="dialogue"/><marker start="8389/30s" duration="1/30s" value="07 Who Was First"/></asset-clip>
+<asset-clip ref="pic" offset="8535/30s" name="07-b" start="8535/30s" duration="195/30s"></asset-clip>
+<asset-clip ref="pic" offset="291s" name="07-c" start="291s" duration="195/30s"></asset-clip>
+<asset-clip ref="pic" offset="8925/30s" name="07-d" start="8925/30s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="9035/30s" name="07-e" start="9035/30s" duration="195/30s"></asset-clip>
+<asset-clip ref="pic" offset="9230/30s" name="07-f" start="9230/30s" duration="98/30s"></asset-clip>
+<asset-clip ref="pic" offset="9328/30s" name="07-g" start="9328/30s" duration="158/30s"></asset-clip>
+<asset-clip ref="pic" offset="9486/30s" name="07-h" start="9486/30s" duration="110/30s"></asset-clip>
 </spine>
 </sequence>
 </project>
