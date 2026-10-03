@@ -640,10 +640,9 @@
    "labels": [
     {
      "name": "Massachusetts Bay",
-     "lat": 42.35,
-     "lon": -70.65,
-     "kind": "sea",
-     "size": 30
+     "lat": 42.1,
+     "lon": -70.3,
+     "kind": "sea"
     }
    ],
    "from": {
