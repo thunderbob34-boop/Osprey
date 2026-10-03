@@ -315,20 +315,12 @@
      "icon": "dot",
      "label": "the legend's pizza",
      "lx": 40,
-     "ly": 55,
+     "ly": -40,
      "at": 2.0,
      "dur": 1.6
     }
    ],
-   "labels": [
-    {
-     "name": "Bay of Naples",
-     "lat": 40.8,
-     "lon": 14.25,
-     "kind": "sea",
-     "size": 30
-    }
-   ],
+   "labels": [],
    "from": {
     "lat": 40.8,
     "lon": 14.25,
@@ -744,21 +736,13 @@
      "icon": "dot",
      "label": "the legend's letter",
      "lx": 40,
-     "ly": 55,
+     "ly": -40,
      "color": "#3A6EA5",
      "at": 3.6,
      "dur": 2.4
     }
    ],
-   "labels": [
-    {
-     "name": "Bay of Naples",
-     "lat": 40.8,
-     "lon": 14.25,
-     "kind": "sea",
-     "size": 30
-    }
-   ],
+   "labels": [],
    "from": {
     "lat": 40.8,
     "lon": 14.25,
@@ -778,72 +762,16 @@
   "section_name": "The Letter",
   "text": "you'd expect it to be addressed to Raffaele Esposito, right?",
   "type": "pinmap",
-  "template": "pinmap",
+  "template": "scene",
   "fields": {
-   "title": "What you'd expect",
-   "pins": [
-    {
-     "name": "The pizzeria, in the legend",
-     "lat": 40.8367,
-     "lon": 14.2468,
-     "sub": "You'd expect: Raffaele Esposito",
-     "side": "left",
-     "first": true,
-     "pulse": true,
-     "at": -1
-    },
-    {
-     "name": "Capodimonte palace (in the legend)",
-     "lat": 40.8664,
-     "lon": 14.2504,
-     "sub": "",
-     "first": false,
-     "pulse": false,
-     "at": -1
-    }
-   ],
-   "routes": [
-    {
-     "points": [
-      [
-       40.8664,
-       14.2504
-      ],
-      [
-       40.85155,
-       14.2486
-      ],
-      [
-       40.8367,
-       14.2468
-      ]
-     ],
-     "style": "dash",
-     "icon": "dot",
-     "label": "the legend's letter",
-     "lx": 40,
-     "ly": 55,
-     "color": "#3A6EA5",
-     "at": -5,
-     "dur": 1
-    }
-   ],
-   "labels": [
-    {
-     "name": "Bay of Naples",
-     "lat": 40.8,
-     "lon": 14.25,
-     "kind": "sea",
-     "size": 30,
-     "at": -1
-    }
-   ],
-   "from": false,
-   "span": 0.3,
-   "caption": "You'd expect it addressed to Raffaele Esposito",
-   "note": "Natural Earth · positions approximate · the line is the legend, not a documented route"
+   "scene": "letter",
+   "tag": "ILLUSTRATION · Not the actual letter",
+   "params": {
+    "title": "You'd expect it addressed to Raffaele Esposito",
+    "highlight": []
+   }
   },
-  "visual": "Same view continues with no new fly-in: the pizzeria pin pulses with \"You'd expect: Raffaele Esposito\".",
+  "visual": "The illustrated letter, no callouts yet",
   "source": null
  },
  {
@@ -1071,25 +999,28 @@
   "section_name": "Who Made It Up",
   "text": "What Nowak has is a letter with the seal in the wrong place,",
   "type": "scene",
-  "template": "scene",
+  "template": "archival",
   "fields": {
-   "scene": "letter",
-   "tag": "ILLUSTRATION · Not the actual letter",
-   "params": {
-    "title": "What Nowak has: the letter's three problems",
-    "highlight": [
-     "seal",
-     "handwriting",
-     "name"
-    ],
-    "step": 1,
-    "at": {
-     "seal": 2.6
-    }
+   "kind": "document",
+   "label": "Nowak's 2014 article (article page)",
+   "lower": "What Nowak has: the seal, the handwriting, the wrong surname (Nowak's 2014 article)",
+   "asset": "tandfonline-com-doi-abs-10-2752-175174414x13828682779249",
+   "crop": "New crop on the abstract",
+   "zoom": {
+    "scale": 1.6,
+    "x": 45,
+    "y": 55
    }
   },
-  "visual": "The letter; the seal callout lands.",
-  "source": null,
+  "visual": "New crop on the abstract",
+  "source": {
+   "institution": "Food, Culture & Society (Taylor & Francis)",
+   "item": "Zachary Nowak, \"Folklore, Fakelore, History: Invented Tradition and the Origins of the Pizza Margherita\", vol. 17, no. 1, 2014",
+   "url": "https://www.tandfonline.com/doi/abs/10.2752/175174414X13828682779249",
+   "rights": "Publisher copyright; not stated as open. Use only the title/abstract page and check permission, or replace with a text card",
+   "credit": "Food, Culture & Society 17(1), 2014",
+   "verified": false
+  },
   "notes": "Two-beat build, 04-i/04-j."
  },
  {
@@ -1435,18 +1366,28 @@
   "section_name": "The Pizza Was Already There",
   "text": "it's one of the combinations, and he doesn't call it a Margherita. He doesn't use that name.",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Rocco doesn't call it a Margherita",
-   "sub": "He doesn't use that name",
-   "bgmap": {
-    "lat": 40.85,
-    "lon": 14.27,
-    "span": 3
+   "kind": "document",
+   "label": "Usi e costumi di Napoli e contorni, 1858",
+   "lower": "Usi e costumi di Napoli e contorni (1858)",
+   "asset": "archive-org-details-rcin-org-pl-wa248-143354-f-24166-2-neapo",
+   "crop": "New crop: a text page, slow push-in",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 60
    }
   },
-  "visual": "Kinetic text: Rocco doesn't call it a Margherita, he doesn't use that name.",
-  "source": null
+  "visual": "New crop: a text page, slow push-in",
+  "source": {
+   "institution": "Internet Archive (Library of the Institute of Literary Research PAS, RCIN)",
+   "item": "Usi e costumi di Napoli e contorni descritti e dipinti. T. 2 (1858)",
+   "url": "https://archive.org/details/rcin.org.pl.WA248_143354_F-24166-2_neapol2_o_116709",
+   "rights": "Public domain (as stated in the search result for the Internet Archive listing)",
+   "credit": "F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive",
+   "verified": true
+  }
  },
  {
   "id": "05-j",
@@ -1526,13 +1467,6 @@
      "lon": 13.5,
      "kind": "region",
      "size": 40
-    },
-    {
-     "name": "Bay of Naples",
-     "lat": 40.74,
-     "lon": 14.17,
-     "kind": "sea",
-     "size": 28
     }
    ],
    "from": {
@@ -1673,21 +1607,13 @@
      "icon": "dot",
      "label": "Unknown: did he serve her?",
      "lx": 40,
-     "ly": 55,
+     "ly": -40,
      "color": "#8B8170",
      "at": 2.0,
      "dur": 1.7
     }
    ],
-   "labels": [
-    {
-     "name": "Bay of Naples",
-     "lat": 40.8,
-     "lon": 14.25,
-     "kind": "sea",
-     "size": 30
-    }
-   ],
+   "labels": [],
    "from": {
     "lat": 40.8,
     "lon": 14.25,
@@ -1751,22 +1677,13 @@
      "icon": "dot",
      "label": "Unknown: did he serve her?",
      "lx": 40,
-     "ly": 55,
+     "ly": -40,
      "color": "#8B8170",
      "at": -5,
      "dur": 1
     }
    ],
-   "labels": [
-    {
-     "name": "Bay of Naples",
-     "lat": 40.8,
-     "lon": 14.25,
-     "kind": "sea",
-     "size": 30,
-     "at": -1
-    }
-   ],
+   "labels": [],
    "from": false,
    "span": 0.3,
    "caption": "Unknown: maybe he did",
@@ -1912,28 +1829,28 @@
   "section_name": "Who Was First",
   "text": "So here's where it lands. The famous story says Raffaele Esposito invented pizza Margherita",
   "type": "scene",
-  "template": "scene",
+  "template": "archival",
   "fields": {
-   "scene": "pizza",
-   "tag": "ILLUSTRATION · Simplified, the pizza as the legend tells it",
-   "params": {
-    "title": "The famous story: pizza Margherita",
-    "layers": [
-     "tomato",
-     "mozzarella",
-     "basil"
-    ],
-    "flag": true,
-    "at": {
-     "tomato": 0.3,
-     "mozzarella": 0.8,
-     "basil": 1.3,
-     "flag": 2.0
-    }
+   "kind": "portrait",
+   "label": "Queen Margherita of Savoy",
+   "lower": "Queen Margherita of Savoy (photographed c. 1910-1915, years after 1889)",
+   "asset": "loc-gov-resource-ggbain-19206",
+   "crop": "New crop, centred on the face",
+   "zoom": {
+    "scale": 1.6,
+    "x": 50,
+    "y": 35
    }
   },
-  "visual": "The legend's pizza builds beside the green, white and red stripes.",
-  "source": null
+  "visual": "New crop, centred on the face",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division (Bain News Service)",
+   "item": "Dowager Queen Margherita -- Italy (digital file from original negative)",
+   "url": "https://www.loc.gov/resource/ggbain.19206",
+   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
+   "credit": "George Grantham Bain Collection, Library of Congress, LC-DIG-ggbain-19206",
+   "verified": true
+  }
  },
  {
   "id": "07-b",
@@ -1967,14 +1884,8 @@
    "params": {
     "title": "Nowak's argument: three problems",
     "highlight": [
-     "seal",
-     "handwriting",
-     "name"
-    ],
-    "step": 1,
-    "at": {
-     "seal": 2.8
-    }
+     "seal"
+    ]
    }
   },
   "visual": "The letter; the seal callout lands.",
@@ -1995,14 +1906,9 @@
     "title": "Nowak's argument: three problems",
     "highlight": [
      "seal",
-     "handwriting",
-     "name"
+     "handwriting"
     ],
-    "step": 2,
-    "at": {
-     "seal": -10,
-     "handwriting": 0.4
-    }
+    "step": 2
    }
   },
   "visual": "Seal already shown; a callout lands on the handwriting.",
@@ -2072,29 +1978,28 @@
   "section_name": "Who Was First",
   "text": "And the pizza itself, basil and thin slices of mozzarella and sometimes tomato,",
   "type": "scene",
-  "template": "scene",
+  "template": "archival",
   "fields": {
-   "scene": "pizza",
-   "tag": "ILLUSTRATION · Simplified, from Rocco's written description",
-   "params": {
-    "title": "Rocco, 1858: basil, thin mozzarella, sometimes tomato",
-    "layers": [
-     "basil",
-     "mozzarella",
-     "tomato"
-    ],
-    "optional": [
-     "tomato"
-    ],
-    "at": {
-     "basil": 1.2,
-     "mozzarella": 2.2,
-     "tomato": 3.4
-    }
+   "kind": "engraving",
+   "label": "\"Il pizzaiuolo\", 1858 print",
+   "lower": "\"Il pizzaiuolo\" (The Pizza Maker), plate in Usi e costumi di Napoli e contorni (1858)",
+   "asset": "commons-wikimedia-org-wiki-file-bourcard-1858-p2-172-il-pizz",
+   "crop": "Tight crop on the pizza maker's hands and the pizza",
+   "zoom": {
+    "scale": 2.0,
+    "x": 50,
+    "y": 62
    }
   },
-  "visual": "Basil, then thin slices of mozzarella, then faint tomato labelled \"(sometimes)\".",
-  "source": null,
+  "visual": "Tight crop on the pizza maker's hands and the pizza",
+  "source": {
+   "institution": "British Library (digitised, via Wikimedia Commons)",
+   "item": "BOURCARD(1858) p2.172 - IL PIZZAIUOLO.jpg (plate by F. Palizzi, from Usi e costumi di Napoli e contorni, vol. 2, p. 172; HMNTS 10129.g.27)",
+   "url": "https://commons.wikimedia.org/wiki/File:BOURCARD(1858)_p2.172_-_IL_PIZZAIUOLO.jpg",
+   "rights": "Public domain (Creative Commons Public Domain Mark 1.0, as stated on the Commons file page)",
+   "credit": "F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library",
+   "verified": true
+  },
   "notes": "Never labelled a Margherita."
  },
  {
