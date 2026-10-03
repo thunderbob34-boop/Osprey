@@ -2,7 +2,7 @@
 // Usage: node motion.mjs <timed.json> <clipdir> <posterdir> [workers] [ids...]
 // timed.json: [{id, template, fields, source, frames, fps, img?}]. Writes <clipdir>/<id>.mp4 and <posterdir>/<id>.png
 // (a still at 70% of the beat, used for contact sheets). Beats whose data and template haven't changed are skipped.
-import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+const { chromium } = await import(process.env.PW_MODULE || '/opt/node22/lib/node_modules/playwright/index.mjs');
 import fs from 'fs'; import path from 'path'; import url from 'url'; import crypto from 'crypto'; import { spawn } from 'child_process';
 const here = path.dirname(url.fileURLToPath(import.meta.url));
 const [,, timedPath, clipDir, posterDir, workersArg, ...only] = process.argv;
@@ -19,7 +19,7 @@ const todo = beats.filter(b => {
   return !(fs.existsSync(kf) && fs.readFileSync(kf, 'utf8') === key && fs.existsSync(path.join(clipDir, b.id + '.mp4')));
 });
 console.log(`clips to render: ${todo.length} of ${beats.length}`);
-const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--allow-file-access-from-files'] });
+const browser = await chromium.launch({ ...(process.env.CHROME_PATH === 'default' ? {} : { executablePath: process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' }), args: ['--allow-file-access-from-files'] });
 let n = 0, done = 0;
 async function worker() {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });

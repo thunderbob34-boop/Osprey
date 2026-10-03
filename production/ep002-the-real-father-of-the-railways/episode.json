@@ -10,5 +10,37 @@
    "There is no period image of the 1804 run itself. Those beats use the conjectural model, a modern replica photo (captioned as modern) and maps. The Terence Cuneo painting is modern and in copyright, so it was left out."
   ],
   "review": "It ran several times on the motion cut. No pass found a High problem. Fixes made: runs of text cards became archival push-ins with the words in the lower-third; map labels moved apart; the plateway callouts were trimmed; the rail crack was timed to land on \"kept cracking the rails\"."
+ },
+ "timebar": {
+  "range": [
+   1800,
+   1870
+  ],
+  "marks": [
+   [
+    1804,
+    "Penydarren"
+   ],
+   [
+    1812,
+    "Middleton"
+   ],
+   [
+    1825,
+    "Stockton"
+   ],
+   [
+    1829,
+    "Rainhill"
+   ],
+   [
+    1833,
+    "Trevithick dies"
+   ],
+   [
+    1862,
+    "Vanderbilt"
+   ]
+  ]
  }
 }

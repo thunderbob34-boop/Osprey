@@ -69,10 +69,20 @@ def asset_path(b):
     a = (b.get('fields') or {}).get('asset')
     for e in ('jpg', 'jpeg', 'png', 'webp'):
         if a and (EP / 'assets' / f'{a}.{e}').exists(): return (EP / 'assets' / f'{a}.{e}').as_uri()
-timed = [{'id': b['id'], 'template': b['template'], 'fields': b.get('fields') or {}, 'source': b.get('source') or {},
-          'frames': b['frames'], 'fps': FPS, **({'img': asset_path(b)} if asset_path(b) else {})} for b in beats]
+TB = meta.get('timebar'); prev_year = None; timed = []
+for b in beats:
+    tb = None
+    if TB:
+        year = b.get('year', prev_year)
+        tb = {**TB, 'from': prev_year if prev_year is not None else year, 'to': year}; prev_year = year
+    timed.append({'id': b['id'], 'template': b['template'], 'fields': b.get('fields') or {}, 'source': b.get('source') or {},
+                  'frames': b['frames'], 'fps': FPS, **({'timebar': tb} if tb else {}), **({'img': asset_path(b)} if asset_path(b) else {})})
 (EP / 'build').mkdir(exist_ok=True)
 (EP / 'build' / 'timed.json').write_text(json.dumps(timed))
+if (EP / 'images.json').exists():   # photo beats are finished in the Higgsfield sandbox, which can reach the image hosts
+    IM = json.load(open(EP / 'images.json'))
+    rb = [{**t, 'start_frame': b['start_frame']} for t, b in zip(timed, beats) if t['template'] == 'archival' and (t['fields'].get('asset') in IM)]
+    (EP / 'remote-beats.json').write_text(json.dumps({'images': {k: IM[k] for k in {r['fields']['asset'] for r in rb}}, 'beats': rb, 'fps': FPS, 'total_frames': TOTAL}, indent=0))
 if not skip_render:
     subprocess.run(['node', str(HERE / 'motion.mjs'), str(EP / 'build' / 'timed.json'), str(cdir), str(gdir), os.environ.get('WORKERS', '3')], check=True)
     subprocess.run(['node', str(HERE / 'render.mjs'), str(SL), str(gdir)], check=True, env={**os.environ, 'LABELS_ONLY': '1'})

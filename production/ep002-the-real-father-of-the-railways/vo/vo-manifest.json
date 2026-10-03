@@ -1,47 +1,47 @@
 {
  "voice": "Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f)",
  "engine": "text2speech_v2 / seed_speech",
- "note": "Read by Holden on Seed Speech from the final script text. Pronunciation respellings used in the TTS text only (the script and on-screen text keep the real spelling): Penydarren read as \"Penny-darren\"; Merthyr read as \"Mer-thur\"; Abercynon read as \"Aber-kunnon\"",
+ "note": "Read by Holden on Seed Speech from the final script text. Pronunciation respellings used in the TTS text only (the script and on-screen text keep the real spelling): Penydarren read as \"Penny-darren\"; Merthyr read as \"Mer-thur\"; Abercynon read as \"Aber-kunnon\" Sections 01-05 re-read on 2026-10-04 after Gus's notes (Vanderbilt opening, no \"right?\", no asides, \"No. 1\" read as \"Number One\").",
  "sections": [
   {
    "num": "01",
    "name": "Cold Open",
    "file": "vo/01-cold-open.mp3",
-   "job_id": "1cfd301b-3dbf-460a-97e5-edf9aed5ddce",
-   "duration": 42.672,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002403_1cfd301b-3dbf-460a-97e5-edf9aed5ddce.mp3"
+   "job_id": "dd1a19ac-529a-4ffa-a529-e2ea089a840d",
+   "duration": 52.056,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_122559_dd1a19ac-529a-4ffa-a529-e2ea089a840d.mp3"
   },
   {
    "num": "02",
    "name": "The Version Everybody Knows",
    "file": "vo/02-the-version-everybody-knows.mp3",
-   "job_id": "219af8fc-68cf-43b0-810e-9a34a046204b",
-   "duration": 44.808,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002403_219af8fc-68cf-43b0-810e-9a34a046204b.mp3"
+   "job_id": "a04d27ff-8f5b-487d-8649-741150152306",
+   "duration": 48.768,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_123035_a04d27ff-8f5b-487d-8649-741150152306.mp3"
   },
   {
    "num": "03",
    "name": "Penydarren, 1804",
    "file": "vo/03-penydarren-1804.mp3",
-   "job_id": "be429580-645a-4920-ad5d-4d383ae287a0",
-   "duration": 77.232,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002403_be429580-645a-4920-ad5d-4d383ae287a0.mp3"
+   "job_id": "24bfeec9-434a-4fc8-9062-7b396aad5a29",
+   "duration": 70.824,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_123035_24bfeec9-434a-4fc8-9062-7b396aad5a29.mp3"
   },
   {
    "num": "04",
    "name": "The Catch",
    "file": "vo/04-the-catch.mp3",
-   "job_id": "fde41fa0-0f67-4bea-88e7-b726f1bbd14d",
-   "duration": 43.248,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002403_fde41fa0-0f67-4bea-88e7-b726f1bbd14d.mp3"
+   "job_id": "751a9e24-bdf5-4aab-b443-aa0de5b7860c",
+   "duration": 36.432,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_123035_751a9e24-bdf5-4aab-b443-aa0de5b7860c.mp3"
   },
   {
    "num": "05",
    "name": "Who Made It Pay",
    "file": "vo/05-who-made-it-pay.mp3",
-   "job_id": "9c442010-023f-4420-a188-08722f7fa717",
-   "duration": 87.552,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002403_9c442010-023f-4420-a188-08722f7fa717.mp3"
+   "job_id": "ee9f48f5-fac1-49b6-9433-d0a0b6e97084",
+   "duration": 79.464,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_123035_ee9f48f5-fac1-49b6-9433-d0a0b6e97084.mp3"
   },
   {
    "num": "06",
