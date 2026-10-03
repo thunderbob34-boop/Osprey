@@ -44,7 +44,7 @@ Total runtime 5:38.7 (74 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 04-i | 2:42.8 | 4.6s | What Nowak has is a letter with the seal… | The letter; the seal callout lands. | illustrated scene (code) |  |
 | 04-j | 2:47.4 | 3.6s | handwriting that doesn&#x27;t match, and the wrong surname on… | Seal callout already shown; callouts land on the handwriting, then the name. | illustrated scene (code) |  |
 | 04-k | 2:51.0 | 5.7s | and from that he thinks it was probably made… | Camera flies from central Italy down to the pizzeria in Naples; the pin carries &quot;Brandi family from the 1930s, per Nowak&quot;. | animated map |  |
-| 04-l | 2:56.7 | 3.6s | So that&#x27;s how I&#x27;m going to say it, probably… | Flow, box 1: &quot;Probably fake&quot;. | motion graphic |  |
+| 04-l | 2:56.7 | 3.6s | So that&#x27;s how I&#x27;m going to say it, probably… | The illustrated letter; a red PROBABLY FAKE stamp lands on it. | illustrated scene (code) |  |
 | 04-m | 3:00.2 | 4.3s | and likely the Brandi family, and not one word… | Flow, box 2 builds in: &quot;Likely the Brandi family&quot;. Caption: not one word stronger. | motion graphic |  |
 | 05-a | 3:04.5 | 6.7s | And there&#x27;s more, because even if you set the… | The 1858 plate again, a different crop on the left side. | archival (fetch) | F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library ✅ |
 | 05-b | 3:11.2 | 7.1s | In 1858, in a book about the customs of… | The 1858 book pushes in; lower-third gives its title and year. | archival (fetch) | F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive ✅ |
