@@ -33,7 +33,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 3b. Episodes 2-5: built 2026-10-03 in `production/ep002-…` to `ep005-…` with the shared kit (`production/_shared/`).
    - Runtimes and beats: ep2 5:51 (77), ep3 5:43 (71), ep4 5:39 (64), ep5 5:23 (70).
    - Each has Holden narration, a validated FCPXML, an animatic, A/B thumbnails, PENDING-ASSETS and a README. Narration cost 43.6 credits for all four; the balance is 270.94.
-   - Blind reviews found no High problems. Every Medium was fixed. Ep2, ep3 and ep4 ended on clean passes, with ep3 clean twice in a row. Ep5's last review pass is recorded in its README.
+   - Blind reviews found no High problems. Every Medium was fixed. All four ended on a clean pass, and ep3 was clean twice in a row.
    - **Still open:** 124 archival beats across the four are placeholders, for the same network reason as the pilot. Rights are stated for only some items; see each README.
    - Ep4 must not air until the Nowak article and the 1858 text are in hand.
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).
