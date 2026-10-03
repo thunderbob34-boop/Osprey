@@ -4,9 +4,9 @@ READING NOTES
 - Runtime is about 6 to 7 minutes at a relaxed pace, roughly 999 spoken words.
 - Tone is calm and matter-of-fact. The ending, where Trevithick dies poor, stays plain and flat, no sad music voice, the facts carry it.
 - Say Trevithick as treh-VITH-ick, Penydarren as pen-uh-DARR-en, Merthyr as MER-thur, Abercynon as ab-er-KUN-un, Hackworth as HACK-worth.
-- Rainhill Trials: the Liverpool and Manchester Railway's October 1829 contest to choose its engine, £500 prize (Wikipedia, National Railway Museum). "Rocket" was the engine's name; in 1829 a rocket meant a firework.
-- Vanderbilt (added 2026-10-04 for US viewers): director of the Harlem Railroad from 1857, bought in heavily 1862-63, New York Central by 1867 (EBSCO, Encyclopedia.com). Keep "in a big way".
-- No "right?" tags and no narrator self-commentary ("I want to be careful", "to be fair", "I'm not taking that away") per Gus, 2026-10-04. Hedges stay, said plainly.
+- Rainhill Trials: the Liverpool and Manchester Railway's October 1829 contest to choose its engine, run 6-13 Oct 1829 (ASME landmark page, checked 2026-10-03). "Rocket" was the engine's name; in 1829 a rocket meant a firework.
+- Vanderbilt (added 2026-10-03 for US viewers): director of the Harlem Railroad from 1857, bought in heavily 1862-63, New York Central by 1867 (EBSCO; Encyclopedia.com, checked 2026-10-03). Keep "in a big way".
+- No "right?" tags and no narrator self-commentary ("I want to be careful", "to be fair", "I'm not taking that away") per Gus, 2026-10-03. Read "Locomotion No. 1" as "Locomotion Number One" (the narration input spells it out). Hedges stay, said plainly.
 - Every hedge in here is on purpose. Read "about seventy", "nearly ten miles", "nearly five miles an hour", "first known", "the story goes", "largely" and "counted as" exactly as written. Don't say how long the run took, the sources disagree, and don't put a duration on screen.
 - Rocket was built under Robert Stephenson, George's son. Keep the two first names straight on screen.
 - Good on-screen text moments are Feb 21 1804, 5 wagons / 10 tons / about 70 men, nearly 10 miles, 1812 Middleton Railway, 1813-14 Puffing Billy, Sept 27 1825, Oct 1829 Rainhill, and April 22 1833.
