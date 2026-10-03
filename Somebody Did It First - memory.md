@@ -110,6 +110,12 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
   Checks added:
   - The blind script read now flags "right?", narrator asides, slogan lines, unexplained terms, and abbreviations TTS may misread ("No. 1" is written "Number One").
   - The stranger's test asks "would an American viewer know this name or term?"
+- **2026-10-03, v3 cuts: condescending and repetitive (Gus).**
+  - Gus's verdict: ep2 good, ep3 OK, ep4 fell apart.
+  - The scripts assume viewers lack basic history knowledge, and they restate the same point four or five times in different words. "That's not an educational video."
+  - Root cause: the scripts were written for hedging safety, so every claim got restated with its caveat. No check looked for repetition or talking down.
+  - Next direction (proposed by Gus): shorts that Gus voices himself, the same way as Lumber Counter Talk and Heavier Runners. That sets the voice, troubleshoots the facts, and generates ideas. The long episodes get redone after that.
+  - Check added: every script pass counts restatements (the same point made twice is cut), and the blind read asks "where does this talk down to someone who knows basic history?"
 - **2026-10-03, Hanaoka date.**
   - "October 13, 1804" is the Japanese-calendar date; it falls on 14 November 1804 on ours.
   - The research had kept the date unqualified. The script now says "by the Japanese calendar of the time", and ep3 sections 06–07 were re-read.
