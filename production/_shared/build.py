@@ -54,9 +54,10 @@ for s in order:
     total_frames = round(vo_by[s]['duration'] * FPS)
     words = [len(b['text'].split()) for b in sb]
     W = sum(words); acc = 0; prev = 0
-    for b, w in zip(sb, words):
+    exact = all('end' in b for b in sb[:-1])   # measured sentence cut points (seconds into the section) beat the word-count split
+    for k, (b, w) in enumerate(zip(sb, words)):
         acc += w
-        edge = round(total_frames * acc / W)
+        edge = round(sb[k]['end'] * FPS) if exact and k < len(sb) - 1 else round(total_frames * acc / W)
         b['frames'] = edge - prev; prev = edge
         b['start_frame'] = t; t += b['frames']
     vo_by[s]['start_frame'] = sb[0]['start_frame']; vo_by[s]['frames'] = total_frames

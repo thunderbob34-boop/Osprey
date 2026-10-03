@@ -1,0 +1,30 @@
+{
+ "num": 0,
+ "script": "production/preview-trevithick/script.md",
+ "notes": {
+  "credits": "",
+  "vo": "",
+  "gaps": [],
+  "review": ""
+ },
+ "timebar": {
+  "range": [
+   1800,
+   1840
+  ],
+  "marks": [
+   [
+    1804,
+    "Penydarren"
+   ],
+   [
+    1829,
+    "Rainhill"
+   ],
+   [
+    1833,
+    "Trevithick dies"
+   ]
+  ]
+ }
+}

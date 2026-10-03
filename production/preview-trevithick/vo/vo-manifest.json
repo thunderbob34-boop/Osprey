@@ -1,0 +1,15 @@
+{
+ "voice": "Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f)",
+ "engine": "text2speech_v2 / seed_speech",
+ "note": "Style preview; Abercynon respelled Aber-kunnon in the TTS text.",
+ "sections": [
+  {
+   "num": "01",
+   "name": "Before Stephenson",
+   "file": "vo/01-before-stephenson.mp3",
+   "job_id": "08ff2ba3-0c8b-443d-87f0-243888ef797a",
+   "duration": 54.408,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_212708_08ff2ba3-0c8b-443d-87f0-243888ef797a.mp3"
+  }
+ ]
+}
