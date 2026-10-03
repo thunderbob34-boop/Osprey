@@ -79,7 +79,10 @@ for b in beats:
     timed.append({'id': b['id'], 'template': b['template'], 'fields': b.get('fields') or {}, 'source': b.get('source') or {},
                   'frames': b['frames'], 'fps': FPS, **({'timebar': tb} if tb else {}), **({'img': asset_path(b)} if asset_path(b) else {})})
 (EP / 'build').mkdir(exist_ok=True)
-(EP / 'build' / 'timed.json').write_text(json.dumps(timed))
+IMK = set(json.load(open(EP / 'images.json'))) if (EP / 'images.json').exists() else set()
+# Photo beats that the sandbox re-renders with the real image only need a still placeholder here.
+local = [{**t, 'static': True} if (t['template'] == 'archival' and t['fields'].get('asset') in IMK) else t for t in timed]
+(EP / 'build' / 'timed.json').write_text(json.dumps(local))
 if (EP / 'images.json').exists():   # photo beats are finished in the Higgsfield sandbox, which can reach the image hosts
     IM = json.load(open(EP / 'images.json'))
     rb = [{**t, 'start_frame': b['start_frame']} for t, b in zip(timed, beats) if t['template'] == 'archival' and (t['fields'].get('asset') in IM)]

@@ -11,5 +11,61 @@
    "No surgical, wound or patient imagery is used anywhere, on purpose."
   ],
   "review": "It ran several times on the motion cut. The one High problem was map backdrops behind timelines putting dates over the wrong countries; timelines and datecards no longer have backdrops in any episode. Medium fixes: card runs broken with portraits and documents; Magendie's face on screen when he is named; a \"First, of the two\" hedge on the public-versus-first card; the anesthesia diagram timed to the words; the Hanaoka date always shown with \"Japanese calendar of the time\"."
+ },
+ "timebar": {
+  "range": [
+   1800,
+   2000
+  ],
+  "scale": [
+   [
+    1800,
+    0
+   ],
+   [
+    1860,
+    0.72
+   ],
+   [
+    2000,
+    1
+   ]
+  ],
+  "ticks": [
+   1800,
+   1810,
+   1820,
+   1830,
+   1840,
+   1850,
+   1860,
+   1900,
+   1950,
+   2000
+  ],
+  "marks": [
+   [
+    1804,
+    "Hanaoka"
+   ],
+   [
+    1842,
+    "Long",
+    "end"
+   ],
+   [
+    1846,
+    "Ether Day",
+    "start"
+   ],
+   [
+    1933,
+    "Doctors' Day"
+   ],
+   [
+    1990,
+    "Congress"
+   ]
+  ]
  }
 }

@@ -30,6 +30,13 @@ async function worker() {
     await page.goto(card + '?n=' + (n++) + '#' + Buffer.from(JSON.stringify(data), 'utf8').toString('base64'));
     await page.waitForSelector('body[data-ready="1"]', { timeout: 30000 });
     const out = path.join(clipDir, b.id + '.mp4');
+    if (b.static) {   // one still, held for the beat (placeholder for a beat finished elsewhere)
+      await page.evaluate(s => window.drawAt(s), (N * 0.7) / fps);
+      const png = path.join(posterDir, b.id + '.png'); await page.screenshot({ path: png });
+      await new Promise((res, rej) => spawn('ffmpeg', ['-y', '-loglevel', 'error', '-loop', '1', '-framerate', String(fps), '-i', png, '-frames:v', String(N),
+        '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '20', '-pix_fmt', 'yuv420p', out]).on('close', c => c ? rej(new Error('ffmpeg failed ' + b.id)) : res()));
+      fs.writeFileSync(path.join(clipDir, b.id + '.key'), b._key); done++; continue;
+    }
     const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
       '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '20', '-pix_fmt', 'yuv420p', '-r', String(fps), out]);
     const posterAt = Math.floor(N * 0.7);
