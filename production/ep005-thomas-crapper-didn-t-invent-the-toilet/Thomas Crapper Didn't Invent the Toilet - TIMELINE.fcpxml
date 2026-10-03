@@ -4,74 +4,7 @@
 <resources>
 <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>
 <format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>
-<asset id="g_01-a" name="01-a" start="0s" duration="108/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/01-a.mp4"/></asset>
-<asset id="g_01-b" name="01-b" start="0s" duration="119/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/01-b.mp4"/></asset>
-<asset id="g_01-c" name="01-c" start="0s" duration="148/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/01-c.mp4"/></asset>
-<asset id="g_01-d" name="01-d" start="0s" duration="89/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/01-d.mp4"/></asset>
-<asset id="g_01-e" name="01-e" start="0s" duration="98/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/01-e.mp4"/></asset>
-<asset id="g_01-f" name="01-f" start="0s" duration="89/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/01-f.mp4"/></asset>
-<asset id="g_01-g" name="01-g" start="0s" duration="158/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/01-g.mp4"/></asset>
-<asset id="g_01-h" name="01-h" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/01-h.mp4"/></asset>
-<asset id="g_02-a" name="02-a" start="0s" duration="151/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/02-a.mp4"/></asset>
-<asset id="g_02-b" name="02-b" start="0s" duration="111/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/02-b.mp4"/></asset>
-<asset id="g_02-c" name="02-c" start="0s" duration="121/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/02-c.mp4"/></asset>
-<asset id="g_02-d" name="02-d" start="0s" duration="171/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/02-d.mp4"/></asset>
-<asset id="g_02-e" name="02-e" start="0s" duration="162/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/02-e.mp4"/></asset>
-<asset id="g_02-f" name="02-f" start="0s" duration="151/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/02-f.mp4"/></asset>
-<asset id="g_02-g" name="02-g" start="0s" duration="111/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/02-g.mp4"/></asset>
-<asset id="g_02-h" name="02-h" start="0s" duration="181/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/02-h.mp4"/></asset>
-<asset id="g_03-a" name="03-a" start="0s" duration="160/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-a.mp4"/></asset>
-<asset id="g_03-b" name="03-b" start="0s" duration="5s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-b.mp4"/></asset>
-<asset id="g_03-c" name="03-c" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-c.mp4"/></asset>
-<asset id="g_03-d" name="03-d" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-d.mp4"/></asset>
-<asset id="g_03-e" name="03-e" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-e.mp4"/></asset>
-<asset id="g_03-f" name="03-f" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-f.mp4"/></asset>
-<asset id="g_03-g" name="03-g" start="0s" duration="5s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-g.mp4"/></asset>
-<asset id="g_03-h" name="03-h" start="0s" duration="139/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-h.mp4"/></asset>
-<asset id="g_03-i" name="03-i" start="0s" duration="160/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-i.mp4"/></asset>
-<asset id="g_03-j" name="03-j" start="0s" duration="171/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-j.mp4"/></asset>
-<asset id="g_03-k" name="03-k" start="0s" duration="171/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-k.mp4"/></asset>
-<asset id="g_03-l" name="03-l" start="0s" duration="160/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-l.mp4"/></asset>
-<asset id="g_03-m" name="03-m" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-m.mp4"/></asset>
-<asset id="g_03-n" name="03-n" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/03-n.mp4"/></asset>
-<asset id="g_04-a" name="04-a" start="0s" duration="181/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-a.mp4"/></asset>
-<asset id="g_04-b" name="04-b" start="0s" duration="85/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-b.mp4"/></asset>
-<asset id="g_04-c" name="04-c" start="0s" duration="5s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-c.mp4"/></asset>
-<asset id="g_04-d" name="04-d" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-d.mp4"/></asset>
-<asset id="g_04-e" name="04-e" start="0s" duration="106/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-e.mp4"/></asset>
-<asset id="g_04-f" name="04-f" start="0s" duration="171/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-f.mp4"/></asset>
-<asset id="g_04-g" name="04-g" start="0s" duration="170/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-g.mp4"/></asset>
-<asset id="g_04-h" name="04-h" start="0s" duration="171/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-h.mp4"/></asset>
-<asset id="g_04-i" name="04-i" start="0s" duration="160/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-i.mp4"/></asset>
-<asset id="g_04-j" name="04-j" start="0s" duration="181/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-j.mp4"/></asset>
-<asset id="g_04-k" name="04-k" start="0s" duration="149/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/04-k.mp4"/></asset>
-<asset id="g_05-a" name="05-a" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/05-a.mp4"/></asset>
-<asset id="g_05-b" name="05-b" start="0s" duration="202/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/05-b.mp4"/></asset>
-<asset id="g_05-c" name="05-c" start="0s" duration="201/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/05-c.mp4"/></asset>
-<asset id="g_05-d" name="05-d" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/05-d.mp4"/></asset>
-<asset id="g_05-e" name="05-e" start="0s" duration="213/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/05-e.mp4"/></asset>
-<asset id="g_05-f" name="05-f" start="0s" duration="138/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/05-f.mp4"/></asset>
-<asset id="g_05-g" name="05-g" start="0s" duration="106/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/05-g.mp4"/></asset>
-<asset id="g_05-h" name="05-h" start="0s" duration="117/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/05-h.mp4"/></asset>
-<asset id="g_06-a" name="06-a" start="0s" duration="105/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-a.mp4"/></asset>
-<asset id="g_06-b" name="06-b" start="0s" duration="85/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-b.mp4"/></asset>
-<asset id="g_06-c" name="06-c" start="0s" duration="124/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-c.mp4"/></asset>
-<asset id="g_06-d" name="06-d" start="0s" duration="229/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-d.mp4"/></asset>
-<asset id="g_06-e" name="06-e" start="0s" duration="133/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-e.mp4"/></asset>
-<asset id="g_06-f" name="06-f" start="0s" duration="143/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-f.mp4"/></asset>
-<asset id="g_06-g" name="06-g" start="0s" duration="76/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-g.mp4"/></asset>
-<asset id="g_06-h" name="06-h" start="0s" duration="124/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-h.mp4"/></asset>
-<asset id="g_06-i" name="06-i" start="0s" duration="123/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-i.mp4"/></asset>
-<asset id="g_06-j" name="06-j" start="0s" duration="162/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-j.mp4"/></asset>
-<asset id="g_06-k" name="06-k" start="0s" duration="162/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/06-k.mp4"/></asset>
-<asset id="g_07-a" name="07-a" start="0s" duration="146/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/07-a.mp4"/></asset>
-<asset id="g_07-b" name="07-b" start="0s" duration="195/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/07-b.mp4"/></asset>
-<asset id="g_07-c" name="07-c" start="0s" duration="195/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/07-c.mp4"/></asset>
-<asset id="g_07-d" name="07-d" start="0s" duration="110/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/07-d.mp4"/></asset>
-<asset id="g_07-e" name="07-e" start="0s" duration="195/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/07-e.mp4"/></asset>
-<asset id="g_07-f" name="07-f" start="0s" duration="98/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/07-f.mp4"/></asset>
-<asset id="g_07-g" name="07-g" start="0s" duration="158/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/07-g.mp4"/></asset>
-<asset id="g_07-h" name="07-h" start="0s" duration="110/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/clips/07-h.mp4"/></asset>
+<asset id="pic" name="Thomas Crapper Didn&#x27;t Invent the Toilet - PICTURE" start="0s" duration="9683/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/Thomas%20Crapper%20Didn't%20Invent%20the%20Toilet%20-%20PICTURE.mp4"/></asset>
 <asset id="vo_01" name="VO 01" start="0s" duration="937/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/01-cold-open.mp3"/></asset>
 <asset id="vo_02" name="VO 02" start="0s" duration="1159/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/02-the-famous-version.mp3"/></asset>
 <asset id="vo_03" name="VO 03" start="0s" duration="2029/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep005-thomas-crapper-didn-t-invent-the-toilet/vo/03-knossos.mp3"/></asset>
@@ -85,74 +18,73 @@
 <project name="Thomas Crapper Didn&#x27;t Invent the Toilet">
 <sequence format="r1" duration="9683/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
 <spine>
-<asset-clip ref="g_01-a" offset="0s" name="01-a" start="0s" duration="108/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="937/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
-<asset-clip ref="g_01-b" offset="108/30s" name="01-b" start="0s" duration="119/30s"></asset-clip>
-<asset-clip ref="g_01-c" offset="227/30s" name="01-c" start="0s" duration="148/30s"></asset-clip>
-<asset-clip ref="g_01-d" offset="375/30s" name="01-d" start="0s" duration="89/30s"></asset-clip>
-<asset-clip ref="g_01-e" offset="464/30s" name="01-e" start="0s" duration="98/30s"></asset-clip>
-<asset-clip ref="g_01-f" offset="562/30s" name="01-f" start="0s" duration="89/30s"></asset-clip>
-<asset-clip ref="g_01-g" offset="651/30s" name="01-g" start="0s" duration="158/30s"></asset-clip>
-<asset-clip ref="g_01-h" offset="809/30s" name="01-h" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_02-a" offset="937/30s" name="02-a" start="0s" duration="151/30s"><asset-clip ref="vo_02" lane="-1" offset="0s" start="0s" duration="1159/30s" name="VO 02" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="02 The Famous Version"/></asset-clip>
-<asset-clip ref="g_02-b" offset="1088/30s" name="02-b" start="0s" duration="111/30s"></asset-clip>
-<asset-clip ref="g_02-c" offset="1199/30s" name="02-c" start="0s" duration="121/30s"></asset-clip>
-<asset-clip ref="g_02-d" offset="44s" name="02-d" start="0s" duration="171/30s"></asset-clip>
-<asset-clip ref="g_02-e" offset="1491/30s" name="02-e" start="0s" duration="162/30s"></asset-clip>
-<asset-clip ref="g_02-f" offset="1653/30s" name="02-f" start="0s" duration="151/30s"></asset-clip>
-<asset-clip ref="g_02-g" offset="1804/30s" name="02-g" start="0s" duration="111/30s"></asset-clip>
-<asset-clip ref="g_02-h" offset="1915/30s" name="02-h" start="0s" duration="181/30s"></asset-clip>
-<asset-clip ref="g_03-a" offset="2096/30s" name="03-a" start="0s" duration="160/30s"><asset-clip ref="vo_03" lane="-1" offset="0s" start="0s" duration="2029/30s" name="VO 03" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="03 Knossos"/></asset-clip>
-<asset-clip ref="g_03-b" offset="2256/30s" name="03-b" start="0s" duration="5s"></asset-clip>
-<asset-clip ref="g_03-c" offset="2406/30s" name="03-c" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_03-d" offset="2534/30s" name="03-d" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_03-e" offset="2662/30s" name="03-e" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_03-f" offset="93s" name="03-f" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_03-g" offset="2918/30s" name="03-g" start="0s" duration="5s"></asset-clip>
-<asset-clip ref="g_03-h" offset="3068/30s" name="03-h" start="0s" duration="139/30s"></asset-clip>
-<asset-clip ref="g_03-i" offset="3207/30s" name="03-i" start="0s" duration="160/30s"></asset-clip>
-<asset-clip ref="g_03-j" offset="3367/30s" name="03-j" start="0s" duration="171/30s"></asset-clip>
-<asset-clip ref="g_03-k" offset="3538/30s" name="03-k" start="0s" duration="171/30s"></asset-clip>
-<asset-clip ref="g_03-l" offset="3709/30s" name="03-l" start="0s" duration="160/30s"></asset-clip>
-<asset-clip ref="g_03-m" offset="3869/30s" name="03-m" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_03-n" offset="3997/30s" name="03-n" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_04-a" offset="4125/30s" name="04-a" start="0s" duration="181/30s"><asset-clip ref="vo_04" lane="-1" offset="0s" start="0s" duration="1652/30s" name="VO 04" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="04 Harington, 1596"/></asset-clip>
-<asset-clip ref="g_04-b" offset="4306/30s" name="04-b" start="0s" duration="85/30s"></asset-clip>
-<asset-clip ref="g_04-c" offset="4391/30s" name="04-c" start="0s" duration="5s"></asset-clip>
-<asset-clip ref="g_04-d" offset="4541/30s" name="04-d" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_04-e" offset="4669/30s" name="04-e" start="0s" duration="106/30s"></asset-clip>
-<asset-clip ref="g_04-f" offset="4775/30s" name="04-f" start="0s" duration="171/30s"></asset-clip>
-<asset-clip ref="g_04-g" offset="4946/30s" name="04-g" start="0s" duration="170/30s"></asset-clip>
-<asset-clip ref="g_04-h" offset="5116/30s" name="04-h" start="0s" duration="171/30s"></asset-clip>
-<asset-clip ref="g_04-i" offset="5287/30s" name="04-i" start="0s" duration="160/30s"></asset-clip>
-<asset-clip ref="g_04-j" offset="5447/30s" name="04-j" start="0s" duration="181/30s"></asset-clip>
-<asset-clip ref="g_04-k" offset="5628/30s" name="04-k" start="0s" duration="149/30s"></asset-clip>
-<asset-clip ref="g_05-a" offset="5777/30s" name="05-a" start="0s" duration="128/30s"><asset-clip ref="vo_05" lane="-1" offset="0s" start="0s" duration="1233/30s" name="VO 05" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="05 Cumming and the S-Bend"/></asset-clip>
-<asset-clip ref="g_05-b" offset="5905/30s" name="05-b" start="0s" duration="202/30s"></asset-clip>
-<asset-clip ref="g_05-c" offset="6107/30s" name="05-c" start="0s" duration="201/30s"></asset-clip>
-<asset-clip ref="g_05-d" offset="6308/30s" name="05-d" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_05-e" offset="6436/30s" name="05-e" start="0s" duration="213/30s"></asset-clip>
-<asset-clip ref="g_05-f" offset="6649/30s" name="05-f" start="0s" duration="138/30s"></asset-clip>
-<asset-clip ref="g_05-g" offset="6787/30s" name="05-g" start="0s" duration="106/30s"></asset-clip>
-<asset-clip ref="g_05-h" offset="6893/30s" name="05-h" start="0s" duration="117/30s"></asset-clip>
-<asset-clip ref="g_06-a" offset="7010/30s" name="06-a" start="0s" duration="105/30s"><asset-clip ref="vo_06" lane="-1" offset="0s" start="0s" duration="1466/30s" name="VO 06" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="06 What Crapper Actually Did"/></asset-clip>
-<asset-clip ref="g_06-b" offset="7115/30s" name="06-b" start="0s" duration="85/30s"></asset-clip>
-<asset-clip ref="g_06-c" offset="240s" name="06-c" start="0s" duration="124/30s"></asset-clip>
-<asset-clip ref="g_06-d" offset="7324/30s" name="06-d" start="0s" duration="229/30s"></asset-clip>
-<asset-clip ref="g_06-e" offset="7553/30s" name="06-e" start="0s" duration="133/30s"></asset-clip>
-<asset-clip ref="g_06-f" offset="7686/30s" name="06-f" start="0s" duration="143/30s"></asset-clip>
-<asset-clip ref="g_06-g" offset="7829/30s" name="06-g" start="0s" duration="76/30s"></asset-clip>
-<asset-clip ref="g_06-h" offset="7905/30s" name="06-h" start="0s" duration="124/30s"></asset-clip>
-<asset-clip ref="g_06-i" offset="8029/30s" name="06-i" start="0s" duration="123/30s"></asset-clip>
-<asset-clip ref="g_06-j" offset="8152/30s" name="06-j" start="0s" duration="162/30s"></asset-clip>
-<asset-clip ref="g_06-k" offset="8314/30s" name="06-k" start="0s" duration="162/30s"></asset-clip>
-<asset-clip ref="g_07-a" offset="8476/30s" name="07-a" start="0s" duration="146/30s"><asset-clip ref="vo_07" lane="-1" offset="0s" start="0s" duration="1207/30s" name="VO 07" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="07 Who Was First"/></asset-clip>
-<asset-clip ref="g_07-b" offset="8622/30s" name="07-b" start="0s" duration="195/30s"></asset-clip>
-<asset-clip ref="g_07-c" offset="8817/30s" name="07-c" start="0s" duration="195/30s"></asset-clip>
-<asset-clip ref="g_07-d" offset="9012/30s" name="07-d" start="0s" duration="110/30s"></asset-clip>
-<asset-clip ref="g_07-e" offset="9122/30s" name="07-e" start="0s" duration="195/30s"></asset-clip>
-<asset-clip ref="g_07-f" offset="9317/30s" name="07-f" start="0s" duration="98/30s"></asset-clip>
-<asset-clip ref="g_07-g" offset="9415/30s" name="07-g" start="0s" duration="158/30s"></asset-clip>
-<asset-clip ref="g_07-h" offset="9573/30s" name="07-h" start="0s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="0s" name="01-a" start="0s" duration="108/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="937/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
+<asset-clip ref="pic" offset="108/30s" name="01-b" start="108/30s" duration="119/30s"></asset-clip>
+<asset-clip ref="pic" offset="227/30s" name="01-c" start="227/30s" duration="148/30s"></asset-clip>
+<asset-clip ref="pic" offset="375/30s" name="01-d" start="375/30s" duration="89/30s"></asset-clip>
+<asset-clip ref="pic" offset="464/30s" name="01-e" start="464/30s" duration="98/30s"></asset-clip>
+<asset-clip ref="pic" offset="562/30s" name="01-f" start="562/30s" duration="89/30s"></asset-clip>
+<asset-clip ref="pic" offset="651/30s" name="01-g" start="651/30s" duration="158/30s"></asset-clip>
+<asset-clip ref="pic" offset="809/30s" name="01-h" start="809/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="937/30s" name="02-a" start="937/30s" duration="262/30s"><asset-clip ref="vo_02" lane="-1" offset="937/30s" start="0s" duration="1159/30s" name="VO 02" audioRole="dialogue"/><marker start="937/30s" duration="1/30s" value="02 The Famous Version"/></asset-clip>
+<asset-clip ref="pic" offset="1199/30s" name="02-c" start="1199/30s" duration="121/30s"></asset-clip>
+<asset-clip ref="pic" offset="44s" name="02-d" start="44s" duration="171/30s"></asset-clip>
+<asset-clip ref="pic" offset="1491/30s" name="02-e" start="1491/30s" duration="162/30s"></asset-clip>
+<asset-clip ref="pic" offset="1653/30s" name="02-f" start="1653/30s" duration="151/30s"></asset-clip>
+<asset-clip ref="pic" offset="1804/30s" name="02-g" start="1804/30s" duration="111/30s"></asset-clip>
+<asset-clip ref="pic" offset="1915/30s" name="02-h" start="1915/30s" duration="181/30s"></asset-clip>
+<asset-clip ref="pic" offset="2096/30s" name="03-a" start="2096/30s" duration="160/30s"><asset-clip ref="vo_03" lane="-1" offset="2096/30s" start="0s" duration="2029/30s" name="VO 03" audioRole="dialogue"/><marker start="2096/30s" duration="1/30s" value="03 Knossos"/></asset-clip>
+<asset-clip ref="pic" offset="2256/30s" name="03-b" start="2256/30s" duration="5s"></asset-clip>
+<asset-clip ref="pic" offset="2406/30s" name="03-c" start="2406/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="2534/30s" name="03-d" start="2534/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="2662/30s" name="03-e" start="2662/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="93s" name="03-f" start="93s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="2918/30s" name="03-g" start="2918/30s" duration="5s"></asset-clip>
+<asset-clip ref="pic" offset="3068/30s" name="03-h" start="3068/30s" duration="139/30s"></asset-clip>
+<asset-clip ref="pic" offset="3207/30s" name="03-i" start="3207/30s" duration="160/30s"></asset-clip>
+<asset-clip ref="pic" offset="3367/30s" name="03-j" start="3367/30s" duration="171/30s"></asset-clip>
+<asset-clip ref="pic" offset="3538/30s" name="03-k" start="3538/30s" duration="171/30s"></asset-clip>
+<asset-clip ref="pic" offset="3709/30s" name="03-l" start="3709/30s" duration="160/30s"></asset-clip>
+<asset-clip ref="pic" offset="3869/30s" name="03-m" start="3869/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="3997/30s" name="03-n" start="3997/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="4125/30s" name="04-a" start="4125/30s" duration="181/30s"><asset-clip ref="vo_04" lane="-1" offset="4125/30s" start="0s" duration="1652/30s" name="VO 04" audioRole="dialogue"/><marker start="4125/30s" duration="1/30s" value="04 Harington, 1596"/></asset-clip>
+<asset-clip ref="pic" offset="4306/30s" name="04-b" start="4306/30s" duration="85/30s"></asset-clip>
+<asset-clip ref="pic" offset="4391/30s" name="04-c" start="4391/30s" duration="5s"></asset-clip>
+<asset-clip ref="pic" offset="4541/30s" name="04-d" start="4541/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="4669/30s" name="04-e" start="4669/30s" duration="106/30s"></asset-clip>
+<asset-clip ref="pic" offset="4775/30s" name="04-f" start="4775/30s" duration="171/30s"></asset-clip>
+<asset-clip ref="pic" offset="4946/30s" name="04-g" start="4946/30s" duration="170/30s"></asset-clip>
+<asset-clip ref="pic" offset="5116/30s" name="04-h" start="5116/30s" duration="171/30s"></asset-clip>
+<asset-clip ref="pic" offset="5287/30s" name="04-i" start="5287/30s" duration="160/30s"></asset-clip>
+<asset-clip ref="pic" offset="5447/30s" name="04-j" start="5447/30s" duration="181/30s"></asset-clip>
+<asset-clip ref="pic" offset="5628/30s" name="04-k" start="5628/30s" duration="149/30s"></asset-clip>
+<asset-clip ref="pic" offset="5777/30s" name="05-a" start="5777/30s" duration="128/30s"><asset-clip ref="vo_05" lane="-1" offset="5777/30s" start="0s" duration="1233/30s" name="VO 05" audioRole="dialogue"/><marker start="5777/30s" duration="1/30s" value="05 Cumming and the S-Bend"/></asset-clip>
+<asset-clip ref="pic" offset="5905/30s" name="05-b" start="5905/30s" duration="202/30s"></asset-clip>
+<asset-clip ref="pic" offset="6107/30s" name="05-c" start="6107/30s" duration="201/30s"></asset-clip>
+<asset-clip ref="pic" offset="6308/30s" name="05-d" start="6308/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="6436/30s" name="05-e" start="6436/30s" duration="213/30s"></asset-clip>
+<asset-clip ref="pic" offset="6649/30s" name="05-f" start="6649/30s" duration="138/30s"></asset-clip>
+<asset-clip ref="pic" offset="6787/30s" name="05-g" start="6787/30s" duration="106/30s"></asset-clip>
+<asset-clip ref="pic" offset="6893/30s" name="05-h" start="6893/30s" duration="117/30s"></asset-clip>
+<asset-clip ref="pic" offset="7010/30s" name="06-a" start="7010/30s" duration="105/30s"><asset-clip ref="vo_06" lane="-1" offset="7010/30s" start="0s" duration="1466/30s" name="VO 06" audioRole="dialogue"/><marker start="7010/30s" duration="1/30s" value="06 What Crapper Actually Did"/></asset-clip>
+<asset-clip ref="pic" offset="7115/30s" name="06-b" start="7115/30s" duration="85/30s"></asset-clip>
+<asset-clip ref="pic" offset="240s" name="06-c" start="240s" duration="124/30s"></asset-clip>
+<asset-clip ref="pic" offset="7324/30s" name="06-d" start="7324/30s" duration="229/30s"></asset-clip>
+<asset-clip ref="pic" offset="7553/30s" name="06-e" start="7553/30s" duration="133/30s"></asset-clip>
+<asset-clip ref="pic" offset="7686/30s" name="06-f" start="7686/30s" duration="143/30s"></asset-clip>
+<asset-clip ref="pic" offset="7829/30s" name="06-g" start="7829/30s" duration="76/30s"></asset-clip>
+<asset-clip ref="pic" offset="7905/30s" name="06-h" start="7905/30s" duration="124/30s"></asset-clip>
+<asset-clip ref="pic" offset="8029/30s" name="06-i" start="8029/30s" duration="123/30s"></asset-clip>
+<asset-clip ref="pic" offset="8152/30s" name="06-j" start="8152/30s" duration="162/30s"></asset-clip>
+<asset-clip ref="pic" offset="8314/30s" name="06-k" start="8314/30s" duration="162/30s"></asset-clip>
+<asset-clip ref="pic" offset="8476/30s" name="07-a" start="8476/30s" duration="146/30s"><asset-clip ref="vo_07" lane="-1" offset="8476/30s" start="0s" duration="1207/30s" name="VO 07" audioRole="dialogue"/><marker start="8476/30s" duration="1/30s" value="07 Who Was First"/></asset-clip>
+<asset-clip ref="pic" offset="8622/30s" name="07-b" start="8622/30s" duration="195/30s"></asset-clip>
+<asset-clip ref="pic" offset="8817/30s" name="07-c" start="8817/30s" duration="195/30s"></asset-clip>
+<asset-clip ref="pic" offset="9012/30s" name="07-d" start="9012/30s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="9122/30s" name="07-e" start="9122/30s" duration="195/30s"></asset-clip>
+<asset-clip ref="pic" offset="9317/30s" name="07-f" start="9317/30s" duration="98/30s"></asset-clip>
+<asset-clip ref="pic" offset="9415/30s" name="07-g" start="9415/30s" duration="158/30s"></asset-clip>
+<asset-clip ref="pic" offset="9573/30s" name="07-h" start="9573/30s" duration="110/30s"></asset-clip>
 </spine>
 </sequence>
 </project>

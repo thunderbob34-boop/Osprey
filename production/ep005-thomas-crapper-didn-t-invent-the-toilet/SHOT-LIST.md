@@ -1,6 +1,6 @@
 # Thomas Crapper Didn't Invent the Toilet: shot list
 
-Total runtime 5:22.8 (68 beats). Narration: Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f), text2speech_v2 / seed_speech. Each beat is timed from the real narration length of its section, split by word count.
+Total runtime 5:22.8 (67 beats). Narration: Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f), text2speech_v2 / seed_speech. Each beat is timed from the real narration length of its section, split by word count.
 
 | Beat | In | Dur | Narration (start) | On screen | Route | Source / credit |
 |---|---|---|---|---|---|---|
@@ -12,15 +12,14 @@ Total runtime 5:22.8 (68 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 01-f | 0:18.7 | 3.0s | and the word &quot;crap&quot; is older than Crapper is. | Kinetic words: the word crap is older than Crapper. | motion graphic |  |
 | 01-g | 0:21.7 | 5.3s | Now, to be fair, Thomas Crapper was a real… | Closer push-in on the Crapper portrait: a real person. | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
 | 01-h | 0:27.0 | 4.3s | and we&#x27;ll give him his due, but he wasn&#x27;t… | Kinetic words: not first, not even close. | motion graphic |  |
-| 02-a | 0:31.2 | 5.0s | The famous version goes like this, a man named… | Flow: first box pops in, the other two ghosted. | motion graphic |  |
-| 02-b | 0:36.3 | 3.7s | puts his name on it, and his name becomes… | Same flow, the last box lands: his name becomes the slang. | motion graphic |  |
+| 02-a | 0:31.2 | 8.7s | The famous version goes like this, a man named… | Flow builds all three boxes in sequence | motion graphic |  |
 | 02-c | 0:40.0 | 4.0s | It&#x27;s a perfect story, because the name does all… | Tight push-in on the Crapper portrait. | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
-| 02-d | 0:44.0 | 5.7s | You hear Crapper and toilet in the same sentence… | Kinetic words. | motion graphic |  |
+| 02-d | 0:44.0 | 5.7s | You hear Crapper and toilet in the same sentence… | Different crop: lower, off-centre | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
 | 02-e | 0:49.7 | 5.4s | And a lot of that comes from one book.… | The year 1969 stamps in with the writer&#x27;s name. | motion graphic |  |
 | 02-f | 0:55.1 | 5.0s | published a book called Flushed with Pride, and it&#x27;s… | Book title builds in word by word. | motion graphic |  |
 | 02-g | 1:00.1 | 3.7s | and it helped spread the idea that Crapper invented… | Red ripples spread out from the book and light up dots as the idea travels. | illustrated scene (code) |  |
 | 02-h | 1:03.8 | 6.0s | So a book that was partly kidding ended up… | Compare card: the book on the left, where it ends up on the right. | motion graphic |  |
-| 03-a | 1:09.9 | 5.3s | So who did it first? Well, it depends how… | Title-style card: the question, then the answer is a distance. | motion graphic |  |
+| 03-a | 1:09.9 | 5.3s | So who did it first? Well, it depends how… | Wide shot, slow push-in | archival (fetch) | Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0 ✅ |
 | 03-b | 1:15.2 | 5.0s | so let&#x27;s start way back. The palace at Knossos,… | Mediterranean fly-in to Crete; a pin lands on Knossos. | animated map |  |
 | 03-c | 1:20.2 | 4.3s | had latrines that were flushed with water and drained… | Slow push-in on the ruins at Knossos (modern photograph). | archival (fetch) | Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0 ✅ |
 | 03-d | 1:24.5 | 4.3s | and that&#x27;s about 3,500 years ago, somewhere around 1700… | About 3,500 counts up, with the 1700 to 1450 BC range underneath. | motion graphic |  |
@@ -64,8 +63,8 @@ Total runtime 5:22.8 (68 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-i | 4:27.6 | 4.1s | seeing &quot;T. Crapper&quot; on toilet cisterns, and that&#x27;s a… | Kinetic words: a may, not a for-sure. | motion graphic |  |
 | 06-j | 4:31.7 | 5.4s | but it&#x27;s a nice idea, that the name on… | Slow push-in on the 1917 photo of American troops in London. | archival (fetch) | U.S. troops marching through London, c. 17 September 1917 (stereograph published by Realistic Travels), Library of Congress ⚠️ unconfirmed |
 | 06-k | 4:37.1 | 5.4s | So his name may well be in the slang,… | Kinetic words, keeping the &#x27;may well&#x27;. | motion graphic |  |
-| 07-a | 4:42.5 | 4.9s | So here&#x27;s where it lands. Thomas Crapper was a… | Compare card: Crapper on the left, the right side ghosted. | motion graphic |  |
-| 07-b | 4:47.4 | 6.5s | who patented improvements in the late 1800s, like the… | Compare card: the right side is revealed. | motion graphic |  |
+| 07-a | 4:42.5 | 4.9s | So here&#x27;s where it lands. Thomas Crapper was a… | New crop, centred on the face | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
+| 07-b | 4:47.4 | 6.5s | who patented improvements in the late 1800s, like the… | Ballcock scene again, for &quot;improvements like the ballcock&quot; | illustrated scene (code) |  |
 | 07-c | 4:53.9 | 6.5s | About 3,500 years ago the palace at Knossos was… | Cross-section again: water runs through the building into the stone sewer. | illustrated scene (code) |  |
 | 07-d | 5:00.4 | 3.7s | and the Indus Valley had drained latrines even earlier. | Map pulls out from Knossos to the Indus Valley. | animated map |  |
 | 07-e | 5:04.1 | 6.5s | In 1596, Sir John Harington built a flushing toilet… | Cistern diagram again: the tank lets go and flushes the bowl. | illustrated scene (code) |  |
