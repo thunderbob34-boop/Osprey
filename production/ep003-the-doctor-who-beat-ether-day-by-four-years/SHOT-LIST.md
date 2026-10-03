@@ -16,10 +16,10 @@ Total runtime 5:42.0 (75 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 01-j | 0:39.9 | 2.5s | and even he wasn&#x27;t the first one. | Kinetic card: the hook into the rest of the episode. | motion graphic |  |
 | 02-a | 0:42.4 | 4.6s | First you have to understand what surgery was like… | Journal abstract page, push-in on the title. | archival (fetch) | PubMed, NLM ⚠️ unconfirmed |
 | 02-b | 0:47.0 | 4.6s | and I don&#x27;t mean the gory part, I mean… | Two columns: not the gory part, but what doctors believed. | motion graphic |  |
-| 02-c | 0:51.6 | 4.2s | Before anesthesia, many doctors didn&#x27;t think pain was purely… | Kinetic card carrying the hedge: many doctors. | motion graphic |  |
+| 02-c | 0:51.6 | 4.2s | Before anesthesia, many doctors didn&#x27;t think pain was purely… | Tighter crop on the abstract | archival (fetch) | PubMed, NLM ⚠️ unconfirmed |
 | 02-d | 0:55.9 | 3.9s | some saw it as a sign the body was… | Compare card, step 1: left side shown, right side ghosted. | motion graphic |  |
 | 02-e | 0:59.8 | 5.0s | and some opposed anesthesia because they thought taking away… | Same compare card, step 2: the right side is revealed. | motion graphic |  |
-| 02-f | 1:04.7 | 4.6s | And that wasn&#x27;t just a few cranks, the great… | Map of western Europe: the camera pushes in on France as the French physiologist is named. | animated map |  |
+| 02-f | 1:04.7 | 4.6s | And that wasn&#x27;t just a few cranks, the great… | Full portrait, slow push-in | archival (fetch) | Wellcome Collection ✅ |
 | 02-g | 1:09.4 | 3.5s | argued that pain, in his words, &quot;has always its… | Typewriter quote card: Magendie&#x27;s recorded words. | motion graphic |  |
 | 02-h | 1:12.9 | 4.3s | A peer-reviewed medical review calls it an &quot;erroneous yet… | Typewriter quote card: the review&#x27;s words. | motion graphic |  |
 | 02-i | 1:17.2 | 4.6s | the idea that the patient&#x27;s anguish was part of… | Title block of the review article, push-in. | archival (fetch) | PubMed Central ⚠️ unconfirmed |
@@ -31,7 +31,7 @@ Total runtime 5:42.0 (75 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 03-d | 1:42.8 | 3.1s | and the place everybody points to is the Ether… | Map: the camera zooms from the east coast into Boston; the Ether Dome pin drops. | animated map |  |
 | 03-e | 1:45.9 | 5.0s | and if you&#x27;ve ever read a short history of… | Modern photograph of the Ether Dome room, slow push-in. | archival (fetch) | Wikimedia Commons file page (copy the author credit from the file page) ⚠️ unconfirmed |
 | 03-f | 1:50.9 | 4.4s | And to be fair to Morton, a public demonstration… | Kinetic card. | motion graphic |  |
-| 03-g | 1:55.3 | 4.7s | It means people saw it with their own eyes,… | Three boxes pop in: seen, in a room, on a date. | motion graphic |  |
+| 03-g | 1:55.3 | 4.7s | It means people saw it with their own eyes,… | Different crop: the tiered seats around the floor, where people watched | archival (fetch) | Wikimedia Commons file page (copy the author credit from the file page) ⚠️ unconfirmed |
 | 03-h | 2:00.0 | 4.7s | and that&#x27;s the kind of thing that gets written… | Three boxes with arrows: written down, talked about, copied. | motion graphic |  |
 | 03-i | 2:04.7 | 4.4s | So Morton gets the credit, and the big reason,… | Compare card, step 1: Morton gets the credit; the reason is ghosted. | motion graphic |  |
 | 03-j | 2:09.1 | 2.8s | is that he did it in front of people. | Same compare card, step 2: the reason is revealed, hedge kept. | motion graphic |  |
@@ -67,8 +67,8 @@ Total runtime 5:42.0 (75 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-k | 4:32.7 | 4.5s | so this is a completely different road to the… | Two columns: herbal mix versus ether. | motion graphic |  |
 | 06-l | 4:37.2 | 7.0s | and it&#x27;s full general anesthesia, on a named patient,… | Three boxes pop in: named patient, known date, Japan. | motion graphic |  |
 | 06-m | 4:44.2 | 5.8s | decades before anybody in Boston or Georgia. So now… | World map: the camera zooms out from Japan; Georgia and Boston pins drop in as they are named. | animated map |  |
-| 06-n | 4:50.0 | 4.1s | 1804 in Japan, 1842 in Georgia, and 1846 in… | Same world map held: each pin picks up its year as it is spoken. | animated map |  |
-| 06-o | 4:54.1 | 3.7s | and the one everybody knows is the last one. | Same world map held; the Boston pin pulses. | animated map |  |
+| 06-n | 4:50.0 | 4.1s | 1804 in Japan, 1842 in Georgia, and 1846 in… | Timeline spaced by years: 1804 Japan, 1842 Georgia, 1846 Boston | motion graphic |  |
+| 06-o | 4:54.1 | 3.7s | and the one everybody knows is the last one. | Timeline spaced by years: 1804 Japan, 1842 Georgia, 1846 Boston (1846 highlighted) | motion graphic |  |
 | 07-a | 4:57.8 | 5.0s | So here&#x27;s where it lands. William Morton&#x27;s public demonstration… | Portrait of William Morton, a looser crop than the earlier ones, slow push-in. | archival (fetch) | Wellcome Collection ⚠️ unconfirmed |
 | 07-b | 5:02.8 | 5.4s | is the one in the textbooks, and it earned… | Kinetic card. | motion graphic |  |
 | 07-c | 5:08.2 | 6.9s | But on March 30th, 1842, Crawford Long had already… | Portrait of Crawford Long, a tighter crop than the opening, slow push-in. | archival (fetch) | Library of Congress Prints and Photographs Division, LCCN 2005691407 ⚠️ unconfirmed |
