@@ -1,1 +1,14 @@
-{"num":3,"script":"scripts/003-the-doctor-who-beat-ether-day-by-four-years.md"}
+{
+ "num": 3,
+ "script": "scripts/003-the-doctor-who-beat-ether-day-by-four-years.md",
+ "notes": {
+  "credits": 10.8,
+  "vo": "Magendie, Hanaoka Seishu, Kan Aiya, mafutsusan and tsusensan were respelled in the TTS text only, for pronunciation.",
+  "gaps": [
+   "Do not use Wellcome M0008841 for Morton (it is marked \"In copyright\"). Use M0002620 as listed.",
+   "The Countway Long engraving prints \"Discoverer of anaesthesia\" in its caption. That overstates the script, so crop it to the portrait.",
+   "No image of Long's own 1842 or 1849 record was found. The \"documented\" beat uses the Smithsonian Crawford W. Long Collection record instead.",
+   "No surgical, wound or patient imagery is used anywhere, on purpose."
+  ]
+ }
+}

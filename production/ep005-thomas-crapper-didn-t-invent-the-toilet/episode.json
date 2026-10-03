@@ -1,1 +1,13 @@
-{"num":5,"script":"scripts/005-thomas-crapper-didn-t-invent-the-toilet.md"}
+{
+ "num": 5,
+ "script": "scripts/005-thomas-crapper-didn-t-invent-the-toilet.md",
+ "notes": {
+  "credits": 10.6,
+  "vo": "Knossos was respelled in the TTS text only, for pronunciation.",
+  "gaps": [
+   "No 1596 first-edition title page of The Metamorphosis of Ajax with a clear licence was found. The beat uses the Wellcome 1814 edition, labelled \"1814 edition\".",
+   "Unconfirmed rights: the Cumming portrait, the Mohenjo-daro photo, the Library of Congress 1917 troops photo, and the Cahill ballcock patent.",
+   "Clean imagery on purpose: no toilets in use, and no catalogue pages."
+  ]
+ }
+}

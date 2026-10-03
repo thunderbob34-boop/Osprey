@@ -1,1 +1,16 @@
-{"num":4,"script":"scripts/004-the-pizza-margherita-letter-was-probably-fake.md"}
+{
+ "num": 4,
+ "script": "scripts/004-the-pizza-margherita-letter-was-probably-fake.md",
+ "notes": {
+  "credits": 10.7,
+  "vo": "Nowak was respelled in the TTS text only, for pronunciation.",
+  "gaps": [
+   "No open image of the letter itself exists, so the seal, handwriting and name problems are carried by a diagram.",
+   "The Nowak article page has publisher copyright. Get permission for a title-page capture, or keep it as a text card.",
+   "The only Queen Margherita image is a later-life photo (c. 1910 to 1915), and its lower-third says so."
+  ],
+  "preair": [
+   "have the published Nowak article (Food, Culture & Society, 2014) and the 1858 Usi e costumi di Napoli e contorni vol. 2 text in hand and check them against the script. The research found only one strong source for the letter analysis."
+  ]
+ }
+}

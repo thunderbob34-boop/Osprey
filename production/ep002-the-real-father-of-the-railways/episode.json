@@ -1,1 +1,13 @@
-{"num":2,"script":"scripts/002-the-real-father-of-the-railways.md"}
+{
+ "num": 2,
+ "script": "scripts/002-the-real-father-of-the-railways.md",
+ "notes": {
+  "credits": 11.5,
+  "vo": "Penydarren, Merthyr and Abercynon were respelled in the TTS text only, for pronunciation.",
+  "gaps": [
+   "Six of the unconfirmed items are Science Museum Group objects (the Penydarren model, Locomotion No. 1, Rocket, the Rocket print, the Rainhill lithograph and Puffing Billy). Their reuse licence has to be read on each object page.",
+   "The tramplate beat uses a generic Museum Wales record. Museum Wales also lists a Penydarren tramplate (accession 46.209/1); confirm which one it is and fix the label if needed.",
+   "There is no period image of the 1804 run itself. Those beats use the conjectural model, a modern replica photo (captioned as modern) and maps. The Terence Cuneo painting is modern and in copyright, so it was left out."
+  ]
+ }
+}
