@@ -4,94 +4,87 @@
 <resources>
 <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>
 <format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>
-<asset id="pic" name="The Pizza Margherita Letter Was Probably Fake - PICTURE" start="0s" duration="10162/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/The%20Pizza%20Margherita%20Letter%20Was%20Probably%20Fake%20-%20PICTURE.mp4"/></asset>
-<asset id="vo_01" name="VO 01" start="0s" duration="1081/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/01-cold-open.mp3"/></asset>
-<asset id="vo_02" name="VO 02" start="0s" duration="1243/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/02-the-legend.mp3"/></asset>
-<asset id="vo_03" name="VO 03" start="0s" duration="50s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/03-the-letter.mp3"/></asset>
-<asset id="vo_04" name="VO 04" start="0s" duration="1711/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/04-who-made-it-up.mp3"/></asset>
-<asset id="vo_05" name="VO 05" start="0s" duration="70s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/05-the-pizza-was-already-there.mp3"/></asset>
-<asset id="vo_06" name="VO 06" start="0s" duration="1099/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/06-fair-credit.mp3"/></asset>
+<asset id="pic" name="The Pizza Margherita Letter Was Probably Fake - PICTURE" start="0s" duration="9318/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/The%20Pizza%20Margherita%20Letter%20Was%20Probably%20Fake%20-%20PICTURE.mp4"/></asset>
+<asset id="vo_01" name="VO 01" start="0s" duration="984/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/01-cold-open.mp3"/></asset>
+<asset id="vo_02" name="VO 02" start="0s" duration="1161/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/02-the-legend.mp3"/></asset>
+<asset id="vo_03" name="VO 03" start="0s" duration="1518/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/03-the-letter.mp3"/></asset>
+<asset id="vo_04" name="VO 04" start="0s" duration="1339/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/04-who-made-it-up.mp3"/></asset>
+<asset id="vo_05" name="VO 05" start="0s" duration="2029/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/05-the-pizza-was-already-there.mp3"/></asset>
+<asset id="vo_06" name="VO 06" start="0s" duration="859/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/06-fair-credit.mp3"/></asset>
 <asset id="vo_07" name="VO 07" start="0s" duration="1428/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/07-who-was-first.mp3"/></asset>
 </resources>
 <library>
 <event name="Somebody Did It First">
 <project name="The Pizza Margherita Letter Was Probably Fake">
-<sequence format="r1" duration="10162/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+<sequence format="r1" duration="9318/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
 <spine>
-<asset-clip ref="pic" offset="0s" name="01-a" start="0s" duration="119/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="1081/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
-<asset-clip ref="pic" offset="119/30s" name="01-b" start="119/30s" duration="109/30s"></asset-clip>
-<asset-clip ref="pic" offset="228/30s" name="01-c" start="228/30s" duration="79/30s"></asset-clip>
-<asset-clip ref="pic" offset="307/30s" name="01-d" start="307/30s" duration="110/30s"></asset-clip>
-<asset-clip ref="pic" offset="417/30s" name="01-e" start="417/30s" duration="168/30s"></asset-clip>
-<asset-clip ref="pic" offset="585/30s" name="01-f" start="585/30s" duration="139/30s"></asset-clip>
-<asset-clip ref="pic" offset="724/30s" name="01-g" start="724/30s" duration="129/30s"></asset-clip>
-<asset-clip ref="pic" offset="853/30s" name="01-h" start="853/30s" duration="99/30s"></asset-clip>
-<asset-clip ref="pic" offset="952/30s" name="01-i" start="952/30s" duration="129/30s"></asset-clip>
-<asset-clip ref="pic" offset="1081/30s" name="02-a" start="1081/30s" duration="106/30s"><asset-clip ref="vo_02" lane="-1" offset="1081/30s" start="0s" duration="1243/30s" name="VO 02" audioRole="dialogue"/><marker start="1081/30s" duration="1/30s" value="02 The Legend"/></asset-clip>
-<asset-clip ref="pic" offset="1187/30s" name="02-b" start="1187/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="1315/30s" name="02-c" start="1315/30s" duration="117/30s"></asset-clip>
-<asset-clip ref="pic" offset="1432/30s" name="02-d" start="1432/30s" duration="138/30s"></asset-clip>
-<asset-clip ref="pic" offset="1570/30s" name="02-e" start="1570/30s" duration="170/30s"></asset-clip>
-<asset-clip ref="pic" offset="58s" name="02-f" start="58s" duration="127/30s"></asset-clip>
-<asset-clip ref="pic" offset="1867/30s" name="02-g" start="1867/30s" duration="117/30s"></asset-clip>
-<asset-clip ref="pic" offset="1984/30s" name="02-h" start="1984/30s" duration="149/30s"></asset-clip>
-<asset-clip ref="pic" offset="2133/30s" name="02-i" start="2133/30s" duration="191/30s"></asset-clip>
-<asset-clip ref="pic" offset="2324/30s" name="03-a" start="2324/30s" duration="170/30s"><asset-clip ref="vo_03" lane="-1" offset="2324/30s" start="0s" duration="50s" name="VO 03" audioRole="dialogue"/><marker start="2324/30s" duration="1/30s" value="03 The Letter"/></asset-clip>
-<asset-clip ref="pic" offset="2494/30s" name="03-b" start="2494/30s" duration="117/30s"></asset-clip>
-<asset-clip ref="pic" offset="2611/30s" name="03-c" start="2611/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="2739/30s" name="03-d" start="2739/30s" duration="74/30s"></asset-clip>
-<asset-clip ref="pic" offset="2813/30s" name="03-e" start="2813/30s" duration="139/30s"></asset-clip>
-<asset-clip ref="pic" offset="2952/30s" name="03-f" start="2952/30s" duration="170/30s"></asset-clip>
-<asset-clip ref="pic" offset="3122/30s" name="03-g" start="3122/30s" duration="106/30s"></asset-clip>
-<asset-clip ref="pic" offset="3228/30s" name="03-h" start="3228/30s" duration="117/30s"></asset-clip>
-<asset-clip ref="pic" offset="3345/30s" name="03-i" start="3345/30s" duration="192/30s"></asset-clip>
-<asset-clip ref="pic" offset="3537/30s" name="03-j" start="3537/30s" duration="106/30s"></asset-clip>
-<asset-clip ref="pic" offset="3643/30s" name="03-k" start="3643/30s" duration="181/30s"></asset-clip>
-<asset-clip ref="pic" offset="3824/30s" name="04-a" start="3824/30s" duration="118/30s"><asset-clip ref="vo_04" lane="-1" offset="3824/30s" start="0s" duration="1711/30s" name="VO 04" audioRole="dialogue"/><marker start="3824/30s" duration="1/30s" value="04 Who Made It Up"/></asset-clip>
-<asset-clip ref="pic" offset="3942/30s" name="04-b" start="3942/30s" duration="149/30s"></asset-clip>
-<asset-clip ref="pic" offset="4091/30s" name="04-c" start="4091/30s" duration="5s"></asset-clip>
-<asset-clip ref="pic" offset="4241/30s" name="04-d" start="4241/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="4369/30s" name="04-e" start="4369/30s" duration="129/30s"></asset-clip>
-<asset-clip ref="pic" offset="4498/30s" name="04-f" start="4498/30s" duration="117/30s"></asset-clip>
-<asset-clip ref="pic" offset="4615/30s" name="04-g" start="4615/30s" duration="5s"></asset-clip>
-<asset-clip ref="pic" offset="4765/30s" name="04-h" start="4765/30s" duration="118/30s"></asset-clip>
-<asset-clip ref="pic" offset="4883/30s" name="04-i" start="4883/30s" duration="139/30s"></asset-clip>
-<asset-clip ref="pic" offset="5022/30s" name="04-j" start="5022/30s" duration="107/30s"></asset-clip>
-<asset-clip ref="pic" offset="5129/30s" name="04-k" start="5129/30s" duration="171/30s"></asset-clip>
-<asset-clip ref="pic" offset="5300/30s" name="04-l" start="5300/30s" duration="107/30s"></asset-clip>
-<asset-clip ref="pic" offset="5407/30s" name="04-m" start="5407/30s" duration="128/30s"></asset-clip>
-<asset-clip ref="pic" offset="5535/30s" name="05-a" start="5535/30s" duration="201/30s"><asset-clip ref="vo_05" lane="-1" offset="5535/30s" start="0s" duration="70s" name="VO 05" audioRole="dialogue"/><marker start="5535/30s" duration="1/30s" value="05 The Pizza Was Already There"/></asset-clip>
-<asset-clip ref="pic" offset="5736/30s" name="05-b" start="5736/30s" duration="212/30s"></asset-clip>
-<asset-clip ref="pic" offset="5948/30s" name="05-c" start="5948/30s" duration="130/30s"></asset-clip>
-<asset-clip ref="pic" offset="6078/30s" name="05-d" start="6078/30s" duration="141/30s"></asset-clip>
-<asset-clip ref="pic" offset="6219/30s" name="05-e" start="6219/30s" duration="95/30s"></asset-clip>
-<asset-clip ref="pic" offset="6314/30s" name="05-f" start="6314/30s" duration="165/30s"></asset-clip>
-<asset-clip ref="pic" offset="6479/30s" name="05-g" start="6479/30s" duration="130/30s"></asset-clip>
-<asset-clip ref="pic" offset="6609/30s" name="05-h" start="6609/30s" duration="153/30s"></asset-clip>
-<asset-clip ref="pic" offset="6762/30s" name="05-i" start="6762/30s" duration="201/30s"></asset-clip>
-<asset-clip ref="pic" offset="6963/30s" name="05-j" start="6963/30s" duration="129/30s"></asset-clip>
-<asset-clip ref="pic" offset="7092/30s" name="05-k" start="7092/30s" duration="83/30s"></asset-clip>
-<asset-clip ref="pic" offset="7175/30s" name="05-l" start="7175/30s" duration="224/30s"></asset-clip>
-<asset-clip ref="pic" offset="7399/30s" name="05-m" start="7399/30s" duration="83/30s"></asset-clip>
-<asset-clip ref="pic" offset="7482/30s" name="05-n" start="7482/30s" duration="153/30s"></asset-clip>
-<asset-clip ref="pic" offset="7635/30s" name="06-a" start="7635/30s" duration="134/30s"><asset-clip ref="vo_06" lane="-1" offset="7635/30s" start="0s" duration="1099/30s" name="VO 06" audioRole="dialogue"/><marker start="7635/30s" duration="1/30s" value="06 Fair Credit"/></asset-clip>
-<asset-clip ref="pic" offset="7769/30s" name="06-b" start="7769/30s" duration="113/30s"></asset-clip>
-<asset-clip ref="pic" offset="7882/30s" name="06-c" start="7882/30s" duration="154/30s"></asset-clip>
-<asset-clip ref="pic" offset="8036/30s" name="06-d" start="8036/30s" duration="133/30s"></asset-clip>
-<asset-clip ref="pic" offset="8169/30s" name="06-e" start="8169/30s" duration="72/30s"></asset-clip>
-<asset-clip ref="pic" offset="8241/30s" name="06-f" start="8241/30s" duration="205/30s"></asset-clip>
-<asset-clip ref="pic" offset="8446/30s" name="06-g" start="8446/30s" duration="165/30s"></asset-clip>
-<asset-clip ref="pic" offset="8611/30s" name="06-h" start="8611/30s" duration="123/30s"></asset-clip>
-<asset-clip ref="pic" offset="8734/30s" name="07-a" start="8734/30s" duration="167/30s"><asset-clip ref="vo_07" lane="-1" offset="8734/30s" start="0s" duration="1428/30s" name="VO 07" audioRole="dialogue"/><marker start="8734/30s" duration="1/30s" value="07 Who Was First"/></asset-clip>
-<asset-clip ref="pic" offset="8901/30s" name="07-b" start="8901/30s" duration="178/30s"></asset-clip>
-<asset-clip ref="pic" offset="9079/30s" name="07-c" start="9079/30s" duration="167/30s"></asset-clip>
-<asset-clip ref="pic" offset="9246/30s" name="07-d" start="9246/30s" duration="119/30s"></asset-clip>
-<asset-clip ref="pic" offset="9365/30s" name="07-e" start="9365/30s" duration="95/30s"></asset-clip>
-<asset-clip ref="pic" offset="9460/30s" name="07-f" start="9460/30s" duration="190/30s"></asset-clip>
-<asset-clip ref="pic" offset="9650/30s" name="07-g" start="9650/30s" duration="155/30s"></asset-clip>
-<asset-clip ref="pic" offset="9805/30s" name="07-h" start="9805/30s" duration="119/30s"></asset-clip>
-<asset-clip ref="pic" offset="9924/30s" name="07-i" start="9924/30s" duration="143/30s"></asset-clip>
-<asset-clip ref="pic" offset="10067/30s" name="07-j" start="10067/30s" duration="95/30s"></asset-clip>
+<asset-clip ref="pic" offset="0s" name="01-a" start="0s" duration="4s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="984/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
+<asset-clip ref="pic" offset="4s" name="01-b" start="4s" duration="111/30s"></asset-clip>
+<asset-clip ref="pic" offset="231/30s" name="01-c" start="231/30s" duration="80/30s"></asset-clip>
+<asset-clip ref="pic" offset="311/30s" name="01-d" start="311/30s" duration="111/30s"></asset-clip>
+<asset-clip ref="pic" offset="422/30s" name="01-e" start="422/30s" duration="170/30s"></asset-clip>
+<asset-clip ref="pic" offset="592/30s" name="01-f" start="592/30s" duration="71/30s"></asset-clip>
+<asset-clip ref="pic" offset="663/30s" name="01-g" start="663/30s" duration="3s"></asset-clip>
+<asset-clip ref="pic" offset="753/30s" name="01-h" start="753/30s" duration="100/30s"></asset-clip>
+<asset-clip ref="pic" offset="853/30s" name="01-i" start="853/30s" duration="131/30s"></asset-clip>
+<asset-clip ref="pic" offset="984/30s" name="02-a" start="984/30s" duration="100/30s"><asset-clip ref="vo_02" lane="-1" offset="984/30s" start="0s" duration="1161/30s" name="VO 02" audioRole="dialogue"/><marker start="984/30s" duration="1/30s" value="02 The Legend"/></asset-clip>
+<asset-clip ref="pic" offset="1084/30s" name="02-b" start="1084/30s" duration="4s"></asset-clip>
+<asset-clip ref="pic" offset="1204/30s" name="02-c" start="1204/30s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="1314/30s" name="02-d" start="1314/30s" duration="3s"></asset-clip>
+<asset-clip ref="pic" offset="1404/30s" name="02-e" start="1404/30s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="1514/30s" name="02-f" start="1514/30s" duration="91/30s"></asset-clip>
+<asset-clip ref="pic" offset="1605/30s" name="02-g" start="1605/30s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="1715/30s" name="02-h" start="1715/30s" duration="110/30s"></asset-clip>
+<asset-clip ref="pic" offset="1825/30s" name="02-i" start="1825/30s" duration="140/30s"></asset-clip>
+<asset-clip ref="pic" offset="1965/30s" name="02-j" start="1965/30s" duration="80/30s"></asset-clip>
+<asset-clip ref="pic" offset="2045/30s" name="02-k" start="2045/30s" duration="100/30s"></asset-clip>
+<asset-clip ref="pic" offset="2145/30s" name="03-a" start="2145/30s" duration="173/30s"><asset-clip ref="vo_03" lane="-1" offset="2145/30s" start="0s" duration="1518/30s" name="VO 03" audioRole="dialogue"/><marker start="2145/30s" duration="1/30s" value="03 The Letter"/></asset-clip>
+<asset-clip ref="pic" offset="2318/30s" name="03-b" start="2318/30s" duration="4s"></asset-clip>
+<asset-clip ref="pic" offset="2438/30s" name="03-c" start="2438/30s" duration="130/30s"></asset-clip>
+<asset-clip ref="pic" offset="2568/30s" name="03-d" start="2568/30s" duration="217/30s"></asset-clip>
+<asset-clip ref="pic" offset="2785/30s" name="03-e" start="2785/30s" duration="173/30s"></asset-clip>
+<asset-clip ref="pic" offset="2958/30s" name="03-f" start="2958/30s" duration="109/30s"></asset-clip>
+<asset-clip ref="pic" offset="3067/30s" name="03-g" start="3067/30s" duration="119/30s"></asset-clip>
+<asset-clip ref="pic" offset="3186/30s" name="03-h" start="3186/30s" duration="195/30s"></asset-clip>
+<asset-clip ref="pic" offset="3381/30s" name="03-i" start="3381/30s" duration="98/30s"></asset-clip>
+<asset-clip ref="pic" offset="3479/30s" name="03-j" start="3479/30s" duration="184/30s"></asset-clip>
+<asset-clip ref="pic" offset="3663/30s" name="04-a" start="3663/30s" duration="116/30s"><asset-clip ref="vo_04" lane="-1" offset="3663/30s" start="0s" duration="1339/30s" name="VO 04" audioRole="dialogue"/><marker start="3663/30s" duration="1/30s" value="04 Who Made It Up"/></asset-clip>
+<asset-clip ref="pic" offset="3779/30s" name="04-b" start="3779/30s" duration="148/30s"></asset-clip>
+<asset-clip ref="pic" offset="3927/30s" name="04-c" start="3927/30s" duration="147/30s"></asset-clip>
+<asset-clip ref="pic" offset="4074/30s" name="04-d" start="4074/30s" duration="127/30s"></asset-clip>
+<asset-clip ref="pic" offset="4201/30s" name="04-e" start="4201/30s" duration="126/30s"></asset-clip>
+<asset-clip ref="pic" offset="4327/30s" name="04-f" start="4327/30s" duration="148/30s"></asset-clip>
+<asset-clip ref="pic" offset="4475/30s" name="04-g" start="4475/30s" duration="116/30s"></asset-clip>
+<asset-clip ref="pic" offset="4591/30s" name="04-h" start="4591/30s" duration="242/30s"></asset-clip>
+<asset-clip ref="pic" offset="4833/30s" name="04-i" start="4833/30s" duration="169/30s"></asset-clip>
+<asset-clip ref="pic" offset="5002/30s" name="05-a" start="5002/30s" duration="212/30s"><asset-clip ref="vo_05" lane="-1" offset="5002/30s" start="0s" duration="2029/30s" name="VO 05" audioRole="dialogue"/><marker start="5002/30s" duration="1/30s" value="05 The Pizza Was Already There"/></asset-clip>
+<asset-clip ref="pic" offset="5214/30s" name="05-b" start="5214/30s" duration="224/30s"></asset-clip>
+<asset-clip ref="pic" offset="5438/30s" name="05-c" start="5438/30s" duration="137/30s"></asset-clip>
+<asset-clip ref="pic" offset="5575/30s" name="05-d" start="5575/30s" duration="149/30s"></asset-clip>
+<asset-clip ref="pic" offset="5724/30s" name="05-e" start="5724/30s" duration="100/30s"></asset-clip>
+<asset-clip ref="pic" offset="5824/30s" name="05-f" start="5824/30s" duration="174/30s"></asset-clip>
+<asset-clip ref="pic" offset="5998/30s" name="05-g" start="5998/30s" duration="162/30s"></asset-clip>
+<asset-clip ref="pic" offset="6160/30s" name="05-h" start="6160/30s" duration="211/30s"></asset-clip>
+<asset-clip ref="pic" offset="6371/30s" name="05-i" start="6371/30s" duration="137/30s"></asset-clip>
+<asset-clip ref="pic" offset="6508/30s" name="05-j" start="6508/30s" duration="162/30s"></asset-clip>
+<asset-clip ref="pic" offset="6670/30s" name="05-k" start="6670/30s" duration="199/30s"></asset-clip>
+<asset-clip ref="pic" offset="6869/30s" name="05-l" start="6869/30s" duration="162/30s"></asset-clip>
+<asset-clip ref="pic" offset="7031/30s" name="06-a" start="7031/30s" duration="176/30s"><asset-clip ref="vo_06" lane="-1" offset="7031/30s" start="0s" duration="859/30s" name="VO 06" audioRole="dialogue"/><marker start="7031/30s" duration="1/30s" value="06 Fair Credit"/></asset-clip>
+<asset-clip ref="pic" offset="7207/30s" name="06-b" start="7207/30s" duration="166/30s"></asset-clip>
+<asset-clip ref="pic" offset="7373/30s" name="06-c" start="7373/30s" duration="72/30s"></asset-clip>
+<asset-clip ref="pic" offset="7445/30s" name="06-d" start="7445/30s" duration="155/30s"></asset-clip>
+<asset-clip ref="pic" offset="7600/30s" name="06-e" start="7600/30s" duration="166/30s"></asset-clip>
+<asset-clip ref="pic" offset="7766/30s" name="06-f" start="7766/30s" duration="124/30s"></asset-clip>
+<asset-clip ref="pic" offset="263s" name="07-a" start="263s" duration="167/30s"><asset-clip ref="vo_07" lane="-1" offset="263s" start="0s" duration="1428/30s" name="VO 07" audioRole="dialogue"/><marker start="263s" duration="1/30s" value="07 Who Was First"/></asset-clip>
+<asset-clip ref="pic" offset="8057/30s" name="07-b" start="8057/30s" duration="178/30s"></asset-clip>
+<asset-clip ref="pic" offset="8235/30s" name="07-c" start="8235/30s" duration="167/30s"></asset-clip>
+<asset-clip ref="pic" offset="8402/30s" name="07-d" start="8402/30s" duration="119/30s"></asset-clip>
+<asset-clip ref="pic" offset="8521/30s" name="07-e" start="8521/30s" duration="95/30s"></asset-clip>
+<asset-clip ref="pic" offset="8616/30s" name="07-f" start="8616/30s" duration="190/30s"></asset-clip>
+<asset-clip ref="pic" offset="8806/30s" name="07-g" start="8806/30s" duration="155/30s"></asset-clip>
+<asset-clip ref="pic" offset="8961/30s" name="07-h" start="8961/30s" duration="119/30s"></asset-clip>
+<asset-clip ref="pic" offset="9080/30s" name="07-i" start="9080/30s" duration="143/30s"></asset-clip>
+<asset-clip ref="pic" offset="9223/30s" name="07-j" start="9223/30s" duration="95/30s"></asset-clip>
 </spine>
 </sequence>
 </project>
