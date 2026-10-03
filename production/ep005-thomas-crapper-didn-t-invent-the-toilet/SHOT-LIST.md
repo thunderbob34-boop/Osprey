@@ -61,7 +61,7 @@ Total runtime 5:19.9 (69 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-e | 4:09.1 | 4.6s | So he made the toilet better, he really did,… | Push-in on Crapper&#x27;s patented Valveless Waste Preventer cistern. | archival (fetch) | Fawcett5 / Wikimedia Commons ✅ |
 | 06-f | 4:13.7 | 4.9s | And what about the word? Well, &quot;crap&quot; as a… | Compare, left side: the word crap is older than he is. | motion graphic |  |
 | 06-g | 4:18.6 | 2.6s | so he&#x27;s not where the word came from. | Compare reveals the right side: Thomas Crapper is not where the word came from. | motion graphic |  |
-| 06-h | 4:21.2 | 4.3s | The word &quot;crapper&quot; for the toilet may come from… | Map: a dashed ship route draws across the Atlantic, American troops, 1917. | animated map |  |
+| 06-h | 4:21.2 | 4.3s | The word &quot;crapper&quot; for the toilet may come from… | Date card: 1917, with the hedge &quot;may&quot; from the narration. | motion graphic |  |
 | 06-i | 4:25.5 | 3.6s | seeing &quot;T. Crapper&quot; on toilet cisterns, and that&#x27;s only… | Closer push-in on the Crapper cistern; chip: only a maybe. | archival (fetch) | Oxyman / Wikimedia Commons ✅ |
 | 06-j | 4:29.1 | 4.9s | but it would mean the name on the tank… | Tighter push-in on the lettering of Crapper&#x27;s cistern. | archival (fetch) | Fawcett5 / Wikimedia Commons ✅ |
 | 06-k | 4:34.1 | 5.6s | So his name may well be in the slang,… | Gentle push-in on the Crapper manhole cover. | archival (fetch) | Patrick Mackie / geograph.org.uk ✅ |
