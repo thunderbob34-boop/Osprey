@@ -1,0 +1,63 @@
+{
+ "voice": "Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f)",
+ "engine": "text2speech_v2 / seed_speech",
+ "note": "Read by Holden on Seed Speech from the final script text. Pronunciation respellings used in the TTS text only (the script and on-screen text keep the real spelling): Knossos read as \"Noss-oss\"",
+ "sections": [
+  {
+   "num": "01",
+   "name": "Cold Open",
+   "file": "vo/01-cold-open.mp3",
+   "job_id": "6bbb4d0b-8aac-43d6-9da7-12d62143e928",
+   "duration": 31.224,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002610_6bbb4d0b-8aac-43d6-9da7-12d62143e928.mp3"
+  },
+  {
+   "num": "02",
+   "name": "The Famous Version",
+   "file": "vo/02-the-famous-version.mp3",
+   "job_id": "20e70767-71dc-45ce-9565-7e08873a0b32",
+   "duration": 38.64,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002610_20e70767-71dc-45ce-9565-7e08873a0b32.mp3"
+  },
+  {
+   "num": "03",
+   "name": "Knossos",
+   "file": "vo/03-knossos.mp3",
+   "job_id": "0a0cfd70-80c2-49b9-b428-7a39e2c85a9e",
+   "duration": 67.632,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002610_0a0cfd70-80c2-49b9-b428-7a39e2c85a9e.mp3"
+  },
+  {
+   "num": "04",
+   "name": "Harington, 1596",
+   "file": "vo/04-harington-1596.mp3",
+   "job_id": "b8b94be2-74d0-4df1-9c74-d0d843b76f27",
+   "duration": 55.056,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002624_b8b94be2-74d0-4df1-9c74-d0d843b76f27.mp3"
+  },
+  {
+   "num": "05",
+   "name": "Cumming and the S-Bend",
+   "file": "vo/05-cumming-and-the-s-bend.mp3",
+   "job_id": "ab45e94b-21ef-4077-b0dd-0d42a96986a9",
+   "duration": 41.088,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002624_ab45e94b-21ef-4077-b0dd-0d42a96986a9.mp3"
+  },
+  {
+   "num": "06",
+   "name": "What Crapper Actually Did",
+   "file": "vo/06-what-crapper-actually-did.mp3",
+   "job_id": "3b394e33-b349-4f1e-a732-31e4a32c96b5",
+   "duration": 48.864,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002624_3b394e33-b349-4f1e-a732-31e4a32c96b5.mp3"
+  },
+  {
+   "num": "07",
+   "name": "Who Was First",
+   "file": "vo/07-who-was-first.mp3",
+   "job_id": "fcba9c09-ca83-4d61-8553-483090aba30a",
+   "duration": 40.248,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002624_fcba9c09-ca83-4d61-8553-483090aba30a.mp3"
+  }
+ ]
+}

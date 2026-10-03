@@ -1,0 +1,63 @@
+{
+ "voice": "Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f)",
+ "engine": "text2speech_v2 / seed_speech",
+ "note": "Read by Holden on Seed Speech from the final script text. Pronunciation respellings used in the TTS text only (the script and on-screen text keep the real spelling): Nowak read as \"No-vak\"",
+ "sections": [
+  {
+   "num": "01",
+   "name": "Cold Open",
+   "file": "vo/01-cold-open.mp3",
+   "job_id": "4ac491dd-da53-4fb8-9ed2-313474aa4518",
+   "duration": 36.048,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002547_4ac491dd-da53-4fb8-9ed2-313474aa4518.mp3"
+  },
+  {
+   "num": "02",
+   "name": "The Legend",
+   "file": "vo/02-the-legend.mp3",
+   "job_id": "1ffc86ad-200f-421e-b276-e3c78954c6fa",
+   "duration": 41.448,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002547_1ffc86ad-200f-421e-b276-e3c78954c6fa.mp3"
+  },
+  {
+   "num": "03",
+   "name": "The Letter",
+   "file": "vo/03-the-letter.mp3",
+   "job_id": "9c64d9fc-a50e-4fba-8005-640815636a7f",
+   "duration": 50.016,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002547_9c64d9fc-a50e-4fba-8005-640815636a7f.mp3"
+  },
+  {
+   "num": "04",
+   "name": "Who Made It Up",
+   "file": "vo/04-who-made-it-up.mp3",
+   "job_id": "98dacd8a-d1a0-4906-8b85-ab52685754d7",
+   "duration": 57.048,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002547_98dacd8a-d1a0-4906-8b85-ab52685754d7.mp3"
+  },
+  {
+   "num": "05",
+   "name": "The Pizza Was Already There",
+   "file": "vo/05-the-pizza-was-already-there.mp3",
+   "job_id": "d76a70be-6d3e-4c4b-bb6e-f97a633b8a41",
+   "duration": 70.008,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002547_d76a70be-6d3e-4c4b-bb6e-f97a633b8a41.mp3"
+  },
+  {
+   "num": "06",
+   "name": "Fair Credit",
+   "file": "vo/06-fair-credit.mp3",
+   "job_id": "ec1089dd-679f-4bd5-88fb-df097a32005f",
+   "duration": 36.648,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002547_ec1089dd-679f-4bd5-88fb-df097a32005f.mp3"
+  },
+  {
+   "num": "07",
+   "name": "Who Was First",
+   "file": "vo/07-who-was-first.mp3",
+   "job_id": "645d96fb-15a1-4394-9a68-6bdf97ce55b9",
+   "duration": 47.616,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002547_645d96fb-15a1-4394-9a68-6bdf97ce55b9.mp3"
+  }
+ ]
+}
