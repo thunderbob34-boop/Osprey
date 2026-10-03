@@ -45,11 +45,20 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
    - Every beat is now an animated clip: maps with routes, illustrated scenes, kinetic type and Ken Burns push-ins.
    - Each episode folder has PREVIEW.mp4 (with section labels), PICTURE.mp4 (clean; the Resolve timeline cuts it once per beat), TIMELINE.fcpxml (DTD-valid), SHOT-LIST, PENDING-ASSETS, README and A/B thumbnails.
    - Per-beat clips are a local build cache, gitignored at about 270MB per episode.
-   - Runtimes and beats: ep2 5:51 (77), ep3 5:42 (75), ep4 5:39 (74), ep5 5:23 (66).
+   - **Rebuilt again 2026-10-03 (v3, after Gus's Episode 2 notes):**
+     - Real Commons images are the backbone, catalogued per episode in `images.json` with licence and credit.
+     - No cartoon scenes.
+     - A running time bar, with hedged labels such as "late 1800s".
+     - Plain-talk scripts, with new narration checked by speech-to-text.
+     - Runtimes and beats: ep2 5:43 (75), ep3 5:34 (76), ep4 5:11 (67), ep5 5:20 (69).
+     - The photo beats are rendered and composited in the Higgsfield sandbox (`production/_shared/finish-in-sandbox.sh`), because this workspace can't reach Wikimedia.
+     - The repo's PICTURE.mp4 files still carry placeholder cards on the photo beats.
+   - Earlier runtimes (v2): ep2 5:51 (77), ep3 5:42 (75), ep4 5:39 (74), ep5 5:23 (66).
    - Stranger tests (now asking "is it entertaining?") ran 2–3 times per episode. None found a High problem in its final pass, and every Medium was fixed. Reviewers still rate the cuts "mostly" entertaining, limited by the missing real images.
    - **Still open:** 94 archival beats are placeholders (ep2 31, ep3 23, ep4 16, ep5 24). The network blocks the image hosts and the narration CDN, so the previews are silent and show dark "to fetch" cards.
    - Allowing these hosts unblocks both: d8j0ntlcm91z4.cloudfront.net, upload.wikimedia.org, commons.wikimedia.org, tile.loc.gov, www.loc.gov, ids.si.edu, collections.sciencemuseumgroup.org.uk, archive.org, iiif.wellcomecollection.org.
    - Ep4 must not air until the Nowak article and the 1858 text are in hand.
+   - Ep4: Commons has an 1880 newspaper item ("Pizze alla napoletana", Il Bersagliere) saying Giovanni Brandi claimed to have made pizzas for Queen Margherita. Check it against the script and Nowak's paper before airing.
    - Narration cost for eps 2–5: 43.6 credits, plus 1.8 for the ep3 re-read.
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).
 5. Pronunciations to confirm: Magie (7), Chevedden (55), Tawell (97), Finlay (109), Koechlin and Nouguier (110). Others are confirmed in each script's reading notes.
