@@ -2,6 +2,7 @@
 # Runs INSIDE the Higgsfield sandbox (it can reach the image hosts and the narration CDN; this workspace can't).
 # Usage: EP=<episode folder> TITLE_ENC=<url-encoded title> PUT=<presigned upload url> bash finish-in-sandbox.sh
 set -e
+# Images are fetched at 1920px, one of Wikimedia's standard thumbnail sizes (other sizes get throttled).
 # Re-runs reuse fin/ep/assets and fin/clips (clips whose data is unchanged are skipped). Delete fin/ for a clean run.
 R="https://raw.githubusercontent.com/thunderbob34-boop/osprey/research/somebody-did-it-first/production"
 mkdir -p fin/_shared fin/ep/assets fin/ep/vo && cd fin
@@ -15,7 +16,7 @@ rb=json.load(open('rb.json'))
 for k,v in rb['images'].items():
     out=f'ep/assets/{k}.jpg'
     if os.path.exists(out) and os.path.getsize(out)>10000: continue   # already fetched (Wikimedia rate-limits repeat fetches)
-    subprocess.run(['curl','-sfL','--retry','6','--retry-delay','5','--retry-all-errors','-A','SomebodyDidItFirstBot/0.1 (research)','-o',out,v['url']],check=True); time.sleep(1)
+    subprocess.run(['curl','-sfL','--retry','6','--retry-delay','5','--retry-all-errors','-A','SomebodyDidItFirstBot/0.1 (research)','-o',out,v['url'].replace('width=2400','width=1920')],check=True); time.sleep(1)
     subprocess.run(['ffmpeg','-loglevel','error','-y','-i',out,'-vf','scale=min(2400\\,iw):-2',out+'.tmp.jpg'],check=True); os.replace(out+'.tmp.jpg',out)
 beats=[]
 for b in rb['beats']:
