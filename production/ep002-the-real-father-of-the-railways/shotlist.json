@@ -593,99 +593,20 @@
   "section": "03",
   "section_name": "Penydarren, 1804",
   "text": "On February 21st, 1804, at the Penydarren ironworks in Merthyr, in south Wales,",
-  "type": "pinmap",
-  "template": "pinmap",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "title": "Penydarren ironworks, Merthyr",
-   "from": {
-    "lat": 52.3,
-    "lon": -3.9,
-    "span": 3.5
-   },
-   "pins": [
-    {
-     "name": "Penydarren ironworks, Merthyr",
-     "lat": 51.7508,
-     "lon": -3.3758,
-     "sub": "February 21, 1804",
-     "pulse": true
-    },
-    {
-     "name": "Abercynon",
-     "lat": 51.6443,
-     "lon": -3.3275,
-     "at": 99
-    }
-   ],
-   "routes": [
-    {
-     "points": [
-      [
-       51.7508,
-       -3.3758
-      ],
-      [
-       51.738,
-       -3.368
-      ],
-      [
-       51.718,
-       -3.359
-      ],
-      [
-       51.705,
-       -3.355
-      ],
-      [
-       51.69,
-       -3.348
-      ],
-      [
-       51.677,
-       -3.343
-      ],
-      [
-       51.668,
-       -3.334
-      ],
-      [
-       51.658,
-       -3.33
-      ],
-      [
-       51.6443,
-       -3.3275
-      ]
-     ],
-     "style": "rail",
-     "at": 99,
-     "icon": "train",
-     "label": "The tramroad (route approximate)",
-     "lx": 30
-    }
-   ],
-   "labels": [
-    {
-     "name": "Cardiff",
-     "lat": 51.4815,
-     "lon": -3.18,
-     "kind": "city",
-     "fit": true
-    },
-    {
-     "name": "Bristol Channel",
-     "lat": 51.4,
-     "lon": -3.0,
-     "kind": "sea",
-     "size": 30
-    }
-   ],
-   "span": 0.45,
-   "rivers": true,
-   "borders": true,
-   "note": "Route approximate · Coastlines: Natural Earth"
+   "scene": "calendar",
+   "tag": "ILLUSTRATION · Calendar graphic",
+   "params": {
+    "month": "February",
+    "day": 21,
+    "year": "1804",
+    "flips": 3,
+    "title": "Penydarren ironworks, Merthyr, south Wales"
+   }
   },
-  "visual": "Camera flies from south Wales down into the Merthyr valley and a pulsing pin lands on Penydarren, with the Bristol Channel to the south.",
+  "visual": "Tear-off calendar pages flip to February 21, 1804, under \"Penydarren ironworks, Merthyr, south Wales\".",
   "source": null
  },
  {
@@ -731,14 +652,14 @@
    "params": {
     "title": "A tramroad, simplified",
     "at": {
-     "block": 0.8,
-     "wheel": 1.8,
-     "plate": 99,
-     "edge": 99
+     "plate": 0.6,
+     "edge": 1.3,
+     "block": 1.9,
+     "wheel": 2.4
     }
    }
   },
-  "visual": "Cross-section of a tramroad builds in: stone blocks and a plain wagon wheel roll into view.",
+  "visual": "Cross-section of a tramroad builds in: the L-shaped iron plate, its upright edge, the stone block and a plain wagon wheel are called out.",
   "source": null
  },
  {
@@ -746,23 +667,30 @@
   "section": "03",
   "section_name": "Penydarren, 1804",
   "text": "iron plates laid down for wagons to run along.",
-  "type": "scene",
-  "template": "scene",
+  "type": "object",
+  "template": "archival",
   "fields": {
-   "scene": "plateway",
-   "tag": "ILLUSTRATION · Simplified cross-section, not to scale",
-   "params": {
-    "title": "A tramroad, simplified",
-    "at": {
-     "block": 0.1,
-     "wheel": 0.1,
-     "plate": 0.5,
-     "edge": 1.8
-    }
+   "kind": "object",
+   "label": "Tramplate (Museum Wales)",
+   "lower": "A tramroad iron plate (Museum Wales collection)",
+   "asset": "museum-wales-collections-online-object-b0bd28a0-4e12-35e5-94",
+   "crop": "Slow push-in on the plate",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 50
    }
   },
-  "visual": "Same cross-section continues: the L-shaped iron plate and its upright edge are called out.",
-  "source": null
+  "visual": "Slow push-in on a real tramroad plate from the Museum Wales collection: iron plates laid down for wagons to run along.",
+  "source": {
+   "institution": "Museum Wales (Amgueddfa Cymru)",
+   "item": "Tramplate",
+   "url": "https://museum.wales/collections/online/object/b0bd28a0-4e12-35e5-94c5-193f9f1ff459/Tramplate/",
+   "rights": "Not stated in the search result. Check the Collections Online record licence",
+   "credit": "Museum Wales Collections Online",
+   "verified": false
+  },
+  "notes": "Generic tramplate shown for \"iron plates\". Museum Wales also lists a Penydarren tramplate (accession 46.209/1); confirm this record is that one and, if so, change the lower to \"A Penydarren tramroad plate\"."
  },
  {
   "id": "03-e",
@@ -959,7 +887,7 @@
    "scene": "tram_run",
    "tag": "ILLUSTRATION · Simplified, generic engine · No picture of the 1804 run survives",
    "params": {
-    "title": "The point",
+    "title": "Penydarren to Abercynon",
     "wagons": 5,
     "men": null,
     "load": 1,
@@ -989,7 +917,7 @@
    "scene": "tram_run",
    "tag": "ILLUSTRATION · Simplified, generic engine · No picture of the 1804 run survives",
    "params": {
-    "title": "The point",
+    "title": "Penydarren to Abercynon",
     "wagons": 5,
     "men": null,
     "load": 1,
@@ -1117,7 +1045,7 @@
   "id": "03-p",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "between an ironmaster named Homfray and a rival ironmaster, but the sources don't even agree on who the rival was,",
+  "text": "between an ironmaster named Homfray and a rival ironmaster,",
   "type": "compare",
   "template": "compare",
   "fields": {
@@ -1127,11 +1055,11 @@
    ],
    "right_title": "A rival ironmaster",
    "right_lines": [
-    "Sources don't agree on who"
+    ""
    ],
    "step": 2
   },
-  "visual": "Compare: Homfray, an ironmaster, against a rival ironmaster the sources do not agree on.",
+  "visual": "Compare: Homfray, an ironmaster, against a rival ironmaster.",
   "source": null,
   "notes": "Name caption for Homfray on first mention."
  },
@@ -1139,15 +1067,37 @@
   "id": "03-q",
   "section": "03",
   "section_name": "Penydarren, 1804",
-  "text": "so treat that as the story people tell and not as something anybody has nailed down.",
+  "text": "but the sources don't even agree on who the rival was,",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "Treat it as the story people tell",
-   "sub": "Not something anybody has nailed down"
+   "headline": "The sources don't agree on who the rival was",
+   "sub": ""
   },
-  "visual": "Kinetic text: treat it as the story people tell.",
+  "visual": "Kinetic text: the sources don't agree on who the rival was.",
   "source": null
+ },
+ {
+  "id": "03-r",
+  "section": "03",
+  "section_name": "Penydarren, 1804",
+  "text": "so treat that as the story people tell and not as something anybody has nailed down.",
+  "type": "compare",
+  "template": "compare",
+  "fields": {
+   "left_title": "The story people tell",
+   "left_lines": [
+    ""
+   ],
+   "right_title": "Something anybody has nailed down",
+   "right_lines": [
+    ""
+   ],
+   "step": 1
+  },
+  "visual": "Compare, step 1: \"The story people tell\" is lit, \"Something anybody has nailed down\" is ghosted.",
+  "source": null,
+  "notes": "Ghosted right side: the story is not nailed down."
  },
  {
   "id": "04-a",
@@ -1162,7 +1112,10 @@
    "params": {
     "title": "The catch",
     "caption": "The rails kept cracking",
-    "weight": "Heavy"
+    "weight": "so heavy",
+    "at": {
+     "crack": 4.6
+    }
    }
   },
   "visual": "The engine rolls onto a cast-iron plate and the plate cracks.",
@@ -1180,14 +1133,14 @@
    "label": "Tramplate (Museum Wales)",
    "lower": "A tramroad plate (Museum Wales collection)",
    "asset": "museum-wales-collections-online-object-b0bd28a0-4e12-35e5-94",
-   "crop": "Slow push-in on the plate",
+   "crop": "Tighter crop than 03-d, off to the left",
    "zoom": {
-    "scale": 1.5,
-    "x": 50,
-    "y": 50
+    "scale": 2.2,
+    "x": 35,
+    "y": 55
    }
   },
-  "visual": "Slow push-in on a real tramroad plate from the Museum Wales collection.",
+  "visual": "Tighter push-in on the same Museum Wales tramroad plate: cast iron, hard but brittle.",
   "source": {
    "institution": "Museum Wales (Amgueddfa Cymru)",
    "item": "Tramplate",
@@ -1258,7 +1211,7 @@
    ],
    "right_title": "A business",
    "right_lines": [
-    "Not this one"
+    "Not a business one"
    ],
    "step": 2
   },
@@ -1270,30 +1223,25 @@
   "section": "04",
   "section_name": "The Catch",
   "text": "It proved a steam locomotive could pull a real load on rails,",
-  "type": "object",
-  "template": "archival",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "kind": "object",
-   "label": "Conjectural model of the Penydarren locomotive (Science Museum Group)",
-   "lower": "Conjectural model of the Penydarren locomotive",
-   "asset": "collection-sciencemuseumgroup-org-uk-objects-co27505-model-o",
-   "crop": "Tight crop on one end of the model (different from 03-b)",
-   "zoom": {
-    "scale": 2.0,
-    "x": 30,
-    "y": 55
+   "scene": "tram_run",
+   "tag": "ILLUSTRATION · Simplified, generic engine · No picture of the 1804 run survives",
+   "params": {
+    "title": "It proved it could pull a real load",
+    "wagons": 5,
+    "men": null,
+    "load": 1,
+    "speed": 140,
+    "counters": [],
+    "at": {
+     "men": 99
+    }
    }
   },
-  "visual": "Tight push-in on the conjectural model: it proved a steam locomotive could pull a real load.",
-  "source": {
-   "institution": "Science Museum Group",
-   "item": "Model of Trevithick's first railway locomotive 'Pen-y-Darren' (conjectural model, 1:8, Walter W. Mason; object 1934-312)",
-   "url": "https://collection.sciencemuseumgroup.org.uk/objects/co27505/model-of-trevithicks-first-railway-locomotive-pen-y-darren",
-   "rights": "Not stated in the search result. Check the Science Museum Group object page licence",
-   "credit": "Model of Trevithick's first railway locomotive 'Pen-y-Darren', Science Museum Group Collection",
-   "verified": false
-  },
-  "notes": "A later conjectural model, labelled as such."
+  "visual": "The engine pulls its loaded wagons along the plateway: it proved a steam locomotive could pull a real load on rails.",
+  "source": null
  },
  {
   "id": "04-g",
@@ -1305,7 +1253,7 @@
   "fields": {
    "left_title": "Doing something first",
    "left_lines": [
-    "Trevithick did this part"
+    "Trevithick did the first part"
    ],
    "right_title": "Doing something that lasts",
    "right_lines": [
@@ -1326,11 +1274,11 @@
   "fields": {
    "left_title": "Doing something first",
    "left_lines": [
-    "Trevithick did this part"
+    "Trevithick did the first part"
    ],
    "right_title": "Doing something that lasts",
    "right_lines": [
-    "The part the story moves on to"
+    ""
    ],
    "step": 2
   },
@@ -2671,7 +2619,7 @@
   "type": "timeline",
   "template": "timeline",
   "fields": {
-   "title": "Who came in between",
+   "title": "From 1804 to 1829",
    "events": [
     {
      "date": "Feb 21, 1804",

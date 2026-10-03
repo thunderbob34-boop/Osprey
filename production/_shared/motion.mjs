@@ -30,7 +30,7 @@ async function worker() {
     await page.waitForSelector('body[data-ready="1"]', { timeout: 30000 });
     const out = path.join(clipDir, b.id + '.mp4');
     const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
-      '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-pix_fmt', 'yuv420p', '-r', String(fps), out]);
+      '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '20', '-pix_fmt', 'yuv420p', '-r', String(fps), out]);
     const posterAt = Math.floor(N * 0.7);
     for (let i = 0; i < N; i++) {
       await page.evaluate(s => window.drawAt(s), i / fps);

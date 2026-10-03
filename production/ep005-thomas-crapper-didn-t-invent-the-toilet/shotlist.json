@@ -366,10 +366,9 @@
    "tag": "ILLUSTRATION · Simplified, not data",
    "params": {
     "title": "It helped spread the idea",
-    "left": "Flushed with Pride",
-    "leftSub": "The idea that Crapper invented the toilet",
-    "right": " ",
-    "rightSub": " "
+    "single": true,
+    "left": "Flushed with Pride, 1969",
+    "leftSub": "that Crapper invented the toilet"
    }
   },
   "visual": "Red ripples spread out from the book and light up dots as the idea travels.",
@@ -871,7 +870,7 @@
   "fields": {
    "kind": "engraving",
    "label": "Harington's flushing toilet, as shown in The Metamorphosis of Ajax (engraving)",
-   "lower": "Harington's flush toilet, from The Metamorphosis of Ajax (engraving)",
+   "lower": "Engraving of a flushing toilet design",
    "asset": "commons-wikimedia-org-wiki-file-a-new-discourse-of-a-stale-s",
    "zoom": {
     "scale": 1.15,
@@ -889,7 +888,7 @@
    "credit": "Harington's flush toilet, from A New Discourse of a Stale Subject, called the Metamorphosis of Ajax, via Wikimedia Commons",
    "verified": true
   },
-  "notes": "Confirm on the file page which edition the engraving comes from before the lower-third wording is final."
+  "notes": "The lower is deliberately neutral: the narration names Harington and the Ajax pamphlet in the next beats. Confirm on the file page which edition the engraving comes from before the final lower-third wording."
  },
  {
   "id": "04-b",
@@ -1161,8 +1160,8 @@
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "Closer to Harington than to Crapper",
-   "sub": "For the flush toilet with a tank"
+   "headline": "If anyone is the inventor, Harington is closer",
+   "sub": "Of the flush toilet with a tank"
   },
   "visual": "Kinetic words.",
   "source": null
@@ -1228,21 +1227,30 @@
   "section": "05",
   "section_name": "Cumming and the S-Bend",
   "text": "The fix for that is the S-bend, a bend in the pipe",
-  "type": "scene",
-  "template": "scene",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "scene": "sbend",
-   "tag": "ILLUSTRATION · Simplified diagram, not to scale",
-   "params": {
-    "title": "The S-bend",
-    "at": {
-     "water": 30,
-     "smell": 30
-    }
-   }
+   "kind": "patent",
+   "label": "A drawing of an S-bend (patent drawing)",
+   "lower": "A drawing of an S-bend",
+   "asset": "commons-wikimedia-org-wiki-file-cummings-s-bend-jpg",
+   "zoom": {
+    "scale": 1.25,
+    "x": 50,
+    "y": 45
+   },
+   "crop": "Wide on the whole drawing, slow push-in"
   },
-  "visual": "The straight pipe is replaced by a bent pipe.",
-  "source": null
+  "visual": "Slow push-in on a period drawing of the S-bend. Cumming is not named yet.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Cummings S-bend.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Cummings_S-bend.jpg",
+   "rights": "Public domain: published before 1 January 1931; Creative Commons Public Domain Mark 1.0, as stated on the file page",
+   "credit": "Alexander Cumming's S-bend flush toilet patent, 1775, via Wikimedia Commons",
+   "verified": true
+  },
+  "notes": "Same Commons drawing is used again at 05-g with a much tighter crop."
  },
  {
   "id": "05-e",
@@ -1338,7 +1346,7 @@
     "x": 50,
     "y": 60
    },
-   "crop": "Push-in on the bend in the pipe"
+   "crop": "Tighter push-in on the bend in the pipe (05-d is the wide view)"
   },
   "visual": "Slow push-in on the S-bend in Cumming's patent drawing.",
   "source": {

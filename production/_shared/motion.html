@@ -300,14 +300,14 @@ SC.plateway = (t,P) => { const roll=(t*120)%2000; const wx=lerp(200,1500,clamp(t
   s+=callout(t,at(P,'wheel',3.0),wx,560,wx+160,330,'plain wagon wheel');
   return s; };
 
-SC.rail_crack = (t,P) => { const wx=lerp(-300,820,eOut(seg(t,0,1.4))); const cr=seg(t,1.4,2.4);
+SC.rail_crack = (t,P) => { const c0=at(P,'crack',1.4); const wx=lerp(-300,820,eOut(seg(t,0,c0))); const cr=seg(t,c0,c0+1);
   let s=titleBar(t,P.title||'Cast iron: hard, but brittle');
   s+=`<rect x="200" y="640" width="1520" height="44" fill="#1D1B18"/>${[0,1,2,3,4,5].map(i=>`<rect x="${260+i*260}" y="684" width="150" height="90" fill="url(#stone)" stroke="#8B8170" stroke-width="3"/>`).join('')}`;
   if (cr>0){ const pts=[[960,640],[948,652],[972,662],[955,672],[968,684]]; const n=Math.ceil(cr*pts.length); s+=`<polyline points="${pts.slice(0,n).map(p=>p.join(',')).join(' ')}" fill="none" stroke="#EFE7D6" stroke-width="6"/>`;
-    if(cr>=1){ const q=seg(t,2.4,3.2); s+=`<g opacity="${q}">${[[-30,10],[25,18],[-12,30]].map(([dx,dy],i)=>`<rect x="${955+dx*q*2}" y="${690+dy*q*3}" width="12" height="9" fill="#1D1B18" transform="rotate(${q*90*(i-1)} ${955+dx} ${690+dy})"/>`).join('')}</g>`; } }
-  s+=engine(wx,640,t*(1-seg(t,1.4,1.6)),1.0);
-  s+=`<g opacity="${eOut(seg(t,2.2,2.8))}">${T(960,880,P.caption||'It cracks instead of bending',50,'middle',800,'#A8261B')}</g>`;
-  if (P.weight){ const q=eOut(seg(t,.9,1.4)); s+=`<g opacity="${q}"><path d="M${wx-60},380 v120" stroke="#A8261B" stroke-width="10" marker-end="url(#arR)"/>${T(wx-60,350,P.weight,40,'middle',800,'#A8261B')}</g>`; }
+    if(cr>=1){ const q=seg(t,c0+1,c0+1.8); s+=`<g opacity="${q}">${[[-30,10],[25,18],[-12,30]].map(([dx,dy],i)=>`<rect x="${955+dx*q*2}" y="${690+dy*q*3}" width="12" height="9" fill="#1D1B18" transform="rotate(${q*90*(i-1)} ${955+dx} ${690+dy})"/>`).join('')}</g>`; } }
+  s+=engine(wx,640,Math.min(t,c0),1.0);
+  s+=`<g opacity="${eOut(seg(t,c0+.8,c0+1.4))}">${T(960,880,P.caption||'It cracks instead of bending',50,'middle',800,'#A8261B')}</g>`;
+  if (P.weight){ const q=eOut(seg(t,c0-.5,c0)); s+=`<g opacity="${q}"><path d="M${wx-60},380 v120" stroke="#A8261B" stroke-width="10" marker-end="url(#arR)"/>${T(wx-60,350,P.weight,40,'middle',800,'#A8261B')}</g>`; }
   return s; };
 
 SC.calendar = (t,P) => { const flips=P.flips??3; const fp=seg(t,.2,1.6); let s=titleBar(t,P.title);
@@ -402,10 +402,11 @@ SC.knossos_drain = (t,P) => { let s=titleBar(t,P.title||'Water carrying waste aw
   return s; };
 
 SC.ripple = (t,P) => { let s=titleBar(t,P.title||'Public versus first'); const rr=at(P,'right',0); const rq=eOut(seg(t,rr,rr+.5));
-  const A=[560,560], B=[1360,560]; const dots=[[300,330],[420,820],[760,300],[820,830],[300,600],[700,640]];
-  for(let i=0;i<4;i++){ const q=((t*.45+i/4)%1); s+=`<circle cx="${A[0]}" cy="${A[1]}" r="${30+q*360}" fill="none" stroke="#A8261B" stroke-width="5" opacity="${(1-q)*.7}"/>`; }
-  dots.forEach(([x,y],i)=>{ const d=Math.hypot(x-A[0],y-A[1]); const lit=t*.45*360>d-30; s+=`<circle cx="${x}" cy="${y}" r="16" fill="${lit?'#A8261B':'#C9BBA0'}"/>`; });
+  const one=!!P.single; const A=one?[960,560]:[560,560], B=[1360,560]; const dots=one?[[520,330],[700,850],[1300,300],[1420,800],[460,620],[1500,560],[960,250],[1180,880]]:[[300,330],[420,820],[760,300],[820,830],[300,600],[700,640]];
+  for(let i=0;i<4;i++){ const q=((t*.45+i/4)%1); s+=`<circle cx="${A[0]}" cy="${A[1]}" r="${30+q*(one?620:360)}" fill="none" stroke="#A8261B" stroke-width="5" opacity="${(1-q)*.7}"/>`; }
+  dots.forEach(([x,y],i)=>{ const d=Math.hypot(x-A[0],y-A[1]); const lit=t*.45*(one?620:360)>d-30; s+=`<circle cx="${x}" cy="${y}" r="16" fill="${lit?'#A8261B':'#C9BBA0'}"/>`; });
   s+=`<circle cx="${A[0]}" cy="${A[1]}" r="34" fill="#A8261B"/>${TH(A[0],A[1]+90,P.left||'Boston, 1846',40,'middle',800)}${TH(A[0],A[1]+135,P.leftSub||'in public: written down, talked about, copied',28,'middle',600,'#5E564A')}`;
+  if(one) return s;
   s+=`<line x1="960" y1="260" x2="960" y2="880" stroke="#C9BBA0" stroke-width="4"/>`;
   s+=`<g opacity="${rq}"><circle cx="${B[0]}" cy="${B[1]}" r="34" fill="#1D1B18"/>${TH(B[0],B[1]+90,P.right||'Georgia, 1842',40,'middle',800)}${TH(B[0],B[1]+135,P.rightSub||'not published until 1849',28,'middle',600,'#5E564A')}</g>`;
   [[1150,330],[1600,320],[1180,820],[1620,800],[1700,560]].forEach(([x,y])=>{ s+=`<circle cx="${x}" cy="${y}" r="16" fill="#C9BBA0"/>`; });

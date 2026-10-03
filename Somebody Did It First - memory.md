@@ -41,6 +41,25 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 6. Pre-recording source pulls, per the "Open check" column in `scripts/README.md`. The biggest are: the Nowak paper and the 1858 Usi e costumi text (4, pizza); a second strong source naming John Loud (53); a Sasson page reference for the Kibri-Dagan letter (47); and a second source for the Dunhuang banner and the Heilongjiang and Xanadu guns (49).
 7. New repo: Gus will create an empty private `somebody-did-it-first` repo and give the Claude GitHub app access to it. The channel work then moves out of Osprey's `research/somebody-did-it-first` branch. Until then, that branch is the safe copy.
 
+## Caught by Gus (pipeline misses) and the checks added
+- **2026-10-03, episodes 2–5 looked like a slideshow.**
+  - Gus's words: "terribly dull… what do they look like? Show us on a map what's going on."
+  - The blind reviews had passed the cut, because they judged accuracy and pacing, not whether it was fun to watch.
+  - Fix: a motion engine (`production/_shared/motion.html` and `motion.mjs`). Every beat is now an animated clip:
+    - animated maps with routes and coastlines;
+    - illustrated scenes for how things worked;
+    - counters and kinetic type;
+    - Ken Burns push-ins on photos.
+  - New definition-of-done checks:
+    - every beat moves;
+    - archival placeholders are at most about 25% of beats, and text cards at most about 12%;
+    - every section has a map or illustrated scene, and every place named in the narration gets a map;
+    - the stranger's test now asks "is this entertaining, and where would a viewer click away?"
+- **2026-10-03, Hanaoka date.**
+  - "October 13, 1804" is the Japanese-calendar date; it falls on 14 November 1804 on ours.
+  - The research had kept the date unqualified. The script now says "by the Japanese calendar of the time", and ep3 sections 06–07 were re-read.
+  - Check added: any pre-1873 Japanese date (and any other non-Gregorian date) is flagged with its calendar.
+
 ## Sources (policy and licensing, checked 2026-10-02)
 See the "Sources checked" table in `production-game-plan.md`. Re-check any row older than 30 days before a video ships.
 
