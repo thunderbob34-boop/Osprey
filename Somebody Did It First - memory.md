@@ -30,6 +30,12 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 1. ~~Narrator decision~~: decided 2026-10-02. Holden on Seed Speech (see Channel).
 2. ~~Length decision~~: decided 2026-10-03. Ship at natural length, about 5 minutes (episode 1 runs 9:37). No padding. Extend later only with new verified research, for the episodes that perform.
 3. ~~Pilot~~: built 2026-10-02 in `production/ep001-the-man-who-invented-nothing/` (116 beats, 9:37, Holden narration, validated FCPXML, five blind reviews). **Still open:** 53 archival/stock beats from 32 items are placeholders, because the cloud network blocks loc.gov, wikimedia.org, si.edu and Higgsfield's CDN (d8j0ntlcm91z4.cloudfront.net). Either allow those hosts in the environment's network settings, or Gus downloads the files into `assets/` (names are in PENDING-ASSETS.md). The 8 narration MP3s go in `vo/`. Rights are confirmed for 11 of the 32 items.
+3b. Episodes 2-5: built 2026-10-03 in `production/ep002-…` to `ep005-…` with the shared kit (`production/_shared/`).
+   - Runtimes and beats: ep2 5:51 (77), ep3 5:43 (71), ep4 5:39 (64), ep5 5:23 (70).
+   - Each has Holden narration, a validated FCPXML, an animatic, A/B thumbnails, PENDING-ASSETS and a README. Narration cost 43.6 credits for all four; the balance is 270.94.
+   - Blind reviews found no High problems. Every Medium was fixed. Ep2, ep3 and ep4 ended on clean passes, with ep3 clean twice in a row. Ep5's last review pass is recorded in its README.
+   - **Still open:** 124 archival beats across the four are placeholders, for the same network reason as the pilot. Rights are stated for only some items; see each README.
+   - Ep4 must not air until the Nowak article and the 1858 text are in hand.
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).
 5. Pronunciations to confirm: Magie (7), Chevedden (55), Tawell (97), Finlay (109), Koechlin and Nouguier (110). Others are confirmed in each script's reading notes.
 6. Pre-recording source pulls, per the "Open check" column in `scripts/README.md`. The biggest are: the Nowak paper and the 1858 Usi e costumi text (4, pizza); a second strong source naming John Loud (53); a Sasson page reference for the Kibri-Dagan letter (47); and a second source for the Dunhuang banner and the Heilongjiang and Xanadu guns (49).
