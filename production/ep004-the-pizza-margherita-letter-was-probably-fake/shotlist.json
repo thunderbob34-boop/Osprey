@@ -619,7 +619,7 @@
     },
     {
      "date": "1930s",
-     "label": "The Brandi family runs the pizzeria"
+     "label": "The Brandi family runs the pizzeria in the legend"
     }
    ],
    "highlight": 1,
@@ -645,7 +645,7 @@
     },
     {
      "date": "1930s",
-     "label": "The Brandi family runs the pizzeria"
+     "label": "The Brandi family runs the pizzeria in the legend"
     }
    ],
    "highlight": 2,
@@ -661,13 +661,28 @@
   "section_name": "Who Made It Up",
   "text": "And a thank-you letter from the palace is about the best marketing a pizzeria could ask for, so that part isn't hard to understand.",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Nowak thinks it was marketing",
-   "sub": "His argument, not proven"
+   "kind": "portrait",
+   "label": "Queen Margherita of Savoy",
+   "lower": "Nowak thinks the letter was marketing (his argument, not proven)",
+   "asset": "loc-gov-resource-ggbain-19206",
+   "crop": "Slow push-in, a different framing from 02-g",
+   "zoom": {
+    "scale": 1.4,
+    "x": 50,
+    "y": 35
+   }
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Slow push-in, a different framing from 02-g",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division (Bain News Service)",
+   "item": "Dowager Queen Margherita -- Italy (digital file from original negative)",
+   "url": "https://www.loc.gov/resource/ggbain.19206",
+   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
+   "credit": "George Grantham Bain Collection, Library of Congress, LC-DIG-ggbain-19206",
+   "verified": true
+  }
  },
  {
   "id": "04-e",
@@ -786,7 +801,7 @@
     },
     {
      "date": "1930s",
-     "label": "The Brandi family runs the pizzeria"
+     "label": "The Brandi family runs the pizzeria in the legend"
     }
    ],
    "highlight": 2,
@@ -800,30 +815,15 @@
   "id": "04-j",
   "section": "04",
   "section_name": "Who Made It Up",
-  "text": "So that's how I'm going to say it, probably fake,",
+  "text": "So that's how I'm going to say it, probably fake, and likely the Brandi family, and not one word stronger than that.",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "Nowak's argument: probably fake",
-   "sub": "Not one word stronger"
+   "headline": "Probably fake, likely the Brandi family",
+   "sub": "Nowak's argument. Not one word stronger"
   },
   "visual": "Text card.",
   "source": null
- },
- {
-  "id": "04-k",
-  "section": "04",
-  "section_name": "Who Made It Up",
-  "text": "and likely the Brandi family, and not one word stronger than that.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "Nowak: likely the Brandi family, not proven",
-   "sub": "Not one word stronger"
-  },
-  "visual": "Text card.",
-  "source": null,
-  "notes": "On-screen wording stays on the letter and on Nowak's argument; no person is accused."
  },
  {
   "id": "05-a",
@@ -958,13 +958,28 @@
   "section_name": "The Pizza Was Already There",
   "text": "Rocco lists tomato as one topping you might get, not a required one, it's one of the combinations,",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "In Rocco, tomato is optional",
-   "sub": "One of the combinations, not required"
+   "kind": "document",
+   "label": "Usi e costumi di Napoli e contorni, vol. 2, 1858",
+   "lower": "In Rocco, tomato is one of the combinations, not required",
+   "asset": "archive-org-details-rcin-org-pl-wa248-143354-f-24166-2-neapo",
+   "crop": "Push-in on the text page describing the toppings",
+   "zoom": {
+    "scale": 1.7,
+    "x": 50,
+    "y": 55
+   }
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Push-in on the text page describing the toppings",
+  "source": {
+   "institution": "Internet Archive (Library of the Institute of Literary Research PAS, RCIN)",
+   "item": "Usi e costumi di Napoli e contorni descritti e dipinti. T. 2 (1858)",
+   "url": "https://archive.org/details/rcin.org.pl.WA248_143354_F-24166-2_neapol2_o_116709",
+   "rights": "Public domain (as stated in the search result for the Internet Archive listing)",
+   "credit": "F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive",
+   "verified": true
+  }
  },
  {
   "id": "05-h",
@@ -1342,24 +1357,24 @@
   "type": "photo",
   "template": "archival",
   "fields": {
-   "kind": "photo",
-   "label": "Pizza Margherita (modern photograph)",
-   "lower": "(modern photograph of a pizza Margherita, Naples, 2005)",
-   "asset": "commons-wikimedia-org-wiki-file-eq-it-na-pizza-margherita-se",
-   "crop": "Close crop, opposite side to 02-i",
+   "kind": "engraving",
+   "label": "\"Il pizzaiuolo\", 1858 print",
+   "lower": "\"Il pizzaiuolo\" (The Pizza Maker), plate in Usi e costumi di Napoli e contorni, vol. 2 (1858)",
+   "asset": "commons-wikimedia-org-wiki-file-bourcard-1858-p2-172-il-pizz",
+   "crop": "Tight crop: the pizza maker's hands and the pizza",
    "zoom": {
-    "scale": 2.0,
-    "x": 70,
+    "scale": 2.2,
+    "x": 50,
     "y": 60
    }
   },
-  "visual": "Modern photo of a Margherita pizza.",
+  "visual": "Tight crop: the pizza maker's hands and the pizza",
   "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Eq it-na pizza-margherita sep2005 sml.jpg (pizza Margherita, I Decumani, Via dei Tribunali, Naples, 6 Sep 2005)",
-   "url": "https://commons.wikimedia.org/wiki/File:Eq_it-na_pizza-margherita_sep2005_sml.jpg",
-   "rights": "CC BY-SA 3.0 (migrated) and GFDL (as stated on the Commons file page); attribution required",
-   "credit": "Valerio Capello, Wikimedia Commons",
+   "institution": "British Library (digitised, via Wikimedia Commons)",
+   "item": "BOURCARD(1858) p2.172 - IL PIZZAIUOLO.jpg (plate by F. Palizzi, from Usi e costumi di Napoli e contorni, vol. 2, p. 172; HMNTS 10129.g.27)",
+   "url": "https://commons.wikimedia.org/wiki/File:BOURCARD(1858)_p2.172_-_IL_PIZZAIUOLO.jpg",
+   "rights": "Public domain (Creative Commons Public Domain Mark 1.0, as stated on the Commons file page)",
+   "credit": "F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library",
    "verified": true
   }
  },

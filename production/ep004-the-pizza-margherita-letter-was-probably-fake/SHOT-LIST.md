@@ -1,6 +1,6 @@
 # The Pizza Margherita Letter Was Probably Fake: shot list
 
-Total runtime 5:38.7 (66 beats). Narration: Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f), text2speech_v2 / seed_speech. Each beat is timed from the real narration length of its section, split by word count.
+Total runtime 5:38.7 (65 beats). Narration: Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f), text2speech_v2 / seed_speech. Each beat is timed from the real narration length of its section, split by word count.
 
 | Beat | In | Dur | Narration (start) | On screen | Route | Source / credit |
 |---|---|---|---|---|---|---|
@@ -34,21 +34,20 @@ Total runtime 5:38.7 (66 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 04-a | 2:07.5 | 3.9s | So if the letter is fake, who made it,… | Text card. | code graphic |  |
 | 04-b | 2:11.4 | 5.0s | Nowak thinks it was probably made up later, and… | Timeline: 1889 appears. | code graphic |  |
 | 04-c | 2:16.4 | 5.0s | who ran the pizzeria from the 1930s, and that… | Timeline: 1930s appears beside 1889. | code graphic |  |
-| 04-d | 2:21.4 | 8.6s | And a thank-you letter from the palace is about… | Text card. | code graphic |  |
+| 04-d | 2:21.4 | 8.6s | And a thank-you letter from the palace is about… | Slow push-in, a different framing from 02-g | archival (fetch) | George Grantham Bain Collection, Library of Congress, LC-DIG-ggbain-19206 ✅ |
 | 04-e | 2:29.9 | 8.9s | Now, to be fair, I want to be really… | Journal article page. | archival (fetch) | Food, Culture &amp; Society 17(1), 2014 ⚠️ unconfirmed |
 | 04-f | 2:38.8 | 3.9s | Nobody has proven who did it, and nobody has… | Text card. | code graphic |  |
 | 04-g | 2:42.8 | 4.6s | What Nowak has is a letter with the seal… | Flow card recap: box 1. | code graphic |  |
 | 04-h | 2:47.4 | 3.6s | handwriting that doesn&#x27;t match, and the wrong surname on… | Flow card recap: all three boxes. | code graphic |  |
 | 04-i | 2:51.0 | 5.7s | and from that he thinks it was probably made… | Timeline holds with both events. | code graphic |  |
-| 04-j | 2:56.7 | 3.6s | So that&#x27;s how I&#x27;m going to say it, probably… | Text card. | code graphic |  |
-| 04-k | 3:00.2 | 4.3s | and likely the Brandi family, and not one word… | Text card. | code graphic |  |
+| 04-j | 2:56.7 | 7.8s | So that&#x27;s how I&#x27;m going to say it, probably… | Text card. | code graphic |  |
 | 05-a | 3:04.5 | 6.7s | And there&#x27;s more, because even if you set the… | 1858 plate of a pizza maker. | archival (fetch) | F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library ✅ |
 | 05-b | 3:11.2 | 7.1s | In 1858, in a book about the customs of… | Book scan, slow push-in on the title page. | archival (fetch) | F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive ✅ |
 | 05-c | 3:18.3 | 6.3s | edited by Francesco de Bourcard, a Neapolitan writer named… | Plate of a pizza maker from the same 1858 book. | archival (fetch) | F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library ✅ |
 | 05-d | 3:24.6 | 5.9s | and he described pizzas topped with basil, and thin… | Text card. | code graphic |  |
 | 05-e | 3:30.5 | 5.5s | So that&#x27;s 1858, which is three decades before the… | Datecard: two dates. | code graphic |  |
 | 05-f | 3:36.0 | 4.3s | Now, I want to be fair to the evidence… | Book scan, a text page. | archival (fetch) | F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive ✅ |
-| 05-g | 3:40.3 | 7.1s | Rocco lists tomato as one topping you might get,… | Text card. | code graphic |  |
+| 05-g | 3:40.3 | 7.1s | Rocco lists tomato as one topping you might get,… | Push-in on the text page describing the toppings | archival (fetch) | F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive ✅ |
 | 05-h | 3:47.4 | 4.7s | and he doesn&#x27;t call it a Margherita. He doesn&#x27;t… | Text card. | code graphic |  |
 | 05-i | 3:52.1 | 7.1s | You&#x27;ll find people online saying the 1858 book names… | Book scan. | archival (fetch) | F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive ✅ |
 | 05-j | 3:59.2 | 7.5s | But basil and thin slices of mozzarella, and sometimes… | Stat card. | code graphic |  |
@@ -66,7 +65,7 @@ Total runtime 5:38.7 (66 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 07-d | 5:08.2 | 4.0s | handwriting that doesn&#x27;t match the official who supposedly signed… | Flow card: box 2. | code graphic |  |
 | 07-e | 5:12.2 | 3.2s | and an address using his wife&#x27;s surname, Brandi, | Flow card: box 3. | code graphic |  |
 | 07-f | 5:15.3 | 6.3s | and he thinks it was probably made up later,… | Text card. | code graphic |  |
-| 07-g | 5:21.7 | 5.2s | And the pizza itself, basil and thin slices of… | Modern photo of a Margherita pizza. | archival (fetch) | Valerio Capello, Wikimedia Commons ✅ |
+| 07-g | 5:21.7 | 5.2s | And the pizza itself, basil and thin slices of… | Tight crop: the pizza maker&#x27;s hands and the pizza | archival (fetch) | F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library ✅ |
 | 07-h | 5:26.8 | 4.0s | was described by Emmanuele Rocco in 1858, three decades… | Datecard: two dates. | code graphic |  |
 | 07-i | 5:30.8 | 4.8s | Somebody did it first, and they were the pizza… | 1858 plate of a pizza maker, slow push-in. | archival (fetch) | F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library ✅ |
 | 07-j | 5:35.6 | 3.2s | decades before anybody wrote a letter about it. | End card holds on the channel line. | code graphic |  |

@@ -14,12 +14,12 @@ Total runtime 5:22.8 (70 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 02-a | 0:31.2 | 5.0s | The famous version goes like this, a man named… | Two-box flow, first box lit: the famous version. | code graphic |  |
 | 02-b | 0:36.3 | 3.7s | puts his name on it, and his name becomes… | Same flow, second box added. | code graphic |  |
 | 02-c | 0:40.0 | 4.0s | It&#x27;s a perfect story, because the name does all… | Crapper portrait, tight push-in. | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
-| 02-d | 0:44.0 | 5.7s | You hear Crapper and toilet in the same sentence… | Text card. | code graphic |  |
+| 02-d | 0:44.0 | 5.7s | You hear Crapper and toilet in the same sentence… | Wide, full portrait (02-c before it is the tight crop) | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
 | 02-e | 0:49.7 | 5.4s | And a lot of that comes from one book.… | Flow build, step 1: 1969, Wallace Reyburn. | code graphic |  |
 | 02-f | 0:55.1 | 3.7s | published a book called Flushed with Pride, and it&#x27;s… | Flow build, step 2: the book title and its hedge. | code graphic |  |
 | 02-g | 0:58.8 | 5.1s | it&#x27;s partly a joke, and it helped spread the… | Flow build, step 3: the idea spreads. | code graphic |  |
 | 02-h | 1:03.8 | 6.0s | So a book that was partly kidding ended up… | Flow build, step 4: people&#x27;s facts came from it. | code graphic |  |
-| 03-a | 1:09.9 | 5.3s | So who did it first? Well, it depends how… | Text card. | code graphic |  |
+| 03-a | 1:09.9 | 5.3s | So who did it first? Well, it depends how… | Slow push-in, wide view of the site | archival (fetch) | Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0 ✅ |
 | 03-b | 1:15.2 | 5.0s | so let&#x27;s start way back. The palace at Knossos,… | Schematic map with one pin: Knossos, Crete. | code graphic |  |
 | 03-c | 1:20.2 | 4.3s | had latrines that were flushed with water and drained… | Modern photo of the Knossos ruins, slow push-in. | archival (fetch) | Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0 ✅ |
 | 03-d | 1:24.5 | 4.3s | and that&#x27;s about 3,500 years ago, somewhere around 1700… | Date stamp with the hedged range. | code graphic |  |
@@ -29,10 +29,10 @@ Total runtime 5:22.8 (70 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 03-g | 1:42.3 | 3.2s | the water came from rainwater channelled from the roof, | Flow build, step 1: rainwater from the roof, through the drains. | code graphic |  |
 | 03-h | 1:45.5 | 3.2s | and through the drains, or somebody poured water in, | Flow build, step 2: or somebody poured water in. | code graphic |  |
 | 03-h2 | 1:48.7 | 3.6s | and either way it flushed the waste into a… | Flow build, step 3: waste into a sewer. | code graphic |  |
-| 03-i | 1:52.2 | 5.7s | So it&#x27;s not a modern toilet, but it&#x27;s water… | Text card. | code graphic |  |
+| 03-i | 1:52.2 | 5.7s | So it&#x27;s not a modern toilet, but it&#x27;s water… | Push-in | archival (fetch) | cavorite (Flickr), via Wikimedia Commons, CC BY-SA 2.0 ✅ |
 | 03-j | 1:57.9 | 5.7s | And Knossos wasn&#x27;t even the earliest. Homes in the… | Schematic map: Knossos and the Indus Valley. | code graphic |  |
 | 03-k | 2:03.6 | 5.3s | and one review says almost every house there had… | Modern photo of a street at Mohenjo-daro, slow push-in. | archival (fetch) | Saqib Qayyum, via Wikimedia Commons (confirm license on the file page) ⚠️ unconfirmed |
-| 03-l | 2:09.0 | 4.3s | So the idea of a toilet that carries waste… | Third Knossos photo, slow push-in. | archival (fetch) | cavorite (Flickr), via Wikimedia Commons, CC BY-SA 2.0 ✅ |
+| 03-l | 2:09.0 | 4.3s | So the idea of a toilet that carries waste… | Different crop from 03-e: wide | archival (fetch) | Lemur12, via Wikimedia Commons, CC BY-SA 3.0 ✅ |
 | 03-m | 2:13.2 | 4.3s | is a lot older than Thomas Crapper, it&#x27;s thousands… | Datecard: Knossos versus Crapper, gap in the script&#x27;s words. | code graphic |  |
 | 04-a | 2:17.5 | 6.0s | But if you want the thing we&#x27;d actually recognise,… | Flow build, step 1: a bowl fed by a tank of water. | code graphic |  |
 | 04-b | 2:23.5 | 6.4s | the name you want is Sir John Harington. In… | Harington portrait, slow push-in on the name. | archival (fetch) | Hieronimo Custodis, Portrait of Sir John Harrington, via Wikimedia Commons ✅ |
@@ -50,8 +50,8 @@ Total runtime 5:22.8 (70 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 05-c | 3:21.8 | 5.3s | you&#x27;ve also got a pipe running straight from the… | Flow build, step 4: the pipe back up. | code graphic |  |
 | 05-d | 3:27.1 | 3.2s | and everything that smells comes right back up it. | Flow build, step 5: the smell comes back up. | code graphic |  |
 | 05-e | 3:30.3 | 4.3s | The fix for that is the S-bend, a bend… | Flow build, step 1: the S-bend, a bend in the pipe. | code graphic |  |
-| 05-f | 3:34.5 | 3.5s | that holds a little water in it all the… | Flow build, step 2: it holds a little water. | code graphic |  |
-| 05-g | 3:38.1 | 3.6s | and that water blocks the smell from coming back… | Flow build, step 3: the water blocks the smell. | code graphic |  |
+| 05-f | 3:34.5 | 3.5s | that holds a little water in it all the… | Push-in on the bend in the pipe | archival (fetch) | Alexander Cumming&#x27;s S-bend flush toilet patent, 1775, via Wikimedia Commons ✅ |
+| 05-g | 3:38.1 | 3.6s | and that water blocks the smell from coming back… | Closer still on the water held in the bend | archival (fetch) | Alexander Cumming&#x27;s S-bend flush toilet patent, 1775, via Wikimedia Commons ✅ |
 | 05-h | 3:41.6 | 4.6s | And the S-bend was patented in 1775 by a… | Cumming portrait with the date lower-third. | archival (fetch) | Portrait of Alexander Cumming, via Wikimedia Commons (confirm on the file page) ⚠️ unconfirmed |
 | 05-i | 3:46.2 | 5.0s | So the key piece that makes an indoor toilet… | Cumming&#x27;s patent drawing, slow pan. | archival (fetch) | Alexander Cumming&#x27;s S-bend flush toilet patent, 1775, via Wikimedia Commons ✅ |
 | 05-j | 3:51.2 | 2.5s | long before Thomas Crapper was making toilets. | Datecard: 1775 versus the late 1800s. | code graphic |  |
@@ -65,7 +65,7 @@ Total runtime 5:22.8 (70 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-h | 4:23.5 | 4.1s | The word &quot;crapper&quot; for the toilet may come from… | Photo of American troops in London in 1917, slow push-in. | archival (fetch) | U.S. troops marching through London, c. 17 September 1917 (stereograph published by Realistic Travels), Library of Congress ⚠️ unconfirmed |
 | 06-i | 4:27.6 | 4.1s | seeing &quot;T. Crapper&quot; on toilet cisterns, and that&#x27;s a… | Text card; the hedge sits in the headline. | code graphic |  |
 | 06-j | 4:31.7 | 5.4s | but it&#x27;s a nice idea, that the name on… | Text card. | code graphic |  |
-| 06-k | 4:37.1 | 5.4s | So his name may well be in the slang,… | Crapper portrait, slow push-out. | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
+| 06-k | 4:37.1 | 5.4s | So his name may well be in the slang,… | Text card. | code graphic |  |
 | 07-a | 4:42.5 | 4.9s | So here&#x27;s where it lands. Thomas Crapper was a… | Crapper portrait holds, no move. | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
 | 07-b | 4:47.4 | 6.5s | who patented improvements in the late 1800s, like the… | Text card. | code graphic |  |
 | 07-c | 4:53.9 | 6.5s | About 3,500 years ago the palace at Knossos was… | Knossos photo, slow push-in. | archival (fetch) | Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0 ✅ |

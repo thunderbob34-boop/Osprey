@@ -41,7 +41,6 @@
 <asset id="g_04-h" name="04-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-h.png"/></asset>
 <asset id="g_04-i" name="04-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-i.png"/></asset>
 <asset id="g_04-j" name="04-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-j.png"/></asset>
-<asset id="g_04-k" name="04-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-k.png"/></asset>
 <asset id="g_05-a" name="05-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-a.png"/></asset>
 <asset id="g_05-b" name="05-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-b.png"/></asset>
 <asset id="g_05-c" name="05-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-c.png"/></asset>
@@ -119,8 +118,7 @@
 <video ref="g_04-g" offset="4883/30s" name="04-g" start="0s" duration="139/30s"></video>
 <video ref="g_04-h" offset="5022/30s" name="04-h" start="0s" duration="107/30s"></video>
 <video ref="g_04-i" offset="5129/30s" name="04-i" start="0s" duration="171/30s"></video>
-<video ref="g_04-j" offset="5300/30s" name="04-j" start="0s" duration="107/30s"></video>
-<video ref="g_04-k" offset="5407/30s" name="04-k" start="0s" duration="128/30s"></video>
+<video ref="g_04-j" offset="5300/30s" name="04-j" start="0s" duration="235/30s"></video>
 <video ref="g_05-a" offset="5535/30s" name="05-a" start="0s" duration="201/30s"><asset-clip ref="vo_05" lane="-1" offset="0s" start="0s" duration="70s" name="VO 05" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="05 The Pizza Was Already There"/></video>
 <video ref="g_05-b" offset="5736/30s" name="05-b" start="0s" duration="212/30s"></video>
 <video ref="g_05-c" offset="5948/30s" name="05-c" start="0s" duration="189/30s"></video>

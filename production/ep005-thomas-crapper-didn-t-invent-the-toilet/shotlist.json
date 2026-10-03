@@ -212,13 +212,23 @@
   "section_name": "The Famous Version",
   "text": "You hear Crapper and toilet in the same sentence and your brain just files it as true.",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Crapper plus toilet: the brain files it as true",
-   "sub": ""
+   "kind": "portrait",
+   "label": "Thomas Crapper",
+   "lower": "Thomas Crapper",
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "crop": "Wide, full portrait (02-c before it is the tight crop)"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Wide, full portrait (02-c before it is the tight crop)",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Thomas Crapper.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
+   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
+   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "02-e",
@@ -363,13 +373,28 @@
   "section_name": "Knossos",
   "text": "So who did it first? Well, it depends how far back you want to go,",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Who did it first? It depends how far back",
-   "sub": ""
+   "kind": "photo",
+   "label": "Palace of Knossos, Crete (modern photograph)",
+   "lower": "Palace of Knossos, Crete (modern photograph)",
+   "asset": "commons-wikimedia-org-wiki-file-knossos-palace-jpg",
+   "crop": "Slow push-in, wide view of the site",
+   "zoom": {
+    "scale": 1.2,
+    "x": 50,
+    "y": 50
+   }
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Slow push-in, wide view of the site",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Knossos palace.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Knossos_palace.jpg",
+   "rights": "CC BY-SA 4.0, as stated in the search result (photographer Theofanis Ampatzidis, 17 August 2017)",
+   "credit": "Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0",
+   "verified": true
+  }
  },
  {
   "id": "03-b",
@@ -407,7 +432,13 @@
    "kind": "photo",
    "label": "Palace of Knossos, Crete (modern photograph)",
    "lower": "Palace of Knossos, Crete (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-knossos-palace-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-knossos-palace-jpg",
+   "crop": "Different crop from 03-a: close on the stonework",
+   "zoom": {
+    "scale": 1.8,
+    "x": 40,
+    "y": 55
+   }
   },
   "visual": "Modern photo of the Knossos ruins, slow push-in.",
   "source": {
@@ -591,13 +622,28 @@
   "section_name": "Knossos",
   "text": "So it's not a modern toilet, but it's water carrying waste away, about 3,500 years ago.",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Not a modern toilet: water carrying waste away",
-   "sub": "About 3,500 years ago"
+   "kind": "photo",
+   "label": "Palace of Knossos, Crete (modern photograph)",
+   "lower": "Not a modern toilet, but water carrying waste away (Knossos, modern photograph)",
+   "asset": "commons-wikimedia-org-wiki-file-palace-of-knossos-jpg",
+   "crop": "Push-in",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 50
+   }
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Push-in",
+  "source": {
+   "institution": "Wikimedia Commons (Flickr, cavorite)",
+   "item": "File:Palace of Knossos.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Palace_of_Knossos.jpg",
+   "rights": "CC BY-SA 2.0 Generic, as stated in the search result",
+   "credit": "cavorite (Flickr), via Wikimedia Commons, CC BY-SA 2.0",
+   "verified": true
+  }
  },
  {
   "id": "03-j",
@@ -664,15 +710,16 @@
    "kind": "photo",
    "label": "Palace of Knossos, Crete (modern photograph)",
    "lower": "Palace of Knossos, Crete (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-palace-of-knossos-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-minoan-palace-of-knossos-jpg",
+   "crop": "Different crop from 03-e: wide"
   },
-  "visual": "Third Knossos photo, slow push-in.",
+  "visual": "Different crop from 03-e: wide",
   "source": {
-   "institution": "Wikimedia Commons (Flickr, cavorite)",
-   "item": "File:Palace of Knossos.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Palace_of_Knossos.jpg",
-   "rights": "CC BY-SA 2.0 Generic, as stated in the search result",
-   "credit": "cavorite (Flickr), via Wikimedia Commons, CC BY-SA 2.0",
+   "institution": "Wikimedia Commons",
+   "item": "File:Minoan Palace of Knossos.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Minoan_Palace_of_Knossos.jpg",
+   "rights": "CC BY-SA 3.0 Unported, as stated in the search result (uploader Lemur12)",
+   "credit": "Lemur12, via Wikimedia Commons, CC BY-SA 3.0",
    "verified": true
   }
  },
@@ -1113,29 +1160,28 @@
   "section_name": "Cumming and the S-Bend",
   "text": "that holds a little water in it all the time,",
   "type": "flow",
-  "template": "flow",
+  "template": "archival",
   "fields": {
-   "title": "The S-bend",
-   "steps": [
-    {
-     "label": "A bend in the pipe",
-     "sub": ""
-    },
-    {
-     "label": "It holds a little water",
-     "sub": "All the time"
-    },
-    {
-     "label": "The water blocks the smell",
-     "sub": "It can't come back up"
-    }
-   ],
-   "step": 2,
-   "highlight": 1,
-   "caption": "The fix"
+   "kind": "patent",
+   "label": "Alexander Cumming's S-bend flush toilet patent, 1775 (patent drawing)",
+   "lower": "Alexander Cumming's S-bend, 1775 (patent drawing)",
+   "asset": "commons-wikimedia-org-wiki-file-cummings-s-bend-jpg",
+   "crop": "Push-in on the bend in the pipe",
+   "zoom": {
+    "scale": 1.6,
+    "x": 50,
+    "y": 60
+   }
   },
-  "visual": "Flow build, step 2: it holds a little water.",
-  "source": null
+  "visual": "Push-in on the bend in the pipe",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Cummings S-bend.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Cummings_S-bend.jpg",
+   "rights": "Public domain: published before 1 January 1931; Creative Commons Public Domain Mark 1.0, as stated on the file page",
+   "credit": "Alexander Cumming's S-bend flush toilet patent, 1775, via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "05-g",
@@ -1143,29 +1189,28 @@
   "section_name": "Cumming and the S-Bend",
   "text": "and that water blocks the smell from coming back up.",
   "type": "flow",
-  "template": "flow",
+  "template": "archival",
   "fields": {
-   "title": "The S-bend",
-   "steps": [
-    {
-     "label": "A bend in the pipe",
-     "sub": ""
-    },
-    {
-     "label": "It holds a little water",
-     "sub": "All the time"
-    },
-    {
-     "label": "The water blocks the smell",
-     "sub": "It can't come back up"
-    }
-   ],
-   "step": 3,
-   "highlight": 2,
-   "caption": "The fix"
+   "kind": "patent",
+   "label": "Alexander Cumming's S-bend flush toilet patent, 1775 (patent drawing)",
+   "lower": "The water in the bend blocks the smell",
+   "asset": "commons-wikimedia-org-wiki-file-cummings-s-bend-jpg",
+   "crop": "Closer still on the water held in the bend",
+   "zoom": {
+    "scale": 2.2,
+    "x": 50,
+    "y": 65
+   }
   },
-  "visual": "Flow build, step 3: the water blocks the smell.",
-  "source": null
+  "visual": "Closer still on the water held in the bend",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Cummings S-bend.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Cummings_S-bend.jpg",
+   "rights": "Public domain: published before 1 January 1931; Creative Commons Public Domain Mark 1.0, as stated on the file page",
+   "credit": "Alexander Cumming's S-bend flush toilet patent, 1775, via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "05-h",
@@ -1202,7 +1247,8 @@
    "kind": "patent",
    "label": "Alexander Cumming's S-bend flush toilet patent, 1775 (patent drawing)",
    "lower": "Alexander Cumming's S-bend patent, 1775 (patent drawing)",
-   "asset": "commons-wikimedia-org-wiki-file-cummings-s-bend-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-cummings-s-bend-jpg",
+   "crop": "Full drawing, held wide"
   },
   "visual": "Cumming's patent drawing, slow pan.",
   "source": {
@@ -1454,22 +1500,12 @@
   "section_name": "What Crapper Actually Did",
   "text": "So his name may well be in the slang, it's just not because he invented the thing.",
   "type": "archival",
-  "template": "archival",
+  "template": "text",
   "fields": {
-   "kind": "portrait",
-   "label": "Thomas Crapper",
-   "lower": "Thomas Crapper",
-   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg"
+   "headline": "His name may be in the slang",
+   "sub": "Not because he invented the toilet"
   },
-  "visual": "Crapper portrait, slow push-out.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:Thomas Crapper.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
-   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
-   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Text card."
  },
  {
   "id": "07-a",
@@ -1482,7 +1518,13 @@
    "kind": "portrait",
    "label": "Thomas Crapper, sanitary engineer",
    "lower": "Thomas Crapper, sanitary engineer",
-   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg"
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "crop": "Tight face crop, slow push-in",
+   "zoom": {
+    "scale": 1.8,
+    "x": 50,
+    "y": 30
+   }
   },
   "visual": "Crapper portrait holds, no move.",
   "source": {
