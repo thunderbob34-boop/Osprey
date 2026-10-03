@@ -5,7 +5,7 @@ set -e
 # Images are fetched at 1920px, one of Wikimedia's standard thumbnail sizes (other sizes get throttled).
 # Re-runs reuse fin/ep/assets and fin/clips (clips whose data is unchanged are skipped). Delete fin/ for a clean run.
 R="https://raw.githubusercontent.com/thunderbob34-boop/osprey/research/somebody-did-it-first/production"
-mkdir -p fin/_shared fin/ep/assets fin/ep/vo && cd fin
+D="${FIN:-fin}"; mkdir -p "$D/_shared" "$D/ep/assets" "$D/ep/vo" && cd "$D"
 for f in motion.html motion.mjs; do curl -sfL "$R/_shared/$f" -o _shared/$f; done
 curl -sfL "$R/$EP/remote-beats.json" -o rb.json
 curl -sfL "$R/$EP/vo/vo-manifest.json" -o vo.json
