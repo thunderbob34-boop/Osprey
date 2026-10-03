@@ -31,7 +31,7 @@ Total runtime 5:38.7 (74 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 03-g | 1:44.1 | 3.5s | And the third one is the name it&#x27;s addressed… | Two callouts already shown; the third lands on the name line: &quot;The name: Brandi&quot;. | illustrated scene (code) |  |
 | 03-h | 1:47.6 | 3.9s | it&#x27;s addressed using his wife&#x27;s surname, Brandi, and not… | Compare card: his own surname, Esposito, against his wife&#x27;s surname, Brandi, per Nowak. | motion graphic |  |
 | 03-i | 1:51.5 | 6.4s | Now think about that third one for a second.… | The Naples map again; the dashed line now runs from the palace to the pizzeria, labelled as the legend&#x27;s letter. | animated map |  |
-| 03-j | 1:57.9 | 3.5s | you&#x27;d expect it to be addressed to Raffaele Esposito,… | Same view continues with no new fly-in: the pizzeria pin pulses with &quot;You&#x27;d expect: Raffaele Esposito&quot;. | animated map |  |
+| 03-j | 1:57.9 | 3.5s | you&#x27;d expect it to be addressed to Raffaele Esposito,… | The illustrated letter, no callouts yet | illustrated scene (code) |  |
 | 03-k | 2:01.4 | 6.0s | But it&#x27;s addressed using the name Brandi, and that&#x27;s… | The letter with all three callouts shown, a recap before the next part. | illustrated scene (code) |  |
 | 04-a | 2:07.5 | 3.9s | So if the letter is fake, who made it,… | The letter again under the question: who made it, and when. | illustrated scene (code) |  |
 | 04-b | 2:11.4 | 5.0s | Nowak thinks it was probably made up later, and… | Timeline, step 1: the axis draws and 1889 pops in; 1930s waits ghosted. | motion graphic |  |
@@ -41,7 +41,7 @@ Total runtime 5:38.7 (74 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 04-f | 2:29.9 | 3.9s | Now, to be fair, I want to be really… | Kinetic text: careful here, Nowak&#x27;s argument, not proven. | motion graphic |  |
 | 04-g | 2:33.8 | 5.0s | That&#x27;s Nowak&#x27;s argument, and it&#x27;s a strong argument, but… | The article page pushes in; lower-third: his argument, not proven. | archival (fetch) | Food, Culture &amp; Society 17(1), 2014 ⚠️ unconfirmed |
 | 04-h | 2:38.8 | 3.9s | Nobody has proven who did it, and nobody has… | Compare card: &quot;Who made it? Not proven&quot; and &quot;When? Not proven&quot;. | motion graphic |  |
-| 04-i | 2:42.8 | 4.6s | What Nowak has is a letter with the seal… | The letter; the seal callout lands. | illustrated scene (code) |  |
+| 04-i | 2:42.8 | 4.6s | What Nowak has is a letter with the seal… | New crop on the abstract | archival (fetch) | Food, Culture &amp; Society 17(1), 2014 ⚠️ unconfirmed |
 | 04-j | 2:47.4 | 3.6s | handwriting that doesn&#x27;t match, and the wrong surname on… | Seal callout already shown; callouts land on the handwriting, then the name. | illustrated scene (code) |  |
 | 04-k | 2:51.0 | 5.7s | and from that he thinks it was probably made… | Camera flies from central Italy down to the pizzeria in Naples; the pin carries &quot;Brandi family from the 1930s, per Nowak&quot;. | animated map |  |
 | 04-l | 2:56.7 | 3.6s | So that&#x27;s how I&#x27;m going to say it, probably… | The illustrated letter; a red PROBABLY FAKE stamp lands on it. | illustrated scene (code) |  |
@@ -54,7 +54,7 @@ Total runtime 5:38.7 (74 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 05-f | 3:30.5 | 5.5s | So that&#x27;s 1858, which is three decades before the… | Datecard: a line draws from 1858 to 1889 and the gap label &quot;three decades&quot; appears. | motion graphic |  |
 | 05-g | 3:36.0 | 4.3s | Now, I want to be fair to the evidence… | Kinetic text: fair to the evidence. | motion graphic |  |
 | 05-h | 3:40.3 | 5.1s | Rocco lists tomato as one topping you might get,… | Basil and mozzarella shown; tomato fades in faint, &quot;(sometimes)&quot;, caption: one topping you might get, not a required one. | illustrated scene (code) |  |
-| 05-i | 3:45.4 | 6.7s | it&#x27;s one of the combinations, and he doesn&#x27;t call… | Kinetic text: Rocco doesn&#x27;t call it a Margherita, he doesn&#x27;t use that name. | motion graphic |  |
+| 05-i | 3:45.4 | 6.7s | it&#x27;s one of the combinations, and he doesn&#x27;t call… | New crop: a text page, slow push-in | archival (fetch) | F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive ✅ |
 | 05-j | 3:52.1 | 4.3s | You&#x27;ll find people online saying the 1858 book names… | Compare card, step 1: the online claim lit, &quot;The book&quot; ghosted. | motion graphic |  |
 | 05-k | 3:56.4 | 2.8s | and it doesn&#x27;t, so don&#x27;t repeat that. | Compare card, step 2: &quot;The book: it doesn&#x27;t&quot; is revealed. | motion graphic |  |
 | 05-l | 3:59.2 | 7.5s | But basil and thin slices of mozzarella, and sometimes… | Camera flies in to Naples again; the red pin reads &quot;A pizza described in print, 1858&quot;. | animated map |  |
@@ -68,13 +68,13 @@ Total runtime 5:38.7 (74 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-f | 4:34.7 | 6.8s | So the fair version is this, maybe Esposito made… | Portrait of the queen, a tight face crop with a slow push-in. | archival (fetch) | George Grantham Bain Collection, Library of Congress, LC-DIG-ggbain-19206 ✅ |
 | 06-g | 4:41.5 | 5.5s | but the letter that&#x27;s supposed to prove it looks… | The letter with all three callouts shown. | illustrated scene (code) |  |
 | 06-h | 4:47.0 | 4.1s | and the pizza itself was already being described in… | The 1858 book again, a closer crop on the page. | archival (fetch) | F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive ✅ |
-| 07-a | 4:51.1 | 5.6s | So here&#x27;s where it lands. The famous story says… | The legend&#x27;s pizza builds beside the green, white and red stripes. | illustrated scene (code) |  |
+| 07-a | 4:51.1 | 5.6s | So here&#x27;s where it lands. The famous story says… | New crop, centred on the face | archival (fetch) | George Grantham Bain Collection, Library of Congress, LC-DIG-ggbain-19206 ✅ |
 | 07-b | 4:56.7 | 5.9s | for Queen Margherita in 1889, and the proof is… | Date stamps in: 1889, with the famous-story caption. | motion graphic |  |
 | 07-c | 5:02.6 | 5.6s | But historian Zachary Nowak found that letter has the… | The letter; the seal callout lands. | illustrated scene (code) |  |
 | 07-d | 5:08.2 | 4.0s | handwriting that doesn&#x27;t match the official who supposedly signed… | Seal already shown; a callout lands on the handwriting. | illustrated scene (code) |  |
 | 07-e | 5:12.2 | 3.2s | and an address using his wife&#x27;s surname, Brandi, | Two callouts already shown; the name callout lands: &quot;The name: Brandi&quot;. | illustrated scene (code) |  |
 | 07-f | 5:15.3 | 6.3s | and he thinks it was probably made up later,… | The article page again, a closer crop on the abstract; lower-third: his argument, not proven. | archival (fetch) | Food, Culture &amp; Society 17(1), 2014 ⚠️ unconfirmed |
-| 07-g | 5:21.7 | 5.2s | And the pizza itself, basil and thin slices of… | Basil, then thin slices of mozzarella, then faint tomato labelled &quot;(sometimes)&quot;. | illustrated scene (code) |  |
+| 07-g | 5:21.7 | 5.2s | And the pizza itself, basil and thin slices of… | Tight crop on the pizza maker&#x27;s hands and the pizza | archival (fetch) | F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library ✅ |
 | 07-h | 5:26.8 | 4.0s | was described by Emmanuele Rocco in 1858, three decades… | Timeline spaced by years: 1858 (red), 1889, the 1930s. | motion graphic |  |
 | 07-i | 5:30.8 | 4.8s | Somebody did it first, and they were the pizza… | The opening fly-in in reverse spirit: Italy to Naples, pin reads &quot;Pizza described in print, 1858&quot;. | animated map |  |
 | 07-j | 5:35.6 | 3.2s | decades before anybody wrote a letter about it. | End card stamps in: &quot;Somebody did it first.&quot; | motion graphic |  |
