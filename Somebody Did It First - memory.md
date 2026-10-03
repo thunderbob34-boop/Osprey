@@ -24,6 +24,17 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 - **Sensitive beats:** no animal-cruelty, execution or gore imagery. Use documents and text cards instead.
 - **Credits:** every image credited in the description; Wikimedia and Science Museum Group licenses checked per file.
 - **Thumbnails:** famous name/object + red "NOT FIRST" stamp + the real first-doer. Two versions to A/B test.
+- **Voice (Gus, 2026-10-03):**
+  - Plain talk, the way a person tells a story.
+  - No "right?" tags.
+  - No narrator asides or self-commentary: "to be fair", "I want to be careful", "the way I see it", "this channel is about", "that's how I'm going to say it".
+  - No slogan lines like "someone made it work and someone made it pay".
+  - Hedges stay, said plainly ("a big reason", "probably", "the story goes").
+- **Hooks (Gus, 2026-10-03):** open on the name an American viewer would actually guess (for railways, Vanderbilt), then turn it. Any term a viewer may not know is explained the first time it comes up (Rainhill Trials, what "Rocket" meant).
+- **Pictures (Gus, 2026-10-03):**
+  - Show what the people and the machines really looked like, using real portraits, real engines and period prints, credited per file in the episode's `images.json`.
+  - No cartoon or "stop-motion" reconstructions of historical technology. Where no picture survives, use a period print, a museum replica photo or a map instead.
+  - A running time bar along the top shows where in time each beat sits (`timebar` in episode.json).
 - **Length (decided 2026-10-03):** ship at about 5 minutes. Holden on Seed Speech reads about 168 wpm, so an 830-word script runs about 5 minutes. No mid-roll ads under 8 minutes. That's accepted for launch. Extending means more research, never padding.
 
 ## Open items waiting on Gus
@@ -59,6 +70,28 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
     - archival placeholders are at most about 25% of beats, and text cards at most about 12%;
     - every section has a map or illustrated scene, and every place named in the narration gets a map;
     - the stranger's test now asks "is this entertaining, and where would a viewer click away?"
+- **2026-10-03, Episode 2 notes.** Gus watched the narrated ep2 and listed:
+  - The opening isn't relatable: Americans would guess Vanderbilt.
+  - Not enough real photos: what did Trevithick, Stephenson and Rocket look like?
+  - "Locomotion No. 1" was read as "Locomotion no one".
+  - The jump to the Rainhill Trials didn't explain what they were.
+  - The calendar pages tore off in the wrong order.
+  - The illustrated tram-run animation looked like a "fifth grader" stop-motion.
+  - The narrator says "right?" and makes asides.
+  - "Made it work / made it pay" is not how people talk.
+  - He wants a running timeline.
+
+  Fixes:
+  - Script rewritten and re-read.
+  - Shot list rebuilt on 19 verified Commons images.
+  - Time bar added to the engine.
+  - Calendar order fixed.
+  - Cartoon scenes dropped.
+  - Scripts 3–5 cleaned up by the same voice rules (their shot lists and narration get redone once Gus approves the ep2 direction).
+
+  Checks added:
+  - The blind script read now flags "right?", narrator asides, slogan lines, unexplained terms, and abbreviations TTS may misread ("No. 1" is written "Number One").
+  - The stranger's test asks "would an American viewer know this name or term?"
 - **2026-10-03, Hanaoka date.**
   - "October 13, 1804" is the Japanese-calendar date; it falls on 14 November 1804 on ours.
   - The research had kept the date unqualified. The script now says "by the Japanese calendar of the time", and ep3 sections 06–07 were re-read.
