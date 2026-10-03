@@ -93,6 +93,8 @@ lst = EP / 'build' / 'concat.txt'
 lst.write_text(''.join(f"file '{cdir / (b['id'] + '.mp4')}'\n" for b in beats))
 joined = EP / 'build' / 'joined.mp4'
 subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', str(lst), '-c', 'copy', str(joined)], check=True)
+picture = EP / f'{TITLE} - PICTURE.mp4'
+subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(joined), '-c:v', 'libx264', '-preset', 'medium', '-crf', '24', '-pix_fmt', 'yuv420p', '-r', str(FPS), str(picture)], check=True)
 inputs = ['-i', str(joined)]; filt = []; last = '0:v'
 for k, s_ in enumerate(order):
     v = vo_by[s_]; a0 = v['start_frame'] / FPS; a1 = (v['start_frame'] + v['frames']) / FPS
@@ -119,9 +121,8 @@ def url(p): return 'file://' + str(p).replace(' ', '%20')
 q = html.escape
 res = ['<format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>',
        '<format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>']
-for b in beats:
-    res.append(f'<asset id="g_{b["id"]}" name="{q(b["id"])}" start="0s" duration="{ft(b["frames"])}" hasVideo="1" format="r1" videoSources="1">'
-               f'<media-rep kind="original-media" src="{url(base / "clips" / (b["id"] + ".mp4"))}"/></asset>')
+res.append(f'<asset id="pic" name="{q(TITLE)} - PICTURE" start="0s" duration="{ft(TOTAL)}" hasVideo="1" format="r1" videoSources="1">'
+           f'<media-rep kind="original-media" src="{url(base / (TITLE + " - PICTURE.mp4"))}"/></asset>')
 for s in order:
     v = vo_by[s]
     res.append(f'<asset id="vo_{s}" name="VO {s}" start="0s" duration="{ft(v["frames"])}" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000">'
@@ -133,9 +134,9 @@ for b in beats:
     inner = ''
     if first_of[b['section']] == b['id']:
         s = b['section']
-        inner = (f'<asset-clip ref="vo_{s}" lane="-1" offset="0s" start="0s" duration="{ft(vo_by[s]["frames"])}" name="VO {s}" audioRole="dialogue"/>'
-                 f'<marker start="0s" duration="1/30s" value="{q(s + " " + names[s])}"/>')
-    spine.append(f'<asset-clip ref="g_{b["id"]}" offset="{ft(b["start_frame"])}" name="{q(b["id"])}" start="0s" duration="{ft(b["frames"])}">{inner}</asset-clip>')
+        inner = (f'<asset-clip ref="vo_{s}" lane="-1" offset="{ft(b["start_frame"])}" start="0s" duration="{ft(vo_by[s]["frames"])}" name="VO {s}" audioRole="dialogue"/>'
+                 f'<marker start="{ft(b["start_frame"])}" duration="1/30s" value="{q(s + " " + names[s])}"/>')
+    spine.append(f'<asset-clip ref="pic" offset="{ft(b["start_frame"])}" name="{q(b["id"])}" start="{ft(b["start_frame"])}" duration="{ft(b["frames"])}">{inner}</asset-clip>')
 xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE fcpxml>\n<fcpxml version="1.10">\n<resources>\n' + '\n'.join(res) +
        f'\n</resources>\n<library>\n<event name="Somebody Did It First">\n<project name="{q(TITLE)}">\n'
        f'<sequence format="r1" duration="{ft(TOTAL)}" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">\n<spine>\n'
@@ -145,7 +146,7 @@ fx.write_text(xml)
 r = subprocess.run(['xmllint', '--noout', '--dtdvalid', str(HERE / 'FCPXMLv1_10.dtd'), str(fx)], capture_output=True, text=True)
 if r.returncode:
     problems.append('FCPXML failed DTD validation: ' + r.stderr[:800])
-n_clips = xml.count('<asset-clip ref="g_'); n_markers = xml.count('<marker ')
+n_clips = xml.count('<asset-clip ref="pic"'); n_markers = xml.count('<marker ')
 if n_clips != len(beats) or n_markers != len(order):
     problems.append(f'timeline has {n_clips} clips / {n_markers} markers, expected {len(beats)} / {len(order)}')
 
