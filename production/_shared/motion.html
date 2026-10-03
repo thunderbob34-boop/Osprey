@@ -408,10 +408,11 @@ SC.knossos_drain = (t,P) => { let s=titleBar(t,P.title||'Water carrying waste aw
    ${T(960,950,'STONE SEWER',34,'middle',900,'#5E564A')}`;
   if(mode==='rain'||mode==='both'){ const r=seg(t,at(P,'rain',.3),DUR); for(let i=0;i<40;i++){ const x=320+((i*97)%1300); const y=((t*700+i*53)%240)-60; s+=`<line x1="${x}" y1="${y}" x2="${x-6}" y2="${y+28}" stroke="#5B8DB0" stroke-width="4" opacity="${r>0?.7:0}"/>`; }
     if(r>0) for(let i=0;i<8;i++){ const y=330+((t*500+i*48)%380); s+=`<rect x="1452" y="${y}" width="20" height="18" fill="#5B8DB0"/>`; } }
-  if(mode==='pour'||mode==='both'){ const q=eOut(seg(t,at(P,'pour',.6),at(P,'pour',.6)+.6)); s+=`<g transform="translate(1100,${500-40*q}) rotate(${q*60})"><path d="M-40,-60 h80 l-10,120 h-60 z" fill="#B87333" stroke="#1D1B18" stroke-width="5"/></g>`; if(q>.9) for(let i=0;i<6;i++){ const y=520+((t*500+i*20)%90); s+=`<rect x="1180" y="${y}" width="16" height="14" fill="#5B8DB0"/>`; } }
+  if(mode==='pour'||mode==='both'){ const q=eOut(seg(t,at(P,'pour',.6),at(P,'pour',.6)+.6)); s+=`<g transform="translate(1100,${500-40*q}) rotate(${q*60})"><path d="M-40,-60 h80 l-10,120 h-60 z" fill="#B87333" stroke="#1D1B18" stroke-width="5"/></g>`; if(q>.9) for(let i=0;i<6;i++){ const y=520+((t*500+i*20)%100); s+=`<rect x="1180" y="${y}" width="16" height="14" fill="#5B8DB0"/>`; } }
   const fl=seg(t,at(P,'flow',1.0),DUR); if(fl>0) for(let i=0;i<14;i++){ const x=1700-((t*400+i*110)%1480); s+=`<rect x="${x}" y="808" width="44" height="22" rx="8" fill="#5B8DB0" opacity=".9"/>`; }
-  s+=callout(t,at(P,'c1',1.2),1470,420,1680,250,mode==='pour'?'or somebody poured water in':'rainwater from the roof');
-  s+=callout(t,at(P,'c2',2.2),900,820,640,690,'flushed into a stone sewer','end');
+  if (mode==='pour') s+=callout(t,at(P,'c1',1.2),1130,470,1560,520,'or somebody poured water in');
+  else s+=callout(t,at(P,'c1',1.2),1462,420,1580,560,'rainwater from the roof');
+  s+=callout(t,at(P,'c2',2.2),900,820,560,690,'flushed into a stone sewer','end');
   return s; };
 
 SC.ripple = (t,P) => { let s=titleBar(t,P.title||'Public versus first'); const rr=at(P,'right',0); const rq=eOut(seg(t,rr,rr+.5));
