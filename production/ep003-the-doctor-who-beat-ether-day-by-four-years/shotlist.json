@@ -29,7 +29,12 @@
   "template": "text",
   "fields": {
    "headline": "Why March 30th?",
-   "sub": "A country doctor in Georgia"
+   "sub": "A country doctor in Georgia",
+   "bgmap": {
+    "lat": 36.5,
+    "lon": -78,
+    "span": 13
+   }
   },
   "visual": "Kinetic card posing the question the narration just asked.",
   "source": null
@@ -73,7 +78,12 @@
   "template": "date",
   "fields": {
    "date": "March 30, 1842",
-   "caption": "Crawford Long puts a man under ether"
+   "caption": "Crawford Long puts a man under ether",
+   "bgmap": {
+    "lat": 36.5,
+    "lon": -78,
+    "span": 13
+   }
   },
   "visual": "Date stamps in: March 30, 1842. Text only, no imagery of the operation.",
   "source": null
@@ -257,7 +267,12 @@
    "right_label": "Public demonstration, Boston",
    "right_date": "1846",
    "gap": "Four years",
-   "firsttag": false
+   "firsttag": false,
+   "bgmap": {
+    "lat": 36.5,
+    "lon": -78,
+    "span": 13
+   }
   },
   "visual": "Line draws from 1842 to 1846, then the gap label: four years.",
   "source": null
@@ -271,7 +286,12 @@
   "template": "text",
   "fields": {
    "headline": "Even he wasn't the first one",
-   "sub": "Crawford Long got there first"
+   "sub": "Crawford Long got there first",
+   "bgmap": {
+    "lat": 36.5,
+    "lon": -78,
+    "span": 13
+   }
   },
   "visual": "Kinetic card: the hook into the rest of the episode.",
   "source": null
@@ -321,7 +341,12 @@
    "right_title": "This",
    "right_lines": [
     "What doctors actually believed"
-   ]
+   ],
+   "bgmap": {
+    "lat": 45,
+    "lon": -30,
+    "span": 45
+   }
   },
   "visual": "Two columns: not the gory part, but what doctors believed.",
   "source": null
@@ -332,13 +357,28 @@
   "section_name": "Before Anesthesia",
   "text": "Before anesthesia, many doctors didn't think pain was purely a bad thing,",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Many doctors didn't think pain was purely bad",
-   "sub": "Before anesthesia"
+   "kind": "document",
+   "label": "Medical-history review on the acceptance of pain",
+   "lower": "Many doctors didn't think pain was purely bad (medical-history review, abstract page)",
+   "asset": "pubmed-ncbi-nlm-nih-gov-26828088",
+   "crop": "Tighter crop on the abstract",
+   "zoom": {
+    "scale": 1.9,
+    "x": 45,
+    "y": 45
+   }
   },
-  "visual": "Kinetic card carrying the hedge: many doctors.",
-  "source": null
+  "visual": "Tighter crop on the abstract",
+  "source": {
+   "institution": "PubMed (National Library of Medicine)",
+   "item": "Accepting Pain Over Comfort (PubMed 26828088, as cited in the episode notes)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/26828088/",
+   "rights": "Abstract page; rights not stated. URL built from the PubMed ID in the notes, not seen in search results",
+   "credit": "PubMed, NLM",
+   "verified": false
+  }
  },
  {
   "id": "02-d",
@@ -357,7 +397,12 @@
     "Some opposed it",
     "They thought taking away the pain could be dangerous"
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 45,
+    "lon": -30,
+    "span": 45
+   }
   },
   "visual": "Compare card, step 1: left side shown, right side ghosted.",
   "source": null
@@ -379,7 +424,12 @@
     "Some opposed it",
     "They thought taking away the pain could be dangerous"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 45,
+    "lon": -30,
+    "span": 45
+   }
   },
   "visual": "Same compare card, step 2: the right side is revealed.",
   "source": null
@@ -390,54 +440,28 @@
   "section_name": "Before Anesthesia",
   "text": "And that wasn't just a few cranks, the great French physiologist François Magendie",
   "type": "pinmap",
-  "template": "pinmap",
+  "template": "archival",
   "fields": {
-   "title": "France",
-   "caption": "François Magendie, French physiologist",
-   "pins": [],
-   "routes": [],
-   "labels": [
-    {
-     "name": "France",
-     "lat": 46.6,
-     "lon": 2.4,
-     "kind": "region",
-     "size": 56,
-     "fit": true,
-     "at": 1.0
-    },
-    {
-     "name": "English Channel",
-     "lat": 50.1,
-     "lon": -1.8,
-     "kind": "sea",
-     "size": 30
-    },
-    {
-     "name": "Bay of Biscay",
-     "lat": 45.3,
-     "lon": -4.0,
-     "kind": "sea",
-     "size": 30
-    },
-    {
-     "name": "Mediterranean Sea",
-     "lat": 42.4,
-     "lon": 5.2,
-     "kind": "sea",
-     "size": 30
-    }
-   ],
-   "from": {
-    "lat": 48.0,
-    "lon": 8.0,
-    "span": 34
-   },
-   "span": 10,
-   "rivers": true
+   "kind": "portrait",
+   "label": "François Magendie, 1837",
+   "lower": "François Magendie, French physiologist (lithograph by N. E. Maurin, 1837)",
+   "asset": "wellcomecollection-org-works-b99w3gfx",
+   "crop": "Full portrait, slow push-in",
+   "zoom": {
+    "scale": 1.15,
+    "x": 50,
+    "y": 40
+   }
   },
-  "visual": "Map of western Europe: the camera pushes in on France as the French physiologist is named.",
-  "source": null
+  "visual": "Full portrait, slow push-in",
+  "source": {
+   "institution": "Wellcome Collection",
+   "item": "François Magendie. Lithograph by N. E. Maurin, 1837.",
+   "url": "https://wellcomecollection.org/works/b99w3gfx",
+   "rights": "Public Domain (as stated by Wellcome Collection)",
+   "credit": "Wellcome Collection",
+   "verified": true
+  }
  },
  {
   "id": "02-g",
@@ -448,7 +472,12 @@
   "template": "quote",
   "fields": {
    "quote": "has always its usefulness.",
-   "attribution": "François Magendie"
+   "attribution": "François Magendie",
+   "bgmap": {
+    "lat": 45,
+    "lon": -30,
+    "span": 45
+   }
   },
   "visual": "Typewriter quote card: Magendie's recorded words.",
   "source": null
@@ -462,7 +491,12 @@
   "template": "quote",
   "fields": {
    "quote": "erroneous yet pervasive Western view",
-   "attribution": "A peer-reviewed medical review"
+   "attribution": "A peer-reviewed medical review",
+   "bgmap": {
+    "lat": 45,
+    "lon": -30,
+    "span": 45
+   }
   },
   "visual": "Typewriter quote card: the review's words.",
   "source": null
@@ -506,7 +540,12 @@
   "template": "text",
   "fields": {
    "headline": "A promise to make it not hurt",
-   "sub": "Not automatically welcome news"
+   "sub": "Not automatically welcome news",
+   "bgmap": {
+    "lat": 45,
+    "lon": -30,
+    "span": 45
+   }
   },
   "visual": "Kinetic card, no quote marks (nobody is recorded saying this).",
   "source": null
@@ -524,10 +563,11 @@
    "lower": "François Magendie (lithograph by N. E. Maurin, 1837)",
    "asset": "wellcomecollection-org-works-b99w3gfx",
    "zoom": {
-    "scale": 1.2,
+    "scale": 1.7,
     "x": 50,
-    "y": 38
-   }
+    "y": 30
+   },
+   "crop": "Tight on the face, different from 02-f"
   },
   "visual": "Lithograph portrait of François Magendie, slow push-in.",
   "source": {
@@ -548,7 +588,12 @@
   "template": "date",
   "fields": {
    "date": "October 16, 1846",
-   "caption": "Boston"
+   "caption": "Boston",
+   "bgmap": {
+    "lat": 42.36,
+    "lon": -71.06,
+    "span": 4
+   }
   },
   "visual": "Date stamps in: October 16, 1846, Boston.",
   "source": null
@@ -631,15 +676,7 @@
     }
    ],
    "routes": [],
-   "labels": [
-    {
-     "name": "Massachusetts Bay",
-     "lat": 42.25,
-     "lon": -70.45,
-     "kind": "sea",
-     "size": 30
-    }
-   ],
+   "labels": [],
    "from": {
     "lat": 40.5,
     "lon": -76.0,
@@ -689,7 +726,12 @@
   "template": "text",
   "fields": {
    "headline": "A public demonstration is a big deal",
-   "sub": "To be fair to Morton"
+   "sub": "To be fair to Morton",
+   "bgmap": {
+    "lat": 42.36,
+    "lon": -71.06,
+    "span": 4
+   }
   },
   "visual": "Kinetic card.",
   "source": null
@@ -700,28 +742,28 @@
   "section_name": "Ether Day",
   "text": "It means people saw it with their own eyes, in a room, on a date,",
   "type": "flow",
-  "template": "flow",
+  "template": "archival",
   "fields": {
-   "title": "Why a public demonstration counts",
-   "steps": [
-    {
-     "label": "Seen with their own eyes",
-     "sub": ""
-    },
-    {
-     "label": "In a room",
-     "sub": ""
-    },
-    {
-     "label": "On a date",
-     "sub": ""
-    }
-   ],
-   "arrows": false,
-   "caption": ""
+   "kind": "photo",
+   "label": "Inside the Ether Dome, Massachusetts General Hospital",
+   "lower": "The Ether Dome, Massachusetts General Hospital (modern photograph)",
+   "asset": "commons-wikimedia-org-wiki-file-inside-the-ether-dome-at-mas",
+   "crop": "Different crop: the tiered seats around the floor, where people watched",
+   "zoom": {
+    "scale": 1.6,
+    "x": 50,
+    "y": 70
+   }
   },
-  "visual": "Three boxes pop in: seen, in a room, on a date.",
-  "source": null
+  "visual": "Different crop: the tiered seats around the floor, where people watched",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Inside the Ether Dome at Massachusetts General Hospital.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Inside_the_Ether_Dome_at_Massachusetts_General_Hospital.jpg",
+   "rights": "CC BY-SA 4.0 (as stated on Commons); attribution and share-alike required",
+   "credit": "Wikimedia Commons file page (copy the author credit from the file page)",
+   "verified": false
+  }
  },
  {
   "id": "03-h",
@@ -746,7 +788,12 @@
      "sub": ""
     }
    ],
-   "caption": ""
+   "caption": "",
+   "bgmap": {
+    "lat": 42.36,
+    "lon": -71.06,
+    "span": 4
+   }
   },
   "visual": "Three boxes with arrows: written down, talked about, copied.",
   "source": null
@@ -767,7 +814,12 @@
    "right_lines": [
     "He did it in front of people"
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 42.36,
+    "lon": -71.06,
+    "span": 4
+   }
   },
   "visual": "Compare card, step 1: Morton gets the credit; the reason is ghosted.",
   "source": null
@@ -788,7 +840,12 @@
    "right_lines": [
     "He did it in front of people"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 42.36,
+    "lon": -71.06,
+    "span": 4
+   }
   },
   "visual": "Same compare card, step 2: the reason is revealed, hedge kept.",
   "source": null
@@ -856,7 +913,12 @@
   "template": "date",
   "fields": {
    "date": "March 30, 1842",
-   "caption": "Crawford Long and James Venable"
+   "caption": "Crawford Long and James Venable",
+   "bgmap": {
+    "lat": 34.1,
+    "lon": -83.6,
+    "span": 6
+   }
   },
   "visual": "Date stamps in: March 30, 1842. Text only, no imagery of the operation.",
   "source": null
@@ -915,7 +977,12 @@
     }
    ],
    "arrows": false,
-   "caption": ""
+   "caption": "",
+   "bgmap": {
+    "lat": 34.1,
+    "lon": -83.6,
+    "span": 6
+   }
   },
   "visual": "Three boxes pop in: named patient, known date, 1842.",
   "source": null
@@ -958,7 +1025,12 @@
   "template": "date",
   "fields": {
    "date": "1849",
-   "caption": "Long didn't publish until 1849"
+   "caption": "Long didn't publish until 1849",
+   "bgmap": {
+    "lat": 34.1,
+    "lon": -83.6,
+    "span": 6
+   }
   },
   "visual": "The year 1849 stamps in.",
   "source": null
@@ -983,7 +1055,12 @@
     }
    ],
    "highlight": "1849",
-   "scale": "years"
+   "scale": "years",
+   "bgmap": {
+    "lat": 34.1,
+    "lon": -83.6,
+    "span": 6
+   }
   },
   "visual": "Timeline spaced by years: the axis draws from 1842 to 1849.",
   "source": null
@@ -1012,7 +1089,12 @@
     }
    ],
    "highlight": "1849",
-   "scale": "years"
+   "scale": "years",
+   "bgmap": {
+    "lat": 34.1,
+    "lon": -83.6,
+    "span": 6
+   }
   },
   "visual": "Same timeline with Morton's 1846 demonstration dropping in between, spaced by years.",
   "source": null
@@ -1035,7 +1117,12 @@
      "label": "Nobody else can build on what you did",
      "sub": ""
     }
-   ]
+   ],
+   "bgmap": {
+    "lat": 34.1,
+    "lon": -83.6,
+    "span": 6
+   }
   },
   "visual": "Two boxes with an arrow: no publishing, nobody builds on it.",
   "source": null
@@ -1126,7 +1213,12 @@
    "right_title": "First",
    "right_lines": [
     "Long, Georgia, 1842"
-   ]
+   ],
+   "bgmap": {
+    "lat": 34.1,
+    "lon": -83.6,
+    "span": 6
+   }
   },
   "visual": "Two columns: public versus first.",
   "source": null
@@ -1140,7 +1232,12 @@
   "template": "date",
   "fields": {
    "date": "March 30",
-   "caption": "National Doctors' Day, United States"
+   "caption": "National Doctors' Day, United States",
+   "bgmap": {
+    "lat": 36,
+    "lon": -80,
+    "span": 12
+   }
   },
   "visual": "Date stamps in: March 30.",
   "source": null
@@ -1164,7 +1261,12 @@
      "sub": "March 30"
     }
    ],
-   "caption": "The date was picked because of Long's operation"
+   "caption": "The date was picked because of Long's operation",
+   "bgmap": {
+    "lat": 36,
+    "lon": -80,
+    "span": 12
+   }
   },
   "visual": "Two boxes with an arrow: Long's operation to Doctors' Day.",
   "source": null
@@ -1278,7 +1380,12 @@
    "right_label": "Famous demonstration, Boston",
    "right_date": "October 16",
    "gap": "Long's date, not Boston's",
-   "firsttag": false
+   "firsttag": false,
+   "bgmap": {
+    "lat": 36,
+    "lon": -80,
+    "span": 12
+   }
   },
   "visual": "Line draws from March 30 to October 16, then the gap label.",
   "source": null
@@ -1322,7 +1429,12 @@
   "template": "text",
   "fields": {
    "headline": "Long wasn't the first either",
-   "sub": "There's more"
+   "sub": "There's more",
+   "bgmap": {
+    "lat": 34.3,
+    "lon": 135.4,
+    "span": 9
+   }
   },
   "visual": "Kinetic card.",
   "source": null
@@ -1337,7 +1449,12 @@
   "fields": {
    "number": "38 years",
    "label": "before Long",
-   "sub": "and 42 years before Morton"
+   "sub": "and 42 years before Morton",
+   "bgmap": {
+    "lat": 34.3,
+    "lon": 135.4,
+    "span": 9
+   }
   },
   "visual": "Number counts up from 0 to 38.",
   "source": null
@@ -1380,7 +1497,12 @@
   "template": "date",
   "fields": {
    "date": "October 13, 1804",
-   "caption": "By the Japanese calendar of the time"
+   "caption": "By the Japanese calendar of the time",
+   "bgmap": {
+    "lat": 34.3,
+    "lon": 135.4,
+    "span": 9
+   }
   },
   "visual": "Date stamps in: October 13, 1804, with the calendar hedge underneath.",
   "source": null
@@ -1451,13 +1573,14 @@
   "fields": {
    "kind": "document",
    "label": "Two Japanese Pioneers in Anesthesiology",
-   "lower": "\"Two Japanese Pioneers in Anesthesiology: Seishū Hanaoka and Gendai Kamada\" (journal article page)",
+   "lower": "\"Two Japanese Pioneers in Anesthesiology\" (journal article page)",
    "asset": "pubmed-ncbi-nlm-nih-gov-28160985",
    "zoom": {
     "scale": 1.5,
     "x": 50,
     "y": 18
-   }
+   },
+   "crop": "Push in on the left of the title so only Hanaoka's name shows"
   },
   "visual": "Journal article page, push-in on the title.",
   "source": {
@@ -1551,7 +1674,12 @@
    "right_title": "Long, 1842",
    "right_lines": [
     "Ether"
-   ]
+   ],
+   "bgmap": {
+    "lat": 34.3,
+    "lon": 135.4,
+    "span": 9
+   }
   },
   "visual": "Two columns: herbal mix versus ether.",
   "source": null
@@ -1580,7 +1708,12 @@
     }
    ],
    "arrows": false,
-   "caption": ""
+   "caption": "",
+   "bgmap": {
+    "lat": 34.3,
+    "lon": 135.4,
+    "span": 9
+   }
   },
   "visual": "Three boxes pop in: named patient, known date, Japan.",
   "source": null
@@ -1672,77 +1805,31 @@
   "section_name": "Hanaoka, 1804",
   "text": "1804 in Japan, 1842 in Georgia, and 1846 in Boston,",
   "type": "pinmap",
-  "template": "pinmap",
+  "template": "timeline",
   "fields": {
-   "title": "Three places",
-   "pins": [
+   "title": "Three dates",
+   "events": [
     {
-     "name": "Japan",
-     "lat": 34.27,
-     "lon": 135.35,
-     "sub": "Hanaoka Seishu, 1804",
-     "at": 0.1
+     "date": "1804",
+     "label": "Hanaoka Seishu, Japan"
     },
     {
-     "name": "Georgia",
-     "lat": 34.1267,
-     "lon": -83.5903,
-     "sub": "Crawford Long, 1842",
-     "at": 1.15,
-     "side": "left"
+     "date": "1842",
+     "label": "Crawford Long, Georgia"
     },
     {
-     "name": "Boston",
-     "lat": 42.363,
-     "lon": -71.0688,
-     "sub": "William Morton, 1846",
-     "at": 2.3
+     "date": "1846",
+     "label": "William Morton, Boston"
     }
    ],
-   "routes": [],
-   "labels": [
-    {
-     "name": "Atlantic Ocean",
-     "lat": 22,
-     "lon": -45,
-     "kind": "sea",
-     "size": 40
-    },
-    {
-     "name": "Pacific Ocean",
-     "lat": 14,
-     "lon": 165,
-     "kind": "sea",
-     "size": 40
-    },
-    {
-     "name": "North America",
-     "lat": 50,
-     "lon": -105,
-     "kind": "region",
-     "size": 44
-    },
-    {
-     "name": "Europe",
-     "lat": 52,
-     "lon": 12,
-     "kind": "region",
-     "size": 40
-    },
-    {
-     "name": "Asia",
-     "lat": 50,
-     "lon": 88,
-     "kind": "region",
-     "size": 44
-    }
-   ],
-   "from": false,
-   "span": 10,
-   "rivers": false,
-   "note": "Coastlines: Natural Earth · places approximate"
+   "scale": "years",
+   "bgmap": {
+    "lat": 34.3,
+    "lon": 135.4,
+    "span": 9
+   }
   },
-  "visual": "Same world map held: each pin picks up its year as it is spoken.",
+  "visual": "Timeline spaced by years: 1804 Japan, 1842 Georgia, 1846 Boston",
   "source": null
  },
  {
@@ -1751,78 +1838,33 @@
   "section_name": "Hanaoka, 1804",
   "text": "and the one everybody knows is the last one.",
   "type": "pinmap",
-  "template": "pinmap",
+  "template": "timeline",
   "fields": {
-   "title": "Three places",
-   "pins": [
+   "title": "Three dates",
+   "events": [
     {
-     "name": "Japan",
-     "lat": 34.27,
-     "lon": 135.35,
-     "sub": "Hanaoka Seishu, 1804",
-     "at": 0.1
+     "date": "1804",
+     "label": "Hanaoka Seishu, Japan"
     },
     {
-     "name": "Georgia",
-     "lat": 34.1267,
-     "lon": -83.5903,
-     "sub": "Crawford Long, 1842",
-     "at": 0.2,
-     "side": "left"
+     "date": "1842",
+     "label": "Crawford Long, Georgia"
     },
     {
-     "name": "Boston",
-     "lat": 42.363,
-     "lon": -71.0688,
-     "sub": "William Morton, 1846",
-     "at": 0.3,
-     "pulse": true
+     "date": "1846",
+     "label": "William Morton, Boston"
     }
    ],
-   "routes": [],
-   "labels": [
-    {
-     "name": "Atlantic Ocean",
-     "lat": 22,
-     "lon": -45,
-     "kind": "sea",
-     "size": 40
-    },
-    {
-     "name": "Pacific Ocean",
-     "lat": 14,
-     "lon": 165,
-     "kind": "sea",
-     "size": 40
-    },
-    {
-     "name": "North America",
-     "lat": 50,
-     "lon": -105,
-     "kind": "region",
-     "size": 44
-    },
-    {
-     "name": "Europe",
-     "lat": 52,
-     "lon": 12,
-     "kind": "region",
-     "size": 40
-    },
-    {
-     "name": "Asia",
-     "lat": 50,
-     "lon": 88,
-     "kind": "region",
-     "size": 44
-    }
-   ],
-   "from": false,
-   "span": 10,
-   "rivers": false,
-   "note": "Coastlines: Natural Earth · places approximate"
+   "scale": "years",
+   "highlight": "1846",
+   "step": 3,
+   "bgmap": {
+    "lat": 34.3,
+    "lon": 135.4,
+    "span": 9
+   }
   },
-  "visual": "Same world map held; the Boston pin pulses.",
+  "visual": "Timeline spaced by years: 1804 Japan, 1842 Georgia, 1846 Boston (1846 highlighted)",
   "source": null
  },
  {
@@ -1863,7 +1905,12 @@
   "template": "text",
   "fields": {
    "headline": "It earned that spot by being public",
-   "sub": "The one in the textbooks"
+   "sub": "The one in the textbooks",
+   "bgmap": {
+    "lat": 30,
+    "lon": 10,
+    "span": 120
+   }
   },
   "visual": "Kinetic card.",
   "source": null
@@ -1912,7 +1959,12 @@
    "right_label": "Long publishes",
    "right_date": "1849",
    "gap": "Didn't publish until 1849",
-   "firsttag": false
+   "firsttag": false,
+   "bgmap": {
+    "lat": 30,
+    "lon": 10,
+    "span": 120
+   }
   },
   "visual": "Line draws from March 30, 1842 to 1849, then the gap label.",
   "source": null
@@ -1960,7 +2012,12 @@
    "right_label": "Public demonstration, Boston",
    "right_date": "October 16, 1846",
    "gap": "42 years",
-   "firsttag": false
+   "firsttag": false,
+   "bgmap": {
+    "lat": 30,
+    "lon": 10,
+    "span": 120
+   }
   },
   "visual": "Line draws from 1804 to October 16, 1846, then the gap label: 42 years.",
   "source": null
@@ -1986,7 +2043,12 @@
    ],
    "highlight": 0,
    "step": 1,
-   "scale": "years"
+   "scale": "years",
+   "bgmap": {
+    "lat": 30,
+    "lon": 10,
+    "span": 120
+   }
   },
   "visual": "Timeline spaced by years: 1804, Hanaoka Seishu in Japan, lands first and is highlighted.",
   "source": null
@@ -2012,7 +2074,12 @@
    ],
    "highlight": 1,
    "step": 2,
-   "scale": "years"
+   "scale": "years",
+   "bgmap": {
+    "lat": 30,
+    "lon": 10,
+    "span": 120
+   }
   },
   "visual": "Same timeline: 1804 already shown, 1842 Crawford Long drops in.",
   "source": null

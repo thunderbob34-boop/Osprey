@@ -163,7 +163,12 @@
   "template": "text",
   "fields": {
    "headline": "Museum Wales, the national museum",
-   "sub": "Has its own name for him"
+   "sub": "Has its own name for him",
+   "bgmap": {
+    "lat": 53.5,
+    "lon": -2.5,
+    "span": 9
+   }
   },
   "visual": "Kinetic text: Museum Wales has its own name for him.",
   "source": null
@@ -177,7 +182,12 @@
   "template": "quote",
   "fields": {
    "quote": "The real father of the railways",
-   "attribution": "Museum Wales"
+   "attribution": "Museum Wales",
+   "bgmap": {
+    "lat": 53.5,
+    "lon": -2.5,
+    "span": 9
+   }
   },
   "visual": "Typewriter quote, attributed to Museum Wales.",
   "source": null,
@@ -192,7 +202,12 @@
   "template": "text",
   "fields": {
    "headline": "The Stephensons did something that really matters",
-   "sub": "To be fair"
+   "sub": "To be fair",
+   "bgmap": {
+    "lat": 53.5,
+    "lon": -2.5,
+    "span": 9
+   }
   },
   "visual": "Kinetic text: the Stephensons did something that really matters.",
   "source": null
@@ -213,7 +228,12 @@
    "right_lines": [
     "Got there first"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 53.5,
+    "lon": -2.5,
+    "span": 9
+   }
   },
   "visual": "Compare card: full credit to the Stephensons, but Trevithick got there first.",
   "source": null
@@ -317,7 +337,12 @@
     }
    ],
    "highlight": 1,
-   "scale": "years"
+   "scale": "years",
+   "bgmap": {
+    "lat": 53.8,
+    "lon": -2.0,
+    "span": 5
+   }
   },
   "visual": "Years-scaled timeline: the axis draws from 1825 to October 1829, the Rainhill Trials highlighted.",
   "source": null
@@ -374,7 +399,12 @@
      "label": "The Stephenson name",
      "sub": ""
     }
-   ]
+   ],
+   "bgmap": {
+    "lat": 53.8,
+    "lon": -2.0,
+    "span": 5
+   }
   },
   "visual": "Three boxes pop in side by side: famous engine, famous contest, the Stephenson name.",
   "source": null
@@ -404,7 +434,12 @@
      "label": "The Stephenson name",
      "sub": "Sitting right on top of it"
     }
-   ]
+   ],
+   "bgmap": {
+    "lat": 53.8,
+    "lon": -2.0,
+    "span": 5
+   }
   },
   "visual": "Same three boxes: the first two already shown, the Stephenson name pops in highlighted on top.",
   "source": null
@@ -871,7 +906,12 @@
   "fields": {
    "number": "Nearly 5",
    "label": "miles an hour",
-   "sub": "Doesn't sound like much"
+   "sub": "Doesn't sound like much",
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 1.6
+   }
   },
   "visual": "\"Nearly 5\" counts up, with \"miles an hour\".",
   "source": null
@@ -953,7 +993,12 @@
   "template": "date",
   "fields": {
    "date": "Feb 21, 1804",
-   "caption": "First known railway journey by steam locomotive"
+   "caption": "First known railway journey by steam locomotive",
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 1.6
+   }
   },
   "visual": "Date stamps in: Feb 21, 1804, with \"First known railway journey by steam locomotive\".",
   "source": null,
@@ -975,7 +1020,12 @@
    "right_lines": [
     "Penydarren, February 21, 1804"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 1.6
+   }
   },
   "visual": "Compare: not the first one people remember, but the first one we know of.",
   "source": null
@@ -990,7 +1040,12 @@
   "fields": {
    "number": "25 years",
    "label": "before Rocket",
-   "sub": "It happened in Wales"
+   "sub": "It happened in Wales",
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 1.6
+   }
   },
   "visual": "\"25 years\" counts up, with \"before Rocket\".",
   "source": null
@@ -1035,7 +1090,12 @@
   "fields": {
    "number": "500 guineas",
    "label": "The story goes there was a bet",
-   "sub": "The story, not something nailed down"
+   "sub": "The story, not something nailed down",
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 1.6
+   }
   },
   "visual": "\"500 guineas\" counts up under \"The story goes there was a bet\".",
   "source": null,
@@ -1057,7 +1117,12 @@
    "right_lines": [
     ""
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 1.6
+   }
   },
   "visual": "Compare: Homfray, an ironmaster, against a rival ironmaster.",
   "source": null,
@@ -1072,7 +1137,12 @@
   "template": "text",
   "fields": {
    "headline": "The sources don't agree on who the rival was",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 1.6
+   }
   },
   "visual": "Kinetic text: the sources don't agree on who the rival was.",
   "source": null
@@ -1093,7 +1163,12 @@
    "right_lines": [
     ""
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 1.6
+   }
   },
   "visual": "Compare, step 1: \"The story people tell\" is lit, \"Something anybody has nailed down\" is ghosted.",
   "source": null,
@@ -1178,7 +1253,12 @@
      "label": "Engine breaks the track",
      "sub": "The track it was running on"
     }
-   ]
+   ],
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 3
+   }
   },
   "visual": "Four boxes pop in one after another: cast iron plates, hard but brittle, cracks, the engine breaks the track.",
   "source": null
@@ -1192,7 +1272,12 @@
   "template": "text",
   "fields": {
    "headline": "You can't run a railway on track that keeps breaking",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 3
+   }
   },
   "visual": "Kinetic text: you can't run a railway on track that keeps breaking.",
   "source": null
@@ -1213,7 +1298,12 @@
    "right_lines": [
     "Not a business one"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 3
+   }
   },
   "visual": "Compare: a technical win against a business.",
   "source": null
@@ -1259,7 +1349,12 @@
    "right_lines": [
     ""
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 3
+   }
   },
   "visual": "Compare, step 1: doing something first, with \"something that lasts\" ghosted.",
   "source": null
@@ -1280,7 +1375,12 @@
    "right_lines": [
     ""
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 3
+   }
   },
   "visual": "Compare, step 2: the right side, something that lasts, is revealed.",
   "source": null
@@ -1305,7 +1405,12 @@
     }
    ],
    "highlight": 0,
-   "scale": "years"
+   "scale": "years",
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 3
+   }
   },
   "visual": "Years-scaled timeline: February 1804 on the left, October 1829 on the right, a long gap between them.",
   "source": null
@@ -1319,7 +1424,12 @@
   "template": "text",
   "fields": {
    "headline": "Then the story moves on without him",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 51.7,
+    "lon": -3.35,
+    "span": 3
+   }
   },
   "visual": "Kinetic text: then the story moves on without him.",
   "source": null
@@ -1344,7 +1454,12 @@
      "label": "Stephenson",
      "sub": ""
     }
-   ]
+   ],
+   "bgmap": {
+    "lat": 54,
+    "lon": -1.8,
+    "span": 5
+   }
   },
   "visual": "Two boxes pop in apart, with the caption that it doesn't go straight from one to the other.",
   "source": null
@@ -2474,7 +2589,12 @@
   "template": "text",
   "fields": {
    "headline": "Rocket: supposed to be the proof of George Stephenson",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 54,
+    "lon": -1.8,
+    "span": 5
+   }
   },
   "visual": "Kinetic text: Rocket, the engine that's supposed to be the proof of George Stephenson.",
   "source": null
@@ -2525,7 +2645,12 @@
     "Rocket was built under his direction",
     "Largely the son's engine"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 54,
+    "lon": -1.8,
+    "span": 5
+   }
   },
   "visual": "Compare: George Stephenson, the father, against Robert Stephenson, the son, under whose direction Rocket was built.",
   "source": null,
@@ -2550,7 +2675,12 @@
      "label": "The Stephensons",
      "sub": "Made it pay"
     }
-   ]
+   ],
+   "bgmap": {
+    "lat": 54,
+    "lon": -1.8,
+    "span": 5
+   }
   },
   "visual": "Two boxes with an arrow: Trevithick proved it could work, the Stephensons made it pay.",
   "source": null
@@ -2571,7 +2701,12 @@
    "right_lines": [
     ""
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 54,
+    "lon": -1.8,
+    "span": 5
+   }
   },
   "visual": "Compare, step 1: \"A demonstration\" against \"A railway\", the right side ghosted.",
   "source": null
@@ -2592,7 +2727,12 @@
    "right_lines": [
     "Something that runs"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 54,
+    "lon": -1.8,
+    "span": 5
+   }
   },
   "visual": "Compare, step 2: one day in Wales against something that runs.",
   "source": null
@@ -2606,7 +2746,12 @@
   "template": "text",
   "fields": {
    "headline": "The Stephensons earned a lot of their reputation",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 54,
+    "lon": -1.8,
+    "span": 5
+   }
   },
   "visual": "Kinetic text: the Stephensons earned a lot of their reputation.",
   "source": null
@@ -2643,7 +2788,12 @@
     }
    ],
    "highlight": 0,
-   "scale": "years"
+   "scale": "years",
+   "bgmap": {
+    "lat": 54,
+    "lon": -1.8,
+    "span": 5
+   }
   },
   "visual": "Years-scaled timeline from 1804 to October 1829: the five dates pop in as the axis draws, Penydarren highlighted.",
   "source": null,
@@ -2743,7 +2893,12 @@
   "template": "text",
   "fields": {
    "headline": "Local workers paid for his funeral and burial",
-   "sub": "So he wouldn't get a pauper's burial"
+   "sub": "So he wouldn't get a pauper's burial",
+   "bgmap": {
+    "lat": 51.6,
+    "lon": -1.5,
+    "span": 5
+   }
   },
   "visual": "Kinetic text: local workers paid for his funeral and burial, so he wouldn't get a pauper's burial.",
   "source": null
@@ -2787,7 +2942,12 @@
   "template": "quote",
   "fields": {
    "quote": "The real father of the railways",
-   "attribution": "Museum Wales"
+   "attribution": "Museum Wales",
+   "bgmap": {
+    "lat": 51.6,
+    "lon": -1.5,
+    "span": 5
+   }
   },
   "visual": "Typewriter quote again, attributed to Museum Wales.",
   "source": null
@@ -2808,7 +2968,12 @@
    "right_lines": [
     "Went on to be the one in the history books"
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 51.6,
+    "lon": -1.5,
+    "span": 5
+   }
   },
   "visual": "Compare, step 1: Trevithick needed local workers to pay for his funeral; the Stephenson side is ghosted.",
   "source": null
@@ -2829,7 +2994,12 @@
    "right_lines": [
     "Went on to be the one in the history books"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 51.6,
+    "lon": -1.5,
+    "span": 5
+   }
   },
   "visual": "Compare, step 2: the Stephenson name is revealed, the one in the history books.",
   "source": null
@@ -2872,7 +3042,12 @@
   "template": "date",
   "fields": {
    "date": "Feb 21, 1804",
-   "caption": "Penydarren, south Wales"
+   "caption": "Penydarren, south Wales",
+   "bgmap": {
+    "lat": 51.6,
+    "lon": -1.5,
+    "span": 5
+   }
   },
   "visual": "Date stamps in: Feb 21, 1804, Penydarren, south Wales.",
   "source": null
@@ -2989,7 +3164,12 @@
    "right_label": "Rocket wins at Rainhill",
    "right_date": "Oct 1829",
    "gap": "twenty-five years",
-   "firsttag": false
+   "firsttag": false,
+   "bgmap": {
+    "lat": 51.6,
+    "lon": -1.5,
+    "span": 5
+   }
   },
   "visual": "Datecard: a line draws from Feb 21, 1804 to Oct 1829, then \"twenty-five years\" appears.",
   "source": null,

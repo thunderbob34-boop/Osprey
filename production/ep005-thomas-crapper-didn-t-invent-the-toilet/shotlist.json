@@ -62,7 +62,12 @@
     }
    ],
    "highlight": 1,
-   "caption": "What many people say"
+   "caption": "What many people say",
+   "bgmap": {
+    "lat": 52,
+    "lon": -1.5,
+    "span": 8
+   }
   },
   "visual": "Two boxes pop in, joined by an arrow: the claim, then the supposed result.",
   "source": null
@@ -175,7 +180,12 @@
   "template": "text",
   "fields": {
    "headline": "The word \"crap\" is older than Crapper",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 52,
+    "lon": -1.5,
+    "span": 8
+   }
   },
   "visual": "Kinetic words: the word crap is older than Crapper.",
   "source": null
@@ -218,7 +228,12 @@
   "template": "text",
   "fields": {
    "headline": "Crapper wasn't first, not even close",
-   "sub": "He still gets his due"
+   "sub": "He still gets his due",
+   "bgmap": {
+    "lat": 52,
+    "lon": -1.5,
+    "span": 8
+   }
   },
   "visual": "Kinetic words: not first, not even close.",
   "source": null
@@ -248,7 +263,12 @@
    ],
    "step": 1,
    "highlight": 0,
-   "caption": "The story as it is usually told"
+   "caption": "The story as it is usually told",
+   "bgmap": {
+    "lat": 51.5,
+    "lon": -0.15,
+    "span": 1.5
+   }
   },
   "visual": "Flow: first box pops in, the other two ghosted.",
   "source": null
@@ -278,7 +298,12 @@
    ],
    "step": 3,
    "highlight": 2,
-   "caption": "The story as it is usually told"
+   "caption": "The story as it is usually told",
+   "bgmap": {
+    "lat": 51.5,
+    "lon": -0.15,
+    "span": 1.5
+   }
   },
   "visual": "Same flow, the last box lands: his name becomes the slang.",
   "source": null
@@ -321,7 +346,12 @@
   "template": "text",
   "fields": {
    "headline": "Crapper and toilet, in the same sentence",
-   "sub": "The brain files it as true"
+   "sub": "The brain files it as true",
+   "bgmap": {
+    "lat": 51.5,
+    "lon": -0.15,
+    "span": 1.5
+   }
   },
   "visual": "Kinetic words.",
   "source": null
@@ -335,7 +365,12 @@
   "template": "date",
   "fields": {
    "date": "1969",
-   "caption": "A writer named Wallace Reyburn"
+   "caption": "A writer named Wallace Reyburn",
+   "bgmap": {
+    "lat": 51.5,
+    "lon": -0.15,
+    "span": 1.5
+   }
   },
   "visual": "The year 1969 stamps in with the writer's name.",
   "source": null
@@ -391,7 +426,12 @@
    "right_lines": [
     "Came from that book"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 51.5,
+    "lon": -0.15,
+    "span": 1.5
+   }
   },
   "visual": "Compare card: the book on the left, where it ends up on the right.",
   "source": null
@@ -512,7 +552,12 @@
   "fields": {
    "number": "About 3,500",
    "label": "years ago",
-   "sub": "Somewhere around 1700 to 1450 BC"
+   "sub": "Somewhere around 1700 to 1450 BC",
+   "bgmap": {
+    "lat": 35.3,
+    "lon": 25.2,
+    "span": 4
+   }
   },
   "visual": "About 3,500 counts up, with the 1700 to 1450 BC range underneath.",
   "source": null
@@ -555,7 +600,12 @@
   "template": "text",
   "fields": {
    "headline": "A flush toilet with roof cisterns?",
-   "sub": "That's overstated"
+   "sub": "That's overstated",
+   "bgmap": {
+    "lat": 35.3,
+    "lon": 25.2,
+    "span": 4
+   }
   },
   "visual": "Kinetic words: the roof-cisterns claim, flagged as overstated.",
   "source": null
@@ -578,7 +628,12 @@
     "No cistern",
     "No valve"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 35.3,
+    "lon": 25.2,
+    "span": 4
+   }
   },
   "visual": "Compare card: your house has a cistern and valve; Knossos has neither.",
   "source": null
@@ -855,7 +910,12 @@
    "right_label": "Crapper's patents",
    "right_date": "Late 1800s",
    "gap": "thousands of years older",
-   "firsttag": false
+   "firsttag": false,
+   "bgmap": {
+    "lat": 35.3,
+    "lon": 25.2,
+    "span": 4
+   }
   },
   "visual": "A line draws between the two dates, then the gap label appears.",
   "source": null
@@ -1043,7 +1103,12 @@
   "template": "date",
   "fields": {
    "date": "1596",
-   "caption": "A working model, built for the Queen of England"
+   "caption": "A working model, built for the Queen of England",
+   "bgmap": {
+    "lat": 51.4,
+    "lon": -2.4,
+    "span": 2
+   }
   },
   "visual": "1596 stamps in.",
   "source": null
@@ -1099,7 +1164,12 @@
    ],
    "arrows": false,
    "highlight": 1,
-   "caption": "Described in The Metamorphosis of Ajax"
+   "caption": "Described in The Metamorphosis of Ajax",
+   "bgmap": {
+    "lat": 51.4,
+    "lon": -2.4,
+    "span": 2
+   }
   },
   "visual": "Two boxes: not a later legend, it's on paper.",
   "source": null
@@ -1118,7 +1188,12 @@
    "right_label": "Crapper's patents",
    "right_date": "Late 1800s",
    "gap": "nearly three centuries",
-   "firsttag": false
+   "firsttag": false,
+   "bgmap": {
+    "lat": 51.4,
+    "lon": -2.4,
+    "span": 2
+   }
   },
   "visual": "Line draws from 1596 to the late 1800s, gap label lands.",
   "source": null
@@ -1161,7 +1236,12 @@
   "template": "text",
   "fields": {
    "headline": "If anyone is the inventor, Harington is closer",
-   "sub": "Of the flush toilet with a tank"
+   "sub": "Of the flush toilet with a tank",
+   "bgmap": {
+    "lat": 51.4,
+    "lon": -2.4,
+    "span": 2
+   }
   },
   "visual": "Kinetic words.",
   "source": null
@@ -1175,7 +1255,12 @@
   "template": "text",
   "fields": {
    "headline": "A flushing toilet isn't the whole job",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 51.51,
+    "lon": -0.14,
+    "span": 0.8
+   }
   },
   "visual": "Kinetic words.",
   "source": null
@@ -1368,7 +1453,12 @@
   "fields": {
    "number": "1775",
    "label": "Alexander Cumming patents the S-bend",
-   "sub": "Long before Thomas Crapper was making toilets"
+   "sub": "Long before Thomas Crapper was making toilets",
+   "bgmap": {
+    "lat": 51.51,
+    "lon": -0.14,
+    "span": 0.8
+   }
   },
   "visual": "1775 stamps in.",
   "source": null
@@ -1467,7 +1557,12 @@
      "label": "Crapper: improvements"
     }
    ],
-   "highlight": 2
+   "highlight": 2,
+   "bgmap": {
+    "lat": 51.49,
+    "lon": -0.17,
+    "span": 0.8
+   }
   },
   "visual": "Timeline draws left to right, and Crapper's late 1800s lights up last.",
   "source": null,
@@ -1511,7 +1606,12 @@
    ],
    "arrows": false,
    "highlight": 1,
-   "caption": "A real engineer, not the inventor"
+   "caption": "A real engineer, not the inventor",
+   "bgmap": {
+    "lat": 51.49,
+    "lon": -0.17,
+    "span": 0.8
+   }
   },
   "visual": "Two boxes: made it better, didn't invent it.",
   "source": null
@@ -1532,7 +1632,12 @@
    "right_lines": [
     "Not where the word came from"
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 51.49,
+    "lon": -0.17,
+    "span": 0.8
+   }
   },
   "visual": "Compare card: the word on the left, the right side ghosted.",
   "source": null
@@ -1553,7 +1658,12 @@
    "right_lines": [
     "Not where the word came from"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 51.49,
+    "lon": -0.17,
+    "span": 0.8
+   }
   },
   "visual": "Compare card: the right side is revealed.",
   "source": null
@@ -1668,7 +1778,12 @@
   "template": "text",
   "fields": {
    "headline": "A \"may\", not a for-sure",
-   "sub": "Seeing T. Crapper on toilet cisterns"
+   "sub": "Seeing T. Crapper on toilet cisterns",
+   "bgmap": {
+    "lat": 51.49,
+    "lon": -0.17,
+    "span": 0.8
+   }
   },
   "visual": "Kinetic words: a may, not a for-sure.",
   "source": null
@@ -1712,7 +1827,12 @@
   "template": "text",
   "fields": {
    "headline": "His name may well be in the slang",
-   "sub": "Just not because he invented it"
+   "sub": "Just not because he invented it",
+   "bgmap": {
+    "lat": 51.49,
+    "lon": -0.17,
+    "span": 0.8
+   }
   },
   "visual": "Kinetic words, keeping the 'may well'.",
   "source": null
@@ -1733,7 +1853,12 @@
    "right_lines": [
     "Invent the toilet"
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 40,
+    "lon": 30,
+    "span": 40
+   }
   },
   "visual": "Compare card: Crapper on the left, the right side ghosted.",
   "source": null
@@ -1756,7 +1881,12 @@
    "right_lines": [
     "Invent the toilet"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 40,
+    "lon": 30,
+    "span": 40
+   }
   },
   "visual": "Compare card: the right side is revealed.",
   "source": null
@@ -1933,7 +2063,12 @@
      "label": "Cumming: S-bend"
     }
    ],
-   "highlight": null
+   "highlight": null,
+   "bgmap": {
+    "lat": 40,
+    "lon": 30,
+    "span": 40
+   }
   },
   "visual": "Timeline draws and the somebodies pop in one by one.",
   "source": null

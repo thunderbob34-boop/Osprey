@@ -73,6 +73,18 @@ const svgOpen = `<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="
  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B8DB0"/><stop offset="1" stop-color="#2F5D7C"/></linearGradient>
 </defs>`;
 
+// ---------- optional faint drifting map behind any card: fields.bgmap = {lat, lon, span, pan:[dLon,dLat], pins:[[lat,lon],...]}
+function bgMapSetup(){ const B=f.bgmap; if(!B) return; const k=Math.cos(B.lat*Math.PI/180), sc=1080/(B.span||8);
+  const V=[B.lon-1300/(k*sc), B.lon+1300/(k*sc), B.lat-800/sc, B.lat+800/sc]; const data = sc<25?window.LAND110:sc<180?window.LAND50:window.LAND;
+  let d=''; for(const r of (data||[])){ let A=1e9,Bx=-1e9,C=1e9,Dd=-1e9; for(let i=0;i<r.length;i+=2){A=Math.min(A,r[i]);Bx=Math.max(Bx,r[i]);C=Math.min(C,r[i+1]);Dd=Math.max(Dd,r[i+1]);} if(Bx<V[0]||A>V[1]||Dd<V[2]||C>V[3]) continue; d+='M'; for(let i=0;i<r.length;i+=2) d+=(i?'L':'')+r[i]+','+r[i+1]; d+='Z'; }
+  const el=document.createElement('div'); el.style.cssText='position:absolute;inset:0;z-index:0;opacity:.8';
+  el.innerHTML=`<svg width="1920" height="1080"><rect width="1920" height="1080" fill="#CCD6D2"/><g id="bgw"><path d="${d}" fill="#EFE7D6" stroke="#A89A7C" stroke-width="2" vector-effect="non-scaling-stroke"/>${(B.pins||[]).map(q=>`<circle cx="${q[1]}" cy="${q[0]}" r="${14/sc}" fill="#A8261B" opacity=".7"/>`).join('')}</g></svg>`;
+  stage.insertBefore(el, stage.firstChild); [...stage.children].slice(1).forEach(c=>{ if(!c.style.position) c.style.position='absolute'; c.style.zIndex=1; });
+  const g=el.querySelector('#bgw'); const pan=B.pan||[0.6/k*(B.span||8)/8,0];
+  window._bg=t=>{ const q=clamp(t/DUR); const lon=B.lon+pan[0]*q, lat=B.lat+pan[1]*q; g.setAttribute('transform',`matrix(${k*sc},0,0,${-sc},${960-lon*k*sc},${540+lat*sc})`); };
+  // a soft paper panel so the words stay readable
+  const pn=document.createElement('div'); pn.style.cssText='position:absolute;left:160px;right:160px;top:250px;bottom:250px;background:radial-gradient(ellipse at center,rgba(239,231,214,.95) 50%,rgba(239,231,214,0) 78%);z-index:0'; stage.insertBefore(pn, el.nextSibling);
+}
 // ---------- templates ----------
 const TPL = {};
 
@@ -431,8 +443,8 @@ SC.herbal = (t,P) => { let s=titleBar(t,P.title||'An herbal mix'); const q=eOut(
 // ---------- boot ----------
 const tpl = TPL[D.template] || TPL.text;
 const loadJS = src => new Promise(r=>{ const e=document.createElement('script'); e.src=src; e.onload=r; e.onerror=r; document.head.appendChild(e); });
-(async()=>{ if (D.template==='pinmap'){ await loadJS('land110.js'); await loadJS('land50.js'); await loadJS('land.js'); await loadJS('geo2.js'); }
-  tpl.setup.call(tpl); window.drawAt = s => tpl.draw.call(tpl, s);
+(async()=>{ if (D.template==='pinmap' || f.bgmap){ await loadJS('land110.js'); await loadJS('land50.js'); await loadJS('land.js'); await loadJS('geo2.js'); }
+  tpl.setup.call(tpl); if (f.bgmap && D.template!=='pinmap') bgMapSetup(); window.drawAt = s => { tpl.draw.call(tpl, s); if (window._bg) window._bg(s); };
   await document.fonts.ready; window.drawAt(0); document.body.setAttribute('data-ready','1'); })();
 </script>
 </body>

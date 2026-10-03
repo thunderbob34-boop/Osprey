@@ -86,7 +86,12 @@
   "template": "text",
   "fields": {
    "headline": "One historian doubts the royal letter",
-   "sub": "His argument, not proven"
+   "sub": "His argument, not proven",
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 6
+   }
   },
   "visual": "Kinetic text: one historian doubts the royal letter, his argument, not proven.",
   "source": null
@@ -134,7 +139,12 @@
     "The letter is probably fake",
     "His argument, not proven"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 6
+   }
   },
   "visual": "Compare card: the story on the left, then \"probably fake, his argument, not proven\" reveals on the right.",
   "source": null
@@ -178,7 +188,12 @@
   "fields": {
    "number": "About 30 years",
    "label": "Pizza was described in print before the queen's supposed visit",
-   "sub": "The pizza came first"
+   "sub": "The pizza came first",
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 6
+   }
   },
   "visual": "Stat: \"About 30 years\" counts up; label: described in print before the queen's supposed visit.",
   "source": null
@@ -221,7 +236,12 @@
   "template": "text",
   "fields": {
    "headline": "The legend, the way it's usually told",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.25,
+    "span": 0.5
+   }
   },
   "visual": "Kinetic text: the legend, the way it's usually told.",
   "source": null
@@ -235,7 +255,12 @@
   "template": "date",
   "fields": {
    "date": "1889",
-   "caption": "The legend: Raffaele Esposito, pizza maker in Naples"
+   "caption": "The legend: Raffaele Esposito, pizza maker in Naples",
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.25,
+    "span": 0.5
+   }
   },
   "visual": "Date stamps in: 1889, with the legend caption naming Raffaele Esposito.",
   "source": null
@@ -410,7 +435,12 @@
    "right_lines": [
     "A letter from the palace, with a seal"
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.25,
+    "span": 0.5
+   }
   },
   "visual": "Compare card, step 1: \"A story\" lit, \"A document\" ghosted.",
   "source": null
@@ -432,7 +462,12 @@
    "right_lines": [
     "A letter from the palace, with a seal"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.25,
+    "span": 0.5
+   }
   },
   "visual": "Compare card, step 2: the \"document\" side is revealed.",
   "source": null
@@ -523,7 +558,12 @@
   "template": "text",
   "fields": {
    "headline": "Folklore, Fakelore, History: Invented Tradition and the Origins of the Pizza Margherita",
-   "sub": "Zachary Nowak, Food, Culture & Society, 2014"
+   "sub": "Zachary Nowak, Food, Culture & Society, 2014",
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.25,
+    "span": 1.2
+   }
   },
   "visual": "Kinetic text: the paper's title, with author and journal beneath.",
   "source": null,
@@ -539,7 +579,12 @@
   "fields": {
    "number": "3",
    "label": "problems with the letter, in Nowak's argument",
-   "sub": "His argument, not proven"
+   "sub": "His argument, not proven",
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.25,
+    "span": 1.2
+   }
   },
   "visual": "Stat: \"3\" counts up; label: problems with the letter, in Nowak's argument.",
   "source": null
@@ -639,7 +684,12 @@
    "right_lines": [
     "His wife's surname: Brandi"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.25,
+    "span": 1.2
+   }
   },
   "visual": "Compare card: his own surname, Esposito, against his wife's surname, Brandi, per Nowak.",
   "source": null
@@ -864,7 +914,12 @@
    ],
    "scale": "years",
    "highlight": 0,
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 40.84,
+    "lon": 14.25,
+    "span": 0.4
+   }
   },
   "visual": "Timeline, step 1: the axis draws and 1889 pops in; 1930s waits ghosted.",
   "source": null,
@@ -891,7 +946,12 @@
    ],
    "scale": "years",
    "highlight": 1,
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 40.84,
+    "lon": 14.25,
+    "span": 0.4
+   }
   },
   "visual": "Timeline, step 2: the 1930s pops in, labelled per Nowak.",
   "source": null,
@@ -935,7 +995,12 @@
     }
    ],
    "caption": "Nowak's argument, not proven",
-   "arrows": true
+   "arrows": true,
+   "bgmap": {
+    "lat": 40.84,
+    "lon": 14.25,
+    "span": 0.4
+   }
   },
   "visual": "Flow: a palace thank-you letter, an arrow, marketing for a pizzeria; caption says it is his argument, not proven.",
   "source": null
@@ -949,7 +1014,12 @@
   "template": "text",
   "fields": {
    "headline": "Careful here",
-   "sub": "Nowak's argument, not proven"
+   "sub": "Nowak's argument, not proven",
+   "bgmap": {
+    "lat": 40.84,
+    "lon": 14.25,
+    "span": 0.4
+   }
   },
   "visual": "Kinetic text: careful here, Nowak's argument, not proven.",
   "source": null
@@ -1000,7 +1070,12 @@
    "right_lines": [
     "Not proven"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 40.84,
+    "lon": 14.25,
+    "span": 0.4
+   }
   },
   "visual": "Compare card: \"Who made it? Not proven\" and \"When? Not proven\".",
   "source": null
@@ -1132,7 +1207,12 @@
    "step": 1,
    "highlight": 1,
    "caption": "Nowak's argument, not proven",
-   "arrows": false
+   "arrows": false,
+   "bgmap": {
+    "lat": 40.84,
+    "lon": 14.25,
+    "span": 0.4
+   }
   },
   "visual": "Flow, box 1: \"Probably fake\".",
   "source": null,
@@ -1160,7 +1240,12 @@
    "step": 2,
    "highlight": 2,
    "caption": "Not one word stronger",
-   "arrows": false
+   "arrows": false,
+   "bgmap": {
+    "lat": 40.84,
+    "lon": 14.25,
+    "span": 0.4
+   }
   },
   "visual": "Flow, box 2 builds in: \"Likely the Brandi family\". Caption: not one word stronger.",
   "source": null,
@@ -1245,7 +1330,12 @@
    ],
    "highlight": 2,
    "caption": "A book about the customs of Naples",
-   "arrows": false
+   "arrows": false,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 3
+   }
   },
   "visual": "Flow: two boxes, \"Francesco de Bourcard, editor\" and \"Emmanuele Rocco, Neapolitan writer\".",
   "source": null,
@@ -1319,7 +1409,12 @@
    "right_label": "The queen's supposed visit",
    "right_date": "1889",
    "gap": "three decades",
-   "firsttag": false
+   "firsttag": false,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 3
+   }
   },
   "visual": "Datecard: a line draws from 1858 to 1889 and the gap label \"three decades\" appears.",
   "source": null
@@ -1333,7 +1428,12 @@
   "template": "text",
   "fields": {
    "headline": "Fair to the evidence",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 3
+   }
   },
   "visual": "Kinetic text: fair to the evidence.",
   "source": null
@@ -1378,7 +1478,12 @@
   "template": "text",
   "fields": {
    "headline": "Rocco doesn't call it a Margherita",
-   "sub": "He doesn't use that name"
+   "sub": "He doesn't use that name",
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 3
+   }
   },
   "visual": "Kinetic text: Rocco doesn't call it a Margherita, he doesn't use that name.",
   "source": null
@@ -1399,7 +1504,12 @@
    "right_lines": [
     "It doesn't"
    ],
-   "step": 1
+   "step": 1,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 3
+   }
   },
   "visual": "Compare card, step 1: the online claim lit, \"The book\" ghosted.",
   "source": null
@@ -1420,7 +1530,12 @@
    "right_lines": [
     "It doesn't"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 3
+   }
   },
   "visual": "Compare card, step 2: \"The book: it doesn't\" is revealed.",
   "source": null
@@ -1490,7 +1605,12 @@
    "right_lines": [
     "Tomato, mozzarella and basil"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.27,
+    "span": 3
+   }
   },
   "visual": "Compare card: Rocco's 1858 toppings beside the legend's toppings.",
   "source": null
@@ -1533,7 +1653,12 @@
   "template": "text",
   "fields": {
    "headline": "Fair to Raffaele Esposito: what we don't know",
-   "sub": ""
+   "sub": "",
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.25,
+    "span": 0.8
+   }
   },
   "visual": "Kinetic text: fair to Raffaele Esposito, what we don't know.",
   "source": null
@@ -1725,7 +1850,12 @@
    "right_lines": [
     "Esposito himself"
    ],
-   "step": 2
+   "step": 2,
+   "bgmap": {
+    "lat": 40.85,
+    "lon": 14.25,
+    "span": 0.8
+   }
   },
   "visual": "Compare card: Nowak's case against \"Not a case against Esposito himself\".",
   "source": null
@@ -1854,7 +1984,12 @@
   "template": "date",
   "fields": {
    "date": "1889",
-   "caption": "The famous story: Raffaele Esposito, pizza Margherita, Queen Margherita"
+   "caption": "The famous story: Raffaele Esposito, pizza Margherita, Queen Margherita",
+   "bgmap": {
+    "lat": 41.5,
+    "lon": 13,
+    "span": 8
+   }
   },
   "visual": "Date stamps in: 1889, with the famous-story caption.",
   "source": null
@@ -2026,7 +2161,12 @@
     }
    ],
    "scale": "years",
-   "highlight": "1858"
+   "highlight": "1858",
+   "bgmap": {
+    "lat": 41.5,
+    "lon": 13,
+    "span": 8
+   }
   },
   "visual": "Timeline spaced by years: 1858 (red), 1889, the 1930s.",
   "source": null,
