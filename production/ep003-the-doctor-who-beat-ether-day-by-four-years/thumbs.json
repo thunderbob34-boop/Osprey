@@ -1,0 +1,24 @@
+{
+ "A": {
+  "layout": "versus",
+  "left": {
+   "label": "ARCHIVAL PORTRAIT<br>William Morton",
+   "asset": "thumb-left"
+  },
+  "stamp": "NOT FIRST",
+  "right": {
+   "label": "ARCHIVAL PORTRAIT<br>Crawford Long",
+   "asset": "thumb-right"
+  },
+  "red": "LONG \u00b7 1842",
+  "sub": "4 years before Boston"
+ },
+ "B": {
+  "layout": "headline",
+  "headline": "Ether Day<br>was 4 years<br>late.",
+  "top": 110,
+  "redTop": 470,
+  "red": "WHO WAS FIRST?",
+  "svg": "<path d=\"M260,170 h80 v90 l90,170 a30,30 0 0 1 -26,44 h-208 a30,30 0 0 1 -26,-44 l90,-170 z\" fill=\"none\" stroke=\"#1D1B18\" stroke-width=\"12\" stroke-linejoin=\"round\"/><rect x=\"245\" y=\"140\" width=\"110\" height=\"34\" fill=\"#1D1B18\"/><path d=\"M196,390 h208 l34,64 a14,14 0 0 1 -12,20 h-252 a14,14 0 0 1 -12,-20 z\" fill=\"#2F5D7C\" opacity=\".55\"/>"
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "A": {
+  "layout": "versus",
+  "left": {
+   "label": "THE 1889 LETTER<br>(archival scan)",
+   "asset": "thumb-left"
+  },
+  "stamp": "PROBABLY FAKE",
+  "stampLeft": 50,
+  "right": {
+   "label": "ARCHIVAL PORTRAIT<br>Queen Margherita",
+   "asset": "thumb-right"
+  },
+  "red": "IN PRINT \u00b7 1858",
+  "sub": "about 30 years earlier",
+  "stampSize": 60
+ },
+ "B": {
+  "layout": "headline",
+  "headline": "The pizza<br>letter was<br>probably fake.",
+  "top": 110,
+  "redTop": 470,
+  "red": "THE PIZZA CAME FIRST",
+  "svg": "<circle cx=\"310\" cy=\"340\" r=\"210\" fill=\"#E6C98A\" stroke=\"#1D1B18\" stroke-width=\"12\"/><circle cx=\"310\" cy=\"340\" r=\"175\" fill=\"#A8261B\" opacity=\".85\"/><circle cx=\"240\" cy=\"280\" r=\"34\" fill=\"#F4F0E6\"/><circle cx=\"370\" cy=\"260\" r=\"34\" fill=\"#F4F0E6\"/><circle cx=\"300\" cy=\"380\" r=\"34\" fill=\"#F4F0E6\"/><circle cx=\"400\" cy=\"400\" r=\"34\" fill=\"#F4F0E6\"/><circle cx=\"220\" cy=\"410\" r=\"34\" fill=\"#F4F0E6\"/><ellipse cx=\"300\" cy=\"250\" rx=\"22\" ry=\"12\" fill=\"#3F6B3A\" transform=\"rotate(30 300 250)\"/><ellipse cx=\"250\" cy=\"350\" rx=\"22\" ry=\"12\" fill=\"#3F6B3A\" transform=\"rotate(30 250 350)\"/><ellipse cx=\"380\" cy=\"330\" rx=\"22\" ry=\"12\" fill=\"#3F6B3A\" transform=\"rotate(30 380 330)\"/><ellipse cx=\"330\" cy=\"450\" rx=\"22\" ry=\"12\" fill=\"#3F6B3A\" transform=\"rotate(30 330 450)\"/>"
+ }
+}

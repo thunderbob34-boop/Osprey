@@ -1,0 +1,22 @@
+{
+ "A": {
+  "layout": "versus",
+  "left": {
+   "label": "ARCHIVAL PORTRAIT<br>George Stephenson",
+   "asset": "thumb-left"
+  },
+  "stamp": "NOT FIRST",
+  "right": {
+   "label": "ARCHIVAL PORTRAIT<br>Richard Trevithick",
+   "asset": "thumb-right"
+  },
+  "red": "TREVITHICK \u00b7 1804",
+  "sub": "25 years before Rocket"
+ },
+ "B": {
+  "layout": "headline",
+  "headline": "Stephenson<br>wasn't first.",
+  "red": "SO WHO WAS?",
+  "svg": "<line x1=\"60\" y1=\"520\" x2=\"560\" y2=\"520\" stroke=\"#1D1B18\" stroke-width=\"10\"/><line x1=\"60\" y1=\"560\" x2=\"560\" y2=\"560\" stroke=\"#1D1B18\" stroke-width=\"10\"/><rect x=\"80\" y=\"505\" width=\"22\" height=\"70\" fill=\"#9A7B3C\"/><rect x=\"140\" y=\"505\" width=\"22\" height=\"70\" fill=\"#9A7B3C\"/><rect x=\"200\" y=\"505\" width=\"22\" height=\"70\" fill=\"#9A7B3C\"/><rect x=\"260\" y=\"505\" width=\"22\" height=\"70\" fill=\"#9A7B3C\"/><rect x=\"320\" y=\"505\" width=\"22\" height=\"70\" fill=\"#9A7B3C\"/><rect x=\"380\" y=\"505\" width=\"22\" height=\"70\" fill=\"#9A7B3C\"/><rect x=\"440\" y=\"505\" width=\"22\" height=\"70\" fill=\"#9A7B3C\"/><rect x=\"500\" y=\"505\" width=\"22\" height=\"70\" fill=\"#9A7B3C\"/><rect x=\"150\" y=\"300\" width=\"300\" height=\"140\" fill=\"#1D1B18\"/><rect x=\"380\" y=\"200\" width=\"44\" height=\"100\" fill=\"#1D1B18\"/><circle cx=\"210\" cy=\"455\" r=\"55\" fill=\"none\" stroke=\"#1D1B18\" stroke-width=\"14\"/><circle cx=\"390\" cy=\"455\" r=\"55\" fill=\"none\" stroke=\"#1D1B18\" stroke-width=\"14\"/><circle cx=\"402\" cy=\"160\" r=\"34\" fill=\"#8B8170\" opacity=\".5\"/><circle cx=\"440\" cy=\"110\" r=\"44\" fill=\"#8B8170\" opacity=\".35\"/>"
+ }
+}

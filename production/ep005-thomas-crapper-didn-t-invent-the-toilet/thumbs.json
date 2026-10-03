@@ -1,0 +1,24 @@
+{
+ "A": {
+  "layout": "versus",
+  "left": {
+   "label": "ARCHIVAL PORTRAIT<br>Thomas Crapper",
+   "asset": "thumb-left"
+  },
+  "stamp": "NOT FIRST",
+  "right": {
+   "label": "ARCHIVAL PORTRAIT<br>John Harington",
+   "asset": "thumb-right"
+  },
+  "red": "HARINGTON \u00b7 1596",
+  "sub": "nearly 3 centuries earlier"
+ },
+ "B": {
+  "layout": "headline",
+  "headline": "Crapper didn't<br>invent the<br>toilet.",
+  "top": 110,
+  "redTop": 470,
+  "red": "SO WHO DID?",
+  "svg": "<rect x=\"200\" y=\"90\" width=\"220\" height=\"110\" rx=\"8\" fill=\"#1D1B18\"/><line x1=\"410\" y1=\"200\" x2=\"410\" y2=\"330\" stroke=\"#9A7B3C\" stroke-width=\"6\"/><circle cx=\"410\" cy=\"345\" r=\"16\" fill=\"#9A7B3C\"/><rect x=\"292\" y=\"200\" width=\"36\" height=\"230\" fill=\"#1D1B18\"/><path d=\"M190,430 h240 l-30,110 h-180 z\" fill=\"none\" stroke=\"#1D1B18\" stroke-width=\"12\" stroke-linejoin=\"round\"/><rect x=\"170\" y=\"420\" width=\"280\" height=\"22\" fill=\"#1D1B18\"/>"
+ }
+}

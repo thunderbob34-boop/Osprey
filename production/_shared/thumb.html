@@ -3,22 +3,28 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:1280px;height:720px;overflow:hidden;background:#EFE7D6;font-family:Inter,Arial}
-.ph{position:absolute;background:#2B2924;border:4px dashed #8B8170;color:#E0B85A;font:800 22px Inter,Arial,sans-serif;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;letter-spacing:.08em}
-.stamp{position:absolute;border:10px solid #A8261B;color:#A8261B;font:900 92px Inter,Arial,sans-serif;padding:4px 26px;letter-spacing:.04em;transform:rotate(-12deg);background:rgba(239,231,214,.55)}
-.name{position:absolute;font:700 96px 'Libre Baskerville',serif;color:#1D1B18}
+.ph{position:absolute;background:#2B2924;border:4px dashed #8B8170;color:#E0B85A;font:800 22px Inter,Arial,sans-serif;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;letter-spacing:.08em;overflow:hidden}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1) sepia(.15)}
+.ph.real{border:none}
+.stamp{position:absolute;border:10px solid #A8261B;color:#A8261B;font:900 84px Inter,Arial,sans-serif;padding:4px 26px;letter-spacing:.04em;transform:rotate(-12deg);background:rgba(239,231,214,.6);white-space:nowrap}
+.name{position:absolute;font:700 84px/1.1 'Libre Baskerville',serif;color:#1D1B18}
 .small{position:absolute;font:900 44px Inter,Arial,sans-serif;color:#1D1B18;letter-spacing:.02em}
 .bar{position:absolute;left:0;right:0;bottom:0;height:16px;background:#A8261B}
 </style></head><body><script>
-const v=location.hash.slice(1);
-if(v==='A'){document.body.innerHTML=`
-<div class="ph" style="left:40px;top:60px;width:560px;height:600px">ARCHIVAL PORTRAIT<br>Thomas Edison<br>(LoC 89714703)</div>
-<div class="stamp" style="left:110px;top:270px">NOT FIRST</div>
-<div class="ph" style="left:760px;top:60px;width:480px;height:420px">ARCHIVAL PORTRAIT<br>Joseph Swan</div>
-<div class="small" style="left:760px;top:510px;color:#A8261B">SWAN · FEB 1879</div>
-<div class="small" style="left:760px;top:570px;font-size:36px">months before Edison</div><div class="bar"></div>`}
-else{document.body.innerHTML=`
-<svg width="1280" height="720" style="position:absolute;inset:0"><circle cx="330" cy="300" r="190" fill="#F2C14E" opacity=".25"/><circle cx="330" cy="300" r="150" fill="none" stroke="#1D1B18" stroke-width="12"/><path d="M290,380 C290,250 370,250 370,380" fill="none" stroke="#1D1B18" stroke-width="10"/><rect x="280" y="450" width="100" height="90" fill="#1D1B18"/></svg>
-<div class="name" style="left:600px;top:150px;font-size:84px;line-height:1.1">Edison didn't<br>invent it.</div>
-<div class="small" style="left:604px;top:420px;color:#A8261B">SO WHO DID?</div><div class="bar"></div>`}
-document.fonts.ready.then(()=>document.body.setAttribute('data-ready','1'))
+// Spec arrives as base64 JSON in the hash.
+// layout "versus": {left:{label,img?}, stamp, right:{label,img?}, red, sub}
+// layout "headline": {headline, red, svg}
+const D=JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1)))));
+const box=(o,st)=>`<div class="ph${o.img?' real':''}" style="${st}">${o.img?`<img src="${o.img}">`:o.label}</div>`;
+if(D.layout==='versus'){document.body.innerHTML=
+ box(D.left,'left:40px;top:60px;width:560px;height:600px')+
+ `<div class="stamp" style="left:${D.stampLeft||90}px;top:290px;${D.stampSize?`font-size:${D.stampSize}px`:""}">${D.stamp}</div>`+
+ box(D.right,'left:760px;top:60px;width:480px;height:420px')+
+ `<div class="small" style="left:760px;top:510px;color:#A8261B">${D.red}</div>
+ <div class="small" style="left:760px;top:570px;font-size:36px">${D.sub}</div><div class="bar"></div>`}
+else{document.body.innerHTML=
+ `<svg width="1280" height="720" style="position:absolute;inset:0">${D.svg||''}</svg>
+ <div class="name" style="left:600px;top:${D.top||150}px">${D.headline}</div>
+ <div class="small" style="left:604px;top:${D.redTop||440}px;color:#A8261B">${D.red}</div><div class="bar"></div>`}
+Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{}))]).then(()=>document.body.setAttribute('data-ready','1'))
 </script></body></html>

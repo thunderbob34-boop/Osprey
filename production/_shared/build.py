@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Build the Episode 1 package from shotlist.json + vo/vo-manifest.json.
+"""Build one episode package from <ep>/shotlist.json + <ep>/vo/vo-manifest.json + <ep>/episode.json.
 
 Steps: check the shot list against the script, time every beat from the real
 narration durations, render graphics, build PREVIEW.mp4 (animatic) and the
 Resolve timeline (.fcpxml), validate, and write SHOT-LIST.md + PENDING-ASSETS.md.
 
-Usage: python3 templates/build.py [--base /Users/gus/.../ep001-folder] [--skip-render]
+Usage: python3 production/_shared/build.py --ep production/ep00X-... [--base /Users/gus/.../ep-folder] [--skip-render]
 """
 import json, os, re, subprocess, sys, html
 from pathlib import Path
