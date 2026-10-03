@@ -75,6 +75,7 @@ for b in beats:
     if TB:
         year = b.get('year', prev_year)
         tb = {**TB, 'from': prev_year if prev_year is not None else year, 'to': year}; prev_year = year
+        if b.get('year_label'): tb['label'] = b['year_label']   # hedged marker text, e.g. 'late 1800s'
     timed.append({'id': b['id'], 'template': b['template'], 'fields': b.get('fields') or {}, 'source': b.get('source') or {},
                   'frames': b['frames'], 'fps': FPS, **({'timebar': tb} if tb else {}), **({'img': asset_path(b)} if asset_path(b) else {})})
 (EP / 'build').mkdir(exist_ok=True)
