@@ -1618,8 +1618,8 @@
     },
     {
      "name": "North Sea",
-     "lat": 55.0,
-     "lon": 0.9,
+     "lat": 54.0,
+     "lon": 1.2,
      "kind": "sea"
     },
     {
@@ -1798,8 +1798,8 @@
     },
     {
      "name": "North Sea",
-     "lat": 55.0,
-     "lon": 0.9,
+     "lat": 54.0,
+     "lon": 1.2,
      "kind": "sea"
     }
    ],
@@ -1998,8 +1998,8 @@
     },
     {
      "name": "North Sea",
-     "lat": 55.0,
-     "lon": 0.9,
+     "lat": 54.0,
+     "lon": 1.2,
      "kind": "sea"
     }
    ],
@@ -2168,8 +2168,8 @@
     },
     {
      "name": "North Sea",
-     "lat": 55.0,
-     "lon": 0.9,
+     "lat": 54.0,
+     "lon": 1.2,
      "kind": "sea"
     }
    ],
@@ -2367,8 +2367,8 @@
     },
     {
      "name": "North Sea",
-     "lat": 55.0,
-     "lon": 0.9,
+     "lat": 54.0,
+     "lon": 1.2,
      "kind": "sea"
     }
    ],
@@ -2535,8 +2535,8 @@
     },
     {
      "name": "North Sea",
-     "lat": 55.0,
-     "lon": 0.9,
+     "lat": 54.0,
+     "lon": 1.2,
      "kind": "sea"
     }
    ],
