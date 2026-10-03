@@ -10,14 +10,7 @@
   "fields": {
    "title": "The United States",
    "caption": "Who gave us the railroad?",
-   "pins": [
-    {
-     "name": "New York",
-     "lat": 40.71,
-     "lon": -74.0,
-     "at": 1.4
-    }
-   ],
+   "pins": [],
    "labels": [
     {
      "name": "United States",
@@ -45,8 +38,9 @@
    "borders": true,
    "note": "Coastlines: Natural Earth · positions approximate"
   },
-  "visual": "Map flies in over the United States; New York is marked. Geography only, no claim.",
-  "source": null
+  "visual": "Map flies in over the United States for orientation; no pins, geography only.",
+  "source": null,
+  "year_label": "1860s"
  },
  {
   "id": "01-b",
@@ -76,7 +70,8 @@
    "rights": "Public domain",
    "credit": "Mathew Brady studio / Wikimedia Commons",
    "verified": true
-  }
+  },
+  "year_label": "1860s"
  },
  {
   "id": "01-c",
@@ -92,7 +87,8 @@
    "sub": ""
   },
   "visual": "Big stamped-in \"1860s\" with the hedge \"in a big way\" in the caption.",
-  "source": null
+  "source": null,
+  "year_label": "1860s"
  },
  {
   "id": "01-d",
@@ -466,7 +462,7 @@
   "fields": {
    "kind": "print",
    "label": "The Rainhill Trials",
-   "lower": "The Rainhill Trials, October 1829 (Illustrated London News)",
+   "lower": "The Rainhill Trials, 1829 (later print, Illustrated London News)",
    "asset": "rainhill_iln",
    "crop": "Slow push-in on the middle of the print",
    "zoom": {
@@ -541,11 +537,11 @@
   "fields": {
    "kind": "print",
    "label": "The Rainhill Trials",
-   "lower": "A famous contest: the Rainhill Trials, October 1829 (Illustrated London News)",
+   "lower": "A famous contest: the Rainhill Trials, 1829 (later print, Illustrated London News)",
    "asset": "rainhill_iln",
    "crop": "Close push-in toward the right of the print",
    "zoom": {
-    "scale": 1.25,
+    "scale": 1.2,
     "x": 70,
     "y": 45
    }
@@ -860,14 +856,14 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Penydarren replica",
-   "lower": "About seventy men climbed on and hitched a ride (the Penydarren replica, modern photograph)",
-   "asset": "replica_2",
-   "crop": "Push-in on the middle of the replica",
+   "label": "The old Penydarren tramroad route",
+   "lower": "The old Penydarren tramroad route at Quakers Yard (modern photograph)",
+   "asset": "tramroad_quakers",
+   "crop": "Gentle push-in along the old tramroad route",
    "zoom": {
-    "scale": 1.3,
-    "x": 55,
-    "y": 50
+    "scale": 1.05,
+    "x": 50,
+    "y": 55
    },
    "counters": [
     {
@@ -876,15 +872,16 @@
     }
    ]
   },
-  "visual": "Second replica photo; chip for the men.",
+  "visual": "Modern photo of the old tramroad route at Quakers Yard; the men chip pops in.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Penydarren replica at NRM 01.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Penydarren_replica_at_NRM_01.jpg",
-   "rights": "CC BY-SA 4.0",
-   "credit": "Thryduulf / Wikimedia Commons",
+   "item": "Penydarren tramway at Quakers Yard Viaduct - geograph.org.uk - 85780.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Penydarren_tramway_at_Quakers_Yard_Viaduct_-_geograph.org.uk_-_85780.jpg",
+   "rights": "CC BY-SA 2.0",
+   "credit": "nantcoly / geograph.org.uk",
    "verified": true
-  }
+  },
+  "notes": "The photo shows the route today, not the 1804 run."
  },
  {
   "id": "03-f",
@@ -955,7 +952,6 @@
      "style": "rail",
      "at": 1.2,
      "dur": 2.6,
-     "icon": "train",
      "label": "The tramroad (route approximate)",
      "lx": 30
     }
@@ -981,7 +977,7 @@
    "borders": true,
    "note": "Route approximate · Coastlines: Natural Earth"
   },
-  "visual": "Map: the tramroad draws from Penydarren to Abercynon, a train icon riding the head.",
+  "visual": "Map: the tramroad draws from Penydarren to Abercynon (route approximate).",
   "source": null
  },
  {
@@ -994,14 +990,14 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Penydarren replica",
-   "lower": "Nearly five miles an hour doesn't sound like much (the Penydarren replica, modern photograph)",
-   "asset": "replica_3",
-   "crop": "Push-in on the engine from the side",
+   "label": "The former Merthyr Tramroad",
+   "lower": "The former Merthyr Tramroad at Merthyr Vale (modern photograph)",
+   "asset": "tramroad_merthyrvale",
+   "crop": "Gentle push-in on the left of the old trackbed",
    "zoom": {
-    "scale": 1.3,
-    "x": 50,
-    "y": 52
+    "scale": 1.1,
+    "x": 40,
+    "y": 55
    },
    "counters": [
     {
@@ -1010,15 +1006,16 @@
     }
    ]
   },
-  "visual": "Third replica photo; speed chip.",
+  "visual": "Modern photo of the former tramroad at Merthyr Vale; speed chip.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_%286635994787%29.jpg",
+   "item": "Former Merthyr Tramroad, Merthyr Vale - geograph.org.uk - 3025356.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Former_Merthyr_Tramroad%2C_Merthyr_Vale_-_geograph.org.uk_-_3025356.jpg",
    "rights": "CC BY-SA 2.0",
-   "credit": "Hugh Llewelyn / Wikimedia Commons",
+   "credit": "Jaggery / geograph.org.uk",
    "verified": true
-  }
+  },
+  "notes": "The photo shows the route today, not the 1804 run."
  },
  {
   "id": "03-h",
@@ -1026,29 +1023,97 @@
   "section_name": "Penydarren, 1804",
   "text": "But the speed isn't the point, the point is that a steam engine pulled",
   "year": 1804,
-  "type": "photo",
-  "template": "archival",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "kind": "photo",
-   "label": "Penydarren replica",
-   "lower": "The speed isn't the point (a working replica of Trevithick's Penydarren locomotive, modern photograph)",
-   "asset": "replica_1",
-   "crop": "Push-in on the wheels and boiler, from the right",
-   "zoom": {
-    "scale": 1.5,
-    "x": 65,
-    "y": 60
-   }
+   "title": "Penydarren to Abercynon",
+   "caption": "The speed isn't the point",
+   "pins": [
+    {
+     "name": "Penydarren ironworks, Merthyr",
+     "lat": 51.7508,
+     "lon": -3.3758,
+     "at": 0.05
+    },
+    {
+     "name": "Abercynon",
+     "lat": 51.6443,
+     "lon": -3.3275,
+     "sub": "The canal",
+     "at": 0.05
+    }
+   ],
+   "routes": [
+    {
+     "points": [
+      [
+       51.7508,
+       -3.3758
+      ],
+      [
+       51.738,
+       -3.368
+      ],
+      [
+       51.718,
+       -3.359
+      ],
+      [
+       51.705,
+       -3.355
+      ],
+      [
+       51.69,
+       -3.348
+      ],
+      [
+       51.677,
+       -3.343
+      ],
+      [
+       51.668,
+       -3.334
+      ],
+      [
+       51.658,
+       -3.33
+      ],
+      [
+       51.6443,
+       -3.3275
+      ]
+     ],
+     "style": "rail",
+     "at": 0.05,
+     "dur": 0.4,
+     "label": "The tramroad (route approximate)",
+     "lx": 30
+    }
+   ],
+   "labels": [
+    {
+     "name": "Cardiff",
+     "lat": 51.4815,
+     "lon": -3.18,
+     "kind": "city",
+     "fit": true
+    },
+    {
+     "name": "Bristol Channel",
+     "lat": 51.4,
+     "lon": -3.0,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "span": 0.45,
+   "rivers": true,
+   "borders": true,
+   "note": "Route approximate · Coastlines: Natural Earth",
+   "from": false
   },
-  "visual": "Closer crop of replica 1.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "Replica of Trevithick's Penydarren locomotive - 2022-08-22.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Replica_of_Trevithick%27s_Penydarren_locomotive_-_2022-08-22.jpg",
-   "rights": "CC BY-SA 4.0",
-   "credit": "The wub / Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Same tramroad map as 03-f, already drawn: Penydarren to Abercynon, no fly-in.",
+  "source": null
  },
  {
   "id": "03-i",
@@ -1118,22 +1183,19 @@
   "type": "compare",
   "template": "compare",
   "fields": {
-   "left_title": "The first one people remember",
-   "left_lines": [
-    "Not the Penydarren run"
-   ],
-   "right_title": "The first one we know of",
+   "left_title": "Not the first one people remember",
+   "left_lines": [],
+   "right_title": "But the first one we know of",
    "right_lines": [
     "Penydarren, February 21, 1804"
    ],
-   "step": 2,
    "bgmap": {
     "lat": 51.7,
     "lon": -3.35,
     "span": 1.6
    }
   },
-  "visual": "Compare card: the first people remember versus the first we know of.",
+  "visual": "Compare card: not the first one people remember, but the first one we know of.",
   "source": null
  },
  {
@@ -1197,7 +1259,7 @@
   "fields": {
    "number": "500",
    "label": "guineas",
-   "sub": "The story goes: a bet between an ironmaster named Homfray and a rival ironmaster"
+   "sub": "The story goes: a bet between ironmaster Homfray and a rival. Guineas were British gold coins."
   },
   "visual": "\"500\" counts up; caption: guineas, with the Homfray bet hedged as the story goes.",
   "source": null
@@ -1223,13 +1285,13 @@
   "section_name": "The Catch",
   "text": "Now here's the catch, and it's a big one,",
   "year": 1804,
-  "type": "text",
-  "template": "text",
+  "type": "title",
+  "template": "title",
   "fields": {
-   "headline": "Here's the catch",
-   "sub": "It's a big one"
+   "title": "Here's the catch",
+   "subtitle": "And it's a big one"
   },
-  "visual": "Kinetic text card: Here is the catch.",
+  "visual": "Section-opening title: words build in.",
   "source": null
  },
  {
@@ -1275,13 +1337,12 @@
    "left_lines": [
     "Hard"
    ],
-   "right_title": "Cast iron",
+   "right_title": "But brittle",
    "right_lines": [
-    "Brittle"
-   ],
-   "step": 2
+    "It cracks instead of bending"
+   ]
   },
-  "visual": "Compare card: cast iron is hard but brittle.",
+  "visual": "Compare card: cast iron is hard, but brittle.",
   "source": null
  },
  {
@@ -1295,7 +1356,7 @@
   "fields": {
    "kind": "photo",
    "label": "The former Merthyr Tramroad",
-   "lower": "It cracks instead of bending (the former Merthyr Tramroad at Merthyr Vale, modern photograph)",
+   "lower": "The former Merthyr Tramroad at Merthyr Vale (modern photograph)",
    "asset": "tramroad_merthyrvale",
    "crop": "Slow push-in along the old trackbed",
    "zoom": {
@@ -1325,25 +1386,26 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Penydarren replica",
-   "lower": "You can't run a railway on track that keeps breaking (the Penydarren replica, modern photograph)",
-   "asset": "replica_3",
-   "crop": "Push-in on the front wheels",
+   "label": "The old Penydarren tramroad route",
+   "lower": "The old Penydarren tramroad route at Quakers Yard (modern photograph)",
+   "asset": "tramroad_quakers",
+   "crop": "Gentle push-in toward the left of the route",
    "zoom": {
-    "scale": 1.5,
-    "x": 35,
-    "y": 62
+    "scale": 1.0,
+    "x": 30,
+    "y": 60
    }
   },
-  "visual": "Replica 3, tighter on the front.",
+  "visual": "Second, different crop of the Quakers Yard tramroad photo.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_%286635994787%29.jpg",
+   "item": "Penydarren tramway at Quakers Yard Viaduct - geograph.org.uk - 85780.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Penydarren_tramway_at_Quakers_Yard_Viaduct_-_geograph.org.uk_-_85780.jpg",
    "rights": "CC BY-SA 2.0",
-   "credit": "Hugh Llewelyn / Wikimedia Commons",
+   "credit": "nantcoly / geograph.org.uk",
    "verified": true
-  }
+  },
+  "notes": "The photo shows the route today, not the broken track."
  },
  {
   "id": "04-f",
@@ -1379,22 +1441,22 @@
   "fields": {
    "kind": "photo",
    "label": "Penydarren replica",
-   "lower": "It didn't stay a railway engine (a working replica of Trevithick's Penydarren locomotive, modern photograph)",
-   "asset": "replica_1",
-   "crop": "Slow pull-back style push-in on the whole replica",
+   "lower": "It didn't stay a railway engine (the Penydarren replica, modern photograph)",
+   "asset": "replica_3",
+   "crop": "Slow push-in on the whole replica",
    "zoom": {
-    "scale": 1.2,
+    "scale": 1.25,
     "x": 50,
-    "y": 48
+    "y": 52
    }
   },
-  "visual": "Replica 1, wide crop.",
+  "visual": "Push-in on a modern photo of the Penydarren replica.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Replica of Trevithick's Penydarren locomotive - 2022-08-22.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Replica_of_Trevithick%27s_Penydarren_locomotive_-_2022-08-22.jpg",
-   "rights": "CC BY-SA 4.0",
-   "credit": "The wub / Wikimedia Commons",
+   "item": "Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_%286635994787%29.jpg",
+   "rights": "CC BY-SA 2.0",
+   "credit": "Hugh Llewelyn / Wikimedia Commons",
    "verified": true
   }
  },
@@ -1455,10 +1517,10 @@
      "at": 99
     },
     {
-     "name": "Wylam, Northumberland",
+     "name": "Puffing Billy",
      "lat": 54.977,
      "lon": -1.814,
-     "sub": "1813-14",
+     "sub": "1813–14",
      "at": 99
     },
     {
@@ -1470,118 +1532,7 @@
      "side": "left"
     }
    ],
-   "routes": [
-    {
-     "points": [
-      [
-       54.67,
-       -1.728
-      ],
-      [
-       54.662,
-       -1.715
-      ],
-      [
-       54.648,
-       -1.69
-      ],
-      [
-       54.634,
-       -1.656
-      ],
-      [
-       54.628,
-       -1.64
-      ],
-      [
-       54.6,
-       -1.595
-      ],
-      [
-       54.54,
-       -1.564
-      ],
-      [
-       54.515,
-       -1.485
-      ],
-      [
-       54.52,
-       -1.4
-      ],
-      [
-       54.545,
-       -1.345
-      ],
-      [
-       54.566,
-       -1.32
-      ]
-     ],
-     "style": "rail",
-     "at": 99,
-     "dur": 3.0,
-     "label": "Stockton and Darlington Railway, 1825",
-     "lx": 70,
-     "ly": 25,
-     "icon": "train"
-    },
-    {
-     "points": [
-      [
-       53.402,
-       -2.965
-      ],
-      [
-       53.406,
-       -2.945
-      ],
-      [
-       53.404,
-       -2.91
-      ],
-      [
-       53.411,
-       -2.885
-      ],
-      [
-       53.413,
-       -2.764
-      ],
-      [
-       53.444,
-       -2.65
-      ],
-      [
-       53.462,
-       -2.588
-      ],
-      [
-       53.472,
-       -2.47
-      ],
-      [
-       53.481,
-       -2.37
-      ],
-      [
-       53.483,
-       -2.336
-      ],
-      [
-       53.477,
-       -2.257
-      ]
-     ],
-     "style": "rail",
-     "at": 99,
-     "dur": 2.0,
-     "label": "Liverpool and Manchester line",
-     "lx": 80,
-     "ly": 70,
-     "icon": "train"
-    }
-   ],
+   "routes": [],
    "labels": [
     {
      "name": "Irish Sea",
@@ -1599,7 +1550,7 @@
    "span": 2.5,
    "rivers": true,
    "borders": true,
-   "note": "Routes approximate · Coastlines: Natural Earth",
+   "note": "Positions approximate · Coastlines: Natural Earth",
    "from": {
     "lat": 51.9,
     "lon": -3.4,
@@ -1636,10 +1587,10 @@
      "at": 3.2
     },
     {
-     "name": "Wylam, Northumberland",
+     "name": "Puffing Billy",
      "lat": 54.977,
      "lon": -1.814,
-     "sub": "1813-14",
+     "sub": "1813–14",
      "at": 99
     },
     {
@@ -1651,118 +1602,7 @@
      "side": "left"
     }
    ],
-   "routes": [
-    {
-     "points": [
-      [
-       54.67,
-       -1.728
-      ],
-      [
-       54.662,
-       -1.715
-      ],
-      [
-       54.648,
-       -1.69
-      ],
-      [
-       54.634,
-       -1.656
-      ],
-      [
-       54.628,
-       -1.64
-      ],
-      [
-       54.6,
-       -1.595
-      ],
-      [
-       54.54,
-       -1.564
-      ],
-      [
-       54.515,
-       -1.485
-      ],
-      [
-       54.52,
-       -1.4
-      ],
-      [
-       54.545,
-       -1.345
-      ],
-      [
-       54.566,
-       -1.32
-      ]
-     ],
-     "style": "rail",
-     "at": 99,
-     "dur": 3.0,
-     "label": "Stockton and Darlington Railway, 1825",
-     "lx": 70,
-     "ly": 25,
-     "icon": "train"
-    },
-    {
-     "points": [
-      [
-       53.402,
-       -2.965
-      ],
-      [
-       53.406,
-       -2.945
-      ],
-      [
-       53.404,
-       -2.91
-      ],
-      [
-       53.411,
-       -2.885
-      ],
-      [
-       53.413,
-       -2.764
-      ],
-      [
-       53.444,
-       -2.65
-      ],
-      [
-       53.462,
-       -2.588
-      ],
-      [
-       53.472,
-       -2.47
-      ],
-      [
-       53.481,
-       -2.37
-      ],
-      [
-       53.483,
-       -2.336
-      ],
-      [
-       53.477,
-       -2.257
-      ]
-     ],
-     "style": "rail",
-     "at": 99,
-     "dur": 2.0,
-     "label": "Liverpool and Manchester line",
-     "lx": 80,
-     "ly": 70,
-     "icon": "train"
-    }
-   ],
+   "routes": [],
    "labels": [
     {
      "name": "Irish Sea",
@@ -1780,7 +1620,7 @@
    "span": 2.5,
    "rivers": true,
    "borders": true,
-   "note": "Routes approximate · Coastlines: Natural Earth",
+   "note": "Positions approximate · Coastlines: Natural Earth",
    "from": false
   },
   "visual": "Same map: a pin lands on the Middleton Railway in Leeds.",
@@ -1797,7 +1637,7 @@
   "fields": {
    "kind": "print",
    "label": "Middleton, Leeds, 1814",
-   "lower": "An engine called Salamanca, from Blenkinsop and Murray (print of a Blenkinsop and Murray engine at Middleton, Leeds, George Walker, 1814)",
+   "lower": "A Blenkinsop and Murray engine at Middleton, Leeds (print, George Walker, 1814)",
    "asset": "middleton_collier",
    "crop": "Slow push-in on the engine and wagons",
    "zoom": {
@@ -1844,10 +1684,10 @@
      "at": 0.05
     },
     {
-     "name": "Wylam, Northumberland",
+     "name": "Puffing Billy",
      "lat": 54.977,
      "lon": -1.814,
-     "sub": "1813-14",
+     "sub": "1813–14",
      "at": 99
     },
     {
@@ -1859,118 +1699,7 @@
      "side": "left"
     }
    ],
-   "routes": [
-    {
-     "points": [
-      [
-       54.67,
-       -1.728
-      ],
-      [
-       54.662,
-       -1.715
-      ],
-      [
-       54.648,
-       -1.69
-      ],
-      [
-       54.634,
-       -1.656
-      ],
-      [
-       54.628,
-       -1.64
-      ],
-      [
-       54.6,
-       -1.595
-      ],
-      [
-       54.54,
-       -1.564
-      ],
-      [
-       54.515,
-       -1.485
-      ],
-      [
-       54.52,
-       -1.4
-      ],
-      [
-       54.545,
-       -1.345
-      ],
-      [
-       54.566,
-       -1.32
-      ]
-     ],
-     "style": "rail",
-     "at": 99,
-     "dur": 3.0,
-     "label": "Stockton and Darlington Railway, 1825",
-     "lx": 70,
-     "ly": 25,
-     "icon": "train"
-    },
-    {
-     "points": [
-      [
-       53.402,
-       -2.965
-      ],
-      [
-       53.406,
-       -2.945
-      ],
-      [
-       53.404,
-       -2.91
-      ],
-      [
-       53.411,
-       -2.885
-      ],
-      [
-       53.413,
-       -2.764
-      ],
-      [
-       53.444,
-       -2.65
-      ],
-      [
-       53.462,
-       -2.588
-      ],
-      [
-       53.472,
-       -2.47
-      ],
-      [
-       53.481,
-       -2.37
-      ],
-      [
-       53.483,
-       -2.336
-      ],
-      [
-       53.477,
-       -2.257
-      ]
-     ],
-     "style": "rail",
-     "at": 99,
-     "dur": 2.0,
-     "label": "Liverpool and Manchester line",
-     "lx": 80,
-     "ly": 70,
-     "icon": "train"
-    }
-   ],
+   "routes": [],
    "labels": [
     {
      "name": "Irish Sea",
@@ -1988,7 +1717,7 @@
    "span": 2.5,
    "rivers": true,
    "borders": true,
-   "note": "Routes approximate · Coastlines: Natural Earth",
+   "note": "Positions approximate · Coastlines: Natural Earth",
    "from": false
   },
   "visual": "Same map, Middleton pin showing Salamanca; caption carries the hedge \"counted as\".",
@@ -2005,7 +1734,7 @@
   "fields": {
    "kind": "print",
    "label": "Middleton, Leeds, 1814",
-   "lower": "The first time a steam railway actually made money (print of a Blenkinsop and Murray engine at Middleton, Leeds, George Walker, 1814)",
+   "lower": "The first time a steam railway actually made money (a Blenkinsop and Murray engine at Middleton, Leeds, print, George Walker, 1814)",
    "asset": "middleton_collier",
    "crop": "Close push-in on the left of the print",
    "zoom": {
@@ -2051,10 +1780,10 @@
      "at": 0.05
     },
     {
-     "name": "Wylam, Northumberland",
+     "name": "Puffing Billy",
      "lat": 54.977,
      "lon": -1.814,
-     "sub": "Puffing Billy, 1813-14 · Hedley, Forster and Hackworth",
+     "sub": "1813–14 · Hedley, Forster and Hackworth",
      "at": 2.6
     },
     {
@@ -2066,118 +1795,7 @@
      "side": "left"
     }
    ],
-   "routes": [
-    {
-     "points": [
-      [
-       54.67,
-       -1.728
-      ],
-      [
-       54.662,
-       -1.715
-      ],
-      [
-       54.648,
-       -1.69
-      ],
-      [
-       54.634,
-       -1.656
-      ],
-      [
-       54.628,
-       -1.64
-      ],
-      [
-       54.6,
-       -1.595
-      ],
-      [
-       54.54,
-       -1.564
-      ],
-      [
-       54.515,
-       -1.485
-      ],
-      [
-       54.52,
-       -1.4
-      ],
-      [
-       54.545,
-       -1.345
-      ],
-      [
-       54.566,
-       -1.32
-      ]
-     ],
-     "style": "rail",
-     "at": 99,
-     "dur": 3.0,
-     "label": "Stockton and Darlington Railway, 1825",
-     "lx": 70,
-     "ly": 25,
-     "icon": "train"
-    },
-    {
-     "points": [
-      [
-       53.402,
-       -2.965
-      ],
-      [
-       53.406,
-       -2.945
-      ],
-      [
-       53.404,
-       -2.91
-      ],
-      [
-       53.411,
-       -2.885
-      ],
-      [
-       53.413,
-       -2.764
-      ],
-      [
-       53.444,
-       -2.65
-      ],
-      [
-       53.462,
-       -2.588
-      ],
-      [
-       53.472,
-       -2.47
-      ],
-      [
-       53.481,
-       -2.37
-      ],
-      [
-       53.483,
-       -2.336
-      ],
-      [
-       53.477,
-       -2.257
-      ]
-     ],
-     "style": "rail",
-     "at": 99,
-     "dur": 2.0,
-     "label": "Liverpool and Manchester line",
-     "lx": 80,
-     "ly": 70,
-     "icon": "train"
-    }
-   ],
+   "routes": [],
    "labels": [
     {
      "name": "Irish Sea",
@@ -2195,18 +1813,19 @@
    "span": 2.5,
    "rivers": true,
    "borders": true,
-   "note": "Routes approximate · Coastlines: Natural Earth",
+   "note": "Positions approximate · Coastlines: Natural Earth",
    "from": false
   },
   "visual": "Same map: a pin lands at Wylam for Puffing Billy.",
-  "source": null
+  "source": null,
+  "year_label": "1813–14"
  },
  {
   "id": "05-g",
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "and Puffing Billy is still around, it's the oldest surviving steam locomotive in the world.",
-  "year": 1814,
+  "year": 1813,
   "type": "photo",
   "template": "archival",
   "fields": {
@@ -2229,7 +1848,8 @@
    "rights": "CC BY-SA 4.0",
    "credit": "TarnishedPath / Wikimedia Commons",
    "verified": true
-  }
+  },
+  "year_label": "1813–14"
  },
  {
   "id": "05-h",
@@ -2242,7 +1862,7 @@
   "fields": {
    "kind": "painting",
    "label": "Stockton and Darlington Railway, 1825",
-   "lower": "Locomotion No. 1 opens the Stockton and Darlington, 1825 (painting by John Dobbin)",
+   "lower": "Locomotion No. 1 opens the Stockton and Darlington, 1825 (painting by John Dobbin, made later)",
    "asset": "sd_opening",
    "crop": "Slow push-in on the train",
    "zoom": {
@@ -2288,10 +1908,10 @@
      "at": 0.05
     },
     {
-     "name": "Wylam, Northumberland",
+     "name": "Puffing Billy",
      "lat": 54.977,
      "lon": -1.814,
-     "sub": "Puffing Billy, 1813-14",
+     "sub": "1813–14",
      "at": 0.05
     },
     {
@@ -2303,60 +1923,7 @@
      "side": "left"
     }
    ],
-   "routes": [
-    {
-     "points": [
-      [
-       53.402,
-       -2.965
-      ],
-      [
-       53.406,
-       -2.945
-      ],
-      [
-       53.404,
-       -2.91
-      ],
-      [
-       53.411,
-       -2.885
-      ],
-      [
-       53.413,
-       -2.764
-      ],
-      [
-       53.444,
-       -2.65
-      ],
-      [
-       53.462,
-       -2.588
-      ],
-      [
-       53.472,
-       -2.47
-      ],
-      [
-       53.481,
-       -2.37
-      ],
-      [
-       53.483,
-       -2.336
-      ],
-      [
-       53.477,
-       -2.257
-      ]
-     ],
-     "style": "rail",
-     "at": 0.6,
-     "dur": 1.3,
-     "icon": "dot"
-    }
-   ],
+   "routes": [],
    "labels": [
     {
      "name": "Irish Sea",
@@ -2374,10 +1941,10 @@
    "span": 2.5,
    "rivers": true,
    "borders": true,
-   "note": "Routes approximate · Coastlines: Natural Earth",
+   "note": "Positions approximate · Coastlines: Natural Earth",
    "from": false
   },
-  "visual": "Same map: the 1825 line stays drawn, Rainhill lights up and the Liverpool and Manchester line draws.",
+  "visual": "Same map: Rainhill lights up; the earlier pins stay.",
   "source": null
  },
  {
@@ -2497,7 +2064,7 @@
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "So here's the honest version. Trevithick was the first to show",
-  "year": 1804,
+  "year": 1829,
   "type": "photo",
   "template": "archival",
   "fields": {
@@ -2527,28 +2094,28 @@
   "section": "05",
   "section_name": "Who Made It Pay",
   "text": "a steam engine could pull a load on rails.",
-  "year": 1804,
-  "type": "photo",
+  "year": 1829,
+  "type": "print",
   "template": "archival",
   "fields": {
-   "kind": "photo",
-   "label": "Penydarren replica",
-   "lower": "A steam engine could pull a load on rails (the Penydarren replica, modern photograph)",
-   "asset": "replica_3",
-   "crop": "Slow push-in on the replica",
+   "kind": "print",
+   "label": "Penydarren ironworks, 1811",
+   "lower": "Penydarren ironworks, 1811 (print by John George Wood)",
+   "asset": "ironworks_1811",
+   "crop": "Gentle push-in toward the right of the print",
    "zoom": {
-    "scale": 1.2,
-    "x": 55,
+    "scale": 1.1,
+    "x": 70,
     "y": 50
    }
   },
-  "visual": "Replica 3 again, wider crop.",
+  "visual": "Third, different crop of the 1811 ironworks print.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_%286635994787%29.jpg",
-   "rights": "CC BY-SA 2.0",
-   "credit": "Hugh Llewelyn / Wikimedia Commons",
+   "item": "Penydarran iron works.jpeg",
+   "url": "https://commons.wikimedia.org/wiki/File:Penydarran_iron_works.jpeg",
+   "rights": "Public domain",
+   "credit": "John George Wood, 1811 / Wikimedia Commons",
    "verified": true
   }
  },
@@ -2723,28 +2290,28 @@
   "section": "06",
   "section_name": "How It Ended",
   "text": "So the man behind the first known railway journey by steam locomotive,",
-  "year": 1804,
+  "year": 1833,
   "type": "photo",
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Penydarren replica",
-   "lower": "The first known railway journey by steam locomotive (the Penydarren replica, modern photograph)",
-   "asset": "replica_2",
-   "crop": "Push-in on the right side of the replica",
+   "label": "Trevithick monument, Merthyr Tydfil",
+   "lower": "The Trevithick monument in Merthyr Tydfil (modern photograph)",
+   "asset": "trevithick_monument",
+   "crop": "Push-in on the base of the monument",
    "zoom": {
-    "scale": 1.3,
-    "x": 60,
-    "y": 55
+    "scale": 1.35,
+    "x": 45,
+    "y": 72
    }
   },
-  "visual": "Replica 2, from the right.",
+  "visual": "Fourth crop of the Trevithick monument, low on the base.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Penydarren replica at NRM 01.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Penydarren_replica_at_NRM_01.jpg",
+   "item": "Richard Trevithick monument in Merthyr Tydfil.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_monument_in_Merthyr_Tydfil.jpg",
    "rights": "CC BY-SA 4.0",
-   "credit": "Thryduulf / Wikimedia Commons",
+   "credit": "14GTR / Wikimedia Commons",
    "verified": true
   }
  },
@@ -2753,7 +2320,7 @@
   "section": "06",
   "section_name": "How It Ended",
   "text": "the man the national museum of Wales calls the real father of the railways,",
-  "year": 1804,
+  "year": 1833,
   "type": "compare",
   "template": "compare",
   "fields": {
@@ -2928,17 +2495,17 @@
   "section": "06",
   "section_name": "How It Ended",
   "text": "nearly ten miles, twenty-five years before Rocket won at Rainhill.",
-  "year": 1829,
+  "year": 1804,
   "type": "print",
   "template": "archival",
   "fields": {
    "kind": "print",
    "label": "The Rainhill Trials",
-   "lower": "Nearly ten miles, twenty-five years before Rocket won at Rainhill (the Rainhill Trials, October 1829, Illustrated London News)",
+   "lower": "Nearly ten miles, twenty-five years before Rocket won at Rainhill (the Rainhill Trials, 1829, later print, Illustrated London News)",
    "asset": "rainhill_iln",
    "crop": "Push-in on the left of the print",
    "zoom": {
-    "scale": 1.25,
+    "scale": 1.15,
     "x": 35,
     "y": 50
    }
