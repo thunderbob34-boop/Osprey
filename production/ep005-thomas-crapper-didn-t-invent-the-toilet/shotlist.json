@@ -374,7 +374,8 @@
     }
    ],
    "connect": false,
-   "caption": "The palace at Knossos, on the island of Crete"
+   "caption": "The palace at Knossos, on the island of Crete",
+   "span": 5
   },
   "visual": "Schematic map with one pin: Knossos, Crete.",
   "source": null,
@@ -483,7 +484,7 @@
   "id": "03-g",
   "section": "03",
   "section_name": "Knossos",
-  "text": "the water came from rainwater channelled from the roof, and through the drains,",
+  "text": "the water came from rainwater channelled from the roof,",
   "type": "flow",
   "template": "flow",
   "fields": {
@@ -513,7 +514,7 @@
   "id": "03-h",
   "section": "03",
   "section_name": "Knossos",
-  "text": "or somebody poured water in,",
+  "text": "and through the drains, or somebody poured water in,",
   "type": "flow",
   "template": "flow",
   "fields": {

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<fcpxml version="1.10">
+<resources>
+<format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>
+<format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>
+<asset id="g_01-a" name="01-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/01-a.png"/></asset>
+<asset id="g_01-b" name="01-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/01-b.png"/></asset>
+<asset id="g_01-c" name="01-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/01-c.png"/></asset>
+<asset id="g_01-d" name="01-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/01-d.png"/></asset>
+<asset id="g_01-e" name="01-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/01-e.png"/></asset>
+<asset id="g_01-f" name="01-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/01-f.png"/></asset>
+<asset id="g_01-g" name="01-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/01-g.png"/></asset>
+<asset id="g_01-h" name="01-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/01-h.png"/></asset>
+<asset id="g_01-i" name="01-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/01-i.png"/></asset>
+<asset id="g_02-a" name="02-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/02-a.png"/></asset>
+<asset id="g_02-b" name="02-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/02-b.png"/></asset>
+<asset id="g_02-c" name="02-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/02-c.png"/></asset>
+<asset id="g_02-d" name="02-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/02-d.png"/></asset>
+<asset id="g_02-e" name="02-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/02-e.png"/></asset>
+<asset id="g_02-f" name="02-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/02-f.png"/></asset>
+<asset id="g_02-g" name="02-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/02-g.png"/></asset>
+<asset id="g_02-h" name="02-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/02-h.png"/></asset>
+<asset id="g_02-i" name="02-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/02-i.png"/></asset>
+<asset id="g_03-a" name="03-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/03-a.png"/></asset>
+<asset id="g_03-b" name="03-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/03-b.png"/></asset>
+<asset id="g_03-c" name="03-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/03-c.png"/></asset>
+<asset id="g_03-d" name="03-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/03-d.png"/></asset>
+<asset id="g_03-e" name="03-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/03-e.png"/></asset>
+<asset id="g_03-f" name="03-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/03-f.png"/></asset>
+<asset id="g_03-g" name="03-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/03-g.png"/></asset>
+<asset id="g_03-h" name="03-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/03-h.png"/></asset>
+<asset id="g_03-i" name="03-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/03-i.png"/></asset>
+<asset id="g_04-a" name="04-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-a.png"/></asset>
+<asset id="g_04-b" name="04-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-b.png"/></asset>
+<asset id="g_04-c" name="04-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-c.png"/></asset>
+<asset id="g_04-d" name="04-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-d.png"/></asset>
+<asset id="g_04-e" name="04-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-e.png"/></asset>
+<asset id="g_04-f" name="04-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-f.png"/></asset>
+<asset id="g_04-g" name="04-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-g.png"/></asset>
+<asset id="g_04-h" name="04-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-h.png"/></asset>
+<asset id="g_04-i" name="04-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-i.png"/></asset>
+<asset id="g_04-j" name="04-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-j.png"/></asset>
+<asset id="g_04-k" name="04-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-k.png"/></asset>
+<asset id="g_05-a" name="05-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-a.png"/></asset>
+<asset id="g_05-b" name="05-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-b.png"/></asset>
+<asset id="g_05-c" name="05-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-c.png"/></asset>
+<asset id="g_05-d" name="05-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-d.png"/></asset>
+<asset id="g_05-e" name="05-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-e.png"/></asset>
+<asset id="g_05-f" name="05-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-f.png"/></asset>
+<asset id="g_05-g" name="05-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-g.png"/></asset>
+<asset id="g_05-h" name="05-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-h.png"/></asset>
+<asset id="g_05-i" name="05-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-i.png"/></asset>
+<asset id="g_05-j" name="05-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-j.png"/></asset>
+<asset id="g_05-k" name="05-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/05-k.png"/></asset>
+<asset id="g_06-a" name="06-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/06-a.png"/></asset>
+<asset id="g_06-b" name="06-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/06-b.png"/></asset>
+<asset id="g_06-c" name="06-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/06-c.png"/></asset>
+<asset id="g_06-d" name="06-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/06-d.png"/></asset>
+<asset id="g_06-e" name="06-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/06-e.png"/></asset>
+<asset id="g_06-f" name="06-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/06-f.png"/></asset>
+<asset id="g_06-g" name="06-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/06-g.png"/></asset>
+<asset id="g_07-a" name="07-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-a.png"/></asset>
+<asset id="g_07-b" name="07-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-b.png"/></asset>
+<asset id="g_07-c" name="07-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-c.png"/></asset>
+<asset id="g_07-d" name="07-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-d.png"/></asset>
+<asset id="g_07-e" name="07-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-e.png"/></asset>
+<asset id="g_07-f" name="07-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-f.png"/></asset>
+<asset id="g_07-g" name="07-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-g.png"/></asset>
+<asset id="g_07-h" name="07-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-h.png"/></asset>
+<asset id="g_07-i" name="07-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-i.png"/></asset>
+<asset id="g_07-j" name="07-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/07-j.png"/></asset>
+<asset id="vo_01" name="VO 01" start="0s" duration="1081/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/01-cold-open.mp3"/></asset>
+<asset id="vo_02" name="VO 02" start="0s" duration="1243/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/02-the-legend.mp3"/></asset>
+<asset id="vo_03" name="VO 03" start="0s" duration="50s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/03-the-letter.mp3"/></asset>
+<asset id="vo_04" name="VO 04" start="0s" duration="1711/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/04-who-made-it-up.mp3"/></asset>
+<asset id="vo_05" name="VO 05" start="0s" duration="70s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/05-the-pizza-was-already-there.mp3"/></asset>
+<asset id="vo_06" name="VO 06" start="0s" duration="1099/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/06-fair-credit.mp3"/></asset>
+<asset id="vo_07" name="VO 07" start="0s" duration="1428/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/vo/07-who-was-first.mp3"/></asset>
+</resources>
+<library>
+<event name="Somebody Did It First">
+<project name="The Pizza Margherita Letter Was Probably Fake">
+<sequence format="r1" duration="10162/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+<spine>
+<video ref="g_01-a" offset="0s" name="01-a" start="0s" duration="119/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="1081/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></video>
+<video ref="g_01-b" offset="119/30s" name="01-b" start="0s" duration="109/30s"></video>
+<video ref="g_01-c" offset="228/30s" name="01-c" start="0s" duration="79/30s"></video>
+<video ref="g_01-d" offset="307/30s" name="01-d" start="0s" duration="110/30s"></video>
+<video ref="g_01-e" offset="417/30s" name="01-e" start="0s" duration="168/30s"></video>
+<video ref="g_01-f" offset="585/30s" name="01-f" start="0s" duration="139/30s"></video>
+<video ref="g_01-g" offset="724/30s" name="01-g" start="0s" duration="129/30s"></video>
+<video ref="g_01-h" offset="853/30s" name="01-h" start="0s" duration="99/30s"></video>
+<video ref="g_01-i" offset="952/30s" name="01-i" start="0s" duration="129/30s"></video>
+<video ref="g_02-a" offset="1081/30s" name="02-a" start="0s" duration="106/30s"><asset-clip ref="vo_02" lane="-1" offset="0s" start="0s" duration="1243/30s" name="VO 02" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="02 The Legend"/></video>
+<video ref="g_02-b" offset="1187/30s" name="02-b" start="0s" duration="128/30s"></video>
+<video ref="g_02-c" offset="1315/30s" name="02-c" start="0s" duration="117/30s"></video>
+<video ref="g_02-d" offset="1432/30s" name="02-d" start="0s" duration="138/30s"></video>
+<video ref="g_02-e" offset="1570/30s" name="02-e" start="0s" duration="170/30s"></video>
+<video ref="g_02-f" offset="58s" name="02-f" start="0s" duration="127/30s"></video>
+<video ref="g_02-g" offset="1867/30s" name="02-g" start="0s" duration="117/30s"></video>
+<video ref="g_02-h" offset="1984/30s" name="02-h" start="0s" duration="149/30s"></video>
+<video ref="g_02-i" offset="2133/30s" name="02-i" start="0s" duration="191/30s"></video>
+<video ref="g_03-a" offset="2324/30s" name="03-a" start="0s" duration="170/30s"><asset-clip ref="vo_03" lane="-1" offset="0s" start="0s" duration="50s" name="VO 03" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="03 The Letter"/></video>
+<video ref="g_03-b" offset="2494/30s" name="03-b" start="0s" duration="117/30s"></video>
+<video ref="g_03-c" offset="2611/30s" name="03-c" start="0s" duration="202/30s"></video>
+<video ref="g_03-d" offset="2813/30s" name="03-d" start="0s" duration="139/30s"></video>
+<video ref="g_03-e" offset="2952/30s" name="03-e" start="0s" duration="170/30s"></video>
+<video ref="g_03-f" offset="3122/30s" name="03-f" start="0s" duration="223/30s"></video>
+<video ref="g_03-g" offset="3345/30s" name="03-g" start="0s" duration="96/30s"></video>
+<video ref="g_03-h" offset="3441/30s" name="03-h" start="0s" duration="202/30s"></video>
+<video ref="g_03-i" offset="3643/30s" name="03-i" start="0s" duration="181/30s"></video>
+<video ref="g_04-a" offset="3824/30s" name="04-a" start="0s" duration="118/30s"><asset-clip ref="vo_04" lane="-1" offset="0s" start="0s" duration="1711/30s" name="VO 04" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="04 Who Made It Up"/></video>
+<video ref="g_04-b" offset="3942/30s" name="04-b" start="0s" duration="149/30s"></video>
+<video ref="g_04-c" offset="4091/30s" name="04-c" start="0s" duration="5s"></video>
+<video ref="g_04-d" offset="4241/30s" name="04-d" start="0s" duration="257/30s"></video>
+<video ref="g_04-e" offset="4498/30s" name="04-e" start="0s" duration="267/30s"></video>
+<video ref="g_04-f" offset="4765/30s" name="04-f" start="0s" duration="118/30s"></video>
+<video ref="g_04-g" offset="4883/30s" name="04-g" start="0s" duration="139/30s"></video>
+<video ref="g_04-h" offset="5022/30s" name="04-h" start="0s" duration="107/30s"></video>
+<video ref="g_04-i" offset="5129/30s" name="04-i" start="0s" duration="171/30s"></video>
+<video ref="g_04-j" offset="5300/30s" name="04-j" start="0s" duration="107/30s"></video>
+<video ref="g_04-k" offset="5407/30s" name="04-k" start="0s" duration="128/30s"></video>
+<video ref="g_05-a" offset="5535/30s" name="05-a" start="0s" duration="201/30s"><asset-clip ref="vo_05" lane="-1" offset="0s" start="0s" duration="70s" name="VO 05" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="05 The Pizza Was Already There"/></video>
+<video ref="g_05-b" offset="5736/30s" name="05-b" start="0s" duration="212/30s"></video>
+<video ref="g_05-c" offset="5948/30s" name="05-c" start="0s" duration="189/30s"></video>
+<video ref="g_05-d" offset="6137/30s" name="05-d" start="0s" duration="177/30s"></video>
+<video ref="g_05-e" offset="6314/30s" name="05-e" start="0s" duration="165/30s"></video>
+<video ref="g_05-f" offset="6479/30s" name="05-f" start="0s" duration="130/30s"></video>
+<video ref="g_05-g" offset="6609/30s" name="05-g" start="0s" duration="212/30s"></video>
+<video ref="g_05-h" offset="6821/30s" name="05-h" start="0s" duration="142/30s"></video>
+<video ref="g_05-i" offset="6963/30s" name="05-i" start="0s" duration="212/30s"></video>
+<video ref="g_05-j" offset="7175/30s" name="05-j" start="0s" duration="224/30s"></video>
+<video ref="g_05-k" offset="7399/30s" name="05-k" start="0s" duration="236/30s"></video>
+<video ref="g_06-a" offset="7635/30s" name="06-a" start="0s" duration="134/30s"><asset-clip ref="vo_06" lane="-1" offset="0s" start="0s" duration="1099/30s" name="VO 06" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="06 Fair Credit"/></video>
+<video ref="g_06-b" offset="7769/30s" name="06-b" start="0s" duration="113/30s"></video>
+<video ref="g_06-c" offset="7882/30s" name="06-c" start="0s" duration="154/30s"></video>
+<video ref="g_06-d" offset="8036/30s" name="06-d" start="0s" duration="205/30s"></video>
+<video ref="g_06-e" offset="8241/30s" name="06-e" start="0s" duration="205/30s"></video>
+<video ref="g_06-f" offset="8446/30s" name="06-f" start="0s" duration="165/30s"></video>
+<video ref="g_06-g" offset="8611/30s" name="06-g" start="0s" duration="123/30s"></video>
+<video ref="g_07-a" offset="8734/30s" name="07-a" start="0s" duration="226/30s"><asset-clip ref="vo_07" lane="-1" offset="0s" start="0s" duration="1428/30s" name="VO 07" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="07 Who Was First"/></video>
+<video ref="g_07-b" offset="8960/30s" name="07-b" start="0s" duration="119/30s"></video>
+<video ref="g_07-c" offset="9079/30s" name="07-c" start="0s" duration="167/30s"></video>
+<video ref="g_07-d" offset="9246/30s" name="07-d" start="0s" duration="119/30s"></video>
+<video ref="g_07-e" offset="9365/30s" name="07-e" start="0s" duration="95/30s"></video>
+<video ref="g_07-f" offset="9460/30s" name="07-f" start="0s" duration="190/30s"></video>
+<video ref="g_07-g" offset="9650/30s" name="07-g" start="0s" duration="155/30s"></video>
+<video ref="g_07-h" offset="9805/30s" name="07-h" start="0s" duration="119/30s"></video>
+<video ref="g_07-i" offset="9924/30s" name="07-i" start="0s" duration="143/30s"></video>
+<video ref="g_07-j" offset="10067/30s" name="07-j" start="0s" duration="95/30s"></video>
+</spine>
+</sequence>
+</project>
+</event>
+</library>
+</fcpxml>

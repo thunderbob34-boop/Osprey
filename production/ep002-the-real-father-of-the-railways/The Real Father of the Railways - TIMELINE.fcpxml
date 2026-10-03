@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<fcpxml version="1.10">
+<resources>
+<format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>
+<format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>
+<asset id="g_01-a" name="01-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-a.png"/></asset>
+<asset id="g_01-b" name="01-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-b.png"/></asset>
+<asset id="g_01-c" name="01-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-c.png"/></asset>
+<asset id="g_01-d" name="01-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-d.png"/></asset>
+<asset id="g_01-e" name="01-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-e.png"/></asset>
+<asset id="g_01-f" name="01-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-f.png"/></asset>
+<asset id="g_01-g" name="01-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-g.png"/></asset>
+<asset id="g_01-h" name="01-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-h.png"/></asset>
+<asset id="g_01-i" name="01-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-i.png"/></asset>
+<asset id="g_01-j" name="01-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/01-j.png"/></asset>
+<asset id="g_02-a" name="02-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/02-a.png"/></asset>
+<asset id="g_02-b" name="02-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/02-b.png"/></asset>
+<asset id="g_02-c" name="02-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/02-c.png"/></asset>
+<asset id="g_02-d" name="02-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/02-d.png"/></asset>
+<asset id="g_02-e" name="02-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/02-e.png"/></asset>
+<asset id="g_02-f" name="02-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/02-f.png"/></asset>
+<asset id="g_02-g" name="02-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/02-g.png"/></asset>
+<asset id="g_02-h" name="02-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/02-h.png"/></asset>
+<asset id="g_02-i" name="02-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/02-i.png"/></asset>
+<asset id="g_03-a" name="03-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-a.png"/></asset>
+<asset id="g_03-b" name="03-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-b.png"/></asset>
+<asset id="g_03-c" name="03-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-c.png"/></asset>
+<asset id="g_03-d" name="03-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-d.png"/></asset>
+<asset id="g_03-e" name="03-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-e.png"/></asset>
+<asset id="g_03-f" name="03-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-f.png"/></asset>
+<asset id="g_03-g" name="03-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-g.png"/></asset>
+<asset id="g_03-h" name="03-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-h.png"/></asset>
+<asset id="g_03-i" name="03-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-i.png"/></asset>
+<asset id="g_03-j" name="03-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-j.png"/></asset>
+<asset id="g_03-k" name="03-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-k.png"/></asset>
+<asset id="g_03-l" name="03-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-l.png"/></asset>
+<asset id="g_03-m" name="03-m" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-m.png"/></asset>
+<asset id="g_03-n" name="03-n" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-n.png"/></asset>
+<asset id="g_03-o" name="03-o" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-o.png"/></asset>
+<asset id="g_03-p" name="03-p" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/03-p.png"/></asset>
+<asset id="g_04-a" name="04-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-a.png"/></asset>
+<asset id="g_04-b" name="04-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-b.png"/></asset>
+<asset id="g_04-c" name="04-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-c.png"/></asset>
+<asset id="g_04-d" name="04-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-d.png"/></asset>
+<asset id="g_04-e" name="04-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-e.png"/></asset>
+<asset id="g_04-f" name="04-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-f.png"/></asset>
+<asset id="g_04-g" name="04-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-g.png"/></asset>
+<asset id="g_04-h" name="04-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-h.png"/></asset>
+<asset id="g_04-i" name="04-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-i.png"/></asset>
+<asset id="g_04-j" name="04-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-j.png"/></asset>
+<asset id="g_04-k" name="04-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/04-k.png"/></asset>
+<asset id="g_05-a" name="05-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-a.png"/></asset>
+<asset id="g_05-b" name="05-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-b.png"/></asset>
+<asset id="g_05-c" name="05-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-c.png"/></asset>
+<asset id="g_05-d" name="05-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-d.png"/></asset>
+<asset id="g_05-e" name="05-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-e.png"/></asset>
+<asset id="g_05-f" name="05-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-f.png"/></asset>
+<asset id="g_05-g" name="05-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-g.png"/></asset>
+<asset id="g_05-h" name="05-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-h.png"/></asset>
+<asset id="g_05-i" name="05-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-i.png"/></asset>
+<asset id="g_05-j" name="05-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-j.png"/></asset>
+<asset id="g_05-k" name="05-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-k.png"/></asset>
+<asset id="g_05-l" name="05-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-l.png"/></asset>
+<asset id="g_05-m" name="05-m" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-m.png"/></asset>
+<asset id="g_05-n" name="05-n" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-n.png"/></asset>
+<asset id="g_05-o" name="05-o" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-o.png"/></asset>
+<asset id="g_05-p" name="05-p" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-p.png"/></asset>
+<asset id="g_05-q" name="05-q" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-q.png"/></asset>
+<asset id="g_05-r" name="05-r" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-r.png"/></asset>
+<asset id="g_05-s" name="05-s" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/05-s.png"/></asset>
+<asset id="g_06-a" name="06-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-a.png"/></asset>
+<asset id="g_06-b" name="06-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-b.png"/></asset>
+<asset id="g_06-c" name="06-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-c.png"/></asset>
+<asset id="g_06-d" name="06-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-d.png"/></asset>
+<asset id="g_06-e" name="06-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-e.png"/></asset>
+<asset id="g_06-f" name="06-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-f.png"/></asset>
+<asset id="g_06-g" name="06-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-g.png"/></asset>
+<asset id="g_06-h" name="06-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-h.png"/></asset>
+<asset id="g_06-i" name="06-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-i.png"/></asset>
+<asset id="g_06-j" name="06-j" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-j.png"/></asset>
+<asset id="g_06-k" name="06-k" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-k.png"/></asset>
+<asset id="g_06-l" name="06-l" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/graphics/06-l.png"/></asset>
+<asset id="vo_01" name="VO 01" start="0s" duration="1280/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/01-cold-open.mp3"/></asset>
+<asset id="vo_02" name="VO 02" start="0s" duration="1344/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/02-the-version-everybody-knows.mp3"/></asset>
+<asset id="vo_03" name="VO 03" start="0s" duration="2317/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/03-penydarren-1804.mp3"/></asset>
+<asset id="vo_04" name="VO 04" start="0s" duration="1297/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/04-the-catch.mp3"/></asset>
+<asset id="vo_05" name="VO 05" start="0s" duration="2627/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/05-who-made-it-pay.mp3"/></asset>
+<asset id="vo_06" name="VO 06" start="0s" duration="1669/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep002-the-real-father-of-the-railways/vo/06-how-it-ended.mp3"/></asset>
+</resources>
+<library>
+<event name="Somebody Did It First">
+<project name="The Real Father of the Railways">
+<sequence format="r1" duration="10534/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+<spine>
+<video ref="g_01-a" offset="0s" name="01-a" start="0s" duration="156/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="1280/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></video>
+<video ref="g_01-b" offset="156/30s" name="01-b" start="0s" duration="118/30s"></video>
+<video ref="g_01-c" offset="274/30s" name="01-c" start="0s" duration="97/30s"></video>
+<video ref="g_01-d" offset="371/30s" name="01-d" start="0s" duration="176/30s"></video>
+<video ref="g_01-e" offset="547/30s" name="01-e" start="0s" duration="147/30s"></video>
+<video ref="g_01-f" offset="694/30s" name="01-f" start="0s" duration="117/30s"></video>
+<video ref="g_01-g" offset="811/30s" name="01-g" start="0s" duration="88/30s"></video>
+<video ref="g_01-h" offset="899/30s" name="01-h" start="0s" duration="107/30s"></video>
+<video ref="g_01-i" offset="1006/30s" name="01-i" start="0s" duration="127/30s"></video>
+<video ref="g_01-j" offset="1133/30s" name="01-j" start="0s" duration="147/30s"></video>
+<video ref="g_02-a" offset="1280/30s" name="02-a" start="0s" duration="147/30s"><asset-clip ref="vo_02" lane="-1" offset="0s" start="0s" duration="1344/30s" name="VO 02" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="02 The Version Everybody Knows"/></video>
+<video ref="g_02-b" offset="1427/30s" name="02-b" start="0s" duration="135/30s"></video>
+<video ref="g_02-c" offset="1562/30s" name="02-c" start="0s" duration="181/30s"></video>
+<video ref="g_02-d" offset="1743/30s" name="02-d" start="0s" duration="181/30s"></video>
+<video ref="g_02-e" offset="1924/30s" name="02-e" start="0s" duration="113/30s"></video>
+<video ref="g_02-f" offset="2037/30s" name="02-f" start="0s" duration="113/30s"></video>
+<video ref="g_02-g" offset="2150/30s" name="02-g" start="0s" duration="169/30s"></video>
+<video ref="g_02-h" offset="2319/30s" name="02-h" start="0s" duration="181/30s"></video>
+<video ref="g_02-i" offset="2500/30s" name="02-i" start="0s" duration="124/30s"></video>
+<video ref="g_03-a" offset="2624/30s" name="03-a" start="0s" duration="134/30s"><asset-clip ref="vo_03" lane="-1" offset="0s" start="0s" duration="2317/30s" name="VO 03" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="03 Penydarren, 1804"/></video>
+<video ref="g_03-b" offset="2758/30s" name="03-b" start="0s" duration="93/30s"></video>
+<video ref="g_03-c" offset="2851/30s" name="03-c" start="0s" duration="175/30s"></video>
+<video ref="g_03-d" offset="3026/30s" name="03-d" start="0s" duration="154/30s"></video>
+<video ref="g_03-e" offset="106s" name="03-e" start="0s" duration="113/30s"></video>
+<video ref="g_03-f" offset="3293/30s" name="03-f" start="0s" duration="175/30s"></video>
+<video ref="g_03-g" offset="3468/30s" name="03-g" start="0s" duration="114/30s"></video>
+<video ref="g_03-h" offset="3582/30s" name="03-h" start="0s" duration="185/30s"></video>
+<video ref="g_03-i" offset="3767/30s" name="03-i" start="0s" duration="103/30s"></video>
+<video ref="g_03-j" offset="129s" name="03-j" start="0s" duration="165/30s"></video>
+<video ref="g_03-k" offset="4035/30s" name="03-k" start="0s" duration="134/30s"></video>
+<video ref="g_03-l" offset="4169/30s" name="03-l" start="0s" duration="92/30s"></video>
+<video ref="g_03-m" offset="4261/30s" name="03-m" start="0s" duration="186/30s"></video>
+<video ref="g_03-n" offset="4447/30s" name="03-n" start="0s" duration="175/30s"></video>
+<video ref="g_03-o" offset="4622/30s" name="03-o" start="0s" duration="154/30s"></video>
+<video ref="g_03-p" offset="4776/30s" name="03-p" start="0s" duration="165/30s"></video>
+<video ref="g_04-a" offset="4941/30s" name="04-a" start="0s" duration="133/30s"><asset-clip ref="vo_04" lane="-1" offset="0s" start="0s" duration="1297/30s" name="VO 04" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="04 The Catch"/></video>
+<video ref="g_04-b" offset="5074/30s" name="04-b" start="0s" duration="94/30s"></video>
+<video ref="g_04-c" offset="5168/30s" name="04-c" start="0s" duration="123/30s"></video>
+<video ref="g_04-d" offset="5291/30s" name="04-d" start="0s" duration="104/30s"></video>
+<video ref="g_04-e" offset="5395/30s" name="04-e" start="0s" duration="114/30s"></video>
+<video ref="g_04-f" offset="5509/30s" name="04-f" start="0s" duration="133/30s"></video>
+<video ref="g_04-g" offset="5642/30s" name="04-g" start="0s" duration="161/30s"></video>
+<video ref="g_04-h" offset="5803/30s" name="04-h" start="0s" duration="142/30s"></video>
+<video ref="g_04-i" offset="5945/30s" name="04-i" start="0s" duration="94/30s"></video>
+<video ref="g_04-j" offset="6039/30s" name="04-j" start="0s" duration="104/30s"></video>
+<video ref="g_04-k" offset="6143/30s" name="04-k" start="0s" duration="95/30s"></video>
+<video ref="g_05-a" offset="6238/30s" name="05-a" start="0s" duration="188/30s"><asset-clip ref="vo_05" lane="-1" offset="0s" start="0s" duration="2627/30s" name="VO 05" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="05 Who Made It Pay"/></video>
+<video ref="g_05-b" offset="6426/30s" name="05-b" start="0s" duration="132/30s"></video>
+<video ref="g_05-c" offset="6558/30s" name="05-c" start="0s" duration="199/30s"></video>
+<video ref="g_05-d" offset="6757/30s" name="05-d" start="0s" duration="132/30s"></video>
+<video ref="g_05-e" offset="6889/30s" name="05-e" start="0s" duration="111/30s"></video>
+<video ref="g_05-f" offset="7000/30s" name="05-f" start="0s" duration="143/30s"></video>
+<video ref="g_05-g" offset="7143/30s" name="05-g" start="0s" duration="166/30s"></video>
+<video ref="g_05-h" offset="7309/30s" name="05-h" start="0s" duration="132/30s"></video>
+<video ref="g_05-i" offset="7441/30s" name="05-i" start="0s" duration="88/30s"></video>
+<video ref="g_05-j" offset="7529/30s" name="05-j" start="0s" duration="122/30s"></video>
+<video ref="g_05-k" offset="7651/30s" name="05-k" start="0s" duration="132/30s"></video>
+<video ref="g_05-l" offset="7783/30s" name="05-l" start="0s" duration="111/30s"></video>
+<video ref="g_05-m" offset="7894/30s" name="05-m" start="0s" duration="165/30s"></video>
+<video ref="g_05-n" offset="8059/30s" name="05-n" start="0s" duration="144/30s"></video>
+<video ref="g_05-o" offset="8203/30s" name="05-o" start="0s" duration="165/30s"></video>
+<video ref="g_05-p" offset="8368/30s" name="05-p" start="0s" duration="111/30s"></video>
+<video ref="g_05-q" offset="8479/30s" name="05-q" start="0s" duration="154/30s"></video>
+<video ref="g_05-r" offset="8633/30s" name="05-r" start="0s" duration="166/30s"></video>
+<video ref="g_05-s" offset="8799/30s" name="05-s" start="0s" duration="66/30s"></video>
+<video ref="g_06-a" offset="8865/30s" name="06-a" start="0s" duration="179/30s"><asset-clip ref="vo_06" lane="-1" offset="0s" start="0s" duration="1669/30s" name="VO 06" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="06 How It Ended"/></video>
+<video ref="g_06-b" offset="9044/30s" name="06-b" start="0s" duration="123/30s"></video>
+<video ref="g_06-c" offset="9167/30s" name="06-c" start="0s" duration="112/30s"></video>
+<video ref="g_06-d" offset="9279/30s" name="06-d" start="0s" duration="135/30s"></video>
+<video ref="g_06-e" offset="9414/30s" name="06-e" start="0s" duration="157/30s"></video>
+<video ref="g_06-f" offset="9571/30s" name="06-f" start="0s" duration="157/30s"></video>
+<video ref="g_06-g" offset="9728/30s" name="06-g" start="0s" duration="168/30s"></video>
+<video ref="g_06-h" offset="9896/30s" name="06-h" start="0s" duration="123/30s"></video>
+<video ref="g_06-i" offset="10019/30s" name="06-i" start="0s" duration="157/30s"></video>
+<video ref="g_06-j" offset="10176/30s" name="06-j" start="0s" duration="168/30s"></video>
+<video ref="g_06-k" offset="10344/30s" name="06-k" start="0s" duration="78/30s"></video>
+<video ref="g_06-l" offset="10422/30s" name="06-l" start="0s" duration="112/30s"></video>
+</spine>
+</sequence>
+</project>
+</event>
+</library>
+</fcpxml>

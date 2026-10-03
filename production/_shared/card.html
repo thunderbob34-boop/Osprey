@@ -56,6 +56,7 @@
   .caption{position:absolute;left:96px;bottom:86px;background:rgba(29,27,24,.88);color:#F3ECDD;font-family:var(--sans);font-weight:600;font-size:28px;padding:12px 22px;letter-spacing:.02em}
   svg text{font-family:var(--sans)}
 </style>
+<script src="land.js"></script>
 </head>
 <body>
 <script>
@@ -190,18 +191,26 @@ else if(t==='flow'){ // {title, steps:[{label,sub}], step, caption}
     <foreignObject x="${x+12}" y="440" width="${W-24}" height="160"><div xmlns="http://www.w3.org/1999/xhtml" style="height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font:800 ${W<260?24:30}px Inter,Arial;color:#1D1B18;line-height:1.2">${esc(s.label)}${s.sub?`<div style="font:600 ${W<260?18:22}px Inter,Arial;color:#5E564A;margin-top:8px">${esc(s.sub)}</div>`:''}</div></foreignObject>
     ${i<n-1?`<line x1="${x+W+6}" y1="520" x2="${x+W+52}" y2="520" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>`:''}</g>`}).join('')}
   ${f.caption?T(960,780,f.caption,34,'middle',600,'#5E564A'):''}`); }
-else if(t==='pinmap'){ // {title, pins:[{name,lat,lon,first?}], connect, caption}  schematic, north up
+else if(t==='pinmap'){ // {title, pins:[{name,lat,lon,first?}], connect, caption, span?}  north up, land from Natural Earth 1:10m
   const P=f.pins||[]; const lats=P.map(p=>p.lat), lons=P.map(p=>p.lon);
   let la0=Math.min(...lats),la1=Math.max(...lats),lo0=Math.min(...lons),lo1=Math.max(...lons);
   const padLa=Math.max((la1-la0)*.35,0.02), padLo=Math.max((lo1-lo0)*.35,0.02); la0-=padLa;la1+=padLa;lo0-=padLo;lo1+=padLo;
-  const k=Math.cos((la0+la1)/2*Math.PI/180); const sx=1500/((lo1-lo0)*k), sy=760/(la1-la0), sc=Math.min(sx,sy);
+  const k=Math.cos((la0+la1)/2*Math.PI/180);
+  if(f.span){const ml=(la0+la1)/2, mo=(lo0+lo1)/2, hl=Math.max(la1-la0,f.span)/2, ho=Math.max(lo1-lo0,f.span/k)/2; la0=ml-hl;la1=ml+hl;lo0=mo-ho;lo1=mo+ho;}
+  const sx=1500/((lo1-lo0)*k), sy=760/(la1-la0), sc=Math.min(sx,sy);
   const cx=960, cy=560, mlo=(lo0+lo1)/2, mla=(la0+la1)/2;
   const X=p=>cx+(p.lon-mlo)*k*sc, Y=p=>cy-(p.lat-mla)*sc;
-  html=svgWrap(`<rect x="0" y="0" width="1920" height="1080" fill="#E4D9C2"/>${T(960,110,f.title||'',40,'middle',800)}
+  const vlo0=mlo-(cx+40)/(k*sc), vlo1=mlo+(1920-cx+40)/(k*sc), vla0=mla-(1080-cy+40)/sc, vla1=mla+(cy+40)/sc;
+  let land='';
+  for(const r of (window.LAND||[])){let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<r.length;i+=2){a=Math.min(a,r[i]);b=Math.max(b,r[i]);c=Math.min(c,r[i+1]);d=Math.max(d,r[i+1]);}
+    if(b<vlo0||a>vlo1||d<vla0||c>vla1) continue;
+    let dd='M'; for(let i=0;i<r.length;i+=2) dd+=(i?'L':'')+(cx+(r[i]-mlo)*k*sc).toFixed(1)+','+(cy-(r[i+1]-mla)*sc).toFixed(1); land+=dd+'Z';}
+  html=svgWrap(`<rect x="0" y="0" width="1920" height="1080" fill="#D3D9D2"/><path d="${land}" fill="#EFE7D6" stroke="#8B8170" stroke-width="2.5" stroke-linejoin="round"/>
+  <rect x="0" y="0" width="1920" height="170" fill="#EFE7D6" opacity=".82"/>${T(960,110,f.title||'',40,'middle',800)}
   ${f.connect&&P.length>1?P.slice(1).map((p,i)=>`<line x1="${X(P[i])}" y1="${Y(P[i])}" x2="${X(p)}" y2="${Y(p)}" stroke="#A8261B" stroke-width="6" stroke-dasharray="22 12"/>`).join(''):''}
-  ${P.map(p=>`<circle cx="${X(p)}" cy="${Y(p)}" r="16" fill="${p.first?'#A8261B':'#1D1B18'}"/>${T(X(p)+(X(p)>1500?-26:26),Y(p)+12,p.name,36,X(p)>1500?'end':'start',800)}`).join('')}
-  ${T(1800,200,'N',34,'middle',800)}<line x1="1800" y1="270" x2="1800" y2="215" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>
-  ${f.caption?T(960,1000,f.caption,34,'middle',600,'#5E564A'):''}${T(1780,1050,'schematic, not to scale',22,'end',600,'#5E564A')}`); }
+  ${P.map(p=>`<circle cx="${X(p)}" cy="${Y(p)}" r="16" fill="${p.first?'#A8261B':'#1D1B18'}" stroke="#EFE7D6" stroke-width="4"/><text x="${X(p)+(X(p)>1500?-26:26)}" y="${Y(p)+12}" font-family="Inter,Arial" font-size="36" font-weight="800" text-anchor="${X(p)>1500?'end':'start'}" fill="#1D1B18" stroke="#EFE7D6" stroke-width="8" paint-order="stroke">${esc(p.name)}</text>`).join('')}
+  ${T(1800,250,'N',34,'middle',800)}<line x1="1800" y1="320" x2="1800" y2="265" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>
+  ${f.caption?`<rect x="0" y="950" width="1920" height="130" fill="#EFE7D6" opacity=".82"/>`+T(960,1000,f.caption,34,'middle',600,'#5E564A'):''}${T(1780,1050,'coastlines: Natural Earth · places approximate',22,'end',600,'#5E564A')}`); }
 else if(t==='timeline'){ // {title, events:[{date,label}], highlight, step}
   const E=f.events||[]; const n=E.length; const x0=220, x1=1700;
   html=svgWrap(`${T(960,170,(f.title||'').toUpperCase(),38,'middle',800)}<line x1="${x0-60}" y1="560" x2="${x1+60}" y2="560" stroke="#1D1B18" stroke-width="5"/>

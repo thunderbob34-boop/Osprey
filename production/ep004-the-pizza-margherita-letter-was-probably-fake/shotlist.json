@@ -31,7 +31,8 @@
     }
    ],
    "connect": false,
-   "caption": "Naples, Italy"
+   "caption": "Naples, Italy",
+   "span": 9
   },
   "visual": "Schematic map, single pin on Naples.",
   "source": null,
@@ -117,7 +118,31 @@
   "id": "01-g",
   "section": "01",
   "section_name": "Cold Open",
-  "text": "and about the fact that the pizza itself was being described in print about thirty years before the queen ever supposedly tasted it,",
+  "text": "and about the fact that the pizza itself was being described in print",
+  "type": "archival",
+  "template": "archival",
+  "fields": {
+   "kind": "engraving",
+   "label": "\"Il pizzaiuolo\", 1858 print",
+   "lower": "\"Il pizzaiuolo\" (The Pizza Maker), plate in Usi e costumi di Napoli e contorni, vol. 2 (1858)",
+   "asset": "commons-wikimedia-org-wiki-file-bourcard-1858-p2-172-il-pizz"
+  },
+  "visual": "1858 plate of a pizza maker, slow push-in.",
+  "source": {
+   "institution": "British Library (digitised, via Wikimedia Commons)",
+   "item": "BOURCARD(1858) p2.172 - IL PIZZAIUOLO.jpg (plate by F. Palizzi, from Usi e costumi di Napoli e contorni, vol. 2, p. 172; HMNTS 10129.g.27)",
+   "url": "https://commons.wikimedia.org/wiki/File:BOURCARD(1858)_p2.172_-_IL_PIZZAIUOLO.jpg",
+   "rights": "Public domain (Creative Commons Public Domain Mark 1.0, as stated on the Commons file page)",
+   "credit": "F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library",
+   "verified": true
+  },
+  "notes": "Printed 1858, before the legend's 1889. The lower says what it is."
+ },
+ {
+  "id": "01-h",
+  "section": "01",
+  "section_name": "Cold Open",
+  "text": "about thirty years before the queen ever supposedly tasted it,",
   "type": "stat",
   "template": "stat",
   "fields": {
@@ -129,7 +154,7 @@
   "source": null
  },
  {
-  "id": "01-h",
+  "id": "01-i",
   "section": "01",
   "section_name": "Cold Open",
   "text": "so the pizza was there first, decades before the man in the story.",
@@ -365,33 +390,18 @@
   "id": "03-c",
   "section": "03",
   "section_name": "The Letter",
-  "text": "\"Folklore, Fakelore, History: Invented Tradition and the Origins of the Pizza Margherita,\"",
+  "text": "\"Folklore, Fakelore, History: Invented Tradition and the Origins of the Pizza Margherita,\" and he found three problems with it.",
   "type": "quote",
   "template": "quote",
   "fields": {
    "quote": "Folklore, Fakelore, History: Invented Tradition and the Origins of the Pizza Margherita",
-   "attribution": "Zachary Nowak, Food, Culture & Society, 2014"
+   "attribution": "Zachary Nowak, Food, Culture & Society, 2014. He finds three problems with the letter"
   },
-  "visual": "Quote card with the paper title.",
+  "visual": "Quote card with the paper title; the attribution carries the three-problems line.",
   "source": null
  },
  {
   "id": "03-d",
-  "section": "03",
-  "section_name": "The Letter",
-  "text": "and he found three problems with it.",
-  "type": "stat",
-  "template": "stat",
-  "fields": {
-   "number": "3",
-   "label": "problems Nowak finds with the letter",
-   "sub": "His argument, not proven"
-  },
-  "visual": "Stat card.",
-  "source": null
- },
- {
-  "id": "03-e",
   "section": "03",
   "section_name": "The Letter",
   "text": "The first one is the seal, the seal is in the wrong place.",
@@ -422,7 +432,7 @@
   "notes": "highlight is 1-based (the box lit on this beat); step N shows the first N boxes."
  },
  {
-  "id": "03-f",
+  "id": "03-e",
   "section": "03",
   "section_name": "The Letter",
   "text": "The second one is the handwriting, the handwriting doesn't match the official who supposedly signed it.",
@@ -453,7 +463,7 @@
   "notes": "highlight is 1-based (the box lit on this beat); step N shows the first N boxes."
  },
  {
-  "id": "03-g",
+  "id": "03-f",
   "section": "03",
   "section_name": "The Letter",
   "text": "And the third one is the name it's addressed to, it's addressed using his wife's surname, Brandi, and not his own.",
@@ -484,7 +494,7 @@
   "notes": "highlight is 1-based (the box lit on this beat); step N shows the first N boxes."
  },
  {
-  "id": "03-h",
+  "id": "03-g",
   "section": "03",
   "section_name": "The Letter",
   "text": "Now think about that third one for a second.",
@@ -515,7 +525,7 @@
   "notes": "highlight is 1-based (the box lit on this beat); step N shows the first N boxes."
  },
  {
-  "id": "03-i",
+  "id": "03-h",
   "section": "03",
   "section_name": "The Letter",
   "text": "If the palace is writing to thank Raffaele Esposito, you'd expect it to be addressed to Raffaele Esposito, right?",
@@ -536,7 +546,7 @@
   "source": null
  },
  {
-  "id": "03-j",
+  "id": "03-i",
   "section": "03",
   "section_name": "The Letter",
   "text": "But it's addressed using the name Brandi, and that's the name that matters for the next part.",
@@ -650,21 +660,7 @@
   "id": "04-e",
   "section": "04",
   "section_name": "Who Made It Up",
-  "text": "Now, to be fair, I want to be really careful here.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "To be fair: this is Nowak's argument",
-   "sub": ""
-  },
-  "visual": "Text card.",
-  "source": null
- },
- {
-  "id": "04-f",
-  "section": "04",
-  "section_name": "Who Made It Up",
-  "text": "That's Nowak's argument, and it's a strong argument, but it's his argument, not proven.",
+  "text": "Now, to be fair, I want to be really careful here. That's Nowak's argument, and it's a strong argument, but it's his argument, not proven.",
   "type": "document",
   "template": "archival",
   "fields": {
@@ -684,7 +680,7 @@
   }
  },
  {
-  "id": "04-g",
+  "id": "04-f",
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "Nobody has proven who did it, and nobody has proven when.",
@@ -698,7 +694,7 @@
   "source": null
  },
  {
-  "id": "04-h",
+  "id": "04-g",
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "What Nowak has is a letter with the seal in the wrong place,",
@@ -729,7 +725,7 @@
   "notes": "highlight is 1-based (the box lit on this beat); step N shows the first N boxes."
  },
  {
-  "id": "04-i",
+  "id": "04-h",
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "handwriting that doesn't match, and the wrong surname on it,",
@@ -760,7 +756,7 @@
   "notes": "highlight is 1-based (the box lit on this beat); step N shows the first N boxes."
  },
  {
-  "id": "04-j",
+  "id": "04-i",
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "and from that he thinks it was probably made up later, likely by the Brandi family.",
@@ -786,7 +782,7 @@
   "notes": "Title carries the hedge on every step. No date is given for when the letter was made; the script gives none."
  },
  {
-  "id": "04-k",
+  "id": "04-j",
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "So that's how I'm going to say it, probably fake,",
@@ -800,7 +796,7 @@
   "source": null
  },
  {
-  "id": "04-l",
+  "id": "04-k",
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "and likely the Brandi family, and not one word stronger than that.",
@@ -812,21 +808,30 @@
   },
   "visual": "Text card.",
   "source": null,
-  "notes": "No person is called a forger anywhere on screen."
+  "notes": "On-screen wording stays on the letter and on Nowak's argument; no person is accused."
  },
  {
   "id": "05-a",
   "section": "05",
   "section_name": "The Pizza Was Already There",
   "text": "And there's more, because even if you set the letter aside, the pizza itself was already around.",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "The pizza itself was already around",
-   "sub": ""
+   "kind": "engraving",
+   "label": "\"Il pizzaiuolo\", 1858 print",
+   "lower": "\"Il pizzaiuolo\" (The Pizza Maker), plate in Usi e costumi di Napoli e contorni, vol. 2 (1858)",
+   "asset": "commons-wikimedia-org-wiki-file-bourcard-1858-p2-172-il-pizz"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "1858 plate of a pizza maker.",
+  "source": {
+   "institution": "British Library (digitised, via Wikimedia Commons)",
+   "item": "BOURCARD(1858) p2.172 - IL PIZZAIUOLO.jpg (plate by F. Palizzi, from Usi e costumi di Napoli e contorni, vol. 2, p. 172; HMNTS 10129.g.27)",
+   "url": "https://commons.wikimedia.org/wiki/File:BOURCARD(1858)_p2.172_-_IL_PIZZAIUOLO.jpg",
+   "rights": "Public domain (Creative Commons Public Domain Mark 1.0, as stated on the Commons file page)",
+   "credit": "F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library",
+   "verified": true
+  }
  },
  {
   "id": "05-b",
@@ -1002,7 +1007,7 @@
   "id": "05-k",
   "section": "05",
   "section_name": "The Pizza Was Already There",
-  "text": "that's basically the pizza in the story,",
+  "text": "that's basically the pizza in the story, decades before the man in the story supposedly invented it for a queen.",
   "type": "photo",
   "template": "archival",
   "fields": {
@@ -1018,29 +1023,6 @@
    "url": "https://commons.wikimedia.org/wiki/File:Eq_it-na_pizza-margherita_sep2005_sml.jpg",
    "rights": "CC BY-SA 3.0 (migrated) and GFDL (as stated on the Commons file page); attribution required",
    "credit": "Valerio Capello, Wikimedia Commons",
-   "verified": true
-  }
- },
- {
-  "id": "05-l",
-  "section": "05",
-  "section_name": "The Pizza Was Already There",
-  "text": "decades before the man in the story supposedly invented it for a queen.",
-  "type": "archival",
-  "template": "archival",
-  "fields": {
-   "kind": "portrait",
-   "label": "Queen Margherita of Savoy",
-   "lower": "Queen Margherita of Savoy (photographed c. 1910-1915, years after 1889)",
-   "asset": "loc-gov-resource-ggbain-19206"
-  },
-  "visual": "Queen Margherita portrait.",
-  "source": {
-   "institution": "Library of Congress, Prints and Photographs Division (Bain News Service)",
-   "item": "Dowager Queen Margherita -- Italy (digital file from original negative)",
-   "url": "https://www.loc.gov/resource/ggbain.19206",
-   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
-   "credit": "George Grantham Bain Collection, Library of Congress, LC-DIG-ggbain-19206",
    "verified": true
   }
  },
@@ -1123,14 +1105,23 @@
   "section": "06",
   "section_name": "Fair Credit",
   "text": "So the fair version is this, maybe Esposito made a pizza for a queen and maybe he didn't, nobody knows,",
-  "type": "text",
-  "template": "text",
+  "type": "photo",
+  "template": "archival",
   "fields": {
-   "headline": "Maybe he did, maybe he didn't: nobody knows",
-   "sub": ""
+   "kind": "photo",
+   "label": "Pizza Margherita (modern photograph)",
+   "lower": "(modern photograph of a pizza Margherita, Naples, 2005)",
+   "asset": "commons-wikimedia-org-wiki-file-eq-it-na-pizza-margherita-se"
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Modern photo of a Margherita pizza.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Eq it-na pizza-margherita sep2005 sml.jpg (pizza Margherita, I Decumani, Via dei Tribunali, Naples, 6 Sep 2005)",
+   "url": "https://commons.wikimedia.org/wiki/File:Eq_it-na_pizza-margherita_sep2005_sml.jpg",
+   "rights": "CC BY-SA 3.0 (migrated) and GFDL (as stated on the Commons file page); attribution required",
+   "credit": "Valerio Capello, Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "06-f",
