@@ -188,6 +188,7 @@ TPL.pinmap = {
     if(f.span){const ml=(la0+la1)/2, mo=(lo0+lo1)/2, hl=Math.max(la1-la0,f.span)/2, ho=Math.max(lo1-lo0,f.span/k)/2; la0=ml-hl;la1=ml+hl;lo0=mo-ho;lo1=mo+ho;}
     this.end={lat:(la0+la1)/2, lon:(lo0+lo1)/2, sc:Math.min(1500/((lo1-lo0)*k), 700/(la1-la0))};
     const fr=f.from; this.start = fr===false ? this.end : fr ? {lat:fr.lat, lon:fr.lon, sc:Math.min(1500/(fr.span/k*1.8), 700/fr.span)} : {lat:this.end.lat, lon:this.end.lon, sc:this.end.sc/3.2};
+    if (this.start.sc < 6.5) this.start.sc = 6.5; if (this.end.sc < 12 && !fr) this.start = this.end;
     // geometry in lon/lat. Three land resolutions, each drawn only at the zoom levels where it is needed
     const vw=(c)=>[c.lon-1100/(k*c.sc), c.lon+1100/(k*c.sc), c.lat-650/c.sc, c.lat+650/c.sc];
     const pathOf=(arr,close,V)=>{ let s=''; for(const r of arr){ let A=1e9,B=-1e9,C=1e9,Dd=-1e9; for(let i=0;i<r.length;i+=2){A=Math.min(A,r[i]);B=Math.max(B,r[i]);C=Math.min(C,r[i+1]);Dd=Math.max(Dd,r[i+1]);} if(B<V[0]||A>V[1]||Dd<V[2]||C>V[3]) continue; s+='M'; for(let i=0;i<r.length;i+=2) s+=(i?'L':'')+r[i]+','+r[i+1]; if(close) s+='Z'; } return s; };
@@ -255,7 +256,7 @@ TPL.scene = {
   draw(t){ drift(t,.025); const fn=SC[f.scene]; g.innerHTML = fn ? fn(t, f.params||{}) : T(960,540,'scene: '+f.scene,50); tg.style.opacity=eOut(seg(t,.3,.8)); }
 };
 const titleBar = (t,s) => s ? `<g opacity="${eOut(seg(t,0,.4))}">${T(960,130,s.toUpperCase(),40,'middle',800)}</g>` : '';
-const callout = (t,at,x,y,x2,y2,s,anchor='start',col='#A8261B') => { const p=eOut(seg(t,at,at+.5)); if(p<=0) return ''; return `<g opacity="${p}"><line x1="${x}" y1="${y}" x2="${lerp(x,x2,p)}" y2="${lerp(y,y2,p)}" stroke="${col}" stroke-width="4"/><circle cx="${x}" cy="${y}" r="8" fill="${col}"/>${TH(x2+(anchor==='start'?12:-12),y2+12,s,36,anchor,800,col)}</g>`; };
+const callout = (t,at,x,y,x2,y2,s,anchor='start',col='#A8261B') => { const p=eOut(seg(t,at,at+.5)); if(p<=0) return ''; const w=String(s).length*20; if(anchor==='start'&&x2+12+w>1880){ x2=1880-12-w; } if(anchor==='end'&&x2-12-w<40){ x2=40+12+w; } return `<g opacity="${p}"><line x1="${x}" y1="${y}" x2="${lerp(x,x2,p)}" y2="${lerp(y,y2,p)}" stroke="${col}" stroke-width="4"/><circle cx="${x}" cy="${y}" r="8" fill="${col}"/>${TH(x2+(anchor==='start'?12:-12),y2+12,s,36,anchor,800,col)}</g>`; };
 const at = (P,key,def) => (P.at&&P.at[key]!=null)?P.at[key]:def;
 
 // a generic early steam engine on a plateway, side view (illustration only)
