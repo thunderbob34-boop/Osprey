@@ -6,7 +6,7 @@ Prepared 2026-10-02. Every policy and licensing fact below was checked against a
 
 1. **Who narrates:** **decided 2026-10-02: the AI voice "Holden" on Higgsfield's Seed Speech engine** (about 9.5 credits per episode). Every upload must tick YouTube's "altered or synthetic content" disclosure. The original comparison is kept below for reference.
 2. **What's on screen:** an "archive documentary" look. Real photos, documents, patents, newspapers and museum objects, tied together with clean graphics. We never fake a photo of a real person or event.
-3. **How long:** the scripts run about 5 minutes. We either ship them at that length or deepen the research to reach 8–10 minutes. That's your call, and the trade-off is below.
+3. **How long:** **decided 2026-10-03: ship at about 5 minutes.** Extend the strongest performers later with new research. The original trade-off is kept below.
 
 ---
 
@@ -83,8 +83,8 @@ This follows your youtube-pipeline process:
 ## What I need from you
 
 1. ~~**Narrator**~~: decided. Holden on Seed Speech.
-2. **Length:** ship at ~5 minutes first (recommended), or research everything to 8–10 minutes before launch.
-3. **Pilot:** say go, and I'll build the full package for Episode 1 (shot list, every visual, animatic and Resolve timeline) as the template for the other 99.
+2. ~~**Length**~~: decided. Ship at about 5 minutes.
+3. ~~**Pilot**~~: built. See `production/ep001-the-man-who-invented-nothing/`.
 
 ---
 

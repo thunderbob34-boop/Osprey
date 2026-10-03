@@ -24,11 +24,11 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 - **Sensitive beats:** no animal-cruelty, execution or gore imagery. Use documents and text cards instead.
 - **Credits:** every image credited in the description; Wikimedia and Science Museum Group licenses checked per file.
 - **Thumbnails:** famous name/object + red "NOT FIRST" stamp + the real first-doer. Two versions to A/B test.
-- **Length:** scripts currently average ~5 minutes. Mid-rolls need 8+ minutes. Extending means more research, never padding.
+- **Length (decided 2026-10-03):** ship at about 5 minutes. Holden on Seed Speech reads about 168 wpm, so an 830-word script runs about 5 minutes. No mid-roll ads under 8 minutes. That's accepted for launch. Extending means more research, never padding.
 
 ## Open items waiting on Gus
 1. ~~Narrator decision~~: decided 2026-10-02. Holden on Seed Speech (see Channel).
-2. Length decision: ship ~5-minute episodes first (recommended) vs. research to 8–10 minutes before launch.
+2. ~~Length decision~~: decided 2026-10-03. Ship at natural length, about 5 minutes (episode 1 runs 9:37). No padding. Extend later only with new verified research, for the episodes that perform.
 3. ~~Pilot~~: built 2026-10-02 in `production/ep001-the-man-who-invented-nothing/` (116 beats, 9:37, Holden narration, validated FCPXML, five blind reviews). **Still open:** 53 archival/stock beats from 32 items are placeholders, because the cloud network blocks loc.gov, wikimedia.org, si.edu and Higgsfield's CDN (d8j0ntlcm91z4.cloudfront.net). Either allow those hosts in the environment's network settings, or Gus downloads the files into `assets/` (names are in PENDING-ASSETS.md). The 8 narration MP3s go in `vo/`. Rights are confirmed for 11 of the 32 items.
 4. Channel name: confirm the handle and domain with the commands in `channel-name-check.md` (direct checks were blocked from the cloud container).
 5. Pronunciations to confirm: Magie (7), Chevedden (55), Tawell (97), Finlay (109), Koechlin and Nouguier (110). Others are confirmed in each script's reading notes.
