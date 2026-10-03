@@ -5,14 +5,14 @@
   "credits": 10.7,
   "vo": "Nowak was respelled in the TTS text only, for pronunciation.",
   "gaps": [
-   "No open image of the letter itself exists, so the seal, handwriting and name problems are carried by a diagram.",
-   "The Nowak article page has publisher copyright. Get permission for a title-page capture, or keep it as a text card.",
-   "The only Queen Margherita image is a later-life photo (c. 1910 to 1915), and its lower-third says so."
+   "No picture of Raffaele Esposito, Zachary Nowak, Rocco or de Bourcard; they are named on cards and map pins only.",
+   "The palace letter scan is tiny (312px) and is the disputed object itself; it is shown twice, small, as 'the letter said to be from 1889'.",
+   "The seal, handwriting and name problems are carried by type cards, since the scan is too small to point at."
   ],
   "preair": [
    "have the published Nowak article (Food, Culture & Society, 2014) and the 1858 Usi e costumi di Napoli e contorni vol. 2 text in hand and check them against the script. The research found only one strong source for the letter analysis."
   ],
-  "review": "It ran several times on the motion cut. No pass found a High problem. Fixes made: Esposito named in the \"wife's surname\" box; the 1858 pizza shown as the 1858 plate, never a modern Margherita; letter callouts timed to land as each problem is spoken; a \"PROBABLY FAKE\" stamp on the \"probably fake\" line; Naples maps widened and label collisions removed; the recap uses the queen's portrait and the 1858 plate rather than replaying earlier graphics."
+  "review": "Rebuilt 2026-10-03 on real images (owner's Episode 2 notes): no cartoon scenes, a running time bar, and the plain-talk script. The review history of the earlier motion cut no longer applies; this cut is reviewed after render."
  },
  "timebar": {
   "range": [
