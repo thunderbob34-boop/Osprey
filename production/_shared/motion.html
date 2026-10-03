@@ -172,7 +172,7 @@ TPL.archival = {
       <div class="phsrc">${esc(s.institution||'')}${s.item?' · '+esc(s.item):''}${s.rights?'<br>'+esc(s.rights):''}${s.verified===false?'<br><b style="color:#E0B85A">SOURCE NOT YET CONFIRMED</b>':''}</div></div></div>`; }
     document.getElementById('vig').style.background='radial-gradient(ellipse at center,rgba(0,0,0,0) 50%,rgba(0,0,0,.35) 100%)';
   },
-  draw(t){ const z=f.zoom||{}; const s0=z.scale?Math.max(1,z.scale*.92):1.0, s1=z.scale||1.08; const p=eIO(clamp(t/DUR)); const sc=lerp(s0,s1,p);
+  draw(t){ const z=D.img?(f.zoom||{}):{}; const s0=z.scale?Math.max(1,z.scale*.92):1.0, s1=z.scale||(D.img?1.08:1.05); const p=eIO(clamp(t/DUR)); const sc=lerp(s0,s1,p);
     const ox=((z.x??50)-50)*-.6*(sc-1)*19.2, oy=((z.y??50)-50)*-.6*(sc-1)*10.8;
     ph.style.transform=`translate(${ox}px,${oy}px) scale(${sc})`; const lo=document.getElementById('lo'); if(lo){ const q=eOut(seg(t,.25,.75)); lo.style.opacity=q; lo.style.transform=`translateX(${(1-q)*-80}px)`; } }
 };
@@ -197,7 +197,7 @@ TPL.pinmap = {
     const union=(a,b)=>{ const x=vw(viewAt(a)), y=vw(viewAt(b)); return [Math.min(x[0],y[0]),Math.max(x[1],y[1]),Math.min(x[2],y[2]),Math.max(x[3],y[3])]; };
     this.bands=[[0,25,'LAND110'],[25,180,'LAND50'],[180,1e9,'LAND']].filter(([a,b])=>hi>=a&&lo<b).map(([a,b,key])=>({a,b,d:pathOf(window[key]||[],true,union(Math.max(a,lo),Math.min(b,hi)))}));
     const V=union(lo,hi);
-    const lakes=(f.rivers===false||hi<40)?'':pathOf(window.LAKES||[],true,union(Math.max(40,lo),hi)), riv=(f.rivers===false||hi<60)?'':pathOf(window.RIVERS||[],false,union(Math.max(60,lo),hi)), bor=(f.borders===false||hi<15)?'':pathOf(window.BORDERS||[],false,union(Math.max(15,lo),hi));
+    const lakes=(f.rivers===false||hi<40)?'':pathOf(window.LAKES||[],true,union(Math.max(40,lo),hi)), riv=(f.rivers===false||hi<260)?'':pathOf(window.RIVERS||[],false,union(Math.max(260,lo),hi)), bor=(f.borders===false||hi<15)?'':pathOf(window.BORDERS||[],false,union(Math.max(15,lo),hi));
     stage.innerHTML = svgOpen+`<rect width="1920" height="1080" fill="#CCD6D2"/>
       <g id="world">${this.bands.map((bd,i)=>`<path id="land${i}" d="${bd.d}" fill="#EFE7D6" stroke="#8B8170" stroke-width="2.2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>`).join('')}
       <path id="bor" d="${bor}" fill="none" stroke="#B4A688" stroke-width="2" stroke-dasharray="7 6" vector-effect="non-scaling-stroke"/>
@@ -219,7 +219,7 @@ TPL.pinmap = {
   draw(t){ const c=this.cam(t), k=this.k; const X=(lat,lon)=>960+(lon-c.lon)*k*c.sc, Y=(lat,lon)=>560-(lat-c.lat)*c.sc;
     this.world.setAttribute('transform',`matrix(${k*c.sc},0,0,${-c.sc},${960-c.lon*k*c.sc},${560+c.lat*c.sc})`);
     this.bands.forEach((bd,i)=>{ document.getElementById('land'+i).style.display = (c.sc>=bd.a && c.sc<bd.b) || (this.bands.length===1) ? '' : 'none'; });
-    riv.style.display = c.sc>=60?'':'none'; lak.style.display = c.sc>=40?'':'none'; bor.style.display = c.sc>=15?'':'none';
+    riv.style.display = c.sc>=260?'':'none'; lak.style.display = c.sc>=40?'':'none'; bor.style.display = c.sc>=15?'':'none';
     let out='';
     (f.labels||[]).forEach((l,i)=>{ const p=eOut(seg(t,(l.at??this.arrive*.6)+i*.1,(l.at??this.arrive*.6)+i*.1+.6)); const it=l.kind==='sea'?'font-style="italic" fill="#4F7487"':l.kind==='region'?'fill="#7A6E5C"':'fill="#5E564A"';
       out+=`<text x="${X(l.lat,l.lon)}" y="${Y(l.lat,l.lon)}" font-size="${l.size||(l.kind==='region'?34:28)}" font-weight="${l.kind==='region'?800:600}" text-anchor="middle" ${it} opacity="${p}" letter-spacing="${l.kind==='region'?6:1}">${esc(l.kind==='region'?l.name.toUpperCase():l.name)}</text>`; });
