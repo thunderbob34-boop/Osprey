@@ -139,7 +139,7 @@
     {
      "name": "United States",
      "lat": 40.5,
-     "lon": -95.0,
+     "lon": -89.0,
      "kind": "region",
      "size": 40
     }
@@ -211,7 +211,7 @@
     {
      "name": "United States",
      "lat": 40.5,
-     "lon": -95.0,
+     "lon": -89.0,
      "kind": "region",
      "size": 40
     }
@@ -267,12 +267,7 @@
    "right_label": "Public demonstration, Boston",
    "right_date": "1846",
    "gap": "Four years",
-   "firsttag": false,
-   "bgmap": {
-    "lat": 36.5,
-    "lon": -78,
-    "span": 13
-   }
+   "firsttag": false
   },
   "visual": "Line draws from 1842 to 1846, then the gap label: four years.",
   "source": null
@@ -511,7 +506,7 @@
   "fields": {
    "kind": "document",
    "label": "The Astonishingly Slow Progress Towards Surgical Anesthesia: Part I",
-   "lower": "\"The Astonishingly Slow Progress Towards Surgical Anesthesia: Part I\" (the review quoted)",
+   "lower": "The review quoted: \"The Astonishingly Slow Progress Towards Surgical Anesthesia: Part I\"",
    "asset": "pmc-ncbi-nlm-nih-gov-articles-pmc8672962",
    "crop": "Crop to the title block only.",
    "zoom": {
@@ -788,12 +783,7 @@
      "sub": ""
     }
    ],
-   "caption": "",
-   "bgmap": {
-    "lat": 42.36,
-    "lon": -71.06,
-    "span": 4
-   }
+   "caption": ""
   },
   "visual": "Three boxes with arrows: written down, talked about, copied.",
   "source": null
@@ -879,13 +869,6 @@
      "size": 40
     },
     {
-     "name": "Atlanta",
-     "lat": 33.749,
-     "lon": -84.388,
-     "kind": "city",
-     "size": 26
-    },
-    {
      "name": "Atlantic Ocean",
      "lat": 31.7,
      "lon": -80.35,
@@ -937,9 +920,9 @@
    "asset": "collections-countway-harvard-edu-onview-items-show-18110",
    "crop": "CROP TO THE PORTRAIT. Never show the printed caption.",
    "zoom": {
-    "scale": 1.25,
+    "scale": 1.5,
     "x": 50,
-    "y": 40
+    "y": 33
    }
   },
   "visual": "Engraved portrait of Crawford Long, slow push-in.",
@@ -977,12 +960,7 @@
     }
    ],
    "arrows": false,
-   "caption": "",
-   "bgmap": {
-    "lat": 34.1,
-    "lon": -83.6,
-    "span": 6
-   }
+   "caption": ""
   },
   "visual": "Three boxes pop in: named patient, known date, 1842.",
   "source": null
@@ -1022,18 +1000,28 @@
   "section_name": "Crawford Long, 1842",
   "text": "Now here's the part that matters. Long didn't publish it until 1849.",
   "type": "date",
-  "template": "date",
+  "template": "archival",
   "fields": {
-   "date": "1849",
-   "caption": "Long didn't publish until 1849",
-   "bgmap": {
-    "lat": 34.1,
-    "lon": -83.6,
-    "span": 6
+   "kind": "engraving",
+   "label": "Crawford W. Long",
+   "lower": "Crawford Long didn't publish until 1849",
+   "asset": "loc-gov-item-2005691407",
+   "crop": "Tight on the face, new crop",
+   "zoom": {
+    "scale": 1.6,
+    "x": 50,
+    "y": 30
    }
   },
-  "visual": "The year 1849 stamps in.",
-  "source": null
+  "visual": "Tight on the face, new crop",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division",
+   "item": "[Dr. Crawford W. Long, bust] (engraving by R. O'Brien, digital ID cph 3a37145)",
+   "url": "https://www.loc.gov/item/2005691407",
+   "rights": "Rights not stated in the search result; confirm on the item page before use",
+   "credit": "Library of Congress Prints and Photographs Division, LCCN 2005691407",
+   "verified": false
+  }
  },
  {
   "id": "04-g",
@@ -1055,12 +1043,7 @@
     }
    ],
    "highlight": "1849",
-   "scale": "years",
-   "bgmap": {
-    "lat": 34.1,
-    "lon": -83.6,
-    "span": 6
-   }
+   "scale": "years"
   },
   "visual": "Timeline spaced by years: the axis draws from 1842 to 1849.",
   "source": null
@@ -1089,12 +1072,7 @@
     }
    ],
    "highlight": "1849",
-   "scale": "years",
-   "bgmap": {
-    "lat": 34.1,
-    "lon": -83.6,
-    "span": 6
-   }
+   "scale": "years"
   },
   "visual": "Same timeline with Morton's 1846 demonstration dropping in between, spaced by years.",
   "source": null
@@ -1117,12 +1095,7 @@
      "label": "Nobody else can build on what you did",
      "sub": ""
     }
-   ],
-   "bgmap": {
-    "lat": 34.1,
-    "lon": -83.6,
-    "span": 6
-   }
+   ]
   },
   "visual": "Two boxes with an arrow: no publishing, nobody builds on it.",
   "source": null
@@ -1167,7 +1140,7 @@
    "scene": "ripple",
    "tag": "ILLUSTRATION · Simplified diagram, not data",
    "params": {
-    "title": "Public versus first",
+    "title": "The way I'd put it",
     "left": "Morton",
     "leftSub": "made it public",
     "right": "Long",
@@ -1183,20 +1156,28 @@
   "section_name": "Crawford Long, 1842",
   "text": "Both of those are true, and they're not the same thing,",
   "type": "scene",
-  "template": "scene",
+  "template": "archival",
   "fields": {
-   "scene": "ripple",
-   "tag": "ILLUSTRATION · Simplified diagram, not data",
-   "params": {
-    "title": "Both are true",
-    "left": "Morton",
-    "leftSub": "made it public",
-    "right": "Long",
-    "rightSub": "did it first"
+   "kind": "engraving",
+   "label": "Crawford W. Long, engraving c. 1877",
+   "lower": "Crawford Long (engraving, c. 1877)",
+   "asset": "collections-countway-harvard-edu-onview-items-show-18110",
+   "crop": "Crop to the portrait only; keep the printed caption out of frame",
+   "zoom": {
+    "scale": 1.6,
+    "x": 50,
+    "y": 32
    }
   },
-  "visual": "Same ripple scene held: public on one side, first on the other.",
-  "source": null
+  "visual": "Crop to the portrait only; keep the printed caption out of frame",
+  "source": {
+   "institution": "Countway Library of Medicine (Harvard), OnView Portrait Collection",
+   "item": "Crawford W. Long, M.D. Discoverer of anaesthesia demonstrated on James M. Venables by the use of sulphuric ether at Jefferson, Jackson Co., Georgia, March 30th, 1842 (engraving, c. 1877)",
+   "url": "https://collections.countway.harvard.edu/onview/items/show/18110",
+   "rights": "Rights not stated in the search result; confirm on the item page before use",
+   "credit": "Countway Library, Portrait Collection M-CL02, box 99, f. 16",
+   "verified": false
+  }
  },
  {
   "id": "04-m",
@@ -1210,7 +1191,7 @@
    "left_lines": [
     "Morton, Boston, 1846"
    ],
-   "right_title": "First",
+   "right_title": "First, of the two",
    "right_lines": [
     "Long, Georgia, 1842"
    ],
@@ -1261,12 +1242,7 @@
      "sub": "March 30"
     }
    ],
-   "caption": "The date was picked because of Long's operation",
-   "bgmap": {
-    "lat": 36,
-    "lon": -80,
-    "span": 12
-   }
+   "caption": "The date was picked because of Long's operation"
   },
   "visual": "Two boxes with an arrow: Long's operation to Doctors' Day.",
   "source": null
@@ -1380,12 +1356,7 @@
    "right_label": "Famous demonstration, Boston",
    "right_date": "October 16",
    "gap": "Long's date, not Boston's",
-   "firsttag": false,
-   "bgmap": {
-    "lat": 36,
-    "lon": -80,
-    "span": 12
-   }
+   "firsttag": false
   },
   "visual": "Line draws from March 30 to October 16, then the gap label.",
   "source": null
@@ -1599,14 +1570,28 @@
   "section_name": "Hanaoka, 1804",
   "text": "And full general anesthesia means exactly what it sounds like, the patient isn't just numbed in one spot,",
   "type": "scene",
-  "template": "scene",
+  "template": "archival",
   "fields": {
-   "scene": "anesthesia",
-   "tag": "ILLUSTRATION · Simplified diagram",
-   "params": {}
+   "kind": "portrait",
+   "label": "Hanaoka Seishu",
+   "lower": "Hanaoka Seishu",
+   "asset": "commons-wikimedia-org-wiki-file-hanaokaseishu-gif",
+   "crop": "New crop: head and shoulders",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 30
+   }
   },
-  "visual": "Two simple head icons: numbed in one spot, versus completely out.",
-  "source": null
+  "visual": "New crop: head and shoulders",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:HanaokaSeishu.gif",
+   "url": "https://commons.wikimedia.org/wiki/File:HanaokaSeishu.gif",
+   "rights": "Public domain (Commons states a faithful reproduction of a 2D work whose author died more than 70 years ago)",
+   "credit": "Wikimedia Commons, File:HanaokaSeishu.gif",
+   "verified": true
+  }
  },
  {
   "id": "06-h",
@@ -1690,33 +1675,28 @@
   "section_name": "Hanaoka, 1804",
   "text": "and it's full general anesthesia, on a named patient, on a known date, in 1804, in Japan,",
   "type": "flow",
-  "template": "flow",
+  "template": "archival",
   "fields": {
-   "title": "Full general anesthesia, 1804",
-   "steps": [
-    {
-     "label": "A named patient",
-     "sub": "Kan Aiya"
-    },
-    {
-     "label": "A known date",
-     "sub": "1804"
-    },
-    {
-     "label": "In Japan",
-     "sub": "Hanaoka Seishu"
-    }
-   ],
-   "arrows": false,
-   "caption": "",
-   "bgmap": {
-    "lat": 34.3,
-    "lon": 135.4,
-    "span": 9
+   "kind": "document",
+   "label": "Two Japanese Pioneers in Anesthesiology",
+   "lower": "\"Two Japanese Pioneers in Anesthesiology\" (journal article page)",
+   "asset": "pubmed-ncbi-nlm-nih-gov-28160985",
+   "crop": "Crop to the left of the title, only Hanaoka's name",
+   "zoom": {
+    "scale": 1.7,
+    "x": 30,
+    "y": 20
    }
   },
-  "visual": "Three boxes pop in: named patient, known date, Japan.",
-  "source": null
+  "visual": "Crop to the left of the title, only Hanaoka's name",
+  "source": {
+   "institution": "PubMed (National Library of Medicine)",
+   "item": "Two Japanese Pioneers in Anesthesiology: Seishū Hanaoka and Gendai Kamada (PubMed 28160985)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/28160985/",
+   "rights": "Rights not stated in the search result; confirm on the item page before use",
+   "credit": "PubMed, NLM",
+   "verified": false
+  }
  },
  {
   "id": "06-m",
@@ -1822,12 +1802,7 @@
      "label": "William Morton, Boston"
     }
    ],
-   "scale": "years",
-   "bgmap": {
-    "lat": 34.3,
-    "lon": 135.4,
-    "span": 9
-   }
+   "scale": "years"
   },
   "visual": "Timeline spaced by years: 1804 Japan, 1842 Georgia, 1846 Boston",
   "source": null
@@ -1857,12 +1832,7 @@
    ],
    "scale": "years",
    "highlight": "1846",
-   "step": 3,
-   "bgmap": {
-    "lat": 34.3,
-    "lon": 135.4,
-    "span": 9
-   }
+   "step": 3
   },
   "visual": "Timeline spaced by years: 1804 Japan, 1842 Georgia, 1846 Boston (1846 highlighted)",
   "source": null
@@ -1959,12 +1929,7 @@
    "right_label": "Long publishes",
    "right_date": "1849",
    "gap": "Didn't publish until 1849",
-   "firsttag": false,
-   "bgmap": {
-    "lat": 30,
-    "lon": 10,
-    "span": 120
-   }
+   "firsttag": false
   },
   "visual": "Line draws from March 30, 1842 to 1849, then the gap label.",
   "source": null
@@ -2012,12 +1977,7 @@
    "right_label": "Public demonstration, Boston",
    "right_date": "October 16, 1846",
    "gap": "42 years",
-   "firsttag": false,
-   "bgmap": {
-    "lat": 30,
-    "lon": 10,
-    "span": 120
-   }
+   "firsttag": false
   },
   "visual": "Line draws from 1804 to October 16, 1846, then the gap label: 42 years.",
   "source": null
@@ -2043,12 +2003,7 @@
    ],
    "highlight": 0,
    "step": 1,
-   "scale": "years",
-   "bgmap": {
-    "lat": 30,
-    "lon": 10,
-    "span": 120
-   }
+   "scale": "years"
   },
   "visual": "Timeline spaced by years: 1804, Hanaoka Seishu in Japan, lands first and is highlighted.",
   "source": null
@@ -2074,12 +2029,7 @@
    ],
    "highlight": 1,
    "step": 2,
-   "scale": "years",
-   "bgmap": {
-    "lat": 30,
-    "lon": 10,
-    "span": 120
-   }
+   "scale": "years"
   },
   "visual": "Same timeline: 1804 already shown, 1842 Crawford Long drops in.",
   "source": null

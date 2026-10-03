@@ -914,12 +914,7 @@
    ],
    "scale": "years",
    "highlight": 0,
-   "step": 1,
-   "bgmap": {
-    "lat": 40.84,
-    "lon": 14.25,
-    "span": 0.4
-   }
+   "step": 1
   },
   "visual": "Timeline, step 1: the axis draws and 1889 pops in; 1930s waits ghosted.",
   "source": null,
@@ -946,12 +941,7 @@
    ],
    "scale": "years",
    "highlight": 1,
-   "step": 2,
-   "bgmap": {
-    "lat": 40.84,
-    "lon": 14.25,
-    "span": 0.4
-   }
+   "step": 2
   },
   "visual": "Timeline, step 2: the 1930s pops in, labelled per Nowak.",
   "source": null,
@@ -995,12 +985,7 @@
     }
    ],
    "caption": "Nowak's argument, not proven",
-   "arrows": true,
-   "bgmap": {
-    "lat": 40.84,
-    "lon": 14.25,
-    "span": 0.4
-   }
+   "arrows": true
   },
   "visual": "Flow: a palace thank-you letter, an arrow, marketing for a pizzeria; caption says it is his argument, not proven.",
   "source": null
@@ -1230,12 +1215,7 @@
    "step": 2,
    "highlight": 2,
    "caption": "Not one word stronger",
-   "arrows": false,
-   "bgmap": {
-    "lat": 40.84,
-    "lon": 14.25,
-    "span": 0.4
-   }
+   "arrows": false
   },
   "visual": "Flow, box 2 builds in: \"Likely the Brandi family\". Caption: not one word stronger.",
   "source": null,
@@ -1320,12 +1300,7 @@
    ],
    "highlight": 2,
    "caption": "A book about the customs of Naples",
-   "arrows": false,
-   "bgmap": {
-    "lat": 40.85,
-    "lon": 14.27,
-    "span": 3
-   }
+   "arrows": false
   },
   "visual": "Flow: two boxes, \"Francesco de Bourcard, editor\" and \"Emmanuele Rocco, Neapolitan writer\".",
   "source": null,
@@ -1399,12 +1374,7 @@
    "right_label": "The queen's supposed visit",
    "right_date": "1889",
    "gap": "three decades",
-   "firsttag": false,
-   "bgmap": {
-    "lat": 40.85,
-    "lon": 14.27,
-    "span": 3
-   }
+   "firsttag": false
   },
   "visual": "Datecard: a line draws from 1858 to 1889 and the gap label \"three decades\" appears.",
   "source": null
@@ -2151,12 +2121,7 @@
     }
    ],
    "scale": "years",
-   "highlight": "1858",
-   "bgmap": {
-    "lat": 41.5,
-    "lon": 13,
-    "span": 8
-   }
+   "highlight": "1858"
   },
   "visual": "Timeline spaced by years: 1858 (red), 1889, the 1930s.",
   "source": null,

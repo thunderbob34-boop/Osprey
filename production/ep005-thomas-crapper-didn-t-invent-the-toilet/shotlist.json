@@ -62,12 +62,7 @@
     }
    ],
    "highlight": 1,
-   "caption": "What many people say",
-   "bgmap": {
-    "lat": 52,
-    "lon": -1.5,
-    "span": 8
-   }
+   "caption": "What many people say"
   },
   "visual": "Two boxes pop in, joined by an arrow: the claim, then the supposed result.",
   "source": null
@@ -263,12 +258,7 @@
    ],
    "step": 1,
    "highlight": 0,
-   "caption": "The story as it is usually told",
-   "bgmap": {
-    "lat": 51.5,
-    "lon": -0.15,
-    "span": 1.5
-   }
+   "caption": "The story as it is usually told"
   },
   "visual": "Flow: first box pops in, the other two ghosted.",
   "source": null
@@ -298,12 +288,7 @@
    ],
    "step": 3,
    "highlight": 2,
-   "caption": "The story as it is usually told",
-   "bgmap": {
-    "lat": 51.5,
-    "lon": -0.15,
-    "span": 1.5
-   }
+   "caption": "The story as it is usually told"
   },
   "visual": "Same flow, the last box lands: his name becomes the slang.",
   "source": null
@@ -910,12 +895,7 @@
    "right_label": "Crapper's patents",
    "right_date": "Late 1800s",
    "gap": "thousands of years older",
-   "firsttag": false,
-   "bgmap": {
-    "lat": 35.3,
-    "lon": 25.2,
-    "span": 4
-   }
+   "firsttag": false
   },
   "visual": "A line draws between the two dates, then the gap label appears.",
   "source": null
@@ -1164,12 +1144,7 @@
    ],
    "arrows": false,
    "highlight": 1,
-   "caption": "Described in The Metamorphosis of Ajax",
-   "bgmap": {
-    "lat": 51.4,
-    "lon": -2.4,
-    "span": 2
-   }
+   "caption": "Described in The Metamorphosis of Ajax"
   },
   "visual": "Two boxes: not a later legend, it's on paper.",
   "source": null
@@ -1188,12 +1163,7 @@
    "right_label": "Crapper's patents",
    "right_date": "Late 1800s",
    "gap": "nearly three centuries",
-   "firsttag": false,
-   "bgmap": {
-    "lat": 51.4,
-    "lon": -2.4,
-    "span": 2
-   }
+   "firsttag": false
   },
   "visual": "Line draws from 1596 to the late 1800s, gap label lands.",
   "source": null
@@ -1557,12 +1527,7 @@
      "label": "Crapper: improvements"
     }
    ],
-   "highlight": 2,
-   "bgmap": {
-    "lat": 51.49,
-    "lon": -0.17,
-    "span": 0.8
-   }
+   "highlight": 2
   },
   "visual": "Timeline draws left to right, and Crapper's late 1800s lights up last.",
   "source": null,
@@ -1606,12 +1571,7 @@
    ],
    "arrows": false,
    "highlight": 1,
-   "caption": "A real engineer, not the inventor",
-   "bgmap": {
-    "lat": 51.49,
-    "lon": -0.17,
-    "span": 0.8
-   }
+   "caption": "A real engineer, not the inventor"
   },
   "visual": "Two boxes: made it better, didn't invent it.",
   "source": null
@@ -2063,12 +2023,7 @@
      "label": "Cumming: S-bend"
     }
    ],
-   "highlight": null,
-   "bgmap": {
-    "lat": 40,
-    "lon": 30,
-    "span": 40
-   }
+   "highlight": null
   },
   "visual": "Timeline draws and the somebodies pop in one by one.",
   "source": null

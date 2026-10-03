@@ -4,7 +4,7 @@ Usage: python3 bgmaps.py <ep folder> '<json: {"01": [lat, lon, span], ...}>'  (s
 import json, sys
 from pathlib import Path
 EP = Path(sys.argv[1]); cfg = json.loads(sys.argv[2])
-TEXTISH = {'text', 'date', 'stat', 'quote', 'compare', 'datecard', 'flow', 'timeline'}
+TEXTISH = {'text', 'date', 'stat', 'quote', 'compare'}  # never behind timelines, datecards or flows: their left-right layout reads as geography
 p = EP / 'shotlist.json'; B = json.load(open(p)); n = 0
 for b in B:
     c = cfg.get(b['section'])
