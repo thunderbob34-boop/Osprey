@@ -74,8 +74,8 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Capodimonte palace",
-   "lower": "Capodimonte palace, Naples: the palace in the legend (modern photograph)",
+   "label": "A royal palace in Naples (Capodimonte)",
+   "lower": "A royal palace in Naples (Capodimonte, modern photograph)",
    "asset": "capodimonte_facade",
    "crop": "Facade across the middle band, slow push-in",
    "zoom": {
@@ -84,7 +84,7 @@
     "y": 58
    }
   },
-  "visual": "Slow push-in on the facade of Capodimonte palace; the lower-third calls it the palace in the legend.",
+  "visual": "Slow push-in on the facade of the royal palace of Capodimonte, Naples; the lower-third just says what the photo is.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "Museo Capodimonte Napoli facciata Sudovest.jpg",
@@ -100,7 +100,6 @@
   "section_name": "Cold Open",
   "text": "Well, one historian took a hard look at that royal letter,",
   "year": 2014,
-  "year_label": "today",
   "type": "archival",
   "template": "archival",
   "fields": {
@@ -124,7 +123,7 @@
    "credit": "Attributed to Camillo Galli (supposed); scan via BBC / Wikimedia Commons",
    "verified": true
   },
-  "notes": "palace_letter is a 312 px scan whose date is the thing in dispute: used twice only, at scale 1.0-1.05, never presented as genuine."
+  "notes": "palace_letter is a 312 px scan whose date is the thing in dispute: used four times (01-d, 02-g, 03-a, 03-f), each a different focus, at scale 1.0-1.05, never presented as genuine."
  },
  {
   "id": "01-e",
@@ -132,7 +131,6 @@
   "section_name": "Cold Open",
   "text": "and he found its seal in the wrong place, and that's only the first problem with it.",
   "year": 2014,
-  "year_label": "today",
   "type": "flow",
   "template": "flow",
   "fields": {
@@ -155,7 +153,6 @@
   "section_name": "Cold Open",
   "text": "He thinks the letter is probably fake.",
   "year": 2014,
-  "year_label": "today",
   "type": "text",
   "template": "text",
   "fields": {
@@ -236,7 +233,7 @@
   "fields": {
    "kind": "photo",
    "label": "Santa Lucia, Naples, 1860s",
-   "lower": "The pizza was there first (Santa Lucia, Naples, 1860s, Roberto Rive)",
+   "lower": "Santa Lucia, Naples, in the 1860s (photograph by Roberto Rive)",
    "asset": "naples_santa_lucia_1860s",
    "crop": "Waterfront buildings, centre-left",
    "zoom": {
@@ -311,13 +308,26 @@
     }
    ],
    "routes": [],
-   "labels": [],
+   "labels": [
+    {
+     "name": "Naples",
+     "lat": 40.86,
+     "lon": 14.27,
+     "kind": "city"
+    },
+    {
+     "name": "Bay of Naples",
+     "lat": 40.72,
+     "lon": 14.2,
+     "kind": "sea"
+    }
+   ],
    "from": {
     "lat": 40.8,
     "lon": 14.25,
-    "span": 0.9
+    "span": 1.8
    },
-   "span": 0.3,
+   "span": 0.55,
    "caption": "Pizzaiolo: a pizza maker",
    "note": "Natural Earth · positions approximate"
   },
@@ -382,7 +392,7 @@
   "fields": {
    "kind": "document",
    "label": "The Italian flag",
-   "lower": "The Italian flag: green, white and red",
+   "lower": "Today's Italian flag: green, white and red",
    "asset": "italian_flag",
    "crop": "Whole flag, gentle push-in",
    "zoom": {
@@ -484,26 +494,27 @@
   "type": "archival",
   "template": "archival",
   "fields": {
-   "kind": "photo",
-   "label": "Capodimonte ballroom",
-   "lower": "The legend's proof: a palace letter (Capodimonte ballroom, modern photo)",
-   "asset": "capodimonte_ballroom",
-   "crop": "Down the ballroom to the vanishing point",
+   "kind": "document",
+   "label": "The letter said to be from 1889",
+   "lower": "The letter said to be from 1889",
+   "asset": "palace_letter",
+   "crop": "Whole page, small, near-still (tiny 312 px scan); new focus slightly high",
    "zoom": {
-    "scale": 1.25,
+    "scale": 1.0,
     "x": 50,
-    "y": 50
+    "y": 40
    }
   },
-  "visual": "Slow push-in down the ballroom of Capodimonte palace.",
+  "visual": "The small scan of the letter, whole and almost still, as the narration calls it the proof.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Palace of Capodimonte (Naples) 03.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Palace_of_Capodimonte_%28Naples%29_03.jpg",
-   "rights": "CC BY 4.0",
-   "credit": "Bernard Gagnon / Wikimedia Commons",
+   "item": "Lettera di ringraziamento a Raffaele Esposito.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Lettera_di_ringraziamento_a_Raffaele_Esposito.jpg",
+   "rights": "Public domain",
+   "credit": "Attributed to Camillo Galli (supposed); scan via BBC / Wikimedia Commons",
    "verified": true
-  }
+  },
+  "notes": "palace_letter is the disputed object; shown small at scale 1.0-1.05 and never presented as genuine."
  },
  {
   "id": "02-h",
@@ -654,7 +665,7 @@
    "credit": "Attributed to Camillo Galli (supposed); scan via BBC / Wikimedia Commons",
    "verified": true
   },
-  "notes": "palace_letter is a 312 px scan whose date is the thing in dispute: used twice only, at scale 1.0-1.05, never presented as genuine. No picture of Nowak is used; his name rides the lower-third."
+  "notes": "palace_letter is a 312 px scan whose date is the thing in dispute: used four times (01-d, 02-g, 03-a, 03-f), each a different focus, at scale 1.0-1.05, never presented as genuine. No picture of Nowak is used; his name rides the lower-third."
  },
  {
   "id": "03-b",
@@ -767,26 +778,36 @@
   "section_name": "The Letter",
   "text": "And the third one is the name it's addressed to,",
   "year": 2014,
-  "type": "compare",
-  "template": "compare",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "left_title": "His own surname",
-   "left_lines": [
-    "Esposito"
-   ],
-   "right_title": "The name on the letter",
-   "right_lines": [
-    "His wife's surname, Brandi"
-   ],
-   "bgmap": {
-    "lat": 40.85,
-    "lon": 14.25,
-    "span": 1.2
+   "kind": "document",
+   "label": "The letter said to be from 1889",
+   "lower": "The letter said to be from 1889",
+   "asset": "palace_letter",
+   "crop": "Lower part of the page, near-still (tiny 312 px scan)",
+   "zoom": {
+    "scale": 1.05,
+    "x": 50,
+    "y": 60
    },
-   "step": 1
+   "counters": [
+    {
+     "text": "The name it's addressed to",
+     "at": 1.4
+    }
+   ]
   },
-  "visual": "Compare card, step 1: His own surname, Esposito, lit; the name on the letter ghosted.",
-  "source": null
+  "visual": "The small letter scan again, almost still; a chip names the third problem as it is spoken.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "Lettera di ringraziamento a Raffaele Esposito.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Lettera_di_ringraziamento_a_Raffaele_Esposito.jpg",
+   "rights": "Public domain",
+   "credit": "Attributed to Camillo Galli (supposed); scan via BBC / Wikimedia Commons",
+   "verified": true
+  },
+  "notes": "Breaks the run of cards and maps in section 03 with the object itself. Fourth and last use of palace_letter, each a different focus."
  },
  {
   "id": "03-g",
@@ -812,7 +833,7 @@
    },
    "step": 2
   },
-  "visual": "Compare card, step 2: the name on the letter, his wife's surname, Brandi, is revealed.",
+  "visual": "Compare card: his own surname, Esposito, then the name on the letter, his wife's surname, Brandi, is revealed.",
   "source": null
  },
  {
@@ -838,7 +859,7 @@
      "at": 2.4
     },
     {
-     "name": "Capodimonte palace (in the legend)",
+     "name": "The royal palace (in the legend)",
      "lat": 40.8664,
      "lon": 14.2504,
      "sub": "",
@@ -873,17 +894,30 @@
      "dur": 2.4
     }
    ],
-   "labels": [],
+   "labels": [
+    {
+     "name": "Naples",
+     "lat": 40.86,
+     "lon": 14.27,
+     "kind": "city"
+    },
+    {
+     "name": "Bay of Naples",
+     "lat": 40.72,
+     "lon": 14.2,
+     "kind": "sea"
+    }
+   ],
    "from": {
     "lat": 40.8,
     "lon": 14.25,
-    "span": 0.9
+    "span": 1.8
    },
-   "span": 0.3,
+   "span": 0.55,
    "caption": "If the palace is writing to thank him",
    "note": "Natural Earth · positions approximate · the line is the legend, not a documented route"
   },
-  "visual": "The Naples map: pizzeria and Capodimonte pins, then a dashed line from the palace to the pizzeria labelled as the legend's letter.",
+  "visual": "The Naples map: pizzeria and royal palace (in the legend) pins, then a dashed line from the palace to the pizzeria labelled as the legend's letter.",
   "source": null,
   "notes": "pizzeria_brandi and capodimonte_palace from places.json. The line is the legend, not a documented route."
  },
@@ -898,8 +932,8 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Capodimonte palace",
-   "lower": "Capodimonte, the palace in the legend (modern photograph)",
+   "label": "A royal palace in Naples (Capodimonte)",
+   "lower": "A royal palace in Naples (Capodimonte, modern photograph)",
    "asset": "capodimonte_facade",
    "crop": "New crop: left wing of the facade",
    "zoom": {
@@ -908,7 +942,7 @@
     "y": 60
    }
   },
-  "visual": "Push-in on the left wing of the Capodimonte facade.",
+  "visual": "New crop on the left wing of the Capodimonte facade; plain photo caption.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "Museo Capodimonte Napoli facciata Sudovest.jpg",
@@ -928,23 +962,23 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Brandi plaque, Naples",
-   "lower": "The name that matters next: Brandi (plaque in Naples)",
-   "asset": "brandi_plaque_2",
-   "crop": "Plaque text, centred",
+   "label": "Vicolo del Pallonetto, Naples",
+   "lower": "Vicolo del Pallonetto, a narrow street in Santa Lucia, Naples, about 1880-1920 (Giacomo Brogi)",
+   "asset": "naples_vicolo_pallonetto",
+   "crop": "Down the alley, lower right where the detail is",
    "zoom": {
-    "scale": 1.2,
-    "x": 46,
-    "y": 50
+    "scale": 1.25,
+    "x": 55,
+    "y": 62
    }
   },
-  "visual": "Push-in on a plaque in Naples about the pizza Margherita, tied to the Brandi name.",
+  "visual": "Push-in down a narrow Naples street of the period; plain photo caption.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Pizza Napoli Brandi.jpeg",
-   "url": "https://commons.wikimedia.org/wiki/File:Pizza_Napoli_Brandi.jpeg",
+   "item": "Napoli-Vicolo del Pallonetto a Santa Lucia, RP-F-F16747.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Napoli-Vicolo_del_Pallonetto_a_Santa_Lucia%2C_RP-F-F16747.jpg",
    "rights": "CC0",
-   "credit": "Uploader (permission confirmed by Wikimedia VRTS) / Wikimedia Commons",
+   "credit": "Giacomo Brogi / Rijksmuseum / Wikimedia Commons",
    "verified": true
   }
  },
@@ -973,8 +1007,7 @@
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "Nowak thinks it was probably made up later, and likely by the Brandi family,",
-  "year": 1930,
-  "year_label": "later",
+  "year": 2014,
   "type": "pinmap",
   "template": "pinmap",
   "fields": {
@@ -992,18 +1025,16 @@
    ],
    "labels": [
     {
-     "name": "Italy",
-     "lat": 41.4,
-     "lon": 13.2,
-     "kind": "region",
-     "size": 40
+     "name": "Naples",
+     "lat": 40.86,
+     "lon": 14.27,
+     "kind": "city"
     },
     {
      "name": "Bay of Naples",
      "lat": 40.72,
-     "lon": 14.12,
-     "kind": "sea",
-     "size": 28
+     "lon": 14.2,
+     "kind": "sea"
     }
    ],
    "from": {
@@ -1011,7 +1042,7 @@
     "lon": 13.6,
     "span": 4
    },
-   "span": 0.5,
+   "span": 0.55,
    "caption": "Nowak's argument",
    "note": "Natural Earth · positions approximate"
   },
@@ -1061,8 +1092,7 @@
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "And a thank-you letter from the palace is about the best marketing",
-  "year": 1930,
-  "year_label": "1930s",
+  "year": 2014,
   "type": "flow",
   "template": "flow",
   "fields": {
@@ -1088,8 +1118,7 @@
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "a pizzeria could ask for, so that part isn't hard to understand.",
-  "year": 1930,
-  "year_label": "1930s",
+  "year": 2014,
   "type": "flow",
   "template": "flow",
   "fields": {
@@ -1121,7 +1150,7 @@
   "fields": {
    "kind": "photo",
    "label": "Strada di Santa Lucia, Naples",
-   "lower": "His argument, not proven (Strada di Santa Lucia, Naples, about 1880-95)",
+   "lower": "Strada di Santa Lucia, Naples, about 1880-95 (Alinari)",
    "asset": "naples_strada_santa_lucia",
    "crop": "Street and people, middle of the frame",
    "zoom": {
@@ -1130,7 +1159,7 @@
     "y": 55
    }
   },
-  "visual": "Slow push-in on the Strada di Santa Lucia in Naples, laundry drying over the street; the lower-third carries the hedge.",
+  "visual": "Push-in on a Naples street of the 1880s-90s; plain photo caption.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "Strada di Santa Lucia in Napels met mensen op straat en drogend wasgoed P.e 1.a N.o 11316. NAPOLI - Strada di S. Lucia. (titel op object), RP-F-00-1657.jpg",
@@ -1172,73 +1201,57 @@
   "section_name": "Who Made It Up",
   "text": "What Nowak has is a letter with the seal in the wrong place, handwriting that doesn't match, and the wrong surname on it,",
   "year": 2014,
-  "type": "archival",
-  "template": "archival",
+  "type": "flow",
+  "template": "flow",
   "fields": {
-   "kind": "photo",
-   "label": "Capodimonte ballroom",
-   "lower": "What Nowak has (Capodimonte, the palace in the legend, modern photo)",
-   "asset": "capodimonte_ballroom",
-   "crop": "New crop: ornate lower right of the ballroom",
-   "zoom": {
-    "scale": 1.35,
-    "x": 65,
-    "y": 62
-   },
-   "counters": [
+   "title": "What Nowak has: a letter with",
+   "steps": [
     {
-     "text": "Seal in the wrong place",
-     "at": 2.9
+     "label": "The seal",
+     "sub": "In the wrong place"
     },
     {
-     "text": "Handwriting doesn't match",
-     "at": 4.6
+     "label": "The handwriting",
+     "sub": "Doesn't match"
     },
     {
-     "text": "Wrong surname",
-     "at": 6.8
+     "label": "The surname",
+     "sub": "The wrong one"
     }
-   ]
+   ],
+   "arrows": false
   },
-  "visual": "Push-in on the ornate corner of the Capodimonte ballroom; three chips pop in as each problem is named.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "Palace of Capodimonte (Naples) 03.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Palace_of_Capodimonte_%28Naples%29_03.jpg",
-   "rights": "CC BY 4.0",
-   "credit": "Bernard Gagnon / Wikimedia Commons",
-   "verified": true
-  },
-  "notes": "23 words; the chips carry the three problems instead of an illustrated letter."
+  "visual": "Flow card: three boxes pop in, the seal in the wrong place, handwriting that doesn't match, the wrong surname.",
+  "source": null,
+  "notes": "23 words; the three problems as a flow card instead of a photo."
  },
  {
   "id": "04-i",
   "section": "04",
   "section_name": "Who Made It Up",
   "text": "and from that he thinks it was probably made up later, likely by the Brandi family.",
-  "year": 1930,
-  "year_label": "later",
+  "year": 2014,
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Brandi plaque, Naples",
-   "lower": "Nowak thinks: probably made up later, likely by the Brandi family",
-   "asset": "brandi_plaque_2",
-   "crop": "New crop: upper half of the plaque",
+   "label": "Street vendors at Santa Lucia, Naples",
+   "lower": "Street vendors at Santa Lucia, Naples, about 1900 (Alinari)",
+   "asset": "naples_street_vendors",
+   "crop": "Vendors across the middle of the frame",
    "zoom": {
-    "scale": 1.4,
-    "x": 46,
-    "y": 38
+    "scale": 1.2,
+    "x": 50,
+    "y": 55
    }
   },
-  "visual": "Closer push-in on the Brandi plaque; the lower-third carries the hedge.",
+  "visual": "Push-in on street vendors in Naples, about 1900; plain photo caption, no claim attached.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Pizza Napoli Brandi.jpeg",
-   "url": "https://commons.wikimedia.org/wiki/File:Pizza_Napoli_Brandi.jpeg",
-   "rights": "CC0",
-   "credit": "Uploader (permission confirmed by Wikimedia VRTS) / Wikimedia Commons",
+   "item": "Naples – Street vendors at Santa Lucia (c.1900), by Fratelli Alinari.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Naples_%E2%80%93_Street_vendors_at_Santa_Lucia_%28c.1900%29%2C_by_Fratelli_Alinari.jpg",
+   "rights": "Public domain",
+   "credit": "Fratelli Alinari / Wikimedia Commons",
    "verified": true
   }
  },
@@ -1395,8 +1408,7 @@
   "section": "05",
   "section_name": "The Pizza Was Already There",
   "text": "So that's 1858, which is three decades before the queen's supposed visit in 1889.",
-  "year": 1889,
-  "year_label": "1889 (legend)",
+  "year": 1858,
   "type": "datecard",
   "template": "datecard",
   "fields": {
@@ -1487,8 +1499,7 @@
   "section": "05",
   "section_name": "The Pizza Was Already There",
   "text": "You'll find people online saying the 1858 book names the Margherita,",
-  "year": 2020,
-  "year_label": "today",
+  "year": 1858,
   "type": "compare",
   "template": "compare",
   "fields": {
@@ -1560,8 +1571,8 @@
    "labels": [
     {
      "name": "Italy",
-     "lat": 41.1,
-     "lon": 13.5,
+     "lat": 41.3,
+     "lon": 15.0,
      "kind": "region",
      "size": 40
     }
@@ -1633,7 +1644,7 @@
      "at": 1.5
     },
     {
-     "name": "Capodimonte palace (in the legend)",
+     "name": "The royal palace (in the legend)",
      "lat": 40.8664,
      "lon": 14.2504,
      "sub": "Queen Margherita",
@@ -1665,13 +1676,26 @@
      "dur": 1.7
     }
    ],
-   "labels": [],
+   "labels": [
+    {
+     "name": "Naples",
+     "lat": 40.86,
+     "lon": 14.27,
+     "kind": "city"
+    },
+    {
+     "name": "Bay of Naples",
+     "lat": 40.72,
+     "lon": 14.2,
+     "kind": "sea"
+    }
+   ],
    "from": {
     "lat": 40.8,
     "lon": 14.25,
-    "span": 0.9
+    "span": 1.8
    },
-   "span": 0.3,
+   "span": 0.55,
    "caption": "We don't know whether he served the queen anything",
    "note": "Natural Earth · positions approximate · the line is the legend, not a documented route"
   },
@@ -1690,7 +1714,7 @@
   "fields": {
    "kind": "photo",
    "label": "Via Roma, Naples",
-   "lower": "Maybe he did (Via Roma, Naples, about 1893-1903, Giorgio Sommer)",
+   "lower": "Via Roma (today's Via Toledo), Naples, about 1893-1903 (Giorgio Sommer)",
    "asset": "naples_via_roma",
    "crop": "Street and carriages, middle to lower centre",
    "zoom": {
@@ -1699,7 +1723,7 @@
     "y": 58
    }
   },
-  "visual": "Slow push-in along Via Roma in Naples with horse-drawn carriages.",
+  "visual": "Push-in on Via Roma, Naples, with carriages; plain photo caption.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "1182 Napoli via Roma (titel op object) Napels (titel op object), RP-F-2007-358-26.jpg",
@@ -1748,7 +1772,7 @@
   "fields": {
    "kind": "engraving",
    "label": "Queen Margherita",
-   "lower": "Nobody knows (Queen Margherita of Italy, engraved from a photograph, 1893)",
+   "lower": "Queen Margherita of Italy, engraved from a photograph (1893)",
    "asset": "queen_margherita_1893",
    "crop": "New crop: tighter on the face",
    "zoom": {
@@ -1772,8 +1796,7 @@
   "section": "06",
   "section_name": "Fair Credit",
   "text": "but the letter that's supposed to prove it looks like it was probably made up later,",
-  "year": 1930,
-  "year_label": "later",
+  "year": 2014,
   "type": "flow",
   "template": "flow",
   "fields": {
@@ -1802,7 +1825,7 @@
   "fields": {
    "kind": "engraving",
    "label": "A Neapolitan pizza maker (print)",
-   "lower": "Already described in 1858 (a Neapolitan pizza maker, print by Gaetano Dura)",
+   "lower": "A Neapolitan pizza maker (19th-century print by Gaetano Dura)",
    "asset": "pizzaiolo_print",
    "crop": "Figure centred, light push-in (900 px wide source)",
    "zoom": {
@@ -1834,7 +1857,7 @@
   "fields": {
    "kind": "photo",
    "label": "Pizza Margherita in Naples (modern)",
-   "lower": "The famous story: pizza Margherita (Naples, modern photograph, 2015)",
+   "lower": "A pizza Margherita in Naples (modern photograph, 2015)",
    "asset": "pizza_margherita_naples",
    "crop": "New crop: the basil and mozzarella, upper left",
    "zoom": {
@@ -1987,29 +2010,28 @@
   "section": "07",
   "section_name": "Who Was First",
   "text": "and he thinks it was probably made up later, likely by the Brandi family as marketing.",
-  "year": 1930,
-  "year_label": "later",
+  "year": 2014,
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Plaque at Pizzeria Brandi",
-   "lower": "Nowak thinks: probably later, likely the Brandi family, as marketing",
-   "asset": "brandi_plaque",
-   "crop": "New crop: wider, centre of the frame",
+   "label": "Naples from Vesuvius",
+   "lower": "Naples seen from the slopes of Vesuvius, about 1870-1900 (Giorgio Sommer)",
+   "asset": "naples_from_vesuvius",
+   "crop": "New crop: city and bay, centre-left",
    "zoom": {
-    "scale": 1.25,
-    "x": 48,
-    "y": 42
+    "scale": 1.35,
+    "x": 42,
+    "y": 60
    }
   },
-  "visual": "Wider push-in on the plaque at Pizzeria Brandi; the lower-third carries the hedge.",
+  "visual": "New crop on Naples and the bay seen from Vesuvius; plain photo caption.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "TargaInvenzionePizzaMargheritaDaBrandi.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:TargaInvenzionePizzaMargheritaDaBrandi.jpg",
-   "rights": "CC BY-SA 4.0",
-   "credit": "Alessandro57 / Wikimedia Commons",
+   "item": "Napels gezien vanaf de flanken van de Vesuvius Napoli dal Vesuvio (titel op object), RP-F-F01000-AO.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Napels_gezien_vanaf_de_flanken_van_de_Vesuvius_Napoli_dal_Vesuvio_%28titel_op_object%29%2C_RP-F-F01000-AO.jpg",
+   "rights": "CC0",
+   "credit": "Giorgio Sommer / Rijksmuseum / Wikimedia Commons",
    "verified": true
   }
  },
@@ -2023,14 +2045,14 @@
   "template": "archival",
   "fields": {
    "kind": "engraving",
-   "label": "Il Pizzaiuolo, 1858 plate",
-   "lower": "Il Pizzaiuolo, the pizza maker: a plate from the 1858 book",
-   "asset": "bourcard_pizzaiuolo",
-   "crop": "New focus: lower centre of the scene",
+   "label": "A Neapolitan pizza maker (print)",
+   "lower": "A Neapolitan pizza maker (19th-century print by Gaetano Dura)",
+   "asset": "pizzaiolo_print",
+   "crop": "New crop: lower half, the figure's hands (900 px wide source)",
    "zoom": {
-    "scale": 1.2,
+    "scale": 1.15,
     "x": 50,
-    "y": 66
+    "y": 62
    },
    "counters": [
     {
@@ -2047,16 +2069,16 @@
     }
    ]
   },
-  "visual": "The 1858 plate, aimed low and centre; chips pop in: basil, thin slices of mozzarella, sometimes tomato.",
+  "visual": "Push-in on the 19th-century pizza maker print; toppings chip in as they are named.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "BOURCARD(1858) p2.172 - IL PIZZAIUOLO.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:BOURCARD%281858%29_p2.172_-_IL_PIZZAIUOLO.jpg",
+   "item": "PizzaioloPrint.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:PizzaioloPrint.jpg",
    "rights": "Public domain",
-   "credit": "F. Palizzi (attributed) / British Library / Wikimedia Commons",
+   "credit": "Gaetano Dura / Wikimedia Commons",
    "verified": true
   },
-  "notes": "The plate shows a pizza maker; never labelled or described as a Margherita."
+  "notes": "Generic 19th-century pizza maker, not tied to Rocco's text or to Esposito."
  },
  {
   "id": "07-h",

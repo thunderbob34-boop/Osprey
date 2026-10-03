@@ -1,37 +1,15 @@
 {
 "images": {
-"long_statue": {
-"title": "CW Long Statue.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/CW_Long_Statue.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:CW_Long_Statue.jpg",
-"license": "CC0",
-"credit": "MallardTV / Wikimedia Commons",
-"caption": "Crawford Long's marble statue in the U.S. Capitol, part of the National Statuary Hall Collection (modern photograph)",
-"w": 4284,
-"h": 5712,
-"desc": "Vertical modern photo of the standing white-marble statue by J. Massey Rhind (Commons files it under the Capitol Crypt). No border, detail spread evenly; statue presumed centred. No face detected, so the head position (upper third, centre) is a guess."
-},
-"morton_inhaler": {
-"title": "Ether inhaler, c. 1846, developed by William T. G. Morton - National Museum of American History - DSC06167.JPG",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Ether_inhaler%2C_c._1846%2C_developed_by_William_T._G._Morton_-_National_Museum_of_American_History_-_DSC06167.JPG?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Ether_inhaler%2C_c._1846%2C_developed_by_William_T._G._Morton_-_National_Museum_of_American_History_-_DSC06167.JPG",
-"license": "CC0",
-"credit": "Daderot / Wikimedia Commons",
-"caption": "Ether inhaler, about 1846, developed by William Morton (National Museum of American History)",
-"w": 2817,
-"h": 3837,
-"desc": "Vertical museum photo of the glass inhaler; dark band across the very top (about 8%). Object near centre with detail strongest top-left; exact outline is a guess."
-},
-"shunrinken": {
-"title": "Shunrinken01s3872.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Shunrinken01s3872.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Shunrinken01s3872.jpg",
-"license": "CC BY 2.5",
-"credit": "663highland / Wikimedia Commons",
-"caption": "Shunrinken, Hanaoka's home and school in Kinokawa, Wakayama: main house (left) and south row house (right) (modern photograph)",
-"w": 3750,
-"h": 2500,
-"desc": "Landscape photo; bright sky in the upper band (about 20% near-white), buildings along the lower half: main house left, south row house right (per the Japanese Wikipedia caption)."
+"winder_downtown": {
+"title": "Downtown Winder at Night.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Downtown_Winder_at_Night.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Downtown_Winder_at_Night.jpg",
+"license": "CC BY-SA 4.0",
+"credit": "SchnauzerhausDW (Dusty Deaton) / Wikimedia Commons",
+"caption": "Downtown Winder, Georgia, where Doctors' Day began in 1933 (modern photograph)",
+"w": 6004,
+"h": 4001,
+"desc": "Night street scene, landscape, no border. Lit buildings across the middle band, darker sky above and street below; centre of interest middle. A guess from the edge map."
 },
 "morton_photo": {
 "title": "Photograph of W. T. G. Morton.jpg",
@@ -44,49 +22,27 @@
 "h": 3384,
 "desc": "Vertical studio photograph, no border. Face centred horizontally, about 40% down from the top. Face position from face detection on a thumbnail."
 },
-"hanaoka_statue": {
-"title": "Seishu Hanaoka01n.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Seishu_Hanaoka01n.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Seishu_Hanaoka01n.jpg",
-"license": "CC BY 2.5",
-"credit": "663highland / Wikimedia Commons",
-"caption": "Statue of Hanaoka Seishu at Seishu-no-Sato, beside his old home Shunrinken, Kinokawa, Wakayama (modern photograph)",
-"w": 3872,
-"h": 2592,
-"desc": "Landscape outdoor photo; open sky at top left, detail concentrated in the centre and lower right. Statue likely centre to centre-right; a guess from the edge map. Identity confirmed by the Japanese Wikipedia caption."
+"morton_inhaler": {
+"title": "Ether inhaler, c. 1846, developed by William T. G. Morton - National Museum of American History - DSC06167.JPG",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Ether_inhaler%2C_c._1846%2C_developed_by_William_T._G._Morton_-_National_Museum_of_American_History_-_DSC06167.JPG?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Ether_inhaler%2C_c._1846%2C_developed_by_William_T._G._Morton_-_National_Museum_of_American_History_-_DSC06167.JPG",
+"license": "CC0",
+"credit": "Daderot / Wikimedia Commons",
+"caption": "Ether inhaler, about 1846, developed by William Morton (National Museum of American History)",
+"w": 2817,
+"h": 3837,
+"desc": "Vertical museum photo of the glass inhaler; dark band across the very top (about 8%). Object near centre with detail strongest top-left; exact outline is a guess."
 },
-"long_statue_unveiling": {
-"title": "Unveiling of Statue of Crawford W. Long in Statuary Hall, Washington, D. C.png",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Unveiling_of_Statue_of_Crawford_W._Long_in_Statuary_Hall%2C_Washington%2C_D._C.png?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Unveiling_of_Statue_of_Crawford_W._Long_in_Statuary_Hall%2C_Washington%2C_D._C.png",
-"license": "Public domain",
-"credit": "Underwood & Underwood / Wikimedia Commons",
-"caption": "The unveiling of Crawford Long's statue in Statuary Hall, Washington, D.C.",
-"w": 1334,
-"h": 924,
-"desc": "Black-and-white landscape group photograph, no border; detail fairly even across the frame. Statue and crowd positions are a guess (statue probably centre)."
-},
-"long_honored_1927": {
-"title": "Honor memory of sleep producer. Doctors attending the American Medical meeting in Washington D.C., honor memory of Crawford (...) of Georgia, discoverer of the use of sulphuric ether LCCN2016888383.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Honor_memory_of_sleep_producer._Doctors_attending_the_American_Medical_meeting_in_Washington_D.C.%2C_honor_memory_of_Crawford_%28...%29_of_Georgia%2C_discoverer_of_the_use_of_sulphuric_ether_LCCN2016888383.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Honor_memory_of_sleep_producer._Doctors_attending_the_American_Medical_meeting_in_Washington_D.C.%2C_honor_memory_of_Crawford_%28...%29_of_Georgia%2C_discoverer_of_the_use_of_sulphuric_ether_LCCN2016888383.jpg",
-"license": "Public domain",
-"credit": "Harris & Ewing / Library of Congress / Wikimedia Commons",
-"caption": "Doctors at the 1927 American Medical Association meeting in Washington honour Crawford Long, with his daughter Frances Long Taylor",
-"w": 7752,
-"h": 10008,
-"desc": "Vertical black-and-white glass-negative photo of a group of people; strongest detail in the middle band, slim dark edges. No faces detected at thumbnail size, so the group's position (centre, middle third) is a guess."
-},
-"long_museum": {
-"title": "Crawford W. Long Museum.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Crawford_W._Long_Museum.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Crawford_W._Long_Museum.jpg",
+"long_statue": {
+"title": "CW Long Statue.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/CW_Long_Statue.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:CW_Long_Statue.jpg",
 "license": "CC0",
 "credit": "MallardTV / Wikimedia Commons",
-"caption": "The Crawford W. Long Museum in Jefferson, Georgia (2024)",
-"w": 2647,
-"h": 2118,
-"desc": "Modern exterior photo, no border. Detail heaviest across the middle and lower bands, so the building likely spans the centre; quieter sky at top left. Framing from a thumbnail edge map."
+"caption": "Crawford Long's marble statue in the U.S. Capitol, part of the National Statuary Hall Collection (modern photograph)",
+"w": 4284,
+"h": 5712,
+"desc": "Vertical modern photo of the standing white-marble statue by J. Massey Rhind (Commons files it under the Capitol Crypt). No border, detail spread evenly; statue presumed centred. No face detected, so the head position (upper third, centre) is a guess."
 },
 "magendie": {
 "title": "Fran\u00e7ois Magendie. Lithograph by N. E. Maurin. Wellcome M0011348.jpg",
@@ -98,6 +54,28 @@
 "w": 2916,
 "h": 3778,
 "desc": "Half-length lithograph on pale paper (about 17% blank, mostly a strip at the right edge). Face centred, about 30% down (upper third). Face position from face detection on a thumbnail."
+},
+"long_1877": {
+"title": "Crawford Long, 1877.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Crawford_Long%2C_1877.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Crawford_Long%2C_1877.jpg",
+"license": "Public domain",
+"credit": "From Joseph Jacobs's 1919 recollections of Long / Wikimedia Commons",
+"caption": "Crawford Long in 1877, about a year before his death",
+"w": 569,
+"h": 711,
+"desc": "Small photograph (569 x 711), portrait filling the frame with no border. Face detected centre-right near the top (upper fifth); detail heaviest in the middle band. Low resolution: keep push-ins gentle."
+},
+"shunrinken": {
+"title": "Shunrinken01s3872.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Shunrinken01s3872.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Shunrinken01s3872.jpg",
+"license": "CC BY 2.5",
+"credit": "663highland / Wikimedia Commons",
+"caption": "Shunrinken, Hanaoka's home and school in Kinokawa, Wakayama: main house (left) and south row house (right) (modern photograph)",
+"w": 3750,
+"h": 2500,
+"desc": "Landscape photo; bright sky in the upper band (about 20% near-white), buildings along the lower half: main house left, south row house right (per the Japanese Wikipedia caption)."
 },
 "long_stamp": {
 "title": "Dr Crawford W Long 1940 Issue-2c.jpg",
@@ -121,39 +99,6 @@
 "h": 1582,
 "desc": "Vertical photo of the empty curved benches rising toward the back; detail fills the frame, densest in the middle band. Commons describes it as the seating only (no people, no operation). Exact composition is a guess."
 },
-"datura_photo": {
-"title": "Datura metel (Bengali name- \u09a7\u09c1\u09a4\u09c1\u09b0\u09be \u09ab\u09c1\u09b2); Datura flower.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Datura_metel_%28Bengali_name-_%E0%A6%A7%E0%A7%81%E0%A6%A4%E0%A7%81%E0%A6%B0%E0%A6%BE_%E0%A6%AB%E0%A7%81%E0%A6%B2%29%3B_Datura_flower.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Datura_metel_%28Bengali_name-_%E0%A6%A7%E0%A7%81%E0%A6%A4%E0%A7%81%E0%A6%B0%E0%A6%BE_%E0%A6%AB%E0%A7%81%E0%A6%B2%29%3B_Datura_flower.jpg",
-"license": "CC0",
-"credit": "Apurv013 / Wikimedia Commons",
-"caption": "Datura metel in flower (modern photograph)",
-"w": 4608,
-"h": 3456,
-"desc": "Landscape photo on a very dark background; the flower sits in the centre (strongest detail in the middle row); thin dark band at the top."
-},
-"ether_dome_exterior": {
-"title": "MGH Ether Dome Outside 29Jan2008.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/MGH_Ether_Dome_Outside_29Jan2008.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:MGH_Ether_Dome_Outside_29Jan2008.jpg",
-"license": "CC BY-SA 3.0",
-"credit": "Adam Lenhardt / Wikimedia Commons",
-"caption": "The Ether Dome on top of the Bulfinch Building at Massachusetts General Hospital, Boston (modern photograph)",
-"w": 1674,
-"h": 1116,
-"desc": "Landscape exterior. Dome and building fill the upper and middle bands (strongest detail there), lower third quieter. Dome likely centre, upper third; a guess from the edge map."
-},
-"long_1877": {
-"title": "Crawford Long, 1877.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Crawford_Long%2C_1877.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Crawford_Long%2C_1877.jpg",
-"license": "Public domain",
-"credit": "From Joseph Jacobs's 1919 recollections of Long / Wikimedia Commons",
-"caption": "Crawford Long in 1877, about a year before his death",
-"w": 569,
-"h": 711,
-"desc": "Small photograph (569 x 711), portrait filling the frame with no border. Face detected centre-right near the top (upper fifth); detail heaviest in the middle band. Low resolution: keep push-ins gentle."
-},
 "datura_illustration": {
 "title": "Datura metel Blanco1.35.jpg",
 "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Datura_metel_Blanco1.35.jpg?width=2400",
@@ -164,28 +109,6 @@
 "w": 1417,
 "h": 2093,
 "desc": "Botanical plate on white paper (about three-quarters blank); the plant drawing sits centre to slightly right (content roughly 12-97% across). Flower position is a guess."
-},
-"long_portrait": {
-"title": "Portrait of Crawford Williamson Long. Wellcome M0003193.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_of_Crawford_Williamson_Long._Wellcome_M0003193.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Portrait_of_Crawford_Williamson_Long._Wellcome_M0003193.jpg",
-"license": "CC BY 4.0",
-"credit": "Wellcome Collection / Wikimedia Commons",
-"caption": "Crawford Long, the Georgia country doctor who operated under ether in 1842",
-"w": 2958,
-"h": 3834,
-"desc": "Head-and-shoulders portrait of Long (bearded) inside an oval on a plain pale mount; about 40% of the frame is blank margin. Face centre, slightly right, about a third of the way down (upper third). Face position from automatic face detection on a thumbnail."
-},
-"boston_1841": {
-"title": "Boston-view-1841-Havell.jpeg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Boston-view-1841-Havell.jpeg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Boston-view-1841-Havell.jpeg",
-"license": "Public domain",
-"credit": "Robert Havell / Library of Congress / Wikimedia Commons",
-"caption": "View of Boston from Dorchester Heights, 1841 (aquatint by Robert Havell)",
-"w": 6310,
-"h": 4253,
-"desc": "Wide coloured aquatint, no border. Sky in the top third; city skyline and harbour with ships across the middle, Bunker Hill Monument in the middle background (per the LOC description); foreground below. Detail centred slightly low."
 },
 "hanaoka_portrait": {
 "title": "HanaokaSeishu.gif",
@@ -209,16 +132,93 @@
 "h": 1108,
 "desc": "Engraving printed on a pale page; about 40% of the frame is plain margin and the picture sits in the centre band (roughly 4-95% across, 13-95% down). Domed building most likely centre; a guess from the edge map."
 },
-"winder_downtown": {
-"title": "Downtown Winder at Night.jpg",
-"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Downtown_Winder_at_Night.jpg?width=2400",
-"page": "https://commons.wikimedia.org/wiki/File:Downtown_Winder_at_Night.jpg",
-"license": "CC BY-SA 4.0",
-"credit": "SchnauzerhausDW (Dusty Deaton) / Wikimedia Commons",
-"caption": "Downtown Winder, Georgia, where Doctors' Day began in 1933 (modern photograph)",
-"w": 6004,
-"h": 4001,
-"desc": "Night street scene, landscape, no border. Lit buildings across the middle band, darker sky above and street below; centre of interest middle. A guess from the edge map."
+"long_statue_unveiling": {
+"title": "Unveiling of Statue of Crawford W. Long in Statuary Hall, Washington, D. C.png",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Unveiling_of_Statue_of_Crawford_W._Long_in_Statuary_Hall%2C_Washington%2C_D._C.png?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Unveiling_of_Statue_of_Crawford_W._Long_in_Statuary_Hall%2C_Washington%2C_D._C.png",
+"license": "Public domain",
+"credit": "Underwood & Underwood / Wikimedia Commons",
+"caption": "The unveiling of Crawford Long's statue in Statuary Hall, Washington, D.C.",
+"w": 1334,
+"h": 924,
+"desc": "Black-and-white landscape group photograph, no border; detail fairly even across the frame. Statue and crowd positions are a guess (statue probably centre)."
+},
+"boston_1841": {
+"title": "Boston-view-1841-Havell.jpeg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Boston-view-1841-Havell.jpeg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Boston-view-1841-Havell.jpeg",
+"license": "Public domain",
+"credit": "Robert Havell / Library of Congress / Wikimedia Commons",
+"caption": "View of Boston from Dorchester Heights, 1841 (aquatint by Robert Havell)",
+"w": 6310,
+"h": 4253,
+"desc": "Wide coloured aquatint, no border. Sky in the top third; city skyline and harbour with ships across the middle, Bunker Hill Monument in the middle background (per the LOC description); foreground below. Detail centred slightly low."
+},
+"long_portrait": {
+"title": "Portrait of Crawford Williamson Long. Wellcome M0003193.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_of_Crawford_Williamson_Long._Wellcome_M0003193.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Portrait_of_Crawford_Williamson_Long._Wellcome_M0003193.jpg",
+"license": "CC BY 4.0",
+"credit": "Wellcome Collection / Wikimedia Commons",
+"caption": "Crawford Long, the Georgia country doctor who operated under ether in 1842",
+"w": 2958,
+"h": 3834,
+"desc": "Head-and-shoulders portrait of Long (bearded) inside an oval on a plain pale mount; about 40% of the frame is blank margin. Face centre, slightly right, about a third of the way down (upper third). Face position from automatic face detection on a thumbnail."
+},
+"ether_dome_exterior": {
+"title": "MGH Ether Dome Outside 29Jan2008.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/MGH_Ether_Dome_Outside_29Jan2008.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:MGH_Ether_Dome_Outside_29Jan2008.jpg",
+"license": "CC BY-SA 3.0",
+"credit": "Adam Lenhardt / Wikimedia Commons",
+"caption": "The Ether Dome on top of the Bulfinch Building at Massachusetts General Hospital, Boston (modern photograph)",
+"w": 1674,
+"h": 1116,
+"desc": "Landscape exterior. Dome and building fill the upper and middle bands (strongest detail there), lower third quieter. Dome likely centre, upper third; a guess from the edge map."
+},
+"long_museum": {
+"title": "Crawford W. Long Museum.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Crawford_W._Long_Museum.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Crawford_W._Long_Museum.jpg",
+"license": "CC0",
+"credit": "MallardTV / Wikimedia Commons",
+"caption": "The Crawford W. Long Museum in Jefferson, Georgia (2024)",
+"w": 2647,
+"h": 2118,
+"desc": "Modern exterior photo, no border. Detail heaviest across the middle and lower bands, so the building likely spans the centre; quieter sky at top left. Framing from a thumbnail edge map."
+},
+"long_honored_1927": {
+"title": "Honor memory of sleep producer. Doctors attending the American Medical meeting in Washington D.C., honor memory of Crawford (...) of Georgia, discoverer of the use of sulphuric ether LCCN2016888383.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Honor_memory_of_sleep_producer._Doctors_attending_the_American_Medical_meeting_in_Washington_D.C.%2C_honor_memory_of_Crawford_%28...%29_of_Georgia%2C_discoverer_of_the_use_of_sulphuric_ether_LCCN2016888383.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Honor_memory_of_sleep_producer._Doctors_attending_the_American_Medical_meeting_in_Washington_D.C.%2C_honor_memory_of_Crawford_%28...%29_of_Georgia%2C_discoverer_of_the_use_of_sulphuric_ether_LCCN2016888383.jpg",
+"license": "Public domain",
+"credit": "Harris & Ewing / Library of Congress / Wikimedia Commons",
+"caption": "Doctors at the 1927 American Medical Association meeting in Washington honour Crawford Long, with his daughter Frances Long Taylor",
+"w": 7752,
+"h": 10008,
+"desc": "Vertical black-and-white glass-negative photo of a group of people; strongest detail in the middle band, slim dark edges. No faces detected at thumbnail size, so the group's position (centre, middle third) is a guess."
+},
+"datura_photo": {
+"title": "Datura metel (Bengali name- \u09a7\u09c1\u09a4\u09c1\u09b0\u09be \u09ab\u09c1\u09b2); Datura flower.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Datura_metel_%28Bengali_name-_%E0%A6%A7%E0%A7%81%E0%A6%A4%E0%A7%81%E0%A6%B0%E0%A6%BE_%E0%A6%AB%E0%A7%81%E0%A6%B2%29%3B_Datura_flower.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Datura_metel_%28Bengali_name-_%E0%A6%A7%E0%A7%81%E0%A6%A4%E0%A7%81%E0%A6%B0%E0%A6%BE_%E0%A6%AB%E0%A7%81%E0%A6%B2%29%3B_Datura_flower.jpg",
+"license": "CC0",
+"credit": "Apurv013 / Wikimedia Commons",
+"caption": "Datura metel in flower (modern photograph)",
+"w": 4608,
+"h": 3456,
+"desc": "Landscape photo on a very dark background; the flower sits in the centre (strongest detail in the middle row); thin dark band at the top."
+},
+"hanaoka_statue": {
+"title": "Seishu Hanaoka01n.jpg",
+"url": "https://commons.wikimedia.org/wiki/Special:FilePath/Seishu_Hanaoka01n.jpg?width=2400",
+"page": "https://commons.wikimedia.org/wiki/File:Seishu_Hanaoka01n.jpg",
+"license": "CC BY 2.5",
+"credit": "663highland / Wikimedia Commons",
+"caption": "Statue of Hanaoka Seishu at Seishu-no-Sato, beside his old home Shunrinken, Kinokawa, Wakayama (modern photograph)",
+"w": 3872,
+"h": 2592,
+"desc": "Landscape outdoor photo; open sky at top left, detail concentrated in the centre and lower right. Statue likely centre to centre-right; a guess from the edge map. Identity confirmed by the Japanese Wikipedia caption."
 }
 },
 "beats": [
@@ -256,7 +256,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -268,7 +268,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -308,6 +308,9 @@
 "Congress"
 ]
 ],
+"gaps": [
+1880
+],
 "from": 1842,
 "to": 1842
 },
@@ -319,7 +322,7 @@
 "fields": {
 "kind": "photo",
 "label": "Crawford W. Long Museum",
-"lower": "The Crawford W. Long Museum in Jefferson, Georgia (2024)",
+"lower": "The Crawford W. Long Museum, Georgia (modern photograph)",
 "asset": "long_museum",
 "crop": "Gentle push-in across the building front",
 "zoom": {
@@ -341,7 +344,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -353,7 +356,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -392,6 +395,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1842,
 "to": 1842
@@ -426,7 +432,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -438,7 +444,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -477,6 +483,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1842,
 "to": 1846
@@ -511,7 +520,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -523,7 +532,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -562,6 +571,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1842,
 "to": 1846
@@ -596,7 +608,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -608,7 +620,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -648,6 +660,9 @@
 "Congress"
 ]
 ],
+"gaps": [
+1880
+],
 "from": 1846,
 "to": 1842
 },
@@ -658,12 +673,101 @@
 "template": "archival",
 "fields": {
 "kind": "engraving",
+"label": "Massachusetts General Hospital, 1840s",
+"lower": "Massachusetts General Hospital (engraving, 1840s)",
+"asset": "mgh_1846",
+"crop": "Wide push-in on the whole engraving, left of the dome",
+"zoom": {
+"scale": 1.3,
+"x": 42,
+"y": 56
+}
+},
+"source": {
+"institution": "Wikimedia Commons",
+"item": "Massachusetts General Hospital, Boston, in 1846-7. Wellcome L0011727.jpg",
+"url": "https://commons.wikimedia.org/wiki/File:Massachusetts_General_Hospital%2C_Boston%2C_in_1846-7._Wellcome_L0011727.jpg",
+"rights": "CC BY 4.0",
+"credit": "Wellcome Collection / Wikimedia Commons",
+"verified": true
+},
+"frames": 144,
+"fps": 30,
+"timebar": {
+"range": [
+1800,
+2020
+],
+"scale": [
+[
+1800,
+0
+],
+[
+1860,
+0.72
+],
+[
+2020,
+1
+]
+],
+"ticks": [
+1800,
+1810,
+1820,
+1830,
+1840,
+1850,
+1860,
+1900,
+1950,
+2000
+],
+"marks": [
+[
+1804,
+"Hanaoka"
+],
+[
+1842,
+"Long",
+"end"
+],
+[
+1846,
+"Ether Day",
+"start"
+],
+[
+1933,
+"Doctors' Day"
+],
+[
+1990,
+"Congress"
+]
+],
+"gaps": [
+1880
+],
+"from": 1842,
+"to": 1830,
+"label": "before anesthesia"
+},
+"start_frame": 1213
+},
+{
+"id": "02-e",
+"template": "archival",
+"fields": {
+"kind": "engraving",
 "label": "View of Boston, 1841",
-"lower": "Before any of this: Boston in 1841 (aquatint by Robert Havell)",
+"lower": "Boston, 1841 (aquatint by Robert Havell)",
 "asset": "boston_1841",
 "crop": "Slow push-in on the skyline and harbour",
 "zoom": {
-"scale": 1.3,
+"scale": 1.15,
 "x": 50,
 "y": 52
 }
@@ -676,12 +780,12 @@
 "credit": "Robert Havell / Library of Congress / Wikimedia Commons",
 "verified": true
 },
-"frames": 144,
+"frames": 155,
 "fps": 30,
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -693,7 +797,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -733,11 +837,14 @@
 "Congress"
 ]
 ],
-"from": 1842,
+"gaps": [
+1880
+],
+"from": 1830,
 "to": 1830,
 "label": "before anesthesia"
 },
-"start_frame": 1213
+"start_frame": 1758
 },
 {
 "id": "02-f",
@@ -767,7 +874,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -779,7 +886,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -818,6 +925,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1830,
 "to": 1830,
@@ -829,23 +939,23 @@
 "id": "02-j",
 "template": "archival",
 "fields": {
-"kind": "photo",
-"label": "Ether inhaler, about 1846",
-"lower": "An ether inhaler, about 1846 (National Museum of American History)",
-"asset": "morton_inhaler",
-"crop": "Wide push-in on the whole glass inhaler",
+"kind": "engraving",
+"label": "View of Boston, 1841 (detail)",
+"lower": "Boston, 1841 (aquatint by Robert Havell)",
+"asset": "boston_1841",
+"crop": "Closer crop on the ships in the harbour, left of centre",
 "zoom": {
-"scale": 1.2,
-"x": 50,
-"y": 52
+"scale": 1.5,
+"x": 34,
+"y": 58
 }
 },
 "source": {
 "institution": "Wikimedia Commons",
-"item": "Ether inhaler, c. 1846, developed by William T. G. Morton - National Museum of American History - DSC06167.JPG",
-"url": "https://commons.wikimedia.org/wiki/File:Ether_inhaler%2C_c._1846%2C_developed_by_William_T._G._Morton_-_National_Museum_of_American_History_-_DSC06167.JPG",
-"rights": "CC0",
-"credit": "Daderot / Wikimedia Commons",
+"item": "Boston-view-1841-Havell.jpeg",
+"url": "https://commons.wikimedia.org/wiki/File:Boston-view-1841-Havell.jpeg",
+"rights": "Public domain",
+"credit": "Robert Havell / Library of Congress / Wikimedia Commons",
 "verified": true
 },
 "frames": 144,
@@ -853,7 +963,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -865,7 +975,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -904,6 +1014,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1830,
 "to": 1830,
@@ -939,7 +1052,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -951,7 +1064,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -990,6 +1103,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1830,
 "to": 1830,
@@ -1025,7 +1141,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1037,7 +1153,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1076,6 +1192,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1846,
 "to": 1846
@@ -1110,7 +1229,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1122,7 +1241,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1161,6 +1280,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1846,
 "to": 1846
@@ -1195,7 +1317,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1207,7 +1329,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1246,6 +1368,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1846,
 "to": 1846
@@ -1256,23 +1381,23 @@
 "id": "03-f",
 "template": "archival",
 "fields": {
-"kind": "engraving",
-"label": "Massachusetts General Hospital, 1846-47",
-"lower": "A really big deal (Massachusetts General Hospital, 1846-47, engraving)",
-"asset": "mgh_1846",
-"crop": "Closer crop on the domed centre building",
+"kind": "photo",
+"label": "Ether inhaler, about 1846",
+"lower": "An ether inhaler, about 1846 (National Museum of American History)",
+"asset": "morton_inhaler",
+"crop": "Wide push-in on the whole glass inhaler",
 "zoom": {
-"scale": 1.45,
+"scale": 1.2,
 "x": 50,
-"y": 45
+"y": 52
 }
 },
 "source": {
 "institution": "Wikimedia Commons",
-"item": "Massachusetts General Hospital, Boston, in 1846-7. Wellcome L0011727.jpg",
-"url": "https://commons.wikimedia.org/wiki/File:Massachusetts_General_Hospital%2C_Boston%2C_in_1846-7._Wellcome_L0011727.jpg",
-"rights": "CC BY 4.0",
-"credit": "Wellcome Collection / Wikimedia Commons",
+"item": "Ether inhaler, c. 1846, developed by William T. G. Morton - National Museum of American History - DSC06167.JPG",
+"url": "https://commons.wikimedia.org/wiki/File:Ether_inhaler%2C_c._1846%2C_developed_by_William_T._G._Morton_-_National_Museum_of_American_History_-_DSC06167.JPG",
+"rights": "CC0",
+"credit": "Daderot / Wikimedia Commons",
 "verified": true
 },
 "frames": 80,
@@ -1280,7 +1405,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1292,7 +1417,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1331,6 +1456,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1846,
 "to": 1846
@@ -1365,7 +1493,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1377,7 +1505,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1416,6 +1544,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1846,
 "to": 1846
@@ -1450,7 +1581,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1462,7 +1593,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1502,6 +1633,9 @@
 "Congress"
 ]
 ],
+"gaps": [
+1880
+],
 "from": 1846,
 "to": 1846
 },
@@ -1513,7 +1647,7 @@
 "fields": {
 "kind": "photo",
 "label": "Crawford W. Long Museum",
-"lower": "Venable was under ether (Crawford W. Long Museum, Jefferson, Georgia, 2024)",
+"lower": "The Crawford W. Long Museum, Georgia (modern photograph)",
 "asset": "long_museum",
 "crop": "Closer crop on the left of the building front",
 "zoom": {
@@ -1535,7 +1669,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1547,7 +1681,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1586,6 +1720,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1842,
 "to": 1842
@@ -1620,7 +1757,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1632,7 +1769,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1671,6 +1808,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1842,
 "to": 1842
@@ -1711,7 +1851,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1723,7 +1863,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1762,6 +1902,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1842,
 "to": 1849
@@ -1796,7 +1939,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1808,7 +1951,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1847,6 +1990,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1849,
 "to": 1849
@@ -1881,7 +2027,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1893,7 +2039,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -1933,8 +2079,11 @@
 "Congress"
 ]
 ],
+"gaps": [
+1880
+],
 "from": 1849,
-"to": 2000,
+"to": 2010,
 "label": "today"
 },
 "start_frame": 5645
@@ -1973,7 +2122,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -1985,7 +2134,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2025,7 +2174,10 @@
 "Congress"
 ]
 ],
-"from": 2000,
+"gaps": [
+1880
+],
+"from": 2010,
 "to": 1933
 },
 "start_frame": 5961
@@ -2034,9 +2186,98 @@
 "id": "05-e",
 "template": "archival",
 "fields": {
+"kind": "engraving",
+"label": "1940 Crawford Long stamp",
+"lower": "Crawford Long on a US stamp (1940)",
+"asset": "long_stamp",
+"crop": "Gentle push-in on the engraved portrait (low-resolution file)",
+"zoom": {
+"scale": 1.12,
+"x": 50,
+"y": 46
+}
+},
+"source": {
+"institution": "Wikimedia Commons",
+"item": "Dr Crawford W Long 1940 Issue-2c.jpg",
+"url": "https://commons.wikimedia.org/wiki/File:Dr_Crawford_W_Long_1940_Issue-2c.jpg",
+"rights": "Public domain",
+"credit": "U.S. Post Office / Wikimedia Commons",
+"verified": true
+},
+"frames": 153,
+"fps": 30,
+"timebar": {
+"range": [
+1800,
+2020
+],
+"scale": [
+[
+1800,
+0
+],
+[
+1860,
+0.72
+],
+[
+2020,
+1
+]
+],
+"ticks": [
+1800,
+1810,
+1820,
+1830,
+1840,
+1850,
+1860,
+1900,
+1950,
+2000
+],
+"marks": [
+[
+1804,
+"Hanaoka"
+],
+[
+1842,
+"Long",
+"end"
+],
+[
+1846,
+"Ether Day",
+"start"
+],
+[
+1933,
+"Doctors' Day"
+],
+[
+1990,
+"Congress"
+]
+],
+"gaps": [
+1880
+],
+"from": 1990,
+"to": 2010,
+"label": "today"
+},
+"start_frame": 6114
+},
+{
+"id": "05-g",
+"template": "archival",
+"fields": {
 "kind": "photo",
 "label": "Doctors honour Crawford Long, 1927",
-"lower": "Long did get something back (doctors honour him, Washington, 1927)",
+"lower": "Doctors honour Crawford Long's memory, Washington, D.C. (photograph, 1927)",
 "asset": "long_honored_1927",
 "crop": "Push-in on the group in the middle band",
 "zoom": {
@@ -2053,98 +2294,12 @@
 "credit": "Harris & Ewing / Library of Congress / Wikimedia Commons",
 "verified": true
 },
-"frames": 153,
-"fps": 30,
-"timebar": {
-"range": [
-1800,
-2000
-],
-"scale": [
-[
-1800,
-0
-],
-[
-1860,
-0.72
-],
-[
-2000,
-1
-]
-],
-"ticks": [
-1800,
-1810,
-1820,
-1830,
-1840,
-1850,
-1860,
-1900,
-1950,
-2000
-],
-"marks": [
-[
-1804,
-"Hanaoka"
-],
-[
-1842,
-"Long",
-"end"
-],
-[
-1846,
-"Ether Day",
-"start"
-],
-[
-1933,
-"Doctors' Day"
-],
-[
-1990,
-"Congress"
-]
-],
-"from": 1990,
-"to": 2000,
-"label": "today"
-},
-"start_frame": 6114
-},
-{
-"id": "05-g",
-"template": "archival",
-"fields": {
-"kind": "engraving",
-"label": "1940 Crawford Long stamp",
-"lower": "Most have never heard of him (1940 U.S. stamp honouring Crawford Long)",
-"asset": "long_stamp",
-"crop": "Gentle push-in on the engraved portrait (low-resolution file)",
-"zoom": {
-"scale": 1.15,
-"x": 50,
-"y": 48
-}
-},
-"source": {
-"institution": "Wikimedia Commons",
-"item": "Dr Crawford W Long 1940 Issue-2c.jpg",
-"url": "https://commons.wikimedia.org/wiki/File:Dr_Crawford_W_Long_1940_Issue-2c.jpg",
-"rights": "Public domain",
-"credit": "U.S. Post Office / Wikimedia Commons",
-"verified": true
-},
 "frames": 186,
 "fps": 30,
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2156,7 +2311,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2196,8 +2351,11 @@
 "Congress"
 ]
 ],
-"from": 2000,
-"to": 2000,
+"gaps": [
+1880
+],
+"from": 2010,
+"to": 2010,
 "label": "today"
 },
 "start_frame": 6463
@@ -2230,7 +2388,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2242,7 +2400,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2282,7 +2440,10 @@
 "Congress"
 ]
 ],
-"from": 2000,
+"gaps": [
+1880
+],
+"from": 2010,
 "to": 1842
 },
 "start_frame": 6649
@@ -2315,7 +2476,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2327,7 +2488,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2367,6 +2528,9 @@
 "Congress"
 ]
 ],
+"gaps": [
+1880
+],
 "from": 1804,
 "to": 1804
 },
@@ -2377,8 +2541,8 @@
 "template": "archival",
 "fields": {
 "kind": "photo",
-"label": "Shunrinken",
-"lower": "Shunrinken, Hanaoka's home and school, Kinokawa, Wakayama (modern photograph)",
+"label": "Hanaoka's home and school",
+"lower": "Hanaoka's home and school (modern photograph)",
 "asset": "shunrinken",
 "crop": "Push-in on the main house on the left",
 "zoom": {
@@ -2400,7 +2564,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2412,7 +2576,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2452,6 +2616,9 @@
 "Congress"
 ]
 ],
+"gaps": [
+1880
+],
 "from": 1804,
 "to": 1804
 },
@@ -2463,7 +2630,7 @@
 "fields": {
 "kind": "photo",
 "label": "Statue of Hanaoka Seishu",
-"lower": "Statue of Hanaoka Seishu, Kinokawa, Wakayama (modern photograph)",
+"lower": "Statue of Hanaoka Seishu (modern photograph)",
 "asset": "hanaoka_statue",
 "crop": "Wide push-in on the statue and garden",
 "zoom": {
@@ -2485,7 +2652,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2497,7 +2664,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2537,6 +2704,9 @@
 "Congress"
 ]
 ],
+"gaps": [
+1880
+],
 "from": 1804,
 "to": 1804
 },
@@ -2547,8 +2717,8 @@
 "template": "archival",
 "fields": {
 "kind": "photo",
-"label": "Datura metel",
-"lower": "Not ether, an herbal mix (Datura metel in flower, modern photograph)",
+"label": "An herbal mix (Datura plant, modern photograph)",
+"lower": "An herbal mix (modern photograph of a Datura plant)",
 "asset": "datura_photo",
 "crop": "Push-in on the flower in the centre",
 "zoom": {
@@ -2570,7 +2740,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2582,7 +2752,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2622,6 +2792,9 @@
 "Congress"
 ]
 ],
+"gaps": [
+1880
+],
 "from": 1804,
 "to": 1804
 },
@@ -2632,8 +2805,8 @@
 "template": "archival",
 "fields": {
 "kind": "engraving",
-"label": "Datura metel, botanical plate",
-"lower": "Datura metel, a key herb in Hanaoka's mafutsusan (botanical plate)",
+"label": "Botanical plate of a Datura plant",
+"lower": "An herbal mix: mafutsusan, also called tsusensan (botanical plate)",
 "asset": "datura_illustration",
 "crop": "Push-in on the plant drawing, right of centre",
 "zoom": {
@@ -2665,7 +2838,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2677,7 +2850,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2716,6 +2889,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1804,
 "to": 1804
@@ -2750,7 +2926,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2762,7 +2938,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2801,6 +2977,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1846,
 "to": 1846
@@ -2841,7 +3020,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2853,7 +3032,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2892,6 +3071,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1846,
 "to": 1846
@@ -2926,7 +3108,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -2938,7 +3120,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -2977,6 +3159,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1846,
 "to": 1846
@@ -3017,7 +3202,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -3029,7 +3214,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -3068,6 +3253,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1846,
 "to": 1842
@@ -3102,7 +3290,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -3114,7 +3302,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -3153,6 +3341,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1842,
 "to": 1849
@@ -3193,7 +3384,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -3205,7 +3396,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -3244,6 +3435,9 @@
 1990,
 "Congress"
 ]
+],
+"gaps": [
+1880
 ],
 "from": 1849,
 "to": 1804
@@ -3284,7 +3478,7 @@
 "timebar": {
 "range": [
 1800,
-2000
+2020
 ],
 "scale": [
 [
@@ -3296,7 +3490,7 @@
 0.72
 ],
 [
-2000,
+2020,
 1
 ]
 ],
@@ -3336,8 +3530,11 @@
 "Congress"
 ]
 ],
+"gaps": [
+1880
+],
 "from": 1842,
-"to": 2000,
+"to": 2010,
 "label": "today"
 },
 "start_frame": 9805

@@ -4,7 +4,7 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "Every year America marks National Doctors' Day on March 30th,",
-  "year": 2000,
+  "year": 2010,
   "year_label": "today",
   "type": "scene",
   "template": "scene",
@@ -27,7 +27,7 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "and most people have no idea why it's that date,",
-  "year": 2000,
+  "year": 2010,
   "year_label": "today",
   "type": "text",
   "template": "text",
@@ -51,7 +51,7 @@
    "caption": "A country doctor in Georgia",
    "pins": [
     {
-     "name": "Jefferson, Georgia",
+     "name": "Georgia",
      "lat": 34.1267,
      "lon": -83.5903,
      "sub": "A country doctor",
@@ -61,13 +61,6 @@
    ],
    "routes": [],
    "labels": [
-    {
-     "name": "GEORGIA",
-     "lat": 32.6,
-     "lon": -83.4,
-     "kind": "region",
-     "size": 40
-    },
     {
      "name": "Atlantic Ocean",
      "lat": 31.7,
@@ -86,7 +79,7 @@
    "borders": true,
    "note": "Coastlines: Natural Earth · positions approximate"
   },
-  "visual": "Map flies in to Georgia; a pin drops on Jefferson.",
+  "visual": "Map flies in to Georgia; a pin drops for the country doctor.",
   "source": null
  },
  {
@@ -137,7 +130,7 @@
   "fields": {
    "kind": "photo",
    "label": "Crawford W. Long Museum",
-   "lower": "The Crawford W. Long Museum in Jefferson, Georgia (2024)",
+   "lower": "The Crawford W. Long Museum, Georgia (modern photograph)",
    "asset": "long_museum",
    "crop": "Gentle push-in across the building front",
    "zoom": {
@@ -146,7 +139,7 @@
     "y": 58
    }
   },
-  "visual": "Push-in on the modern museum building in Jefferson. No surgical imagery.",
+  "visual": "Push-in on the modern museum building in Georgia. No surgical imagery.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "Crawford W. Long Museum.jpg",
@@ -200,7 +193,7 @@
    "caption": "A public demonstration in Boston, 1846",
    "pins": [
     {
-     "name": "Jefferson, Georgia",
+     "name": "Georgia",
      "lat": 34.1267,
      "lon": -83.5903,
      "sub": "Crawford Long",
@@ -352,23 +345,23 @@
   "template": "archival",
   "fields": {
    "kind": "engraving",
-   "label": "View of Boston, 1841",
-   "lower": "Before any of this: Boston in 1841 (aquatint by Robert Havell)",
-   "asset": "boston_1841",
-   "crop": "Slow push-in on the skyline and harbour",
+   "label": "Massachusetts General Hospital, 1840s",
+   "lower": "Massachusetts General Hospital (engraving, 1840s)",
+   "asset": "mgh_1846",
+   "crop": "Wide push-in on the whole engraving, left of the dome",
    "zoom": {
     "scale": 1.3,
-    "x": 50,
-    "y": 52
+    "x": 42,
+    "y": 56
    }
   },
-  "visual": "Push-in on Havell's 1841 aquatint of Boston. Period view, no surgery.",
+  "visual": "Push-in on the 1840s engraving of Massachusetts General Hospital. Period view, no surgery.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Boston-view-1841-Havell.jpeg",
-   "url": "https://commons.wikimedia.org/wiki/File:Boston-view-1841-Havell.jpeg",
-   "rights": "Public domain",
-   "credit": "Robert Havell / Library of Congress / Wikimedia Commons",
+   "item": "Massachusetts General Hospital, Boston, in 1846-7. Wellcome L0011727.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Massachusetts_General_Hospital%2C_Boston%2C_in_1846-7._Wellcome_L0011727.jpg",
+   "rights": "CC BY 4.0",
+   "credit": "Wellcome Collection / Wikimedia Commons",
    "verified": true
   }
  },
@@ -456,14 +449,29 @@
   "text": "and some opposed anesthesia because they thought taking away the pain could be dangerous.",
   "year": 1830,
   "year_label": "before anesthesia",
-  "type": "text",
-  "template": "text",
+  "type": "engraving",
+  "template": "archival",
   "fields": {
-   "headline": "Some opposed anesthesia",
-   "sub": "They thought taking away the pain could be dangerous"
+   "kind": "engraving",
+   "label": "View of Boston, 1841",
+   "lower": "Boston, 1841 (aquatint by Robert Havell)",
+   "asset": "boston_1841",
+   "crop": "Slow push-in on the skyline and harbour",
+   "zoom": {
+    "scale": 1.15,
+    "x": 50,
+    "y": 52
+   }
   },
-  "visual": "Kinetic card carrying the hedge \"some\".",
-  "source": null
+  "visual": "Push-in on Havell's 1841 aquatint of Boston: a period backdrop, plainly captioned.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "Boston-view-1841-Havell.jpeg",
+   "url": "https://commons.wikimedia.org/wiki/File:Boston-view-1841-Havell.jpeg",
+   "rights": "Public domain",
+   "credit": "Robert Havell / Library of Congress / Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "02-f",
@@ -560,27 +568,27 @@
   "text": "So when somebody came along and said, I can make this not hurt,",
   "year": 1830,
   "year_label": "before anesthesia",
-  "type": "photo",
+  "type": "engraving",
   "template": "archival",
   "fields": {
-   "kind": "photo",
-   "label": "Ether inhaler, about 1846",
-   "lower": "An ether inhaler, about 1846 (National Museum of American History)",
-   "asset": "morton_inhaler",
-   "crop": "Wide push-in on the whole glass inhaler",
+   "kind": "engraving",
+   "label": "View of Boston, 1841 (detail)",
+   "lower": "Boston, 1841 (aquatint by Robert Havell)",
+   "asset": "boston_1841",
+   "crop": "Closer crop on the ships in the harbour, left of centre",
    "zoom": {
-    "scale": 1.2,
-    "x": 50,
-    "y": 52
+    "scale": 1.5,
+    "x": 34,
+    "y": 58
    }
   },
-  "visual": "Push-in on the museum ether inhaler, an object only.",
+  "visual": "Closer crop of Havell's 1841 Boston aquatint, on the harbour.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Ether inhaler, c. 1846, developed by William T. G. Morton - National Museum of American History - DSC06167.JPG",
-   "url": "https://commons.wikimedia.org/wiki/File:Ether_inhaler%2C_c._1846%2C_developed_by_William_T._G._Morton_-_National_Museum_of_American_History_-_DSC06167.JPG",
-   "rights": "CC0",
-   "credit": "Daderot / Wikimedia Commons",
+   "item": "Boston-view-1841-Havell.jpeg",
+   "url": "https://commons.wikimedia.org/wiki/File:Boston-view-1841-Havell.jpeg",
+   "rights": "Public domain",
+   "credit": "Robert Havell / Library of Congress / Wikimedia Commons",
    "verified": true
   }
  },
@@ -770,27 +778,27 @@
   "section_name": "Ether Day",
   "text": "A public demonstration is a really big deal.",
   "year": 1846,
-  "type": "engraving",
+  "type": "photo",
   "template": "archival",
   "fields": {
-   "kind": "engraving",
-   "label": "Massachusetts General Hospital, 1846-47",
-   "lower": "A really big deal (Massachusetts General Hospital, 1846-47, engraving)",
-   "asset": "mgh_1846",
-   "crop": "Closer crop on the domed centre building",
+   "kind": "photo",
+   "label": "Ether inhaler, about 1846",
+   "lower": "An ether inhaler, about 1846 (National Museum of American History)",
+   "asset": "morton_inhaler",
+   "crop": "Wide push-in on the whole glass inhaler",
    "zoom": {
-    "scale": 1.45,
+    "scale": 1.2,
     "x": 50,
-    "y": 45
+    "y": 52
    }
   },
-  "visual": "Second, closer crop of the 1846-47 engraving.",
+  "visual": "Push-in on the museum ether inhaler, an object only.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Massachusetts General Hospital, Boston, in 1846-7. Wellcome L0011727.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Massachusetts_General_Hospital%2C_Boston%2C_in_1846-7._Wellcome_L0011727.jpg",
-   "rights": "CC BY 4.0",
-   "credit": "Wellcome Collection / Wikimedia Commons",
+   "item": "Ether inhaler, c. 1846, developed by William T. G. Morton - National Museum of American History - DSC06167.JPG",
+   "url": "https://commons.wikimedia.org/wiki/File:Ether_inhaler%2C_c._1846%2C_developed_by_William_T._G._Morton_-_National_Museum_of_American_History_-_DSC06167.JPG",
+   "rights": "CC0",
+   "credit": "Daderot / Wikimedia Commons",
    "verified": true
   }
  },
@@ -893,7 +901,7 @@
    "caption": "Crawford Long had already done it",
    "pins": [
     {
-     "name": "Jefferson, Georgia",
+     "name": "Georgia",
      "lat": 34.1267,
      "lon": -83.5903,
      "sub": "Crawford Long",
@@ -903,13 +911,6 @@
    ],
    "routes": [],
    "labels": [
-    {
-     "name": "GEORGIA",
-     "lat": 32.6,
-     "lon": -83.4,
-     "kind": "region",
-     "size": 40
-    },
     {
      "name": "Atlantic Ocean",
      "lat": 31.7,
@@ -965,7 +966,7 @@
   "fields": {
    "kind": "photo",
    "label": "Crawford W. Long Museum",
-   "lower": "Venable was under ether (Crawford W. Long Museum, Jefferson, Georgia, 2024)",
+   "lower": "The Crawford W. Long Museum, Georgia (modern photograph)",
    "asset": "long_museum",
    "crop": "Closer crop on the left of the building front",
    "zoom": {
@@ -1224,7 +1225,7 @@
   "section": "05",
   "section_name": "Doctors' Day",
   "text": "And that brings us back to Doctors' Day. Today in the United States,",
-  "year": 2000,
+  "year": 2010,
   "year_label": "today",
   "type": "photo",
   "template": "archival",
@@ -1255,7 +1256,7 @@
   "section": "05",
   "section_name": "Doctors' Day",
   "text": "National Doctors' Day falls on March 30th, and that date was picked because of Long's operation,",
-  "year": 2000,
+  "year": 2010,
   "year_label": "today",
   "type": "flow",
   "template": "flow",
@@ -1339,7 +1340,8 @@
      "lon": -77.0091,
      "sub": "Congress, 1990",
      "at": 1.3,
-     "pulse": true
+     "pulse": true,
+     "side": "left"
     }
    ],
    "routes": [],
@@ -1370,29 +1372,29 @@
   "section": "05",
   "section_name": "Doctors' Day",
   "text": "So Crawford Long did get something back, because the day America thanks its doctors",
-  "year": 2000,
+  "year": 2010,
   "year_label": "today",
-  "type": "photo",
+  "type": "engraving",
   "template": "archival",
   "fields": {
-   "kind": "photo",
-   "label": "Doctors honour Crawford Long, 1927",
-   "lower": "Long did get something back (doctors honour him, Washington, 1927)",
-   "asset": "long_honored_1927",
-   "crop": "Push-in on the group in the middle band",
+   "kind": "engraving",
+   "label": "1940 Crawford Long stamp",
+   "lower": "Crawford Long on a US stamp (1940)",
+   "asset": "long_stamp",
+   "crop": "Gentle push-in on the engraved portrait (low-resolution file)",
    "zoom": {
-    "scale": 1.2,
+    "scale": 1.12,
     "x": 50,
-    "y": 50
+    "y": 46
    }
   },
-  "visual": "Push-in on the 1927 Harris & Ewing photograph of doctors honouring Long.",
+  "visual": "Gentle push-in on the 1940 2-cent stamp honouring Crawford Long.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Honor memory of sleep producer. Doctors attending the American Medical meeting in Washington D.C., honor memory of Crawford (...) of Georgia, discoverer of the use of sulphuric ether LCCN2016888383.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Honor_memory_of_sleep_producer._Doctors_attending_the_American_Medical_meeting_in_Washington_D.C.%2C_honor_memory_of_Crawford_%28...%29_of_Georgia%2C_discoverer_of_the_use_of_sulphuric_ether_LCCN2016888383.jpg",
+   "item": "Dr Crawford W Long 1940 Issue-2c.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Dr_Crawford_W_Long_1940_Issue-2c.jpg",
    "rights": "Public domain",
-   "credit": "Harris & Ewing / Library of Congress / Wikimedia Commons",
+   "credit": "U.S. Post Office / Wikimedia Commons",
    "verified": true
   }
  },
@@ -1401,7 +1403,7 @@
   "section": "05",
   "section_name": "Doctors' Day",
   "text": "is the date of his operation, and not October 16th, the day of the famous demonstration in Boston,",
-  "year": 2000,
+  "year": 2010,
   "year_label": "today",
   "type": "compare",
   "template": "compare",
@@ -1424,29 +1426,29 @@
   "section": "05",
   "section_name": "Doctors' Day",
   "text": "and most people who see a Doctors' Day post every March have never heard of Crawford Long.",
-  "year": 2000,
+  "year": 2010,
   "year_label": "today",
-  "type": "engraving",
+  "type": "photo",
   "template": "archival",
   "fields": {
-   "kind": "engraving",
-   "label": "1940 Crawford Long stamp",
-   "lower": "Most have never heard of him (1940 U.S. stamp honouring Crawford Long)",
-   "asset": "long_stamp",
-   "crop": "Gentle push-in on the engraved portrait (low-resolution file)",
+   "kind": "photo",
+   "label": "Doctors honour Crawford Long, 1927",
+   "lower": "Doctors honour Crawford Long's memory, Washington, D.C. (photograph, 1927)",
+   "asset": "long_honored_1927",
+   "crop": "Push-in on the group in the middle band",
    "zoom": {
-    "scale": 1.15,
+    "scale": 1.2,
     "x": 50,
-    "y": 48
+    "y": 50
    }
   },
-  "visual": "Gentle push-in on the 1940 2-cent stamp.",
+  "visual": "Push-in on the 1927 Harris & Ewing photograph; plain descriptive lower third.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Dr Crawford W Long 1940 Issue-2c.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Dr_Crawford_W_Long_1940_Issue-2c.jpg",
+   "item": "Honor memory of sleep producer. Doctors attending the American Medical meeting in Washington D.C., honor memory of Crawford (...) of Georgia, discoverer of the use of sulphuric ether LCCN2016888383.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Honor_memory_of_sleep_producer._Doctors_attending_the_American_Medical_meeting_in_Washington_D.C.%2C_honor_memory_of_Crawford_%28...%29_of_Georgia%2C_discoverer_of_the_use_of_sulphuric_ether_LCCN2016888383.jpg",
    "rights": "Public domain",
-   "credit": "U.S. Post Office / Wikimedia Commons",
+   "credit": "Harris & Ewing / Library of Congress / Wikimedia Commons",
    "verified": true
   }
  },
@@ -1555,7 +1557,7 @@
    "caption": "A patient named Kan Aiya",
    "pins": [
     {
-     "name": "Kii Province, Japan",
+     "name": "Japan",
      "lat": 34.27,
      "lon": 135.35,
      "sub": "Hanaoka Seishu",
@@ -1597,7 +1599,7 @@
    "borders": true,
    "note": "Coastlines: Natural Earth · position approximate (municipality level)"
   },
-  "visual": "Map flies into Kii Province, Japan; Hanaoka's pin drops; caption names Kan Aiya.",
+  "visual": "Map flies into Japan; Hanaoka's pin drops; caption names Kan Aiya.",
   "source": null
  },
  {
@@ -1610,8 +1612,8 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Shunrinken",
-   "lower": "Shunrinken, Hanaoka's home and school, Kinokawa, Wakayama (modern photograph)",
+   "label": "Hanaoka's home and school",
+   "lower": "Hanaoka's home and school (modern photograph)",
    "asset": "shunrinken",
    "crop": "Push-in on the main house on the left",
    "zoom": {
@@ -1620,7 +1622,7 @@
     "y": 65
    }
   },
-  "visual": "Push-in on Shunrinken, Hanaoka's home and school. No patient imagery.",
+  "visual": "Push-in on Hanaoka's home and school. No patient imagery.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "Shunrinken01s3872.jpg",
@@ -1641,7 +1643,7 @@
   "fields": {
    "kind": "photo",
    "label": "Statue of Hanaoka Seishu",
-   "lower": "Statue of Hanaoka Seishu, Kinokawa, Wakayama (modern photograph)",
+   "lower": "Statue of Hanaoka Seishu (modern photograph)",
    "asset": "hanaoka_statue",
    "crop": "Wide push-in on the statue and garden",
    "zoom": {
@@ -1671,7 +1673,7 @@
   "fields": {
    "left_title": "Numbed in one spot",
    "left_lines": [
-    "Not just this"
+    "Local numbing"
    ],
    "right_title": "Full general anesthesia",
    "right_lines": [
@@ -1693,7 +1695,7 @@
   "fields": {
    "left_title": "Numbed in one spot",
    "left_lines": [
-    "Not just this"
+    "Local numbing"
    ],
    "right_title": "Full general anesthesia",
    "right_lines": [
@@ -1714,8 +1716,8 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Datura metel",
-   "lower": "Not ether, an herbal mix (Datura metel in flower, modern photograph)",
+   "label": "An herbal mix (Datura plant, modern photograph)",
+   "lower": "An herbal mix (modern photograph of a Datura plant)",
    "asset": "datura_photo",
    "crop": "Push-in on the flower in the centre",
    "zoom": {
@@ -1724,7 +1726,7 @@
     "y": 50
    }
   },
-  "visual": "Push-in on a modern photo of Datura metel in flower.",
+  "visual": "Push-in on a modern photo of a Datura plant in flower; the lower third says only \"an herbal mix\".",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "Datura metel (Bengali name- ধুতুরা ফুল); Datura flower.jpg",
@@ -1744,8 +1746,8 @@
   "template": "archival",
   "fields": {
    "kind": "engraving",
-   "label": "Datura metel, botanical plate",
-   "lower": "Datura metel, a key herb in Hanaoka's mafutsusan (botanical plate)",
+   "label": "Botanical plate of a Datura plant",
+   "lower": "An herbal mix: mafutsusan, also called tsusensan (botanical plate)",
    "asset": "datura_illustration",
    "crop": "Push-in on the plant drawing, right of centre",
    "zoom": {
@@ -1764,7 +1766,7 @@
     }
    ]
   },
-  "visual": "Push-in on the Flora de Filipinas plate; name chips spell out mafutsusan and tsusensan.",
+  "visual": "Push-in on a Flora de Filipinas botanical plate; name chips spell out mafutsusan and tsusensan.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "Datura metel Blanco1.35.jpg",
@@ -2280,7 +2282,7 @@
   "section": "07",
   "section_name": "Who Was First",
   "text": "and the next time you see Doctors' Day on March 30th,",
-  "year": 2000,
+  "year": 2010,
   "year_label": "today",
   "type": "photo",
   "template": "archival",

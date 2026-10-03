@@ -100,44 +100,39 @@
   "fields": {
    "title": "England",
    "caption": "In England",
-   "pins": [
-    {
-     "name": "",
-     "lat": 51.4048,
-     "lon": -2.4256,
-     "pulse": true,
-     "at": 1.3,
-     "sub": ""
-    }
-   ],
+   "pins": [],
    "labels": [
     {
      "name": "England",
      "lat": 52.9,
      "lon": -1.6,
      "kind": "region",
-     "size": 40
+     "size": 40,
+     "fit": true
     },
     {
      "name": "Wales",
-     "lat": 52.2,
-     "lon": -3.9,
+     "lat": 51.95,
+     "lon": -3.85,
      "kind": "region",
-     "size": 30
+     "size": 26,
+     "fit": true
     },
     {
      "name": "English Channel",
      "lat": 50.1,
      "lon": -1.6,
      "kind": "sea",
-     "size": 26
+     "size": 26,
+     "fit": true
     },
     {
      "name": "Bristol Channel",
      "lat": 51.3,
      "lon": -4.3,
      "kind": "sea",
-     "size": 22
+     "size": 22,
+     "fit": true
     }
    ],
    "from": {
@@ -149,9 +144,9 @@
    "rivers": true,
    "borders": true
   },
-  "visual": "Map flies in over England; a pin pulses near Bath. Geography only, no name yet.",
+  "visual": "Map flies in over England for orientation; no pins, no place named beyond England.",
   "source": null,
-  "notes": "Neutral hook map. Harington is named and shown in section 04."
+  "notes": "Neutral hook map with no pin: the script gives no place for the Queen's toilet. Labels carry fit:true so the view frames southern England and Wales. Harington is named and shown in section 04."
  },
  {
   "id": "01-e",
@@ -248,25 +243,26 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Thomas Crapper",
-   "lower": "Thomas Crapper: he wasn't first, not even close",
-   "asset": "crapper_portrait",
-   "crop": "Wide crop of the whole seated portrait (01-a was tight on the face)",
+   "label": "Crapper's Valveless Waste Preventer",
+   "lower": "Crapper's Valveless Waste Preventer No. 814",
+   "asset": "crapper_waste_preventer",
+   "crop": "Wide, gentle push-in a little below centre (06-e centre, 06-j upper lettering)",
    "zoom": {
     "scale": 1.15,
     "x": 50,
-    "y": 45
+    "y": 58
    }
   },
-  "visual": "Wide, slow push-in on the Crapper portrait.",
+  "visual": "Gentle push-in on Crapper's Valveless Waste Preventer cistern.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Thomas Crapper.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
+   "item": "Crapper's Valveless Waste Preventer.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Crapper%27s_Valveless_Waste_Preventer.jpg",
    "rights": "Public domain",
-   "credit": "Unknown photographer / Wikimedia Commons",
+   "credit": "Fawcett5 / Wikimedia Commons",
    "verified": true
-  }
+  },
+  "notes": "Was a second Crapper portrait; portrait now used 3 times (01-a, 06-a, 07-a)."
  },
  {
   "id": "02-a",
@@ -411,15 +407,15 @@
   "section_name": "The Famous Version",
   "text": "published a book called Flushed with Pride, and it's partly tongue-in-cheek, it's partly a joke,",
   "year": 1969,
-  "type": "title",
-  "template": "title",
+  "type": "text",
+  "template": "text",
   "fields": {
-   "title": "Flushed with Pride",
-   "subtitle": "A book that's partly tongue-in-cheek, partly a joke"
+   "headline": "Flushed with Pride",
+   "sub": "Wallace Reyburn, 1969: partly tongue-in-cheek, partly a joke"
   },
-  "visual": "Book title builds in: Flushed with Pride, partly tongue-in-cheek, partly a joke.",
+  "visual": "Text card: Flushed with Pride, Wallace Reyburn, 1969, partly tongue-in-cheek, partly a joke.",
   "source": null,
-  "notes": "No licensed cover image of the book; type card instead."
+  "notes": "No licensed cover image of the book; text card instead (no channel kicker, so it can't read as an endorsement)."
  },
  {
   "id": "02-g",
@@ -431,25 +427,26 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Thomas Crapper",
-   "lower": "Thomas Crapper: the book helped spread the idea he invented the toilet",
-   "asset": "crapper_portrait",
-   "crop": "Tighter push-in on the face, a little lower than 01-a",
+   "label": "Thomas Crapper's grave",
+   "lower": "Thomas Crapper's grave, Beckenham Cemetery, London (modern photograph)",
+   "asset": "crapper_grave",
+   "crop": "Tighter push-in, left of centre (01-g was wider, centre)",
    "zoom": {
     "scale": 1.45,
-    "x": 45,
-    "y": 32
+    "x": 42,
+    "y": 50
    }
   },
-  "visual": "Tight push-in on the Crapper portrait.",
+  "visual": "Tighter push-in on Thomas Crapper's gravestone.",
   "source": {
    "institution": "Wikimedia Commons",
-   "item": "Thomas Crapper.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
-   "rights": "Public domain",
-   "credit": "Unknown photographer / Wikimedia Commons",
+   "item": "Beckenham Cemetery 20181022 133700 (45494456541).jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Beckenham_Cemetery_20181022_133700_%2845494456541%29.jpg",
+   "rights": "CC BY-SA 2.0",
+   "credit": "Irid Escent / Wikimedia Commons",
    "verified": true
-  }
+  },
+  "notes": "Was a Crapper portrait; swapped to cut portrait reuse."
  },
  {
   "id": "02-h",
@@ -480,7 +477,7 @@
   "section": "03",
   "section_name": "Knossos",
   "text": "So who did it first? Well, it depends how far back you want to go,",
-  "year": 1969,
+  "year": -1600,
   "type": "photo",
   "template": "archival",
   "fields": {
@@ -503,7 +500,9 @@
    "rights": "Public domain",
    "credit": "G. Eric and Edith Matson Photograph Collection / Library of Congress / Wikimedia Commons",
    "verified": true
-  }
+  },
+  "year_label": "about 1700–1450 BC",
+  "notes": "Lead-in to Knossos: the time bar slides back as the narration goes back."
  },
  {
   "id": "03-b",
@@ -530,29 +529,30 @@
    "labels": [
     {
      "name": "Mediterranean Sea",
-     "lat": 33.0,
-     "lon": 23.0,
+     "lat": 34.4,
+     "lon": 22.6,
      "kind": "sea",
      "size": 32
     },
     {
      "name": "Aegean Sea",
-     "lat": 37.0,
-     "lon": 25.6,
+     "lat": 38.3,
+     "lon": 25.0,
      "kind": "sea",
      "size": 28
     },
     {
      "name": "Greece",
-     "lat": 38.0,
+     "lat": 38.75,
      "lon": 22.0,
      "kind": "region",
-     "size": 34
+     "size": 34,
+     "fit": true
     },
     {
      "name": "Turkey",
-     "lat": 37.6,
-     "lon": 31.0,
+     "lat": 38.6,
+     "lon": 29.5,
      "kind": "region",
      "size": 34
     }
@@ -567,7 +567,8 @@
    "borders": true
   },
   "visual": "Map flies in over the eastern Mediterranean; a pin lands on Knossos, Crete.",
-  "source": null
+  "source": null,
+  "notes": "Greece label sits on the central mainland with fit:true, so the view frames it below the title band; Turkey sits inland."
  },
  {
   "id": "03-c",
@@ -788,7 +789,7 @@
   "section": "03",
   "section_name": "Knossos",
   "text": "And Knossos wasn't even the earliest. Homes in the Indus Valley had drained latrines even earlier,",
-  "year": -2000,
+  "year": -2300,
   "year_label": "even earlier",
   "type": "pinmap",
   "template": "pinmap",
@@ -868,7 +869,7 @@
   "section": "03",
   "section_name": "Knossos",
   "text": "and one review says almost every house there had its own bathroom, including a lavatory.",
-  "year": -2000,
+  "year": -2300,
   "year_label": "even earlier",
   "type": "photo",
   "template": "archival",
@@ -899,7 +900,7 @@
   "section": "03",
   "section_name": "Knossos",
   "text": "So the idea of a toilet that carries waste away with water",
-  "year": -2000,
+  "year": -2300,
   "year_label": "even earlier",
   "type": "photo",
   "template": "archival",
@@ -1341,7 +1342,7 @@
   "fields": {
    "kind": "engraving",
    "label": "Water closets and pipework",
-   "lower": "Everything that smells comes right back up (engravings, date unknown)",
+   "lower": "Water-closet engravings (date unknown)",
    "asset": "wc_engravings",
    "crop": "Whole plate, slow push-in",
    "zoom": {
@@ -1367,29 +1368,21 @@
   "section_name": "Cumming and the S-Bend",
   "text": "The fix for that is the S-bend, a bend in the pipe",
   "year": 1775,
-  "type": "document",
-  "template": "archival",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "kind": "document",
-   "label": "S-bend patent drawing",
-   "lower": "A bend in the pipe: the S-bend (from a 1775 patent drawing)",
-   "asset": "cumming_sbend",
-   "crop": "Tiny image (355px): shown whole, no push-in, used once",
-   "zoom": {
-    "scale": 1.0,
-    "x": 50,
-    "y": 50
-   }
+   "left_title": "A pipe running straight",
+   "left_lines": [
+    "Everything that smells comes right back up"
+   ],
+   "right_title": "The fix: the S-bend",
+   "right_lines": [
+    "A bend in the pipe"
+   ],
+   "step": 2
   },
-  "visual": "Cumming's 1775 patent drawing shown whole, no push-in.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "Cummings S-bend.jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Cummings_S-bend.jpg",
-   "rights": "Public domain",
-   "credit": "Alexander Cumming, 1775 / Wikimedia Commons",
-   "verified": true
-  }
+  "visual": "Compare: a pipe running straight (smell comes back up) versus the fix, the S-bend (a bend in the pipe).",
+  "source": null
  },
  {
   "id": "05-f",
@@ -1451,55 +1444,30 @@
   "section_name": "Cumming and the S-Bend",
   "text": "And the S-bend was patented in 1775 by a man named Alexander Cumming.",
   "year": 1775,
-  "type": "pinmap",
-  "template": "pinmap",
+  "type": "document",
+  "template": "archival",
   "fields": {
-   "title": "London, 1775",
-   "caption": "S-bend patented, 1775",
-   "pins": [
-    {
-     "name": "Bond Street, London",
-     "lat": 51.5115,
-     "lon": -0.1425,
-     "sub": "Alexander Cumming, 1775",
-     "pulse": true,
-     "at": 1.3
-    }
-   ],
-   "labels": [
-    {
-     "name": "England",
-     "lat": 52.8,
-     "lon": -1.8,
-     "kind": "region",
-     "size": 40
-    },
-    {
-     "name": "English Channel",
-     "lat": 50.2,
-     "lon": -0.6,
-     "kind": "sea",
-     "size": 26
-    },
-    {
-     "name": "North Sea",
-     "lat": 53.0,
-     "lon": 2.8,
-     "kind": "sea",
-     "size": 26
-    }
-   ],
-   "from": {
-    "lat": 53.0,
-    "lon": -2.0,
-    "span": 9
-   },
-   "span": 3,
-   "rivers": true,
-   "borders": true
+   "kind": "document",
+   "label": "Alexander Cumming's patent drawing",
+   "lower": "Alexander Cumming's 1775 patent drawing of his water closet with the S-bend",
+   "asset": "cumming_sbend",
+   "crop": "Tiny image (355px): shown whole, no push-in, used once",
+   "zoom": {
+    "scale": 1.0,
+    "x": 50,
+    "y": 50
+   }
   },
-  "visual": "Map flies in to London; Bond Street pin with Alexander Cumming, 1775.",
-  "source": null
+  "visual": "Alexander Cumming's 1775 patent drawing shown whole, no push-in.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "Cummings S-bend.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Cummings_S-bend.jpg",
+   "rights": "Public domain",
+   "credit": "Alexander Cumming, 1775 / Wikimedia Commons",
+   "verified": true
+  },
+  "notes": "Replaces the Bond Street map: no place is added. Cumming's name appears in the lower third on first mention."
  },
  {
   "id": "05-i",
@@ -1512,7 +1480,7 @@
   "fields": {
    "kind": "engraving",
    "label": "Water closets and pipework",
-   "lower": "The key piece that makes an indoor toilet livable (pipework engravings)",
+   "lower": "Water-closet and pipework engravings (date unknown)",
    "asset": "wc_engravings",
    "crop": "Closer push-in on the centre diagrams (05-d was the whole plate)",
    "zoom": {
@@ -1521,7 +1489,7 @@
     "y": 42
    }
   },
-  "visual": "Closer push-in on the engraved pipework diagrams.",
+  "visual": "Closer push-in on the centre of the undated water-closet and pipework engravings.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "Eight illustrations of water closets and pipework. Engraving Wellcome V0020280.jpg",
@@ -1597,9 +1565,9 @@
    "caption": "He came along in the late 1800s",
    "pins": [
     {
-     "name": "Chelsea, London",
-     "lat": 51.4915,
-     "lon": -0.1685,
+     "name": "London",
+     "lat": 51.5074,
+     "lon": -0.1278,
      "sub": "Thomas Crapper",
      "pulse": true,
      "at": 1.0
@@ -1623,7 +1591,7 @@
    "rivers": true,
    "borders": true
   },
-  "visual": "Map flies in to London; a pin lands softly on Chelsea, Thomas Crapper.",
+  "visual": "Map of southern England; a London pin, Thomas Crapper.",
   "source": null,
   "notes": "places.json marks this low confidence, so the pin is labelled only Chelsea, London."
  },
@@ -1977,7 +1945,7 @@
   "section": "07",
   "section_name": "Who Was First",
   "text": "and the Indus Valley had drained latrines even earlier.",
-  "year": -2000,
+  "year": -2300,
   "year_label": "even earlier",
   "type": "pinmap",
   "template": "pinmap",
