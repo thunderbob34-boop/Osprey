@@ -46,7 +46,7 @@ Total runtime 5:42.0 (75 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 04-i | 2:48.8 | 6.4s | And that&#x27;s the whole problem, right? If you don&#x27;t… | Two boxes with an arrow: no publishing, nobody builds on it. | motion graphic |  |
 | 04-j | 2:55.2 | 5.7s | and nobody else knows it happened, so it&#x27;s no… | Portrait of William Morton, a tighter crop than the first one, slow push-in. | archival (fetch) | Wellcome Collection ⚠️ unconfirmed |
 | 04-k | 3:00.9 | 6.1s | So the way I&#x27;d put it is this, Morton… | Ripples spread from Morton and light up other dots; Long&#x27;s dot stays quiet. | illustrated scene (code) |  |
-| 04-l | 3:07.0 | 3.9s | Both of those are true, and they&#x27;re not the… | Crop to the portrait only; keep the printed caption out of frame | archival (fetch) | Countway Library, Portrait Collection M-CL02, box 99, f. 16 ⚠️ unconfirmed |
+| 04-l | 3:07.0 | 3.9s | Both of those are true, and they&#x27;re not the… | Ripple scene held: both are true | illustrated scene (code) |  |
 | 04-m | 3:10.9 | 4.3s | and this whole channel is about the gap between… | Two columns: public versus first. | motion graphic |  |
 | 05-a | 3:15.2 | 4.7s | And that brings us back to Doctors&#x27; Day. Today… | Date stamps in: March 30. | motion graphic |  |
 | 05-b | 3:19.9 | 5.8s | National Doctors&#x27; Day falls on March 30th, and that… | Two boxes with an arrow: Long&#x27;s operation to Doctors&#x27; Day. | motion graphic |  |
@@ -60,12 +60,12 @@ Total runtime 5:42.0 (75 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-d | 3:59.8 | 4.5s | On October 13th, 1804, by the Japanese calendar of… | Date stamps in: October 13, 1804, with the calendar hedge underneath. | motion graphic |  |
 | 06-e | 4:04.3 | 4.5s | Hanaoka removed a breast tumor from a patient named… | Map: the camera flies into Kii Province, Japan; Hanaoka&#x27;s pin drops. | animated map |  |
 | 06-f | 4:08.8 | 4.9s | and the patient was under full general anesthesia while… | Journal article page, push-in on the title. | archival (fetch) | PubMed, NLM ⚠️ unconfirmed |
-| 06-g | 4:13.8 | 7.4s | And full general anesthesia means exactly what it sounds… | New crop: head and shoulders | archival (fetch) | Wikimedia Commons, File:HanaokaSeishu.gif ✅ |
+| 06-g | 4:13.8 | 7.4s | And full general anesthesia means exactly what it sounds… | Anesthesia scene: &quot;numbed in one spot&quot; side lands as it is said | illustrated scene (code) |  |
 | 06-h | 4:21.2 | 3.3s | the patient is completely out for the operation. | Same two-icon scene held; the completely-out side lands as the words are spoken. | illustrated scene (code) |  |
 | 06-i | 4:24.5 | 4.1s | And he didn&#x27;t use ether, he used an herbal… | Mortar and pestle with leaves: an herbal mix. | illustrated scene (code) |  |
-| 06-j | 4:28.6 | 4.1s | a preparation called mafutsusan, which you&#x27;ll also see called… | Same mortar and pestle held; the two names appear as a caption. | illustrated scene (code) |  |
+| 06-j | 4:28.6 | 4.1s | a preparation called mafutsusan, which you&#x27;ll also see called… | Hanaoka portrait, head and shoulders, slow push-in | archival (fetch) | Wikimedia Commons, File:HanaokaSeishu.gif ✅ |
 | 06-k | 4:32.7 | 4.5s | so this is a completely different road to the… | Two columns: herbal mix versus ether. | motion graphic |  |
-| 06-l | 4:37.2 | 7.0s | and it&#x27;s full general anesthesia, on a named patient,… | Crop to the left of the title, only Hanaoka&#x27;s name | archival (fetch) | PubMed, NLM ⚠️ unconfirmed |
+| 06-l | 4:37.2 | 7.0s | and it&#x27;s full general anesthesia, on a named patient,… | Flow: full general anesthesia, a named patient, a known date, Japan | motion graphic |  |
 | 06-m | 4:44.2 | 5.8s | decades before anybody in Boston or Georgia. So now… | World map: the camera zooms out from Japan; Georgia and Boston pins drop in as they are named. | animated map |  |
 | 06-n | 4:50.0 | 4.1s | 1804 in Japan, 1842 in Georgia, and 1846 in… | Timeline spaced by years: 1804 Japan, 1842 Georgia, 1846 Boston | motion graphic |  |
 | 06-o | 4:54.1 | 3.7s | and the one everybody knows is the last one. | Timeline spaced by years: 1804 Japan, 1842 Georgia, 1846 Boston (1846 highlighted) | motion graphic |  |
