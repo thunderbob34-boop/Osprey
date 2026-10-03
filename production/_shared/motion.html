@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- engine: 96045c001bec87d68e03f6037ff26c4a (bump this only for changes that affect every template; for one template, delete those clips' .key files) -->
+<!-- engine: 5d1e0b7a3c2f4e6a8b9c0d1e2f3a4b5c (bump this only for changes that affect every template; for one template, delete those clips' .key files) -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -35,7 +35,7 @@
   .phtag{font-family:var(--mono);font-size:30px;letter-spacing:.2em;color:#E0B85A}
   .phlabel{font-family:var(--serif);font-size:62px;font-weight:700;margin-top:30px;line-height:1.2;color:#EDE6D6}
   .phsrc{font-family:var(--sans);font-size:28px;color:#B9AF9C;margin-top:34px;line-height:1.5;max-width:1400px}
-  .tag{position:absolute;right:80px;top:96px;text-align:right;font-family:var(--sans);font-weight:600;font-size:24px;letter-spacing:.08em;color:var(--muted);z-index:6}
+  .tag{position:absolute;left:80px;bottom:30px;text-align:left;font-family:var(--sans);font-weight:600;font-size:20px;letter-spacing:.08em;color:var(--muted);z-index:6}
   svg text{font-family:var(--sans)}
 </style>
 </head>
@@ -93,7 +93,7 @@ function timebarDraw(t){ const B=D.timebar; if(!B) return; const g=document.getE
   const from=B.from??B.to, to=B.to; const cur = to==null ? null : lerp(from??to,to,eIO(seg(t,0,.8)));
   let o=`<rect x="0" y="0" width="1920" height="74" fill="#EFE7D6" opacity=".93"/><line x1="0" y1="74" x2="1920" y2="74" stroke="#C9BBA0" stroke-width="2"/>
    <line x1="${x0}" y1="40" x2="${x1}" y2="40" stroke="#8B8170" stroke-width="3"/>`;
-  for(let y=Math.ceil(a/10)*10;y<=b;y+=10) o+=`<line x1="${X(y)}" y1="34" x2="${X(y)}" y2="46" stroke="#8B8170" stroke-width="2"/><text x="${X(y)}" y="66" font-size="17" font-weight="600" text-anchor="middle" fill="#7A6E5C">${y}</text>`;
+  for(let y=Math.ceil(a/10)*10;y<=b;y+=10) o+=`<line x1="${X(y)}" y1="34" x2="${X(y)}" y2="46" stroke="#8B8170" stroke-width="2"/>`+(cur!=null&&Math.abs(X(y)-X(cur))<62?'':`<text x="${X(y)}" y="66" font-size="17" font-weight="600" text-anchor="middle" fill="#7A6E5C">${y}</text>`);
   if (cur!=null) o+=`<rect x="${x0}" y="37" width="${Math.max(0,X(cur)-x0)}" height="6" fill="#A8261B" opacity=".55"/>`;
   (B.marks||[]).forEach(([y,l])=>{ const past = cur!=null && y<=cur+0.01; o+=`<circle cx="${X(y)}" cy="40" r="7" fill="${past?'#1D1B18':'#EFE7D6'}" stroke="#1D1B18" stroke-width="2.5"/><text x="${X(y)}" y="24" font-size="16" font-weight="700" text-anchor="middle" fill="${past?'#1D1B18':'#9A8F7C'}">${esc(l)}</text>`; });
   if (cur!=null){ const xc=X(cur), lab=String(Math.round(cur)); o+=`<g transform="translate(${xc},40)"><circle r="12" fill="#A8261B" stroke="#EFE7D6" stroke-width="3"/></g><g transform="translate(${Math.min(1850,Math.max(70,xc))},0)"><rect x="-34" y="47" width="68" height="24" rx="5" fill="#A8261B"/><text x="0" y="65" font-size="18" font-weight="800" text-anchor="middle" fill="#EFE7D6">${lab}</text></g>`; }
@@ -232,10 +232,10 @@ TPL.pinmap = {
       <path id="lak" d="${lakes}" fill="#CCD6D2" stroke="#8FA6AE" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
       <path id="riv" d="${riv}" fill="none" stroke="#8FB0C0" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linecap="round"/></g>
       <g id="ov"></g>
-      <rect x="0" y="0" width="1920" height="150" fill="#EFE7D6" opacity=".88"/><text x="960" y="98" font-size="44" font-weight="800" text-anchor="middle" fill="#1D1B18" id="ttl">${esc(f.title||'')}</text>
+      <rect x="0" y="0" width="1920" height="${D.timebar?186:150}" fill="#EFE7D6" opacity=".88"/><text x="960" y="${D.timebar?146:98}" font-size="44" font-weight="800" text-anchor="middle" fill="#1D1B18" id="ttl">${esc(f.title||'')}</text>
       ${f.caption?`<rect x="0" y="955" width="1920" height="125" fill="#EFE7D6" opacity=".88"/><text id="cap" x="960" y="1010" font-size="36" font-weight="600" text-anchor="middle" fill="#4A443A">${esc(f.caption)}</text>`:''}
       <text x="1860" y="1055" font-size="20" font-weight="600" text-anchor="end" fill="#5E564A">${esc(f.note||'Coastlines: Natural Earth · places and routes approximate')}</text>
-      <g transform="translate(1810,230)"><circle r="34" fill="#EFE7D6" stroke="#5E564A" stroke-width="3"/><path d="M0,-26 L10,6 L0,0 L-10,6 Z" fill="#A8261B"/>${T(0,24,'N',20,'middle',800)}</g></svg>`;
+      <g transform="translate(1810,${D.timebar?266:230})"><circle r="34" fill="#EFE7D6" stroke="#5E564A" stroke-width="3"/><path d="M0,-26 L10,6 L0,0 L-10,6 Z" fill="#A8261B"/>${T(0,24,'N',20,'middle',800)}</g></svg>`;
     this.world=document.getElementById('world'); this.ov=document.getElementById('ov');
     this.arrive = f.from===false ? 0 : Math.min(2.4, DUR*.42);
     // route lengths
