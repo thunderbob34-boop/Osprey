@@ -660,17 +660,17 @@
   "template": "archival",
   "fields": {
    "kind": "photo",
-   "label": "Replica of the Penydarren locomotive (modern photograph)",
-   "lower": "The story goes: a 500-guinea bet between Homfray and a rival ironmaster (replica locomotive, modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-1804-pen"
+   "label": "Penydarren tramway (modern photograph)",
+   "lower": "The story goes: a 500-guinea bet between Homfray and a rival ironmaster (Penydarren tramway, modern photograph)",
+   "asset": "commons-wikimedia-org-wiki-file-penydarren-tramway-at-quaker"
   },
-  "visual": "Replica locomotive, slow pan.",
+  "visual": "Penydarren tramway (modern photograph)",
   "source": {
-   "institution": "Wikimedia Commons (Flickr transfer)",
-   "item": "File:Richard Trevithick 1804 Pen y Darren locomotive (6635994787).jpg",
-   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_1804_Pen_y_Darren_locomotive_(6635994787).jpg",
-   "rights": "Not stated in the search result. The result says only that it is a Creative Commons licence from Flickr; read the file page for the exact licence and attribution",
-   "credit": "Photographer per file page, via Wikimedia Commons (replica locomotive, Swansea)",
+   "institution": "Wikimedia Commons (geograph.org.uk upload)",
+   "item": "File:Penydarren tramway at Quakers Yard Viaduct - geograph.org.uk - 85780.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Penydarren_tramway_at_Quakers_Yard_Viaduct_-_geograph.org.uk_-_85780.jpg",
+   "rights": "Not stated in the search result. Geograph uploads are usually CC BY-SA 2.0; confirm on the file page",
+   "credit": "Photographer per file page, geograph.org.uk, via Wikimedia Commons",
    "verified": false
   }
  },
@@ -680,13 +680,28 @@
   "section_name": "Penydarren, 1804",
   "text": "and a rival ironmaster, but the sources don't even agree on who the rival was,",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Sources don't agree on who the rival was",
-   "sub": "The story goes: a 500-guinea bet, Homfray against a rival ironmaster"
+   "kind": "photo",
+   "label": "Penydarren ironworks, 1876 (later photograph)",
+   "lower": "The story goes: sources don't agree on who the rival was (Penydarren ironworks, 1876 photograph)",
+   "asset": "museum-wales-collections-online-object-c7873268-cc6c-32d5-8f",
+   "crop": "Slow push-in",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 50
+   }
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Slow push-in",
+  "source": {
+   "institution": "Museum Wales (Amgueddfa Cymru)",
+   "item": "Penydarren ironworks, photograph (contact print from a glass negative, summer 1876, Robert Thompson Crawshay)",
+   "url": "https://museum.wales/collections/online/object/c7873268-cc6c-32d5-8f5c-029ca5b6f6fc/Penydarren-ironworks-photograph/",
+   "rights": "Not stated in the search result. Check the Collections Online record licence",
+   "credit": "Museum Wales Collections Online",
+   "verified": false
+  }
  },
  {
   "id": "03-p",
@@ -713,7 +728,13 @@
    "kind": "photo",
    "label": "Replica of the Penydarren locomotive (modern photograph)",
    "lower": "Replica (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-1804-pen"
+   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-1804-pen",
+   "crop": "Tight crop on the replica's cylinder and wheels (not the 03-h framing)",
+   "zoom": {
+    "scale": 2.0,
+    "x": 45,
+    "y": 60
+   }
   },
   "visual": "Replica locomotive, slow push-in.",
   "source": {

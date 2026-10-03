@@ -1486,13 +1486,28 @@
   "section_name": "What Crapper Actually Did",
   "text": "but it's a nice idea, that the name on the tank is where the slang came from.",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "A nice idea: the name on the tank",
-   "sub": "It may be where the slang came from"
+   "kind": "photo",
+   "label": "American troops marching through London, 1917 (illustrative photograph)",
+   "lower": "American troops in London, 1917 (illustrative photograph)",
+   "asset": "loc-gov-item-2004682822",
+   "crop": "Different crop, slow push-out",
+   "zoom": {
+    "scale": 1.5,
+    "x": 60,
+    "y": 45
+   }
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Different crop, slow push-out",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division",
+   "item": "U.S. troops marching through London for the first time in history",
+   "url": "https://www.loc.gov/item/2004682822",
+   "rights": "Not stated in the search result; read the LOC rights statement on the item page",
+   "credit": "U.S. troops marching through London, c. 17 September 1917 (stereograph published by Realistic Travels), Library of Congress",
+   "verified": false
+  }
  },
  {
   "id": "06-k",
@@ -1500,12 +1515,28 @@
   "section_name": "What Crapper Actually Did",
   "text": "So his name may well be in the slang, it's just not because he invented the thing.",
   "type": "archival",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "His name may be in the slang",
-   "sub": "Not because he invented the toilet"
+   "kind": "portrait",
+   "label": "Thomas Crapper",
+   "lower": "Thomas Crapper",
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "crop": "Slow push-in",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 35
+   }
   },
-  "visual": "Text card."
+  "visual": "Slow push-in",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Thomas Crapper.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
+   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
+   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "07-a",

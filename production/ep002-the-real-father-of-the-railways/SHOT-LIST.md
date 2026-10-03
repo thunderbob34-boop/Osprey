@@ -36,8 +36,8 @@ Total runtime 5:51.1 (77 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 03-k | 2:14.5 | 4.5s | not the first one people remember but the first… | Compare card, both sides. | code graphic |  |
 | 03-l | 2:19.0 | 3.1s | and it happened in Wales, twenty-five years before Rocket. | Photograph of the ironworks, slow push-in. | archival (fetch) | Museum Wales Collections Online ⚠️ unconfirmed |
 | 03-m | 2:22.0 | 6.2s | There&#x27;s also a story that gets told about this… | Text card. | code graphic |  |
-| 03-n | 2:28.2 | 5.8s | The story goes there was a bet on it,… | Replica locomotive, slow pan. | archival (fetch) | Photographer per file page, via Wikimedia Commons (replica locomotive, Swansea) ⚠️ unconfirmed |
-| 03-o | 2:34.1 | 5.1s | and a rival ironmaster, but the sources don&#x27;t even… | Text card. | code graphic |  |
+| 03-n | 2:28.2 | 5.8s | The story goes there was a bet on it,… | Penydarren tramway (modern photograph) | archival (fetch) | Photographer per file page, geograph.org.uk, via Wikimedia Commons ⚠️ unconfirmed |
+| 03-o | 2:34.1 | 5.1s | and a rival ironmaster, but the sources don&#x27;t even… | Slow push-in | archival (fetch) | Museum Wales Collections Online ⚠️ unconfirmed |
 | 03-p | 2:39.2 | 5.5s | so treat that as the story people tell and… | Text card. | code graphic |  |
 | 04-a | 2:44.7 | 4.4s | Now here&#x27;s the catch, and it&#x27;s a big one,… | Replica locomotive, slow push-in. | archival (fetch) | Photographer per file page, via Wikimedia Commons (replica locomotive, Swansea) ⚠️ unconfirmed |
 | 04-b | 2:49.1 | 3.1s | it kept cracking the rails. Those plates were cast… | Tramroad plate, slow pan. | archival (fetch) | Museum Wales Collections Online ⚠️ unconfirmed |

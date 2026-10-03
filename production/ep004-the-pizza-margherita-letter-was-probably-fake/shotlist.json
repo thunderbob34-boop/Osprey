@@ -552,20 +552,28 @@
   "section_name": "The Letter",
   "text": "If the palace is writing to thank Raffaele Esposito, you'd expect it to be addressed to Raffaele Esposito, right?",
   "type": "compare",
-  "template": "compare",
+  "template": "archival",
   "fields": {
-   "left_title": "What you'd expect",
-   "left_lines": [
-    "Letter addressed to Raffaele Esposito"
-   ],
-   "right_title": "What Nowak points to",
-   "right_lines": [
-    "Addressed using the name Brandi"
-   ],
-   "step": 1
+   "kind": "portrait",
+   "label": "Queen Margherita of Savoy",
+   "lower": "Queen Margherita of Savoy (photographed c. 1910-1915, years after 1889)",
+   "asset": "loc-gov-resource-ggbain-19206",
+   "crop": "Slow push-in on the queen, as the narration turns to the palace",
+   "zoom": {
+    "scale": 1.25,
+    "x": 50,
+    "y": 35
+   }
   },
-  "visual": "Compare card, right side ghosted.",
-  "source": null
+  "visual": "Slow push-in on the queen, as the narration turns to the palace",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division (Bain News Service)",
+   "item": "Dowager Queen Margherita -- Italy (digital file from original negative)",
+   "url": "https://www.loc.gov/resource/ggbain.19206",
+   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
+   "credit": "George Grantham Bain Collection, Library of Congress, LC-DIG-ggbain-19206",
+   "verified": true
+  }
  },
  {
   "id": "03-i",
@@ -595,13 +603,28 @@
   "section_name": "Who Made It Up",
   "text": "So if the letter is fake, who made it, and when?",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Who made it, and when? Nowak's answer, not proof",
-   "sub": ""
+   "kind": "document",
+   "label": "Nowak's 2014 article (article page)",
+   "lower": "Nowak's 2014 article: his argument, not proven",
+   "asset": "tandfonline-com-doi-abs-10-2752-175174414x13828682779249",
+   "crop": "Push-in on the article title",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 30
+   }
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Push-in on the article title",
+  "source": {
+   "institution": "Food, Culture & Society (Taylor & Francis)",
+   "item": "Zachary Nowak, \"Folklore, Fakelore, History: Invented Tradition and the Origins of the Pizza Margherita\", vol. 17, no. 1, 2014",
+   "url": "https://www.tandfonline.com/doi/abs/10.2752/175174414X13828682779249",
+   "rights": "Publisher copyright; not stated as open. Use only the title/abstract page and check permission, or replace with a text card",
+   "credit": "Food, Culture & Society 17(1), 2014",
+   "verified": false
+  }
  },
  {
   "id": "04-b",
@@ -619,7 +642,7 @@
     },
     {
      "date": "1930s",
-     "label": "The Brandi family runs the pizzeria in the legend"
+     "label": "The Brandi family runs the pizzeria (per Nowak)"
     }
    ],
    "highlight": 1,
@@ -645,7 +668,7 @@
     },
     {
      "date": "1930s",
-     "label": "The Brandi family runs the pizzeria in the legend"
+     "label": "The Brandi family runs the pizzeria (per Nowak)"
     }
    ],
    "highlight": 2,
@@ -688,13 +711,13 @@
   "id": "04-e",
   "section": "04",
   "section_name": "Who Made It Up",
-  "text": "Now, to be fair, I want to be really careful here. That's Nowak's argument, and it's a strong argument, but it's his argument, not proven.",
+  "text": "Now, to be fair, I want to be really careful here. That's Nowak's argument, and it's a strong argument, but it's his argument, not proven. Nobody has proven who did it, and nobody has proven when.",
   "type": "document",
   "template": "archival",
   "fields": {
    "kind": "document",
    "label": "Nowak's 2014 article (article page)",
-   "lower": "Nowak's 2014 article: his argument, not proven",
+   "lower": "Nowak's 2014 article: his argument. Not proven who made it, or when",
    "asset": "tandfonline-com-doi-abs-10-2752-175174414x13828682779249"
   },
   "visual": "Journal article page.",
@@ -706,20 +729,6 @@
    "credit": "Food, Culture & Society 17(1), 2014",
    "verified": false
   }
- },
- {
-  "id": "04-f",
-  "section": "04",
-  "section_name": "Who Made It Up",
-  "text": "Nobody has proven who did it, and nobody has proven when.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "Not proven: who made it, or when",
-   "sub": "Nowak's hypothesis"
-  },
-  "visual": "Text card.",
-  "source": null
  },
  {
   "id": "04-g",
@@ -801,7 +810,7 @@
     },
     {
      "date": "1930s",
-     "label": "The Brandi family runs the pizzeria in the legend"
+     "label": "The Brandi family runs the pizzeria (per Nowak)"
     }
    ],
    "highlight": 2,
@@ -1341,13 +1350,28 @@
   "section_name": "Who Was First",
   "text": "and he thinks it was probably made up later, likely by the Brandi family as marketing.",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Nowak thinks it was probably made up later",
-   "sub": "Likely by the Brandi family, as marketing. His argument, not proven"
+   "kind": "document",
+   "label": "Nowak's 2014 article (article page)",
+   "lower": "Nowak's 2014 article: his argument, not proven",
+   "asset": "tandfonline-com-doi-abs-10-2752-175174414x13828682779249",
+   "crop": "Different crop: the abstract",
+   "zoom": {
+    "scale": 1.6,
+    "x": 50,
+    "y": 60
+   }
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Different crop: the abstract",
+  "source": {
+   "institution": "Food, Culture & Society (Taylor & Francis)",
+   "item": "Zachary Nowak, \"Folklore, Fakelore, History: Invented Tradition and the Origins of the Pizza Margherita\", vol. 17, no. 1, 2014",
+   "url": "https://www.tandfonline.com/doi/abs/10.2752/175174414X13828682779249",
+   "rights": "Publisher copyright; not stated as open. Use only the title/abstract page and check permission, or replace with a text card",
+   "credit": "Food, Culture & Society 17(1), 2014",
+   "verified": false
+  }
  },
  {
   "id": "07-g",
@@ -1386,7 +1410,7 @@
   "type": "datecard",
   "template": "datecard",
   "fields": {
-   "left_label": "Pizza described by Emmanuele Rocco",
+   "left_label": "Described by Rocco",
    "left_date": "1858",
    "right_label": "The queen's supposed visit",
    "right_date": "1889",

@@ -36,7 +36,6 @@
 <asset id="g_04-c" name="04-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-c.png"/></asset>
 <asset id="g_04-d" name="04-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-d.png"/></asset>
 <asset id="g_04-e" name="04-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-e.png"/></asset>
-<asset id="g_04-f" name="04-f" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-f.png"/></asset>
 <asset id="g_04-g" name="04-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-g.png"/></asset>
 <asset id="g_04-h" name="04-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-h.png"/></asset>
 <asset id="g_04-i" name="04-i" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep004-the-pizza-margherita-letter-was-probably-fake/graphics/04-i.png"/></asset>
@@ -113,8 +112,7 @@
 <video ref="g_04-b" offset="3942/30s" name="04-b" start="0s" duration="149/30s"></video>
 <video ref="g_04-c" offset="4091/30s" name="04-c" start="0s" duration="5s"></video>
 <video ref="g_04-d" offset="4241/30s" name="04-d" start="0s" duration="257/30s"></video>
-<video ref="g_04-e" offset="4498/30s" name="04-e" start="0s" duration="267/30s"></video>
-<video ref="g_04-f" offset="4765/30s" name="04-f" start="0s" duration="118/30s"></video>
+<video ref="g_04-e" offset="4498/30s" name="04-e" start="0s" duration="385/30s"></video>
 <video ref="g_04-g" offset="4883/30s" name="04-g" start="0s" duration="139/30s"></video>
 <video ref="g_04-h" offset="5022/30s" name="04-h" start="0s" duration="107/30s"></video>
 <video ref="g_04-i" offset="5129/30s" name="04-i" start="0s" duration="171/30s"></video>

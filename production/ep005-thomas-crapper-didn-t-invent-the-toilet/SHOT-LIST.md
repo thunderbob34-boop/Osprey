@@ -64,8 +64,8 @@ Total runtime 5:22.8 (70 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-g | 4:21.0 | 2.5s | so he&#x27;s not where the word came from. | Text card. | code graphic |  |
 | 06-h | 4:23.5 | 4.1s | The word &quot;crapper&quot; for the toilet may come from… | Photo of American troops in London in 1917, slow push-in. | archival (fetch) | U.S. troops marching through London, c. 17 September 1917 (stereograph published by Realistic Travels), Library of Congress ⚠️ unconfirmed |
 | 06-i | 4:27.6 | 4.1s | seeing &quot;T. Crapper&quot; on toilet cisterns, and that&#x27;s a… | Text card; the hedge sits in the headline. | code graphic |  |
-| 06-j | 4:31.7 | 5.4s | but it&#x27;s a nice idea, that the name on… | Text card. | code graphic |  |
-| 06-k | 4:37.1 | 5.4s | So his name may well be in the slang,… | Text card. | code graphic |  |
+| 06-j | 4:31.7 | 5.4s | but it&#x27;s a nice idea, that the name on… | Different crop, slow push-out | archival (fetch) | U.S. troops marching through London, c. 17 September 1917 (stereograph published by Realistic Travels), Library of Congress ⚠️ unconfirmed |
+| 06-k | 4:37.1 | 5.4s | So his name may well be in the slang,… | Slow push-in | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
 | 07-a | 4:42.5 | 4.9s | So here&#x27;s where it lands. Thomas Crapper was a… | Crapper portrait holds, no move. | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
 | 07-b | 4:47.4 | 6.5s | who patented improvements in the late 1800s, like the… | Text card. | code graphic |  |
 | 07-c | 4:53.9 | 6.5s | About 3,500 years ago the palace at Knossos was… | Knossos photo, slow push-in. | archival (fetch) | Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0 ✅ |
