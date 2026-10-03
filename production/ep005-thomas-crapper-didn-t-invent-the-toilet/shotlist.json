@@ -79,11 +79,12 @@
    "caption": "In England",
    "pins": [
     {
-     "name": "Kelston, near Bath",
+     "name": "",
      "lat": 51.4048,
      "lon": -2.4256,
      "pulse": true,
-     "at": 1.3
+     "at": 1.3,
+     "sub": ""
     }
    ],
    "labels": [
@@ -114,14 +115,6 @@
      "lon": -4.3,
      "kind": "sea",
      "size": 22
-    },
-    {
-     "name": "London",
-     "lat": 51.5074,
-     "lon": -0.1278,
-     "kind": "city",
-     "size": 26,
-     "fit": true
     }
    ],
    "from": {
@@ -237,7 +230,7 @@
   "id": "02-a",
   "section": "02",
   "section_name": "The Famous Version",
-  "text": "The famous version goes like this, a man named Thomas Crapper invents the flush toilet,",
+  "text": "The famous version goes like this, a man named Thomas Crapper invents the flush toilet, puts his name on it, and his name becomes the slang.",
   "type": "flow",
   "template": "flow",
   "fields": {
@@ -256,41 +249,9 @@
      "sub": ""
     }
    ],
-   "step": 1,
-   "highlight": 0,
    "caption": "The story as it is usually told"
   },
-  "visual": "Flow: first box pops in, the other two ghosted.",
-  "source": null
- },
- {
-  "id": "02-b",
-  "section": "02",
-  "section_name": "The Famous Version",
-  "text": "puts his name on it, and his name becomes the slang.",
-  "type": "flow",
-  "template": "flow",
-  "fields": {
-   "title": "The famous version",
-   "steps": [
-    {
-     "label": "Thomas Crapper invents the flush toilet",
-     "sub": "The popular story"
-    },
-    {
-     "label": "He puts his name on it",
-     "sub": ""
-    },
-    {
-     "label": "His name becomes the slang",
-     "sub": ""
-    }
-   ],
-   "step": 3,
-   "highlight": 2,
-   "caption": "The story as it is usually told"
-  },
-  "visual": "Same flow, the last box lands: his name becomes the slang.",
+  "visual": "Flow builds all three boxes in sequence",
   "source": null
  },
  {
@@ -328,18 +289,28 @@
   "section_name": "The Famous Version",
   "text": "You hear Crapper and toilet in the same sentence and your brain just files it as true.",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Crapper and toilet, in the same sentence",
-   "sub": "The brain files it as true",
-   "bgmap": {
-    "lat": 51.5,
-    "lon": -0.15,
-    "span": 1.5
+   "kind": "portrait",
+   "label": "Thomas Crapper",
+   "lower": "Thomas Crapper",
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "crop": "Different crop: lower, off-centre",
+   "zoom": {
+    "scale": 1.4,
+    "x": 40,
+    "y": 45
    }
   },
-  "visual": "Kinetic words.",
-  "source": null
+  "visual": "Different crop: lower, off-centre",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Thomas Crapper.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
+   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
+   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "02-e",
@@ -427,13 +398,28 @@
   "section_name": "Knossos",
   "text": "So who did it first? Well, it depends how far back you want to go,",
   "type": "title",
-  "template": "title",
+  "template": "archival",
   "fields": {
-   "title": "So who did it first?",
-   "subtitle": "It depends how far back you want to go"
+   "kind": "photo",
+   "label": "Palace of Knossos, Crete (modern photograph)",
+   "lower": "Palace of Knossos, Crete (modern photograph)",
+   "asset": "commons-wikimedia-org-wiki-file-knossos-palace-jpg",
+   "crop": "Wide shot, slow push-in",
+   "zoom": {
+    "scale": 1.15,
+    "x": 50,
+    "y": 50
+   }
   },
-  "visual": "Title-style card: the question, then the answer is a distance.",
-  "source": null
+  "visual": "Wide shot, slow push-in",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Knossos palace.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Knossos_palace.jpg",
+   "rights": "CC BY-SA 4.0, as stated in the search result (photographer Theofanis Ampatzidis, 17 August 2017)",
+   "credit": "Theofanis Ampatzidis, via Wikimedia Commons, CC BY-SA 4.0",
+   "verified": true
+  }
  },
  {
   "id": "03-b",
@@ -731,8 +717,8 @@
    "labels": [
     {
      "name": "Mediterranean Sea",
-     "lat": 33.8,
-     "lon": 19.0,
+     "lat": 33.6,
+     "lon": 18.5,
      "kind": "sea",
      "size": 30
     },
@@ -839,8 +825,8 @@
    "labels": [
     {
      "name": "Mediterranean Sea",
-     "lat": 33.8,
-     "lon": 19.0,
+     "lat": 33.6,
+     "lon": 18.5,
      "kind": "sea",
      "size": 30
     },
@@ -981,13 +967,6 @@
    ],
    "labels": [
     {
-     "name": "England",
-     "lat": 52.9,
-     "lon": -1.6,
-     "kind": "region",
-     "size": 40
-    },
-    {
      "name": "Wales",
      "lat": 52.2,
      "lon": -3.9,
@@ -1007,14 +986,6 @@
      "lon": -4.3,
      "kind": "sea",
      "size": 22
-    },
-    {
-     "name": "London",
-     "lat": 51.5074,
-     "lon": -0.1278,
-     "kind": "city",
-     "size": 26,
-     "fit": true
     }
    ],
    "from": {
@@ -1696,14 +1667,14 @@
     {
      "name": "United States",
      "lat": 39.5,
-     "lon": -98.0,
+     "lon": -90.0,
      "kind": "region",
      "size": 34
     },
     {
      "name": "Atlantic Ocean",
-     "lat": 43.0,
-     "lon": -40.0,
+     "lat": 28,
+     "lon": -45,
      "kind": "sea",
      "size": 36
     },
@@ -1803,25 +1774,28 @@
   "section_name": "Who Was First",
   "text": "So here's where it lands. Thomas Crapper was a real sanitary engineer",
   "type": "compare",
-  "template": "compare",
+  "template": "archival",
   "fields": {
-   "left_title": "Thomas Crapper",
-   "left_lines": [
-    "A real sanitary engineer"
-   ],
-   "right_title": "What he didn't do",
-   "right_lines": [
-    "Invent the toilet"
-   ],
-   "step": 1,
-   "bgmap": {
-    "lat": 40,
-    "lon": 30,
-    "span": 40
+   "kind": "portrait",
+   "label": "Thomas Crapper",
+   "lower": "Thomas Crapper, a real sanitary engineer",
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "crop": "New crop, centred on the face",
+   "zoom": {
+    "scale": 1.6,
+    "x": 50,
+    "y": 32
    }
   },
-  "visual": "Compare card: Crapper on the left, the right side ghosted.",
-  "source": null
+  "visual": "New crop, centred on the face",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Thomas Crapper.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
+   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
+   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "07-b",
@@ -1829,26 +1803,15 @@
   "section_name": "Who Was First",
   "text": "who patented improvements in the late 1800s, like the ballcock, and he didn't invent the toilet.",
   "type": "compare",
-  "template": "compare",
+  "template": "scene",
   "fields": {
-   "left_title": "Thomas Crapper",
-   "left_lines": [
-    "A real sanitary engineer",
-    "Patented improvements in the late 1800s",
-    "Like the ballcock"
-   ],
-   "right_title": "What he didn't do",
-   "right_lines": [
-    "Invent the toilet"
-   ],
-   "step": 2,
-   "bgmap": {
-    "lat": 40,
-    "lon": 30,
-    "span": 40
+   "scene": "ballcock",
+   "tag": "ILLUSTRATION · Simplified diagram of a ballcock",
+   "params": {
+    "title": "The ballcock"
    }
   },
-  "visual": "Compare card: the right side is revealed.",
+  "visual": "Ballcock scene again, for \"improvements like the ballcock\"",
   "source": null
  },
  {
@@ -1907,8 +1870,8 @@
    "labels": [
     {
      "name": "Mediterranean Sea",
-     "lat": 33.8,
-     "lon": 19.0,
+     "lat": 33.6,
+     "lon": 18.5,
      "kind": "sea",
      "size": 30
     },

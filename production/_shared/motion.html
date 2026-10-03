@@ -418,7 +418,7 @@ SC.ripple = (t,P) => { let s=titleBar(t,P.title||'Public versus first'); const r
   const one=!!P.single; const A=one?[960,560]:[560,560], B=[1360,560]; const dots=one?[[520,330],[700,850],[1300,300],[1420,800],[460,620],[1500,560],[960,250],[1180,880]]:[[300,330],[420,820],[760,300],[820,830],[300,600],[700,640]];
   for(let i=0;i<4;i++){ const q=((t*.45+i/4)%1); s+=`<circle cx="${A[0]}" cy="${A[1]}" r="${30+q*(one?620:360)}" fill="none" stroke="#A8261B" stroke-width="5" opacity="${(1-q)*.7}"/>`; }
   dots.forEach(([x,y],i)=>{ const d=Math.hypot(x-A[0],y-A[1]); const lit=t*.45*(one?620:360)>d-30; s+=`<circle cx="${x}" cy="${y}" r="16" fill="${lit?'#A8261B':'#C9BBA0'}"/>`; });
-  s+=`<circle cx="${A[0]}" cy="${A[1]}" r="34" fill="#A8261B"/>${TH(A[0],A[1]+90,P.left||'Boston, 1846',40,'middle',800)}${TH(A[0],A[1]+135,P.leftSub||'in public: written down, talked about, copied',28,'middle',600,'#5E564A')}`;
+  s+=`<circle cx="${A[0]}" cy="${A[1]}" r="34" fill="#A8261B"/>` + (one ? `<rect x="560" y="905" width="800" height="120" rx="12" fill="#EFE7D6" opacity=".92"/>${T(960,955,P.left||'',46,'middle',800)}${T(960,1003,P.leftSub||'',32,'middle',600,'#4A443A')}` : `${TH(A[0],A[1]+90,P.left||'Boston, 1846',40,'middle',800)}${TH(A[0],A[1]+135,P.leftSub||'in public: written down, talked about, copied',28,'middle',600,'#5E564A')}`);
   if(one) return s;
   s+=`<line x1="960" y1="260" x2="960" y2="880" stroke="#C9BBA0" stroke-width="4"/>`;
   s+=`<g opacity="${rq}"><circle cx="${B[0]}" cy="${B[1]}" r="34" fill="#1D1B18"/>${TH(B[0],B[1]+90,P.right||'Georgia, 1842',40,'middle',800)}${TH(B[0],B[1]+135,P.rightSub||'not published until 1849',28,'middle',600,'#5E564A')}</g>`;
