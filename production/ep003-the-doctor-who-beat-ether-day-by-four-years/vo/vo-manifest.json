@@ -1,39 +1,39 @@
 {
  "voice": "Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f)",
  "engine": "text2speech_v2 / seed_speech",
- "note": "Read by Holden on Seed Speech from the final script text. Pronunciation respellings used in the TTS text only (the script and on-screen text keep the real spelling): Magendie read as \"Mah-zhahn-dee\"; Hanaoka Seishu read as \"Hana-oka Say-shoo\"; Hanaoka read as \"Hana-oka\"; Kan Aiya read as \"Kahn Eye-yah\"; mafutsusan read as \"mah-foo-tsoo-sahn\"; tsusensan read as \"tsoo-sen-sahn\" Sections 06 and 07 were re-read on 2026-10-03 after the Hanaoka date fix (\"by the Japanese calendar of the time\").",
+ "note": "Read by Holden on Seed Speech from the final script text. Pronunciation respellings used in the TTS text only (the script and on-screen text keep the real spelling): Magendie read as \"Mah-zhahn-dee\"; Hanaoka Seishu read as \"Hana-oka Say-shoo\"; Hanaoka read as \"Hana-oka\"; Kan Aiya read as \"Kahn Eye-yah\"; mafutsusan read as \"mah-foo-tsoo-sahn\"; tsusensan read as \"tsoo-sen-sahn\" Sections 06 and 07 were re-read on 2026-10-03 after the Hanaoka date fix (\"by the Japanese calendar of the time\"). Sections changed for plain talk (no \"right?\", no asides) were re-read 2026-10-03 (plain talk).",
  "sections": [
   {
    "num": "01",
    "name": "Cold Open",
    "file": "vo/01-cold-open.mp3",
-   "job_id": "d12452d4-46cd-42a4-b613-15d083795334",
-   "duration": 42.384,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002510_d12452d4-46cd-42a4-b613-15d083795334.mp3"
+   "job_id": "ad7f3483-d8ac-4aa4-8f97-f1fe90b066af",
+   "duration": 40.44,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125232_ad7f3483-d8ac-4aa4-8f97-f1fe90b066af.mp3"
   },
   {
    "num": "02",
    "name": "Before Anesthesia",
    "file": "vo/02-before-anesthesia.mp3",
-   "job_id": "b8fb6b3c-0abd-4f7d-9a16-f3ecf822788c",
-   "duration": 50.016,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002510_b8fb6b3c-0abd-4f7d-9a16-f3ecf822788c.mp3"
+   "job_id": "f4c24505-0f8c-41d3-a732-3c98f19de6a6",
+   "duration": 51.864,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125231_f4c24505-0f8c-41d3-a732-3c98f19de6a6.mp3"
   },
   {
    "num": "03",
    "name": "Ether Day",
    "file": "vo/03-ether-day.mp3",
-   "job_id": "416c9e50-028e-4973-ad3d-de25a6cca40b",
-   "duration": 39.576,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002510_416c9e50-028e-4973-ad3d-de25a6cca40b.mp3"
+   "job_id": "86137b39-0e7c-4027-955e-7147a0a465f1",
+   "duration": 38.256,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125231_86137b39-0e7c-4027-955e-7147a0a465f1.mp3"
   },
   {
    "num": "04",
    "name": "Crawford Long, 1842",
    "file": "vo/04-crawford-long-1842.mp3",
-   "job_id": "8627e9f9-618b-423d-bf85-feb12d101cd5",
-   "duration": 63.24,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002510_8627e9f9-618b-423d-bf85-feb12d101cd5.mp3"
+   "job_id": "017eff6b-5bb6-4609-8180-b025e9b9bea1",
+   "duration": 57.6,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125231_017eff6b-5bb6-4609-8180-b025e9b9bea1.mp3"
   },
   {
    "num": "05",
@@ -47,9 +47,9 @@
    "num": "06",
    "name": "Hanaoka, 1804",
    "file": "vo/06-hanaoka-1804.mp3",
-   "job_id": "59bf246a-fd58-41c3-adc4-dcc9c30103fc",
-   "duration": 69.096,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_030648_59bf246a-fd58-41c3-adc4-dcc9c30103fc.mp3"
+   "job_id": "697c0bf8-5727-4fda-b853-80ad641a678f",
+   "duration": 68.232,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125231_697c0bf8-5727-4fda-b853-80ad641a678f.mp3"
   },
   {
    "num": "07",

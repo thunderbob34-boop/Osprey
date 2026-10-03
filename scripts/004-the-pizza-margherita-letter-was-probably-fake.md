@@ -37,7 +37,7 @@ That's Nowak's argument, and it's a strong one, but it's his argument, not prove
 
 And there's more, because even if you set the letter aside, the pizza itself was already around. In 1858, in a book about the customs of Naples called Usi e costumi di Napoli e contorni, edited by Francesco de Bourcard, a Neapolitan writer named Emmanuele Rocco described the pizzas of Naples, and he described pizzas topped with basil, and thin slices of mozzarella, and sometimes tomato.
 
-So that's 1858, which is three decades before the queen's supposed visit in 1889. Rocco lists tomato as one topping you might get, not a required one, it's one of the combinations, and he doesn't call it a Margherita. He doesn't use that name. You'll find people online saying the 1858 book names the Margherita, but it doesn't. But basil and thin slices of mozzarella, and sometimes tomato, on a pizza in Naples, in print, in 1858, that's basically the pizza in the story, decades before the man in the story supposedly invented it for a queen.
+So that's 1858, which is three decades before the queen's supposed visit in 1889. Rocco lists tomato as one topping you might get, not a required one, it's one of the combinations, and he doesn't call it a Margherita. He doesn't use that name. You'll find people online saying the 1858 book names the Margherita, and it doesn't. But basil and thin slices of mozzarella, and sometimes tomato, on a pizza in Naples, in print, in 1858, that's basically the pizza in the story, decades before the man in the story supposedly invented it for a queen.
 
 ## 06 Fair Credit
 

@@ -1,39 +1,39 @@
 {
  "voice": "Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f)",
  "engine": "text2speech_v2 / seed_speech",
- "note": "Read by Holden on Seed Speech from the final script text. Pronunciation respellings used in the TTS text only (the script and on-screen text keep the real spelling): Knossos read as \"Noss-oss\"",
+ "note": "Read by Holden on Seed Speech from the final script text. Pronunciation respellings used in the TTS text only (the script and on-screen text keep the real spelling): Knossos read as \"Noss-oss\" Sections changed for plain talk (no \"right?\", no asides) were re-read 2026-10-03 (plain talk); \"Elizabeth I\" is spelled \"Elizabeth the First\" in the TTS text.",
  "sections": [
   {
    "num": "01",
    "name": "Cold Open",
    "file": "vo/01-cold-open.mp3",
-   "job_id": "6bbb4d0b-8aac-43d6-9da7-12d62143e928",
-   "duration": 31.224,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002610_6bbb4d0b-8aac-43d6-9da7-12d62143e928.mp3"
+   "job_id": "d7f5dd08-ceba-4cd0-8cb3-9f75e2c26696",
+   "duration": 31.056,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125231_d7f5dd08-ceba-4cd0-8cb3-9f75e2c26696.mp3"
   },
   {
    "num": "02",
    "name": "The Famous Version",
    "file": "vo/02-the-famous-version.mp3",
-   "job_id": "20e70767-71dc-45ce-9565-7e08873a0b32",
-   "duration": 38.64,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002610_20e70767-71dc-45ce-9565-7e08873a0b32.mp3"
+   "job_id": "9f23fcb5-64f1-4894-837e-8090a3bb2747",
+   "duration": 37.824,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125245_9f23fcb5-64f1-4894-837e-8090a3bb2747.mp3"
   },
   {
    "num": "03",
    "name": "Knossos",
    "file": "vo/03-knossos.mp3",
-   "job_id": "0a0cfd70-80c2-49b9-b428-7a39e2c85a9e",
-   "duration": 67.632,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002610_0a0cfd70-80c2-49b9-b428-7a39e2c85a9e.mp3"
+   "job_id": "d01cb908-f7ab-49b1-8e2e-73c9e8f2b786",
+   "duration": 66.6,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125246_d01cb908-f7ab-49b1-8e2e-73c9e8f2b786.mp3"
   },
   {
    "num": "04",
    "name": "Harington, 1596",
    "file": "vo/04-harington-1596.mp3",
-   "job_id": "b8b94be2-74d0-4df1-9c74-d0d843b76f27",
-   "duration": 55.056,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002624_b8b94be2-74d0-4df1-9c74-d0d843b76f27.mp3"
+   "job_id": "fc2ec791-a0c0-47b3-8f8a-eb84197223ec",
+   "duration": 55.44,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125245_fc2ec791-a0c0-47b3-8f8a-eb84197223ec.mp3"
   },
   {
    "num": "05",
@@ -47,9 +47,9 @@
    "num": "06",
    "name": "What Crapper Actually Did",
    "file": "vo/06-what-crapper-actually-did.mp3",
-   "job_id": "3b394e33-b349-4f1e-a732-31e4a32c96b5",
-   "duration": 48.864,
-   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_002624_3b394e33-b349-4f1e-a732-31e4a32c96b5.mp3"
+   "job_id": "49665421-7b57-46b2-af03-4424fd25f199",
+   "duration": 47.592,
+   "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Jxhva7RWv8ZQ6PwQw5a7ufLHV6/hf_20261003_125245_49665421-7b57-46b2-af03-4424fd25f199.mp3"
   },
   {
    "num": "07",
