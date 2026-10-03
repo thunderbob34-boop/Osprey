@@ -1156,28 +1156,20 @@
   "section_name": "Crawford Long, 1842",
   "text": "Both of those are true, and they're not the same thing,",
   "type": "scene",
-  "template": "archival",
+  "template": "scene",
   "fields": {
-   "kind": "engraving",
-   "label": "Crawford W. Long, engraving c. 1877",
-   "lower": "Crawford Long (engraving, c. 1877)",
-   "asset": "collections-countway-harvard-edu-onview-items-show-18110",
-   "crop": "Crop to the portrait only; keep the printed caption out of frame",
-   "zoom": {
-    "scale": 1.6,
-    "x": 50,
-    "y": 32
+   "scene": "ripple",
+   "tag": "ILLUSTRATION · Simplified diagram, not data",
+   "params": {
+    "title": "Both are true, and not the same thing",
+    "left": "Morton",
+    "leftSub": "made it public",
+    "right": "Long",
+    "rightSub": "did it first"
    }
   },
-  "visual": "Crop to the portrait only; keep the printed caption out of frame",
-  "source": {
-   "institution": "Countway Library of Medicine (Harvard), OnView Portrait Collection",
-   "item": "Crawford W. Long, M.D. Discoverer of anaesthesia demonstrated on James M. Venables by the use of sulphuric ether at Jefferson, Jackson Co., Georgia, March 30th, 1842 (engraving, c. 1877)",
-   "url": "https://collections.countway.harvard.edu/onview/items/show/18110",
-   "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Countway Library, Portrait Collection M-CL02, box 99, f. 16",
-   "verified": false
-  }
+  "visual": "Ripple scene held: both are true",
+  "source": null
  },
  {
   "id": "04-m",
@@ -1570,28 +1562,20 @@
   "section_name": "Hanaoka, 1804",
   "text": "And full general anesthesia means exactly what it sounds like, the patient isn't just numbed in one spot,",
   "type": "scene",
-  "template": "archival",
+  "template": "scene",
   "fields": {
-   "kind": "portrait",
-   "label": "Hanaoka Seishu",
-   "lower": "Hanaoka Seishu",
-   "asset": "commons-wikimedia-org-wiki-file-hanaokaseishu-gif",
-   "crop": "New crop: head and shoulders",
-   "zoom": {
-    "scale": 1.5,
-    "x": 50,
-    "y": 30
+   "scene": "anesthesia",
+   "tag": "ILLUSTRATION · Simplified",
+   "params": {
+    "title": "Full general anesthesia",
+    "at": {
+     "left": 4.6,
+     "right": 99
+    }
    }
   },
-  "visual": "New crop: head and shoulders",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:HanaokaSeishu.gif",
-   "url": "https://commons.wikimedia.org/wiki/File:HanaokaSeishu.gif",
-   "rights": "Public domain (Commons states a faithful reproduction of a 2D work whose author died more than 70 years ago)",
-   "credit": "Wikimedia Commons, File:HanaokaSeishu.gif",
-   "verified": true
-  }
+  "visual": "Anesthesia scene: \"numbed in one spot\" side lands as it is said",
+  "source": null
  },
  {
   "id": "06-h",
@@ -1603,7 +1587,13 @@
   "fields": {
    "scene": "anesthesia",
    "tag": "ILLUSTRATION · Simplified diagram",
-   "params": {}
+   "params": {
+    "title": "Full general anesthesia",
+    "at": {
+     "left": 0,
+     "right": 0.3
+    }
+   }
   },
   "visual": "Same two-icon scene held; the completely-out side lands as the words are spoken.",
   "source": null
@@ -1631,17 +1621,28 @@
   "section_name": "Hanaoka, 1804",
   "text": "a preparation called mafutsusan, which you'll also see called tsusensan,",
   "type": "scene",
-  "template": "scene",
+  "template": "archival",
   "fields": {
-   "scene": "herbal",
-   "tag": "ILLUSTRATION · Simplified, not the actual ingredients",
-   "params": {
-    "title": "An herbal mix",
-    "caption": "mafutsusan, also called tsusensan"
+   "kind": "portrait",
+   "label": "Hanaoka Seishu",
+   "lower": "Hanaoka Seishu · mafutsusan, also called tsusensan",
+   "asset": "commons-wikimedia-org-wiki-file-hanaokaseishu-gif",
+   "crop": "New crop: head and shoulders",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 30
    }
   },
-  "visual": "Same mortar and pestle held; the two names appear as a caption.",
-  "source": null
+  "visual": "Hanaoka portrait, head and shoulders, slow push-in",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:HanaokaSeishu.gif",
+   "url": "https://commons.wikimedia.org/wiki/File:HanaokaSeishu.gif",
+   "rights": "Public domain (Commons states a faithful reproduction of a 2D work whose author died more than 70 years ago)",
+   "credit": "Wikimedia Commons, File:HanaokaSeishu.gif",
+   "verified": true
+  }
  },
  {
   "id": "06-k",
@@ -1675,28 +1676,31 @@
   "section_name": "Hanaoka, 1804",
   "text": "and it's full general anesthesia, on a named patient, on a known date, in 1804, in Japan,",
   "type": "flow",
-  "template": "archival",
+  "template": "flow",
   "fields": {
-   "kind": "document",
-   "label": "Two Japanese Pioneers in Anesthesiology",
-   "lower": "\"Two Japanese Pioneers in Anesthesiology\" (journal article page)",
-   "asset": "pubmed-ncbi-nlm-nih-gov-28160985",
-   "crop": "Crop to the left of the title, only Hanaoka's name",
-   "zoom": {
-    "scale": 1.7,
-    "x": 30,
-    "y": 20
-   }
+   "title": "Full general anesthesia, 1804",
+   "arrows": false,
+   "steps": [
+    {
+     "label": "Full general anesthesia",
+     "sub": "Completely out"
+    },
+    {
+     "label": "Kan Aiya",
+     "sub": "A named patient"
+    },
+    {
+     "label": "October 13, 1804",
+     "sub": "A known date (Japanese calendar of the time)"
+    },
+    {
+     "label": "Japan",
+     "sub": "Hanaoka Seishu"
+    }
+   ]
   },
-  "visual": "Crop to the left of the title, only Hanaoka's name",
-  "source": {
-   "institution": "PubMed (National Library of Medicine)",
-   "item": "Two Japanese Pioneers in Anesthesiology: Seishū Hanaoka and Gendai Kamada (PubMed 28160985)",
-   "url": "https://pubmed.ncbi.nlm.nih.gov/28160985/",
-   "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "PubMed, NLM",
-   "verified": false
-  }
+  "visual": "Flow: full general anesthesia, a named patient, a known date, Japan",
+  "source": null
  },
  {
   "id": "06-m",

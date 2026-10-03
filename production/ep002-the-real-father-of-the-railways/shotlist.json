@@ -1088,25 +1088,25 @@
   "type": "stat",
   "template": "archival",
   "fields": {
-   "kind": "photo",
-   "label": "Penydarren ironworks, 1876 (later photograph)",
-   "lower": "The story goes: a bet of 500 guineas (Penydarren ironworks, 1876 photograph)",
-   "asset": "museum-wales-collections-online-object-c7873268-cc6c-32d5-8f",
-   "crop": "Tighter crop than 03-n",
+   "kind": "portrait",
+   "label": "Richard Trevithick, 1816",
+   "lower": "The story goes: a bet of 500 guineas (Richard Trevithick, portrait by John Linnell, 1816)",
+   "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-portrait",
+   "crop": "New crop: shoulders up, off-centre",
    "zoom": {
-    "scale": 1.5,
-    "x": 40,
-    "y": 50
+    "scale": 1.4,
+    "x": 45,
+    "y": 38
    }
   },
-  "visual": "Tighter crop than 03-n",
+  "visual": "New crop: shoulders up, off-centre",
   "source": {
-   "institution": "Museum Wales (Amgueddfa Cymru)",
-   "item": "Penydarren ironworks, photograph (contact print from a glass negative, summer 1876, Robert Thompson Crawshay)",
-   "url": "https://museum.wales/collections/online/object/c7873268-cc6c-32d5-8f5c-029ca5b6f6fc/Penydarren-ironworks-photograph/",
-   "rights": "Not stated in the search result. Check the Collections Online record licence",
-   "credit": "Museum Wales Collections Online",
-   "verified": false
+   "institution": "Wikimedia Commons (photo credit Science Museum; original in the Science Museum Group, Bennet Woodcroft Bequest)",
+   "item": "File:Richard Trevithick portrait.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Richard_Trevithick_portrait.jpg",
+   "rights": "Public domain in the United States (published before 1 January 1931), as stated on the Commons file page",
+   "credit": "Richard Trevithick by John Linnell, 1816, oil on canvas, Science Museum Group (Bennet Woodcroft Bequest), via Wikimedia Commons",
+   "verified": true
   },
   "notes": "Hedge kept: \"the story goes\"."
  },
@@ -1145,22 +1145,22 @@
   "type": "text",
   "template": "archival",
   "fields": {
-   "kind": "photo",
-   "label": "Penydarren ironworks, 1876 (later photograph)",
-   "lower": "The sources don't agree on who the rival was (Penydarren ironworks, 1876 photograph)",
-   "asset": "museum-wales-collections-online-object-c7873268-cc6c-32d5-8f",
-   "crop": "Third crop, the other side of the works",
+   "kind": "object",
+   "label": "Tramplate (Museum Wales)",
+   "lower": "The sources don't agree on who the rival was (a tramroad iron plate, Museum Wales)",
+   "asset": "museum-wales-collections-online-object-b0bd28a0-4e12-35e5-94",
+   "crop": "Tight crop on the plate surface",
    "zoom": {
-    "scale": 1.6,
-    "x": 70,
+    "scale": 1.7,
+    "x": 50,
     "y": 50
    }
   },
-  "visual": "Third crop, the other side of the works",
+  "visual": "Tight crop on the plate surface",
   "source": {
    "institution": "Museum Wales (Amgueddfa Cymru)",
-   "item": "Penydarren ironworks, photograph (contact print from a glass negative, summer 1876, Robert Thompson Crawshay)",
-   "url": "https://museum.wales/collections/online/object/c7873268-cc6c-32d5-8f5c-029ca5b6f6fc/Penydarren-ironworks-photograph/",
+   "item": "Tramplate",
+   "url": "https://museum.wales/collections/online/object/b0bd28a0-4e12-35e5-94c5-193f9f1ff459/Tramplate/",
    "rights": "Not stated in the search result. Check the Collections Online record licence",
    "credit": "Museum Wales Collections Online",
    "verified": false
@@ -1283,18 +1283,28 @@
   "section_name": "The Catch",
   "text": "and you can't run a railway on track that keeps breaking, right?",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "You can't run a railway on track that keeps breaking",
-   "sub": "",
-   "bgmap": {
-    "lat": 51.7,
-    "lon": -3.35,
-    "span": 3
+   "kind": "object",
+   "label": "Tramplate (Museum Wales)",
+   "lower": "You can't run a railway on track that keeps breaking (a tramroad iron plate, Museum Wales)",
+   "asset": "museum-wales-collections-online-object-b0bd28a0-4e12-35e5-94",
+   "crop": "New tight crop, different from 03-d and 03-q",
+   "zoom": {
+    "scale": 2.0,
+    "x": 35,
+    "y": 55
    }
   },
-  "visual": "Kinetic text: you can't run a railway on track that keeps breaking.",
-  "source": null
+  "visual": "New tight crop, different from 03-d and 03-q",
+  "source": {
+   "institution": "Museum Wales (Amgueddfa Cymru)",
+   "item": "Tramplate",
+   "url": "https://museum.wales/collections/online/object/b0bd28a0-4e12-35e5-94c5-193f9f1ff459/Tramplate/",
+   "rights": "Not stated in the search result. Check the Collections Online record licence",
+   "credit": "Museum Wales Collections Online",
+   "verified": false
+  }
  },
  {
   "id": "04-e",
@@ -1302,25 +1312,28 @@
   "section_name": "The Catch",
   "text": "So the Penydarren run worked, it really worked, but it was a technical win and not a business one.",
   "type": "compare",
-  "template": "compare",
+  "template": "archival",
   "fields": {
-   "left_title": "A technical win",
-   "left_lines": [
-    "The Penydarren run worked"
-   ],
-   "right_title": "A business",
-   "right_lines": [
-    "Not a business one"
-   ],
-   "step": 2,
-   "bgmap": {
-    "lat": 51.7,
-    "lon": -3.35,
-    "span": 3
+   "kind": "object",
+   "label": "Conjectural model of the Penydarren locomotive (Science Museum Group)",
+   "lower": "The Penydarren run worked: a technical win, not a business one (conjectural model)",
+   "asset": "collection-sciencemuseumgroup-org-uk-objects-co27505-model-o",
+   "crop": "Slow push-in on the flywheel",
+   "zoom": {
+    "scale": 1.6,
+    "x": 35,
+    "y": 50
    }
   },
-  "visual": "Compare: a technical win against a business.",
-  "source": null
+  "visual": "Slow push-in on the flywheel",
+  "source": {
+   "institution": "Science Museum Group",
+   "item": "Model of Trevithick's first railway locomotive 'Pen-y-Darren' (conjectural model, 1:8, Walter W. Mason; object 1934-312)",
+   "url": "https://collection.sciencemuseumgroup.org.uk/objects/co27505/model-of-trevithicks-first-railway-locomotive-pen-y-darren",
+   "rights": "Not stated in the search result. Check the Science Museum Group object page licence",
+   "credit": "Model of Trevithick's first railway locomotive 'Pen-y-Darren', Science Museum Group Collection",
+   "verified": false
+  }
  },
  {
   "id": "04-f",
@@ -2644,26 +2657,28 @@
   "section_name": "Who Made It Pay",
   "text": "So the most famous Stephenson engine was largely the son's engine, not the father's, right?",
   "type": "compare",
-  "template": "compare",
+  "template": "archival",
   "fields": {
-   "left_title": "George Stephenson (the father)",
-   "left_lines": [
-    "The name people attach to Rocket"
-   ],
-   "right_title": "Robert Stephenson (the son)",
-   "right_lines": [
-    "Rocket was built under his direction",
-    "Largely the son's engine"
-   ],
-   "step": 2,
-   "bgmap": {
-    "lat": 54,
-    "lon": -1.8,
-    "span": 5
+   "kind": "engraving",
+   "label": "Robert Stephenson, engraving",
+   "lower": "Rocket was built under Robert Stephenson's direction: largely the son's engine, not the father's",
+   "asset": "library-si-edu-image-gallery-73445",
+   "crop": "Tighter push-in than 05-l",
+   "zoom": {
+    "scale": 1.6,
+    "x": 50,
+    "y": 32
    }
   },
-  "visual": "Compare: George Stephenson, the father, against Robert Stephenson, the son, under whose direction Rocket was built.",
-  "source": null,
+  "visual": "Tighter push-in than 05-l",
+  "source": {
+   "institution": "Smithsonian Libraries and Archives",
+   "item": "Portrait of Robert Stephenson (engraving by Daniel J. Pound after Mayall)",
+   "url": "https://library.si.edu/image-gallery/73445",
+   "rights": "No Copyright - United States (as stated by Smithsonian Libraries)",
+   "credit": "Portrait of Robert Stephenson, Smithsonian Libraries and Archives (SIL14-s006-09)",
+   "verified": true
+  },
   "notes": "Hedge kept: \"largely\"."
  },
  {
