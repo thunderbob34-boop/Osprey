@@ -11,7 +11,7 @@ Total runtime 5:51.1 (77 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 01-e | 0:18.2 | 4.9s | and it wasn&#x27;t a Stephenson engine, it was built… | Trevithick portrait pushes in; name caption slides in on first mention. | archival (fetch) | Richard Trevithick by John Linnell, 1816, oil on canvas, Science Museum Group (Bennet Woodcroft Bequest), via Wikimedia Commons ✅ |
 | 01-f | 0:23.1 | 3.9s | and Museum Wales, the national museum, has its own… | Kinetic text: Museum Wales has its own name for him. | motion graphic |  |
 | 01-g | 0:27.0 | 2.9s | they call him the real father of the railways. | Typewriter quote, attributed to Museum Wales. | motion graphic |  |
-| 01-h | 0:30.0 | 3.6s | Now, to be fair, the Stephensons did something that… | Kinetic text: the Stephensons did something that really matters. | motion graphic |  |
+| 01-h | 0:30.0 | 3.6s | Now, to be fair, the Stephensons did something that… | Slow push-in across the engine | archival (fetch) | &quot;The Rocket&quot;, Science Museum Group Collection ⚠️ unconfirmed |
 | 01-i | 0:33.5 | 4.2s | and we&#x27;ll give them full credit for it, but… | Compare card: full credit to the Stephensons, but Trevithick got there first. | motion graphic |  |
 | 01-j | 0:37.8 | 4.9s | and the way his story ends is not the… | Slow, tight push-in on Trevithick as the sentence about his ending lands. | archival (fetch) | Richard Trevithick by John Linnell, 1816, oil on canvas, Science Museum Group (Bennet Woodcroft Bequest), via Wikimedia Commons ✅ |
 | 02-a | 0:42.7 | 4.9s | The version most people half remember goes like this,… | Tear-off calendar pages flip to September 27, 1825. | illustrated scene (code) |  |
@@ -34,12 +34,12 @@ Total runtime 5:51.1 (77 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 03-i | 1:59.4 | 6.2s | But the speed isn&#x27;t the point, the point is… | The engine runs along the plateway with its loaded wagons; &quot;10 tons of iron&quot; pops in as the words are spoken. | illustrated scene (code) |  |
 | 03-j | 2:05.6 | 3.4s | and about seventy people on rails for nearly ten… | Same run: tons and riders already shown, &quot;nearly 10 miles&quot; pops in on cue. | illustrated scene (code) |  |
 | 03-k | 2:09.0 | 5.5s | and that run on February 21st, 1804 is the… | Date stamps in: Feb 21, 1804, with &quot;First known railway journey by steam locomotive&quot;. | motion graphic |  |
-| 03-l | 2:14.5 | 4.5s | not the first one people remember but the first… | Compare: not the first one people remember, but the first one we know of. | motion graphic |  |
-| 03-m | 2:19.0 | 3.1s | and it happened in Wales, twenty-five years before Rocket. | &quot;25 years&quot; counts up, with &quot;before Rocket&quot;. | motion graphic |  |
+| 03-l | 2:14.5 | 4.5s | not the first one people remember but the first… | Push-in, different from 03-b | archival (fetch) | Model of Trevithick&#x27;s first railway locomotive &#x27;Pen-y-Darren&#x27;, Science Museum Group Collection ⚠️ unconfirmed |
+| 03-m | 2:19.0 | 3.1s | and it happened in Wales, twenty-five years before Rocket. | Push-in on the chimney and boiler | archival (fetch) | Rocket locomotive, Science Museum Group Collection ⚠️ unconfirmed |
 | 03-n | 2:22.0 | 6.2s | There&#x27;s also a story that gets told about this… | Slow push-in on a later photograph of the Penydarren ironworks, labelled with its year. | archival (fetch) | Museum Wales Collections Online ⚠️ unconfirmed |
-| 03-o | 2:28.2 | 4.1s | The story goes there was a bet on it,… | &quot;500 guineas&quot; counts up under &quot;The story goes there was a bet&quot;. | motion graphic |  |
+| 03-o | 2:28.2 | 4.1s | The story goes there was a bet on it,… | Tighter crop than 03-n | archival (fetch) | Museum Wales Collections Online ⚠️ unconfirmed |
 | 03-p | 2:32.3 | 3.1s | between an ironmaster named Homfray and a rival ironmaster, | Compare: Homfray, an ironmaster, against a rival ironmaster. | motion graphic |  |
-| 03-q | 2:35.4 | 3.8s | but the sources don&#x27;t even agree on who the… | Kinetic text: the sources don&#x27;t agree on who the rival was. | motion graphic |  |
+| 03-q | 2:35.4 | 3.8s | but the sources don&#x27;t even agree on who the… | Third crop, the other side of the works | archival (fetch) | Museum Wales Collections Online ⚠️ unconfirmed |
 | 03-r | 2:39.2 | 5.5s | so treat that as the story people tell and… | Compare, step 1: &quot;The story people tell&quot; is lit, &quot;Something anybody has nailed down&quot; is ghosted. | motion graphic |  |
 | 04-a | 2:44.7 | 6.0s | Now here&#x27;s the catch, and it&#x27;s a big one,… | The engine rolls onto a cast-iron plate and the plate cracks. | illustrated scene (code) |  |
 | 04-b | 2:50.7 | 4.1s | Those plates were cast iron, and cast iron is… | Tighter push-in on the same Museum Wales tramroad plate: cast iron, hard but brittle. | archival (fetch) | Museum Wales Collections Online ⚠️ unconfirmed |
@@ -50,7 +50,7 @@ Total runtime 5:51.1 (77 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 04-g | 3:13.4 | 4.7s | and it didn&#x27;t turn into a business, and that&#x27;s… | Compare, step 1: doing something first, with &quot;something that lasts&quot; ghosted. | motion graphic |  |
 | 04-h | 3:18.2 | 3.1s | and doing something that lasts. Trevithick did the first… | Compare, step 2: the right side, something that lasts, is revealed. | motion graphic |  |
 | 04-i | 3:21.3 | 3.5s | he did the first part twenty-five years before the… | Years-scaled timeline: February 1804 on the left, October 1829 on the right, a long gap between them. | motion graphic |  |
-| 04-j | 3:24.8 | 3.2s | and then the story kind of moves on without… | Kinetic text: then the story moves on without him. | motion graphic |  |
+| 04-j | 3:24.8 | 3.2s | and then the story kind of moves on without… | Slow push-in on the locomotives | archival (fetch) | &#x27;Rocket&#x27;, &#x27;Novelty&#x27; and &#x27;Sans Pareil&#x27; at the Rainhill Trials, Science Museum Group Collection ⚠️ unconfirmed |
 | 05-a | 3:27.9 | 6.3s | Now, to be fair to everybody who came after,… | Two boxes pop in apart, with the caption that it doesn&#x27;t go straight from one to the other. | motion graphic |  |
 | 05-b | 3:34.2 | 4.4s | there are other names in between that most people… | The camera flies north out of south Wales (Penydarren label slips off the bottom) into northern England, where the map waits for the other names. | animated map |  |
 | 05-c | 3:38.6 | 6.6s | In 1812, at the Middleton Railway in Leeds, an… | Same map: a pulsing pin lands on the Middleton Railway in Leeds, Salamanca, 1812, Blenkinsop and Murray. | animated map |  |
@@ -65,9 +65,9 @@ Total runtime 5:51.1 (77 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 05-l | 4:19.4 | 3.7s | was built under the direction of his son, Robert… | Robert Stephenson engraving pushes in; name caption on first mention. | archival (fetch) | Portrait of Robert Stephenson, Smithsonian Libraries and Archives (SIL14-s006-09) ✅ |
 | 05-m | 4:23.1 | 5.5s | So the most famous Stephenson engine was largely the… | Compare: George Stephenson, the father, against Robert Stephenson, the son, under whose direction Rocket was built. | motion graphic |  |
 | 05-n | 4:28.6 | 7.0s | So here&#x27;s the fair way to put it, Trevithick… | Two boxes with an arrow: Trevithick proved it could work, the Stephensons made it pay. | motion graphic |  |
-| 05-o | 4:35.6 | 5.9s | And making it pay is a really big deal,… | Compare, step 1: &quot;A demonstration&quot; against &quot;A railway&quot;, the right side ghosted. | motion graphic |  |
-| 05-p | 4:41.5 | 6.2s | and a railway, a demonstration is one day in… | Compare, step 2: one day in Wales against something that runs. | motion graphic |  |
-| 05-q | 4:47.8 | 3.0s | The Stephensons earned a lot of their reputation, | Kinetic text: the Stephensons earned a lot of their reputation. | motion graphic |  |
+| 05-o | 4:35.6 | 5.9s | And making it pay is a really big deal,… | Slow push-out from the wheels | archival (fetch) | Model of Trevithick&#x27;s first railway locomotive &#x27;Pen-y-Darren&#x27;, Science Museum Group Collection ⚠️ unconfirmed |
+| 05-p | 4:41.5 | 6.2s | and a railway, a demonstration is one day in… | Slow push-in | archival (fetch) | Steam locomotive No. 1 &#x27;Locomotion&#x27;, Science Museum Group Collection (National Railway Museum) ⚠️ unconfirmed |
+| 05-q | 4:47.8 | 3.0s | The Stephensons earned a lot of their reputation, | New crop: shoulders and face, centred | archival (fetch) | Portrait of George Stephenson, Smithsonian Libraries and Archives ✅ |
 | 05-r | 4:50.7 | 4.8s | I&#x27;m not taking that away from them, I&#x27;m just… | Years-scaled timeline from 1804 to October 1829: the five dates pop in as the axis draws, Penydarren highlighted. | motion graphic |  |
 | 06-a | 4:55.5 | 6.0s | And this is the part that stays with you,… | Slow push-in on the Trevithick portrait as the date of his death is given. | archival (fetch) | Richard Trevithick by John Linnell, 1816, oil on canvas, Science Museum Group (Bennet Woodcroft Bequest), via Wikimedia Commons ✅ |
 | 06-b | 5:01.5 | 4.1s | in Dartford, in poverty, and local workers paid for… | Map flies in over southern Britain: a pin on Penydarren in Wales, then a pulsing pin lands on Dartford, east of London. | animated map |  |
@@ -75,7 +75,7 @@ Total runtime 5:51.1 (77 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-d | 5:09.3 | 4.5s | So the man behind the first known railway journey… | Push-in on the conjectural model: the man behind the first known railway journey by steam locomotive. | archival (fetch) | Model of Trevithick&#x27;s first railway locomotive &#x27;Pen-y-Darren&#x27;, Science Museum Group Collection ⚠️ unconfirmed |
 | 06-e | 5:13.8 | 5.2s | the man the national museum of Wales calls the… | Typewriter quote again, attributed to Museum Wales. | motion graphic |  |
 | 06-f | 5:19.0 | 5.2s | needed local workers to pay for his funeral. That&#x27;s… | Compare, step 1: Trevithick needed local workers to pay for his funeral; the Stephenson side is ghosted. | motion graphic |  |
-| 06-g | 5:24.3 | 5.6s | and meanwhile the Stephenson name went on to be… | Compare, step 2: the Stephenson name is revealed, the one in the history books. | motion graphic |  |
+| 06-g | 5:24.3 | 5.6s | and meanwhile the Stephenson name went on to be… | Different crop from 01-h: the engine alone | archival (fetch) | &quot;The Rocket&quot;, Science Museum Group Collection ⚠️ unconfirmed |
 | 06-h | 5:29.9 | 6.0s | So when somebody tells you George Stephenson gave us… | Slow push-in on the Stephenson engraving as the viewer imagines hearing his name. | archival (fetch) | Portrait of George Stephenson, Smithsonian Libraries and Archives ✅ |
 | 06-i | 5:35.8 | 3.4s | on February 21st, 1804, at Penydarren, in south Wales, | Date stamps in: Feb 21, 1804, Penydarren, south Wales. | motion graphic |  |
 | 06-j | 5:39.2 | 5.6s | Richard Trevithick&#x27;s engine pulled ten tons of iron and… | Map flies back to the Merthyr valley and the tramroad route draws again, train icon riding the head, ten tons and about seventy men nearly ten miles. | animated map |  |

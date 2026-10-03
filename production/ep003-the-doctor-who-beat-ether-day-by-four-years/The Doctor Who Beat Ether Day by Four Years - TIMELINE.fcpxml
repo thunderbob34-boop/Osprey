@@ -4,81 +4,7 @@
 <resources>
 <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>
 <format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>
-<asset id="g_01-a" name="01-a" start="0s" duration="106/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-a.mp4"/></asset>
-<asset id="g_01-b" name="01-b" start="0s" duration="201/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-b.mp4"/></asset>
-<asset id="g_01-c" name="01-c" start="0s" duration="85/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-c.mp4"/></asset>
-<asset id="g_01-d" name="01-d" start="0s" duration="127/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-d.mp4"/></asset>
-<asset id="g_01-e" name="01-e" start="0s" duration="159/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-e.mp4"/></asset>
-<asset id="g_01-f" name="01-f" start="0s" duration="138/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-f.mp4"/></asset>
-<asset id="g_01-g" name="01-g" start="0s" duration="85/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-g.mp4"/></asset>
-<asset id="g_01-h" name="01-h" start="0s" duration="170/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-h.mp4"/></asset>
-<asset id="g_01-i" name="01-i" start="0s" duration="127/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-i.mp4"/></asset>
-<asset id="g_01-j" name="01-j" start="0s" duration="74/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/01-j.mp4"/></asset>
-<asset id="g_02-a" name="02-a" start="0s" duration="138/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-a.mp4"/></asset>
-<asset id="g_02-b" name="02-b" start="0s" duration="139/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-b.mp4"/></asset>
-<asset id="g_02-c" name="02-c" start="0s" duration="127/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-c.mp4"/></asset>
-<asset id="g_02-d" name="02-d" start="0s" duration="117/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-d.mp4"/></asset>
-<asset id="g_02-e" name="02-e" start="0s" duration="149/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-e.mp4"/></asset>
-<asset id="g_02-f" name="02-f" start="0s" duration="139/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-f.mp4"/></asset>
-<asset id="g_02-g" name="02-g" start="0s" duration="106/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-g.mp4"/></asset>
-<asset id="g_02-h" name="02-h" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-h.mp4"/></asset>
-<asset id="g_02-i" name="02-i" start="0s" duration="138/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-i.mp4"/></asset>
-<asset id="g_02-j" name="02-j" start="0s" duration="138/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-j.mp4"/></asset>
-<asset id="g_02-k" name="02-k" start="0s" duration="181/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/02-k.mp4"/></asset>
-<asset id="g_03-a" name="03-a" start="0s" duration="104/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-a.mp4"/></asset>
-<asset id="g_03-b" name="03-b" start="0s" duration="103/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-b.mp4"/></asset>
-<asset id="g_03-c" name="03-c" start="0s" duration="104/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-c.mp4"/></asset>
-<asset id="g_03-d" name="03-d" start="0s" duration="94/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-d.mp4"/></asset>
-<asset id="g_03-e" name="03-e" start="0s" duration="151/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-e.mp4"/></asset>
-<asset id="g_03-f" name="03-f" start="0s" duration="132/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-f.mp4"/></asset>
-<asset id="g_03-g" name="03-g" start="0s" duration="141/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-g.mp4"/></asset>
-<asset id="g_03-h" name="03-h" start="0s" duration="141/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-h.mp4"/></asset>
-<asset id="g_03-i" name="03-i" start="0s" duration="132/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-i.mp4"/></asset>
-<asset id="g_03-j" name="03-j" start="0s" duration="85/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/03-j.mp4"/></asset>
-<asset id="g_04-a" name="04-a" start="0s" duration="171/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-a.mp4"/></asset>
-<asset id="g_04-b" name="04-b" start="0s" duration="183/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-b.mp4"/></asset>
-<asset id="g_04-c" name="04-c" start="0s" duration="5s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-c.mp4"/></asset>
-<asset id="g_04-d" name="04-d" start="0s" duration="107/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-d.mp4"/></asset>
-<asset id="g_04-e" name="04-e" start="0s" duration="5s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-e.mp4"/></asset>
-<asset id="g_04-f" name="04-f" start="0s" duration="129/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-f.mp4"/></asset>
-<asset id="g_04-g" name="04-g" start="0s" duration="117/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-g.mp4"/></asset>
-<asset id="g_04-h" name="04-h" start="0s" duration="97/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-h.mp4"/></asset>
-<asset id="g_04-i" name="04-i" start="0s" duration="193/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-i.mp4"/></asset>
-<asset id="g_04-j" name="04-j" start="0s" duration="171/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-j.mp4"/></asset>
-<asset id="g_04-k" name="04-k" start="0s" duration="182/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-k.mp4"/></asset>
-<asset id="g_04-l" name="04-l" start="0s" duration="118/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-l.mp4"/></asset>
-<asset id="g_04-m" name="04-m" start="0s" duration="129/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/04-m.mp4"/></asset>
-<asset id="g_05-a" name="05-a" start="0s" duration="142/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/05-a.mp4"/></asset>
-<asset id="g_05-b" name="05-b" start="0s" duration="174/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/05-b.mp4"/></asset>
-<asset id="g_05-c" name="05-c" start="0s" duration="153/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/05-c.mp4"/></asset>
-<asset id="g_05-d" name="05-d" start="0s" duration="153/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/05-d.mp4"/></asset>
-<asset id="g_05-e" name="05-e" start="0s" duration="196/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/05-e.mp4"/></asset>
-<asset id="g_05-f" name="05-f" start="0s" duration="186/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/05-f.mp4"/></asset>
-<asset id="g_06-a" name="06-a" start="0s" duration="123/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-a.mp4"/></asset>
-<asset id="g_06-b" name="06-b" start="0s" duration="111/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-b.mp4"/></asset>
-<asset id="g_06-c" name="06-c" start="0s" duration="99/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-c.mp4"/></asset>
-<asset id="g_06-d" name="06-d" start="0s" duration="136/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-d.mp4"/></asset>
-<asset id="g_06-e" name="06-e" start="0s" duration="136/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-e.mp4"/></asset>
-<asset id="g_06-f" name="06-f" start="0s" duration="148/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-f.mp4"/></asset>
-<asset id="g_06-g" name="06-g" start="0s" duration="222/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-g.mp4"/></asset>
-<asset id="g_06-h" name="06-h" start="0s" duration="99/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-h.mp4"/></asset>
-<asset id="g_06-i" name="06-i" start="0s" duration="123/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-i.mp4"/></asset>
-<asset id="g_06-j" name="06-j" start="0s" duration="123/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-j.mp4"/></asset>
-<asset id="g_06-k" name="06-k" start="0s" duration="136/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-k.mp4"/></asset>
-<asset id="g_06-l" name="06-l" start="0s" duration="7s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-l.mp4"/></asset>
-<asset id="g_06-m" name="06-m" start="0s" duration="173/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-m.mp4"/></asset>
-<asset id="g_06-n" name="06-n" start="0s" duration="123/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-n.mp4"/></asset>
-<asset id="g_06-o" name="06-o" start="0s" duration="111/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/06-o.mp4"/></asset>
-<asset id="g_07-a" name="07-a" start="0s" duration="5s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-a.mp4"/></asset>
-<asset id="g_07-b" name="07-b" start="0s" duration="162/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-b.mp4"/></asset>
-<asset id="g_07-c" name="07-c" start="0s" duration="208/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-c.mp4"/></asset>
-<asset id="g_07-d" name="07-d" start="0s" duration="80/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-d.mp4"/></asset>
-<asset id="g_07-e" name="07-e" start="0s" duration="128/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-e.mp4"/></asset>
-<asset id="g_07-f" name="07-f" start="0s" duration="138/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-f.mp4"/></asset>
-<asset id="g_07-g" name="07-g" start="0s" duration="162/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-g.mp4"/></asset>
-<asset id="g_07-h" name="07-h" start="0s" duration="81/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-h.mp4"/></asset>
-<asset id="g_07-i" name="07-i" start="0s" duration="127/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-i.mp4"/></asset>
-<asset id="g_07-j" name="07-j" start="0s" duration="92/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/clips/07-j.mp4"/></asset>
+<asset id="pic" name="The Doctor Who Beat Ether Day by Four Years - PICTURE" start="0s" duration="10261/30s" hasVideo="1" format="r1" videoSources="1"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/The%20Doctor%20Who%20Beat%20Ether%20Day%20by%20Four%20Years%20-%20PICTURE.mp4"/></asset>
 <asset id="vo_01" name="VO 01" start="0s" duration="1272/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/vo/01-cold-open.mp3"/></asset>
 <asset id="vo_02" name="VO 02" start="0s" duration="50s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/vo/02-before-anesthesia.mp3"/></asset>
 <asset id="vo_03" name="VO 03" start="0s" duration="1187/30s" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/vo/03-ether-day.mp3"/></asset>
@@ -92,81 +18,81 @@
 <project name="The Doctor Who Beat Ether Day by Four Years">
 <sequence format="r1" duration="10261/30s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
 <spine>
-<asset-clip ref="g_01-a" offset="0s" name="01-a" start="0s" duration="106/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="1272/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
-<asset-clip ref="g_01-b" offset="106/30s" name="01-b" start="0s" duration="201/30s"></asset-clip>
-<asset-clip ref="g_01-c" offset="307/30s" name="01-c" start="0s" duration="85/30s"></asset-clip>
-<asset-clip ref="g_01-d" offset="392/30s" name="01-d" start="0s" duration="127/30s"></asset-clip>
-<asset-clip ref="g_01-e" offset="519/30s" name="01-e" start="0s" duration="159/30s"></asset-clip>
-<asset-clip ref="g_01-f" offset="678/30s" name="01-f" start="0s" duration="138/30s"></asset-clip>
-<asset-clip ref="g_01-g" offset="816/30s" name="01-g" start="0s" duration="85/30s"></asset-clip>
-<asset-clip ref="g_01-h" offset="901/30s" name="01-h" start="0s" duration="170/30s"></asset-clip>
-<asset-clip ref="g_01-i" offset="1071/30s" name="01-i" start="0s" duration="127/30s"></asset-clip>
-<asset-clip ref="g_01-j" offset="1198/30s" name="01-j" start="0s" duration="74/30s"></asset-clip>
-<asset-clip ref="g_02-a" offset="1272/30s" name="02-a" start="0s" duration="138/30s"><asset-clip ref="vo_02" lane="-1" offset="0s" start="0s" duration="50s" name="VO 02" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="02 Before Anesthesia"/></asset-clip>
-<asset-clip ref="g_02-b" offset="47s" name="02-b" start="0s" duration="139/30s"></asset-clip>
-<asset-clip ref="g_02-c" offset="1549/30s" name="02-c" start="0s" duration="127/30s"></asset-clip>
-<asset-clip ref="g_02-d" offset="1676/30s" name="02-d" start="0s" duration="117/30s"></asset-clip>
-<asset-clip ref="g_02-e" offset="1793/30s" name="02-e" start="0s" duration="149/30s"></asset-clip>
-<asset-clip ref="g_02-f" offset="1942/30s" name="02-f" start="0s" duration="139/30s"></asset-clip>
-<asset-clip ref="g_02-g" offset="2081/30s" name="02-g" start="0s" duration="106/30s"></asset-clip>
-<asset-clip ref="g_02-h" offset="2187/30s" name="02-h" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_02-i" offset="2315/30s" name="02-i" start="0s" duration="138/30s"></asset-clip>
-<asset-clip ref="g_02-j" offset="2453/30s" name="02-j" start="0s" duration="138/30s"></asset-clip>
-<asset-clip ref="g_02-k" offset="2591/30s" name="02-k" start="0s" duration="181/30s"></asset-clip>
-<asset-clip ref="g_03-a" offset="2772/30s" name="03-a" start="0s" duration="104/30s"><asset-clip ref="vo_03" lane="-1" offset="0s" start="0s" duration="1187/30s" name="VO 03" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="03 Ether Day"/></asset-clip>
-<asset-clip ref="g_03-b" offset="2876/30s" name="03-b" start="0s" duration="103/30s"></asset-clip>
-<asset-clip ref="g_03-c" offset="2979/30s" name="03-c" start="0s" duration="104/30s"></asset-clip>
-<asset-clip ref="g_03-d" offset="3083/30s" name="03-d" start="0s" duration="94/30s"></asset-clip>
-<asset-clip ref="g_03-e" offset="3177/30s" name="03-e" start="0s" duration="151/30s"></asset-clip>
-<asset-clip ref="g_03-f" offset="3328/30s" name="03-f" start="0s" duration="132/30s"></asset-clip>
-<asset-clip ref="g_03-g" offset="3460/30s" name="03-g" start="0s" duration="141/30s"></asset-clip>
-<asset-clip ref="g_03-h" offset="3601/30s" name="03-h" start="0s" duration="141/30s"></asset-clip>
-<asset-clip ref="g_03-i" offset="3742/30s" name="03-i" start="0s" duration="132/30s"></asset-clip>
-<asset-clip ref="g_03-j" offset="3874/30s" name="03-j" start="0s" duration="85/30s"></asset-clip>
-<asset-clip ref="g_04-a" offset="3959/30s" name="04-a" start="0s" duration="171/30s"><asset-clip ref="vo_04" lane="-1" offset="0s" start="0s" duration="1897/30s" name="VO 04" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="04 Crawford Long, 1842"/></asset-clip>
-<asset-clip ref="g_04-b" offset="4130/30s" name="04-b" start="0s" duration="183/30s"></asset-clip>
-<asset-clip ref="g_04-c" offset="4313/30s" name="04-c" start="0s" duration="5s"></asset-clip>
-<asset-clip ref="g_04-d" offset="4463/30s" name="04-d" start="0s" duration="107/30s"></asset-clip>
-<asset-clip ref="g_04-e" offset="4570/30s" name="04-e" start="0s" duration="5s"></asset-clip>
-<asset-clip ref="g_04-f" offset="4720/30s" name="04-f" start="0s" duration="129/30s"></asset-clip>
-<asset-clip ref="g_04-g" offset="4849/30s" name="04-g" start="0s" duration="117/30s"></asset-clip>
-<asset-clip ref="g_04-h" offset="4966/30s" name="04-h" start="0s" duration="97/30s"></asset-clip>
-<asset-clip ref="g_04-i" offset="5063/30s" name="04-i" start="0s" duration="193/30s"></asset-clip>
-<asset-clip ref="g_04-j" offset="5256/30s" name="04-j" start="0s" duration="171/30s"></asset-clip>
-<asset-clip ref="g_04-k" offset="5427/30s" name="04-k" start="0s" duration="182/30s"></asset-clip>
-<asset-clip ref="g_04-l" offset="5609/30s" name="04-l" start="0s" duration="118/30s"></asset-clip>
-<asset-clip ref="g_04-m" offset="5727/30s" name="04-m" start="0s" duration="129/30s"></asset-clip>
-<asset-clip ref="g_05-a" offset="5856/30s" name="05-a" start="0s" duration="142/30s"><asset-clip ref="vo_05" lane="-1" offset="0s" start="0s" duration="1004/30s" name="VO 05" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="05 Doctors&#x27; Day"/></asset-clip>
-<asset-clip ref="g_05-b" offset="5998/30s" name="05-b" start="0s" duration="174/30s"></asset-clip>
-<asset-clip ref="g_05-c" offset="6172/30s" name="05-c" start="0s" duration="153/30s"></asset-clip>
-<asset-clip ref="g_05-d" offset="6325/30s" name="05-d" start="0s" duration="153/30s"></asset-clip>
-<asset-clip ref="g_05-e" offset="6478/30s" name="05-e" start="0s" duration="196/30s"></asset-clip>
-<asset-clip ref="g_05-f" offset="6674/30s" name="05-f" start="0s" duration="186/30s"></asset-clip>
-<asset-clip ref="g_06-a" offset="6860/30s" name="06-a" start="0s" duration="123/30s"><asset-clip ref="vo_06" lane="-1" offset="0s" start="0s" duration="2073/30s" name="VO 06" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="06 Hanaoka, 1804"/></asset-clip>
-<asset-clip ref="g_06-b" offset="6983/30s" name="06-b" start="0s" duration="111/30s"></asset-clip>
-<asset-clip ref="g_06-c" offset="7094/30s" name="06-c" start="0s" duration="99/30s"></asset-clip>
-<asset-clip ref="g_06-d" offset="7193/30s" name="06-d" start="0s" duration="136/30s"></asset-clip>
-<asset-clip ref="g_06-e" offset="7329/30s" name="06-e" start="0s" duration="136/30s"></asset-clip>
-<asset-clip ref="g_06-f" offset="7465/30s" name="06-f" start="0s" duration="148/30s"></asset-clip>
-<asset-clip ref="g_06-g" offset="7613/30s" name="06-g" start="0s" duration="222/30s"></asset-clip>
-<asset-clip ref="g_06-h" offset="7835/30s" name="06-h" start="0s" duration="99/30s"></asset-clip>
-<asset-clip ref="g_06-i" offset="7934/30s" name="06-i" start="0s" duration="123/30s"></asset-clip>
-<asset-clip ref="g_06-j" offset="8057/30s" name="06-j" start="0s" duration="123/30s"></asset-clip>
-<asset-clip ref="g_06-k" offset="8180/30s" name="06-k" start="0s" duration="136/30s"></asset-clip>
-<asset-clip ref="g_06-l" offset="8316/30s" name="06-l" start="0s" duration="7s"></asset-clip>
-<asset-clip ref="g_06-m" offset="8526/30s" name="06-m" start="0s" duration="173/30s"></asset-clip>
-<asset-clip ref="g_06-n" offset="8699/30s" name="06-n" start="0s" duration="123/30s"></asset-clip>
-<asset-clip ref="g_06-o" offset="8822/30s" name="06-o" start="0s" duration="111/30s"></asset-clip>
-<asset-clip ref="g_07-a" offset="8933/30s" name="07-a" start="0s" duration="5s"><asset-clip ref="vo_07" lane="-1" offset="0s" start="0s" duration="1328/30s" name="VO 07" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="07 Who Was First"/></asset-clip>
-<asset-clip ref="g_07-b" offset="9083/30s" name="07-b" start="0s" duration="162/30s"></asset-clip>
-<asset-clip ref="g_07-c" offset="9245/30s" name="07-c" start="0s" duration="208/30s"></asset-clip>
-<asset-clip ref="g_07-d" offset="9453/30s" name="07-d" start="0s" duration="80/30s"></asset-clip>
-<asset-clip ref="g_07-e" offset="9533/30s" name="07-e" start="0s" duration="128/30s"></asset-clip>
-<asset-clip ref="g_07-f" offset="9661/30s" name="07-f" start="0s" duration="138/30s"></asset-clip>
-<asset-clip ref="g_07-g" offset="9799/30s" name="07-g" start="0s" duration="162/30s"></asset-clip>
-<asset-clip ref="g_07-h" offset="9961/30s" name="07-h" start="0s" duration="81/30s"></asset-clip>
-<asset-clip ref="g_07-i" offset="10042/30s" name="07-i" start="0s" duration="127/30s"></asset-clip>
-<asset-clip ref="g_07-j" offset="10169/30s" name="07-j" start="0s" duration="92/30s"></asset-clip>
+<asset-clip ref="pic" offset="0s" name="01-a" start="0s" duration="106/30s"><asset-clip ref="vo_01" lane="-1" offset="0s" start="0s" duration="1272/30s" name="VO 01" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="01 Cold Open"/></asset-clip>
+<asset-clip ref="pic" offset="106/30s" name="01-b" start="106/30s" duration="201/30s"></asset-clip>
+<asset-clip ref="pic" offset="307/30s" name="01-c" start="307/30s" duration="85/30s"></asset-clip>
+<asset-clip ref="pic" offset="392/30s" name="01-d" start="392/30s" duration="127/30s"></asset-clip>
+<asset-clip ref="pic" offset="519/30s" name="01-e" start="519/30s" duration="159/30s"></asset-clip>
+<asset-clip ref="pic" offset="678/30s" name="01-f" start="678/30s" duration="138/30s"></asset-clip>
+<asset-clip ref="pic" offset="816/30s" name="01-g" start="816/30s" duration="85/30s"></asset-clip>
+<asset-clip ref="pic" offset="901/30s" name="01-h" start="901/30s" duration="170/30s"></asset-clip>
+<asset-clip ref="pic" offset="1071/30s" name="01-i" start="1071/30s" duration="127/30s"></asset-clip>
+<asset-clip ref="pic" offset="1198/30s" name="01-j" start="1198/30s" duration="74/30s"></asset-clip>
+<asset-clip ref="pic" offset="1272/30s" name="02-a" start="1272/30s" duration="138/30s"><asset-clip ref="vo_02" lane="-1" offset="1272/30s" start="0s" duration="50s" name="VO 02" audioRole="dialogue"/><marker start="1272/30s" duration="1/30s" value="02 Before Anesthesia"/></asset-clip>
+<asset-clip ref="pic" offset="47s" name="02-b" start="47s" duration="139/30s"></asset-clip>
+<asset-clip ref="pic" offset="1549/30s" name="02-c" start="1549/30s" duration="127/30s"></asset-clip>
+<asset-clip ref="pic" offset="1676/30s" name="02-d" start="1676/30s" duration="117/30s"></asset-clip>
+<asset-clip ref="pic" offset="1793/30s" name="02-e" start="1793/30s" duration="149/30s"></asset-clip>
+<asset-clip ref="pic" offset="1942/30s" name="02-f" start="1942/30s" duration="139/30s"></asset-clip>
+<asset-clip ref="pic" offset="2081/30s" name="02-g" start="2081/30s" duration="106/30s"></asset-clip>
+<asset-clip ref="pic" offset="2187/30s" name="02-h" start="2187/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="2315/30s" name="02-i" start="2315/30s" duration="138/30s"></asset-clip>
+<asset-clip ref="pic" offset="2453/30s" name="02-j" start="2453/30s" duration="138/30s"></asset-clip>
+<asset-clip ref="pic" offset="2591/30s" name="02-k" start="2591/30s" duration="181/30s"></asset-clip>
+<asset-clip ref="pic" offset="2772/30s" name="03-a" start="2772/30s" duration="104/30s"><asset-clip ref="vo_03" lane="-1" offset="2772/30s" start="0s" duration="1187/30s" name="VO 03" audioRole="dialogue"/><marker start="2772/30s" duration="1/30s" value="03 Ether Day"/></asset-clip>
+<asset-clip ref="pic" offset="2876/30s" name="03-b" start="2876/30s" duration="103/30s"></asset-clip>
+<asset-clip ref="pic" offset="2979/30s" name="03-c" start="2979/30s" duration="104/30s"></asset-clip>
+<asset-clip ref="pic" offset="3083/30s" name="03-d" start="3083/30s" duration="94/30s"></asset-clip>
+<asset-clip ref="pic" offset="3177/30s" name="03-e" start="3177/30s" duration="151/30s"></asset-clip>
+<asset-clip ref="pic" offset="3328/30s" name="03-f" start="3328/30s" duration="132/30s"></asset-clip>
+<asset-clip ref="pic" offset="3460/30s" name="03-g" start="3460/30s" duration="141/30s"></asset-clip>
+<asset-clip ref="pic" offset="3601/30s" name="03-h" start="3601/30s" duration="141/30s"></asset-clip>
+<asset-clip ref="pic" offset="3742/30s" name="03-i" start="3742/30s" duration="132/30s"></asset-clip>
+<asset-clip ref="pic" offset="3874/30s" name="03-j" start="3874/30s" duration="85/30s"></asset-clip>
+<asset-clip ref="pic" offset="3959/30s" name="04-a" start="3959/30s" duration="171/30s"><asset-clip ref="vo_04" lane="-1" offset="3959/30s" start="0s" duration="1897/30s" name="VO 04" audioRole="dialogue"/><marker start="3959/30s" duration="1/30s" value="04 Crawford Long, 1842"/></asset-clip>
+<asset-clip ref="pic" offset="4130/30s" name="04-b" start="4130/30s" duration="183/30s"></asset-clip>
+<asset-clip ref="pic" offset="4313/30s" name="04-c" start="4313/30s" duration="5s"></asset-clip>
+<asset-clip ref="pic" offset="4463/30s" name="04-d" start="4463/30s" duration="107/30s"></asset-clip>
+<asset-clip ref="pic" offset="4570/30s" name="04-e" start="4570/30s" duration="5s"></asset-clip>
+<asset-clip ref="pic" offset="4720/30s" name="04-f" start="4720/30s" duration="129/30s"></asset-clip>
+<asset-clip ref="pic" offset="4849/30s" name="04-g" start="4849/30s" duration="117/30s"></asset-clip>
+<asset-clip ref="pic" offset="4966/30s" name="04-h" start="4966/30s" duration="97/30s"></asset-clip>
+<asset-clip ref="pic" offset="5063/30s" name="04-i" start="5063/30s" duration="193/30s"></asset-clip>
+<asset-clip ref="pic" offset="5256/30s" name="04-j" start="5256/30s" duration="171/30s"></asset-clip>
+<asset-clip ref="pic" offset="5427/30s" name="04-k" start="5427/30s" duration="182/30s"></asset-clip>
+<asset-clip ref="pic" offset="5609/30s" name="04-l" start="5609/30s" duration="118/30s"></asset-clip>
+<asset-clip ref="pic" offset="5727/30s" name="04-m" start="5727/30s" duration="129/30s"></asset-clip>
+<asset-clip ref="pic" offset="5856/30s" name="05-a" start="5856/30s" duration="142/30s"><asset-clip ref="vo_05" lane="-1" offset="5856/30s" start="0s" duration="1004/30s" name="VO 05" audioRole="dialogue"/><marker start="5856/30s" duration="1/30s" value="05 Doctors&#x27; Day"/></asset-clip>
+<asset-clip ref="pic" offset="5998/30s" name="05-b" start="5998/30s" duration="174/30s"></asset-clip>
+<asset-clip ref="pic" offset="6172/30s" name="05-c" start="6172/30s" duration="153/30s"></asset-clip>
+<asset-clip ref="pic" offset="6325/30s" name="05-d" start="6325/30s" duration="153/30s"></asset-clip>
+<asset-clip ref="pic" offset="6478/30s" name="05-e" start="6478/30s" duration="196/30s"></asset-clip>
+<asset-clip ref="pic" offset="6674/30s" name="05-f" start="6674/30s" duration="186/30s"></asset-clip>
+<asset-clip ref="pic" offset="6860/30s" name="06-a" start="6860/30s" duration="123/30s"><asset-clip ref="vo_06" lane="-1" offset="6860/30s" start="0s" duration="2073/30s" name="VO 06" audioRole="dialogue"/><marker start="6860/30s" duration="1/30s" value="06 Hanaoka, 1804"/></asset-clip>
+<asset-clip ref="pic" offset="6983/30s" name="06-b" start="6983/30s" duration="111/30s"></asset-clip>
+<asset-clip ref="pic" offset="7094/30s" name="06-c" start="7094/30s" duration="99/30s"></asset-clip>
+<asset-clip ref="pic" offset="7193/30s" name="06-d" start="7193/30s" duration="136/30s"></asset-clip>
+<asset-clip ref="pic" offset="7329/30s" name="06-e" start="7329/30s" duration="136/30s"></asset-clip>
+<asset-clip ref="pic" offset="7465/30s" name="06-f" start="7465/30s" duration="148/30s"></asset-clip>
+<asset-clip ref="pic" offset="7613/30s" name="06-g" start="7613/30s" duration="222/30s"></asset-clip>
+<asset-clip ref="pic" offset="7835/30s" name="06-h" start="7835/30s" duration="99/30s"></asset-clip>
+<asset-clip ref="pic" offset="7934/30s" name="06-i" start="7934/30s" duration="123/30s"></asset-clip>
+<asset-clip ref="pic" offset="8057/30s" name="06-j" start="8057/30s" duration="123/30s"></asset-clip>
+<asset-clip ref="pic" offset="8180/30s" name="06-k" start="8180/30s" duration="136/30s"></asset-clip>
+<asset-clip ref="pic" offset="8316/30s" name="06-l" start="8316/30s" duration="7s"></asset-clip>
+<asset-clip ref="pic" offset="8526/30s" name="06-m" start="8526/30s" duration="173/30s"></asset-clip>
+<asset-clip ref="pic" offset="8699/30s" name="06-n" start="8699/30s" duration="123/30s"></asset-clip>
+<asset-clip ref="pic" offset="8822/30s" name="06-o" start="8822/30s" duration="111/30s"></asset-clip>
+<asset-clip ref="pic" offset="8933/30s" name="07-a" start="8933/30s" duration="5s"><asset-clip ref="vo_07" lane="-1" offset="8933/30s" start="0s" duration="1328/30s" name="VO 07" audioRole="dialogue"/><marker start="8933/30s" duration="1/30s" value="07 Who Was First"/></asset-clip>
+<asset-clip ref="pic" offset="9083/30s" name="07-b" start="9083/30s" duration="162/30s"></asset-clip>
+<asset-clip ref="pic" offset="9245/30s" name="07-c" start="9245/30s" duration="208/30s"></asset-clip>
+<asset-clip ref="pic" offset="9453/30s" name="07-d" start="9453/30s" duration="80/30s"></asset-clip>
+<asset-clip ref="pic" offset="9533/30s" name="07-e" start="9533/30s" duration="128/30s"></asset-clip>
+<asset-clip ref="pic" offset="9661/30s" name="07-f" start="9661/30s" duration="138/30s"></asset-clip>
+<asset-clip ref="pic" offset="9799/30s" name="07-g" start="9799/30s" duration="162/30s"></asset-clip>
+<asset-clip ref="pic" offset="9961/30s" name="07-h" start="9961/30s" duration="81/30s"></asset-clip>
+<asset-clip ref="pic" offset="10042/30s" name="07-i" start="10042/30s" duration="127/30s"></asset-clip>
+<asset-clip ref="pic" offset="10169/30s" name="07-j" start="10169/30s" duration="92/30s"></asset-clip>
 </spine>
 </sequence>
 </project>
