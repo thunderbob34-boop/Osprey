@@ -7,18 +7,18 @@ Total runtime 5:19.9 (69 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 01-a | 0:00.0 | 3.8s | Thomas Crapper&#x27;s name is on every toilet joke you&#x27;ve… | Push-in on the Thomas Crapper portrait; his name slides in as the lower third. | archival (fetch) | Unknown photographer / Wikimedia Commons ✅ |
 | 01-b | 0:03.8 | 4.1s | and a lot of people will tell you, with… | Gentle push-in on a cast-iron manhole cover lettered T Crapper &amp; Co. | archival (fetch) | Patrick Mackie / geograph.org.uk ✅ |
 | 01-c | 0:07.9 | 5.2s | that he invented the toilet and that&#x27;s why we… | Flow: the popular claim, he invented the toilet, so that is why we call it what we call it. | motion graphic |  |
-| 01-d | 0:13.1 | 3.1s | But a man in England built a flushing toilet | Map flies in over England; a pin pulses near Bath. Geography only, no name yet. | animated map |  |
+| 01-d | 0:13.1 | 3.1s | But a man in England built a flushing toilet | Map flies in over England for orientation; no pins, no place named beyond England. | animated map |  |
 | 01-e | 0:16.2 | 3.4s | for Queen Elizabeth I nearly three centuries before Crapper&#x27;s… | Push-in on the Armada Portrait of Elizabeth I; a chip pops in: nearly three centuries before Crapper&#x27;s patents. | archival (fetch) | Unknown artist, British School, about 1588 / Wikimedia Commons ✅ |
 | 01-f | 0:19.7 | 3.1s | and the word &quot;crap&quot; is older than Crapper is. | Kinetic text card: the word crap is older than Crapper is. | motion graphic |  |
 | 01-g | 0:22.8 | 4.2s | Thomas Crapper was a real person who really did… | Push-in on Thomas Crapper&#x27;s gravestone in Beckenham Cemetery. | archival (fetch) | Irid Escent / Wikimedia Commons ✅ |
-| 01-h | 0:26.9 | 4.1s | and we&#x27;ll get to that, but he wasn&#x27;t first,… | Wide, slow push-in on the Crapper portrait. | archival (fetch) | Unknown photographer / Wikimedia Commons ✅ |
+| 01-h | 0:26.9 | 4.1s | and we&#x27;ll get to that, but he wasn&#x27;t first,… | Gentle push-in on Crapper&#x27;s Valveless Waste Preventer cistern. | archival (fetch) | Fawcett5 / Wikimedia Commons ✅ |
 | 02-a | 0:31.1 | 5.0s | The famous version goes like this, a man named… | Flow builds: Thomas Crapper invents the flush toilet. | motion graphic |  |
 | 02-b | 0:36.0 | 3.7s | puts his name on it, and his name becomes… | Flow completes: puts his name on it, his name becomes the slang. | motion graphic |  |
 | 02-c | 0:39.7 | 3.6s | It&#x27;s a perfect story, because the name does all… | Push-in on a wall-mounted Thomas Crapper cistern in the Horta Museum. | archival (fetch) | Oxyman / Wikimedia Commons ✅ |
 | 02-d | 0:43.3 | 5.7s | You hear Crapper and toilet in the same sentence… | Closer look at the T Crapper &amp; Co lettering on the manhole cover. | archival (fetch) | Patrick Mackie / geograph.org.uk ✅ |
 | 02-e | 0:49.0 | 5.3s | And a lot of that comes from one book.… | Date stamps in: 1969, a writer named Wallace Reyburn. | motion graphic |  |
-| 02-f | 0:54.3 | 5.0s | published a book called Flushed with Pride, and it&#x27;s… | Book title builds in: Flushed with Pride, partly tongue-in-cheek, partly a joke. | motion graphic |  |
-| 02-g | 0:59.3 | 3.7s | and it helped spread the idea that Crapper invented… | Tight push-in on the Crapper portrait. | archival (fetch) | Unknown photographer / Wikimedia Commons ✅ |
+| 02-f | 0:54.3 | 5.0s | published a book called Flushed with Pride, and it&#x27;s… | Text card: Flushed with Pride, Wallace Reyburn, 1969, partly tongue-in-cheek, partly a joke. | motion graphic |  |
+| 02-g | 0:59.3 | 3.7s | and it helped spread the idea that Crapper invented… | Tighter push-in on Thomas Crapper&#x27;s gravestone. | archival (fetch) | Irid Escent / Wikimedia Commons ✅ |
 | 02-h | 1:02.9 | 6.0s | So a book that was partly kidding ended up… | Flow: a book that was partly kidding, then where a lot of people&#x27;s facts came from. | motion graphic |  |
 | 03-a | 1:08.9 | 5.5s | So who did it first? Well, it depends how… | Wide push-in over the ruins of Knossos. | archival (fetch) | G. Eric and Edith Matson Photograph Collection / Library of Congress / Wikimedia Commons ✅ |
 | 03-b | 1:14.4 | 5.1s | so let&#x27;s start way back. The palace at Knossos,… | Map flies in over the eastern Mediterranean; a pin lands on Knossos, Crete. | animated map |  |
@@ -48,14 +48,14 @@ Total runtime 5:19.9 (69 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 05-b | 3:15.2 | 4.9s | If you&#x27;ve got a pipe running straight from your… | Flow: a straight pipe, down from your bathroom to a sewer. | motion graphic |  |
 | 05-c | 3:20.1 | 5.3s | you&#x27;ve also got a pipe running straight from the… | Flow adds: back up from the sewer into your bathroom. | motion graphic |  |
 | 05-d | 3:25.5 | 3.2s | and everything that smells comes right back up it. | Slow push-in on a plate of engraved water-closet and pipework diagrams. | archival (fetch) | Mutlow and Russell / Wellcome Collection / Wikimedia Commons ✅ |
-| 05-e | 3:28.6 | 4.3s | The fix for that is the S-bend, a bend… | Cumming&#x27;s 1775 patent drawing shown whole, no push-in. | archival (fetch) | Alexander Cumming, 1775 / Wikimedia Commons ✅ |
+| 05-e | 3:28.6 | 4.3s | The fix for that is the S-bend, a bend… | Compare: a pipe running straight (smell comes back up) versus the fix, the S-bend (a bend in the pipe). | motion graphic |  |
 | 05-f | 3:32.9 | 3.5s | that holds a little water in it all the… | Flow: the S-bend, a bend in the pipe that holds a little water all the time. | motion graphic |  |
 | 05-g | 3:36.4 | 3.6s | and that water blocks the smell from coming back… | Flow adds: that water blocks the smell from coming back up. | motion graphic |  |
-| 05-h | 3:40.0 | 4.6s | And the S-bend was patented in 1775 by a… | Map flies in to London; Bond Street pin with Alexander Cumming, 1775. | animated map |  |
-| 05-i | 3:44.6 | 3.5s | So the key piece that makes an indoor toilet… | Closer push-in on the engraved pipework diagrams. | archival (fetch) | Mutlow and Russell / Wellcome Collection / Wikimedia Commons ✅ |
+| 05-h | 3:40.0 | 4.6s | And the S-bend was patented in 1775 by a… | Alexander Cumming&#x27;s 1775 patent drawing shown whole, no push-in. | archival (fetch) | Alexander Cumming, 1775 / Wikimedia Commons ✅ |
+| 05-i | 3:44.6 | 3.5s | So the key piece that makes an indoor toilet… | Closer push-in on the centre of the undated water-closet and pipework engravings. | archival (fetch) | Mutlow and Russell / Wellcome Collection / Wikimedia Commons ✅ |
 | 05-j | 3:48.1 | 3.9s | was patented in 1775, long before Thomas Crapper was… | 1775 stamps in: the S-bend is patented, long before Thomas Crapper was making toilets. | motion graphic |  |
 | 06-a | 3:52.0 | 4.9s | Thomas Crapper isn&#x27;t a fraud, though. He&#x27;s a real… | Medium push-in on the Crapper portrait. | archival (fetch) | Unknown photographer / Wikimedia Commons ✅ |
-| 06-b | 3:57.0 | 4.3s | He came along in the late 1800s, and he… | Map flies in to London; a pin lands softly on Chelsea, Thomas Crapper. | animated map |  |
+| 06-b | 3:57.0 | 4.3s | He came along in the late 1800s, and he… | Map of southern England; a London pin, Thomas Crapper. | animated map |  |
 | 06-c | 4:01.2 | 3.6s | things like the ballcock, which is the float in… | Flow: the ballcock is the float in the tank. | motion graphic |  |
 | 06-d | 4:04.8 | 4.3s | that shuts the water off when the tank is… | Flow adds: shuts the water off when the tank is full; caption: patents on fittings too. | motion graphic |  |
 | 06-e | 4:09.1 | 4.6s | So he made the toilet better, he really did,… | Push-in on Crapper&#x27;s patented Valveless Waste Preventer cistern. | archival (fetch) | Fawcett5 / Wikimedia Commons ✅ |
