@@ -13,5 +13,60 @@
    "have the published Nowak article (Food, Culture & Society, 2014) and the 1858 Usi e costumi di Napoli e contorni vol. 2 text in hand and check them against the script. The research found only one strong source for the letter analysis."
   ],
   "review": "It ran several times on the motion cut. No pass found a High problem. Fixes made: Esposito named in the \"wife's surname\" box; the 1858 pizza shown as the 1858 plate, never a modern Margherita; letter callouts timed to land as each problem is spoken; a \"PROBABLY FAKE\" stamp on the \"probably fake\" line; Naples maps widened and label collisions removed; the recap uses the queen's portrait and the 1858 plate rather than replaying earlier graphics."
+ },
+ "timebar": {
+  "range": [
+   1850,
+   2020
+  ],
+  "scale": [
+   [
+    1850,
+    0
+   ],
+   [
+    1940,
+    0.82
+   ],
+   [
+    2020,
+    1
+   ]
+  ],
+  "ticks": [
+   1850,
+   1860,
+   1870,
+   1880,
+   1890,
+   1900,
+   1910,
+   1920,
+   1930,
+   1940,
+   1980,
+   2020
+  ],
+  "gaps": [
+   1960
+  ],
+  "marks": [
+   [
+    1858,
+    "Rocco's book"
+   ],
+   [
+    1889,
+    "Queen's visit?"
+   ],
+   [
+    1930,
+    "Brandi family"
+   ],
+   [
+    2014,
+    "Nowak's paper"
+   ]
+  ]
  }
 }
