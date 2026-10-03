@@ -35,6 +35,11 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
   - Show what the people and the machines really looked like, using real portraits, real engines and period prints, credited per file in the episode's `images.json`.
   - No cartoon or "stop-motion" reconstructions of historical technology. Where no picture survives, use a period print, a museum replica photo or a map instead.
   - A running time bar along the top shows where in time each beat sits (`timebar` in episode.json).
+  - **On-screen honesty (blind review of the v3 cuts, 2026-10-03):**
+    - Map pins and captions name only places the narration names (no Jefferson, Capodimonte, Bond Street, Wylam, Kelston).
+    - The time bar never parks a beat on a date the narration doesn't give. Use `year_label` for hedged times ("1860s", "late 1800s", "about 1700–1450 BC"). An undated claim, such as "made up later", sits on the year of the source that makes it, not on a nearby event.
+    - Lower-thirds describe the picture plainly. Don't put a narration slogan over an unrelated photo, and don't imply that a later print or painting was made at the time.
+    - No image more than about 3 times per episode. No run of more than 3 cards without a real picture.
 - **Length (decided 2026-10-03):** ship at about 5 minutes. Holden on Seed Speech reads about 168 wpm, so an 830-word script runs about 5 minutes. No mid-roll ads under 8 minutes. That's accepted for launch. Extending means more research, never padding.
 
 ## Open items waiting on Gus
