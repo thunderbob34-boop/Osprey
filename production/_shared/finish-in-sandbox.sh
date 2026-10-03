@@ -16,7 +16,7 @@ rb=json.load(open('rb.json'))
 for k,v in rb['images'].items():
     out=f'ep/assets/{k}.jpg'
     if os.path.exists(out) and os.path.getsize(out)>10000: continue   # already fetched (Wikimedia rate-limits repeat fetches)
-    subprocess.run(['curl','-sfL','--retry','6','--retry-delay','5','--retry-all-errors','-A','SomebodyDidItFirstBot/0.1 (research)','-o',out,(v['url'].split('?')[0] if v.get('w',9999)<=1920 else v['url'].replace('width=2400','width=1920'))],check=True); time.sleep(1)
+    subprocess.run(['curl','-sfL','--retry','3','--retry-delay','20','--retry-max-time','120','-A','SomebodyDidItFirstBot/0.1 (https://github.com/thunderbob34-boop/osprey; history research)','-o',out,(v['url'].split('?')[0] if v.get('w',9999)<=1920 else v['url'].replace('width=2400','width=1920'))],check=True); time.sleep(1)
     subprocess.run(['ffmpeg','-loglevel','error','-y','-i',out,'-vf','scale=min(2400\\,iw):-2',out+'.tmp.jpg'],check=True); os.replace(out+'.tmp.jpg',out)
 beats=[]
 for b in rb['beats']:
