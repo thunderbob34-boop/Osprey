@@ -6,6 +6,7 @@ READING NOTES
 - Say Venable as VEN-uh-bul, Magendie as mah-zhahn-DEE, Hanaoka Seishu as hah-nah-OH-kah SAY-shoo, Kan Aiya as KAHN eye-YAH, mafutsusan as mah-foo-TSOO-sahn, tsusensan as TSOO-sen-sahn.
 - Every hedge in here is on purpose. Read "many doctors", "some saw it as a sign", "some opposed anesthesia", "the way I see it" and "the way I'd put it" exactly as written. Never say doctors thought screaming was a good sign, that line has no source behind it.
 - Doctors' Day was verified 2026-10-02: it started in Winder, Georgia, on 30 March 1933 to mark Long's operation (UTMB), and Congress designated it nationally in Public Law 101-473 (1990, congress.gov).
+- Hanaoka's date, October 13th 1804, is by the Japanese calendar of the time (14 November 1804 on ours). Keep "by the Japanese calendar of the time" (fixed 2026-10-03).
 - Leave out the other names people bring up in the ether fight. They weren't checked for this episode.
 - Visuals: no surgical or tumor imagery. Use text cards, period portraits, and period engravings of the buildings.
 - Good on-screen text moments are Oct 13 1804, March 30 1842, 1849, Oct 16 1846, and March 30, National Doctors' Day.
@@ -40,7 +41,7 @@ And that brings us back to Doctors' Day. Today in the United States, National Do
 
 ## 06 Hanaoka, 1804
 
-And there's more, because Crawford Long wasn't the first either. Thirty-eight years before Long, and forty-two years before Morton, there was a Japanese surgeon named Hanaoka Seishu. On October 13th, 1804, Hanaoka removed a breast tumor from a patient named Kan Aiya, and the patient was under full general anesthesia while he did it.
+And there's more, because Crawford Long wasn't the first either. Thirty-eight years before Long, and forty-two years before Morton, there was a Japanese surgeon named Hanaoka Seishu. On October 13th, 1804, by the Japanese calendar of the time, Hanaoka removed a breast tumor from a patient named Kan Aiya, and the patient was under full general anesthesia while he did it.
 
 And full general anesthesia means exactly what it sounds like, the patient isn't just numbed in one spot, the patient is completely out for the operation. And he didn't use ether, he used an herbal mix, a preparation called mafutsusan, which you'll also see called tsusensan, so this is a completely different road to the same place, and it's full general anesthesia, on a named patient, on a known date, in 1804, in Japan, decades before anybody in Boston or Georgia.
 
@@ -48,4 +49,4 @@ So now you've got three dates, right? 1804 in Japan, 1842 in Georgia, and 1846 i
 
 ## 07 Who Was First
 
-So here's where it lands. William Morton's public demonstration on October 16th, 1846 is the one in the textbooks, and it earned that spot by being public. But on March 30th, 1842, Crawford Long had already removed a tumor from James Venable's neck under ether, and he just didn't publish until 1849. And on October 13th, 1804, Hanaoka Seishu had already operated on Kan Aiya under full general anesthesia with an herbal mix, forty-two years before Boston. Somebody did it first, and in this story it was a surgeon in Japan, and then a country doctor in Georgia, and the next time you see Doctors' Day on March 30th, that's the same date as Crawford Long's operation.
+So here's where it lands. William Morton's public demonstration on October 16th, 1846 is the one in the textbooks, and it earned that spot by being public. But on March 30th, 1842, Crawford Long had already removed a tumor from James Venable's neck under ether, and he just didn't publish until 1849. And in 1804, Hanaoka Seishu had already operated on Kan Aiya under full general anesthesia with an herbal mix, forty-two years before Boston. Somebody did it first, and in this story it was a surgeon in Japan, and then a country doctor in Georgia, and the next time you see Doctors' Day on March 30th, that's the same date as Crawford Long's operation.

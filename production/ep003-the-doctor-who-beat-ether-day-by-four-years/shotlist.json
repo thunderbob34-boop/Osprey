@@ -4,13 +4,20 @@
   "section": "01",
   "section_name": "Cold Open",
   "text": "Every year America marks National Doctors' Day on March 30th,",
-  "type": "date",
-  "template": "date",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "date": "March 30",
-   "caption": "National Doctors' Day, United States"
+   "scene": "calendar",
+   "tag": "ILLUSTRATION · Calendar page, simplified",
+   "params": {
+    "month": "March",
+    "day": 30,
+    "flips": 3,
+    "title": "National Doctors' Day",
+    "caption": "United States"
+   }
   },
-  "visual": "Date card: March 30, National Doctors' Day.",
+  "visual": "Tear-off calendar flips to March 30 for National Doctors' Day.",
   "source": null
  },
  {
@@ -21,26 +28,32 @@
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "Why March 30th? A country doctor in Georgia",
-   "sub": "Most people have no idea why it's that date"
+   "headline": "Why March 30th?",
+   "sub": "A country doctor in Georgia"
   },
-  "visual": "Card posing the question the narration just asked.",
+  "visual": "Kinetic card posing the question the narration just asked.",
   "source": null
  },
  {
   "id": "01-c",
   "section": "01",
   "section_name": "Cold Open",
-  "text": "named Crawford Long, who on March 30th, 1842, put a man under ether",
+  "text": "named Crawford Long, who on March 30th, 1842,",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "engraving",
    "label": "Crawford W. Long",
    "lower": "Crawford Long (engraving)",
-   "asset": "loc-gov-item-2005691407"
+   "asset": "loc-gov-item-2005691407",
+   "crop": "Wide crop, full bust.",
+   "zoom": {
+    "scale": 1.15,
+    "x": 50,
+    "y": 50
+   }
   },
-  "visual": "Engraved bust portrait of Crawford Long as he is named.",
+  "visual": "Engraved bust portrait of Crawford Long, slow push-in, name in the lower third.",
   "source": {
    "institution": "Library of Congress, Prints and Photographs Division",
    "item": "[Dr. Crawford W. Long, bust] (engraving by R. O'Brien, digital ID cph 3a37145)",
@@ -49,67 +62,160 @@
    "credit": "Library of Congress Prints and Photographs Division, LCCN 2005691407",
    "verified": false
   },
-  "notes": "Portrait only. No surgical imagery."
+  "notes": "Portrait only. No surgical imagery. Portrait only. No surgical imagery. Portrait only. No surgical imagery."
  },
  {
   "id": "01-d",
   "section": "01",
   "section_name": "Cold Open",
-  "text": "and took a tumor off his neck. And that matters for this channel,",
-  "type": "title",
-  "template": "title",
+  "text": "put a man under ether and took a tumor off his neck.",
+  "type": "date",
+  "template": "date",
   "fields": {
-   "title": "The Doctor Who Beat Ether Day by Four Years",
-   "subtitle": "Doctors' Day, Ether Day, and who got there first"
+   "date": "March 30, 1842",
+   "caption": "Crawford Long puts a man under ether"
   },
-  "visual": "Episode title card as the story is framed.",
+  "visual": "Date stamps in: March 30, 1842. Text only, no imagery of the operation.",
   "source": null
  },
  {
   "id": "01-e",
   "section": "01",
   "section_name": "Cold Open",
-  "text": "because the famous moment in the history of anesthesia, the one in the textbooks,",
-  "type": "archival",
-  "template": "archival",
+  "text": "And that matters for this channel, because the famous moment in the history of anesthesia,",
+  "type": "title",
+  "template": "title",
   "fields": {
-   "kind": "photo",
-   "label": "Ether Monument, Public Garden, Boston",
-   "lower": "Ether Monument, Public Garden, Boston (photograph, c. 1900-1906)",
-   "asset": "loc-gov-item-2016794538"
+   "title": "The Doctor Who Beat Ether Day by Four Years",
+   "subtitle": "Doctors' Day, Ether Day, and who got there first"
   },
-  "visual": "Photograph of the Boston memorial to the ether discovery, held while the textbook moment is described.",
-  "source": {
-   "institution": "Library of Congress, Prints and Photographs Division",
-   "item": "Ether Monument, Public Garden, Boston, The (Detroit Publishing Co., c. 1900-1906)",
-   "url": "https://www.loc.gov/item/2016794538/",
-   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
-   "credit": "Detroit Publishing Co., LC-DIG-det-4a07480, Library of Congress Prints and Photographs Division",
-   "verified": true
-  },
-  "notes": "Later memorial, labelled as a photograph. Do not read as a period view of 1846. Show the monument, not its inscription text if the crop allows."
+  "visual": "Episode title builds in word by word.",
+  "source": null
  },
  {
   "id": "01-f",
   "section": "01",
   "section_name": "Cold Open",
-  "text": "is a public demonstration in Boston in 1846, and Crawford Long beat it by four years.",
-  "type": "datecard",
-  "template": "datecard",
+  "text": "the one in the textbooks, is a public demonstration in Boston in 1846,",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "left_label": "Crawford Long, Georgia",
-   "left_date": "1842",
-   "right_label": "Public demonstration, Boston",
-   "right_date": "1846",
-   "gap": "Four years",
-   "kicker": "Long beat it by four years",
-   "firsttag": false
+   "title": "The famous demonstration",
+   "pins": [
+    {
+     "name": "Boston",
+     "lat": 42.363,
+     "lon": -71.0688,
+     "sub": "Public demonstration, 1846",
+     "at": 1.0,
+     "pulse": true
+    },
+    {
+     "name": "Jefferson, Georgia",
+     "lat": 34.1267,
+     "lon": -83.5903,
+     "at": 99
+    }
+   ],
+   "routes": [],
+   "labels": [
+    {
+     "name": "Atlantic Ocean",
+     "lat": 39.0,
+     "lon": -65.0,
+     "kind": "sea",
+     "size": 34
+    },
+    {
+     "name": "United States",
+     "lat": 40.5,
+     "lon": -95.0,
+     "kind": "region",
+     "size": 40
+    }
+   ],
+   "from": {
+    "lat": 40.0,
+    "lon": -92.0,
+    "span": 30
+   },
+   "span": 6,
+   "rivers": true
   },
-  "visual": "Two-date card: 1842 against 1846, four years apart.",
+  "visual": "US map: camera flies in from the whole country to the east coast; Boston pin drops and pulses.",
   "source": null
  },
  {
   "id": "01-g",
+  "section": "01",
+  "section_name": "Cold Open",
+  "text": "and Crawford Long beat it by four years.",
+  "type": "pinmap",
+  "template": "pinmap",
+  "fields": {
+   "title": "The famous demonstration",
+   "caption": "Crawford Long beat it by four years",
+   "pins": [
+    {
+     "name": "Boston",
+     "lat": 42.363,
+     "lon": -71.0688,
+     "sub": "Public demonstration, 1846",
+     "at": 0.0
+    },
+    {
+     "name": "Jefferson, Georgia",
+     "lat": 34.1267,
+     "lon": -83.5903,
+     "sub": "Crawford Long, 1842",
+     "at": 1.7
+    }
+   ],
+   "routes": [
+    {
+     "points": [
+      [
+       42.363,
+       -71.0688
+      ],
+      [
+       34.1267,
+       -83.5903
+      ]
+     ],
+     "style": "dash",
+     "icon": "dot",
+     "at": 0.2,
+     "dur": 1.5,
+     "color": "#A8261B"
+    }
+   ],
+   "labels": [
+    {
+     "name": "Atlantic Ocean",
+     "lat": 39.0,
+     "lon": -65.0,
+     "kind": "sea",
+     "size": 34
+    },
+    {
+     "name": "United States",
+     "lat": 40.5,
+     "lon": -95.0,
+     "kind": "region",
+     "size": 40
+    }
+   ],
+   "from": false,
+   "span": 6,
+   "rivers": true,
+   "note": "Coastlines: Natural Earth · the line joins two places, not a travel route"
+  },
+  "visual": "Same map, camera held: a dashed line runs from Boston down to Jefferson, Georgia; caption says four years.",
+  "source": null
+ },
+ {
+  "id": "01-h",
   "section": "01",
   "section_name": "Cold Open",
   "text": "Now, to be fair, there's a real reason the Boston demonstration is the one people remember,",
@@ -119,9 +225,14 @@
    "kind": "engraving",
    "label": "Massachusetts General Hospital, Boston",
    "lower": "Massachusetts General Hospital, Boston (later engraving, c. 1857-1860; building shown)",
-   "asset": "ark-digitalcommonwealth-org-ark-50959-cn69mw38z"
+   "asset": "ark-digitalcommonwealth-org-ark-50959-cn69mw38z",
+   "zoom": {
+    "scale": 1.25,
+    "x": 45,
+    "y": 55
+   }
   },
-  "visual": "Engraving of the hospital building in Boston.",
+  "visual": "Later engraving of the hospital building in Boston, slow push-in.",
   "source": {
    "institution": "Digital Commonwealth (Boston Public Library, Boston Pictorial Archive)",
    "item": "Massachusetts General Hospital, Boston (engraving by Reuben Carpenter, c. 1857-1860)",
@@ -133,57 +244,58 @@
   "notes": "Later engraving of the building, not a view of the 1846 event."
  },
  {
-  "id": "01-h",
+  "id": "01-i",
   "section": "01",
   "section_name": "Cold Open",
-  "text": "and we'll give it its due, but Crawford Long got there first, and even he wasn't the first one.",
-  "type": "archival",
-  "template": "archival",
+  "text": "and we'll give it its due, but Crawford Long got there first,",
+  "type": "datecard",
+  "template": "datecard",
   "fields": {
-   "kind": "engraving",
-   "label": "Crawford W. Long",
-   "lower": "Crawford Long (engraving)",
-   "asset": "loc-gov-item-2005691407"
+   "kicker": "Crawford Long got there first",
+   "left_label": "Crawford Long, Georgia",
+   "left_date": "1842",
+   "right_label": "Public demonstration, Boston",
+   "right_date": "1846",
+   "gap": "Four years",
+   "firsttag": false
   },
-  "visual": "Long portrait returns as 'got there first' is hedged by 'even he wasn't the first one'.",
-  "source": {
-   "institution": "Library of Congress, Prints and Photographs Division",
-   "item": "[Dr. Crawford W. Long, bust] (engraving by R. O'Brien, digital ID cph 3a37145)",
-   "url": "https://www.loc.gov/item/2005691407",
-   "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Library of Congress Prints and Photographs Division, LCCN 2005691407",
-   "verified": false
+  "visual": "Line draws from 1842 to 1846, then the gap label: four years.",
+  "source": null
+ },
+ {
+  "id": "01-j",
+  "section": "01",
+  "section_name": "Cold Open",
+  "text": "and even he wasn't the first one.",
+  "type": "text",
+  "template": "text",
+  "fields": {
+   "headline": "Even he wasn't the first one",
+   "sub": "Crawford Long got there first"
   },
-  "notes": "Third use of this portrait, not consecutive."
+  "visual": "Kinetic card: the hook into the rest of the episode.",
+  "source": null
  },
  {
   "id": "02-a",
   "section": "02",
   "section_name": "Before Anesthesia",
-  "text": "First you have to understand what surgery was like before any of this, and I don't mean the gory part, I mean what doctors actually believed.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "Before anesthesia: what doctors actually believed",
-   "sub": "Not the gory part"
-  },
-  "visual": "Card setting up the section. No surgical imagery.",
-  "source": null
- },
- {
-  "id": "02-c",
-  "section": "02",
-  "section_name": "Before Anesthesia",
-  "text": "Before anesthesia, many doctors didn't think pain was purely a bad thing,",
-  "type": "document",
+  "text": "First you have to understand what surgery was like before any of this,",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "document",
    "label": "Medical-history review on the acceptance of pain",
    "lower": "Medical-history review: \"Accepting Pain Over Comfort\" (abstract page)",
-   "asset": "pubmed-ncbi-nlm-nih-gov-26828088"
+   "asset": "pubmed-ncbi-nlm-nih-gov-26828088",
+   "crop": "Crop to the title and abstract text.",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 18
+   }
   },
-  "visual": "Journal abstract page that backs the claim.",
+  "visual": "Journal abstract page, push-in on the title.",
   "source": {
    "institution": "PubMed (National Library of Medicine)",
    "item": "Accepting Pain Over Comfort (PubMed 26828088, as cited in the episode notes)",
@@ -195,17 +307,59 @@
   "notes": "Document only. Crop to title and abstract text."
  },
  {
+  "id": "02-b",
+  "section": "02",
+  "section_name": "Before Anesthesia",
+  "text": "and I don't mean the gory part, I mean what doctors actually believed.",
+  "type": "compare",
+  "template": "compare",
+  "fields": {
+   "left_title": "Not this",
+   "left_lines": [
+    "The gory part"
+   ],
+   "right_title": "This",
+   "right_lines": [
+    "What doctors actually believed"
+   ]
+  },
+  "visual": "Two columns: not the gory part, but what doctors believed.",
+  "source": null
+ },
+ {
+  "id": "02-c",
+  "section": "02",
+  "section_name": "Before Anesthesia",
+  "text": "Before anesthesia, many doctors didn't think pain was purely a bad thing,",
+  "type": "text",
+  "template": "text",
+  "fields": {
+   "headline": "Many doctors didn't think pain was purely bad",
+   "sub": "Before anesthesia"
+  },
+  "visual": "Kinetic card carrying the hedge: many doctors.",
+  "source": null
+ },
+ {
   "id": "02-d",
   "section": "02",
   "section_name": "Before Anesthesia",
   "text": "some saw it as a sign the body was still fighting,",
-  "type": "text",
-  "template": "text",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "headline": "Some saw pain as a sign the body was fighting",
-   "sub": "Many doctors didn't think pain was purely bad"
+   "left_title": "Pain",
+   "left_lines": [
+    "Some saw it as a sign the body was still fighting"
+   ],
+   "right_title": "Anesthesia",
+   "right_lines": [
+    "Some opposed it",
+    "They thought taking away the pain could be dangerous"
+   ],
+   "step": 1
   },
-  "visual": "Card with the hedge 'some' in the headline.",
+  "visual": "Compare card, step 1: left side shown, right side ghosted.",
   "source": null
  },
  {
@@ -213,52 +367,77 @@
   "section": "02",
   "section_name": "Before Anesthesia",
   "text": "and some opposed anesthesia because they thought taking away the pain could be dangerous.",
-  "type": "text",
-  "template": "archival",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "kind": "document",
-   "label": "Medical-history review on the acceptance of pain",
-   "lower": "Some opposed anesthesia, fearing that taking away pain could be dangerous",
-   "asset": "pubmed-ncbi-nlm-nih-gov-26828088",
-   "crop": "Crop to the abstract text (a different framing from 02-c)",
-   "zoom": {
-    "scale": 1.6,
-    "x": 50,
-    "y": 60
-   }
+   "left_title": "Pain",
+   "left_lines": [
+    "Some saw it as a sign the body was still fighting"
+   ],
+   "right_title": "Anesthesia",
+   "right_lines": [
+    "Some opposed it",
+    "They thought taking away the pain could be dangerous"
+   ],
+   "step": 2
   },
-  "visual": "The review page again, cropped to the abstract, with the lower-third carrying the line.",
-  "source": {
-   "institution": "PubMed (National Library of Medicine)",
-   "item": "Accepting Pain Over Comfort (PubMed 26828088, as cited in the episode notes)",
-   "url": "https://pubmed.ncbi.nlm.nih.gov/26828088/",
-   "rights": "Abstract page; rights not stated. URL built from the PubMed ID in the notes, not seen in search results",
-   "credit": "PubMed, NLM",
-   "verified": false
-  }
+  "visual": "Same compare card, step 2: the right side is revealed.",
+  "source": null
  },
  {
   "id": "02-f",
   "section": "02",
   "section_name": "Before Anesthesia",
   "text": "And that wasn't just a few cranks, the great French physiologist François Magendie",
-  "type": "archival",
-  "template": "archival",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "kind": "portrait",
-   "label": "François Magendie, 1837",
-   "lower": "François Magendie (lithograph by N. E. Maurin, 1837)",
-   "asset": "wellcomecollection-org-works-b99w3gfx"
+   "title": "France",
+   "caption": "François Magendie, French physiologist",
+   "pins": [],
+   "routes": [],
+   "labels": [
+    {
+     "name": "France",
+     "lat": 46.6,
+     "lon": 2.4,
+     "kind": "region",
+     "size": 56,
+     "fit": true,
+     "at": 1.0
+    },
+    {
+     "name": "English Channel",
+     "lat": 50.1,
+     "lon": -1.8,
+     "kind": "sea",
+     "size": 30
+    },
+    {
+     "name": "Bay of Biscay",
+     "lat": 45.3,
+     "lon": -4.0,
+     "kind": "sea",
+     "size": 30
+    },
+    {
+     "name": "Mediterranean Sea",
+     "lat": 42.4,
+     "lon": 5.2,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "from": {
+    "lat": 48.0,
+    "lon": 8.0,
+    "span": 34
+   },
+   "span": 10,
+   "rivers": true
   },
-  "visual": "Magendie lithograph portrait as he is named.",
-  "source": {
-   "institution": "Wellcome Collection",
-   "item": "François Magendie. Lithograph by N. E. Maurin, 1837.",
-   "url": "https://wellcomecollection.org/works/b99w3gfx",
-   "rights": "Public Domain (as stated by Wellcome Collection)",
-   "credit": "Wellcome Collection",
-   "verified": true
-  }
+  "visual": "Map of western Europe: the camera pushes in on France as the French physiologist is named.",
+  "source": null
  },
  {
   "id": "02-g",
@@ -271,7 +450,7 @@
    "quote": "has always its usefulness.",
    "attribution": "François Magendie"
   },
-  "visual": "Quote card with Magendie's exact words.",
+  "visual": "Typewriter quote card: Magendie's recorded words.",
   "source": null
  },
  {
@@ -285,7 +464,7 @@
    "quote": "erroneous yet pervasive Western view",
    "attribution": "A peer-reviewed medical review"
   },
-  "visual": "Quote card with the review's exact words.",
+  "visual": "Typewriter quote card: the review's words.",
   "source": null
  },
  {
@@ -293,15 +472,21 @@
   "section": "02",
   "section_name": "Before Anesthesia",
   "text": "the idea that the patient's anguish was part of what kept them alive.",
-  "type": "document",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "document",
    "label": "The Astonishingly Slow Progress Towards Surgical Anesthesia: Part I",
    "lower": "\"The Astonishingly Slow Progress Towards Surgical Anesthesia: Part I\" (the review quoted)",
-   "asset": "pmc-ncbi-nlm-nih-gov-articles-pmc8672962"
+   "asset": "pmc-ncbi-nlm-nih-gov-articles-pmc8672962",
+   "crop": "Crop to the title block only.",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 12
+   }
   },
-  "visual": "Article page for the review just quoted.",
+  "visual": "Title block of the review article, push-in.",
   "source": {
    "institution": "PubMed Central (National Library of Medicine)",
    "item": "The Astonishingly Slow Progress Towards Surgical Anesthesia: Part I (PMC8672962)",
@@ -323,7 +508,7 @@
    "headline": "A promise to make it not hurt",
    "sub": "Not automatically welcome news"
   },
-  "visual": "Card for the promise of painless surgery.",
+  "visual": "Kinetic card, no quote marks (nobody is recorded saying this).",
   "source": null
  },
  {
@@ -337,9 +522,14 @@
    "kind": "portrait",
    "label": "François Magendie, 1837",
    "lower": "François Magendie (lithograph by N. E. Maurin, 1837)",
-   "asset": "wellcomecollection-org-works-b99w3gfx"
+   "asset": "wellcomecollection-org-works-b99w3gfx",
+   "zoom": {
+    "scale": 1.2,
+    "x": 50,
+    "y": 38
+   }
   },
-  "visual": "Magendie again as 'serious people' who thought pain was doing something.",
+  "visual": "Lithograph portrait of François Magendie, slow push-in.",
   "source": {
    "institution": "Wellcome Collection",
    "item": "François Magendie. Lithograph by N. E. Maurin, 1837.",
@@ -347,8 +537,7 @@
    "rights": "Public Domain (as stated by Wellcome Collection)",
    "credit": "Wellcome Collection",
    "verified": true
-  },
-  "notes": "Second use, separated by four beats."
+  }
  },
  {
   "id": "03-a",
@@ -361,7 +550,7 @@
    "date": "October 16, 1846",
    "caption": "Boston"
   },
-  "visual": "Date card for Ether Day.",
+  "visual": "Date stamps in: October 16, 1846, Boston.",
   "source": null
  },
  {
@@ -375,9 +564,15 @@
    "kind": "portrait",
    "label": "William T. G. Morton",
    "lower": "William T. G. Morton",
-   "asset": "wellcomecollection-org-works-esemf62n"
+   "asset": "wellcomecollection-org-works-esemf62n",
+   "crop": "Whole portrait.",
+   "zoom": {
+    "scale": 1.2,
+    "x": 50,
+    "y": 40
+   }
   },
-  "visual": "Portrait of Morton as he is named.",
+  "visual": "Portrait of William Morton, slow push-in, name in the lower third.",
   "source": {
    "institution": "Wellcome Collection",
    "item": "M0002620: Portrait of William T. G. Morton (1819-1868)",
@@ -392,29 +587,89 @@
   "section": "03",
   "section_name": "Ether Day",
   "text": "and that's the moment everybody remembers. It's remembered as Ether Day,",
-  "type": "text",
-  "template": "text",
+  "type": "archival",
+  "template": "archival",
   "fields": {
-   "headline": "Remembered as Ether Day",
-   "sub": "October 16, 1846, Boston"
+   "kind": "photo",
+   "label": "Ether Monument, Public Garden, Boston",
+   "lower": "Ether Monument, Public Garden, Boston (photograph, c. 1900-1906)",
+   "asset": "loc-gov-item-2016794538",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 60
+   }
   },
-  "visual": "Card naming Ether Day.",
-  "source": null
+  "visual": "Photograph of the Ether Monument in Boston's Public Garden, push-in.",
+  "source": {
+   "institution": "Library of Congress, Prints and Photographs Division",
+   "item": "Ether Monument, Public Garden, Boston, The (Detroit Publishing Co., c. 1900-1906)",
+   "url": "https://www.loc.gov/item/2016794538/",
+   "rights": "No known restrictions on publication (as stated by the Library of Congress)",
+   "credit": "Detroit Publishing Co., LC-DIG-det-4a07480, Library of Congress Prints and Photographs Division",
+   "verified": true
+  },
+  "notes": "Later memorial, labelled as a photograph. Do not read as a period view of 1846. Show the monument, not its inscription text if the crop allows."
  },
  {
   "id": "03-d",
   "section": "03",
   "section_name": "Ether Day",
   "text": "and the place everybody points to is the Ether Dome,",
+  "type": "pinmap",
+  "template": "pinmap",
+  "fields": {
+   "title": "Boston",
+   "pins": [
+    {
+     "name": "Ether Dome",
+     "lat": 42.363,
+     "lon": -71.0688,
+     "sub": "Massachusetts General Hospital, Boston",
+     "at": 1.3,
+     "pulse": true
+    }
+   ],
+   "routes": [],
+   "labels": [
+    {
+     "name": "Massachusetts Bay",
+     "lat": 42.25,
+     "lon": -70.45,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "from": {
+    "lat": 40.5,
+    "lon": -76.0,
+    "span": 14
+   },
+   "span": 1.2,
+   "rivers": true
+  },
+  "visual": "Map: the camera zooms from the east coast into Boston; the Ether Dome pin drops.",
+  "source": null
+ },
+ {
+  "id": "03-e",
+  "section": "03",
+  "section_name": "Ether Day",
+  "text": "and if you've ever read a short history of anesthesia, that's usually where the story starts.",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "photo",
    "label": "Inside the Ether Dome, Massachusetts General Hospital",
    "lower": "The Ether Dome, Massachusetts General Hospital (modern photograph)",
-   "asset": "commons-wikimedia-org-wiki-file-inside-the-ether-dome-at-mas"
+   "asset": "commons-wikimedia-org-wiki-file-inside-the-ether-dome-at-mas",
+   "zoom": {
+    "scale": 1.25,
+    "x": 50,
+    "y": 45
+   }
   },
-  "visual": "Modern photograph of the Ether Dome interior.",
+  "visual": "Modern photograph of the Ether Dome room, slow push-in.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:Inside the Ether Dome at Massachusetts General Hospital.jpg",
@@ -426,30 +681,6 @@
   "notes": "Modern photo, labelled. Crop away any people. CC BY-SA 4.0 needs attribution in the description."
  },
  {
-  "id": "03-e",
-  "section": "03",
-  "section_name": "Ether Day",
-  "text": "and if you've ever read a short history of anesthesia, that's usually where the story starts.",
-  "type": "archival",
-  "template": "archival",
-  "fields": {
-   "kind": "photo",
-   "label": "Bulfinch Building, Massachusetts General Hospital",
-   "lower": "Massachusetts General Hospital, Bulfinch Building (survey photograph; building shown)",
-   "asset": "loc-gov-item-ma0909"
-  },
-  "visual": "Survey photograph of the hospital building.",
-  "source": {
-   "institution": "Library of Congress, Historic American Buildings Survey",
-   "item": "Massachusetts General Hospital, Bulfinch Building, Fruit Street, Boston, Suffolk County, MA (HABS MA-556)",
-   "url": "https://www.loc.gov/item/ma0909/",
-   "rights": "Rights not stated in the search result; confirm on the item page before use (HABS photographs are US government work, but confirm)",
-   "credit": "Library of Congress, HABS MA-556",
-   "verified": false
-  },
-  "notes": "Exterior only. The LOC record also has interior views, avoid any showing an operating scene."
- },
- {
   "id": "03-f",
   "section": "03",
   "section_name": "Ether Day",
@@ -458,9 +689,9 @@
   "template": "text",
   "fields": {
    "headline": "A public demonstration is a big deal",
-   "sub": "People saw it with their own eyes"
+   "sub": "To be fair to Morton"
   },
-  "visual": "Card crediting Morton fairly.",
+  "visual": "Kinetic card.",
   "source": null
  },
  {
@@ -486,11 +717,10 @@
      "sub": ""
     }
    ],
-   "step": 3,
-   "highlight": 3,
+   "arrows": false,
    "caption": ""
   },
-  "visual": "Three-box diagram built from the narration: eyes, room, date.",
+  "visual": "Three boxes pop in: seen, in a room, on a date.",
   "source": null
  },
  {
@@ -516,11 +746,9 @@
      "sub": ""
     }
    ],
-   "step": 3,
-   "highlight": 3,
    "caption": ""
   },
-  "visual": "Three-box diagram: written down, talked about, copied.",
+  "visual": "Three boxes with arrows: written down, talked about, copied.",
   "source": null
  },
  {
@@ -528,37 +756,41 @@
   "section": "03",
   "section_name": "Ether Day",
   "text": "So Morton gets the credit, and the big reason, the way I see it,",
-  "type": "archival",
-  "template": "archival",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "kind": "portrait",
-   "label": "William T. G. Morton",
-   "lower": "William T. G. Morton",
-   "asset": "wellcomecollection-org-works-esemf62n"
+   "left_title": "Morton gets the credit",
+   "left_lines": [
+    "Public demonstration, 1846"
+   ],
+   "right_title": "The big reason, the way I see it",
+   "right_lines": [
+    "He did it in front of people"
+   ],
+   "step": 1
   },
-  "visual": "Morton portrait again.",
-  "source": {
-   "institution": "Wellcome Collection",
-   "item": "M0002620: Portrait of William T. G. Morton (1819-1868)",
-   "url": "https://wellcomecollection.org/works/esemf62n",
-   "rights": "Rights not stated in the search result; confirm on the item page before use. Do NOT use sibling item M0008841, which Wellcome marks \"In copyright\".",
-   "credit": "Wellcome Collection",
-   "verified": false
-  },
-  "notes": "Second use, separated by five beats."
+  "visual": "Compare card, step 1: Morton gets the credit; the reason is ghosted.",
+  "source": null
  },
  {
   "id": "03-j",
   "section": "03",
   "section_name": "Ether Day",
   "text": "is that he did it in front of people.",
-  "type": "text",
-  "template": "text",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "headline": "The way I see it: he did it publicly",
-   "sub": "The big reason Morton gets the credit"
+   "left_title": "Morton gets the credit",
+   "left_lines": [
+    "Public demonstration, 1846"
+   ],
+   "right_title": "The big reason, the way I see it",
+   "right_lines": [
+    "He did it in front of people"
+   ],
+   "step": 2
   },
-  "visual": "Card keeping the hedge 'the way I see it' in the headline.",
+  "visual": "Same compare card, step 2: the reason is revealed, hedge kept.",
   "source": null
  },
  {
@@ -566,24 +798,54 @@
   "section": "04",
   "section_name": "Crawford Long, 1842",
   "text": "But four years earlier, in Georgia, a country doctor named Crawford Long had already done it.",
-  "type": "archival",
-  "template": "archival",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "kind": "engraving",
-   "label": "Crawford W. Long, engraving c. 1877",
-   "lower": "Crawford Long (engraving, c. 1877)",
-   "asset": "collections-countway-harvard-edu-onview-items-show-18110"
+   "title": "Georgia, four years earlier",
+   "pins": [
+    {
+     "name": "Jefferson, Georgia",
+     "lat": 34.1267,
+     "lon": -83.5903,
+     "sub": "Crawford Long",
+     "at": 2.3,
+     "pulse": true
+    }
+   ],
+   "routes": [],
+   "labels": [
+    {
+     "name": "GEORGIA",
+     "lat": 32.6,
+     "lon": -83.4,
+     "kind": "region",
+     "size": 40
+    },
+    {
+     "name": "Atlanta",
+     "lat": 33.749,
+     "lon": -84.388,
+     "kind": "city",
+     "size": 26
+    },
+    {
+     "name": "Atlantic Ocean",
+     "lat": 31.7,
+     "lon": -80.35,
+     "kind": "sea",
+     "size": 30
+    }
+   ],
+   "from": {
+    "lat": 39.0,
+    "lon": -92.0,
+    "span": 22
+   },
+   "span": 6,
+   "rivers": true
   },
-  "visual": "Second Long portrait engraving as the 1842 story begins.",
-  "source": {
-   "institution": "Countway Library of Medicine (Harvard), OnView Portrait Collection",
-   "item": "Crawford W. Long, M.D. Discoverer of anaesthesia demonstrated on James M. Venables by the use of sulphuric ether at Jefferson, Jackson Co., Georgia, March 30th, 1842 (engraving, c. 1877)",
-   "url": "https://collections.countway.harvard.edu/onview/items/show/18110",
-   "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Countway Library, Portrait Collection M-CL02, box 99, f. 16",
-   "verified": false
-  },
-  "notes": "CROP TO THE PORTRAIT. The printed caption on this engraving calls Long the 'Discoverer of anaesthesia', which overstates the script. Never show that caption."
+  "visual": "Map: the camera flies down into Georgia and drops a pin on Jefferson.",
+  "source": null
  },
  {
   "id": "04-b",
@@ -596,7 +858,7 @@
    "date": "March 30, 1842",
    "caption": "Crawford Long and James Venable"
   },
-  "visual": "Date card for the 1842 operation.",
+  "visual": "Date stamps in: March 30, 1842. Text only, no imagery of the operation.",
   "source": null
  },
  {
@@ -608,19 +870,26 @@
   "template": "archival",
   "fields": {
    "kind": "engraving",
-   "label": "Crawford W. Long",
-   "lower": "Crawford Long (engraving)",
-   "asset": "loc-gov-item-2005691407"
+   "label": "Crawford W. Long, engraving c. 1877",
+   "lower": "Crawford Long (engraving, c. 1877)",
+   "asset": "collections-countway-harvard-edu-onview-items-show-18110",
+   "crop": "CROP TO THE PORTRAIT. Never show the printed caption.",
+   "zoom": {
+    "scale": 1.25,
+    "x": 50,
+    "y": 40
+   }
   },
-  "visual": "Long bust portrait. No operating imagery.",
+  "visual": "Engraved portrait of Crawford Long, slow push-in.",
   "source": {
-   "institution": "Library of Congress, Prints and Photographs Division",
-   "item": "[Dr. Crawford W. Long, bust] (engraving by R. O'Brien, digital ID cph 3a37145)",
-   "url": "https://www.loc.gov/item/2005691407",
+   "institution": "Countway Library of Medicine (Harvard), OnView Portrait Collection",
+   "item": "Crawford W. Long, M.D. Discoverer of anaesthesia demonstrated on James M. Venables by the use of sulphuric ether at Jefferson, Jackson Co., Georgia, March 30th, 1842 (engraving, c. 1877)",
+   "url": "https://collections.countway.harvard.edu/onview/items/show/18110",
    "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Library of Congress Prints and Photographs Division, LCCN 2005691407",
+   "credit": "Countway Library, Portrait Collection M-CL02, box 99, f. 16",
    "verified": false
-  }
+  },
+  "notes": "CROP TO THE PORTRAIT. The printed caption on this engraving calls Long the 'Discoverer of anaesthesia', which overstates the script. Never show that caption."
  },
  {
   "id": "04-d",
@@ -630,26 +899,25 @@
   "type": "flow",
   "template": "flow",
   "fields": {
-   "title": "What the record gives us",
+   "title": "Surgery under ether, 1842",
    "steps": [
     {
-     "label": "James Venable",
-     "sub": "A named patient"
+     "label": "A named patient",
+     "sub": "James Venable"
     },
     {
-     "label": "March 30, 1842",
-     "sub": "A known date"
+     "label": "A known date",
+     "sub": "March 30, 1842"
     },
     {
-     "label": "Under ether",
-     "sub": "Surgery, 1842"
+     "label": "In 1842",
+     "sub": "Georgia"
     }
    ],
-   "step": 3,
-   "highlight": 3,
+   "arrows": false,
    "caption": ""
   },
-  "visual": "Three-box diagram: named patient, known date, under ether.",
+  "visual": "Three boxes pop in: named patient, known date, 1842.",
   "source": null
  },
  {
@@ -657,15 +925,20 @@
   "section": "04",
   "section_name": "Crawford Long, 1842",
   "text": "and Long documented it, this isn't a story somebody made up about him later.",
-  "type": "document",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "document",
    "label": "Crawford W. Long Collection",
    "lower": "Crawford W. Long Collection, Smithsonian Archives Center (documents relating to Long's ether case)",
-   "asset": "sova-si-edu-record-nmah-ac-0120"
+   "asset": "sova-si-edu-record-nmah-ac-0120",
+   "zoom": {
+    "scale": 1.4,
+    "x": 50,
+    "y": 25
+   }
   },
-  "visual": "Archival collection record for Long's papers.",
+  "visual": "Archive collection page, push-in.",
   "source": {
    "institution": "Smithsonian National Museum of American History, Archives Center",
    "item": "Crawford W. Long Collection, 1841-1926 (NMAH.AC.0120)",
@@ -687,7 +960,7 @@
    "date": "1849",
    "caption": "Long didn't publish until 1849"
   },
-  "visual": "Date card: 1849.",
+  "visual": "The year 1849 stamps in.",
   "source": null
  },
  {
@@ -710,10 +983,9 @@
     }
    ],
    "highlight": "1849",
-   "step": 2,
    "scale": "years"
   },
-  "visual": "Timeline: 1842, then 1849.",
+  "visual": "Timeline spaced by years: the axis draws from 1842 to 1849.",
   "source": null
  },
  {
@@ -732,18 +1004,17 @@
     },
     {
      "date": "1846",
-     "label": "Morton's demonstration, Boston (4 years after Long)"
+     "label": "Morton's demonstration, Boston"
     },
     {
      "date": "1849",
-     "label": "Long publishes (3 years later)"
+     "label": "Long publishes"
     }
    ],
    "highlight": "1849",
-   "step": 3,
    "scale": "years"
   },
-  "visual": "Timeline now showing Morton's 1846 demonstration between the two Long dates.",
+  "visual": "Same timeline with Morton's 1846 demonstration dropping in between, spaced by years.",
   "source": null
  },
  {
@@ -751,13 +1022,22 @@
   "section": "04",
   "section_name": "Crawford Long, 1842",
   "text": "And that's the whole problem, right? If you don't publish, nobody else can build on what you did,",
-  "type": "text",
-  "template": "text",
+  "type": "flow",
+  "template": "flow",
   "fields": {
-   "headline": "No publishing, nobody builds on it",
-   "sub": "If you don't publish, nobody else can build on what you did"
+   "title": "The whole problem",
+   "steps": [
+    {
+     "label": "If you don't publish",
+     "sub": ""
+    },
+    {
+     "label": "Nobody else can build on what you did",
+     "sub": ""
+    }
+   ]
   },
-  "visual": "Card stating the problem.",
+  "visual": "Two boxes with an arrow: no publishing, nobody builds on it.",
   "source": null
  },
  {
@@ -771,9 +1051,15 @@
    "kind": "portrait",
    "label": "William T. G. Morton",
    "lower": "William T. G. Morton",
-   "asset": "wellcomecollection-org-works-esemf62n"
+   "asset": "wellcomecollection-org-works-esemf62n",
+   "crop": "Tight on the face, left of centre.",
+   "zoom": {
+    "scale": 1.5,
+    "x": 40,
+    "y": 35
+   }
   },
-  "visual": "Morton portrait as 'the name people remember'.",
+  "visual": "Portrait of William Morton, a tighter crop than the first one, slow push-in.",
   "source": {
    "institution": "Wellcome Collection",
    "item": "M0002620: Portrait of William T. G. Morton (1819-1868)",
@@ -781,21 +1067,27 @@
    "rights": "Rights not stated in the search result; confirm on the item page before use. Do NOT use sibling item M0008841, which Wellcome marks \"In copyright\".",
    "credit": "Wellcome Collection",
    "verified": false
-  },
-  "notes": "Third use, separated."
+  }
  },
  {
   "id": "04-k",
   "section": "04",
   "section_name": "Crawford Long, 1842",
   "text": "So the way I'd put it is this, Morton made it public, and Long did it first.",
-  "type": "text",
-  "template": "text",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "headline": "The way I'd put it: public versus first",
-   "sub": "Morton made it public, and Long did it first"
+   "scene": "ripple",
+   "tag": "ILLUSTRATION · Simplified diagram, not data",
+   "params": {
+    "title": "Public versus first",
+    "left": "Morton",
+    "leftSub": "made it public",
+    "right": "Long",
+    "rightSub": "did it first"
+   }
   },
-  "visual": "Card with the hedge 'the way I'd put it' in the headline.",
+  "visual": "Ripples spread from Morton and light up other dots; Long's dot stays quiet.",
   "source": null
  },
  {
@@ -803,22 +1095,20 @@
   "section": "04",
   "section_name": "Crawford Long, 1842",
   "text": "Both of those are true, and they're not the same thing,",
-  "type": "compare",
-  "template": "compare",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "left_title": "Morton",
-   "left_lines": [
-    "Made it public",
-    "Boston, 1846"
-   ],
-   "right_title": "Long",
-   "right_lines": [
-    "Did it before Morton",
-    "Georgia, 1842"
-   ],
-   "step": 2
+   "scene": "ripple",
+   "tag": "ILLUSTRATION · Simplified diagram, not data",
+   "params": {
+    "title": "Both are true",
+    "left": "Morton",
+    "leftSub": "made it public",
+    "right": "Long",
+    "rightSub": "did it first"
+   }
   },
-  "visual": "Compare card: public against first, both sides showing.",
+  "visual": "Same ripple scene held: public on one side, first on the other.",
   "source": null
  },
  {
@@ -826,24 +1116,20 @@
   "section": "04",
   "section_name": "Crawford Long, 1842",
   "text": "and this whole channel is about the gap between those two things.",
-  "type": "archival",
-  "template": "archival",
+  "type": "compare",
+  "template": "compare",
   "fields": {
-   "kind": "engraving",
-   "label": "Crawford W. Long",
-   "lower": "Crawford Long (engraving)",
-   "asset": "loc-gov-item-2005691407"
+   "left_title": "Public",
+   "left_lines": [
+    "Morton, Boston, 1846"
+   ],
+   "right_title": "First",
+   "right_lines": [
+    "Long, Georgia, 1842"
+   ]
   },
-  "visual": "Long portrait to close the section.",
-  "source": {
-   "institution": "Library of Congress, Prints and Photographs Division",
-   "item": "[Dr. Crawford W. Long, bust] (engraving by R. O'Brien, digital ID cph 3a37145)",
-   "url": "https://www.loc.gov/item/2005691407",
-   "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Library of Congress Prints and Photographs Division, LCCN 2005691407",
-   "verified": false
-  },
-  "notes": "Used for the third time overall, not consecutive."
+  "visual": "Two columns: public versus first.",
+  "source": null
  },
  {
   "id": "05-a",
@@ -854,9 +1140,9 @@
   "template": "date",
   "fields": {
    "date": "March 30",
-   "caption": "National Doctors' Day"
+   "caption": "National Doctors' Day, United States"
   },
-  "visual": "Date card: March 30.",
+  "visual": "Date stamps in: March 30.",
   "source": null
  },
  {
@@ -864,48 +1150,89 @@
   "section": "05",
   "section_name": "Doctors' Day",
   "text": "National Doctors' Day falls on March 30th, and that date was picked because of Long's operation,",
-  "type": "archival",
-  "template": "archival",
+  "type": "flow",
+  "template": "flow",
   "fields": {
-   "kind": "engraving",
-   "label": "Crawford W. Long, engraving c. 1877",
-   "lower": "Crawford Long (engraving, c. 1877)",
-   "asset": "collections-countway-harvard-edu-onview-items-show-18110"
+   "title": "Why March 30th?",
+   "steps": [
+    {
+     "label": "Long's operation",
+     "sub": "March 30, 1842"
+    },
+    {
+     "label": "National Doctors' Day",
+     "sub": "March 30"
+    }
+   ],
+   "caption": "The date was picked because of Long's operation"
   },
-  "visual": "Long engraving as the date is tied to his operation.",
-  "source": {
-   "institution": "Countway Library of Medicine (Harvard), OnView Portrait Collection",
-   "item": "Crawford W. Long, M.D. Discoverer of anaesthesia demonstrated on James M. Venables by the use of sulphuric ether at Jefferson, Jackson Co., Georgia, March 30th, 1842 (engraving, c. 1877)",
-   "url": "https://collections.countway.harvard.edu/onview/items/show/18110",
-   "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Countway Library, Portrait Collection M-CL02, box 99, f. 16",
-   "verified": false
-  },
-  "notes": "Crop to the portrait. Do not show the engraving's printed caption."
+  "visual": "Two boxes with an arrow: Long's operation to Doctors' Day.",
+  "source": null
  },
  {
   "id": "05-c",
   "section": "05",
   "section_name": "Doctors' Day",
   "text": "it started in Winder, Georgia, in 1933 and Congress made it national in 1990.",
-  "type": "timeline",
-  "template": "timeline",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
    "title": "National Doctors' Day",
-   "events": [
+   "pins": [
     {
-     "date": "1933",
-     "label": "Started in Winder, Georgia"
+     "name": "Winder, Georgia",
+     "lat": 33.9964,
+     "lon": -83.7208,
+     "sub": "Started 1933",
+     "at": 1.6,
+     "side": "left"
     },
     {
-     "date": "1990",
-     "label": "Congress made it national"
+     "name": "Washington, D.C.",
+     "lat": 38.8899,
+     "lon": -77.0091,
+     "sub": "Congress made it national, 1990",
+     "at": 3.7
     }
    ],
-   "highlight": "1990",
-   "step": 2
+   "routes": [
+    {
+     "points": [
+      [
+       33.9964,
+       -83.7208
+      ],
+      [
+       38.8899,
+       -77.0091
+      ]
+     ],
+     "style": "dash",
+     "icon": "dot",
+     "at": 2.4,
+     "dur": 1.5,
+     "color": "#A8261B"
+    }
+   ],
+   "labels": [
+    {
+     "name": "Atlantic Ocean",
+     "lat": 35.2,
+     "lon": -74.0,
+     "kind": "sea",
+     "size": 34
+    }
+   ],
+   "from": {
+    "lat": 38.0,
+    "lon": -90.0,
+    "span": 26
+   },
+   "span": 8,
+   "rivers": true,
+   "note": "Coastlines: Natural Earth · the line joins two places, not a travel route"
   },
-  "visual": "Timeline: 1933 Winder, 1990 Congress.",
+  "visual": "Map: a pin drops on Winder, Georgia (1933), a dashed line runs to Washington (1990).",
   "source": null
  },
  {
@@ -913,15 +1240,20 @@
   "section": "05",
   "section_name": "Doctors' Day",
   "text": "So Crawford Long did get something back, because the day America thanks its doctors",
-  "type": "document",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "document",
    "label": "Public Law 101-473",
    "lower": "Public Law 101-473, signed October 30, 1990 (National Doctors Day)",
-   "asset": "congress-gov-101-statute-statute-104-statute-104-pg1096-pdf"
+   "asset": "congress-gov-101-statute-statute-104-statute-104-pg1096-pdf",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 15
+   }
   },
-  "visual": "Statute page, Congress's national designation.",
+  "visual": "The 1990 law, push-in on the title and opening clause.",
   "source": {
    "institution": "Congress.gov / US Statutes at Large",
    "item": "Public Law 101-473, Oct. 30, 1990, 104 Stat. 1096 (S.J.Res. 366, National Doctors Day)",
@@ -940,15 +1272,15 @@
   "type": "datecard",
   "template": "datecard",
   "fields": {
+   "kicker": "The day America thanks its doctors",
    "left_label": "Doctors' Day, and Long's operation",
    "left_date": "March 30",
    "right_label": "Famous demonstration, Boston",
    "right_date": "October 16",
    "gap": "Long's date, not Boston's",
-   "kicker": "The day America thanks its doctors",
    "firsttag": false
   },
-  "visual": "Two-date card: March 30 against October 16.",
+  "visual": "Line draws from March 30 to October 16, then the gap label.",
   "source": null
  },
  {
@@ -960,19 +1292,26 @@
   "template": "archival",
   "fields": {
    "kind": "engraving",
-   "label": "Crawford W. Long",
-   "lower": "Crawford Long (engraving)",
-   "asset": "loc-gov-item-2005691407"
+   "label": "Crawford W. Long, engraving c. 1877",
+   "lower": "Crawford Long (engraving, c. 1877)",
+   "asset": "collections-countway-harvard-edu-onview-items-show-18110",
+   "crop": "Tighter crop on the face, different from the first use.",
+   "zoom": {
+    "scale": 1.7,
+    "x": 48,
+    "y": 30
+   }
   },
-  "visual": "Long portrait as 'never heard of'.",
+  "visual": "Portrait of Crawford Long, a tighter crop, slow push-in.",
   "source": {
-   "institution": "Library of Congress, Prints and Photographs Division",
-   "item": "[Dr. Crawford W. Long, bust] (engraving by R. O'Brien, digital ID cph 3a37145)",
-   "url": "https://www.loc.gov/item/2005691407",
+   "institution": "Countway Library of Medicine (Harvard), OnView Portrait Collection",
+   "item": "Crawford W. Long, M.D. Discoverer of anaesthesia demonstrated on James M. Venables by the use of sulphuric ether at Jefferson, Jackson Co., Georgia, March 30th, 1842 (engraving, c. 1877)",
+   "url": "https://collections.countway.harvard.edu/onview/items/show/18110",
    "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Library of Congress Prints and Photographs Division, LCCN 2005691407",
+   "credit": "Countway Library, Portrait Collection M-CL02, box 99, f. 16",
    "verified": false
-  }
+  },
+  "notes": "CROP TO THE PORTRAIT. The printed caption on this engraving calls Long the 'Discoverer of anaesthesia', which overstates the script. Never show that caption."
  },
  {
   "id": "06-a",
@@ -985,7 +1324,7 @@
    "headline": "Long wasn't the first either",
    "sub": "There's more"
   },
-  "visual": "Card: Long wasn't the first either.",
+  "visual": "Kinetic card.",
   "source": null
  },
  {
@@ -1000,7 +1339,7 @@
    "label": "before Long",
    "sub": "and 42 years before Morton"
   },
-  "visual": "Stat card: 38 years before Long, 42 before Morton.",
+  "visual": "Number counts up from 0 to 38.",
   "source": null
  },
  {
@@ -1014,9 +1353,15 @@
    "kind": "portrait",
    "label": "Hanaoka Seishu",
    "lower": "Hanaoka Seishu",
-   "asset": "commons-wikimedia-org-wiki-file-hanaokaseishu-gif"
+   "asset": "commons-wikimedia-org-wiki-file-hanaokaseishu-gif",
+   "crop": "Whole portrait.",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 40
+   }
   },
-  "visual": "Portrait of Hanaoka Seishu as he is named.",
+  "visual": "Portrait of Hanaoka Seishu, slow push-in, name in the lower third.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:HanaokaSeishu.gif",
@@ -1030,30 +1375,91 @@
   "id": "06-d",
   "section": "06",
   "section_name": "Hanaoka, 1804",
-  "text": "On October 13th, 1804, Hanaoka removed a breast tumor from a patient named Kan Aiya,",
+  "text": "On October 13th, 1804, by the Japanese calendar of the time,",
   "type": "date",
   "template": "date",
   "fields": {
    "date": "October 13, 1804",
-   "caption": "Hanaoka Seishu and Kan Aiya"
+   "caption": "By the Japanese calendar of the time"
   },
-  "visual": "Date card: October 13, 1804. Text only, no imagery of the operation.",
+  "visual": "Date stamps in: October 13, 1804, with the calendar hedge underneath.",
   "source": null
  },
  {
   "id": "06-e",
   "section": "06",
   "section_name": "Hanaoka, 1804",
+  "text": "Hanaoka removed a breast tumor from a patient named Kan Aiya,",
+  "type": "pinmap",
+  "template": "pinmap",
+  "fields": {
+   "title": "Japan, 1804",
+   "caption": "A patient named Kan Aiya",
+   "pins": [
+    {
+     "name": "Kii Province, Japan",
+     "lat": 34.27,
+     "lon": 135.35,
+     "sub": "Hanaoka Seishu",
+     "at": 1.5,
+     "pulse": true
+    }
+   ],
+   "routes": [],
+   "labels": [
+    {
+     "name": "HONSHU",
+     "lat": 35.45,
+     "lon": 136.6,
+     "kind": "region",
+     "size": 40
+    },
+    {
+     "name": "SHIKOKU",
+     "lat": 33.65,
+     "lon": 133.4,
+     "kind": "region",
+     "size": 30
+    },
+    {
+     "name": "Pacific Ocean",
+     "lat": 32.8,
+     "lon": 136.0,
+     "kind": "sea",
+     "size": 32
+    }
+   ],
+   "from": {
+    "lat": 36.0,
+    "lon": 138.0,
+    "span": 16
+   },
+   "span": 4,
+   "rivers": true,
+   "note": "Coastlines: Natural Earth · position approximate (municipality level)"
+  },
+  "visual": "Map: the camera flies into Kii Province, Japan; Hanaoka's pin drops.",
+  "source": null
+ },
+ {
+  "id": "06-f",
+  "section": "06",
+  "section_name": "Hanaoka, 1804",
   "text": "and the patient was under full general anesthesia while he did it.",
-  "type": "document",
+  "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "document",
    "label": "Two Japanese Pioneers in Anesthesiology",
    "lower": "\"Two Japanese Pioneers in Anesthesiology: Seishū Hanaoka and Gendai Kamada\" (journal article page)",
-   "asset": "pubmed-ncbi-nlm-nih-gov-28160985"
+   "asset": "pubmed-ncbi-nlm-nih-gov-28160985",
+   "zoom": {
+    "scale": 1.5,
+    "x": 50,
+    "y": 18
+   }
   },
-  "visual": "Journal page on Hanaoka.",
+  "visual": "Journal article page, push-in on the title.",
   "source": {
    "institution": "PubMed (National Library of Medicine)",
    "item": "Two Japanese Pioneers in Anesthesiology: Seishū Hanaoka and Gendai Kamada (PubMed 28160985)",
@@ -1065,96 +1471,72 @@
   "notes": "Document only. Do NOT use the Wellcome or Commons Hanaoka casebook illustrations, which depict the operation."
  },
  {
-  "id": "06-f",
-  "section": "06",
-  "section_name": "Hanaoka, 1804",
-  "text": "And full general anesthesia means exactly what it sounds like, the patient isn't just numbed in one spot,",
-  "type": "compare",
-  "template": "compare",
-  "fields": {
-   "left_title": "Not this",
-   "left_lines": [
-    "Numbed in one spot"
-   ],
-   "right_title": "Full general anesthesia",
-   "right_lines": [
-    "The patient is completely out for the operation"
-   ],
-   "step": 1
-  },
-  "visual": "Compare card, left side first: numbed in one spot.",
-  "source": null
- },
- {
   "id": "06-g",
   "section": "06",
   "section_name": "Hanaoka, 1804",
-  "text": "the patient is completely out for the operation.",
-  "type": "compare",
-  "template": "compare",
+  "text": "And full general anesthesia means exactly what it sounds like, the patient isn't just numbed in one spot,",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "left_title": "Not this",
-   "left_lines": [
-    "Numbed in one spot"
-   ],
-   "right_title": "Full general anesthesia",
-   "right_lines": [
-    "The patient is completely out for the operation"
-   ],
-   "step": 2
+   "scene": "anesthesia",
+   "tag": "ILLUSTRATION · Simplified diagram",
+   "params": {}
   },
-  "visual": "Same compare card, right side now showing.",
+  "visual": "Two simple head icons: numbed in one spot, versus completely out.",
   "source": null
  },
  {
   "id": "06-h",
   "section": "06",
   "section_name": "Hanaoka, 1804",
-  "text": "And he didn't use ether, he used an herbal mix,",
-  "type": "archival",
-  "template": "archival",
+  "text": "the patient is completely out for the operation.",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "kind": "portrait",
-   "label": "Hanaoka Seishu",
-   "lower": "Hanaoka Seishu",
-   "asset": "commons-wikimedia-org-wiki-file-hanaokaseishu-gif"
+   "scene": "anesthesia",
+   "tag": "ILLUSTRATION · Simplified diagram",
+   "params": {}
   },
-  "visual": "Hanaoka portrait again.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:HanaokaSeishu.gif",
-   "url": "https://commons.wikimedia.org/wiki/File:HanaokaSeishu.gif",
-   "rights": "Public domain (Commons states a faithful reproduction of a 2D work whose author died more than 70 years ago)",
-   "credit": "Wikimedia Commons, File:HanaokaSeishu.gif",
-   "verified": true
-  },
-  "notes": "Second use, separated by five beats."
+  "visual": "Same two-icon scene held; the completely-out side lands as the words are spoken.",
+  "source": null
  },
  {
   "id": "06-i",
   "section": "06",
   "section_name": "Hanaoka, 1804",
-  "text": "a preparation called mafutsusan, which you'll also see called tsusensan,",
-  "type": "document",
-  "template": "archival",
+  "text": "And he didn't use ether, he used an herbal mix,",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "kind": "document",
-   "label": "Development of Mafutsusan by Seishu Hanaoka",
-   "lower": "\"Development of Mafutsusan by Seishu Hanaoka and General Anesthetics...\" (journal article page)",
-   "asset": "pubmed-ncbi-nlm-nih-gov-30549786"
+   "scene": "herbal",
+   "tag": "ILLUSTRATION · Simplified, not the actual ingredients",
+   "params": {
+    "title": "An herbal mix"
+   }
   },
-  "visual": "Journal page on mafutsusan.",
-  "source": {
-   "institution": "PubMed (National Library of Medicine)",
-   "item": "Development of Mafutsusan by Seishu Hanaoka and General Anesthetics in the Very Early Part of the 19th Century in Japan (PubMed 30549786)",
-   "url": "https://pubmed.ncbi.nlm.nih.gov/30549786/",
-   "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "PubMed, NLM",
-   "verified": false
-  }
+  "visual": "Mortar and pestle with leaves: an herbal mix.",
+  "source": null
  },
  {
   "id": "06-j",
+  "section": "06",
+  "section_name": "Hanaoka, 1804",
+  "text": "a preparation called mafutsusan, which you'll also see called tsusensan,",
+  "type": "scene",
+  "template": "scene",
+  "fields": {
+   "scene": "herbal",
+   "tag": "ILLUSTRATION · Simplified, not the actual ingredients",
+   "params": {
+    "title": "An herbal mix",
+    "caption": "mafutsusan, also called tsusensan"
+   }
+  },
+  "visual": "Same mortar and pestle held; the two names appear as a caption.",
+  "source": null
+ },
+ {
+  "id": "06-k",
   "section": "06",
   "section_name": "Hanaoka, 1804",
   "text": "so this is a completely different road to the same place,",
@@ -1169,14 +1551,13 @@
    "right_title": "Long, 1842",
    "right_lines": [
     "Ether"
-   ],
-   "step": 2
+   ]
   },
-  "visual": "Compare card: herbal mix against ether.",
+  "visual": "Two columns: herbal mix versus ether.",
   "source": null
  },
  {
-  "id": "06-k",
+  "id": "06-l",
   "section": "06",
   "section_name": "Hanaoka, 1804",
   "text": "and it's full general anesthesia, on a named patient, on a known date, in 1804, in Japan,",
@@ -1186,27 +1567,26 @@
    "title": "Full general anesthesia, 1804",
    "steps": [
     {
-     "label": "Kan Aiya",
-     "sub": "A named patient"
+     "label": "A named patient",
+     "sub": "Kan Aiya"
     },
     {
-     "label": "October 13, 1804",
-     "sub": "A known date"
+     "label": "A known date",
+     "sub": "1804"
     },
     {
-     "label": "Hanaoka Seishu",
-     "sub": "In Japan"
+     "label": "In Japan",
+     "sub": "Hanaoka Seishu"
     }
    ],
-   "step": 3,
-   "highlight": 3,
+   "arrows": false,
    "caption": ""
   },
-  "visual": "Three-box diagram: named patient, known date, Japan.",
+  "visual": "Three boxes pop in: named patient, known date, Japan.",
   "source": null
  },
  {
-  "id": "06-l",
+  "id": "06-m",
   "section": "06",
   "section_name": "Hanaoka, 1804",
   "text": "decades before anybody in Boston or Georgia. So now you've got three dates, right?",
@@ -1217,88 +1597,232 @@
    "pins": [
     {
      "name": "Japan",
-     "lat": 36.2,
-     "lon": 138.25,
-     "first": false
+     "lat": 34.27,
+     "lon": 135.35,
+     "sub": "Hanaoka Seishu",
+     "at": 0.2
     },
     {
-     "name": "Georgia, USA",
-     "lat": 32.68,
-     "lon": -83.22,
-     "first": false
+     "name": "Georgia",
+     "lat": 34.1267,
+     "lon": -83.5903,
+     "at": 2.1,
+     "side": "left"
     },
     {
      "name": "Boston",
-     "lat": 42.36,
-     "lon": -71.06,
-     "first": false
+     "lat": 42.363,
+     "lon": -71.0688,
+     "at": 2.5
     }
    ],
-   "connect": false,
-   "caption": "Japan, Georgia and Boston"
-  },
-  "visual": "Schematic world map with three pins.",
-  "source": null,
-  "notes": "Pins are region and city centers (Japan, Georgia state, Boston), not exact sites; the script names no towns. Pin 'first' left false for all."
- },
- {
-  "id": "06-m",
-  "section": "06",
-  "section_name": "Hanaoka, 1804",
-  "text": "1804 in Japan, 1842 in Georgia, and 1846 in Boston,",
-  "type": "timeline",
-  "template": "timeline",
-  "fields": {
-   "title": "Three dates",
-   "events": [
+   "routes": [],
+   "labels": [
     {
-     "date": "1804",
-     "label": "Japan: Hanaoka Seishu"
+     "name": "Atlantic Ocean",
+     "lat": 22,
+     "lon": -45,
+     "kind": "sea",
+     "size": 40
     },
     {
-     "date": "1842",
-     "label": "Georgia: Crawford Long (38 years later)"
+     "name": "Pacific Ocean",
+     "lat": 14,
+     "lon": 165,
+     "kind": "sea",
+     "size": 40
     },
     {
-     "date": "1846",
-     "label": "Boston: William Morton (4 years later)"
+     "name": "North America",
+     "lat": 50,
+     "lon": -105,
+     "kind": "region",
+     "size": 44
+    },
+    {
+     "name": "Europe",
+     "lat": 52,
+     "lon": 12,
+     "kind": "region",
+     "size": 40
+    },
+    {
+     "name": "Asia",
+     "lat": 50,
+     "lon": 88,
+     "kind": "region",
+     "size": 44
     }
    ],
-   "highlight": "1804",
-   "step": 3,
-   "scale": "years"
+   "from": {
+    "lat": 34.27,
+    "lon": 135.35,
+    "span": 4
+   },
+   "span": 10,
+   "rivers": false,
+   "note": "Coastlines: Natural Earth · places approximate"
   },
-  "visual": "Timeline of the three dates.",
+  "visual": "World map: the camera zooms out from Japan; Georgia and Boston pins drop in as they are named.",
   "source": null
  },
  {
   "id": "06-n",
   "section": "06",
   "section_name": "Hanaoka, 1804",
-  "text": "and the one everybody knows is the last one.",
-  "type": "timeline",
-  "template": "timeline",
+  "text": "1804 in Japan, 1842 in Georgia, and 1846 in Boston,",
+  "type": "pinmap",
+  "template": "pinmap",
   "fields": {
-   "title": "Three dates",
-   "events": [
+   "title": "Three places",
+   "pins": [
     {
-     "date": "1804",
-     "label": "Japan: Hanaoka Seishu"
+     "name": "Japan",
+     "lat": 34.27,
+     "lon": 135.35,
+     "sub": "Hanaoka Seishu, 1804",
+     "at": 0.1
     },
     {
-     "date": "1842",
-     "label": "Georgia: Crawford Long (38 years later)"
+     "name": "Georgia",
+     "lat": 34.1267,
+     "lon": -83.5903,
+     "sub": "Crawford Long, 1842",
+     "at": 1.15,
+     "side": "left"
     },
     {
-     "date": "1846",
-     "label": "Boston: William Morton (4 years later)"
+     "name": "Boston",
+     "lat": 42.363,
+     "lon": -71.0688,
+     "sub": "William Morton, 1846",
+     "at": 2.3
     }
    ],
-   "highlight": "1846",
-   "step": 3,
-   "scale": "years"
+   "routes": [],
+   "labels": [
+    {
+     "name": "Atlantic Ocean",
+     "lat": 22,
+     "lon": -45,
+     "kind": "sea",
+     "size": 40
+    },
+    {
+     "name": "Pacific Ocean",
+     "lat": 14,
+     "lon": 165,
+     "kind": "sea",
+     "size": 40
+    },
+    {
+     "name": "North America",
+     "lat": 50,
+     "lon": -105,
+     "kind": "region",
+     "size": 44
+    },
+    {
+     "name": "Europe",
+     "lat": 52,
+     "lon": 12,
+     "kind": "region",
+     "size": 40
+    },
+    {
+     "name": "Asia",
+     "lat": 50,
+     "lon": 88,
+     "kind": "region",
+     "size": 44
+    }
+   ],
+   "from": false,
+   "span": 10,
+   "rivers": false,
+   "note": "Coastlines: Natural Earth · places approximate"
   },
-  "visual": "Same timeline, highlight moves to 1846.",
+  "visual": "Same world map held: each pin picks up its year as it is spoken.",
+  "source": null
+ },
+ {
+  "id": "06-o",
+  "section": "06",
+  "section_name": "Hanaoka, 1804",
+  "text": "and the one everybody knows is the last one.",
+  "type": "pinmap",
+  "template": "pinmap",
+  "fields": {
+   "title": "Three places",
+   "pins": [
+    {
+     "name": "Japan",
+     "lat": 34.27,
+     "lon": 135.35,
+     "sub": "Hanaoka Seishu, 1804",
+     "at": 0.1
+    },
+    {
+     "name": "Georgia",
+     "lat": 34.1267,
+     "lon": -83.5903,
+     "sub": "Crawford Long, 1842",
+     "at": 0.2,
+     "side": "left"
+    },
+    {
+     "name": "Boston",
+     "lat": 42.363,
+     "lon": -71.0688,
+     "sub": "William Morton, 1846",
+     "at": 0.3,
+     "pulse": true
+    }
+   ],
+   "routes": [],
+   "labels": [
+    {
+     "name": "Atlantic Ocean",
+     "lat": 22,
+     "lon": -45,
+     "kind": "sea",
+     "size": 40
+    },
+    {
+     "name": "Pacific Ocean",
+     "lat": 14,
+     "lon": 165,
+     "kind": "sea",
+     "size": 40
+    },
+    {
+     "name": "North America",
+     "lat": 50,
+     "lon": -105,
+     "kind": "region",
+     "size": 44
+    },
+    {
+     "name": "Europe",
+     "lat": 52,
+     "lon": 12,
+     "kind": "region",
+     "size": 40
+    },
+    {
+     "name": "Asia",
+     "lat": 50,
+     "lon": 88,
+     "kind": "region",
+     "size": 44
+    }
+   ],
+   "from": false,
+   "span": 10,
+   "rivers": false,
+   "note": "Coastlines: Natural Earth · places approximate"
+  },
+  "visual": "Same world map held; the Boston pin pulses.",
   "source": null
  },
  {
@@ -1312,9 +1836,15 @@
    "kind": "portrait",
    "label": "William T. G. Morton",
    "lower": "William T. G. Morton",
-   "asset": "wellcomecollection-org-works-esemf62n"
+   "asset": "wellcomecollection-org-works-esemf62n",
+   "crop": "Lower, off-centre crop.",
+   "zoom": {
+    "scale": 1.35,
+    "x": 62,
+    "y": 55
+   }
   },
-  "visual": "Morton portrait.",
+  "visual": "Portrait of William Morton, a looser crop than the earlier ones, slow push-in.",
   "source": {
    "institution": "Wellcome Collection",
    "item": "M0002620: Portrait of William T. G. Morton (1819-1868)",
@@ -1322,32 +1852,21 @@
    "rights": "Rights not stated in the search result; confirm on the item page before use. Do NOT use sibling item M0008841, which Wellcome marks \"In copyright\".",
    "credit": "Wellcome Collection",
    "verified": false
-  },
-  "notes": "Fourth use, separated."
+  }
  },
  {
   "id": "07-b",
   "section": "07",
   "section_name": "Who Was First",
   "text": "is the one in the textbooks, and it earned that spot by being public.",
-  "type": "archival",
-  "template": "archival",
+  "type": "text",
+  "template": "text",
   "fields": {
-   "kind": "engraving",
-   "label": "Massachusetts General Hospital, Boston",
-   "lower": "Massachusetts General Hospital, Boston (later engraving, c. 1857-1860; building shown)",
-   "asset": "ark-digitalcommonwealth-org-ark-50959-cn69mw38z"
+   "headline": "It earned that spot by being public",
+   "sub": "The one in the textbooks"
   },
-  "visual": "Hospital engraving.",
-  "source": {
-   "institution": "Digital Commonwealth (Boston Public Library, Boston Pictorial Archive)",
-   "item": "Massachusetts General Hospital, Boston (engraving by Reuben Carpenter, c. 1857-1860)",
-   "url": "https://ark.digitalcommonwealth.org/ark:/50959/cn69mw38z",
-   "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Boston Public Library via Digital Commonwealth",
-   "verified": false
-  },
-  "notes": "Second use, far from the first."
+  "visual": "Kinetic card.",
+  "source": null
  },
  {
   "id": "07-c",
@@ -1358,20 +1877,26 @@
   "template": "archival",
   "fields": {
    "kind": "engraving",
-   "label": "Crawford W. Long, engraving c. 1877",
-   "lower": "Crawford Long (engraving, c. 1877)",
-   "asset": "collections-countway-harvard-edu-onview-items-show-18110"
+   "label": "Crawford W. Long",
+   "lower": "Crawford Long (engraving)",
+   "asset": "loc-gov-item-2005691407",
+   "crop": "Tight crop on the face, different from the opening.",
+   "zoom": {
+    "scale": 1.7,
+    "x": 50,
+    "y": 33
+   }
   },
-  "visual": "Long engraving.",
+  "visual": "Portrait of Crawford Long, a tighter crop than the opening, slow push-in.",
   "source": {
-   "institution": "Countway Library of Medicine (Harvard), OnView Portrait Collection",
-   "item": "Crawford W. Long, M.D. Discoverer of anaesthesia demonstrated on James M. Venables by the use of sulphuric ether at Jefferson, Jackson Co., Georgia, March 30th, 1842 (engraving, c. 1877)",
-   "url": "https://collections.countway.harvard.edu/onview/items/show/18110",
+   "institution": "Library of Congress, Prints and Photographs Division",
+   "item": "[Dr. Crawford W. Long, bust] (engraving by R. O'Brien, digital ID cph 3a37145)",
+   "url": "https://www.loc.gov/item/2005691407",
    "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Countway Library, Portrait Collection M-CL02, box 99, f. 16",
+   "credit": "Library of Congress Prints and Photographs Division, LCCN 2005691407",
    "verified": false
   },
-  "notes": "Crop to the portrait, caption excluded."
+  "notes": "Portrait only. No surgical imagery. Portrait only. No surgical imagery."
  },
  {
   "id": "07-d",
@@ -1381,31 +1906,37 @@
   "type": "datecard",
   "template": "datecard",
   "fields": {
+   "kicker": "Operation versus publication",
    "left_label": "Long's operation",
    "left_date": "March 30, 1842",
    "right_label": "Long publishes",
    "right_date": "1849",
    "gap": "Didn't publish until 1849",
-   "kicker": "Operation versus publication",
    "firsttag": false
   },
-  "visual": "Two-date card: 1842 operation, 1849 publication.",
+  "visual": "Line draws from March 30, 1842 to 1849, then the gap label.",
   "source": null
  },
  {
   "id": "07-e",
   "section": "07",
   "section_name": "Who Was First",
-  "text": "And on October 13th, 1804, Hanaoka Seishu had already operated on Kan Aiya",
+  "text": "And in 1804, Hanaoka Seishu had already operated on Kan Aiya",
   "type": "archival",
   "template": "archival",
   "fields": {
    "kind": "portrait",
    "label": "Hanaoka Seishu",
    "lower": "Hanaoka Seishu",
-   "asset": "commons-wikimedia-org-wiki-file-hanaokaseishu-gif"
+   "asset": "commons-wikimedia-org-wiki-file-hanaokaseishu-gif",
+   "crop": "Tighter crop on the face, different from the first use.",
+   "zoom": {
+    "scale": 1.7,
+    "x": 52,
+    "y": 30
+   }
   },
-  "visual": "Hanaoka portrait.",
+  "visual": "Portrait of Hanaoka Seishu, a tighter crop, slow push-in.",
   "source": {
    "institution": "Wikimedia Commons",
    "item": "File:HanaokaSeishu.gif",
@@ -1413,8 +1944,7 @@
    "rights": "Public domain (Commons states a faithful reproduction of a 2D work whose author died more than 70 years ago)",
    "credit": "Wikimedia Commons, File:HanaokaSeishu.gif",
    "verified": true
-  },
-  "notes": "Third use, separated."
+  }
  },
  {
   "id": "07-f",
@@ -1424,15 +1954,15 @@
   "type": "datecard",
   "template": "datecard",
   "fields": {
+   "kicker": "Full general anesthesia, before Boston",
    "left_label": "Hanaoka Seishu, Japan",
-   "left_date": "October 13, 1804",
+   "left_date": "1804",
    "right_label": "Public demonstration, Boston",
    "right_date": "October 16, 1846",
    "gap": "42 years",
-   "kicker": "Full general anesthesia, before Boston",
    "firsttag": false
   },
-  "visual": "Two-date card: 1804 against 1846, 42 years.",
+  "visual": "Line draws from 1804 to October 16, 1846, then the gap label: 42 years.",
   "source": null
  },
  {
@@ -1440,60 +1970,72 @@
   "section": "07",
   "section_name": "Who Was First",
   "text": "Somebody did it first, and in this story it was a surgeon in Japan,",
-  "type": "archival",
-  "template": "archival",
+  "type": "timeline",
+  "template": "timeline",
   "fields": {
-   "kind": "portrait",
-   "label": "Hanaoka Seishu",
-   "lower": "Hanaoka Seishu",
-   "asset": "commons-wikimedia-org-wiki-file-hanaokaseishu-gif"
+   "title": "Somebody did it first",
+   "events": [
+    {
+     "date": "1804",
+     "label": "Hanaoka Seishu, Japan"
+    },
+    {
+     "date": "1842",
+     "label": "Crawford Long, Georgia"
+    }
+   ],
+   "highlight": 0,
+   "step": 1,
+   "scale": "years"
   },
-  "visual": "Hanaoka portrait as the surgeon in Japan.",
-  "source": {
-   "institution": "Wikimedia Commons",
-   "item": "File:HanaokaSeishu.gif",
-   "url": "https://commons.wikimedia.org/wiki/File:HanaokaSeishu.gif",
-   "rights": "Public domain (Commons states a faithful reproduction of a 2D work whose author died more than 70 years ago)",
-   "credit": "Wikimedia Commons, File:HanaokaSeishu.gif",
-   "verified": true
-  },
-  "notes": "Fourth use, separated."
+  "visual": "Timeline spaced by years: 1804, Hanaoka Seishu in Japan, lands first and is highlighted.",
+  "source": null
  },
  {
   "id": "07-h",
   "section": "07",
   "section_name": "Who Was First",
   "text": "and then a country doctor in Georgia,",
-  "type": "archival",
-  "template": "archival",
+  "type": "timeline",
+  "template": "timeline",
   "fields": {
-   "kind": "engraving",
-   "label": "Crawford W. Long",
-   "lower": "Crawford Long (engraving)",
-   "asset": "loc-gov-item-2005691407"
+   "title": "Somebody did it first",
+   "events": [
+    {
+     "date": "1804",
+     "label": "Hanaoka Seishu, Japan"
+    },
+    {
+     "date": "1842",
+     "label": "Crawford Long, Georgia"
+    }
+   ],
+   "highlight": 1,
+   "step": 2,
+   "scale": "years"
   },
-  "visual": "Long portrait.",
-  "source": {
-   "institution": "Library of Congress, Prints and Photographs Division",
-   "item": "[Dr. Crawford W. Long, bust] (engraving by R. O'Brien, digital ID cph 3a37145)",
-   "url": "https://www.loc.gov/item/2005691407",
-   "rights": "Rights not stated in the search result; confirm on the item page before use",
-   "credit": "Library of Congress Prints and Photographs Division, LCCN 2005691407",
-   "verified": false
-  }
+  "visual": "Same timeline: 1804 already shown, 1842 Crawford Long drops in.",
+  "source": null
  },
  {
   "id": "07-i",
   "section": "07",
   "section_name": "Who Was First",
   "text": "and the next time you see Doctors' Day on March 30th,",
-  "type": "date",
-  "template": "date",
+  "type": "scene",
+  "template": "scene",
   "fields": {
-   "date": "March 30",
-   "caption": "National Doctors' Day"
+   "scene": "calendar",
+   "tag": "ILLUSTRATION · Calendar page, simplified",
+   "params": {
+    "month": "March",
+    "day": 30,
+    "flips": 4,
+    "title": "National Doctors' Day",
+    "caption": "The next time you see it"
+   }
   },
-  "visual": "Date card: March 30.",
+  "visual": "Tear-off calendar flips to March 30 again, echoing the opening.",
   "source": null
  },
  {
@@ -1506,7 +2048,7 @@
   "fields": {
    "line": "March 30: the date of Crawford Long's operation"
   },
-  "visual": "End card.",
+  "visual": "End card stamps in.",
   "source": null
  }
 ]

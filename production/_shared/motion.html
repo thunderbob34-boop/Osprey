@@ -1,0 +1,436 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;800;900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#EFE7D6;--paper2:#E4D9C2;--ink:#1D1B18;--muted:#5E564A;--red:#A8261B;--gold:#9A7B3C;--blue:#2F5D7C;--rule:#C9BBA0;
+    --serif:'Libre Baskerville',Georgia,serif;--sans:'Inter',Arial,sans-serif;--mono:'IBM Plex Mono',monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--paper)}
+  body{color:var(--ink);font-family:var(--serif);position:relative}
+  #stage{position:absolute;inset:0;transform-origin:50% 50%}
+  #vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(60,40,10,.20) 100%);z-index:50}
+  #grain{position:absolute;inset:0;pointer-events:none;z-index:49;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+  .frame{position:absolute;inset:56px;border:2px solid var(--rule)}
+  .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 200px}
+  .kicker{font-family:var(--sans);font-weight:600;letter-spacing:.28em;text-transform:uppercase;font-size:26px;color:var(--muted)}
+  .rule{height:4px;background:var(--red);margin:34px auto;width:0}
+  h1{font-size:96px;line-height:1.08;font-weight:700}
+  h2{font-size:76px;line-height:1.15;font-weight:700}
+  .w{display:inline-block;opacity:0;will-change:transform}
+  .sub{font-family:var(--serif);font-style:italic;font-size:42px;color:var(--muted);line-height:1.35;opacity:0}
+  .bigdate{font-family:var(--serif);font-size:170px;font-weight:700;line-height:1}
+  .q{font-family:var(--serif);font-style:italic;font-size:76px;line-height:1.25;max-width:1500px}
+  .qm{font-family:var(--serif);font-size:260px;color:var(--red);line-height:.6;height:120px}
+  .attr{font-family:var(--sans);font-weight:600;font-size:32px;color:var(--muted);margin-top:44px;letter-spacing:.06em;opacity:0}
+  .cols{position:absolute;inset:150px 160px;display:grid;grid-template-columns:1fr 4px 1fr;gap:80px;align-items:center}
+  .col h3{font-family:var(--sans);font-weight:800;font-size:58px;margin-bottom:34px}
+  .col p{font-family:var(--serif);font-size:46px;line-height:1.45}
+  .vr{background:var(--rule);height:0;align-self:center}
+  .lower{position:absolute;left:96px;right:96px;bottom:96px;background:rgba(29,27,24,.9);color:#F3ECDD;font-family:var(--serif);font-size:44px;line-height:1.3;padding:22px 34px;border-left:8px solid var(--red);z-index:5}
+  .credit{position:absolute;right:70px;bottom:40px;font-family:var(--sans);font-size:20px;color:rgba(243,236,221,.8);text-shadow:0 1px 3px #000;z-index:5}
+  .phbox{position:absolute;inset:90px;border:4px dashed #8B8170;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 140px}
+  .phtag{font-family:var(--mono);font-size:30px;letter-spacing:.2em;color:#E0B85A}
+  .phlabel{font-family:var(--serif);font-size:62px;font-weight:700;margin-top:30px;line-height:1.2;color:#EDE6D6}
+  .phsrc{font-family:var(--sans);font-size:28px;color:#B9AF9C;margin-top:34px;line-height:1.5;max-width:1400px}
+  .tag{position:absolute;right:80px;top:60px;text-align:right;font-family:var(--sans);font-weight:600;font-size:24px;letter-spacing:.08em;color:var(--muted);z-index:6}
+  svg text{font-family:var(--sans)}
+</style>
+</head>
+<body>
+<div id="stage"></div><div id="grain"></div><div id="vig"></div>
+<script>
+// ---------- data + helpers ----------
+const D = JSON.parse(decodeURIComponent(escape(atob(location.hash.slice(1)))));
+const f = D.fields || {};
+const DUR = D.dur || 5;
+const stage = document.getElementById('stage');
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const clamp = (x,a=0,b=1) => Math.max(a,Math.min(b,x));
+const seg = (t,a,b) => clamp((t-a)/Math.max(1e-6,b-a));
+const lerp = (a,b,p) => a+(b-a)*p;
+const eOut = p => 1-Math.pow(1-p,3);
+const eIn = p => p*p*p;
+const eIO = p => p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const eBack = p => { const c1=1.70158,c3=c1+1; return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2); };
+const T = (x,y,s,size=34,anchor='middle',w=600,fill='#1D1B18',extra='') => `<text x="${x}" y="${y}" font-size="${size}" font-weight="${w}" text-anchor="${anchor}" fill="${fill}" ${extra}>${esc(s)}</text>`;
+const TH = (x,y,s,size=34,anchor='middle',w=800,fill='#1D1B18') => `<text x="${x}" y="${y}" font-size="${size}" font-weight="${w}" text-anchor="${anchor}" fill="${fill}" stroke="#EFE7D6" stroke-width="9" paint-order="stroke" stroke-linejoin="round">${esc(s)}</text>`;
+const words = (s, cls='w') => esc(s).split(/\s+/).map(w=>`<span class="${cls}">${w}</span>`).join(' ');
+const drift = (t, amt=.035) => { stage.style.transform = `scale(${1+amt*eIO(clamp(t/DUR))})`; };
+// reveal spans in sequence
+function revealWords(sel, t, t0, gap=.07, len=.35){ const W=[...document.querySelectorAll(sel)]; W.forEach((w,i)=>{ const p=eOut(seg(t,t0+i*gap,t0+i*gap+len)); w.style.opacity=p; w.style.transform=`translateY(${(1-p)*28}px)`; }); return t0+W.length*gap+len; }
+// step semantics: items < step-1 already shown, item step-1 animates in, items >= step ghosted
+function stepState(i, n, t, {t0=.15, stagger=.35, len=.5}={}){
+  if (f.step){ if (i < f.step-1) return 1; if (i === f.step-1) return eOut(seg(t,t0,t0+len)); return -1; }
+  return eOut(seg(t, t0+i*stagger, t0+i*stagger+len));
+}
+const svgOpen = `<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"><defs>
+ <marker id="ar" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" refX="24" refY="15" orient="auto"><path d="M0,0 L30,15 L0,30 z" fill="#1D1B18"/></marker>
+ <marker id="arR" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" refX="24" refY="15" orient="auto"><path d="M0,0 L30,15 L0,30 z" fill="#A8261B"/></marker>
+ <pattern id="stone" width="60" height="30" patternUnits="userSpaceOnUse"><rect width="60" height="30" fill="#CDBF9F"/><path d="M0,15 H60 M30,0 V15 M0,0 V0 M15,15 V30 M45,15 V30" stroke="#A8987A" stroke-width="2"/></pattern>
+ <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B8DB0"/><stop offset="1" stop-color="#2F5D7C"/></linearGradient>
+</defs>`;
+
+// ---------- templates ----------
+const TPL = {};
+
+TPL.title = {
+  setup(){ stage.innerHTML = `<div class="frame"></div><div class="center"><div class="kicker" id="k">Somebody Did It First</div><div class="rule" id="r"></div><h1>${words(f.title)}</h1>${f.subtitle?`<div class="sub" id="s" style="margin-top:28px">${esc(f.subtitle)}</div>`:''}</div>`; },
+  draw(t){ drift(t,.03); k.style.opacity=eOut(seg(t,0,.5)); r.style.width=120*eOut(seg(t,.15,.8))+'px'; const e=revealWords('h1 .w',t,.3,.09,.45); const s=document.getElementById('s'); if(s) s.style.opacity=eOut(seg(t,e,e+.5)); }
+};
+
+TPL.text = {
+  setup(){ stage.innerHTML = `<div class="frame"></div><div class="center"><h2>${words(f.headline)}</h2>${f.sub?`<div class="rule" id="r"></div><div class="sub" id="s">${esc(f.sub)}</div>`:''}</div>`; },
+  draw(t){ drift(t,.04); const e=revealWords('h2 .w',t,.05,.06,.35); const r=document.getElementById('r'); if(r){ r.style.width=120*eOut(seg(t,e-.1,e+.4))+'px'; s.style.opacity=eOut(seg(t,e+.1,e+.6)); } }
+};
+
+TPL.endcard = {
+  setup(){ stage.innerHTML = `<div class="frame"></div><div class="center"><div class="kicker" id="k">Somebody Did It First</div><div class="rule" id="r"></div><h2 id="h">${esc(f.line)}</h2></div>`; },
+  draw(t){ drift(t,.03); k.style.opacity=eOut(seg(t,.6,1.1)); r.style.width=160*eOut(seg(t,.4,1))+'px'; const p=seg(t,0,.45); h.style.transform=`scale(${lerp(1.5,1,eBack(p))}) rotate(${lerp(-5,0,eOut(p))}deg)`; h.style.opacity=eOut(seg(t,0,.25)); }
+};
+
+function countable(s){ const m=String(s).match(/^(\D*?)(\d[\d,]*)(\D*)$/); if(!m) return null; const v=+m[2].replace(/,/g,''); if (v>=1000 && v<=2100 && !/,/.test(m[2])) return null; return {pre:m[1],v,post:m[3],comma:/,/.test(m[2])}; }
+TPL.date = {
+  setup(){ stage.innerHTML = `<div class="frame"></div><div class="center"><div class="bigdate" id="d">${esc(f.date||f.number)}</div><div class="rule" id="r"></div><div class="sub" id="s" style="font-style:normal;color:var(--ink)">${esc(f.caption||f.label||'')}</div>${f.sub?`<div class="sub" id="s2" style="font-size:34px;margin-top:14px">${esc(f.sub)}</div>`:''}</div>`; this.c=countable(f.date||f.number); },
+  draw(t){ drift(t,.035); const p=seg(t,0,.5);
+    if (this.c && D.template==='stat'){ const v=Math.round(this.c.v*eOut(seg(t,0,1.1))); d.textContent=this.c.pre+(this.c.comma?v.toLocaleString('en-US'):v)+this.c.post; d.style.opacity=eOut(seg(t,0,.2)); }
+    else { d.style.transform=`scale(${lerp(1.6,1,eBack(p))}) rotate(${lerp(-4,0,eOut(p))}deg)`; d.style.opacity=eOut(seg(t,0,.2)); }
+    r.style.width=120*eOut(seg(t,.4,.9))+'px'; s.style.opacity=eOut(seg(t,.55,1.05)); const s2=document.getElementById('s2'); if(s2) s2.style.opacity=eOut(seg(t,.8,1.3)); }
+};
+TPL.stat = { setup(){ TPL.date.setup.call(this); this.c=countable(f.number); d.style.color='var(--red)'; }, draw(t){ TPL.date.draw.call(this,t); } };
+
+TPL.quote = {
+  setup(){ stage.innerHTML = `<div class="frame"></div><div class="center"><div class="qm" id="qm">“</div><div class="q">${words(f.quote)}</div><div class="attr" id="a">${esc(f.attribution)}</div></div>`; },
+  draw(t){ drift(t,.03); qm.style.opacity=eOut(seg(t,0,.3)); qm.style.transform=`scale(${lerp(.6,1,eBack(seg(t,0,.4)))})`; const n=document.querySelectorAll('.q .w').length; const gap=Math.min(.16,(DUR*.55)/Math.max(1,n)); const e=revealWords('.q .w',t,.25,gap,.3); a.style.opacity=eOut(seg(t,e,e+.5)); }
+};
+
+TPL.compare = {
+  setup(){ stage.innerHTML = `<div class="cols"><div class="col" id="L"><h3>${esc(f.left_title)}</h3>${(f.left_lines||[]).map(l=>`<p>${esc(l)}</p>`).join('')}</div><div class="vr" id="V"></div><div class="col" id="R"><h3>${esc(f.right_title)}</h3>${(f.right_lines||[]).map(l=>`<p>${esc(l)}</p>`).join('')}</div></div>`; },
+  draw(t){ drift(t,.03);
+    const lp = f.step===2 ? 1 : eOut(seg(t,0,.55)); L.style.opacity=lp; L.style.transform=`translateX(${(1-lp)*-60}px)`;
+    V.style.height = (f.step===2?70:70*eOut(seg(t,.2,.8)))+'%';
+    let rp; if (f.step===1) rp = .13*eOut(seg(t,.4,.9)); else if (f.step===2) rp = lerp(.13,1,eOut(seg(t,.1,.7))); else rp = eOut(seg(t,.6,1.15));
+    R.style.opacity=rp; R.style.transform=`translateX(${(1-Math.min(1,rp/ (f.step===1?.13:1)))*60}px)`; }
+};
+
+TPL.datecard = {
+  setup(){ stage.innerHTML = svgOpen+`<g id="g"></g></svg>`; },
+  draw(t){ drift(t,.03); const x0=330,x1=1590,y=600;
+    const lp=eOut(seg(t,.1,1.0)); const pinL=eBack(seg(t,.05,.45)), pinR=eBack(seg(t,.9,1.3)); const gp=eOut(seg(t,1.2,1.7));
+    const ll=eOut(seg(t,.2,.6)), rl=eOut(seg(t,1.0,1.4));
+    g.innerHTML = `${T(960,170,(f.kicker||'').toUpperCase(),28,'middle',600,'#5E564A','letter-spacing="7"')}
+      <line x1="${x0}" y1="${y}" x2="${lerp(x0,x1,lp)}" y2="${y}" stroke="#1D1B18" stroke-width="6"/>
+      <circle cx="${x0}" cy="${y}" r="${26*pinL}" fill="#A8261B"/>
+      <circle cx="${x1}" cy="${y}" r="${26*pinR}" fill="#EFE7D6" stroke="#1D1B18" stroke-width="6" opacity="${pinR>0?1:0}"/>
+      <g opacity="${ll}" transform="translate(0,${(1-ll)*20})">${T(x0,y-150,f.left_label,38,'middle',800)}${T(x0,y-70,f.left_date,66,'middle',700,'#1D1B18','font-family="Libre Baskerville"')}</g>
+      <g opacity="${rl}" transform="translate(0,${(1-rl)*20})">${T(x1,y-150,f.right_label,38,'middle',800)}${T(x1,y-70,f.right_date,66,'middle',700,'#1D1B18','font-family="Libre Baskerville"')}</g>
+      <g opacity="${gp}"><path d="M${x0},${y+60} v20 H${x1} v-20" fill="none" stroke="#A8261B" stroke-width="4"/>${T(960,y+150,(f.gap||'').toUpperCase(),50,'middle',900,'#A8261B','letter-spacing="4"')}</g>`; }
+};
+
+TPL.flow = {
+  setup(){ stage.innerHTML = svgOpen+`<g id="g"></g></svg>`; this.n=(f.steps||[]).length; },
+  draw(t){ drift(t,.03); const st=f.steps||[], n=st.length; const G=f.arrows===false?50:70; const W=Math.min(500,(1760-(n-1)*G)/n); const x0=(1920-(n*W+(n-1)*G))/2;
+    const fl=W>=420?42:W>=330?36:30, fs=W>=420?30:W>=330?27:23; let out=T(960,170,(f.title||'').toUpperCase(),40,'middle',800);
+    st.forEach((s,i)=>{ const x=x0+i*(W+G); let p=stepState(i,n,t,{t0:.15,stagger:Math.min(.5,(DUR*.5)/n)}); const ghost=p<0; const vis=ghost?.13:p; const sc=ghost?1:lerp(.8,1,eBack(Math.max(0,p)));
+      const hi=f.highlight===i && !ghost; const pulse=hi?(1+.03*Math.sin(t*5)):1;
+      out+=`<g opacity="${vis}" transform="translate(${x+W/2},520) scale(${sc*pulse}) translate(${-(x+W/2)},-520)"><rect x="${x}" y="390" width="${W}" height="260" rx="14" fill="${hi?'#F2C14E':'#EFE7D6'}" stroke="#1D1B18" stroke-width="5"/>
+      <foreignObject x="${x+14}" y="400" width="${W-28}" height="240"><div xmlns="http://www.w3.org/1999/xhtml" style="height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font:800 ${fl}px Inter,Arial;color:#1D1B18;line-height:1.15">${esc(s.label)}${s.sub?`<div style="font:600 ${fs}px Inter,Arial;color:#4A443A;margin-top:12px;line-height:1.25">${esc(s.sub)}</div>`:''}</div></foreignObject></g>`;
+      if(i<n-1 && f.arrows!==false){ const q=stepState(i+1,n,t,{t0:.15,stagger:Math.min(.5,(DUR*.5)/n)}); const a=q<0?0:clamp(q*1.5); if(a>0) out+=`<line x1="${x+W+6}" y1="520" x2="${x+W+6+(G-14)*a}" y2="520" stroke="#1D1B18" stroke-width="5" ${a>.6?'marker-end="url(#ar)"':''}/>`; }
+    });
+    if (f.caption) out+=`<g opacity="${eOut(seg(t,.8,1.3))}">${T(960,800,f.caption,36,'middle',600,'#5E564A')}</g>`;
+    g.innerHTML=out; }
+};
+
+function yearOf(s){ const m=String(s).match(/(\d{3,4})/); if(!m) return NaN; let y=+m[1]; if(/BC/i.test(s)) y=-y; return y; }
+TPL.timeline = {
+  setup(){ stage.innerHTML = svgOpen+`<g id="g"></g></svg>`; },
+  draw(t){ drift(t,.03); const E=f.events||[], n=E.length, x0=290, x1=1630, y=560;
+    const yr=E.map(e=>yearOf(e.date)); const prop=f.scale==='years'&&yr.every(v=>!isNaN(v));
+    const X=i=> n<2?960: prop? x0+(yr[i]-yr[0])*(x1-x0)/(yr[n-1]-yr[0]) : x0+i*(x1-x0)/(n-1);
+    const axis = f.step&&f.step>1 ? 1 : eIO(seg(t,0,Math.min(1.6,DUR*.45)));
+    const ax=lerp(x0-60,x1+60,axis);
+    let out=T(960,170,(f.title||'').toUpperCase(),38,'middle',800)+`<line x1="${x0-60}" y1="${y}" x2="${ax}" y2="${y}" stroke="#1D1B18" stroke-width="5"/>`;
+    E.forEach((e,i)=>{ const x=X(i); let p;
+      if (f.step){ p = i<f.step-1?1 : i===f.step-1 ? eOut(seg(t, f.step>1?.15:(x-x0+60)/(x1-x0+120)*Math.min(1.6,DUR*.45), (f.step>1?.15:(x-x0+60)/(x1-x0+120)*Math.min(1.6,DUR*.45))+.5)) : -1; }
+      else { const ta=(x-(x0-60))/(x1-x0+120)*Math.min(1.6,DUR*.45); p=eOut(seg(t,ta,ta+.5)); }
+      const ghost=p<0, vis=ghost?.13:p; const hi=(f.highlight===i||(f.highlight!=null&&String(f.highlight)===String(e.date)))&&!ghost; const up=i%2===0;
+      const ring = hi ? `<circle cx="${x}" cy="${y}" r="${24+30*((t*.8)%1)}" fill="none" stroke="#A8261B" stroke-width="4" opacity="${1-((t*.8)%1)}"/>` : '';
+      out+=`<g opacity="${vis}">${ring}<circle cx="${x}" cy="${y}" r="${(hi?24:16)*(ghost?1:eBack(Math.max(0,p)))}" fill="${hi?'#A8261B':'#1D1B18'}"/>
+      <line x1="${x}" y1="${up?536:584}" x2="${x}" y2="${up?lerp(536,470,p<0?1:p):lerp(584,650,p<0?1:p)}" stroke="#5E564A" stroke-width="3"/>
+      ${T(x,up?445:700,e.date,44,'middle',800,hi?'#A8261B':'#1D1B18')}
+      <foreignObject x="${x-180}" y="${up?270:720}" width="360" height="140"><div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font:600 30px Inter,Arial;color:#4A443A;line-height:1.25;${up?'display:flex;flex-direction:column;justify-content:flex-end;height:140px':''}">${esc(e.label)}</div></foreignObject></g>`; });
+    g.innerHTML=out; }
+};
+
+// ---------- archival / illustration placeholder, with Ken Burns ----------
+TPL.archival = {
+  setup(){ const s=D.source||{};
+    if (D.img){ document.body.style.background='#141210'; stage.innerHTML=`<div id="ph" style="position:absolute;inset:0;background:#141210 url('${D.img}') center/contain no-repeat"></div>${f.lower?`<div class="lower" id="lo">${esc(f.lower)}</div>`:''}<div class="credit">${esc(s.credit||s.institution||'')}</div>`; }
+    else { document.body.style.background='#2B2924'; stage.innerHTML=(f.lower?`<div class="lower" id="lo">${esc(f.lower)}</div>`:'')+`<div id="ph" style="position:absolute;inset:0"><div class="phbox"><div class="phtag">${D.template==='illustration'?'ILLUSTRATION · TO GENERATE':'ARCHIVAL '+esc((f.kind||'image').toUpperCase())+' · TO FETCH'}</div>
+      <div class="phlabel">${esc(f.label||f.scene||'')}</div>${f.crop?`<div class="phsrc" style="color:#E0B85A">${esc(f.crop)}</div>`:''}${f.asset?`<div class="phsrc">save as assets/${esc(f.asset)}.jpg</div>`:''}
+      <div class="phsrc">${esc(s.institution||'')}${s.item?' · '+esc(s.item):''}${s.rights?'<br>'+esc(s.rights):''}${s.verified===false?'<br><b style="color:#E0B85A">SOURCE NOT YET CONFIRMED</b>':''}</div></div></div>`; }
+    document.getElementById('vig').style.background='radial-gradient(ellipse at center,rgba(0,0,0,0) 50%,rgba(0,0,0,.35) 100%)';
+  },
+  draw(t){ const z=f.zoom||{}; const s0=z.scale?Math.max(1,z.scale*.92):1.0, s1=z.scale||1.08; const p=eIO(clamp(t/DUR)); const sc=lerp(s0,s1,p);
+    const ox=((z.x??50)-50)*-.6*(sc-1)*19.2, oy=((z.y??50)-50)*-.6*(sc-1)*10.8;
+    ph.style.transform=`translate(${ox}px,${oy}px) scale(${sc})`; const lo=document.getElementById('lo'); if(lo){ const q=eOut(seg(t,.25,.75)); lo.style.opacity=q; lo.style.transform=`translateX(${(1-q)*-80}px)`; } }
+};
+TPL.illustration = TPL.archival;
+
+// ---------- maps ----------
+TPL.pinmap = {
+  setup(){
+    const P=f.pins||[]; const pts=[...P.map(p=>[p.lat,p.lon]),...(f.routes||[]).flatMap(r=>r.points||[]),...(f.labels||[]).filter(l=>l.fit).map(l=>[l.lat,l.lon])];
+    let la0=Math.min(...pts.map(p=>p[0])),la1=Math.max(...pts.map(p=>p[0])),lo0=Math.min(...pts.map(p=>p[1])),lo1=Math.max(...pts.map(p=>p[1]));
+    const padLa=Math.max((la1-la0)*.3,0.03), padLo=Math.max((lo1-lo0)*.3,0.03); la0-=padLa;la1+=padLa;lo0-=padLo;lo1+=padLo;
+    this.k=Math.cos((la0+la1)/2*Math.PI/180); const k=this.k;
+    if(f.span){const ml=(la0+la1)/2, mo=(lo0+lo1)/2, hl=Math.max(la1-la0,f.span)/2, ho=Math.max(lo1-lo0,f.span/k)/2; la0=ml-hl;la1=ml+hl;lo0=mo-ho;lo1=mo+ho;}
+    this.end={lat:(la0+la1)/2, lon:(lo0+lo1)/2, sc:Math.min(1500/((lo1-lo0)*k), 700/(la1-la0))};
+    const fr=f.from; this.start = fr===false ? this.end : fr ? {lat:fr.lat, lon:fr.lon, sc:Math.min(1500/(fr.span/k*1.8), 700/fr.span)} : {lat:this.end.lat, lon:this.end.lon, sc:this.end.sc/3.2};
+    // geometry in lon/lat. Three land resolutions, each drawn only at the zoom levels where it is needed
+    const vw=(c)=>[c.lon-1100/(k*c.sc), c.lon+1100/(k*c.sc), c.lat-650/c.sc, c.lat+650/c.sc];
+    const pathOf=(arr,close,V)=>{ let s=''; for(const r of arr){ let A=1e9,B=-1e9,C=1e9,Dd=-1e9; for(let i=0;i<r.length;i+=2){A=Math.min(A,r[i]);B=Math.max(B,r[i]);C=Math.min(C,r[i+1]);Dd=Math.max(Dd,r[i+1]);} if(B<V[0]||A>V[1]||Dd<V[2]||C>V[3]) continue; s+='M'; for(let i=0;i<r.length;i+=2) s+=(i?'L':'')+r[i]+','+r[i+1]; if(close) s+='Z'; } return s; };
+    const scs=[this.start.sc,this.end.sc*1.06]; const lo=Math.min(...scs), hi=Math.max(...scs);
+    const viewAt=sc=>{ const p=(Math.log(sc)-Math.log(this.start.sc))/((Math.log(this.end.sc)-Math.log(this.start.sc))||1); const q=clamp(p); return {lat:lerp(this.start.lat,this.end.lat,q), lon:lerp(this.start.lon,this.end.lon,q), sc}; };
+    const union=(a,b)=>{ const x=vw(viewAt(a)), y=vw(viewAt(b)); return [Math.min(x[0],y[0]),Math.max(x[1],y[1]),Math.min(x[2],y[2]),Math.max(x[3],y[3])]; };
+    this.bands=[[0,25,'LAND110'],[25,180,'LAND50'],[180,1e9,'LAND']].filter(([a,b])=>hi>=a&&lo<b).map(([a,b,key])=>({a,b,d:pathOf(window[key]||[],true,union(Math.max(a,lo),Math.min(b,hi)))}));
+    const V=union(lo,hi);
+    const lakes=(f.rivers===false||hi<40)?'':pathOf(window.LAKES||[],true,union(Math.max(40,lo),hi)), riv=(f.rivers===false||hi<60)?'':pathOf(window.RIVERS||[],false,union(Math.max(60,lo),hi)), bor=(f.borders===false||hi<15)?'':pathOf(window.BORDERS||[],false,union(Math.max(15,lo),hi));
+    stage.innerHTML = svgOpen+`<rect width="1920" height="1080" fill="#CCD6D2"/>
+      <g id="world">${this.bands.map((bd,i)=>`<path id="land${i}" d="${bd.d}" fill="#EFE7D6" stroke="#8B8170" stroke-width="2.2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>`).join('')}
+      <path id="bor" d="${bor}" fill="none" stroke="#B4A688" stroke-width="2" stroke-dasharray="7 6" vector-effect="non-scaling-stroke"/>
+      <path id="lak" d="${lakes}" fill="#CCD6D2" stroke="#8FA6AE" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+      <path id="riv" d="${riv}" fill="none" stroke="#8FB0C0" stroke-width="2.4" vector-effect="non-scaling-stroke" stroke-linecap="round"/></g>
+      <g id="ov"></g>
+      <rect x="0" y="0" width="1920" height="150" fill="#EFE7D6" opacity=".88"/><text x="960" y="98" font-size="44" font-weight="800" text-anchor="middle" fill="#1D1B18" id="ttl">${esc(f.title||'')}</text>
+      ${f.caption?`<rect x="0" y="955" width="1920" height="125" fill="#EFE7D6" opacity=".88"/><text id="cap" x="960" y="1010" font-size="36" font-weight="600" text-anchor="middle" fill="#4A443A">${esc(f.caption)}</text>`:''}
+      <text x="1860" y="1055" font-size="20" font-weight="600" text-anchor="end" fill="#5E564A">${esc(f.note||'Coastlines: Natural Earth · places and routes approximate')}</text>
+      <g transform="translate(1810,230)"><circle r="34" fill="#EFE7D6" stroke="#5E564A" stroke-width="3"/><path d="M0,-26 L10,6 L0,0 L-10,6 Z" fill="#A8261B"/>${T(0,24,'N',20,'middle',800)}</g></svg>`;
+    this.world=document.getElementById('world'); this.ov=document.getElementById('ov');
+    this.arrive = f.from===false ? 0 : Math.min(2.4, DUR*.42);
+    // route lengths
+    this.routes=(f.routes||[]).map((r,ri)=>({...r,ri}));
+    if (f.connect && P.length>1 && !this.routes.length) this.routes=P.slice(1).map((p,i)=>({points:[[P[i].lat,P[i].lon],[p.lat,p.lon]],style:'dash'}));
+  },
+  cam(t){ const p=eIO(seg(t,0,this.arrive||1e-6)); const s0=Math.log(this.start.sc), s1=Math.log(this.end.sc);
+    const sc=Math.exp(lerp(s0,s1,p)) * (1+.05*eIO(seg(t,this.arrive,DUR))); return {lat:lerp(this.start.lat,this.end.lat,p), lon:lerp(this.start.lon,this.end.lon,p), sc}; },
+  draw(t){ const c=this.cam(t), k=this.k; const X=(lat,lon)=>960+(lon-c.lon)*k*c.sc, Y=(lat,lon)=>560-(lat-c.lat)*c.sc;
+    this.world.setAttribute('transform',`matrix(${k*c.sc},0,0,${-c.sc},${960-c.lon*k*c.sc},${560+c.lat*c.sc})`);
+    this.bands.forEach((bd,i)=>{ document.getElementById('land'+i).style.display = (c.sc>=bd.a && c.sc<bd.b) || (this.bands.length===1) ? '' : 'none'; });
+    riv.style.display = c.sc>=60?'':'none'; lak.style.display = c.sc>=40?'':'none'; bor.style.display = c.sc>=15?'':'none';
+    let out='';
+    (f.labels||[]).forEach((l,i)=>{ const p=eOut(seg(t,(l.at??this.arrive*.6)+i*.1,(l.at??this.arrive*.6)+i*.1+.6)); const it=l.kind==='sea'?'font-style="italic" fill="#4F7487"':l.kind==='region'?'fill="#7A6E5C"':'fill="#5E564A"';
+      out+=`<text x="${X(l.lat,l.lon)}" y="${Y(l.lat,l.lon)}" font-size="${l.size||(l.kind==='region'?34:28)}" font-weight="${l.kind==='region'?800:600}" text-anchor="middle" ${it} opacity="${p}" letter-spacing="${l.kind==='region'?6:1}">${esc(l.kind==='region'?l.name.toUpperCase():l.name)}</text>`; });
+    const P=f.pins||[];
+    this.routes.forEach((r,ri)=>{ const at=r.at??(this.arrive+.3+ri*.4); const len=r.dur??Math.max(1.4,Math.min(4,(DUR-at)*.7)); const p=eIO(seg(t,at,at+len)); if(p<=0) return;
+      const pts=r.points.map(q=>[X(q[0],q[1]),Y(q[0],q[1])]); let L=[0]; for(let i=1;i<pts.length;i++) L.push(L[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
+      const tot=L[L.length-1], want=tot*p; let d=`M${pts[0][0]},${pts[0][1]}`, head=pts[0], ang=0;
+      for(let i=1;i<pts.length;i++){ if(L[i]<=want){ d+=`L${pts[i][0]},${pts[i][1]}`; head=pts[i]; ang=Math.atan2(pts[i][1]-pts[i-1][1],pts[i][0]-pts[i-1][0]); } else { const q=(want-L[i-1])/(L[i]-L[i-1]); head=[lerp(pts[i-1][0],pts[i][0],q),lerp(pts[i-1][1],pts[i][1],q)]; ang=Math.atan2(pts[i][1]-pts[i-1][1],pts[i][0]-pts[i-1][0]); d+=`L${head[0]},${head[1]}`; break; } }
+      const col=r.color||'#A8261B';
+      if (r.style==='rail') out+=`<path d="${d}" fill="none" stroke="#1D1B18" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#EFE7D6" stroke-width="5" stroke-dasharray="10 10" stroke-linejoin="round"/>`;
+      else out+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" ${r.style==='dash'?'stroke-dasharray="22 12"':''}/>`;
+      if (r.icon && p<1.0001) out+=icon(r.icon, head[0], head[1], ang);
+      if (r.label){ const lp=eOut(seg(t,at+len*.6,at+len*.6+.6)); const m=pts[Math.floor(pts.length/2)]; out+=`<g opacity="${lp}">${TH(m[0]+(r.lx||30),m[1]+(r.ly||0),r.label,34,r.anchor||'start',800,col)}</g>`; }
+    });
+    P.forEach((p,i)=>{ const at=p.at??(this.arrive*.75+i*.35); const q=seg(t,at,at+.55); if(q<=0) return; const x=X(p.lat,p.lon), y=Y(p.lat,p.lon); const dy=(1-eBack(q))*-60;
+      const right = x+30+String(p.name).length*20 > 1840 || p.side==='left'; const col=p.first?'#A8261B':'#1D1B18';
+      const ring = p.pulse ? `<circle cx="${x}" cy="${y}" r="${18+40*((t*.7)%1)}" fill="none" stroke="${col}" stroke-width="4" opacity="${(1-((t*.7)%1))*.8}"/>` : '';
+      out+=`<g opacity="${clamp(q*3)}">${ring}<g transform="translate(0,${dy})"><circle cx="${x}" cy="${y}" r="17" fill="${col}" stroke="#EFE7D6" stroke-width="5"/></g>
+        ${TH(x+(right?-30:30),y+12+(p.dy||0),p.name,p.size||38,right?'end':'start',800,'#1D1B18')}${p.sub?TH(x+(right?-30:30),y+52+(p.dy||0),p.sub,28,right?'end':'start',600,'#5E564A'):''}</g>`; });
+    this.ov.innerHTML=out;
+  }
+};
+function icon(kind,x,y,ang){ const flip=Math.cos(ang)<0?-1:1;
+  if(kind==='train') return `<g transform="translate(${x},${y}) scale(${flip},1)"><rect x="-34" y="-30" width="50" height="22" rx="10" fill="#1D1B18"/><rect x="6" y="-48" width="9" height="20" fill="#1D1B18"/><rect x="-40" y="-14" width="58" height="8" fill="#1D1B18"/><circle cx="-26" cy="-2" r="9" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/><circle cx="6" cy="-2" r="9" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/><circle cx="18" cy="-58" r="7" fill="#8B8170" opacity=".6"/><circle cx="28" cy="-70" r="9" fill="#8B8170" opacity=".4"/></g>`;
+  if(kind==='ship') return `<g transform="translate(${x},${y}) scale(${flip},1)"><path d="M-34,-6 H34 L22,12 H-24 Z" fill="#1D1B18"/><rect x="-6" y="-40" width="5" height="34" fill="#1D1B18"/><path d="M-1,-40 L26,-14 H-1 Z" fill="#EFE7D6" stroke="#1D1B18" stroke-width="3"/></g>`;
+  if(kind==='dot') return `<circle cx="${x}" cy="${y}" r="12" fill="#A8261B" stroke="#EFE7D6" stroke-width="4"/>`;
+  return '';
+}
+
+// ---------- illustrated scenes ----------
+const SC = {};
+TPL.scene = {
+  setup(){ stage.innerHTML = svgOpen+`<g id="g"></g></svg><div class="tag" id="tg">${esc(f.tag||'ILLUSTRATION')}</div>`; },
+  draw(t){ drift(t,.025); const fn=SC[f.scene]; g.innerHTML = fn ? fn(t, f.params||{}) : T(960,540,'scene: '+f.scene,50); tg.style.opacity=eOut(seg(t,.3,.8)); }
+};
+const titleBar = (t,s) => s ? `<g opacity="${eOut(seg(t,0,.4))}">${T(960,130,s.toUpperCase(),40,'middle',800)}</g>` : '';
+const callout = (t,at,x,y,x2,y2,s,anchor='start',col='#A8261B') => { const p=eOut(seg(t,at,at+.5)); if(p<=0) return ''; return `<g opacity="${p}"><line x1="${x}" y1="${y}" x2="${lerp(x,x2,p)}" y2="${lerp(y,y2,p)}" stroke="${col}" stroke-width="4"/><circle cx="${x}" cy="${y}" r="8" fill="${col}"/>${TH(x2+(anchor==='start'?12:-12),y2+12,s,36,anchor,800,col)}</g>`; };
+const at = (P,key,def) => (P.at&&P.at[key]!=null)?P.at[key]:def;
+
+// a generic early steam engine on a plateway, side view (illustration only)
+function engine(x,y,t,sc=1){ const a=t*220; const spokes=(cx,cy,r)=>[0,45,90,135].map(d=>`<line x1="${cx+r*Math.cos((d+a)*Math.PI/180)}" y1="${cy+r*Math.sin((d+a)*Math.PI/180)}" x2="${cx-r*Math.cos((d+a)*Math.PI/180)}" y2="${cy-r*Math.sin((d+a)*Math.PI/180)}" stroke="#1D1B18" stroke-width="4"/>`).join('');
+  return `<g transform="translate(${x},${y}) scale(${sc})">
+   <rect x="-150" y="-150" width="250" height="110" rx="50" fill="#3A3631" stroke="#1D1B18" stroke-width="5"/>
+   <rect x="60" y="-290" width="26" height="150" fill="#1D1B18"/><rect x="52" y="-300" width="42" height="16" fill="#1D1B18"/>
+   <rect x="-120" y="-178" width="110" height="30" rx="6" fill="#5E564A" stroke="#1D1B18" stroke-width="4"/>
+   <circle cx="-190" cy="-110" r="70" fill="none" stroke="#1D1B18" stroke-width="7"/>${spokes(-190,-110,66)}<circle cx="-190" cy="-110" r="10" fill="#1D1B18"/>
+   <rect x="-160" y="-42" width="290" height="16" fill="#1D1B18"/>
+   <circle cx="-100" cy="-8" r="34" fill="#EFE7D6" stroke="#1D1B18" stroke-width="7"/>${spokes(-100,-8,30)}
+   <circle cx="60" cy="-8" r="34" fill="#EFE7D6" stroke="#1D1B18" stroke-width="7"/>${spokes(60,-8,30)}
+   ${[0,1,2].map(i=>{const q=((t*.9+i/3)%1); return `<circle cx="${73+q*-120}" cy="${-310-q*170}" r="${18+q*45}" fill="#8B8170" opacity="${.5*(1-q)}"/>`;}).join('')}</g>`; }
+function wagon(x,y,t,load,men){ const a=t*220; const sp=(cx,cy,r)=>[0,60,120].map(d=>`<line x1="${cx+r*Math.cos((d+a)*Math.PI/180)}" y1="${cy+r*Math.sin((d+a)*Math.PI/180)}" x2="${cx-r*Math.cos((d+a)*Math.PI/180)}" y2="${cy-r*Math.sin((d+a)*Math.PI/180)}" stroke="#1D1B18" stroke-width="3"/>`).join('');
+  let s=`<g transform="translate(${x},${y})"><rect x="-80" y="-70" width="160" height="50" fill="#9A7B3C" stroke="#1D1B18" stroke-width="4"/>`;
+  if(load>0) for(let i=0;i<3;i++) s+=`<rect x="${-72+i*4}" y="${-80-i*10}" width="${144-i*8}" height="10" fill="#5E564A" stroke="#1D1B18" stroke-width="2" opacity="${load}"/>`;
+  if(men>0) [-55,-25,5,35,60].forEach((mx,i)=>{ s+=`<g opacity="${clamp(men*5-i)}"><circle cx="${mx}" cy="${-128}" r="10" fill="#1D1B18"/><path d="M${mx},-118 v26 M${mx-12},-108 h24" stroke="#1D1B18" stroke-width="5"/></g>`; });
+  s+=`<circle cx="-45" cy="-12" r="20" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${sp(-45,-12,17)}<circle cx="45" cy="-12" r="20" fill="#EFE7D6" stroke="#1D1B18" stroke-width="5"/>${sp(45,-12,17)}</g>`; return s; }
+function plateway(y,x0,x1,off){ let s=`<rect x="${x0}" y="${y+8}" width="${x1-x0}" height="10" fill="#3A3631"/><rect x="${x0}" y="${y-8}" width="${x1-x0}" height="16" fill="#1D1B18"/>`; for(let x=x0-((off%120)+120)%120;x<x1;x+=120) s+=`<rect x="${x}" y="${y+18}" width="60" height="34" fill="url(#stone)" stroke="#8B8170" stroke-width="2"/>`; return s; }
+
+SC.tram_run = (t,P) => { const W=P.wagons??5; const speed=P.speed??260; const x=lerp(1750, 1750-speed*DUR, clamp(t/DUR)) ; const off=t*speed;
+  let s=`<rect width="1920" height="1080" fill="#EFE7D6"/>
+  <path d="M0,640 C300,520 520,560 760,500 C1000,440 1240,520 1500,470 C1700,430 1820,470 1920,450 V720 H0 Z" fill="#DCCFB3"/>
+  <path d="M0,700 C260,640 600,660 900,620 C1200,580 1500,640 1920,600 V760 H0 Z" fill="#CFC09F"/>
+  <rect x="0" y="760" width="1920" height="320" fill="#D8CBAE"/>${plateway(800,0,1920,off*0)}`;
+  const cx = P.static ? 1500 : x; s+=engine(cx,800,t,1.15);
+  for(let i=0;i<W;i++) s+=wagon(cx+190+i*190,800,t,(P.load??1),(P.men!=null?P.men:clamp((t-at(P,'men',1.6))/1.2)));
+  const cs=P.counters||[]; cs.forEach((c,i)=>{ const p=eOut(seg(t,c.at??(1+i*1.1),(c.at??(1+i*1.1))+.5)); s+=`<g opacity="${p}" transform="translate(${110},${260+i*95}) scale(${lerp(.8,1,eBack(p))})"><rect x="0" y="-58" width="${c.w||520}" height="80" rx="10" fill="#1D1B18"/>${T(26,0,c.text,46,'start',900,'#F2C14E')}</g>`; });
+  return s+titleBar(t,P.title); };
+
+SC.plateway = (t,P) => { const roll=(t*120)%2000; const wx=lerp(200,1500,clamp(t/DUR));
+  let s=titleBar(t,P.title||'A tramroad: iron plates for wagons to run along')+
+  `<g transform="translate(0,40)"><rect x="100" y="640" width="1720" height="40" fill="#1D1B18"/><rect x="100" y="520" width="26" height="160" fill="#1D1B18"/>
+   ${[0,1,2,3,4,5,6].map(i=>`<rect x="${130+i*250}" y="680" width="150" height="90" fill="url(#stone)" stroke="#8B8170" stroke-width="3"/><line x1="${100+i*250}" y1="636" x2="${100+i*250}" y2="684" stroke="#5E564A" stroke-width="3"/>`).join('')}
+   <path d="M100,520 v-0" /><rect x="100" y="520" width="1720" height="26" fill="#1D1B18" opacity=".0"/>
+   <g transform="translate(${wx},560)"><circle r="80" fill="#EFE7D6" stroke="#1D1B18" stroke-width="10"/>${[0,60,120].map(d=>`<line x1="${80*Math.cos((d+t*200)*Math.PI/180)}" y1="${80*Math.sin((d+t*200)*Math.PI/180)}" x2="${-80*Math.cos((d+t*200)*Math.PI/180)}" y2="${-80*Math.sin((d+t*200)*Math.PI/180)}" stroke="#1D1B18" stroke-width="6"/>`).join('')}<circle r="14" fill="#1D1B18"/></g></g>`;
+  s+=`<rect x="100" y="545" width="26" height="135" fill="#1D1B18"/>`;
+  s+=callout(t,at(P,'plate',.6),700,700,900,860,'cast-iron plate, L-shaped');
+  s+=callout(t,at(P,'edge',1.4),113,560,260,420,'upright edge keeps the wheel on');
+  s+=callout(t,at(P,'block',2.2),1450,770,1550,900,'stone block');
+  s+=callout(t,at(P,'wheel',3.0),wx,560,wx+160,330,'plain wagon wheel');
+  return s; };
+
+SC.rail_crack = (t,P) => { const wx=lerp(-300,820,eOut(seg(t,0,1.4))); const cr=seg(t,1.4,2.4);
+  let s=titleBar(t,P.title||'Cast iron: hard, but brittle');
+  s+=`<rect x="200" y="640" width="1520" height="44" fill="#1D1B18"/>${[0,1,2,3,4,5].map(i=>`<rect x="${260+i*260}" y="684" width="150" height="90" fill="url(#stone)" stroke="#8B8170" stroke-width="3"/>`).join('')}`;
+  if (cr>0){ const pts=[[960,640],[948,652],[972,662],[955,672],[968,684]]; const n=Math.ceil(cr*pts.length); s+=`<polyline points="${pts.slice(0,n).map(p=>p.join(',')).join(' ')}" fill="none" stroke="#EFE7D6" stroke-width="6"/>`;
+    if(cr>=1){ const q=seg(t,2.4,3.2); s+=`<g opacity="${q}">${[[-30,10],[25,18],[-12,30]].map(([dx,dy],i)=>`<rect x="${955+dx*q*2}" y="${690+dy*q*3}" width="12" height="9" fill="#1D1B18" transform="rotate(${q*90*(i-1)} ${955+dx} ${690+dy})"/>`).join('')}</g>`; } }
+  s+=engine(wx,640,t*(1-seg(t,1.4,1.6)),1.0);
+  s+=`<g opacity="${eOut(seg(t,2.2,2.8))}">${T(960,880,P.caption||'It cracks instead of bending',50,'middle',800,'#A8261B')}</g>`;
+  if (P.weight){ const q=eOut(seg(t,.9,1.4)); s+=`<g opacity="${q}"><path d="M${wx-60},380 v120" stroke="#A8261B" stroke-width="10" marker-end="url(#arR)"/>${T(wx-60,350,P.weight,40,'middle',800,'#A8261B')}</g>`; }
+  return s; };
+
+SC.calendar = (t,P) => { const flips=P.flips??3; const fp=seg(t,.2,1.6); let s=titleBar(t,P.title);
+  const page=(m,d,y)=>`<rect x="-260" y="-300" width="520" height="600" rx="16" fill="#FBF7EE" stroke="#1D1B18" stroke-width="6"/><rect x="-260" y="-300" width="520" height="140" rx="16" fill="#A8261B"/><rect x="-260" y="-180" width="520" height="20" fill="#A8261B"/>
+    ${T(0,-205,m.toUpperCase(),64,'middle',900,'#FBF7EE','letter-spacing="8"')}${T(0,160,d,300,'middle',700,'#1D1B18','font-family="Libre Baskerville"')}${y?T(0,250,y,40,'middle',600,'#5E564A'):''}`;
+  s+=`<g transform="translate(960,560)">${page(P.month||'March',String(P.day||30),P.year||'')}`;
+  for(let i=0;i<flips;i++){ const q=seg(fp,i/flips,(i+1)/flips); if(q>=1) continue; s+=`<g transform="translate(0,-300) rotate(${-q*25}) translate(${q*-500},${q*900}) translate(0,300)" opacity="${1-q*.5}">${page(P.month||'March',String((P.day||30)-flips+i),'')}</g>`; }
+  s+=`<rect x="-200" y="-330" width="400" height="34" rx="8" fill="#5E564A"/></g>`;
+  if(P.caption) s+=`<g opacity="${eOut(seg(t,1.7,2.2))}">${T(960,1000,P.caption,46,'middle',800)}</g>`;
+  return s; };
+
+SC.pizza = (t,P) => { const L=P.layers||['tomato','mozzarella','basil']; const cx=P.cx||760, cy=560, R=300; let s=titleBar(t,P.title);
+  if (P.flag){ const q=eOut(seg(t,at(P,'flag',.2),at(P,'flag',.2)+.6)); s+=`<g opacity="${q*.9}"><rect x="1180" y="330" width="170" height="460" fill="#3F7A45"/><rect x="1350" y="330" width="170" height="460" fill="#FBF7EE" stroke="#C9BBA0" stroke-width="2"/><rect x="1520" y="330" width="170" height="460" fill="#B8352B"/></g>`; }
+  const b=eBack(seg(t,0,.5)); s+=`<g transform="translate(${cx},${cy}) scale(${b})"><circle r="${R}" fill="#E2BE7E" stroke="#1D1B18" stroke-width="7"/><circle r="${R-38}" fill="#EBCB8F"/>`;
+  L.forEach((ly,i)=>{ const a0=at(P,ly,.6+i*1.0); const q=eOut(seg(t,a0,a0+.7)); const opt=(P.optional||[]).includes(ly);
+    if(ly==='tomato') s+=`<circle r="${(R-40)*q}" fill="#B8352B" opacity="${opt?.55:.95}"/>`;
+    if(ly==='mozzarella') [[-110,-90],[90,-120],[0,20],[130,90],[-120,110],[-20,-190],[200,-10]].forEach(([x,y],j)=>{ const qq=eBack(seg(t,a0+j*.08,a0+j*.08+.5)); if(qq>0) s+=`<ellipse cx="${x}" cy="${y}" rx="${58*qq}" ry="${44*qq}" fill="#FBF7EE" stroke="#E4D9C2" stroke-width="3"/>`; });
+    if(ly==='basil') [[-60,-150],[150,-70],[40,120],[-170,10],[60,-40],[-60,200]].forEach(([x,y],j)=>{ const qq=eBack(seg(t,a0+j*.08,a0+j*.08+.5)); if(qq>0) s+=`<ellipse cx="${x}" cy="${y}" rx="${30*qq}" ry="${15*qq}" fill="#3F7A45" transform="rotate(${j*37} ${x} ${y})"/>`; });
+  }); s+=`</g>`;
+  if (P.labels!==false && !P.flag) L.forEach((ly,i)=>{ const a0=at(P,ly,.6+i*1.0); const q=eOut(seg(t,a0+.3,a0+.8)); const opt=(P.optional||[]).includes(ly); const nm={tomato:'tomato',mozzarella:'thin slices of mozzarella',basil:'basil'}[ly]||ly;
+    s+=`<g opacity="${q}" transform="translate(${(1-q)*40},0)">${T(1200,420+i*110,nm+(opt?' (sometimes)':''),48,'start',800,{tomato:'#B8352B',mozzarella:'#5E564A',basil:'#3F7A45'}[ly])}</g>`; });
+  if (P.caption) s+=`<g opacity="${eOut(seg(t,DUR*.5,DUR*.5+.5))}">${T(960,1000,P.caption,40,'middle',700,'#4A443A')}</g>`;
+  return s; };
+
+SC.letter = (t,P) => { let s=titleBar(t,P.title); const q=eOut(seg(t,0,.6));
+  s+=`<g transform="translate(700,${560+(1-q)*60}) rotate(${-3+q*1})" opacity="${q}"><rect x="-330" y="-400" width="660" height="800" fill="#FBF7EE" stroke="#8B8170" stroke-width="4"/>
+   ${T(0,-310,'~ Royal Household ~',30,'middle',600,'#5E564A','font-style="italic" font-family="Libre Baskerville"')}
+   ${[0,1,2,3,4,5,6,7].map(i=>`<path d="M-250,${-200+i*55} q40,-14 80,0 t80,0 t80,0 t80,0 t80,0 t${i===7?-40:80},0" fill="none" stroke="#5E564A" stroke-width="3"/>`).join('')}
+   <path d="M60,280 q30,-40 60,0 t60,-10 t50,5" fill="none" stroke="#1D1B18" stroke-width="4"/>
+   <circle cx="-220" cy="290" r="54" fill="#A8261B" opacity=".85"/><circle cx="-220" cy="290" r="38" fill="none" stroke="#7A1B13" stroke-width="4"/>
+   <path d="M-250,-255 h180" stroke="#1D1B18" stroke-width="5"/></g>`;
+  const H=P.highlight||[]; const pos={seal:[480,850],handwriting:[860,840],name:[540,305]}; const lab={seal:'The seal',handwriting:'The handwriting',name:'The name: Brandi'};
+  H.forEach((h,i)=>{ const a0=(P.at&&P.at[h]!=null)?P.at[h]:(P.step&&i<P.step-1)?-10:(.7+i*.9); const [x,y]=pos[h]; s+=callout(t,a0,x,y,1180,300+i*170,lab[h]); });
+  if (P.stamp){ const a0=at(P,'stamp',1.0); const p=seg(t,a0,a0+.35); if(p>0) s+=`<g transform="translate(700,560) rotate(-14) scale(${lerp(2.2,1,eBack(p))})" opacity="${clamp(p*3)}"><rect x="-330" y="-70" width="660" height="140" fill="none" stroke="#A8261B" stroke-width="12"/>${T(0,28,P.stamp,78,'middle',900,'#A8261B','letter-spacing="4"')}</g>`; }
+  return s; };
+
+SC.toilet_cistern = (t,P) => { let s=titleBar(t,P.title||'A bowl fed by a tank of water');
+  const open=seg(t,at(P,'pull',1.6),at(P,'pull',1.6)+.3); const lvl=1-seg(t,at(P,'pull',1.6),at(P,'pull',1.6)+1.6);
+  s+=`<rect x="760" y="230" width="400" height="230" fill="none" stroke="#1D1B18" stroke-width="8"/><rect x="768" y="${238+214*(1-lvl)}" width="384" height="${214*lvl}" fill="url(#water)" opacity=".85"/>
+   <rect x="940" y="460" width="40" height="300" fill="#EFE7D6" stroke="#1D1B18" stroke-width="7"/>
+   <path d="M760,760 H1160 L1110,900 H810 Z" fill="#EFE7D6" stroke="#1D1B18" stroke-width="8"/><path d="M810,900 H1110 V960 H810Z" fill="#CFC09F" stroke="#1D1B18" stroke-width="6"/>
+   <line x1="1160" y1="300" x2="${1240}" y2="${300+open*60}" stroke="#9A7B3C" stroke-width="8"/><line x1="1240" y1="${300+open*60}" x2="1240" y2="${500+open*60}" stroke="#9A7B3C" stroke-width="4"/><circle cx="1240" cy="${510+open*60}" r="14" fill="#9A7B3C"/>`;
+  if (open>0 && lvl>0){ for(let i=0;i<10;i++){ const y=460+((t*600+i*30)%300); s+=`<rect x="948" y="${y}" width="24" height="18" fill="#5B8DB0"/>`; } const sw=(t*4)%(2*Math.PI); s+=`<ellipse cx="960" cy="820" rx="${150+20*Math.sin(sw)}" ry="30" fill="#5B8DB0" opacity=".8"/>`; }
+  s+=callout(t,at(P,'cistern',.5),760,300,520,300,'cistern: the tank','end');
+  s+=callout(t,at(P,'bowl',1.0),780,830,520,830,'the bowl','end');
+  if(open>0) s+=callout(t,at(P,'pull',1.6)+.2,1240,520,1400,640,'let it go, and it flushes');
+  return s; };
+
+const smell=(x,y,t,h,stop)=>{ let s=''; for(let i=0;i<3;i++){ const q=((t*.5+i/3)%1); const yy=y-q*h; if(stop!=null&&yy<stop) continue; const xx=x+(i-1)*36; s+=`<path d="M${xx},${yy} q14,-18 0,-36 t0,-36" fill="none" stroke="#7D8F55" stroke-width="7" stroke-linecap="round" opacity="${(1-q)*.9}"/>`; } return s; };
+SC.pipe_straight = (t,P) => { let s=titleBar(t,P.title||'A pipe straight to the sewer');
+  s+=`<rect x="0" y="0" width="1920" height="600" fill="#EFE7D6"/><line x1="200" y1="600" x2="1720" y2="600" stroke="#1D1B18" stroke-width="8"/>
+   <path d="M820,470 H1100 L1070,560 H850 Z" fill="#FBF7EE" stroke="#1D1B18" stroke-width="7"/><rect x="930" y="560" width="60" height="360" fill="#EFE7D6" stroke="#1D1B18" stroke-width="7"/>
+   <rect x="200" y="920" width="1520" height="120" fill="#8B7B5C"/><rect x="200" y="920" width="1520" height="120" fill="none" stroke="#1D1B18" stroke-width="6"/>${T(400,995,'SEWER',40,'start',900,'#EFE7D6')}${T(1500,300,'YOUR BATHROOM',36,'middle',800,'#5E564A')}`;
+  const down=seg(t,at(P,'down',.4),at(P,'down',.4)+1.4); for(let i=0;i<6;i++){ const y=570+((down*700+i*60)%360); if(down>0&&down<1) s+=`<circle cx="960" cy="${y}" r="10" fill="#7A6040"/>`; }
+  if (t>at(P,'up',1.6)) s+= smell(960,980,t-at(P,'up',1.6),560,null);
+  s+=callout(t,at(P,'up',1.6)+.4,1000,500,1300,460,'and everything that smells comes back up');
+  return s; };
+SC.sbend = (t,P) => { let s=titleBar(t,P.title||'The S-bend');
+  s+=`<rect x="0" y="0" width="1920" height="560" fill="#EFE7D6"/><line x1="200" y1="560" x2="1720" y2="560" stroke="#1D1B18" stroke-width="8"/>
+   <path d="M820,430 H1100 L1070,520 H850 Z" fill="#FBF7EE" stroke="#1D1B18" stroke-width="7"/>
+   <path d="M960,520 V640 C960,760 1160,760 1160,640 C1160,560 1300,560 1300,660 V930" fill="none" stroke="#1D1B18" stroke-width="72" stroke-linecap="butt"/>
+   <path d="M960,520 V640 C960,760 1160,760 1160,640 C1160,560 1300,560 1300,660 V930" fill="none" stroke="#EFE7D6" stroke-width="58"/>
+   <rect x="200" y="930" width="1520" height="110" fill="#8B7B5C" stroke="#1D1B18" stroke-width="6"/>${T(400,1000,'SEWER',40,'start',900,'#EFE7D6')}`;
+  const w=eOut(seg(t,at(P,'water',.4),at(P,'water',.4)+1)); s+=`<path d="M960,650 C960,${650+80*w} 1160,${650+80*w} 1160,650" fill="none" stroke="url(#water)" stroke-width="56" opacity="${w}"/>`;
+  if (t>at(P,'smell',1.4)) s+=smell(1300,960,t-at(P,'smell',1.4),330,650);
+  s+=callout(t,at(P,'water',.4)+.6,1060,740,700,860,'a little water, held in the bend','end','#2F5D7C');
+  s+=callout(t,at(P,'smell',1.4)+.6,1330,700,1450,520,'blocks the smell');
+  return s; };
+SC.ballcock = (t,P) => { let s=titleBar(t,P.title||'The ballcock'); const fill=eIO(seg(t,.3,DUR*.7)); const lvl=lerp(.25,.82,fill); const tx=760,ty=300,tw=520,th=520;
+  const wy=ty+th*(1-lvl); const ang=lerp(28,0,fill); const shut=fill>=.98;
+  s+=`<rect x="${tx}" y="${ty}" width="${tw}" height="${th}" fill="none" stroke="#1D1B18" stroke-width="8"/><rect x="${tx+4}" y="${wy}" width="${tw-8}" height="${ty+th-wy-4}" fill="url(#water)" opacity=".8"/>
+   <rect x="${tx-120}" y="${ty+40}" width="160" height="34" fill="#5E564A"/><rect x="${tx+30}" y="${ty+30}" width="40" height="56" fill="#9A7B3C" stroke="#1D1B18" stroke-width="4"/>`;
+  if(!shut) for(let i=0;i<8;i++){ const y=ty+86+((t*500+i*40)%Math.max(10,wy-ty-86)); s+=`<rect x="${tx+40}" y="${y}" width="20" height="16" fill="#5B8DB0"/>`; }
+  const px=tx+70, py=ty+70, L=330; const bx=px+L*Math.cos(ang*Math.PI/180), by=py+L*Math.sin(ang*Math.PI/180);
+  s+=`<line x1="${px}" y1="${py}" x2="${bx}" y2="${Math.min(by,wy-2)}" stroke="#1D1B18" stroke-width="8"/><circle cx="${bx}" cy="${Math.min(by,wy)-6}" r="56" fill="#9A7B3C" stroke="#1D1B18" stroke-width="6"/>`;
+  s+=callout(t,1.0,bx+50,Math.min(by,wy)-40,1460,380,'the float');
+  if(shut||t>DUR*.72) s+=callout(t,DUR*.72,tx+50,ty+60,1460,560,'shuts the water off when the tank is full');
+  return s; };
+
+SC.knossos_drain = (t,P) => { let s=titleBar(t,P.title||'Water carrying waste away'); const mode=P.mode||'rain';
+  s+=`<path d="M300,330 L960,180 L1620,330 Z" fill="#A8987A" stroke="#1D1B18" stroke-width="6"/><rect x="380" y="330" width="1160" height="380" fill="#E4D9C2" stroke="#1D1B18" stroke-width="6"/>
+   <rect x="1440" y="330" width="44" height="380" fill="#CFC09F" stroke="#1D1B18" stroke-width="4"/>
+   <rect x="1060" y="600" width="260" height="110" fill="url(#stone)" stroke="#1D1B18" stroke-width="5"/><rect x="1150" y="600" width="80" height="22" fill="#2B2924"/>
+   <rect x="200" y="760" width="1520" height="120" fill="url(#stone)" stroke="#1D1B18" stroke-width="6"/><rect x="220" y="790" width="1480" height="60" fill="#5E564A"/>
+   ${T(960,950,'STONE SEWER',34,'middle',900,'#5E564A')}`;
+  if(mode==='rain'||mode==='both'){ const r=seg(t,at(P,'rain',.3),DUR); for(let i=0;i<40;i++){ const x=320+((i*97)%1300); const y=((t*700+i*53)%240)-60; s+=`<line x1="${x}" y1="${y}" x2="${x-6}" y2="${y+28}" stroke="#5B8DB0" stroke-width="4" opacity="${r>0?.7:0}"/>`; }
+    if(r>0) for(let i=0;i<8;i++){ const y=330+((t*500+i*48)%380); s+=`<rect x="1452" y="${y}" width="20" height="18" fill="#5B8DB0"/>`; } }
+  if(mode==='pour'||mode==='both'){ const q=eOut(seg(t,at(P,'pour',.6),at(P,'pour',.6)+.6)); s+=`<g transform="translate(1100,${500-40*q}) rotate(${q*60})"><path d="M-40,-60 h80 l-10,120 h-60 z" fill="#B87333" stroke="#1D1B18" stroke-width="5"/></g>`; if(q>.9) for(let i=0;i<6;i++){ const y=520+((t*500+i*20)%90); s+=`<rect x="1180" y="${y}" width="16" height="14" fill="#5B8DB0"/>`; } }
+  const fl=seg(t,at(P,'flow',1.0),DUR); if(fl>0) for(let i=0;i<14;i++){ const x=1700-((t*400+i*110)%1480); s+=`<rect x="${x}" y="808" width="44" height="22" rx="8" fill="#5B8DB0" opacity=".9"/>`; }
+  s+=callout(t,at(P,'c1',1.2),1470,420,1680,250,mode==='pour'?'or somebody poured water in':'rainwater from the roof');
+  s+=callout(t,at(P,'c2',2.2),900,820,640,690,'flushed into a stone sewer','end');
+  return s; };
+
+SC.ripple = (t,P) => { let s=titleBar(t,P.title||'Public versus first'); const rr=at(P,'right',0); const rq=eOut(seg(t,rr,rr+.5));
+  const A=[560,560], B=[1360,560]; const dots=[[300,330],[420,820],[760,300],[820,830],[300,600],[700,640]];
+  for(let i=0;i<4;i++){ const q=((t*.45+i/4)%1); s+=`<circle cx="${A[0]}" cy="${A[1]}" r="${30+q*360}" fill="none" stroke="#A8261B" stroke-width="5" opacity="${(1-q)*.7}"/>`; }
+  dots.forEach(([x,y],i)=>{ const d=Math.hypot(x-A[0],y-A[1]); const lit=t*.45*360>d-30; s+=`<circle cx="${x}" cy="${y}" r="16" fill="${lit?'#A8261B':'#C9BBA0'}"/>`; });
+  s+=`<circle cx="${A[0]}" cy="${A[1]}" r="34" fill="#A8261B"/>${TH(A[0],A[1]+90,P.left||'Boston, 1846',40,'middle',800)}${TH(A[0],A[1]+135,P.leftSub||'in public: written down, talked about, copied',28,'middle',600,'#5E564A')}`;
+  s+=`<line x1="960" y1="260" x2="960" y2="880" stroke="#C9BBA0" stroke-width="4"/>`;
+  s+=`<g opacity="${rq}"><circle cx="${B[0]}" cy="${B[1]}" r="34" fill="#1D1B18"/>${TH(B[0],B[1]+90,P.right||'Georgia, 1842',40,'middle',800)}${TH(B[0],B[1]+135,P.rightSub||'not published until 1849',28,'middle',600,'#5E564A')}</g>`;
+  [[1150,330],[1600,320],[1180,820],[1620,800],[1700,560]].forEach(([x,y])=>{ s+=`<circle cx="${x}" cy="${y}" r="16" fill="#C9BBA0"/>`; });
+  return s; };
+
+SC.anesthesia = (t,P) => { let s=titleBar(t,P.title||'Numbed in one spot, or completely out');
+  const head=(x,awake,glow)=>`<g transform="translate(${x},560)"><circle cx="0" cy="-120" r="110" fill="#E4D9C2" stroke="#1D1B18" stroke-width="7"/>
+   ${awake?`<circle cx="-38" cy="-130" r="12" fill="#1D1B18"/><circle cx="38" cy="-130" r="12" fill="#1D1B18"/><path d="M-30,-70 q30,16 60,0" fill="none" stroke="#1D1B18" stroke-width="6"/>`:`<path d="M-58,-128 q20,14 40,0 M18,-128 q20,14 40,0" fill="none" stroke="#1D1B18" stroke-width="7"/><path d="M-26,-66 h52" stroke="#1D1B18" stroke-width="6"/>`}
+   <path d="M-190,190 C-190,40 190,40 190,190" fill="#E4D9C2" stroke="#1D1B18" stroke-width="7"/>${glow||''}</g>`;
+  const L0=at(P,'left',0), R0=at(P,'right',1.2); const g1=eOut(seg(t,L0+.5,L0+1.1)); s+=`<g opacity="${eOut(seg(t,L0,L0+.5))}">${head(560,true,`<circle cx="120" cy="120" r="${40+8*Math.sin(t*5)}" fill="#F2C14E" opacity="${.8*g1}"/>`)}${T(560,880,'numbed in one spot',44,'middle',800)}</g>`;
+  const g2=eOut(seg(t,R0,R0+.6)); s+=`<g opacity="${g2}">${head(1360,false,'')}<g opacity="${.5+.5*Math.sin(t*3)}">${T(1500,-0+330,'z',60,'middle',900,'#2F5D7C')}${T(1550,280,'z',80,'middle',900,'#2F5D7C')}</g>${T(1360,880,'completely out: full general anesthesia',44,'middle',800,'#A8261B')}</g>`;
+  return s; };
+
+SC.herbal = (t,P) => { let s=titleBar(t,P.title||'An herbal mix'); const q=eOut(seg(t,0,.6));
+  s+=`<g transform="translate(960,${600+(1-q)*40})" opacity="${q}"><path d="M-220,-60 H220 C220,120 120,200 0,200 C-120,200 -220,120 -220,-60 Z" fill="#CFC09F" stroke="#1D1B18" stroke-width="8"/>
+   <g transform="rotate(${-30+8*Math.sin(t*3)}) translate(80,-160)"><rect x="-26" y="-180" width="52" height="260" rx="26" fill="#9A7B3C" stroke="#1D1B18" stroke-width="7"/></g>
+   ${[[-150,-80],[-60,-100],[60,-90],[150,-70],[0,-120]].map(([x,y],i)=>`<ellipse cx="${x}" cy="${y-30*Math.sin(t*2+i)}" rx="34" ry="14" fill="#3F7A45" transform="rotate(${i*40} ${x} ${y})" opacity="${eOut(seg(t,.4+i*.15,.9+i*.15))}"/>`).join('')}</g>`;
+  if(P.caption) s+=`<g opacity="${eOut(seg(t,.8,1.3))}">${T(960,960,P.caption,46,'middle',800)}</g>`;
+  return s; };
+
+// ---------- boot ----------
+const tpl = TPL[D.template] || TPL.text;
+const loadJS = src => new Promise(r=>{ const e=document.createElement('script'); e.src=src; e.onload=r; e.onerror=r; document.head.appendChild(e); });
+(async()=>{ if (D.template==='pinmap'){ await loadJS('land110.js'); await loadJS('land50.js'); await loadJS('land.js'); await loadJS('geo2.js'); }
+  tpl.setup.call(tpl); window.drawAt = s => tpl.draw.call(tpl, s);
+  await document.fonts.ready; window.drawAt(0); document.body.setAttribute('data-ready','1'); })();
+</script>
+</body>
+</html>

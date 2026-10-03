@@ -63,31 +63,52 @@ for s in order:
 TOTAL = t
 short = [b['id'] for b in beats if b['frames'] < 2 * FPS]
 
-# 3. render graphics
-gdir = EP / 'graphics'
+# 3. render: every beat becomes an animated clip (clips/<id>.mp4) plus a poster still (graphics/<id>.png)
+gdir = EP / 'graphics'; cdir = EP / 'clips'
+def asset_path(b):
+    a = (b.get('fields') or {}).get('asset')
+    for e in ('jpg', 'jpeg', 'png', 'webp'):
+        if a and (EP / 'assets' / f'{a}.{e}').exists(): return (EP / 'assets' / f'{a}.{e}').as_uri()
+timed = [{'id': b['id'], 'template': b['template'], 'fields': b.get('fields') or {}, 'source': b.get('source') or {},
+          'frames': b['frames'], 'fps': FPS, **({'img': asset_path(b)} if asset_path(b) else {})} for b in beats]
+(EP / 'build').mkdir(exist_ok=True)
+(EP / 'build' / 'timed.json').write_text(json.dumps(timed))
 if not skip_render:
-    subprocess.run(['node', str(HERE / 'render.mjs'), str(SL), str(gdir)], check=True, env={**os.environ, 'ASSETS': str(EP / 'assets')})
+    subprocess.run(['node', str(HERE / 'motion.mjs'), str(EP / 'build' / 'timed.json'), str(cdir), str(gdir), os.environ.get('WORKERS', '3')], check=True)
+    subprocess.run(['node', str(HERE / 'render.mjs'), str(SL), str(gdir)], check=True, env={**os.environ, 'LABELS_ONLY': '1'})
+ids = {b['id'] for b in beats}
+for d, ext in ((gdir, '.png'), (cdir, '.mp4'), (cdir, '.key')):
+    for p in d.glob('*' + ext):
+        if p.stem not in ids: p.unlink()
 for b in beats:
     im = Image.open(gdir / f"{b['id']}.png")
     if im.size != (1920, 1080):
         problems.append(f"{b['id']}.png is {im.size}")
+    fr = int(subprocess.check_output(['ffprobe', '-v', 'error', '-count_packets', '-select_streams', 'v:0', '-show_entries', 'stream=nb_read_packets', '-of', 'csv=p=0', str(cdir / f"{b['id']}.mp4")]).decode().strip().rstrip(','))
+    if fr != b['frames']:
+        problems.append(f"{b['id']}.mp4 has {fr} frames, expected {b['frames']}")
 
-# 4. animatic frames: graphic + burned-in section label
-fdir = EP / 'build' / 'frames'; fdir.mkdir(parents=True, exist_ok=True)
-for b in beats:
-    g = Image.open(gdir / f"{b['id']}.png").convert('RGBA')
-    lab = Image.open(EP / 'labels' / f"{b['section']}.png").convert('RGBA')
-    Image.alpha_composite(g, lab).convert('RGB').save(fdir / f"{b['id']}.png")
+# 4. animatic: clips in order, section label burned in, narration if the MP3s are in vo/
 lst = EP / 'build' / 'concat.txt'
-with open(lst, 'w') as f:
-    for b in beats:
-        f.write(f"file '{fdir / (b['id'] + '.png')}'\nduration {b['frames'] / FPS:.6f}\n")
-    f.write(f"file '{fdir / (beats[-1]['id'] + '.png')}'\n")
+lst.write_text(''.join(f"file '{cdir / (b['id'] + '.mp4')}'\n" for b in beats))
+joined = EP / 'build' / 'joined.mp4'
+subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', str(lst), '-c', 'copy', str(joined)], check=True)
+inputs = ['-i', str(joined)]; filt = []; last = '0:v'
+for k, s_ in enumerate(order):
+    v = vo_by[s_]; a0 = v['start_frame'] / FPS; a1 = (v['start_frame'] + v['frames']) / FPS
+    inputs += ['-i', str(EP / 'labels' / f'{s_}.png')]
+    filt.append(f"[{last}][{k + 1}:v]overlay=0:0:enable='between(t,{a0:.3f},{a1 - 0.001:.3f})'[v{k}]"); last = f'v{k}'
+have_vo = all((EP / v['file']).exists() for v in vo['sections'])
+if have_vo:
+    for v in vo['sections']: inputs += ['-i', str(EP / v['file'])]
+    na = len(order) + 1
+    filt.append(''.join(f'[{na + i}:a]' for i in range(len(order))) + f'concat=n={len(order)}:v=0:a=1[aud]')
+    amap = ['-map', '[aud]']
+else:
+    inputs += ['-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo']; amap = ['-map', f'{len(order) + 1}:a']
 out = EP / f'{TITLE} - PREVIEW.mp4'
-subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', str(lst),
-                '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo',
-                '-vf', f'fps={FPS},format=yuv420p', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20',
-                '-c:a', 'aac', '-t', f'{TOTAL / FPS:.3f}', '-shortest', str(out)], check=True)
+subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', *inputs, '-filter_complex', ';'.join(filt), '-map', f'[{last}]', *amap,
+                '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-t', f'{TOTAL / FPS:.3f}', str(out)], check=True)
 dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(out)]).decode())
 if abs(dur - TOTAL / FPS) > 0.2:
     problems.append(f'animatic is {dur:.2f}s, expected {TOTAL / FPS:.2f}s')
@@ -99,8 +120,8 @@ q = html.escape
 res = ['<format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080"/>',
        '<format id="r2" name="FFVideoFormatRateUndefined" width="1920" height="1080"/>']
 for b in beats:
-    res.append(f'<asset id="g_{b["id"]}" name="{q(b["id"])}" start="0s" duration="0s" hasVideo="1" format="r2">'
-               f'<media-rep kind="original-media" src="{url(base / "graphics" / (b["id"] + ".png"))}"/></asset>')
+    res.append(f'<asset id="g_{b["id"]}" name="{q(b["id"])}" start="0s" duration="{ft(b["frames"])}" hasVideo="1" format="r1" videoSources="1">'
+               f'<media-rep kind="original-media" src="{url(base / "clips" / (b["id"] + ".mp4"))}"/></asset>')
 for s in order:
     v = vo_by[s]
     res.append(f'<asset id="vo_{s}" name="VO {s}" start="0s" duration="{ft(v["frames"])}" hasAudio="1" audioSources="1" audioChannels="1" audioRate="48000">'
@@ -114,7 +135,7 @@ for b in beats:
         s = b['section']
         inner = (f'<asset-clip ref="vo_{s}" lane="-1" offset="0s" start="0s" duration="{ft(vo_by[s]["frames"])}" name="VO {s}" audioRole="dialogue"/>'
                  f'<marker start="0s" duration="1/30s" value="{q(s + " " + names[s])}"/>')
-    spine.append(f'<video ref="g_{b["id"]}" offset="{ft(b["start_frame"])}" name="{q(b["id"])}" start="0s" duration="{ft(b["frames"])}">{inner}</video>')
+    spine.append(f'<asset-clip ref="g_{b["id"]}" offset="{ft(b["start_frame"])}" name="{q(b["id"])}" start="0s" duration="{ft(b["frames"])}">{inner}</asset-clip>')
 xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE fcpxml>\n<fcpxml version="1.10">\n<resources>\n' + '\n'.join(res) +
        f'\n</resources>\n<library>\n<event name="Somebody Did It First">\n<project name="{q(TITLE)}">\n'
        f'<sequence format="r1" duration="{ft(TOTAL)}" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">\n<spine>\n'
@@ -124,7 +145,7 @@ fx.write_text(xml)
 r = subprocess.run(['xmllint', '--noout', '--dtdvalid', str(HERE / 'FCPXMLv1_10.dtd'), str(fx)], capture_output=True, text=True)
 if r.returncode:
     problems.append('FCPXML failed DTD validation: ' + r.stderr[:800])
-n_clips = xml.count('<video '); n_markers = xml.count('<marker ')
+n_clips = xml.count('<asset-clip ref="g_'); n_markers = xml.count('<marker ')
 if n_clips != len(beats) or n_markers != len(order):
     problems.append(f'timeline has {n_clips} clips / {n_markers} markers, expected {len(beats)} / {len(order)}')
 
@@ -136,7 +157,7 @@ md = [f'# {TITLE}: shot list', '',
       '| Beat | In | Dur | Narration (start) | On screen | Route | Source / credit |', '|---|---|---|---|---|---|---|']
 for b in beats:
     src = b.get('source') or {}
-    route = {'archival': 'archival (fetch)', 'illustration': 'AI illustration'}.get(b['template'], 'code graphic')
+    route = {'archival': 'archival (fetch)', 'illustration': 'AI illustration', 'scene': 'illustrated scene (code)', 'pinmap': 'animated map'}.get(b['template'], 'motion graphic')
     cred = (src.get('credit') or src.get('institution') or '') + ('' if not src else (' ✅' if src.get('verified') else ' ⚠️ unconfirmed'))
     words = b['text'].split()
     md.append(f"| {b['id']} | {tc(b['start_frame'])} | {b['frames'] / FPS:.1f}s | {q(' '.join(words[:9]))}{'…' if len(words) > 9 else ''} | {q(b.get('visual', ''))} | {route} | {q(cred)} |")

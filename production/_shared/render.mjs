@@ -10,7 +10,7 @@ const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromi
 const page = await browser.newPage({ viewport:{width:1920,height:1080} });
 const card = url.pathToFileURL(path.join(here,'card.html')).href;
 let n=0;
-for (const b of beats) {
+for (const b of (process.env.LABELS_ONLY ? [] : beats)) {
   if (only.length && !only.includes(b.id)) continue;
   const a = b.fields && b.fields.asset;
   const hit = a && ['jpg','jpeg','png','webp'].map(e=>path.join(process.env.ASSETS || path.join(here,'..','assets'),a+'.'+e)).find(f=>fs.existsSync(f));
