@@ -5,11 +5,11 @@
   "credits": 11.5,
   "vo": "Penydarren, Merthyr and Abercynon were respelled in the TTS text only, for pronunciation.",
   "gaps": [
-   "Six of the unconfirmed items are Science Museum Group objects (the Penydarren model, Locomotion No. 1, Rocket, the Rocket print, the Rainhill lithograph and Puffing Billy). Their reuse licence has to be read on each object page.",
-   "The tramplate beat uses a generic Museum Wales record. Museum Wales also lists a Penydarren tramplate (accession 46.209/1); confirm which one it is and fix the label if needed.",
-   "There is no period image of the 1804 run itself. Those beats use the conjectural model, a modern replica photo (captioned as modern) and maps. The Terence Cuneo painting is modern and in copyright, so it was left out."
+   "There is no period image of the 1804 run itself. Those beats use photos of the working Penydarren replica (captioned as a replica), an 1811 ironworks view, and maps.",
+   "The Rainhill print and the 1811 ironworks view are small originals, so their push-ins are kept gentle.",
+   "No picture is AI-generated or illustrated; the only drawn graphics are maps, calendars and type cards."
   ],
-  "review": "It ran several times on the motion cut. No pass found a High problem. Fixes made: runs of text cards became archival push-ins with the words in the lower-third; map labels moved apart; the plateway callouts were trimmed; the rail crack was timed to land on \"kept cracking the rails\"."
+  "review": "Rebuilt 2026-10-03 on real images (owner's Episode 2 notes): no cartoon scenes, a running time bar, and the plain-talk script."
  },
  "timebar": {
   "range": [

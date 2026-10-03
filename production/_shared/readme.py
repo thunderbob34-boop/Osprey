@@ -12,7 +12,9 @@ words = sum(len(b['text'].split()) for b in beats)
 dur = sum(s['duration'] for s in vo['sections']); rt = f"{int(dur // 60)}:{round(dur % 60):02d}"
 have = lambda a: any((EP / 'assets' / f'{a}.{e}').exists() for e in ('jpg', 'jpeg', 'png', 'webp'))
 arch = [b for b in beats if b['template'] in ('archival', 'illustration')]
-pend = [b for b in arch if not have(b['fields'].get('asset', ''))]
+IM = json.load(open(EP / 'images.json')) if (EP / 'images.json').exists() else {}
+real = [b for b in arch if b['fields'].get('asset', '') in IM]   # real Commons images, composited in the sandbox pass
+pend = [b for b in arch if not have(b['fields'].get('asset', '')) and b['fields'].get('asset', '') not in IM]
 items = {}
 for b in arch: items.setdefault(b['fields'].get('asset', ''), b)
 ver = [a for a, b in items.items() if (b.get('source') or {}).get('verified')]
@@ -33,17 +35,23 @@ L = [f'# Episode {meta["num"]}: "{TITLE}"', '', 'Built 2026-10-03 with the share
      '## How it was built and checked', '',
      f'1. **Narration first.** Holden read each section in Higgsfield ({words} words). The real audio lengths set the timing of every beat.' + (f' {n["vo"]}' if n.get('vo') else ''),
      f'2. **Shot list.** It has {len(beats)} beats, about one new visual every {dur / len(beats):.0f} seconds. The beat texts match the script word for word, which the build checks every time.',
-     '3. **Motion.** Every beat is an animated clip, built in code in the channel\'s archive-paper style (`production/_shared/motion.html`):\n   - maps fly in, drop pins and draw routes with a moving train or ship (Natural Earth coastlines);\n   - illustrated scenes animate how things worked, each tagged as an illustration;\n   - numbers count up, words build in, timelines draw themselves, and text cards sit over a slowly drifting map of where that part of the story happens;\n   - photos and documents get a slow push-in.\n   Templates used: ' + ', '.join(f'{v} {k}' for k, v in C.most_common()) + '. Nothing is AI-generated.',
+     ('3. **Pictures and motion.** ' + (f'{len(real)} beats show real photos, prints, drawings and portraits from Wikimedia Commons ({len({x["fields"]["asset"] for x in real})} images, each with its licence and credit in `images.json`), with a slow push-in. ' if IM else '') + 'Every beat is an animated clip, built in code in the channel\'s archive-paper style (`production/_shared/motion.html`):\n   - a time bar along the top shows where in time each moment sits, with hedged labels where the narration is approximate;\n   - maps fly in, drop pins and draw routes (Natural Earth coastlines);\n' + ('' if IM else '   - illustrated scenes animate how things worked, each tagged as an illustration;\n') + '   - numbers count up, words build in, timelines draw themselves, and text cards sit over a slowly drifting map of where that part of the story happens;\n   Templates used: ' + ', '.join(f'{v} {k}' for k, v in C.most_common()) + '. No picture is AI-generated.'),
+     ('4. **Review (this cut).** Every non-photo beat was checked on a contact sheet; every on-screen line was checked against the script so no hedge is dropped; the finished file was checked automatically for faces clear of the time bar and captions, normal audio level, and no blank frames. A blind review of this cut is still to do.' if IM else None),
      '4. **Blind review.** A reviewer with no context checked the cut, including the question "is this entertaining, and where would a viewer click away?", plus places where the picture doesn\'t match the words and where on-screen text overstates the narration or drops a hedge. ' + n.get('review', ''),
      f'5. **Mechanical checks** run on every build: every still is 1920×1080; every clip has exactly its beat\'s frame count; the cut\'s length equals the narration length; the timeline has {len(beats)} clips and {len(secs)} markers; the timeline passes DTD validation.', '',
      '## What\'s left before it can be uploaded', '',
-     f'1. **Archival images ({len(pend)} beats, from {len(items)} distinct items).** Rights are stated for {len(ver)} items, covering {ver_beats} beats. The others need their rights checked on the item page. `PENDING-ASSETS.md` lists each one.',
-     '   - The cloud workspace\'s network blocks the museum and library sites, so these couldn\'t be downloaded here. You can allow those hosts and I\'ll fetch them, or save each image in `assets/` under the name in `PENDING-ASSETS.md`.',
-     f'   - Then run `python3 production/_shared/build.py --ep production/{EP.name}`. Each image is fitted to the frame automatically, with its lower-third and credit.']
+     ]
+if IM:
+    L += [f'1. **Real images.** The {len(real)} photo beats are finished outside this workspace: `production/_shared/finish-in-sandbox.sh` fetches the images from Wikimedia Commons, renders those beats and composites them into the narrated cut. The PICTURE file here still shows placeholder cards on those beats. To finish locally instead, save each image from `images.json` into `assets/` as `<key>.jpg` and re-run the build.']
+if pend or not IM:
+    L += [f'1. **Archival images ({len(pend)} beats, from {len(items)} distinct items).** Rights are stated for {len(ver)} items, covering {ver_beats} beats. The others need their rights checked on the item page. `PENDING-ASSETS.md` lists each one.',
+          '   - The cloud workspace\'s network blocks the museum and library sites, so these couldn\'t be downloaded here. You can allow those hosts and I\'ll fetch them, or save each image in `assets/` under the name in `PENDING-ASSETS.md`.',
+          f'   - Then run `python3 production/_shared/build.py --ep production/{EP.name}`. Each image is fitted to the frame automatically, with its lower-third and credit.']
 for g in n.get('gaps', []): L.append(f'   - {g}')
 L += ['2. **Narration files.** The section MP3s are in your Higgsfield library, and the links are in `vo/vo-manifest.json`. Put them in `vo/` under the names in the manifest; the timeline already points to them, and re-running the build adds them to the preview.',
       '3. **Resolve.** File > Import > Timeline and pick the `.fcpxml`. If the media shows offline, use Relink Media and point it at this folder (the PICTURE file and `vo/`).',
       '4. **Upload checklist.** Mark "altered or synthetic content: Yes", because the voice is synthetic. Credit every archival image in the description. Pick a thumbnail.']
 for k, x in enumerate(n.get('preair', []), 5): L.append(f'{k}. **Before this airs:** {x}')
 L += ['', '## Cost', '', f'- **Higgsfield:** {n.get("credits", "?")} credits, all narration. No images or video clips were needed.', '']
+L = [x for x in L if x is not None and not (IM and x.startswith('4. **Blind review.**'))]
 (EP / 'README.md').write_text('\n'.join(L)); print(EP / 'README.md')

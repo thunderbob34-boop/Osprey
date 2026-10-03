@@ -5,12 +5,11 @@
   "credits": 12.6,
   "vo": "Magendie, Hanaoka Seishu, Kan Aiya, mafutsusan and tsusensan were respelled in the TTS text only, for pronunciation. Sections 06 and 07 were re-read after the Hanaoka date fix.",
   "gaps": [
-   "Do not use Wellcome M0008841 for Morton (it is marked \"In copyright\"). Use M0002620 as listed.",
-   "The Countway Long engraving prints \"Discoverer of anaesthesia\" in its caption. That overstates the script, so crop it to the portrait.",
-   "No image of Long's own 1842 or 1849 record was found. The \"documented\" beat uses the Smithsonian Crawford W. Long Collection record instead.",
-   "No surgical, wound or patient imagery is used anywhere, on purpose."
+   "No image of Long's own 1842 or 1849 record exists on Commons. The \"documented\" beat uses an 1877 photo of Long, with the claim carried in the lower-third.",
+   "Hanaoka's only free portrait is 377px, so it appears once, with no zoom. His statue and his home cover the other beats.",
+   "No surgical, wound or patient imagery is used anywhere, on purpose. The Ether Dome is shown from outside and as an empty room."
   ],
-  "review": "It ran several times on the motion cut. The one High problem was map backdrops behind timelines putting dates over the wrong countries; timelines and datecards no longer have backdrops in any episode. Medium fixes: card runs broken with portraits and documents; Magendie's face on screen when he is named; a \"First, of the two\" hedge on the public-versus-first card; the anesthesia diagram timed to the words; the Hanaoka date always shown with \"Japanese calendar of the time\"."
+  "review": "Rebuilt 2026-10-03 on real images (owner's Episode 2 notes): no cartoon scenes, a running time bar, and the plain-talk script."
  },
  "timebar": {
   "range": [
