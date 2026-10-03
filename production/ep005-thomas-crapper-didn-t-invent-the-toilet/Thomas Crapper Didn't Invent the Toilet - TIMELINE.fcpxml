@@ -27,8 +27,7 @@
 <asset-clip ref="pic" offset="651/30s" name="01-g" start="651/30s" duration="158/30s"></asset-clip>
 <asset-clip ref="pic" offset="809/30s" name="01-h" start="809/30s" duration="128/30s"></asset-clip>
 <asset-clip ref="pic" offset="937/30s" name="02-a" start="937/30s" duration="262/30s"><asset-clip ref="vo_02" lane="-1" offset="937/30s" start="0s" duration="1159/30s" name="VO 02" audioRole="dialogue"/><marker start="937/30s" duration="1/30s" value="02 The Famous Version"/></asset-clip>
-<asset-clip ref="pic" offset="1199/30s" name="02-c" start="1199/30s" duration="121/30s"></asset-clip>
-<asset-clip ref="pic" offset="44s" name="02-d" start="44s" duration="171/30s"></asset-clip>
+<asset-clip ref="pic" offset="1199/30s" name="02-c" start="1199/30s" duration="292/30s"></asset-clip>
 <asset-clip ref="pic" offset="1491/30s" name="02-e" start="1491/30s" duration="162/30s"></asset-clip>
 <asset-clip ref="pic" offset="1653/30s" name="02-f" start="1653/30s" duration="151/30s"></asset-clip>
 <asset-clip ref="pic" offset="1804/30s" name="02-g" start="1804/30s" duration="111/30s"></asset-clip>
