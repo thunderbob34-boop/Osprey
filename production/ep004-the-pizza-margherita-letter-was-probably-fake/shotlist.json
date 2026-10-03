@@ -998,7 +998,7 @@
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "Rocco never calls it a Margherita",
+   "headline": "Rocco doesn't call it a Margherita",
    "sub": "He doesn't use that name"
   },
   "visual": "Text card.",
