@@ -164,7 +164,13 @@
    "kind": "engraving",
    "label": "\"Il pizzaiuolo\", 1858 print",
    "lower": "\"Il pizzaiuolo\" (The Pizza Maker), plate in Usi e costumi di Napoli e contorni, vol. 2 (1858)",
-   "asset": "commons-wikimedia-org-wiki-file-bourcard-1858-p2-172-il-pizz"
+   "asset": "commons-wikimedia-org-wiki-file-bourcard-1858-p2-172-il-pizz",
+   "crop": "Tight crop: the pizza maker's hands and the pizza",
+   "zoom": {
+    "scale": 2.2,
+    "x": 50,
+    "y": 60
+   }
   },
   "visual": "1858 plate of a pizza maker, slow push-in.",
   "source": {
@@ -300,7 +306,13 @@
    "kind": "portrait",
    "label": "Queen Margherita of Savoy",
    "lower": "Queen Margherita of Savoy (photographed c. 1910-1915, years after 1889)",
-   "asset": "loc-gov-resource-ggbain-19206"
+   "asset": "loc-gov-resource-ggbain-19206",
+   "crop": "Tight crop on the face",
+   "zoom": {
+    "scale": 2.0,
+    "x": 50,
+    "y": 25
+   }
   },
   "visual": "Queen Margherita portrait, wider crop.",
   "source": {
@@ -337,7 +349,13 @@
    "kind": "photo",
    "label": "Pizza Margherita (modern photograph)",
    "lower": "(modern photograph of a pizza Margherita, Naples, 2005)",
-   "asset": "commons-wikimedia-org-wiki-file-eq-it-na-pizza-margherita-se"
+   "asset": "commons-wikimedia-org-wiki-file-eq-it-na-pizza-margherita-se",
+   "crop": "Different crop: close on the basil and mozzarella",
+   "zoom": {
+    "scale": 2.2,
+    "x": 35,
+    "y": 40
+   }
   },
   "visual": "Modern photo of a Margherita pizza.",
   "source": {
@@ -420,12 +438,13 @@
     },
     {
      "label": "The name",
-     "sub": "His wife's surname, Brandi"
+     "sub": "Esposito's wife's surname, Brandi"
     }
    ],
    "step": 1,
    "highlight": 1,
-   "caption": "Nowak's argument, not proven"
+   "caption": "Nowak's argument, not proven",
+   "arrows": false
   },
   "visual": "Flow card: box 1 builds in.",
   "source": null,
@@ -451,12 +470,13 @@
     },
     {
      "label": "The name",
-     "sub": "His wife's surname, Brandi"
+     "sub": "Esposito's wife's surname, Brandi"
     }
    ],
    "step": 2,
    "highlight": 2,
-   "caption": "Nowak's argument, not proven"
+   "caption": "Nowak's argument, not proven",
+   "arrows": false
   },
   "visual": "Flow card: box 2 builds in.",
   "source": null,
@@ -482,12 +502,13 @@
     },
     {
      "label": "The name",
-     "sub": "His wife's surname, Brandi"
+     "sub": "Esposito's wife's surname, Brandi"
     }
    ],
    "step": 3,
    "highlight": 3,
-   "caption": "Nowak's argument, not proven"
+   "caption": "Nowak's argument, not proven",
+   "arrows": false
   },
   "visual": "Flow card: box 3 builds in.",
   "source": null,
@@ -513,12 +534,13 @@
     },
     {
      "label": "The name",
-     "sub": "His wife's surname, Brandi"
+     "sub": "Esposito's wife's surname, Brandi"
     }
    ],
    "step": 3,
    "highlight": 3,
-   "caption": "Nowak's argument, not proven"
+   "caption": "Nowak's argument, not proven",
+   "arrows": false
   },
   "visual": "Flow card holds on box 3.",
   "source": null,
@@ -551,28 +573,19 @@
   "section_name": "The Letter",
   "text": "But it's addressed using the name Brandi, and that's the name that matters for the next part.",
   "type": "flow",
-  "template": "flow",
+  "template": "compare",
   "fields": {
-   "title": "Nowak's three problems with the letter",
-   "steps": [
-    {
-     "label": "The seal",
-     "sub": "In the wrong place"
-    },
-    {
-     "label": "The handwriting",
-     "sub": "Doesn't match the official who supposedly signed it"
-    },
-    {
-     "label": "The name",
-     "sub": "His wife's surname, Brandi"
-    }
+   "left_title": "What you'd expect",
+   "left_lines": [
+    "Letter addressed to Raffaele Esposito"
    ],
-   "step": 3,
-   "highlight": 3,
-   "caption": "Nowak's argument, not proven"
+   "right_title": "What Nowak points to",
+   "right_lines": [
+    "Addressed using the name Brandi"
+   ],
+   "step": 2
   },
-  "visual": "Flow card, box 3 lit: the name.",
+  "visual": "Compare card, step 2: the right side reveals 'Addressed using the name Brandi'.",
   "source": null,
   "notes": "highlight is 1-based (the box lit on this beat); step N shows the first N boxes."
  },
@@ -598,7 +611,7 @@
   "type": "timeline",
   "template": "timeline",
   "fields": {
-   "title": "Nowak thinks the letter was probably made up later, likely by the Brandi family",
+   "title": "Nowak: probably made up later, likely by the Brandis",
    "events": [
     {
      "date": "1889",
@@ -624,7 +637,7 @@
   "type": "timeline",
   "template": "timeline",
   "fields": {
-   "title": "Nowak thinks the letter was probably made up later, likely by the Brandi family",
+   "title": "Nowak: probably made up later, likely by the Brandis",
    "events": [
     {
      "date": "1889",
@@ -713,12 +726,13 @@
     },
     {
      "label": "The name",
-     "sub": "His wife's surname, Brandi"
+     "sub": "Esposito's wife's surname, Brandi"
     }
    ],
    "step": 1,
    "highlight": 1,
-   "caption": "Nowak's argument, not proven"
+   "caption": "Nowak's argument, not proven",
+   "arrows": false
   },
   "visual": "Flow card recap: box 1.",
   "source": null,
@@ -744,12 +758,13 @@
     },
     {
      "label": "The name",
-     "sub": "His wife's surname, Brandi"
+     "sub": "Esposito's wife's surname, Brandi"
     }
    ],
    "step": 3,
    "highlight": 3,
-   "caption": "Nowak's argument, not proven"
+   "caption": "Nowak's argument, not proven",
+   "arrows": false
   },
   "visual": "Flow card recap: all three boxes.",
   "source": null,
@@ -763,7 +778,7 @@
   "type": "timeline",
   "template": "timeline",
   "fields": {
-   "title": "Nowak thinks the letter was probably made up later, likely by the Brandi family",
+   "title": "Nowak: probably made up later, likely by the Brandis",
    "events": [
     {
      "date": "1889",
@@ -1111,7 +1126,13 @@
    "kind": "photo",
    "label": "Pizza Margherita (modern photograph)",
    "lower": "(modern photograph of a pizza Margherita, Naples, 2005)",
-   "asset": "commons-wikimedia-org-wiki-file-eq-it-na-pizza-margherita-se"
+   "asset": "commons-wikimedia-org-wiki-file-eq-it-na-pizza-margherita-se",
+   "crop": "Slow push-in from the full frame",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 50
+   }
   },
   "visual": "Modern photo of a Margherita pizza.",
   "source": {
@@ -1145,18 +1166,24 @@
   "type": "archival",
   "template": "archival",
   "fields": {
-   "kind": "engraving",
-   "label": "\"Il pizzaiuolo\", 1858 print",
-   "lower": "\"Il pizzaiuolo\" (The Pizza Maker), plate in Usi e costumi di Napoli e contorni, vol. 2 (1858)",
-   "asset": "commons-wikimedia-org-wiki-file-bourcard-1858-p2-172-il-pizz"
+   "kind": "document",
+   "label": "Usi e costumi di Napoli e contorni, vol. 2, 1858",
+   "asset": "archive-org-details-rcin-org-pl-wa248-143354-f-24166-2-neapo",
+   "lower": "Usi e costumi di Napoli e contorni, vol. 2 (1858)",
+   "crop": "Push-in on the title page",
+   "zoom": {
+    "scale": 1.4,
+    "x": 50,
+    "y": 40
+   }
   },
-  "visual": "1858 plate of a pizza maker.",
+  "visual": "The 1858 book (title page), push-in.",
   "source": {
-   "institution": "British Library (digitised, via Wikimedia Commons)",
-   "item": "BOURCARD(1858) p2.172 - IL PIZZAIUOLO.jpg (plate by F. Palizzi, from Usi e costumi di Napoli e contorni, vol. 2, p. 172; HMNTS 10129.g.27)",
-   "url": "https://commons.wikimedia.org/wiki/File:BOURCARD(1858)_p2.172_-_IL_PIZZAIUOLO.jpg",
-   "rights": "Public domain (Creative Commons Public Domain Mark 1.0, as stated on the Commons file page)",
-   "credit": "F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library",
+   "institution": "Internet Archive (Library of the Institute of Literary Research PAS, RCIN)",
+   "item": "Usi e costumi di Napoli e contorni descritti e dipinti. T. 2 (1858)",
+   "url": "https://archive.org/details/rcin.org.pl.WA248_143354_F-24166-2_neapol2_o_116709",
+   "rights": "Public domain (as stated in the search result for the Internet Archive listing)",
+   "credit": "F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive",
    "verified": true
   }
  },
@@ -1217,12 +1244,13 @@
     },
     {
      "label": "The name",
-     "sub": "His wife's surname, Brandi"
+     "sub": "Esposito's wife's surname, Brandi"
     }
    ],
    "step": 1,
    "highlight": 1,
-   "caption": "Nowak's argument, not proven"
+   "caption": "Nowak's argument, not proven",
+   "arrows": false
   },
   "visual": "Flow card: box 1.",
   "source": null,
@@ -1248,12 +1276,13 @@
     },
     {
      "label": "The name",
-     "sub": "His wife's surname, Brandi"
+     "sub": "Esposito's wife's surname, Brandi"
     }
    ],
    "step": 2,
    "highlight": 2,
-   "caption": "Nowak's argument, not proven"
+   "caption": "Nowak's argument, not proven",
+   "arrows": false
   },
   "visual": "Flow card: box 2.",
   "source": null,
@@ -1279,12 +1308,13 @@
     },
     {
      "label": "The name",
-     "sub": "His wife's surname, Brandi"
+     "sub": "Esposito's wife's surname, Brandi"
     }
    ],
    "step": 3,
    "highlight": 3,
-   "caption": "Nowak's argument, not proven"
+   "caption": "Nowak's argument, not proven",
+   "arrows": false
   },
   "visual": "Flow card: box 3.",
   "source": null,
@@ -1315,7 +1345,13 @@
    "kind": "photo",
    "label": "Pizza Margherita (modern photograph)",
    "lower": "(modern photograph of a pizza Margherita, Naples, 2005)",
-   "asset": "commons-wikimedia-org-wiki-file-eq-it-na-pizza-margherita-se"
+   "asset": "commons-wikimedia-org-wiki-file-eq-it-na-pizza-margherita-se",
+   "crop": "Close crop, opposite side to 02-i",
+   "zoom": {
+    "scale": 2.0,
+    "x": 70,
+    "y": 60
+   }
   },
   "visual": "Modern photo of a Margherita pizza.",
   "source": {

@@ -183,13 +183,28 @@
   "section_name": "The Famous Version",
   "text": "It's a perfect story, because the name does all the work, right?",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "The name does all the work",
-   "sub": "A perfect story"
+   "kind": "portrait",
+   "label": "Thomas Crapper",
+   "lower": "Thomas Crapper",
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "crop": "Tight crop on the face, slow push-in (closer than 01-b and 01-f)",
+   "zoom": {
+    "scale": 1.8,
+    "x": 50,
+    "y": 30
+   }
   },
-  "visual": "Text card.",
-  "source": null
+  "visual": "Crapper portrait, tight push-in.",
+  "source": {
+   "institution": "Wikimedia Commons",
+   "item": "File:Thomas Crapper.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
+   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
+   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
+   "verified": true
+  }
  },
  {
   "id": "02-d",
@@ -216,20 +231,20 @@
    "title": "Where the myth spread",
    "steps": [
     {
-     "label": "1969",
-     "sub": "A writer named Wallace Reyburn"
+     "label": "Wallace Reyburn",
+     "sub": "A writer, 1969"
     },
     {
      "label": "Flushed with Pride",
-     "sub": "Partly tongue-in-cheek, partly a joke"
+     "sub": "Partly tongue-in-cheek"
     },
     {
      "label": "The idea spreads",
-     "sub": "That Crapper invented the toilet"
+     "sub": "Crapper invented the toilet"
     },
     {
      "label": "A lot of people's facts",
-     "sub": "Came from a book that was partly kidding"
+     "sub": "From a book partly kidding"
     }
    ],
    "step": 1,
@@ -250,20 +265,20 @@
    "title": "Where the myth spread",
    "steps": [
     {
-     "label": "1969",
-     "sub": "A writer named Wallace Reyburn"
+     "label": "Wallace Reyburn",
+     "sub": "A writer, 1969"
     },
     {
      "label": "Flushed with Pride",
-     "sub": "Partly tongue-in-cheek, partly a joke"
+     "sub": "Partly tongue-in-cheek"
     },
     {
      "label": "The idea spreads",
-     "sub": "That Crapper invented the toilet"
+     "sub": "Crapper invented the toilet"
     },
     {
      "label": "A lot of people's facts",
-     "sub": "Came from a book that was partly kidding"
+     "sub": "From a book partly kidding"
     }
    ],
    "step": 2,
@@ -284,20 +299,20 @@
    "title": "Where the myth spread",
    "steps": [
     {
-     "label": "1969",
-     "sub": "A writer named Wallace Reyburn"
+     "label": "Wallace Reyburn",
+     "sub": "A writer, 1969"
     },
     {
      "label": "Flushed with Pride",
-     "sub": "Partly tongue-in-cheek, partly a joke"
+     "sub": "Partly tongue-in-cheek"
     },
     {
      "label": "The idea spreads",
-     "sub": "That Crapper invented the toilet"
+     "sub": "Crapper invented the toilet"
     },
     {
      "label": "A lot of people's facts",
-     "sub": "Came from a book that was partly kidding"
+     "sub": "From a book partly kidding"
     }
    ],
    "step": 3,
@@ -318,20 +333,20 @@
    "title": "Where the myth spread",
    "steps": [
     {
-     "label": "1969",
-     "sub": "A writer named Wallace Reyburn"
+     "label": "Wallace Reyburn",
+     "sub": "A writer, 1969"
     },
     {
      "label": "Flushed with Pride",
-     "sub": "Partly tongue-in-cheek, partly a joke"
+     "sub": "Partly tongue-in-cheek"
     },
     {
      "label": "The idea spreads",
-     "sub": "That Crapper invented the toilet"
+     "sub": "Crapper invented the toilet"
     },
     {
      "label": "A lot of people's facts",
-     "sub": "Came from a book that was partly kidding"
+     "sub": "From a book partly kidding"
     }
    ],
    "step": 4,
@@ -1263,27 +1278,27 @@
   "type": "timeline",
   "template": "timeline",
   "fields": {
-   "title": "A lot of somebodies",
+   "title": "Where Crapper fits",
    "events": [
     {
      "date": "Even earlier",
-     "label": "Indus Valley: drained latrines"
+     "label": "Indus Valley"
     },
     {
      "date": "About 1700 to 1450 BC",
-     "label": "Knossos: water-flushed latrines"
+     "label": "Knossos"
     },
     {
      "date": "1596",
-     "label": "Harington: flushing toilet with a cistern"
+     "label": "Harington"
     },
     {
      "date": "1775",
-     "label": "Cumming patents the S-bend"
+     "label": "Cumming: S-bend"
     },
     {
      "date": "Late 1800s",
-     "label": "Crapper patents improvements"
+     "label": "Crapper: improvements"
     }
    ],
    "highlight": 4,
@@ -1331,19 +1346,25 @@
   "type": "document",
   "template": "archival",
   "fields": {
-   "kind": "patent",
-   "label": "A ballcock patent drawing: W. J. Cahill, US, 1889 (not Crapper's)",
-   "lower": "A ballcock patent drawing, W. J. Cahill, US, 1889 (not Crapper's)",
-   "asset": "patents-google-com-patent-us418162a-en"
+   "kind": "portrait",
+   "label": "Thomas Crapper",
+   "lower": "Thomas Crapper",
+   "asset": "commons-wikimedia-org-wiki-file-thomas-crapper-jpg",
+   "crop": "Slow push-in from the full portrait",
+   "zoom": {
+    "scale": 1.3,
+    "x": 50,
+    "y": 40
+   }
   },
-  "visual": "Patent drawing of a ballcock, slow pan, labelled as someone else's patent.",
+  "visual": "Crapper portrait, slow push-in: he made the toilet better.",
   "source": {
-   "institution": "US Patent Office via Google Patents",
-   "item": "US418162 - Ball-cock (W. J. Cahill, issued 31 December 1889)",
-   "url": "https://patents.google.com/patent/US418162A/en",
-   "rights": "US patent drawings are generally not subject to copyright; the patent number and date came from a search result, so confirm the Google Patents page",
-   "credit": "W. J. Cahill, US Patent 418,162, 1889",
-   "verified": false
+   "institution": "Wikimedia Commons",
+   "item": "File:Thomas Crapper.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Thomas_Crapper.jpg",
+   "rights": "Public domain: author anonymous, 19th century, published before 1 January 1931, as stated on the file page",
+   "credit": "Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons",
+   "verified": true
   },
   "notes": "Illustration of what a ballcock patent looks like. The lower says plainly it is not Crapper's. Skip if the label feels clumsy; a text card works."
  },
@@ -1591,23 +1612,23 @@
    "events": [
     {
      "date": "Even earlier",
-     "label": "Indus Valley: drained latrines"
+     "label": "Indus Valley"
     },
     {
      "date": "About 1700 to 1450 BC",
-     "label": "Knossos: water-flushed latrines"
+     "label": "Knossos"
     },
     {
      "date": "1596",
-     "label": "Harington: flushing toilet with a cistern"
+     "label": "Harington"
     },
     {
      "date": "1775",
-     "label": "Cumming patents the S-bend"
+     "label": "Cumming: S-bend"
     },
     {
      "date": "Late 1800s",
-     "label": "Crapper patents improvements"
+     "label": "Crapper: improvements"
     }
    ],
    "highlight": null,

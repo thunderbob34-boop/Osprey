@@ -160,28 +160,14 @@
   "id": "02-a",
   "section": "02",
   "section_name": "Before Anesthesia",
-  "text": "First you have to understand what surgery was like before any of this,",
+  "text": "First you have to understand what surgery was like before any of this, and I don't mean the gory part, I mean what doctors actually believed.",
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "Before anesthesia: what doctors believed",
+   "headline": "Before anesthesia: what doctors actually believed",
    "sub": "Not the gory part"
   },
   "visual": "Card setting up the section. No surgical imagery.",
-  "source": null
- },
- {
-  "id": "02-b",
-  "section": "02",
-  "section_name": "Before Anesthesia",
-  "text": "and I don't mean the gory part, I mean what doctors actually believed.",
-  "type": "text",
-  "template": "text",
-  "fields": {
-   "headline": "What doctors actually believed",
-   "sub": "About pain"
-  },
-  "visual": "Second card, belief rather than gore.",
   "source": null
  },
  {
@@ -228,13 +214,28 @@
   "section_name": "Before Anesthesia",
   "text": "and some opposed anesthesia because they thought taking away the pain could be dangerous.",
   "type": "text",
-  "template": "text",
+  "template": "archival",
   "fields": {
-   "headline": "Some opposed anesthesia, fearing it was dangerous",
-   "sub": "Their reasoning: taking away pain could be dangerous"
+   "kind": "document",
+   "label": "Medical-history review on the acceptance of pain",
+   "lower": "Some opposed anesthesia, fearing that taking away pain could be dangerous",
+   "asset": "pubmed-ncbi-nlm-nih-gov-26828088",
+   "crop": "Crop to the abstract text (a different framing from 02-c)",
+   "zoom": {
+    "scale": 1.6,
+    "x": 50,
+    "y": 60
+   }
   },
-  "visual": "Card with the hedge 'some' in the headline.",
-  "source": null
+  "visual": "The review page again, cropped to the abstract, with the lower-third carrying the line.",
+  "source": {
+   "institution": "PubMed (National Library of Medicine)",
+   "item": "Accepting Pain Over Comfort (PubMed 26828088, as cited in the episode notes)",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/26828088/",
+   "rights": "Abstract page; rights not stated. URL built from the PubMed ID in the notes, not seen in search results",
+   "credit": "PubMed, NLM",
+   "verified": false
+  }
  },
  {
   "id": "02-f",
@@ -632,12 +633,12 @@
    "title": "What the record gives us",
    "steps": [
     {
-     "label": "A named patient",
-     "sub": "James Venable"
+     "label": "James Venable",
+     "sub": "A named patient"
     },
     {
-     "label": "A known date",
-     "sub": "March 30, 1842"
+     "label": "March 30, 1842",
+     "sub": "A known date"
     },
     {
      "label": "Under ether",
@@ -709,7 +710,8 @@
     }
    ],
    "highlight": "1849",
-   "step": 2
+   "step": 2,
+   "scale": "years"
   },
   "visual": "Timeline: 1842, then 1849.",
   "source": null
@@ -730,15 +732,16 @@
     },
     {
      "date": "1846",
-     "label": "Morton's demonstration, Boston"
+     "label": "Morton's demonstration, Boston (4 years after Long)"
     },
     {
      "date": "1849",
-     "label": "Long publishes"
+     "label": "Long publishes (3 years later)"
     }
    ],
    "highlight": "1849",
-   "step": 3
+   "step": 3,
+   "scale": "years"
   },
   "visual": "Timeline now showing Morton's 1846 demonstration between the two Long dates.",
   "source": null
@@ -1183,16 +1186,16 @@
    "title": "Full general anesthesia, 1804",
    "steps": [
     {
-     "label": "A named patient",
-     "sub": "Kan Aiya"
+     "label": "Kan Aiya",
+     "sub": "A named patient"
     },
     {
-     "label": "A known date",
-     "sub": "October 13, 1804"
+     "label": "October 13, 1804",
+     "sub": "A known date"
     },
     {
-     "label": "In Japan",
-     "sub": "Hanaoka Seishu"
+     "label": "Hanaoka Seishu",
+     "sub": "In Japan"
     }
    ],
    "step": 3,
@@ -1254,15 +1257,16 @@
     },
     {
      "date": "1842",
-     "label": "Georgia: Crawford Long"
+     "label": "Georgia: Crawford Long (38 years later)"
     },
     {
      "date": "1846",
-     "label": "Boston: William Morton"
+     "label": "Boston: William Morton (4 years later)"
     }
    ],
    "highlight": "1804",
-   "step": 3
+   "step": 3,
+   "scale": "years"
   },
   "visual": "Timeline of the three dates.",
   "source": null
@@ -1283,15 +1287,16 @@
     },
     {
      "date": "1842",
-     "label": "Georgia: Crawford Long"
+     "label": "Georgia: Crawford Long (38 years later)"
     },
     {
      "date": "1846",
-     "label": "Boston: William Morton"
+     "label": "Boston: William Morton (4 years later)"
     }
    ],
    "highlight": "1846",
-   "step": 3
+   "step": 3,
+   "scale": "years"
   },
   "visual": "Same timeline, highlight moves to 1846.",
   "source": null
@@ -1499,7 +1504,7 @@
   "type": "endcard",
   "template": "endcard",
   "fields": {
-   "line": "Somebody did it first."
+   "line": "March 30: the date of Crawford Long's operation"
   },
   "visual": "End card.",
   "source": null

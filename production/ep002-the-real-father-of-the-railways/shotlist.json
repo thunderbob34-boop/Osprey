@@ -661,7 +661,7 @@
   "fields": {
    "kind": "photo",
    "label": "Replica of the Penydarren locomotive (modern photograph)",
-   "lower": "The story goes: a 500-guinea bet (replica locomotive, modern photograph)",
+   "lower": "The story goes: a 500-guinea bet between Homfray and a rival ironmaster (replica locomotive, modern photograph)",
    "asset": "commons-wikimedia-org-wiki-file-richard-trevithick-1804-pen"
   },
   "visual": "Replica locomotive, slow pan.",
@@ -1407,7 +1407,7 @@
   "type": "text",
   "template": "text",
   "fields": {
-   "headline": "The Stephensons earned their reputation, but weren't first",
+   "headline": "The Stephensons earned a lot of their reputation. They weren't first.",
    "sub": ""
   },
   "visual": "Text card.",

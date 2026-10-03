@@ -1,6 +1,6 @@
 # The Doctor Who Beat Ether Day by Four Years: shot list
 
-Total runtime 5:43.3 (72 beats). Narration: Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f), text2speech_v2 / seed_speech. Each beat is timed from the real narration length of its section, split by word count.
+Total runtime 5:43.3 (71 beats). Narration: Holden (Higgsfield preset 3c9d6053-6334-592c-8997-4e325286af3f), text2speech_v2 / seed_speech. Each beat is timed from the real narration length of its section, split by word count.
 
 | Beat | In | Dur | Narration (start) | On screen | Route | Source / credit |
 |---|---|---|---|---|---|---|
@@ -12,11 +12,10 @@ Total runtime 5:43.3 (72 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 01-f | 0:24.4 | 5.7s | is a public demonstration in Boston in 1846, and… | Two-date card: 1842 against 1846, four years apart. | code graphic |  |
 | 01-g | 0:30.0 | 5.7s | Now, to be fair, there&#x27;s a real reason the… | Engraving of the hospital building in Boston. | archival (fetch) | Boston Public Library via Digital Commonwealth ⚠️ unconfirmed |
 | 01-h | 0:35.7 | 6.7s | and we&#x27;ll give it its due, but Crawford Long… | Long portrait returns as &#x27;got there first&#x27; is hedged by &#x27;even he wasn&#x27;t the first one&#x27;. | archival (fetch) | Library of Congress Prints and Photographs Division, LCCN 2005691407 ⚠️ unconfirmed |
-| 02-a | 0:42.4 | 4.6s | First you have to understand what surgery was like… | Card setting up the section. No surgical imagery. | code graphic |  |
-| 02-b | 0:47.0 | 4.6s | and I don&#x27;t mean the gory part, I mean… | Second card, belief rather than gore. | code graphic |  |
+| 02-a | 0:42.4 | 9.2s | First you have to understand what surgery was like… | Card setting up the section. No surgical imagery. | code graphic |  |
 | 02-c | 0:51.6 | 4.2s | Before anesthesia, many doctors didn&#x27;t think pain was purely… | Journal abstract page that backs the claim. | archival (fetch) | PubMed, NLM ⚠️ unconfirmed |
 | 02-d | 0:55.9 | 3.9s | some saw it as a sign the body was… | Card with the hedge &#x27;some&#x27; in the headline. | code graphic |  |
-| 02-e | 0:59.8 | 5.0s | and some opposed anesthesia because they thought taking away… | Card with the hedge &#x27;some&#x27; in the headline. | code graphic |  |
+| 02-e | 0:59.8 | 5.0s | and some opposed anesthesia because they thought taking away… | The review page again, cropped to the abstract, with the lower-third carrying the line. | archival (fetch) | PubMed, NLM ⚠️ unconfirmed |
 | 02-f | 1:04.7 | 4.6s | And that wasn&#x27;t just a few cranks, the great… | Magendie lithograph portrait as he is named. | archival (fetch) | Wellcome Collection ✅ |
 | 02-g | 1:09.4 | 3.5s | argued that pain, in his words, &quot;has always its… | Quote card with Magendie&#x27;s exact words. | code graphic |  |
 | 02-h | 1:12.9 | 4.3s | A peer-reviewed medical review calls it an &quot;erroneous yet… | Quote card with the review&#x27;s exact words. | code graphic |  |

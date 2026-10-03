@@ -30,7 +30,7 @@ Total runtime 5:38.7 (66 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 03-f | 1:44.1 | 7.4s | And the third one is the name it&#x27;s addressed… | Flow card: box 3 builds in. | code graphic |  |
 | 03-g | 1:51.5 | 3.2s | Now think about that third one for a second. | Flow card holds on box 3. | code graphic |  |
 | 03-h | 1:54.7 | 6.7s | If the palace is writing to thank Raffaele Esposito,… | Compare card, right side ghosted. | code graphic |  |
-| 03-i | 2:01.4 | 6.0s | But it&#x27;s addressed using the name Brandi, and that&#x27;s… | Flow card, box 3 lit: the name. | code graphic |  |
+| 03-i | 2:01.4 | 6.0s | But it&#x27;s addressed using the name Brandi, and that&#x27;s… | Compare card, step 2: the right side reveals &#x27;Addressed using the name Brandi&#x27;. | code graphic |  |
 | 04-a | 2:07.5 | 3.9s | So if the letter is fake, who made it,… | Text card. | code graphic |  |
 | 04-b | 2:11.4 | 5.0s | Nowak thinks it was probably made up later, and… | Timeline: 1889 appears. | code graphic |  |
 | 04-c | 2:16.4 | 5.0s | who ran the pizzeria from the 1930s, and that… | Timeline: 1930s appears beside 1889. | code graphic |  |
@@ -59,7 +59,7 @@ Total runtime 5:38.7 (66 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-d | 4:27.9 | 6.8s | And Nowak&#x27;s case is about the letter and how… | Journal article page. | archival (fetch) | Food, Culture &amp; Society 17(1), 2014 ⚠️ unconfirmed |
 | 06-e | 4:34.7 | 6.8s | So the fair version is this, maybe Esposito made… | Modern photo of a Margherita pizza. | archival (fetch) | Valerio Capello, Wikimedia Commons ✅ |
 | 06-f | 4:41.5 | 5.5s | but the letter that&#x27;s supposed to prove it looks… | Text card. | code graphic |  |
-| 06-g | 4:47.0 | 4.1s | and the pizza itself was already being described in… | 1858 plate of a pizza maker. | archival (fetch) | F. Palizzi, in F. de Bourcard, Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2 (1858), British Library ✅ |
+| 06-g | 4:47.0 | 4.1s | and the pizza itself was already being described in… | The 1858 book (title page), push-in. | archival (fetch) | F. de Bourcard (ed.), Usi e costumi di Napoli e contorni descritti e dipinti, vol. 2, 1858, via Internet Archive ✅ |
 | 07-a | 4:51.1 | 7.5s | So here&#x27;s where it lands. The famous story says… | Date stamp. | code graphic |  |
 | 07-b | 4:58.7 | 4.0s | and the proof is a thank-you letter from the… | Queen Margherita portrait. | archival (fetch) | George Grantham Bain Collection, Library of Congress, LC-DIG-ggbain-19206 ✅ |
 | 07-c | 5:02.6 | 5.6s | But historian Zachary Nowak found that letter has the… | Flow card: box 1. | code graphic |  |

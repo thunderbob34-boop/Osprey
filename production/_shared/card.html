@@ -178,19 +178,20 @@ else if(t==='diagram'){ html=(diagrams[f.variant]||(()=>`<div class="center"><h2
 else if(t==='map'){ html=(maps[f.variant]||(()=>`<div class="center"><h2>map: ${esc(f.variant)}</h2></div>`))(); }
 else if(t==='endcard'){ html=`<div class="frame"></div><div class="center"><h2>${esc(f.line)}</h2><div class="rule"></div></div>`; }
 else if((t==='archival'||t==='illustration') && D.img){ const s=D.source||{}; document.body.style.background='#141210';
-  html=`<div class="photo" style="background-image:url('${D.img}')"></div>${f.lower?`<div class="lower">${esc(f.lower)}</div>`:''}<div class="credit">${esc(s.credit||s.institution||'')}</div>`; }
+  const z=f.zoom; html=`<div class="photo" style="background-image:url('${D.img}')${z?`;background-size:${z.scale*100}% auto;background-position:${z.x??50}% ${z.y??50}%`:''}"></div>${f.lower?`<div class="lower">${esc(f.lower)}</div>`:''}<div class="credit">${esc(s.credit||s.institution||'')}</div>`; }
 else if(t==='archival'||t==='illustration'){ document.body.classList.add('ph'); const s=D.source||{};
   html=(f.lower?`<div class="lower" style="z-index:2">${esc(f.lower)}</div>`:'')+`<div class="phbox"><div class="phtag">${t==='illustration'?'ILLUSTRATION · TO GENERATE':'ARCHIVAL '+esc((f.kind||'image').toUpperCase())+' · TO FETCH'}</div>
   <div class="phlabel">${esc(f.label||f.scene||'')}</div>${f.crop?`<div class="phsrc" style="color:#E0B85A">${esc(f.crop)}</div>`:''}${f.asset?`<div class="phsrc">save as assets/${esc(f.asset)}.jpg</div>`:''}
   <div class="phsrc">${esc(s.institution||'')}${s.item?' · '+esc(s.item):''}${s.rights?'<br>'+esc(s.rights):''}${s.verified===false?'<br><b style="color:#E0B85A">SOURCE NOT YET CONFIRMED</b>':''}</div></div>`; }
-else if(t==='flow'){ // {title, steps:[{label,sub}], step, caption}
-  const st=f.steps||[]; const n=st.length; const W=Math.min(360,(1700-(n-1)*60)/n); const x0=(1920-(n*W+(n-1)*60))/2;
+else if(t==='flow'){ // {title, steps:[{label,sub}], step, highlight, caption, arrows (default true; false for parallel items)}
+  const st=f.steps||[]; const n=st.length; const G=f.arrows===false?50:70; const W=Math.min(500,(1760-(n-1)*G)/n); const x0=(1920-(n*W+(n-1)*G))/2;
+  const fl=W>=420?42:W>=330?36:30, fs=W>=420?30:W>=330?27:23;
   html=svgWrap(`${T(960,170,(f.title||'').toUpperCase(),40,'middle',800)}
-  ${st.map((s,i)=>{const x=x0+i*(W+60); const on=!f.step||i<f.step;
-    return `<g style="opacity:${on?1:0.13}"><rect x="${x}" y="430" width="${W}" height="180" rx="12" fill="${(f.highlight===i)?'#F2C14E':'#EFE7D6'}" stroke="#1D1B18" stroke-width="5"/>
-    <foreignObject x="${x+12}" y="440" width="${W-24}" height="160"><div xmlns="http://www.w3.org/1999/xhtml" style="height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font:800 ${W<260?24:30}px Inter,Arial;color:#1D1B18;line-height:1.2">${esc(s.label)}${s.sub?`<div style="font:600 ${W<260?18:22}px Inter,Arial;color:#5E564A;margin-top:8px">${esc(s.sub)}</div>`:''}</div></foreignObject>
-    ${i<n-1?`<line x1="${x+W+6}" y1="520" x2="${x+W+52}" y2="520" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>`:''}</g>`}).join('')}
-  ${f.caption?T(960,780,f.caption,34,'middle',600,'#5E564A'):''}`); }
+  ${st.map((s,i)=>{const x=x0+i*(W+G); const on=!f.step||i<f.step;
+    return `<g style="opacity:${on?1:0.13}"><rect x="${x}" y="390" width="${W}" height="260" rx="14" fill="${(f.highlight===i)?'#F2C14E':'#EFE7D6'}" stroke="#1D1B18" stroke-width="5"/>
+    <foreignObject x="${x+14}" y="400" width="${W-28}" height="240"><div xmlns="http://www.w3.org/1999/xhtml" style="height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font:800 ${fl}px Inter,Arial;color:#1D1B18;line-height:1.15">${esc(s.label)}${s.sub?`<div style="font:600 ${fs}px Inter,Arial;color:#4A443A;margin-top:12px;line-height:1.25">${esc(s.sub)}</div>`:''}</div></foreignObject>
+    ${i<n-1&&f.arrows!==false?`<line x1="${x+W+6}" y1="520" x2="${x+W+G-8}" y2="520" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>`:''}</g>`}).join('')}
+  ${f.caption?T(960,800,f.caption,36,'middle',600,'#5E564A'):''}`); }
 else if(t==='pinmap'){ // {title, pins:[{name,lat,lon,first?}], connect, caption, span?}  north up, land from Natural Earth 1:10m
   const P=f.pins||[]; const lats=P.map(p=>p.lat), lons=P.map(p=>p.lon);
   let la0=Math.min(...lats),la1=Math.max(...lats),lo0=Math.min(...lons),lo1=Math.max(...lons);
@@ -208,17 +209,17 @@ else if(t==='pinmap'){ // {title, pins:[{name,lat,lon,first?}], connect, caption
   html=svgWrap(`<rect x="0" y="0" width="1920" height="1080" fill="#D3D9D2"/><path d="${land}" fill="#EFE7D6" stroke="#8B8170" stroke-width="2.5" stroke-linejoin="round"/>
   <rect x="0" y="0" width="1920" height="170" fill="#EFE7D6" opacity=".82"/>${T(960,110,f.title||'',40,'middle',800)}
   ${f.connect&&P.length>1?P.slice(1).map((p,i)=>`<line x1="${X(P[i])}" y1="${Y(P[i])}" x2="${X(p)}" y2="${Y(p)}" stroke="#A8261B" stroke-width="6" stroke-dasharray="22 12"/>`).join(''):''}
-  ${P.map(p=>`<circle cx="${X(p)}" cy="${Y(p)}" r="16" fill="${p.first?'#A8261B':'#1D1B18'}" stroke="#EFE7D6" stroke-width="4"/><text x="${X(p)+(X(p)>1500?-26:26)}" y="${Y(p)+12}" font-family="Inter,Arial" font-size="36" font-weight="800" text-anchor="${X(p)>1500?'end':'start'}" fill="#1D1B18" stroke="#EFE7D6" stroke-width="8" paint-order="stroke">${esc(p.name)}</text>`).join('')}
+  ${P.map(p=>`<circle cx="${X(p)}" cy="${Y(p)}" r="16" fill="${p.first?'#A8261B':'#1D1B18'}" stroke="#EFE7D6" stroke-width="4"/><text x="${X(p)+(X(p)+26+p.name.length*21>1840?-26:26)}" y="${Y(p)+12}" font-family="Inter,Arial" font-size="36" font-weight="800" text-anchor="${X(p)+26+p.name.length*21>1840?'end':'start'}" fill="#1D1B18" stroke="#EFE7D6" stroke-width="8" paint-order="stroke">${esc(p.name)}</text>`).join('')}
   ${T(1800,250,'N',34,'middle',800)}<line x1="1800" y1="320" x2="1800" y2="265" stroke="#1D1B18" stroke-width="5" marker-end="url(#ar)"/>
   ${f.caption?`<rect x="0" y="950" width="1920" height="130" fill="#EFE7D6" opacity=".82"/>`+T(960,1000,f.caption,34,'middle',600,'#5E564A'):''}${T(1780,1050,'coastlines: Natural Earth · places approximate',22,'end',600,'#5E564A')}`); }
-else if(t==='timeline'){ // {title, events:[{date,label}], highlight, step}
-  const E=f.events||[]; const n=E.length; const x0=220, x1=1700;
+else if(t==='timeline'){ // {title, events:[{date,label}], highlight (index or date), step, scale:'years' to space by date}
+  const E=f.events||[]; const n=E.length; const x0=290, x1=1630;
   html=svgWrap(`${T(960,170,(f.title||'').toUpperCase(),38,'middle',800)}<line x1="${x0-60}" y1="560" x2="${x1+60}" y2="560" stroke="#1D1B18" stroke-width="5"/>
-  ${E.map((e,i)=>{const x=n>1?x0+i*(x1-x0)/(n-1):960; const on=!f.step||i<f.step; const hi=f.highlight===i; const up=i%2===0;
+  ${E.map((e,i)=>{const yr=E.map(e=>parseInt((String(e.date).match(/\d{3,4}/)||[])[0])); const prop=f.scale==='years'&&yr.every(v=>!isNaN(v)); const x=n<2?960:prop?x0+(yr[i]-yr[0])*(x1-x0)/(yr[n-1]-yr[0]):x0+i*(x1-x0)/(n-1); const on=!f.step||i<f.step; const hi=f.highlight===i||(f.highlight!=null&&String(f.highlight)===String(e.date)); const up=i%2===0;
    return `<g style="opacity:${on?1:0.13}"><circle cx="${x}" cy="560" r="${hi?24:16}" fill="${hi?'#A8261B':'#1D1B18'}"/>
    <line x1="${x}" y1="${up?536:584}" x2="${x}" y2="${up?470:650}" stroke="#5E564A" stroke-width="3"/>
    ${T(x,up?445:700,e.date,44,'middle',800,hi?'#A8261B':'#1D1B18')}
-   <foreignObject x="${x-170}" y="${up?300:720}" width="340" height="110"><div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font:600 26px Inter,Arial;color:#5E564A;line-height:1.25;${up?'display:flex;flex-direction:column;justify-content:flex-end;height:110px':''}">${esc(e.label)}</div></foreignObject></g>`}).join('')}`); }
+   <foreignObject x="${x-180}" y="${up?270:720}" width="360" height="140"><div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;font:600 30px Inter,Arial;color:#4A443A;line-height:1.25;${up?'display:flex;flex-direction:column;justify-content:flex-end;height:140px':''}">${esc(e.label)}</div></foreignObject></g>`}).join('')}`); }
 else if(t==='stat'){ // {number, label, sub}
   html=`<div class="frame"></div><div class="center"><div class="bigdate" style="color:var(--red)">${esc(f.number)}</div><div class="rule"></div><div class="sub" style="font-style:normal;color:var(--ink)">${esc(f.label)}</div>${f.sub?`<div class="sub" style="font-size:32px">${esc(f.sub)}</div>`:''}</div>`; }
 else { html=`<div class="center"><h2>${esc(t)}</h2></div>`; }

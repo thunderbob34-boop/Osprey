@@ -13,7 +13,7 @@ Total runtime 5:22.8 (70 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 01-g | 0:27.0 | 4.3s | and we&#x27;ll give him his due, but he wasn&#x27;t… | Text card; sub lands on &#x27;his due&#x27;. | code graphic |  |
 | 02-a | 0:31.2 | 5.0s | The famous version goes like this, a man named… | Two-box flow, first box lit: the famous version. | code graphic |  |
 | 02-b | 0:36.3 | 3.7s | puts his name on it, and his name becomes… | Same flow, second box added. | code graphic |  |
-| 02-c | 0:40.0 | 4.0s | It&#x27;s a perfect story, because the name does all… | Text card. | code graphic |  |
+| 02-c | 0:40.0 | 4.0s | It&#x27;s a perfect story, because the name does all… | Crapper portrait, tight push-in. | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
 | 02-d | 0:44.0 | 5.7s | You hear Crapper and toilet in the same sentence… | Text card. | code graphic |  |
 | 02-e | 0:49.7 | 5.4s | And a lot of that comes from one book.… | Flow build, step 1: 1969, Wallace Reyburn. | code graphic |  |
 | 02-f | 0:55.1 | 3.7s | published a book called Flushed with Pride, and it&#x27;s… | Flow build, step 2: the book title and its hedge. | code graphic |  |
@@ -59,7 +59,7 @@ Total runtime 5:22.8 (70 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 06-b | 3:57.2 | 2.8s | he&#x27;s a real sanitary engineer who did real work. | Text card. | code graphic |  |
 | 06-c | 4:00.0 | 5.4s | He came along in the late 1800s, and he… | Timeline of the five dates already narrated, Crapper&#x27;s lit. | code graphic |  |
 | 06-d | 4:05.4 | 5.4s | which is the float in the tank that shuts… | Three-box flow: the float in the tank shuts the water off when it&#x27;s full. | code graphic |  |
-| 06-e | 4:10.8 | 5.4s | and on fittings. So he made the toilet better,… | Patent drawing of a ballcock, slow pan, labelled as someone else&#x27;s patent. | archival (fetch) | W. J. Cahill, US Patent 418,162, 1889 ⚠️ unconfirmed |
+| 06-e | 4:10.8 | 5.4s | and on fittings. So he made the toilet better,… | Crapper portrait, slow push-in: he made the toilet better. | archival (fetch) | Portrait of Thomas Crapper, unknown photographer (source: MJC Plumbing), via Wikimedia Commons ✅ |
 | 06-f | 4:16.2 | 4.8s | And what about the word? Well, &quot;crap&quot; as a… | Text card. | code graphic |  |
 | 06-g | 4:21.0 | 2.5s | so he&#x27;s not where the word came from. | Text card. | code graphic |  |
 | 06-h | 4:23.5 | 4.1s | The word &quot;crapper&quot; for the toilet may come from… | Photo of American troops in London in 1917, slow push-in. | archival (fetch) | U.S. troops marching through London, c. 17 September 1917 (stereograph published by Realistic Travels), Library of Congress ⚠️ unconfirmed |

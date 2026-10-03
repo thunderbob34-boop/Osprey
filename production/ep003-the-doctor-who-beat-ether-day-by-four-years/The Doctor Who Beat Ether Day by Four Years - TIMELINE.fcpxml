@@ -13,7 +13,6 @@
 <asset id="g_01-g" name="01-g" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/graphics/01-g.png"/></asset>
 <asset id="g_01-h" name="01-h" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/graphics/01-h.png"/></asset>
 <asset id="g_02-a" name="02-a" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/graphics/02-a.png"/></asset>
-<asset id="g_02-b" name="02-b" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/graphics/02-b.png"/></asset>
 <asset id="g_02-c" name="02-c" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/graphics/02-c.png"/></asset>
 <asset id="g_02-d" name="02-d" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/graphics/02-d.png"/></asset>
 <asset id="g_02-e" name="02-e" start="0s" duration="0s" hasVideo="1" format="r2"><media-rep kind="original-media" src="file:///home/user/Osprey/production/ep003-the-doctor-who-beat-ether-day-by-four-years/graphics/02-e.png"/></asset>
@@ -97,8 +96,7 @@
 <video ref="g_01-f" offset="731/30s" name="01-f" start="0s" duration="170/30s"></video>
 <video ref="g_01-g" offset="901/30s" name="01-g" start="0s" duration="170/30s"></video>
 <video ref="g_01-h" offset="1071/30s" name="01-h" start="0s" duration="201/30s"></video>
-<video ref="g_02-a" offset="1272/30s" name="02-a" start="0s" duration="138/30s"><asset-clip ref="vo_02" lane="-1" offset="0s" start="0s" duration="50s" name="VO 02" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="02 Before Anesthesia"/></video>
-<video ref="g_02-b" offset="47s" name="02-b" start="0s" duration="139/30s"></video>
+<video ref="g_02-a" offset="1272/30s" name="02-a" start="0s" duration="277/30s"><asset-clip ref="vo_02" lane="-1" offset="0s" start="0s" duration="50s" name="VO 02" audioRole="dialogue"/><marker start="0s" duration="1/30s" value="02 Before Anesthesia"/></video>
 <video ref="g_02-c" offset="1549/30s" name="02-c" start="0s" duration="127/30s"></video>
 <video ref="g_02-d" offset="1676/30s" name="02-d" start="0s" duration="117/30s"></video>
 <video ref="g_02-e" offset="1793/30s" name="02-e" start="0s" duration="149/30s"></video>
