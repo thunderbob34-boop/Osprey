@@ -4,7 +4,7 @@ Total runtime 5:43.2 (75 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 
 | Beat | In | Dur | Narration (start) | On screen | Route | Source / credit |
 |---|---|---|---|---|---|---|
-| 01-a | 0:00.0 | 4.4s | Ask most Americans who gave us the railroad, and… | Map flies in over the United States; New York is marked. Geography only, no claim. | animated map |  |
+| 01-a | 0:00.0 | 4.4s | Ask most Americans who gave us the railroad, and… | Map flies in over the United States for orientation; no pins, geography only. | animated map |  |
 | 01-b | 0:04.4 | 4.8s | Cornelius Vanderbilt, the man who got enormously rich off… | Slow push-in on the Vanderbilt daguerreotype; name slides in as the lower third. | archival (fetch) | Mathew Brady studio / Wikimedia Commons ✅ |
 | 01-c | 0:09.2 | 4.8s | But Vanderbilt didn&#x27;t get into railroads in a big… | Big stamped-in &quot;1860s&quot; with the hedge &quot;in a big way&quot; in the caption. | motion graphic |  |
 | 01-d | 0:14.0 | 6.3s | Ask in Britain, and you&#x27;ll hear George Stephenson, the… | Push-in on the George Stephenson engraving; name in the lower third. | archival (fetch) | William Holl after John Lucas / Wikimedia Commons ✅ |
@@ -30,24 +30,24 @@ Total runtime 5:43.2 (75 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 03-b | 1:44.3 | 4.2s | in south Wales, Richard Trevithick put his steam locomotive… | Push-in on the 1811 print of the Penydarren ironworks. | archival (fetch) | John George Wood, 1811 / Wikimedia Commons ✅ |
 | 03-c | 1:48.5 | 5.9s | and a tramroad is basically an early track, iron… | Flow: a tramroad is an early track; iron plates laid down for wagons to run along. | motion graphic |  |
 | 03-d | 1:54.4 | 5.2s | And that day his engine pulled five wagons with… | Replica photo; chips pop in as the numbers are spoken. | archival (fetch) | The wub / Wikimedia Commons ✅ |
-| 03-e | 1:59.6 | 3.8s | plus about seventy men who climbed on and hitched… | Second replica photo; chip for the men. | archival (fetch) | Thryduulf / Wikimedia Commons ✅ |
-| 03-f | 2:03.4 | 5.9s | nearly ten miles down the line to the canal… | Map: the tramroad draws from Penydarren to Abercynon, a train icon riding the head. | animated map |  |
-| 03-g | 2:09.3 | 3.5s | Now, nearly five miles an hour doesn&#x27;t sound like… | Third replica photo; speed chip. | archival (fetch) | Hugh Llewelyn / Wikimedia Commons ✅ |
-| 03-h | 2:12.8 | 4.9s | But the speed isn&#x27;t the point, the point is… | Closer crop of replica 1. | archival (fetch) | The wub / Wikimedia Commons ✅ |
+| 03-e | 1:59.6 | 3.8s | plus about seventy men who climbed on and hitched… | Modern photo of the old tramroad route at Quakers Yard; the men chip pops in. | archival (fetch) | nantcoly / geograph.org.uk ✅ |
+| 03-f | 2:03.4 | 5.9s | nearly ten miles down the line to the canal… | Map: the tramroad draws from Penydarren to Abercynon (route approximate). | animated map |  |
+| 03-g | 2:09.3 | 3.5s | Now, nearly five miles an hour doesn&#x27;t sound like… | Modern photo of the former tramroad at Merthyr Vale; speed chip. | archival (fetch) | Jaggery / geograph.org.uk ✅ |
+| 03-h | 2:12.8 | 4.9s | But the speed isn&#x27;t the point, the point is… | Same tramroad map as 03-f, already drawn: Penydarren to Abercynon, no fly-in. | animated map |  |
 | 03-i | 2:17.6 | 4.9s | ten tons of iron and about seventy people on… | Replica 2 again with all three chips timed to the words. | archival (fetch) | Thryduulf / Wikimedia Commons ✅ |
 | 03-j | 2:22.5 | 5.6s | and that run on February 21st, 1804 is the… | Date stamps in: February 21, 1804, the first known railway journey by steam locomotive. | motion graphic |  |
-| 03-k | 2:28.1 | 4.5s | not the first one people remember but the first… | Compare card: the first people remember versus the first we know of. | motion graphic |  |
+| 03-k | 2:28.1 | 4.5s | not the first one people remember but the first… | Compare card: not the first one people remember, but the first one we know of. | motion graphic |  |
 | 03-l | 2:32.6 | 3.1s | and it happened in Wales, twenty-five years before Rocket. | Date line draws from February 1804 to October 1829, gap: twenty-five years. | motion graphic |  |
 | 03-m | 2:35.7 | 5.5s | There&#x27;s also a story about this run. The story… | Second, closer crop of the ironworks print. | archival (fetch) | John George Wood, 1811 / Wikimedia Commons ✅ |
 | 03-n | 2:41.2 | 4.2s | five hundred guineas, between an ironmaster named Homfray and… | &quot;500&quot; counts up; caption: guineas, with the Homfray bet hedged as the story goes. | motion graphic |  |
 | 03-o | 2:45.4 | 6.2s | but the sources don&#x27;t agree on who the rival… | Kinetic text card: a story, not a settled fact. | motion graphic |  |
-| 04-a | 2:51.7 | 3.1s | Now here&#x27;s the catch, and it&#x27;s a big one, | Kinetic text card: Here is the catch. | motion graphic |  |
+| 04-a | 2:51.7 | 3.1s | Now here&#x27;s the catch, and it&#x27;s a big one, | Section-opening title: words build in. | motion graphic |  |
 | 04-b | 2:54.7 | 3.4s | the engine was so heavy it kept cracking the… | Replica 2, tight on the wheels and the track. | archival (fetch) | Thryduulf / Wikimedia Commons ✅ |
-| 04-c | 2:58.1 | 4.4s | Those plates were cast iron, and cast iron is… | Compare card: cast iron is hard but brittle. | motion graphic |  |
+| 04-c | 2:58.1 | 4.4s | Those plates were cast iron, and cast iron is… | Compare card: cast iron is hard, but brittle. | motion graphic |  |
 | 04-d | 3:02.6 | 5.4s | it cracks instead of bending, and Trevithick&#x27;s engine was… | Modern photo of the old tramroad route at Merthyr Vale. | archival (fetch) | Jaggery / geograph.org.uk ✅ |
-| 04-e | 3:08.0 | 3.8s | and you can&#x27;t run a railway on track that… | Replica 3, tighter on the front. | archival (fetch) | Hugh Llewelyn / Wikimedia Commons ✅ |
+| 04-e | 3:08.0 | 3.8s | and you can&#x27;t run a railway on track that… | Second, different crop of the Quakers Yard tramroad photo. | archival (fetch) | nantcoly / geograph.org.uk ✅ |
 | 04-f | 3:11.8 | 5.8s | So the Penydarren run worked. It showed a steam… | Flow: the run worked; a steam engine could pull a real load on rails. | motion graphic |  |
-| 04-g | 3:17.5 | 4.8s | But it didn&#x27;t stay a railway engine, because the… | Replica 1, wide crop. | archival (fetch) | The wub / Wikimedia Commons ✅ |
+| 04-g | 3:17.5 | 4.8s | But it didn&#x27;t stay a railway engine, because the… | Push-in on a modern photo of the Penydarren replica. | archival (fetch) | Hugh Llewelyn / Wikimedia Commons ✅ |
 | 04-h | 3:22.3 | 5.8s | Trevithick got there twenty-five years before the famous engine,… | Second, closer crop of the Linnell portrait. | archival (fetch) | John Linnell, 1816 / Wikimedia Commons ✅ |
 | 05-a | 3:28.1 | 5.7s | This doesn&#x27;t go straight from Trevithick to Stephenson, though.… | Map pulls out from Penydarren to show Britain. | animated map |  |
 | 05-b | 3:33.8 | 5.3s | that most people have never heard. In 1812, at… | Same map: a pin lands on the Middleton Railway in Leeds. | animated map |  |
@@ -57,20 +57,20 @@ Total runtime 5:43.2 (75 beats). Narration: Holden (Higgsfield preset 3c9d6053-6
 | 05-f | 3:51.6 | 4.9s | Then in 1813 and 1814 there&#x27;s Puffing Billy, from… | Same map: a pin lands at Wylam for Puffing Billy. | animated map |  |
 | 05-g | 3:56.5 | 5.7s | and Puffing Billy is still around, it&#x27;s the oldest… | Push-in on a modern photograph of Puffing Billy. | archival (fetch) | TarnishedPath / Wikimedia Commons ✅ |
 | 05-h | 4:02.2 | 4.5s | And then in 1825 Locomotion No. 1 opens the… | Push-in on the Dobbin painting of the 1825 opening. | archival (fetch) | John Dobbin / Wikimedia Commons ✅ |
-| 05-i | 4:06.7 | 3.0s | and in October 1829 Rocket wins at Rainhill. | Same map: the 1825 line stays drawn, Rainhill lights up and the Liverpool and Manchester line draws. | animated map |  |
+| 05-i | 4:06.7 | 3.0s | and in October 1829 Rocket wins at Rainhill. | Same map: Rainhill lights up; the earlier pins stay. | animated map |  |
 | 05-j | 4:09.7 | 4.2s | And there&#x27;s more, because even Rocket isn&#x27;t quite what… | Third crop of the Rocket photo, from the right. | archival (fetch) | Les Chatfield / Wikimedia Commons ✅ |
 | 05-k | 4:13.9 | 4.5s | Rocket, the engine that&#x27;s supposed to be the proof… | Third crop of the Stephenson engraving, wider. | archival (fetch) | William Holl after John Lucas / Wikimedia Commons ✅ |
 | 05-l | 4:18.4 | 3.8s | was built under the direction of his son, Robert… | Push-in on the Robert Stephenson photograph; name in the lower third. | archival (fetch) | Maull &amp; Polyblank, 1856 / Wikimedia Commons ✅ |
 | 05-m | 4:22.2 | 5.3s | So the most famous Stephenson engine was largely the… | Compare card: largely the son&#x27;s engine, not the father&#x27;s. | motion graphic |  |
 | 05-n | 4:27.5 | 4.2s | So here&#x27;s the honest version. Trevithick was the first… | Third crop of the monument. | archival (fetch) | 14GTR / Wikimedia Commons ✅ |
-| 05-o | 4:31.7 | 3.4s | a steam engine could pull a load on rails. | Replica 3 again, wider crop. | archival (fetch) | Hugh Llewelyn / Wikimedia Commons ✅ |
+| 05-o | 4:31.7 | 3.4s | a steam engine could pull a load on rails. | Third, different crop of the 1811 ironworks print. | archival (fetch) | John George Wood, 1811 / Wikimedia Commons ✅ |
 | 05-p | 4:35.1 | 4.6s | The Stephensons were the ones who built railways that… | Flow: first box, built railways that ran every day. | motion graphic |  |
 | 05-q | 4:39.6 | 4.1s | carried people and freight, and made money. That&#x27;s a… | Flow: second box, carried people and freight, and made money. | motion graphic |  |
 | 05-r | 4:43.8 | 3.8s | and it&#x27;s why their name stuck. They just weren&#x27;t… | Kinetic text card: they just weren&#x27;t first. | motion graphic |  |
 | 06-a | 4:47.6 | 6.0s | And this is the part that stays with you,… | Date stamps in: April 22, 1833. | motion graphic |  |
 | 06-b | 4:53.5 | 4.1s | in Dartford, in poverty, and local workers paid for… | Map: from the Penydarren pin across southern England to Dartford. | animated map |  |
 | 06-c | 4:57.6 | 3.7s | and his burial so he wouldn&#x27;t get a pauper&#x27;s… | Third crop of the Linnell portrait. | archival (fetch) | John Linnell, 1816 / Wikimedia Commons ✅ |
-| 06-d | 5:01.4 | 4.5s | So the man behind the first known railway journey… | Replica 2, from the right. | archival (fetch) | Thryduulf / Wikimedia Commons ✅ |
+| 06-d | 5:01.4 | 4.5s | So the man behind the first known railway journey… | Fourth crop of the Trevithick monument, low on the base. | archival (fetch) | 14GTR / Wikimedia Commons ✅ |
 | 06-e | 5:05.9 | 5.2s | the man the national museum of Wales calls the… | Compare card: the man behind the first known journey; the national museum of Wales calls him the real father of the railways. | motion graphic |  |
 | 06-f | 5:11.1 | 5.2s | needed local workers to pay for his funeral. That&#x27;s… | Fourth, closest crop of the Linnell portrait. | archival (fetch) | John Linnell, 1816 / Wikimedia Commons ✅ |
 | 06-g | 5:16.3 | 5.6s | and meanwhile the Stephenson name went on to be… | Fourth crop of the Rocket photo. | archival (fetch) | Les Chatfield / Wikimedia Commons ✅ |
