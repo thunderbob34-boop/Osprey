@@ -116,6 +116,19 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
   - Root cause: the scripts were written for hedging safety, so every claim got restated with its caveat. No check looked for repetition or talking down.
   - Next direction (proposed by Gus): shorts that Gus voices himself, the same way as Lumber Counter Talk and Heavier Runners. That sets the voice, troubleshoots the facts, and generates ideas. The long episodes get redone after that.
   - Check added: every script pass counts restatements (the same point made twice is cut), and the blind read asks "where does this talk down to someone who knows basic history?"
+- **2026-10-06, the animated Trevithick mockup "looks terrible" (Gus).**
+  - This is the second time AI cartoon scenes have been rejected (the first was the ep2 "fifth grader" tram run).
+  - Root causes:
+    - The style was described in words, not taken from a reference Gus picked.
+    - There was no locked design sheet, so the engine changed in every shot and the track was the modern kind.
+    - The video model only wobbled smoke and coats, so nothing meaningful moved.
+    - Stills went straight to video before anyone checked them.
+  - Checks added:
+    - Gus picks a reference frame for the look before any generation.
+    - Lock design sheets first: the engine and track from the replica photos, plus the characters.
+    - Stills are checked for accuracy against the real photos, and approved, before any video credits are spent.
+    - Animate only beats where the motion carries the fact. Real photos stay for real people and surviving objects.
+  - Higgsfield credits ran out on 2026-10-06. Next generation runs on Gus's Google Flow account.
 - **2026-10-03, Hanaoka date.**
   - "October 13, 1804" is the Japanese-calendar date; it falls on 14 November 1804 on ours.
   - The research had kept the date unqualified. The script now says "by the Japanese calendar of the time", and ep3 sections 06–07 were re-read.
