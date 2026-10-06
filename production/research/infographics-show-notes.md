@@ -66,3 +66,38 @@ Their recent Shorts are mostly "what happens if / when" body and science topics.
 
 ## Open
 Whether to add simple character animation (their style) to act out the scenes, with real photos for the real people and machines. Gus liked their "basic animations that go with the story", but also rejected cartoon reconstructions of historical technology.
+
+## Tell It Animated (looked at 2026-10-06)
+**Sources:**
+- The channel's 12 latest uploads, pulled 2026-10-06 with yt-dlp:
+  - 5–7 minutes each;
+  - 0.26M–4.6M views;
+  - "The Evolution of Godzilla" has about 85M views.
+- Frames from that video at 60–200 s, compared with frames from The Infographics Show's Bin Laden video.
+
+**What they do:**
+- **Format.** "The Evolution of X": every version of one character, in date order, one version per segment.
+- **Picture.** One large character fills the frame against a plain colour backdrop that changes per segment. There's no scenery.
+- **Drawing.** Thick-outline cartoon with expressive faces. Thought bubbles carry side characters.
+- **Stat card.** Each version gets a small card bottom-left: title (year), then name, height, weight, length.
+
+**Infographics Show, from the same frame pull:**
+- Full flat-vector scenes with characters.
+- **Real photos are framed as cards with fact chips.** For example, "American Airlines Flight 77, passengers and crew: 59" over the real Pentagon photo, with a "FACT SOURCE" tag.
+- A real mugshot, real satellite imagery, and kinetic captions over maps.
+
+## The mix proposed for us
+- **From Tell It Animated, the structure.**
+  - The "who did it first" story is an evolution in date order: Trevithick 1804, then the next machines, then Rocket 1829.
+  - Each machine or person gets its own segment, with a stat card (year, builder, and figures from the script only). The time bar already does this job.
+- **From Tell It Animated, the picture.**
+  - One subject on a plain backdrop is the easiest thing to draw accurately, to keep identical between shots, and to check against a replica photo.
+  - It fixes what went wrong in the 2026-10-03 mockup: busy scenes, the wrong track, an engine that changed every shot.
+- **From The Infographics Show:**
+  - real photos as framed cards with fact chips and a source tag;
+  - the narration cadence above.
+- **Leave out:** Tell It Animated's comedy bits and pop-culture gags. Gus has banned asides.
+- **Production.**
+  - Draw each subject once as a cut-out (a still image split into parts).
+  - Move the parts with our own motion engine: wheels turn, the train slides along, a character bobs.
+  - Use AI video for only a few shots where the action carries a fact.
