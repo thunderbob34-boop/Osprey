@@ -74,6 +74,16 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 6. Pre-recording source pulls, per the "Open check" column in `scripts/README.md`. The biggest are: the Nowak paper and the 1858 Usi e costumi text (4, pizza); a second strong source naming John Loud (53); a Sasson page reference for the Kibri-Dagan letter (47); and a second source for the Dunhuang banner and the Heilongjiang and Xanadu guns (49).
 7. New repo: Gus will create an empty private `somebody-did-it-first` repo and give the Claude GitHub app access to it. The channel work then moves out of Osprey's `research/somebody-did-it-first` branch. Until then, that branch is the safe copy.
 
+- **2026-10-08, format pivot proposed by Gus: a podcast.**
+  - Gus reads the story everyone knows, then discusses the "who did it first" part. Later he brings on guests: his dad (knows a lot of history) and guest stars.
+  - Claude's recommendation:
+    - Yes, as the main show. Shorts get clipped from the episodes.
+    - Pilot 2–3 episodes before committing.
+    - Every episode gets a prep packet: the story to read, the sourced facts, the hedges to keep, and the things to stay away from.
+    - Every edit gets a fact pass on the transcript.
+  - The 99 fact-checked scripts become the episode backlog.
+  - Open question for Gus: camera on him (and his dad), or audio with pictures on screen?
+
 ## Caught by Gus (pipeline misses) and the checks added
 - **2026-10-03, episodes 2–5 looked like a slideshow.**
   - Gus's words: "terribly dull… what do they look like? Show us on a map what's going on."
