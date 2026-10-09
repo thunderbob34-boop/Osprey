@@ -26,4 +26,18 @@
 - **Recording.**
   - A mic close to the mouth, in a small soft room (a closet full of clothes works).
   - Loudness gets set in the edit to the usual podcast target, about -16 LUFS.
-- **Voice rules (the same as the scripts):** say each point once, trust the audience, no "right?", no asides.
+- **Voice rules.** Say each point once and trust the audience. In the read-aloud parts, no "right?" and no asides.
+
+## Fun (added 2026-10-09, after Gus asked "does our podcast include fun?")
+**It should be fun.** The no-asides rules were written for the AI-narrated scripts, which came out stiff and condescending. In a podcast with Gus and his dad, the banter is the point. The Rest Is History is the model: two people who know their stuff, laughing at the absurd bits.
+
+**Where the fun comes from:**
+- **Gus's own reactions** in the your-words and discussion parts: opinions, disbelief, calling things ridiculous.
+- **The absurd true details,** which history is full of. About seventy men hitched a ride on the first steam railway journey. Watt, by Trevithick's account, said he deserved hanging.
+- **Recurring bits:**
+  - **Legend or Fact?** A quick-fire round of 3–4 true/false claims; the guest guesses. It doubles as a Short.
+  - **Credit rating.** Was the famous name's credit Stolen, Shared or Earned? It's the host's opinion, and the guest argues.
+  - **Weirdest thing I found.** One strange true detail to close out the episode.
+- **Teasing each other** once Gus's dad is on.
+
+**The one line:** jokes and opinions never change the facts. Opinions are said as opinions, and every factual claim inside a joke still has to be true. The edit pass checks this.

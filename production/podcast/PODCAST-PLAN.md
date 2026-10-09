@@ -24,6 +24,13 @@
 - No "right?" and no asides.
 - Hedges said once.
 
+**Recurring fun bits (added 2026-10-09; see `SOUND.md`):**
+- **Legend or Fact?**: a quick-fire true/false round, placed after "Why history forgot them".
+- **Credit rating**: Stolen, Shared or Earned, said before the verdict.
+- **Weirdest thing I found**: to close the episode.
+
+The no-asides rule covers only the read-aloud parts. The rest of the show should sound like people enjoying it.
+
 ## Each episode, who does what
 1. **Claude: the prep packet, one page plus the read-aloud script.** It holds:
    - the cold open;

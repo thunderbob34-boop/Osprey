@@ -16,7 +16,8 @@
   - Camborne: CAM-born
   - Cartagena: car-tuh-HAY-nuh
 - **Hedges.** Keep the hedges exactly as written: "about seventy", "nearly ten miles", "nearly five miles an hour", "first known", "the story goes". Each one is said once, plainly.
-- **No asides.** No "right?" and no narrator asides. If a point is made, move on.
+- **Inside the read-aloud boxes:** no "right?" and no asides. Read them straight.
+- **Everywhere else, have fun with it.** React, laugh, give your opinion, call something ridiculous when it is. The only line is facts: jokes and opinions are fine as long as they're clearly yours and don't change what happened.
 - **Recording.** Record each segment as its own take; flubs are fine because I edit.
 - **Cold opens.** Record the cold open last, once you know how the episode felt.
 
@@ -103,6 +104,18 @@ This is the guest segment later. Solo, pick 2–3 questions and give your honest
 4. Robert Stephenson is said to have paid his way home. What does that tell you about how the engineers themselves saw each other?
 5. Who gets to decide who the "father" of something is: the inventor, the businessman, or the biographer?
 
+## 5b. Legend or Fact? (about 2 min): a quick-fire round
+Read each claim, give your gut call out loud, then reveal. Solo, guess against yourself; with your dad, he guesses. This round is also built to be cut into a Short.
+
+1. **"Trevithick's first steam carriage burned up a few days after its first run."**
+   - **FACT.** It was left with the fire going, and the water boiled off. *(Grace's Guide.)*
+2. **"Rocket was George Stephenson's engine."**
+   - **MOSTLY LEGEND.** It was built under his son Robert's direction. *(NRM; Britannica.)*
+3. **"People paid to ride a steam train in London in 1808."**
+   - **FACT.** Trevithick's "Catch Me Who Can" ran on a circular track, and it's generally credited as the first time a steam locomotive carried fare-paying passengers. *(British Library.)*
+4. **"The saying 'like billy-o' comes from Puffing Billy."**
+   - **MAYBE.** The Science Museum says it's been suggested, but nobody's proven it. *(Science Museum Group.)*
+
 ## 6. What we know vs. the legend (1 min): say each once
 - "About seventy men" and "nearly ten miles" are the honest figures. Sources disagree on how long the run took, so we don't give a time.
 - The 500-guinea bet is a story, not a settled fact.
@@ -110,6 +123,8 @@ This is the guest segment later. Solo, pick 2–3 questions and give your honest
 - The line about Watt and hanging is Trevithick's own account.
 
 ## 7. The verdict (30 s), read as written
+*Optional, before reading it: your credit rating, said off the cuff. Is the famous name's credit **Stolen, Shared or Earned**? It's your opinion, so own it. One line of why, then read the verdict.*
+
 > George Stephenson and his son Robert built the railways that lasted, and they got the credit. But on February 21st, 1804, at Penydarren, Richard Trevithick's engine pulled ten tons of iron and about seventy men nearly ten miles, twenty-five years before Rocket. He died in Dartford on April 22nd, 1833, in poverty, and local workers paid for his funeral so he wouldn't get a pauper's burial. Somebody did it first. His name was Richard Trevithick.
 
 *(Sources for the death: Britannica; ASME; ETHW; Science Museum Group.)*

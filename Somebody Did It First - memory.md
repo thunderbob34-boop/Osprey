@@ -84,6 +84,12 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
     - Every edit gets a fact pass on the transcript.
   - The 99 fact-checked scripts become the episode backlog.
   - Open question for Gus: camera on him (and his dad), or audio with pictures on screen?
+  - **2026-10-09, Gus:** "I imagined this being fun... does our podcast include fun?" Proposed answer:
+    - The voice rules (no "right?", no asides) apply only to the read-aloud parts.
+    - The rest of the show is relaxed, with reactions and opinions.
+    - Recurring bits: Legend or Fact?, the credit rating (Stolen, Shared or Earned), and "weirdest thing I found".
+    - The one line: jokes never change the facts.
+    - Details are in `production/podcast/SOUND.md`.
   - **2026-10-09, Gus decided:** no camera at first (maybe later, with a studio). Product first. The plan is in `production/podcast/PODCAST-PLAN.md`.
 
 ## Caught by Gus (pipeline misses) and the checks added

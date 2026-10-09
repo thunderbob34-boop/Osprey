@@ -38,7 +38,8 @@ Updated 2026-10-09 by the Claude Code session building it. Hand this to Cowork s
 - **Fair credit.** The famous person gets their real due ("they built what lasted"), never "fraud", unless a fraud is documented.
 - **Voice.**
   - Plain talk; say each point once; trust the audience.
-  - No "right?", no narrator asides, no slogan lines.
+  - No "right?", no narrator asides and no slogan lines in the read-aloud parts.
+  - The rest of the show should be fun: reactions, opinions and recurring bits (Legend or Fact?, the Stolen/Shared/Earned credit rating). Jokes never change the facts.
   - Banned words: "genuinely", "dive in", "game changer", "unpack", "in today's video", "level up". No em dashes in spoken text.
 - **On screen.** Never claim more than the narration: no added places or dates. No realistic AI "photo" of a real person or event. Every image credited.
 - **Holds.** The pizza Margherita episode (and its Short) does not air until two sources are pulled: Zachary Nowak's paper and the 1858 Naples text. An 1880 newspaper item also has to be checked.
