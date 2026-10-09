@@ -83,6 +83,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
     - Every edit gets a fact pass on the transcript.
   - The 99 fact-checked scripts become the episode backlog.
   - Open question for Gus: camera on him (and his dad), or audio with pictures on screen?
+  - **2026-10-09, Gus decided:** no camera at first (maybe later, with a studio). Product first. The plan is in `production/podcast/PODCAST-PLAN.md`.
 
 ## Caught by Gus (pipeline misses) and the checks added
 - **2026-10-03, episodes 2–5 looked like a slideshow.**
