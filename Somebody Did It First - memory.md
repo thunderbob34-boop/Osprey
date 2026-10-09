@@ -4,6 +4,7 @@ The channel's standing rules. The youtube-pipeline skill reads this before any b
 
 ## Channel
 - **Premise:** someone gets the credit, but someone else did it first. Credibility is the main asset and the defense against being lumped in with AI slop.
+- **Direction (2026-10-08/09):** pivoted to an audio-first podcast hosted by Gus, with no camera at first; guests later (his dad, then guest stars). The plan is in `production/podcast/`. The Format, Narrator and Disclosure lines below describe the earlier faceless-video plan. Re-check the disclosure once the podcast is live with Gus's real voice. A brief for Hoosier Goose Co.'s Cowork is in `Somebody Did It First - Cowork brief.md`.
 - **Format:** faceless. Archive-documentary visuals.
 - **Narrator (decided by Gus, 2026-10-02):** AI voice **Holden** (Higgsfield preset `3c9d6053-6334-592c-8997-4e325286af3f`) on **text2speech_v2 / Seed Speech**. That's about 9.5 credits per ~830-word episode. Send the text in pieces of under 2,048 characters, split at sentence breaks, and join the audio in the timeline.
 - **Disclosure (required on every upload):** in YouTube Studio, answer **Yes** to "altered or synthetic content", because the narration is a synthetic voice. Never skip it.
